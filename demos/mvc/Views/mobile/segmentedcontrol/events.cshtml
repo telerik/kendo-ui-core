@@ -1,0 +1,24 @@
+<div data-role="view" data-init="mobileSegmentedEventsInit">
+    <ul id="segmented-control" data-role="segmentedcontrol">
+       <li data-icon="featured">
+            Featured
+       </li>
+       <li data-icon="toprated">
+            Top Rated
+       </li>
+       <li data-icon="mostviewed">
+            Most Viewed
+       </li>
+    </ul>
+    <div class="console"></div>
+</div>
+
+<script>
+    function mobileSegmentedEventsInit() {
+        $("#segmented-control")
+            .data("kendoMobileSegmentedControl")
+            .bind("change", function() {
+                kendoConsole.log("Selected button: " + this.current().text());
+            });
+    }
+</script>

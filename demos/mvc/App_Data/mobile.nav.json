@@ -77,6 +77,21 @@
             ]
         },
         {
+            "text": "Segmented Control",
+            "name": "segmentedcontrol",
+            "spriteCssClass": "mobileSwitchIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "segmentedcontrol/index.html"
+                },
+                {
+                    "text": "Events",
+                    "url": "segmentedcontrol/events.html"
+                }
+            ]
+        },
+        {
             "text": "Switch",
             "name": "Switch",
             "spriteCssClass": "mobileSwitchIcon",
