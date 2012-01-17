@@ -16,6 +16,11 @@ tests.push(
         title: "mobile button"
     },
     {
+        page: "mobile/buttongroup.html",
+        title: "mobile buttongroup"
+    },
+
+    {
         page: "mobile/switch.html",
         title: "mobile switch"
     },

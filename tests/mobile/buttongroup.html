@@ -113,6 +113,14 @@
                 ok(dom.children("li:first").hasClass("km-state-active"));
             });
 
+            test("Do not select if index is negative", function() {
+                var segmented = new ButtonGroup(dom);
+
+                segmented.select(-1);
+
+                equal(dom.children("li.km-state-active").length, 0);
+            });
+
             test("Only one li is selected", function() {
                 var segmented = new ButtonGroup(dom);
 
@@ -138,11 +146,14 @@
 
             asyncTest("Raise change event", function() {
                 var segmented = new ButtonGroup(dom, {
-                    change: function() {
+                    select: function() {
                         ok(true);
+                        equal(this.selectedIndex, 1);
                         start();
                     }
                 });
+
+                equal(this.selectedIndex, undefined);
 
                 segmented._mousedown({
                     currentTarget: dom.find("li:last")[0]
