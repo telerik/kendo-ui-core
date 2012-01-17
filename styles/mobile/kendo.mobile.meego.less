@@ -157,20 +157,25 @@
     margin-left: -1em;
 }
 
-.km-meego .km-switch-handle,
-.km-meego .km-switch-handle:after
+.km-meego .km-switch-handle
 {
+    width: 0;
     margin: 0;
+    height: 0;
     margin-right: 0;
     .border-radius(0);
-    background: rgba(255,255,255,.3);
-    border-left: 1em solid #232323;
-    border-right: 1.4em solid transparent;
-    border-bottom: 2em solid transparent;
-    height: 0;
-    width: 0;
     .box-shadow(none);
     .box-sizing(border-box);
+    border-left: 1em solid #232323;
+    background: rgba(255,255,255,.3);
+    border-right: 1.4em solid transparent;
+    border-bottom: 2em solid transparent;
+    border-width: 0 1.4rem 2rem 1rem;
+}
+
+:-moz-any(.km-meego) .km-switch-handle
+{
+    border-right-width: 1.44rem;
 }
 
 .km-meego .km-switch-handle:before
@@ -185,6 +190,7 @@
     border-left: 1.4em solid transparent;
     border-right: 1em solid #232323;
     border-top: 2em solid transparent;
+    border-width: 2rem 1rem 0 1.4rem;
     height: 0;
     width: 0;
 }
@@ -242,9 +248,41 @@
 
 .km-meego .km-detail
 {
+    top: -.6em;
+    right: -.8em;
+    top: ~"-.6rem";
+    right: ~"-.8rem";
+    padding: .6em .8em;
+    padding: .6rem .8rem;
     border: none;
     background: transparent;
     .box-shadow(none);
+}
+
+.km-meego .km-rowinsert
+{
+    background-color: #fff;
+}
+
+.km-root .km-meego .km-detail
+{
+    height: 100%;
+    width: 1.5rem;
+    margin: 0;
+}
+
+.km-meego .km-detail .km-text
+{
+    width: 100%;
+    display: block;
+    height: 1.6em;
+    height: 1.6rem;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-top: -.8em;
+    margin-top: ~"-.8rem";
+    border-left: 1px dotted #ddd;
 }
 
 .km-meego .km-rowinsert
@@ -423,11 +461,6 @@
     color: #fff;
 }
 
-.km-meego .km-list > li:last-child
-{
-    border-bottom: 0;
-}
-
 .km-meego .km-listgroup > li,
 .km-meego .km-listgroupinset > li
 {
@@ -442,9 +475,27 @@
     color: #fff;
 }
 
+.km-meego .km-detail.km-state-active,
+.km-meego .km-state-active .km-detail,
+.km-meego .km-state-active .km-listview-link
+{
+    background: rgba(76,190,232,.5);
+}
+
+.km-meego .km-listview-link:after
+{
+    display: none;
+}
+
 .km-meego .km-list .km-item
 {
     height: 56px;
+}
+
+.km-meego .km-listview .km-switch
+{
+    margin-top: -.8em;
+    margin-top: ~"-.8rem";
 }
 
 .km-meego .km-content,
