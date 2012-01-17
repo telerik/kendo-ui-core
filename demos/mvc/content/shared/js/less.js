@@ -1115,6 +1115,25 @@ less.Parser = function Parser(env) {
             },
 
             //
+            // An @require directive
+            //
+            //     @require "lib";
+            //
+            // Depending on our environemnt, importing is done differently:
+            // In the browser, it's an XHR request, in Node, it would be a
+            // file-system operation. The function used for importing is
+            // stored in `import`, which we pass to the Import constructor.
+            //
+            "require": function () {
+                var path;
+                if ($(/^@require\s+/) &&
+                    (path = $(this.entities.quoted) || $(this.entities.url)) &&
+                    $(';')) {
+                    return new(tree.Require)(path, imports);
+                }
+            },
+
+            //
             // A CSS Directive
             //
             //     @charset "utf-8";
@@ -1125,6 +1144,8 @@ less.Parser = function Parser(env) {
                 if (input.charAt(i) !== '@') return;
 
                 if (value = $(this['import'])) {
+                    return value;
+                } else if (value = $(this['require'])) {
                     return value;
                 } else if (name = $(/^@media|@page/) || $(/^@(?:-webkit-|-moz-|-o-)[a-z0-9-]+/) || $('keyframes')) {
                     types = ($(/^[^{]+/) || '').trim();
@@ -1900,12 +1921,14 @@ tree.Import = function (path, imports) {
 
     // Only pre-compile .less files
     if (! this.css) {
-        imports.push(this.path, function (root) {
-            if (! root) {
-                throw new(Error)("Error parsing " + that.path);
-            }
-            that.root = root;
-        });
+        if (!tree.skiplist[this.path]) {
+            imports.push(this.path, function (root) {
+                if (! root) {
+                    throw new(Error)("Error parsing " + that.path);
+                }
+                that.root = root;
+            });
+        }
     }
 };
 
@@ -1929,13 +1952,93 @@ tree.Import.prototype = {
     eval: function (env) {
         var ruleset;
 
+        if (this.css || tree.skiplist[this.path]) {
+            return this;
+        } else {
+            if (!tree.skiplist[this.path]) {
+                ruleset = new(tree.Ruleset)(null, this.root.rules.slice(0));
+
+                for (var i = 0; i < ruleset.rules.length; i++) {
+                    if (ruleset.rules[i] instanceof tree.Import) {
+                        Array.prototype
+                             .splice
+                             .apply(ruleset.rules,
+                                    [i, 1].concat(ruleset.rules[i].eval(env)));
+                    }
+                }
+            }
+            tree.skiplist[this.path] = true;
+            return ruleset.rules;
+        }
+    }
+};
+
+})(require('../tree'));
+(function (tree) {
+//
+// CSS @require node
+//
+// The general strategy here is that we don't want to wait
+// for the parsing to be completed, before we start importing
+// the file. That's because in the context of a browser,
+// most of the time will be spent waiting for the server to respond.
+//
+// On creation, we push the require path to our import queue, though
+// `import,push`, we also pass it a callback, which it'll call once
+// the file has been fetched, and parsed.
+//
+tree.Require = function (path, imports) {
+    var that = this;
+
+    this._path = path;
+
+    // The '.less' extension is optional
+    if (path instanceof tree.Quoted) {
+        this.path = /\.(le?|c)ss(\?.*)?$/.test(path.value) ? path.value : path.value + '.less';
+    } else {
+        this.path = path.value.value || path.value;
+    }
+
+    this.css = /css(\?.*)?$/.test(this.path);
+
+    // Only pre-compile .less files
+    if (! this.css) {
+        imports.push(this.path, function (root) {
+            if (! root) {
+                throw new(Error)("Error parsing " + that.path);
+            }
+            that.root = root;
+        });
+    }
+};
+
+//
+// The actual import node doesn't return anything, when converted to CSS.
+// The reason is that it's used at the evaluation stage, so that the rules
+// it imports can be treated like any other rules.
+//
+// In `eval`, we make sure all Import nodes get evaluated, recursively, so
+// we end up with a flat structure, which can easily be imported in the parent
+// ruleset.
+//
+tree.Require.prototype = {
+    toCSS: function () {
+        if (this.css) {
+            return "@require " + this._path.toCSS() + ';\n';
+        } else {
+            return "";
+        }
+    },
+    eval: function (env) {
+        var ruleset;
+
         if (this.css) {
             return this;
         } else {
             ruleset = new(tree.Ruleset)(null, this.root.rules.slice(0));
 
             for (var i = 0; i < ruleset.rules.length; i++) {
-                if (ruleset.rules[i] instanceof tree.Import) {
+                if (ruleset.rules[i] instanceof tree.Require) {
                     Array.prototype
                          .splice
                          .apply(ruleset.rules,
@@ -2232,7 +2335,7 @@ tree.Ruleset.prototype = {
         // Evaluate imports
         if (ruleset.root) {
             for (var i = 0; i < ruleset.rules.length; i++) {
-                if (ruleset.rules[i] instanceof tree.Import) {
+                if (ruleset.rules[i] instanceof tree.Import || ruleset.rules[i] instanceof tree.Require) {
                     Array.prototype.splice
                          .apply(ruleset.rules, [i, 1].concat(ruleset.rules[i].eval(env)));
                 }
@@ -2589,6 +2692,7 @@ require('./tree').jsify = function (obj) {
     }
 };
 require('./tree').prefix = "";
+require('./tree').skiplist = {};
 //
 // browser.js - client-side engine
 //
@@ -2663,7 +2767,6 @@ for (var i = 0; i < links.length; i++) {
         less.sheets.push(links[i]);
     }
 }
-
 
 less.refresh = function (reload) {
     var startTime, endTime;

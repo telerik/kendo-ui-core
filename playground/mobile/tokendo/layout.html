@@ -11,12 +11,11 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/common.less">
     <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.ios.less">
     <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less">
     <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.meego.less">
 
-    <script src="../../../styles/mobile/less.js"></script>
+    <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
@@ -115,16 +114,19 @@
         .km-ios .km-tabstrip .km-state-active .km-toprated,
         .km-ios .km-tabstrip .km-state-active .km-favorites
         {
+            background: -moz-linear-gradient(top, #E4FFBC, #99D23F 50%, #BFE553);
             background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #E4FFBC), color-stop(0.5, #99D23F), color-stop(1, #BFE553));
         }
 
         .km-ios .km-tabstrip .km-state-active .km-mostviewed
         {
+            background: -moz-linear-gradient(top, #FFBCE4, #D23F99 50%, #E553BF);
             background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #FFBCE4), color-stop(0.5, #D23F99), color-stop(1, #E553BF));
         }
 
         .km-ios .km-tabstrip .km-state-active .km-bookmarks
         {
+            background: -moz-linear-gradient(top, #E4BCFF, #993FD2 50%, #BF53E5);
             background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #E4BCFF), color-stop(0.5, #993FD2), color-stop(1, #BF53E5));
         }
     </style>
