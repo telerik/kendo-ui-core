@@ -2,21 +2,22 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Scrollview</title>
+        <script src="../src/ease.js"></script>
         <script src="../src/jquery.min.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.mobile.core.js"></script>
-        <script src="../demos/mvc/content/shared/js/console.js"></script>
         <link rel="stylesheet" href="../demos/mvc/content/shared/styles/console.css" />
         <style type="text/css" media="screen">
             #scrollview {
                 background: #EBEBEB;
                 width: 300px;
-                height: 300px;
+                height: 75px;
                 margin: 20px;
+                padding: 20px;
                 overflow: hidden;
             }
             #inner {
-                width: 600px;
+                width: 1600px;
             }
         </style>
         <script>
@@ -62,6 +63,7 @@
                         return;
                     }
 
+                    e.preventDefault();
                     that.withTouchEvent(e, function(touch) {
                         that.trigger("move", that.perAxis("_axisMove", touch));
                     });
@@ -160,45 +162,135 @@
                 }
             });
 
+            var TRANSFORMSTYLE = kendo.support.transitions.prefix + "Transform";
+            var STEP = 10;
+
+            var Moveable = kendo.Class.extend({
+                init: function(element) {
+                    var that = this;
+                    that.element = $(element);
+                    that.domElement = that.element[0];
+                    that.x = 0;
+                    that.y = 0;
+                    that.timer = 0;
+                    that.tickProxy = $.proxy(that.tick, that);
+                },
+
+                moveBy: function(x, y) {
+                    var that = this;
+                    if (x) { that.x += x; }
+                    if (y) { that.y += y; }
+                    that.redraw();
+                },
+
+                redraw: function() {
+                    var that = this;
+                    that.domElement.style[TRANSFORMSTYLE] = "translate3d(" + that.x + "px," + that.y +"px,0)";
+                },
+
+                animate: function() {
+                    var that = this;
+                    that.intervalID = setInterval(that.tickProxy, STEP);
+                },
+
+                stop: function() {
+                    var that = this;
+                    clearInterval(that.intervalID);
+                    that.timer = 0;
+                },
+
+                moveTo: function(options) {
+                    var that = this;
+
+                    that.deltaX = options.x - that.x;
+                    that.deltaY = options.y - that.y;
+
+                    that.initialX = that.x;
+                    that.initialY = that.y;
+
+                    that.duration = options.duration || 300;
+
+                    that.ease = that.easeProxy(options.ease || Ease.easeOutQuad);
+
+                    that.animate();
+                },
+
+                easeProxy: function(ease) {
+                    var that = this;
+                    return function() {
+                        that.x = ease(that.timer, that.initialX, that.deltaX, that.duration);
+                        that.y = ease(that.timer, that.initialY, that.deltaY, that.duration);
+                    }
+                },
+
+                tick: function() {
+                    var that = this;
+                    that.timer += STEP;
+                    that.ease();
+                    that.redraw();
+
+                    if (that.timer === that.duration) {
+                        that.stop();
+                    }
+                }
+            });
+
             kendo.mobile.Swipe = Swipe;
+
+
+            $(function(){
+                var moveable = new Moveable($("#inner"));
+
+                var swipe = new kendo.mobile.Swipe($("#scrollview"), {
+                        start: function(e) {
+                            moveable.stop();
+                        },
+
+                        move: function(e) {
+                            moveable.moveBy(e.x, 0);
+                        },
+
+                        end: function(e) {
+                            var velocity = e.xVelocity,
+                                duration= 200,
+                                snap,
+                                ease = Ease.linearTween;
+
+                            console.log(velocity);
+                            if (velocity > 1) {
+                                snap = Math.ceil(moveable.x / 300) * 300;
+                                duration = 100;
+                            } else  {
+                                snap = Math.round(moveable.x / 300) * 300;
+                            }
+
+                            if (velocity > 2) {
+                                ease = Ease.easeOutBack;
+                            };
+
+                            moveable.moveTo({
+                                x: snap,
+                                y: 0,
+                                duration: duration,
+                                ease: ease
+                            });
+                        }
+                });
+            });
         </script>
     </head>
     <body>
-
         <div id="scrollview">
             <div id="inner">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis tincidunt lacus varius luctus. In nisi augue, euismod vitae tempus nec, consequat sed dui. Praesent auctor, nisl id fermentum venenatis, ante erat dictum nibh, quis blandit odio nunc suscipit libero. Aliquam nec sapien ligula. Integer volutpat nisi non magna suscipit eu sagittis metus placerat. Integer rutrum condimentum lectus, eget blandit lectus sollicitudin non. Quisque ornare nisi nec ante molestie condimentum.
-
-                Cras vel lorem non nisi lacinia euismod. Suspendisse cursus quam et tortor scelerisque posuere. Proin vel interdum massa. Ut tempor nisl ut dui imperdiet in ornare orci imperdiet. Integer suscipit tellus tincidunt urna pulvinar ornare. Maecenas sed odio at lectus commodo faucibus. Nam non nulla vel purus sagittis mollis. Maecenas hendrerit ipsum in ligula molestie rutrum eu ut ipsum. Etiam iaculis luctus nisi, fringilla pulvinar dui bibendum ac. Etiam aliquam, nisi eget posuere pretium, nisl velit gravida eros, eu sagittis turpis lorem ac purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer facilisis tristique sodales.
-
-                Integer quis interdum turpis. Duis velit lectus, posuere vitae feugiat quis, ullamcorper et augue. Proin mauris leo, cursus tempor auctor a, tincidunt vel lacus. Integer ac risus nisl, eu eleifend sem. Suspendisse porta purus vitae est convallis vel vulputate lorem tempor. Praesent quam ligula, lobortis consequat semper nec, mattis eu odio. Ut nec magna tortor, feugiat tincidunt nisi. Sed justo urna, elementum et dapibus eget, tempus ac risus. Nullam mauris ante, fringilla id condimentum non, vehicula ac ligula. Donec dolor urna, fringilla sed posuere ut, malesuada sed sapien. In porta velit a elit cursus facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean suscipit mattis faucibus. Proin vehicula commodo elementum.
-
-                Praesent fermentum velit vitae urna rhoncus commodo. Sed viverra nibh arcu, nec laoreet ligula. Morbi interdum aliquet euismod. Vestibulum ac velit tortor. Suspendisse sollicitudin posuere lorem nec porttitor. Vivamus at nulla vitae lorem semper malesuada id eget quam. Praesent eget eros in nibh sodales dignissim.
-
-                Donec massa magna, elementum placerat tincidunt id, egestas et lorem. Curabitur in vestibulum nulla. Maecenas nec justo eros. Integer vel malesuada purus. Phasellus vel arcu id elit fermentum molestie. Sed pharetra fermentum ipsum eu vulputate. Curabitur cursus, ligula ut vehicula pharetra, mauris lorem suscipit tellus, in adipiscing arcu risus commodo tellus.
+                <img src="http://farm8.staticflickr.com/7033/6707225615_c25455a548_s.jpg">
+                <img src="http://farm8.staticflickr.com/7170/6695493683_0c59e22fee_s.jpg">
+                <img src="http://farm8.staticflickr.com/7016/6688957777_c081c774ff_s.jpg">
+                <img src="http://farm8.staticflickr.com/7155/6675539929_40b053a2fe_s.jpg">
+                <img src="http://farm8.staticflickr.com/7152/6674457167_a9c0eac63d_s.jpg">
+                <img src="http://farm8.staticflickr.com/7002/6640623175_3e82b14c99_s.jpg">
+                <img src="http://farm8.staticflickr.com/7146/6524806833_53e1237cf9_s.jpg">
+                <img src="http://farm8.staticflickr.com/7167/6584748701_8323e10194_s.jpg">
             </div>
         </div>
-
-        <div class="console"></div>
-
-        <script>
-            var x = 0;
-            var element = $("#inner");
-
-            var swipe = new kendo.mobile.Swipe($("#scrollview"), {
-                    start: function(e) {
-                        // console.log("start: " + e.x);
-                    },
-
-                    move: function(e) {
-                        x += e.x;
-                        element[0].style["webkitTransform"] = "translate3d(" + x + "px,0,0)";
-                    },
-
-                    end: function(e) {
-
-                    }
-            })
-        </script>
     </body>
 </html>
