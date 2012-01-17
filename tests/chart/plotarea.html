@@ -49,7 +49,43 @@
                         name: "Value B",
                         type: "column",
                         data: [10, 20, 30]
-                    }];
+                    }],
+                    lineSeriesData = [{
+                        name: "Value A",
+                        type: "line",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "line",
+                        data: [10, 20, 30]
+                    },
+                    verticalLineSeriesData = [{
+                        name: "Value A",
+                        type: "verticalLine",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "verticalLine",
+                        data: [10, 20, 30]
+                    }]],
+                    areaSeriesData = [{
+                        name: "Value A",
+                        type: "area",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "area",
+                        data: [10, 20, 30]
+                    },
+                    verticalAreaSeriesData = [{
+                        name: "Value A",
+                        type: "verticalArea",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "verticalArea",
+                        data: [10, 20, 30]
+                    }]];
 
                 function createPlotArea(series, chartOptions) {
                     plotArea = new Chart.CategoricalPlotArea(series, {
@@ -228,6 +264,90 @@
 
                 test("applies gap from first series", function() {
                     equals(chartSeries.options.gap, GAP);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Line series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(lineSeriesData);
+                    }
+                });
+
+                test("creates numeric Y-Axis", function() {
+                    ok(axisY instanceof Chart.NumericAxis);
+                });
+
+                test("creates category X-Axis", function() {
+                    ok(axisX instanceof Chart.CategoryAxis);
+                });
+
+                test("creates line chart", function() {
+                    ok(chartSeries instanceof Chart.LineChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Verical line series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(verticalLineSeriesData);
+                    }
+                });
+
+                test("creates numeric X-Axis", function() {
+                    ok(axisX instanceof Chart.NumericAxis);
+                });
+
+                test("creates category Y-Axis", function() {
+                    ok(axisY instanceof Chart.CategoryAxis);
+                });
+
+                test("creates line chart", function() {
+                    ok(chartSeries instanceof Chart.LineChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Area series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(areaSeriesData);
+                    }
+                });
+
+                test("creates numeric Y-Axis", function() {
+                    ok(axisY instanceof Chart.NumericAxis);
+                });
+
+                test("creates category X-Axis", function() {
+                    ok(axisX instanceof Chart.CategoryAxis);
+                });
+
+                test("creates area chart", function() {
+                    ok(chartSeries instanceof Chart.AreaChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Verical area series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(verticalAreaSeriesData);
+                    }
+                });
+
+                test("creates numeric X-Axis", function() {
+                    ok(axisX instanceof Chart.NumericAxis);
+                });
+
+                test("creates category Y-Axis", function() {
+                    ok(axisY instanceof Chart.CategoryAxis);
+                });
+
+                test("creates area chart", function() {
+                    ok(chartSeries instanceof Chart.AreaChart);
                 });
 
                 // ------------------------------------------------------------
