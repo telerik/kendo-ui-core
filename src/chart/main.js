@@ -22,7 +22,6 @@
     var ABOVE = "above",
         DEFAULT_FONT = "12px sans-serif",
         ANIMATION_STEP = 10,
-        AREA = "area",
         BASELINE_MARKER_SIZE = 1,
         BAR = "bar",
         BAR_BORDER_BRIGHTNESS = 0.8,
@@ -158,7 +157,10 @@
                 line: {
                     width: 4
                 },
-                labels: {}
+                labels: {},
+                area: {
+                    opacity: 0.2
+                }
             },
             series: [],
             tooltip: {
@@ -329,7 +331,7 @@
                 seriesPoint;
 
             if (chart._plotArea.box.containsPoint(coords.x, coords.y)) {
-                if (point && (point.series.type === LINE || point.series.type === AREA)) {
+                if (point && point.series.type === LINE) {
                     owner = point.owner;
                     seriesPoint = owner.getNearestPoint(coords.x, coords.y, point.seriesIx);
                     if (seriesPoint && seriesPoint != point) {
@@ -3039,6 +3041,8 @@
                 isVertical = chart.options.isVertical,
                 lines = LineChart.fn.splitSegments.call(chart, view),
                 originalLines = deepExtend({}, lines),
+                areas = [],
+                i,
                 axis = isVertical ? plotArea.axisX : plotArea.axisY,
                 axisLineBox = axis.getAxisLineBox(),
                 end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
@@ -3046,33 +3050,26 @@
                 linesCount = lines.length,
                 seriesIx = 0,
                 linePoints,
-                firstPoint,
-                lastPoint,
-                lineOptions,
-                i;
+                missingValues;
 
             for (i = 0; i < linesCount; i++) {
                 line = lines[i];
                 linePoints = lines[i].points;
-                lineOptions = line.options;
-                seriesIx = lineOptions.seriesIx;
+                seriesIx = line.options.seriesIx;
 
-                if (lineOptions.stack && seriesIx != 0) {
+                if (line.options.stack && seriesIx != 0) {
                     if (seriesIx > 0) {
                         originalLinePoints = originalLines[i - 1].points.reverse();
                         lines[i].points = linePoints.concat(originalLinePoints);
                     }
                 } else {
                     if (linePoints.length > 1) {
-                        firstPoint = linePoints[0];
-                        lastPoint = last(linePoints);
-
                         if (isVertical) {
-                            linePoints.unshift(new Point2D(firstPoint.x, end));
-                            linePoints.push(new Point2D(lastPoint.x, end));
+                            linePoints.unshift(new Point2D(linePoints[0].x, end));
+                            linePoints.push(new Point2D(last(linePoints).x, end));
                         } else {
-                            linePoints.unshift(new Point2D(end, firstPoint.y));
-                            linePoints.push(new Point2D(end, lastPoint.y));
+                            linePoints.unshift(new Point2D(end, linePoints[0].y));
+                            linePoints.push(new Point2D(end, last(linePoints).y));
                         }
                     }
                 }
@@ -4012,7 +4009,7 @@
                     scatterSeries.push(currentSeries);
                 } else if (currentSeries.type === "scatterLine") {
                     scatterLineSeries.push(currentSeries);
-                } else if (currentSeries.type === AREA) {
+                } else if (currentSeries.type === "area") {
                     areaSeries.push(currentSeries);
                 }
             }

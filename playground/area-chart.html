@@ -21,21 +21,13 @@
                             visible: false,
                             position: "insideEnd"
                         },
+                        overlay: null,
                         stack: false,
-                        type: "area",
-                        markers: {
-                            visible: true
-                        }
+                        type: "line"
                     },
                     series: [{
                         name: "1",
-                        data: [1, 1, 1, 1]
-                    }, {
-                        name: "1",
-                        data: [2, 2, 2, 2, 2]
-                    }, {
-                        name: "1",
-                        data: [3, 3, 3, 3, 3, 3]
+                        data: [1, null, 3, 3]
                     }]
                 });
             });
@@ -47,11 +39,11 @@
         <div class="configurator" style="margin-top: 30px; clear: both;">
             <div>
                 <input id="horizontal" name="orientation"
-                        type="radio" checked="checked" autocomplete="off" />
+                        type="radio" autocomplete="off" />
                 <label for="horizontal">horizontal</label>
 
                 <input id="vertical" name="orientation"
-                       type="radio" autocomplete="off" />
+                       type="radio" checked="checked" autocomplete="off" />
                 <label for="vertical">vertical</label>
 
                 <input id="stack" type="checkbox" autocomplete="off" />
