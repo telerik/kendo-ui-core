@@ -4240,16 +4240,16 @@
                 series = plotArea.series;
 
             plotArea.createBarChart(grep(series, function(s) {
-                return s.type === BAR || s.type === COLUMN;
-            }));;
+                return inArray(s.type, [BAR, COLUMN]);
+            }));
 
             plotArea.createLineChart(grep(series, function(s) {
-                return s.type === LINE;
-            }));;
+                return inArray(s.type, [LINE, VERTICAL_LINE]);
+            }));
 
             plotArea.createAreaChart(grep(series, function(s) {
-                return s.type === AREA;
-            }));;
+                return inArray(s.type, [AREA, VERTICAL_AREA]);
+            }));
 
             plotArea.createAxes();
         },
@@ -4376,11 +4376,11 @@
 
             plotArea.createScatterChart(grep(series, function(s) {
                 return s.type === SCATTER;
-            }));;
+            }));
 
             plotArea.createScatterLineChart(grep(series, function(s) {
                 return s.type === SCATTER_LINE;
-            }));;
+            }));
 
             plotArea.createAxes();
         },
@@ -4437,9 +4437,7 @@
             var plotArea = this,
                 series = plotArea.series;
 
-            plotArea.createPieChart(grep(series, function(s) {
-                return s.type === PIE;
-            }));;
+            plotArea.createPieChart(series);
         },
 
         createPieChart: function(series) {
