@@ -15,6 +15,7 @@ live/
 node_modules
 obj/
 release/
+sitefinity-docs/
 tags
 functional-tests/Results/
 functional-tests/**/**/Profiler Configurations/

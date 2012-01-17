@@ -1,9 +1,12 @@
 var fs = require("fs"),
+    sys = require("sys"),
     os = require("os"),
     path = require("path"),
     parser = require("./lib/parse-js"),
     spawn = require('child_process').spawn,
-    uglify = require("./lib/process");
+    uglify = require("./lib/process"),
+    cssmin = require("./lib/cssmin").cssmin,
+    themes = require("build/themes");
 
 function rmdirSyncRecursive(path) {
     if (!existsSync(path)) {
@@ -97,15 +100,17 @@ function merge(files) {
     return result.replace("\ufeff", "");
 }
 
-function generateVersion() {
+function buildVersion(year, release) {
     var date = new Date(),
+        currentYear = date.getFullYear(),
+        month = date.getMonth() + 1,
         day = date.getDate();
 
-    if (day < 10) {
-        day = "0" + day;
+    if (currentYear > year) {
+        month += (currentYear - year) * 12;
     }
 
-    return date.getFullYear() + ".3." + (date.getMonth() + 1) + "" + day;
+    return year + "." + release + "." + (month * 100 + day);
 }
 
 function template(template) {
@@ -201,27 +206,48 @@ function minifyJs(source) {
     return uglify.gen_code(ast);
 }
 
-function zip(name, filesPath, success) {
-    var archive;
+function zip(name, filesPath, onSuccess) {
+    var archive,
+        osName = os.type();
 
-    if (os.type() == "Linux") {
-        archive = spawn("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) });
+    var success = function() {
+        console.log("Package created: " + name);
+
+        if (onSuccess) {
+            onSuccess();
+        }
+    };
+
+    if (osName == "Linux" || osName == "Darwin") {
+        archive = spawnSilent("7z", [ "a", "-tzip", path.resolve(name), '*' ], { cwd: path.resolve(filesPath) }, success);
     } else {
-        archive = spawn("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ]);
+        archive = spawnSilent("./build/lib/7z/7z", [ "a", "-tzip", name, path.join(filesPath, '*') ], {}, success);
     }
+}
 
-    archive.stderr.on('data', function (data) {
-        sys.print('stderr: ' + data);
-    });
+function spawnSilent(name, params, options, onSuccess, onError) {
+    var proc,
+        output = "";
 
-    archive.on('exit', function (code) {
-        if (code !== 0) {
-            console.log("zip error: " + code);
+    proc = spawn(name, params, options);
+
+    var logger = function(data) {
+        output += data;
+    };
+
+    proc.stderr.on('data', logger);
+    proc.stdout.on('data', logger);
+
+    proc.on('exit', function (code) {
+        if (code === 0) {
+            if (onSuccess) {
+                onSuccess();
+            }
         } else {
-            console.log("Package created: " + name);
-
-            if (success) {
-                success();
+            sys.print(name + " ", params.join(" "));
+            sys.print(output);
+            if (onError) {
+                onError();
             }
         }
     });
@@ -235,16 +261,76 @@ function mkdir(newDir) {
     }
 }
 
+function deployStyles(stylesRoot, outputRoot, header, compress) {
+    var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif)$/i : /\.(less|css|png|jpg|jpeg|gif)$/i,
+        stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
+
+    mkdir(outputRoot);
+    copyDirSyncRecursive(stylesRoot, outputRoot, true, filesRegex);
+    themes.buildThemes(stylesRoot, outputRoot);
+    processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
+        if (fileName.indexOf(".min.") === -1) {
+            var css = stripBOM(readText(fileName)),
+                output = compress ? cssmin(css) : css;
+
+            writeText(fileName, header + output);
+
+            if (compress) {
+                fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
+            }
+        }
+    });
+}
+
+function msBuild(project, params, onSuccess, onError) {
+    var build,
+        osName = os.type(),
+        buildParams = params.concat([project]);
+
+    var success = function() {
+        console.log("Built MSBuild project", project);
+        if (onSuccess) {
+            onSuccess();
+        }
+    };
+
+    if (osName == "Linux" || osName == "Darwin") {
+        build = spawnSilent("xbuild", buildParams, {}, success, onError);
+    } else {
+        build = spawnSilent(
+            "/cygdrive/c/Windows/Microsoft.NET/Framework64/v4.0.30319/msbuild.exe",
+            buildParams,
+            {},
+            success,
+            onError
+        );
+    }
+}
+
+function grep(items, condition) {
+    var result = [];
+    items.forEach(function(item) {
+        if (condition(item)) {
+            result.push(item);
+        }
+    });
+    return result;
+}
+
 // Exports ====================================================================
 exports.addBOM = addBOM;
 exports.copyDirSyncRecursive = copyDirSyncRecursive;
 exports.copyFileSync = copyFileSync;
 exports.copyTextFile = copyTextFile;
-exports.generateVersion = generateVersion;
+exports.deployStyles = deployStyles;
+exports.buildVersion = buildVersion;
+exports.grep = grep;
 exports.hasBOM = hasBOM;
 exports.merge = merge;
 exports.minifyJs = minifyJs;
 exports.mkdir = mkdir;
+exports.msBuild = msBuild;
+exports.spawnSilent = spawnSilent;
 exports.processFilesRecursive = processFilesRecursive;
 exports.readText = readText;
 exports.rmdirSyncRecursive = rmdirSyncRecursive;

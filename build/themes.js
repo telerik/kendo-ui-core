@@ -1,42 +1,34 @@
 var less = require("./less-js/lib/less"),
+    kendoBuild = require("./kendo-build"),
     fs = require("fs"),
-    path = require("path");
+    path = require("path"),
+    cache = {};
 
-function generateThemes(themesFolder, outputFolder) {
-    var themes = fs.readdirSync(themesFolder)
-                    .filter(function(file) {
-                        return file != "template.less" && /\.less$/i.test(file);
-                    })
-                    .map(function(file) {
-                        return path.join(themesFolder, file);
-                    });
+function buildThemes(themesFolder, outputFolder) {
+    var parser = new(less.Parser)({
+        paths: [ themesFolder ]
+    });
 
-    themes.forEach(function(theme) {
-        var skinTemplate = fs.readFileSync(theme, "utf8"),
-            themeName = /[\/\\]([^\/]+)\.less/i.exec(theme)[1];
+    kendoBuild.processFilesRecursive(themesFolder, /kendo\..+\.less/, function(file) {
+        var source = kendoBuild.readText(file),
+        theme = path.basename(file, ".less"),
+        output = path.join(outputFolder, theme + ".css"),
+        cacheEntry = cache[file];
 
-        var parser = new(less.Parser)({
-            paths: [ themesFolder ] // Specify search paths for @import directives
-        });
-
-        parser.parse(skinTemplate, function (e, tree) {
-            if (e) {
-                console.log("ERROR: `" + theme + "` theme generation failed: " + e.message);
-            } else {
-                fs.writeFileSync(path.join(outputFolder, "kendo." + themeName + ".css"), tree.toCSS(/* { compress: true } */), "utf8");
-
-                console.log("theme `" + themeName + "` generated successfully.");
-            }
-        });
+        if (cacheEntry) {
+            kendoBuild.writeText(output, cacheEntry);
+        } else {
+            parser.parse(source, function (error, ast) {
+                if (error) {
+                    console.log("ERROR: `" + theme + "` theme generation failed: " + error.message);
+                } else {
+                    cache[file] = ast.toCSS();
+                    kendoBuild.writeText(output, cache[file]);
+                    console.log("Built theme", theme);
+                }
+            });
+        }
     });
 }
 
-function build(outputFolder) {
-    generateThemes("styles", outputFolder || "styles");
-}
-
-if (require.main === module) {
-    build();
-} else {
-    exports.build = build;
-}
+exports.buildThemes = buildThemes;
