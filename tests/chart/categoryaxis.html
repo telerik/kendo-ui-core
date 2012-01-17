@@ -403,8 +403,7 @@
                     }];
 
                 function createPlotArea(series, chartOptions) {
-                    plotArea = new Chart.PlotArea({
-                        series: series,
+                    plotArea = new Chart.CategoricalPlotArea(series{
                         categoryAxis: {
                             categories: ["A"],
                             plotBands: [{
@@ -489,8 +488,7 @@
                     }];
 
                 function createPlotArea(series, plotOptions) {
-                    plotArea = new Chart.PlotArea($.extend({}, {
-                        series: series,
+                    plotArea = new Chart.CategoricalPlotArea(series, $.extend({}, {
                         categoryAxis: {
                             categories: ["A"],
                             title: {
