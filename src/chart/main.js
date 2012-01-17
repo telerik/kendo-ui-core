@@ -4004,8 +4004,7 @@
             plotArea.charts = [];
             plotArea.options.legend.items = [];
 
-            plotArea.createCharts();
-            plotArea.createAxes();
+            plotArea.render();
 
             plotArea.append.apply(plotArea, plotArea.charts);
         },
@@ -4024,8 +4023,6 @@
             },
             legend: {}
         },
-
-        createAxes: function() { },
 
         addToLegend: function(series) {
             var count = series.length,
@@ -4231,7 +4228,7 @@
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
 
-        createCharts: function() {
+        render: function() {
             var plotArea = this,
                 series = plotArea.series;
 
@@ -4246,6 +4243,8 @@
             plotArea.createAreaChart(grep(series, function(s) {
                 return s.type === AREA;
             }));;
+
+            plotArea.createAxes();
         },
 
         createBarChart: function(series) {
@@ -4369,7 +4368,7 @@
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
 
-        createCharts: function() {
+        render: function() {
             var plotArea = this,
                 series = plotArea.series;
 
@@ -4380,6 +4379,8 @@
             plotArea.createScatterLineChart(grep(series, function(s) {
                 return s.type === SCATTER_LINE;
             }));;
+
+            plotArea.createAxes();
         },
 
         createScatterChart: function(series) {
@@ -4439,7 +4440,7 @@
     });
 
     var PiePlotArea = PlotAreaBase.extend({
-        createCharts: function() {
+        render: function() {
             var plotArea = this,
                 series = plotArea.series;
 
