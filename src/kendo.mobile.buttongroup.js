@@ -87,6 +87,7 @@
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
         ACTIVE = "km-state-active",
+        EMPTY_JQUERY_OBJECT = $(),
         SELECT = "select",
         SELECTOR = "li:not(." + ACTIVE +")",
         MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown";
@@ -131,12 +132,14 @@
                 SELECT
             ], that.options);
 
+            that._current = EMPTY_JQUERY_OBJECT;
             that.select(that.options.index);
         },
 
         options: {
             name: "ButtonGroup",
-            selector: kendo.roleSelector("buttongroup")
+            selector: kendo.roleSelector("buttongroup"),
+            index: -1
         },
 
         /**
@@ -160,27 +163,29 @@
         * buttongroup.select(1);
         */
         select: function (li) {
+            if (li === undefined) {
+                return;
+            }
+
             var that = this,
-                current = that._current,
+                current = that._current.removeClass(ACTIVE),
                 index = -1;
 
-            if (current) {
-                current.removeClass(ACTIVE)
-            }
+            if (typeof li === "number") {
+                index = li;
 
-            if (li !== undefined) {
-                if (typeof li === "number") {
-                    index = li;
-                    li = that.element.children().eq(li);
-                } else if (li && li.nodeType) {
-                    li = $(li);
-                    index = li.index();
+                if (li > -1) {
+                    li = $(that.element[0].children[li]);
+                } else {
+                    li = EMPTY_JQUERY_OBJECT;
                 }
 
-                li.addClass(ACTIVE);
+            } else if (li.nodeType) {
+                li = $(li);
+                index = li.index();
             }
 
-            that._current = li;
+            that._current = li.addClass(ACTIVE);
             that.selectedIndex = index;
         },
 
