@@ -1119,10 +1119,10 @@ less.Parser = function Parser(env) {
             //
             //     @require "lib";
             //
-            // Depending on our environemnt, importing is done differently:
+            // Depending on our environment, importing is done differently:
             // In the browser, it's an XHR request, in Node, it would be a
             // file-system operation. The function used for importing is
-            // stored in `import`, which we pass to the Import constructor.
+            // stored in `import`, which we pass to the Require constructor.
             //
             "require": function () {
                 var path;
@@ -2017,7 +2017,7 @@ tree.Require = function (path, imports) {
 // The reason is that it's used at the evaluation stage, so that the rules
 // it imports can be treated like any other rules.
 //
-// In `eval`, we make sure all Import nodes get evaluated, recursively, so
+// In `eval`, we make sure all Require nodes get evaluated, recursively, so
 // we end up with a flat structure, which can easily be imported in the parent
 // ruleset.
 //
@@ -2767,6 +2767,7 @@ for (var i = 0; i < links.length; i++) {
         less.sheets.push(links[i]);
     }
 }
+
 
 less.refresh = function (reload) {
     var startTime, endTime;
