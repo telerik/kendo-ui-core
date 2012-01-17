@@ -216,7 +216,7 @@
 
                 test("sets axis min/max to series limits", 2, function() {
                     stubMethod(Chart.CategoricalPlotArea, "createAxes",
-                        function(seriesMin, seriesMax) {
+                        function() {
                             equal(this.range.min, 10);
                             equal(this.range.max, 300);
                         },
