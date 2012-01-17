@@ -4026,11 +4026,13 @@
             var plotArea = this;
 
             plotArea.charts.push(chart);
+            plotArea.addToLegend(chart);
             plotArea.append(chart);
         },
 
-        addToLegend: function(series) {
-            var count = series.length,
+        addToLegend: function(chart) {
+            var series = chart.options.series,
+                count = series.length,
                 data = [],
                 i;
 
@@ -4260,7 +4262,6 @@
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));
-            plotArea.addToLegend(series);
 
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
         },
@@ -4388,7 +4389,6 @@
             var plotArea = this;
 
             plotArea.range = chart.valueRange() || plotArea.range;
-            plotArea.addToLegend(chart.options.series);
 
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
         },
@@ -4444,19 +4444,23 @@
 
         createPieChart: function(series) {
             var plotArea = this,
-                options = plotArea.options,
                 firstSeries = series[0],
                 pieChart = new PieChart(plotArea, {
                     series: series,
                     padding: firstSeries.padding,
                     startAngle: firstSeries.startAngle,
                     connectors: firstSeries.connectors
-                }),
-                segments = pieChart.segments,
-                count = segments.length,
-                i;
+                });
 
             plotArea.appendChart(pieChart);
+        },
+
+        addToLegend: function(chart) {
+            var plotArea = this,
+                options = plotArea.options,
+                segments = chart.segments,
+                count = segments.length,
+                i;
 
             for (i = 0; i < count; i++) {
                 options.legend.items.push({
