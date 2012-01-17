@@ -1852,11 +1852,24 @@
         init: function(element, options) {
             var that = this;
 
-            Observable.fn.init.call(that);
             that.element = $(element);
+
+            Observable.fn.init.call(that);
+
             that.options = extend(true, {}, that.options, options);
+
+            if (!that.element.attr(kendo.attr("role"))) {
+                that.element.attr(kendo.attr("role"), (that.options.name || "").toLowerCase());
+            }
+
+            /*
+            kendo.notify(that);
+            */
         }
     });
+
+    kendo.notify = noop;
+    kendo.widgetBinders = {};
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
