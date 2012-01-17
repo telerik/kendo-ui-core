@@ -3082,19 +3082,14 @@
         },
 
         createSegment: function(lineId, view, points, series, seriesIx) {
-            var line = deepExtend({}, {
-                    color: series.color,
-                    opacity: series.opacity
-                }, series.line);
             this.registerId(lineId, { seriesIx: seriesIx });
-
             return view.createPolyline(points, true, {
                 id: lineId,
-                stroke: line.color,
-                strokeWidth: line.width,
-                strokeOpacity: line.opacity,
-                dashType: line.dashType,
+                stroke: series.color,
+                strokeWidth: series.width,
+                strokeOpacity: series.opacity,
                 fillOpacity: series.opacity,
+                dashType: series.dashType,
                 fill: series.color,
                 seriesIx: seriesIx,
                 stack: series.stack
@@ -5598,7 +5593,6 @@
         ShapeElement: ShapeElement,
         LinePoint: LinePoint,
         LineChart: LineChart,
-        AreaChart: AreaChart,
         ClusterLayout: ClusterLayout,
         StackLayout: StackLayout,
         Title: Title,

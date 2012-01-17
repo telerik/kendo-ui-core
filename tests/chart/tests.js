@@ -52,10 +52,6 @@ tests.push(
         title: "Line Chart"
     },
     {
-        page: "chart/areachart.html",
-        title: "Area Chart"
-    },
-    {
         page: "chart/piechart.html",
         title: "Pie Chart"
     },

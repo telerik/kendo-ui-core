@@ -50,10 +50,7 @@ ViewStub.prototype = {
 
     createPolyline: function(points, closed, style) {
         this.log.path.push({ points: points, closed: closed, style: style });
-        var element = new kendo.ui.Chart.ViewElement(style);
-        element.points = points;
-        element.closed = closed;
-        return element;
+        return new kendo.ui.Chart.ViewElement(style);
     },
 
     createCircle: function(center, radius, style) {
