@@ -4384,41 +4384,33 @@
             plotArea.createAxes();
         },
 
+        appendChart: function(chart) {
+            var plotArea = this;
+
+            plotArea.range = chart.valueRange() || plotArea.range;
+            plotArea.addToLegend(chart.options.series);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+        },
+
         createScatterChart: function(series) {
-            if (series.length === 0) {
-                return;
+            var plotArea = this;
+
+            if (series.length > 0) {
+                plotArea.appendChart(
+                    new ScatterChart(plotArea, { series: series })
+                );
             }
-
-            var plotArea = this,
-                options = plotArea.options,
-                range = plotArea.range,
-                // Override the original invertAxes
-                scatterChart = new ScatterChart(plotArea, { series: series }),
-                scatterChartRange = scatterChart.valueRange() || range;
-
-            // Override the original range
-            plotArea.range = scatterChartRange;
-            plotArea.appendChart(scatterChart);
-
-            plotArea.addToLegend(series);
         },
 
         createScatterLineChart: function(series) {
-            if (series.length === 0) {
-                return;
+            var plotArea = this;
+
+            if (series.length > 0) {
+                plotArea.appendChart(
+                    new ScatterLineChart(plotArea, { series: series })
+                );
             }
-
-            var plotArea = this,
-                options = plotArea.options,
-                // Override the original invertAxes
-                scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
-                scatterLineChartRange = scatterLineChart.valueRange() || plotArea.range;
-
-            // Override the original range
-            plotArea.range = scatterLineChartRange;
-            plotArea.appendChart(scatterLineChart);
-
-            plotArea.addToLegend(series);
         },
 
         createAxes: function() {
