@@ -1,0 +1,24 @@
+<div data-role="view" data-init="mobileButtonGroupEventsInit">
+    <ul id="button-group" data-role="buttongroup">
+       <li data-icon="featured">
+            Featured
+       </li>
+       <li data-icon="toprated">
+            Top Rated
+       </li>
+       <li data-icon="mostviewed">
+            Most Viewed
+       </li>
+    </ul>
+    <div class="console"></div>
+</div>
+
+<script>
+    function mobileButtonGroupEventsInit() {
+        $("#button-group")
+            .data("kendoMobileButtonGroup")
+            .bind("change", function() {
+                kendoConsole.log("Selected button: " + this.current().text());
+            });
+    }
+</script>
