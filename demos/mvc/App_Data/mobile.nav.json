@@ -42,6 +42,25 @@
             ]
         },
         {
+            "text": "ButtonGroup",
+            "name": "buttongroup",
+            "spriteCssClass": "mobileSwitchIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "buttongroup/index.html"
+                },
+                {
+                    "text": "Events",
+                    "url": "buttongroup/events.html"
+                },
+                {
+                    "text": "Customizing Appearance",
+                    "url": "buttongroup/appearance.html"
+                }
+            ]
+        },
+        {
             "text": "ListView",
             "name": "listview",
             "spriteCssClass": "mobileListViewIcon",
@@ -73,21 +92,6 @@
                 {
                     "text": "Customizing appearance",
                     "url": "navbar/appearance.html"
-                }
-            ]
-        },
-        {
-            "text": "Button Group",
-            "name": "buttongroup",
-            "spriteCssClass": "mobileSwitchIcon",
-            "items": [
-                {
-                    "text": "Basic usage",
-                    "url": "buttongroup/index.html"
-                },
-                {
-                    "text": "Events",
-                    "url": "buttongroup/events.html"
                 }
             ]
         },

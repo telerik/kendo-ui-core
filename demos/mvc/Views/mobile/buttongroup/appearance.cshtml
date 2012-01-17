@@ -1,0 +1,37 @@
+<div data-role="view" data-init="mobileButtonGroupInit" data-title="ButtonGroup Appearance">
+    <ul data-role="listview">
+        <li>
+            <h3>Background color:</h3>
+            <ul id="button-group">
+                <li style="background-color: green">Green</li>
+                <li style="background-color: darkred">Red</li>
+            </ul>
+        </li>
+        <li>
+            <h3>Font Size:</h3>
+            Small:
+            <ul data-role="buttongroup">
+                <li style="font-size: 0.6rem">Option1</li>
+                <li style="font-size: 0.6rem">Option2</li>
+            </ul>
+            Normal:
+            <ul data-role="buttongroup">
+                <li>Option1</li>
+                <li>Option2</li>
+            </ul>
+            Large:
+            <ul data-role="buttongroup">
+                <li style="font-size: 1.2rem">Option1</li>
+                <li style="font-size: 1.2rem">Option2</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    function mobileButtonGroupInit() {
+        $("#button-group").kendoMobileButtonGroup({
+            index: 0
+        });
+    }
+</script>
