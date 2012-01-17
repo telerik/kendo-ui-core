@@ -9,6 +9,7 @@
         baseTemplate = kendo.template,
         format = kendo.format,
         map = $.map,
+        grep = $.grep,
         math = Math,
         proxy = $.proxy,
         getter = kendo.getter,
@@ -20,7 +21,6 @@
 
     // Constants ==============================================================
     var ABOVE = "above",
-        DEFAULT_FONT = "12px sans-serif",
         ANIMATION_STEP = 10,
         AREA = "area",
         BASELINE_MARKER_SIZE = 1,
@@ -39,6 +39,7 @@
         COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
+        DEFAULT_FONT = "12px sans-serif",
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
@@ -71,6 +72,8 @@
         RADIAL = "radial",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
+        SCATTER = "scatter",
+        SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
         SQUARE = "square",
         SWING = "swing",
@@ -81,6 +84,8 @@
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
+        VERTICAL_LINE = "verticalLine",
+        VERTICAL_AREA = "verticalArea",
         WIDTH = "width",
         WHITE = "#fff",
         X = "x",
@@ -225,7 +230,7 @@
                 model.append(new Title(options.title));
             }
 
-            plotArea = model._plotArea = new PlotArea(options);
+            plotArea = model._plotArea = chart._createPlotArea();
             if (options.legend.visible) {
                 model.append(new Legend(plotArea.options.legend));
             }
@@ -233,6 +238,41 @@
             model.reflow();
 
             return model;
+        },
+
+        _createPlotArea: function() {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                i,
+                length = series.length,
+                currentSeries,
+                categoricalSeries = [],
+                xySeries = [],
+                pieSeries = [],
+                plotArea;
+
+            for (i = 0; i < length; i++) {
+                currentSeries = series[i];
+
+                if (inArray(currentSeries.type, [BAR, COLUMN, LINE, AREA])) {
+                    categoricalSeries.push(currentSeries);
+                } else if (inArray(currentSeries.type, [SCATTER, SCATTER_LINE])) {
+                    xySeries.push(currentSeries);
+                } else if (currentSeries.type === PIE) {
+                    pieSeries.push(currentSeries);
+                }
+            }
+
+            if (pieSeries.length > 0) {
+                plotArea = new PiePlotArea(pieSeries, options);
+            } else if (xySeries.length > 0) {
+                plotArea = new XYPlotArea(xySeries, options);
+            } else {
+                plotArea = new CategoricalPlotArea(categoricalSeries, options);
+            }
+
+            return plotArea;
         },
 
         // Needs to be overridable in tests
@@ -3954,13 +3994,23 @@
         }
     });
 
-    var PlotArea = ChartElement.extend({
-        init: function(options) {
+    var PlotAreaBase = ChartElement.extend({
+        init: function(series, options) {
             var plotArea = this;
 
             ChartElement.fn.init.call(plotArea, options);
 
-            plotArea.render();
+            plotArea.series = series;
+            plotArea.charts = [];
+            plotArea.options.legend.items = [];
+
+            if (series && series.length > 0) {
+                plotArea.createCharts();
+            }
+
+            plotArea.createAxes();
+
+            plotArea.append.apply(plotArea, plotArea.charts);
         },
 
         options: {
@@ -3975,85 +4025,10 @@
                 color: BLACK,
                 width: 0
             },
-            range: {},
             legend: {}
         },
 
-        render: function() {
-            var plotArea = this,
-                options = plotArea.options,
-                series = options.series,
-                seriesLength = series.length,
-                currentSeries,
-                pieSeries = [],
-                barSeries = [],
-                lineSeries = [],
-                scatterSeries = [],
-                scatterLineSeries = [],
-                areaSeries = [],
-                i;
-
-            options.legend.items = [];
-            options.range = { min: 0, max: 1 };
-            options.scatterRange = { min: [0, 0], max: [1, 1] };
-            plotArea.charts = [];
-            for (i = 0; i < seriesLength; i++) {
-                currentSeries = series[i];
-
-                if (currentSeries.type === BAR || currentSeries.type === COLUMN) {
-                    barSeries.push(currentSeries);
-                } else if (currentSeries.type === LINE) {
-                    lineSeries.push(currentSeries);
-                } else if (currentSeries.type === PIE) {
-                    pieSeries.push(currentSeries);
-                } else if (currentSeries.type === "scatter") {
-                    scatterSeries.push(currentSeries);
-                } else if (currentSeries.type === "scatterLine") {
-                    scatterLineSeries.push(currentSeries);
-                } else if (currentSeries.type === AREA) {
-                    areaSeries.push(currentSeries);
-                }
-            }
-
-            if (barSeries.length > 0) {
-                plotArea.createBarChart(barSeries);
-            }
-
-            if (lineSeries.length > 0) {
-                plotArea.createLineChart(lineSeries);
-            }
-
-            if (pieSeries.length > 0) {
-                plotArea.createPieChart(pieSeries);
-            }
-
-            if (areaSeries.length > 0) {
-                plotArea.createAreaChart(areaSeries);
-            }
-
-            if (scatterSeries.length > 0 || scatterLineSeries.length > 0) {
-                if (scatterSeries.length > 0) {
-                    plotArea.createScatterChart(scatterSeries);
-                } else {
-                    plotArea.createScatterLineChart(scatterLineSeries);
-                }
-
-                plotArea.axisX = new NumericAxis(options.range.min[0], options.range.max[0],
-                    deepExtend({}, options.xAxis, { orientation: HORIZONTAL })
-                );
-
-                plotArea.axisY = new NumericAxis(options.range.min[1], options.range.max[1],
-                    deepExtend({}, options.yAxis, { orientation: VERTICAL })
-                );
-
-                plotArea.append(plotArea.axisY);
-                plotArea.append(plotArea.axisX);
-            } else if (seriesLength != pieSeries.length || seriesLength == 0) {
-                plotArea.createAxes(options.range.min, options.range.max, options.invertAxes);
-            }
-
-            plotArea.append.apply(plotArea, plotArea.charts);
-        },
+        createAxes: function() { },
 
         addToLegend: function(series) {
             var count = series.length,
@@ -4065,153 +4040,6 @@
             }
 
             append(this.options.legend.items, data);
-        },
-
-        createBarChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                invertAxes = options.invertAxes = firstSeries.type === BAR,
-                categories = options.categoryAxis.categories,
-                areaChart = new BarChart(plotArea, {
-                    series: series,
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    gap: firstSeries.gap,
-                    spacing: firstSeries.spacing
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
-
-            append(categories, new Array(categoriesToAdd));
-            options.range = areaChart.valueRange() || options.range;
-            plotArea.charts.push(areaChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createLineChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
-                // Override the original invertAxes
-                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
-                lineChart = new LineChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    series: series
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
-                lineChartRange = lineChart.valueRange() || options.range;
-
-            append(categories, new Array(categoriesToAdd));
-            // Override the original range
-            options.range.min = math.min(options.range.min, lineChartRange.min);
-            options.range.max = math.max(options.range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createAreaChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
-                // Override the original invertAxes
-                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
-                lineChart = new AreaChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    series: series
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
-                lineChartRange = lineChart.valueRange() || options.range;
-
-            append(categories, new Array(categoriesToAdd));
-            // Override the original range
-            options.range.min = math.min(options.range.min, lineChartRange.min);
-            options.range.max = math.max(options.range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createScatterChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                // Override the original invertAxes
-                scatterChart = new ScatterChart(plotArea, { series: series }),
-                scatterChartRange = scatterChart.valueRange() || options.scatterRange;
-
-            // Override the original range
-            options.range = scatterChartRange;
-            plotArea.charts.push(scatterChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createScatterLineChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                // Override the original invertAxes
-                scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
-                scatterLineChartRange = scatterLineChart.valueRange() || options.scatterRange;
-
-            // Override the original range
-            options.range = scatterLineChartRange;
-            plotArea.charts.push(scatterLineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createPieChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                pieChart = new PieChart(plotArea, {
-                    series: series,
-                    padding: firstSeries.padding,
-                    startAngle: firstSeries.startAngle,
-                    connectors: firstSeries.connectors
-                }),
-                segments = pieChart.segments,
-                count = segments.length,
-                i;
-
-            plotArea.charts.push(pieChart);
-            for (i = 0; i < count; i++) {
-                options.legend.items.push({
-                    name: segments[i].category,
-                    color: segments[i].options.color });
-            }
-        },
-
-        createAxes: function(seriesMin, seriesMax, invertAxes) {
-            var plotArea = this,
-                options = plotArea.options,
-                categoriesCount = options.categoryAxis.categories.length,
-                categoryAxis = new CategoryAxis(deepExtend({
-                        orientation: invertAxes ? VERTICAL : HORIZONTAL,
-                        axisCrossingValue: invertAxes ? categoriesCount : 0
-                    },
-                    options.categoryAxis)
-                ),
-                valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
-                        orientation: invertAxes ? HORIZONTAL : VERTICAL
-                    },
-                    options.valueAxis)
-                );
-
-            plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
-
-            plotArea.append(plotArea.axisY);
-            plotArea.append(plotArea.axisX);
         },
 
         alignAxes: function() {
@@ -4389,7 +4217,261 @@
 
             return [].concat(gridLinesY, gridLinesX, childElements, elements);
         }
+    });
 
+    var CategoricalPlotArea = PlotAreaBase.extend({
+        init: function(series, options) {
+            var plotArea = this;
+
+            plotArea.range = { min: 0, max: 1 };
+
+            if (series && series.length > 0) {
+                plotArea.invertAxes = inArray(
+                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
+                );
+            }
+
+            PlotAreaBase.fn.init.call(plotArea, series, options);
+        },
+
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createBarChart(grep(series, function(s) {
+                return s.type === BAR || s.type === COLUMN;
+            }));;
+
+            plotArea.createLineChart(grep(series, function(s) {
+                return s.type === LINE;
+            }));;
+
+            plotArea.createAreaChart(grep(series, function(s) {
+                return s.type === AREA;
+            }));;
+        },
+
+        createBarChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                categories = options.categoryAxis.categories,
+                areaChart = new BarChart(plotArea, {
+                    series: series,
+                    isVertical: !plotArea.invertAxes,
+                    isStacked: firstSeries.stack,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
+                }),
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
+
+            append(categories, new Array(categoriesToAdd));
+            plotArea.range = areaChart.valueRange() || plotArea.range;
+            plotArea.charts.push(areaChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createLineChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                range = plotArea.range,
+                firstSeries = series[0],
+                categoryAxis = options.categoryAxis,
+                categories = categoryAxis.categories,
+                // Override the original invertAxes
+                lineChart = new LineChart(plotArea, {
+                    // TODO: Rename isVertical to invertAxes, flip logic
+                    isVertical: !plotArea.invertAxes,
+                    isStacked: firstSeries.stack,
+                    series: series
+                }),
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
+                lineChartRange = lineChart.valueRange() || range;
+
+            append(categories, new Array(categoriesToAdd));
+            // Override the original range
+            range.min = math.min(range.min, lineChartRange.min);
+            range.max = math.max(range.max, lineChartRange.max);
+            plotArea.charts.push(lineChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createAreaChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                range = plotArea.range,
+                firstSeries = series[0],
+                categoryAxis = options.categoryAxis,
+                categories = categoryAxis.categories,
+                // Override the original invertAxes
+                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
+                lineChart = new AreaChart(plotArea, {
+                    // TODO: Rename isVertical to invertAxes, flip logic
+                    isVertical: !invertAxes,
+                    isStacked: firstSeries.stack,
+                    series: series
+                }),
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
+                lineChartRange = lineChart.valueRange() || range;
+
+            append(categories, new Array(categoriesToAdd));
+            // Override the original range
+            range.min = math.min(range.min, lineChartRange.min);
+            range.max = math.max(range.max, lineChartRange.max);
+            plotArea.charts.push(lineChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createAxes: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                range = plotArea.range,
+                invertAxes = plotArea.invertAxes,
+                categoriesCount = options.categoryAxis.categories.length,
+                categoryAxis = new CategoryAxis(deepExtend({
+                        orientation: invertAxes ? VERTICAL : HORIZONTAL,
+                        axisCrossingValue: invertAxes ? categoriesCount : 0
+                    },
+                    options.categoryAxis)
+                ),
+                valueAxis = new NumericAxis(range.min, range.max, deepExtend({
+                        orientation: invertAxes ? HORIZONTAL : VERTICAL
+                    },
+                    options.valueAxis)
+                );
+
+            plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
+
+            plotArea.append(plotArea.axisY);
+            plotArea.append(plotArea.axisX);
+        }
+    });
+
+    var XYPlotArea = PlotAreaBase.extend({
+        init: function(series, options) {
+            var plotArea = this;
+
+            plotArea.range = { min: [0, 0], max: [1, 1] };
+
+            PlotAreaBase.fn.init.call(plotArea, series, options);
+        },
+
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createScatterChart(grep(series, function(s) {
+                return s.type === SCATTER;
+            }));;
+
+            plotArea.createScatterLineChart(grep(series, function(s) {
+                return s.type === SCATTER_LINE;
+            }));;
+        },
+
+        createScatterChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                range = plotArea.range,
+                // Override the original invertAxes
+                scatterChart = new ScatterChart(plotArea, { series: series }),
+                scatterChartRange = scatterChart.valueRange() || range;
+
+            // Override the original range
+            plotArea.range = scatterChartRange;
+            plotArea.charts.push(scatterChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createScatterLineChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                // Override the original invertAxes
+                scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
+                scatterLineChartRange = scatterLineChart.valueRange() || plotArea.range;
+
+            // Override the original range
+            plotArea.range = scatterLineChartRange;
+            plotArea.charts.push(scatterLineChart);
+
+            plotArea.addToLegend(series);
+        },
+
+        createAxes: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                range = plotArea.range,
+                firstSeries = plotArea.series[0];
+
+            plotArea.axisX = new NumericAxis(range.min[0], range.max[0],
+                deepExtend({}, options.xAxis, { orientation: HORIZONTAL })
+            );
+
+            plotArea.axisY = new NumericAxis(range.min[1], range.max[1],
+                deepExtend({}, options.yAxis, { orientation: VERTICAL })
+            );
+
+            plotArea.append(plotArea.axisY);
+            plotArea.append(plotArea.axisX);
+        }
+    });
+
+    var PiePlotArea = PlotAreaBase.extend({
+        createCharts: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createPieChart(grep(series, function(s) {
+                return s.type === PIE;
+            }));;
+        },
+
+        createPieChart: function(series) {
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                pieChart = new PieChart(plotArea, {
+                    series: series,
+                    padding: firstSeries.padding,
+                    startAngle: firstSeries.startAngle,
+                    connectors: firstSeries.connectors
+                }),
+                segments = pieChart.segments,
+                count = segments.length,
+                i;
+
+            plotArea.charts.push(pieChart);
+            for (i = 0; i < count; i++) {
+                options.legend.items.push({
+                    name: segments[i].category,
+                    color: segments[i].options.color });
+            }
+        }
     });
 
     // **************************
@@ -5596,7 +5678,9 @@
         StackLayout: StackLayout,
         Title: Title,
         Legend: Legend,
-        PlotArea: PlotArea,
+        CategoricalPlotArea: CategoricalPlotArea,
+        PiePlotArea: PiePlotArea,
+        XYPlotArea: XYPlotArea,
         Tooltip: Tooltip,
         Highlight: Highlight,
         PieSegment: PieSegment,

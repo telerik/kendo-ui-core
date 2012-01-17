@@ -19,7 +19,8 @@
                 view,
                 TOLERANCE = 1,
                 MARGIN = 10,
-                GAP = 4;
+                GAP = 4,
+                chartSeries;
 
                 function moduleSetup() {
                     view = new ViewStub();
@@ -51,8 +52,7 @@
                     }];
 
                 function createPlotArea(series, chartOptions) {
-                    plotArea = new Chart.PlotArea({
-                        series: series,
+                    plotArea = new Chart.CategoricalPlotArea(series, {
                         categoryAxis: {
                             categories: ["A", "B", "C"]
                         }
@@ -60,10 +60,11 @@
 
                     axisY = plotArea.axisY;
                     axisX = plotArea.axisX;
+                    chartSeries = plotArea.charts[0];
                 }
 
                 // ------------------------------------------------------------
-                module("PlotArea", {
+                module("Categorical PlotArea", {
                     setup: function() {
                         moduleSetup();
                         createPlotArea(columnSeriesData);
@@ -97,20 +98,19 @@
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(Chart.PlotArea, "createAxes",
-                        function(seriesMin, seriesMax) {
-                            equal(seriesMin, 0);
-                            equal(seriesMax, 1);
+                    stubMethod(Chart.CategoricalPlotArea, "createAxes",
+                        function() {
+                            equal(this.range.min, 0);
+                            equal(this.range.max, 1);
                         },
                         function() {
-                            plotArea = new Chart.PlotArea();
+                            plotArea = new Chart.CategoricalPlotArea();
                         }
                     );
                 });
 
                 test("adds categories to match actual data", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: columnSeriesData,
+                    var plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B"]
                         }
@@ -120,11 +120,10 @@
                 });
 
                 test("accepts extra categories", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [{
+                    var plotArea = new Chart.CategoricalPlotArea([{
                             type: "column",
                             data: [100]
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A", "B"]
                         }
@@ -134,10 +133,9 @@
                 });
 
                 test("applies margin", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [{
+                    var plotArea = new Chart.CategoricalPlotArea([{
                             data: [100]
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A", "B"],
                             labels: { font: SANS12 }
@@ -156,13 +154,11 @@
                 });
 
                 // ------------------------------------------------------------
-                var barChart;
-                module("PlotArea / Column series", {
+                module("Categorical PlotArea / Column series", {
                     setup: function() {
                         moduleSetup();
 
                         createPlotArea(columnSeriesData);
-                        barChart = plotArea.charts[0];
                     }
                 });
 
@@ -187,8 +183,7 @@
                 });
 
                 test("value axis crossing can be changed", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: columnSeriesData,
+                    plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
@@ -198,16 +193,15 @@
                 });
 
                 test("creates bar chart", function() {
-                    ok(barChart instanceof Chart.BarChart);
+                    ok(chartSeries instanceof Chart.BarChart);
                 });
 
                 test("stacks series", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: [{
+                    plotArea = new Chart.CategoricalPlotArea([{
                             type: "column",
                             data: [],
                             stack: true
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A"]
                         }
@@ -217,14 +211,14 @@
                 });
 
                 test("groups bar series into bar chart", function() {
-                    equal(barChart.options.series.length, 2);
+                    equal(chartSeries.options.series.length, 2);
                 });
 
                 test("sets axis min/max to series limits", 2, function() {
-                    stubMethod(Chart.PlotArea, "createAxes",
+                    stubMethod(Chart.CategoricalPlotArea, "createAxes",
                         function(seriesMin, seriesMax) {
-                            equal(seriesMin, 10);
-                            equal(seriesMax, 300);
+                            equal(this.range.min, 10);
+                            equal(this.range.max, 300);
                         },
                         function() {
                             createPlotArea(columnSeriesData);
@@ -233,11 +227,33 @@
                 });
 
                 test("applies gap from first series", function() {
-                    equals(barChart.options.gap, GAP);
+                    equals(chartSeries.options.gap, GAP);
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Bar series", {
+                module("Categorical PlotArea / Column series / Additional value axes", {
+                    setup: function() {
+                        moduleSetup();
+
+                        plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
+                            categoryAxis: {
+                                categories: ["A", "B", "C"]
+                            },
+                            valueAxis: [{
+                                name: "primary"
+                            }, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("creates two value axes", function() {
+                    equals(2, plotArea.yAxes.length);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Bar series", {
                     setup: function() {
                         moduleSetup();
 
@@ -266,8 +282,7 @@
                 });
 
                 test("value axis crossing can be changed", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: barSeriesData,
+                    plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
@@ -277,12 +292,11 @@
                 });
 
                 test("stacks series", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: [{
+                    plotArea = new Chart.CategoricalPlotArea([{
                             type: "bar",
                             data: [],
                             stack: true
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A"]
                         }
@@ -292,7 +306,7 @@
                 });
 
                 test("applies gap from first series", function() {
-                    equals(barChart.options.gap, GAP);
+                    equals(chartSeries.options.gap, GAP);
                 });
 
             })();
@@ -308,8 +322,7 @@
                     }];
 
                 function createPlotArea(categoryAxis, valueAxis, plotArea) {
-                    plotArea = new Chart.PlotArea({
-                        series: barSeriesData,
+                    plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: categoryAxis,
                         valueAxis: valueAxis,
                         plotArea: plotArea
@@ -329,7 +342,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("PlotArea / Major Gridlines", {
+                module("Categorical PlotArea / Major Gridlines", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -393,7 +406,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Minor Gridlines", {
+                module("Categorical PlotArea / Minor Gridlines", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -481,7 +494,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Major and Minor GridLines", {
+                module("Categorical PlotArea / Major and Minor GridLines", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -512,7 +525,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Configuration", {
+                module("Categorical PlotArea / Configuration", {
                     setup: function() {
                         moduleSetup();
                     }
