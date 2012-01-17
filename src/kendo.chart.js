@@ -4005,8 +4005,6 @@
             plotArea.options.legend.items = [];
 
             plotArea.render();
-
-            plotArea.append.apply(plotArea, plotArea.charts);
         },
 
         options: {
@@ -4022,6 +4020,13 @@
                 width: 0
             },
             legend: {}
+        },
+
+        appendChart: function(chart) {
+            var plotArea = this;
+
+            plotArea.charts.push(chart);
+            plotArea.append(chart);
         },
 
         addToLegend: function(series) {
@@ -4256,7 +4261,7 @@
                 options = plotArea.options,
                 firstSeries = series[0],
                 categories = options.categoryAxis.categories,
-                areaChart = new BarChart(plotArea, {
+                barChart = new BarChart(plotArea, {
                     series: series,
                     isVertical: !plotArea.invertAxes,
                     isStacked: firstSeries.stack,
@@ -4266,8 +4271,8 @@
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));
-            plotArea.range = areaChart.valueRange() || plotArea.range;
-            plotArea.charts.push(areaChart);
+            plotArea.range = barChart.valueRange() || plotArea.range;
+            plotArea.appendChart(barChart);
 
             plotArea.addToLegend(series);
         },
@@ -4297,7 +4302,7 @@
             // Override the original range
             range.min = math.min(range.min, lineChartRange.min);
             range.max = math.max(range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
+            plotArea.appendChart(lineChart);
 
             plotArea.addToLegend(series);
         },
@@ -4315,20 +4320,20 @@
                 categories = categoryAxis.categories,
                 // Override the original invertAxes
                 invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
-                lineChart = new AreaChart(plotArea, {
+                areaChart = new AreaChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
                     isVertical: !invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
                 }),
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
-                lineChartRange = lineChart.valueRange() || range;
+                areaChartRange = areaChart.valueRange() || range;
 
             append(categories, new Array(categoriesToAdd));
             // Override the original range
-            range.min = math.min(range.min, lineChartRange.min);
-            range.max = math.max(range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
+            range.min = math.min(range.min, areaChartRange.min);
+            range.max = math.max(range.max, areaChartRange.max);
+            plotArea.appendChart(areaChart);
 
             plotArea.addToLegend(series);
         },
@@ -4397,7 +4402,7 @@
 
             // Override the original range
             plotArea.range = scatterChartRange;
-            plotArea.charts.push(scatterChart);
+            plotArea.appendChart(scatterChart);
 
             plotArea.addToLegend(series);
         },
@@ -4415,7 +4420,7 @@
 
             // Override the original range
             plotArea.range = scatterLineChartRange;
-            plotArea.charts.push(scatterLineChart);
+            plotArea.appendChart(scatterLineChart);
 
             plotArea.addToLegend(series);
         },
@@ -4463,7 +4468,8 @@
                 count = segments.length,
                 i;
 
-            plotArea.charts.push(pieChart);
+            plotArea.appendChart(pieChart);
+
             for (i = 0; i < count; i++) {
                 options.legend.items.push({
                     name: segments[i].category,
