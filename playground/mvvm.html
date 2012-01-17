@@ -2,63 +2,134 @@
 <html>
     <head>
         <title>MVVM</title>
+
+
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
-        <script src="../src/kendo.binder.js"></script>
-        <script src="../src/kendo.model.js"></script>
         <script src="../src/kendo.data.js"></script>
-        <script src="../src/kendo.grid.js"></script>
-        <link rel="stylesheet" href="../styles/kendo.common.css"/>
-        <link rel="stylesheet" href="../styles/kendo.default.css"/>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+
         <style>
             table, td, th {
                 border: 1px solid black;
-               border-collapse: collapse;
+                border-collapse: collapse;
             }
         </style>
+
+        <script>
+            kendo.widgetBinders["dropdownlist"] = function(element, context){
+                var dropDownList = $(element).data("kendoDropDownList");
+
+                if (!dropDownList) {
+                    $(element).kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
+                } else {
+                    var dataSource = context.get(element.getAttribute("data-source"));
+                    var valueAttribute  = element.getAttribute("data-value");
+
+                    dropDownList.dataSource.data(dataSource);
+
+                    dropDownList.bind("change", function() {
+                        var value = this.value();
+
+                        var product = $.grep(dataSource, function(p) {
+                            return p.id == value; //fix the id
+                        })[0];
+
+                        context.set(valueAttribute, product);
+                    });
+
+                    context.bind("change", function(e) {
+                        if (valueAttribute.indexOf(e.field) >= 0) {
+                            var product = context.get(valueAttribute);
+
+                            dropDownList.value(product.id);
+                        }
+                    });
+                }
+            }
+
+            kendo.notify = function(widget) {
+                var bindings = widget.element.data("bindings");
+                var context = widget.element.data("context");
+
+                if (context) {
+                    $(bindings).each(function() {
+                        this.destroy();
+                    });
+
+                    var dataSource = context.get(widget.element.attr("data-source"));
+                    var valueAttribute  = widget.element.attr("data-value");
+
+                    context.bind("change", function(e) {
+                        if (valueAttribute.indexOf(e.field) >= 0) {
+                            var product = context.get(valueAttribute);
+
+                            widget.value(product.id);
+                        }
+                    });
+
+                    $.extend(widget.options, {
+                        dataSource: dataSource,
+                        change: function() {
+                            var value = this.value();
+                            var product = $.grep(dataSource, function(p) {
+                                return p.id == value; //fix the id
+                            })[0];
+
+                            context.set(valueAttribute, product);
+                        }
+                    });
+                }
+            }
+        </script>
     </head>
     <body>
         <form>
-            <div data-template="div-template"></div>
-
+            <button data-click="addProduct">Add one product</button>
             <fieldset>
-                <legend>&lt;select multiple&gt;</legend>
-                <select style="width: 200px"
-                    data-value="selectedProduct"
-                    data-template="option-tmpl"
-                    data-source="products">
-                </select>
-
-                <script type="text/x-kendo-tmpl" id="option-tmpl">
-                    <option value="${id}">${name}</option>
-                </script>
-                <script type="text/x-kendo-tmpl" id="div-template">
-                    # if (get("selectedProduct")) {
-                    #
-                        Selected product is #= get("selectedProduct.name") #
-                    # } else { #
-                        No selected product
-                    # } #
-                </script>
+                <legend> DropDownList initialized after kendo.bind</legend>
+                <select id="afterBind" data-source="products" data-value="selectedProduct"></select>
             </fieldset>
+            <fieldset>
+                <legend> DropDownList initialized before kendo.bind</legend>
+                <select id="beforeBind" data-source="products" data-value="selectedProduct"></select>
+            </fieldset>
+            <fieldset>
+                <legend> DropDownList initialized by kendo.bind</legend>
+                <select id="byRole" data-role="dropdownlist" data-source="products" data-value="selectedProduct"></select>
+            </fieldset>
+            Selected product <span data-text="selectedProduct.name"></span>
         </form>
 
         <script>
             var viewModel = kendo.observable({
-                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" } ],
+                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" }, { id:3, name: "Beer" }],
                 selectedProduct: null,
                 selectFirst: function() {
                     this.set("selectedProduct", this.products[0]);
                 },
                 addProduct: function() {
-                    this.products.push({ id: 3, name: "Coffee" });
+                    this.products.push({ id: this.products.length + 1, name: "Product " + (this.products.length + 1) });
                 },
                 removeProduct: function(e) {
                     this.products.splice(this.products.length-1, 1);
                 }
             });
 
+            $("#beforeBind").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
+
             kendo.bind($("form"), viewModel);
+
+            $("#afterBind").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
+
         </script>
     </body>
 </html>
