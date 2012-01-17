@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.mobile.ui.SegmentedControl Tests</title>
+        <title>kendo.mobile.ui.ButtonGroup Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
-        <script src="../../src/kendo.mobile.segmentedcontrol.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.mobile.ui.SegmentedControl Tests</h1>
+        <h1 id="qunit-header">kendo.mobile.ui.ButtonGroup Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -21,7 +21,7 @@
 
         <script>
 
-            var SegmentedControl = kendo.mobile.ui.SegmentedControl,
+            var ButtonGroup = kendo.mobile.ui.ButtonGroup,
                 MOUSEDOWN = kendo.support.mousedown,
                 MOUSEUP = kendo.support.mouseup,
                 dom;
@@ -35,26 +35,26 @@
                 mouseDownEvent = MOUSEDOWN;
             }
 
-            module("segmentedcontrol", {
+            module("buttongroup", {
                 setup: function() {
                     dom = $("<ul><li>Text1</li><li>Text2</li></ul>");
                 }
             });
 
             test("Add css class to the ul element", function() {
-                new SegmentedControl(dom);
+                new ButtonGroup(dom);
 
                 ok(dom.hasClass("km-radiogroup"));
             });
 
             test("Add class to the li element", function() {
-                new SegmentedControl(dom);
+                new ButtonGroup(dom);
 
                 equal(dom.find("li.km-button").length, 2);
             });
 
             test("Wrap li content with span element", function() {
-                new SegmentedControl(dom);
+                new ButtonGroup(dom);
 
                 var spans = dom.find("span.km-text");
 
@@ -65,13 +65,13 @@
 
             test("Wrap image in span if it exists", function() {
                 dom.find("li:first").append("<img />");
-                new SegmentedControl(dom);
+                new ButtonGroup(dom);
 
                 equal(dom.find("img.km-image").length, 1);
             });
 
             test("Rendering does not expand child nodes of UL", function() {
-                new SegmentedControl(dom);
+                new ButtonGroup(dom);
 
                 equal(dom[0].childNodes.length, 2);
             });
@@ -79,14 +79,14 @@
             test("Add icon if no image and data attribute", function() {
                 dom.find("li:first").attr("data-icon", "test");
 
-                new SegmentedControl(dom);
+                new ButtonGroup(dom);
 
                 equal(dom.find(".km-icon").length, 1);
                 ok(dom.find(".km-icon").hasClass("km-test"));
             });
 
             test("Select li on init", function() {
-                var segmented = new SegmentedControl(dom, {
+                var segmented = new ButtonGroup(dom, {
                     index: 0
                 });
 
@@ -94,7 +94,7 @@
             });
 
             test("Select li as jQuery object", function() {
-                var segmented = new SegmentedControl(dom);
+                var segmented = new ButtonGroup(dom);
 
                 segmented.select(dom.children("li:first"));
 
@@ -106,7 +106,7 @@
             });
 
             test("Select by index", function() {
-                var segmented = new SegmentedControl(dom);
+                var segmented = new ButtonGroup(dom);
 
                 segmented.select(0);
 
@@ -114,7 +114,7 @@
             });
 
             test("Only one li is selected", function() {
-                var segmented = new SegmentedControl(dom);
+                var segmented = new ButtonGroup(dom);
 
                 segmented.select(0);
                 segmented.select(1);
@@ -127,7 +127,7 @@
             });
 
             test("Click button should select it", function() {
-                var segmented = new SegmentedControl(dom);
+                var segmented = new ButtonGroup(dom);
 
                 segmented._mousedown({
                     currentTarget: dom.find("li:last")[0]
@@ -137,7 +137,7 @@
             });
 
             asyncTest("Raise change event", function() {
-                var segmented = new SegmentedControl(dom, {
+                var segmented = new ButtonGroup(dom, {
                     change: function() {
                         ok(true);
                         start();

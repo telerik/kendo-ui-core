@@ -11,7 +11,7 @@
         SELECTOR = "li:not(." + ACTIVE +")",
         MOUSEDOWN = touch ? "touchstart" : "mousedown";
 
-    var SegmentedControl = Widget.extend({
+    var ButtonGroup = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -24,19 +24,19 @@
             that.bind([
                 /**
                 * Fires when different button is selected
-                * @name kendo.mobile.ui.SegmentedControl#change
+                * @name kendo.mobile.ui.ButtonGroup#change
                 * @event
                 * @param {Event} e
                 *
                 * @exampleTitle Handle change event
                 * @example
-                * <ul id="segmented-control" data-role="segmentedcontrol" />
+                * <ul id="buttongroup" data-role="buttongroup" />
                 *   <li>Option1</li>
                 *   <li>Option2</li>
                 * </ul>
                 *
                 * <script>
-                *  $("#segmented-control").data("kendoMobileSegmentedControl").bind("change", function(e) {
+                *  $("#buttongroup").data("kendoMobileButtonGroup").bind("change", function(e) {
                 *      //handle change event
                 *  }
                 * </script>
@@ -48,8 +48,8 @@
         },
 
         options: {
-            name: "SegmentedControl",
-            selector: kendo.roleSelector("segmentedcontrol")
+            name: "ButtonGroup",
+            selector: kendo.roleSelector("buttongroup")
         },
 
         current: function() {
@@ -101,5 +101,5 @@
         }
     });
 
-    ui.plugin(SegmentedControl);
+    ui.plugin(ButtonGroup);
 })(jQuery);
