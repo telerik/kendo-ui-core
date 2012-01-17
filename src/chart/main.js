@@ -4004,10 +4004,7 @@
             plotArea.charts = [];
             plotArea.options.legend.items = [];
 
-            if (series && series.length > 0) {
-                plotArea.createCharts();
-            }
-
+            plotArea.createCharts();
             plotArea.createAxes();
 
             plotArea.append.apply(plotArea, plotArea.charts);
@@ -4225,7 +4222,7 @@
 
             plotArea.range = { min: 0, max: 1 };
 
-            if (series && series.length > 0) {
+            if (series.length > 0) {
                 plotArea.invertAxes = inArray(
                     series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
                 );
