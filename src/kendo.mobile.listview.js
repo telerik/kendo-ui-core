@@ -219,7 +219,7 @@
                 that.element.html(kendo.render(that.template, view));
             }
 
-            kendo.mobile.enhance(that.element);
+            kendo.mobile.enhance(that.element.children());
 
             that._style();
         },

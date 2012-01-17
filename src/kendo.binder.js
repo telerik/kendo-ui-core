@@ -46,7 +46,15 @@
         },
 
         value: function() {
-            return this.observable.get(this.field);
+            if (this.observable instanceof kendo.data.ObservableObject) {
+                var result = this.observable.get(this.field);
+                if (typeof result === "function") {
+                    result = result.call(this.observable);
+                }
+                return result;
+            } else {
+                return this.observable;
+            }
         },
 
         destroy: function() {
@@ -123,11 +131,11 @@
             this.element.style.cssText = this.field.replace(cssRegExp, function(match, css, field) {
                 that.observable.bind("change", function(e) {
                     if (e.field === field && e.initiator !== that.element) {
-                        $(that.element).css(css, get(that.observable, field));
+                        $(that.element).css(css, that.observable.get(field));
                     }
                 });
 
-                return css + ":" + get(that.observable, field) + ";";
+                return css + ":" + that.observable.get(field) + ";";
             });
         }
     });
@@ -327,8 +335,6 @@
         "ol": listBindings
     };
 
-    var widgetBindings = {};
-
     function bindElement(element, object) {
         var field, key, binding;
 
@@ -336,16 +342,10 @@
 
         var role = element.getAttribute("data-role");
 
-        if (role) {
-            var widget = widgetBindings[role];
-            var options = {};
 
-            var dataSource = element.getAttribute("data-source");
-            if (dataSource) {
-                options.dataSource = get(object, dataSource, true);
-            }
-
-            $(element)["kendo" + widget.fn.options.name](options);
+        if (role && kendo.widgetBinders[role]) {
+            $.data(element, "context", object);
+            kendo.widgetBinders[role](element, object);
         } else {
             var bound= [];
 
@@ -363,13 +363,12 @@
 
             if (bound.length) {
                 $.data(element, "bindings", bound);
+                $.data(element, "context", object);
             }
 
             if (!element.getAttribute("data-source")) {
-                for (element = element.firstChild; element; element = element.nextSibling) {
-                    if (element.nodeType === 1) {
-                        bindElement(element, object);
-                    }
+                for (var i = 0; i < element.children.length; i++) {
+                    bindElement(element.children[i], object);
                 }
             }
         }
@@ -383,132 +382,7 @@
         }
     }
 
-    function bindSelect(select, model) {
-        select = $(select);
-
-        var text = select.attr(kendo.attr("text-field")),
-            value = select.attr(kendo.attr("value-field")),
-            source = select.attr(kendo.attr("source"));
-
-        if (model[source]) {
-            source = model[source].call(model);
-        } else {
-            try {
-                source = eval(source);
-            } catch(e) {
-                return;
-            }
-        }
-
-        if ($.isArray(source)) {
-            select.html(kendo.render(kendo.template('<option value="${'+ value +'}">${' + text + '}</option>'), source));
-        }
-    }
-
-    var ModelViewBinder = Observable.extend({
-        init: function(element, model, options) {
-            var that = this;
-
-            that.element = $(element);
-            that.options = options || {};
-
-            Observable.fn.init.call(that);
-
-            that.model = model instanceof Model ? model : new (Model.define())(model);
-
-            that.bind([CHANGE], that.options);
-
-            var elements = that.element.find("input,select,textarea");
-            if (!elements.length) {
-                elements = that.element;
-            }
-
-            elements.bind(CHANGE, $.proxy(that._change, that))
-                .each(function() {
-                    var mapping = that._map(this);
-                    if (mapping) {
-                        mapping.bindView();
-                    }
-                });
-        },
-
-        bindModel: function() {
-            var that = this,
-                valid = true;
-
-            that.element.find("input,select,textarea")
-                .each(function() {
-                    var mapping = that._map(this);
-                    if (mapping) {
-                        return valid = mapping.bindModel();
-                    }
-                });
-
-            return valid;
-        },
-
-        _change: function(e) {
-            var that = this,
-                mapping = that._map(e.target);
-
-            if (mapping) {
-                mapping.bindModel();
-            }
-        },
-
-        _map: function(target) {
-            var that = this,
-                model = that.model,
-                options = that.options,
-                element = $(target),
-                field = element.attr(kendo.attr("field")) || element.attr("name"),
-                setting = options[field] || {};
-
-            if (field) {
-                return {
-                    bindView: function() {
-                        var value = model.get(field);
-
-                        if (setting.format) {
-                            value = setting.format(value);
-                        }
-
-                        if (target.nodeName.toLowerCase() === "select") {
-                            bindSelect(target, model);
-                        }
-
-                        if (element.is(":checkbox")) {
-                            element.attr("checked", value === true);
-                        } else {
-                            element.val(value);
-                        }
-                    },
-                    bindModel: function() {
-                        var value = element.is(":checkbox") ? element.is(":checked") : target.value,
-                            values = {};
-
-                        if (setting.parse) {
-                           value = setting.parse(value);
-                        }
-
-                        values[field] = value;
-
-                        if (!that.trigger(CHANGE, { values: values })) {
-                            model.set(field, value);
-                            return true;
-                        }
-
-                        return false;
-                    }
-                }
-            }
-        }
-    });
-
-    data.ModelViewBinder = ModelViewBinder;
-
     kendo.bindings = bindings;
-    kendo.widgetBindings = widgetBindings;
 
     kendo.bind = function(dom, object) {
         bind(dom, kendo.observable(object));
