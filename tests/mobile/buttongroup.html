@@ -113,6 +113,14 @@
                 ok(dom.children("li:first").hasClass("km-state-active"));
             });
 
+            test("Do not select if index is negative", function() {
+                var segmented = new ButtonGroup(dom);
+
+                segmented.select(-1);
+
+                equal(dom.children("li.km-state-active").length, 0);
+            });
+
             test("Only one li is selected", function() {
                 var segmented = new ButtonGroup(dom);
 
