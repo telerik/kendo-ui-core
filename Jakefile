@@ -15,6 +15,7 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     STYLES_PATH = "styles",
     SCRIPTS_PATH = "js",
     DEPLOY_PATH = "deploy",
+    SITEFINITY_HELP_PATH = "sitefinity-docs",
     DEMOS_PATH = path.join("demos", "mvc"),
     DEMOS_PROJECT = "Kendo.csproj",
     DEMOS_LIVE_PATH = path.join(DEPLOY_PATH, "live"),
@@ -46,74 +47,12 @@ task("merge-scripts", function() {
 
 desc("Build documentation");
 task("docs", function() {
-    var mappings = {
-            "ui.slider": ["ui.slider", "ui.rangeslider"],
-            "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"],
-            "ui.dragdrop": ["ui.draggable", "ui.droptarget"]
-        },
-        sections = ["description", "configuration", "methods", "events"];
+    buildDocs();
+});
 
-    function combine() {
-        var files = fs.readdirSync(DOCS_DEPLOY_PATH),
-            filesToMerge;
-        for (var key in mappings) {
-            var mapping = mappings[key];
-            filesToMerge = [];
-
-            sections.forEach(function(section) {
-                mapping.forEach(function(source) {
-                    var fileName = "kendo." + source + "." + section + ".html";
-                    if (files.indexOf(fileName) > -1) {
-                        filesToMerge.push(fileName);
-                    }
-                });
-            });
-
-            sections.forEach(function(sectionName) {
-                var cache = "";
-                kendoBuild.grep(filesToMerge, function(fileName) {
-                    return fileName.indexOf(sectionName) > -1;
-                }).forEach(function(fileToMerge) {
-                    var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
-
-                    if (sectionName != "description") {
-                        text = wrap(text, fileToMerge);
-                    }
-                    cache += text;
-                });
-
-                kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
-            });
-        }
-    }
-
-    function wrap(text, fileToMerge) {
-        fileToMerge = fileToMerge.split(".");
-        fileToMerge = fileToMerge[fileToMerge.length - 3];
-
-        return '<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>' + fileToMerge + '</div><div style="display: block;" class="detailBody">' + text + "</div>";
-    }
-
-    var params = [
-        // output directory
-        "-d=demos/mvc/content/docs",
-        // template
-        "-t=build/node-jsdoc-toolkit/template",
-        // constants
-        "-D=\"copyright:" + new Date().getFullYear() + "\"",
-        "-D=\"title:Kendo UI Documentation\""
-    ];
-
-    var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
-    for (var i = 0; i < sourceFiles.length; i++) {
-        params.push(path.join(SOURCE_PATH, sourceFiles[i]));
-    }
-
-    params.push("src/chart/docs.js");
-
-    jsdoctoolkit.run(params);
-
-    combine();
+desc("Build sitefinity documentation");
+task("sitefinity-docs", function() {
+    buildDocs(SITEFINITY_HELP_PATH);
 });
 
 namespace("demos", function() {
@@ -191,6 +130,83 @@ task("cdn", ["clean", "merge-scripts"], function() {
 }, true);
 
 // Helpers ====================================================================
+function buildDocs(sitefinity_path) {
+    var mappings = {
+            "ui.slider": ["ui.slider", "ui.rangeslider"],
+            "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"],
+            "ui.dragdrop": ["ui.draggable", "ui.droptarget"]
+        },
+        sections = ["description", "configuration", "methods", "events"];
+
+    function combine() {
+        var files = fs.readdirSync(DOCS_DEPLOY_PATH),
+            filesToMerge;
+        for (var key in mappings) {
+            var mapping = mappings[key];
+            filesToMerge = [];
+
+            sections.forEach(function(section) {
+                mapping.forEach(function(source) {
+                    var fileName = "kendo." + source + "." + section + ".html";
+                    if (files.indexOf(fileName) > -1) {
+                        filesToMerge.push(fileName);
+                    }
+                });
+            });
+
+            sections.forEach(function(sectionName) {
+                var cache = "";
+                kendoBuild.grep(filesToMerge, function(fileName) {
+                    return fileName.indexOf(sectionName) > -1;
+                }).forEach(function(fileToMerge) {
+                    var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
+
+                    if (sectionName != "description") {
+                        text = wrap(text, fileToMerge);
+                    }
+                    cache += text;
+                });
+
+                kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
+            });
+        }
+    }
+
+    function wrap(text, fileToMerge) {
+        fileToMerge = fileToMerge.split(".");
+        fileToMerge = fileToMerge[fileToMerge.length - 3];
+
+        return '<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>' + fileToMerge + '</div><div style="display: block;" class="detailBody">' + text + "</div>";
+    }
+
+    var params = [
+        // output directory
+        "-d=demos/mvc/content/docs",
+        // template
+        "-t=build/node-jsdoc-toolkit/template",
+        // constants
+        "-D=\"copyright:" + new Date().getFullYear() + "\"",
+        "-D=\"title:Kendo UI Documentation\""
+    ];
+
+    sitefinity = false; //create global variable
+    if (sitefinity_path) {
+        params[0] = "-d=" + sitefinity_path;
+        sitefinity = true;
+    }
+
+    var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
+    for (var i = 0; i < sourceFiles.length; i++) {
+        params.push(path.join(SOURCE_PATH, sourceFiles[i]));
+    }
+
+    params.push("src/chart/docs.js");
+
+    jsdoctoolkit.run(params);
+
+    combine();
+}
+
 function deployDemos(outputPath, cdnRoot, onSuccess) {
     var webConfig = path.join(outputPath, "Web.config");
 

@@ -19,6 +19,10 @@ function publish(symbolSet) {
             var template = new JSDOC.JsPlate(templatesDir + section + ".tmpl"),
                 html = template.process(c);
 
+            if (sitefinity) {
+                html = html.replace(/detailHandle/g, "detailHandle detailHandleExpanded");
+            }
+
             if (hasValue(html)) {
                 IO.saveFile(
                     outDir,
@@ -87,10 +91,14 @@ function outputDescription(description) {
                 if (/<[^>]+>/g.test(tag.desc)) {
                     output += tag.desc;
                 } else if (tag.desc.indexOf("kendo.") !== 0) {
-                    output += "<p>" + tag.desc + "</p>";
+                    output += '<div class="desc">' + tag.desc + "</div>";
                 }
             break;
         }
+    }
+
+    if (sitefinity) {
+        output = output.replace("index.html", "overview.aspx");
     }
 
     return output;
