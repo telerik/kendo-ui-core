@@ -20,7 +20,7 @@ function publish(symbolSet) {
                 html = template.process(c);
 
             if (sitefinity) {
-                html = html.replace("detailHandle", "detailHandle detailHandleExpanded");
+                html = html.replace(/detailHandle/g, "detailHandle detailHandleExpanded");
             }
 
             if (hasValue(html)) {
@@ -91,7 +91,7 @@ function outputDescription(description) {
                 if (/<[^>]+>/g.test(tag.desc)) {
                     output += tag.desc;
                 } else if (tag.desc.indexOf("kendo.") !== 0) {
-                    output += "<p>" + tag.desc + "</p>";
+                    output += '<div class="desc">' + tag.desc + "</div>";
                 }
             break;
         }
