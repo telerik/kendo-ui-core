@@ -4252,6 +4252,19 @@
             plotArea.createAxes();
         },
 
+        appendChart: function(chart) {
+            var plotArea = this,
+                options = plotArea.options,
+                series = chart.options.series,
+                categories = options.categoryAxis.categories,
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
+
+            append(categories, new Array(categoriesToAdd));
+            plotArea.addToLegend(series);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+        },
+
         createBarChart: function(series) {
             if (series.length === 0) {
                 return;
@@ -4260,21 +4273,16 @@
             var plotArea = this,
                 options = plotArea.options,
                 firstSeries = series[0],
-                categories = options.categoryAxis.categories,
                 barChart = new BarChart(plotArea, {
                     series: series,
                     isVertical: !plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
+                });
 
-            append(categories, new Array(categoriesToAdd));
             plotArea.range = barChart.valueRange() || plotArea.range;
             plotArea.appendChart(barChart);
-
-            plotArea.addToLegend(series);
         },
 
         createLineChart: function(series) {
@@ -4286,25 +4294,19 @@
                 options = plotArea.options,
                 range = plotArea.range,
                 firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
-                // Override the original invertAxes
                 lineChart = new LineChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
                     isVertical: !plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
                 }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
                 lineChartRange = lineChart.valueRange() || range;
 
-            append(categories, new Array(categoriesToAdd));
             // Override the original range
             range.min = math.min(range.min, lineChartRange.min);
             range.max = math.max(range.max, lineChartRange.max);
-            plotArea.appendChart(lineChart);
 
-            plotArea.addToLegend(series);
+            plotArea.appendChart(lineChart);
         },
 
         createAreaChart: function(series) {
@@ -4316,26 +4318,20 @@
                 options = plotArea.options,
                 range = plotArea.range,
                 firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
                 // Override the original invertAxes
-                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
                 areaChart = new AreaChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !invertAxes,
+                    isVertical: !plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
                 }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
                 areaChartRange = areaChart.valueRange() || range;
 
-            append(categories, new Array(categoriesToAdd));
             // Override the original range
             range.min = math.min(range.min, areaChartRange.min);
             range.max = math.max(range.max, areaChartRange.max);
-            plotArea.appendChart(areaChart);
 
-            plotArea.addToLegend(series);
+            plotArea.appendChart(areaChart);
         },
 
         createAxes: function() {
