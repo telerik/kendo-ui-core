@@ -31,6 +31,7 @@
             function setup(options) {
                 options = $.extend({
                     template: "<li></li>",
+                    navigatable: true,
                     dataSource: dataSource = new DataSource({ data: [1,2,3,4,5] })
                 }, options);
                 return $("<ul/>").kendoListView(options);
@@ -55,6 +56,34 @@
                         }
                     });
                 ok(called);
+            });
+
+            test("autoBind false does not populate listView", function() {
+                var ul = setup({autoBind: false});
+                equal(ul.find("li").length, 0);
+            });
+
+            test("selectable false does not instantiate Selectable object", function() {
+                var ul = setup({ selectable: false });
+                ok(!ul.data("kendoListView").selectable);
+            });
+
+            test("selectable true instantiate Selectable object", function() {
+                var ul = setup({ selectable: true });
+                ok(ul.data("kendoListView").selectable);
+            });
+
+            test("selectable true instantiate Selectable object", function() {
+                var listView = setup({ selectable: true }).data("kendoListView");
+
+                ok(listView.selectable);
+                ok(!listView.selectable.options.multiple);
+            });
+
+            test("selectable multiple set multiple mode of the selectable", function() {
+                var listView = setup({ selectable: "multiple" }).data("kendoListView");
+
+                ok(listView.selectable.options.multiple);
             });
 
             test("focusing grid element focus first item ", function() {
@@ -88,15 +117,114 @@
             });
 
             test("space key select the focused item", function() {
-                    var listView = setup();
+                var listView = setup({ selectable: true });
 
-                    listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+                listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
 
-                    ok(listView.find("li:eq(1)").hasClass("k-state-selected"));
+                ok(listView.find("li:eq(1)").hasClass("k-state-selected"));
             });
-            test("autoBind false does not populate listView", function() {
-                var ul = setup({autoBind: false});
-                equal(ul.find("li").length, 0);
+
+            test("ctrl + space key when multiple selectoin is enabled persist the selected items", function() {
+                var listView = setup({ selectable: "multiple" });
+
+                listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR);
+                listView.press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR, true);
+
+                equal(listView.find(".k-state-selected").length, 2);
+                ok(listView.find("li:eq(1)").hasClass("k-state-selected"));
+                ok(listView.find("li:eq(2)").hasClass("k-state-selected"));
+            });
+
+            test("space key on already selected item when multiple selectoin is enabled unselects the item", function() {
+                var listView = setup({ selectable: "multiple" });
+
+                listView.focus().press(kendo.keys.DOWN).press(kendo.keys.SPACEBAR).press(kendo.keys.SPACEBAR, true);
+
+                ok(!listView.find("li:eq(1)").hasClass("k-state-selected"));
+            });
+
+            test("select without arguments returns selected items", function() {
+                var ul = setup({ selectable: true }),
+                    selected;
+
+                ul.find("li:first").addClass("k-state-selected");
+
+                selected = ul.data("kendoListView").select();
+                equal(selected.length, 1);
+            });
+
+            test("select with arguments mark the arguments as selected", function() {
+                var ul = setup({
+                        selectable: true
+                    }),
+                    item = ul.find("li:eq(0)");
+
+                ul.data("kendoListView").select(item);
+
+                ok(item.hasClass("k-state-selected"));
+            });
+
+            test("select clears previously selected items if single select", function() {
+                var ul = setup({
+                        selectable: true
+                    }),
+                    items = ul.children();
+                items.eq(0).addClass("k-state-selected");
+                ul.data("kendoListView").select(items.eq(1));
+
+                ok(!items.eq(0).hasClass("k-state-selected"));
+                ok(items.eq(1).hasClass("k-state-selected"));
+            });
+
+            test("select persist previously selected items if multi select", function() {
+                var ul = setup({
+                        selectable: "multiple"
+                    }),
+                    items = ul.children();
+                items.eq(0).addClass("k-state-selected");
+                ul.data("kendoListView").select(items.eq(1));
+
+                ok(items.eq(0).hasClass("k-state-selected"));
+                ok(items.eq(1).hasClass("k-state-selected"));
+            });
+
+            test("select with array of items as argument select first if single select", function() {
+                var ul = setup({
+                        selectable: true
+                    }),
+                    items = ul.children();
+
+                ul.data("kendoListView").select(items);
+
+                ok(items.eq(0).hasClass("k-state-selected"));
+                ok(!items.eq(1).hasClass("k-state-selected"));
+                ok(!items.eq(2).hasClass("k-state-selected"));
+            });
+
+            test("clearSelection clears selected items", function() {
+                var listView = setup({
+                        selectable: true
+                    }).data("kendoListView"),
+                    item = listView.element.find("li:eq(1)").addClass("k-state-selected");
+
+                listView.clearSelection();
+
+                ok(!item.hasClass("k-state-selected"));
+            });
+
+            test("clearSelection triggers change event", function() {
+                var triggered = false,
+                    listView = setup({
+                        selectable: true,
+                        change: function() {
+                            triggered = true;
+                        }
+                    }).data("kendoListView"),
+                    item = listView.element.find("li:eq(1)").addClass("k-state-selected");
+
+                listView.clearSelection();
+
+                ok(triggered);
             });
 
         </script>

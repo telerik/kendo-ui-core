@@ -4,9 +4,14 @@
         DATABOUND = "dataBound",
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
-        FOCUSSELECTOR =  "> li",
+        FOCUSSELECTOR =  ">*",
+        CHANGE = "change",
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
+        SELECTED = "k-state-selected",
+        STRING = "string",
+        CLICK = "click",
+        proxy = $.proxy,
         DataSource = kendo.data.DataSource;
 
     var ListView = Widget.extend( {
@@ -23,12 +28,12 @@
 
             that.template = kendo.template(that.options.template);
 
-            that._selection();
+            that._navigatable();
 
-            that._navigation();
+            that._selectable();
 
             if(that.options.autoBind){
-                that.dataSource.query();
+                that.dataSource.fetch();
             }
         },
         options: {
@@ -40,7 +45,7 @@
         _dataSource: function() {
             var that = this;
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, $.proxy(that.refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
         refresh: function() {
@@ -53,31 +58,54 @@
             that.trigger(DATABOUND);
         },
 
-        _selection: function() {
-            var that = this;
+        _selectable: function() {
+            var that = this,
+                multi,
+                current,
+                selectable = that.options.selectable,
+                navigatable = that.options.navigatable;
 
-            that.selectable = new kendo.ui.Selectable(that.element, {
-                change: function() {
-                    that.trigger(CHANGE);
+            if (selectable) {
+                multi = typeof selectable === STRING && selectable.toLowerCase().indexOf("multiple") > -1;
+
+                that.selectable = new kendo.ui.Selectable(that.element, {
+                    multiple: multi,
+                    filter: FOCUSSELECTOR,
+                    change: function() {
+                        that.trigger(CHANGE);
+                    }
+                });
+
+                if (navigatable) {
+                    that.element.keydown(function(e) {
+                        if (e.keyCode === keys.SPACEBAR) {
+                            current = that.current();
+                            e.preventDefault();
+                            if(multi) {
+                                if(!e.ctrlKey) {
+                                    that.selectable.clear();
+                                } else {
+                                    if(current.hasClass(SELECTED)) {
+                                        current.removeClass(SELECTED);
+                                        current = null;
+                                    }
+                                }
+                            } else {
+                                that.selectable.clear();
+                            }
+
+                            that.selectable.value(current);
+                        }
+                    });
                 }
-            });
-
-            that.element.keydown(function(e) {
-                if (e.keyCode === kendo.keys.SPACEBAR) {
-
-                    that.selectable.clear();
-
-                    that.selectable.value(that.current());
-                }
-            });
-
+            }
         },
 
         current: function(element) {
             var that = this,
                 current = that._current;
 
-            if(element !== undefined && element[0]) {
+            if (element !== undefined && element.length) {
                 if (!current || current[0] !== element[0]) {
                     element.addClass(FOCUSED);
                     if (current) {
@@ -85,51 +113,85 @@
                     }
                     that._current = element;
                 }
-            } else {
-                return that._current;
             }
+
+            return that._current;
         },
 
-        _navigation: function() {
+        _navigatable: function() {
             var that = this,
-                element = that.element;
-
-            element.attr("tabIndex", Math.max(element.attr("tabIndex") || 0, 0));
-            element.bind({
-                focus: function() {
-                    that.current(element.find(FOCUSSELECTOR).first());
-                },
-                blur: function() {
-                    if (that._current) {
-                        that._current.removeClass(FOCUSED);
-                        that._current = null;
+                navigatable = that.options.navigatable,
+                element = that.element,
+                currentProxy = proxy(that.current, that),
+                clickCallback = function(e) {
+                    currentProxy($(e.currentTarget));
+                    if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
+                        element.focus();
                     }
-                },
-                keydown: function(e) {
-                    var key = e.keyCode,
-                        current = that.current();
+                };
 
-                    if (keys.UP === key) {
-                        that.current(current ? current.prev() : element.find(FOCUSSELECTOR).first());
-                    } else if (keys.DOWN === key) {
-                        that.current(current ? current.next() : element.find(FOCUSSELECTOR).first());
-                    } else if (keys.PAGEUP == key) {
-                        that._current = null;
-                        that.dataSource.page(that.dataSource.page() + 1);
-                    } else if (keys.PAGEDOWN == key) {
-                        that._current = null;
-                        that.dataSource.page(that.dataSource.page() - 1);
+            if (navigatable) {
+                element.attr("tabIndex", Math.max(element.attr("tabIndex") || 0, 0));
+                element.bind({
+                    focus: function() {
+                        var current = that._current;
+                        if(current && current.is(":visible")) {
+                            current.addClass(FOCUSED);
+                        } else {
+                            currentProxy(element.find(FOCUSSELECTOR).first());
+                        }
+                    },
+                    focusout: function() {
+                        if (that._current) {
+                            that._current.removeClass(FOCUSED);
+                        }
+                    },
+                    keydown: function(e) {
+                        var key = e.keyCode,
+                            current = that.current();
+
+                        if (keys.UP === key) {
+                            that.current(current ? current.prev() : element.find(FOCUSSELECTOR).first());
+                        } else if (keys.DOWN === key) {
+                            that.current(current ? current.next() : element.find(FOCUSSELECTOR).first());
+                        } else if (keys.PAGEUP == key) {
+                            that._current = null;
+                            that.dataSource.page(that.dataSource.page() - 1);
+                        } else if (keys.PAGEDOWN == key) {
+                            that._current = null;
+                            that.dataSource.page(that.dataSource.page() + 1);
+                        }
                     }
-                }
-            });
+                });
 
-            element.addClass(FOCUSABLE)
-                  .delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", function(e) {
-                      that.current($(e.currentTarget));
-                  });
+                element.addClass(FOCUSABLE).delegate("." + FOCUSABLE + FOCUSSELECTOR, "mousedown", clickCallback);
+            }
        },
-       selected: function() {
-           return this.selectable.value();
+
+        /**
+         * Clears currently selected items.
+         */
+        clearSelection: function() {
+            var that = this;
+            that.selectable.clear();
+            that.trigger(CHANGE);
+        },
+
+       select: function(items) {
+           var that = this,
+               selectable = that.selectable;
+
+            items = $(items);
+            if(items.length) {
+                if(!selectable.options.multiple) {
+                    selectable.clear();
+                    items = items.first();
+                }
+                selectable.value(items);
+                return;
+            }
+
+           return selectable.value();
        }
     });
 
