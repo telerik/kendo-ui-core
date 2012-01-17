@@ -1,5 +1,5 @@
-<div data-role="view" data-init="mobileSegmentedEventsInit">
-    <ul id="segmented-control" data-role="segmentedcontrol">
+<div data-role="view" data-init="mobileButtonGroupEventsInit">
+    <ul id="button-group" data-role="buttongroup">
        <li data-icon="featured">
             Featured
        </li>
@@ -14,9 +14,9 @@
 </div>
 
 <script>
-    function mobileSegmentedEventsInit() {
-        $("#segmented-control")
-            .data("kendoMobileSegmentedControl")
+    function mobileButtonGroupEventsInit() {
+        $("#button-group")
+            .data("kendoMobileButtonGroup")
             .bind("change", function() {
                 kendoConsole.log("Selected button: " + this.current().text());
             });
