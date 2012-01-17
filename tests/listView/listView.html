@@ -63,6 +63,27 @@
                 equal(ul.find("li").length, 0);
             });
 
+            test("altTemplate defaults to template if is not set", function() {
+                var listView = setup({ template: "<li>1</li>" }).data("kendoListView");
+
+                equal(listView.template({}), "<li>1</li>");
+                equal(listView.altTemplate({}), "<li>1</li>");
+            });
+
+            test("altTemplate defined", function() {
+                var listView = setup({ template: "<li>1</li>", altTemplate: "<li>2</li>" }).data("kendoListView");
+
+                equal(listView.template({}), "<li>1</li>");
+                equal(listView.altTemplate({}), "<li>2</li>");
+            });
+
+            test("altTemplate is rendered", function() {
+                var ul = setup({ template: "<li>1</li>", altTemplate: "<li>2</li>" });
+
+                equal(ul.children().eq(0).html(), "1");
+                equal(ul.children().eq(1).html(), "2");
+            });
+
             test("selectable false does not instantiate Selectable object", function() {
                 var ul = setup({ selectable: false });
                 ok(!ul.data("kendoListView").selectable);

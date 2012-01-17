@@ -26,7 +26,8 @@
 
             that._dataSource();
 
-            that.template = kendo.template(that.options.template);
+            that.template = kendo.template(options.template);
+            that.altTemplate = kendo.template(options.altTemplate || options.template);
 
             that._navigatable();
 
@@ -51,7 +52,19 @@
         refresh: function() {
             var that = this,
                 data = that.dataSource.view(),
-                html = kendo.render(that.template, data);
+                html = "",
+                idx,
+                length,
+                template = that.template,
+                altTemplate = that.altTemplate;
+
+            for (idx = 0, length = data.length; idx < length; idx++) {
+                if (idx % 2) {
+                    html += altTemplate(data[idx]);
+                } else {
+                    html += template(data[idx]);
+                }
+            }
 
             that.element.html(html);
 
