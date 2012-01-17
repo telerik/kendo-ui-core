@@ -119,7 +119,8 @@
             that.element.bind(MOUSEUP, that._releaseProxy);
 
             that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, function (e) {
-                $(e.target).closest(".km-button").toggleClass("km-state-active", e.type == MOUSEDOWN);
+                e.stopImmediatePropagation();
+                $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
             });
 
             that.bind([
@@ -255,6 +256,7 @@
                 $.each(styles, function () {
                     element.addClass("km-" + this);
                 });
+                element.removeClass("km-button");
             }
         }
 

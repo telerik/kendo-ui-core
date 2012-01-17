@@ -209,6 +209,15 @@
     background-color: #1F6DD8;
 }
 
+.km-ios .km-detail .km-icon
+{
+    left: 10%;
+    top: 10%;
+    width: 90%;
+    height: 90%;
+    background-color: #fff;
+}
+
 .km-ios .km-rowinsert
 {
     background-color: #24870D;
@@ -319,7 +328,8 @@
 
 .km-ios .km-list > li
 {
-    border-bottom: 1px solid #E9E9E9;
+    border-top: 1px solid rgba(255,255,255,.5);
+    border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .km-ios .km-list > li,
@@ -331,6 +341,30 @@
 .km-ios .km-listview .km-list
 {
     border-top: 1px solid #78858e;
+}
+
+.km-ios li.km-state-active .km-listview-link
+{
+    color: #fff;
+    background: #0260E8;
+    background-image: linear-gradient(top, rgba(255,255,255,.28), rgba(255,255,255,.1) 50%, rgba(255,255,255,0));
+}
+
+.km-ios .km-state-active .km-listview-link:after
+{
+    border-color: #fff;
+}
+
+.km-ios .km-listinset > li:first-child > .km-listview-link,
+.km-ios .km-listgroupinset > li:first-child > .km-listview-link
+{
+    .border-radius(9px 9px 0 0);
+}
+
+.km-ios .km-listinset > li:last-child > .km-listview-link,
+.km-ios .km-listgroupinset > li:last-child > .km-listview-link
+{
+    .border-radius(0 0 9px 9px);
 }
 
 .km-ios .km-listgroup > li,
@@ -366,7 +400,7 @@
 .km-ios .km-list,
 .km-ios .km-content
 {
-    background: #fff;
+    background: #f9f9f9;
 }
 
 .km-ios .km-insetcontent
