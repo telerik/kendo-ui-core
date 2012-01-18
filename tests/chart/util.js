@@ -53,6 +53,9 @@ ViewStub.prototype = {
         var element = new kendo.ui.Chart.ViewElement(style);
         element.points = points;
         element.closed = closed;
+        element.clone = function() {
+            return this;
+        };
         return element;
     },
 
