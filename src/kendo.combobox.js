@@ -734,7 +734,7 @@
                 }
 
                 that._old = that.value();
-            }).query();
+            }).filter({});
         },
 
         _wrapper: function() {
