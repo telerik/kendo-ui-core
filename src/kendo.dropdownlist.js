@@ -300,6 +300,14 @@
         },
 
         /**
+        * Re-popuplates the data in the dataSource.
+        * @name kendo.ui.DropDownList#refresh
+        * @function
+        * @example
+        * dropdownlist.refresh();
+        */
+
+        /**
         * Selects item, which starts with the provided parameter.
         * @param {string} word The search value.
         * @example
