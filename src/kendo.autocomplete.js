@@ -372,6 +372,16 @@
         */
 
         /**
+        * Re-popuplates the data in the DataSource.
+        * @example
+        * // get a referenence to the Kendo UI AutoComplete
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
+        * // re-populate the data of the DataSource
+        * autocomplete.refresh();
+        */
+
+
+        /**
         * Selects drop-down list item and sets the text of the autocomplete.
         * @param {jQueryObject} li The LI element.
         * @example
