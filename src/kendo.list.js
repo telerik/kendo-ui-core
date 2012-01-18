@@ -17,6 +17,7 @@
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-loading",
+        SCROLLER = "kendoMobileScroller",
         SELECT = "select",
         proxy = $.proxy;
 
@@ -31,7 +32,7 @@
          * @extends kendo.ui.Widget
          */
         init: function(element, options) {
-            var that = this, id;
+            var that = this, id, list;
 
             Widget.fn.init.call(that, element, options);
 
@@ -42,7 +43,7 @@
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-            that.list = $("<div class='k-list-container'/>")
+            that.list = list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .mousedown(function() {
                             that._clearBlurTimeout();
@@ -51,7 +52,11 @@
 
             id = that.element.attr(ID);
             if (id) {
-                that.list.attr(ID, id + "-list")
+                list.attr(ID, id + "-list")
+            }
+
+            if (touch && list[SCROLLER]) {
+                list[SCROLLER]();
             }
 
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
