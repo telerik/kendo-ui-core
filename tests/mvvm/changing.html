@@ -93,14 +93,27 @@
             test("changing the value updates the view model", function() {
                 var dom = $('<input data-value="foo" />');
 
-                var viewModel = kendo.observable( { foo: "foo" });
+                var viewmodel = kendo.observable( { foo: "foo" });
 
-                kendo.bind(dom, viewModel);
+                kendo.bind(dom, viewmodel);
 
                 dom.val("bar");
                 dom.trigger("change");
 
-                equal(viewModel.foo, "bar");
+                equal(viewmodel.foo, "bar");
+            });
+
+            test("changing checkbox value updates the view model", function() {
+                var dom = $('<input type="checkbox" data-value="foo" />');
+
+                var viewmodel = kendo.observable( { foo: false });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.attr("checked", true);
+                dom.trigger("change");
+
+                equal(viewmodel.foo, true);
             });
 
             test("change event does not update the value again", function() {
