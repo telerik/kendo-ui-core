@@ -1,20 +1,41 @@
-<div data-role="view" id="home" data-title="Button">
-    <h2>Home</h2>
-    Home | <a data-role="button" href="#about">About Us</a> | <a data-role="button" href="#contacts">Contacts</a>
-    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquam egestas sem vitae suscipit. Sed suscipit, enim ut cursus pharetra, erat diam vulputate nisl, nec pharetra quam lorem non massa. Maecenas dapibus rhoncus commodo. Donec posuere pellentesque eleifend. Ut eu orci sit amet turpis posuere facilisis. Sed consequat nisi quis sem vehicula varius. Nullam lacinia imperdiet accumsan. Integer ac suscipit magna.  </p>
+<div data-role="view" id="home" data-title="Sports Academy">
+    <img class="banner" src="../../content/mobile/button/sports-home.jpg" alt="Sports Home" />    
+    <a class="button" data-role="button" href="#home" style="background-color: #f60">Home</a><a class="button" data-role="button" href="#facility">Facility</a><a class="button" data-role="button" href="#sports">Sports</a>
+    <h2>Welcome</h2>
+    <p>The Sports Academy provides a venue for outdoor and indoor sports and activities for children and adults of all ages.</p>
 </div>
 
-<div data-role="view" id="about" data-title="Button">
-    <h2>About us</h2>
-    <a data-role="button" href="#home">Home</a> | About us | <a data-role="button" href="#contacts">Contacts</a>
-    <p>Phasellus nec sem et velit blandit aliquet eget quis quam. Nulla placerat nisi sit amet ante pellentesque porttitor. Duis id ipsum sit amet massa facilisis condimentum. In congue metus fringilla urna suscipit blandit. Praesent auctor augue sit amet augue elementum adipiscing consequat nisl iaculis. Donec non sapien diam, quis congue mauris. Nulla id lobortis risus. Suspendisse potenti. Cras sit amet odio ante. Nullam quis velit in enim facilisis hendrerit nec rutrum lacus. Integer eu urna id tellus adipiscing adipiscing. Aliquam egestas sem in ligula viverra tristique. Cras et risus felis. Cras mauris nunc, venenatis ut vestibulum id, suscipit id arcu. Phasellus sagittis nulla eget velit dignissim in viverra ligula euismod.</p>
+<div data-role="view" id="facility" data-title="Facility">
+    <img class="banner" src="../../content/mobile/button/sports-facility.jpg" alt="Sports Facility" />
+    <a class="button" data-role="button" href="#home">Home</a><a class="button" data-role="button" href="#facility" style="background-color: #f60">Facility</a><a class="button" data-role="button" href="#sports">Sports</a>
+    <h2>Sports Facility</h2>
+    <p>Our facility has two indoor basketball fields, olimpic size swimming pool, outdoor soccer field, baseball field, golf club and more.</p>
 </div>
 
-<div data-role="view" id="contacts" data-title="Button">
-    <h2>Contacts</h2>
-    <a data-role="button" href="#home">Home</a> | <a data-role="button" href="#about">About Us</a> | Contacts
-    <p>Aliquam hendrerit ultricies est vel congue. Nulla pellentesque felis eget orci porta non pretium nunc fringilla. Nulla facilisi. Nunc vitae dolor quis dolor rhoncus pellentesque. Nulla ut magna leo, quis hendrerit ante. Etiam scelerisque tincidunt ultrices. Donec et nisi non mauris suscipit consequat. Phasellus non libero id odio suscipit hendrerit. Curabitur orci eros, faucibus vel vulputate id, rutrum in tellus.</p>
+<div data-role="view" id="sports" data-title="Sports">
+    <img class="banner" src="../../content/mobile/button/sports.jpg" alt="Sports" />
+    <a class="button" data-role="button" href="#home">Home</a><a class="button" data-role="button" href="#facility">Facility</a><a class="button" data-role="button" href="#sports" style="background-color: #f60">Sports</a>
+    <ul data-role="listview" data-style="inset">
+        <li>American Football</li>
+        <li>Baseball</li>
+        <li>Basketball</li>
+        <li>Football</li>
+        <li>Golf</li>
+        <li>Swimming</li>
+    </ul>
 </div>
+
+<style scoped>
+.button {
+    margin: 0 0 1rem 1rem;
+    text-align: center;
+}
+.banner 
+{
+	display: block;
+	margin: 0 auto 1rem auto;
+}
+</style>
 
 <script>
     $("#home-link").kendoMobileButton();
