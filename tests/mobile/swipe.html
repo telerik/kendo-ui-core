@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.mobile.Swipe Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.mobile.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.Button Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <ul id="log"></ul>
+
+        <script>
+            var swipe,
+                Swipe = kendo.mobile.Swipe,
+                element;
+            module("swipe on desktop", {
+                setup: function() {
+                    element = $("<div />");
+                    swipe = new kendo.mobile.Swipe(element);
+                }
+            });
+
+            test("swipe raises start on mousedown", 2, function(){
+                var e = $.Event("mousedown", {pageX: 10, pageY: 20});
+                swipe.bind("start", function(e) {
+                    equal(e.x, 10);
+                    equal(e.y, 20);
+                });
+                element.trigger(e);
+            });
+        </script>
+    </body>
+</html>
