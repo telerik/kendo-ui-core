@@ -3,7 +3,7 @@
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-black" />
-    <meta content="minimum-scale=1, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+    <meta content="minimum-scale=1.0, width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no" name="viewport" />
     
     <!-- Weinre Proxy, configure to your machine if you have it. -->
     <!--<script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>-->
@@ -11,8 +11,8 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.ios.less">
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less">
+    <!--<link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.ios.less">-->
+    <!--<link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less">-->
     <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.meego.less">
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
@@ -156,9 +156,9 @@
                 <li>Albania<input type="checkbox" data-role="switch" /></li>
                 <li>Australia<input type="checkbox" data-role="switch" checked="checked" autocomplete="off" /></li>
             </ul>
-            <div class="sliderValue">0</div>
-            <span class="km-slider" style="float: right; clear: both;"></span>
-            <ul data-role="listview" data-style="inset">
+            <!--<div class="sliderValue">0</div>-->
+            <!--<span class="km-slider" style="float: right; clear: both;"></span>-->
+            <ul data-role="listview">
                 <li><a>Albania</a></li>
                 <li><a>Australia</a></li>
             </ul>
@@ -197,6 +197,40 @@
                 </li>
             </ul>
 
+            <ul data-role="listview" data-style="inset">
+                <li><a>Albania<span data-role="detail-button" data-style="contactadd"></span></a></li>
+                <li><a>Australia<span data-role="detail-button" data-style="detaildisclose"></span></a></li>
+                <li><a>Australia<span data-role="detail-button" data-icon="more"></span></a></li>
+                <li><a>Australia<span data-role="detail-button" data-icon="battery"></span></a></li>
+            </ul>
+            <ul data-role="listview" data-type="group">
+                <li>ABC
+                    <ul>
+                        <li>Albania<input type="checkbox" data-role="switch" /></li>
+                        <li>Australia<input type="checkbox" data-role="switch" /></li>
+                    </ul>
+                </li>
+                <li>B
+                    <ul>
+                        <li>Bangladesh<a data-role="detail-button" data-style="rowinsert"></a></li>
+                        <li>Bulgaria<a data-role="detail-button" data-style="rowdelete"></a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul data-role="listview" data-type="group" data-style="inset">
+                <li>A
+                    <ul>
+                        <li>Albania<input type="checkbox" data-role="switch" /></li>
+                        <li>Australia</li>
+                    </ul>
+                </li>
+                <li>B
+                    <ul>
+                        <li>Bangladesh</li>
+                        <li>Bulgaria</li>
+                    </ul>
+                </li>
+            </ul>
             <!--Show message: <input type="checkbox" id="toggle" />-->
             <!--<input id="checky" type="checkbox" />-->
             <!--<div id="radio">-->
