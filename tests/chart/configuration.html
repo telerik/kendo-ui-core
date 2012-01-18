@@ -309,6 +309,66 @@
                 });
 
                 // ------------------------------------------------------------
+                var plotAreaConfig = [{
+                        series: "bar",
+                        plotArea: Chart.CategoricalPlotArea,
+                        chart: Chart.BarChart
+                    }, {
+                        series: "column",
+                        plotArea: Chart.CategoricalPlotArea,
+                        chart: Chart.BarChart
+                    }, {
+                        series: "line",
+                        plotArea: Chart.CategoricalPlotArea,
+                        chart: Chart.LineChart
+                    }, {
+                        series: "verticalLine",
+                        plotArea: Chart.CategoricalPlotArea,
+                        chart: Chart.LineChart
+                    }, {
+                        series: "area",
+                        plotArea: Chart.CategoricalPlotArea,
+                        chart: Chart.AreaChart
+                    }, {
+                        series: "verticalArea",
+                        plotArea: Chart.CategoricalPlotArea,
+                        chart: Chart.AreaChart
+                    }, {
+                        series: "pie",
+                        plotArea: Chart.PiePlotArea,
+                        chart: Chart.PieChart
+                    }, {
+                        series: "scatter",
+                        plotArea: Chart.XYPlotArea,
+                        chart: Chart.ScatterChart
+                    }, {
+                        series: "scatterLine",
+                        plotArea: Chart.XYPlotArea,
+                        chart: Chart.ScatterLineChart
+                    }
+                ];
+
+                module("Plot Area", {
+                    teardown: destroyChart
+                });
+
+                test("Initialization and chart creation", function() {
+                    for (var i = 0; i < plotAreaConfig.length; i++) {
+                        var config = plotAreaConfig[i];
+
+                        createChart({
+                            series: [{ type: config.series }]
+                        });
+
+                        ok( plotArea instanceof config.plotArea,
+                            "PlotArea type for '" + config.series + "' series");
+
+                        ok( plotArea.charts[0] instanceof config.chart,
+                            "Series of type '" + config.series + "' added to plot area");
+                    }
+                });
+
+                // ------------------------------------------------------------
                 module("Series defaults", {
                     teardown: destroyChart
                 });
