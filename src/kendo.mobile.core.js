@@ -42,6 +42,7 @@
         }
     });
 
+// Mobile Swipe
     var SwipeAxis = kendo.Class.extend({
         init: function(horizontal) {
             var that = this;
@@ -55,20 +56,60 @@
             }
         },
 
-        location: function(location) {
-            this.location = location;
+        start: function(location) {
+            var that = this;
+            that.location = location;
+            that._resetDirection();
+        },
+
+        move: function(location) {
+            var that = this,
+                direction;
+
+            that.delta = location - that.location;
+            direction = that.delta > 0;
+
+            if (that.direction != direction) {
+                that._resetDirection();
+                that.direction = direction;
+            }
+
+            that.location = location;
+        },
+
+        end: function(location) {
+            var that = this,
+                timePassed = (+new Date()) -that.startTime;
+
+            that.velocity = (location - that.startLocation) / timePassed;
+            that.move(location);
+        },
+
+        _resetDirection: function() {
+            var that = this;
+            that.startTime = +new Date();
+            that.startLocation = that.location;
         }
     });
+
+    var START = "start",
+        MOVE = "move",
+        END = "end";
 
     var Swipe = Observable.extend({
         init: function(element, options) {
             var that = this;
 
-            that.xAxis = new SwipeAxis(true);
-            that.yAxis = new SwipeAxis(false);
+            that.x = new SwipeAxis(true);
+            that.y = new SwipeAxis(false);
 
             Observable.fn.init.call(that);
             element.bind("mousedown", $.proxy(that._mouseDown, that));
+            element.bind("mousemove", $.proxy(that._mouseMove, that));
+            element.bind("mouseup mouseleave", $.proxy(that._mouseUp, that));
+            element.bind("touchstart", $.proxy(that._touchStart, that));
+            element.bind("touchmove", $.proxy(that._touchMove, that));
+            element.bind("touchend", $.proxy(that._touchEnd, that));
         },
 
         _mouseDown: function(e) {
@@ -76,17 +117,73 @@
 
             if (!that.pressed) {
                 that.pressed = true;
-                that._updateAxis(e);
-                that.trigger("start", {
-                    x: that.xAxis.location,
-                    y: that.yAxis.location
+                that._perAxis(START, e);
+            }
+        },
+
+        _touchStart: function(e) {
+            var that = this;
+
+            if (!that.pressed) {
+                var originalEvent = e.originalEvent;
+                touch = originalEvent.changedTouches[0];
+                that.touchID = touch.identifier;
+                that._mouseDown(touch);
+            }
+        },
+
+        _touchMove: function(e) {
+            var that = this;
+
+            if (that.pressed) {
+                that._withTouchEvent(e, function(touch) {
+                    that._mouseMove(touch);
                 });
             }
         },
 
-        _updateAxis: function(e) {
-            this.xAxis.location(e.pageX);
-            this.yAxis.location(e.pageY);
+        _touchEnd: function(e) {
+            var that = this;
+
+            that._withTouchEvent(e, function(touch) {
+                that._mouseUp(touch);
+            });
+        },
+
+        _mouseMove: function(e) {
+            var that = this;
+            if (that.pressed) {
+                that._perAxis(MOVE, e);
+            }
+        },
+
+        _mouseUp: function(e) {
+            var that = this;
+            if (that.pressed) {
+                that.pressed = false;
+                that._perAxis(END, e);
+            }
+        },
+
+        _perAxis: function(method, e) {
+            var that = this;
+
+            that.x[method](e.pageX);
+            that.y[method](e.pageY);
+            that.trigger(method, that);
+        },
+
+        _withTouchEvent: function(e, callback) {
+            var that = this,
+            touches = e.originalEvent.changedTouches,
+            idx = touches.length;
+
+            while (idx) {
+                idx --;
+                if (touches[idx].identifier === that.touchID) {
+                    return callback(touches[idx]);
+                }
+            }
         }
     });
 
@@ -124,5 +221,4 @@
 
         Swipe: Swipe
     });
-
 })(jQuery);

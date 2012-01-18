@@ -21,20 +21,130 @@
             var swipe,
                 Swipe = kendo.mobile.Swipe,
                 element;
-            module("swipe on desktop", {
+
+            function triggerEvent(type, e) {
+                element.trigger($.Event(type, e));
+            }
+
+            function triggerTouchEvent(type, e) {
+                for (var i = 0; i < e.length; i ++) {
+                    e[i].identifier = i;
+                }
+
+                element.trigger($.Event(type, { originalEvent: { changedTouches: e }}));
+            }
+
+            module("mobile swipe", {
                 setup: function() {
                     element = $("<div />");
                     swipe = new kendo.mobile.Swipe(element);
                 }
             });
 
-            test("swipe raises start on mousedown", 2, function(){
-                var e = $.Event("mousedown", {pageX: 10, pageY: 20});
+            test("raises start on mousedown", 2, function(){
                 swipe.bind("start", function(e) {
-                    equal(e.x, 10);
-                    equal(e.y, 20);
+                    equal(e.x.location, 10);
+                    equal(e.y.location, 20);
                 });
-                element.trigger(e);
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+            });
+
+            test("raises start on touchstart", 2, function(){
+                swipe.bind("start", function(e) {
+                    equal(e.x.location, 10);
+                    equal(e.y.location, 20);
+                });
+
+                triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
+            });
+
+            test("raises move on touchmove", 2, function(){
+                swipe.bind("move", function(e) {
+                    equal(e.x.delta, 10);
+                    equal(e.y.delta, 10);
+                });
+
+                triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
+                triggerTouchEvent("touchmove", [{pageX: 20, pageY: 30}]);
+            });
+
+            test("passes delta on mousemove", 2, function(){
+                swipe.bind("move", function(e) {
+                    equal(e.x.delta, 10);
+                    equal(e.y.delta, 20);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 20, pageY: 40});
+            });
+
+            test("does not track unpressed mousemove", 0, function(){
+                swipe.bind("move", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousemove", {pageX: 20, pageY: 40});
+            });
+
+            asyncTest("calculates velocity on mouseup", 2, function(){
+
+                swipe.bind("end", function(e) {
+                    start();
+                    ok(e.x.velocity > 0);
+                    ok(e.y.velocity < 0);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 20, pageY: 10});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mouseup", {pageX: 20, pageY: 0});
+                }, 1);
+            });
+
+            asyncTest("calculates velocity on touchend", 2, function(){
+                swipe.bind("end", function(e) {
+                    start();
+                    ok(e.x.velocity > 0);
+                    ok(e.y.velocity < 0);
+                });
+
+                triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
+
+                setTimeout(function() {
+                    triggerTouchEvent("touchmove", [{pageX: 20, pageY: 10}]);
+                }, 1);
+
+                setTimeout(function() {
+                    triggerTouchEvent("touchend", [{pageX: 20, pageY: 0}]);
+                }, 1);
+            });
+
+
+            asyncTest("resets velocity on direction change", 2, function(){
+
+                swipe.bind("end", function(e) {
+                    start();
+                    ok(e.x.velocity > 0);
+                    ok(e.y.velocity < 0);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 0, pageY: 30});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 10, pageY: 20});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mouseup", {pageX: 10, pageY: 20});
+                }, 1);
             });
         </script>
     </body>
