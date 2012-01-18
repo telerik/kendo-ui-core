@@ -11,8 +11,9 @@
         <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="../styles/kendo.blueopal.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="../styles/web/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet/less" href="../styles/web/kendo.blueopal.less" type="text/css" media="screen" charset="utf-8">
+        <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
         dataSource source: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 1}, {text:2, value:2}];
@@ -64,8 +65,8 @@
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
 
-var jsonDS = new kendo.data.DataSource({
-value: 2,
+                var jsonDS = new kendo.data.DataSource({
+                    value: 2,
                     transport: {
                         read: {
                             url: "ddl.json",

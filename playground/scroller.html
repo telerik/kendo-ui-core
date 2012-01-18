@@ -9,17 +9,25 @@
     <link rel="apple-touch-startup-image" href="mobile/tokendo/images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="mobile/tokendo/layout.less">
+    <link rel="stylesheet" type="text/css" href="../styles/web/kendo.common.css">
+    <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.blueopal.less">
     <link rel="stylesheet" href="mobile/tokendo/scroll-container.css" />
-    <script src="mobile/examples/less.js"></script>
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
     <script src="../src/jquery.js"></script>
     <script src="../src/kendo.core.js"></script>
     <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.data.odata.js"></script>
+    <script src="../src/kendo.model.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
     <script src="../src/kendo.mobile.core.js"></script>
     <script src="../src/kendo.mobile.scroller.js"></script>
 
+
     <style type="text/css">
-        .k-content
+        /*.k-content
         {
             -webkit-user-select: none;
             background: silver;
@@ -48,10 +56,39 @@
         .k-list .k-item:nth-child(2n)
         {
             background-color: #eee;
-        }
+        }*/
     </style>
+
 </head>
 <body>
+<input id="titles"/>
+
+<script>
+    $(document).ready(function() {
+        $("#titles").kendoDropDownList({
+            dataTextField: "Name",
+            dataValueField: "Id",
+            dataSource: {
+                type: "odata",
+                serverFiltering: true,
+                filter: [{
+                    field: "Name",
+                    operator: "contains",
+                    value: "Star Wars"
+                },{
+                    field: "BoxArt.SmallUrl",
+                    operator: "neq",
+                    value: null
+                }],
+                transport: {
+                    read: "http://odata.netflix.com/Catalog/Titles"
+                }
+            }
+        }).data("kendoDropDownList").list.kendoMobileScroller({ useOnDesktop: false });
+    });
+</script>
+
+<!--
     <div class="k-slot">
         <div class="k-showcase">
             <div class="k-view">
@@ -127,6 +164,7 @@
             $(".k-contentIn").kendoMobileScroller().data("kendoMobileScroller").bind("scroll", function(e) { console.log(e.x, e.y) });
         });
     </script>
+-->
 </body>
 </html>
 
