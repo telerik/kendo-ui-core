@@ -93,6 +93,9 @@
         ZERO = "zero",
         ZERO_THRESHOLD = 0.2;
 
+    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        XY_CHARTS = [SCATTER, SCATTER_LINE];
+
     // Chart ==================================================================
     var Chart = Widget.extend({
         init: function(element, userOptions) {
@@ -255,9 +258,9 @@
             for (i = 0; i < length; i++) {
                 currentSeries = series[i];
 
-                if (inArray(currentSeries.type, [BAR, COLUMN, LINE, AREA])) {
+                if (inArray(currentSeries.type, CATEGORICAL_CHARTS)) {
                     categoricalSeries.push(currentSeries);
-                } else if (inArray(currentSeries.type, [SCATTER, SCATTER_LINE])) {
+                } else if (inArray(currentSeries.type, XY_CHARTS)) {
                     xySeries.push(currentSeries);
                 } else if (currentSeries.type === PIE) {
                     pieSeries.push(currentSeries);
