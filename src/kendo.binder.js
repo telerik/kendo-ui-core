@@ -142,18 +142,28 @@
 
     var ValueBinding = Binding.extend( {
         init: function() {
-            var that = this;
+            var that = this,
+                element;
 
             Binding.fn.init.apply(this, arguments);
 
             $(that.element).change(function() {
-                that.observable.set(that.field, this.value, this);
+                element = $(this);
+                var value = element.is(":checkbox") ? element.is(":checked") : this.value;
+                that.observable.set(that.field, value, this);
             });
         },
 
         bind: function() {
-            var that = this, element = this.element;
-            $(element).val(this.value())
+            var that = this,
+                element = $(that.element),
+                value = that.value();
+
+            if (element.is(":checkbox")) {
+               element.attr("checked", value === true);
+            } else {
+                element.val(value);
+            }
         }
     });
 
