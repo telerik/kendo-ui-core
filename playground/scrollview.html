@@ -6,321 +6,50 @@
         <script src="../src/jquery.min.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.mobile.core.js"></script>
+        <script src="../src/kendo.mobile.scrollview.js"></script>
         <link rel="stylesheet" href="../demos/mvc/content/shared/styles/console.css" />
         <style type="text/css" media="screen">
             #scrollview {
-                background: #EBEBEB;
                 width: 300px;
                 height: 75px;
                 margin: 20px;
                 padding: 20px;
                 overflow: hidden;
             }
-            #inner {
+
+            #scrollview > div {
                 white-space: nowrap;
+            }
+
+            #scrollview > div > div {
+                width: 800px;
+                background: grey;
+                overflow: hidden;
+            }
+
+            #scrollview > div > div > div {
+                float: left;
+                width: 100px;
+                height: 100px;
+                background: blue;
+                margin: 10px;
+                -webkit-transform: translatez(0);
             }
         </style>
         <script>
-            var Swipe = kendo.Observable.extend({
-                init: function(element, options) {
-                    var that = this;
-                    that.options = options || {};
-                    that.x = {};
-                    that.y = {};
-                    element = that.element = $(element);
-
-                    kendo.Observable.fn.init.call(that);
-
-                    element.bind("mousedown", $.proxy(that.mouseDown, that));
-                    element.bind("touchstart", $.proxy(that.touchStart, that));
-                    element.bind("touchmove", $.proxy(that.touchMove, that));
-                    element.bind("touchend", $.proxy(that.touchEnd, that));
-                    element.bind("mousemove", $.proxy(that.mouseMove, that));
-                    element.bind("mouseup mouseleave", $.proxy(that.mouseUp, that));
-
-                    that.bind([
-                        "start", "move", "end"
-                    ], that.options);
-                },
-
-                touchStart: function(e) {
-                    var that = this;
-
-                    if (!that.pressed) {
-                        var originalEvent = e.originalEvent;
-                            touch = originalEvent.touches[0];
-
-                        that.pressed = true;
-                        that.touchID = touch.identifier;
-                        that.trigger("start", that.perAxis("_location", touch));
-                    }
-                },
-
-                touchMove: function(e) {
-                    var that = this;
-
-                    if (!that.pressed) {
-                        return;
-                    }
-
-                    e.preventDefault();
-                    that.withTouchEvent(e, function(touch) {
-                        that.trigger("move", that.perAxis("_axisMove", touch));
-                    });
-                },
-
-                touchEnd: function(e) {
-                    var that = this;
-
-                    that.withTouchEvent(e, function(touch) {
-                        that.mouseUp(touch);
-                    });
-                },
-
-                withTouchEvent: function(e, callback) {
-                    var that = this,
-                        touches = e.originalEvent.changedTouches,
-                        idx = touches.length;
-
-                    while (idx) {
-                        idx --;
-                        if (touches[idx].identifier === that.touchID) {
-                            return callback(touches[idx]);
-                        }
-                    }
-                },
-
-                mouseDown: function(e) {
-                    var that = this;
-                    if (!that.pressed) {
-                        that.pressed = true;
-                        that.trigger("start", that.perAxis("_location", e));
-                    }
-                },
-
-                mouseMove: function(e) {
-                    var that = this;
-                    if (!that.pressed) {
-                        return;
-                    }
-
-                    that.trigger("move", that.perAxis("_axisMove", e));
-                },
-
-                mouseUp: function(e) {
-                    var that = this,
-                        velocity,
-                        coordinates;
-
-                    if (that.pressed) {
-                        that.pressed = false;
-                        velocity = that.perAxis("_endVelocity", e);
-                        coordinates = that.perAxis("_location", e);
-                        that.trigger("end", {
-                            x: coordinates.x,
-                            y: coordinates.y,
-                            xVelocity: velocity.x,
-                            yVelocity: velocity.y
-                        });
-                    }
-                },
-
-                perAxis: function(method, event) {
-                    var that = this;
-                    return {
-                        x: that[method].call(that, that.x, event.pageX),
-                        y: that[method].call(that, that.y, event.pageY)
-                    };
-                },
-
-                _axisMove: function(data, location) {
-                    var delta = location - data.location,
-                        direction = delta > 0;
-
-                    if (data.direction != direction) {
-                        data.direction = direction;
-                        data.startTime = +new Date();
-                        data.startLocation = data.location;
-                    }
-
-                    data.location = location;
-
-                    return delta;
-                },
-
-                _endVelocity: function(data, location) {
-                    var timePassed = (+new Date()) - data.startTime,
-                        velocity = (location - data.startLocation) / timePassed;
-
-                    delete data.direction;
-                    return velocity;
-                },
-
-                _location: function(data, location) {
-                    data.location = location;
-                    return data.location;
-                }
-            });
-
-            var TRANSFORMSTYLE = kendo.support.transitions.prefix + "Transform";
-            var STEP = 10;
-
-            var Moveable = kendo.Class.extend({
-                init: function(element) {
-                    var that = this;
-                    that.element = $(element);
-                    that.domElement = that.element[0];
-                    that.x = 0;
-                    that.y = 0;
-                    that.timer = 0;
-                    that.tickProxy = $.proxy(that.tick, that);
-                },
-
-                moveBy: function(x, y) {
-                    var that = this;
-                    if (x) { that.x += x; }
-                    if (y) { that.y += y; }
-                    that.redraw();
-                },
-
-                redraw: function() {
-                    var that = this;
-                    that.domElement.style[TRANSFORMSTYLE] = "translate3d(" + that.x + "px," + that.y +"px,0)";
-                },
-
-                animate: function() {
-                    var that = this;
-                    that.intervalID = setInterval(that.tickProxy, STEP);
-                },
-
-                stop: function() {
-                    var that = this;
-                    clearInterval(that.intervalID);
-                    that.timer = 0;
-                },
-
-                moveTo: function(options) {
-                    var that = this;
-
-                    that.deltaX = options.x - that.x;
-                    that.deltaY = options.y - that.y;
-
-                    that.initialX = that.x;
-                    that.initialY = that.y;
-
-                    that.duration = options.duration || 300;
-
-                    that.ease = that.easeProxy(options.ease || Ease.easeOutQuad);
-
-                    that.animate();
-                },
-
-                easeProxy: function(ease) {
-                    var that = this;
-                    return function() {
-                        that.x = ease(that.timer, that.initialX, that.deltaX, that.duration);
-                        that.y = ease(that.timer, that.initialY, that.deltaY, that.duration);
-                    }
-                },
-
-                tick: function() {
-                    var that = this;
-                    that.timer += STEP;
-                    that.ease();
-                    that.redraw();
-
-                    if (that.timer === that.duration) {
-                        that.stop();
-                    }
-                }
-            });
-
-            kendo.mobile.Swipe = Swipe;
-
-            var ContainerDraggable = kendo.Class.extend({
-                init: function(element, swipe, moveable) {
-                    var that = this,
-                        parent = element.parent(),
-                        maxX = 0,
-                        maxY = 0,
-                        minY = - (parent[0].scrollHeight - parent.height()),
-                        minX = - (parent[0].scrollWidth - parent.width());
-
-                    swipe.bind("move", function(e) {
-                        var x = e.x;
-                        var y = e.y;
-
-                        if (moveable.x + x > maxX || moveable.x < minX) { x *= 0.5; }
-                        if (moveable.y + y > maxY || moveable.y < minY) { y *= 0.5; }
-                        moveable.moveBy(x, 0);
-                    });
-                }
-            });
-
             $(window).bind("load", function(){
-
-                function within(min, value, max) {
-                    return Math.max(min, Math.min(max, value));
-                }
-
-                var moveable = new Moveable($("#inner"));
-
-                console.log($("#scrollview")[0].scrollWidth);
-                var minX = - Math.floor($("#scrollview")[0].scrollWidth / 300) * 300;
-                console.log(minX);
-
-                var swipe = new kendo.mobile.Swipe($("#scrollview"), {
-                        start: function(e) {
-                            moveable.stop();
-                        },
-
-                        end: function(e) {
-                            var velocity = e.xVelocity,
-                                duration= 200,
-                                snap,
-                                ease = Ease.easeOutExpo;
-
-                            if (velocity > 0.6) {
-                                snap = Math.ceil(moveable.x / 300) * 300;
-                            } else if(velocity < -0.6)  {
-                                snap = Math.floor(moveable.x / 300) * 300;
-                            } else {
-                                snap = Math.round(moveable.x / 300) * 300;
-                            }
-
-                            snap = within(minX, snap, 0);
-
-                            if (Math.abs(velocity) > 1.6) {
-                                ease = Ease.easeOutBack;
-                            };
-
-                            moveable.moveTo({
-                                x: snap,
-                                y: 0,
-                                duration: duration,
-                                ease: ease
-                            });
-                        }
-                });
-
-                var draggable = new ContainerDraggable($("#inner"), swipe, moveable);
+                $("#scrollview").kendoMobileScrollView();
             });
         </script>
     </head>
     <body>
         <div id="scrollview">
-            <div id="inner">
-                <img src="http://farm8.staticflickr.com/7033/6707225615_c25455a548_s.jpg">
-                <img src="http://farm8.staticflickr.com/7170/6695493683_0c59e22fee_s.jpg">
-                <img src="http://farm8.staticflickr.com/7016/6688957777_c081c774ff_s.jpg">
-                <img src="http://farm8.staticflickr.com/7155/6675539929_40b053a2fe_s.jpg">
-                <img src="http://farm8.staticflickr.com/7152/6674457167_a9c0eac63d_s.jpg">
-                <img src="http://farm8.staticflickr.com/7002/6640623175_3e82b14c99_s.jpg">
-                <img src="http://farm8.staticflickr.com/7146/6524806833_53e1237cf9_s.jpg">
-                <img src="http://farm8.staticflickr.com/7167/6584748701_8323e10194_s.jpg">
-                <img src="http://farm8.staticflickr.com/7146/6524806833_53e1237cf9_s.jpg">
-                <img src="http://farm8.staticflickr.com/7167/6584748701_8323e10194_s.jpg">
-                <img src="http://farm8.staticflickr.com/7002/6640623175_3e82b14c99_s.jpg">
+            <div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
     </body>

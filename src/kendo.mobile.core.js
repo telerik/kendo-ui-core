@@ -3,6 +3,7 @@
         ui = kendo.ui,
         support = kendo.support,
         extend = $.extend,
+        proxy = $.proxy,
         Observable = kendo.Observable,
         mobile;
 
@@ -29,9 +30,7 @@
             }
         },
 
-        options: {
-
-        },
+        options: {},
 
         enhance: function(element) {
             var options = this.options,
@@ -42,7 +41,7 @@
         }
     });
 
-// Mobile Swipe
+    // Mobile Swipe
     var SwipeAxis = kendo.Class.extend({
         init: function(horizontal) {
             var that = this;
@@ -59,7 +58,6 @@
         start: function(location) {
             var that = this;
             that.location = location;
-            that._resetDirection();
         },
 
         move: function(location) {
@@ -81,8 +79,11 @@
             var that = this,
                 timePassed = (+new Date()) -that.startTime;
 
+            // console.log(location + "-" + that.startLocation + "/" + timePassed);
+
             that.velocity = (location - that.startLocation) / timePassed;
             that.move(location);
+            delete that.direction;
         },
 
         _resetDirection: function() {
@@ -98,24 +99,28 @@
 
     var Swipe = Observable.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                options = options || {};
 
             that.x = new SwipeAxis(true);
             that.y = new SwipeAxis(false);
 
             Observable.fn.init.call(that);
-            element.bind("mousedown", $.proxy(that._mouseDown, that));
-            element.bind("mousemove", $.proxy(that._mouseMove, that));
-            element.bind("mouseup mouseleave", $.proxy(that._mouseUp, that));
-            element.bind("touchstart", $.proxy(that._touchStart, that));
-            element.bind("touchmove", $.proxy(that._touchMove, that));
-            element.bind("touchend", $.proxy(that._touchEnd, that));
+            element.bind("mousedown", proxy(that._mouseDown, that));
+            element.bind("mousemove", proxy(that._mouseMove, that));
+            element.bind("mouseup mouseleave", proxy(that._mouseUp, that));
+            element.bind("touchstart", proxy(that._touchStart, that));
+            element.bind("touchmove", proxy(that._touchMove, that));
+            element.bind("touchend", proxy(that._touchEnd, that));
+
+            that.bind([START, MOVE, END], options);
         },
 
         _mouseDown: function(e) {
             var that = this;
 
             if (!that.pressed) {
+                e.preventDefault();
                 that.pressed = true;
                 that._perAxis(START, e);
             }
@@ -128,7 +133,8 @@
                 var originalEvent = e.originalEvent;
                 touch = originalEvent.changedTouches[0];
                 that.touchID = touch.identifier;
-                that._mouseDown(touch);
+                that.pressed = true;
+                that._perAxis(START, touch);
             }
         },
 
@@ -137,7 +143,8 @@
 
             if (that.pressed) {
                 that._withTouchEvent(e, function(touch) {
-                    that._mouseMove(touch);
+                    e.preventDefault();
+                    that._perAxis(MOVE, touch);
                 });
             }
         },
@@ -152,7 +159,9 @@
 
         _mouseMove: function(e) {
             var that = this;
+
             if (that.pressed) {
+                e.preventDefault(e);
                 that._perAxis(MOVE, e);
             }
         },
@@ -187,6 +196,173 @@
         }
     });
 
+    var TRANSFORM_STYLE = kendo.support.transitions.prefix + "Transform";
+    var Move = kendo.Class.extend({
+        init: function(element) {
+            var that = this;
+            that.element = $(element);
+            that.domElement = that.element[0];
+            that.x = 0;
+            that.y = 0;
+        },
+
+        moveBy: function(x, y) {
+            var that = this;
+            if (x) { that.x += x; }
+            if (y) { that.y += y; }
+            that._redraw();
+        },
+
+        moveTo: function(x, y) {
+            var that = this;
+            that.x = x;
+            that.y = y;
+            that._redraw();
+        },
+
+        _redraw: function() {
+            var that = this;
+            that.domElement.style[TRANSFORM_STYLE] = "translate3d(" + that.x + "px," + that.y +"px,0)";
+        }
+    });
+
+    var TICK_INTERVAL = 10;
+
+    var Inertia = kendo.Class.extend({
+        init: function(move) {
+            var that = this;
+            that.move = move;
+            that.timer = 0;
+            that.tickProxy = proxy(that.tick, that);
+        },
+
+        animate: function() {
+            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
+        },
+
+        stop: function() {
+            clearInterval(this.intervalID);
+            this.timer = 0;
+        },
+
+        moveTo: function(options) {
+            var that = this,
+                move = that.move;
+
+            that.initialX = move.x;
+            that.initialY = move.y;
+
+            that.deltaX = options.x - that.initialX;
+            that.deltaY = options.y - that.initialY;
+
+            that.duration = options.duration || 300;
+
+            that.ease = that.easeProxy(options.ease || Ease.easeOutQuad);
+
+            that.animate();
+        },
+
+        easeProxy: function(ease) {
+            var that = this;
+            return function() {
+                that.move.moveTo(
+                    ease(that.timer, that.initialX, that.deltaX, that.duration),
+                    ease(that.timer, that.initialY, that.deltaY, that.duration)
+                );
+            }
+        },
+
+        tick: function() {
+            var that = this;
+            that.timer += TICK_INTERVAL;
+            that.ease();
+
+            if (that.timer === that.duration) {
+                that.stop();
+            }
+        }
+    });
+
+    var Ease = {
+        linearTween: function (t, b, c, d) {
+            return c*t/d + b;
+        },
+
+        easeInQuad: function (t, b, c, d) {
+            return c*(t/=d)*t + b;
+        },
+
+        easeOutQuad: function (t, b, c, d) {
+            return -c *(t/=d)*(t-2) + b;
+        },
+
+        easeInCubic: function (t, b, c, d) {
+            return c*(t/=d)*t*t + b;
+        },
+
+        easeOutCubic: function (t, b, c, d) {
+            return c*((t=t/d-1)*t*t + 1) + b;
+        },
+
+        easeInQuart: function (t, b, c, d) {
+            return c*(t/=d)*t*t*t + b;
+        },
+
+        easeOutQuart: function (t, b, c, d) {
+            return -c * ((t=t/d-1)*t*t*t - 1) + b;
+        },
+
+        easeInQuint: function (t, b, c, d) {
+            return c*(t/=d)*t*t*t*t + b;
+        },
+
+        easeOutQuint: function (t, b, c, d) {
+            return c*((t=t/d-1)*t*t*t*t + 1) + b;
+        },
+
+        easeInExpo: function (t, b, c, d) {
+            return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
+        },
+
+        easeOutExpo: function (t, b, c, d) {
+            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        },
+
+        easeInBack: function (t, b, c, d, s) {
+            if (s == undefined) s = 1.70158;
+            return c*(t/=d)*t*((s+1)*t - s) + b;
+        },
+
+        easeOutBack: function (t, b, c, d, s) {
+            if (s == undefined) s = 1.70158;
+            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
+        }
+    }
+
+    var Draggable = kendo.Class.extend({
+        init: function(options) {
+            var that = this;
+
+            that.options = options;
+
+            options.swipe.bind("move", proxy(that._move, that));
+        },
+
+        _move: function(e) {
+            var that = this,
+                options = that.options,
+                move = options.move,
+                deltaX = options.ignoreX ? 0 : e.x.delta,
+                deltaY = options.ignoreY ? 0 : e.y.delta,
+                x = move.x + deltaX,
+                y = move.y + deltaY;
+
+            if (x > 0 || x < options.minX) { deltaX *= 0.5; }
+            if (y > 0 || y < options.minY) { deltaY *= 0.5; }
+            move.moveBy(deltaX, deltaY);
+        }
+    });
+
     /**
      * @name kendo.mobile
      * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
@@ -216,9 +392,13 @@
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
             },
 
-            Widget: Widget
+            Widget: Widget,
         },
 
-        Swipe: Swipe
+        Swipe: Swipe,
+        Move: Move,
+        Draggable: Draggable,
+        Inertia: Inertia,
+        Ease: Ease
     });
 })(jQuery);
