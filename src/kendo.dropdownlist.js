@@ -484,10 +484,11 @@
         },
 
         /**
-        * Re-popuplates the data in the dataSource.
-        * @name kendo.ui.DropDownList#refresh
-        * @function
+        * Re-popuplates the data in the DataSource.
         * @example
+        * // get a referenence to the Kendo UI DropDownList
+        * var dropdownlist = $("dropdownlist").data("kendoDropDownList");
+        * // re-populate the data of the DataSource
         * dropdownlist.refresh();
         */
 

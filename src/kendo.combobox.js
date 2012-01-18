@@ -530,10 +530,11 @@
         },
 
         /**
-        * Re-popuplates the data in the dataSource.
-        * @name kendo.ui.ComboBox#refresh
-        * @function
+        * Re-popuplates the data in the DataSource.
         * @example
+        * // get a referenence to the Kendo UI ComboBox
+        * var combobox = $("#combobox").data("kendoComboBox");
+        * // re-populate the data of the DataSource
         * combobox.refresh();
         */
 
