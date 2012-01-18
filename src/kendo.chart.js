@@ -4881,7 +4881,7 @@
                     "border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px;" +
                     "border: #= d.border.width #px solid;" +
                     "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);" +
-                    "padding: 2px 6px; white-space: nowrap;'></div>"
+                    "padding: 2px 6px; white-space: nowrap; z-index: 1000;'></div>"
                 );
             }
 
