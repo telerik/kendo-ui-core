@@ -114,6 +114,29 @@
     <Content Include="content\dataviz\overview\pie.png" />
     <Content Include="content\dataviz\overview\scatter.png" />
     <Content Include="content\mobile\application\remote-view.html" />
+    <Content Include="content\mobile\overview\ann.jpg" />
+    <Content Include="content\mobile\overview\annette.jpg" />
+    <Content Include="content\mobile\overview\antonio.jpg" />
+    <Content Include="content\mobile\overview\bombay.jpg" />
+    <Content Include="content\mobile\overview\boston.jpg" />
+    <Content Include="content\mobile\overview\cannes.jpg" />
+    <Content Include="content\mobile\overview\carine.jpg" />
+    <Content Include="content\mobile\overview\catherine.jpg" />
+    <Content Include="content\mobile\overview\christina.jpg" />
+    <Content Include="content\mobile\overview\daniel.jpg" />
+    <Content Include="content\mobile\overview\diego.jpg" />
+    <Content Include="content\mobile\overview\eduardo.jpg" />
+    <Content Include="content\mobile\overview\elizabeth.jpg" />
+    <Content Include="content\mobile\overview\felipe.jpg" />
+    <Content Include="content\mobile\overview\fran.jpg" />
+    <Content Include="content\mobile\overview\francisco.jpg" />
+    <Content Include="content\mobile\overview\liverpool.jpg" />
+    <Content Include="content\mobile\overview\london.jpg" />
+    <Content Include="content\mobile\overview\melbourne.jpg" />
+    <Content Include="content\mobile\overview\nairobi.jpg" />
+    <Content Include="content\mobile\overview\ottawa.jpg" />
+    <Content Include="content\mobile\overview\san-francisco.jpg" />
+    <Content Include="content\mobile\overview\sydney.jpg" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\less.js" />
@@ -432,6 +455,8 @@
     <Content Include="Views\mobile\application\index.cshtml" />
     <Content Include="Views\mobile\switch\events.cshtml" />
     <Content Include="Views\mobile\switch\index.cshtml" />
+    <Content Include="Views\mobile\buttongroup\events.cshtml" />
+    <Content Include="Views\mobile\buttongroup\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\mobile\button\" />
