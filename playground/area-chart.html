@@ -21,21 +21,21 @@
                             visible: false,
                             position: "insideEnd"
                         },
-                        stack: false,
+                        stack: true,
                         type: "area",
                         markers: {
                             visible: true
-                        }
+                        },
+                        opacity: 1
                     },
                     series: [{
                         name: "1",
-                        data: [1, 1, 1, 1]
-                    }, {
+                        data: [2, 2, 2, 2, 2],
+                        color: "red"
+                    },{
                         name: "1",
-                        data: [2, 2, 2, 2, 2]
-                    }, {
-                        name: "1",
-                        data: [3, 3, 3, 3, 3, 3]
+                        data: [1, 1, 1, 1, 1],
+                        color: "green"
                     }]
                 });
             });

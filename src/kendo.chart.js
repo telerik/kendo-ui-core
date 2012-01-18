@@ -3029,13 +3029,13 @@
             var chart = this,
                 plotArea = chart.plotArea,
                 isVertical = chart.options.isVertical,
-                lines = LineChart.fn.splitSegments.call(chart, view),
-                originalLines = deepExtend({}, lines),
+                originalLines = LineChart.fn.splitSegments.call(chart, view),
+                lines = [],
                 axis = isVertical ? plotArea.axisX : plotArea.axisY,
                 axisLineBox = axis.getAxisLineBox(),
                 end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
                 originalLinePoints,
-                linesCount = lines.length,
+                linesCount = originalLines.length,
                 seriesIx = 0,
                 linePoints,
                 firstPoint,
@@ -3044,15 +3044,15 @@
                 i;
 
             for (i = 0; i < linesCount; i++) {
-                line = lines[i];
-                linePoints = lines[i].points;
+                line = originalLines[i].clone();
+                linePoints = line.points;
                 lineOptions = line.options;
                 seriesIx = lineOptions.seriesIx;
 
                 if (lineOptions.stack && seriesIx != 0) {
                     if (seriesIx > 0) {
-                        originalLinePoints = originalLines[i - 1].points.reverse();
-                        lines[i].points = linePoints.concat(originalLinePoints);
+                        originalLinePoints = originalLines[i - 1].clone().points.reverse();
+                        line.points = linePoints.concat(originalLinePoints);
                     }
                 } else {
                     if (linePoints.length > 1) {
@@ -3068,6 +3068,7 @@
                         }
                     }
                 }
+                lines.push(line);
             }
 
             return lines;
