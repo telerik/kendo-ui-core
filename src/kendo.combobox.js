@@ -530,6 +530,14 @@
         },
 
         /**
+        * Re-popuplates the data in the dataSource.
+        * @name kendo.ui.ComboBox#refresh
+        * @function
+        * @example
+        * combobox.refresh();
+        */
+
+        /**
         * Selects drop-down list item and sets the value and the text of the combobox.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
         * @example
