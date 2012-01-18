@@ -311,7 +311,7 @@
 
             that._accessors();
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that._refresh, that));
 
             that.bind([
             /**
@@ -456,34 +456,6 @@
             var that = this;
             that._current = null;
             that.popup.close();
-        },
-
-        refresh: function () {
-            var that = this,
-            ul = that.ul[0],
-            options = that.options,
-            suggest = options.suggest,
-            data = that.dataSource.view(),
-            length = data.length;
-
-            ul.innerHTML = kendo.render(that.template, data);
-
-            that._height(length);
-
-            if (length) {
-                if (suggest || options.highlightFirst) {
-                    that.current($(ul.firstChild));
-                }
-
-                if (suggest) {
-                    that.suggest(that._current);
-                }
-            }
-
-            if (that._open) {
-                that._open = false;
-                that.popup[length ? "open" : "close"]();
-            }
         },
 
         /**
@@ -666,18 +638,6 @@
             moveCaretAtEnd(that.element[0]);
         },
 
-        _move: function (li) {
-            var that = this;
-
-            li = li[0] ? li : null;
-
-            that.current(li);
-
-            if (that.options.suggest) {
-                that.suggest(li);
-            }
-        },
-
         _keydown: function (e) {
             var that = this,
                 ul = that.ul[0],
@@ -708,6 +668,46 @@
                 that.close();
             } else {
                 that._search();
+            }
+        },
+
+        _move: function (li) {
+            var that = this;
+
+            li = li[0] ? li : null;
+
+            that.current(li);
+
+            if (that.options.suggest) {
+                that.suggest(li);
+            }
+        },
+
+        _refresh: function () {
+            var that = this,
+            ul = that.ul[0],
+            options = that.options,
+            suggest = options.suggest,
+            data = that.dataSource.view(),
+            length = data.length;
+
+            ul.innerHTML = kendo.render(that.template, data);
+
+            that._height(length);
+
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
+            }
+
+            if (that._open) {
+                that._open = false;
+                that.popup[length ? "open" : "close"]();
             }
         },
 

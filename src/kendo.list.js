@@ -78,6 +78,10 @@
             }
         },
 
+        refresh: function() {
+            this.dataSource.read();
+        },
+
         _accessors: function() {
             var that = this,
                 element = that.element,
@@ -380,7 +384,7 @@
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                   .bind(CHANGE, proxy(that.refresh, that))
+                                   .bind(CHANGE, proxy(that._refresh, that))
                                    .bind("requestStart", proxy(that._showBusy, that));
         },
 

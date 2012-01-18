@@ -529,40 +529,6 @@
             }
         },
 
-        refresh: function() {
-            var that = this,
-                ul = that.ul[0],
-                options = that.options,
-                suggest = options.suggest,
-                height = options.height,
-                data = that._data(),
-                length = data.length;
-
-            ul.innerHTML = kendo.render(that.template, data);
-            that._height(length);
-
-            if (that.element.is(SELECT)) {
-                that._options(data);
-            }
-
-            if (length) {
-                if (suggest || options.highlightFirst) {
-                    that.current($(ul.firstChild));
-                }
-
-                if (suggest) {
-                    that.suggest(that._current);
-                }
-            }
-
-            if (that._open) {
-                that._open = false;
-                that.toggle(!!length);
-            }
-
-            that._hideBusy();
-        },
-
         /**
         * Selects drop-down list item and sets the value and the text of the combobox.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
@@ -912,6 +878,41 @@
                that._search();
             }
         },
+
+        _refresh: function() {
+            var that = this,
+                ul = that.ul[0],
+                options = that.options,
+                suggest = options.suggest,
+                height = options.height,
+                data = that._data(),
+                length = data.length;
+
+            ul.innerHTML = kendo.render(that.template, data);
+            that._height(length);
+
+            if (that.element.is(SELECT)) {
+                that._options(data);
+            }
+
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
+            }
+
+            if (that._open) {
+                that._open = false;
+                that.toggle(!!length);
+            }
+
+            that._hideBusy();
+        },
+
 
         _search: function() {
             var that = this;
