@@ -391,7 +391,7 @@
 
             $(element).each(function (index, item) {
                 item = $(item);
-                if (!item.hasClass(ACTIVESTATE)) {
+                if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentElement(item.index()) })) {
                     that.activateTab(item);
                 }
             });
