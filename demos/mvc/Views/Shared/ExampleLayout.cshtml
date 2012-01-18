@@ -20,6 +20,16 @@
         <div id="example" class="k-content">
             <div id="mobile-application-container">
                 @RenderBody()
+                <div data-role="layout" data-id="examples">
+                    <header data-role="header">
+                        <div data-role="navbar">
+                            <!--a class="nav-button" data-align="left" data-role="back-button">Back</a-->
+                            <span data-role="view-title">Settings</span>
+                            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                        </div>
+                    </header>
+                </div>
+
             </div>
             @RenderSection("ExampleFooter", false)
         </div>
@@ -97,7 +107,10 @@
         <text>
             kendo.history.stop();
 
-            window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"));
+            window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"), 
+            {
+                layout: "examples"
+            });
 
             $(function() { applyCurrentMobileOS("#mobile-application-container") });
         </text>

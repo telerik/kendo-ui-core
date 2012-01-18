@@ -1,40 +1,134 @@
-<div data-role="view" data-title="Settings">
-    <header data-role="header">
-        <div data-role="navbar">
-            <!--a class="nav-button" data-align="left" data-role="back-button">Back</a-->
-            <span data-role="view-title">Settings</span>
-            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
-        </div>
-    </header>
+<div data-role="view" data-layout="overview-layout" id="contacts" data-title="My Contacts">
+    <ul data-role="listview" data-type="group">
+        <li>
+            A
+            <ul>
+                <li><h2>Ann Devon</h2><img src="../../content/mobile/overview/ann.jpg" /></li>
+                <li><h2>Annette Roulet</h2><img src="../../content/mobile/overview/annette.jpg" /></li>
+                <li><h2>Antonio Moreno</h2><img src="../../content/mobile/overview/antonio.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            C
+            <ul>
+                <li><h2>Carine Schmitt</h2><img src="../../content/mobile/overview/carine.jpg" /></li>
+                <li><h2>Catherine Dewey</h2><img src="../../content/mobile/overview/catherine.jpg" /></li>
+                <li><h2>Christina Berglund</h2><img src="../../content/mobile/overview/christina.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+           D
+            <ul>
+                <li><h2>Daniel Tonini</h2><img src="../../content/mobile/overview/daniel.jpg" /></li>
+                <li><h2>Diego Roel</h2><img src="../../content/mobile/overview/diego.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            E
+            <ul>
+                <li><h2>Eduardo Saavedra</h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
+                <li><h2>Elizabeth Brown</h2><img src="../../content/mobile/overview/elizabeth.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            F
+            <ul>
+                <li><h2>Felipe Izquierdo</h2><img src="../../content/mobile/overview/felipe.jpg" /></li>
+                <li><h2>Fran Wilson</h2><img src="../../content/mobile/overview/fran.jpg" /></li>
+                <li><h2>Francisco Chang</h2><img src="../../content/mobile/overview/francisco.jpg" /></li>
+            </ul>
+        </li>
+    </ul>
+</div>
 
+
+<div data-role="view" data-layout="overview-layout" id="cities" data-title="Favourite Cities">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Africa
+            <ul>
+                <li><h2>Nairobi</h2><img src="../../content/mobile/overview/nairobi.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            America
+            <ul>
+                <li><h2>Boston</h2><img src="../../content/mobile/overview/boston.jpg" /></li>
+                <li><h2>Ottawa</h2><img src="../../content/mobile/overview/ottawa.jpg" /></li>
+                <li><h2>San Francisco</h2><img src="../../content/mobile/overview/san-francisco.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            Asia
+            <ul>
+                <li><h2>Bombay</h2><img src="../../content/mobile/overview/bombay.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            Australia
+            <ul>
+                <li><h2>Melbourne</h2><img src="../../content/mobile/overview/melbourne.jpg" /></li>
+                <li><h2>Sydney</h2><img src="../../content/mobile/overview/sydney.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            Europe
+            <ul>
+                <li><h2>Cannes</h2><img src="../../content/mobile/overview/cannes.jpg" /></li>
+                <li><h2>Liverpool</h2><img src="../../content/mobile/overview/liverpool.jpg" /></li>
+                <li><h2>London</h2><img src="../../content/mobile/overview/london.jpg" /></li>
+            </ul>
+        </li>
+        
+    </ul>
+</div>
+
+<div data-role="view" data-layout="overview-layout" id="account" data-title="Account Settings">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             General Settings
             <ul>
-                <li>About <button type="button" data-role="detail-button" data-style="details">More...</button></li>
-                <li>Airplane mode <input type="checkbox" data-role="switch"></li>
-                <li>BlueTooth <input type="checkbox" data-role="switch" checked></li>
-                <li>Notifications <input type="checkbox" data-role="switch"></li>
-                <li>Local Services <input type="checkbox" data-role="switch" checked></li>
-            </ul>
-        </li>
-
-        <li>
-            Other Settings
-            <ul>
-                <li>Wi-Fi <button type="button" data-role="detail-button" data-style="details">More...</button></li>
-                <li>Sounds <button type="button" data-role="detail-button" data-style="details">More...</button></li>
-                <li>Battery <button type="button" data-role="detail-button" data-style="details">More...</button></li>
+                <li>Notifications <input type="checkbox" data-role="switch" checked></li>
+                <li>Local Services <input type="checkbox" data-role="switch"></li>
+                <li>About </li>
             </ul>
         </li>
     </ul>
+</div>
+
+<div data-role="layout" data-id="overview-layout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <!--a class="nav-button" data-align="left" data-role="back-button">Back</a-->
+            <span data-role="view-title">My Contacts</span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
 
     <footer data-role="footer">
         <div data-role="tabstrip">
-            <a data-icon="featured">Home</a>
-            <a data-icon="toprated">Explore</a>
+            <a data-icon="contacts" href="#contacts">Contacts</a>
+            <a data-icon="globe" href="#cities">Cities</a>
+            <a data-icon="settings" href="#account">My Account</a>
             <a data-icon="info">About</a>
-            <a data-icon="settings">Settings</a>
         </div>
     </footer>
 </div>
+
+<style scoped>
+.km-list h2 {
+    display: inline-block;
+    font-size: 1.1rem;
+    margin: 1.4rem 0 1rem 1rem;
+}
+img {
+    width: 4em;
+    height: 4em;
+    float: left;
+    margin: 1rem;
+    -webkit-box-shadow: 0 1px 3px #333;
+    box-shadow: 0 1px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+</style>

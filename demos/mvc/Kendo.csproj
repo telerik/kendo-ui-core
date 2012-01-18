@@ -93,12 +93,27 @@
     <None Include="App_Data\dataviz.nav.json" />
     <None Include="App_Data\mobile.nav.json" />
     <None Include="App_Data\web.nav.json" />
+    <Content Include="bin\Kendo.dll" />
+    <Content Include="bin\Kendo.pdb" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Helpers.xml" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Mvc.xml" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.xml" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.xml" />
+    <Content Include="bin\System.Web.WebPages.xml" />
     <Content Include="content\dataviz\js\kendo.examples.nav.js" />
     <Content Include="content\dataviz\overview\bar.png" />
     <Content Include="content\dataviz\overview\line.png" />
     <Content Include="content\dataviz\overview\overlay.png" />
     <Content Include="content\dataviz\overview\pie.png" />
     <Content Include="content\dataviz\overview\scatter.png" />
+    <Content Include="content\mobile\application\remote-view.html" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\less.js" />
@@ -254,6 +269,9 @@
     <Content Include="content\web\validator\ticketsOnline.png" />
     <Content Include="content\web\wave.png" />
     <Content Include="Global.asax" />
+    <Content Include="obj\Debug\Kendo.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\Kendo.dll" />
+    <Content Include="obj\Debug\Kendo.pdb" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -410,8 +428,15 @@
     <Content Include="Views\mobile\listview\databinding.cshtml" />
     <Content Include="Views\mobile\listview\index.cshtml" />
     <Content Include="Views\mobile\listview\templates.cshtml" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="Views\mobile\application\index.cshtml" />
+    <Content Include="Views\mobile\switch\events.cshtml" />
+    <Content Include="Views\mobile\switch\index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="content\mobile\button\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\home\Index.cshtml" />
   </ItemGroup>
