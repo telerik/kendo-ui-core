@@ -21,8 +21,7 @@
     display: block;
     text-align: center;
     color: #fff;
-    font-size: 1.5em;
-    line-height: 1.5em;
+    font-size: 1.5rem;
     line-height: 2.2rem;
     font-weight: bold;
     text-shadow: 0 -1px rgba(0,0,0,.3);
@@ -51,8 +50,9 @@
 
 .km-meego .km-button
 {
-    .border-radius(.8em);
+    .border-radius(~".8rem");
 
+    padding: .5rem 1rem;
     border: 1px solid transparent;
     border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.4);
     background: #f5f5f5;
@@ -83,7 +83,6 @@
 .km-meego .km-button
 {
     font-weight: bold;
-    font-size: .9em;
     font-size: .9rem;
     font-family: Nokia Pure, HelveticaNeue, sans-serif;
 }
@@ -91,20 +90,6 @@
 .km-meego .km-back:before
 {
     display: none;
-}
-
-.km-meego :-moz-first-node.km-back:before
-{
-    border-radius: 0 1rem 0 0.4rem;
-    left: ~"-.56rem";
-    top: 0.28rem;
-    width: 1.36rem;
-    height: 1.36rem;
-}
-
-.km-meego .km-switch
-{
-    font-family: HelveticaNeue, Arial, sans-serif;
 }
 
 .km-meego .km-switch-background,
@@ -116,34 +101,30 @@
 .km-meego .km-switch
 {
     background: transparent;
-    height: 1.4em;
     height: 1.4rem;
 }
 
 .km-meego .km-switch-container
 {
     overflow: hidden;
-    border: 0;
-    width: 10rem;
-    .border-radius(0);
-    background: #232323;
-    margin-left: -1em;
+    border: 1px solid transparent;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.4);
+    background: #f5f5f5;
+    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+    .border-radius(~".5rem");
+    background: #f0f0f0;
 }
 
 .km-meego .km-switch-handle
 {
-    width: 0;
-    margin: 0;
+    width: 1.2rem;
+    margin: 1.2rem;
     height: 0;
     margin-right: 0;
-    .border-radius(0);
+    .border-radius(~".6rem");
     .box-shadow(none);
     .box-sizing(border-box);
-    border-left: 1em solid #232323;
-    background: rgba(255,255,255,.3);
-    border-right: 1.4em solid transparent;
-    border-bottom: 2em solid transparent;
-    border-width: 0 1.4rem 2rem 1rem;
+    background: #fff;
 }
 
 :-moz-any(.km-meego) .km-switch-handle
@@ -151,22 +132,21 @@
     border-right-width: 1.44rem;
 }
 
-.km-meego .km-switch-handle:before
+/*.km-meego .km-switch-handle:before
 {
     content: "\a0";
     display: block;
     position: absolute;
-    left: 1.4em;
     left: 1.4rem;
     background-color: inherit;
     border-bottom: 0;
-    border-left: 1.4em solid transparent;
-    border-right: 1em solid #232323;
-    border-top: 2em solid transparent;
+    border-left: 1.4rem solid transparent;
+    border-right: 1rem solid #232323;
+    border-top: 2rem solid transparent;
     border-width: 2rem 1rem 0 1.4rem;
     height: 0;
     width: 0;
-}
+}*/
 
 .km-meego .km-switch-off
 {
@@ -175,20 +155,6 @@
 
 .km-meego .km-switch-label-on,
 .km-meego .km-switch-label-off
-{
-    font-size: .9em;
-    left: 0;
-    width: 2.6rem;
-    width: 2.6rem;
-    line-height: 1.6em;
-    line-height: 1.6rem;
-    text-align: center;
-    text-shadow: none;
-    position: absolute;
-}
-
-.km-meego .km-switch-off .km-switch-label-on,
-.km-meego .km-switch-on .km-switch-label-off
 {
     display: none;
 }
@@ -204,35 +170,35 @@
 {
     background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,.2) 50%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0));
     color: #FFF;
-    border: .3em solid #FFF;
+    border: .3rem solid #FFF;
     background-color: #bc0404;
 }
 
 .km-meego .km-badge
 {
+    top: 0;
     background: #33b5e5;
     border: 0;
     background-clip: padding-box;
-    line-height: 1.7em;
     line-height: 1.1rem;
-    .border-radius(2em);
+    .border-radius(~"2rem");
     .box-shadow(0 3px 3px #000);
 }
 
 .km-meego .km-detail
 {
     line-height: .95rem;
-    background: #f0f0f0;
+    background: #ccc;
     .box-shadow(none);
-    .border-radius(.5em);
-    border: 1px solid rgba(0,0,0,.3);
+    .border-radius(~".5rem");
+    border: 1px solid rgba(0,0,0,.1);
 }
 
 .km-root .km-meego .km-detail
 {
-    width: 1.2rem;
-    height: 1.2rem;
-    margin: .22rem 0 0;
+    width: 1.35rem;
+    height: 1.35rem;
+    margin: .18rem 0 0;
 }
 
 .km-meego .km-detail .km-text
@@ -248,6 +214,7 @@
     height: 80%;
     background-color: #282828;
 }
+
 .km-meego .km-rowdelete:after,
 .km-meego .km-rowinsert:after,
 .km-meego .km-rowinsert:before,
@@ -300,21 +267,20 @@
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2));
     background-clip: padding-box;
     border-top: 1px solid #fff;
-    .box-shadow(0 1px 5px rgba(0,0,0,.5))
+    .box-shadow(0 0 5px rgba(0,0,0,.8))
 }
 
 .km-meego .km-navbar,
 .km-meego .km-toolbar
 {
-    font-size: .8em;
     font-size: .8rem;
+    display: none;
 }
 
 .km-meego .km-navbar .km-button,
 .km-meego .km-toolbar .km-button
 {
     margin: 0;
-    padding: .7em 0;
     padding: 1rem 0;
     border: 0;
     .box-shadow(none);
@@ -327,7 +293,6 @@
 {
     float: none;
     border: 0;
-    padding: 0 .7em;
     padding: 0 .7rem;
 }
 
@@ -342,15 +307,26 @@
 {
     color: #999;
     display: table-cell;
-    font-size: .8em;
-    padding: .5em 0 .4em 0;
+    font-size: .8rem;
+    padding: .5rem 0 .4rem 0;
     .border-radius(0);
     border-style: solid;
     border-color: transparent;
     border-width: 0;
     background: transparent;
     background-clip: padding-box;
-    min-width: 5em;
+    min-width: 4rem;
+}
+
+.km-meego .km-tabstrip .km-text
+{
+    position: relative;
+    left: 50%;
+    width: 0;
+    height: 0;
+    display: block;
+    float: left;
+    text-indent: -9999px;
 }
 
 .km-meego .km-tabstrip .km-state-active
@@ -359,13 +335,13 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
 }
 
-
 .km-meego .km-tabstrip .km-badge
 {
     text-indent: 0;
-    top: auto;
-    bottom: -2.5em;
-    right: 0;
+    position: absolute;
+    top: ~"-2.8rem";
+    right: ~"-1.8rem";
+    .box-shadow(0 1px 2px rgba(0,0,0,.6));
 }
 
 .km-meego .km-tabstrip .km-button:active,
@@ -373,10 +349,7 @@
 {
     color: #2e2e2e;
     padding-bottom: 0;
-    border-bottom-width: .4em;
-    padding-bottom: 0;
     .box-shadow(none);
-    border-color: transparent;
 }
 
 .km-meego .km-navbar .km-state-active:after,
@@ -386,17 +359,22 @@
     display: none;
 }
 
+.km-meego,
+.km-meego .km-icon,
 .km-meego .km-switch,
 .km-meego .km-switch-handle,
-.km-meego .km-switch-wrapper
+.km-meego .km-switch-wrapper,
+.km-meego .km-touch-scrollbar,
+.km-meego .km-scroll-container
 {
     -webkit-transform: translatez(0);
+    -webkit-backface-visibility: hidden;
 }
 
 .km-meego .km-listinset,
 .km-meego .km-listgroupinset > li > .km-list
 {
-    .border-radius(.8em);
+    .border-radius(~".8rem");
 
     border: 1px solid transparent;
     border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.3);
@@ -417,8 +395,6 @@
 }
 
 .km-meego li.km-state-active .km-listview-link,
-.km-meego .km-detail.km-state-active,
-.km-meego .km-state-active .km-detail,
 .km-meego .km-state-active .km-listview-link
 {
     background: #d7d8d8;
@@ -427,13 +403,13 @@
 .km-meego .km-listinset > li:first-child > .km-listview-link,
 .km-meego .km-listgroupinset > li:first-child > .km-listview-link
 {
-    .border-radius(.6em .6em 0 0);
+    .border-radius(~".6rem .6rem 0 0");
 }
 
 .km-meego .km-listinset > li:last-child > .km-listview-link,
 .km-meego .km-listgroupinset > li:last-child > .km-listview-link
 {
-    .border-radius(0 0 .6em .6em);
+    .border-radius(~"0 0 .6rem .6rem");
 }
 
 .km-meego .km-listgroup > li
@@ -463,7 +439,7 @@
     position: absolute;
     margin-top: .64rem;
     border: 1px solid transparent;
-    border-width: 0 .8em;
+    border-width: 0 .8rem;
     background: rgba(0,0,0,.2);
     .box-sizing(border-box);
     background-clip: padding-box;
@@ -496,8 +472,8 @@
 {
     display: block;
     vertical-align: middle;
-    line-height: 1.6em;
-    font-size: 1.2em;
+    line-height: 1.6rem;
+    font-size: 1.2rem;
     font-weight: bold;
     overflow: hidden;
 }
@@ -523,7 +499,6 @@
 
 .km-meego .km-listview .km-switch
 {
-    margin-top: -.8em;
     margin-top: ~"-.8rem";
 }
 
@@ -563,17 +538,18 @@
 
 .km-meego .km-navbar .km-icon
 {
-    margin-left: .5em;
-    margin-right: -.3em;
+    margin-left: .5rem;
+    margin-right: ~"-.3rem";
     background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
 }
 
 .km-meego .km-tabstrip .km-icon
 {
+    width: 1.8rem;
+    height: 1.8rem;
     position: relative;
     left: 50%;
-    margin-left: -2em;
-    margin-left: ~"-1.25rem";
+    margin: ~".3rem 0 .4rem -.9rem";
 }
 
 .km-meego .km-tabstrip .km-button .km-icon
@@ -592,7 +568,7 @@
 .km-meego .km-slider-background
 {
     background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,0) 15%, rgba(0,0,0,0) 90%, rgba(0,0,0,.4)) 0 0 no-repeat,
-                linear-gradient(top, rgb(219,219,219), rgb(255,255,255)) 12em 0 no-repeat,
+                linear-gradient(top, rgb(219,219,219), rgb(255,255,255)) 12rem 0 no-repeat,
                 linear-gradient(top, rgb(42,93,178), rgb(109,169,247)) 0 0 no-repeat;
 }
 
@@ -633,10 +609,10 @@
 .km-meego .km-dialog .km-button
 {
     display: block;
-    margin: .4em;
-    font-size: 1.3em;
+    margin: .4rem;
+    font-size: 1.3rem;
     text-align: center;
-    padding: .44em;
+    padding: .44rem;
     .user-select(none);
     .border-radius(4px);
 }
