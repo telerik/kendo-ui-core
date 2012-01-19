@@ -188,11 +188,15 @@
         /**
          *
          * Creates a Splitter instance.
+         *
          * @constructs
          * @extends kendo.ui.Widget
+         *
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {String} [orientation] <horizontal> Specifies the orientation of the splitter.
+         *
+         * @option {String} [orientation] <horizontal>
+         * Specifies the orientation of the <strong>Splitter</strong>.
          * <div class="details-list">
 	     *  <dl>
          *   <dt>"horizontal"</dt>
@@ -206,30 +210,27 @@
          * _example
          * $("#splitter").kendoSplitter({
          *  panes: [
-         *   {
-         *    size: "200px",
-         *    min: "100px",
-         *    max: "300px"
-         *   },
-         *   {
-         *    size: "20%",
-         *    resizable: false
-         *   },
-         *   {
-         *    collapsed: true,
-         *    collapsible: true
-         *   }
+         *   { size: "200px", min: "100px", max: "300px" },
+         *   { size: "20%", resizable: false },
+         *   { collapsed: true, collapsible: true }
          *  ]
          * });
          *
-         * @option {String} [panes.size] Specifies the size of the pane.
-         * <p>The size can be defined in pixes or in percents.</p>
-         * <p>The size cannot be more than panes.max and less then panes.min.</p>
+         * @option {String} [panes.size]
+         * Specifies the size of the pane defined as pixels (i.e. "200px") or
+         * as a percentage (i.e. "50%"). Note: This value cannot be more than
+         * <strong>panes.max</strong> and less then
+         * <strong>panes.min</strong>.
          *
-         * @option {String} [panes.min] Specifies the minimum size of the pane.
-         * <p>Resized pane cannot be smaller then the defined minimum size.</p>
-         * @option {String} [panes.max] Specifies the maximum size of the pane.
-         * <p>Resized pane cannot be bigger then the defined maximum size.</p>
+         * @option {String} [panes.min]
+         * Specifies the minimum size of the pane defined as pixels
+         * (i.e. "200px") or as a percentage (i.e. "50%"). The size of a
+         * resized pane cannot be less than the defined minimum size.
+         *
+         * @option {String} [panes.max]
+         * Specifies the maximum size of the pane defined as pixels
+         * (i.e. "200px") or as a percentage (i.e. "50%"). The size of a
+         * resized pane cannot exceed the defined maximum size.
          *
          * @option {Boolean} [panes.collapsed] <false>
          * Specifies whether the pane is initially collapsed.
@@ -238,7 +239,8 @@
          * Specifies whether the pane can be collapsed by the user.
          *
          * @option {Boolean} [panes.scrollable] <true>
-         * Specifies whether the pane shows a scrollbar when its content overflows.
+         * Specifies whether the pane shows a scrollbar when its content
+         * overflows.
          *
          * @option {Boolean} [panes.resizable] <true>
          * Specifies whether the pane can be resized by the user.
@@ -816,7 +818,7 @@
 	     * var splitter = $("#splitter").data("kendoSplitter");
 	     * // set the max size of the pane
          * splitter.max("#Item1", "300px");
-         */
+            */
         max: panePropertyAccessor("max")
     });
 
