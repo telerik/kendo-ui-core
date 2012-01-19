@@ -8,12 +8,14 @@
         proxy = $.proxy,
         GROUP_TEMPLATE = kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"),
         FUNCTION = "function",
+        MOUSEDOWN = support.mousedown,
+        MOUSEUP = support.MOUSEUP,
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
         var item = $(e.currentTarget);
         if ($(e.target).closest("a" + kendo.roleSelector("listview-link"), item)[0]) {
-            item.toggleClass("km-state-active", e.type === support.mousedown);
+            item.toggleClass("km-state-active", e.type === MOUSEDOWN);
         }
     }
 
@@ -21,17 +23,15 @@
         item = $(item);
         var parent = item.parent();
 
-        if (!item.parent().contents().not(item)[0]) {
-            var icon = parent.data(kendo.ns + "icon"),
-                iconSpan = $('<span class="km-icon"/>');
+        var icon = parent.data(kendo.ns + "icon"),
+            iconSpan = $('<span class="km-icon"/>');
 
-            item.addClass("km-listview-link")
-                .attr(kendo.attr("role"), "listview-link");
+        item.addClass("km-listview-link")
+            .attr(kendo.attr("role"), "listview-link");
 
-            if (icon) {
-                item.prepend(iconSpan);
-                iconSpan.addClass("km-" + icon);
-            }
+        if (icon) {
+            item.prepend(iconSpan);
+            iconSpan.addClass("km-" + icon);
         }
     }
 
@@ -148,8 +148,8 @@
             options = that.options;
 
             that.element
-                .delegate(ITEM_SELECTOR, support.mousedown + " " + support.mouseup, toggleItemActiveClass)
-                .delegate(ITEM_SELECTOR, support.mouseup, proxy(that._click, that));
+                .delegate(ITEM_SELECTOR, MOUSEDOWN + " " + MOUSEUP, toggleItemActiveClass)
+                .delegate(ITEM_SELECTOR, MOUSEUP, proxy(that._click, that));
 
             if (options.dataSource) {
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that._refresh, that));
@@ -292,7 +292,7 @@
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset)
-                .find("a:only-child").each(enhanceLinkItem);
+                .find("a:only-child:not([data-" + kendo.ns + "role])").each(enhanceLinkItem);
 
             if (grouped) {
                 that.element
