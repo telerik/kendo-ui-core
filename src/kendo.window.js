@@ -136,6 +136,7 @@
         CLOSE = "close",
         REFRESH = "refresh",
         RESIZE = "resize",
+        DRAGSTART = "dragstart",
         DRAGEND = "dragend",
         ERROR = "error",
         OVERFLOW = "overflow",
@@ -370,6 +371,13 @@
                  * @param {Event} e
                  */
                 RESIZE,
+                /**
+                 * Fires when the user starts to move the window.
+                 * @name kendo.ui.Window#dragstart
+                 * @event
+                 * @param {Event} e
+                 */
+                DRAGSTART,
                 /**
                  * Fires when the window has been moved by the user.
                  * @name kendo.ui.Window#dragend
@@ -1016,6 +1024,8 @@
             var wnd = this.owner,
                 element = wnd.element,
                 actions = element.find(".k-window-actions");
+
+            wnd.trigger(DRAGSTART);
 
             wnd.initialWindowPosition = wnd.wrapper.position();
 
