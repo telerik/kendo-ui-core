@@ -69,7 +69,7 @@
 
 .km-ios li.km-state-active
 {
-    border: 0;
+    border-width: 0;
     color: white;
 }
 
@@ -228,20 +228,34 @@
     background-color: #B01B1A;
 }
 
+.km-ios .km-radiogroup
+{
+    border: none;
+    background: none;
+    padding: 0 1px 1px 0;
+}
+
 .km-ios .km-radiogroup .km-button
 {
+    border-right-width: 0;
     color: #929292;
     text-shadow: 0 1px #fff;
-    border-color: #B4B8BA #9FA3A4 #9FA3A4;
+    border-color: rgba(0,0,0,.4);
     background-image: linear-gradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+}
+
+.km-ios .km-radiogroup .km-button:last-child
+{
+    border-right-width: 1px;
 }
 
 .km-ios .km-radiogroup .km-state-active
 {
     color: #fff;
     text-shadow: none;
-    border-color: rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(0,0,0,.1);
+    border-color: rgba(0,0,0,.4);
+    border-width: 1px 0 1px 1px;
     background-color: #3D7EEB;
     background-image: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.25));
     .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
