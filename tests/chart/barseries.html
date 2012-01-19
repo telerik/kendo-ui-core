@@ -17,7 +17,6 @@
                 Box2D = Chart.Box2D,
                 categoriesCount = Chart.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                plotArea,
                 series,
                 view;
 
@@ -39,6 +38,28 @@
                 series.reflow();
             }
 
+            function stubPlotArea(getCategorySlot, getValueSlot, options) {
+                return new function() {
+                    this.categoryAxis = {
+                        getSlot: getCategorySlot,
+                        options: {
+                            axisCrossingValue: 0
+                        }
+                    };
+
+                    this.valueAxes = {
+                        primary: {
+                            getSlot: getValueSlot,
+                            options: {
+                                axisCrossingValue: 0
+                            }
+                        }
+                    };
+
+                    this.options = options;
+                };
+            }
+
             (function() {
                 var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
@@ -46,17 +67,12 @@
                     CATEGORY_AXIS_Y = 2,
                     TOLERANCE = 0.1;
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(categoryIndex) {
+                var plotArea = stubPlotArea(
+                        function(categoryIndex) {
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
-                        }
-                    },
-                    axisY: {
-                        getSlot: function(value) {
+                        },
+                        function(value) {
                             var value = typeof value === "undefined" ? 0 : value,
                                 valueY = VALUE_AXIS_MAX - value,
                                 slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
@@ -64,19 +80,16 @@
 
                             return new Box2D(0, slotTop, 0, slotBottom);
                         },
-                        options: {}
-                    },
-                    options: {
-                        categoryAxis: {
-                            categories: ["A", "B"]
+                        {
+                            categoryAxis: {
+                                categories: ["A", "B"]
+                            }
                         }
-                    }
-                });
+                    );
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [ positiveSeries ] });
                     }
                 });
@@ -151,7 +164,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [ negativeSeries ] });
                     }
                 });
@@ -183,7 +195,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Multiple Series", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
                     }
                 });
@@ -196,7 +207,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Mismatched series", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                         series: [ { data: [1, 2, 3] },
                                   positiveSeries
@@ -234,7 +244,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Cluster", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [ positiveSeries, negativeSeries ] });
                     }
                 });
@@ -246,7 +255,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             series: [ positiveSeries, positiveSeries ],
                             isStacked: true }
@@ -281,7 +289,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             series: [ negativeSeries, negativeSeries ],
                             isStacked: true
@@ -317,7 +324,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             series: [{
                                 data: [1, -1],
@@ -347,7 +353,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Series", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             series: [ positiveSeries, negativeSeries ],
                             isStacked: true
@@ -388,40 +393,27 @@
                         dashType: "dot"
                     };
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
-                            categoryIndex + 100, CATEGORY_AXIS_Y);
-                        },
-                        options: {
-                            axisCrossingValue: 0
-                        }
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                         categoryIndex + 100, CATEGORY_AXIS_Y);
                     },
-                    axisY: {
-                        getSlot: function(value) {
-                            var value = typeof value === "undefined" ? 0 : value,
-                                valueY = VALUE_AXIS_MAX - value,
-                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+                    function(value) {
+                        var value = typeof value === "undefined" ? 0 : value,
+                            valueY = VALUE_AXIS_MAX - value,
+                            slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                            slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
-                            return new Box2D(0, slotTop, 0, slotBottom);
-                        },
-                        options: {
-                            axisCrossingValue: 0
-                        }
+                        return new Box2D(0, slotTop, 0, slotBottom);
                     },
-                    options: {
-                        categoryAxis: { }
+                    {
+                        categoryAxis: {}
                     }
-                });
+                );
 
                 // ------------------------------------------------------------
                 module("Column Chart / Labels / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [{
                             data: positiveData,
                             labels: { position: "insideEnd", visible: true }
@@ -511,7 +503,6 @@
                 // ------------------------------------------------------------
                 module("Column Chart / Labels / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { series: [{
                             data: negativeData,
                             labels: { position: "insideEnd", visible: true }
@@ -588,11 +579,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Column Chart / Labels / Rendering", {
-                    setup: function() {
-                        plotArea = new PlotAreaStub();
-                    }
-                });
+                module("Column Chart / Labels / Rendering");
 
                 test("color", function() {
                     setupBarChart(plotArea, { series: [{
@@ -661,39 +648,26 @@
                     CATEGORY_AXIS_X = 200,
                     TOLERANCE = 0.1;
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(value) {
-                            var valueX = CATEGORY_AXIS_X + value,
-                                slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
-                                slotRight = Math.max(CATEGORY_AXIS_X, valueX);
-
-                            return new Box2D(slotLeft, 0, slotRight, 0);
-                        },
-                        options: {
-                            axisCrossingValue: 0
-                        }
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D(CATEGORY_AXIS_X, categoryIndex,
+                                         CATEGORY_AXIS_X, categoryIndex + 1);
                     },
-                    axisY: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D(CATEGORY_AXIS_X, categoryIndex,
-                            CATEGORY_AXIS_X, categoryIndex + 1);
-                        },
-                        options: {
-                            axisCrossingValue: 0
-                        }
+                    function(value) {
+                        var valueX = CATEGORY_AXIS_X + value,
+                            slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
+                            slotRight = Math.max(CATEGORY_AXIS_X, valueX);
+
+                        return new Box2D(slotLeft, 0, slotRight, 0);
                     },
-                    options: {
-                        categoryAxis: { }
+                    {
+                        categoryAxis: {}
                     }
-                });
+                );
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Labels / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         view = new ViewStub();
                         setupBarChart(plotArea, { series: [{
                             data: positiveData,
@@ -848,35 +822,26 @@
                     CATEGORY_AXIS_X = 2,
                     TOLERANCE = 0.1;
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(value) {
-                            var valueX = CATEGORY_AXIS_X + value,
-                                slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
-                                slotRight = Math.max(CATEGORY_AXIS_X, valueX);
-
-                            return new Box2D(slotLeft, 0, slotRight, 0);
-                        },
-                        options: {}
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D(CATEGORY_AXIS_X, categoryIndex,
+                                       CATEGORY_AXIS_X, categoryIndex + 1);
                     },
-                    axisY: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D(CATEGORY_AXIS_X, categoryIndex,
-                                           CATEGORY_AXIS_X, categoryIndex + 1);
-                        },
-                        options: {}
+                    function(value) {
+                        var valueX = CATEGORY_AXIS_X + value,
+                            slotLeft = Math.min(CATEGORY_AXIS_X, valueX),
+                            slotRight = Math.max(CATEGORY_AXIS_X, valueX);
+
+                        return new Box2D(slotLeft, 0, slotRight, 0);
                     },
-                    options: {
-                        categoryAxis: { }
+                    {
+                        categoryAxis: {}
                     }
-                });
+                );
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { isVertical: false, series: [ positiveSeries ] });
                     }
                 });
@@ -914,7 +879,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, { isVertical: false, series: [ negativeSeries ] });
                     }
                 });
@@ -946,7 +910,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Missing values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ { data: [1, 2, 3] },
@@ -967,7 +930,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Cluster", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea,
                             { isVertical: false,
                               series: [ positiveSeries, negativeSeries ]
@@ -983,7 +945,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ positiveSeries, positiveSeries ],
@@ -1019,7 +980,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ negativeSeries, negativeSeries ],
@@ -1056,7 +1016,6 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Stack / Mixed Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupBarChart(plotArea, {
                             isVertical: false,
                             series: [ positiveSeries, negativeSeries ],
@@ -1086,28 +1045,21 @@
             (function() {
                 var barChart;
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(value) {
-                            return new Box2D();
-                        }
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D();
                     },
-                    axisY: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D();
-                        }
+                    function(value) {
+                        return new Box2D();
                     },
-                    options: {
-                        categoryAxis: { }
+                    {
+                        categoryAxis: {}
                     }
-                });
+                );
 
                 // ------------------------------------------------------------
                 module("Bar Chart / Configuration", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         barChart = new Chart.BarChart(plotArea, {
                             series: [{
                                 data: [0, 1],
