@@ -19,10 +19,19 @@
 
     function enhanceLinkItem(i, item) {
         item = $(item);
+        var parent = item.parent();
 
         if (!item.parent().contents().not(item)[0]) {
+            var icon = parent.data(kendo.ns + "icon"),
+                iconSpan = $('<span class="km-icon"/>');
+
             item.addClass("km-listview-link")
                 .attr(kendo.attr("role"), "listview-link");
+
+            if (icon) {
+                item.prepend(iconSpan);
+                iconSpan.addClass("km-" + icon);
+            }
         }
     }
 

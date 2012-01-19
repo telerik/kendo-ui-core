@@ -250,9 +250,15 @@
     .box-shadow(none);
 }
 
+.km-android .km-list .km-icon,
 .km-android .km-detail .km-icon
 {
     background-color: #fff;
+}
+
+.km-android .km-list .km-icon
+{
+    margin-top: .3em;
 }
 
 .km-root .km-android .km-detail
@@ -421,7 +427,8 @@
 .km-android .km-list > li,
 .km-android .km-switch-handle,
 .km-android .km-switch-wrapper,
-.km-android .km-scroll-container
+.km-android .km-content,
+.km-android .km-root
 {
     -webkit-transform: translatez(0);
 }
@@ -525,7 +532,7 @@
 
 .km-android .km-content
 {
-    background: #000 linear-gradient(top, rgba(0,0,0,1), rgba(70,70,70,.5));
+//    background: #000 linear-gradient(top, rgba(0,0,0,1), rgba(70,70,70,.5));
 }
 
 .km-android .km-button .km-icon
@@ -543,7 +550,7 @@
 .km-android .km-tabstrip .km-icon
 {
     position: relative;
-    left: 50%;
+    left: 0;
     margin-left: -2em;
     margin-left: ~"-1.25rem";
 }
