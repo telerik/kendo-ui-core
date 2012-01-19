@@ -9,7 +9,7 @@
         GROUP_TEMPLATE = kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"),
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
-        MOUSEUP = support.MOUSEUP,
+        MOUSEUP = support.mouseup,
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
@@ -22,6 +22,10 @@
     function enhanceLinkItem(i, item) {
         item = $(item);
         var parent = item.parent();
+
+        if (parent.contents().not(item)[0]) {
+            return;
+        }
 
         var icon = parent.data(kendo.ns + "icon"),
             iconSpan = $('<span class="km-icon"/>');
