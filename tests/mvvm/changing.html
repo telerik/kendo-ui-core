@@ -103,6 +103,19 @@
                 equal(viewmodel.foo, "bar");
             });
 
+            test("changing radiobutton value updates the view model", function() {
+                var dom = $('<input type="radio" value="bar"  data-checked="foo"/>');
+
+                var viewmodel = kendo.observable( { foo: "" });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.attr("checked", true);
+                dom.trigger("change");
+
+                equal(viewmodel.foo, "bar");
+            });
+
             test("changing checkbox value updates the view model", function() {
                 var dom = $('<input type="checkbox" data-checked="foo"/>');
 

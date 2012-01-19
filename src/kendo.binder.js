@@ -158,6 +158,9 @@
                         container.push(value);
                     }
                 } else {
+                    if (that.element.type.toLowerCase() === "radio") {
+                        checked = that.element.value;
+                    }
                     that.observable.set(that.field, checked, this);
                 }
             });
@@ -185,8 +188,13 @@
             if (value instanceof kendo.data.ObservableArray && that._find(value, element.val()) > -1) {
                 value = true;
             }
-
-            element.attr("checked", value === true);
+            if (element.is(":radio")) {
+                if (value === element.val()) { // radio button groups will be reset when checked is set
+                    element.attr("checked", true);
+                }
+            } else {
+                element.attr("checked", value === true);
+            }
         }
     });
 

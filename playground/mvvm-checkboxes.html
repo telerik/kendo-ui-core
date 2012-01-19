@@ -36,6 +36,19 @@
                 </div>
             </fieldset>
         </form>
+
+        <form>
+            Preferred flavors of spam:
+            <div><input type="radio" name="flavors" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
+            <div><input type="radio" name="flavors" value="cherry" data-checked="spamFlavors" /> Cherry</div>
+            <div><input type="radio" name="flavors" value="almond" data-checked="spamFlavors" /> Almond</div>
+            <fieldset>
+                    <legend> Selection</legend>
+                    <div>
+                    spamTypes: <span data-text="spamFlavors"></span>
+                </div>
+            </fieldset>
+        </form>
         <script>
             var viewModel = kendo.observable({
                 spamFlavors: ["cherry","almond"],
@@ -49,7 +62,13 @@
                 }
             });
 
-            kendo.bind($("form"), viewModel);
+            kendo.bind($("form:first"), viewModel);
+
+            viewModel = kendo.observable({
+                spamFlavors: "almond"
+            });
+
+            kendo.bind($("form:last"), viewModel);
         </script>
     </body>
 </html>

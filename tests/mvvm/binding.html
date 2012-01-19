@@ -318,6 +318,19 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
+            test("checked binding binds radiobutton by value", function() {
+                var dom = $('<input type="radio" value="foo" data-checked="selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItem: ""
+                });
+
+                viewModel.set("selectedItem", "foo");
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":checked"));
+            });
+
             test("checked binding binds checkbox to boolean", function() {
                 var dom = $('<input type="checkbox" data-checked="selectedItem"/>');
 
