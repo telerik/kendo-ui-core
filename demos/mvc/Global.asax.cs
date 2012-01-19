@@ -18,13 +18,13 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileDeviceIndex",
-                "m",
+                "mobile/m",
                 new { controller = "MobileDevice", action = "Index" }
             );
 
             routes.MapRoute(
                 "MobileDeviceExample",
-                "m/{section}/{example}.html",
+                "mobile/m/{section}/{example}.html",
                 new { controller = "MobileDevice", action = "Example" }
             );
 
