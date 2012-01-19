@@ -2486,7 +2486,7 @@
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 categoryAxis = plotArea.categoryAxis,
-                valueAxis = chart.valueAxis(),
+                valueAxis = plotArea.valueAxes[options.axis],
                 point;
 
             chart.traverseDataPoints(function(value, category, categoryIx) {
@@ -2515,10 +2515,6 @@
             chart.reflowCategories(categorySlots);
 
             chart.box = targetBox;
-        },
-
-        valueAxis: function() {
-            return this.plotArea.valueAxes[this.options.axis];
         },
 
         reflowCategories: function() { },
@@ -3082,8 +3078,7 @@
                 isVertical = chart.options.isVertical,
                 originalLines = LineChart.fn.splitSegments.call(chart, view),
                 lines = [],
-                valueAxis = chart.valueAxis(),
-                axisLineBox = valueAxis.getAxisLineBox(),
+                axisLineBox = plotArea.categoryAxis.getAxisLineBox(),
                 end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
                 originalLinePoints,
                 linesCount = originalLines.length,
