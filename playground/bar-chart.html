@@ -40,23 +40,15 @@
 
             $(document).ready(function() {
                 $("#container").kendoChart({
-                    theme: "silver",
                     title: {
-                        text: "Teh chart",
-                        position: "top"
+                        visible: false
                     },
-                legend: {
-                    position: "right"
-                },
+                    legend: {
+                        visible: false
+                    },
                     dataSource: data,
                     seriesDefaults: {
-                        labels: {
-                            visible: true,
-                            position: "insideEnd"
-                        },
-                        overlay: null,
-                        stack: false,
-                        type: "column"
+                        type: "area"
                     },
                     series: [{
                             name: "1",
@@ -69,133 +61,16 @@
                             field: "d"
                     }],
                     categoryAxis: {
-                        field: "name",
-                        plotBands: [{
-                            from: 0,
-                            to: 1,
-                            color: "#547a9f"
-                        }],
-                        title: {
-                            text: "kuru muru",
-                            position: "bottom"
-                        }
+                        field: "name"
                     },
                     valueAxis: {
-                        title: {
-                            text: "kuru muru",
-                            position: "right"
-                        }
-                    },
-                    transitions: true
+                    }
                 });
             });
         </script>
 
-        <div id="container" style="width: 600px; height: 400px; float: left; margin-left: 100px;">
+        <div id="container" style="width: 600px; height: 400px;">
         </div>
-
-            <div class="configurator" style="margin-top: 30px; clear: both;">
-                <div>
-                    <input  id="typeColumn" name="type"
-                            type="radio" checked="checked" autocomplete="off" />
-                    <label for="typeColumn">Column</label>
-
-                    <input id="barColumn" name="type"
-                           type="radio" value="Bar" autocomplete="off" />
-                    <label for="barColumn">Bar</label>
-
-                    <input id="stack" type="checkbox" autocomplete="off" />
-                    <label for="stack">Stacked</label>
-                </div>
-                <fieldset style="width: 100px;">
-                    <legend>Labels</legend>
-                    <p>
-                        <input id="center" name="labelType"
-                           type="radio" value="center" autocomplete="off" />
-                        <label for="center">center</label>
-                    </p>
-                    <p>
-                        <input id="insideEnd" name="labelType"
-                           type="radio" value="insideEnd" autocomplete="off" />
-                        <label for="insideEnd">insideEnd</label>
-                    </p>
-                    <p>
-                        <input id="insideBase" name="labelType"
-                           type="radio" value="insideBase" autocomplete="off" />
-                        <label for="insideBase">insideBase</label>
-                    </p>
-                    <p>
-                        <input id="outsideEnd" name="labelType"
-                           type="radio" checked="checked" value="outsideEnd" autocomplete="off" />
-                        <label for="outsideEnd">outsideEnd</label>
-                    </p>
-                </fieldset>
-            </div>
-
-        <input type="button" id="animate" value="Dance, dance!" />
-        <script type="text/javascript">
-            $(".configurator input").change(function() {
-                var chart = $("#container").data("kendoChart"),
-                    series = chart.options.series,
-                    type = $("#typeColumn").prop("checked") ? "column" : "bar",
-                    stack = $("#stack").prop("checked"),
-                    labelPosition = $("input[name=labelType]:checked").val();
-
-                for (var i = 0, length = chart.options.series.length; i < length; i++) {
-                    series[i].type = type;
-                    series[i].stack = stack;
-                    series[i].labels.position = labelPosition;
-                };
-
-                chart.refresh();
-            });
-
-            var FRAMES = 40,
-                STEP = 1,
-                MAX_DATA = 400,
-                direction = 1;
-
-            var view;
-            $("#animate").click(function() {
-                var chart = $("#container").data("kendoChart"),
-                    data = chart.options.dataSource,
-                    frame = 0;
-
-                var start = new Date();
-                function step() {
-                    for (var i = 0, length = data.length; i < length; i++) {
-                        var point = data[i];
-                        point.a = (point.a + direction * STEP) % MAX_DATA;
-                        point.b = (point.b + direction * STEP) % MAX_DATA;
-                        point.c = (point.c - direction * STEP) % MAX_DATA;
-                    };
-
-                    /*
-                if (!view) {
-                    view = chart._model.getView();
-                }
-                view.renderTo(chart.element[0]);
-                */
-                    chart.refresh();
-
-                    if (frame++ < FRAMES) {
-                        setTimeout(step, 0);
-                    } else {
-                        var duration = (new Date()) - start,
-                            fps = (FRAMES / duration) * 1000;
-
-                        if (console) {
-                            console.log(Math.round(fps) + " FPS");
-                        }
-
-                        direction = direction * -1;
-                    }
-                }
-
-                step();
-            });
-        </script>
-
     </body>
 </html>
 
