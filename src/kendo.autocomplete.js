@@ -223,7 +223,7 @@
 
             that._accessors();
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that._refresh, that));
 
             that.bind([
             /**
@@ -363,33 +363,23 @@
             that.popup.close();
         },
 
-        refresh: function () {
-            var that = this,
-            ul = that.ul[0],
-            options = that.options,
-            suggest = options.suggest,
-            data = that.dataSource.view(),
-            length = data.length;
+        /**
+        * Re-popuplates the data in the dataSource.
+        * @name kendo.ui.AutoComplete#refresh
+        * @function
+        * @example
+        * autocomplete.refresh();
+        */
 
-            ul.innerHTML = kendo.render(that.template, data);
+        /**
+        * Re-popuplates the data in the DataSource.
+        * @example
+        * // get a referenence to the Kendo UI AutoComplete
+        * var autocomplete = $("autocomplete").data("kendoAutoComplete");
+        * // re-populate the data of the DataSource
+        * autocomplete.refresh();
+        */
 
-            that._height(length);
-
-            if (length) {
-                if (suggest || options.highlightFirst) {
-                    that.current($(ul.firstChild));
-                }
-
-                if (suggest) {
-                    that.suggest(that._current);
-                }
-            }
-
-            if (that._open) {
-                that._open = false;
-                that.popup[length ? "open" : "close"]();
-            }
-        },
 
         /**
         * Selects drop-down list item and sets the text of the autocomplete.
@@ -567,18 +557,6 @@
             moveCaretAtEnd(that.element[0]);
         },
 
-        _move: function (li) {
-            var that = this;
-
-            li = li[0] ? li : null;
-
-            that.current(li);
-
-            if (that.options.suggest) {
-                that.suggest(li);
-            }
-        },
-
         _keydown: function (e) {
             var that = this,
                 ul = that.ul[0],
@@ -609,6 +587,46 @@
                 that.close();
             } else {
                 that._search();
+            }
+        },
+
+        _move: function (li) {
+            var that = this;
+
+            li = li[0] ? li : null;
+
+            that.current(li);
+
+            if (that.options.suggest) {
+                that.suggest(li);
+            }
+        },
+
+        _refresh: function () {
+            var that = this,
+            ul = that.ul[0],
+            options = that.options,
+            suggest = options.suggest,
+            data = that.dataSource.view(),
+            length = data.length;
+
+            ul.innerHTML = kendo.render(that.template, data);
+
+            that._height(length);
+
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
+            }
+
+            if (that._open) {
+                that._open = false;
+                that.popup[length ? "open" : "close"]();
             }
         },
 

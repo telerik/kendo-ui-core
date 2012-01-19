@@ -299,34 +299,14 @@
             this._toggle(toggle);
         },
 
-        refresh: function() {
-            var that = this,
-                value = that.value(),
-                options = that.options,
-                data = that._data(),
-                length = data.length;
-
-            that.ul[0].innerHTML = kendo.render(that.template, data);
-            that._height(length);
-
-            if (that.element.is(SELECT)) {
-                that._options(data);
-            }
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(options.index);
-            }
-
-            that._old = that.value();
-
-            if (that._open) {
-                that.toggle(length);
-            }
-
-            that._hideBusy();
-        },
+        /**
+        * Re-popuplates the data in the DataSource.
+        * @example
+        * // get a referenence to the Kendo UI DropDownList
+        * var dropdownlist = $("dropdownlist").data("kendoDropDownList");
+        * // re-populate the data of the DataSource
+        * dropdownlist.refresh();
+        */
 
         /**
         * Selects item, which starts with the provided parameter.
@@ -505,6 +485,35 @@
                 that._word += String.fromCharCode(e.keyCode || e.charCode);
                 that._search();
             }, 0);
+        },
+
+        _refresh: function() {
+            var that = this,
+                value = that.value(),
+                options = that.options,
+                data = that._data(),
+                length = data.length;
+
+            that.ul[0].innerHTML = kendo.render(that.template, data);
+            that._height(length);
+
+            if (that.element.is(SELECT)) {
+                that._options(data);
+            }
+
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(options.index);
+            }
+
+            that._old = that.value();
+
+            if (that._open) {
+                that.toggle(length);
+            }
+
+            that._hideBusy();
         },
 
         _search: function() {
