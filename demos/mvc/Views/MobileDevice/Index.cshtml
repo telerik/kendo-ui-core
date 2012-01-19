@@ -32,10 +32,8 @@
                 <ul>
                     @foreach (NavigationExample example in widget.Items)
                     {
-                        <li>
-                            <a data-role="listview-link"
-                               href="@Url.Content("~/m/" + example.Url)">@example.Text</a>
-                        </li>
+                        <li><a data-role="listview-link"
+                               href="@Url.Content("~/m/" + example.Url)">@example.Text</a></li>
                     }
                 </ul>
             </li>
