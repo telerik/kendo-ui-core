@@ -9,31 +9,24 @@
      *
      * @section
      * <p>
-     *  The <b>Slider</b> provides a rich input for selecting values or
-     *  ranges of values. Unlike the HTML5 range input, the <b>Slider</b>
-     *  presents a consistent experience across browsers and features a rich
+     *  The <strong>Slider</strong> provides a rich input for selecting values or ranges of values. Unlike the HTML5
+     *  range input, the <strong>Slider</strong> presents a consistent experience across browsers and features a rich
      *  API and event model.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>There are two types of <b>Slider</b>:</p>
+     * <p>There are two types of <strong>Slider</strong>:</p>
      * <ol>
-     *  <li>
-     *   <strong>Slider</strong>, which presents one thumb and two
-     *   opposing buttons for selecting a single value
-     *  </li>
-     *  <li>
-     *   <strong>RangeSlider</strong>, which present two thumbs for defining
-     *   a range of values
-     *  </li>
+     *  <li><strong>Slider</strong>, which presents one thumb and two opposing buttons for selecting a single value</li>
+     *  <li><strong>RangeSlider</strong>, which present two thumbs for defining a range of values</li>
      * </ol>
      * <h4>Slider</h4>
      * @exampleTitle Create an input element
      * @example
      * <input id="slider" />
-     * @exampleTitle Initialize the Slider using a jQuery selector
+     * @exampleTitle Initialize the Slider using a selector
      * @example
      * $(document).ready(function() {
-     *  $("#slider").kendoSlider();
+     *     $("#slider").kendoSlider();
      * });
      *
      * @section
@@ -41,29 +34,28 @@
      * @exampleTitle Create two HTML input elements in a div
      * @example
      * <div id="rangeSlider">
-     *  <input />
-     *  <input />
+     *     <input />
+     *     <input />
      * </div>
      *
-     * @exampleTitle Initialize the <b>RangeSlider</b> using a jQuery
+     * @exampleTitle Initialize the <strong>RangeSlider</strong> using a jQuery
      * selector targeting the div
      * @example
      * $(document).ready(function() {
-     *  $("#rangeSlider").kendoRangeSlider();
+     *     $("#rangeSlider").kendoRangeSlider();
      * });
      *
      * @section
      * <p>
-     *  The <b>RangeSlider</b> requires two inputs to capture both ends of
-     *  the value range. This benefits scenarios where JavaScript is
-     *  disabled, in which case users will be presented with two inputs,
-     *  still allowing them to input a valid range.
+     *  The <strong>RangeSlider</strong> requires two inputs to capture both ends of the value range. This benefits
+     *  scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing
+     *  them to input a valid range.
      * </p>
      *
      * <h3>Customizing Slider Behavior</h3>
      * <p>
-     *  Many facets of the <b>Slider</b> and <b>RangeSlider</b> behavior can
-     *  be configured via simple properties, including:
+     *  Many facets of the <strong>Slider</strong> and <strong>RangeSlider</strong> behavior can be configured through
+     *  properties, including:
      * </p>
      * <ul>
      *  <li>Minimum and/or maximum values</li>
@@ -74,20 +66,19 @@
      * @exampleTitle Customizing Slider default settings
      * @example
      * $("#slider").kendoSlider({
-     *  min: 10,
-     *  max: 50,
-     *  orientation: "vertical",
-     *  smallStep: 1,
-     *  largeStep: 10
+     *     min: 10,
+     *     max: 50,
+     *     orientation: "vertical",
+     *     smallStep: 1,
+     *     largeStep: 10
      * });
      *
      * @section
      * <h3>Accessing an Existing Slider</h3>
      * <p>
-     *  You can reference an existing <b>Slider</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-     *  Once a reference has been established, you can use the API to control
-     *  its behavior.
+     *  You can reference an existing <strong>Slider</strong> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+     *  use the API to control its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing Slider instance
@@ -543,40 +534,40 @@
          *
          * @option {Boolean} [enabled] <true>
          * Disables (<b>false</b>) or enables (<b>true</b>) the
-         * <b>Slider</b>. This option can be specified when initializing the
-         * <b>Slider</b>.
+         * <strong>Slider</strong>. This option can be specified when initializing the
+         * <strong>Slider</strong>.
          *
          * @option {Number} [min] <0>
-         * The minimum value of the <b>Slider</b>.
+         * The minimum value of the <strong>Slider</strong>.
          *
          * @option {Number} [max] <10>
-         * The maximum value of the <b>Slider</b>.
+         * The maximum value of the <strong>Slider</strong>.
          *
          * @option {Boolean} [showButtons] <true>
          * Can be used to show (<b>true</b>) or hide (<b>false</b>) the
-         * increase and decrease buttons of a <b>Slider</b>.
+         * increase and decrease buttons of a <strong>Slider</strong>.
          *
          * @option {Object} [tooltip]
-         * Configuration of the <b>Slider</b> tooltip.
+         * Configuration of the <strong>Slider</strong> tooltip.
          *
          * @option {Boolean} [tooltip.enabled] <true>
          * Disables (<b>false</b>) or enables (<b>true</b>) the tooltip of
-         * the <b>Slider</b>.
+         * the <strong>Slider</strong>.
          *
          * @option {String} [tooltip.format] <"{0}">
          * Format string for the text of the tooltip. Note: The applied
-         * format will also influence the appearance of the <b>Slider</b>
+         * format will also influence the appearance of the <strong>Slider</strong>
          * tick labels.
          *
          * @option {Number} [value] <0>
-         * The underlying value of the <b>Slider</b>.
+         * The underlying value of the <strong>Slider</strong>.
          *
          * @option {String} [orientation] <"horizontal">
          * The orientation of the slider. Available options are
          * <b>"horizontal"</b> and <b>"vertical"</b>.
          *
          * @option {String} [tickPlacement] <"both">
-         * Denotes the location of the tick marks in the <b>Slider</b>.
+         * Denotes the location of the tick marks in the <strong>Slider</strong>.
          * Available options are:
          * <ul>
          *  <li>
@@ -595,9 +586,9 @@
          * </ul>
          *
          * @option {Number} [smallStep] <1>
-         * The small step value of the <b>Slider</b>. The underlying value
+         * The small step value of the <strong>Slider</strong>. The underlying value
          * will be changed when the end user (1) clicks on the increase or
-         * decrease buttons of the <b>Slider</b>, (2) presses the arrow keys
+         * decrease buttons of the <strong>Slider</strong>, (2) presses the arrow keys
          * (the drag handle must be focused), or (3) drags the drag handle.
          *
          * @option {Number} [largeStep] <5>
@@ -607,10 +598,10 @@
          * large step.
          *
          * @option {String} [increaseButtonTitle] <"Increase">
-         * The title of the increase button of the <b>Slider</b>.
+         * The title of the increase button of the <strong>Slider</strong>.
          *
          * @option {String} [decreaseButtonTitle] <"Decrease">
-         * The title of the decrease button of the <b>Slider</b>.
+         * The title of the decrease button of the <strong>Slider</strong>.
          *
          */
         init: function(element, options) {
