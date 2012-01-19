@@ -459,15 +459,9 @@
         },
 
         /**
-        * Re-popuplates the data in the dataSource.
+        * Re-popuplates the data in the DataSource.
         * @name kendo.ui.AutoComplete#refresh
         * @function
-        * @example
-        * autocomplete.refresh();
-        */
-
-        /**
-        * Re-popuplates the data in the DataSource.
         * @example
         * // get a referenence to the Kendo UI AutoComplete
         * var autocomplete = $("autocomplete").data("kendoAutoComplete");
