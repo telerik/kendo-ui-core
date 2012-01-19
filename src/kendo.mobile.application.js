@@ -426,7 +426,7 @@
                 dom = $(toDom(html)),
                 views = dom.find(roleSelector("view")).hide(),
                 layouts = dom.find(roleSelector("layout")),
-                scripts = dom.find("script"),
+                scriptsAndStyles = dom.find("script, style"),
                 element = views.first(),
                 view;
 
@@ -434,7 +434,7 @@
 
             that._setupLayouts(dom);
             that.element.append(layouts);
-            that.element.append(scripts);
+            that.element.append(scriptsAndStyles);
             that.element.append(views);
 
             view = that._createView(element);
