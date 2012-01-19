@@ -137,7 +137,6 @@
         options: {
             name: "Button",
             style: "",
-            selector: kendo.roleSelector("button"),
             enable: true
         },
 
@@ -201,8 +200,7 @@
     var BackButton = Button.extend(/** @lends kendo.mobile.ui.BackButton.prototype */{
         options: {
             name: "BackButton",
-            style: "back",
-            selector: kendo.roleSelector("back-button")
+            style: "back"
         },
 
         /**
@@ -232,8 +230,7 @@
     var DetailButton = Button.extend(/** @lends kendo.mobile.ui.DetailButton.prototype */{
         options: {
             name: "DetailButton",
-            style: "",
-            selector: kendo.roleSelector("detail-button")
+            style: ""
         },
 
         /**

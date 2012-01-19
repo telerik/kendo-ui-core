@@ -34,12 +34,10 @@
 
         enhance: function(element) {
             var options = this.options,
-                selector = options.selector;
+                selector = kendo.roleSelector(options.name.toLowerCase());
 
-            if (selector) {
                 element.find(selector)
                        .add(element.filter(selector))["kendoMobile" + options.name]();
-            }
         }
     });
 
@@ -50,15 +48,16 @@
 
     extend(kendo.mobile, {
         enhance: function(element) {
-            var widget, ui = kendo.mobile.ui;
+            var widget, prototype, ui = kendo.mobile.ui;
 
             element = $(element);
 
             for (widget in ui) {
                 widget = ui[widget];
+                prototype = widget.prototype;
 
-                if (widget.prototype.enhance) {
-                    widget.prototype.enhance(element);
+                if (prototype.enhance && prototype.options.name) {
+                    prototype.enhance(element);
                 }
             }
         },
