@@ -74,6 +74,10 @@
                         kendoConsole.log("event :: resize");
                     }
 
+                    function onDragStart(e) {
+                        kendoConsole.log("event :: dragstart");
+                    }
+
                     function onDragEnd(e) {
                         kendoConsole.log("event :: dragend");
                     }
@@ -84,13 +88,17 @@
                             title: "Kendo Window",
                             actions: ["Refresh", "Close"],
                             content: 'ajax/ajaxContent.html',
+
                             open: onOpen,
                             activate: onActivate,
                             close: onClose,
                             deactivate: onDeactivate,
+
+                            refresh: onRefresh,
+
                             resize: onResize,
-                            dragend: onDragEnd,
-                            refresh: onRefresh
+                            dragstart: onDragStart,
+                            dragend: onDragEnd
                         });
                     }
                 });
