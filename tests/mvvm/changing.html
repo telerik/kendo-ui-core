@@ -103,8 +103,21 @@
                 equal(viewmodel.foo, "bar");
             });
 
+            test("changing radiobutton value updates the view model", function() {
+                var dom = $('<input type="radio" value="bar"  data-checked="foo"/>');
+
+                var viewmodel = kendo.observable( { foo: "" });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.attr("checked", true);
+                dom.trigger("change");
+
+                equal(viewmodel.foo, "bar");
+            });
+
             test("changing checkbox value updates the view model", function() {
-                var dom = $('<input type="checkbox" data-value="foo" />');
+                var dom = $('<input type="checkbox" data-checked="foo"/>');
 
                 var viewmodel = kendo.observable( { foo: false });
 
@@ -114,6 +127,32 @@
                 dom.trigger("change");
 
                 equal(viewmodel.foo, true);
+            });
+
+            test("checking checkbox adds the value to the view model", function() {
+                var dom = $('<input type="checkbox" value="bar" data-checked="foo"/>');
+
+                var viewmodel = kendo.observable( { foo: [] });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.attr("checked", true);
+                dom.trigger("change");
+
+                equal(viewmodel.foo[0], "bar");
+            });
+
+            test("unchecking checkbox removes the value from the view model", function() {
+                var dom = $('<input type="checkbox" value="bar" data-checked="foo"/>');
+
+                var viewmodel = kendo.observable( { foo: ["bar"] });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.attr("checked", false);
+                dom.trigger("change");
+
+                ok(!viewmodel.foo.length);
             });
 
             test("change event does not update the value again", function() {

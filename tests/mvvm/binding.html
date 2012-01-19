@@ -318,8 +318,21 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
-            test("binding checkbox value to object", function() {
-                var dom = $('<input type="checkbox" data-value="selectedItem"/>');
+            test("checked binding binds radiobutton by value", function() {
+                var dom = $('<input type="radio" value="foo" data-checked="selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItem: ""
+                });
+
+                viewModel.set("selectedItem", "foo");
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":checked"));
+            });
+
+            test("checked binding binds checkbox to boolean", function() {
+                var dom = $('<input type="checkbox" data-checked="selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     selectedItem: false
@@ -329,6 +342,44 @@
 
                 kendo.bind(dom, viewModel);
                 ok(dom.is(":checked"));
+            });
+
+            test("checked binding binds checkbox by value to array", function() {
+                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItems: []
+                });
+
+                viewModel.selectedItems.push("foo");
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":checked"));
+            });
+
+            test("checked binding removing the item unchecks the checkbox", function() {
+                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItems: ["foo"]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.selectedItems.splice(0,1);
+
+                ok(!dom.is(":checked"));
+            });
+
+            test("checked binding checkbox is not checked if value does not exists", function() {
+                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItems: []
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(!dom.is(":checked"));
             });
 
             test("binding to getter", function() {
