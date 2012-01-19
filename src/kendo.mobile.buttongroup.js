@@ -105,7 +105,7 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("km-radiogroup")
+            that.element.addClass("km-buttongroup")
                 .delegate(SELECTOR, MOUSEDOWN, $.proxy(that._mousedown, that))
                 .find("li").each(that._button);
 
