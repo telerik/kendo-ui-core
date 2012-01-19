@@ -148,7 +148,8 @@
 
             $(that.element).change(function() {
                 var container = that.observable.get(that.field),
-                    checked = $(this).is(":checked"),
+                    element = $(this),
+                    checked = element.is(":checked"),
                     value = this.value;
 
                 if (container instanceof kendo.data.ObservableArray) {
@@ -158,7 +159,7 @@
                         container.push(value);
                     }
                 } else {
-                    if (that.element.type.toLowerCase() === "radio") {
+                    if (element.is(":radio")) {
                         checked = that.element.value;
                     }
                     that.observable.set(that.field, checked, this);
