@@ -2417,7 +2417,8 @@
         options: {
             series: [],
             isVertical: true,
-            isStacked: false
+            isStacked: false,
+            axis: "primary"
         },
 
         render: function() {
@@ -2484,8 +2485,8 @@
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
-                valueAxis = isVertical ? plotArea.axisY : plotArea.axisX,
-                axisCrossingValue = valueAxis.options.axisCrossingValue,
+                categoryAxis = plotArea.categoryAxis,
+                valueAxis = chart.valueAxis(),
                 point;
 
             chart.traverseDataPoints(function(value, category, categoryIx) {
@@ -2494,10 +2495,12 @@
                     value = point.plotValue;
                 }
 
-                var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value),
-                    slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx),
+                var categorySlot = categoryAxis.getSlot(categoryIx),
+                    valueSlot = valueAxis.getSlot(value),
+                    slotX = isVertical ? categorySlot : valueSlot,
+                    slotY = isVertical ? valueSlot : categorySlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                    aboveAxis = value >= axisCrossingValue;
+                    aboveAxis = value >= valueAxis.options.axisCrossingValue;
 
                 if (point) {
                     point.options.aboveAxis = aboveAxis;
@@ -2505,13 +2508,17 @@
                 }
 
                 if (!categorySlots[categoryIx]) {
-                    categorySlots[categoryIx] = isVertical ? slotX : slotY;
+                    categorySlots[categoryIx] = categorySlot;
                 }
             });
 
             chart.reflowCategories(categorySlots);
 
             chart.box = targetBox;
+        },
+
+        valueAxis: function() {
+            return this.plotArea.valueAxes[this.options.axis];
         },
 
         reflowCategories: function() { },
@@ -3070,12 +3077,13 @@
     var AreaChart = LineChart.extend({
         splitSegments: function(view) {
             var chart = this,
+                options = chart.options,
                 plotArea = chart.plotArea,
                 isVertical = chart.options.isVertical,
                 originalLines = LineChart.fn.splitSegments.call(chart, view),
                 lines = [],
-                axis = isVertical ? plotArea.axisX : plotArea.axisY,
-                axisLineBox = axis.getAxisLineBox(),
+                valueAxis = chart.valueAxis(),
+                axisLineBox = valueAxis.getAxisLineBox(),
                 end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
                 originalLinePoints,
                 linesCount = originalLines.length,
@@ -4011,8 +4019,6 @@
         },
 
         options: {
-            categoryAxis: {},
-            valueAxis: {},
             series: [],
             plotArea: {
                 margin: {}
@@ -4238,6 +4244,11 @@
             PlotAreaBase.fn.init.call(plotArea, series, options);
         },
 
+        options: {
+            categoryAxis: {},
+            valueAxis: {}
+        },
+
         render: function() {
             var plotArea = this,
                 series = plotArea.series;
@@ -4350,14 +4361,24 @@
                     },
                     options.categoryAxis)
                 ),
-                valueAxis = new NumericAxis(range.min, range.max, deepExtend({
+                valueAxes = {},
+                valueAxesOptions = $.isArray(options.valueAxis) ?
+                    options.valueAxis : [ options.valueAxis ];
+
+            $.each(valueAxesOptions, function() {
+                valueAxes[this.name || "primary"] =
+                    new NumericAxis(range.min, range.max, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
                     },
-                    options.valueAxis)
+                    this)
                 );
+            });
 
-            plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
+            plotArea.axisX = invertAxes ? valueAxes.primary : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : valueAxes.primary;
+
+            plotArea.categoryAxis = categoryAxis;
+            plotArea.valueAxes = valueAxes;
 
             plotArea.append(plotArea.axisY);
             plotArea.append(plotArea.axisX);
