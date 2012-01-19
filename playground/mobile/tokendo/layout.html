@@ -24,7 +24,7 @@
     <script src="../../../src/kendo.mobile.button.js"></script>
     <script src="../../../src/kendo.mobile.switch.js"></script>
     <script src="../../../src/kendo.mobile.scroller.js"></script>
-    <script src="../../../src/kendo.mobile.radiogroup.js"></script>
+    <script src="../../../src/kendo.mobile.buttongroup.js"></script>
     <script src="../../../src/kendo.mobile.navbar.js"></script>
     <script src="../../../src/kendo.mobile.tabstrip.js"></script>
     <script src="../../../src/kendo.mobile.listview.js"></script>
@@ -65,8 +65,8 @@
             background-color: #c0c;
         }
 
-        .km-root .km-radiogroup,
-        .km-root .km-radiogroup:active
+        .km-root .km-buttongroup,
+        .km-root .km-buttongroup:active
         {
             background-color: transparent;
         }
@@ -276,11 +276,11 @@
 
 //        function onClick(e) {
 //            toggle.toggle();
-//            radiogroup.select(Math.round(Math.random()*2));
+//            buttongroup.select(Math.round(Math.random()*2));
 //        }
 
 //        var radio = $("#radio").kendoMobileRadioGroup().data("kendoMobileRadioGroup"),
-//            radiogroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
+//            buttongroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
 //            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
 
         var app = new kendo.mobile.Application($(document.body));
@@ -300,7 +300,7 @@
 
                     $(".km-navbar, .km-ios .km-switch-background, .km-ios .km-listgroup > li, .km-badge, .km-tabstrip").css("background-color", color); // .km-ios .km-listgroup > li,
                     $(".km-insetcontent").css("background-color", color.replace(")", ",.3)").replace("rgb(", "rgba("));
-                    $(".km-radiogroup, .km-content [data-role=button], .km-android .km-switch, .km-touch-scrollbar").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
+                    $(".km-buttongroup, .km-content [data-role=button], .km-android .km-switch, .km-touch-scrollbar").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
                 });
             });
         });

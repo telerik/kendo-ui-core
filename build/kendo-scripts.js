@@ -76,7 +76,7 @@ var suiteScripts = {
         "kendo.mobile.button.js",
         "kendo.mobile.listview.js",
         "kendo.mobile.navbar.js",
-        "kendo.mobile.radiogroup.js",
+        "kendo.mobile.buttongroup.js",
         "kendo.mobile.scroller.js",
         "kendo.mobile.switch.js",
         "kendo.mobile.tabstrip.js"

@@ -133,7 +133,7 @@
 .km-toolbar,
 .km-navbar,
 .km-button,
-.km-radiogroup,
+.km-buttongroup,
 .km-tabstrip
 {
     background-origin: border-box;
@@ -359,7 +359,7 @@
     top: -1em;
 }
 
-.km-root .km-radiogroup
+.km-root .km-buttongroup
 {
     padding: 0;
     .border-radius(0);
@@ -370,30 +370,30 @@
     display: table;
 }
 
-.km-radiogroup > .km-button
+.km-buttongroup > .km-button
 {
     display: table-cell;
 }
 
-.km-radiogroup .km-button
+.km-root .km-buttongroup .km-button
 {
     margin: 0;
     border-width: 1px 0 1px 1px;
     .border-radius(0);
 }
 
-.km-radiogroup .km-button:first-child
+.km-root .km-buttongroup .km-button:first-child
 {
     .border-radius(5pt 0 0 5pt);
 }
 
-.km-radiogroup .km-button:last-child
+.km-root .km-buttongroup .km-button:last-child
 {
     border-right-width: 1px;
     .border-radius(0 5pt 5pt 0);
 }
 
-.km-ios .km-radiogroup .km-button
+.km-ios .km-buttongroup .km-button
 {
     font-size: 1.3em;
     font-weight: bold;
@@ -435,7 +435,7 @@
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     .km-tabstrip { display: table; word-spacing: normal; width: 100%; }
-    .km-radiogroup > .km-button { display: inline-block; }
+    .km-buttongroup > .km-button { display: inline-block; }
 }
 
 .km-toolbar,
@@ -647,6 +647,11 @@
     margin: 0;
     position: absolute;
     .box-sizing(border-box);
+}
+
+.km-buttongroup .km-button .km-icon
+{
+    margin-right: 0;
 }
 
 .km-tabstrip .km-button .km-icon
