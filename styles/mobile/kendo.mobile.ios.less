@@ -238,7 +238,7 @@
 {
     border-right-width: 0;
     color: #929292;
-    text-shadow: 0 1px #fff;
+    text-shadow: 0 1px rgba(255,255,255,.8);
     border-color: rgba(0,0,0,.4);
     background-image: linear-gradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
     .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
@@ -368,16 +368,22 @@
     border-color: #fff;
 }
 
-.km-ios .km-listinset > li:first-child > .km-listview-link,
-.km-ios .km-listgroupinset > li:first-child > .km-listview-link
+.km-ios .km-listinset li:first-child > .km-listview-link,
+.km-ios .km-listgroupinset li:first-child > .km-listview-link
 {
     .border-radius(9px 9px 0 0);
 }
 
-.km-ios .km-listinset > li:last-child > .km-listview-link,
-.km-ios .km-listgroupinset > li:last-child > .km-listview-link
+.km-ios .km-listinset li:last-child > .km-listview-link,
+.km-ios .km-listgroupinset li:last-child > .km-listview-link
 {
     .border-radius(0 0 9px 9px);
+}
+
+.km-ios .km-listinset li:first-child:last-child > .km-listview-link,
+.km-ios .km-listgroupinset li:first-child:last-child > .km-listview-link
+{
+    .border-radius(9px);
 }
 
 .km-ios .km-listgroup > li,
@@ -426,9 +432,15 @@
     background: transparent url("images/ios-sprite.png") 0 -10px no-repeat;
 }
 
-.km-ios .km-button .km-icon
+.km-ios .km-button .km-icon,
+.km-ios .km-button.km-state-active .km-icon
 {
     background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
+}
+
+.km-ios .km-buttongroup .km-icon
+{
+    background: linear-gradient(top, rgba(0,0,0,.5), rgba(0,0,0,.3));
 }
 
 .km-ios .km-tabstrip .km-button .km-icon
