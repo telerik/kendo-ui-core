@@ -8,11 +8,12 @@
     var TICK_INTERVAL = 10;
 
     var Inertia = kendo.Class.extend({
-        init: function(move) {
+        init: function(move, callback) {
             var that = this;
             that.move = move;
             that.timer = 0;
             that.tickProxy = proxy(that.tick, that);
+            that.callback = callback;
         },
 
         animate: function() {
@@ -58,6 +59,7 @@
 
             if (that.timer === that.duration) {
                 that.stop();
+                this.callback();
             }
         }
     });
@@ -123,6 +125,8 @@
     }
 
 
+    var PAGE = "<li/>";
+
     var ScrollView = Widget.extend({
         /**
         * @constructs
@@ -136,9 +140,16 @@
             element = that.element;
 
             that.domElement = element[0];
-            element.wrapInner("<div/>");
-            that.move = new mobile.Move(element.children().first());
-            that.inertia = new Inertia(that.move);
+            element
+                .wrapInner("<div/>")
+                .append('<ol class="km-pages"/>');
+
+            that.inner = element.children().first();
+            that.pager = element.children().last();
+            that.page = 0;
+
+            that.move = new mobile.Move(that.inner);
+            that.inertia = new Inertia(that.move, proxy(that._snapComplete, that));
 
             that.swipe = new mobile.Swipe(element, {
                 start: $.proxy(that._swipeStart, that),
@@ -160,17 +171,26 @@
             duration: 300,
             velocityThreshold: 1,
             bounceVelocityThreshold: 2.5,
-            selector: roleSelector("navbar")
+            selector: roleSelector("scrollview")
         },
 
         calculateDimensions: function() {
             var that = this,
                 width = that.width = that.element.width(),
-                scrollWidth = that.domElement.scrollWidth;
+                scrollWidth = that.domElement.scrollWidth,
+                pages = that.pages = Math.ceil(scrollWidth / width),
+                pageHTML = "";
 
-            that.minSnapX = - Math.floor(scrollWidth / width) * width;
+            that.minSnapX = - (pages - 1) * width;
             that.maxSnapX = 0;
             that.draggable.options.minX = width - scrollWidth;
+
+            for (var idx = 0; idx < pages; idx ++) {
+                pageHTML += PAGE;
+            };
+
+            that.pager.html(pageHTML);
+            that._updatePage();
         },
 
         _swipeStart: function() {
@@ -199,6 +219,20 @@
             }
 
             that.inertia.moveTo({ x: snap, y: 0, duration: options.duration, ease: ease });
+        },
+
+        _snapComplete: function() {
+            var that = this;
+            that.page = -that.move.x / that.width;
+            that._updatePage();
+        },
+
+        _updatePage: function() {
+            var that = this,
+                pager = that.pager;
+
+            pager.children().removeClass("selected");
+            pager.find(":nth-child(" + (that.page + 1) +")").addClass("selected");
         }
     });
 
