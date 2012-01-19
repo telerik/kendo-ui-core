@@ -15,8 +15,6 @@
         <script src="../src/kendo.mobile.scrollview.js"></script>
         <style type="text/css" media="screen">
             #scrollview {
-                height: 237px;
-                padding: 20px;
                 overflow: hidden;
             }
 
@@ -30,11 +28,29 @@
                 white-space: nowrap;
             }
 
+            #scrollview > ol {
+                clear: both;
+                text-align: center;
+                font-size: 2rem;
+            }
+
+            #scrollview > ol li {
+                text-align: center;
+                display: inline;
+            }
+
+            #scrollview > ol li:before {
+                content: " ▫ ";
+            }
+
+            #scrollview > ol li.selected:before {
+                content: " ▪ ";
+            }
         </style>
+
         <script>
-            $(window).bind("load", function(){
+            $(window).load(function() {
                 new kendo.mobile.Application();
-                $("#scrollview").kendoMobileScrollView();
             });
         </script>
     </head>
@@ -46,7 +62,7 @@
                 </div>
             </header>
 
-            <div id="scrollview">
+            <div data-role="scrollview" id="scrollview">
                 <img src="images/1.jpg">
                 <img src="images/2.jpg">
                 <img src="images/3.jpg">
