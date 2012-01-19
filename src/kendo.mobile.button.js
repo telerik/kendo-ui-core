@@ -51,40 +51,40 @@
     * A button icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
     * Kendo mobile comes out of the box with several ready to use icons:
     *
-    * <ul>
-    *   <li>featured</li>
-    *   <li>toprated</li>,
-    *   <li>favorites</li>
-    *   <li>mostviewed</li>
-    *   <li>bookmarks</li>
-    *   <li>contacts</li>
-    *   <li>downloads</li>
-    *   <li>more</li>
-    *   <li>mostrecent</li>
-    *   <li>recents</li>
-    *   <li>history</li>
-    *   <li>add</li>,
-    *   <li>contactadd</li>
-    *   <li>detaildisclosure</li>
-    *   <li>info</li>
-    *   <li>action</li>
-    *   <li>camera</li>
-    *   <li>compose</li>
-    *   <li>search</li>
-    *   <li>trash</li>
-    *   <li>organize</li>
-    *   <li>reply</li>
-    *   <li>stop</li>
-    *   <li>refresh</li>
-    *   <li>play</li>
-    *   <li>fastforward</li>
-    *   <li>pause</li>
-    *   <li>rewind</li>
-    *   <li>settings</li>
-    *   <li>globe</li>
-    *   <li>home</li>
-    *   <li>cart</li>
-    *   <li>about</li>
+    * <ul id="icon-list">
+    *   <li title=".km-about"><span class="km-icon km-about"></span>about</li>
+    *   <li title=".km-action"><span class="km-icon km-action"></span>action</li>
+    *   <li title=".km-add"><span class="km-icon km-add"></span>add</li>
+    *   <li title=".km-bookmarks"><span class="km-icon km-bookmarks"></span>bookmarks</li>
+    *   <li title=".km-camera"><span class="km-icon km-camera"></span>camera</li>
+    *   <li title=".km-cart"><span class="km-icon km-cart"></span>cart</li>
+    *   <li title=".km-compose"><span class="km-icon km-compose"></span>compose</li>
+    *   <li title=".km-contacts"><span class="km-icon km-contacts"></span>contacts</li>
+    *   <li title=".km-details"><span class="km-icon km-details"></span>details</li>
+    *   <li title=".km-downloads"><span class="km-icon km-downloads"></span>downloads</li>
+    *   <li title=".km-fastforward"><span class="km-icon km-fastforward"></span>fastforward</li>
+    *   <li title=".km-favorites"><span class="km-icon km-favorites"></span>favorites</li>
+    *   <li title=".km-featured"><span class="km-icon km-featured"></span>featured</li>
+    *   <li title=".km-featured"><span class="km-icon km-toprated"></span>toprated</li>
+    *   <li title=".km-globe"><span class="km-icon km-globe"></span>globe</li>
+    *   <li title=".km-history"><span class="km-icon km-history"></span>history</li>
+    *   <li title=".km-home"><span class="km-icon km-home"></span>home</li>
+    *   <li title=".km-info"><span class="km-icon km-info"></span>info</li>
+    *   <li title=".km-more"><span class="km-icon km-more"></span>more</li>
+    *   <li title=".km-mostrecent"><span class="km-icon km-mostrecent"></span>mostrecent</li>
+    *   <li title=".km-mostviewed"><span class="km-icon km-mostviewed"></span>mostviewed</li>
+    *   <li title=".km-organize"><span class="km-icon km-organize"></span>organize</li>
+    *   <li title=".km-pause"><span class="km-icon km-pause"></span>pause</li>
+    *   <li title=".km-play"><span class="km-icon km-play"></span>play</li>
+    *   <li title=".km-recents"><span class="km-icon km-recents"></span>recents</li>
+    *   <li title=".km-refresh"><span class="km-icon km-refresh"></span>refresh</li>
+    *   <li title=".km-reply"><span class="km-icon km-reply"></span>reply</li>
+    *   <li title=".km-rewind"><span class="km-icon km-rewind"></span>rewind</li>
+    *   <li title=".km-search"><span class="km-icon km-search"></span>search</li>
+    *   <li title=".km-settings"><span class="km-icon km-settings"></span>settings</li>
+    *   <li title=".km-share"><span class="km-icon km-share"></span>share</li>
+    *   <li title=".km-stop"><span class="km-icon km-stop"></span>stop</li>
+    *   <li title=".km-trash"><span class="km-icon km-trash"></span>trash</li>
     * </ul>
     *
     * Additional icons may be added by defining the respective CSS class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.

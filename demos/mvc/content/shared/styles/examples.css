@@ -1806,3 +1806,30 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 {
     visibility: hidden;
 }
+
+#icon-list
+{
+    margin: 0;
+    padding: 0;
+}
+
+#icon-list li
+{
+    position: relative;
+    padding: 4px 0;
+    width: 70px;
+    height: 50px;
+    margin: 0 0 .6em;
+    text-align: center;
+    display: inline-block;
+    list-style: none;
+}
+
+#icon-list span
+{
+    display: block;
+    margin: 0 auto;
+    background-color: #444;
+    width: 32px;
+    height: 32px;
+}
