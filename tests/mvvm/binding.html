@@ -382,6 +382,32 @@
                 ok(!dom.is(":checked"));
             });
 
+            test("visible binding shows the element", function() {
+                var dom = $('<span data-visible="show" style="display:none"/>');
+
+                var viewModel = kendo.observable({
+                    show: true
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.css("display"), "");
+
+            });
+
+            test("visible binding hides the element", function() {
+                var dom = $('<span data-visible="show"/>');
+
+                var viewModel = kendo.observable({
+                    show: true
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("show", false);
+
+                equal(dom.css("display"), "none");
+            });
+
             test("binding to getter", function() {
                 var dom = $('<div data-template="get-template"/>');
 

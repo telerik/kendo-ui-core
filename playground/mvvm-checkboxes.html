@@ -21,11 +21,13 @@
     </head>
     <body>
         <form>
-        <p>Send me spam: <input type="checkbox" data-checked="wantsSpam" /></p>
+            <p>Send me spam: <input type="checkbox" data-checked="wantsSpam" /></p>
+            <div data-visible="wantsSpam">
             Preferred flavors of spam:
             <div><input type="checkbox" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
             <div><input type="checkbox" value="cherry" data-checked="spamFlavors" /> Cherry</div>
             <div><input type="checkbox" value="almond" data-checked="spamFlavors" /> Almond</div>
+        </div>
             <fieldset>
                     <legend> Selection</legend>
                 <div>

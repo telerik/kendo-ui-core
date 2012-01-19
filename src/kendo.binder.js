@@ -140,6 +140,12 @@
         }
     });
 
+    var VisibleBinding = Binding.extend( {
+        bind: function() {
+            $(this.element).toggle(this.value());
+        }
+    });
+
     var CheckedBinding = Binding.extend( {
         init: function() {
             var that = this;
@@ -181,8 +187,6 @@
 
         bind: function() {
             var that = this,
-                idx,
-                length,
                 element = $(that.element),
                 value = that.value();
 
@@ -338,6 +342,7 @@
     var commonBindings = {
         title: AttributeBinding.extend({ attribute: "title" }),
         style: StyleBinding,
+        visible: VisibleBinding,
         click: EventBinding.extend({ event: "click", preventDefault: true })
     }
 
