@@ -226,119 +226,6 @@
         }
     });
 
-    var TICK_INTERVAL = 10;
-
-    var Inertia = kendo.Class.extend({
-        init: function(move) {
-            var that = this;
-            that.move = move;
-            that.timer = 0;
-            that.tickProxy = proxy(that.tick, that);
-        },
-
-        animate: function() {
-            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
-        },
-
-        stop: function() {
-            clearInterval(this.intervalID);
-            this.timer = 0;
-        },
-
-        moveTo: function(options) {
-            var that = this,
-                move = that.move;
-
-            that.initialX = move.x;
-            that.initialY = move.y;
-
-            that.deltaX = options.x - that.initialX;
-            that.deltaY = options.y - that.initialY;
-
-            that.duration = options.duration || 300;
-
-            that.ease = that.easeProxy(options.ease || Ease.easeOutQuad);
-
-            that.animate();
-        },
-
-        easeProxy: function(ease) {
-            var that = this;
-            return function() {
-                that.move.moveTo(
-                    ease(that.timer, that.initialX, that.deltaX, that.duration),
-                    ease(that.timer, that.initialY, that.deltaY, that.duration)
-                );
-            }
-        },
-
-        tick: function() {
-            var that = this;
-            that.timer += TICK_INTERVAL;
-            that.ease();
-
-            if (that.timer === that.duration) {
-                that.stop();
-            }
-        }
-    });
-
-    var Ease = {
-        linearTween: function (t, b, c, d) {
-            return c*t/d + b;
-        },
-
-        easeInQuad: function (t, b, c, d) {
-            return c*(t/=d)*t + b;
-        },
-
-        easeOutQuad: function (t, b, c, d) {
-            return -c *(t/=d)*(t-2) + b;
-        },
-
-        easeInCubic: function (t, b, c, d) {
-            return c*(t/=d)*t*t + b;
-        },
-
-        easeOutCubic: function (t, b, c, d) {
-            return c*((t=t/d-1)*t*t + 1) + b;
-        },
-
-        easeInQuart: function (t, b, c, d) {
-            return c*(t/=d)*t*t*t + b;
-        },
-
-        easeOutQuart: function (t, b, c, d) {
-            return -c * ((t=t/d-1)*t*t*t - 1) + b;
-        },
-
-        easeInQuint: function (t, b, c, d) {
-            return c*(t/=d)*t*t*t*t + b;
-        },
-
-        easeOutQuint: function (t, b, c, d) {
-            return c*((t=t/d-1)*t*t*t*t + 1) + b;
-        },
-
-        easeInExpo: function (t, b, c, d) {
-            return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
-        },
-
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
-        },
-
-        easeInBack: function (t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
-            return c*(t/=d)*t*((s+1)*t - s) + b;
-        },
-
-        easeOutBack: function (t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-        }
-    }
-
     var Draggable = kendo.Class.extend({
         init: function(options) {
             var that = this;
@@ -397,8 +284,6 @@
 
         Swipe: Swipe,
         Move: Move,
-        Draggable: Draggable,
-        Inertia: Inertia,
-        Ease: Ease
+        Draggable: Draggable
     });
 })(jQuery);

@@ -2,54 +2,56 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>Scrollview</title>
-        <script src="../src/ease.js"></script>
+        <link rel="stylesheet/less" href="../styles/mobile/kendo.mobile.ios.less">
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
         <script src="../src/jquery.min.js"></script>
         <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.history.js"></script>
         <script src="../src/kendo.mobile.core.js"></script>
+        <script src="../src/kendo.mobile.scroller.js"></script>
+        <script src="../src/kendo.mobile.navbar.js"></script>
+        <script src="../src/kendo.mobile.view.js"></script>
+        <script src="../src/kendo.mobile.application.js"></script>
         <script src="../src/kendo.mobile.scrollview.js"></script>
-        <link rel="stylesheet" href="../demos/mvc/content/shared/styles/console.css" />
         <style type="text/css" media="screen">
             #scrollview {
-                width: 300px;
-                height: 75px;
-                margin: 20px;
+                height: 237px;
                 padding: 20px;
                 overflow: hidden;
+            }
+
+            #scrollview img {
+                vertical-align: top;
+                margin: 10px;
+                -webkit-transform: translatez(0);
             }
 
             #scrollview > div {
                 white-space: nowrap;
             }
 
-            #scrollview > div > div {
-                width: 800px;
-                background: grey;
-                overflow: hidden;
-            }
-
-            #scrollview > div > div > div {
-                float: left;
-                width: 100px;
-                height: 100px;
-                background: blue;
-                margin: 10px;
-                -webkit-transform: translatez(0);
-            }
         </style>
         <script>
             $(window).bind("load", function(){
+                new kendo.mobile.Application();
                 $("#scrollview").kendoMobileScrollView();
             });
         </script>
     </head>
     <body>
-        <div id="scrollview">
-            <div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+        <div data-role="view">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">ScrollView</span>
+                </div>
+            </header>
+
+            <div id="scrollview">
+                <img src="images/1.jpg">
+                <img src="images/2.jpg">
+                <img src="images/3.jpg">
+                <img src="images/4.jpg">
+                <img src="images/5.jpg">
             </div>
         </div>
     </body>
