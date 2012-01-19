@@ -373,6 +373,21 @@
                 equal(result[0].getFullYear(), 2011);
             });
 
+            test("filter filters on nullable dates", function () {
+                var data = [new Date(2011, 1, 1), null, new Date(2009, 1, 1)];
+
+                var result = new Query(data).filter( {
+                    field: function(item) {
+                        return item;
+                    },
+                    operator: "eq",
+                    value: new Date(2011, 1, 1)
+                }).toArray();
+
+                equal(result.length, 1);
+                equal(result[0].getFullYear(), 2011);
+            });
+
             test("filter filters without passing operator defaults to eq", function() {
                 var data = [ {field: 100} , {field: 10} , {field: 1} ];
 

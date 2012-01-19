@@ -465,7 +465,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "eq", value: date} ]
-                }), "(d.getTime() == " + date.getTime() + ")");
+                }), "((d?d.getTime():d) == " + date.getTime() + ")");
             });
 
             test("date neq", function() {
@@ -473,7 +473,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "neq", value: date} ]
-                }), "(d.getTime() != " + date.getTime() + ")");
+                }), "((d?d.getTime():d) != " + date.getTime() + ")");
             });
 
             test("date gt", function() {
@@ -481,7 +481,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "gt", value: date} ]
-                }), "(d.getTime() > " + date.getTime() + ")");
+                }), "((d?d.getTime():d) > " + date.getTime() + ")");
             });
 
             test("date gte", function() {
@@ -489,7 +489,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "gte", value: date} ]
-                }), "(d.getTime() >= " + date.getTime() + ")");
+                }), "((d?d.getTime():d) >= " + date.getTime() + ")");
             });
 
             test("date lt", function() {
@@ -497,7 +497,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "lt", value: date} ]
-                }), "(d.getTime() < " + date.getTime() + ")");
+                }), "((d?d.getTime():d) < " + date.getTime() + ")");
             });
 
             test("date lte", function() {
@@ -505,7 +505,7 @@
                 equal(compile({
                     logic: "and",
                     filters: [ { operator: "lte", value: date} ]
-                }), "(d.getTime() <= " + date.getTime() + ")");
+                }), "((d?d.getTime():d) <= " + date.getTime() + ")");
             });
 
             test("string neq", function() {
