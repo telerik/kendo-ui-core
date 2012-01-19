@@ -19,6 +19,7 @@
             ruleName,
             DATATYPE = kendo.attr("type"),
             VALUE = kendo.attr("value"),
+            CHECKED = kendo.attr("checked"),
             rule,
             attr = {
                 name: options.field
@@ -40,7 +41,11 @@
             attr[DATATYPE] = type;
         }
 
-        attr[VALUE] = options.field;
+        if (type === "boolean") {
+            attr[CHECKED] = options.field;
+        } else {
+            attr[VALUE] = options.field;
+        }
 
         return attr;
     }
