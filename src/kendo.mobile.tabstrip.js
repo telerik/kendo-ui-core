@@ -191,7 +191,6 @@
 
         options: {
             name: "Tabstrip",
-            selector: kendo.roleSelector("tabstrip"),
             selectedIndex: 0,
             enable: true
         }

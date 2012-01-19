@@ -138,7 +138,6 @@
 
         options: {
             name: "ButtonGroup",
-            selector: kendo.roleSelector("buttongroup"),
             index: -1
         },
 

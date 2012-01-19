@@ -135,7 +135,6 @@
 
         options: {
             name: "Switch",
-            selector: kendo.roleSelector("switch"),
             onLabel: "ON",
             offLabel: "OFF"
         },

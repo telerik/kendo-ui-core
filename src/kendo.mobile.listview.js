@@ -212,7 +212,6 @@
 
         options: {
             name: "ListView",
-            selector: kendo.roleSelector("listview"),
             type: "flat",
             template: "${data}",
             headerTemplate: "${value}",

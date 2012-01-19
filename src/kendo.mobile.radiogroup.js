@@ -40,7 +40,6 @@
 
         options: {
             name: "RadioGroup",
-            selector: roleSelector("radiogroup"),
             enable: true
         },
 

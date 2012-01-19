@@ -87,8 +87,7 @@
         },
 
         options: {
-            name: "NavBar",
-            selector: roleSelector("navbar")
+            name: "NavBar"
         },
 
         /**
