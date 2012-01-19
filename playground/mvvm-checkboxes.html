@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+
+        <style>
+            table, td, th {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+        <p>Send me spam: <input type="checkbox" data-checked="wantsSpam" /></p>
+            Preferred flavors of spam:
+            <div><input type="checkbox" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
+            <div><input type="checkbox" value="cherry" data-checked="spamFlavors" /> Cherry</div>
+            <div><input type="checkbox" value="almond" data-checked="spamFlavors" /> Almond</div>
+            <fieldset>
+                    <legend> Selection</legend>
+                <div>
+                    wantsSpam: <span data-text="wantsSpam"></span>
+                </div>
+                <div>
+                    spamTypes: <span data-text="selectedFlavors"></span>
+                </div>
+            </fieldset>
+        </form>
+        <script>
+            var viewModel = kendo.observable({
+                spamFlavors: ["cherry","almond"],
+                wantsSpam: true,
+                selectedFlavors: function() {
+                    var result = "";
+                    for (var idx = 0, length = this.spamFlavors.length; idx < length; idx++){
+                        result += this.spamFlavors[idx] + ",";
+                    }
+                    return result;
+                }
+            });
+
+            kendo.bind($("form"), viewModel);
+        </script>
+    </body>
+</html>
+

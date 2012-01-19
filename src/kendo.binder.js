@@ -140,30 +140,69 @@
         }
     });
 
-    var ValueBinding = Binding.extend( {
+    var CheckedBinding = Binding.extend( {
         init: function() {
-            var that = this,
-                element;
+            var that = this;
 
             Binding.fn.init.apply(this, arguments);
 
             $(that.element).change(function() {
-                element = $(this);
-                var value = element.is(":checkbox") ? element.is(":checked") : this.value;
-                that.observable.set(that.field, value, this);
+                var container = that.observable.get(that.field),
+                    checked = $(this).is(":checked"),
+                    value = this.value;
+
+                if (container instanceof kendo.data.ObservableArray) {
+                    if (!checked) {
+                        container.splice(that._find(container, value), 1);
+                    } else {
+                        container.push(value);
+                    }
+                } else {
+                    that.observable.set(that.field, checked, this);
+                }
             });
+        },
+
+        _find: function(array, value) {
+            var idx,
+                length;
+
+            for (idx = 0, length = array.length; idx < length; idx++) {
+                if (array[idx] === value) {
+                    return idx;
+                }
+            }
+            return -1;
         },
 
         bind: function() {
             var that = this,
+                idx,
+                length,
                 element = $(that.element),
                 value = that.value();
 
-            if (element.is(":checkbox")) {
-               element.attr("checked", value === true);
-            } else {
-                element.val(value);
+            if (value instanceof kendo.data.ObservableArray && that._find(value, element.val()) > -1) {
+                value = true;
             }
+
+            element.attr("checked", value === true);
+        }
+    });
+
+    var ValueBinding = Binding.extend( {
+        init: function() {
+            var that = this;
+
+            Binding.fn.init.apply(this, arguments);
+
+            $(that.element).change(function() {
+                that.observable.set(that.field, this.value, this);
+            });
+        },
+
+        bind: function() {
+           $(this.element).val(this.value());
         }
     });
 
@@ -302,7 +341,8 @@
 
     var inputBindings = $.extend({}, commonBindings, {
         value: ValueBinding,
-        change: EventBinding.extend({ event: "change" })
+        change: EventBinding.extend({ event: "change" }),
+        checked: CheckedBinding
     });
 
     var listBindings = $.extend({}, commonBindings, {
