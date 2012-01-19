@@ -164,6 +164,8 @@
         stringify = kendo.stringify,
         math = Math,
         push = [].push,
+        join = [].join,
+        pop = [].pop,
         splice = [].splice,
         slice = [].slice,
         unshift = [].unshift,
@@ -236,6 +238,9 @@
 
         slice: slice,
 
+        join: join,
+
+        pop: pop,
 
         splice: function(index, howMany, item) {
             var result = splice.apply(this, arguments);

@@ -43,8 +43,8 @@
             <div><input type="radio" name="flavors" value="cherry" data-checked="spamFlavors" /> Cherry</div>
             <div><input type="radio" name="flavors" value="almond" data-checked="spamFlavors" /> Almond</div>
             <fieldset>
-                    <legend> Selection</legend>
-                    <div>
+                <legend> Selection</legend>
+                <div>
                     spamTypes: <span data-text="spamFlavors"></span>
                 </div>
             </fieldset>
@@ -54,11 +54,7 @@
                 spamFlavors: ["cherry","almond"],
                 wantsSpam: true,
                 selectedFlavors: function() {
-                    var result = "";
-                    for (var idx = 0, length = this.spamFlavors.length; idx < length; idx++){
-                        result += this.spamFlavors[idx] + ",";
-                    }
-                    return result;
+                    return this.spamFlavors.join(",");
                 }
             });
 
