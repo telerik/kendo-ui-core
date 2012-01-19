@@ -52,7 +52,7 @@
      *  them to input a valid range.
      * </p>
      *
-     * <h3>Customizing Slider Behavior</h3>
+     * <h3>Customizing Slider Behaviors</h3>
      * <p>
      *  Many facets of the <strong>Slider</strong> and <strong>RangeSlider</strong> behavior can be configured through
      *  properties, including:

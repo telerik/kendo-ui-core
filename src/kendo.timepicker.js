@@ -25,7 +25,7 @@
      *      When a TimePicker is initialized, it will automatically be displayed near the
      *      location of the used HTML element.
      *  </p>
-     *  <h3>Configuring TimePicker behaviors</h3>
+     *  <h3>Configuring TimePicker Behaviors</h3>
      *  <p>
      *      TimePicker provides configuration options that can be easily set during initialization.
      *      Among the properties that can be controlled:

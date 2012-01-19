@@ -29,7 +29,7 @@
      *  When the <strong>Splitter</strong> is initialized, a vertical split bar will be placed between the two div
      *  elements. This bar can be moved by a user left and right to adjust the size on the panes.
      * </p>
-     * <h3>Configuring Splitter Behavior</h3>
+     * <h3>Configuring Splitter Behaviors</h3>
      * <p>
      *  The <strong>Splitter</strong> provides many configuration options that can be easily set during initialization.
      *  Among the properties that can be controlled:

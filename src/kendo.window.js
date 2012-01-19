@@ -3,116 +3,123 @@
      * @name kendo.ui.Window.Description
      *
      * @section
-     *  <p>
-     *      The Window widget displays content in a modal or non-modal HTML window. By default, Windows can be moved,
-     *      resized, and closed by users. Window content can also be defined with either static HTML or loaded dynamically with Ajax.
-     *  </p>
-     *  <p>
-     *      A Window can be initialized from virtually any HTML element. During initialization, the targeted content will
-     *      automatically be wrapped in the Window’s HTML div element.
-     *  </p>
-     *  <h3>Getting Started</h3>
+     * <p>
+     *  A <strong>Window</strong> displays content in a modal or non-modal HTML window. By default, a
+     *  <strong>Window</strong> can be moved, resized, and closed. Its content can also be defined with either as
+     *  static HTML or loaded dynamically via AJAX.
+     * </p>
+     * <p>
+     *  A <strong>Window</strong> can be initialized from virtually any DOM element. During initialization, the
+     *  targeted content will automatically be wrapped in the div element of the <strong>Window</strong>.
+     * </p>
+     * <h3>Getting Started</h3>
+     *
      * @exampleTitle Create a simple HTML element with the Window content
      * @example
-     *  <p id="window">
-     *      Kendo window content
-     *  </p>
-     * @exampleTitle Initialize Window using a jQuery selector
+     * <p id="window">
+     *     Content of the Window
+     * </p>
+     *
+     * @exampleTitle Initialize the Window using a selector
      * @example
-     * $("#window").kendoWindow();
+     * $(document).ready(function() {
+     *     $("#window").kendoWindow();
+     * });
+     *
      * @section
-     *  <p>
-     *      When a Window is initialized, it will automatically be displayed open near the
-     *      location of the HTML element that was used to initialize the content.
-     *  </p>
-     *  <h3>Configuring Window behaviors</h3>
-     *  <p>
-     *      Window provides many configuration options that can be easily set during initialization.
-     *      Among the properties that can be controlled:
-     *  </p>
-     *  <ul>
-     *      <li>Minimum height/width</li>
-     *      <li>Available user Window actions (close/refresh/maximize/minimize)</li>
-     *      <li>Window title</li>
-     *      <li>Draggable and Resizable behaviors</li>
-     *  </ul>
-     * @exampleTitle Create modal Window with all user actions enabled
+     * <p>
+     *  When a <strong>Window</strong> is initialized, it will automatically be displayed open near the location of the
+     *  DOM element that was used to initialize the content.
+     * </p>
+     * <h3>Configuring Window Behaviors</h3>
+     * <p>
+     *  A <strong>Window</strong> provides many configuration options that can be easily set during initialization.
+     *  Among the properties that can be controlled:
+     * </p>
+     * <ul>
+     *  <li>Minimum height/width</li>
+     *  <li>Available user actions (close/refresh/maximize/minimize)</li>
+     *  <li>Title</li>
+     *  <li>Draggable and resizable behaviors</li>
+     * </ul>
+     *
+     * @exampleTitle Create a modal Window with all user actions enabled
      * @example
-     *  $("#window").kendoWindow({
-     *      draggable: false,
-     *      resizable: false,
-     *      width: "500px",
-     *      height: "300px",
-     *      title: "Modal Window",
-     *      modal: true,
-     *      actions: ["Refresh", "Maximize", "Minimize", "Close"]
-     *  });
+     * $("#window").kendoWindow({
+     *     actions: ["Refresh", "Maximize", "Minimize", "Close"],
+     *     draggable: false,
+     *     height: "300px",
+     *     modal: true,
+     *     resizable: false,
+     *     title: "Modal Window",
+     *     width: "500px"
+     * });
+     *
      * @section
-     *  <p>
-     *      The order of the values in the actions array determines the order in which the action buttons
-     *      will be rendered in the Window title bar. The maximize action serves both as a button for expanding
-     *      the Window to fill the screen and as a button to restore the Window to the previous size. The minimize
-     *      action collapses the window to its title.
-     *  </p>
-     *  <h3>Positioning and Opening the Window</h3>
-     *  <p>
-     *      In some scenarios, it is preferable to center a Window rather than open it near the HTML element
-     *      used to define the content. It’s also common to open a Window as the result of an action rather
-     *      than on initial page load. The Window API provides methods for handling this and many more advanced
-     *      Window scenarios. Please see the Window demo Methods tab for more details.
-     *  </p>
+     * <p>
+     *  The order of the values in the actions array determines the order in which the action buttons will be rendered
+     *  in the title of a <strong>Window</strong>. The maximize action serves both as a button for expanding a
+     *  <strong>Window</strong> to fill the screen and as a button to restore a <strong>Window</strong> to its previous
+     *  size. The minimize action collapses a <strong>Window</strong> to its title.
+     * </p>
+     * <h3>Positioning and Opening a Window</h3>
+     * <p>
+     *  In some scenarios, it is preferable to center a <strong>Window</strong> rather than open it near the HTML
+     *  element used to define the content. It is also common to open a <strong>Window</strong> as the result of the
+     *  action of a user rather than on the load event of a page. The <strong>Window</strong> API provides methods for
+     *  handling these scenarios.
+     * </p>
+     *
      * @exampleTitle Centering a Window and opening on button click
      * @example
-     *  <!-- Create Window HTML and a button to open Window -->
-     *  <p id="window">
-     *      Centered Kendo UI Window content
-     *  </p>
-     *  <button id="btnOpen">Open Window</button>
-     * @exampleTitle
-     * @example
-     *  // Initialize Window, center, and configure button click action
-     *  $(document).ready(function(){
-     *      var window = $("#window").kendoWindow({
-     *              title: "Centered Window",
-     *              width: "200px",
-     *              height: "200px",
-     *              visible: false
-     *          }).data("kendoWindow");
-     *  });
+     * <p id="window">
+     *     Content of the Window
+     * </p>
+     * <button id="openButton">Open Window</button>
      *
-     *  $("#btnOpen").click(function(){
-     *      var window = $("#window").data("kendoWindow");
-     *      window.center();
-     *      window.open();
-     *  });
+     * @exampleTitle Initialize Window, center, and configure button click action
+     * @example
+     * $(document).ready(function(){
+     *     var window = $("#window").kendoWindow({
+     *         height: "200px",
+     *         title: "Centered Window",
+     *         visible: false,
+     *         width: "200px"
+     *     }).data("kendoWindow");
+     * });
+     *
+     * $("#openButton").click(function(){
+     *     var window = $("#window").data("kendoWindow");
+     *     window.center();
+     *     window.open();
+     * });
+     *
      * @section
-     *  <h3>Loading Window content with Ajax</h3>
-     *  <p>
-     *      While any valid technique for loading Ajax content can be used, Window provides
-     *      built-in support for asynchronously loading content from a URL. This URL should
-     *      return a HTML fragment that can be loaded in a Window content area.
-     *  </p>
+     * <h3>Loading Window content with Ajax</h3>
+     * <p>
+     *  A <strong>Window</strong> provides built-in support for asynchronously loading content from a URL. This URL
+     *  should return a HTML fragment that can be loaded in a Window content area.
+     * </p>
+     *
      * @exampleTitle Load Window content asynchronously
      * @example
-     *  <!-- Define a basic HTML element for the Window -->
-     *  <div id="window"></div>
-     * @exampleTitle
+     * <div id="window"></div>
+     *
+     * @exampleTitle Initialize window and configure content loading
      * @example
-     *  // Initialize window and configure content loading
-     *  $(document).ready(function(){
-     *      $("#window").kendoWindow({
-     *        title: "Async Window Content",
-     *        content: "html-content-snippet.html"
-     *      });
-     *  });
+     * $(document).ready(function(){
+     *     $("#window").kendoWindow({
+     *         content: "html-content-snippet.html",
+     *         title: "Async Window Content"
+     *     });
+     * });
      *
      * @section
      * <h3>Accessing an Existing Window</h3>
      * <p>
      *  You can reference an existing <b>Window</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-     *  Once a reference has been established, you can use the API to control
-     *  its behavior. 
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+     *  use the API to control its behavior. 
      * </p>
      *
      * @exampleTitle Accessing an existing Window instance
