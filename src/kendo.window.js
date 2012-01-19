@@ -95,7 +95,7 @@
      * });
      *
      * @section
-     * <h3>Loading Window content with Ajax</h3>
+     * <h3>Loading Window content via AJAX</h3>
      * <p>
      *  A <strong>Window</strong> provides built-in support for asynchronously loading content from a URL. This URL
      *  should return a HTML fragment that can be loaded in a Window content area.

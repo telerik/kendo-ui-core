@@ -47,10 +47,10 @@
      * @exampleTitle Create a list of items in HTML with nested content
      * @example
      * <ul id="panelBar">
-     *  <li>Item with no content</li>
-     *  <li>Item with content
-     *   <div>This is nested content of a PanelBar item.</div>
-     *  </li>
+     *     <li>Item with no content</li>
+     *     <li>Item with content
+     *         <div>This is nested content of a PanelBar item.</div>
+     *     </li>
      * </ul>
      *
      * @section

@@ -3,28 +3,32 @@
      * @name kendo.ui.TabStrip.Description
      *
      * @section
-     *  <p>
-     *      The TabStrip widget displays a collection of tabs with associated tab content.
-     *      TabStrips are composed of an HTML unordered list of items, which represent the tabs,
-     *      and a collection of HTML divs, which define the tab content.
-     *  </p>
-     *  <h3>Getting Started</h3>
+     * <p>
+     *  A <strong>TabStrip</strong> displays a collection of tabs with associated content. It is composed of an
+     *  unordered list of items - representing tabs - and a collection of div elements, which contain the content for
+     *  each tab.
+     * </p>
+     * <h3>Getting Started</h3>
+     * <p>
+     *  Creating a <strong>TabStrip</strong> 
+     * </p>
      *
-     * @exampleTitle In a HTML div, create an HTML unordered list for tabs, HTML divs for content, If you don't
-     * have content, you can init the TabStrip from an UL element.
+     * @exampleTitle Create an unordered list for tabs with associated div elements for content
      * @example
-     *  <div id="tabstrip">
-     *      <ul>
-     *          <li>First Tab</li>
-     *          <li>Second Tab</li>
-     *      </ul>
-     *      <div>First Tab Content</div>
-     *      <div>Second Tab Content</div>
-     *  </div>
+     * <div id="tabStrip">
+     *     <ul>
+     *         <li>First tab</li>
+     *         <li>Second tab</li>
+     *     </ul>
+     *     <div>First tab content</div>
+     *     <div>Second tab content</div>
+     * </div>
      *
-     * @exampleTitle Initialize the TabStrip using a jQuery selector to target the outer DIV or UL
+     * @exampleTitle Initialize a TabStrip using a selector
      * @example
-     * var tabStrip = $("#tabstrip").kendoTabStrip();
+     * $(document).ready(function() {
+     *     $("#tabStrip").kendoTabStrip();
+     * });
      *
      * @exampleTitle Initialize the TabStrip using JSON data object
      * @example
