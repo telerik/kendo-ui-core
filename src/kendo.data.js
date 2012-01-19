@@ -616,7 +616,7 @@
 
                 if (b.getTime) {
                     //b looks like a Date
-                    a += ".getTime()";
+                    a = "(" + a + "?" + a + ".getTime():" + a + ")";
                     b = b.getTime();
                 }
             }
