@@ -47,6 +47,10 @@
                         kendoConsole.log("event :: resize");
                     }
 
+                    function onDragStart(e) {
+                        kendoConsole.log("event :: dragstart");
+                    }
+
                     function onDragEnd(e) {
                         kendoConsole.log("event :: dragend");
                     }
@@ -61,9 +65,12 @@
                             activate: onActivate,
                             close: onClose,
                             deactivate: onDeactivate,
+
+                            refresh: onRefresh,
+
                             resize: onResize,
-                            dragend: onDragEnd,
-                            refresh: onRefresh
+                            dragstart: onDragStart,
+                            dragend: onDragEnd
                         });
                     }
                 });
