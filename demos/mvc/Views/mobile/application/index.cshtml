@@ -1,3 +1,26 @@
-<div data-role="view">
-    <a href="../../content/mobile/application/remote-view.html" data-role="button">Go to remote view</a>
+<div data-role="view" data-title="My Music">
+    <div class="banner">&nbsp;</div>
+    <h2>Welcome to "My Music" App</h2>
+    <p>A native-looking web based mobile application.</p>
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>I want to:
+            <ul>
+                <li data-icon="play"><a href="../../content/mobile/application/play-music.html">Play Music</a></li>
+                <li data-icon="cart"><a href="../../content/mobile/application/music-store.html">Buy Music</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
+<style scoped>
+h2 {
+    margin-top: 1rem;
+}
+.banner {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 100%;
+	height: 120px;
+	background: url(../../content/mobile/application/i/mymusic.png) no-repeat center center;
+    background-size: 100% auto;
+}
+</style>
