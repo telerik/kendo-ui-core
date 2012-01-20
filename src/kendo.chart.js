@@ -4357,16 +4357,21 @@
                     options.categoryAxis)
                 ),
                 valueAxes = {},
+                axisName,
                 valueAxesOptions = $.isArray(options.valueAxis) ?
                     options.valueAxis : [ options.valueAxis ];
 
             $.each(valueAxesOptions, function() {
-                valueAxes[this.name || "primary"] =
+                axisName = this.name || "primary";
+
+                valueAxes[axisName] =
                     new NumericAxis(range.min, range.max, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
                     },
                     this)
                 );
+
+                //plotArea.append(valueAxes[axisName]);
             });
 
             plotArea.axisX = invertAxes ? valueAxes.primary : categoryAxis;
@@ -4375,8 +4380,8 @@
             plotArea.categoryAxis = categoryAxis;
             plotArea.valueAxes = valueAxes;
 
-            plotArea.append(plotArea.axisY);
-            plotArea.append(plotArea.axisX);
+            plotArea.append(plotArea.categoryAxis);
+            plotArea.append(valueAxes.primary);
         }
     });
 
@@ -5368,16 +5373,22 @@
     }
 
     function applyAxisDefaults(options, themeOptions) {
-        var themeAxisDefaults = themeOptions ? deepExtend({}, themeOptions.axisDefaults) : {};
+        var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
 
         $.each(["category", "value", "x", "y"], function() {
-            var axisName = this + "Axis";
-            options[axisName] = deepExtend({},
-                themeAxisDefaults,
-                themeAxisDefaults[axisName],
-                options.axisDefaults,
-                options[axisName]
-            );
+            var axisName = this + "Axis",
+                axes = [].concat(options[axisName]);
+
+            axes = $.map(axes, function(axisOptions) {
+                return deepExtend({},
+                    themeAxisDefaults,
+                    themeAxisDefaults[axisName],
+                    options.axisDefaults,
+                    axisOptions
+                );
+            });
+
+            options[axisName] = axes.length > 1 ? axes : axes[0];
         });
     }
 

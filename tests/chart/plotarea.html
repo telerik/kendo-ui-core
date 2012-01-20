@@ -28,8 +28,8 @@
 
             (function() {
                 var plotArea,
-                    axisY,
-                    axisX,
+                    categoryAxis,
+                    valueAxes,
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
@@ -87,35 +87,41 @@
                         data: [10, 20, 30]
                     }]];
 
-                function createPlotArea(series, chartOptions) {
-                    plotArea = new Chart.CategoricalPlotArea(series, {
+                function createPlotArea(series, options) {
+                    plotArea = new Chart.CategoricalPlotArea(series,
+                        $.extend({
                         categoryAxis: {
                             categories: ["A", "B", "C"]
                         }
-                    });
+                    }, options));
 
-                    axisY = plotArea.axisY;
-                    axisX = plotArea.axisX;
+                    categoryAxis = plotArea.categoryAxis;
+                    valueAxes = plotArea.valueAxes;
+
                     chartSeries = plotArea.charts[0];
                 }
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea", {
+                module("Categorical PlotArea / Axes", {
                     setup: function() {
                         moduleSetup();
+
                         createPlotArea(columnSeriesData);
                     }
                 });
 
-                test("appends Y-Axis to children collection", function() {
-                    ok($.inArray(axisY, plotArea.children) >= 0);
+                test("appends primary value axis to children collection", function() {
+                    ok($.inArray(valueAxes.primary, plotArea.children) >= 0);
                 });
 
-                test("appends X-Axis to children collection", function() {
-                    ok($.inArray(axisX, plotArea.children) >= 0);
+                test("appends category axis to children collection", function() {
+                    ok($.inArray(categoryAxis, plotArea.children) >= 0);
                 });
 
-                test("aligns axises at default crossing values", function() {
+                test("aligns axes at default crossing values", function() {
+                    var axisX = categoryAxis,
+                        axisY = valueAxes.primary;
+
                     plotArea.reflow(chartBox);
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
@@ -124,6 +130,9 @@
                 });
 
                 test("aligns axises at non-default crossing values", function() {
+                    var axisX = categoryAxis,
+                        axisY = valueAxes.primary;
+
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
                     plotArea.reflow(chartBox);
@@ -152,7 +161,7 @@
                         }
                     });
 
-                    equals(plotArea.axisX.options.categories.length, 3);
+                    equals(plotArea.categoryAxis.options.categories.length, 3);
                 });
 
                 test("accepts extra categories", function() {
@@ -165,28 +174,24 @@
                         }
                     });
 
-                    equals(plotArea.axisX.options.categories.length, 2);
+                    equals(plotArea.categoryAxis.options.categories.length, 2);
                 });
 
-                test("applies margin", function() {
-                    var plotArea = new Chart.CategoricalPlotArea([{
-                            data: [100]
-                        }], {
-                        categoryAxis: {
-                            categories: ["A", "B"],
-                            labels: { font: SANS12 }
-                        },
-                        valueAxis: {
-                            labels: { font: SANS12 }
-                        },
-                        plotArea: {
-                            margin: MARGIN
-                        }
-                    });
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Axes / Additional", {
+                    setup: function() {
+                        moduleSetup();
 
-                    plotArea.reflow(chartBox);
+                        createPlotArea(columnSeriesData, {
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
 
-                    sameBox(plotArea.box, new Box2D(136, 117, 990, 966), TOLERANCE);
+                test("additional value axis is added to children collection", function() {
+                    ok($.inArray(valueAxes.secondary, plotArea.children) >= 0);
                 });
 
                 // ------------------------------------------------------------
@@ -198,34 +203,26 @@
                     }
                 });
 
-                test("creates numeric Y-Axis", function() {
-                    ok(axisY instanceof Chart.NumericAxis);
+                test("value axis orientation is vertical", function() {
+                    equal(valueAxes.primary.options.orientation, "vertical");
                 });
 
-                test("creates category X-Axis", function() {
-                    ok(axisX instanceof Chart.CategoryAxis);
-                });
-
-                test("Y-Axis orientation is vertical", function() {
-                    equal(axisY.options.orientation, "vertical");
-                });
-
-                test("X-Axis orientation is horizontal", function() {
-                    equal(axisX.options.orientation, "horizontal");
+                test("category axis orientation is horizontal", function() {
+                    equal(categoryAxis.options.orientation, "horizontal");
                 });
 
                 test("value axis crosses at first category", function() {
-                    equal(axisY.options.axisCrossingValue, 0);
+                    equal(valueAxes.primary.options.axisCrossingValue, 0);
                 });
 
-                test("value axis crossing can be changed", function() {
+                test("category axis crossing value can be changed", function() {
                     plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
                         }
                     });
-                    equal(plotArea.axisX.options.axisCrossingValue, 2);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 2);
                 });
 
                 test("creates bar chart", function() {
@@ -275,12 +272,12 @@
                     }
                 });
 
-                test("creates numeric Y-Axis", function() {
-                    ok(axisY instanceof Chart.NumericAxis);
+                test("value axis orientation is vertical", function() {
+                    equal(valueAxes.primary.options.orientation, "vertical");
                 });
 
-                test("creates category X-Axis", function() {
-                    ok(axisX instanceof Chart.CategoryAxis);
+                test("category axis orientation is horizontal", function() {
+                    equal(categoryAxis.options.orientation, "horizontal");
                 });
 
                 test("creates line chart", function() {
@@ -288,7 +285,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Verical line series", {
+                module("Categorical PlotArea / Vertical line series", {
                     setup: function() {
                         moduleSetup();
 
@@ -296,12 +293,12 @@
                     }
                 });
 
-                test("creates numeric X-Axis", function() {
-                    ok(axisX instanceof Chart.NumericAxis);
+                test("value axis orientation is horizontal", function() {
+                    equal(valueAxes.primary.options.orientation, "horizontal");
                 });
 
-                test("creates category Y-Axis", function() {
-                    ok(axisY instanceof Chart.CategoryAxis);
+                test("category axis orientation is vertical", function() {
+                    equal(categoryAxis.options.orientation, "vertical");
                 });
 
                 test("creates line chart", function() {
@@ -317,12 +314,12 @@
                     }
                 });
 
-                test("creates numeric Y-Axis", function() {
-                    ok(axisY instanceof Chart.NumericAxis);
+                test("value axis orientation is vertical", function() {
+                    equal(valueAxes.primary.options.orientation, "vertical");
                 });
 
-                test("creates category X-Axis", function() {
-                    ok(axisX instanceof Chart.CategoryAxis);
+                test("category axis orientation is horizontal", function() {
+                    equal(categoryAxis.options.orientation, "horizontal");
                 });
 
                 test("creates area chart", function() {
@@ -338,30 +335,16 @@
                     }
                 });
 
-                test("creates numeric X-Axis", function() {
-                    ok(axisX instanceof Chart.NumericAxis);
+                test("value axis orientation is horizontal", function() {
+                    equal(valueAxes.primary.options.orientation, "horizontal");
                 });
 
-                test("creates category Y-Axis", function() {
-                    ok(axisY instanceof Chart.CategoryAxis);
+                test("category axis orientation is vertical", function() {
+                    equal(categoryAxis.options.orientation, "vertical");
                 });
 
                 test("creates area chart", function() {
                     ok(chartSeries instanceof Chart.AreaChart);
-                });
-
-                // ------------------------------------------------------------
-                module("Categorical PlotArea / Column series / Additional value axes", {
-                    setup: function() {
-                        moduleSetup();
-
-                        plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
-                            categoryAxis: {
-                                categories: ["A"]
-                            },
-                            valueAxis: [{ }, { }]
-                        });
-                    }
                 });
 
                 // ------------------------------------------------------------
@@ -373,24 +356,16 @@
                     }
                 });
 
-                test("creates category Y-Axis", function() {
-                    ok(axisY instanceof Chart.CategoryAxis);
+                test("value axis orientation is horizontal", function() {
+                    equal(valueAxes.primary.options.orientation, "horizontal");
                 });
 
-                test("creates numeric X-Axis", function() {
-                    ok(axisX instanceof Chart.NumericAxis);
-                });
-
-                test("Y-Axis orientation is vertical", function() {
-                    equal(axisY.options.orientation, "vertical");
-                });
-
-                test("X-Axis orientation is horizontal", function() {
-                    equal(axisX.options.orientation, "horizontal");
+                test("category axis orientation is vertical", function() {
+                    equal(categoryAxis.options.orientation, "vertical");
                 });
 
                 test("value axis crosses at last category", function() {
-                    equal(axisY.options.axisCrossingValue, 3);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 3);
                 });
 
                 test("value axis crossing can be changed", function() {
@@ -400,7 +375,7 @@
                             axisCrossingValue: 2
                         }
                     });
-                    equal(plotArea.axisY.options.axisCrossingValue, 2);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 2);
                 });
 
                 test("stacks series", function() {
@@ -425,8 +400,6 @@
 
             (function() {
                 var plotArea,
-                    axisY,
-                    axisX,
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
@@ -439,9 +412,6 @@
                         valueAxis: valueAxis,
                         plotArea: plotArea
                     });
-
-                    axisY = plotArea.axisY;
-                    axisX = plotArea.axisX;
 
                     stubMethod(Chart.NumericAxis, "getViewElements", function() { return []; },
                         function() {
@@ -641,6 +611,27 @@
                     setup: function() {
                         moduleSetup();
                     }
+                });
+
+                test("applies margin", function() {
+                    var plotArea = new Chart.CategoricalPlotArea([{
+                            data: [100]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            labels: { font: SANS12 }
+                        },
+                        valueAxis: {
+                            labels: { font: SANS12 }
+                        },
+                        plotArea: {
+                            margin: MARGIN
+                        }
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    sameBox(plotArea.box, new Box2D(136, 117, 990, 966), TOLERANCE);
                 });
 
                 test("should not render plot area with borders", function() {
