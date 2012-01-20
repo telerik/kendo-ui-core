@@ -61,10 +61,20 @@
                             field: "d"
                     }],
                     categoryAxis: {
-                        field: "name"
+                        field: "name",
+                        axisCrossingValue: 2
                     },
-                    valueAxis: {
-                    }
+                    valueAxis: [{
+                        title: {
+                            text: "First Axis"
+                        }
+                        // name: primary
+                    }, {
+                        name: "secondary",
+                        title: {
+                            text: "Second Axis"
+                        }
+                    }]
                 });
             });
         </script>

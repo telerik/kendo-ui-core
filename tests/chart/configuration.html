@@ -200,6 +200,18 @@
                     ok(chart.options.valueAxis.flag === true);
                 });
 
+                test("axisDefaults are applied to all value axes", function() {
+                    createChart({
+                        axisDefaults: {
+                            flag: true
+                        },
+                        valueAxis: [{ }, { name: "secondary" }]
+                    });
+
+                    ok(chart.options.valueAxis[0].flag === true);
+                    ok(chart.options.valueAxis[1].flag === true);
+                });
+
                 test("axisDefaults are applied to xAxis", function() {
                     createChart({
                         axisDefaults: {

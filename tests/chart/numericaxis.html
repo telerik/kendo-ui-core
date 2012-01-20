@@ -976,6 +976,10 @@
 
                     plotArea.reflow(chartBox);
                     plotArea.getViewElements(view);
+
+                    title = $.grep(view.log.text, function(text) {
+                        return text.content == "text";
+                    })[0];
                 }
 
                 // ------------------------------------------------------------
@@ -983,7 +987,6 @@
                     setup: function() {
                         createPlotArea(barSeriesData);
                         titleBox = plotArea.axisX.title.box;
-                        title = view.log.text[8];
                     }
                 });
 
@@ -1030,7 +1033,6 @@
                     setup: function() {
                         createPlotArea(lineSeriesData);
                         titleBox = plotArea.axisY.title.box;
-                        title = view.log.text[7];
                     }
                 });
 
