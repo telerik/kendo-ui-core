@@ -1,25 +1,50 @@
 <div data-role="view" data-title="Photo Gallery">
-    <div data-role="scrollview">
-        <div class="photo">
-            Foo
-        </div>
+    <div id="scrollview-container">
+        <div data-role="scrollview">
+            <div class="photo photo1">
+            </div>
 
-        <div class="photo">
-            Bar
-        </div>
+            <div class="photo photo2">
+            </div>
 
-        <div class="photo">
-            Baz
+            <div class="photo photo3">
+            </div>
         </div>
     </div>
 </div>
 
 <style>
     .photo {
-        width: 250px;
-        margin: 20px;
+        width: 278px;
+        margin: 20px 20px 7px;
         height: 200px;
-        background: teal;
         display: inline-block;
+        background-size: auto 100%;
+    }
+
+    .photo1 {
+        background: url("../../content/mobile/button/sports-home.jpg");
+    }
+
+    .photo2 {
+        background: url("../../content/mobile/button/sports-facility.jpg");
+    }
+
+    .photo3 {
+        background: url("../../content/mobile/button/sports.jpg");
+    }
+
+    #scrollview-container {
+        margin: 3px 0;
+        padding-bottom: 10px;
+        background: rgba(0,0,0,.1);
+        border: 1px solid rgba(0,0,0,.3);
+        border-width: 1px 0;
+        -webkit-box-shadow: 0 1px 1px rgba(255,255,255,.3);
+        box-shadow: 0 1px 1px rgba(255,255,255,.3);
+    }
+
+    .km-ios .km-content {
+        background: #bbb;
     }
 </style>

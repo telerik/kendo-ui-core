@@ -1796,17 +1796,33 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     padding: 25px 50px;
 }
 
-#mobile-application-container {
-    position: relative;
-    height: 460px;
-    overflow: hidden;
-    width: 320px;
-    border: 5px solid buttonface;
+#device-wrapper {
+    background-image: url("phone.png");
+    background-size: cover;
+    padding: 52px 72px 110px 66px;
+    margin: auto;
 }
 
-#example .nav-button
+#device-wrapper,
+#mobile-application-container {
+    height: 460px;
+    overflow: hidden;
+    position: relative;
+    width: 320px;
+}
+
+:-moz-any(#device-wrapper) .km-scrollview {
+    width:320px; /* Workaround the broken flex box in FF. */
+}
+
+#example [href*=index]
 {
     visibility: hidden;
+}
+
+#example .km-android [href*=index]
+{
+    display: none;
 }
 
 #icon-list

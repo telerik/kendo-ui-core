@@ -18,18 +18,20 @@
 
         @if (ViewBag.suite == "mobile") {
         <div id="example" class="k-content">
-            <div id="mobile-application-container">
-                @RenderBody()
-                <div data-role="layout" data-id="examples">
-                    <header data-role="header">
-                        <div data-role="navbar">
-                            <!--a class="nav-button" data-align="left" data-role="backbutton">Back</a-->
-                            <span data-role="view-title">Settings</span>
-                            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
-                        </div>
-                    </header>
-                </div>
+            <div id="device-wrapper">
+                <div id="mobile-application-container">
+                    @RenderBody()
+                    <div data-role="layout" data-id="examples">
+                        <header data-role="header">
+                            <div data-role="navbar">
+                                <!--a class="nav-button" data-align="left" data-role="backbutton">Back</a-->
+                                <span data-role="view-title">Settings</span>
+                                <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+                            </div>
+                        </header>
+                    </div>
 
+                </div>
             </div>
             @RenderSection("ExampleFooter", false)
         </div>

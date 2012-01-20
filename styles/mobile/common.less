@@ -395,30 +395,26 @@
     .border-radius(0 5pt 5pt 0);
 }
 
-.km-scrollview {
+.km-scrollview
+{
     white-space: nowrap;
     overflow: hidden;
     width: 100%;
 }
 
-.km-scrollview > ol {
-    clear: both;
+.km-pages
+{
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-.km-scrollview > ol li {
-    text-align: center;
-    display: inline;
-}
-
-.km-scrollview > ol li:before {
-    content: " ▫ ";
-}
-
-.km-scrollview > ol li.km-current-page:before {
-    content: " ▪ ";
+.km-pages li
+{
+    display: inline-block;
+    width: .5em;
+    height: .55em;
+    margin: 0 .3em;
 }
 
 .km-ios .km-buttongroup .km-button
