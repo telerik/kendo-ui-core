@@ -440,7 +440,7 @@
 
 .km-ios .km-insetcontent
 {
-    background: #c4ccd5 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAABCAYAAAASC7TOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABRJREFUeNpi/P//PwMW4AAiAAIMAFIpAz/zYoI+AAAAAElFTkSuQmCC);
+    background: #c4ccd5 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAEAgMAAADQaqbQAAAACVBMVEUAAAAAAAD///+D3c/SAAAAA3RSTlMAEmYmU3BgAAAAG0lEQVR4XgXAsREAAAQDwI8JFQZUGtMZjrTaBwrRAfAcfxApAAAAAElFTkSuQmCC");
 }
 
 .km-ios label.km-item-checked:after
@@ -468,6 +468,21 @@
 .km-ios .km-tabstrip .km-state-active .km-icon
 {
     background: linear-gradient(top, #bCe4ff 0, #3F99D2 50%, #53BFE5 100%);
+}
+
+/* ScrollView */
+
+.km-ios .km-pages li
+{
+    background: rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.3);
+    .border-radius(1em);
+    .box-shadow(0 1px 1px rgba(255,255,255,.5));
+}
+
+.km-ios .km-pages .km-current-page
+{
+    background: rgba(0,0,0,.3);
 }
 
 /* Slider */
