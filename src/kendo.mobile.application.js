@@ -14,11 +14,13 @@
         linkRolesSelector = toRoleSelector("tab"),
         initialHeight = {},
         TRANSFORM = support.transitions.css + "transform",
+        ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
         View = mobile.View,
         ViewSwitcher = mobile.ViewSwitcher,
         Layout = mobile.Layout,
         VIEW_INIT = "viewInit",
         VIEW_SHOW = "viewShow",
+        lastOrientation = -1,
         roleSelector = kendo.roleSelector;
 
     function toRoleSelector(string) {
@@ -36,26 +38,31 @@
     function hideBar(element) {
         var compensation = 0, newHeight,
             orientation = window.orientation + "";
-        element = $(this);
 
-        if (!initialHeight[orientation])
-            initialHeight[orientation] = $(window).height();
+        if (lastOrientation != orientation) {
+            element = $(this);
 
-        if (os.device == "iphone" || os.device == "ipod" || os.android) {
-            if (os.android) {
-                compensation = 56;
-            } else {
-                compensation = 60;
+            if (!initialHeight[orientation])
+                initialHeight[orientation] = $(window).height();
+
+            if (os.device == "iphone" || os.device == "ipod" || os.android) {
+                if (os.android) {
+                    compensation = 56;
+                } else {
+                    compensation = 60;
+                }
+
+                newHeight = initialHeight[orientation] + compensation;
+                if (newHeight != element.height()) {
+                    element.height(newHeight);
+
+                    setTimeout(function () {
+                        window.scrollTo(0, 1);
+                    }, 0);
+                }
             }
 
-            newHeight = initialHeight[orientation] + compensation;
-            if (newHeight != element.height()) {
-                element.height(newHeight);
-
-                setTimeout(function () {
-                    window.scrollTo(0, 1);
-                }, 0);
-            }
+            lastOrientation = orientation;
         }
     }
 
@@ -71,7 +78,7 @@
         }
 
         $(window).load($.proxy(hideBar, element));
-        $(window).bind("orientationchange", $.proxy(hideBar, element));
+        $(window).bind(ORIENTATIONEVENT, $.proxy(hideBar, element));
     }
 
     function isInternal(link) {
@@ -454,7 +461,7 @@
             element.parent().addClass("km-root");
             element.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
 
-            $(document).bind("orientationchange", function(e) {
+            $(window).bind(ORIENTATIONEVENT, function(e) {
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
 

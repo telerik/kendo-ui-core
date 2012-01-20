@@ -67,7 +67,7 @@
         }
     });
 
-    ViewSwitcher = Class.extend({
+    var ViewSwitcher = Class.extend({
         init: function (application) {
             this.application = application;
         },
@@ -133,7 +133,7 @@
         }
     });
 
-    Layout = Class.extend({
+    var Layout = Class.extend({
         init: function(element) {
             var that = this;
             that.header = element.find(roleSelector("header")).addClass("km-header");
