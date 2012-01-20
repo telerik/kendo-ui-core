@@ -86,13 +86,13 @@
             previous.onHideStart();
             view.onShowStart();
 
-//            if (that.back && !that.parallax) {
-//                view.element.css("z-index", 0);
-//                previous.element.css("z-index", 1);
-//            } else {
-//                view.element.css("z-index", 1);
-//                previous.element.css("z-index", 0);
-//            }
+            if (that.back && !that.parallax) {
+                view.element.css("z-index", 0);
+                  previous.element.css("z-index", 1);
+              } else {
+            view.element.css("z-index", 1);
+                previous.element.css("z-index", 0);
+            }
 
             if (that.back) {
                 hideAddressBarOnBack();
