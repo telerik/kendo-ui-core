@@ -24,7 +24,7 @@
         $("#custom-listview").kendoMobileListView({
             dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
             template: $("#customListViewTemplate").html(),
-            headerTemplate: "Letter ${value}"
+            headerTemplate: "<h2>Letter ${value}</h2>"
         });
     }
 </script>
@@ -67,8 +67,22 @@
     right: 0.6rem;
     top: 50%;
 }
-.km-ios .km-listgroup > li, .km-android .km-listgroup > li {
+.km-listview .km-list {
+    margin: 0;
+}
+.km-ios .km-listgroup > li,
+.km-android .km-listgroup > li {
+	padding: 0;
+	border-top: 0;
+	box-shadow: none;
+}
+.km-ios .km-listgroup > li h2,
+.km-android .km-listgroup > li h2 {
+	margin: 0;
+	padding-top: .4rem;
+	padding-bottom: .4rem;
 	background-color: #ef652a;
 	color: #fff;
+	text-shadow: none;
 }
 </style>
