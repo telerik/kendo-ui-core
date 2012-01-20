@@ -168,6 +168,7 @@
             });
 
             that.calculateDimensions();
+            $(window).bind("orientationchange", proxy(that.calculateDimensions, that));
         },
 
         options: {
