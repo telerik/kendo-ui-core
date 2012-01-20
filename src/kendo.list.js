@@ -239,11 +239,18 @@
             var that = this,
                 options = that.options,
                 template = options.template,
-                dataTextField = options.dataTextField || "";
+                hasDataSource = options.dataSource;
+
+            if (that.element.is("select")) {
+                if (!hasDataSource) {
+                    options.dataTextField = options.dataTextField || "text";
+                    options.dataValueField = options.dataValueField || "value";
+                }
+            }
 
             if (!template) {
                 //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-                that.template = kendo.template("<li class='k-item' unselectable='on'>${data" + (dataTextField ? "." : "") + dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template("<li class='k-item' unselectable='on'>${data" + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
@@ -373,7 +380,6 @@
                 selected,
                 element = that.element,
                 options = that.options,
-                hasDataSource = options.dataSource,
                 dataSource = options.dataSource || {};
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
@@ -385,11 +391,6 @@
                 }
 
                 dataSource.select = element;
-
-                if (!hasDataSource) {
-                    options.dataTextField = options.dataTextField || "text";
-                    options.dataValueField = options.dataValueField || "value";
-                }
 
                 dataSource.fields = [{ field: options.dataTextField },
                                      { field: options.dataValueField }];

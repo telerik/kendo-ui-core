@@ -5,7 +5,7 @@
     * @section
     *   <p>
     *       The DropDownList widget displays a list of values and allows the selection of a single value from the list.
-    *       It is a richer version of the standard HTML select, providing support for local and remote data binding, item templates,
+    *       It is a richer version of the standard HTML select, providing support for local and remote data binding, iteM templates,
     *       and configurable options for controlling the list behavior.
     *   </p>
     *   If you want to allow user input, use the <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
@@ -169,9 +169,9 @@
 
             that._popup();
 
-            that._dataSource();
-
             that._accessors();
+
+            that._dataSource();
 
             that._enable();
 
