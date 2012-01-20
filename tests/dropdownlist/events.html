@@ -68,7 +68,7 @@
 
             test("_change raises the change event if value has changed", function() {
                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
@@ -147,7 +147,7 @@
 
             test("clicking an item raises the change event", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
@@ -161,7 +161,7 @@
 
             test("change should be raised on enter", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
@@ -176,7 +176,7 @@
 
             test("change should be raised on tab", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
@@ -196,7 +196,7 @@
                                     origCalled = true;
                                 }),
                     dropdownlist = new DropDownList(select, {
-                        dataSource: [{text: "foo"}, {text: "bar"}]
+                        dataSource: ["foo", "bar"]
                     });
 
                 dropdownlist.wrapper.focus();

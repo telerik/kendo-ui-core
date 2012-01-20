@@ -23,11 +23,17 @@
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
                 SELECTED = "k-state-selected",
                 keys = kendo.keys,
+                dropdownlist,
                 input;
 
             module("kendo.ui.DropDownList selection", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
+                    dropdownlist = new DropDownList(input, {
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
+                    });
                 },
                 teardown: function() {
                     input.append($("ul")).parent(".k-widget").remove();
@@ -35,8 +41,6 @@
             });
 
             test("value method should select item if exists", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 dropdownlist.value("2");
 
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
@@ -46,41 +50,40 @@
            });
 
            test("value method should select first if no such value", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+               dropdownlist.select(1);
+               dropdownlist.value("");
 
-                dropdownlist.select(1);
-                dropdownlist.value("");
-
-                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
-                equal(dropdownlist.value(), "1");
-                equal(dropdownlist.text(), "foo");
-                equal(dropdownlist._old, 1);
+               ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+               equal(dropdownlist.value(), "1");
+               equal(dropdownlist.text(), "foo");
+               equal(dropdownlist._old, 1);
            });
 
             test("value method should select item with 0 value", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:0}]);
+                dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
+                });
 
                 dropdownlist.value(0);
 
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+
                 equal(dropdownlist.value(), "0");
                 equal(dropdownlist.text(), 2);
                 equal(dropdownlist._old, 0);
            });
 
            test("value(value) should call _accessor", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+               stub(dropdownlist, "_accessor");
 
-                stub(dropdownlist, "_accessor");
+               dropdownlist.value(2);
 
-                dropdownlist.value(2);
-
-                equal(dropdownlist.calls("_accessor"), 2); //call select and set _old value
+               equal(dropdownlist.calls("_accessor"), 2); //call select and set _old value
             });
 
             test("value() should call _accessor", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 stub(dropdownlist, "_accessor");
 
                 dropdownlist.value();
@@ -89,8 +92,6 @@
             });
 
            test("select should select item by predicate", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 dropdownlist.select(function(item) {
                     return item.text == 2;
                 });
@@ -102,8 +103,6 @@
             });
 
             test("select item with index -1 should not select anything", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 dropdownlist.select(0);
 
                 dropdownlist.select(-1);
@@ -113,8 +112,6 @@
             });
 
             test("select should call _accessor", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 stub(dropdownlist, "_accessor");
 
                 dropdownlist.select(1);
@@ -123,15 +120,11 @@
             });
 
             asyncTest("open should open popup", function () {
-                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
-
                 dropdownlist._scroll = function() { ok(true); start(); };
                 dropdownlist.open();
             });
 
             asyncTest("open should call _scroll method", function () {
-                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
-
                 dropdownlist.popup.bind("open", function(){
                     ok(true);
                     start();
@@ -152,8 +145,6 @@
             });
 
             asyncTest("close should close popup", function () {
-                var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
-
                 dropdownlist.popup.bind("close", function(){
                     ok(true);
                     start();
@@ -197,9 +188,7 @@
             });
 
             test('after enable(false) should not open popup', function() {
-                var dropdownlist = input.kendoDropDownList({dataSource: data}).data("kendoDropDownList");
-                    oldOpen = dropdownlist.popup.toggle,
-                    called = false;
+                var oldOpen = dropdownlist.popup.toggle, called = false;
 
                 dropdownlist.popup.toggle = function() {called = true};
 
@@ -213,7 +202,7 @@
             });
 
             test("enable(true) removes k-state-disabled class", function() {
-                var dropdownlist = new DropDownList(input);
+                dropdownlist = new DropDownList(input);
                 dropdownlist.wrapper.addClass('k-state-disabled');
                 dropdownlist.element.attr("disabled", true);
 
@@ -224,14 +213,10 @@
             });
 
             test("_accessor should return value of the INPUT", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 equal(dropdownlist.value(), input.val());
             });
 
             test("_accessor should set value of the INPUT", function() {
-                var dropdownlist = new DropDownList(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 dropdownlist.value(2);
 
                 equal(dropdownlist.value(), input.val());
@@ -240,7 +225,7 @@
 
             test("_accessor should return value of the SELECT", function() {
                 var select = $("<select><option>Chai</option><option selected='selected'>Bar</option></select>");
-                var dropdownlist = new DropDownList(select);
+                dropdownlist = new DropDownList(select);
 
                 equal(dropdownlist.value(), "Bar");
                 equal(select[0].selectedIndex, 1);
@@ -248,7 +233,7 @@
 
             test("_accessor should set value of the SELECT", function() {
                 var select = $("<select><option>Chai</option><option>Bar</option></select>");
-                var dropdownlist = new DropDownList(select);
+                dropdownlist = new DropDownList(select);
 
                 dropdownlist.value("Bar");
 

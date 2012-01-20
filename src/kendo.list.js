@@ -373,17 +373,24 @@
                 selected,
                 element = that.element,
                 options = that.options,
+                hasDataSource = options.dataSource,
                 dataSource = options.dataSource || {};
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            if(that.element.is(SELECT)) {
+            if (that.element.is(SELECT)) {
                 selected = element.children(":selected");
                 if (selected[0]) {
                     options.index = selected.index();
                 }
 
                 dataSource.select = element;
+
+                if (!hasDataSource) {
+                    options.dataTextField = options.dataTextField || "text";
+                    options.dataValueField = options.dataValueField || "value";
+                }
+
                 dataSource.fields = [{ field: options.dataTextField },
                                      { field: options.dataValueField }];
             }
