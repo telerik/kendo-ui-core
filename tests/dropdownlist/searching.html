@@ -38,6 +38,8 @@
 
             test("search select first match", function() {
                 var dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data
                 });
 
@@ -48,6 +50,8 @@
 
             test("search select item if text number", function() {
                 var dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "Foo", value: 1}, {text:10, value:2}]
                 });
 
@@ -58,6 +62,8 @@
 
             test("search select item if text is 0", function() {
                 var dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
                 });
 
@@ -68,6 +74,8 @@
 
             test("search should raise error if word is null", function() {
                 var dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data
                 });
 

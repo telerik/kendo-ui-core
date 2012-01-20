@@ -169,9 +169,9 @@
 
             that._popup();
 
-            that._accessors();
-
             that._dataSource();
+
+            that._accessors();
 
             that._enable();
 
@@ -210,8 +210,8 @@
             index: 0,
             autoBind: true,
             delay: 500,
-            dataTextField: "text",
-            dataValueField: "value",
+            dataTextField: "",
+            dataValueField: "",
             height: 200
         },
 
