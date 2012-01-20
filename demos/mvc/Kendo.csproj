@@ -119,6 +119,13 @@
     <Content Include="content\mobile\button\sports-facility.jpg" />
     <Content Include="content\mobile\button\sports-home.jpg" />
     <Content Include="content\mobile\button\sports.jpg" />
+    <Content Include="content\mobile\listview\california-rolls.jpg" />
+    <Content Include="content\mobile\listview\edamame.jpg" />
+    <Content Include="content\mobile\listview\food.jpg" />
+    <Content Include="content\mobile\listview\maguro.jpg" />
+    <Content Include="content\mobile\listview\sashimi-salad.jpg" />
+    <Content Include="content\mobile\listview\seaweed-salad.jpg" />
+    <Content Include="content\mobile\listview\tekka-maki.jpg" />
     <Content Include="content\mobile\overview\ann.jpg" />
     <Content Include="content\mobile\overview\annette.jpg" />
     <Content Include="content\mobile\overview\antonio.jpg" />
@@ -462,6 +469,8 @@
     <Content Include="Views\mobile\switch\index.cshtml" />
     <Content Include="Views\mobile\buttongroup\events.cshtml" />
     <Content Include="Views\mobile\buttongroup\index.cshtml" />
+    <Content Include="Views\mobile\buttongroup\appearance.cshtml" />
+    <Content Include="Views\mobile\scrollview\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
