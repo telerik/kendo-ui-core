@@ -60,6 +60,10 @@
             if (that.layout) {
                 that.layout.attach(that);
             }
+
+            that.element.find("[data-" + kendo.ns + "widget]").each(function(){
+                $(this).data("kendoWidget").viewShow(that);
+            });
         }
     });
 

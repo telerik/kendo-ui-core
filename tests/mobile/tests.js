@@ -35,5 +35,9 @@ tests.push(
     {
         page: "mobile/navbar.html",
         title: "navbar"
+    },
+    {
+        page: "mobile/swipe.html",
+        title: "swipe"
     }
 );
