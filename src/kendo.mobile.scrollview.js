@@ -125,14 +125,37 @@
     }
 
 
-    var PAGE = "<li/>";
-
-    var ScrollView = Widget.extend({
+    /**
+    * @name kendo.mobile.ui.ScrollView.Description
+    * @section The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.
+    *
+    * <h3>Getting Started</h3>
+    * <p>The Kendo Mobile Application automatically initializes the Mobile ScrollView for every element with <code>role</code> data attribute set to <code>scrollview</code> present in the views' markup.
+    * Alternatively, it can be initialized using a jQuery selector. </p>
+    * @exampleTitle Initialize mobile ScrollView using a role data attribute.
+    * @example
+    * <div data-role="scrollview">
+    *   Foo
+    * </div>
+    *
+    * @exampleTitle Initialize mobile ScrollView using a jQuery selector.
+    * @example
+    * <div id="scrollView"></div>
+    * <script>
+    * var listView = $("#scrollView").kendoMobileScrollView();
+    * </script>
+    *
+    */
+    var ScrollView = Widget.extend(/** @lends kendo.mobile.ui.ScrollView.prototype */{
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element
         * @param {Object} options
+        * @option {Number} [duration] <300> The milliseconds that take the scrollview to snap to the current page after released.
+        * @option {Number} [velocityThreshold] <1> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current view).
+        * The swipe velocity equal the pixels per millisecond change for a swipe.
+        * @option {Number} [bounceVelocityThreshold] <.2,5> The velocity threshold after which a swipe will result in a bounce effect.
         */
         init: function(element, options) {
             var that = this;
