@@ -428,7 +428,7 @@
 .km-android .km-switch-handle,
 .km-android .km-switch-wrapper,
 .km-android .km-content,
-.km-android .km-root
+.km-android
 {
     -webkit-transform: translatez(0);
 }
@@ -507,12 +507,14 @@
     margin-top: ~"-.8rem";
 }
 
-.km-android .km-content,
-.km-android .km-vertical,
-.km-android .km-horizontal
+.km-android .km-content
 {
     color: #fff;
-    background: #000;
+}
+
+.km-android
+{
+    background: linear-gradient(top, #000, #333);
 }
 
 .km-android .km-item label:before
@@ -530,11 +532,6 @@
     background: transparent url("images/android-sprite.png") 0 -36px no-repeat;
 }
 
-.km-android .km-content
-{
-//    background: #000 linear-gradient(top, rgba(0,0,0,1), rgba(70,70,70,.5));
-}
-
 .km-android .km-button .km-icon
 {
     background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
@@ -550,7 +547,7 @@
 .km-android .km-tabstrip .km-icon
 {
     position: relative;
-    left: 0;
+    left: 50%;
     margin-left: -2em;
     margin-left: ~"-1.25rem";
 }
