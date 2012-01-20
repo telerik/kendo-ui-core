@@ -239,15 +239,15 @@
 
 .km-android .km-detail
 {
-    top: -.6em;
-    right: -.8em;
-    top: ~"-.6rem";
-    right: ~"-.8rem";
-    padding: .6em .8em;
-    padding: .6rem .8rem;
+    position: absolute;
+    top: 0;
+    right: 0;
     border: none;
+    padding-top: .5em;
+    padding-top: .5rem;
     background: transparent;
     .box-shadow(none);
+    .box-sizing(border-box);
 }
 
 .km-android .km-list .km-icon,
@@ -261,10 +261,16 @@
     margin-top: .3em;
 }
 
+.km-android .km-detail .km-icon
+{
+    margin-top: 0;
+}
+
 .km-root .km-android .km-detail
 {
     height: 100%;
-    width: 1.5rem;
+    width: 3em;
+    width: 3rem;
     margin: 0;
 }
 
@@ -462,6 +468,7 @@
     font-weight: normal;
     line-height: 2em;
     border-bottom: 1px solid #404040;
+    overflow: hidden;
 }
 
 .km-android .km-list > li,
@@ -484,6 +491,8 @@
     color: #fff;
 }
 
+.km-android .km-navbar .km-state-active,
+.km-android .km-toolbar .km-state-active,
 .km-android .km-detail.km-state-active,
 .km-android .km-state-active .km-detail,
 .km-android .km-state-active .km-listview-link
