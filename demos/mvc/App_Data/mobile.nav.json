@@ -44,7 +44,7 @@
         {
             "text": "ButtonGroup",
             "name": "buttongroup",
-            "spriteCssClass": "mobileSwitchIcon",
+            "spriteCssClass": "mobileButtonGroupIcon",
             "items": [
                 {
                     "text": "Basic usage",

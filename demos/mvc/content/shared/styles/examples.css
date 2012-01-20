@@ -672,6 +672,8 @@ a.bigButton
 .mobileNavBarIcon { background-position: -100px -320px; }
 .mobileSwitchIcon { background-position: -100px -350px; }
 .mobileTabStripIcon { background-position: -100px -380px; }
+.mobileButtonGroupIcon { background-position: -100px -410px; }
+.mobileScrollViewIcon { background-position: -100px -440px; }
 
 /*example content*/
 
