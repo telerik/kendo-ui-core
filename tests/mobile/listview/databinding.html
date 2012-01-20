@@ -129,13 +129,13 @@
             });
 
             test("accepts custom header template", function() {
-                ok(dom.find("li > span").eq(0).children(0).is("i"), "item has custom header");
+                ok(dom.find("li > div").eq(0).children(0).is("i"), "item has custom header");
             });
 
             test("accepts function as a custom header template", function() {
                 dom = $("<ul/>");
                 listView = new ListView(dom, {dataSource: dataSource, template: "${bar}", headerTemplate: function(data) { return "<i>" + data + "</i>" }});
-                ok(dom.find("li > span").eq(0).children(0).is("i"), "item has custom header");
+                ok(dom.find("li > div").eq(0).children(0).is("i"), "item has custom header");
             });
 
             test("data-uid attribute is rendered for each row when model is defined", function() {
