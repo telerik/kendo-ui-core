@@ -1,19 +1,23 @@
 <div data-role="view" id="flat" data-init="mobileListViewTemplatesInit" data-title="ListView">
+    <div class="banner">&nbsp;</div>  
     <ul id="custom-listview"></ul>
 </div>
 
 <script type="text/x-kendo-template" id="customListViewTemplate">
-    <strong style="color: gray">${name}</strong> ---- <a data-role="button" class="details-link">Order</a>
+    <img class="item-photo" src="${url}" />
+    <h3 class="item-title">${name}</h3>
+    <p class="item-info">${description}</p>
+    <a data-role="button" class="details-link">Order</a>
 </script>
 
 <script>
     var groupedData = [
-        {name: "Sashimi Salad", letter: "S" },
-        {name: "Seaweed Salad", letter: "S" },
-        {name: "Edamame", letter: "E" },
-        {name: "Maguro", letter: "M" },
-        {name: "Tekka Maki", letter: "T" },
-        {name: "Tori Katsu", letter: "T" }
+        { name: "Sashimi Salad", description: "Organic greens topped with market fresh sashimi, wasabi soy vinaigrette.", url: "../../content/mobile/listview/sashimi-salad.jpg", letter: "S" },
+        { name: "Seaweed Salad", description: "A nice seaweed salad.", url: "../../content/mobile/listview/seaweed-salad.jpg", letter: "S" },
+        { name: "Edamame", description: "Boiled soy beans with salt.", url: "../../content/mobile/listview/edamame.jpg", letter: "E" },
+        { name: "Maguro", description: "Tuna pieces.", url: "../../content/mobile/listview/maguro.jpg", letter: "M" },
+        { name: "Tekka Maki", description: "Tuna roll with wasabi.", url: "../../content/mobile/listview/tekka-maki.jpg", letter: "T" },
+        { name: "California Rolls", description: "Crab sticks, avocado and cucumber.", url: "../../content/mobile/listview/california-rolls.jpg", letter: "C" }
     ]
 
     function mobileListViewTemplatesInit() {
@@ -24,3 +28,47 @@
         });
     }
 </script>
+
+<style scoped>
+.banner {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	height: 100px;
+	background: url(../../content/mobile/listview/food.jpg) no-repeat center top;
+    background-size: 100% auto;
+}
+.item-photo {
+    width: 4em;
+    height: 4em;
+    float: left;
+    margin: .5rem 0;
+    -webkit-box-shadow: 0 1px 3px #333;
+    box-shadow: 0 1px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+#custom-listview .item-title {
+	float: left;
+	font-size: 1.2rem;
+    margin: .5rem 1rem 0 1rem;
+    width: 50%;
+}
+#custom-listview .item-info {
+	float: left;
+	font-size: .8rem;
+	line-height: 1rem;
+    margin: 0 1rem;
+    width: 50%;
+}
+.details-link {
+    margin-top: -1rem;
+    position: absolute;
+    right: 0.6rem;
+    top: 50%;
+}
+.km-ios .km-listgroup > li, .km-android .km-listgroup > li {
+	background-color: #ef652a;
+	color: #fff;
+}
+</style>
