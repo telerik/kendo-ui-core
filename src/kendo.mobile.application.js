@@ -384,26 +384,7 @@
             var that = this, params = history.url().params;
             that.view = view;
             view.params = params;
-            that._updateNavigationControls();
             that.trigger(VIEW_SHOW, {view: view, params: params});
-        },
-
-        _updateNavigationControls: function(argument) {
-            var that = this;
-            var tabstrip = that.element.find(roleSelector("tabstrip")).data("kendoMobileTabstrip");
-
-            // At the moment of switching, the href of the link is set to "#!"
-            if (tabstrip) {
-                setTimeout(function() {
-                    tabstrip.switchTo(history.url().string);
-                })
-            }
-
-            var navbar = that.element.find(roleSelector("navbar")).data("kendoMobileNavBar");
-
-            if (navbar) {
-                navbar.title(that.view.title);
-            }
         },
 
         _createView: function(element) {

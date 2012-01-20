@@ -73,6 +73,7 @@ namespace Kendo.Models
             "kendo.mobile.application.js",
             "kendo.mobile.button.js",
             "kendo.mobile.listview.js",
+            "kendo.mobile.scrollview.js",
             "kendo.mobile.navbar.js",
             "kendo.mobile.scroller.js",
             "kendo.mobile.buttongroup.js",

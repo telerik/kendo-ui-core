@@ -19,7 +19,7 @@
         VISIBLE = "visible",
         TRANSFORM = support.transitions.css + "transform",
         TRANSFORMSTYLE = support.transitions.prefix + "Transform",
-        MOVEEVENT = touch ? "touchmove" : "mousemove",
+        MOVEEVENT = support.mousemove,
         FRAMERATE = 1000 / 30,
         ACCELERATION = 20,
         VELOCITY = 0.5,

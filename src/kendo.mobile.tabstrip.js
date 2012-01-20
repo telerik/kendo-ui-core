@@ -189,6 +189,14 @@
             }
         },
 
+        viewShow: function(view) {
+            var that = this;
+            setTimeout(function() {
+                console.log(kendo.history.url().string);
+                that.switchTo(kendo.history.url().string);
+            });
+        },
+
         options: {
             name: "Tabstrip",
             selectedIndex: 0,

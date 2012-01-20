@@ -104,6 +104,10 @@
         */
         title: function(value) {
             this.element.find(roleSelector("view-title")).text(value);
+        },
+
+        viewShow: function(view) {
+            this.title(view.title);
         }
     });
 
