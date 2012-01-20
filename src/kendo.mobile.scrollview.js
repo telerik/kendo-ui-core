@@ -124,6 +124,7 @@
         }
     }
 
+    var CURRENT_PAGE_CLASS = "km-current-page";
 
     /**
     * @name kendo.mobile.ui.ScrollView.Description
@@ -164,6 +165,7 @@
 
             element
                 .wrapInner("<div/>")
+                .addClass("km-scrollview")
                 .append('<ol class="km-pages"/>');
 
             that.inner = element.children().first();
@@ -198,8 +200,11 @@
             name: "ScrollView",
             duration: 300,
             velocityThreshold: 1,
-            bounceVelocityThreshold: 2.5,
-            selector: roleSelector("scrollview")
+            bounceVelocityThreshold: 2.5
+        },
+
+        viewShow: function(view) {
+            this.calculateDimensions();
         },
 
         calculateDimensions: function() {
@@ -214,7 +219,7 @@
             that.draggable.options.minX = width - scrollWidth;
 
             for (var idx = 0; idx < pages; idx ++) {
-                pageHTML += PAGE;
+                pageHTML += "<li/>";
             };
 
             that.pager.html(pageHTML);
@@ -249,8 +254,8 @@
             var that = this,
                 pager = that.pager;
 
-            pager.children().removeClass("km-current-page");
-            pager.find(":nth-child(" + (that.page + 1) +")").addClass("km-current-page");
+            pager.children().removeClass(CURRENT_PAGE_CLASS);
+            pager.find(":nth-child(" + (that.page + 1) +")").addClass(CURRENT_PAGE_CLASS);
         }
     });
 
