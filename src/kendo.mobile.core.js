@@ -32,12 +32,16 @@
 
         options: {},
 
+        viewShow: $.noop,
+
         enhance: function(element) {
             var options = this.options,
+                pluginMethod = "kendoMobile" + options.name,
                 selector = kendo.roleSelector(options.name.toLowerCase());
 
                 element.find(selector)
-                       .add(element.filter(selector))["kendoMobile" + options.name]();
+                       .add(element.filter(selector))
+                       .attr("data-" + kendo.ns + "widget", options.name)[pluginMethod]();
         }
     });
 
