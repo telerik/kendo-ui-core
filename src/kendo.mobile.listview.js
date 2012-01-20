@@ -6,7 +6,7 @@
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li",
         proxy = $.proxy,
-        GROUP_TEMPLATE = kendo.template("<li>#= this.headerTemplate(data) #<ul>#= kendo.render(this.template, data.items)#</ul></li>"),
+        GROUP_TEMPLATE = kendo.template("<li><span class=\"km-group-title\">#= this.headerTemplate(data) #</span><ul>#= kendo.render(this.template, data.items)#</ul></li>"),
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
         MOUSEUP = support.mouseup,
