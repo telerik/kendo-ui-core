@@ -311,6 +311,7 @@
         options: {
             name: "AutoComplete",
             suggest: false,
+            dataTextField: "",
             minLength: 1,
             delay: 200,
             height: 200,
