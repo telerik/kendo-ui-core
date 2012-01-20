@@ -81,6 +81,17 @@
             ]
         },
         {
+            "text": "ScrollView",
+            "name": "scrollview",
+            "spriteCssClass": "mobileScrollViewIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "scrollview/index.html"
+                }
+            ]
+        },
+        {
             "text": "NavBar",
             "name": "navbar",
             "spriteCssClass": "mobileNavBarIcon",
