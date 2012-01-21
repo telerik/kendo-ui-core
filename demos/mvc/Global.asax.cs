@@ -18,7 +18,7 @@ namespace Kendo
 
             routes.MapRoute(
                 "MobileDeviceIndex",
-                "mobile/m",
+                "mobile/m/index.html",
                 new { controller = "MobileDevice", action = "Index" }
             );
 
