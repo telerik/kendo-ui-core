@@ -17,17 +17,17 @@ namespace Kendo.Extensions
             return url.Content(contentUrl);
         }
 
-        public static string Script(this UrlHelper url, string file)
+        public static string Script(this UrlHelper url, string file, string suite)
         {
-            return ResourceUrl(url, "js", file);
+            return ResourceUrl(url, "js", file, suite);
         }
 
-        public static string Style(this UrlHelper url, string file)
+        public static string Style(this UrlHelper url, string file, string suite)
         {
-            return ResourceUrl(url, "styles", file);
+            return ResourceUrl(url, "styles", file, suite);
         }
 
-        private static string ResourceUrl(UrlHelper url, string assetType, string file)
+        private static string ResourceUrl(UrlHelper url, string assetType, string file, string suite)
         {
 #if DEBUG
             return url.RouteUrl("Debug", new { assetType = assetType, file = file });
@@ -37,7 +37,7 @@ namespace Kendo.Extensions
             }
 
             return url.Content(string.Format("{0}/{1}/{2}",
-                ConfigurationManager.AppSettings["CDN_ROOT"],
+                ConfigurationManager.AppSettings[suite == "mobile" ? "CDN_ROOT" : "OLD_CDN_ROOT"],
                 assetType,
                 file
             ));

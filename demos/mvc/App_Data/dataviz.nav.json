@@ -95,20 +95,6 @@
                     "url": "scatter-charts/local-data.html"
             }],
             "name": "scatter charts"
-        }, {
-            "text": "Area Chart",
-            "spriteCssClass": "chartAreaIcon",
-            "items": [{
-					"text": "Basic usage",
-					"url": "area-chart/index.html"
-				}, {
-					"text": "Binding to remote data",
-					"url": "area-chart/remote-data.html"
-				}, {
-					"text": "Binding to local data",
-					"url": "area-chart/local-data.html"
-            }],
-            "name": "area chart"
         }
     ]
 }
