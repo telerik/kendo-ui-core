@@ -161,15 +161,21 @@ function buildDocs(sitefinity_path) {
                 }).forEach(function(fileToMerge) {
                     var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
 
-                    if (sectionName != "description") {
+                    if (sectionName != "description" && hasValue(text)) {
                         text = wrap(text, fileToMerge);
                     }
                     cache += text;
                 });
 
-                kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
+                if (hasValue(cache)) {
+                    kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
+                }
             });
         }
+    }
+
+    function hasValue(text) {
+        return text.replace(/^\s*|\s*$/g, '').replace("<!-- help-data -->", "").length > 0;
     }
 
     function wrap(text, fileToMerge) {
