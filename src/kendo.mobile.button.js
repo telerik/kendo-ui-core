@@ -136,8 +136,7 @@
 
         options: {
             name: "Button",
-            style: "",
-            enable: true
+            style: ""
         },
 
         _release: function(e) {
