@@ -112,6 +112,19 @@
                 ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
             });
 
+            test("toggles item with detail button as pressed on press/release", function() {
+                var dom = $('<ul><li><a id="foo" href="foo">Foo</a><a data-role="detailbutton" data-style="detaildisclose"></a></li></ul>'),
+                    foo = dom.find("#foo");
+
+                new ListView(dom);
+
+                foo.trigger(kendo.support.mousedown);
+                ok(foo.parent().is(".km-state-active"), "list item is marked as active");
+
+                foo.trigger(kendo.support.mouseup);
+                ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+            });
+
             test("does not activate pushed state for non-link items", function() {
                 var dom = $('<ul><li>Foo</li></ul>'),
                     item = dom.find("li");

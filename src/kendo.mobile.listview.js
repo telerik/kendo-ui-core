@@ -14,7 +14,10 @@
 
     function toggleItemActiveClass(e) {
         var item = $(e.currentTarget);
-        if ($(e.target).closest("a" + kendo.roleSelector("listview-link"), item)[0]) {
+            clickedLink = $(e.target).closest("a"),
+            role = clickedLink.data(kendo.ns + "role") || "";
+
+        if (clickedLink[0] && (!role.match(/button/))) {
             item.toggleClass("km-state-active", e.type === MOUSEDOWN);
         }
     }
