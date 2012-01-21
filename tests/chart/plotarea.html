@@ -178,7 +178,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Axes / Additional", {
+                module("Categorical PlotArea / Axes / Additional value axis", {
                     setup: function() {
                         moduleSetup();
 
@@ -190,9 +190,37 @@
                     }
                 });
 
-                test("additional value axis is added to children collection", function() {
+                test("added to children collection", function() {
                     ok($.inArray(valueAxes.secondary, plotArea.children) >= 0);
                 });
+
+                test("crosses category axis at default value", function() {
+                    plotArea.reflow(chartBox);
+
+                    var valueAxis = valueAxes.primary,
+                        slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
+                        slotY = valueAxis.getSlot(valueAxis.options.axisCrossingValue);
+
+                    console.log(slotX, slotY);
+                    equals(slotX.y1, slotY.y1);
+                });
+
+                test("positioned next to primary axis by default", function() {
+                    var primary = valueAxes.primary,
+                        secondary = valueAxes.secondary;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondary.box.x2, secondary.box.y1], [primary.box.x1, primary.box.y1]);
+                });
+
+                test("plot area bounding box wraps axis", function() {
+                    plotArea.reflow(chartBox);
+
+                    var axisBox = valueAxes.secondary.box;
+                    ok(axisBox.x1 >= plotArea.box.x1 && axisBox.y1 >= plotArea.box.x1);
+                });
+
 
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Column series", {

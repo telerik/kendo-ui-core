@@ -44,7 +44,8 @@
                         visible: false
                     },
                     legend: {
-                        visible: false
+                        visible: true,
+                        position: "bottom"
                     },
                     dataSource: data,
                     seriesDefaults: {
@@ -55,24 +56,28 @@
                             field: "b"
                         },{
                             name: "2",
-                            field: "c"
+                            field: "c",
+                            axis: "secondary"
                         },{
                             name: "3",
                             field: "d"
                     }],
                     categoryAxis: {
-                        field: "name",
-                        axisCrossingValue: 2
+                        field: "name"
+                        //,axisCrossingValue: 2
                     },
                     valueAxis: [{
                         title: {
-                            text: "First Axis"
+                            text: "axis"
                         }
                         // name: primary
                     }, {
                         name: "secondary",
+                        min: -100,
+                        max: 100,
                         title: {
-                            text: "Second Axis"
+                            text: "axis"
+                            //text: "Secondary Axis"
                         }
                     }]
                 });
