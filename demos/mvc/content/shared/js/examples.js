@@ -251,6 +251,8 @@
         return this.each(function() {
             $(this).val(kendoMobileOS).kendoDropDownList({
                 dataSource: oses,
+                dataTextField: "text",
+                dataValueField: "value",
                 change: function (argument) {
                     var value = this.value();
                     $(options.container).removeClass(mobileClasses).addClass("km-" + value);
