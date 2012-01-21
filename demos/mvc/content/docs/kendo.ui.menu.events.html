@@ -1,0 +1,100 @@
+
+
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="close"><code>close</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires after a sub menu gets closed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#menu").kendoMenu({     close: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the menu widget var menu = $("#menu").data("kendoMenu"); // bind to the close event menu.bind("close", function(e) {     // handle event });</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>item</code>
+                            <span class="type">: Element</span> 
+                            
+                        </dt>
+                        <dd>The closed item</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="open"><code>open</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before a sub menu gets opened.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#menu").kendoMenu({     open: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the menu widget var menu = $("#menu").data("kendoMenu"); // bind to the open event menu.bind("open", function(e) {     // handle event });</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>item</code>
+                            <span class="type">: Element</span> 
+                            
+                        </dt>
+                        <dd>The opened item</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="select"><code>select</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when a menu item gets selected.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#menu").kendoMenu({     select: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the menu widget var menu = $("#menu").data("kendoMenu"); // bind to the select event menu.bind("select", function(e) {     // handle event });</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>item</code>
+                            <span class="type">: Element</span> 
+                            
+                        </dt>
+                        <dd>The selected item</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+

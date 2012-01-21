@@ -1,0 +1,303 @@
+
+
+    <ul class="methodDetail" id="MethodDetail">
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="append"><code>append</code></a> (item, referenceItem)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Appends a PanelBar item in the specified referenceItem</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var panelBar = $("#panelBar").data("kendoPanelBar");panelBar.append( [  {   text: "Item 1",   // link URL if navigation is needed, optional   url: "http://www.kendoui.com/"  },  {   text: "Item 2",   // content within an item   content: "text"  },  {   text: "Item 3",   // content URL to load within an item   contentUrl: "partialContent.html"  },  {   text: "Item 4",   // item image URL, optional   imageUrl: "http://www.kendoui.com/test.jpg",   // sub-item collection   items:   [    { text: "Sub Item 1" },    { text: "Sub Item 2" }   ]  },  {   text: "Item 5",   // item image sprite CSS class, optional   spriteCssClass: "imageClass3"  } ], referenceItem);</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>item</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>Target item, specified as the JSON representation of an object. You can pass item text, content orcontentUrl here. Can handle an HTML string or array of such strings or JSON.</dd>
+                        
+                            <dt>
+                                <code>referenceItem</code><span class="light fixedFont">: Item</span> 
+                                
+                            </dt>
+                            <dd>A reference item to append the new item in</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="collapse"><code>collapse</code></a> (element, useAnimation)
+
+                    
+                </div>
+                <div class="detailBody">
+                    Collapses the specified item(s) of a <strong>PanelBar</strong>.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// access an existing PanelBar instancevar panelBar = $("#panelBar").data("kendoPanelBar");// collapse the element with ID, "item1"panelBar.collapse($("#item1"));// collapse the element with ID, "item2" without visual animationspanelBar.collapse($("#item2"), false);// collapse all list items that start with ID, "item"panelBar.collapse($('[id^="item"]'));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>element</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>The <strong>PanelBar</strong> item(s) to be collapsed, expressed as a string containing a selectorexpression or represented by a <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</dd>
+                        
+                            <dt>
+                                <code>useAnimation</code><span class="light fixedFont">: Boolean</span> 
+                                (<i>optional</i>)
+                            </dt>
+                            <dd>Temporarily enables (<strong>true</strong>) or disables (<strong>false</strong>) any visual animation(s)when collapsing items.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="enable"><code>enable</code></a> (element, enable)
+
+                    
+                </div>
+                <div class="detailBody">
+                    Enables (<strong>true</strong>) or disables (<strong>false</strong>) the specified item(s) of the<strong>PanelBar</strong>.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// access an existing PanelBar instancevar panelBar = $("#panelBar").data("kendoPanelBar");// enable the item of the PanelBar with ID, "item1"panelBar.enable($("#item1"), true);// disable the currently selected item of the PanelBarvar item = panelBar.select();panelBar.enable(item, false);// disable all list items that start with ID, "item"panelBar.enable($('[id^="item"]'), false);</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>element</code><span class="light fixedFont">: String | Selector</span> 
+                                
+                            </dt>
+                            <dd>The <strong>PanelBar</strong> item(s) to be enabled (<b>true</b>) or disabled (<b>false</b>), expressed as astring containing a selector expression or represented by a<a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</dd>
+                        
+                            <dt>
+                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
+                                
+                            </dt>
+                            <dd>The desired state - enabled (<strong>true</strong>) or disabled (<strong>false</strong>) - of the targetelement(s).</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="expand"><code>expand</code></a> (element, useAnimation)
+
+                    
+                </div>
+                <div class="detailBody">
+                    Expands the specified item(s) of a <strong>PanelBar</strong>.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// access an existing PanelBar instancevar panelBar = $("#panelBar").data("kendoPanelBar");// expand the element with ID, "item1"panelBar.expand($("#item1"));// expand the element with ID, "item2" without visual animationspanelBar.expand($("#item2"), false);// expand all list items that start with ID, "item"panelBar.expand($('[id^="item"]'));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>element</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>The <strong>PanelBar</strong> item(s) to be expanded, expressed as a<a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</dd>
+                        
+                            <dt>
+                                <code>useAnimation</code><span class="light fixedFont">: Boolean</span> 
+                                (<i>optional</i>)
+                            </dt>
+                            <dd>Temporariliy enables (<b>true</b>) or disables (<b>false</b>) anyvisual animation(s) when expanding items.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="insertAfter"><code>insertAfter</code></a> (item, referenceItem)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Inserts a PanelBar item after the specified referenceItem</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>panelBar.insertAfter(    [{        text: "Item 1",        url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.    },    {        text: "Item 2",        content: "text"                              // Content for the content element    },    {        text: "Item 3",        contentUrl: "partialContent.html"            // From where to load the item content    },    {        text: "Item 4",        imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.        items: [{                                    // Sub item collection.             text: "Sub Item 1"        },        {             text: "Sub Item 2"        }]    },    {        text: "Item 5",        spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.    }],    referenceItem);</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>item</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>Target item, specified as a JSON object. You can pass item text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.</dd>
+                        
+                            <dt>
+                                <code>referenceItem</code><span class="light fixedFont">: Item</span> 
+                                
+                            </dt>
+                            <dd>A reference item to insert the new item after</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="insertBefore"><code>insertBefore</code></a> (item, referenceItem)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Inserts a PanelBar item before the specified referenceItem</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>panelBar.insertBefore(    [{        text: "Item 1",        url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.    },    {        text: "Item 2",        content: "text"                              // Content for the content element    },    {        text: "Item 3",        contentUrl: "partialContent.html"            // From where to load the item content    },    {        text: "Item 4",        imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.        items: [{                                    // Sub item collection.             text: "Sub Item 1"        },        {             text: "Sub Item 2"        }]    },    {        text: "Item 5",        spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.    }],    referenceItem);</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>item</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>Target item, specified as a JSON object. You can pass item text, content or contentUrl here. Can handle an TML string or array of such strings or JSON.</dd>
+                        
+                            <dt>
+                                <code>referenceItem</code><span class="light fixedFont">: Item</span> 
+                                
+                            </dt>
+                            <dd>A reference item to insert the new item before.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="reload"><code>reload</code></a> (element)
+
+                    
+                </div>
+                <div class="detailBody">
+                    Reloads the content of a <strong>PanelBar</strong> from an AJAX request.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the panel barvar panelBar = $("#panelBar").data("kendoPanelBar");// reload the panel basrpanelBar.reload();</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>element</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>Target element</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="remove"><code>remove</code></a> (element)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Removes the specified PanelBar item(s).</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the panel barvar panelBar = $("#panelBar").data("kendoPanelBar");// remove Item 1panelBar.remove("#Item1");</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>element</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>Target item selector.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="select"><code>select</code></a> (element)
+
+                    
+                </div>
+                <div class="detailBody">
+                    Selects the specified item of the <strong>PanelBar</strong>. If this method is invoked without arguments, it returnsthe currently selected item.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// access an existing PanelBar instancevar panelBar = $("#panelBar").data("kendoPanelBar");// select the item with ID, "item1"panelBar.select("#item1");</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>element</code><span class="light fixedFont">: String | Selector</span> 
+                                
+                            </dt>
+                            <dd>The <strong>PanelBar</strong> item to be selected, expressed as a string containing a selector expression orrepresented by a <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+    </ul>
+

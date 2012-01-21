@@ -1,0 +1,363 @@
+
+
+    <ul class="methodDetail" id="MethodDetail">
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="addRow"><code>addRow</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Adds a new empty table row in edit mode. The addRow method triggers edit event.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");grid.addRow();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="cancelChanges"><code>cancelChanges</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Cancels any pending changes during. Deleted rows are restored. Inserted rows are removed. Updated rows are restored to their original values.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");grid.cancelChanges();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="cellIndex"><code>cellIndex</code></a> (cell)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Returns the index of the cell in the grid item skipping group and hierarchy cells.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> // get a reference to the grid widget var grid = $("#grid").data("kendoGrid"); // get the index of the row // TODO: add specific function call here</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>cell</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Target cell.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="clearSelection"><code>clearSelection</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Clears currently selected items.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// clear the selection of items in the gridgrid.clearSelection();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="closeCell"><code>closeCell</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Closes current edited cell.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// close the cell being editedgrid.closeCell();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="collapseGroup"><code>collapseGroup</code></a> (group)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Collapses specified group.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// collapses first group itemgrid.collapseGroup(grid.tbody.find("&gt;tr.k-grouping-row:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>group</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Target group item to collapse.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="collapseRow"><code>collapseRow</code></a> (row)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Collapses specified master row.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// collapses first master rowgrid.collapseRow(grid.tbody.find("&gt;tr.k-master-row:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>row</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Target master row to collapse.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="dataItem"><code>dataItem</code></a> (tr)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Returns the data item to which a given table row (tr DOM element) is bound.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// returns the data item for first rowgrid.dataItem(grid.tbody.find("&gt;tr:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>tr</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Target row.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="editCell"><code>editCell</code></a> (cell)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Puts the specified table cell in edit mode. It requires a jQuery object representing the cell. The editCell method triggers edit event.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// edit first table cellgrid.editCell(grid.tbody.find("&gt;tr&gt;td:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>cell</code><span class="light fixedFont">: Selector</span> 
+                                
+                            </dt>
+                            <dd>Cell to be edited.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="expandGroup"><code>expandGroup</code></a> (group)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Expands specified group.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// expands first group itemgrid.expandGroup(grid.tbody.find("&gt;tr.k-grouping-row:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>group</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Target group item to expand.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="expandRow"><code>expandRow</code></a> (row)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Expands specified master row.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// expands first master rowgrid.expandRow(grid.tbody.find("&gt;tr.k-master-row:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>row</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Target master row to expand.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="refresh"><code>refresh</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Reloads the data and repaints the grid.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// refreshes the gridgrid.refresh();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="removeRow"><code>removeRow</code></a> (row)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Removes the specified row from the grid. The removeRow method triggers remove event.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// remove first table rowgrid.removeRow(grid.tbody.find("&gt;tr:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>row</code><span class="light fixedFont">: Selector | DOM Element</span> 
+                                
+                            </dt>
+                            <dd>Row to be removed.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="saveChanges"><code>saveChanges</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Calls DataSource sync to submit any pending changes if state is valid. The saveChanges method triggers saveChanges event.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");grid.saveChanges();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="select"><code>select</code></a> (items)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Selects the specified Grid rows/cells. If called without arguments - returns the selected rows/cells.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the grid widgetvar grid = $("#grid").data("kendoGrid");// selects first grid itemgrid.select(grid.tbody.find("&gt;tr:first"));</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>items</code><span class="light fixedFont">: Selector | Array</span> 
+                                
+                            </dt>
+                            <dd>Items to select.</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+    </ul>
+

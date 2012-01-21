@@ -1,0 +1,8 @@
+
+
+        <!-- help-data -->
+
+
+    
+    <div class="detailHandle"><div class="detailCollapsed"></div><a name="messages"><code class="symbol">messages</code></a>: <span class="type">Object</span></div><div class="detailBody"><div class="desc">Set of messages (either strings or functions) which will be shown when given validation rule fails. By setting already existing key the appropriate built-in message will be overridden.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint lang-js"><code>$("#myform").kendoValidator({     rules: {         custom: function(input) {            //...         }     },     messages: {         custom: "Please enter valid value for my custom rule",// defines message for the 'custom' validation rule         required: "My custom required message", // overrides the built-in message for required rule         email: function(input) { // overrides the built-in email rule message with a custom function which return the actual message             return getMessage(input);         }     }});</code></pre></div></div><div class="detailHandle"><div class="detailCollapsed"></div><a name="rules"><code class="symbol">rules</code></a>: <span class="type">Object</span></div><div class="detailBody"><div class="desc">Set of validation rules. Those rules will extend the built-in ones.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint lang-js"><code>$("#myform").kendoValidator({     rules: {         custom: function(input) {             return input.is("[name=firstname]") && input.val() === "Tom"; // Only Tom will be a valid value for FirstName input         }     }});</code></pre></div></div>
+

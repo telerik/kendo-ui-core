@@ -1,0 +1,113 @@
+
+
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="dataBound"><code>dataBound</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the chart has received data from the data sourceand is about to render it.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>function onDataBound(e) {    // Series data is now available}</code></pre></div>
+
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="seriesClick"><code>seriesClick</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when chart series are clicked.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>function onSeriesClick(e) {    alert("Clicked value: " + e.value);}</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>value</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The data point value.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>category</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The data point category</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>series</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The clicked series.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>series.type</code>
+                            <span class="type">: String</span> 
+                            
+                        </dt>
+                        <dd>The series type</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>series.name</code>
+                            <span class="type">: String</span> 
+                            
+                        </dt>
+                        <dd>The series name</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>series.data</code>
+                            <span class="type">: Array</span> 
+                            
+                        </dt>
+                        <dd>The series data points</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>dataItem</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The original data item (when binding to dataSource).</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>element</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The DOM element of the data point.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+

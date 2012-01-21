@@ -1,0 +1,17 @@
+<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>draggable</div><div style="display: block;" class="detailBody">
+
+        <!-- help-data -->
+
+
+    
+    <div class="detailHandle"><div class="detailCollapsed"></div><a name="distance"><code class="symbol">distance</code></a>: <span class="type">Integer</span><span class="defaultValue">(default: 5)</span></div><div class="detailBody"><div class="desc"> The required distance that the mouse should travel in order to initiate a drag.</div></div><div class="detailHandle"><div class="detailCollapsed"></div><a name="filter"><code class="symbol">filter</code></a>: <span class="type">Selector</span></div><div class="detailBody"><div class="desc">Selects child elements that are draggable if a widget is attached to a container.</div></div><div class="detailHandle"><div class="detailCollapsed"></div><a name="group"><code class="symbol">group</code></a>: <span class="type">String</span><span class="defaultValue">(default: "default")</span></div><div class="detailBody"><div class="desc"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.</div></div><div class="detailHandle"><div class="detailCollapsed"></div><a name="hint"><code class="symbol">hint</code></a>: <span class="type">Function|jQueryObject</span></div><div class="detailBody"><div class="desc">Provides a way for customization of the drag indicator. If a function is supplied, it receives one argument - the draggable element's jQuery object.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint lang-js"><code>//hint as a function $("#draggable").kendoDraggable({     hint: function(element) {         return $("#draggable").clone();         // same as         //  return element.clone();     } });//hint as jQuery object $("#draggable").kendoDraggable({     hint: $("#draggableHint"); });</code></pre></div></div>
+
+</div><div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>droptarget</div><div style="display: block;" class="detailBody">
+
+        <!-- help-data -->
+
+
+    
+    <div class="detailHandle"><div class="detailCollapsed"></div><a name="group"><code class="symbol">group</code></a>: <span class="type">String</span><span class="defaultValue">(default: "default")</span></div><div class="detailBody"><div class="desc"> Used to group sets of draggable and drop targets. A draggable with the same group value as a drop target will be accepted by the drop target.</div></div>
+
+</div>

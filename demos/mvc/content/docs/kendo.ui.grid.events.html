@@ -1,0 +1,319 @@
+
+
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="change"><code>change</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the grid selection has changed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     change: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the change event grid.bind("change", function(e) {     // handle event }</code></pre></div>
+
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="dataBound"><code>dataBound</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the grid has received data from the data source.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     dataBound: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the dataBound event grid.bind("dataBound", function(e) {     // handle event }</code></pre></div>
+
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="detailCollapse"><code>detailCollapse</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the grid detail row is collapsed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     detailCollapse: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the detailCollapse event grid.bind("detailCollapse", function(e) {     // handle event }</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>masterRow</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing master row.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>detailRow</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing detail row.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="detailExpand"><code>detailExpand</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the grid detail row is expanded.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     detailExpand: function(e) {         // handle event     } });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the detailExpand event grid.bind("detailExpand", function(e) {     // handle event }</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>masterRow</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing master row.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>detailRow</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing detail row.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="detailInit"><code>detailInit</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the grid detail is initialized.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     detailInit: function(e) {         // handle event });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the detailInit event grid.bind("detailInit", function(e) {     // handle event }</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>masterRow</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing master row.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>detailRow</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing detail row.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>detailCell</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element representing detail cell.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>data</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The data for the master row.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="edit"><code>edit</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when the grid enters edit mode.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     edit: function(e) {         // handle event });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the edit event grid.bind("edit", function(e) {     // handle event }</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>container</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element to be edited.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>model</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The model to be edited.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="remove"><code>remove</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before the grid item is removed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     remove: function(e) {         // handle event });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the remove event grid.bind("remove", function(e) {     // handle event }</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>row</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The row element to be deleted.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>model</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The model which to be deleted.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="save"><code>save</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before the grid item is changed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     save: function(e) {         // handle event });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the save event grid.bind("save", function(e) {     // handle event }</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>values</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The values entered by the user.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>container</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The jQuery element which is in edit mode.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>model</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The edited model.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="saveChanges"><code>saveChanges</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before the grid calls DataSource sync.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code> $("#grid").kendoGrid({     saveChanges: function(e) {         // handle event });</code></pre></div><div class="code-sample"><h4 class="code-title">To set after initialization</h4><pre class="code prettyprint"><code> // get a reference to the grid var grid = $("#grid").data("kendoGrid"); // bind to the saveChanges event grid.bind("saveChanges", function(e) {     // handle event }</code></pre></div>
+
+            
+
+            
+
+            
+        </div>
+    
+

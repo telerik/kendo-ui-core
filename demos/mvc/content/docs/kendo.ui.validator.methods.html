@@ -1,0 +1,74 @@
+
+
+    <ul class="methodDetail" id="MethodDetail">
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="errors"><code>errors</code></a> ()
+
+                    : <span class="type">Array</span>
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Get the error messages if any.</div><div class="desc">Messages for the failed validation rules.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the validatable formvar validatable = $("#myform").kendoValidator().data("kendoValidator");$("#save").click(function() {    if (validatable.validate() === false) {        // get the errors and write them out to the "errors" html container        var errors = validatable.errors();        $(errors).each(function() {            $("#errors").html(this);        });    }});</code></pre></div>
+
+                    
+
+                    
+                        <dl class="detailList">
+                            
+
+                            
+
+                            
+                                <dt class="heading">Returns</dt>
+                                
+                                    <dd><span class="light fixedFont">Array</span> Messages for the failed validation rules.</dd>
+                                
+                            
+
+                            
+
+                            
+
+                        </dl>
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="validate"><code>validate</code></a> ()
+
+                    : <span class="type">Boolean</span>
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Validates the input element(s) against the declared validation rules.</div><div class="desc">If all rules are passed successfully.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the validatable formvar validatable = $("#myform").kendoValidator().data("kendoValidator");// check validation on save button click$("#save").click(function() {    if (validatable.validate()) {        save();    }});</code></pre></div>
+
+                    
+
+                    
+                        <dl class="detailList">
+                            
+
+                            
+
+                            
+                                <dt class="heading">Returns</dt>
+                                
+                                    <dd><span class="light fixedFont">Boolean</span> If all rules are passed successfully.</dd>
+                                
+                            
+
+                            
+
+                            
+
+                        </dl>
+                    
+                </div>
+            </li>
+        
+    </ul>
+

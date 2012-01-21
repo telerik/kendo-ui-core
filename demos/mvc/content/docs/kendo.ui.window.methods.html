@@ -1,0 +1,261 @@
+
+
+    <ul class="methodDetail" id="MethodDetail">
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="center"><code>center</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Centers the window within the viewport.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var wnd = $("#window").data("kendoWindow");wnd.center();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="close"><code>close</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Closes the window</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var wnd = $("#window").data("kendoWindow");wnd.close();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="content"><code>content</code></a> (content)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Sets/gets the window content.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var wnd = $("#window").data("kendoWindow");// get the contentvar content = wnd.content();// set the contentwnd.content("&amp;lt;p&amp;gt;New content&amp;lt;/p&amp;gt;");</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>content</code><span class="light fixedFont">: String</span> 
+                                
+                            </dt>
+                            <dd>The new window content</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="destroy"><code>destroy</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Destroys the window and its modal overlay, if necessary. Useful for removing modal windows.</div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="maximize"><code>maximize</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Maximizes a window so that it fills the entire screen.</div><div class="desc"></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="minimize"><code>minimize</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Minimizes a window to its title bar.</div><div class="desc"></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="open"><code>open</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Opens the window</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var wnd = $("#window").data("kendoWindow");wnd.open();</code></pre></div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="refresh"><code>refresh</code></a> (options)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Refreshes the window content from a remote url.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var windowObject = $("#window").data("kendoWindow");windowObject.refresh("/feedbackForm");windowObject.refresh({    url: "/feedbackForm",    data: { userId: 42 }});windowObject.refresh({    url: "/userInfo",    data: { userId: 42 },    template: "Hello, #= firstName # #= lastName #"});</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>options</code><span class="light fixedFont">: Object|String</span> 
+                                
+                            </dt>
+                            <dd>Options for requesting data from the server. If omitted, the window uses the <code>content</code> property that was supplied when the window was created. Any options specified here are passed to the jQuery.ajax call.</dd>
+                        
+                            <dt>
+                                <code>options.url</code><span class="light fixedFont">: String</span> 
+                                
+                            </dt>
+                            <dd>The server URL that will be requested.</dd>
+                        
+                            <dt>
+                                <code>options.data</code><span class="light fixedFont">: Object</span> 
+                                
+                            </dt>
+                            <dd>A JSON object containing the data that will be passed to the server.</dd>
+                        
+                            <dt>
+                                <code>options.type</code><span class="light fixedFont">: String</span> 
+                                
+                            </dt>
+                            <dd>The request method ("GET", "POST").</dd>
+                        
+                            <dt>
+                                <code>options.template</code><span class="light fixedFont">: String</span> 
+                                
+                            </dt>
+                            <dd>A template to be used for displaying the requested data</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="restore"><code>restore</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Restores a maximized / minimized window to its previous size.</div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="title"><code>title</code></a> (title)
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Sets/gets the window title.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var wnd = $("#window").data("kendoWindow");// get the titlevar title = wnd.title();// set the titlewnd.title("New title");</code></pre></div>
+
+                    
+                    <div class="details-list">
+                        <h4 class="details-title">Parameters</h4>
+                        <dl>
+                        
+                            <dt>
+                                <code>title</code><span class="light fixedFont">: String</span> 
+                                
+                            </dt>
+                            <dd>The new window title</dd>
+                        
+                        </dl>
+                    </div>
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="toFront"><code>toFront</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Brings the window on top of other windows.</div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+            <li>
+                <div class="detailHandle">
+                    <div class="detailCollapsed"></div>
+                    <a name="toggleMaximization"><code>toggleMaximization</code></a> ()
+
+                    
+                </div>
+                <div class="detailBody">
+                    <div class="desc">Toggles the window between a maximized and restored state.</div>
+
+                    
+
+                    
+                </div>
+            </li>
+        
+    </ul>
+

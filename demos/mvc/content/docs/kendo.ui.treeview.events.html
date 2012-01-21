@@ -1,0 +1,336 @@
+
+
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="collapse"><code>collapse</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before a subgroup gets collapsed.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>node</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The collapsed node</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="drag"><code>drag</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires while a node is being dragged.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>sourceNode</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The node that is being dragged.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>dropTarget</code>
+                            <span class="type">: DomElement</span> 
+                            
+                        </dt>
+                        <dd>The element that the node is placed over.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>pageX</code>
+                            <span class="type">: Integer</span> 
+                            
+                        </dt>
+                        <dd>The x coordinate of the mouse.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>pageY</code>
+                            <span class="type">: Integer</span> 
+                            
+                        </dt>
+                        <dd>The y coordinate of the mouse.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>statusClass</code>
+                            <span class="type">: String</span> 
+                            
+                        </dt>
+                        <dd>The status that the drag clue shows.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>setStatusClass</code>
+                            <span class="type">: Function</span> 
+                            
+                        </dt>
+                        <dd>Allows a custom drag clue status to be set.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="dragend"><code>dragend</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires after a node is has been dropped.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>sourceNode</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The node that is being dropped.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>destinationNode</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The node that the sourceNode is being dropped upon.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>dropPosition</code>
+                            <span class="type">: String</span> 
+                            
+                        </dt>
+                        <dd>Shows where the new sourceLocation would be.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="dragstart"><code>dragstart</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before the dragging of a node starts.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>sourceNode</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The node that will be dragged.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="drop"><code>drop</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when a node is being dropped.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>sourceNode</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The node that is being dropped.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>destinationNode</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The node that the sourceNode is being dropped upon.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>valid</code>
+                            <span class="type">: Boolean</span> 
+                            
+                        </dt>
+                        <dd>Whether this drop operation is permitted</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>setValid</code>
+                            <span class="type">: Function</span> 
+                            
+                        </dt>
+                        <dd>Allows the drop to be prevented.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>dropTarget</code>
+                            <span class="type">: DomElement</span> 
+                            
+                        </dt>
+                        <dd>The element that the node is placed over.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>dropPosition</code>
+                            <span class="type">: String</span> 
+                            
+                        </dt>
+                        <dd>Shows where the new sourceLocation would be.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="expand"><code>expand</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires before a subgroup gets expanded.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>node</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The expanded node</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="select"><code>select</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when a node gets selected.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>node</code>
+                            <span class="type">: Node</span> 
+                            
+                        </dt>
+                        <dd>The selected node</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+
