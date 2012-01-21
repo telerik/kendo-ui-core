@@ -314,6 +314,12 @@
     background: #d6d6d6;
 }
 
+:-moz-any(.km-android) .km-buttongroup .km-button
+{
+    display: inline-block;
+    margin-left: -4px;
+}
+
 .km-android .km-buttongroup .km-state-active
 {
     background: #4cbee8;
@@ -344,6 +350,7 @@
 
 .km-android .km-buttongroup .km-button:first-child
 {
+    margin-left: 0;
     .border-radius(1px 0 0 1px);
 }
 
