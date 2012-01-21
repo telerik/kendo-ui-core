@@ -55,7 +55,7 @@ var bundles = [{
     name: "kendoui.mobile",
     suites: ["mobile"],
     licenses: betaLicenses,
-    eula: "eula"
+    eula: "beta-eula"
 }];
 
 var thirdPartyScripts = [
