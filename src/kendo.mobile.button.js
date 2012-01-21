@@ -217,7 +217,7 @@
 
     /**
     * @name kendo.mobile.ui.DetailButton.Description
-    * @section The DetailButton widget navigates to a detail mobile View when pressed.
+    * @section The DetailButton widget navigates to a mobile view when pressed.
     *
     * @exampleTitle Initialize Kendo mobile DetailButton based on role data attribute.
     * @example
