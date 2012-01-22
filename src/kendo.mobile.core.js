@@ -113,8 +113,8 @@
 
             var eventMap = {};
 
-            eventMap["mousemove" + ns + " mouseleave" + ns] = proxy(that._mouseMove, that);
-            eventMap["mouseup" + ns] = proxy(that._mouseUp, that);
+            eventMap["mousemove" + ns] = proxy(that._mouseMove, that);
+            eventMap["mouseup" + ns + " mouseleave" + ns] = proxy(that._mouseUp, that);
             eventMap["touchmove" + ns] = proxy(that._touchMove, that);
             eventMap["touchend" + ns] = proxy(that._touchEnd, that);
 
