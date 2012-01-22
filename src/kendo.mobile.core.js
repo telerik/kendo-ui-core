@@ -246,10 +246,9 @@
         },
 
         moveTo: function(x, y) {
-            var that = this;
-            that.x = x;
-            that.y = y;
-            that._redraw();
+            this.x = x;
+            this.y = y;
+            this._redraw();
         },
 
         _redraw: function() {
@@ -267,22 +266,27 @@
         init: function(options) {
             var that = this;
 
-            that.options = options;
+            extend(that, { maxX: 0, maxY: 0, elastic: true }, options);
+            that.ignoreX = that.maxX === that.minX;
+            that.ignoreY = that.maxY === that.minY;
 
-            options.swipe.bind("move", proxy(that._move, that));
+            that.resistance = that.elastic ? 0.5 : 0;
+
+            that.swipe.bind("move", proxy(that._move, that));
         },
 
         _move: function(e) {
             var that = this,
-                options = that.options,
-                move = options.move,
-                deltaX = options.ignoreX ? 0 : e.x.delta,
-                deltaY = options.ignoreY ? 0 : e.y.delta,
+                move = that.move,
+                resistance = that.resistance,
+                deltaX = that.ignoreX ? 0 : e.x.delta,
+                deltaY = that.ignoreY ? 0 : e.y.delta,
                 x = move.x + deltaX,
                 y = move.y + deltaY;
 
-            if (x > 0 || x < options.minX) { deltaX *= 0.5; }
-            if (y > 0 || y < options.minY) { deltaY *= 0.5; }
+            if (x > that.maxX || x < that.minX) { deltaX *= resistance; }
+            if (y > that.maxY || y < that.minY) { deltaY *= resistance; }
+
             move.moveBy(deltaX, deltaY);
         }
     });
