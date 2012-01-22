@@ -262,32 +262,41 @@
         }
     });
 
+    var draggableHandler = function(axis) {
+        return function(e) {
+            var that = this,
+                move = that.move,
+                capitalAxis = axis.toUpperCase(),
+                min = that["min" + capitalAxis],
+                max = that["max" + capitalAxis],
+                resistance = that.resistance,
+                delta = min === max ? 0 : e.delta,
+                position = move[axis] + delta;
+
+            if (position > max || position < min) { delta *= resistance; }
+            that["delta" + capitalAxis] = delta;
+        }
+    }
+
     var Draggable = kendo.Class.extend({
         init: function(options) {
             var that = this;
 
             extend(that, { maxX: 0, maxY: 0, elastic: true }, options);
-            that.ignoreX = that.maxX === that.minX;
-            that.ignoreY = that.maxY === that.minY;
 
             that.resistance = that.elastic ? 0.5 : 0;
 
             that.swipe.bind("move", proxy(that._move, that));
         },
 
+        xHandler: draggableHandler("x"),
+        yHandler: draggableHandler("y"),
+
         _move: function(e) {
-            var that = this,
-                move = that.move,
-                resistance = that.resistance,
-                deltaX = that.ignoreX ? 0 : e.x.delta,
-                deltaY = that.ignoreY ? 0 : e.y.delta,
-                x = move.x + deltaX,
-                y = move.y + deltaY;
-
-            if (x > that.maxX || x < that.minX) { deltaX *= resistance; }
-            if (y > that.maxY || y < that.minY) { deltaY *= resistance; }
-
-            move.moveBy(deltaX, deltaY);
+            var that = this;
+            that.xHandler(e.x);
+            that.yHandler(e.y);
+            that.move.moveBy(that.deltaX, that.deltaY);
         }
     });
 
