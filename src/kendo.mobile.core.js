@@ -99,7 +99,8 @@
 
     var START = "start",
         MOVE = "move",
-        END = "end";
+        END = "end",
+        SURFACE = $(document.documentElement);
 
     var Swipe = Observable.extend({
         init: function(element, options) {
@@ -109,6 +110,7 @@
 
             options = options || {};
 
+            element = $(element);
             Observable.fn.init.call(that);
 
             var eventMap = {};
@@ -118,10 +120,11 @@
             eventMap["touchmove" + ns] = proxy(that._touchMove, that);
             eventMap["touchend" + ns] = proxy(that._touchEnd, that);
 
-            $.extend(that, {
+            extend(that, {
                 x: new SwipeAxis(true),
                 y: new SwipeAxis(false),
-                element: $(element),
+                element: element,
+                surface: options.global ? SURFACE : element,
                 pressed: false,
                 eventMap: eventMap,
                 ns: ns
@@ -140,7 +143,7 @@
 
             e.preventDefault();
 
-            that.element.on(that.eventMap);
+            that.surface.on(that.eventMap);
 
             that._perAxis(START, e);
         },
@@ -158,7 +161,7 @@
 
             that.touchID = touch.identifier;
 
-            that.element.on(that.eventMap);
+            that.surface.on(that.eventMap);
 
             that._perAxis(START, touch);
         },
@@ -189,7 +192,7 @@
             that._withTouchEvent(e, function(touch) {
                 that.pressed = false;
 
-                that.element.off(that.ns);
+                that.surface.off(that.ns);
 
                 that._perAxis(END, touch);
             });
@@ -198,7 +201,7 @@
         _mouseUp: function(e) {
             var that = this;
 
-            that.element.off(that.ns);
+            that.surface.off(that.ns);
 
             that._perAxis(END, e);
         },
