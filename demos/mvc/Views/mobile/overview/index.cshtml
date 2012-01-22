@@ -10,51 +10,7 @@
 
 <p>See what’s on the pipeline for the official Kendo UI Mobile release by visiting the <a href="http://www.kendoui.com/mobile/roadmap.aspx" target="_blank">public roadmap</a>.</p>
 }
-<div data-role="view" data-layout="overview-layout" id="contacts" data-title="My Contacts">
-    <ul data-role="listview" data-type="group">
-        <li>
-            A
-            <ul>
-                <li><h2>Ann Devon</h2><img src="../../content/mobile/overview/ann.jpg" /></li>
-                <li><h2>Annette Roulet</h2><img src="../../content/mobile/overview/annette.jpg" /></li>
-                <li><h2>Antonio Moreno</h2><img src="../../content/mobile/overview/antonio.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-            C
-            <ul>
-                <li><h2>Carine Schmitt</h2><img src="../../content/mobile/overview/carine.jpg" /></li>
-                <li><h2>Catherine Dewey</h2><img src="../../content/mobile/overview/catherine.jpg" /></li>
-                <li><h2>Christina Berglund</h2><img src="../../content/mobile/overview/christina.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-           D
-            <ul>
-                <li><h2>Daniel Tonini</h2><img src="../../content/mobile/overview/daniel.jpg" /></li>
-                <li><h2>Diego Roel</h2><img src="../../content/mobile/overview/diego.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-            E
-            <ul>
-                <li><h2>Eduardo Saavedra</h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
-                <li><h2>Elizabeth Brown</h2><img src="../../content/mobile/overview/elizabeth.jpg" /></li>
-            </ul>
-        </li>
-        <li>
-            F
-            <ul>
-                <li><h2>Felipe Izquierdo</h2><img src="../../content/mobile/overview/felipe.jpg" /></li>
-                <li><h2>Fran Wilson</h2><img src="../../content/mobile/overview/fran.jpg" /></li>
-                <li><h2>Francisco Chang</h2><img src="../../content/mobile/overview/francisco.jpg" /></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-
-<div data-role="view" data-layout="overview-layout" id="cities" data-title="Favourite Cities">
+<div data-role="view" data-layout="overview-layout" id="overview-cities" data-title="Favourite Cities">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             Africa
@@ -94,7 +50,49 @@
     </ul>
 </div>
 
-<div data-role="view" data-layout="overview-layout" id="account" data-title="Account Settings">
+<div data-role="view" data-layout="overview-layout" id="overview-contacts" data-title="My Contacts">
+    <ul data-role="listview" data-type="group">
+        <li>
+            A
+            <ul>
+                <li><h2>Ann Devon</h2><img src="../../content/mobile/overview/ann.jpg" /></li>
+                <li><h2>Annette Roulet</h2><img src="../../content/mobile/overview/annette.jpg" /></li>
+                <li><h2>Antonio Moreno</h2><img src="../../content/mobile/overview/antonio.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            C
+            <ul>
+                <li><h2>Carine Schmitt</h2><img src="../../content/mobile/overview/carine.jpg" /></li>
+                <li><h2>Catherine Dewey</h2><img src="../../content/mobile/overview/catherine.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+           D
+            <ul>
+                <li><h2>Daniel Tonini</h2><img src="../../content/mobile/overview/daniel.jpg" /></li>
+                <li><h2>Diego Roel</h2><img src="../../content/mobile/overview/diego.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            E
+            <ul>
+                <li><h2>Eduardo Saavedra</h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
+                <li><h2>Elizabeth Brown</h2><img src="../../content/mobile/overview/elizabeth.jpg" /></li>
+            </ul>
+        </li>
+        <li>
+            F
+            <ul>
+                <li><h2>Felipe Izquierdo</h2><img src="../../content/mobile/overview/felipe.jpg" /></li>
+                <li><h2>Fran Wilson</h2><img src="../../content/mobile/overview/fran.jpg" /></li>
+                <li><h2>Francisco Chang</h2><img src="../../content/mobile/overview/francisco.jpg" /></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" data-layout="overview-layout" id="overview-account" data-title="Account Settings">
     <ul id="settings-view" data-role="buttongroup" data-index="0">
         <li>
             General
@@ -112,29 +110,54 @@
             <ul>
                 <li>Notifications <input type="checkbox" data-role="switch" checked></li>
                 <li>Local Services <input type="checkbox" data-role="switch"></li>
-                <li>About </li>
+                <li><a>About</a></li>
             </ul>
         </li>
         <li>
             Group
             <ul>
-                <li>Your Group Name</li>
-                <li>Group Email</li>
+                <li><a>Your Group Name</a></li>
+                <li><a>Group Email</a></li>
             </ul>
         </li>
         <li>
             Profile
             <ul>
-                <li>Username</li>
-                <li>Email</li>
+                <li><a>Username</a></li>
+                <li><a>Email</a></li>
             </ul>
         </li>
     </ul>
 </div>
 
-<div data-role="view" data-layout="overview-layout" id="about" data-title="About">
-    <h2>Native UI on Every Device</h2>
-    <p>Kendo UI Mobile helps developers build apps and sites for mobile devices that always look native. On iOS, Kendo UI Mobile widgets look native to iOS. On Android, Kendo UI Mobile widgets look native to Android. Automatically. Kendo UI Mobile detects the device and applies the proper styling.</p>
+<div data-role="view" data-layout="overview-layout" id="overview-about" data-title="My Profile">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li><h2>Christina <span>Berglund</span></h2><img src="../../content/mobile/overview/christina.jpg" /></li>
+                <li>Username <span class="value">christina</span></li>
+                <li>Email <span class="value">clientservice at kendoui.com</span></li>
+            </ul>
+        </li>
+        <li>
+            Languages
+            <ul>
+                <li>English <span class="value">Native</span></li>
+                <li>French<span class="value">Advanced</span></li>
+            </ul>
+        </li>
+        <li>
+            PC Skills
+            <ul>
+                <li>MS Word</li>
+                <li>MS Excel</li>
+                <li>MS Outlook</li>
+                <li>MS PowerPoint</li>
+                <li>Windows (XP, Vista)</li>
+                <li>Internet</li>
+            </ul>
+        </li>
+    </ul>
 </div>
 
 <div data-role="layout" data-id="overview-layout">
@@ -148,31 +171,54 @@
 
     <footer data-role="footer">
         <div data-role="tabstrip">
-            <a data-icon="contacts" href="#contacts">Contacts</a>
-            <a data-icon="globe" href="#cities">Cities</a>
-            <a data-icon="settings" href="#account">My Account</a>
-            <a data-icon="info" href="#about">About</a>
+            <a data-icon="globe" href="#overview-cities">Cities</a>
+            <a data-icon="contacts" href="#overview-contacts">Contacts</a>
+            <a data-icon="settings" href="#overview-account">My Account</a>
+            <a data-icon="info" href="#overview-about">My Profile</a>
         </div>
     </footer>
 </div>
 
 <style scoped>
-.km-list h2 {
+#overview-contacts h2,
+#overview-cities h2 {
     display: inline-block;
     font-size: 1.1rem;
     margin: 1rem 0 1.5rem 1rem;
 }
-img {
+#overview-about h2 {
+    display: inline-block;
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0 1rem;
+}
+#overview-about h2 span {
+    display: block;
+    clear: both;
+    font-size: 2.3rem;
+    margin: .5rem 0 0 0;
+}
+#overview-contacts img,
+#overview-cities img,
+#overview-about img {
+	float: left;
     width: 4em;
     height: 4em;
-    float: left;
     margin: 0;
     -webkit-box-shadow: 0 1px 3px #333;
     box-shadow: 0 1px 3px #333;
     -webkit-border-radius: 8px;
     border-radius: 8px;
 }
-#about h2 {
-	margin-top: 1rem;
+#overview-about img {
+    width: 5em;
+    height: 5em;
+    margin: 1rem;
+}
+#overview-about .value {
+	float: right;
+	color: #ccc;
+}
+#settings-view {
+	margin: 1rem auto .4rem auto;
 }
 </style>

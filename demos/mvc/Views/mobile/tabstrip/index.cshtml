@@ -7,8 +7,6 @@
                 <li>Monthly average sales <span class="sales-up">$ 32,000</span></li>
             </ul>
         </li>
-    </ul>
-    <ul data-role="listview" data-type="group">
         <li>
             Sales commodity
             <ul>
@@ -25,10 +23,10 @@
         <li>
             Languages
             <ul>
-                <li>English (Native)</li>
-                <li>Hungarian (Advanced)</li>
-                <li>French (Advanced)</li>
-                <li>Chinese (beginner)</li>
+                <li>English <span class="value">Native</span></li>
+                <li>Hungarian <span class="value">Advanced</span></li>
+                <li>French <span class="value">Advanced</span></li>
+                <li>Chinese <span class="value">Beginner</span></li>
             </ul>
         </li>
         <li>
@@ -145,7 +143,8 @@
     border-radius: 8px;
 }
 #tabstrip-sales ul span,
-#tabstrip-profile .sales-up {
+#tabstrip-profile .sales-up,
+#tabstrip-profile .value {
 	float: right;
 }
 #tabstrip-sales .sales-up,
@@ -157,5 +156,8 @@
 }
 #tabstrip-sales .sales-hold {
 	color: blue;
+}
+#tabstrip-profile .value {
+	color: #ccc;
 }
 </style>
