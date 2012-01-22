@@ -104,18 +104,33 @@
     var Swipe = Observable.extend({
         init: function(element, options) {
             var that = this,
+                eventMap = {},
+                ns = "." + kendo.guid();
+
             options = options || {};
 
-            that.x = new SwipeAxis(true);
-            that.y = new SwipeAxis(false);
-
             Observable.fn.init.call(that);
-            element.bind("mousedown", proxy(that._mouseDown, that));
-            element.bind("mousemove", proxy(that._mouseMove, that));
-            element.bind("mouseup mouseleave", proxy(that._mouseUp, that));
-            element.bind("touchstart", proxy(that._touchStart, that));
-            element.bind("touchmove", proxy(that._touchMove, that));
-            element.bind("touchend", proxy(that._touchEnd, that));
+
+            var eventMap = {};
+
+            eventMap["mousemove" + ns + " mouseleave" + ns] = proxy(that._mouseMove, that);
+            eventMap["mouseup" + ns] = proxy(that._mouseUp, that);
+            eventMap["touchmove" + ns] = proxy(that._touchMove, that);
+            eventMap["touchend" + ns] = proxy(that._touchEnd, that);
+
+            $.extend(that, {
+                x: new SwipeAxis(true),
+                y: new SwipeAxis(false),
+                element: $(element),
+                pressed: false,
+                eventMap: eventMap,
+                ns: ns
+            });
+
+            element.on({
+                "mousedown": proxy(that._mouseDown, that),
+                "touchstart": proxy(that._touchStart, that)
+            });
 
             that.bind([START, MOVE, END], options);
         },
@@ -123,59 +138,69 @@
         _mouseDown: function(e) {
             var that = this;
 
-            if (!that.pressed) {
-                e.preventDefault();
-                that.pressed = true;
-                that._perAxis(START, e);
-            }
+            e.preventDefault();
+
+            that.element.on(that.eventMap);
+
+            that._perAxis(START, e);
         },
 
         _touchStart: function(e) {
-            var that = this;
+            var that = this,
+                originalEvent,
+                touch;
 
-            if (!that.pressed) {
-                var originalEvent = e.originalEvent;
-                touch = originalEvent.changedTouches[0];
-                that.touchID = touch.identifier;
-                that.pressed = true;
-                that._perAxis(START, touch);
-            }
+            if (that.pressed) { return; }
+            that.pressed = true;
+
+            originalEvent = e.originalEvent;
+            touch = originalEvent.changedTouches[0];
+
+            that.touchID = touch.identifier;
+
+            that.element.on(that.eventMap);
+
+            that._perAxis(START, touch);
         },
 
         _touchMove: function(e) {
             var that = this;
 
-            if (that.pressed) {
-                that._withTouchEvent(e, function(touch) {
-                    e.preventDefault();
-                    that._perAxis(MOVE, touch);
-                });
-            }
-        },
-
-        _touchEnd: function(e) {
-            var that = this;
+            if (!that.pressed) { return; }
 
             that._withTouchEvent(e, function(touch) {
-                that._mouseUp(touch);
+                e.preventDefault();
+                that._perAxis(MOVE, touch);
             });
         },
 
         _mouseMove: function(e) {
             var that = this;
 
-            if (that.pressed) {
-                e.preventDefault(e);
-                that._perAxis(MOVE, e);
-            }
+            e.preventDefault(e);
+            that._perAxis(MOVE, e);
+        },
+
+        _touchEnd: function(e) {
+            var that = this;
+
+            if (!that.pressed) { return; }
+
+            that._withTouchEvent(e, function(touch) {
+                that.pressed = false;
+
+                that.element.off(that.ns);
+
+                that._perAxis(END, touch);
+            });
         },
 
         _mouseUp: function(e) {
             var that = this;
-            if (that.pressed) {
-                that.pressed = false;
-                that._perAxis(END, e);
-            }
+
+            that.element.off(that.ns);
+
+            that._perAxis(END, e);
         },
 
         _perAxis: function(method, e) {
@@ -183,7 +208,7 @@
 
             that.x[method](e.pageX);
             that.y[method](e.pageY);
-            that.trigger(method, that);
+            return that.trigger(method, that);
         },
 
         _withTouchEvent: function(e, callback) {
