@@ -262,19 +262,22 @@
         }
     });
 
-    var draggableHandler = function(axis) {
+    function draggableHandler (axis) {
         return function(e) {
             var that = this,
-                move = that.move,
                 capitalAxis = axis.toUpperCase(),
-                min = that["min" + capitalAxis],
-                max = that["max" + capitalAxis],
-                resistance = that.resistance,
-                delta = min === max ? 0 : e.delta,
-                position = move[axis] + delta;
+                delta = e[axis].delta,
+                position = that.move[axis] + delta;
 
-            if (position > max || position < min) { delta *= resistance; }
+            if (position > that["max" + capitalAxis] || position < that["min" + capitalAxis]) { delta *= that.resistance; }
             that["delta" + capitalAxis] = delta;
+        }
+    }
+
+    function and(context, funcA, funcB) {
+        return function() {
+            funcA.apply(context, arguments);
+            funcB.apply(context, arguments);
         }
     }
 
@@ -282,21 +285,33 @@
         init: function(options) {
             var that = this;
 
-            extend(that, { maxX: 0, maxY: 0, elastic: true }, options);
-
-            that.resistance = that.elastic ? 0.5 : 0;
-
-            that.swipe.bind("move", proxy(that._move, that));
+            that.update(options);
+            that.swipe.bind("move", proxy(that.swipeMove, that));
         },
 
-        xHandler: draggableHandler("x"),
-        yHandler: draggableHandler("y"),
+        swipeMove: function(e) {
+            this._move(e);
+        },
 
-        _move: function(e) {
+        update: function(options) {
             var that = this;
-            that.xHandler(e.x);
-            that.yHandler(e.y);
-            that.move.moveBy(that.deltaX, that.deltaY);
+            extend(that, { maxX: 0, maxY: 0, elastic: true }, options);
+            that.resistance = that.elastic ? 0.5 : 0;
+
+            var move = that._apply;
+            if (that.minX != that.maxX) {
+                move = and(that, draggableHandler("x"), move);
+            }
+
+            if (that.minY != that.maxY) {
+                move = and(that, draggableHandler("y"), move);
+            }
+
+            that._move = move;
+        },
+
+        _apply: function() {
+            this.move.moveBy(this.deltaX, this.deltaY);
         }
     });
 

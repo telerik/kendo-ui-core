@@ -222,7 +222,7 @@
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
-            that.draggable.minX = width - scrollWidth;
+            that.draggable.update({minX: width - scrollWidth});
 
             for (var idx = 0; idx < pages; idx ++) {
                 pageHTML += "<li/>";
