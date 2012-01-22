@@ -103,7 +103,6 @@
 .km-android li.km-state-active
 {
     border: 0;
-    color: white;
 }
 
 .km-android,
@@ -256,17 +255,6 @@
     background-color: #fff;
 }
 
-.km-android .km-list .km-icon
-{
-    margin-top: .3em;
-}
-
-.km-android .km-detail .km-icon,
-.km-android .km-buttongroup .km-icon
-{
-    margin-top: 0;
-}
-
 .km-root .km-android .km-detail
 {
     height: 100%;
@@ -331,6 +319,12 @@
 {
     position: relative;
     z-index: 1;
+}
+
+.km-android .km-buttongroup .km-button .km-icon
+{
+    width: 1.1em;
+    height: 1.1em;
 }
 
 .km-android .km-buttongroup .km-button.km-state-active:after
@@ -586,6 +580,12 @@
 .km-android .km-button .km-icon
 {
     background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
+}
+
+.km-android .km-button.km-state-active .km-icon
+{
+    position: relative;
+    z-index: 1;
 }
 
 .km-android .km-navbar .km-icon

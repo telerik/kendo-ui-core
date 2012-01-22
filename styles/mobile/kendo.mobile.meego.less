@@ -39,7 +39,6 @@
 .km-meego .km-toolbar,
 .km-meego .km-button,
 .km-meego .km-switch,
-.km-meego .km-buttongroup,
 .km-meego .km-tabstrip
 {
     color: #000;
@@ -240,23 +239,22 @@
     background-color: #B01B1A;
 }
 
+.km-meego .km-buttongroup
+{
+    padding: 0 1px 1px 0;
+}
+
 .km-meego .km-buttongroup .km-button
 {
-    color: #929292;
-    text-shadow: 0 1px #fff;
-    border-color: #B4B8BA #9FA3A4 #9FA3A4;
-    background-image: linear-gradient(top, rgb(251,251,251), rgb(225,225,225) 50%, rgb(200,200,200));
-    .box-shadow(0 1px 0 0 rgba(255,255,255,.4));
+    border-right-width: 0;
 }
 
 .km-meego .km-buttongroup .km-state-active
 {
     color: #fff;
-    text-shadow: none;
     border-color: rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(0,0,0,.1);
-    background-color: #3D7EEB;
-    background-image: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 50%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.25));
-    .box-shadow(inset -1px 0 2px rgba(0,0,0,.6));
+    background-color: #1080dd;
+    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
 
 .km-meego .km-tabstrip
@@ -544,11 +542,16 @@
     background: #768694;
 }
 
+.km-meego .km-navbar .km-icon,
+.km-meego .km-button.km-state-active .km-icon
+{
+    background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
+}
+
 .km-meego .km-navbar .km-icon
 {
     margin-left: .5rem;
     margin-right: ~"-.3rem";
-    background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
 }
 
 .km-meego .km-tabstrip .km-icon
