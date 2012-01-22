@@ -187,9 +187,9 @@
             });
 
             that.draggable = new mobile.Draggable({
-                ignoreY: true,
                 minY: 0,
                 swipe: that.swipe,
+                elastic: true,
                 move: that.move
             });
 
@@ -222,7 +222,7 @@
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
-            that.draggable.options.minX = width - scrollWidth;
+            that.draggable.minX = width - scrollWidth;
 
             for (var idx = 0; idx < pages; idx ++) {
                 pageHTML += "<li/>";
