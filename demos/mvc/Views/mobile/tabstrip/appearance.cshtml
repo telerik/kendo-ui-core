@@ -1,0 +1,47 @@
+<div data-role="view" id="tabstrip-profile" data-title="Profile" data-layout="mobile-tabstrip">
+</div>
+
+<div data-role="view" id="tabstrip-sales" data-title="Sales History" data-layout="mobile-tabstrip">
+</div>
+
+<div data-role="view" id="tabstrip-rating" data-title="Rating" data-layout="mobile-tabstrip">
+</div>
+
+<div data-role="view" id="tabstrip-settings" data-title="Settings" data-layout="mobile-tabstrip">
+</div>
+
+<div data-role="layout" data-id="mobile-tabstrip">
+    <header data-role="header" id="tabstrip-appearance-header">
+        <div data-role="navbar">
+            <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <p>TabStrip</p>
+
+    <div data-role="footer">
+        <div data-role="tabstrip" id="tabstrip-appearance">
+            <a href="#tabstrip-profile" data-icon="contacts">Profile</a>
+            <a href="#tabstrip-sales" data-icon="history">Sales History</a>
+            <a href="#tabstrip-rating" data-icon="favorites">Rating</a>
+            <a href="#tabstrip-settings" data-icon="settings">Settings</a>
+        </div>
+    </div>
+</div>
+
+<style scoped>
+    #tabstrip-appearance,
+    #tabstrip-appearance-header .km-navbar,
+    #tabstrip-appearance .km-state-active .km-icon,
+    #tabstrip-appearance-header .km-navbar .km-button
+    {
+        background-color: #228b22;
+    }
+
+    #tabstrip-appearance .km-state-active .km-icon
+    {
+        background: #62cb62;
+    }
+</style>
