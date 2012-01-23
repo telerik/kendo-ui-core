@@ -119,6 +119,19 @@
                 theSwitch._toggle(true);
             });
 
+            test("Switch does not raise change event when no value changes", function() {
+                expect(1);
+
+                var theSwitch = new Switch(dom);
+
+                theSwitch.bind("change", function() {
+                    ok(true);
+                });
+
+                theSwitch._toggle(true);
+                theSwitch._toggle(true);
+            });
+
             test("Switch applies active state when pressed", function() {
                 expect(1);
 
