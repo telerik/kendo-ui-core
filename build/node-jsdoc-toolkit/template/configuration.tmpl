@@ -5,7 +5,7 @@
 
     if (defined(ownOptions) && ownOptions.length) {
         ownOptions.forEach(function (value, idx) {
-            var description = /\[(.*)\]/i.exec(ownOptions[idx].desc);
+            var description = /\[([^\]]*)\]/i.exec(ownOptions[idx].desc);
             description && (ownOptions[idx].name = description[1]);
 
             var defaultValue = /]\s*\<(.*)\>/i.exec(ownOptions[idx].desc);
