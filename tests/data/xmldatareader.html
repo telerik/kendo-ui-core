@@ -418,6 +418,22 @@
 
                 equal(result.length, 0);
             });
+
+            test("additional field is not added to the model if id is not defined", function() {
+                 var reader = new XmlDataReader({
+                    model: {
+                        fields: {
+                            bar: { field: "bar/text()" }
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo><bar>moo</bar></foo></root>');
+                result = reader.data(result);
+
+                ok(!result[""]);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

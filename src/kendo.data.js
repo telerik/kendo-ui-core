@@ -440,7 +440,10 @@
 
             that.dirty = false;
 
-            that.id = that.get(that.idField);
+            if (that.idField) {
+                that.id = that.get(that.idField);
+            }
+
         },
 
         shouldSerialize: function(field) {
@@ -449,8 +452,6 @@
                 && !(this.idField !== "id" && field === "id")
                 && field !== "dirty" && field !== "_accessors";
         },
-
-        idField: "id",
 
         _parse: function(field, value) {
             var that = this,
@@ -490,7 +491,9 @@
 
             extend(that, data);
 
-            that.id = that.get(that.idField);
+            if (that.idField) {
+                that.id = that.get(that.idField);
+            }
             that.dirty = false;
         },
 
@@ -502,9 +505,11 @@
     Model.define = function(options) {
         var model,
             proto = extend({}, { defaults: {} }, options),
-            id = proto.id || "id";
+            id = proto.id;
 
-        proto.idField = id;
+        if (id) {
+            proto.idField = id;
+        }
 
         if (proto.id) {
             delete proto.id;
@@ -1819,7 +1824,7 @@
             var idx, length, data = this._data;
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].id == model.id) {
+                if (data[idx].uid == model.uid) {
                     model = data[idx];
                     data.splice(idx, 1);
                     return model;
