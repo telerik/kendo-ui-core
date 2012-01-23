@@ -131,7 +131,9 @@
         MOUSEENTER = "mouseenter",
         CLICK = "click",
         PANE = "pane",
-        MOUSELEAVE = "mouseleave";
+        MOUSELEAVE = "mouseleave",
+        KPANE = "k-" + PANE,
+        PANECLASS = "." + KPANE;
 
     function isPercentageSize(size) {
         return percentageUnitsRegex.test(size);
@@ -315,7 +317,7 @@
             that.element
                 .addClass("k-widget").addClass("k-splitter")
                 .children()
-                    .addClass("k-pane")
+                    .addClass(KPANE)
                     .each(function (index, pane) {
                         var config = panesConfig && panesConfig[index];
 
@@ -416,7 +418,7 @@
                 that._triggerAction(arrowType, pane);
             };
         },
-        _updateSplitBar: function(splitBar, previousPane, nextPane) {
+        _updateSplitBar: function(splitbar, previousPane, nextPane) {
             var catIconIf = function(iconType, condition) {
                    return condition ? "<div class='k-icon " + iconType + "' />" : "";
                 },
@@ -427,7 +429,7 @@
                 nextCollapsible = nextPane.collapsible,
                 nextCollapsed = nextPane.collapsed;
 
-            splitBar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
+            splitbar.addClass("k-splitbar k-state-default k-splitbar-" + orientation)
                 .removeClass("k-splitbar-" + orientation + "-hover")
                 .toggleClass("k-splitbar-draggable-" + orientation,
                     draggable && !prevCollapsed && !nextCollapsed)
@@ -446,8 +448,8 @@
 
             this.element.children(".k-splitbar").each(function() {
                 var splitbar = $(this),
-                    previousPane = splitbar.prev(".k-pane").data(PANE),
-                    nextPane = splitbar.next(".k-pane").data(PANE);
+                    previousPane = splitbar.prev(PANECLASS).data(PANE),
+                    nextPane = splitbar.next(PANECLASS).data(PANE);
 
                 if (!nextPane) {
                     return;
@@ -457,7 +459,7 @@
             });
         },
         _contentFrames: function(splitbar) {
-            return $(splitbar).siblings(".k-pane").find("> .k-content-frame");
+            return $(splitbar).siblings(PANECLASS).find("> .k-content-frame");
         },
         _resize: function() {
             var that = this,
@@ -655,13 +657,13 @@
         },
         _start: function(e) {
             var that = this,
-                splitBar = $(e.currentTarget),
-                previousPane = splitBar.prev(),
-                nextPane = splitBar.next(),
+                splitbar = $(e.currentTarget),
+                previousPane = splitbar.prev(),
+                nextPane = splitbar.next(),
                 previousPaneConfig = previousPane.data(PANE),
                 nextPaneConfig = nextPane.data(PANE),
                 prevBoundary = parseInt(previousPane[0].style[that.positioningProperty]),
-                nextBoundary = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - splitBar[0][that.sizingDomProperty],
+                nextBoundary = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - splitbar[0][that.sizingDomProperty],
                 totalSize = that._element.css(that.sizingProperty),
                 toPx = function (value) {
                     var val = parseInt(value, 10);
@@ -685,20 +687,20 @@
         },
         _stop: function(e) {
             var that = this,
-                splitBar = $(e.currentTarget),
+                splitbar = $(e.currentTarget),
                 owner = that.owner;
 
-            owner._contentFrames(splitBar).next(".k-overlay").remove();
+            owner._contentFrames(splitbar).next(".k-overlay").remove();
 
             if (e.keyCode !== kendo.keys.ESC) {
                 var ghostPosition = e.position,
-                    previousPane = splitBar.prev(),
-                    nextPane = splitBar.next(),
+                    previousPane = splitbar.prev(),
+                    nextPane = splitbar.next(),
                     previousPaneConfig = previousPane.data(PANE),
                     nextPaneConfig = nextPane.data(PANE),
                     previousPaneNewSize = ghostPosition - parseInt(previousPane[0].style[that.positioningProperty]),
-                    nextPaneNewSize = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - ghostPosition - splitBar[0][that.sizingDomProperty],
-                    fluidPanesCount = that._element.children(".k-pane").filter(function() { return isFluid($(this).data(PANE).size); }).length;
+                    nextPaneNewSize = parseInt(nextPane[0].style[that.positioningProperty]) + nextPane[0][that.sizingDomProperty] - ghostPosition - splitbar[0][that.sizingDomProperty],
+                    fluidPanesCount = that._element.children(PANECLASS).filter(function() { return isFluid($(this).data(PANE).size); }).length;
 
                 if (!isFluid(previousPaneConfig.size) || fluidPanesCount > 1) {
                     if (isFluid(previousPaneConfig.size)) {
