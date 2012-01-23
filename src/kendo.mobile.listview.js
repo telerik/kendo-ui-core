@@ -44,20 +44,22 @@
 
     /**
     * @name kendo.mobile.ui.ListView.Description
-    * @section The Kendo Mobile ListView widget is used to display flat or grouped list of items.
-    * <p>It can be either used in unbound mode by enhancing an HTML <code>ul</code> element, or bound to a kendo.data.DataSource instance.</p>
+    * @section
+    * <p>The Kendo Mobile ListView widget is used to display flat or grouped list of items.
+    * It can be either used in unbound mode by enhancing an HTML <code>ul</code> element, or bound to a DataSource instance.</p>
     *
     * <h3>Getting Started</h3>
-    * <p>The Kendo Mobile Application automatically initializes the Mobile ListView for every <code>ul</code> element with <code>role</code> data attribute set to <code>listview</code> present in the views' markup.
-    * Alternatively, it can be initialized using a jQuery selector. The Mobile ListView element can contain one or more <code>li</code> elements.</p>
-    * @exampleTitle Initialize mobile ListView using a role data attribute.
+    * <p>The Kendo mobile Application automatically initializes the mobile ListView for every <code>ul</code> element with <code>role</code> data attribute set to
+    * <code>listview</code> present in the views' markup.
+    * Alternatively, it can be initialized using a jQuery selector. The mobile ListView element can contain one or more <code>li</code> elements.</p>
+    * @exampleTitle Initialize mobile ListView using a role data attribute
     * @example
     * <ul data-role="listview">
     *   <li>Foo</li>
     *   <li>Bar</li>
     * </ul>
     *
-    * @exampleTitle Initialize mobile ListView using a jQuery selector.
+    * @exampleTitle Initialize mobile ListView using a jQuery selector
     * @example
     * <ul id="listView"></ul>
     * <script>
@@ -66,8 +68,10 @@
     *
     * @section
     * <h3>Inset mobile ListView</h3>
-    * <p>In iOS, the mobile ListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped table views, where the list items are padded from the container, and have rounded corners.
-    * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>. <strong>Note:</strong> This setting won't affect the appearance of the mobile ListView on Android devices.</p>
+    * <p>In iOS, the mobile ListView appearance can be changed to <strong>inset</strong>, to achieve an effect similar to iOS grouped table views,
+    * where the list items are padded from the container, and have rounded corners.
+    * This can be accomplished by setting the <code>style</code> data attribute to <code>inset</code>.
+    * <strong>Note:</strong> This setting won't affect the appearance of the mobile ListView on Android devices.</p>
     *
     * @exampleTitle Create Inset mobile ListView
     * @example
@@ -78,7 +82,8 @@
     *
     * @section
     * <h3>Grouped mobile ListView</h3>
-    * <p>The mobile ListView can display items in groups, with optional headers. This can be achieved by nesting unordered list in items, and setting the <code>type</code> data attribute to <code>group</code>.</p>
+    * <p>The mobile ListView can display items in groups, with optional headers. This can be achieved by nesting unordered lists in items,
+    * and setting the widget's element <code>type</code> data attribute to <code>group</code>.</p>
     * @exampleTitle Create grouped mobile ListView
     * @example
     * <ul data-role="listview" data-type="group">
@@ -136,7 +141,7 @@
     * </script>
     *
     * @section
-    * <h3>Item icons</h3>
+    * <h3>Item Icons</h3>
     * An icon can be set in two ways - either by adding an <code>img</code> element inside the <code>li</code> element, or by setting an <code>icon</code> data attribute to the <code>li</code> element.
     * if data attribute is used then an <code>a</code> element should be put in the <code>li</code> element. The icon class will be applied to the <code>a</code> element.
     * Kendo mobile comes out of the box with several ready to use icons:
@@ -177,12 +182,15 @@
     *   <li title=".km-trash"><span class="km-icon km-trash"></span>trash</li>
     * </ul>
     *
-    * Additional icons may be added by defining the respective CSS class. If the <code>icon</code> data attribute is set to <code>custom</code>, the item will receive <code>km-custom</code> CSS class.
+    * <p>Additional icons may be added by defining the respective CSS class. If the <code>icon</code> data attribute is set to <code>custom</code>, the item will receive <code>km-custom</code> CSS class.  </p>
+    *
     * @exampleTitle Define custom button icon.
     * @example
+    * <style>
     * .km-custom {
-    *   background-image: ...
+    *   background-image: url("foo.jpg");
     * }
+    * </style>
     *
     * <ul data-role="listview" data-style="inset">
     *   <li data-icon="custom">
@@ -230,11 +238,11 @@
              * @name kendo.mobile.ui.ListView#click
              * @event
              * @param {Event} e
-             * @param {jQueryObject} e.item The selected list item
-             * @param {jQueryObject} e.target The clicked DOM element
+             * @param {jQueryObject} e.item The selected list item.
+             * @param {jQueryObject} e.target The clicked DOM element.
              * @param {Object} e.dataItem The corresponding dataItem associated with the item (available in databound mode only).
-             * @param {String} e.buttonName The name of the clicked Kendo MobileButton. Specified by setting the <code>name</code> data attribute of the button widget.
-             * @param {kendo.ui.MobileButton} e.button The clicked Kendo MobileButton
+             * @param {String} e.buttonName The name of the clicked Kendo mobile Button. Specified by setting the <code>name</code> data attribute of the button widget element.
+             * @param {kendo.ui.MobileButton} e.button The clicked Kendo mobile Button.
              *
              * @exampleTitle Handling button clicks
              * @example
@@ -254,11 +262,11 @@
              * <ul id="foo"></ul>
              *
              * <script>
-             *  // for the dataItem to be present in the click event, The datasource must have schema definition, specifying the model id field.
+             *  // for the dataItem to be present in the click event, The datasource must have schema definition.
              *  $("#foo").kendoMobileListView({
              *     dataSource: new kendo.data.DataSource({
-             *          data:   [{id: 1, title: "foo"}, {id: 2, title: "bar"}],
-             *          schema: {model: {id: "id"}}
+             *          data:   [{title: "foo"}, {title: "bar"}],
+             *          schema: {model: {}}
              *     }),
              *
              *     click: function(e) {
