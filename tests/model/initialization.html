@@ -339,6 +339,11 @@
                 ok(MyModel.fields.foo.parse());
             });
 
+            test("toJSON skips the id if id field is not declared", function() {
+                var model = new Model({ foo: 1 });
+                ok(!("id" in model.toJSON()));
+            });
+
             test("toJSON skips the id if id field is not default", function() {
                 var MyModel = Model.define({ id: "foo" }),
                     model = new MyModel({ foo: 1 });

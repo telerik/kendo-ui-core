@@ -22,7 +22,7 @@
                 dataSource = new DataSource($.extend({
                     data: [{ id: 1, foo: "foo" }],
                     schema: {
-                        model: Model
+                        model: $.extend({}, Model, { id: "id" })
                     }
                 }, options));
 

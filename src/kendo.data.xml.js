@@ -27,11 +27,13 @@
                         });
                     }
                     var id = model.id;
-                    var idField = {};
+                    if (id) {
+                        var idField = {};
 
-                    idField[that.xpathToMember(id, true)] = { field : that.getter(id) };
-                    model.fields = extend(model.fields, idField);
-                    model.id = that.xpathToMember(id);
+                        idField[that.xpathToMember(id, true)] = { field : that.getter(id) };
+                        model.fields = extend(model.fields, idField);
+                        model.id = that.xpathToMember(id);
+                    }
                     model = kendo.data.Model.define(model);
                 }
 
