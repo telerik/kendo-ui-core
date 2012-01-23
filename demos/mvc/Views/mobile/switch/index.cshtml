@@ -1,23 +1,24 @@
-<div data-role="view" id="home" data-init="mobileSwitchInit" data-title="Mobile Switch &ndash; Basic Usage">
-    <h2>Push Notifications</h2>
-    <ul class="km-list km-listinset">
+<div data-role="view" id="switch-home" data-init="mobileSwitchInit" data-title="User Settings">
+    <ul data-role="listview" data-style="inset" data-type="group">
         <li>
-            <h3>Email</h3>
-            <input data-role="switch" id="email-switch" checked="checked" />
+            <ul>
+                <li><h2>Eduardo <span>Saavedra</span></h2><img src="../../content/mobile/overview/eduardo.jpg" /></li>
+                <li>Brand Manager at Marketing Team</li>
+            </ul>
         </li>
-        <li>
-            <h3>Wink</h3>
-            <input id="wink-switch" />
-        </li>
-    </ul>
 
-    <h2>Subscription</h2>
-    <ul class="km-list km-listinset">
-        <li>
-            <h3>Subscribe</h3>
-            <input id="subscription-switch" />
+        <li>Password
+            <ul>
+                <li>User cannot change pasword <input data-role="switch" id="email-switch" checked="checked" /></li>
+                <li>Password never expires <input id="wink-switch" /></li>
+            </ul>
         </li>
-    </ul>
+
+        <li>Newsletter Subscription
+            <ul>
+                <li>Subscribed <input id="subscription-switch" /></li>
+            </ul>
+        </li>
 </div>
 
 <script>
@@ -31,3 +32,27 @@
         });
     }
 </script>
+
+<style scoped>
+#switch-home h2 {
+    display: inline-block;
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0 1rem;
+}
+#switch-home h2 span {
+    display: block;
+    clear: both;
+    font-size: 2.3rem;
+    margin: .5rem 0 0 0;
+}
+#switch-home img {
+    width: 5em;
+    height: 5em;
+    float: left;
+    margin: 1rem;
+    -webkit-box-shadow: 0 1px 3px #333;
+    box-shadow: 0 1px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+</style>
