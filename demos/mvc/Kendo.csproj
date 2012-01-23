@@ -115,9 +115,9 @@
     <Content Include="content\dataviz\overview\scatter.png" />
     <Content Include="content\mobile\application\music-store.html" />
     <Content Include="content\mobile\application\play-music.html" />
-    <Content Include="content\mobile\button\sports-facility.jpg" />
-    <Content Include="content\mobile\button\sports-home.jpg" />
-    <Content Include="content\mobile\button\sports.jpg" />
+    <Content Include="content\mobile\shared\sports-facility.jpg" />
+    <Content Include="content\mobile\shared\sports-home.jpg" />
+    <Content Include="content\mobile\shared\sports.jpg" />
     <Content Include="content\mobile\cities\220\berlin.jpg" />
     <Content Include="content\mobile\cities\220\bonn.jpg" />
     <Content Include="content\mobile\cities\220\boston.jpg" />
