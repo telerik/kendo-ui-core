@@ -11,15 +11,15 @@
 
 <script>
     function mobileSwitchEventsInit() {
-        $("#mobile-switch").data("kendoMobileSwitch").bind("change", function() {
-            kendoConsole.log("switch value  was changed!");
+        $("#mobile-switch").data("kendoMobileSwitch").bind("change", function(e) {
+            kendoConsole.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
         });
     }
 </script>
 
 <style scoped>
 #switch-events .console {
-    background-color: none;
+    background-color: transparent;
     border: 0;
     margin: 1.4em 1em;
     overflow: hidden;

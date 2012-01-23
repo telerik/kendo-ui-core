@@ -14,7 +14,7 @@
         {
             "text": "Application",
             "name": "application",
-            "spriteCssClass": "dataSourceIcon",
+            "spriteCssClass": "mobileAppIcon",
             "items": [
                 {
                     "text": "Overview",
