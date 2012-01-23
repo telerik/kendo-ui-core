@@ -1,13 +1,16 @@
-<div data-role="view" data-init="mobileButtonGroupEventsInit" data-title="ButtonGroup Events">
+<div data-role="view" id="buttongroup-events" data-init="mobileButtonGroupEventsInit" data-title="Player">
+    <div class="photo">
+    </div>
     <ul id="button-group" data-role="buttongroup">
-       <li data-icon="featured">
-            Featured
+       <li data-icon="rewind">
        </li>
-       <li data-icon="toprated">
-            Top Rated
+       <li data-icon="play">
        </li>
-       <li data-icon="mostviewed">
-            Most Viewed
+       <li data-icon="pause">
+       </li>
+       <li data-icon="stop">
+       </li>
+       <li data-icon="fastforward">
        </li>
     </ul>
     <div class="console"></div>
@@ -18,8 +21,21 @@
         $("#button-group")
             .data("kendoMobileButtonGroup")
             .bind("select", function() {
-                console.log(this.current().text());
                 kendoConsole.log("Selected button: " + this.current().text());
             });
     }
 </script>
+
+<style scoped>
+#buttongroup-events .photo {
+    width: 277px;
+    margin: 20px 20px 7px;
+    height: 120px;
+    display: inline-block;
+    background: url("../../content/mobile/shared/player.jpg") no-repeat center center;
+    background-size: auto 100%;
+}
+#button-group {
+	margin: 1rem auto;
+}
+</style>
