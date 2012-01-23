@@ -118,8 +118,8 @@
     </ul>
 </div>
 
-<div data-role="view" data-layout="overview-layout" id="overview-account" data-title="Account Settings">
-    <ul id="settings-view" data-role="buttongroup" data-index="0">
+<div data-role="view" data-layout="overview-layout" data-init="mobileAccountViewInit" id="overview-account" data-title="Account Settings">
+    <ul id="settings-view" data-index="0">
         <li>
             General
         </li>
@@ -139,6 +139,8 @@
                 <li><a>About</a></li>
             </ul>
         </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
         <li>
             Group
             <ul>
@@ -146,6 +148,8 @@
                 <li><a>Group Email</a></li>
             </ul>
         </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
         <li>
             Profile
             <ul>
@@ -205,6 +209,20 @@
         </div>
     </footer>
 </div>
+
+<script>
+    function mobileAccountViewInit() {
+        var listviews = $("#overview-account").find("ul.km-listview");
+
+        $("#settings-view").kendoMobileButtonGroup({
+            select: function() {
+                listviews.hide()
+                         .eq(this.selectedIndex)
+                         .show();
+            }
+        });
+    }
+</script>
 
 <style scoped>
 #overview-contacts h2,
