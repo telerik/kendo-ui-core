@@ -379,11 +379,9 @@
          * @param {Object} options Configuration options.
          *
          * @option {Object} [animation]
-         * A collection of visual animations used when <strong>PanelBar</strong> items
-         * are opened or closed through user interactions. Setting this
-         * option to <b>false</b> will disable all animations.
-         * _exampleTitle Defining custom animations when opening and
-         * closing items
+         * A collection of visual animations used when <strong>PanelBar</strong> items are opened or closed through
+         * user interactions. Setting this option to <strong>false</strong> will disable all animations.
+         * _exampleTitle Defining custom animations when opening and closing items
          * _example
          * $("#panelBar").kendoPanelBar({
          *     animation: {
@@ -405,8 +403,7 @@
          *
          * @option {Object} [animation.open]
          * The visual animation(s) that will be used when opening items.
-         * _exampleTitle Defining a custom animation when opening items
-         * that executes over 200 milliseconds
+         * _exampleTitle Defining a custom animation when opening items that executes over 200 milliseconds
          * _example
          * $("#panelBar").kendoPanelBar({
          *     animation: {
@@ -765,12 +762,10 @@
          * panelBar.expand($('[id^="item"]'));
          *
          * @param {Selector} element
-         * The <strong>PanelBar</strong> item(s) to be expanded, expressed as a
-         * <a href="http://api.jquery.com/category/selectors/">jQuery selector</a>.
+         * The <strong>PanelBar</strong> item(s) to be expanded, expressed as a selector.
          *
          * @param {Boolean} [useAnimation]
-         * Temporariliy enables (<b>true</b>) or disables (<b>false</b>) any
-         * visual animation(s) when expanding items.
+         * Temporariliy enables (<b>true</b>) or disables (<b>false</b>) any visual animation(s) when expanding items.
          *
          */
         expand: function (element, useAnimation) {

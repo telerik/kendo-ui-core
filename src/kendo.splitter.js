@@ -10,15 +10,24 @@
      *  complex layouts.
      * </p>
      * <h3>Getting Started</h3>
+     * <p>
+     *  The layout and structure of a <strong>Splitter</strong> is defined within the DOM as a div with child elements.
+     * </p>
      *
-     * @exampleTitle Create a root HTML div element with children that will become panes
+     * @exampleTitle Create a div with children that will become panes
      * @example
      * <div id="splitter">
      *     <div>Area 1</div>
      *     <div>Area 2</div>
      * </div>
      *
-     * @exampleTitle Initialize the Splitter using a selector
+     * @section
+     * <p>
+     *  Initialization of a <strong>Splitter</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>Splitter</strong> occur within a handler is provided to $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize the Splitter using a selector within $(document).ready()
      * @example
      * $(document).ready(function() {
      *     $("#splitter").kendoSplitter();
@@ -31,11 +40,11 @@
      * </p>
      * <h3>Configuring Splitter Behaviors</h3>
      * <p>
-     *  The <strong>Splitter</strong> provides many configuration options that can be easily set during initialization.
-     *  Among the properties that can be controlled:
+     *  The <strong>Splitter</strong> has a default configuration specified during initialization. However, these
+     *  options may be overriden to control the following properties:
      * </p>
      * <ul>
-     *  <li>Min/max pane size</li>
+     *  <li>Maximum and minimum pane size</li>
      *  <li>Resizable and collapsible pane behaviors</li>
      *  <li>Orientation of the <strong>Splitter</strong></li>
      * </ul>
@@ -44,38 +53,36 @@
      *  <strong>Splitter</strong>.
      * </p>
      *
-     * @exampleTitle Setting Splitter and pane properties
+     * @exampleTitle Initialize a Splitter and the properties of its panes
      * @example
      * $("#splitter").kendoSplitter({
      *     panes: [
-     *         { min: "100px", max: "300px", collapsible: true },
+     *         { collapsible: true, min: "100px", max: "300px" },
      *         { collapsible: true }
      *     ],
-     *     orientation: "vertical"
+     *     orientation: "vertical"rome
      * });
      *
      * @section
      * <h3>Nested Splitter Layouts</h3>
-     * <p>To achieve complex layouts, the <strong>Splitter</strong> supports nested configurations.</p>
+     * <p>To achieve complex layouts, the <strong>Splitter</strong> supports nested layouts.</p>
      *
      * @exampleTitle Creating nested Splitter layout
      * @example
      * <div id="horizontalSplitter">
-     *  <div><p>Left Side Pane Content</p></div>
-     *  <div>
-     *   <div id="verticalSplitter">
-     *    <div><p>Right Side, Top Pane Content</p></div>
-     *    <div><p>Right Side, Bottom Pane Content</p></div>
-     *   </div>
-     *  </div>
+     *     <div><p>Left Side Pane Content</p></div>
+     *     <div>
+     *         <div id="verticalSplitter">
+     *             <div><p>Right Side, Top Pane Content</p></div>
+     *             <div><p>Right Side, Bottom Pane Content</p></div>
+     *         </div>
+     *     </div>
      * </div>
      *
-     * @exampleTitle Initialize two Splitter widgets with the differing orientation
+     * @exampleTitle Initialize two Splitters with differing orientations
      * @example
-     * $(document).ready(function() {
-     *     $("horizontalSplitter").kendoSplitter();
-     *     $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
-     * });
+     * $("horizontalSplitter").kendoSplitter();
+     * $("verticalSplitter").kendoSplitter({ orientation: "vertical" });
      *
      * @section
      * <h3>Loading Content with AJAX</h3>
