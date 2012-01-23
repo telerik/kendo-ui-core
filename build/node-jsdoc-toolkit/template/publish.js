@@ -83,7 +83,9 @@ function outputDescription(description) {
             break;
 
             case "param":
-                // params are separately outputted
+            break;
+
+            case "return":
             break;
 
             case "section":
