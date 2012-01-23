@@ -1,13 +1,73 @@
-<div data-role="view" id="home" data-title="Basic Usage">
-    <ul data-role="buttongroup">
-        <li data-icon="featured">
-            test1
+<div data-role="view" id="buttongroup-home" data-title="Sales Report">
+    <div class="head">&nbsp;</div>
+    <ul data-role="buttongroup" id="select-period" data-index="0">
+        <li>
+            Month 
         </li>
         <li>
-            test2
+            Quarter
         </li>
         <li>
-            test3
+            Year
+        </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li>January <span class="sales-up">&uarr; $ 35,000</span></li>
+                <li>February <span class="sales-down">&darr; $ 25,000</span></li>
+                <li>March <span class="sales-down">&darr; $ 23,000</span></li>
+                <li>April <span class="sales-up">&uarr; $ 30,000</span></li>
+                <li>May <span class="sales-up">&uarr; $ 31,000</span></li>
+                <li>June <span class="sales-down">&darr; $ 29,000</span></li>
+                <li>July <span class="sales-up">&uarr; $ 35,000</span></li>
+                <li>August <span class="sales-up">&uarr; $ 37,000</span></li>
+                <li>September <span class="sales-hold">&rarr; $ 37,000</span></li>
+                <li>October <span class="sales-hold">&rarr; $ 37,000</span></li>
+                <li>November <span class="sales-up">&uarr; $ 38,000</span></li>
+                <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>1st Quarter <span class="sales-up">&uarr; $ 83,000</span></li>
+                <li>2nd Quarter <span class="sales-up">&darr; $ 90,000</span></li>
+                <li>3rd Quarter <span class="sales-up">&darr; $ 109,000</span></li>
+                <li>4th Quarter <span class="sales-up">&uarr; $ 115,000</span></li>
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li>2009 <span class="sales-up">&uarr; $ 120,000</span></li>
+                <li>2010 <span class="sales-down">&darr; $ 109,000</span></li>
+                <li>2011 <span class="sales-hold">&darr; $ 109,000</span></li>
+            </ul>
         </li>
     </ul>
 </div>
+
+<style scoped>
+#buttongroup-home .head {
+	display: block;
+	margin: 0 auto 1rem auto;
+	width: 100%;
+	height: 100px;
+	background: url(../../content/mobile/shared/sales.jpg) no-repeat center center;
+    background-size: 100% auto;
+}
+#select-period {
+	margin: 1rem auto .4rem auto;
+}
+#buttongroup-home ul span {
+	float: right;
+}
+#buttongroup-home .sales-up {
+	color: green;
+}
+#buttongroup-home .sales-down {
+	color: red;
+}
+#buttongroup-home .sales-hold {
+	color: blue;
+}
+</style>
