@@ -211,14 +211,18 @@
         calculateDimensions: function() {
             var that = this,
                 width = that.width = that.element.width(),
-                scrollWidth = that.inner[0].scrollWidth,
-                pages = that.pages = Math.ceil(scrollWidth / width),
-                pageHTML = "";
+                pageHTML = "",
+                scrollWidth,
+                pages;
+
+            that.page = -that.move.x / width;
+
+            scrollWidth = that.element[0].scrollWidth + (that.page * width);
+            pages = that.pages = Math.ceil(scrollWidth / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
             that.draggable.options.minX = width - scrollWidth;
-            that.page = -that.move.x / width;
 
             for (var idx = 0; idx < pages; idx ++) {
                 pageHTML += "<li/>";

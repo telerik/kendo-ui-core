@@ -225,8 +225,13 @@
         },
 
         _redraw: function() {
-            var that = this;
-            that.domElement.style[TRANSFORM_STYLE] = "translate3d(" + that.x + "px," + that.y +"px,0)";
+            var that = this, translate;
+            if (support.hasHW3D) {
+                translate = "translate3d(" + that.x + "px," + that.y +"px,0)";
+            } else {
+                translate = "translate(" + that.x + "px," + that.y +"px)";
+            }
+            that.domElement.style[TRANSFORM_STYLE] = translate;
         }
     });
 
