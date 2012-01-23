@@ -249,18 +249,25 @@
         applyCurrentMobileOS(options.container);
 
         return this.each(function() {
-            $(this).val(kendoMobileOS).kendoDropDownList({
+            var deviceChooser = $(this).val(kendoMobileOS).kendoDropDownList({
                 dataSource: oses,
                 dataTextField: "text",
                 dataValueField: "value",
-                change: function (argument) {
+                template: "<span class='thumbLink'><span class='thumb #= data.value #Thumb'></span><span class='skinTitle'>#= data.text #</span></span>",
+                change: function () {
                     var value = this.value();
                     $(options.container).removeClass(mobileClasses).addClass("km-" + value);
                     try {
                         sessionStorage.setItem("kendoMobileOS", value);
                     } catch(err) {}
                 }
-            });
+            }).data("kendoDropDownList");
+
+            deviceChooser.list.width(180);
+            deviceChooser.popup.options = extend(deviceChooser.popup.options, {
+                    origin: "bottom right",
+                    position: "top right"
+                });
         });
     };
 
@@ -280,6 +287,8 @@
         return this.each(function() {
             var themeChooser  = $(this).val(kendoSkin).kendoDropDownList({
                     dataSource: themes,
+                    dataTextField: "text",
+                    dataValueField: "value",
                     template: "<span class='thumbLink'>" +
                         "<span class='thumb #= data.text.toLowerCase() #Thumb' " +
                             "style='background-image: url(" + initialRelativePath + "Menu/thumbSprite.png)'>" +
