@@ -1,41 +1,63 @@
 <div data-role="view" data-init="mobileButtonGroupInit" data-title="ButtonGroup Appearance">
-    <ul data-role="listview">
+    <ul data-role="listview" data-style="inset" data-type="group">
         <li>
-            <h3>Background color:</h3>
-            <ul id="button-group">
-                <li style="background-color: green">Green</li>
-                <li style="background-color: darkred">Red</li>
+            Background color
+            <ul>
+                <li>
+                    <ul id="button-group">
+                        <li style="background-color: green">Green</li>
+                        <li style="background-color: darkred">Red</li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li>
-            <h3>Font Size:</h3>
-            Small:
-            <ul data-role="buttongroup">
-                <li style="font-size: 0.6em;">Option1</li>
-                <li style="font-size: 0.6em">Option2</li>
-            </ul>
-            Normal:
-            <ul data-role="buttongroup">
-                <li>Option1</li>
-                <li>Option2</li>
-            </ul>
-            Large:
-            <ul data-role="buttongroup">
-                <li data-icon="toprated" style="font-size: 2em">Option1</li>
-                <li data-icon="globe" style="font-size: 2em">Option2</li>
+            Font Size Small
+            <ul>
+                <li>
+                    <ul data-role="buttongroup">
+                        <li style="font-size: 0.8em;">Flat View</li>
+                        <li style="font-size: 0.8em">Grouped View</li>
+                    </ul>
+                </li>
             </ul>
         </li>
         <li>
-            Button icons (check help for the all icons):
-            <ul data-role="buttongroup">
-                <li data-icon="play"></li>
-                <li data-icon="pause"></li>
-                <li data-icon="rewind"></li>
-                <li data-icon="fastforward"></li>
-                <li data-icon="globe"></li>
+            Font Size Normal
+            <ul>
+                <li>
+                    <ul data-role="buttongroup">
+                        <li>2011</li>
+                        <li>2012</li>
+                    </ul>
+                </li>
             </ul>
         </li>
-
+        <li>
+            Font Size Large
+            <ul>
+                <li>
+                    <ul data-role="buttongroup">
+                        <li data-icon="toprated" style="font-size: 1.5em">Featured</li>
+                        <li data-icon="globe" style="font-size: 1.5em">Popular</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Button icons (check help for all icons)
+            <ul>
+                <li>
+                    <ul data-role="buttongroup">
+                        <li data-icon="play"></li>
+                        <li data-icon="pause"></li>
+                        <li data-icon="rewind"></li>
+                        <li data-icon="fastforward"></li>
+                        <li data-icon="globe"></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
     </ul>
 </div>
 
