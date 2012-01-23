@@ -5,12 +5,12 @@
     * The looks of the mobile Tabstrip vary depending on the user mobile device and operating system.
     *
     * <h3>Getting Started</h3>
-    * The Kendo mobile Application will automatically initialize the mobile Tabstrip for every element with <code>role</code> data attribute set to <code>tabstrip</code> present in the views/layouts markup.
-    * Alternatively, it can be initialized using a jQuery selector. The tabstrip element should contain several <code>a</code> elements.
+    * <p>The Kendo mobile Application will automatically initialize the mobile Tabstrip for every element with <code>role</code> data attribute set to <code>tabstrip</code> present in the views/layouts markup.
+    * Alternatively, it can be initialized using a jQuery selector. The tabstrip element should contain one or more <code>a</code> elements.</p>
     *
-    * <h3>Kendo mobile Application integration</h3>
-    * If a Kendo mobile Application is initialized, the tabs of the tabstrip will automatically navigate within the application's views.
-    * When the application navigates between views, it updates the tabstrip's currently selected tab, based on the current view URL.
+    * <h3>Kendo Mobile Application Integration</h3>
+    * <p>If a Kendo mobile Application is initialized, the tabs of the Tabstrip will automatically navigate within the application's views.
+    * When the application navigates between views, it updates the Tabstrip's currently selected tab, based on the current view's URL.</p>
     *
     * @exampleTitle Initialize Kendo mobile Tabstrip based on role data attribute.
     * @example
@@ -25,8 +25,8 @@
     *
     * @section
     * <h3>Tab icons</h3>
-    * A tab icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
-    * Kendo mobile Tabstrip comes out of the box with several ready to use icons:
+    * <p> A tab icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
+    * Kendo mobile Tabstrip comes out of the box with several ready to use icons:</p>
     *
     * <ul id="icon-list">
     *   <li title=".km-about"><span class="km-icon km-about"></span>about</li>
@@ -64,12 +64,15 @@
     *   <li title=".km-trash"><span class="km-icon km-trash"></span>trash</li>
     * </ul>
     *
-    * Additional icons may be added by defining the respective CSS tab class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.
+    * Additional icons may be added by defining the respective CSS tab class. If the <code>icon</code> data attribute is set to <code>custom</code>,
+    * the tab will receive <code>km-custom</code> CSS class.
     * @exampleTitle Define custom tabstrip icon.
     * @example
+    * <style>
     * .km-custom {
-    *   background-image: ...
+    *   background-image: url("foo.jpg");
     * }
+    * </style>
     *
     * <div data-role="tabstrip">
     *   <a href="#index" data-icon="custom">Home</a>
@@ -123,7 +126,7 @@
         },
 
         /**
-        * Set the mobile Tabstrip active item to the tab with the specified url.
+        * Set the mobile Tabstrip active tab to the tab with the specified url.
         * @param {String} url The url of the tab.
         *
         * @example
@@ -140,8 +143,8 @@
         },
 
         /**
-        * Get the currently selected tab element.
-        * @returns {jQueryObject} the currenlty selected tab element.
+        * Get the currently selected tab DOM element.
+        * @returns {jQueryObject} the currently selected tab DOM element.
         */
         currentItem: function() {
             return this.element.children("." + ACTIVE_STATE_CLASS);
