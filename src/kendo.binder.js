@@ -474,8 +474,7 @@
 
 
         if (role && kendo.binders[role]) {
-            $.data(element, "context", object);
-            kendo.binders[role].bind(element, object, "init");
+            kendo.binders[role].bind(element, object);
         } else {
             var bound= [];
 
@@ -512,6 +511,30 @@
         }
     }
 
+    function unbindElement(element) {
+        var idx, bindings = $.data(element, "bindings");
+
+        if (bindings) {
+            for (idx = 0; idx < bindings.length; idx++) {
+                bindings[idx].destroy();
+            }
+        }
+
+        for (idx = 0; idx < element.children.length; idx++) {
+            unbindElement(element.children[idx]);
+        }
+    }
+
+    kendo.notify = function(widget) {
+        var context = widget.element.data("context");
+
+        if (context) {
+            kendo.unbind(widget.element[0]);
+
+            bindElement(widget.element[0], context);
+        }
+    }
+
     kendo.data.Binding = Binding;
     kendo.data.WidgetValueBinding = WidgetValueBinding;
 
@@ -519,6 +542,18 @@
 
     kendo.bind = function(dom, object) {
         bind(dom, kendo.observable(object));
+    }
+
+    kendo.unbind = function(dom) {
+        var idx, length;
+
+        if (dom.length === undefined) {
+            dom = [dom];
+        }
+
+        for (idx = 0, length = dom.length; idx < length; idx++ ) {
+            unbindElement(dom[idx]);
+        }
     }
 
     kendo.observable = function(object) {

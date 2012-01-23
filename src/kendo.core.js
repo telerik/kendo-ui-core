@@ -2135,9 +2135,7 @@
                 that.element.attr(kendo.attr("role"), (that.options.name || "").toLowerCase());
             }
 
-            /*
-            kendo.notify(that);
-            */
+            that.element.data("kendo" + that.options.name, that);
         }
     });
 
