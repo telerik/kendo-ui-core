@@ -202,6 +202,8 @@
             } else if (element.is(SELECT)) {
                 that.text(element.children(":selected").text());
             }
+
+            kendo.notify(that);
         },
 
         options: {
@@ -581,7 +583,7 @@
 
     kendo.binders.dropdownlist = {
         bind: function(element, observable, reason) {
-            var options = {}, option, value, dataSource;
+            var options = {}, option, value, dataSource, widget;
 
             element = $(element);
 
@@ -598,12 +600,17 @@
             }
 
             dataSource = element.data(kendo.ns + "source");
+
             if (dataSource) {
                 options.dataSource = observable.get(dataSource);
             }
 
-            if (reason === "init") {
+            widget = element.data("kendoDropDownList");
+
+            if (!widget) {
                 element.kendoDropDownList(options);
+            } else {
+                widget.dataSource.data(options.dataSource);
             }
 
             value = element.data(kendo.ns + "value");

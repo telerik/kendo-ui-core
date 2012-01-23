@@ -79,6 +79,33 @@
 
                 equal(observable.value, observable.items[0]);
             });
+
+            test("binding dropdownlist initialized before binding", function() {
+                var dom = $('<select data-valuefield="text" data-value="value" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+                observable.value = observable.items[1];
+
+                dom.kendoDropDownList();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoDropDownList").value(), "bar");
+            });
+
+            test("binding dropdownlist initialized after binding", function() {
+                var dom = $('<select data-valuefield="text" data-value="value" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+                observable.value = observable.items[1];
+
+                kendo.bind(dom, observable);
+
+                dom.kendoDropDownList({ dataValueField: "text" });
+
+                equal(dom.data("kendoDropDownList").value(), "bar");
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
