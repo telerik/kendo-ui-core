@@ -164,6 +164,7 @@
     <Content Include="content\mobile\overview\san-francisco.jpg" />
     <Content Include="content\mobile\overview\sydney.jpg" />
     <Content Include="content\mobile\shared\player.jpg" />
+    <Content Include="content\mobile\shared\sales.jpg" />
     <Content Include="content\shared\js\console.js" />
     <Content Include="content\shared\js\examples.js" />
     <Content Include="content\shared\js\less.js" />
