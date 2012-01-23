@@ -1,0 +1,79 @@
+.device-skin
+{
+    font-size: 11px; /* Sets the zoom level */
+}
+
+.device-container.vertical .device-skin
+{
+    padding-top: 2.7cm;
+    background-image: url("images/vertical.png");
+}
+
+.device-container.horizontal .device-skin
+{
+    padding-top: 2.3cm;
+    background-image: url("images/horizontal.png");
+}
+
+.device-container.vertical
+{
+    height: 1000px;
+    width: 850px;
+    padding: 3.42cm 6.6cm 10.1cm 6.74cm;
+    bottom: -150px;
+}
+
+.device-container.horizontal
+{
+    height: 800px;
+    padding: 3.04cm 10.4cm 11.3cm 10.56cm;
+    width: 1360px;
+    bottom: -150px;
+}
+
+#address-bar
+{
+    color: #FFFFFF;
+    height: 18px;
+}
+
+.device-container.vertical #address-bar
+{
+    left: 380px;
+    top: 105px;
+    width: 130px;
+}
+
+.device-container.horizontal #address-bar
+{
+    left: 520px;
+    top: 90px;
+    width: 352px;
+}
+
+.device-container #navigate-back
+{
+    background: rgba(255,255,255,.3);
+    top: auto;
+}
+
+.device-container #navigate-back:hover
+{
+    background: rgba(255,255,255,.1);
+}
+
+.device-container.vertical #navigate-back
+{
+    bottom: 360px;
+    left: 260px;
+    width: 32px;
+    height: 22px;
+}
+
+.device-container.horizontal #navigate-back
+{
+    bottom: 400px;
+    left: 403px;
+    width: 31px;
+    height: 24px;
+}
