@@ -121,8 +121,7 @@
                 read: {
                     cache: true, // to prevent jQuery from adding cache buster
                     dataType: "jsonp",
-                    jsonpCallback: "callback", //required by OData
-                    jsonp: false // to prevent jQuery from adding the jsonpCallback in the query string - we will add it ourselves
+                    jsonp: "$callback"
                 },
                 parameterMap: function(options, type) {
                     type = type || "read";
@@ -135,10 +134,6 @@
                         dataType = (this.options || defaultDataType)[type].dataType;
 
                     options = options || {};
-
-                    if (dataType.toLowerCase() == "jsonp") {
-                        params.$callback = "callback";
-                    }
 
                     for (option in options) {
                         if (mappers[option]) {
