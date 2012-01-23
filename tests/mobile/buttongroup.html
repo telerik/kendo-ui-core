@@ -76,6 +76,12 @@
                 equal(dom[0].childNodes.length, 2);
             });
 
+            test("Honor li.km-state-active on init", function() {
+                var segmented = new ButtonGroup($("<ul><li class='km-state-active'>Text1</li><li>Text2</li></ul>"));
+
+                equal(segmented.current().index(), 0);
+            });
+
             test("Add icon if no image and data attribute", function() {
                 dom.find("li:first").attr("data-icon", "test");
 

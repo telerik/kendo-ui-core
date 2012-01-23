@@ -1,8 +1,8 @@
-<div data-role="view" id="buttongroup-home" data-title="Sales Report">
+<div data-role="view" id="buttongroup-home" data-init="mobileSalesViewInit" data-title="Sales Report">
     <div class="head">&nbsp;</div>
-    <ul data-role="buttongroup" id="select-period" data-index="0">
+    <ul id="select-period" data-index="0">
         <li>
-            Month 
+            Month
         </li>
         <li>
             Quarter
@@ -28,6 +28,8 @@
                 <li>December <span class="sales-up">&uarr; $ 40,000</span></li>
             </ul>
         </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
         <li>
             <ul>
                 <li>1st Quarter <span class="sales-up">&uarr; $ 83,000</span></li>
@@ -36,6 +38,8 @@
                 <li>4th Quarter <span class="sales-up">&uarr; $ 115,000</span></li>
             </ul>
         </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
         <li>
             <ul>
                 <li>2009 <span class="sales-up">&uarr; $ 120,000</span></li>
@@ -45,6 +49,20 @@
         </li>
     </ul>
 </div>
+
+<script>
+    function mobileSalesViewInit() {
+        var listviews = this.element.find("ul.km-listview");
+
+        $("#select-period").kendoMobileButtonGroup({
+            select: function() {
+                listviews.hide()
+                         .eq(this.selectedIndex)
+                         .show();
+            }
+        });
+    }
+</script>
 
 <style scoped>
 #buttongroup-home .head {
