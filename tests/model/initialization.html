@@ -82,6 +82,7 @@
 
             test("isNew returns true if no key is defined", function() {
                 var MyModel = Model.define({
+                    id: "id"
                 });
                 var model = new MyModel();
                 ok(model.isNew());
