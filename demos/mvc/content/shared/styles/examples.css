@@ -1182,7 +1182,8 @@ pre.prettyprint
     background-position: 100% -693px;
 }
 
-#skinSelector-list
+#skinSelector-list,
+#deviceChooser-list
 {
     margin-top: 2px;
     padding: 3px 0 0;
@@ -1199,19 +1200,23 @@ pre.prettyprint
 }
 
 #skinSelector-list .k-state-selected,
-#skinSelector-list .k-state-hover
+#skinSelector-list .k-state-hover,
+#deviceChooser-list .k-state-selected,
+#deviceChooser-list .k-state-hover
 {
     color: #0c303c;
     background: #C7CED1;
     border-color: transparent;
 }
 
-#skinSelector-list .k-state-hover
+#skinSelector-list .k-state-hover,
+#deviceChooser-list .k-state-hover
 {
     color: #000;
 }
 
-#skinSelector-list .thumbLink
+#skinSelector-list .thumbLink,
+#deviceChooser-list .thumbLink
 {
     cursor: pointer;
     display: inline-block;
@@ -1233,12 +1238,14 @@ pre.prettyprint
     text-indent: -999em;
 }
 
-#skinSelector-list .k-state-hover .thumbLink
+#skinSelector-list .k-state-hover .thumbLink,
+#deviceChooser-list .k-state-hover .thumbLink
 {
     color: #222;
 }
 
-#skinSelector-list .k-item
+#skinSelector-list .k-item,
+#deviceChooser-list .k-item
 {
     overflow: hidden;
     float: left;
@@ -1249,7 +1256,8 @@ pre.prettyprint
     margin-top: 3px;
 }
 
-#skinSelector-list .thumb
+#skinSelector-list .thumb,
+#deviceChooser-list .thumb
 {
     background-color: transparent;
     background-image: url("Menu/thumbSprite.png");
@@ -1265,7 +1273,8 @@ pre.prettyprint
     border-radius: 30px;
 }
 
-#skinSelector-list .gloss
+#skinSelector-list .gloss,
+#deviceChooser-list .gloss
 {
     display: block;
     width: 100%;
