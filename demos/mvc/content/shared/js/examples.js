@@ -236,6 +236,7 @@
         } catch(err) {}
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
+        $("#device-wrapper").removeClass("ios android").addClass(kendoMobileOS);
     }
 
     $.fn.mobileOsChooser = function(options) {
@@ -257,6 +258,7 @@
                 change: function () {
                     var value = this.value();
                     $(options.container).removeClass(mobileClasses).addClass("km-" + value);
+                    $("#device-wrapper").removeClass("ios android").addClass(value);
                     try {
                         sessionStorage.setItem("kendoMobileOS", value);
                     } catch(err) {}
