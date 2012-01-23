@@ -235,6 +235,32 @@
         }
     });
 
+    var WidgetValueBinding = Binding.extend( {
+        init: function(widget, observable, field) {
+            var that = this;
+
+            Binding.fn.init.call(that, widget.element, observable, field);
+
+            that.widget = widget.bind(CHANGE, $.proxy(that._change, that));
+        },
+
+        _change: function() {
+            var that = this,
+                widget = that.widget;
+
+            that.observable.set(that.field, widget.dataSource.view()[widget.select()]);
+        },
+
+        bind: function() {
+            var that = this,
+                widget = that.widget,
+                index;
+
+            index = widget.dataSource.view().indexOf(that.value());
+
+            that.widget.select(index);
+        }
+    });
     var SelectValueBinding = Binding.extend( {
         init: function() {
             var that = this;
@@ -447,9 +473,9 @@
         var role = element.getAttribute("data-role");
 
 
-        if (role && kendo.widgetBinders[role]) {
+        if (role && kendo.binders[role]) {
             $.data(element, "context", object);
-            kendo.widgetBinders[role](element, object);
+            kendo.binders[role].bind(element, object, "init");
         } else {
             var bound= [];
 
@@ -485,6 +511,9 @@
             bindElement(dom[idx], object);
         }
     }
+
+    kendo.data.Binding = Binding;
+    kendo.data.WidgetValueBinding = WidgetValueBinding;
 
     kendo.bindings = bindings;
 

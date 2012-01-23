@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.bind Tests</h1>
+        <h1 id="qunit-header">kendo.bind widgets Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -22,11 +22,8 @@
             QUnit.config.testTimeout = 100;
 
             var FooWidget = kendo.ui.Widget.extend({
-                init: function(element, options) {
-                    kendo.ui.Widget.fn.init.call(this, element, options);
-                    options = this.options;
-                    this.dataSource = kendo.data.DataSource.create(options.dataSource);
-                    this.dataSource.read();
+                bind: function(element, options) {
+                    kendo.ui.Widget.fn.bind.call(this, element, options);
                 },
 
                 options: {
@@ -36,36 +33,53 @@
 
             kendo.ui.plugin(FooWidget);
 
-            kendo.widgetBindings.foo = FooWidget;
+            test("finds the right binder based on the role attribute", function() {
+                kendo.binders.foo = {};
+                stub(kendo.binders.foo, "bind");
 
-            test("initializes foo widget based on data-role attribute", function() {
-                var dom = $('<span id="foo" data-role="foo" />');
-                kendo.bind(dom, { foo: "foo" });
-                ok(dom.data("kendoFoo") instanceof FooWidget, "Widget not initialized");
+                kendo.bind($('<div data-role="foo"></div>'));
+
+                ok(kendo.binders.foo.calls("bind"), 1);
             });
 
-            test("passes datasource to initialized widget", function() {
-                var dom = $('<span id="foo" data-role="foo" data-source="items" />');
-                var viewModel = kendo.observable({
-                    foo: "foo", items: []
-                })
+            test("passes the element to the bind method of the binder", function() {
+                kendo.binders.foo = {};
+                stub(kendo.binders.foo, "bind");
 
-                kendo.bind(dom, viewModel);
+                var dom = $('<div data-role="foo"></div>');
 
-                equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
+                kendo.bind(dom);
+
+                equal(kendo.binders.foo.args("bind")[0], dom[0]);
             });
 
-            test("keeps model in sync with widget's datasource", function() {
-                var dom = $('<span id="foo" data-role="foo" data-source="items" />');
-                var viewModel = kendo.observable({
-                    foo: "foo", items: []
-                })
+            test("passes the observable to the bind method of the binder", function() {
+                kendo.binders.foo = {};
 
-                kendo.bind(dom, viewModel);
+                stub(kendo.binders.foo, "bind");
 
-                equal(dom.data("kendoFoo").dataSource.data(), viewModel.items);
+                var observable = kendo.observable({});
+
+                var dom = $('<div data-role="foo"></div>');
+
+                kendo.bind(dom, observable);
+
+                equal(kendo.binders.foo.args("bind")[1], observable);
+            });
+
+            test("passes init as action to the binder", function() {
+                kendo.binders.foo = {};
+
+                stub(kendo.binders.foo, "bind");
+
+                var observable = kendo.observable({});
+
+                var dom = $('<div data-role="foo"></div>');
+
+                kendo.bind(dom, observable);
+
+                equal(kendo.binders.foo.args("bind")[2], "init");
             });
         </script>
-
     </body>
 </html>

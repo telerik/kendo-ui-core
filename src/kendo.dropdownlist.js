@@ -359,6 +359,10 @@
                 text,
                 idx;
 
+            if (li === undefined) {
+                return current ? current.index() : -1;
+            }
+
             li = that._get(li);
 
             if (li && li[0] && !li.hasClass(SELECTED)) {
@@ -574,6 +578,41 @@
                               .addClass(DOMelement.className);
         }
     });
+
+    kendo.binders.dropdownlist = {
+        bind: function(element, observable, reason) {
+            var options = {}, option, value, dataSource;
+
+            element = $(element);
+
+            for (option in DropDownList.fn.options) {
+                value = element.data(kendo.ns + option.toLowerCase());
+
+                if (value === undefined) {
+                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                }
+
+                if (value !== undefined) {
+                    options[option] = value;
+                }
+            }
+
+            dataSource = element.data(kendo.ns + "source");
+            if (dataSource) {
+                options.dataSource = observable.get(dataSource);
+            }
+
+            if (reason === "init") {
+                element.kendoDropDownList(options);
+            }
+
+            value = element.data(kendo.ns + "value");
+
+            if (value) {
+               (new kendo.data.WidgetValueBinding(element.data("kendoDropDownList"), observable, value)).bind();
+            }
+        }
+    }
 
     ui.plugin(DropDownList);
 })(jQuery);
