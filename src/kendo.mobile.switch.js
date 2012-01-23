@@ -184,9 +184,12 @@
 
         _position: function(position, margin) {
             var that = this;
+
             that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
-            if (that._visibleBack)
+
+            if (that._visibleBack) {
                 that.background.css(MARGINLEFT, margin);
+            }
         },
 
         _start: function(e) {
@@ -225,6 +228,8 @@
         _toggle: function (checked) {
             var that = this,
                 handle = that.handle,
+                element = that.element[0],
+                value = element.checked,
                 distance;
 
             handle
@@ -245,8 +250,10 @@
                         duration: 200,
                         offset: distance + "px,0",
                         complete: function () {
-                            that.element[0].checked = checked;
-                            that.trigger(CHANGE, { checked: checked });
+                            if (value !== checked) {
+                                element.checked = checked;
+                                that.trigger(CHANGE, { checked: checked });
+                            }
                         }
                     });
             }
