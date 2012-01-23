@@ -2142,7 +2142,7 @@
     });
 
     kendo.notify = noop;
-    kendo.widgetBinders = {};
+    kendo.binders = {};
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
