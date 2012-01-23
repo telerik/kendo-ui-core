@@ -68,8 +68,8 @@
                     //create AutoComplete UI component
                     $("#input").kendoAutoComplete({
                         dataSource: data,
-                        filter: "contains",
-                        suggest: true
+                        filter: "startswith",
+                        separator: ", "
                     });
                 });
             </script>
