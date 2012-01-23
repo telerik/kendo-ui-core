@@ -284,7 +284,7 @@
         init: function(element, options) {
             var that = this;
 
-            that.options = $.extend({ transition: "slide" }, options);
+            that.options = options || {};
             that.layouts = {};
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
