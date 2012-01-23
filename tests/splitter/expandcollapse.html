@@ -9,6 +9,7 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.resizable.js"></script>
         <script src="../../src/kendo.splitter.js"></script>
+        <script src="../jquery.mockjax.js"></script>
         <script src="helper.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
@@ -289,6 +290,29 @@
 
                 equal(splitter.find(".k-pane:first").width(), splitter.width() - 7);
                 equal(splitter.find(".k-splitbar:first")[0].offsetLeft, splitter.width() - 7);
+            });
+
+            test("collapsing pane does not add overlay to frames", function() {
+                $.mockjax({
+                    url: "http://foo",
+                    responseText: "foo"
+                });
+
+                var splitter = $(getSplitterHtml(2))
+                        .appendTo(document.body)
+                        .kendoSplitter({
+                            panes: [
+                                { collapsible: true },
+                                { contentUrl: "http://foo" }
+                            ]
+                        });
+
+                splitter.find(".k-collapse-prev")
+                    .trigger("mousedown")
+                    .trigger("mouseup")
+                    .trigger("click");
+
+                equal(splitter.find(".k-overlay").length, 0);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

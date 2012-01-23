@@ -287,7 +287,8 @@
             that.element
                 .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
                 .delegate(splitbarSelector, MOUSELEAVE, function() { $(this).removeClass("k-splitbar-" + that.orientation + "-hover"); })
-                .delegate(splitbarSelector, "mousedown", function() { that.element.find("> .k-pane > .k-content-frame").after("<div class='k-overlay' />"); })
+                .delegate(splitbarSelector, "mousedown", function() { that._contentFrames(this).after("<div class='k-overlay' />"); })
+                .delegate(splitbarSelector, "mouseup", function() { that._contentFrames(this).next(".k-overlay").remove(); })
                 .delegate(expandCollapseSelector, MOUSEENTER, function() { $(this).addClass("k-state-hover")})
                 .delegate(expandCollapseSelector, MOUSELEAVE, function() { $(this).removeClass('k-state-hover')})
                 .delegate(".k-splitbar .k-collapse-next, .k-splitbar .k-collapse-prev", CLICK, that._arrowClick(COLLAPSE))
@@ -454,6 +455,9 @@
 
                 that._updateSplitBar(splitbar, previousPane, nextPane);
             });
+        },
+        _contentFrames: function(splitbar) {
+            return $(splitbar).siblings(".k-pane").find("> .k-content-frame");
         },
         _resize: function() {
             var that = this,
@@ -681,9 +685,10 @@
         },
         _stop: function(e) {
             var that = this,
-                splitBar = $(e.currentTarget);
+                splitBar = $(e.currentTarget),
+                owner = that.owner;
 
-            splitBar.siblings(".k-pane").find("> .k-content-frame + .k-overlay").remove();
+            owner._contentFrames(splitBar).next(".k-overlay").remove();
 
             if (e.keyCode !== kendo.keys.ESC) {
                 var ghostPosition = e.position,
@@ -707,7 +712,7 @@
                     nextPaneConfig.size = nextPaneNewSize + "px";
                 }
 
-                that.owner.trigger(RESIZE);
+                owner.trigger(RESIZE);
             }
 
             return false;
