@@ -20,9 +20,11 @@ namespace Kendo.Models
         public static readonly IList<string> Mobile = new string[]
         {
 #if DEBUG
+            "web/kendo.common.css",
             "web/kendo.default.less",
             "mobile/kendo.mobile.all.less"
 #else
+            "web/kendo.common.css",
             "kendo.default.min.css",
             "kendo.mobile.all.min.css"
 #endif
