@@ -121,46 +121,15 @@
 <div data-role="view" data-layout="overview-layout" data-init="mobileAccountViewInit" id="overview-account" data-title="Account Settings">
     <ul id="settings-view" data-index="0">
         <li>
+            Profile
+        </li>
+        <li>
             General
         </li>
         <li>
             Group
         </li>
-        <li>
-            Profile
-        </li>
     </ul>
-    <ul data-role="listview" data-style="inset" data-type="group">
-        <li>
-            General Settings
-            <ul>
-                <li>Notifications <input type="checkbox" data-role="switch" checked></li>
-                <li>Local Services <input type="checkbox" data-role="switch"></li>
-                <li><a>About</a></li>
-            </ul>
-        </li>
-    </ul>
-    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
-        <li>
-            Group
-            <ul>
-                <li><a>Your Group Name</a></li>
-                <li><a>Group Email</a></li>
-            </ul>
-        </li>
-    </ul>
-    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
-        <li>
-            Profile
-            <ul>
-                <li><a>Username</a></li>
-                <li><a>Email</a></li>
-            </ul>
-        </li>
-    </ul>
-</div>
-
-<div data-role="view" data-layout="overview-layout" id="overview-about" data-title="My Profile">
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>
             <ul>
@@ -188,6 +157,25 @@
             </ul>
         </li>
     </ul>
+    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
+        <li>
+            General Settings
+            <ul>
+                <li>Notifications <input type="checkbox" data-role="switch" checked></li>
+                <li>Local Services <input type="checkbox" data-role="switch"></li>
+                <li><a>About</a></li>
+            </ul>
+        </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group" style="display:none">
+        <li>
+            Group
+            <ul>
+                <li><a>Your Group Name</a></li>
+                <li><a>Group Email</a></li>
+            </ul>
+        </li>
+    </ul>
 </div>
 
 <div data-role="layout" data-id="overview-layout">
@@ -205,7 +193,6 @@
             <a data-icon="organize" href="#overview-gallery">Gallery</a>
             <a data-icon="contacts" href="#overview-contacts">Contacts</a>
             <a data-icon="settings" href="#overview-account">My Account</a>
-            <a data-icon="info" href="#overview-about">My Profile</a>
         </div>
     </footer>
 </div>
@@ -231,12 +218,12 @@
     font-size: 1.1rem;
     margin: 1rem 0 1.5rem 1rem;
 }
-#overview-about h2 {
+#overview-account h2 {
     display: inline-block;
     font-size: 1.1rem;
     margin: 1.5rem 0 0 1rem;
 }
-#overview-about h2 span {
+#overview-account h2 span {
     display: block;
     clear: both;
     font-size: 2.3rem;
@@ -244,7 +231,7 @@
 }
 #overview-contacts img,
 #overview-cities img,
-#overview-about img {
+#overview-account img {
 	float: left;
     width: 4em;
     height: 4em;
@@ -254,12 +241,12 @@
     -webkit-border-radius: 8px;
     border-radius: 8px;
 }
-#overview-about img {
+#overview-account img {
     width: 5em;
     height: 5em;
     margin: 1rem;
 }
-#overview-about .value {
+#overview-account .value {
 	float: right;
 	color: #ccc;
 }
