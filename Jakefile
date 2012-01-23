@@ -185,9 +185,11 @@ function buildDocs(sitefinity_path) {
         return '<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>' + fileToMerge + '</div><div style="display: block;" class="detailBody">' + text + "</div>";
     }
 
+    // output directory
+    var outputPath ="demos/mvc/content/docs";
+
     var params = [
-        // output directory
-        "-d=demos/mvc/content/docs",
+        "-d=",
         // template
         "-t=build/node-jsdoc-toolkit/template",
         // constants
@@ -195,11 +197,16 @@ function buildDocs(sitefinity_path) {
         "-D=\"title:Kendo UI Documentation\""
     ];
 
+
     sitefinity = false; //create global variable
     if (sitefinity_path) {
-        params[0] = "-d=" + sitefinity_path;
+        outputPath = sitefinity_path;
         sitefinity = true;
     }
+
+    params[0] = params[0] + outputPath;
+
+    kendoBuild.rmdirSyncRecursive(outputPath);
 
     var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
     for (var i = 0; i < sourceFiles.length; i++) {
