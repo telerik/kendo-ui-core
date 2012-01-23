@@ -1,17 +1,19 @@
 (function($, undefined) {
     /**
     * @name kendo.mobile.ui.ButtonGroup.Description
-    * @section The ButtonGroup widget is a linear set of segmentes, which function as button.
+    * @section The Kendo mobile ButtonGroup widget is a linear set of grouped buttons.
     *
     * <h3>Getting Started</h3>
-    * The Kendo mobile Application will automatically initialize a mobile ButtonGroup for every element with <code>role</code> data attribute set to <code>buttongroup</code> present in the views/layouts markup.
-    * Alternatively, it can be initialized using a jQuery selector. The ButtonGroup element may be <code>UL</code> element.
+    * <p>The Kendo mobile Application will automatically initialize a mobile ButtonGroup for every element with <code>role</code> data attribute set to <code>buttongroup</code>
+    * present in the views/layouts markup.</p>
+    *
+    * <p>Alternatively, it can be initialized using a jQuery selector. The ButtonGroup element may be <code>UL</code> element.</p>
     *
     * @exampleTitle Initialize Kendo mobile ButtonGroup based on role data attribute.
     * @example
     * <ul id="buttongroup" data-role="buttongroup" />
-    *   <li>Option1</li>
-    *   <li>Option2</li>
+    *   <li>Option 1</li>
+    *   <li>Option 2</li>
     * </ul>
     *
     * @exampleTitle Initialize Kendo mobile ButtonGroup using a jQuery selector
@@ -21,8 +23,8 @@
     * @section
     *
     * <h3>Customizing mobile ButtonGroup appearance</h3>
-    * Every Kendo Mobile ButtonGroup color can be customized by simply setting its background-color (either inline or by using a CSS selector).
-    * @exampleTitle Initialize a green Kendo mobile ButtonGroup
+    * Every Kendo Mobile ButtonGroup color can be customized by setting its <code>background-color</code> inline or using a CSS selector.
+    * @exampleTitle Green Kendo mobile ButtonGroup
     * @example
     * <ul id="buttongroup" data-role="buttongroup" />
     *   <li style="background-color: green">Option1</li>
@@ -31,8 +33,9 @@
     *
     * @section
     * <h3>Button icons</h3>
-    * A button icon can be set in two ways - either by adding an <code>img</code> element inside the <code>a</code> element, or by setting an <code>icon</code> data attribute to the <code>a</code> element.
-    * Kendo mobile comes out of the box with several ready to use icons:
+    * <p>A Button icon can be set in two ways - either by adding an <code>img</code> element inside the Button <code>a</code> element,
+    * or by setting an <code>icon</code> data attribute to the Button <code>a</code> element.</p>
+    * <p>Kendo mobile comes out of the box with several ready to use icons:</p>
     *
     * * <ul id="icon-list">
     *   <li title=".km-about"><span class="km-icon km-about"></span>about</li>
@@ -69,18 +72,20 @@
     *   <li title=".km-stop"><span class="km-icon km-stop"></span>stop</li>
     *   <li title=".km-trash"><span class="km-icon km-trash"></span>trash</li>
     * </ul>
-
     *
-    * Additional icons may be added by defining the respective CSS class. If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.
+    * <p>Additional icons may be added by defining the respective CSS class.
+    * If the <code>icon</code> data attribute is set to <code>custom</code>, the Button will receive <code>km-custom</code> CSS class.</p>
     * @exampleTitle Define custom button icon.
     * @example
+    * <style>
     * .km-custom {
-    *   background-image: ...
+    *   background-image: url("foo.png");
     * }
+    * </style>
     *
     * <ul id="buttongroup" data-role="buttongroup" />
-    *   <li data-icon="custom">Option1</li>
-    *   <li>Option2</li>
+    *   <li data-icon="custom">Option 1</li>
+    *   <li>Option 2</li>
     * </ul>
     */
 
@@ -99,7 +104,7 @@
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
-        * @option {Number} [index] Defines the initial selected item.
+        * @option {Number} [index] Defines the initially selected Button.
         */
         init: function(element, options) {
             var that = this;
@@ -112,7 +117,7 @@
 
             that.bind([
                 /**
-                * Fires when different button is selected
+                * Fires when different Button is selected.
                 * @name kendo.mobile.ui.ButtonGroup#select
                 * @event
                 * @param {Event} e
@@ -120,8 +125,8 @@
                 * @exampleTitle Handle select event
                 * @example
                 * <ul id="buttongroup" data-role="buttongroup" />
-                *   <li>Option1</li>
-                *   <li>Option2</li>
+                *   <li>Option 1</li>
+                *   <li>Option 2</li>
                 * </ul>
                 *
                 * <script>
@@ -143,16 +148,16 @@
         },
 
         /**
-        * Get the currently selected button element.
-        * @returns {jQueryObject} the currenlty selected button element.
+        * Get the currently selected Button.
+        * @returns {jQueryObject} the currently selected Button.
         */
         current: function() {
             return this._current;
         },
 
         /**
-        * Selects a button.
-        * @param {jQueryObject | Number} li LI element or index of the item, which defines the button that should be selected.
+        * Select a Button.
+        * @param {jQueryObject | Number} li LI element or index of the Button.
         * @example
         * var buttongroup = $("#buttongroup").data("kendoMobileButtonGroup");
         *
