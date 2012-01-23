@@ -188,7 +188,7 @@
             '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
                 '<div class="code-sample">' +
                     '<h4 class="code-title">Example</h4>' +
-                    '<pre class="code prettyprint lang-js"><code><%= example[exampleIdx] %></code></pre>' +
+                    '<pre class="code prettyprint"><code><%= htmlEncode(example[exampleIdx]) %></code></pre>' +
                 '</div>' +
             '<% } %>' +
             '<%= typeof subOptions != "undefined" ? renderChildOptions(subOptions) : "" %>' +
