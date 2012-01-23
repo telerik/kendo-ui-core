@@ -7,7 +7,14 @@
     <link href="styles/kendo.default.css" rel="stylesheet" />
 </head>
 <body>
-    @{ WriteTo(new StringWriter(), RenderSection("Description", false)); }    
+    @{ WriteTo(new StringWriter(), RenderSection("Description", false)); }
     @RenderBody()
+
+    @if (ViewBag.suite == "mobile")
+    {
+<script>
+    var app = new kendo.mobile.Application(document.body);
+</script>
+    }
 </body>
 </html>

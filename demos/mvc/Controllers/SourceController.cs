@@ -14,6 +14,7 @@ namespace Kendo.Controllers
         public ActionResult Index(string suite, string section, string example)
         {
             var source = RenderView(
+                suite,
                 string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example),
                 "SourceLayout"
             );
@@ -21,10 +22,11 @@ namespace Kendo.Controllers
             return Content(source, "text/plain");
         }
 
-        private string RenderView(string viewName, string template)
+        private string RenderView(string suite, string viewName, string template)
         {
             using (var writer = new StringWriter())
             {
+                ViewData["suite"] = suite;
                 var viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, template);
                 var viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, writer);
                 viewResult.View.Render(viewContext, writer);
