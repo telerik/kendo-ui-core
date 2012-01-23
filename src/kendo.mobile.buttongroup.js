@@ -93,7 +93,6 @@
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
         ACTIVE = "km-state-active",
-        EMPTY_JQUERY_OBJECT = $(),
         SELECT = "select",
         SELECTOR = "li:not(." + ACTIVE +")",
         MOUSEDOWN = kendo.support.touch ? "touchstart" : "mousedown";
@@ -138,7 +137,6 @@
                 SELECT
             ], that.options);
 
-            that._current = EMPTY_JQUERY_OBJECT;
             that.select(that.options.index);
         },
 
@@ -152,7 +150,7 @@
         * @returns {jQueryObject} the currently selected Button.
         */
         current: function() {
-            return this._current;
+            return this.element.find("." + ACTIVE);
         },
 
         /**
@@ -168,29 +166,24 @@
         * buttongroup.select(1);
         */
         select: function (li) {
-            if (li === undefined) {
+            var that = this,
+                index = -1;
+
+            if (li === undefined || li === -1) {
                 return;
             }
 
-            var that = this,
-                current = that._current.removeClass(ACTIVE),
-                index = -1;
+            that.current().removeClass(ACTIVE);
 
             if (typeof li === "number") {
                 index = li;
-
-                if (li > -1) {
-                    li = $(that.element[0].children[li]);
-                } else {
-                    li = EMPTY_JQUERY_OBJECT;
-                }
-
+                li = $(that.element[0].children[li]);
             } else if (li.nodeType) {
                 li = $(li);
                 index = li.index();
             }
 
-            that._current = li.addClass(ACTIVE);
+            li.addClass(ACTIVE);
             that.selectedIndex = index;
         },
 
