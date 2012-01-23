@@ -487,6 +487,7 @@
     <Content Include="Views\mobile\buttongroup\index.cshtml" />
     <Content Include="Views\mobile\buttongroup\appearance.cshtml" />
     <Content Include="Views\mobile\scrollview\index.cshtml" />
+    <Content Include="Views\mobile\tabstrip\appearance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
