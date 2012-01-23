@@ -21,7 +21,7 @@
         $("#button-group")
             .data("kendoMobileButtonGroup")
             .bind("select", function() {
-                kendoConsole.log("Selected button: " + this.current().text());
+                kendoConsole.log("Selected button: " + this.current().index());
             });
     }
 </script>
