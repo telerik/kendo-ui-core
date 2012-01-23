@@ -56,6 +56,7 @@
     border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.4);
     background: #f5f5f5;
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
+    .box-shadow(0 1px 1px rgba(0,0,0,.4));
 }
 
 .km-meego .km-button.km-state-active
@@ -74,7 +75,7 @@
 
 .km-meego li.km-state-active
 {
-    border: 0;
+    border-width: 0;
     color: white;
 }
 
@@ -130,22 +131,6 @@
 {
     border-right-width: 1.44rem;
 }
-
-/*.km-meego .km-switch-handle:before
-{
-    content: "\a0";
-    display: block;
-    position: absolute;
-    left: 1.4rem;
-    background-color: inherit;
-    border-bottom: 0;
-    border-left: 1.4rem solid transparent;
-    border-right: 1rem solid #232323;
-    border-top: 2rem solid transparent;
-    border-width: 2rem 1rem 0 1.4rem;
-    height: 0;
-    width: 0;
-}*/
 
 .km-meego .km-switch-off
 {
@@ -241,18 +226,21 @@
 
 .km-meego .km-buttongroup
 {
-    padding: 0 1px 1px 0;
+    .border-radius(~".5rem");
+    .box-shadow(0 1px 1px rgba(0,0,0,.4));
 }
 
 .km-meego .km-buttongroup .km-button
 {
     border-right-width: 0;
+    .box-shadow(none);
 }
 
-.km-meego .km-buttongroup .km-state-active
+.km-meego .km-buttongroup li.km-state-active
 {
     color: #fff;
-    border-color: rgba(0,0,0,.4) rgba(0,0,0,.4) rgba(0,0,0,.1);
+    border: 1px 0 1px 1px;
+    border-color: transparent;
     background-color: #1080dd;
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
@@ -399,14 +387,14 @@
     background: #d7d8d8;
 }
 
-.km-meego .km-listinset > li:first-child > .km-listview-link,
-.km-meego .km-listgroupinset > li:first-child > .km-listview-link
+.km-meego .km-listinset li:first-child > .km-listview-link,
+.km-meego .km-listgroupinset li:first-child > .km-listview-link
 {
     .border-radius(~".6rem .6rem 0 0");
 }
 
-.km-meego .km-listinset > li:last-child > .km-listview-link,
-.km-meego .km-listgroupinset > li:last-child > .km-listview-link
+.km-meego .km-listinset li:last-child > .km-listview-link,
+.km-meego .km-listgroupinset li:last-child > .km-listview-link
 {
     .border-radius(~"0 0 .6rem .6rem");
 }
