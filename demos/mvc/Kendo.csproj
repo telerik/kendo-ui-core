@@ -113,7 +113,6 @@
     <Content Include="content\dataviz\overview\overlay.png" />
     <Content Include="content\dataviz\overview\pie.png" />
     <Content Include="content\dataviz\overview\scatter.png" />
-    <Content Include="content\mobile\application\i\mymusic.png" />
     <Content Include="content\mobile\application\music-store.html" />
     <Content Include="content\mobile\application\play-music.html" />
     <Content Include="content\mobile\button\sports-facility.jpg" />
@@ -163,6 +162,7 @@
     <Content Include="content\mobile\overview\ottawa.jpg" />
     <Content Include="content\mobile\overview\san-francisco.jpg" />
     <Content Include="content\mobile\overview\sydney.jpg" />
+    <Content Include="content\mobile\shared\mymusic.jpg" />
     <Content Include="content\mobile\shared\player.jpg" />
     <Content Include="content\mobile\shared\sales.jpg" />
     <Content Include="content\shared\js\console.js" />

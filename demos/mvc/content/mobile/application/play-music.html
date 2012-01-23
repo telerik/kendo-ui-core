@@ -1,5 +1,5 @@
-<div data-role="view" data-title="Play Music">
-    <div class="banner">&nbsp;</div>
+<div data-role="view" id="application-play" data-title="Play Music">
+    <div class="head">&nbsp;</div>
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>Genres
             <ul>
@@ -15,12 +15,12 @@
     <a data-role="button" href=":back" style="display: block; margin: 1rem; text-align: center;">Go back!</a>
 </div>
 <style scoped>
-.banner {
+#application-play .head {
 	display: block;
-	margin: 0 auto 1rem auto;
-	width: 100%;
-	height: 120px;
-	background: url(../../content/mobile/application/i/mymusic.png) no-repeat center center;
+	margin: 1rem;
+	height: 110px;
+	background: url(../../content/mobile/shared/mymusic.jpg) no-repeat center center;
     background-size: 100% auto;
+    border-radius: 10px 10px 10px 10px;
 }
 </style>
