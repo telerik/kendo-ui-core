@@ -43,8 +43,7 @@
                 var read = dataSource.transport.options.read;
                 equal(read.dataType, "jsonp");
                 equal(read.cache, true);
-                equal(read.jsonp, false);
-                equal(read.jsonpCallback, "callback");
+                equal(read.jsonp, "$callback");
             });
 
             test("datasource with type odata initializes odata schema", function() {
@@ -60,26 +59,10 @@
                 equal(schema.data, "d.results");
             });
 
-            test("parameterMap adds $format and $inlinecount and $callback to the request", function() {
+            test("parameterMap adds $format and $inlinecount to the request", function() {
                 var result = parameterMap();
                 equal(result.$format, "json");
                 equal(result.$inlinecount, "allpages");
-                equal(result.$callback, "callback");
-            });
-
-            test("parameterMap does not add $callback when dataType is not jsonp", function() {
-                var dataSource = new DataSource({
-                    type: "odata",
-                    transport: {
-                        read: {
-                            url: "foo",
-                            dataType: "json"
-                        }
-                    }
-                });
-
-                var result = dataSource.transport.parameterMap(null, "read");
-                ok(!result.hasOwnProperty("$callback"), "Callback is not set");
             });
 
             test("parameterMap adds $skip when skip is specified", function() {
