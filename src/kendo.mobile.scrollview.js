@@ -173,6 +173,7 @@
             that.page = 0;
 
             that.move = new mobile.Move(that.inner);
+
             that.inertia = new Inertia(that.move, function() {
                 that.page = -that.move.x / that.width;
                 that._updatePage();
@@ -210,13 +211,14 @@
         calculateDimensions: function() {
             var that = this,
                 width = that.width = that.element.width(),
-                scrollWidth = that.element[0].scrollWidth,
+                scrollWidth = that.inner[0].scrollWidth,
                 pages = that.pages = Math.ceil(scrollWidth / width),
                 pageHTML = "";
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
             that.draggable.options.minX = width - scrollWidth;
+            that.page = -that.move.x / width;
 
             for (var idx = 0; idx < pages; idx ++) {
                 pageHTML += "<li/>";
