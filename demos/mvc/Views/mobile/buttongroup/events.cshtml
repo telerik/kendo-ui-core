@@ -17,7 +17,8 @@
     function mobileButtonGroupEventsInit() {
         $("#button-group")
             .data("kendoMobileButtonGroup")
-            .bind("change", function() {
+            .bind("select", function() {
+                console.log(this.current().text());
                 kendoConsole.log("Selected button: " + this.current().text());
             });
     }
