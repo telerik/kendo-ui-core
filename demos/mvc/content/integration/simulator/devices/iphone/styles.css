@@ -1,0 +1,77 @@
+.device-skin
+{
+    font-size: 12px; /* Sets the zoom level */
+}
+
+.device-container.vertical .device-skin
+{
+    padding-top: 3.22cm;
+    background-image: url("images/vertical.png");
+}
+
+.device-container.horizontal .device-skin
+{
+    padding-top: .86cm;
+    background-image: url("images/horizontal.png");
+}
+
+.device-container.vertical
+{
+    bottom: -100px;
+    width: 1050px;
+    height: 802px;
+    padding: 4.5cm 10.52cm 9.14cm;
+}
+
+.device-container.horizontal
+{
+    bottom: -100px;
+    width: 748px;
+    height: 658px;
+    padding: 2.06cm 5.14cm 11.3cm 5.22cm;
+}
+
+#address-bar
+{
+    height: 18px;
+}
+
+.device-container.vertical #address-bar
+{
+    left: 406px;
+    top: 141px;
+    width: 138px;
+}
+
+.device-container.horizontal #address-bar
+{
+    left: 206px;
+    top: 50px;
+    width: 200px;
+}
+
+.device-container #navigate-back
+{
+    top: auto;
+}
+
+.device-container #navigate-back:hover
+{
+    background: rgba(255,255,255,.3);
+}
+
+.device-container.vertical #navigate-back
+{
+    bottom: 315px;
+    left: 412px;
+    width: 25px;
+    height: 25px;
+}
+
+.device-container.horizontal #navigate-back
+{
+    bottom: 406px;
+    left: 214px;
+    width: 19px;
+    height: 19px;
+}

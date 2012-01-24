@@ -23,6 +23,12 @@ namespace Kendo
             );
 
             routes.MapRoute(
+                "Simulator",
+                "mobile/simulator",
+                new { controller = "Integration", action = "Simulator" }
+            );
+
+            routes.MapRoute(
                 "MobileDeviceIndex",
                 "mobile/m/index.html",
                 new { controller = "MobileDevice", action = "Index" }
