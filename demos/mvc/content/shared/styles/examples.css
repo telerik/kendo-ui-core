@@ -1939,188 +1939,188 @@ div.old-browser
 
 /* Firefox Icon Masks */
 
-#device-wrapper .km-featured
+#navmainWrap .km-featured
 {
     clip-path: url("iconmasks.svg#featured");
 }
 
-#device-wrapper .km-toprated,
-#device-wrapper .km-favorites
+#navmainWrap .km-toprated,
+#navmainWrap .km-favorites
 {
     clip-path: url("iconmasks.svg#toprated");
 }
 
-#device-wrapper .km-mostviewed
+#navmainWrap .km-mostviewed
 {
     clip-path: url("iconmasks.svg#mostviewed");
 }
 
-#device-wrapper .km-bookmarks
+#navmainWrap .km-bookmarks
 {
     clip-path: url("iconmasks.svg#bookmarks");
 }
 
-#device-wrapper .km-contacts
+#navmainWrap .km-contacts
 {
     clip-path: url("iconmasks.svg#contacts");
 }
 
-#device-wrapper .km-download,
-#device-wrapper .km-downloads
+#navmainWrap .km-download,
+#navmainWrap .km-downloads
 {
     clip-path: url("iconmasks.svg#download");
 }
 
-#device-wrapper .km-more
+#navmainWrap .km-more
 {
     clip-path: url("iconmasks.svg#more");
 }
 
-#device-wrapper .km-android #device-wrapper .km-more
+#navmainWrap .km-android #navmainWrap .km-more
 {
     clip-path: url("iconmasks.svg#androidmore");
 }
 
-#device-wrapper .km-meego #device-wrapper .km-more
+#navmainWrap .km-meego #navmainWrap .km-more
 {
     clip-path: url("iconmasks.svg#meegomore");
 }
 
-#device-wrapper .km-mostrecent
+#navmainWrap .km-mostrecent
 {
     clip-path: url("iconmasks.svg#mostrecent");
 }
 
-#device-wrapper .km-recents
+#navmainWrap .km-recents
 {
     clip-path: url("iconmasks.svg#recents");
 }
 
-#device-wrapper .km-history
+#navmainWrap .km-history
 {
     clip-path: url("iconmasks.svg#history");
 }
 
-#device-wrapper .km-add
+#navmainWrap .km-add
 {
     clip-path: url("iconmasks.svg#add");
 }
 
-#device-wrapper .km-details
+#navmainWrap .km-details
 {
     clip-path: url("iconmasks.svg#details");
 }
 
-#device-wrapper .km-info,
-#device-wrapper .km-about
+#navmainWrap .km-info,
+#navmainWrap .km-about
 {
     clip-path: url("iconmasks.svg#info");
 }
 
-#device-wrapper .km-action
+#navmainWrap .km-action
 {
     clip-path: url("iconmasks.svg#action");
 }
 
-#device-wrapper .km-camera
+#navmainWrap .km-camera
 {
     clip-path: url("iconmasks.svg#camera");
 }
 
-#device-wrapper .km-edit,
-#device-wrapper .km-compose
+#navmainWrap .km-edit,
+#navmainWrap .km-compose
 {
     clip-path: url("iconmasks.svg#edit");
 }
 
-#device-wrapper .km-search
+#navmainWrap .km-search
 {
     clip-path: url("iconmasks.svg#search");
 }
 
-#device-wrapper .km-trash,
-#device-wrapper .km-delete
+#navmainWrap .km-trash,
+#navmainWrap .km-delete
 {
     clip-path: url("iconmasks.svg#trash");
 }
 
-#device-wrapper .km-organize
+#navmainWrap .km-organize
 {
     clip-path: url("iconmasks.svg#organize");
 }
 
-#device-wrapper .km-reply
+#navmainWrap .km-reply
 {
     clip-path: url("iconmasks.svg#reply");
 }
 
-#device-wrapper .km-stop
+#navmainWrap .km-stop
 {
     clip-path: url("iconmasks.svg#stop");
 }
 
-#device-wrapper .km-sounds,
-#device-wrapper .km-volume
+#navmainWrap .km-sounds,
+#navmainWrap .km-volume
 {
     clip-path: url("iconmasks.svg#sounds");
 }
 
-#device-wrapper .km-refresh
+#navmainWrap .km-refresh
 {
     clip-path: url("iconmasks.svg#refresh");
 }
 
-#device-wrapper .km-play
+#navmainWrap .km-play
 {
     clip-path: url("iconmasks.svg#play");
 }
 
-#device-wrapper .km-fastforward
+#navmainWrap .km-fastforward
 {
     clip-path: url("iconmasks.svg#fastforward");
 }
 
-#device-wrapper .km-pause
+#navmainWrap .km-pause
 {
     clip-path: url("iconmasks.svg#pause");
 }
 
-#device-wrapper .km-rewind
+#navmainWrap .km-rewind
 {
     clip-path: url("iconmasks.svg#rewind");
 }
 
-#device-wrapper .km-settings
+#navmainWrap .km-settings
 {
     clip-path: url("iconmasks.svg#settings");
 }
 
-#device-wrapper .km-globe
+#navmainWrap .km-globe
 {
     clip-path: url("iconmasks.svg#globe");
 }
 
-#device-wrapper .km-home
+#navmainWrap .km-home
 {
     clip-path: url("iconmasks.svg#home");
 }
 
-#device-wrapper .km-cart
+#navmainWrap .km-cart
 {
     clip-path: url("iconmasks.svg#cart");
 }
 
-#device-wrapper .km-battery
+#navmainWrap .km-battery
 {
     clip-path: url("iconmasks.svg#battery");
 }
 
-#device-wrapper .km-wifi
+#navmainWrap .km-wifi
 {
     clip-path: url("iconmasks.svg#wifi");
 }
 
-#device-wrapper .km-share
+#navmainWrap .km-share
 {
     clip-path: url("iconmasks.svg#share");
 }
