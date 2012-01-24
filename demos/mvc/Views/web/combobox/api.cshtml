@@ -18,7 +18,11 @@
                         {text: "The Shawshank Redemption 2", value:"11"}
                     ];
 
-                    $("#products").kendoComboBox(data)
+                    $("#products").kendoComboBox({
+                                       dataTextField: "text",
+                                       dataValueField: "value",
+                                       dataSource: data
+                                  })
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
 

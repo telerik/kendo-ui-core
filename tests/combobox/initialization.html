@@ -237,7 +237,11 @@
            });
 
            test("combobox populates its list when the datasource changes", function() {
-                  var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
+               var combobox = new ComboBox(input, {
+                   dataTextField: "text",
+                   dataValueField: "value",
+                   dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
+               });
 
                   combobox.dataSource.read();
 
@@ -279,6 +283,8 @@
 
            test("should populate text and value if items", function() {
                var combobox = new ComboBox(input, {
+                   dataTextField: "text",
+                   dataValueField: "value",
                    dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
                    index: 0
                });
@@ -299,6 +305,8 @@
            test("rebuild select options if data", function() {
                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
                combobox = new ComboBox(select, {
+                   dataTextField: "text",
+                   dataValueField: "value",
                    dataSource: [{text: "Foo", value: 0}, {text: 0, value:5}]
                });
 
@@ -320,6 +328,8 @@
                var select = $("<select><option value=1>foo1</option><option value=2>foo2</option><option value=3>foo3</option></select>"),
                combobox = new ComboBox(select, {
                    index: 0,
+                   dataTextField: "text",
+                   dataValueField: "value",
                    dataSource: [{text: "Foo", value: "Foo 1"}, {text: "Foo 2", value:"Foo 2"}]
                });
 

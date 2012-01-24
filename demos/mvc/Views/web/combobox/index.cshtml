@@ -55,6 +55,8 @@
                 $(document).ready(function() {
                     // create ComboBox from input HTML element
                     $("#input").kendoComboBox({
+                        dataTextField: "text",
+                        dataValueField: "value",
                         dataSource: [
                             { text: "Cotton", value: "1" },
                             { text: "Polyester", value: "2" },
