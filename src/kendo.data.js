@@ -918,8 +918,8 @@
 	 * var dataSource = new kendo.data.DataSource({
 	 *      data: orders
 	 * });
-         * @option {Boolean} [serverPaging] <false> Determines if paging of the data should be handled on the server.  
-	 * <p><b>serverPaging</b> must be used in conjunction with the <b>pageSize</b> configuration setting. The following options to the server as part of the query string by default: 
+         * @option {Boolean} [serverPaging] <false> Determines if paging of the data should be handled on the server.
+	 * <p><b>serverPaging</b> must be used in conjunction with the <b>pageSize</b> configuration setting. The following options to the server as part of the query string by default:
 	 * <div class="details-list">
 	 *     <dl>
 	 *         <dt><b>take</b></dt>
@@ -939,7 +939,7 @@
 	 *         read: "orders.json"
 	 *     },
 	 *     serverPaging: true,
-	 *     pageSize: 5 // 5 records per page  
+	 *     pageSize: 5 // 5 records per page
 	 * });
 	 * @option {Boolean} [serverSorting] <false> Determines if sorting of the data should be handled on the server.
 	 * <p>The <b>serverSorting</b> must be used in conjunction with the <b>sort</b> configuration.  By default, a sort object is sent to the server with the query string in the following form:</p>
@@ -967,7 +967,7 @@
 	 * var dataSource = new kendo.data.DataSource({
 	 *     transport: {
 	 *         read: "orders.json"
-	 *     },     
+	 *     },
 	 *     serverGrouping: true,
 	 *     sort: { field: "orderId", dir: "asc" } // group by orderId descending
 	 * });
@@ -1096,7 +1096,7 @@
          * @option {String} [transport.read.url] The remote service URL
          * @option {String} [transport.read.dataType] The type of data that you're expecting back from the server
          * @option {Object | Function} [transport.read.data] Additional data to be sent to the server
-         * 
+         *
 	 * @option {Object | String} [transport.create.url] The remote url to call when creating a new record
 	 * @option {String} [transport.create.dataType] The type of data that you're expecting back from the server
 	 * @options {Object | Function} [transport.create.data] Additional data to be sent to the server
@@ -1271,6 +1271,7 @@
                     data: that._data,
                     reader: that.reader,
                     batch: options.batch,
+                    autoSync: options.autoSync,
                     sendAllFields: options.sendAllFields,
                     transport: that.transport,
                     change: function() {
@@ -1426,7 +1427,7 @@
          *     }
 	 * });
 	 * // the datasource will not contain any data until a read is called
-	 * dataSource.read();   
+	 * dataSource.read();
 	 */
         read: function(data) {
             var that = this, params = that._params(data);
@@ -1613,7 +1614,7 @@
 
         /**
          * Returns a view of the data with operation such as in-memory sorting, paring, grouping and filtering are applied.
-         * To ensure that data is available this method should be use from within change event of the dataSource.      
+         * To ensure that data is available this method should be use from within change event of the dataSource.
          * @returns {Array} Array of items
 	 * @example
          * var dataSource = new kendo.data.DataSource({
@@ -1623,8 +1624,8 @@
  	 *     change: function(e) {
 	 *        // create a template instance
 	 *        var template = kendo.template($("#template").html());
-         *        // render a view by passing the data to a template  
-	 *        kendo.render(template, dataSource.view());         
+         *        // render a view by passing the data to a template
+	 *        kendo.render(template, dataSource.view());
 	 *     }
 	 * });
          */

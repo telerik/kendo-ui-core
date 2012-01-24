@@ -337,6 +337,9 @@
                     model = that._models[id] = new that.options.model(data);
                     model.bind(CHANGE, function () {
                         that.trigger(MODELCHANGE, model);
+                        if (that.options.autoSync) {
+                            that.sync();
+                        }
                     });
                 }
             }
