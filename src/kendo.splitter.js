@@ -263,8 +263,7 @@
                  * @param {Element} e.pane
                  * The expanding pane of the Splitter.
                  *
-                 * @exampleTitle Attach expand event handler during
-                 * initialization; detach via unbind()
+                 * @exampleTitle Attach expand event handler during initialization; detach via unbind()
                  * @example
                  * // event handler for expand
                  * var onExpand = function(e) {
@@ -279,8 +278,7 @@
                  * // detach expand event handler via unbind()
                  * splitter.data("kendoSplitter").unbind("expand", onExpand);
                  *
-                 * @exampleTitle Attach expand event handler via bind();
-                 * detach via unbind()
+                 * @exampleTitle Attach expand event handler via bind(); detach via unbind()
                  * @example
                  * // event handler for expand
                  * var onExpand = function(e) {
@@ -307,8 +305,7 @@
                  * @param {Element} e.pane
                  * The collapsing pane of the Splitter.
                  *
-                 * @exampleTitle Attach expand event handler during
-                 * initialization; detach via unbind()
+                 * @exampleTitle Attach expand event handler during initialization; detach via unbind()
                  * @example
                  * // event handler for expand
                  * var onCollapse = function(e) {
@@ -323,8 +320,7 @@
                  * // detach collapse event handler via unbind()
                  * splitter.data("kendoSplitter").unbind("collapse", onCollapse);
                  *
-                 * @exampleTitle Attach collapse event handler via bind();
-                 * detach via unbind()
+                 * @exampleTitle Attach collapse event handler via bind(); detach via unbind()
                  * @example
                  * // event handler for collapse
                  * var onExpand = function(e) {
@@ -507,15 +503,24 @@
         },
 
         /**
-         * Loads the pane content from the specified URL.
-         * @param {Selector | DOM Element} pane The pane whose content should be loaded.
-         * @param {String} url The URL which returns the pane content.
-         * @param {Object | String} data Data to be sent to the server.
+         *
+         * Loads the content of a pane from a local or remote URL.
+         *
+         * @param {Selector | DOM Element} pane
+         * The targetted pane whose content is to be loaded via a URL.
+         *
+         * @param {String} url
+         * A local or remote URL from which the content of the pane is to be loaded.
+         *
+         * @param {Object | String} data
+         * Any data that is necessary to be sent to the server.
+         *
          * @example
 	     * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
          * // load pane content
 	     * splitter.ajaxRequest("#Panel1", "/customer/profile", { id: 42 });
+         *
          */
         ajaxRequest: function(pane, url, data) {
             pane = $(pane);
@@ -737,67 +742,112 @@
 
             this.trigger(RESIZE);
         },
+
         /**
-         * Collapses the specified Pane item
-         * @param {Selector | DOM Element} pane The pane, which will be collapsed.
+         *
+         * Collapses a specified pane. Invoking this method will force the <strong>Splitter</strong> to redraw and it
+         * will trigger layoutChange and resize events. Note: Invoking the method will not trigger a collapse event.
+         *
+         * @param {Selector | DOM Element} pane
+         * The pane to be collapsed.
+         *
          * @example
     	 * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
-	     * // collapse the specified pane
-         * splitter.collapse("#Item1"); // id of the first pane
+         * // collapse the pane with ID, pane1
+         * splitter.collapse("#pane1");
+         *
          */
         collapse: function(pane) {
             this.toggle(pane, false);
         },
+
         /**
-         * Expands the specified Pane item
-         * @param {Selector | DOM Element} pane The pane, which will be expanded.
+         *
+         * Expands a specified pane. Invoking this method will force the <strong>Splitter</strong> to redraw and it
+         * will trigger layoutChange and resize events. Note: Invoking the method will not trigger an expand event.
+         *
+         * @param {Selector | DOM Element} pane
+         * The pane to be expanded.
+         *
          * @example
          * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
-    	 * // expand the pane
-         * splitter.expand("#Item1"); // id of the first pane
+    	 * // expand the pane with ID, pane1
+         * splitter.expand("#pane1");
+         *
          */
         expand: function(pane) {
             this.toggle(pane, true);
         },
+
         /**
-         * Set the size of the pane.
+         *
+         * Set the size of the pane. Setting this value will cause the <strong>Splitter</strong> to redraw and it will
+         * trigger layoutChange and resize events.
+         *
          * @name kendo.ui.Splitter#size
          * @function
-         * @param {Selector | DOM Element} pane The pane
-         * @param {String} value The new size of the pane.
+         *
+         * @param {Selector | DOM Element} pane
+         * The pane to be resized.
+         *
+         * @param {String} value
+         * The new size of the pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%"). Note: This value
+         * must not exceed <strong>panes.max</strong> or be less then <strong>panes.min</strong>.
+         *
          * @example
 	     * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
-	     * // set the size of the pane
-         * splitter.size("#Item1", "200px");
+	     * // set the size of the pane with ID, pane1
+         * splitter.size("#pane1", "200px");
+         *
          */
         size: panePropertyAccessor("size", true),
+
         /**
-         * Set the minimum size of the pane.
+         *
+         * Sets the minimum size of a pane. Setting this value will not cause the <strong>Splitter</strong> to
+         * redraw, nor will it trigger any events.
+         *
          * @name kendo.ui.Splitter#min
          * @function
-         * @param {Selector | DOM Element} pane The pane
-         * @param {String} value The minimum size value.
+         *
+         * @param {Selector | DOM Element} pane
+         * The pane being targetted for a new minimum size configuration value.
+         *
+         * @param {String} value
+         * The minimum size value of the pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%").
+         *
          * @example
 	     * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
-	     * // 
-         * splitter.min("#Item1", "100px");
+	     * // set the minimum size of the pane with ID, pane1
+         * splitter.min("#pane1", "100px");
+         *
          */
         min: panePropertyAccessor("min"),
+
         /**
-         * Set the maximum size of the pane.
+         *
+         * Sets the maximum size of a pane. Setting this value will not cause the <strong>Splitter</strong> to
+         * redraw, nor will it trigger any events.
+         *
          * @name kendo.ui.Splitter#max
          * @function
-         * @param {Selector | DOM Element} pane The pane
-         * @param {String} value The maximum size value.
+         *
+         * @param {Selector | DOM Element} pane
+         * The pane being targetted for a new minimum size configuration value.
+         *
+         * @param {String} value
+         * The maximum size value of the pane defined as pixels (i.e. "200px") or as a percentage (i.e. "50%").
+         *
          * @example
 	     * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
-	     * // set the max size of the pane
-         * splitter.max("#Item1", "300px");
+	     * // set the maximum size of the pane with ID, pane1
+         * splitter.max("#pane1", "300px");
+         *
          */
         max: panePropertyAccessor("max")
     });
