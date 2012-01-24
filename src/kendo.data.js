@@ -1889,7 +1889,7 @@
                 }
             }
 
-            if (that.options.autoSync && (action === "add" || action === "remove")) {
+            if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
                 that.sync();
             } else {
                 that._total = that.reader.total(that._pristine);
