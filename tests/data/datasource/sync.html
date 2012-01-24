@@ -92,6 +92,15 @@
                 equal(dataSource.calls("sync"), 1);
             });
 
+            test("update syncs when autoSync is true", function() {
+                setup({ autoSync: true });
+                stub(dataSource, "sync");
+
+                dataSource.get(1).set("foo", "moo");
+
+                equal(dataSource.calls("sync"), 1);
+            });
+
             test("add does not sync when autoSync is false", function() {
                 stub(dataSource, "sync");
                 dataSource.add({ foo: "bar" });
