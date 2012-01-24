@@ -177,6 +177,18 @@
 
                 viewModel.foo[0].set("bar", "baz");
             });
+
+            test("indexOf return index of the item", function() {
+                var viewModel = kendo.observable({ foo: [ { bar: 1 } ] });
+
+                equal(viewModel.foo.indexOf(viewModel.foo[0]), 0);
+            });
+
+            test("indexOf return -1 if item does not exists", function() {
+                var viewModel = kendo.observable({ foo: [ { bar: 1 } ] });
+
+                equal(viewModel.foo.indexOf({ bar: 42 }), -1);
+            });
         </script>
     </head>
 </html>

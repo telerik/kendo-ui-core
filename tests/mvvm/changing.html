@@ -90,6 +90,42 @@
                 equal(dom.find("span").text(), "foo");
             });
 
+            test("select of multi select updates the viewModel", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    selectedItems: []
+                });
+
+                var dom = $('<select data-source="foo" multiple="multiple" data-value="selectedItems"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:first").attr("selected", "selected");
+                dom.find("option:last").attr("selected", "selected");
+                dom.trigger("change");
+
+                equal(viewModel.selectedItems[0], "foo");
+                equal(viewModel.selectedItems[1], "baz");
+            });
+
+            test("multi select has same item count after change", function() {
+                var viewModel = kendo.observable( {
+                    items: ["foo", "bar", "baz"],
+                    selectedItems: []
+                });
+
+                var dom = $('<select data-source="items" multiple data-value="selectedItems"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:first").attr("selected", "selected");
+                dom.trigger("change");
+                dom.find("option:last").attr("selected", "selected");
+                dom.trigger("change");
+
+                equal(dom.find("option").length, 3);
+            });
+
             test("changing the value updates the view model", function() {
                 var dom = $('<input data-value="foo" />');
 

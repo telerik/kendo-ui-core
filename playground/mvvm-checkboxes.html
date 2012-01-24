@@ -20,54 +20,97 @@
         </style>
     </head>
     <body>
-        <form>
-            <p>Send me spam: <input type="checkbox" data-checked="wantsSpam" /></p>
-            <div data-visible="wantsSpam">
-            Preferred flavors of spam:
-            <div><input type="checkbox" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
-            <div><input type="checkbox" value="cherry" data-checked="spamFlavors" /> Cherry</div>
-            <div><input type="checkbox" value="almond" data-checked="spamFlavors" /> Almond</div>
-        </div>
-            <fieldset>
+        <fieldset id="checkboxes">
+            <legend>Checkboxes</legend>
+            <form>
+                <p>Send me spam: <input type="checkbox" data-checked="wantsSpam" /></p>
+                <div data-visible="wantsSpam">
+                    Preferred flavors of spam:
+                    <div><input type="checkbox" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
+                    <div><input type="checkbox" value="cherry" data-checked="spamFlavors" /> Cherry</div>
+                    <div><input type="checkbox" value="almond" data-checked="spamFlavors" /> Almond</div>
+                </div>
+                <fieldset>
                     <legend> Selection</legend>
-                <div>
-                    wantsSpam: <span data-text="wantsSpam"></span>
-                </div>
-                <div>
-                    spamTypes: <span data-text="selectedFlavors"></span>
-                </div>
-            </fieldset>
-        </form>
+                    <div>
+                        wantsSpam: <span data-text="wantsSpam"></span>
+                    </div>
+                    <div>
+                        spamTypes: <span data-text="selectedFlavors"></span>
+                    </div>
+                </fieldset>
+            </form>
+        </fieldset>
+        <fieldset id="radio">
+            <legend>Radio</legend>
+            <form>
+                Preferred flavors of spam:
+                <div><input type="radio" name="flavors" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
+                <div><input type="radio" name="flavors" value="cherry" data-checked="spamFlavors" /> Cherry</div>
+                <div><input type="radio" name="flavors" value="almond" data-checked="spamFlavors" /> Almond</div>
+                <fieldset>
+                    <legend> Selection</legend>
+                    <div>
+                        spamTypes: <span data-text="spamFlavors"></span>
+                    </div>
+                </fieldset>
+            </form>
+        </fieldset>
+        <fieldset id="multiple">
+            <legend></legend>
+            <form>
+                <select data-source="products" data-value="selected" multiple data-template="select-template">
+                </select>
+                Selected product <span data-text="selectedProducts"></span>
 
-        <form>
-            Preferred flavors of spam:
-            <div><input type="radio" name="flavors" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
-            <div><input type="radio" name="flavors" value="cherry" data-checked="spamFlavors" /> Cherry</div>
-            <div><input type="radio" name="flavors" value="almond" data-checked="spamFlavors" /> Almond</div>
-            <fieldset>
-                <legend> Selection</legend>
-                <div>
-                    spamTypes: <span data-text="spamFlavors"></span>
-                </div>
-            </fieldset>
-        </form>
+                <select data-source="spamFlavors" data-value="flavors" multiple>
+                </select>
+                Selected spam <span data-text="printFlavors"></span>
+            </form>
+        </fieldset>
+
+        <script id="select-template" type="text/x-kendo-template">
+            <option value="${id}">${name}</option>
+        </script>
+
         <script>
             var viewModel = kendo.observable({
                 spamFlavors: ["cherry","almond"],
                 wantsSpam: true,
                 selectedFlavors: function() {
-                    return this.spamFlavors.join(",");
+                    return this.get("spamFlavors").join(",");
                 }
             });
 
-            kendo.bind($("form:first"), viewModel);
+            kendo.bind($("#checkboxes>form"), viewModel);
 
             viewModel = kendo.observable({
                 spamFlavors: "almond"
             });
 
-            kendo.bind($("form:last"), viewModel);
+            kendo.bind($("#radio>form"), viewModel);
+            viewModel = kendo.observable({
+                products: [ { id: 1,  name: "Food"}, { id: 2, name: "Beverages" }, { id: 3, name: "Beer" }],
+                selected: [],
+                selectedProducts: function() {
+                    var result = "",
+                        selected = this.get("selected");
+                    for (var idx = 0, length = selected.length; idx < length; idx++) {
+                        result += selected[idx].name + ",";
+                    }
+                    return result;
+                },
+                spamFlavors: ["cherry","almond"],
+                flavors: ["cherry"],
+                printFlavors: function() {
+                    return this.get("flavors").join(",");
+                }
+            });
+            viewModel.selected.push(viewModel.products[1]);
+
+            kendo.bind($("#multiple>form"), viewModel);
         </script>
+
     </body>
 </html>
 
