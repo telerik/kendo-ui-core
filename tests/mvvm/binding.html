@@ -318,6 +318,22 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
+            test("binding multi select value to multiple objects", function() {
+                var dom = $('<select multiple="multiple" data-source="items" data-value="selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
+                    selectedItem: []
+                });
+
+                viewModel.selectedItem.push(viewModel.items[1]);
+                viewModel.selectedItem.push(viewModel.items[2]);
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").eq(1).is(":selected"));
+                ok(dom.find("option").eq(2).is(":selected"));
+            });
+
             test("checked binding binds radiobutton by value", function() {
                 var dom = $('<input type="radio" value="foo" data-checked="selectedItem"/>');
 

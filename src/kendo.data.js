@@ -277,6 +277,19 @@
             });
 
             return result;
+        },
+
+        indexOf: function(item) {
+            var that = this,
+                idx,
+                length;
+
+            for (idx = 0, length = that.length; idx < length; idx++) {
+                if (that[idx] === item) {
+                    return idx;
+                }
+            }
+            return -1;
         }
     });
 

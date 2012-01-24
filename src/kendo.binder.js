@@ -29,7 +29,6 @@
 
             if (field !== "this") {
                 that.observe(field);
-                that.observable.bind("get", function(e) { that.observe(e.field) });
             }
         },
 
@@ -65,6 +64,22 @@
             }
         },
 
+        apply: function() {
+            var that = this,
+                handler;
+
+            if (that.field !== "this") {
+                handler = function(e) { console.log(that, e.field); that.observe(e.field) };
+                that.observable.bind("get", handler);
+            }
+
+            that.bind();
+
+            if (that.field !== "this") {
+                that.observable.unbind("get", handler);
+            }
+        },
+
         createObserver: function(field) {
             var that = this;
             return function(e) {
@@ -72,7 +87,7 @@
                     if (e.action && e.action in that) {
                         that[e.action].call(that, e.index, e.items);
                     } else {
-                        that.bind();
+                       that.apply();
                     }
                 }
             };
@@ -160,7 +175,7 @@
 
                 if (container instanceof kendo.data.ObservableArray) {
                     if (!checked) {
-                        container.splice(that._find(container, value), 1);
+                        container.splice(container.indexOf(value), 1);
                     } else {
                         container.push(value);
                     }
@@ -173,26 +188,15 @@
             });
         },
 
-        _find: function(array, value) {
-            var idx,
-                length;
-
-            for (idx = 0, length = array.length; idx < length; idx++) {
-                if (array[idx] === value) {
-                    return idx;
-                }
-            }
-            return -1;
-        },
-
         bind: function() {
             var that = this,
                 element = $(that.element),
                 value = that.value();
 
-            if (value instanceof kendo.data.ObservableArray && that._find(value, element.val()) > -1) {
+            if (value instanceof kendo.data.ObservableArray && value.indexOf(element.val()) > -1) {
                 value = true;
             }
+
             if (element.is(":radio")) {
                 if (value === element.val()) { // radio button groups will be reset when checked is set
                     element.attr("checked", true);
@@ -226,10 +230,20 @@
             Binding.fn.init.apply(this, arguments);
 
             this._change = function() {
-                that.observable.set(that.field, $.data(this.options[this.selectedIndex], "value"), this);
+                var container = that.observable.get(that.field);
+                if (container instanceof kendo.data.ObservableArray) {
+
+                    var args = $(this).find(":selected").map(function() {
+                        return $.data(this, "value");
+                    }).toArray();
+
+                    container.splice.apply(container, [0, container.length].concat(args));
+                } else {
+                    that.observable.set(that.field, $.data(this.options[this.selectedIndex], "value"), this);
+                }
             };
 
-            $(that.element).change(this._change);
+           $(that.element).change(this._change);
         },
 
         destroy: function() {
@@ -239,11 +253,17 @@
         },
 
         bind: function() {
-            var that = this, element = this.element;
-            var value = this.value();
+            var that = this,
+                element = that.element,
+                value = that.value(),
+                isArray = value instanceof kendo.data.ObservableArray;
 
             $(element)
-                .find("option").filter(function() { return $.data(this, "value") === value; })
+                .find("option")
+                .attr("selected", false)
+                .filter(function() {
+                    return isArray ? value.indexOf($.data(this, "value")) > -1 : $.data(this, "value") === value;
+                })
                 .attr("selected", "selected");
         }
     });
@@ -336,6 +356,10 @@
                 }
                 callback.call(that.observable, e);
             });
+        },
+
+        apply: function() {
+            this.bind();
         }
     });
 
@@ -419,7 +443,7 @@
                 if (field) {
                     binding = elementBindings[key];
                     binding = new binding(element, object, field);
-                    binding.bind();
+                    binding.apply();
 
                     bound.push(binding);
                 }

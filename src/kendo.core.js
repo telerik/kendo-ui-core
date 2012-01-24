@@ -77,7 +77,7 @@
                         original = handler;
                         handler = function() {
                             that.unbind(eventName, handler);
-                            original.call(that, arguments);
+                            original.apply(that, arguments);
                         }
                     }
                     events = that._events[eventName] || [];
