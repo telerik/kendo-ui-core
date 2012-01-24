@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\MobileDeviceController.cs" />
     <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\ThemeBuilderController.cs" />
@@ -429,7 +430,6 @@
     <Content Include="Views\web\timepicker\rangeselection.cshtml" />
     <Content Include="Views\web\upload\api.cshtml" />
     <Content Include="Views\web\upload\async.cshtml" />
-    <Content Include="Views\web\upload\blank.cshtml" />
     <Content Include="Views\web\upload\events.cshtml" />
     <Content Include="Views\web\upload\index.cshtml" />
     <Content Include="Views\web\validator\index.cshtml" />
