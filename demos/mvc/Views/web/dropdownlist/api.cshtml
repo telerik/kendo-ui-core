@@ -17,7 +17,11 @@
                         {text: "The Dark Knight", value:"10"}
                     ];
 
-                    $("#products").kendoDropDownList(data)
+                    $("#products").kendoDropDownList({
+                                      dataTextField: "text",
+                                      dataValueField: "value",
+                                      dataSource: data
+                                  })
                                   .closest(".k-widget")
                                   .attr("id", "products_wrapper");
 

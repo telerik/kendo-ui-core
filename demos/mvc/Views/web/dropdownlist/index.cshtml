@@ -73,6 +73,8 @@
 
                     // create DropDownList from input HTML element
                     $("#color").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
                         dataSource: data,
                         index: 0,
                         change: onChange
