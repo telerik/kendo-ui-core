@@ -989,6 +989,11 @@
                     }
                 });
 
+                test("does not change axis box height", function() {
+                    var box = plotArea.axisX.getAxisLineBox();
+                    same({box.x1, box.y1, box.x2, box.y2], [57, 800, 573, 573]);
+                });
+
                 test("applied position center", function() {
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 391, 582, 424, 600 ], TOLERANCE);
@@ -1031,9 +1036,14 @@
                     }
                 });
 
+                test("does not change axis box height", function() {
+                    var box = plotArea.axisY.getAxisLineBox();
+                    same([box.x1, box.y1, box.x2, box.y2], [57, 9, 57, 573]);
+                });
+
                 test("applied position center", function() {
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 278.25, 18, 311.25 ], TOLERANCE);
+                         [ 0, 274.5, 18, 307.5 ], TOLERANCE);
                 });
 
                 test("applied position bottom", function() {
@@ -1041,7 +1051,7 @@
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 573, 18, 573 ], TOLERANCE);
+                         [ 0, 582, 18, 582 ], TOLERANCE);
                 });
 
                 test("applied position top", function() {

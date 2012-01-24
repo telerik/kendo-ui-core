@@ -1899,14 +1899,14 @@
                 options = axis.options,
                 isVertical = options.orientation === VERTICAL,
                 labelSize = isVertical ? "height" : "width",
-                children = axis.children,
+                labels = axis.labels,
                 box = axis.box,
                 startMargin = 0,
                 endMargin = 0;
 
-            if (children.length > 1) {
-                startMargin = children[0].box[labelSize]() / 2;
-                endMargin = last(children).box[labelSize]() / 2;
+            if (labels.length > 1) {
+                startMargin = labels[0].box[labelSize]() / 2;
+                endMargin = last(labels).box[labelSize]() / 2;
             }
 
             if (isVertical) {
