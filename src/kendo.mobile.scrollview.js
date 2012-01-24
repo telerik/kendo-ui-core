@@ -122,7 +122,7 @@
             if (s == undefined) s = 1.70158;
             return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
         }
-    }
+    };
 
     var CURRENT_PAGE_CLASS = "km-current-page";
 
@@ -226,7 +226,7 @@
 
             for (var idx = 0; idx < pages; idx ++) {
                 pageHTML += "<li/>";
-            };
+            }
 
             that.pager.html(pageHTML);
             that._updatePage();
