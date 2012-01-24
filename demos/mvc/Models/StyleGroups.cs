@@ -13,7 +13,18 @@ namespace Kendo.Models
             "web/kendo.default.less"
 #else
             "kendo.common.min.css",
-            "kendo.default.min.css",
+            "kendo.default.min.css"
+#endif
+        };
+
+        public static readonly IList<string> Simulator = new string[]
+        {
+#if DEBUG
+            "web/kendo.common.css",
+            "web/kendo.black.less"
+#else
+            "kendo.common.min.css",
+            "kendo.black.min.css"
 #endif
         };
 
