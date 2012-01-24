@@ -1,5 +1,11 @@
-(function($, undefined) {
+/**
+ * @fileOverview Provides a Splitter implementation which can be used to display a dynamic layout of resizable and
+ * collapsible panes.
+ */
+
+(function ($, undefined) {
     /**
+     *
      * @name kendo.ui.Splitter.Description
      *
      * @section
@@ -44,9 +50,9 @@
      *  options may be overriden to control the following properties:
      * </p>
      * <ul>
-     *  <li>Maximum and minimum pane size</li>
-     *  <li>Resizable and collapsible pane behaviors</li>
-     *  <li>Orientation of the <strong>Splitter</strong></li>
+     *  <li>Maximum and/or minimum pane sizes</li>
+     *  <li>Resizable and collapsible/expandable pane behaviors</li>
+     *  <li>Orientation (horizontal or vertical)</li>
      * </ul>
      * <p>
      *  The properties of a pane must be set during initialization and set for each individual pane in a
@@ -60,7 +66,7 @@
      *         { collapsible: true, min: "100px", max: "300px" },
      *         { collapsible: true }
      *     ],
-     *     orientation: "vertical"rome
+     *     orientation: "vertical"
      * });
      *
      * @section
@@ -198,7 +204,9 @@
          *  </dl>
 	     * </div>
          *
-         * @option {Array} [panes] Array of pane definitions.
+         * @option {Array} [panes]
+         * An array of pane definitions.
+         *
          * _example
          * $("#splitter").kendoSplitter({
          *     panes: [
