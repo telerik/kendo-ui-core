@@ -357,6 +357,49 @@
         }
     });
 
+    var SVGArc = SVGPath.extend({
+        init: function(config, options) {
+            var arc = this;
+            SVGPath.fn.init.call(arc, options);
+
+            arc.pathTemplate = SVGArc.pathTemplate;
+            if (!arc.pathTemplate) {
+                arc.pathTemplate = SVGArc.pathTemplate = template(
+                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+                    "A#= d.r # #= d.r # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
+                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
+                    "L #= d.cx # #= d.cy # z"
+                );
+            }
+
+            arc.config = config || {};
+        },
+
+        renderPoints: function() {
+            var arc = this,
+                arcConfig = arc.config,
+                startAngle = arcConfig.startAngle,
+                endAngle = arcConfig.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                isReflexAngle = (endAngle - startAngle) > 180,
+                r = math.max(arcConfig.r, 0),
+                cx = arcConfig.c.x,
+                cy = arcConfig.c.y,
+                firstPoint = arcConfig.point(startAngle),
+                secondPoint = arcConfig.point(endAngle);
+
+            return arc.pathTemplate({
+                firstPoint: firstPoint,
+                secondPoint: secondPoint,
+                isReflexAngle: isReflexAngle,
+                r: r,
+                cx: cx,
+                cy: cy
+            });
+        }
+    });
+
     var SVGSector = SVGPath.extend({
         init: function(circleSector, options) {
             var sector = this;
@@ -728,6 +771,7 @@
         SVGPath: SVGPath,
         SVGLine: SVGLine,
         SVGSector: SVGSector,
+        SVGArc: SVGArc,
         SVGCircle: SVGCircle,
         SVGGroup: SVGGroup,
         SVGClipPath: SVGClipPath,

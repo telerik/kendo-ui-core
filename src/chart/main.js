@@ -669,6 +669,30 @@
         }
     });
 
+    var Arc = Class.extend({
+        init: function(c, innerRadius, outerRadius, startAngle, angle) {
+            var arc = this;
+
+            arc.c = c;
+            arc.innerRadius = innerRadius;
+            arc.outerRadius = outerRadius;
+            arc.startAngle = startAngle;
+            arc.angle = angle;
+        },
+
+        point: function(angle, inner) {
+            var arc = this,
+                radianAngle = angle * DEGREE,
+                ax = math.cos(radianAngle),
+                ay = math.sin(radianAngle),
+                r = inner ? arc.innerRadius : arc.outerRadius,
+                x = arc.c.x - (ax * r),
+                y = arc.c.y - (ay * r);
+
+            return new Point2D(x, y);
+        }
+    });
+
     var ChartElement = Class.extend({
         init: function(options) {
             var element = this;
@@ -6049,6 +6073,7 @@
         Box2D: Box2D,
         Point2D: Point2D,
         Sector: Sector,
+        Arc: Arc,
         Text: Text,
         BarLabel: BarLabel,
         ChartElement: ChartElement,
@@ -6090,5 +6115,38 @@
         FadeAnimationDecorator: FadeAnimationDecorator,
         categoriesCount: categoriesCount
     });
+
+    // RadialGauge ===================================================
+
+    var RadialGauge = Widget.extend({
+        init: function(element, userOptions) {
+            var gauge = this,
+                options;
+
+            Widget.fn.init.call(gauge, element);
+            options = deepExtend({}, gauge.options, userOptions);
+
+            gauge.options = deepExtend({}, options);
+
+            $(element).addClass("k-radialgauge");
+
+            gauge._axis();
+        },
+
+        _axis: function() {
+        },
+
+        options: {
+            name: "RadialGauge",
+            axis: {
+                type: "Numeric",
+                min: 0,
+                max: 100
+            },
+            value: 0
+        }
+    });
+
+    kendo.ui.plugin(RadialGauge);
 
 })(jQuery);
