@@ -11,6 +11,7 @@
         SELECTED = "k-state-selected",
         STRING = "string",
         CLICK = "click",
+        EDIT = "edit",
         proxy = $.proxy,
         DataSource = kendo.data.DataSource;
 
@@ -22,12 +23,13 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.bind([CHANGE,DATABOUND], options);
+            that.bind([CHANGE,DATABOUND,EDIT], options);
 
             that._dataSource();
 
             that.template = kendo.template(options.template);
             that.altTemplate = kendo.template(options.altTemplate || options.template);
+            that.editTemplate = kendo.template(options.editTemplate || "");
 
             that._navigatable();
 
@@ -49,7 +51,7 @@
             that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
-        refresh: function() {
+        refresh: function(e) {
             var that = this,
                 data = that.dataSource.view(),
                 html = "",
@@ -205,6 +207,38 @@
             }
 
            return selectable.value();
+       },
+
+       editItem: function(item) {
+           var that = this,
+               data = that.dataSource.view()[item.index()],
+               container = $(that.editTemplate(data));
+
+            if (that.editable) {
+                if (that.editable.end()) {
+                    that.saveItem(that.editable.element);
+                } else {
+                    return;
+                }
+            }
+
+           item.replaceWith(container);
+           that.editable = container.kendoEditable({ model: data }).data("kendoEditable");
+
+           that.trigger(EDIT, { model: data, item: container });
+       },
+
+       saveItem: function(item) {
+           var that = this,
+               data = that.dataSource.view()[item.index()],
+               container = $(that.template(data));
+
+           if (that.editable && that.editable.end()) {
+               that.editable.distroy();
+               delete that.editable;
+
+               item.replaceWith(container);
+           }
        }
     });
 
