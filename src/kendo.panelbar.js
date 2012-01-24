@@ -547,8 +547,7 @@
                  * @param {Element} e.item
                  * The expanding item of the PanelBar.
                  *
-        		 * @exampleTitle Attach expand event handler during
-                 * initialization; detach via unbind()
+        		 * @exampleTitle Attach expand event handler during initialization; detach via unbind()
                  * @example
                  * // event handler for expand
                  * var onExpand = function(e) {
@@ -563,8 +562,7 @@
                  * // detach expand event handler via unbind()
                  * panelBar.data("kendoPanelBar").unbind("expand", onExpand);
                  *
-                 * @exampleTitle Attach expand event handler via bind();
-                 * detach via unbind()
+                 * @exampleTitle Attach expand event handler via bind(); detach via unbind()
                  * @example
                  * // event handler for expand
                  * var onExpand = function(e) {
@@ -592,8 +590,7 @@
                  * @param {Element} e.item
                  * The collapsing item of the PanelBar.
                  *
-                 * @exampleTitle Attach collapse event handler during
-                 * initialization; detach via unbind()
+                 * @exampleTitle Attach collapse event handler during initialization; detach via unbind()
                  * @example
                  * // event handler for collapse
                  * var onCollapse = function(e) {
@@ -608,8 +605,7 @@
                  * // detach collapse event handler via unbind()
                  * panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);
                  *
-                 * @exampleTitle Attach collapse event handler via bind();
-                 * detach via unbind()
+                 * @exampleTitle Attach collapse event handler via bind(); detach via unbind()
                  * @example
                  * // event handler for collapse
                  * var onCollapse = function(e) {
@@ -637,8 +633,7 @@
                  * @param {Element} e.item
                  * The selected item of the PanelBar.
                  *
-                 * @exampleTitle Attach select event handler during
-                 * initialization; detach via unbind()
+                 * @exampleTitle Attach select event handler during initialization; detach via unbind()
                  * @example
                  * // event handler for select
                  * var onSelect = function(e) {
@@ -653,8 +648,7 @@
                  * // detach select event handler via unbind()
                  * panelBar.data("kendoPanelBar").unbind("select", onSelect);
                  *
-                 * @exampleTitle Attach select event handler via bind();
-                 * detach via unbind()
+                 * @exampleTitle Attach select event handler via bind(); detach via unbind()
                  * @example
                  * // event handler for select
                  * var onSelect = function(e) {
@@ -867,8 +861,8 @@
 
         /**
          *
-         * Selects the specified item of the <strong>PanelBar</strong>. If this method is invoked without arguments, it returns
-         * the currently selected item.
+         * Selects the specified item of the <strong>PanelBar</strong>. If this method is invoked without arguments, it
+         * returns the currently selected item.
          *
          * @param {String | Selector} element
          * The <strong>PanelBar</strong> item to be selected, expressed as a string containing a selector expression or

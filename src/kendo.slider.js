@@ -177,8 +177,8 @@
             that.bind([
                 /**
                  *
-                 * Triggered when the value of a RangeSlider is changed as the result of selecting a new value with one
-                 * of the drag handles or the keyboard.
+                 * Triggered when the value of a <strong>RangeSlider</strong> is changed as the result of selecting a
+                 * new value with one of the drag handles or the keyboard.
                  *
                  * @name kendo.ui.RangeSlider#change
                  * @event
@@ -193,7 +193,7 @@
 
                 /**
                  *
-                 * Triggered when a user moves the drag handle of a RangeSlider to a new position.
+                 * Triggered when a user moves the drag handle of a <strong>RangeSlider</strong> to a new position.
                  *
                  * @name kendo.ui.RangeSlider#slide
                  * @event
