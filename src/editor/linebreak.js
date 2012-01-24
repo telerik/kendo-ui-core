@@ -1,9 +1,19 @@
 (function($) {
 
-function ParagraphCommand(options) {
-    Command.call(this, options);
+// Imports ================================================================
+var kendo = window.kendo,
+    Class = kendo.Class,
+    extend = $.extend,
+    dom = kendo.ui.Editor.Dom;
 
-    this.exec = function () {
+var ParagraphCommand = Command.extend({
+    init: function(options) {
+        var cmd = this;
+        this.options = options;
+        Command.fn.init.call(cmd, options);
+    },
+
+    exec: function () {
         var range = this.getRange(),
             document = documentFromRange(range),
             parent, previous, next,
@@ -111,12 +121,17 @@ function ParagraphCommand(options) {
 
         selectRange(range);
     }
-}
 
-function NewLineCommand(options) {
-    Command.call(this, options);
+});
 
-    this.exec = function () {
+var NewLineCommand = Command.extend({
+    init: function(options) {
+        var cmd = this;
+        this.options = options;
+        Command.fn.init.call(cmd, options);
+    },
+
+    exec: function () {
         var range = this.getRange();
         range.deleteContents();
         var br = dom.create(documentFromRange(range), 'br');
@@ -133,6 +148,11 @@ function NewLineCommand(options) {
         range.collapse(true);
         selectRange(range);
     }
-};
+});
+
+extend(kendo.ui.Editor, {
+    ParagraphCommand: ParagraphCommand,
+    NewLineCommand: NewLineCommand
+});
 
 })(jQuery);

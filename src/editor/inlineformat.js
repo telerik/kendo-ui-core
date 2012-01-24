@@ -1,7 +1,19 @@
 (function($) {
 
-function InlineFormatFinder(format) {
-    function numberOfSiblings(referenceNode) {
+// Imports ================================================================
+var doc = document,
+    kendo = window.kendo,
+    Class = kendo.Class,
+    Widget = kendo.ui.Widget,
+    extend = $.extend;
+
+
+var InlineFormatFinder = Class.extend({
+    init: function(format) {
+        this.format = format;
+    },
+
+    numberOfSiblings: function(referenceNode) {
         var textNodesCount = 0, elementNodesCount = 0, markerCount = 0,
             parentNode = referenceNode.parentNode;
 
@@ -23,16 +35,17 @@ function InlineFormatFinder(format) {
         } else {
             return elementNodesCount + textNodesCount;
         }
-    }
+    },
 
-    this.findSuitable = function (sourceNode, skip) {
-        if (!skip && numberOfSiblings(sourceNode) > 0)
+    findSuitable: function (sourceNode, skip) {
+        if (!skip && this.numberOfSiblings(sourceNode) > 0)
             return null;
 
         return dom.parentOfType(sourceNode, format[0].tags);
-    }
+    },
 
-    this.findFormat = function (sourceNode) {
+    findFormat: function (sourceNode) {
+        var format = this.format;
         for (var i = 0; i < format.length; i++) {
             var node = sourceNode;
             var tags = format[i].tags;
@@ -49,51 +62,51 @@ function InlineFormatFinder(format) {
         }
 
         return null;
-    }
+    },
 
-    this.isFormatted = function (nodes) {
+    isFormatted: function (nodes) {
         for (var i = 0; i < nodes.length; i++)
             if (this.findFormat(nodes[i]))
                 return true;
 
         return false;
     }
-}
+});
 
-function InlineFormatter(format, values) {
-    this.finder = new InlineFormatFinder(format);
+var InlineFormatter = Class.extend({
+    init: function(format, values) {
+        this.finder = new InlineFormatFinder(format);
+        this.attributes = $.extend({}, format[0].attr, values);
+        this.tag = format[0].tags[0];
+    },
 
-    var attributes = $.extend({}, format[0].attr, values);
+    wrap: function(node) {
+        return dom.wrap(node, dom.create(node.ownerDocument, this.tag, this.attributes));
+    },
 
-    var tag = format[0].tags[0];
-
-    function wrap(node) {
-        return dom.wrap(node, dom.create(node.ownerDocument, tag, attributes));
-    }
-
-    this.activate = function(range, nodes) {
+    activate: function(range, nodes) {
         if (this.finder.isFormatted(nodes)) {
             this.split(range);
             this.remove(nodes);
         } else
             this.apply(nodes);
-    }
+    },
 
-    this.toggle = function (range) {
+    toggle: function (range) {
         var nodes = textNodes(range);
 
         if (nodes.length > 0)
             this.activate(range, nodes);
-    }
+    },
 
-    this.apply = function (nodes) {
+    apply: function (nodes) {
         var formatNodes = [];
         for (var i = 0, l = nodes.length; i < l; i++) {
             var node = nodes[i];
 
             var formatNode = this.finder.findSuitable(node);
             if (formatNode)
-                dom.attr(formatNode, attributes);
+                dom.attr(formatNode, this.attributes);
             else
                 formatNode = wrap(node);
 
@@ -101,14 +114,14 @@ function InlineFormatter(format, values) {
         }
 
         this.consolidate(formatNodes);
-    }
+    },
 
-    this.remove = function (nodes) {
+    remove: function (nodes) {
         for (var i = 0, l = nodes.length; i < l; i++) {
             var formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode) {
-                if (attributes && attributes.style) {
-                    dom.unstyle(formatNode, attributes.style);
+                if (this.attributes && this.attributes.style) {
+                    dom.unstyle(formatNode, this.attributes.style);
                     if (!formatNode.style.cssText) {
                         dom.unwrap(formatNode);
                     }
@@ -117,9 +130,9 @@ function InlineFormatter(format, values) {
                 }
             }
         }
-    }
+    },
 
-    this.split = function (range) {
+    split: function (range) {
         var nodes = textNodes(range);
 
         if (nodes.length > 0) {
@@ -129,9 +142,9 @@ function InlineFormatter(format, values) {
                     split(range, formatNode, true);
             }
         }
-    }
+    },
 
-    this.consolidate = function (nodes) {
+    consolidate: function (nodes) {
         while (nodes.length > 1) {
             var node = nodes.pop();
             var last = nodes[nodes.length - 1];
@@ -147,12 +160,18 @@ function InlineFormatter(format, values) {
             }
         }
     }
-}
 
-function GreedyInlineFormatFinder(format, greedyProperty) {
-    InlineFormatFinder.call(this, format);
+});
 
-    function getInlineCssValue(node) {
+var GreedyInlineFormatFinder = InlineFormatter.extend({
+    init: function(format, greedyProperty) {
+        var formatter = this;
+        this.format = format;
+        this.greedyProperty = greedyProperty;
+        InlineFormatFinder.fn.init.call(formatter, format);
+    },
+
+    getInlineCssValue: function(node) {
         var attributes = node.attributes,
             trim = $.trim;
 
@@ -174,7 +193,7 @@ function GreedyInlineFormatFinder(format, greedyProperty) {
                         var property = trim(propertyAndValue[0].toLowerCase()),
                             value = trim(propertyAndValue[1]);
 
-                        if (property != greedyProperty)
+                        if (property != this.greedyProperty)
                             continue;
 
                         return property.indexOf('color') >= 0 ? dom.toHex(value) : value;
@@ -184,65 +203,89 @@ function GreedyInlineFormatFinder(format, greedyProperty) {
         }
 
         return;
-    }
+    },
 
-    function getFormat (node) {
+    getFormatInner: function (node) {
         var $node = $(isDataNode(node) ? node.parentNode : node);
         var parents = $node.parents().andSelf();
 
         for (var i = 0, len = parents.length; i < len; i++) {
-            var value = greedyProperty == 'className' ? parents[i].className : getInlineCssValue(parents[i]);
+            var value = this.greedyProperty == 'className' ? parents[i].className : this.getInlineCssValue(parents[i]);
             if (value)
                 return value;
         }
 
         return 'inherit';
-    }
+    },
 
-    this.getFormat = function (nodes) {
-        var result = getFormat(nodes[0]);
+    getFormat: function (nodes) {
+        var result = getFormatInner(nodes[0]);
 
         for (var i = 1, len = nodes.length; i < len; i++)
-            if (result != getFormat(nodes[i]))
+            if (result != getFormatInner(nodes[i]))
                 return '';
 
         return result;
-    }
+    },
 
-    this.isFormatted = function (nodes) {
+    isFormatted: function (nodes) {
         return this.getFormat(nodes) !== '';
     }
-}
 
-function GreedyInlineFormatter(format, values, greedyProperty) {
-    InlineFormatter.call(this, format, values);
+});
 
-    this.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+var GreedyInlineFormatter = InlineFormatter.extend({
+    init: function(format, values, greedyProperty) {
+        var formatter = this;
 
-    this.activate = function(range, nodes) {
+        InlineFormatter.fn.init.call(formatter, format, values);
+
+        this.greedyProperty = greedyProperty;
+        this.values = values;
+        this.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+    },
+
+    activate: function(range, nodes) {
         this.split(range);
 
-        if (greedyProperty) {
-            var camelCase = greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
-            this[values.style[camelCase] == 'inherit' ? 'remove' : 'apply'](nodes);
+        if (this.greedyProperty) {
+            var camelCase = this.greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
+            this[this.values.style[camelCase] == 'inherit' ? 'remove' : 'apply'](nodes);
         } else {
             this.apply(nodes);
         }
     }
-}
+});
 
 function inlineFormatWillDelayExecution (range) {
     return range.collapsed && !RangeUtils.isExpandable(range);
 }
 
-function InlineFormatTool(options) {
-    FormatTool.call(this, $.extend(options, {
-        finder: new InlineFormatFinder(options.format),
-        formatter: function () { return new InlineFormatter(options.format) }
-    }));
+var InlineFormatTool = FormatTool.extend({
+    init: function(options) {
+        var tool = this;
+        FormatTool.fn.init.call(tool, $.extend(options, {
+            finder: new InlineFormatFinder(options.format),
+            formatter: function () { return new InlineFormatter(options.format) }
+        }));
 
-    this.willDelayExecution = inlineFormatWillDelayExecution;
-}
+        this.willDelayExecution = inlineFormatWillDelayExecution;
+    }
+});
+
+var FontTool = Tool.extend({
+    init: function(options) {
+        var ftool = this;
+        Tool.fn.call.init(ftool, options);
+
+        // IE has single selection hence we are using select box instead of combobox
+        var type = $.browser.msie ? 'tSelectBox' : 'tComboBox',
+            format = [{ tags: ['span'] }],
+            finder = new GreedyInlineFormatFinder(format, options.cssAttr);
+
+    }
+});
+
 
 function FontTool(options){
     Tool.call(this, options);

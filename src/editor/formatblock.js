@@ -1,7 +1,20 @@
 (function($) {
 
-function BlockFormatFinder(format) {
-    function contains(node, children) {
+// Imports ================================================================
+var doc = document,
+    kendo = window.kendo,
+    Class = kendo.Class,
+    Widget = kendo.ui.Widget,
+    extend = $.extend,
+    dom = kendo.ui.Editor.Dom,
+    RangeUtils = kendo.ui.Editor.RangeUtils;
+
+var BlockFormatFinder = Class.extend({
+    init: function(format) {
+        this.format = format;
+    },
+
+    contains: function(node, children) {
         for (var i = 0; i < children.length; i++) {
             var child = children[i];
             if (child == null || !isAncestorOrSelf(node, child))
@@ -9,9 +22,9 @@ function BlockFormatFinder(format) {
         }
 
         return true;
-    }
+    },
 
-    this.findSuitable = function (nodes) {
+    findSuitable: function (nodes) {
         var suitable = [];
 
         for (var i = 0; i < nodes.length; i++) {
@@ -23,13 +36,14 @@ function BlockFormatFinder(format) {
         }
 
         for (var i = 0; i < suitable.length; i++)
-            if (contains(suitable[i], suitable))
+            if (this.contains(suitable[i], suitable))
                 return [suitable[i]];
 
         return suitable;
-    }
+    },
 
-    this.findFormat = function (sourceNode) {
+    findFormat: function (sourceNode) {
+        var format = this.format;
         for (var i = 0; i < format.length; i++) {
             var node = sourceNode;
             var tags = format[i].tags;
@@ -42,9 +56,9 @@ function BlockFormatFinder(format) {
             }
         }
         return null;
-    }
+    },
 
-    this.getFormat = function (nodes) {
+    getFormat: function (nodes) {
         var findFormat = $.proxy(function(node) { return this.findFormat(isDataNode(node) ? node.parentNode : node); }, this),
             result = findFormat(nodes[0]);
 
@@ -56,21 +70,26 @@ function BlockFormatFinder(format) {
                 return '';
 
         return result.nodeName.toLowerCase();
-    }
+    },
 
-    this.isFormatted = function (nodes) {
+    isFormatted: function (nodes) {
         for (var i = 0; i < nodes.length; i++)
             if (!this.findFormat(nodes[i]))
                 return false;
 
         return true;
     }
-}
 
-function BlockFormatter(format, values) {
-    var finder = new BlockFormatFinder(format);
+});
 
-    function wrap(tag, attributes, nodes) {
+var BlockFormatter = Class.extend({
+    init: function (format, values) {
+        this.format = format;
+        this.values = values;
+        this.finder = new BlockFormatFinder(format);
+    },
+
+    wrap: function(tag, attributes, nodes) {
         var commonAncestor = nodes.length == 1 ? dom.blockParentOrBody(nodes[0]) : dom.commonAncestor.apply(null, nodes);
 
         if (dom.isInline(commonAncestor))
@@ -102,10 +121,10 @@ function BlockFormatter(format, values) {
 
         if (wrapper.firstChild)
             dom.insertAt(commonAncestor, wrapper, position);
-    }
+    },
 
-    this.apply = function (nodes) {
-        var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : finder.findSuitable(nodes);
+    apply: function (nodes) {
+        var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : this.finder.findSuitable(nodes);
 
         var formatToApply = formatNodes.length ? formatByName(dom.name(formatNodes[0]), format) : format[0];
 
@@ -116,33 +135,35 @@ function BlockFormatter(format, values) {
             for (var i = 0; i < formatNodes.length; i++)
                 dom.attr(formatNodes[i], attributes);
         else
-            wrap(tag, attributes, nodes);
-    }
+            this.wrap(tag, attributes, nodes);
+    },
 
-    this.remove = function (nodes) {
+    remove: function (nodes) {
         for (var i = 0, l = nodes.length; i < l; i++) {
-            var formatNode = finder.findFormat(nodes[i]);
+            var formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode)
                 if (dom.ofType(formatNode, ['p', 'img', 'li']))
                     dom.unstyle(formatNode, formatByName(dom.name(formatNode), format).attr.style);
                 else
                     dom.unwrap(formatNode);
         }
-    }
+    },
 
-    this.toggle = function (range) {
+    toggle: function (range) {
         var nodes = RangeUtils.nodes(range);
-        if (finder.isFormatted(nodes))
+        if (this.finder.isFormatted(nodes))
             this.remove(nodes);
         else
             this.apply(nodes);
     }
-}
+});
 
-function GreedyBlockFormatter(format, values) {
-    var finder = new BlockFormatFinder(format);
+var GreedyBlockFormatter = Class.extend({
+    init: function (format, values) {
+        this.finder = new BlockFormatFinder(format);
+    },
 
-    this.apply = function (nodes) {
+    apply: function (nodes) {
         var blocks = blockParents(nodes);
         var formatTag = format[0].tags[0];
         if (blocks.length) {
@@ -160,9 +181,9 @@ function GreedyBlockFormatter(format, values) {
         } else {
             new BlockFormatter(format, values).apply(nodes);
         }
-    }
+    },
 
-    this.toggle = function (range) {
+    toggle: function (range) {
         var nodes = textNodes(range);
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
@@ -173,37 +194,46 @@ function GreedyBlockFormatter(format, values) {
 
         this.apply(nodes);
     }
-}
+});
 
-function FormatCommand(options) {
-    options.formatter = options.formatter();
-    Command.call(this, options);
-}
+var FormatCommand = Command.extend({
+    init: function (options) {
+        options.formatter = options.formatter();
+        var command = this;
+        Command.fn.init.call(command, options);
+    }
+});
 
-function BlockFormatTool (options) {
-    FormatTool.call(this, $.extend(options, {
-        finder: new BlockFormatFinder(options.format),
-        formatter: function () { return new BlockFormatter(options.format) }
-    }));
-}
+var BlockFormatTool = FormatTool.extend({
+    init: function (options) {
+        var tool = this;
+        FormatTool.fn.init.call(tool, $.extend(options, {
+            finder: new BlockFormatFinder(options.format),
+            formatter: function () { return new BlockFormatter(options.format) }
+        }));
+    }
+});
 
-function FormatBlockTool() {
-    Tool.call(this);
-    var finder = new BlockFormatFinder([{ tags: blockElements }])
+var FormatBlockTool = Tool.extend({
+    init: function () {
+        var tool = this;
+        Tool.fn.init.call(tool);
+        var finder = new BlockFormatFinder([{ tags: blockElements }])
+    },
 
-    this.command = function (commandArguments) {
+    command: function (commandArguments) {
         return new FormatCommand($.extend(commandArguments, {
             formatter: function () { return new GreedyBlockFormatter([{ tags: [commandArguments.value] }], {}); }
-        }))
-    }
+        }));
+    },
     
-    this.update = function($ui, nodes) {
+    update: function($ui, nodes) {
         var list = $ui.data('tSelectBox');
         list.close();
         list.value(finder.getFormat(nodes));
-    }
+    },
 
-    this.init = function($ui, initOptions) {
+    initialize: function($ui, initOptions) {
         var editor = initOptions.editor;
         
         $ui.tSelectBox({
@@ -219,6 +249,16 @@ function FormatBlockTool() {
             highlightFirst: false
         });
     }
-};
+
+});
+
+extend(kendo.ui.Editor, {
+    BlockFormatFinder: BlockFormatFinder,
+    BlockFormatter: BlockFormatter,
+    GreedyBlockFormatter: GreedyBlockFormatter,
+    FormatCommand: FormatCommand,
+    BlockFormatTool: BlockFormatTool,
+    FormatBlockTool: FormatBlockTool
+});
 
 })(jQuery);
