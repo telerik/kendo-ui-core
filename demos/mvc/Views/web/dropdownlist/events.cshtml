@@ -23,6 +23,8 @@
                     ];
 
                     $("#input").kendoDropDownList({
+                        dataTextField: "text",
+                        dataValueField: "value",
                         dataSource: data,
                         change: onChange,
                         close: onClose,
