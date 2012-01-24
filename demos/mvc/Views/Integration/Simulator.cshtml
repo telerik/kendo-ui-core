@@ -22,7 +22,7 @@
     }
     <script>
         if (kendo.support.mobileOS)
-            top.location.href = "/sushi";
+            top.location.href = "@Url.Content("~/sushi/")";
     </script>
 </head>
 <body class="k-content">
@@ -48,7 +48,7 @@
             <div class="device-skin"></div>
             <input id="address-bar" type="text" onchange="frame.src = 'http://' + this.value.replace('http://', '')" />
             <button id="navigate-back"></button>
-            <iframe id="simulator" src="../../../sushi" width="100%" height="100%"></iframe>
+            <iframe id="simulator" src="@Url.Content("~/sushi/")" width="100%" height="100%"></iframe>
         </div>
     </div>
     <div class="fake3d"></div>
