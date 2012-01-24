@@ -820,6 +820,30 @@
             })();
 
             (function() {
+                var arc;
+
+                module("SVGArc", {
+                    setup: function() {
+                        arc = new Chart.SVGArc(
+                            new Chart.Arc(
+                                new Point2D(135, 135), 100, 135, 90, 20
+                            )
+                        );
+                    }
+                });
+
+                test("renders arc tag", function() {
+                    equal(arc.render().replace(/\<path.*?\>/, "<path>"),
+                        "<path></path>");
+                });
+
+                test("renders radius", function() {
+                    //ok(arc.render().indexOf("A135 135") > -1);
+                });
+
+            })();
+
+            (function() {
                 var view,
                     rect,
                     group,
