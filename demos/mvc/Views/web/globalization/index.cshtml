@@ -147,6 +147,8 @@
 
                     $("#culture").kendoDropDownList({
                         change: cultureChange,
+                        dataTextField: "text",
+                        dataValueField: "value",
                         dataSource: [{text: "bg-BG"},
                         {text: "de-DE"},
                         {text: "en-US"},

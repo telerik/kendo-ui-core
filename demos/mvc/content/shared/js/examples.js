@@ -288,6 +288,8 @@
 
         return this.each(function() {
             var themeChooser  = $(this).val(kendoSkin).kendoDropDownList({
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: themes,
                     dataTextField: "text",
                     dataValueField: "value",
