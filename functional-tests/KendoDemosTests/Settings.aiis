@@ -70,5 +70,6 @@
   <ExcludedFiles />
   <DisabledTranslators>
     <Item Type="System.String">KendoInput for KendoUI Translators</Item>
+    <Item Type="System.String">KendoPanelBar for KendoUI Translators</Item>
   </DisabledTranslators>
 </ProjectSettings>
