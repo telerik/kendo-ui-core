@@ -518,8 +518,8 @@
          * @example
 	     * // get a reference to the splitter
 	     * var splitter = $("#splitter").data("kendoSplitter");
-         * // load pane content
-	     * splitter.ajaxRequest("#Panel1", "/customer/profile", { id: 42 });
+         * // load content into the pane with ID, pane1
+	     * splitter.ajaxRequest("#pane1", "/customer/profile", { id: 42 });
          *
          */
         ajaxRequest: function(pane, url, data) {
@@ -730,6 +730,32 @@
 
             that.trigger(LAYOUTCHANGE);
         },
+
+        /**
+         *
+         * Toggles the state of a specified pane (i.e. collapsed or expanded). Invoking this method will force the
+         * <strong>Splitter</strong> to redraw and it will trigger layoutChange and resize events. Note: Invoking the
+         * method will not trigger collapse or expand events.
+         *
+         * @param {Selector | DOM Element} pane
+         * The pane to be collapsed.
+         *
+         * @param {Boolean} expand (Optional)
+         * Represents the desired state of the specified pane; to be expanded (<strong>true</strong>) or collapsed
+         * (<strong>false</strong>). If undefined, toggle() will collapse the pane if it is expanded or will expand the
+         * pane if it is collapsed.
+         *
+         * @example
+         * // get a reference to the splitter
+         * var splitter = $("#splitter").data("kendoSplitter");
+         * // toggle the state of the pane with ID, pane1
+         * splitter.toggle("#pane1");
+         * // toggle the state of the pane with ID, pane1 to be expanded
+         * splitter.toggle("#pane1", true);
+         * // toggle the state of the pane with ID, pane1 to be collapsed
+         * splitter.toggle("#pane1", false);
+         *
+         */
         toggle: function(pane, expand) {
             var pane = $(pane),
                 paneConfig = pane.data(PANE);
