@@ -1936,3 +1936,191 @@ div.old-browser
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
 }
+
+/* Firefox Icon Masks */
+
+#device-wrapper .km-featured
+{
+    clip-path: url("iconmasks.svg#featured");
+}
+
+#device-wrapper .km-toprated,
+#device-wrapper .km-favorites
+{
+    clip-path: url("iconmasks.svg#toprated");
+}
+
+#device-wrapper .km-mostviewed
+{
+    clip-path: url("iconmasks.svg#mostviewed");
+}
+
+#device-wrapper .km-bookmarks
+{
+    clip-path: url("iconmasks.svg#bookmarks");
+}
+
+#device-wrapper .km-contacts
+{
+    clip-path: url("iconmasks.svg#contacts");
+}
+
+#device-wrapper .km-download,
+#device-wrapper .km-downloads
+{
+    clip-path: url("iconmasks.svg#download");
+}
+
+#device-wrapper .km-more
+{
+    clip-path: url("iconmasks.svg#more");
+}
+
+#device-wrapper .km-android #device-wrapper .km-more
+{
+    clip-path: url("iconmasks.svg#androidmore");
+}
+
+#device-wrapper .km-meego #device-wrapper .km-more
+{
+    clip-path: url("iconmasks.svg#meegomore");
+}
+
+#device-wrapper .km-mostrecent
+{
+    clip-path: url("iconmasks.svg#mostrecent");
+}
+
+#device-wrapper .km-recents
+{
+    clip-path: url("iconmasks.svg#recents");
+}
+
+#device-wrapper .km-history
+{
+    clip-path: url("iconmasks.svg#history");
+}
+
+#device-wrapper .km-add
+{
+    clip-path: url("iconmasks.svg#add");
+}
+
+#device-wrapper .km-details
+{
+    clip-path: url("iconmasks.svg#details");
+}
+
+#device-wrapper .km-info,
+#device-wrapper .km-about
+{
+    clip-path: url("iconmasks.svg#info");
+}
+
+#device-wrapper .km-action
+{
+    clip-path: url("iconmasks.svg#action");
+}
+
+#device-wrapper .km-camera
+{
+    clip-path: url("iconmasks.svg#camera");
+}
+
+#device-wrapper .km-edit,
+#device-wrapper .km-compose
+{
+    clip-path: url("iconmasks.svg#edit");
+}
+
+#device-wrapper .km-search
+{
+    clip-path: url("iconmasks.svg#search");
+}
+
+#device-wrapper .km-trash,
+#device-wrapper .km-delete
+{
+    clip-path: url("iconmasks.svg#trash");
+}
+
+#device-wrapper .km-organize
+{
+    clip-path: url("iconmasks.svg#organize");
+}
+
+#device-wrapper .km-reply
+{
+    clip-path: url("iconmasks.svg#reply");
+}
+
+#device-wrapper .km-stop
+{
+    clip-path: url("iconmasks.svg#stop");
+}
+
+#device-wrapper .km-sounds,
+#device-wrapper .km-volume
+{
+    clip-path: url("iconmasks.svg#sounds");
+}
+
+#device-wrapper .km-refresh
+{
+    clip-path: url("iconmasks.svg#refresh");
+}
+
+#device-wrapper .km-play
+{
+    clip-path: url("iconmasks.svg#play");
+}
+
+#device-wrapper .km-fastforward
+{
+    clip-path: url("iconmasks.svg#fastforward");
+}
+
+#device-wrapper .km-pause
+{
+    clip-path: url("iconmasks.svg#pause");
+}
+
+#device-wrapper .km-rewind
+{
+    clip-path: url("iconmasks.svg#rewind");
+}
+
+#device-wrapper .km-settings
+{
+    clip-path: url("iconmasks.svg#settings");
+}
+
+#device-wrapper .km-globe
+{
+    clip-path: url("iconmasks.svg#globe");
+}
+
+#device-wrapper .km-home
+{
+    clip-path: url("iconmasks.svg#home");
+}
+
+#device-wrapper .km-cart
+{
+    clip-path: url("iconmasks.svg#cart");
+}
+
+#device-wrapper .km-battery
+{
+    clip-path: url("iconmasks.svg#battery");
+}
+
+#device-wrapper .km-wifi
+{
+    clip-path: url("iconmasks.svg#wifi");
+}
+
+#device-wrapper .km-share
+{
+    clip-path: url("iconmasks.svg#share");
+}
