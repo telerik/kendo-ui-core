@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MobileDeviceController.cs" />
+    <Compile Include="Controllers\IntegrationController.cs" />
     <Compile Include="Controllers\ThemeBuilderController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DebugController.cs" />
