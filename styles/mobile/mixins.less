@@ -41,9 +41,9 @@
 }
 
 .border-radius() {
+    border-radius: @arguments;
     -moz-border-radius: @arguments;
     -webkit-border-radius: @arguments;
-    border-radius: @arguments;
 }
 
 .box-shadow() {
@@ -69,6 +69,14 @@
     -ms-transform: @arguments;
     -o-transform: @arguments;
     transform: @arguments;
+}
+
+.transform-origin() {
+    -webkit-transform-origin: @arguments;
+    -moz-transform-origin: @arguments;
+    -ms-transform-origin: @arguments;
+    -o-transform-origin: @arguments;
+    transform-origin: @arguments;
 }
 
 .transition() {

@@ -43,7 +43,7 @@
         {name: "Gohan", letter: "G" },
         {name: "Tori Katsu", letter: "T" },
         {name: "Yaki Udon", letter: "Y" }
-    ]
+    ];
 
 
     var flatData = [ "Sashimi salad", "Chirashi sushi", "Seaweed salad", "Edamame", "Miso soup", "Maguro", "Shake", "Shiromi", "Tekka maki", "Hosomaki Mix", "California rolls", "Seattle rolls", "Spicy Tuna rolls", "Ebi rolls", "Chicken Teriyaki", "Salmon Teriyaki", "Gohan", "Tori Katsu", "Yaki Udon" ];
@@ -55,7 +55,7 @@
     function mobileListViewDataBindInitGrouped() {
         $("#grouped-listview").kendoMobileListView({
             dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
-            template: "${name}",
+            template: "${name}"
         });
     }
 </script>
