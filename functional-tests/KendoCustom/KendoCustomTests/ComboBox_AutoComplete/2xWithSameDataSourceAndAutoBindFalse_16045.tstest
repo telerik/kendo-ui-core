@@ -626,7 +626,7 @@
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>ComboBox\2xWithSameDataSourceAndAutoBindFalse_16045.tstest</Path>
+  <Path>ComboBox_AutoComplete\2xWithSameDataSourceAndAutoBindFalse_16045.tstest</Path>
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
@@ -640,7 +640,7 @@
   </ProfilerConfigurations>
   <ProfilerResultsDirectory>C:\Users\aggeorgiev\AppData\Local\Temp\1\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
-  <ResourceFilePath>ComboBox\2xWithSameDataSourceAndAutoBindFalse_16045.resx</ResourceFilePath>
+  <ResourceFilePath>ComboBox_AutoComplete\2xWithSameDataSourceAndAutoBindFalse_16045.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />

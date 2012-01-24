@@ -36,7 +36,7 @@
     </Item>
   </IdentificationOptionSchemes>
   <UnitTestType Type="ArtOfTest.Common.Design.ProjectModel.UnitTestType">VS</UnitTestType>
-  <RecorderBaseUrl Type="System.String">http://localhost/kendomvc</RecorderBaseUrl>
+  <RecorderBaseUrl Type="System.String">http://mvc-kendobuild/staging</RecorderBaseUrl>
   <IsStoryboardCapturingEnabled Type="System.Boolean">True</IsStoryboardCapturingEnabled>
   <SimulateRealClickByDefault Type="System.Boolean">False</SimulateRealClickByDefault>
   <SimulateRealTypingByDefault Type="System.Boolean">False</SimulateRealTypingByDefault>

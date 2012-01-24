@@ -17,7 +17,15 @@
             
             <label for="input">Search for a movie:</label>
             <input id="input" value="foo"/>
-         
+            <br/>
+            <label for="input2">Filter is "Contains":</label>
+            <input id="input2" value=""/>
+            <br/>
+            <label for="input3">AutoComplete filter is "Contains":</label>
+            <input id="input3" value=""/>
+            <br/>
+            <label for="input4">Disabled AutoComplete:</label>
+            <input id="input4" value=""/>
             <script>
                 $(document).ready(function () {
                     var data = [
@@ -40,7 +48,29 @@
                         dataValueField: ""
                     });
 
+                    $("#input2").kendoComboBox({
+                        autoBind: false,
+                        dataSource: data,
+                        dataTextField: "",
+                        filter: "contains",
+                        dataValueField: ""
+                    });
 
+                    $("#input3").kendoAutoComplete({
+                        autoBind: false,
+                        dataSource: data,
+                        dataTextField: "",
+                        filter: "contains",
+                        dataValueField: ""
+                    });
+
+                    $("#input4").kendoAutoComplete({
+                        enable: false,
+                        dataSource: data,
+                        dataTextField: "",
+                        filter: "contains",
+                        dataValueField: ""
+                    });
                 });
 
             </script>
