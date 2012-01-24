@@ -26,7 +26,13 @@
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
         proxy = $.proxy,
-        Widget = ui.Widget;
+        Widget = ui.Widget,
+        styles = ["font-family",
+                   "font-size",
+                   "font-stretch",
+                   "font-style",
+                   "font-weight",
+                   "line-height"];
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -144,9 +150,15 @@
                 options = that.options,
                 direction = "down",
                 animation, wrapper,
-                anchor = $(options.anchor);
+                anchor = $(options.anchor),
+                style, idx = 0;
 
             if (!that.visible()) {
+
+                for (; idx < 6; idx++) {
+                    style = styles[idx];
+                    element.css(style, anchor.css(style));
+                }
 
                 if (element.data("animating") || that.trigger(OPEN)) {
                     return;
