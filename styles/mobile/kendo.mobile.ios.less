@@ -23,7 +23,7 @@
     display: block;
     text-align: center;
     color: #fff;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-size: 1.4rem;
     line-height: 1.5em;
     line-height: 1.9rem;
@@ -391,12 +391,16 @@
 .km-ios .km-listinset li:first-child > .km-listview-link,
 .km-ios .km-listgroupinset li:first-child > .km-listview-link
 {
+    -webkit-border-top-left-radius: 9px;
+    -webkit-border-top-right-radius: 9px;
     .border-radius(9px 9px 0 0);
 }
 
 .km-ios .km-listinset li:last-child > .km-listview-link,
 .km-ios .km-listgroupinset li:last-child > .km-listview-link
 {
+    -webkit-border-bottom-left-radius: 9px;
+    -webkit-border-bottom-right-radius: 9px;
     .border-radius(0 0 9px 9px);
 }
 

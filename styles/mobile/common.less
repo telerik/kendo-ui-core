@@ -388,14 +388,18 @@
     .border-radius(0);
 }
 
-.km-root .km-buttongroup .km-button:first-child
+.km-root .km-view .km-buttongroup .km-button:first-child
 {
+    -webkit-border-bottom-left-radius: 5pt;
+    -webkit-border-top-left-radius: 5pt;
     .border-radius(5pt 0 0 5pt);
 }
 
-.km-root .km-buttongroup .km-button:last-child
+.km-root .km-view .km-buttongroup .km-button:last-child
 {
     border-right-width: 1px;
+    -webkit-border-bottom-right-radius: 5pt;
+    -webkit-border-top-right-radius: 5pt;
     .border-radius(0 5pt 5pt 0);
 }
 
@@ -484,18 +488,18 @@
 
 .km-navbar .km-view-title
 {
-    margin-top: .3em;
+    margin-top: .5em;
     margin-top: .5rem;
-    margin-bottom: .3em;
+    margin-bottom: .5em;
     margin-bottom: .5rem;
 }
 
 .km-toolbar .km-button,
 .km-navbar .km-button
 {
-    margin-top: .3em;
+    margin-top: .5em;
     margin-top: .5rem;
-    margin-bottom: .3em;
+    margin-bottom: .5em;
     margin-bottom: .5rem;
 }
 
@@ -765,17 +769,10 @@
     height: .3em;
     width: .3em;
     background-color: #333;
-    -moz-transform-origin: 0 0;
-    -webkit-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
-    transform-origin: 0 0;
-    -webkit-transition: opacity 0.3s linear;
-    -moz-transition: opacity 0.3s linear;
-    -o-transition: opacity 0.3s linear;
     opacity: 0;
-    -moz-border-radius: .4em;
-    -webkit-border-radius: .4em;
-    border-radius: .4em;
+    .border-radius(.4em);
+    .transform-origin(~"0 0");
+    .transition(~"opacity 0.3s linear");
 }
 
 .km-vertical-scrollbar
