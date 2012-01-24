@@ -27,11 +27,17 @@
             data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
             SELECTED = "k-state-selected",
             keys = kendo.keys,
+            combobox,
             input;
 
             module("kendo.ui.ComboBox selection", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
+                    combobox = new ComboBox(input, {
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
+                    });
                 },
                 teardown: function() {
                     input.append($("ul")).parent(".k-widget").remove();
@@ -39,8 +45,6 @@
             });
 
             test("open() method should open popup {autobind: true}", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.open();
 
                 ok(combobox.popup.visible());
@@ -48,6 +52,8 @@
 
            test("open() method should bind and open popup {autobind: false}", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
                     autoBind: false
                 });
@@ -58,7 +64,6 @@
             });
 
             test("value method should select item if exists", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
                 combobox.value("2");
 
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
@@ -68,8 +73,6 @@
             });
 
             test("value method should select first if no such value", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.select(1);
                 combobox.value("");
 
@@ -81,23 +84,23 @@
             });
 
             test("should select jquery object", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.select(combobox.ul.children().first());
 
                 equal(combobox.value(), "1");
             });
 
             test("should select dom element", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.select(combobox.ul.children().first()[0]);
 
                 equal(combobox.value(), "1");
             });
 
             test("value method should select item with 0 value", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:0}]);
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
+                });
                 combobox.value(0);
 
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
@@ -107,8 +110,6 @@
             });
 
             test("select item with index -1 should not select anything", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.select(0);
 
                 combobox.select(-1);
@@ -119,8 +120,6 @@
 
 
             test("select should select item by predicate", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.select(0);
                 combobox.select(function(item) {
                     return item.text == 2;
@@ -132,16 +131,12 @@
             });
 
             asyncTest("open should call _scroll method", function () {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.select(0);
                 combobox._scroll = function() { ok(true); start(); };
                 combobox.open();
             });
 
             asyncTest("open should open popup", function () {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.popup.bind("open", function(){
                     ok(true);
                     start();
@@ -151,7 +146,12 @@
             });
 
             asyncTest("open should bind and open after this if no items", function () {
-                var combobox = input.kendoComboBox({autoBind: false, dataSource: data}).data("kendoComboBox");
+                var combobox = input.kendoComboBox({
+                    autoBind: false,
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data
+                }).data("kendoComboBox");
 
                 combobox.popup.bind("open", function(){
                     ok(true);
@@ -162,8 +162,6 @@
             });
 
             asyncTest("close should close popup", function () {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.popup.bind("close", function(){
                     ok(true);
                     start();
@@ -176,6 +174,8 @@
             test("value should select custom option if element is select", function() {
                 var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>"),
                 combobox = new ComboBox(select, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
 
@@ -186,7 +186,6 @@
             });
 
             test("text method should select item if exists", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
                 combobox.text("foo");
 
                 ok(combobox.ul.children().eq(0).hasClass(SELECTED));
@@ -196,8 +195,6 @@
             });
 
             test("text should set custom value", function() {
-                var combobox = new ComboBox(input, [{text: "foo", value: 1}, {text:2, value:2}]);
-
                 combobox.select(1);
                 combobox.text("custom");
 
@@ -220,9 +217,8 @@
             });
 
             test('after enable(false) should not open popup', function() {
-                var combobox = input.kendoComboBox({dataSource: data}).data("kendoComboBox");
-                oldOpen = combobox.popup.toggle,
-                called = false;
+                var oldOpen = combobox.popup.toggle,
+                    called = false;
 
                 combobox.popup.toggle = function() {called = true};
 

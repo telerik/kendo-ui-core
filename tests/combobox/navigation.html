@@ -24,6 +24,7 @@
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
                 SELECTED = "k-state-selected",
                 keys = kendo.keys,
+                combobox,
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
@@ -37,8 +38,14 @@
             module("kendo.ui.ComboBox selection", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
+                    combobox = input.kendoComboBox({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: data
+                    }).data("kendoComboBox");
                 },
                 teardown: function() {
+                    combobox = null;
                     var ul = $(document.body).children(":last");
                     if(!ul[0].id) {
                         ul.remove();
@@ -54,9 +61,7 @@
             });
 
             asyncTest("pressing alt + down should open popup", function() {
-                var blurWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
+                var blurWasCalled;
                 combobox.popup.bind("open", function(){
                     ok(true);
                     start();
@@ -66,9 +71,7 @@
             });
 
             asyncTest("pressing alt + up should close popup", function() {
-                var blurWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
+                var blurWasCalled;
                 combobox.popup.bind("close", function(){
                     ok(true);
                     start();
@@ -79,9 +82,7 @@
             });
 
             asyncTest("click _arrow should input", function() {
-                var focusWasCalled, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
+                var focusWasCalled;
 
                 combobox.input.bind("focus", function(){
                     ok(true);
@@ -93,6 +94,8 @@
 
             asyncTest("empty input should clear focused item", function() {
                 var combobox = input.kendoComboBox({
+                                    dataTextField: "text",
+                                    dataValueField: "value",
                                     dataSource: data,
                                     highlightFirst: false
                                 }).data("kendoComboBox");
@@ -111,6 +114,8 @@
 
             test("select item depending on the options.index", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "foo", value: 1}, {text:2, value:2}],
                     index: 1
                 });
@@ -119,7 +124,11 @@
            });
 
             asyncTest("click first li should update text and value", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
+                var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data
+                }).data("kendoComboBox");
                 combobox.open();
                 combobox.ul.children().eq(1).trigger(CLICK);
 
@@ -132,7 +141,11 @@
 
             asyncTest("value should be set to item.text if no item.value", function() {
                 var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
-                    combobox = input.kendoComboBox(localData).data("kendoComboBox");
+                combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: localData
+                }).data("kendoComboBox");
 
                 combobox.select(1);
 
@@ -144,8 +157,6 @@
             });
 
             test("select li should update text and value", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(combobox.ul.children().eq(1));
 
@@ -154,8 +165,6 @@
             });
 
             asyncTest("click li should close popup", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.popup.bind("close", function(){
                     ok(true);
                     start();
@@ -166,8 +175,6 @@
             });
 
             test("select should select li by index", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(1);
 
@@ -176,8 +183,6 @@
             });
 
             test("selected should be persisted", function(){
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(1);
 
@@ -187,8 +192,6 @@
             });
 
             test("only one li should be selected at a time", function(){
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(1);
                 combobox.select(0);
@@ -199,8 +202,6 @@
             });
 
             test("press down _arrow should focus next item and update text and value", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(0);
                 combobox.input.focus().press(keys.DOWN);
@@ -212,8 +213,6 @@
             });
 
             test("press down _arrow when last item is selected should not do anything", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(combobox.ul.children(":last"));
                 combobox.input.focus().press(keys.DOWN);
@@ -224,8 +223,6 @@
             });
 
             test("press up _arrow should focus prev item and update text and value", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
 
                 combobox.select(1);
@@ -238,8 +235,6 @@
             });
 
             test("press up _arrow when first item is selected should not do anything", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.dataSource.read();
                 combobox.select(0);
                 combobox.input.focus().press(keys.UP);
@@ -250,8 +245,6 @@
             });
 
             asyncTest("press enter should close popup when no change in selection", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.popup.bind("close", function(){
                     ok(true);
                     start();
@@ -264,8 +257,6 @@
             });
 
             asyncTest("press enter should call preventDefault when popup is visible", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.popup.open();
 
                 combobox.select(0);
@@ -280,8 +271,6 @@
             });
 
             test("press TAB should call text()", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.input.focus().val("item");
 
                 stub(combobox, {text: combobox.text});
@@ -292,8 +281,6 @@
             });
 
             asyncTest("press esc should close popup when no change in selection", function() {
-                var combobox = input.kendoComboBox(data).data("kendoComboBox");
-
                 combobox.popup.bind("close", function(){
                     ok(true);
                     start();
@@ -307,6 +294,8 @@
 
             asyncTest("pressing enter calls _blur", function() {
                 var blurWasCalled, combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data
                 });
 

@@ -24,6 +24,7 @@
             var ComboBox = kendo.ui.ComboBox,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
                 CLICK = kendo.support.touch ? "touchend" : "click",
+                combobox,
                 input;
 
             $.fn.press = function(key) {
@@ -38,6 +39,12 @@
             module("kendo.ui.ComboBox searching", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
+                    combobox = input.kendoComboBox({
+                        dataTextField: "text",
+                        dataValueField: "value",
+                        dataSource: data
+                    }).data("kendoComboBox");
+
                 },
                 teardown: function() {
                     input.add($("ul")).parent(".k-widget").remove();
@@ -46,6 +53,8 @@
 
             test("search focus first match", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     autoBind: true,
                     index: 0
@@ -58,10 +67,6 @@
             });
 
             test("open popup on search and any items", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.text("b");
                 combobox.search("b");
 
@@ -70,6 +75,8 @@
 
             asyncTest("open popup with all items if empty input", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     filter: "startswith"
                 });
@@ -87,6 +94,8 @@
 
             test("search focus item if text number", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "Foo", value: 1}, {text:10, value:2}]
                 });
 
@@ -98,6 +107,8 @@
 
             test("search focus item if text is 0", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
                 });
 
@@ -108,10 +119,6 @@
             });
 
             test("focused item does not update text input value", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
-                });
-
                 combobox.text("f");
                 combobox.search("f");
 
@@ -120,6 +127,8 @@
 
             test("current item is not cleared on search with filter none", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text: "Foo", value: 1}, {text:0, value:2}]
                 });
 
@@ -130,10 +139,6 @@
             });
 
             test("search should raise error if word is null", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.text("");
                 combobox.search("");
 
@@ -142,6 +147,8 @@
 
             asyncTest("search with no filter should open popup if any match", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     autoBind: false
                 });
@@ -157,6 +164,8 @@
 
             asyncTest("search with no filter should not open if no match", function() {
                 var opened = false, combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     autoBind: false
                 });
@@ -175,10 +184,6 @@
             });
 
            test("search with startswith rebind items", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.options.filter = "startswith";
                 combobox.text("f");
                 combobox.search("f");
@@ -187,10 +192,6 @@
             });
 
             asyncTest("search with filter opens drop down if any items", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.popup.bind("open", function() {
                     ok(true);
                     start();
@@ -202,10 +203,6 @@
             });
 
             asyncTest("rebound list should use correct dataItem to update text and value", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.options.filter = "startswith";
                 combobox.text("b");
                 combobox.search("b");
@@ -220,10 +217,6 @@
             });
 
             asyncTest("reopen ul after filter should show all data", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.options.filter = "startswith";
                 combobox.text("b");
                 combobox.search("b");
@@ -240,10 +233,6 @@
             });
 
             asyncTest("rebound ul should has item selected", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.options.filter = "startswith";
                 combobox.open();
                 combobox.text("b");
@@ -259,10 +248,6 @@
             });
 
             asyncTest("typing should trigger search", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox._search = function() {
                     ok(true);
                     start();
@@ -272,6 +257,8 @@
 
             test("dataSource.read triggered by typing does not update input value with dataItem.text", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     filter: "startswith",
                     dataSource: data,
                     autoBind: false
@@ -285,9 +272,7 @@
             });
 
             test("should not trigger search on TAB", function() {
-                var called = false, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
+                var called = false;
 
                 combobox.search = function() {
                     called = true;
@@ -299,9 +284,7 @@
             });
 
             test("should not trigger search on ESC", function() {
-                var called = false, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
+                var called = false;
 
                 combobox.search = function() {
                     called = true;
@@ -313,9 +296,6 @@
             });
 
             asyncTest("allow custom value", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
                 combobox._selected = combobox._current = null;
 
                 combobox.input.val("ffff").blur();
@@ -327,10 +307,6 @@
             });
 
             test("do not set custom value if _current", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox._current = $('<li class="k-state-selected">Test</li>');
 
                 combobox.input.val("ffff").blur();
@@ -339,9 +315,7 @@
             });
 
             asyncTest("do not search if text does not changed", function() {
-                var called = false, combobox = new ComboBox(input, {
-                    dataSource: data
-                });
+                var called = false;
 
                 combobox.search = function() { called = true; };
 
@@ -357,6 +331,8 @@
 
             asyncTest("highlight first item on refresh", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     suggest: false,
                     filter: "startswith"
@@ -372,10 +348,6 @@
             });
 
             asyncTest("no filter and highlightFirst should always focus first item", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.input.val("f");
                 combobox.search("");
 
@@ -386,10 +358,6 @@
             });
 
             asyncTest("no filter and highlightFirst should always focus first item", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.search("");
 
                 setTimeout(function() {
@@ -400,6 +368,8 @@
 
             asyncTest("no filter and highlightFirst=false should not focus first item", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     highlightFirst: false
                 });
@@ -413,10 +383,6 @@
             });
 
             asyncTest("failed filter should not focus first item", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: data
-                });
-
                 combobox.open();
                 combobox.current(combobox.ul.children("li").eq(1));
 
@@ -431,6 +397,8 @@
 
             asyncTest("startswith filter and highlightFirst should always focus first item", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     filter: "startswith"
                 });
@@ -445,6 +413,8 @@
 
             asyncTest("startswith filter and highlightFirst=false should not focus first item", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     highlightFirst: false,
                     filter: "startswith"

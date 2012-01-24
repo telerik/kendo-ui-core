@@ -59,6 +59,8 @@
 
             test("current popup item completes the value of the input if suggest is enabled", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     suggest: true
                 });
@@ -71,6 +73,8 @@
 
             test("suggestion selects the remainder of the word", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     suggest: true
                 });
@@ -82,6 +86,8 @@
 
             test("suggest with empty string clears selection", function() {
                 var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     suggest: true
                 });
@@ -95,6 +101,8 @@
 
             test("suggest(text) should add text if input is empty", function() {
                 var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data
                 }).data("kendoComboBox");
 
@@ -105,6 +113,8 @@
 
             test("suggest(text) does not suggest on backspace", function() {
                 var combobox = input.val("f").kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data
                 }).data("kendoComboBox");
 
@@ -115,6 +125,8 @@
 
             test("suggest(text) does not suggest on delete", function() {
                 var combobox = input.val("f").kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data
                 }).data("kendoComboBox");
 
@@ -126,6 +138,8 @@
             test("suggest(text) should use dataItem.text instead of li.text()", function() {
                 var data = [{text: "Item1", value: "1"}, {text: "Item2", value: "2"}],
                     combobox = input.val("i").kendoComboBox({
+                        dataTextField: "text",
+                        dataValueField: "value",
                         dataSource: data,
                         template: "<span>List:</span>#=data.text#"
                     }).data("kendoComboBox");
@@ -136,6 +150,8 @@
 
             asyncTest("suggest() should suggest correctly", function() {
                 var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
                     suggest: true
                 }).data("kendoComboBox");
@@ -153,6 +169,8 @@
 
             asyncTest("suggest(text) should only append the rest of the text (filter:contains)", function() {
                 var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
                     dataSource: data,
                     filter: "contains",
                     suggest: true
