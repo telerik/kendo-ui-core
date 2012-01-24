@@ -109,6 +109,7 @@ namespace("demos", function() {
 
     desc("Pack online-demos.zip");
     task("pack-production", ["demos:production"], function() {
+        copyDir(path.join("resources", "live", "bin"), path.join(DEMOS_LIVE_PATH, "bin"), true);
         zip(DEMOS_LIVE_PACKAGE, DEMOS_LIVE_PATH, complete);
     }, true);
 });
