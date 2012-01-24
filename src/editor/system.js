@@ -1,61 +1,76 @@
 (function($) {
 
-function Command(options) {
-    var restorePoint = new RestorePoint(options.range);
-    var marker = new Marker();
+    // Imports ================================================================
+    var doc = document,
+        kendo = window.kendo,
+        Class = kendo.Class,
+        Widget = kendo.ui.Widget,
+        extend = $.extend;
 
-    this.formatter = options.formatter;
+var Command = Class.extend({
+    init: function(options) {
+        this.restorePoint = new RestorePoint(options.range);
+        this.marker = new Marker();
+        this.formatter = options.formatter;
 
-    this.getRange = function () {
-        return restorePoint.toRange();
-    }
+    },
 
-    this.lockRange = function (expand) {
-        return marker.add(this.getRange(), expand);
-    }
+    getRange: function () {
+        return this.restorePoint.toRange();
+    },
 
-    this.releaseRange = function (range) {
-        marker.remove(range);
+    lockRange: function (expand) {
+        return this.marker.add(this.getRange(), expand);
+    },
+
+    releaseRange: function (range) {
+        this.marker.remove(range);
         selectRange(range);
-    }
+    },
 
-    this.undo = function () {
-        restorePoint.body.innerHTML = restorePoint.html;
-        selectRange(restorePoint.toRange());
-    }
+    undo: function () {
+        var point = this.restorePoint;
+        point.body.innerHTML = point.html;
+        selectRange(point.toRange());
+    },
 
-    this.redo = function () {
+    redo: function () {
         this.exec();
-    }
+    },
 
-    this.exec = function () {
+    exec: function () {
         var range = this.lockRange(true);
         this.formatter.editor = this.editor;
         this.formatter.toggle(range);
         this.releaseRange(range);
     }
-}
+});
 
-function GenericCommand(startRestorePoint, endRestorePoint) {
-    var body = startRestorePoint.body;
+var GenericCommand = Class.extend({
+    init: function(startRestorePoint, endRestorePoint) {
+        this.body = startRestorePoint.body;
+    },
 
-    this.redo = function () {
-        body.innerHTML = endRestorePoint.html;
+    redo: function () {
+        this.body.innerHTML = endRestorePoint.html;
         selectRange(endRestorePoint.toRange());
-    }
+    },
 
-    this.undo = function () {
-        body.innerHTML = startRestorePoint.html;
+    undo: function () {
+        this.body.innerHTML = startRestorePoint.html;
         selectRange(startRestorePoint.toRange());
     }
-}
+});
 
-function InsertHtmlCommand(options) {
-    Command.call(this, options);
+var InsertHtmlCommand = Command.extend({
+    init: function(options) {
+        var cmd = this;
+        Command.fn.init.call(cmd, options);
 
-    this.managesUndoRedo = true;
+        this.managesUndoRedo = true;
+    },
 
-    this.exec = function () {
+    exec: function() {
         var editor = this.editor;
         var range = editor.getRange();
         var startRestorePoint = new RestorePoint(range);
@@ -65,20 +80,13 @@ function InsertHtmlCommand(options) {
 
         editor.focus();
     }
-}
+});
 
-function InsertHtmlTool() {
-    Tool.call(this);
+var InsertHtmlTool = Tool.extend({
+    init: function($ui, initOptions) {
+        var t = this;
+        Tool.fn.init.call(t, $ui, initOptions);
 
-    this.command = function (commandArguments) {
-        return new InsertHtmlCommand(commandArguments);
-    }
-    
-    this.update = function($ui, nodes) {
-        $ui.data('tSelectBox').close();
-    }
-
-    this.init = function($ui, initOptions) {
         var editor = initOptions.editor;
         
         $ui.tSelectBox({
@@ -91,40 +99,57 @@ function InsertHtmlTool() {
             },
             highlightFirst: false
         }).find('.t-input').html(editor.localization.insertHtml);
+    },
+
+    command: function (commandArguments) {
+        return new InsertHtmlCommand(commandArguments);
+    },
+
+    update: function($ui, nodes) {
+        $ui.data('tSelectBox').close();
     }
-}
 
-function UndoRedoStack() {
-    var stack = [], currentCommandIndex = -1;
+});
 
-    this.push = function (command) {
-        stack = stack.slice(0, currentCommandIndex + 1);
-        currentCommandIndex = stack.push(command) - 1;
-    }
+var UndoRedoStack = Class.extend({
+    init: function() {
+        this.stack = [];
+        this.currentCommandIndex = -1;
+    },
 
-    this.undo = function () {
+    push: function (command) {
+        this.stack = this.stack.slice(0, this.currentCommandIndex + 1);
+        this.currentCommandIndex = this.stack.push(command) - 1;
+    },
+
+    undo: function () {
         if (this.canUndo())
-            stack[currentCommandIndex--].undo();
-    }
+            this.stack[this.currentCommandIndex--].undo();
+    },
 
-    this.redo = function () {
+    redo: function () {
         if (this.canRedo())
-            stack[++currentCommandIndex].redo();
-    }
+            this.stack[++this.currentCommandIndex].redo();
+    },
 
-    this.canUndo = function () {
-        return currentCommandIndex >= 0;
-    }
+    canUndo: function () {
+        return this.currentCommandIndex >= 0;
+    },
 
-    this.canRedo = function () {
-        return currentCommandIndex != stack.length - 1;
+    canRedo: function () {
+        return this.currentCommandIndex != this.stack.length - 1;
     }
-}
+});
 
-function TypingHandler(editor) {
-    this.keydown = function (e) {
-        var keyboard = editor.keyboard;
-        var isTypingKey = keyboard.isTypingKey(e);
+var TypingHandler = Class.extend({
+    init: function(editor) {
+        this.editor = editor;
+    },
+
+    keydown: function (e) {
+        var editor = this.editor,
+            keyboard = editor.keyboard;
+            isTypingKey = keyboard.isTypingKey(e);
 
         if (isTypingKey && !keyboard.typingInProgress()) {
             var range = editor.getRange();
@@ -139,10 +164,10 @@ function TypingHandler(editor) {
         }
 
         return false;
-    }
+    },
 
-    this.keyup = function (e) {
-        var keyboard = editor.keyboard;
+    keyup: function (e) {
+        var keyboard = this.editor.keyboard;
 
         if (keyboard.typingInProgress()) {
             keyboard.endTyping();
@@ -150,27 +175,31 @@ function TypingHandler(editor) {
         }
 
         return false;
-    }
-}
+    }    
+});
 
-function SystemHandler(editor) {
-    var systemCommandIsInProgress = false;
+var SystemHandler = Class.extend({
+    init: function(editor) {
+        this.editor = editor;
+        this.systemCommandIsInProgress = false;
+    },
 
-    this.createUndoCommand = function () {
-        this.endRestorePoint = new RestorePoint(editor.getRange());
-        editor.undoRedoStack.push(new GenericCommand(this.startRestorePoint, this.endRestorePoint));
+    createUndoCommand: function () {
+        this.endRestorePoint = new RestorePoint(this.editor.getRange());
+        this.editor.undoRedoStack.push(new GenericCommand(this.startRestorePoint, this.endRestorePoint));
         this.startRestorePoint = this.endRestorePoint;
-    }
+    },
 
-    this.changed = function () {
+    changed: function () {
         if (this.startRestorePoint)
-            return this.startRestorePoint.html != editor.body.innerHTML;
+            return this.startRestorePoint.html != this.editor.body.innerHTML;
 
         return false;
-    }
+    },
 
-    this.keydown = function (e) {
-        var keyboard = editor.keyboard;
+    keydown: function (e) {
+        var editor = this.editor,
+            keyboard = editor.keyboard;
 
         if (keyboard.isModifierKey(e)) {
 
@@ -182,10 +211,10 @@ function SystemHandler(editor) {
         }
 
         if (keyboard.isSystem(e)) {
-            systemCommandIsInProgress = true;
+            this.systemCommandIsInProgress = true;
 
             if (this.changed()) {
-                systemCommandIsInProgress = false;
+                this.systemCommandIsInProgress = false;
                 this.createUndoCommand();
             }
 
@@ -193,30 +222,31 @@ function SystemHandler(editor) {
         }
 
         return false;
-    }
+    },
 
-    this.keyup = function (e) {
-        if (systemCommandIsInProgress && this.changed()) {
-            systemCommandIsInProgress = false;
+    keyup: function (e) {
+        if (this.systemCommandIsInProgress && this.changed()) {
+            this.systemCommandIsInProgress = false;
             this.createUndoCommand(e);
             return true;
         }
 
         return false;
     }
-}
+});
 
-function Keyboard(handlers) {
-    var typingInProgress = false;
-    var timeout;
-    var onEndTyping;
+var Keyboard = Class.extend({
+    init: function(handlers) {
+        this.handlers = handlers;
+        this.typingInProgress = false;
+    },
 
-    function isCharacter(keyCode) {
+    isCharacter: function(keyCode) {
         return (keyCode >= 48 && keyCode <= 90) || (keyCode >= 96 && keyCode <= 111) ||
             (keyCode >= 186 && keyCode <= 192) || (keyCode >= 219 && keyCode <= 222);
-    }
+    },
 
-    this.toolFromShortcut = function (tools, e) {
+    toolFromShortcut: function (tools, e) {
         var key = String.fromCharCode(e.keyCode);
 
         for (var toolName in tools) {
@@ -225,71 +255,73 @@ function Keyboard(handlers) {
             if ((tool.key == key || tool.key == e.keyCode) && !!tool.ctrl == e.ctrlKey && !!tool.alt == e.altKey && !!tool.shift == e.shiftKey)
                 return toolName;
         }
-    }
+    },
 
-    this.isTypingKey = function (e) {
+    isTypingKey: function (e) {
         var keyCode = e.keyCode;
-        return (isCharacter(keyCode) && !e.ctrlKey && !e.altKey) || keyCode == 32 || keyCode == 13
+        return (this.isCharacter(keyCode) && !e.ctrlKey && !e.altKey) || keyCode == 32 || keyCode == 13
         || keyCode == 8 || (keyCode == 46 && !e.shiftKey && !e.ctrlKey && !e.altKey);
-    }
+    },
 
-    this.isModifierKey = function (e) {
+    isModifierKey: function (e) {
         var keyCode = e.keyCode;
         return (keyCode == 17 && !e.shiftKey && !e.altKey)
                 || (keyCode == 16 && !e.ctrlKey && !e.altKey)
                 || (keyCode == 18 && !e.ctrlKey && !e.shiftKey);
-    }
+    },
 
-    this.isSystem = function (e) {
+    isSystem: function (e) {
         return e.keyCode == 46 && e.ctrlKey && !e.altKey && !e.shiftKey;
-    }
+    },
 
-    this.startTyping = function (callback) {
-        onEndTyping = callback;
-        typingInProgress = true;
-    }
+    startTyping: function (callback) {
+        this.onEndTyping = callback;
+        this.typingInProgress = true;
+    },
 
-    function stopTyping() {
-        typingInProgress = false;
-        if (onEndTyping)
-            onEndTyping();
-    }
+    stopTyping: function() {
+        this.typingInProgress = false;
+        if (this.onEndTyping)
+            this.onEndTyping();
+    },
 
-    this.endTyping = function (force) {
+    endTyping: function (force) {
         this.clearTimeout();
         if (force)
-            stopTyping();
+            this.stopTyping();
         else
-            timeout = window.setTimeout(stopTyping, 1000);
-    }
+            this.timeout = window.setTimeout(this.stopTyping, 1000);
+    },
 
-    this.typingInProgress = function () {
-        return typingInProgress;
-    }
+    typingInProgress: function () {
+        return this.typingInProgress;
+    },
 
-    this.clearTimeout = function () {
-        window.clearTimeout(timeout);
-    }
+    clearTimeout: function () {
+        window.clearTimeout(this.timeout);
+    },
 
-    function notify(e, what) {
-        for (var i = 0; i < handlers.length; i++)
-            if (handlers[i][what](e))
+    notify: function(e, what) {
+        for (var i = 0; i < this.handlers.length; i++)
+            if (this.handlers[i][what](e))
                 break;
+    },
+
+    keydown: function (e) {
+        this.notify(e, 'keydown');
+    },
+
+    keyup: function (e) {
+        this.notify(e, 'keyup');
     }
+});
 
-    this.keydown = function (e) {
-        notify(e, 'keydown');
-    }
+var Clipboard = Class.extend({
+    init: function(editor) {
+        this.cleaners = [new MSWordFormatCleaner()];
+    },
 
-    this.keyup = function (e) {
-        notify(e, 'keyup');
-    }
-}
-
-function Clipboard (editor) {
-    var cleaners = [new MSWordFormatCleaner()];
-
-    function htmlToFragment (html) {
+    htmlToFragment: function(html) {
         var container = dom.create(editor.document, 'div');
         container.innerHTML = html;
             
@@ -299,20 +331,20 @@ function Clipboard (editor) {
             fragment.appendChild(container.firstChild);
             
         return fragment;
-    }
+    },
 
-    function isBlock(html) {
+    isBlock: function(html) {
         return /<(div|p|ul|ol|table|h[1-6])/i.test(html);
-    }
+    },
         
-    this.oncut = function(e) {
+    oncut: function(e) {
         var startRestorePoint = new RestorePoint(editor.getRange());
         setTimeout(function() {
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
         });
-    }
+    },
 
-    this.onpaste = function(e) {
+    onpaste: function(e) {
         var range = editor.getRange();
         var startRestorePoint = new RestorePoint(range);
             
@@ -349,9 +381,9 @@ function Clipboard (editor) {
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
             selectionChanged(editor);
         });
-    }
+    },
 
-    function splittableParent(block, node) {
+    splittableParent: function(block, node) {
         if (block)
             return dom.parentOfType(node, ['p', 'ul', 'ol']) || node.parentNode;
             
@@ -364,14 +396,14 @@ function Clipboard (editor) {
         }
             
         return parent;
-    }
+    },
 
-    this.paste = function (html, clean) {
+    paste: function (html, clean) {
         var i, l;
 
-        for (i = 0, l = cleaners.length; i < l; i++)
-            if (cleaners[i].applicable(html))
-                html = cleaners[i].clean(html);
+        for (i = 0, l = this.cleaners.length; i < l; i++)
+            if (this.cleaners[i].applicable(html))
+                html = this.cleaners[i].clean(html);
             
         if (clean) {
             // remove br elements which immediately precede block elements
@@ -383,7 +415,7 @@ function Clipboard (editor) {
         // It is possible in IE to copy just <li> tags
         html = html.replace(/^<li/i, '<ul><li').replace(/li>$/g, 'li></ul>');
 
-        var block = isBlock(html);
+        var block = this.isBlock(html);
 
         var range = editor.getRange();
         range.deleteContents();
@@ -394,7 +426,7 @@ function Clipboard (editor) {
         var marker = new Marker();
         var caret = marker.addCaret(range)
             
-        var parent = splittableParent(block, caret);
+        var parent = this.splittableParent(block, caret);
         var unwrap = false;
             
         if (!/body|td/.test(dom.name(parent)) && (block || dom.isInline(parent))) {
@@ -403,7 +435,7 @@ function Clipboard (editor) {
             unwrap = true;
         }
             
-        var fragment = htmlToFragment(html);
+        var fragment = this.htmlToFragment(html);
         
         if (fragment.firstChild && fragment.firstChild.className === "t-paste-container") {
             var fragmentsHtml = [];
@@ -411,12 +443,12 @@ function Clipboard (editor) {
                 fragmentsHtml.push(fragment.childNodes[i].innerHTML);
             }
 
-            fragment = htmlToFragment(fragmentsHtml.join('<br />'));
+            fragment = this.htmlToFragment(fragmentsHtml.join('<br />'));
         }
 
         range.insertNode(fragment);
                 
-        parent = splittableParent(block, caret);
+        parent = this.splittableParent(block, caret);
         if (unwrap) {
             while (caret.parentNode != parent)
                 dom.unwrap(caret.parentNode);
@@ -430,38 +462,40 @@ function Clipboard (editor) {
         marker.removeCaret(range);
         selectRange(range);
     }
-}
+});
 
-function MSWordFormatCleaner() {
-    var replacements = [
-        /<!--(.|\n)*?-->/g, '', /* comments */
-        /&quot;/g, "'", /* encoded quotes (in attributes) */
-        /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
-        /<br><br>/g, '<BR><BR>', 
-        /<br>/g, ' ',
-        /<BR><BR>/g, '<br>',
-        /^\s*(&nbsp;)+/gi, '',
-        /(&nbsp;|<br[^>]*>)+\s*$/gi, '',
-        /mso-[^;"]*;?/ig, '', /* office-related CSS attributes */
-        /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
-        /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
-        /<\/?(meta|link|style|o:|v:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:)[^>]*>)?/ig, '', /* external references and namespaced tags */
-        /style=(["|'])\s*\1/g, '' /* empty style attributes */
-    ];
-        
-    this.applicable = function(html) {
+var MSWordFormatCleaner = Class.extend({
+    init: function() {
+        this.replacements = [
+            /<!--(.|\n)*?-->/g, '', /* comments */
+            /&quot;/g, "'", /* encoded quotes (in attributes) */
+            /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
+            /<br><br>/g, '<BR><BR>', 
+            /<br>/g, ' ',
+            /<BR><BR>/g, '<br>',
+            /^\s*(&nbsp;)+/gi, '',
+            /(&nbsp;|<br[^>]*>)+\s*$/gi, '',
+            /mso-[^;"]*;?/ig, '', /* office-related CSS attributes */
+            /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
+            /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
+            /<\/?(meta|link|style|o:|v:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:)[^>]*>)?/ig, '', /* external references and namespaced tags */
+            /style=(["|'])\s*\1/g, '' /* empty style attributes */
+        ];
+    },
+
+    applicable: function(html) {
         return /class="?Mso|style="[^"]*mso-/i.test(html);
-    }
+    },
         
-    function listType(html) {
+    listType: function(html) {
         if (/^[\u2022\u00b7\u00a7\u00d8o]\u00a0+/.test(html))
             return 'ul';
             
         if (/^\s*\w+[\.\)]\u00a0{2,}/.test(html))
             return 'ol';
-    }
+    },
 
-    function lists(html) {
+    lists: function(html) {
         var placeholder = dom.create(document, 'div', {innerHTML: html});
         var blockChildren = $(blockElements.join(','), placeholder);
             
@@ -470,7 +504,7 @@ function MSWordFormatCleaner() {
         for (var i = 0; i < blockChildren.length; i++) {
             var p = blockChildren[i];
             var html = p.innerHTML.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');      
-            var type = listType(html);
+            var type = this.listType(html);
                 
             if (!type || dom.name(p) != 'p') { 
                 if (p.innerHTML == '') {
@@ -512,9 +546,9 @@ function MSWordFormatCleaner() {
             lastType = type;
         }
         return placeholder.innerHTML;
-    }
+    },
 
-    function stripEmptyAnchors(html) {
+    stripEmptyAnchors: function(html) {
         return html.replace(/<a([^>]*)>\s*<\/a>/ig, function(a, attributes) {
             if (!attributes || attributes.indexOf("href") < 0) {
                 return "";
@@ -522,18 +556,31 @@ function MSWordFormatCleaner() {
 
             return a;
         });
-    }
+    },
 
-    this.clean = function(html) {
-        for (var i = 0, l = replacements.length; i < l; i+= 2)
-            html = html.replace(replacements[i], replacements[i+1]);
+    clean: function(html) {
+        for (var i = 0, l = this.replacements.length; i < l; i+= 2)
+            html = html.replace(this.replacements[i], this.replacements[i+1]);
 
-        html = stripEmptyAnchors(html);
-        html = lists(html);
+        html = this.stripEmptyAnchors(html);
+        html = this.lists(html);
         html = html.replace(/\s+class="?[^"\s>]*"?/ig, '');
            
         return html;
     }
-};
+});
+
+extend(kendo.ui.Editor, {
+    Command: Command,
+    GenericCommand: GenericCommand,
+    InsertHtmlCommand: InsertHtmlCommand,
+    InsertHtmlTool: InsertHtmlTool,
+    UndoRedoStack: UndoRedoStack,
+    TypingHandler: TypingHandler,
+    SystemHandler: SystemHandler,
+    Keyboard: Keyboard,
+    Clipboard: Clipboard,
+    MSWordFormatCleaner: MSWordFormatCleaner
+});
 
 })(jQuery);

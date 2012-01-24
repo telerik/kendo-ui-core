@@ -1,15 +1,25 @@
 (function($) {
 
-function ListFormatFinder(tag) {
-    var tags = [tag == 'ul' ? 'ol' : 'ul', tag];
-        
-    BlockFormatFinder.call(this, [{ tags: tags}]);
+// Imports ================================================================
+var kendo = window.kendo,
+    Class = kendo.Class,
+    extend = $.extend,
+    dom = kendo.ui.Editor.Dom;
 
-    this.isFormatted = function (nodes) {
+var ListFormatFinder = BlockFormatFinder.extend({
+    init: function(tag) {
+        this.tag = tag;
+        var finder = this,
+            tags = this.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
+
+        BlockFormatFinder.fn.init.call(finder, [{ tags: tags}]);
+    },
+
+    isFormatted: function (nodes) {
         var formatNodes = [], formatNode;
             
         for (var i = 0; i < nodes.length; i++)
-            if ((formatNode = this.findFormat(nodes[i])) && dom.name(formatNode) == tag)
+            if ((formatNode = this.findFormat(nodes[i])) && dom.name(formatNode) == this.tag)
                 formatNodes.push(formatNode);
 
         if (formatNodes.length < 1) {
@@ -27,20 +37,25 @@ function ListFormatFinder(tag) {
         }
 
         return true;
-    }
+    },
 
-    this.findSuitable = function (nodes) {
-        var candidate = dom.parentOfType(nodes[0], tags)
-        if (candidate && dom.name(candidate) == tag)
+    findSuitable: function (nodes) {
+        var candidate = dom.parentOfType(nodes[0], this.tags)
+        if (candidate && dom.name(candidate) == this.tag)
             return candidate;
         return null;
     }
-}
 
-function ListFormatter(tag, unwrapTag) {
-    var finder = new ListFormatFinder(tag);
+});
 
-    function wrap(list, nodes) {
+var ListFormatter = Class.extend({
+    init: function(tag, unwrapTag) {
+        this.finder = new ListFormatFinder(tag);
+        this.tag = tag;
+        this.unwrapTag = unwrapTag;
+    },
+
+    wrap: function(list, nodes) {
         var li = dom.create(list.ownerDocument, 'li');
 
         for (var i = 0; i < nodes.length; i++) {
@@ -80,17 +95,17 @@ function ListFormatter(tag, unwrapTag) {
 
         if (li.firstChild)
             list.appendChild(li);
-    }
+    },
 
-    function containsAny(parent, nodes) {
+    containsAny: function(parent, nodes) {
         for (var i = 0; i < nodes.length; i++)
             if (isAncestorOrSelf(parent, nodes[i]))
                 return true;
 
         return false;
-    }
+    },
 
-    function suitable(candidate, nodes) {
+    suitable: function (candidate, nodes) {
         if (candidate.className == "t-marker") {
             var sibling = candidate.nextSibling;
 
@@ -106,9 +121,9 @@ function ListFormatter(tag, unwrapTag) {
         }
 
         return containsAny(candidate, nodes) || dom.isInline(candidate) || candidate.nodeType == 3;
-    }
+    },
 
-    this.split = function (range) {
+    split: function (range) {
         var nodes = textNodes(range);
         if (nodes.length) {
             var start = dom.parentOfType(nodes[0], ['li']);
@@ -117,21 +132,22 @@ function ListFormatter(tag, unwrapTag) {
             range.setEndAfter(end);
 
             for (var i = 0, l = nodes.length; i < l; i++) {
-                var formatNode = finder.findFormat(nodes[i]);
+                var formatNode = this.finder.findFormat(nodes[i]);
                 if (formatNode) {
                     var parents = $(formatNode).parents("ul,ol");
                     if (parents[0]) {
-                        split(range, parents.last()[0], true);
+                        this.split(range, parents.last()[0], true);
                     } else {
-                        split(range, formatNode, true);
+                        this.split(range, formatNode, true);
                     }
                 }
             }
         }
-    }
+    },
 
-    this.apply = function (nodes) {
-        var commonAncestor = nodes.length == 1 ? dom.parentOfType(nodes[0], ['ul','ol']) : dom.commonAncestor.apply(null, nodes);
+    apply: function (nodes) {
+        var tag = this.tag,
+            commonAncestor = nodes.length == 1 ? dom.parentOfType(nodes[0], ['ul','ol']) : dom.commonAncestor.apply(null, nodes);
             
         if (!commonAncestor)
             commonAncestor = dom.parentOfType(nodes[0], ["td"]) || nodes[0].ownerDocument.body;
@@ -141,7 +157,7 @@ function ListFormatter(tag, unwrapTag) {
 
         var ancestors = [];
 
-        var formatNode = finder.findSuitable(nodes);
+        var formatNode = this.finder.findSuitable(nodes);
 
         if (!formatNode)
             formatNode = new ListFormatFinder(tag == 'ul' ? 'ol' : 'ul').findSuitable(nodes);
@@ -175,7 +191,7 @@ function ListFormatter(tag, unwrapTag) {
             dom.insertBefore(formatNode, ancestors[0]);
         }
 
-        wrap(formatNode, ancestors);
+        this.wrap(formatNode, ancestors);
 
         if (!dom.is(formatNode, tag))
             dom.changeTag(formatNode, tag);
@@ -202,9 +218,9 @@ function ListFormatter(tag, unwrapTag) {
             }
             dom.remove(formatNode);
         }
-    }
+    },
 
-    function unwrap(ul) {
+    unwrap: function(ul) {
         var fragment = document.createDocumentFragment(), 
             parents,
             li,
@@ -245,16 +261,16 @@ function ListFormatter(tag, unwrapTag) {
         }
 
         dom.remove(ul);
-    }
+    },
 
-    this.remove = function (nodes) {
+    remove: function (nodes) {
         var formatNode;
         for (var i = 0, l = nodes.length; i < l; i++)
-            if (formatNode = finder.findFormat(nodes[i]))
-                unwrap(formatNode);
-    }
+            if (formatNode = this.finder.findFormat(nodes[i]))
+                this.unwrap(formatNode);
+    },
 
-    this.toggle = function (range) {
+    toggle: function (range) {
         var nodes = textNodes(range),
             ancestor = range.commonAncestorContainer;
 
@@ -269,28 +285,43 @@ function ListFormatter(tag, unwrapTag) {
             }
         }
             
-        if (finder.isFormatted(nodes)) {
+        if (this.finder.isFormatted(nodes)) {
             this.split(range);
             this.remove(nodes);
         } else {
             this.apply(nodes);
         }
     }
-}
 
-function ListCommand(options) {
-    options.formatter = new ListFormatter(options.tag);
-    Command.call(this, options);
-}
+});
 
-function ListTool(options) {
-    FormatTool.call(this, $.extend(options, {
-        finder: new ListFormatFinder(options.tag)
-    }));
+var ListCommand = Command.extend({
+    init: function(options) {
+        this.options = options;
+        var cmd = this;
+        Command.fn.init.call(cmd, options);
+    }
+});
 
-    this.command = function (commandArguments) { 
+var ListTool = FormatTool.extend({
+    init: function(options) {
+        this.options = options;
+        var tool = this;
+        FormatTool.fn.init.call(tool, $.extend(options, {
+            finder: new ListFormatFinder(options.tag)
+        }));
+    },
+
+    command: function (commandArguments) { 
         return new ListCommand($.extend(commandArguments, { tag: options.tag }));
     }
-};
+});
+
+extend(kendo.ui.Editor, {
+    ListFormatFinder: ListFormatFinder,
+    ListFormatter: ListFormatter,
+    ListCommand: ListCommand,
+    ListTool: ListTool
+});
 
 })(jQuery);

@@ -1,15 +1,28 @@
 (function($) {
 
-function LinkFormatFinder() {
-    this.findSuitable = function (sourceNode) {
+// Imports ================================================================
+var kendo = window.kendo,
+    Class = kendo.Class,
+    extend = $.extend,
+    dom = kendo.ui.Editor.Dom;
+
+var LinkFormatFinder = Class.extend({
+    init: function() {
+        
+    },
+
+    findSuitable: function (sourceNode) {
         return dom.parentOfType(sourceNode, ['a']);
     }
-}
 
-function LinkFormatter() {
-    this.finder = new LinkFormatFinder();
+});
 
-    this.apply = function (range, attributes) {
+var LinkFormatter = Class.extend({
+    init: function() {
+        this.finder = new LinkFormatFinder();
+    },
+
+    apply: function (range, attributes) {
         var nodes = textNodes(range);
         if (attributes.innerHTML != undefined) {
             var markers = getMarkers(range);
@@ -29,28 +42,31 @@ function LinkFormatter() {
             formatter.apply(nodes);
         }
     }
-}
 
-function UnlinkCommand(options) {
-    options.formatter = {
-        toggle : function(range) {
-            new InlineFormatter([{ tags: ['a']}]).remove(textNodes(range));
-        }
-    };
-    
-    Command.call(this, options);
-}
+});
 
-function LinkCommand(options) {
-    Command.call(this, options);
+var UnlinkCommand = Class.extend({
+    init: function(options) {
+        options.formatter = {
+            toggle : function(range) {
+                new InlineFormatter([{ tags: ['a']}]).remove(textNodes(range));
+            }
+        };
+        this.options = options;
+        Command.fn.init.call(this, options);
+    }
+});
 
-    var attributes;
+var LinkCommand = Command.extend({
+    init: function(options) {
+        var cmd = this;
+        Command.fn.init.call(cmd, options);
+        cmd.attributes = null;
+        cmd.async = true;
+        cmd.formatter = new LinkFormatter();
+    },
 
-    this.async = true;
-
-    var formatter = new LinkFormatter();
-
-    this.exec = function () {
+    exec: function () {
         var range = this.getRange();
 
         var collapsed = range.collapsed;
@@ -67,21 +83,21 @@ function LinkCommand(options) {
             var href = $('#t-editor-link-url', dialog.element).val();
 
             if (href && href != 'http://') {
-                attributes = { href: href };
+                self.attributes = { href: href };
 
                 var title = $('#t-editor-link-title', dialog.element).val();
                 if (title)
-                    attributes.title = title;
+                    self.attributes.title = title;
 
                 var text = $('#t-editor-link-text', dialog.element).val();
                 if (text !== initialText)
-                    attributes.innerHTML = text;
+                    self.attributes.innerHTML = text;
 
                 var target = $('#t-editor-link-target', dialog.element).is(':checked');
                 if (target)
-                    attributes.target = '_blank';
+                    self.attributes.target = '_blank';
 
-                formatter.apply(range, attributes);
+                self.formatter.apply(range, self.attributes);
             }
             close(e);
             if (self.change)
@@ -97,7 +113,7 @@ function LinkCommand(options) {
             self.releaseRange(range);
         }
 
-        var a = nodes.length ? formatter.finder.findSuitable(nodes[0]) : null;
+        var a = nodes.length ? self.formatter.finder.findSuitable(nodes[0]) : null;
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
@@ -144,27 +160,38 @@ function LinkCommand(options) {
         $('#t-editor-link-url', dialog.element).focus().select();
     },
 
-    this.redo = function () {
+    redo: function () {
         var range = this.lockRange(true);
-        formatter.apply(range, attributes);
+        this.formatter.apply(range, this.attributes);
         this.releaseRange(range);
     }
-}
 
-function UnlinkTool(options){
-    Tool.call(this, $.extend(options, {command:UnlinkCommand}));
-    
-    var finder = new InlineFormatFinder([{tags:['a']}]);
+});
 
-    this.init = function($ui) {
+var UnlinkTool = Tool.extend({
+    init: function(options) {
+        this.options = options;
+
+        Tool.fn.init.call(this, $.extend(options, {command:UnlinkCommand}));
+    },
+
+    initialize: function($ui) {
         $ui.attr('unselectable', 'on')
            .addClass('t-state-disabled');
-    }
-    
-    this.update = function ($ui, nodes) {
-        $ui.toggleClass('t-state-disabled', !finder.isFormatted(nodes))
+    },
+
+    update: function ($ui, nodes) {
+        $ui.toggleClass('t-state-disabled', !this.finder.isFormatted(nodes))
             .removeClass('t-state-hover');
     }
-}
+});
+
+extend(kendo.ui.Editor, {
+    LinkFormatFinder: LinkFormatFinder,
+    LinkFormatter: LinkFormatter,
+    UnlinkCommand: UnlinkCommand,
+    LinkCommand: LinkCommand,
+    UnlinkTool: UnlinkTool
+});
 
 })(jQuery);

@@ -702,7 +702,7 @@
             return new options.command(commandArguments);
         },
 
-        updat: function() {
+        update: function() {
         },
 
         willDelayExecution: function() {
@@ -715,6 +715,11 @@
     });
 
     var FormatTool = Tool.extend({
+        init: function() {
+            var t = this;
+            Tool.fn.init.call(t);
+        },
+
         command: function (commandArguments) {
             return new FormatCommand($.extend(commandArguments, {
                     formatter: options.formatter
