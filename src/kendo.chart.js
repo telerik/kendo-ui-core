@@ -4233,6 +4233,8 @@
             var plotArea = this;
 
             plotArea.range = { min: 0, max: 1 };
+            plotArea.namedAxes = {};
+            plotArea.valueAxes = [];
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
@@ -4371,160 +4373,128 @@
                     },
                     options.categoryAxis)
                 ),
-                valueAxes = {},
-                axisName,
+                axis,
+                namedAxes = plotArea.namedAxes,
                 valueAxesOptions = $.isArray(options.valueAxis) ?
                     options.valueAxis : [ options.valueAxis ];
 
             $.each(valueAxesOptions, function() {
-                axisName = this.name || "primary";
-
-                valueAxes[axisName] =
+                axis = namedAxes[this.name || "primary"] =
                     new NumericAxis(range.min, range.max, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
                     },
                     this)
                 );
 
-                plotArea.append(valueAxes[axisName]);
+                plotArea.valueAxes.push(axis);
+                plotArea.append(axis);
             });
 
-            plotArea.axisX = invertAxes ? valueAxes.primary : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : valueAxes.primary;
+            plotArea.axisX = invertAxes ? namedAxes.primary : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : namedAxes.primary;
 
             plotArea.categoryAxis = categoryAxis;
-            plotArea.valueAxes = valueAxes;
-
             plotArea.append(plotArea.categoryAxis);
         },
 
-        /*
-        reflowAxes: function() {
-            var plotArea = this,
-                valueAxes = plotArea.valueAxes,
-                box = plotArea.box;
+        axisCrossingValues: function(axis, crossingAxes) {
+            var options = axis.options,
+                crossingValues = [].concat(options.axisCrossingValue),
+                valuesToAdd = crossingValues.length - crossingAxes.length,
+                i;
 
-            PlotAreaBase.fn.reflowAxes.call(plotArea);
-
-            for (var axisName in valueAxes) {
-                if (axisName != "primary") {
-                    var axis = valueAxes[axisName];
-                    axis.reflow(box);
-
-                    plotArea.alignAxes(
-                        plotArea.categoryAxis,
-                        axis,
-                        plotArea.categoryAxis.options.axisCrossingValue,
-                        axis.options.axisCrossingValue
-                    );
-
-                    axis.box.alignTo(valueAxes.primary.box, LEFT);
-                    axis.reflow(axis.box);
-
-                    plotArea.box = boxX.clone().wrap(boxY);
-                }
+            for (i = 0; i < valuesToAdd; i++) {
+                crossingValues.push(0);
             }
-        }
-        */
+
+            return crossingValues;
+        },
+
+        alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
+            var slot = axis.getSlot(crossingValue, crossingValue),
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
+                isVertical = axis.options.orientation === VERTICAL;
+
+            axis.reflow(
+                axis.box.translate(targetSlot.x1 - slot.x1, targetSlot.y1 - slot.y1)
+            );
+        },
+
+        alignAxes: function(xAxes, yAxes) {
+            var plotArea = this,
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
+                xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
+                yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
+                axis,
+                axisCrossings,
+                i;
+
+            plotArea.alignAxisTo(yAnchor, xAnchor, yAnchorCrossings[0], xAnchorCrossings[0]);
+            plotArea.alignAxisTo(xAnchor, yAnchor, xAnchorCrossings[0], yAnchorCrossings[0]);
+
+            for (i = 1; i < yAxes.length; i++) {
+                axis = yAxes[i];
+                plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+            }
+
+            for (i = 1; i < xAxes.length; i++) {
+                axis = xAxes[i];
+                plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+            }
+        },
 
         reflowAxes: function() {
             var plotArea = this,
+                invertAxes = plotArea.invertAxes,
                 categoryAxis = plotArea.categoryAxis,
-                primaryValueAxis = plotArea.valueAxes.primary,
-                secondaryValueAxis = plotArea.valueAxes.secondary,
-                box = plotArea.box;
+                valueAxes = plotArea.valueAxes,
+                namedAxes = plotArea.namedAxes,
+                allAxes = [categoryAxis].concat(valueAxes),
+                axisX = invertAxes ? namedAxes.primary : categoryAxis,
+                axisY = invertAxes ? categoryAxis : namedAxes.primary,
+                box = plotArea.box,
+                axisBox;
 
-                categoryAxis.reflow(box);
-                primaryValueAxis.reflow(box);
+            allAxes.forEach(function(item) {
+                item.reflow(box);
+            });
 
-            if (secondaryValueAxis) {
-                secondaryValueAxis.reflow(box);
-            }
+            plotArea.alignAxes([categoryAxis], valueAxes);
 
-            plotArea.alignAxisTo(
-                primaryValueAxis, categoryAxis,
-                primaryValueAxis.options.axisCrossingValue,
-                categoryAxis.options.axisCrossingValue
-            );
-
-            if (secondaryValueAxis) {
-                plotArea.alignAxisTo(
-                    secondaryValueAxis, categoryAxis,
-                    secondaryValueAxis.options.axisCrossingValue,
-                    categoryAxis.options.axisCrossingValue
-                );
-            }
-
-            plotArea.alignAxisTo(
-                categoryAxis, primaryValueAxis,
-                categoryAxis.options.axisCrossingValue,
-                primaryValueAxis.options.axisCrossingValue
-            );
-
-            if (secondaryValueAxis) {
-                secondaryValueAxis.box.alignTo(primaryValueAxis.box, LEFT);
-            }
-
-            var axisBox = categoryAxis.box.clone().wrap(primaryValueAxis.box);
-
-            if (secondaryValueAxis) {
-                axisBox.wrap(secondaryValueAxis.box);
-            }
+            axisBox = categoryAxis.box.clone();
+            allAxes.forEach(function(axis) {
+                axisBox.wrap(axis.box);
+            });
 
             var overflowY = axisBox.height() - box.height(),
-                overflowX = axisBox.width() - box.width(),
-                offsetX = box.x1 - axisBox.x1,
-                offsetY = box.y1 - axisBox.y1;
+                overflowX = axisBox.width() - box.width();
 
-            function isVertical(axis) {
-                return axis.options.orientation === VERTICAL;
-            };
+            allAxes.forEach(function(axis) {
+                var isVertical = axis.options.orientation === VERTICAL;
 
-            categoryAxis.reflow(
-                categoryAxis.box.translate(offsetX, offsetY)
-                .shrink(isVertical(categoryAxis) ? 0 : overflowX,
-                        isVertical(categoryAxis) ? overflowY : 0)
-            );
-
-            primaryValueAxis.reflow(
-                primaryValueAxis.box.translate(offsetX, offsetY)
-                .shrink(isVertical(primaryValueAxis) ? 0 : overflowX,
-                        isVertical(primaryValueAxis) ? overflowY : 0)
-            );
-
-            if (secondaryValueAxis) {
-                secondaryValueAxis.reflow(
-                    secondaryValueAxis.box.translate(offsetX, offsetY)
-                    .shrink(isVertical(secondaryValueAxis) ? 0 : overflowX,
-                            isVertical(secondaryValueAxis) ? overflowY : 0)
+                axis.reflow(
+                    axis.box.shrink(
+                        isVertical ? 0 : overflowX,
+                        isVertical ? overflowY : 0)
                 );
-            }
+            });
 
-            plotArea.alignAxisTo(
-                primaryValueAxis, categoryAxis,
-                primaryValueAxis.options.axisCrossingValue,
-                categoryAxis.options.axisCrossingValue
-            );
+            plotArea.alignAxes([categoryAxis], valueAxes);
 
-            if (secondaryValueAxis) {
-                plotArea.alignAxisTo(
-                    secondaryValueAxis, categoryAxis,
-                    secondaryValueAxis.options.axisCrossingValue,
-                    categoryAxis.options.axisCrossingValue
+            axisBox = categoryAxis.box.clone();
+            allAxes.forEach(function(axis) {
+                axisBox.wrap(axis.box);
+            });
+
+            offsetX = box.x1 - axisBox.x1;
+            offsetY = box.y1 - axisBox.y1;
+
+            allAxes.forEach(function(axis) {
+                axis.reflow(
+                    axis.box.translate(overflowX, overflowY)
                 );
-            }
-
-            plotArea.alignAxisTo(
-                categoryAxis, primaryValueAxis,
-                categoryAxis.options.axisCrossingValue,
-                primaryValueAxis.options.axisCrossingValue
-            );
-
-            if (secondaryValueAxis) {
-                secondaryValueAxis.reflow(
-                    secondaryValueAxis.box.alignTo(primaryValueAxis.box, LEFT)
-                );
-            }
+            });
         }
     });
 
