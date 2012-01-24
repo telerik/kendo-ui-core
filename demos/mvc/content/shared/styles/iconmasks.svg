@@ -360,8 +360,8 @@
         <circle fill="black" cx="0.296" cy="0.5" r="0.11"/>
         <circle fill="black" cx="0.705" cy="0.72" r="0.11"/>
         <circle fill="black" cx="0.705" cy="0.28" r="0.11"/>
-        <line style="fill:none;stroke:black;stroke-width:0.1;" x1="0.704" y1="0.28" x2="0.296" y2="0.5"/>
-        <line style="fill:none;stroke:black;stroke-width:0.1;" x1="0.296" y1="0.5" x2="0.704" y2="0.72"/>
+        <rect x="0.202" y="0.351" transform="matrix(0.8661 -0.4999 0.4999 0.8661 -0.1281 0.3021)" fill="black" width="0.595" height="0.078"/>
+        <rect x="0.203" y="0.571" transform="matrix(-0.8661 -0.4999 0.4999 -0.8661 0.6286 1.3881)" fill="black" width="0.595" height="0.078"/>
     </clipPath>
     <clipPath id="androidmore" clipPathUnits="objectBoundingBox">
         <circle fill="black" cx="0.5" cy="0.781" r="0.094"/>
