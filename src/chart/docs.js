@@ -556,7 +556,7 @@
          *      valueAxis: {
          *          labels: {
          *              // label template
-         *              template: "${ value }%"
+         *              template: "#=  value  #%"
          *          }
          *      }
          * });
@@ -753,7 +753,7 @@
          *          categories: [2000, 2001, 2002, 2003],
          *          labels: {
          *              // label template
-         *              template: "Year: ${ value }"
+         *              template: "Year: #=  value  #"
          *          }
          *      }
          * });
@@ -890,7 +890,7 @@
          *      seriesDefault: {
          *          labels: {
          *              // label template
-         *              template: "${ value }%",
+         *              template: "#=  value  #%",
          *              visible: true
          *          }
          *      },
@@ -999,7 +999,7 @@
          *      seriesDefaults: {
          *          tooltip: {
          *              visible: true,
-         *              template: "${category} - ${value}"
+         *              template: "#= category} - ${value #"
          *          }
          *      },
          *      series: [
@@ -1184,7 +1184,7 @@
          *              data: [200, 450, 300, 125],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#=  value  #%",
          *                  visible: true
          *              }
          *          }
@@ -1276,7 +1276,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category} - ${value #"
          *              }
          *          }
          *      ],
@@ -1434,7 +1434,7 @@
          *              data: [200, 450, 300, 125],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#=  value  #%",
          *                  visible: true
          *              }
          *          }
@@ -1526,7 +1526,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category} - ${value #"
          *              }
          *          }
          *      ],
@@ -1737,7 +1737,7 @@
          *              data: [200, 450, 300, 125],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#=  value  #%",
          *                  visible: true
          *              }
          *          }
@@ -1777,7 +1777,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category} - ${value #"
          *              }
          *          }
          *      ],
@@ -1978,7 +1978,7 @@
          *              ],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#=  value  #%",
          *                  visible: true
          *              }
          *          }
@@ -2094,7 +2094,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category} - ${value #"
          *              }
          *          }
          *      ]
@@ -2256,7 +2256,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              labels: {
          *                  // label template
-         *                  template: "${ value.x } - ${ value.y }",
+         *                  template: "#=  value.x } - ${ value.y  #",
          *                  visible: true
          *              }
          *          }
@@ -2364,7 +2364,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${ category } - ${ value.x } - ${ value.y }"
+         *                  template: "#=  category } - ${ value.x } - ${ value.y  #"
          *              }
          *          }
          *      ]
@@ -2510,7 +2510,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              labels: {
          *                  // label template
-         *                  template: "${ value.x } - ${ value.y }",
+         *                  template: "#=  value.x } - ${ value.y  #",
          *                  visible: true
          *              }
          *          }
@@ -2618,7 +2618,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${ category } - ${ value.x } - ${ value.y }"
+         *                  template: "#=  category } - ${ value.x } - ${ value.y  #"
          *              }
          *          }
          *      ]
@@ -2779,7 +2779,7 @@
          *      },
          *      tooltip: {
          *          visible: true,
-         *          template: "${category} - ${value}"
+         *          template: "#= category} - ${value #"
          *      }
          * });
          * @option {String} [tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
