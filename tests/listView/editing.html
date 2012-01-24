@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.ui.ListView Editing Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.listView.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.ui.ListView Editing Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var DataSource = kendo.data.DataSource,
+                dataSource;
+
+            function setup(options) {
+                var data = [];
+                for (var idx = 0; idx < 5; idx++) {
+                    data.push({ id: idx, foo: "foo " + idx });
+                }
+
+                options = $.extend({
+                    template: "<li>${foo}</li>",
+                    dataSource: dataSource = new DataSource({
+                        data: data,
+                        schema: {
+                            model: {
+                                id: "id",
+                                fields: {
+                                    id: { type: "number" },
+                                    foo: { type: "string" }
+                                }
+                            }
+                        }
+                    })
+                }, options);
+                return $("<ul/>").kendoListView(options).data("kendoListView");
+            }
+
+            test("default edit template is empty string", function() {
+                var listView = setup();
+
+                equal(listView.editTemplate({}), "");
+            });
+
+            test("editTemplate options defined", function() {
+                var editTemplate = "<li>edit template</li>",
+                    listView = setup({ editTemplate: editTemplate });
+
+                equal(listView.editTemplate({}), editTemplate);
+            });
+
+            test("editItem renders editTemplate for the current item", function() {
+                var editTemplate = "<li>template</li>",
+                    listView = setup({ editTemplate: editTemplate });
+
+                listView.editItem(listView.element.children().first());
+                equal(listView.element.children().first().html(), "template");
+            });
+
+            test("editItem binds the edit template", function() {
+                var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
+
+                listView.editItem(listView.element.children().first());
+                equal(listView.element.children().first().html(), "edit foo 0");
+            });
+
+            test("editItem instantiates editable for edited item", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+
+                listView.editItem(listView.element.children().first());
+                ok(listView.element.children().first().data("kendoEditable"));
+                ok(listView.editable);
+            });
+
+            test("correct model is passed to editable", function() {
+                var listView = setup({ editTemplate: "<li></li>" });
+
+                listView.editItem(listView.element.children().first());
+                equal(listView.editable.options.model, dataSource.get(0));
+            });
+
+            test("edit item triggers edit event", function() {
+                var called = false,
+                    listView = setup({
+                        editTemplate: "<li></li>",
+                        edit: function() {
+                            called = true;
+                        }
+                    });
+
+                listView.editItem(listView.element.children().first());
+                ok(called);
+            });
+
+            test("item and model is send to edit event arguments", function() {
+                var args = {},
+                    listView = setup({
+                        editTemplate: "<li></li>",
+                        edit: function() {
+                            args = arguments[0];
+                        }
+                    });
+
+                listView.editItem(listView.element.children().first());
+
+                equal(args.model, dataSource.get(0));
+                equal(args.item[0], listView.element.children()[0]);
+            });
+
+            test("closeItem destroys the editable", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+
+                listView.editItem(listView.element.children().first());
+                listView.saveItem(listView.element.children().first());
+
+                ok(!listView.element.children().first().data("kendoEditable"));
+                ok(!listView.editable);
+            });
+
+            test("closeItem renders item template", function() {
+                var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
+
+                listView.editItem(listView.element.children().first());
+                listView.saveItem(listView.element.children().first());
+
+                equal(listView.element.children().first().html(), "foo 0");
+            });
+
+            test("editItem closes previous edited item", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+
+                listView.editItem(listView.element.children().eq(0));
+                listView.editItem(listView.element.children().eq(1));
+
+                ok(!listView.element.children().eq(0).data("kendoEditable"));
+                ok(listView.element.children().eq(1).data("kendoEditable"));
+            });
+
+            test("editItem does not close previous edited item if validation fails", function() {
+                var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
+
+                listView.editItem(listView.element.children().eq(0));
+                listView.element.find(":input").val("");
+                listView.editItem(listView.element.children().eq(1));
+
+                ok(listView.element.children().eq(0).data("kendoEditable"));
+                ok(!listView.element.children().eq(1).data("kendoEditable"));
+            });
+
+            test("saveItem does not close edited item if validation fails", function() {
+                var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
+
+                listView.editItem(listView.element.children().eq(0));
+                listView.element.find(":input").val("");
+                listView.saveItem(listView.element.children().eq(0));
+
+                ok(listView.element.children().eq(0).data("kendoEditable"));
+            });
+        </script>
+    </body>
+</html>
