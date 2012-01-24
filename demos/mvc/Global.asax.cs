@@ -17,6 +17,13 @@ namespace Kendo
             var suiteConstraint = new { suite = "(web|dataviz|mobile)" };
 
             routes.MapRoute(
+                "AsyncUpload",
+                "web/upload/{action}",
+                new { controller = "Upload" },
+                new { action = "(save|remove)" }
+            );
+
+            routes.MapRoute(
                 "Sushi",
                 "sushi",
                 new { controller = "Integration", action = "Sushi" }
