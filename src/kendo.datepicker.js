@@ -149,7 +149,6 @@
                 calendar.options.depth = options.depth;
 
                 calendar._footer(that.footer);
-                //calendar._today.html(that.footer(new DATE()));
 
                 calendar.min(options.min);
                 calendar.max(options.max);
