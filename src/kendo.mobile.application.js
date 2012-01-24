@@ -115,12 +115,12 @@
      * @name kendo.mobile.Application.Description
      * @section
      *
-     * <p>The Kendo Mobile Application provides the necessary tools for building native-looking web based mobile applications.</p>
+     * <p>The Kendo mobile Application provides the necessary tools for building native-looking web based mobile applications.</p>
      *
      * <h3>Getting Started</h3>
-     * <p>The simplest mobile application consists of a single mobile View. </p>
+     * <p>The simplest mobile Application consists of a single mobile View. </p>
      *
-     * @exampleTitle Hello World mobile application
+     * @exampleTitle Hello World mobile Application
      * @example
      * <body>
      *    <div data-role="view">
@@ -138,7 +138,7 @@
      * <h3>View Structure</h3>
      *
      * <p>The mobile Application consists of a single HTML page with one or more mobile Views, linked with navigational widgets (Buttons, TabStrip, etc.).
-     * Each element within the application element (by default, the <code>body</code>) with <code>role</code> data attribute set to <code>view</code> is considered a mobile view. </p>
+     * Each element within the application element (by default, the <code>body</code>) with <code>role</code> data attribute set to <code>view</code> is considered a mobile View. </p>
      *
      * @exampleTitle Define mobile View
      * @example
@@ -162,9 +162,9 @@
      *
      * @section
      * <h3>Layout</h3>
-     * <p>A mobile Layout is used to share headers and footers between multiple views. A Layout contains header and/or footer element, which are applied to any view that uses it.
-     * A view is defined by setting an element's <code>role</code> data attribute to <code>layout</code>. A View is associated with a Layout by setting its <code>layout</code> data attribute value
-     * to the value of the layout's <code>id</code> <strong>data attribute</strong>.</p>
+     * <p>A mobile Layout is used to share headers and footers between multiple Views. A Layout contains header and/or footer element, which are applied to any View that uses it.
+     * A Layout is defined by setting an element's <code>role</code> data attribute to <code>layout</code>. A View is associated with a Layout by setting its <code>layout</code> data attribute value
+     * to the value of the layout's <code>id</code> data attribute.</p>
      *
      * <p>An Application default layout can be set, by passing the layout id in the <code>options</code> parameter of the Application's constructor.
      * A mobile View can remove the default application Layout by setting its <code>layout</code> data attribute to empty string ("").</p>
@@ -194,8 +194,8 @@
      * @section
      *
      * <h3>Navigation</h3>
-     * <p>When initialized, the Mobile Application modifies the kendo mobile widgets' behavior, so that they navigate between Views when pressed.
-     * The navigation Widget's <code>href</code> attribute specifies the view id to navigate to.</p>
+     * <p>When initialized, the mobile Application modifies the kendo mobile widgets' behavior, so that they navigate between Views when pressed.
+     * The navigation Widget's <code>href</code> attribute specifies the View id to navigate to.</p>
      *
      * @exampleTitle Views linked with mobile Buttons
      * @example
@@ -210,7 +210,7 @@
      * The following transitions are supported:</p>
      *
      * <h4>slide</h4>
-     * <p> The default iOS View transition. Previous view contents slide to the left, with new View contents sliding in their place.
+     * <p> The default iOS View transition. Previous View contents slide to the left, with new View contents sliding in their place.
      * Headers and footers (if present) use the <strong>fade</strong> transition. </p>
      *
      * <h4>zoom</h4>
@@ -221,7 +221,7 @@
      *
      * <h4>overlay</h4>
      * <p>The new View contents slide on top of the previous View. Unlike the <code>slide</code> transition,
-     * the previous view stays "below" the new one, and headers/footers do not transition separately. </p>
+     * the previous View stays "below" the new one, and headers/footers do not transition separately. </p>
      * <p>The transition direction can be specified by using <code>overlay:(direction)</code>.
      * Supported directions are <code>down</code>, <code>left</code>, <code>up</code> and <code>right</code>. By default, the direction is <code>left</code>.</p>
      *
@@ -233,7 +233,7 @@
      * @section
      *
      * <p>When a View transitions to the View displayed before it (foo → bar → foo), this is considered a <strong>back</strong> navigation.
-     * In this case, the animation of the current view is applied in reverse.
+     * In this case, the animation of the current View is applied in reverse.
      * For instance, navigating with slide animation from <code>foo</code> to <code>bar</code>, then back to <code>foo</code>
      * would cause the <code>foo</code> View to slide from the right side of the screen, creating the effect of "coming back from where it came". </p>
      *
@@ -246,7 +246,7 @@
      * The View contents (first element with <code>role</code> data attribute set to <code>view</code>) are extracted from the AJAX response and appended into the Application element.
      * Once the remote View is fetched, no additional roundtrips to the server occur when the View is displayed. </p>
      *
-     * @exampleTitle Remote view
+     * @exampleTitle Remote View
      * @example
      * <!-- foo.html -->
      * <div data-role="view">Foo <a href="bar.html" data-role="button">Go to Bar</a></div>
@@ -262,7 +262,7 @@
      *
      * @exampleTitle Button with additional URL parameters
      * @example
-     * <a data-role="button" href="#foo?bar=baz">Link to FOO view with bar parameter set to baz</a>
+     * <a data-role="button" href="#foo?bar=baz">Link to FOO View with bar parameter set to baz</a>
      */
     var Application = kendo.Observable.extend(/** @lends kendo.mobile.Application.prototype */{
         /**
