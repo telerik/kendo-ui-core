@@ -27,6 +27,10 @@ html
     font:75% arial,helvetica,sans-serif;
 }
 
+p code {
+    color: #06C;
+}
+
 #examplesThemeChooser .k-arrow-down,
 #navWrap .k-sprite,
 #codeStrip .k-link,
