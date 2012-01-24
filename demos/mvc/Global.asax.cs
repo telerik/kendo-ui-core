@@ -17,6 +17,12 @@ namespace Kendo
             var suiteConstraint = new { suite = "(web|dataviz|mobile)" };
 
             routes.MapRoute(
+                "Sushi",
+                "sushi",
+                new { controller = "Integration", action = "Sushi" }
+            );
+
+            routes.MapRoute(
                 "MobileDeviceIndex",
                 "mobile/m/index.html",
                 new { controller = "MobileDevice", action = "Index" }

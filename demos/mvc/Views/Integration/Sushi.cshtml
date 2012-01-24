@@ -1,0 +1,239 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo Sushi</title>
+
+    @foreach (string styleName in Kendo.Models.StyleGroups.Mobile) {
+        <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    }
+    @if (ViewBag.Debug) {
+        <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    }
+    @foreach (string scriptName in Kendo.Models.ScriptGroups.Mobile) {
+        <script src="@Url.Script(scriptName)"></script>
+    }
+    <link rel="stylesheet" href="@Url.Content("~/content/integration/sushi/css/style.css")" />
+</head>
+<body>
+    <div data-role="layout" data-id="default">
+        <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a class="about-button" data-align="right" href="@Url.Content("~/content/integration/sushi/about.html")" data-role="button">About</a>
+        </div>
+        </header>
+
+        <footer data-role="footer" data-id="default">
+        <div data-role="tabstrip">
+            <a href="#index" data-icon="home">Home</a>
+            <a href="#menu" data-icon="organize">Our menu</a>
+            <a href="#cart" data-icon="cart">Cart</a>
+            <a href="#account" data-icon="contacts">Account</a>
+        </div>
+        </footer>
+    </div>
+
+    <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default">
+        <div data-role="content">
+            <ul id="featured" class="item-list"></ul>
+        </div>
+    </div>
+
+    <div data-role="view" id="menu" data-layout="default" data-title="Menu">
+        <div data-role="content">
+            <ul id="menuList" class="item-list"></ul>
+        </div>
+    </div>
+
+    <div data-role="view" id="cart" data-layout="default" data-title="Cart">
+        <div data-role="content">
+            <h2 id="total"></h2>
+            <img src="@Url.Content("~/content/integration/sushi/images/sad.png")" id="empty-icon">
+            <a id="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
+            <ul id="cartList" class="item-list" data-style="inset"></ul>
+        </div>
+    </div>
+
+    <div data-role="view" id="account" data-layout="default" data-title="My Account">
+        <div data-role="content">
+            <ul data-role="listview" data-style="inset" data-type="group">
+                <li>
+                    Account
+                    <ul>
+                        <li>Username<span class="list-item-data">kendoSushi</span></li>
+                        <li>Email<span class="list-item-data">sushi@kendoui.com</span></li>
+                    </ul>
+                </li>
+                <li>
+                    Notifications
+                    <ul>
+                        <li>New products<input type="checkbox" data-role="switch" /></li>
+                        <li>Exclusive promos<input type="checkbox" data-role="switch" checked="checked" /></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="view" id="done" data-transition="zoom">
+        <header data-role="header"> <div data-role="navbar"> <span data-role="view-title">Done!</span> </div>
+        </header>
+        <div data-role="content" class="km-insetcontent">
+            <img src="@Url.Content("~/content/integration/sushi/images/happy.png")" id="done-icon">
+            <h2>Thanks for shopping!</h2>
+            <h3>Your sushi is on the way.</h3>
+            <a id="done-button" href="#cart" data-role="button">Done</a>
+        </div>
+    </div>
+
+    <div data-role="view" id="details" data-transition="slide" data-layout="default">
+        <header data-role="header">
+        <div data-role="navbar">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-role="view-title">Item</span>
+        </div>
+        </header>
+
+        <div data-role="content">
+        </div>
+    </div>
+
+    <script id="menuTemplate" type="text/x-kendo-template">
+        <a data-role="button" data-name="add" href="\\#">${kendo.toString(price, "c")}</a>
+        <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
+            <img src="@Url.Content("~/content/integration/sushi/images/75/${image}")" />
+            <h2>${name}</h2>
+            <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added to cart</span>
+        </a>
+    </script>
+
+    <script id="cartItemTemplate" type="text/x-kendo-template">
+        <a class="red-button" data-role="button" data-name="remove" href="\\#">&nbsp;&\\#x2716;&nbsp;</a>
+        <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
+            <img src="@Url.Content("~/content/integration/sushi/images/75/${image}")" />
+            <h2>${name}</h2>
+            <span class="price">${kendo.toString(price, "c")}</span>
+        </a>
+    </script>
+
+    <script id="detailTemplate" type="text/x-kendo-template">
+        <aside>
+        <img src="@Url.Content("~/content/integration/sushi/images/200/${image}")" />
+        <span class="price">${kendo.toString(price, "c")}</span>
+        <a data-role="button" href="\\#" id="add-to-cart">Order</a>
+        </aside>
+        <h2>${name}</h2>
+        <p>${description}</p>
+        <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added to cart</span>
+    </script>
+
+    <script>
+        var schema = { model: {uid: "uid"} };
+
+        var ds = kendo.data.DataSource.create({
+            schema: schema,
+            transport: { read: { url: "@Url.Content("~/content/integration/sushi/menu.js")", dataType: "json" } },
+            group: "category",
+            error: function() { console.log(arguments); }
+        });
+
+        var cartDataSource = kendo.data.DataSource.create({schema: schema, aggregate: [{ field: "price", aggregate: "sum" }]});
+
+        cartDataSource.bind("change", function() {
+            var emptyCart = cartDataSource.aggregates().price === undefined;
+
+            if (emptyCart) {
+                $("#total").html(kendo.toString(0, "c"));
+                } else {
+                $("#total").html(kendo.toString(cartDataSource.aggregates().price.sum, "c"));
+            }
+
+            $("#cart .km-content").toggleClass("km-empty", emptyCart);
+        });
+
+        var featured = kendo.data.DataSource.create({ schema: schema, filter: { field: "featured", operator: "eq", value: true } });
+
+        ds.bind("change", function() {
+            featured.data(ds.data());
+        });
+
+        ds.fetch();
+
+        var itemDetailsTemplate = kendo.template($("#detailTemplate").text());
+
+        function addToCartFromList(e) {
+            if (e.buttonName === "add") {
+                cartDataSource.add(e.dataItem);
+                e.button.element.parent().find(".added").show();
+                e.preventDefault();
+            }
+        }
+
+        function removeItemFromList(e) {
+            if (e.buttonName === "remove") {
+                cartDataSource.remove(e.dataItem);
+                $(".km-scroll-container:visible").css(kendo.support.transitions.css + "transform", "none");
+                e.preventDefault();
+            }
+        }
+
+        var app = new kendo.mobile.Application($(document.body), {
+            transition: "slide",
+
+            viewInit: function(e) {
+                var id = e.view.element.attr("id");
+
+                if (id === "index") {
+                    $("#featured")
+                    .kendoMobileListView({
+                        dataSource: featured,
+                        click: addToCartFromList,
+                        template: $("#menuTemplate").text()
+                    });
+                    } else if (id === "menu") {
+                    $("#menuList")
+                    .kendoMobileListView({
+                        dataSource: ds,
+                        click: addToCartFromList,
+                        template: $("#menuTemplate").text()
+                    });
+                    } else if (id === "cart") {
+                    $("#cartList").kendoMobileListView({
+                        dataSource: cartDataSource,
+                        click: removeItemFromList,
+                        template: $("#cartItemTemplate").text()
+                    });
+
+                    $("#checkout").data("kendoMobileButton").bind("click", function() {
+                        setTimeout(function () { cartDataSource.data([]) }, 400);
+                    });
+                }
+            },
+
+            viewShow: function(e) {
+                var view = e.view, viewID = view.element.attr("id"), item;
+
+                if (viewID === "details") {
+                    ds.fetch(function() {
+                        item = ds.get(e.params.id);
+                        view.content.data("kendoMobileScroller").scrollElement.html(itemDetailsTemplate(item));
+                        kendo.mobile.enhance(view.content);
+
+                        view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
+                            e.preventDefault();
+                            cartDataSource.add(item);
+                            view.content.find(".added").show();
+                        });
+                    });
+                    } else if (viewID === "index" || viewID === "menu") {
+                    view.content.find(".item-list").data("kendoMobileListView")._refresh();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
