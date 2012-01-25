@@ -15,11 +15,11 @@
      * </p>
      * <h3>Getting Started</h3>
      *
-     * @exampleTitle Creating a TimePicker from existing INPUT element
+     * @exampleTitle Creating a TimePicker from existing input element
      * @example
      * <input id="timePicker" />
      *
-     * @exampleTitle TimePicker initialization
+     * @exampleTitle Initialize the PanelBar via an ID selector
      * @example
      * $(document).ready(function(){
      *     $("#timePicker").kendoTimePicker();

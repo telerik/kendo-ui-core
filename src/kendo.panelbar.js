@@ -9,28 +9,35 @@
      *
      * @section
      * <p>
-     *  The <strong>PanelBar</strong> displays hierarchical data as a multi-level, expandable widget that's useful for constained
-     *  areas of a page. Its structure may be defined in HTML or configured dynamically through its API. The content
-     *  for items can also be loaded via AJAX by specifying a content URL.
+     *  The <strong>PanelBar</strong> displays hierarchical data as a multi-level, expandable widget that is useful for
+     *  constained areas of a page. Its structure may be defined in HTML or configured dynamically through its API. The
+     *  content for items can also be loaded via AJAX by specifying a content URL.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>A <strong>PanelBar</strong> will utilize an HTML list to define its structure and content.</p>
+     * <p>
+     *  A <strong>PanelBar</strong> can be created by targeting the root element of a HTML list. A
+     *  <strong>PanelBar</strong> will utilize this list to define its structure and content.
+     * </p>
      *
      * @exampleTitle Create a list of items
      * @example
      * <ul id="panelBar">
-     *  <li>
-     *   Item 1
-     *   <ul>
-     *    <li>Sub Item 1</li>
-     *    <li>Sub Item 2</li>
-     *   </ul>
-     *  <li>
-     *  <li>Item 2</li>
+     *     <li>
+     *         Item 1
+     *             <ul>
+     *                 <li>Sub Item 1</li>
+     *                 <li>Sub Item 2</li>
+     *             </ul>
+     *     <li>
+     *     <li>Item 2</li>
      * </ul>
      *
      * @section
-     * <p>A <strong>PanelBar</strong> can be created by targeting the root element of a HTML list.</p>
+     * <p></p>
+     * <p>
+     *  Initialization of a <strong>PanelBar</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>PanelBar</strong> occur within a handler is provided to $(document).ready().
+     * </p>
      *
      * @exampleTitle Initialize the PanelBar via an ID selector
      * @example
