@@ -1,10 +1,8 @@
 (function($) {
 
     // Imports ================================================================
-    var doc = document,
-        kendo = window.kendo,
+    var kendo = window.kendo,
         Class = kendo.Class,
-        Widget = kendo.ui.Widget,
         map = $.map,
         extend = $.extend;
 
@@ -23,7 +21,6 @@ var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,isindex,link,m
     inlineElements = 'span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var'.split(','),
     inline = makeMap(inlineElements),
     fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected'.split(','));
-
 
 var normalize = function (node) {
     if (node.nodeType == 1)
