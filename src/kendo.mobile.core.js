@@ -4,6 +4,7 @@
         support = kendo.support,
         extend = $.extend,
         proxy = $.proxy,
+        Class = kendo.Class,
         Observable = kendo.Observable,
         mobile;
 
@@ -46,7 +47,7 @@
     });
 
     // Mobile Swipe
-    var SwipeAxis = kendo.Class.extend({
+    var SwipeAxis = Class.extend({
         init: function(horizontal) {
             var that = this;
 
@@ -230,7 +231,7 @@
 
     var TRANSFORM_STYLE = kendo.support.transitions.prefix + "Transform";
 
-    var Move = kendo.Class.extend({
+    var Move = Class.extend({
         init: function(element) {
             var that = this;
             that.element = $(element);
@@ -318,7 +319,7 @@
         }
     }
 
-    var Draggable = kendo.Class.extend({
+    var Draggable = Class.extend({
         init: function(options) {
             var that = this;
 
@@ -351,6 +352,77 @@
 
         _apply: function() {
             this.move.moveBy(this.deltax, this.deltay);
+        }
+    });
+
+
+    var TICK_INTERVAL = 10;
+
+    var Transition = Class.extend({
+        init: function(move, callback) {
+            var that = this;
+            that.move = move;
+            that.timer = 0;
+            that.tickProxy = proxy(that._tick, that);
+            that.callback = callback;
+        },
+
+        stop: function() {
+            clearInterval(this.intervalID);
+            this.timer = 0;
+        },
+
+        moveTo: function(options) {
+            var that = this,
+                move = that.move;
+
+            that.initialX = move.x;
+            that.initialY = move.y;
+
+            that.deltaX = options.x - that.initialX;
+            that.deltaY = options.y - that.initialY;
+
+            that.duration = options.duration || 300;
+
+            that.ease = that._easeProxy(options.ease || Ease.easeOutQuad);
+
+            that._start();
+        },
+
+        _easeProxy: function(ease) {
+            var that = this;
+            return function() {
+                that.move.moveTo(
+                    ease(that.timer, that.initialX, that.deltaX, that.duration),
+                    ease(that.timer, that.initialY, that.deltaY, that.duration)
+                );
+            }
+        },
+
+        _start: function() {
+            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
+        },
+
+        _tick: function() {
+            var that = this;
+            that.timer += TICK_INTERVAL;
+            that.ease();
+
+            if (that.timer === that.duration) {
+                that.stop();
+                that.callback();
+            }
+        }
+    });
+
+    extend(Transition, {
+        easeOutExpo: function (t, b, c, d) {
+            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
+        },
+
+        easeOutBack: function (t, b, c, d, s) {
+            if (s == undefined) s = 1.70158;
+            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
         }
     });
 
@@ -389,6 +461,7 @@
         Swipe: Swipe,
         Move: Move,
         ContainerBoundary: ContainerBoundary,
+        Transition: Transition,
         Draggable: Draggable
     });
 })(jQuery);
