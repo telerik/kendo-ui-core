@@ -236,6 +236,7 @@
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Application layout.
+         * @option {Boolean} [hideAddressBar] <true> Whether to hide the browser address bar.
          * _example
          * <div data-role="view">Bar</div>
          *
@@ -255,8 +256,8 @@
         init: function(element, options) {
             var that = this;
 
-            that.options = options || {};
             that.layouts = {};
+            that.options = $.extend({ hideAddressBar: true }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 
@@ -455,16 +456,12 @@
         _attachHideBarHandlers: function() {
             var that = this;
 
-            that._lastOrientation = -1;
-            that._initialHeight = {};
-
-            if (os.appMode) {
+            if (os.appMode || !that.options.hideAddressBar) {
                 return;
             }
 
-            if (os.android) {
-                WINDOW.scroll(proxy(that._windowScroll, that));
-            }
+            that._initialHeight = {};
+            that._lastOrientation = -1;
 
             if (HIDEBAR) {
                 WINDOW.bind("load " + ORIENTATIONEVENT, proxy(that._hideBar, that));
@@ -495,10 +492,6 @@
                 element.height(newHeight);
                 setTimeout(scrollTo, 0, 0, 1);
             }
-        },
-
-        _windowScroll: function() {
-            this.element.height(window.innerHeight);
         },
 
         dataOrDefault: function(element, option) {
