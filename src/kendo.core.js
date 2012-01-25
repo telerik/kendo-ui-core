@@ -7,6 +7,7 @@
         extend = $.extend,
         each = $.each,
         proxy = $.proxy,
+        isArray = $.isArray,
         noop = $.noop,
         isFunction = $.isFunction,
         math = Math,
@@ -58,14 +59,23 @@
             this._events = {};
         },
 
-        bind: function(eventName, handlers, one) {
+        bind: function(index, eventNames, handlers, one) {
             var that = this,
                 idx,
-                eventNames = $.isArray(eventName) ? eventName : [eventName],
                 length,
-                handler,
+                eventName,
                 original,
+                handler,
                 events;
+
+            if (typeof index !== NUMBER) {
+                one = handlers;
+                handlers = eventNames;
+                eventNames = index;
+                index = -1;
+            }
+
+            eventNames = typeof eventNames === STRING ? [eventNames] : eventNames;
 
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
                 eventName = eventNames[idx];
@@ -80,17 +90,20 @@
                             original.apply(that, arguments);
                         }
                     }
-                    events = that._events[eventName] || [];
-                    events.push(handler);
-                    that._events[eventName] = events;
+                    events = that._events[eventName] = that._events[eventName] || [];
+                    if (index >= 0) {
+                        events.splice(index, 0, handler);
+                    } else {
+                        events.push(handler);
+                    }
                 }
             }
 
             return that;
         },
 
-        one: function(eventName, handlers) {
-            return this.bind(eventName, handlers, true);
+        one: function(eventNames, handlers) {
+            return this.bind(eventNames, handlers, true);
         },
 
         trigger: function(eventName, parameter) {
@@ -1418,7 +1431,7 @@
             idx = 0;
         }
 
-        formats = $.isArray(formats) ? formats: [formats];
+        formats = isArray(formats) ? formats: [formats];
         length = formats.length;
 
         for (; idx < length; idx++) {
@@ -2135,14 +2148,12 @@
                 that.element.attr(kendo.attr("role"), (that.options.name || "").toLowerCase());
             }
 
-            /*
-            kendo.notify(that);
-            */
+            that.element.data("kendo" + that.options.name, that);
         }
     });
 
     kendo.notify = noop;
-    kendo.widgetBinders = {};
+    kendo.binders = {};
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
