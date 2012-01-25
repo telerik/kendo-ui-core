@@ -140,8 +140,9 @@ function buildDocs(sitefinity_path) {
         sections = ["description", "configuration", "methods", "events"];
 
     function combine() {
-        var files = fs.readdirSync(DOCS_DEPLOY_PATH),
+        var files = fs.readdirSync(outputPath),
             filesToMerge;
+
         for (var key in mappings) {
             var mapping = mappings[key];
             filesToMerge = [];
@@ -160,7 +161,7 @@ function buildDocs(sitefinity_path) {
                 kendoBuild.grep(filesToMerge, function(fileName) {
                     return fileName.indexOf(sectionName) > -1;
                 }).forEach(function(fileToMerge) {
-                    var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
+                    var text = kendoBuild.readText(outputPath + "/" + fileToMerge);
 
                     if (sectionName != "description" && hasValue(text)) {
                         text = wrap(text, fileToMerge);
@@ -169,7 +170,7 @@ function buildDocs(sitefinity_path) {
                 });
 
                 if (hasValue(cache)) {
-                    kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
+                    kendoBuild.writeText(path.join(outputPath, "kendo." + key + "." + sectionName + ".html"), cache);
                 }
             });
         }
@@ -187,17 +188,7 @@ function buildDocs(sitefinity_path) {
     }
 
     // output directory
-    var outputPath ="demos/mvc/content/docs";
-
-    var params = [
-        "-d=",
-        // template
-        "-t=build/node-jsdoc-toolkit/template",
-        // constants
-        "-D=\"copyright:" + new Date().getFullYear() + "\"",
-        "-D=\"title:Kendo UI Documentation\""
-    ];
-
+    var outputPath = DOCS_DEPLOY_PATH;
 
     sitefinity = false; //create global variable
     if (sitefinity_path) {
@@ -205,7 +196,14 @@ function buildDocs(sitefinity_path) {
         sitefinity = true;
     }
 
-    params[0] = params[0] + outputPath;
+    var params = [
+        "-d=" + outputPath,
+        // template
+        "-t=build/node-jsdoc-toolkit/template",
+        // constants
+        "-D=\"copyright:" + new Date().getFullYear() + "\"",
+        "-D=\"title:Kendo UI Documentation\""
+    ];
 
     kendoBuild.rmdirSyncRecursive(outputPath);
 
