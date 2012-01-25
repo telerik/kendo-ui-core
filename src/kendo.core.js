@@ -7,6 +7,7 @@
         extend = $.extend,
         each = $.each,
         proxy = $.proxy,
+        isArray = $.isArray,
         noop = $.noop,
         isFunction = $.isFunction,
         math = Math,
@@ -58,14 +59,22 @@
             this._events = {};
         },
 
-        bind: function(eventName, handlers, one) {
+        bind: function(index, eventNames, handlers, one) {
             var that = this,
                 idx,
-                eventNames = $.isArray(eventName) ? eventName : [eventName],
                 length,
-                handler,
+                eventName,
                 original,
                 events;
+
+            if (typeof index !== NUMBER) {
+                one = handlers;
+                handlers = eventNames;
+                eventNames = index;
+                index = -1;
+            }
+
+            eventNames = typeof eventNames === STRING ? [eventNames] : eventNames;
 
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
                 eventName = eventNames[idx];
@@ -80,17 +89,20 @@
                             original.apply(that, arguments);
                         }
                     }
-                    events = that._events[eventName] || [];
-                    events.push(handler);
-                    that._events[eventName] = events;
+                    events = that._events[eventName] = that._events[eventName] || [];
+                    events.splice(index, 0, handler);
                 }
             }
 
             return that;
         },
 
-        one: function(eventName, handlers) {
-            return this.bind(eventName, handlers, true);
+        one: function(index, eventNames, handlers) {
+            if (typeof index !== NUMBER) {
+                handlers = eventNames;
+                eventNames = index;
+            }
+            return this.bind(-1, eventNames, handlers, true);
         },
 
         trigger: function(eventName, parameter) {
@@ -1418,7 +1430,7 @@
             idx = 0;
         }
 
-        formats = $.isArray(formats) ? formats: [formats];
+        formats = isArray(formats) ? formats: [formats];
         length = formats.length;
 
         for (; idx < length; idx++) {
