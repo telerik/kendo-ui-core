@@ -4,10 +4,12 @@
         ui = mobile.ui,
         Widget = ui.Widget,
         support = kendo.support,
+        os = support.mobileOS,
         touch = support.touch,
         os = support.mobileOS,
         MOUSECANCEL = support.mousecancel,
         MOUSEDOWN = support.mousedown,
+        MOUSEMOVE = support.mousemove,
         MOUSEUP = support.mouseup,
         CLICK = "click",
         proxy = $.proxy;
@@ -117,7 +119,11 @@
         * var button = $("#button").kendoMobileButton({ icon: "stop" });
         */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                removeActiveID = 0,
+                removeActive = function (e) {
+                    $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
+                };
 
             Widget.fn.init.call(that, element, options);
 
@@ -128,8 +134,24 @@
 
             that.element.bind(MOUSEUP, that._releaseProxy);
 
+            if (os.android && os.flatVersion >= 300) {
+                that.element.bind(MOUSEMOVE, function (e) {
+                    if (!removeActiveID) {
+                        removeActiveID = setTimeout(function () {
+                            removeActive(e);
+                            removeActiveID = 0;
+                        }, 500);
+                    }
+                });
+            }
+
             that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, function (e) {
-                $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
+                removeActive(e);
+
+                if (os.android && e.type == MOUSEUP && os.flatVersion >= 300) {
+                    clearTimeout(removeActiveID);
+                    removeActiveID = 0;
+                }
             });
         },
 
