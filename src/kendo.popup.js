@@ -22,6 +22,7 @@
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
+        SCROLLER = "kendoMobileScroller",
         cssPrefix = kendo.support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
@@ -44,6 +45,7 @@
 
             Widget.fn.init.call(that, element, options);
 
+            element = that.element;
             options = that.options;
 
             that.collisions = that.options.collision.split(" ");
@@ -98,7 +100,7 @@
                             .removeClass(ACTIVE)
                             .removeClass(dirClass);
 
-                        that.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
+                        element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
                     }
 
                     that._closing = false;
@@ -109,12 +111,14 @@
 
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
-            if (!touch) { //  On mobile device this closes the popup if keyboard is shown :)
+            if (!touch) { //  On mobile device this closes the popup if keyboard is shown
                 $(window).bind("resize scroll", function() {
                     if (!that._hovered) {
                         that.close();
                     }
                 });
+            } else if (SCROLLER in element) {
+                element[SCROLLER]();
             }
 
             if (options.toggleTarget) {
