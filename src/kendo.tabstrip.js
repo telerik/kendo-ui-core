@@ -461,6 +461,9 @@
          * @example
          * tabStrip.select("#tab1");
          *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          */
         select: function (element) {
             var that = this;
@@ -492,6 +495,9 @@
          * Desired state of the tab(s) specified by the selector; enabled (<strong>true</strong>) or disabled
          * (<strong>false</strong>).
          *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          */
         enable: function (element, state) {
             this._toggleDisabled(element, state !== false);
@@ -506,6 +512,9 @@
          * @param {Selector} element
          * The target tab(s), specified as a selector, to be disabled.
          *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          */
         disable: function (element) {
             this._toggleDisabled(element, false);
@@ -519,6 +528,9 @@
          *
          * @param {Selector} element
          * The target tab(s), specified as a selector, to be reloaded via AJAX.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
          *
          */
         reload: function (element) {
@@ -537,8 +549,16 @@
         },
 
         /**
-         * Appends a TabStrip item to the end of the tab list.
-         * @param {Selector} tab Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
+         *
+         * Appends a tab to the collection of tabs in a <strong>TabStrip</strong>.
+         *
+         * @param {Selector} tab
+         * Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an
+         * HTML string or array of such strings or JSON.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          * @example
          * tabStrip.append(
          *     [{
@@ -562,6 +582,7 @@
          *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }]
          * );
+         *
          */
         append: function (tab) {
             var that = this,
@@ -579,9 +600,19 @@
         },
 
         /**
-         * Inserts a TabStrip item before the specified referenceItem
-         * @param {Selector} item Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
-         * @param {Item} referenceTab A reference tab to insert the new item before
+         *
+         * Inserts a newly-created tab before a specified tab.
+         *
+         * @param {Selector} item
+         * Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an
+         * HTML string or array of such strings or JSON.
+         *
+         * @param {Item} referenceTab
+         * A reference tab to insert the new item before
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          * @example
          * tabStrip.insertBefore(
          *     [{
@@ -624,9 +655,19 @@
         },
 
         /**
-         * Inserts a TabStrip tab after the specified referenceTab
-         * @param {Selector} item Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
-         * @param {Item} referenceTab A reference tab to insert the new item after
+         *
+         * Inserts a newly-created tab after a specified tab.
+         *
+         * @param {Selector} item
+         * Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an
+         * HTML string or array of such strings or JSON.
+         *
+         * @param {Item} referenceTab
+         * A reference tab to insert the new item after.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          * @example
          * tabStrip.insertAfter(
          *     [{
@@ -651,6 +692,7 @@
          *     }],
          *     referenceItem
          * );
+         *
          */
         insertAfter: function (tab, referenceTab) {
             var that = this,
@@ -670,11 +712,15 @@
 
         /**
          *
-         * Removes the specified TabStrip item/s
+         * Removes a specified tab from a TabStrip.
          *
          * @param {Selector} element
          * The target tab(s), specified as a selector, to be removed.
          *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
+         * @exampleTitle Remove a tab with ID, tab1 from a TabStrip
          * @example
          * tabStrip.remove("#tab1");
          *
@@ -883,6 +929,10 @@
          * @param {Selector} item
          * The target tab, specified as a selector, to be activated.
          *
+         * @returns {Boolean}
+         * Returns <strong>true</strong> if successful; otherwise, <strong>false</strong>.
+         *
+         * @exampleTitle Activate a tab with ID, tab1 in a TabStrip
          * @example
          * var tabToActivate = $("#tab1");
          * $("#tabStrip").data("kendoTabStrip").activateTab(tabToActivate);
@@ -975,10 +1025,17 @@
 
         /**
          *
-         * Returns the DOM element representing a tab by its index in the <strong>TabStrip</strong>.
+         * Obtains the DOM element representing a tab by its index in the <strong>TabStrip</strong>.
          *
          * @param {int} itemIndex
          * The index of the tab in the TabStrip.
+         *
+         * @returns {HTMLElement}
+         * The DOM element representing a tab by its index in the <strong>TabStrip</strong>.
+         *
+         * @exampleTitle Obtain the DOM element representing the first tab in a TabStrip
+         * @example
+         * var tabContent = $("#tabStrip").data("kendoTabStrip").contentElement(0);
          *
          */
         contentElement: function (itemIndex) {
