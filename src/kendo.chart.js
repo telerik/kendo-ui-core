@@ -4351,17 +4351,6 @@
             plotArea.appendChart(areaChart);
         },
 
-        alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
-            var slot = axis.getSlot(crossingValue, crossingValue),
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
-                isVertical = axis.options.orientation === VERTICAL;
-
-            axis.reflow(isVertical ?
-                axis.box.translate(targetSlot.x1 - slot.x1, slot.y1 - targetSlot.y1) :
-                axis.box.translate(slot.x1 - targetSlot.x1, targetSlot.y1 - slot.y1)
-            );
-        },
-
         createAxes: function() {
             var plotArea = this,
                 options = plotArea.options,
@@ -4436,15 +4425,12 @@
                 axisCrossings,
                 i;
 
-            plotArea.alignAxisTo(yAnchor, xAnchor, yAnchorCrossings[0], xAnchorCrossings[0]);
-            plotArea.alignAxisTo(xAnchor, yAnchor, xAnchorCrossings[0], yAnchorCrossings[0]);
-
-            for (i = 1; i < yAxes.length; i++) {
+            for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
             }
 
-            for (i = 1; i < xAxes.length; i++) {
+            for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
             }
