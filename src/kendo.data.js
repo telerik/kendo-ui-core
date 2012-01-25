@@ -212,7 +212,9 @@
                     member = new type(member);
 
                     member.bind(CHANGE, function(e) {
-                        that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
+                        if (!e.isPropagationStopped()) {
+                            that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
+                        }
                     });
                 }
 
@@ -357,7 +359,7 @@
         },
 
         set: function(field, value, initiator) {
-            var current = this[field];
+            var current = this[field], stopped = false;
 
             if (current != value) {
                 if (!this.trigger("set", { field: field, value: value })) {
@@ -365,7 +367,13 @@
 
                     this.trigger(CHANGE, {
                         field: field,
-                        initiator: initiator
+                        initiator: initiator,
+                        stopPropagation: function() {
+                            stopped = true;
+                        },
+                        isPropagationStopped: function() {
+                            return stopped;
+                        }
                     });
                 }
             }

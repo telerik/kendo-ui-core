@@ -106,6 +106,44 @@
                 equal(dom.data("kendoDropDownList").value(), "bar");
             });
 
+            test("binding template", function() {
+                var dom = $('<select data-role="dropdownlist" data-template="template" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).html()), "<strong>foo</strong>");
+            });
+
+            test("binding template containing binding attributes", function() {
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).html()), '<strong data-text="text">foo</strong>');
+            });
+
+            test("updating an item from the data source updates the corresponding dropdownlist item", function() {
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                observable.items[0].set("text", "baz");
+
+                equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).text()), "baz");
+            });
+        </script>
+
+        <script id="template" type="text/x-kendo-template">
+            <strong>#:text#</strong>
+        </script>
+        <script id="template-with-attributes" type="text/x-kendo-template">
+            <strong data-text="text"></strong>
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
