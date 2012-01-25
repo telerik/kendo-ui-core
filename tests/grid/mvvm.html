@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a grid when data role is grid", function() {
+                var dom = $('<div data-role="grid"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoGrid") instanceof kendo.ui.Grid);
+            });
+
+            test("initalizes data source", function() {
+                var dom = $('<div data-role="grid" data-source="items" />');
+
+                kendo.bind(dom, { items: ["foo", "bar"] } );
+
+                equal(dom.data("kendoGrid").dataSource.view()[0], "foo");
+                equal(dom.data("kendoGrid").dataSource.view()[1], "bar");
+            });
+
+            test("binding grid initialized before binding", function() {
+                var dom = $('<div data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
+
+                dom.kendoGrid();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoGrid").dataSource.at(0).text, "foo");
+            });
+
+            test("binding grid initialized after binding", function() {
+                var dom = $('<div data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
+
+                kendo.bind(dom, observable);
+
+                dom.kendoGrid();
+
+                equal(dom.data("kendoGrid").dataSource.at(0).text, "foo");
+            });
+
+            test("binding template", function() {
+                var dom = $('<div data-role="grid" data-rowtemplate="template" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.data("kendoGrid").tbody.find("tr:first > td:first").html()), "<strong>foo</strong>");
+            });
+
+            test("binding template containing binding attributes", function() {
+                var dom = $('<div data-role="grid" data-rowtemplate="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.data("kendoGrid").tbody.find("tr:first > td:first").html()), '<strong data-text="text">foo</strong>');
+            });
+
+            test("updating an item from the data source updates the corresponding grid item", function() {
+                var dom = $('<div data-role="grid" data-rowtemplate="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+
+                observable.items[0].set("text", "baz");
+
+                equal($.trim(dom.data("kendoGrid").tbody.find("tr:first > td:first").text()), "baz");
+            });
+
+            test("clearing previous bindings the datasource is changed", function() {
+                var dom = $('<div data-role="grid" data-rowtemplate="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{ text:"foo"} ] });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoGrid").refresh();
+
+                equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
+            });
+        </script>
+
+        <script id="template" type="text/x-kendo-template">
+            <tr><td><strong>#:text#</strong></td></tr>
+        </script>
+        <script id="template-with-attributes" type="text/x-kendo-template">
+            <tr><td><strong data-text="text"></strong></td></tr>
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
