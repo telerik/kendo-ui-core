@@ -194,7 +194,9 @@
                 * @event
                 * @param {Event} e
                 */
-                CHANGE
+                CHANGE,
+                "dataBinding",
+                "dataBound"
             ], options);
 
             if (options.autoBind) {
@@ -311,6 +313,38 @@
         * // re-populate the data of the DataSource
         * dropdownlist.refresh();
         */
+        refresh: function() {
+            var that = this,
+                value = that.value(),
+                options = that.options,
+                data = that._data(),
+                length = data.length;
+
+            that.trigger("dataBinding");
+
+            that.ul[0].innerHTML = kendo.render(that.template, data);
+            that._height(length);
+
+            if (that.element.is(SELECT)) {
+                that._options(data);
+            }
+
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(options.index);
+            }
+
+            that._old = that.value();
+
+            if (that._open) {
+                that.toggle(length);
+            }
+
+            that._hideBusy();
+
+            that.trigger("dataBound");
+        },
 
         /**
         * Selects item, which starts with the provided parameter.
@@ -589,6 +623,7 @@
                 template,
                 container,
                 idx,
+                length,
                 dataSource,
                 widget;
 
@@ -618,6 +653,18 @@
                 template = $("#" + template).html();
                 if (template) {
                     options.template = template;
+
+                    options.dataBinding = function() {
+                        kendo.unbind(this.ul);
+                    };
+
+                    options.dataBound = function() {
+                        var idx, length, children = this.ul[0].children;
+
+                        for (idx = 0, length = children.length; idx < length; idx++) {
+                            kendo.bind(children[idx], options.dataSource[idx]);
+                        }
+                    };
                 }
             }
 
@@ -626,18 +673,11 @@
             if (!widget) {
                 widget = new DropDownList(element, options);
             } else {
-                widget.dataSource.data(options.dataSource);
-            }
-
-            if (template) {
-                container = widget.ul[0];
-                idx = 0;
-
-                for (container = container.firstChild; container; container = container.nextSibling) {
-                    if (container.nodeType === 1) {
-                        kendo.bind(container, options.dataSource[idx]);
-                    }
+                if (options.template) {
+                    widget.bind("dataBinding", options.dataBinding);
+                    widget.bind("dataBound", options.dataBound);
                 }
+                widget.dataSource.data(options.dataSource);
             }
 
             value = element.data(kendo.ns + "value");

@@ -137,6 +137,17 @@
 
                 equal($.trim(dom.data("kendoDropDownList").ul.children().eq(0).text()), "baz");
             });
+
+            test("clearing previous bindings the datasource is changed", function() {
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{ text:"foo"} ] });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoDropDownList").refresh();
+
+                equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">
