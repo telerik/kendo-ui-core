@@ -1,11 +1,21 @@
 (function($) {
 
-function ImageCommand(options) {
-    Command.call(this, options);
-    this.async = true;
-    var attributes;
+// Imports ================================================================
+var kendo = window.kendo,
+    Class = kendo.Class,
+    extend = $.extend;
 
-    function insertImage(img, range) {
+var ImageCommand = Command.extend({
+    init: function(options) {
+        var cmd = this;
+        Command.fn.init.call(cmd, options);
+
+        cmd.async = true;
+        cmd.attributes = null;
+    },
+
+    insertImage: function(img, range) {
+        var attributes = this.attributes;
         if (attributes.src && attributes.src != 'http://') {
             if (!img) {
                 img = dom.create(documentFromRange(range), 'img', attributes);
@@ -25,15 +35,15 @@ function ImageCommand(options) {
         }
 
         return false;
-    }
+    },
 
-    this.redo = function () {
+    redo: function () {
         var range = this.lockRange();
         if (!insertImage(RangeUtils.image(range), range))
             this.releaseRange(range);
-    }
+    },
 
-    this.exec = function () {
+    exec: function () {
         var range = this.lockRange();
 
         var applied = false;
@@ -43,7 +53,7 @@ function ImageCommand(options) {
         var self = this;
 
         function apply(e) {
-            attributes = {
+            self.attributes = {
                 src: $('#t-editor-image-url', dialog.element).val(),
                 alt: $('#t-editor-image-title', dialog.element).val()
             };
@@ -65,13 +75,13 @@ function ImageCommand(options) {
                 self.releaseRange(range);
         }
 
-        var fileBrowser = this.editor.fileBrowser;
-        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
-        
+//        var fileBrowser = this.editor.fileBrowser;
+//        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
+//        
         function activate() {  
-            if (showBrowser) {
-                new $t.imageBrowser($(this).find(".t-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.localization }));
-            }
+//            if (showBrowser) {
+//                new $t.imageBrowser($(this).find(".t-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.localization }));
+//            }
         }        
         
         var dialog = $t.window.create($.extend({ width: 750 }, this.editor.dialogOptions, {
@@ -102,7 +112,7 @@ function ImageCommand(options) {
             else if (e.keyCode == 27)
                 close(e);
         }).end()                
-        .toggleClass("t-imagebrowser", showBrowser)
+        //.toggleClass("t-imagebrowser", showBrowser)
         // IE < 8 returns absolute url if getAttribute is not used
         .find('#t-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
         .find('#t-editor-image-title').val(img ? img.alt : '').end()
@@ -111,6 +121,11 @@ function ImageCommand(options) {
 
         $('#t-editor-image-url', dialog.element).focus().select();
     }
-};
+
+});
+
+extend(kendo.ui.Editor, {
+    ImageCommand: ImageCommand
+});
 
 })(jQuery);

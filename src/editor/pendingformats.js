@@ -1,11 +1,17 @@
 (function($) {
 
-function PendingFormats(editor) {
-    this.editor = editor;
-    this.formats = [];
-}
+// Imports ================================================================
+var kendo = window.kendo,
+    Class = kendo.Class,
+    extend = $.extend,
+    dom = kendo.ui.Editor.Dom;
 
-PendingFormats.prototype = {
+var PendingFormats = Class.extend({
+    init: function(editor) {
+        this.editor = editor;
+        this.formats = [];
+    },
+
     apply: function(range) {
         if (!this.hasPending())
             return;
@@ -58,12 +64,15 @@ PendingFormats.prototype = {
 
         this.editor.selectRange(range);
     },
+
     hasPending: function() {
         return this.formats.length > 0;
     },
+
     isPending: function(format) {
         return !!this.getPending(format);
     },
+
     getPending: function(format) {
         var formats = this.formats;
         for (var i = 0; i < formats.length; i++)
@@ -72,6 +81,7 @@ PendingFormats.prototype = {
 
         return;
     },
+
     toggle: function(format) {
         var formats = this.formats;
 
@@ -87,9 +97,15 @@ PendingFormats.prototype = {
 
         formats.push(format);
     },
+
     clear: function() {
         this.formats = [];
     }
-};
+
+});
+
+extend(kendo.ui.Editor, {
+    PendingFormats: PendingFormats
+});
 
 })(jQuery);

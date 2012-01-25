@@ -1,5 +1,11 @@
 (function($) {
 
+// Imports ================================================================
+var kendo = window.kendo,
+    Class = kendo.Class,
+    extend = $.extend,
+    dom = kendo.ui.Editor.Dom;
+
 function indent(node, value) {
     var property = dom.name(node) != 'td' ? 'marginLeft' : 'paddingLeft';
     if (value === undefined) {
@@ -16,12 +22,13 @@ function indent(node, value) {
     }
 }
 
-function IndentFormatter() {
-    var finder = new BlockFormatFinder([{tags:blockElements}]);
-    
+var IndentFormatter = Class.extend({
+    init: function() {
+        this.finder = new BlockFormatFinder([{tags:blockElements}]);
+    },
 
-    this.apply = function (nodes) {
-        var formatNodes = finder.findSuitable(nodes);
+    apply: function (nodes) {
+        var formatNodes = this.finder.findSuitable(nodes);
         if (formatNodes.length) {
             var targets = [];
             for (var i = 0; i < formatNodes.length;i++)
@@ -74,10 +81,12 @@ function IndentFormatter() {
 
             formatter.apply(nodes);
         }
-    }
-    
-    this.remove = function(nodes) {
-        var formatNodes = finder.findSuitable(nodes), targetNode;
+    },
+
+    remove: function(nodes) {
+        var formatNodes = this.finder.findSuitable(nodes),
+            targetNode;
+
         for (var i = 0; i < formatNodes.length; i++) {
             var $formatNode = $(formatNodes[i]);
             
@@ -115,38 +124,44 @@ function IndentFormatter() {
             indent(targetNode, marginLeft);
         }
     }
-}
 
-function IndentCommand(options) {
-    options.formatter = {
-        toggle : function(range) {
-            new IndentFormatter().apply(RangeUtils.nodes(range));
-        }
-    };
-    Command.call(this, options);
-}
+});
 
-function OutdentCommand(options) {
-    options.formatter = {
-        toggle : function(range) {
-            new IndentFormatter().remove(RangeUtils.nodes(range));
-        }
-    };
-    
-    Command.call(this, options);
-}
+var IndentCommand = Command.extend({
+    init: function(options) {
+        options.formatter = {
+            toggle : function(range) {
+                new IndentFormatter().apply(RangeUtils.nodes(range));
+            }
+        };
+        Command.fn.init.call(this, options);
+    }
+});
 
-function OutdentTool() {
-    Tool.call(this, {command:OutdentCommand});
-    
-    var finder = new BlockFormatFinder([{tags:blockElements}]);  
+var OutdentCommand = Command.extend({
+    init: function(options) {
+        options.formatter = {
+            toggle : function(range) {
+                new IndentFormatter().remove(RangeUtils.nodes(range));
+            }
+        };
+        Command.fn.init.call(this, options);
+    }
+});
 
-    this.init = function($ui) {
+var OutdentTool = Tool.extend({
+    init: function() {
+        Tool.fn.init.call(this, {command:OutdentCommand});
+
+        this.finder = new BlockFormatFinder([{tags:blockElements}]);  
+    },
+
+    initialize: function($ui) {
         $ui.attr('unselectable', 'on')
            .addClass('t-state-disabled');
-    }
-    
-    this.update = function ($ui, nodes) {
+    },
+
+    update: function ($ui, nodes) {
         var suitable = finder.findSuitable(nodes),
             isOutdentable, listParentsCount;
 
@@ -167,6 +182,14 @@ function OutdentTool() {
     
         $ui.addClass('t-state-disabled').removeClass('t-state-hover');
     }
-};
+
+});
+
+extend(kendo.ui.Editor, {
+    IndentFormatter: IndentFormatter,
+    IndentCommand: IndentCommand,
+    OutdentCommand: OutdentCommand,
+    OutdentTool: OutdentTool
+});
 
 })(jQuery);
