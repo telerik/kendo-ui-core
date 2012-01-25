@@ -4,77 +4,8 @@
         proxy = $.proxy,
         Class = kendo.Class,
         roleSelector = kendo.roleSelector,
+        Transition = mobile.Transition,
         Widget = ui.Widget;
-
-    var TICK_INTERVAL = 10;
-
-    var Inertia = Class.extend({
-        init: function(move, callback) {
-            var that = this;
-            that.move = move;
-            that.timer = 0;
-            that.tickProxy = proxy(that.tick, that);
-            that.callback = callback;
-        },
-
-        animate: function() {
-            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
-        },
-
-        stop: function() {
-            clearInterval(this.intervalID);
-            this.timer = 0;
-        },
-
-        moveTo: function(options) {
-            var that = this,
-                move = that.move;
-
-            that.initialX = move.x;
-            that.initialY = move.y;
-
-            that.deltaX = options.x - that.initialX;
-            that.deltaY = options.y - that.initialY;
-
-            that.duration = options.duration || 300;
-
-            that.ease = that.easeProxy(options.ease || Ease.easeOutQuad);
-
-            that.animate();
-        },
-
-        easeProxy: function(ease) {
-            var that = this;
-            return function() {
-                that.move.moveTo(
-                    ease(that.timer, that.initialX, that.deltaX, that.duration),
-                    ease(that.timer, that.initialY, that.deltaY, that.duration)
-                );
-            }
-        },
-
-        tick: function() {
-            var that = this;
-            that.timer += TICK_INTERVAL;
-            that.ease();
-
-            if (that.timer === that.duration) {
-                that.stop();
-                this.callback();
-            }
-        }
-    });
-
-    var Ease = {
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
-        },
-
-        easeOutBack: function (t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-        }
-    }
 
     var CURRENT_PAGE_CLASS = "km-current-page";
 
@@ -126,14 +57,14 @@
 
             that.move = new mobile.Move(that.inner);
 
-            that.inertia = new Inertia(that.move, function() {
+            that.transition = new mobile.Transition(that.move, function() {
                 that.page = -that.move.x / that.boundary.x.size;
                 that._updatePage();
             });
 
             that.swipe = new mobile.Swipe(element, {
                 start: function() {
-                    that.inertia.stop();
+                    that.transition.stop();
                 },
                 end: $.proxy(that._swipeEnd, that)
             });
@@ -194,7 +125,7 @@
                 velocityThreshold = options.velocityThreshold,
                 snap,
                 approx = Math.round,
-                ease = Ease.easeOutExpo;
+                ease = Transition.easeOutExpo;
 
             if (velocity > velocityThreshold) {
                 approx = Math.ceil;
@@ -203,12 +134,12 @@
             }
 
             if (Math.abs(velocity) > options.bounceVelocityThreshold) {
-                ease = Ease.easeOutBack;
+                ease = Transition.easeOutBack;
             }
 
             snap = Math.max(that.minSnap, Math.min(approx(that.move.x / width) * width, that.maxSnap));
 
-            that.inertia.moveTo({ x: snap, y: 0, duration: options.duration, ease: ease });
+            that.transition.moveTo({ x: snap, y: 0, duration: options.duration, ease: ease });
         },
 
         _updatePage: function() {
