@@ -161,6 +161,18 @@
         }
     });
 
+    var EnableBinding = Binding.extend( {
+        bind: function() {
+            $(this.element).attr("disabled", this.value() !== true);
+        }
+    });
+
+    var DisableBinding = Binding.extend( {
+        bind: function() {
+            $(this.element).attr("disabled", this.value() === true);
+        }
+    });
+
     var CheckedBinding = Binding.extend( {
         init: function() {
             var that = this;
@@ -380,7 +392,9 @@
     var inputBindings = $.extend({}, commonBindings, {
         value: ValueBinding,
         change: EventBinding.extend({ event: "change" }),
-        checked: CheckedBinding
+        checked: CheckedBinding,
+        enabled: EnableBinding,
+        disabled: DisableBinding
     });
 
     var listBindings = $.extend({}, commonBindings, {
@@ -390,7 +404,9 @@
     var selectBindings = $.extend({}, commonBindings, {
         source: SourceBinding.extend({defaultTemplate: "<option>${data}</option>" }),
         value: SelectValueBinding,
-        change: EventBinding.extend({ event: "change" })
+        change: EventBinding.extend({ event: "change" }),
+        enabled: EnableBinding,
+        disabled: DisableBinding
     });
 
     var optionBindings = {

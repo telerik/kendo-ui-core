@@ -407,7 +407,6 @@
 
                 kendo.bind(dom, viewModel);
                 equal(dom.css("display"), "");
-
             });
 
             test("visible binding hides the element", function() {
@@ -423,6 +422,97 @@
 
                 equal(dom.css("display"), "none");
             });
+
+            test("enable binding enables the element", function() {
+                var dom = $('<input data-enabled="enable" disabled="disabled"/>');
+
+                var viewModel = kendo.observable({
+                    enable: true
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(!dom.is(":disabled"));
+            });
+
+            test("enable binding disables the element if value is false", function() {
+                var dom = $('<input data-enabled="enable"/>');
+
+                var viewModel = kendo.observable({
+                    enable: false
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":disabled"));
+            });
+
+            test("enable binding disables the element if value is changed to false", function() {
+                var dom = $('<input data-enabled="enable"/>');
+
+                var viewModel = kendo.observable({
+                    enable: true
+                });
+
+                kendo.bind(dom, viewModel);
+                viewModel.set("enable", false);
+                ok(dom.is(":disabled"));
+            });
+
+            test("enable binding enables the select element", function() {
+                var dom = $('<select data-enabled="enable" disabled="disabled"/>');
+
+                var viewModel = kendo.observable({
+                    enable: true
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(!dom.is(":disabled"));
+            });
+
+            test("disable binding disables the element", function() {
+                var dom = $('<input data-disabled="disabled"/>');
+
+                var viewModel = kendo.observable({
+                    disabled: true
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":disabled"));
+            });
+
+            test("disable binding enables the element if value is false", function() {
+                var dom = $('<input data-disabled="disabled" disabled="disabled"/>');
+
+                var viewModel = kendo.observable({
+                    disabled: false
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(!dom.is(":disabled"));
+            });
+
+            test("disable binding disables the element if value is changed to true", function() {
+                var dom = $('<input data-disabled="disabled"/>');
+
+                var viewModel = kendo.observable({
+                    disabled: false
+                });
+
+                kendo.bind(dom, viewModel);
+                viewModel.set("disabled", true);
+                ok(dom.is(":disabled"));
+            });
+
+            test("disable binding disables the select element", function() {
+                var dom = $('<select data-disabled="disabled"/>');
+
+                var viewModel = kendo.observable({
+                    disabled: true
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":disabled"));
+            });
+
 
             test("binding to getter", function() {
                 var dom = $('<div data-template="get-template"/>');
