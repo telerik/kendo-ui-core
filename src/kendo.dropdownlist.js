@@ -194,7 +194,9 @@
                 * @event
                 * @param {Event} e
                 */
-                CHANGE
+                CHANGE,
+                "dataBinding",
+                "dataBound"
             ], options);
 
             if (options.autoBind) {
@@ -202,6 +204,8 @@
             } else if (element.is(SELECT)) {
                 that.text(element.children(":selected").text());
             }
+
+            kendo.notify(that);
         },
 
         options: {
@@ -359,6 +363,10 @@
                 text,
                 idx;
 
+            if (li === undefined) {
+                return current ? current.index() : -1;
+            }
+
             li = that._get(li);
 
             if (li && li[0] && !li.hasClass(SELECTED)) {
@@ -496,6 +504,8 @@
                 data = that._data(),
                 length = data.length;
 
+            that.trigger("dataBinding");
+
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
 
@@ -516,6 +526,8 @@
             }
 
             that._hideBusy();
+
+            that.trigger("dataBound");
         },
 
         _search: function() {
@@ -574,6 +586,81 @@
                               .addClass(DOMelement.className);
         }
     });
+
+    kendo.binders.dropdownlist = {
+        bind: function(element, observable, reason) {
+            var options = {},
+                option,
+                value,
+                template,
+                container,
+                idx,
+                length,
+                dataSource,
+                widget;
+
+            element = $(element);
+
+            for (option in DropDownList.fn.options) {
+                value = element.data(kendo.ns + option.toLowerCase());
+
+                if (value === undefined) {
+                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                }
+
+                if (value !== undefined) {
+                    options[option] = value;
+                }
+            }
+
+            dataSource = element.data(kendo.ns + "source");
+
+            if (dataSource) {
+                options.dataSource = observable.get(dataSource);
+            }
+
+            template = element.data(kendo.ns + "template");
+
+            if (template) {
+                template = $("#" + template).html();
+                if (template) {
+                    options.template = template;
+
+                    options.dataBinding = function() {
+                        kendo.unbind(this.ul);
+                    };
+
+                    options.dataBound = function() {
+                        var idx, length, children = this.ul[0].children;
+
+                        for (idx = 0, length = children.length; idx < length; idx++) {
+                            kendo.bind(children[idx], options.dataSource[idx]);
+                        }
+                    };
+                }
+            }
+
+            widget = element.data("kendoDropDownList");
+
+            if (!widget) {
+                widget = new DropDownList(element, options);
+            } else {
+                if (options.template) {
+                    widget.bind("dataBinding", options.dataBinding);
+                    widget.bind("dataBound", options.dataBound);
+                }
+                widget.options.dataTextField = options.dataTextField;
+                widget.options.dataValueField = options.dataValueField;
+                widget.dataSource.data(options.dataSource);
+            }
+
+            value = element.data(kendo.ns + "value");
+
+            if (value) {
+               (new kendo.data.WidgetValueBinding(element.data("kendoDropDownList"), observable, value)).apply();
+            }
+        }
+    }
 
     ui.plugin(DropDownList);
 })(jQuery);

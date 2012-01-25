@@ -39,13 +39,13 @@
 
             if (observer === undefined) {
                 var observer = that.createObserver(field);
-                that.observable.bind(CHANGE, observer);
+                that.observable.bind(0, CHANGE, observer);
                 that.observers[field] = observer;
             }
         },
 
         value: function() {
-            if (this.observable instanceof kendo.data.ObservableObject) {
+            if (this.observable instanceof ObservableObject) {
                 var result = this.observable.get(this.field);
                 if (typeof result === "function") {
                     result = result.call(this.observable);
@@ -69,7 +69,7 @@
                 handler;
 
             if (that.field !== "this") {
-                handler = function(e) { console.log(that, e.field); that.observe(e.field) };
+                handler = function(e) { that.observe(e.field) };
                 that.observable.bind("get", handler);
             }
 
@@ -83,10 +83,13 @@
         createObserver: function(field) {
             var that = this;
             return function(e) {
-                if (field.indexOf(e.field) === 0) {
+                if (field.indexOf(e.field) === 0 && e.initiator != that.element) {
                     if (e.action && e.action in that) {
                         that[e.action].call(that, e.index, e.items);
                     } else {
+                       if (!e.action) {
+                          e.stopPropagation();
+                       }
                        that.apply();
                     }
                 }
@@ -235,6 +238,45 @@
         }
     });
 
+    var WidgetValueBinding = Binding.extend( {
+        init: function(widget, observable, field) {
+            var that = this;
+
+            Binding.fn.init.call(that, widget.element, observable, field);
+
+            that.widget = widget.bind(CHANGE, $.proxy(that._change, that));
+        },
+
+        _change: function() {
+            var that = this,
+                widget = that.widget,
+                idx,
+                length,
+                view = widget.dataSource.view(),
+                value = that.widget.value();
+
+            for (idx = 0, length = view.length; idx < length; idx++) {
+                if (view[idx].get(widget.options.dataValueField) == value) {
+                    that.observable.set(that.field, view[idx]);
+                    return;
+                }
+            }
+
+            that.observable.set(that.field, value);
+        },
+
+        bind: function() {
+            var that = this,
+                widget = that.widget,
+                value = that.value();
+
+            if (value instanceof ObservableObject) {
+                value = value.get(widget.options.dataValueField);
+            }
+
+            that.widget.value(value);
+        }
+    });
     var SelectValueBinding = Binding.extend( {
         init: function() {
             var that = this;
@@ -447,9 +489,8 @@
         var role = element.getAttribute("data-role");
 
 
-        if (role && kendo.widgetBinders[role]) {
-            $.data(element, "context", object);
-            kendo.widgetBinders[role](element, object);
+        if (role && kendo.binders[role]) {
+            kendo.binders[role].bind(element, object);
         } else {
             var bound= [];
 
@@ -486,10 +527,49 @@
         }
     }
 
+    function unbindElement(element) {
+        var idx, bindings = $.data(element, "bindings");
+
+        if (bindings) {
+            for (idx = 0; idx < bindings.length; idx++) {
+                bindings[idx].destroy();
+            }
+        }
+
+        for (idx = 0; idx < element.children.length; idx++) {
+            unbindElement(element.children[idx]);
+        }
+    }
+
+    kendo.notify = function(widget) {
+        var context = widget.element.data("context");
+
+        if (context) {
+            kendo.unbind(widget.element[0]);
+
+            bindElement(widget.element[0], context);
+        }
+    }
+
+    kendo.data.Binding = Binding;
+    kendo.data.WidgetValueBinding = WidgetValueBinding;
+
     kendo.bindings = bindings;
 
     kendo.bind = function(dom, object) {
-        bind(dom, kendo.observable(object));
+        bind($(dom), kendo.observable(object));
+    }
+
+    kendo.unbind = function(dom) {
+        var idx, length;
+
+        if (dom.length === undefined) {
+            dom = [dom];
+        }
+
+        for (idx = 0, length = dom.length; idx < length; idx++ ) {
+            unbindElement(dom[idx]);
+        }
     }
 
     kendo.observable = function(object) {

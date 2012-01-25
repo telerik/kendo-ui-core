@@ -22,5 +22,9 @@ tests.push(
     {
         page: "combobox/suggestion.html",
         title: "combobox suggestion"
+    },
+    {
+        page: "combobox/mvvm.html",
+        title: "combobox mvvm"
     }
 );
