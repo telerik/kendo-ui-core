@@ -24,7 +24,8 @@
 
         <script>
             var DataSource = kendo.data.DataSource,
-                dataSource;
+                dataSource,
+                ul;
 
             function setup(options) {
                 var data = [];
@@ -47,8 +48,17 @@
                         }
                     })
                 }, options);
-                return $("<ul/>").kendoListView(options).data("kendoListView");
+                return ul.kendoListView(options).data("kendoListView");
             }
+
+            module("listView editing", {
+                setup: function() {
+                    ul = $("<ul/>").appendTo(document.body);
+                },
+                teardown: function() {
+                    ul.remove();
+                }
+            });
 
             test("default edit template is empty string", function() {
                 var listView = setup();
@@ -169,6 +179,68 @@
                 listView.saveItem(listView.element.children().eq(0));
 
                 ok(listView.element.children().eq(0).data("kendoEditable"));
+            });
+
+            test("removeItem hides the item", function() {
+                var listView = setup(),
+                    item = listView.element.children().first();
+
+                listView.removeItem(item);
+
+                ok(!item.is(":visible"));
+            });
+
+            test("removeItem calls dataSource remove", function() {
+                var listView = setup(),
+                    removeMethod = stub(dataSource, "remove");
+
+                listView.removeItem(listView.element.children().first());
+
+                ok(removeMethod.calls("remove"));
+                ok(removeMethod.args("remove", 0)[0] instanceof kendo.data.Model);
+                equal(removeMethod.args("remove", 0)[0].get("id"), 0);
+            });
+
+            test("removeItem triggers remove event", function() {
+                var called = false,
+                    listView = setup({
+                        remove: function() {
+                            called = true;
+                        }
+                    });
+
+                listView.removeItem(listView.element.children().first());
+
+                ok(called);
+            });
+
+            test("remove event pass model and item as arguments", function() {
+                var args,
+                    listView = setup({
+                        remove: function() {
+                            args = arguments[0];
+                        }
+                    }),
+                    item = listView.element.children().first();
+
+                listView.removeItem(item);
+
+                equal(args.item[0], item[0]);
+                equal(args.model.id, 0);
+            });
+
+            test("remove event prevention", function() {
+                var listView = setup({
+                        remove: function(e) {
+                            e.preventDefault();
+                        }
+                    }),
+                    item = listView.element.children().first();
+
+                listView.removeItem(item);
+
+                ok(item.is(":visible"));
+                ok(dataSource.get(0));
             });
         </script>
     </body>
