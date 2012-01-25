@@ -161,9 +161,15 @@
         }
     });
 
-    var EnabledBinding = Binding.extend( {
+    var EnableBinding = Binding.extend( {
         bind: function() {
             $(this.element).attr("disabled", this.value() !== true);
+        }
+    });
+
+    var DisableBinding = Binding.extend( {
+        bind: function() {
+            $(this.element).attr("disabled", this.value() === true);
         }
     });
 
@@ -387,7 +393,8 @@
         value: ValueBinding,
         change: EventBinding.extend({ event: "change" }),
         checked: CheckedBinding,
-        enabled: EnabledBinding
+        enabled: EnableBinding,
+        disabled: DisableBinding
     });
 
     var listBindings = $.extend({}, commonBindings, {
@@ -398,7 +405,8 @@
         source: SourceBinding.extend({defaultTemplate: "<option>${data}</option>" }),
         value: SelectValueBinding,
         change: EventBinding.extend({ event: "change" }),
-        enabled: EnabledBinding
+        enabled: EnableBinding,
+        disabled: DisableBinding
     });
 
     var optionBindings = {

@@ -70,8 +70,8 @@
                     </select>
                     Selected spam <span data-text="printFlavors"></span>
                 </div>
-                <div>
-                    <input type="input" value="Foo" data-enabled="enabled"></input>
+                <div> Disable input: <input type="checkbox" data-checked="disabled" />
+                    <input type="input" value="Foo"  data-disabled="disabled"></input>
             </form>
         </fieldset>
 
@@ -100,6 +100,7 @@
                 products: [ { id: 1,  name: "Food"}, { id: 2, name: "Beverages" }, { id: 3, name: "Beer" }],
                 selected: [],
                 enabled: true,
+                disabled: false,
                 selectedProducts: function() {
                     var result = "",
                         selected = this.get("selected");
