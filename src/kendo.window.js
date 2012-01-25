@@ -823,7 +823,7 @@
          *
          * Gets or set the title of a <strong>Window</strong>.
          *
-         * @param {String} title
+         * @param {String} [text]
          * The title of the Window.
          *
          * @returns {Window}
@@ -873,7 +873,7 @@
          *
          * Gets or set the content of a <strong>Window</strong>.
          *
-         * @param {String} content
+         * @param {String} [content]
          * The content of the Window.
          *
          * @returns {Window}
@@ -1188,8 +1188,7 @@
          *
          * @param {Object|String} options
          * Options for requesting data from the server. If omitted, the window uses the <code>content</code> property
-         * that was supplied when the window was created. Any options specified here are passed to the jQuery.ajax
-         * call.
+         * that was supplied when the window was created. Any options specified here are passed to jQuery.ajax().
          *
          * @param {String} options.url
          * The server URL that will be requested.
