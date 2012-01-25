@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>260863f3-ee49-4f61-a00e-27fda351ef6b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f3efacfc-9794-446d-989a-cb688a1afbfe</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>5ea7138a-8c26-4fea-828e-3502afde14a1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ca7f383b-7e8b-45ad-a18b-ea33cef3ff96</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -139,11 +139,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify 'TextContent' 'Contains' '2009' on 'x2009TableCell'</d2p1:Description>
+      <d2p1:Description>Wait for 'TextContent' 'Contains' '2009' on 'x2009TableCell'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>704d6c2a-59b2-4a60-856f-46a99ca63232</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ba7f41b6-afce-42a8-9b40-36acae6be7a8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -210,12 +210,13 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
         <d2p1:ExpectedString>2009</d2p1:ExpectedString>
@@ -232,7 +233,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4129ad65-3f60-401c-b04d-e64cf9c78623</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2d52eb70-1094-444d-8da5-b263e8c09b38</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -313,6 +314,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
         <d2p1:ExpectedString>2000</d2p1:ExpectedString>
@@ -329,7 +331,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>01537d43-b59b-42c3-994e-7d2e88e57d4b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>26c6ad46-24f1-4283-b2e0-7c9b54a92692</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -400,6 +402,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
         <d2p1:ExpectedString>2009</d2p1:ExpectedString>
@@ -416,7 +419,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>f021f5e7-e9d6-47c8-81f9-581458564a5e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fc470d90-ee8f-44ce-807d-b30e00dd7959</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -487,6 +490,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
         <d2p1:ExpectedString>2000</d2p1:ExpectedString>
@@ -502,11 +506,14 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.928.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.928.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.1.729.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
+    <d2p1:string>System.Windows.Forms</d2p1:string>
+    <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -545,6 +552,7 @@
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>fc6e091f-1b8f-4bfb-9e6f-21f4025b91ac</UniqueId>
+  <UseDefaultWpfAppPath>false</UseDefaultWpfAppPath>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

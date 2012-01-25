@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>04a92aaa-82c1-4719-b993-7fcd52c854c6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9ccb4658-dabc-456b-8dea-88d68ea79371</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c20e9172-7892-406b-93a4-6b1585a6e9ae</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>35108729-97c5-4548-93d2-becd7485e490</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -76,7 +76,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/span[1]/span[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/span[1]/span[1]/span[1]/span[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -89,7 +89,7 @@
                           <Clause>id=datepicker_wrapper</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagIndex=span:1</Clause>
+                          <Clause>tagIndex=span:2</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -107,91 +107,11 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>API</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatecbcrfbla.srg</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'Span'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>782a4180-0cd3-4732-a40f-c8021019bb09</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[3]/div[1]/div[1]/div[1]/a[1]/span[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TagIndex=span:171</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>Span</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://localhost/kendomvc</d2p1:BaseUrl>
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>API21</d2p1:FriendlyName>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
                 <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
@@ -212,51 +132,101 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatebjbasbug.cov</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDateghmcwyix.3v3</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
+      <d2p1:Description>Click 'January2012Link'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>b83d2de1-f138-4da9-905a-06ee2bd30ce9</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/a[2]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TextContent=January 2012</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagname=a</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>January2012Link</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>API</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDatejldhhof4.xhx</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'x2012Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8227ef81-2709-4f40-ac86-768a3c93dec4</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatef1t5oaqg.nsc</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'October2011Link'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>97065259-1be0-4ff1-a1d3-7368a20aca61</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f3fcc46c-c5d0-4d18-95fb-b04b33fd02d6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -282,17 +252,17 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>tagname=a</Clause>
+                          <Clause>TextContent=2012</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>TextContent=~201</Clause>
+                          <Clause>tagname=a</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>October2011Link</Name>
+                <Name>x2012Link</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -303,12 +273,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -328,156 +298,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDate242li1o4.vj1</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8cd4195a-f2e0-475e-ac97-45935c34cdfe</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatev1i0osyn.jcv</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'x2011Link'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>69539262-ba06-4ad2-b91b-f3f0718349dc</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[4]/div[1]/div[1]/div[1]/a[2]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TextContent=2011</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagname=a</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>x2011Link</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>API</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDateupzh0jtm.0vz</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>4d9a45ab-d64b-4b47-83c1-d89c75c33b98</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatenbn3dhs1.rzm</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDatelrfqnk52.tl5</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -487,8 +308,8 @@
       <d2p1:Description>Click 'x20102019Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2d784515-107d-4c2d-b10c-820babe1eda1</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>20a460ab-9c85-4728-a76f-c31b6aea3f92</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -535,12 +356,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -560,40 +381,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatedfibiej5.s3m</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1b7c7b01-bdd9-45ff-b600-669bcb31e9d0</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatebv5uyxiu.lbz</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDateer1i2xvh.3fd</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -603,8 +391,8 @@
       <d2p1:Description>Click 'x20902099Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>55dd2df7-2026-4547-a9bb-5e11dd23125a</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>6d3ddf6e-40f2-4acb-bcfd-de00e6ecb3db</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -651,12 +439,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -676,40 +464,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatec1s0f5sn.kb4</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>2fc49167-fff6-4598-a319-8d6af4c61622</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatetiyepfid.yjg</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDate3torbo2j.dwk</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -719,8 +474,8 @@
       <d2p1:Description>Click 'x2099Link'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>13</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>18b866ac-65ab-4746-86f8-2b9470d9bc6d</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>265fadbe-8e61-486f-8d21-56d28ba7a8bd</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -767,12 +522,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -792,40 +547,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDate12d2k0tx.gyn</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>14</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0422f404-f5a6-40a1-96c3-fbc713377549</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDateofmfrc14.oxj</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDatelv5u1uzz.tmp</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -835,8 +557,8 @@
       <d2p1:Description>Click 'DecLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>15</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e0e64857-1666-4f7c-9d12-5ea31a7c4641</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>baae33d9-9c3e-4d67-96d7-98f75bc7ded2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -883,12 +605,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -908,51 +630,18 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDaterywjz3q2.gat</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDatekwfwlwvv.3sy</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
+      <d2p1:Description>Click 'ThursdayLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>16</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>129aa88f-3d5d-438a-b2f1-a22a800da070</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDateyaql0rd3.jxo</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'x31Link'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>17</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>27ed0fea-afbd-4ea7-9ccd-578ef396a624</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>9</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>b269fcbe-9871-40aa-992e-991e35744699</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -988,7 +677,7 @@
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>x31Link</Name>
+                <Name>ThursdayLink</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -999,12 +688,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -1024,18 +713,18 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatefezmtfbx.rnj</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDateoaerthma.tqw</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify textbox 'DatepickerText' content 'Contains' '12/31/2099'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'DatepickerText' content 'Contains' '12/31/2099'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>18</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b201babf-5aa9-4918-bf1e-b4c2bd9b9355</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>10</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>dde9a325-c1ba-4620-bbd3-ce4013ea02e1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1053,7 +742,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]/input[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/span[1]/span[1]/input[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -1082,12 +771,12 @@
               <Name>TargetKey1</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>API10</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/api.html</d2p1:Path>
+                <d2p1:FriendlyName>API22</d2p1:FriendlyName>
+                <d2p1:Path>/web/datepicker/api.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>API</d2p1:Title>
               </Page>
@@ -1100,7 +789,7 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
@@ -1111,7 +800,7 @@
         <CompareType>Contains</CompareType>
         <ExpectedValue>12/31/2099</ExpectedValue>
       </d2p1:Step>
-      <d2p1:StepImageKey>DatePickerAPISetMaxDatepzocfbts.jvd</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DatePickerAPISetMaxDateg4l3bdli.0ef</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -1128,6 +817,7 @@
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
+    <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>..\..\bin\Debug\KendoDemosTests.dll</d2p1:string>

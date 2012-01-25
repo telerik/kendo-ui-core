@@ -19,11 +19,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : 'http://localhost/kendomvc/web/grid/remote-data.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/grid/remote-data.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>21fba9ad-9a15-41a4-ba32-462350a62dd0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>964c8d5c-dc08-4b21-b15f-f74ac2914712</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -44,8 +44,8 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl />
-        <d2p1:NavigateURL>http://localhost/kendomvc/web/grid/remote-data.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/web/grid/remote-data.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>PageFilterfgo5oxs0.hqo</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bc1b8c7f-3ecb-4b8b-8150-d7e152752b24</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>8d28280a-26f9-4a8b-acdb-8e2355757adf</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +143,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0184764f-b76f-456a-8c27-cb5f73e26613</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1705c76d-19c2-4183-9d85-d69a17901185</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -228,7 +228,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d23f08d9-8274-4ab7-8662-f079eb60e134</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d36fec3b-46fe-43c9-be93-34b4b268349c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -318,7 +318,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>53eb758f-89c5-41f4-8cc8-e0509049c41e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>332dd810-2efa-47da-a891-486b6f34412e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -398,7 +398,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>27e03abc-2d80-4de1-997f-bb735838aa9c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>23d01e55-84a1-48c8-a936-3718f1e2039a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -488,7 +488,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d55598da-8033-48fa-8113-39015d37970e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>468e7fe0-0b39-46c7-8a5d-c476be6e8466</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -602,7 +602,7 @@
   <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{7aa6b795-bb3f-402c-ae69-8ac9fc912216}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <ProfilerResultsDirectory i:nil="true" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\1\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
   <ResourceFilePath>UIWidgets\Grid\BindToRemoteData\PageFilter.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>

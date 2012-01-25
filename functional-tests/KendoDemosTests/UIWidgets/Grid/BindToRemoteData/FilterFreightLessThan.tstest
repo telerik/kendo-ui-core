@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1be24711-384e-4414-b2fd-0df0a27cf26b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f2de8cda-e629-4f90-84b7-bb778a432a78</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bfa2a918-b416-42dc-b60e-cde261bf89c7</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7ee5fc02-946e-40d2-8f42-d3f419e9efcf</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -107,12 +107,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -132,233 +132,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThansbbpeonw.nfj</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e43f2640-aecd-4ee9-b7bd-752621bf2600</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[1]/span[1]/span[2]/span[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TagIndex=span:946</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>SelectSpan</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Binding to remote data</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThandxxygulq.kmn</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1478501b-8b12-403c-8fcc-ada90b5c0fed</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>500</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanxlw3xqke.yfw</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'IsLessThanListItem0'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ba71e3d6-df30-441e-b5b4-0df98e47cffb</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[5]/div[1]/ul[1]/li[5]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TagIndex=li:183</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>IsLessThanListItem0</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Binding to remote data</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanjj3jo3zd.0u0</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>25653f22-2b44-4b02-a69e-3745bff13e24</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThannkc2n5ey.kqo</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThanqqhodb4a.kne</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -366,10 +140,10 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Click 'IsEqualToSpan'</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>abca98bd-63cd-4eeb-9ec8-eb054e282722</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>88148e82-3694-4e0d-8b55-d57f7b56c44c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -395,7 +169,7 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TagIndex=span:862</Clause>
+                          <Clause>TagIndex=span:346</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -413,12 +187,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -438,7 +212,87 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanbzr5ns13.t4z</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThang2p5jv1x.xyq</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>1ad900dc-8411-4e99-8d9d-6ce0ce5e9de8</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[1]/span[1]/span[2]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TagIndex=span:348</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>SelectSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Binding to remote data</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>FilterFreightLessThandxgmzxs0.30i</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -446,10 +300,10 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Click 'IsLessThanListItem'</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>53fd878a-8e18-4c95-a9ac-17417f94a0e9</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>a9695eec-fd75-4ac0-a69d-5870450492df</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -475,7 +329,7 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TagIndex=li:181</Clause>
+                          <Clause>TagIndex=li:169</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -493,12 +347,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -518,87 +372,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThan5nrpggec.ruq</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Invoke 'OnFocus' event on 'Text'</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>425eb679-be2a-4d71-846f-1cbed58371d3</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>invokeTarget</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[2]/span[1]/input[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TagIndex=input:3</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>Text</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputText</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>invokeTarget</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Binding to remote data</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:EventType>OnFocus</d2p1:EventType>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThantwy2ohij.f1k</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThan5dix1aqx.lki</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -606,10 +380,10 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Keyboard (KeyPress) - Decimal (1 times) on 'Filters0ValueText'</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>466cba14-6469-4a54-af31-8903f8d51bb1</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>334fdfef-9cad-4e13-a6cc-26f6f65b082c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DesktopKeyboardActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -653,12 +427,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -682,7 +456,7 @@
         <d2p1:RepeatCount>1</d2p1:RepeatCount>
         <d2p1:focus>true</d2p1:focus>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanqhbod25a.ly5</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThangyh4ai3y.elm</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -692,8 +466,8 @@
       <d2p1:Description>Enter text '41.34' in 'Filters0ValueText'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a9e0ea24-edd6-43fd-a61a-26abd870ae0b</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>7ddfdbc1-a756-4853-95bd-3011a5e3bd2b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -737,12 +511,12 @@
               <Name>textTarget</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -772,87 +546,7 @@
         </d2p1:TypingInfo>
         <d2p1:TypingSpeed>50</d2p1:TypingSpeed>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThano4agx0cd.scy</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Invoke 'OnBlur' event on 'Text'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>12</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a80df53d-9207-4c1d-b60c-f26ac2810a58</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>invokeTarget</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[2]/span[1]/input[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TagIndex=input:3</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>Text</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputText</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>invokeTarget</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Binding to remote data</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:EventType>OnBlur</d2p1:EventType>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThannbplf1dp.b0w</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThanxqsu5uaj.2nq</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -862,8 +556,8 @@
       <d2p1:Description>Click 'FilterButtonTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>13</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1295ceda-4e51-4d14-9e55-52452018272e</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>f1bd340b-6449-494d-859b-0b2ffa28eb2f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -907,12 +601,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -932,7 +626,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanrz1nrykz.o2h</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThancllzk05z.0dh</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -942,8 +636,8 @@
       <d2p1:Description>Click 'FreightLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>14</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>3f6ab3ed-4b73-43a1-b91b-ca7329819aa8</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>9</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>079bcd59-de6c-4c0d-b60d-7ca8f8426497</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -990,12 +684,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -1015,35 +709,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanddwuvsep.xid</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '250' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>15</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>efad64ce-d9ee-4f73-9701-3caa0f4ad0ee</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>250</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThanb1cfxesy.pp4</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThansa1geinv.s5i</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -1053,8 +719,8 @@
       <d2p1:Description>Click 'FreightLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>16</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e143d3f2-8901-4644-a11e-ed9ae76c96a0</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>10</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>045aa7cf-b204-4316-909b-2535a53a2af1</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1101,12 +767,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>BindingToRemoteData0</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/web/grid/remote-data.html</d2p1:Path>
+                <d2p1:FriendlyName>BindingToRemoteData3</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/remote-data.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Binding to remote data</d2p1:Title>
               </Page>
@@ -1126,7 +792,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterFreightLessThan4zkcylft.sra</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterFreightLessThangzzqijeh.bvy</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -1136,8 +802,8 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' '40.42' on 'x404200TableCell'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>17</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>9830220e-3f06-4ced-b131-96fba08a2b34</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>11</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>e1929841-5df6-4a28-97a4-e5fd3acd1555</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1224,8 +890,8 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' '38.64' on 'x386400TableCell'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>18</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a2b615aa-b7d2-4ff4-8b48-80e0018d1a5e</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>12</d2p1:Order>
+      <d2p1:Runtime_x0020_ID>42ed944b-e722-428a-a53e-4290862819ad</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1319,6 +985,7 @@
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
+    <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
