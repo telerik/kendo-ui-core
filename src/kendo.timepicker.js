@@ -160,7 +160,7 @@
                 template = that.template,
                 start = new DATE(min),
                 length = MS_PER_DAY / msInterval,
-                idx = 0, length,
+                idx = 0,
                 html = "";
 
             if (msMin != msMax) {
