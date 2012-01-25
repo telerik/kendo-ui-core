@@ -69,7 +69,7 @@
                 handler;
 
             if (that.field !== "this") {
-                handler = function(e) { console.log(that, e.field); that.observe(e.field) };
+                handler = function(e) { that.observe(e.field) };
                 that.observable.bind("get", handler);
             }
 
@@ -83,11 +83,13 @@
         createObserver: function(field) {
             var that = this;
             return function(e) {
-                if (field.indexOf(e.field) === 0) {
+                if (field.indexOf(e.field) === 0 && e.initiator != that.element) {
                     if (e.action && e.action in that) {
                         that[e.action].call(that, e.index, e.items);
                     } else {
-                       e.stopPropagation();
+                       if (!e.action) {
+                          e.stopPropagation();
+                       }
                        that.apply();
                     }
                 }
