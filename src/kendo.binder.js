@@ -39,13 +39,13 @@
 
             if (observer === undefined) {
                 var observer = that.createObserver(field);
-                that.observable.bind(CHANGE, observer);
+                that.observable.bind(0, CHANGE, observer);
                 that.observers[field] = observer;
             }
         },
 
         value: function() {
-            if (this.observable instanceof kendo.data.ObservableObject) {
+            if (this.observable instanceof ObservableObject) {
                 var result = this.observable.get(this.field);
                 if (typeof result === "function") {
                     result = result.call(this.observable);
@@ -87,6 +87,7 @@
                     if (e.action && e.action in that) {
                         that[e.action].call(that, e.index, e.items);
                     } else {
+                       e.stopPropagation();
                        that.apply();
                     }
                 }
@@ -247,6 +248,7 @@
         _change: function() {
             var that = this,
                 widget = that.widget;
+
 
             that.observable.set(that.field, widget.dataSource.view()[widget.select()]);
         },
@@ -541,7 +543,7 @@
     kendo.bindings = bindings;
 
     kendo.bind = function(dom, object) {
-        bind(dom, kendo.observable(object));
+        bind($(dom), kendo.observable(object));
     }
 
     kendo.unbind = function(dom) {

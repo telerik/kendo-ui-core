@@ -583,7 +583,14 @@
 
     kendo.binders.dropdownlist = {
         bind: function(element, observable, reason) {
-            var options = {}, option, value, dataSource, widget;
+            var options = {},
+                option,
+                value,
+                template,
+                container,
+                idx,
+                dataSource,
+                widget;
 
             element = $(element);
 
@@ -605,12 +612,32 @@
                 options.dataSource = observable.get(dataSource);
             }
 
+            template = element.data(kendo.ns + "template");
+
+            if (template) {
+                template = $("#" + template).html();
+                if (template) {
+                    options.template = template;
+                }
+            }
+
             widget = element.data("kendoDropDownList");
 
             if (!widget) {
-                element.kendoDropDownList(options);
+                widget = new DropDownList(element, options);
             } else {
                 widget.dataSource.data(options.dataSource);
+            }
+
+            if (template) {
+                container = widget.ul[0];
+                idx = 0;
+
+                for (container = container.firstChild; container; container = container.nextSibling) {
+                    if (container.nodeType === 1) {
+                        kendo.bind(container, options.dataSource[idx]);
+                    }
+                }
             }
 
             value = element.data(kendo.ns + "value");
