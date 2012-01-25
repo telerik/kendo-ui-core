@@ -12,7 +12,6 @@
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
         buttonRolesSelector = toRoleSelector("button listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
-        initialHeight = {},
         TRANSFORM = support.transitions.css + "transform",
         ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
         View = mobile.View,
@@ -20,8 +19,12 @@
         Layout = mobile.Layout,
         VIEW_INIT = "viewInit",
         VIEW_SHOW = "viewShow",
-        lastOrientation = -1,
-        roleSelector = kendo.roleSelector;
+        roleSelector = kendo.roleSelector,
+        scrollTo = window.scrollTo,
+        HIDEBAR = os.device == "iphone" || os.device == "ipod",
+        BARCOMPENSATION = 60,
+        WINDOW = $(window),
+        proxy = $.proxy;
 
     function toRoleSelector(string) {
         return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
@@ -33,52 +36,6 @@
         }
         div[0].innerHTML = html;
         return div;
-    }
-
-    function hideBar(element) {
-        var compensation = 0, newHeight,
-            orientation = window.orientation + "";
-
-        if (lastOrientation != orientation) {
-            element = $(this);
-
-            if (!initialHeight[orientation])
-                initialHeight[orientation] = $(window).height();
-
-            if (os.device == "iphone" || os.device == "ipod" || os.android) {
-                if (os.android) {
-                    compensation = 56;
-                } else {
-                    compensation = 60;
-                }
-
-                newHeight = initialHeight[orientation] + compensation;
-                if (newHeight != element.height()) {
-                    element.height(newHeight);
-
-                    setTimeout(function () {
-                        window.scrollTo(0, 1);
-                    }, 0);
-                }
-            }
-
-            lastOrientation = orientation;
-        }
-    }
-
-    function hideAddressBar(element) {
-        if (os.appMode) {
-            return;
-        }
-
-        if (os.android) {
-            $(window).scroll(function() {
-                element.height(window.innerHeight);
-            });
-        }
-
-        $(window).load($.proxy(hideBar, element));
-        $(window).bind(ORIENTATIONEVENT, $.proxy(hideBar, element));
     }
 
     function isInternal(link) {
@@ -337,7 +294,7 @@
             ], that.options);
 
             $(function(){
-                hideAddressBar(that.element);
+                that._attachHideBarHandlers();
                 that._attachOrientationChange();
                 that._attachMeta();
                 that._setupAppLinks();
@@ -475,7 +432,7 @@
             element.parent().addClass("km-root");
             element.addClass(getOSClass() + " " + getOrientationClass());
 
-            $(window).bind(ORIENTATIONEVENT, function(e) {
+            WINDOW.bind(ORIENTATIONEVENT, function(e) {
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
 
@@ -493,6 +450,55 @@
             if (icon) {
                 $("head").prepend(iconMeta({icon: icon}));
             }
+        },
+
+        _attachHideBarHandlers: function() {
+            var that = this;
+
+            that._lastOrientation = -1;
+            that._initialHeight = {};
+
+            if (os.appMode) {
+                return;
+            }
+
+            if (os.android) {
+                WINDOW.scroll(proxy(that._windowScroll, that));
+            }
+
+            if (HIDEBAR) {
+                WINDOW.bind("load " + ORIENTATIONEVENT, proxy(that._hideBar, that));
+            }
+        },
+
+        _hideBar: function() {
+            var that = this,
+                element = that.element,
+                orientation = window.orientation + "",
+                initialHeight = that._initialHeight,
+                lastOrientation = that._lastOrientation,
+                newHeight;
+
+            if (lastOrientation === orientation) {
+                return;
+            }
+
+            that._lastOrientation = orientation;
+
+            if (!initialHeight[orientation]) {
+                initialHeight[orientation] = WINDOW.height();
+            }
+
+            newHeight = initialHeight[orientation] + BARCOMPENSATION;
+
+            if (newHeight != element.height()) {
+                element.height(newHeight);
+                setTimeout(scrollTo, 0, 0, 1);
+            }
+        },
+
+        _windowScroll: function() {
+            this.element.height(window.innerHeight);
         },
 
         dataOrDefault: function(element, option) {

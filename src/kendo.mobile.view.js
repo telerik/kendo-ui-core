@@ -6,13 +6,6 @@
         Class = kendo.Class,
         roleSelector = kendo.roleSelector;
 
-    // TODO: refactor this to a singleton
-    function hideAddressBarOnBack() {
-        if (os.android) {
-            window.scrollBy(0,56);
-        }
-    }
-
     var View = Class.extend({
         init: function(element, options) {
             var that = this,
@@ -92,10 +85,6 @@
               } else {
             view.element.css("z-index", 1);
                 previous.element.css("z-index", 0);
-            }
-
-            if (that.back) {
-                hideAddressBarOnBack();
             }
 
             that.switchWith(previous.footer, view.footer);
