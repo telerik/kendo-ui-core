@@ -155,6 +155,12 @@
             );
         },
 
+        createRing: function(ring, options) {
+            return this.decorate(
+                new SVGRing(ring, options)
+            );
+        },
+
         createGradient: function(options) {
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
@@ -357,45 +363,52 @@
         }
     });
 
-    var SVGArc = SVGPath.extend({
+    var SVGRing = SVGPath.extend({
         init: function(config, options) {
-            var arc = this;
-            SVGPath.fn.init.call(arc, options);
+            var ring = this;
+            SVGPath.fn.init.call(ring, options);
 
-            arc.pathTemplate = SVGArc.pathTemplate;
-            if (!arc.pathTemplate) {
-                arc.pathTemplate = SVGArc.pathTemplate = template(
-                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+            ring.pathTemplate = SVGRing.pathTemplate;
+            if (!ring.pathTemplate) {
+                ring.pathTemplate = SVGRing.pathTemplate = template(
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
-                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
-                    "L #= d.cx # #= d.cy # z"
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
+                    "L #= d.secondInnerPoint.x # #= d.secondInnerPoint.y # " +
+                    "A#= d.ir # #= d.ir # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
+                    "#= d.firstInnerPoint.x # #= d.firstInnerPoint.y # z"
                 );
             }
 
-            arc.config = config || {};
+            ring.config = config || {};
         },
 
         renderPoints: function() {
-            var arc = this,
-                arcConfig = arc.config,
-                startAngle = arcConfig.startAngle,
-                endAngle = arcConfig.angle + startAngle,
+            var ring = this,
+                ringConfig = ring.config,
+                startAngle = ringConfig.startAngle,
+                endAngle = ringConfig.angle + startAngle,
                 endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
-                r = math.max(arcConfig.r, 0),
-                cx = arcConfig.c.x,
-                cy = arcConfig.c.y,
-                firstPoint = arcConfig.point(startAngle),
-                secondPoint = arcConfig.point(endAngle);
+                r = math.max(ringConfig.outerRadius, 0),
+                ir = math.max(ringConfig.innerRadius, 0),
+                cx = ringConfig.c.x,
+                cy = ringConfig.c.y,
+                firstOuterPoint = ringConfig.point(startAngle),
+                firstInnerPoint = ringConfig.point(startAngle, true),
+                secondOuterPoint = ringConfig.point(endAngle),
+                secondInnerPoint = ringConfig.point(endAngle, true);
 
-            return arc.pathTemplate({
-                firstPoint: firstPoint,
-                secondPoint: secondPoint,
+            return ring.pathTemplate({
+                firstOuterPoint: firstOuterPoint,
+                secondOuterPoint: secondOuterPoint,
                 isReflexAngle: isReflexAngle,
                 r: r,
-                cx: cx,
-                cy: cy
+                ir: ir,
+                firstInnerPoint: firstInnerPoint,
+                secondInnerPoint: secondInnerPoint
             });
         }
     });
@@ -771,7 +784,7 @@
         SVGPath: SVGPath,
         SVGLine: SVGLine,
         SVGSector: SVGSector,
-        SVGArc: SVGArc,
+        SVGRing: SVGRing,
         SVGCircle: SVGCircle,
         SVGGroup: SVGGroup,
         SVGClipPath: SVGClipPath,

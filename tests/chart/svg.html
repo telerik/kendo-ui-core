@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UI5.Chart Tests - SVG</title>
+        <title>SVG tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -819,26 +819,84 @@
 
             })();
 
-            (function() {
-                var arc;
+            var Gauge = Chart.ChartElement.extend({
+                init: function(ringConfig) {
+                    Chart.ChartElement.fn.init.call(this);
 
-                module("SVGArc", {
+                    this.ringConfig = ringConfig;
+                },
+                reflow: function(targetBox) {
+                    this.box = new Chart.Box2D(
+                        targetBox.x1, targetBox.y1,
+                        targetBox.x1 + 300, targetBox.y1 + 300
+                    );
+                },
+                getViewElements: function(view) {
+                    return [view.createRing(this.ringConfig, { fill: "#000000" })];
+                }
+            });
+
+            function render(ringConfig) {
+                var model = new Chart.RootElement({
+                        width: 300,
+                        height: 300,
+                        transitions: false
+                    }),
+                    viewClass = Chart.SVGView,
+                    div = $("<div />").css({
+                        width: 300,
+                        height: 300,
+                        border: "2px solid #000"
+                    }).appendTo(document.body)[0];
+
+                model.append(new Gauge(ringConfig));
+                model.reflow();
+
+                var view = viewClass.fromModel(model);
+
+                view.renderTo(div);
+            }
+
+            // TODO: Test Gauge
+            // TODO: Test SVGView.createRing
+
+            // TODO: Test Ring
+            (function() {
+                module("Ring");
+
+                function createRing(cx, cy, innerR, outerR, startAngle, angle) {
+                    return new Chart.Ring(new Point2D(cx, cy), innerR, outerR, startAngle, angle);
+                }
+
+                test("calculates inner point correctly", function() {
+                    var ring = createRing(135, 135, 100, 135, 90, 20);
+
+                    var innerPoint = ring.point(90, true);
+
+                    equal(innerPoint.x, 135);
+                    equal(innerPoint.y, 35);
+                });
+            })();
+
+            (function() {
+                var ring;
+
+                module("SVGRing", {
                     setup: function() {
-                        arc = new Chart.SVGArc(
-                            new Chart.Arc(
-                                new Point2D(135, 135), 100, 135, 90, 20
-                            )
-                        );
+                        var ringConfig = new Chart.Ring(
+                                new Point2D(135, 135), 100, 135, -30, 240
+                            );
+                        ring = new Chart.SVGRing(ringConfig);
                     }
                 });
 
-                test("renders arc tag", function() {
-                    equal(arc.render().replace(/\<path.*?\>/, "<path>"),
+                test("renders path", function() {
+                    equal(ring.render().replace(/\<path.*?\>/, "<path>"),
                         "<path></path>");
                 });
 
                 test("renders radius", function() {
-                    //ok(arc.render().indexOf("A135 135") > -1);
+                    ok(ring.render().indexOf("A135 135") > -1);
                 });
 
             })();
