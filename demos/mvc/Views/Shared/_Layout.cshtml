@@ -62,8 +62,7 @@
             expand: function() {
                 $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
                     $(this)
-                        .find(".k-link").removeClass("k-state-selected k-state-highlighted").end()
-                        .data("kendoPanelBar").collapse(".k-item");
+                        .find(".k-link").removeClass("k-state-selected k-state-highlighted");
                 });
             },
             expandMode: "single"
