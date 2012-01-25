@@ -494,14 +494,14 @@
             return field ? field.editable !== false : true;
         },
 
-        set: function(field, value) {
+        set: function(field, value, initiator) {
             var that = this;
 
             if (that.editable(field)) {
                 value = that._parse(field, value);
 
                 if (!equal(value, that.get(field))) {
-                    ObservableObject.fn.set.call(that, field, value);
+                    ObservableObject.fn.set.call(that, field, value, initiator);
                     that.dirty = true;
                 }
             }
