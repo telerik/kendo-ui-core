@@ -2,12 +2,13 @@
     var mobile = kendo.mobile,
         ui = mobile.ui,
         proxy = $.proxy,
+        Class = kendo.Class,
         roleSelector = kendo.roleSelector,
         Widget = ui.Widget;
 
     var TICK_INTERVAL = 10;
 
-    var Inertia = kendo.Class.extend({
+    var Inertia = Class.extend({
         init: function(move, callback) {
             var that = this;
             that.move = move;
@@ -65,64 +66,15 @@
     });
 
     var Ease = {
-        /*
-        linearTween: function (t, b, c, d) {
-            return c*t/d + b;
-        },
-
-        easeInQuad: function (t, b, c, d) {
-            return c*(t/=d)*t + b;
-        },
-
-        easeOutQuad: function (t, b, c, d) {
-            return -c *(t/=d)*(t-2) + b;
-        },
-
-        easeInCubic: function (t, b, c, d) {
-            return c*(t/=d)*t*t + b;
-        },
-
-        easeOutCubic: function (t, b, c, d) {
-            return c*((t=t/d-1)*t*t + 1) + b;
-        },
-
-        easeInQuart: function (t, b, c, d) {
-            return c*(t/=d)*t*t*t + b;
-        },
-
-        easeOutQuart: function (t, b, c, d) {
-            return -c * ((t=t/d-1)*t*t*t - 1) + b;
-        },
-
-        easeInQuint: function (t, b, c, d) {
-            return c*(t/=d)*t*t*t*t + b;
-        },
-
-        easeOutQuint: function (t, b, c, d) {
-            return c*((t=t/d-1)*t*t*t*t + 1) + b;
-        },
-
-        easeInExpo: function (t, b, c, d) {
-            return (t==0) ? b : c * Math.pow(2, 10 * (t/d - 1)) + b;
-        },
-        */
-
         easeOutExpo: function (t, b, c, d) {
             return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
         },
-
-        /*
-        easeInBack: function (t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
-            return c*(t/=d)*t*((s+1)*t - s) + b;
-        },
-        */
 
         easeOutBack: function (t, b, c, d, s) {
             if (s == undefined) s = 1.70158;
             return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
         }
-    };
+    }
 
     var CURRENT_PAGE_CLASS = "km-current-page";
 
@@ -175,7 +127,7 @@
             that.move = new mobile.Move(that.inner);
 
             that.inertia = new Inertia(that.move, function() {
-                that.page = -that.move.x / that.width;
+                that.page = -that.move.x / that.boundary.x.size;
                 that._updatePage();
             });
 
@@ -186,15 +138,19 @@
                 end: $.proxy(that._swipeEnd, that)
             });
 
+            that.boundary = new mobile.ContainerBoundary(element, {
+                move: that.move,
+                change: proxy(that.calculateDimensions, that)
+            });
+
             that.draggable = new mobile.Draggable({
-                minY: 0,
+                boundary: that.boundary,
                 swipe: that.swipe,
                 elastic: true,
                 move: that.move
             });
 
-            that.calculateDimensions();
-            $(window).bind("orientationchange", proxy(that.calculateDimensions, that));
+            that.boundary.refresh();
         },
 
         options: {
@@ -210,19 +166,17 @@
 
         calculateDimensions: function() {
             var that = this,
-                width = that.width = that.element.width(),
                 pageHTML = "",
-                scrollWidth,
+                boundary = that.boundary.x,
+                width = boundary.size,
                 pages;
 
             that.page = -that.move.x / width;
 
-            scrollWidth = that.element[0].scrollWidth + (that.page * width);
-            pages = that.pages = Math.ceil(scrollWidth / width);
+            pages = that.pages = Math.ceil(boundary.total / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
-            that.draggable.update({minX: width - scrollWidth});
 
             for (var idx = 0; idx < pages; idx ++) {
                 pageHTML += "<li/>";
@@ -235,6 +189,7 @@
         _swipeEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
+                width = that.boundary.x.size,
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
                 snap,
@@ -247,11 +202,11 @@
                 approx = Math.floor;
             }
 
-            snap = Math.max(that.minSnap, Math.min(approx(that.move.x / that.width) * that.width, that.maxSnap));
-
             if (Math.abs(velocity) > options.bounceVelocityThreshold) {
                 ease = Ease.easeOutBack;
             }
+
+            snap = Math.max(that.minSnap, Math.min(approx(that.move.x / width) * width, that.maxSnap));
 
             that.inertia.moveTo({ x: snap, y: 0, duration: options.duration, ease: ease });
         },

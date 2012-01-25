@@ -263,22 +263,58 @@
         }
     });
 
-    function draggableHandler (axis) {
+    var ContainerBoundary = kendo.Observable.extend({
+        init: function(element, options) {
+            var that = this;
+
+            kendo.Observable.fn.init.call(that);
+
+            that.element = element;
+            that.move = options.move;
+            that.x = {max: 0};
+            that.y = {max: 0};
+
+            $(window).bind("orientationchange", proxy(that.refresh, that));
+
+            that.bind(["change"], options);
+        },
+
+        refresh: function() {
+            var that = this,
+                element = that.element,
+                x = that.x,
+                y = that.y,
+                move = that.move;
+
+            x.size = element.width();
+            x.total = element[0].scrollWidth - move.x;
+
+            y.size = element.height();
+            y.total = element[0].scrollHeight - move.y;
+
+            x.min = x.size - x.total;
+            y.min = y.size - y.total;
+
+            that.trigger("change");
+        }
+    });
+
+    function draggableHandler(axis) {
         return function(e) {
             var that = this,
-                capitalAxis = axis.toUpperCase(),
+                boundary = that.boundary[axis];
                 delta = e[axis].delta,
                 position = that.move[axis] + delta;
 
-            if (position > that["max" + capitalAxis] || position < that["min" + capitalAxis]) { delta *= that.resistance; }
-            that["delta" + capitalAxis] = delta;
+            if (position > boundary.max || position < boundary.min) { delta *= that.resistance; }
+            that["delta" + axis] = delta;
         }
     }
 
-    function and(context, funcA, funcB) {
+    function and(funcA, funcB) {
         return function() {
-            funcA.apply(context, arguments);
-            funcB.apply(context, arguments);
+            funcA.apply(this, arguments);
+            funcB.apply(this, arguments);
         }
     }
 
@@ -286,7 +322,10 @@
         init: function(options) {
             var that = this;
 
-            that.update(options);
+            extend(that, { elastic: true }, options);
+            that.resistance = that.elastic ? 0.5 : 0;
+
+            that.boundary.bind("change", proxy(that.update, that));
             that.swipe.bind("move", proxy(that.swipeMove, that));
         },
 
@@ -295,24 +334,23 @@
         },
 
         update: function(options) {
-            var that = this;
-            extend(that, { maxX: 0, maxY: 0, elastic: true }, options);
-            that.resistance = that.elastic ? 0.5 : 0;
+            var that = this,
+                boundary = that.boundary;
 
             var move = that._apply;
-            if (that.minX != that.maxX) {
-                move = and(that, draggableHandler("x"), move);
+            if (boundary.x.min != boundary.x.max) {
+                move = and(draggableHandler("x"), move);
             }
 
-            if (that.minY != that.maxY) {
-                move = and(that, draggableHandler("y"), move);
+            if (boundary.y.min != boundary.y.max) {
+                move = and(draggableHandler("y"), move);
             }
 
             that._move = move;
         },
 
         _apply: function() {
-            this.move.moveBy(this.deltaX, this.deltaY);
+            this.move.moveBy(this.deltax, this.deltay);
         }
     });
 
@@ -350,6 +388,7 @@
 
         Swipe: Swipe,
         Move: Move,
+        ContainerBoundary: ContainerBoundary,
         Draggable: Draggable
     });
 })(jQuery);
