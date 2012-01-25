@@ -14,27 +14,19 @@
                 {
                     name: "Alpha",
                     a: 15,
-                    b: 20,
-                    c: 15,
-                    d: 20
+                    b: 2000
                 }, {
                     name: "Gamma",
                     a: -20,
-                    b: -30,
-                    c: 20,
-                    d: -20
+                    b: 2500
                 }, {
                     name: "Delta",
                     a: 20,
-                    b: 30,
-                    c: 20,
-                    d: 30
+                    b: 3000
                 }, {
                     name: "Epsilon",
                     a: 20,
-                    b: 30,
-                    c: 20,
-                    d: 30
+                    b: 3500
                 }
             ];
 
@@ -48,39 +40,39 @@
                         position: "bottom"
                     },
                     dataSource: data,
-                    seriesDefaults: {
-                        type: "column"
-                    },
-                    /*
                     series: [{
+                            type: "column",
                             name: "1",
-                            field: "b"
+                            field: "a",
+                            color: "red"
                         },{
+                            type: "line",
                             name: "2",
-                            field: "c",
-                            axis: "secondary"
-                        },{
-                            name: "3",
-                            field: "d"
-                    }],
-                    */
+                            field: "b",
+                            axis: "secondary",
+                            color: "blue"
+                        }],
                     categoryAxis: {
-                        field: "name"
-                        //,axisCrossingValue: 2
+                        field: "name",
+                        axisCrossingValue: [0, 4]
                     },
                     valueAxis: [{
                         title: {
-                            text: "axis"
+                            text: "Red Axis"
+                        },
+                        line: {
+                            color: "red"
                         }
                         // name: primary
                     }, {
                         name: "secondary",
-                        min: -100,
-                        max: 100,
                         title: {
-                            text: "axis"
-                            //text: "Secondary Axis"
+                            text: "Blue Axis"
+                        },
+                        line: {
+                            color: "blue"
                         }
+
                     }]
                 });
             });
