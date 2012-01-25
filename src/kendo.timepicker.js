@@ -79,7 +79,7 @@
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
+        MOUSEDOWN = "mousedown",
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         SELECTED = "k-state-selected",
