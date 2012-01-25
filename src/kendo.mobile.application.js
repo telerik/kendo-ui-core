@@ -107,6 +107,11 @@
         }
     }
 
+    function getOSClass() {
+        var osName = "km-" + (!os ? "ios" : os.name);
+        return (osName + (os ? " " + osName + os.majorVersion : ""));
+    }
+
     function getOrientationClass() {
         return Math.abs(window.orientation) / 90 ? "km-horizontal" : "km-vertical";
     }
@@ -468,7 +473,7 @@
         _attachOrientationChange: function() {
             var that = this, element = that.element;
             element.parent().addClass("km-root");
-            element.addClass("km-" + (!os ? "ios" : os.name) + " " + getOrientationClass());
+            element.addClass(getOSClass() + " " + getOrientationClass());
 
             $(window).bind(ORIENTATIONEVENT, function(e) {
                 element.removeClass("km-horizontal km-vertical")
