@@ -8,14 +8,14 @@
     <title>Mobile Simulator</title>
 
     @foreach (string styleName in Kendo.Models.StyleGroups.Simulator) {
-    <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    <link href="@Url.Style(styleName, "web")" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
     }
 
     <link rel="stylesheet" href="@Url.Content("~/content/integration/simulator/devices/ipad/styles.css")" />
     <link rel="stylesheet" href="@Url.Content("~/content/integration/simulator/styles/styles.css")" />
 
     @foreach (string scriptName in Kendo.Models.ScriptGroups.All) {
-    <script src="@Url.Script(scriptName)"></script>
+    <script src="@Url.Script(scriptName, "web")"></script>
     }
     @if (ViewBag.Debug) {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>
