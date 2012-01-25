@@ -148,6 +148,11 @@
         },
 
         _release: function(e) {
+            if (e.which === 3) {
+                e.preventDefault();
+                return;
+            }
+
             if (this.trigger(CLICK, {target: $(e.target)})) {
                 e.preventDefault();
             }
