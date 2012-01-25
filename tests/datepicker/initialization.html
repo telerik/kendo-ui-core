@@ -43,6 +43,7 @@
                 var options = {
                     anchor: $("<input/>"),
                     value: new Date (2000, 10, 10),
+                    footer: '#= kendo.toString(data,"D") #',
                     min: new Date (1900, 10, 10),
                     max: new Date (2100, 10, 10),
                     change: function() {},
@@ -55,6 +56,7 @@
                     value: new Date(),
                     min: new Date(),
                     max: new Date(),
+                    footer: '#= kendo.toString(data,"D") #',
                     start: "month",
                     depth: "month"
                 }),
@@ -77,6 +79,7 @@
 
             test("DateView should call calendar.navigate correctly", function() {
                 var dv1 = new DateView({
+                    footer: '#= kendo.toString(data,"D") #',
                     anchor: $("<input/>"),
                     value: new Date(),
                     min: new Date(),
@@ -112,7 +115,9 @@
             });
 
             test("DateView build footer template", function() {
-                var dateView = new DateView();
+                var dateView = new DateView({
+                    footer: '#= kendo.toString(data,"D") #'
+                });
 
                 ok(dateView.footer);
             });
@@ -180,6 +185,14 @@
                 datepicker.dateView.calendar.element.mousedown();
 
                 ok(called);
+            });
+
+            test("dateView should not create footer template", function() {
+                var datepicker = input.kendoDatePicker({
+                    footer: false
+                }).data("kendoDatePicker");
+
+                deepEqual(datepicker.dateView.footer, undefined);
             });
 
             //DatePicker

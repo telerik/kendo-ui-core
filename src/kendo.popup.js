@@ -22,11 +22,18 @@
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
+        SCROLLER = "kendoMobileScroller",
         cssPrefix = kendo.support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
         proxy = $.proxy,
-        Widget = ui.Widget;
+        Widget = ui.Widget,
+        styles = ["font-family",
+                   "font-size",
+                   "font-stretch",
+                   "font-style",
+                   "font-weight",
+                   "line-height"];
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -38,6 +45,7 @@
 
             Widget.fn.init.call(that, element, options);
 
+            element = that.element;
             options = that.options;
 
             that.collisions = that.options.collision.split(" ");
@@ -92,7 +100,7 @@
                             .removeClass(ACTIVE)
                             .removeClass(dirClass);
 
-                        that.element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
+                        element.removeClass(ACTIVEBORDER + "-" + kendo.directions[direction].reverse);
                     }
 
                     that._closing = false;
@@ -103,12 +111,14 @@
 
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
-            if (!touch) { //  On mobile device this closes the popup if keyboard is shown :)
+            if (!touch) { //  On mobile device this closes the popup if keyboard is shown
                 $(window).bind("resize scroll", function() {
                     if (!that._hovered) {
                         that.close();
                     }
                 });
+            } else if (SCROLLER in element) {
+                element[SCROLLER]();
             }
 
             if (options.toggleTarget) {
@@ -144,9 +154,15 @@
                 options = that.options,
                 direction = "down",
                 animation, wrapper,
-                anchor = $(options.anchor);
+                anchor = $(options.anchor),
+                style, idx = 0;
 
             if (!that.visible()) {
+
+                for (; idx < 6; idx++) {
+                    style = styles[idx];
+                    element.css(style, anchor.css(style));
+                }
 
                 if (element.data("animating") || that.trigger(OPEN)) {
                     return;

@@ -220,6 +220,12 @@
                 equal(cal.calls("_todayClick"), 0);
             });
 
+            test("footer:false should not render footer", function() {
+                    var cal = new Calendar(div, {
+                        footer: false
+                    });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

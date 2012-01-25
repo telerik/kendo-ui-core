@@ -17,7 +17,6 @@
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-loading",
-        SCROLLER = "kendoMobileScroller",
         SELECT = "select",
         proxy = $.proxy;
 
@@ -41,22 +40,18 @@
             that.ul = $('<ul class="k-list k-reset"/>')
                         .css({ overflow: "auto" })
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
-                        .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
+                        .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); })
+                        .delegate(LI, CLICK, proxy(that._click, that));
 
             that.list = list = $("<div class='k-list-container'/>")
                         .append(that.ul)
                         .mousedown(function() {
                             that._clearBlurTimeout();
-                        })
-                        .delegate(LI, CLICK, proxy(that._click, that));
+                        });
 
             id = that.element.attr(ID);
             if (id) {
                 list.attr(ID, id + "-list")
-            }
-
-            if (touch && list[SCROLLER]) {
-                list[SCROLLER]();
             }
 
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));

@@ -148,7 +148,7 @@
                 calendar.month = that.month;
                 calendar.options.depth = options.depth;
 
-                calendar._today.html(that.footer(new DATE()));
+                calendar._footer(that.footer);
 
                 calendar.min(options.min);
                 calendar.max(options.max);
@@ -333,6 +333,7 @@
         _templates: function() {
             var that = this,
                 options = that.options,
+                footer = options.footer,
                 month = options.month || {},
                 content = month.content,
                 empty = month.empty;
@@ -342,7 +343,9 @@
                 empty: template("<td>" + (empty || "&nbsp;") + "</td>", { useWithBlock: !!empty })
             };
 
-            that.footer = template(options.footer || '#= kendo.toString(data,"D") #', { useWithBlock: false });
+            if (footer) {
+                that.footer = template(footer, { useWithBlock: false });
+            }
         }
     };
 
@@ -430,6 +433,7 @@
             value: null,
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
+            footer: '#= kendo.toString(data,"D") #',
             start: MONTH,
             depth: MONTH
         },

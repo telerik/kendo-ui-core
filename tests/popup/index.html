@@ -642,6 +642,19 @@
                 equal(div.parent().css("zIndex"), "3");
             });
 
+            test("copy font styles from anchor", function() {
+                anchor.css("font-size", "1rem");
+                anchor.css("font-family", "Serif");
+                anchor.css("font-style", "italic");
+
+                var popup = new Popup(div, { anchor: anchor });
+                popup.open();
+
+                equal(anchor.css("font-size"), div.css("font-size"));
+                equal(anchor.css("font-family"), div.css("font-family"));
+                equal(anchor.css("font-style"), div.css("font-style"));
+            });
+
         </script>
     </body>
 </html>
