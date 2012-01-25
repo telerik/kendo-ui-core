@@ -90,7 +90,7 @@
                     dataSource: dataSource,
                     selectable: false,
                     navigatable: true,
-                    template: "<li>#=foo# <button class='k-edit-button'>Edit</button></li>",
+                    template: "<li>#=foo# <button class='k-edit-button'>Edit</button><button class='k-delete-button'>Delete</button></li>",
                     editTemplate: kendo.template($("#editTemplate").html())
                 }).delegate(".k-edit-button", "click", function(e) {
                     var item = $(this).parent();
@@ -102,6 +102,12 @@
 
                     listView.closeItem(item);
 
+                }).delegate(".k-delete-button", "click", function(e) {
+                    var item = $(this).parent();
+
+                    if (confirm("Delete?")) {
+                        listView.removeItem(item);
+                    }
                 }).data("kendoListView");
             });
         </script>

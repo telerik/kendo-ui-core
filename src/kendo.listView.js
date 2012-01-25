@@ -12,6 +12,7 @@
         STRING = "string",
         CLICK = "click",
         EDIT = "edit",
+        REMOVE = "remove",
         proxy = $.proxy,
         DataSource = kendo.data.DataSource;
 
@@ -23,7 +24,7 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.bind([CHANGE,DATABOUND,EDIT], options);
+            that.bind([CHANGE,DATABOUND,EDIT,REMOVE], options);
 
             that._dataSource();
 
@@ -239,7 +240,18 @@
 
                item.replaceWith(container);
            }
+       },
+
+       removeItem: function(item) {
+           var that = this,
+               data = that.dataSource.view()[item.index()];
+
+           if (!that.trigger(REMOVE, { model: data, item: item })) {
+               item.hide();
+               that.dataSource.remove(data);
+           }
        }
+
     });
 
     kendo.ui.plugin(ListView);
