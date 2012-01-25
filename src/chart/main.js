@@ -4235,6 +4235,7 @@
             plotArea.range = { min: 0, max: 1 };
             plotArea.namedAxes = {};
             plotArea.valueAxes = [];
+            plotArea.axes = [];
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
@@ -4387,6 +4388,7 @@
                 );
 
                 plotArea.valueAxes.push(axis);
+                plotArea.axes.push(axis);
                 plotArea.append(axis);
             });
 
@@ -4394,6 +4396,7 @@
             plotArea.axisY = invertAxes ? categoryAxis : namedAxes.primary;
 
             plotArea.categoryAxis = categoryAxis;
+            plotArea.axes.push(categoryAxis);
             plotArea.append(plotArea.categoryAxis);
         },
 
@@ -4416,7 +4419,10 @@
                 isVertical = axis.options.orientation === VERTICAL;
 
             axis.reflow(
-                axis.box.translate(targetSlot.x1 - slot.x1, targetSlot.y1 - slot.y1)
+                axis.box.translate(
+                    isVertical ? targetSlot.x1 - slot.x1 : 0,
+                    isVertical ? 0 : targetSlot.y1 - slot.y1
+                )
             );
         },
 
@@ -4444,57 +4450,83 @@
             }
         },
 
+        axisBox: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                box = axes[0].box.clone(),
+                i,
+                length = axes.length;
+
+            for (i = 1; i < length; i++) {
+                box.wrap(axes[i].box);
+            }
+
+            return box;
+        },
+
+        shrinkAxes: function() {
+            var plotArea = this,
+                box = plotArea.box,
+                axisBox = plotArea.axisBox(),
+                overflowY = axisBox.height() - box.height(),
+                overflowX = axisBox.width() - box.width(),
+                axes = plotArea.axes,
+                currentAxis,
+                isVertical,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+                isVertical  = currentAxis.options.orientation === VERTICAL;
+
+                currentAxis.reflow(
+                    currentAxis.box.shrink(
+                        isVertical ? 0 : overflowX,
+                        isVertical ? overflowY : 0)
+                );
+            }
+        },
+
+        fitAxes: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                box = plotArea.box,
+                axisBox = plotArea.axisBox(),
+                offsetX = box.x1 - axisBox.x1,
+                offsetY = box.y1 - axisBox.y1,
+                currentAxis,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                currentAxis.reflow(
+                    currentAxis.box.translate(offsetX, offsetY)
+                );
+            }
+        },
+
         reflowAxes: function() {
             var plotArea = this,
                 invertAxes = plotArea.invertAxes,
                 categoryAxis = plotArea.categoryAxis,
                 valueAxes = plotArea.valueAxes,
-                namedAxes = plotArea.namedAxes,
-                allAxes = [categoryAxis].concat(valueAxes),
-                axisX = invertAxes ? namedAxes.primary : categoryAxis,
-                axisY = invertAxes ? categoryAxis : namedAxes.primary,
-                box = plotArea.box,
-                axisBox;
+                axes = plotArea.axes,
+                xAxes = invertAxes ? valueAxes : [categoryAxis],
+                yAxes = invertAxes ? [categoryAxis] : valueAxes,
+                i,
+                length = axes.length;
 
-            allAxes.forEach(function(item) {
-                item.reflow(box);
-            });
+            for (i = 0; i < length; i++) {
+                axes[i].reflow(plotArea.box);
+            }
 
-            plotArea.alignAxes([categoryAxis], valueAxes);
-
-            axisBox = categoryAxis.box.clone();
-            allAxes.forEach(function(axis) {
-                axisBox.wrap(axis.box);
-            });
-
-            var overflowY = axisBox.height() - box.height(),
-                overflowX = axisBox.width() - box.width();
-
-            allAxes.forEach(function(axis) {
-                var isVertical = axis.options.orientation === VERTICAL;
-
-                axis.reflow(
-                    axis.box.shrink(
-                        isVertical ? 0 : overflowX,
-                        isVertical ? overflowY : 0)
-                );
-            });
-
-            plotArea.alignAxes([categoryAxis], valueAxes);
-
-            axisBox = categoryAxis.box.clone();
-            allAxes.forEach(function(axis) {
-                axisBox.wrap(axis.box);
-            });
-
-            offsetX = box.x1 - axisBox.x1;
-            offsetY = box.y1 - axisBox.y1;
-
-            allAxes.forEach(function(axis) {
-                axis.reflow(
-                    axis.box.translate(overflowX, overflowY)
-                );
-            });
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.shrinkAxes();
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.fitAxes();
         }
     });
 
