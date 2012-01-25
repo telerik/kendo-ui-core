@@ -29,7 +29,7 @@
             (function() {
                 var plotArea,
                     categoryAxis,
-                    valueAxes,
+                    namedValueAxes,
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
@@ -96,7 +96,7 @@
                     }, options));
 
                     categoryAxis = plotArea.categoryAxis;
-                    valueAxes = plotArea.valueAxes;
+                    namedValueAxes = plotArea.namedValueAxes;
 
                     chartSeries = plotArea.charts[0];
                 }
@@ -111,7 +111,7 @@
                 });
 
                 test("appends primary value axis to children collection", function() {
-                    ok($.inArray(valueAxes.primary, plotArea.children) >= 0);
+                    ok($.inArray(namedValueAxes.primary, plotArea.children) >= 0);
                 });
 
                 test("appends category axis to children collection", function() {
@@ -120,7 +120,7 @@
 
                 test("aligns axes at default crossing values", function() {
                     var axisX = categoryAxis,
-                        axisY = valueAxes.primary;
+                        axisY = namedValueAxes.primary;
 
                     plotArea.reflow(chartBox);
 
@@ -131,7 +131,7 @@
 
                 test("aligns axises at non-default crossing values", function() {
                     var axisX = categoryAxis,
-                        axisY = valueAxes.primary;
+                        axisY = namedValueAxes.primary;
 
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
@@ -191,23 +191,22 @@
                 });
 
                 test("added to children collection", function() {
-                    ok($.inArray(valueAxes.secondary, plotArea.children) >= 0);
+                    ok($.inArray(namedValueAxes.secondary, plotArea.children) >= 0);
                 });
 
                 test("crosses category axis at default value", function() {
                     plotArea.reflow(chartBox);
 
-                    var valueAxis = valueAxes.primary,
+                    var valueAxis = namedValueAxes.primary,
                         slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
                         slotY = valueAxis.getSlot(valueAxis.options.axisCrossingValue);
 
-                    console.log(slotX, slotY);
                     equals(slotX.y1, slotY.y1);
                 });
 
                 test("positioned next to primary axis by default", function() {
-                    var primary = valueAxes.primary,
-                        secondary = valueAxes.secondary;
+                    var primary = namedValueAxes.primary,
+                        secondary = namedValueAxes.secondary;
 
                     plotArea.reflow(chartBox);
 
@@ -217,7 +216,7 @@
                 test("plot area bounding box wraps axis", function() {
                     plotArea.reflow(chartBox);
 
-                    var axisBox = valueAxes.secondary.box;
+                    var axisBox = namedValueAxes.secondary.box;
                     ok(axisBox.x1 >= plotArea.box.x1 && axisBox.y1 >= plotArea.box.x1);
                 });
 
@@ -232,7 +231,7 @@
                 });
 
                 test("value axis orientation is vertical", function() {
-                    equal(valueAxes.primary.options.orientation, "vertical");
+                    equal(namedValueAxes.primary.options.orientation, "vertical");
                 });
 
                 test("category axis orientation is horizontal", function() {
@@ -240,7 +239,7 @@
                 });
 
                 test("value axis crosses at first category", function() {
-                    equal(valueAxes.primary.options.axisCrossingValue, 0);
+                    equal(namedValueAxes.primary.options.axisCrossingValue, 0);
                 });
 
                 test("category axis crossing value can be changed", function() {
@@ -301,7 +300,7 @@
                 });
 
                 test("value axis orientation is vertical", function() {
-                    equal(valueAxes.primary.options.orientation, "vertical");
+                    equal(namedValueAxes.primary.options.orientation, "vertical");
                 });
 
                 test("category axis orientation is horizontal", function() {
@@ -322,7 +321,7 @@
                 });
 
                 test("value axis orientation is horizontal", function() {
-                    equal(valueAxes.primary.options.orientation, "horizontal");
+                    equal(namedValueAxes.primary.options.orientation, "horizontal");
                 });
 
                 test("category axis orientation is vertical", function() {
@@ -343,7 +342,7 @@
                 });
 
                 test("value axis orientation is vertical", function() {
-                    equal(valueAxes.primary.options.orientation, "vertical");
+                    equal(namedValueAxes.primary.options.orientation, "vertical");
                 });
 
                 test("category axis orientation is horizontal", function() {
@@ -364,7 +363,7 @@
                 });
 
                 test("value axis orientation is horizontal", function() {
-                    equal(valueAxes.primary.options.orientation, "horizontal");
+                    equal(namedValueAxes.primary.options.orientation, "horizontal");
                 });
 
                 test("category axis orientation is vertical", function() {
@@ -385,7 +384,7 @@
                 });
 
                 test("value axis orientation is horizontal", function() {
-                    equal(valueAxes.primary.options.orientation, "horizontal");
+                    equal(namedValueAxes.primary.options.orientation, "horizontal");
                 });
 
                 test("category axis orientation is vertical", function() {

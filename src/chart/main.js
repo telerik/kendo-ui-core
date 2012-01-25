@@ -69,6 +69,7 @@
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
+        PRIMARY = "primary",
         RADIAL = "radial",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
@@ -2418,7 +2419,7 @@
             series: [],
             isVertical: true,
             isStacked: false,
-            axis: "primary"
+            axis: PRIMARY
         },
 
         render: function() {
@@ -2486,7 +2487,7 @@
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 categoryAxis = plotArea.categoryAxis,
-                valueAxis = plotArea.namedAxes[options.axis],
+                valueAxis = plotArea.namedValueAxes[options.axis],
                 point;
 
             chart.traverseDataPoints(function(value, category, categoryIx) {
@@ -4233,7 +4234,7 @@
             var plotArea = this;
 
             plotArea.range = { min: 0, max: 1 };
-            plotArea.namedAxes = {};
+            plotArea.namedValueAxes = {};
             plotArea.valueAxes = [];
             plotArea.axes = [];
 
@@ -4364,12 +4365,12 @@
                     options.categoryAxis)
                 ),
                 axis,
-                namedAxes = plotArea.namedAxes,
+                namedValueAxes = plotArea.namedValueAxes,
                 valueAxesOptions = $.isArray(options.valueAxis) ?
                     options.valueAxis : [ options.valueAxis ];
 
             $.each(valueAxesOptions, function() {
-                axis = namedAxes[this.name || "primary"] =
+                axis = namedValueAxes[this.name || PRIMARY] =
                     new NumericAxis(range.min, range.max, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
                     },
@@ -4381,8 +4382,8 @@
                 plotArea.append(axis);
             });
 
-            plotArea.axisX = invertAxes ? namedAxes.primary : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : namedAxes.primary;
+            plotArea.axisX = invertAxes ? namedValueAxes.primary : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : namedValueAxes.primary;
 
             plotArea.categoryAxis = categoryAxis;
             plotArea.axes.push(categoryAxis);
