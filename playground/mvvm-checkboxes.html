@@ -59,13 +59,19 @@
         <fieldset id="multiple">
             <legend></legend>
             <form>
-                <select data-source="products" data-value="selected" multiple data-template="select-template">
-                </select>
-                Selected product <span data-text="selectedProducts"></span>
-
-                <select data-source="spamFlavors" data-value="flavors" multiple>
-                </select>
-                Selected spam <span data-text="printFlavors"></span>
+                <p> Enable: <input type="checkbox" data-checked="enabled" /></p>
+                <div>
+                    <select data-source="products" data-enabled="enabled" data-value="selected" multiple data-template="select-template">
+                    </select>
+                    Selected product <span data-text="selectedProducts"></span>
+                </div>
+                <div>
+                    <select data-source="spamFlavors" data-enabled="enabled" data-value="flavors" multiple>
+                    </select>
+                    Selected spam <span data-text="printFlavors"></span>
+                </div>
+                <div>
+                    <input type="input" value="Foo" data-enabled="enabled"></input>
             </form>
         </fieldset>
 
@@ -89,9 +95,11 @@
             });
 
             kendo.bind($("#radio>form"), viewModel);
+
             viewModel = kendo.observable({
                 products: [ { id: 1,  name: "Food"}, { id: 2, name: "Beverages" }, { id: 3, name: "Beer" }],
                 selected: [],
+                enabled: true,
                 selectedProducts: function() {
                     var result = "",
                         selected = this.get("selected");
