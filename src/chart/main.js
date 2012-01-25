@@ -669,25 +669,25 @@
         }
     });
 
-    var Arc = Class.extend({
+    var Ring = Class.extend({
         init: function(c, innerRadius, outerRadius, startAngle, angle) {
-            var arc = this;
+            var ring = this;
 
-            arc.c = c;
-            arc.innerRadius = innerRadius;
-            arc.outerRadius = outerRadius;
-            arc.startAngle = startAngle;
-            arc.angle = angle;
+            ring.c = c;
+            ring.innerRadius = innerRadius;
+            ring.outerRadius = outerRadius;
+            ring.startAngle = startAngle;
+            ring.angle = angle;
         },
 
         point: function(angle, inner) {
-            var arc = this,
+            var ring = this,
                 radianAngle = angle * DEGREE,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
-                r = inner ? arc.innerRadius : arc.outerRadius,
-                x = arc.c.x - (ax * r),
-                y = arc.c.y - (ay * r);
+                r = inner ? ring.innerRadius : ring.outerRadius,
+                x = ring.c.x - (ax * r),
+                y = ring.c.y - (ay * r);
 
             return new Point2D(x, y);
         }
@@ -6073,7 +6073,7 @@
         Box2D: Box2D,
         Point2D: Point2D,
         Sector: Sector,
-        Arc: Arc,
+        Ring: Ring,
         Text: Text,
         BarLabel: BarLabel,
         ChartElement: ChartElement,
