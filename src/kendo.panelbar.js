@@ -761,6 +761,9 @@
          * @param {Boolean} [useAnimation]
          * Temporariliy enables (<b>true</b>) or disables (<b>false</b>) any visual animation(s) when expanding items.
          *
+         * @returns {PanelBar}
+         * Returns the PanelBar object to support chaining.
+         *
          */
         expand: function (element, useAnimation) {
             element = $(element);
@@ -820,6 +823,9 @@
          * @param {Boolean} [useAnimation]
          * Temporarily enables (<strong>true</strong>) or disables (<strong>false</strong>) any visual animation(s)
          * when collapsing items.
+         *
+         * @returns {PanelBar}
+         * Returns the PanelBar object to support chaining.
          *
          */
         collapse: function (element, useAnimation) {
@@ -942,51 +948,50 @@
          *
          * Appends a PanelBar item in the specified referenceItem
          *
-         * @example
-         * var panelBar = $("#panelBar").data("kendoPanelBar");
-         * panelBar.append(
-         *  [
-         *   {
-         *    text: "Item 1",
-         *    // link URL if navigation is needed, optional
-         *    url: "http://www.kendoui.com/"
-         *   },
-         *   {
-         *    text: "Item 2",
-         *    // content within an item
-         *    content: "text"
-         *   },
-         *   {
-         *    text: "Item 3",
-         *    // content URL to load within an item
-         *    contentUrl: "partialContent.html"
-         *   },
-         *   {
-         *    text: "Item 4",
-         *    // item image URL, optional
-         *    imageUrl: "http://www.kendoui.com/test.jpg",
-         *    // sub-item collection
-         *    items:
-         *    [
-         *     { text: "Sub Item 1" },
-         *     { text: "Sub Item 2" }
-         *    ]
-         *   },
-         *   {
-         *    text: "Item 5",
-         *    // item image sprite CSS class, optional
-         *    spriteCssClass: "imageClass3"
-         *   }
-         *  ],
-         *  referenceItem
-         * );
-         *
          * @param {Selector} item
          * Target item, specified as the JSON representation of an object. You can pass item text, content or
          * contentUrl here. Can handle an HTML string or array of such strings or JSON.
          *
          * @param {Item} referenceItem
          * A reference item to append the new item in
+         *
+         * @returns {PanelBar}
+         * Returns the PanelBar object to support chaining.
+         *
+         * @example
+         * var panelBar = $("#panelBar").data("kendoPanelBar");
+         * panelBar.append(
+         *     [
+         *         {
+         *             text: "Item 1",
+         *             url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
+         *         },
+         *         {
+         *             text: "Item 2",
+         *             content: "text"                                 // content within an item
+         *         },
+         *         {
+         *             text: "Item 3",
+         *             contentUrl: "partialContent.html"               // content URL to load within an item
+         *         },
+         *         {
+         *             text: "Item 4",
+         *             imageUrl: "http://www.kendoui.com/test.jpg",    // item image URL, optional
+         *             // sub-item collection
+         *             items:
+         *                 [
+         *                     { text: "Sub Item 1" },
+         *                     { text: "Sub Item 2" }
+         *                 ]
+         *         },
+         *         {
+         *             text: "Item 5",
+         *             // item image sprite CSS class, optional
+         *             spriteCssClass: "imageClass3"
+         *         }
+         *      ],
+         *      referenceItem
+         * );
          *
          */
         append: function (item, referenceItem) {
@@ -1022,6 +1027,9 @@
          * @param {Item} referenceItem
          * A reference item to insert the new item before.
          *
+         * @returns {PanelBar}
+         * Returns the PanelBar object to support chaining.
+         *
          * @example
          * panelBar.insertBefore(
          *     [{
@@ -1052,6 +1060,7 @@
          *     }],
          *     referenceItem
          * );
+         *
          */
         insertBefore: function (item, referenceItem) {
             referenceItem = $(referenceItem);
