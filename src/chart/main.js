@@ -2405,8 +2405,8 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart._seriesMin = MAX_VALUE;
-            chart._seriesMax = MIN_VALUE;
+            chart._axisMin = {};
+            chart._axisMax = {};
 
             chart.points = [];
             chart.categoryPoints = [];
@@ -2418,8 +2418,7 @@
         options: {
             series: [],
             isVertical: true,
-            isStacked: false,
-            axis: PRIMARY
+            isStacked: false
         },
 
         render: function() {
@@ -2442,7 +2441,7 @@
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(value, categoryIx);
+            chart.updateRange(value, categoryIx, series);
 
             point = chart.createPoint(value, category, categoryIx, series, seriesIx);
             if (point) {
@@ -2459,23 +2458,34 @@
             categoryPoints.push(point);
         },
 
-        updateRange: function(value, categoryIx) {
-            var chart = this;
+        updateRange: function(value, categoryIx, series) {
+            var chart = this,
+                axis = series.axis || PRIMARY,
+                axisMin = chart._axisMin[axis],
+                axisMax = chart._axisMax[axis];
 
             if (defined(value)) {
-                chart._seriesMin = math.min(chart._seriesMin, value);
-                chart._seriesMax = math.max(chart._seriesMax, value);
+                chart._axisMin[axis] = math.min(defined(axisMin) ? axisMin : MAX_VALUE, value);
+                chart._axisMax[axis] = math.max(defined(axisMax) ? axisMax : MIN_VALUE, value);
             }
         },
 
-        valueRange: function() {
-            var chart = this;
+        axisRange: function(axisName) {
+            var chart = this,
+                axisName = axisName || PRIMARY;
 
-            if (chart.points.length) {
-                return { min: chart._seriesMin, max: chart._seriesMax };
+            if (chart.points.length && defined(chart._axisMin[axisName])) {
+                return { min: chart._axisMin[axisName], max: chart._axisMax[axisName] };
             }
 
             return null;
+        },
+
+        seriesValueAxis: function(series) {
+            var namedValueAxes = this.plotArea.namedValueAxes;
+
+            // TODO: Test fallbacks
+            return namedValueAxes[series ? series.axis : PRIMARY] || namedValueAxes[PRIMARY];
         },
 
         reflow: function(targetBox) {
@@ -2487,10 +2497,11 @@
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 categoryAxis = plotArea.categoryAxis,
-                valueAxis = plotArea.namedValueAxes[options.axis],
+                valueAxis,
                 point;
 
-            chart.traverseDataPoints(function(value, category, categoryIx) {
+            chart.traverseDataPoints(function(value, category, categoryIx, currentSeries) {
+                valueAxis = chart.seriesValueAxis(currentSeries);
                 point = chartPoints[pointIx++];
                 if (point && point.plotValue) {
                     value = point.plotValue;
@@ -2622,7 +2633,7 @@
             return bar;
         },
 
-        updateRange: function(value, categoryIx) {
+        updateRange: function(value, categoryIx, series) {
             var chart = this,
                 options = chart.options,
                 isStacked = options.isStacked,
@@ -2638,7 +2649,7 @@
             }
         },
 
-        valueRange: function() {
+        axisRange: function(axisName) {
             var chart = this,
                 options = chart.options,
                 isStacked = options.isStacked,
@@ -2646,11 +2657,22 @@
                 totalsNeg = chart._categoryTotalsNeg;
 
             if (isStacked) {
-                chart._seriesMin = sparseArrayMin(totalsNeg.concat(0));
-                chart._seriesMax = sparseArrayMax(totalsPos.concat(0));
+                axisName = chart.seriesValueAxis().options.name || PRIMARY,
+                chart._axisMin[axisName] = sparseArrayMin(totalsNeg.concat(0));
+                chart._axisMax[axisName] = sparseArrayMax(totalsPos.concat(0));
             }
 
-            return CategoricalChart.fn.valueRange.call(chart);
+            return CategoricalChart.fn.axisRange.call(chart, axisName);
+        },
+
+        seriesValueAxis: function(series) {
+            var chart = this,
+                options = chart.options;
+
+            return CategoricalChart.fn.seriesValueAxis.call(
+                chart,
+                options.isStacked ? chart.options.series[0] : series
+            );
         },
 
         reflowCategories: function(categorySlots) {
@@ -3037,17 +3059,24 @@
             return point;
         },
 
-        updateRange: function(value, categoryIx) {
+        updateRange: function(value, categoryIx, series) {
             var chart = this,
+                axisName = series.axis || PRIMARY,
                 options = chart.options,
                 isStacked = options.isStacked,
-                totals = chart._categoryTotals;
+                totals = chart._categoryTotals,
+                axisMin = chart._axisMin[axisName],
+                axisMax = chart._axisMax[axisName];
 
             if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
-                    chart._seriesMin = math.min(chart._seriesMin, sparseArrayMin(totals));
-                    chart._seriesMax = math.max(chart._seriesMax, sparseArrayMax(totals));
+
+                    chart._axisMin[axisName] =
+                        math.min(defined(axisMin) ? axisMin : MAX_VALUE, sparseArrayMin(totals));
+
+                    chart._axisMax[axisName] =
+                        math.max(defined(axisMax) ? axisMax : MIN_VALUE, sparseArrayMax(totals));
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
@@ -4233,7 +4262,7 @@
         init: function(series, options) {
             var plotArea = this;
 
-            plotArea.range = { min: 0, max: 1 };
+            plotArea.axisRanges = {};
             plotArea.namedValueAxes = {};
             plotArea.valueAxes = [];
             plotArea.axes = [];
@@ -4268,7 +4297,39 @@
                 return inArray(s.type, [AREA, VERTICAL_AREA]);
             }));
 
+            plotArea.updateAxisRanges();
             plotArea.createAxes();
+        },
+
+        updateAxisRanges: function(chart) {
+            var plotArea = this,
+                axisRanges = plotArea.axisRanges,
+                valueAxesOptions = [].concat(plotArea.options.valueAxis),
+                axisOptions,
+                axisName,
+                range,
+                chartRange,
+                i,
+                length = valueAxesOptions.length;
+
+            for (i = 0; i < length; i++) {
+                axisOptions = valueAxesOptions[i];
+                axisName = axisOptions.name || PRIMARY;
+
+                if (chart) {
+                    chartRange = chart.axisRange(axisName);
+                    if (chartRange) {
+                        range = axisRanges[axisName] = axisRanges[axisName] || chartRange;
+                        range.min = math.min(range.min, chartRange.min);
+                        range.max = math.max(range.max, chartRange.max);
+                    }
+                } else {
+                    axisRanges[axisName] = axisRanges[axisName] || { min: 0, max: 1 };
+                }
+            }
+
+            // TODO: Refactor
+            axisRanges[PRIMARY] = axisRanges[PRIMARY] || { min: 0, max: 1 };
         },
 
         appendChart: function(chart) {
@@ -4279,6 +4340,8 @@
                 categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
 
             append(categories, new Array(categoriesToAdd));
+
+            plotArea.updateAxisRanges(chart);
 
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
         },
@@ -4299,7 +4362,6 @@
                     spacing: firstSeries.spacing
                 });
 
-            plotArea.range = barChart.valueRange() || plotArea.range;
             plotArea.appendChart(barChart);
         },
 
@@ -4310,19 +4372,13 @@
 
             var plotArea = this,
                 options = plotArea.options,
-                range = plotArea.range,
                 firstSeries = series[0],
                 lineChart = new LineChart(plotArea, {
                     // TODO: Rename isVertical to invertAxes, flip logic
                     isVertical: !plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
-                }),
-                lineChartRange = lineChart.valueRange() || range;
-
-            // Override the original range
-            range.min = math.min(range.min, lineChartRange.min);
-            range.max = math.max(range.max, lineChartRange.max);
+                });
 
             plotArea.appendChart(lineChart);
         },
@@ -4334,7 +4390,6 @@
 
             var plotArea = this,
                 options = plotArea.options,
-                range = plotArea.range,
                 firstSeries = series[0],
                 // Override the original invertAxes
                 areaChart = new AreaChart(plotArea, {
@@ -4342,12 +4397,7 @@
                     isVertical: !plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
-                }),
-                areaChartRange = areaChart.valueRange() || range;
-
-            // Override the original range
-            range.min = math.min(range.min, areaChartRange.min);
-            range.max = math.max(range.max, areaChartRange.max);
+                });
 
             plotArea.appendChart(areaChart);
         },
@@ -4355,7 +4405,7 @@
         createAxes: function() {
             var plotArea = this,
                 options = plotArea.options,
-                range = plotArea.range,
+                range,
                 invertAxes = plotArea.invertAxes,
                 categoriesCount = options.categoryAxis.categories.length,
                 categoryAxis = new CategoryAxis(deepExtend({
@@ -4365,12 +4415,15 @@
                     options.categoryAxis)
                 ),
                 axis,
+                axisName,
                 namedValueAxes = plotArea.namedValueAxes,
-                valueAxesOptions = $.isArray(options.valueAxis) ?
-                    options.valueAxis : [ options.valueAxis ];
+                valueAxesOptions = [].concat(options.valueAxis);
 
             $.each(valueAxesOptions, function() {
-                axis = namedValueAxes[this.name || PRIMARY] =
+                axisName = this.name || PRIMARY;
+                range = plotArea.axisRanges[axisName];
+
+                axis = namedValueAxes[axisName] =
                     new NumericAxis(range.min, range.max, deepExtend({
                         orientation: invertAxes ? HORIZONTAL : VERTICAL
                     },
@@ -4382,8 +4435,8 @@
                 plotArea.append(axis);
             });
 
-            plotArea.axisX = invertAxes ? namedValueAxes.primary : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : namedValueAxes.primary;
+            plotArea.axisX = invertAxes ? namedValueAxes[PRIMARY] : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : namedValueAxes[PRIMARY];
 
             plotArea.categoryAxis = categoryAxis;
             plotArea.axes.push(categoryAxis);
