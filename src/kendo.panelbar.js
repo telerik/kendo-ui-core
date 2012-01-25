@@ -3,7 +3,7 @@
  * display a hierarchical data as a multi-level, expandable panel bar.
  */
 
-(function ($, undefined) {
+(function($, undefined) {
     /**
      * @name kendo.ui.PanelBar.Description
      *
@@ -381,6 +381,7 @@
          * @option {Object} [animation]
          * A collection of visual animations used when <strong>PanelBar</strong> items are opened or closed through
          * user interactions. Setting this option to <strong>false</strong> will disable all animations.
+         *
          * _exampleTitle Defining custom animations when opening and closing items
          * _example
          * $("#panelBar").kendoPanelBar({
@@ -403,6 +404,7 @@
          *
          * @option {Object} [animation.open]
          * The visual animation(s) that will be used when opening items.
+         *
          * _exampleTitle Defining a custom animation when opening items that executes over 200 milliseconds
          * _example
          * $("#panelBar").kendoPanelBar({
@@ -416,10 +418,9 @@
          * });
          *
          * @option {Number} [animation.open.duration] <200>
-         * The number of milliseconds used for the visual animation when an
-         * item is opened.
-         * _exampleTitle Defining a custom animation for opening items that
-         * executes over 1000 milliseconds
+         * The number of milliseconds used for the visual animation when an item is opened.
+         *
+         * _exampleTitle Defining a custom animation for opening items that executes over 1000 milliseconds
          * _example
          * $("#panelBar").kendoPanelBar({
          *  animation: {
@@ -430,17 +431,16 @@
          * });
          *
          * @option {String} [animation.open.effects] <"expandVertical">
-         * A whitespace-delimited string of animation effects that are used
-         * when an item is expanded. Options include
-         * <b>"expandVertical"</b> and <b>"fadeIn"</b>.
+         * A whitespace-delimited string of animation effects that are used when an item is expanded. Options include
+         * <strong>"expandVertical"</strong> and <strong>"fadeIn"</strong>.
          *
          * @option {Boolean} [animation.open.hide]
          *
          * @option {Boolean} [animation.open.show] <true>
          *
          * @option {Object} [animation.close]
-         * The visual animation(s) that will be used when <strong>PanelBar</strong>
-         * items are closed.
+         * The visual animation(s) that will be used when <strong>PanelBar</strong> items are closed.
+         *
          * _exampleTitle Defining a custom animation for closing items that
          * executes over 200 milliseconds
          * _example
@@ -454,8 +454,8 @@
          * });
          *
          * @option {Number} [animation.close.duration] <200>
-         * The number of milliseconds used for the visual animation when a
-         * <strong>PanelBar</strong> item is closed.
+         * The number of milliseconds used for the visual animation when a <strong>PanelBar</strong> item is closed.
+         *
          * _exampleTitle Animating all closing items for 1000 milliseconds
          * _example
          * $("#panelBar").kendoPanelBar({
@@ -467,9 +467,9 @@
          * });
          *
          * @option {String} [animation.close.effects]
-         * A whitespace-delimited string of animation effects that are
-         * utilized when a <strong>PanelBar</strong> item is closed. Options include
-         * <b>"fadeOut"</b>.
+         * A whitespace-delimited string of animation effects that are utilized when a <strong>PanelBar</strong> item
+         * is closed. Options include <strong>"fadeOut"</strong>.
+         *
          * _exampleTitle Fading-out all closing items for 1000 milliseconds
          * _example
          * $("#panelBar").kendoPanelBar({
@@ -486,8 +486,8 @@
          * @option {Boolean} [animation.close.show] <false>
          *
          * @option {String} [expandMode] <"multiple">
-         * Specifies how the <strong>PanelBar</strong> items are displayed when opened
-         * and closed. The following values are available: 
+         * Specifies how the <strong>PanelBar</strong> items are displayed when opened and closed. The following values
+         * are available:
     	 * <div class="details-list">
          *  <dl>
     	 *   <dt>"single"</dt>
@@ -496,6 +496,7 @@
     	 *   <dd>Display multiple values at one time; opening an item has no visual impact on any other items in the <strong>PanelBar</strong>.</dd>
     	 *  </dl>
     	 * </div>
+         *
          * _example
          * $("#panelBar").kendoPanelBar({
          *     expandMode: "single"

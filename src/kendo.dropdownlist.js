@@ -1,3 +1,8 @@
+/**
+ * @fileOverview Provides a DropDownList implementation which can be used to display a list of values and allows the
+ * selection of a single value from the list.
+ */
+
 (function($, undefined) {
     /**
      * @name kendo.ui.DropDownList.Description

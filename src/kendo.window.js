@@ -1,4 +1,9 @@
-(function ($, undefined) {
+/**
+ * @fileOverview Provides a Window implementation which can be used to display content in a modal or non-modal HTML
+ * window.
+ */
+
+(function($, undefined) {
     /**
      * @name kendo.ui.Window.Description
      *

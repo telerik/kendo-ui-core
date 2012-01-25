@@ -3,7 +3,7 @@
  * selecting values or ranges of values.
  */
 
-(function ($, undefined) {
+(function($, undefined) {
     /**
      *
      * @name kendo.ui.Slider.Description
