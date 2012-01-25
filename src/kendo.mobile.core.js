@@ -104,7 +104,7 @@
     var Swipe = Observable.extend({
         init: function(element, options) {
             var that = this,
-                options = options || {};
+            options = options || {};
 
             that.x = new SwipeAxis(true);
             that.y = new SwipeAxis(false);
@@ -288,7 +288,7 @@
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
             },
 
-            Widget: Widget,
+            Widget: Widget
         },
 
         Swipe: Swipe,
