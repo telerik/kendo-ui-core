@@ -1,46 +1,55 @@
+/**
+ * @fileOverview Provides a TreeView implementation which can be used to display hierarchical data in a traditional
+ * tree structure.
+ */
+
 (function($, undefined){
     /**
      * @name kendo.ui.TreeView.Description
      *
      * @section
      * <p>
-     *  The <b>TreeView</b> displays hierarchical data in a traditional tree
-     *  structure. It supports user interaction through the mouse or touch to
-     *  perform re-ordering operations via drag-and-drop.
+     *  The <strong>TreeView</strong> displays hierarchical data in a traditional tree structure. It supports user
+     *  interaction through the mouse or touch to perform re-ordering operations via drag-and-drop.
      * </p>
      * <p>
-     *  A <b>TreeView</b> can be created by leveraging HTML lists. However,
-     *  it does not support binding to a remote data source at this point in
-     *  time.
+     *  A <strong>TreeView</strong> can be created by leveraging HTML lists. However, it does not support binding to a
+     *  remote data source at this point in time.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>A <b>TreeView</b> can be created in two ways:</p>
+     * <p>A <strong>TreeView</strong> can be created in two ways:</p>
      * <ol>
      *  <li>Define a hierarchical list with static HTML</li>
      *  <li>Use dynamic data binding</li>
      * </ol>
      * <p>
-     *  Static HTML definition is appropriate for small hierarchies and for
-     *  data that does not change frequently. Databinding should be used for
-     *  larger data sets and for data that changes frequently.
+     *  Static HTML definition is appropriate for small hierarchies and for data that does not change frequently.
+     *  Databinding should be used for larger data sets and for data that changes frequently.
      * </p>
      * <h3>Creating a TreeView from HTML</h3>
-     * @exampleTitle Create a hierarchical HTML list
+     *
+     * @exampleTitle Create a hierarchical list in HTML
      * @example
      * <ul id="treeView">
-     *  <li>Item 1
-     *   <ul>
-     *    <li>Item 1.1</li>
-     *    <li>Item 1.2</li>
-     *   </ul>
-     *  </li>
-     *  <li>Item 2</li>
+     *     <li>Item 1
+     *         <ul>
+     *             <li>Item 1.1</li>
+     *             <li>Item 1.2</li>
+     *         </ul>
+     *     </li>
+     *     <li>Item 2</li>
      * </ul>
      *
-     * @exampleTitle Initialize the TreeView using a jQuery selector
+     * @section
+     * <p>
+     *  Initialization of a <strong>TreeView</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>TreeView</strong> occur within a handler is provided to $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize a TreeView using a selector within $(document).ready()
      * @example
      * $(document).ready(function() {
-     *  $("#treeView").kendoTreeView();
+     *     $("#treeView").kendoTreeView();
      * });
      *
      * @section
@@ -69,12 +78,12 @@
      *
      * @section
      * <p>
-     *  <b>Note:</b> Currently, the <b>TreeView</b> does not support binding
+     *  <b>Note:</b> Currently, the <strong>TreeView</strong> does not support binding
      *  to a remote data source.
      * </p>
      * <h3>Configuring TreeView Behavior</h3>
      * <p>
-     *  A number of <b>TreeView</b> behaviors can be easily controlled by
+     *  A number of <strong>TreeView</strong> behaviors can be easily controlled by
      *  simple configuration properties, such as animation behaviors and
      *  drag-and-drop behaviors.
      * </p>
@@ -87,13 +96,13 @@
      *
      * @section
      * <p>
-     *  When drag-and-drop is enabled, the nodes of a <b>TreeView</b> can be
+     *  When drag-and-drop is enabled, the nodes of a <strong>TreeView</strong> can be
      *  dragged and dropped between all levels, with useful tooltips helping
      *  indicate where the node will be dropped.
      * </p>
      * <h3>Accessing an Existing TreeView</h3>
      * <p>
-     *  You can reference an existing <b>TreeView</b> instance via
+     *  You can reference an existing <strong>TreeView</strong> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
      *  Once a reference has been established, you can use the API to control
      *  its behavior.
@@ -242,7 +251,7 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          * @option {Array} [dataSource]
-         * The data that the <b>TreeView</b> will be bound to.
+         * The data that the <strong>TreeView</strong> will be bound to.
          *
          * @option {Object} [animation]
          * A collection of visual animations used when items are expanded or
@@ -280,7 +289,7 @@
          *
          * @option {String} [animation.expand.effects] <"expandVertical">
          * A whitespace-delimited string of animation effects that are
-         * utilized when a <b>TreeView</b> node is expanded. Options include
+         * utilized when a <strong>TreeView</strong> node is expanded. Options include
          * <b>"expandVertical"</b> and <b>"fadeIn"</b>.
            * _example
            * // expand and fade-in simultaneously over 5000 milliseconds
@@ -297,7 +306,7 @@
          *
          * @option {Boolean} [dragAndDrop] <false>
          * Disables (<b>false</b>) or enables (<b>true</b>) drag-and-drop
-         * on the nodes of a <b>TreeView</b>.
+         * on the nodes of a <strong>TreeView</strong>.
          *
          * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
          * @option {Number} [animation.collapse.duration] <200> The number of
@@ -313,7 +322,7 @@
          *
          * @option {String} [animation.collapse.effects]
          * A whitespace-delimited string of animation effects that are
-         * utilized when a <b>TreeView</b> node is collapsed. Options include
+         * utilized when a <strong>TreeView</strong> node is collapsed. Options include
          * <b>"fadeOut"</b>.
            * _example
            * // collapse and fade-out over 5000 milliseconds
@@ -853,7 +862,7 @@
 
         /**
          *
-         * Appends a node to a group of a <b>TreeView</b>.
+         * Appends a node to a group of a <strong>TreeView</strong>.
          * @example
          * var treeview = $("#treeview").data("kendoTreeView");
          *
