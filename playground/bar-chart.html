@@ -12,21 +12,25 @@
 
             var data = [
                 {
-                    name: "Alpha",
-                    a: 15,
-                    b: 2000
+                    name: "Jan",
+                    rain: 50,
+                    temp: 7,
+                    press: 1000
                 }, {
-                    name: "Gamma",
-                    a: -20,
-                    b: 2500
+                    name: "Feb",
+                    rain: 75,
+                    temp: 5,
+                    press: 990
                 }, {
-                    name: "Delta",
-                    a: 20,
-                    b: 3000
+                    name: "Mar",
+                    rain: 110,
+                    temp: 9,
+                    press: 1010
                 }, {
-                    name: "Epsilon",
-                    a: 20,
-                    b: 3500
+                    name: "Apr",
+                    rain: 140,
+                    temp: 14,
+                    press: 990
                 }
             ];
 
@@ -42,37 +46,49 @@
                     dataSource: data,
                     series: [{
                             type: "column",
-                            name: "1",
-                            field: "a",
-                            color: "red"
-                        },{
-                            type: "line",
-                            name: "2",
-                            field: "b",
-                            axis: "secondary",
+                            name: "Rain",
+                            field: "rain",
                             color: "blue"
+                        }, {
+                            type: "line",
+                            name: "Temperature",
+                            field: "temp",
+                            axis: "temp",
+                            color: "green"
+                        }, {
+                            type: "line",
+                            name: "Pressure",
+                            field: "press",
+                            axis: "press",
+                            color: "red"
                         }],
                     categoryAxis: {
                         field: "name",
-                        axisCrossingValue: [0, 4]
+                        axisCrossingValue: [0, 3, 4]
                     },
                     valueAxis: [{
-                        title: {
-                            text: "Red Axis"
-                        },
-                        line: {
-                            color: "red"
-                        }
-                        // name: primary
-                    }, {
-                        name: "secondary",
-                        title: {
-                            text: "Blue Axis"
-                        },
                         line: {
                             color: "blue"
+                        },
+                        labels: {
+                            template: "${ value } mm"
                         }
-
+                    }, {
+                        name: "temp",
+                        line: {
+                            color: "green"
+                        },
+                        labels: {
+                            template: "${ value } C"
+                        }
+                    }, {
+                        name: "press",
+                        line: {
+                            color: "red"
+                        },
+                        labels: {
+                            template: "${ value } mb"
+                        }
                     }]
                 });
             });

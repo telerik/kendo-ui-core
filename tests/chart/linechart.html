@@ -92,12 +92,12 @@
                     equal(lineChart.points.length, positiveSeries.data.length);
                 });
 
-                test("Reports minimum series value", function() {
-                    same(lineChart.valueRange().min, positiveSeries.data[0]);
+                test("Reports minimum series value for default axis", function() {
+                    same(lineChart.axisRange().min, positiveSeries.data[0]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(lineChart.valueRange().max, positiveSeries.data[1]);
+                test("Reports maximum series value for default axis", function() {
+                    same(lineChart.axisRange().max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -169,12 +169,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(lineChart.valueRange().min, negativeSeries.data[1]);
+                test("Reports minimum series value for default axis", function() {
+                    same(lineChart.axisRange().min, negativeSeries.data[1]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(lineChart.valueRange().max, negativeSeries.data[0]);
+                test("Reports maximum series value for default axis", function() {
+                    same(lineChart.axisRange().max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
@@ -230,12 +230,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(lineChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(lineChart.axisRange().min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(lineChart.valueRange().max, 3);
+                test("Reports maximum series value for default axis", function() {
+                    same(lineChart.axisRange().max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -258,12 +258,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(lineChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(lineChart.axisRange().min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(lineChart.valueRange().max, 2);
+                test("Reports maximum series value for default axis", function() {
+                    same(lineChart.axisRange().max, 2);
                 });
 
                 test("omits missing points by default", function() {
@@ -314,12 +314,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, 1);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(lineChart.axisRange().min, 1);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 6);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(lineChart.axisRange().max, 6);
                 });
 
                 test("point plot values are stacked", function() {
@@ -339,12 +339,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, -6);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(lineChart.axisRange().min, -6);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, -1);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(lineChart.axisRange().max, -1);
                 });
 
                 test("point plot values are stacked", function() {
@@ -370,12 +370,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, 1);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(lineChart.axisRange().min, 1);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(lineChart.axisRange().max, 2);
                 });
 
                 test("points have set height according to stack value", function() {
@@ -390,18 +390,24 @@
                 module("Line Chart / Stack / Mixed Series", {
                     setup: function() {
                         setupLineChart(plotArea, {
-                            series: [ positiveSeries, negativeSeries ],
+                            series: [
+                                // Both axes should be on same axis.
+                                // This rule is intentionally broken for the tests.
+                                $.extend({ axis: "a" }, positiveSeries),
+                                $.extend({ axis: "b" }, negativeSeries)
+                            ],
                             isStacked: true
                         });
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(lineChart.valueRange().min, 0);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(lineChart.axisRange("a").min, 0);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(lineChart.valueRange().max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    console.log(lineChart._axisMin, lineChart._axisMax);
+                    equal(lineChart.axisRange("a").max, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -415,11 +421,11 @@
                 });
 
                 test("Reports minimum series value", function() {
-                    same(lineChart.valueRange().min, 1);
+                    same(lineChart.axisRange().min, 1);
                 });
 
                 test("Reports maximum series value", function() {
-                    same(lineChart.valueRange().max, 4);
+                    same(lineChart.axisRange().max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
