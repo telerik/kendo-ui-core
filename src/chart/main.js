@@ -2486,7 +2486,7 @@
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
                 categoryAxis = plotArea.categoryAxis,
-                valueAxis = plotArea.valueAxes[options.axis],
+                valueAxis = plotArea.namedAxes[options.axis],
                 point;
 
             chart.traverseDataPoints(function(value, category, categoryIx) {
