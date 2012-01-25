@@ -4,30 +4,21 @@
      *
      * @section
      * <p>
-     * The Upload widget uses progressive enhancement to deliver the best possible
-     * uploading experience to users without requiring extra developer effort.
-     * Features highlights:
+     *  An <strong>Upload</strong> uses progressive enhancement to deliver the best possible uploading experience to
+     *  users without requiring extra developer effort. Features highlights:
      * </p>
-     *
      * <ul>
-     *    <li>Asynchronous and synchronous (on form submit) file upload</li>
-     *    <li>Multiple file selection</li>
-     *    <li>Removing uploaded files</li>
-     *    <li>Progress tracking *</li>
-     *    <li>File Drag-and-Drop *</li>
-     *    <li>Cancelling upload in progress *</li>
+     *  <li>Asynchronous and synchronous (on form submit) file upload</li>
+     *  <li>Multiple file selection</li>
+     *  <li>Removing uploaded files</li>
+     *  <li>Progress tracking *</li>
+     *  <li>File Drag-and-Drop *</li>
+     *  <li>Cancelling upload in progress *</li>
      * </ul>
-     * <p>
-     * * These features are automatically enabled if supported by the browser.
-     * </p>
-     * <p>
-     * Upload is a standards-based widget. No plug-ins required.
-     * </p>
+     * <p>(*) These features are automatically enabled if supported by the browser.</p>
+     * <p>An <strong>Upload</strong> is a standards-based widget; no plug-ins required.</p>
+     * <h3>Getting Started</h3>
      *
-     * <h3>
-     * Getting Started
-     * </h3>
-     * <p>
      * @exampleTitle 1. Create a simple HTML form and input element of type "file"
      * @example
      * <!-- Kendo will automatically set the form enctype attribute to "multi-part/form-data" -->
@@ -39,32 +30,24 @@
      *
      * @exampleTitle 2. Initialize Upload with a jQuery selector
      * @example
-     *    $(document).ready(function() {
-     *        $("#photos").kendoUpload();
-     *    });
+     * $(document).ready(function() {
+     *     $("#photos").kendoUpload();
+     * });
      *
      * @section
      * <p>
-     * Note the array syntax in the input name.
-     * It is used to hint the upload handler to treat photos as an array.
+     *  Note the array syntax in the input name; it is used to hint the upload handler to treat photos as an array.
      * </p>
      * <p>
-     * Please consult the documentation of your specific server technology
-     * regarding the handling of uploaded files.
+     *  Please consult the documentation of your specific server technology regarding the handling of uploaded files.
      * </p>
-     *
-     * <h3>
-     * See also
-     * </h3>
-     * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx">Upload Modes</a>
-     *
-     * @section
+     * <h3>See Also</h3>
+     * <p><a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx">Upload Modes</a></p>
      * <h3>Accessing an Existing Upload</h3>
      * <p>
      *  You can reference an existing <b>Upload</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-     *  Once a reference has been established, you can use the API to control
-     *  its behavior. 
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+     *  use the API to control its behavior. 
      * </p>
      *
      * @exampleTitle Accessing an existing Upload instance
@@ -86,14 +69,22 @@
 
     var Upload = Widget.extend(/** @lends kendo.ui.Upload.prototype */{
         /**
+         *
+         * Creates an Upload instance.
+         *
          * @constructs
          * @extends kendo.ui.Widget
+         *
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
+         *
          * @option {Boolean} [enabled] <true>
-         * Can be used to disable the upload. A disabled upload can be enabled by calling enable().
+         * Enables (<strong>true</strong>) or disables (<strong>false</strong>) an <strong>Upload</strong>. A disabled
+         * <strong>Upload</strong> may be re-enabled via enable().
+         *
          * @option {Boolean} [multiple] <true>
          * Enables or disables multiple file selection.
+         *
          * If set to false, users will be able to select only one file at a time.
          * Note: This option does not limit the total number of uploaded files
          * in asynchronous configuration.
