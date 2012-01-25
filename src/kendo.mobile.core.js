@@ -229,6 +229,7 @@
     });
 
     var TRANSFORM_STYLE = kendo.support.transitions.prefix + "Transform";
+
     var Move = kendo.Class.extend({
         init: function(element) {
             var that = this;
