@@ -946,7 +946,7 @@
 
         /**
          *
-         * Appends a PanelBar item in the specified referenceItem
+         * Appends an item to the PanelBar.
          *
          * @param {Selector} item
          * Target item, specified as the JSON representation of an object. You can pass item text, content or
