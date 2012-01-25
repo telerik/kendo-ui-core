@@ -249,3 +249,191 @@
     font-size: 1.1em;
     font-size: 1.1rem;
 }
+
+/* Firefox Icon Masks */
+
+.km-root .km-featured
+{
+    clip-path: url("images/iconmasks.svg#featured");
+}
+
+.km-root .km-toprated,
+.km-root .km-favorites
+{
+    clip-path: url("images/iconmasks.svg#toprated");
+}
+
+.km-root .km-mostviewed
+{
+    clip-path: url("images/iconmasks.svg#mostviewed");
+}
+
+.km-root .km-bookmarks
+{
+    clip-path: url("images/iconmasks.svg#bookmarks");
+}
+
+.km-root .km-contacts
+{
+    clip-path: url("images/iconmasks.svg#contacts");
+}
+
+.km-root .km-download,
+.km-root .km-downloads
+{
+    clip-path: url("images/iconmasks.svg#download");
+}
+
+.km-root .km-more
+{
+    clip-path: url("images/iconmasks.svg#more");
+}
+
+.km-root .km-android .km-root .km-more
+{
+    clip-path: url("images/iconmasks.svg#androidmore");
+}
+
+.km-root .km-meego .km-root .km-more
+{
+    clip-path: url("images/iconmasks.svg#meegomore");
+}
+
+.km-root .km-mostrecent
+{
+    clip-path: url("images/iconmasks.svg#mostrecent");
+}
+
+.km-root .km-recents
+{
+    clip-path: url("images/iconmasks.svg#recents");
+}
+
+.km-root .km-history
+{
+    clip-path: url("images/iconmasks.svg#history");
+}
+
+.km-root .km-add
+{
+    clip-path: url("images/iconmasks.svg#add");
+}
+
+.km-root .km-details
+{
+    clip-path: url("images/iconmasks.svg#details");
+}
+
+.km-root .km-info,
+.km-root .km-about
+{
+    clip-path: url("images/iconmasks.svg#info");
+}
+
+.km-root .km-action
+{
+    clip-path: url("images/iconmasks.svg#action");
+}
+
+.km-root .km-camera
+{
+    clip-path: url("images/iconmasks.svg#camera");
+}
+
+.km-root .km-edit,
+.km-root .km-compose
+{
+    clip-path: url("images/iconmasks.svg#edit");
+}
+
+.km-root .km-search
+{
+    clip-path: url("images/iconmasks.svg#search");
+}
+
+.km-root .km-trash,
+.km-root .km-delete
+{
+    clip-path: url("images/iconmasks.svg#trash");
+}
+
+.km-root .km-organize
+{
+    clip-path: url("images/iconmasks.svg#organize");
+}
+
+.km-root .km-reply
+{
+    clip-path: url("images/iconmasks.svg#reply");
+}
+
+.km-root .km-stop
+{
+    clip-path: url("images/iconmasks.svg#stop");
+}
+
+.km-root .km-sounds,
+.km-root .km-volume
+{
+    clip-path: url("images/iconmasks.svg#sounds");
+}
+
+.km-root .km-refresh
+{
+    clip-path: url("images/iconmasks.svg#refresh");
+}
+
+.km-root .km-play
+{
+    clip-path: url("images/iconmasks.svg#play");
+}
+
+.km-root .km-fastforward
+{
+    clip-path: url("images/iconmasks.svg#fastforward");
+}
+
+.km-root .km-pause
+{
+    clip-path: url("images/iconmasks.svg#pause");
+}
+
+.km-root .km-rewind
+{
+    clip-path: url("images/iconmasks.svg#rewind");
+}
+
+.km-root .km-settings
+{
+    clip-path: url("images/iconmasks.svg#settings");
+}
+
+.km-root .km-globe
+{
+    clip-path: url("images/iconmasks.svg#globe");
+}
+
+.km-root .km-home
+{
+    clip-path: url("images/iconmasks.svg#home");
+}
+
+.km-root .km-cart
+{
+    clip-path: url("images/iconmasks.svg#cart");
+}
+
+.km-root .km-battery
+{
+    clip-path: url("images/iconmasks.svg#battery");
+}
+
+.km-root .km-wifi
+{
+    clip-path: url("images/iconmasks.svg#wifi");
+}
+
+.km-root .km-share
+{
+    clip-path: url("images/iconmasks.svg#share");
+}
