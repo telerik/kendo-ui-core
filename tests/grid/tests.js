@@ -58,5 +58,9 @@ tests.push(
     {
         page: "grid/editingnavigation.html",
         title: "editing navigation"
+    },
+    {
+        page: "grid/mvvm.html",
+        title: "grid mvvm"
     }
 );

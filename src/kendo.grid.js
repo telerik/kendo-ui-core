@@ -616,6 +616,7 @@
                  * @param {Event} e
                  */
                 CHANGE,
+                "dataBinding",
                 /**
                  * Fires when the grid has received data from the data source.
                  * @name kendo.ui.Grid#dataBound
@@ -704,6 +705,8 @@
             if (that.options.autoBind) {
                 that.dataSource.fetch();
             }
+
+            kendo.notify(that);
         },
 
         options: {
@@ -2190,6 +2193,8 @@
                 return;
             }
 
+            that.trigger("dataBinding");
+
             that._distroyEditable();
 
             that._progress(false);
@@ -2239,6 +2244,71 @@
        }
    });
 
+    kendo.binders.grid = {
+        bind: function(element, observable, reason) {
+            var options = {},
+                option,
+                template,
+                container,
+                idx,
+                length,
+                dataSource,
+                widget;
+
+            element = $(element);
+
+            for (option in Grid.fn.options) {
+                value = element.data(kendo.ns + option.toLowerCase());
+
+                if (value === undefined) {
+                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                }
+
+                if (value !== undefined) {
+                    options[option] = value;
+                }
+            }
+
+            dataSource = element.data(kendo.ns + "source");
+
+            if (dataSource) {
+                options.dataSource = observable.get(dataSource);
+            }
+
+            template = element.data(kendo.ns + "rowtemplate");
+
+            if (template) {
+                template = $("#" + template).html();
+                if (template) {
+                    options.rowTemplate = template;
+
+                    options.dataBinding = function() {
+                        kendo.unbind(this.tbody);
+                    };
+
+                    options.dataBound = function() {
+                        var idx, length, children = this.tbody[0].children;
+
+                        for (idx = 0, length = children.length; idx < length; idx++) {
+                            kendo.bind(children[idx], options.dataSource[idx]);
+                        }
+                    };
+                }
+            }
+
+            widget = element.data("kendoGrid");
+
+            if (!widget) {
+                widget = new Grid(element, options);
+            } else {
+                if (options.rowTemplate) {
+                    widget.bind("dataBinding", options.dataBinding);
+                    widget.bind("dataBound", options.dataBound);
+                }
+                widget.dataSource.data(options.dataSource);
+            }
+        }
+    }
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
 })(jQuery);
