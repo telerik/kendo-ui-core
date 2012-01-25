@@ -1486,6 +1486,7 @@
 
         value = value.replace("-", "")
                      .replace(symbol, "")
+                     .replace(nonBreakingSpaceRegExp, " ")
                      .split(number[","].replace(nonBreakingSpaceRegExp, " ")).join("")
                      .replace(number["."], ".");
 
