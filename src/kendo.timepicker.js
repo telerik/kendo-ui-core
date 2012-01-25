@@ -576,74 +576,102 @@
         },
 
         /**
-        * Closes the popup.
-        * @name kendo.ui.TimePicker#close
-        * @function
-        * @example
-        * timepicker.close();
-        */
+         *
+         * Closes the drop-down list of a TimePicker.
+         *
+         * @exampleTitle Close the time drop-down list of a TimePicker.
+         * @example
+         * $("timepicker").data("kendoTimePicker").close();
+         *
+         */
         close: function() {
             this.timeView.close();
         },
 
         /**
-        * Opens the popup.
-        * @name kendo.ui.TimePicker#open
-        * @function
-        * @example
-        * timepicker.open();
-        */
+         *
+         * Opens the drop-down list of a TimePicker.
+         *
+         * @exampleTitle Open the time drop-down list of a TimePicker.
+         * @example
+         * $("timepicker").data("kendoTimePicker").open();
+         *
+         */
         open: function() {
             this.timeView.open();
         },
 
         /**
-        * Gets/Sets the min value of the timepicker.
-        * @param {Date|String} value The min time to set.
-        * @returns {Date} The min value of the timepicker.
-        * @example
-        * var timepicker = $("#timepicker").data("kendoTimePicker");
-        *
-        * // get the min value of the timepicker.
-        * var min = timepicker.min();
-        *
-        * // set the min value of the timepicker.
-        * timepicker.min(new Date(1900, 0, 1, 10, 0, 0));
-        */
+         *
+         * Gets or sets the minimum value of the TimePicker.
+         *
+         * @param {Date|String} value
+         * The minimum time value to set for a TimePicker, expressed as a Date object or as a string.
+         *
+         * @returns {Date}
+         * The minimum time value of a TimePicker.
+         *
+         * @exampleTitle Get the minimum value of a TimePicker
+         * @example
+         * var timePicker = $("#timePicker").data("kendoTimePicker");
+         * var minimum = timePicker.min();
+         *
+         * @exampleTitle Set the minimum value of a TimePicker
+         * @example
+         * var timePicker = $("#timePicker").data("kendoTimePicker");
+         * timePicker.min(new Date(1900, 0, 1, 10, 0, 0));
+         *
+         */
         min: function (value) {
             return this._option("min", value);
         },
 
         /**
-        * Gets/Sets the max value of the timepicker.
-        * @param {Date|String} value The max time to set.
-        * @returns {Date} The max value of the timepicker.
-        * @example
-        * var timepicker = $("#timepicker").data("kendoTimePicker");
-        *
-        * // get the max value of the timepicker.
-        * var max = timepicker.max();
-        *
-        * // set the max value of the timepicker.
-        * timepicker.max(new Date(1900, 0, 1, 18, 0, 0));
-        */
+         *
+         * Gets or sets the maximum value of the TimePicker.
+         *
+         * @param {Date|String} value
+         * The maximum time value to set for a TimePicker, expressed as a Date object or as a string.
+         *
+         * @returns {Date}
+         * The maximum time value of a TimePicker.
+         *
+         * @exampleTitle Get the maximum value of a TimePicker
+         * @example
+         * var timePicker = $("#timePicker").data("kendoTimePicker");
+         * var maximum = timePicker.max();
+         *
+         * @exampleTitle Set the maximum value of a TimePicker
+         * @example
+         * var timePicker = $("#timePicker").data("kendoTimePicker");
+         * timePicker.max(new Date(1900, 0, 1, 10, 0, 0));
+         *
+         */
         max: function (value) {
             return this._option("max", value);
         },
 
         /**
-        * Gets/Sets the value of the timepicker.
-        * @param {Date|String} value The value to set.
-        * @returns {Date} The value of the timepicker.
-        * @example
-        * var timepicker = $("#timepicker").data("kendoTimePicker");
-        *
-        * // get the value of the timepicker.
-        * var value = timepicker.value();
-        *
-        * // set the value of the timepicker.
-        * timepicker.value("10:00 AM"); //parse "10:00 AM" time and selects it in the popup.
-        */
+         *
+         * Gets or sets the value of the TimePicker.
+         *
+         * @param {Date|String} value
+         * The time value to set for a TimePicker, expressed as a Date object or as a string.
+         *
+         * @returns {Date}
+         * The time value of a TimePicker.
+         *
+         * @exampleTitle Get the value of a TimePicker
+         * @example
+         * var timePicker = $("#timePicker").data("kendoTimePicker");
+         * var timePickerValue = timePicker.value();
+         *
+         * @exampleTitle Set the value of a TimePicker
+         * @example
+         * var timePicker = $("#timePicker").data("kendoTimePicker");
+         * timePicker.value("10:00 AM");
+         *
+         */
         value: function(value) {
             var that = this;
 
