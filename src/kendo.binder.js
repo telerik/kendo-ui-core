@@ -247,20 +247,32 @@
 
         _change: function() {
             var that = this,
-                widget = that.widget;
+                widget = that.widget,
+                idx,
+                length,
+                view = widget.dataSource.view(),
+                value = that.widget.value();
 
+            for (idx = 0, length = view.length; idx < length; idx++) {
+                if (view[idx].get(widget.options.dataValueField) == value) {
+                    that.observable.set(that.field, view[idx]);
+                    return;
+                }
+            }
 
-            that.observable.set(that.field, widget.dataSource.view()[widget.select()]);
+            that.observable.set(that.field, value);
         },
 
         bind: function() {
             var that = this,
                 widget = that.widget,
-                index;
+                value = that.value();
 
-            index = widget.dataSource.view().indexOf(that.value());
+            if (value instanceof ObservableObject) {
+                value = value.get(widget.options.dataValueField);
+            }
 
-            that.widget.select(index);
+            that.widget.value(value);
         }
     });
     var SelectValueBinding = Binding.extend( {

@@ -21,6 +21,6 @@ tests.push(
     },
     {
         page: "dropdownlist/mvvm.html",
-        title: "dropdownlist mvvm support"
+        title: "dropdownlist mvvm"
     }
 );

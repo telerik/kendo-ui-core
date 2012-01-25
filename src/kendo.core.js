@@ -65,6 +65,7 @@
                 length,
                 eventName,
                 original,
+                handler,
                 events;
 
             if (typeof index !== NUMBER) {
@@ -90,19 +91,19 @@
                         }
                     }
                     events = that._events[eventName] = that._events[eventName] || [];
-                    events.splice(index, 0, handler);
+                    if (index >= 0) {
+                        events.splice(index, 0, handler);
+                    } else {
+                        events.push(handler);
+                    }
                 }
             }
 
             return that;
         },
 
-        one: function(index, eventNames, handlers) {
-            if (typeof index !== NUMBER) {
-                handlers = eventNames;
-                eventNames = index;
-            }
-            return this.bind(-1, eventNames, handlers, true);
+        one: function(eventNames, handlers) {
+            return this.bind(eventNames, handlers, true);
         },
 
         trigger: function(eventName, parameter) {

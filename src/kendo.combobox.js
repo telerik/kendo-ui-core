@@ -8,7 +8,7 @@
     *       It is a richer version of the standard HTML select, providing support for local and remote data binding, item templates,
     *       and configurable options for controlling the list behavior.
     *   </p>
-    *   If you do not want to allow user input, use the <a href="../dropdownlist/index.html" title="Kendo UI DropDownList">Kendo UI DropDownList</a>.
+    *   If you do not want to allow user input, use the <a href="../dropdownlist/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
     *
     *   <h3>Getting Started</h3>
     *   There are two basic ways to create a ComboBox:
@@ -199,7 +199,9 @@
                 * @event
                 * @param {Event} e
                 */
-                CHANGE
+                CHANGE,
+                "dataBinding",
+                "dataBound"
             ], options);
 
             wrapper = that._inputWrapper;
@@ -231,6 +233,8 @@
             } else if (element.is(SELECT)) {
                 that.input.val(element.children(":selected").text());
             }
+
+            kendo.notify(that);
         },
 
         options: {
@@ -695,6 +699,8 @@
                 data = that._data(),
                 length = data.length;
 
+            that.trigger("dataBinding");
+
             ul.innerHTML = kendo.render(that.template, data);
             that._height(length);
 
@@ -718,6 +724,7 @@
             }
 
             that._hideBusy();
+            that.trigger("dataBound");
         },
 
 
@@ -765,5 +772,79 @@
         }
     });
 
+    kendo.binders.combobox = {
+        bind: function(element, observable, reason) {
+            var options = {},
+                option,
+                value,
+                template,
+                container,
+                idx,
+                length,
+                dataSource,
+                widget;
+
+            element = $(element);
+
+            for (option in ComboBox.fn.options) {
+                value = element.data(kendo.ns + option.toLowerCase());
+
+                if (value === undefined) {
+                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                }
+
+                if (value !== undefined) {
+                    options[option] = value;
+                }
+            }
+
+            dataSource = element.data(kendo.ns + "source");
+
+            if (dataSource) {
+                options.dataSource = observable.get(dataSource);
+            }
+
+            template = element.data(kendo.ns + "template");
+
+            if (template) {
+                template = $("#" + template).html();
+                if (template) {
+                    options.template = template;
+
+                    options.dataBinding = function() {
+                        kendo.unbind(this.ul);
+                    };
+
+                    options.dataBound = function() {
+                        var idx, length, children = this.ul[0].children;
+
+                        for (idx = 0, length = children.length; idx < length; idx++) {
+                            kendo.bind(children[idx], options.dataSource[idx]);
+                        }
+                    };
+                }
+            }
+
+            widget = element.data("kendoComboBox");
+
+            if (!widget) {
+                widget = new ComboBox(element, options);
+            } else {
+                if (options.template) {
+                    widget.bind("dataBinding", options.dataBinding);
+                    widget.bind("dataBound", options.dataBound);
+                }
+                widget.options.dataTextField = options.dataTextField;
+                widget.options.dataValueField = options.dataValueField;
+                widget.dataSource.data(options.dataSource);
+            }
+
+            value = element.data(kendo.ns + "value");
+
+            if (value) {
+               (new kendo.data.WidgetValueBinding(element.data("kendoComboBox"), observable, value)).apply();
+            }
+        }
+    }
     ui.plugin(ComboBox);
 })(jQuery);

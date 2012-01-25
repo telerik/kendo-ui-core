@@ -313,38 +313,6 @@
         * // re-populate the data of the DataSource
         * dropdownlist.refresh();
         */
-        refresh: function() {
-            var that = this,
-                value = that.value(),
-                options = that.options,
-                data = that._data(),
-                length = data.length;
-
-            that.trigger("dataBinding");
-
-            that.ul[0].innerHTML = kendo.render(that.template, data);
-            that._height(length);
-
-            if (that.element.is(SELECT)) {
-                that._options(data);
-            }
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(options.index);
-            }
-
-            that._old = that.value();
-
-            if (that._open) {
-                that.toggle(length);
-            }
-
-            that._hideBusy();
-
-            that.trigger("dataBound");
-        },
 
         /**
         * Selects item, which starts with the provided parameter.
@@ -536,6 +504,8 @@
                 data = that._data(),
                 length = data.length;
 
+            that.trigger("dataBinding");
+
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
 
@@ -556,6 +526,8 @@
             }
 
             that._hideBusy();
+
+            that.trigger("dataBound");
         },
 
         _search: function() {
@@ -677,13 +649,15 @@
                     widget.bind("dataBinding", options.dataBinding);
                     widget.bind("dataBound", options.dataBound);
                 }
+                widget.options.dataTextField = options.dataTextField;
+                widget.options.dataValueField = options.dataValueField;
                 widget.dataSource.data(options.dataSource);
             }
 
             value = element.data(kendo.ns + "value");
 
             if (value) {
-               (new kendo.data.WidgetValueBinding(element.data("kendoDropDownList"), observable, value)).bind();
+               (new kendo.data.WidgetValueBinding(element.data("kendoDropDownList"), observable, value)).apply();
             }
         }
     }
