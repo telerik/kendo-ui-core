@@ -32,6 +32,10 @@ tests.push(
         title: "number formatting"
     },
     {
+        page: "core/numberparsing.html",
+        title: "number parsing"
+    },
+    {
         page: "core/culture.html",
         title: "culture"
     },

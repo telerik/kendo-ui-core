@@ -170,18 +170,15 @@
                 equal(kendo.parseInt(value), 1232);
             });
 
-            test("parse should call Globalize if it available", function() {
-                var called = false;
+            test("parse Bulgarian number", function() {
+                kendo.culture("bg-BG");
 
-                window.Globalize = {};
-                window.Globalize.parseFloat = function() {
-                    called = true;
-                }
+                var value = 10000.12,
+                    formatted = kendo.toString(value, "c");
 
-                parseF("1");
+                equal(kendo.parseFloat(formatted), value);
 
-                ok(called);
-                window.Globalized = null;
+                kendo.culture("en-US");
             });
         </script>
     </body>
