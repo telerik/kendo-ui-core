@@ -195,6 +195,11 @@
         },
 
         _start: function(e) {
+            if (e.which === 3) {
+                e.preventDefault();
+                return;
+            }
+
             var that = this;
 
             that._visibleBack = that.background.is(":visible");

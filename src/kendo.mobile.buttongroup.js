@@ -205,6 +205,11 @@
         },
 
         _mousedown: function(e) {
+            if (e.which === 3) {
+                e.preventDefault();
+                return;
+            }
+
             var that = this;
             that.select(e.currentTarget);
             that.trigger(SELECT);
