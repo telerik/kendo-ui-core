@@ -4,70 +4,37 @@
         ui = mobile.ui,
         proxy = $.proxy,
         roleSelector = kendo.roleSelector,
-        Widget = ui.Widget
-        BOUNCE_FRICTION = 0.8,
-        BOUNCE_DECELERATION = 3,
-        BOUNCE_PARALLAX = 0.5,
-        BOUNCE_SNAP = 0.7,
-        FRICTION = 0.96;
+        Widget = ui.Widget,
+        Transition = mobile.Transition;
+        FRICTION = 0.98;
+        OUT_OF_BOUNDS_FRICTION = 0.83;
 
     var Inertia = kendo.Class.extend({
-        init: function(move) {
+        init: function(options) {
             var that = this;
-            that.move = move;
-            that.tickProxy = proxy(that.tick, that);
-        },
-
-        start: function() {
-            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
+            $.extend(that, options);
+            that.tickProxy = proxy(that._tick, that);
         },
 
         stop: function() {
             clearInterval(this.intervalID);
         },
 
-        wind: function(options) {
-            var that = this,
-                move = that.move;
-
-            that.xVelocity = options.x * 10;
-            that.yVelocity = options.y * 10;
-
-            that.start();
+        start: function(velocity) {
+            this.velocity = velocity * 8;
+            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
         },
 
-        update:function(boundries) {
-            $.extend(this, boundries);
-        },
-
-        tick: function() {
+        _tick: function() {
             var that = this,
-                y = that.move.y,
-                offBy,
-                negativeVelocity = 0,
-                offBounds = false;
+                friction = that.boundary.y.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
-           if (y < that.minY) {
-               offBounds = true;
-               negativeVelocity = that.minY - y;
-           } else if (y > that.maxY) {
-               offBounds = true;
-               negativeVelocity = -(y - that.maxY);
-           }
+            that.move.moveBy(0, that.velocity *= friction);
 
-           negativeVelocity *= BOUNCE_SNAP;
-
-           if (offBounds) {
-               that.yVelocity *= BOUNCE_FRICTION;
-           } else {
-               that.yVelocity *= FRICTION;
-           }
-
-           that.move.moveBy(0, that.yVelocity);
-
-           if (Math.abs(that.yVelocity) < 0.5) {
-               that.stop();
-           }
+            if (Math.abs(that.velocity) < 1) {
+                that.stop();
+                that.callback();
+            }
         }
     });
 
@@ -85,21 +52,33 @@
 
             that.move = new mobile.Move(that.inner);
 
-            that.inertia = new Inertia(that.move);
+            that.transition = new Transition(that.move, $.noop);
 
             that.swipe = new mobile.Swipe(element, {
-                start: function() { },
+                start: function() {
+                    that.transition.stop();
+                    that.inertia.stop();
+                    that.boundary.refresh();
+                },
                 end: $.proxy(that._swipeEnd, that)
             });
 
-            that.draggable = new mobile.Draggable({
-                swipe: that.swipe,
-                elastic: true,
-                move: that.move
+            that.boundary = new mobile.ContainerBoundary(element, {move: that.move});
+
+            that.inertia = new Inertia({
+                move: that.move,
+                boundary: that.boundary,
+                callback: $.proxy(that._snapBack, that)
             });
 
-            that.calculateDimensions();
-            $(window).bind("orientationchange", proxy(that.calculateDimensions, that));
+            that.draggable = new mobile.Draggable({
+                move: that.move,
+                boundary: that.boundary,
+                swipe: that.swipe,
+                elastic: true,
+            });
+
+            that.boundary.refresh();
         },
 
         options: {
@@ -107,29 +86,26 @@
         },
 
         viewShow: function(view) {
-            this.calculateDimensions();
+            that.boundary.refresh();
         },
 
-        calculateDimensions: function() {
-            var that = this,
-                width = that.width = that.element.width(),
-                height = that.height = that.element.height(),
-                pageHTML = "",
-                scrollWidth = that.element[0].scrollWidth - that.move.x,
-                scrollHeight = that.element[0].scrollHeight - that.move.y,
-                boundries = {minX: width - scrollWidth, minY: height - scrollHeight}
+        _snapBack: function() {
+            var that = this, snapBack, y = that.move.y, boundary = that.boundary.y;
 
-            that.draggable.update(boundries);
-            that.inertia.update(boundries);
+            if (that.boundary.y.outOfBounds()) {
+                snapBack = y > boundary.max ? boundary.max : boundary.min;
+                that.transition.moveTo({ x: 0, y: snapBack, duration: 500, ease: Transition.easeOutExpo });
+            }
         },
 
         _swipeEnd: function(e) {
-            this.inertia.wind({
-                x: 0,
-                y: e.y.velocity
-            });
+            var that = this;
+            if (that.boundary.y.outOfBounds()) {
+                that._snapBack();
+            } else {
+                that.inertia.start(that.swipe.y.velocity);
+            }
         }
-
     });
 
     ui.plugin(Scroller);
