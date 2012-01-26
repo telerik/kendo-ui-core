@@ -28,10 +28,24 @@
             var Class = kendo.Class,
                 Observable = kendo.Observable;
 
-            var Binding = Class.extend( {
+            var Binding = Observable.extend( {
                 init: function(source, path) {
-                    this.source = source;
-                    this.path = path;
+                    var that = this;
+
+                    Observable.fn.init.call(that);
+
+                    that.source = source;
+                    that.path = path;
+
+                    that.source.bind("change", function(e) {
+                        if (that.path.indexOf(e.field) >= 0) {
+                            that.change();
+                        }
+                    });
+                },
+
+                change: function() {
+                    this.trigger("change");
                 },
 
                 get: function() {
@@ -39,7 +53,7 @@
                 },
 
                 set: function(value) {
-                    console.log("Setting", value);
+                    this.source.set(this.path, value);
                 }
             });
 
@@ -63,6 +77,10 @@
 
                     property.bind("change", function() {
                         expression.updateSource();
+                    });
+
+                    binding.bind("change", function() {
+                        expression.updateTarget();
                     });
                 }
             });
@@ -124,6 +142,7 @@
         <form>
             <div data-text="foo" data-title="bar"></div>
             <input data-value="baz" />
+            Input value is: <span data-text="baz"></span>
         </form>
 
         <script>
@@ -135,6 +154,7 @@
 
             bind($("div")[0], viewModel);
             bind($("input")[0], viewModel);
+            bind($("span")[0], viewModel);
         </script>
     </body>
 </html>
