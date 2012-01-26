@@ -23,7 +23,7 @@
         <ul id="log"></ul>
 
         <script>
-            var Tabstrip = kendo.mobile.ui.Tabstrip,
+            var Tabstrip = kendo.mobile.ui.TabStrip,
                 MOUSEDOWN = kendo.support.mousedown,
                 MOUSEUP = kendo.support.mouseup,
                 dom,
@@ -54,7 +54,7 @@
             });
 
             test("name is Tabstrip", function() {
-                equal(Tabstrip.fn.options.name, "Tabstrip", "Name is properly set");
+                equal(Tabstrip.fn.options.name, "TabStrip", "Name is properly set");
             });
 
             test("creates html structure", function() {
