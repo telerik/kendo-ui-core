@@ -25,7 +25,8 @@
         </style>
 
         <script>
-            var Class = kendo.Class;
+            var Class = kendo.Class,
+                Observable = kendo.Observable;
 
             var Binding = Class.extend( {
                 init: function(source, path) {
@@ -38,6 +39,7 @@
                 },
 
                 set: function(value) {
+                    console.log("Setting", value);
                 }
             });
 
@@ -49,11 +51,19 @@
                 setBinding: function(path, binding) {
                     path = {
                         "text": "innerText",
-                        "title": "title"
+                        "title": "title",
+                        "value": "value"
                     }[path];
 
-                    var expression = new BindingExpression(new Property(this.target, path), binding);
+                    var property = new Property(this.target, path);
+
+                    var expression = new BindingExpression(property, binding);
+
                     expression.updateTarget();
+
+                    property.bind("change", function() {
+                        expression.updateSource();
+                    });
                 }
             });
 
@@ -65,17 +75,29 @@
 
                 updateTarget: function() {
                     this.property.set(this.binding.get());
+                },
+
+                updateSource: function() {
+                    this.binding.set(this.property.get());
                 }
             });
 
-            var Property = Class.extend( {
+            var Property = Observable.extend( {
                 init: function(target, path) {
+                    Observable.fn.init.call(this);
+
                     this.target = target;
                     this.path = path;
+
+                    $(this.target).bind("change", $.proxy(this.change, this));
+                },
+
+                change: function() {
+                    this.trigger("change");
                 },
 
                 get: function() {
-                    return null;
+                    return this.target[this.path];
                 },
 
                 set: function(value) {
@@ -86,7 +108,7 @@
             function bind(target, source) {
                 var element = new DomElement(target);
 
-                ["text", "title"].forEach(function(path) {
+                ["text", "title", "value"].forEach(function(path) {
                     var sourcePath = target.getAttribute("data-" + path);
 
                     if (sourcePath) {
@@ -101,15 +123,18 @@
     <body>
         <form>
             <div data-text="foo" data-title="bar"></div>
+            <input data-value="baz" />
         </form>
 
         <script>
             var viewModel = kendo.observable({
                 foo: "foo",
-                bar: "bar"
+                bar: "bar",
+                baz: "baz"
             });
 
             bind($("div")[0], viewModel);
+            bind($("input")[0], viewModel);
         </script>
     </body>
 </html>
