@@ -63,15 +63,9 @@
                 },
 
                 setBinding: function(path, binding) {
-                    path = {
-                        "text": "innerText",
-                        "title": "title",
-                        "value": "value"
-                    }[path];
+                    var property = this.createProperty(path);
 
-                    var property = new Property(this.target, path);
-
-                    var expression = new BindingExpression(property, binding);
+                    var expression = this.createExpression(property, binding);
 
                     expression.updateTarget();
 
@@ -82,8 +76,32 @@
                     binding.bind("change", function() {
                         expression.updateTarget();
                     });
+                },
+
+                createExpression: function(property, binding) {
+                    return new BindingExpression(property, binding);
+                },
+
+                createProperty: function(path) {
+                    path = {
+                        "text": "innerText",
+                        "title": "title",
+                        "value": "value"
+                    }[path];
+
+                    return new Property(this.target, path);
                 }
             });
+
+            var SelectElement = DomElement.extend( {
+                createExpression: function(property, binding) {
+                    return new MultipleBindingExpression(property, binding);
+                },
+                createProperty: function(path) {
+                    return new MultipleProperty(this.target, path);
+                }
+            });
+
 
             var BindingExpression = Class.extend( {
                 init: function(property, binding) {
@@ -97,6 +115,15 @@
 
                 updateSource: function() {
                     this.binding.set(this.property.get());
+                }
+            });
+
+            var MultipleBindingExpression = BindingExpression.extend( {
+                updateSource: function() {
+                    var source = this.binding.get();
+                    var target = this.property.get();
+
+                    source.splice.apply(source, [0, source.length].concat(target));
                 }
             });
 
@@ -123,8 +150,34 @@
                 }
             });
 
+            var MultipleProperty = Property.extend({
+                get: function() {
+                    var optionIndex, value = [];
+
+                    for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
+                        if (this.target[optionIndex].selected) {
+                            value.push(this.target[optionIndex].value);
+                        }
+                    }
+
+                    return value;
+                },
+
+                set: function(value) {
+                    var valueIndex, optionIndex;
+
+                    for (valueIndex = 0; valueIndex < value.length; valueIndex++) {
+                        for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
+                            if (this.target[optionIndex].value == value[valueIndex]) {
+                                this.target[optionIndex].selected = true;
+                            }
+                        }
+                    }
+                }
+            });
+
             function bind(target, source) {
-                var element = new DomElement(target);
+                var element = target.nodeName.toLowerCase() === "select" ? new SelectElement(target) : new DomElement(target);
 
                 ["text", "title", "value"].forEach(function(path) {
                     var sourcePath = target.getAttribute("data-" + path);
@@ -141,21 +194,30 @@
     <body>
         <form>
             <div data-text="foo" data-title="bar"></div>
+
             <input data-value="baz" />
+
             Input value is: <span data-text="baz"></span>
+
+            <select multiple style="display:block" data-value="selectedValues">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
         </form>
 
         <script>
             var viewModel = kendo.observable({
                 foo: "foo",
                 bar: "bar",
-                baz: "baz"
+                baz: "baz",
+                selectedValues: ["two"]
             });
 
             bind($("div")[0], viewModel);
             bind($("input")[0], viewModel);
             bind($("span")[0], viewModel);
+            bind($("select")[0], viewModel);
         </script>
     </body>
 </html>
-
