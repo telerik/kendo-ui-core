@@ -343,8 +343,12 @@
 
             that._updateClasses();
 
-            if (that.tabGroup.is(EMPTY)) {
-                options.dataSource && that.append(options.dataSource);
+            if (options.dataSource) {
+                that.tabGroup.empty().detach();
+                that.element.empty();
+                that.tabGroup.appendTo(that.element);
+
+                that.append(options.dataSource);
             }
 
             if (that.options.contentUrls) {

@@ -330,8 +330,8 @@
 
             options = that.options;
 
-            if (that.element.is(EMPTY)) {
-                that.element.append($(Menu.renderGroup({
+            if (options.dataSource) {
+                that.element.empty().append($(Menu.renderGroup({
                     items: options.dataSource,
                     group: {
                         firstLevel: true,
