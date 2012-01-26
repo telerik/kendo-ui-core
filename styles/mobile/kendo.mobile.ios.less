@@ -131,18 +131,49 @@
     -webkit-transform: translatez(0);
 }
 
+.km-ios5 .km-switch-wrapper
+{
+    overflow: hidden;
+    background-color: #f0f0f0;
+}
+
 .km-ios .km-switch-background,
 .km-ios .km-slider-background
 {
     background:
-        linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%, rgb(250, 250, 250) 50%, rgb(255, 255, 255)) 6em 0 no-repeat,
-        linear-gradient(top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.18) 50%, rgba(255, 255, 255, 0.35)) 0 0 no-repeat #3074e7;
+        linear-gradient(top, rgb(219, 219, 219), rgb(238, 238, 238) 50%) 6em 0 no-repeat #3074e7;
+}
+
+.km-ios5 .km-switch-background
+{
+    background-color: #007EE9;
+    background-position: 3.8rem 0;
+    margin-left: ~"-3rem";
+}
+
+.km-ios .km-switch-background:after
+{
+    content: "\a0";
+    display: inline-block;
+    margin: 0;
+    width: 100%;
+    height: 55%;
+    line-height: 100%;
+    vertical-align: bottom;
+    background: linear-gradient(top,  rgba(255,255,255,.14) 0, rgba(255,255,255,.4));
+}
+
+.km-ios5 .km-switch-background:after
+{
+    margin: 0 0 0 .3rem;
+    width: 78%;
 }
 
 .km-ios .km-switch-container
 {
     border: 1px solid #999;
     .box-shadow(inset 0 2px 2px 0 rgba(0,0,0,.3));
+    background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 95%, rgba(0,0,0,.2));
 }
 
 .km-ios .km-checkbox
@@ -182,6 +213,60 @@
     color: #fff;
 }
 
+.km-ios5 .km-switch
+{
+    width: 4.6rem;
+    height: 1.6rem;
+    line-height: 1.65rem;
+    overflow: hidden;
+}
+
+.km-ios5 .km-switch-container
+{
+    padding: 1px 0 0 1px;
+    border-width: 0;
+}
+
+.km-ios5 .km-switch-handle
+{
+    .box-sizing(border-box);
+    width: 1.6rem;
+    height: 1.6rem;
+    margin: -.4px 0 0;
+    border-width: 1px;
+    border-color: #fff;
+}
+
+.km-ios5 .km-switch-handle,
+.km-ios5 .km-switch-wrapper,
+.km-ios5 .km-switch-container,
+.km-ios5 .km-switch-background:after
+{
+    .border-radius(~"1rem");
+}
+
+.km-ios5 .km-switch-background:after
+{
+    .border-radius(~"1rem 1rem .5rem .5rem");
+}
+
+.km-ios5 .km-switch-label-on,
+.km-ios5 .km-switch-label-off
+{
+    font-size: 1.05rem;
+    line-height: 1.45rem;
+}
+
+.km-ios5 .km-switch-label-off
+{
+    left: 1.6rem;
+}
+
+.km-ios5 .km-switch-label-on
+{
+    left: ~"-2.9rem";
+}
+
 .km-ios .km-badge,
 .km-ios .km-detail
 {
@@ -207,6 +292,11 @@
     border-width: .15rem;
     .box-shadow(0 1px 3px rgba(0,0,0,.5));
     background-color: #1F6DD8;
+}
+
+.km-ios5 .km-listview .km-switch
+{
+    margin-top: ~"-.85rem";
 }
 
 .km-ios .km-list .km-icon
