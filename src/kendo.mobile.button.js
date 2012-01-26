@@ -198,7 +198,7 @@
     *
     * @exampleTitle Initialize Kendo mobile BackButton based on role data attribute
     * @example
-    * <a data-role="back-button">Foo</a>
+    * <a data-role="backbutton">Foo</a>
     *
     * @exampleTitle Initialize Kendo mobile BackButton using a jQuery selector
     * @example
