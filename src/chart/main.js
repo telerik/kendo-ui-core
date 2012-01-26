@@ -4101,7 +4101,6 @@
             plotArea.box.unpad(margin);
             plotArea.reflowAxes();
             plotArea.reflowCharts();
-            plotArea.wrapAxes();
         },
 
         reflowAxes: function() {
@@ -4139,6 +4138,8 @@
                     axisX.options.axisCrossingValue,
                     axisY.options.axisCrossingValue
                 );
+
+                plotArea.wrapAxes([axisX, axisY]);
             }
         },
 
@@ -4156,18 +4157,20 @@
             plotArea.box = box;
         },
 
-        wrapAxes: function() {
+        wrapAxes: function(axes) {
             var plotArea = this,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                boxX,
-                boxY;
+                box,
+                axisBox,
+                i,
+                length = axes.length;
 
-            if (axisY || axisX) {
-                boxX = axisX.getAxisLineBox();
-                boxY = axisY.getAxisLineBox();
-                plotArea.box = boxX.clone().wrap(boxY);
+            for (i = 0; i < length; i++) {
+                axisBox = axes[i].box;
+                box = box || axisBox.clone();
+                box.wrap(axisBox);
             }
+
+            plotArea.box = box;
         },
 
         renderGridLines: function(view, axis, secondaryAxis) {
@@ -4567,6 +4570,7 @@
             plotArea.shrinkAxes();
             plotArea.alignAxes(xAxes, yAxes);
             plotArea.fitAxes();
+            plotArea.wrapAxes(axes);
         }
     });
 
