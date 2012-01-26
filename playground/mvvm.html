@@ -47,6 +47,11 @@
                 },
 
                 setBinding: function(path, binding) {
+                    path = {
+                        "text": "innerText",
+                        "title": "title"
+                    }[path];
+
                     var expression = new BindingExpression(new Property(this.target, path), binding);
                     expression.updateTarget();
                 }
@@ -79,25 +84,29 @@
             });
 
             function bind(target, source) {
-                var path = target.getAttribute("data-text");
-
-                var binding = new Binding(source, path);
-
                 var element = new DomElement(target);
 
-                element.setBinding("innerText", binding);
+                ["text", "title"].forEach(function(path) {
+                    var sourcePath = target.getAttribute("data-" + path);
+
+                    if (sourcePath) {
+                        var binding = new Binding(source, sourcePath);
+
+                        element.setBinding(path, binding);
+                    }
+                });
             }
         </script>
     </head>
     <body>
         <form>
-
-            <div data-text="foo"></div>
+            <div data-text="foo" data-title="bar"></div>
         </form>
 
         <script>
             var viewModel = kendo.observable({
-                foo: "foo"
+                foo: "foo",
+                bar: "bar"
             });
 
             bind($("div")[0], viewModel);
