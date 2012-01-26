@@ -24,46 +24,83 @@
             }
         </style>
 
+        <script>
+            var Class = kendo.Class;
+
+            var Binding = Class.extend( {
+                init: function(source, path) {
+                    this.source = source;
+                    this.path = path;
+                },
+
+                get: function() {
+                    return this.source.get(this.path);
+                },
+
+                set: function(value) {
+                }
+            });
+
+            var DomElement = Class.extend( {
+                init: function(target) {
+                    this.target = target;
+                },
+
+                setBinding: function(path, binding) {
+                    var expression = new BindingExpression(new Property(this.target, path), binding);
+                    expression.updateTarget();
+                }
+            });
+
+            var BindingExpression = Class.extend( {
+                init: function(property, binding) {
+                    this.property = property;
+                    this.binding = binding;
+                },
+
+                updateTarget: function() {
+                    this.property.set(this.binding.get());
+                }
+            });
+
+            var Property = Class.extend( {
+                init: function(target, path) {
+                    this.target = target;
+                    this.path = path;
+                },
+
+                get: function() {
+                    return null;
+                },
+
+                set: function(value) {
+                    this.target[this.path] = value;
+                }
+            });
+
+            function bind(target, source) {
+                var path = target.getAttribute("data-text");
+
+                var binding = new Binding(source, path);
+
+                var element = new DomElement(target);
+
+                element.setBinding("innerText", binding);
+            }
+        </script>
     </head>
     <body>
         <form>
-            <button data-click="addProduct">Add one product</button>
-            <fieldset>
-                <legend> DropDownList initialized before kendo.bind</legend>
-                <select id="beforeBind" data-source="products" data-textfield="name" data-valuefield="id" data-value="selectedProduct"></select>
-            </fieldset>
-            <fieldset>
-                <legend> DropDownList initialized after kendo.bind</legend>
-                <select id="afterBind" data-source="products" data-textfield="name" data-valuefield="id" data-value="selectedProduct"></select>
-            </fieldset>
-            <fieldset>
-                <legend> DropDownList initialized by kendo.bind</legend>
-                <select id="byRole" data-role="dropdownlist" data-textfield="name" data-valuefield="id" data-source="products" data-value="selectedProduct"></select>
-            </fieldset>
-            Selected product <span data-text="selectedProduct.name"></span>
+
+            <div data-text="foo"></div>
         </form>
 
         <script>
             var viewModel = kendo.observable({
-                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" }, { id:3, name: "Beer" }],
-                selectedProduct: null,
-                selectFirst: function() {
-                    this.set("selectedProduct", this.products[0]);
-                },
-                addProduct: function() {
-                    this.products.push({ id: this.products.length + 1, name: "Product " + (this.products.length + 1) });
-                },
-                removeProduct: function(e) {
-                    this.products.splice(this.products.length-1, 1);
-                }
+                foo: "foo"
             });
 
-            $("#beforeBind").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
-
-            kendo.bind($("form"), viewModel);
-
-            $("#afterBind").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
-
+            bind($("div")[0], viewModel);
         </script>
     </body>
 </html>
