@@ -628,47 +628,6 @@
         }
     });
 
-    var Sector = Class.extend({
-        init: function(c, r, startAngle, angle) {
-            var sector = this;
-
-            sector.c = c;
-            sector.r = r;
-            sector.startAngle = startAngle;
-            sector.angle = angle;
-        },
-
-        clone: function() {
-            var s = this;
-            return new Sector(s.c, s.r, s.startAngle, s.angle);
-        },
-
-        expand: function(value) {
-            this.r += value;
-            return this;
-        },
-
-        middle: function() {
-            return this.startAngle + this.angle / 2;
-        },
-
-        radius: function(newRadius) {
-            this.r = newRadius;
-            return this;
-        },
-
-        point: function(angle) {
-            var sector = this,
-                radianAngle = angle * DEGREE,
-                ax = math.cos(radianAngle),
-                ay = math.sin(radianAngle),
-                x = sector.c.x - (ax * sector.r),
-                y = sector.c.y - (ay * sector.r);
-
-            return new Point2D(x, y);
-        }
-    });
-
     var Ring = Class.extend({
         init: function(c, innerRadius, outerRadius, startAngle, angle) {
             var ring = this;
@@ -678,6 +637,27 @@
             ring.outerRadius = outerRadius;
             ring.startAngle = startAngle;
             ring.angle = angle;
+        },
+
+        clone: function() {
+            var s = this;
+            return new Sector(s.c, s.r, s.startAngle, s.angle);
+        },
+
+        middle: function() {
+            return this.startAngle + this.angle / 2;
+        },
+
+        radius: function(newRadius, inner) {
+            var that = this;
+
+            if (inner) {
+                that.innerRadius = newRadius;
+            } else {
+                that.innerRadius = newRadius;
+            }
+
+            return that;
         },
 
         point: function(angle, inner) {
@@ -690,6 +670,21 @@
                 y = ring.c.y - (ay * r);
 
             return new Point2D(x, y);
+        }
+    });
+
+    var Sector = Ring.extend({
+        init: function(c, r, startAngle, angle) {
+            Ring.fn.init.call(this, c, 0, r, startAngle, angle);
+        },
+
+        expand: function(value) {
+            this.outerRadius += value;
+            return this;
+        },
+
+        point: function(angle) {
+            return Ring.fn.point.call(this, angle);
         }
     });
 

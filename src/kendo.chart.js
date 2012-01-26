@@ -628,47 +628,6 @@
         }
     });
 
-    var Sector = Class.extend({
-        init: function(c, r, startAngle, angle) {
-            var sector = this;
-
-            sector.c = c;
-            sector.r = r;
-            sector.startAngle = startAngle;
-            sector.angle = angle;
-        },
-
-        clone: function() {
-            var s = this;
-            return new Sector(s.c, s.r, s.startAngle, s.angle);
-        },
-
-        expand: function(value) {
-            this.r += value;
-            return this;
-        },
-
-        middle: function() {
-            return this.startAngle + this.angle / 2;
-        },
-
-        radius: function(newRadius) {
-            this.r = newRadius;
-            return this;
-        },
-
-        point: function(angle) {
-            var sector = this,
-                radianAngle = angle * DEGREE,
-                ax = math.cos(radianAngle),
-                ay = math.sin(radianAngle),
-                x = sector.c.x - (ax * sector.r),
-                y = sector.c.y - (ay * sector.r);
-
-            return new Point2D(x, y);
-        }
-    });
-
     var Ring = Class.extend({
         init: function(c, innerRadius, outerRadius, startAngle, angle) {
             var ring = this;
@@ -678,6 +637,27 @@
             ring.outerRadius = outerRadius;
             ring.startAngle = startAngle;
             ring.angle = angle;
+        },
+
+        clone: function() {
+            var s = this;
+            return new Sector(s.c, s.r, s.startAngle, s.angle);
+        },
+
+        middle: function() {
+            return this.startAngle + this.angle / 2;
+        },
+
+        radius: function(newRadius, inner) {
+            var that = this;
+
+            if (inner) {
+                that.innerRadius = newRadius;
+            } else {
+                that.innerRadius = newRadius;
+            }
+
+            return that;
         },
 
         point: function(angle, inner) {
@@ -690,6 +670,21 @@
                 y = ring.c.y - (ay * r);
 
             return new Point2D(x, y);
+        }
+    });
+
+    var Sector = Ring.extend({
+        init: function(c, r, startAngle, angle) {
+            Ring.fn.init.call(this, c, 0, r, startAngle, angle);
+        },
+
+        expand: function(value) {
+            this.outerRadius += value;
+            return this;
+        },
+
+        point: function(angle) {
+            return Ring.fn.point.call(this, angle);
         }
     });
 
@@ -6546,8 +6541,7 @@
                 isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(ringConfig.outerRadius, 0),
                 ir = math.max(ringConfig.innerRadius, 0),
-                cx = ringConfig.c.x,
-                cy = ringConfig.c.y,
+                center = ringConfig.c,
                 firstOuterPoint = ringConfig.point(startAngle),
                 firstInnerPoint = ringConfig.point(startAngle, true),
                 secondOuterPoint = ringConfig.point(endAngle),
@@ -6559,29 +6553,29 @@
                 isReflexAngle: isReflexAngle,
                 r: r,
                 ir: ir,
+                cx: center.x,
+                cy: center.y,
                 firstInnerPoint: firstInnerPoint,
                 secondInnerPoint: secondInnerPoint
             });
         }
     });
 
-    var SVGSector = SVGPath.extend({
-        init: function(circleSector, options) {
+    var SVGSector = SVGRing.extend({
+        init: function(config, options) {
             var sector = this;
-            SVGPath.fn.init.call(sector, options);
+            SVGRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = SVGSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = SVGSector.pathTemplate = template(
-                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
-                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
                     "L #= d.cx # #= d.cy # z"
                 );
             }
-
-            sector.circleSector = circleSector || {};
         },
 
         options: {
@@ -6594,32 +6588,9 @@
         clone: function() {
             var sector = this;
             return new SVGSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                circleSector = sector.circleSector,
-                startAngle = circleSector.startAngle,
-                endAngle = circleSector.angle + startAngle,
-                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
-                isReflexAngle = (endAngle - startAngle) > 180,
-                r = math.max(circleSector.r, 0),
-                cx = circleSector.c.x,
-                cy = circleSector.c.y,
-                firstPoint = circleSector.point(startAngle),
-                secondPoint = circleSector.point(endAngle);
-
-            return sector.pathTemplate({
-                firstPoint: firstPoint,
-                secondPoint: secondPoint,
-                isReflexAngle: isReflexAngle,
-                r: r,
-                cx: cx,
-                cy: cy
-            });
         }
     });
 
