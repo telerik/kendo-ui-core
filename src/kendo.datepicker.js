@@ -507,34 +507,44 @@
          *          }
          *      });
          *  &lt;/script&gt;
-         * @option {Function} [month.empty] <> Template to be used for rendering the cells in the calendar "month" view, which are not in the min/max range.
-         * @option {Object} [animation] <> Animations to be used for
-         * opening/closing the popup. Setting to false will turn of the
-         * animation.
          *
-         * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+         * @option {Function} [month.empty]
+         * The template used for rendering the cells in the calendar "month" view, which are not in the range between 
+         * the minimum and maximum values.
+         *
+         * @option {Object} [animation]
+         * The animation(s) used for opening and/or closing the pop-up. Setting this value to <strong>false</strong>
+         * will disable the animation(s).
+         *
+         * @option {Object} [animation.open]
+         * The animation(s) used for displaying of the pop-up.
+         *
+         * _exampleTitle Fade-in the pop-up over 300 milliseconds
          * _example
          * $("#datePicker").kendoDatePicker({
-         *  animation: {
-         *   open: {
-         *    effects: "fadeIn",
-         *    duration: 300,
-         *    show: true
-         *   }
-         *  }
+         *     animation: {
+         *         open: {
+         *             effects: "fadeIn",
+         *             duration: 300,
+         *             show: true
+         *         }
+         *     }
          * });
          *
-         * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+         * @option {Object} [animation.close]
+         * The animation(s) used for hiding of the pop-up.
+         *
+         * _exampleTitle Fade-out the pop-up over 300 milliseconds
          * _example
          * $("#datePicker").kendoDatePicker({
-         *  animation: {
-         *   close: {
-         *    effects: "fadeOut",
-         *    duration: 300,
-         *    show: false,
-         *    hide: true
-         *   }
-         *  }
+         *     animation: {
+         *         close: {
+         *             effects: "fadeOut",
+         *             duration: 300,
+         *             show: false,
+         *             hide: true
+         *         }
+         *     }
          * });
          *
          */

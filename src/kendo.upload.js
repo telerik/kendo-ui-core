@@ -12,8 +12,8 @@
      *  <li>Multiple file selection</li>
      *  <li>Removing uploaded files</li>
      *  <li>Progress tracking *</li>
-     *  <li>File Drag-and-Drop *</li>
-     *  <li>Cancelling upload in progress *</li>
+     *  <li>File drag-and-drop *</li>
+     *  <li>Cancelling upload in-progress *</li>
      * </ul>
      * <p>(*) These features are automatically enabled if supported by the browser.</p>
      * <p>An <strong>Upload</strong> is a standards-based widget; no plug-ins required.</p>
@@ -83,67 +83,41 @@
          * <strong>Upload</strong> may be re-enabled via enable().
          *
          * @option {Boolean} [multiple] <true>
-         * Enables or disables multiple file selection.
+         * Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability to select multiple files.
+         * If <strong>false</strong>, users will be able to select only one file at a time. Note: This option does not
+         * limit the total number of uploaded files in an asynchronous configuration.
          *
-         * If set to false, users will be able to select only one file at a time.
-         * Note: This option does not limit the total number of uploaded files
-         * in asynchronous configuration.
          * @option {Boolean} [showFileList] <true>
-         * Controls whether to show the list of uploaded files.
-         * Hiding the list can be useful when you want to fully customize the UI.
-         * Use the client-side events to build your own UI.
+         * Enables (<strong>true</strong>) or disables (<strong>false</strong>) the ability to display a file listing
+         * for uploading a file(s). Disabling a file listing may be useful you wish to customize the UI; use the
+         * client-side events to build your own UI.
+         *
          * @option {Object} [async]
-         * Configures the upload for asynchronous operation.
-         * <dl>
-         *     <dt>
-         *         saveUrl: (String)
-         *     </dt>
-         *     <dd>
-         *         The URL of the handler that will receive the submitted files.
-         *         The handler must accept POST requests containing one or more
-         *         fields with the same name as the original input name.
-         *     </dd>
-         *     <dt>
-         *         saveField: (String)
-         *     </dt>
-         *     <dd>
-         *         The name of the form field submitted to the Save URL.
-         *         The default value is the input name.
-         *     </dd>
-         *     <dt>
-         *         removeUrl: (String)
-         *     </dt>
-         *     <dd>
-         *         The URL of the handler responsible for removing uploaded files (if any).
-         *         The handler must accept POST requests containing one or more
-         *         "fileNames" fields specifying the files to be deleted.
-         *     </dd>
-         *     <dt>
-         *         removeVerb: (String)
-         *     </dt>
-         *     <dd>
-         *         The HTTP verb to be used by the remove action.
-         *         The default value is "DELETE".
-         *     </dd>
-         *     <dt>
-         *         removeField: (String)
-         *     </dt>
-         *     <dd>
-         *         The name of the form field submitted to the Remove URL.
-         *         The default value is fileNames.
-         *     </dd>
-         *     <dt>
-         *         autoUpload: (Boolean)
-         *     </dt>
-         *     <dd>
-         *         The selected files will be uploaded immediately by default.
-         *         You can change this behavior by setting autoUpload to false.
-         *     </dd>
-         * </dl>
-         * <p>
-         * See the <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>
-         * help topic for more details.
-         * </p>
+         * Configures the ability to upload a file(s) in an asynchronous manner. Please refer to the
+         * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode help topic</a>
+         * for more details.
+         *
+         * @option {String} [async.saveUrl]
+         * The URL of the handler that will receive the submitted files. The handler must accept POST requests
+         * containing one or more fields with the same name as the original input name.
+         *
+         * @option {String} [async.saveField]
+         * The name of the form field submitted to the save URL. The default value is the input name.
+         *
+         * @option {String} [async.removeUrl]
+         * The URL of the handler responsible for removing uploaded files (if any). The handler must accept POST
+         * requests containing one or more "fileNames" fields specifying the files to be deleted.
+         *
+         * @option {String} [async.removeVerb] <"DELETE">
+         * The HTTP verb to be used by the remove action.
+         *
+         * @option {String} [async.removeField] <"fileNames">
+         * The name of the form field submitted to the Remove URL.
+         *
+         * @option {Boolean} [async.autoUpload] <"fileNames">
+         * The selected files will be uploaded immediately by default. You can change this behavior by setting
+         * autoUpload to false.
+         *
          * @option {Object} [localization]
          * Sets the strings rendered by the Upload.
          * <dl>
