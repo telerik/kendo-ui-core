@@ -13,6 +13,11 @@
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
+        if (e.which === 3) {
+            e.preventDefault();
+            return;
+        }
+
         var item = $(e.currentTarget);
             clickedLink = $(e.target).closest("a"),
             role = clickedLink.data(kendo.ns + "role") || "";
@@ -336,6 +341,11 @@
         },
 
         _click: function(e) {
+            if (e.which === 3) {
+                e.preventDefault();
+                return;
+            }
+
             var that = this,
                 dataItem,
                 item = $(e.currentTarget),

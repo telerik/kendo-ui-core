@@ -151,6 +151,11 @@
         },
 
         _release: function(e) {
+            if (e.which === 3) {
+                e.preventDefault();
+                return;
+            }
+
             var that = this,
                 item = $(e.currentTarget);
 
