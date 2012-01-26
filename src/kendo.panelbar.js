@@ -364,8 +364,8 @@
 
             options = that.options;
 
-            if (that.element.is(EMPTY)) {
-                that.element.append($(PanelBar.renderGroup({
+            if (options.dataSource) {
+                that.element.empty().append($(PanelBar.renderGroup({
                     items: options.dataSource,
                     group: {
                         firstLevel: true,
