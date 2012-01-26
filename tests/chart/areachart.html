@@ -98,12 +98,12 @@
                     equal(areaChart.points.length, positiveSeries.data.length);
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, positiveSeries.data[0]);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.axisRange().min, positiveSeries.data[0]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, positiveSeries.data[1]);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.axisRange().max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -175,12 +175,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, negativeSeries.data[1]);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.axisRange().min, negativeSeries.data[1]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, negativeSeries.data[0]);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.axisRange().max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
@@ -209,8 +209,28 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Multiple Series", {
                     setup: function() {
-                        setupAreaChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
+                        setupAreaChart(plotArea, {
+                            series: [
+                            $.extend({ axis: "primary" }, positiveSeries),
+                            $.extend({ axis: "secondary" }, negativeSeries  )
+                        ] });
                     }
+                });
+
+                test("Reports minimum series value for primary axis", function() {
+                    same(areaChart.axisRange().min, positiveSeries.data[0]);
+                });
+
+                test("Reports maximum series value for primary axis", function() {
+                    same(areaChart.axisRange().max, positiveSeries.data[1]);
+                });
+
+                test("Reports minimum series value for secondary axis", function() {
+                    same(areaChart.axisRange("secondary").min, negativeSeries.data[1]);
+                });
+
+                test("Reports maximum series value for secondary axis", function() {
+                    same(areaChart.axisRange("secondary").max, negativeSeries.data[0]);
                 });
 
                 test("Reports number of categories for two series", function() {
@@ -236,12 +256,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.axisRange().min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, 3);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.axisRange().max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -264,12 +284,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.axisRange().min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, 2);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.axisRange().max, 2);
                 });
 
                 test("omits missing points by default", function() {
@@ -320,12 +340,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, 1);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.axisRange().min, 1);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, 6);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.axisRange().max, 6);
                 });
 
                 test("point plot values are stacked", function() {
@@ -345,12 +365,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, -6);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.axisRange().min, -6);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, -1);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.axisRange().max, -1);
                 });
 
                 test("point plot values are stacked", function() {
@@ -376,12 +396,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, 1);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.axisRange().min, 1);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.axisRange().max, 2);
                 });
 
                 test("points have set height according to stack value", function() {
@@ -402,12 +422,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, 0);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.axisRange().min, 0);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.axisRange().max, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -420,12 +440,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.axisRange().min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, 4);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.axisRange().max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
