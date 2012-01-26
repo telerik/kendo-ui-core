@@ -194,7 +194,8 @@
             that.bind([
                 /**
                  *
-                 * Triggered when one or more files are selected. Cancelling this event will prevent the selection.
+                 * Triggered when a file(s) is selected. Note: Cancelling this event will prevent the selection from
+                 * occurring.
                  *
                  * @name kendo.ui.Upload#select
                  * @event
@@ -213,21 +214,23 @@
                  *     <li>size - the file size in bytes (null if not available)</li>
                  * </ul>
                  *
+                 * @exampleTitle Wire-up an event handler that triggered when a user selects a file(s)
                  * @example
+                 * var onSelect = function(e) {
+                 *     var files = e.files;    // array with information about the uploaded files
+                 *
+                 *     if (files.length > 5) {
+                 *         alert("Y U NO select fewer than six files?");
+                 *         e.preventDefault();
+                 *     }
+                 * };
+                 *
+                 * // initialize and configure an Upload widget with a select event handler
                  * $("#photos").kendoUpload({
                  *     // ...
                  *     select: onSelect
                  * });
                  *
-                 * function onSelect(e) {
-                 *     // Array with information about the uploaded files
-                 *     var files = e.files;
-                 *
-                 *     if (files.length > 5) {
-                 *         alert("Too many files selected!");
-                 *         e.preventDefault();
-                 *     }
-                 * }
                  */
                 SELECT,
 
