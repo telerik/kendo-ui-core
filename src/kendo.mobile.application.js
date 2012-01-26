@@ -349,9 +349,13 @@
 
                 ready: function(e) {
                     that._findView(e.string, function(view) {
-                        views.not(view.element).hide();
+                        var element = view.element;
+
+                        views.not(view).hide();
                         view.onShowStart();
                         that._setCurrentView(view);
+
+                        history.navigate(element.attr("id") || element.data("url"), true);
                     });
                 }
             };
