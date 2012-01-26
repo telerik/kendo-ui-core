@@ -2657,7 +2657,7 @@
                 totalsNeg = chart._categoryTotalsNeg;
 
             if (isStacked) {
-                axisName = chart.seriesValueAxis().options.name || PRIMARY,
+                axisName = chart.options.series[0].axis || PRIMARY,
                 chart._axisMin[axisName] = sparseArrayMin(totalsNeg.concat(0));
                 chart._axisMax[axisName] = sparseArrayMax(totalsPos.concat(0));
             }

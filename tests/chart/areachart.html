@@ -416,18 +416,23 @@
                 module("Area Chart / Stack / Mixed Series", {
                     setup: function() {
                         setupAreaChart(plotArea, {
-                            series: [ positiveSeries, negativeSeries ],
+                            series: [
+                                // Both axes should be on same axis.
+                                // This rule is intentionally broken for the tests.
+                                $.extend({ axis: "a" }, positiveSeries),
+                                $.extend({ axis: "b" }, negativeSeries)
+                            ],
                             isStacked: true
                         });
                     }
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(areaChart.axisRange().min, 0);
+                    equal(areaChart.axisRange("a").min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(areaChart.axisRange().max, 2);
+                    equal(areaChart.axisRange("a").max, 2);
                 });
 
                 // ------------------------------------------------------------
