@@ -23,7 +23,7 @@
     * @exampleTitle Use the <code>align</code> data attribute to specify the elements position inside the NavBar
     * @example
     * <div data-role="navbar">
-    *   <a data-role="back-button" data-align="left">Back</a>
+    *   <a data-role="backbutton" data-align="left">Back</a>
     *   My View Title
     *   <a data-role="button" data-align="right">About</a>
     * </div>
