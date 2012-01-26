@@ -9,6 +9,7 @@
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
+        KEDITITEM = "k-edit-item",
         STRING = "string",
         CLICK = "click",
         EDIT = "edit",
@@ -25,6 +26,8 @@
             Widget.fn.init.call(that, element, options);
 
             that.bind([CHANGE,DATABOUND,EDIT,REMOVE], options);
+
+            that._element();
 
             that._dataSource();
 
@@ -52,6 +55,10 @@
             that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
+        _element: function() {
+            this.element.addClass("k-widget k-listview");
+        },
+
         refresh: function(e) {
             var that = this,
                 data = that.dataSource.view(),
@@ -60,6 +67,12 @@
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate;
+
+            if (e && e.action === "itemchange") {
+                that._modelChange(e);
+                return;
+            }
+            that._destroyEditable();
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
@@ -210,10 +223,30 @@
            return selectable.value();
        },
 
+       _modelChange: function(e) {
+           var that = this,
+               model = e.items[0],
+               index = $.inArray(model, that.dataSource.view()),
+               isAlt = index % 2,
+               item = that.element.children().eq(index);
+
+            if (!item.hasClass(KEDITITEM)) {
+                item.replaceWith((isAlt ? that.altTemplate : that.template)(model));
+            }
+       },
+
+       _destroyEditable: function() {
+           var that = this;
+           if (that.editable) {
+               that.editable.distroy();
+               delete that.editable;
+           }
+       },
+
        editItem: function(item) {
            var that = this,
                data = that.dataSource.view()[item.index()],
-               container = $(that.editTemplate(data));
+               container = $(that.editTemplate(data)).addClass(KEDITITEM);
 
             if (that.editable) {
                 if (that.editable.end()) {
@@ -235,9 +268,7 @@
                container = $(that.template(data));
 
            if (that.editable && that.editable.end()) {
-               that.editable.distroy();
-               delete that.editable;
-
+               that._destroyEditable();
                item.replaceWith(container);
            }
        },
