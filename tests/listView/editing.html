@@ -79,6 +79,7 @@
 
                 listView.editItem(listView.element.children().first());
                 equal(listView.element.children().first().html(), "template");
+                ok(listView.element.children().first().hasClass("k-edit-item"));
             });
 
             test("editItem binds the edit template", function() {
@@ -94,6 +95,31 @@
                 listView.editItem(listView.element.children().first());
                 ok(listView.element.children().first().data("kendoEditable"));
                 ok(listView.editable);
+            });
+
+            test("editable is destroyed on refresh", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+
+                listView.editItem(listView.element.children().first());
+                dataSource.read();
+
+                ok(!listView.editable);
+            });
+
+            test("item is refreshed on itemchange", function() {
+                var listView = setup();
+                dataSource.get(0).set("foo", "bar");
+
+                equal(listView.element.children().first().text(), "bar");
+            });
+
+            test("edited item is not refreshed on itemchange", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+                listView.editItem(listView.element.find("li:first"));
+                dataSource.get(0).set("foo", "bar");
+
+                ok(listView.element.find("li:first").hasClass("k-edit-item"));
+                equal(listView.element.find("li:first").text(), "foo 0");
             });
 
             test("correct model is passed to editable", function() {
@@ -131,7 +157,7 @@
                 equal(args.item[0], listView.element.children()[0]);
             });
 
-            test("closeItem destroys the editable", function() {
+            test("saveItem destroys the editable", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
                 listView.editItem(listView.element.children().first());
@@ -141,7 +167,7 @@
                 ok(!listView.editable);
             });
 
-            test("closeItem renders item template", function() {
+            test("saveItem renders item template", function() {
                 var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
 
                 listView.editItem(listView.element.children().first());

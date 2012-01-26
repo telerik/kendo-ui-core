@@ -45,26 +45,28 @@
        </style>
     </head>
     <body>
+        <button class="k-add-button">Add new item</button>
         <ul id="listView"></ul>
         <div class="pager"></div>
 
         <script id="editTemplate" type="text/x-kendo-tmpl">
             <li>Editing: <input type="text" data-value="foo" name="foo" required/><div><span data-for="foo"></span></div>
             <input type="number" data-value="id" name="id" min="1"/>
-            <button class='k-close-button'>Close</button></li>
+            <button class='k-close-button'>Save</button></li>
         </script>
 
         <script>
             $(document).ready(function() {
                 var data = [];
                 for (var i = 1; i <= 20; i++ ) {
-                    data.push( { id: i, foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
+                    data.push( { mid: i, id: i, foo: "foo" + i, bar: "bar" + i, baz: { foo: "baz.foo" + i } } );
                 }
                 var dataSource = new kendo.data.DataSource({
                     schema: {
                         model: {
-                            id: "id",
+                            id: "mid",
                             fields: {
+                                mid: { type: "number" },
                                 id: { type: "number" },
                                 foo: "foo"
                             }
@@ -72,12 +74,6 @@
                     },
                     data: data,
                     pageSize: 10
-                });
-
-                $("<table><tbody></tbody></table>").appendTo(document.body).kendoListView({
-                    dataSource: dataSource,
-                    selectable: true,
-                    template: "<tr><td>${id}</td><td>${foo}</td></tr>"
                 });
 
                 $(".pager").kendoPager({
@@ -100,7 +96,7 @@
                 }).delegate(".k-close-button", "click", function(e) {
                     var item = $(this).parent();
 
-                    listView.closeItem(item);
+                    listView.saveItem(item);
 
                 }).delegate(".k-delete-button", "click", function(e) {
                     var item = $(this).parent();
@@ -109,6 +105,11 @@
                         listView.removeItem(item);
                     }
                 }).data("kendoListView");
+
+                $(".k-add-button").click(function() {
+                    listView.addItem();
+                });
+
             });
         </script>
     </body>
