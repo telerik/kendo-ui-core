@@ -25,7 +25,7 @@
             "source": "kendo.binder.min.js",
             "depends": [
                 "core",
-                "model"
+                "data"
             ],
             "hidden": true
         },
