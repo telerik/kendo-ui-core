@@ -394,8 +394,7 @@
                 isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(ringConfig.outerRadius, 0),
                 ir = math.max(ringConfig.innerRadius, 0),
-                cx = ringConfig.c.x,
-                cy = ringConfig.c.y,
+                center = ringConfig.c,
                 firstOuterPoint = ringConfig.point(startAngle),
                 firstInnerPoint = ringConfig.point(startAngle, true),
                 secondOuterPoint = ringConfig.point(endAngle),
@@ -407,29 +406,29 @@
                 isReflexAngle: isReflexAngle,
                 r: r,
                 ir: ir,
+                cx: center.x,
+                cy: center.y,
                 firstInnerPoint: firstInnerPoint,
                 secondInnerPoint: secondInnerPoint
             });
         }
     });
 
-    var SVGSector = SVGPath.extend({
-        init: function(circleSector, options) {
+    var SVGSector = SVGRing.extend({
+        init: function(config, options) {
             var sector = this;
-            SVGPath.fn.init.call(sector, options);
+            SVGRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = SVGSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = SVGSector.pathTemplate = template(
-                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
-                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
                     "L #= d.cx # #= d.cy # z"
                 );
             }
-
-            sector.circleSector = circleSector || {};
         },
 
         options: {
@@ -442,32 +441,9 @@
         clone: function() {
             var sector = this;
             return new SVGSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                circleSector = sector.circleSector,
-                startAngle = circleSector.startAngle,
-                endAngle = circleSector.angle + startAngle,
-                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
-                isReflexAngle = (endAngle - startAngle) > 180,
-                r = math.max(circleSector.r, 0),
-                cx = circleSector.c.x,
-                cy = circleSector.c.y,
-                firstPoint = circleSector.point(startAngle),
-                secondPoint = circleSector.point(endAngle);
-
-            return sector.pathTemplate({
-                firstPoint: firstPoint,
-                secondPoint: secondPoint,
-                isReflexAngle: isReflexAngle,
-                r: r,
-                cx: cx,
-                cy: cy
-            });
         }
     });
 

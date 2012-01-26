@@ -165,6 +165,29 @@
                     equals(circle.options.strokeWidth, 2);
                 });
 
+                test("createRing returns SVGRing", function() {
+                    var ring = view.createRing();
+                    ok(ring instanceof Chart.SVGRing);
+                });
+
+                test("createRing sets fill color", function() {
+                    var ring = view.createRing({ }, { fill: "#cf0" });
+
+                    equals(ring.options.fill, "#cf0");
+                });
+
+                test("createRing sets stroke color", function() {
+                    var ring = view.createRing({ }, { stroke: "#cf0" });
+
+                    equals(ring.options.stroke, "#cf0");
+                });
+
+                test("createRing sets stroke width", function() {
+                    var ring = view.createRing({ }, { strokeWidth: 2});
+
+                    equals(ring.options.strokeWidth, 2);
+                });
+
                 test("createSector returns SVGSector", function() {
                     var sector = view.createSector();
                     ok(sector instanceof Chart.SVGSector);
@@ -858,25 +881,6 @@
             }
 
             // TODO: Test Gauge
-            // TODO: Test SVGView.createRing
-
-            // TODO: Test Ring
-            (function() {
-                module("Ring");
-
-                function createRing(cx, cy, innerR, outerR, startAngle, angle) {
-                    return new Chart.Ring(new Point2D(cx, cy), innerR, outerR, startAngle, angle);
-                }
-
-                test("calculates inner point correctly", function() {
-                    var ring = createRing(135, 135, 100, 135, 90, 20);
-
-                    var innerPoint = ring.point(90, true);
-
-                    equal(innerPoint.x, 135);
-                    equal(innerPoint.y, 35);
-                });
-            })();
 
             (function() {
                 var ring;
