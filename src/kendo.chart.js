@@ -6111,9 +6111,41 @@
         categoriesCount: categoriesCount
     });
 
-    // RadialGauge ===================================================
+    // Gauge ===================================================
 
-    var RadialGauge = Widget.extend({
+    var GaugePlotArea = ChartElement.extend({
+        init: function(options) {
+            ChartElement.fn.init.call(this, options);
+
+            this.render();
+        },
+
+        options: {
+            axis: {},
+            plotArea: {
+                margin: {}
+            },
+            background: "",
+            border: {
+                color: BLACK,
+                width: 0
+            }
+        },
+
+        render: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                i;
+
+            plotArea.axis = new NumericAxis(options.min, options.max,
+                deepExtend({}, options.axis, { orientation: HORIZONTAL })
+            );
+
+            plotArea.append(plotArea.axis);
+        }
+    });
+
+    var Gauge = Widget.extend({
         init: function(element, userOptions) {
             var gauge = this,
                 options;
@@ -6123,7 +6155,7 @@
 
             gauge.options = deepExtend({}, options);
 
-            $(element).addClass("k-radialgauge");
+            $(element).addClass("k-gauge");
 
             gauge._axis();
         },
@@ -6131,8 +6163,39 @@
         _axis: function() {
         },
 
+        _redraw: function() {
+            var gauge = this,
+                options = gauge.options,
+                element = gauge.element,
+                model = gauge._model = gauge._getModel(),
+                plotArea = gauge._plotArea = model._plotArea,
+                viewClass = gauge._supportsSVG() ? gauge.SVGView : gauge.VMLView,
+                view = gauge._view = viewClass.fromModel(model);
+
+            element.css("position", "relative");
+            gauge._viewElement = view.renderTo(element[0]);
+        },
+
+        _getModel: function() {
+            var gauge = this,
+                options = gauge.options,
+                element = gauge.element,
+                model = new RootElement(deepExtend({
+                    width: element.width() || DEFAULT_WIDTH,
+                    height: element.height() || DEFAULT_HEIGHT
+                    }, options.gaugeArea)),
+                plotArea;
+
+            plotArea = model._plotArea = new GaugePlotArea(options);
+
+            model.append(plotArea);
+            model.reflow();
+
+            return model;
+        },
+
         options: {
-            name: "RadialGauge",
+            name: "Gauge",
             axis: {
                 type: "Numeric",
                 min: 0,
@@ -6142,7 +6205,7 @@
         }
     });
 
-    kendo.ui.plugin(RadialGauge);
+    kendo.ui.plugin(Gauge);
 
 })(jQuery);
 (function () {

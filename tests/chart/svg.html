@@ -842,46 +842,6 @@
 
             })();
 
-            var Gauge = Chart.ChartElement.extend({
-                init: function(ringConfig) {
-                    Chart.ChartElement.fn.init.call(this);
-
-                    this.ringConfig = ringConfig;
-                },
-                reflow: function(targetBox) {
-                    this.box = new Chart.Box2D(
-                        targetBox.x1, targetBox.y1,
-                        targetBox.x1 + 300, targetBox.y1 + 300
-                    );
-                },
-                getViewElements: function(view) {
-                    return [view.createRing(this.ringConfig, { fill: "#000000" })];
-                }
-            });
-
-            function render(ringConfig) {
-                var model = new Chart.RootElement({
-                        width: 300,
-                        height: 300,
-                        transitions: false
-                    }),
-                    viewClass = Chart.SVGView,
-                    div = $("<div />").css({
-                        width: 300,
-                        height: 300,
-                        border: "2px solid #000"
-                    }).appendTo(document.body)[0];
-
-                model.append(new Gauge(ringConfig));
-                model.reflow();
-
-                var view = viewClass.fromModel(model);
-
-                view.renderTo(div);
-            }
-
-            // TODO: Test Gauge
-
             (function() {
                 var ring;
 
