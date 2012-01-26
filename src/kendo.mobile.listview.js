@@ -9,6 +9,8 @@
         GROUP_TEMPLATE = kendo.template("<li><div class=\"km-group-title\">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>"),
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
+        MOUSEMOVE = support.mousemove,
+        MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
         CLICK = "click";
 
@@ -225,7 +227,7 @@
             options = that.options;
 
             that.element
-                .delegate(ITEM_SELECTOR, MOUSEDOWN + " " + MOUSEUP, toggleItemActiveClass)
+                .delegate(ITEM_SELECTOR, [MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), toggleItemActiveClass)
                 .delegate(ITEM_SELECTOR, MOUSEUP, proxy(that._click, that));
 
             if (options.dataSource) {

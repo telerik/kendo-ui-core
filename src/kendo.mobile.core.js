@@ -47,22 +47,14 @@
     });
 
     // Mobile Swipe
+
+    var MOVE_STOP_THRESHOLD = 35; // time after which the swipe is considered "stopped";
+
     var SwipeAxis = Class.extend({
-        init: function(horizontal) {
-            var that = this;
-
-            if (horizontal) {
-                that.size = "width";
-                that.axis = "x";
-            } else {
-                that.size = "height";
-                that.axis = "y";
-            }
-        },
-
         start: function(location) {
             var that = this;
             that.location = location;
+            that.lastMove = +new Date();
         },
 
         move: function(location) {
@@ -70,6 +62,7 @@
                 direction;
 
             that.delta = location - that.location;
+            that.lastMove = +new Date();
             direction = that.delta > 0;
 
             if (that.direction != direction) {
@@ -82,11 +75,10 @@
 
         end: function(location) {
             var that = this,
-                timePassed = (+new Date()) -that.startTime;
+                timePassed = (+new Date()) -that.startTime,
+                timeSinceMove = (+new Date()) -that.lastMove;
 
-            // console.log(location + "-" + that.startLocation + "/" + timePassed);
-
-            that.velocity = (location - that.startLocation) / timePassed;
+            that.velocity = timeSinceMove > MOVE_STOP_THRESHOLD ? 0 : (location - that.startLocation) / timePassed;
             that.move(location);
             delete that.direction;
         },
@@ -119,7 +111,7 @@
             eventMap["mousemove" + ns] = proxy(that._mouseMove, that);
             eventMap["mouseup" + ns + " mouseleave" + ns] = proxy(that._mouseUp, that);
             eventMap["touchmove" + ns] = proxy(that._touchMove, that);
-            eventMap["touchend" + ns] = proxy(that._touchEnd, that);
+            eventMap["touchend" + ns + " touchcancel" + ns] = proxy(that._touchEnd, that);
 
             extend(that, {
                 x: new SwipeAxis(true),
@@ -141,11 +133,7 @@
 
         _mouseDown: function(e) {
             var that = this;
-
-            e.preventDefault();
-
             that.surface.on(that.eventMap);
-
             that._perAxis(START, e);
         },
 
@@ -164,7 +152,7 @@
 
             that.surface.on(that.eventMap);
 
-            that._perAxis(START, touch);
+            that._perAxis(START, touch, e);
         },
 
         _touchMove: function(e) {
@@ -173,15 +161,13 @@
             if (!that.pressed) { return; }
 
             that._withTouchEvent(e, function(touch) {
-                e.preventDefault();
-                that._perAxis(MOVE, touch);
+                that._perAxis(MOVE, touch, e);
             });
         },
 
         _mouseMove: function(e) {
             var that = this;
 
-            e.preventDefault(e);
             that._perAxis(MOVE, e);
         },
 
@@ -195,7 +181,7 @@
 
                 that.surface.off(that.ns);
 
-                that._perAxis(END, touch);
+                that._perAxis(END, touch, e);
             });
         },
 
@@ -207,12 +193,17 @@
             that._perAxis(END, e);
         },
 
-        _perAxis: function(method, e) {
+        _perAxis: function(method, location, event) {
             var that = this;
 
-            that.x[method](e.pageX);
-            that.y[method](e.pageY);
-            return that.trigger(method, that);
+            event = event || location;
+
+            that.x[method](location.pageX);
+            that.y[method](location.pageY);
+
+            if(that.trigger(method, that)) {
+                event.preventDefault();
+            }
         },
 
         _withTouchEvent: function(e, callback) {
@@ -244,6 +235,7 @@
             var that = this;
             if (x) { that.x += x; }
             if (y) { that.y += y; }
+
             that._redraw();
         },
 
@@ -264,39 +256,62 @@
         }
     });
 
+    var Boundary = kendo.Class.extend({
+        init: function(options) {
+            var that = this;
+
+            $.extend(that, options);
+
+            that.max = 0;
+
+            if (that.horizontal) {
+                that.measure = "width";
+                that.scrollSize = "scrollWidth";
+                that.axis = "x";
+            } else {
+                that.measure = "height";
+                that.scrollSize = "scrollHeight";
+                that.axis = "y";
+            }
+        },
+
+        outOfBounds: function() {
+            var that = this,
+                offset = that.move[that.axis];
+
+            return  offset > that.max || offset < that.min;
+        },
+
+        update: function() {
+            var that = this,
+                element = that.element,
+                measure = that.measure;
+
+            that.size = element[that.measure]();
+            that.total = element[0][that.scrollSize];
+            that.min = that.size - that.total;
+        }
+    });
+
     var ContainerBoundary = kendo.Observable.extend({
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                move = options.move;
 
             kendo.Observable.fn.init.call(that);
 
-            that.element = element;
-            that.move = options.move;
-            that.x = {max: 0};
-            that.y = {max: 0};
+            that.x = new Boundary({horizontal: true, element: element, move: move});
+            that.y = new Boundary({horizontal: false, element: element, move: move});
 
-            $(window).bind("orientationchange", proxy(that.refresh, that));
+            $(window).bind("orientationchange resize", proxy(that.refresh, that));
 
             that.bind(["change"], options);
         },
 
         refresh: function() {
-            var that = this,
-                element = that.element,
-                x = that.x,
-                y = that.y,
-                move = that.move;
-
-            x.size = element.width();
-            x.total = element[0].scrollWidth - move.x;
-
-            y.size = element.height();
-            y.total = element[0].scrollHeight - move.y;
-
-            x.min = x.size - x.total;
-            y.min = y.size - y.total;
-
-            that.trigger("change");
+            this.x.update();
+            this.y.update();
+            this.trigger("change");
         }
     });
 
@@ -323,15 +338,28 @@
         init: function(options) {
             var that = this;
 
-            extend(that, { elastic: true }, options);
+            extend(that, { elastic: true, deltax: 0, deltay: 0 }, options);
             that.resistance = that.elastic ? 0.5 : 0;
 
             that.boundary.bind("change", proxy(that.update, that));
-            that.swipe.bind("move", proxy(that.swipeMove, that));
-        },
 
-        swipeMove: function(e) {
-            this._move(e);
+            that.swipe.bind([START, MOVE, END], {
+                start: function() {
+                    that.moved = false;
+                },
+
+                move: function(e) {
+                    that.moved = true;
+                    that._move(e);
+                    e.preventDefault();
+                },
+
+                end: function(e) {
+                    if (that.moved) {
+                        e.preventDefault();
+                    }
+                }
+            });
         },
 
         update: function(options) {
@@ -339,6 +367,7 @@
                 boundary = that.boundary;
 
             var move = that._apply;
+
             if (boundary.x.min != boundary.x.max) {
                 move = and(draggableHandler("x"), move);
             }
