@@ -120,63 +120,34 @@
          *
          * @option {Object} [localization]
          * Sets the strings rendered by the Upload.
-         * <dl>
-         *     <dt>
-         *         select: (String)
-         *     </dt>
-         *     <dd>
-         *         The "Select..." button text.
-         *     </dd>
-         *     <dt>
-         *         cancel: (String)
-         *     </dt>
-         *     <dd>
-         *         The Cancel button text.
-         *     </dd>
-         *     <dt>
-         *         retry: (String)
-         *     </dt>
-         *     <dd>
-         *         The Retry button text.
-         *     </dd>
-         *     <dt>
-         *         remove: (String)
-         *     </dt>
-         *     <dd>
-         *         The Remove button text.
-         *     </dd>
-         *     <dt>
-         *         uploadSelectedFiles: (String)
-         *     </dt>
-         *     <dd>
-         *         The "Upload files" button text.
-         *     </dd>
-         *     <dt>
-         *         dropFilesHere: (String)
-         *     </dt>
-         *     <dd>
-         *         The drop zone hint.
-         *         The default value is "drop files here to upload".
-         *     </dd>
-         *     <dt>
-         *         statusUploading: (String)
-         *     </dt>
-         *     <dd>
-         *         The status message for files that are being uploaded.
-         *     </dd>
-         *     <dt>
-         *         statusUploaded: (String)
-         *     </dt>
-         *     <dd>
-         *         The status message for uploaded files.
-         *     </dd>
-         *     <dt>
-         *         statusFailed: (String)
-         *     </dt>
-         *     <dd>
-         *         The status message for failed uploads.
-         *     </dd>
-         * </dl>
+         *
+         * @option {String} [localization.select]
+         * Sets the "Select..." button text.
+         *
+         * @option {String} [localization.cancel]
+         * Sets the text of the cancel button text.
+         *
+         * @option {String} [localization.retry]
+         * Sets the text of the retry button text.
+         *
+         * @option {String} [localization.remove]
+         * Sets the text of the remove button text.
+         *
+         * @option {String} [localization.uploadSelectedFiles]
+         * Sets the text of the "Upload files" button.
+         *
+         * @option {String} [localization.dropFilesHere] <"drop files here to upload">
+         * Sets the drop zone hint.
+         *
+         * @option {String} [localization.statusUploading]
+         * Sets the status message for files that are being uploaded.
+         *
+         * @option {String} [localization.statusUploaded]
+         * Sets the status message for uploaded files.
+         *
+         * @option {String} [localization.statusFailed]
+         * Sets the status message for failed uploads.
+         *
          */
         init: function(element, options) {
             var that = this;
@@ -222,21 +193,26 @@
 
             that.bind([
                 /**
-                 * Fires when one or more files are selected.
-                 * Cancelling the event will prevent the selection.
+                 *
+                 * Triggered when one or more files are selected. Cancelling this event will prevent the selection.
+                 *
                  * @name kendo.ui.Upload#select
                  * @event
+                 *
                  * @param {Event} e
+                 *
                  * @param {Array} e.files
                  * List of the selected files. Each file has:
+                 *
                  * <ul>
                  *     <li>name</li>
                  *     <li>
                  *         extension - the file extension
-                 *         inlcuding the leading dot - ".jpg", ".png", etc.
+                 *         including the leading dot - ".jpg", ".png", etc.
                  *      </li>
                  *     <li>size - the file size in bytes (null if not available)</li>
                  * </ul>
+                 *
                  * @example
                  * $("#photos").kendoUpload({
                  *     // ...
