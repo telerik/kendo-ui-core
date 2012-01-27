@@ -2408,10 +2408,9 @@
 
             chart.plotArea = plotArea;
 
-            // Value axis min/max range grouped by axis name, e.g.:
-            // primary: 0
-            chart._axisMin = {};
-            chart._axisMax = {};
+            // Value axis ranges grouped by axis name, e.g.:
+            // primary: { min: 0, max: 1 }
+            chart.valueAxisRanges = {};
 
             chart.points = [];
             chart.categoryPoints = [];
@@ -2465,25 +2464,16 @@
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
-                axis = series.axis || PRIMARY,
-                axisMin = chart._axisMin[axis],
-                axisMax = chart._axisMax[axis];
+                axisName = series.axis || PRIMARY,
+                axisRange = chart.valueAxisRanges[axisName];
 
             if (defined(value)) {
-                chart._axisMin[axis] = math.min(defined(axisMin) ? axisMin : MAX_VALUE, value);
-                chart._axisMax[axis] = math.max(defined(axisMax) ? axisMax : MIN_VALUE, value);
+                axisRange = chart.valueAxisRanges[axisName] =
+                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                axisRange.min = math.min(axisRange.min, value);
+                axisRange.max = math.max(axisRange.max, value);
             }
-        },
-
-        axisRange: function(axisName) {
-            var chart = this,
-                axisName = axisName || PRIMARY;
-
-            if (chart.points.length && defined(chart._axisMin[axisName])) {
-                return { min: chart._axisMin[axisName], max: chart._axisMax[axisName] };
-            }
-
-            return null;
         },
 
         seriesValueAxis: function(series) {
@@ -2573,6 +2563,13 @@
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
+        render: function() {
+            var chart = this;
+
+            CategoricalChart.fn.render.apply(chart);
+            chart.computeAxisRanges();
+        },
+
         createPoint: function(value, category, categoryIx, series, seriesIx) {
             var barChart = this,
                 options = barChart.options,
@@ -2640,8 +2637,7 @@
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
+                isStacked = chart.options.isStacked,
                 totalsPos = chart._categoryTotalsPos,
                 totalsNeg = chart._categoryTotalsNeg;
 
@@ -2654,20 +2650,18 @@
             }
         },
 
-        axisRange: function(axisName) {
+        computeAxisRanges: function() {
             var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
-                totalsPos = chart._categoryTotalsPos,
-                totalsNeg = chart._categoryTotalsNeg;
+                isStacked = chart.options.isStacked,
+                axisName;
 
             if (isStacked) {
-                axisName = chart.options.series[0].axis || PRIMARY,
-                chart._axisMin[axisName] = sparseArrayMin(totalsNeg.concat(0));
-                chart._axisMax[axisName] = sparseArrayMax(totalsPos.concat(0));
+                axisName = chart.options.series[0].axis || PRIMARY;
+                chart.valueAxisRanges[axisName] = {
+                    min: sparseArrayMin(chart._categoryTotalsNeg.concat(0)),
+                    max: sparseArrayMax(chart._categoryTotalsPos.concat(0))
+                };
             }
-
-            return CategoricalChart.fn.axisRange.call(chart, axisName);
         },
 
         seriesValueAxis: function(series) {
@@ -3018,9 +3012,17 @@
         init: function(plotArea, options) {
             var chart = this;
 
+            chart._stackAxisRange = { min: MAX_VALUE, max: MIN_VALUE };
             chart._categoryTotals = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
+        },
+
+        render: function() {
+            var chart = this;
+
+            CategoricalChart.fn.render.apply(chart);
+            chart.computeAxisRanges();
         },
 
         createPoint: function(value, category, categoryIx, series, seriesIx) {
@@ -3066,25 +3068,31 @@
 
         updateRange: function(value, categoryIx, series) {
             var chart = this,
-                axisName = series.axis || PRIMARY,
-                options = chart.options,
-                isStacked = options.isStacked,
-                totals = chart._categoryTotals,
-                axisMin = chart._axisMin[axisName],
-                axisMax = chart._axisMax[axisName];
+                isStacked = chart.options.isStacked,
+                stackAxisRange = chart._stackAxisRange,
+                totals = chart._categoryTotals;
 
             if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
 
-                    chart._axisMin[axisName] =
-                        math.min(defined(axisMin) ? axisMin : MAX_VALUE, sparseArrayMin(totals));
-
-                    chart._axisMax[axisName] =
-                        math.max(defined(axisMax) ? axisMax : MIN_VALUE, sparseArrayMax(totals));
+                    stackAxisRange.min = math.min(stackAxisRange.min, sparseArrayMin(totals));
+                    stackAxisRange.max = math.max(stackAxisRange.max, sparseArrayMax(totals));
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
+            }
+        },
+
+        computeAxisRanges: function() {
+            var chart = this,
+                isStacked = chart.options.isStacked,
+                axisName,
+                totals = chart._categoryTotals;
+
+            if (isStacked) {
+                axisName = chart.options.series[0].axis || PRIMARY;
+                chart.valueAxisRanges[axisName] = chart._stackAxisRange;
             }
         },
 
@@ -4356,11 +4364,11 @@
 
     var CategoricalPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            var plotArea = this;
+            var plotArea = this,
+                axisOptions = deepExtend({}, plotArea.options, options);
 
-            plotArea.axisRanges = {};
             plotArea.namedValueAxes = {};
-            plotArea.valueAxes = [];
+            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
@@ -4392,39 +4400,7 @@
                 return inArray(s.type, [AREA, VERTICAL_AREA]);
             }));
 
-            plotArea.updateAxisRanges();
             plotArea.createAxes();
-        },
-
-        updateAxisRanges: function(chart) {
-            var plotArea = this,
-                axisRanges = plotArea.axisRanges,
-                valueAxesOptions = [].concat(plotArea.options.valueAxis),
-                axisOptions,
-                axisName,
-                range,
-                chartRange,
-                i,
-                length = valueAxesOptions.length;
-
-            for (i = 0; i < length; i++) {
-                axisOptions = valueAxesOptions[i];
-                axisName = axisOptions.name || PRIMARY;
-
-                if (chart) {
-                    chartRange = chart.axisRange(axisName);
-                    if (chartRange) {
-                        range = axisRanges[axisName] = axisRanges[axisName] || chartRange;
-                        range.min = math.min(range.min, chartRange.min);
-                        range.max = math.max(range.max, chartRange.max);
-                    }
-                } else {
-                    axisRanges[axisName] = axisRanges[axisName] || { min: 0, max: 1 };
-                }
-            }
-
-            // TODO: Refactor
-            axisRanges[PRIMARY] = axisRanges[PRIMARY] || { min: 0, max: 1 };
         },
 
         appendChart: function(chart) {
@@ -4436,7 +4412,7 @@
 
             append(categories, new Array(categoriesToAdd));
 
-            plotArea.updateAxisRanges(chart);
+            plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
 
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
         },
@@ -4516,7 +4492,7 @@
 
             each(valueAxisOptions, function() {
                 axisName = this.name || PRIMARY;
-                range = plotArea.axisRanges[axisName];
+                range = plotArea.valueAxisRangeTracker.query(axisName);
 
                 axis = namedValueAxes[axisName] =
                     new NumericAxis(range.min, range.max, deepExtend({
@@ -4525,7 +4501,6 @@
                     this)
                 );
 
-                plotArea.valueAxes.push(axis);
                 plotArea.axes.push(axis);
                 plotArea.append(axis);
             });
@@ -4540,12 +4515,12 @@
     });
 
     var AxisGroupRangeTracker = Class.extend({
-        init: function(axisOptions, defaultRange) {
+        init: function(axisOptions) {
             var tracker = this;
 
             tracker.axisRanges = {},
-            tracker.axisOptions = axisOptions,
-            tracker.defaultRange = defaultRange || { min: 0, max: 1 };
+            tracker.axisOptions = [].concat(axisOptions),
+            tracker.defaultRange = { min: 0, max: 1 };
         },
 
         update: function(chartAxisRanges) {
@@ -4564,11 +4539,14 @@
             }
 
             for (i = 0; i < length; i++) {
-                axis = allAxisOptions[i];
+                axis = axisOptions[i];
                 axisName = axis.name || PRIMARY;
                 range = axisRanges[axisName];
                 chartRange = chartAxisRanges[axisName];
                 if (chartRange) {
+                    axisRanges[axisName] = range =
+                        range || { min: MAX_VALUE, max: MIN_VALUE };
+
                     range.min = math.min(range.min, chartRange.min);
                     range.max = math.max(range.max, chartRange.max);
                 }
@@ -4578,7 +4556,7 @@
         query: function(axisName) {
             var tracker = this;
 
-            return tracker.axisRanges[axisName] || tracker.defaultRange;
+            return tracker.axisRanges[axisName] || deepExtend({}, tracker.defaultRange);
         }
     });
 
