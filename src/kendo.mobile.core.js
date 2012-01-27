@@ -255,9 +255,10 @@
         }
     });
 
-    var Boundary = kendo.Class.extend({
+    var Boundary = Observable.extend({
         init: function(options) {
             var that = this;
+            Observable.fn.init.call(that);
 
             $.extend(that, options);
 
@@ -300,28 +301,22 @@
             that.size = element[that.measure]();
             that.total = element[0][that.scrollSize];
             that.min = that.size - that.total;
+            that.trigger("change", that);
         }
     });
 
-    var ContainerBoundary = Observable.extend({
+    var ContainerBoundary = Class.extend({
         init: function(element, options) {
             var that = this,
                 move = options.move;
 
-            Observable.fn.init.call(that);
-
             that.x = new Boundary({horizontal: true, element: element, move: move});
             that.y = new Boundary({horizontal: false, element: element, move: move});
 
-            $(window).bind("orientationchange resize", proxy(that.refresh, that));
-
-            that.bind(["change"], options);
-        },
-
-        refresh: function() {
-            this.x.update();
-            this.y.update();
-            this.trigger("change");
+            $(window).bind("orientationchange resize", function() {
+                that.x.update();
+                that.y.update();
+            });
         }
     });
 

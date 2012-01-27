@@ -42,8 +42,11 @@
         * @option {Number} [bounceVelocityThreshold] <2.5> The velocity threshold after which a swipe will result in a bounce effect.
         */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                containerBoundary;
+
             Widget.fn.init.call(that, element, options);
+
             element = that.element;
 
             element
@@ -61,7 +64,7 @@
                 axis: "x",
                 move: that.move,
                 callback: function() {
-                    that.page = -that.move.x / that.boundary.x.size;
+                    that.page = -that.move.x / that.boundary.size;
                     that._updatePage();
                 }
             });
@@ -73,19 +76,19 @@
                 end: $.proxy(that._swipeEnd, that)
             });
 
-            that.boundary = new mobile.ContainerBoundary(element, {
-                move: that.move,
-                change: proxy(that.calculateDimensions, that)
-            });
+            that.containerBoundary = new mobile.ContainerBoundary(element, {move: that.move });
+
+            that.boundary = that.containerBoundary.x;
+            that.boundary.bind("change", proxy(that.calculateDimensions, that));
 
             that.draggable = new mobile.Draggable({
-                boundary: that.boundary,
+                boundary: containerBoundary,
                 swipe: that.swipe,
                 elastic: true,
                 move: that.move
             });
 
-            that.boundary.refresh();
+            that.containerBoundary.refresh();
         },
 
         options: {
@@ -102,7 +105,7 @@
         calculateDimensions: function() {
             var that = this,
                 pageHTML = "",
-                boundary = that.boundary.x,
+                boundary = that.boundary,
                 width = boundary.size,
                 pages;
 
@@ -124,7 +127,7 @@
         _swipeEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
-                width = that.boundary.x.size,
+                width = that.boundary.size,
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
                 snap,

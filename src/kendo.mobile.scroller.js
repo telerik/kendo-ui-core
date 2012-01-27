@@ -21,7 +21,6 @@
                 callback: function() { that.end(); }
             });
 
-            that.boundary = that.boundary[that.axis];
             that.outOfBounds = proxy(that.boundary.outOfBounds, that.boundary);
             that.tickProxy = proxy(that._tick, that);
 
@@ -88,7 +87,7 @@
             that.element = $('<div class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
 
             that.size = horizontal ? "width" : "height";
-            that.scrollMove = that.boundary[that.axis].move;
+            that.scrollMove = that.boundary.move;
 
             that.boundary.bind("change", proxy(that.resize, that));
             that.scrollMove.bind("change", proxy(that.move, that));
@@ -97,7 +96,7 @@
 
         resize: function() {
             var that = this,
-                boundary = that.boundary[that.axis];
+                boundary = that.boundary;
 
             that.sizeRatio = boundary.size / boundary.total;
 
@@ -141,12 +140,12 @@
 
             var xScrollbar = new ScrollBar({
                 axis: "x",
-                boundary: that.boundary
+                boundary: that.boundary.x
             });
 
             var yScrollbar = new ScrollBar({
                 axis: "y",
-                boundary: that.boundary
+                boundary: that.boundary.y
             });
 
             element.append(xScrollbar.element)
@@ -157,19 +156,19 @@
             });
 
             new DragInertia({
-                axis: "y",
-                move: that.move,
-                swipe: that.swipe,
-                boundary: that.boundary,
-                end: function() { yScrollbar.hide(); console.log("end"); }
-            });
-
-            new DragInertia({
                 axis: "x",
                 move: that.move,
                 swipe: that.swipe,
-                boundary: that.boundary,
+                boundary: that.boundary.x,
                 end: function() { xScrollbar.hide() }
+            });
+
+            new DragInertia({
+                axis: "y",
+                move: that.move,
+                swipe: that.swipe,
+                boundary: that.boundary.y,
+                end: function() { yScrollbar.hide(); console.log("end"); }
             });
 
             that.draggable = new mobile.Draggable({
