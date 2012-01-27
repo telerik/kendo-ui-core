@@ -629,19 +629,19 @@
     });
 
     var Ring = Class.extend({
-        init: function(c, innerRadius, outerRadius, startAngle, angle) {
+        init: function(center, innerRadius, radius, startAngle, angle) {
             var ring = this;
 
-            ring.c = c;
-            ring.innerRadius = innerRadius;
-            ring.outerRadius = outerRadius;
+            ring.c = center;
+            ring.ir = innerRadius;
+            ring.r = radius;
             ring.startAngle = startAngle;
             ring.angle = angle;
         },
 
         clone: function() {
-            var s = this;
-            return new Sector(s.c, s.r, s.startAngle, s.angle);
+            var r = this;
+            return new Ring(r.c, r.ir, r.r, r.startAngle, r.angle);
         },
 
         middle: function() {
@@ -652,9 +652,9 @@
             var that = this;
 
             if (inner) {
-                that.innerRadius = newRadius;
+                that.ir = newRadius;
             } else {
-                that.innerRadius = newRadius;
+                that.r = newRadius;
             }
 
             return that;
@@ -665,22 +665,31 @@
                 radianAngle = angle * DEGREE,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
-                r = inner ? ring.innerRadius : ring.outerRadius,
-                x = ring.c.x - (ax * r),
-                y = ring.c.y - (ay * r);
+                radius = inner ? ring.ir : ring.r,
+                x = ring.c.x - (ax * radius),
+                y = ring.c.y - (ay * radius);
 
             return new Point2D(x, y);
         }
     });
 
     var Sector = Ring.extend({
-        init: function(c, r, startAngle, angle) {
-            Ring.fn.init.call(this, c, 0, r, startAngle, angle);
+        init: function(center, radius, startAngle, angle) {
+            Ring.fn.init.call(this, center, 0, radius, startAngle, angle);
         },
 
         expand: function(value) {
-            this.outerRadius += value;
+            this.r += value;
             return this;
+        },
+
+        clone: function() {
+            var sector = this;
+            return new Sector(sector.c, sector.r, sector.startAngle, sector.angle);
+        },
+
+        radius: function(newRadius) {
+            return Ring.fn.radius.call(this, newRadius);
         },
 
         point: function(angle) {
@@ -6602,8 +6611,8 @@
                 endAngle = ringConfig.angle + startAngle,
                 endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
-                r = math.max(ringConfig.outerRadius, 0),
-                ir = math.max(ringConfig.innerRadius, 0),
+                r = math.max(ringConfig.r, 0),
+                ir = math.max(ringConfig.ir, 0),
                 center = ringConfig.c,
                 firstOuterPoint = ringConfig.point(startAngle),
                 firstInnerPoint = ringConfig.point(startAngle, true),
