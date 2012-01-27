@@ -57,9 +57,13 @@
 
             that.move = new mobile.Move(that.inner);
 
-            that.transition = new mobile.Transition(that.move, function() {
-                that.page = -that.move.x / that.boundary.x.size;
-                that._updatePage();
+            that.transition = new mobile.Transition({
+                axis: "x",
+                move: that.move,
+                callback: function() {
+                    that.page = -that.move.x / that.boundary.x.size;
+                    that._updatePage();
+                }
             });
 
             that.swipe = new mobile.Swipe(element, {
@@ -139,7 +143,7 @@
 
             snap = Math.max(that.minSnap, Math.min(approx(that.move.x / width) * width, that.maxSnap));
 
-            that.transition.moveTo({ x: snap, y: 0, duration: options.duration, ease: ease });
+            that.transition.moveTo({ location: snap, duration: options.duration, ease: ease });
         },
 
         _updatePage: function() {
