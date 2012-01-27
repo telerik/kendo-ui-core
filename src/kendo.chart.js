@@ -5262,7 +5262,7 @@
 
         setup: function() {
             var anim = this,
-                sector = anim.element.circleSector;
+                sector = anim.element.config;
 
             anim.endRadius = sector.r;
             sector.r = 0;
@@ -5271,7 +5271,7 @@
         step: function(pos) {
             var anim = this,
                 endRadius = anim.endRadius,
-                sector = anim.element.circleSector;
+                sector = anim.element.config;
 
             sector.r = interpolateValue(0, endRadius, pos);
         }
