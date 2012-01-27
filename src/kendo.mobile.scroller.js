@@ -6,6 +6,7 @@
         extend = $.extend,
         Widget = ui.Widget,
         Class = kendo.Class,
+        Move = mobile.Move,
         Transition = mobile.Transition,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.95,
@@ -81,7 +82,7 @@
 
             extend(that, options, {
                 element: element,
-                move: new mobile.Move(element),
+                move: new Move(element),
                 scrollMove: options.boundary.move,
                 size: horizontal ? "width" : "height"
             });
@@ -131,7 +132,7 @@
                 .wrapInner('<div class="km-scroll-container"/>');
 
             var inner = element.children().first(),
-                move = new mobile.Move(inner),
+                move = new Move(inner),
                 boundary = new mobile.ContainerBoundary(element, {move: move}),
 
                 swipe = new mobile.Swipe(element, {

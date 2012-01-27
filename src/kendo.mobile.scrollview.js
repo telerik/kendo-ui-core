@@ -3,7 +3,6 @@
         ui = mobile.ui,
         proxy = $.proxy,
         Class = kendo.Class,
-        roleSelector = kendo.roleSelector,
         Transition = mobile.Transition,
         Widget = ui.Widget;
 
@@ -60,7 +59,7 @@
 
             that.move = new mobile.Move(that.inner);
 
-            that.transition = new mobile.Transition({
+            that.transition = new Transition({
                 axis: "x",
                 move: that.move,
                 callback: function() {
