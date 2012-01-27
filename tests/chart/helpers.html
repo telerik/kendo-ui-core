@@ -291,8 +291,8 @@
                     same([sector.c.x, sector.c.y], [10, 20]);
                 });
 
-                test("constructor sets outerRadius", function() {
-                    equals(sector.outerRadius, 30);
+                test("constructor sets radius", function() {
+                    equals(sector.r, 30);
                 });
 
                 test("constructor sets start angle", function() {
@@ -313,7 +313,7 @@
                 });
 
                 test("expand increases radius", function() {
-                    equals(sector.expand(100).outerRadius, 130);
+                    equals(sector.expand(100).r, 130);
                 });
 
                 test("point returns intersection point for angle", function() {
@@ -336,8 +336,8 @@
                 });
 
                 test("constructor sets radii", function() {
-                    equals(ring.innerRadius, 20);
-                    equals(ring.outerRadius, 30);
+                    equals(ring.ir, 20);
+                    equals(ring.r, 30);
                 });
 
                 test("constructor sets start angle", function() {
