@@ -6,7 +6,10 @@
         proxy = $.proxy,
         Class = kendo.Class,
         Observable = kendo.Observable,
-        mobile;
+        mobile,
+
+        // Math shortcuts
+        round = Math.round;
 
     var Widget = ui.Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
         /**
@@ -191,6 +194,16 @@
 
     var TRANSFORM_STYLE = kendo.support.transitions.prefix + "Transform";
 
+    if (support.hasHW3D) {
+        function translate(x, y) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        }
+    } else {
+        function translate(x, y) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        }
+    }
+
     var Move = Class.extend({
         init: function(element) {
             var that = this;
@@ -198,9 +211,10 @@
             that.domElement = that.element[0];
             that.x = 0;
             that.y = 0;
+            that._saveCoordinates(translate(that.x, that.y));
         },
 
-        moveBy: function(x, y) {
+        moveBy: function(coordinates) {
             var that = this;
             if (x) { that.x += x; }
             if (y) { that.y += y; }
@@ -215,13 +229,17 @@
         },
 
         _redraw: function() {
-            var that = this, translate;
-            if (support.hasHW3D) {
-                translate = "translate3d(" + that.x + "px," + that.y +"px,0)";
-            } else {
-                translate = "translate(" + that.x + "px," + that.y +"px)";
+            var that = this, 
+                newCoordinates = translate(that.x, that.y);
+
+            if (newCoordinates != that.coordinates) {
+                that.domElement.style[TRANSFORM_STYLE] = newCoordinates;
+                that._saveCoordinates(newCoordinates);
             }
-            that.domElement.style[TRANSFORM_STYLE] = translate;
+        },
+
+        _saveCoordinates: function(coordinates) {
+            this.coordinates = coordinates;
         }
     });
 
