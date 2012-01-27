@@ -17,13 +17,6 @@
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
 
-        <style>
-            table, td, th {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
-
         <script>
             var Class = kendo.Class,
                 Observable = kendo.Observable;
@@ -57,7 +50,7 @@
                 }
             });
 
-            var DomElement = Class.extend( {
+            var BindingTarget = Class.extend( {
                 init: function(target) {
                     this.target = target;
                 },
@@ -93,7 +86,7 @@
                 }
             });
 
-            var SelectElement = DomElement.extend( {
+            var SelectBindingTarget = BindingTarget.extend( {
                 createExpression: function(property, binding) {
                     return new MultipleBindingExpression(property, binding);
                 },
@@ -176,16 +169,56 @@
                 }
             });
 
-            function bind(target, source) {
-                var element = target.nodeName.toLowerCase() === "select" ? new SelectElement(target) : new DomElement(target);
+            var WidgetBindingTarget = BindingTarget.extend( {
+                createProperty: function(path) {
+                    path = {
+                        "value": "value"
+                    }[path];
+
+                    return new WidgetProperty(this.target, path);
+                }
+            });
+
+            var WidgetProperty = Observable.extend( {
+                init: function(target, path) {
+                    Observable.fn.init.call(this);
+
+                    this.target = target;
+                    this.path = path;
+
+                    this.target.bind("change", $.proxy(this.change, this));
+                },
+
+                change: function() {
+                    this.trigger("change");
+                },
+
+                get: function() {
+                    return this.target[this.path]();
+                },
+
+                set: function(value) {
+                    this.target[this.path](value);
+                }
+            });
+
+            function bind(element, source) {
+                var role = element.getAttribute("data-role");
+                var target;
+
+                if (role) {
+                    target = new WidgetBindingTarget(new kendo.ui.DropDownList(element));
+                } else {
+                    target = element.nodeName.toLowerCase() === "select" ? new SelectBindingTarget(element) : new BindingTarget(element);
+                }
 
                 ["text", "title", "value"].forEach(function(path) {
-                    var sourcePath = target.getAttribute("data-" + path);
+                    var sourcePath = element.getAttribute("data-" + path);
 
                     if (sourcePath) {
                         var binding = new Binding(source, sourcePath);
 
-                        element.setBinding(path, binding);
+                        target.setBinding(path, binding);
                     }
                 });
             }
@@ -204,6 +237,13 @@
                 <option>two</option>
                 <option>three</option>
             </select>
+
+            <select data-role="dropdownlist" style="display:block" data-value="selectedValue">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+            DropDownList value is: <span id="selectedValue" data-text="selectedValue"></span>
         </form>
 
         <script>
@@ -211,13 +251,16 @@
                 foo: "foo",
                 bar: "bar",
                 baz: "baz",
-                selectedValues: ["two"]
+                selectedValues: ["two"],
+                selectedValue: "two"
             });
 
             bind($("div")[0], viewModel);
             bind($("input")[0], viewModel);
             bind($("span")[0], viewModel);
             bind($("select")[0], viewModel);
+            bind($("select")[1], viewModel);
+            bind($("#selectedValue")[0], viewModel);
         </script>
     </body>
 </html>
