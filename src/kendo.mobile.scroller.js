@@ -3,6 +3,7 @@
         TICK_INTERVAL,
         ui = mobile.ui,
         proxy = $.proxy,
+        extend = $.extend,
         roleSelector = kendo.roleSelector,
         Widget = ui.Widget,
         Transition = mobile.Transition;
@@ -13,16 +14,14 @@
     var DragInertia = kendo.Class.extend({
         init: function(options) {
             var that = this;
-            $.extend(that, options);
-
-            that.transition = new Transition({
-                axis: that.axis,
-                move: that.move,
-                callback: function() { that.end(); }
+            extend(that, options, {
+                tickProxy: proxy(that._tick, that),
+                transition: new Transition({
+                    axis: options.axis,
+                    move: options.move,
+                    callback: function() { that.end(); }
+                })
             });
-
-            that.outOfBounds = proxy(that.boundary.outOfBounds, that.boundary);
-            that.tickProxy = proxy(that._tick, that);
 
             that.swipe.bind("start", proxy(that.cancel, that));
             that.swipe.bind("end", proxy(that.start, that));
@@ -38,22 +37,11 @@
 
             if (!that.boundary.present()) { return; }
 
-            if (that.outOfBounds()) {
+            if (that.boundary.outOfBounds()) {
                 that._snapBack();
             } else {
                 that.velocity = that.swipe[that.axis].velocity * .5;
                 that.intervalID = setInterval(that.tickProxy, TICK_INTERVAL);
-            }
-        },
-
-        _end: function() {
-            var that = this;
-            that.cancel();
-
-            if (that.outOfBounds()) {
-                that._snapBack();
-            } else {
-                that.end();
             }
         },
 
@@ -67,12 +55,19 @@
 
         _tick: function() {
             var that = this,
-                friction =  that.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
+                outOfBounds = that.boundary.outOfBounds(),
+                friction = outOfBounds ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
             that.move.translateAxis(that.axis, that.velocity *= friction);
 
             if (Math.abs(that.velocity) < 1) {
-                that._end();
+                that.cancel();
+
+                if (outOfBounds) {
+                    that._snapBack();
+                } else {
+                    that.end();
+                }
             }
         }
     });
@@ -80,19 +75,20 @@
     var ScrollBar = kendo.Class.extend({
         init: function(options) {
             var that = this,
-                horizontal = options.axis === "x";
+                horizontal = options.axis === "x",
+                element = $('<div class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
 
-            $.extend(that, options);
-
-            that.element = $('<div class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
-            that.container.append(that.element);
-
-            that.size = horizontal ? "width" : "height";
-            that.scrollMove = that.boundary.move;
+            extend(that, options, {
+                element: element,
+                move: new mobile.Move(element),
+                scrollMove: options.boundary.move,
+                size: horizontal ? "width" : "height"
+            });
 
             that.boundary.bind("change", proxy(that.resize, that));
-            that.scrollMove.bind("change", proxy(that.move, that));
-            that.move = new mobile.Move(that.element);
+            that.scrollMove.bind("change", proxy(that._move, that));
+
+            that.container.append(element);
         },
 
         resize: function() {
@@ -104,7 +100,7 @@
             that.element.css(that.size, 100 * that.sizeRatio + "%");
         },
 
-        move: function() {
+        _move: function() {
             var that = this,
                 axis = that.axis,
                 scrollMove = that.scrollMove,
@@ -122,9 +118,6 @@
         }
     });
 
-    function ScrollAxis(axis, scroller) {
-    };
-
     var Scroller = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -136,27 +129,35 @@
                 .css("overflow", "hidden")
                 .wrapInner('<div class="km-scroll-container"/>');
 
-            that.inner = element.children().first();
+            var inner = element.children().first(),
+                move = new mobile.Move(inner),
+                boundary = new mobile.ContainerBoundary(element, {move: move}),
 
-            that.move = new mobile.Move(that.inner);
+                swipe = new mobile.Swipe(element, {
+                    start: function() {
+                        boundary.refresh();
+                    }
+                }),
 
-            that.boundary = new mobile.ContainerBoundary(element, {move: that.move});
+                draggable = new mobile.Draggable({
+                    move: move,
+                    boundary: boundary,
+                    swipe: swipe,
+                    elastic: true
+                });
 
-            that.swipe = new mobile.Swipe(element, {
-                start: function() { that.boundary.refresh(); }
-            });
-
-            that.draggable = new mobile.Draggable({
-                move: that.move,
-                boundary: that.boundary,
-                swipe: that.swipe,
-                elastic: true,
+            extend(that, {
+                boundary: boundary,
+                move: move,
+                boundary: boundary,
+                swipe: swipe,
+                draggable: draggable
             });
 
             that.initAxis("x");
             that.initAxis("y");
 
-            that.boundary.refresh();
+            boundary.refresh();
         },
 
         initAxis: function(axis) {
