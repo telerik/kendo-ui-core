@@ -6,6 +6,7 @@
         roleSelector = kendo.roleSelector,
         Widget = ui.Widget,
         Transition = mobile.Transition;
+        SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.95;
         OUT_OF_BOUNDS_FRICTION = 0.83;
 
@@ -16,7 +17,8 @@
 
             that.transition = new Transition({
                 axis: that.axis,
-                move: that.move
+                move: that.move,
+                callback: function() { that.end(); }
             });
 
             that.boundary = that.boundary[that.axis];
@@ -46,30 +48,29 @@
         },
 
         _end: function() {
-            this.cancel();
-            this._snapBack();
+            var that = this;
+            that.cancel();
+
+            if (that.outOfBounds()) {
+                that._snapBack();
+            } else {
+                that.end();
+            }
         },
 
         _snapBack: function() {
             var that = this,
-                snapBack,
-                boundary = that.boundary;
-
-            if (that.outOfBounds()) {
+                boundary = that.boundary,
                 snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
-                that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
-            }
+
+            that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
         },
 
         _tick: function() {
             var that = this,
-                axis = that.axis,
-                params = {},
                 friction =  that.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
-            params[axis] = that.velocity *= friction;
-
-            that.move.translate(params);
+            that.move.translateAxis(that.axis, that.velocity *= friction);
 
             if (Math.abs(that.velocity) < 1) {
                 that._end();
@@ -77,10 +78,55 @@
         }
     });
 
+    var ScrollBar = kendo.Class.extend({
+        init: function(options) {
+            var that = this,
+                horizontal = options.axis === "x";
+
+            $.extend(that, options);
+
+            that.element = $('<div class="km-touch-scrollbar km-' + (horizontal ? "horizontal" : "vertical") + '-scrollbar" />');
+
+            that.size = horizontal ? "width" : "height";
+            that.scrollMove = that.boundary[that.axis].move;
+
+            that.boundary.bind("change", proxy(that.resize, that));
+            that.scrollMove.bind("change", proxy(that.move, that));
+            that.move = new mobile.Move(that.element);
+        },
+
+        resize: function() {
+            var that = this,
+                boundary = that.boundary[that.axis];
+
+            that.sizeRatio = boundary.size / boundary.total;
+
+            that.element.css(that.size, 100 * that.sizeRatio + "%");
+        },
+
+        move: function() {
+            var that = this,
+                axis = that.axis,
+                scrollMove = that.scrollMove,
+                position = scrollMove[axis];
+
+            that.move.moveAxis(axis, -position * that.sizeRatio);
+        },
+
+        show: function() {
+            this.element.css({opacity: SCROLLBAR_OPACITY, visibility: "visible"});
+        },
+
+        hide: function() {
+            this.element.css({opacity: 0});
+        }
+    });
+
     var Scroller = Widget.extend({
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
+
             element = that.element;
 
             element
@@ -93,17 +139,37 @@
 
             that.boundary = new mobile.ContainerBoundary(element, {move: that.move});
 
-            that.swipe = new mobile.Swipe(element, {
-                start: function() {
-                    that.boundary.refresh();
-                }
+            var xScrollbar = new ScrollBar({
+                axis: "x",
+                boundary: that.boundary
             });
 
-            that.inertia = new DragInertia({
+            var yScrollbar = new ScrollBar({
+                axis: "y",
+                boundary: that.boundary
+            });
+
+            element.append(xScrollbar.element)
+                .append(yScrollbar.element);
+
+            that.swipe = new mobile.Swipe(element, {
+                start: function() { that.boundary.refresh(); }
+            });
+
+            new DragInertia({
                 axis: "y",
                 move: that.move,
                 swipe: that.swipe,
-                boundary: that.boundary
+                boundary: that.boundary,
+                end: function() { yScrollbar.hide(); console.log("end"); }
+            });
+
+            new DragInertia({
+                axis: "x",
+                move: that.move,
+                swipe: that.swipe,
+                boundary: that.boundary,
+                end: function() { xScrollbar.hide() }
             });
 
             that.draggable = new mobile.Draggable({
@@ -112,6 +178,9 @@
                 swipe: that.swipe,
                 elastic: true,
             });
+
+            that.draggable.x.bind("change", function() { xScrollbar.show(); })
+            that.draggable.y.bind("change", function() { yScrollbar.show(); })
 
             that.boundary.refresh();
         },
