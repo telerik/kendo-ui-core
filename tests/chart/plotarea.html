@@ -145,8 +145,8 @@
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
                     stubMethod(Chart.CategoricalPlotArea, "createAxes",
                         function() {
-                            equal(this.axisRanges.primary.min, 0);
-                            equal(this.axisRanges.primary.max, 1);
+                            equal(this.valueAxisRangeTracker.query("primary").min, 0);
+                            equal(this.valueAxisRangeTracker.query("primary").max, 1);
                         },
                         function() {
                             plotArea = new Chart.CategoricalPlotArea([]);
@@ -279,8 +279,8 @@
                 test("sets axis min/max to series limits", 2, function() {
                     stubMethod(Chart.CategoricalPlotArea, "createAxes",
                         function() {
-                            equal(this.axisRanges.primary.min, 10);
-                            equal(this.axisRanges.primary.max, 300);
+                            equal(this.valueAxisRangeTracker.query("primary").min, 10);
+                            equal(this.valueAxisRangeTracker.query("primary").max, 300);
                         },
                         function() {
                             createPlotArea(columnSeriesData);

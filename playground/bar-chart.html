@@ -44,13 +44,16 @@
                         position: "bottom"
                     },
                     dataSource: data,
+                    seriesDefaults: {
+                        stack: false
+                    },
                     series: [{
                             type: "column",
                             name: "Rain",
                             field: "rain",
                             color: "blue"
                         }, {
-                            type: "line",
+                            type: "area",
                             name: "Temperature",
                             field: "temp",
                             axis: "temp",

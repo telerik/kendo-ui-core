@@ -99,11 +99,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.axisRange().min, positiveSeries.data[0]);
+                    same(series.valueAxisRanges.primary.min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.axisRange().max, positiveSeries.data[1]);
+                    same(series.valueAxisRanges.primary.max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -169,11 +169,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.axisRange().min, negativeSeries.data[1]);
+                    same(series.valueAxisRanges.primary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.axisRange().max, negativeSeries.data[0]);
+                    same(series.valueAxisRanges.primary.max, negativeSeries.data[0]);
                 });
 
                 test("bar tops are aligned to category axis", function() {
@@ -204,19 +204,19 @@
                 });
 
                 test("Reports minimum value for primary axis", function() {
-                    same(series.axisRange().min, negativeSeries.data[1]);
+                    same(series.valueAxisRanges.primary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for primary axis", function() {
-                    same(series.axisRange().max, negativeSeries.data[0]);
+                    same(series.valueAxisRanges.primary.max, negativeSeries.data[0]);
                 });
 
                 test("Reports minimum value for secondary axis", function() {
-                    same(series.axisRange("secondary").min, positiveSeries.data[0]);
+                    same(series.valueAxisRanges.secondary.min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum value for secondary axis", function() {
-                    same(series.axisRange("secondary").max, positiveSeries.data[1]);
+                    same(series.valueAxisRanges.secondary.max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories for two series", function() {
@@ -235,11 +235,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.axisRange().min, 1);
+                    same(series.valueAxisRanges.primary.min, 1);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.axisRange().max, 3);
+                    same(series.valueAxisRanges.primary.max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -282,11 +282,11 @@
                 });
 
                 test("reports 0 as minumum value for default axis", function() {
-                    equal(series.axisRange().min, 0);
+                    equal(series.valueAxisRanges.primary.min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.axisRange().max, 4);
+                    equal(series.valueAxisRanges.primary.max, 4);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -316,11 +316,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.axisRange().min, -4);
+                    equal(series.valueAxisRanges.primary.min, -4);
                 });
 
                 test("reports 0 as maximum value for default axis", function() {
-                    equal(series.axisRange().max, 0);
+                    equal(series.valueAxisRanges.primary.max, 0);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -354,11 +354,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.axisRange().min, -1);
+                    equal(series.valueAxisRanges.primary.min, -1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.axisRange().max, 1);
+                    equal(series.valueAxisRanges.primary.max, 1);
                 });
 
                 test("bars have set height according to value", function() {
@@ -385,11 +385,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.axisRange("a").min, -2);
+                    equal(series.valueAxisRanges.a.min, -2);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.axisRange("a").max, 2);
+                    equal(series.valueAxisRanges.a.max, 2);
                 });
 
                 test("bars have set height according to value", function() {
@@ -908,11 +908,11 @@
                 });
 
                 test("Reports minimum value for default axis", function() {
-                    same(series.axisRange().min, negativeSeries.data[1]);
+                    same(series.valueAxisRanges.primary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum value for default axis", function() {
-                    same(series.axisRange().max, negativeSeries.data[0]);
+                    same(series.valueAxisRanges.primary.max, negativeSeries.data[0]);
                 });
 
                 test("bar sides are aligned to category axis", function() {
@@ -978,11 +978,11 @@
                 });
 
                 test("reports 0 as minumum value for default axis", function() {
-                    equal(series.axisRange().min, 0);
+                    equal(series.valueAxisRanges.primary.min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.axisRange().max, 4);
+                    equal(series.valueAxisRanges.primary.max, 4);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -1013,11 +1013,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.axisRange().min, -4);
+                    equal(series.valueAxisRanges.primary.min, -4);
                 });
 
                 test("reports 0 as maximum value for default axis", function() {
-                    equal(series.axisRange().max, 0);
+                    equal(series.valueAxisRanges.primary.max, 0);
                 });
 
                 test("bars in first category are stacked", function() {
@@ -1049,11 +1049,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(series.axisRange().min, -2);
+                    equal(series.valueAxisRanges.primary.min, -2);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(series.axisRange().max, 2);
+                    equal(series.valueAxisRanges.primary.max, 2);
                 });
 
                 test("bars have set width according to value", function() {

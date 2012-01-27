@@ -99,11 +99,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.axisRange().min, positiveSeries.data[0]);
+                    same(areaChart.valueAxisRanges.primary.min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.axisRange().max, positiveSeries.data[1]);
+                    same(areaChart.valueAxisRanges.primary.max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -176,11 +176,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.axisRange().min, negativeSeries.data[1]);
+                    same(areaChart.valueAxisRanges.primary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.axisRange().max, negativeSeries.data[0]);
+                    same(areaChart.valueAxisRanges.primary.max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
@@ -218,19 +218,19 @@
                 });
 
                 test("Reports minimum series value for primary axis", function() {
-                    same(areaChart.axisRange().min, positiveSeries.data[0]);
+                    same(areaChart.valueAxisRanges.primary.min, positiveSeries.data[0]);
                 });
 
                 test("Reports maximum series value for primary axis", function() {
-                    same(areaChart.axisRange().max, positiveSeries.data[1]);
+                    same(areaChart.valueAxisRanges.primary.max, positiveSeries.data[1]);
                 });
 
                 test("Reports minimum series value for secondary axis", function() {
-                    same(areaChart.axisRange("secondary").min, negativeSeries.data[1]);
+                    same(areaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
                 });
 
                 test("Reports maximum series value for secondary axis", function() {
-                    same(areaChart.axisRange("secondary").max, negativeSeries.data[0]);
+                    same(areaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
                 });
 
                 test("Reports number of categories for two series", function() {
@@ -257,11 +257,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.axisRange().min, 1);
+                    same(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.axisRange().max, 3);
+                    same(areaChart.valueAxisRanges.primary.max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -285,11 +285,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.axisRange().min, 1);
+                    same(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.axisRange().max, 2);
+                    same(areaChart.valueAxisRanges.primary.max, 2);
                 });
 
                 test("omits missing points by default", function() {
@@ -341,11 +341,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(areaChart.axisRange().min, 1);
+                    equal(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(areaChart.axisRange().max, 6);
+                    equal(areaChart.valueAxisRanges.primary.max, 6);
                 });
 
                 test("point plot values are stacked", function() {
@@ -366,11 +366,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(areaChart.axisRange().min, -6);
+                    equal(areaChart.valueAxisRanges.primary.min, -6);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(areaChart.axisRange().max, -1);
+                    equal(areaChart.valueAxisRanges.primary.max, -1);
                 });
 
                 test("point plot values are stacked", function() {
@@ -397,11 +397,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(areaChart.axisRange().min, 1);
+                    equal(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(areaChart.axisRange().max, 2);
+                    equal(areaChart.valueAxisRanges.primary.max, 2);
                 });
 
                 test("points have set height according to stack value", function() {
@@ -428,11 +428,11 @@
                 });
 
                 test("reports stacked minumum value for default axis", function() {
-                    equal(areaChart.axisRange("a").min, 0);
+                    equal(areaChart.valueAxisRanges.a.min, 0);
                 });
 
                 test("reports stacked maximum value for default axis", function() {
-                    equal(areaChart.axisRange("a").max, 2);
+                    equal(areaChart.valueAxisRanges.a.max, 2);
                 });
 
                 // ------------------------------------------------------------
@@ -446,11 +446,11 @@
                 });
 
                 test("Reports minimum series value for default axis", function() {
-                    same(areaChart.axisRange().min, 1);
+                    same(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
                 test("Reports maximum series value for default axis", function() {
-                    same(areaChart.axisRange().max, 4);
+                    same(areaChart.valueAxisRanges.primary.max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
