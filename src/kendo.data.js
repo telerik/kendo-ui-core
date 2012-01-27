@@ -1547,6 +1547,8 @@
 
             model = that.reader.model || {};
 
+            that._data = that._observe(that._data);
+
             id = model.id;
 
             if (id) {
