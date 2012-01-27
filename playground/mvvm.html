@@ -82,6 +82,9 @@
                         "value": "value"
                     }[path];
 
+                    if (path == "value") {
+                        return new TwoWayProperty(this.target, path);
+                    }
                     return new Property(this.target, path);
                 }
             });
@@ -91,10 +94,13 @@
                     return new MultipleBindingExpression(property, binding);
                 },
                 createProperty: function(path) {
-                    return new MultipleProperty(this.target, path);
+                    if (path == "value") {
+                        return new MultipleProperty(this.target, path);
+                    } else if (path == "source") {
+                        return new SourceProperty(this.target, path);
+                    }
                 }
             });
-
 
             var BindingExpression = Class.extend( {
                 init: function(property, binding) {
@@ -120,7 +126,21 @@
                 }
             });
 
-            var Property = Observable.extend( {
+            var Property = Class.extend( {
+                init: function(target, path) {
+                    this.target = target;
+                    this.path = path;
+                },
+
+                bind: function() {
+                },
+
+                set: function(value) {
+                    this.target[this.path] = value;
+                }
+            });
+
+            var TwoWayProperty = Observable.extend( {
                 init: function(target, path) {
                     Observable.fn.init.call(this);
 
@@ -143,7 +163,7 @@
                 }
             });
 
-            var MultipleProperty = Property.extend({
+            var MultipleProperty = TwoWayProperty.extend({
                 get: function() {
                     var optionIndex, value = [];
 
@@ -166,6 +186,12 @@
                             }
                         }
                     }
+                }
+            });
+
+            var SourceProperty = Property.extend({
+                set: function(value) {
+                    this.target.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), value);
                 }
             });
 
@@ -212,7 +238,7 @@
                     target = element.nodeName.toLowerCase() === "select" ? new SelectBindingTarget(element) : new BindingTarget(element);
                 }
 
-                ["text", "title", "value"].forEach(function(path) {
+                ["text", "title", "value", "source"].forEach(function(path) {
                     var sourcePath = element.getAttribute("data-" + path);
 
                     if (sourcePath) {
@@ -244,6 +270,7 @@
                 <option>three</option>
             </select>
             DropDownList value is: <span id="selectedValue" data-text="selectedValue"></span>
+            <select style="display:block" data-source="items"></select>
         </form>
 
         <script>
@@ -252,7 +279,8 @@
                 bar: "bar",
                 baz: "baz",
                 selectedValues: ["two"],
-                selectedValue: "two"
+                selectedValue: "two",
+                items: ["one", "two", "three"]
             });
 
             bind($("div")[0], viewModel);
@@ -261,6 +289,7 @@
             bind($("select")[0], viewModel);
             bind($("select")[1], viewModel);
             bind($("#selectedValue")[0], viewModel);
+            bind($("select")[2], viewModel);
         </script>
     </body>
 </html>
