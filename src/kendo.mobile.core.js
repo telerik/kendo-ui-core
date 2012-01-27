@@ -48,46 +48,20 @@
 
     // Mobile Swipe
 
-    var MOVE_STOP_THRESHOLD = 35; // time after which the swipe is considered "stopped";
-
     var SwipeAxis = Class.extend({
         start: function(location) {
             var that = this;
             that.location = location;
-            that.lastMove = +new Date();
         },
 
         move: function(location) {
-            var that = this,
-                direction;
+            var that = this;
 
-            that.delta = location - that.location;
-            that.lastMove = +new Date();
-            direction = that.delta > 0;
-
-            if (that.direction != direction) {
-                that._resetDirection();
-                that.direction = direction;
-            }
-
+            that.velocity = that.delta = location - that.location;
             that.location = location;
         },
 
-        end: function(location) {
-            var that = this,
-                timePassed = (+new Date()) -that.startTime,
-                timeSinceMove = (+new Date()) -that.lastMove;
-
-            that.velocity = timeSinceMove > MOVE_STOP_THRESHOLD ? 0 : (location - that.startLocation) / timePassed;
-            that.move(location);
-            delete that.direction;
-        },
-
-        _resetDirection: function() {
-            var that = this;
-            that.startTime = +new Date();
-            that.startLocation = that.location;
-        }
+        end: $.noop
     });
 
     var START = "start",
