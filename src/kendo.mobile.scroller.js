@@ -6,7 +6,7 @@
         roleSelector = kendo.roleSelector,
         Widget = ui.Widget,
         Transition = mobile.Transition;
-        FRICTION = 0.98;
+        FRICTION = 0.95;
         OUT_OF_BOUNDS_FRICTION = 0.83;
 
     var Inertia = kendo.Class.extend({
@@ -21,7 +21,7 @@
         },
 
         start: function(velocity) {
-            this.velocity = velocity * 8;
+            this.velocity = velocity;
             this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
         },
 
