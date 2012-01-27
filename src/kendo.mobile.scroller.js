@@ -29,7 +29,7 @@
             var that = this,
                 friction = that.boundary.y.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
-            that.move.moveBy(0, that.velocity *= friction);
+            that.move.translate({y: that.velocity *= friction});
 
             if (Math.abs(that.velocity) < 1) {
                 that.stop();
@@ -52,7 +52,10 @@
 
             that.move = new mobile.Move(that.inner);
 
-            that.transition = new Transition(that.move, $.noop);
+            that.transition = new Transition({
+                axis: "y",
+                move: that.move
+            });
 
             that.swipe = new mobile.Swipe(element, {
                 start: function() {
@@ -94,12 +97,15 @@
 
             if (that.boundary.y.outOfBounds()) {
                 snapBack = y > boundary.max ? boundary.max : boundary.min;
-                that.transition.moveTo({ x: 0, y: snapBack, duration: 500, ease: Transition.easeOutExpo });
+                that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
             }
         },
 
         _swipeEnd: function(e) {
             var that = this;
+
+            if (!that.boundary.y.present()) { return; }
+
             if (that.boundary.y.outOfBounds()) {
                 that._snapBack();
             } else {

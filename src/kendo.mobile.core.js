@@ -8,8 +8,9 @@
         Observable = kendo.Observable,
         mobile,
 
-        // Math shortcuts
+        //Math
         round = Math.round;
+
 
     var Widget = ui.Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
         /**
@@ -214,22 +215,24 @@
             that._saveCoordinates(translate(that.x, that.y));
         },
 
-        moveBy: function(coordinates) {
-            var that = this;
-            if (x) { that.x += x; }
-            if (y) { that.y += y; }
+        translate: function(coordinates) {
+            var that = this,
+                x = coordinates.x || 0,
+                y = coordinates.y || 0;
+
+            that.x += x;
+            that.y += y;
 
             that._redraw();
         },
 
-        moveTo: function(x, y) {
-            this.x = x;
-            this.y = y;
+        moveTo: function(coordinates) {
+            extend(this, coordinates);
             this._redraw();
         },
 
         _redraw: function() {
-            var that = this, 
+            var that = this,
                 newCoordinates = translate(that.x, that.y);
 
             if (newCoordinates != that.coordinates) {
@@ -267,6 +270,10 @@
                 offset = that.move[that.axis];
 
             return  offset > that.max || offset < that.min;
+        },
+
+        present: function() {
+            return this.max - this.min;
         },
 
         update: function() {
@@ -325,7 +332,7 @@
         init: function(options) {
             var that = this;
 
-            extend(that, { elastic: true, deltax: 0, deltay: 0 }, options);
+            extend(that, {elastic: true, deltax: 0, deltay: 0}, options);
             that.resistance = that.elastic ? 0.5 : 0;
 
             that.boundary.bind("change", proxy(that.update, that));
@@ -355,11 +362,11 @@
 
             var move = that._apply;
 
-            if (boundary.x.min != boundary.x.max) {
+            if (boundary.x.present()) {
                 move = and(draggableHandler("x"), move);
             }
 
-            if (boundary.y.min != boundary.y.max) {
+            if (boundary.y.present()) {
                 move = and(draggableHandler("y"), move);
             }
 
@@ -367,20 +374,18 @@
         },
 
         _apply: function() {
-            this.move.moveBy(this.deltax, this.deltay);
+            this.move.translate({x: this.deltax, y: this.deltay});
         }
     });
-
 
     var TICK_INTERVAL = 10;
 
     var Transition = Class.extend({
-        init: function(move, callback) {
+        init: function(options) {
             var that = this;
-            that.move = move;
+            extend(that, options);
             that.timer = 0;
             that.tickProxy = proxy(that._tick, that);
-            that.callback = callback;
         },
 
         stop: function() {
@@ -392,11 +397,8 @@
             var that = this,
                 move = that.move;
 
-            that.initialX = move.x;
-            that.initialY = move.y;
-
-            that.deltaX = options.x - that.initialX;
-            that.deltaY = options.y - that.initialY;
+            that.initial = move[that.axis];
+            that.delta = options.location - that.initial;
 
             that.duration = options.duration || 300;
 
@@ -407,11 +409,11 @@
 
         _easeProxy: function(ease) {
             var that = this;
+
             return function() {
-                that.move.moveTo(
-                    ease(that.timer, that.initialX, that.deltaX, that.duration),
-                    ease(that.timer, that.initialY, that.deltaY, that.duration)
-                );
+                var params = {};
+                params[that.axis] = ease(that.timer, that.initial, that.delta, that.duration);
+                that.move.moveTo(params);
             }
         },
 
@@ -428,7 +430,9 @@
                 that.stop();
                 that.callback();
             }
-        }
+        },
+
+        callback: $.noop
     });
 
     extend(Transition, {
