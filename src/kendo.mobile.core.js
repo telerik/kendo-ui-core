@@ -205,9 +205,12 @@
         }
     }
 
-    var Move = Class.extend({
+    var Move = Observable.extend({
         init: function(element) {
             var that = this;
+
+            Observable.fn.init.call(that);
+
             that.element = $(element);
             that.domElement = that.element[0];
             that.x = 0;
@@ -215,15 +218,20 @@
             that._saveCoordinates(translate(that.x, that.y));
         },
 
+        translateAxis: function(axis, by) {
+            this[axis] += by;
+            this._redraw();
+        },
+
         translate: function(coordinates) {
-            var that = this,
-                x = coordinates.x || 0,
-                y = coordinates.y || 0;
+            this.x += coordinates.x;
+            this.y += coordinates.y;
+            this._redraw();
+        },
 
-            that.x += x;
-            that.y += y;
-
-            that._redraw();
+        moveAxis: function(axis, value) {
+            this[axis] = value;
+            this._redraw();
         },
 
         moveTo: function(coordinates) {
@@ -238,6 +246,7 @@
             if (newCoordinates != that.coordinates) {
                 that.domElement.style[TRANSFORM_STYLE] = newCoordinates;
                 that._saveCoordinates(newCoordinates);
+                that.trigger("change");
             }
         },
 
@@ -265,7 +274,14 @@
             }
         },
 
-        outOfBounds: function() {
+        willBeOutOfBounds: function(offset) {
+            var that = this,
+                offset = that.move[that.axis] + offset;
+
+            return  offset > that.max || offset < that.min;
+        },
+
+        outOfBounds: function(offset) {
             var that = this,
                 offset = that.move[that.axis];
 
@@ -287,12 +303,12 @@
         }
     });
 
-    var ContainerBoundary = kendo.Observable.extend({
+    var ContainerBoundary = Observable.extend({
         init: function(element, options) {
             var that = this,
                 move = options.move;
 
-            kendo.Observable.fn.init.call(that);
+            Observable.fn.init.call(that);
 
             that.x = new Boundary({horizontal: true, element: element, move: move});
             that.y = new Boundary({horizontal: false, element: element, move: move});
@@ -309,33 +325,42 @@
         }
     });
 
-    function draggableHandler(axis) {
-        return function(e) {
-            var that = this,
-                boundary = that.boundary[axis];
-                delta = e[axis].delta,
-                position = that.move[axis] + delta;
+    var DraggableAxis = Observable.extend({
+        init: function(options) {
+            var that = this;
+            extend(that, {delta: 0}, options);
+            Observable.fn.init.call(that);
+        },
 
-            if (position > boundary.max || position < boundary.min) { delta *= that.resistance; }
-            that["delta" + axis] = delta;
-        }
-    }
+        move: function(delta) {
+            var that = this;
 
-    function and(funcA, funcB) {
-        return function() {
-            funcA.apply(this, arguments);
-            funcB.apply(this, arguments);
+            if (!that.boundary.present()) {
+                return;
+            }
+
+            if (that.boundary.willBeOutOfBounds(delta)) {
+                delta *= that.resistance;
+            }
+
+            that.delta = delta;
+            that.trigger("change", that);
         }
-    }
+    });
 
     var Draggable = Class.extend({
         init: function(options) {
-            var that = this;
+            var that = this,
+                x,
+                y,
+                resistance;
 
-            extend(that, {elastic: true, deltax: 0, deltay: 0}, options);
-            that.resistance = that.elastic ? 0.5 : 0;
+            extend(that, {elastic: true}, options);
 
-            that.boundary.bind("change", proxy(that.update, that));
+            resistance = that.elastic ? 0.5 : 0;
+
+            that.x = x = new DraggableAxis({boundary: that.boundary.x, resistance: resistance});
+            that.y = y = new DraggableAxis({boundary: that.boundary.y, resistance: resistance});
 
             that.swipe.bind([START, MOVE, END], {
                 start: function() {
@@ -344,7 +369,9 @@
 
                 move: function(e) {
                     that.moved = true;
-                    that._move(e);
+                    x.move(e.x.delta);
+                    y.move(e.y.delta);
+                    that.move.translate({x: x.delta, y: y.delta});
                     e.preventDefault();
                 },
 
@@ -354,27 +381,6 @@
                     }
                 }
             });
-        },
-
-        update: function(options) {
-            var that = this,
-                boundary = that.boundary;
-
-            var move = that._apply;
-
-            if (boundary.x.present()) {
-                move = and(draggableHandler("x"), move);
-            }
-
-            if (boundary.y.present()) {
-                move = and(draggableHandler("y"), move);
-            }
-
-            that._move = move;
-        },
-
-        _apply: function() {
-            this.move.translate({x: this.deltax, y: this.deltay});
         }
     });
 
@@ -411,9 +417,7 @@
             var that = this;
 
             return function() {
-                var params = {};
-                params[that.axis] = ease(that.timer, that.initial, that.delta, that.duration);
-                that.move.moveTo(params);
+                that.move.moveAxis(that.axis, ease(that.timer, that.initial, that.delta, that.duration));
             }
         },
 
