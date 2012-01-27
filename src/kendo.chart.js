@@ -6122,6 +6122,92 @@
 
     // Gauge ===================================================
 
+    var GaugeSegment = ChartElement.extend({
+        init: function(ring, options) {
+            this.ring = ring;
+
+            ChartElement.fn.init.call(this, options);
+        },
+
+        options: {
+            color: "#ff0000",
+            border: {
+                width: 0.5
+            }
+        },
+
+        reflow: function(targetBox) {
+            this.box = targetBox;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                ring = segment.ring,
+                options = segment.options,
+                borderOptions = options.border || {},
+                border = borderOptions.width > 0 ? {
+                    stroke: borderOptions.color,
+                    strokeWidth: borderOptions.width,
+                    dashType: borderOptions.dashType
+                } : {},
+                elements = [],
+                overlay = options.overlay;
+
+            elements.push(view.createRing(ring, deepExtend({
+                id: options.id,
+                fill: options.color,
+                overlay: overlay,
+                fillOpacity: options.opacity,
+                strokeOpacity: options.opacity
+            }, border)));
+
+            append(elements,
+                ChartElement.fn.getViewElements.call(segment, view)
+            );
+
+            return elements;
+        },
+
+        getOutlineElement: function(view, options) {
+            var segment = this,
+                highlight = segment.options.highlight || {},
+                border = highlight.border || {},
+                outlineId = segment.options.id + OUTLINE_SUFFIX,
+                element;
+
+            segment.registerId(outlineId);
+            options = deepExtend({}, options, { id: outlineId });
+
+            if (segment.value !== 0) {
+                element = view.createSector(segment.sector, deepExtend({}, options, {
+                    fill: highlight.color,
+                    fillOpacity: highlight.opacity,
+                    strokeOpacity: border.opacity,
+                    strokeWidth: border.width,
+                    stroke: border.color
+                }));
+            }
+
+            return element;
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var w = tooltipWidth / 2,
+                h = tooltipHeight / 2,
+                r = math.sqrt((w * w) + (h * h)),
+                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
+                tooltipCenter = sector.point(sector.middle());
+
+            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
+        }
+    });
+
     var GaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
@@ -6146,6 +6232,14 @@
                 options = plotArea.options,
                 i;
 
+            var ringConfig = new Chart.Ring(
+                    new Point2D(135, 135), 100, 135, -30, 240
+                );
+
+            plotArea.append(new GaugeSegment(ringConfig));
+
+            return;
+
             plotArea.axis = new NumericAxis(options.min, options.max,
                 deepExtend({}, options.axis, { orientation: HORIZONTAL })
             );
@@ -6167,6 +6261,7 @@
             $(element).addClass("k-gauge");
 
             gauge._axis();
+            gauge._redraw();
         },
 
         _axis: function() {
@@ -6178,7 +6273,7 @@
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
                 plotArea = gauge._plotArea = model._plotArea,
-                viewClass = gauge._supportsSVG() ? gauge.SVGView : gauge.VMLView,
+                viewClass = gauge._supportsSVG() ? Chart.SVGView : Chart.VMLView,
                 view = gauge._view = viewClass.fromModel(model);
 
             element.css("position", "relative");
@@ -6211,7 +6306,9 @@
                 max: 100
             },
             value: 0
-        }
+        },
+
+        _supportsSVG: supportsSVG
     });
 
     kendo.ui.plugin(Gauge);
@@ -7130,6 +7227,12 @@
             );
         },
 
+        createRing: function(ring, options) {
+            return this.decorate(
+                new VMLRing(ring, options)
+            );
+        },
+
         createGroup: function(options) {
             return this.decorate(
                 new VMLGroup(options)
@@ -7382,10 +7485,54 @@
         }
     });
 
-    var VMLSector = VMLPath.extend({
-        init: function(circleSector, options) {
+    var VMLRing = VMLPath.extend({
+        init: function(config, options) {
+            var ring = this;
+            VMLPath.fn.init.call(ring, options);
+
+            ring.pathTemplate = VMLRing.pathTemplate;
+            if (!ring.pathTemplate) {
+                ring.pathTemplate = VMLRing.pathTemplate = template(
+                   "M 10,100 " +
+                   //"AE #= d.cx # #= d.cy # " +
+                   //"#= d.r # #= d.r # " +
+                   //"#= d.sa # #= d.a # X E"
+                   "at 10,10 100,100 100,10 10,100 " +
+                   // c6547838,5616000,6615439,5623989,6681408,5639803
+                   //"L 70,70 " +
+                   //"C 70,70 20,20 10,10 " +
+                   "X E"
+                );
+            }
+
+            ring.config = config;
+        },
+
+        renderPoints: function() {
+            var ring = this,
+                config = ring.config,
+                r = math.max(round(config.r), 0),
+                cx = round(config.c.x),
+                cy = round(config.c.y),
+                sa = -round((config.startAngle + 180) * 65535),
+                a = -round(config.angle * 65536);
+
+            return ring.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
+        },
+
+        clone: function() {
             var sector = this;
-            VMLPath.fn.init.call(sector, options);
+            return new VMLRing(
+                deepExtend({}, sector.config),
+                deepExtend({}, sector.options)
+            );
+        }
+    });
+
+    var VMLSector = VMLRing.extend({
+        init: function(config, options) {
+            var sector = this;
+            VMLRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = VMLSector.pathTemplate;
             if (!sector.pathTemplate) {
@@ -7396,18 +7543,16 @@
                    "#= d.sa # #= d.a # X E"
                 );
             }
-
-            sector.circleSector = circleSector;
         },
 
         renderPoints: function() {
             var sector = this,
-                circleSector = sector.circleSector,
-                r = math.max(round(circleSector.r), 0),
-                cx = round(circleSector.c.x),
-                cy = round(circleSector.c.y),
-                sa = -round((circleSector.startAngle + 180) * 65535),
-                a = -round(circleSector.angle * 65536);
+                config = sector.config,
+                r = math.max(round(config.r), 0),
+                cx = round(config.c.x),
+                cy = round(config.c.y),
+                sa = -round((config.startAngle + 180) * 65535),
+                a = -round(config.angle * 65536);
 
             return sector.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
         },
@@ -7415,7 +7560,7 @@
         clone: function() {
             var sector = this;
             return new VMLSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
         }
@@ -7693,6 +7838,7 @@
         VMLPath: VMLPath,
         VMLLine: VMLLine,
         VMLSector: VMLSector,
+        VMLRing: VMLRing,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
         VMLClipRect: VMLClipRect,
