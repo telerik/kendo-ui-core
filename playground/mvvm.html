@@ -17,54 +17,561 @@
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
 
-        <style>
-            table, td, th {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
-
-    </head>
-    <body>
-        <form>
-            <button data-click="addProduct">Add one product</button>
-            <fieldset>
-                <legend> DropDownList initialized before kendo.bind</legend>
-                <select id="beforeBind" data-source="products" data-textfield="name" data-valuefield="id" data-value="selectedProduct"></select>
-            </fieldset>
-            <fieldset>
-                <legend> DropDownList initialized after kendo.bind</legend>
-                <select id="afterBind" data-source="products" data-textfield="name" data-valuefield="id" data-value="selectedProduct"></select>
-            </fieldset>
-            <fieldset>
-                <legend> DropDownList initialized by kendo.bind</legend>
-                <select id="byRole" data-role="dropdownlist" data-textfield="name" data-valuefield="id" data-source="products" data-value="selectedProduct"></select>
-            </fieldset>
-            Selected product <span data-text="selectedProduct.name"></span>
-        </form>
-
         <script>
-            var viewModel = kendo.observable({
-                products: [ { id: 1, name: "Food" }, { id: 2, name: "Beverages" }, { id:3, name: "Beer" }],
-                selectedProduct: null,
-                selectFirst: function() {
-                    this.set("selectedProduct", this.products[0]);
+            var Class = kendo.Class,
+                Observable = kendo.Observable;
+var
+        CHANGE = "change",
+        GET = "get",
+        SET = "set",
+        push = [].push,
+        join = [].join,
+        pop = [].pop,
+        splice = [].splice,
+        slice = [].slice,
+        unshift = [].unshift,
+        toString = {}.toString;
+
+    function set(object, field, value) {
+        return kendo.setter(field)(object, value);
+    }
+
+    function get(object, field, call) {
+        var result;
+
+        if (field === "this") {
+            result = object;
+        } else {
+            result = kendo.getter(field, true)(object);
+
+            if (call && typeof result === "function") {
+                result = result.call(object);
+            }
+        }
+
+        return result;
+    }
+
+    var ObservableArray = Observable.extend({
+        init: function(array, type) {
+            var that = this,
+                member,
+                idx;
+
+            type = type || ObservableObject;
+
+            Observable.fn.init.call(that);
+
+            that.length = array.length;
+
+            for (idx = 0; idx < that.length; idx++) {
+                member = array[idx];
+
+                if ($.isPlainObject(member)) {
+                    member = new type(member);
+
+                    member.bind(CHANGE, function(e) {
+                        if (!e.isPropagationStopped()) {
+                            that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
+                        }
+                    });
+                }
+
+                that[idx] = member;
+            }
+        },
+
+        push: function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = push.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: index,
+                items: items
+            });
+
+            return result;
+        },
+
+        slice: slice,
+
+        join: join,
+
+        pop: pop,
+
+        splice: function(index, howMany, item) {
+            var result = splice.apply(this, arguments);
+
+            if (result.length) {
+                this.trigger(CHANGE, {
+                    action: "remove",
+                    index: index,
+                    items: result
+                });
+            }
+
+            if (item) {
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: index,
+                    items: slice.call(arguments, 2)
+                });
+            }
+            return result;
+        },
+
+        unshift: function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = unshift.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: 0,
+                items: items
+            });
+
+            return result;
+        },
+
+        indexOf: function(item) {
+            var that = this,
+                idx,
+                length;
+
+            for (idx = 0, length = that.length; idx < length; idx++) {
+                if (that[idx] === item) {
+                    return idx;
+                }
+            }
+            return -1;
+        }
+    });
+
+    var ObservableObject = Observable.extend({
+        init: function(value) {
+            var that = this,
+                member,
+                field,
+                type;
+
+            Observable.fn.init.call(this);
+
+            for (field in value) {
+                member = value[field];
+                type = toString.call(member);
+
+                if (type === "[object Object]") {
+                    member = new ObservableObject(member);
+
+                    (function(field) {
+                        member.bind(GET, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(GET, e);
+                        });
+
+                        member.bind(CHANGE, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(CHANGE, e);
+                        });
+                    })(field);
+                } else if (type === "[object Array]") {
+                    member = new ObservableArray(member);
+                }
+
+                that[field] = member;
+            }
+        },
+
+        shouldSerialize: function(field) {
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function";
+        },
+
+        toJSON: function() {
+            var result = {}, field;
+
+            for (field in this) {
+                if (this.shouldSerialize(field)) {
+                    result[field] = this[field];
+                }
+            }
+
+            return result;
+        },
+
+        get: function(field) {
+            this.trigger(GET, { field: field });
+
+            return get(this, field);
+        },
+
+        set: function(field, value, initiator) {
+            var current = this[field], stopped = false;
+
+            if (current != value) {
+                if (!this.trigger("set", { field: field, value: value })) {
+                    set(this, field, value);
+
+                    this.trigger(CHANGE, {
+                        field: field,
+                        initiator: initiator,
+                        stopPropagation: function() {
+                            stopped = true;
+                        },
+                        isPropagationStopped: function() {
+                            return stopped;
+                        }
+                    });
+                }
+            }
+        }
+    });
+            var Binding = Observable.extend( {
+                init: function(source, path) {
+                    var that = this;
+
+                    Observable.fn.init.call(that);
+
+                    that.source = source;
+                    that.path = path;
+
+                    that.source.bind("change", function(e) {
+                        if (that.path.indexOf(e.field) >= 0) {
+                            that.change();
+                        }
+                    });
                 },
-                addProduct: function() {
-                    this.products.push({ id: this.products.length + 1, name: "Product " + (this.products.length + 1) });
+
+                change: function() {
+                    this.trigger("change");
                 },
-                removeProduct: function(e) {
-                    this.products.splice(this.products.length-1, 1);
+
+                get: function() {
+                    return this.source.get(this.path);
+                },
+
+                set: function(value) {
+                    this.source.set(this.path, value);
                 }
             });
 
-            $("#beforeBind").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
+            var BindingTarget = Class.extend( {
+                init: function(target) {
+                    this.target = target;
+                },
 
-            kendo.bind($("form"), viewModel);
+                setBinding: function(path, binding, template) {
+                    var property = this.createProperty(path, template);
 
-            $("#afterBind").kendoDropDownList({ dataTextField: "name", dataValueField: "id" });
+                    var expression = this.createExpression(property, binding);
 
+                    expression.updateTarget();
+
+                    property.bind("change", function() {
+                        expression.updateSource();
+                    });
+
+                    binding.bind("change", function() {
+                        expression.updateTarget();
+                    });
+                },
+
+                createExpression: function(property, binding) {
+                    return new BindingExpression(property, binding);
+                },
+
+                createProperty: function(path, template) {
+                    path = {
+                        "text": "innerText",
+                        "title": "title",
+                        "html": "innerHTML",
+                        "value": "value"
+                    }[path] || path;
+
+                    if (path == "value") {
+                        return new TwoWayProperty(this.target, path);
+                    }
+
+                    if (path == "template") {
+                        return new TemplateProperty(this.target, path, template);
+                    }
+
+                    return new Property(this.target, path);
+                }
+            });
+
+            var SelectBindingTarget = BindingTarget.extend( {
+                createExpression: function(property, binding) {
+                    return new MultipleBindingExpression(property, binding);
+                },
+                createProperty: function(path) {
+                    if (path == "value") {
+                        return new MultipleProperty(this.target, path);
+                    } else if (path == "source") {
+                        return new SourceProperty(this.target, path);
+                    }
+                }
+            });
+
+            var BindingExpression = Class.extend( {
+                init: function(property, binding) {
+                    this.property = property;
+                    this.binding = binding;
+                },
+
+                updateTarget: function() {
+                    this.property.set(this.binding.get());
+                },
+
+                updateSource: function() {
+                    this.binding.set(this.property.get());
+                }
+            });
+
+            var MultipleBindingExpression = BindingExpression.extend( {
+                updateSource: function() {
+                    var source = this.binding.get();
+                    var target = this.property.get();
+
+                    source.splice.apply(source, [0, source.length].concat(target));
+                }
+            });
+
+            var Property = Class.extend( {
+                init: function(target, path) {
+                    this.target = target;
+                    this.path = path;
+                },
+
+                bind: function() {
+                },
+
+                set: function(value) {
+                    this.target[this.path] = value;
+                }
+            });
+
+            var TemplateProperty = Class.extend( {
+                init: function(target, path, template) {
+                    this.target = target;
+                    this.path = path;
+                    this.template = template;
+                },
+
+                bind: function() {
+                },
+
+                set: function(value) {
+                    var idx;
+
+                    this.target.innerHTML = this.template(value);
+
+                    for (idx = 0; idx < this.target.children.length; idx++) {
+                        bind(this.target.children[idx], value);
+                    }
+                }
+            });
+            var TwoWayProperty = Observable.extend( {
+                init: function(target, path) {
+                    Observable.fn.init.call(this);
+
+                    this.target = target;
+                    this.path = path;
+
+                    $(this.target).bind("change", $.proxy(this.change, this));
+                },
+
+                change: function() {
+                    this.trigger("change");
+                },
+
+                get: function() {
+                    return this.target[this.path];
+                },
+
+                set: function(value) {
+                    this.target[this.path] = value;
+                }
+            });
+
+            var MultipleProperty = TwoWayProperty.extend({
+                get: function() {
+                    var optionIndex, value = [];
+
+                    for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
+                        if (this.target[optionIndex].selected) {
+                            value.push(this.target[optionIndex].value);
+                        }
+                    }
+
+                    return value;
+                },
+
+                set: function(value) {
+                    var valueIndex, optionIndex;
+
+                    for (valueIndex = 0; valueIndex < value.length; valueIndex++) {
+                        for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
+                            if (this.target[optionIndex].value == value[valueIndex]) {
+                                this.target[optionIndex].selected = true;
+                            }
+                        }
+                    }
+                }
+            });
+
+            var SourceProperty = Property.extend({
+                set: function(value) {
+                    var that = this;
+
+                    value.bind("change", function(e) {
+                        if (e.action == "add") {
+                            that.add(e.index, e.items);
+                        } else if (e.action == "remove") {
+                            that.remove(e.index, e.items);
+                        }
+                    });
+
+                    this.target.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), value);
+                },
+
+                add: function(index, items) {
+                    var idx, length, clone = this.target.cloneNode();
+
+                    clone.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), items);
+
+                    for (idx = 0, length = items.length; idx < length; idx++) {
+                        this.target.insertBefore(clone.children[idx], this.target.children[index]);
+                    }
+                },
+
+                remove: function(index, items) {
+                    var idx, length;
+
+                    for (idx = 0, length = items.length; idx < length; idx++) {
+                        this.target.removeChild(this.target.children[index]);
+                    }
+                }
+            });
+
+            var WidgetBindingTarget = BindingTarget.extend( {
+                createProperty: function(path) {
+                    path = {
+                        "value": "value"
+                    }[path];
+
+                    return new WidgetProperty(this.target, path);
+                }
+            });
+
+            var WidgetProperty = Observable.extend( {
+                init: function(target, path) {
+                    Observable.fn.init.call(this);
+
+                    this.target = target;
+                    this.path = path;
+
+                    this.target.bind("change", $.proxy(this.change, this));
+                },
+
+                change: function() {
+                    this.trigger("change");
+                },
+
+                get: function() {
+                    return this.target[this.path]();
+                },
+
+                set: function(value) {
+                    this.target[this.path](value);
+                }
+            });
+
+            function bind(element, source) {
+                var role = element.getAttribute("data-role");
+                var target;
+
+                if (role) {
+                    target = new WidgetBindingTarget(new kendo.ui.DropDownList(element));
+                } else {
+                    target = element.nodeName.toLowerCase() === "select" ? new SelectBindingTarget(element) : new BindingTarget(element);
+                }
+
+                var template = element.getAttribute("data-template");
+
+                if (template) {
+                    var binding = new Binding(source, "");
+
+                    template = kendo.template($("#" + template).html());
+
+                    target.setBinding("template", binding, template);
+                }
+
+                ["text", "html", "title", "value", "source"].forEach(function(path) {
+                    var sourcePath = element.getAttribute("data-" + path);
+
+                    if (sourcePath){
+                        var binding = new Binding(source, sourcePath);
+
+                        target.setBinding(path, binding);
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            <div data-text="foo" data-title="bar"></div>
+
+            <input data-value="baz" />
+
+            Input value is: <span data-text="baz"></span>
+
+            <select multiple style="display:block" data-value="selectedValues">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+
+            <select data-role="dropdownlist" style="display:block" data-value="selectedValue">
+                <option>one</option>
+                <option>two</option>
+                <option>three</option>
+            </select>
+            DropDownList value is: <span id="selectedValue" data-text="selectedValue"></span>
+            <select style="display:block" data-source="items"></select>
+            <div id="html" data-html="baz"></div>
+            <div id="template" data-template="baz"></div>
+        </form>
+
+        <script id="baz" type="text/x-kendo-template">
+            Template: <span data-text="baz"></span>
+        </script>
+        <script>
+            var viewModel = new ObservableObject({
+                foo: "foo",
+                bar: "bar",
+                baz: "baz",
+                selectedValues: ["two"],
+                selectedValue: "two",
+                items: ["one", "two", "three"]
+            });
+
+            bind($("div")[0], viewModel);
+            bind($("input")[0], viewModel);
+            bind($("span")[0], viewModel);
+            bind($("select")[0], viewModel);
+            bind($("select")[1], viewModel);
+            bind($("#selectedValue")[0], viewModel);
+            bind($("select")[2], viewModel);
+            bind($("#html")[0], viewModel);
+            bind($("#template")[0], viewModel);
         </script>
     </body>
 </html>
-
