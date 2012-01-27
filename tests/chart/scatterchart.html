@@ -47,27 +47,31 @@
                 function PlotAreaStub() { }
 
                 $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
-                            categoryIndex + 1, CATEGORY_AXIS_Y);
+                    namedXAxes: {
+                        primary: {
+                            getSlot: function(categoryIndex) {
+                                return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                categoryIndex + 1, CATEGORY_AXIS_Y);
+                            }
                         }
                     },
-                    axisY: {
-                        getSlot: function(value) {
-                            var value = typeof value === "undefined" ? 0 : value,
-                                valueY = VALUE_AXIS_MAX - value,
-                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+                    namedYAxes: {
+                        primary: {
+                            getSlot: function(value) {
+                                var value = typeof value === "undefined" ? 0 : value,
+                                    valueY = VALUE_AXIS_MAX - value,
+                                    slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                                    slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
-                            return new Box2D(0, slotTop, 0, slotBottom);
-                        },
-                        options: {}
+                                return new Box2D(0, slotTop, 0, slotBottom);
+                            },
+                            options: {}
+                        }
                     }
                 });
 
                 // ------------------------------------------------------------
-                module("Scatter Chart / series", {
+                module("Scatter Chart / Series", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
                         setupScatterChart(plotArea, { series: [ series ] });
@@ -78,12 +82,20 @@
                     equal(scatterChart.points.length, series.data.length);
                 });
 
-                test("Reports minimum series value", function() {
-                    same(scatterChart.valueRange().min, series.data[0]);
+                test("Reports minimum value for primary X axis", function() {
+                    same(scatterChart.xAxisRanges.primary.min, series.data[0][0]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(scatterChart.valueRange().max, series.data[1]);
+                test("Reports minimum value for primary Y axis", function() {
+                    same(scatterChart.yAxisRanges.primary.min, series.data[0][1]);
+                });
+
+                test("Reports maximum value for primary X axis", function() {
+                    same(scatterChart.xAxisRanges.primary.max, series.data[1][0]);
+                });
+
+                test("Reports maximum value for primary Y axis", function() {
+                    same(scatterChart.yAxisRanges.primary.max, series.data[1][1]);
                 });
 
                 test("points have set width", function() {
@@ -117,6 +129,54 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Scatter Chart / Multiple Axes", {
+                    setup: function() {
+                        plotArea = new PlotAreaStub();
+                        plotArea.namedXAxes.secondary = plotArea.namedXAxes.primary;
+                        plotArea.namedYAxes.secondary = plotArea.namedYAxes.primary;
+
+                        setupScatterChart(plotArea, {
+                            series: [
+                                { xAxis: "primary", yAxis: "primary", data: [[1, 10], [2, 20]] },
+                                { xAxis: "secondary", yAxis: "secondary", data: [[3, 30], [4, 40]] }
+                            ]
+                        });
+                    }
+                });
+
+                test("Reports minimum value for primary X axis", function() {
+                    same(scatterChart.xAxisRanges.primary.min, 1);
+                });
+
+                test("Reports minimum value for primary Y axis", function() {
+                    same(scatterChart.yAxisRanges.primary.min, 10);
+                });
+
+                test("Reports maximum value for primary X axis", function() {
+                    same(scatterChart.xAxisRanges.primary.max, 2);
+                });
+
+                test("Reports maximum value for primary Y axis", function() {
+                    same(scatterChart.yAxisRanges.primary.max, 20);
+                });
+
+                test("Reports minimum value for secondary X axis", function() {
+                    same(scatterChart.xAxisRanges.secondary.min, 3);
+                });
+
+                test("Reports minimum value for secondary Y axis", function() {
+                    same(scatterChart.yAxisRanges.secondary.min, 30);
+                });
+
+                test("Reports maximum value for secondary X axis", function() {
+                    same(scatterChart.xAxisRanges.secondary.max, 4);
+                });
+
+                test("Reports maximum value for secondary Y axis", function() {
+                    same(scatterChart.yAxisRanges.secondary.max, 40);
+                });
+
+                // ------------------------------------------------------------
                 module("Scatter Chart / Missing values", {
                     setup: function() {
                         plotArea = new PlotAreaStub();
@@ -126,12 +186,20 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(scatterChart.valueRange().min, [1, 1]);
+                test("Reports minimum value for primary X axis", function() {
+                    same(scatterChart.xAxisRanges.primary.min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(scatterChart.valueRange().max, [2, 2]);
+                test("Reports minimum value for primary Y axis", function() {
+                    same(scatterChart.yAxisRanges.primary.min, 1);
+                });
+
+                test("Reports maximum value for primary X axis", function() {
+                    same(scatterChart.xAxisRanges.primary.max, 2);
+                });
+
+                test("Reports maximum value for primary Y axis", function() {
+                    same(scatterChart.yAxisRanges.primary.max, 2);
                 });
 
                 test("omits missing points by default", function() {

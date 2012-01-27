@@ -119,60 +119,28 @@
                 });
 
                 // ------------------------------------------------------------
-                module("X Axis Configuration", {
-                    teardown: destroyChart
-                });
-
-                test("xAxis options are applied to X Axis", function() {
-                    createChart({
-                        xAxis: {
-                            flag: true
-                        },
-                        series: [{ type: "scatter", data:[[1,1], [2,2]] }]
-                    });
-
-                    ok(plotArea.axisX.options.flag);
-                });
-
-                // ------------------------------------------------------------
-                module("Y Axis Configuration", {
-                    teardown: destroyChart
-                });
-
-                test("yAxis options are applied to Y Axis", function() {
-                    createChart({
-                        yAxis: {
-                            flag: true
-                        },
-                        series: [{ type: "scatter", data:[[1,1], [2,2]] }]
-                    });
-
-                    ok(plotArea.axisY.options.flag);
-                });
-
-                // ------------------------------------------------------------
                 module("Axis Configuration / Scatter Chart", {
                     teardown: destroyChart
                 });
 
-                test("xAxis settings are applied to X Axis", function() {
+                test("xAxis settings are applied to primary X Axis", function() {
                     createScatterChart({ xAxis: { min: 100 } });
-                    same(plotArea.axisX.options.min, 100);
+                    same(plotArea.namedXAxes.primary.options.min, 100);
                 });
 
                 test("xAxis orientation can't be set to vertical", function() {
                     createScatterChart({ xAxis: { orientation: "vertical" } });
-                    same(plotArea.axisX.options.orientation, "horizontal");
+                    same(plotArea.namedXAxes.primary.options.orientation, "horizontal");
                 });
 
-                test("yAxis settings are applied to Y Axis", function() {
+                test("yAxis settings are applied to primary Y Axis", function() {
                     createScatterChart({ yAxis: { min: 100 } });
-                    same(plotArea.axisY.options.min, 100);
+                    same(plotArea.namedYAxes.primary.options.min, 100);
                 });
 
                 test("yAxis orientation can't be set to horizontal", function() {
                     createScatterChart({ yAxis: { orientation: "horizontal" } });
-                    same(plotArea.axisY.options.orientation, "vertical");
+                    same(plotArea.namedYAxes.primary.options.orientation, "vertical");
                 });
 
                 // ------------------------------------------------------------

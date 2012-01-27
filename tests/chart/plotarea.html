@@ -684,6 +684,98 @@
                 });
 
             })();
+
+            (function() {
+                var plotArea,
+                    categoryAxis,
+                    namedXAxes,
+                    namedYAxes,
+                    scatterSeriesData = [{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, 100], [200, 200], [300, 300]]
+                    }, {
+                        name: "Value B",
+                        type: "scatter",
+                        data: [[10, 10], [20, 20], [30, 30]]
+                    }];
+
+                function createPlotArea(series, options) {
+                    plotArea = new Chart.XYPlotArea(series, options);
+
+                    namedXAxes = plotArea.namedXAxes;
+                    namedYAxes = plotArea.namedYAxes;
+
+                    chartSeries = plotArea.charts[0];
+                }
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Axes", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData);
+                    }
+                });
+
+                test("appends primary X axis to children collection", function() {
+                    ok($.inArray(namedXAxes.primary, plotArea.children) >= 0);
+                });
+
+                test("appends primary Y axis to children collection", function() {
+                    ok($.inArray(namedYAxes.primary, plotArea.children) >= 0);
+                });
+
+                test("aligns axes at default crossing values", function() {
+                    var axisX = namedXAxes.primary,
+                        axisY = namedYAxes.primary;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("aligns axises at non-default crossing values", function() {
+                    var axisX = namedXAxes.primary,
+                        axisY = namedYAxes.primary;
+
+                    axisY.options.axisCrossingValue = 10;
+                    axisX.options.axisCrossingValue = 1;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("X axis limit is [0, 1] when no series are configured", 2, function() {
+                    stubMethod(Chart.XYPlotArea, "createAxes",
+                        function() {
+                            equal(this.xAxisRangeTracker.query("primary").min, 0);
+                            equal(this.xAxisRangeTracker.query("primary").max, 1);
+                        },
+                        function() {
+                            plotArea = new Chart.XYPlotArea([]);
+                        }
+                    );
+                });
+
+                test("Y axis limit is [0, 1] when no series are configured", 2, function() {
+                    stubMethod(Chart.XYPlotArea, "createAxes",
+                        function() {
+                            equal(this.yAxisRangeTracker.query("primary").min, 0);
+                            equal(this.yAxisRangeTracker.query("primary").max, 1);
+                        },
+                        function() {
+                            plotArea = new Chart.XYPlotArea([]);
+                        }
+                    );
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

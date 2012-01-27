@@ -10,6 +10,7 @@
         format = kendo.format,
         map = $.map,
         grep = $.grep,
+        each = $.each,
         math = Math,
         proxy = $.proxy,
         getter = kendo.getter,
@@ -1412,6 +1413,7 @@
         },
 
         options: {
+            // TODO: Replace orientation with isVertical
             labels: {
                 visible: true,
                 rotation: 0
@@ -2405,6 +2407,9 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
+
+            // Value axis min/max range grouped by axis name, e.g.:
+            // primary: 0
             chart._axisMin = {};
             chart._axisMax = {};
 
@@ -3178,8 +3183,12 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart._seriesMin = [MAX_VALUE, MAX_VALUE];
-            chart._seriesMax = [MIN_VALUE, MIN_VALUE];
+
+            // X and Y axis ranges grouped by name, e.g.:
+            // primary: { min: 0, max: 1 }
+            chart.xAxisRanges = {};
+            chart.yAxisRanges = {};
+
             chart.points = [];
             chart.seriesPoints = [];
 
@@ -3208,7 +3217,7 @@
                 seriesIx = fields.seriesIx,
                 seriesPoints = chart.seriesPoints[seriesIx];
 
-            chart.updateRange(value);
+            chart.updateRange(value, fields.series);
 
             if (!seriesPoints) {
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
@@ -3223,32 +3232,30 @@
             seriesPoints.push(point);
         },
 
-        updateRange: function(value) {
+        updateRange: function(value, series) {
             var chart = this,
                 x = value.x,
                 y = value.y,
-                seriesMin = chart._seriesMin,
-                seriesMax = chart._seriesMax;
+                xAxisName = series.xAxis || PRIMARY,
+                yAxisName = series.yAxis || PRIMARY,
+                xAxisRange = chart.xAxisRanges[xAxisName],
+                yAxisRange = chart.yAxisRanges[yAxisName];
 
             if (defined(x)) {
-                seriesMin[0] = math.min(seriesMin[0], x);
-                seriesMax[0] = math.max(seriesMax[0], x);
+                xAxisRange = chart.xAxisRanges[xAxisName] =
+                    xAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                xAxisRange.min = math.min(xAxisRange.min, x);
+                xAxisRange.max = math.max(xAxisRange.max, x);
             }
 
             if (defined(y)) {
-                seriesMin[1] = math.min(seriesMin[1], y);
-                seriesMax[1] = math.max(seriesMax[1], y);
+                yAxisRange = chart.yAxisRanges[yAxisName] =
+                    yAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                yAxisRange.min = math.min(yAxisRange.min, y);
+                yAxisRange.max = math.max(yAxisRange.max, y);
             }
-        },
-
-        valueRange: function() {
-            var chart = this;
-
-            if (chart.points.length) {
-                return { min: chart._seriesMin, max: chart._seriesMax };
-            }
-
-            return null;
         },
 
         createPoint: function(value, series, seriesIx) {
@@ -3281,18 +3288,31 @@
             return point;
         },
 
+        seriesAxes: function(series) {
+            var plotArea = this.plotArea,
+                xAxis = series.xAxis || PRIMARY,
+                yAxis = series.yAxis || PRIMARY;
+
+            return {
+                x: plotArea.namedXAxes[xAxis],
+                y: plotArea.namedYAxes[yAxis]
+            };
+        },
+
         reflow: function(targetBox) {
             var chart = this,
                 plotArea = chart.plotArea,
                 chartPoints = chart.points,
                 pointIx = 0,
-                point;
+                point,
+                seriesAxes;
 
-            chart.traverseDataPoints(function(value) {
+            chart.traverseDataPoints(function(value, fields) {
                 point = chartPoints[pointIx++];
+                seriesAxes = chart.seriesAxes(fields.series);
 
-                var slotX = plotArea.axisX.getSlot(value.x, value.x),
-                    slotY = plotArea.axisY.getSlot(value.y, value.y),
+                var slotX = seriesAxes.x.getSlot(value.x, value.x),
+                    slotY = seriesAxes.y.getSlot(value.y, value.y),
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
 
                 if (point) {
@@ -4039,6 +4059,7 @@
             plotArea.series = series;
             plotArea.charts = [];
             plotArea.options.legend.items = [];
+            plotArea.axes = [];
 
             plotArea.render();
         },
@@ -4077,20 +4098,6 @@
             append(this.options.legend.items, data);
         },
 
-        alignAxes: function(axisX, axisY, crossingValueX, crossingValueY) {
-            var plotArea = this,
-                axisCrossingY = axisY.getSlot(crossingValueY, crossingValueY),
-                axisCrossingX = axisX.getSlot(crossingValueX, crossingValueX);
-
-            axisY.reflow(
-                axisY.box.translate(axisCrossingX.x1 - axisCrossingY.x1, 0)
-            );
-
-            axisX.reflow(
-                axisX.box.translate(0, axisCrossingY.y1 - axisCrossingX.y1)
-            );
-        },
-
         reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
@@ -4099,48 +4106,134 @@
             plotArea.box = targetBox.clone();
 
             plotArea.box.unpad(margin);
-            plotArea.reflowAxes();
+            if (plotArea.axes.length > 0) {
+                plotArea.reflowAxes();
+            }
             plotArea.reflowCharts();
+        },
+
+        axisCrossingValues: function(axis, crossingAxes) {
+            var options = axis.options,
+                crossingValues = [].concat(options.axisCrossingValue),
+                valuesToAdd = crossingValues.length - crossingAxes.length,
+                i;
+
+            for (i = 0; i < valuesToAdd; i++) {
+                crossingValues.push(0);
+            }
+
+            return crossingValues;
+        },
+
+        alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
+            var slot = axis.getSlot(crossingValue, crossingValue),
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
+                isVertical = axis.options.orientation === VERTICAL;
+
+            axis.reflow(
+                axis.box.translate(
+                    isVertical ? targetSlot.x1 - slot.x1 : 0,
+                    isVertical ? 0 : targetSlot.y1 - slot.y1
+                )
+            );
+        },
+
+        alignAxes: function(xAxes, yAxes) {
+            var plotArea = this,
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
+                xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
+                yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
+                axis,
+                axisCrossings,
+                i;
+
+            for (i = 0; i < yAxes.length; i++) {
+                axis = yAxes[i];
+                plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+            }
+
+            for (i = 0; i < xAxes.length; i++) {
+                axis = xAxes[i];
+                plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+            }
+        },
+
+        axisBox: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                box = axes[0].box.clone(),
+                i,
+                length = axes.length;
+
+            for (i = 1; i < length; i++) {
+                box.wrap(axes[i].box);
+            }
+
+            return box;
+        },
+
+        shrinkAxes: function() {
+            var plotArea = this,
+                box = plotArea.box,
+                axisBox = plotArea.axisBox(),
+                overflowY = axisBox.height() - box.height(),
+                overflowX = axisBox.width() - box.width(),
+                axes = plotArea.axes,
+                currentAxis,
+                isVertical,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+                isVertical  = currentAxis.options.orientation === VERTICAL;
+
+                currentAxis.reflow(
+                    currentAxis.box.shrink(
+                        isVertical ? 0 : overflowX,
+                        isVertical ? overflowY : 0)
+                );
+            }
+        },
+
+        fitAxes: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                box = plotArea.box,
+                axisBox = plotArea.axisBox(),
+                offsetX = box.x1 - axisBox.x1,
+                offsetY = box.y1 - axisBox.y1,
+                currentAxis,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                currentAxis.reflow(
+                    currentAxis.box.translate(offsetX, offsetY)
+                );
+            }
         },
 
         reflowAxes: function() {
             var plotArea = this,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                box = plotArea.box;
+                axes = plotArea.axes,
+                xAxes = axes.filter(function(axis) { return axis.options.orientation !== VERTICAL; }),
+                yAxes = axes.filter(function(axis) { return axis.options.orientation === VERTICAL; }),
+                i,
+                length = axes.length;
 
-            if (axisY || axisX) {
-                axisY.reflow(box);
-                axisX.reflow(box);
-
-                plotArea.alignAxes(
-                    axisX, axisY,
-                    axisX.options.axisCrossingValue,
-                    axisY.options.axisCrossingValue
-                );
-
-                var axisBox = axisY.box.clone().wrap(axisX.box),
-                    overflowY = axisBox.height() - box.height(),
-                    overflowX = axisBox.width() - box.width(),
-                    offsetX = box.x1 - axisBox.x1,
-                    offsetY = box.y1 - axisBox.y1;
-
-                axisY.reflow(
-                    axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
-                );
-
-                axisX.reflow(
-                    axisX.box.translate(offsetX, offsetY).shrink(overflowX, 0)
-                );
-
-                plotArea.alignAxes(
-                    axisX, axisY,
-                    axisX.options.axisCrossingValue,
-                    axisY.options.axisCrossingValue
-                );
-
-                plotArea.wrapAxes([axisX, axisY]);
+            for (i = 0; i < length; i++) {
+                axes[i].reflow(plotArea.box);
             }
+
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.shrinkAxes();
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.fitAxes();
+            plotArea.wrapAxes(axes);
         },
 
         reflowCharts: function() {
@@ -4268,7 +4361,6 @@
             plotArea.axisRanges = {};
             plotArea.namedValueAxes = {};
             plotArea.valueAxes = [];
-            plotArea.axes = [];
 
             if (series.length > 0) {
                 plotArea.invertAxes = inArray(
@@ -4420,9 +4512,9 @@
                 axis,
                 axisName,
                 namedValueAxes = plotArea.namedValueAxes,
-                valueAxesOptions = [].concat(options.valueAxis);
+                valueAxisOptions = [].concat(options.valueAxis);
 
-            $.each(valueAxesOptions, function() {
+            each(valueAxisOptions, function() {
                 axisName = this.name || PRIMARY;
                 range = plotArea.axisRanges[axisName];
 
@@ -4444,143 +4536,69 @@
             plotArea.categoryAxis = categoryAxis;
             plotArea.axes.push(categoryAxis);
             plotArea.append(plotArea.categoryAxis);
+        }
+    });
+
+    var AxisGroupRangeTracker = Class.extend({
+        init: function(axisOptions, defaultRange) {
+            var tracker = this;
+
+            tracker.axisRanges = {},
+            tracker.axisOptions = axisOptions,
+            tracker.defaultRange = defaultRange || { min: 0, max: 1 };
         },
 
-        axisCrossingValues: function(axis, crossingAxes) {
-            var options = axis.options,
-                crossingValues = [].concat(options.axisCrossingValue),
-                valuesToAdd = crossingValues.length - crossingAxes.length,
-                i;
-
-            for (i = 0; i < valuesToAdd; i++) {
-                crossingValues.push(0);
-            }
-
-            return crossingValues;
-        },
-
-        alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
-            var slot = axis.getSlot(crossingValue, crossingValue),
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
-                isVertical = axis.options.orientation === VERTICAL;
-
-            axis.reflow(
-                axis.box.translate(
-                    isVertical ? targetSlot.x1 - slot.x1 : 0,
-                    isVertical ? 0 : targetSlot.y1 - slot.y1
-                )
-            );
-        },
-
-        alignAxes: function(xAxes, yAxes) {
-            var plotArea = this,
-                xAnchor = xAxes[0],
-                yAnchor = yAxes[0],
-                xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
-                yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
+        update: function(chartAxisRanges) {
+            var tracker = this,
+                axisRanges = tracker.axisRanges,
+                axisOptions = tracker.axisOptions,
+                range,
+                chartRange,
+                i,
                 axis,
-                axisCrossings,
-                i;
+                axisName,
+                length = axisOptions.length;
 
-            for (i = 0; i < yAxes.length; i++) {
-                axis = yAxes[i];
-                plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+            if (!chartAxisRanges) {
+                return;
             }
-
-            for (i = 0; i < xAxes.length; i++) {
-                axis = xAxes[i];
-                plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
-            }
-        },
-
-        axisBox: function() {
-            var plotArea = this,
-                axes = plotArea.axes,
-                box = axes[0].box.clone(),
-                i,
-                length = axes.length;
-
-            for (i = 1; i < length; i++) {
-                box.wrap(axes[i].box);
-            }
-
-            return box;
-        },
-
-        shrinkAxes: function() {
-            var plotArea = this,
-                box = plotArea.box,
-                axisBox = plotArea.axisBox(),
-                overflowY = axisBox.height() - box.height(),
-                overflowX = axisBox.width() - box.width(),
-                axes = plotArea.axes,
-                currentAxis,
-                isVertical,
-                i,
-                length = axes.length;
 
             for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
-                isVertical  = currentAxis.options.orientation === VERTICAL;
-
-                currentAxis.reflow(
-                    currentAxis.box.shrink(
-                        isVertical ? 0 : overflowX,
-                        isVertical ? overflowY : 0)
-                );
+                axis = allAxisOptions[i];
+                axisName = axis.name || PRIMARY;
+                range = axisRanges[axisName];
+                chartRange = chartAxisRanges[axisName];
+                if (chartRange) {
+                    range.min = math.min(range.min, chartRange.min);
+                    range.max = math.max(range.max, chartRange.max);
+                }
             }
         },
 
-        fitAxes: function() {
-            var plotArea = this,
-                axes = plotArea.axes,
-                box = plotArea.box,
-                axisBox = plotArea.axisBox(),
-                offsetX = box.x1 - axisBox.x1,
-                offsetY = box.y1 - axisBox.y1,
-                currentAxis,
-                i,
-                length = axes.length;
+        query: function(axisName) {
+            var tracker = this;
 
-            for (i = 0; i < length; i++) {
-                currentAxis = axes[i];
-
-                currentAxis.reflow(
-                    currentAxis.box.translate(offsetX, offsetY)
-                );
-            }
-        },
-
-        reflowAxes: function() {
-            var plotArea = this,
-                invertAxes = plotArea.invertAxes,
-                categoryAxis = plotArea.categoryAxis,
-                valueAxes = plotArea.valueAxes,
-                axes = plotArea.axes,
-                xAxes = invertAxes ? valueAxes : [categoryAxis],
-                yAxes = invertAxes ? [categoryAxis] : valueAxes,
-                i,
-                length = axes.length;
-
-            for (i = 0; i < length; i++) {
-                axes[i].reflow(plotArea.box);
-            }
-
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.shrinkAxes();
-            plotArea.alignAxes(xAxes, yAxes);
-            plotArea.fitAxes();
-            plotArea.wrapAxes(axes);
+            return tracker.axisRanges[axisName] || tracker.defaultRange;
         }
     });
 
     var XYPlotArea = PlotAreaBase.extend({
         init: function(series, options) {
-            var plotArea = this;
+            var plotArea = this,
+                axisOptions = deepExtend({}, plotArea.options, options);
 
-            plotArea.range = { min: [0, 0], max: [1, 1] };
+            plotArea.namedXAxes = {};
+            plotArea.namedYAxes = {};
+
+            plotArea.xAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.xAxis);
+            plotArea.yAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.yAxis);
 
             PlotAreaBase.fn.init.call(plotArea, series, options);
+        },
+
+        options: {
+            xAxis: {},
+            yAxis: {}
         },
 
         render: function() {
@@ -4601,7 +4619,8 @@
         appendChart: function(chart) {
             var plotArea = this;
 
-            plotArea.range = chart.valueRange() || plotArea.range;
+            plotArea.xAxisRangeTracker.update(chart.xAxisRanges);
+            plotArea.yAxisRangeTracker.update(chart.yAxisRanges);
 
             PlotAreaBase.fn.appendChart.call(plotArea, chart);
         },
@@ -4626,22 +4645,33 @@
             }
         },
 
+        createXYAxis: function(options, isVertical) {
+            var plotArea = this,
+                axisName = options.name || PRIMARY,
+                namedAxes = isVertical ? plotArea.namedYAxes : plotArea.namedXAxes,
+                axisRanges = isVertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
+                rangeTracker = isVertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
+                range = rangeTracker.query(axisName),
+                orientation = isVertical ? VERTICAL : HORIZONTAL,
+                options = deepExtend({}, options, { orientation: orientation }),
+                axis = new NumericAxis(range.min, range.max, options);
+
+            namedAxes[axisName] = axis;
+            plotArea.append(axis);
+            plotArea.axes.push(axis);
+        },
+
         createAxes: function() {
             var plotArea = this,
-                options = plotArea.options,
-                range = plotArea.range,
-                firstSeries = plotArea.series[0];
+                options = plotArea.options;
 
-            plotArea.axisX = new NumericAxis(range.min[0], range.max[0],
-                deepExtend({}, options.xAxis, { orientation: HORIZONTAL })
-            );
+            each([].concat(options.xAxis), function() {
+                plotArea.createXYAxis(this, false);
+            });
 
-            plotArea.axisY = new NumericAxis(range.min[1], range.max[1],
-                deepExtend({}, options.yAxis, { orientation: VERTICAL })
-            );
-
-            plotArea.append(plotArea.axisY);
-            plotArea.append(plotArea.axisX);
+            each([].concat(options.yAxis), function() {
+                plotArea.createXYAxis(this, true);
+            });
         }
     });
 
@@ -5564,7 +5594,7 @@
     function applyAxisDefaults(options, themeOptions) {
         var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
 
-        $.each(["category", "value", "x", "y"], function() {
+        each(["category", "value", "x", "y"], function() {
             var axisName = this + "Axis",
                 axes = [].concat(options[axisName]);
 
