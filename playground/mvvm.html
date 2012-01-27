@@ -266,8 +266,8 @@ var
                     this.target = target;
                 },
 
-                setBinding: function(path, binding) {
-                    var property = this.createProperty(path);
+                setBinding: function(path, binding, template) {
+                    var property = this.createProperty(path, template);
 
                     var expression = this.createExpression(property, binding);
 
@@ -286,16 +286,22 @@ var
                     return new BindingExpression(property, binding);
                 },
 
-                createProperty: function(path) {
+                createProperty: function(path, template) {
                     path = {
                         "text": "innerText",
                         "title": "title",
+                        "html": "innerHTML",
                         "value": "value"
-                    }[path];
+                    }[path] || path;
 
                     if (path == "value") {
                         return new TwoWayProperty(this.target, path);
                     }
+
+                    if (path == "template") {
+                        return new TemplateProperty(this.target, path, template);
+                    }
+
                     return new Property(this.target, path);
                 }
             });
@@ -351,6 +357,26 @@ var
                 }
             });
 
+            var TemplateProperty = Class.extend( {
+                init: function(target, path, template) {
+                    this.target = target;
+                    this.path = path;
+                    this.template = template;
+                },
+
+                bind: function() {
+                },
+
+                set: function(value) {
+                    var idx;
+
+                    this.target.innerHTML = this.template(value);
+
+                    for (idx = 0; idx < this.target.children.length; idx++) {
+                        bind(this.target.children[idx], value);
+                    }
+                }
+            });
             var TwoWayProperty = Observable.extend( {
                 init: function(target, path) {
                     Observable.fn.init.call(this);
@@ -477,10 +503,20 @@ var
                     target = element.nodeName.toLowerCase() === "select" ? new SelectBindingTarget(element) : new BindingTarget(element);
                 }
 
-                ["text", "title", "value", "source"].forEach(function(path) {
+                var template = element.getAttribute("data-template");
+
+                if (template) {
+                    var binding = new Binding(source, "");
+
+                    template = kendo.template($("#" + template).html());
+
+                    target.setBinding("template", binding, template);
+                }
+
+                ["text", "html", "title", "value", "source"].forEach(function(path) {
                     var sourcePath = element.getAttribute("data-" + path);
 
-                    if (sourcePath) {
+                    if (sourcePath){
                         var binding = new Binding(source, sourcePath);
 
                         target.setBinding(path, binding);
@@ -510,8 +546,13 @@ var
             </select>
             DropDownList value is: <span id="selectedValue" data-text="selectedValue"></span>
             <select style="display:block" data-source="items"></select>
+            <div id="html" data-html="baz"></div>
+            <div id="template" data-template="baz"></div>
         </form>
 
+        <script id="baz" type="text/x-kendo-template">
+            Template: <span data-text="baz"></span>
+        </script>
         <script>
             var viewModel = new ObservableObject({
                 foo: "foo",
@@ -529,6 +570,8 @@ var
             bind($("select")[1], viewModel);
             bind($("#selectedValue")[0], viewModel);
             bind($("select")[2], viewModel);
+            bind($("#html")[0], viewModel);
+            bind($("#template")[0], viewModel);
         </script>
     </body>
 </html>
