@@ -9,31 +9,70 @@
         FRICTION = 0.95;
         OUT_OF_BOUNDS_FRICTION = 0.83;
 
-    var Inertia = kendo.Class.extend({
+    var DragInertia = kendo.Class.extend({
         init: function(options) {
             var that = this;
             $.extend(that, options);
+
+            that.transition = new Transition({
+                axis: that.axis,
+                move: that.move
+            });
+
+            that.boundary = that.boundary[that.axis];
+            that.outOfBounds = proxy(that.boundary.outOfBounds, that.boundary);
             that.tickProxy = proxy(that._tick, that);
+
+            that.swipe.bind("start", proxy(that.cancel, that));
+            that.swipe.bind("end", proxy(that.start, that));
         },
 
-        stop: function() {
+        cancel: function() {
+            this.transition.stop();
             clearInterval(this.intervalID);
         },
 
-        start: function(velocity) {
-            this.velocity = velocity;
-            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
+        start: function() {
+            var that = this;
+
+            if (!that.boundary.present()) { return; }
+
+            if (that.outOfBounds()) {
+                that._snapBack();
+            } else {
+                that.velocity = that.swipe[that.axis].velocity * .5;
+                that.intervalID = setInterval(that.tickProxy, TICK_INTERVAL);
+            }
+        },
+
+        _end: function() {
+            this.cancel();
+            this._snapBack();
+        },
+
+        _snapBack: function() {
+            var that = this,
+                snapBack,
+                boundary = that.boundary;
+
+            if (that.outOfBounds()) {
+                snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
+                that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
+            }
         },
 
         _tick: function() {
             var that = this,
-                friction = that.boundary.y.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
+                axis = that.axis,
+                params = {},
+                friction =  that.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
-            that.move.translate({y: that.velocity *= friction});
+            params[axis] = that.velocity *= friction;
+
+            that.move.translate(params);
 
             if (Math.abs(that.velocity) < 1) {
-                that.stop();
-                that.callback();
+                that._end();
             }
         }
     });
@@ -52,26 +91,19 @@
 
             that.move = new mobile.Move(that.inner);
 
-            that.transition = new Transition({
-                axis: "y",
-                move: that.move
-            });
+            that.boundary = new mobile.ContainerBoundary(element, {move: that.move});
 
             that.swipe = new mobile.Swipe(element, {
                 start: function() {
-                    that.transition.stop();
-                    that.inertia.stop();
                     that.boundary.refresh();
-                },
-                end: $.proxy(that._swipeEnd, that)
+                }
             });
 
-            that.boundary = new mobile.ContainerBoundary(element, {move: that.move});
-
-            that.inertia = new Inertia({
+            that.inertia = new DragInertia({
+                axis: "y",
                 move: that.move,
-                boundary: that.boundary,
-                callback: $.proxy(that._snapBack, that)
+                swipe: that.swipe,
+                boundary: that.boundary
             });
 
             that.draggable = new mobile.Draggable({
@@ -86,31 +118,6 @@
 
         options: {
             name: "Scroller"
-        },
-
-        viewShow: function(view) {
-            that.boundary.refresh();
-        },
-
-        _snapBack: function() {
-            var that = this, snapBack, y = that.move.y, boundary = that.boundary.y;
-
-            if (that.boundary.y.outOfBounds()) {
-                snapBack = y > boundary.max ? boundary.max : boundary.min;
-                that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
-            }
-        },
-
-        _swipeEnd: function(e) {
-            var that = this;
-
-            if (!that.boundary.y.present()) { return; }
-
-            if (that.boundary.y.outOfBounds()) {
-                that._snapBack();
-            } else {
-                that.inertia.start(that.swipe.y.velocity);
-            }
         }
     });
 
