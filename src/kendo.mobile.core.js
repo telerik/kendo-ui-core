@@ -52,6 +52,7 @@
         start: function(location) {
             var that = this;
             that.location = location;
+            that.velocity = 0;
         },
 
         move: function(location) {
@@ -88,8 +89,8 @@
             eventMap["touchend" + ns + " touchcancel" + ns] = proxy(that._touchEnd, that);
 
             extend(that, {
-                x: new SwipeAxis(true),
-                y: new SwipeAxis(false),
+                x: new SwipeAxis(),
+                y: new SwipeAxis(),
                 element: element,
                 surface: options.global ? SURFACE : element,
                 pressed: false,
@@ -99,7 +100,8 @@
 
             element.on({
                 "mousedown": proxy(that._mouseDown, that),
-                "touchstart": proxy(that._touchStart, that)
+                "touchstart": proxy(that._touchStart, that),
+                "dragstart": function(e) { e.preventDefault(); }
             });
 
             that.bind([START, MOVE, END], options);
