@@ -140,9 +140,7 @@
         },
 
         _mouseMove: function(e) {
-            var that = this;
-
-            that._perAxis(MOVE, e);
+            this._perAxis(MOVE, e);
         },
 
         _touchEnd: function(e) {
@@ -152,19 +150,14 @@
 
             that._withTouchEvent(e, function(touch) {
                 that.pressed = false;
-
                 that.surface.off(that.ns);
-
                 that._perAxis(END, touch, e);
             });
         },
 
         _mouseUp: function(e) {
-            var that = this;
-
-            that.surface.off(that.ns);
-
-            that._perAxis(END, e);
+            this.surface.off(this.ns);
+            this._perAxis(END, e);
         },
 
         _perAxis: function(method, location, event) {
