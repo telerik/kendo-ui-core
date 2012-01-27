@@ -82,7 +82,7 @@
             that.boundary.bind("change", proxy(that.calculateDimensions, that));
 
             that.draggable = new mobile.Draggable({
-                boundary: containerBoundary,
+                boundary: that.containerBoundary,
                 swipe: that.swipe,
                 elastic: true,
                 move: that.move
