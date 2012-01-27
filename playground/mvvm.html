@@ -20,7 +20,218 @@
         <script>
             var Class = kendo.Class,
                 Observable = kendo.Observable;
+var
+        CHANGE = "change",
+        GET = "get",
+        SET = "set",
+        push = [].push,
+        join = [].join,
+        pop = [].pop,
+        splice = [].splice,
+        slice = [].slice,
+        unshift = [].unshift,
+        toString = {}.toString;
 
+    function set(object, field, value) {
+        return kendo.setter(field)(object, value);
+    }
+
+    function get(object, field, call) {
+        var result;
+
+        if (field === "this") {
+            result = object;
+        } else {
+            result = kendo.getter(field, true)(object);
+
+            if (call && typeof result === "function") {
+                result = result.call(object);
+            }
+        }
+
+        return result;
+    }
+
+    var ObservableArray = Observable.extend({
+        init: function(array, type) {
+            var that = this,
+                member,
+                idx;
+
+            type = type || ObservableObject;
+
+            Observable.fn.init.call(that);
+
+            that.length = array.length;
+
+            for (idx = 0; idx < that.length; idx++) {
+                member = array[idx];
+
+                if ($.isPlainObject(member)) {
+                    member = new type(member);
+
+                    member.bind(CHANGE, function(e) {
+                        if (!e.isPropagationStopped()) {
+                            that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
+                        }
+                    });
+                }
+
+                that[idx] = member;
+            }
+        },
+
+        push: function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = push.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: index,
+                items: items
+            });
+
+            return result;
+        },
+
+        slice: slice,
+
+        join: join,
+
+        pop: pop,
+
+        splice: function(index, howMany, item) {
+            var result = splice.apply(this, arguments);
+
+            if (result.length) {
+                this.trigger(CHANGE, {
+                    action: "remove",
+                    index: index,
+                    items: result
+                });
+            }
+
+            if (item) {
+                this.trigger(CHANGE, {
+                    action: "add",
+                    index: index,
+                    items: slice.call(arguments, 2)
+                });
+            }
+            return result;
+        },
+
+        unshift: function() {
+            var index = this.length,
+                items = arguments,
+                result;
+
+            result = unshift.apply(this, items);
+
+            this.trigger(CHANGE, {
+                action: "add",
+                index: 0,
+                items: items
+            });
+
+            return result;
+        },
+
+        indexOf: function(item) {
+            var that = this,
+                idx,
+                length;
+
+            for (idx = 0, length = that.length; idx < length; idx++) {
+                if (that[idx] === item) {
+                    return idx;
+                }
+            }
+            return -1;
+        }
+    });
+
+    var ObservableObject = Observable.extend({
+        init: function(value) {
+            var that = this,
+                member,
+                field,
+                type;
+
+            Observable.fn.init.call(this);
+
+            for (field in value) {
+                member = value[field];
+                type = toString.call(member);
+
+                if (type === "[object Object]") {
+                    member = new ObservableObject(member);
+
+                    (function(field) {
+                        member.bind(GET, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(GET, e);
+                        });
+
+                        member.bind(CHANGE, function(e) {
+                            e.field = field + "." + e.field;
+                            that.trigger(CHANGE, e);
+                        });
+                    })(field);
+                } else if (type === "[object Array]") {
+                    member = new ObservableArray(member);
+                }
+
+                that[field] = member;
+            }
+        },
+
+        shouldSerialize: function(field) {
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function";
+        },
+
+        toJSON: function() {
+            var result = {}, field;
+
+            for (field in this) {
+                if (this.shouldSerialize(field)) {
+                    result[field] = this[field];
+                }
+            }
+
+            return result;
+        },
+
+        get: function(field) {
+            this.trigger(GET, { field: field });
+
+            return get(this, field);
+        },
+
+        set: function(field, value, initiator) {
+            var current = this[field], stopped = false;
+
+            if (current != value) {
+                if (!this.trigger("set", { field: field, value: value })) {
+                    set(this, field, value);
+
+                    this.trigger(CHANGE, {
+                        field: field,
+                        initiator: initiator,
+                        stopPropagation: function() {
+                            stopped = true;
+                        },
+                        isPropagationStopped: function() {
+                            return stopped;
+                        }
+                    });
+                }
+            }
+        }
+    });
             var Binding = Observable.extend( {
                 init: function(source, path) {
                     var that = this;
@@ -191,7 +402,35 @@
 
             var SourceProperty = Property.extend({
                 set: function(value) {
+                    var that = this;
+
+                    value.bind("change", function(e) {
+                        if (e.action == "add") {
+                            that.add(e.index, e.items);
+                        } else if (e.action == "remove") {
+                            that.remove(e.index, e.items);
+                        }
+                    });
+
                     this.target.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), value);
+                },
+
+                add: function(index, items) {
+                    var idx, length, clone = this.target.cloneNode();
+
+                    clone.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), items);
+
+                    for (idx = 0, length = items.length; idx < length; idx++) {
+                        this.target.insertBefore(clone.children[idx], this.target.children[index]);
+                    }
+                },
+
+                remove: function(index, items) {
+                    var idx, length;
+
+                    for (idx = 0, length = items.length; idx < length; idx++) {
+                        this.target.removeChild(this.target.children[index]);
+                    }
                 }
             });
 
@@ -274,7 +513,7 @@
         </form>
 
         <script>
-            var viewModel = kendo.observable({
+            var viewModel = new ObservableObject({
                 foo: "foo",
                 bar: "bar",
                 baz: "baz",
