@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UI5.Chart Tests - VML</title>
+        <title>VML tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -191,6 +191,29 @@
                     var sector = view.createSector({}, { strokeWidth: 2});
 
                     equals(sector.options.strokeWidth, 2);
+                });
+
+                test("createRing returns VMLRing", function() {
+                    var ring = view.createRing();
+                    ok(ring instanceof Chart.VMLRing);
+                });
+
+                test("createRing sets fill color", function() {
+                    var ring = view.createRing({}, { fill: "#cf0" });
+
+                    equals(ring.options.fill, "#cf0");
+                });
+
+                test("createRing sets stroke color", function() {
+                    var ring = view.createRing({}, { stroke: "#cf0" });
+
+                    equals(ring.options.stroke, "#cf0");
+                });
+
+                test("createRing sets stroke width", function() {
+                    var ring = view.createRing({}, { strokeWidth: 2});
+
+                    equals(ring.options.strokeWidth, 2);
                 });
 
                 test("renderTo returns DOM element", function() {
@@ -892,6 +915,30 @@
                     clipRect.refresh(domElement);
                     equals(domElement.style.clip.replace(/,/g, ''),
                            "rect(20px 110px 220px 10px)");
+                });
+
+            })();
+
+            (function() {
+                var ring;
+
+                module("VMLRing", {
+                    setup: function() {
+                        var ringConfig = new Chart.Ring(
+                                new Point2D(135, 135), 100, 135, -30, 240
+                            );
+                        ring = new Chart.VMLRing(ringConfig);
+
+                        $("<div />").appendTo(document.body).kendoGauge();
+                    }
+                });
+
+                test("renders path", function() {
+                    //ok(sector.render().indexOf("<kvml:path v='M 150 150 AE 150 150 135 135 -17694450 -1310720 X E' />"));
+                });
+
+                test("renders radius", function() {
+                    //ok(ring.render().indexOf("A135 135") > -1);
                 });
 
             })();
