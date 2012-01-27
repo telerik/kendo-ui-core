@@ -4,14 +4,15 @@
         ui = mobile.ui,
         proxy = $.proxy,
         extend = $.extend,
-        roleSelector = kendo.roleSelector,
         Widget = ui.Widget,
-        Transition = mobile.Transition;
+        Class = kendo.Class,
+        Transition = mobile.Transition,
         SCROLLBAR_OPACITY = 0.7,
-        FRICTION = 0.95;
-        OUT_OF_BOUNDS_FRICTION = 0.83;
+        FRICTION = 0.95,
+        OUT_OF_BOUNDS_FRICTION = 0.83,
+        CHANGE = change;
 
-    var DragInertia = kendo.Class.extend({
+    var DragInertia = Class.extend({
         init: function(options) {
             var that = this;
             extend(that, options, {
@@ -72,7 +73,7 @@
         }
     });
 
-    var ScrollBar = kendo.Class.extend({
+    var ScrollBar = Class.extend({
         init: function(options) {
             var that = this,
                 horizontal = options.axis === "x",
@@ -85,8 +86,8 @@
                 size: horizontal ? "width" : "height"
             });
 
-            that.boundary.bind("change", proxy(that.resize, that));
-            that.scrollMove.bind("change", proxy(that._move, that));
+            that.boundary.bind(CHANGE, proxy(that.resize, that));
+            that.scrollMove.bind(CHANGE, proxy(that._move, that));
 
             that.container.append(element);
         },
@@ -178,7 +179,7 @@
                 end: function() { scrollBar.hide(); }
             });
 
-            draggable.bind("change", function() { scrollBar.show(); });
+            draggable.bind(CHANGE, function() { scrollBar.show(); });
         },
 
         options: {
