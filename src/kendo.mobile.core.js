@@ -313,10 +313,12 @@
             that.x = new Boundary({horizontal: true, element: element, move: move});
             that.y = new Boundary({horizontal: false, element: element, move: move});
 
-            $(window).bind("orientationchange resize", function() {
-                that.x.update();
-                that.y.update();
-            });
+            $(window).bind("orientationchange resize", proxy(that.refresh, that));
+        },
+
+        refresh: function() {
+            this.x.update();
+            this.y.update();
         }
     });
 
