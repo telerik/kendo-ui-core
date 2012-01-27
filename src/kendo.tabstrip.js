@@ -15,9 +15,6 @@
      *  each tab.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>
-     *  Creating a <strong>TabStrip</strong> 
-     * </p>
      *
      * @exampleTitle Create an unordered list for tabs with associated div elements for content
      * @example
@@ -86,7 +83,7 @@
      *  });
      *
      * @section
-     * <h3>Dynamically configure TabStrip tabs</h3>
+     * <h3>Dynamically Configure TabStrip Tabs</h3>
      * <p>
      *  The <strong>TabStrip</strong> API provides several methods for dynamically adding or removing tabs. To add
      *  tabs, provide the new item as a JSON object along with a reference item that will be used to determine the
@@ -484,8 +481,7 @@
 
         /**
          *
-         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) a tab(s) of a
-         * <strong>TabStrip</strong>.
+         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) a tab(s) of a <strong>TabStrip</strong>.
          *
          * @param {Selector} element
          * The target tab(s), specified as a selector, to be enabled (<strong>true</strong>) or disabled
