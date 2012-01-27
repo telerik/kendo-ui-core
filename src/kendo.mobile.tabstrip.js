@@ -107,7 +107,7 @@
             that.bind([
             /**
              * Fires when tab is selected.
-             * @name kendo.mobile.ui.Tabstrip#select
+             * @name kendo.mobile.ui.TabStrip#select
              * @event
              * @param {Event} e
              * @param {jQueryObject} e.item The selected tab
@@ -134,7 +134,7 @@
         *
         * <script>
         *     $(function() {
-        *         $("#tabstrip").data("kendoMobileTabstrip").switchTo("#foo");
+        *         $("#tabstrip").data("kendoMobileTabStrip").switchTo("#foo");
         *     });
         * </script>
         */

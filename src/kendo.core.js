@@ -537,9 +537,9 @@
      * @exampleTitle Include culture scripts and select culture
      * @example
      *
-     * <script src="jquery.js" />
-     * <script src="kendo.all.min.js" />
-     * <script src="kendo.culture.en-GB.js" />
+     * <script src="jquery.js"><script/>
+     * <script src="kendo.all.min.js"><script/>
+     * <script src="kendo.culture.en-GB.js"><script/>
      * <script type="text/javascript">
      *    //set current culture to the "en-GB" culture script.
      *    kendo.culture("en-GB");
@@ -562,9 +562,11 @@
      * kendo.toString(10.12, "n0"); //10
      * kendo.toString(10.12, "n5"); //10.12000
      * kendo.toString(10.12, "c"); //$10.12
-     * kendo.toString(0.12, "p"); //12.00 %
+     * kendo.toString(0.12, "p"); //12.00 % />
+     *
      * //format number using custom number format
      * kendo.toString(19.12, "00##"); //0019
+     *
      * //format date
      * kendo.toString(new Date(2010, 9, 5), "yyyy/MM/dd" ); // "2010/10/05"
      * kendo.toString(new Date(2010, 9, 5), "dddd MMMM d, yyyy" ); // "Tuesday October 5, 2010"
@@ -581,40 +583,38 @@
      * <h3>Parsing a string</h3>
      *
      * Kendo exposes methods which converts the specified string to date or number object:
-     * <ol>
-     *    <li>
-     *       <code>kendo.parseInt(string, [culture])</code> - converts a string to a whole number using the specified culture (current culture by default).
-     *        @exampleTitle Parse string to integer
-     *        @example
-     *
-     *        //assumes that current culture defines decimal separator as "."
-     *        kendo.parseInt("12.22"); //12
-     *
-     *        //assumes that current culture defines decimal separator as ",", group separator as "." and currency symbol as "€"
-     *        kendo.parseInt("1.212,22 €"); //1212
-     *    </li>
-     *    <li>
-     *       <code>kendo.parseFloat(string, [culture])</code> - converts a string to a number with floating point using the specified culture (current culture by default).
-     *        @exampleTitle Parse string to float
-     *        @example
-     *
-     *        //assumes that current culture defines decimal separator as "."
-     *        kendo.parseFloat("12.22"); //12.22
-     *
-     *        //assumes that current culture defines decimal separator as ",", group separator as "." and currency symbol as "€"
-     *        kendo.parseFloat("1.212,22 €"); //1212.22
-     *    </li>
-     *    <li>
-     *       <code>kendo.parseDate(string, [formats], [culture])</code> - converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
-     *       Current culture is used if one is not specified.
-     *        @exampleTitle Parse string to float
-     *        @example
-     *
-     *        //current culture is "en-US"
-     *        kendo.parseDate("12/22/2000"); //Fri Dec 22 2000
-     *        kendo.parseDate("2000/12/22", "yyyy/MM/dd"); //Fri Dec 22 2000
-     *    </li>
-     * </ol>
+     * <br/>
+     * <br/>
+     *  @section
+     *  <strong><code>kendo.parseInt(string, [culture])</code></strong> - converts a string to a whole number using the specified culture (current culture by default).
+     *   @exampleTitle Parse an integer string
+     *   @example
+     *   //assumes that current culture defines decimal separator as "."
+     *   kendo.parseInt("12.22"); //12
+     *
+     *   //assumes that current culture defines decimal separator as ",", group separator as "." and currency symbol as "€"
+     *   kendo.parseInt("1.212,22 €"); //1212
+     *
+     *   @section
+     * <br/>
+     *   <strong><code>kendo.parseFloat(string, [culture])</code></strong> - converts a string to a number with floating point using the specified culture (current culture by default).
+     *   @exampleTitle Parse a float string
+     *   @example
+     *   //assumes that current culture defines decimal separator as "."
+     *   kendo.parseFloat("12.22"); //12.22
+     *
+     *   //assumes that current culture defines decimal separator as ",", group separator as "." and currency symbol as "€"
+     *   kendo.parseFloat("1.212,22 €"); //1212.22
+     *
+     *   @section
+     * <br/>
+     *   <strong><code>kendo.parseDate(string, [formats], [culture])</code></strong> - converts a string to a JavaScript Date object, taking into account the given format/formats (or the given culture's set of default formats).
+     *   Current culture is used if one is not specified.
+     *   @exampleTitle Parse a date string
+     *   @example
+     *   //current culture is "en-US"
+     *   kendo.parseDate("12/22/2000"); //Fri Dec 22 2000
+     *   kendo.parseDate("2000/12/22", "yyyy/MM/dd"); //Fri Dec 22 2000
      *
      * @section
      * <h3>Number formatting</h3>
@@ -823,7 +823,7 @@
      * </div>
      *
      * @section
-     * <p><h3>Widgets that depend on current culture are:</h3>
+     * <p><h3>Widgets that depend on the current culture are:</h3>
      *    <ul>
      *        <li> Calendar </li>
      *        <li> DatePicker </li>
