@@ -37,19 +37,19 @@
         </footer>
     </div>
 
-    <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default">
+    <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default" data-init="initIndexView">
         <div data-role="content">
             <ul id="featured" class="item-list"></ul>
         </div>
     </div>
 
-    <div data-role="view" id="menu" data-layout="default" data-title="Menu">
+    <div data-role="view" id="menu" data-layout="default" data-title="Menu" data-init="initMenuView">
         <div data-role="content">
             <ul id="menuList" class="item-list"></ul>
         </div>
     </div>
 
-    <div data-role="view" id="cart" data-layout="default" data-title="Cart">
+    <div data-role="view" id="cart" data-layout="default" data-title="Cart" data-init="initCartView">
         <div data-role="content">
             <h2 id="total"></h2>
             <img src="@Url.Content("~/content/integration/sushi/images/sad.png")" id="empty-icon">
@@ -132,7 +132,7 @@
     </script>
 
     <script>
-        var schema = { model: {uid: "uid"} };
+        var schema = {model: {}};
 
         var ds = kendo.data.DataSource.create({
             schema: schema,
@@ -141,7 +141,8 @@
             error: function() { console.log(arguments); }
         });
 
-        var cartDataSource = kendo.data.DataSource.create({schema: schema, aggregate: [{ field: "price", aggregate: "sum" }]});
+        var cartDataSource = kendo.data.DataSource.create({data: [], schema: schema, aggregate: [{ field: "price", aggregate: "sum" }]});
+        cartDataSource.read();
 
         cartDataSource.bind("change", function() {
             var emptyCart = cartDataSource.aggregates().price === undefined;
@@ -172,7 +173,6 @@
                 e.preventDefault();
             }
         }
-
         function removeItemFromList(e) {
             if (e.buttonName === "remove") {
                 cartDataSource.remove(e.dataItem);
@@ -181,38 +181,36 @@
             }
         }
 
+        function initCartView() {
+            $("#cartList").kendoMobileListView({
+                dataSource: cartDataSource,
+                click: removeItemFromList,
+                template: $("#cartItemTemplate").text()
+            });
+
+            $("#checkout").data("kendoMobileButton").bind("click", function() {
+                setTimeout(function () { cartDataSource.data([]) }, 400);
+            });
+        }
+
+        function initIndexView() {
+            $("#featured").kendoMobileListView({
+                dataSource: featured,
+                click: addToCartFromList,
+                template: $("#menuTemplate").text()
+            });
+        }
+
+        function initMenuView() {
+            $("#menuList").kendoMobileListView({
+                dataSource: ds,
+                click: addToCartFromList,
+                template: $("#menuTemplate").text()
+            });
+        }
+
         var app = new kendo.mobile.Application($(document.body), {
             transition: "slide",
-
-            viewInit: function(e) {
-                var id = e.view.element.attr("id");
-
-                if (id === "index") {
-                    $("#featured")
-                    .kendoMobileListView({
-                        dataSource: featured,
-                        click: addToCartFromList,
-                        template: $("#menuTemplate").text()
-                    });
-                    } else if (id === "menu") {
-                    $("#menuList")
-                    .kendoMobileListView({
-                        dataSource: ds,
-                        click: addToCartFromList,
-                        template: $("#menuTemplate").text()
-                    });
-                    } else if (id === "cart") {
-                    $("#cartList").kendoMobileListView({
-                        dataSource: cartDataSource,
-                        click: removeItemFromList,
-                        template: $("#cartItemTemplate").text()
-                    });
-
-                    $("#checkout").data("kendoMobileButton").bind("click", function() {
-                        setTimeout(function () { cartDataSource.data([]) }, 400);
-                    });
-                }
-            },
 
             viewShow: function(e) {
                 var view = e.view, viewID = view.element.attr("id"), item;
@@ -229,7 +227,7 @@
                             view.content.find(".added").show();
                         });
                     });
-                    } else if (viewID === "index" || viewID === "menu") {
+                } else if (viewID === "index" || viewID === "menu") {
                     view.content.find(".item-list").data("kendoMobileListView")._refresh();
                 }
             }
