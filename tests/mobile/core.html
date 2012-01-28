@@ -1,7 +1,7 @@
 <!DOCTYPE dom>
 <html>
     <head>
-        <title>kendo.mobile.code Tests</title>
+        <title>Kendo mobile Core Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -19,19 +19,18 @@
         <ul id="log"></ul>
 
         <script>
-            var MobileWidget = kendo.ui.MobileWidget;
+            var MobileWidget = kendo.mobile.ui.Widget;
 
             var MyMobileWidget = MobileWidget.extend({
                 options: {
-                    name: "MyMobileWidget",
+                    name: "My",
                     foo: "foo",
                     bar: "bar",
-                    caseSensitive: "caseSensitive",
-                    selector: "[data-kendo-role=my]"
+                    caseSensitive: "caseSensitive"
                 }
             });
 
-            kendo.ui.plugin(MyMobileWidget);
+            kendo.mobile.ui.plugin(MyMobileWidget);
 
             module("mobile core", {
                 setup: function() {
@@ -87,7 +86,7 @@
 
                 kendo.mobile.enhance(dom);
 
-                ok(dom.find("div").data("kendoMyMobileWidget"), "Plugin instantiated");
+                ok(dom.find("div").data("kendoMobileMy"), "Plugin instantiated");
             });
 
             test("instantiates mobile widgets by data attribute", function() {
@@ -97,8 +96,58 @@
 
                 kendo.mobile.enhance(dom);
 
-                ok(dom.data("kendoMyMobileWidget"), "Plugin instantiated");
+                ok(dom.data("kendoMobileMy"), "Plugin instantiated");
             });
+
+            module("mobile Animation", {});
+
+            asyncTest("executes callbacks", 1, function() {
+                var animation = kendo.mobile.Animation.extend({
+                    counter: 0,
+                    tick: function() {
+                        this.counter ++;
+                    },
+
+                    onEnd: function() {
+                        start();
+                        equal(this.counter, 3);
+                    },
+
+                    done: function() {
+                        return this.counter === 3;
+                    }
+                });
+
+                new animation().start();
+            });
+
+            asyncTest("is cancellable", 1, function() {
+                var animation = kendo.mobile.Animation.extend({
+                    counter: 0,
+                    tick: function() {
+                        this.counter ++;
+                        if (this.counter === 2) {
+                            this.cancel();
+                        }
+                    },
+
+                    onCancel: function() {
+                        start();
+                        equal(this.counter, 2);
+                    },
+
+                    onEnd: function() {
+                        ok(false);
+                    },
+
+                    done: function() {
+                        return this.counter === 3;
+                    }
+                });
+
+                new animation().start();
+            });
+
 
         </script>
     </body>
