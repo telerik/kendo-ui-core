@@ -389,6 +389,9 @@
 
                 // ------------------------------------------------------------
                 module("Line Chart / Stack / Mixed Series", {
+                    plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
+                    plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
+
                     setup: function() {
                         setupLineChart(plotArea, {
                             series: [

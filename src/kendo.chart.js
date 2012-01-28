@@ -2477,10 +2477,7 @@
         },
 
         seriesValueAxis: function(series) {
-            var namedValueAxes = this.plotArea.namedValueAxes;
-
-            // TODO: Test fallbacks
-            return namedValueAxes[series ? series.axis : PRIMARY] || namedValueAxes[PRIMARY];
+            return this.plotArea.namedValueAxes[(series || {}).axis || PRIMARY];
         },
 
         reflow: function(targetBox) {

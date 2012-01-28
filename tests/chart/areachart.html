@@ -209,6 +209,8 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Multiple Series", {
                     setup: function() {
+                        plotArea.namedValueAxes.secondary = plotArea.namedValueAxes.primary;
+
                         setupAreaChart(plotArea, {
                             series: [
                             $.extend({ axis: "primary" }, positiveSeries),
@@ -415,6 +417,9 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Mixed Series", {
                     setup: function() {
+                        plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
+                        plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
+
                         setupAreaChart(plotArea, {
                             series: [
                                 // Both axes should be on same axis.
