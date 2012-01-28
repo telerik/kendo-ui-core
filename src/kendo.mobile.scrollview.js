@@ -62,7 +62,7 @@
             that.transition = new Transition({
                 axis: "x",
                 move: that.move,
-                callback: function() {
+                onEnd: function() {
                     that.page = -that.move.x / that.boundary.size;
                     that._updatePage();
                 }
@@ -70,12 +70,17 @@
 
             that.swipe = new mobile.Swipe(element, {
                 start: function() {
-                    that.transition.stop();
+                    console.log("canceling");
+                    that.transition.cancel();
                 },
                 end: $.proxy(that._swipeEnd, that)
             });
 
-            that.containerBoundary = new mobile.ContainerBoundary(element, {move: that.move });
+            that.containerBoundary = new mobile.ContainerBoundary({
+                element: that.inner,
+                container: that.element,
+                move: that.move
+            });
 
             that.boundary = that.containerBoundary.x;
             that.boundary.bind("change", proxy(that.calculateDimensions, that));
