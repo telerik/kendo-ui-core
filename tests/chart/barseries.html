@@ -195,12 +195,14 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Multiple Series", {
                     setup: function() {
-                    setupBarChart(plotArea, {
-                        series: [
-                            $.extend({ axis: "primary" }, negativeSeries ),
-                            $.extend({ axis: "secondary" }, positiveSeries )
-                        ] });
-                    }
+                        plotArea.namedValueAxes.secondary = plotArea.namedValueAxes.primary;
+
+                        setupBarChart(plotArea, {
+                            series: [
+                                $.extend({ axis: "primary" }, negativeSeries ),
+                                $.extend({ axis: "secondary" }, positiveSeries )
+                            ] });
+                        }
                 });
 
                 test("Reports minimum value for primary axis", function() {
@@ -372,6 +374,9 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Stack / Mixed Series", {
                     setup: function() {
+                        plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
+                        plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
+
                         setupBarChart(plotArea, {
                             series: [
                                 // Both axes should be on same axis.
