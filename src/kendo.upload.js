@@ -203,26 +203,23 @@
                  * @param {Event} e
                  *
                  * @param {Array} e.files
-                 * List of the selected files. Each file has:
+                 * An array of the selected files.
                  *
                  * <ul>
-                 *     <li>name</li>
-                 *     <li>
-                 *         extension - the file extension
-                 *         including the leading dot - ".jpg", ".png", etc.
-                 *      </li>
-                 *     <li>size - the file size in bytes (null if not available)</li>
+                 *     <li>name - the name of a selected file, including its extension</li>
+                 *     <li>extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")</li>
+                 *     <li>size - the size (in bytes) of a selected file (null, if unavailable)</li>
+                 *     <li>rawFile - an in-memory representation of a selected file</li>
                  * </ul>
                  *
                  * @exampleTitle Wire-up an event handler that triggered when a user selects a file(s)
                  * @example
                  * var onSelect = function(e) {
-                 *     var files = e.files;    // array with information about the uploaded files
-                 *
-                 *     if (files.length > 5) {
-                 *         alert("Y U NO select fewer than six files?");
-                 *         e.preventDefault();
-                 *     }
+                 *     $.each(e.files, function(index, value) {
+                 *         console.log("Name: " + value.name);
+                 *         console.log("Size: " + value.size + " bytes");
+                 *         console.log("Extension: " + value.extension);
+                 *     });
                  * };
                  *
                  * // initialize and configure an Upload widget with a select event handler
