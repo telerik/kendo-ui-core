@@ -294,24 +294,22 @@
         },
 
         update: function() {
-            var that = this,
-                element = that.element,
-                measure = that.measure;
+            var that = this;
 
-            that.size = element[that.measure]();
-            that.total = element[0][that.scrollSize];
-            that.min = that.size - that.total;
+            that.size = that.container[that.measure]();
+            that.total = that.element[0][that.scrollSize];
+            that.min = Math.min(that.max, that.size - that.total);
             that.trigger("change", that);
         }
     });
 
     var ContainerBoundary = Class.extend({
-        init: function(element, options) {
+        init: function(options) {
             var that = this,
                 move = options.move;
 
-            that.x = new Boundary({horizontal: true, element: element, move: move});
-            that.y = new Boundary({horizontal: false, element: element, move: move});
+            that.x = new Boundary(extend({horizontal: true}, options));
+            that.y = new Boundary(extend({horizontal: false}, options));
 
             $(window).bind("orientationchange resize", proxy(that.refresh, that));
         },
@@ -383,17 +381,67 @@
 
     var TICK_INTERVAL = 10;
 
-    var Transition = Class.extend({
+    animationFrame = (function(){
+      return  window.requestAnimationFrame       ||
+              window.webkitRequestAnimationFrame ||
+              window.mozRequestAnimationFrame    ||
+              window.oRequestAnimationFrame      ||
+              window.msRequestAnimationFrame     ||
+              function(callback){
+                window.setTimeout(callback, 1000 / 60);
+              };
+    })();
+
+    var Animation = Class.extend({
+        init: function() {
+            var that = this;
+            that._tickProxy = proxy(that._tick, that);
+            that._started = false;
+        },
+
+        tick: $.noop,
+        done: $.noop,
+        onEnd: $.noop,
+        onCancel: $.noop,
+
+        start: function() {
+            this._started = true;
+            animationFrame(this._tickProxy);
+        },
+
+        cancel: function() {
+            this._started = false;
+            this.onCancel();
+        },
+
+        _tick: function() {
+            var that = this;
+            if (!that._started) { return; }
+
+            that.tick();
+
+            if (!that.done()) {
+                animationFrame(that._tickProxy);
+            } else {
+                that._started = false;
+                that.onEnd();
+            }
+        }
+    });
+
+    var Transition = Animation.extend({
         init: function(options) {
             var that = this;
             extend(that, options);
-            that.timer = 0;
-            that.tickProxy = proxy(that._tick, that);
+            Animation.fn.init.call(that);
         },
 
-        stop: function() {
-            clearInterval(this.intervalID);
-            this.timer = 0;
+        done: function() {
+            return this.timePassed() >= this.duration;
+        },
+
+        timePassed: function() {
+            return Math.min(this.duration, (+new Date()) - this.startDate);
         },
 
         moveTo: function(options) {
@@ -405,35 +453,19 @@
 
             that.duration = options.duration || 300;
 
-            that.ease = that._easeProxy(options.ease || Ease.easeOutQuad);
+            that.tick = that._easeProxy(options.ease || Ease.easeOutQuad);
 
-            that._start();
+            that.startDate = +new Date();
+            that.start();
         },
 
         _easeProxy: function(ease) {
             var that = this;
 
             return function() {
-                that.move.moveAxis(that.axis, ease(that.timer, that.initial, that.delta, that.duration));
+                that.move.moveAxis(that.axis, ease(that.timePassed(), that.initial, that.delta, that.duration));
             }
-        },
-
-        _start: function() {
-            this.intervalID = setInterval(this.tickProxy, TICK_INTERVAL);
-        },
-
-        _tick: function() {
-            var that = this;
-            that.timer += TICK_INTERVAL;
-            that.ease();
-
-            if (that.timer === that.duration) {
-                that.stop();
-                that.callback();
-            }
-        },
-
-        callback: $.noop
+        }
     });
 
     extend(Transition, {
@@ -442,7 +474,7 @@
         },
 
         easeOutBack: function (t, b, c, d, s) {
-            if (s == undefined) s = 1.70158;
+            s = 1.70158;
             return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
         }
     });
@@ -482,6 +514,7 @@
         Swipe: Swipe,
         Move: Move,
         ContainerBoundary: ContainerBoundary,
+        Animation: Animation,
         Transition: Transition,
         Draggable: Draggable
     });

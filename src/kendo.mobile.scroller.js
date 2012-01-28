@@ -8,20 +8,23 @@
         Class = kendo.Class,
         Move = mobile.Move,
         Transition = mobile.Transition,
+        Animation = mobile.Animation,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.95,
         OUT_OF_BOUNDS_FRICTION = 0.83,
-        CHANGE = change;
+        CHANGE = "change";
 
-    var DragInertia = Class.extend({
+    var DragInertia = Animation.extend({
         init: function(options) {
             var that = this;
+
+            Animation.fn.init.call(that);
+
             extend(that, options, {
-                tickProxy: proxy(that._tick, that),
                 transition: new Transition({
                     axis: options.axis,
                     move: options.move,
-                    callback: function() { that.end(); }
+                    onEnd: function() { that.end(); }
                 })
             });
 
@@ -29,9 +32,21 @@
             that.swipe.bind("end", proxy(that.start, that));
         },
 
-        cancel: function() {
-            this.transition.stop();
-            clearInterval(this.intervalID);
+        onCancel: function() {
+            this.transition.cancel();
+        },
+
+        onEnd: function() {
+            var that = this;
+            if (that.boundary.outOfBounds()) {
+                that._snapBack();
+            } else {
+                that.end();
+            }
+        },
+
+        done: function() {
+            return Math.abs(this.velocity) < 1;
         },
 
         start: function() {
@@ -43,8 +58,15 @@
                 that._snapBack();
             } else {
                 that.velocity = that.swipe[that.axis].velocity * .5;
-                that.intervalID = setInterval(that.tickProxy, TICK_INTERVAL);
+                Animation.fn.start.call(that);
             }
+        },
+
+        tick: function() {
+            var that = this,
+                friction = that.boundary.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
+
+            that.move.translateAxis(that.axis, that.velocity *= friction);
         },
 
         _snapBack: function() {
@@ -53,24 +75,6 @@
                 snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
 
             that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
-        },
-
-        _tick: function() {
-            var that = this,
-                outOfBounds = that.boundary.outOfBounds(),
-                friction = outOfBounds ? OUT_OF_BOUNDS_FRICTION : FRICTION;
-
-            that.move.translateAxis(that.axis, that.velocity *= friction);
-
-            if (Math.abs(that.velocity) < 1) {
-                that.cancel();
-
-                if (outOfBounds) {
-                    that._snapBack();
-                } else {
-                    that.end();
-                }
-            }
         }
     });
 
@@ -82,33 +86,32 @@
 
             extend(that, options, {
                 element: element,
+                elementSize: 0,
                 move: new Move(element),
                 scrollMove: options.boundary.move,
                 size: horizontal ? "width" : "height"
             });
 
-            that.boundary.bind(CHANGE, proxy(that.resize, that));
             that.scrollMove.bind(CHANGE, proxy(that._move, that));
-
             that.container.append(element);
-        },
-
-        resize: function() {
-            var that = this,
-                boundary = that.boundary;
-
-            that.sizeRatio = boundary.size / boundary.total;
-
-            that.element.css(that.size, 100 * that.sizeRatio + "%");
         },
 
         _move: function() {
             var that = this,
                 axis = that.axis,
+                boundary = that.boundary;
+                boundarySize = boundary.size,
                 scrollMove = that.scrollMove,
-                position = scrollMove[axis];
+                position = scrollMove[axis],
+                sizeRatio = boundarySize / boundary.total,
+                position = -scrollMove[axis] * sizeRatio,
+                size = Math.round(Math.min(boundarySize * sizeRatio, boundarySize - position));
 
-            that.move.moveAxis(axis, -position * that.sizeRatio);
+            if (that.elementSize != size) {
+                that.element.css(that.size, size + "px");
+                that.elementSize = size;
+            }
+            that.move.moveAxis(axis, position);
         },
 
         show: function() {
@@ -133,7 +136,12 @@
 
             var inner = element.children().first(),
                 move = new Move(inner),
-                boundary = new mobile.ContainerBoundary(element, {move: move}),
+
+                boundary = new mobile.ContainerBoundary({
+                    element: inner,
+                    container: element,
+                    move: move
+                });
 
                 swipe = new mobile.Swipe(element, {
                     start: function() {
