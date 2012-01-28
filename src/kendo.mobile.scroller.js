@@ -1,6 +1,5 @@
 (function($, undefined) {
     var mobile = kendo.mobile,
-        TICK_INTERVAL = 10,
         ui = mobile.ui,
         proxy = $.proxy,
         extend = $.extend,
