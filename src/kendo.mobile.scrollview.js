@@ -4,7 +4,16 @@
         proxy = $.proxy,
         Class = kendo.Class,
         Transition = mobile.Transition,
-        Widget = ui.Widget;
+        Widget = ui.Widget,
+
+        // Math
+        math = Math,
+        abs  = math.abs,
+        ceil = math.ceil,
+        round = math.round,
+        max = math.max,
+        min = math.min,
+        floor = math.floor;
 
     var CURRENT_PAGE_CLASS = "km-current-page";
 
@@ -41,8 +50,7 @@
         * @option {Number} [bounceVelocityThreshold] <2.5> The velocity threshold after which a swipe will result in a bounce effect.
         */
         init: function(element, options) {
-            var that = this,
-                containerBoundary;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -76,23 +84,23 @@
                 end: $.proxy(that._swipeEnd, that)
             });
 
-            that.containerBoundary = new mobile.ContainerBoundary({
+            that.container = new mobile.ContainerBoundary({
                 element: that.inner,
                 container: that.element,
                 move: that.move
             });
 
-            that.boundary = that.containerBoundary.x;
+            that.boundary = that.container.x;
             that.boundary.bind("change", proxy(that.calculateDimensions, that));
 
             that.draggable = new mobile.Draggable({
-                boundary: that.containerBoundary,
+                boundary: that.container,
                 swipe: that.swipe,
                 elastic: true,
                 move: that.move
             });
 
-            that.containerBoundary.refresh();
+            that.container.refresh();
         },
 
         options: {
@@ -115,7 +123,7 @@
 
             that.page = -that.move.x / width;
 
-            pages = that.pages = Math.ceil(boundary.total / width);
+            pages = that.pages = ceil(boundary.total / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
@@ -135,20 +143,20 @@
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
                 snap,
-                approx = Math.round,
+                approx = round,
                 ease = Transition.easeOutExpo;
 
             if (velocity > velocityThreshold) {
-                approx = Math.ceil;
+                approx = ceil;
             } else if(velocity < -velocityThreshold) {
-                approx = Math.floor;
+                approx = floor;
             }
 
-            if (Math.abs(velocity) > options.bounceVelocityThreshold) {
+            if (abs(velocity) > options.bounceVelocityThreshold) {
                 ease = Transition.easeOutBack;
             }
 
-            snap = Math.max(that.minSnap, Math.min(approx(that.move.x / width) * width, that.maxSnap));
+            snap = max(that.minSnap, min(approx(that.move.x / width) * width, that.maxSnap));
 
             that.transition.moveTo({ location: snap, duration: options.duration, ease: ease });
         },
