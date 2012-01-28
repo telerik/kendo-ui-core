@@ -78,7 +78,6 @@
 
             that.swipe = new mobile.Swipe(element, {
                 start: function() {
-                    console.log("canceling");
                     that.transition.cancel();
                 },
                 end: $.proxy(that._swipeEnd, that)
@@ -86,8 +85,7 @@
 
             that.container = new mobile.ContainerBoundary({
                 element: that.inner,
-                container: that.element,
-                move: that.move
+                container: that.element
             });
 
             that.boundary = that.container.x;
