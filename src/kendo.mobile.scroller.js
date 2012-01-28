@@ -37,7 +37,7 @@
 
         onEnd: function() {
             var that = this;
-            if (that.boundary.outOfBounds()) {
+            if (that._outOfBounds()) {
                 that._snapBack();
             } else {
                 that.end();
@@ -53,7 +53,7 @@
 
             if (!that.boundary.present()) { return; }
 
-            if (that.boundary.outOfBounds()) {
+            if (that._outOfBounds()) {
                 that._snapBack();
             } else {
                 that.velocity = that.swipe[that.axis].velocity * .5;
@@ -63,9 +63,13 @@
 
         tick: function() {
             var that = this,
-                friction = that.boundary.outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
+                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
             that.move.translateAxis(that.axis, that.velocity *= friction);
+        },
+
+        _outOfBounds: function() {
+            return this.boundary.outOfBounds(this.move[this.axis]);
         },
 
         _snapBack: function() {
@@ -87,7 +91,7 @@
                 element: element,
                 elementSize: 0,
                 move: new Move(element),
-                scrollMove: options.boundary.move,
+                scrollMove: options.move,
                 size: horizontal ? "width" : "height"
             });
 
@@ -138,8 +142,7 @@
 
                 boundary = new mobile.ContainerBoundary({
                     element: inner,
-                    container: element,
-                    move: move
+                    container: element
                 });
 
                 swipe = new mobile.Swipe(element, {
@@ -171,17 +174,19 @@
 
         initAxis: function(axis) {
             var that = this,
+            move = that.move,
             boundary = that.boundary[axis],
             draggable = that.draggable[axis],
             scrollBar = new ScrollBar({
                 axis: axis,
+                move: move,
                 boundary: boundary,
                 container: that.element
             });
 
             new DragInertia({
                 axis: axis,
-                move: that.move,
+                move: move,
                 swipe: that.swipe,
                 boundary: boundary,
                 end: function() { scrollBar.hide(); }

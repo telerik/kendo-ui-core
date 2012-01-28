@@ -275,18 +275,8 @@
             }
         },
 
-        willBeOutOfBounds: function(offset) {
-            var that = this,
-                offset = that.move[that.axis] + offset;
-
-            return  offset > that.max || offset < that.min;
-        },
-
         outOfBounds: function(offset) {
-            var that = this,
-                offset = that.move[that.axis];
-
-            return  offset > that.max || offset < that.min;
+            return  offset > this.max || offset < this.min;
         },
 
         present: function() {
@@ -323,22 +313,27 @@
     var DraggableAxis = Observable.extend({
         init: function(options) {
             var that = this;
-            extend(that, {delta: 0}, options);
+            extend(that, options);
             Observable.fn.init.call(that);
         },
 
-        move: function(delta) {
-            var that = this;
+        swipeMove: function(delta) {
+            var that = this,
+                boundary = that.boundary,
+                axis = that.axis,
+                move = that.move,
+                position = move[axis] + delta;
 
-            if (!that.boundary.present()) {
+
+            if (!boundary.present()) {
                 return;
             }
 
-            if (that.boundary.willBeOutOfBounds(delta)) {
+            if ((position < boundary.min && delta < 0) || (position > boundary.min && delta > 0)) {
                 delta *= that.resistance;
             }
 
-            that.delta = delta;
+            move.translateAxis(axis, delta);
             that.trigger("change", that);
         }
     });
@@ -354,8 +349,19 @@
 
             resistance = that.elastic ? 0.5 : 0;
 
-            that.x = x = new DraggableAxis({boundary: that.boundary.x, resistance: resistance});
-            that.y = y = new DraggableAxis({boundary: that.boundary.y, resistance: resistance});
+            that.x = x = new DraggableAxis({
+                axis: "x",
+                boundary: that.boundary.x,
+                resistance: resistance,
+                move: that.move
+            });
+
+            that.y = y = new DraggableAxis({
+                axis: "y",
+                boundary: that.boundary.y,
+                resistance: resistance,
+                move: that.move
+            });
 
             that.swipe.bind([START, MOVE, END], {
                 start: function() {
@@ -364,9 +370,8 @@
 
                 move: function(e) {
                     that.moved = true;
-                    x.move(e.x.delta);
-                    y.move(e.y.delta);
-                    that.move.translate({x: x.delta, y: y.delta});
+                    x.swipeMove(e.x.delta);
+                    y.swipeMove(e.y.delta);
                     e.preventDefault();
                 },
 
