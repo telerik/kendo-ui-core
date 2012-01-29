@@ -1413,7 +1413,6 @@
         },
 
         options: {
-            // TODO: Replace orientation with isVertical
             labels: {
                 visible: true,
                 rotation: 0
@@ -2421,7 +2420,7 @@
 
         options: {
             series: [],
-            isVertical: true,
+            invertAxes: false,
             isStacked: false
         },
 
@@ -2483,7 +2482,7 @@
         reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
-                isVertical = options.isVertical,
+                invertAxes = options.invertAxes,
                 plotArea = chart.plotArea,
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
@@ -2501,8 +2500,8 @@
 
                 var categorySlot = categoryAxis.getSlot(categoryIx),
                     valueSlot = valueAxis.getSlot(value),
-                    slotX = isVertical ? categorySlot : valueSlot,
-                    slotY = isVertical ? valueSlot : categorySlot,
+                    slotX = invertAxes ? valueSlot : categorySlot,
+                    slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                     aboveAxis = value >= valueAxis.options.axisCrossingValue;
 
@@ -2582,7 +2581,7 @@
 
             var bar = new Bar(value,
                 deepExtend({}, {
-                    isVertical: options.isVertical,
+                    isVertical: !options.invertAxes,
                     overlay: series.overlay,
                     labels: labelOptions,
                     isStacked: isStacked
@@ -2591,7 +2590,7 @@
             var cluster = children[categoryIx];
             if (!cluster) {
                 cluster = new ClusterLayout({
-                    isVertical: !options.isVertical,
+                    isVertical: options.invertAxes,
                     gap: options.gap,
                     spacing: options.spacing
                 });
@@ -2608,10 +2607,10 @@
                     cluster.append(stackWrap);
 
                     positiveStack = new StackLayout({
-                        isVertical: options.isVertical
+                        isVertical: !options.invertAxes
                     });
                     negativeStack = new StackLayout({
-                        isVertical: options.isVertical,
+                        isVertical: !options.invertAxes,
                         isReversed: true
                     });
                     stackWrap.append(positiveStack, negativeStack);
@@ -2975,9 +2974,9 @@
 
         getNearestPoint: function(x, y, seriesIx) {
             var chart = this,
-                isVertical = chart.options.isVertical,
-                axis = isVertical ? X : Y,
-                pos = isVertical ? x : y,
+                invertAxes = chart.options.invertAxes,
+                axis = invertAxes ? Y : X,
+                pos = invertAxes ? y : x,
                 points = chart.seriesPoints[seriesIx],
                 nearestPointDistance = MAX_VALUE,
                 pointsLength = points.length,
@@ -3040,7 +3039,7 @@
 
             var point = new LinePoint(value,
                 deepExtend({
-                    isVertical: options.isVertical,
+                    isVertical: !options.invertAxes,
                     markers: {
                         border: {
                             color: series.color
@@ -3115,11 +3114,11 @@
             var chart = this,
                 options = chart.options,
                 plotArea = chart.plotArea,
-                isVertical = chart.options.isVertical,
+                invertAxes = chart.options.invertAxes,
                 originalLines = LineChart.fn.splitSegments.call(chart, view),
                 lines = [],
                 axisLineBox = plotArea.categoryAxis.getAxisLineBox(),
-                end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
+                end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
                 originalLinePoints,
                 linesCount = originalLines.length,
                 seriesIx = 0,
@@ -3145,12 +3144,12 @@
                         firstPoint = linePoints[0];
                         lastPoint = last(linePoints);
 
-                        if (isVertical) {
-                            linePoints.unshift(new Point2D(firstPoint.x, end));
-                            linePoints.push(new Point2D(lastPoint.x, end));
-                        } else {
+                        if (invertAxes) {
                             linePoints.unshift(new Point2D(end, firstPoint.y));
                             linePoints.push(new Point2D(end, lastPoint.y));
+                        } else {
+                            linePoints.unshift(new Point2D(firstPoint.x, end));
+                            linePoints.push(new Point2D(lastPoint.x, end));
                         }
                     }
                 }
@@ -4424,7 +4423,7 @@
                 firstSeries = series[0],
                 barChart = new BarChart(plotArea, {
                     series: series,
-                    isVertical: !plotArea.invertAxes,
+                    invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
@@ -4442,8 +4441,7 @@
                 options = plotArea.options,
                 firstSeries = series[0],
                 lineChart = new LineChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !plotArea.invertAxes,
+                    invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
                 });
@@ -4459,10 +4457,8 @@
             var plotArea = this,
                 options = plotArea.options,
                 firstSeries = series[0],
-                // Override the original invertAxes
                 areaChart = new AreaChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !plotArea.invertAxes,
+                    invertAxes: plotArea.invertAxes,
                     isStacked: firstSeries.stack,
                     series: series
                 });
