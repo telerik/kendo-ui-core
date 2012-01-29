@@ -703,7 +703,7 @@
                             labels: {
                                 visible: true
                             }
-                        }], isVertical: false });
+                        }], invertAxes: true });
                     }
                 });
 
@@ -714,7 +714,7 @@
                             visible: true,
                             position: "insideEnd"
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
 
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
@@ -730,7 +730,7 @@
                             position: "insideBase",
                             visible: true
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(text.box.x1, this.box.x1);
@@ -745,7 +745,7 @@
                             position: "outsideEnd",
                             visible: true
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.x2, text.box.x1);
@@ -760,7 +760,7 @@
                             position: "center",
                             visible: true
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
                     $.each(series.points, function() {
                         var text = this.children[0].children[0],
                         margin = (this.box.width() - text.box.width()) / 2;
@@ -786,7 +786,7 @@
                                 visible: true,
                                 position: "insideEnd"
                             }
-                        }], isVertical: false });
+                        }], invertAxes: true });
                     }
                 });
 
@@ -805,7 +805,7 @@
                             position: "insideBase",
                             visible: true
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.x2 - text.box.width(), text.box.x1);
@@ -820,7 +820,7 @@
                             position: "outsideEnd",
                             visible: true
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
                     $.each(series.points, function() {
                         var text = this.children[0].children[0];
                         equal(this.box.x1 - text.box.width(), text.box.x1);
@@ -835,7 +835,7 @@
                             position: "center",
                             visible: true
                         }
-                    }], isVertical: false });
+                    }], invertAxes: true });
                     $.each(series.points, function() {
                         var text = this.children[0].children[0],
                             margin = (this.box.height() - text.box.height()) / 2;
@@ -871,7 +871,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Positive Values", {
                     setup: function() {
-                        setupBarChart(plotArea, { isVertical: false, series: [ positiveSeries ] });
+                        setupBarChart(plotArea, { invertAxes: true, series: [ positiveSeries ] });
                     }
                 });
 
@@ -908,7 +908,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Horizontal / Negative Values", {
                     setup: function() {
-                        setupBarChart(plotArea, { isVertical: false, series: [ negativeSeries ] });
+                        setupBarChart(plotArea, { invertAxes: true, series: [ negativeSeries ] });
                     }
                 });
 
@@ -940,7 +940,7 @@
                 module("Bar Chart / Horizontal / Missing values", {
                     setup: function() {
                         setupBarChart(plotArea, {
-                            isVertical: false,
+                            invertAxes: true,
                             series: [ { data: [1, 2, 3] },
                                       positiveSeries
                                 ]
@@ -960,7 +960,7 @@
                 module("Bar Chart / Horizontal / Cluster", {
                     setup: function() {
                         setupBarChart(plotArea,
-                            { isVertical: false,
+                            { invertAxes: true,
                               series: [ positiveSeries, negativeSeries ]
                             }
                         );
@@ -975,7 +975,7 @@
                 module("Bar Chart / Horizontal / Stack / Positive Values", {
                     setup: function() {
                         setupBarChart(plotArea, {
-                            isVertical: false,
+                            invertAxes: true,
                             series: [ positiveSeries, positiveSeries ],
                             isStacked: true }
                         );
@@ -1010,7 +1010,7 @@
                 module("Bar Chart / Horizontal / Stack / Negative Values", {
                     setup: function() {
                         setupBarChart(plotArea, {
-                            isVertical: false,
+                            invertAxes: true,
                             series: [ negativeSeries, negativeSeries ],
                             isStacked: true }
                         );
@@ -1046,7 +1046,7 @@
                 module("Bar Chart / Horizontal / Stack / Mixed Values", {
                     setup: function() {
                         setupBarChart(plotArea, {
-                            isVertical: false,
+                            invertAxes: true,
                             series: [ positiveSeries, negativeSeries ],
                             isStacked: true }
                         );
