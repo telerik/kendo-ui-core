@@ -23,7 +23,7 @@
                 transition: new Transition({
                     axis: options.axis,
                     move: options.move,
-                    onEnd: function() { that.end(); }
+                    onEnd: function() { that._end(); }
                 })
             });
 
@@ -40,7 +40,7 @@
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.end();
+                that._end();
             }
         },
 
@@ -56,8 +56,11 @@
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = that.swipe[that.axis].velocity * .5;
-                Animation.fn.start.call(that);
+                that.velocity = that.swipe[that.axis].velocity;
+                if (that.velocity) {
+                    setTimeout(function() { that.swipe.captureNext(); });
+                    Animation.fn.start.call(that);
+                }
             }
         },
 
@@ -66,6 +69,11 @@
                 friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
             that.move.translateAxis(that.axis, that.velocity *= friction);
+        },
+
+        _end: function() {
+            this.swipe.cancelCapture();
+            this.end();
         },
 
         _outOfBounds: function() {
