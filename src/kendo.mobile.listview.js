@@ -13,8 +13,7 @@
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
-        if (e.which === 3) {
-            e.preventDefault();
+        if (e.which > 1) {
             return;
         }
 
@@ -341,8 +340,7 @@
         },
 
         _click: function(e) {
-            if (e.which === 3) {
-                e.preventDefault();
+            if (e.which > 1) {
                 return;
             }
 
