@@ -364,10 +364,11 @@
                 options = that.options,
                 val = options.min,
                 selection = 0,
-                itemsCount = pixelWidths.length,
+                itemsCount = math.ceil(that._distance / options.smallStep),
                 i = 1,
                 lastItem;
 
+            itemsCount += (that._distance / options.smallStep) % 1 == 0 ? 1 : 0;
             pixelWidths.splice(0, 0, pixelWidths[itemsCount - 2] * 2);
             pixelWidths.splice(itemsCount -1, 1, pixelWidths.pop() * 2);
 
@@ -386,10 +387,11 @@
                 i++;
             }
 
-            lastItem = options.max % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
+            lastItem = that._distance % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
+            console.log(that._pixelSteps, that._values, that._valueToPixels);
         },
 
         _getValueFromPosition: function(mousePosition, dragableArea) {
@@ -693,24 +695,18 @@
                 $(e.target).removeClass(STATE_SELECTED);
             });
 
-            move = proxy(function (e, sign) {
-                var index = math.ceil(options.value / options.smallStep) - math.abs(options.min);
-
-                if (index >= that._values.length - 1 || index <= 0) {
-                    that._setValueInRange(options.value + (sign * options.smallStep));
-                } else {
-                    that._setValueInRange(that._values[index + (sign * 1)]);
-                }
+            move = proxy(function (sign) {
+                that._setValueInRange(that._nextValueByIndex(that._valueIndex + (sign * 1)));
             }, that);
 
             if (options.showButtons) {
                 var mouseDownHandler = proxy(function(e, sign) {
                     if (e.which == 1 || (touch && e.which == 0)) {
-                        move(e, sign);
+                        move(sign);
 
                         this.timeout = setTimeout(proxy(function () {
                             this.timer = setInterval(function () {
-                                move(e, sign)
+                                move(sign)
                             }, 60);
                         }, this), 200);
                     }
@@ -860,13 +856,18 @@
 
             val = math.max(math.min(val, options.max), options.min);
             that._update(val);
+        },
+
+        _nextValueByIndex: function (index) {
+            var count = this._values.length;
+            return this._values[math.max(0, math.min(index, count - 1))];
         }
     });
 
     Slider.Selection = function (dragHandle, that, options) {
         function moveSelection (val) {
             var selectionValue = val - options.min,
-                index = math.ceil(selectionValue / options.smallStep),
+                index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
                 selection = parseInt(that._pixelSteps[index]),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
                 halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10);
@@ -1419,8 +1420,8 @@
         function moveSelection(values) {
             var selectionStartValue = values[0] - options.min,
                 selectionEndValue = values[1] - options.min,
-                selectionStartIndex = math.ceil(selectionStartValue / options.smallStep),
-                selectionEndIndex = math.ceil(selectionEndValue / options.smallStep),
+                selectionStartIndex = math.ceil(round(selectionStartValue / options.smallStep)),
+                selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
                 selectionStart = that._pixelSteps[selectionStartIndex],
                 selectionEnd = that._pixelSteps[selectionEndIndex],
                 halfHandle = parseInt(dragHandles.eq(0)[that._outerSize]() / 2, 10);
