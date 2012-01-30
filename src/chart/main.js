@@ -1431,6 +1431,7 @@
                 width: 1,
                 color: BLACK
             },
+            // TODO: Move to line or labels options
             margin: 5
         },
 
@@ -4114,11 +4115,12 @@
         axisCrossingValues: function(axis, crossingAxes) {
             var options = axis.options,
                 crossingValues = [].concat(options.axisCrossingValue),
-                valuesToAdd = crossingValues.length - crossingAxes.length,
+                valuesToAdd = crossingAxes.length - crossingValues.length,
+                defaultValue = crossingValues[0] || 0,
                 i;
 
             for (i = 0; i < valuesToAdd; i++) {
-                crossingValues.push(0);
+                crossingValues.push(defaultValue);
             }
 
             return crossingValues;
@@ -4147,9 +4149,17 @@
                 axisCrossings,
                 i;
 
+            // distribute axes
+            var xAnchorLeftStackOffset = 0;
+
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+
+                if (xAnchorCrossings[i] === 0) {
+                    axis.reflow(axis.box.translate(xAnchorLeftStackOffset, 0))
+                    xAnchorLeftStackOffset -= axis.box.width() + axis.options.margin;
+                }
             }
 
             for (i = 0; i < xAxes.length; i++) {
@@ -4493,6 +4503,7 @@
                 plotArea.append(axis);
             });
 
+            // TODO: Consider removing axisX and axisY aliases
             plotArea.axisX = invertAxes ? namedValueAxes[PRIMARY] : categoryAxis;
             plotArea.axisY = invertAxes ? categoryAxis : namedValueAxes[PRIMARY];
 

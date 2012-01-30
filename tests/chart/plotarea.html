@@ -204,13 +204,32 @@
                     equals(slotX.y1, slotY.y1);
                 });
 
-                test("positioned next to primary axis by default", function() {
+                test("overlapping axes are shifted to the left", function() {
+                    var primary = namedValueAxes.primary,
+                        secondary = namedValueAxes.secondary,
+                        margin = primary.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondary.box.x2, secondary.box.y1], [primary.box.x1 - margin, primary.box.y1]);
+                });
+
+                test("overlapping axes are shifted to the right", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: {
+                            axisCrossingValue: 100
+                        },
+                        valueAxis: [{}, {
+                            name: "secondary"
+                        }]
+                    });
+
                     var primary = namedValueAxes.primary,
                         secondary = namedValueAxes.secondary;
 
                     plotArea.reflow(chartBox);
 
-                    same([secondary.box.x2, secondary.box.y1], [primary.box.x1, primary.box.y1]);
+                    same([secondary.box.x1, secondary.box.y1], [primary.box.x2, primary.box.y1]);
                 });
 
                 test("plot area bounding box wraps axis", function() {
