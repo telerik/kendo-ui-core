@@ -200,7 +200,10 @@
                 i,
                 paddingTop = 0,
                 bordersWidth = 2,
-                selection = 0;
+                selection = 0,
+                isOverlap =
+                (1000 * options.largeStep) % (1000 * options.smallStep) == 0
+                && that._distance % options.largeStep != 0;
 
             for (i = 0; i < items.length - 2; i++) {
                 $(items[i + 1])[that._size](pixelWidths[i]);
@@ -208,10 +211,14 @@
 
             if (that._isHorizontal) {
                 $(items[first]).addClass("k-first")[that._size](pixelWidths[last - 1]);
-                $(items[last]).addClass("k-last")[that._size](pixelWidths[last]);
+                if (!isOverlap) {
+                    $(items[last]).addClass("k-last")[that._size](pixelWidths[last]);
+                }
             } else {
                 $(items[last]).addClass("k-first")[that._size](pixelWidths[last]);
-                $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
+                if (!isOverlap) {
+                    $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
+                }
             }
 
             if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
@@ -357,7 +364,6 @@
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
-            console.log(that._pixelSteps, that._values, that._valueToPixels);
         },
 
         _getValueFromPosition: function(mousePosition, dragableArea) {
