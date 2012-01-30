@@ -6208,6 +6208,72 @@
         }
     });
 
+    var RadialGaugeAxis = NumericAxis.extend({
+        init: function (min, max, options) {
+            NumericAxis.fn.init.call(this, options);
+        },
+
+        renderTicks: function(view) {
+            var ticks = [];
+
+            var ticksRing = new Chart.Ring(
+                new Point2D(135, 135), 120, 135, -30, 240
+            );
+
+            for (var i = 0; i < 10; i++) {
+                var outerPoint = ticksRing.point(-30 + i * 27);
+                var innerPoint = ticksRing.point(-30 + i * 27, true);
+                ticks.push(view.createLine(innerPoint.x, innerPoint.y, outerPoint.x, outerPoint.y, { stroke: "#000" }));
+            }
+
+            return ticks;
+        },
+
+        getViewElements: function(view) {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                childElements = ChartElement.fn.getViewElements.call(axis, view),
+                tickPositions = axis.getMinorTickPositions(),
+                lineOptions;
+
+            var axisRing = new Chart.Ring(
+                    new Point2D(135, 135), 134, 135, -30, 240
+                );
+
+            childElements.push(view.createRing(axisRing, { fill: "#000" }));
+
+            append(childElements, axis.renderTicks(view));
+
+            return childElements;
+
+            if (options.line.width > 0) {
+                lineOptions = {
+                    strokeWidth: options.line.width,
+                    stroke: options.line.color,
+                    dashType: options.line.dashType,
+                    zIndex: options.zIndex
+                };
+                if (isVertical) {
+                    childElements.push(view.createLine(
+                        axis.box.x2, tickPositions[0],
+                        axis.box.x2, last(tickPositions),
+                        lineOptions));
+                } else {
+                    childElements.push(view.createLine(
+                        tickPositions[0], axis.box.y1,
+                        last(tickPositions), axis.box.y1,
+                        lineOptions));
+                }
+
+                append(childElements, axis.renderTicks(view));
+                append(childElements, axis.renderPlotBands(view));
+            }
+
+            return childElements;
+        }
+    });
+
     var GaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
@@ -6233,16 +6299,12 @@
                 i;
 
             var ringConfig = new Chart.Ring(
-                    new Point2D(135, 135), 100, 135, -30, 240
+                    new Point2D(135, 135), 125, 135, -30, 240
                 );
 
-            plotArea.append(new GaugeSegment(ringConfig));
+            //plotArea.append(new GaugeSegment(ringConfig, { background: "#dedede" }));
 
-            return;
-
-            plotArea.axis = new NumericAxis(options.min, options.max,
-                deepExtend({}, options.axis, { orientation: HORIZONTAL })
-            );
+            plotArea.axis = new RadialGaugeAxis(options.min, options.max, deepExtend({}, options.axis, { orientation: HORIZONTAL }));
 
             plotArea.append(plotArea.axis);
         }
