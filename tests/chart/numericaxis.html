@@ -378,7 +378,7 @@
                     MARGIN = PADDING = 5;
 
                 // ------------------------------------------------------------
-                module("View Rendering / Vertical", {
+                module("Numeric Axis / Vertical / Rendering", {
                     setup: function() {
                         moduleSetup();
 
@@ -542,6 +542,60 @@
                         [47.8, 125.4, 203, 280.6, 358.2, 435.8, 513.4, 591], TOLERANCE);
                 });
 
+                test("major ticks are aligned to axis", 7, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 31);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 31, function() {
+                    numericAxis.options.majorTickType = "none",
+                    numericAxis.options.minorTickType= "outside",
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 31);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Vertical / Mirrored / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        numericAxis.options.mirror = true;
+                        numericAxis.reflow(chartBox);
+                    }
+                });
+
+                test("labels are aligned left", 7, function() {
+                    numericAxis.getViewElements(view);
+
+                    $.each(view.log.text, function() { equals(this.style.x, 9); });
+                });
+
+                test("major ticks are aligned to axis", 7, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 0);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 31, function() {
+                    numericAxis.options.majorTickType = "none",
+                    numericAxis.options.minorTickType= "outside",
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 0);
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("View Rendering / Horizontal", {
                     setup: function() {
@@ -696,6 +750,48 @@
                             equal(this.y2 - this.y1, MINOR_TICK_HEIGHT);
                     });
                 });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Horizontal / Mirrored / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        numericAxis = new Chart.NumericAxis(0, 1, {
+                            isVertical: false,
+                            mirror: true
+                        });
+
+                        numericAxis.reflow(chartBox);
+                    }
+                });
+
+                test("labels are aligned bottom", 7, function() {
+                    numericAxis.getViewElements(view);
+
+                    $.each(view.log.text, function() {
+                            equal(this.style.y, 0);
+                    })
+                });
+
+                test("major ticks are aligned to axis", 7, function() {
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 23);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 31, function() {
+                    numericAxis.options.majorTickType = "none",
+                    numericAxis.options.minorTickType= "outside",
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 23);
+                    });
+                });
+
             })();
 
             (function() {
@@ -966,7 +1062,7 @@
                     }];
 
                 function createPlotArea(series, plotOptions) {
-                    plotArea = new Chart.CategoricalPlotArea(series, $.extend({}, {
+                    plotArea = new Chart.CategoricalPlotArea(series, $.extend(true, {
                         valueAxis: {
                             title: {
                                 text: "text",
@@ -998,30 +1094,121 @@
                     }
                 });
 
-                test("does not change axis box height", function() {
-                    var box = plotArea.axisX.getAxisLineBox();
-                    same([box.x1, box.y1, box.x2, box.y2], [20, 555, 785, 555]);
+                test("does not change line box width", function() {
+                    var box = plotArea.axisX.lineBox();
+                    same([box.x1, box.x2], [20, 785]);
                 });
 
-                test("applied position center", function() {
+                test("positioned at center", function() {
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 391, 582, 424, 600 ], TOLERANCE);
                 });
 
-                test("applied position left", function() {
+                test("positioned left", function() {
                     createPlotArea(barSeriesData, { valueAxis: { title: { position: "left" }}});
                     titleBox = plotArea.axisX.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 15, 582, 15, 600 ], TOLERANCE);
+                         [ 15, 582, 48, 600 ], TOLERANCE);
                 });
 
-                test("applied position right", function() {
+                test("positioned right", function() {
                     createPlotArea(barSeriesData, { valueAxis: { title: { position: "right" }}});
                     titleBox = plotArea.axisX.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 800, 582, 800, 600 ], TOLERANCE);
+                         [ 767, 582, 800, 600 ], TOLERANCE);
+                });
+
+                test("renders color", function() {
+                    equal(title.style.color, "red");
+                });
+
+                test("renders opacity", function() {
+                    equal(title.style.opacity, 0.33);
+                });
+
+                test("renders zIndex", function() {
+                    equal(title.style.zIndex, 1);
+                });
+
+                test("hidden when visible is false", function() {
+                    createPlotArea(barSeriesData, { valueAxis: { title: { visible: false }}});
+                    equals(plotArea.axisX.title, null);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Horizontal / Mirrored / Title", {
+                    setup: function() {
+                        createPlotArea(barSeriesData, { valueAxis: { mirror: true } });
+                        titleBox = plotArea.axisX.title.box;
+                    }
+                });
+
+                test("does not change line box width", function() {
+                    var box = plotArea.axisX.lineBox();
+                    same([box.x1, box.x2], [20, 785]);
+                });
+
+                test("positioned at center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 391, 555, 424, 573 ], TOLERANCE);
+                });
+
+                test("positioned left", function() {
+                    createPlotArea(barSeriesData, {
+                        valueAxis: { mirror: true, title: { position: "left" }}
+                    });
+
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 15, 555, 48, 573 ], TOLERANCE);
+                });
+
+                test("positioned right", function() {
+                    createPlotArea(barSeriesData, {
+                        valueAxis: { mirror: true, title: { position: "right" }}
+                    });
+
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 767, 555, 800, 573 ], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Title / Vertical", {
+                    setup: function() {
+                        createPlotArea(lineSeriesData);
+                        titleBox = plotArea.axisY.title.box;
+                    }
+                });
+
+                test("does not change line box height", function() {
+                    var box = plotArea.axisY.lineBox();
+                    same([box.y1, box.y2], [9, 573]);
+                });
+
+                test("position at center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 274.5, 18, 307.5 ], TOLERANCE);
+                });
+
+                test("positioned bottom", function() {
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom" }}});
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 549, 18, 582 ], TOLERANCE);
+                });
+
+                test("positioned top", function() {
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top" }}});
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 0, 0, 18, 33 ], TOLERANCE);
                 });
 
                 test("renders color", function() {
@@ -1037,49 +1224,43 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Numeric Axis / Title / Vertical", {
+                module("Numeric Axis / Vertical / Mirrored / Title", {
                     setup: function() {
-                        createPlotArea(lineSeriesData);
+                        createPlotArea(lineSeriesData, { valueAxis: { mirror: true } });
                         titleBox = plotArea.axisY.title.box;
                     }
                 });
 
-                test("does not change axis box height", function() {
-                    var box = plotArea.axisY.getAxisLineBox();
-                    same([box.x1, box.y1, box.x2, box.y2], [57, 9, 57, 573]);
+                test("does not change line box height", function() {
+                    var box = plotArea.axisY.lineBox();
+                    same([box.y1, box.y2], [9, 573]);
                 });
 
-                test("applied position center", function() {
+                test("position at center", function() {
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 274.5, 18, 307.5 ], TOLERANCE);
+                         [ 39, 274.5, 57, 307.5 ], TOLERANCE);
                 });
 
-                test("applied position bottom", function() {
-                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom" }}});
+                test("positioned bottom", function() {
+                    createPlotArea(lineSeriesData, {
+                        valueAxis: { mirror: true, title: { position: "bottom" }}
+                    });
+
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 582, 18, 582 ], TOLERANCE);
+                         [ 39, 549, 57, 582 ], TOLERANCE);
                 });
 
-                test("applied position top", function() {
-                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top" }}});
+                test("positioned top", function() {
+                    createPlotArea(lineSeriesData, {
+                        valueAxis: { mirror: true, title: { position: "top" }}
+                    });
+
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 0, 18, 0 ], TOLERANCE);
-                });
-
-                test("renders color", function() {
-                    equal(title.style.color, "red");
-                });
-
-                test("renders opacity", function() {
-                    equal(title.style.opacity, 0.33);
-                });
-
-                test("renders zIndex", function() {
-                    equal(title.style.zIndex, 1);
+                         [ 39, 0, 57, 33 ], TOLERANCE);
                 });
 
             })();

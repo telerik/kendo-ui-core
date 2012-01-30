@@ -1421,6 +1421,10 @@
                 width: 1,
                 color: BLACK
             },
+            title: {
+                visible: true,
+                position: CENTER
+            },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
             minorTickType: NONE,
@@ -1431,6 +1435,7 @@
                 width: 1,
                 color: BLACK
             },
+            mirror: false,
             // TODO: Move to line or labels options
             margin: 5
         },
@@ -1471,6 +1476,22 @@
         getLabelText: function(index) {
         },
 
+        lineBox: function() {
+            var axis = this,
+                options = axis.options,
+                box = axis.box,
+                isVertical = options.isVertical,
+                mirror = options.mirror,
+                axisX = mirror ? box.x1 : box.x2,
+                axisY = mirror ? box.y2 : box.y1;
+
+            if (isVertical) {
+                return new Box2D(axisX, box.y1, axisX, box.y2);
+            }
+
+            return new Box2D(box.x1, axisY, box.x2, axisY);
+        },
+
         createTitle: function() {
             var axis = this,
                 options = axis.options,
@@ -1481,7 +1502,7 @@
                 }, options.title),
                 title;
 
-            if (options.title) {
+            if (titleOptions.visible && titleOptions.text) {
                 title = new TextBox(titleOptions.text, titleOptions);
                 axis.append(title);
                 axis.title = title;
@@ -1491,7 +1512,8 @@
         renderTicks: function(view) {
             var axis = this,
                 options = axis.options,
-                box = axis.box,
+                mirror = options.mirror,
+                lineBox = axis.lineBox(),
                 majorTicks = axis.getMajorTickPositions(),
                 ticks = [];
 
@@ -1529,9 +1551,12 @@
             }
 
             return map(ticks, function(tick) {
+                var tickX = mirror ? lineBox.x2 : lineBox.x2 - tick.size,
+                    tickY = mirror ? lineBox.y1 - tick.size : lineBox.y1;
+
                 if (options.isVertical) {
                     return view.createLine(
-                        box.x2 - tick.size, tick.pos, box.x2, tick.pos,
+                        tickX, tick.pos, tickX + tick.size, tick.pos,
                         {
                             strokeWidth: tick.width,
                             stroke: tick.color
@@ -1539,7 +1564,7 @@
                     );
                 } else {
                     return view.createLine(
-                        tick.pos, box.y1, tick.pos, box.y1 + tick.size,
+                        tick.pos, tickY, tick.pos, tickY + tick.size,
                         {
                             strokeWidth: tick.width,
                             stroke: tick.color
@@ -1583,8 +1608,8 @@
                     to = defined(item.to) ? item.to : MAX_VALUE;
                     item.from = math.min(from, to);
                     item.to = math.max(from, to);
-                    slotX = isVertical ? plotArea.axisX.getAxisLineBox()  : plotArea.axisX.getSlot(item.from, item.to);
-                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getAxisLineBox();
+                    slotX = isVertical ? plotArea.axisX.lineBox()  : plotArea.axisX.getSlot(item.from, item.to);
+                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.lineBox();
                     return view.createRect(
                             new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                             { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
@@ -1633,7 +1658,7 @@
                 );
             }
 
-            axis.arrangeTitle(title, isVertical, axis.box);
+            axis.arrangeTitle();
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
         },
 
@@ -1641,9 +1666,12 @@
             var axis = this,
                 options = axis.options,
                 labels = axis.labels,
-                isVertical = axis.options.isVertical,
+                isVertical = options.isVertical,
+                lineBox = axis.lineBox(),
+                mirror = options.mirror,
                 tickPositions = axis.getMajorTickPositions(),
                 tickSize = axis.getActualTickSize(),
+                labelOffset = axis.getActualTickSize() + options.margin,
                 labelBox,
                 labelY,
                 i;
@@ -1666,10 +1694,16 @@
                         middle = firstTickPosition + (nextTickPosition - firstTickPosition) / 2;
                         labelPos = middle - (labelSize / 2);
                     }
-                    labelX = axis.box.x2 - options.margin - tickSize;
 
-                    labelBox = new Box2D(labelX - label.box.width(), labelPos,
-                                         labelX, labelPos)
+                    labelX = lineBox.x2;
+
+                    if (mirror) {
+                        labelX += labelOffset;
+                    } else {
+                        labelX -= labelOffset + label.box.width();
+                    }
+
+                    labelBox = label.box.move(labelX, labelPos);
                 } else {
                     if (position == ON_MINOR_TICKS) {
                         firstTickPosition = tickPositions[i];
@@ -1678,38 +1712,40 @@
                         firstTickPosition = labelPos;
                         nextTickPosition = labelPos + labelSize;
                     }
-                    labelY = axis.box.y1 + tickSize + options.margin;
+
+                    labelY = lineBox.y1;
+
+                    if (mirror) {
+                        labelY -= labelOffset + label.box.height();
+                    } else {
+                        labelY += labelOffset;
+                    }
 
                     labelBox = new Box2D(firstTickPosition, labelY,
-                                         nextTickPosition, labelY);
+                                         nextTickPosition, labelY + label.box.height());
                 }
 
                 label.reflow(labelBox);
             }
         },
 
-        arrangeTitle: function(title, isVertical, box) {
+        arrangeTitle: function() {
+            var axis = this,
+                options = axis.options,
+                mirror = options.mirror,
+                isVertical = options.isVertical,
+                title = axis.title;
+
             if (title) {
                 if (isVertical) {
-                    title.options.align = LEFT;
-                    if (title.options.position === TOP) {
-                        title.options.vAlign = TOP;
-                    } else if (title.options.position === BOTTOM) {
-                        title.options.vAlign = BOTTOM;
-                    } else {
-                        title.options.vAlign = CENTER;
-                    }
+                    title.options.align = mirror ? RIGHT : LEFT;
+                    title.options.vAlign = title.options.position;
                 } else {
-                    if (title.options.position === LEFT) {
-                        title.options.align = LEFT;
-                    } else if (title.options.position === RIGHT) {
-                        title.options.align = RIGHT;
-                    } else {
-                        title.options.align = CENTER;
-                    }
-                    title.options.vAlign = BOTTOM;
+                    title.options.align = title.options.position;
+                    title.options.vAlign = mirror ? TOP : BOTTOM;
                 }
-                title.reflow(box);
+
+                title.reflow(axis.box);
             }
         }
     });
@@ -1797,6 +1833,7 @@
                 options = axis.options,
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 tickPositions = axis.getMinorTickPositions(),
+                lineBox = axis.lineBox(),
                 lineOptions;
 
             if (options.line.width > 0) {
@@ -1808,13 +1845,13 @@
                 };
                 if (options.isVertical) {
                     childElements.push(view.createLine(
-                        axis.box.x2, tickPositions[0],
-                        axis.box.x2, last(tickPositions),
+                        lineBox.x1, tickPositions[0],
+                        lineBox.x1, last(tickPositions),
                         lineOptions));
                 } else {
                     childElements.push(view.createLine(
-                        tickPositions[0], axis.box.y1,
-                        last(tickPositions), axis.box.y1,
+                        tickPositions[0], lineBox.y1,
+                        last(tickPositions), lineBox.y1,
                         lineOptions));
                 }
 
@@ -1910,7 +1947,7 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.isVertical,
-                lineBox = axis.getAxisLineBox(),
+                lineBox = axis.lineBox(),
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
@@ -1941,13 +1978,13 @@
             return axis.getTickPositions(axis.options.majorUnit / 5);
         },
 
-        getAxisLineBox: function() {
+        lineBox: function() {
             var axis = this,
                 options = axis.options,
                 isVertical = options.isVertical,
                 labelSize = isVertical ? "height" : "width",
                 labels = axis.labels,
-                box = axis.box,
+                baseBox = Axis.fn.lineBox.call(axis),
                 startMargin = 0,
                 endMargin = 0;
 
@@ -1957,11 +1994,11 @@
             }
 
             if (isVertical) {
-               return new Box2D(box.x2, box.y1 + startMargin,
-                 box.x2, box.y2 - endMargin);
+               return new Box2D(baseBox.x1, baseBox.y1 + startMargin,
+                 baseBox.x1, baseBox.y2 - endMargin);
             } else {
-               return new Box2D(box.x1 + startMargin, box.y1,
-                 box.x2 - endMargin, box.y1);
+               return new Box2D(baseBox.x1 + startMargin, baseBox.y1,
+                 baseBox.x2 - endMargin, baseBox.y1);
             }
         },
 
@@ -1970,7 +2007,7 @@
                 options = axis.options,
                 isVertical = options.isVertical,
                 valueAxis = isVertical ? Y : X,
-                lineBox = axis.getAxisLineBox(),
+                lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + 1],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
@@ -2030,6 +2067,7 @@
             var axis = this,
                 options = axis.options,
                 line = options.line,
+                lineBox = axis.lineBox(),
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 lineOptions;
 
@@ -2041,15 +2079,9 @@
                     zIndex: line.zIndex
                 };
 
-                if (options.isVertical) {
-                    childElements.push(view.createLine(
-                        axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
-                        lineOptions));
-                } else {
-                    childElements.push(view.createLine(
-                        axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
-                        lineOptions));
-                }
+                childElements.push(view.createLine(
+                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
+                    lineOptions));
 
                 append(childElements, axis.renderTicks(view));
                 append(childElements, axis.renderPlotBands(view));
@@ -2097,9 +2129,9 @@
                 childrenCount = math.max(1, options.categories.length),
                 from = math.max(0, from),
                 to = math.min(childrenCount, to),
-                box = axis.box,
-                size = isVertical ? box.height() : box.width(),
-                startPos = isVertical ? box.y1 : box.x1,
+                lineBox = axis.lineBox(),
+                size = isVertical ? lineBox.height() : lineBox.width(),
+                startPos = isVertical ? lineBox.y1 : lineBox.x1,
                 step = size / childrenCount,
                 p1 = startPos + (from * step),
                 p2 = p1 + step,
@@ -2110,15 +2142,8 @@
             }
 
             return isVertical ?
-                   new Box2D(box.x2, p1, box.x2, p2) :
-                   new Box2D(p1, box.y1, p2, box.y1);
-        },
-
-        getAxisLineBox: function() {
-            var axis = this,
-                options = axis.options;
-
-            return axis.getSlot(0).wrap(axis.getSlot(options.categories.length - 1));
+                   new Box2D(lineBox.x2, p1, lineBox.x2, p2) :
+                   new Box2D(p1, lineBox.y1, p2, lineBox.y1);
         },
 
         getLabelsCount: function() {
@@ -3122,7 +3147,7 @@
                 invertAxes = chart.options.invertAxes,
                 originalLines = LineChart.fn.splitSegments.call(chart, view),
                 lines = [],
-                axisLineBox = plotArea.categoryAxis.getAxisLineBox(),
+                axisLineBox = plotArea.categoryAxis.lineBox(),
                 end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
                 originalLinePoints,
                 linesCount = originalLines.length,

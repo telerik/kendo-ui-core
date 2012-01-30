@@ -40,7 +40,7 @@
                 return new function() {
                     this.categoryAxis = {
                         getSlot: getCategorySlot,
-                        getAxisLineBox: function() {
+                        lineBox: function() {
                             return new Box2D(1,1,1,1);
                         },
                         options: {}
@@ -49,7 +49,7 @@
                     this.namedValueAxes = {
                         primary: {
                             getSlot: getValueSlot,
-                            getAxisLineBox: function() {
+                            lineBox: function() {
                                 return new Box2D(1,1,1,1);
                             },
                             options: {}

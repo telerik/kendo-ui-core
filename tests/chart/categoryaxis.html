@@ -203,6 +203,59 @@
                     equal(view.log.line.length, 0);
                 });
 
+                test("major ticks are aligned to axis", 3, function() {
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 0);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 5, function() {
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 0);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Horizontal / Mirrored / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createCategoryAxis({ mirror: true });
+                    }
+                });
+
+                test("labels are aligned bottom", 2, function() {
+                    categoryAxis.getViewElements(view);
+
+                    $.each(view.log.text, function() {
+                            equal(this.style.y, 0);
+                    })
+                });
+
+                test("major ticks are aligned to axis", 3, function() {
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 23);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 5, function() {
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.y1, 24);
+                    });
+                });
+
                 // ------------------------------------------------------------
                 module("Category Axis / Vertical / Rendering", {
                     setup: function() {
@@ -316,6 +369,57 @@
 
                     same($.map(view.log.text, function(text) { return text.style.x }),
                          [0 + MARGIN + PADDING, 2 + MARGIN + PADDING]);
+                });
+
+                test("major ticks are aligned to axis", 3, function() {
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 34);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 5, function() {
+                    categoryAxis.options.majorTickType = "none",
+                    categoryAxis.options.minorTickType= "outside",
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 35);
+                    });
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Vertical / Mirrored / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createCategoryAxis({ mirror: true, isVertical: true });
+                    }
+                });
+
+                test("labels are aligned left", function() {
+                    categoryAxis.getViewElements(view);
+
+                    $.each(view.log.text, function() { equals(this.style.x, 9); });
+                });
+
+                test("major ticks are aligned to axis", 3, function() {
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 0);
+                    });
+                });
+
+                test("minor ticks are aligned to axis", 5, function() {
+                    categoryAxis.options.majorTickType = "none",
+                    categoryAxis.options.minorTickType= "outside",
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    $.each(view.log.line, function() {
+                            equal(this.x1, 0);
+                    });
                 });
 
                 // ------------------------------------------------------------
@@ -496,7 +600,7 @@
                     }];
 
                 function createPlotArea(series, plotOptions) {
-                    plotArea = new Chart.CategoricalPlotArea(series, $.extend({}, {
+                    plotArea = new Chart.CategoricalPlotArea(series, $.extend(true, {
                         categoryAxis: {
                             categories: ["A"],
                             title: {
@@ -526,25 +630,25 @@
                     }
                 });
 
-                test("applied position center", function() {
+                test("positioned at center", function() {
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
                          [ 403, 582, 436, 600 ], TOLERANCE);
                 });
 
-                test("applied position left", function() {
-                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "left" }}});
+                test("positioned left", function() {
+                    createPlotArea(lineSeriesData, { categoryAxis: { title: { position: "left" }}});
                     titleBox = plotArea.axisX.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 33, 582, 33, 600 ], TOLERANCE);
+                         [ 39, 582, 72, 600 ], TOLERANCE);
                 });
 
-                test("applied position right", function() {
-                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "right" }}});
+                test("positioned right", function() {
+                    createPlotArea(lineSeriesData, { categoryAxis: { title: { position: "right" }}});
                     titleBox = plotArea.axisX.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 800, 582, 800, 600 ], TOLERANCE);
+                         [ 767, 582, 800, 600 ], TOLERANCE);
                 });
 
                 test("renders color", function() {
@@ -557,6 +661,46 @@
 
                 test("renders zIndex", function() {
                     equal(title.style.zIndex, 1);
+                });
+
+                test("hidden when visible is false", function() {
+                    createPlotArea(lineSeriesData, { categoryAxis: { title: { visible: false }}});
+                    equals(plotArea.axisX.title, null);
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Horizontal / Mirrored / Title", {
+                    setup: function() {
+                        createPlotArea(lineSeriesData, { categoryAxis: { mirror: true }});
+                        titleBox = plotArea.axisX.title.box;
+                    }
+                });
+
+                test("positioned at center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 403, 546, 436, 564 ], TOLERANCE);
+                });
+
+                test("positioned left", function() {
+                    createPlotArea(lineSeriesData, {
+                        categoryAxis: { mirror: true, title: { position: "left" }}
+                    });
+
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 39, 546, 72, 564 ], TOLERANCE);
+                });
+
+                test("positioned right", function() {
+                    createPlotArea(lineSeriesData, {
+                        categoryAxis: { mirror: true, title: { position: "right" }}
+                    });
+
+                    titleBox = plotArea.axisX.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 767, 546, 800, 564 ], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
@@ -573,19 +717,19 @@
                 });
 
                 test("applied position bottom", function() {
-                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom" }}});
+                    createPlotArea(barSeriesData, { categoryAxis: { title: { position: "bottom" }}});
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 564, 18, 564 ], TOLERANCE);
+                         [ 0, 540, 18, 573 ], TOLERANCE);
                 });
 
                 test("applied position top", function() {
-                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top" }}});
+                    createPlotArea(barSeriesData, { categoryAxis: { title: { position: "top" }}});
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 0, 18, 0 ], TOLERANCE);
+                         [ 0, 0, 18, 33 ], TOLERANCE);
                 });
 
                 test("renders color", function() {
@@ -598,6 +742,41 @@
 
                 test("renders zIndex", function() {
                     equal(title.style.zIndex, 1);
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Vertical / Mirrored / Title", {
+                    setup: function() {
+                        createPlotArea(barSeriesData, { categoryAxis: { mirror: true }});
+                        titleBox = plotArea.axisY.title.box;
+                    }
+                });
+
+                test("applied position center", function() {
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 25, 270, 43, 303 ], TOLERANCE);
+                });
+
+                test("applied position bottom", function() {
+                    createPlotArea(barSeriesData, {
+                        categoryAxis: { mirror: true, title: { position: "bottom" }}
+                    });
+
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 25, 540, 43, 573 ], TOLERANCE);
+                });
+
+                test("applied position top", function() {
+                    createPlotArea(barSeriesData, {
+                        categoryAxis: { mirror: true, title: { position: "top" }}
+                    });
+
+                    titleBox = plotArea.axisY.title.box;
+
+                    same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
+                         [ 25, 0, 43, 33 ], TOLERANCE);
                 });
 
             })();
