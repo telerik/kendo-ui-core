@@ -181,7 +181,6 @@
                 move = that.move,
                 position = move[axis] + delta;
 
-
             if (!boundary.present()) {
                 return;
             }
@@ -220,22 +219,15 @@
                 move: that.move
             });
 
-            that.swipe.bind(["start", "move", "end"], {
-                start: function() {
-                    that.moved = false;
-                },
-
+            that.swipe.bind(["move", "end"], {
                 move: function(e) {
-                    that.moved = true;
                     x.swipeMove(e.x.delta);
                     y.swipeMove(e.y.delta);
                     e.preventDefault();
                 },
 
                 end: function(e) {
-                    if (that.moved) {
-                        e.preventDefault();
-                    }
+                    e.preventDefault();
                 }
             });
         }

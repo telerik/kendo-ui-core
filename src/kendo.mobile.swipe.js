@@ -9,15 +9,14 @@
         SURFACE = $(document.documentElement);
 
     var SwipeAxis = Class.extend({
-        velocity: 0,
-
         start: function(location) {
-            this.location = location;
+            var that = this;
+            that.location = location;
+            that.velocity = that.delta = 0;
         },
 
         move: function(location) {
             var that = this;
-
             that.velocity = that.delta = location - that.location;
             that.location = location;
         }
@@ -49,7 +48,6 @@
                 element: element,
                 surface: options.global ? SURFACE : element,
                 pressed: false,
-                nextCaptured: false,
                 eventMap: eventMap,
                 ns: ns
             });
@@ -62,14 +60,6 @@
             that.bind([START, MOVE, END], options);
         },
 
-        captureNext: function() {
-            this.nextCaptured = true;
-        },
-
-        cancelCapture: function() {
-            this.nextCaptured = false;
-        },
-
         _start: function(e) {
             var that = this,
                 originalEvent = e.originalEvent,
@@ -77,15 +67,16 @@
                 touch = touches && touches[0];
 
             if (that.pressed) { return; }
+
             that.pressed = true;
+            this.moved = false;
 
             if (touch) {
                 that.touchID = touch.identifier;
             }
 
+            that._perAxis(START, touch || e);
             that.surface.on(that.eventMap);
-
-            that._perAxis(START, e, touch);
         },
 
         _move: function(e) {
@@ -94,7 +85,13 @@
             if (!that.pressed) { return; }
 
             that._withEvent(e, function(location) {
-                that._perAxis(MOVE, e, location);
+                if (!that.moved) {
+                    that._trigger(START, e);
+                    that.moved = true;
+                }
+
+                that._perAxis(MOVE, location);
+                that._trigger(MOVE, e);
             });
         },
 
@@ -106,28 +103,21 @@
             that._withEvent(e, function() {
                 that.pressed = false;
                 that.surface.off(that.ns);
-                that._trigger(END, e);
-                that.nextCaptured = false;
+
+                if (that.moved) {
+                    that._trigger(END, e);
+                }
             });
         },
 
-        _perAxis: function(method, event, location) {
-            var that = this;
-
-            location = location || event;
-
-            that.x[method](location.pageX);
-            that.y[method](location.pageY);
-            that._trigger(method, event);
+        _perAxis: function(method, location) {
+            this.x[method](location.pageX);
+            this.y[method](location.pageY);
         },
 
         _trigger: function(name, event) {
-            if(this.trigger(name, this) || this.nextCaptured) {
+            if(this.trigger(name, this)) {
                 event.preventDefault();
-            }
-
-            if (this.nextCaptured && event.originalEvent) {
-                event.originalEvent.preventDefault();
             }
         },
 

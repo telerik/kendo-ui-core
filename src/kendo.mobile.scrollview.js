@@ -119,7 +119,7 @@
                 width = boundary.size,
                 pages;
 
-            that.page = -that.move.x / width;
+            that.page = Math.round(-that.move.x / width);
 
             pages = that.pages = ceil(boundary.total / width);
 
