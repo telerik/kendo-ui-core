@@ -230,7 +230,7 @@
                 template = options.template,
                 hasDataSource = options.dataSource;
 
-            if (that.element.is("select")) {
+            if (that.element.is("select") && that.element[0].length) {
                 if (!hasDataSource) {
                     options.dataTextField = options.dataTextField || "text";
                     options.dataValueField = options.dataValueField || "value";
@@ -275,12 +275,11 @@
             }
         },
         inArray: function(node, parentNode) {
-            var idx, siblings, length;
+            var idx, length, siblings = parentNode.children;
+
             if (!node || node.parentNode !== parentNode) {
                 return -1;
             }
-
-            siblings = parentNode.children;
 
             for (idx = 0, length = siblings.length; idx < length; idx++) {
                 if (node === siblings[idx]) {
