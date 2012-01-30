@@ -50,169 +50,6 @@
         }
     });
 
-    // Mobile Swipe
-
-    var SwipeAxis = Class.extend({
-        start: function(location) {
-            var that = this;
-            that.location = location;
-            that.velocity = 0;
-        },
-
-        move: function(location) {
-            var that = this;
-
-            that.velocity = that.delta = location - that.location;
-            that.location = location;
-        }
-    });
-
-    var START = "start",
-        MOVE = "move",
-        END = "end",
-        SURFACE = $(document.documentElement);
-
-    var Swipe = Observable.extend({
-        init: function(element, options) {
-            var that = this,
-                eventMap = {},
-                ns = "." + kendo.guid();
-
-            options = options || {};
-
-            element = $(element);
-            Observable.fn.init.call(that);
-
-            var eventMap = {};
-
-            eventMap["mousemove" + ns] = proxy(that._mouseMove, that);
-            eventMap["mouseup" + ns + " mouseleave" + ns] = proxy(that._mouseUp, that);
-            eventMap["touchmove" + ns] = proxy(that._touchMove, that);
-            eventMap["touchend" + ns + " touchcancel" + ns] = proxy(that._touchEnd, that);
-
-            extend(that, {
-                x: new SwipeAxis(),
-                y: new SwipeAxis(),
-                element: element,
-                surface: options.global ? SURFACE : element,
-                pressed: false,
-                nextCaptured: false,
-                eventMap: eventMap,
-                ns: ns
-            });
-
-            element.on({
-                "mousedown": proxy(that._mouseDown, that),
-                "touchstart": proxy(that._touchStart, that),
-                "dragstart": function(e) { e.preventDefault(); }
-            });
-
-            that.bind([START, MOVE, END], options);
-        },
-
-        captureNext: function() {
-            this.nextCaptured = true;
-        },
-
-        cancelCapture: function() {
-            this.nextCaptured = false;
-        },
-
-        _mouseDown: function(e) {
-            var that = this;
-            that.surface.on(that.eventMap);
-            that._perAxis(START, e);
-        },
-
-        _touchStart: function(e) {
-            var that = this,
-                originalEvent,
-                touch;
-
-            if (that.pressed) { return; }
-            that.pressed = true;
-
-            originalEvent = e.originalEvent;
-            touch = originalEvent.changedTouches[0];
-
-            that.touchID = touch.identifier;
-
-            that.surface.on(that.eventMap);
-
-            that._perAxis(START, e, touch);
-        },
-
-        _touchMove: function(e) {
-            var that = this;
-
-            if (!that.pressed) { return; }
-
-            that._withTouchEvent(e, function(touch) {
-                that._perAxis(MOVE, e, touch);
-            });
-        },
-
-        _mouseMove: function(e) {
-            this._perAxis(MOVE, e);
-        },
-
-        _touchEnd: function(e) {
-            var that = this;
-
-            if (!that.pressed) { return; }
-
-            that._withTouchEvent(e, function() {
-                that.pressed = false;
-                that._end(e);
-            });
-        },
-
-        _mouseUp: function(e) {
-            this._end(e);
-        },
-
-        _perAxis: function(method, event, location) {
-            var that = this;
-
-            location = location || event;
-
-            that.x[method](location.pageX);
-            that.y[method](location.pageY);
-
-            that._trigger(method, event);
-        },
-
-        _end: function(e) {
-            var that = this;
-            that.surface.off(that.ns);
-            that._trigger(END, e);
-            that.nextCaptured = false;
-        },
-
-        _trigger: function(name, event) {
-            if(this.trigger(name, this) || this.nextCaptured) {
-                event.preventDefault();
-            }
-
-            if (this.nextCaptured && event.originalEvent) {
-                event.originalEvent.preventDefault();
-            }
-        },
-
-        _withTouchEvent: function(e, callback) {
-            var that = this,
-            touches = e.originalEvent.changedTouches,
-            idx = touches.length;
-
-            while (idx) {
-                idx --;
-                if (touches[idx].identifier === that.touchID) {
-                    return callback(touches[idx]);
-                }
-            }
-        }
-    });
-
     var TRANSFORM_STYLE = kendo.support.transitions.prefix + "Transform";
 
     if (support.hasHW3D) {
@@ -383,7 +220,7 @@
                 move: that.move
             });
 
-            that.swipe.bind([START, MOVE, END], {
+            that.swipe.bind(["start", "move", "end"], {
                 start: function() {
                     that.moved = false;
                 },
@@ -536,7 +373,6 @@
             Widget: Widget
         },
 
-        Swipe: Swipe,
         Move: Move,
         ContainerBoundary: ContainerBoundary,
         Animation: Animation,

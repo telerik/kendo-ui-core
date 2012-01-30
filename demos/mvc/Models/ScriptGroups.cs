@@ -69,6 +69,7 @@ namespace Kendo.Models
             "kendo.popup.js",
             "kendo.history.js",
             "kendo.mobile.core.js",
+            "kendo.mobile.swipe.js",
             "kendo.mobile.view.js",
             "kendo.mobile.application.js",
             "kendo.mobile.button.js",
@@ -78,8 +79,7 @@ namespace Kendo.Models
             "kendo.mobile.scroller.js",
             "kendo.mobile.buttongroup.js",
             "kendo.mobile.switch.js",
-            "kendo.mobile.tabstrip.js",
-            "kendo.mobile.view.js"
+            "kendo.mobile.tabstrip.js"
 #else
             "http://code.jquery.com/jquery-1.7.1.min.js",
             "kendo.all.min.js"
