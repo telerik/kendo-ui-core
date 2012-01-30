@@ -1,12 +1,8 @@
 
         <div id="example" class="k-content">
-            <div class="configuration">
-                <span class="infoHead">Information</span>
-                <p>Start typing a movie title in the AutoComplete (minimum 3 characters) to open it. </p>
+            <div id="movies">
+                <input id="titles"/>
             </div>
-
-            <label for="titles">Search Netflix (type at least 3 characters):</label>
-            <input id="titles" />
 
             <script>
                 $(document).ready(function() {
@@ -14,10 +10,10 @@
                         minLength: 3,
                         dataTextField: "Name",
                         template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />' +
-                                  '<dl>' +
-                                      '<dt>Title:</dt><dd>${ data.Name }</dd>' +
-                                      '<dt>Year:</dt><dd>${ data.ReleaseYear }</dd>' +
-                                  '</dl>',
+                                  '<h3>' +
+                                      '${ data.Name } ' +
+                                      '<span>${ data.ReleaseYear }</span>' +
+                                  '</h3>',
                         dataSource: {
                             type: "odata",
                             serverFiltering: true,
@@ -30,12 +26,19 @@
                     });
 
                     // set width of the drop-down list
-                    $("#titles").data("kendoAutoComplete").list.width(400);
                 });
             </script>
 
             <style scoped>
+                #movies {
+					width: 369px;
+					height: 71px;
+					padding: 211px 0 0 141px;
+					background: url('../../content/web/autocomplete/movies.png') transparent no-repeat 0 0;
+					margin: 30px auto;
+ 				}
                 .k-autocomplete {
+                	width: 240px;
                     vertical-align: middle;
                 }
 
@@ -44,28 +47,25 @@
                 }
 
                 #titles-list img {
-                    box-shadow: 0 0 4px rgba(255,255,255,.7);
                     float: left;
-                    margin: 5px;
+                    width: 64px;
+                    height: 90px;
+                    margin: 10px 5px;
+                    -webkit-box-shadow: 0 1px 2px #333;
+                    box-shadow: 0 1px 2px #333;
+                    -webkit-border-radius: 4px;
+                    border-radius: 4px;
+                    font-size: .7em;
+                    line-height: 1em;
                 }
-
-                #titles-list dl {
-                    margin-left: 85px;
+                #titles-list h3 {
+                    margin: 20px 0 0 80px;
+                    font-size: 1.2em;
+                    line-height: 1.2em;
                 }
-
-                #titles-list dt,
-                #titles-list dd {
-                    margin: 0;
-                    padding: 0;
-                }
-
-                #titles-list dt {
-                    font-weight: bold;
-                    padding-top: .5em;
-                }
-
-                #titles-list dd {
-                    padding-bottom: .3em;
+                #titles-list h3 span {
+                    display: block;
+                    font-size: .7em;
                 }
             </style>
         </div>
