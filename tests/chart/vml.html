@@ -924,23 +924,24 @@
 
                 module("VMLRing", {
                     setup: function() {
-                        var ringConfig = new Chart.Ring(
-                                new Point2D(135, 135), 100, 135, -30, 240
-                            );
+                        var ringConfig = new Chart.Ring(new Point2D(135, 135), 100, 130, -30, 240);
                         ring = new Chart.VMLRing(ringConfig);
 
                         $("<div />").appendTo(document.body).kendoGauge();
                     }
                 });
 
-                test("renders path", function() {
-                    //ok(sector.render().indexOf("<kvml:path v='M 150 150 AE 150 150 135 135 -17694450 -1310720 X E' />"));
+                test("renders outer arc", function() {
+                    ok(ring.render().indexOf("WA 5,5 265,265 22,200 248,200") > -1);
                 });
 
-                test("renders radius", function() {
-                    //ok(ring.render().indexOf("A135 135") > -1);
+                test("renders line", function() {
+                    ok(ring.render().indexOf("L 222,185") > -1);
                 });
 
+                test("renders inner arc", function() {
+                    ok(ring.render().indexOf("AT 35,35 235,235 222,185 48,185") > -1);
+                });
             })();
 
             (function() {

@@ -403,14 +403,12 @@
             ring.pathTemplate = VMLRing.pathTemplate;
             if (!ring.pathTemplate) {
                 ring.pathTemplate = VMLRing.pathTemplate = template(
-                   "M 10,100 " +
-                   //"AE #= d.cx # #= d.cy # " +
-                   //"#= d.r # #= d.r # " +
-                   //"#= d.sa # #= d.a # X E"
-                   "at 10,10 100,100 100,10 10,100 " +
-                   // c6547838,5616000,6615439,5623989,6681408,5639803
-                   //"L 70,70 " +
-                   //"C 70,70 20,20 10,10 " +
+                   "M #= d.osp.x #,#= d.osp.y # " +
+                   "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
+                      "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
+                   "L #= d.iep.x #,#= d.iep.y # " +
+                   "AT #= d.ibb.l #,#= d.ibb.t # #= d.ibb.r #,#= d.ibb.b # " +
+                      "#= d.iep.x #,#= d.iep.y # #= d.isp.x #,#= d.isp.y # " +
                    "X E"
                 );
             }
@@ -422,12 +420,37 @@
             var ring = this,
                 config = ring.config,
                 r = math.max(round(config.r), 0),
+                ir = math.max(round(config.ir), 0),
                 cx = round(config.c.x),
                 cy = round(config.c.y),
-                sa = -round((config.startAngle + 180) * 65535),
-                a = -round(config.angle * 65536);
+                startAngle = config.startAngle,
+                endAngle = config.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                // outer bounding box
+                obb = {
+                    l: cx - r,
+                    t: cy - r,
+                    r: cx + r,
+                    b: cy + r
+                },
+                // inner bounding box
+                ibb = {
+                    l: cx - ir,
+                    t: cy - ir,
+                    r: cx + ir,
+                    b: cy + ir
+                },
+                // outer/inner start/end points
+                osp = roundPointCoordinates(config.point(startAngle)),
+                oep = roundPointCoordinates(config.point(endAngle)),
+                isp = roundPointCoordinates(config.point(startAngle, true)),
+                iep = roundPointCoordinates(config.point(endAngle, true));
 
-            return ring.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
+            function roundPointCoordinates(point) {
+                return new Point2D(round(point.x), round(point.y));
+            }
+
+            return ring.pathTemplate({ obb: obb, ibb: ibb, osp: osp, isp: isp, oep: oep, iep: iep });
         },
 
         clone: function() {
