@@ -1,0 +1,39 @@
+        <div id="example" class="k-content">
+            <div id="gauge"></div>
+
+            <script>
+                function createGauge() {
+                    $("#gauge").kendoGauge({
+                        theme: $(document).data("kendoSkin") || "default",
+
+                        value: 35,
+                        min: 0,
+                        max: 100,
+
+                        axis: {
+                            majorTickSize: 5,
+                            majorTickType: "outside",
+
+                            regions: [
+                                { from: 60, to: 80, color: "#00ffff" },
+                                { from: 80, to: 100, background: "#ff0000" }
+                            ]
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createGauge();
+
+                        // Initialize the gauge with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createGauge();
+                    });
+                });
+            </script>
+        </div>
+
