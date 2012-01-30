@@ -16,14 +16,16 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <ul id="log"></ul>
+        <div id="qunit-fixture">test markup, will be hidden</div>
 
         <script>
             var swipe,
                 Swipe = kendo.mobile.Swipe,
                 element;
 
-            function triggerEvent(type, e) {
-                element.trigger($.Event(type, e));
+            function triggerEvent(type, e, el) {
+                el = el || element;
+                el.trigger($.Event(type, e));
             }
 
             function triggerTouchEvent(type, e) {
@@ -36,7 +38,8 @@
 
             module("mobile swipe", {
                 setup: function() {
-                    element = $("<div />");
+                    element = $('<div id="outer"><div id="inner"></div></div>');
+                    $("#qunit-fixture").empty().append(element);
                     swipe = new kendo.mobile.Swipe(element);
                 }
             });
@@ -125,7 +128,6 @@
 
 
             asyncTest("resets velocity on direction change", 2, function(){
-
                 swipe.bind("end", function(e) {
                     start();
                     ok(e.x.velocity > 0);
@@ -145,6 +147,53 @@
                 setTimeout(function() {
                     triggerEvent("mouseup", {pageX: 10, pageY: 20});
                 }, 1);
+            });
+
+            asyncTest("captures next mousedown", function() {
+                var inner = element.find("#inner");
+
+                inner.mousedown(function(e){
+                    setTimeout(function(){
+                        start();
+                        ok(e.isDefaultPrevented());
+                    })
+                });
+
+                swipe.captureNext();
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20}, inner);
+            });
+
+            test("captures next mouseup", function() {
+                $("#qunit-fixture").one("mouseup", function(e){
+                    ok(e.isDefaultPrevented());
+                });
+
+                swipe.captureNext();
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup", {pageX: 10, pageY: 20});
+            });
+
+            test("does not capture subsequent events", 4, function() {
+                $("#qunit-fixture").one("mousedown mouseup", function(e){ ok(e.isDefaultPrevented()); });
+
+                swipe.captureNext();
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup", {pageX: 10, pageY: 20});
+
+                $("#qunit-fixture").one("mousedown mouseup", function(e){ ok(!e.isDefaultPrevented()); });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup", {pageX: 10, pageY: 20});
+            });
+
+            test("cancels capturing", 2, function() {
+                $("#qunit-fixture").one("mousedown mouseup", function(e){ ok(!e.isDefaultPrevented()); });
+
+                swipe.captureNext();
+                swipe.cancelCapture();
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup", {pageX: 10, pageY: 20});
             });
         </script>
     </body>
