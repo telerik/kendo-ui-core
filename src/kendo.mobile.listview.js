@@ -12,6 +12,7 @@
         MOUSEMOVE = support.mousemove,
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
+        ACTIVE_STATE_TIMEOUT = "active-state-timeout",
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
@@ -21,10 +22,21 @@
 
         var item = $(e.currentTarget);
             clickedLink = $(e.target).closest("a"),
+            intervalID = item.data(ACTIVE_STATE_TIMEOUT);
             role = clickedLink.data(kendo.ns + "role") || "";
 
         if (clickedLink[0] && (!role.match(/button/))) {
-            item.toggleClass("km-state-active", e.type === MOUSEDOWN);
+            clearTimeout(intervalID);
+            if (e.type === MOUSEDOWN) {
+                intervalID = setTimeout(function(){
+                    if (!e.originalEvent.defaultPrevented) {
+                        item.toggleClass("km-state-active", true);
+                    }
+                }, 100);
+                item.data(ACTIVE_STATE_TIMEOUT, intervalID);
+            } else {
+                item.toggleClass("km-state-active", false);
+            }
         }
     }
 
@@ -227,8 +239,8 @@
             options = that.options;
 
             that.element
-                .delegate(ITEM_SELECTOR, [MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), toggleItemActiveClass)
-                .delegate(ITEM_SELECTOR, MOUSEUP, proxy(that._click, that));
+                .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), ITEM_SELECTOR, toggleItemActiveClass)
+                .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
             if (options.dataSource) {
                 that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that._refresh, that));
