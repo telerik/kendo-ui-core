@@ -23,6 +23,10 @@
         }
     });
 
+    function addNS(events, ns) {
+        return events.replace(/ /g, ns + " ");
+    }
+
     var Swipe = Observable.extend({
         init: function(element, options) {
             var that = this,
@@ -36,8 +40,8 @@
 
             var eventMap = {};
 
-            eventMap["mousemove" + ns + " touchmove" + ns] = proxy(that._move, that);
-            eventMap["mouseup" + ns + " mouseleave" + ns + " touchend" + ns + " touchcancel" + ns] = proxy(that._end, that);
+            eventMap[addNS("mousemove touchmove", ns)] = proxy(that._move, that);
+            eventMap[addNS("mouseup mouseleave touchend touchcancel", ns)] = proxy(that._end, that);
 
             extend(that, {
                 x: new SwipeAxis(),
