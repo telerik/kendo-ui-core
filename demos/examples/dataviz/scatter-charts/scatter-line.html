@@ -50,15 +50,21 @@
                             data: [[10, 70], [13, 90], [25, 100]]
                         }],
                         xAxis: {
+                            max: 90,
                             labels: {
                                 format: "{0}m"
                             },
-                            max: 90
+                            title: {
+                                text: "Performance Ratio"
+                            }
                         },
                         yAxis: {
                             max: 100,
                             labels: {
                                 format: "{0}%"
+                            },
+                            title: {
+                                text: "Price"
                             }
                         },
                         tooltip: {
