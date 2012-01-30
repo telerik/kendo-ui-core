@@ -1,8 +1,8 @@
 
         <div id="example" class="k-content">
-            <label for="titles">Search Netflix for a movie title (minimum 3 characters):</label>
-            <input id="titles"/>
-
+            <div id="movies">
+                <input id="titles"/>
+            </div>
             <script>
                 $("#titles").kendoAutoComplete({
                     minLength: 3,
@@ -20,7 +20,15 @@
             </script>
 
             <style scoped>
+                #movies {
+					width: 369px;
+					height: 71px;
+					padding: 211px 0 0 141px;
+					background: url('../../content/web/autocomplete/movies.png') transparent no-repeat 0 0;
+					margin: 30px auto;
+ 				}
                 .k-autocomplete {
+                	width: 240px;
                     vertical-align: middle;
                 }
             </style>
