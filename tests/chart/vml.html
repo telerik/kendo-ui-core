@@ -926,8 +926,6 @@
                     setup: function() {
                         var ringConfig = new Chart.Ring(new Point2D(135, 135), 100, 130, -30, 240);
                         ring = new Chart.VMLRing(ringConfig);
-
-                        $("<div />").appendTo(document.body).kendoGauge();
                     }
                 });
 
@@ -965,10 +963,6 @@
                     ok(sector.render().match(
                         /\<kvml:shape.*\>.*\<\/kvml:shape\>/
                     ));
-                });
-
-                test("renders path", function() {
-                    ok(sector.render().indexOf("<kvml:path v='M 150 150 AE 150 150 135 135 -17694450 -1310720 X E' />"));
                 });
 
                 test("creates fill", function() {

@@ -450,7 +450,16 @@
                 return new Point2D(round(point.x), round(point.y));
             }
 
-            return ring.pathTemplate({ obb: obb, ibb: ibb, osp: osp, isp: isp, oep: oep, iep: iep });
+            return ring.pathTemplate({
+                obb: obb,
+                ibb: ibb,
+                osp: osp,
+                isp: isp,
+                oep: oep,
+                iep: iep,
+                cx: cx,
+                cy: cy
+            });
         },
 
         clone: function() {
@@ -470,24 +479,13 @@
             sector.pathTemplate = VMLSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = VMLSector.pathTemplate = template(
-                   "M #= d.cx # #= d.cy # " +
-                   "AE #= d.cx # #= d.cy # " +
-                   "#= d.r # #= d.r # " +
-                   "#= d.sa # #= d.a # X E"
+                   "M #= d.osp.x #,#= d.osp.y # " +
+                   "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
+                      "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
+                   "L #= d.cx #,#= d.cy # " +
+                   "X E"
                 );
             }
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                config = sector.config,
-                r = math.max(round(config.r), 0),
-                cx = round(config.c.x),
-                cy = round(config.c.y),
-                sa = -round((config.startAngle + 180) * 65535),
-                a = -round(config.angle * 65536);
-
-            return sector.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
         },
 
         clone: function() {
