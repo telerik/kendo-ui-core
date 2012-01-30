@@ -1783,6 +1783,11 @@
             return deepExtend(autoOptions, options);
         },
 
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
+        },
+
         reflow: function(targetBox) {
             this.reflowAxis(targetBox);
         },
@@ -2011,6 +2016,10 @@
                 color: BLACK
             },
             zIndex: 1
+        },
+
+        range: function() {
+            return { min: 0, max: this.options.categories.length };
         },
 
         reflow: function(targetBox) {
@@ -4150,15 +4159,21 @@
                 i;
 
             // distribute axes
-            var xAnchorLeftStackOffset = 0;
+            var xAnchorLeftStackOffset = 0,
+                xAnchorRightStackOffset = 0;
 
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                if (xAnchorCrossings[i] === 0) {
+                if (xAnchorCrossings[i] <= xAnchor.range().min) {
                     axis.reflow(axis.box.translate(xAnchorLeftStackOffset, 0))
                     xAnchorLeftStackOffset -= axis.box.width() + axis.options.margin;
+                }
+
+                if (xAnchorCrossings[i] >= xAnchor.range().max) {
+                    axis.reflow(axis.box.translate(xAnchorRightStackOffset, 0))
+                    xAnchorRightStackOffset += axis.box.width() + axis.options.margin;
                 }
             }
 
@@ -4381,7 +4396,9 @@
         },
 
         options: {
-            categoryAxis: {},
+            categoryAxis: {
+                categories: []
+            },
             valueAxis: {}
         },
 

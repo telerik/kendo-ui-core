@@ -303,6 +303,14 @@
                     equals(numericAxis.options.min, 0);
                 });
 
+                test("reports range minimum equal to options.min", function() {
+                    equals(numericAxis.range().min, 0);
+                });
+
+                test("reports range maximum equal to options.max", function() {
+                    equals(numericAxis.range().max, 1.2);
+                });
+
                 // ------------------------------------------------------------
                 module("Numeric Axis / Configuration / Negative values", {
                     setup: moduleSetup
