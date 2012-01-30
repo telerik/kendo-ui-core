@@ -43,6 +43,10 @@
     }
 
     function appLinkMouseUp(e) {
+        if (e.which > 1) {
+            return;
+        }
+
         var link = $(e.currentTarget),
             href = link.attr("href");
 

@@ -195,8 +195,7 @@
         },
 
         _start: function(e) {
-            if (e.which === 3) {
-                e.preventDefault();
+            if (e.which > 1) {
                 return;
             }
 
