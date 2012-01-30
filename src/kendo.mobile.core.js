@@ -64,9 +64,7 @@
 
             that.velocity = that.delta = location - that.location;
             that.location = location;
-        },
-
-        end: $.noop
+        }
     });
 
     var START = "start",
@@ -98,6 +96,7 @@
                 element: element,
                 surface: options.global ? SURFACE : element,
                 pressed: false,
+                nextCaptured: false,
                 eventMap: eventMap,
                 ns: ns
             });
@@ -109,6 +108,14 @@
             });
 
             that.bind([START, MOVE, END], options);
+        },
+
+        captureNext: function() {
+            this.nextCaptured = true;
+        },
+
+        cancelCapture: function() {
+            this.nextCaptured = false;
         },
 
         _mouseDown: function(e) {
@@ -132,7 +139,7 @@
 
             that.surface.on(that.eventMap);
 
-            that._perAxis(START, touch, e);
+            that._perAxis(START, e, touch);
         },
 
         _touchMove: function(e) {
@@ -141,7 +148,7 @@
             if (!that.pressed) { return; }
 
             that._withTouchEvent(e, function(touch) {
-                that._perAxis(MOVE, touch, e);
+                that._perAxis(MOVE, e, touch);
             });
         },
 
@@ -154,28 +161,41 @@
 
             if (!that.pressed) { return; }
 
-            that._withTouchEvent(e, function(touch) {
+            that._withTouchEvent(e, function() {
                 that.pressed = false;
-                that.surface.off(that.ns);
-                that._perAxis(END, touch, e);
+                that._end(e);
             });
         },
 
         _mouseUp: function(e) {
-            this.surface.off(this.ns);
-            this._perAxis(END, e);
+            this._end(e);
         },
 
-        _perAxis: function(method, location, event) {
+        _perAxis: function(method, event, location) {
             var that = this;
 
-            event = event || location;
+            location = location || event;
 
             that.x[method](location.pageX);
             that.y[method](location.pageY);
 
-            if(that.trigger(method, that)) {
+            that._trigger(method, event);
+        },
+
+        _end: function(e) {
+            var that = this;
+            that.surface.off(that.ns);
+            that._trigger(END, e);
+            that.nextCaptured = false;
+        },
+
+        _trigger: function(name, event) {
+            if(this.trigger(name, this) || this.nextCaptured) {
                 event.preventDefault();
+            }
+
+            if (this.nextCaptured && event.originalEvent) {
+                event.originalEvent.preventDefault();
             }
         },
 
