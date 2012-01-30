@@ -201,7 +201,7 @@
             });
 
             test("navigateToFuture should navigate to next month when month view", function() {
-                var cal = new Calendar(div, {animation: false}),
+                var cal = new Calendar(div, {value: new Date(2000, 10, 10), animation: false}),
                     modified = new Date(cal._current),
                     names = kendo.culture().calendar.months.names;
 
