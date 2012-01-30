@@ -230,12 +230,12 @@
                     }
                 });
 
-                test("value axis orientation is vertical", function() {
-                    equal(namedValueAxes.primary.options.orientation, "vertical");
+                test("value axis is vertical", function() {
+                    ok(namedValueAxes.primary.options.isVertical);
                 });
 
-                test("category axis orientation is horizontal", function() {
-                    equal(categoryAxis.options.orientation, "horizontal");
+                test("category axis is horizontal", function() {
+                    ok(!categoryAxis.options.isVertical);
                 });
 
                 test("value axis crosses at first category", function() {
@@ -301,12 +301,12 @@
                     }
                 });
 
-                test("value axis orientation is vertical", function() {
-                    equal(namedValueAxes.primary.options.orientation, "vertical");
+                test("value axis is vertical", function() {
+                    ok(namedValueAxes.primary.options.isVertical);
                 });
 
-                test("category axis orientation is horizontal", function() {
-                    equal(categoryAxis.options.orientation, "horizontal");
+                test("category axis is horizontal", function() {
+                    ok(!categoryAxis.options.isVertical);
                 });
 
                 test("creates line chart", function() {
@@ -322,12 +322,12 @@
                     }
                 });
 
-                test("value axis orientation is horizontal", function() {
-                    equal(namedValueAxes.primary.options.orientation, "horizontal");
+                test("value axis is horizontal", function() {
+                    ok(!namedValueAxes.primary.options.isVertical);
                 });
 
-                test("category axis orientation is vertical", function() {
-                    equal(categoryAxis.options.orientation, "vertical");
+                test("category axis is vertical", function() {
+                    ok(categoryAxis.options.isVertical);
                 });
 
                 test("creates line chart", function() {
@@ -343,12 +343,12 @@
                     }
                 });
 
-                test("value axis orientation is vertical", function() {
-                    equal(namedValueAxes.primary.options.orientation, "vertical");
+                test("value axis is vertical", function() {
+                    ok(namedValueAxes.primary.options.isVertical);
                 });
 
-                test("category axis orientation is horizontal", function() {
-                    equal(categoryAxis.options.orientation, "horizontal");
+                test("category axis is horizontal", function() {
+                    ok(!categoryAxis.options.isVertical);
                 });
 
                 test("creates area chart", function() {
@@ -364,12 +364,12 @@
                     }
                 });
 
-                test("value axis orientation is horizontal", function() {
-                    equal(namedValueAxes.primary.options.orientation, "horizontal");
+                test("value axis is horizontal", function() {
+                    ok(!namedValueAxes.primary.options.isVertical);
                 });
 
-                test("category axis orientation is vertical", function() {
-                    equal(categoryAxis.options.orientation, "vertical");
+                test("category axis is vertical", function() {
+                    ok(categoryAxis.options.isVertical);
                 });
 
                 test("creates area chart", function() {
@@ -385,12 +385,12 @@
                     }
                 });
 
-                test("value axis orientation is horizontal", function() {
-                    equal(namedValueAxes.primary.options.orientation, "horizontal");
+                test("value axis is horizontal", function() {
+                    ok(!namedValueAxes.primary.options.isVertical);
                 });
 
-                test("category axis orientation is vertical", function() {
-                    equal(categoryAxis.options.orientation, "vertical");
+                test("category axis is vertical", function() {
+                    ok(categoryAxis.options.isVertical);
                 });
 
                 test("value axis crosses at last category", function() {

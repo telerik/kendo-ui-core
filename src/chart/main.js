@@ -1437,8 +1437,7 @@
         createLabels: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                align = isVertical ? RIGHT : CENTER,
+                align = options.isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
                 });
@@ -1474,9 +1473,8 @@
         createTitle: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
                 titleOptions = deepExtend({
-                    rotation: isVertical ? -90 : 0,
+                    rotation: options.isVertical ? -90 : 0,
                     text: "",
                     zIndex: 1
                 }, options.title),
@@ -1492,7 +1490,6 @@
         renderTicks: function(view) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
                 box = axis.box,
                 majorTicks = axis.getMajorTickPositions(),
                 ticks = [];
@@ -1531,7 +1528,7 @@
             }
 
             return map(ticks, function(tick) {
-                if (isVertical) {
+                if (options.isVertical) {
                     return view.createLine(
                         box.x2 - tick.size, tick.pos, box.x2, tick.pos,
                         {
@@ -1571,7 +1568,7 @@
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 result = [],
                 plotArea = axis.parent,
                 slotX,
@@ -1599,7 +1596,7 @@
         reflowAxis: function(box, position) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 labels = axis.labels,
                 count = labels.length,
                 space = axis.getActualTickSize() + options.margin,
@@ -1643,7 +1640,7 @@
             var axis = this,
                 options = axis.options,
                 labels = axis.labels,
-                isVertical = axis.options.orientation === VERTICAL,
+                isVertical = axis.options.isVertical,
                 tickPositions = axis.getMajorTickPositions(),
                 tickSize = axis.getActualTickSize(),
                 labelBox,
@@ -1729,7 +1726,7 @@
         options: {
             min: 0,
             max: 1,
-            orientation: VERTICAL,
+            isVertical: true,
             majorGridLines: {
                 visible: true,
                 width: 1,
@@ -1792,7 +1789,6 @@
         getViewElements: function(view) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 tickPositions = axis.getMinorTickPositions(),
                 lineOptions;
@@ -1804,7 +1800,7 @@
                     dashType: options.line.dashType,
                     zIndex: options.zIndex
                 };
-                if (isVertical) {
+                if (options.isVertical) {
                     childElements.push(view.createLine(
                         axis.box.x2, tickPositions[0],
                         axis.box.x2, last(tickPositions),
@@ -1907,7 +1903,7 @@
         getTickPositions: function(stepValue) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 lineBox = axis.getAxisLineBox(),
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
@@ -1942,7 +1938,7 @@
         getAxisLineBox: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 labelSize = isVertical ? "height" : "width",
                 labels = axis.labels,
                 box = axis.box,
@@ -1966,7 +1962,7 @@
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 valueAxis = isVertical ? Y : X,
                 lineBox = axis.getAxisLineBox(),
                 lineStart = lineBox[valueAxis + 1],
@@ -2007,7 +2003,7 @@
     var CategoryAxis = Axis.extend({
         options: {
             categories: [],
-            orientation: HORIZONTAL,
+            isVertical: false,
             majorGridLines: {
                 visible: false,
                 width: 1,
@@ -2024,7 +2020,6 @@
             var axis = this,
                 options = axis.options,
                 line = options.line,
-                isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 lineOptions;
 
@@ -2036,7 +2031,7 @@
                     zIndex: line.zIndex
                 };
 
-                if (isVertical) {
+                if (options.isVertical) {
                     childElements.push(view.createLine(
                         axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
                         lineOptions));
@@ -2056,7 +2051,7 @@
         getTickPositions: function(itemsCount) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 size = isVertical ? axis.box.height() : axis.box.width(),
                 step = size / itemsCount,
                 pos = isVertical ? axis.box.y1 : axis.box.x1,
@@ -2088,7 +2083,7 @@
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 childrenCount = math.max(1, options.categories.length),
                 from = math.max(0, from),
                 to = math.min(childrenCount, to),
@@ -4132,7 +4127,7 @@
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
             var slot = axis.getSlot(crossingValue, crossingValue),
                 targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
-                isVertical = axis.options.orientation === VERTICAL;
+                isVertical = axis.options.isVertical;
 
             axis.reflow(
                 axis.box.translate(
@@ -4191,7 +4186,7 @@
 
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
-                isVertical  = currentAxis.options.orientation === VERTICAL;
+                isVertical  = currentAxis.options.isVertical;
 
                 currentAxis.reflow(
                     currentAxis.box.shrink(
@@ -4224,8 +4219,8 @@
         reflowAxes: function() {
             var plotArea = this,
                 axes = plotArea.axes,
-                xAxes = axes.filter(function(axis) { return axis.options.orientation !== VERTICAL; }),
-                yAxes = axes.filter(function(axis) { return axis.options.orientation === VERTICAL; }),
+                xAxes = axes.filter(function(axis) { return !axis.options.isVertical; }),
+                yAxes = axes.filter(function(axis) { return axis.options.isVertical; }),
                 i,
                 length = axes.length;
 
@@ -4272,7 +4267,7 @@
 
         renderGridLines: function(view, axis, secondaryAxis) {
             var options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 boundaries = secondaryAxis.getMajorTickPositions(),
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
                 secAxisPos = round(crossingSlot[isVertical ? "y1" : "x1"]),
@@ -4473,7 +4468,7 @@
                 invertAxes = plotArea.invertAxes,
                 categoriesCount = options.categoryAxis.categories.length,
                 categoryAxis = new CategoryAxis(deepExtend({
-                        orientation: invertAxes ? VERTICAL : HORIZONTAL,
+                        isVertical: invertAxes,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
                     },
                     options.categoryAxis)
@@ -4489,7 +4484,7 @@
 
                 axis = namedValueAxes[axisName] =
                     new NumericAxis(range.min, range.max, deepExtend({
-                        orientation: invertAxes ? HORIZONTAL : VERTICAL
+                        isVertical: !invertAxes
                     },
                     this)
                 );
@@ -4623,8 +4618,7 @@
                 axisRanges = isVertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
                 rangeTracker = isVertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
-                orientation = isVertical ? VERTICAL : HORIZONTAL,
-                options = deepExtend({}, options, { orientation: orientation }),
+                options = deepExtend({}, options, { isVertical: isVertical }),
                 axis = new NumericAxis(range.min, range.max, options);
 
             namedAxes[axisName] = axis;

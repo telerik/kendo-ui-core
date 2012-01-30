@@ -208,7 +208,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ orientation: "vertical" });
+                        createCategoryAxis({ isVertical: true });
                     }
                 });
 
@@ -292,7 +292,7 @@
 
                 test("labels have set background", 1, function() {
                     createCategoryAxis({
-                        orientation: "vertical",
+                        isVertical: true,
                         labels: {
                             background: "#f0f"
                         }
@@ -305,7 +305,7 @@
 
                 test("labels are positioned to the left of the axis line with margin and padding", function() {
                     createCategoryAxis({
-                        orientation: "vertical",
+                        isVertical: true,
                         labels: {
                             margin: MARGIN,
                             padding: PADDING
@@ -367,7 +367,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ orientation: "vertical" });
+                        createCategoryAxis({ isVertical: true });
                     }
                 });
 
