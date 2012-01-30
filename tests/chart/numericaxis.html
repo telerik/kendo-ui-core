@@ -539,7 +539,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis = new Chart.NumericAxis(0, 1, { orientation: "horizontal" });
+                        numericAxis = new Chart.NumericAxis(0, 1, { isVertical: false });
                         numericAxis.reflow(chartBox);
                     }
                 });
@@ -578,7 +578,7 @@
 
                 test("labels are aligned top", 7, function() {
                     numericAxis = new Chart.NumericAxis(0, 1, {
-                        orientation: "horizontal",
+                        isVertical: false,
                         labels: {
                             margin: MARGIN,
                             padding: PADDING
@@ -640,7 +640,7 @@
 
                 test("minor ticks are rendered after last major tick", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, {
-                        orientation: "horizontal",
+                        isVertical: false,
                         min: 0,
                         max: 0.3,
                         majorUnit: 0.2,
@@ -781,7 +781,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis = new Chart.NumericAxis(0, 1, { orientation: "horizontal" });
+                        numericAxis = new Chart.NumericAxis(0, 1, { isVertical: false });
                         numericAxis.reflow(chartBox);
                     }
                 });
@@ -821,7 +821,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis = new Chart.NumericAxis(-1, 0, { orientation: "horizontal" });
+                        numericAxis = new Chart.NumericAxis(-1, 0, { isVertical: false });
                         numericAxis.reflow(chartBox);
                     }
                 });
