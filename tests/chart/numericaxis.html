@@ -991,7 +991,7 @@
 
                 test("does not change axis box height", function() {
                     var box = plotArea.axisX.getAxisLineBox();
-                    same({box.x1, box.y1, box.x2, box.y2], [57, 800, 573, 573]);
+                    same([box.x1, box.y1, box.x2, box.y2], [20, 555, 785, 555]);
                 });
 
                 test("applied position center", function() {
