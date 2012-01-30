@@ -310,11 +310,11 @@ var
                 createExpression: function(property, binding) {
                     return new MultipleBindingExpression(property, binding);
                 },
-                createProperty: function(path) {
+                createProperty: function(path, template) {
                     if (path == "value") {
                         return new MultipleProperty(this.target, path);
                     } else if (path == "source") {
-                        return new SourceProperty(this.target, path);
+                        return new SourceProperty(this.target, path, template);
                     }
                 }
             });
@@ -427,6 +427,12 @@ var
             });
 
             var SourceProperty = Property.extend({
+                init: function(target, path, template) {
+                    this.target = target;
+                    this.path = path;
+                    this.template = template;
+                },
+
                 set: function(value) {
                     var that = this;
 
@@ -438,13 +444,13 @@ var
                         }
                     });
 
-                    this.target.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), value);
+                    this.target.innerHTML = kendo.render(this.template, value);
                 },
 
                 add: function(index, items) {
                     var idx, length, clone = this.target.cloneNode();
 
-                    clone.innerHTML = kendo.render(kendo.template("<option>#:data#</option>"), items);
+                    clone.innerHTML = kendo.render(this.template, items);
 
                     for (idx = 0, length = items.length; idx < length; idx++) {
                         this.target.insertBefore(clone.children[idx], this.target.children[index]);
@@ -462,9 +468,9 @@ var
 
             var WidgetBindingTarget = BindingTarget.extend( {
                 createProperty: function(path) {
-                    path = {
-                        "value": "value"
-                    }[path];
+                    if (path == "source") {
+                        return new DataSourceWidgetProperty(this.target);
+                    }
 
                     return new WidgetProperty(this.target, path);
                 }
@@ -493,33 +499,55 @@ var
                 }
             });
 
+            var DataSourceWidgetProperty = Class.extend({
+                init: function(target) {
+                   this.target = target;
+                },
+
+                bind: function() {
+                },
+
+                set: function(value) {
+                    this.target.dataSource.data(value);
+                }
+            });
+
             function bind(element, source) {
                 var role = element.getAttribute("data-role");
                 var target;
 
                 if (role) {
-                    target = new WidgetBindingTarget(new kendo.ui.DropDownList(element));
+                    target = new WidgetBindingTarget(new kendo.ui.DropDownList(element, { dataSource:{} }));
                 } else {
                     target = element.nodeName.toLowerCase() === "select" ? new SelectBindingTarget(element) : new BindingTarget(element);
                 }
 
                 var template = element.getAttribute("data-template");
+                var dataSource = element.getAttribute("data-source");
+                var templateBinding;
 
                 if (template) {
                     var binding = new Binding(source, "");
 
                     template = kendo.template($("#" + template).html());
 
-                    target.setBinding("template", binding, template);
+                    if (!dataSource) {
+                        target.setBinding("template", binding, template);
+                    }
                 }
 
-                ["text", "html", "title", "value", "source"].forEach(function(path) {
+                if (dataSource) {
+                    var binding = new Binding(source, dataSource);
+                    target.setBinding("source", binding, template || kendo.template("<option>#:data#</option>"));
+                }
+
+                ["text", "html", "title", "value"].forEach(function(path) {
                     var sourcePath = element.getAttribute("data-" + path);
 
                     if (sourcePath){
                         var binding = new Binding(source, sourcePath);
 
-                        target.setBinding(path, binding);
+                        target.setBinding(path, binding , template);
                     }
                 });
             }
@@ -539,10 +567,7 @@ var
                 <option>three</option>
             </select>
 
-            <select data-role="dropdownlist" style="display:block" data-value="selectedValue">
-                <option>one</option>
-                <option>two</option>
-                <option>three</option>
+            <select data-role="dropdownlist" style="display:block" data-value="selectedValue" data-source="items">
             </select>
             DropDownList value is: <span id="selectedValue" data-text="selectedValue"></span>
             <select style="display:block" data-source="items"></select>
