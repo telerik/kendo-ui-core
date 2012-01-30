@@ -362,6 +362,14 @@
                     same([slot.x1, slot.x2], [0, chartBox.width()]);
                 });
 
+                test("reports range minimum of 0", function() {
+                    equals(categoryAxis.range().min, 0);
+                });
+
+                test("reports range maximum equal to category count", function() {
+                    equals(categoryAxis.range().max, 2);
+                });
+
                 // ------------------------------------------------------------
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
