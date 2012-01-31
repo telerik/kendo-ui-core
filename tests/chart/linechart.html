@@ -389,10 +389,10 @@
 
                 // ------------------------------------------------------------
                 module("Line Chart / Stack / Mixed Series", {
-                    plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
-                    plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
-
                     setup: function() {
+                        plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
+                        plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
+
                         setupLineChart(plotArea, {
                             series: [
                                 // Both axes should be on same axis.
