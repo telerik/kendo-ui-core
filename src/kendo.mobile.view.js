@@ -22,8 +22,7 @@
             }
 
             that.content = element.find(roleSelector("content"))
-                                .addClass("km-content")
-                                .kendoMobileScroller({useOnDesktop: true});
+                                .addClass("km-content");
 
             that.title = element.data(kendo.ns + "title");
 
@@ -33,6 +32,7 @@
             }
 
             kendo.mobile.enhance(element);
+            that.content.kendoMobileScroller({useOnDesktop: true});
 
             if (initCallback) {
                 window[initCallback].call(this);
