@@ -234,7 +234,7 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {Boolean} [title.visible] <false> The visibility of the title.
+         * @option {Boolean} [title.visible] <true> The visibility of the title.
          * @option {Number|Object} [title.margin] <5> The margin of the title.
          * _example
          * // sets the top, right, bottom and left margin to 3px.
@@ -463,6 +463,8 @@
          * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
          * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
          * @option {Object} [valueAxis.labels] Configures the axis labels.
+         * @option {String} [valueAxis.labels.color] The text color of the labels.
+         * @option {String} [valueAxis.labels.background] The background color of the labels.
          * @option {String} [valueAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
@@ -564,7 +566,7 @@
          * _example
          * //sets format of the labels
          * format: "{0:C}"
-         * @option {Array} [valueAxis.plotBands] The plot bands of value axis.
+         * @option {Array} [valueAxis.plotBands] The plot bands of the value axis.
          * The plot band fields:
          * <div class="details-list">
          *    <dl>
@@ -598,6 +600,115 @@
          *      }]
          *  }
          *  // ...
+         * @option {Object} [valueAxis.title] The title of the value axis.
+         * @option {String} [valueAxis.title.color] The text color of the title.
+         * @option {String} [valueAxis.title.background] The background color of the title.
+         * @option {String} [valueAxis.title.text] The text of the title.
+         * @option {String} [valueAxis.title.font] <"16px Arial,Helvetica,sans-serif">
+         * The font style of the title.
+         * @option {Boolean} [valueAxis.title.visible] <true> The visibility of the title.
+         * @option {Number|Object} [valueAxis.title.margin] <5> The margin of the title.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [valueAxis.title.padding] <0> The padding of the title.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [valueAxis.title.border] The border of the title.
+         * @option {Number} [valueAxis.title.border.width] <0> The width of the border.
+         * @option {String} [valueAxis.title.border.color] <"black"> The color of the border.
+         * @option {String} [valueAxis.title.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [valueAxis.title.rotation] <0> The rotation angle of the title.
+         * @option {String} [valueAxis.title.position] <"center"> The position of the title.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              top
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the top (work only with vertical axis)
+         *         </dd>
+         *         <dt>
+         *              bottom
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the bottom (work only with vertical axis)
+         *         </dd>
+         *         <dt>
+         *              left
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the left (work only with horizontal axis)
+         *         </dd>
+         *         <dt>
+         *              right
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the right (work only with horizontal axis)
+         *         </dd>
+         *         <dt>
+         *              center
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned in the center
+         *         </dd>
+         *    </dl>
+         * </div>
          *
          * @option {Object} [xAxis] The scatter charts X-axis configuration options.
          * See valueAxis for detailed members list.
@@ -659,6 +770,8 @@
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
          * @option {Boolean} [categoryAxis.line.visible] <true> The visibility of the lines.
          * @option {Object} [categoryAxis.labels] Configures the axis labels.
+         * @option {String} [categoryAxis.labels.color] The text color of the labels.
+         * @option {String} [categoryAxis.labels.background] The background color of the labels.
          * @option {String} [categoryAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
@@ -795,6 +908,115 @@
          *      }]
          *  }
          *  // ...
+         * @option {Object} [categoryAxis.title] The title of the category axis.
+         * @option {String} [categoryAxis.title.color] The text color of the title.
+         * @option {String} [categoryAxis.title.background] The background color of the title.
+         * @option {String} [categoryAxis.title.text] The text of the title.
+         * @option {String} [categoryAxis.title.font] <"16px Arial,Helvetica,sans-serif">
+         * The font style of the title.
+         * @option {Boolean} [categoryAxis.title.visible] <true> The visibility of the title.
+         * @option {Number|Object} [categoryAxis.title.margin] <5> The margin of the title.
+         * _example
+         * // sets the top, right, bottom and left margin to 3px.
+         * margin: 3
+         *
+         * // sets the top and left margin to 1px
+         * // margin right and bottom are with 0px (by default)
+         * margin: { top: 1, left: 1 }
+         * @option {Number|Object} [categoryAxis.title.padding] <0> The padding of the title.
+         * _example
+         * // sets the top, right, bottom and left padding to 3px.
+         * padding: 3
+         *
+         * // sets the top and left padding to 1px
+         * // padding right and bottom are with 0px (by default)
+         * padding: { top: 1, left: 1 }
+         * @option {Object} [categoryAxis.title.border] The border of the title.
+         * @option {Number} [categoryAxis.title.border.width] <0> The width of the border.
+         * @option {String} [categoryAxis.title.border.color] <"black"> The color of the border.
+         * @option {String} [categoryAxis.title.border.dashType] <"solid"> The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [categoryAxis.title.rotation] <0> The rotation angle of the title.
+         * @option {String} [categoryAxis.title.position] <"center"> The position of the title.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              top
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the top (work only with vertical axis)
+         *         </dd>
+         *         <dt>
+         *              bottom
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the bottom (work only with vertical axis)
+         *         </dd>
+         *         <dt>
+         *              left
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the left (work only with horizontal axis)
+         *         </dd>
+         *         <dt>
+         *              right
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned on the right (work only with horizontal axis)
+         *         </dd>
+         *         <dt>
+         *              center
+         *         </dt>
+         *         <dd>
+         *              The axis title is positioned in the center
+         *         </dd>
+         *    </dl>
+         * </div>
          *
          * @option {Object} [seriesDefaults] Default values for each series.
          * @option {Boolean} [seriesDefaults.stacked] <false>
@@ -802,6 +1024,8 @@
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
          * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
          * @option {Object} [seriesDefaults.labels] Configures the series data labels.
+         * @option {String} [seriesDefaults.labels.color] The text color of the labels.
+         * @option {String} [seriesDefaults.labels.background] The background color of the labels.
          * @option {String} [seriesDefaults.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {Boolean} [seriesDefaults.labels.visible] <false> The visibility of the labels.
@@ -1061,6 +1285,8 @@
          * @option {String} [series.type="bar".color] The series base color.
          * @option {Number} [series.type="bar".opacity] <1> The series opacity.
          * @option {Object} [series.type="bar".labels] Configures the series data labels.
+         * @option {String} [series.type="bar".labels.color] The text color of the labels.
+         * @option {String} [series.type="bar".labels.background] The background color of the labels.
          * @option {String} [series.type="bar".labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {String} [series.type="bar".labels.position] <"outsideEnd">
@@ -1310,6 +1536,8 @@
          * @option {String} [series.type="column".color] The series base color.
          * @option {Number} [series.type="column".opacity] <1> The series opacity.
          * @option {Object} [series.type="column".labels] Configures the series data labels.
+         * @option {String} [series.type="column".labels.color] The text color of the labels.
+         * @option {String} [series.type="column".labels.background] The background color of the labels.
          * @option {String} [series.type="column".labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
          * @option {String} [series.type="column".labels.position] <"outsideEnd">
@@ -1559,9 +1787,6 @@
          * @option {String} [series.type="line".width] <4> The line width of the line chart.
          * @option {String} [series.type="line".color] The series base color.
          * @option {Number} [series.type="line".opacity] <1> The series opacity.
-         * @option {Object} [series.type="line".labels] Configures the series data labels.
-         * @option {String} [series.type="line".labels.font] <"12px Arial,Helvetica,sans-serif">
-         * The font style of the labels.
          * @option {String} [series.type="line".missingValues] <"gap">
          * Configures the behavior for handling missing values in line series.
          * <div class="details-list">
@@ -1618,6 +1843,11 @@
          * @option {String} [series.type="line".markers.border.color] <"black"> The color of the border.
          * @option {String} [series.type="line".markers.background]
          * The background color of the current series markers.
+         * @option {Object} [series.type="line".labels] Configures the series data labels.
+         * @option {String} [series.type="line".labels.color] The text color of the labels.
+         * @option {String} [series.type="line".labels.background] The background color of the labels.
+         * @option {String} [series.type="line".labels.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the labels.
          * @option {String} [series.type="line".labels.position] <"above">
          * Defines the position of the line labels.
          * <div class="details-list">
@@ -1860,6 +2090,8 @@
          * @option {Number} [series.type="pie".padding] <60> The padding around the pie chart (equal on all sides).
          * @option {Number} [series.type="pie".opacity] <1> The series opacity.
          * @option {Object} [series.type="pie".labels] Configures the series data labels.
+         * @option {String} [series.type="pie".labels.color] The text color of the labels.
+         * @option {String} [series.type="pie".labels.background] The background color of the labels.
          * @option {String} [series.type="pie".labels.font] <"12px Arial, sans-serif">
          * The font style of the labels.
          * @option {Boolean} [series.type="pie".labels.visible] <false> The visibility of the labels.
@@ -2131,6 +2363,8 @@
          *  // ...
          * @option {Number} [series.type="scatter".opacity] <1> The series opacity.
          * @option {Object} [series.type="scatter".labels] Configures the series data labels.
+         * @option {String} [series.type="scatter".labels.color] The text color of the labels.
+         * @option {String} [series.type="scatter".labels.background] The background color of the labels.
          * @option {Object} [series.type="scatter".labels.border] The border of the labels.
          * @option {Number} [series.type="scatter".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="scatter".labels.border.color] <"black"> The color of the border.
@@ -2385,6 +2619,8 @@
          *  // ...
          * @option {Number} [series.type="scatterLine".opacity] <1> The series opacity.
          * @option {Object} [series.type="scatterLine".labels] Configures the series data labels.
+         * @option {String} [series.type="scatterLine".labels.color] The text color of the labels.
+         * @option {String} [series.type="scatterLine".labels.background] The background color of the labels.
          * @option {Object} [series.type="scatterLine".labels.border] The border of the labels.
          * @option {Number} [series.type="scatterLine".labels.border.width] <0> The width of the border.
          * @option {String} [series.type="scatterLine".labels.border.color] <"black"> The color of the border.
