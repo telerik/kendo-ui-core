@@ -699,13 +699,13 @@
          *              <code>"right"</code>
          *         </dt>
          *         <dd>
-         *              <code>"The axis title is positioned on the right (work only with horizontal axis).
+         *              "The axis title is positioned on the right (work only with horizontal axis).
          *         </dd>
          *         <dt>
          *             <code>"center"</code>
          *         </dt>
          *         <dd>
-         *              <code>"The axis title is positioned in the center.
+         *              "The axis title is positioned in the center.
          *         </dd>
          *    </dl>
          * </div>
