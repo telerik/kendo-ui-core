@@ -535,7 +535,7 @@
                     return !(($(this).data(PANE) || {}).collapsed);
                 }).last();
 
-                lastNonCollapsedPane.width(totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
+                lastNonCollapsedPane[sizingProperty](totalSize + lastNonCollapsedPane[0][sizingDomProperty]);
             }
 
             element.children()
