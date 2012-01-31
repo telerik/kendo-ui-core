@@ -30,6 +30,8 @@
                 var plotArea,
                     categoryAxis,
                     namedValueAxes,
+                    primaryValueAxis,
+                    secondaryValueAxis,
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
@@ -97,6 +99,8 @@
 
                     categoryAxis = plotArea.categoryAxis;
                     namedValueAxes = plotArea.namedValueAxes;
+                    primaryValueAxis = plotArea.namedValueAxes.primary;
+                    secondaryValueAxis = plotArea.namedValueAxes.secondary;
 
                     chartSeries = plotArea.charts[0];
                 }
@@ -111,7 +115,7 @@
                 });
 
                 test("appends primary value axis to children collection", function() {
-                    ok($.inArray(namedValueAxes.primary, plotArea.children) >= 0);
+                    ok($.inArray(primaryValueAxis, plotArea.children) >= 0);
                 });
 
                 test("appends category axis to children collection", function() {
@@ -120,7 +124,7 @@
 
                 test("aligns axes at default crossing values", function() {
                     var axisX = categoryAxis,
-                        axisY = namedValueAxes.primary;
+                        axisY = primaryValueAxis;
 
                     plotArea.reflow(chartBox);
 
@@ -131,7 +135,7 @@
 
                 test("aligns axises at non-default crossing values", function() {
                     var axisX = categoryAxis,
-                        axisY = namedValueAxes.primary;
+                        axisY = primaryValueAxis;
 
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
@@ -178,7 +182,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Axes / Additional value axis", {
+                module("Categorical PlotArea / Multiple Axes", {
                     setup: function() {
                         moduleSetup();
 
@@ -191,59 +195,137 @@
                 });
 
                 test("added to children collection", function() {
-                    ok($.inArray(namedValueAxes.secondary, plotArea.children) >= 0);
+                    ok($.inArray(secondaryValueAxis, plotArea.children) >= 0);
                 });
 
                 test("crosses category axis at default value", function() {
                     plotArea.reflow(chartBox);
 
-                    var valueAxis = namedValueAxes.primary,
-                        slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
-                        slotY = valueAxis.getSlot(valueAxis.options.axisCrossingValue);
+                    var slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
+                        slotY = primaryValueAxis.getSlot(primaryValueAxis.options.axisCrossingValue);
 
                     equals(slotX.y1, slotY.y1);
                 });
 
-                test("overlapping axes are shifted to the left", function() {
-                    var primary = namedValueAxes.primary,
-                        secondary = namedValueAxes.secondary,
-                        margin = secondary.options.margin;
+                test("overlapping axes are stacked to the left", function() {
+                    var margin = secondaryValueAxis.options.margin;
 
                     plotArea.reflow(chartBox);
 
-                    same([secondary.box.x2, secondary.box.y1],
-                         [primary.box.x1 - margin, primary.box.y1]
+                    same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
+                         [primaryValueAxis.box.x1 - margin, primaryValueAxis.box.y1]
                     );
                 });
 
-                test("overlapping axes are shifted to the right", function() {
-                    createPlotArea(columnSeriesData, {
-                        categoryAxis: {
-                            axisCrossingValue: 100
-                        },
-                        valueAxis: [{}, {
-                            name: "secondary"
-                        }]
-                    });
+                test("stacked axes on left are aligned", function() {
+                    plotArea.reflow(chartBox);
 
-                    var primary = namedValueAxes.primary,
-                        secondary = namedValueAxes.secondary,
-                        margin = secondary.options.margin;
+                    same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
+                         [primaryValueAxis.lineBox().y1, primaryValueAxis.lineBox().y2]
+                    );
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Multiple Axes / Stacked right", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(columnSeriesData, {
+                            categoryAxis: {
+                                axisCrossingValue: 100
+                            },
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are shifted to the right", function() {
+                    var margin = secondaryValueAxis.options.margin;
 
                     plotArea.reflow(chartBox);
 
-                    same([secondary.box.x1, secondary.box.y1],
-                         [primary.box.x2 + margin, primary.box.y1]
+                    same([secondaryValueAxis.box.x1, secondaryValueAxis.box.y1],
+                         [primaryValueAxis.box.x2 + margin, primaryValueAxis.box.y1]
+                    );
+                });
+
+                test("stacked axes on right are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
+                         [primaryValueAxis.lineBox().y1, primaryValueAxis.lineBox().y2]
                     );
                 });
 
                 test("plot area bounding box wraps axis", function() {
                     plotArea.reflow(chartBox);
 
-                    var axisBox = namedValueAxes.secondary.box;
+                    var axisBox = secondaryValueAxis.box;
                     ok(axisBox.x1 >= plotArea.box.x1 && axisBox.y1 >= plotArea.box.x1);
                 });
 
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Top", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(barSeriesData, {
+                            categoryAxis: {
+                                axisCrossingValue: 0
+                            },
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are shifted to the top", function() {
+                    var margin = secondaryValueAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryValueAxis.box.y2, primaryValueAxis.box.y1 - margin);
+                });
+
+                test("stacked axes on top are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
+                         [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
+                    );
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Bottom", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(barSeriesData, {
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are shifted to the bottom", function() {
+                    var margin = secondaryValueAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryValueAxis.box.y1, primaryValueAxis.box.y2 + margin);
+                });
+
+                test("stacked axes on bottom are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
+                         [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
+                    );
+                });
 
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Column series", {
@@ -255,7 +337,7 @@
                 });
 
                 test("value axis is vertical", function() {
-                    ok(namedValueAxes.primary.options.isVertical);
+                    ok(primaryValueAxis.options.isVertical);
                 });
 
                 test("category axis is horizontal", function() {
@@ -263,7 +345,7 @@
                 });
 
                 test("value axis crosses at first category", function() {
-                    equal(namedValueAxes.primary.options.axisCrossingValue, 0);
+                    equal(primaryValueAxis.options.axisCrossingValue, 0);
                 });
 
                 test("category axis crossing value can be changed", function() {
@@ -326,7 +408,7 @@
                 });
 
                 test("value axis is vertical", function() {
-                    ok(namedValueAxes.primary.options.isVertical);
+                    ok(primaryValueAxis.options.isVertical);
                 });
 
                 test("category axis is horizontal", function() {
@@ -347,7 +429,7 @@
                 });
 
                 test("value axis is horizontal", function() {
-                    ok(!namedValueAxes.primary.options.isVertical);
+                    ok(!primaryValueAxis.options.isVertical);
                 });
 
                 test("category axis is vertical", function() {
@@ -368,7 +450,7 @@
                 });
 
                 test("value axis is vertical", function() {
-                    ok(namedValueAxes.primary.options.isVertical);
+                    ok(primaryValueAxis.options.isVertical);
                 });
 
                 test("category axis is horizontal", function() {
@@ -389,7 +471,7 @@
                 });
 
                 test("value axis is horizontal", function() {
-                    ok(!namedValueAxes.primary.options.isVertical);
+                    ok(!primaryValueAxis.options.isVertical);
                 });
 
                 test("category axis is vertical", function() {
@@ -410,7 +492,7 @@
                 });
 
                 test("value axis is horizontal", function() {
-                    ok(!namedValueAxes.primary.options.isVertical);
+                    ok(!primaryValueAxis.options.isVertical);
                 });
 
                 test("category axis is vertical", function() {
