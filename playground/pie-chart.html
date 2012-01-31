@@ -21,119 +21,26 @@
         ];
 
         $(document).ready(function() {
-            $("#container").kendoChart({
-                theme: "silver",
-                legend: {
-                    position: "bottom",
-                    visible: true,
-                    border: {
-                        width: 1,
-                        color: "white"
-                    }
-                },
-                dataSource: data,
-                seriesDefaults: {
-                    connectors: {
-                        width: 4
-                    }
-                },
-                transitions: false,
-                series: [{
-                    type: "pie",
-                    name: "World",
-                    padding: 50,
-                    labels: {
-                        visible: true,
-                        position: "center",
-                        background: ""
-                    },
-                    tooltip: {
-                        color: "green",
-                        border: {
-                            width: 5
-                        }
-                    },
-                    data: [{
-                          value: 200,
-                          category: "Avg 2011"
-                      }, {
-                          value: 100,
-                          category: "Mar 20121111111"
-                      }, {
-                          value: 10,
-                          category: "Mar 2013"
-                      }, {
-                          value: 10,
-                          category: "Mar 2014"
-                      }, {
-                          value: 10,
-                          category: "Mar 2015"
-                      }, {
-                          value: 10,
-                          category: "Mar 2016"
-                      }, {
-                          value: 10,
-                          category: "Mar 2017"
-                      }, {
-                          value: 10,
-                          category: "Mar 20181111111"
-                      }, {
-                          value: 10,
-                          category: "Mar 2011111111111111111111111111111118"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 2111018"
-                      }, {
-                          value: 10,
-                          category: "Mar 20111118"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 20181111111"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018aaaaaaaaa111a"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }, {
-                          value: 10,
-                          category: "Mar 2018"
-                      }]
-                }],
-                chartArea: {
-                    border: {
-                        width: 1,
-                        color: "white"
-                    }
-                },
-                plotArea: {
-                    border: {
-                        width: 1,
-                        color: "white"
-                    }
-                },
-                tooltip: {
-                    visible: true
-                }
-            });
+          $("#container").kendoChart({
+               title: {
+                   text: "My Chart Title"
+               },
+               seriesDefaults: {
+                   tooltip: {
+                       visible: true,
+                       template: "#= category # - #= value #"
+                   }
+               },
+               series: [
+                   {
+                       name: "Series 1",
+                       data: [200, 450, 300, 125]
+                   }
+               ],
+               categoryAxis: {
+                   categories: [2000, 2001, 2002, 2003]
+               }
+          });
 /*
             $("#container1").kendoChart({
                 title: {
