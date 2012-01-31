@@ -199,6 +199,9 @@
                 "dataBound"
             ], options);
 
+
+            that.selectedIndex = -1;
+
             if (options.autoBind) {
                 that.dataSource.fetch();
             } else if (element.is(SELECT)) {
@@ -328,7 +331,7 @@
                 var that = this;
                 word = word.toLowerCase();
 
-                that.select(function(dataItem) {
+                that._select(function(dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
                         return (text + "").toLowerCase().indexOf(word) === 0;
@@ -355,35 +358,13 @@
         * });
         */
         select: function(li) {
-            var that = this,
-                element = that.element[0],
-                current = that._current,
-                data = that._data(),
-                value,
-                text,
-                idx;
+            var that = this;
 
             if (li === undefined) {
-                return current ? current.index() : -1;
-            }
-
-            li = that._get(li);
-
-            if (li && li[0] && !li.hasClass(SELECTED)) {
-                if (current) {
-                    current.removeClass(SELECTED);
-                }
-
-                idx = ui.List.inArray(li[0], that.ul[0]);
-                if (idx > -1) {
-                    data = data[idx];
-                    text = that._text(data);
-                    value = that._value(data);
-
-                    that.text(text);
-                    that._accessor(value != undefined ? value : text, idx);
-                    that.current(li.addClass(SELECTED));
-                }
+                return that.selectedIndex;
+            } else {
+                that._select(li);
+                that._old = that._accessor();
             }
         },
 
@@ -429,7 +410,6 @@
                 idx = that._index(value);
 
                 that.select(idx > -1 ? idx : 0);
-                that._old = that._accessor();
             } else {
                 return that._accessor();
             }
@@ -481,10 +461,10 @@
 
             if (key === keys.HOME) {
                 e.preventDefault();
-                that.select(ul.firstChild);
+                that._select(ul.firstChild);
             } else if (key === keys.END) {
                 e.preventDefault();
-                that.select(ul.lastChild);
+                that._select(ul.lastChild);
             }
         },
 
@@ -519,8 +499,6 @@
                 that.select(options.index);
             }
 
-            that._old = that.value();
-
             if (that._open) {
                 that.toggle(length);
             }
@@ -539,6 +517,36 @@
             }, that.options.delay);
 
             that.search(that._word);
+        },
+
+        _select: function(li) {
+            var that = this,
+                element = that.element[0],
+                current = that._current,
+                data = that._data(),
+                value,
+                text,
+                idx;
+
+            li = that._get(li);
+
+            if (li && li[0] && !li.hasClass(SELECTED)) {
+                if (current) {
+                    current.removeClass(SELECTED);
+                }
+
+                idx = ui.List.inArray(li[0], that.ul[0]);
+                if (idx > -1) {
+                    data = data[idx];
+                    text = that._text(data);
+                    value = that._value(data);
+                    that.selectedIndex = idx;
+
+                    that.text(text);
+                    that._accessor(value != undefined ? value : text, idx);
+                    that.current(li.addClass(SELECTED));
+                }
+            }
         },
 
         _span: function() {

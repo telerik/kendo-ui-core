@@ -68,8 +68,6 @@
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that._scroll(candidate[0]);
-                } else {
-                    that._selected = candidate;
                 }
 
                 that._current = candidate;
@@ -150,7 +148,7 @@
         _focus: function(li) {
             var that = this;
 
-            that.select(li);
+            that._select(li);
             that._blur();
 
             if (that._focused[0] !== document.activeElement) {
@@ -372,21 +370,20 @@
 
         _dataSource: function() {
             var that = this,
-                selected,
                 element = that.element,
                 options = that.options,
-                dataSource = options.dataSource || {};
+                dataSource = options.dataSource || {},
+                idx;
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            if (that.element.is(SELECT)) {
-                selected = element.children(":selected");
-                if (selected[0]) {
-                    options.index = selected.index();
+            if (element.is(SELECT)) {
+                idx = element[0].selectedIndex;
+                if (idx > -1) {
+                    options.index = idx;
                 }
 
                 dataSource.select = element;
-
                 dataSource.fields = [{ field: options.dataTextField },
                                      { field: options.dataValueField }];
             }
@@ -462,10 +459,10 @@
                 if (e.altKey) {
                     that.toggle(down);
                 } else if (down) {
-                    that.select(current ? current[0].nextSibling : ul.firstChild);
+                    that._select(current ? current[0].nextSibling : ul.firstChild);
                     e.preventDefault();
                 } else {
-                    that.select(current ? current[0].previousSibling : ul.lastChild);
+                    that._select(current ? current[0].previousSibling : ul.lastChild);
                     e.preventDefault();
                 }
                 pressed = true;

@@ -166,16 +166,22 @@
 
             test("if no options, do not set index", function() {
                 var select = $("<select/>");
-                    var dropdownlist = new DropDownList(select, {index: 2});
+                var dropdownlist = new DropDownList(select, {index: 2});
 
-                    equal(dropdownlist.options.index, 2);
-                });
+                equal(dropdownlist.options.index, 2);
+            });
 
             test("selected index is get from select element", function() {
-                var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
-                dropdownlist = new DropDownList(select);
+                var select = $("<select><option value='1'>Chai</option><option value='2' selected='selected'>Chai</option></select>"),
+                    dropdownlist = new DropDownList(select);
 
+                equal(select[0].selectedIndex, 1);
                 equal(dropdownlist.options.index, 1);
+            });
+
+            test("set selectedIndex when autoBind:false", function() {
+                var dropdownlist = input.kendoDropDownList({ autoBind: false }).data("kendoDropDownList");
+                equal(dropdownlist.selectedIndex, -1);
             });
 
             test("retrived data from OPTIONS does not override options.dataSource", function() {
@@ -399,9 +405,17 @@
                     dataSource: ["foo", "bar"]
                 });
 
-
                 equal(dropdownlist.text(), "foo");
                 equal(dropdownlist.value(), "foo");
+            });
+
+            test("persist selectedIndex", function() {
+                dropdownlist = new DropDownList(input, {
+                    dataSource: ["foo", "bar"]
+                });
+
+                ok(dropdownlist.current()[0]);
+                equal(dropdownlist.selectedIndex, 0);
             });
 
             asyncTest("form reset support", function() {
