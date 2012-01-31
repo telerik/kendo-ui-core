@@ -474,6 +474,26 @@
                     equals(categoryAxis.range().max, 2);
                 });
 
+                test("from value can't be lower than 0", function() {
+                    var slot = categoryAxis.getSlot(-1);
+                    equals(slot.x1, 0);
+                });
+
+                test("caps from value to categories count", function() {
+                    var slot = categoryAxis.getSlot(1000);
+                    equals(slot.x1, chartBox.width());
+                });
+
+                test("to value equals from value when not set", function() {
+                    var slot = categoryAxis.getSlot(1000);
+                    equals(slot.x2, chartBox.width());
+                });
+
+                test("value equals from value when smaller", function() {
+                    var slot = categoryAxis.getSlot(2, 1);
+                    equals(slot.x2, chartBox.width());
+                });
+
                 // ------------------------------------------------------------
                 module("Category Axis / Vertical / Slots", {
                     setup: function() {
