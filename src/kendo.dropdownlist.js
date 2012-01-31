@@ -379,6 +379,7 @@
                     data = data[idx];
                     text = that._text(data);
                     value = that._value(data);
+                    that.selectedIndex = idx;
 
                     that.text(text);
                     that._accessor(value != undefined ? value : text, idx);

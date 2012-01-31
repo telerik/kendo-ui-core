@@ -59,20 +59,20 @@
                equal(dropdownlist._old, 1);
            });
 
-            test("value method should select item with 0 value", function() {
-                dropdownlist = new DropDownList(input, {
-                    dataTextField: "text",
-                    dataValueField: "value",
-                    dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
-                });
+           test("value method should select item with 0 value", function() {
+               dropdownlist = new DropDownList(input, {
+                   dataTextField: "text",
+                   dataValueField: "value",
+                   dataSource: [{text: "foo", value: 1}, {text:2, value:0}]
+               });
 
-                dropdownlist.value(0);
+               dropdownlist.value(0);
 
-                ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
+               ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
 
-                equal(dropdownlist.value(), "0");
-                equal(dropdownlist.text(), 2);
-                equal(dropdownlist._old, 0);
+               equal(dropdownlist.value(), "0");
+               equal(dropdownlist.text(), 2);
+               equal(dropdownlist._old, 0);
            });
 
            test("value(value) should call _accessor", function() {
@@ -81,15 +81,22 @@
                dropdownlist.value(2);
 
                equal(dropdownlist.calls("_accessor"), 2); //call select and set _old value
-            });
+           });
 
-            test("value() should call _accessor", function() {
-                stub(dropdownlist, "_accessor");
+           test("value() should call _accessor", function() {
+               stub(dropdownlist, "_accessor");
 
-                dropdownlist.value();
+               dropdownlist.value();
 
-                equal(dropdownlist.calls("_accessor"), 1);
-            });
+               equal(dropdownlist.calls("_accessor"), 1);
+           });
+
+           test("value should update the selectedIndex", function() {
+                dropdownlist.value("2");
+
+                equal(dropdownlist.selectedIndex, 1);
+                equal(dropdownlist.current().index(), 1);
+           });
 
            test("select should select item by predicate", function() {
                 dropdownlist.select(function(item) {
