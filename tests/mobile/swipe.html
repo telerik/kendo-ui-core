@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.swipe.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -16,14 +17,16 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <ul id="log"></ul>
+        <div id="qunit-fixture">test markup, will be hidden</div>
 
         <script>
             var swipe,
                 Swipe = kendo.mobile.Swipe,
                 element;
 
-            function triggerEvent(type, e) {
-                element.trigger($.Event(type, e));
+            function triggerEvent(type, e, el) {
+                el = el || element;
+                el.trigger($.Event(type, e));
             }
 
             function triggerTouchEvent(type, e) {
@@ -36,27 +39,39 @@
 
             module("mobile swipe", {
                 setup: function() {
-                    element = $("<div />");
+                    element = $('<div id="outer"><div id="inner"></div></div>');
+                    $("#qunit-fixture").empty().append(element);
                     swipe = new kendo.mobile.Swipe(element);
                 }
             });
 
-            test("raises start on mousedown", 2, function(){
+            test("raises start on first mouse move", 2, function(){
                 swipe.bind("start", function(e) {
-                    equal(e.x.location, 10);
-                    equal(e.y.location, 20);
+                    equal(e.x.location, 15);
+                    equal(e.y.location, 25);
                 });
 
                 triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 15, pageY: 25});
             });
 
-            test("raises start on touchstart", 2, function(){
+            test("raises tap on tap", 1, function(){
+                swipe.bind("tap", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup");
+            });
+
+            test("raises start on first touchmove", 2, function(){
                 swipe.bind("start", function(e) {
-                    equal(e.x.location, 10);
-                    equal(e.y.location, 20);
+                    equal(e.x.location, 15);
+                    equal(e.y.location, 25);
                 });
 
                 triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
+                triggerTouchEvent("touchmove", [{pageX: 15, pageY: 25}]);
             });
 
             test("raises move on touchmove", 2, function(){
@@ -81,7 +96,7 @@
 
             test("does not track unpressed mousemove", 0, function(){
                 swipe.bind("move", function(e) {
-                    ok(true);
+                    ok(false);
                 });
 
                 triggerEvent("mousemove", {pageX: 20, pageY: 40});
@@ -125,7 +140,6 @@
 
 
             asyncTest("resets velocity on direction change", 2, function(){
-
                 swipe.bind("end", function(e) {
                     start();
                     ok(e.x.velocity > 0);

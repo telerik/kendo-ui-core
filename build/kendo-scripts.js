@@ -71,6 +71,7 @@ var suiteScripts = {
         "kendo.data.js",
         "kendo.history.js",
         "kendo.mobile.core.js",
+        "kendo.mobile.swipe.js",
         "kendo.mobile.view.js",
         "kendo.mobile.application.js",
         "kendo.mobile.button.js",
