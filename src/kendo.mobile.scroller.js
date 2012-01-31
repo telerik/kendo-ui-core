@@ -116,10 +116,16 @@
                 boundary = that.boundary;
                 boundarySize = boundary.size,
                 scrollMove = that.scrollMove,
-                position = scrollMove[axis],
                 sizeRatio = boundarySize / boundary.total,
-                position = Math.max(0, -scrollMove[axis] * sizeRatio),
-                size = Math.round(Math.min(boundarySize * sizeRatio, boundarySize - position));
+                position = Math.round(-scrollMove[axis] * sizeRatio),
+                size = Math.round(boundarySize * sizeRatio);
+
+                if (position + size > boundarySize) {
+                    size = boundarySize - position;
+                } else if (position < 0) {
+                    size += position;
+                    position = 0;
+                }
 
             if (that.elementSize != size) {
                 that.element.css(that.size, size + "px");
