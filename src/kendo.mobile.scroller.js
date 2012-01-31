@@ -11,7 +11,7 @@
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
-        OUT_OF_BOUNDS_FRICTION = 0.80,
+        OUT_OF_BOUNDS_FRICTION = 0.70,
         CHANGE = "change";
 
     var DragInertia = Animation.extend({

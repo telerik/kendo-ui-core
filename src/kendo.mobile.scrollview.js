@@ -126,8 +126,8 @@
         options: {
             name: "ScrollView",
             duration: 300,
-            velocityThreshold: 30,
-            bounceVelocityThreshold: 60
+            velocityThreshold: 20,
+            bounceVelocityThreshold: 40
         },
 
         viewShow: function(view) {
