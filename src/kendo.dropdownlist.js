@@ -328,7 +328,7 @@
                 var that = this;
                 word = word.toLowerCase();
 
-                that.select(function(dataItem) {
+                that._select(function(dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
                         return (text + "").toLowerCase().indexOf(word) === 0;
@@ -355,6 +355,17 @@
         * });
         */
         select: function(li) {
+            var that = this;
+
+            if (li === undefined) {
+                return that.selectedIndex;
+            } else {
+                that._select(li);
+                that._old = that._accessor();
+            }
+        },
+
+        _select: function(li) {
             var that = this,
                 element = that.element[0],
                 current = that._current,
@@ -362,10 +373,6 @@
                 value,
                 text,
                 idx;
-
-            if (li === undefined) {
-                return current ? current.index() : -1;
-            }
 
             li = that._get(li);
 
@@ -430,7 +437,6 @@
                 idx = that._index(value);
 
                 that.select(idx > -1 ? idx : 0);
-                that._old = that._accessor();
             } else {
                 return that._accessor();
             }
@@ -482,10 +488,10 @@
 
             if (key === keys.HOME) {
                 e.preventDefault();
-                that.select(ul.firstChild);
+                that._select(ul.firstChild);
             } else if (key === keys.END) {
                 e.preventDefault();
-                that.select(ul.lastChild);
+                that._select(ul.lastChild);
             }
         },
 
@@ -519,8 +525,6 @@
             } else {
                 that.select(options.index);
             }
-
-            that._old = that.value();
 
             if (that._open) {
                 that.toggle(length);
