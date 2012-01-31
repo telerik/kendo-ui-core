@@ -279,17 +279,20 @@
             }
         },
         inArray: function(node, parentNode) {
-            var idx = -1;
+            var idx, siblings, length;
             if (!node || node.parentNode !== parentNode) {
-                return idx;
+                return -1;
             }
 
-            idx = 0;
-            while (node = node.previousSibling) {
-                idx++;
+            siblings = parentNode.children;
+
+            for (idx = 0, length = siblings.length; idx < length; idx++) {
+                if (node === siblings[idx]) {
+                    return idx;
+                }
             }
 
-            return idx;
+            return -1;
         }
     });
 
@@ -437,7 +440,7 @@
                     return $();
                 }
 
-                li = $(that.ul[0].childNodes[li]);
+                li = $(that.ul[0].children[li]);
             }
 
             if (li && li.nodeType) {
