@@ -428,6 +428,20 @@
 
                 equal($.trim(dom.text()), "boobar");
             });
+
+            test("checked binding removing the item unchecks the checkbox", function() {
+                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItems: ["foo"]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.selectedItems.splice(0,1);
+
+                ok(!dom.is(":checked"));
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
