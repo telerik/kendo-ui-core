@@ -4168,8 +4168,8 @@
 
             axis.reflow(
                 axis.box.translate(
-                    isVertical ? targetSlot.x1 - slot.x1 : 0,
-                    isVertical ? 0 : targetSlot.y1 - slot.y1
+                    targetSlot.x1 - slot.x1,
+                    targetSlot.y1 - slot.y1
                 )
             );
         },
@@ -4180,32 +4180,64 @@
                 yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
+                xAnchorRange = xAnchor.range(),
+                yAnchorRange = yAnchor.range(),
+                leftAnchor,
+                rightAnchor,
+                topAnchor,
+                bottomAnchor,
                 axis,
                 axisCrossings,
                 i;
-
-            // distribute axes
-            var xAnchorLeftStackOffset = 0,
-                xAnchorRightStackOffset = 0;
 
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                if (xAnchorCrossings[i] <= xAnchor.range().min) {
-                    axis.reflow(axis.box.translate(xAnchorLeftStackOffset, 0))
-                    xAnchorLeftStackOffset -= axis.box.width() + axis.options.margin;
+                if (xAnchorCrossings[i] <= xAnchorRange.min) {
+                    if (leftAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(leftAnchor.box, LEFT)
+                            .translate(-axis.options.margin, 0)
+                        );
+                    }
+                    leftAnchor = axis;
                 }
 
-                if (xAnchorCrossings[i] >= xAnchor.range().max) {
-                    axis.reflow(axis.box.translate(xAnchorRightStackOffset, 0))
-                    xAnchorRightStackOffset += axis.box.width() + axis.options.margin;
+                if (xAnchorCrossings[i] >= xAnchorRange.max) {
+                    if (rightAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(rightAnchor.box, RIGHT)
+                            .translate(axis.options.margin, 0)
+                        );
+                    }
+                    rightAnchor = axis;
                 }
             }
 
             for (i = 0; i < xAxes.length; i++) {
                 axis = xAxes[i];
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+
+                if (yAnchorCrossings[i] <= yAnchorRange.min) {
+                    if (topAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(topAnchor.box, TOP)
+                            .translate(0, -axis.options.margin)
+                        );
+                    }
+                    topAnchor = axis;
+                }
+
+                if (yAnchorCrossings[i] >= yAnchorRange.max) {
+                    if (bottomAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(bottomAnchor.box, BOTTOM)
+                            .translate(0, axis.options.margin)
+                        );
+                    }
+                    bottomAnchor = axis;
+                }
             }
         },
 
@@ -4227,22 +4259,48 @@
             var plotArea = this,
                 box = plotArea.box,
                 axisBox = plotArea.axisBox(),
+                lineBox,
                 overflowY = axisBox.height() - box.height(),
                 overflowX = axisBox.width() - box.width(),
+                minAxisWidth = MAX_VALUE,
+                minAxisHeight = MAX_VALUE,
                 axes = plotArea.axes,
                 currentAxis,
                 isVertical,
                 i,
                 length = axes.length;
 
+            // Shrink all axes so they don't overflow out of the bounding box
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
-                isVertical  = currentAxis.options.isVertical;
+                isVertical = currentAxis.options.isVertical;
 
                 currentAxis.reflow(
                     currentAxis.box.shrink(
                         isVertical ? 0 : overflowX,
-                        isVertical ? overflowY : 0)
+                        isVertical ? overflowY : 0
+                    )
+                );
+
+                lineBox = currentAxis.lineBox();
+                if (isVertical) {
+                    minAxisHeight = math.min(lineBox.height(), minAxisHeight);
+                } else {
+                    minAxisWidth = math.min(lineBox.width(), minAxisWidth);
+                }
+            }
+
+            // Make all axis lines equal in width/height
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+                isVertical = currentAxis.options.isVertical;
+                lineBox = currentAxis.lineBox();
+
+                currentAxis.reflow(
+                    currentAxis.box.shrink(
+                        isVertical ? 0 : lineBox.width() - minAxisWidth,
+                        isVertical ? lineBox.height() - minAxisHeight : 0
+                    )
                 );
             }
         },
