@@ -4,18 +4,22 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    dom = kendo.ui.Editor.Dom;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    Command = Editor.Command,
+    normalize = dom.normalize,
+    RangeUtils = Editor.RangeUtils;
 
 var ParagraphCommand = Command.extend({
     init: function(options) {
         var cmd = this;
-        this.options = options;
+        cmd.options = options;
         Command.fn.init.call(cmd, options);
     },
 
     exec: function () {
         var range = this.getRange(),
-            document = documentFromRange(range),
+            document = RangeUtils.documentFromRange(range),
             parent, previous, next,
             emptyParagraphContent = $.browser.msie ? '' : '<br _moz_dirty="" />',
             paragraph, marker, li, heading, rng,
@@ -40,11 +44,11 @@ var ParagraphCommand = Command.extend({
             rng.selectNode(li);
             
             // hitting 'enter' in empty li
-            if (textNodes(rng).length == 0) {
+            if (RangeUtils.textNodes(rng).length == 0) {
                 paragraph = dom.create(document, 'p');
 
                 if (li.nextSibling) {
-                    split(rng, li.parentNode);
+                    RangeUtils.split(rng, li.parentNode);
                 }
 
                 dom.insertAfter(paragraph, li.parentNode);
@@ -70,7 +74,7 @@ var ParagraphCommand = Command.extend({
 
             parent = dom.parentOfType(marker, [li ? 'li' : heading ? dom.name(heading) : 'p']);
 
-            split(range, parent, shouldTrim);
+            RangeUtils.split(range, parent, shouldTrim);
 
             previous = parent.previousSibling;
 
@@ -91,7 +95,7 @@ var ParagraphCommand = Command.extend({
                     dom.remove(node.firstChild);
                 }
 
-                if (isDataNode(node) && node.nodeValue == '') {
+                if (dom.isDataNode(node) && node.nodeValue == '') {
                     node = node.parentNode;
                 }
 
@@ -119,7 +123,7 @@ var ParagraphCommand = Command.extend({
 
         dom.scrollTo(next);
 
-        selectRange(range);
+        RangeUtils.selectRange(range);
     }
 
 });
@@ -127,14 +131,14 @@ var ParagraphCommand = Command.extend({
 var NewLineCommand = Command.extend({
     init: function(options) {
         var cmd = this;
-        this.options = options;
+        cmd.options = options;
         Command.fn.init.call(cmd, options);
     },
 
     exec: function () {
         var range = this.getRange();
         range.deleteContents();
-        var br = dom.create(documentFromRange(range), 'br');
+        var br = dom.create(RangeUtils.documentFromRange(range), 'br');
         range.insertNode(br);
         normalize(br.parentNode);
         
@@ -146,7 +150,7 @@ var NewLineCommand = Command.extend({
         }
         range.setStartAfter(br);
         range.collapse(true);
-        selectRange(range);
+        RangeUtils.selectRange(range);
     }
 });
 

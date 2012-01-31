@@ -1,212 +1,220 @@
 (function($) {
 
     // Imports ================================================================
-    var doc = document,
-        kendo = window.kendo,
+    var kendo = window.kendo,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
-        DataSource = kendo.data.DataSource,
-        baseTemplate = kendo.template,
-        format = kendo.format,
-        map = $.map,
-        proxy = $.proxy,
-        getter = kendo.getter,
         extend = $.extend,
         deepExtend = kendo.deepExtend;
 
     // static functions =======================================================
 
-    function createContentElement($textarea, stylesheets) {
-        $textarea.hide();
-        var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
-                        .css('display', '')
-                        .addClass("t-content")
-                        .insertBefore($textarea)[0];
+    var EditorUtils = {
+        selectionChanged: function(editor) {
+            editor.trigger('selectionChange', {});
+        },
 
-        var window = iframe.contentWindow || iframe;
-        var document = window.document || iframe.contentDocument;
+        focusable: ".t-colorpicker,a.t-tool-icon:not(.t-state-disabled),.t-selectbox, .t-combobox .t-input",
+
+        createContentElement: function($textarea, stylesheets) {
+            $textarea.hide();
+            var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
+                            .css('display', '')
+                            .addClass("t-content")
+                            .insertBefore($textarea)[0];
+
+            var window = iframe.contentWindow || iframe;
+            var document = window.document || iframe.contentDocument;
     
-        var html = $textarea.val()
-                    // <img>\s+\w+ creates invalid nodes after cut in IE
-                    .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, '$1')
-                    // indented HTML introduces problematic ranges in IE
-                    .replace(/[\r\n\v\f\t ]+/ig, ' ');
+            var html = $textarea.val()
+                        // <img>\s+\w+ creates invalid nodes after cut in IE
+                        .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, '$1')
+                        // indented HTML introduces problematic ranges in IE
+                        .replace(/[\r\n\v\f\t ]+/ig, ' ');
 
-        if (!html.length && $.browser.mozilla)
-            html = '<br _moz_dirty="true" />';
+            if (!html.length && $.browser.mozilla)
+                html = '<br _moz_dirty="true" />';
 
-        document.designMode = 'On';
-        document.open();
-        document.write(
-            new $t.stringBuilder()
-                .cat('<!DOCTYPE html><html><head>')
-                .cat('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />')
-                .cat('<style type="text/css">')
-                    .cat('html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}')
-                    .cat('html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;')
-                        .catIf('direction:rtl;', $textarea.closest('.t-rtl').length)
-                    .cat('}')
-                    .cat('h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}')
-                    .cat('p{margin:0 0 1em;padding:0 .2em}.t-marker{display:none;}.t-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}')
-                    .cat('ul,ol{padding-left:2.5em}')
-                    .cat('a{color:#00a}')
-                    .cat('code{font-size:1.23em}')
-                .cat('</style>')
-                .cat($.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join(''))
-                .cat('</head><body spellcheck="false">')
-                .cat(html)
-                .cat('</body></html>')
-            .string());
+            document.designMode = 'On';
+            document.open();
+            document.write(
+                new $t.stringBuilder()
+                    .cat('<!DOCTYPE html><html><head>')
+                    .cat('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />')
+                    .cat('<style type="text/css">')
+                        .cat('html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}')
+                        .cat('html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;')
+                            .catIf('direction:rtl;', $textarea.closest('.t-rtl').length)
+                        .cat('}')
+                        .cat('h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}')
+                        .cat('p{margin:0 0 1em;padding:0 .2em}.t-marker{display:none;}.t-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}')
+                        .cat('ul,ol{padding-left:2.5em}')
+                        .cat('a{color:#00a}')
+                        .cat('code{font-size:1.23em}')
+                    .cat('</style>')
+                    .cat($.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join(''))
+                    .cat('</head><body spellcheck="false">')
+                    .cat(html)
+                    .cat('</body></html>')
+                .string());
         
-        document.close();
+            document.close();
 
-        return window;
-    }
+            return window;
+        },
 
-    function selectionChanged(editor) {
-        $t.trigger(editor.element, 'selectionChange');
-    }
+        initializeContentElement: function(editor) {
+            var isFirstKeyDown = true;
 
-    var focusable = ".t-colorpicker,a.t-tool-icon:not(.t-state-disabled),.t-selectbox, .t-combobox .t-input";
+            editor.window = this.createContentElement($(editor.textarea), editor.stylesheets);
+            editor.document = editor.window.contentDocument || editor.window.document;
+            editor.body = editor.document.body;
 
-    function initializeContentElement(editor) {
-        var isFirstKeyDown = true;
-
-        editor.window = createContentElement($(editor.textarea), editor.stylesheets);
-        editor.document = editor.window.contentDocument || editor.window.document;
-        editor.body = editor.document.body;
-
-        $(editor.document)
-            .bind({
-                keydown: function (e) {
-                    if (e.keyCode === 121) {
-                        //Using the timeout to avoid the default IE menu when F10 is pressed
-                        setTimeout(function() {
-                            var tabIndex = $(editor.element).attr("tabIndex");
+            $(editor.document)
+                .bind({
+                    keydown: function (e) {
+                        if (e.keyCode === 121) {
+                            //Using the timeout to avoid the default IE menu when F10 is pressed
+                            setTimeout(function() {
+                                var tabIndex = $(editor.element).attr("tabIndex");
     
-                            //Chrome can't focus something which has already been focused
-                            $(editor.element).attr("tabIndex", tabIndex || 0).focus().find(focusable).first().focus();
+                                //Chrome can't focus something which has already been focused
+                                $(editor.element).attr("tabIndex", tabIndex || 0).focus().find(focusable).first().focus();
     
-                            if (!tabIndex && tabIndex !== 0) {
-                               $(editor.element).removeAttr("tabIndex"); 
-                            } 
+                                if (!tabIndex && tabIndex !== 0) {
+                                   $(editor.element).removeAttr("tabIndex"); 
+                                } 
 
-                        }, 100);
-                        e.preventDefault();
-                        return;
-                    }
-                    var toolName = editor.keyboard.toolFromShortcut(editor.tools, e);
-
-                    if (toolName) {
-                        e.preventDefault();
-                        if (!/undo|redo/.test(toolName)) {
-                            editor.keyboard.endTyping(true);
+                            }, 100);
+                            e.preventDefault();
+                            return;
                         }
-                        editor.exec(toolName);
-                        return false;
-                    }
+                        var toolName = editor.keyboard.toolFromShortcut(editor.tools, e);
 
-                    if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
-                        if (isFirstKeyDown) {
-                            isFirstKeyDown = false;
-                        } else {
-                            var range = editor.getRange();
-                            editor.pendingFormats.apply(range);
-                            editor.selectRange(range);
-                        } 
-                    }
+                        if (toolName) {
+                            e.preventDefault();
+                            if (!/undo|redo/.test(toolName)) {
+                                editor.keyboard.endTyping(true);
+                            }
+                            editor.exec(toolName);
+                            return false;
+                        }
 
-                    editor.keyboard.clearTimeout();
+                        if (editor.keyboard.isTypingKey(e) && editor.pendingFormats.hasPending()) {
+                            if (isFirstKeyDown) {
+                                isFirstKeyDown = false;
+                            } else {
+                                var range = editor.getRange();
+                                editor.pendingFormats.apply(range);
+                                editor.selectRange(range);
+                            } 
+                        }
 
-                    editor.keyboard.keydown(e);
-                },
-                keyup: function (e) {
-                    var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
+                        editor.keyboard.clearTimeout();
 
-                    if ($.browser.mozilla && e.keyCode == 8) {
-                        fixBackspace(editor, e);
-                    }
+                        editor.keyboard.keydown(e);
+                    },
+                    keyup: function (e) {
+                        var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
+
+                        if ($.browser.mozilla && e.keyCode == 8) {
+                            fixBackspace(editor, e);
+                        }
                 
-                    if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
+                        if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
+                            editor.pendingFormats.clear();
+                            selectionChanged(editor);
+                        }
+                
+                        if (editor.keyboard.isTypingKey(e)) {
+                            if (editor.pendingFormats.hasPending()) {
+                                var range = editor.getRange();
+                                editor.pendingFormats.apply(range);
+                                editor.selectRange(range);
+                            }
+                        } else {
+                            isFirstKeyDown = true;
+                        }
+
+                        editor.keyboard.keyup(e);
+                    },
+                    mousedown: function(e) {
                         editor.pendingFormats.clear();
+
+                        var target = $(e.target);
+
+                        if (!$.browser.gecko && e.which == 2 && target.is('a[href]'))
+                        window.open(target.attr('href'), '_new');
+                    },
+                    mouseup: function () {
                         selectionChanged(editor);
                     }
-                
-                    if (editor.keyboard.isTypingKey(e)) {
-                        if (editor.pendingFormats.hasPending()) {
-                            var range = editor.getRange();
-                            editor.pendingFormats.apply(range);
-                            editor.selectRange(range);
-                        }
-                    } else {
-                        isFirstKeyDown = true;
+                });
+
+            $(editor.window)
+                .bind('blur', function () {
+                    var old = editor.textarea.value,
+                    value = editor.encodedValue();
+
+                    editor.update(value);
+
+                    if (value != old) {
+                        $t.trigger(editor.element, 'change');
                     }
-
-                    editor.keyboard.keyup(e);
-                },
-                mousedown: function(e) {
-                    editor.pendingFormats.clear();
-
-                    var target = $(e.target);
-
-                    if (!$.browser.gecko && e.which == 2 && target.is('a[href]'))
-                    window.open(target.attr('href'), '_new');
-                },
-                mouseup: function () {
-                    selectionChanged(editor);
-                }
-            });
-
-        $(editor.window)
-            .bind('blur', function () {
-                var old = editor.textarea.value,
-                value = editor.encodedValue();
-
-                editor.update(value);
-
-                if (value != old) {
-                    $t.trigger(editor.element, 'change');
-                }
-            });
+                });
     
-        $(editor.body)
-            .bind('cut paste', function (e) {
-                  editor.clipboard['on' + e.type](e);
-              });
-    }
+            $(editor.body)
+                .bind('cut paste', function (e) {
+                      editor.clipboard['on' + e.type](e);
+                  });
+        },
 
-    function fixBackspace(editor, e) {
+        fixBackspace: function(editor, e) {
 
-        var range = editor.getRange(),
-            startContainer = range.startContainer;
+            var range = editor.getRange(),
+                startContainer = range.startContainer;
 
-	    if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
-        || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, 'br'))))
-            return;
+	        if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
+            || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, 'br'))))
+                return;
 			
-	    var previousBlock = startContainer.previousSibling;
+	        var previousBlock = startContainer.previousSibling;
 
-	    while (previousBlock && !dom.isBlock(previousBlock))
-            previousBlock = previousBlock.previousSibling;
+	        while (previousBlock && !dom.isBlock(previousBlock))
+                previousBlock = previousBlock.previousSibling;
 
-	    if (!previousBlock)
-            return;
+	        if (!previousBlock)
+                return;
 
-	    var walker = editor.document.createTreeWalker(previousBlock, NodeFilter.SHOW_TEXT, null, false);
+	        var walker = editor.document.createTreeWalker(previousBlock, NodeFilter.SHOW_TEXT, null, false);
 
-        var textNode;
+            var textNode;
 
-	    while (textNode = walker.nextNode())
-		    previousBlock = textNode;
+	        while (textNode = walker.nextNode())
+		        previousBlock = textNode;
 
-	    range.setStart(previousBlock, isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
-	    range.collapse(true);
-	    selectRange(range);
+	        range.setStart(previousBlock, dom.isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
+	        range.collapse(true);
+	        Editor.RangeUtils.selectRange(range);
 
-	    dom.remove(startContainer);
+	        dom.remove(startContainer);
 
-        e.preventDefault();
-    }
+            e.preventDefault();
+        },
+
+        formatByName: function(name, format) {
+            for (var i = 0; i < format.length; i++)
+                if ($.inArray(name, format[i].tags) >= 0)
+                    return format[i];
+        }
+
+    };
+    
+    var selectionChanged = EditorUtils.selectionChanged,
+        focusable = EditorUtils.focusable,
+        createContentElement = EditorUtils.createContentElement,
+        initializeContentElement = EditorUtils.initializeContentElement,
+        fixBackspace = EditorUtils.fixBackspace;
 
 
     // Editor ==================================================================
@@ -219,7 +227,7 @@
 
             var self = this;
 
-            this.element = element;
+            self.element = element;
 
             var $element = $(element);
 
@@ -230,27 +238,28 @@
             Widget.fn.init.call(self, element);
             self.options = deepExtend({}, self.options, options);
 
-            $t.bind(this, {
-                load: this.onLoad,
-                selectionChange: this.onSelectionChange,
-                change: this.onChange,
-                execute: this.onExecute,
-                error: this.onError,
-                paste: this.onPaste
-            });
+            self.bind([
+                "load",
+                "selectionChange",
+                "change",
+                "execute",
+                "error",
+                "paste"
+            ], self.options);
 
-            for (var id in this.tools)
-                this.tools[id].name = id.toLowerCase();
+            for (var id in self.tools)
+                self.tools[id].name = id.toLowerCase();
         
-            this.textarea = $element.find('textarea').attr('autocomplete', 'off')[0];
+            self.textarea = $element.find('textarea').attr('autocomplete', 'off')[0];
             initializeContentElement(this);
-            this.keyboard = new Keyboard([new TypingHandler(this), new SystemHandler(this)]);
-        
-            this.clipboard = new Clipboard(this);
 
-            this.pendingFormats = new PendingFormats(this);
+            self.keyboard = new Editor.Keyboard([new Editor.TypingHandler(self), new Editor.SystemHandler(self)]);
         
-            this.undoRedoStack = new UndoRedoStack();
+            self.clipboard = new Editor.Clipboard(this);
+
+            self.pendingFormats = new Editor.PendingFormats(this);
+        
+            self.undoRedoStack = new Editor.UndoRedoStack();
 
             function toolFromClassName(element) {
                 var tool = $.grep(element.className.split(' '), function (x) {
@@ -327,7 +336,7 @@
                                  .find('span.t-input').text(inheritText).end();
                         }
 
-                        tool.init($this, {
+                        tool.initialize($this, {
                             title: appendShortcutSequence(description, tool),
                             editor: self
                         });
@@ -336,7 +345,7 @@
                 .bind('selectionChange', function() {
                     var range = self.getRange();
 
-                    var nodes = textNodes(range);
+                    var nodes = Editor.RangeUtils.textNodes(range);
 
                     if (!nodes.length) {
                         nodes = [range.startContainer];
@@ -367,7 +376,7 @@
                             self.keyboard.endTyping(true);
                 
                         if (!self.selectionRestorePoint) {
-                            self.selectionRestorePoint = new RestorePoint(self.getRange());
+                            self.selectionRestorePoint = new Editor.RestorePoint(self.getRange());
                         } 
                     } catch (e) { }
                 });
@@ -415,40 +424,40 @@
                 { Text: 'Heading 6', Value: 'h6' }
             ],
             tools: {
-                bold: new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}),
-                italic: new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}),
-                underline: new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}),
-                strikethrough: new InlineFormatTool({format: formats.strikethrough}),
-                superscript: new InlineFormatTool({format: formats.superscript }),
-                subscript: new InlineFormatTool({format: formats.subscript }),
+                bold: new Editor.InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}),
+                italic: new Editor.InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}),
+                underline: new Editor.InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}),
+                strikethrough: new Editor.InlineFormatTool({format: formats.strikethrough}),
+                superscript: new Editor.InlineFormatTool({format: formats.superscript }),
+                subscript: new Editor.InlineFormatTool({format: formats.subscript }),
                 undo: { key: 'Z', ctrl: true },
                 redo: { key: 'Y', ctrl: true },
-                insertLineBreak: new Tool({ key: 13, shift: true, command: NewLineCommand }),
-                insertParagraph: new Tool({ key: 13, command: ParagraphCommand }),
-                justifyCenter: new BlockFormatTool({format: formats.justifyCenter}),
-                justifyLeft: new BlockFormatTool({format: formats.justifyLeft}),
-                justifyRight: new BlockFormatTool({format: formats.justifyRight}),
-                justifyFull: new BlockFormatTool({format: formats.justifyFull}),
-                insertUnorderedList: new ListTool({tag:'ul'}),
-                insertOrderedList: new ListTool({tag:'ol'}),
-                createLink: new Tool({ key: 'K', ctrl: true, command: LinkCommand}),
-                unlink: new UnlinkTool({ key: 'K', ctrl: true, shift: true}),
-                insertImage: new Tool({ command: ImageCommand }),
-                indent: new Tool({ command: IndentCommand }),
-                outdent: new OutdentTool(),
-                insertHtml: new InsertHtmlTool(),
-                style: new StyleTool(),
-                fontName: new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}),
-                fontSize: new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}),
-                formatBlock: new FormatBlockTool(),
-                foreColor: new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}),
-                backColor: new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'})
+                insertLineBreak: new Editor.Tool({ key: 13, shift: true, command: NewLineCommand }),
+                insertParagraph: new Editor.Tool({ key: 13, command: ParagraphCommand }),
+                justifyCenter: new Editor.BlockFormatTool({format: formats.justifyCenter}),
+                justifyLeft: new Editor.BlockFormatTool({format: formats.justifyLeft}),
+                justifyRight: new Editor.BlockFormatTool({format: formats.justifyRight}),
+                justifyFull: new Editor.BlockFormatTool({format: formats.justifyFull}),
+                insertUnorderedList: new Editor.ListTool({tag:'ul'}),
+                insertOrderedList: new Editor.ListTool({tag:'ol'}),
+                createLink: new Editor.Tool({ key: 'K', ctrl: true, command: LinkCommand}),
+                unlink: new Editor.UnlinkTool({ key: 'K', ctrl: true, shift: true}),
+                insertImage: new Editor.Tool({ command: ImageCommand }),
+                indent: new Editor.Tool({ command: IndentCommand }),
+                outdent: new Editor.OutdentTool(),
+                insertHtml: new Editor.InsertHtmlTool(),
+                style: new Editor.StyleTool(),
+                fontName: new Editor.FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}),
+                fontSize: new Editor.FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}),
+                formatBlock: new Editor.FormatBlockTool(),
+                foreColor: new Editor.ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}),
+                backColor: new Editor.ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'})
             }
         },
 
         value: function (html) {
             var body = this.body;
-            if (html === undefined) return domToXhtml(body);
+            if (html === undefined) return Editor.Serializer.domToXhtml(body);
 
             this.pendingFormats.clear();
 
@@ -491,7 +500,7 @@
                 body.innerHTML = html;
                 if ($.browser.msie) {
                     // having unicode characters creates denormalized DOM tree in IE9
-                    normalize(body);
+                    dom.normalize(body);
                 }
             }
         
@@ -512,11 +521,11 @@
         },
 
         createRange: function (document) {
-            return createRange(document || this.document);
+            return Editor.RangeUtils.createRange(document || this.document);
         },
 
         getSelection: function () {
-            return selectionFromDocument(this.document);
+            return Editor.SelectionUtils.selectionFromDocument(this.document);
         },
         
         selectRange: function(range) {
@@ -539,7 +548,7 @@
         },
 
         selectedHtml: function() {
-            return domToXhtml(this.getRange().cloneContents());
+            return Editor.Serializer.domToXhtml(this.getRange().cloneContents());
         },
     
         paste: function (html) {
@@ -575,7 +584,7 @@
                     return;
                 }
 
-                var command = tool.command ? tool.command($.extend({ range: range }, params)) : null;
+                var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
 
                 $t.trigger(this.element, 'execute', { name: name, command: command });
 
@@ -600,46 +609,7 @@
         }
     });
 
-    // Exports ================================================================
-
     kendo.ui.plugin(Editor);
-
-    $.extend(kendo.ui.Editor, {
-        BlockFormatFinder: BlockFormatFinder,
-        BlockFormatter: BlockFormatter,
-        Dom: dom,
-        FormatCommand: FormatCommand,
-        GenericCommand: GenericCommand,
-        GreedyBlockFormatter: GreedyBlockFormatter,
-        GreedyInlineFormatFinder: GreedyInlineFormatFinder,
-        GreedyInlineFormatter: GreedyInlineFormatter,
-        ImageCommand: ImageCommand,
-        IndentCommand: IndentCommand,
-        IndentFormatter: IndentFormatter,
-        InlineFormatFinder: InlineFormatFinder,
-        InlineFormatter: InlineFormatter,
-        InsertHtmlCommand: InsertHtmlCommand,
-        Keyboard: Keyboard,
-        LinkCommand: LinkCommand,
-        LinkFormatFinder: LinkFormatFinder,
-        LinkFormatter: LinkFormatter,
-        ListCommand: ListCommand,
-        ListFormatFinder: ListFormatFinder,
-        ListFormatter: ListFormatter,
-        MSWordFormatCleaner: MSWordFormatCleaner,
-        Marker: Marker,
-        NewLineCommand: NewLineCommand,
-        OutdentCommand: OutdentCommand,
-        ParagraphCommand: ParagraphCommand,
-        PendingFormats: PendingFormats,
-        RangeEnumerator: RangeEnumerator,
-        RangeUtils: RangeUtils,
-        RestorePoint: RestorePoint,
-        SystemHandler: SystemHandler,
-        TypingHandler: TypingHandler,
-        UndoRedoStack: UndoRedoStack,
-        UnlinkCommand: UnlinkCommand
-    });
 
     var formats = {
         bold: [
@@ -668,72 +638,24 @@
         ],
     
         justifyLeft: [
-            { tags: blockElements, attr: { style: { textAlign: 'left'}} },
+            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'left'}} },
             { tags: ['img'], attr: { style: { 'float': 'left'}} }
         ],
 
         justifyCenter: [
-            { tags: blockElements, attr: { style: { textAlign: 'center'}} },
+            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'center'}} },
             { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} }
         ],
 
         justifyRight: [
-            { tags: blockElements, attr: { style: { textAlign: 'right'}} },
+            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'right'}} },
             { tags: ['img'], attr: { style: { 'float': 'right'}} }
         ],
 
         justifyFull: [
-            { tags: blockElements, attr: { style: { textAlign: 'justify'}} }
+            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'justify'}} }
         ]
     };
-
-    function formatByName(name, format) {
-        for (var i = 0; i < format.length; i++)
-            if ($.inArray(name, format[i].tags) >= 0)
-                return format[i];
-    }
-
-    var Tool = Class.extend({
-        init: function($ui, options) {
-            $ui.attr({ unselectable: 'on', title: options.title });
-        },
-
-        command: function (commandArguments) {
-            return new options.command(commandArguments);
-        },
-
-        update: function() {
-        },
-
-        willDelayExecution: function() {
-            return false;
-        },
-
-        exec: function (editor, name, value) {
-            editor.exec(name, { value: value });
-        }
-    });
-
-    var FormatTool = Tool.extend({
-        init: function() {
-            var t = this;
-            Tool.fn.init.call(t);
-        },
-
-        command: function (commandArguments) {
-            return new FormatCommand($.extend(commandArguments, {
-                    formatter: options.formatter
-                }));
-        },
-
-        update: function($ui, nodes, pendingFormats) {
-            var isPending = pendingFormats.isPending(this.name),
-                isFormatted = options.finder.isFormatted(nodes),
-                isActive = isPending ? !isFormatted : isFormatted;
-
-            $ui.toggleClass('t-state-active', isActive);
-        }
-    });
 
     var emptyFinder = function () { return { isFormatted: function () { return false } } };
 
@@ -772,5 +694,51 @@
         overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
         directoryNotFound: 'A directory with this name was not found.'
     };
+
+    var Tool = Class.extend({
+        initialize: function($ui, options) {
+            $ui.attr({ unselectable: 'on', title: options.title });
+        },
+
+        command: function (commandArguments) {
+            return new options.command(commandArguments);
+        },
+
+        update: function() {
+        },
+
+        willDelayExecution: function() {
+            return false;
+        }
+
+    });
+
+    Tool.exec = function (editor, name, value) {
+        editor.exec(name, { value: value });
+    }
+
+    var FormatTool = Tool.extend({
+        command: function (commandArguments) {
+            return new FormatCommand(extend(commandArguments, {
+                    formatter: options.formatter
+                }));
+        },
+
+        update: function($ui, nodes, pendingFormats) {
+            var isPending = pendingFormats.isPending(this.name),
+                isFormatted = options.finder.isFormatted(nodes),
+                isActive = isPending ? !isFormatted : isFormatted;
+
+            $ui.toggleClass('t-state-active', isActive);
+        }
+    });
+
+    // Exports ================================================================
+
+    extend(kendo.ui.Editor, {
+        EditorUtils: EditorUtils,
+        Tool: Tool,
+        FormatTool: FormatTool
+    });
 
 })(jQuery);

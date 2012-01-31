@@ -44,64 +44,6 @@ if ($.browser.msie && parseInt($.browser.version) >= 8) {
     }
 }
 
-function findNodeIndex(node) {
-    var i = 0;
-    while (node = node.previousSibling) i++;
-    return i;
-}
-
-function isDataNode(node) {
-    return node && node.nodeValue !== null && node.data !== null;
-}
-
-function isAncestorOf(parent, node) {
-    try {
-        return !isDataNode(parent) && ($.contains(parent, isDataNode(node) ? node.parentNode : node) || node.parentNode == parent);
-    } catch (e) {
-        return false;
-    }
-}
-
-function isAncestorOrSelf(root, node) {
-    return isAncestorOf(root, node) || root == node;
-}
-
-function findClosestAncestor(root, node) {
-    if (isAncestorOf(root, node))
-        while (node && node.parentNode != root)
-            node = node.parentNode;
-
-    return node;
-}
-
-function getNodeLength(node) {
-    return isDataNode(node) ? node.length : node.childNodes.length;
-}
-
-function splitDataNode(node, offset) {
-    var newNode = node.cloneNode(false);
-    node.deleteData(offset, node.length);
-    newNode.deleteData(0, offset);
-    dom.insertAfter(newNode, node);
-}
-
-function attrEquals(node, attributes) {
-    for (var key in attributes) {
-        var value = node[key];
-
-        if (key == 'float')
-            value = node[$.support.cssFloat ? "cssFloat" : "styleFloat"];
-
-        if (typeof value == 'object') {
-            if (!attrEquals(value, attributes[key]))
-                return false;
-        } else if (value != attributes[key])
-            return false;
-    }
-
-    return true;
-}
-
 var whitespace = /^\s+$/;
 var rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i;
 var cssAttributes = ('color,padding-left,padding-right,padding-top,padding-bottom,\
@@ -113,11 +55,90 @@ border-right-style,border-right-width,border-right-color,\
 font-family,font-size,font-style,font-variant,font-weight,line-height'
 ).split(',');
 
-var Dom = Class.extend({
+var Dom = {
+    findNodeIndex: function(node) {
+        var i = 0;
+        while (node = node.previousSibling) i++;
+        return i;
+    },
+
+    isDataNode: function(node) {
+        return node && node.nodeValue !== null && node.data !== null;
+    },
+
+    isAncestorOf: function(parent, node) {
+        try {
+            return !Dom.isDataNode(parent) && ($.contains(parent, Dom.isDataNode(node) ? node.parentNode : node) || node.parentNode == parent);
+        } catch (e) {
+            return false;
+        }
+    },
+
+    isAncestorOrSelf: function(root, node) {
+        return Dom.isAncestorOf(root, node) || root == node;
+    },
+
+    findClosestAncestor: function(root, node) {
+        if (Dom.isAncestorOf(root, node))
+            while (node && node.parentNode != root)
+                node = node.parentNode;
+
+        return node;
+    },
+
+    getNodeLength: function(node) {
+        return Dom.isDataNode(node) ? node.length : node.childNodes.length;
+    },
+
+    splitDataNode: function(node, offset) {
+        var newNode = node.cloneNode(false);
+        node.deleteData(offset, node.length);
+        newNode.deleteData(0, offset);
+        dom.insertAfter(newNode, node);
+    },
+
+    attrEquals: function(node, attributes) {
+        for (var key in attributes) {
+            var value = node[key];
+
+            if (key == 'float')
+                value = node[$.support.cssFloat ? "cssFloat" : "styleFloat"];
+
+            if (typeof value == 'object') {
+                if (!Dom.attrEquals(value, attributes[key]))
+                    return false;
+            } else if (value != attributes[key])
+                return false;
+        }
+
+        return true;
+    },
+
     blockParentOrBody: function(node) {
         return dom.parentOfType(node, blockElements) || node.ownerDocument.body;
     },
+
+    blockParents: function(nodes) {
+        var blocks = [];
+
+        for (var i = 0, len = nodes.length; i < len; i++) {
+            var block = dom.parentOfType(nodes[i], dom.blockElements);
+            if (block && $.inArray(block, blocks) < 0)
+                blocks.push(block);
+        }
+
+        return blocks;
+    },
+
+    windowFromDocument: function(document) {
+        return document.defaultView || document.parentWindow;
+    },
+
     normalize: normalize,
+    blockElements: blockElements,
+    inlineElements: inlineElements,
+    fillAttrs: fillAttrs,
+
     toHex: function (color) {
         var matches = rgb.exec(color);
 
@@ -183,7 +204,7 @@ var Dom = Class.extend({
     },
         
     scrollTo: function (node) {
-        node.ownerDocument.body.scrollTop = $(isDataNode(node) ? node.parentNode : node).offset().top;
+        node.ownerDocument.body.scrollTop = $(Dom.isDataNode(node) ? node.parentNode : node).offset().top;
     },
 
     insertAt: function (parent, newElement, position) {
@@ -208,7 +229,7 @@ var Dom = Class.extend({
     trim: function (parent) {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
-            if (isDataNode(node)) {
+            if (Dom.isDataNode(node)) {
                 if (node.nodeValue.replace(/\ufeff/g, '').length == 0)
                     dom.remove(node);
                 if (dom.isWhitespace(node))
@@ -363,7 +384,7 @@ var Dom = Class.extend({
         }
         return output;
     }
-});
+}
 
 // exports
 

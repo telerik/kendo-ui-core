@@ -4,7 +4,10 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    dom = kendo.ui.Editor.Dom;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    RangeUtils = Editor.RangeUtils,
+    blockElements = dom.blockElements;
 
 function indent(node, value) {
     var property = dom.name(node) != 'td' ? 'marginLeft' : 'paddingLeft';

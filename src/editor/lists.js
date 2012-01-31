@@ -4,13 +4,17 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    dom = kendo.ui.Editor.Dom;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    RangeUtils = Editor.RangeUtils,
+    BlockFormatFinder = Editor.BlockFormatFinder,
+    textNodes = RangeUtils.textNodes;
 
 var ListFormatFinder = BlockFormatFinder.extend({
     init: function(tag) {
-        this.tag = tag;
-        var finder = this,
-            tags = this.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
+        var finder = this;
+        finder.tag = tag;
+        var tags = finder.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
 
         BlockFormatFinder.fn.init.call(finder, [{ tags: tags}]);
     },
@@ -50,9 +54,10 @@ var ListFormatFinder = BlockFormatFinder.extend({
 
 var ListFormatter = Class.extend({
     init: function(tag, unwrapTag) {
-        this.finder = new ListFormatFinder(tag);
-        this.tag = tag;
-        this.unwrapTag = unwrapTag;
+        var formatter = this;
+        formatter.finder = new ListFormatFinder(tag);
+        formatter.tag = tag;
+        formatter.unwrapTag = unwrapTag;
     },
 
     wrap: function(list, nodes) {
@@ -99,7 +104,7 @@ var ListFormatter = Class.extend({
 
     containsAny: function(parent, nodes) {
         for (var i = 0; i < nodes.length; i++)
-            if (isAncestorOrSelf(parent, nodes[i]))
+            if (dom.isAncestorOrSelf(parent, nodes[i]))
                 return true;
 
         return false;
@@ -171,7 +176,7 @@ var ListFormatter = Class.extend({
         for (var i = 0; i < childNodes.length; i++) {
             var child = childNodes[i];
             var nodeName = dom.name(child);
-            if (suitable(child, nodes) && (!formatNode || !isAncestorOrSelf(formatNode, child))) {
+            if (suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
 
                 if (formatNode && (nodeName == 'ul' || nodeName == 'ol')) {
                     // merging lists
@@ -307,13 +312,13 @@ var ListTool = FormatTool.extend({
     init: function(options) {
         this.options = options;
         var tool = this;
-        FormatTool.fn.init.call(tool, $.extend(options, {
+        FormatTool.fn.init.call(tool, extend(options, {
             finder: new ListFormatFinder(options.tag)
         }));
     },
 
     command: function (commandArguments) { 
-        return new ListCommand($.extend(commandArguments, { tag: options.tag }));
+        return new ListCommand(extend(commandArguments, { tag: options.tag }));
     }
 });
 

@@ -4,65 +4,37 @@
     var doc = document,
         kendo = window.kendo,
         Class = kendo.Class,
-        Widget = kendo.ui.Widget,
         extend = $.extend,
-        dom = kendo.Editor.Dom;
+        Editor = kendo.ui.Editor,
+        dom = Editor.Dom,
+        findNodeIndex = dom.findNodeIndex,
+        isDataNode = dom.isDataNode,
+        findClosestAncestor = dom.findClosestAncestor,
+        getNodeLength = dom.getNodeLength,
+        normalize = dom.normalize;
 
 var START_TO_START = 0,
     START_TO_END = 1,
     END_TO_END = 2,
     END_TO_START = 3;
 
-
-function documentFromRange(range) {
-    var startContainer = range.startContainer;
-    return startContainer.nodeType == 9 ? startContainer : startContainer.ownerDocument;
-}
-
-function selectionFromWindow(window) {
-    if ($.browser.msie && $.browser.version < 9) {
-        return new W3CSelection(window.document);
-    }
+var SelectionUtils = {
+    selectionFromWindow: function(window) {
+        if ($.browser.msie && $.browser.version < 9) {
+            return new W3CSelection(window.document);
+        }
     
-    return window.getSelection(); 
-}
+        return window.getSelection(); 
+    },
 
-function selectionFromRange(range) {
-    var document = documentFromRange(range);
-    return selectionFromDocument(document);
-}
+    selectionFromRange: function(range) {
+        var document = RangeUtils.documentFromRange(range);
+        return SelectionUtils.selectionFromDocument(document);
+    },
 
-function selectionFromDocument(document) {
-    return selectionFromWindow(windowFromDocument(document));
-}
-
-function windowFromDocument(document) {
-    return document.defaultView || document.parentWindow;
-}
-
-function split(range, node, trim) {
-    function partition(start) {
-        var partitionRange = range.cloneRange();
-        partitionRange.collapse(start);
-        partitionRange[start ? 'setStartBefore' : 'setEndAfter'](node);
-        var contents = partitionRange.extractContents();
-        if (trim)
-            contents = dom.trim(contents);
-        dom[start ? 'insertBefore' : 'insertAfter'](contents, node);
+    selectionFromDocument: function(document) {
+        return SelectionUtils.selectionFromWindow(dom.windowFromDocument(document));
     }
-    partition(true);
-    partition(false);
-}
-
-function selectRange(range) {
-    var image = RangeUtils.image(range);
-    if (image) {
-        range.setStartAfter(image);
-        range.setEndAfter(image);
-    }
-    var selection = selectionFromRange(range);
-    selection.removeAllRanges();
-    selection.addRange(range);
 }
 
 var W3CRange = Class.extend({
@@ -145,7 +117,7 @@ var W3CRange = Class.extend({
     
     cloneContents: function () {
         // clone subtree
-        var document = documentFromRange(this);
+        var document = RangeUtils.documentFromRange(this);
         return (function cloneSubtree(iterator) {
                 for (var node, frag = document.createDocumentFragment(); node = iterator.next(); ) {
                         node = node.cloneNode(!iterator.hasPartialSubtree());
@@ -167,7 +139,7 @@ var W3CRange = Class.extend({
 
         var self = this;
 
-        var document = documentFromRange(this);
+        var document = RangeUtils.documentFromRange(this);
 
         return (function extractSubtree(iterator) {
             for (var node, frag = document.createDocumentFragment(); node = iterator.next(); ) {
@@ -186,7 +158,7 @@ var W3CRange = Class.extend({
     insertNode: function (node) {
         if (isDataNode(this.startContainer)) {
             if (this.startOffset != this.startContainer.nodeValue.length)
-                splitDataNode(this.startContainer, this.startOffset);
+                dom.splitDataNode(this.startContainer, this.startOffset);
 
             dom.insertAfter(node, this.startContainer);
         } else {
@@ -291,18 +263,10 @@ function updateRangeProperties(range) {
     range.collapsed = range.startContainer == range.endContainer && range.startOffset == range.endOffset;
 
     var node = range.startContainer;
-    while (node && node != range.endContainer && !isAncestorOf(node, range.endContainer))
+    while (node && node != range.endContainer && !dom.isAncestorOf(node, range.endContainer))
         node = node.parentNode;
 
     range.commonAncestorContainer = node;
-}
-
-function createRange(document) {
-    if ($.browser.msie && $.browser.version < 9) {
-        return new W3CRange(document);
-    }
-    
-    return document.createRange();
 }
 
 var RangeIterator = Class.extend({
@@ -404,17 +368,17 @@ var RangeIterator = Class.extend({
 
     hasPartialSubtree: function () {
         return !isDataNode(this._current) &&
-        (isAncestorOrSelf(this._current, this.range.startContainer) ||
-            isAncestorOrSelf(this._current, this.range.endContainer));
+        (dom.isAncestorOrSelf(this._current, this.range.startContainer) ||
+            dom.isAncestorOrSelf(this._current, this.range.endContainer));
     },
 
     getSubtreeIterator: function () {
         var subRange = this.range.cloneRange();
         subRange.selectNodeContents(this._current);
 
-        if (isAncestorOrSelf(this._current, this.range.startContainer))
+        if (dom.isAncestorOrSelf(this._current, this.range.startContainer))
             subRange.setStart(this.range.startContainer, this.range.startOffset);
-        if (isAncestorOrSelf(this._current, this.range.endContainer))
+        if (dom.isAncestorOrSelf(this._current, this.range.endContainer))
             subRange.setEnd(this.range.endContainer, this.range.endOffset);
 
         return new RangeIterator(subRange);
@@ -557,7 +521,7 @@ function adoptEndPoint(textRange, range, start) {
 }
 
 var RangeEnumerator = Class.extend({
-    init: function() {
+    init: function(range) {
         this.enumerate = function () {
             var nodes = [];
 
@@ -580,36 +544,9 @@ var RangeEnumerator = Class.extend({
     }
 });
 
-function textNodes(range) {
-    return new RangeEnumerator(range).enumerate();
-}
-
-function blockParents(nodes) {
-    var blocks = [];
-
-    for (var i = 0, len = nodes.length; i < len; i++) {
-        var block = dom.parentOfType(nodes[i], blockElements);
-        if (block && $.inArray(block, blocks) < 0)
-            blocks.push(block);
-    }
-
-    return blocks;
-}
-
-function getMarkers(range) {
-    var markers = [];
-
-    new RangeIterator(range).traverse(function (node) {
-        if (node.className == 't-marker')
-            markers.push(node);
-    });
-
-    return markers;
-}
-
 var RestorePoint = Class.extend({
     init: function(range) {
-        this.rootNode = documentFromRange(range);
+        this.rootNode = RangeUtils.documentFromRange(range);
         this.body = this.rootNode.body;
         this.html = this.body.innerHTML;
         this.range = range;
@@ -683,14 +620,10 @@ var RestorePoint = Class.extend({
 });
 
 var Marker = Class.extend({
-    init: function() {
-        
-    },
-
     addCaret: function (range) {
         var caret = this.caret;
 
-        caret = dom.create(documentFromRange(range), 'span', { className: 't-marker' });
+        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 't-marker' });
         range.insertNode(caret);
         range.selectNode(caret);
         return caret;
@@ -738,7 +671,7 @@ var Marker = Class.extend({
         var rangeBoundary = range.cloneRange();
 
         rangeBoundary.collapse(false);
-        this.end = dom.create(documentFromRange(range), 'span', { className: 't-marker' });
+        this.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 't-marker' });
         rangeBoundary.insertNode(this.end);
 
         rangeBoundary = range.cloneRange();
@@ -849,20 +782,69 @@ var Marker = Class.extend({
 
 var boundary = /[\u0009-\u000d]|\u0020|\u00a0|\ufeff|\.|,|;|:|!|\(|\)|\?/;
 
-var RangeUtils = Class.extend({
-    init: function() {
-
-    },
-
+var RangeUtils = {
     nodes: function(range) {
-        var nodes = textNodes(range);
+        var nodes = RangeUtils.textNodes(range);
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
-            nodes = textNodes(range);
+            nodes = RangeUtils.textNodes(range);
             if (!nodes.length)
                 nodes = dom.significantChildNodes(range.commonAncestorContainer);
         }
         return nodes;
+    },
+
+    textNodes: function(range) {
+        return new RangeEnumerator(range).enumerate();
+    },
+
+    documentFromRange: function(range) {
+        var startContainer = range.startContainer;
+        return startContainer.nodeType == 9 ? startContainer : startContainer.ownerDocument;
+    },
+
+    createRange: function(document) {
+        if ($.browser.msie && $.browser.version < 9) {
+            return new W3CRange(document);
+        }
+    
+        return document.createRange();
+    },
+
+    selectRange: function(range) {
+        var image = RangeUtils.image(range);
+        if (image) {
+            range.setStartAfter(image);
+            range.setEndAfter(image);
+        }
+        var selection = SelectionUtils.selectionFromRange(range);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    },
+
+    split: function(range, node, trim) {
+        function partition(start) {
+            var partitionRange = range.cloneRange();
+            partitionRange.collapse(start);
+            partitionRange[start ? 'setStartBefore' : 'setEndAfter'](node);
+            var contents = partitionRange.extractContents();
+            if (trim)
+                contents = dom.trim(contents);
+            dom[start ? 'insertBefore' : 'insertAfter'](contents, node);
+        }
+        partition(true);
+        partition(false);
+    },
+
+    getMarkers: function(range) {
+        var markers = [];
+
+        new RangeIterator(range).traverse(function (node) {
+            if (node.className == 't-marker')
+                markers.push(node);
+        });
+
+        return markers;
     },
 
     image: function (range) {
@@ -909,7 +891,7 @@ var RangeUtils = Class.extend({
 
     isExpandable: function (range) {
         var node = range.startContainer;
-        var document = documentFromRange(range);
+        var document = RangeUtils.documentFromRange(range);
 
         if (node == document || node == document.body)
             return false;
@@ -933,9 +915,10 @@ var RangeUtils = Class.extend({
 
         return startOffset != 0 && endOffset != 0;
     }
-});
+};
 
 extend(kendo.ui.Editor, {
+    SelectionUtils: SelectionUtils,
     W3CRange: W3CRange,
     RangeIterator: RangeIterator,
     W3CSelection: W3CSelection,

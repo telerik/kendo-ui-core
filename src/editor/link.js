@@ -4,7 +4,10 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    dom = kendo.ui.Editor.Dom;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    RangeUtils = Editor.RangeUtils,
+    textNodes = RangeUtils.textNodes;
 
 var LinkFormatFinder = Class.extend({
     init: function() {
@@ -25,8 +28,8 @@ var LinkFormatter = Class.extend({
     apply: function (range, attributes) {
         var nodes = textNodes(range);
         if (attributes.innerHTML != undefined) {
-            var markers = getMarkers(range);
-            var document = documentFromRange(range);
+            var markers = RangeUtils.getMarkers(range);
+            var document = RangeUtils.documentFromRange(range);
             range.deleteContents();
             var a = dom.create(document, 'a', attributes);
             range.insertNode(a);
@@ -108,7 +111,7 @@ var LinkCommand = Command.extend({
             e.preventDefault();
             dialog.destroy();
 
-            windowFromDocument(documentFromRange(range)).focus();
+            dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
 
             self.releaseRange(range);
         }

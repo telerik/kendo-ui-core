@@ -1,20 +1,18 @@
 (function($) {
 
-    // Imports ================================================================
-    var doc = document,
-        kendo = window.kendo,
-        Class = kendo.Class,
-        Widget = kendo.ui.Widget,
-        map = $.map,
-        deepExtend = kendo.deepExtend,
-        extend = $.extend;
+// Imports ================================================================
+var doc = document,
+    kendo = window.kendo,
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    extend = $.extend;
 
 var fontSizeMappings = 'xx-small,x-small,small,medium,large,x-large,xx-large'.split(','),
     quoteRe = /"/g,
     brRe = /<br[^>]*>/i,
     emptyPRe = /<p><\/p>/i;
 
-var Serializer = Class.extend({
+var Serializer = {
     domToXhtml: function(root) {
         var result = [];
         var tagMap = {
@@ -132,7 +130,7 @@ var Serializer = Class.extend({
                 } else if (attributeName == 'src' || attributeName == 'href') {
                     result.push(node.getAttribute(attributeName, 2));
                 } else {
-                    result.push(fillAttrs[attributeName] ? attributeName : attributeValue);
+                    result.push(dom.fillAttrs[attributeName] ? attributeName : attributeValue);
                 }
 
                 result.push('"');
@@ -222,9 +220,9 @@ var Serializer = Class.extend({
         return result;
     }
 
-});
+};
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     Serializer: Serializer
 });
 
