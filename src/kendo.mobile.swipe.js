@@ -6,6 +6,10 @@
         START = "start",
         MOVE = "move",
         END = "end",
+        TAP = "tap",
+        START_EVENTS = "touchstart mousedown",
+        MOVE_EVENTS = "mousemove touchmove",
+        END_EVENTS = "mouseup mouseleave touchend touchcancel",
         SURFACE = $(document.documentElement);
 
     var SwipeAxis = Class.extend({
@@ -39,8 +43,8 @@
 
             var eventMap = {};
 
-            eventMap[addNS("mousemove touchmove", ns)] = proxy(that._move, that);
-            eventMap[addNS("mouseup mouseleave touchend touchcancel", ns)] = proxy(that._end, that);
+            eventMap[addNS(MOVE_EVENTS, ns)] = proxy(that._move, that);
+            eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
 
             extend(that, {
                 x: new SwipeAxis(),
@@ -52,16 +56,19 @@
                 ns: ns
             });
 
-            element.on({
-                "mousedown touchstart": proxy(that._start, that),
-                "dragstart": function(e) { e.preventDefault(); }
-            });
+            element.on(START_EVENTS, proxy(that._start, that))
+                .on("dragstart", function(e) { e.preventDefault(); });
 
             that.bind([START, MOVE, END], options);
         },
 
         capture: function() {
             Swipe.captured = true;
+        },
+
+        cancel: function() {
+            this.pressed = false;
+            this.surface.off(this.ns);
         },
 
         _start: function(e) {
@@ -98,11 +105,14 @@
                         that._trigger(START, e);
                         that.moved = true;
                     } else {
-                        return that._cancel();
+                        return that.cancel();
                     }
                 }
 
-                that._trigger(MOVE, e);
+                // Event handlers may cancel the swipe in the START event handler, hence the double check for pressed.
+                if (that.pressed) {
+                    that._trigger(MOVE, e);
+                }
             });
         },
 
@@ -112,17 +122,14 @@
             if (!that.pressed) { return; }
 
             that._withEvent(e, function() {
-                that._cancel();
+                that.cancel();
 
                 if (that.moved) {
                     that._trigger(END, e);
+                } else {
+                    that._trigger(TAP, e);
                 }
             });
-        },
-
-        _cancel: function() {
-            this.pressed = false;
-            this.surface.off(this.ns);
         },
 
         _perAxis: function(method, location) {
@@ -155,5 +162,47 @@
         }
     });
 
+    var Tap = Observable.extend({
+        init: function(element, options) {
+            var that = this;
+
+            that.capture = false;
+            element.on(START_EVENTS, proxy(that._press, that));
+            element.on(END_EVENTS, proxy(that._release, that));
+            Observable.fn.init.call(that);
+
+            that.bind(["press", "release"], options || {});
+        },
+
+        _press: function(e) {
+            var that = this;
+            that.trigger("press");
+            if (that.capture) {
+                e.preventDefault();
+                e.originalEvent && e.originalEvent.preventDefault();
+            }
+        },
+
+        _release: function(e) {
+            var that = this;
+            that.trigger("release");
+
+            if (that.capture) {
+                e.preventDefault();
+                e.originalEvent && e.originalEvent.preventDefault();
+                that.cancelCapture();
+            }
+        },
+
+        captureNext: function() {
+            this.capture = true;
+        },
+
+        cancelCapture: function() {
+            this.capture = false;
+        }
+    });
+
     kendo.mobile.Swipe = Swipe;
+    kendo.mobile.Tap = Tap;
 })(jQuery);

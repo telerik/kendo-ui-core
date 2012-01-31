@@ -86,9 +86,12 @@
             swipe = new mobile.Swipe(element, {
                 start: function() {
 
-                    if (abs(swipe.x.velocity) > 3) {
+                    if (abs(swipe.x.velocity) > abs(swipe.y.velocity)) {
                         swipe.capture();
+                    } else {
+                        swipe.cancel();
                     }
+
                     transition.cancel();
                 },
                 end: $.proxy(that._swipeEnd, that)
