@@ -106,10 +106,9 @@
                 ok(dropdownlist.ul.children().eq(1).hasClass(SELECTED));
                 equal(dropdownlist.value(), "2");
                 equal(dropdownlist.text(), "2");
-                equal(dropdownlist._old, 1);
             });
 
-            test("select item with index -1 should not select anything", function() {
+            test("select(-1) should not select anything", function() {
                 dropdownlist.select(0);
 
                 dropdownlist.select(-1);
@@ -118,12 +117,27 @@
                 equal(dropdownlist.text(), "foo");
             });
 
+            test("select(li) should prevent raising of change event", function() {
+                dropdownlist.bind("change", function() {
+                    ok(false);
+                });
+
+                dropdownlist.select(1);
+                dropdownlist._change();
+            });
+
             test("select should call _accessor", function() {
                 stub(dropdownlist, "_accessor");
 
                 dropdownlist.select(1);
 
-                equal(dropdownlist.calls("_accessor"), 1);
+                equal(dropdownlist.calls("_accessor"), 2);
+            });
+
+            test("select() should return index", function() {
+                dropdownlist.select(1);
+
+                equal(dropdownlist.select(), 1);
             });
 
             asyncTest("open should open popup", function () {

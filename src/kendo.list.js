@@ -150,7 +150,7 @@
         _focus: function(li) {
             var that = this;
 
-            that.select(li);
+            that._select(li);
             that._blur();
 
             if (that._focused[0] !== document.activeElement) {
@@ -461,10 +461,10 @@
                 if (e.altKey) {
                     that.toggle(down);
                 } else if (down) {
-                    that.select(current ? current[0].nextSibling : ul.firstChild);
+                    that._select(current ? current[0].nextSibling : ul.firstChild);
                     e.preventDefault();
                 } else {
-                    that.select(current ? current[0].previousSibling : ul.lastChild);
+                    that._select(current ? current[0].previousSibling : ul.lastChild);
                     e.preventDefault();
                 }
                 pressed = true;
