@@ -8,7 +8,7 @@
     @if (ViewBag.Debug) {
     <script src="@Url.Content("~/content/shared/js/less.js")"></script>
     } else {
-    <script>var _gaq=[['_setAccount','UA-23480938-1'],['_setDomainName','.kendoui.com'],['_trackPageview']];(function(d,s){var g=d.createElement(s),e=d.getElementsByTagName(s)[0];g.src="//www.google-analytics.com/ga.js";e.parentNode.insertBefore(g,e);}(document,"script"))</script>
+    @Html.Partial("GoogleAnalytics")
     }
     <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
     @foreach (string scriptName in ViewBag.scripts) {
