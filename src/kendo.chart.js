@@ -7001,14 +7001,13 @@
                     font: SANS11
                 }
             },
-            categoryAxis: {
+            axisDefaults: {
                 labels: {
                     font: SANS12
-                }
-            },
-            valueAxis: {
-                labels: {
-                    font: SANS12
+                },
+                title: {
+                    font: SANS16,
+                    margin: 5
                 }
             },
             tooltip: {
