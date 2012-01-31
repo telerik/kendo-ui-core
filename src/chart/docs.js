@@ -571,19 +571,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              from
+         *              <code>"from"</code>
          *         </dt>
          *         <dd>
          *              The start position of the plot band in axis units.
          *         </dd>
          *         <dt>
-         *              to
+         *              <code>"to"</code>
          *         </dt>
          *         <dd>
          *              The end position of the plot band in axis units.
          *         </dd>
          *         <dt>
-         *              color
+         *              <code>"color"</code>
          *         </dt>
          *         <dd>
          *              The color of the plot band.
