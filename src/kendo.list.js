@@ -372,21 +372,20 @@
 
         _dataSource: function() {
             var that = this,
-                selected,
                 element = that.element,
                 options = that.options,
-                dataSource = options.dataSource || {};
+                dataSource = options.dataSource || {},
+                idx;
 
             dataSource = $.isArray(dataSource) ? {data: dataSource} : dataSource;
 
-            if (that.element.is(SELECT)) {
-                selected = element.children(":selected");
-                if (selected[0]) {
-                    options.index = selected.index();
+            if (element.is(SELECT)) {
+                idx = element[0].selectedIndex;
+                if (idx > -1) {
+                    options.index = idx;
                 }
 
                 dataSource.select = element;
-
                 dataSource.fields = [{ field: options.dataTextField },
                                      { field: options.dataValueField }];
             }
