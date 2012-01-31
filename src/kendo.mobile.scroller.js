@@ -10,8 +10,8 @@
         Animation = mobile.Animation,
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
-        FRICTION = 0.95,
-        OUT_OF_BOUNDS_FRICTION = 0.83,
+        FRICTION = 0.93,
+        OUT_OF_BOUNDS_FRICTION = 0.80,
         CHANGE = "change";
 
     var DragInertia = Animation.extend({
