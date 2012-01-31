@@ -4,7 +4,9 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    dom = kendo.ui.Editor.Dom;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    RangeUtils = Editor.RangeUtils;
 
 var PendingFormats = Class.extend({
     init: function(editor) {
@@ -32,7 +34,7 @@ var PendingFormats = Class.extend({
 
         marker.add(range);
 
-        if (textNodes(range).length == 0) {
+        if (rangeUtils.textNodes(range).length == 0) {
             marker.remove(range);
             range.collapse(true);
             this.editor.selectRange(range);

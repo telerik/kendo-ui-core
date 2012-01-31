@@ -1,13 +1,14 @@
 (function($) {
 
 // Imports ================================================================
-var doc = document,
-    kendo = window.kendo,
+var kendo = window.kendo,
     Class = kendo.Class,
-    Widget = kendo.ui.Widget,
     extend = $.extend,
-    dom = kendo.ui.Editor.Dom,
-    RangeUtils = kendo.ui.Editor.RangeUtils;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom,
+    Command = Editor.Command,
+    EditorUtils = Editor.EditorUtils,
+    RangeUtils = Editor.RangeUtils;
 
 var BlockFormatFinder = Class.extend({
     init: function(format) {
@@ -17,7 +18,7 @@ var BlockFormatFinder = Class.extend({
     contains: function(node, children) {
         for (var i = 0; i < children.length; i++) {
             var child = children[i];
-            if (child == null || !isAncestorOrSelf(node, child))
+            if (child == null || !dom.isAncestorOrSelf(node, child))
                 return false;
         }
 
@@ -25,7 +26,8 @@ var BlockFormatFinder = Class.extend({
     },
 
     findSuitable: function (nodes) {
-        var suitable = [];
+        var format = this.format,
+            suitable = [];
 
         for (var i = 0; i < nodes.length; i++) {
             var candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
@@ -50,7 +52,7 @@ var BlockFormatFinder = Class.extend({
             var attributes = format[i].attr;
 
             while (node) {
-                if (dom.ofType(node, tags) && attrEquals(node, attributes))
+                if (dom.ofType(node, tags) && dom.attrEquals(node, attributes))
                     return node;
                 node = node.parentNode;
             }
@@ -59,7 +61,7 @@ var BlockFormatFinder = Class.extend({
     },
 
     getFormat: function (nodes) {
-        var findFormat = $.proxy(function(node) { return this.findFormat(isDataNode(node) ? node.parentNode : node); }, this),
+        var findFormat = $.proxy(function(node) { return this.findFormat(dom.isDataNode(node) ? node.parentNode : node); }, this),
             result = findFormat(nodes[0]);
 
         if (!result)
@@ -97,7 +99,7 @@ var BlockFormatter = Class.extend({
 
         var ancestors = dom.significantChildNodes(commonAncestor);
 
-        var position = findNodeIndex(ancestors[0]);
+        var position = dom.findNodeIndex(ancestors[0]);
 
         var wrapper = dom.create(commonAncestor.ownerDocument, tag, attributes);
 
@@ -111,7 +113,7 @@ var BlockFormatter = Class.extend({
                     wrapper = wrapper.cloneNode(false);
                 }
 
-                position = findNodeIndex(ancestor) + 1;
+                position = dom.findNodeIndex(ancestor) + 1;
 
                 continue;
             }
@@ -126,10 +128,10 @@ var BlockFormatter = Class.extend({
     apply: function (nodes) {
         var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : this.finder.findSuitable(nodes);
 
-        var formatToApply = formatNodes.length ? formatByName(dom.name(formatNodes[0]), format) : format[0];
+        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), format) : format[0];
 
         var tag = formatToApply.tags[0];
-        var attributes = $.extend({}, formatToApply.attr, values);
+        var attributes = extend({}, formatToApply.attr, values);
 
         if (formatNodes.length)
             for (var i = 0; i < formatNodes.length; i++)
@@ -143,7 +145,7 @@ var BlockFormatter = Class.extend({
             var formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode)
                 if (dom.ofType(formatNode, ['p', 'img', 'li']))
-                    dom.unstyle(formatNode, formatByName(dom.name(formatNode), format).attr.style);
+                    dom.unstyle(formatNode, EditorUtils.formatByName(dom.name(formatNode), this.format).attr.style);
                 else
                     dom.unwrap(formatNode);
         }
@@ -160,12 +162,16 @@ var BlockFormatter = Class.extend({
 
 var GreedyBlockFormatter = Class.extend({
     init: function (format, values) {
+        this.format = format;
+        this.values = values;
         this.finder = new BlockFormatFinder(format);
     },
 
     apply: function (nodes) {
-        var blocks = blockParents(nodes);
-        var formatTag = format[0].tags[0];
+        var format = this.format,
+            blocks = dom.blockParents(nodes),
+            formatTag = format[0].tags[0];
+
         if (blocks.length) {
             for (var i = 0, len = blocks.length; i < len; i++) {
                 if (dom.is(blocks[i], 'li')) {
@@ -199,15 +205,13 @@ var GreedyBlockFormatter = Class.extend({
 var FormatCommand = Command.extend({
     init: function (options) {
         options.formatter = options.formatter();
-        var command = this;
-        Command.fn.init.call(command, options);
+        Command.fn.init.call(this, options);
     }
 });
 
 var BlockFormatTool = FormatTool.extend({
     init: function (options) {
-        var tool = this;
-        FormatTool.fn.init.call(tool, $.extend(options, {
+        FormatTool.fn.init.call(this, extend(options, {
             finder: new BlockFormatFinder(options.format),
             formatter: function () { return new BlockFormatter(options.format) }
         }));
@@ -216,13 +220,12 @@ var BlockFormatTool = FormatTool.extend({
 
 var FormatBlockTool = Tool.extend({
     init: function () {
-        var tool = this;
-        Tool.fn.init.call(tool);
-        var finder = new BlockFormatFinder([{ tags: blockElements }])
+        Tool.fn.init.call(this);
+        this.finder = new BlockFormatFinder([{ tags: dom.blockElements }]);
     },
 
     command: function (commandArguments) {
-        return new FormatCommand($.extend(commandArguments, {
+        return new FormatCommand(extend(commandArguments, {
             formatter: function () { return new GreedyBlockFormatter([{ tags: [commandArguments.value] }], {}); }
         }));
     },

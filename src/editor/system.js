@@ -4,15 +4,20 @@
     var doc = document,
         kendo = window.kendo,
         Class = kendo.Class,
-        Widget = kendo.ui.Widget,
+        Editor = kendo.ui.Editor,
+        dom = Editor.Dom,
+        RangeUtils = Editor.RangeUtils,
+        selectRange = RangeUtils.selectRange,
+        RestorePoint = Editor.RestorePoint,
+        Marker = Editor.Marker,
         extend = $.extend;
 
 var Command = Class.extend({
     init: function(options) {
+        this.options = options;
         this.restorePoint = new RestorePoint(options.range);
         this.marker = new Marker();
         this.formatter = options.formatter;
-
     },
 
     getRange: function () {
@@ -64,8 +69,7 @@ var GenericCommand = Class.extend({
 
 var InsertHtmlCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        Command.fn.init.call(cmd, options);
+        Command.fn.init.call(this, options);
 
         this.managesUndoRedo = true;
     },
@@ -83,11 +87,9 @@ var InsertHtmlCommand = Command.extend({
 });
 
 var InsertHtmlTool = Tool.extend({
-    init: function($ui, initOptions) {
-        var t = this;
-        Tool.fn.init.call(t, $ui, initOptions);
-
+    initialize: function($ui, initOptions) {
         var editor = initOptions.editor;
+        var title = editor.localization.insertHtml;
         
         $ui.tSelectBox({
             data: editor['insertHtml'],
@@ -106,7 +108,9 @@ var InsertHtmlTool = Tool.extend({
     },
 
     update: function($ui, nodes) {
-        $ui.data('tSelectBox').close();
+        var list = $ui.data('tSelectBox');
+        list.close();
+        list.value(title);
     }
 
 });
@@ -318,11 +322,14 @@ var Keyboard = Class.extend({
 
 var Clipboard = Class.extend({
     init: function(editor) {
+        this.editor = editor;
         this.cleaners = [new MSWordFormatCleaner()];
     },
 
     htmlToFragment: function(html) {
-        var container = dom.create(editor.document, 'div');
+        var editor = this.editor,
+            container = dom.create(editor.document, 'div');
+        
         container.innerHTML = html;
             
         var fragment = editor.document.createDocumentFragment();
@@ -338,17 +345,18 @@ var Clipboard = Class.extend({
     },
         
     oncut: function(e) {
-        var startRestorePoint = new RestorePoint(editor.getRange());
+        var editor = this.editor,
+            startRestorePoint = new RestorePoint(editor.getRange());
         setTimeout(function() {
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
         });
     },
 
     onpaste: function(e) {
-        var range = editor.getRange();
-        var startRestorePoint = new RestorePoint(range);
-            
-        var clipboardNode = dom.create(editor.document, 'div', {className:'t-paste-container', innerHTML: '\ufeff'});
+        var editor = this.editor,
+            range = editor.getRange(),
+            startRestorePoint = new RestorePoint(range),
+            clipboardNode = dom.create(editor.document, 'div', {className:'t-paste-container', innerHTML: '\ufeff'});
 
         editor.body.appendChild(clipboardNode);
             
@@ -379,7 +387,7 @@ var Clipboard = Class.extend({
             $t.trigger(editor.element, "paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
-            selectionChanged(editor);
+            Editor.EditorUtils.selectionChanged(editor);
         });
     },
 
@@ -431,7 +439,7 @@ var Clipboard = Class.extend({
             
         if (!/body|td/.test(dom.name(parent)) && (block || dom.isInline(parent))) {
             range.selectNode(caret);
-            split(range, parent, true);
+            RangeUtils.split(range, parent, true);
             unwrap = true;
         }
             
@@ -497,7 +505,7 @@ var MSWordFormatCleaner = Class.extend({
 
     lists: function(html) {
         var placeholder = dom.create(document, 'div', {innerHTML: html});
-        var blockChildren = $(blockElements.join(','), placeholder);
+        var blockChildren = $(dom.blockElements.join(','), placeholder);
             
         var lastMargin = -1, lastType, levels = {'ul':{}, 'ol':{}}, li = placeholder;
             

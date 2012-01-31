@@ -3,7 +3,9 @@
 // Imports ================================================================
 var kendo = window.kendo,
     Class = kendo.Class,
-    extend = $.extend;
+    extend = $.extend,
+    Editor = kendo.ui.Editor,
+    RangeUtils = Editor.RangeUtils;
 
 var ImageCommand = Command.extend({
     init: function(options) {
@@ -18,7 +20,7 @@ var ImageCommand = Command.extend({
         var attributes = this.attributes;
         if (attributes.src && attributes.src != 'http://') {
             if (!img) {
-                img = dom.create(documentFromRange(range), 'img', attributes);
+                img = dom.create(RangeUtils.documentFromRange(range), 'img', attributes);
                 img.onload = img.onerror = function () {
                     img.removeAttribute('complete');
                     img.removeAttribute('width');
@@ -28,7 +30,7 @@ var ImageCommand = Command.extend({
                 range.insertNode(img);
                 range.setStartAfter(img);
                 range.setEndAfter(img);
-                selectRange(range);
+                RangeUtils.selectRange(range);
                 return true;
             } else
                 dom.attr(img, attributes);
@@ -70,7 +72,7 @@ var ImageCommand = Command.extend({
             e.preventDefault();
             dialog.destroy();
 
-            windowFromDocument(documentFromRange(range)).focus();
+            dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
             if (!applied)
                 self.releaseRange(range);
         }
