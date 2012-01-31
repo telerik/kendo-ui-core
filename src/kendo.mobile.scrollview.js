@@ -65,47 +65,67 @@
             that.pager = element.children().last();
             that.page = 0;
 
-            that.move = new mobile.Move(that.inner);
+            var move,
+                transition,
+                swipe,
+                container,
+                bounary,
+                draggable;
 
-            that.transition = new Transition({
+            move = new mobile.Move(that.inner);
+
+            transition = new Transition({
                 axis: "x",
-                move: that.move,
+                move: move,
                 onEnd: function() {
-                    that.page = -that.move.x / that.boundary.size;
+                    that.page = - move.x / boundary.size;
                     that._updatePage();
                 }
             });
 
-            that.swipe = new mobile.Swipe(element, {
+            swipe = new mobile.Swipe(element, {
                 start: function() {
-                    that.transition.cancel();
+
+                    if (abs(swipe.x.velocity) > 3) {
+                        swipe.capture();
+                    }
+                    transition.cancel();
                 },
                 end: $.proxy(that._swipeEnd, that)
             });
 
-            that.container = new mobile.ContainerBoundary({
+            container = new mobile.ContainerBoundary({
                 element: that.inner,
                 container: that.element
             });
 
-            that.boundary = that.container.x;
-            that.boundary.bind("change", proxy(that.calculateDimensions, that));
+            boundary = container.x;
+            boundary.bind("change", proxy(that.calculateDimensions, that));
 
-            that.draggable = new mobile.Draggable({
-                boundary: that.container,
-                swipe: that.swipe,
-                elastic: true,
-                move: that.move
+            draggable = new mobile.Draggable({
+                boundary: container,
+                swipe: swipe,
+                move: move,
+                elastic: true
             });
 
-            that.container.refresh();
+            $.extend(that, {
+                move: move,
+                transition: transition,
+                swipe: swipe,
+                container: container,
+                boundary: boundary,
+                draggable: draggable
+            });
+
+            container.refresh();
         },
 
         options: {
             name: "ScrollView",
             duration: 300,
-            velocityThreshold: 1,
-            bounceVelocityThreshold: 2.5
+            velocityThreshold: 30,
+            bounceVelocityThreshold: 60
         },
 
         viewShow: function(view) {

@@ -60,6 +60,10 @@
             that.bind([START, MOVE, END], options);
         },
 
+        capture: function() {
+            Swipe.captured = true;
+        },
+
         _start: function(e) {
             var that = this,
                 originalEvent = e.originalEvent,
@@ -69,14 +73,15 @@
             if (that.pressed) { return; }
 
             that.pressed = true;
-            this.moved = false;
+            that.moved = false;
 
             if (touch) {
                 that.touchID = touch.identifier;
             }
 
             that._perAxis(START, touch || e);
-            that.surface.on(that.eventMap);
+            that.surface.off(that.eventMap).on(that.eventMap);
+            Swipe.captured = false;
         },
 
         _move: function(e) {
@@ -85,12 +90,18 @@
             if (!that.pressed) { return; }
 
             that._withEvent(e, function(location) {
-                if (!that.moved) {
-                    that._trigger(START, e);
-                    that.moved = true;
-                }
 
                 that._perAxis(MOVE, location);
+
+                if (!that.moved) {
+                    if (!Swipe.captured) {
+                        that._trigger(START, e);
+                        that.moved = true;
+                    } else {
+                        return that._cancel();
+                    }
+                }
+
                 that._trigger(MOVE, e);
             });
         },
@@ -101,13 +112,17 @@
             if (!that.pressed) { return; }
 
             that._withEvent(e, function() {
-                that.pressed = false;
-                that.surface.off(that.ns);
+                that._cancel();
 
                 if (that.moved) {
                     that._trigger(END, e);
                 }
             });
+        },
+
+        _cancel: function() {
+            this.pressed = false;
+            this.surface.off(this.ns);
         },
 
         _perAxis: function(method, location) {
