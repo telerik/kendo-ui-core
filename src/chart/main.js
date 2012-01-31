@@ -6208,25 +6208,58 @@
         }
     });
 
-    var RadialGaugeAxis = NumericAxis.extend({
+    var RadialAxis = NumericAxis.extend({
         init: function (min, max, options) {
-            NumericAxis.fn.init.call(this, options);
+            NumericAxis.fn.init.call(this, min, max, options);
         },
 
         renderTicks: function(view) {
-            var ticks = [];
+            var axis = this,
+                ticks = [],
+                ring = axis.ring,
+                tickPositions = axis.getTickPositions(ring, 20),
+                i, innerPoint, outerPoint;
 
-            var ticksRing = new Chart.Ring(
-                new Point2D(135, 135), 120, 135, -30, 240
-            );
-
-            for (var i = 0; i < 10; i++) {
-                var outerPoint = ticksRing.point(-30 + i * 27);
-                var innerPoint = ticksRing.point(-30 + i * 27, true);
+            for (i = 0; i < tickPositions.length; i++) {
+                outerPoint = ring.point(tickPositions[i]);
+                innerPoint = ring.point(tickPositions[i], true);
                 ticks.push(view.createLine(innerPoint.x, innerPoint.y, outerPoint.x, outerPoint.y, { stroke: "#000" }));
             }
 
             return ticks;
+        },
+
+        reflow: function(box) {
+            var axis = this,
+                options = axis.options,
+                center = box.center(),
+                radius = math.min(center.x, center.y);
+
+            axis.ring = new Chart.Ring(
+                center, radius - options.majorTickSize, radius, options.startAngle, options.angle
+            );
+
+            axis.box = box;
+        },
+
+        getTickPositions: function(ring, itemsCount) {
+            var axis = this,
+                options = axis.options,
+                angle = ring.angle,
+                step = angle / itemsCount,
+                startAngle = ring.startAngle,
+                pos = startAngle,
+                positions = [],
+                i;
+
+            for (i = 0; i < itemsCount; i++) {
+                positions.push(round(pos, COORD_PRECISION));
+                pos += step;
+            }
+
+            positions.push(startAngle + angle);
+
+            return positions;
         },
 
         getViewElements: function(view) {
@@ -6237,38 +6270,8 @@
                 tickPositions = axis.getMinorTickPositions(),
                 lineOptions;
 
-            var axisRing = new Chart.Ring(
-                    new Point2D(135, 135), 134, 135, -30, 240
-                );
-
-            childElements.push(view.createRing(axisRing, { fill: "#000" }));
-
             append(childElements, axis.renderTicks(view));
-
-            return childElements;
-
-            if (options.line.width > 0) {
-                lineOptions = {
-                    strokeWidth: options.line.width,
-                    stroke: options.line.color,
-                    dashType: options.line.dashType,
-                    zIndex: options.zIndex
-                };
-                if (isVertical) {
-                    childElements.push(view.createLine(
-                        axis.box.x2, tickPositions[0],
-                        axis.box.x2, last(tickPositions),
-                        lineOptions));
-                } else {
-                    childElements.push(view.createLine(
-                        tickPositions[0], axis.box.y1,
-                        last(tickPositions), axis.box.y1,
-                        lineOptions));
-                }
-
-                append(childElements, axis.renderTicks(view));
-                append(childElements, axis.renderPlotBands(view));
-            }
+            // append(childElements, axis.renderPlotBands(view));
 
             return childElements;
         }
@@ -6295,16 +6298,9 @@
 
         render: function() {
             var plotArea = this,
-                options = plotArea.options,
-                i;
+                options = plotArea.options;
 
-            var ringConfig = new Chart.Ring(
-                    new Point2D(135, 135), 125, 135, -30, 240
-                );
-
-            //plotArea.append(new GaugeSegment(ringConfig, { background: "#dedede" }));
-
-            plotArea.axis = new RadialGaugeAxis(options.min, options.max, deepExtend({}, options.axis, { orientation: HORIZONTAL }));
+            plotArea.axis = new RadialAxis(options.min, options.max, deepExtend({ startAngle: options.startAngle, angle: options.angle }, options.axis));
 
             plotArea.append(plotArea.axis);
         }
@@ -6365,14 +6361,22 @@
             axis: {
                 type: "Numeric",
                 min: 0,
-                max: 100
+                max: 100,
+                majorTickSize: 15,
+                minorTickSize: 10
             },
-            value: 0
+            value: 0,
+            startAngle: -30,
+            angle: 240
         },
 
         _supportsSVG: supportsSVG
     });
 
     kendo.ui.plugin(Gauge);
+
+    deepExtend(Gauge, {
+        RadialAxis: RadialAxis
+    });
 
 })(jQuery);
