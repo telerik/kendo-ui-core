@@ -180,6 +180,8 @@
 
             that._enable();
 
+            that._placeholder();
+
             that.bind([
                 /**
                 * Fires when the drop-down list is opened
@@ -710,6 +712,15 @@
                 }
             } else if (!that._move(e)) {
                that._search();
+            }
+        },
+
+        _placeholder: function() {
+            var that = this,
+                placeholder = that.options.placeholder;
+
+            if (placeholder && !that.value()) {
+                that.input.val(placeholder);
             }
         },
 

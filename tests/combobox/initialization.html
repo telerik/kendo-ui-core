@@ -414,6 +414,14 @@
                 equal(combobox.selectedIndex, -1);
             });
 
+            test("set placeholder if defined", function() {
+                var combobox = input.kendoComboBox({
+                    placeholder: "Select item..."
+                }).data("kendoComboBox");
+
+                equal(combobox.input.val(), "Select item...");
+            });
+
             asyncTest("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
