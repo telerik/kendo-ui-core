@@ -118,7 +118,6 @@
                     }
                 });
 
-
                 combobox._old = "foo";
                 combobox.value("foo");
                 combobox._change();
@@ -129,7 +128,7 @@
                 var combobox = new ComboBox(input, {autoBind: false} );
 
                 input.val("foo");
-                combobox._select();
+                combobox._selectItem();
                 equal(combobox._old, "foo");
             });
 
