@@ -420,9 +420,8 @@
 
         _get: function(li) {
             var that = this,
-                idx,
                 data = that._data(),
-                length;
+                idx, length;
 
             if (typeof li === "function") {
                 for (idx = 0, length = data.length; idx < length; idx++) {
@@ -432,8 +431,6 @@
                     }
                 }
             }
-
-            idx = -1;
 
             if (typeof li === "number") {
                 if (li < 0) {
