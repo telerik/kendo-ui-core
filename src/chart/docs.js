@@ -8,6 +8,7 @@
      * The Chart widget uses modern browser technologies to render high-quality data visualizations.
      * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
      * </p>
+     M
      *
      * <p>
      * Supported chart types:
@@ -1411,7 +1412,6 @@
          *              labels: {
          *                  // label template
          *                  template: "#= value #%",
->>>>>>> 76f802c... Update chart documentation
          *                  visible: true
          *              }
          *          }
