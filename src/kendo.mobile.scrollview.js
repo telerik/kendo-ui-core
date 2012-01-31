@@ -85,8 +85,7 @@
 
             swipe = new mobile.Swipe(element, {
                 start: function() {
-
-                    if (abs(swipe.x.velocity) > abs(swipe.y.velocity)) {
+                    if (abs(swipe.x.velocity)*2 >= abs(swipe.y.velocity)) {
                         swipe.capture();
                     } else {
                         swipe.cancel();
