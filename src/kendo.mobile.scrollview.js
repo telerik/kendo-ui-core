@@ -131,7 +131,7 @@
         },
 
         viewShow: function(view) {
-            this.calculateDimensions();
+            this.container.refresh();
         },
 
         calculateDimensions: function() {
