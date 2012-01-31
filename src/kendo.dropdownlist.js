@@ -368,36 +368,6 @@
             }
         },
 
-        _select: function(li) {
-            var that = this,
-                element = that.element[0],
-                current = that._current,
-                data = that._data(),
-                value,
-                text,
-                idx;
-
-            li = that._get(li);
-
-            if (li && li[0] && !li.hasClass(SELECTED)) {
-                if (current) {
-                    current.removeClass(SELECTED);
-                }
-
-                idx = ui.List.inArray(li[0], that.ul[0]);
-                if (idx > -1) {
-                    data = data[idx];
-                    text = that._text(data);
-                    value = that._value(data);
-                    that.selectedIndex = idx;
-
-                    that.text(text);
-                    that._accessor(value != undefined ? value : text, idx);
-                    that.current(li.addClass(SELECTED));
-                }
-            }
-        },
-
         /**
         * Gets/Sets the text of the dropdownlist.
         * @param {String} text The text to set.
@@ -547,6 +517,36 @@
             }, that.options.delay);
 
             that.search(that._word);
+        },
+
+        _select: function(li) {
+            var that = this,
+                element = that.element[0],
+                current = that._current,
+                data = that._data(),
+                value,
+                text,
+                idx;
+
+            li = that._get(li);
+
+            if (li && li[0] && !li.hasClass(SELECTED)) {
+                if (current) {
+                    current.removeClass(SELECTED);
+                }
+
+                idx = ui.List.inArray(li[0], that.ul[0]);
+                if (idx > -1) {
+                    data = data[idx];
+                    text = that._text(data);
+                    value = that._value(data);
+                    that.selectedIndex = idx;
+
+                    that.text(text);
+                    that._accessor(value != undefined ? value : text, idx);
+                    that.current(li.addClass(SELECTED));
+                }
+            }
         },
 
         _span: function() {

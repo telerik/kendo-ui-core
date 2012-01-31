@@ -150,6 +150,15 @@
                 equal(combobox.select(), 1);
             });
 
+            test("select() returns selectedIndex", function() {
+                combobox.bind("change", function() {
+                    ok(false);
+                });
+
+                combobox.select(1);
+                combobox._change();
+            });
+
             asyncTest("open should call _scroll method", function () {
                 combobox.select(0);
                 combobox._scroll = function() { ok(true); start(); };
@@ -211,7 +220,6 @@
                 ok(combobox.ul.children().eq(0).hasClass(SELECTED));
                 equal(combobox.value(), "1");
                 equal(combobox.text(), "foo");
-                equal(combobox._old, "");
             });
 
             test("text should set custom value", function() {
@@ -223,7 +231,6 @@
                 ok(!combobox._selected);
                 equal(combobox.value(), "custom");
                 equal(combobox.text(), "custom");
-                equal(combobox._old, "");
             });
 
             test('enable(false) should disable combobox', function() {
