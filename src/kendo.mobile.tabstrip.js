@@ -151,17 +151,19 @@
         },
 
         _release: function(e) {
-            if (e.which === 1) {
-                var that = this,
+            if (e.which > 1) {
+                return;
+            }
+
+            var that = this,
                 item = $(e.currentTarget);
 
-                if (item[0] === that.currentItem()[0]) {
-                    return;
-                }
-
-                that.trigger(SELECT, {item: item});
-                that._setActiveItem(item);
+            if (item[0] === that.currentItem()[0]) {
+                return;
             }
+
+            that.trigger(SELECT, {item: item});
+            that._setActiveItem(item);
         },
 
         _setActiveItem: function(item) {
