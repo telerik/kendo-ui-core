@@ -226,7 +226,10 @@
                 }
             });
 
-            that._old = that.value();
+            //check it!!
+            //that._old = that.value();
+
+            that.selectedIndex = -1;
 
             if (options.autoBind) {
                 that._select();
@@ -363,6 +366,12 @@
                 value,
                 idx = that._highlight(li),
                 data = that._data();
+
+            if (li === undefined) {
+                return that.selectedIndex;
+            }
+
+            that.selectedIndex = idx;
 
             if (idx !== -1) {
                 that._selected = that._current.addClass(STATE_SELECTED);

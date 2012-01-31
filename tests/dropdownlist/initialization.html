@@ -179,6 +179,11 @@
                 equal(dropdownlist.options.index, 1);
             });
 
+            test("set selectedIndex when autoBind:false", function() {
+                var dropdownlist = input.kendoDropDownList({ autoBind: false }).data("kendoDropDownList");
+                equal(dropdownlist.selectedIndex, -1);
+            });
+
             test("retrived data from OPTIONS does not override options.dataSource", function() {
                 var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Beverages</option></select>"),
                 data = [{text: "Foo", value: "Foo"}],

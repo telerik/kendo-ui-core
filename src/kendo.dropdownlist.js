@@ -199,6 +199,9 @@
                 "dataBound"
             ], options);
 
+
+            that.selectedIndex = -1;
+
             if (options.autoBind) {
                 that.dataSource.fetch();
             } else if (element.is(SELECT)) {

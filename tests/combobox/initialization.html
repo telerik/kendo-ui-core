@@ -404,6 +404,16 @@
                 ok(!wrap.hasClass("k-state-hover"));
             });
 
+            test("set selectedIndex", function() {
+                var combobox = input.kendoComboBox().data("kendoComboBox");
+                equal(combobox.selectedIndex, -1);
+            });
+
+            test("set selectedIndex when autoBind: false", function() {
+                var combobox = input.kendoComboBox({ autoBind: false }).data("kendoComboBox");
+                equal(combobox.selectedIndex, -1);
+            });
+
             asyncTest("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
