@@ -50,6 +50,7 @@
         var link = $(e.currentTarget),
             href = link.attr("href");
 
+        console.log("mouseup", e.isDefaultPrevented());
         // Prevent iOS address bar progress display for in app navigation
         if (!e.isDefaultPrevented() && isInternal(link)) {
             if (href) {

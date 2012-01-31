@@ -8,6 +8,7 @@
         Move = mobile.Move,
         Transition = mobile.Transition,
         Animation = mobile.Animation,
+        SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.95,
         OUT_OF_BOUNDS_FRICTION = 0.83,
@@ -27,8 +28,10 @@
                 })
             });
 
-            that.swipe.bind("start", proxy(that.cancel, that));
+
+            that.tap.bind("press", function() { that.cancel(); });
             that.swipe.bind("end", proxy(that.start, that));
+            that.swipe.bind("tap", proxy(that.onEnd, that));
         },
 
         onCancel: function() {
@@ -58,6 +61,7 @@
             } else {
                 that.velocity = that.swipe[that.axis].velocity;
                 if (that.velocity) {
+                    that.tap.captureNext();
                     Animation.fn.start.call(that);
                 }
             }
@@ -71,6 +75,7 @@
         },
 
         _end: function() {
+            this.tap.cancelCapture();
             this.end();
         },
 
@@ -83,7 +88,7 @@
                 boundary = that.boundary,
                 snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
 
-            that.transition.moveTo({ location: snapBack, duration: 500, ease: Transition.easeOutExpo });
+            that.transition.moveTo({ location: snapBack, duration: SNAPBACK_DURATION, ease: Transition.easeOutExpo });
         }
     });
 
@@ -113,13 +118,14 @@
                 scrollMove = that.scrollMove,
                 position = scrollMove[axis],
                 sizeRatio = boundarySize / boundary.total,
-                position = -scrollMove[axis] * sizeRatio,
+                position = Math.max(0, -scrollMove[axis] * sizeRatio),
                 size = Math.round(Math.min(boundarySize * sizeRatio, boundarySize - position));
 
             if (that.elementSize != size) {
                 that.element.css(that.size, size + "px");
                 that.elementSize = size;
             }
+
             that.move.moveAxis(axis, position);
         },
 
@@ -144,12 +150,15 @@
                 .wrapInner('<div class="km-scroll-container"/>');
 
             var inner = element.children().first(),
+
+                tap = new mobile.Tap(element),
+
                 move = new Move(inner),
 
                 boundary = new mobile.ContainerBoundary({
                     element: inner,
                     container: element
-                });
+                }),
 
                 swipe = new mobile.Swipe(element, {
                     start: function() {
@@ -169,7 +178,8 @@
                 move: move,
                 boundary: boundary,
                 swipe: swipe,
-                draggable: draggable
+                draggable: draggable,
+                tap: tap
             });
 
             that.initAxis("x");
@@ -183,16 +193,19 @@
             move = that.move,
             boundary = that.boundary[axis],
             draggable = that.draggable[axis],
+            tap = that.tap,
+
             scrollBar = new ScrollBar({
                 axis: axis,
                 move: move,
                 boundary: boundary,
                 container: that.element
-            });
+            }),
 
-            new DragInertia({
+            inertia = new DragInertia({
                 axis: axis,
                 move: move,
+                tap: tap,
                 swipe: that.swipe,
                 boundary: boundary,
                 end: function() { scrollBar.hide(); }

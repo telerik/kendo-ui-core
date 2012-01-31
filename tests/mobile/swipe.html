@@ -45,22 +45,33 @@
                 }
             });
 
-            test("raises start on mousedown", 2, function(){
+            test("raises start on first mouse move", 2, function(){
                 swipe.bind("start", function(e) {
-                    equal(e.x.location, 10);
-                    equal(e.y.location, 20);
+                    equal(e.x.location, 15);
+                    equal(e.y.location, 25);
                 });
 
                 triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 15, pageY: 25});
             });
 
-            test("raises start on touchstart", 2, function(){
+            test("raises tap on tap", 1, function(){
+                swipe.bind("tap", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup");
+            });
+
+            test("raises start on first touchmove", 2, function(){
                 swipe.bind("start", function(e) {
-                    equal(e.x.location, 10);
-                    equal(e.y.location, 20);
+                    equal(e.x.location, 15);
+                    equal(e.y.location, 25);
                 });
 
                 triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
+                triggerTouchEvent("touchmove", [{pageX: 15, pageY: 25}]);
             });
 
             test("raises move on touchmove", 2, function(){
@@ -85,7 +96,7 @@
 
             test("does not track unpressed mousemove", 0, function(){
                 swipe.bind("move", function(e) {
-                    ok(true);
+                    ok(false);
                 });
 
                 triggerEvent("mousemove", {pageX: 20, pageY: 40});
@@ -148,53 +159,6 @@
                 setTimeout(function() {
                     triggerEvent("mouseup", {pageX: 10, pageY: 20});
                 }, 1);
-            });
-
-            asyncTest("captures next mousedown", function() {
-                var inner = element.find("#inner");
-
-                inner.mousedown(function(e){
-                    setTimeout(function(){
-                        start();
-                        ok(e.isDefaultPrevented());
-                    })
-                });
-
-                swipe.captureNext();
-
-                triggerEvent("mousedown", {pageX: 10, pageY: 20}, inner);
-            });
-
-            test("captures next mouseup", function() {
-                $("#qunit-fixture").one("mouseup", function(e){
-                    ok(e.isDefaultPrevented());
-                });
-
-                swipe.captureNext();
-                triggerEvent("mousedown", {pageX: 10, pageY: 20});
-                triggerEvent("mouseup", {pageX: 10, pageY: 20});
-            });
-
-            test("does not capture subsequent events", 4, function() {
-                $("#qunit-fixture").one("mousedown mouseup", function(e){ ok(e.isDefaultPrevented()); });
-
-                swipe.captureNext();
-                triggerEvent("mousedown", {pageX: 10, pageY: 20});
-                triggerEvent("mouseup", {pageX: 10, pageY: 20});
-
-                $("#qunit-fixture").one("mousedown mouseup", function(e){ ok(!e.isDefaultPrevented()); });
-
-                triggerEvent("mousedown", {pageX: 10, pageY: 20});
-                triggerEvent("mouseup", {pageX: 10, pageY: 20});
-            });
-
-            test("cancels capturing", 2, function() {
-                $("#qunit-fixture").one("mousedown mouseup", function(e){ ok(!e.isDefaultPrevented()); });
-
-                swipe.captureNext();
-                swipe.cancelCapture();
-                triggerEvent("mousedown", {pageX: 10, pageY: 20});
-                triggerEvent("mouseup", {pageX: 10, pageY: 20});
             });
         </script>
     </body>
