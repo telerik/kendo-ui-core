@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radial Axis</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script>
+            var Chart = kendo.ui.Chart,
+                Gauge = kendo.ui.Gauge,
+                Box2D = Chart.Box2D,
+                RadialAxis = Gauge.RadialAxis,
+                radialAxis,
+                gridLayout,
+                chartBox = new Box2D(0, 0, 400, 300),
+                view,
+                TOLERANCE = 1.5;
+
+            // Tests expect particular font size
+            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+
+            module("RadialAxis", {
+                setup: function() {
+                    radialAxis = new RadialAxis(0, 100, { majorTickSize: 10, angle: 180, startAngle: 0 });
+                }
+            });
+
+            test("reflow calculates axis ring position", function() {
+                radialAxis.reflow(chartBox);
+
+                var ring = radialAxis.ring;
+                equals(ring.c.x, 200);
+                equals(ring.c.y, 150);
+                equals(ring.r, 150);
+                equals(ring.ir, 140);
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
