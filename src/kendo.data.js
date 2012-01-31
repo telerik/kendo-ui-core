@@ -324,12 +324,6 @@
                     })(field);
                 } else if (type === "[object Array]") {
                     member = new ObservableArray(member);
-
-                    (function(field) {
-                        member.bind(CHANGE, function(e) {
-                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
-                        });
-                    })(field);
                 }
 
                 that[field] = member;

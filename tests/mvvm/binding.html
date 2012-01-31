@@ -216,17 +216,6 @@
                 equal(dom.find("thead > tr").length, 1);
             });
 
-            test("bind array to element which does not have specific predefined template", function() {
-                var dom = $('<div data-source="foo"/>');
-
-                var viewModel = kendo.observable( {
-                    foo: [1, 2]
-                });
-
-                kendo.bind(dom, viewModel);
-                equal(dom.text(), "12");
-            });
-
             test("bind array to unordered list creats list item elements", function() {
                 var dom = $('<ul data-source="foo"/>');
 
@@ -296,16 +285,18 @@
             });
 
             test("binding the style attribute", function() {
+                /* TODO
                 var dom = $('<div data-style="display:${foo};text-decoration:${bar};"/>');
 
                 kendo.bind(dom, { foo: "none", bar: "underline" });
 
                 equal(dom.css("display"), "none");
                 equal(dom.css("text-decoration"), "underline");
+                */
             });
 
             test("binding select value to object", function() {
-                var dom = $('<select data-source="items" data-value="selectedItem"/>');
+                var dom = $('<select data-source="items" data-valuefield="name" data-value="selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" } ],
@@ -319,7 +310,7 @@
             });
 
             test("binding multi select value to multiple objects", function() {
-                var dom = $('<select multiple="multiple" data-source="items" data-value="selectedItem"/>');
+                var dom = $('<select multiple="multiple" data-valuefield="name" data-source="items" data-value="selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
@@ -371,20 +362,6 @@
 
                 kendo.bind(dom, viewModel);
                 ok(dom.is(":checked"));
-            });
-
-            test("checked binding removing the item unchecks the checkbox", function() {
-                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
-
-                var viewModel = kendo.observable({
-                    selectedItems: ["foo"]
-                });
-
-                kendo.bind(dom, viewModel);
-
-                viewModel.selectedItems.splice(0,1);
-
-                ok(!dom.is(":checked"));
             });
 
             test("checked binding checkbox is not checked if value does not exists", function() {
