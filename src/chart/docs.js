@@ -558,7 +558,7 @@
          *      valueAxis: {
          *          labels: {
          *              // label template
-         *              template: "${ value }%"
+         *              template: "#= value #%"
          *          }
          *      }
          * });
@@ -866,7 +866,7 @@
          *          categories: [2000, 2001, 2002, 2003],
          *          labels: {
          *              // label template
-         *              template: "Year: ${ value }"
+         *              template: "Year: #= value #"
          *          }
          *      }
          * });
@@ -879,19 +879,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              from
+         *              <code>"from"</code>
          *         </dt>
          *         <dd>
          *              The start position of the plot band.
          *         </dd>
          *         <dt>
-         *              to
+         *              <code>"to"</code>
          *         </dt>
          *         <dd>
          *              The end position of the plot band.
          *         </dd>
          *         <dt>
-         *              color
+         *              <code>"color"</code>
          *         </dt>
          *         <dd>
          *              The color of the plot band.
@@ -1114,7 +1114,7 @@
          *      seriesDefault: {
          *          labels: {
          *              // label template
-         *              template: "${ value }%",
+         *              template: "#= value  #%",
          *              visible: true
          *          }
          *      },
@@ -1223,7 +1223,7 @@
          *      seriesDefaults: {
          *          tooltip: {
          *              visible: true,
-         *              template: "${category} - ${value}"
+         *              template: "#= category # - #= value #"
          *          }
          *      },
          *      series: [
@@ -1294,25 +1294,25 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "center"
+         *              <code>"center"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the bar center.
          *         </dd>
          *         <dt>
-         *              "insideEnd"
+         *              <code>""insideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the end of the bar.
          *         </dd>
          *         <dt>
-         *              "insideBase"
+         *              <code>""insideBase"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the base of the bar.
          *         </dd>
          *         <dt>
-         *              "outsideEnd"
+         *              <code>""outsideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned outside, near the end of the bar.
@@ -1410,7 +1410,8 @@
          *              data: [200, 450, 300, 125],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#= value #%",
+>>>>>>> 76f802c... Update chart documentation
          *                  visible: true
          *              }
          *          }
@@ -1502,7 +1503,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category # - #= value #"
          *              }
          *          }
          *      ],
@@ -1545,25 +1546,25 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "center"
+         *              <code>"center"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the bar center.
          *         </dd>
          *         <dt>
-         *              "insideEnd"
+         *              <code>"insideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the end of the bar.
          *         </dd>
          *         <dt>
-         *              "insideBase"
+         *              <code>"insideBase"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the base of the bar.
          *         </dd>
          *         <dt>
-         *              "outsideEnd"
+         *              <code>"outsideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned outside, near the end of the bar.
@@ -1662,7 +1663,7 @@
          *              data: [200, 450, 300, 125],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#= value #%",
          *                  visible: true
          *              }
          *          }
@@ -1754,7 +1755,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category # - #= value #"
          *              }
          *          }
          *      ],
@@ -1792,19 +1793,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "interpolate"
+         *              <code>"interpolate"</code>
          *         </dt>
          *         <dd>
          *              The value is interpolated from neighboring points.
          *         </dd>
          *         <dt>
-         *              "zero"
+         *              <code>"zero"</code>
          *         </dt>
          *         <dd>
          *              The value is assumed to be zero.
          *         </dd>
          *         <dt>
-         *              "gap"
+         *              <code>"gap"</code>
          *         </dt>
          *         <dd>
          *              The line stops before the missing point and continues after it.
@@ -1817,19 +1818,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "square"
+         *              <code>"square"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              "triagle"
+         *              <code>"triagle"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is triagle.
          *         </dd>
          *         <dt>
-         *              "circle"
+         *              <code>"circle"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is circle.
@@ -1853,25 +1854,25 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "above"
+         *              <code>"above"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the top of the line chart marker.
          *         </dd>
          *         <dt>
-         *              "right"
+         *              <code>"right"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the right of the line chart marker.
          *         </dd>
          *         <dt>
-         *              "below"
+         *              <code>"below"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the bottom of the line chart marker.
          *         </dd>
          *         <dt>
-         *              "left"
+         *              <code>"left"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the left of the line chart marker.
@@ -1967,7 +1968,7 @@
          *              data: [200, 450, 300, 125],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#= value #%",
          *                  visible: true
          *              }
          *          }
@@ -2007,7 +2008,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category # - #= value #"
          *              }
          *          }
          *      ],
@@ -2044,25 +2045,25 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              value
+         *              <code>"value"</code>
          *         </dt>
          *         <dd>
          *              The sector value.
          *         </dd>
          *         <dt>
-         *              category
+         *              <code>"category"</code>
          *         </dt>
          *         <dd>
          *              The sector category that is shown in the legend.
          *         </dd>
          *         <dt>
-         *              color
+         *              <code>"color"</code>
          *         </dt>
          *         <dd>
          *              The sector color.
          *         </dd>
          *         <dt>
-         *              explode
+         *              <code>"explode"</code>
          *         </dt>
          *         <dd>
          *              A boolean value indicating whether to explode the sector.
@@ -2210,7 +2211,7 @@
          *              ],
          *              labels: {
          *                  // label template
-         *                  template: "${ value }%",
+         *                  template: "#= value #%",
          *                  visible: true
          *              }
          *          }
@@ -2228,13 +2229,13 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "circle"
+         *             <code>"circle"</code>
          *         </dt>
          *         <dd>
          *              The labels are positioned in circle around the pie chart.
          *         </dd>
          *         <dt>
-         *              "column"
+         *             <code>"column"</code>
          *         </dt>
          *         <dd>
          *              The labels are positioned in columns to the left and right of the pie chart.
@@ -2326,7 +2327,7 @@
          *              data: [200, 450, 300, 125],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${category} - ${value}"
+         *                  template: "#= category # - #= value #"
          *              }
          *          }
          *      ]
@@ -2443,25 +2444,25 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "above"
+         *              <code>"above"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the top of the scatter chart marker.
          *         </dd>
          *         <dt>
-         *              "right"
+         *              <code>"right"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the right of the scatter chart marker.
          *         </dd>
          *         <dt>
-         *              "below"
+         *              <code>"below"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the bottom of the scatter chart marker.
          *         </dd>
          *         <dt>
-         *              "left"
+         *              <code>"left"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the left of the scatter chart marker.
@@ -2490,7 +2491,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              labels: {
          *                  // label template
-         *                  template: "${ value.x } - ${ value.y }",
+         *                  template: "#= value.x # - #= value.y x #",
          *                  visible: true
          *              }
          *          }
@@ -2503,19 +2504,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "square"
+         *             <code>"square"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              "triagle"
+         *              <code>"triagle"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is triagle.
          *         </dd>
          *         <dt>
-         *              "circle"
+         *              <code>"circle"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is circle.
@@ -2534,19 +2535,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "interpolate"
+         *              <code>"interpolate"</code>
          *         </dt>
          *         <dd>
          *              The value is interpolated from neighboring points.
          *         </dd>
          *         <dt>
-         *              "zero"
+         *              <code>"zero"</code>
          *         </dt>
          *         <dd>
          *              The value is assumed to be zero.
          *         </dd>
          *         <dt>
-         *              "gap"
+         *              <code>"gap"</code>
          *         </dt>
          *         <dd>
          *              The line stops before the missing point and continues after it.
@@ -2598,7 +2599,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${ category } - ${ value.x } - ${ value.y }"
+         *                  template: "#= category # - #= value.x # - #= value.y #"
          *              }
          *          }
          *      ]
@@ -2699,25 +2700,25 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "above"
+         *              <code>"above"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the top of the scatter chart marker.
          *         </dd>
          *         <dt>
-         *              "right"
+         *              <code>"right"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the right of the scatter chart marker.
          *         </dd>
          *         <dt>
-         *              "below"
+         *              <code>"below"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the bottom of the scatter chart marker.
          *         </dd>
          *         <dt>
-         *              "left"
+         *              <code>"left"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned at the left of the scatter chart marker.
@@ -2746,7 +2747,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              labels: {
          *                  // label template
-         *                  template: "${ value.x } - ${ value.y }",
+         *                  template: "#= value.x # - #= value.y #",
          *                  visible: true
          *              }
          *          }
@@ -2759,19 +2760,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "square"
+         *              <code>"square"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              "triagle"
+         *              <code>"triagle"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is triagle.
          *         </dd>
          *         <dt>
-         *              "circle"
+         *              <code>"circle"</code>
          *         </dt>
          *         <dd>
          *              The marker shape is circle.
@@ -2790,19 +2791,19 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "interpolate"
+         *              <code>"interpolate"</code>
          *         </dt>
          *         <dd>
          *              The value is interpolated from neighboring points.
          *         </dd>
          *         <dt>
-         *              "zero"
+         *              <code>"zero"</code>
          *         </dt>
          *         <dd>
          *              The value is assumed to be zero.
          *         </dd>
          *         <dt>
-         *              "gap"
+         *              <code>"gap"</code>
          *         </dt>
          *         <dd>
          *              The line stops before the missing point and continues after it.
@@ -2854,7 +2855,7 @@
          *              data: [[1, 1], [1, 2], [1, 3]],
          *              tooltip: {
          *                  visible: true,
-         *                  template: "${ category } - ${ value.x } - ${ value.y }"
+         *                  template: "#= category # - #= value.x # - #= value.y #"
          *              }
          *          }
          *      ]
@@ -3015,7 +3016,7 @@
          *      },
          *      tooltip: {
          *          visible: true,
-         *          template: "${category} - ${value}"
+         *          template: "#= category # - #= value #"
          *      }
          * });
          * @option {String} [tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
