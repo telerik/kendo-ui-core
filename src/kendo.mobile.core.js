@@ -185,7 +185,7 @@
                 return;
             }
 
-            if ((position < boundary.min && delta < 0) || (position > boundary.min && delta > 0)) {
+            if ((position < boundary.min && delta < 0) || (position > boundary.max && delta > 0)) {
                 delta *= that.resistance;
             }
 

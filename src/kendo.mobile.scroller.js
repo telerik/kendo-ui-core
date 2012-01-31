@@ -58,7 +58,6 @@
             } else {
                 that.velocity = that.swipe[that.axis].velocity;
                 if (that.velocity) {
-                    setTimeout(function() { that.swipe.captureNext(); });
                     Animation.fn.start.call(that);
                 }
             }
@@ -72,7 +71,6 @@
         },
 
         _end: function() {
-            this.swipe.cancelCapture();
             this.end();
         },
 
@@ -200,7 +198,9 @@
                 end: function() { scrollBar.hide(); }
             });
 
-            draggable.bind(CHANGE, function() { scrollBar.show(); });
+            draggable.bind(CHANGE, function() {
+                scrollBar.show();
+            });
         },
 
         options: {
