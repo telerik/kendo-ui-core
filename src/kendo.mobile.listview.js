@@ -29,7 +29,7 @@
             clearTimeout(intervalID);
             if (e.type === MOUSEDOWN) {
                 intervalID = setTimeout(function(){
-                    if (!e.originalEvent.defaultPrevented) {
+                    if (!e.originalEvent || !e.originalEvent.defaultPrevented) {
                         item.toggleClass("km-state-active", true);
                     }
                 }, 100);

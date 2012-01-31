@@ -8,6 +8,7 @@
         <script src="../../qunit-runner.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.mobile.swipe.js"></script>
         <script src="../../../src/kendo.mobile.core.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
@@ -97,7 +98,7 @@
                 ok(!dom.find("#bar").is(".km-listview-link"), "mixed item does not receive CSS class");
             });
 
-            test("toggles item as pressed on press/release", function() {
+            asyncTest("toggles item as pressed on press/release", 2, function() {
                 var dom = $('<ul> \
                     <li><a id="foo" href="foo">Foo</a></li> \
                 </ul>'),
@@ -106,10 +107,13 @@
                 new ListView(dom);
 
                 foo.trigger(kendo.support.mousedown);
-                ok(foo.parent().is(".km-state-active"), "list item is marked as active");
+                setTimeout(function() {
+                    start();
+                    ok(foo.parent().is(".km-state-active"), "list item is marked as active");
 
-                foo.trigger(kendo.support.mouseup);
-                ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+                    foo.trigger(kendo.support.mouseup);
+                    ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+                }, 200);
             });
 
             test("toggles item with detail button as pressed on press/release", function() {
@@ -119,10 +123,12 @@
                 new ListView(dom);
 
                 foo.trigger(kendo.support.mousedown);
-                ok(foo.parent().is(".km-state-active"), "list item is marked as active");
+                setTimeout(function() {
+                    ok(foo.parent().is(".km-state-active"), "list item is marked as active");
 
-                foo.trigger(kendo.support.mouseup);
-                ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+                    foo.trigger(kendo.support.mouseup);
+                    ok(!foo.parent().is(".km-state-active"), "list item is unmarked");
+                }, 200);
             });
 
             test("does not activate pushed state for non-link items", function() {
