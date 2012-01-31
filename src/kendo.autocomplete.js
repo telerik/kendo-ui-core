@@ -211,7 +211,7 @@
     * });
         */
         init: function (element, options) {
-            var that = this;
+            var that = this, wrapper;
 
             options = $.isArray(options) ? { dataSource: options} : options;
 
@@ -281,6 +281,7 @@
             ], that.options);
 
             element[0].type = "text";
+            wrapper = that.wrapper;
 
             element
                 .attr("autocomplete", "off")
@@ -290,16 +291,18 @@
                     paste: proxy(that._search, that),
                     focus: function () {
                         that._old = that.value();
-                        that.wrapper.addClass(FOCUSED);
+                        wrapper.addClass(FOCUSED);
                     },
                     blur: function () {
-                        that._bluring = setTimeout(function () {
-                            if (kendo.support.touch)
-                                that._change();
-                            else
+                        if (!touch) {
+                            that._bluring = setTimeout(function () {
                                 that._blur();
-                            that.wrapper.removeClass(FOCUSED);
-                        }, 100);
+                                wrapper.removeClass(FOCUSED);
+                            }, 100);
+                        } else {
+                            that._change();
+                            wrapper.removeClass(FOCUSED);
+                        }
                     }
                 });
 
@@ -386,29 +389,7 @@
         * autocomplete.select(autocomplete.ul.children().eq(0));
         */
         select: function (li) {
-            var that = this,
-                separator = that.options.separator,
-                data = that.dataSource.view(),
-                text,
-                idx;
-
-            li = $(li);
-
-            if (li[0] && !li.hasClass(SELECTED)) {
-                idx = List.inArray(li[0], that.ul[0]);
-
-                if (idx > -1) {
-                    data = data[idx];
-                    text = that._text(data);
-
-                    if (separator) {
-                        text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
-                    }
-
-                    that.value(text);
-                    that.current(li.addClass(SELECTED));
-                }
-            }
+            this._select(li);
         },
 
         /**
@@ -635,6 +616,32 @@
                     that.search();
                 }
             }, that.options.delay);
+        },
+
+        _select: function (li) {
+            var that = this,
+                separator = that.options.separator,
+                data = that.dataSource.view(),
+                text,
+                idx;
+
+            li = $(li);
+
+            if (li[0] && !li.hasClass(SELECTED)) {
+                idx = List.inArray(li[0], that.ul[0]);
+
+                if (idx > -1) {
+                    data = data[idx];
+                    text = that._text(data);
+
+                    if (separator) {
+                        text = replaceWordAtCaret(caretPosition(that.element[0]), that.value(), text, separator);
+                    }
+
+                    that.value(text);
+                    that.current(li.addClass(SELECTED));
+                }
+            }
         },
 
         _toggleHover: function(e) {

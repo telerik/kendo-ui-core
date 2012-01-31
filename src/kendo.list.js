@@ -68,8 +68,6 @@
                 if (candidate) {
                     candidate.addClass(FOCUSED);
                     that._scroll(candidate[0]);
-                } else {
-                    that._selected = candidate;
                 }
 
                 that._current = candidate;
