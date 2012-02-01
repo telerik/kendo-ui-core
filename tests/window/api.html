@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.ui.window Tests</title>
+        <title>Window API Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -278,6 +278,22 @@
                 dialog.title("foo");
 
                 ok(true);
+            });
+
+            test("title(false) removes titlebar", function() {
+                var dialog = createWindow({ title: "foo" });
+
+                dialog.title(false);
+
+                equal(dialog.wrapper.find(".k-window-titlebar").length, 0);
+            });
+
+            test("title('foo') on titleless window adds title", function() {
+                var dialog = createWindow({ title: false });
+
+                dialog.title("foo");
+
+                equal(dialog.wrapper.find(".k-window-titlebar").length, 1);
             });
         </script>
 

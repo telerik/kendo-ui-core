@@ -213,7 +213,7 @@
          * @option {Boolean} [iframe] Explicitly states whether content iframe should be created.
          * @option {Boolean} [resizable] <true> Specifies whether the users may to resize the window.
          * @option {Array<String>} [actions] <["Close"]> The buttons for interacting with the window. Predefined array values are "Close", "Refresh", "Minimize", "Maximize".
-         * @option {String} [title] The text in the window title bar.
+         * @option {String} [title] The text in the window title bar. If <code>false</code>, the title bar will be hidden.
          * @option {Object} [animation] A collection of {Animation} objects, used to change default animations. A value of false will disable all animations in the widget.
          * @option {Animation} [animation.open] The animation that will be used when the window opens.
          * @option {Animation} [animation.close] The animation that will be used when the window closes.
@@ -502,7 +502,7 @@
 
         /**
          * Sets/gets the window title.
-         * @param {String} title The new window title
+         * @param {String} title The new window title. If <code>false</code>, the title bar will be hidden.
          * @example
          * var wnd = $("#window").data("kendoWindow");
          *
@@ -511,9 +511,14 @@
          *
          * // set the title
          * wnd.title("New title");
+         *
+         * // remove the title bar
+         * wnd.title(false);
          */
         title: function (text) {
-            var wrapper = this.wrapper,
+            var that = this,
+                wrapper = that.wrapper,
+                options = that.options,
                 titleBar = wrapper.find(KWINDOWTITLEBAR),
                 title = titleBar.children(".k-window-title"),
                 titleBarHeight = titleBar.outerHeight();
@@ -524,14 +529,19 @@
 
             if (text === false) {
                 wrapper.addClass("k-window-titleless");
+                titleBar.remove();
             } else {
+                if (titleBar.length == 0) {
+                    wrapper.prepend(templates.titlebar(extend(templates, options)));
+                }
+
                 wrapper.css("padding-top", titleBarHeight);
                 titleBar.css("margin-top", -titleBarHeight);
             }
 
             title.text(text);
 
-            return this;
+            return that;
         },
 
         /**
