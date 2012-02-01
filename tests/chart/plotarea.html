@@ -225,8 +225,23 @@
                     );
                 });
 
+                test("stacked axes on the left are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                    ok(!secondaryValueAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                });
+
                 // ------------------------------------------------------------
-                module("Categorical PlotArea / Multiple Axes / Stacked right", {
+                module("Categorical PlotArea / Multiple Axes / Stacked Right", {
                     setup: function() {
                         moduleSetup();
 
@@ -266,6 +281,21 @@
                     ok(axisBox.x1 >= plotArea.box.x1 && axisBox.y1 >= plotArea.box.x1);
                 });
 
+                test("stacked axes on the right are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                    ok(secondaryValueAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Top", {
                     setup: function() {
@@ -298,6 +328,21 @@
                     );
                 });
 
+                test("stacked axes on the top are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                    ok(secondaryValueAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Bottom", {
                     setup: function() {
@@ -325,6 +370,21 @@
                     same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
                          [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
                     );
+                });
+
+                test("stacked axes on the bottom are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                    ok(!secondaryValueAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
                 });
 
                 // ------------------------------------------------------------

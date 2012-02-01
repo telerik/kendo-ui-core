@@ -4163,8 +4163,7 @@
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
             var slot = axis.getSlot(crossingValue, crossingValue),
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
-                isVertical = axis.options.isVertical;
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue);
 
             axis.reflow(
                 axis.box.translate(
@@ -4180,8 +4179,6 @@
                 yAnchor = yAxes[0],
                 xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
                 yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
-                xAnchorRange = xAnchor.range(),
-                yAnchorRange = yAnchor.range(),
                 leftAnchor,
                 rightAnchor,
                 topAnchor,
@@ -4190,27 +4187,36 @@
                 axisCrossings,
                 i;
 
+            // TODO: Refactor almost-identical loops
             for (i = 0; i < yAxes.length; i++) {
                 axis = yAxes[i];
                 plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
 
-                if (xAnchorCrossings[i] <= xAnchorRange.min) {
+                if (axis.lineBox().x1 === xAnchor.lineBox().x1) {
                     if (leftAnchor) {
                         axis.reflow(axis.box
                             .alignTo(leftAnchor.box, LEFT)
                             .translate(-axis.options.margin, 0)
                         );
                     }
+
                     leftAnchor = axis;
                 }
 
-                if (xAnchorCrossings[i] >= xAnchorRange.max) {
+                if (axis.lineBox().x2 === xAnchor.lineBox().x2) {
+                    if (!axis._mirrored) {
+                        axis.options.mirror = !axis.options.mirror;
+                        axis._mirrored = true;
+                    }
+                    plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+
                     if (rightAnchor) {
                         axis.reflow(axis.box
                             .alignTo(rightAnchor.box, RIGHT)
                             .translate(axis.options.margin, 0)
                         );
                     }
+
                     rightAnchor = axis;
                 }
             }
@@ -4219,23 +4225,31 @@
                 axis = xAxes[i];
                 plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
 
-                if (yAnchorCrossings[i] <= yAnchorRange.min) {
+                if (axis.lineBox().y1 === yAnchor.lineBox().y1) {
+                    if (!axis._mirrored) {
+                        axis.options.mirror = !axis.options.mirror;
+                        axis._mirrored = true;
+                    }
+                    plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+
                     if (topAnchor) {
                         axis.reflow(axis.box
                             .alignTo(topAnchor.box, TOP)
                             .translate(0, -axis.options.margin)
                         );
                     }
+
                     topAnchor = axis;
                 }
 
-                if (yAnchorCrossings[i] >= yAnchorRange.max) {
+                if (axis.lineBox().y2 === yAnchor.lineBox().y2) {
                     if (bottomAnchor) {
                         axis.reflow(axis.box
                             .alignTo(bottomAnchor.box, BOTTOM)
                             .translate(0, axis.options.margin)
                         );
                     }
+
                     bottomAnchor = axis;
                 }
             }
