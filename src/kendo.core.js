@@ -21,6 +21,7 @@
         OBJECT = "object",
         NULL = "null",
         BOOLEAN = "boolean",
+        UNDEFINED = "undefined",
         globalize = window.Globalize;
 
     function Class() {}
@@ -1616,7 +1617,7 @@
                     destination[property] = {};
                 }
                 deepExtendOne(destination[property], propValue);
-            } else if (propType !== undefined) {
+            } else if (propType !== UNDEFINED) {
                 destination[property] = propValue;
             }
         }
@@ -1749,7 +1750,7 @@
                         os.minorVersion = match[3].replace("_", ".");
                         os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
                         os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
-                        os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== "undefined"; // Use file protocol to detect appModes.
+                        os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED; // Use file protocol to detect appModes.
 
                         break;
                     }
