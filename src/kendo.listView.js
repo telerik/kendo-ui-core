@@ -243,34 +243,42 @@
            }
        },
 
+       _closeEditable: function() {
+           var that = this,
+               editable = that.editable,
+               data,
+               container,
+               valid = true;
+
+           if (editable) {
+               if (editable.end()) {
+                   data = that.dataSource.view()[editable.element.index()],
+                   container = $(that.template(data))
+                   that._destroyEditable();
+                   editable.element.replaceWith(container);
+               } else {
+                   valid = false;
+               }
+           }
+
+           return valid;
+       },
+
        editItem: function(item) {
            var that = this,
                data = that.dataSource.view()[item.index()],
                container = $(that.editTemplate(data)).addClass(KEDITITEM);
 
-            if (that.editable) {
-                if (that.editable.end()) {
-                    that.saveItem(that.editable.element);
-                } else {
-                    return;
-                }
+            if (that._closeEditable()) {
+                item.replaceWith(container);
+                that.editable = container.kendoEditable({ model: data }).data("kendoEditable");
+
+                that.trigger(EDIT, { model: data, item: container });
             }
-
-           item.replaceWith(container);
-           that.editable = container.kendoEditable({ model: data }).data("kendoEditable");
-
-           that.trigger(EDIT, { model: data, item: container });
        },
 
-       saveItem: function(item) {
-           var that = this,
-               data = that.dataSource.view()[item.index()],
-               container = $(that.template(data));
-
-           if (that.editable && that.editable.end()) {
-               that._destroyEditable();
-               item.replaceWith(container);
-           }
+       saveItem: function() {
+           this._closeEditable();
        },
 
        removeItem: function(item) {
@@ -280,6 +288,21 @@
            if (!that.trigger(REMOVE, { model: data, item: item })) {
                item.hide();
                that.dataSource.remove(data);
+           }
+       },
+
+       addItem: function() {
+           var that = this,
+               dataSource = that.dataSource,
+               index = dataSource.indexOf((dataSource.view() || [])[0]);
+
+           if (index < 0) {
+               index = 0;
+           }
+
+           if (that._closeEditable()) {
+               dataSource.insert(index, {});
+               that.editItem(that.element.children().first());
            }
        }
 
