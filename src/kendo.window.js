@@ -252,10 +252,7 @@
                 createWindow(element, options);
                 wrapper = that.wrapper = element.closest(KWINDOW);
 
-                titleBar = that.wrapper.find(KWINDOWTITLEBAR);
-                titleBar.css("margin-top", -titleBar.outerHeight());
-
-                wrapper.css("padding-top", titleBar.outerHeight());
+                that.title(options.title);
 
                 if (options.width) {
                     wrapper.width(options.width);
@@ -502,13 +499,24 @@
          * wnd.title("New title");
          */
         title: function (text) {
-            var title = $(".k-window-titlebar > .k-window-title", this.wrapper);
+            var wrapper = this.wrapper,
+                titleBar = wrapper.find(KWINDOWTITLEBAR),
+                title = titleBar.children(".k-window-title"),
+                titleBarHeight = titleBar.outerHeight();
 
-            if (!text) {
+            if (arguments.length == 0) {
                 return title.text();
             }
 
+            if (text === false) {
+                wrapper.addClass("k-window-titleless");
+            } else {
+                wrapper.css("padding-top", titleBarHeight);
+                titleBar.css("margin-top", -titleBarHeight);
+            }
+
             title.text(text);
+
             return this;
         },
 
@@ -893,7 +901,8 @@
     };
 
     function createWindow(element, options) {
-        var contentHtml = $(element);
+        var contentHtml = $(element),
+            wrapper;
 
         if (options.scrollable === false) {
             contentHtml.attr("style", "overflow:hidden;");
@@ -903,8 +912,13 @@
             contentHtml.html(templates.contentFrame(options));
         }
 
-        $(templates.wrapper(options))
-            .append(templates.titlebar(extend(templates, options)))
+        wrapper = $(templates.wrapper(options));
+
+        if (options.title !== false) {
+            wrapper.append(templates.titlebar(extend(templates, options)))
+        }
+
+        wrapper
             .append(contentHtml)
             .appendTo(body);
     }

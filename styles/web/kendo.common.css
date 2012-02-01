@@ -432,6 +432,11 @@ div.k-window
     vertical-align: middle;
 }
 
+div.k-window-titleless
+{
+    padding-top: 0;
+}
+
 div.k-window-content
 {
     position: relative;
