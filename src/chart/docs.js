@@ -19,6 +19,7 @@
      *     <li>Pie</li>
      *     <li>Scatter</li>
      *     <li>Scatter Line</li>
+     *     <li>Area</li>
      * </ul>
      *
      * <p>
@@ -2803,6 +2804,7 @@
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
          * @option {Object} [axisDefaults] Default options for all chart axes.
+         * @option {Array} [seriesColors] The default colors for the chart's series. When all colors are used, new colors are pulled from the start again.
          */
         init: function() {
             /**
