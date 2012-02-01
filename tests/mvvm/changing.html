@@ -19,14 +19,11 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
         <script>
-            var valueBinding;
 
             module("mvvm observing", {
                 setup: function() {
-                    valueBinding = kendo.bindings.select.value.prototype.bind;
                 },
                 teardown: function() {
-                    kendo.bindings.select.value.prototype.bind = valueBinding;
                 }
             });
 
@@ -268,22 +265,6 @@
                 equal(dom.attr("title"), "boo");
             });
 
-            test("tracking changes of parent complex fields", function() {
-                var dom = $('<div data-title="bar" data-text="foo.bar"/>');
-
-                var viewModel = kendo.observable({
-                    foo: {
-                        bar: "bar"
-                    }
-                });
-
-                kendo.bind(dom, viewModel);
-
-                viewModel.set("foo", { bar: "baz" });
-
-                equal(dom.text(), "baz");
-            });
-
             test("tracking changes in templates", function() {
                 var dom = $('<div data-template="simple-field-template" />');
 
@@ -421,6 +402,7 @@
 
                 ok(!dom.is(":checked"));
             });
+
         </script>
 
         <script id="array-template" type="text/x-kendo-template">

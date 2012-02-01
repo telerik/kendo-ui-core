@@ -110,24 +110,26 @@
             return this.bind(eventNames, handlers, true);
         },
 
-        trigger: function(eventName, parameter) {
+        trigger: function(eventName, e, isDefaultPrevented) {
             var that = this,
                 events = that._events[eventName],
-                isDefaultPrevented = false,
-                args = extend(parameter, {
-                    preventDefault: function() {
-                        isDefaultPrevented = true;
-                    },
-                    isDefaultPrevented: function() {
-                        return isDefaultPrevented;
-                    }
-                }),
                 idx,
                 length;
 
+            e = e || {};
+            isDefaultPrevented = !!isDefaultPrevented;
+
+            e.preventDefault = function () {
+                isDefaultPrevented = true;
+            }
+
+            e.isDefaultPrevented = function() {
+                return isDefaultPrevented;
+            }
+
             if (events) {
                 for (idx = 0, length = events.length; idx < length; idx++) {
-                    events[idx].call(that, args);
+                    events[idx].call(that, e);
                 }
             }
 

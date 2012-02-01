@@ -190,19 +190,6 @@
                 equal(viewModel.foo.indexOf({ bar: 42 }), -1);
             });
 
-            test("change event is not raised if propagation is stopped", function() {
-                var viewModel = kendo.observable({ foo: [ { bar: "bar" } ] });
-
-                viewModel.foo.bind("change", function() {
-                    ok(false, "Event should not be raised");
-                });
-
-                viewModel.foo[0].bind(0, "change", function(e) {
-                    e.stopPropagation();
-                });
-
-                viewModel.foo[0].set("bar", "boo");
-            });
         </script>
     </head>
 </html>

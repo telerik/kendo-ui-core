@@ -212,9 +212,7 @@
                     member = new type(member);
 
                     member.bind(CHANGE, function(e) {
-                        if (!e.isPropagationStopped()) {
-                            that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
-                        }
+                        that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" }, e.isDefaultPrevented());
                     });
                 }
 
@@ -324,6 +322,12 @@
                     })(field);
                 } else if (type === "[object Array]") {
                     member = new ObservableArray(member);
+
+                    (function(field) {
+                        member.bind(CHANGE, function(e) {
+                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action}, e.isDefaultPrevented());
+                        });
+                    })(field);
                 }
 
                 that[field] = member;
@@ -361,13 +365,7 @@
 
                     this.trigger(CHANGE, {
                         field: field,
-                        initiator: initiator,
-                        stopPropagation: function() {
-                            stopped = true;
-                        },
-                        isPropagationStopped: function() {
-                            return stopped;
-                        }
+                        initiator: initiator
                     });
                 }
             }
