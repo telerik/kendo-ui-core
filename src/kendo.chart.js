@@ -5695,10 +5695,12 @@
                 axes = [].concat(options[axisName]);
 
             axes = $.map(axes, function(axisOptions) {
+                var axisColor = (axisOptions || {}).color;
                 return deepExtend({},
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
                     options.axisDefaults,
+                    { line: { color: axisColor }, labels: { color: axisColor } },
                     axisOptions
                 );
             });
