@@ -21,11 +21,13 @@
         },
 
         move: function(location, timeStamp) {
+            if (!location) {
+                return;
+            }
+
             var that = this;
-            location = Math.max(0, location);
             that.delta = location - that.location;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
-            console.log(location);
             that.location = location;
             that.timeStamp = timeStamp;
         }
