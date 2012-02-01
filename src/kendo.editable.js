@@ -130,7 +130,7 @@
                 idx,
                 length,
                 fields = that.options.fields || [],
-                container = that.element.empty(),
+                container = that.options.fields ? that.element.empty() : that.element,
                 model = that.options.model || {},
                 rules = {};
 
