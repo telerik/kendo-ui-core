@@ -13,16 +13,21 @@
         SURFACE = $(document.documentElement);
 
     var SwipeAxis = Class.extend({
-        start: function(location) {
+        start: function(location, timeStamp) {
             var that = this;
             that.location = location;
             that.velocity = that.delta = 0;
+            that.timeStamp = timeStamp;
         },
 
-        move: function(location) {
+        move: function(location, timeStamp) {
             var that = this;
-            that.velocity = that.delta = location - that.location;
+            location = Math.max(0, location);
+            that.delta = location - that.location;
+            that.velocity = that.delta / (timeStamp - that.timeStamp);
+            console.log(location);
             that.location = location;
+            that.timeStamp = timeStamp;
         }
     });
 
@@ -86,7 +91,7 @@
                 that.touchID = touch.identifier;
             }
 
-            that._perAxis(START, touch || e);
+            that._perAxis(START, touch || e, e.timeStamp);
             that.surface.off(that.eventMap).on(that.eventMap);
             Swipe.captured = false;
         },
@@ -98,7 +103,7 @@
 
             that._withEvent(e, function(location) {
 
-                that._perAxis(MOVE, location);
+                that._perAxis(MOVE, location, e.timeStamp);
 
                 if (!that.moved) {
                     if (!Swipe.captured) {
@@ -132,9 +137,9 @@
             });
         },
 
-        _perAxis: function(method, location) {
-            this.x[method](location.pageX);
-            this.y[method](location.pageY);
+        _perAxis: function(method, location, timeStamp) {
+            this.x[method](location.pageX, timeStamp);
+            this.y[method](location.pageY, timeStamp);
         },
 
         _trigger: function(name, event) {
