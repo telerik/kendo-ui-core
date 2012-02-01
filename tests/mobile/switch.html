@@ -7,6 +7,7 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.mobile.swipe.js"></script>
         <script src="../../src/kendo.mobile.switch.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -23,16 +24,21 @@
 
             var Switch = kendo.mobile.ui.Switch,
                 MOUSEDOWN = kendo.support.mousedown,
+                MOUSEMOVE = kendo.support.mousemove,
                 MOUSEUP = kendo.support.mouseup,
                 dom;
 
             QUnit.config.reorder = false;
 
-            var mouseDownEvent;
+            var mouseDownEvent,
+                mouseMoveEvent;
+
             if (kendo.support.touch) {
                 mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+                mouseMoveEvent = new $.Event(null, {type: MOUSEMOVE, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
             } else {
                 mouseDownEvent = MOUSEDOWN;
+                mouseMoveEvent = MOUSEMOVE;
             }
 
             module("switch", {
@@ -138,6 +144,7 @@
                 var theSwitch = new Switch(dom);
 
                 theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(mouseMoveEvent);
                 ok(theSwitch.handle.hasClass("km-state-active"), "has active css class");
             });
 
@@ -147,18 +154,9 @@
                 var theSwitch = new Switch(dom);
 
                 theSwitch.handle.trigger(mouseDownEvent);
+                theSwitch.handle.trigger(mouseMoveEvent);
                 theSwitch.handle.trigger(MOUSEUP);
                 ok(!theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
-            });
-
-            test("Switch does apply active state", function() {
-                expect(1);
-
-                var theSwitch = new Switch(dom);
-
-                theSwitch.handle.trigger(mouseDownEvent);
-
-                ok(theSwitch.handle.hasClass("km-state-active"), "Does not have active css class");
             });
 
             test("Switch check the input depending on the checked option", function() {
