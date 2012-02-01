@@ -4763,6 +4763,10 @@
             each([].concat(options.yAxis), function() {
                 plotArea.createXYAxis(this, true);
             });
+
+            // TODO: Remove axisX and axisY aliases
+            plotArea.axisX = plotArea.namedXAxes.primary;
+            plotArea.axisY = plotArea.namedYAxes.primary;
         }
     });
 
