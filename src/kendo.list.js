@@ -76,10 +76,6 @@
             }
         },
 
-        refresh: function() {
-            this.dataSource.read();
-        },
-
         _accessors: function() {
             var that = this,
                 element = that.element,
@@ -392,7 +388,7 @@
             }
 
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                   .bind(CHANGE, proxy(that._refresh, that))
+                                   .bind(CHANGE, proxy(that.refresh, that))
                                    .bind("requestStart", proxy(that._showBusy, that));
         },
 
@@ -420,9 +416,8 @@
 
         _get: function(li) {
             var that = this,
-                idx,
                 data = that._data(),
-                length;
+                idx, length;
 
             if (typeof li === "function") {
                 for (idx = 0, length = data.length; idx < length; idx++) {
@@ -432,8 +427,6 @@
                     }
                 }
             }
-
-            idx = -1;
 
             if (typeof li === "number") {
                 if (li < 0) {

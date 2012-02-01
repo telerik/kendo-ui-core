@@ -79,7 +79,7 @@
                 equal(combobox._old, "2");
             });
 
-            test("value method should select first if no such value", function() {
+            test("value('') clear selection", function() {
                 combobox.select(1);
                 combobox.value("");
 
@@ -269,16 +269,6 @@
                 ok(!combobox._inputWrapper.hasClass('k-state-disabled'));
                 ok(!combobox.element.attr("disabled"));
                 ok(!combobox.input.attr("disabled"));
-            });
-
-            test("refresh repopulates the list", function() {
-                var combobox = new ComboBox(input);
-
-                stub(combobox.dataSource, {read: combobox.dataSource.read});
-
-                combobox.refresh();
-
-                equal(combobox.dataSource.calls("read"), 1);
             });
 
         </script>
