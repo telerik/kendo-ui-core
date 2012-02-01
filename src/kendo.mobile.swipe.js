@@ -66,7 +66,7 @@
             element.on(START_EVENTS, proxy(that._start, that))
                 .on("dragstart", function(e) { e.preventDefault(); });
 
-            that.bind([START, MOVE, END], options);
+            that.bind([TAP, START, MOVE, END], options);
         },
 
         capture: function() {
