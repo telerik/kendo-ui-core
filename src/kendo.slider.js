@@ -200,25 +200,19 @@
                 i,
                 paddingTop = 0,
                 bordersWidth = 2,
-                selection = 0,
-                isOverlap =
-                (1000 * options.largeStep) % (1000 * options.smallStep) == 0
-                && that._distance % options.largeStep != 0;
+                count = items.length,
+                selection = 0;
 
-            for (i = 0; i < items.length - 2; i++) {
+            for (i = 0; i < count - 2; i++) {
                 $(items[i + 1])[that._size](pixelWidths[i]);
             }
 
             if (that._isHorizontal) {
                 $(items[first]).addClass("k-first")[that._size](pixelWidths[last - 1]);
-                if (!isOverlap) {
-                    $(items[last]).addClass("k-last")[that._size](pixelWidths[last]);
-                }
+                $(items[last]).addClass("k-last")[that._size](pixelWidths[last]);
             } else {
                 $(items[last]).addClass("k-first")[that._size](pixelWidths[last]);
-                if (!isOverlap) {
-                    $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
-                }
+                $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
             }
 
             if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
