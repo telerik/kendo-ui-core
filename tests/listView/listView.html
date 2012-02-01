@@ -43,8 +43,16 @@
                 ok(ul.data("kendoListView") instanceof kendo.ui.ListView);
             });
 
+            test("k-widget and k-listview classes are applied on element", function() {
+                var ul = setup();
+
+                ok(ul.hasClass("k-widget"));
+                ok(ul.hasClass("k-listview"));
+            });
+
             test("renders item for dataSource items", function() {
                 var ul = setup();
+
                 equal(ul.find("li").length, 5);
             });
 

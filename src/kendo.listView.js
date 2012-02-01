@@ -9,8 +9,11 @@
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
+        KEDITITEM = "k-edit-item",
         STRING = "string",
         CLICK = "click",
+        EDIT = "edit",
+        REMOVE = "remove",
         proxy = $.proxy,
         DataSource = kendo.data.DataSource;
 
@@ -22,12 +25,15 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.bind([CHANGE,DATABOUND], options);
+            that.bind([CHANGE,DATABOUND,EDIT,REMOVE], options);
+
+            that._element();
 
             that._dataSource();
 
             that.template = kendo.template(options.template);
             that.altTemplate = kendo.template(options.altTemplate || options.template);
+            that.editTemplate = kendo.template(options.editTemplate || "");
 
             that._navigatable();
 
@@ -49,7 +55,11 @@
             that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
         },
 
-        refresh: function() {
+        _element: function() {
+            this.element.addClass("k-widget k-listview");
+        },
+
+        refresh: function(e) {
             var that = this,
                 data = that.dataSource.view(),
                 html = "",
@@ -57,6 +67,12 @@
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate;
+
+            if (e && e.action === "itemchange") {
+                that._modelChange(e);
+                return;
+            }
+            that._destroyEditable();
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (idx % 2) {
@@ -205,7 +221,91 @@
             }
 
            return selectable.value();
+       },
+
+       _modelChange: function(e) {
+           var that = this,
+               model = e.items[0],
+               index = $.inArray(model, that.dataSource.view()),
+               isAlt = index % 2,
+               item = that.element.children().eq(index);
+
+            if (!item.hasClass(KEDITITEM)) {
+                item.replaceWith((isAlt ? that.altTemplate : that.template)(model));
+            }
+       },
+
+       _destroyEditable: function() {
+           var that = this;
+           if (that.editable) {
+               that.editable.distroy();
+               delete that.editable;
+           }
+       },
+
+       _closeEditable: function() {
+           var that = this,
+               editable = that.editable,
+               data,
+               container,
+               valid = true;
+
+           if (editable) {
+               if (editable.end()) {
+                   data = that.dataSource.view()[editable.element.index()],
+                   container = $(that.template(data))
+                   that._destroyEditable();
+                   editable.element.replaceWith(container);
+               } else {
+                   valid = false;
+               }
+           }
+
+           return valid;
+       },
+
+       editItem: function(item) {
+           var that = this,
+               data = that.dataSource.view()[item.index()],
+               container = $(that.editTemplate(data)).addClass(KEDITITEM);
+
+            if (that._closeEditable()) {
+                item.replaceWith(container);
+                that.editable = container.kendoEditable({ model: data }).data("kendoEditable");
+
+                that.trigger(EDIT, { model: data, item: container });
+            }
+       },
+
+       saveItem: function() {
+           this._closeEditable();
+       },
+
+       removeItem: function(item) {
+           var that = this,
+               data = that.dataSource.view()[item.index()];
+
+           if (!that.trigger(REMOVE, { model: data, item: item })) {
+               item.hide();
+               that.dataSource.remove(data);
+           }
+       },
+
+       addItem: function() {
+           var that = this,
+               dataSource = that.dataSource,
+               index = dataSource.indexOf((dataSource.view() || [])[0]);
+
+           if (index < 0) {
+               index = 0;
+           }
+
+           if (that._closeEditable()) {
+               dataSource.insert(index, {});
+               that.editItem(that.element.children().first());
+           }
        }
+
     });
 
     kendo.ui.plugin(ListView);
