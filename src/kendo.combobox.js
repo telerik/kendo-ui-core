@@ -337,6 +337,42 @@
         * // re-populate the data of the DataSource
         * combobox.refresh();
         */
+        refresh: function() {
+            var that = this,
+                ul = that.ul[0],
+                options = that.options,
+                suggest = options.suggest,
+                height = options.height,
+                data = that._data(),
+                length = data.length;
+
+            that.trigger("dataBinding");
+
+            ul.innerHTML = kendo.render(that.template, data);
+            that._height(length);
+
+            if (that.element.is(SELECT)) {
+                that._options(data);
+            }
+
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
+            }
+
+            if (that._open) {
+                that._open = false;
+                that.toggle(!!length);
+            }
+
+            that._hideBusy();
+            that.trigger("dataBound");
+        },
 
         /**
         * Selects drop-down list item and sets the value and the text of the combobox.
@@ -678,43 +714,6 @@
             } else if (!that._move(e)) {
                that._search();
             }
-        },
-
-        _refresh: function() {
-            var that = this,
-                ul = that.ul[0],
-                options = that.options,
-                suggest = options.suggest,
-                height = options.height,
-                data = that._data(),
-                length = data.length;
-
-            that.trigger("dataBinding");
-
-            ul.innerHTML = kendo.render(that.template, data);
-            that._height(length);
-
-            if (that.element.is(SELECT)) {
-                that._options(data);
-            }
-
-            if (length) {
-                if (suggest || options.highlightFirst) {
-                    that.current($(ul.firstChild));
-                }
-
-                if (suggest) {
-                    that.suggest(that._current);
-                }
-            }
-
-            if (that._open) {
-                that._open = false;
-                that.toggle(!!length);
-            }
-
-            that._hideBusy();
-            that.trigger("dataBound");
         },
 
         _search: function() {

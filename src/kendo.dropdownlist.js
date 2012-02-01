@@ -316,6 +316,38 @@
         * // re-populate the data of the DataSource
         * dropdownlist.refresh();
         */
+        refresh: function() {
+            var that = this,
+                value = that.value(),
+                options = that.options,
+                data = that._data(),
+                length = data.length;
+
+            that.trigger("dataBinding");
+
+            that.ul[0].innerHTML = kendo.render(that.template, data);
+            that._height(length);
+
+            if (that.element.is(SELECT)) {
+                that._options(data);
+            }
+
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(options.index);
+            }
+
+            if (that._open) {
+                that.toggle(length);
+            }
+
+            that._hideBusy();
+
+            that.trigger("dataBound");
+        },
+
+
 
         /**
         * Selects item, which starts with the provided parameter.
@@ -475,37 +507,6 @@
                 that._word += String.fromCharCode(e.keyCode || e.charCode);
                 that._search();
             }, 0);
-        },
-
-        _refresh: function() {
-            var that = this,
-                value = that.value(),
-                options = that.options,
-                data = that._data(),
-                length = data.length;
-
-            that.trigger("dataBinding");
-
-            that.ul[0].innerHTML = kendo.render(that.template, data);
-            that._height(length);
-
-            if (that.element.is(SELECT)) {
-                that._options(data);
-            }
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(options.index);
-            }
-
-            if (that._open) {
-                that.toggle(length);
-            }
-
-            that._hideBusy();
-
-            that.trigger("dataBound");
         },
 
         _search: function() {

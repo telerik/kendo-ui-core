@@ -261,17 +261,7 @@
                 equal(select[0].selectedIndex, 1);
             });
 
-            test("refresh repopulates the list", function() {
-                var dropdownlist = new DropDownList(input);
-
-                stub(dropdownlist.dataSource, {read: dropdownlist.dataSource.read});
-
-                dropdownlist.refresh();
-
-                equal(dropdownlist.dataSource.calls("read"), 1);
-            });
-
-      </script>
+        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
     </body>
