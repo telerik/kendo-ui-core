@@ -56,21 +56,14 @@
         SWITCHON = "km-switch-on",
         SWITCHOFF = "km-switch-off",
         MARGINLEFT = "margin-left",
-        MOUSEDOWN = support.mousedown,
-        MOUSEUP = support.mouseup,
-        MOUSEMOVE = support.mousemove,
+        ACTIVE_STATE = "km-state-active",
         TRANSFORMSTYLE = support.transitions.css + "transform",
         DOCUMENT = $(document),
         extend = $.extend,
         proxy = $.proxy;
 
-    function prevent(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
     function limitValue(value, minLimit, maxLimit) {
-        return Math.max( minLimit, Math.min( maxLimit, value));
+        return Math.max(minLimit, Math.min(maxLimit, value));
     }
 
     var Switch = Widget.extend(/** @lends kendo.mobile.ui.Switch.prototype */{
@@ -89,6 +82,7 @@
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
+            that._swipe();
             that._background();
             that._handle();
 
@@ -96,15 +90,12 @@
             element = that.element.data(kendo.attr("role"), "switch");
             element[0].type = "checkbox";
 
+            width = that.wrapper.outerWidth();
             handleWidth = that.handle.outerWidth();
-            that.halfWidth = handleWidth / 2;
-            that.width = width = that.wrapper.outerWidth();
-            that.snapPart = width - handleWidth;
-            that.constrain = width - that.halfWidth;
-            that._visibleBack = true;
 
-            that._moveProxy = proxy(that._move, that);
-            that._stopProxy = proxy(that._stop, that);
+            that.constrain = width - handleWidth;
+            that.snapPoint = width / 2 - handleWidth / 2;
+            that._visibleBack = true;
 
             that.bind([
                 /**
@@ -132,7 +123,7 @@
                 checked = element[0].checked;
             }
 
-            that.toggle(checked);
+            that._toggle(checked, true);
         },
 
         options: {
@@ -152,41 +143,21 @@
         * </script>;
         */
         toggle: function(check) {
-            var that = this,
-                element = that.element[0];
+            var that = this;
 
             if (check === undefined) {
-                check = !element.checked;
+                check = !that.element[0].checked;
             }
 
-            element.checked = check;
-
-            that._position(check * that.snapPart, check ? 0 : that.origin);
-
-            that.handle
-                .toggleClass(SWITCHON, check)
-                .toggleClass(SWITCHOFF, !check);
-        },
-
-        _active: function (e) {
-            this.handle.toggleClass("km-state-active", e.type == MOUSEDOWN);
-        },
-
-        _location: function(e) {
-            return kendo.touchLocation(e).x - this.wrapper.offset().left;
+            that._toggle(check, true);
         },
 
         _move: function(e) {
             var that = this,
-                location = limitValue(that._location(e), that.halfWidth, that.constrain),
-                position = location - that.halfWidth;
+                position = limitValue(that.position + e.x.delta, 0, that.constrain),
+                margin = that.origin + position;
 
-            that._position(position, that.origin + position);
-        },
-
-        _position: function(position, margin) {
-            var that = this;
-
+            that.position = position;
             that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
 
             if (that._visibleBack) {
@@ -195,74 +166,51 @@
         },
 
         _start: function(e) {
-            if (e.which > 1) {
-                return;
-            }
-
-            var that = this;
-
-            that._visibleBack = that.background.is(":visible");
-            that._initial = that._location(e);
-
-            DOCUMENT
-                .bind(MOUSEMOVE, that._moveProxy)
-                .bind(MOUSEUP + " mouseleave", that._stopProxy); // Stop if leaving the simulator/screen
-
-            prevent(e);
+            this.handle.addClass(ACTIVE_STATE);
+            this._visibleBack = this.background.is(":visible");
         },
 
         _stop: function(e) {
-            var that = this,
-                location = that._location(e),
-                check;
+            var that = this;
 
-            if (Math.abs(that._initial - location) <= 2) {
-                check = !that.element[0].checked;
-            } else {
-                check = location > (that.width / 2);
-            }
-
-            that._toggle(check);
-
-            DOCUMENT
-                .unbind(MOUSEMOVE, that._moveProxy)
-                .unbind(MOUSEUP + " mouseleave", that._stopProxy);
-
-            prevent(e);
+            that.handle.removeClass(ACTIVE_STATE);
+            that._toggle(that.position > that.snapPoint, false);
         },
 
-        _toggle: function (checked) {
+        _toggle: function (checked, silent) {
             var that = this,
                 handle = that.handle,
                 element = that.element[0],
                 value = element.checked,
+                duration = silent ? 0 : 200,
                 distance;
 
             handle
                 .toggleClass(SWITCHON, checked)
                 .toggleClass(SWITCHOFF, !checked);
 
-            if (!handle.data("animating")) {
-                distance = checked * that.snapPart;
+            that.position = distance = checked * that.constrain;
 
-                that.background
-                    .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: 200 });
 
-                handle
-                    .kendoStop(true, true)
-                    .kendoAnimate({
-                        effects: "slideTo",
-                        duration: 200,
-                        offset: distance + "px,0",
-                        complete: function () {
-                            if (value !== checked) {
-                                element.checked = checked;
+            that.background
+                .kendoStop(true, true)
+                .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: duration });
+
+            handle
+                .kendoStop(true, true)
+                .kendoAnimate({
+                    effects: "slideTo",
+                    duration: duration,
+                    offset: distance + "px,0",
+                    complete: function () {
+                        if (value !== checked) {
+                            element.checked = checked;
+                            if (!silent) {
                                 that.trigger(CHANGE, { checked: checked });
                             }
                         }
-                    });
-            }
+                    }
+                });
         },
 
         _background: function() {
@@ -284,8 +232,7 @@
 
             that.handle = $("<span class='km-switch-container'><span class='km-switch-handle' /></span>")
                             .appendTo(that.wrapper)
-                            .children(".km-switch-handle")
-                            .bind(MOUSEDOWN + " " + MOUSEUP, proxy(that._active, that));
+                            .children(".km-switch-handle");
 
             that.handle.append('<span class="km-switch-label-on">' + options.onLabel + '</span><span class="km-switch-label-off">' + options.offLabel + '</span>');
         },
@@ -299,8 +246,20 @@
                 wrapper = element.wrap("<label />").parent();
             }
 
-            that.wrapper = wrapper.addClass("km-switch")
-                                  .bind(MOUSEDOWN, proxy(that._start, that));
+            that.wrapper = wrapper.addClass("km-switch");
+        },
+
+        _swipe: function() {
+            var that = this;
+
+            that.swipe = new kendo.mobile.Swipe(that.wrapper, {
+                tap: function() {
+                    that._toggle(!that.element[0].checked, false);
+                },
+                start: proxy(that._start, that),
+                move: proxy(that._move, that),
+                end: proxy(that._stop, that)
+            });
         }
     });
 
