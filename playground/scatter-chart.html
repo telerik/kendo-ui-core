@@ -20,44 +20,21 @@
                 data2.push([Math.sin(i / 25), Math.cos(i / 10) * 0.5]);
             }
 
-            var data = [{
-                    xValue: 3,
-                    yValue: 1
-                },{
-                    xValue: 2,
-                    yValue: 2
-                }];
-
             $(document).ready(function() {
                 $("#container").kendoChart({
-                    theme: "silver",
                     title: {
                         text: "Scatter chart"
-                    },
-                    dataSource: {
-                        data: data
                     },
                     legend: {
                         position: "bottom"
                     },
                     series: [
                         {
-                            labels: {
-                                visible: true
-                            },
                             type: "scatter",
                             name: "Plot 1",
-                            missingValues: "",
-                            data: [[1,1], [1,2]],
-                            tooltip: {
-                                format: "{0}kur{1}"
-                            }
+                            data: data1
                         }
-                    ],
-                    tooltip: {
-                        visible: true,
-                        format: "{0}-----------{1}"
-                    }
+                    ]
                 });
             });
         </script>

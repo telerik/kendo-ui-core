@@ -17,7 +17,6 @@
                 Box2D = Chart.Box2D,
                 categoriesCount = Chart.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                plotArea,
                 areaChart,
                 root,
                 view,
@@ -37,6 +36,30 @@
                 pointCoordinates = mapPoints(view.log.path[0].points);
             }
 
+            function stubPlotArea(getCategorySlot, getValueSlot, options) {
+                return new function() {
+                    this.categoryAxis = {
+                        getSlot: getCategorySlot,
+                        lineBox: function() {
+                            return new Box2D(1,1,1,1);
+                        },
+                        options: {}
+                    };
+
+                    this.namedValueAxes = {
+                        primary: {
+                            getSlot: getValueSlot,
+                            lineBox: function() {
+                                return new Box2D(1,1,1,1);
+                            },
+                            options: {}
+                        }
+                    };
+
+                    this.options = options;
+                };
+            }
+
             (function() {
                 var positiveSeries = { data: [1, 2], labels: {} },
                     negativeSeries = { data: [-1, -2], labels: {} },
@@ -44,43 +67,29 @@
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
-                                categoryIndex + 1, CATEGORY_AXIS_Y);
-                        },
-                        getAxisLineBox: function() {
-                            return new Box2D(1,1,1,1);
-                        }
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
+                                         categoryIndex + 1, CATEGORY_AXIS_Y);
                     },
-                    axisY: {
-                        getSlot: function(value) {
-                            var value = typeof value === "undefined" ? 0 : value,
-                                valueY = VALUE_AXIS_MAX - value,
-                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+                    function(value) {
+                        var value = typeof value === "undefined" ? 0 : value,
+                            valueY = VALUE_AXIS_MAX - value,
+                            slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
+                            slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
 
-                            return new Box2D(0, slotTop, 0, slotBottom);
-                        },
-                        getAxisLineBox: function() {
-                            return new Box2D(1,1,1,1);
-                        },
-                        options: {}
+                        return new Box2D(0, slotTop, 0, slotBottom);
                     },
-                    options: {
+                    {
                         categoryAxis: {
                             categories: ["A", "B"]
                         }
                     }
-                });
+                );
 
                 // ------------------------------------------------------------
                 module("Area Chart / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, { series: [ positiveSeries ] });
                     }
                 });
@@ -89,12 +98,12 @@
                     equal(areaChart.points.length, positiveSeries.data.length);
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, positiveSeries.data[0]);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.min, positiveSeries.data[0]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, positiveSeries.data[1]);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.max, positiveSeries.data[1]);
                 });
 
                 test("Reports number of categories", function() {
@@ -162,17 +171,16 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, { series: [ negativeSeries ] });
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, negativeSeries.data[1]);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.min, negativeSeries.data[1]);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, negativeSeries.data[0]);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.max, negativeSeries.data[0]);
                 });
 
                 test("point tops are aligned to category axis", function() {
@@ -201,9 +209,30 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Multiple Series", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
-                        setupAreaChart(plotArea, { series: [ negativeSeries, positiveSeries ] });
+                        plotArea.namedValueAxes.secondary = plotArea.namedValueAxes.primary;
+
+                        setupAreaChart(plotArea, {
+                            series: [
+                            $.extend({ axis: "primary" }, positiveSeries),
+                            $.extend({ axis: "secondary" }, negativeSeries  )
+                        ] });
                     }
+                });
+
+                test("Reports minimum series value for primary axis", function() {
+                    same(areaChart.valueAxisRanges.primary.min, positiveSeries.data[0]);
+                });
+
+                test("Reports maximum series value for primary axis", function() {
+                    same(areaChart.valueAxisRanges.primary.max, positiveSeries.data[1]);
+                });
+
+                test("Reports minimum series value for secondary axis", function() {
+                    same(areaChart.valueAxisRanges.secondary.min, negativeSeries.data[1]);
+                });
+
+                test("Reports maximum series value for secondary axis", function() {
+                    same(areaChart.valueAxisRanges.secondary.max, negativeSeries.data[0]);
                 });
 
                 test("Reports number of categories for two series", function() {
@@ -221,7 +250,6 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Mismatched series", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                         series: [ { data: [1, 2, 3] },
                                   positiveSeries
@@ -230,12 +258,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, 3);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.max, 3);
                 });
 
                 test("Reports number of categories", function() {
@@ -252,19 +280,18 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Missing values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                             series: [ sparseSeries ]
                         });
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, 2);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.max, 2);
                 });
 
                 test("omits missing points by default", function() {
@@ -308,7 +335,6 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Positive Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                             series: [ positiveSeries, positiveSeries, positiveSeries ],
                             isStacked: true }
@@ -316,12 +342,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, 1);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, 6);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.primary.max, 6);
                 });
 
                 test("point plot values are stacked", function() {
@@ -334,7 +360,6 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Negative Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                             series: [ negativeSeries, negativeSeries, negativeSeries ],
                             isStacked: true
@@ -342,12 +367,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, -6);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.primary.min, -6);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, -1);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.primary.max, -1);
                 });
 
                 test("point plot values are stacked", function() {
@@ -360,7 +385,6 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Mixed Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                             series: [{
                                 data: [2, 2],
@@ -374,12 +398,12 @@
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, 1);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.primary.max, 2);
                 });
 
                 test("points have set height according to stack value", function() {
@@ -393,26 +417,32 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Mixed Series", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
+                        plotArea.namedValueAxes.a = plotArea.namedValueAxes.primary;
+                        plotArea.namedValueAxes.b = plotArea.namedValueAxes.primary;
+
                         setupAreaChart(plotArea, {
-                            series: [ positiveSeries, negativeSeries ],
+                            series: [
+                                // Both axes should be on same axis.
+                                // This rule is intentionally broken for the tests.
+                                $.extend({ axis: "a" }, positiveSeries),
+                                $.extend({ axis: "b" }, negativeSeries)
+                            ],
                             isStacked: true
                         });
                     }
                 });
 
-                test("reports stacked minumum value", function() {
-                    equal(areaChart.valueRange().min, 0);
+                test("reports stacked minumum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.a.min, 0);
                 });
 
-                test("reports stacked maximum value", function() {
-                    equal(areaChart.valueRange().max, 2);
+                test("reports stacked maximum value for default axis", function() {
+                    equal(areaChart.valueAxisRanges.a.max, 2);
                 });
 
                 // ------------------------------------------------------------
                 module("Area Chart / Stack / Missing values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                             series: [ sparseSeries, sparseSeries ],
                             isStacked: true
@@ -420,12 +450,12 @@
                     }
                 });
 
-                test("Reports minimum series value", function() {
-                    same(areaChart.valueRange().min, 1);
+                test("Reports minimum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.min, 1);
                 });
 
-                test("Reports maximum series value", function() {
-                    same(areaChart.valueRange().max, 4);
+                test("Reports maximum series value for default axis", function() {
+                    same(areaChart.valueAxisRanges.primary.max, 4);
                 });
 
                 test("missing points are assumed to be 0 by default", function() {
@@ -457,7 +487,6 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Rendering", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                         setupAreaChart(plotArea, {
                             series: [
                                 $.extend({
@@ -520,7 +549,6 @@
                 // ------------------------------------------------------------
                 module("Area Chart / Rendering / Missing Values", {
                     setup: function() {
-                        plotArea = new PlotAreaStub();
                     }
                 });
 
@@ -593,26 +621,19 @@
                     MARGIN = PADDING = BORDER = 5,
                     linePoint;
 
-                function PlotAreaStub() { }
-
-                $.extend(PlotAreaStub.prototype, {
-                    axisX: {
-                        getSlot: function(value) {
-                            return new Box2D();
-                        }
+                var plotArea = stubPlotArea(
+                    function(categoryIndex) {
+                        return new Box2D();
                     },
-                    axisY: {
-                        getSlot: function(categoryIndex) {
-                            return new Box2D();
-                        }
+                    function(value) {
+                        return new Box2D();
                     },
-                    options: {
-                        categoryAxis: { }
+                    {
+                        categoryAxis: {}
                     }
-                });
+                );
 
                 function createAreaChart(options) {
-                    plotArea = new PlotAreaStub();
                     areaChart = new Chart.AreaChart(plotArea, {
                         series: [$.extend({
                             data: [0, 1],
