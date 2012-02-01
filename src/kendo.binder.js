@@ -778,10 +778,13 @@
 
     var SelectValueExpression = BindingExpression.extend( {
         updateSource: function() {
-            var source = this.binding.get();
             var target = this.property.get();
 
-            source.splice.apply(source, [0, source.length].concat(target));
+            if (this.property.options.valueField) {
+                this.binding.set(this.property.options.valueField, target);
+            } else {
+                this.binding.set(target);
+            }
         },
 
         updateTarget: function() {
@@ -886,10 +889,12 @@
         }
     });
 
-    var TwoWayProperty = Property.extend( {
-        init: function(target, path) {
-            Property.fn.init.apply(this, arguments);
-
+    var TwoWayProperty = Observable.extend( {
+        init: function(target, path, options) {
+            Observable.fn.init.call(this);
+            this.target = target;
+            this.path = path;
+            this.options = options;
             $(this.target).bind("change", $.proxy(this.change, this));
         },
 
@@ -903,6 +908,10 @@
 
         set: function(value) {
             this.target[this.path] = value;
+        },
+
+        createExpression: function(binding) {
+            return new BindingExpression(this, binding);
         }
     });
 
@@ -946,6 +955,9 @@
     });
 
     var RadioCheckedProperty = TwoWayProperty.extend({
+        get: function() {
+            return this.target.value;
+        },
         set: function(value) {
             if (this.target.value == value) {
                 this.target.checked = true;
@@ -954,16 +966,53 @@
     });
 
     var CheckBoxCheckedProperty = TwoWayProperty.extend({
+        get: function() {
+            var value = this.target.getAttribute("value");
+            return value || this.target.checked;
+        },
+
         set: function(value) {
-            if (value instanceof ObservableArray) {
-                if (value.indexOf(this.target.value) >= 0) {
-                    value = true;
+            this.target.checked = value === true;
+        },
+
+        createExpression: function(binding) {
+            return new CheckBoxBindingExpression(this, binding);
+        }
+    });
+
+    var CheckBoxBindingExpression = BindingExpression.extend({
+        updateSource:function() {
+            var source = this.binding.get();
+            var target = this.property.get();
+            var index;
+
+            if (source instanceof ObservableArray) {
+                if (target !== false && target !== true) {
+                    index = source.indexOf(target);
+                    if (index > -1) {
+                        source.splice(index, 1);
+                    } else {
+                        source.push(target);
+                    }
+                }
+            } else {
+                this.binding.set(target);
+            }
+        },
+
+        updateTarget: function() {
+            var source = this.binding.get();
+            var target = this.property.get();
+
+            if (source instanceof ObservableArray) {
+                if (source.indexOf(target) >= 0) {
+                    source = true;
                 }
             }
 
-            this.target.checked = value === true;
+            this.property.set(source);
         }
-    });
+    })
 
     var SourceProperty = Property.extend({
         init: function(target, path, template) {
