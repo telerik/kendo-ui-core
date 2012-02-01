@@ -348,16 +348,6 @@
             });
 
             asyncTest("no filter and highlightFirst should always focus first item", function() {
-                combobox.input.val("f");
-                combobox.search("");
-
-                setTimeout(function() {
-                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 500);
-            });
-
-            asyncTest("no filter and highlightFirst should always focus first item", function() {
                 combobox.search("");
 
                 setTimeout(function() {
