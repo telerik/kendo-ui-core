@@ -271,6 +271,14 @@
 
                 ok(parseInt(firstWindow.wrapper.css("zIndex")) < parseInt($(".k-overlay").css("zIndex")));
             });
+
+            test("title() on titleless window does not fail", function() {
+                var dialog = createWindow({ title: false });
+
+                dialog.title("foo");
+
+                ok(true);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>

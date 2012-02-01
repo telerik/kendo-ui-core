@@ -249,6 +249,15 @@
                     }
                 });
             });
+
+            test("title=false does not render title and adds css class", function() {
+                var dialog = createWindow({
+                    title: false
+                });
+
+                equal(dialog.wrapper.find(".k-window-titlebar").length, 0);
+                ok(dialog.wrapper.is(".k-window-titleless"));
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
