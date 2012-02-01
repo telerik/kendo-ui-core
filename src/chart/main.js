@@ -4141,9 +4141,12 @@
             plotArea.box = targetBox.clone();
 
             plotArea.box.unpad(margin);
+
             if (plotArea.axes.length > 0) {
                 plotArea.reflowAxes();
+                plotArea.box = plotArea.axisBox();
             }
+
             plotArea.reflowCharts();
         },
 
@@ -4273,11 +4276,8 @@
             var plotArea = this,
                 box = plotArea.box,
                 axisBox = plotArea.axisBox(),
-                lineBox,
                 overflowY = axisBox.height() - box.height(),
                 overflowX = axisBox.width() - box.width(),
-                minAxisWidth = MAX_VALUE,
-                minAxisHeight = MAX_VALUE,
                 axes = plotArea.axes,
                 currentAxis,
                 isVertical,
@@ -4295,25 +4295,38 @@
                         isVertical ? overflowY : 0
                     )
                 );
-
-                lineBox = currentAxis.lineBox();
-                if (isVertical) {
-                    minAxisHeight = math.min(lineBox.height(), minAxisHeight);
-                } else {
-                    minAxisWidth = math.min(lineBox.width(), minAxisWidth);
-                }
             }
+        },
 
-            // Make all axis lines equal in width/height
+        shrinkAdditionalAxes: function(xAxes, yAxes) {
+            var plotArea = this,
+                axes = plotArea.axes,
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
+                anchorLineBox = xAnchor.lineBox().clone().wrap(yAnchor.lineBox()),
+                overflowX,
+                overflowY,
+                currentAxis,
+                isVertical,
+                lineBox,
+                i,
+                length = axes.length;
+
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
                 isVertical = currentAxis.options.isVertical;
                 lineBox = currentAxis.lineBox();
 
+                overflowX = math.max(0, lineBox.x2 - anchorLineBox.x2) +
+                            math.max(0, anchorLineBox.x1 - lineBox.x1);
+
+                overflowY = math.max(0, lineBox.y2 - anchorLineBox.y2) +
+                            math.max(0, anchorLineBox.y1 - lineBox.y1);
+
                 currentAxis.reflow(
                     currentAxis.box.shrink(
-                        isVertical ? 0 : lineBox.width() - minAxisWidth,
-                        isVertical ? lineBox.height() - minAxisHeight : 0
+                        isVertical ? 0 : overflowX,
+                        isVertical ? overflowY : 0
                     )
                 );
             }
@@ -4352,10 +4365,11 @@
             }
 
             plotArea.alignAxes(xAxes, yAxes);
+            plotArea.shrinkAdditionalAxes(xAxes, yAxes);
+            plotArea.alignAxes(xAxes, yAxes);
             plotArea.shrinkAxes();
             plotArea.alignAxes(xAxes, yAxes);
             plotArea.fitAxes();
-            plotArea.wrapAxes(axes);
         },
 
         reflowCharts: function() {
@@ -4367,22 +4381,6 @@
 
             for (i = 0; i < count; i++) {
                 charts[i].reflow(box);
-            }
-
-            plotArea.box = box;
-        },
-
-        wrapAxes: function(axes) {
-            var plotArea = this,
-                box,
-                axisBox,
-                i,
-                length = axes.length;
-
-            for (i = 0; i < length; i++) {
-                axisBox = axes[i].box;
-                box = box || axisBox.clone();
-                box.wrap(axisBox);
             }
 
             plotArea.box = box;

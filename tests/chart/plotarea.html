@@ -194,7 +194,7 @@
                     }
                 });
 
-                test("added to children collection", function() {
+                test("secondary axis added to children collection", function() {
                     ok($.inArray(secondaryValueAxis, plotArea.children) >= 0);
                 });
 
@@ -205,6 +205,19 @@
                         slotY = primaryValueAxis.getSlot(primaryValueAxis.options.axisCrossingValue);
 
                     equals(slotX.y1, slotY.y1);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Multiple Axes / Stacked Left", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(columnSeriesData, {
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
                 });
 
                 test("overlapping axes are stacked to the left", function() {
@@ -856,6 +869,10 @@
                     categoryAxis,
                     namedXAxes,
                     namedYAxes,
+                    primaryXAxis,
+                    secondaryXAxis,
+                    primaryYAxis,
+                    secondaryYAxis,
                     scatterSeriesData = [{
                         name: "Value A",
                         type: "scatter",
@@ -871,6 +888,11 @@
 
                     namedXAxes = plotArea.namedXAxes;
                     namedYAxes = plotArea.namedYAxes;
+
+                    primaryXAxis = namedXAxes.primary;
+                    primaryYAxis = namedYAxes.primary;
+                    secondaryXAxis = namedXAxes.secondary;
+                    secondaryYAxis = namedYAxes.secondary;
 
                     chartSeries = plotArea.charts[0];
                 }
@@ -939,6 +961,259 @@
                             plotArea = new Chart.XYPlotArea([]);
                         }
                     );
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: [{}, {
+                                name: "secondary"
+                            }],
+                            yAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("secondary X axis added to children collection", function() {
+                    ok($.inArray(secondaryXAxis, plotArea.children) >= 0);
+                });
+
+                test("secondary Y axis added to children collection", function() {
+                    ok($.inArray(secondaryYAxis, plotArea.children) >= 0);
+                });
+
+                test("aligns primary axes at default crossing values", function() {
+                    var axisX = primaryXAxis,
+                        axisY = primaryYAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("secondary X axis on the right is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: [{ min: -350 }, { name: "secondary" }],
+                        yAxis: { axisCrossingValue: [0, 100], min: -350 }
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryXAxis.lineBox().x2, primaryXAxis.lineBox().x2);
+                });
+
+                test("secondary X axis on the left is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: [{ min: -350 }, { name: "secondary", min: -1, max: 0 }],
+                        yAxis: { axisCrossingValue: [0, 100], min: -350 }
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryXAxis.lineBox().x1, primaryXAxis.lineBox().x1);
+                });
+
+                test("secondary Y axis on top is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: { axisCrossingValue: [0, 100], min: -350 },
+                        yAxis: [{ min: -350 }, { name: "secondary" }]
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryYAxis.lineBox().y1, primaryYAxis.lineBox().y1);
+                });
+
+                test("secondary Y axis on bottom is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: { axisCrossingValue: [0, 100], min: -350 },
+                        yAxis: [{ min: -350 }, { name: "secondary", min: -1, max: 0 }]
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryYAxis.lineBox().y2, primaryYAxis.lineBox().y2);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Top", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: [{}, { name: "secondary" }],
+                            yAxis: { axisCrossingValue: 10000 }
+                        });
+                    }
+                });
+
+                test("overlapping X axes are shifted to the top", function() {
+                    var margin = secondaryXAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryXAxis.box.y2, primaryXAxis.box.y1 - margin);
+                });
+
+                test("stacked X axes on top are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
+                         [primaryXAxis.lineBox().x1, primaryXAxis.lineBox().x2]
+                    );
+                });
+
+                test("stacked X axes on the top are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryXAxis.options.mirror);
+                    ok(secondaryXAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryXAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryXAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Right", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: { axisCrossingValue: 10000 },
+                            yAxis: [{}, { name: "secondary" }]
+                        });
+                    }
+                });
+
+                test("overlapping Y axes are shifted to the right", function() {
+                    var margin = secondaryYAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
+                         [primaryYAxis.box.x2 + margin, primaryYAxis.box.y1]
+                    );
+                });
+
+                test("stacked Y axes on right are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
+                         [primaryYAxis.lineBox().y1, primaryYAxis.lineBox().y2]
+                    );
+                });
+
+                test("stacked Y axes on the right are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryYAxis.options.mirror);
+                    ok(secondaryYAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryYAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryYAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Bottom", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: [{}, { name: "secondary" }]
+                        });
+                    }
+                });
+
+                test("overlapping X axes are shifted to the bottom", function() {
+                    var margin = secondaryXAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryXAxis.box.y1, primaryXAxis.box.y2 + margin);
+                });
+
+                test("stacked X axes on bottom are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
+                         [primaryXAxis.lineBox().x1, primaryXAxis.lineBox().x2]
+                    );
+                });
+
+                test("stacked X axes on the bottom are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryXAxis.options.mirror);
+                    ok(!secondaryXAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryXAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryXAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Left", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            yAxis: [{}, { name: "secondary" }]
+                        });
+                    }
+                });
+
+                test("overlapping Y axes are stacked to the left", function() {
+                    var margin = secondaryYAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.box.x2, secondaryYAxis.box.y1],
+                         [primaryYAxis.box.x1 - margin, primaryYAxis.box.y1]
+                    );
+                });
+
+                test("stacked Y axes on left are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
+                         [primaryYAxis.lineBox().y1, primaryYAxis.lineBox().y2]
+                    );
+                });
+
+                test("stacked Y axes on the left are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryYAxis.options.mirror);
+                    ok(!secondaryYAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryYAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryYAxis.options.mirror);
                 });
 
             })();
