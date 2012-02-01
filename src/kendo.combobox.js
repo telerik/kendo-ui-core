@@ -418,8 +418,6 @@
                 options = that.options,
                 filter = options.filter;
 
-            that.lastSearch = word;
-
             clearTimeout(that._typing);
 
             if (length >= options.minLength) {
@@ -513,7 +511,6 @@
                 input = that.input[0];
 
             if (text !== undefined) {
-                that.lastSearch = "\n"; // TODO: Evil hack to pass the tests, a review of conflicting tests is in order...
                 that._select(function(dataItem) {
                     return that._text(dataItem) === text;
                 });
@@ -657,7 +654,7 @@
             idx = List.inArray(li[0], that.ul[0]);
 
             if (idx == -1) {
-                if (that.options.highlightFirst && !that.lastSearch) {
+                if (that.options.highlightFirst && !that.text()) {
                     li = $(that.ul[0].firstChild);
                 } else {
                     li = NULL;
