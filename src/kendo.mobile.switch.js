@@ -95,7 +95,7 @@
 
             that.constrain = width - handleWidth;
             that.snapPoint = width / 2 - handleWidth / 2;
-            that._visibleBack = true;
+            that._animateBackground = that.background.is(":visible");
 
             that.bind([
                 /**
@@ -123,7 +123,7 @@
                 checked = element[0].checked;
             }
 
-            that._toggle(checked, true);
+            that.toggle(checked);
         },
 
         options: {
@@ -143,46 +143,52 @@
         * </script>;
         */
         toggle: function(check) {
-            var that = this;
+            var that = this,
+                element = that.element[0];
 
             if (check === undefined) {
-                check = !that.element[0].checked;
+                check = !element.checked;
             }
 
-            that._toggle(check, true);
+            that._position(check ? that.constrain : 0);
+            element.checked = check;
         },
 
         _move: function(e) {
-            var that = this,
-                position = limitValue(that.position + e.x.delta, 0, that.constrain),
-                margin = that.origin + position;
+            var that = this;
+
+            that._position(limitValue(that.position + e.x.delta, 0, that.constrain));
+        },
+
+        _position: function(position) {
+            var that = this;
 
             that.position = position;
             that.handle.css(TRANSFORMSTYLE, "translatex(" + position + "px)");
 
-            if (that._visibleBack) {
-                that.background.css(MARGINLEFT, margin);
+            if (that._animateBackground) {
+                that.background.css(MARGINLEFT, that.origin + position);
             }
         },
 
         _start: function(e) {
+            this.swipe.capture();
             this.handle.addClass(ACTIVE_STATE);
-            this._visibleBack = this.background.is(":visible");
         },
 
         _stop: function(e) {
             var that = this;
 
             that.handle.removeClass(ACTIVE_STATE);
-            that._toggle(that.position > that.snapPoint, false);
+            that._toggle(that.position > that.snapPoint);
         },
 
-        _toggle: function (checked, silent) {
+        _toggle: function (checked) {
             var that = this,
                 handle = that.handle,
                 element = that.element[0],
                 value = element.checked,
-                duration = silent ? 0 : 200,
+                duration = 200,
                 distance;
 
             handle
@@ -191,10 +197,11 @@
 
             that.position = distance = checked * that.constrain;
 
-
-            that.background
-                .kendoStop(true, true)
-                .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: duration });
+            if (that._animateBackground) {
+                that.background
+                    .kendoStop(true, true)
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: duration });
+            }
 
             handle
                 .kendoStop(true, true)
@@ -205,9 +212,7 @@
                     complete: function () {
                         if (value !== checked) {
                             element.checked = checked;
-                            if (!silent) {
-                                that.trigger(CHANGE, { checked: checked });
-                            }
+                            that.trigger(CHANGE, { checked: checked });
                         }
                     }
                 });
@@ -254,7 +259,7 @@
 
             that.swipe = new kendo.mobile.Swipe(that.wrapper, {
                 tap: function() {
-                    that._toggle(!that.element[0].checked, false);
+                    that._toggle(!that.element[0].checked);
                 },
                 start: proxy(that._start, that),
                 move: proxy(that._move, that),
