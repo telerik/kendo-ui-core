@@ -59,7 +59,7 @@
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = that.swipe[that.axis].velocity;
+                that.velocity = that.swipe[that.axis].velocity * 16;
                 if (that.velocity) {
                     that.tap.captureNext();
                     Animation.fn.start.call(that);

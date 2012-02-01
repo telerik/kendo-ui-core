@@ -45,9 +45,9 @@
         * @param {DomElement} element DOM element
         * @param {Object} options
         * @option {Number} [duration] <300> The milliseconds that take the ScrollView to snap to the current page after released.
-        * @option {Number} [velocityThreshold] <1> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current view).
+        * @option {Number} [velocityThreshold] <0.8> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current view).
         * The swipe velocity equal the pixels per millisecond change for a swipe.
-        * @option {Number} [bounceVelocityThreshold] <2.5> The velocity threshold after which a swipe will result in a bounce effect.
+        * @option {Number} [bounceVelocityThreshold] <1.6> The velocity threshold after which a swipe will result in a bounce effect.
         */
         init: function(element, options) {
             var that = this;
@@ -126,8 +126,8 @@
         options: {
             name: "ScrollView",
             duration: 300,
-            velocityThreshold: 20,
-            bounceVelocityThreshold: 40
+            velocityThreshold: 0.8,
+            bounceVelocityThreshold: 1.6
         },
 
         viewShow: function(view) {
