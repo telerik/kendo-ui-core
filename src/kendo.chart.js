@@ -4601,7 +4601,8 @@
                 axis,
                 axisName,
                 namedValueAxes = plotArea.namedValueAxes,
-                valueAxisOptions = [].concat(options.valueAxis);
+                valueAxisOptions = [].concat(options.valueAxis),
+                primaryValueAxis;
 
             each(valueAxisOptions, function() {
                 axisName = this.name || PRIMARY;
@@ -4618,9 +4619,11 @@
                 plotArea.append(axis);
             });
 
+            primaryValueAxis = namedValueAxes[PRIMARY] || plotArea.axes[0];
+
             // TODO: Consider removing axisX and axisY aliases
-            plotArea.axisX = invertAxes ? namedValueAxes[PRIMARY] : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : namedValueAxes[PRIMARY];
+            plotArea.axisX = invertAxes ? primaryValueAxis : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : primaryValueAxis;
 
             plotArea.categoryAxis = categoryAxis;
             plotArea.axes.push(categoryAxis);
