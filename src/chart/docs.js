@@ -13,9 +13,9 @@
      * Supported chart types:
      * </p>
      * <ul>
-     *     <li>Bar</li>
-     *     <li>Column</li>
-     *     <li>Line</li>
+     *     <li>Bar / Column</li>
+     *     <li>Line / Vertical Line</li>
+     *     <li>Area / Verical Area</li>
      *     <li>Pie</li>
      *     <li>Scatter</li>
      *     <li>Scatter Line</li>
@@ -1259,12 +1259,18 @@
          * The default options for all column series. For more details see the series options.
          * @option {Object} [seriesDefaults.line] The line configuration options.
          * The default options for all line series. For more details see the series options.
+         * @option {Object} [seriesDefaults.verticalLine] The vertical line configuration options.
+         * The default options for all vertical line series. For more details see the series options.
          * @option {Object} [seriesDefaults.pie] The pie configuration options.
          * The default options for all pie series. For more details see the series options.
          * @option {Object} [seriesDefaults.scatter] The scatter configuration options.
          * The default options for all scatter series. For more details see the series options.
          * @option {Object} [seriesDefaults.scatterLine] The scatterLine configuration options.
          * The default options for all scatterLine series. For more details see the series options.
+         * @option {Object} [seriesDefaults.area] The area configuration options.
+         * The default options for all area series. For more details see the series options.
+         * @option {Object} [seriesDefaults.verticalArea] The vertical area configuration options.
+         * The default options for all vertical area series. For more details see the series options.
          * @option {Array} [series] Array of series definitions.
          * <p>
          * The series type is determined by the value of the type field.
@@ -1276,7 +1282,7 @@
          * @option {String} [series.name] The series name visible in the legend.
          * @option {Array} [series.data] Array of data points.
          * @option {String} [series.field] The data field containing the series value.
-         * @option [series.type="bar"] The type of the series.
+         * @option [series.type="bar"] Available options for bar series:
          * @option {Boolean} [series.type="bar".stacked] <false>
          * A value indicating if the series should be stacked.
          * @option {Number} [series.type="bar".gap] <1.5> The distance between category clusters.
@@ -1527,260 +1533,10 @@
          * @option {Number} [series.type="bar".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="bar".tooltip.border.color] <"black"> The color of the border.
          * @option {Boolean} [series.type="bar".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
-         * @option [series.type="column"] The type of the series.
-         * @option {Boolean} [series.type="column".stacked] <false>
-         * A value indicating if the series should be stacked.
-         * @option {Number} [series.type="column".gap] <1.5> The distance between category clusters.
-         * @option {Number} [series.type="column".spacing] <0.4> Space between bars.
-         * @option {String} [series.type="column".name] The series name.
-         * @option {String} [series.type="column".color] The series base color.
-         * @option {Number} [series.type="column".opacity] <1> The series opacity.
-         * @option {Object} [series.type="column".labels] Configures the series data labels.
-         * @option {String} [series.type="column".labels.color] The text color of the labels.
-         * @option {String} [series.type="column".labels.background] The background color of the labels.
-         * @option {String} [series.type="column".labels.font] <"12px Arial,Helvetica,sans-serif">
-         * The font style of the labels.
-         * @option {String} [series.type="column".labels.position] <"outsideEnd">
-         * Defines the position of the column labels.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              <code>"center"</code>
-         *         </dt>
-         *         <dd>
-         *              The label is positioned at the bar center.
-         *         </dd>
-         *         <dt>
-         *              <code>"insideEnd"</code>
-         *         </dt>
-         *         <dd>
-         *              The label is positioned inside, near the end of the bar.
-         *         </dd>
-         *         <dt>
-         *              <code>"insideBase"</code>
-         *         </dt>
-         *         <dd>
-         *              The label is positioned inside, near the base of the bar.
-         *         </dd>
-         *         <dt>
-         *              <code>"outsideEnd"</code>
-         *         </dt>
-         *         <dd>
-         *              The label is positioned outside, near the end of the bar.
-         *              Not applicable for stacked bar series.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Boolean} [series.type="column".labels.visible] <false> The visibility of the labels.
-         * @option {Number|Object} [series.type="column".labels.margin] <2> The margin of the labels.
-         * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
-         *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 2px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [series.type="column".labels.padding] <2> The padding of the labels.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 2px (by default)
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="column".labels.border] The border of the labels.
-         * @option {Number} [series.type="column".labels.border.width] <0> The width of the border.
-         * @option {String} [series.type="column".labels.border.color] <"black">
-         * The color of the border.
-         * @option {String} [series.type="column".labels.border.dashType] <"solid"> The dash type of the border.
-         * <div class="details-list">
-         *     <dl>
-         *         <dt>
-         *              <code>"solid"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a solid line.
-         *         </dd>
-         *         <dt>
-         *              <code>"dot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dots.
-         *         </dd>
-         *         <dt>
-         *              <code>"dash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dashes.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash.
-         *         </dd>
-         *         <dt>
-         *              <code>"dashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDotDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {String/Function} [series.type="column".labels.template] The label template.
-         * Template variables:
-         * <ul>
-         *     <li><strong>value</strong> - the point value</li>
-         *     <li><strong>category</strong> - the category name</li>
-         *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
-         *         Will be null if binding to array.
-         *     </li>
-         * </ul>
-         * _example
-         * // chart intialization
-         * $("#chart").kendoChart({
-         *      title: {
-         *          text: "My Chart Title"
-         *      },
-         *      series: [
-         *          {
-         *              type: "column",
-         *              name: "Series 1",
-         *              data: [200, 450, 300, 125],
-         *              labels: {
-         *                  // label template
-         *                  template: "#= value #%",
-         *                  visible: true
-         *              }
-         *          }
-         *      ],
-         *      categoryAxis: {
-         *          categories: [2000, 2001, 2002, 2003]
-         *      }
-         * });
-         * @option {String} [series.type="column".labels.format] The format of the labels.
-         * _example
-         * //sets format of the labels
-         * format: "{0:C}"
-         * @option {Object} [series.type="column".border] The border of the series.
-         * @option {Number} [series.type="column".border.width] <1> The width of the border.
-         * @option {String} [series.type="column".border.color] <the color of the current series>
-         * The color of the border.
-         * @option {String} [series.type="column".border.dashType] <"solid"> The dash type of the border.
-         * <div class="details-list">
-         *     <dl>
-         *         <dt>
-         *              <code>"solid"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a solid line.
-         *         </dd>
-         *         <dt>
-         *              <code>"dot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dots.
-         *         </dd>
-         *         <dt>
-         *              <code>"dash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dashes.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash.
-         *         </dd>
-         *         <dt>
-         *              <code>"dashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDotDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {String} [series.type="column".overlay] <"glass"> The effects overlay.
-         * @option {Object} [series.type="column".tooltip] The data point tooltip configuration options.
-         * @option {String} [series.type="column".tooltip.format] The tooltip format.
-         * _example
-         * //sets format of the tooltip
-         * format: "{0:C}"
-         * @option {String|Function} [series.type="column".tooltip.template] The tooltip template.
-         * Template variables:
-         * <ul>
-         *     <li><strong>value</strong> - the point value</li>
-         *     <li><strong>category</strong> - the category name</li>
-         *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
-         *     </li>
-         * </ul>
-         * _example
-         * $("#chart").kendoChart({
-         *      title: {
-         *          text: "My Chart Title"
-         *      },
-         *      series: [
-         *          {
-         *              type: "column",
-         *              name: "Series 1",
-         *              data: [200, 450, 300, 125],
-         *              tooltip: {
-         *                  visible: true,
-         *                  template: "#= category # - #= value #"
-         *              }
-         *          }
-         *      ],
-         *      categoryAxis: {
-         *          categories: [2000, 2001, 2002, 2003]
-         *      }
-         * });
-         * @option {String} [series.type="column".tooltip.font] <"12px Arial,Helvetica,sans-serif"> The tooltip font.
-         * @option {String} [series.type="column".tooltip.color]
-         * The text color of the tooltip. The default is the same as the series labels color.
-         * @option {String} [series.type="column".tooltip.background]
-         * The background color of the tooltip. The default is determined from the series color.
-         * @option {Number|Object} [series.type="column".tooltip.padding] The padding of the tooltip.
-         * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // right and bottom padding are left at their default values
-         * padding: { top: 1, left: 1 }
-         * @option {Object} [series.type="column".tooltip.border] The border configuration options.
-         * @option {Number} [series.type="column".tooltip.border.width] <0> The width of the border.
-         * @option {String} [series.type="column".tooltip.border.color] <"black"> The color of the border.
-         * @option {Boolean} [series.type="column".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
-         *
-         * @option [series.type="line"] The type of the series.
+         * @option [series.type="column"]
+         * Column series accepts the same parameters as bar series.
+         * The difference is that column series are rendered on a horizontal category axis.
+         * @option [series.type="line"] Available options for line series:
          * @option {Boolean} [series.type="line".stacked] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="line".name] The series name.
@@ -2032,8 +1788,10 @@
          * @option {Number} [series.type="line".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="line".tooltip.border.color] <"black"> The color of the border.
          * @option {Boolean} [series.type="line".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
-         *
-         * @option [series.type="pie"] The type of the series.
+         * @option [series.type="verticalLine"]
+         * Vertical line series accepts the same parameters as line series.
+         * The line and the category axis are now vertical instead of horizontal.
+         * @option [series.type="pie"] Available options for pie series:
          * @option {String} [series.type="pie".categoryField]
          * The data field containing the sector category name.
          * @option {String} [series.type="pie".colorField]
@@ -2349,7 +2107,7 @@
          * @option {String} [series.type="pie".tooltip.border.color] <"black"> The color of the border.
          * @option {Boolean} [series.type="pie".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
-         * @option [series.type="scatter"] The type of the series.
+         * @option [series.type="scatter"] Available options for scatter series:
          * @option {String} [series.type="scatter".color] The series base color.
          * @option {Array} [series.type="scatter".data] Array of data items (optional).
          * The scatter chart can be bound to an array of arrays with two numbers (X and Y).
@@ -2605,7 +2363,7 @@
          * });
          * @option {Boolean} [series.type="scatter".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
-         * @option [series.type="scatterLine"] The type of the series.
+         * @option [series.type="scatterLine"] Available options for scatter line series:
          * @option {String} [series.type="scatterLine".color] The series base color.
          * @option {Array} [series.type="scatterLine".data] Array of data items (optional).
          * The scatter chart can be bound to an array of arrays with two numbers (X and Y).
@@ -2862,6 +2620,9 @@
          * @option {Boolean} [series.type="scatterLine".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
+         * @option [series.type="verticalArea"]
+         * Vertical area series use the same options as area series.
+         * The category axis is rendered vertically instead of horizontally.
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.

@@ -9,6 +9,8 @@
         baseTemplate = kendo.template,
         format = kendo.format,
         map = $.map,
+        grep = $.grep,
+        each = $.each,
         math = Math,
         proxy = $.proxy,
         getter = kendo.getter,
@@ -20,7 +22,6 @@
 
     // Constants ==============================================================
     var ABOVE = "above",
-        DEFAULT_FONT = "12px sans-serif",
         ANIMATION_STEP = 10,
         AREA = "area",
         BASELINE_MARKER_SIZE = 1,
@@ -39,6 +40,7 @@
         COLUMN = "column",
         COORD_PRECISION = 3,
         DATABOUND = "dataBound",
+        DEFAULT_FONT = "12px sans-serif",
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
         DEFAULT_WIDTH = 600,
@@ -68,9 +70,12 @@
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
         PIE_SECTOR_ANIM_DELAY = 70,
+        PRIMARY = "primary",
         RADIAL = "radial",
         RIGHT = "right",
         ROUNDED_BEVEL = "roundedBevel",
+        SCATTER = "scatter",
+        SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
         SQUARE = "square",
         SWING = "swing",
@@ -81,12 +86,17 @@
         TRIANGLE = "triangle",
         UNDEFINED = "undefined",
         VERTICAL = "vertical",
+        VERTICAL_LINE = "verticalLine",
+        VERTICAL_AREA = "verticalArea",
         WIDTH = "width",
         WHITE = "#fff",
         X = "x",
         Y = "y",
         ZERO = "zero",
         ZERO_THRESHOLD = 0.2;
+
+    var CATEGORICAL_CHARTS = [BAR, COLUMN, LINE, VERTICAL_LINE, AREA, VERTICAL_AREA],
+        XY_CHARTS = [SCATTER, SCATTER_LINE];
 
     // Chart ==================================================================
     var Chart = Widget.extend({
@@ -225,7 +235,7 @@
                 model.append(new Title(options.title));
             }
 
-            plotArea = model._plotArea = new PlotArea(options);
+            plotArea = model._plotArea = chart._createPlotArea();
             if (options.legend.visible) {
                 model.append(new Legend(plotArea.options.legend));
             }
@@ -233,6 +243,41 @@
             model.reflow();
 
             return model;
+        },
+
+        _createPlotArea: function() {
+            var chart = this,
+                options = chart.options,
+                series = options.series,
+                i,
+                length = series.length,
+                currentSeries,
+                categoricalSeries = [],
+                xySeries = [],
+                pieSeries = [],
+                plotArea;
+
+            for (i = 0; i < length; i++) {
+                currentSeries = series[i];
+
+                if (inArray(currentSeries.type, CATEGORICAL_CHARTS)) {
+                    categoricalSeries.push(currentSeries);
+                } else if (inArray(currentSeries.type, XY_CHARTS)) {
+                    xySeries.push(currentSeries);
+                } else if (currentSeries.type === PIE) {
+                    pieSeries.push(currentSeries);
+                }
+            }
+
+            if (pieSeries.length > 0) {
+                plotArea = new PiePlotArea(pieSeries, options);
+            } else if (xySeries.length > 0) {
+                plotArea = new XYPlotArea(xySeries, options);
+            } else {
+                plotArea = new CategoricalPlotArea(categoricalSeries, options);
+            }
+
+            return plotArea;
         },
 
         // Needs to be overridable in tests
@@ -1376,6 +1421,10 @@
                 width: 1,
                 color: BLACK
             },
+            title: {
+                visible: true,
+                position: CENTER
+            },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
             minorTickType: NONE,
@@ -1386,14 +1435,15 @@
                 width: 1,
                 color: BLACK
             },
+            mirror: false,
+            // TODO: Move to line or labels options
             margin: 5
         },
 
         createLabels: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                align = isVertical ? RIGHT : CENTER,
+                align = options.isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
                 });
@@ -1426,18 +1476,33 @@
         getLabelText: function(index) {
         },
 
+        lineBox: function() {
+            var axis = this,
+                options = axis.options,
+                box = axis.box,
+                isVertical = options.isVertical,
+                mirror = options.mirror,
+                axisX = mirror ? box.x1 : box.x2,
+                axisY = mirror ? box.y2 : box.y1;
+
+            if (isVertical) {
+                return new Box2D(axisX, box.y1, axisX, box.y2);
+            }
+
+            return new Box2D(box.x1, axisY, box.x2, axisY);
+        },
+
         createTitle: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
                 titleOptions = deepExtend({
-                    rotation: isVertical ? -90 : 0,
+                    rotation: options.isVertical ? -90 : 0,
                     text: "",
                     zIndex: 1
                 }, options.title),
                 title;
 
-            if (options.title) {
+            if (titleOptions.visible && titleOptions.text) {
                 title = new TextBox(titleOptions.text, titleOptions);
                 axis.append(title);
                 axis.title = title;
@@ -1447,8 +1512,8 @@
         renderTicks: function(view) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                box = axis.box,
+                mirror = options.mirror,
+                lineBox = axis.lineBox(),
                 majorTicks = axis.getMajorTickPositions(),
                 ticks = [];
 
@@ -1486,9 +1551,12 @@
             }
 
             return map(ticks, function(tick) {
-                if (isVertical) {
+                var tickX = mirror ? lineBox.x2 : lineBox.x2 - tick.size,
+                    tickY = mirror ? lineBox.y1 - tick.size : lineBox.y1;
+
+                if (options.isVertical) {
                     return view.createLine(
-                        box.x2 - tick.size, tick.pos, box.x2, tick.pos,
+                        tickX, tick.pos, tickX + tick.size, tick.pos,
                         {
                             strokeWidth: tick.width,
                             stroke: tick.color
@@ -1496,7 +1564,7 @@
                     );
                 } else {
                     return view.createLine(
-                        tick.pos, box.y1, tick.pos, box.y1 + tick.size,
+                        tick.pos, tickY, tick.pos, tickY + tick.size,
                         {
                             strokeWidth: tick.width,
                             stroke: tick.color
@@ -1526,7 +1594,7 @@
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 result = [],
                 plotArea = axis.parent,
                 slotX,
@@ -1540,8 +1608,8 @@
                     to = defined(item.to) ? item.to : MAX_VALUE;
                     item.from = math.min(from, to);
                     item.to = math.max(from, to);
-                    slotX = isVertical ? plotArea.axisX.getAxisLineBox()  : plotArea.axisX.getSlot(item.from, item.to);
-                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.getAxisLineBox();
+                    slotX = isVertical ? plotArea.axisX.lineBox()  : plotArea.axisX.getSlot(item.from, item.to);
+                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.lineBox();
                     return view.createRect(
                             new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                             { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
@@ -1554,7 +1622,7 @@
         reflowAxis: function(box, position) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 labels = axis.labels,
                 count = labels.length,
                 space = axis.getActualTickSize() + options.margin,
@@ -1590,7 +1658,7 @@
                 );
             }
 
-            axis.arrangeTitle(title, isVertical, axis.box);
+            axis.arrangeTitle();
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
         },
 
@@ -1598,9 +1666,12 @@
             var axis = this,
                 options = axis.options,
                 labels = axis.labels,
-                isVertical = axis.options.orientation === VERTICAL,
+                isVertical = options.isVertical,
+                lineBox = axis.lineBox(),
+                mirror = options.mirror,
                 tickPositions = axis.getMajorTickPositions(),
                 tickSize = axis.getActualTickSize(),
+                labelOffset = axis.getActualTickSize() + options.margin,
                 labelBox,
                 labelY,
                 i;
@@ -1623,10 +1694,16 @@
                         middle = firstTickPosition + (nextTickPosition - firstTickPosition) / 2;
                         labelPos = middle - (labelSize / 2);
                     }
-                    labelX = axis.box.x2 - options.margin - tickSize;
 
-                    labelBox = new Box2D(labelX - label.box.width(), labelPos,
-                                         labelX, labelPos)
+                    labelX = lineBox.x2;
+
+                    if (mirror) {
+                        labelX += labelOffset;
+                    } else {
+                        labelX -= labelOffset + label.box.width();
+                    }
+
+                    labelBox = label.box.move(labelX, labelPos);
                 } else {
                     if (position == ON_MINOR_TICKS) {
                         firstTickPosition = tickPositions[i];
@@ -1635,38 +1712,40 @@
                         firstTickPosition = labelPos;
                         nextTickPosition = labelPos + labelSize;
                     }
-                    labelY = axis.box.y1 + tickSize + options.margin;
+
+                    labelY = lineBox.y1;
+
+                    if (mirror) {
+                        labelY -= labelOffset + label.box.height();
+                    } else {
+                        labelY += labelOffset;
+                    }
 
                     labelBox = new Box2D(firstTickPosition, labelY,
-                                         nextTickPosition, labelY);
+                                         nextTickPosition, labelY + label.box.height());
                 }
 
                 label.reflow(labelBox);
             }
         },
 
-        arrangeTitle: function(title, isVertical, box) {
+        arrangeTitle: function() {
+            var axis = this,
+                options = axis.options,
+                mirror = options.mirror,
+                isVertical = options.isVertical,
+                title = axis.title;
+
             if (title) {
                 if (isVertical) {
-                    title.options.align = LEFT;
-                    if (title.options.position === TOP) {
-                        title.options.vAlign = TOP;
-                    } else if (title.options.position === BOTTOM) {
-                        title.options.vAlign = BOTTOM;
-                    } else {
-                        title.options.vAlign = CENTER;
-                    }
+                    title.options.align = mirror ? RIGHT : LEFT;
+                    title.options.vAlign = title.options.position;
                 } else {
-                    if (title.options.position === LEFT) {
-                        title.options.align = LEFT;
-                    } else if (title.options.position === RIGHT) {
-                        title.options.align = RIGHT;
-                    } else {
-                        title.options.align = CENTER;
-                    }
-                    title.options.vAlign = BOTTOM;
+                    title.options.align = title.options.position;
+                    title.options.vAlign = mirror ? TOP : BOTTOM;
                 }
-                title.reflow(box);
+
+                title.reflow(axis.box);
             }
         }
     });
@@ -1684,7 +1763,7 @@
         options: {
             min: 0,
             max: 1,
-            orientation: VERTICAL,
+            isVertical: true,
             majorGridLines: {
                 visible: true,
                 width: 1,
@@ -1740,6 +1819,11 @@
             return deepExtend(autoOptions, options);
         },
 
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
+        },
+
         reflow: function(targetBox) {
             this.reflowAxis(targetBox);
         },
@@ -1747,9 +1831,9 @@
         getViewElements: function(view) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 tickPositions = axis.getMinorTickPositions(),
+                lineBox = axis.lineBox(),
                 lineOptions;
 
             if (options.line.width > 0) {
@@ -1759,15 +1843,15 @@
                     dashType: options.line.dashType,
                     zIndex: options.zIndex
                 };
-                if (isVertical) {
+                if (options.isVertical) {
                     childElements.push(view.createLine(
-                        axis.box.x2, tickPositions[0],
-                        axis.box.x2, last(tickPositions),
+                        lineBox.x1, tickPositions[0],
+                        lineBox.x1, last(tickPositions),
                         lineOptions));
                 } else {
                     childElements.push(view.createLine(
-                        tickPositions[0], axis.box.y1,
-                        last(tickPositions), axis.box.y1,
+                        tickPositions[0], lineBox.y1,
+                        last(tickPositions), lineBox.y1,
                         lineOptions));
                 }
 
@@ -1862,21 +1946,21 @@
         getTickPositions: function(stepValue) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
-                lineBox = axis.getAxisLineBox(),
+                isVertical = options.isVertical,
+                lineBox = axis.lineBox(),
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
                 step = stepValue * scale,
                 divisions = axis.getDivisions(stepValue),
                 pos = lineBox[isVertical ? "y2" : "x1"],
-                multuplier = isVertical ? -1 : 1,
+                multiplier = isVertical ? -1 : 1,
                 positions = [],
                 i;
 
             for (i = 0; i < divisions; i++) {
                 positions.push(round(pos, COORD_PRECISION));
-                pos = pos + step * multuplier;
+                pos = pos + step * multiplier;
             }
 
             return isVertical ? positions.reverse() : positions;
@@ -1894,13 +1978,13 @@
             return axis.getTickPositions(axis.options.majorUnit / 5);
         },
 
-        getAxisLineBox: function() {
+        lineBox: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 labelSize = isVertical ? "height" : "width",
                 labels = axis.labels,
-                box = axis.box,
+                baseBox = Axis.fn.lineBox.call(axis),
                 startMargin = 0,
                 endMargin = 0;
 
@@ -1910,20 +1994,20 @@
             }
 
             if (isVertical) {
-               return new Box2D(box.x2, box.y1 + startMargin,
-                 box.x2, box.y2 - endMargin);
+               return new Box2D(baseBox.x1, baseBox.y1 + startMargin,
+                 baseBox.x1, baseBox.y2 - endMargin);
             } else {
-               return new Box2D(box.x1 + startMargin, box.y1,
-                 box.x2 - endMargin, box.y1);
+               return new Box2D(baseBox.x1 + startMargin, baseBox.y1,
+                 baseBox.x2 - endMargin, baseBox.y1);
             }
         },
 
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 valueAxis = isVertical ? Y : X,
-                lineBox = axis.getAxisLineBox(),
+                lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + 1],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 scale = lineSize / (options.max - options.min),
@@ -1962,13 +2046,17 @@
     var CategoryAxis = Axis.extend({
         options: {
             categories: [],
-            orientation: HORIZONTAL,
+            isVertical: false,
             majorGridLines: {
                 visible: false,
                 width: 1,
                 color: BLACK
             },
             zIndex: 1
+        },
+
+        range: function() {
+            return { min: 0, max: this.options.categories.length };
         },
 
         reflow: function(targetBox) {
@@ -1979,7 +2067,7 @@
             var axis = this,
                 options = axis.options,
                 line = options.line,
-                isVertical = options.orientation === VERTICAL,
+                lineBox = axis.lineBox(),
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 lineOptions;
 
@@ -1991,15 +2079,9 @@
                     zIndex: line.zIndex
                 };
 
-                if (isVertical) {
-                    childElements.push(view.createLine(
-                        axis.box.x2, axis.box.y1, axis.box.x2, axis.box.y2,
-                        lineOptions));
-                } else {
-                    childElements.push(view.createLine(
-                        axis.box.x1, axis.box.y1, axis.box.x2, axis.box.y1,
-                        lineOptions));
-                }
+                childElements.push(view.createLine(
+                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
+                    lineOptions));
 
                 append(childElements, axis.renderTicks(view));
                 append(childElements, axis.renderPlotBands(view));
@@ -2011,7 +2093,7 @@
         getTickPositions: function(itemsCount) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 size = isVertical ? axis.box.height() : axis.box.width(),
                 step = size / itemsCount,
                 pos = isVertical ? axis.box.y1 : axis.box.x1,
@@ -2043,13 +2125,14 @@
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 childrenCount = math.max(1, options.categories.length),
-                from = math.max(0, from),
-                to = math.min(childrenCount, to),
-                box = axis.box,
-                size = isVertical ? box.height() : box.width(),
-                startPos = isVertical ? box.y1 : box.x1,
+                from = math.min(math.max(0, from), childrenCount),
+                to = defined(to) ? to : from,
+                to = math.max(math.min(childrenCount, to), from),
+                lineBox = axis.lineBox(),
+                size = isVertical ? lineBox.height() : lineBox.width(),
+                startPos = isVertical ? lineBox.y1 : lineBox.x1,
                 step = size / childrenCount,
                 p1 = startPos + (from * step),
                 p2 = p1 + step,
@@ -2060,15 +2143,8 @@
             }
 
             return isVertical ?
-                   new Box2D(box.x2, p1, box.x2, p2) :
-                   new Box2D(p1, box.y1, p2, box.y1);
-        },
-
-        getAxisLineBox: function() {
-            var axis = this,
-                options = axis.options;
-
-            return axis.getSlot(0).wrap(axis.getSlot(options.categories.length - 1));
+                   new Box2D(lineBox.x2, p1, lineBox.x2, p2) :
+                   new Box2D(p1, lineBox.y1, p2, lineBox.y1);
         },
 
         getLabelsCount: function() {
@@ -2361,8 +2437,10 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart._seriesMin = MAX_VALUE;
-            chart._seriesMax = MIN_VALUE;
+
+            // Value axis ranges grouped by axis name, e.g.:
+            // primary: { min: 0, max: 1 }
+            chart.valueAxisRanges = {};
 
             chart.points = [];
             chart.categoryPoints = [];
@@ -2373,7 +2451,7 @@
 
         options: {
             series: [],
-            isVertical: true,
+            invertAxes: false,
             isStacked: false
         },
 
@@ -2397,7 +2475,7 @@
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
             }
 
-            chart.updateRange(value, categoryIx);
+            chart.updateRange(value, categoryIx, series);
 
             point = chart.createPoint(value, category, categoryIx, series, seriesIx);
             if (point) {
@@ -2414,47 +2492,49 @@
             categoryPoints.push(point);
         },
 
-        updateRange: function(value, categoryIx) {
-            var chart = this;
+        updateRange: function(value, categoryIx, series) {
+            var chart = this,
+                axisName = series.axis || PRIMARY,
+                axisRange = chart.valueAxisRanges[axisName];
 
             if (defined(value)) {
-                chart._seriesMin = math.min(chart._seriesMin, value);
-                chart._seriesMax = math.max(chart._seriesMax, value);
+                axisRange = chart.valueAxisRanges[axisName] =
+                    axisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                axisRange.min = math.min(axisRange.min, value);
+                axisRange.max = math.max(axisRange.max, value);
             }
         },
 
-        valueRange: function() {
-            var chart = this;
-
-            if (chart.points.length) {
-                return { min: chart._seriesMin, max: chart._seriesMax };
-            }
-
-            return null;
+        seriesValueAxis: function(series) {
+            return this.plotArea.namedValueAxes[(series || {}).axis || PRIMARY];
         },
 
         reflow: function(targetBox) {
             var chart = this,
                 options = chart.options,
-                isVertical = options.isVertical,
+                invertAxes = options.invertAxes,
                 plotArea = chart.plotArea,
                 pointIx = 0,
                 categorySlots = chart.categorySlots = [],
                 chartPoints = chart.points,
-                valueAxis = isVertical ? plotArea.axisY : plotArea.axisX,
-                axisCrossingValue = valueAxis.options.axisCrossingValue,
+                categoryAxis = plotArea.categoryAxis,
+                valueAxis,
                 point;
 
-            chart.traverseDataPoints(function(value, category, categoryIx) {
+            chart.traverseDataPoints(function(value, category, categoryIx, currentSeries) {
+                valueAxis = chart.seriesValueAxis(currentSeries);
                 point = chartPoints[pointIx++];
                 if (point && point.plotValue) {
                     value = point.plotValue;
                 }
 
-                var slotX = plotArea.axisX.getSlot(isVertical ? categoryIx : value),
-                    slotY = plotArea.axisY.getSlot(isVertical ? value : categoryIx),
+                var categorySlot = categoryAxis.getSlot(categoryIx),
+                    valueSlot = valueAxis.getSlot(value),
+                    slotX = invertAxes ? valueSlot : categorySlot,
+                    slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                    aboveAxis = value >= axisCrossingValue;
+                    aboveAxis = value >= valueAxis.options.axisCrossingValue;
 
                 if (point) {
                     point.options.aboveAxis = aboveAxis;
@@ -2462,7 +2542,7 @@
                 }
 
                 if (!categorySlots[categoryIx]) {
-                    categorySlots[categoryIx] = isVertical ? slotX : slotY;
+                    categorySlots[categoryIx] = categorySlot;
                 }
             });
 
@@ -2510,6 +2590,13 @@
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
 
+        render: function() {
+            var chart = this;
+
+            CategoricalChart.fn.render.apply(chart);
+            chart.computeAxisRanges();
+        },
+
         createPoint: function(value, category, categoryIx, series, seriesIx) {
             var barChart = this,
                 options = barChart.options,
@@ -2525,7 +2612,7 @@
 
             var bar = new Bar(value,
                 deepExtend({}, {
-                    isVertical: options.isVertical,
+                    isVertical: !options.invertAxes,
                     overlay: series.overlay,
                     labels: labelOptions,
                     isStacked: isStacked
@@ -2534,7 +2621,7 @@
             var cluster = children[categoryIx];
             if (!cluster) {
                 cluster = new ClusterLayout({
-                    isVertical: !options.isVertical,
+                    isVertical: options.invertAxes,
                     gap: options.gap,
                     spacing: options.spacing
                 });
@@ -2551,10 +2638,10 @@
                     cluster.append(stackWrap);
 
                     positiveStack = new StackLayout({
-                        isVertical: options.isVertical
+                        isVertical: !options.invertAxes
                     });
                     negativeStack = new StackLayout({
-                        isVertical: options.isVertical,
+                        isVertical: !options.invertAxes,
                         isReversed: true
                     });
                     stackWrap.append(positiveStack, negativeStack);
@@ -2575,10 +2662,9 @@
             return bar;
         },
 
-        updateRange: function(value, categoryIx) {
+        updateRange: function(value, categoryIx, series) {
             var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
+                isStacked = chart.options.isStacked,
                 totalsPos = chart._categoryTotalsPos,
                 totalsNeg = chart._categoryTotalsNeg;
 
@@ -2591,19 +2677,28 @@
             }
         },
 
-        valueRange: function() {
+        computeAxisRanges: function() {
             var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
-                totalsPos = chart._categoryTotalsPos,
-                totalsNeg = chart._categoryTotalsNeg;
+                isStacked = chart.options.isStacked,
+                axisName;
 
             if (isStacked) {
-                chart._seriesMin = sparseArrayMin(totalsNeg.concat(0));
-                chart._seriesMax = sparseArrayMax(totalsPos.concat(0));
+                axisName = chart.options.series[0].axis || PRIMARY;
+                chart.valueAxisRanges[axisName] = {
+                    min: sparseArrayMin(chart._categoryTotalsNeg.concat(0)),
+                    max: sparseArrayMax(chart._categoryTotalsPos.concat(0))
+                };
             }
+        },
 
-            return CategoricalChart.fn.valueRange.call(chart);
+        seriesValueAxis: function(series) {
+            var chart = this,
+                options = chart.options;
+
+            return CategoricalChart.fn.seriesValueAxis.call(
+                chart,
+                options.isStacked ? chart.options.series[0] : series
+            );
         },
 
         reflowCategories: function(categorySlots) {
@@ -2910,9 +3005,9 @@
 
         getNearestPoint: function(x, y, seriesIx) {
             var chart = this,
-                isVertical = chart.options.isVertical,
-                axis = isVertical ? X : Y,
-                pos = isVertical ? x : y,
+                invertAxes = chart.options.invertAxes,
+                axis = invertAxes ? Y : X,
+                pos = invertAxes ? y : x,
                 points = chart.seriesPoints[seriesIx],
                 nearestPointDistance = MAX_VALUE,
                 pointsLength = points.length,
@@ -2944,9 +3039,17 @@
         init: function(plotArea, options) {
             var chart = this;
 
+            chart._stackAxisRange = { min: MAX_VALUE, max: MIN_VALUE };
             chart._categoryTotals = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
+        },
+
+        render: function() {
+            var chart = this;
+
+            CategoricalChart.fn.render.apply(chart);
+            chart.computeAxisRanges();
         },
 
         createPoint: function(value, category, categoryIx, series, seriesIx) {
@@ -2967,7 +3070,7 @@
 
             var point = new LinePoint(value,
                 deepExtend({
-                    isVertical: options.isVertical,
+                    isVertical: !options.invertAxes,
                     markers: {
                         border: {
                             color: series.color
@@ -2990,20 +3093,33 @@
             return point;
         },
 
-        updateRange: function(value, categoryIx) {
+        updateRange: function(value, categoryIx, series) {
             var chart = this,
-                options = chart.options,
-                isStacked = options.isStacked,
+                isStacked = chart.options.isStacked,
+                stackAxisRange = chart._stackAxisRange,
                 totals = chart._categoryTotals;
 
             if (defined(value)) {
                 if (isStacked) {
                     incrementSlot(totals, categoryIx, value);
-                    chart._seriesMin = math.min(chart._seriesMin, sparseArrayMin(totals));
-                    chart._seriesMax = math.max(chart._seriesMax, sparseArrayMax(totals));
+
+                    stackAxisRange.min = math.min(stackAxisRange.min, sparseArrayMin(totals));
+                    stackAxisRange.max = math.max(stackAxisRange.max, sparseArrayMax(totals));
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
+            }
+        },
+
+        computeAxisRanges: function() {
+            var chart = this,
+                isStacked = chart.options.isStacked,
+                axisName,
+                totals = chart._categoryTotals;
+
+            if (isStacked) {
+                axisName = chart.options.series[0].axis || PRIMARY;
+                chart.valueAxisRanges[axisName] = chart._stackAxisRange;
             }
         },
 
@@ -3027,13 +3143,13 @@
     var AreaChart = LineChart.extend({
         splitSegments: function(view) {
             var chart = this,
+                options = chart.options,
                 plotArea = chart.plotArea,
-                isVertical = chart.options.isVertical,
+                invertAxes = chart.options.invertAxes,
                 originalLines = LineChart.fn.splitSegments.call(chart, view),
                 lines = [],
-                axis = isVertical ? plotArea.axisX : plotArea.axisY,
-                axisLineBox = axis.getAxisLineBox(),
-                end = isVertical ? axisLineBox.y1 : axisLineBox.x1,
+                axisLineBox = plotArea.categoryAxis.lineBox(),
+                end = invertAxes ? axisLineBox.x1 : axisLineBox.y1,
                 originalLinePoints,
                 linesCount = originalLines.length,
                 seriesIx = 0,
@@ -3059,12 +3175,12 @@
                         firstPoint = linePoints[0];
                         lastPoint = last(linePoints);
 
-                        if (isVertical) {
-                            linePoints.unshift(new Point2D(firstPoint.x, end));
-                            linePoints.push(new Point2D(lastPoint.x, end));
-                        } else {
+                        if (invertAxes) {
                             linePoints.unshift(new Point2D(end, firstPoint.y));
                             linePoints.push(new Point2D(end, lastPoint.y));
+                        } else {
+                            linePoints.unshift(new Point2D(firstPoint.x, end));
+                            linePoints.push(new Point2D(lastPoint.x, end));
                         }
                     }
                 }
@@ -3102,8 +3218,12 @@
             ChartElement.fn.init.call(chart, options);
 
             chart.plotArea = plotArea;
-            chart._seriesMin = [MAX_VALUE, MAX_VALUE];
-            chart._seriesMax = [MIN_VALUE, MIN_VALUE];
+
+            // X and Y axis ranges grouped by name, e.g.:
+            // primary: { min: 0, max: 1 }
+            chart.xAxisRanges = {};
+            chart.yAxisRanges = {};
+
             chart.points = [];
             chart.seriesPoints = [];
 
@@ -3132,7 +3252,7 @@
                 seriesIx = fields.seriesIx,
                 seriesPoints = chart.seriesPoints[seriesIx];
 
-            chart.updateRange(value);
+            chart.updateRange(value, fields.series);
 
             if (!seriesPoints) {
                 chart.seriesPoints[seriesIx] = seriesPoints = [];
@@ -3147,32 +3267,30 @@
             seriesPoints.push(point);
         },
 
-        updateRange: function(value) {
+        updateRange: function(value, series) {
             var chart = this,
                 x = value.x,
                 y = value.y,
-                seriesMin = chart._seriesMin,
-                seriesMax = chart._seriesMax;
+                xAxisName = series.xAxis || PRIMARY,
+                yAxisName = series.yAxis || PRIMARY,
+                xAxisRange = chart.xAxisRanges[xAxisName],
+                yAxisRange = chart.yAxisRanges[yAxisName];
 
             if (defined(x)) {
-                seriesMin[0] = math.min(seriesMin[0], x);
-                seriesMax[0] = math.max(seriesMax[0], x);
+                xAxisRange = chart.xAxisRanges[xAxisName] =
+                    xAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                xAxisRange.min = math.min(xAxisRange.min, x);
+                xAxisRange.max = math.max(xAxisRange.max, x);
             }
 
             if (defined(y)) {
-                seriesMin[1] = math.min(seriesMin[1], y);
-                seriesMax[1] = math.max(seriesMax[1], y);
+                yAxisRange = chart.yAxisRanges[yAxisName] =
+                    yAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
+
+                yAxisRange.min = math.min(yAxisRange.min, y);
+                yAxisRange.max = math.max(yAxisRange.max, y);
             }
-        },
-
-        valueRange: function() {
-            var chart = this;
-
-            if (chart.points.length) {
-                return { min: chart._seriesMin, max: chart._seriesMax };
-            }
-
-            return null;
         },
 
         createPoint: function(value, series, seriesIx) {
@@ -3205,18 +3323,31 @@
             return point;
         },
 
+        seriesAxes: function(series) {
+            var plotArea = this.plotArea,
+                xAxis = series.xAxis || PRIMARY,
+                yAxis = series.yAxis || PRIMARY;
+
+            return {
+                x: plotArea.namedXAxes[xAxis],
+                y: plotArea.namedYAxes[yAxis]
+            };
+        },
+
         reflow: function(targetBox) {
             var chart = this,
                 plotArea = chart.plotArea,
                 chartPoints = chart.points,
                 pointIx = 0,
-                point;
+                point,
+                seriesAxes;
 
-            chart.traverseDataPoints(function(value) {
+            chart.traverseDataPoints(function(value, fields) {
                 point = chartPoints[pointIx++];
+                seriesAxes = chart.seriesAxes(fields.series);
 
-                var slotX = plotArea.axisX.getSlot(value.x, value.x),
-                    slotY = plotArea.axisY.getSlot(value.y, value.y),
+                var slotX = seriesAxes.x.getSlot(value.x, value.x),
+                    slotY = seriesAxes.y.getSlot(value.y, value.y),
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2);
 
                 if (point) {
@@ -3954,18 +4085,21 @@
         }
     });
 
-    var PlotArea = ChartElement.extend({
-        init: function(options) {
+    var PlotAreaBase = ChartElement.extend({
+        init: function(series, options) {
             var plotArea = this;
 
             ChartElement.fn.init.call(plotArea, options);
+
+            plotArea.series = series;
+            plotArea.charts = [];
+            plotArea.options.legend.items = [];
+            plotArea.axes = [];
 
             plotArea.render();
         },
 
         options: {
-            categoryAxis: {},
-            valueAxis: {},
             series: [],
             plotArea: {
                 margin: {}
@@ -3975,88 +4109,20 @@
                 color: BLACK,
                 width: 0
             },
-            range: {},
             legend: {}
         },
 
-        render: function() {
-            var plotArea = this,
-                options = plotArea.options,
-                series = options.series,
-                seriesLength = series.length,
-                currentSeries,
-                pieSeries = [],
-                barSeries = [],
-                lineSeries = [],
-                scatterSeries = [],
-                scatterLineSeries = [],
-                areaSeries = [],
-                i;
+        appendChart: function(chart) {
+            var plotArea = this;
 
-            options.legend.items = [];
-            options.range = { min: 0, max: 1 };
-            options.scatterRange = { min: [0, 0], max: [1, 1] };
-            plotArea.charts = [];
-            for (i = 0; i < seriesLength; i++) {
-                currentSeries = series[i];
-
-                if (currentSeries.type === BAR || currentSeries.type === COLUMN) {
-                    barSeries.push(currentSeries);
-                } else if (currentSeries.type === LINE) {
-                    lineSeries.push(currentSeries);
-                } else if (currentSeries.type === PIE) {
-                    pieSeries.push(currentSeries);
-                } else if (currentSeries.type === "scatter") {
-                    scatterSeries.push(currentSeries);
-                } else if (currentSeries.type === "scatterLine") {
-                    scatterLineSeries.push(currentSeries);
-                } else if (currentSeries.type === AREA) {
-                    areaSeries.push(currentSeries);
-                }
-            }
-
-            if (barSeries.length > 0) {
-                plotArea.createBarChart(barSeries);
-            }
-
-            if (lineSeries.length > 0) {
-                plotArea.createLineChart(lineSeries);
-            }
-
-            if (pieSeries.length > 0) {
-                plotArea.createPieChart(pieSeries);
-            }
-
-            if (areaSeries.length > 0) {
-                plotArea.createAreaChart(areaSeries);
-            }
-
-            if (scatterSeries.length > 0 || scatterLineSeries.length > 0) {
-                if (scatterSeries.length > 0) {
-                    plotArea.createScatterChart(scatterSeries);
-                } else {
-                    plotArea.createScatterLineChart(scatterLineSeries);
-                }
-
-                plotArea.axisX = new NumericAxis(options.range.min[0], options.range.max[0],
-                    deepExtend({}, options.xAxis, { orientation: HORIZONTAL })
-                );
-
-                plotArea.axisY = new NumericAxis(options.range.min[1], options.range.max[1],
-                    deepExtend({}, options.yAxis, { orientation: VERTICAL })
-                );
-
-                plotArea.append(plotArea.axisY);
-                plotArea.append(plotArea.axisX);
-            } else if (seriesLength != pieSeries.length || seriesLength == 0) {
-                plotArea.createAxes(options.range.min, options.range.max, options.invertAxes);
-            }
-
-            plotArea.append.apply(plotArea, plotArea.charts);
+            plotArea.charts.push(chart);
+            plotArea.addToLegend(chart);
+            plotArea.append(chart);
         },
 
-        addToLegend: function(series) {
-            var count = series.length,
+        addToLegend: function(chart) {
+            var series = chart.options.series,
+                count = series.length,
                 data = [],
                 i;
 
@@ -4067,171 +4133,6 @@
             append(this.options.legend.items, data);
         },
 
-        createBarChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                invertAxes = options.invertAxes = firstSeries.type === BAR,
-                categories = options.categoryAxis.categories,
-                areaChart = new BarChart(plotArea, {
-                    series: series,
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    gap: firstSeries.gap,
-                    spacing: firstSeries.spacing
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
-
-            append(categories, new Array(categoriesToAdd));
-            options.range = areaChart.valueRange() || options.range;
-            plotArea.charts.push(areaChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createLineChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
-                // Override the original invertAxes
-                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
-                lineChart = new LineChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    series: series
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
-                lineChartRange = lineChart.valueRange() || options.range;
-
-            append(categories, new Array(categoriesToAdd));
-            // Override the original range
-            options.range.min = math.min(options.range.min, lineChartRange.min);
-            options.range.max = math.max(options.range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createAreaChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                categoryAxis = options.categoryAxis,
-                categories = categoryAxis.categories,
-                // Override the original invertAxes
-                invertAxes = options.invertAxes = categoryAxis.orientation === VERTICAL,
-                lineChart = new AreaChart(plotArea, {
-                    // TODO: Rename isVertical to invertAxes, flip logic
-                    isVertical: !invertAxes,
-                    isStacked: firstSeries.stack,
-                    series: series
-                }),
-                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length),
-                lineChartRange = lineChart.valueRange() || options.range;
-
-            append(categories, new Array(categoriesToAdd));
-            // Override the original range
-            options.range.min = math.min(options.range.min, lineChartRange.min);
-            options.range.max = math.max(options.range.max, lineChartRange.max);
-            plotArea.charts.push(lineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createScatterChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                // Override the original invertAxes
-                scatterChart = new ScatterChart(plotArea, { series: series }),
-                scatterChartRange = scatterChart.valueRange() || options.scatterRange;
-
-            // Override the original range
-            options.range = scatterChartRange;
-            plotArea.charts.push(scatterChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createScatterLineChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                // Override the original invertAxes
-                scatterLineChart = new ScatterLineChart(plotArea, { series: series }),
-                scatterLineChartRange = scatterLineChart.valueRange() || options.scatterRange;
-
-            // Override the original range
-            options.range = scatterLineChartRange;
-            plotArea.charts.push(scatterLineChart);
-
-            plotArea.addToLegend(series);
-        },
-
-        createPieChart: function(series) {
-            var plotArea = this,
-                options = plotArea.options,
-                firstSeries = series[0],
-                pieChart = new PieChart(plotArea, {
-                    series: series,
-                    padding: firstSeries.padding,
-                    startAngle: firstSeries.startAngle,
-                    connectors: firstSeries.connectors
-                }),
-                segments = pieChart.segments,
-                count = segments.length,
-                i;
-
-            plotArea.charts.push(pieChart);
-            for (i = 0; i < count; i++) {
-                options.legend.items.push({
-                    name: segments[i].category,
-                    color: segments[i].options.color });
-            }
-        },
-
-        createAxes: function(seriesMin, seriesMax, invertAxes) {
-            var plotArea = this,
-                options = plotArea.options,
-                categoriesCount = options.categoryAxis.categories.length,
-                categoryAxis = new CategoryAxis(deepExtend({
-                        orientation: invertAxes ? VERTICAL : HORIZONTAL,
-                        axisCrossingValue: invertAxes ? categoriesCount : 0
-                    },
-                    options.categoryAxis)
-                ),
-                valueAxis = new NumericAxis(seriesMin, seriesMax, deepExtend({
-                        orientation: invertAxes ? HORIZONTAL : VERTICAL
-                    },
-                    options.valueAxis)
-                );
-
-            plotArea.axisX = invertAxes ? valueAxis : categoryAxis;
-            plotArea.axisY = invertAxes ? categoryAxis : valueAxis;
-
-            plotArea.append(plotArea.axisY);
-            plotArea.append(plotArea.axisX);
-        },
-
-        alignAxes: function() {
-            var plotArea = this,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                crossingValueY = axisY.options.axisCrossingValue,
-                axisCrossingY = axisY.getSlot(crossingValueY, crossingValueY),
-                crossingValueX = axisX.options.axisCrossingValue,
-                axisCrossingX = axisX.getSlot(crossingValueX, crossingValueX);
-
-            axisY.reflow(
-                axisY.box.translate(axisCrossingX.x1 - axisCrossingY.x1, 0)
-            );
-
-            axisX.reflow(
-                axisX.box.translate(0, axisCrossingY.y1 - axisCrossingX.y1)
-            );
-        },
-
         reflow: function(targetBox) {
             var plotArea = this,
                 options = plotArea.options.plotArea,
@@ -4240,39 +4141,235 @@
             plotArea.box = targetBox.clone();
 
             plotArea.box.unpad(margin);
-            plotArea.reflowAxes();
+
+            if (plotArea.axes.length > 0) {
+                plotArea.reflowAxes();
+                plotArea.box = plotArea.axisBox();
+            }
+
             plotArea.reflowCharts();
-            plotArea.wrapAxes();
+        },
+
+        axisCrossingValues: function(axis, crossingAxes) {
+            var options = axis.options,
+                crossingValues = [].concat(options.axisCrossingValue),
+                valuesToAdd = crossingAxes.length - crossingValues.length,
+                defaultValue = crossingValues[0] || 0,
+                i;
+
+            for (i = 0; i < valuesToAdd; i++) {
+                crossingValues.push(defaultValue);
+            }
+
+            return crossingValues;
+        },
+
+        alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
+            var slot = axis.getSlot(crossingValue, crossingValue),
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue);
+
+            axis.reflow(
+                axis.box.translate(
+                    targetSlot.x1 - slot.x1,
+                    targetSlot.y1 - slot.y1
+                )
+            );
+        },
+
+        alignAxes: function(xAxes, yAxes) {
+            var plotArea = this,
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
+                xAnchorCrossings = plotArea.axisCrossingValues(xAnchor, yAxes),
+                yAnchorCrossings = plotArea.axisCrossingValues(yAnchor, xAxes),
+                leftAnchor,
+                rightAnchor,
+                topAnchor,
+                bottomAnchor,
+                axis,
+                axisCrossings,
+                i;
+
+            // TODO: Refactor almost-identical loops
+            for (i = 0; i < yAxes.length; i++) {
+                axis = yAxes[i];
+                plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+
+                if (axis.lineBox().x1 === xAnchor.lineBox().x1) {
+                    if (leftAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(leftAnchor.box, LEFT)
+                            .translate(-axis.options.margin, 0)
+                        );
+                    }
+
+                    leftAnchor = axis;
+                }
+
+                if (axis.lineBox().x2 === xAnchor.lineBox().x2) {
+                    if (!axis._mirrored) {
+                        axis.options.mirror = !axis.options.mirror;
+                        axis._mirrored = true;
+                    }
+                    plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
+
+                    if (rightAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(rightAnchor.box, RIGHT)
+                            .translate(axis.options.margin, 0)
+                        );
+                    }
+
+                    rightAnchor = axis;
+                }
+            }
+
+            for (i = 0; i < xAxes.length; i++) {
+                axis = xAxes[i];
+                plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+
+                if (axis.lineBox().y1 === yAnchor.lineBox().y1) {
+                    if (!axis._mirrored) {
+                        axis.options.mirror = !axis.options.mirror;
+                        axis._mirrored = true;
+                    }
+                    plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);
+
+                    if (topAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(topAnchor.box, TOP)
+                            .translate(0, -axis.options.margin)
+                        );
+                    }
+
+                    topAnchor = axis;
+                }
+
+                if (axis.lineBox().y2 === yAnchor.lineBox().y2) {
+                    if (bottomAnchor) {
+                        axis.reflow(axis.box
+                            .alignTo(bottomAnchor.box, BOTTOM)
+                            .translate(0, axis.options.margin)
+                        );
+                    }
+
+                    bottomAnchor = axis;
+                }
+            }
+        },
+
+        axisBox: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                box = axes[0].box.clone(),
+                i,
+                length = axes.length;
+
+            for (i = 1; i < length; i++) {
+                box.wrap(axes[i].box);
+            }
+
+            return box;
+        },
+
+        shrinkAxes: function() {
+            var plotArea = this,
+                box = plotArea.box,
+                axisBox = plotArea.axisBox(),
+                overflowY = axisBox.height() - box.height(),
+                overflowX = axisBox.width() - box.width(),
+                axes = plotArea.axes,
+                currentAxis,
+                isVertical,
+                i,
+                length = axes.length;
+
+            // Shrink all axes so they don't overflow out of the bounding box
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+                isVertical = currentAxis.options.isVertical;
+
+                currentAxis.reflow(
+                    currentAxis.box.shrink(
+                        isVertical ? 0 : overflowX,
+                        isVertical ? overflowY : 0
+                    )
+                );
+            }
+        },
+
+        shrinkAdditionalAxes: function(xAxes, yAxes) {
+            var plotArea = this,
+                axes = plotArea.axes,
+                xAnchor = xAxes[0],
+                yAnchor = yAxes[0],
+                anchorLineBox = xAnchor.lineBox().clone().wrap(yAnchor.lineBox()),
+                overflowX,
+                overflowY,
+                currentAxis,
+                isVertical,
+                lineBox,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+                isVertical = currentAxis.options.isVertical;
+                lineBox = currentAxis.lineBox();
+
+                overflowX = math.max(0, lineBox.x2 - anchorLineBox.x2) +
+                            math.max(0, anchorLineBox.x1 - lineBox.x1);
+
+                overflowY = math.max(0, lineBox.y2 - anchorLineBox.y2) +
+                            math.max(0, anchorLineBox.y1 - lineBox.y1);
+
+                currentAxis.reflow(
+                    currentAxis.box.shrink(
+                        isVertical ? 0 : overflowX,
+                        isVertical ? overflowY : 0
+                    )
+                );
+            }
+        },
+
+        fitAxes: function() {
+            var plotArea = this,
+                axes = plotArea.axes,
+                box = plotArea.box,
+                axisBox = plotArea.axisBox(),
+                offsetX = box.x1 - axisBox.x1,
+                offsetY = box.y1 - axisBox.y1,
+                currentAxis,
+                i,
+                length = axes.length;
+
+            for (i = 0; i < length; i++) {
+                currentAxis = axes[i];
+
+                currentAxis.reflow(
+                    currentAxis.box.translate(offsetX, offsetY)
+                );
+            }
         },
 
         reflowAxes: function() {
             var plotArea = this,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                box = plotArea.box;
+                axes = plotArea.axes,
+                xAxes = axes.filter(function(axis) { return !axis.options.isVertical; }),
+                yAxes = axes.filter(function(axis) { return axis.options.isVertical; }),
+                i,
+                length = axes.length;
 
-            if (axisY || axisX) {
-                axisY.reflow(box);
-                axisX.reflow(box);
-
-                plotArea.alignAxes();
-
-                var axisBox = axisY.box.clone().wrap(axisX.box),
-                    overflowY = axisBox.height() - box.height(),
-                    overflowX = axisBox.width() - box.width(),
-                    offsetX = box.x1 - axisBox.x1,
-                    offsetY = box.y1 - axisBox.y1;
-
-                axisY.reflow(
-                    axisY.box.translate(offsetX, offsetY).shrink(0, overflowY)
-                );
-
-                axisX.reflow(
-                    axisX.box.translate(offsetX, offsetY).shrink(overflowX, 0)
-                );
-
-                plotArea.alignAxes();
+            for (i = 0; i < length; i++) {
+                axes[i].reflow(plotArea.box);
             }
+
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.shrinkAdditionalAxes(xAxes, yAxes);
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.shrinkAxes();
+            plotArea.alignAxes(xAxes, yAxes);
+            plotArea.fitAxes();
         },
 
         reflowCharts: function() {
@@ -4289,23 +4386,9 @@
             plotArea.box = box;
         },
 
-        wrapAxes: function() {
-            var plotArea = this,
-                axisY = plotArea.axisY,
-                axisX = plotArea.axisX,
-                boxX,
-                boxY;
-
-            if (axisY || axisX) {
-                boxX = axisX.getAxisLineBox();
-                boxY = axisY.getAxisLineBox();
-                plotArea.box = boxX.clone().wrap(boxY);
-            }
-        },
-
         renderGridLines: function(view, axis, secondaryAxis) {
             var options = axis.options,
-                isVertical = options.orientation === VERTICAL,
+                isVertical = options.isVertical,
                 boundaries = secondaryAxis.getMajorTickPositions(),
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
                 secAxisPos = round(crossingSlot[isVertical ? "y1" : "x1"]),
@@ -4389,7 +4472,339 @@
 
             return [].concat(gridLinesY, gridLinesX, childElements, elements);
         }
+    });
 
+    var CategoricalPlotArea = PlotAreaBase.extend({
+        init: function(series, options) {
+            var plotArea = this,
+                axisOptions = deepExtend({}, plotArea.options, options);
+
+            plotArea.namedValueAxes = {};
+            plotArea.valueAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.valueAxis);
+
+            if (series.length > 0) {
+                plotArea.invertAxes = inArray(
+                    series[0].type, [BAR, VERTICAL_LINE, VERTICAL_AREA]
+                );
+            }
+
+            PlotAreaBase.fn.init.call(plotArea, series, options);
+        },
+
+        options: {
+            categoryAxis: {
+                categories: []
+            },
+            valueAxis: {}
+        },
+
+        render: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createBarChart(grep(series, function(s) {
+                return inArray(s.type, [BAR, COLUMN]);
+            }));
+
+            plotArea.createLineChart(grep(series, function(s) {
+                return inArray(s.type, [LINE, VERTICAL_LINE]);
+            }));
+
+            plotArea.createAreaChart(grep(series, function(s) {
+                return inArray(s.type, [AREA, VERTICAL_AREA]);
+            }));
+
+            plotArea.createAxes();
+        },
+
+        appendChart: function(chart) {
+            var plotArea = this,
+                options = plotArea.options,
+                series = chart.options.series,
+                categories = options.categoryAxis.categories,
+                categoriesToAdd = math.max(0, categoriesCount(series) - categories.length);
+
+            append(categories, new Array(categoriesToAdd));
+
+            plotArea.valueAxisRangeTracker.update(chart.valueAxisRanges);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+        },
+
+        createBarChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                barChart = new BarChart(plotArea, {
+                    series: series,
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack,
+                    gap: firstSeries.gap,
+                    spacing: firstSeries.spacing
+                });
+
+            plotArea.appendChart(barChart);
+        },
+
+        createLineChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                lineChart = new LineChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack,
+                    series: series
+                });
+
+            plotArea.appendChart(lineChart);
+        },
+
+        createAreaChart: function(series) {
+            if (series.length === 0) {
+                return;
+            }
+
+            var plotArea = this,
+                options = plotArea.options,
+                firstSeries = series[0],
+                areaChart = new AreaChart(plotArea, {
+                    invertAxes: plotArea.invertAxes,
+                    isStacked: firstSeries.stack,
+                    series: series
+                });
+
+            plotArea.appendChart(areaChart);
+        },
+
+        createAxes: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                range,
+                invertAxes = plotArea.invertAxes,
+                categoriesCount = options.categoryAxis.categories.length,
+                categoryAxis = new CategoryAxis(deepExtend({
+                        isVertical: invertAxes,
+                        axisCrossingValue: invertAxes ? categoriesCount : 0
+                    },
+                    options.categoryAxis)
+                ),
+                axis,
+                axisName,
+                namedValueAxes = plotArea.namedValueAxes,
+                valueAxisOptions = [].concat(options.valueAxis),
+                primaryValueAxis;
+
+            each(valueAxisOptions, function() {
+                axisName = this.name || PRIMARY;
+                range = plotArea.valueAxisRangeTracker.query(axisName);
+
+                axis = namedValueAxes[axisName] =
+                    new NumericAxis(range.min, range.max, deepExtend({
+                        isVertical: !invertAxes
+                    },
+                    this)
+                );
+
+                plotArea.axes.push(axis);
+                plotArea.append(axis);
+            });
+
+            primaryValueAxis = namedValueAxes[PRIMARY] || plotArea.axes[0];
+
+            // TODO: Consider removing axisX and axisY aliases
+            plotArea.axisX = invertAxes ? primaryValueAxis : categoryAxis;
+            plotArea.axisY = invertAxes ? categoryAxis : primaryValueAxis;
+
+            plotArea.categoryAxis = categoryAxis;
+            plotArea.axes.push(categoryAxis);
+            plotArea.append(plotArea.categoryAxis);
+        }
+    });
+
+    var AxisGroupRangeTracker = Class.extend({
+        init: function(axisOptions) {
+            var tracker = this;
+
+            tracker.axisRanges = {},
+            tracker.axisOptions = [].concat(axisOptions),
+            tracker.defaultRange = { min: 0, max: 1 };
+        },
+
+        update: function(chartAxisRanges) {
+            var tracker = this,
+                axisRanges = tracker.axisRanges,
+                axisOptions = tracker.axisOptions,
+                range,
+                chartRange,
+                i,
+                axis,
+                axisName,
+                length = axisOptions.length;
+
+            if (!chartAxisRanges) {
+                return;
+            }
+
+            for (i = 0; i < length; i++) {
+                axis = axisOptions[i];
+                axisName = axis.name || PRIMARY;
+                range = axisRanges[axisName];
+                chartRange = chartAxisRanges[axisName];
+                if (chartRange) {
+                    axisRanges[axisName] = range =
+                        range || { min: MAX_VALUE, max: MIN_VALUE };
+
+                    range.min = math.min(range.min, chartRange.min);
+                    range.max = math.max(range.max, chartRange.max);
+                }
+            }
+        },
+
+        query: function(axisName) {
+            var tracker = this;
+
+            return tracker.axisRanges[axisName] || deepExtend({}, tracker.defaultRange);
+        }
+    });
+
+    var XYPlotArea = PlotAreaBase.extend({
+        init: function(series, options) {
+            var plotArea = this,
+                axisOptions = deepExtend({}, plotArea.options, options);
+
+            plotArea.namedXAxes = {};
+            plotArea.namedYAxes = {};
+
+            plotArea.xAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.xAxis);
+            plotArea.yAxisRangeTracker = new AxisGroupRangeTracker(axisOptions.yAxis);
+
+            PlotAreaBase.fn.init.call(plotArea, series, options);
+        },
+
+        options: {
+            xAxis: {},
+            yAxis: {}
+        },
+
+        render: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createScatterChart(grep(series, function(s) {
+                return s.type === SCATTER;
+            }));
+
+            plotArea.createScatterLineChart(grep(series, function(s) {
+                return s.type === SCATTER_LINE;
+            }));
+
+            plotArea.createAxes();
+        },
+
+        appendChart: function(chart) {
+            var plotArea = this;
+
+            plotArea.xAxisRangeTracker.update(chart.xAxisRanges);
+            plotArea.yAxisRangeTracker.update(chart.yAxisRanges);
+
+            PlotAreaBase.fn.appendChart.call(plotArea, chart);
+        },
+
+        createScatterChart: function(series) {
+            var plotArea = this;
+
+            if (series.length > 0) {
+                plotArea.appendChart(
+                    new ScatterChart(plotArea, { series: series })
+                );
+            }
+        },
+
+        createScatterLineChart: function(series) {
+            var plotArea = this;
+
+            if (series.length > 0) {
+                plotArea.appendChart(
+                    new ScatterLineChart(plotArea, { series: series })
+                );
+            }
+        },
+
+        createXYAxis: function(options, isVertical) {
+            var plotArea = this,
+                axisName = options.name || PRIMARY,
+                namedAxes = isVertical ? plotArea.namedYAxes : plotArea.namedXAxes,
+                axisRanges = isVertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
+                rangeTracker = isVertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
+                range = rangeTracker.query(axisName),
+                options = deepExtend({}, options, { isVertical: isVertical }),
+                axis = new NumericAxis(range.min, range.max, options);
+
+            namedAxes[axisName] = axis;
+            plotArea.append(axis);
+            plotArea.axes.push(axis);
+        },
+
+        createAxes: function() {
+            var plotArea = this,
+                options = plotArea.options;
+
+            each([].concat(options.xAxis), function() {
+                plotArea.createXYAxis(this, false);
+            });
+
+            each([].concat(options.yAxis), function() {
+                plotArea.createXYAxis(this, true);
+            });
+
+            // TODO: Remove axisX and axisY aliases
+            plotArea.axisX = plotArea.namedXAxes.primary;
+            plotArea.axisY = plotArea.namedYAxes.primary;
+        }
+    });
+
+    var PiePlotArea = PlotAreaBase.extend({
+        render: function() {
+            var plotArea = this,
+                series = plotArea.series;
+
+            plotArea.createPieChart(series);
+        },
+
+        createPieChart: function(series) {
+            var plotArea = this,
+                firstSeries = series[0],
+                pieChart = new PieChart(plotArea, {
+                    series: series,
+                    padding: firstSeries.padding,
+                    startAngle: firstSeries.startAngle,
+                    connectors: firstSeries.connectors
+                });
+
+            plotArea.appendChart(pieChart);
+        },
+
+        addToLegend: function(chart) {
+            var plotArea = this,
+                options = plotArea.options,
+                segments = chart.segments,
+                count = segments.length,
+                i;
+
+            for (i = 0; i < count; i++) {
+                options.legend.items.push({
+                    name: segments[i].category,
+                    color: segments[i].options.color });
+            }
+        }
     });
 
     // **************************
@@ -5273,16 +5688,22 @@
     }
 
     function applyAxisDefaults(options, themeOptions) {
-        var themeAxisDefaults = themeOptions ? deepExtend({}, themeOptions.axisDefaults) : {};
+        var themeAxisDefaults = deepExtend({}, (themeOptions || {}).axisDefaults);
 
-        $.each(["category", "value", "x", "y"], function() {
-            var axisName = this + "Axis";
-            options[axisName] = deepExtend({},
-                themeAxisDefaults,
-                themeAxisDefaults[axisName],
-                options.axisDefaults,
-                options[axisName]
-            );
+        each(["category", "value", "x", "y"], function() {
+            var axisName = this + "Axis",
+                axes = [].concat(options[axisName]);
+
+            axes = $.map(axes, function(axisOptions) {
+                return deepExtend({},
+                    themeAxisDefaults,
+                    themeAxisDefaults[axisName],
+                    options.axisDefaults,
+                    axisOptions
+                );
+            });
+
+            options[axisName] = axes.length > 1 ? axes : axes[0];
         });
     }
 
@@ -5596,7 +6017,9 @@
         StackLayout: StackLayout,
         Title: Title,
         Legend: Legend,
-        PlotArea: PlotArea,
+        CategoricalPlotArea: CategoricalPlotArea,
+        PiePlotArea: PiePlotArea,
+        XYPlotArea: XYPlotArea,
         Tooltip: Tooltip,
         Highlight: Highlight,
         PieSegment: PieSegment,

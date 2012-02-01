@@ -19,7 +19,8 @@
                 view,
                 TOLERANCE = 1,
                 MARGIN = 10,
-                GAP = 4;
+                GAP = 4,
+                chartSeries;
 
                 function moduleSetup() {
                     view = new ViewStub();
@@ -27,8 +28,10 @@
 
             (function() {
                 var plotArea,
-                    axisY,
-                    axisX,
+                    categoryAxis,
+                    namedValueAxes,
+                    primaryValueAxis,
+                    secondaryValueAxis,
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
@@ -48,37 +51,81 @@
                         name: "Value B",
                         type: "column",
                         data: [10, 20, 30]
-                    }];
+                    }],
+                    lineSeriesData = [{
+                        name: "Value A",
+                        type: "line",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "line",
+                        data: [10, 20, 30]
+                    },
+                    verticalLineSeriesData = [{
+                        name: "Value A",
+                        type: "verticalLine",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "verticalLine",
+                        data: [10, 20, 30]
+                    }]],
+                    areaSeriesData = [{
+                        name: "Value A",
+                        type: "area",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "area",
+                        data: [10, 20, 30]
+                    },
+                    verticalAreaSeriesData = [{
+                        name: "Value A",
+                        type: "verticalArea",
+                        data: [100, 200, 300]
+                    }, {
+                        name: "Value B",
+                        type: "verticalArea",
+                        data: [10, 20, 30]
+                    }]];
 
-                function createPlotArea(series, chartOptions) {
-                    plotArea = new Chart.PlotArea({
-                        series: series,
+                function createPlotArea(series, options) {
+                    plotArea = new Chart.CategoricalPlotArea(series,
+                        $.extend({
                         categoryAxis: {
                             categories: ["A", "B", "C"]
                         }
-                    });
+                    }, options));
 
-                    axisY = plotArea.axisY;
-                    axisX = plotArea.axisX;
+                    categoryAxis = plotArea.categoryAxis;
+                    namedValueAxes = plotArea.namedValueAxes;
+                    primaryValueAxis = plotArea.namedValueAxes.primary;
+                    secondaryValueAxis = plotArea.namedValueAxes.secondary;
+
+                    chartSeries = plotArea.charts[0];
                 }
 
                 // ------------------------------------------------------------
-                module("PlotArea", {
+                module("Categorical PlotArea / Axes", {
                     setup: function() {
                         moduleSetup();
+
                         createPlotArea(columnSeriesData);
                     }
                 });
 
-                test("appends Y-Axis to children collection", function() {
-                    ok($.inArray(axisY, plotArea.children) >= 0);
+                test("appends primary value axis to children collection", function() {
+                    ok($.inArray(primaryValueAxis, plotArea.children) >= 0);
                 });
 
-                test("appends X-Axis to children collection", function() {
-                    ok($.inArray(axisX, plotArea.children) >= 0);
+                test("appends category axis to children collection", function() {
+                    ok($.inArray(categoryAxis, plotArea.children) >= 0);
                 });
 
-                test("aligns axises at default crossing values", function() {
+                test("aligns axes at default crossing values", function() {
+                    var axisX = categoryAxis,
+                        axisY = primaryValueAxis;
+
                     plotArea.reflow(chartBox);
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
@@ -87,6 +134,9 @@
                 });
 
                 test("aligns axises at non-default crossing values", function() {
+                    var axisX = categoryAxis,
+                        axisY = primaryValueAxis;
+
                     axisY.options.axisCrossingValue = 10;
                     axisX.options.axisCrossingValue = 1;
                     plotArea.reflow(chartBox);
@@ -97,134 +147,319 @@
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(Chart.PlotArea, "createAxes",
-                        function(seriesMin, seriesMax) {
-                            equal(seriesMin, 0);
-                            equal(seriesMax, 1);
+                    stubMethod(Chart.CategoricalPlotArea, "createAxes",
+                        function() {
+                            equal(this.valueAxisRangeTracker.query("primary").min, 0);
+                            equal(this.valueAxisRangeTracker.query("primary").max, 1);
                         },
                         function() {
-                            plotArea = new Chart.PlotArea();
+                            plotArea = new Chart.CategoricalPlotArea([]);
                         }
                     );
                 });
 
                 test("adds categories to match actual data", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: columnSeriesData,
+                    var plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B"]
                         }
                     });
 
-                    equals(plotArea.axisX.options.categories.length, 3);
+                    equals(plotArea.categoryAxis.options.categories.length, 3);
                 });
 
                 test("accepts extra categories", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [{
+                    var plotArea = new Chart.CategoricalPlotArea([{
                             type: "column",
                             data: [100]
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A", "B"]
                         }
                     });
 
-                    equals(plotArea.axisX.options.categories.length, 2);
-                });
-
-                test("applies margin", function() {
-                    var plotArea = new Chart.PlotArea({
-                        series: [{
-                            data: [100]
-                        }],
-                        categoryAxis: {
-                            categories: ["A", "B"],
-                            labels: { font: SANS12 }
-                        },
-                        valueAxis: {
-                            labels: { font: SANS12 }
-                        },
-                        plotArea: {
-                            margin: MARGIN
-                        }
-                    });
-
-                    plotArea.reflow(chartBox);
-
-                    sameBox(plotArea.box, new Box2D(136, 117, 990, 966), TOLERANCE);
+                    equals(plotArea.categoryAxis.options.categories.length, 2);
                 });
 
                 // ------------------------------------------------------------
-                var barChart;
-                module("PlotArea / Column series", {
+                module("Categorical PlotArea / Multiple Axes", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(columnSeriesData, {
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("secondary axis added to children collection", function() {
+                    ok($.inArray(secondaryValueAxis, plotArea.children) >= 0);
+                });
+
+                test("crosses category axis at default value", function() {
+                    plotArea.reflow(chartBox);
+
+                    var slotX = categoryAxis.getSlot(categoryAxis.options.axisCrossingValue),
+                        slotY = primaryValueAxis.getSlot(primaryValueAxis.options.axisCrossingValue);
+
+                    equals(slotX.y1, slotY.y1);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Multiple Axes / Stacked Left", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(columnSeriesData, {
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are stacked to the left", function() {
+                    var margin = secondaryValueAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.box.x2, secondaryValueAxis.box.y1],
+                         [primaryValueAxis.box.x1 - margin, primaryValueAxis.box.y1]
+                    );
+                });
+
+                test("stacked axes on left are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
+                         [primaryValueAxis.lineBox().y1, primaryValueAxis.lineBox().y2]
+                    );
+                });
+
+                test("stacked axes on the left are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                    ok(!secondaryValueAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Multiple Axes / Stacked Right", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(columnSeriesData, {
+                            categoryAxis: {
+                                axisCrossingValue: 100
+                            },
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are shifted to the right", function() {
+                    var margin = secondaryValueAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.box.x1, secondaryValueAxis.box.y1],
+                         [primaryValueAxis.box.x2 + margin, primaryValueAxis.box.y1]
+                    );
+                });
+
+                test("stacked axes on right are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().y1, secondaryValueAxis.lineBox().y2],
+                         [primaryValueAxis.lineBox().y1, primaryValueAxis.lineBox().y2]
+                    );
+                });
+
+                test("plot area bounding box wraps axis", function() {
+                    plotArea.reflow(chartBox);
+
+                    var axisBox = secondaryValueAxis.box;
+                    ok(axisBox.x1 >= plotArea.box.x1 && axisBox.y1 >= plotArea.box.x1);
+                });
+
+                test("stacked axes on the right are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                    ok(secondaryValueAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Top", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(barSeriesData, {
+                            categoryAxis: {
+                                axisCrossingValue: 0
+                            },
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are shifted to the top", function() {
+                    var margin = secondaryValueAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryValueAxis.box.y2, primaryValueAxis.box.y1 - margin);
+                });
+
+                test("stacked axes on top are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
+                         [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
+                    );
+                });
+
+                test("stacked axes on the top are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                    ok(secondaryValueAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Inverted / Multiple Axes / Stacked Bottom", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(barSeriesData, {
+                            valueAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("overlapping axes are shifted to the bottom", function() {
+                    var margin = secondaryValueAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryValueAxis.box.y1, primaryValueAxis.box.y2 + margin);
+                });
+
+                test("stacked axes on bottom are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryValueAxis.lineBox().x1, secondaryValueAxis.lineBox().x2],
+                         [primaryValueAxis.lineBox().x1, primaryValueAxis.lineBox().x2]
+                    );
+                });
+
+                test("stacked axes on the bottom are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryValueAxis.options.mirror);
+                    ok(!secondaryValueAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryValueAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryValueAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Column series", {
                     setup: function() {
                         moduleSetup();
 
                         createPlotArea(columnSeriesData);
-                        barChart = plotArea.charts[0];
                     }
                 });
 
-                test("creates numeric Y-Axis", function() {
-                    ok(axisY instanceof Chart.NumericAxis);
+                test("value axis is vertical", function() {
+                    ok(primaryValueAxis.options.isVertical);
                 });
 
-                test("creates category X-Axis", function() {
-                    ok(axisX instanceof Chart.CategoryAxis);
-                });
-
-                test("Y-Axis orientation is vertical", function() {
-                    equal(axisY.options.orientation, "vertical");
-                });
-
-                test("X-Axis orientation is horizontal", function() {
-                    equal(axisX.options.orientation, "horizontal");
+                test("category axis is horizontal", function() {
+                    ok(!categoryAxis.options.isVertical);
                 });
 
                 test("value axis crosses at first category", function() {
-                    equal(axisY.options.axisCrossingValue, 0);
+                    equal(primaryValueAxis.options.axisCrossingValue, 0);
                 });
 
-                test("value axis crossing can be changed", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: columnSeriesData,
+                test("category axis crossing value can be changed", function() {
+                    plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
                         }
                     });
-                    equal(plotArea.axisX.options.axisCrossingValue, 2);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 2);
                 });
 
                 test("creates bar chart", function() {
-                    ok(barChart instanceof Chart.BarChart);
+                    ok(chartSeries instanceof Chart.BarChart);
                 });
 
                 test("stacks series", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: [{
+                    plotArea = new Chart.CategoricalPlotArea([{
                             type: "column",
                             data: [],
                             stack: true
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A"]
                         }
                     });
 
+                    console.log(plotArea);
+
                     ok(plotArea.charts[0].options.isStacked);
                 });
 
                 test("groups bar series into bar chart", function() {
-                    equal(barChart.options.series.length, 2);
+                    equal(chartSeries.options.series.length, 2);
                 });
 
                 test("sets axis min/max to series limits", 2, function() {
-                    stubMethod(Chart.PlotArea, "createAxes",
-                        function(seriesMin, seriesMax) {
-                            equal(seriesMin, 10);
-                            equal(seriesMax, 300);
+                    stubMethod(Chart.CategoricalPlotArea, "createAxes",
+                        function() {
+                            equal(this.valueAxisRangeTracker.query("primary").min, 10);
+                            equal(this.valueAxisRangeTracker.query("primary").max, 300);
                         },
                         function() {
                             createPlotArea(columnSeriesData);
@@ -233,11 +468,95 @@
                 });
 
                 test("applies gap from first series", function() {
-                    equals(barChart.options.gap, GAP);
+                    equals(chartSeries.options.gap, GAP);
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Bar series", {
+                module("Categorical PlotArea / Line series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(lineSeriesData);
+                    }
+                });
+
+                test("value axis is vertical", function() {
+                    ok(primaryValueAxis.options.isVertical);
+                });
+
+                test("category axis is horizontal", function() {
+                    ok(!categoryAxis.options.isVertical);
+                });
+
+                test("creates line chart", function() {
+                    ok(chartSeries instanceof Chart.LineChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Vertical line series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(verticalLineSeriesData);
+                    }
+                });
+
+                test("value axis is horizontal", function() {
+                    ok(!primaryValueAxis.options.isVertical);
+                });
+
+                test("category axis is vertical", function() {
+                    ok(categoryAxis.options.isVertical);
+                });
+
+                test("creates line chart", function() {
+                    ok(chartSeries instanceof Chart.LineChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Area series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(areaSeriesData);
+                    }
+                });
+
+                test("value axis is vertical", function() {
+                    ok(primaryValueAxis.options.isVertical);
+                });
+
+                test("category axis is horizontal", function() {
+                    ok(!categoryAxis.options.isVertical);
+                });
+
+                test("creates area chart", function() {
+                    ok(chartSeries instanceof Chart.AreaChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Verical area series", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(verticalAreaSeriesData);
+                    }
+                });
+
+                test("value axis is horizontal", function() {
+                    ok(!primaryValueAxis.options.isVertical);
+                });
+
+                test("category axis is vertical", function() {
+                    ok(categoryAxis.options.isVertical);
+                });
+
+                test("creates area chart", function() {
+                    ok(chartSeries instanceof Chart.AreaChart);
+                });
+
+                // ------------------------------------------------------------
+                module("Categorical PlotArea / Bar series", {
                     setup: function() {
                         moduleSetup();
 
@@ -245,44 +564,34 @@
                     }
                 });
 
-                test("creates category Y-Axis", function() {
-                    ok(axisY instanceof Chart.CategoryAxis);
+                test("value axis is horizontal", function() {
+                    ok(!primaryValueAxis.options.isVertical);
                 });
 
-                test("creates numeric X-Axis", function() {
-                    ok(axisX instanceof Chart.NumericAxis);
-                });
-
-                test("Y-Axis orientation is vertical", function() {
-                    equal(axisY.options.orientation, "vertical");
-                });
-
-                test("X-Axis orientation is horizontal", function() {
-                    equal(axisX.options.orientation, "horizontal");
+                test("category axis is vertical", function() {
+                    ok(categoryAxis.options.isVertical);
                 });
 
                 test("value axis crosses at last category", function() {
-                    equal(axisY.options.axisCrossingValue, 3);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 3);
                 });
 
                 test("value axis crossing can be changed", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: barSeriesData,
+                    plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
                         }
                     });
-                    equal(plotArea.axisY.options.axisCrossingValue, 2);
+                    equal(plotArea.categoryAxis.options.axisCrossingValue, 2);
                 });
 
                 test("stacks series", function() {
-                    plotArea = new Chart.PlotArea({
-                        series: [{
+                    plotArea = new Chart.CategoricalPlotArea([{
                             type: "bar",
                             data: [],
                             stack: true
-                        }],
+                        }], {
                         categoryAxis: {
                             categories: ["A"]
                         }
@@ -292,15 +601,13 @@
                 });
 
                 test("applies gap from first series", function() {
-                    equals(barChart.options.gap, GAP);
+                    equals(chartSeries.options.gap, GAP);
                 });
 
             })();
 
             (function() {
                 var plotArea,
-                    axisY,
-                    axisX,
                     barSeriesData = [{
                         name: "Value A",
                         type: "bar",
@@ -308,15 +615,11 @@
                     }];
 
                 function createPlotArea(categoryAxis, valueAxis, plotArea) {
-                    plotArea = new Chart.PlotArea({
-                        series: barSeriesData,
+                    plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: categoryAxis,
                         valueAxis: valueAxis,
                         plotArea: plotArea
                     });
-
-                    axisY = plotArea.axisY;
-                    axisX = plotArea.axisX;
 
                     stubMethod(Chart.NumericAxis, "getViewElements", function() { return []; },
                         function() {
@@ -329,7 +632,7 @@
                 }
 
                 // ------------------------------------------------------------
-                module("PlotArea / Major Gridlines", {
+                module("Categorical PlotArea / Major Gridlines", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -393,7 +696,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Minor Gridlines", {
+                module("Categorical PlotArea / Minor Gridlines", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -481,7 +784,7 @@
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Major and Minor GridLines", {
+                module("Categorical PlotArea / Major and Minor GridLines", {
                     setup: function() {
                         moduleSetup();
                     }
@@ -512,10 +815,31 @@
                 });
 
                 // ------------------------------------------------------------
-                module("PlotArea / Configuration", {
+                module("Categorical PlotArea / Configuration", {
                     setup: function() {
                         moduleSetup();
                     }
+                });
+
+                test("applies margin", function() {
+                    var plotArea = new Chart.CategoricalPlotArea([{
+                            data: [100]
+                        }], {
+                        categoryAxis: {
+                            categories: ["A", "B"],
+                            labels: { font: SANS12 }
+                        },
+                        valueAxis: {
+                            labels: { font: SANS12 }
+                        },
+                        plotArea: {
+                            margin: MARGIN
+                        }
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    sameBox(plotArea.box, new Box2D(110, 110, 990, 990), TOLERANCE);
                 });
 
                 test("should not render plot area with borders", function() {
@@ -536,6 +860,360 @@
                     equal(plotAreaRect.style.dashType, "dot");
                     equal(plotAreaRect.style.stroke, "red");
                     equal(plotAreaRect.style.strokeWidth, 2);
+                });
+
+            })();
+
+            (function() {
+                var plotArea,
+                    categoryAxis,
+                    namedXAxes,
+                    namedYAxes,
+                    primaryXAxis,
+                    secondaryXAxis,
+                    primaryYAxis,
+                    secondaryYAxis,
+                    scatterSeriesData = [{
+                        name: "Value A",
+                        type: "scatter",
+                        data: [[100, 100], [200, 200], [300, 300]]
+                    }, {
+                        name: "Value B",
+                        type: "scatter",
+                        data: [[10, 10], [20, 20], [30, 30]]
+                    }];
+
+                function createPlotArea(series, options) {
+                    plotArea = new Chart.XYPlotArea(series, options);
+
+                    namedXAxes = plotArea.namedXAxes;
+                    namedYAxes = plotArea.namedYAxes;
+
+                    primaryXAxis = namedXAxes.primary;
+                    primaryYAxis = namedYAxes.primary;
+                    secondaryXAxis = namedXAxes.secondary;
+                    secondaryYAxis = namedYAxes.secondary;
+
+                    chartSeries = plotArea.charts[0];
+                }
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Axes", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData);
+                    }
+                });
+
+                test("appends primary X axis to children collection", function() {
+                    ok($.inArray(namedXAxes.primary, plotArea.children) >= 0);
+                });
+
+                test("appends primary Y axis to children collection", function() {
+                    ok($.inArray(namedYAxes.primary, plotArea.children) >= 0);
+                });
+
+                test("aligns axes at default crossing values", function() {
+                    var axisX = namedXAxes.primary,
+                        axisY = namedYAxes.primary;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("aligns axises at non-default crossing values", function() {
+                    var axisX = namedXAxes.primary,
+                        axisY = namedYAxes.primary;
+
+                    axisY.options.axisCrossingValue = 10;
+                    axisX.options.axisCrossingValue = 1;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("X axis limit is [0, 1] when no series are configured", 2, function() {
+                    stubMethod(Chart.XYPlotArea, "createAxes",
+                        function() {
+                            equal(this.xAxisRangeTracker.query("primary").min, 0);
+                            equal(this.xAxisRangeTracker.query("primary").max, 1);
+                        },
+                        function() {
+                            plotArea = new Chart.XYPlotArea([]);
+                        }
+                    );
+                });
+
+                test("Y axis limit is [0, 1] when no series are configured", 2, function() {
+                    stubMethod(Chart.XYPlotArea, "createAxes",
+                        function() {
+                            equal(this.yAxisRangeTracker.query("primary").min, 0);
+                            equal(this.yAxisRangeTracker.query("primary").max, 1);
+                        },
+                        function() {
+                            plotArea = new Chart.XYPlotArea([]);
+                        }
+                    );
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: [{}, {
+                                name: "secondary"
+                            }],
+                            yAxis: [{}, {
+                                name: "secondary"
+                            }]
+                        });
+                    }
+                });
+
+                test("secondary X axis added to children collection", function() {
+                    ok($.inArray(secondaryXAxis, plotArea.children) >= 0);
+                });
+
+                test("secondary Y axis added to children collection", function() {
+                    ok($.inArray(secondaryYAxis, plotArea.children) >= 0);
+                });
+
+                test("aligns primary axes at default crossing values", function() {
+                    var axisX = primaryXAxis,
+                        axisY = primaryYAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("secondary X axis on the right is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: [{ min: -350 }, { name: "secondary" }],
+                        yAxis: { axisCrossingValue: [0, 100], min: -350 }
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryXAxis.lineBox().x2, primaryXAxis.lineBox().x2);
+                });
+
+                test("secondary X axis on the left is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: [{ min: -350 }, { name: "secondary", min: -1, max: 0 }],
+                        yAxis: { axisCrossingValue: [0, 100], min: -350 }
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryXAxis.lineBox().x1, primaryXAxis.lineBox().x1);
+                });
+
+                test("secondary Y axis on top is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: { axisCrossingValue: [0, 100], min: -350 },
+                        yAxis: [{ min: -350 }, { name: "secondary" }]
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryYAxis.lineBox().y1, primaryYAxis.lineBox().y1);
+                });
+
+                test("secondary Y axis on bottom is contained in plot area", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: { axisCrossingValue: [0, 100], min: -350 },
+                        yAxis: [{ min: -350 }, { name: "secondary", min: -1, max: 0 }]
+                    });
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryYAxis.lineBox().y2, primaryYAxis.lineBox().y2);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Top", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: [{}, { name: "secondary" }],
+                            yAxis: { axisCrossingValue: 10000 }
+                        });
+                    }
+                });
+
+                test("overlapping X axes are shifted to the top", function() {
+                    var margin = secondaryXAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    equals(secondaryXAxis.box.y2, primaryXAxis.box.y1 - margin);
+                });
+
+                test("stacked X axes on top are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
+                         [primaryXAxis.lineBox().x1, primaryXAxis.lineBox().x2]
+                    );
+                });
+
+                test("stacked X axes on the top are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryXAxis.options.mirror);
+                    ok(secondaryXAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryXAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryXAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Right", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: { axisCrossingValue: 10000 },
+                            yAxis: [{}, { name: "secondary" }]
+                        });
+                    }
+                });
+
+                test("overlapping Y axes are shifted to the right", function() {
+                    var margin = secondaryYAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.box.x1, secondaryYAxis.box.y1],
+                         [primaryYAxis.box.x2 + margin, primaryYAxis.box.y1]
+                    );
+                });
+
+                test("stacked Y axes on right are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
+                         [primaryYAxis.lineBox().y1, primaryYAxis.lineBox().y2]
+                    );
+                });
+
+                test("stacked Y axes on the right are mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryYAxis.options.mirror);
+                    ok(secondaryYAxis.options.mirror);
+                });
+
+                test("mirroring inverts the mirror option", function() {
+                    primaryYAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryYAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Bottom", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            xAxis: [{}, { name: "secondary" }]
+                        });
+                    }
+                });
+
+                test("overlapping X axes are shifted to the bottom", function() {
+                    var margin = secondaryXAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same(secondaryXAxis.box.y1, primaryXAxis.box.y2 + margin);
+                });
+
+                test("stacked X axes on bottom are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryXAxis.lineBox().x1, secondaryXAxis.lineBox().x2],
+                         [primaryXAxis.lineBox().x1, primaryXAxis.lineBox().x2]
+                    );
+                });
+
+                test("stacked X axes on the bottom are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryXAxis.options.mirror);
+                    ok(!secondaryXAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryXAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryXAxis.options.mirror);
+                });
+
+                // ------------------------------------------------------------
+                module("XY PlotArea / Multiple Axes / Stacked Left", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createPlotArea(scatterSeriesData, {
+                            yAxis: [{}, { name: "secondary" }]
+                        });
+                    }
+                });
+
+                test("overlapping Y axes are stacked to the left", function() {
+                    var margin = secondaryYAxis.options.margin;
+
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.box.x2, secondaryYAxis.box.y1],
+                         [primaryYAxis.box.x1 - margin, primaryYAxis.box.y1]
+                    );
+                });
+
+                test("stacked Y axes on left are aligned", function() {
+                    plotArea.reflow(chartBox);
+
+                    same([secondaryYAxis.lineBox().y1, secondaryYAxis.lineBox().y2],
+                         [primaryYAxis.lineBox().y1, primaryYAxis.lineBox().y2]
+                    );
+                });
+
+                test("stacked Y axes on the left are not mirrored", function() {
+                    plotArea.reflow(chartBox);
+
+                    ok(!primaryYAxis.options.mirror);
+                    ok(!secondaryYAxis.options.mirror);
+                });
+
+                test("user set mirror option is not changed", function() {
+                    primaryYAxis.options.mirror = true;
+
+                    plotArea.reflow(chartBox);
+
+                    ok(primaryYAxis.options.mirror);
                 });
 
             })();
