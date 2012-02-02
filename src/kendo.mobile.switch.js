@@ -152,6 +152,10 @@
 
             that._position(check ? that.constrain : 0);
             element.checked = check;
+            that.handle
+                .toggleClass(SWITCHON, check)
+                .toggleClass(SWITCHOFF, !check);
+
         },
 
         _move: function(e) {
@@ -248,7 +252,7 @@
                 wrapper = element.parent("label");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap("<label />").parent();
+                wrapper = element.wrap("<label />").bind("click", function(e) { e.preventDefault() }).parent();
             }
 
             that.wrapper = wrapper.addClass("km-switch");
