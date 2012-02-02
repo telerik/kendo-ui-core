@@ -676,6 +676,14 @@
                     equals(line.clone().options.id, "1");
                 });
 
+                test("align=false skips point coordinate rounding", function() {
+                    line = new Chart.SVGLine([
+                        new Point2D(1.503, 2.103),
+                        new Point2D(2.506, 3.801)
+                    ], false, { align: false })
+
+                    equal(line.renderPoints(), "M1.503 2.103 2.506 3.801");
+                });
             })();
 
             (function() {

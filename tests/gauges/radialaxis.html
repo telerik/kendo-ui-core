@@ -15,11 +15,11 @@
             var Chart = kendo.ui.Chart,
                 Gauge = kendo.ui.Gauge,
                 Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D,
                 RadialAxis = Gauge.RadialAxis,
                 radialAxis,
-                gridLayout,
+                ring,
                 chartBox = new Box2D(0, 0, 400, 300),
-                view,
                 TOLERANCE = 1.5;
 
             // Tests expect particular font size
@@ -27,18 +27,43 @@
 
             module("RadialAxis", {
                 setup: function() {
-                    radialAxis = new RadialAxis(0, 100, { majorTickSize: 10, angle: 180, startAngle: 0 });
+                    radialAxis = new RadialAxis(
+                        0, 100, {
+                            majorTickSize: 10,
+                            angle: 180,
+                            startAngle: 0
+                        });
+
+                    ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
                 }
             });
 
             test("reflow calculates axis ring position", function() {
                 radialAxis.reflow(chartBox);
 
-                var ring = radialAxis.ring;
+                ring = radialAxis.ring;
                 equals(ring.c.x, 200);
                 equals(ring.c.y, 150);
                 equals(ring.r, 150);
                 equals(ring.ir, 140);
+            });
+
+            test("getTickAngles returns array", function() {
+                var tickAngles = radialAxis.getTickAngles(ring, 10);
+
+                ok(tickAngles instanceof Array);
+            });
+
+            test("getTickAngles returns proper amount of tick angles", function() {
+                radialAxis.options.min = 0;
+                radialAxis.options.max = 100;
+                var tickAngles = radialAxis.getTickAngles(ring, 10);
+
+                equal(tickAngles.length, 11);
+
+                tickAngles = radialAxis.getTickAngles(ring, 1);
+
+                equal(tickAngles.length, 101);
             });
         </script>
 
