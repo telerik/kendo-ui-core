@@ -198,6 +198,26 @@
                     equals(plotArea.namedValueAxes.primary.options.labels.color, "#f00");
                 });
 
+                test("global color is applied to title", function() {
+                    createChart({
+                        valueAxis: {
+                            color: "#f00"
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes.primary.options.title.color, "#f00");
+                });
+
+                test("title color overrides global color", function() {
+                    createChart({
+                        valueAxis: {
+                            color: "#0f0", title: { color: "#f00" }
+                        }
+                    });
+
+                    equals(plotArea.namedValueAxes.primary.options.title.color, "#f00");
+                });
+
                 // ------------------------------------------------------------
                 module("Axis Configuration / Scatter Chart", {
                     teardown: destroyChart

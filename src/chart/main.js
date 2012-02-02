@@ -5700,7 +5700,7 @@
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
                     options.axisDefaults,
-                    { line: { color: axisColor }, labels: { color: axisColor } },
+                    { line: { color: axisColor }, labels: { color: axisColor }, title: { color: axisColor } },
                     axisOptions
                 );
             });
