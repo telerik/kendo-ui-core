@@ -5700,7 +5700,7 @@
                     themeAxisDefaults,
                     themeAxisDefaults[axisName],
                     options.axisDefaults,
-                    { line: { color: axisColor }, labels: { color: axisColor } },
+                    { line: { color: axisColor }, labels: { color: axisColor }, title: { color: axisColor } },
                     axisOptions
                 );
             });
@@ -7765,7 +7765,7 @@
             },
             pie: {
                 connectors: {
-                    color: "#a6b1c0"
+                    color: "#A6B1C0"
                 }
             },
             area: {
