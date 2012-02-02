@@ -422,6 +422,12 @@
             height: 200
         },
 
+        setOptions: function(options) {
+            $.extend(this.options, options);
+            this._template();
+            this._accessors();
+        },
+
         /**
         * Closes the drop-down list.
         * @name kendo.ui.DropDownList#close
