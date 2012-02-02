@@ -637,46 +637,48 @@
             }
 
             $(element).each(function () {
-                var li = $(this);
+                if (that.trigger(OPEN, { item: element[0] }) === false) {
+                    var li = $(this);
 
-                clearTimeout(li.data(TIMER));
+                    clearTimeout(li.data(TIMER));
 
-                li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-group:first:hidden"), popup;
+                    li.data(TIMER, setTimeout(function () {
+                        var ul = li.find(".k-group:first:hidden"), popup;
 
-                    if (ul[0]) {
-                        li.data(ZINDEX, li.css(ZINDEX));
-                        li.css(ZINDEX, that.nextItemZIndex ++);
+                        if (ul[0]) {
+                            li.data(ZINDEX, li.css(ZINDEX));
+                            li.css(ZINDEX, that.nextItemZIndex ++);
 
-                        popup = ul.data(KENDOPOPUP);
-                        var root = li.parent().hasClass(MENU),
-                            parentHorizontal = root && horizontal,
-                            directions = parseDirection(direction, root),
-                            openEffects = "slideIn:" + getEffectDirection(direction, root);
-
-                        if (!popup) {
-                            popup = ul.kendoPopup({
-                                origin: directions.origin,
-                                position: directions.position,
-                                collision: parentHorizontal ? "fit" : "fit flip",
-                                anchor: li,
-                                appendTo: li,
-                                animation: {
-                                    open: extend( { effects: openEffects }, that.options.animation.open),
-                                    close: that.options.animation.close
-                                }
-                            }).data(KENDOPOPUP);
-                        } else {
                             popup = ul.data(KENDOPOPUP);
-                            popup.options.origin = directions.origin;
-                            popup.options.position = directions.position;
-                            popup.options.animation.open.effects = openEffects;
+                            var root = li.parent().hasClass(MENU),
+                                parentHorizontal = root && horizontal,
+                                directions = parseDirection(direction, root),
+                                openEffects = "slideIn:" + getEffectDirection(direction, root);
+
+                            if (!popup) {
+                                popup = ul.kendoPopup({
+                                    origin: directions.origin,
+                                    position: directions.position,
+                                    collision: parentHorizontal ? "fit" : "fit flip",
+                                    anchor: li,
+                                    appendTo: li,
+                                    animation: {
+                                        open: extend( { effects: openEffects }, that.options.animation.open),
+                                        close: that.options.animation.close
+                                    }
+                                }).data(KENDOPOPUP);
+                            } else {
+                                popup = ul.data(KENDOPOPUP);
+                                popup.options.origin = directions.origin;
+                                popup.options.position = directions.position;
+                                popup.options.animation.open.effects = openEffects;
+                            }
+
+                            popup.open();
                         }
 
-                        popup.open();
-                    }
-
-                }, that.options.hoverDelay));
+                    }, that.options.hoverDelay));
+                }
             });
 
             return that;
@@ -692,20 +694,22 @@
             var that = this;
 
             $(element).each(function () {
-                var li = $(this);
+                if (that.trigger(CLOSE, { item: element[0] }) === false) {
+                    var li = $(this);
 
-                clearTimeout(li.data(TIMER));
+                    clearTimeout(li.data(TIMER));
 
-                li.data(TIMER, setTimeout(function () {
-                    var ul = li.find(".k-group:first:visible"), popup;
-                    if (ul[0]) {
-                        li.css(ZINDEX, li.data(ZINDEX));
-                        li.removeData(ZINDEX);
+                    li.data(TIMER, setTimeout(function () {
+                        var ul = li.find(".k-group:first:visible"), popup;
+                        if (ul[0]) {
+                            li.css(ZINDEX, li.data(ZINDEX));
+                            li.removeData(ZINDEX);
 
-                        popup = ul.data(KENDOPOPUP);
-                        popup.close();
-                    }
-                }, that.options.hoverDelay));
+                            popup = ul.data(KENDOPOPUP);
+                            popup.close();
+                        }
+                    }, that.options.hoverDelay));
+                }
             });
 
             return that;
