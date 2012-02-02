@@ -1911,7 +1911,7 @@
          * grid.collapseRow(grid.tbody.find(">tr.k-master-row:first"));
          */
         collapseRow: function(tr) {
-            $(tr).find('> td .k-minus, > td .k-plus').click();
+            $(tr).find('> td .k-minus, > td .k-collapse').click();
         },
 
         _thead: function() {
