@@ -10,7 +10,7 @@
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
-        buttonRolesSelector = toRoleSelector("button listview-link"),
+        buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
         TRANSFORM = support.transitions.css + "transform",
         ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
@@ -27,7 +27,7 @@
         proxy = $.proxy;
 
     function toRoleSelector(string) {
-        return string.replace(/(\S+)/g, "[" + attr("role") + "*=$1],")
+        return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],")
     }
 
     function toDom(html) {
