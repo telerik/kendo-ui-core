@@ -355,11 +355,12 @@
 
         _print: function(point) {
             var line = this,
-                strokeWidth = line.options.strokeWidth,
-                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                align = shouldAlign ? alignToPixel : math.round;
+                options = line.options,
+                strokeWidth = options.strokeWidth,
+                shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
+                align = shouldAlign ? alignToPixel : round;
 
-            return align(point.x) + " " + align(point.y);
+            return align(point.x, COORD_PRECISION) + " " + align(point.y, COORD_PRECISION);
         }
     });
 

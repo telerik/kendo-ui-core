@@ -6210,23 +6210,12 @@
 
     var RadialAxis = NumericAxis.extend({
         init: function (min, max, options) {
-            NumericAxis.fn.init.call(this, min, max, options);
-        },
+            var axis = this;
 
-        renderTicks: function(view) {
-            var axis = this,
-                ticks = [],
-                ring = axis.ring,
-                tickPositions = axis.getTickPositions(ring, 20),
-                i, innerPoint, outerPoint;
+            NumericAxis.fn.init.call(axis, min, max, options);
 
-            for (i = 0; i < tickPositions.length; i++) {
-                outerPoint = ring.point(tickPositions[i]);
-                innerPoint = ring.point(tickPositions[i], true);
-                ticks.push(view.createLine(innerPoint.x, innerPoint.y, outerPoint.x, outerPoint.y, { stroke: "#000" }));
-            }
-
-            return ticks;
+            axis.min = min;
+            axis.max = max;
         },
 
         reflow: function(box) {
@@ -6242,17 +6231,53 @@
             axis.box = box;
         },
 
-        getTickPositions: function(ring, itemsCount) {
+        renderTicks: function(view) {
+            var axis = this,
+                ticks = [],
+                majorTickRing = axis.ring,
+                minorTickRing = majorTickRing.clone();
+                options = axis.options,
+                tickOptions = { stroke: "#000", strokeWidth: .5 };
+
+            function renderTickRing(ring, unit) {
+                var tickAngles = axis.getTickAngles(ring, unit),
+                    i, innerPoint, outerPoint;
+
+                for (i = 0; i < tickAngles.length; i++) {
+                    outerPoint = ring.point(tickAngles[i]);
+                    innerPoint = ring.point(tickAngles[i], true);
+
+                    ticks.push(view.createLine(
+                        innerPoint.x, innerPoint.y,
+                        outerPoint.x, outerPoint.y,
+                        deepExtend(
+                            tickOptions,
+                            { align: false }
+                        )
+                    ));
+                }
+            }
+
+            renderTickRing(majorTickRing, options.majorUnit);
+            //minorTickRing.radius(minorTickRing.r - options.minorTickSize);
+            //renderTickRing(minorTickRing, options.minorUnit);
+
+            return ticks;
+        },
+
+        getTickAngles: function(ring, stepValue) {
             var axis = this,
                 options = axis.options,
+                range = options.max - options.min,
                 angle = ring.angle,
-                step = angle / itemsCount,
+                tickCount = range / stepValue,
+                step = angle / tickCount,
                 startAngle = ring.startAngle,
                 pos = startAngle,
                 positions = [],
                 i;
 
-            for (i = 0; i < itemsCount; i++) {
+            for (i = 0; i < tickCount; i++) {
                 positions.push(round(pos, COORD_PRECISION));
                 pos += step;
             }
