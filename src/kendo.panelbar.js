@@ -493,7 +493,6 @@
                     if (!that._triggerEvent(EXPAND, item)) {
                         that._toggleItem(item, false, null);
                     }
-                    that._toggleItem(item, false, null);
 
                     if (!useAnimation) {
                         that.options.animation = animBackup;
@@ -1064,7 +1063,7 @@
         _triggerEvent: function (eventName, element) {
             var that = this;
 
-            that.trigger(eventName, { item: element[0] });
+            return that.trigger(eventName, { item: element[0] });
         }
     });
 
