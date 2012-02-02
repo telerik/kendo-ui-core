@@ -5548,10 +5548,10 @@
         var min = MAX_VALUE,
             max = MIN_VALUE,
             i,
-            length,
+            length = arr.length,
             n;
 
-        for (i = 0, length = arr.length; i < length; i++) {
+        for (i = 0; i < length; i++) {
             n = arr[i];
             if (defined(n)) {
                 min = math.min(min, n);
