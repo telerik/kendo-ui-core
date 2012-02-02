@@ -92,7 +92,7 @@
 
             var expression = property.createExpression(binding);
 
-            expression.updateTarget();
+            expression.updateTarget(this.options);
 
             binding.bind("change", function() {
                 expression.updateTarget();
@@ -100,18 +100,19 @@
         },
 
         setBinding: function(path, binding) {
-            var property = this.createProperty(path);
+            var property = this.createProperty(path),
+                that = this;
 
             var expression = property.createExpression(binding);
 
-            expression.updateTarget();
+            expression.updateTarget(this.options);
 
             property.bind("change", function() {
-                expression.updateSource();
+                expression.updateSource(that.options);
             });
 
             binding.bind("change", function() {
-                expression.updateTarget();
+                expression.updateTarget(that.options);
             });
         },
 
@@ -247,7 +248,7 @@
             this.binding = binding;
         },
 
-        applyToTarget: function() {
+        applyToTarget: function(options) {
             var value = this.binding.get();
 
             if (typeof value === "function") {
@@ -257,13 +258,13 @@
             this.property.set(value);
         },
 
-        updateTarget: function() {
+        updateTarget: function(options) {
             this.binding.start();
-            this.applyToTarget();
+            this.applyToTarget(options);
             this.binding.stop();
         },
 
-        updateSource: function() {
+        updateSource: function(options) {
             this.binding.set(this.property.get());
         }
     });
@@ -275,21 +276,31 @@
     });
 
     var SelectValueExpression = BindingExpression.extend( {
-        updateSource: function() {
-            var target = this.property.get();
+        updateSource: function(options) {
+            var target = this.property.get(),
+                source = options.source,
+                field = this.property.options.valueField || this.property.options.dataValueField,
+                idx,
+                length;
 
-            if (this.property.options.valueField) {
-                this.binding.set(this.property.options.valueField, target);
+            if (field) {
+                for (idx = 0, length = source.length; idx < length; idx++) {
+                    if (source[idx].get(field) == target) {
+                        this.binding.set(source[idx]);
+                        break;
+                    }
+                }
             } else {
                 this.binding.set(target);
             }
         },
 
         applyToTarget: function() {
-            var value = this.binding.get();
+            var value = this.binding.get(),
+                field = this.property.options.valueField || this.property.options.dataValueField;
 
-            if (this.property.options.valueField) {
-                value = value.get(this.property.options.valueField);
+            if (field) {
+                value = value.get(field);
             }
 
             this.property.set(value);
@@ -557,6 +568,20 @@
             for (idx = 0, length = items.length; idx < length; idx++) {
                 this.target.removeChild(this.target.children[index]);
             }
+        },
+
+        createExpression: function(binding) {
+            return new SourceBindingExpression(this, binding);
+        }
+    });
+
+    var SourceBindingExpression = BindingExpression.extend({
+        applyToTarget: function(options) {
+            var source = this.binding.get();
+
+            options.source = source;
+
+            this.property.set(source);
         }
     });
 
@@ -569,6 +594,10 @@
             this.target.template = template;
         },
 
+        setOptions: function(options) {
+            this.target.setOptions(options);
+        },
+
         createProperty: function(path) {
             if (path == "source") {
                 return new DataSourceWidgetProperty(this.target);
@@ -578,6 +607,9 @@
                 return new TemplateWidgetProperty(this.target, path, template);
             }
 
+            if (path == "value") {
+                return new WidgetValueProperty(this.target, path, this.target.options);
+            }
             return new WidgetProperty(this.target, path);
         }
     });
@@ -601,9 +633,21 @@
 
         set: function(value) {
             this.target[this.path](value);
+        },
+        createExpression: function(binding) {
+            return new BindingExpression(this, binding);
         }
     });
 
+    var WidgetValueProperty = WidgetProperty.extend({
+        init: function(target, path, options) {
+            WidgetProperty.fn.init.call(this, target, path);
+            this.options = options;
+        },
+        createExpression: function(binding) {
+            return new SelectValueExpression(this, binding);
+        }
+    });
     var TemplateWidgetProperty = Class.extend({
         init: function(target, path, template) {
             this.target = target;
@@ -616,6 +660,9 @@
         set: function(value) {
             var target = this.target;
             target.template = template;
+        },
+        createExpression: function(binding) {
+            return new BindingExpression(this, binding);
         }
     });
 
@@ -633,11 +680,14 @@
             widget.bind("dataBound", function() {
                 var idx, length, view = widget.dataSource.view();
                 for (idx = 0, length = view.length; idx < length; idx++) {
-                    bind(widget.ul[0].children[idx], view[idx]);
+                    bindElement(widget.ul[0].children[idx], view[idx]);
                 }
             });
 
             widget.dataSource.data(value);
+        },
+        createExpression: function(binding) {
+            return new SourceBindingExpression(this, binding);
         }
     });
 
@@ -646,10 +696,34 @@
             idx,
             nodeName = element.nodeName.toLowerCase(),
             deep = true,
+            value,
+            option,
             target;
 
-        if (false/*role*/) {
-            target = new WidgetBindingTarget(new kendo.ui.DropDownList(element));
+        if (role) {
+            if (role === "dropdownlist") {
+                var options = {};
+
+                for (option in kendo.ui.DropDownList.fn.options) {
+                    value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+
+                    if (value === null) {
+                        value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                    }
+
+                    if (value !== null) {
+                        options[option] = value;
+                    }
+                }
+
+                var widget = $.data(element, "kendoDropDownList");
+                if (!widget) {
+                    widget = new kendo.ui.DropDownList(element, options);
+                } else {
+                    widget.setOptions(options);
+                }
+                target = new WidgetBindingTarget(widget);
+           }
         } else {
             if (nodeName == "select") {
                 target = new SelectBindingTarget(element);
