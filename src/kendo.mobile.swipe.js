@@ -161,10 +161,6 @@
                 touches = originalEvent && originalEvent.changedTouches,
                 idx = touches && touches.length;
 
-            if (!isNaN(which) && which != 1) {
-                return;
-            }
-
             if (!touches) {
                 return callback(e);
             }
