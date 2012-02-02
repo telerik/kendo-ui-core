@@ -180,8 +180,6 @@
 
             that._enable();
 
-            that._placeholder();
-
             that.bind([
                 /**
                 * Fires when the drop-down list is opened
@@ -212,6 +210,7 @@
                 keydown: proxy(that._keydown, that),
                 focus: function() {
                     wrapper.addClass(FOCUSED);
+                    that._placeholder(false);
                 },
                 blur: function() {
                     if (!touch) {
@@ -522,6 +521,8 @@
                 }
 
                 input.value = text;
+
+                that._placeholder();
             } else {
                 return input.value;
             }
@@ -582,6 +583,8 @@
 
         _accept: function(li) {
             var that = this;
+
+            that._placeholder(false);
 
             if (li && that.popup.visible()) {
 
@@ -715,12 +718,25 @@
             }
         },
 
-        _placeholder: function() {
+        _placeholder: function(show) {
             var that = this,
                 placeholder = that.options.placeholder;
 
-            if (placeholder && !that.value()) {
+            if (placeholder) {
+                if (show === undefined) {
+                    show = !that.value();
+                }
+
+                if (!show) {
+                    if (that.value()) {
+                        placeholder = that.input.val();
+                    } else {
+                        placeholder = "";
+                    }
+                }
+
                 that.input.val(placeholder);
+                that.input.toggleClass("k-readonly", show);
             }
         },
 
@@ -768,6 +784,7 @@
                 } else {
                     that.select(that.options.index);
                 }
+                that._placeholder();
             }).filter({});
         },
 
