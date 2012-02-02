@@ -107,6 +107,10 @@
 
                 that._perAxis(MOVE, location, e.timeStamp);
 
+                if (!that.x.delta && !that.y.delta) {
+                    return;
+                }
+
                 if (!that.moved) {
                     if (!Swipe.captured) {
                         that._trigger(START, e);
