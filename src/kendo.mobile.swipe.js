@@ -153,8 +153,13 @@
         _withEvent: function(e, callback) {
             var that = this,
                 originalEvent = e.originalEvent,
+                which = e.which,
                 touches = originalEvent && originalEvent.changedTouches,
                 idx = touches && touches.length;
+
+            if (!isNaN(which) && which != 1) {
+                return;
+            }
 
             if (!touches) {
                 return callback(e);
