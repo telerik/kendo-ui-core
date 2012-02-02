@@ -1,29 +1,45 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        mobile = kendo.mobile,
+
         history = kendo.history,
         support = kendo.support,
+        mobile = kendo.mobile,
+        roleSelector = kendo.roleSelector,
         attr = kendo.attr,
-        os = support.mobileOS,
+
+        View = mobile.View,
+        ViewSwitcher = mobile.ViewSwitcher,
+        Layout = mobile.Layout,
+
+        OS = support.mobileOS,
+        OS_NAME = "km-" + (!OS ? "ios" : OS.name),
+        OS_CSS_CLASS = (OS_NAME + (OS ? " " + OS_NAME + OS.majorVersion : "")),
+
+        TRANSFORM = support.transitions.css + "transform",
+
         div = $("<div/>"),
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
         iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
+
         buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
-        TRANSFORM = support.transitions.css + "transform",
+
         ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
-        View = mobile.View,
-        ViewSwitcher = mobile.ViewSwitcher,
-        Layout = mobile.Layout,
+        HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
+        BARCOMPENSATION = 60,
+
         VIEW_INIT = "viewInit",
         VIEW_SHOW = "viewShow",
-        roleSelector = kendo.roleSelector,
+        HREF = "href",
+        DUMMY_HREF = "#!",
+        BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
+
         scrollTo = window.scrollTo,
-        HIDEBAR = os.device == "iphone" || os.device == "ipod",
-        BARCOMPENSATION = 60,
         WINDOW = $(window),
+        HEAD = $("head"),
+
         proxy = $.proxy;
 
     function toRoleSelector(string) {
@@ -31,7 +47,7 @@
     }
 
     function toDom(html) {
-        if (/<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i.test(html)) {
+        if (BODY_REGEX.test(html)) {
             html = RegExp.$1;
         }
         div[0].innerHTML = html;
@@ -48,13 +64,13 @@
         }
 
         var link = $(e.currentTarget),
-            href = link.attr("href");
+            href = link.attr(HREF);
 
         // Prevent iOS address bar progress display for in app navigation
         if (!e.isDefaultPrevented() && isInternal(link)) {
-            if (href) {
-                link.attr("href", "#!");
-                setTimeout(function() { link.attr("href", href) });
+            if (href && href != DUMMY_HREF) {
+                link.attr(HREF, DUMMY_HREF);
+                setTimeout(function() { link.attr(HREF, href) });
                 history.navigate(href);
             }
 
@@ -66,11 +82,6 @@
         if(isInternal($(e.currentTarget))) {
             e.preventDefault();
         }
-    }
-
-    function getOSClass() {
-        var osName = "km-" + (!os ? "ios" : os.name);
-        return (osName + (os ? " " + osName + os.majorVersion : ""));
     }
 
     function getOrientationClass() {
@@ -439,7 +450,7 @@
         _attachOrientationChange: function() {
             var that = this, element = that.element;
             element.parent().addClass("km-root");
-            element.addClass(getOSClass() + " " + getOrientationClass());
+            element.addClass(OS_CSS_CLASS + " " + getOrientationClass());
 
             WINDOW.bind(ORIENTATIONEVENT, function(e) {
                 element.removeClass("km-horizontal km-vertical")
@@ -454,17 +465,17 @@
         _attachMeta: function() {
             var icon = this.options.icon;
 
-            $("head").prepend(meta);
+            HEAD.prepend(meta);
 
             if (icon) {
-                $("head").prepend(iconMeta({icon: icon}));
+                HEAD.prepend(iconMeta({icon: icon}));
             }
         },
 
         _attachHideBarHandlers: function() {
             var that = this;
 
-            if (os.appMode || !that.options.hideAddressBar) {
+            if (OS.appMode || !that.options.hideAddressBar) {
                 return;
             }
 
