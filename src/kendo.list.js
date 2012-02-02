@@ -100,7 +100,6 @@
             var that = this;
 
             that._change();
-            that._placeholder();
             that.close();
         },
 

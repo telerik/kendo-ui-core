@@ -422,6 +422,16 @@
                 equal(combobox.input.val(), "Select item...");
             });
 
+            test("do not set k-readonly if value", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["text1", "text2"],
+                    placeholder: "Select item...",
+                    index: 0
+                }).data("kendoComboBox");
+
+                ok(!combobox.input.hasClass("k-readonly"));
+            });
+
             asyncTest("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
