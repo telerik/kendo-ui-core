@@ -118,8 +118,6 @@
 
             Widget.fn.init.call(that, element, options);
 
-            options = that.options;
-
             that._wrap();
 
             that._releaseProxy = proxy(that._release, that);
@@ -129,18 +127,18 @@
             that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, function (e) {
                 $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
             });
-
-            that.bind([
-                /**
-                 * Fires when button is clicked
-                 * @name kendo.mobile.ui.Button#click
-                 * @event
-                 * @param {Event} e
-                 * @param {jQueryObject} e.target The clicked DOM element
-                 */
-                 CLICK
-            ], options);
         },
+
+        events: [
+        /**
+         * Fires when button is clicked
+         * @name kendo.mobile.ui.Button#click
+         * @event
+         * @param {Event} e
+         * @param {jQueryObject} e.target The clicked DOM element
+         */
+        CLICK
+        ],
 
         options: {
             name: "Button",
