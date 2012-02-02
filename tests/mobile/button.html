@@ -31,7 +31,7 @@
             }
 
             module("mobile button", {
-                setup: function() { kendo.ns = "kendo-"; }
+                // setup: function() { kendo.ns = "kendo-"; }
             });
 
 
@@ -48,7 +48,7 @@
             test("accepts custom css class through options", function() {
                 expect(1);
 
-                var dom = $('<button data-kendo-style="detail"/>');
+                var dom = $('<button data-style="detail"/>');
 
                 var button = new Button(dom);
 
@@ -97,6 +97,18 @@
                 button.bind("click", function() {
                     ok(true, "Should raise the click event");
                 });
+
+                click(dom);
+            });
+
+            test("raises click event when clicked", function() {
+                expect(1);
+
+                var dom = $('<button data-click="foo">foo</button>');
+
+                window.foo = function() { ok(true, "Should raise the click event"); }
+
+                var button = new Button(dom);
 
                 click(dom);
             });
