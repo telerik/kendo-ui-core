@@ -490,6 +490,9 @@
                         that.options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
                     }
 
+                    if (!that._triggerEvent(EXPAND, item)) {
+                        that._toggleItem(item, false, null);
+                    }
                     that._toggleItem(item, false, null);
 
                     if (!useAnimation) {
@@ -525,7 +528,9 @@
                         that.options.animation = { expand: { show: true, effects: {} }, collapse: { hide:true, effects: {} } };
                     }
 
-                    that._toggleItem(item, true, null);
+                    if (!that._triggerEvent(COLLAPSE, item)) {
+                        that._toggleItem(item, true, null);
+                    }
 
                     if (!useAnimation) {
                         that.options.animation = animBackup;
