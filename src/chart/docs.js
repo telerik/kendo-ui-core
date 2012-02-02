@@ -8,7 +8,6 @@
      * The Chart widget uses modern browser technologies to render high-quality data visualizations.
      * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
      * </p>
-     M
      *
      * <p>
      * Supported chart types:
@@ -175,7 +174,7 @@
          *     }
          * });
          *
-         * // Alternative configuraiton
+         * // Alternative configuration
          * var dataSource = new kendo.data.DataSource({
          *     transport: {
          *          read: "spain-electricity.json"
@@ -195,7 +194,7 @@
          * @option {String} [title.background] <"white"> The background color of the title.
          * @option {String} [title.text] The title of the chart.
          * @option {String} [title.font] <"16px Arial,Helvetica,sans-serif"> The font of the title.
-         * @option {String} [title.position] <"top"> The positions of the title.
+         * @option {String} [title.position] <"top"> The position of the title.
          * <div class="details-list">
          *    <dl>
          *         <dt>
@@ -235,26 +234,57 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {Boolean} [title.visible] <true> The visibility of the title.
-         * @option {Number|Object} [title.margin] <5> The margin of the title.
+         * @option {Boolean} [title.visible] <false> The visibility of the title.
          * _example
-         * // sets the top, right, bottom and left margin to 3px.
-         * margin: 3
+         * $("#chart ").kendoChart({
+         *     title: {
+         *         // hides the title
+         *         visible: false
+         *     },
+         *     ...
+         * });
          *
-         * // sets the top and left margin to 1px
-         * // margin right and bottom are with 5px (by default)
-         * margin: { top: 1, left: 1 }
-         * @option {Number|Object} [title.padding] <5> The padding of the title.
+         * @option {Number | Object} [title.margin] <5> The margin of the title.
          * _example
-         * // sets the top, right, bottom and left padding to 3px.
-         * padding: 3
-         *
-         * // sets the top and left padding to 1px
-         * // padding right and bottom are with 5px (by default)
-         * padding: { top: 1, left: 1 }
+         * $("#chart").kendoChart({
+         *     // sets the top, right, bottom and left margin to 3px.
+         *     title: {
+         *         margin: 3
+         *     },
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     // sets the top and left margin to 1px
+         *     // margin right and bottom are with 5px (by default)
+         *     title: {
+         *         margin: { top: 1, left: 1 }
+         *     },
+         *     ...
+         * });
+         * @option {Number | Object} [title.padding] <5> The padding of the title.
+         * _example
+         * $("#chart").kendoChart({
+         *     // sets the top, right, bottom and left padding to 3px.
+         *     title: {
+         *         padding: 3
+         *     },
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     // sets the top and left padding to 1px
+         *     // padding right and bottom are with 5px (by default)
+         *     title: {
+         *         padding: { top: 1, left: 1 }
+         *     },
+         *     ...
+         * });
          * @option {Object} [title.border] The border of the title.
-         * @option {Number} [title.border.width] <0> The width of the border.
-         * @option {String} [title.border.color] <"black"> The color of the border.
+         * _example
+         * $("#chart").kendoChart({});
+         * @option {Number} [title.border.width] <0> The width of the border. Any valid CSS color string will work here, including hex and rgb.
+         * @option {String} [title.border.color] <"black"> The color of the border. Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [title.border.dashType] <"solid"> The dash type of the border.
          * <div class="details-list">
          *     <dl>
