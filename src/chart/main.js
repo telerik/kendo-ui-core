@@ -4355,8 +4355,8 @@
         reflowAxes: function() {
             var plotArea = this,
                 axes = plotArea.axes,
-                xAxes = axes.filter(function(axis) { return !axis.options.isVertical; }),
-                yAxes = axes.filter(function(axis) { return axis.options.isVertical; }),
+                xAxes = grep(axes, (function(axis) { return !axis.options.isVertical; })),
+                yAxes = grep(axes, (function(axis) { return axis.options.isVertical; })),
                 i,
                 length = axes.length;
 
@@ -5548,7 +5548,9 @@
         var min = MAX_VALUE,
             max = MIN_VALUE,
             i,
+            length,
             n;
+
         for (i = 0, length = arr.length; i < length; i++) {
             n = arr[i];
             if (defined(n)) {
