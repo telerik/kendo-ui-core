@@ -303,6 +303,22 @@
                 ok(masterRow.next(":not(:visible)").hasClass("k-detail-row"));
             });
 
+            test("multiple calls to collapseRow does not toggle the detailView", function() {
+                var grid = new Grid(table(), {
+                    dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
+                    columns: [{ field: "foo" }],
+                    detailTemplate: "#= foo #",
+                    scrollable: true
+                }),
+                masterRow = grid.tbody.find("tr.k-master-row:first");
+
+                grid.expandRow(masterRow);
+                grid.collapseRow(masterRow);
+                grid.collapseRow(masterRow);
+
+                ok(grid.tbody.find("tr.k-detail-row:first").is(":not(:visible)"));
+            });
+
             test("expandRow shows the detailView for given master row", function() {
                 var grid = new Grid(table(), {
                     dataSource: [{ foo: "foo" }, { foo: "bar" }, { foo: "boo" }],
