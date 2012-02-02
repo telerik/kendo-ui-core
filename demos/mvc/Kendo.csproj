@@ -489,6 +489,9 @@
     <Content Include="Views\mobile\buttongroup\appearance.cshtml" />
     <Content Include="Views\mobile\scrollview\index.cshtml" />
     <Content Include="Views\mobile\tabstrip\appearance.cshtml" />
+    <Content Include="Views\dataviz\area-chart\index.cshtml" />
+    <Content Include="Views\dataviz\area-chart\local-data.cshtml" />
+    <Content Include="Views\dataviz\area-chart\remote-data.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

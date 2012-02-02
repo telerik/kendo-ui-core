@@ -115,6 +115,9 @@
             },
             minorGridLines: {
                 color: "#454545"
+            },
+            title: {
+                color: WHITE
             }
         },
         tooltip: {
@@ -165,6 +168,9 @@
             },
             majorGridLines: {
                 color: "#dfdfdf"
+            },
+            title: {
+                color: "#232323"
             }
         },
         tooltip: {
@@ -215,6 +221,9 @@
             },
             minorGridLines: {
                 color: "#edf1f2"
+            },
+            title: {
+                color: "#293135"
             }
         },
         tooltip: {
@@ -238,6 +247,21 @@
                 color: "#293135",
                 background: "#eaeaec",
                 opacity: 0.5
+            },
+            line: {
+                markers: {
+                    background: "#eaeaec"
+                }
+            },
+            scatter: {
+                markers: {
+                    background: "#eaeaec"
+                }
+            },
+            scatterLine: {
+                markers: {
+                    background: "#eaeaec"
+                }
             },
             pie: {
                 connectors: {
@@ -273,6 +297,9 @@
             },
             minorGridLines: {
                 color: "#eeeeef"
+            },
+            title: {
+                color: "#4e5968"
             }
         },
         tooltip: {
@@ -321,6 +348,9 @@
             },
             majorGridLines: {
                 color: "#c7c7c7"
+            },
+            title: {
+                color: "#777777"
             }
         },
         tooltip: {
