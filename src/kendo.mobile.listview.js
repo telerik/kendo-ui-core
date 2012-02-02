@@ -32,7 +32,7 @@
                     if (!e.originalEvent || !e.originalEvent.defaultPrevented) {
                         item.toggleClass("km-state-active", true);
                     }
-                }, 100);
+                }, 30);
                 item.data(ACTIVE_STATE_TIMEOUT, intervalID);
             } else {
                 item.toggleClass("km-state-active", false);
