@@ -67,11 +67,11 @@
 
             test("Switch does not wraps the input twice", function() {
                 expect(1);
-                dom.wrap("<label />");
+                dom.wrap("<span />");
 
                 var theSwitch = new Switch(dom);
 
-                equal(dom.parents("label").length, 1);
+                equal(dom.parent("span").length, 1);
             });
 
             test("Switch creates a toggle handle", function() {

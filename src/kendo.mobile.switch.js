@@ -249,13 +249,13 @@
         _wrapper: function() {
             var that = this,
                 element = that.element,
-                wrapper = element.parent("label");
+                wrapper = element.parent("span.km-swith");
 
             if (!wrapper[0]) {
-                wrapper = element.wrap("<label />").bind("click", function(e) { e.preventDefault() }).parent();
+                wrapper = element.wrap('<span class="km-switch"/>').parent();
             }
 
-            that.wrapper = wrapper.addClass("km-switch");
+            that.wrapper = wrapper;
         },
 
         _swipe: function() {
