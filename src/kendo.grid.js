@@ -1948,7 +1948,7 @@
                     if (!th.command) {
                         html += "<th " + kendo.attr("field") + "='" + th.field + "' ";
                         if (th.title) {
-                            html += kendo.attr("title") + "='" + th.title + "' ";
+                            html += kendo.attr("title") + '="' + th.title.replace(/'/g, "\'") + '" ';
                         }
 
                         if (th.groupable !== undefined) {
