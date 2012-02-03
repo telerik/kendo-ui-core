@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ComboBox placeholder</title>
+        <title>AutoComplete placeholder</title>
         <script src="../../src/jquery.js"></script>
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
@@ -10,21 +10,21 @@
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.list.js"></script>
-        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.autocomplete.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
     <body>
-        <h1 id="qunit-header">ComboBox placeholder</h1>
+        <h1 id="qunit-header">AutoComplete placeholder</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
             kendo.ns = "kendo-";
-            var ComboBox = kendo.ui.ComboBox,
+            var AutoComplete = kendo.ui.AutoComplete,
                 input;
 
-            module("kendo.ui.ComboBox placeholder", {
+            module("kendo.ui.AutoComplete placeholder", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -45,66 +45,67 @@
 
             if (!kendo.support.placeholder) {
                 test("get text from placeholder attr", function() {
-                    var combobox = input.attr("placeholder", "Select...").kendoComboBox().data("kendoComboBox");
+                    var autocomplete = input.attr("placeholder", "Select...").kendoAutoComplete().data("kendoAutoComplete");
 
-                    equal(combobox.options.placeholder, "Select...");
-                    equal(combobox.input.val(), "Select...");
+                    equal(autocomplete.options.placeholder, "Select...");
+                    equal(autocomplete.element.val(), "Select...");
                 });
 
                 test("set placeholder if defined", function() {
-                    var combobox = input.kendoComboBox({
+                    var autocomplete = input.kendoAutoComplete({
                         placeholder: "Select item..."
-                    }).data("kendoComboBox");
+                    }).data("kendoAutoComplete");
 
-                    equal(combobox.input.val(), "Select item...");
+                    equal(autocomplete.element.val(), "Select item...");
                 });
 
                 test("do not set k-readonly if value", function() {
-                    var combobox = input.kendoComboBox({
+                    var autocomplete = input.val("text1").kendoAutoComplete({
                         dataSource: ["text1", "text2"],
-                        placeholder: "Select item...",
-                        index: 0
-                    }).data("kendoComboBox");
+                        placeholder: "Select item..."
+                    }).data("kendoAutoComplete");
 
-                    ok(!combobox.input.hasClass("k-readonly"));
+                    ok(!autocomplete.element.hasClass("k-readonly"));
                 });
 
                 asyncTest("set placeholder on blur", function() {
-                    var combo = input.kendoComboBox({
-                        dataTextField: "text",
-                        dataValueField: "value",
-                        dataSource: [{text: 1, value: 1}],
-                        placeholder: "Select...",
-                        index: 0
-                    }).data("kendoComboBox");
+                    var autocomplete = input.val("1").kendoAutoComplete({
+                        placeholder: "Select..."
+                    }).data("kendoAutoComplete");
 
-                    combo.value("");
-                    combo.input.focus().blur();
+                    autocomplete.value("");
+                    autocomplete.element.focus().blur();
                     setTimeout(function() {
                         start();
-                        equal(combo.input.val(), "Select...");
+                        equal(autocomplete.element.val(), "Select...");
                     }, 300);
                 });
 
-            } else {
-                test("add placeholder attr to the visible input", function() {
-                    var combobox = input.attr("placeholder", "test").kendoComboBox({
+                asyncTest("remove placeholder on focus", function() {
+                    var autocomplete = input.kendoAutoComplete({
                         placeholder: "Select..."
-                    }).data("kendoComboBox");
+                    }).data("kendoAutoComplete");
 
-                    equal(combobox.input.attr("placeholder"), "Select...");
+                    autocomplete.element.focus();
+                    setTimeout(function() {
+                        start();
+                        equal(autocomplete.element.val(), "");
+                    }, 100);
                 });
 
-                test("get text from element.placeholder", function() {
-                    var combobox = input.attr("placeholder", "test").kendoComboBox().data("kendoComboBox");
+            } else {
+                test("add placeholder attr to the input", function() {
+                    var autocomplete = input.attr("placeholder", "test").kendoAutoComplete({
+                        placeholder: "Select..."
+                    }).data("kendoAutoComplete");
 
-                    equal(combobox.input.attr("placeholder"), "test");
+                    equal(input.attr("placeholder"), "Select...");
                 });
 
                 test("do not set k-readonly class", function() {
-                    var combobox = input.attr("placeholder", "test").kendoComboBox().data("kendoComboBox");
+                    var autocomplete = input.attr("placeholder", "test").kendoAutoComplete().data("kendoAutoComplete");
 
-                    ok(!combobox.input.hasClass("k-readonly"));
+                    ok(!input.hasClass("k-readonly"));
                 });
             }
       </script>
