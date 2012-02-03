@@ -414,31 +414,6 @@
                 equal(combobox.selectedIndex, -1);
             });
 
-            test("get text from placeholder attr", function() {
-                var combobox = input.attr("placeholder", "Select...").kendoComboBox().data("kendoComboBox");
-
-                equal(combobox.options.placeholder, "Select...");
-                equal(combobox.input.val(), "Select...");
-            });
-
-            test("set placeholder if defined", function() {
-                var combobox = input.kendoComboBox({
-                    placeholder: "Select item..."
-                }).data("kendoComboBox");
-
-                equal(combobox.input.val(), "Select item...");
-            });
-
-            test("do not set k-readonly if value", function() {
-                var combobox = input.kendoComboBox({
-                    dataSource: ["text1", "text2"],
-                    placeholder: "Select item...",
-                    index: 0
-                }).data("kendoComboBox");
-
-                ok(!combobox.input.hasClass("k-readonly"));
-            });
-
             test("do not suggest on init", function() {
                 var combobox = input.kendoComboBox({
                     dataSource: ["text1", "text2"],
@@ -447,25 +422,6 @@
 
                 equal(combobox.input.val(), "");
             });
-
-            if ($.browser.mozilla) {
-                test("blur on ESC in mozilla", function() {
-                    expect(1);
-                    var combobox = input.kendoComboBox({
-                        dataSource: ["text1", "text2"]
-                    }).data("kendoComboBox");
-
-                    combobox.input
-                            .blur(function() {
-                                ok(true);
-                            })
-                            .focus()
-                            .trigger({
-                                type: "keydown",
-                                keyCode: 27
-                            });
-                });
-            }
 
             asyncTest("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],

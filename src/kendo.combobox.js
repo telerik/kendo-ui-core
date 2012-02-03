@@ -118,7 +118,9 @@
         ui = kendo.ui,
         List = ui.List,
         Select = ui.Select,
-        touch = kendo.support.touch,
+        support = kendo.support,
+        placeholderSupport = support.placeholder,
+        touch = support.touch,
         keys = kendo.keys,
         CLICK = touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
@@ -166,9 +168,7 @@
                         that.input.focus();
                       });
 
-            if (!options.placeholder) {
-                options.placeholder = element.attr("placeholder");
-            }
+            options.placeholder = options.placeholder || element.attr("placeholder");
 
             that._reset();
 
@@ -213,6 +213,7 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
+                    clearTimeout(that._bluring);
                     wrapper.addClass(FOCUSED);
                     that._placeholder(false);
                 },
@@ -698,6 +699,10 @@
                  })
                  .show();
 
+            if (placeholderSupport) {
+                input.attr("placeholder", that.options.placeholder);
+            }
+
             that._focused = that.input = input;
             that._arrow = wrapper.find(".k-icon");
             that._inputWrapper = $(wrapper[0].firstChild)
@@ -710,9 +715,7 @@
 
             that._last = key;
 
-            if (key == keys.ESC && $.browser.mozilla) {
-                input.blur();
-            } else if (key == keys.TAB) {
+            if (key == keys.TAB) {
                 that.text(input.val());
 
                 if (that._state === STATE_FILTER && that.selectedIndex > -1) {
@@ -724,9 +727,14 @@
         },
 
         _placeholder: function(show) {
+            if (placeholderSupport) {
+                return;
+            }
+
             var that = this,
-            placeholder = that.options.placeholder,
-            value;
+                input = that.input,
+                placeholder = that.options.placeholder,
+                value;
 
             if (placeholder) {
                 value = that.value();
@@ -737,14 +745,14 @@
 
                 if (!show) {
                     if (value) {
-                        placeholder = that.input.val();
+                        placeholder = input.val();
                     } else {
                         placeholder = "";
                     }
                 }
 
-                that.input.val(placeholder);
-                that.input.toggleClass("k-readonly", show);
+                input.toggleClass("k-readonly", show)
+                     .val(placeholder);
             }
         },
 

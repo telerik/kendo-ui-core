@@ -81,23 +81,6 @@
                 combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
             });
 
-            asyncTest("set placeholder on blur", function() {
-                var combo = input.kendoComboBox({
-                    dataTextField: "text",
-                    dataValueField: "value",
-                    dataSource: data,
-                    placeholder: "Select...",
-                    index: 0
-                }).data("kendoComboBox");
-
-                combo.value("");
-                combo.input.focus().blur();
-                setTimeout(function() {
-                    start();
-                    equal(combo.input.val(), "Select...");
-                }, 300);
-            });
-
             asyncTest("click _arrow should input", function() {
                 var focusWasCalled;
 
