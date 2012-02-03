@@ -102,19 +102,6 @@
 
             Widget.fn.init.call(that, element, options);
 
-            options = that.options;
-
-            that.bind([
-            /**
-             * Fires when tab is selected.
-             * @name kendo.mobile.ui.TabStrip#select
-             * @event
-             * @param {Event} e
-             * @param {jQueryObject} e.item The selected tab
-             */
-              SELECT
-            ], options);
-
             that.element.addClass("km-tabstrip");
 
             that._releaseProxy = proxy(that._release, that);
@@ -122,8 +109,19 @@
             that.element.find("a")
                             .each(that._buildButton)
                             .bind(support.mousedown, that._releaseProxy)
-                            .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
+                            .eq(that.options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
+
+        events: [
+            /**
+             * Fires when tab is selected.
+             * @name kendo.mobile.ui.TabStrip#select
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.item The selected tab
+             */
+            SELECT
+        ],
 
         /**
         * Set the mobile TabStrip active tab to the tab with the specified url.

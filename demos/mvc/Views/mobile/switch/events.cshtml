@@ -2,7 +2,7 @@
     <ul data-role="listview" data-style="inset" data-type="group">
         <li>General Settings
             <ul>
-                <li>Automatic Update <input id="mobile-switch" data-role="switch" /></li>
+                <li>Automatic Update <input id="mobile-switch" data-role="switch" data-change="switchChange" /></li>
             </ul>
         </li>
     </ul>
@@ -10,10 +10,8 @@
 </div>
 
 <script>
-    function mobileSwitchEventsInit() {
-        $("#mobile-switch").data("kendoMobileSwitch").bind("change", function(e) {
-            kendoConsole.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
-        });
+    function switchChange(e) {
+        kendoConsole.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
     }
 </script>
 

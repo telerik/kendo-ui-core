@@ -1,17 +1,13 @@
-<div data-role="view"id="button-events " data-init="mobileButtonEventsInit" data-title="Button Events">
-    <a id="mobile-button1" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 1</a>
-    <a id="mobile-button2" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 2</a>
-    <a id="mobile-button3" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 3</a>
+<div data-role="view"id="button-events " data-title="Button Events">
+    <a id="mobile-button1" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 1</a>
+    <a id="mobile-button2" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 2</a>
+    <a id="mobile-button3" data-click="logClick" data-role="button" style="display: block; margin: 2em; text-align: center;">Trigger Event 3</a>
     <div class="console"></div>
 </div>
 
 <script>
-    function mobileButtonEventsInit() {
-        $("[data-role=button]").each(function () {
-            $(this).data("kendoMobileButton").bind("click", function(e) {
-                kendoConsole.log(this.element.prop("id") + " was clicked!");
-            });
-        });
+    function logClick(e) {
+        kendoConsole.log(this.element.prop("id") + " was clicked!");
     }
 </script>
 
