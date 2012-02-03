@@ -367,7 +367,7 @@
                     that.current($(ul.firstChild));
                 }
 
-                if (suggest) {
+                if (suggest && that.input.val()) {
                     that.suggest(that._current);
                 }
             }
