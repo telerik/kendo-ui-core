@@ -35,10 +35,10 @@
 
             if (kendo.support.touch) {
                 mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
-                mouseMoveEvent = new $.Event(null, {type: MOUSEMOVE, changedTouches: [{identifier: 1, pageX: 100, pageY: 100}] });
+                mouseMoveEvent = new $.Event(null, {type: MOUSEMOVE, changedTouches: [{identifier: 1, pageX: 110, pageY: 102}] });
             } else {
-                mouseDownEvent = MOUSEDOWN;
-                mouseMoveEvent = MOUSEMOVE;
+                mouseDownEvent = new $.Event(null, {type: MOUSEDOWN, pageX: 100, pageY: 100 });
+                mouseMoveEvent = new $.Event(null, {type: MOUSEMOVE, pageX: 110, pageY: 102 });
             }
 
             module("switch", {
