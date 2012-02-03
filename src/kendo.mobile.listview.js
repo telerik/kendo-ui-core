@@ -265,14 +265,14 @@
              *
              * @exampleTitle Handling button clicks
              * @example
-             * <ul data-role="listview" id="foo">
+             * <ul data-role="listview" id="foo" data-click="listViewClick">
              *     <li><a data-role="button" data-name="bar">Bar button</a> | <a data-role="button" data-name="baz">Baz button</a></li>
              * </ul>
              *
              * <script>
-             *  $("#foo").data("kendoMobileListView").bind("click", function(e) {
+             *  function listViewClick(e) {
              *      console.log(e.buttonName); // "foo" or "bar"
-             *      console.log(e.button); // Kendo MobileButton instance
+             *      console.log(e.button); // Kendo mobile Button instance
              *  }
              * </script>
              *
