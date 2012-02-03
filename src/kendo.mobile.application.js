@@ -379,10 +379,8 @@
         },
 
         _setCurrentView: function(view) {
-            var that = this, params = history.url().params;
-            that.view = view;
-            view.params = params;
-            that.trigger(VIEW_SHOW, {view: view, params: params});
+            this.view = view;
+            this.trigger(VIEW_SHOW, {view: view, params: view.params});
         },
 
         _createView: function(element) {

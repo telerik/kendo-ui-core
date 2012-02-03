@@ -185,7 +185,8 @@
                 boundary: boundary,
                 swipe: swipe,
                 draggable: draggable,
-                tap: tap
+                tap: tap,
+                scrollElement: inner
             });
 
             that.initAxis("x");

@@ -1,6 +1,7 @@
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
+        history = kendo.history,
         os = kendo.support.mobileOS,
         attr = kendo.attr,
         Class = kendo.Class,
@@ -37,6 +38,7 @@
 
             kendo.mobile.enhance(element);
             that.content.kendoMobileScroller({useOnDesktop: true});
+            that.scrollerContent = that.content.data("kendoMobileScroller").scrollElement;
 
             that.trigger(INIT, that);
         },
@@ -65,6 +67,8 @@
                 $(this).data("kendoWidget").viewShow(that);
             });
 
+            that.params = history.url().params;
+
             that.trigger(SHOW, that);
         }
     });
@@ -79,7 +83,7 @@
                 callback = function() { previous.element.hide(); },
                 animationType;
 
-            that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(kendo.history.url().params);
+            that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
 
             animationType = that.application.dataOrDefault((that.back ? previous : view).element, "transition");
 
