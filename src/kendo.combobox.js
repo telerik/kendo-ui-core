@@ -166,6 +166,10 @@
                         that.input.focus();
                       });
 
+            if (!options.placeholder) {
+                options.placeholder = element.attr("placeholder");
+            }
+
             that._reset();
 
             that._wrapper();
@@ -218,6 +222,7 @@
                             wrapper.removeClass(FOCUSED);
                             clearTimeout(that._typing);
                             that.text(that.text());
+                            that._placeholder();
                             that._blur();
                         }, 100);
                     } else {
@@ -251,6 +256,7 @@
             height: 200,
             highlightFirst: true,
             filter: "none",
+            placeholder: "",
             suggest: false
         },
 
@@ -521,8 +527,6 @@
                 }
 
                 input.value = text;
-
-                that._placeholder();
             } else {
                 return input.value;
             }
@@ -583,8 +587,6 @@
 
         _accept: function(li) {
             var that = this;
-
-            that._placeholder(false);
 
             if (li && that.popup.visible()) {
 
@@ -720,15 +722,18 @@
 
         _placeholder: function(show) {
             var that = this,
-                placeholder = that.options.placeholder;
+            placeholder = that.options.placeholder,
+            value;
 
             if (placeholder) {
+                value = that.value();
+
                 if (show === undefined) {
-                    show = !that.value();
+                    show = !value;
                 }
 
                 if (!show) {
-                    if (that.value()) {
+                    if (value) {
                         placeholder = that.input.val();
                     } else {
                         placeholder = "";
