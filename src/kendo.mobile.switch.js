@@ -86,7 +86,6 @@
             that._background();
             that._handle();
 
-            options = that.options;
             element = that.element.data(kendo.attr("role"), "switch");
             element[0].type = "checkbox";
 
@@ -97,7 +96,7 @@
             that.snapPoint = width / 2 - handleWidth / 2;
             that._animateBackground = that.background.is(":visible");
 
-            checked = options.checked;
+            checked = that.options.checked;
             if (checked === undefined) {
                 checked = element[0].checked;
             }
