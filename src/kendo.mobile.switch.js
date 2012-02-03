@@ -160,7 +160,6 @@
 
         _move: function(e) {
             var that = this;
-
             that._position(limitValue(that.position + e.x.delta, 0, that.constrain));
         },
 
