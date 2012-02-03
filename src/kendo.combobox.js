@@ -705,12 +705,15 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                input = that.input;
 
             that._last = key;
 
-            if (key == kendo.keys.TAB) {
-                that.text(that.input.val());
+            if (key == keys.ESC && $.browser.mozilla) {
+                input.blur();
+            } else if (key == keys.TAB) {
+                that.text(input.val());
 
                 if (that._state === STATE_FILTER && that.selectedIndex > -1) {
                     that._state = STATE_ACCEPT;

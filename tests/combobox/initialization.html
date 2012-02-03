@@ -448,6 +448,25 @@
                 equal(combobox.input.val(), "");
             });
 
+            if ($.browser.mozilla) {
+                test("blur on ESC in mozilla", function() {
+                    expect(1);
+                    var combobox = input.kendoComboBox({
+                        dataSource: ["text1", "text2"]
+                    }).data("kendoComboBox");
+
+                    combobox.input
+                            .blur(function() {
+                                ok(true);
+                            })
+                            .focus()
+                            .trigger({
+                                type: "keydown",
+                                keyCode: 27
+                            });
+                });
+            }
+
             asyncTest("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
