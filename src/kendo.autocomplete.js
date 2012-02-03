@@ -95,7 +95,9 @@
     *
     */
     var kendo = window.kendo,
-        touch = kendo.support.touch,
+        support = kendo.support,
+        touch = support.touch,
+        placeholderSupported = support.placeholder,
         ui = kendo.ui,
         keys = kendo.keys,
         DataSource = kendo.data.DataSource,
@@ -209,15 +211,22 @@
     * $("#autoComplete").kendoAutoComplete({
     *     separator: ", "
     * });
+        * @option {String} [placeholder] The hint shown in the input when it is empty.
         */
         init: function (element, options) {
-            var that = this, wrapper;
+            var that = this, wrapper, placeholder;
 
             options = $.isArray(options) ? { dataSource: options} : options;
 
             List.fn.init.call(that, element, options);
 
             element = that.element;
+            options = that.options;
+
+            options.placeholder = options.placeholder || element.attr("placeholder");
+            if (placeholderSupported) {
+                element.attr("placeholder", options.placeholder);
+            }
 
             that._wrapper();
 
@@ -291,12 +300,15 @@
                     paste: proxy(that._search, that),
                     focus: function () {
                         that._old = that.value();
+                        that._placeholder(false);
                         wrapper.addClass(FOCUSED);
+                        clearTimeout(that._bluring);
                     },
                     blur: function () {
                         if (!touch) {
                             that._bluring = setTimeout(function () {
                                 that._blur();
+                                that._placeholder();
                                 wrapper.removeClass(FOCUSED);
                             }, 100);
                         } else {
@@ -309,6 +321,8 @@
             that._enable();
 
             that._popup();
+
+            that._placeholder();
         },
 
         options: {
@@ -318,7 +332,8 @@
             minLength: 1,
             delay: 200,
             height: 200,
-            filter: "startswith"
+            filter: "startswith",
+            placeholder: ""
         },
 
         /**
@@ -603,6 +618,34 @@
 
             if (that.options.suggest) {
                 that.suggest(li);
+            }
+        },
+
+        _placeholder: function(show) {
+            if (placeholderSupported) {
+                return;
+            }
+
+            var that = this,
+                element = that.element,
+                placeholder = that.options.placeholder,
+                value = element.val();
+
+            if (placeholder) {
+                if (show === undefined) {
+                    show = !value;
+                }
+
+                if (!show) {
+                    if (value !== placeholder) {
+                        placeholder = value;
+                    } else {
+                        placeholder = "";
+                    }
+                }
+
+                element.toggleClass("k-readonly", show)
+                       .val(placeholder);
             }
         },
 
