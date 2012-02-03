@@ -1,19 +1,24 @@
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
+        history = kendo.history,
         os = kendo.support.mobileOS,
         attr = kendo.attr,
         Class = kendo.Class,
+        Widget = mobile.ui.Widget,
+        INIT = "init",
+        SHOW = "show",
         roleSelector = kendo.roleSelector;
 
-    var View = Class.extend({
+    var View = Widget.extend({
         init: function(element, options) {
             var that = this,
-                initCallback = element.data(kendo.ns + "init"),
                 contentSelector = roleSelector("content");
 
+            Widget.fn.init.call(that, element, options);
+
             that.layout = options.layout;
-            that.element = element.data("kendoView", that).addClass("km-view");
+            that.element.data("kendoView", that).addClass("km-view");
 
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
@@ -33,11 +38,15 @@
 
             kendo.mobile.enhance(element);
             that.content.kendoMobileScroller({useOnDesktop: true});
+            that.scrollerContent = that.content.data("kendoMobileScroller").scrollElement;
 
-            if (initCallback) {
-                window[initCallback].call(this);
-            }
+            that.trigger(INIT, that);
         },
+
+        events: [
+            INIT,
+            SHOW
+        ],
 
         onHideStart: function() {
             var that = this;
@@ -57,6 +66,10 @@
             that.element.find("[data-" + kendo.ns + "widget]").each(function(){
                 $(this).data("kendoWidget").viewShow(that);
             });
+
+            that.params = history.url().params;
+
+            that.trigger(SHOW, that);
         }
     });
 
@@ -70,7 +83,7 @@
                 callback = function() { previous.element.hide(); },
                 animationType;
 
-            that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(kendo.history.url().params);
+            that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
 
             animationType = that.application.dataOrDefault((that.back ? previous : view).element, "transition");
 

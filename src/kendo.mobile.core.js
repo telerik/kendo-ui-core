@@ -21,21 +21,38 @@
          */
         init: function(element, options) {
             var that = this,
+                idx = 0,
+                events = that.events,
                 option,
-                value;
+                value,
+                handler;
 
             ui.Widget.fn.init.call(that, element, options);
+            options = that.options;
 
-            for (option in that.options) {
+            for (option in options) {
                 value = that.element.data(kendo.ns + option);
 
                 if (value !== undefined) {
-                    that.options[option] = value;
+                    options[option] = value;
                 }
             }
+
+            for (; idx < events.length; idx ++) {
+                event = events[idx];
+                handler = that.element.data(kendo.ns + event);
+
+                if (handler !== undefined) {
+                    options[event] = window[handler];
+                }
+            }
+
+            that.bind(events, options);
         },
 
+
         options: {},
+        events: [],
 
         viewShow: $.noop,
 

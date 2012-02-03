@@ -38,7 +38,7 @@
         fn = subclass.fn = subclass.prototype = extend(new base, proto);
 
         for (member in fn) {
-            if (typeof fn[member] === OBJECT) {
+            if (typeof fn[member] === OBJECT && fn[member].constructor != Array) {
                 fn[member] = extend(true, {}, base.prototype[member], proto[member]);
             }
         }

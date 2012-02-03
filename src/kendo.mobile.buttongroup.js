@@ -114,31 +114,31 @@
                 .delegate(SELECTOR, MOUSEDOWN, $.proxy(that._mousedown, that))
                 .find("li").each(that._button);
 
-            that.bind([
-                /**
-                * Fires when different Button is selected.
-                * @name kendo.mobile.ui.ButtonGroup#select
-                * @event
-                * @param {Event} e
-                *
-                * @exampleTitle Handle select event
-                * @example
-                * <ul id="buttongroup" data-role="buttongroup" />
-                *   <li>Option 1</li>
-                *   <li>Option 2</li>
-                * </ul>
-                *
-                * <script>
-                *  $("#buttongroup").data("kendoMobileButtonGroup").bind("select", function(e) {
-                *      //handle select event
-                *  }
-                * </script>
-                */
-                SELECT
-            ], that.options);
-
             that.select(that.options.index);
         },
+
+        events: [
+            /**
+            * Fires when different Button is selected.
+            * @name kendo.mobile.ui.ButtonGroup#select
+            * @event
+            * @param {Event} e
+            *
+            * @exampleTitle Handle select event
+            * @example
+            * <ul id="buttongroup" data-role="buttongroup" />
+            *   <li>Option 1</li>
+            *   <li>Option 2</li>
+            * </ul>
+            *
+            * <script>
+            *  $("#buttongroup").data("kendoMobileButtonGroup").bind("select", function(e) {
+            *      //handle select event
+            *  }
+            * </script>
+            */
+            SELECT
+        ],
 
         options: {
             name: "ButtonGroup",
