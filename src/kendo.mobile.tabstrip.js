@@ -102,8 +102,6 @@
 
             Widget.fn.init.call(that, element, options);
 
-            options = that.options;
-
             that.element.addClass("km-tabstrip");
 
             that._releaseProxy = proxy(that._release, that);
@@ -111,7 +109,7 @@
             that.element.find("a")
                             .each(that._buildButton)
                             .bind(support.mousedown, that._releaseProxy)
-                            .eq(options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
+                            .eq(that.options.selectedIndex).addClass(ACTIVE_STATE_CLASS);
         },
 
         events: [
