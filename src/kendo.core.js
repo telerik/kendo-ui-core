@@ -1995,6 +1995,14 @@
          * @property {Float}
          */
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
+
+        /**
+         * Indicates whether the browser supports input placeholder.
+         * @name kendo.support.placeholder
+         * @property {Boolean}
+         */
+        support.placeholder = "placeholder" in document.createElement("input");
+
     })();
 
     /**

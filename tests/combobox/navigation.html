@@ -139,6 +139,23 @@
                 }, 300);
             });
 
+            asyncTest("click li should remove readonly css", function() {
+                var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    placeholder: "select"
+                }).data("kendoComboBox");
+                combobox.open();
+                combobox.ul.children().eq(1).trigger(CLICK);
+
+                setTimeout(function() {
+                    equal(combobox.text(), data[1].text);
+                    ok(!combobox.input.hasClass("k-readonly"));
+                    start();
+                }, 300);
+            });
+
             asyncTest("value should be set to item.text if no item.value", function() {
                 var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
                 combobox = input.kendoComboBox({
