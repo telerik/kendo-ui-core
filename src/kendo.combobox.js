@@ -155,6 +155,7 @@
         * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
         * @option {String} [filter] <"none"> Defines the type of filtration. If "none" the ComboBox will not filter the items.
         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+        * @option {String} [placeholder] Define the text of shown when the input is empty.
         */
         init: function(element, options) {
             var that = this, wrapper;
