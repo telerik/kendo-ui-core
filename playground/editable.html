@@ -3,6 +3,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>editable</title>
+        <link href="http://cdn.kendostatic.com/2011.3.1129/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2011.3.1129/styles/kendo.default.min.css" rel="stylesheet" />
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
@@ -20,8 +22,6 @@
         <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
-        <link href="../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../styles/kendo.blueopal.css" rel="stylesheet"/>
         <style>
             body {
                font: 75% arial,helvetica,sans-serif;
@@ -73,7 +73,7 @@
                     selectable: false,
                     //detailTemplate: "detail template",
                     toolbar: ["create", "cancel", "save"],
-                    columns: [{field: "date", format: "{0:dd/MM/yyyy}"}, { field: "id", format: "{0:c}" }, "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
+                    columns: [{field: "date", format: "{0:dd/MM/yyyy}"}, { title: "id's", field: "id", format: "{0:c}" }, "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
                 });
 
                 $("#relatedGrid").kendoGrid({
