@@ -414,6 +414,13 @@
                 equal(combobox.selectedIndex, -1);
             });
 
+            test("get text from placeholder attr", function() {
+                var combobox = input.attr("placeholder", "Select...").kendoComboBox().data("kendoComboBox");
+
+                equal(combobox.options.placeholder, "Select...");
+                equal(combobox.input.val(), "Select...");
+            });
+
             test("set placeholder if defined", function() {
                 var combobox = input.kendoComboBox({
                     placeholder: "Select item..."
