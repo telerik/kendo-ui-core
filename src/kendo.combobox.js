@@ -119,7 +119,7 @@
         List = ui.List,
         Select = ui.Select,
         support = kendo.support,
-        placeholderSupport = support.placeholder,
+        placeholderSupported = support.placeholder,
         touch = support.touch,
         keys = kendo.keys,
         CLICK = touch ? "touchend" : "click",
@@ -699,7 +699,7 @@
                  })
                  .show();
 
-            if (placeholderSupport) {
+            if (placeholderSupported) {
                 input.attr("placeholder", that.options.placeholder);
             }
 
@@ -727,7 +727,7 @@
         },
 
         _placeholder: function(show) {
-            if (placeholderSupport) {
+            if (placeholderSupported) {
                 return;
             }
 
