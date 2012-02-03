@@ -249,8 +249,9 @@
             } else {
                 that._style();
             }
+        },
 
-            that.bind([
+        events: [
             /**
              * Fires when item is clicked
              * @name kendo.mobile.ui.ListView#click
@@ -294,8 +295,7 @@
              * </script>
              */
             CLICK
-            ], options);
-        },
+        ],
 
         options: {
             name: "ListView",
