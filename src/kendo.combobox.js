@@ -118,7 +118,9 @@
         ui = kendo.ui,
         List = ui.List,
         Select = ui.Select,
-        touch = kendo.support.touch,
+        support = kendo.support,
+        placeholderSupported = support.placeholder,
+        touch = support.touch,
         keys = kendo.keys,
         CLICK = touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
@@ -153,6 +155,7 @@
         * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
         * @option {String} [filter] <"none"> Defines the type of filtration. If "none" the ComboBox will not filter the items.
         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
+        * @option {String} [placeholder] Define the text of shown when the input is empty.
         */
         init: function(element, options) {
             var that = this, wrapper;
@@ -165,6 +168,8 @@
             element = that.element.focus(function() {
                         that.input.focus();
                       });
+
+            options.placeholder = options.placeholder || element.attr("placeholder");
 
             that._reset();
 
@@ -209,7 +214,9 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
+                    clearTimeout(that._bluring);
                     wrapper.addClass(FOCUSED);
+                    that._placeholder(false);
                 },
                 blur: function() {
                     if (!touch) {
@@ -217,6 +224,7 @@
                             wrapper.removeClass(FOCUSED);
                             clearTimeout(that._typing);
                             that.text(that.text());
+                            that._placeholder();
                             that._blur();
                         }, 100);
                     } else {
@@ -250,6 +258,7 @@
             height: 200,
             highlightFirst: true,
             filter: "none",
+            placeholder: "",
             suggest: false
         },
 
@@ -360,7 +369,7 @@
                     that.current($(ul.firstChild));
                 }
 
-                if (suggest) {
+                if (suggest && that.input.val()) {
                     that.suggest(that._current);
                 }
             }
@@ -691,6 +700,10 @@
                  })
                  .show();
 
+            if (placeholderSupported) {
+                input.attr("placeholder", that.options.placeholder);
+            }
+
             that._focused = that.input = input;
             that._arrow = wrapper.find(".k-icon");
             that._inputWrapper = $(wrapper[0].firstChild)
@@ -698,18 +711,49 @@
 
         _keydown: function(e) {
             var that = this,
-                key = e.keyCode;
+                key = e.keyCode,
+                input = that.input;
 
             that._last = key;
 
-            if (key == kendo.keys.TAB) {
-                that.text(that.input.val());
+            if (key == keys.TAB) {
+                that.text(input.val());
 
                 if (that._state === STATE_FILTER && that.selectedIndex > -1) {
                     that._state = STATE_ACCEPT;
                 }
             } else if (!that._move(e)) {
                that._search();
+            }
+        },
+
+        _placeholder: function(show) {
+            if (placeholderSupported) {
+                return;
+            }
+
+            var that = this,
+                input = that.input,
+                placeholder = that.options.placeholder,
+                value;
+
+            if (placeholder) {
+                value = that.value();
+
+                if (show === undefined) {
+                    show = !value;
+                }
+
+                if (!show) {
+                    if (value) {
+                        placeholder = input.val();
+                    } else {
+                        placeholder = "";
+                    }
+                }
+
+                input.toggleClass("k-readonly", show)
+                     .val(placeholder);
             }
         },
 
@@ -757,6 +801,7 @@
                 } else {
                     that.select(that.options.index);
                 }
+                that._placeholder();
             }).filter({});
         },
 

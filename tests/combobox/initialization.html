@@ -414,6 +414,15 @@
                 equal(combobox.selectedIndex, -1);
             });
 
+            test("do not suggest on init", function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["text1", "text2"],
+                    suggest: true
+                }).data("kendoComboBox");
+
+                equal(combobox.input.val(), "");
+            });
+
             asyncTest("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
