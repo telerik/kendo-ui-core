@@ -211,6 +211,7 @@
     * $("#autoComplete").kendoAutoComplete({
     *     separator: ", "
     * });
+        * @option {String} [placeholder] The hint shown in the input when it is empty.
         */
         init: function (element, options) {
             var that = this, wrapper, placeholder;
