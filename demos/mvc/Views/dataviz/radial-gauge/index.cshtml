@@ -6,18 +6,13 @@
                     $("#gauge").kendoGauge({
                         theme: $(document).data("kendoSkin") || "default",
 
-                        value: 35,
-                        min: 0,
-                        max: 100,
+                        pointer: {
+                            value: 35,
+                            type: "needle"
+                        },
 
-                        axis: {
-                            majorTickSize: 5,
-                            majorTickType: "outside",
-
-                            regions: [
-                                { from: 60, to: 80, color: "#00ffff" },
-                                { from: 80, to: 100, background: "#ff0000" }
-                            ]
+                        scale: {
+                            minorUnit: 5
                         }
                     });
                 }

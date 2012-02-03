@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Radial Axis</title>
+        <title>Radial Scale</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -16,19 +16,19 @@
                 Gauge = kendo.ui.Gauge,
                 Box2D = Chart.Box2D,
                 Point2D = Chart.Point2D,
-                RadialAxis = Gauge.RadialAxis,
-                radialAxis,
+                RadialScale = Gauge.RadialScale,
+                radialScale,
                 ring,
-                chartBox = new Box2D(0, 0, 400, 300),
-                TOLERANCE = 1.5;
+                chartBox = new Box2D(0, 0, 400, 300);
 
             // Tests expect particular font size
             Chart.Text.fn.options.font = "16px Verdana, sans-serif";
 
-            module("RadialAxis", {
+            module("RadialScal", {
                 setup: function() {
-                    radialAxis = new RadialAxis(
-                        0, 100, {
+                    radialScale = new RadialScale({
+                            min: 0,
+                            max: 100,
                             majorTickSize: 10,
                             angle: 180,
                             startAngle: 0
@@ -38,10 +38,10 @@
                 }
             });
 
-            test("reflow calculates axis ring position", function() {
-                radialAxis.reflow(chartBox);
+            test("reflow calculates scale ring position", function() {
+                radialScale.reflow(chartBox);
 
-                ring = radialAxis.ring;
+                ring = radialScale.ring;
                 equals(ring.c.x, 200);
                 equals(ring.c.y, 150);
                 equals(ring.r, 150);
@@ -49,19 +49,19 @@
             });
 
             test("getTickAngles returns array", function() {
-                var tickAngles = radialAxis.getTickAngles(ring, 10);
+                var tickAngles = radialScale.getTickAngles(ring, 10);
 
                 ok(tickAngles instanceof Array);
             });
 
             test("getTickAngles returns proper amount of tick angles", function() {
-                radialAxis.options.min = 0;
-                radialAxis.options.max = 100;
-                var tickAngles = radialAxis.getTickAngles(ring, 10);
+                radialScale.options.min = 0;
+                radialScale.options.max = 100;
+                var tickAngles = radialScale.getTickAngles(ring, 10);
 
                 equal(tickAngles.length, 11);
 
-                tickAngles = radialAxis.getTickAngles(ring, 1);
+                tickAngles = radialScale.getTickAngles(ring, 1);
 
                 equal(tickAngles.length, 101);
             });

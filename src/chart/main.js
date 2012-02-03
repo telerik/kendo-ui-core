@@ -66,6 +66,7 @@
         OBJECT = "object",
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
+        INSIDE = "inside",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
@@ -6208,39 +6209,67 @@
         }
     });
 
-    var RadialAxis = NumericAxis.extend({
-        init: function (min, max, options) {
-            var axis = this;
+    var Pointer = ChartElement.extend({
+        init: function (options) {
+            var pointer = this;
 
-            NumericAxis.fn.init.call(axis, min, max, options);
+            ChartElement.fn.init.call(pointer, options);
+        },
 
-            axis.min = min;
-            axis.max = max;
+        render: function() {
+            var plotArea = this,
+                options = plotArea.options;
+
+            plotArea.append(plotArea.scale);
+        }
+    });
+
+    var RadialScale = NumericAxis.extend({
+        init: function (options) {
+            var scale = this;
+
+            options = deepExtend({}, scale.options, options);
+
+            NumericAxis.fn.init.call(scale, options.min, options.max, options);
+        },
+
+        options: {
+            min: 0,
+            max: 100,
+
+            majorTickSize: 15,
+            majorTickAlignment: INSIDE,
+
+            minorTickSize: 10,
+            minorTickAlignment: INSIDE,
+
+            startAngle: -30,
+            angle: 240
         },
 
         reflow: function(box) {
-            var axis = this,
-                options = axis.options,
+            var scale = this,
+                options = scale.options,
                 center = box.center(),
                 radius = math.min(center.x, center.y);
 
-            axis.ring = new Chart.Ring(
+            scale.ring = new Chart.Ring(
                 center, radius - options.majorTickSize, radius, options.startAngle, options.angle
             );
 
-            axis.box = box;
+            scale.box = box;
         },
 
         renderTicks: function(view) {
-            var axis = this,
+            var scale = this,
                 ticks = [],
-                majorTickRing = axis.ring,
+                majorTickRing = scale.ring,
                 minorTickRing = majorTickRing.clone();
-                options = axis.options,
+                options = scale.options,
                 tickOptions = { stroke: "#000", strokeWidth: .5 };
 
             function renderTickRing(ring, unit) {
-                var tickAngles = axis.getTickAngles(ring, unit),
+                var tickAngles = scale.getTickAngles(ring, unit),
                     i, innerPoint, outerPoint;
 
                 for (i = 0; i < tickAngles.length; i++) {
@@ -6259,15 +6288,15 @@
             }
 
             renderTickRing(majorTickRing, options.majorUnit);
-            //minorTickRing.radius(minorTickRing.r - options.minorTickSize);
-            //renderTickRing(minorTickRing, options.minorUnit);
+            minorTickRing.radius(minorTickRing.r - options.minorTickSize, true);
+            renderTickRing(minorTickRing, options.minorUnit);
 
             return ticks;
         },
 
         getTickAngles: function(ring, stepValue) {
-            var axis = this,
-                options = axis.options,
+            var scale = this,
+                options = scale.options,
                 range = options.max - options.min,
                 angle = ring.angle,
                 tickCount = range / stepValue,
@@ -6288,15 +6317,15 @@
         },
 
         getViewElements: function(view) {
-            var axis = this,
-                options = axis.options,
+            var scale = this,
+                options = scale.options,
                 isVertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                tickPositions = axis.getMinorTickPositions(),
+                childElements = ChartElement.fn.getViewElements.call(scale, view),
+                tickPositions = scale.getMinorTickPositions(),
                 lineOptions;
 
-            append(childElements, axis.renderTicks(view));
-            // append(childElements, axis.renderPlotBands(view));
+            append(childElements, scale.renderTicks(view));
+            // append(childElements, scale.renderPlotBands(view));
 
             return childElements;
         }
@@ -6310,10 +6339,7 @@
         },
 
         options: {
-            axis: {},
-            plotArea: {
-                margin: {}
-            },
+            margin: {},
             background: "",
             border: {
                 color: BLACK,
@@ -6325,9 +6351,9 @@
             var plotArea = this,
                 options = plotArea.options;
 
-            plotArea.axis = new RadialAxis(options.min, options.max, deepExtend({ startAngle: options.startAngle, angle: options.angle }, options.axis));
+            plotArea.scale = new RadialScale(options.scale);
 
-            plotArea.append(plotArea.axis);
+            plotArea.append(plotArea.scale);
         }
     });
 
@@ -6343,11 +6369,7 @@
 
             $(element).addClass("k-gauge");
 
-            gauge._axis();
             gauge._redraw();
-        },
-
-        _axis: function() {
         },
 
         _redraw: function() {
@@ -6382,17 +6404,7 @@
         },
 
         options: {
-            name: "Gauge",
-            axis: {
-                type: "Numeric",
-                min: 0,
-                max: 100,
-                majorTickSize: 15,
-                minorTickSize: 10
-            },
-            value: 0,
-            startAngle: -30,
-            angle: 240
+            name: "Gauge"
         },
 
         _supportsSVG: supportsSVG
@@ -6401,7 +6413,8 @@
     kendo.ui.plugin(Gauge);
 
     deepExtend(Gauge, {
-        RadialAxis: RadialAxis
+        RadialScale: RadialScale,
+        Pointer: Pointer
     });
 
 })(jQuery);
