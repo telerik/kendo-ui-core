@@ -97,27 +97,6 @@
             that.snapPoint = width / 2 - handleWidth / 2;
             that._animateBackground = that.background.is(":visible");
 
-            that.bind([
-                /**
-                * Fires when the state of the widget changes
-                * @name kendo.mobile.ui.Switch#change
-                * @event
-                * @param {Event} e
-                * @param {Object} e.checked The checked state of the widget.
-                *
-                * @exampleTitle Handle change event
-                * @example
-                * <input type="checkbox" id="switch" data-role="switch" />
-                *
-                * <script>
-                *  $("#switch").data("kendoMobileSwitch").bind("change", function(e) {
-                *      //handle change event
-                *  }
-                * </script>
-                */
-                CHANGE
-            ], options);
-
             checked = options.checked;
             if (checked === undefined) {
                 checked = element[0].checked;
@@ -125,6 +104,27 @@
 
             that.toggle(checked);
         },
+
+        events: [
+            /**
+            * Fires when the state of the widget changes
+            * @name kendo.mobile.ui.Switch#change
+            * @event
+            * @param {Event} e
+            * @param {Object} e.checked The checked state of the widget.
+            *
+            * @exampleTitle Handle change event
+            * @example
+            * <input type="checkbox" id="switch" data-role="switch" />
+            *
+            * <script>
+            *  $("#switch").data("kendoMobileSwitch").bind("change", function(e) {
+            *      //handle change event
+            *  }
+            * </script>
+            */
+            CHANGE
+        ],
 
         options: {
             name: "Switch",
