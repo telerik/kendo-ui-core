@@ -684,7 +684,7 @@
                 }
             });
 
-            wrapper.css(ZINDEX, zIndex + 2)
+            wrapper.css(ZINDEX, zIndex + 2);
             that.element.find("> .k-overlay").remove();
 
             return that;
