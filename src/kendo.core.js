@@ -1906,6 +1906,7 @@
          * @property {Boolean}
          */
         var transitions = support.transitions = false;
+        var transforms = support.transforms = false;
 
         /**
          * Indicates whether the browser supports hardware 3d transitions.
@@ -1916,23 +1917,28 @@
         support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
-            var prefix = this.toString();
+            var prefix = this.toString(),
+                hasTransitions = typeof table.style[prefix + "Transition"] === STRING;
 
-            if (typeof table.style[prefix + "Transition"] === STRING) {
+            if (hasTransitions || typeof table.style[prefix + "Transform"] === STRING) {
                 var lowPrefix = prefix.toLowerCase();
 
-                transitions = {
+                transforms = {
                     css: "-" + lowPrefix + "-",
                     prefix: prefix,
                     event: (lowPrefix === "o" || lowPrefix === "webkit") ? lowPrefix : ""
                 };
 
-                transitions.event = transitions.event ? transitions.event + "TransitionEnd" : "transitionend";
+                if (hasTransitions) {
+                    transitions = transforms;
+                    transitions.event = transitions.event ? transitions.event + "TransitionEnd" : "transitionend";
+                }
 
                 return false;
             }
         });
 
+        support.transforms = transforms;
         support.transitions = transitions;
 
         function detectOS(ua) {
@@ -1970,7 +1976,7 @@
                         os.minorVersion = match[3].replace("_", ".");
                         os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
                         os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
-                        os.appMode = window.navigator.standalone || typeof window._nativeReady !== "undefined";
+                        os.appMode = window.navigator.standalone || window.location.protocol == "file:" || typeof window.PhoneGap !== "undefined"; // Use file protocol to detect appModes.
 
                         break;
                     }
@@ -2019,6 +2025,10 @@
         }
 
         return size;
+    }
+
+    function isNodeEmpty(element) {
+        return $.trim($(element).contents().filter(function () { return this.nodeType != 8 }).html()) === "";
     }
 
     function getOffset(element, type) {
@@ -2355,6 +2365,7 @@
         },
         wrap: wrap,
         size: size,
+        isNodeEmpty: isNodeEmpty,
         getOffset: getOffset,
         parseEffects: parseEffects,
         toggleClass: toggleClass,
