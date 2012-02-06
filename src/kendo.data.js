@@ -2146,7 +2146,7 @@
 
             if (action === "remove") {
                 for (idx = 0, length = e.items.length; idx < length; idx++) {
-                    if (!e.items[idx].isNew()) {
+                    if (!e.items[idx].isNew || !e.items[idx].isNew()) {
                         that._destroyed.push(e.items[idx]);
                     }
                 }
