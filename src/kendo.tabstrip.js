@@ -714,6 +714,10 @@
                 collapse = that.options.collapsible,
                 content = $(that.contentElement(item.index()));
 
+            if (item.closest(".k-widget")[0] != that.element[0]) {
+                return;
+            }
+
             if (item.is("." + DISABLEDSTATE + (!collapse ? ",." + ACTIVESTATE : ""))) {
                 e.preventDefault();
                 return;
