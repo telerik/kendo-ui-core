@@ -34,13 +34,25 @@
                 optionsText: 'name',
                 value: chosenTicket"></select>
             </p>
+            <p>
+                Departure: <input id="departure" data-bind="value: departure" />
+            </p>
+            <p>
+                Quantity: <input id="quantity" data-bind="value: quantity" />
+            </p>
             <p data-bind="template: 'ticketTemplate'"></p>
 
             <script id="ticketTemplate" type="text/x-jquery-tmpl">
                 {{if chosenTicket}}
-                You have chosen <b>${ chosenTicket().name }</b>
-                ($${ chosenTicket().price })
-                <button data-bind="click: resetTicket">Clear</button>
+                <dl>
+                    <dt> You have chosen: </dt>
+                    <dd><b>${ chosenTicket().name }</b> ($${ chosenTicket().price }) </dd>
+                    <dt>Departure:</dt>
+                    <dd>${ kendo.toString(kendo.parseDate(departure()), "MM/dd/yyyy") }</dd>
+                    <dt>Quantity:</dt>
+                    <dd>${ quantity() }</dd>
+                    <dt><button data-bind="click: resetTicket">Clear</button></dt>
+                </dl>
                 {{/if}}
             </script>
             <script>
@@ -52,12 +64,24 @@
                         { name: "First Class", price: 1199.99 }
                         ],
                         chosenTicket: ko.observable(),
-                        resetTicket: function() { this.chosenTicket(null) }
+                        resetTicket: function() { this.chosenTicket(null) },
+                        departure: ko.observable(new Date()),
+                        quantity: ko.observable(1)
                     };
 
                     ko.applyBindings(viewModel);
 
                     $("#ticket").kendoDropDownList().trigger("change");
+
+                    $("#quantity").kendoNumericTextBox({
+                        min: 1,
+                        format: "n0",
+                        precision: 0
+                    });
+
+                    var departure = $("#departure").kendoDatePicker().data("kendoDatePicker");
+
+                    departure.value(kendo.parseDate(departure.element.val()));
                 });
             </script>
         </div>
