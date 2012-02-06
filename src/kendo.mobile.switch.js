@@ -94,7 +94,7 @@
 
             that.constrain = width - handleWidth;
             that.snapPoint = width / 2 - handleWidth / 2;
-            that._animateBackground = that.background.is(":visible");
+            that._animateBackground = true; // that.background.is(":visible");
 
             checked = that.options.checked;
             if (checked === undefined) {
