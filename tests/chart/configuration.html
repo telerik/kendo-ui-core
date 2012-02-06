@@ -654,6 +654,117 @@
                     ok(typeof(chart.options.series[0].line) === "undefined");
                 });
 
+                test("verticalLine series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            verticalLine: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "verticalLine" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("verticalLine series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            verticalLine: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("verticalLine series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            verticalLine: { }
+                        },
+                        series: [{ type: "verticalLine" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].verticalLine) === "undefined");
+                });
+
+                test("area series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            area: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "area" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("area series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            area: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("area series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            area: { }
+                        },
+                        series: [{ type: "area" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].area) === "undefined");
+                });
+
+                test("verticalArea series defaults are applied", function() {
+                    createChart({
+                        seriesDefaults: {
+                            verticalArea: {
+                                width: 2
+                            }
+                        },
+                        series: [{ type: "verticalArea" }]
+                    });
+
+                    equal(chart.options.series[0].width, 2);
+                });
+
+                test("verticalArea series defaults are not applied to other series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            verticalArea: {
+                                width: 1
+                            }
+                        },
+                        series: [{ type: "bar" }]
+                    });
+
+                    notEqual(chart.options.series[0].width, 1);
+                });
+
+                test("verticalArea series defaults are not copied in series", function() {
+                    createChart({
+                        seriesDefaults: {
+                            verticalArea: { }
+                        },
+                        series: [{ type: "verticalArea" }]
+                    });
+
+                    ok(typeof(chart.options.series[0].verticalArea) === "undefined");
+                });
+
                 test("pie series defaults are applied", function() {
                     createChart({
                         seriesDefaults: {

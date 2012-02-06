@@ -5653,29 +5653,37 @@
             seriesLength = series.length,
             seriesType,
             seriesDefaults = options.seriesDefaults,
-            baseSeriesDefaults = deepExtend({}, options.seriesDefaults),
-            themeSeriesDefaults = themeOptions ? deepExtend({}, themeOptions.seriesDefaults) : {};
+            commonDefaults = deepExtend({}, options.seriesDefaults),
+            themeSeriesDefaults = themeOptions ? deepExtend({}, themeOptions.seriesDefaults) : {},
+            commonThemeDefaults = deepExtend({}, themeSeriesDefaults);
 
-        delete baseSeriesDefaults.bar;
-        delete baseSeriesDefaults.column;
-        delete baseSeriesDefaults.line;
-        delete baseSeriesDefaults.pie;
-        delete baseSeriesDefaults.area;
-        delete baseSeriesDefaults.scatter;
-        delete baseSeriesDefaults.scatterLine;
+        cleanupNestedSeriesDefaults(commonDefaults);
+        cleanupNestedSeriesDefaults(commonThemeDefaults);
 
         for (i = 0; i < seriesLength; i++) {
             seriesType = series[i].type || options.seriesDefaults.type;
 
             series[i] = deepExtend(
                 {},
-                themeSeriesDefaults,
+                commonThemeDefaults,
                 themeSeriesDefaults[seriesType],
                 { tooltip: options.tooltip },
-                baseSeriesDefaults,
+                commonDefaults,
                 seriesDefaults[seriesType],
                 series[i]);
         }
+    }
+
+    function cleanupNestedSeriesDefaults(seriesDefaults) {
+        delete seriesDefaults.bar;
+        delete seriesDefaults.column;
+        delete seriesDefaults.line;
+        delete seriesDefaults.verticalLine;
+        delete seriesDefaults.pie;
+        delete seriesDefaults.area;
+        delete seriesDefaults.verticalArea;
+        delete seriesDefaults.scatter;
+        delete seriesDefaults.scatterLine;
     }
 
     function applySeriesColors(options) {
