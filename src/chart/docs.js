@@ -813,7 +813,7 @@
          * @option {Boolean} [categoryAxis.majorGridLines.visible] <false> The visibility of the lines.
          * @option {String} [categoryAxis.color] Color to apply to all axis elements.
          * Individual color settings for line and labels take priority.
-         * @option {Boolean} [valueAxis.mirror] Mirrors the axis labels and ticks.
+         * @option {Boolean} [categoryAxis.mirror] Mirrors the axis labels and ticks.
          * If the labels are normally on the left side of the axis,
          * mirroring the axis will render them to the right.
          * @option {Object} [categoryAxis.line] Configures the axis line.
