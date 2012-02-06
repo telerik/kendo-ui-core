@@ -10,7 +10,7 @@
         transitions = support.transitions,
         scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
-        hasZoom = (typeof document.documentElement.style.zoom !== "undefined"),
+        hasZoom = (typeof document.documentElement.style.zoom !== "undefined") && $.browser.msie,
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
         cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
