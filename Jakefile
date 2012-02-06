@@ -133,7 +133,7 @@ task("cdn", ["clean", "merge-scripts"], function() {
 // Helpers ====================================================================
 function buildDocs(sitefinity_path) {
     var mappings = {
-            "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"]
+            // "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"]
         },
         sections = ["description", "configuration", "methods", "events"];
 
@@ -205,17 +205,15 @@ function buildDocs(sitefinity_path) {
 
     sitefinity = false; //create global variable
     if (sitefinity_path) {
-        outputPath = sitefinity_path;
+        params[0] = sitefinity_path;
         sitefinity = true;
     }
-
-    params[0] = params[0] + outputPath;
 
     var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
 
     var sourceFiles = fs.readdirSync(SOURCE_PATH)
         .filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } )
-        .filter(function(file) { return file.indexOf("mobile") > -1; });
+        .filter(function(file) { return file.indexOf("mobile") === -1; });
 
     for (var i = 0; i < sourceFiles.length; i++) {
         params.push(path.join(SOURCE_PATH, sourceFiles[i]));
