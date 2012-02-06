@@ -877,3 +877,43 @@
     .border-radius(4px);
 }
 
+.km-loader
+{
+    top: 30%;
+    left: 20%;
+    width: 150px;
+    opacity: .85;
+    padding: 30px 30px;
+    position: absolute;
+    background-color: black;
+    z-index: 100;
+}
+
+.km-loader h1
+{
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.km-loader .km-loading
+{
+    -webkit-animation: km-spin 1s infinite linear;
+    display: block;
+    margin: 0 auto;
+    background: white;
+    width: 35px;
+    height: 35px;
+}
+
+@-webkit-keyframes km-spin
+{
+    from
+    {
+        -webkit-transform: rotate(0deg);
+    }
+    to
+    {
+        -webkit-transform: rotate(360deg);
+    }
+}
