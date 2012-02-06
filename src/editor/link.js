@@ -1,23 +1,21 @@
-(function($) {
+(function($, undefined) {
 
-// Imports ================================================================
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
-    textNodes = RangeUtils.textNodes;
+    Command = Editor.Command,
+    Tool = Editor.Tool,
+    InlineFormatter = Editor.InlineFormatter,
+    textNodes = RangeUtils.textNodes,
+    registerTool = Editor.EditorUtils.registerTool;
 
 var LinkFormatFinder = Class.extend({
-    init: function() {
-        
-    },
-
     findSuitable: function (sourceNode) {
         return dom.parentOfType(sourceNode, ['a']);
     }
-
 });
 
 var LinkFormatter = Class.extend({
@@ -45,10 +43,9 @@ var LinkFormatter = Class.extend({
             formatter.apply(nodes);
         }
     }
-
 });
 
-var UnlinkCommand = Class.extend({
+var UnlinkCommand = Command.extend({
     init: function(options) {
         options.formatter = {
             toggle : function(range) {
@@ -63,6 +60,7 @@ var UnlinkCommand = Class.extend({
 var LinkCommand = Command.extend({
     init: function(options) {
         var cmd = this;
+        cmd.options = options;
         Command.fn.init.call(cmd, options);
         cmd.attributes = null;
         cmd.async = true;
@@ -83,20 +81,20 @@ var LinkCommand = Command.extend({
         var self = this;
 
         function apply(e) {
-            var href = $('#t-editor-link-url', dialog.element).val();
+            var href = $('#k-editor-link-url', dialog.element).val();
 
             if (href && href != 'http://') {
                 self.attributes = { href: href };
 
-                var title = $('#t-editor-link-title', dialog.element).val();
+                var title = $('#k-editor-link-title', dialog.element).val();
                 if (title)
                     self.attributes.title = title;
 
-                var text = $('#t-editor-link-text', dialog.element).val();
+                var text = $('#k-editor-link-text', dialog.element).val();
                 if (text !== initialText)
                     self.attributes.innerHTML = text;
 
-                var target = $('#t-editor-link-target', dialog.element).is(':checked');
+                var target = $('#k-editor-link-target', dialog.element).is(':checked');
                 if (target)
                     self.attributes.target = '_blank';
 
@@ -120,53 +118,55 @@ var LinkCommand = Command.extend({
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var dialog = $t.window.create($.extend({}, this.editor.dialogOptions, {
+        var dialog = $t.window.create($.extend({}, this.editor.options.dialogOptions, {
             title: "Insert link",
             html: new $.telerik.stringBuilder()
-                .cat('<div class="t-editor-dialog">')
+                .cat('<div class="k-editor-dialog">')
                     .cat('<ol>')
-                        .cat('<li class="t-form-text-row"><label for="t-editor-link-url">Web address</label><input type="text" class="t-input" id="t-editor-link-url"/></li>')
-                        .catIf('<li class="t-form-text-row"><label for="t-editor-link-text">Text</label><input type="text" class="t-input" id="t-editor-link-text"/></li>', shouldShowText)
-                        .cat('<li class="t-form-text-row"><label for="t-editor-link-title">Tooltip</label><input type="text" class="t-input" id="t-editor-link-title"/></li>')
-                        .cat('<li class="t-form-checkbox-row"><input type="checkbox" id="t-editor-link-target"/><label for="t-editor-link-target">Open link in new window</label></li>')
+                        .cat('<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>')
+                        .catIf('<li class="k-form-text-row"><label for="k-editor-link-text">Text</label><input type="text" class="k-input" id="k-editor-link-text"/></li>', shouldShowText)
+                        .cat('<li class="k-form-text-row"><label for="k-editor-link-title">Tooltip</label><input type="text" class="k-input" id="k-editor-link-title"/></li>')
+                        .cat('<li class="k-form-checkbox-row"><input type="checkbox" id="k-editor-link-target"/><label for="k-editor-link-target">Open link in new window</label></li>')
                     .cat('</ol>')
-                    .cat('<div class="t-button-wrapper">')
-                        .cat('<button class="t-dialog-insert t-button">Insert</button>')
+                    .cat('<div class="k-button-wrapper">')
+                        .cat('<button class="k-dialog-insert k-button">Insert</button>')
                         .cat('&nbsp;or&nbsp;')
-                        .cat('<a href="#" class="t-dialog-close t-link">Close</a>')
+                        .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
                     .cat('</div>')
                 .cat('</div>')
                 .string(),
             onClose: close
         }))
             .hide()
-            .find('.t-dialog-insert').click(apply).end()
-            .find('.t-dialog-close').click(close).end()
-            .find('.t-form-text-row input').keydown(function (e) {
+            .find('.k-dialog-insert').click(apply).end()
+            .find('.k-dialog-close').click(close).end()
+            .find('.k-form-text-row input').keydown(function (e) {
                 if (e.keyCode == 13)
                     apply(e);
                 else if (e.keyCode == 27)
                     close(e);
             }).end()
             // IE < 8 returns absolute url if getAttribute is not used
-            .find('#t-editor-link-url').val(a ? a.getAttribute('href', 2) : 'http://').end()
-            .find('#t-editor-link-text').val(nodes.length > 0 ? (nodes.length == 1 ? nodes[0].nodeValue : nodes[0].nodeValue + nodes[1].nodeValue) : '').end()
-            .find('#t-editor-link-title').val(a ? a.title : '').end()
-            .find('#t-editor-link-target').attr('checked', a ? a.target == '_blank' : false).end()
+            .find('#k-editor-link-url').val(a ? a.getAttribute('href', 2) : 'http://').end()
+            .find('#k-editor-link-text').val(nodes.length > 0 ? (nodes.length == 1 ? nodes[0].nodeValue : nodes[0].nodeValue + nodes[1].nodeValue) : '').end()
+            .find('#k-editor-link-title').val(a ? a.title : '').end()
+            .find('#k-editor-link-target').attr('checked', a ? a.target == '_blank' : false).end()
             .show()
             .data('tWindow')
             .center();
 
         if (shouldShowText && nodes.length > 0)
-            initialText = $('#t-editor-link-text', dialog.element).val();
+            initialText = $('#k-editor-link-text', dialog.element).val();
 
-        $('#t-editor-link-url', dialog.element).focus().select();
+        $('#k-editor-link-url', dialog.element).focus().select();
     },
 
     redo: function () {
-        var range = this.lockRange(true);
-        this.formatter.apply(range, this.attributes);
-        this.releaseRange(range);
+        var that = this,
+            range = that.lockRange(true);
+
+        that.formatter.apply(range, that.attributes);
+        that.releaseRange(range);
     }
 
 });
@@ -180,12 +180,12 @@ var UnlinkTool = Tool.extend({
 
     initialize: function($ui) {
         $ui.attr('unselectable', 'on')
-           .addClass('t-state-disabled');
+           .addClass('k-state-disabled');
     },
 
     update: function ($ui, nodes) {
-        $ui.toggleClass('t-state-disabled', !this.finder.isFormatted(nodes))
-            .removeClass('t-state-hover');
+        $ui.toggleClass('k-state-disabled', !this.finder.isFormatted(nodes))
+            .removeClass('k-state-hover');
     }
 });
 
@@ -196,5 +196,8 @@ extend(kendo.ui.Editor, {
     LinkCommand: LinkCommand,
     UnlinkTool: UnlinkTool
 });
+
+registerTool("createLink", new Tool({ key: 'K', ctrl: true, command: LinkCommand}));
+registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true}));
 
 })(jQuery);

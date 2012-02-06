@@ -4,11 +4,14 @@
     var kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
+        formats = Editor.fn.options.formats,
         Tool = Editor.Tool,
-        dom = Editor.dom,
+        FormatTool = Editor.FormatTool,
+        dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
-        extend = $.extend;
-
+        extend = $.extend,
+        registerTool = Editor.EditorUtils.registerTool,
+        registerFormat = Editor.EditorUtils.registerFormat;
 
     var InlineFormatFinder = Class.extend({
         init: function(format) {
@@ -23,7 +26,7 @@
 
             for (var node = parentNode.firstChild; node; node = node.nextSibling) {
                 if (node != referenceNode) {
-                    if (node.className == 't-marker') {
+                    if (node.className == 'k-marker') {
                         markerCount++;
                     } else if (node.nodeType == 3) {
                         textNodesCount++;
@@ -33,7 +36,7 @@
                 }
             }
 
-            if (markerCount > 1 && parentNode.firstChild.className == 't-marker' && parentNode.lastChild.className == 't-marker') {
+            if (markerCount > 1 && parentNode.firstChild.className == 'k-marker' && parentNode.lastChild.className == 'k-marker') {
                 // full node selection
                 return 0;
             } else {
@@ -45,7 +48,7 @@
             if (!skip && this.numberOfSiblings(sourceNode) > 0)
                 return null;
 
-            return dom.parentOfType(sourceNode, format[0].tags);
+            return dom.parentOfType(sourceNode, this.format[0].tags);
         },
 
         findFormat: function (sourceNode) {
@@ -113,7 +116,7 @@
                 if (formatNode)
                     dom.attr(formatNode, this.attributes);
                 else
-                    formatNode = wrap(node);
+                    formatNode = this.wrap(node);
 
                 formatNodes.push(formatNode);
             }
@@ -154,7 +157,7 @@
                 var node = nodes.pop();
                 var last = nodes[nodes.length - 1];
 
-                if (node.previousSibling && node.previousSibling.className == 't-marker') {
+                if (node.previousSibling && node.previousSibling.className == 'k-marker') {
                     last.appendChild(node.previousSibling);
                 }
 
@@ -339,7 +342,7 @@
 
     var ColorTool = Tool.extend({
         init: function(options) {
-            Tool.fn.init.call(colorTool, options);
+            Tool.fn.init.call(this, options);
 
             this.options = options;
             this.format = [{ tags: dom.inlineElements }];
@@ -399,12 +402,12 @@
             list.value(this.finder.getFormat(nodes));
         },
 
-        init: function($ui, initOptions) {
+        initiliaze: function($ui, initOptions) {
             var editor = initOptions.editor;
         
             $ui.tSelectBox({
                 data: editor['style'],
-                title: editor.localization.style,
+                title: editor.options.localization.style,
                 onItemCreate: function (e) {
                     var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
                 
@@ -428,5 +431,33 @@
         ColorTool: ColorTool,
         StyleTool: StyleTool
     });
+
+    registerTool("style", new Editor.StyleTool());
+
+    registerFormat("bold", [ { tags: ['strong'] }, { tags: ['span'], attr: { style: { fontWeight: 'bold'}} } ]);
+    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}));
+
+    registerFormat("italic", [ { tags: ['em'] }, { tags: ['span'], attr: { style: { fontStyle: 'italic'}} } ]);
+    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}));
+
+    registerFormat("underline", [ { tags: ['span'], attr: { style: { textDecoration: 'underline'}} } ]);
+    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}));
+
+    registerFormat("strikethrough", [ { tags: ['del'] }, { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} } ]);
+    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough}));
+
+    registerFormat("superscript", [ { tags: ['sup'] } ]);
+    registerTool("superscript", new InlineFormatTool({format: formats.superscript}));
+
+    registerFormat("subscript", [ { tags: ['sub'] } ]);
+    registerTool("subscript", new InlineFormatTool({format: formats.subscript}));
+
+    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}));
+
+    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'}));
+
+    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}));
+
+    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}));
 
 })(jQuery);

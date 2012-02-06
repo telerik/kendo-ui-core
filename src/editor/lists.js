@@ -7,16 +7,18 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
+    Command = Editor.Command,
+    FormatTool = Editor.FormatTool,
     BlockFormatFinder = Editor.BlockFormatFinder,
-    textNodes = RangeUtils.textNodes;
+    textNodes = RangeUtils.textNodes,
+    registerTool = Editor.EditorUtils.registerTool;
 
 var ListFormatFinder = BlockFormatFinder.extend({
     init: function(tag) {
-        var finder = this;
-        finder.tag = tag;
-        var tags = finder.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
+        this.tag = tag;
+        var tags = this.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
 
-        BlockFormatFinder.fn.init.call(finder, [{ tags: tags}]);
+        BlockFormatFinder.fn.init.call(this, [{ tags: tags}]);
     },
 
     isFormatted: function (nodes) {
@@ -54,10 +56,10 @@ var ListFormatFinder = BlockFormatFinder.extend({
 
 var ListFormatter = Class.extend({
     init: function(tag, unwrapTag) {
-        var formatter = this;
-        formatter.finder = new ListFormatFinder(tag);
-        formatter.tag = tag;
-        formatter.unwrapTag = unwrapTag;
+        var that = this;
+        that.finder = new ListFormatFinder(tag);
+        that.tag = tag;
+        that.unwrapTag = unwrapTag;
     },
 
     wrap: function(list, nodes) {
@@ -111,7 +113,7 @@ var ListFormatter = Class.extend({
     },
 
     suitable: function (candidate, nodes) {
-        if (candidate.className == "t-marker") {
+        if (candidate.className == "k-marker") {
             var sibling = candidate.nextSibling;
 
             if (sibling && dom.isBlock(sibling)) {
@@ -125,7 +127,7 @@ var ListFormatter = Class.extend({
             }
         }
 
-        return containsAny(candidate, nodes) || dom.isInline(candidate) || candidate.nodeType == 3;
+        return this.containsAny(candidate, nodes) || dom.isInline(candidate) || candidate.nodeType == 3;
     },
 
     split: function (range) {
@@ -176,7 +178,7 @@ var ListFormatter = Class.extend({
         for (var i = 0; i < childNodes.length; i++) {
             var child = childNodes[i];
             var nodeName = dom.name(child);
-            if (suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
+            if (this.suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
 
                 if (formatNode && (nodeName == 'ul' || nodeName == 'ol')) {
                     // merging lists
@@ -202,7 +204,7 @@ var ListFormatter = Class.extend({
             dom.changeTag(formatNode, tag);
 
         var prev = formatNode.previousSibling;
-        while (prev && (prev.className == "t-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) prev = prev.previousSibling;
+        while (prev && (prev.className == "k-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) prev = prev.previousSibling;
 
         // merge with previous list
         if (prev && dom.name(prev) == tag) {
@@ -214,7 +216,7 @@ var ListFormatter = Class.extend({
         }
 
         var next = formatNode.nextSibling;
-        while (next && (next.className == "t-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) next = next.nextSibling;
+        while (next && (next.className == "k-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) next = next.nextSibling;
 
         // merge with next list
         if (next && dom.name(next) == tag) {
@@ -276,7 +278,8 @@ var ListFormatter = Class.extend({
     },
 
     toggle: function (range) {
-        var nodes = textNodes(range),
+        var that = this,
+            nodes = textNodes(range),
             ancestor = range.commonAncestorContainer;
 
         if (!nodes.length) {
@@ -290,11 +293,11 @@ var ListFormatter = Class.extend({
             }
         }
             
-        if (this.finder.isFormatted(nodes)) {
-            this.split(range);
-            this.remove(nodes);
+        if (that.finder.isFormatted(nodes)) {
+            that.split(range);
+            that.remove(nodes);
         } else {
-            this.apply(nodes);
+            that.apply(nodes);
         }
     }
 
@@ -303,16 +306,14 @@ var ListFormatter = Class.extend({
 var ListCommand = Command.extend({
     init: function(options) {
         this.options = options;
-        var cmd = this;
-        Command.fn.init.call(cmd, options);
+        Command.fn.init.call(this, options);
     }
 });
 
 var ListTool = FormatTool.extend({
     init: function(options) {
         this.options = options;
-        var tool = this;
-        FormatTool.fn.init.call(tool, extend(options, {
+        FormatTool.fn.init.call(this, extend(options, {
             finder: new ListFormatFinder(options.tag)
         }));
     },
@@ -328,5 +329,8 @@ extend(kendo.ui.Editor, {
     ListCommand: ListCommand,
     ListTool: ListTool
 });
+
+registerTool("insertUnorderedList", new ListTool({tag:'ul'}));
+registerTool("insertOrderedList", new ListTool({tag:'ol'}));
 
 })(jQuery);

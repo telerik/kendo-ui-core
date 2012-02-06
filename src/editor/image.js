@@ -1,19 +1,20 @@
-(function($) {
+(function($, undefined) {
 
 // Imports ================================================================
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
-    RangeUtils = Editor.RangeUtils;
+    registerTool = Editor.EditorUtils.registerTool,
+    RangeUtils = Editor.RangeUtils
+    Command = Editor.Command;
 
 var ImageCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        Command.fn.init.call(cmd, options);
+        Command.fn.init.call(this, options);
 
-        cmd.async = true;
-        cmd.attributes = null;
+        this.async = true;
+        this.attributes = null;
     },
 
     insertImage: function(img, range) {
@@ -41,23 +42,20 @@ var ImageCommand = Command.extend({
 
     redo: function () {
         var range = this.lockRange();
-        if (!insertImage(RangeUtils.image(range), range))
+        if (!this.insertImage(RangeUtils.image(range), range))
             this.releaseRange(range);
     },
 
     exec: function () {
-        var range = this.lockRange();
-
-        var applied = false;
-
-        var img = RangeUtils.image(range);
-
-        var self = this;
+        var self = this,
+            range = self.lockRange(),
+            applied = false,
+            img = RangeUtils.image(range);
 
         function apply(e) {
             self.attributes = {
-                src: $('#t-editor-image-url', dialog.element).val(),
-                alt: $('#t-editor-image-title', dialog.element).val()
+                src: $('#k-editor-image-url', dialog.element).val(),
+                alt: $('#k-editor-image-title', dialog.element).val()
             };
 
             applied = insertImage(img, range);
@@ -82,23 +80,23 @@ var ImageCommand = Command.extend({
 //        
         function activate() {  
 //            if (showBrowser) {
-//                new $t.imageBrowser($(this).find(".t-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.localization }));
+//                new $t.imageBrowser($(this).find(".k-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.options.localization }));
 //            }
         }        
         
-        var dialog = $t.window.create($.extend({ width: 750 }, this.editor.dialogOptions, {
+        var dialog = $t.window.create(extend({ width: 750 }, this.editor.options.dialogOptions, {
             title: "Insert image",
             html: new $.telerik.stringBuilder()
-                        .cat('<div class="t-editor-dialog">')                        
-                            .catIf('<div class="t-image-browser"></div>', showBrowser)
+                        .cat('<div class="k-editor-dialog">')                        
+                            .catIf('<div class="k-image-browser"></div>', showBrowser)
                             .cat('<ol>')
-                                .cat('<li class="t-form-text-row"><label for="t-editor-image-url">Web address</label><input type="text" class="t-input" id="t-editor-image-url"/></li>')
-                                .cat('<li class="t-form-text-row"><label for="t-editor-image-title">Tooltip</label><input type="text" class="t-input" id="t-editor-image-title"/></li>')
+                                .cat('<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>')
+                                .cat('<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>')
                             .cat('</ol>')
-                            .cat('<div class="t-button-wrapper">')
-                                .cat('<button class="t-dialog-insert t-button">Insert</button>')
+                            .cat('<div class="k-button-wrapper">')
+                                .cat('<button class="k-dialog-insert k-button">Insert</button>')
                                 .cat('&nbsp;or&nbsp;')
-                                .cat('<a href="#" class="t-dialog-close t-link">Close</a>')
+                                .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
                             .cat('</div>')
                         .cat('</div>')
                     .string(),
@@ -106,22 +104,22 @@ var ImageCommand = Command.extend({
             onActivate: activate
         }))
         .hide()
-        .find('.t-dialog-insert').click(apply).end()
-        .find('.t-dialog-close').click(close).end()
-        .find('.t-form-text-row input').keydown(function (e) {
+        .find('.k-dialog-insert').click(apply).end()
+        .find('.k-dialog-close').click(close).end()
+        .find('.k-form-text-row input').keydown(function (e) {
             if (e.keyCode == 13)
                 apply(e);
             else if (e.keyCode == 27)
                 close(e);
         }).end()                
-        //.toggleClass("t-imagebrowser", showBrowser)
+        //.toggleClass("k-imagebrowser", showBrowser)
         // IE < 8 returns absolute url if getAttribute is not used
-        .find('#t-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
-        .find('#t-editor-image-title').val(img ? img.alt : '').end()
+        .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
+        .find('#k-editor-image-title').val(img ? img.alt : '').end()
         .show()
         .data('tWindow').center();
 
-        $('#t-editor-image-url', dialog.element).focus().select();
+        $('#k-editor-image-url', dialog.element).focus().select();
     }
 
 });
@@ -129,5 +127,7 @@ var ImageCommand = Command.extend({
 extend(kendo.ui.Editor, {
     ImageCommand: ImageCommand
 });
+
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand }));
 
 })(jQuery);

@@ -36,7 +36,7 @@ if ($.browser.msie && parseInt($.browser.version) >= 8) {
             while (node = node.nextSibling) {
                 if (node.nodeType == 3 && prev.nodeType == 3) {
                     node.nodeValue = prev.nodeValue + node.nodeValue;
-                    dom.remove(prev);
+                    Dom.remove(prev);
                 }
                 prev = node;
             }
@@ -94,7 +94,7 @@ var Dom = {
         var newNode = node.cloneNode(false);
         node.deleteData(offset, node.length);
         newNode.deleteData(0, offset);
-        dom.insertAfter(newNode, node);
+        Dom.insertAfter(newNode, node);
     },
 
     attrEquals: function(node, attributes) {
@@ -115,14 +115,14 @@ var Dom = {
     },
 
     blockParentOrBody: function(node) {
-        return dom.parentOfType(node, blockElements) || node.ownerDocument.body;
+        return Dom.parentOfType(node, blockElements) || node.ownerDocument.body;
     },
 
     blockParents: function(nodes) {
         var blocks = [];
 
         for (var i = 0, len = nodes.length; i < len; i++) {
-            var block = dom.parentOfType(nodes[i], dom.blockElements);
+            var block = Dom.parentOfType(nodes[i], Dom.blockElements);
             if (block && $.inArray(block, blocks) < 0)
                 blocks.push(block);
         }
@@ -137,6 +137,7 @@ var Dom = {
     normalize: normalize,
     blockElements: blockElements,
     inlineElements: inlineElements,
+    empty: empty,
     fillAttrs: fillAttrs,
 
     toHex: function (color) {
@@ -162,7 +163,7 @@ var Dom = {
         
     significantChildNodes: function(node) {
         return $.grep(node.childNodes, function(child) {
-            return child.nodeType != 3 || !dom.isWhitespace(child);
+            return child.nodeType != 3 || !Dom.isWhitespace(child);
         });
     },
         
@@ -173,18 +174,18 @@ var Dom = {
         var result = null;
             
         for (var child = node.lastChild; child; child = child.previousSibling)
-            if (result = dom.lastTextNode(child))
+            if (result = Dom.lastTextNode(child))
                 return result;
                 
         return result;
     },
 
     is: function (node, nodeName) {
-        return dom.name(node) == nodeName;
+        return Dom.name(node) == nodeName;
     },
         
     isMarker: function(node) {
-        return node.className == 't-marker';
+        return node.className == 'k-marker';
     },
         
     isWhitespace: function(node) {
@@ -192,15 +193,15 @@ var Dom = {
     },
         
     isBlock: function(node) {
-        return block[dom.name(node)];
+        return block[Dom.name(node)];
     },
 
     isEmpty: function(node) {
-        return empty[dom.name(node)];
+        return empty[Dom.name(node)];
     },
         
     isInline: function(node) {
-        return inline[dom.name(node)];
+        return inline[Dom.name(node)];
     },
         
     scrollTo: function (node) {
@@ -231,13 +232,13 @@ var Dom = {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
                 if (node.nodeValue.replace(/\ufeff/g, '').length == 0)
-                    dom.remove(node);
-                if (dom.isWhitespace(node))
-                    dom.insertBefore(node, parent);
-            } else if (node.className != 't-marker') {
-                dom.trim(node);
-                if (node.childNodes.length == 0 && !dom.isEmpty(node))
-                    dom.remove(node);
+                    Dom.remove(node);
+                if (Dom.isWhitespace(node))
+                    Dom.insertBefore(node, parent);
+            } else if (node.className != 'k-marker') {
+                Dom.trim(node);
+                if (node.childNodes.length == 0 && !Dom.isEmpty(node))
+                    Dom.remove(node);
             }
         }
 
@@ -247,17 +248,17 @@ var Dom = {
     parentOfType: function (node, tags) {
         do {
             node = node.parentNode;
-        } while (node && !(dom.ofType(node, tags)));
+        } while (node && !(Dom.ofType(node, tags)));
 
         return node;
     },
 
     ofType: function (node, tags) {
-        return $.inArray(dom.name(node), tags) >= 0;
+        return $.inArray(Dom.name(node), tags) >= 0;
     },
 
     changeTag: function (referenceElement, tagName) {
-        var newElement = dom.create(referenceElement.ownerDocument, tagName);
+        var newElement = Dom.create(referenceElement.ownerDocument, tagName);
         var attributes = referenceElement.attributes;
 
         for (var i = 0; i < attributes.length; i++) {
@@ -278,13 +279,13 @@ var Dom = {
         while (referenceElement.firstChild)
             newElement.appendChild(referenceElement.firstChild);
 
-        dom.insertBefore(newElement, referenceElement);
-        dom.remove(referenceElement);
+        Dom.insertBefore(newElement, referenceElement);
+        Dom.remove(referenceElement);
         return newElement;
     },
 
     wrap: function (node, wrapper) {
-        dom.insertBefore(wrapper, node);
+        Dom.insertBefore(wrapper, node);
         wrapper.appendChild(node);
         return wrapper;
     },
@@ -298,14 +299,14 @@ var Dom = {
     },
 
     create: function (document, tagName, attributes) {
-        return dom.attr(document.createElement(tagName), attributes);
+        return Dom.attr(document.createElement(tagName), attributes);
     },
 
     attr: function (element, attributes) {
         attributes = extend({}, attributes);
 
         if (attributes && 'style' in attributes) {
-            dom.style(element, attributes.style);
+            Dom.style(element, attributes.style);
             delete attributes.style;
         }
         return extend(element, attributes);
@@ -328,7 +329,7 @@ var Dom = {
     },
 
     inlineStyle: function(document, name, attributes) {
-        var span = dom.create(document, name, attributes);
+        var span = Dom.create(document, name, attributes);
         
         document.body.appendChild(span);
                 

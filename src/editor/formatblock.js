@@ -5,9 +5,14 @@ var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
+    formats = Editor.fn.options.formats,
     dom = Editor.Dom,
     Command = Editor.Command,
+    Tool = Editor.Tool,
+    FormatTool = Editor.FormatTool,
     EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool,
+    registerFormat = EditorUtils.registerFormat,
     RangeUtils = Editor.RangeUtils;
 
 var BlockFormatFinder = Class.extend({
@@ -128,10 +133,10 @@ var BlockFormatter = Class.extend({
     apply: function (nodes) {
         var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : this.finder.findSuitable(nodes);
 
-        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), format) : format[0];
+        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), this.format) : this.format[0];
 
         var tag = formatToApply.tags[0];
-        var attributes = extend({}, formatToApply.attr, values);
+        var attributes = extend({}, formatToApply.attr, this.values);
 
         if (formatNodes.length)
             for (var i = 0; i < formatNodes.length; i++)
@@ -240,8 +245,8 @@ var FormatBlockTool = Tool.extend({
         var editor = initOptions.editor;
         
         $ui.tSelectBox({
-            data: editor.formatBlock,
-            title: editor.localization.formatBlock,
+            data: editor.options.formatBlock,
+            title: editor.options.localization.formatBlock,
             onItemCreate: function (e) {
                 var tagName = e.dataItem.Value;
                 e.html = '<' + tagName + ' unselectable="on" style="margin: .3em 0;' + dom.inlineStyle(editor.document, tagName) + '">' + e.dataItem.Text + '</' + tagName + '>';
@@ -263,5 +268,19 @@ extend(kendo.ui.Editor, {
     BlockFormatTool: BlockFormatTool,
     FormatBlockTool: FormatBlockTool
 });
+
+registerTool("formatBlock", new FormatBlockTool());
+
+registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: 'left'}} }, { tags: ['img'], attr: { style: { 'float': 'left'}} } ]);
+registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft}));
+
+registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: 'center'}} }, { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} } ]);
+registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter}));
+
+registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: 'right'}} }, { tags: ['img'], attr: { style: { 'float': 'right'}} } ]);
+registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight}));
+
+registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: 'justify'}} } ]);
+registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull}));
 
 })(jQuery);

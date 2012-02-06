@@ -1,4 +1,4 @@
-(function($) {
+(function($, undefined) {
 
 // Imports ================================================================
 var doc = document,
@@ -163,7 +163,7 @@ var Serializer = {
 
                 attr(node);
 
-                if (empty[tagName]) {
+                if (dom.empty[tagName]) {
                     result.push(' />');
                 } else {
                     result.push('>');

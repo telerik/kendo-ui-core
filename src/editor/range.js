@@ -546,21 +546,21 @@ var RangeEnumerator = Class.extend({
 
 var RestorePoint = Class.extend({
     init: function(range) {
-        this.rootNode = RangeUtils.documentFromRange(range);
-        this.body = this.rootNode.body;
-        this.html = this.body.innerHTML;
-        this.range = range;
+        var that = this;
+        that.range = range;
+        that.rootNode = RangeUtils.documentFromRange(range);
+        that.body = that.rootNode.body;
+        that.html = that.body.innerHTML;
 
-        this.startContainer = nodeToPath(range.startContainer);
-        this.endContainer = nodeToPath(range.endContainer);
-        this.startOffset = offset(range.startContainer, range.startOffset);
-        this.endOffset = offset(range.endContainer, range.endOffset);
-
-        range[start ? 'setStart' : 'setEnd'](node, offset);
+        that.startContainer = that.nodeToPath(range.startContainer);
+        that.endContainer = that.nodeToPath(range.endContainer);
+        that.startOffset = that.offset(range.startContainer, range.startOffset);
+        that.endOffset = that.offset(range.endContainer, range.endOffset);
     },
 
     index: function(node) {
-        var result = 0, lastType = node.nodeType;
+        var result = 0,
+            lastType = node.nodeType;
 
         while (node = node.previousSibling) {
             var nodeType = node.nodeType;
@@ -586,7 +586,7 @@ var RestorePoint = Class.extend({
         var path = [];
             
         while (node != this.rootNode) {
-            path.push(index(node));
+            path.push(this.index(node));
             node = node.parentNode;
         }
 
@@ -606,13 +606,15 @@ var RestorePoint = Class.extend({
             node = node.nextSibling;
         }
 
+        range[start ? 'setStart' : 'setEnd'](node, offset);
     },
 
     toRange: function () {
-        var result = this.range.cloneRange();
+        var that = this,
+            result = that.range.cloneRange();
 
-        toRangePoint(result, true, this.startContainer, this.startOffset);
-        toRangePoint(result, false, this.endContainer, this.endOffset);
+        that.toRangePoint(result, true, that.startContainer, that.startOffset);
+        that.toRangePoint(result, false, that.endContainer, that.endOffset);
 
         return result;
     }
@@ -623,7 +625,7 @@ var Marker = Class.extend({
     addCaret: function (range) {
         var caret = this.caret;
 
-        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 't-marker' });
+        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
         range.insertNode(caret);
         range.selectNode(caret);
         return caret;
@@ -671,7 +673,7 @@ var Marker = Class.extend({
         var rangeBoundary = range.cloneRange();
 
         rangeBoundary.collapse(false);
-        this.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 't-marker' });
+        this.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
         rangeBoundary.insertNode(this.end);
 
         rangeBoundary = range.cloneRange();
@@ -840,7 +842,7 @@ var RangeUtils = {
         var markers = [];
 
         new RangeIterator(range).traverse(function (node) {
-            if (node.className == 't-marker')
+            if (node.className == 'k-marker')
                 markers.push(node);
         });
 
