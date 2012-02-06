@@ -2084,6 +2084,7 @@
         _thead: function() {
             var that = this,
                 columns = that.columns,
+                hasDetails = that._hasDetails() && columns.length,
                 idx,
                 length,
                 html = "",
@@ -2105,7 +2106,7 @@
             }
 
             if (!tr.children().length) {
-                if (that._hasDetails() && columns.length) {
+                if (hasDetails) {
                     html += '<th class="k-hierarchy-cell">&nbsp;</th>';
                 }
 
@@ -2133,6 +2134,8 @@
                 }
 
                 tr.html(html);
+            } else if (hasDetails) {
+                tr.prepend('<th class="k-hierarchy-cell">&nbsp;</th>');
             }
 
             tr.find("th").addClass("k-header");
