@@ -226,7 +226,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ mirror: true });
+                        createCategoryAxis({ labels: { mirror: true } });
                     }
                 });
 
@@ -394,7 +394,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ mirror: true, isVertical: true });
+                        createCategoryAxis({ labels: { mirror: true }, isVertical: true });
                     }
                 });
 
@@ -691,7 +691,7 @@
                 // ------------------------------------------------------------
                 module("Category Axis / Horizontal / Mirrored / Title", {
                     setup: function() {
-                        createPlotArea(lineSeriesData, { categoryAxis: { mirror: true }});
+                        createPlotArea(lineSeriesData, { categoryAxis: { labels: { mirror: true } }});
                         titleBox = plotArea.axisX.title.box;
                     }
                 });
@@ -703,7 +703,7 @@
 
                 test("positioned left", function() {
                     createPlotArea(lineSeriesData, {
-                        categoryAxis: { mirror: true, title: { position: "left" }}
+                        categoryAxis: { labels: { mirror: true }, title: { position: "left" }}
                     });
 
                     titleBox = plotArea.axisX.title.box;
@@ -714,7 +714,7 @@
 
                 test("positioned right", function() {
                     createPlotArea(lineSeriesData, {
-                        categoryAxis: { mirror: true, title: { position: "right" }}
+                        categoryAxis: { labels: { mirror: true }, title: { position: "right" }}
                     });
 
                     titleBox = plotArea.axisX.title.box;
@@ -767,7 +767,7 @@
                 // ------------------------------------------------------------
                 module("Category Axis / Vertical / Mirrored / Title", {
                     setup: function() {
-                        createPlotArea(barSeriesData, { categoryAxis: { mirror: true }});
+                        createPlotArea(barSeriesData, { categoryAxis: { labels: { mirror: true } }});
                         titleBox = plotArea.axisY.title.box;
                     }
                 });
@@ -779,7 +779,7 @@
 
                 test("applied position bottom", function() {
                     createPlotArea(barSeriesData, {
-                        categoryAxis: { mirror: true, title: { position: "bottom" }}
+                        categoryAxis: { labels: { mirror: true }, title: { position: "bottom" }}
                     });
 
                     titleBox = plotArea.axisY.title.box;
@@ -790,7 +790,7 @@
 
                 test("applied position top", function() {
                     createPlotArea(barSeriesData, {
-                        categoryAxis: { mirror: true, title: { position: "top" }}
+                        categoryAxis: { labels: { mirror: true }, title: { position: "top" }}
                     });
 
                     titleBox = plotArea.axisY.title.box;

@@ -566,7 +566,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis.options.mirror = true;
+                        numericAxis.options.labels.mirror = true;
                         numericAxis.reflow(chartBox);
                     }
                 });
@@ -758,7 +758,9 @@
 
                         numericAxis = new Chart.NumericAxis(0, 1, {
                             isVertical: false,
-                            mirror: true
+                            labels: {
+                                mirror: true
+                            }
                         });
 
                         numericAxis.reflow(chartBox);
@@ -1140,7 +1142,7 @@
                 // ------------------------------------------------------------
                 module("Numeric Axis / Horizontal / Mirrored / Title", {
                     setup: function() {
-                        createPlotArea(barSeriesData, { valueAxis: { mirror: true } });
+                        createPlotArea(barSeriesData, { valueAxis: { labels: { mirror: true } } });
                         titleBox = plotArea.axisX.title.box;
                     }
                 });
@@ -1157,7 +1159,7 @@
 
                 test("positioned left", function() {
                     createPlotArea(barSeriesData, {
-                        valueAxis: { mirror: true, title: { position: "left" }}
+                        valueAxis: { labels: { mirror: true }, title: { position: "left" }}
                     });
 
                     titleBox = plotArea.axisX.title.box;
@@ -1168,7 +1170,7 @@
 
                 test("positioned right", function() {
                     createPlotArea(barSeriesData, {
-                        valueAxis: { mirror: true, title: { position: "right" }}
+                        valueAxis: { labels: { mirror: true }, title: { position: "right" }}
                     });
 
                     titleBox = plotArea.axisX.title.box;
@@ -1226,7 +1228,7 @@
                 // ------------------------------------------------------------
                 module("Numeric Axis / Vertical / Mirrored / Title", {
                     setup: function() {
-                        createPlotArea(lineSeriesData, { valueAxis: { mirror: true } });
+                        createPlotArea(lineSeriesData, { valueAxis: { labels: { mirror: true } } });
                         titleBox = plotArea.axisY.title.box;
                     }
                 });
@@ -1243,7 +1245,7 @@
 
                 test("positioned bottom", function() {
                     createPlotArea(lineSeriesData, {
-                        valueAxis: { mirror: true, title: { position: "bottom" }}
+                        valueAxis: { labels: { mirror: true }, title: { position: "bottom" }}
                     });
 
                     titleBox = plotArea.axisY.title.box;
@@ -1254,7 +1256,7 @@
 
                 test("positioned top", function() {
                     createPlotArea(lineSeriesData, {
-                        valueAxis: { mirror: true, title: { position: "top" }}
+                        valueAxis: { labels: { mirror: true }, title: { position: "top" }}
                     });
 
                     titleBox = plotArea.axisY.title.box;

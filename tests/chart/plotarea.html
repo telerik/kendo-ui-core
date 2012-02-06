@@ -241,16 +241,16 @@
                 test("stacked axes on the left are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.mirror);
-                    ok(!secondaryValueAxis.options.mirror);
+                    ok(!primaryValueAxis.options.labels.mirror);
+                    ok(!secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryValueAxis.options.mirror = true;
+                    primaryValueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.mirror);
+                    ok(primaryValueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -297,16 +297,16 @@
                 test("stacked axes on the right are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.mirror);
-                    ok(secondaryValueAxis.options.mirror);
+                    ok(primaryValueAxis.options.labels.mirror);
+                    ok(secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryValueAxis.options.mirror = true;
+                    primaryValueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.mirror);
+                    ok(!primaryValueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -344,16 +344,16 @@
                 test("stacked axes on the top are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.mirror);
-                    ok(secondaryValueAxis.options.mirror);
+                    ok(primaryValueAxis.options.labels.mirror);
+                    ok(secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryValueAxis.options.mirror = true;
+                    primaryValueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.mirror);
+                    ok(!primaryValueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -388,16 +388,16 @@
                 test("stacked axes on the bottom are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryValueAxis.options.mirror);
-                    ok(!secondaryValueAxis.options.mirror);
+                    ok(!primaryValueAxis.options.labels.mirror);
+                    ok(!secondaryValueAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryValueAxis.options.mirror = true;
+                    primaryValueAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryValueAxis.options.mirror);
+                    ok(primaryValueAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -1073,16 +1073,16 @@
                 test("stacked X axes on the top are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryXAxis.options.mirror);
-                    ok(secondaryXAxis.options.mirror);
+                    ok(primaryXAxis.options.labels.mirror);
+                    ok(secondaryXAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryXAxis.options.mirror = true;
+                    primaryXAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryXAxis.options.mirror);
+                    ok(!primaryXAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -1118,16 +1118,16 @@
                 test("stacked Y axes on the right are mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(primaryYAxis.options.mirror);
-                    ok(secondaryYAxis.options.mirror);
+                    ok(primaryYAxis.options.labels.mirror);
+                    ok(secondaryYAxis.options.labels.mirror);
                 });
 
                 test("mirroring inverts the mirror option", function() {
-                    primaryYAxis.options.mirror = true;
+                    primaryYAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryYAxis.options.mirror);
+                    ok(!primaryYAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -1160,16 +1160,16 @@
                 test("stacked X axes on the bottom are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryXAxis.options.mirror);
-                    ok(!secondaryXAxis.options.mirror);
+                    ok(!primaryXAxis.options.labels.mirror);
+                    ok(!secondaryXAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryXAxis.options.mirror = true;
+                    primaryXAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryXAxis.options.mirror);
+                    ok(primaryXAxis.options.labels.mirror);
                 });
 
                 // ------------------------------------------------------------
@@ -1204,16 +1204,16 @@
                 test("stacked Y axes on the left are not mirrored", function() {
                     plotArea.reflow(chartBox);
 
-                    ok(!primaryYAxis.options.mirror);
-                    ok(!secondaryYAxis.options.mirror);
+                    ok(!primaryYAxis.options.labels.mirror);
+                    ok(!secondaryYAxis.options.labels.mirror);
                 });
 
                 test("user set mirror option is not changed", function() {
-                    primaryYAxis.options.mirror = true;
+                    primaryYAxis.options.labels.mirror = true;
 
                     plotArea.reflow(chartBox);
 
-                    ok(primaryYAxis.options.mirror);
+                    ok(primaryYAxis.options.labels.mirror);
                 });
 
             })();
