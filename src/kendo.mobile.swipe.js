@@ -7,10 +7,17 @@
         MOVE = "move",
         END = "end",
         TAP = "tap",
-        START_EVENTS = "touchstart mousedown",
-        MOVE_EVENTS = "mousemove touchmove",
-        END_EVENTS = "mouseup mouseleave touchend touchcancel",
         SURFACE = $(document.documentElement);
+
+        if (kendo.support.touch) {
+            var START_EVENTS = "touchstart",
+                MOVE_EVENTS = "touchmove",
+                END_EVENTS = "touchend touchcancel";
+        } else {
+            var START_EVENTS = "mousedown",
+                MOVE_EVENTS = "mousemove",
+                END_EVENTS = "mouseup mouseleave";
+        }
 
     var SwipeAxis = Class.extend({
         start: function(location, timeStamp) {

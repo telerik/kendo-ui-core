@@ -64,24 +64,26 @@
                 triggerEvent("mouseup");
             });
 
-            test("raises start on first touchmove", 2, function(){
-                swipe.bind("start", function(e) {
-                    equal(e.x.location, 15);
-                    equal(e.y.location, 25);
+            asyncTest("resets velocity on direction change", 2, function(){
+                swipe.bind("end", function(e) {
+                    start();
+                    ok(e.x.velocity > 0);
+                    ok(e.y.velocity < 0);
                 });
 
-                triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
-                triggerTouchEvent("touchmove", [{pageX: 15, pageY: 25}]);
-            });
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
 
-            test("raises move on touchmove", 2, function(){
-                swipe.bind("move", function(e) {
-                    equal(e.x.delta, 10);
-                    equal(e.y.delta, 10);
-                });
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 1, pageY: 30});
+                }, 1);
 
-                triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
-                triggerTouchEvent("touchmove", [{pageX: 20, pageY: 30}]);
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 10, pageY: 20});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mouseup", {pageX: 10, pageY: 20});
+                }, 1);
             });
 
             test("passes delta on mousemove", 2, function(){
@@ -117,47 +119,6 @@
 
                 setTimeout(function() {
                     triggerEvent("mouseup", {pageX: 20, pageY: 0});
-                }, 1);
-            });
-
-            asyncTest("calculates velocity on touchend", 2, function(){
-                swipe.bind("end", function(e) {
-                    start();
-                    ok(e.x.velocity > 0);
-                    ok(e.y.velocity < 0);
-                });
-
-                triggerTouchEvent("touchstart", [{pageX: 10, pageY: 20}]);
-
-                setTimeout(function() {
-                    triggerTouchEvent("touchmove", [{pageX: 20, pageY: 10}]);
-                }, 1);
-
-                setTimeout(function() {
-                    triggerTouchEvent("touchend", [{pageX: 20, pageY: 0}]);
-                }, 1);
-            });
-
-
-            asyncTest("resets velocity on direction change", 2, function(){
-                swipe.bind("end", function(e) {
-                    start();
-                    ok(e.x.velocity > 0);
-                    ok(e.y.velocity < 0);
-                });
-
-                triggerEvent("mousedown", {pageX: 10, pageY: 20});
-
-                setTimeout(function() {
-                    triggerEvent("mousemove", {pageX: 1, pageY: 30});
-                }, 1);
-
-                setTimeout(function() {
-                    triggerEvent("mousemove", {pageX: 10, pageY: 20});
-                }, 1);
-
-                setTimeout(function() {
-                    triggerEvent("mouseup", {pageX: 10, pageY: 20});
                 }, 1);
             });
         </script>
