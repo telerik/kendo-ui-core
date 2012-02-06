@@ -3,8 +3,8 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>editable</title>
-        <link href="http://cdn.kendostatic.com/2011.3.1129/styles/kendo.common.min.css" rel="stylesheet" />
-        <link href="http://cdn.kendostatic.com/2011.3.1129/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2011.3.1129/styles/kendo.common.min.css" rel="stylesheet" />
+        <link href="http://cdn.kendostatic.com/2011.3.1129/styles/kendo.default.min.css" rel="stylesheet" />
         <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
@@ -12,8 +12,11 @@
         <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.filtermenu.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
@@ -52,9 +55,10 @@
                                 id: { field: "id", type: "number", nullable: true, defaultValue: 0 },
                                 foo: {
                                     field: "foo",
-                                    readonly: true
+                                    readonly: true,
+                                    type: "string"
                                 },
-                                bar: { field: "bar", validation: { required: true } },
+                                bar: { field: "bar", validation: { required: true }, type: "string" },
                                 date: { field: "date", type: "date" }
                             }
                         }
@@ -64,6 +68,7 @@
 
                 $("#grid").kendoGrid({
                     dataSource: dataSource,
+                    filterable: true,
                     pageable: true,
                     editable: true,
                     sortable: true,
@@ -71,7 +76,6 @@
                     scrollable: false,
                     navigatable: true,
                     selectable: false,
-                    //detailTemplate: "detail template",
                     toolbar: ["create", "cancel", "save"],
                     columns: [{field: "date", format: "{0:dd/MM/yyyy}"}, { title: "id's", field: "id", format: "{0:c}" }, "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
                 });
@@ -82,7 +86,6 @@
                     selectable: "cell",
                     scrollable: false,
                     groupable: true,
-                    //detailTemplate: "template",
                     pageable: true,
                     columns: ["id", "bar", "foo", { command: { name: "destroy", text: "delete"}, title: "delete" }]
                 });

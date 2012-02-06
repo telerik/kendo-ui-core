@@ -279,6 +279,14 @@
                 expression = that.dataSource.filter() || { filters:[] };
 
             expression.filters = $.grep(expression.filters, function(filter) {
+                if (filter.filters) {
+                    filter.filters = $.grep(filter.filters, function(expr) {
+                        return expr.field != that.field;
+                    });
+
+                    return filter.filters.length;
+                }
+
                 return filter.field != that.field;
             });
 

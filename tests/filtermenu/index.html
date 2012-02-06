@@ -340,6 +340,27 @@
                 equal(dataSource.filter(), null);
             });
 
+            test("clear removes two expression filter with multiple filtering", function() {
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                dataSource.filter({ value: "1", field: "bar" });
+
+                filterMenu.filter({
+                    filters: [
+                        { value: "1", field: "foo" },
+                        { value: "2", field: "foo" }
+                    ]
+                });
+
+                filterMenu.clear();
+
+                equal(dataSource.filter().filters.length, 1);
+                equal(dataSource.filter().filters[0].field, "bar");
+                equal(dataSource.filter().filters[0].value, "1");
+            });
+
             test("populates the first field value from the datasource", function() {
                 dataSource.filter( { field: "foo", value: "1" });
 
