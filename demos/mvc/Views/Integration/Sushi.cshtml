@@ -37,13 +37,13 @@
         </footer>
     </div>
 
-    <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default" data-init="initIndexView" data-show="showMenuView">
+    <div data-title="Kendo sushi" data-role="view" id="index" data-url="/" data-layout="default" data-init="initIndexView">
         <div data-role="content">
             <ul id="featured" class="item-list"></ul>
         </div>
     </div>
 
-    <div data-role="view" id="menu" data-layout="default" data-title="Menu" data-init="initMenuView" data-show="showMenuView">
+    <div data-role="view" id="menu" data-layout="default" data-title="Menu" data-init="initMenuView">
         <div data-role="content">
             <ul id="menuList" class="item-list"></ul>
         </div>
@@ -53,7 +53,7 @@
         <div data-role="content">
             <h2 id="total"></h2>
             <img src="@Url.Content("~/content/integration/sushi/images/sad.png")" id="empty-icon">
-            <a id="checkout" data-click="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
+            <a id="checkout" class="red-button" href="#done" data-role="button">Checkout</a>
             <ul id="cartList" class="item-list" data-style="inset"></ul>
         </div>
     </div>
@@ -90,7 +90,7 @@
         </div>
     </div>
 
-    <div data-role="view" id="details" data-transition="slide" data-layout="default" data-show="showDetailsView">
+    <div data-role="view" id="details" data-transition="slide" data-layout="default">
         <header data-role="header">
         <div data-role="navbar">
             <a data-role="backbutton" data-align="left">Back</a>
@@ -173,7 +173,6 @@
                 e.preventDefault();
             }
         }
-
         function removeItemFromList(e) {
             if (e.buttonName === "remove") {
                 cartDataSource.remove(e.dataItem);
@@ -182,15 +181,15 @@
             }
         }
 
-        function checkout() {
-            setTimeout(function () { cartDataSource.data([]) }, 400);
-        }
-
         function initCartView() {
             $("#cartList").kendoMobileListView({
                 dataSource: cartDataSource,
                 click: removeItemFromList,
                 template: $("#cartItemTemplate").text()
+            });
+
+            $("#checkout").data("kendoMobileButton").bind("click", function() {
+                setTimeout(function () { cartDataSource.data([]) }, 400);
             });
         }
 
@@ -210,26 +209,29 @@
             });
         }
 
-        function showDetailsView(e) {
-            var view = e;
-            ds.fetch(function() {
-                item = ds.get(view.params.id);
-                view.scrollerContent.html(itemDetailsTemplate(item));
-                kendo.mobile.enhance(e.content);
+        var app = new kendo.mobile.Application($(document.body), {
+            transition: "slide",
 
-                view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
-                    e.preventDefault();
-                    cartDataSource.add(item);
-                    view.content.find(".added").show();
-                });
-            });
-        }
+            viewShow: function(e) {
+                var view = e.view, viewID = view.element.attr("id"), item;
 
-        function showMenuView(e) {
-            e.content.find(".item-list").data("kendoMobileListView")._refresh();
-        }
+                if (viewID === "details") {
+                    ds.fetch(function() {
+                        item = ds.get(e.params.id);
+                        view.content.data("kendoMobileScroller").scrollElement.html(itemDetailsTemplate(item));
+                        kendo.mobile.enhance(view.content);
 
-        var app = new kendo.mobile.Application($(document.body), { transition: "slide" });
+                        view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
+                            e.preventDefault();
+                            cartDataSource.add(item);
+                            view.content.find(".added").show();
+                        });
+                    });
+                } else if (viewID === "index" || viewID === "menu") {
+                    view.content.find(".item-list").data("kendoMobileListView")._refresh();
+                }
+            }
+        });
     </script>
 </body>
 </html>

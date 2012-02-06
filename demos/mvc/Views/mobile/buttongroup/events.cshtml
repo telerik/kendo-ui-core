@@ -1,7 +1,7 @@
 <div data-role="view" id="buttongroup-events" data-init="mobileButtonGroupEventsInit" data-title="Player">
     <div class="photo">
     </div>
-    <ul id="button-group" data-role="buttongroup" data-index="3" data-select="selectButton">
+    <ul id="button-group" data-role="buttongroup" data-index="3">
        <li data-icon="rewind">
        </li>
        <li data-icon="play">
@@ -17,8 +17,12 @@
 </div>
 
 <script>
-    function selectButton() {
-        kendoConsole.log("Selected button: " + this.current().index());
+    function mobileButtonGroupEventsInit() {
+        $("#button-group")
+            .data("kendoMobileButtonGroup")
+            .bind("select", function() {
+                kendoConsole.log("Selected button: " + this.current().index());
+            });
     }
 </script>
 
