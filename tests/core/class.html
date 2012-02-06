@@ -110,6 +110,15 @@
                 equal(initArguments[1], "bar");
             });
 
+            test("copies array from prototype", function() {
+                var Ball = Class.extend( {
+                    colors: ["red", "green"]
+                });
+
+                var AnotherBall = Ball.extend();
+
+                ok($.isArray(AnotherBall.fn.colors));
+            });
       </script>
     </body>
 </html>
