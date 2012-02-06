@@ -1,277 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="close"><code>close</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Closes the drop-down list.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to instance of the Kendo UI ComboBoxvar combobox = $("#comboBox").data("kendoComboBox");combobox.close();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="enable"><code>enable</code></a> (enable)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Enables/disables the combobox widget</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to instance of the Kendo UI ComboBoxvar combobox = $("#comboBox").data("kendoComboBox");// disables the comboboxcombobox.enable(false);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>Desired state</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="open"><code>open</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Opens the drop-down list.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to instance of the Kendo UI ComboBoxvar combobox = $("#comboBox").data("kendoComboBox");combobox.open();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="search"><code>search</code></a> (word)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Filters dataSource using the provided parameter and rebinds drop-down list.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var combobox = $("#combobox").data("kendoComboBox");// Searches for item which has "In" in the name.combobox.search("In");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>word</code><span class="light fixedFont">: string</span> 
-                                
-                            </dt>
-                            <dd>The filter value.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="select"><code>select</code></a> (li)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Selects drop-down list item and sets the value and the text of the combobox.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var combobox = $("#combobox").data("kendoComboBox");// selects by jQuery objectcombobox.select(combobox.ul.children().eq(0));// selects by indexcombobox.select(1);// selects item if its text is equal to "test" using predicate functioncombobox.select(function(dataItem) {    return dataItem.text === "test";});</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>li</code><span class="light fixedFont">: jQueryObject | Number | Function</span> 
-                                
-                            </dt>
-                            <dd>LI element or index of the item or predicate function, which defines the item that should be selected.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="suggest"><code>suggest</code></a> (value)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Forces a suggestion onto the text of the ComboBox.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// note that this suggest is not the same as the configuration method// suggest which enables/disables auto suggesting for the ComboBox//// get a referenence to the Kendo UI ComboBoxvar combobox = $("#combobox").data("kendoComboBox");// force a suggestion to the item with the name "Inception"combobox.suggest("Inception");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: string</span> 
-                                
-                            </dt>
-                            <dd>Characters to force a suggestion.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="text"><code>text</code></a> (text)
-
-                    : <span class="type">String</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the text of the ComboBox.</div><div class="desc">The text of the combobox.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var combobox = $("#combobox").data("kendoComboBox");// get the text of the combobox.var text = combobox.text();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>text</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>The text to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">String</span> The text of the combobox.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="toggle"><code>toggle</code></a> (toggle)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Toggles the drop-down list between opened and closed state.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var combobox = $("#combobox").data("kendoComboBox");// toggles the open state of the drop-down list.combobox.toggle();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>toggle</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>Defines the whether to open/close the drop-down list.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="value"><code>value</code></a> (value)
-
-                    : <span class="type">String</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the value of the combobox. If the value is undefined, text of the data item will be used.</div><div class="desc">The value of the combobox.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var combobox = $("#combobox").data("kendoComboBox");// get the value of the combobox.var value = combobox.value();// set the value of the combobox.combobox.value("1"); //looks for item which has value "1"</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>The value to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">String</span> The value of the combobox.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-    </ul>
-

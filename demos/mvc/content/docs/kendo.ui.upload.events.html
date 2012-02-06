@@ -1,273 +1,0 @@
-
-
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="cancel"><code>cancel</code></a>
-        </div>
-        <div class="detailBody">
-            Fires when the upload has been cancelled while in progress.<p>Note: The cancel event fires only when the upload is in<a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.</p><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    cancel: onCancel});function onCancel(e) {    // Array with information about the uploaded files    var files = e.files;    // Process the Cancel event}</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>files</code>
-                            <span class="type">: Array</span> 
-                            
-                        </dt>
-                        <dd>List of the files that were uploaded or removed . Each file has:<ul>    <li>name</li>    <li>        extension - the file extension        inlcuding the leading dot - ".jpg", ".png", etc.     </li>    <li>size - the file size in bytes (null if not available)</li></ul></dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="complete"><code>complete</code></a>
-        </div>
-        <div class="detailBody">
-            Fires when all active uploads have completed either successfully or with errors.<p>Note: The complete event fires only when the upload is in<a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.</p><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    complete: onComplete});function onComplete(e) {    // The upload is now idle}</code></pre></div>
-
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="error"><code>error</code></a>
-        </div>
-        <div class="detailBody">
-            Fires when an upload / remove operation has failed.<p>Note: The error event fires only when the upload is in<a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.</p><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    error: onError});function onError(e) {    // Array with information about the uploaded files    var files = e.files;    if (e.operation == "upload") {        alert("Failed to uploaded " + files.length + " files");    }    // Suppress the default error message    e.preventDefault();}</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>files</code>
-                            <span class="type">: Array</span> 
-                            
-                        </dt>
-                        <dd>List of the files that were uploaded or removed . Each file has:<ul>    <li>name</li>    <li>        extension - the file extension        inlcuding the leading dot - ".jpg", ".png", etc.     </li>    <li>size - the file size in bytes (null if not available)</li></ul></dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>operation</code>
-                            <span class="type">: String</span> 
-                            
-                        </dt>
-                        <dd>- "upload" or "remove".</dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>XMLHttpRequest</code>
-                            <span class="type">: Object</span> 
-                            
-                        </dt>
-                        <dd>This is either the original XHR used for the operation or a stub containing:<ul>    <li>responseText</li>    <li>status</li>    <li>statusText</li></ul>Verify that this is an actual XHR before accessing any other fields.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="remove"><code>remove</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Fires when an uploaded file is about to be removed.Cancelling the event will prevent the remove.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    remove: onRemove});function onRemove(e) {    // Array with information about the removed files    var files = e.files;    // Process the Remove event    // Optionally cancel the remove operation by calling    // e.preventDefault()}</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>files</code>
-                            <span class="type">: Array</span> 
-                            
-                        </dt>
-                        <dd>List of the files that were uploaded or removed . Each file has:<ul>    <li>name</li>    <li>        extension - the file extension        inlcuding the leading dot - ".jpg", ".png", etc.     </li>    <li>size - the file size in bytes (null if not available)</li></ul></dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>data</code>
-                            <span class="type">: Object</span> 
-                            
-                        </dt>
-                        <dd>Optional object that will besent to the save handler in the form of key/value pairs.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="select"><code>select</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Fires when one or more files are selected.Cancelling the event will prevent the selection.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    select: onSelect});function onSelect(e) {    // Array with information about the uploaded files    var files = e.files;    if (files.length &gt; 5) {        alert("Too many files selected!");        e.preventDefault();    }}</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>files</code>
-                            <span class="type">: Array</span> 
-                            
-                        </dt>
-                        <dd>List of the selected files. Each file has:<ul>    <li>name</li>    <li>        extension - the file extension        inlcuding the leading dot - ".jpg", ".png", etc.     </li>    <li>size - the file size in bytes (null if not available)</li></ul></dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="success"><code>success</code></a>
-        </div>
-        <div class="detailBody">
-            Fires when an upload / remove operation has been completed successfully.<p>Note: The success event fires only when the upload is in<a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.</p><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    success: onSuccess});function onSuccess(e) {    // Array with information about the uploaded files    var files = e.files;    if (e.operation == "upload") {        alert("Successfully uploaded " + files.length + " files");    }}</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>files</code>
-                            <span class="type">: Array</span> 
-                            
-                        </dt>
-                        <dd>List of the files that were uploaded or removed . Each file has:<ul>    <li>name</li>    <li>        extension - the file extension        inlcuding the leading dot - ".jpg", ".png", etc.     </li>    <li>size - the file size in bytes (null if not available)</li></ul></dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>operation</code>
-                            <span class="type">: String</span> 
-                            
-                        </dt>
-                        <dd>"upload" or "remove".</dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>response</code>
-                            <span class="type">: String</span> 
-                            
-                        </dt>
-                        <dd>the response object returned by the server.</dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>XMLHttpRequest</code>
-                            <span class="type">: Object</span> 
-                            
-                        </dt>
-                        <dd>This is either the original XHR used for the operation or a stub containing:<ul>    <li>responseText</li>    <li>status</li>    <li>statusText</li></ul>Verify that this is an actual XHR before accessing any other fields.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="upload"><code>upload</code></a>
-        </div>
-        <div class="detailBody">
-            Fires when one or more files are about to be uploaded.Cancelling the event will prevent the upload.<p>Note: The upload event fires only when the upload is in<a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.</p><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#photos").kendoUpload({    // ...    upload: onUpload});function onUpload(e) {    // Array with information about the uploaded files    var files = e.files;    // Check the extension of each file and abort the upload if it is not .jpg    $.each(files, function() {        if (this.extension != ".jpg") {            alert("Only .jpg files can be uploaded")            e.preventDefault();        }    });}</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>files</code>
-                            <span class="type">: Array</span> 
-                            
-                        </dt>
-                        <dd>List of the files that will be uploaded. Each file has:<ul>    <li>name</li>    <li>        extension - the file extension        inlcuding the leading dot - ".jpg", ".png", etc.     </li>    <li>size - the file size in bytes (null if not available)</li></ul></dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>data</code>
-                            <span class="type">: Object</span> 
-                            
-                        </dt>
-                        <dd>Optional object that will besent to the save handler in the form of key/value pairs.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-

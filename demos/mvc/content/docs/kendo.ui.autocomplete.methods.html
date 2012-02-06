@@ -1,185 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="close"><code>close</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Closes the drop-down list.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the autocomplete widgetvar autocomplete = $("autocomplete").data("kendoAutoComplete");autocomplete.close();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="enable"><code>enable</code></a> (enable)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Enable/Disable the autocomplete widget.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the autocomplete widgetvar autocomplete = $("autocomplete").data("kendoAutoComplete");// disables the autocompleteautocomplete.enable(false);// enables the autocompleteautocomplete.enable(true);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>The argument, which defines whether to enable/disable the autocomplete.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="search"><code>search</code></a> (word)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Filters dataSource using the provided parameter and rebinds drop-down list.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the autocomplete widgetvar autocomplete = $("autocomplete").data("kendoAutoComplete");// Searches for item which has "Inception" in the name.autocomplete.search("Inception");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>word</code><span class="light fixedFont">: string</span> 
-                                
-                            </dt>
-                            <dd>The filter value.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="select"><code>select</code></a> (li)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Selects drop-down list item and sets the text of the autocomplete.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the autocomplete widgetvar autocomplete = $("autocomplete").data("kendoAutoComplete");// selects by jQuery objectautocomplete.select(autocomplete.ul.children().eq(0));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>li</code><span class="light fixedFont">: jQuery Object</span> 
-                                
-                            </dt>
-                            <dd>The LI element.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="suggest"><code>suggest</code></a> (value)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Forces a suggestion onto the text of the AutoComplete.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// note that this suggest is not the same as the configuration method// suggest which enables/disables auto suggesting for the AutoComplete//// get a referenence to the Kendo UI AutoCompletevar autoComplete = $("#autoComplete").data("kendoAutoComplete");// force a suggestion to the item with the name "Inception"autoComplete.suggest("Inception");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: string</span> 
-                                
-                            </dt>
-                            <dd>Characters to force a suggestion.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="value"><code>value</code></a> (value)
-
-                    : <span class="type">String</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the value of the autocomplete.</div><div class="desc">The value of the autocomplete.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the autocomplete widgetvar autocomplete = $("autocomplete").data("kendoAutoComplete");// get the text of the autocomplete.var value = autocomplete.value();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>The value to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">String</span> The value of the autocomplete.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-    </ul>
-

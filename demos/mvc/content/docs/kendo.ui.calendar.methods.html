@@ -1,259 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="max"><code>max</code></a> (value)
-
-                    : <span class="type">Date</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the max value of the calendar.</div><div class="desc">The max value of the calendar.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// get the max value of the calendar.var max = calendar.max();// set the max value of the calendar.calendar.max(new Date(2100, 0, 1));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date | String</span> 
-                                
-                            </dt>
-                            <dd>The max date to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Date</span> The max value of the calendar.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="min"><code>min</code></a> (value)
-
-                    : <span class="type">Date</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the min value of the calendar.</div><div class="desc">The min value of the calendar.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// get the min value of the calendar.var min = calendar.min();// set the min value of the calendar.calendar.min(new Date(1900, 0, 1));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date|String</span> 
-                                
-                            </dt>
-                            <dd>The min date to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Date</span> The min value of the calendar.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="navigate"><code>navigate</code></a> (value, view)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Navigates to view</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// navigate to the desired datecalendar.navigate(value, view);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date</span> 
-                                
-                            </dt>
-                            <dd>Desired date</dd>
-                        
-                            <dt>
-                                <code>view</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>Desired view</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="navigateDown"><code>navigateDown</code></a> (value)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Navigates to the lower view</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// navigate downcalendar.navigateDown(value);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date</span> 
-                                
-                            </dt>
-                            <dd>Desired date</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="navigateToFuture"><code>navigateToFuture</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Navigates to the future</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// navigate to futurecalendar.navigateToFuture();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="navigateToPast"><code>navigateToPast</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Navigates to the past</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// navigate to pastcalendar.navigateToPast();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="navigateUp"><code>navigateUp</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Navigates to the upper view</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");       // navigate upcalendar.navigateUp();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="value"><code>value</code></a> (value)
-
-                    : <span class="type">Date</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the value of the calendar.</div><div class="desc">The value of the calendar.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the calendar widgetvar calendar = $("#calendar").data("kendoCalendar");// get the value of the calendar.var value = calendar.value();// set the value of the calendar.calendar.value(new Date());</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date|String</span> 
-                                
-                            </dt>
-                            <dd>The date to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Date</span> The value of the calendar.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-    </ul>
-

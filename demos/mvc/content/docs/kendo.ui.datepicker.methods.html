@@ -1,208 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="close"><code>close</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Closes the calendar.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the datepicker widgetvar datePicker = $("#datePicker").data("kendoDatePicker");// close the datepickerdatePicker.close();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="enable"><code>enable</code></a> (enable)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Enable/Disable the datePicker widget.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the datepicker widgetvar datePicker = $("#datePicker").data("kendoDatePicker");// disables the datePickerdatePicker.enable(false);// enables the datePickerdatePicker.enable(true);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>The argument, which defines whether to enable/disable the datePicker.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="max"><code>max</code></a> (value)
-
-                    : <span class="type">Date</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the max value of the datePicker.</div><div class="desc">The max value of the datePicker.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the datepicker widgetvar datePicker = $("#datePicker").data("kendoDatePicker");// get the max value of the datePicker.var max = datePicker.max();// set the max value of the datePicker.datePicker.max(new Date(1900, 0, 1));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date | String</span> 
-                                
-                            </dt>
-                            <dd>The max date to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Date</span> The max value of the datePicker.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="min"><code>min</code></a> (value)
-
-                    : <span class="type">Date</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the min value of the datePicker.</div><div class="desc">The min value of the datePicker.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the datepicker widgetvar datePicker = $("#datePicker").data("kendoDatePicker");// get the min value of the datePicker.var min = datePicker.min();// set the min value of the datePicker.datePicker.min(new Date(1900, 0, 1));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date | String</span> 
-                                
-                            </dt>
-                            <dd>The min date to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Date</span> The min value of the datePicker.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="open"><code>open</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Opens the calendar.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the datepicker widgetvar datePicker = $("#datePicker").data("kendoDatePicker");// open the datepickerdatePicker.open();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="value"><code>value</code></a> (value)
-
-                    : <span class="type">Date</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the value of the datePicker.</div><div class="desc">The value of the datePicker.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the datepicker widgetvar datePicker = $("#datePicker").data("kendoDatePicker");// get the value of the datePicker.var value = datePicker.value();// set the value of the datePicker.datePicker.value("10/10/2000"); //parse "10/10/2000" date and selects it in the calendar.</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: Date | String</span> 
-                                
-                            </dt>
-                            <dd>The value to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Date</span> The value of the datePicker.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-    </ul>
-

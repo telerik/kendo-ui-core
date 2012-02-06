@@ -1,256 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="append"><code>append</code></a> (tab)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Appends a TabStrip item to the end of the tab list.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>tabStrip.append(    [{        text: "Item 1",        url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.    },    {        text: "Item 2",        content: "text"                             // Content for the content element    },    {        text: "Item 3",        contentUrl: "partialContent.html"           // From where to load the item content    },    {        text: "Item 4",        imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.    },    {        text: "Item 5",        spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.    }]);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>tab</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="contentElement"><code>contentElement</code></a> (itemIndex)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Returns the contentElement of a an item by its index.</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>itemIndex</code><span class="light fixedFont">: int</span> 
-                                
-                            </dt>
-                            <dd>Target tab index</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="enable"><code>enable</code></a> (element, enable)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Enables/disables TabStrip tab/s</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>element</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target element</dd>
-                        
-                            <dt>
-                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>Desired state</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="insertAfter"><code>insertAfter</code></a> (item, referenceTab)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Inserts a TabStrip tab after the specified referenceTab</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>tabStrip.insertAfter(    [{        text: "Item 1",        url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.    },    {        text: "Item 2",        content: "text"                             // Content for the content element    },    {        text: "Item 3",        contentUrl: "partialContent.html"           // From where to load the item content    },    {        text: "Item 4",        imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.    },    {        text: "Item 5",        spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.    }],    referenceItem);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>item</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.</dd>
-                        
-                            <dt>
-                                <code>referenceTab</code><span class="light fixedFont">: Item</span> 
-                                
-                            </dt>
-                            <dd>A reference tab to insert the new item after</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="insertBefore"><code>insertBefore</code></a> (item, referenceTab)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Inserts a TabStrip item before the specified referenceItem</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>tabStrip.insertBefore(    [{        text: "Item 1",        url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.    },    {        text: "Item 2",        content: "text"                             // Content for the content element    },    {        text: "Item 3",        contentUrl: "partialContent.html"           // From where to load the item content    },    {        text: "Item 4",        imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.    },    {        text: "Item 5",        spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.    }],    referenceItem);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>item</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.</dd>
-                        
-                            <dt>
-                                <code>referenceTab</code><span class="light fixedFont">: Item</span> 
-                                
-                            </dt>
-                            <dd>A reference tab to insert the new item before</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="reload"><code>reload</code></a> (element)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Reloads TabStrip tab/s with ajax request</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>element</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target tab element</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="remove"><code>remove</code></a> (element)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Removes the specified TabStrip item/s</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>tabStrip.remove("#Item1");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>element</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target item selector.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="select"><code>select</code></a> (element)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Selects the specified TabStrip tab/s. If called without arguments - returns the selected tab.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>tabStrip.select("#Item1");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>element</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>Target tab selector.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-    </ul>
-

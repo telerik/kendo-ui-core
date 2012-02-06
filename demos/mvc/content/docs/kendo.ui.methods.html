@@ -1,70 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="plugin"><code>plugin</code></a> (widget)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Helper method for writing new widgets.Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-* attribute.Also triggers the init event, when the widget has been created.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>function TextBox(element, options);kendo.ui.plugin(TextBox);// initialize a new TextBox for each input, with the given options object.$("input").kendoTextBox({ });// get the TextBox object and call the value API method$("input").data("kendoTextBox").value();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>widget</code><span class="light fixedFont">: <a href="symbols/kendo.ui.Widgetundefined">kendo.ui.Widget</a></span> 
-                                
-                            </dt>
-                            <dd>The widget function.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="progress"><code>progress</code></a> (container, toggle)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Shows an overlay with a loading message, indicating that an action is in progress.</div><div class="desc"></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>container</code><span class="light fixedFont">: jQueryObject</span> 
-                                
-                            </dt>
-                            <dd>The container that will hold the overlay</dd>
-                        
-                            <dt>
-                                <code>toggle</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>Whether the overlay should be shown or hidden</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-    </ul>
-

@@ -1,248 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="close"><code>close</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Closes the drop-down list.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown widgetvar dropdownList = $("#dropdownList").data("kendoDropDownList");// close the dropdowndropdownlist.close();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="enable"><code>enable</code></a> (enable)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Enables/disables the dropdownlist widget</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// disable the dropdown listdropdownlist.enable(false);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>Desired state</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="open"><code>open</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Opens the drop-down list.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// open the drop downdropdownlist.open();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="search"><code>search</code></a> (word)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Selects item, which starts with the provided parameter.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// Selects item which starts with "In".autocomplete.search("In");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>word</code><span class="light fixedFont">: string</span> 
-                                
-                            </dt>
-                            <dd>The search value.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="select"><code>select</code></a> (li)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Selects drop-down list item and sets the value and the text of the dropdownlist.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// selects by jQuery objectdropdownlist.select(dropdownlist.ul.children().eq(0));// selects by indexdropdownlist.select(1);// selects item if its text is equal to "test" using predicate functiondropdownlist.select(function(dataItem) {    return dataItem.text === "test";});</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>li</code><span class="light fixedFont">: jQueryObject | Number | Function</span> 
-                                
-                            </dt>
-                            <dd>LI element or index of the item or predicate function, which defines the item that should be selected.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="text"><code>text</code></a> (text)
-
-                    : <span class="type">String</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the text of the dropdownlist.</div><div class="desc">The text of the dropdownlist.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// get the text of the dropdownlist.var text = dropdownlist.text();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>text</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>The text to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">String</span> The text of the dropdownlist.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="toggle"><code>toggle</code></a> (toggle)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Toggles the drop-down list between opened and closed state.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// toggles the open state of the drop-down list.dropdownlist.toggle();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>toggle</code><span class="light fixedFont">: Boolean</span> 
-                                
-                            </dt>
-                            <dd>Defines the whether to open/close the drop-down list.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="value"><code>value</code></a> (value)
-
-                    : <span class="type">String</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/Sets the value of the dropdownlist. The value will not be set if there is no item with such value. If value is undefined, text of the data item is used.</div><div class="desc">The value of the dropdownlist.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get a reference to the dropdown listvar dropdownlist = $("#dropdownlist").data("kendoDropDownList");// get the value of the dropdownlist.var value = dropdownlist.value();// set the value of the dropdownlist.dropdownlist.value("1"); //looks for item which has value "1"</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>The value to set.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">String</span> The value of the dropdownlist.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-    </ul>
-

@@ -1,182 +1,0 @@
-
-
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="collapse"><code>collapse</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Triggered when an item of a PanelBar is collapsed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Attach collapse event handler duringinitialization; detach via unbind()</h4><pre class="code prettyprint"><code>// event handler for collapsevar onCollapse = function(e) {    // access the collapsed item via e.item (HTMLElement)};// attach collapse event handler during initializationvar panelBar = $("#panelBar").kendoPanelBar({    collapse: onCollapse});// detach collapse event handler via unbind()panelBar.data("kendoPanelBar").unbind("collapse", onCollapse);</code></pre></div><div class="code-sample"><h4 class="code-title">Attach collapse event handler via bind();detach via unbind()</h4><pre class="code prettyprint"><code>// event handler for collapsevar onCollapse = function(e) {    // access the collapsed item via e.item (HTMLElement)};// attach collapse event handler via bind()$("#panelBar").data("kendoPanelBar").bind("collapse", onCollapse);// detach collapse event handler via unbind()$("#panelBar").data("kendoPanelBar").unbind("collapse", onCollapse);</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>item</code>
-                            <span class="type">: Element</span> 
-                            
-                        </dt>
-                        <dd>The collapsing item of the PanelBar.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="contentLoad"><code>contentLoad</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Fires when content is fetched from an AJAX request.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#panelBar").kendoPanelBar({    contentLoad: function(e) {        // handle event    }});</code></pre></div><div class="code-sample"><h4 class="code-title">To set after intialization</h4><pre class="code prettyprint"><code>// get a reference to the panel barvar panelBar = $("#panelBar").data("kendoPanelBar");// bind the contentLoad eventpanelBar.bind("contentLoad", function(e) {    // handle event});</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>item</code>
-                            <span class="type">: Element</span> 
-                            
-                        </dt>
-                        <dd>The selected item</dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>contentElement</code>
-                            <span class="type">: Element</span> 
-                            
-                        </dt>
-                        <dd>The loaded content element</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="error"><code>error</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Fires when AJAX request results in an error.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>$("#panelBar").kendoPanelBar({    error: function(e) {        // handle event    }});</code></pre></div><div class="code-sample"><h4 class="code-title">To set after intialization</h4><pre class="code prettyprint"><code>// get a reference to the panel barvar panelBar = $("#panelBar").data("kendoPanelBar");// bind the error ajax eventpanelBar.bind("error", function(e) {    // handle event});</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>xhr</code>
-                            <span class="type">: jqXHR</span> 
-                            
-                        </dt>
-                        <dd>The jqXHR object used to load the content</dd>
-                        
-                    
-                        
-                        <dt>
-                            <code>status</code>
-                            <span class="type">: String</span> 
-                            
-                        </dt>
-                        <dd>The returned status.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="expand"><code>expand</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Triggered when an item of a PanelBar is expanded.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Attach expand event handler duringinitialization; detach via unbind()</h4><pre class="code prettyprint"><code>// event handler for expandvar onExpand = function(e) {    // access the expanded item via e.item (HTMLElement)};// attach expand event handler during initializationvar panelBar = $("#panelBar").kendoPanelBar({    expand: onExpand});// detach expand event handler via unbind()panelBar.data("kendoPanelBar").unbind("expand", onExpand);</code></pre></div><div class="code-sample"><h4 class="code-title">Attach expand event handler via bind();detach via unbind()</h4><pre class="code prettyprint"><code>// event handler for expandvar onExpand = function(e) {    // access the expanded item via e.item (HTMLElement)};// attach expand event handler via bind()$("#panelBar").data("kendoPanelBar").bind("expand", onExpand);// detach expand event handler via unbind()$("#panelBar").data("kendoPanelBar").unbind("expand", onExpand);</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>item</code>
-                            <span class="type">: Element</span> 
-                            
-                        </dt>
-                        <dd>The expanding item of the PanelBar.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-        <div class="detailHandle">
-            <div class="detailCollapsed"></div>
-            <a name="select"><code>select</code></a>
-        </div>
-        <div class="detailBody">
-            <div class="desc">Triggered when an item of a PanelBar is selected.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Attach select event handler duringinitialization; detach via unbind()</h4><pre class="code prettyprint"><code>// event handler for selectvar onSelect = function(e) {    // access the selected item via e.item (HTMLElement)};// attach select event handler during initializationvar panelBar = $("#panelBar").kendoPanelBar({    select: onSelect});// detach select event handler via unbind()panelBar.data("kendoPanelBar").unbind("select", onSelect);</code></pre></div><div class="code-sample"><h4 class="code-title">Attach select event handler via bind();detach via unbind()</h4><pre class="code prettyprint"><code>// event handler for selectvar onSelect = function(e) {    // access the selected item via e.item (HTMLElement)};// attach select event handler via bind()$("#panelBar").data("kendoPanelBar").bind("select", onSelect);// detach select event handler via unbind()$("#panelBar").data("kendoPanelBar").unbind("select", onSelect);</code></pre></div>
-
-            
-                <div class="details-list">
-                    <h4 class="details-title">Event data</h4>
-                    <dl>
-                    
-                        
-                    
-                        
-                        <dt>
-                            <code>item</code>
-                            <span class="type">: Element</span> 
-                            
-                        </dt>
-                        <dd>The selected item of the PanelBar.</dd>
-                        
-                    
-                    </dl>
-                </div>
-            
-
-            
-
-            
-        </div>
-    
-

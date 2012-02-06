@@ -1,403 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="append"><code>append</code></a> (nodeData, parentNode)
-
-                    
-                </div>
-                <div class="detailBody">
-                    Appends a node to a group of a <b>TreeView</b>.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// appends a new node with the text "new node" to the node with id="firstItem"treeview.append({ text: "new node" }, document.getElementById("firstItem"));// moves the node with id="secondNode" as a last child of the node with id="firstItem"treeview.append(document.getElementById("secondNode"), document.getElementById("firstItem"));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>nodeData</code><span class="light fixedFont">: NodeData</span> 
-                                
-                            </dt>
-                            <dd>JSON that specifies the node data, or a reference to a node in theTreeView.</dd>
-                        
-                            <dt>
-                                <code>parentNode</code><span class="light fixedFont">: Node</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd>The node that will contain the newly appended node. If notspecified, the new node will be appended to the root group of thetreeview.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="collapse"><code>collapse</code></a> (nodes)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Collapses nodes.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// collapse the node with id="firstItem"treeview.collapse(document.getElementById("firstItem"));// collapse all nodestreeview.collapse(".k-item");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>nodes</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>The nodes that are to be collapsed.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="enable"><code>enable</code></a> (nodes, enable)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Enables or disables nodes.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// disable the node with id="firstItem"treeview.enable(document.getElementById("firstItem"), false);// enable all nodestreeview.enable(".k-item");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>nodes</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>The nodes that are to be enabled/disabled.</dd>
-                        
-                            <dt>
-                                <code>enable</code><span class="light fixedFont">: Boolean</span> 
-                                (<i>optional, default: true</i>)
-                            </dt>
-                            <dd>Whether the nodes should be enabled or disabled.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="expand"><code>expand</code></a> (nodes)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Expands nodes.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// expands the node with id="firstItem"treeview.expand(document.getElementById("firstItem"));// expands all nodestreeview.expand(".k-item");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>nodes</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>The nodes that are to be expanded.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="findByText"><code>findByText</code></a> (text)
-
-                    : <span class="type">jQueryObject</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Searches the treeview for a node that has specific text.</div><div class="desc">All nodes that have the text.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// searches the treeview for the item that has the text "foo"var foundNode = treeview.findByText("foo");</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>text</code><span class="light fixedFont">: String</span> 
-                                
-                            </dt>
-                            <dd>The text that is being searched for.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">jQueryObject</span> All nodes that have the text.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="insertAfter"><code>insertAfter</code></a> (nodeData, referenceNode)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Inserts a node after another node.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// inserts a new node with the text "new node" after the node with id="firstItem"treeview.insertAfter({ text: "new node" }, document.getElementById("firstItem"));// moves the node with id="secondNode" after the node with id="firstItem"treeview.insertAfter(document.getElementById("secondNode"), document.getElementById("firstItem"));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>nodeData</code><span class="light fixedFont">: NodeData</span> 
-                                
-                            </dt>
-                            <dd>JSON that specifies the node data, or a reference to a node in the TreeView.</dd>
-                        
-                            <dt>
-                                <code>referenceNode</code><span class="light fixedFont">: Node</span> 
-                                
-                            </dt>
-                            <dd>The node that will be before the newly appended node.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="insertBefore"><code>insertBefore</code></a> (nodeData, referenceNode)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Inserts a node before another node.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// inserts a new node with the text "new node" before the node with id="firstItem"treeview.insertBefore({ text: "new node" }, document.getElementById("firstItem"));// moves the node with id="secondNode" before the node with id="firstItem"treeview.insertBefore(document.getElementById("secondNode"), document.getElementById("firstItem"));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>nodeData</code><span class="light fixedFont">: NodeData</span> 
-                                
-                            </dt>
-                            <dd>JSON that specifies the node data, or a reference to a node in the TreeView.</dd>
-                        
-                            <dt>
-                                <code>referenceNode</code><span class="light fixedFont">: Node</span> 
-                                
-                            </dt>
-                            <dd>The node that will be after the newly appended node.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="remove"><code>remove</code></a> (node)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Removes a node</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// remove the node with id="firstItem"treeview.remove(document.getElementById("firstItem"));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>node</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>The node that is to be removed.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="select"><code>select</code></a> (node)
-
-                    : <span class="type">Node</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Gets/sets the selected node.</div><div class="desc">The currently selected node</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// select the node with id="firstItem"treeview.select(document.getElementById("firstItem"));// get the currently selected nodevar selectedNode = treeview.select();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>node</code><span class="light fixedFont">: Selector</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd>The node that should be selected.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Node</span> The currently selected node</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="text"><code>text</code></a> (node)
-
-                    : <span class="type">String</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get the text of a node.</div><div class="desc">The text of the node.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// get the text of the node with id="firstItem"var nodeText = treeview.text(document.getElementById("firstItem"));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>node</code><span class="light fixedFont">: Selector</span> 
-                                
-                            </dt>
-                            <dd>The node that you need the text for.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">String</span> The text of the node.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="toggle"><code>toggle</code></a> (node)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Toggles a node between expanded and collapsed state.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var treeview = $("#treeview").data("kendoTreeView");// toggle the node with id="firstItem"treeview.toggle(document.getElementById("firstItem"));</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>node</code><span class="light fixedFont">: jQueryObject</span> 
-                                
-                            </dt>
-                            <dd>The node that should be toggled.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-    </ul>
-

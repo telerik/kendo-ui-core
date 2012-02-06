@@ -1,795 +1,0 @@
-
-
-    <ul class="methodDetail" id="MethodDetail">
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="add"><code>add</code></a> (model)
-
-                    : <span class="type">Object</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Adds a new Model instance to the DataSource</div><div class="desc">The Model instance which has been added</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var model = kendo.data.Model.extend({    id: "orderId",    fields: {        name: "customerName",        description: "orderDescription",        address: "customerAddress"    }});// add a new model item to the data source.  If a model has not been declared as above, a new// model instance will be created for you.dataSource.add({ name: "John Smith", description: "Product Description", address: "123 1st Street" });</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>model</code><span class="light fixedFont">: Object</span> 
-                                
-                            </dt>
-                            <dd>Either a Model instance or raw object from which the Model will be created</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Object</span> The Model instance which has been added</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="aggregate"><code>aggregate</code></a> (val)
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get current aggregate descriptors or applies aggregates to the data.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.aggregate({ field: "orderId", aggregate: "sum" });</code></pre></div><div class="desc">Current aggregate descriptors</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>val</code><span class="light fixedFont">: Object|Array</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd><undefined> Aggregate(s) to be applied to the data.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Current aggregate descriptors</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="aggregates"><code>aggregates</code></a> ()
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get result of aggregates calculation</div><div class="desc">Aggregates result</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var aggr = dataSource.aggregates();</code></pre></div>
-
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Aggregates result</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="at"><code>at</code></a> (index)
-
-                    : <span class="type">Object</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Returns the raw data record at the specified index</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// returns the 4th item in the collectionvar order = dataSource.at(3);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>index</code><span class="light fixedFont">: Number</span> 
-                                
-                            </dt>
-                            <dd>The zero-based index of the data record</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Object</span> </dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="cancelChanges"><code>cancelChanges</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Cancel the changes made to the DataSource after the last sync. Any changes currently existing in the modelwill be discarded.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// we have updated 2 items and deleted 1. All of those changes will be discarded.dataSource.cancelChanges();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="data"><code>data</code></a> (value)
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get data returned from the transport</div><div class="desc">Array of items</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var data = dataSource.data();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>value</code>
-                                
-                            </dt>
-                            <dd></dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Array of items</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="fetch"><code>fetch</code></a> (callback)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Fetches data using the current filter/sort/group/paging information.If data is not available or remote operations are enabled data is requested through the transport,otherwise operations are executed over the available data.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.fetch();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>callback</code>
-                                
-                            </dt>
-                            <dd></dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="filter"><code>filter</code></a> (val)
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    Get current filters or filter the data.<p><i>Supported filter operators/aliases are</i>:<div class="details-list">    <dl>        <dt><b>Equal To</b></dt>        <dd>"eq", "==", "isequalto", "equals", "equalto", "equal"</dd>        <dt><b>Not Equal To</b></dt>        <dd>"neq", "!=", "isnotequalto", "notequals", "notequalto", "notequal", "ne"</dd>        <dt><b>Less Then</b></dt>        <dd>"lt", "<", "islessthan", "lessthan", "less"</dd>        <dt><b>Less Then or Equal To</b></dt>        <dd> "lte", "<=", "islessthanorequalto", "lessthanequal", "le"</dd>        <dt><b>Greater Then</b></dt>        <dd> "gt", ">", "isgreaterthan", "greaterthan", "greater"</dd>        <dt><b>Greater Then or Equal To</b></dt>        <dd>"gte", ">=", "isgreaterthanorequalto", "greaterthanequal", "ge"</dd>        <dt><b>Starts With</b></dt>        <dd>"startswith"</dd>        <dt><b>Ends With</b></dt>        <dd>"endswith"</dd>        <dt><b>Contains</b></dt>        <dd>"contains", "substringof"</dd>    </dl></div></p><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.filter({ field: "orderId", operator: "eq", value: 10428 });dataSource.filter([     { field: "orderId", operator: "neq", value: 42 },     { field: "unitPrice", operator: "ge", value: 3.14 }]);</code></pre></div><div class="desc">Current filter descriptors</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>val</code><span class="light fixedFont">: Object|Array</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd><undefined> Filter(s) to be applied to the data.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Current filter descriptors</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="get"><code>get</code></a> (id)
-
-                    : <span class="type">Object</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Retrieves a Model instance by given id.</div><div class="desc">Model instance if found</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var order = dataSource.get(1); // retrieves the "order" model item with an id of 1</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>id</code><span class="light fixedFont">: Number</span> 
-                                
-                            </dt>
-                            <dd>The id of the model to be retrieved</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Object</span> Model instance if found</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="group"><code>group</code></a> (val)
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get current group descriptors or group the data.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.group({ field: "orderId" });</code></pre></div><div class="desc">Current grouping descriptors</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>val</code><span class="light fixedFont">: Object|Array</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd><undefined> Group(s) to be applied to the data.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Current grouping descriptors</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="insert"><code>insert</code></a> (index, model)
-
-                    : <span class="type">Object</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Inserts a new Model instance to the DataSource.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var model = kendo.data.Model.extend({    id: "orderId",    fields: {        name: "customerName",        description: "orderDescription",        address: "customerAddress"    }});// insert a new model item at the very front of the collectiondataSource.insert(0, { name: "John Smith", description: "Product Description", address: "123 1st Street" });</code></pre></div><div class="desc">The Model instance which has been inserted</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>index</code><span class="light fixedFont">: Number</span> 
-                                
-                            </dt>
-                            <dd>Index at which the Model will be inserted</dd>
-                        
-                            <dt>
-                                <code>model</code><span class="light fixedFont">: Object</span> 
-                                
-                            </dt>
-                            <dd>Either a Model instance or raw object from which the Model will be created</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Object</span> The Model instance which has been inserted</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="page"><code>page</code></a> (val)
-
-                    : <span class="type">Number</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get current page index or request a page with specified index.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.page(2);</code></pre></div><div class="desc">Current page index</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>val</code><span class="light fixedFont">: Number</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd><undefined> The index of the page to be retrieved</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Number</span> Current page index</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="pageSize"><code>pageSize</code></a> (val)
-
-                    : <span class="type">Number</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get current pageSize or request a page with specified number of records.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.pageSize(25);</code></pre></div><div class="desc">Current page size</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>val</code><span class="light fixedFont">: Number</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd><undefined> The of number of records to be retrieved.</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Number</span> Current page size</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="query"><code>query</code></a> (options)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Executes a query over the data. Available operations are paging, sorting, filtering, grouping.If data is not available or remote operations are enabled, data is requested through the transport.Otherwise operations are executed over the available data.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// create a view containing at most 20 records, taken from the// 5th page and sorted ascending by orderId field.dataSource.query({ page: 5, pageSize: 20, sort: { field: "orderId", dir: "asc" } });// moves the view to the first page returning at most 20 records// but without particular ordering.dataSource.query({ page: 1, pageSize: 20 });</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>options</code><span class="light fixedFont">: Object</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd>Contains the settings for the operations. Note: If setting for previous operation is omitted, this operation is not applied to the resulting view</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="read"><code>read</code></a> (data)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Read the data into the DataSource using the transport read definition</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var dataSource = new kendo.data.DataSource({    transport: {        read: "orders.json";    }});// the datasource will not contain any data until a read is calleddataSource.read();</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>data</code>
-                                
-                            </dt>
-                            <dd></dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="remove"><code>remove</code></a> (model)
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Remove given Model instance from the DataSource.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// get the model item with an id of 1 from the DataSourcevar itemToRemove = dataSource.get(1);// remove the item from the DataSourcedataSource.remove(itemToRemove);</code></pre></div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>model</code><span class="light fixedFont">: Object</span> 
-                                
-                            </dt>
-                            <dd>Model instance to be removed</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="sort"><code>sort</code></a> (val)
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get current sort descriptors or sorts the data.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>dataSource.sort({ field: "orderId", dir: "desc" });dataSource.sort([     { field: "orderId", dir: "desc" },     { field: "unitPrice", dir: "asc" }]);</code></pre></div><div class="desc">Current sort descriptors</div>
-
-                    
-                    <div class="details-list">
-                        <h4 class="details-title">Parameters</h4>
-                        <dl>
-                        
-                            <dt>
-                                <code>val</code><span class="light fixedFont">: Object | Array</span> 
-                                (<i>optional</i>)
-                            </dt>
-                            <dd><undefined> Sort options to be applied to the data</dd>
-                        
-                        </dl>
-                    </div>
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Current sort descriptors</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="sync"><code>sync</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    Synchronizes changes through the transport. Any pending CRUD operations will be sent to the server.<p>If the DataSource is in <b>batch</b> mode, only one call will be made for each type of operation.Otherwise, the DataSource will send one command per pending item change per change type.<div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>// we have deleted 2 items and updated 1. If not in batch mode, this will send three commands to the serverdataSource.sync();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="total"><code>total</code></a> ()
-
-                    
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get the total number of records</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var total = dataSource.total();</code></pre></div>
-
-                    
-
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="totalPages"><code>totalPages</code></a> ()
-
-                    : <span class="type">Number</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Get the number of available pages.</div><div class="desc">Number of available pages.</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var pages = dataSource.totalPages();</code></pre></div>
-
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Number</span> Number of available pages.</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-            <li>
-                <div class="detailHandle">
-                    <div class="detailCollapsed"></div>
-                    <a name="view"><code>view</code></a> ()
-
-                    : <span class="type">Array</span>
-                </div>
-                <div class="detailBody">
-                    <div class="desc">Returns a view of the data with operation such as in-memory sorting, paring, grouping and filtering are applied.To ensure that data is available this method should be use from within change event of the dataSource.</div><div class="desc">Array of items</div><div class="code-sample"><h4 class="code-title">Example</h4><pre class="code prettyprint"><code>var dataSource = new kendo.data.DataSource({    transport: {        read: "orders.json"    }    change: function(e) {       // create a template instance       var template = kendo.template($("#template").html());       // render a view by passing the data to a template         kendo.render(template, dataSource.view());             }});</code></pre></div>
-
-                    
-
-                    
-                        <dl class="detailList">
-                            
-
-                            
-
-                            
-                                <dt class="heading">Returns</dt>
-                                
-                                    <dd><span class="light fixedFont">Array</span> Array of items</dd>
-                                
-                            
-
-                            
-
-                            
-
-                        </dl>
-                    
-                </div>
-            </li>
-        
-    </ul>
-
