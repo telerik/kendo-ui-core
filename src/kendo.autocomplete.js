@@ -629,9 +629,11 @@
             var that = this,
                 element = that.element,
                 placeholder = that.options.placeholder,
-                value = element.val();
+                value;
 
             if (placeholder) {
+                value = element.val();
+
                 if (show === undefined) {
                     show = !value;
                 }
