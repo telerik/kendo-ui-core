@@ -91,41 +91,32 @@
             this.expressions = [];
         },
 
-        setOption: function(name, value) {
-            this.options[name] = value;
-        },
-
-        setTemplate: function(binding, template) {
-            var property = new TemplateProperty(this.target, template);
-
-            var expression = property.createExpression(binding);
-
-            this.expressions.push(expression);
-
-            expression.updateTarget(this.options);
-
-            binding.bind("change", function() {
-                expression.updateTarget();
-            });
+        setOptions: function(options) {
+            if (options.template) {
+                options.template = kendo.template(options.template);
+            }
+            $.extend(this.options, options);
         },
 
         setBinding: function(path, binding) {
             var property = this.createProperty(path),
                 that = this;
 
-            var expression = property.createExpression(binding);
+            if (property) {
+                var expression = property.createExpression(binding);
 
-            this.expressions.push(expression);
+                this.expressions.push(expression);
 
-            expression.updateTarget(this.options);
+                expression.updateTarget(this.options);
 
-            property.bind("change", function() {
-                expression.updateSource(that.options);
-            });
+                property.bind("change", function() {
+                    expression.updateSource(that.options);
+                });
 
-            binding.bind("change", function() {
-                expression.updateTarget(that.options);
-            });
+                binding.bind("change", function() {
+                    expression.updateTarget(that.options);
+                });
+            }
         },
 
         createProperty: function(path) {
@@ -135,6 +126,10 @@
 
             if (path == "visible") {
                 return new VisibleProperty(this.target, path);
+            }
+
+            if (path == "template") {
+                return new TemplateProperty(this.target, "innerHTML");
             }
 
             if (path == "enabled") {
@@ -185,17 +180,13 @@
             BindingTarget.fn.init.call(this, target);
         },
 
-        setTemplate: function(binding, template) {
-            this.template = template;
-        },
-
-        getTemplate: function() {
-            return this.template;
-        },
-
         createProperty: function(path) {
             if (path == "source") {
-                return new SourceProperty(this.target, path, this.getTemplate());
+                return new SourceProperty(this.target, "innerHTML");
+            }
+
+            if (path == "template") {
+                return null;
             }
 
             return BindingTarget.fn.createProperty.call(this, path);
@@ -205,20 +196,16 @@
     var SelectBindingTarget = SourceBindingTarget.extend( {
         init: function(target) {
             SourceBindingTarget.fn.init.call(this, target);
+
+            this.options.template = kendo.template("<option>#:data#</option>");
         },
 
-        getTemplate: function() {
-            var valueField = this.options.valueField;
-
-            if (this.template) {
-                return this.template;
+        setOptions: function(options) {
+            if (options.valueField && !options.template) {
+                options.template = kendo.template(kendo.format('<option value="#:{0}#">#:{0}#</option>', options.valueField));
             }
 
-            if (!valueField) {
-                return kendo.template("<option>#:data#</option>");
-            }
-
-            return kendo.template(kendo.format('<option value="#:{0}#">#:{0}#</option>', valueField));
+            BindingTarget.fn.setOptions.call(this, options);
         },
 
         createProperty: function(path) {
@@ -237,14 +224,14 @@
     var ListBindingTarget = SourceBindingTarget.extend( {
         init: function(target) {
             SourceBindingTarget.fn.init.call(this, target);
-            this.template = kendo.template("<li>#:data#</li>");
+            this.options.template = kendo.template("<li>#:data#</li>");
         }
     });
 
     var TableBindingTarget = SourceBindingTarget.extend( {
         init: function(target) {
             SourceBindingTarget.fn.init.call(this, target);
-            this.template = kendo.template("<tr><td>#:data#</td></tr>");
+            this.options.template = kendo.template("<tr><td>#:data#</td></tr>");
         },
 
         createProperty: function(path) {
@@ -256,7 +243,7 @@
                     this.target.appendChild(tbody);
                 }
 
-                return new SourceProperty(tbody, path, this.getTemplate());
+                return new SourceProperty(tbody, "innerHTML");
             }
 
             return SourceBindingTarget.fn.createProperty.call(this, path);
@@ -391,13 +378,16 @@
     });
 
     var TemplateProperty = Property.extend( {
-        init: function(target, template, options) {
-            Property.fn.init.apply(this, arguments);
-            this.template = template;
-        },
+        createExpression: function(binding) {
+            return new TemplateBindingExpression(this, binding);
+        }
+    });
 
-        set: function(value) {
-            this.target.innerHTML = this.template(value);
+    var TemplateBindingExpression = BindingExpression.extend( {
+        applyToTarget: function(options) {
+            var source = this.binding.get();
+            var template = options.template;
+            this.property.set(template(source));
         }
     });
 
@@ -558,48 +548,28 @@
     })
 
     var SourceProperty = Property.extend({
-        init: function(target, path, template) {
-            this.target = target;
-            this.path = path;
-            this.template = template;
-        },
-
-        set: function(value) {
-            var that = this,
-                idx,
-                length;
-
-            value.bind(0, "change", function(e) {
-                e.preventDefault();
-
-                if (e.action == "add") {
-                    that.add(e.index, e.items);
-                } else if (e.action == "remove") {
-                    that.remove(e.index, e.items);
-                }
-            });
-
-            this.target.innerHTML = kendo.render(this.template, value);
+        bindChildren: function(value) {
+            var idx, length;
 
             for (idx = 0, length = value.length; idx < length; idx++) {
                 bindElement(this.target.children[idx], value[idx]);
             }
         },
 
-        add: function(index, items) {
+        add: function(index, html) {
             var clone = this.target.cloneNode(), reference = this.target.children[index];
 
-            clone.innerHTML = kendo.render(this.template, items);
+            clone.innerHTML = html;
 
             while (clone.firstChild) {
                 this.target.insertBefore(clone.firstChild, reference);
             }
         },
 
-        remove: function(index, items) {
-            var idx, length;
+        remove: function(index, length) {
+            var idx;
 
-            for (idx = 0, length = items.length; idx < length; idx++) {
+            for (idx = 0; idx < length; idx++) {
                 this.target.removeChild(this.target.children[index]);
             }
         },
@@ -611,6 +581,30 @@
 
     var SourceBindingExpression = BindingExpression.extend({
         applyToTarget: function(options) {
+            var that = this;
+            var source = that.binding.get();
+            var template = options.template;
+            var property = that.property;
+
+            options.source = source;
+
+            source.bind(0, "change", function(e) {
+                e.preventDefault();
+
+                if (e.action == "add") {
+                    property.add(e.index, kendo.render(template, e.items));
+                } else if (e.action == "remove") {
+                    property.remove(e.index, e.items.length);
+                }
+            });
+
+            that.property.set(kendo.render(template, source));
+            that.property.bindChildren(source);
+        }
+    });
+
+    var DataSourceBindingExpression = BindingExpression.extend({
+        applyToTarget: function(options) {
             var source = this.binding.get();
 
             options.source = source;
@@ -618,14 +612,9 @@
             this.property.set(source);
         }
     });
-
     var WidgetBindingTarget = BindingTarget.extend( {
         init: function(target) {
             BindingTarget.fn.init.apply(this, arguments);
-        },
-
-        setTemplate: function(binding, template) {
-            this.target.template = template;
         },
 
         setOptions: function(options) {
@@ -633,17 +622,18 @@
         },
 
         createProperty: function(path) {
-            if (path == "source") {
-                return new DataSourceWidgetProperty(this.target);
+            if (path == "template") {
+                return null;
             }
 
-            if (path == "template") {
-                return new TemplateWidgetProperty(this.target, path, template);
+            if (path == "source") {
+                return new DataSourceWidgetProperty(this.target);
             }
 
             if (path == "value") {
                 return new WidgetValueProperty(this.target, path, this.target.options);
             }
+
             return new WidgetProperty(this.target, path);
         }
     });
@@ -682,23 +672,6 @@
             return new SelectValueExpression(this, binding);
         }
     });
-    var TemplateWidgetProperty = Class.extend({
-        init: function(target, path, template) {
-            this.target = target;
-            this.template = template;
-        },
-
-        bind: function() {
-        },
-
-        set: function(value) {
-            var target = this.target;
-            target.template = template;
-        },
-        createExpression: function(binding) {
-            return new BindingExpression(this, binding);
-        }
-    });
 
     var DataSourceWidgetProperty = Class.extend({
         init: function(target) {
@@ -712,16 +685,20 @@
             var widget = this.target;
 
             widget.bind("dataBound", function() {
-                var idx, length, view = widget.dataSource.view();
+                var idx,
+                    length,
+                    items = widget.items(),
+                    view = widget.dataSource.view();
+
                 for (idx = 0, length = view.length; idx < length; idx++) {
-                    bindElement(widget.ul[0].children[idx], view[idx]);
+                    bindElement(items[idx], view[idx]);
                 }
             });
 
             widget.dataSource.data(value);
         },
         createExpression: function(binding) {
-            return new SourceBindingExpression(this, binding);
+            return new DataSourceBindingExpression(this, binding);
         }
     });
 
@@ -758,6 +735,7 @@
             nodeName = element.nodeName.toLowerCase(),
             deep = true,
             value,
+            options = {},
             option,
             target;
 
@@ -768,8 +746,12 @@
                 target = bindingTargetForWidget("DropDownList", element);
             } else if (role === "combobox") {
                 target = bindingTargetForWidget("ComboBox", element);
+            } else if (role === "grid") {
+                target = bindingTargetForWidget("Grid", element);
             }
-        } else {
+        }
+
+        if (!target) {
             if (nodeName == "select") {
                 target = new SelectBindingTarget(element);
             } else if (nodeName == "table") {
@@ -783,30 +765,27 @@
 
         $.data(element, "kendoBindingTarget", target);
 
-        ["valueField"].forEach(function(path) {
+        ["valueField", "template"].forEach(function(path) {
             var option = element.getAttribute("data-" + path.toLowerCase());
 
             if (option) {
-                target.setOption(path, option);
+                if (path == "template") {
+                    option =  $("#" + option).html();
+                }
+                options[path] = option;
             }
         });
 
-        var template = element.getAttribute("data-template");
+        target.setOptions(options);
 
-        if (template) {
-            var binding = new Binding(source, "");
-
-            template = kendo.template($("#" + template).html());
-
-            target.setTemplate(binding, template);
-        }
-
-        ["text", "checked", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"].forEach(function(path) {
+        ["text", "checked", "template", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"].forEach(function(path) {
             var sourcePath = element.getAttribute("data-" + path);
 
             if (sourcePath) {
                 if (path == "source") {
                     deep = false;
+                } else if (path == "template") {
+                    sourcePath = "";
                 }
 
                 var binding = new Binding(source, sourcePath);

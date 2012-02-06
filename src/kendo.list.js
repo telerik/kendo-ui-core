@@ -57,6 +57,10 @@
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
         },
 
+        items: function() {
+            return this.ul[0].children;
+        },
+
         current: function(candidate) {
             var that = this;
 
