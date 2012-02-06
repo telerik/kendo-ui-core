@@ -159,6 +159,7 @@
 
         _move: function(e) {
             var that = this;
+            e.preventDefault();
             that._position(limitValue(that.position + e.x.delta, 0, that.constrain));
         },
 
