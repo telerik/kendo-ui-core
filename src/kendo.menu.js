@@ -345,7 +345,7 @@
             that._updateClasses();
 
             if (options.animation === false) {
-                options.animation = { open: { show: true, effects: {} }, close: { hide:true, effects: {} } };
+                options.animation = { open: { show: true, effects: {} }, close: { hide: true, effects: {} } };
             }
 
             that.nextItemZIndex = 100;
@@ -653,7 +653,8 @@
                             var root = li.parent().hasClass(MENU),
                                 parentHorizontal = root && horizontal,
                                 directions = parseDirection(direction, root),
-                                openEffects = "slideIn:" + getEffectDirection(direction, root);
+                                effects = options.animation.open.effects,
+                                openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root);
 
                             if (!popup) {
                                 popup = ul.kendoPopup({
@@ -663,8 +664,8 @@
                                     anchor: li,
                                     appendTo: li,
                                     animation: {
-                                        open: extend( { effects: openEffects }, that.options.animation.open),
-                                        close: that.options.animation.close
+                                        open: extend( { effects: openEffects }, options.animation.open),
+                                        close: options.animation.close
                                     }
                                 }).data(KENDOPOPUP);
                             } else {
