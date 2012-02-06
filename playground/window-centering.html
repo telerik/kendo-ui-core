@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <title>window</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.window.js"></script>
+        <link href="../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link href="../styles/kendo.blueopal.css" rel="stylesheet"/>
+
+        <style>
+            body {
+                    font: 12px/1.5 Tahoma,sans-serif;
+            }
+
+            #very-high-into-the-sky {
+                    height: 1200px;
+            }
+
+            .delete-button {
+                    position: fixed;
+                        top: 20px;
+                            right: 20px;
+            }
+
+            .delete-message {
+                    width: 12em;
+            }
+
+            .delete-cancel {
+                    color: #000;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="very-high-into-the-sky"></div>
+
+        <button class="delete-button k-button">Delete record</button>
+
+        <script id="delete-confirmation" type="text/x-kendo-template">
+            <p class="delete-message">Are you sure?</p>
+
+            <button class="delete-confirm k-button">Yes</button>
+            <a href="\#" class="delete-cancel">No</a>
+        </script>
+
+        <script>
+            var kendoWindow = $("<div />").kendoWindow({
+                title: "Confirm",
+                resizable: false,
+                modal: true,
+                // comment next line to see problem with zoomIn animation (ticket 502170)
+                content: {
+                    template: $("#delete-confirmation").html()
+                }
+            });
+
+            $(".delete-button").click(function(e) {
+                e.preventDefault();
+
+                kendoWindow.data("kendoWindow").center().open();
+            });
+        </script>
+    </body>
+</html>

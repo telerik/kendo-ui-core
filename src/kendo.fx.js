@@ -6,15 +6,17 @@
         size = kendo.size,
         browser = $.browser,
         support = kendo.support,
+        transforms = support.transforms,
         transitions = support.transitions,
         scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
+        hasZoom = (typeof document.documentElement.style.zoom !== "undefined"),
         matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
         cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
         translateXRegExp = /translatex?$/i,
         transformProps = ["perspective", "rotate", "rotateX", "rotateY", "rotateZ", "rotate3d", "scale", "scaleX", "scaleY", "scaleZ", "scale3d", "skew", "skewX", "skewY", "translate", "translateX", "translateY", "translateZ", "translate3d", "matrix", "matrix3d"],
-        cssPrefix = transitions.css,
+        cssPrefix = transforms.css,
         round = Math.round,
         BLANK = "",
         PX = "px",
@@ -85,6 +87,29 @@
             }
         }
     });
+
+    /* jQuery support for scale transform animation (FF 3.5/3.6, Opera 10.x */
+    $.fn.scale = function (val) {
+        if (typeof val == "undefined") {
+            return animationProperty(this, "scale");
+        } else {
+            $(this).css(TRANSFORM, "scale(" + val + ")");
+        }
+        return this;
+    };
+
+    var curProxy = $.fx.prototype.cur;
+    $.fx.prototype.cur = function () {
+        if (this.prop == "scale") {
+            return parseFloat($(this.elem).scale());
+        }
+
+        return curProxy.apply(this, arguments);
+    };
+
+    $.fx.step.scale = function (fx) {
+        $(fx.elem).scale(fx.now);
+    };
 
     kendo.toggleClass = function(element, classes, options, add) {
         if (classes) {
@@ -322,7 +347,7 @@
     }
 
     function animationProperty(element, property) {
-        if (transitions) {
+        if (transforms) {
             var transform = element.css(TRANSFORM);
             if (transform == "none") return property == "scale" ? 1 : 0;
 
@@ -397,9 +422,10 @@
                             css = extend(css, { display: element.data("olddisplay") || "block" }); // Add show to the set
                         }
 
-                        if (css.transform) {
-                            css[support.transitions.prefix + "Transform"] = css.transform;
-                            delete css.transform;
+                        var buffer = css.transform;
+                        delete css.transform;
+                        if (transforms) {
+                            css[TRANSFORM] = buffer;
                         }
 
                         element.css(css);
@@ -482,31 +508,18 @@
                                 single = properties;
 
                             if (value in scaleProperties && properties[value] !== undefined) {
-                                !element.data(SCALE) && element.data(SCALE, {
-                                            top: parseCSS(element, "top") || 0,
-                                            left: parseCSS(element, "left") || 0,
-                                            width: element.width(),
-                                            height: element.height()
-                                        });
-
-                                element.data(WIDTH, element[0].style.width);
-                                element.data(HEIGHT, element[0].style.height);
-                                var originalScale = element.data(SCALE);
-
                                 params = currentValue.match(cssParamsRegExp);
-                                if (params) {
-                                    var scaleX = value == SCALE + "Y" ? +null : +params[1],
-                                        scaleY = value == SCALE + "Y" ? +params[1] : +params[2] || +params[1];
-
-                                    !isNaN(scaleX) && extend(single, {
-                                                left: originalScale.left + originalScale.width * (1-scaleX) / 2,
-                                                width: originalScale.width * scaleX
-                                    });
-
-                                    !isNaN(scaleY) && extend(single, {
-                                                top: originalScale.top + originalScale.height * (1-scaleY) / 2,
-                                                height: originalScale.height * scaleY
-                                            });
+                                if (hasZoom) {
+                                    var half = (1 - params[1]) / 2;
+                                    extend(single, {
+                                                       zoom: +params[1],
+                                                       marginLeft: element.width() * half,
+                                                       marginTop: element.height() * half
+                                                   });
+                                } else if (transforms) {
+                                    extend(single, {
+                                                       scale: +params[0]
+                                                   });
                                 }
                             } else
                                 if (value in translateProperties && properties[value] !== undefined) {
@@ -553,7 +566,9 @@
                                     }
                                 }
 
-                            value in single && delete single[value];
+                            if (!transforms && value != "scale")
+                                value in single && delete single[value];
+
                             element.animate(single, extend({ queue: false }, options, { show: false, hide: false })); // Stop animate from showing/hiding the element to be able to hide it later on.
                         }
                     });
@@ -613,27 +628,41 @@
         zoomIn: {
             css: {
                 transform: function() {
-                    return !$(this).data("reverse") && transitions ? "scale(.01)" : undefined;
+                    return !$(this).data("reverse") && transforms ? "scale(.01)" : undefined;
+                },
+                zoom: function() {
+                    return !$(this).data("reverse") && hasZoom ? ".01" : undefined;
                 }
             },
             setup: function(element, options) {
-                return extend({ scale: options.reverse ? .01 : 1 }, options.properties)
-            },
-            teardown: function(element) {
-                if (element.data(SCALE)) { // Remove IE "zoom"
-                    setTimeout(function() { element.css(HEIGHT, AUTO).css(HEIGHT); }, 0);
-                    element.removeData(SCALE);
+                if (!$(this).data("reverse") && hasZoom) {
+                    var half = $.browser.msie && $.browser.version >= 9 ? (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2 : 0; // Kill margins in IE7/8
+                    element.css({
+                        marginLeft: element.width() * half,
+                        marginTop: element.width() * half
+                    });
                 }
+                return extend({ scale: options.reverse ? .01 : 1 }, options.properties);
             }
         },
         zoomOut: {
             css: {
                 transform: function() {
-                    return $(this).data("reverse") && transitions ? "scale(.01)" : undefined;
+                    return $(this).data("reverse") && transforms ? "scale(.01)" : undefined;
+                },
+                zoom: function() {
+                    return $(this).data("reverse") && hasZoom ? ".01" : undefined;
                 }
             },
             setup: function(element, options) {
-                return extend({ scale: options.reverse ? 1 : .01 }, options.properties)
+                if ($(this).data("reverse") && hasZoom) {
+                    var half = (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2;
+                    element.css({
+                        marginLeft: element.width() * half,
+                        marginTop: element.height() * half
+                    });
+                }
+                return extend({ scale: options.reverse ? 1 : .01 }, options.properties);
             }
         },
         slide: {
