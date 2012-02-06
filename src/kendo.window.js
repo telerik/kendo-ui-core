@@ -409,12 +409,12 @@
             name: "Window",
             animation: {
                 open: {
-                    effects: { zoomIn: {}, fadeIn: {} },
+                    effects: { zoom: { direction: "in" }, fade: { direction: "in" } },
                     duration: 350,
                     show: true
                 },
                 close: {
-                    effects: { zoomOut: { properties: { scale: 0.7 } }, fadeOut: {} },
+                    effects: { zoom: { direction: "out", properties: { scale: 0.7 } }, fade: { direction: "out" } },
                     duration: 350,
                     hide: true
                 }
@@ -575,7 +575,7 @@
 
                     if (showOptions.duration) {
                         overlay.kendoStop().kendoAnimate({
-                            effects: { fadeOut: { properties: { opacity: 0.5 } } },
+                            effects: { fade: { direction: "out", properties: { opacity: 0.5 } } },
                             duration: showOptions.duration,
                             show: true
                         });
