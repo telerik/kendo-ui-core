@@ -145,6 +145,15 @@
                 equal(button.text(), "foo");
             });
 
+            test("custom toolbar does not have k-icon on inner span", function() {
+                setup({
+                    toolbar: [ "foo" ]
+                });
+
+                var button = toolbar.children().first();
+                ok(!button.find("span").hasClass("k-icon"));
+            });
+
             test("toolbar create custom command from setting", function() {
                 setup({
                     toolbar: [ { text: "bar" } ]

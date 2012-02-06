@@ -41,7 +41,7 @@
         DELETECONFIRM = "Are you sure you want to delete this record?",
         formatRegExp = /\}/ig,
         templateHashRegExp = /#/ig,
-        COMMANDBUTTONTEMP = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="k-icon #=imageClass#"></span>#=text#</a>';
+        COMMANDBUTTONTEMP = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>';
 
     var VirtualScrollable =  Widget.extend({
         init: function(element, options) {
@@ -222,22 +222,26 @@
         create: {
             text: "Add new record",
             imageClass: "k-add",
-            className: "k-grid-add"
+            className: "k-grid-add",
+            iconClass: "k-icon"
         },
         cancel: {
             text: "Cancel changes",
             imageClass: "k-cancel",
-            className: "k-grid-cancel-changes"
+            className: "k-grid-cancel-changes",
+            iconClass: "k-icon"
         },
         save: {
             text: "Save changes",
             imageClass: "k-update",
-            className: "k-grid-save-changes"
+            className: "k-grid-save-changes",
+            iconClass: "k-icon"
         },
         destroy: {
             text: "Delete",
             imageClass: "k-delete",
-            className: "k-grid-delete"
+            className: "k-grid-delete",
+            iconClass: "k-icon"
         }
     }
 
@@ -1276,7 +1280,7 @@
             var that = this,
                 template = command.template || COMMANDBUTTONTEMP,
                 commandName = typeof command === STRING ? command : command.name,
-                options = { className: "", text: commandName, imageClass: "", attr: "" };
+                options = { className: "", text: commandName, imageClass: "", attr: "", iconClass: "" };
 
             if (isPlainObject(command)) {
                 options = extend(true, options, defaultCommands[commandName], command);
