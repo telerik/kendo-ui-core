@@ -547,6 +547,16 @@
 
                 equal(grid.thead.find("th").data("kendoFilterMenu").options.extra, false);
             });
+
+            test("detail th is created when thead is defined", function() {
+                var grid = new Grid($('<table><th data-kendo-field="foo"></th></table>')[0], {
+                        dataSource: [],
+                        detailInit: $.noop }),
+                    th = grid.thead.find("th");
+
+                equal(th.length, 2);
+                ok(th.eq(0).hasClass("k-hierarchy-cell"));
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
