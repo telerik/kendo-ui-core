@@ -28,13 +28,14 @@
             that.dependencies[path] = true;
 
             that._access = $.proxy(that.access, that);
+            that._changeHandler = function(e) {
+                if (that.dependencies[e.field] && !e.isDefaultPrevented()) {
+                    that.change();
+                }
+            };
 
             if (path != "this") {
-                that.source.bind("change", function(e) {
-                    if (that.dependencies[e.field] && !e.isDefaultPrevented()) {
-                        that.change();
-                    }
-                });
+                that.source.bind("change", that._changeHandler);
             }
         },
 
@@ -74,6 +75,12 @@
 
         set: function(value) {
             this.source.set(this.path, value);
+        },
+
+        destroy: function() {
+            if (this.path != "this") {
+                this.source.unbind("change", this._changeHandler);
+            }
         }
     });
 
@@ -81,6 +88,7 @@
         init: function(target) {
             this.target = target;
             this.options = {};
+            this.expressions = [];
         },
 
         setOption: function(name, value) {
@@ -91,6 +99,8 @@
             var property = new TemplateProperty(this.target, template);
 
             var expression = property.createExpression(binding);
+
+            this.expressions.push(expression);
 
             expression.updateTarget(this.options);
 
@@ -104,6 +114,8 @@
                 that = this;
 
             var expression = property.createExpression(binding);
+
+            this.expressions.push(expression);
 
             expression.updateTarget(this.options);
 
@@ -156,6 +168,15 @@
             }
 
             return new Property(this.target, path);
+        },
+
+        destroy: function() {
+            var idx,
+                length;
+
+            for (idx = 0, length = this.expressions.length; idx < length; idx++) {
+                this.expressions[idx].destroy();
+            }
         }
     });
 
@@ -266,6 +287,11 @@
 
         updateSource: function(options) {
             this.binding.set(this.property.get());
+        },
+
+        destroy: function() {
+            this.property.destroy();
+            this.binding.destroy();
         }
     });
 
@@ -348,6 +374,9 @@
 
         createExpression: function(binding) {
             return new BindingExpression(this, binding);
+        },
+
+        destroy: function() {
         }
     });
 
@@ -404,7 +433,8 @@
             this.target = target;
             this.path = path;
             this.options = options;
-            $(this.target).bind("change", $.proxy(this.change, this));
+            this._changeHandler = $.proxy(this.change, this);
+            $(this.target).bind("change", this._changeHandler);
         },
 
         change: function() {
@@ -421,6 +451,10 @@
 
         createExpression: function(binding) {
             return new BindingExpression(this, binding);
+        },
+
+        destroy: function() {
+           $(this.target).unbind("change", this._changeHandler);
         }
     });
 
@@ -700,6 +734,8 @@
             option,
             target;
 
+        kendo.unbind(element);
+
         if (role) {
             if (role === "dropdownlist") {
                 var options = {};
@@ -718,10 +754,11 @@
 
                 var widget = $.data(element, "kendoDropDownList");
                 if (!widget) {
-                    widget = new kendo.ui.DropDownList(element, options);
-                } else {
-                    widget.setOptions(options);
+                    widget = new kendo.ui.DropDownList(element);
                 }
+
+                widget.setOptions(options);
+
                 target = new WidgetBindingTarget(widget);
            }
         } else {
@@ -735,6 +772,8 @@
                 target = new BindingTarget(element);
             }
         }
+
+        $.data(element, "bindingTarget", target);
 
         ["valueField"].forEach(function(path) {
             var option = element.getAttribute("data-" + path.toLowerCase());
@@ -785,5 +824,23 @@
         }
     }
 
+    function unbindElement(element) {
+        var bindingTarget = $.data(element, "bindingTarget");
+
+        if (bindingTarget) {
+            bindingTarget.destroy();
+            $.removeData(element, "bindingTarget")
+        }
+    }
+
+    function unbind(dom) {
+        var idx, length;
+
+        for (idx = 0, length = dom.length; idx < length; idx++ ) {
+            unbindElement(dom[idx]);
+        }
+    }
+
+    kendo.unbind = unbind;
     kendo.bind = bind;
 })(jQuery);

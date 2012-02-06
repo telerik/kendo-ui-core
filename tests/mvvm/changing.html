@@ -422,6 +422,34 @@
                 ok(!dom.is(":checked"));
             });
 
+            test("model is not updated after target is destoryed", function() {
+                var dom = $('<input data-value="foo" />');
+
+                var viewmodel = kendo.observable( { foo: "foo" });
+
+                kendo.bind(dom, viewmodel);
+
+                kendo.unbind(dom);
+
+                dom.val("bar");
+                dom.trigger("change");
+
+                equal(viewmodel.foo, "foo");
+            });
+
+            test("UI element is not updated after unbind", function() {
+                var dom = $('<input data-value="foo" />');
+
+                var viewmodel = kendo.observable( { foo: "foo" });
+
+                kendo.bind(dom, viewmodel);
+
+                kendo.unbind(dom);
+
+                viewmodel.set("foo", "bar");
+
+                equal(dom.val(), "foo");
+            });
         </script>
 
         <script id="array-template" type="text/x-kendo-template">

@@ -515,6 +515,49 @@
                 kendo.bind(dom, viewModel);
                 equal($.trim(dom.text()), "bar")
             });
+
+            test("binding target is assign to the element", function() {
+                var dom = $('<div data-text="foo"/>');
+
+                var viewModel = {
+                    bar: "bar"
+                };
+
+                kendo.bind(dom, viewModel);
+                ok(dom.data("bindingTarget"));
+            });
+
+            test("binding are removed if element is rebind", 1, function() {
+                var dom = $('<div data-text="foo"/>');
+
+                var viewModel = kendo.observable({
+                    foo: "bar"
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var destroy = stub(dom.data("bindingTarget"), "destroy");
+
+                kendo.bind(dom, viewModel);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("expressions are destroyed", 1, function() {
+                var dom = $('<div data-text="foo"/>');
+
+                var viewModel = kendo.observable({
+                    foo: "bar"
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var destroy = stub(dom.data("bindingTarget").expressions[0], "destroy");
+
+                kendo.bind(dom, viewModel);
+
+                equal(destroy.calls("destroy"), 1);
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
