@@ -29,6 +29,7 @@
 
             ui.Widget.fn.init.call(that, element, options);
             options = that.options;
+            that.element.attr("data-" + kendo.ns + "widget", options.name);
 
             for (option in options) {
                 value = that.element.data(kendo.ns + option);
@@ -62,8 +63,7 @@
                 selector = kendo.roleSelector(options.name.toLowerCase());
 
                 element.find(selector)
-                       .add(element.filter(selector))
-                       .attr("data-" + kendo.ns + "widget", options.name)[pluginMethod]();
+                       .add(element.filter(selector))[pluginMethod]();
         }
     });
 
