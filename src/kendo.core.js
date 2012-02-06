@@ -35,11 +35,14 @@
             fn;
 
         base.prototype = that.prototype;
-        fn = subclass.fn = subclass.prototype = extend(new base, proto);
+        fn = subclass.fn = subclass.prototype = new base;
 
-        for (member in fn) {
-            if (typeof fn[member] === OBJECT && fn[member].constructor != Array) {
-                fn[member] = extend(true, {}, base.prototype[member], proto[member]);
+        for (member in proto) {
+            if (typeof proto[member] === OBJECT && !(proto[member] instanceof Array)) {
+                // Merge object members
+                fn[member] = extend({}, base.prototype[member], proto[member]);
+            } else {
+                fn[member] = proto[member];
             }
         }
 
