@@ -5068,6 +5068,10 @@
         return $.inArray(value, array) != -1;
     }
 
+    function last(array) {
+        return array[array.length - 1];
+    };
+
     function deepExtend(destination) {
         var i = 1,
             length = arguments.length;
