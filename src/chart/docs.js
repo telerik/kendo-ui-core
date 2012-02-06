@@ -410,8 +410,9 @@
          *    </dl>
          * </div>
          * @option {Object} [valueAxis] The value axis configuration options.
+         * @option {Object} [valueAxis.name] <primary> The unique axis name.
          * @option {Number} [valueAxis.axisCrossingValue] <0>
-         * Value at which the first perpendicular axis crosses this axis.
+         * Value at which the category axis crosses this axis.
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
          * @option {Number} [valueAxis.max] <1> The maximum value of the axis.
          * @option {Number} [valueAxis.majorUnit] The interval between major divisions.
@@ -716,17 +717,56 @@
          *    </dl>
          * </div>
          *
-         * @option {Object} [xAxis] The scatter charts X-axis configuration options.
-         * See valueAxis for detailed members list.
+         * @option {Object} [xAxis] Scatter charts X-axis configuration options.
+         * Includes all valueAxis options in addition to:
+         * @option {Number} [xAxis.axisCrossingValue] <0>
+         * Value at which the first Y axis crosses this axis.
+         * @option {Array} [xAxis.axisCrossingValue] <[0]>
+         * Values at which the Y axes cross this X axis.
+         * <p>
+         * <strong>Note:&nbsp;</strong> Specify a value greater than or equal to the
+         * axis maximum value to denote the far end of the axis.
+         * _example
+         *      xAxis: {
+         *          axisCrossingValues: [0, 1000]
+         *      },
+         *      yAxis: [{ }, { name: "secondary" }
+         * </p>
          *
          * @option {Object} [yAxis] The scatter charts Y-axis configuration options.
-         * See valueAxis for detailed members list.
+         * Includes all valueAxis options in addition to:
+         * @option {Number} [yAxis.axisCrossingValue] <0>
+         * Value at which the first X axis crosses this axis.
+         * @option {Array} [yAxis.axisCrossingValue] <[0]>
+         * Values at which the X axes cross this Y axis.
+         * <p>
+         * <strong>Note:&nbsp;</strong> Specify a value greater than or equal to the
+         * axis maximum value to denote the far end of the axis.
+         * _example
+         *      yAxis: {
+         *          axisCrossingValues: [0, 1000]
+         *      },
+         *      xAxis: [{ }, { name: "secondary" }
+         * </p>
          *
          * @option {Object} [categoryAxis] The category axis configuration options.
+         * @option {Object} [categoryAxis.name] <primary> The unique axis name.
          * @option {Array} [categoryAxis.categories] Array of category names.
          * @option {String} [categoryAxis.field] The data field containing the category name.
          * @option {Number} [categoryAxis.axisCrossingValue] <0>
-         * Category index at which the first perpendicular axis crosses this axis.
+         * Category index at which the first value axis crosses this axis.
+         * @option {Array} [categoryAxis.axisCrossingValue] <[0]>
+         * Category indicies at which the value axes cross the category axis.
+         * <p>
+         * <strong>Note:&nbsp;</strong> Specify an index greater than or equal to the number
+         * of categories to denote the far end of the axis.
+         * _example
+         *      categoryAxis: {
+         *      categories: ["A", "B"]
+         *          axisCrossingValues: [0, 100]
+         *      },
+         *      valueAxis: [{ }, { name: "secondary" }
+         * </p>
          * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.
          * @option {String} [categoryAxis.minorTickType] <"none"> The axis minor tick size.
          * <div class="details-list">
@@ -1299,6 +1339,7 @@
          * @option {Number} [series.type="bar".gap] <1.5> The distance between category clusters.
          * @option {Number} [series.type="bar".spacing] <0.4> Space between bars.
          * @option {String} [series.type="bar".name] The series name.
+         * @option {String} [series.type="bar".axis] <primary> The name of the value axis to use.
          * @option {String} [series.type="bar".color] The series base color.
          * @option {Number} [series.type="bar".opacity] <1> The series opacity.
          * @option {Object} [series.type="bar".labels] Configures the series data labels.
@@ -1551,6 +1592,7 @@
          * @option {Boolean} [series.type="line".stacked] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="line".name] The series name.
+         * @option {String} [series.type="line".axis] <primary> The name of the value axis to use.
          * @option {String} [series.type="line".width] <4> The line width of the line chart.
          * @option {String} [series.type="line".color] The series base color.
          * @option {Number} [series.type="line".opacity] <1> The series opacity.
@@ -2323,6 +2365,8 @@
          *    </dl>
          * </div>
          * @option {String} [series.type="scatter".name] The series name.
+         * @option {String} [series.type="scatter".xAxis] <primary> The name of the X axis to use.
+         * @option {String} [series.type="scatter".yAxis] <primary> The name of the Y axis to use.
          * @option {Object} [series.type="scatter".tooltip] The data point tooltip configuration options.
          * @option {String} [series.type="scatter".tooltip.background]
          * The background color of the tooltip. The default is determined from the series color.
@@ -2579,6 +2623,8 @@
          *    </dl>
          * </div>
          * @option {String} [series.type="scatterLine".name] The series name.
+         * @option {String} [series.type="scatterLine".xAxis] <primary> The name of the X axis to use.
+         * @option {String} [series.type="scatterLine".yAxis] <primary> The name of the Y axis to use.
          * @option {Object} [series.type="scatterLine".tooltip] The data point tooltip configuration options.
          * @option {String} [series.type="scatterLine".tooltip.background]
          * The background color of the tooltip. The default is determined from the series color.
