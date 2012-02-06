@@ -1,11 +1,11 @@
-(function($) {
+(function($, undefined) {
 
 /* select box */
 
 $t.selectbox = function (element, options) {
     var selectedValue;
     var $element = $(element).attr("tabIndex", 0);
-    var $text = $element.find('.t-input');
+    var $text = $element.find('.k-input');
 
     var dropDown = this.dropDown = new $t.dropDown({
         effects: $t.fx.slide.defaults(),
@@ -39,8 +39,8 @@ $t.selectbox = function (element, options) {
         if (index != -1) {
 
             dropDown.$items
-                    .removeClass('t-state-selected')
-                    .eq(index).addClass('t-state-selected');
+                    .removeClass('k-state-selected')
+                    .eq(index).addClass('k-state-selected');
 
             text($(dropDown.$items[index]).text());
             selectedValue = options.data[index].Value;
@@ -85,30 +85,30 @@ $t.selectbox = function (element, options) {
             if (!dropDown.isOpened()) {
                 $element.click();
             } else {
-                selected = dropDown.$items.filter(".t-state-selected");
+                selected = dropDown.$items.filter(".k-state-selected");
                 if (!selected[0]) {
                     next = dropDown.$items.first();
                 } else {
                     next = selected.next();
                 }
                 if (next[0]) {
-                    selected.removeClass("t-state-selected");
-                    next.addClass("t-state-selected");
+                    selected.removeClass("k-state-selected");
+                    next.addClass("k-state-selected");
                 }
             }
             e.preventDefault();
         } else if (key === 38) {
             if (dropDown.isOpened()) {
-                selected = dropDown.$items.filter(".t-state-selected");
+                selected = dropDown.$items.filter(".k-state-selected");
                 prev = selected.prev();
                 if (prev[0]) {
-                    selected.removeClass("t-state-selected");
-                    prev.addClass("t-state-selected");
+                    selected.removeClass("k-state-selected");
+                    prev.addClass("k-state-selected");
                 }
             }
             e.preventDefault();
         } else if (key == 13) {
-            selected = dropDown.$items.filter(".t-state-selected");
+            selected = dropDown.$items.filter(".k-state-selected");
             if (selected[0]) {
                 selected.click();
             }
@@ -127,7 +127,7 @@ $t.selectbox = function (element, options) {
         });
     }
 
-    dropDown.$element.css('direction', $element.closest('.t-rtl').length > 0 ? 'rtl' : '');
+    dropDown.$element.css('direction', $element.closest('.k-rtl').length > 0 ? 'rtl' : '');
 
     $(document.documentElement).bind('mousedown', $.proxy(function (e) {
         var $dropDown = dropDown.$element;
@@ -172,32 +172,32 @@ $t.colorpicker = function (element, options) {
                     if (!popup.is(":visible")) {
                         that.open();
                     } else {
-                       selected = popup.find(".t-state-selected");
+                       selected = popup.find(".k-state-selected");
                        if (selected[0]) {
                            next = selected.next();
                        } else {
                            next = popup.find("li:first");
                        }
                        if (next[0]) {
-                            selected.removeClass("t-state-selected");
-                            next.addClass("t-state-selected");
+                            selected.removeClass("k-state-selected");
+                            next.addClass("k-state-selected");
                        } 
                     }
                     e.preventDefault();
                 } else if (e.keyCode == 38) {
                     if (popup.is(":visible")) {
-                       selected = popup.find(".t-state-selected");
+                       selected = popup.find(".k-state-selected");
                        prev = selected.prev();
                        if (prev[0]) {
-                            selected.removeClass("t-state-selected");
-                            prev.addClass("t-state-selected");
+                            selected.removeClass("k-state-selected");
+                            prev.addClass("k-state-selected");
                        } 
                     }
                     e.preventDefault();
                 } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
                     that.close();
                 } else if (e.keyCode == 13) {
-                   popup.find(".t-state-selected").click();
+                   popup.find(".k-state-selected").click();
                    e.preventDefault();
                 }
             })
@@ -214,11 +214,11 @@ $t.colorpicker = function (element, options) {
     }    
 
     if (that.selectedColor)
-        $element.find('.t-selected-color').css('background-color', this.selectedColor);
+        $element.find('.k-selected-color').css('background-color', this.selectedColor);
 
     $(element.ownerDocument.documentElement)
         .bind('mousedown', $.proxy(function (e) {
-            if (!$(e.target).closest('.t-colorpicker-popup').length) {
+            if (!$(e.target).closest('.k-colorpicker-popup').length) {
                 this.close();
             }
         }, that));
@@ -233,12 +233,12 @@ $t.colorpicker.prototype = {
     select: function(color) {
         if (color) {
             color = dom.toHex(color);
-            if (!$t.trigger(this.element, 'change', { value: color })) {
+            if (!this.trigger('change', { value: color })) {
                 this.value(color);
                 this.close();
             }
         } else
-            $t.trigger(this.element, 'change', { value: this.selectedColor })
+            this.trigger('change', { value: this.selectedColor })
     },
 
     open: function() {
@@ -248,7 +248,7 @@ $t.colorpicker.prototype = {
         var elementPosition = $element.offset();
         elementPosition.top += $element.outerHeight();
 
-        if ($element.closest('.t-rtl').length)
+        if ($element.closest('.k-rtl').length)
             elementPosition.left -= $popup.outerWidth() - $element.outerWidth();
 
         var zIndex = 'auto';
@@ -267,7 +267,7 @@ $t.colorpicker.prototype = {
         }, elementPosition));
         
         $popup
-            .find('.t-item').bind('click', $.proxy(function(e) {
+            .find('.k-item').bind('click', $.proxy(function(e) {
                 var color = $(e.currentTarget, e.target.ownerDocument).find("div").css('background-color');
                 this.select(color);
             }, this));
@@ -296,7 +296,7 @@ $t.colorpicker.prototype = {
     },
 
     click: function(e) {
-        if ($(e.target).closest('.t-tool-icon').length > 0)
+        if ($(e.target).closest('.k-tool-icon').length > 0)
             this.select();
         else
             this.toggle();
@@ -310,7 +310,7 @@ $t.colorpicker.prototype = {
 
         this.selectedColor = color;
 
-        $('.t-selected-color', this.element)
+        $('.k-selected-color', this.element)
             .css('background-color', color);
     },
 
@@ -331,15 +331,15 @@ $.extend($t.colorpicker, {
     buildPopup: function(component) {
         var html = new $t.stringBuilder();
 
-        html.cat('<div class="t-popup t-group t-colorpicker-popup">')
-            .cat('<ul class="t-reset">');
+        html.cat('<div class="k-popup k-group k-colorpicker-popup">')
+            .cat('<ul class="k-reset">');
 
         var data = component.data;
         var currentColor = (component.value() || '').substring(1);
 
         for (var i = 0, len = data.length; i < len; i++) {
-            html.cat('<li class="t-item')
-                .catIf(' t-state-selected', data[i] == currentColor)
+            html.cat('<li class="k-item')
+                .catIf(' k-state-selected', data[i] == currentColor)
                 .cat('"><div style="background-color:#')
                 .cat(data[i])
                 .cat('"></div></li>');

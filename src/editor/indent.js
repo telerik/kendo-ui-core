@@ -1,4 +1,4 @@
-(function($) {
+(function($, undefined) {
 
 // Imports ================================================================
 var kendo = window.kendo,
@@ -6,8 +6,13 @@ var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
+    registerTool = Editor.EditorUtils.registerTool,
+    Command = Editor.Command,
+    Tool = Editor.Tool,
     RangeUtils = Editor.RangeUtils,
-    blockElements = dom.blockElements;
+    blockElements = dom.blockElements,
+    BlockFormatFinder = Editor.BlockFormatFinder,
+    BlockFormatter = Editor.BlockFormatter;
 
 function indent(node, value) {
     var property = dom.name(node) != 'td' ? 'marginLeft' : 'paddingLeft';
@@ -27,7 +32,7 @@ function indent(node, value) {
 
 var IndentFormatter = Class.extend({
     init: function() {
-        this.finder = new BlockFormatFinder([{tags:blockElements}]);
+        this.finder = new BlockFormatFinder([{tags:dom.blockElements}]);
     },
 
     apply: function (nodes) {
@@ -161,11 +166,11 @@ var OutdentTool = Tool.extend({
 
     initialize: function($ui) {
         $ui.attr('unselectable', 'on')
-           .addClass('t-state-disabled');
+           .addClass('k-state-disabled');
     },
 
     update: function ($ui, nodes) {
-        var suitable = finder.findSuitable(nodes),
+        var suitable = this.finder.findSuitable(nodes),
             isOutdentable, listParentsCount;
 
         for (var i = 0; i < suitable.length; i++) {
@@ -178,12 +183,12 @@ var OutdentTool = Tool.extend({
             }
 
             if (isOutdentable) {
-                $ui.removeClass('t-state-disabled');
+                $ui.removeClass('k-state-disabled');
                 return;
             }
         }
     
-        $ui.addClass('t-state-disabled').removeClass('t-state-hover');
+        $ui.addClass('k-state-disabled').removeClass('k-state-hover');
     }
 
 });
@@ -194,5 +199,8 @@ extend(kendo.ui.Editor, {
     OutdentCommand: OutdentCommand,
     OutdentTool: OutdentTool
 });
+
+registerTool("indent", new Tool({ command: IndentCommand }));
+registerTool("outdent", new OutdentTool());
 
 })(jQuery);

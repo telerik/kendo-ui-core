@@ -6,7 +6,8 @@ var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
-    RangeUtils = Editor.RangeUtils;
+    RangeUtils = Editor.RangeUtils,
+    Marker = Editor.Marker;
 
 var PendingFormats = Class.extend({
     init: function(editor) {
@@ -34,7 +35,7 @@ var PendingFormats = Class.extend({
 
         marker.add(range);
 
-        if (rangeUtils.textNodes(range).length == 0) {
+        if (RangeUtils.textNodes(range).length == 0) {
             marker.remove(range);
             range.collapse(true);
             this.editor.selectRange(range);
@@ -43,12 +44,13 @@ var PendingFormats = Class.extend({
 
         var textNode = marker.end.previousSibling.previousSibling;
 
-        var pendingFormat, formats = this.formats;
+        var pendingFormat,
+            formats = this.formats;
 
         for (var i = 0; i < formats.length; i++) {
             pendingFormat = formats[i];
             
-            var command = pendingFormat.command($.extend({ range: range }, pendingFormat.params));
+            var command = pendingFormat.command(extend({ range: range }, pendingFormat.params));
             command.editor = this.editor;
             command.exec();
 

@@ -5,9 +5,11 @@
         kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
+        registerTool = Editor.EditorUtils.registerTool,
         dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
         selectRange = RangeUtils.selectRange,
+        Tool = Editor.Tool,
         RestorePoint = Editor.RestorePoint,
         Marker = Editor.Marker,
         extend = $.extend;
@@ -89,7 +91,7 @@ var InsertHtmlCommand = Command.extend({
 var InsertHtmlTool = Tool.extend({
     initialize: function($ui, initOptions) {
         var editor = initOptions.editor;
-        var title = editor.localization.insertHtml;
+        var title = editor.options.localization.insertHtml;
         
         $ui.tSelectBox({
             data: editor['insertHtml'],
@@ -100,7 +102,7 @@ var InsertHtmlTool = Tool.extend({
                 Tool.exec(editor, 'insertHtml', e.value);
             },
             highlightFirst: false
-        }).find('.t-input').html(editor.localization.insertHtml);
+        }).find('.k-input').html(editor.options.localization.insertHtml);
     },
 
     command: function (commandArguments) {
@@ -155,7 +157,7 @@ var TypingHandler = Class.extend({
             keyboard = editor.keyboard;
             isTypingKey = keyboard.isTypingKey(e);
 
-        if (isTypingKey && !keyboard.typingInProgress()) {
+        if (isTypingKey && !keyboard.isTypingInProgress()) {
             var range = editor.getRange();
             this.startRestorePoint = new RestorePoint(range);
 
@@ -173,7 +175,7 @@ var TypingHandler = Class.extend({
     keyup: function (e) {
         var keyboard = this.editor.keyboard;
 
-        if (keyboard.typingInProgress()) {
+        if (keyboard.isTypingInProgress()) {
             keyboard.endTyping();
             return true;
         }
@@ -207,7 +209,7 @@ var SystemHandler = Class.extend({
 
         if (keyboard.isModifierKey(e)) {
 
-            if (keyboard.typingInProgress())
+            if (keyboard.isTypingInProgress())
                 keyboard.endTyping(true);
 
             this.startRestorePoint = new RestorePoint(editor.getRange());
@@ -254,9 +256,9 @@ var Keyboard = Class.extend({
         var key = String.fromCharCode(e.keyCode);
 
         for (var toolName in tools) {
-            var tool = tools[toolName];
+            var toolOptions = tools[toolName].options || {};
 
-            if ((tool.key == key || tool.key == e.keyCode) && !!tool.ctrl == e.ctrlKey && !!tool.alt == e.altKey && !!tool.shift == e.shiftKey)
+            if ((toolOptions.key == key || toolOptions.key == e.keyCode) && !!toolOptions.ctrl == e.ctrlKey && !!toolOptions.alt == e.altKey && !!toolOptions.shift == e.shiftKey)
                 return toolName;
         }
     },
@@ -297,7 +299,7 @@ var Keyboard = Class.extend({
             this.timeout = window.setTimeout(this.stopTyping, 1000);
     },
 
-    typingInProgress: function () {
+    isTypingInProgress: function () {
         return this.typingInProgress;
     },
 
@@ -356,7 +358,7 @@ var Clipboard = Class.extend({
         var editor = this.editor,
             range = editor.getRange(),
             startRestorePoint = new RestorePoint(range),
-            clipboardNode = dom.create(editor.document, 'div', {className:'t-paste-container', innerHTML: '\ufeff'});
+            clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: '\ufeff'});
 
         editor.body.appendChild(clipboardNode);
             
@@ -384,7 +386,7 @@ var Clipboard = Class.extend({
                 dom.remove(clipboardNode.lastChild);
                 
             var args = { html: clipboardNode.innerHTML };
-            $t.trigger(editor.element, "paste", args);
+            editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
             Editor.EditorUtils.selectionChanged(editor);
@@ -445,7 +447,7 @@ var Clipboard = Class.extend({
             
         var fragment = this.htmlToFragment(html);
         
-        if (fragment.firstChild && fragment.firstChild.className === "t-paste-container") {
+        if (fragment.firstChild && fragment.firstChild.className === "k-paste-container") {
             var fragmentsHtml = [];
             for (i = 0, l = fragment.childNodes.length; i < l; i++) {
                 fragmentsHtml.push(fragment.childNodes[i].innerHTML);
@@ -590,5 +592,7 @@ extend(kendo.ui.Editor, {
     Clipboard: Clipboard,
     MSWordFormatCleaner: MSWordFormatCleaner
 });
+
+registerTool("insertHtml", new InsertHtmlTool());
 
 })(jQuery);

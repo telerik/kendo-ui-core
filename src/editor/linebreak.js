@@ -7,14 +7,16 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     Command = Editor.Command,
+    Tool = Editor.Tool,
+    BlockFormatter = Editor.BlockFormatter,
     normalize = dom.normalize,
-    RangeUtils = Editor.RangeUtils;
+    RangeUtils = Editor.RangeUtils,
+    registerTool = Editor.EditorUtils.registerTool;
 
 var ParagraphCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        cmd.options = options;
-        Command.fn.init.call(cmd, options);
+        this.options = options;
+        Command.fn.init.call(this, options);
     },
 
     exec: function () {
@@ -130,9 +132,8 @@ var ParagraphCommand = Command.extend({
 
 var NewLineCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        cmd.options = options;
-        Command.fn.init.call(cmd, options);
+        this.options = options;
+        Command.fn.init.call(this, options);
     },
 
     exec: function () {
@@ -158,5 +159,8 @@ extend(kendo.ui.Editor, {
     ParagraphCommand: ParagraphCommand,
     NewLineCommand: NewLineCommand
 });
+
+registerTool("insertLineBreak", new Tool({ key: 13, shift: true, command: NewLineCommand }));
+registerTool("insertParagraph", new Tool({ key: 13, command: ParagraphCommand }));
 
 })(jQuery);
