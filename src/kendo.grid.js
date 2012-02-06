@@ -986,6 +986,20 @@
             dataSource: {}
         },
 
+        setOptions: function(options) {
+            if (options.template) {
+                options.rowTemplate = options.template;
+            }
+
+            extend(this.options, options);
+
+            this._templates();
+        },
+
+        items: function() {
+            return this.tbody.children();
+        },
+
         _element: function() {
             var that = this,
                 table = that.element;
