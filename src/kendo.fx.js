@@ -141,7 +141,10 @@
 
         if (typeof input === "string") {
             each(input.split(" "), function() {
-                var effect = this.split(":"),
+                var resolved = this.replace(/(zoom|fade)(\w+)/, function(match, $1, $2) {
+                        return $1 + ":" + $2.toLowerCase();
+                    }), // Support for old zoomIn/fadeOut style, now deprecated.
+                    effect = resolved.split(":"),
                     direction = effect[1],
                     effectBody = {};
 
@@ -381,7 +384,6 @@
         }
 
         element.data("animating", true);
-        element.data("reverse", options.reverse);
 
         var props = { keep: [], restore: [] }, css = {},
             methods = { setup: [], teardown: [] }, properties = {},
@@ -395,6 +397,10 @@
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
+                            var direction = kendo.directions[this.direction];
+                            if (this.direction && direction)
+                                element.data(effectName, { direction: options.reverse ? direction.reverse : this.direction });
+
                             opts = extend(true, opts, settings);
 
                             each(methods, function (idx) {
@@ -455,7 +461,6 @@
         $.when.apply(null, promises).then(function() {
             element
                 .removeData("animating")
-                .removeData("reverse")
                 .dequeue(); // call next animation from the queue
 
             if (options.hide) {
@@ -582,7 +587,7 @@
                 originalOverflow = commonParent.css(OVERFLOW);
 
             options = parseTransitionEffects(options);
-            commonParent.css("overflow-x", "hidden");
+            commonParent.css("overflow", "hidden");
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;
@@ -605,64 +610,37 @@
             }
         },
 
-        fadeOut: {
+        fade: {
             css: {
                 opacity: function() {
-                    return $(this).data("reverse") && !this.style.opacity ? 0 : undefined;
+                    return $(this).data("fade").direction == "in" && !this.style.opacity ? 0 : undefined;
                 }
             },
             setup: function(element, options) {
-                return extend({ opacity: options.reverse ? 1 : 0 }, options.properties)
+                return extend({ opacity: options.direction == "out" ? 0 : 1 }, options.properties)
             }
         },
-        fadeIn: {
-            css: {
-                opacity: function() {
-                    return !$(this).data("reverse") && !this.style.opacity ? 0 : undefined;
-                }
-            },
-            setup: function(element, options) {
-                return extend({ opacity: options.reverse ? 0 : 1 }, options.properties)
-            }
-        },
-        zoomIn: {
+        zoom: {
             css: {
                 transform: function() {
-                    return !$(this).data("reverse") && transforms ? "scale(.01)" : undefined;
+                    return $(this).data("zoom").direction == "in" && transitions ? "scale(.01)" : undefined;
                 },
                 zoom: function() {
-                    return !$(this).data("reverse") && hasZoom ? ".01" : undefined;
+                    return $(this).data("zoom").direction == "in" && hasZoom ? ".01" : undefined;
                 }
             },
             setup: function(element, options) {
-                if (!$(this).data("reverse") && hasZoom) {
+                var reverse = options.direction == "out";
+
+                if (reverse && hasZoom) {
                     var half = $.browser.msie && $.browser.version >= 9 ? (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2 : 0; // Kill margins in IE7/8
                     element.css({
                         marginLeft: element.width() * half,
                         marginTop: element.width() * half
                     });
                 }
-                return extend({ scale: options.reverse ? .01 : 1 }, options.properties);
-            }
-        },
-        zoomOut: {
-            css: {
-                transform: function() {
-                    return $(this).data("reverse") && transforms ? "scale(.01)" : undefined;
-                },
-                zoom: function() {
-                    return $(this).data("reverse") && hasZoom ? ".01" : undefined;
-                }
-            },
-            setup: function(element, options) {
-                if ($(this).data("reverse") && hasZoom) {
-                    var half = (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2;
-                    element.css({
-                        marginLeft: element.width() * half,
-                        marginTop: element.height() * half
-                    });
-                }
-                return extend({ scale: options.reverse ? 1 : .01 }, options.properties);
+
+                return extend({ scale: reverse ? .01 : 1 }, options.properties)
             }
         },
         slide: {
