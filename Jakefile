@@ -109,6 +109,7 @@ namespace("demos", function() {
 
     desc("Pack online-demos.zip");
     task("pack-production", ["demos:production"], function() {
+        copyDir(path.join("resources", "live", "bin"), path.join(DEMOS_LIVE_PATH, "bin"), true);
         zip(DEMOS_LIVE_PACKAGE, DEMOS_LIVE_PATH, complete);
     }, true);
 });
@@ -139,8 +140,9 @@ function buildDocs(sitefinity_path) {
         sections = ["description", "configuration", "methods", "events"];
 
     function combine() {
-        var files = fs.readdirSync(DOCS_DEPLOY_PATH),
+        var files = fs.readdirSync(outputPath),
             filesToMerge;
+
         for (var key in mappings) {
             var mapping = mappings[key];
             filesToMerge = [];
@@ -159,17 +161,23 @@ function buildDocs(sitefinity_path) {
                 kendoBuild.grep(filesToMerge, function(fileName) {
                     return fileName.indexOf(sectionName) > -1;
                 }).forEach(function(fileToMerge) {
-                    var text = kendoBuild.readText(DOCS_DEPLOY_PATH + "/" + fileToMerge);
+                    var text = kendoBuild.readText(outputPath + "/" + fileToMerge);
 
-                    if (sectionName != "description") {
+                    if (sectionName != "description" && hasValue(text)) {
                         text = wrap(text, fileToMerge);
                     }
                     cache += text;
                 });
 
-                kendoBuild.writeText(path.join(DOCS_DEPLOY_PATH, "kendo." + key + "." + sectionName + ".html"), cache);
+                if (hasValue(cache)) {
+                    kendoBuild.writeText(path.join(outputPath, "kendo." + key + "." + sectionName + ".html"), cache);
+                }
             });
         }
+    }
+
+    function hasValue(text) {
+        return text.replace(/^\s*|\s*$/g, '').replace("<!-- help-data -->", "").length > 0;
     }
 
     function wrap(text, fileToMerge) {
@@ -179,9 +187,17 @@ function buildDocs(sitefinity_path) {
         return '<div class="detailHandle detailHandleExpanded"> <div class="detailExpanded"></div>' + fileToMerge + '</div><div style="display: block;" class="detailBody">' + text + "</div>";
     }
 
+    // output directory
+    var outputPath = DOCS_DEPLOY_PATH;
+
+    sitefinity = false; //create global variable
+    if (sitefinity_path) {
+        outputPath = sitefinity_path;
+        sitefinity = true;
+    }
+
     var params = [
-        // output directory
-        "-d=demos/mvc/content/docs",
+        "-d=" + outputPath,
         // template
         "-t=build/node-jsdoc-toolkit/template",
         // constants
@@ -189,11 +205,7 @@ function buildDocs(sitefinity_path) {
         "-D=\"title:Kendo UI Documentation\""
     ];
 
-    sitefinity = false; //create global variable
-    if (sitefinity_path) {
-        params[0] = "-d=" + sitefinity_path;
-        sitefinity = true;
-    }
+    kendoBuild.rmdirSyncRecursive(outputPath);
 
     var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
     for (var i = 0; i < sourceFiles.length; i++) {

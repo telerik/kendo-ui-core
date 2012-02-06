@@ -1,0 +1,72 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+
+    <link href="@Url.Content("~/content/shared/styles/console.css")" rel="stylesheet" />
+
+    @foreach (string styleName in Kendo.Models.StyleGroups.Mobile) {
+        <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    }
+    @if (ViewBag.Debug) {
+        <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    }
+    @foreach (string scriptName in Kendo.Models.ScriptGroups.Mobile) {
+        <script src="@Url.Script(scriptName)"></script>
+    }
+
+    <script src="@Url.Content("~/content/shared/js/console.js")"></script>
+</head>
+<body>
+    <div data-role="view" data-title="Kendo Mobile &ndash; Overview" id="index">
+    @foreach (string category in ViewBag.Navigation.Keys)
+    {
+        <ul data-role="listview" data-type="group" data-style="inset">
+        @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+        {
+            <li> @widget.Text
+                <ul>
+                    @foreach (NavigationExample example in widget.Items)
+                    {
+                        <li><a href="@Url.Content("~/mobile/m/" + example.Url)">@example.Text</a></li>
+                    }
+                </ul>
+            </li>
+        }
+        </ul>
+    }
+    </div>
+
+    <div data-id="examples" data-role="layout">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                <span data-role="view-title"></span>
+                <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+            </div>
+        </header>
+    </div>
+
+    <script>
+        document.title = "@ViewBag.Title";
+        window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
+            layout: "examples",
+            transition: "slide",
+            scriptsAppend: function(e) {
+                if (typeof kendoDemoViewInit != "undefined") {
+                    kendoDemoViewInit(e);
+                }
+            },
+
+            viewShow: function(e) {
+                var viewID = e.view.element.attr("id");
+                e.view.element.find(".nav-button").css({visibility: viewID != "index" ? "visible" : "hidden"});
+            }
+        });
+    </script>
+</body>
+</html>

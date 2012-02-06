@@ -1,0 +1,64 @@
+
+        <div id="example" class="k-content">
+            <label for="start">Start time:</label>
+            <input id="start" value="8:00 AM" />
+
+            <label for="end" style="margin-left:3em">End time:</label>
+            <input id="end" value="8:30 AM"/>
+            <script>
+                $(document).ready(function() {
+                    function startChange() {
+                        var startTime = start.value();
+
+                        if (startTime) {
+                            startTime = new Date(startTime);
+
+                            end.max(startTime);
+
+                            startTime.setMinutes(startTime.getMinutes() + this.options.interval);
+
+                            end.min(startTime);
+                            end.value(startTime);
+                        }
+                    }
+
+                    //init start timepicker
+                    var start = $("#start").kendoTimePicker({
+                        change: startChange
+                    }).data("kendoTimePicker");
+
+                    //init end timepicker
+                    var end = $("#end").kendoTimePicker().data("kendoTimePicker");
+
+                    //define min/max range
+                    start.min("8:00 AM");
+                    start.max("6:00 PM");
+
+                    //define min/max range
+                    end.min("8:00 AM");
+                    end.max("7:30 AM");
+                });
+            </script>
+
+            <style scoped>
+                #example .k-timepicker {
+                    vertical-align: middle;
+                }
+
+                #example h3 {
+                    clear: both;
+                }
+
+                #example .code-sample {
+                    width: 60%;
+                    float:left;
+                    margin-bottom: 20px;
+                }
+
+                #example .output {
+                    width: 24%;
+                    margin-left: 4%;
+                    float:left;
+                }
+            </style>
+        </div>

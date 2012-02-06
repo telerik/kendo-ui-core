@@ -1,0 +1,64 @@
+
+        <div id="example" class="k-content">
+            <label for="start">Start date:</label>
+            <input id="start" value="10/10/2011" />
+
+            <label for="end" style="margin-left:3em">End date:</label>
+            <input id="end" value="10/10/2012"/>
+            <script>
+                $(document).ready(function() {
+                    function startChange() {
+                        var startDate = start.value();
+
+                        if (startDate) {
+                            startDate = new Date(startDate);
+                            startDate.setDate(startDate.getDate() + 1);
+                            end.min(startDate);
+                        }
+                    }
+
+                    function endChange() {
+                        var endDate = end.value();
+
+                        if (endDate) {
+                            endDate = new Date(endDate);
+                            endDate.setDate(endDate.getDate() - 1);
+                            start.max(endDate);
+                        }
+                    }
+
+                    var start = $("#start").kendoDatePicker({
+                        change: startChange
+                    }).data("kendoDatePicker");
+
+                    var end = $("#end").kendoDatePicker({
+                        change: endChange
+                    }).data("kendoDatePicker");
+
+                    start.max(end.value());
+                    end.min(start.value());
+                });
+            </script>
+
+            <style scoped>
+                #example .k-datepicker {
+                    vertical-align: middle;
+                }
+
+                #example h3 {
+                    clear: both;
+                }
+
+                #example .code-sample {
+                    width: 60%;
+                    float:left;
+                    margin-bottom: 20px;
+                }
+
+                #example .output {
+                    width: 24%;
+                    margin-left: 4%;
+                    float:left;
+                }
+            </style>
+        </div>

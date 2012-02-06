@@ -29,33 +29,18 @@ var betaLicenses = [
 // Configuration ==============================================================
 var cdnBundle = {
     name: "kendoui.cdn",
-    suites: ["web", "dataviz", "mobile"],
+    suites: ["web", "dataviz"],
     combinedScript: "all",
     licenses: [commercialLicense],
     eula: "eula",
 };
 
 var bundles = [{
-    name: "kendoui.complete",
-    suites: ["web", "dataviz", "mobile"],
+    name: "kendoui.web-dataviz",
+    suites: ["web", "dataviz"],
     combinedScript: "all",
     licenses: productionLicenses,
     eula: "eula",
-}, {
-    name: "kendoui.web",
-    suites: ["web"],
-    licenses: productionLicenses,
-    eula: "eula",
-}, {
-    name: "kendoui.dataviz",
-    suites: ["dataviz"],
-    licenses: productionLicenses,
-    eula: "eula"
-}, {
-    name: "kendoui.mobile",
-    suites: ["mobile"],
-    licenses: betaLicenses,
-    eula: "eula"
 }];
 
 var thirdPartyScripts = [

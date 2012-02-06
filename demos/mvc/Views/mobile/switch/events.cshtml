@@ -1,0 +1,26 @@
+<div data-role="view" id="switch-events" data-init="mobileSwitchEventsInit">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>General Settings
+            <ul>
+                <li>Automatic Update <input id="mobile-switch" data-role="switch" data-change="switchChange" /></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="console"></div>
+</div>
+
+<script>
+    function switchChange(e) {
+        kendoConsole.log("switch value was changed to " + (e.checked ? "checked" : "unchecked"));
+    }
+</script>
+
+<style scoped>
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>

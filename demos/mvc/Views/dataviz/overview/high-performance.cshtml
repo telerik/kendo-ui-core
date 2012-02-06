@@ -1,0 +1,141 @@
+
+        <div id="example" class="k-content">
+            <div class="chart-wrapper">
+                <button id="playButton" class="k-button" onclick="playButtonClick()">Start update</button>
+                <div id="fpsCount">-- FPS / (-- ms per frame)</div>
+                <div id="chart"></div>
+            </div>
+            <script>
+                var TICKS_PER_DAY = 86400000,
+                    POINTS = 20,
+                    lastDate = new Date("2000/01/20"),
+                    playInterval,
+                    fpsUpdateInterval,
+                    categoryList = [],
+                    stocks = [[], [], []];
+
+                function createChart() {
+                    $("#chart").kendoChart({
+                        theme: $(document).data("kendoSkin") || "default",
+                        title: {
+                            text: "Stock prices"
+                        },
+                        legend: {
+                            visible: false
+                        },
+                        series: [{
+                            type: "column",
+                            name: "Stock A",
+                            data: stocks[0]
+                        }, {
+                            type: "line",
+                            name: "Stock B",
+                            data: stocks[1]
+                        }, {
+                            type: "line",
+                            name: "Stock C",
+                            data: stocks[2]
+                        }],
+                        valueAxis: {
+                            labels: {
+                                format: "${0}"
+                            }
+                        },
+                        categoryAxis: {
+                            categories: categoryList
+                        },
+                        transitions: false
+                    });
+                }
+
+                $(document).ready(function() {
+                    initializeData();
+
+                    setTimeout(function() {
+                        createChart();
+
+                        // Initialize the chart with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createChart();
+                    });
+                });
+
+                function initializeData() {
+                    for (var i = 0; i < POINTS; i++) {
+                        addPoint();
+                    }
+                }
+
+                function playButtonClick(button) {
+                    var button = $("#playButton");
+
+                    if (playInterval) {
+                        stop();
+                        button.text("Start update");
+                    } else {
+                        play();
+                        button.html("Pause update");
+                    }
+                }
+
+                function play() {
+                    var frames = 0,
+                        start = new Date();
+
+                    playInterval = setInterval(function() {
+                        step();
+                        frames++;
+                    }, 10);
+
+                    fpsUpdateInterval = setInterval(function() {
+                        var time = (new Date() - start) / 1000,
+                            fps = Math.round(frames / time),
+                            frameTime = Math.round(1000 / fps);
+                        $("#fpsCount").html(fps + " FPS (" + frameTime + " ms per frame)");
+                    }, 1000);
+                }
+
+                function stop() {
+                    clearInterval(playInterval);
+                    clearInterval(fpsUpdateInterval);
+                    playInterval = null;
+                    fpsUpdateInterval = null;
+                }
+
+                function step() {
+                    addPoint();
+                    $("#chart").data("kendoChart").refresh();
+                }
+
+                function addPoint() {
+                    var stockData,
+                        change,
+                        lastValue;
+
+                    // Shift existing categories to the left and add the next date at the end
+                    lastDate = new Date(lastDate.getTime() + TICKS_PER_DAY);
+                    categoryList.push((lastDate.getMonth() + 1) + "/" + (lastDate.getDay() + 1));
+
+                    if (categoryList.length > POINTS) {
+                        categoryList.shift();
+                    }
+
+                    for (var i = 0; i < stocks.length; i++) {
+                        stockData = stocks[i];
+                        change = (Math.random() > 0.5 ? 1 : - 1) * Math.random() * 10;
+                        lastValue = stockData[stockData.length - 1] || Math.random() * 10;
+
+                        // Add a new pseudo-random data point
+                        stockData.push(Math.min((i + 1) * 20, Math.max((i + 1) * 10, lastValue + change)));
+
+                        // Shift the data points of each series to the left
+                        if (stockData.length > POINTS) {
+                            stockData.shift();
+                        }
+                    }
+                }
+            </script>
+        </div>

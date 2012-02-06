@@ -1,0 +1,62 @@
+        <script src="../../content/shared/js/people.js"></script>
+
+        <div id="example" class="k-content">
+            <h3>Grid with multiple row selection enabled</h3>
+            <div id="rowSelection" style="width:600px;"></div>
+
+            <h3>Grid with multiple cell selection enabled</h3>
+            <div id="cellSelection" style="width:600px;"></div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#rowSelection").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(20),
+                            pageSize: 5
+                        },
+                        selectable: "multiple",
+                        pageable: true,
+                        scrollable: false,
+                        navigatable: true,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age"
+                            }
+                        ]
+                    });
+
+                    $("#cellSelection").kendoGrid({
+                        dataSource: {
+                            data: createRandomData(20),
+                            pageSize: 5
+                        },
+                        selectable: "multiple cell",
+                        pageable: true,
+                        scrollable: false,
+                        navigatable: true,
+                        columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Age",
+                                title: "Age"
+                            }
+                        ]
+                    });
+                });
+            </script>
+        </div>
