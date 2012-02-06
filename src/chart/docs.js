@@ -2646,6 +2646,7 @@
          * @option {Boolean} [series.type="area".stacked] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="area".name] The series name.
+         * @option {String} [series.type="area".line] The line of the area chart.
          * @option {String} [series.type="area".line.width] <4> The line width of the area chart.
          * @option {String} [series.type="area".line.color] The line color of the area chart.
          * @option {Number} [series.type="area".line.opacity] <1> The line opacity of the area chart.
