@@ -141,7 +141,7 @@
 
         if (typeof input === "string") {
             each(input.split(" "), function() {
-                var resolved = this.replace(/(zoom|fade)(\w+)/, function(match, $1, $2) {
+                var resolved = this.replace(/(zoom|fade|expand)(\w+)/, function(match, $1, $2) {
                         return $1 + ":" + $2.toLowerCase();
                     }), // Support for old zoomIn/fadeOut style, now deprecated.
                     effect = resolved.split(":"),
@@ -382,6 +382,7 @@
         if (typeof effects === "string") {
             effects = kendo.parseEffects(options.effects);
         }
+        options.effects = effects;
 
         element.data("animating", true);
 
@@ -397,9 +398,11 @@
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
-                            var direction = kendo.directions[this.direction];
-                            if (this.direction && direction)
-                                element.data(effectName, { direction: options.reverse ? direction.reverse : this.direction });
+                            var dir = kendo.directions[this.direction];
+                            if (this.direction && dir) {
+                                this.direction = (options.reverse ? dir.reverse : this.direction);
+                                element.data(effectName, this);
+                            }
 
                             opts = extend(true, opts, settings);
 
@@ -481,7 +484,7 @@
                     restore();
                 }
 
-                each(methods.teardown, function() { this(element, options.reverse); }); // call the internal completion callbacks
+                each(methods.teardown, function() { this(element, options); }); // call the internal completion callbacks
             }
 
             if (options.completeCallback) {
@@ -617,7 +620,7 @@
                 }
             },
             setup: function(element, options) {
-                return extend({ opacity: options.direction == "out" ? 0 : 1 }, options.properties)
+                return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties)
             }
         },
         zoom: {
@@ -630,7 +633,7 @@
                 }
             },
             setup: function(element, options) {
-                var reverse = options.direction == "out";
+                var reverse = options.effects.zoom.direction == "out";
 
                 if (reverse && hasZoom) {
                     var half = $.browser.msie && $.browser.version >= 9 ? (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2 : 0; // Kill margins in IE7/8
@@ -645,7 +648,7 @@
         },
         slide: {
             setup: function(element, options) {
-                var direction = kendo.directions[options.direction],
+                var direction = kendo.directions[options.effects.slide.direction],
                     extender = {}, offset, reverse = options.reverse,
                     property = transitions && options.transition !== false ? direction.transition : direction.property,
                     divisor = options.divisor || 1;
@@ -692,9 +695,11 @@
         },
         slideIn: {
             setup: function(element, options) {
-                var direction = kendo.directions[options.direction],
+                var dir = kendo.directions[options.effects.slideIn.direction],
+                    reverse = options.reverse,
+                    direction = reverse ? kendo.directions[dir.reverse] : dir,
                     offset = -direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()),
-                    extender = {}, reverse = options.reverse;
+                    extender = {};
 
                 if (transitions && options.transition !== false) {
                     element.css(TRANSFORM, direction.transition + "(" + (!reverse ? offset : 0) + "px)");
@@ -706,6 +711,7 @@
                     element.css(direction.property); // Read a style to force Chrome to apply the change.
                 }
 
+
                 return extend(extender, options.properties);
             }
         },
@@ -715,7 +721,8 @@
             restore: [ OVERFLOW ],
             setup: function(element, options) {
                 var reverse = options.reverse,
-                    property = (options.direction ? options.direction == "vertical" : true) ? HEIGHT : WIDTH,
+                    direction = options.effects.expand.direction,
+                    property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
                     setLength = element[0].style[property],
                     oldLength = element.data(property),
                     length = parseInteger(oldLength || setLength) || round(element.css(property, AUTO )[property]()),
@@ -730,7 +737,8 @@
                 return extend(completion, options.properties);
             },
             teardown: function(element, options) {
-                var property = (options.direction ? options.direction == "vertical" : true) ? HEIGHT : WIDTH,
+                var direction = options.effects.expand.direction,
+                    property = (direction ? direction == "vertical" : true) ? HEIGHT : WIDTH,
                     length = element.data(property);
                 if (length == AUTO || length === BLANK) {
                     setTimeout(function() { element.css(property, AUTO).css(property); }, 0); // jQuery animate complete callback in IE is called before the last animation step!
