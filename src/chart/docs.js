@@ -461,6 +461,9 @@
          * @option {Boolean} [valueAxis.majorGridLines.visible] <true> The visibility of the lines.
          * @option {String} [valueAxis.color] Color to apply to all axis elements.
          * Individual color settings for line and labels take priority.
+         * @option {Boolean} [valueAxis.mirror] Mirrors the axis labels and ticks.
+         * If the labels are normally on the left side of the axis,
+         * mirroring the axis will render them to the right.
          * @option {Object} [valueAxis.line] Configures the axis line.
          * @option {Number} [valueAxis.line.width] <1> The width of the lines.
          * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
@@ -770,6 +773,9 @@
          * @option {Boolean} [categoryAxis.majorGridLines.visible] <false> The visibility of the lines.
          * @option {String} [categoryAxis.color] Color to apply to all axis elements.
          * Individual color settings for line and labels take priority.
+         * @option {Boolean} [valueAxis.mirror] Mirrors the axis labels and ticks.
+         * If the labels are normally on the left side of the axis,
+         * mirroring the axis will render them to the right.
          * @option {Object} [categoryAxis.line] Configures the axis line.
          * @option {Number} [categoryAxis.line.width] <1> The width of the lines.
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
