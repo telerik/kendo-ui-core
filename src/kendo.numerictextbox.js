@@ -535,9 +535,9 @@
                 element = that.element,
                 wrapper;
 
-            wrapper = element.parent();
+            wrapper = element.parents(".k-numerictextbox");
 
-            if (!wrapper.is("span.k-widget")) {
+            if (!wrapper.is("span.k-numerictextbox")) {
                 wrapper = element.hide().wrap('<span class="k-numeric-wrap k-state-default" />').parent();
                 wrapper = wrapper.wrap("<span/>").parent();
             }
