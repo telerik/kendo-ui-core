@@ -22,5 +22,9 @@ tests.push(
     {
         page: "autocomplete/events.html",
         title: "autocomplete events"
+    },
+    {
+        page: "autocomplete/placeholder.html",
+        title: "autocomplete placeholder"
     }
 );
