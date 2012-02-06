@@ -1,46 +1,55 @@
+/**
+ * @fileOverview Provides a TreeView implementation which can be used to display hierarchical data in a traditional
+ * tree structure.
+ */
+
 (function($, undefined){
     /**
      * @name kendo.ui.TreeView.Description
      *
      * @section
      * <p>
-     *  The <b>TreeView</b> displays hierarchical data in a traditional tree
-     *  structure. It supports user interaction through the mouse or touch to
-     *  perform re-ordering operations via drag-and-drop.
+     *  The <strong>TreeView</strong> displays hierarchical data in a traditional tree structure. It supports user
+     *  interaction through the mouse or touch to perform re-ordering operations via drag-and-drop.
      * </p>
      * <p>
-     *  A <b>TreeView</b> can be created by leveraging HTML lists. However,
-     *  it does not support binding to a remote data source at this point in
-     *  time.
+     *  A <strong>TreeView</strong> can be created by leveraging HTML lists. However, it does not support binding to a
+     *  remote data source at this point in time.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>A <b>TreeView</b> can be created in two ways:</p>
+     * <p>A <strong>TreeView</strong> can be created in two ways:</p>
      * <ol>
      *  <li>Define a hierarchical list with static HTML</li>
      *  <li>Use dynamic data binding</li>
      * </ol>
      * <p>
-     *  Static HTML definition is appropriate for small hierarchies and for
-     *  data that does not change frequently. Databinding should be used for
-     *  larger data sets and for data that changes frequently.
+     *  Static HTML definition is appropriate for small hierarchies and for data that does not change frequently.
+     *  Databinding should be used for larger data sets and for data that changes frequently.
      * </p>
      * <h3>Creating a TreeView from HTML</h3>
-     * @exampleTitle Create a hierarchical HTML list
+     *
+     * @exampleTitle Create a hierarchical list in HTML
      * @example
      * <ul id="treeView">
-     *  <li>Item 1
-     *   <ul>
-     *    <li>Item 1.1</li>
-     *    <li>Item 1.2</li>
-     *   </ul>
-     *  </li>
-     *  <li>Item 2</li>
+     *     <li>Item 1
+     *         <ul>
+     *             <li>Item 1.1</li>
+     *             <li>Item 1.2</li>
+     *         </ul>
+     *     </li>
+     *     <li>Item 2</li>
      * </ul>
      *
-     * @exampleTitle Initialize the TreeView using a jQuery selector
+     * @section
+     * <p>
+     *  Initialization of a <strong>TreeView</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>TreeView</strong> occur within a handler is provided to $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize a TreeView using a selector within $(document).ready()
      * @example
      * $(document).ready(function() {
-     *  $("#treeView").kendoTreeView();
+     *     $("#treeView").kendoTreeView();
      * });
      *
      * @section
@@ -53,50 +62,44 @@
      * @exampleTitle Initialize and bind the TreeView
      * @example
      * $(document).ready(function() {
-     *  $("#treeView").kendoTreeView({
-     *   dataSource: [
-     *    {
-     *     text: "Item 1",
-     *     items: [
-     *      { text: "Item 1.1" },
-     *      { text: "Item 1.2" }
-     *     ]
-     *    },
-     *    { text: "Item 2" }
-     *   ]
-     *  })
+     *     $("#treeView").kendoTreeView({
+     *         dataSource: [
+     *             {
+     *                 text: "Item 1",
+     *                 items: [
+     *                     { text: "Item 1.1" },
+     *                     { text: "Item 1.2" }
+     *                 ]
+     *             },
+     *             { text: "Item 2" }
+     *         ]
+     *     })
      * });
      *
      * @section
-     * <p>
-     *  <b>Note:</b> Currently, the <b>TreeView</b> does not support binding
-     *  to a remote data source.
-     * </p>
+     * <p>Currently, the <strong>TreeView</strong> does not support binding to a remote data source.</p>
      * <h3>Configuring TreeView Behavior</h3>
      * <p>
-     *  A number of <b>TreeView</b> behaviors can be easily controlled by
-     *  simple configuration properties, such as animation behaviors and
-     *  drag-and-drop behaviors.
+     *  A number of <strong>TreeView</strong> behaviors can be easily controlled by simple configuration properties,
+     *  such as animation behaviors and drag-and-drop behaviors.
      * </p>
      *
      * @exampleTitle Enabling drag-and-drop for TreeView nodes
      * @example
      * $("#treeView").kendoTreeView({
-     *  dragAndDrop: true
+     *     dragAndDrop: true
      * });
      *
      * @section
      * <p>
-     *  When drag-and-drop is enabled, the nodes of a <b>TreeView</b> can be
-     *  dragged and dropped between all levels, with useful tooltips helping
-     *  indicate where the node will be dropped.
+     *  When drag-and-drop is enabled, the nodes of a <strong>TreeView</strong> can be dragged and dropped between all
+     *  levels, with useful tooltips helping indicate where the node will be dropped.
      * </p>
      * <h3>Accessing an Existing TreeView</h3>
      * <p>
-     *  You can reference an existing <b>TreeView</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-     *  Once a reference has been established, you can use the API to control
-     *  its behavior.
+     *  You can reference an existing <strong>TreeView</strong> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+     *  use the API to control its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing TreeView instance
@@ -237,95 +240,104 @@
 
     TreeView = Widget.extend(/** @lends kendo.ui.TreeView.prototype */ {
         /**
+         *
+         * Creates a TreeView instance.
+         *
          * @constructs
          * @extends kendo.ui.Widget
+         *
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
+         *
          * @option {Array} [dataSource]
-         * The data that the <b>TreeView</b> will be bound to.
+         * The data that the <strong>TreeView</strong> will be bound to.
          *
          * @option {Object} [animation]
-         * A collection of visual animations used when items are expanded or
-         * collapsed through user interaction. Setting this option to
-         * <b>false</b> will disable all animations.
-           * _example
-           * $("#treeView").kendoTreeView({
-           *  animation: {
-           *   expand: {
-           *    duration: 200,
-           *    hide: true,
-           *    show: false
-           *   }
-           *   collapse: {
-           *    duration: 200,
-           *    effects: "expandVertical",
-           *    show: true
-           *   }
-           *  }
-           * });
+         * A collection of visual animations used when items are expanded or collapsed through user interaction.
+         * Setting this option to <strong>false</strong> will disable all animations.
+         *
+         * _example
+         * $("#treeView").kendoTreeView({
+         *     animation: {
+         *         expand: {
+         *             duration: 200,
+         *             hide: true,
+         *             show: false
+         *         }
+         *         collapse: {
+         *             duration: 200,
+         *             effects: "expandVertical",
+         *             show: true
+         *         }
+         *     }
+         * });
          *
          * @option {Animation} [animation.expand]
          * The animation that will be used when expanding items.
          *
-         * @option {Number} [animation.expand.duration] <200> The number of
-         * milliseconds used for the animation when a node is expanded.
-           * _example
-           * $("#treeView").kendoTreeView({
-           *  animation: {
-           *   expand: {
-           *    duration: 1000
-           *   }
-           *  }
-           * });
+         * @option {Number} [animation.expand.duration] <200> The number of milliseconds used for the animation when a
+         * node is expanded.
+         *
+         * _example
+         * $("#treeView").kendoTreeView({
+         *     animation: {
+         *         expand: {
+         *             duration: 1000
+         *         }
+         *     }
+         * });
          *
          * @option {String} [animation.expand.effects] <"expandVertical">
-         * A whitespace-delimited string of animation effects that are
-         * utilized when a <b>TreeView</b> node is expanded. Options include
-         * <b>"expandVertical"</b> and <b>"fadeIn"</b>.
-           * _example
-           * // expand and fade-in simultaneously over 5000 milliseconds
-           * $("#treeView").kendoTreeView({
-           *  animation: {
-           *   expand: {
-           *    duration: 5000,
-           *    effects: "expandVertical fadeIn"
-           *   }
-           *  }
-           * });
+         * A whitespace-delimited string of animation effects that are utilized when a <strong>TreeView</strong> node
+         * is expanded. Options include <strong>"expandVertical"</strong> and <strong>"fadeIn"</strong>.
+         *
+         * _exampleTitle Initialize a TreeView to expand and fade-in nodes over 5000 milliseconds
+         * _example
+         * $("#treeView").kendoTreeView({
+         *     animation: {
+         *         expand: {
+         *             duration: 5000,
+         *             effects: "expandVertical fadeIn"
+         *         }
+         *     }
+         * });
          *
          * @option {Boolean} [animation.expand.show] <true>
          *
          * @option {Boolean} [dragAndDrop] <false>
-         * Disables (<b>false</b>) or enables (<b>true</b>) drag-and-drop
-         * on the nodes of a <b>TreeView</b>.
+         * Disables (<strong>false</strong>) or enables (<b>true</b>) drag-and-drop on the nodes of a
+         * <strong>TreeView</strong>.
          *
-         * @option {Animation} [animation.collapse] The animation that will be used when collapsing items.
-         * @option {Number} [animation.collapse.duration] <200> The number of
-         * milliseconds used for the animation when a node is expanded.
-           * _example
-           * $("#treeView").kendoTreeView({
-           *  animation: {
-           *   collapse: {
-           *    duration: 1000
-           *   }
-           *  }
-           * });
+         * @option {Animation} [animation.collapse]
+         * The animation that will be used when collapsing items.
+         *
+         * @option {Number} [animation.collapse.duration] <200>
+         * The number of milliseconds used for the animation when a node is expanded.
+         *
+         * _exampleTitle Initialize a TreeView to collapse nodes over 1000 milliseconds
+         * _example
+         * $("#treeView").kendoTreeView({
+         *     animation: {
+         *         collapse: {
+         *             duration: 1000
+         *         }
+         *     }
+         * });
          *
          * @option {String} [animation.collapse.effects]
-         * A whitespace-delimited string of animation effects that are
-         * utilized when a <b>TreeView</b> node is collapsed. Options include
-         * <b>"fadeOut"</b>.
-           * _example
-           * // collapse and fade-out over 5000 milliseconds
-           * $("#treeView").kendoTreeView({
-           *  animation: {
-           *   collapse: {
-           *    duration: 5000,
-           *    effects: "fadeOut"
-           *   }
-           *  }
-           * });
+         * A whitespace-delimited string of animation effects that are utilized when a <strong>TreeView</strong> node
+         * is collapsed. Options include <strong>"fadeOut"</strong>.
          *
+         * _exampleTitle Initialize a TreeView to collapse and fade-out nodes over 5000 milliseconds
+         * _example
+         * $("#treeView").kendoTreeView({
+         *     animation: {
+         *         collapse: {
+         *             duration: 5000,
+         *             effects: "fadeOut"
+         *         }
+         *     }
+         * });
          *
          */
         init: function (element, options) {
@@ -380,47 +392,98 @@
             if (options.dragAndDrop) {
                 that.bind([
                         /**
-                         * Fires before the dragging of a node starts.
+                         *
+                         * Triggered before the dragging of a node starts.
+                         *
                          * @name kendo.ui.TreeView#dragstart
                          * @event
+                         *
                          * @param {Event} e
-                         * @param {Node} e.sourceNode The node that will be dragged.
+                         *
+                         * @param {Node} e.sourceNode
+                         * The node that will be dragged.
+                         *
                          */
                         DRAGSTART,
+
                         /**
-                         * Fires while a node is being dragged.
+                         *
+                         * Triggered while a node is being dragged.
+                         *
                          * @name kendo.ui.TreeView#drag
                          * @event
+                         *
                          * @param {Event} e
-                         * @param {Node} e.sourceNode The node that is being dragged.
-                         * @param {DomElement} e.dropTarget The element that the node is placed over.
-                         * @param {Integer} e.pageX The x coordinate of the mouse.
-                         * @param {Integer} e.pageY The y coordinate of the mouse.
-                         * @param {String} e.statusClass The status that the drag clue shows.
-                         * @param {Function} e.setStatusClass Allows a custom drag clue status to be set.
+                         *
+                         * @param {Node} e.sourceNode
+                         * The node that is being dragged.
+                         *
+                         * @param {DomElement} e.dropTarget
+                         * The element that the node is placed over.
+                         *
+                         * @param {Integer} e.pageX
+                         * The x coordinate of the mouse.
+                         *
+                         * @param {Integer} e.pageY
+                         * The y coordinate of the mouse.
+                         *
+                         * @param {String} e.statusClass
+                         * The status that the drag clue shows.
+                         *
+                         * @param {Function} e.setStatusClass
+                         * Allows a custom drag clue status to be set.
+                         *
                          */
                         DRAG,
+
                         /**
-                         * Fires when a node is being dropped.
+                         *
+                         * Triggered when a node is being dropped.
+                         *
                          * @name kendo.ui.TreeView#drop
                          * @event
+                         *
                          * @param {Event} e
-                         * @param {Node} e.sourceNode The node that is being dropped.
-                         * @param {Node} e.destinationNode The node that the sourceNode is being dropped upon.
-                         * @param {Boolean} e.valid Whether this drop operation is permitted
-                         * @param {Function} e.setValid Allows the drop to be prevented.
-                         * @param {DomElement} e.dropTarget The element that the node is placed over.
-                         * @param {String} e.dropPosition Shows where the new sourceLocation would be.
+                         *
+                         * @param {Node} e.sourceNode
+                         * The node that is being dropped.
+                         *
+                         * @param {Node} e.destinationNode
+                         * The node that the sourceNode is being dropped upon.
+                         *
+                         * @param {Boolean} e.valid
+                         * Whether this drop operation is permitted.
+                         *
+                         * @param {Function} e.setValid
+                         * Allows the drop to be prevented.
+                         *
+                         * @param {DomElement} e.dropTarget
+                         * The element that the node is placed over.
+                         *
+                         * @param {String} e.dropPosition
+                         * Shows where the new sourceLocation would be.
+                         *
                          */
                         DROP,
+
                         /**
-                         * Fires after a node is has been dropped.
+                         *
+                         * Triggered after a node is has been dropped.
+                         *
                          * @name kendo.ui.TreeView#dragend
                          * @event
+                         *
                          * @param {Event} e
-                         * @param {Node} e.sourceNode The node that is being dropped.
-                         * @param {Node} e.destinationNode The node that the sourceNode is being dropped upon.
-                         * @param {String} e.dropPosition Shows where the new sourceLocation would be.
+                         *
+                         * @param {Node} e.sourceNode
+                         * The node that is being dropped.
+                         *
+                         * @param {Node} e.destinationNode
+                         * The node that the sourceNode is being dropped upon.
+                         *
+                         * @param {String} e.dropPosition
+                         * Shows where the new sourceLocation would be.
+                         *
                          */
                         DRAGEND
                     ], options);
@@ -430,27 +493,47 @@
 
             that.bind([
                 /**
-                 * Fires before a subgroup gets expanded.
+                 *
+                 * Triggered before a subgroup gets expanded.
+                 *
                  * @name kendo.ui.TreeView#expand
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Node} e.node The expanded node
+                 *
+                 * @param {Node} e.node
+                 * The expanded node
+                 *
                  */
                 EXPAND,
+
                 /**
-                 * Fires before a subgroup gets collapsed.
+                 *
+                 * Triggered before a subgroup gets collapsed.
+                 *
                  * @name kendo.ui.TreeView#collapse
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Node} e.node The collapsed node
+                 *
+                 * @param {Node} e.node
+                 * The collapsed node
+                 *
                  */
                 COLLAPSE,
+
                 /**
-                 * Fires when a node gets selected.
+                 *
+                 * Triggered when a node gets selected.
+                 *
                  * @name kendo.ui.TreeView#select
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Node} e.node The selected node
+                 *
+                 * @param {Node} e.node
+                 * The selected node
+                 *
                  */
                 SELECT
             ], options);
@@ -566,8 +649,12 @@
         },
 
         /**
+         *
          * Expands nodes.
-         * @param {Selector} nodes The nodes that are to be expanded.
+         *
+         * @param {Selector} nodes
+         * The nodes that are to be expanded.
+         *
          * @example
          * var treeview = $("#treeview").data("kendoTreeView");
          *
@@ -576,6 +663,7 @@
          *
          * // expands all nodes
          * treeview.expand(".k-item");
+         *
          */
         expand: function (nodes) {
             this._processNodes(nodes, function (index, item) {
@@ -588,8 +676,12 @@
         },
 
         /**
+         *
          * Collapses nodes.
-         * @param {Selector} nodes The nodes that are to be collapsed.
+         *
+         * @param {Selector} nodes
+         * The nodes that are to be collapsed.
+         *
          * @example
          * var treeview = $("#treeview").data("kendoTreeView");
          *
@@ -598,6 +690,7 @@
          *
          * // collapse all nodes
          * treeview.collapse(".k-item");
+         *
          */
         collapse: function (nodes) {
             this._processNodes(nodes, function (index, item) {
@@ -610,9 +703,15 @@
         },
 
         /**
+         *
          * Enables or disables nodes.
-         * @param {Selector} nodes The nodes that are to be enabled/disabled.
-         * @param {Boolean} [enable=true] Whether the nodes should be enabled or disabled.
+         *
+         * @param {Selector} nodes
+         * The nodes that are to be enabled/disabled.
+         *
+         * @param {Boolean} [enable=true]
+         * Whether the nodes should be enabled or disabled.
+         *
          * @example
          * var treeview = $("#treeview").data("kendoTreeView");
          *
@@ -621,6 +720,7 @@
          *
          * // enable all nodes
          * treeview.enable(".k-item");
+         *
          */
         enable: function (nodes, enable) {
             enable = arguments.length == 2 ? !!enable : true;
@@ -647,17 +747,25 @@
         },
 
         /**
-         * Gets/sets the selected node.
-         * @param {Selector} [node] The node that should be selected.
-         * @returns {Node} The currently selected node
+         *
+         * Gets or sets the selected node of a TreeView.
+         *
+         * @param {Selector} [node]
+         * If provided, the node of a TreeView that should be selected.
+         *
+         * @returns {Node}
+         * The selected node of a TreeView.
+         *
+         * @exampleTitle Select the node with ID, firstItem
          * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.select($("#firstItem"));
          *
-         * // select the node with id="firstItem"
-         * treeview.select(document.getElementById("firstItem"));
+         * @exampleTitle Get the currently selected node
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * var selectedNode = treeView.select();
          *
-         * // get the currently selected node
-         * var selectedNode = treeview.select();
          */
         select: function (node) {
             var element = this.element;
@@ -676,13 +784,17 @@
         },
 
         /**
-         * Toggles a node between expanded and collapsed state.
-         * @param {jQueryObject} node The node that should be toggled.
-         * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
          *
-         * // toggle the node with id="firstItem"
-         * treeview.toggle(document.getElementById("firstItem"));
+         * Toggles the node of a TreeView between its expanded and collapsed states.
+         *
+         * @param {Selector} node
+         * The node that should be toggled.
+         *
+         * @exampleTitle Toggle the state of a node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.toggle($("#firstItem"));
+         *
          */
         toggle: function (node) {
             node = $(node);
@@ -733,14 +845,20 @@
         },
 
         /**
-         * Get the text of a node.
-         * @param {Selector} node The node that you need the text for.
-         * @returns {String} The text of the node.
-         * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
          *
-         * // get the text of the node with id="firstItem"
-         * var nodeText = treeview.text(document.getElementById("firstItem"));
+         * Gets the text of a node in a TreeView.
+         *
+         * @param {Selector} node
+         * The node of which the text is being retrieved.
+         *
+         * @returns {String}
+         * The text of a node.
+         *
+         * @exampleTitle Get the text of the node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * var nodeText = treeView.text($("#firstItem"));
+         *
          */
         text: function (node) {
             return $(node).closest(NODE).find(">div>.k-in").text();
@@ -810,17 +928,26 @@
         },
 
         /**
-         * Inserts a node after another node.
-         * @param {NodeData} nodeData JSON that specifies the node data, or a reference to a node in the TreeView.
-         * @param {Node} referenceNode The node that will be before the newly appended node.
+         *
+         * Inserts a node after a specified node in a TreeView. This method may also be used to reorder the nodes of a
+         * TreeView.
+         *
+         * @param {String|Selector} nodeData
+         * A JSON-formatted string or selector that specifies the node to be inserted.
+         *
+         * @param {Node} referenceNode
+         * The node that will be preceed the newly-appended node.
+         *
+         * @exampleTitle Insert a node with the text, "Y U NO insert node?" after the node with ID, firstItem
          * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.insertAfter({ text: "Y U NO insert node?" }, $("#firstItem"));
          *
-         * // inserts a new node with the text "new node" after the node with id="firstItem"
-         * treeview.insertAfter({ text: "new node" }, document.getElementById("firstItem"));
+         * @exampleTitle Moves a node with ID, secondNode after a node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.insertAfter($("#secondNode"), $("#firstItem"));
          *
-         * // moves the node with id="secondNode" after the node with id="firstItem"
-         * treeview.insertAfter(document.getElementById("secondNode"), document.getElementById("firstItem"));
          */
         insertAfter: function (nodeData, referenceNode) {
             var group = referenceNode.parent();
@@ -831,17 +958,26 @@
         },
 
         /**
-         * Inserts a node before another node.
-         * @param {NodeData} nodeData JSON that specifies the node data, or a reference to a node in the TreeView.
-         * @param {Node} referenceNode The node that will be after the newly appended node.
+         *
+         * Inserts a node before another node. This method may also be used to reorder the nodes of a
+         * TreeView.
+         *
+         * @param {String|Selector} nodeData
+         * A JSON-formatted string or selector that specifies the node to be inserted.
+         *
+         * @param {Node} referenceNode
+         * The node that follows the inserted node.
+         *
+         * @exampleTitle Inserts a new node with the text, "It's over 9000!" before the node with ID, firstItem
          * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.insertBefore({ text: "It's over 9000!" }, $("#firstItem"));
          *
-         * // inserts a new node with the text "new node" before the node with id="firstItem"
-         * treeview.insertBefore({ text: "new node" }, document.getElementById("firstItem"));
+         * @exampleTitle Moves the node with ID, secondNode before the node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.insertBefore($("#secondNode"), $("#firstItem"));
          *
-         * // moves the node with id="secondNode" before the node with id="firstItem"
-         * treeview.insertBefore(document.getElementById("secondNode"), document.getElementById("firstItem"));
          */
         insertBefore: function (nodeData, referenceNode) {
             var group = referenceNode.parent();
@@ -853,25 +989,25 @@
 
         /**
          *
-         * Appends a node to a group of a <b>TreeView</b>.
-         * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
-         *
-         * // appends a new node with the text "new node" to the node with id="firstItem"
-         * treeview.append({ text: "new node" }, document.getElementById("firstItem"));
-         *
-         * // moves the node with id="secondNode" as a last child of the node with id="firstItem"
-         * treeview.append(document.getElementById("secondNode"), document.getElementById("firstItem"));
-         *
-         *
-         * @param {NodeData} nodeData
-         * JSON that specifies the node data, or a reference to a node in the
+         * Appends a node to a group of a TreeView. This method may also be used to reorder the nodes of a
          * TreeView.
          *
+         * @param {String|Selector} nodeData
+         * A JSON-formatted string or selector that specifies the node to be appended.
+         *
          * @param {Node} [parentNode]
-         * The node that will contain the newly appended node. If not
-         * specified, the new node will be appended to the root group of the
-         * treeview.
+         * The node that will contain the newly appended node. If not specified, the new node will be appended to the
+         * root group of the TreeView.
+         *
+         * @exampleTitle Append a new node with the text, "Meanwhile, in HTML5..." to the node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.append({ text: "Meanwhile, in HTML5..." }, $("#firstItem"));
+         *
+         * @exampleTitle Moves the node with ID, secondNode as a last child of the node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.append($("#secondNode"), $("#firstItem"));
          *
          */
         append: function (nodeData, parentNode) {
@@ -885,13 +1021,17 @@
         },
 
         /**
-         * Removes a node
-         * @param {Selector} node The node that is to be removed.
-         * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
          *
-         * // remove the node with id="firstItem"
-         * treeview.remove(document.getElementById("firstItem"));
+         * Removes a node from a TreeView.
+         *
+         * @param {Selector} node
+         * The node that is to be removed.
+         *
+         * @exampleTitle Remove the node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * treeView.remove($("#firstItem"));
+         *
          */
         remove: function (node) {
             node = $(node);
@@ -913,14 +1053,20 @@
         },
 
         /**
-         * Searches the treeview for a node that has specific text.
-         * @param {String} text The text that is being searched for.
-         * @returns {jQueryObject} All nodes that have the text.
-         * @example
-         * var treeview = $("#treeview").data("kendoTreeView");
          *
-         * // searches the treeview for the item that has the text "foo"
-         * var foundNode = treeview.findByText("foo");
+         * Searches a TreeView for a node that has specific text.
+         *
+         * @param {String} text
+         * The text that is being searched for.
+         *
+         * @returns {jQueryObject}
+         * All nodes that have the text.
+         *
+         * @exampleTitle Search a TreeView for the item that has the text, "CSS3 is da bomb!"
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * var foundNode = treeView.findByText("CSS3 is da bomb!");
+         *
          */
         findByText: function(text) {
             return $(this.element).find(".k-in").filter(function(i, element) {

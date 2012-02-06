@@ -1,0 +1,66 @@
+{! var ownEvents = data.events.filter(function($){return !$.isNamespace}).sort(makeSortby("name")); !}
+<if test="defined(ownEvents) && ownEvents.length">
+    <for each="member" in="ownEvents">
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="{+ member.name +}"><code>{+member.name+}</code></a>
+        </div>
+        <div class="detailBody">
+            {! output += outputDescription(member.comment); !}
+
+            <if test="member.params.length > 1">
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    <for each="item" in="member.params">
+                        <if test="item.name != 'e'">
+                        <dt>
+                            <code>{+item.name.replace(/^e\./i,"")+}</code>
+                            {+((item.type)?"<span class=\"type\">: " + item.type + "</span> " : "")+}
+                            <if test="item.isOptional"><i>optional<if test="item.defaultValue">, default: {+item.defaultValue+}</if></i></if>
+                        </dt>
+                        <dd>{+ resolveLinks(item.desc) +}</dd>
+                        </if>
+                    </for>
+                    </dl>
+                </div>
+            </if>
+
+            <if test="member.returns.length">
+            <div class="returns">
+                <strong>Returns</strong>
+                <span>{+((member.returns[0].type)?"<span class=\"light fixedFont\">"+(new Link().toSymbol(member.returns[0].type))+"</span> " : "")+}{+resolveLinks(member.returns[0].desc)+}</span>
+            </div>
+            </if>
+
+            <if test="member.deprecated || member.since || member.exceptions.length || member.see.length">
+                <dl class="detailList">
+                    <if test="member.deprecated">
+                        <dt class="heading">Deprecated:</dt>
+                        <dt>{+ resolveLinks(member.deprecated) +}</dt>
+                    </if>
+
+                    <if test="member.since">
+                        <dt class="heading">Since:</dt>
+                        <dd>{+ member.since +}</dd>
+                    </if>
+
+
+                    <if test="member.requires.length">
+                        <dt class="heading">Requires:</dt>
+                        <for each="item" in="member.requires">
+                            <dd>{+ resolveLinks(item) +}</dd>
+                        </for>
+                    </if>
+
+                    <if test="member.see.length">
+                        <dt class="heading">See:</dt>
+                        <for each="item" in="member.see">
+                            <dd>{+ new Link().toSymbol(item) +}</dd>
+                        </for>
+                    </if>
+                </dl>
+            </if>
+        </div>
+    </for>
+</if>

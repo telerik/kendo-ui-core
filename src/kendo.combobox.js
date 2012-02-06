@@ -138,7 +138,7 @@
      * @exampleTitle Accessing an existing ComboBox instance
      * @example
      * var comboBox = $("#comboBox").data("kendoComboBox");
-     *    
+     *
      */
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -181,7 +181,7 @@
 	*	      read: {
 	*	          url: "Get/Items" // url to remote data source
 	*	      }
-	*         }         
+	*         }
 	*     });
 	* });
 	* @option {Boolean} [enable] <true> Controls whether the ComboBox should be initially enabled.
@@ -193,7 +193,7 @@
 	* _example
 	* // get a reference to the ComboBox widget
 	* var comboBox = $("#comboBox").data("kendoComboBox");
-	* comboBox.enable(false); 
+	* comboBox.enable(false);
 	* @option {Number} [index] <-1> Defines the initial selected item.
 	* _example
 	* var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
@@ -239,11 +239,11 @@
 	* $("#comboBox").kendoComboBox({
 	*     dataTextField: "Name",
 	*     dataValueField: "ID"
-	* }); 
+	* });
 	* @option {String} [filter] <"none"> Defines the type of filtration. If "none" the ComboBox will not filter the items.
         * _example
 	* $("#comboBox").kendoComboBox({
-	*     filter: "Item"
+	*     filter: "startswith"
 	* });
 	* @option {Number} [height] <200> Define the height of the drop-down list in pixels.
 	* _example
@@ -353,7 +353,7 @@
 		* // bind to the open event
 		* combobox.bind("open", function(e) {
 		*     // handle event
-		* });	
+		* });
                 */
                 /**
                 * Fires when the drop-down list is closed

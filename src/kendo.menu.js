@@ -4,29 +4,34 @@
      *
      * @section
      * <p>
-     *  The <b>Menu</b> displays hierarchical data as a multi-level menu.
-     *  It provides rich styling for unordered lists of items, and can be
-     *  used for both navigation and executing JavaScript commands. Items can
-     *  be defined and initialized from HTML, or the API can be used to add
-     *  and remove items.
+     *  The <b>Menu</b> displays hierarchical data as a multi-level menu. It provides rich styling for unordered lists
+     *  of items, and can be used for both navigation and executing JavaScript commands. Items can be defined and
+     *  initialized from HTML, or the API can be used to add and remove items.
      * </p>
      * <h3>Getting Started</h3>
+     *
      * @exampleTitle Create a HTML hierarchical list of items
      * @example
      * <ul id="menu">
-     *  <li>Item 1
-     *   <ul>
-     *    <li>Item 1.1</li>
-     *    <li>Item 1.2</li>
-     *   </ul>
-     *  </li>
-     *  <li>Item 2</li>
+     *     <li>Item 1
+     *         <ul>
+     *             <li>Item 1.1</li>
+     *             <li>Item 1.2</li>
+     *         </ul>
+     *     </li>
+     *     <li>Item 2</li>
      * </ul>
      *
-     * @exampleTitle Initialize the Menu using jQuery selector
+     * @section
+     * <p>
+     *  Initialization of a <strong>Menu</strong> should occur after the DOM is fully loaded. It is recommended that
+     *  initialization the <strong>Menu</strong> occur within a handler is provided to $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize a Menu using a selector within $(document).ready()
      * @example
      * $(document).ready(function() {
-     *  $("#menu").kendoMenu();
+     *     $("#menu").kendoMenu();
      * });
      *
      * @exampleTitle Initialize the Menu using JSON data object
@@ -506,10 +511,19 @@
         },
 
         /**
-         * Enables/disables a Menu item
-         * <p>This can optionally be accomplished on initialization by setting the <b>disabled="disabled"</b> on the desired menu item html element.</p>
-         * @param {Selector} element Target element
-         * @param {Boolean} enable Desired state
+         *
+         * Enables or disables an item of a <strong>Menu</strong>. This can optionally be accomplished on
+         * initialization by setting the <b>disabled="disabled"</b> on the desired menu item html element.
+         *
+         * @param {Selector} element
+         * Target element
+         *
+         * @param {Boolean} enable
+         * Desired state
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
@@ -529,9 +543,18 @@
         },
 
         /**
-         * Appends a Menu item in the specified referenceItem's sub menu
-         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
-         * @param {Item} referenceItem A reference item to append the new item in
+         *
+         * Appends an item to a <strong>Menu</strong> in the specified referenceItem's sub menu.
+         *
+         * @param {Selector} item
+         * Target item, specified as a JSON object. Can also handle an array of such objects.
+         *
+         * @param {Item} referenceItem
+         * A reference item to append the new item in.
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
@@ -575,9 +598,18 @@
         },
 
         /**
-         * Inserts a Menu item before the specified referenceItem
-         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
-         * @param {Selector} referenceItem A reference item to insert the new item before
+         *
+         * Inserts an item into a <strong>Menu</strong> before the specified referenceItem.
+         *
+         * @param {Selector} item
+         * Target item, specified as a JSON object. Can also handle an array of such objects.
+         *
+         * @param {Selector} referenceItem
+         * A reference item to insert the new item before
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
@@ -620,9 +652,18 @@
         },
 
         /**
-         * Inserts a Menu item after the specified referenceItem
-         * @param {Selector} item Target item, specified as a JSON object. Can also handle an array of such objects.
-         * @param {Selector} referenceItem A reference item to insert the new item after
+         *
+         * Inserts an item into a <strong>Menu</strong> after the specified referenceItem.
+         *
+         * @param {Selector} item
+         * Target item, specified as a JSON object. Can also handle an array of such objects.
+         *
+         * @param {Selector} referenceItem
+         * A reference item to insert the new item after.
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
@@ -648,6 +689,7 @@
          *     }],
          *     referenceItem
          * );
+         *
          */
         insertAfter: function (item, referenceItem) {
             referenceItem = $(referenceItem);
@@ -701,13 +743,21 @@
         },
 
         /**
-         * Removes the specified Menu item/s from the Menu
-         * @param {Selector} element Target item selector.
+         *
+         * Removes a specified item(s) from a <strong>Menu</strong>.
+         *
+         * @param {Selector} element
+         * Target item selector.
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
          * // remove the item with the id "Item1"
          * menu.remove("#Item1");
+         *
          */
         remove: function (element) {
             element = $(element);
@@ -734,13 +784,21 @@
         },
 
         /**
-         * Opens the sub menu of the specified Menu item/s
-         * @param {Selector} element Target item selector.
+         *
+         * Opens a sub-menu of a specified item(s) in a <strong>Menu</strong>.
+         *
+         * @param {Selector} element
+         * Target item selector.
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
          * // open the sub menu of "Item1"
          * menu.open("#Item1");
+         *
          */
         open: function (element) {
             var that = this,
@@ -801,13 +859,20 @@
         },
 
         /**
-         * Closes the sub menu of the specified Menu item/s
+         *
+         * Closes a sub-menu of a specified item(s) in a <strong>Menu</strong>.
+         *
          * @param {Selector} element Target item selector.
+         *
+         * @returns {Menu}
+         * Returns the Menu object to support chaining.
+         *
          * @example
          * // get a reference to the menu widget
          * var menu = $("#menu").data("kendoMenu");
          * // close the sub menu of "Item1"
          * menu.close("#Item1");
+         *
          */
         close: function (element) {
             var that = this;

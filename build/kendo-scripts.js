@@ -4,105 +4,100 @@ var fs = require("fs"),
     kendoBuild = require("./kendo-build.js");
 
 // Configuration ==============================================================
-var SCRIPTS = "src/",
-    EXAMPLES_SCRIPTS = "demos/examples/shared/js/";
+var SCRIPTS = "src",
+    CULTURES = "cultures",
+    CULTURE_SCRIPTS = path.join(SCRIPTS, CULTURES);
 
 var multipartScripts = [{
-    output:   SCRIPTS + "kendo.chart.js",
-    inputs: [ SCRIPTS + "chart/main.js",
-              SCRIPTS + "chart/svg.js",
-              SCRIPTS + "chart/vml.js",
-              SCRIPTS + "chart/themes.js"]
-    }, {
-    output:   EXAMPLES_SCRIPTS + "kendo.examples.js",
-    inputs: [ EXAMPLES_SCRIPTS + "examples.js",
-              EXAMPLES_SCRIPTS + "console.js",
-              EXAMPLES_SCRIPTS + "people.js",
-              EXAMPLES_SCRIPTS + "prettify.js"
-    ]}
+    output:   "kendo.chart.js",
+    inputs: [ path.join("chart", "main.js"),
+              path.join("chart", "svg.js"),
+              path.join("chart", "vml.js"),
+              path.join("chart", "themes.js")]
+    }
 ];
 
-var allScripts = [
-    "kendo.core.js",
-    "kendo.fx.js",
-    "kendo.data.odata.js",
-    "kendo.data.xml.js",
-    "kendo.model.js",
-    "kendo.binder.js",
-    "kendo.data.js",
-    "kendo.validator.js",
-    "kendo.draganddrop.js",
-    "kendo.groupable.js",
-    "kendo.resizable.js",
-    "kendo.sortable.js",
-    "kendo.selectable.js",
-    "kendo.pager.js",
-    "kendo.popup.js",
-    "kendo.list.js",
-    "kendo.calendar.js",
-    "kendo.datepicker.js",
-    "kendo.autocomplete.js",
-    "kendo.dropdownlist.js",
-    "kendo.combobox.js",
-    "kendo.grid.js",
-    "kendo.numerictextbox.js",
-    "kendo.menu.js",
-    "kendo.editable.js",
-    "kendo.filtermenu.js",
-    "kendo.panelbar.js",
-    "kendo.tabstrip.js",
-    "kendo.timepicker.js",
-    "kendo.treeview.js",
-    "kendo.slider.js",
-    "kendo.splitter.js",
-    "kendo.upload.js",
-    "kendo.window.js",
-    "kendo.chart.js"
-];
-
-var deployScripts = [{
-    output: "kendo.all.js",
-    inputs: allScripts
-}, {
-    output: "kendo.web.js",
-    inputs: allScripts.filter(function(scriptName) {
-                return scriptName.indexOf("chart") == -1;
-            })
-}, {
-    output: "kendo.dataviz.js",
-    inputs: [
+var suiteScripts = {
+    "web": [
+        "kendo.core.js",
+        "kendo.fx.js",
+        "kendo.data.odata.js",
+        "kendo.data.xml.js",
+        "kendo.model.js",
+        "kendo.binder.js",
+        "kendo.data.js",
+        "kendo.validator.js",
+        "kendo.draganddrop.js",
+        "kendo.groupable.js",
+        "kendo.resizable.js",
+        "kendo.sortable.js",
+        "kendo.selectable.js",
+        "kendo.pager.js",
+        "kendo.popup.js",
+        "kendo.list.js",
+        "kendo.calendar.js",
+        "kendo.datepicker.js",
+        "kendo.autocomplete.js",
+        "kendo.dropdownlist.js",
+        "kendo.combobox.js",
+        "kendo.grid.js",
+        "kendo.numerictextbox.js",
+        "kendo.menu.js",
+        "kendo.editable.js",
+        "kendo.filtermenu.js",
+        "kendo.panelbar.js",
+        "kendo.tabstrip.js",
+        "kendo.timepicker.js",
+        "kendo.treeview.js",
+        "kendo.slider.js",
+        "kendo.splitter.js",
+        "kendo.upload.js",
+        "kendo.window.js"
+    ],
+    "dataviz": [
         "kendo.core.js",
         "kendo.data.odata.js",
         "kendo.data.xml.js",
         "kendo.model.js",
         "kendo.data.js",
         "kendo.chart.js"
+    ],
+    "mobile": [
+        "kendo.core.js",
+        "kendo.model.js",
+        "kendo.fx.js",
+        "kendo.data.odata.js",
+        "kendo.data.xml.js",
+        "kendo.data.js",
+        "kendo.history.js",
+        "kendo.mobile.core.js",
+        "kendo.mobile.view.js",
+        "kendo.mobile.application.js",
+        "kendo.mobile.button.js",
+        "kendo.mobile.listview.js",
+        "kendo.mobile.navbar.js",
+        "kendo.mobile.radiogroup.js",
+        "kendo.mobile.scroller.js",
+        "kendo.mobile.switch.js",
+        "kendo.mobile.tabstrip.js"
     ]
-}];
+};
 
-var thirdPartyScripts = [
-    "jquery.min.js",
-    "jquery.tmpl.min.js"
-];
-
-var CULTURES_ROOT = "cultures",
-    deployCache = { },
+var deployCache = { },
     mergeCache = { };
 
 // Implementation =============================================================
-function deploy(scriptsRoot, outputRoot, header, compress) {
-    deployScripts.forEach(function(script) {
-        console.log("\t" + scriptOutName(script.output, compress));
-        mergeMultipartScript(script, scriptsRoot, outputRoot, header, compress);
-    });
+function buildSuiteScripts(suite, outputRoot, header, compress) {
+    var scripts = suiteScripts[suite],
+        suiteScript = "kendo." + suite + ".js";
 
-    allScripts.forEach(function(scriptName) {
-        var cacheKey = scriptsRoot + compress + scriptName,
+    scripts.forEach(function(scriptName) {
+        var cacheKey = SCRIPTS + compress + scriptName,
             output = deployCache[cacheKey],
             outName = scriptOutName(scriptName, compress);
 
         if (!output) {
-            var content = kendoBuild.readText(path.join(scriptsRoot, scriptName));
+            var content = kendoBuild.readText(path.join(SCRIPTS, scriptName));
             output = compress ? kendoBuild.minifyJs(content) : content;
 
             deployCache[cacheKey] = kendoBuild.stripBOM(output);
@@ -111,17 +106,29 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
         kendoBuild.writeText(path.join(outputRoot, outName), header + output);
     });
 
-    thirdPartyScripts.forEach(function(scriptName) {
-        kendoBuild.copyFileSync(
-            path.join(scriptsRoot, scriptName),
-            path.join(outputRoot, scriptName)
+    console.log("\t" + scriptOutName(suiteScript, compress));
+    mergeMultipartScript(scripts, suiteScript, outputRoot, header, compress);
+}
+
+function buildCombinedScript(name, suites, outputRoot, header, compress) {
+    var scripts = [],
+        combinedScript = "kendo." + name + ".js";
+
+    suites.forEach(function(suite) {
+        scripts = scripts.concat(
+            suiteScripts[suite].filter(function(script) {
+                return scripts.indexOf(script) === -1;
+            })
         );
     });
 
-    var culturesRoot = path.join(scriptsRoot, CULTURES_ROOT),
-        culturesDest = path.join(outputRoot, CULTURES_ROOT);
+    mergeMultipartScript(scripts, combinedScript, outputRoot, header, compress);
+}
 
-    kendoBuild.copyDirSyncRecursive(culturesRoot, culturesDest);
+function buildCultures(outputRoot, header, compress) {
+    var culturesDest = path.join(outputRoot, CULTURES);
+
+    kendoBuild.copyDirSyncRecursive(CULTURE_SCRIPTS, culturesDest);
     kendoBuild.processFilesRecursive(culturesDest, /\.js$/, function(fileName) {
         var content = kendoBuild.readText(fileName),
             output = compress ? kendoBuild.minifyJs(content) : content,
@@ -141,20 +148,20 @@ function deploy(scriptsRoot, outputRoot, header, compress) {
 function mergeScripts() {
     multipartScripts.forEach(function(script) {
         console.log("\t" + script.output + ": " + script.inputs.length + " files");
-        mergeMultipartScript(script, "", "", "", false);
+        mergeMultipartScript(script.inputs, script.output, SCRIPTS, "", false);
     });
 }
 
-function mergeMultipartScript(script, srcDir, outDir, header, compress) {
-    var outFile = scriptOutName(script.output, compress),
-        cacheKey = srcDir + compress + outFile,
+function mergeMultipartScript(inputs, output, outDir, header, compress) {
+    var outFile = scriptOutName(output, compress),
+        cacheKey = compress + outFile,
         result = mergeCache[cacheKey] || "",
         moduleText;
 
     if (!result) {
-        script.inputs.forEach(function(module, index) {
+        inputs.forEach(function(module, index) {
             moduleText = kendoBuild.readText(
-                path.join(srcDir, module)
+                path.join(SCRIPTS, module)
             );
 
             if (index > 0) {
@@ -184,7 +191,8 @@ function scriptOutName(scriptName, compress) {
 // Exports / Execute =====================================================
 if (require.main !== module) {
     exports.mergeScripts = mergeScripts;
-    exports.deployScripts = deploy;
+    exports.buildSuiteScripts = buildSuiteScripts;
+    exports.buildCombinedScript = buildCombinedScript;
 } else {
     console.log("merging multipart scripts...");
     mergeScripts();

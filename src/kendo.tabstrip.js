@@ -1,153 +1,144 @@
+/**
+ * @fileOverview Provides a TabStrip implementation which can be used to display a collection of tabs with associated
+ * content
+ */
+
 (function ($, undefined) {
     /**
+     *
      * @name kendo.ui.TabStrip.Description
      *
      * @section
-     *  <p>
-     *      The TabStrip widget displays a collection of tabs with associated tab content.
-     *      TabStrips are composed of an HTML unordered list of items, which represent the tabs,
-     *      and a collection of HTML divs, which define the tab content.
-     *  </p>
-     *  <h3>Getting Started</h3>
+     * <p>
+     *  A <strong>TabStrip</strong> displays a collection of tabs with associated content. It is composed of an
+     *  unordered list of items - representing tabs - and a collection of div elements, which contain the content for
+     *  each tab.
+     * </p>
+     * <h3>Getting Started</h3>
      *
-     * @exampleTitle In a HTML div, create an HTML unordered list for tabs, HTML divs for content, If you don't
-     * have content, you can init the TabStrip from an UL element.
+     * @exampleTitle Create an unordered list for tabs with associated div elements for content
      * @example
-     *  <div id="tabstrip">
-     *      <ul>
-     *          <li>First Tab</li>
-     *          <li>Second Tab</li>
-     *      </ul>
-     *      <div>First Tab Content</div>
-     *      <div>Second Tab Content</div>
-     *  </div>
+     * <div id="tabStrip">
+     *     <ul>
+     *         <li>First tab</li>
+     *         <li>Second tab</li>
+     *     </ul>
+     *     <div>First tab content</div>
+     *     <div>Second tab content</div>
+     * </div>
      *
-     * @exampleTitle Initialize the TabStrip using a jQuery selector to target the outer DIV or UL
+     * @section
+     * <p>
+     *  Initialization of a <strong>TabStrip</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>TabStrip</strong> occur within a handler is provided to $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize a TabStrip using a selector within $(document).ready()
      * @example
-     * var tabStrip = $("#tabstrip").kendoTabStrip();
+     * $(document).ready(function() {
+     *     $("#tabStrip").kendoTabStrip();
+     * });
      *
      * @exampleTitle Initialize the TabStrip using JSON data object
      * @example
-     * $("#tabstrip").kendoTabStrip({
-     *     dataSource: [
-     *         {
-     *             text: "Tab 1",
-     *             content: "Tab 1 Content"
-     *         },
-     *         {
-     *             text: "Tab 2",
-     *             content: "Tab 2 Content"
-     *         }
-     *     ]
+     * $(document).ready(function() {
+     *     $("#tabstrip").kendoTabStrip({
+     *         dataSource:
+     *         [
+     *             { text: "Tab 1", content: "Tab 1 content" },
+     *             { text: "Tab 2", content: "Tab 2 content" }
+     *         ]
+     *     });
      * });
      *
      * @section
-     *  <p>
-     *      Tabs do not have to have content. If a tab should have no content, it is safe to omit the HTML div.
-     *  </p>
-     *  <h3>Loading TabStrip content with Ajax</h3>
-     *  <p>
-     *      While any valid technique for loading Ajax content can be used, TabStrip provides
-     *      built-in support for asynchronously loading content from URLs. These URLs should
-     *      return HTML fragments that can be loaded in a TabStrip content area.
-     *  </p>
+     * <p>
+     *  The tabs of a <strong>TabStrip</strong> are not required to have content. Should a tab have no content, it is
+     *  safe to omit its associated div.
+     * </p>
+     * <h3>Loading TabStrip content with AJAX</h3>
+     * <p>
+     *  While any valid technique for loading AJAX content can be used, a <strong>TabStrip</strong> supports loading
+     *  content from URLs in an asynchronous manner. These URLs should return HTML fragments that can be loaded in a
+     *  TabStrip content area.
+     * </p>
+     *
      * @exampleTitle Loading Tab content asynchronously
      * @example
-     *  <!-- Define the TabStrip HTML -->
-     *  <div id="tabstrip">
-     *      <ul>
-     *          <li>First Tab</li>
-     *          <li>Second Tab</li>
-     *      </ul>
-     *      <div> </div>
-     *      <div> </div>
+     * <div id="tabstrip">
+     *     <ul>
+     *         <li>First Tab</li>
+     *         <li>Second Tab</li>
+     *     </ul>
+     *     <div></div>
+     *     <div></div>
      *  </div>
-     * @exampleTitle
+     *
+     * @exampleTitle Initialize TabStrip and configure one tab with async content loading
      * @example
-     *  //Initialize TabStrip and configure one tab with async content loading
-     *  $(document).ready(function(){
-     *      $("#tabstrip").kendoTabStrip({
-     *        contentUrls: [null, "html-content-snippet.html"]
-     *      });
+     * $(document).ready(function(){
+     *     $("#tabstrip").kendoTabStrip({
+     *         contentUrls: [null, "html-content-snippet.html"]
+     *     });
      *  });
      *
      * @section
-     *  <h3>Dynamically configure TabStrip tabs</h3>
-     *  <p>
-     *      The TabStrip API provides several methods for dynamically adding or removing Tabs. To add tabs,
-     *      provide the new item as a JSON object along with a reference item that will be used to determine
-     *      the placement in the TabStrip. The append method doesn't need a reference item.
-     *  <p>
-     *  <p>
-     *      A reference item is simply a target Tab HTML element that already exists in the TabStrip. Any valid
-     *      jQuery selector can be used to obtain a reference to the target item. For examples, see the <a href="../tabstrip/api.html" title="TabStrip  API demos">TabStrip  API demos</a>.
-     *  </p>
-     *  <p>
-     *      Removing an item only requires a reference to the target element that should be removed.
-     *  </p>
-     * @exampleTitle Dynamically add a new Tab
-     * @example
-     *  var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+     * <h3>Dynamically Configure TabStrip Tabs</h3>
+     * <p>
+     *  The <strong>TabStrip</strong> API provides several methods for dynamically adding or removing tabs. To add
+     *  tabs, provide the new item as a JSON object along with a reference item that will be used to determine the
+     *  placement in the <strong>TabStrip</strong>. Note: append() does not require a reference item.
+     * <p>
+     * <p>
+     *  A reference item is simply a target DOM element of a tab that already exists in the TabStrip. Any valid
+     *  selector may be used to obtain a reference to the target item.
+     * </p>
+     * <p>Removing an item requires a reference to the target element.</p>
      *
-     *  tabstrip.insertAfter(
-     *      { text: "New Tab" },
-     *      tabstrip.tabGroup.children("li:last")
-     *  );
+     * @exampleTitle Dynamically add a new tab
+     * @example
+     * var tabStrip = $("#tabStrip").data("kendoTabStrip");
+     * tabStrip.insertAfter(
+     *     { text: "New Tab" },
+     *     tabstrip.tabGroup.children("li:last")
+     * );
+     *
      * @section
-     *  <h3>Selecting a Tab on Initial Load</h3>
-     *  <p>
-     *      A common desire with TabStrips is to select a tab and display its associated content on initial load. There are two ways to accomplish this with TabStrip:
-     *  </p>
-     *  <ol>
-     *      <li>Manually add the "k-state-active" class to the Tab that should be selected</li>
-     *      <li>Use the TabStrip API to target and select a Tab</li>
-     *  </ol>
-     *  <p>
-     *      Both approaches produce the same end result. The first approach requires no additional JavaScript, but does require a small amount of HTML configuration.
-     *  </p>
+     * <h3>Selecting a Tab on Initial Load</h3>
+     * <p>
+     *  It is possible to select a tab and display its associated content upon its initial load. There are two (2) ways
+     *  to accomplish this task:
+     * </p>
+     * <ol>
+     *  <li>Add a "k-state-active" class to the DOM element of the tab</li>
+     *  <li>Use select() to target and select a tab</li>
+     * </ol>
+     * <p>Both approaches produce the same result.</p>
      *
      * @exampleTitle Selecting a default tab manually using HTML
      * @example
-     *  <div id="tabstrip">
-     *      <ul>
-     *          <li class="k-state-active">First Tab</li>
-     *          <li>Second Tab</li>
-     *      </ul>
-     *      <div> </div>
-     *      <div> </div>
-     *  </div>
-     * @exampleTitle
-     * @example
-     *  //Initialize the TabStrip
-     *  $(document).ready(function(){
-     *      $("#tabstrip").kendoTabStrip();
-     *  });
-     * @exampleTitle Selecting a default tab using the TabStrip API
-     * @example
-     *  <div id="tabstrip">
-     *      <ul>
-     *          <li>First Tab</li>
-     *          <li>Second Tab</li>
-     *      </ul>
-     *      <div> </div>
-     *      <div> </div>
-     *  </div>
+     * <div id="tabstrip">
+     *     <ul>
+     *         <li class="k-state-active">First Tab</li>
+     *         <li>Second Tab</li>
+     *     </ul>
+     *     <div></div>
+     *     <div></div>
+     * </div>
      *
-     * @exampleTitle
+     * @exampleTitle Initialize a TabStrip and select first tab via select()
      * @example
-     *  //Initialize the TabStrip and select first tab
-     *  $(document).ready(function(){
-     *      var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
-     *      tabstrip.select(tabstrip.tabGroup.children("li:first"));
-     *  });
+     * $(document).ready(function(){
+     *     var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+     *     tabstrip.select(tabstrip.tabGroup.children("li:first"));
+     * });
      *
      * @section
      * <h3>Accessing an Existing TabStrip</h3>
      * <p>
      *  You can reference an existing <b>TabStrip</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-     *  Once a reference has been established, you can use the API to control
-     *  its behavior.
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+     *  use the API to control its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing TabStrip instance
@@ -293,17 +284,27 @@
 
     var TabStrip = Widget.extend({/** @lends kendo.ui.TabStrip.prototype */
         /**
+         *
          * Creates a TabStrip instance.
+         *
          * @constructs
          * @extends kendo.ui.Widget
          * @class TabStrip UI widget
+         *
          * @param {Selector} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Object} [animation] A collection of <b>Animation</b> objects, used to change default animations. A value of false will disable all animations in the widget.
-         * @option {Animation} [animation.open] The animation that will be used when opening content.
-         * @option {Animation} [animation.close] The animation that will be used when closing content.
+         *
+         * @option {Object} [animation]
+         * A collection of <strong>Animation</strong> objects, used to change default animations. A value of
+         * <strong>false</strong> will disable all animations.
+         *
+         * @option {Animation} [animation.open]
+         * The animation that will be used when opening content.
+         *
+         * @option {Animation} [animation.close]
+         * The animation that will be used when closing content.
+         *
          */
-
         init: function(element, options) {
             element = $(element);
 
@@ -328,29 +329,81 @@
 
             that.bind([
                 /**
-                 * Fires before a tab is selected.
+                 *
+                 * Triggered before a tab is selected.
+                 *
                  * @name kendo.ui.TabStrip#select
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Element} e.item The selected item
+                 *
+                 * @param {HTMLElement} e.item
+                 * The selected item chosen by a user.
+                 *
+                 * @exampleTitle Attach select event handler during initialization; detach via unbind()
+                 * @example
+                 * // event handler for select
+                 * var onSelect = function(e) {
+                 *     // access the selected item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach select event handler during initialization
+                 * var tabStrip = $("#tabStrip").kendoTabStrip({
+                 *     select: onSelect
+                 * });
+                 *
+                 * // detach select event handler via unbind()
+                 * tabStrip.data("kendoTabStrip").unbind("select", onSelect);
+                 *
+                 * @exampleTitle Attach select event handler via bind(); detach via unbind()
+                 * @example
+                 * // event handler for select
+                 * var onSelect = function(e) {
+                 *     // access the selected item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach select event handler via bind()
+                 * $("#tabStrip").data("kendoTabStrip").bind("select", onSelect);
+                 *
+                 * // detach select event handler via unbind()
+                 * $("#tabStrip").data("kendoTabStrip").unbind("select", onSelect);
+                 *
                  */
                 SELECT,
+
                 /**
-                 * Fires when ajax request results in an error.
+                 *
+                 * Triggered when an AJAX request results in an error.
+                 *
                  * @name kendo.ui.TabStrip#error
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {jqXHR} e.xhr The jqXHR object used to load the content
-                 * @param {String} e.status The returned status.
+                 *
+                 * @param {jqXHR} e.xhr
+                 * The jqXHR object used to load the content
+                 *
+                 * @param {String} e.status
+                 * The returned status.
+                 *
                  */
                 ERROR,
+
                 /**
-                 * Fires when content is fetched from an ajax request.
+                 *
+                 * Triggered when content is fetched from an AJAX request.
+                 *
                  * @name kendo.ui.TabStrip#contentLoad
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Element} e.item The selected item
-                 * @param {Element} e.contentElement The loaded content element
+                 *
+                 * @param {Element} e.item
+                 * The selected item
+                 *
+                 * @param {Element} e.contentElement
+                 * The loaded content element that is retrieved via AJAX.
+                 *
                  */
                 CONTENTLOAD
             ], that.options);
@@ -395,10 +448,19 @@
         },
 
         /**
-         * Selects the specified TabStrip tab/s. If called without arguments - returns the selected tab.
-         * @param {Selector} element Target tab selector.
+         *
+         * Selects the specified tab(s) within a <strong>TabStrip</strong>. If called without arguments, it returns the
+         * currently selected tab.
+         *
+         * @param {Selector} element
+         * The target tab(s), specified as a selector.
+         *
          * @example
-         * tabStrip.select("#Item1");
+         * tabStrip.select("#tab1");
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          */
         select: function (element) {
             var that = this;
@@ -418,9 +480,20 @@
         },
 
         /**
-         * Enables/disables TabStrip tab/s
-         * @param {Selector} element Target element
-         * @param {Boolean} enable Desired state
+         *
+         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) a tab(s) of a <strong>TabStrip</strong>.
+         *
+         * @param {Selector} element
+         * The target tab(s), specified as a selector, to be enabled (<strong>true</strong>) or disabled
+         * (<strong>false</strong>).
+         *
+         * @param {Boolean} enable
+         * Desired state of the tab(s) specified by the selector; enabled (<strong>true</strong>) or disabled
+         * (<strong>false</strong>).
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          */
         enable: function (element, state) {
             this._toggleDisabled(element, state !== false);
@@ -428,16 +501,33 @@
             return this;
         },
 
+        /**
+         *
+         * Disables a tab(s) of a <strong>TabStrip</strong>.
+         *
+         * @param {Selector} element
+         * The target tab(s), specified as a selector, to be disabled.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
+         */
         disable: function (element) {
             this._toggleDisabled(element, false);
 
             return this;
         },
 
-
         /**
-         * Reloads TabStrip tab/s with ajax request
-         * @param {Selector} element Target tab element
+         *
+         * Reloads TabStrip tab(s) via AJAX.
+         *
+         * @param {Selector} element
+         * The target tab(s), specified as a selector, to be reloaded via AJAX.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          */
         reload: function (element) {
             var that = this;
@@ -455,8 +545,16 @@
         },
 
         /**
-         * Appends a TabStrip item to the end of the tab list.
-         * @param {Selector} tab Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
+         *
+         * Appends a tab to the collection of tabs in a <strong>TabStrip</strong>.
+         *
+         * @param {Selector} tab
+         * Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an
+         * HTML string or array of such strings or JSON.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          * @example
          * tabStrip.append(
          *     [{
@@ -480,6 +578,7 @@
          *         spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
          *     }]
          * );
+         *
          */
         append: function (tab) {
             var that = this,
@@ -497,9 +596,19 @@
         },
 
         /**
-         * Inserts a TabStrip item before the specified referenceItem
-         * @param {Selector} item Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
-         * @param {Item} referenceTab A reference tab to insert the new item before
+         *
+         * Inserts a newly-created tab before a specified tab.
+         *
+         * @param {Selector} item
+         * Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an
+         * HTML string or array of such strings or JSON.
+         *
+         * @param {Item} referenceTab
+         * A reference tab to insert the new item before
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          * @example
          * tabStrip.insertBefore(
          *     [{
@@ -542,9 +651,19 @@
         },
 
         /**
-         * Inserts a TabStrip tab after the specified referenceTab
-         * @param {Selector} item Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an HTML string or array of such strings or JSON.
-         * @param {Item} referenceTab A reference tab to insert the new item after
+         *
+         * Inserts a newly-created tab after a specified tab.
+         *
+         * @param {Selector} item
+         * Target tab, specified as a JSON object. You can pass tab text, content or contentUrl here. Can handle an
+         * HTML string or array of such strings or JSON.
+         *
+         * @param {Item} referenceTab
+         * A reference tab to insert the new item after.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
          * @example
          * tabStrip.insertAfter(
          *     [{
@@ -569,6 +688,7 @@
          *     }],
          *     referenceItem
          * );
+         *
          */
         insertAfter: function (tab, referenceTab) {
             var that = this,
@@ -587,10 +707,19 @@
         },
 
         /**
-         * Removes the specified TabStrip item/s
-         * @param {Selector} element Target item selector.
+         *
+         * Removes a specified tab from a TabStrip.
+         *
+         * @param {Selector} element
+         * The target tab(s), specified as a selector, to be removed.
+         *
+         * @returns {TabStrip}
+         * Returns the TabStrip object to support chaining.
+         *
+         * @exampleTitle Remove a tab with ID, tab1 from a TabStrip
          * @example
-         * tabStrip.remove("#Item1");
+         * tabStrip.remove("#tab1");
+         *
          */
         remove: function (element) {
             element = $(element);
@@ -752,6 +881,18 @@
             }
         },
 
+        /**
+         *
+         * Deactivates a tab specified as a selector. Note: Invoking this method will not trigger any events.
+         *
+         * @param {Selector} item
+         * The target tab, specified as a selector, to be deactivated.
+         *
+         * @example
+         * var tabToDeactivate = $("#tab1");
+         * $("#tabStrip").data("kendoTabStrip").deactivateTab(tabToActivate);
+         *
+         */
         deactivateTab: function (item) {
             var that = this,
                 animationSettings = that.options.animation,
@@ -777,6 +918,22 @@
                     .removeClass(ACTIVESTATE);
         },
 
+        /**
+         *
+         * Activates a tab specified as a selector. Note: Invoking this method will not trigger any events.
+         *
+         * @param {Selector} item
+         * The target tab, specified as a selector, to be activated.
+         *
+         * @returns {Boolean}
+         * Returns <strong>true</strong> if successful; otherwise, <strong>false</strong>.
+         *
+         * @exampleTitle Activate a tab with ID, tab1 in a TabStrip
+         * @example
+         * var tabToActivate = $("#tab1");
+         * $("#tabStrip").data("kendoTabStrip").activateTab(tabToActivate);
+         *
+         */
         activateTab: function (item) {
             var that = this,
                 animationSettings = that.options.animation,
@@ -863,8 +1020,19 @@
         },
 
         /**
-         * Returns the contentElement of a an item by its index.
-         * @param {int} itemIndex Target tab index
+         *
+         * Obtains the DOM element representing a tab by its index in the <strong>TabStrip</strong>.
+         *
+         * @param {int} itemIndex
+         * The index of the tab in the TabStrip.
+         *
+         * @returns {HTMLElement}
+         * The DOM element representing a tab by its index in the <strong>TabStrip</strong>.
+         *
+         * @exampleTitle Obtain the DOM element representing the first tab in a TabStrip
+         * @example
+         * var tabContent = $("#tabStrip").data("kendoTabStrip").contentElement(0);
+         *
          */
         contentElement: function (itemIndex) {
             if (isNaN(itemIndex - 0)) return;

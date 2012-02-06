@@ -142,30 +142,32 @@
     /**
      * @name kendo.Template.Description
      *
-     * @section Templates offer way of creating html chunks.
-     *  Options such as html encoding and compilation for optimal performance are available.
+     * @section
+     * <p>
+     *  Templates offer way of creating HTML chunks. Options such as HTML encoding and compilation for optimal
+     *  performance are available.
+     * </p>
      *
      * @exampleTitle Basic template
      * @example
-     *
-     *  var inlineTemplate = kendo.template("Hello, #= firstName # #= lastName #");
-     *  var inlineData = { firstName: "John", lastName: "Doe" };
-     *  $("#inline").html(inlineTemplate(inlineData));
+     * var inlineTemplate = kendo.template("Hello, #= firstName # #= lastName #");
+     * var inlineData = { firstName: "John", lastName: "Doe" };
+     * $("#inline").html(inlineTemplate(inlineData));
      *
      * @exampleTitle Output:
      * @example
-     *  Hello, John Doe!
+     * Hello, John Doe!
      *
      * @exampleTitle Encoding HTML
      * @example
-     *
-     * var encodingTemplate = kendo.template("HTML tags are encoded like this - ${ html }");
+     * var encodingTemplate = kendo.template("HTML tags are encoded as follows: ${ html }");
      * var encodingData = { html: "<strong>lorem ipsum</strong>" };
      * $("#encoding").html(encodingTemplate(encodingData));
      *
      * @exampleTitle Output:
      * @example
-     *  HTML tags are encoded like this - <strong>lorem ipsum</strong>
+     * HTML tags are encoded as follows: <strong>lorem ipsum</strong>
+     *
      */
 
      function compilePart(part, stringPart) {
