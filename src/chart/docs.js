@@ -564,7 +564,7 @@
          *      },
          *      valueAxis: {
          *          labels: {
-         *              // label template
+         *              // labels template
          *              template: "#= value #%"
          *          }
          *      }
@@ -772,31 +772,13 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              "outside"
+         *              <code>"outside"</code>
          *         </dt>
          *         <dd>
          *              The tick is drawn on the outer side of the axis.
          *         </dd>
          *         <dt>
-         *              "none"
-         *         </dt>
-         *         <dd>
-         *              No tick is drawn.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Number} [categoryAxis.majorTickSize] <3> The axis major tick size.
-         * @option {String} [categoryAxis.majorTickType] <"outside"> The axis major tick size.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "outside"
-         *         </dt>
-         *         <dd>
-         *              The tick is drawn on the outer side of the axis.
-         *         </dd>
-         *         <dt>
-         *              "none"
+         *              <code>"none"</code>
          *         </dt>
          *         <dd>
          *              No tick is drawn.
@@ -897,9 +879,6 @@
          * Template variables:
          * <ul>
          *     <li><strong>value</strong> - the value</li>
-         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
-         *         Will be null if binding to array.
-         *     </li>
          * </ul>
          * _example
          * // chart intialization
@@ -916,7 +895,7 @@
          *      categoryAxis: {
          *          categories: [2000, 2001, 2002, 2003],
          *          labels: {
-         *              // label template
+         *              // labels template
          *              template: "Year: #= value #"
          *          }
          *      }
@@ -1037,31 +1016,31 @@
          * <div class="details-list">
          *    <dl>
          *         <dt>
-         *              top
+         *              <code>"top"</code>
          *         </dt>
          *         <dd>
          *              The axis title is positioned on the top (work only with vertical axis)
          *         </dd>
          *         <dt>
-         *              bottom
+         *              <code>"bottom"</code>
          *         </dt>
          *         <dd>
          *              The axis title is positioned on the bottom (work only with vertical axis)
          *         </dd>
          *         <dt>
-         *              left
+         *              <code>"left"</code>
          *         </dt>
          *         <dd>
          *              The axis title is positioned on the left (work only with horizontal axis)
          *         </dd>
          *         <dt>
-         *              right
+         *              <code>"right"</code>
          *         </dt>
          *         <dd>
          *              The axis title is positioned on the right (work only with horizontal axis)
          *         </dd>
          *         <dt>
-         *              center
+         *              <code>"center"</code>
          *         </dt>
          *         <dd>
          *              The axis title is positioned in the center
@@ -1262,8 +1241,8 @@
          *     <li><strong>value</strong> - the point value</li>
          *     <li><strong>category</strong> - the category name</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
@@ -1544,8 +1523,8 @@
          *     <li><strong>value</strong> - the point value</li>
          *     <li><strong>category</strong> - the category name</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
@@ -1759,7 +1738,9 @@
          * @option {String/Function} [series.type="line".labels.template] The label template.
          * Template variables:
          * <ul>
-         *     <li><strong>value</strong> - the value</li>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
          *     <li><strong>dataItem</strong> - the original data item used to construct the point.
          *         Will be null if binding to array.
          *     </li>
@@ -1977,34 +1958,15 @@
          * </div>
          * @option {String/Function} [series.type="pie".labels.template] The label template.
          * Template variables:
-         * <div class="details-list">
-         *     <dl>
-         *         <dt>
-         *              value
-         *         </dt>
-         *         <dd>
-         *              the point value
-         *         </dd>
-         *         <dt>
-         *              category
-         *         </dt>
-         *         <dd>
-         *              the category name
-         *         </dd>
-         *         <dt>
-         *              series
-         *         </dt>
-         *         <dd>
-         *              the data series
-         *         </dd>
-         *         <dt>
-         *              dataItem
-         *         </dt>
-         *         <dd>
-         *              the original data item used to construct the point (when binding from dataSource)
-         *         </dd>
-         *     </dl>
-         * </div>
+         * <ul>
+         *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>percentage</strong> - the point value represented as a percentage value</li>
+         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>series</strong> - the data series</li>
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
+         *     </li>
+         * </ul>
          * _example
          * // chart intialization
          * $("#chart").kendoChart({
@@ -2121,10 +2083,11 @@
          * Template variables:
          * <ul>
          *     <li><strong>value</strong> - the point value</li>
+         *     <li><strong>percentage</strong> - the point value represented as a percentage value</li>
          *     <li><strong>category</strong> - the category name</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
@@ -2286,6 +2249,7 @@
          * <ul>
          *     <li><strong>value.x</strong> - the x value</li>
          *     <li><strong>value.y</strong> - the y value</li>
+         *     <li><strong>series</strong> - the data series</li>
          *     <li><strong>dataItem</strong> - the original data item used to construct the point.
          *         Will be null if binding to array.
          *     </li>
@@ -2393,12 +2357,11 @@
          * @option {String|Function} [series.type="scatter".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
-         *     <li><strong>value.x</strong> - the point x value</li>
-         *     <li><strong>value.y</strong> - the point y value</li>
-         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>value.x</strong> - the x value</li>
+         *     <li><strong>value.y</strong> - the y value</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
@@ -2544,6 +2507,7 @@
          * <ul>
          *     <li><strong>value.x</strong> - the x value</li>
          *     <li><strong>value.y</strong> - the y value</li>
+         *     <li><strong>series</strong> - the data series</li>
          *     <li><strong>dataItem</strong> - the original data item used to construct the point.
          *         Will be null if binding to array.
          *     </li>
@@ -2651,12 +2615,11 @@
          * @option {String|Function} [series.type="scatterLine".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
-         *     <li><strong>value.x</strong> - the point x value</li>
-         *     <li><strong>value.y</strong> - the point y value</li>
-         *     <li><strong>category</strong> - the category name</li>
+         *     <li><strong>value.x</strong> - the x value</li>
+         *     <li><strong>value.y</strong> - the y value</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
@@ -2894,8 +2857,8 @@
          *     <li><strong>value</strong> - the point value</li>
          *     <li><strong>category</strong> - the category name</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
@@ -3074,8 +3037,8 @@
          *     <li><strong>value</strong> - the point value</li>
          *     <li><strong>category</strong> - the category name</li>
          *     <li><strong>series</strong> - the data series</li>
-         *     <li><strong>dataItem</strong> -
-         *         the original data item (when binding to dataSource)
+         *     <li><strong>dataItem</strong> - the original data item used to construct the point.
+         *         Will be null if binding to array.
          *     </li>
          * </ul>
          * _example
