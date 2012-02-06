@@ -37,7 +37,7 @@ namespace Kendo.Extensions
             }
 
             return url.Content(string.Format("{0}/{1}/{2}",
-                ConfigurationManager.AppSettings[suite == "mobile" ? "CDN_ROOT" : "OLD_CDN_ROOT"],
+                ConfigurationManager.AppSettings[suite == "mobile" ? "MOBILE_CDN_ROOT" : "CDN_ROOT"],
                 assetType,
                 file
             ));
