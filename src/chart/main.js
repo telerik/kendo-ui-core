@@ -6216,11 +6216,38 @@
             ChartElement.fn.init.call(pointer, options);
         },
 
-        render: function() {
-            var plotArea = this,
-                options = plotArea.options;
+        options: {
+            shape: "needle",
+            fill: "red"
+        },
 
-            plotArea.append(plotArea.scale);
+        value: function(newValue) {
+            var pointer = this;
+
+
+
+            pointer.element.rotate();
+        },
+
+        reflow: function(box) {
+            var pointer = this;
+
+            pointer.box = box;
+        },
+
+        getViewElements: function(view) {
+            var pointer = this,
+                box = pointer.box,
+                halfWidth = box.width() / 2,
+                center = box.center();
+
+            pointer.element = view.createPolyline([
+                    new Point2D((box.x1 + box.x2) / 2, box.y1),
+                    new Point2D(center.x - 10, center.y),
+                    new Point2D(center.x + 10, center.y)
+                ], true, pointer.options);
+
+            return [pointer.element];
         }
     });
 
@@ -6352,8 +6379,10 @@
                 options = plotArea.options;
 
             plotArea.scale = new RadialScale(options.scale);
+            plotArea.pointer = new Pointer(options.pointer);
 
             plotArea.append(plotArea.scale);
+            plotArea.append(plotArea.pointer);
         }
     });
 

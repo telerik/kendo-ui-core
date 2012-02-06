@@ -284,6 +284,11 @@
             strokeOpacity: 1
         },
 
+        rotate: function(domElement, angle, center) {
+            $(domElement).attr("transform", "rotate(" + [angle, center.x, center.y].join(" ") + ")");
+        },
+
+
         refresh: function(domElement) {
             var options = this.options;
 

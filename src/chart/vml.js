@@ -326,11 +326,20 @@
             // Overriden by inheritors
         },
 
+        rotate: function(domElement, angle, center) {
+            var parentNode = domElement.parentNode;
+
+            if (parentNode) {
+                domElement.rotation = angle;
+                // TODO: Adjust left/top to match the center after rotation
+            }
+        },
+
         refresh: function(domElement) {
             var path = this,
                 options = path.options,
                 element = $(domElement),
-                parentNode = element[0].parentNode;
+                parentNode = domElement.parentNode;
 
             if (parentNode) {
                 element.find("path")[0].v = this.renderPoints();
