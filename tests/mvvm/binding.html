@@ -524,7 +524,7 @@
                 };
 
                 kendo.bind(dom, viewModel);
-                ok(dom.data("bindingTarget"));
+                ok(dom.data("kendoBindingTarget"));
             });
 
             test("binding are removed if element is rebind", 1, function() {
@@ -536,7 +536,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                var destroy = stub(dom.data("bindingTarget"), "destroy");
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
 
                 kendo.bind(dom, viewModel);
 
@@ -552,12 +552,13 @@
 
                 kendo.bind(dom, viewModel);
 
-                var destroy = stub(dom.data("bindingTarget").expressions[0], "destroy");
+                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
 
                 kendo.bind(dom, viewModel);
 
                 equal(destroy.calls("destroy"), 1);
             });
+
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
