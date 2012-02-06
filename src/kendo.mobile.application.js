@@ -313,6 +313,7 @@
                 that._attachHideBarHandlers();
                 that._attachOrientationChange();
                 that._attachMeta();
+                that._loader();
                 that._setupAppLinks();
                 that._setupLayouts(that.element);
                 that._startHistory();
@@ -359,10 +360,12 @@
 
             historyEvents = {
                 change: function(e) {
+                    that.showLoading();
                     that.navigate(e.string);
                 },
 
                 ready: function(e) {
+                    that.showLoading();
                     that._findView(e.string, function(view) {
                         var element = view.element;
 
@@ -380,6 +383,7 @@
 
         _setCurrentView: function(view) {
             this.view = view;
+            this.hideLoading();
             this.trigger(VIEW_SHOW, {view: view, params: view.params});
         },
 
@@ -513,6 +517,27 @@
 
         dataOrDefault: function(element, option) {
             return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
+        },
+
+        hideLoading: function() {
+            var that = this;
+            clearTimeout(that._loading);
+            that.loader.hide();
+        },
+
+        showLoading: function() {
+            var that = this;
+
+            that._loading = setTimeout(function() {
+                that.loader.show();
+            }, 100);
+        },
+
+        _loader: function() {
+            var that = this;
+            that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span><h1>Loading...</h1></div>')
+            .hide()
+            .appendTo(that.element);
         }
     });
 
