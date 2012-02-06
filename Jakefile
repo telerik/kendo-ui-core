@@ -219,6 +219,8 @@ function buildDocs(sitefinity_path) {
         params.push(path.join(SOURCE_PATH, sourceFiles[i]));
     }
 
+    params.push("src/chart/docs.js");
+
     jsdoctoolkit.run(params);
 
     combine();
