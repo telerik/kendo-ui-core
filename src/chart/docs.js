@@ -1337,19 +1337,19 @@
          *              The label is positioned at the bar center.
          *         </dd>
          *         <dt>
-         *              <code>""insideEnd"</code>
+         *              <code>"insideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the end of the bar.
          *         </dd>
          *         <dt>
-         *              <code>""insideBase"</code>
+         *              <code>"insideBase"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the base of the bar.
          *         </dd>
          *         <dt>
-         *              <code>""outsideEnd"</code>
+         *              <code>"outsideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned outside, near the end of the bar.
