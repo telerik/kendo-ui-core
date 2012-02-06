@@ -725,6 +725,33 @@
         }
     });
 
+    function bindingTargetForWidget(name, element) {
+        var options = {},
+            option,
+            value
+
+        for (option in kendo.ui[name].fn.options) {
+            value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+
+            if (value === null) {
+                value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+            }
+
+            if (value !== null) {
+                options[option] = value;
+            }
+        }
+
+        var widget = $.data(element, "kendo" + name);
+        if (!widget) {
+            widget = new kendo.ui[name](element);
+        }
+
+        widget.setOptions(options);
+
+        return new WidgetBindingTarget(widget);
+    }
+
     function bindElement(element, source) {
         var role = element.getAttribute("data-role"),
             idx,
@@ -734,33 +761,14 @@
             option,
             target;
 
-        kendo.unbind(element);
+        unbindElement(element);
 
         if (role) {
             if (role === "dropdownlist") {
-                var options = {};
-
-                for (option in kendo.ui.DropDownList.fn.options) {
-                    value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
-
-                    if (value === null) {
-                        value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
-                    }
-
-                    if (value !== null) {
-                        options[option] = value;
-                    }
-                }
-
-                var widget = $.data(element, "kendoDropDownList");
-                if (!widget) {
-                    widget = new kendo.ui.DropDownList(element);
-                }
-
-                widget.setOptions(options);
-
-                target = new WidgetBindingTarget(widget);
-           }
+                target = bindingTargetForWidget("DropDownList", element);
+            } else if (role === "combobox") {
+                target = bindingTargetForWidget("ComboBox", element);
+            }
         } else {
             if (nodeName == "select") {
                 target = new SelectBindingTarget(element);
@@ -773,7 +781,7 @@
             }
         }
 
-        $.data(element, "bindingTarget", target);
+        $.data(element, "kendoBindingTarget", target);
 
         ["valueField"].forEach(function(path) {
             var option = element.getAttribute("data-" + path.toLowerCase());
@@ -825,11 +833,11 @@
     }
 
     function unbindElement(element) {
-        var bindingTarget = $.data(element, "bindingTarget");
+        var bindingTarget = $.data(element, "kendoBindingTarget");
 
         if (bindingTarget) {
             bindingTarget.destroy();
-            $.removeData(element, "bindingTarget")
+            $.removeData(element, "kendoBindingTarget")
         }
     }
 

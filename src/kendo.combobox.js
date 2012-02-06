@@ -455,6 +455,12 @@
             suggest: false
         },
 
+        setOptions: function(options) {
+            $.extend(this.options, options);
+            this._template();
+            this._accessors();
+        },
+
         current: function(li) {
             var that = this,
                 current = that._current;
