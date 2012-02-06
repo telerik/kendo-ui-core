@@ -1415,7 +1415,8 @@
         options: {
             labels: {
                 visible: true,
-                rotation: 0
+                rotation: 0,
+                mirror: false
             },
             line: {
                 width: 1,
@@ -1435,7 +1436,6 @@
                 width: 1,
                 color: BLACK
             },
-            mirror: false,
             // TODO: Move to line or labels options
             margin: 5
         },
@@ -1481,7 +1481,7 @@
                 options = axis.options,
                 box = axis.box,
                 isVertical = options.isVertical,
-                mirror = options.mirror,
+                mirror = options.labels.mirror,
                 axisX = mirror ? box.x1 : box.x2,
                 axisY = mirror ? box.y2 : box.y1;
 
@@ -1512,7 +1512,7 @@
         renderTicks: function(view) {
             var axis = this,
                 options = axis.options,
-                mirror = options.mirror,
+                mirror = options.labels.mirror,
                 lineBox = axis.lineBox(),
                 majorTicks = axis.getMajorTickPositions(),
                 ticks = [];
@@ -1668,7 +1668,7 @@
                 labels = axis.labels,
                 isVertical = options.isVertical,
                 lineBox = axis.lineBox(),
-                mirror = options.mirror,
+                mirror = options.labels.mirror,
                 tickPositions = axis.getMajorTickPositions(),
                 tickSize = axis.getActualTickSize(),
                 labelOffset = axis.getActualTickSize() + options.margin,
@@ -1732,7 +1732,7 @@
         arrangeTitle: function() {
             var axis = this,
                 options = axis.options,
-                mirror = options.mirror,
+                mirror = options.labels.mirror,
                 isVertical = options.isVertical,
                 title = axis.title;
 
@@ -4208,7 +4208,7 @@
 
                 if (axis.lineBox().x2 === xAnchor.lineBox().x2) {
                     if (!axis._mirrored) {
-                        axis.options.mirror = !axis.options.mirror;
+                        axis.options.labels.mirror = !axis.options.labels.mirror;
                         axis._mirrored = true;
                     }
                     plotArea.alignAxisTo(axis, xAnchor, yAnchorCrossings[i], xAnchorCrossings[i]);
@@ -4230,7 +4230,7 @@
 
                 if (axis.lineBox().y1 === yAnchor.lineBox().y1) {
                     if (!axis._mirrored) {
-                        axis.options.mirror = !axis.options.mirror;
+                        axis.options.labels.mirror = !axis.options.labels.mirror;
                         axis._mirrored = true;
                     }
                     plotArea.alignAxisTo(axis, yAnchor, xAnchorCrossings[i], yAnchorCrossings[i]);

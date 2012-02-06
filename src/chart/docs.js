@@ -462,9 +462,6 @@
          * @option {Boolean} [valueAxis.majorGridLines.visible] <true> The visibility of the lines.
          * @option {String} [valueAxis.color] Color to apply to all axis elements.
          * Individual color settings for line and labels take priority.
-         * @option {Boolean} [valueAxis.mirror] Mirrors the axis labels and ticks.
-         * If the labels are normally on the left side of the axis,
-         * mirroring the axis will render them to the right.
          * @option {Object} [valueAxis.line] Configures the axis line.
          * @option {Number} [valueAxis.line.width] <1> The width of the lines.
          * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
@@ -474,6 +471,9 @@
          * @option {String} [valueAxis.labels.background] The background color of the labels.
          * @option {String} [valueAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
+         * @option {Boolean} [valueAxis.labels.mirror] Mirrors the axis labels and ticks.
+         * If the labels are normally on the left side of the axis,
+         * mirroring the axis will render them to the right.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
          * _example
@@ -813,9 +813,6 @@
          * @option {Boolean} [categoryAxis.majorGridLines.visible] <false> The visibility of the lines.
          * @option {String} [categoryAxis.color] Color to apply to all axis elements.
          * Individual color settings for line and labels take priority.
-         * @option {Boolean} [categoryAxis.mirror] Mirrors the axis labels and ticks.
-         * If the labels are normally on the left side of the axis,
-         * mirroring the axis will render them to the right.
          * @option {Object} [categoryAxis.line] Configures the axis line.
          * @option {Number} [categoryAxis.line.width] <1> The width of the lines.
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines.
@@ -825,6 +822,9 @@
          * @option {String} [categoryAxis.labels.background] The background color of the labels.
          * @option {String} [categoryAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
          * The font style of the labels.
+         * @option {Boolean} [categoryAxis.labels.mirror] Mirrors the axis labels and ticks.
+         * If the labels are normally on the left side of the axis,
+         * mirroring the axis will render them to the right.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
          * @option {Number|Object} [categoryAxis.labels.margin] <0> The margin of the labels.
          * _example
