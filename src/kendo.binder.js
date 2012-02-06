@@ -812,6 +812,7 @@
                 var binding = new Binding(source, sourcePath);
 
                 target.setBinding(path, binding);
+                target.source = source;
             }
         });
 
@@ -849,6 +850,16 @@
         }
     }
 
+    function notify(widget) {
+        var element = widget.element;
+        var bindingTarget = element.data("kendoBindingTarget");
+
+        if (bindingTarget) {
+            bind(element, bindingTarget.source);
+        }
+    }
+
     kendo.unbind = unbind;
     kendo.bind = bind;
+    kendo.notify = notify;
 })(jQuery);
