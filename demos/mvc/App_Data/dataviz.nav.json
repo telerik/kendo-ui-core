@@ -13,16 +13,19 @@
             }],
             "name": "overview"
         }, {
-            "text": "API",
-            "spriteCssClass": "chartIcon",
+            "text": "Area Chart",
+            "spriteCssClass": "chartAreaIcon",
             "items": [{
-                    "text": "Methods",
-                    "url": "api/index.html"
-                }, {
-                    "text": "Events",
-                    "url": "api/events.html"
+					"text": "Basic usage",
+					"url": "area-chart/index.html"
+				}, {
+					"text": "Binding to remote data",
+					"url": "area-chart/remote-data.html"
+				}, {
+					"text": "Binding to local data",
+					"url": "area-chart/local-data.html"
             }],
-            "name": "api"
+            "name": "area chart"
         }, {
             "text": "Bar Charts",
             "spriteCssClass": "chartBarIcon",
@@ -96,19 +99,24 @@
             }],
             "name": "scatter charts"
         }, {
-            "text": "Area Chart",
-            "spriteCssClass": "chartAreaIcon",
+            "text": "Customization",
+            "spriteCssClass": "chartIcon",
             "items": [{
-					"text": "Basic usage",
-					"url": "area-chart/index.html"
-				}, {
-					"text": "Binding to remote data",
-					"url": "area-chart/remote-data.html"
-				}, {
-					"text": "Binding to local data",
-					"url": "area-chart/local-data.html"
+                    "text": "PlotBands",
+                    "url": "customization/plotbands.html"
+                }],
+            "name": "customization"
+        }, {
+            "text": "API",
+            "spriteCssClass": "chartIcon",
+            "items": [{
+                    "text": "Methods",
+                    "url": "api/index.html"
+                }, {
+                    "text": "Events",
+                    "url": "api/events.html"
             }],
-            "name": "area chart"
+            "name": "api"
         }
     ]
 }
