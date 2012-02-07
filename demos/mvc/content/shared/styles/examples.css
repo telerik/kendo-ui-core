@@ -1271,10 +1271,16 @@ pre.prettyprint
     border-radius: 30px;
 }
 
+#example.mobileExample
+{
+    padding-right:200px;
+}
+
 .mobileConfiguration
 {
     width:200px;
     min-height:820px;
+    margin-right:-202px;
     margin-bottom:-21px;
     padding-left:0;
     padding-right:0;
@@ -1366,7 +1372,7 @@ pre.prettyprint
     height: 64px;
     width: 48px;
     text-align:center;
-    text-indent:-999px;
+    text-indent:-4444px;
 }
 
 #deviceList .androidThumb { background-image: url("android.png"); }
