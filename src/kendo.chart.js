@@ -1371,6 +1371,10 @@
                 width: 1,
                 color: BLACK
             },
+            title: {
+                visible: true,
+                position: CENTER
+            },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
             minorTickType: NONE,
@@ -1395,7 +1399,7 @@
                 }, options.title),
                 title;
 
-            if (options.title) {
+            if (titleOptions.visible && titleOptions.text) {
                 title = new TextBox(titleOptions.text, titleOptions);
                 axis.append(title);
                 axis.title = title;
@@ -1548,7 +1552,7 @@
                 );
             }
 
-            axis.arrangeTitle(title, isVertical, axis.box);
+            axis.arrangeTitle();
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
         },
 
@@ -1603,28 +1607,22 @@
             }
         },
 
-        arrangeTitle: function(title, isVertical, box) {
+        arrangeTitle: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                title = axis.title;
+
             if (title) {
                 if (isVertical) {
                     title.options.align = LEFT;
-                    if (title.options.position === TOP) {
-                        title.options.vAlign = TOP;
-                    } else if (title.options.position === BOTTOM) {
-                        title.options.vAlign = BOTTOM;
-                    } else {
-                        title.options.vAlign = CENTER;
-                    }
+                    title.options.vAlign = title.options.position;
                 } else {
-                    if (title.options.position === LEFT) {
-                        title.options.align = LEFT;
-                    } else if (title.options.position === RIGHT) {
-                        title.options.align = RIGHT;
-                    } else {
-                        title.options.align = CENTER;
-                    }
+                    title.options.align = title.options.position;
                     title.options.vAlign = BOTTOM;
                 }
-                title.reflow(box);
+
+                title.reflow(axis.box);
             }
         }
     });

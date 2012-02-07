@@ -489,7 +489,7 @@
                     }];
 
                 function createPlotArea(series, plotOptions) {
-                    plotArea = new Chart.PlotArea($.extend({}, {
+                    plotArea = new Chart.PlotArea($.extend(true, {}, {
                         series: series,
                         categoryAxis: {
                             categories: ["A"],
@@ -523,19 +523,19 @@
                 });
 
                 test("applied position left", function() {
-                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "left" }}});
+                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "left", text: "Title" }}});
                     titleBox = plotArea.axisX.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 33, 582, 33, 600 ], TOLERANCE);
+                         [ 33, 582, 70, 600 ], TOLERANCE);
                 });
 
                 test("applied position right", function() {
-                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "right" }}});
+                    createPlotArea(barSeriesData, { valueAxis: { title: { position: "right", text: "Title" }}});
                     titleBox = plotArea.axisX.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 800, 582, 800, 600 ], TOLERANCE);
+                         [ 763, 582, 800, 600 ], TOLERANCE);
                 });
 
                 test("renders color", function() {
@@ -565,19 +565,19 @@
                 });
 
                 test("applied position bottom", function() {
-                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom" }}});
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "bottom", text: "Title" }}});
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 564, 18, 564 ], TOLERANCE);
+                         [ 0, 527, 18, 564 ], TOLERANCE);
                 });
 
                 test("applied position top", function() {
-                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top" }}});
+                    createPlotArea(lineSeriesData, { valueAxis: { title: { position: "top", text: "Title" }}});
                     titleBox = plotArea.axisY.title.box;
 
                     same([titleBox.x1, titleBox.y1, titleBox.x2, titleBox.y2],
-                         [ 0, 0, 18, 0 ], TOLERANCE);
+                         [ 0, 0, 18, 37 ], TOLERANCE);
                 });
 
                 test("renders color", function() {
