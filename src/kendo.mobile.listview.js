@@ -307,17 +307,30 @@
             style: ""
         },
 
+        viewInit: function(view) {
+            var that = this;
+            that.view = view;
+            view.bind("pull", function() {
+                view.scroller.freeze();
+                that.dataSource.read();
+            });
+        },
+
         _refresh: function() {
             var that = this,
                 dataSource = that.dataSource,
                 grouped,
                 view = dataSource.view();
 
+            if (that.view) {
+                that.view.scroller.unfreeze();
+            }
+
             if (dataSource.group()[0]) {
                 that.options.type = "group";
-                that.element.html(kendo.render(that.groupTemplate, view));
+                that.element.prepend(kendo.render(that.groupTemplate, view));
             } else {
-                that.element.html(kendo.render(that.template, view));
+                that.element.prepend(kendo.render(that.template, view));
             }
 
             kendo.mobile.enhance(that.element.children());

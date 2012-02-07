@@ -64,6 +64,10 @@
 
         viewShow: $.noop,
 
+        viewInit: function(view) {
+            this.view = view;
+        },
+
         enhance: function(element) {
             var options = this.options,
                 pluginMethod = "kendoMobile" + options.name,

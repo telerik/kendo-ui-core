@@ -12,6 +12,10 @@
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
         OUT_OF_BOUNDS_FRICTION = 0.70,
+        PULL = "pull",
+        START_PULL = "startPull",
+        CANCEL_PULL = "cancelPull",
+        PULL_THRESHOLD_RATIO = 4,
         CHANGE = "change";
 
     var DragInertia = Animation.extend({
@@ -27,7 +31,6 @@
                     onEnd: function() { that._end(); }
                 })
             });
-
 
             that.tap.bind("press", function() { that.cancel(); });
             that.swipe.bind("end", proxy(that.start, that));
@@ -186,16 +189,57 @@
                 swipe: swipe,
                 draggable: draggable,
                 tap: tap,
+                pulled: false,
                 scrollElement: inner
             });
 
-            that.initAxis("x");
-            that.initAxis("y");
+            that._initAxis("x");
+            that._initAxis("y");
+            that._initPull();
 
             boundary.refresh();
+
         },
 
-        initAxis: function(axis) {
+        events: [
+            START_PULL,
+            CANCEL_PULL,
+            PULL
+        ],
+
+        freeze: function() {
+            this.yinertia.cancel();
+            this.xinertia.cancel();
+        },
+
+        unfreeze: function() {
+            this.yinertia.onEnd();
+            this.xinertia.onEnd();
+        },
+
+        _initPull: function() {
+            var that = this;
+            that.draggable.y.bind("change", function() {
+                if (that.move.y > that.boundary.y.size / PULL_THRESHOLD_RATIO) {
+                    if (!that.pulled) {
+                        that.pulled = true;
+                        that.trigger(START_PULL);
+                    }
+                } else if (that.pulled) {
+                    that.pulled = false;
+                    that.trigger(CANCEL_PULL);
+                }
+            });
+
+            that.swipe.bind("end", function() {
+                if(that.pulled) {
+                    that.pulled = false;
+                    that.trigger(PULL);
+                }
+            });
+        },
+
+        _initAxis: function(axis) {
             var that = this,
             move = that.move,
             boundary = that.boundary[axis],
@@ -217,6 +261,8 @@
                 boundary: boundary,
                 end: function() { scrollBar.hide(); }
             });
+
+            that[axis + "inertia"] = inertia;
 
             draggable.bind(CHANGE, function() {
                 scrollBar.show();
