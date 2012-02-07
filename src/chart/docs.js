@@ -14,12 +14,11 @@
      * </p>
      * <ul>
      *     <li>Bar / Column</li>
-     *     <li>Line / Vertical Line</li>
-     *     <li>Area / Verical Area</li>
+     *     <li>Line</li>
+     *     <li>Area</li>
      *     <li>Pie</li>
      *     <li>Scatter</li>
      *     <li>Scatter Line</li>
-     *     <li>Area</li>
      * </ul>
      *
      * <p>
@@ -161,7 +160,7 @@
          * @option {String} [theme] Sets Chart theme. Available themes: default, blueOpal, black.
          * @option {Object} [dataSource] DataSource configuration or instance.
          * _example
-	 * $("#chart").kendoChart({
+         * $("#chart").kendoChart({
          *     dataSource: {
          *         transport: {
          *              read: "spain-electricity.json"
@@ -298,27 +297,7 @@
          *     ...
          * });
          * @option {Number} [title.border.width] <0> The width of the border.
-         * _example
-         * $("#chart").kendoChart({
-         *     title: {
-         *         border: {
-         *             // set border width to 2 pixels
-         *             width: 2
-         *         }
-         *     },
-         *     ...
-         * });
          * @option {String} [title.border.color] <"black"> The color of the border.
-         * _example
-         * $("#chart").kendoChart({
-         *     title: {
-         *         border: {
-         *             // set border color to a dark blue
-         *             color: "#336699
-         *         }
-         *     },
-         *     ...
-         * });
          * @option {String} [title.border.dashType] <"solid"> The dash type of the border.
          * <div class="details-list">
          *     <dl>
@@ -366,65 +345,26 @@
          *         </dd>
          *    </dl>
          * </div>
+         * @option {Object} [legend] The chart legend configuration options.
+         * @option {String} [legend.background] <"white"> The background color of the legend.
          * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         border: {
-	 *             // set border style to a long dash
-	 *             dashType: "longDash"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Object} [legend] The chart legend configuration options.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *         // set the background color to a dark blue
-	 *         background: "#336699",
-	 *         // set the font to a size of 14px
-	 *         font: "14px Arial,Helvetica,sans-serif",
-	 *         // move the legend to the left
-	 *         position: "left",
-	 *         // move the legend a bit closer to the chart by setting the x offset to 20
-	 *         offsetX: 20,
-	 *         // move the legend up to the top by setting the y offset to -100
-	 *         offsetY: -100,
-	 *         // eliminate all the margins by setting them to 0
-	 *         margin: 0,
-	 *         // make sure the padding on all sides is 20
-	 *         padding: 20,
-	 *         // tweak the border style
-	 *         border: {
-	 *             // make the color black
-	 *             color: "black",
-	 *             // set the border width to 2 pixels
-	 *             width: 2,
-	 *             // set the style to dashed
-	 *             dashType: "dash"
-	 *         }
-	 *     }
-	 * });
-	 *
-	 * @option {String} [legend.background] <"white"> The background color of the legend. Any valid CSS color string will work here, including hex and rgb.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *         // set the background color to a dark blue
-	 *         background: "#336699"
-	 *     },
-	 *     ...
-	 * });
+         * $("#chart").kendoChart({
+         *     legend: {
+         *         // set the background color to a dark blue
+         *         background: "#336699"
+         *     },
+         *     ...
+         * });
          * @option {String} [legend.font] <12px Arial,Helvetica,sans-serif> The font style of the legend.
          * _example
          * $("#chart").kendoChart({
-	 *     legend: {
-	 *         // set the font to a size of 20 pixels
-	 *         font: "20px Arial, Helvetica,sans-serif"
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [legend.position] <right> The positions of the legend.
+         *     legend: {
+         *         // set the font to a size of 20 pixels
+         *         font: "20px Arial, Helvetica,sans-serif"
+         *     },
+         *     ...
+         * });
+         * @option {String} [legend.position] <right> The positions of the legend.
          * <div class="details-list">
          *    <dl>
          *         <dt>
@@ -459,120 +399,100 @@
          *         </dd>
          *    </dl>
          * </div>
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 	   // move the legend to the left side of the chart
-	 *         position: "left"
-	 *     },
-	 *     ...
-	 * });
-         * @option {Number} [legend.offsetX] <0> The X offset from its position.  The offset is relative to the current position of the legend.
-	 * For instance, a value of 20 will move the legend 20 pixels to the right of it's initial position.  A negative value will move the legend
-	 * to the left of the current position.
          * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 	   // move the legend to the left side of the chart
-	 *         offsetX: 20
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Number} [legend.offsetY] <0> The Y offset from its position.  The offset is relative to the current position of the legend.
-	 * For instance, a value of 20 will move the legend 20 pixels down from it's initial position.  A negative value will move the legend
-	 * upwards from the current position.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *	   // move the legend up 100 pixels
-	 *         offsetY: -100
-	 *     },
-	 *     ...
-	 * });
+         * $("#chart").kendoChart({
+         *     legend: {
+         *         // move the legend to the left side of the chart
+         *         position: "left"
+         *     },
+         *     ...
+         * });
+         * @option {Number} [legend.offsetX] <0> The X offset from its position. The offset is relative to the current position of the legend.
+         * For instance, a value of 20 will move the legend 20 pixels to the right of it's initial position. A negative value will move the legend
+         * to the left of the current position.
+         * _example
+         * $("#chart").kendoChart({
+         *     legend: {
+         *         // move the legend to the left side of the chart
+         *         offsetX: 20
+         *     },
+         *     ...
+         * });
+         * @option {Number} [legend.offsetY] <0> The Y offset from its position. The offset is relative to the current position of the legend.
+         * For instance, a value of 20 will move the legend 20 pixels down from it's initial position. A negative value will move the legend
+         * upwards from the current position.
+         * _example
+         * $("#chart").kendoChart({
+         *     legend: {
+         *         // move the legend up 100 pixels
+         *         offsetY: -100
+         *     },
+         *     ...
+         * });
          * @option {Boolean} [legend.visible] <true> The visibility of the legend.
          * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *	   // hide the legend
-	 *         visible: false
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Number | Object} [legend.margin] <10> The margin of the legend.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
+         * $("#chart").kendoChart({
+         *     legend: {
+         *         // hide the legend
+         *         visible: false
+         *     },
+         *     ...
+         * });
+         * @option {Number | Object} [legend.margin] <10> The margin of the legend.
+         * _example
+         * $("#chart").kendoChart({
+         *     legend: {
          *         // sets the top, right, bottom and left margin to 3px.
          *         margin: 3
-	 *     },
-	 *     ...
-	 * });
+         *     },
+         *     ...
+         * });
          * //
-	 * $("#chart").kendoChart({
-	 *     legend: {
+         * $("#chart").kendoChart({
+         *     legend: {
          *         // sets the top and left margin to 1px
          *         // margin right and bottom are with 10px (by default)
          *         margin: { top: 1, left: 1 }
-	 *     },
-	 *     ...
-	 * });
+         *     },
+         *     ...
+         * });
          * @option {Number | Object} [legend.padding] <5> The padding of the legend.
          * _example
          * // sets the top, right, bottom and left padding to 3px.
-	 * $("#chart").kendoChart({
-	 *     legend: {
+         * $("#chart").kendoChart({
+         *     legend: {
          *         // sets the top, right, bottom and left padding to 3px.
          *         padding: 3
-	 *     },
-	 *     ...
-	 * });
+         *     },
+         *     ...
+         * });
          * //
-	 * $("#chart").kendoChart({
-	 *     legend: {
+         * $("#chart").kendoChart({
+         *     legend: {
          *        // sets the top and left padding to 1px
          *        // padding right and bottom are with 5px (by default)
          *        padding: { top: 1, left: 1 }
-	 *     },
-	 *     ...
-	 * });
+         *     },
+         *     ...
+         * });
          * @option {Object} [legend.border] The border of the legend.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *         border: {
-	 *             // set the border width to 2 pixels
-	 *             width: 2,
-	 *             // set the color to grey
-	 *             color: "grey",
-	 *             // set the dash type to solid. this is the default so we could leave this line out.
-	 *             dashType: "solid"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-         * @option {Number} [legend.border.width] <0> The width of the border.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *         border: {
-	 *             // set the border width to 2 pixels
-	 *             width: 2
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-         * @option {String} [legend.border.color] <"black"> The color of the border.
          * _example
-	 * $("#chart").kendoChart({
-	 *     legend: {
-	 *         border: {
-	 *             // set the color to grey
-	 *             color: "grey"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [legend.border.dashType] <"solid"> The dash type of the border.
+         * $("#chart").kendoChart({
+         *     legend: {
+         *         border: {
+         *             // set the border width to 2 pixels
+         *             width: 2,
+         *             // set the color to grey
+         *             color: "grey",
+         *             // set the dash type to solid. this is the default so we could leave this line out.
+         *             dashType: "solid"
+         *         }
+         *     },
+         *     ...
+         * });
+         * @option {Number} [legend.border.width] <0> The width of the border.
+         * @option {String} [legend.border.color] <"black"> The color of the border.
+         * @option {String} [legend.border.dashType] <"solid"> The dash type of the border.
          * <div class="details-list">
          *     <dl>
          *         <dt>
@@ -619,16 +539,6 @@
          *         </dd>
          *    </dl>
          * </div>
-         * _example
-         * $("#chart").kendoChart({
-         *     legend: {
-         *         border: {
-         *             // set the dash type to solid. this is the default so we could leave this line out.
-         *             dashType: "solid"
-         *         }
-         *     },
-         *     ...
-         * });
          * @option {Object} [valueAxis] The value axis configuration options.
          * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
          * _example
@@ -640,47 +550,10 @@
          *     ...
          * });
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
-         * This is often used in combination with the <b>max</b> configuration method
-         * to adjust the size of the chart relative to the charting area.
-         * _example
-         * $("#chart").kendoChart({
-         *     // assuming the data set lowest value is 20 and the highest is 100,
-         *     // we can make the chart bigger in the chart area by adjusting the min/max values
-         *     valueAxis: {
-         *         min: 10,
-         *         max: 100
-         *     },
-         *     ...
-         * });
          * @option {Number} [valueAxis.max] <1> The maximum value of the axis.
-         * This is often used in combination with the <b>min</b> configuration method
-         * to adjust the size of the chart relative to the charting area.
-         * _example
-         * $("#chart").kendoChart({
-         *     // assuming the data set lowest value is 20 and the highest is 100,
-         *     // we can make the chart bigger in the chart area by adjusting the min/max values
-         *     valueAxis: {
-         *         min: 10,
-         *         max: 100
-         *     },
-         *     ...
-         * });
-         * @option {Number} [valueAxis.majorUnit] The interval between major divisions.  For instance, on a column chart, its the step size while going up the
-         * vertical axis.  You can additionally have minor steps and ticks in between the major ones by adjusting the <b>minorUnit</b>, <b>minorTickSize</b> and
-         * <b>minorTickType</b>
-         * _example
-         * $("#chart").kendoChart({
-         *     valueAxis: {
-         *         // show ticks in steps of 100.
-         *         majorUnit: 100,
-         *         // by default, the size is 4. Increase it to 5 pixels.
-         *         majorTickSize: 5,
-         *         // change the tick type to none. only the number will appear.
-         *         majorTickType: "none"
-         *     },
-         *     ...
-         * });
-         * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.  This is the length of the line in pixels that is drawn to indicate the tick
+         * @option {Number} [valueAxis.majorUnit] The interval between major divisions. For instance, on a column chart, its the step size while going up the
+         * vertical axis.
+         * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
          * on the chart.
          * _example
          * $("#chart").kendoChart({
@@ -716,17 +589,13 @@
          *     },
          *     ...
          * });
-         * @option {Number} [valueAxis.majorTickSize] <4> The axis major tick size.  This is the length of the line in pixels that is drawn to indicate the tick
+         * @option {Number} [valueAxis.majorTickSize] <4> The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
          * on the chart.
          * _example
          * $("#chart").kendoChart({
          *     valueAxis: {
-         *         // show ticks in steps of 100.
-         *         majorUnit: 100,
          *         // by default, the size is 4. Increase it to 5 pixels.
          *         majorTickSize: 5,
-         *         // change the tick type to none. only the number will appear.
-         *         majorTickType: "none"
          *     },
          *     ...
          * });
@@ -752,18 +621,14 @@
          * _example
          * $("#chart").kendoChart({
          *     valueAxis: {
-         *         // show ticks in steps of 100.
-         *         majorUnit: 100,
-         *         // by default, the size is 4. Increase it to 5 pixels.
-         *         majorTickSize: 5,
-         *         // change the tick type to none. only the number will appear.
+         *         // change the tick type to none. Only the number will appear.
          *         majorTickType: "none"
          *     },
          *     ...
          * });
          *
-         * @option {Object} [valueAxis.minorGridLines] Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
-         * body of the chart.  Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid
+         * @option {Object} [valueAxis.minorGridLines] Configures the minor grid lines. These are the lines that are an extension of the minor ticks through the
+         * body of the chart. Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid
          * lines visibility being set to <b>true</b>.
          * _example
          * $("#chart").kendoChart({
@@ -777,31 +642,9 @@
          *     },
          *     ...
          * });
-         * @option {Number} [valueAxis.minorGridLines.width] <1> The width of the lines. Note that this settings has no effect if the visibility of the minor
-         * grid lines is not set to <b>true</b>.
-         * _example
-         * $("#chart").kendoChart({
-         *     valueAxis: {
-         *         // set visible to true
-         *         visible: true,
-         *         // set width to 2 pixels
-         *         width: 2
-         *     },
-         *     ...
-         * });
-         * @option {String} [valueAxis.minorGridLines.color] <"black"> The color of the lines. Note that this has no effect if the visibility of the minor
-         * grid lines is not set to <b>true</b>.
-         * _example
-         * $("#chart").kendoChart({
-         *     valueAxis: {
-         *         // set visible to true
-         *         visible: true,
-         *         // set the color to a dark blue
-         *         color: "#336699"
-         *     },
-         *     ...
-         * });
-         * @option {Boolean} [valueAxis.minorGridLines.visible] <false> The visibility of the lines.
+         * @option {Number} [valueAxis.minorGridLines.width] <1> The width of the minor grid lines.
+         * @option {String} [valueAxis.minorGridLines.color] <"black"> The color of the minor grid lines.
+         * @option {Boolean} [valueAxis.minorGridLines.visible] <false> The visibility of the minor grid lines.
          * _example
          * $("#chart").kendoChart({
          *     valueAxis: {
@@ -810,7 +653,7 @@
          *     },
          *     ...
          * });
-         * @option {Object} [valueAxis.majorGridLines] Configures the major grid lines.  These are the lines that are an extension of the major ticks through the
+         * @option {Object} [valueAxis.majorGridLines] Configures the major grid lines. These are the lines that are an extension of the major ticks through the
          * body of the chart.
          * _example
          * $("#chart").kendoChart({
@@ -822,257 +665,96 @@
          *     },
          *     ...
          * });
-         * @option {Number} [valueAxis.majorGridLines.width] <1> The width of the lines.
+         * @option {Number} [valueAxis.majorGridLines.width] <1> The width of the major grid lines.
+         * @option {String} [valueAxis.majorGridLines.color] <"black"> The color of the major grid lines.
+         * @option {Boolean} [valueAxis.majorGridLines.visible] <true> The visibility of the major grid lines.
+         * @option {Object} [valueAxis.line] Configures the axis line. This will also affect the major and minor ticks, but not the grid lines.
          * _example
-	 * $("#chart").kendoChart({
-	 *     majorGridLines: {
-	 *         // set the width of the lines to 2 pixels
-	 *         width: 2
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.majorGridLines.color] <"black"> The color of the lines.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     majorGridLines: {
-	 *         // set the color to a dark blue
-	 *         color: "#336699"
-	 *     },
-	 *     ...
-	 * });
- 	 * @option {Boolean} [valueAxis.majorGridLines.visible] <true> The visibility of the lines.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     majorGridLines: {
-	 *         // hide the major grid lines
-	 *         visible: false
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.color] Color to apply to all axis elements.
-         * Individual color settings for line and labels take priority. Any valid CSS color string will work here, including hex and rgb.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         // set the default color for all axis elements to a dark blue. note that
-	 *         // any axis elements with color settings will override this.
-	 *         color: "#336699"
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Object} [valueAxis.line] Configures the axis line.  This will also affect the major and minor ticks, but not the grid lines.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         line: {
-	 *             // change the line width to 2 pixels
-	 *             width: 2,
-	 * 	       // set the color to light grey
-	 *             color: "#e2e2e2"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Number} [valueAxis.line.width] <1> The width of the lines.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         line: {
-	 *             // change the line width to 2 pixels
-	 *             width: 2
-	 * 	   }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.line.color] <"black"> The color of the lines. This will also affect the major and minor ticks, but not the
-	 * grid lines.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         line: {
-	 * 	       // set the color to light grey
-	 *             color: "#e2e2e2"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         line: {
-	 *             // hide the axis lines altogether
-	 *             visible: false
-         *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Object} [valueAxis.labels] Configures the axis labels.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             // set the color of the text on the labels to a dark blue
-	 *             color: "#336699",
-	 *             // set the background color of the labels to a light grey
-	 *             background: "#e2e2e2",
-	 *             // make the font 14px
-	 *             font: "14px Arial,Helvetica,sans-serif",
-	 *             // zero out the margins
-	 *             margin: 0,
-	 *             // make the padding 2 px all around
-	 *             padding: 2,
-	 *             // tweak the border style
-	 *             border: {
-	 *                 // make the width 1
-	 *                 width: 1,
-	 *                 // set the color to a dark blue
-	 *                 color: "#336699",
-	 *                 // set the border style to dashed
-	 *                 dashType: "dash"
-	 *             },
-	 *             // rotate the labels just slightly for visual effect
-	 *             rotation: 10,
-	 *             // format the labels for currency
-	 *             format: "{0:C}"
-	 	   }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.labels.color] The text color of the labels. Any valid CSS color string will work here, including hex and rgb.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             // set the color of the text on the labels to a dark blue
-	 *             color: "#336699"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-         * @option {String} [valueAxis.labels.background] The background color of the labels. Any valid CSS color string will work here, including
-	 * hex and rgb
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             // set the background color of the labels to a light grey
-	 *             background: "#e2e2e2"
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
-         * The font style of the labels.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             // set the font to 14 px
-	 *             font: "14px Arial,Helvetica,sans-serif"
-	 *         }
-	 *     },
-	 *     ...
- 	 * });
-	 * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             // hide the axis labels
-	 *             visible: false
-	 *         }
-	 *    },
-	 *    ...
-	 * });
-	 * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         label: {
- 	 *             // sets the top, right, bottom and left margin to 3px.
-	 *             margin: 3
-         *        }
-	 *     },
-	 *     ...
-	 * });
-	 * //
          * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         label: {
- 	 *             // sets the top and left margin to 1px
+         *     valueAxis: {
+         *         line: {
+         *             // change the line width to 2 pixels
+         *             width: 2,
+         *             // set the color to light grey
+         *             color: "#e2e2e2"
+         *         }
+         *     },
+         *     ...
+         * });
+         * @option {Number} [valueAxis.line.width] <1> The width of the lines.
+         * @option {String} [valueAxis.line.color] <"black"> The color of the lines.
+         * @option {Boolean} [valueAxis.line.visible] <true> The visibility of the lines.
+         * @option {Object} [valueAxis.labels] Configures the axis labels.
+         * @option {String} [valueAxis.labels.color] The text color of the labels.
+         * @option {String} [valueAxis.labels.background] The background color of the labels.
+         * @option {String} [valueAxis.labels.font] <"12px Arial,Helvetica,sans-serif">
+         * The font style of the labels.
+         * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
+         * @option {Number|Object} [valueAxis.labels.margin] <0> The margin of the labels.
+         * _example
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         labels: {
+         *             // sets the top, right, bottom and left margin to 3px.
+         *             margin: 3
+         *        }
+         *     },
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         labels: {
+         *             // sets the top and left margin to 1px
          *             // margin right and bottom are with 0px (by default)
          *             margin: { top: 1, left: 1 }
-	 *         }
-	 *     },
-	 *     ...
-	 * });
+         *         }
+         *     },
+         *     ...
+         * });
          * @option {Number | Object} [valueAxis.labels.padding] <0> The padding of the labels.
          * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         label: {
- 	 *             // sets the top, right, bottom and left padding to 3px.
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         labels: {
+         *             // sets the top, right, bottom and left padding to 3px.
          *             padding: 3
          *         }
-	 *     },
-	 *     ...
-	 * });
-	 * //
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         label: {
+         *     },
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         labels: {
          *             // sets the top and left padding to 1px
          *             // padding right and bottom are with 0px (by default)
          *             padding: { top: 1, left: 1 }
-	 *         }
-	 *     },
-	 *     ...
-	 * });
+         *         }
+         *     },
+         *     ...
+         * });
          * @option {Object} [valueAxis.labels.border] The border of the labels.
          * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             border: {
-	 *                 // make the width 1
-	 *                 width: 1,
-	 *                 // set the color to a dark blue
-	 *                 color: "#336699",
-	 *                 // set the border style to dashed
-	 *                 dashType: "dash"
-	 *             }
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         labels: {
+         *             border: {
+         *                 // make the width 1
+         *                 width: 1,
+         *                 // set the color to a dark blue
+         *                 color: "#336699",
+         *                 // set the border style to dashed
+         *                 dashType: "dash"
+         *             }
+         *         }
+         *     },
+         *     ...
+         * });
+         * @option {Number} [valueAxis.labels.border.width] <0> The width of the border.
          * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             border: {
-	 *                 // make the width 1
-	 *                 width: 1
-	 *             }
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             border: {
-	 *                 // set the color to a dark blue
-	 *                 color: "#336699"
-	 *             }
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.labels.border.dashType] <"solid"> The dash type of the border.
+         * @option {String} [valueAxis.labels.border.color] <"black"> The color of the border.
+         * @option {String} [valueAxis.labels.border.dashType] <"solid"> The dash type of the border.
          * <div class="details-list">
          *     <dl>
          *         <dt>
@@ -1119,30 +801,9 @@
          *         </dd>
          *    </dl>
          * </div>
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             border: {
-	 *                 // set the border style to dashed
-	 *                 dashType: "dash"
-	 *             }
-	 *         }
-	 *     },
-	 *     ...
-	 * });
          * @option {Number} [valueAxis.labels.rotation] <0> The rotation angle of the labels.
          * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *         labels: {
-	 *             // rotate the labels slightly for visual effect
-	 *             rotation: 10
-	 *         }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String/Function} [valueAxis.labels.template] The label template.
+         * @option {String/Function} [valueAxis.labels.template] The label template.
          * Template variables:
          * <ul>
          *     <li><strong>value</strong> - the value</li>
@@ -1170,16 +831,6 @@
          *      }
          * });
          * @option {String} [valueAxis.labels.format] The format of the labels.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     valueAxis: {
-	 *        labels: {
-	 *            // set the format to currency
-         *            format: "{0:C}"
-	 *        }
-	 *     },
-	 *     ...
-	 * });
          * @option {Array} [valueAxis.plotBands] The plot bands of the value axis.
          * The plot band fields:
          * <div class="details-list">
@@ -1204,169 +855,78 @@
          *         </dd>
          *    </dl>
          * </div>
-         * _example
-         * $("#chart").kendoChart({
-         *     ...,
-         *     valueAxis: {
-         *         plotBands: [{
-         *             from: 0.2,
-         *             to: 0.4,
-         *             color: "green"
-         *         }]
-         *     },
-         *  });
          * @option {Object} [valueAxis.title] The title of the value axis.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // set the color of the title text to a dark blue
-	 *         color: "#336699",
-	 *         // set the background color to a light grey
-	 *         background: "#e2e2e2",
-	 *         // set the text of the title
-	 *         text: "Sales By District",
-	 *         // decreate the font size of the title to 14 px
-	 *         font: "14px Arial,Helvetica,sans-serif",
-	 *         // set the margin on all sides to 4
-	 *         margin: 4,
-	 *         // set padding to 2 px
-	 *         padding: 2,
-	 *         // tweak the border around the title
-	 *         border: {
-	 *             // set the width to 1
-	 *             width: 1,
-	 *             // set the color to a dark blue
-	 *             color: "#336699",
-	 *             // set the style to dashed
-	 *             dashType: "dash"
-	 *         },
-	 *         // move the title to the bottom
-	 *         position: "bottom"
-	 *     },
-	 *     ...
-	 * });
          * @option {String} [valueAxis.title.color] The text color of the title.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // set the color of the title text to a dark blue
-	 *         color: "#336699"
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.title.background] The background color of the title.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // set the background color to a light grey
-	 *         background: "#e2e2e2"
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.title.text] The text of the title.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // set the text of the title
-	 *         text: "Sales By District"
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.title.font] <"16px Arial,Helvetica,sans-serif">
+         * @option {String} [valueAxis.title.background] The background color of the title.
+         * @option {String} [valueAxis.title.text] The text of the title.
+         * @option {String} [valueAxis.title.font] <"16px Arial,Helvetica,sans-serif">
          * The font style of the title.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // decreate the font size of the title to 14 px
-	 *         font: "14px Arial,Helvetica,sans-serif"
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Boolean} [valueAxis.title.visible] <true> The visibility of the title.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // hide the title
-	 *         visible: false
-	 *     },
-	 *     ...
-	 * });
-	 * @option {Number | Object} [valueAxis.title.margin] <5> The margin of the title.
+         * @option {Boolean} [valueAxis.title.visible] <true> The visibility of the title.
+         * @option {Number | Object} [valueAxis.title.margin] <5> The margin of the title.
          * _example
          * $("#chart").kendoChart({
-	 *     title: {
-	 *         // sets the top, right, bottom and left margin to 3px.
-         *         margin: 3
+         *     valueAxis: {
+         *         title: {
+         *             // sets the top, right, bottom and left margin to 3px.
+         *             margin: 3
+         *         }
          *     },
-	 *     ...
-	 * });
-	 * //
-	 * $("#chart").kendoChart({
-	 *     title: {
-         *         // sets the top and left margin to 1px
-         *         // margin right and bottom are with 0px (by default)
-         *         margin: { top: 1, left: 1 }
-	 *     },
-	 *     ...
-	 * });
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         title: {
+         *             // sets the top and left margin to 1px
+         *             // margin right and bottom are with 0px (by default)
+         *             margin: 3
+         *         }
+         *     },
+         *     ...
+         * });
          * @option {Number|Object} [valueAxis.title.padding] <0> The padding of the title.
          * _example
          * $("#chart").kendoChart({
-	 *     title: {
-	 *         // sets the top, right, bottom and left padding to 3px.
-         *         padding: 3
+         *     valueAxis: {
+         *         title: {
+         *             // sets the top, right, bottom and left padding to 3px.
+         *             padding: 3
+         *         }
          *     },
-	 *     ...
-	 * });
-	 * $("#chart").kendoChart({
-	 *     title: {
-         *         // sets the top and left padding to 1px
-         *         // padding right and bottom are with 0px (by default)
-         *         padding: { top: 1, left: 1 }
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         title: {
+         *             // sets the top and left padding to 1px
+         *             // padding right and bottom are with 0px (by default)
+         *             padding: 3
+         *         }
          *     },
-	 *     ...
-	 * });
-	 * @option {Object} [valueAxis.title.border] The border of the title.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // tweak the border around the title
-	 *         border: {
-	 *             // set the width to 1
-	 *             width: 1,
-	 *             // set the color to a dark blue
-	 *             color: "#336699",
-	 *             // set the style to dashed
-	 *             dashType: "dash"
-	 *     	   }
-	 *     },
-	 *     ...
-	 * });
+         *     ...
+         * });
+         * @option {Object} [valueAxis.title.border] The border of the title.
+         * _example
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         title: {
+         *             // tweak the border around the title
+         *             border: {
+         *                 // set the width to 1
+         *                 width: 1,
+         *                 // set the color to a dark blue
+         *                 color: "#336699",
+         *                 // set the style to dashed
+         *                 dashType: "dash"
+         *             }
+         *         }
+         *     },
+         *     ...
+         * });
          * @option {Number} [valueAxis.title.border.width] <0> The width of the border.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // tweak the border around the title
-	 *         border: {
-	 *             // set the width to 1
-	 *             width: 1
-	 *     	   }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.title.border.color] <"black"> The color of the border.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // tweak the border around the title
-	 *         border: {
-	 *             // set the color to a dark blue
-	 *             color: "#336699"
-	 *     	   }
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.title.border.dashType] <"solid"> The dash type of the border.
+         * @option {String} [valueAxis.title.border.color] <"black"> The color of the border.
+         * @option {String} [valueAxis.title.border.dashType] <"solid"> The dash type of the border.
          * <div class="details-list">
          *     <dl>
          *         <dt>
@@ -1413,27 +973,8 @@
          *         </dd>
          *    </dl>
          * </div>
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // tweak the border around the title
-	 *         border: {
-	 *             // set the style to dashed
-	 *             dashType: "dash"
-	 *     	   }
-	 *     },
-	 *     ...
-	 * });
          * @option {Number} [valueAxis.title.rotation] <0> The rotation angle of the title.
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // rotate the title 20 degrees
-	 *         rotate: 20
-	 *     },
-	 *     ...
-	 * });
-	 * @option {String} [valueAxis.title.position] <"center"> The position of the title.
+         * @option {String} [valueAxis.title.position] <"center"> The position of the title.
          * <div class="details-list">
          *    <dl>
          *         <dt>
@@ -1468,14 +1009,7 @@
          *         </dd>
          *    </dl>
          * </div>
-         * _example
-	 * $("#chart").kendoChart({
-	 *     title: {
-	 *         // move the title to the bottom of the chart
-	 *         position: "bottom"
-	 *     },
-	 *     ...
-	 * });
+         *
          * @option {Object} [xAxis] The scatter charts X-axis configuration options.
          * See valueAxis for detailed members list.
          *
@@ -2027,8 +1561,6 @@
          * The default options for all column series. For more details see the series options.
          * @option {Object} [seriesDefaults.line] The line configuration options.
          * The default options for all line series. For more details see the series options.
-         * @option {Object} [seriesDefaults.verticalLine] The vertical line configuration options.
-         * The default options for all vertical line series. For more details see the series options.
          * @option {Object} [seriesDefaults.pie] The pie configuration options.
          * The default options for all pie series. For more details see the series options.
          * @option {Object} [seriesDefaults.scatter] The scatter configuration options.
@@ -2037,8 +1569,6 @@
          * The default options for all scatterLine series. For more details see the series options.
          * @option {Object} [seriesDefaults.area] The area configuration options.
          * The default options for all area series. For more details see the series options.
-         * @option {Object} [seriesDefaults.verticalArea] The vertical area configuration options.
-         * The default options for all vertical area series. For more details see the series options.
          * @option {Array} [series] Array of series definitions.
          * <p>
          * The series type is determined by the value of the type field.
@@ -2074,19 +1604,19 @@
          *              The label is positioned at the bar center.
          *         </dd>
          *         <dt>
-         *              <code>""insideEnd"</code>
+         *              <code>"insideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the end of the bar.
          *         </dd>
          *         <dt>
-         *              <code>""insideBase"</code>
+         *              <code>"insideBase"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned inside, near the base of the bar.
          *         </dd>
          *         <dt>
-         *              <code>""outsideEnd"</code>
+         *              <code>"outsideEnd"</code>
          *         </dt>
          *         <dd>
          *              The label is positioned outside, near the end of the bar.
@@ -2808,9 +2338,6 @@
          * @option {Number} [series.type="line".tooltip.border.width] <0> The width of the border.
          * @option {String} [series.type="line".tooltip.border.color] <"black"> The color of the border.
          * @option {Boolean} [series.type="line".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
-         * @option [series.type="verticalLine"]
-         * Vertical line series accepts the same parameters as line series.
-         * The line and the category axis are now vertical instead of horizontal.
          * @option [series.type="pie"] Available options for pie series:
          * @option {String} [series.type="pie".categoryField]
          * The data field containing the sector category name.
@@ -3640,9 +3167,6 @@
          * @option {Boolean} [series.type="scatterLine".tooltip.visible] <false> A value indicating if the tooltip should be displayed.
          *
          * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
-         * @option [series.type="verticalArea"]
-         * Vertical area series use the same options as area series.
-         * The category axis is rendered vertically instead of horizontally.
          * @option {Object} [chartArea] The chart area configuration options.
          * This is the entire visible area of the chart.
          * @option {String} [chartArea.background] <"white"> The background color of the chart area.
