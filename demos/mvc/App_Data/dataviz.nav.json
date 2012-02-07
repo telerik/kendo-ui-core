@@ -91,6 +91,9 @@
                     "text": "Scatter line chart",
                     "url": "scatter-charts/scatter-line.html"
                 }, {
+                    "text": "Multiple axes",
+                    "url": "scatter-charts/multiple-axes.html"
+				}, {
                     "text": "Binding to remote data",
                     "url": "scatter-charts/remote-data.html"
                 }, {
