@@ -214,7 +214,7 @@
         * @option {Boolean} [suggest] <false> Controls whether the ComboBox should automatically auto-type the rest of text.
 	* _example
 	* $("#comboBox").kendoComboBox({
-	*     suggest: false
+	*     suggest: true
 	* });
         * @option {Number} [delay] <200> Specifies the delay in ms after which the ComboBox will start filtering dataSource.
         * _example
@@ -530,13 +530,13 @@
         },
 
         /**
-        * Re-popuplates the data in the DataSource.
+        * Re-render the items of the drop-down list.
         * @name kendo.ui.ComboBox#refresh
         * @function
         * @example
         * // get a referenence to the Kendo UI ComboBox
         * var combobox = $("#combobox").data("kendoComboBox");
-        * // re-populate the data of the DataSource
+        * // re-render the items of the drop-down list.
         * combobox.refresh();
         */
 

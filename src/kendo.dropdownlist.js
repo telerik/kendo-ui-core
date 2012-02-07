@@ -141,7 +141,7 @@
      * <p>
      *  You can reference an existing <b>DropDownList</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
-     *  use the API to control its behavior. 
+     *  use the API to control its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing DropDownList instance
@@ -181,7 +181,7 @@
 	 *     dataSource: items,
 	 *     dataTextField: "Title",
 	 *     dataValueField: "Id"
-	 * });    
+	 * });
 	 * _exampleTitle Bind to a remote URL
 	 * _example
 	 * $("#dropdownlist").kendoDropDownList({
@@ -199,7 +199,7 @@
 	 *     enabled: false // dropdown list will not be enabled
 	 * });
 	 * _exampleTitle To set after initialization
-	 * _example	 
+	 * _example
 	 * // get a reference to the dropdown list
 	 * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 	 * // disable the dropdown
@@ -226,7 +226,7 @@
 	 *     dataSource: items,
 	 *     dataTextField: "Title",
 	 *     dataValueField: "Id"
-	 * }); 
+	 * });
          * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
          * _example
 	 * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
@@ -426,7 +426,7 @@
 	* // get a reference to the dropdown list
 	* var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
 	* // disable the dropdown list
-	* dropdownlist.enable(false);    
+	* dropdownlist.enable(false);
         */
         enable: function(enable) {
             var that = this,
@@ -505,13 +505,13 @@
         },
 
         /**
-        * Re-popuplates the data in the DataSource.
+        * Re-render the items in drop-down list.
         * @name kendo.ui.DropDownList#refresh
         * @function
         * @example
         * // get a referenence to the Kendo UI DropDownList
         * var dropdownlist = $("dropdownlist").data("kendoDropDownList");
-        * // re-populate the data of the DataSource
+        * // re-render the items in drop-down list.
         * dropdownlist.refresh();
         */
 
