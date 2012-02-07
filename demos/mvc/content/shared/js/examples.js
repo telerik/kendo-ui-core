@@ -251,6 +251,11 @@
     }
 
     $.fn.mobileOsChooser = function(options) {
+        var deviceList = $("#deviceList");
+        if (deviceList.length != 1) {
+            return this;
+        }
+
         var oses = new kendo.data.DataSource({
             data: [
                 { text: "iOS", value: "ios" },
@@ -263,9 +268,9 @@
         applyCurrentMobileOS(options.container);
         
         var deviceTemplate = kendo.template($("#deviceThumbTemplate").html());
-        $("#deviceList").html(kendo.render(deviceTemplate, oses.view()));
+        deviceList.html(kendo.render(deviceTemplate, oses.view()));
 
-        $("#deviceList .thumbLink").click(function () {
+        deviceList.find(".thumbLink").click(function () {
             var value = $(this).closest(".thumbLink").children(".thumb").text();
             $(options.container).removeClass(mobileClasses).addClass("km-" + value);
             $("#device-wrapper").removeClass("ios android").addClass(value);
