@@ -459,13 +459,13 @@
         },
 
         /**
-        * Re-popuplates the data in the DataSource.
+        * Re-render the items in drop-down list.
         * @name kendo.ui.AutoComplete#refresh
         * @function
         * @example
         * // get a referenence to the Kendo UI AutoComplete
         * var autocomplete = $("autocomplete").data("kendoAutoComplete");
-        * // re-populate the data of the DataSource
+        * // re-render the items in drop-down list.
         * autocomplete.refresh();
         */
 
