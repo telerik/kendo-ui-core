@@ -159,7 +159,7 @@
 	 * $("#numeric").kendoNumericTextBox({
 	 *     min: 0,
 	 *     max: 1,
-	 *     step: .1,
+	 *     step: 0.1,
 	 *     decimals: 1
 	 * });
          * @option {String} [format] <n> Specifies the format of the number. Any valid number format is allowed.
@@ -168,8 +168,8 @@
 	 *    format: "p0", // format as percentage with % sign
          *    min: 0,
          *    max: 1,
-         *    step: 0.01	
-         * }); 
+         *    step: 0.01
+         * });
 	 * @option {String} [placeholder] <Enter value> Specifies the text displayed when the input is empty.
 	 * _example
 	 * // specify on widget initialization
