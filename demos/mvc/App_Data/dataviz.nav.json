@@ -95,6 +95,14 @@
                     "url": "scatter-charts/local-data.html"
             }],
             "name": "scatter charts"
+        }, {
+            "text": "Customization",
+            "spriteCssClass": "chartIcon",
+            "items": [{
+                    "text": "PlotBands",
+                    "url": "customization/plotbands.html"
+                }],
+            "name": "customization"
         }
     ]
 }
