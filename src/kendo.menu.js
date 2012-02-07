@@ -637,49 +637,47 @@
             }
 
             $(element).each(function () {
-                if (that.trigger(OPEN, { item: element[0] }) === false) {
-                    var li = $(this);
+                var li = $(this);
 
-                    clearTimeout(li.data(TIMER));
+                clearTimeout(li.data(TIMER));
 
-                    li.data(TIMER, setTimeout(function () {
-                        var ul = li.find(".k-group:first:hidden"), popup;
+                li.data(TIMER, setTimeout(function () {
+                    var ul = li.find(".k-group:first:hidden"), popup;
 
-                        if (ul[0]) {
-                            li.data(ZINDEX, li.css(ZINDEX));
-                            li.css(ZINDEX, that.nextItemZIndex ++);
+                    if (ul[0] && that.trigger(OPEN, { item: element[0] }) === false) {
+                        li.data(ZINDEX, li.css(ZINDEX));
+                        li.css(ZINDEX, that.nextItemZIndex ++);
 
+                        popup = ul.data(KENDOPOPUP);
+                        var root = li.parent().hasClass(MENU),
+                            parentHorizontal = root && horizontal,
+                            directions = parseDirection(direction, root),
+                            effects = options.animation.open.effects,
+                            openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root);
+
+                        if (!popup) {
+                            popup = ul.kendoPopup({
+                                origin: directions.origin,
+                                position: directions.position,
+                                collision: parentHorizontal ? "fit" : "fit flip",
+                                anchor: li,
+                                appendTo: li,
+                                animation: {
+                                    open: extend( { effects: openEffects }, options.animation.open),
+                                    close: options.animation.close
+                                }
+                            }).data(KENDOPOPUP);
+                        } else {
                             popup = ul.data(KENDOPOPUP);
-                            var root = li.parent().hasClass(MENU),
-                                parentHorizontal = root && horizontal,
-                                directions = parseDirection(direction, root),
-                                effects = options.animation.open.effects,
-                                openEffects = effects !== undefined ? effects : "slideIn:" + getEffectDirection(direction, root);
-
-                            if (!popup) {
-                                popup = ul.kendoPopup({
-                                    origin: directions.origin,
-                                    position: directions.position,
-                                    collision: parentHorizontal ? "fit" : "fit flip",
-                                    anchor: li,
-                                    appendTo: li,
-                                    animation: {
-                                        open: extend( { effects: openEffects }, options.animation.open),
-                                        close: options.animation.close
-                                    }
-                                }).data(KENDOPOPUP);
-                            } else {
-                                popup = ul.data(KENDOPOPUP);
-                                popup.options.origin = directions.origin;
-                                popup.options.position = directions.position;
-                                popup.options.animation.open.effects = openEffects;
-                            }
-
-                            popup.open();
+                            popup.options.origin = directions.origin;
+                            popup.options.position = directions.position;
+                            popup.options.animation.open.effects = openEffects;
                         }
 
-                    }, that.options.hoverDelay));
-                }
+                        popup.open();
+                    }
+
+                }, that.options.hoverDelay));
             });
 
             return that;
@@ -695,22 +693,20 @@
             var that = this;
 
             $(element).each(function () {
-                if (that.trigger(CLOSE, { item: element[0] }) === false) {
-                    var li = $(this);
+                var li = $(this);
 
-                    clearTimeout(li.data(TIMER));
+                clearTimeout(li.data(TIMER));
 
-                    li.data(TIMER, setTimeout(function () {
-                        var ul = li.find(".k-group:first:visible"), popup;
-                        if (ul[0]) {
-                            li.css(ZINDEX, li.data(ZINDEX));
-                            li.removeData(ZINDEX);
+                li.data(TIMER, setTimeout(function () {
+                    var ul = li.find(".k-group:first:visible"), popup;
+                    if (ul[0] && that.trigger(CLOSE, { item: element[0] }) === false) {
+                        li.css(ZINDEX, li.data(ZINDEX));
+                        li.removeData(ZINDEX);
 
-                            popup = ul.data(KENDOPOPUP);
-                            popup.close();
-                        }
-                    }, that.options.hoverDelay));
-                }
+                        popup = ul.data(KENDOPOPUP);
+                        popup.close();
+                    }
+                }, that.options.hoverDelay));
             });
 
             return that;
@@ -756,15 +752,11 @@
 
             if (!that.options.openOnClick || that.clicked) {
                 if (!contains(e.currentTarget, e.relatedTarget) && hasChildren) {
-                    if (that.trigger(OPEN, { item: element[0] }) === false) {
-                        that.open(element);
-                    }
+                    that.open(element);
                 }
             }
 
             if (that.options.openOnClick && that.clicked) {
-                that.trigger(CLOSE, { item: element[0] });
-
                 element.siblings().each(proxy(function (_, sibling) {
                     that.close(sibling);
                 }, that));
@@ -777,9 +769,7 @@
                 hasChildren = (element.children(".k-animation-container").length || element.children(groupSelector).length);
 
             if (!that.options.openOnClick && !contains(e.currentTarget, e.relatedTarget) && hasChildren) {
-                if (that.trigger(CLOSE, { item: element[0] }) === false) {
-                    that.close(element);
-                }
+                that.close(element);
             }
         },
 
@@ -811,8 +801,6 @@
 
             that.clicked = true;
             openHandle = element.children(".k-animation-container, .k-group").is(":visible") ? CLOSE : OPEN;
-
-            that.trigger(openHandle, { item: element[0] });
             that[openHandle](element);
         },
 
