@@ -169,7 +169,7 @@
 
                     interval = setInterval(nextChart, 3000);
 
-                    $(document).bind("kendo:skinChange", function(e) {
+                    $("#example").bind("kendo:skinChange", function(e) {
                         nextChart();
                     });
 

@@ -116,7 +116,8 @@
                     exampleElement[0].style.cssText = exampleElement[0].style.cssText;
                 }
 
-                $(doc).data("kendoSkin", skinName).trigger("kendo:skinChange");
+                $(doc).data("kendoSkin", skinName);
+                $("#example").trigger("kendo:skinChange");
                 $(doc.documentElement).removeClass("k-" + oldSkinName).addClass("k-" + skinName);
             }
 

@@ -66,15 +66,14 @@
 
                 $(document).ready(function() {
                     setTimeout(function() {
-                        createChart();
-
                         // Initialize the chart with a delay to make sure
                         // the initial animation is visible
-                    }, 400);
-
-                    $(document).bind("kendo:skinChange", function(e) {
                         createChart();
-                    });
+
+                        $("#example").bind("kendo:skinChange", function(e) {
+                            createChart();
+                        });
+                    }, 400);
                 });
             </script>
         </div>
