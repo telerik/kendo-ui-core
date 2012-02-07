@@ -519,9 +519,9 @@
      * @exampleTitle Include culture scripts and select culture
      * @example
      *
-     * <script src="jquery.js" />
-     * <script src="kendo.all.min.js" />
-     * <script src="kendo.culture.en-GB.js" />
+     * <script src="jquery.js" ></script>
+     * <script src="kendo.all.min.js"></script>
+     * <script src="kendo.culture.en-GB.js"></script>
      * <script type="text/javascript">
      *    //set current culture to the "en-GB" culture script.
      *    kendo.culture("en-GB");
