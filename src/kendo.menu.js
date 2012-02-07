@@ -644,7 +644,7 @@
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".k-group:first:hidden"), popup;
 
-                    if (ul[0] && that.trigger(OPEN, { item: element[0] }) === false) {
+                    if (that.trigger(OPEN, { item: element[0] }) === false && ul[0]) {
                         li.data(ZINDEX, li.css(ZINDEX));
                         li.css(ZINDEX, that.nextItemZIndex ++);
 
@@ -699,7 +699,7 @@
 
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".k-group:first:visible"), popup;
-                    if (ul[0] && that.trigger(CLOSE, { item: element[0] }) === false) {
+                    if (that.trigger(CLOSE, { item: element[0] }) === false && ul[0]) {
                         li.css(ZINDEX, li.data(ZINDEX));
                         li.removeData(ZINDEX);
 
