@@ -630,15 +630,16 @@
 	 *     ...
 	 * }); 
 	 * @option {Object} [valueAxis] The value axis configuration options.
-	 * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the first perpendicular axis crosses this axis.
-	 * _example
-	 * $("#chart").kendoChart({	
-	 *     valueAxis: {
-	 *         // have the axis cross at 5 instead of starting at 0
-	 *         axisCrossingValue: 5
-	 *     },
-	 *     ...
-	 * });
+         * @option {Object} [valueAxis.name] <primary> The unique axis name.
+         * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the category axis crosses this axis.
+         * _example
+         * $("#chart").kendoChart({
+         *     valueAxis: {
+         *         // have the axis cross at 5 instead of starting at 0
+         *         axisCrossingValue: 5
+         *     },
+         *     ...
+         * });
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.  
 	 * This is often used in combination with the <b>max</b> configuration method
 	 * to adjust the size of the chart relative to the charting area.
@@ -1551,17 +1552,17 @@
 	 * }); 
          *
          * @option {Object} [xAxis] Scatter charts X-axis configuration options.
-	 * Includes all valueAxis options in addition to:
+         * Includes all valueAxis options in addition to:
          * @option {Number} [xAxis.axisCrossingValue] <0>
          * _example
-	 * $("#chart").kendoChart({
-	 *     ...,
-	 *     xAxis: {
-	 *         // move crossing axis
-	 *         axisCrossingValue: 5
-	 *     },
-	 *     ...
-	 * });
+         * $("#chart").kendoChart({
+         *     ...,
+         *     xAxis: {
+         *         // The Y Axis crosses this axis at the '5' mark
+         *         axisCrossingValue: 5
+         *     },
+         *     ...
+         * });
          * Value at which the first Y axis crosses this axis.
          * @option {Array} [xAxis.axisCrossingValue] <[0]>
          * Values at which the Y axes cross this X axis.
@@ -1569,28 +1570,28 @@
          * <strong>Note:&nbsp;</strong> Specify a value greater than or equal to the
          * axis maximum value to denote the far end of the axis.
          * _example
-	 * $("#chart").kendoChart({
-	 *      ...,
+         * $("#chart").kendoChart({
+         *      ...,
          *      xAxis: {
          *          axisCrossingValues: [0, 1000]
          *      },
          *      yAxis: [{ }, { name: "secondary" }],
-	 *      ...
-	 * });
+         *      ...
+         * });
          * </p>
          *
          * @option {Object} [yAxis] The scatter charts Y-axis configuration options.
          * Includes all valueAxis options in addition to:
-	 * @option {Number} [yAxis.axisCrossingValue] <0>
+         * @option {Number} [yAxis.axisCrossingValue] <0>
          * _example
-	 * $("#chart").kendoChart({
-	 *     ...,
-	 *     xAxis: {
-	 *         // move crossing axis
-	 *         axisCrossingValue: 5
-	 *     },
-	 *     ...
-	 * });
+         * $("#chart").kendoChart({
+         *     ...,
+         *     xAxis: {
+         *         // The X Axis crosses this axis at the '5' mark
+         *         axisCrossingValue: 5
+         *     },
+         *     ...
+         * });
          * Value at which the first X axis crosses this axis.
          * @option {Array} [yAxis.axisCrossingValue] <[0]>
          * Values at which the X axes cross this Y axis.
@@ -1598,14 +1599,14 @@
          * <strong>Note:&nbsp;</strong> Specify a value greater than or equal to the
          * axis maximum value to denote the far end of the axis.
          * _example
-	 * $("#chart").kendoChart({
+         * $("#chart").kendoChart({
          *      ...,
-	 *      yAxis: {
+         *      yAxis: {
          *          axisCrossingValues: [0, 1000]
          *      },
          *      xAxis: [{ }, { name: "secondary" }],
-	 *      ...
-	 * });
+         *      ...
+         * });
          * </p>
          *
          * @option {Object} [categoryAxis] The category axis configuration options.
@@ -1632,32 +1633,32 @@
 	 * });
          * @option {Number} [categoryAxis.axisCrossingValue] <0>
          * Category index at which the first value axis crosses this axis.
-	 * _example
-	 * $("#chart").kendoChart({
-	 *     ...,
-	 *     categoryAxis: {
-	 *         axisCrossingValue: {
-	 *             // move crossing axis
-	 *             axisCrossingValue: 5
-	 *         }
-	 *     },
-	 *     ...
-	 * });
+         * _example
+         * $("#chart").kendoChart({
+         *     ...,
+         *     categoryAxis: {
+         *         axisCrossingValue: {
+         *             // The Value Axis crosses this axis at the fifth category
+         *             axisCrossingValue: 5
+         *         }
+         *     },
+         *     ...
+         * });
          * @option {Array} [categoryAxis.axisCrossingValue] <[0]>
          * Category indicies at which the value axes cross the category axis.
          * <p>
          * <strong>Note:&nbsp;</strong> Specify an index greater than or equal to the number
          * of categories to denote the far end of the axis.
          * _example
-	 * $("#chart").kendoChart({
+         * $("#chart").kendoChart({
          *      categoryAxis: {
          *          categories: ["A", "B"]
          *              axisCrossingValues: [0, 100]
          *          },
          *      valueAxis: [{ }, { name: "secondary" }],
          *      ...
-	 * })'
-	 * </p>
+         * })'
+         * </p>
          * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.  This is the length of the line in pixels that is drawn to indicate the tick
 	 * on the chart.
 	 * _example
