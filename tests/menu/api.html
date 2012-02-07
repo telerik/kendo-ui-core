@@ -177,20 +177,26 @@
             ok(selected == 1);
         });
 
-        test('hovering root item opens it and raises open event', function() {
+        asyncTest('hovering root item opens it and raises open event', function() {
             var item = getRootItem(1);
 
             menu._mouseenter({ currentTarget: item[0] });
 
-            ok(isOpenRaised);
+            setTimeout(function () {
+                ok(isOpenRaised);
+                start();
+            }, 1);
         });
 
-        test('leaving root item closes it and raises close event', function() {
+        asyncTest('leaving root item closes it and raises close event', function() {
             var item = getRootItem(1);
 
             menu._mouseleave({ currentTarget: item[0] });
 
-            ok(isCloseRaised);
+            setTimeout(function () {
+                ok(isCloseRaised);
+                start();
+            }, 1);
         });
 
         test('clicking should raise select event', function() {
