@@ -818,7 +818,7 @@
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".k-group:first:hidden"), popup;
 
-                    if (that.trigger(OPEN, { item: element[0] }) === false && ul[0]) {
+                    if (ul[0] && that.trigger(OPEN, { item: li[0] }) === false) {
                         li.data(ZINDEX, li.css(ZINDEX));
                         li.css(ZINDEX, that.nextItemZIndex ++);
 
@@ -883,7 +883,7 @@
 
                 li.data(TIMER, setTimeout(function () {
                     var ul = li.find(".k-group:first:visible"), popup;
-                    if (that.trigger(CLOSE, { item: element[0] }) === false && ul[0]) {
+                    if (ul[0] && that.trigger(CLOSE, { item: li[0] }) === false) {
                         li.css(ZINDEX, li.data(ZINDEX));
                         li.removeData(ZINDEX);
 
@@ -974,8 +974,9 @@
 
             e.handled = true;
 
-            if (that.options.closeOnClick && !(href && href.length > 0) && !element.children(groupSelector + ",.k-animation-container").length)
+            if (that.options.closeOnClick && !(href && href.length > 0) && !element.children(groupSelector + ",.k-animation-container").length) {
                 that.close(link.parentsUntil(that.element, allItemsSelector));
+            }
 
             if ((!element.parent().hasClass(MENU) || !that.options.openOnClick) && !touch) {
                 return;

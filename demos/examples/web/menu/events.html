@@ -1,30 +1,4 @@
-<!doctype html>
-<html>
-    <head>
-        <!-- meta -->
-        <!-- meta -->
-        <title>Events</title>
-        <!-- css -->
-        <link href="../../shared/styles/examples.css" rel="stylesheet"/>
-        <link href="../../shared/styles/examples-offline.css" rel="stylesheet"/>
-        <link href="../../../../styles/kendo.common.css" rel="stylesheet"/>
-        <link href="../../../../styles/kendo.default.css" rel="stylesheet"/>
-        <!-- css -->
-        <!-- script -->
-        <script src="../../../../src/jquery.min.js"></script>
-        <script src="../../../../src/kendo.core.js"></script>
-        <script src="../../../../src/kendo.fx.js"></script>
-        <script src="../../../../src/kendo.popup.js"></script>
-        <script src="../../../../src/kendo.menu.js"></script>
-        <script src="../../shared/js/console.js"></script>
-        <!-- script -->
-    </head>
-    <body>
-        <!-- nav -->
-        <!-- nav -->
-        <!-- description -->
-        <div class="description">Events</div>
-        <!-- description -->
+
         <div id="example" class="k-content">
             <ul id="menu">
                 <li>
@@ -77,16 +51,16 @@
         <script>
             $(document).ready(function() {
                 function onOpen(e) {
-                    kendoConsole.log("Opened: " + $(e.item).find("> .k-link").text());
-                };
+                    kendoConsole.log("Opened: " + $(e.item).children(".k-link").text());
+                }
 
                 function onClose(e) {
-                    kendoConsole.log("Closed: " + $(e.item).find("> .k-link").text());
-                };
+                    kendoConsole.log("Closed: " + $(e.item).children(".k-link").text());
+                }
 
                 function onSelect(e) {
-                    kendoConsole.log("Selected: " + $(e.item).find("> .k-link").text());
-                };
+                    kendoConsole.log("Selected: " + $(e.item).children(".k-link").text());
+                }
 
                 $("#menu").kendoMenu({
                     select: onSelect,
@@ -96,7 +70,3 @@
             });
         </script>
         <div class="console"></div>
-        <!-- tools -->
-        <!-- tools -->
-    </body>
-</html>
