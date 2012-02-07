@@ -363,7 +363,7 @@
      *  You can reference an existing <b>Grid</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
      *  Once a reference has been established, you can use the API to control
-     *  its behavior. 
+     *  its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing Grid instance
@@ -671,7 +671,7 @@
          *              template: '#= kendo.toString(BirthDate,"dd MMMM yyyy") #'
          *         }
          *      ],
-         *      autoBind: true // the grid will not be populated with data until read() is called on the sharedDataSource
+         *      autoBind: false // the grid will not be populated with data until read() is called on the sharedDataSource
          *  });
          * @option {Boolean | Object} [scrollable] <true> Enable/disable grid scrolling. Possible values:
          * <div class="details-list">
