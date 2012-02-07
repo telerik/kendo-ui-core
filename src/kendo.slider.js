@@ -578,18 +578,30 @@
          *
          * @option {String} [tickPlacement] <"both">
          * Denotes the location of the tick marks in the <strong>Slider</strong>. The available options are:
-         * <ul>
-         *  <li>
-         *   <strong>"topLeft"</strong> - Tick marks are located on the top of the horizontal widget or on the left of
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"topLeft"</code>
+         *         </dt>
+         *         <dd>
+         *              Tick marks are located on the top of the horizontal widget or on the left of
          *   the vertical widget.
-         *  </li>
-         *  <li>
-         *   <strong>"bottomRight"</strong> - Tick marks are located on the bottom of the horizontal widget or on the
+         *         </dd>
+         *         <dt>
+         *              <code>"bottomRight"</code>
+         *         </dt>
+         *         <dd>
+         *             Tick marks are located on the bottom of the horizontal widget or on the
          *   right side of the vertical widget.
-         *  </li>
-         *  <li><strong>"both"</strong> - Tick marks are located on both sides of the widget.</li>
-         * </ul>
-         *
+         *         </dd>
+         *         <dt>
+         *              <code>"both"</code>
+         *         </dt>
+         *         <dd>
+         *             Tick marks are located on both sides of the widget.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Number} [smallStep] <1>
          * The small step value of the <strong>Slider</strong>. The underlying value will be changed when the end user
          * (1) clicks on the increase or decrease buttons of the <strong>Slider</strong>, (2) presses the arrow keys
@@ -794,7 +806,7 @@
          *
          * @param {String} [value]
          * The value to be set for a Slider.
-         * 
+         *
          * @example
          * var slider = $("#slider").data("kendoSlider");
          * var sliderValue = slider.value();
@@ -1107,18 +1119,31 @@
          * <strong>"vertical"</strong>.
          *
          * @option {String} [tickPlacement] <"both">
-         * Denotes the location of the tick marks in the <strong>Slider</strong>. The available options are:
-         * <ul>
-         *  <li>
-         *   <strong>"topLeft"</strong> - Tick marks are located on the top of the horizontal widget or on the left of
+         * Denotes the location of the tick marks in the <strong>RangeSlider</strong>. The available options are:
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"topLeft"</code>
+         *         </dt>
+         *         <dd>
+         *              Tick marks are located on the top of the horizontal widget or on the left of
          *   the vertical widget.
-         *  </li>
-         *  <li>
-         *   <strong>"bottomRight"</strong> - Tick marks are located on the bottom of the horizontal widget or on the
+         *         </dd>
+         *         <dt>
+         *              <code>"bottomRight"</code>
+         *         </dt>
+         *         <dd>
+         *             Tick marks are located on the bottom of the horizontal widget or on the
          *   right side of the vertical widget.
-         *  </li>
-         *  <li><strong>"both"</strong> - Tick marks are located on both sides of the widget.</li>
-         * </ul>
+         *         </dd>
+         *         <dt>
+         *              <code>"both"</code>
+         *         </dt>
+         *         <dd>
+         *             Tick marks are located on both sides of the widget.
+         *         </dd>
+         *    </dl>
+         * </div>
          *
          * @option {Number} [smallStep] <1>
          * The small step value of the <strong>RangeSlider</strong>. The underlying value will be changed when the end
