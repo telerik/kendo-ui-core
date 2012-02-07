@@ -2,30 +2,29 @@
         <script src="../../content/web/integration/knockout-1.2.1.js"></script>
 
         <div id="example" class="k-content">
-            <p> Choose a ticket class: <select id="ticket" style="vertical-align: middle" data-bind="options: tickets,
-                optionsCaption: 'Choose...',
-                optionsText: 'name',
-                value: chosenTicket"></select>
-            </p>
-            <p>
-                Departure: <input id="departure" data-bind="value: departure" />
-            </p>
-            <p>
-                Quantity: <input id="quantity" data-bind="value: quantity" />
-            </p>
-            <p data-bind="template: 'ticketTemplate'"></p>
+            <div id="options">
+                Choose a ticket class:
+                <select id="ticket" style="vertical-align: middle" data-bind="options: tickets,
+                    optionsCaption: 'Choose...',
+                    optionsText: 'name',
+                    value: chosenTicket"></select>
 
+                Departure:
+                <input id="departure" data-bind="value: departure" />
+
+                Quantity:
+                <input id="quantity" data-bind="value: quantity" />
+            </div>
+            <hr/>
+            <p data-bind="template: 'ticketTemplate'"></p>
             <script id="ticketTemplate" type="text/x-jquery-tmpl">
                 {{if chosenTicket}}
-                <dl>
-                    <dt> You have chosen: </dt>
-                    <dd><b>${ chosenTicket().name }</b> ($${ chosenTicket().price }) </dd>
-                    <dt>Departure:</dt>
-                    <dd>${ kendo.toString(kendo.parseDate(departure()), "MM/dd/yyyy") }</dd>
-                    <dt>Quantity:</dt>
-                    <dd>${ quantity() }</dd>
-                    <dt><button data-bind="click: resetTicket">Clear</button></dt>
-                </dl>
+                    <p> You have chosen: <b>${ chosenTicket().name }</b> ($${ chosenTicket().price }) </p>
+                    <p>Departure: ${ kendo.toString(kendo.parseDate(departure()), "MM/dd/yyyy") } </p>
+                    <p>Quantity: ${ quantity() } </p>
+                    <p><button data-bind="click: resetTicket">Clear</button></p>
+                {{else}}
+                    No tickets...
                 {{/if}}
             </script>
             <script>
@@ -45,6 +44,9 @@
                     ko.applyBindings(viewModel);
 
                     $("#ticket").kendoDropDownList().trigger("change");
+                    $("#ticket").bind("change", function() {
+                        $(this).data("kendoDropDownList").select(this.selectedIndex);
+                    });
 
                     $("#quantity").kendoNumericTextBox({
                         min: 1,
