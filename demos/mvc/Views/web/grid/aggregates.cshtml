@@ -1,0 +1,42 @@
+﻿
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+            <script>
+                $(document).ready(function() {
+                    $("#grid").kendoGrid({
+                        dataSource: {
+                            type: "odata",
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"                                
+                            },
+                            pageSize: 7,
+                            group: { 
+                                     field: "UnitsInStock", aggregates: [ 
+                                        { field: "ProductName", aggregate: "count" }, 
+                                        { field: "UnitPrice", aggregate: "sum"},
+                                        { field: "UnitsOnOrder", aggregate: "average" },
+                                        { field: "UnitsInStock", aggregate: "count" }                                        
+                                        ]
+                                   },
+
+                            aggregate: [ { field: "ProductName", aggregate: "count" },
+                                          { field: "UnitPrice", aggregate: "sum" },
+                                          { field: "UnitsOnOrder", aggregate: "average" },                                          
+                                          { field: "UnitsInStock", aggregate: "min" },
+                                          { field: "UnitsInStock", aggregate: "max" }]
+                        },                                                                  
+                        sortable: true,
+                        scrollable: false,
+                        pageable: true,
+                        columns: [
+                            { field: "ProductName", footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+                            { field: "UnitPrice" },
+                            { field: "UnitsOnOrder", footerTemplate: "Average: #=average#", 
+                                groupFooterTemplate: "Average: #=average#" },    
+                            { field: "UnitsInStock", footerTemplate: "<div>Min: #= min #</div><div>Max: #= max #</div>", 
+                                groupHeaderTemplate: "#= field #: #= value # (Count: #= count#)" }
+                        ]
+                    });
+                });
+            </script>
+        </div>

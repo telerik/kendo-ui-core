@@ -189,6 +189,10 @@
                     "url": "grid/toolbar-template.html"
                 },
                 {
+                    "text": "Aggregates",
+                    "url": "grid/aggregates.html"
+                },
+                {
                     "text": "Sorting",
                     "url": "grid/sorting.html"
                 },
