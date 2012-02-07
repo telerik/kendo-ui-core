@@ -505,15 +505,44 @@
         },
 
         /**
-        * Re-render the items in drop-down list.
+        * Re-render the items of the drop-down list.
         * @name kendo.ui.DropDownList#refresh
         * @function
         * @example
         * // get a referenence to the Kendo UI DropDownList
         * var dropdownlist = $("dropdownlist").data("kendoDropDownList");
-        * // re-render the items in drop-down list.
+        * // re-render the items of the drop-down list.
         * dropdownlist.refresh();
         */
+        refresh: function() {
+            var that = this,
+                value = that.value(),
+                options = that.options,
+                data = that._data(),
+                length = data.length;
+
+            that.ul[0].innerHTML = kendo.render(that.template, data);
+            that._height(length);
+
+            if (that.element.is(SELECT)) {
+                that._options(data);
+            }
+
+            if (value) {
+                that.value(value);
+            } else {
+                that.select(options.index);
+            }
+
+            that._old = that.value();
+
+            if (that._open) {
+                that.toggle(length);
+            }
+
+            that._hideBusy();
+        },
+
 
         /**
         * Selects item, which starts with the provided parameter.
@@ -696,35 +725,6 @@
                 that._word += String.fromCharCode(e.keyCode || e.charCode);
                 that._search();
             }, 0);
-        },
-
-        _refresh: function() {
-            var that = this,
-                value = that.value(),
-                options = that.options,
-                data = that._data(),
-                length = data.length;
-
-            that.ul[0].innerHTML = kendo.render(that.template, data);
-            that._height(length);
-
-            if (that.element.is(SELECT)) {
-                that._options(data);
-            }
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(options.index);
-            }
-
-            that._old = that.value();
-
-            if (that._open) {
-                that.toggle(length);
-            }
-
-            that._hideBusy();
         },
 
         _search: function() {

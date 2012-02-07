@@ -311,7 +311,7 @@
 
             that._accessors();
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that._refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
 
             that.bind([
             /**
@@ -459,16 +459,42 @@
         },
 
         /**
-        * Re-render the items in drop-down list.
+        * Re-render the items of the drop-down list.
         * @name kendo.ui.AutoComplete#refresh
         * @function
         * @example
         * // get a referenence to the Kendo UI AutoComplete
         * var autocomplete = $("autocomplete").data("kendoAutoComplete");
-        * // re-render the items in drop-down list.
+        * // re-render the items of the drop-down list.
         * autocomplete.refresh();
         */
+        refresh: function () {
+            var that = this,
+            ul = that.ul[0],
+            options = that.options,
+            suggest = options.suggest,
+            data = that.dataSource.view(),
+            length = data.length;
 
+            ul.innerHTML = kendo.render(that.template, data);
+
+            that._height(length);
+
+            if (length) {
+                if (suggest || options.highlightFirst) {
+                    that.current($(ul.firstChild));
+                }
+
+                if (suggest) {
+                    that.suggest(that._current);
+                }
+            }
+
+            if (that._open) {
+                that._open = false;
+                that.popup[length ? "open" : "close"]();
+            }
+        },
 
         /**
         * Selects drop-down list item and sets the text of the autocomplete.
@@ -692,34 +718,6 @@
 
             if (that.options.suggest) {
                 that.suggest(li);
-            }
-        },
-
-        _refresh: function () {
-            var that = this,
-            ul = that.ul[0],
-            options = that.options,
-            suggest = options.suggest,
-            data = that.dataSource.view(),
-            length = data.length;
-
-            ul.innerHTML = kendo.render(that.template, data);
-
-            that._height(length);
-
-            if (length) {
-                if (suggest || options.highlightFirst) {
-                    that.current($(ul.firstChild));
-                }
-
-                if (suggest) {
-                    that.suggest(that._current);
-                }
-            }
-
-            if (that._open) {
-                that._open = false;
-                that.popup[length ? "open" : "close"]();
             }
         },
 
