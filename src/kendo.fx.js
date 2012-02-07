@@ -635,7 +635,7 @@
             setup: function(element, options) {
                 var reverse = options.effects.zoom.direction == "out";
 
-                if (reverse && hasZoom) {
+                if (hasZoom) {
                     var half = $.browser.msie && $.browser.version >= 9 ? (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2 : 0; // Kill margins in IE7/8
                     element.css({
                         marginLeft: element.width() * half,
