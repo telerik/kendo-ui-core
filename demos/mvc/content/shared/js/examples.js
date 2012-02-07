@@ -200,6 +200,15 @@
                 });
 
             $(doc).data("kendoSkin", kendoSkin);
+
+            $("#qr").click(function(e){
+                var bigQR = $("#qrBig");
+                bigQR.toggle();
+                var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
+                $(this).children("em").html(newText);
+                e.preventDefault();
+                e.stopPropagation();
+            });
         }
     };
 
@@ -237,6 +246,8 @@
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
         $("#device-wrapper").removeClass("ios android").addClass(kendoMobileOS);
+        $("#deviceList .selectedThumb").removeClass("selectedThumb");
+        $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
     }
 
     $.fn.mobileOsChooser = function(options) {
@@ -246,31 +257,26 @@
                 { text: "Android", value: "android" }
             ]
         });
+        
+        oses.read();
 
         applyCurrentMobileOS(options.container);
+        
+        var deviceTemplate = kendo.template($("#deviceThumbTemplate").html());
+        $("#deviceList").html(kendo.render(deviceTemplate, oses.view()));
 
-        return this.each(function() {
-            var deviceChooser = $(this).val(kendoMobileOS).kendoDropDownList({
-                dataSource: oses,
-                dataTextField: "text",
-                dataValueField: "value",
-                template: "<span class='thumbLink'><span class='thumb #= data.value #Thumb'></span><span class='skinTitle'>#= data.text #</span></span>",
-                change: function () {
-                    var value = this.value();
-                    $(options.container).removeClass(mobileClasses).addClass("km-" + value);
-                    $("#device-wrapper").removeClass("ios android").addClass(value);
-                    try {
-                        sessionStorage.setItem("kendoMobileOS", value);
-                    } catch(err) {}
-                }
-            }).data("kendoDropDownList");
-
-            deviceChooser.list.width(180);
-            deviceChooser.popup.options = extend(deviceChooser.popup.options, {
-                    origin: "bottom right",
-                    position: "top right"
-                });
+        $("#deviceList .thumbLink").click(function () {
+            var value = $(this).closest(".thumbLink").children(".thumb").text();
+            $(options.container).removeClass(mobileClasses).addClass("km-" + value);
+            $("#device-wrapper").removeClass("ios android").addClass(value);
+            try {
+                sessionStorage.setItem("kendoMobileOS", value);
+            } catch(err) {}
+            $("#deviceList .selectedThumb").removeClass("selectedThumb");
+            $("#deviceList ." + value + "Thumb").parent().addClass("selectedThumb");
         });
+
+       return this;
     };
 
     $.fn.themeChooser = function(options) {

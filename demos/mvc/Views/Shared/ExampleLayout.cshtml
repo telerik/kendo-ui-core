@@ -18,6 +18,22 @@
 
         @if (ViewBag.suite == "mobile") {
         <div id="example" class="k-content">
+
+            <div class="configuration mobileConfiguration">
+                <a class="bigButton" id="downloadMobile" href="http://kendoui.com/get-kendo-ui/accept-license-agreement.aspx?pId=927"><strong>Download Beta</strong> <em>Get Kendo UI Mobile Beta</em></a>
+                <input id="deviceChooser" type="hidden" />
+                <ul id="deviceList" class="options">
+                    <li></li>
+                </ul>
+                <p id="qrWrap">Open this demo with an iOS/Android mobile device for a full experience. <a href="#" id="qr"><span class="k-icon k-qr"></span><em>Show QR Code</em></a></p>
+                <img src="/content/mobile/shared/qr.png" id="qrBig" />
+
+                <script id="deviceThumbTemplate" type="text/x-kendo-template">
+                    <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+                </script>
+                
+            </div>
+
             <div id="device-wrapper">
                 <div id="mobile-application-container">
                     @RenderBody()
@@ -32,6 +48,7 @@
                     </div>
                 </div>
             </div>
+
             @RenderSection("ExampleFooter", false)
         </div>
         <script>
