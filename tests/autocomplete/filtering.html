@@ -77,19 +77,6 @@
                 input.val("").press(8/*backspace*/);
                 stop(1);
             });
-
-            test("refresh repopulates the list", function() {
-                var autocomplete = new AutoComplete(input, {
-                    dataSource: ["foo", "bar"]
-                });
-
-                stub(autocomplete.dataSource, {read: autocomplete.dataSource.read});
-
-                autocomplete.refresh();
-
-                equal(autocomplete.dataSource.calls("read"), 1);
-            });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

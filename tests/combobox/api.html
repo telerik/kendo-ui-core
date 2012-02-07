@@ -247,17 +247,6 @@
                 ok(!combobox.element.attr("disabled"));
                 ok(!combobox.input.attr("disabled"));
             });
-
-            test("refresh repopulates the list", function() {
-                var combobox = new ComboBox(input);
-
-                stub(combobox.dataSource, {read: combobox.dataSource.read});
-
-                combobox.refresh();
-
-                equal(combobox.dataSource.calls("read"), 1);
-            });
-
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
