@@ -499,11 +499,11 @@
     }};
 
     /**
-     * @name kendo.Globalization
+     * @name kendo.ui.Globalization
      * @namespace
      */
      /**
-     * @name kendo.Globalization.Description
+     * @name kendo.ui.Globalization.Description
      *
      * @section Globalization is the process of designing and developing an
      * application that works in multiple cultures. The culture defines specific information
