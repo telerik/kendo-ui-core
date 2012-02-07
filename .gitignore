@@ -1,4 +1,5 @@
 *.dll
+*.mdb
 !**/References/*.dll
 *.gpState
 *.pdb
