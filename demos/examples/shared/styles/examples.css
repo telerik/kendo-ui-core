@@ -1786,3 +1786,292 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     height: 420px;
     padding: 25px 50px;
 }
+
+#device-wrapper {
+    background-image: url("iphone.png");
+    background-size: cover;
+    padding: 132px 72px 188px 66px;
+    margin: auto;
+}
+
+#device-wrapper.android {
+    background-image: url("nexus.png");
+}
+
+#device-wrapper,
+#mobile-application-container {
+    height: 460px;
+    overflow: hidden;
+    position: relative;
+    width: 320px;
+}
+
+:-moz-any(#device-wrapper) .km-scrollview {
+    width:320px; /* Workaround the broken flex box in FF. */
+}
+
+#device-wrapper [href*=index]
+{
+    visibility: hidden;
+}
+
+#example .km-android [href*=index]
+{
+    display: none;
+}
+
+#icon-list
+{
+    margin: 0;
+    padding: 0;
+}
+
+#icon-list li
+{
+    position: relative;
+    padding: 4px 0;
+    width: 70px;
+    height: 50px;
+    margin: 0 0 .6em;
+    text-align: center;
+    display: inline-block;
+    list-style: none;
+}
+
+#icon-list span
+{
+    display: block;
+    margin: 0 auto;
+    background-color: #444;
+    width: 32px;
+    height: 32px;
+}
+
+div.old-browser
+{
+    display: block;
+    background: #333;
+}
+
+.old-browser .content
+{
+    width: 100%;
+    height: 120%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.old-browser .content:before
+{
+    content: "\a0";
+    display: inline-block;
+    height: 100%;
+    width: 0;
+    vertical-align: middle;
+}
+
+.old-browser .centered
+{
+    margin: 20px;
+    color: #eee;
+    font-size: 12px;
+    display: inline-block;
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.3);
+}
+
+.old-browser .centered strong
+{
+    font-size: 16px;
+    display: block;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* Firefox Icon Masks */
+
+#navmainWrap .km-featured
+{
+    clip-path: url("iconmasks.svg#featured");
+}
+
+#navmainWrap .km-toprated,
+#navmainWrap .km-favorites
+{
+    clip-path: url("iconmasks.svg#toprated");
+}
+
+#navmainWrap .km-mostviewed
+{
+    clip-path: url("iconmasks.svg#mostviewed");
+}
+
+#navmainWrap .km-bookmarks
+{
+    clip-path: url("iconmasks.svg#bookmarks");
+}
+
+#navmainWrap .km-contacts
+{
+    clip-path: url("iconmasks.svg#contacts");
+}
+
+#navmainWrap .km-download,
+#navmainWrap .km-downloads
+{
+    clip-path: url("iconmasks.svg#download");
+}
+
+#navmainWrap .km-more
+{
+    clip-path: url("iconmasks.svg#more");
+}
+
+#navmainWrap .km-android #navmainWrap .km-more
+{
+    clip-path: url("iconmasks.svg#androidmore");
+}
+
+#navmainWrap .km-meego #navmainWrap .km-more
+{
+    clip-path: url("iconmasks.svg#meegomore");
+}
+
+#navmainWrap .km-mostrecent
+{
+    clip-path: url("iconmasks.svg#mostrecent");
+}
+
+#navmainWrap .km-recents
+{
+    clip-path: url("iconmasks.svg#recents");
+}
+
+#navmainWrap .km-history
+{
+    clip-path: url("iconmasks.svg#history");
+}
+
+#navmainWrap .km-add
+{
+    clip-path: url("iconmasks.svg#add");
+}
+
+#navmainWrap .km-details
+{
+    clip-path: url("iconmasks.svg#details");
+}
+
+#navmainWrap .km-info,
+#navmainWrap .km-about
+{
+    clip-path: url("iconmasks.svg#info");
+}
+
+#navmainWrap .km-action
+{
+    clip-path: url("iconmasks.svg#action");
+}
+
+#navmainWrap .km-camera
+{
+    clip-path: url("iconmasks.svg#camera");
+}
+
+#navmainWrap .km-edit,
+#navmainWrap .km-compose
+{
+    clip-path: url("iconmasks.svg#edit");
+}
+
+#navmainWrap .km-search
+{
+    clip-path: url("iconmasks.svg#search");
+}
+
+#navmainWrap .km-trash,
+#navmainWrap .km-delete
+{
+    clip-path: url("iconmasks.svg#trash");
+}
+
+#navmainWrap .km-organize
+{
+    clip-path: url("iconmasks.svg#organize");
+}
+
+#navmainWrap .km-reply
+{
+    clip-path: url("iconmasks.svg#reply");
+}
+
+#navmainWrap .km-stop
+{
+    clip-path: url("iconmasks.svg#stop");
+}
+
+#navmainWrap .km-sounds,
+#navmainWrap .km-volume
+{
+    clip-path: url("iconmasks.svg#sounds");
+}
+
+#navmainWrap .km-refresh
+{
+    clip-path: url("iconmasks.svg#refresh");
+}
+
+#navmainWrap .km-play
+{
+    clip-path: url("iconmasks.svg#play");
+}
+
+#navmainWrap .km-fastforward
+{
+    clip-path: url("iconmasks.svg#fastforward");
+}
+
+#navmainWrap .km-pause
+{
+    clip-path: url("iconmasks.svg#pause");
+}
+
+#navmainWrap .km-rewind
+{
+    clip-path: url("iconmasks.svg#rewind");
+}
+
+#navmainWrap .km-settings
+{
+    clip-path: url("iconmasks.svg#settings");
+}
+
+#navmainWrap .km-globe
+{
+    clip-path: url("iconmasks.svg#globe");
+}
+
+#navmainWrap .km-home
+{
+    clip-path: url("iconmasks.svg#home");
+}
+
+#navmainWrap .km-cart
+{
+    clip-path: url("iconmasks.svg#cart");
+}
+
+#navmainWrap .km-battery
+{
+    clip-path: url("iconmasks.svg#battery");
+}
+
+#navmainWrap .km-wifi
+{
+    clip-path: url("iconmasks.svg#wifi");
+}
+
+#navmainWrap .km-share
+{
+    clip-path: url("iconmasks.svg#share");
+}
