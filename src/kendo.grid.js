@@ -997,7 +997,7 @@
         },
 
         items: function() {
-            return this.tbody.children();
+            return this.tbody.children(':not(.k-grouping-row,.k-detail-row)');
         },
 
         _element: function() {

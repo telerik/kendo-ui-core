@@ -673,6 +673,21 @@
         }
     });
 
+    function flattenGroups(data) {
+        var idx,
+            lenght,
+            result = [];
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            if (data[idx].hasSubgroups) {
+                result = result.concat(flattenGroups(data[idx].items));
+            } else {
+                result = result.concat(data[idx].items);
+            }
+        }
+        return result;
+    }
+
     var DataSourceWidgetProperty = Class.extend({
         init: function(target) {
             this.target = target;
@@ -688,7 +703,13 @@
                 var idx,
                     length,
                     items = widget.items(),
-                    view = widget.dataSource.view();
+                    dataSource = widget.dataSource,
+                    view = dataSource.view(),
+                    groups = dataSource.group() || [];
+
+                if (groups.length) {
+                   view = flattenGroups(view);
+                }
 
                 for (idx = 0, length = view.length; idx < length; idx++) {
                     bindElement(items[idx], view[idx]);

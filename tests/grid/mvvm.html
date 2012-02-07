@@ -91,6 +91,16 @@
                 equal($.trim(dom.data("kendoGrid").tbody.find("tr:first > td:first").text()), "baz");
             });
 
+            test("templates are updated when grid is grouped", function() {
+                var dom = $('<div data-role="grid" data-template="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoGrid").dataSource.group({ field: "text" });
+
+                equal($.trim(dom.data("kendoGrid").tbody.find("tr:not(.k-grouping-row):first > td:not(.k-group-cell):first").html()), '<strong data-text="text">bar</strong>');
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">
