@@ -35,6 +35,8 @@
                         });
 
                     ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
+
+                    radialScale.ring = ring;
                 }
             });
 
@@ -64,6 +66,23 @@
                 tickAngles = radialScale.getTickAngles(ring, 1);
 
                 equal(tickAngles.length, 101);
+            });
+
+            test("renderTicks does not render duplicate ticks for major and minor points", function() {
+                $.extend(radialScale.options, {
+                    min: 0,
+                    max: 100,
+                    majorUnit: 50,
+                    minorUnit: 25
+                });
+
+                var ticks = radialScale.renderTicks({
+                    createLine: function() {
+                        return {};
+                    }
+                });
+
+                equal(ticks.length, 5);
             });
         </script>
 

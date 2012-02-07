@@ -6319,11 +6319,16 @@
                 options = scale.options,
                 tickOptions = { stroke: "#000", strokeWidth: .5 };
 
-            function renderTickRing(ring, unit) {
+            function renderTickRing(ring, unit, skipUnit) {
                 var tickAngles = scale.getTickAngles(ring, unit),
-                    i, innerPoint, outerPoint;
+                    i, innerPoint, outerPoint,
+                    skip = skipUnit / unit;
 
                 for (i = 0; i < tickAngles.length; i++) {
+                    if (i % skip == 0) {
+                        continue;
+                    }
+
                     outerPoint = ring.point(tickAngles[i]);
                     innerPoint = ring.point(tickAngles[i], true);
 
@@ -6340,7 +6345,7 @@
 
             renderTickRing(majorTickRing, options.majorUnit);
             minorTickRing.radius(minorTickRing.r - options.minorTickSize, true);
-            renderTickRing(minorTickRing, options.minorUnit);
+            renderTickRing(minorTickRing, options.minorUnit, options.majorUnit);
 
             return ticks;
         },
