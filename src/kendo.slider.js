@@ -391,7 +391,6 @@
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
-            console.log(that._pixelSteps, that._values, that._valueToPixels);
         },
 
         _getValueFromPosition: function(mousePosition, dragableArea) {
