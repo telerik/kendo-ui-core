@@ -343,6 +343,7 @@
         init: function (element, options) {
             var that = this,
                 clickableItems = ".k-in:not(.k-state-selected,.k-state-disabled)",
+                MOUSEENTER = "mouseenter",
                 dataInit;
 
             options = $.isArray(options) ? (dataInit = true, { dataSource: options }) : options;
@@ -382,12 +383,12 @@
             }
 
             that.wrapper
-                .delegate(".k-in.k-state-selected", "mouseenter", function(e) { e.preventDefault(); })
-                .delegate(clickableItems, "mouseenter", function () { $(this).addClass(TSTATEHOVER); })
-                .delegate(clickableItems, "mouseleave", function () { $(this).removeClass(TSTATEHOVER); })
-                .delegate(clickableItems, CLICK, proxy(that._nodeClick, that))
-                .delegate("div:not(.k-state-disabled) .k-in", "dblclick", proxy(that._toggleButtonClick, that))
-                .delegate(".k-plus,.k-minus", CLICK, proxy(that._toggleButtonClick, that));
+                .on(MOUSEENTER, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
+                .on(MOUSEENTER, clickableItems, function () { $(this).addClass(TSTATEHOVER); })
+                .on("mouseleave", clickableItems, function () { $(this).removeClass(TSTATEHOVER); })
+                .on(CLICK, clickableItems, proxy(that._nodeClick, that))
+                .on("dblclick", "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
+                .on(CLICK, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
 
             if (options.dragAndDrop) {
                 that.bind([
@@ -593,14 +594,14 @@
                 wrapperClasses = "k-widget k-treeview k-reset";
 
             if (element.is("div")) {
-                wrapper = element.addClass(wrapperClasses);
+                wrapper = element;
                 root = wrapper.children("ul").eq(0);
             } else { // element is ul
-                wrapper = element.wrap('<div class="' + wrapperClasses + '" />').parent();
+                wrapper = element.wrap('<div />').parent();
                 root = element;
             }
 
-            that.wrapper = wrapper;
+            that.wrapper = wrapper.addClass(wrapperClasses);
             that.root = root;
         },
 
