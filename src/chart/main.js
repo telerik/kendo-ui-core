@@ -6210,23 +6210,33 @@
     });
 
     var Pointer = ChartElement.extend({
-        init: function (options) {
-            var pointer = this;
+        init: function (scale, options) {
+            var pointer = this,
+                options;
 
             ChartElement.fn.init.call(pointer, options);
+
+            options = pointer.options;
+
+            if (!options.id) {
+                options.id = uniqueId();
+            }
+
+            pointer.scale = scale;
         },
 
         options: {
             shape: "needle",
-            fill: "red"
+            fill: "red",
+            id: "myLovelyPointer"
         },
 
         value: function(newValue) {
-            var pointer = this;
+            var pointer = this,
+                options = pointer.options,
+                element = doc.getElementById(options.id);
 
-
-
-            pointer.element.rotate();
+            pointer.element.rotate(element, pointer.scale.getSlotAngle(newValue), pointer.box.center());
         },
 
         reflow: function(box) {
@@ -6285,6 +6295,12 @@
             );
 
             scale.box = box;
+        },
+
+        getSlotAngle: function(value) {
+            var options = this.options;
+
+            return value / options.max * options.angle + options.startAngle;
         },
 
         renderTicks: function(view) {
@@ -6376,10 +6392,11 @@
 
         render: function() {
             var plotArea = this,
-                options = plotArea.options;
+                options = plotArea.options,
+                scale;
 
-            plotArea.scale = new RadialScale(options.scale);
-            plotArea.pointer = new Pointer(options.pointer);
+            scale = plotArea.scale = new RadialScale(options.scale);
+            plotArea.pointer = new Pointer(scale, options.pointer);
 
             plotArea.append(plotArea.scale);
             plotArea.append(plotArea.pointer);
@@ -6399,6 +6416,10 @@
             $(element).addClass("k-gauge");
 
             gauge._redraw();
+
+            setInterval(function() {
+                gauge._plotArea.pointer.value(Math.floor(Math.random() * 100));
+            }, 1000);
         },
 
         _redraw: function() {
