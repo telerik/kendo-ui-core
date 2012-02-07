@@ -81,7 +81,7 @@
                         });
                     }, 400);
 
-                    $(".configuration").live("change", refresh);
+                    $(".configuration").bind("change", refresh);
                 });
 
                 function refresh() {
