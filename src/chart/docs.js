@@ -1004,6 +1004,19 @@
 	 *     },
 	 *     ...
  	 * });
+     * @option {Boolean} [valueAxis.labels.mirror] Mirrors the axis labels and ticks.
+     * If the labels are normally on the left side of the axis,
+     * mirroring the axis will render them to the right.
+     * _example
+     * $("#chart").kendoChart({
+     *     valueAxis: {
+     *         labels: {
+     *             // mirror the labels on the right
+     *             mirror: true
+     *         }
+     *     },
+     *     ...
+     * });
 	 * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
          * _example
 	 * $("#chart").kendoChart({
@@ -1922,10 +1935,10 @@
 	 *     },
 	 *     ...
 	 * });
-         * @option {Boolean} [categoryAxis.labels.mirror] Mirrors the axis labels and ticks.
-         * If the labels are normally on the left side of the axis,
-         * mirroring the axis will render them to the right.
-         * _example
+     * @option {Boolean} [categoryAxis.labels.mirror] Mirrors the axis labels and ticks.
+     * If the labels are normally on the left side of the axis,
+     * mirroring the axis will render them to the right.
+     * _example
 	 * $("#chart").kendoChart({
 	 *     categoryAxis: {
 	 *         labels: {
