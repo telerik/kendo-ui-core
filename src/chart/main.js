@@ -6228,7 +6228,7 @@
         options: {
             shape: "needle",
             fill: "red",
-            id: "myLovelyPointer"
+            value: 0
         },
 
         value: function(newValue) {
@@ -6236,7 +6236,8 @@
                 options = pointer.options,
                 element = doc.getElementById(options.id);
 
-            pointer.element.rotate(element, pointer.scale.getSlotAngle(newValue), pointer.box.center());
+            // initial pointer position is at 90deg
+            pointer.element.rotate(element, pointer.scale.getSlotAngle(newValue) - 90, pointer.box.center());
         },
 
         reflow: function(box) {
@@ -6245,17 +6246,24 @@
             pointer.box = box;
         },
 
-        getViewElements: function(view) {
+        _createNeedle: function(view, box) {
             var pointer = this,
                 box = pointer.box,
                 halfWidth = box.width() / 2,
                 center = box.center();
 
-            pointer.element = view.createPolyline([
+            return view.createPolyline([
                     new Point2D((box.x1 + box.x2) / 2, box.y1),
-                    new Point2D(center.x - 10, center.y),
-                    new Point2D(center.x + 10, center.y)
-                ], true, pointer.options);
+                    new Point2D(center.x - 10, center.y + 50),
+                    new Point2D(center.x + 10, center.y + 50)
+                ], true, pointer.options)
+        },
+
+        getViewElements: function(view) {
+            var pointer = this,
+                shape = pointer.options.shape;
+
+            pointer.element = pointer._createNeedle(view, pointer.box);
 
             return [pointer.element];
         }
@@ -6417,9 +6425,12 @@
 
             gauge._redraw();
 
+
+            gauge._plotArea.pointer.value(0);
+            var i = 0;
             setInterval(function() {
-                gauge._plotArea.pointer.value(Math.floor(Math.random() * 100));
-            }, 1000);
+                gauge._plotArea.pointer.value((i+=.5) % 100);
+            }, 10);
         },
 
         _redraw: function() {
