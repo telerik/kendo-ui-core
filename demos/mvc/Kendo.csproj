@@ -492,6 +492,7 @@
     <Content Include="Views\dataviz\area-chart\index.cshtml" />
     <Content Include="Views\dataviz\area-chart\local-data.cshtml" />
     <Content Include="Views\dataviz\area-chart\remote-data.cshtml" />
+    <Content Include="Views\dataviz\customization\plotbands.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />
