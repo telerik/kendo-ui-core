@@ -28,12 +28,7 @@
                     <li>@Html.SuiteLink("ThemeBuilder", "last")</li>
                 </ul>
 
-                @if (ViewBag.suite == "mobile") {
-                    <div id="examplesThemeChooser">
-                        <label for="deviceChooser">Device</label>
-                        <input id="deviceChooser" />
-                    </div>
-                } else if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
+                @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
                     <div id="examplesThemeChooser">
                         <label for="skinSelector">Theme</label>
                         <input id="skinSelector" class="themeChooser" />
