@@ -389,7 +389,7 @@
      	 * _example
          * // set the min date to Jan 1st, 2011
          * $("#datePicker").kendoDatePicker({
-         *  min = new Date(2011, 0, 1)
+         *  min: new Date(2011, 0, 1)
          * });
          * _exampleTitle To set after initialization
 	 * _example
@@ -400,10 +400,10 @@
          * @option {Date} [max] <Date(2099, 11, 31)> Specifies the maximum date, which the calendar can show.
          * _example
          * $("#datePicker").kendoDatePicker({
-         *  max = new Date(2013, 0, 1) // sets max date to Jan 1st, 2013
-         * });        
+         *  max: new Date(2013, 0, 1) // sets max date to Jan 1st, 2013
+         * });
 	 * _exampleTitle To set after initialization
-	 * _example          
+	 * _example
          * var datePicker = $("#datePicker").data("kendoDatePicker");
          * // set the max date to Jan 1st, 2013
          * datePicker.max(new Date(2013,0, 1));
@@ -420,7 +420,7 @@
          *              <code>"month"</code>
          *         </dt>
          *         <dd>
-         *             shows the days of the month 
+         *             shows the days of the month
          *         </dd>
          *         <dt>
          *              <code>"year"</code>
@@ -454,7 +454,7 @@
          *              <code>"month"</code>
          *         </dt>
          *         <dd>
-         *             shows the days of the month 
+         *             shows the days of the month
          *         </dd>
          *         <dt>
          *              <code>"year"</code>
@@ -475,7 +475,7 @@
 	 *              shows the decades from the centery
 	 *         </dd>
 	 *    </dl>
-         * </div> 
+         * </div>
          * _example
          * $("#datePicker").kendoDatePicker({
          *     start: "decade",
@@ -509,7 +509,7 @@
          *  &lt;/script&gt;
          *
          * @option {Function} [month.empty]
-         * The template used for rendering the cells in the calendar "month" view, which are not in the range between 
+         * The template used for rendering the cells in the calendar "month" view, which are not in the range between
          * the minimum and maximum values.
          *
          * @option {Object} [animation]
