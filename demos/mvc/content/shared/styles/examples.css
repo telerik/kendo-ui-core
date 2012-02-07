@@ -1970,7 +1970,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     width:320px; /* Workaround the broken flex box in FF. */
 }
 
-#example [href*=index]
+#device-wrapper [href*=index]
 {
     visibility: hidden;
 }
