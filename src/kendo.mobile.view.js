@@ -8,6 +8,9 @@
         Widget = mobile.ui.Widget,
         INIT = "init",
         SHOW = "show",
+        PULL = "pull",
+        START_PULL = "startPull",
+        CANCEL_PULL = "cancelPull",
         roleSelector = kendo.roleSelector;
 
     var View = Widget.extend({
@@ -37,15 +40,30 @@
             }
 
             kendo.mobile.enhance(element);
-            that.content.kendoMobileScroller({useOnDesktop: true});
-            that.scrollerContent = that.content.data("kendoMobileScroller").scrollElement;
+
+            that.content.kendoMobileScroller({
+                useOnDesktop: true,
+                startPull: function() { that.trigger(START_PULL); },
+                cancelPull: function() { that.trigger(CANCEL_PULL); },
+                pull: function() { that.trigger(PULL); }
+            });
+
+            that.scroller = that.content.data("kendoMobileScroller");
+            that.scrollerContent = that.scroller.scrollElement;
 
             that.trigger(INIT, that);
+
+            that._eachWidget(function(widget) {
+                widget.viewInit(that);
+            });
         },
 
         events: [
             INIT,
-            SHOW
+            SHOW,
+            START_PULL,
+            CANCEL_PULL,
+            PULL
         ],
 
         onHideStart: function() {
@@ -58,18 +76,23 @@
         onShowStart: function () {
             var that = this;
             that.element.css("display", "");
+            that.params = history.url().params;
 
             if (that.layout) {
                 that.layout.attach(that);
             }
 
-            that.element.find("[data-" + kendo.ns + "widget]").each(function(){
-                $(this).data("kendoWidget").viewShow(that);
-            });
-
-            that.params = history.url().params;
-
             that.trigger(SHOW, that);
+
+            that._eachWidget(function(widget) {
+                widget.viewShow(that);
+            })
+        },
+
+        _eachWidget: function(callback) {
+            this.element.find("[data-" + kendo.ns + "widget]").each(function(){
+                callback($(this).data("kendoWidget"));
+            });
         }
     });
 
