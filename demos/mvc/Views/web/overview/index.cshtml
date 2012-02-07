@@ -207,7 +207,7 @@
 
                     filterCountries();
 
-                    $(document).bind("kendo:skinChange", function(e) {
+                    $("#example").bind("kendo:skinChange", function(e) {
                         createChart();
                         sharedDataSource.read();
                     });
