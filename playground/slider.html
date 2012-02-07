@@ -6,8 +6,9 @@
         <script type="text/javascript" src="../src/kendo.core.js"></script>
         <script type="text/javascript" src="../src/kendo.draganddrop.js"></script>
         <script type="text/javascript" src="../src/kendo.slider.js"></script>
-        <link type="text/css" href="../styles/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../styles/kendo.blueopal.css" rel="stylesheet"/>
+        <link href="../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link href="../styles/web/kendo.default.less" rel="stylesheet/less" type="text/css"/>
+        <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
 
     </head>
     <body>
@@ -22,12 +23,12 @@
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
-                var slider = $("#slider").kendoSlider({ showButtons: true, orientation: "vertical" });
+                var slider = $("#slider").kendoSlider({ showButtons: true, smallStep: 2, orientation: "vertical" });
                 var slider = $("#slider3").kendoSlider({ showButtons: true, largeStep: 1, min: -10  });
                 var slider = $("#slider4").kendoSlider({ showButtons: true, smallStep: 3  });
-                var slider = $("#slider5").kendoSlider({ showButtons: true, min: -20, max: 20  });
+                var slider = $("#slider5").kendoSlider({ showButtons: true, min: -1, max: 20  });
 
-                $("#rangeslider").kendoRangeSlider({ min: -20 });
+                $("#rangeslider").kendoRangeSlider({ min: -13 });
             });
         </script>
 
