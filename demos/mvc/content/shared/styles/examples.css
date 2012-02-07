@@ -43,7 +43,8 @@ p code {
 .console div,
 #telerik,
 #introText dt,
-#footer .icon
+#footer .icon,
+.k-qr
 {
     background-image: url("sprite.png");
     background-repeat: no-repeat;
@@ -1186,14 +1187,7 @@ pre.prettyprint
     background-position: 100% -693px;
 }
 
-#deviceChooser-list
-{
-    width: 200px;
-    height: 150px;
-}
-
-#skinSelector-list,
-#deviceChooser-list
+#skinSelector-list
 {
     margin-left: 3px;
     margin-top: 3px;
@@ -1211,23 +1205,19 @@ pre.prettyprint
 }
 
 #skinSelector-list .k-state-selected,
-#skinSelector-list .k-state-hover,
-#deviceChooser-list .k-state-selected,
-#deviceChooser-list .k-state-hover
+#skinSelector-list .k-state-hover
 {
     color: #0c303c;
     background: #C7CED1;
     border-color: transparent;
 }
 
-#skinSelector-list .k-state-hover,
-#deviceChooser-list .k-state-hover
+#skinSelector-list .k-state-hover
 {
     color: #000;
 }
 
-#skinSelector-list .thumbLink,
-#deviceChooser-list .thumbLink
+#skinSelector-list .thumbLink
 {
     cursor: pointer;
     display: inline-block;
@@ -1237,11 +1227,6 @@ pre.prettyprint
     font-size: 11px;
     color: #555;
     text-align: center;
-}
-
-#deviceChooser-list .thumbLink
-{
-    width: 69px;
 }
 
 #skinSelector-list #launch-themebuilder
@@ -1254,14 +1239,12 @@ pre.prettyprint
     text-indent: -999em;
 }
 
-#skinSelector-list .k-state-hover .thumbLink,
-#deviceChooser-list .k-state-hover .thumbLink
+#skinSelector-list .k-state-hover .thumbLink
 {
     color: #222;
 }
 
-#skinSelector-list .k-item,
-#deviceChooser-list .k-item
+#skinSelector-list .k-item
 {
     overflow: hidden;
     float: left;
@@ -1288,24 +1271,146 @@ pre.prettyprint
     border-radius: 30px;
 }
 
-#deviceChooser-list .k-item
+.mobileConfiguration
 {
-    margin-bottom: 5px;
+    width:200px;
+    min-height:820px;
+    margin-bottom:-21px;
+    padding-left:0;
+    padding-right:0;
+}
+            
+#downloadMobile
+{
+    margin:20px;
+    line-height:1;
+    display:block;
+    padding:1em 0 .7em;
+    float:none;
+    text-align:center;
 }
 
-#deviceChooser-list .thumb
+#downloadMobile strong
 {
-    background: transparent url("ios.png") no-repeat 50% 50%;
-    display: block;
+    display:block;
+    margin:0 auto -.1em;
+    font-size:18px;
+    line-height:1;
+    font-weight:normal;
+}
+            
+#downloadMobile em
+{
+    font-style:normal;
+    color:#999;
+    font-size:10px;
+}
+           
+#deviceList li
+{
+    padding:0;
+}
+
+#deviceList .thumbLink,
+#qrWrap
+{
+    padding-left:20px;
+    padding-right:20px;
+}
+
+#deviceList .thumbLink
+{
+    display:block;
+    margin-left:-1px;
+    margin-right:-1px;
+    padding-top:12px;
+    border:1px solid;
+    border-color:#f5f5f5 #dedede #dedede #dedede;
+    cursor: pointer;
+}
+
+#deviceList li:first-child .thumbLink
+{
+    border-top-color:#dedede;
+}
+
+#deviceList .selectedThumb
+{
+    border-left-color:#fff;
+    background-color:#fff;
+}
+
+#deviceList .skinTitle
+{
+    display: inline-block;
+    width: 70px;
+    height: 48px;
+    padding:16px 0;
+    vertical-align:top;
+    color:#999;
+    font-size:11px;
+}
+
+#deviceList .skinTitle em
+{
+    font-style:normal;
+    color:#444;
+    font-size:15px; 
+}
+
+#deviceList .thumb
+{
+    background: transparent url("ios.png") no-repeat 0 50%;
+    display: inline-block;
+    vertical-align:top;
     height: 64px;
-    width: 64px;
+    width: 48px;
+    text-align:center;
+    text-indent:-999px;
 }
 
-#deviceChooser-list .androidThumb { background-image: url("android.png"); }
-#deviceChooser-list .iosThumb { background-image: url("ios.png"); }
+#deviceList .androidThumb { background-image: url("android.png"); }
+#deviceList .iosThumb { background-image: url("ios.png"); }
 
-#skinSelector-list .gloss,
-#deviceChooser-list .gloss
+#qrWrap
+{
+    color:#444;
+}
+            
+#qr
+{
+    display:inline-block;
+    margin-top:1em;
+    color:#2175bd;
+    text-decoration:none;
+}
+            
+#qr:hover
+{
+    text-decoration:underline;
+}
+
+#qr em
+{
+    font-style:normal;
+}
+
+#qrBig
+{
+    display:none;
+    margin:0 20px;
+}
+
+.k-qr
+{
+    width:16px;
+    height:16px;
+    margin-right:8px;
+    vertical-align:text-top;
+    background-position:0 -972px;
+}
+
+#skinSelector-list .gloss
 {
     display: block;
     width: 100%;
