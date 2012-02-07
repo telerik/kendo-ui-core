@@ -122,7 +122,7 @@
      * @exampleTitle Accessing an existing Calendar instance
      * @example
      * var calendar = $("#calendar").data("kendoCalendar");
-     *    
+     *
      */
     var kendo = window.kendo,
         ui = kendo.ui,
@@ -181,7 +181,7 @@
 	  * // get a reference to the Kendo UI calendar widget
 	  * var calendar = $("#calendar").data("kendoCalendar");
 	  * // set the selected date on the calendar to Jan 1st, 2012
-	  * calendar.value(new Date(2012, 0, 1)); 
+	  * calendar.value(new Date(2012, 0, 1));
           * @option {Date} [min] <Date(1900, 0, 1)> Specifies the minimum date, which the calendar can show.
 	  * _example
 	  * // set the min date to Jan 1st, 2011
@@ -204,24 +204,13 @@
 	  * // get a reference to the Kendo UI calendar widget
 	  * var calendar = $("#calendar").data("kendoCalendar");
 	  * // set the max date to Jan 1st, 2013
-	  * calendar.max(new Date(2013, 0, 1)); 
-	  * @option {String} [footer] <> Specifies the content of the footer. If false, the footer will not be rendered.
-	  * _example
-	  * // change the footer text from the default current date
-	  * $("#calendar").kendoCalendar({
-	  *     footer = "My Custom Footer"
-	  * });
-	  * _exampleTitle Hide the footer
-	  * _example
-	  * $("#calendar").kendoCalendar({
-	  *     footer = false;
-	  * });
-          * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
+	  * calendar.max(new Date(2013, 0, 1));
+      * @option {String} [format] <MM/dd/yyyy> Specifies the format, which is used to parse value set with value() method.
 	  * _example
 	  * $("#calendar").kendoCalendar({
 	  *     format: "yyyy/MM/dd"
 	  * });
-          * @option {String} [start] <month> Specifies the start view.
+      * @option {String} [start] <month> Specifies the start view.
 	  * _example
 	  * $("#calendar").kendoCalendar({
 	  *     start: "year"
@@ -232,14 +221,18 @@
 	  *     depth: "year"
 	  * });
           * @option {Function} [footer] <> Template to be used for rendering the footer. If false, the footer will not be rendered.
+          * _exampleTitle Change the default footer template
           * _example
-          *
-          *  //calendar intialization
           *  &lt;script&gt;
           *      $("#calendar").kendoCalendar({
           *          footer: kendo.template("Today - #=kendo.toString(data, 'd') #")
           *      });
           *  &lt;/script&gt;
+          * _exampleTitle Hide the footer
+          * _example
+          * $("#calendar").kendoCalendar({
+          *     footer: false;
+          * });
           * @option {Object} [month] <> Templates for the cells rendered in the "month" view.
           * @option {Function} [month.content] <> Template to be used for rendering the cells in the "month" view, which are in range.
           * _example
@@ -310,7 +303,7 @@
 		* @example
 		* $("#calendar").kendoCalendar({
 		*     navigate: function(e) {
-		*          // handle event 
+		*          // handle event
 		*     }
 		* });
 		* @exampleTitle To set after initialization
@@ -420,7 +413,7 @@
         * Navigates to the upper view
         * @example
  	* // get a reference to the calendar widget
-	* var calendar = $("#calendar").data("kendoCalendar");       
+	* var calendar = $("#calendar").data("kendoCalendar");
 	* // navigate up
 	* calendar.navigateUp();
         */
