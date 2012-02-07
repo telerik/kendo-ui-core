@@ -1373,7 +1373,7 @@
                     that.content.height(height);
                 }
 
-                var scrollables = header.find(">.k-grid-header-wrap"); // add footer when implemented
+                var scrollables = header.find(">.k-grid-header-wrap, > .k-footer-template"); // add footer when implemented
 
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind('scroll', function () {
