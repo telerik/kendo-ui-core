@@ -7085,6 +7085,9 @@
             },
             minorGridLines: {
                 color: "#454545"
+            },
+            title: {
+                color: WHITE
             }
         },
         tooltip: {
@@ -7128,6 +7131,9 @@
             },
             majorGridLines: {
                 color: "#dfdfdf"
+            },
+            title: {
+                color: "#232323"
             }
         },
         tooltip: {
@@ -7171,6 +7177,9 @@
             },
             minorGridLines: {
                 color: "#edf1f2"
+            },
+            title: {
+                color: "#293135"
             }
         },
         tooltip: {
@@ -7199,6 +7208,9 @@
                 connectors: {
                     color: "#A6B1C0"
                 }
+            },
+            markers: {
+                background: "#eaeaec"
             }
         },
         chartArea: {
@@ -7222,6 +7234,9 @@
             },
             minorGridLines: {
                 color: "#eeeeef"
+            },
+            title: {
+                color: "#4e5968"
             }
         },
         tooltip: {
@@ -7263,6 +7278,9 @@
             },
             majorGridLines: {
                 color: "#c7c7c7"
+            },
+            title: {
+                color: "#777777"
             }
         },
         tooltip: {
