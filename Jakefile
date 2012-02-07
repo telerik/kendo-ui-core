@@ -133,6 +133,8 @@ task("cdn", ["clean", "merge-scripts"], function() {
 // Helpers ====================================================================
 function buildDocs(sitefinity_path) {
     var mappings = {
+            "ui.slider": ["ui.slider", "ui.rangeslider"],
+            "ui.dragdrop": ["ui.draggable", "ui.droptarget"]
             // "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"]
         },
         sections = ["description", "configuration", "methods", "events"];
