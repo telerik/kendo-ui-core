@@ -32,7 +32,7 @@
                     foo: "foo"
                 });
 
-                var dom = $('<span data-text="foo"/>');
+                var dom = $('<span data-bind="text:foo"/>');
                 kendo.bind(dom, viewModel);
                 viewModel.set("foo", "bar");
                 equal(dom.text(), "bar");
@@ -46,7 +46,7 @@
                     }
                 });
 
-                var dom = $('<div><span data-text="foo"/><button data-click="bar"></button></div>');
+                var dom = $('<div><span data-bind="text:foo"/><button data-bind="click:bar"></button></div>');
 
                 kendo.bind(dom, viewModel);
 
@@ -61,7 +61,7 @@
                     bar: "boo" // needed to test closure value assignment
                 });
 
-                var dom = $('<select data-source="foo"/>');
+                var dom = $('<select data-bind="source:foo"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -78,7 +78,7 @@
                     bar: "bar"
                 });
 
-                var dom = $('<div><select data-source="foo" data-value="bar"/><span data-text="bar"/></div>');
+                var dom = $('<div><select data-bind="source:foo,value:bar"/><span data-bind="text:bar"/></div>');
 
                 kendo.bind(dom, viewModel);
 
@@ -93,7 +93,7 @@
                     selectedItems: []
                 });
 
-                var dom = $('<select data-source="foo" multiple="multiple" data-value="selectedItems"/>');
+                var dom = $('<select data-bind="source:foo,value:selectedItems" multiple="multiple"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -113,7 +113,7 @@
 
                 viewModel.selectedItem = viewModel.foo[0];
 
-                var dom = $('<select data-source="foo"  data-value="selectedItem" data-valuefield="text"/>');
+                var dom = $('<select data-bind="source:foo,value:selectedItem,valuefield:text"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -130,7 +130,7 @@
                     selectedItems: []
                 });
 
-                var dom = $('<select data-source="items" multiple data-value="selectedItems"/>');
+                var dom = $('<select data-bind="source:items,value:selectedItem" multiple />');
 
                 kendo.bind(dom, viewModel);
 
@@ -143,7 +143,7 @@
             });
 
             test("changing the value updates the view model", function() {
-                var dom = $('<input data-value="foo" />');
+                var dom = $('<input data-bind="value:foo" />');
 
                 var viewmodel = kendo.observable( { foo: "foo" });
 
@@ -156,7 +156,7 @@
             });
 
             test("changing radiobutton value updates the view model", function() {
-                var dom = $('<input type="radio" value="bar"  data-checked="foo"/>');
+                var dom = $('<input type="radio" value="bar"  data-bind="checked:foo"/>');
 
                 var viewmodel = kendo.observable( { foo: "" });
 
@@ -169,7 +169,7 @@
             });
 
             test("changing checkbox value updates the view model", function() {
-                var dom = $('<input type="checkbox" data-checked="foo"/>');
+                var dom = $('<input type="checkbox" data-bind="checked:foo"/>');
 
                 var viewmodel = kendo.observable( { foo: false });
 
@@ -182,7 +182,7 @@
             });
 
             test("checking checkbox adds the value to the view model", function() {
-                var dom = $('<input type="checkbox" value="bar" data-checked="foo"/>');
+                var dom = $('<input type="checkbox" value="bar" data-bind="checked:foo"/>');
 
                 var viewmodel = kendo.observable( { foo: [] });
 
@@ -195,7 +195,7 @@
             });
 
             test("unchecking checkbox removes the value from the view model", function() {
-                var dom = $('<input type="checkbox" value="bar" data-checked="foo"/>');
+                var dom = $('<input type="checkbox" value="bar" data-bind="checked:foo"/>');
 
                 var viewmodel = kendo.observable( { foo: ["bar"] });
 
@@ -215,7 +215,7 @@
 
                 var calls = 0;
 
-                var dom = $('<select data-source="foo" data-value="bar"/>');
+                var dom = $('<select data-bind="source:foo,value:bar"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -237,7 +237,7 @@
                     foo: [{ name: "foo" }]
                 });
 
-                var dom = $('<ul data-source="foo" data-template="array-template"/>');
+                var dom = $('<ul data-bind="source:foo,template:array-template"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -266,7 +266,7 @@
             });
 
             test("tracking changes of complex fields", function() {
-                var dom = $('<div data-title="bar" data-text="foo.bar"/>');
+                var dom = $('<div data-bind="title:bar,text:foo.bar"/>');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -285,7 +285,7 @@
             });
 
             test("tracking changes in templates", function() {
-                var dom = $('<div data-template="simple-field-template" />');
+                var dom = $('<div data-bind="template:simple-field-template" />');
 
                 var viewModel = kendo.observable({ foo: "foo" });
 
@@ -297,7 +297,7 @@
             });
 
             test("dependencies are reavaluated", function() {
-                var dom = $('<div data-template="if-else-template" />');
+                var dom = $('<div data-bind="template:if-else-template" />');
 
                 var viewModel = kendo.observable({ foo: "foo", bar: "bar" });
 
@@ -311,7 +311,7 @@
             });
 
             test("does not attach more than one change handler when monitoring for dependency changes", function() {
-                var dom = $('<div data-template="counting-template" />');
+                var dom = $('<div data-bind="template:counting-template" />');
 
                 var viewModel = kendo.observable({ foo: "foo" });
 
@@ -327,7 +327,7 @@
             });
 
             test("tracking changes when direct access and set are used", function() {
-                var dom = $('<div data-template="nested-field-template" />');
+                var dom = $('<div data-bind="template:nested-field-template" />');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -343,7 +343,7 @@
             });
 
             test("tracking changes when single set is used", function() {
-                var dom = $('<div data-template="nested-field-template" />');
+                var dom = $('<div data-bind="template:nested-field-template" />');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -359,7 +359,7 @@
             });
 
             test("tracking changes when direct access and set are used (multiple get template)", function() {
-                var dom = $('<div data-template="nested-field-template-multiple-gets" />');
+                var dom = $('<div data-bind="template:nested-field-template-multiple-gets" />');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -375,7 +375,7 @@
             });
 
             test("tracking changes when single set is used (multiple get template)", function() {
-                var dom = $('<div data-template="nested-field-template-multiple-gets" />');
+                var dom = $('<div data-bind="template:nested-field-template-multiple-gets" />');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -391,7 +391,7 @@
             });
 
             test("tracking changes in dependent fields", function() {
-                var dom = $('<div data-text="computed" />');
+                var dom = $('<div data-bind="text:computed" />');
 
                 var viewModel = kendo.observable({
                     foo: "foo",
@@ -409,7 +409,7 @@
             });
 
             test("checked binding removing the item unchecks the checkbox", function() {
-                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+                var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
 
                 var viewModel = kendo.observable({
                     selectedItems: ["foo"]
@@ -423,7 +423,7 @@
             });
 
             test("model is not updated after target is destoryed", function() {
-                var dom = $('<input data-value="foo" />');
+                var dom = $('<input data-bind="value:foo" />');
 
                 var viewmodel = kendo.observable( { foo: "foo" });
 
@@ -438,7 +438,7 @@
             });
 
             test("UI element is not updated after unbind", function() {
-                var dom = $('<input data-value="foo" />');
+                var dom = $('<input data-bind="value:foo" />');
 
                 var viewmodel = kendo.observable( { foo: "foo" });
 
@@ -453,7 +453,7 @@
         </script>
 
         <script id="array-template" type="text/x-kendo-template">
-            <li data-text="name"></li>
+            <li data-bind="text:name"></li>
         </script>
 
         <script id="simple-field-template" type="text/x-kendo-template">
