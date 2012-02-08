@@ -111,6 +111,11 @@
                 equal(result.$orderby, "bar desc,foo");
             });
 
+            test("parametterMap does not add $filter if no filters is applied", function() {
+                var result = parameterMap({ filter: null });
+                equal(typeof result.filter, "undefined");
+            });
+
             test("parameterMap adds $filter if filter is specified", function() {
                 var result = parameterMap({ filter: { filters:[ {field: "Name", operator: "startswith", value: "bar"} ]} });
                 equal(result.$filter, "startswith(Name,'bar')");
