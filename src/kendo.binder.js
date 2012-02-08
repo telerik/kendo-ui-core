@@ -699,6 +699,16 @@
         set: function(value) {
             var widget = this.target;
 
+            widget.bind("dataBinding", function() {
+                var idx,
+                    length,
+                    items = widget.items();
+
+                for (idx = 0, length = items.length; idx < length; idx++) {
+                    unbindElement(items[idx]);
+                }
+            });
+
             widget.bind("dataBound", function() {
                 var idx,
                     length,
@@ -723,31 +733,40 @@
         }
     });
 
-    function bindingTargetForWidget(name, element) {
+    function bindingTargetForRole(role, element) {
         var options = {},
             option,
-            value
+            type,
+            name,
+            value;
 
-        for (option in kendo.ui[name].fn.options) {
-            value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+        type = kendo.roles[role];
 
-            if (value === null) {
-                value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+        if (type) {
+            name = type.fn.options.name;
+
+            for (option in type.fn.options) {
+                value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+
+                if (value === null) {
+                    value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                }
+
+                if (value !== null) {
+                    options[option] = value;
+                }
             }
 
-            if (value !== null) {
-                options[option] = value;
+            var widget = $.data(element, "kendo" + name);
+
+            if (!widget) {
+                widget = new kendo.ui[name](element);
             }
+
+            widget.setOptions(options);
+
+            return new WidgetBindingTarget(widget);
         }
-
-        var widget = $.data(element, "kendo" + name);
-        if (!widget) {
-            widget = new kendo.ui[name](element);
-        }
-
-        widget.setOptions(options);
-
-        return new WidgetBindingTarget(widget);
     }
 
     function bindElement(element, source) {
@@ -763,13 +782,7 @@
         unbindElement(element);
 
         if (role) {
-            if (role === "dropdownlist") {
-                target = bindingTargetForWidget("DropDownList", element);
-            } else if (role === "combobox") {
-                target = bindingTargetForWidget("ComboBox", element);
-            } else if (role === "grid") {
-                target = bindingTargetForWidget("Grid", element);
-            }
+            target = bindingTargetForRole(role, element);
         }
 
         if (!target) {
@@ -834,11 +847,15 @@
     }
 
     function unbindElement(element) {
-        var bindingTarget = $.data(element, "kendoBindingTarget");
+        var idx, length, bindingTarget = $.data(element, "kendoBindingTarget");
 
         if (bindingTarget) {
             bindingTarget.destroy();
             $.removeData(element, "kendoBindingTarget")
+        }
+
+        for (idx = 0, length = element.children.length; idx < length; idx++) {
+            unbindElement(element.children[idx]);
         }
     }
 

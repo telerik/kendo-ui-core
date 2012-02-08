@@ -138,7 +138,7 @@
                 equal($.trim(dom.data("kendoComboBox").ul.children().eq(0).text()), "baz");
             });
 
-            test("clearing previous bindings the datasource is changed", function() {
+            test("destroying binding targets when the datasource changes", function() {
                 var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-source="items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"} ] });
@@ -190,6 +190,7 @@
 
                 equal(destroy.calls("destroy"), 1);
             });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
