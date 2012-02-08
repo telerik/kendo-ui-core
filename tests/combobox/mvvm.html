@@ -40,7 +40,7 @@
             });
 
             test("initalizes data source", function() {
-                var dom = $('<select data-role="combobox" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="source:items" />');
 
                 kendo.bind(dom, { items: ["foo", "bar"] } );
 
@@ -49,7 +49,7 @@
             });
 
             test("initalizes value from view model", function() {
-                var dom = $('<select data-role="combobox" data-value="value" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="value:value, source:items" />');
 
                 kendo.bind(dom, { items: ["foo", "bar"], value: "bar" } );
 
@@ -57,7 +57,7 @@
             });
 
             test("initalizes complex value from view model", function() {
-                var dom = $('<select data-valuefield="text" data-role="combobox" data-value="value" data-source="items" />');
+                var dom = $('<select data-valuefield="text" data-role="combobox" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -68,7 +68,7 @@
             });
 
             test("changing a value updates the view model", function() {
-                var dom = $('<select data-valuefield="text" data-role="combobox" data-value="value" data-source="items" />');
+                var dom = $('<select data-valuefield="text" data-role="combobox" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -81,7 +81,7 @@
             });
 
             test("binding combobox initialized before binding", function() {
-                var dom = $('<select data-valuefield="text" data-value="value" data-source="items" />');
+                var dom = $('<select data-valuefield="text" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -94,7 +94,7 @@
             });
 
             test("binding combobox initialized after binding", function() {
-                var dom = $('<select data-valuefield="text" data-value="value" data-source="items" />');
+                var dom = $('<select data-valuefield="text" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -107,7 +107,7 @@
             });
 
             test("binding template", function() {
-                var dom = $('<select data-role="combobox" data-template="template" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="template:template, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -117,17 +117,17 @@
             });
 
             test("binding template containing binding attributes", function() {
-                var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="template:template-with-attributes,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
                 kendo.bind(dom, observable);
 
-                equal($.trim(dom.data("kendoComboBox").ul.children().eq(0).html()), '<strong data-text="text">foo</strong>');
+                equal($.trim(dom.data("kendoComboBox").ul.children().eq(0).html()), '<strong data-bind="text:text">foo</strong>');
             });
 
             test("updating an item from the data source updates the corresponding combobox item", function() {
-                var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="template:template-with-attributes, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -139,7 +139,7 @@
             });
 
             test("destroying binding targets when the datasource changes", function() {
-                var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="template:template-with-attributes,source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"} ] });
 
@@ -150,7 +150,7 @@
             });
 
             test("removing items from the model updates the UI", function() {
-                var dom = $('<select data-source="items" />');
+                var dom = $('<select data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" },{ text: "baz" }] });
 
@@ -164,7 +164,7 @@
             });
 
             test("binding are removed if element is rebind", 1, function() {
-                var dom = $('<select data-role="combobox" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
@@ -178,7 +178,7 @@
             });
 
             test("expressions are destroyed", 1, function() {
-                var dom = $('<select data-role="combobox" data-source="items" />');
+                var dom = $('<select data-role="combobox" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
@@ -197,7 +197,7 @@
            <strong>#:text#</strong>
         </script>
         <script id="template-with-attributes" type="text/x-kendo-template">
-            <strong data-text="text"></strong>
+            <strong data-bind="text:text"></strong>
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
