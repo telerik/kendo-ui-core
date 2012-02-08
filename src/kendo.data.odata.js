@@ -16,7 +16,9 @@
             pageSize: $.noop,
             page: $.noop,
             filter: function(params, filter) {
-                params.$filter = toOdataFilter(filter);
+                if (filter) {
+                    params.$filter = toOdataFilter(filter);
+                }
             },
             sort: function(params, orderby) {
                 params.$orderby = $.map(orderby, function(value) {
