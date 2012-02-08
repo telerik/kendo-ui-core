@@ -1832,7 +1832,6 @@
             var axis = this,
                 options = axis.options,
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
-                tickPositions = axis.getMinorTickPositions(),
                 lineBox = axis.lineBox(),
                 lineOptions;
 
@@ -1845,13 +1844,13 @@
                 };
                 if (options.isVertical) {
                     childElements.push(view.createLine(
-                        lineBox.x1, tickPositions[0],
-                        lineBox.x1, last(tickPositions),
+                        lineBox.x1, lineBox.y1,
+                        lineBox.x1, lineBox.y2,
                         lineOptions));
                 } else {
                     childElements.push(view.createLine(
-                        tickPositions[0], lineBox.y1,
-                        last(tickPositions), lineBox.y1,
+                        lineBox.x1, lineBox.y1,
+                        lineBox.x2, lineBox.y1,
                         lineOptions));
                 }
 
@@ -4389,11 +4388,11 @@
         renderGridLines: function(view, axis, secondaryAxis) {
             var options = axis.options,
                 isVertical = options.isVertical,
-                boundaries = secondaryAxis.getMajorTickPositions(),
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
                 secAxisPos = round(crossingSlot[isVertical ? "y1" : "x1"]),
-                lineStart = boundaries[0],
-                lineEnd = boundaries.pop(),
+                lineBox = secondaryAxis.lineBox(),
+                lineStart = lineBox[isVertical ? "x1" : "y1"],
+                lineEnd = lineBox[isVertical ? "x2" : "y2" ],
                 majorTicks = axis.getMajorTickPositions(),
                 gridLines = [],
                 gridLine = function (pos, options) {
@@ -4401,7 +4400,7 @@
                         pos: pos,
                         options: options
                     };
-                };
+                }
 
             if (options.majorGridLines.visible) {
                 gridLines = map(majorTicks, function(pos) {

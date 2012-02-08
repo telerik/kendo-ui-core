@@ -143,7 +143,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
@@ -614,11 +614,11 @@
                         data: [100]
                     }];
 
-                function createPlotArea(categoryAxis, valueAxis, plotArea) {
+                function createPlotArea(categoryAxis, valueAxis, options) {
                     plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: categoryAxis,
                         valueAxis: valueAxis,
-                        plotArea: plotArea
+                        plotArea: options
                     });
 
                     stubMethod(Chart.NumericAxis, "getViewElements", function() { return []; },
@@ -693,6 +693,26 @@
                     createPlotArea(categoryAxis, valueAxis);
 
                     equal(view.log.line.length, 0);
+                });
+
+                test("gridlines extend to secondary axis end", function() {
+                    var categoryAxis = {
+                            categories: ["A"],
+                            majorGridLines: {
+                                visible: true
+                            }
+                        },
+                        valueAxis = {
+                            min: 0,
+                            max: 10,
+                            majorUnit: 3,
+                            majorGridLines: {
+                                visible: false
+                            }
+                        };
+
+                    createPlotArea(categoryAxis, valueAxis);
+                    equals(view.log.line[0].x2, plotArea.namedValueAxes.primary.lineBox().x2);
                 });
 
                 // ------------------------------------------------------------
@@ -936,7 +956,7 @@
 
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
-                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
                 });
 
                 test("X axis limit is [0, 1] when no series are configured", 2, function() {

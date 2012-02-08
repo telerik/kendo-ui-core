@@ -396,6 +396,19 @@
                     );
                 })
 
+                test("creates axis line when max is not multiple of majorUnit", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { min: 0, max: 1, majorUnit: .3 });
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+
+                    sameBox(view.log.line[0], new Box2D(
+                            MAX_LABEL_WIDTH + MARGIN, chartBox.y1 + LABEL_HEIGHT / 2,
+                            MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
+                            TOLERANCE
+                    );
+                })
+
                 test("creates axis with dash type", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, {
                         line: {
