@@ -902,6 +902,7 @@
     background-size: cover;
     background-image: url("http://a1.twimg.com/profile_images/1514396238/KendoUI-Figure.png");
     -webkit-animation: km-spin 1s infinite linear;
+    -moz-animation: km-spin 1s infinite linear;
     display: block;
     margin: 0 auto;
     width: 35px;
@@ -910,12 +911,12 @@
 
 @-webkit-keyframes km-spin
 {
-    from
-    {
-        -webkit-transform: rotate(0deg);
-    }
-    to
-    {
-        -webkit-transform: rotate(360deg);
-    }
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+
+@-moz-keyframes km-spin
+{
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
 }
