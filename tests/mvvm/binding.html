@@ -22,63 +22,63 @@
             QUnit.config.testTimeout = 100;
 
             test("text binding", function() {
-                var dom = $('<span data-text="foo"/>');
+                var dom = $('<span data-bind="text:foo"/>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.text(), "foo");
             });
 
             test("html binding", function() {
-                var dom = $('<span data-html="foo"/>');
+                var dom = $('<span data-bind="html:foo"/>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.html(), "foo");
             });
 
             test("value binding", function() {
-                var dom = $('<input data-value="foo"/>');
+                var dom = $('<input data-bind="value:foo"/>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.val(), "foo");
             });
 
             test("title binding", function() {
-                var dom = $('<span data-title="foo"/>');
+                var dom = $('<span data-bind="title:foo"/>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.attr("title"), "foo");
             });
 
             test("alt binding", function() {
-                var dom = $('<img data-alt="foo"/>');
+                var dom = $('<img data-bind="alt:foo"/>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.attr("alt"), "foo");
             });
 
             test("src binding", function() {
-                var dom = $('<img data-src="foo"/>');
+                var dom = $('<img data-bind="src:foo"/>');
 
                 kendo.bind(dom, { foo: "http://www.example.com" });
                 equal(dom.attr("src"), "http://www.example.com");
             });
 
             test("href binding", function() {
-                var dom = $('<a data-href="foo"/>');
+                var dom = $('<a data-bind="href:foo"/>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.attr("href"), "foo");
             });
 
             test("binding immediate children", function() {
-                var dom = $('<span><img data-alt="foo"/></span>');
+                var dom = $('<span><img data-bind="alt:foo"/></span>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.find("img").attr("alt"), "foo");
             });
 
             test("binding arbitrary children", function() {
-                var dom = $('<span><span><img data-alt="foo"/></span></span>');
+                var dom = $('<span><span><img data-bind="alt:foo"/></span></span>');
 
                 kendo.bind(dom, { foo: "foo" });
                 equal(dom.find("img").attr("alt"), "foo");
@@ -87,7 +87,7 @@
             asyncTest("click binding", function() {
                 expect(1);
 
-                var dom = $('<span data-click="foo"/>');
+                var dom = $('<span data-bind="click:foo"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
@@ -102,7 +102,7 @@
             asyncTest("change binding", function() {
                 expect(1);
 
-                var dom = $('<input data-change="foo"/>');
+                var dom = $('<input data-bind="change:foo"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
@@ -117,7 +117,7 @@
             asyncTest("the context of the event handler is the viewmodel", function() {
                 expect(1);
 
-                var dom = $('<span data-click="foo"/>');
+                var dom = $('<span data-bind="click:foo"/>');
                 var viewModel = kendo.observable( {
                     foo: function() {
                         start();
@@ -131,7 +131,7 @@
             });
 
             test("select binding", function() {
-                var dom = $('<select data-source="foo"/>');
+                var dom = $('<select data-bind="source:foo"/>');
 
                 kendo.bind(dom, {
                     foo: [1, 2]
@@ -143,7 +143,7 @@
             });
 
             test("select binding with template", function() {
-                var dom = $('<select data-source="foo" data-template="select-template" />');
+                var dom = $('<select data-bind="source:foo,template:select-template"/>');
 
                 kendo.bind(dom, {
                     foo: [ {
@@ -157,7 +157,7 @@
             });
 
             test("pushing items to array creates new option elements without destroying the existing ones", function() {
-                var dom = $('<select data-source="foo"/>');
+                var dom = $('<select data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
                     foo: [1, 2]
@@ -176,7 +176,7 @@
             });
 
             test("splicing items from array removes option elements without destroying the existing ones", function() {
-                var dom = $('<select data-source="foo"/>');
+                var dom = $('<select data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
                     foo: [1, 2, 3, 4]
@@ -195,7 +195,7 @@
             });
 
             test("bind array to table appends table rows to the table body", function() {
-                var dom = $('<table data-source="foo"><thead><tr><th></th></tr></thead></table>');
+                var dom = $('<table data-bind="source:foo"><thead><tr><th></th></tr></thead></table>');
 
                 var viewModel = kendo.observable( {
                     foo: [1, 2]
@@ -206,7 +206,7 @@
             });
 
             test("bind array to table keeps thead", function() {
-                var dom = $('<table data-source="foo"><thead><tr><th></th></tr></thead></table>');
+                var dom = $('<table data-bind="source:foo"><thead><tr><th></th></tr></thead></table>');
 
                 var viewModel = kendo.observable( {
                     foo: [1, 2]
@@ -217,7 +217,7 @@
             });
 
             test("bind array to unordered list creats list item elements", function() {
-                var dom = $('<ul data-source="foo"/>');
+                var dom = $('<ul data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
                     foo: [1, 2]
@@ -228,7 +228,7 @@
             });
 
             test("bind array to ordered list creats list item elements", function() {
-                var dom = $('<ol data-source="foo"/>');
+                var dom = $('<ol data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
                     foo: [1, 2]
@@ -239,7 +239,7 @@
             });
 
             test("binding child elements of template to data item", function() {
-                var dom = $('<div><ol data-source="foo" data-template="ol-template"/></div>');
+                var dom = $('<div><ol data-bind="source:foo,template: ol-template"/></div>');
 
                 var viewModel = kendo.observable( {
                     foo: [{ name: "foo"}]
@@ -250,7 +250,7 @@
             });
 
             test("binding child elements of template to data item of primitive type", function() {
-                var dom = $('<ul data-source="foo" data-template="ul-template"/>');
+                var dom = $('<ul data-bind="source:foo,template:ul-template"/>');
 
                 var viewModel = kendo.observable( {
                     foo: [1]
@@ -261,7 +261,7 @@
             });
 
             test("template binding without source", function() {
-                var dom = $('<div data-template="div-template"/>');
+                var dom = $('<div data-bind="template:div-template"/>');
 
                 kendo.bind(dom, { foo: "foo" });
 
@@ -269,7 +269,7 @@
             });
 
             test("binding to nested field", function() {
-                var dom = $('<div data-text="foo.bar"/>');
+                var dom = $('<div data-bind="text:foo.bar"/>');
 
                 kendo.bind(dom, { foo: { bar: "baz" } });
 
@@ -277,7 +277,7 @@
             });
 
             test("binding to array item", function() {
-                var dom = $('<div data-text="foo[0]"/>');
+                var dom = $('<div data-bind="text:foo[0]"/>');
 
                 kendo.bind(dom, { foo: ["baz"] });
 
@@ -296,7 +296,7 @@
             });
 
             test("binding select value to object", function() {
-                var dom = $('<select data-source="items" data-valuefield="name" data-value="selectedItem"/>');
+                var dom = $('<select data-bind="source:items, valuefield:name, value:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" } ],
@@ -310,7 +310,7 @@
             });
 
             test("binding multi select value to multiple objects", function() {
-                var dom = $('<select multiple="multiple" data-valuefield="name" data-source="items" data-value="selectedItem"/>');
+                var dom = $('<select multiple="multiple" data-bind="valuefield:name, source:items, value:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
@@ -326,7 +326,7 @@
             });
 
             test("checked binding binds radiobutton by value", function() {
-                var dom = $('<input type="radio" value="foo" data-checked="selectedItem"/>');
+                var dom = $('<input type="radio" value="foo" data-bind="checked:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     selectedItem: ""
@@ -339,7 +339,7 @@
             });
 
             test("checked binding binds checkbox to boolean", function() {
-                var dom = $('<input type="checkbox" data-checked="selectedItem"/>');
+                var dom = $('<input type="checkbox" data-bind="checked:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     selectedItem: false
@@ -352,7 +352,7 @@
             });
 
             test("checked binding binds checkbox by value to array", function() {
-                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+                var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
 
                 var viewModel = kendo.observable({
                     selectedItems: []
@@ -365,7 +365,7 @@
             });
 
             test("checked binding checkbox is not checked if value does not exists", function() {
-                var dom = $('<input type="checkbox" value="foo" data-checked="selectedItems"/>');
+                var dom = $('<input type="checkbox" value="foo" data-bind="checked:selectedItems"/>');
 
                 var viewModel = kendo.observable({
                     selectedItems: []
@@ -376,7 +376,7 @@
             });
 
             test("visible binding shows the element", function() {
-                var dom = $('<span data-visible="show" style="display:none"/>');
+                var dom = $('<span data-bind="visible:show" style="display:none"/>');
 
                 var viewModel = kendo.observable({
                     show: true
@@ -387,7 +387,7 @@
             });
 
             test("visible binding hides the element", function() {
-                var dom = $('<span data-visible="show"/>');
+                var dom = $('<span data-bind="visible:show"/>');
 
                 var viewModel = kendo.observable({
                     show: true
@@ -401,7 +401,7 @@
             });
 
             test("enable binding enables the element", function() {
-                var dom = $('<input data-enabled="enable" disabled="disabled"/>');
+                var dom = $('<input data-bind="enabled:enable" disabled="disabled"/>');
 
                 var viewModel = kendo.observable({
                     enable: true
@@ -412,7 +412,7 @@
             });
 
             test("enable binding disables the element if value is false", function() {
-                var dom = $('<input data-enabled="enable"/>');
+                var dom = $('<input data-bind="enabled:enable"/>');
 
                 var viewModel = kendo.observable({
                     enable: false
@@ -423,7 +423,7 @@
             });
 
             test("enable binding disables the element if value is changed to false", function() {
-                var dom = $('<input data-enabled="enable"/>');
+                var dom = $('<input data-bind="enabled:enable"/>');
 
                 var viewModel = kendo.observable({
                     enable: true
@@ -435,7 +435,7 @@
             });
 
             test("enable binding enables the select element", function() {
-                var dom = $('<select data-enabled="enable" disabled="disabled"/>');
+                var dom = $('<select data-bind="enabled:enable" disabled="disabled"/>');
 
                 var viewModel = kendo.observable({
                     enable: true
@@ -446,7 +446,7 @@
             });
 
             test("disable binding disables the element", function() {
-                var dom = $('<input data-disabled="disabled"/>');
+                var dom = $('<input data-bind="disabled:disabled"/>');
 
                 var viewModel = kendo.observable({
                     disabled: true
@@ -457,7 +457,7 @@
             });
 
             test("disable binding enables the element if value is false", function() {
-                var dom = $('<input data-disabled="disabled" disabled="disabled"/>');
+                var dom = $('<input data-bind="disabled:disabled" disabled="disabled"/>');
 
                 var viewModel = kendo.observable({
                     disabled: false
@@ -468,7 +468,7 @@
             });
 
             test("disable binding disables the element if value is changed to true", function() {
-                var dom = $('<input data-disabled="disabled"/>');
+                var dom = $('<input data-bind="disabled:disabled"/>');
 
                 var viewModel = kendo.observable({
                     disabled: false
@@ -480,7 +480,7 @@
             });
 
             test("disable binding disables the select element", function() {
-                var dom = $('<select data-disabled="disabled"/>');
+                var dom = $('<select data-bind="disabled:disabled"/>');
 
                 var viewModel = kendo.observable({
                     disabled: true
@@ -492,7 +492,7 @@
 
 
             test("binding to getter", function() {
-                var dom = $('<div data-template="get-template"/>');
+                var dom = $('<div data-bind="template:get-template"/>');
 
                 var viewModel = {
                     foo: "foo"
@@ -503,7 +503,7 @@
             });
 
             test("binding to function", function() {
-                var dom = $('<div data-text="foo"/>');
+                var dom = $('<div data-bind="text:foo"/>');
 
                 var viewModel = {
                     bar: "bar",
@@ -517,7 +517,7 @@
             });
 
             test("binding target is assign to the element", function() {
-                var dom = $('<div data-text="foo"/>');
+                var dom = $('<div data-bind="text:foo"/>');
 
                 var viewModel = {
                     bar: "bar"
@@ -528,7 +528,7 @@
             });
 
             test("binding are removed if element is rebind", 1, function() {
-                var dom = $('<div data-text="foo"/>');
+                var dom = $('<div data-bind="text:foo"/>');
 
                 var viewModel = kendo.observable({
                     foo: "bar"
@@ -544,7 +544,7 @@
             });
 
             test("expressions are destroyed", 1, function() {
-                var dom = $('<div data-text="foo"/>');
+                var dom = $('<div data-bind="text:foo"/>');
 
                 var viewModel = kendo.observable({
                     foo: "bar"
@@ -570,13 +570,13 @@
         </script>
 
         <script id="ol-template" type="text/x-kendo-template">
-            <li data-text="name"></li>
+            <li data-bind="text:name"></li>
         </script>
         <script id="ul-template" type="text/x-kendo-template">
-            <li data-text="this"></li>
+            <li data-bind="text:this"></li>
         </script>
         <script id="div-template" type="text/x-kendo-template">
-            Hello, ${foo}<span data-text="foo"></span>
+            Hello, ${foo}<span data-bind="text:foo"></span>
         </script>
     </body>
 </html>
