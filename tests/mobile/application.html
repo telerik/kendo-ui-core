@@ -55,6 +55,13 @@
                 equal(location.hash, "#page1");
             });
 
+            test("navigate to remote view silently on ready", function() {
+                location.hash = "#../../test1";
+
+                setup('<div data-role="view" id="test1">Page 1</div><div data-url="../../test1" data-role="view" id="page2">Page 2</div>');
+                equal(location.hash, "#../../test1");
+            });
+
             test("switches to local view", function() {
                 setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
                 application.navigate("#page2");

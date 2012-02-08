@@ -367,13 +367,19 @@
                 ready: function(e) {
                     that.showLoading();
                     that._findView(e.string, function(view) {
-                        var element = view.element;
+                        var element = view.element,
+                        id = element.attr("id"),
+                        url = element.attr(attr("url"));
 
                         views.not(view).hide();
                         view.onShowStart();
                         that._setCurrentView(view);
 
-                        history.navigate(element.attr("id") || element.data("url"), true);
+                        if (id && url == "/" || !url) {
+                            url = id;
+                        }
+
+                        history.navigate(url, true);
                     });
                 }
             };
