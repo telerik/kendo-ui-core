@@ -27,7 +27,7 @@
             });
 
             test("initalizes data source", function() {
-                var dom = $('<div data-role="grid" data-source="items" />');
+                var dom = $('<div data-role="grid" data-bind="source:items" />');
 
                 kendo.bind(dom, { items: ["foo", "bar"] } );
 
@@ -36,7 +36,7 @@
             });
 
             test("binding grid initialized before binding", function() {
-                var dom = $('<div data-source="items" />');
+                var dom = $('<div data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -48,7 +48,7 @@
             });
 
             test("binding grid initialized after binding", function() {
-                var dom = $('<div data-source="items" />');
+                var dom = $('<div data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -60,7 +60,7 @@
             });
 
             test("binding template", function() {
-                var dom = $('<div data-role="grid" data-template="template" data-source="items" />');
+                var dom = $('<div data-role="grid" data-bind="template:template, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -70,17 +70,17 @@
             });
 
             test("binding template containing binding attributes", function() {
-                var dom = $('<div data-role="grid" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
                 kendo.bind(dom, observable);
 
-                equal($.trim(dom.data("kendoGrid").tbody.find("tr:first > td:first").html()), '<strong data-text="text">foo</strong>');
+                equal($.trim(dom.data("kendoGrid").tbody.find("tr:first > td:first").html()), '<strong data-bind="text:text">foo</strong>');
             });
 
             test("updating an item from the data source updates the corresponding grid item", function() {
-                var dom = $('<div data-role="grid" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -92,18 +92,18 @@
             });
 
             test("templates are updated when grid is grouped", function() {
-                var dom = $('<div data-role="grid" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
                 kendo.bind(dom, observable);
                 dom.data("kendoGrid").dataSource.group({ field: "text" });
 
-                equal($.trim(dom.data("kendoGrid").tbody.find("tr:not(.k-grouping-row):first > td:not(.k-group-cell):first").html()), '<strong data-text="text">bar</strong>');
+                equal($.trim(dom.data("kendoGrid").tbody.find("tr:not(.k-grouping-row):first > td:not(.k-group-cell):first").html()), '<strong data-bind="text:text">bar</strong>');
             });
 
             test("destroys binding targets when datasource changes", function() {
-                var dom = $('<div data-role="grid" data-template="template-with-attributes" data-source="items" />');
+                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -118,7 +118,7 @@
             <tr><td><strong>#:text#</strong></td></tr>
         </script>
         <script id="template-with-attributes" type="text/x-kendo-template">
-            <tr><td><strong data-text="text"></strong></td></tr>
+            <tr><td><strong data-bind="text:text"></strong></td></tr>
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
