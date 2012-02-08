@@ -616,7 +616,10 @@
         fade: {
             css: {
                 opacity: function() {
-                    return $(this).data("fade").direction == "in" && !this.style.opacity ? 0 : undefined;
+                    var fade = $(this).data("fade"),
+                        inDirection = fade ? fade.direction == "in" : false;
+
+                    return inDirection && !this.style.opacity ? 0 : undefined;
                 }
             },
             setup: function(element, options) {
@@ -626,10 +629,16 @@
         zoom: {
             css: {
                 transform: function() {
-                    return $(this).data("zoom").direction == "in" && transitions ? "scale(.01)" : undefined;
+                    var zoom = $(this).data("zoom"),
+                        inDirection = zoom ? zoom.direction == "in" : false;
+
+                    return inDirection && transitions ? "scale(.01)" : undefined;
                 },
                 zoom: function() {
-                    return $(this).data("zoom").direction == "in" && hasZoom ? ".01" : undefined;
+                    var zoom = $(this).data("zoom"),
+                        inDirection = zoom ? zoom.direction == "in" : false;
+
+                    return inDirection && hasZoom ? ".01" : undefined;
                 }
             },
             setup: function(element, options) {
