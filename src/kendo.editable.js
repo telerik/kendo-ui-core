@@ -18,8 +18,7 @@
             validation = field.validation,
             ruleName,
             DATATYPE = kendo.attr("type"),
-            VALUE = kendo.attr("value"),
-            CHECKED = kendo.attr("checked"),
+            BINDING = kendo.attr("bind"),
             rule,
             attr = {
                 name: options.field
@@ -41,11 +40,7 @@
             attr[DATATYPE] = type;
         }
 
-        if (type === "boolean") {
-            attr[CHECKED] = options.field;
-        } else {
-            attr[VALUE] = options.field;
-        }
+        attr[BINDING] = (type === "boolean" ? "checked:" : "value:") + options.field;
 
         return attr;
     }
