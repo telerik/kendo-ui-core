@@ -55,6 +55,13 @@
                 equal(location.hash, "#page1");
             });
 
+            test("navigate to remote view silently on ready", function() {
+                location.hash = "#../../test1";
+
+                setup('<div data-role="view" id="test1">Page 1</div><div data-url="../../test1" data-role="view" id="page2">Page 2</div>');
+                equal(location.hash, "#../../test1");
+            });
+
             test("switches to local view", function() {
                 setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
                 application.navigate("#page2");
@@ -366,6 +373,35 @@
                 });
 
                 application.navigate("#page2?foo=bar");
+            });
+
+            test("Creates loader", function() {
+                var loader = application.loader;
+
+                console.log(application);
+                ok(loader);
+                ok(loader.hasClass("km-loader"));
+            });
+
+            asyncTest("showLoading shows loading image", function() {
+                expect(1);
+                application.showLoading();
+
+                setTimeout(function() {
+                    start();
+                    equal(application.loader.css("display"), "");
+                }, 150);
+            });
+
+            asyncTest("hideLoading hides loading image", function() {
+                expect(1);
+                application.showLoading();
+
+                setTimeout(function() {
+                    start();
+                    application.hideLoading();
+                    equal(application.loader.css("display"), "none");
+                }, 150);
             });
 
         </script>
