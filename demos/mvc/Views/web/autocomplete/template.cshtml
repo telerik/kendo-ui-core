@@ -1,0 +1,71 @@
+
+        <div id="example" class="k-content">
+            <div id="movies">
+                <input id="titles"/>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#titles").kendoAutoComplete({
+                        minLength: 3,
+                        dataTextField: "Name",
+                        template: '<img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />' +
+                                  '<h3>' +
+                                      '${ data.Name } ' +
+                                      '<span>${ data.ReleaseYear }</span>' +
+                                  '</h3>',
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
+                        }
+                    });
+
+                    // set width of the drop-down list
+                });
+            </script>
+
+            <style scoped>
+                #movies {
+					width: 369px;
+					height: 71px;
+					padding: 211px 0 0 141px;
+					background: url('../../content/web/autocomplete/movies.png') transparent no-repeat 0 0;
+					margin: 30px auto;
+ 				}
+                .k-autocomplete {
+                	width: 240px;
+                    vertical-align: middle;
+                }
+
+                #titles-list .k-item {
+                    overflow: hidden; /* clear floated images */
+                }
+
+                #titles-list img {
+                    float: left;
+                    width: 64px;
+                    height: 90px;
+                    margin: 10px 5px;
+                    -webkit-box-shadow: 0 1px 2px #333;
+                    box-shadow: 0 1px 2px #333;
+                    -webkit-border-radius: 4px;
+                    border-radius: 4px;
+                    font-size: .7em;
+                    line-height: 1em;
+                }
+                #titles-list h3 {
+                    margin: 20px 0 0 80px;
+                    font-size: 1.2em;
+                    line-height: 1.2em;
+                }
+                #titles-list h3 span {
+                    display: block;
+                    font-size: .7em;
+                }
+            </style>
+        </div>

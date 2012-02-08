@@ -1,0 +1,48 @@
+<div data-role="view" id="buttongroup-events" data-init="mobileButtonGroupEventsInit" data-title="Player">
+    <div class="photo">
+    </div>
+    <ul id="button-group" data-role="buttongroup" data-index="3">
+       <li data-icon="rewind">
+       </li>
+       <li data-icon="play">
+       </li>
+       <li data-icon="pause">
+       </li>
+       <li data-icon="stop">
+       </li>
+       <li data-icon="fastforward">
+       </li>
+    </ul>
+    <div class="console"></div>
+</div>
+
+<script>
+    function mobileButtonGroupEventsInit() {
+        $("#button-group")
+            .data("kendoMobileButtonGroup")
+            .bind("select", function() {
+                kendoConsole.log("Selected button: " + this.current().index());
+            });
+    }
+</script>
+
+<style scoped>
+    #buttongroup-events .photo {
+        width: 277px;
+        margin: 1em auto;
+        height: 120px;
+        background: url("../../content/mobile/shared/player.jpg") no-repeat center center;
+        -webkit-background-size: auto 100%;
+        background-size: auto 100%;
+    }
+    #button-group {
+        margin: 1em auto;
+    }
+    .km-root .console {
+        background-color: transparent;
+        border: 0;
+        margin: 1.4em 1em;
+        overflow: hidden;
+        height: auto;
+    }
+</style>

@@ -1,0 +1,64 @@
+The Button widget navigates between mobile Application views when pressed.
+
+<h3>Getting Started</h3>
+<p>The Kendo mobile Application will automatically initialize a mobile Button for every element with <code>role</code> data attribute set to <code>button</code> present in the views/layouts' markup.
+Alternatively, it can be initialized using a jQuery selector. The button element may be either <code>A</code> or <code>BUTTON</code>. </p><div class="code-sample"><h4 class="code-title">Initialize Kendo mobile Button based on role data attribute</h4><pre class="code prettyprint"><code>&lt;a href="#foo" data-role="button"&gt;Foo&lt;/a&gt;</code></pre></div><div class="code-sample"><h4 class="code-title">Initialize Kendo mobile Button using a jQuery selector</h4><pre class="code prettyprint"><code>var button = $("#button").kendoMobileButton();</code></pre></div><h3>Customizing Mobile Button Appearance</h3>
+<p>The Kendo mobile Button color can be customized by setting its <code>background-color</code> CSS property inline or by using a CSS selector with specificity of 20+.
+You can target platforms separately with their respective root CSS classes.</p><div class="code-sample"><h4 class="code-title">Green Button</h4><pre class="code prettyprint"><code>&lt;a href="#foo" data-role="button" style="background-color: green"&gt;Foo&lt;/a&gt;</code></pre></div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Green Kendo mobile Button in iOS and a red one in Android</h4><pre class="code prettyprint"><code>&lt;style&gt;
+    .km-ios .checkout { background-color: green; }
+    .km-android .checkout { background-color: red; }
+&lt;/style&gt;
+
+&lt;a href="#foo" data-role="button" class="checkout"&gt;Foo&lt;/a&gt;</code></pre></div><h3>Button icons</h3>
+<p>A Button icon can be set in two ways - either by adding an <code>img</code> element inside the Button element,
+or by setting an <code>icon</code> data attribute to the Button element.</p>
+<p>KendoUI Mobile comes out of the box with several ready to use icons:</p>
+
+<ul id="icon-list">
+  <li title=".km-about"><span class="km-icon km-about"></span>about</li>
+  <li title=".km-action"><span class="km-icon km-action"></span>action</li>
+  <li title=".km-add"><span class="km-icon km-add"></span>add</li>
+  <li title=".km-bookmarks"><span class="km-icon km-bookmarks"></span>bookmarks</li>
+  <li title=".km-camera"><span class="km-icon km-camera"></span>camera</li>
+  <li title=".km-cart"><span class="km-icon km-cart"></span>cart</li>
+  <li title=".km-compose"><span class="km-icon km-compose"></span>compose</li>
+  <li title=".km-contacts"><span class="km-icon km-contacts"></span>contacts</li>
+  <li title=".km-details"><span class="km-icon km-details"></span>details</li>
+  <li title=".km-downloads"><span class="km-icon km-downloads"></span>downloads</li>
+  <li title=".km-fastforward"><span class="km-icon km-fastforward"></span>fastforward</li>
+  <li title=".km-favorites"><span class="km-icon km-favorites"></span>favorites</li>
+  <li title=".km-featured"><span class="km-icon km-featured"></span>featured</li>
+  <li title=".km-featured"><span class="km-icon km-toprated"></span>toprated</li>
+  <li title=".km-globe"><span class="km-icon km-globe"></span>globe</li>
+  <li title=".km-history"><span class="km-icon km-history"></span>history</li>
+  <li title=".km-home"><span class="km-icon km-home"></span>home</li>
+  <li title=".km-info"><span class="km-icon km-info"></span>info</li>
+  <li title=".km-more"><span class="km-icon km-more"></span>more</li>
+  <li title=".km-mostrecent"><span class="km-icon km-mostrecent"></span>mostrecent</li>
+  <li title=".km-mostviewed"><span class="km-icon km-mostviewed"></span>mostviewed</li>
+  <li title=".km-organize"><span class="km-icon km-organize"></span>organize</li>
+  <li title=".km-pause"><span class="km-icon km-pause"></span>pause</li>
+  <li title=".km-play"><span class="km-icon km-play"></span>play</li>
+  <li title=".km-recents"><span class="km-icon km-recents"></span>recents</li>
+  <li title=".km-refresh"><span class="km-icon km-refresh"></span>refresh</li>
+  <li title=".km-reply"><span class="km-icon km-reply"></span>reply</li>
+  <li title=".km-rewind"><span class="km-icon km-rewind"></span>rewind</li>
+  <li title=".km-search"><span class="km-icon km-search"></span>search</li>
+  <li title=".km-settings"><span class="km-icon km-settings"></span>settings</li>
+  <li title=".km-share"><span class="km-icon km-share"></span>share</li>
+  <li title=".km-stop"><span class="km-icon km-stop"></span>stop</li>
+  <li title=".km-trash"><span class="km-icon km-trash"></span>trash</li>
+</ul>
+
+<p>Additional icons may be added by defining the respective CSS class.
+If the <code>icon</code> data attribute is set to <code>custom</code>, the tab will receive <code>km-custom</code> CSS class.</p><div class="code-sample"><h4 class="code-title">Define custom button icon</h4><pre class="code prettyprint"><code>&lt;style&gt;
+.km-custom {
+  background-image: url("foo.jpg");
+}
+&lt;/style&gt;
+
+&lt;div data-role="button"&gt;
+  &lt;a href="#index" data-icon="custom"&gt;Home&lt;/a&gt;
+&lt;/div&gt;</code></pre></div>
+<div class="desc">The BackButton widget navigates to the previous mobile View when pressed.</div><div class="code-sample"><h4 class="code-title">Initialize Kendo mobile BackButton based on role data attribute</h4><pre class="code prettyprint"><code>&lt;a data-role="back-button"&gt;Foo&lt;/a&gt;</code></pre></div><div class="code-sample"><h4 class="code-title">Initialize Kendo mobile BackButton using a jQuery selector</h4><pre class="code prettyprint"><code>var button = $("#button").kendoMobileBackButton();</code></pre></div>
+<div class="desc">The DetailButton widget navigates to a mobile View when pressed.</div><div class="code-sample"><h4 class="code-title">Initialize Kendo mobile DetailButton based on role data attribute</h4><pre class="code prettyprint"><code>&lt;a data-role="detail-button"&gt;Foo&lt;/a&gt;</code></pre></div><div class="code-sample"><h4 class="code-title">Initialize Kendo mobile DetailButton using a jQuery selector</h4><pre class="code prettyprint"><code>var button = $("#button").kendoMobileDetailButton();</code></pre></div>

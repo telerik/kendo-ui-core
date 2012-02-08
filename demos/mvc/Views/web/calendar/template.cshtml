@@ -1,0 +1,97 @@
+
+        <div id="example" class="k-content">
+            <div id="special-days">
+                <div id="calendar" style="width: 300px;"></div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    var today = new Date(),
+                        birthdays = [
+                           +new Date(today.getFullYear(), today.getMonth(), 8),
+                           +new Date(today.getFullYear(), today.getMonth(), 12),
+                           +new Date(today.getFullYear(), today.getMonth(), 24),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 6),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 7),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 25),
+                           +new Date(today.getFullYear(), today.getMonth() + 1, 27),
+                           +new Date(today.getFullYear(), today.getMonth() - 1, 3),
+                           +new Date(today.getFullYear(), today.getMonth() - 1, 5),
+                           +new Date(today.getFullYear(), today.getMonth() - 2, 22),
+                           +new Date(today.getFullYear(), today.getMonth() - 2, 27)
+                        ];
+
+                    $("#calendar").kendoCalendar({
+                        value: today,
+                        month: {
+                            // template for dates in month view
+                            content: '# if ($.inArray(+data.date, [' + birthdays + ']) != -1) { #' +
+                                        '<div class="' +
+                                           '# if (data.value < 10) { #' +
+                                               "exhibition" +
+                                           '# } else if ( data.value < 20 ) { #' +
+                                               "party" +
+                                           '# } else { #' +
+                                               "cocktail" +
+                                           '# } #' +
+                                        '"></div>' +
+                                     '# } #' +
+                                     '#= data.value #'
+                        },
+                        footer: "Today - #=kendo.toString(data, 'd') #"
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #special-days {
+                    height: 270px;
+                    width: 500px;
+                    margin: 30px auto;
+                    padding: 22px 0 0 21px;
+                    background: url('../../content/web/calendar/specialDays.png') transparent no-repeat 0 0;
+                }
+
+                #calendar {
+                    border-radius: 3px 3px 3px 3px;
+                    border-style: solid;
+                    border-width: 1px;
+                }
+
+                .k-header {
+                    border-radius: 3px 3px 0 0;
+                }
+
+                #calendar .k-content {
+                    height: 168px;
+                }
+
+                .exhibition {
+                    background: transparent url(../../content/web/calendar/exhibition.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
+                }
+
+                .party {
+                    background: transparent url(../../content/web/calendar/party.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
+                }
+
+                .cocktail {
+                    background: transparent url(../../content/web/calendar/cocktail.png) no-repeat 0 50%;
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    vertical-align: middle;
+                    margin-right: 3px;
+                }
+
+            </style>
+        </div>

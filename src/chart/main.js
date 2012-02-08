@@ -1371,6 +1371,10 @@
                 width: 1,
                 color: BLACK
             },
+            title: {
+                visible: true,
+                position: CENTER
+            },
             majorTickType: OUTSIDE,
             majorTickSize: 4,
             minorTickType: NONE,
@@ -1382,6 +1386,24 @@
                 color: BLACK
             },
             margin: 5
+        },
+
+        createTitle: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                titleOptions = deepExtend({
+                    rotation: isVertical ? -90 : 0,
+                    text: "",
+                    zIndex: 1
+                }, options.title),
+                title;
+
+            if (titleOptions.visible && titleOptions.text) {
+                title = new TextBox(titleOptions.text, titleOptions);
+                axis.append(title);
+                axis.title = title;
+            }
         },
 
         renderTicks: function(view) {
@@ -1530,7 +1552,7 @@
                 );
             }
 
-            axis.arrangeTitle(title, isVertical, axis.box);
+            axis.arrangeTitle();
             axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
         },
 
@@ -1585,28 +1607,22 @@
             }
         },
 
-        arrangeTitle: function(title, isVertical, box) {
+        arrangeTitle: function() {
+            var axis = this,
+                options = axis.options,
+                isVertical = options.orientation === VERTICAL,
+                title = axis.title;
+
             if (title) {
                 if (isVertical) {
                     title.options.align = LEFT;
-                    if (title.options.position === TOP) {
-                        title.options.vAlign = TOP;
-                    } else if (title.options.position === BOTTOM) {
-                        title.options.vAlign = BOTTOM;
-                    } else {
-                        title.options.vAlign = CENTER;
-                    }
+                    title.options.vAlign = title.options.position;
                 } else {
-                    if (title.options.position === LEFT) {
-                        title.options.align = LEFT;
-                    } else if (title.options.position === RIGHT) {
-                        title.options.align = RIGHT;
-                    } else {
-                        title.options.align = CENTER;
-                    }
+                    title.options.align = title.options.position;
                     title.options.vAlign = BOTTOM;
                 }
-                title.reflow(box);
+
+                title.reflow(axis.box);
             }
         }
     });
@@ -1625,13 +1641,7 @@
                 align = isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
-                }),
-                titleOptions = deepExtend({}, {
-                    rotation: isVertical ? -90 : 0,
-                    text: "",
-                    zIndex: 1
-                }, options.title),
-                title;
+                });
 
             axis.labels = [];
             if (labelOptions.visible) {
@@ -1654,11 +1664,7 @@
                 }
             }
 
-            if (options.title) {
-                title = new TextBox(titleOptions.text, titleOptions);
-                axis.append(title);
-                axis.title = title;
-            }
+            axis.createTitle();
         },
 
         options: {
@@ -1945,13 +1951,7 @@
                 count = options.categories.length,
                 content,
                 i,
-                titleOptions = deepExtend({}, {
-                    rotation: isVertical ? -90 : 0,
-                    text: "",
-                    zIndex: 1
-                }, options.title),
-                label,
-                title;
+                label;
 
             axis.labels = [];
             if (labelOptions.visible) {
@@ -1969,11 +1969,7 @@
                 }
             }
 
-            if (options.title) {
-                title = new TextBox(titleOptions.text, titleOptions);
-                axis.append(title);
-                axis.title = title;
-            }
+            axis.createTitle();
         },
 
         options: {
@@ -5037,8 +5033,10 @@
         var min = MAX_VALUE,
             max = MIN_VALUE,
             i,
+            length = arr.length,
             n;
-        for (i = 0, length = arr.length; i < length; i++) {
+
+        for (i = 0; i < length; i++) {
             n = arr[i];
             if (defined(n)) {
                 min = math.min(min, n);

@@ -5,7 +5,7 @@
 
     if (defined(ownOptions) && ownOptions.length) {
         ownOptions.forEach(function (value, idx) {
-            var description = /\[(.*)\]/i.exec(ownOptions[idx].desc);
+            var description = /\[([^\]]*)\]/i.exec(ownOptions[idx].desc);
             description && (ownOptions[idx].name = description[1]);
 
             var defaultValue = /]\s*\<(.*)\>/i.exec(ownOptions[idx].desc);
@@ -179,7 +179,7 @@
     var optionsTemplate = tmpl(
         '<div class="detailHandle">' +
             '<div class="detailCollapsed"></div>' +
-            '<a name="<%= name %>"><code class="symbol"><%= name %></code></a>' +
+            '<a name=\'<%= name %>\'><code class="symbol"><%= name %></code></a>' +
             '<%= type ? \': <span class="type">\' + type + \'</span>\' : \'\' %>' +
             '<%= defaultValue ? \'<span class="defaultValue">(default: \' + defaultValue + \')</span>\' : \'\' %>' +
         '</div>' +
@@ -188,7 +188,7 @@
             '<% for (var exampleIdx = 0; typeof example != "undefined" && exampleIdx < example.length; exampleIdx++) { %>' +
                 '<div class="code-sample">' +
                     '<h4 class="code-title">Example</h4>' +
-                    '<pre class="code prettyprint lang-js"><code><%= example[exampleIdx] %></code></pre>' +
+                    '<pre class="code prettyprint"><code><%= htmlEncode(example[exampleIdx]) %></code></pre>' +
                 '</div>' +
             '<% } %>' +
             '<%= typeof subOptions != "undefined" ? renderChildOptions(subOptions) : "" %>' +

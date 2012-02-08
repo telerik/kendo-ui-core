@@ -1,0 +1,48 @@
+
+        <div id="example" class="k-content">
+            <div class="configuration">
+                <span class="infoHead">Information</span>
+                <p>
+                    <strong>Note:</strong>
+                    Security restrictions in Chrome prevent this
+                    example from working when the page is
+                    loaded from the file system (via file:// protocol).
+                </p>
+            </div>
+            <ul id="panelbar">
+                <li class="k-state-active">
+                    First Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Second Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Third Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Fourth Ajax Item
+                    <div></div>
+                </li>
+                <li>
+                    Fifth Ajax Item
+                    <div></div>
+                </li>
+            </ul>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#panelbar").css({ marginRight: "220px" }).kendoPanelBar({
+                    expandMode: "single",
+                    contentUrls: [
+                        '../../content/web/panelbar/ajax/ajaxContent1.html',
+                        '../../content/web/panelbar/ajax/ajaxContent2.html',
+                        '../../content/web/panelbar/ajax/ajaxContent3.html',
+                        '../../content/web/panelbar/ajax/ajaxContent4.html',
+                        '../../content/web/panelbar/ajax/ajaxContent5.html'
+                    ]
+                });
+            });
+        </script>

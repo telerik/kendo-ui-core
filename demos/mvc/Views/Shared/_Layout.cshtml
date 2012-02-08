@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @foreach (string styleName in ViewBag.styles) {
+    <link href="@Url.Style(styleName, (string) ViewBag.Suite)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
+    }
+    @if (ViewBag.Debug) {
+    <script src="@Url.Content("~/content/shared/js/less.js")"></script>
+    } else {
+    @Html.Partial("GoogleAnalytics")
+    }
+    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    @foreach (string scriptName in ViewBag.scripts) {
+    <script src="@Url.Script(scriptName, (string) ViewBag.Suite)"></script>
+    }
+    <script src="@Url.Content("~/content/shared/js/examples.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/console.js")"></script>
+    <script src="@Url.Content("~/content/shared/js/prettify.js")"></script>
+</head>
+<body>
+    @Html.Partial("Header")
+
+    <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
+        <div id="navWrap">
+            @foreach (string category in ViewBag.Navigation.Keys)
+            {
+                if (ViewBag.Navigation.Keys.Count > 1)
+                {
+                    <h3>@category</h3>
+                }
+                <ul class="nav">
+                @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                {
+                    <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
+                        <span class="k-link k-header">
+                            <span class="k-sprite @widget.SpriteCssClass"></span>
+                            @widget.Text
+                        </span>
+                        <ul>
+                            @foreach (NavigationExample example in widget.Items)
+                            {
+                                <li>
+                                    <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                                        href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                }
+                </ul>
+            }
+        </div>
+        @RenderBody()
+    </div>
+
+    @Html.Partial("Footer")
+
+    <script>
+        $(".nav").kendoPanelBar({
+            animation: { open: { effects: "fadeIn expandVertical" } },
+            expand: function() {
+                $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
+                    $(this)
+                        .find(".k-link").removeClass("k-state-selected k-state-highlighted");
+                });
+            },
+            expandMode: "single"
+        });
+
+        $(".themeChooser").themeChooser();
+
+        $("#deviceChooser").mobileOsChooser({
+            container: "#mobile-application-container"
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<div data-role="view" data-init="mobileButtonGroupInit" data-title="ButtonGroup Appearance">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Background color
+            <ul>
+                <li>
+                    <ul id="button-group">
+                        <li style="background-color: green">Green</li>
+                        <li style="background-color: darkred">Red</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Font Size Small
+            <ul>
+                <li>
+                    <ul data-role="buttongroup" data-index="0">
+                        <li style="font-size: 0.8em;">Flat View</li>
+                        <li style="font-size: 0.8em">Grouped View</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Font Size Normal
+            <ul>
+                <li>
+                    <ul data-role="buttongroup" data-index="1">
+                        <li>2011</li>
+                        <li>2012</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Font Size Large
+            <ul>
+                <li>
+                    <ul data-role="buttongroup" data-index="0">
+                        <li data-icon="toprated" style="font-size: 1.5em">Featured</li>
+                        <li data-icon="globe" style="font-size: 1.5em">Popular</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Button icons (check help for all icons)
+            <ul>
+                <li>
+                    <ul data-role="buttongroup" data-index="1">
+                        <li data-icon="play"></li>
+                        <li data-icon="pause"></li>
+                        <li data-icon="rewind"></li>
+                        <li data-icon="fastforward"></li>
+                        <li data-icon="globe"></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script>
+    function mobileButtonGroupInit() {
+        $("#button-group").kendoMobileButtonGroup({
+            index: 0
+        });
+    }
+</script>

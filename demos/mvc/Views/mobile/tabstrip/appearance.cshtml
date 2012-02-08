@@ -1,0 +1,130 @@
+<div data-role="view" id="tabstrip-gallery" data-title="Gallery" data-layout="tabstrip-appearance">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            <ul>
+                <li><h2>Boston</h2><img src="../../content/mobile/overview/boston.jpg" /></li>
+                <li><h2>Ottawa</h2><img src="../../content/mobile/overview/ottawa.jpg" /></li>
+                <li><h2>San Francisco</h2><img src="../../content/mobile/overview/san-francisco.jpg" /></li>
+                <li><h2>Liverpool</h2><img src="../../content/mobile/overview/liverpool.jpg" /></li>
+                <li><h2>London</h2><img src="../../content/mobile/overview/london.jpg" /></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="tabstrip-cities" data-title="Cities" data-layout="tabstrip-appearance">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Africa
+            <ul>
+                <li data-icon="toprated"><a>Nairobi</a></li>
+            </ul>
+        </li>
+        <li>
+            America
+            <ul>
+                <li data-icon="globe"><a>Boston</a></li>
+                <li data-icon="globe"><a>Ottawa</a></li>
+                <li data-icon="toprated"><a>San Francisco</a></li>
+            </ul>
+        </li>
+        <li>
+            Asia
+            <ul>
+                <li data-icon="globe"><a>Bombay</a></li>
+            </ul>
+        </li>
+        <li>
+            Australia
+            <ul>
+                <li data-icon="globe"><a>Melbourne</a></li>
+                <li data-icon="toprated"><a>Sydney</a></li>
+            </ul>
+        </li>
+        <li>
+            Europe
+            <ul>
+                <li data-icon="globe"><a>Cannes</a></li>
+                <li data-icon="globe"><a>Liverpool</a></li>
+                <li data-icon="toprated"><a>London</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" id="tabstrip-favourites" data-title="Favourites" data-layout="tabstrip-appearance">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Favourite Cities
+            <ul>
+                <li data-icon="toprated"><a>Nairobi</a></li>
+                <li data-icon="toprated"><a>San Francisco</a></li>
+                <li data-icon="toprated"><a>Sydney</a></li>
+                <li data-icon="toprated"><a>London</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="layout" data-id="tabstrip-appearance">
+    <header data-role="header" id="tabstrip-appearance-header">
+        <div data-role="navbar">
+            <!--<a class="nav-button" data-align="left" data-role="backbutton">Back</a>-->
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <p>TabStrip</p>
+
+    <div data-role="footer">
+        <div data-role="tabstrip" id="custom-tabstrip">
+            <a href="#tabstrip-gallery" data-icon="camera">Gallery</a>
+            <a href="#tabstrip-cities" data-icon="globe">Cities</a>
+            <a href="#tabstrip-favourites" data-icon="favorites">Favourites</a>
+        </div>
+    </div>
+</div>
+
+<style scoped>
+    #custom-tabstrip,
+    #tabstrip-appearance-header .km-navbar,
+    #custom-tabstrip .km-state-active .km-icon,
+    #tabstrip-appearance-header .km-navbar .km-button
+    {
+        background-color: #228b22;
+    }
+    .km-ios #tabstrip-gallery .km-insetcontent,
+    .km-ios #tabstrip-cities .km-insetcontent,
+    .km-ios #tabstrip-favourites .km-insetcontent 
+    {
+        background-color: #dbf5d3;
+    }
+    .km-android #tabstrip-gallery .km-insetcontent,
+    .km-android #tabstrip-cities .km-insetcontent,
+    .km-android #tabstrip-favourites .km-insetcontent  {
+        background: -moz-linear-gradient(center top , #000000, #0b350b);
+        background: -webkit-linear-gradient(center top , #000000, #0b350b);
+    }
+    
+    #custom-tabstrip .km-state-active .km-icon
+    {
+        background: #62cb62;
+    }
+    #tabstrip-gallery h2 {
+        display: inline-block;
+        font-size: 1.1em;
+        margin: 1em 0 1.5em 1em;
+    }
+
+    #tabstrip-gallery img {
+	    float: left;
+        width: 4em;
+        height: 4em;
+        margin: 0;
+        -webkit-box-shadow: 0 1px 3px #333;
+        box-shadow: 0 1px 3px #333;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+    }
+</style>

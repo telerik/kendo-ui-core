@@ -1,0 +1,439 @@
+.added
+{
+    color: green;
+    font-size: .8em;
+    font-size: .8rem;
+    display: block;
+}
+
+.item-list.km-list > li,
+.item-list .km-list > li
+{
+    overflow: hidden;
+    line-height: 1em;
+}
+
+.item-list img,
+#details img
+{
+    width: 4em;
+    height: 4em;
+    width: 4rem;
+    height: 4rem;
+    float: left;
+    margin-right: 1em;
+    margin-right: 1rem;
+    -webkit-box-shadow: 0 2px 3px #333;
+    box-shadow: 0 2px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    margin-bottom: 3px;
+    margin-left: 2px;
+}
+
+.item-list h2
+{
+    margin: 0;
+    display: inline-block;
+    font-size: 1.1em;
+    margin-top: 1.4em;
+    font-size: 1.1rem;
+    margin-top: 1.4rem;
+}
+
+#cartList h2
+{
+    margin-top: 1.1rem;
+}
+
+#cartList .km-button
+{
+    font-weight: bold;
+}
+
+.item-list a.km-button
+{
+    position: absolute;
+    right: .6em;
+    right: .6rem;
+    top: 50%;
+    margin-top: -1em;
+    margin-top: -1rem;
+}
+
+.km-android .item-list a.km-button
+{
+    margin-top: -1.35em;
+    margin-top: -1.35rem;
+}
+
+.item-list a.details-link
+{
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.price
+{
+    color: #4F576F;
+    font-size: 2em;
+    font-size: 2rem;
+    line-height: normal;
+}
+
+#cart .price
+{
+    color: #777;
+    display: block;
+    font-weight: normal;
+    font-size: .8em;
+    font-size: .8rem;
+    line-height: 1em
+    line-height: 1rem
+}
+
+#details .km-content
+{
+    padding: 1em;
+    padding: 1rem;
+    -webkit-box-sizing: border-box;
+}
+
+#details .km-content p
+{
+    margin-top: 1em;
+    margin-top: 1rem;
+    font-size: .9em;
+    font-size: .9rem;
+    line-height: 1.2em;
+    line-height: 1.2rem;
+    font-weight: normal;
+    text-shadow: 1px 1px white;
+}
+
+#details .km-content aside
+{
+    display: block;
+    overflow: hidden;
+}
+
+#details img
+{
+    width: 8.4em;
+    height: 8.4em;
+    margin-right: 2em;
+    margin-right: 2rem;
+    margin-bottom: 1em;
+    margin-bottom: 1rem;
+}
+
+#details .km-content aside .price
+{
+    display: block;
+    margin-bottom: 1em;
+    margin-bottom: 1rem;
+}
+
+.details-link
+{
+    color: #000;
+}
+
+.km-android .details-link
+{
+    color: #fff;
+}
+
+#checkout
+{
+    margin: 1em;
+    margin: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 2em;
+    font-size: 2rem;
+}
+
+.list-item-data
+{
+    float: right;
+    font-weight: normal;
+    color: rgb(146, 163, 189);
+}
+
+.km-empty h2,
+.km-empty #checkout
+{
+    display: none;
+}
+
+#cartList:empty:before
+{
+    content: "Your cart is empty.";
+    padding: 2em;
+    padding: 2rem;
+    line-height: 3.5em;
+    line-height: 3.5rem;
+    color: #888;
+}
+
+.km-android .km-back
+{
+    display: none;
+}
+
+#total
+{
+    text-align: center;
+    padding: .5em 1em 0;
+    padding: .5rem 1rem 0;
+    font-size: 4em;
+    font-size: 4rem;
+}
+
+#total,
+.km-insetcontent .km-scroll-container > h2,
+.km-insetcontent .km-scroll-container > h3
+{
+    color: #4F576F;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.about-button,
+#menu .item-list .km-button,
+#index .item-list .km-button
+{
+    width: 3.4em;
+    text-align: center;
+}
+
+.km-ios .red-button {
+    background-color: #B11C1A;
+}
+
+.km-ios .red-button:active {
+    background-color: #910000;
+}
+
+#done-icon, #empty-icon {
+    margin: 20px auto;
+    display: block;
+    width: 128px;
+}
+
+#empty-icon {
+    display: none;
+}
+
+.km-empty #empty-icon {
+    display: block;
+}
+
+#done h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#done h3, #checkout h3 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#done-button
+{
+    margin: 1em;
+    margin: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 1.1em;
+    font-size: 1.1rem;
+}
+
+/* Firefox Icon Masks */
+
+.km-root .km-featured
+{
+    clip-path: url("images/iconmasks.svg#featured");
+}
+
+.km-root .km-toprated,
+.km-root .km-favorites
+{
+    clip-path: url("images/iconmasks.svg#toprated");
+}
+
+.km-root .km-mostviewed
+{
+    clip-path: url("images/iconmasks.svg#mostviewed");
+}
+
+.km-root .km-bookmarks
+{
+    clip-path: url("images/iconmasks.svg#bookmarks");
+}
+
+.km-root .km-contacts
+{
+    clip-path: url("images/iconmasks.svg#contacts");
+}
+
+.km-root .km-download,
+.km-root .km-downloads
+{
+    clip-path: url("images/iconmasks.svg#download");
+}
+
+.km-root .km-more
+{
+    clip-path: url("images/iconmasks.svg#more");
+}
+
+.km-root .km-android .km-root .km-more
+{
+    clip-path: url("images/iconmasks.svg#androidmore");
+}
+
+.km-root .km-meego .km-root .km-more
+{
+    clip-path: url("images/iconmasks.svg#meegomore");
+}
+
+.km-root .km-mostrecent
+{
+    clip-path: url("images/iconmasks.svg#mostrecent");
+}
+
+.km-root .km-recents
+{
+    clip-path: url("images/iconmasks.svg#recents");
+}
+
+.km-root .km-history
+{
+    clip-path: url("images/iconmasks.svg#history");
+}
+
+.km-root .km-add
+{
+    clip-path: url("images/iconmasks.svg#add");
+}
+
+.km-root .km-details
+{
+    clip-path: url("images/iconmasks.svg#details");
+}
+
+.km-root .km-info,
+.km-root .km-about
+{
+    clip-path: url("images/iconmasks.svg#info");
+}
+
+.km-root .km-action
+{
+    clip-path: url("images/iconmasks.svg#action");
+}
+
+.km-root .km-camera
+{
+    clip-path: url("images/iconmasks.svg#camera");
+}
+
+.km-root .km-edit,
+.km-root .km-compose
+{
+    clip-path: url("images/iconmasks.svg#edit");
+}
+
+.km-root .km-search
+{
+    clip-path: url("images/iconmasks.svg#search");
+}
+
+.km-root .km-trash,
+.km-root .km-delete
+{
+    clip-path: url("images/iconmasks.svg#trash");
+}
+
+.km-root .km-organize
+{
+    clip-path: url("images/iconmasks.svg#organize");
+}
+
+.km-root .km-reply
+{
+    clip-path: url("images/iconmasks.svg#reply");
+}
+
+.km-root .km-stop
+{
+    clip-path: url("images/iconmasks.svg#stop");
+}
+
+.km-root .km-sounds,
+.km-root .km-volume
+{
+    clip-path: url("images/iconmasks.svg#sounds");
+}
+
+.km-root .km-refresh
+{
+    clip-path: url("images/iconmasks.svg#refresh");
+}
+
+.km-root .km-play
+{
+    clip-path: url("images/iconmasks.svg#play");
+}
+
+.km-root .km-fastforward
+{
+    clip-path: url("images/iconmasks.svg#fastforward");
+}
+
+.km-root .km-pause
+{
+    clip-path: url("images/iconmasks.svg#pause");
+}
+
+.km-root .km-rewind
+{
+    clip-path: url("images/iconmasks.svg#rewind");
+}
+
+.km-root .km-settings
+{
+    clip-path: url("images/iconmasks.svg#settings");
+}
+
+.km-root .km-globe
+{
+    clip-path: url("images/iconmasks.svg#globe");
+}
+
+.km-root .km-home
+{
+    clip-path: url("images/iconmasks.svg#home");
+}
+
+.km-root .km-cart
+{
+    clip-path: url("images/iconmasks.svg#cart");
+}
+
+.km-root .km-battery
+{
+    clip-path: url("images/iconmasks.svg#battery");
+}
+
+.km-root .km-wifi
+{
+    clip-path: url("images/iconmasks.svg#wifi");
+}
+
+.km-root .km-share
+{
+    clip-path: url("images/iconmasks.svg#share");
+}

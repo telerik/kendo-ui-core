@@ -1,0 +1,17 @@
+
+        <div id="example" class="k-content">
+            <input id="numerictextbox"/>
+            <script>
+                $(document).ready(function() {
+
+                    function onChange() {
+                        kendoConsole.log("Change :: " + this.value());
+                    }
+
+                    $("#numerictextbox").kendoNumericTextBox({
+                        change: onChange
+                    });
+                });
+            </script>
+        </div>
+        <div class="console"></div>

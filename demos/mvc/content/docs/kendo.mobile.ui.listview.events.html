@@ -1,0 +1,72 @@
+
+
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="click"><code>click</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when item is clicked</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Handling button clicks</h4><pre class="code prettyprint"><code>&lt;ul data-role="listview" id="foo"&gt;    &lt;li&gt;&lt;a data-role="button" data-name="bar"&gt;Bar button&lt;/a&gt; | &lt;a data-role="button" data-name="baz"&gt;Baz button&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;script&gt; $("#foo").data("kendoMobileListView").bind("click", function(e) {     console.log(e.buttonName); // "foo" or "bar"     console.log(e.button); // Kendo MobileButton instance }&lt;/script&gt;</code></pre></div><div class="code-sample"><h4 class="code-title">Making dataItem available in events</h4><pre class="code prettyprint"><code>&lt;ul id="foo"&gt;&lt;/ul&gt;&lt;script&gt; // for the dataItem to be present in the click event, The datasource must have schema definition. $("#foo").kendoMobileListView({    dataSource: new kendo.data.DataSource({         data:   [{title: "foo"}, {title: "bar"}],         schema: {model: {}}    }),    click: function(e) {         console.log(e.dataItem.title);    } });&lt;/script&gt;</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>item</code>
+                            <span class="type">: jQueryObject</span> 
+                            
+                        </dt>
+                        <dd>The selected list item.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>target</code>
+                            <span class="type">: jQueryObject</span> 
+                            
+                        </dt>
+                        <dd>The clicked DOM element.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>dataItem</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The corresponding dataItem associated with the item (available in databound mode only).</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>buttonName</code>
+                            <span class="type">: String</span> 
+                            
+                        </dt>
+                        <dd>The name of the clicked Kendo mobile Button. Specified by setting the <code>name</code> data attribute of the button widget element.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>button</code>
+                            <span class="type">: kendo.ui.MobileButton</span> 
+                            
+                        </dt>
+                        <dd>The clicked Kendo mobile Button.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+

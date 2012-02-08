@@ -1,0 +1,77 @@
+
+
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="viewInit"><code>viewInit</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires the first time when a View is displayed.</div><div class="desc"></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>view</code>
+                            <span class="type">: kendo.mobile.View</span> 
+                            
+                        </dt>
+                        <dd>The displayed View.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+        <div class="detailHandle">
+            <div class="detailCollapsed"></div>
+            <a name="viewShow"><code>viewShow</code></a>
+        </div>
+        <div class="detailBody">
+            <div class="desc">Fires when a View is displayed.</div><div class="desc"></div><div class="code-sample"><h4 class="code-title">Display View with URL parameters</h4><pre class="code prettyprint"><code>&lt;div id="foo" data-role="view"&gt;&lt;a href="#bar?baz=qux"&gt;Go to bar&lt;/a&gt;&lt;/div&gt;&lt;div id="bar" data-role="view"&gt;Bar&lt;/div&gt;&lt;script&gt;     // ...     application.bind("viewShow", function(e) {         console.log(e.view); // kendo.mobile.View instance         console.log(e.params); // {"baz": "qux"}     });&lt;/script&gt;</code></pre></div>
+
+            
+                <div class="details-list">
+                    <h4 class="details-title">Event data</h4>
+                    <dl>
+                    
+                        
+                    
+                        
+                        <dt>
+                            <code>view</code>
+                            <span class="type">: kendo.mobile.View</span> 
+                            
+                        </dt>
+                        <dd>The displayed View.</dd>
+                        
+                    
+                        
+                        <dt>
+                            <code>params</code>
+                            <span class="type">: Object</span> 
+                            
+                        </dt>
+                        <dd>The URL params passed.</dd>
+                        
+                    
+                    </dl>
+                </div>
+            
+
+            
+
+            
+        </div>
+    
+

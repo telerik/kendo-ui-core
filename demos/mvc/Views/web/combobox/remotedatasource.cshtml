@@ -1,0 +1,25 @@
+
+        <div id="example" class="k-content">
+            Select a title from Netflix:
+            <input id="titles"/>
+
+            <script>
+                $(document).ready(function() {
+                    $("#titles").kendoComboBox({
+                        index: 0,
+                        dataTextField: "Name",
+                        dataValueField: "Id",
+                        filter: "contains",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
+                        }
+                    });
+                });
+            </script>
+        </div>

@@ -262,7 +262,7 @@ function mkdir(newDir) {
 }
 
 function deployStyles(stylesRoot, outputRoot, header, compress) {
-    var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif)$/i : /\.(less|css|png|jpg|jpeg|gif)$/i,
+    var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif|svg)$/i : /\.(less|css|png|jpg|jpeg|gif|svg)$/i,
         stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
 
     mkdir(outputRoot);

@@ -1,0 +1,56 @@
+
+        <div id="example" class="k-content">
+            <div id="vertical" style="height: 300px">
+                <div>
+                    <p>
+                        Outer splitter : top pane (resizable and collapsible)
+                    </p>
+                </div>
+                <div>
+                    <div id="horizontal" style="height: 100%; width: 100%;">
+                        <div>
+                            <p>
+                                Inner splitter :: left pane
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Inner splitter :: center pane
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                Inner splitter :: right pane
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <p>
+                        Outer splitter : bottom pane (non-resizable, non-collapsible)
+                    </p>
+                </div>
+            </div>
+
+            <script>
+                $(document).ready(function() {
+                    $("#vertical").kendoSplitter({
+                        orientation: "vertical",
+                        panes: [
+                            { collapsible: true, size: "100px" },
+                            { collapsible: false },
+                            { collapsible: false, resizable: false, size: "20%" }
+                        ]
+                    });
+
+                    $("#horizontal").kendoSplitter({
+                        panes: [
+                            { collapsible: true, size: "150px" },
+                            { collapsible: false },
+                            { collapsible: true, size: "20%" }
+                        ]
+                    });
+                });
+            </script>
+
+        </div>
