@@ -63,9 +63,8 @@
     <Item Type="System.String">Telerik.WebAii.Controls.Html, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
     <Item Type="System.String">Telerik.WebAii.Controls.Xaml, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
     <Item Type="System.String">Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
-    <Item Type="System.String">c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</Item>
     <Item Type="System.String">System.Windows.Forms</Item>
-    <Item Type="System.String">C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</Item>
+    <Item Type="System.String">Telerik.TestingFramework.Controls.KendoUI, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
   </ProjectReferences>
   <ExcludedFiles />
   <DisabledTranslators>

@@ -69,7 +69,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>932bdfa2-62dc-44bd-9197-71da1fde4c99</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b892c19f-568c-403d-b4d4-7a79254024b3</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -104,7 +104,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>11612350-5c0a-4973-bdbe-133a086551ff</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d3c4ea2e-f88a-4937-9977-7f878b2561b8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -197,7 +197,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b4a247e6-7d4b-4959-9b1e-493095717e4a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1c7126ec-99a9-4749-ad87-dfad9a417ba5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -290,7 +290,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>967f0084-62dc-4987-b22d-07aa4a9ea391</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f6d35813-2f6c-456e-9eca-bf8070d86c11</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -373,7 +373,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bfcb8e3a-9cd7-4113-8de2-2dba283e44be</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bce6190f-e174-4191-b20d-361c97947984</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:InvokeEventActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -452,11 +452,11 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>[Append_CodedStep] : @"Invoke 'OnMouseOver' event on 'SecondItemSpan'</d2p1:Description>
+      <d2p1:Description>[Append_CodedStep] : Invoke 'OnMouseOver' event on 'SecondItemSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>Append_CodedStep</d2p1:Id>
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a47b7970-c4e0-422c-8320-0d3174b4cd2c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>fb8ac2d6-46f1-4ee7-b7a3-18219f0dece0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -479,7 +479,6 @@
         <d2p1:Code>
             // Invoke 'OnMouseOver' event on 'SecondItemSpan'
             Pages.API.SubItem2Span.InvokeEvent(ArtOfTest.WebAii.Core.ScriptEventType.OnMouseOver);
-
 </d2p1:Code>
         <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
       </d2p1:Step>
@@ -494,7 +493,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c395d00c-f9b6-4053-a676-64442fa00fc1</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>82692043-5d19-4ea9-bb76-f8203dc45896</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -577,7 +576,7 @@
       <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>1e800ae0-8f47-4209-ba60-16e39003a290</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>dcdd6464-9a74-4f07-93d7-3367d33f3039</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -680,7 +679,7 @@
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{071dc329-c46f-4cc2-b443-47d48192af77}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationFilePath>E:\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{071dc329-c46f-4cc2-b443-47d48192af77}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
@@ -694,7 +693,7 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass>KendoDemosTests.Append</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
@@ -710,5 +709,6 @@
       <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
     </d2p1:KeyValueOfstringstring>
   </VSProperties>
+  <WebKitExecutionDelay>0</WebKitExecutionDelay>
   <WpfAppPath i:nil="true" />
 </WebAiiTest>
