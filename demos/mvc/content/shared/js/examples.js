@@ -116,9 +116,9 @@
                     newLink = doc.createStyleSheet(url);
                 } else {
                     newLink = skinLink.eq(0).clone().attr("href", url);
+                    skinLink.eq(0).before(newLink);
                 }
 
-                newLink.insertBefore(skinLink[0]);
                 skinLink.remove();
 
                 if (extension === ".less") {
