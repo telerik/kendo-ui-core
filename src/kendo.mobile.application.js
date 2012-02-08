@@ -449,9 +449,16 @@
             } else if (element[0]) {
                 callback(that._createView(element));
             } else {
-                $.get(url, function(html) {
-                    callback(that._createRemoteView(url, html));
-                });
+                if (that._xhr) {
+                    that._xhr.abort();
+                }
+
+                that._xhr = $.get(url, function(html) {
+                                callback(that._createRemoteView(url, html));
+                            })
+                            .fail(function() {
+                                that.hideLoading();
+                            });
             }
         },
 
