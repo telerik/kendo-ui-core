@@ -41,6 +41,12 @@
             this.transition.cancel();
         },
 
+        freeze: function(location) {
+            var that = this;
+            that.cancel();
+            that._moveTo(location);
+        },
+
         onEnd: function() {
             var that = this;
             if (that._outOfBounds()) {
@@ -90,8 +96,11 @@
             var that = this,
                 boundary = that.boundary,
                 snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
+            that._moveTo(snapBack);
+        },
 
-            that.transition.moveTo({ location: snapBack, duration: SNAPBACK_DURATION, ease: Transition.easeOutExpo });
+        _moveTo: function(location) {
+            this.transition.moveTo({ location: location, duration: SNAPBACK_DURATION, ease: Transition.easeOutExpo });
         }
     });
 
@@ -207,9 +216,8 @@
             PULL
         ],
 
-        freeze: function() {
-            this.yinertia.cancel();
-            this.xinertia.cancel();
+        freeze: function(offset) {
+            this.yinertia.freeze(offset);
         },
 
         unfreeze: function() {

@@ -311,7 +311,7 @@
             var that = this;
             that.view = view;
             view.bind("pull", function() {
-                view.scroller.freeze();
+                view.scroller.freeze(200);
                 that.dataSource.read();
             });
         },
@@ -328,9 +328,9 @@
 
             if (dataSource.group()[0]) {
                 that.options.type = "group";
-                that.element.prepend(kendo.render(that.groupTemplate, view));
+                that.element.html(kendo.render(that.groupTemplate, view));
             } else {
-                that.element.prepend(kendo.render(that.template, view));
+                that.element.html(kendo.render(that.template, view));
             }
 
             kendo.mobile.enhance(that.element.children());
