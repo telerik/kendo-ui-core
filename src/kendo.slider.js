@@ -1,66 +1,103 @@
-(function ($, undefined) {
+/**
+ * @fileOverview Provides a Slider and RangeSlider implementation which can be used to display a rich input for
+ * selecting values or ranges of values.
+ */
+
+(function($, undefined) {
     /**
+     *
      * @name kendo.ui.Slider.Description
-     * @section
-     *  <p>
-     *      The Slider widget provides a rich input for selecting values or ranges of values.
-     *      Unlike the plain HTML5 range input, the Slider presents a consistent experience across
-     *      all browsers and has a rich API and event model.
-     *  </p>
-     *  <h3>Getting Started</h3>
-     *  There are two basic types of Sliders:
-     *  <ol>
-     *      <li><strong>Slider</strong>, which presents one thumb and two opposing buttons for selecting a single value</li>
-     *      <li><strong>RangeSlider</strong>, which present two thumbs for defining a range of values</li>
-     *  </ol>
-     *  <h4>Slider</h4>
-     * @exampleTitle Create simple HTML input element
-     * @example
-     *  <input id="slider" />
-     * @exampleTitle Initialize the Slider using a jQuery selector
-     * @example
-     *  $("#slider").kendoSlider();
      *
      * @section
-     *  <h4>RangeSlider</h4>
-     * @exampleTitle Create two simple HTML input elements in a div
-     * @example
-     *  <div id="rangeSlider">
-     *      <input />
-     *      <input />
-     *  </div>
+     * <p>
+     *  The <strong>Slider</strong> provides a rich input for selecting values or ranges of values. Unlike the HTML5
+     *  range input, the <strong>Slider</strong> presents a consistent experience across browsers and features a rich
+     *  API and event model.
+     * </p>
+     * <h3>Getting Started</h3>
+     * <p>There are two types of <strong>Slider</strong>:</p>
+     * <ol>
+     *  <li><strong>Slider</strong>, which presents one thumb and two opposing buttons for selecting a single value</li>
+     *  <li><strong>RangeSlider</strong>, which present two thumbs for defining a range of values</li>
+     * </ol>
+     * <h4>Slider</h4>
      *
-     * @exampleTitle Initialize the RangeSlider using a jQuery selector targeting the div
+     * @exampleTitle Create an input element
      * @example
-     *  $("#rangeSlider").kendoRangeSlider();
+     * <input id="slider" />
      *
      * @section
-     *  <p>
-     *      The RangeSlider requires two inputs to capture both ends of the value range. This
-     *      benefits scenarios where JavaScript is disabled, in which case users will be presented
-     *      with two inputs, still allowing them to input a valid range.
-     *  </p>
+     * <p>
+     *  Initialization of a <strong>Slider</strong> should occur after the DOM is fully loaded. It is recommended that
+     *  initialization the <strong>Slider</strong> occur within a handler is provided to $(document).ready().
+     * </p>
      *
-     *  <h3>Customizing Slider Behavior</h3>
-     *  Many facets of the Slider and RangeSlider behavior can be configured via simple properties, including:
-     *  <ul>
-     *      <li>Min/Max values</li>
-     *      <li>Orientation (horizontal or vertical)</li>
-     *      <li>Small/Large step</li>
-     *      <li>Tooltip format/placement</li>
-     *  </ul>
-     *  <p>
-     *      To see a full list of available properties and values, review the Slider Configuration API documentation tab.
-     *  </p>
-     * @exampleTitle Customizing Slider default settings
+     * @exampleTitle Initialize a Slider using a selector within $(document).ready()
      * @example
-     *  $("#slider").kendoSlider({
-     *      min:10,
-     *      max:50,
-     *      orientation: "vertical",
-     *      smallStep: 1,
-     *      largeStep: 10
-     *  });
+     * $(document).ready(function() {
+     *     $("#slider").kendoSlider();
+     * });
+     *
+     * @section
+     * <h4>RangeSlider</h4>
+     * @exampleTitle Create two HTML input elements in a div
+     * @example
+     * <div id="rangeSlider">
+     *     <input />
+     *     <input />
+     * </div>
+     *
+     * @section
+     * <p>
+     *  Initialization of a <strong>RangeSlider</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>RangeSlider</strong> occur within a handler is provided to $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize a RangeSlider using a selector within $(document).ready()
+     * @example
+     * $(document).ready(function() {
+     *     $("#rangeSlider").kendoRangeSlider();
+     * });
+     *
+     * @section
+     * <p>
+     *  The <strong>RangeSlider</strong> requires two inputs to capture both ends of the value range. This benefits
+     *  scenarios where JavaScript is disabled, in which case users will be presented with two inputs, still allowing
+     *  them to input a valid range.
+     * </p>
+     * <h3>Customizing Slider Behaviors</h3>
+     * <p>
+     *  Many facets of the <strong>Slider</strong> and <strong>RangeSlider</strong> behavior can be configured through
+     *  properties, including:
+     * </p>
+     * <ul>
+     *  <li>Minimum and/or maximum values</li>
+     *  <li>Orientation (horizontal or vertical)</li>
+     *  <li>Small or large step</li>
+     *  <li>Tooltip format/placement</li>
+     * </ul>
+     *
+     * @exampleTitle Initialize a Slider and its properties
+     * @example
+     * $("#slider").kendoSlider({
+     *     min: 10,
+     *     max: 50,
+     *     orientation: "vertical",
+     *     smallStep: 1,
+     *     largeStep: 10
+     * });
+     *
+     * @section
+     * <h3>Accessing an Existing Slider</h3>
+     * <p>
+     *  You can reference an existing <strong>Slider</strong> instance via
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
+     *  use the API to control its behavior.
+     * </p>
+     *
+     * @exampleTitle Accessing an existing Slider instance
+     * @example
+     * var slider = $("#slider").data("kendoSlider");
      *
      */
     var kendo = window.kendo,
@@ -139,36 +176,33 @@
 
             that.bind([
                 /**
-                 * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
-                 * @name kendo.ui.Slider#change
-                 * @event
-                 * @param {Event} e
-                 * @param {Number} e.value Represents the updated value of the slider.
-                 */
-
-                /**
-                 * Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
+                 *
+                 * Triggered when the value of a <strong>RangeSlider</strong> is changed as the result of selecting a
+                 * new value with one of the drag handles or the keyboard.
+                 *
                  * @name kendo.ui.RangeSlider#change
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Number} e.values Represents the updated array of values of the first and second drag handle.
+                 *
+                 * @param {Array} e.values
+                 * An array of values of the first and second drag handle.
+                 *
                  */
                 CHANGE,
 
                 /**
-                 * Fires when the user drags the drag handle to a new position.
-                 * @name kendo.ui.Slider#slide
-                 * @event
-                 * @param {Event} e
-                 * @param {Number} e.value Represents the value from the current position of the drag handle.
-                 */
-
-                /**
-                 * Fires when the user drags the drag handle to a new position.
+                 *
+                 * Triggered when a user moves the drag handle of a <strong>RangeSlider</strong> to a new position.
+                 *
                  * @name kendo.ui.RangeSlider#slide
                  * @event
+                 *
                  * @param {Event} e
-                 * @param {Number} e.values Represents an array of values of the current positions of the first and second drag handle.
+                 *
+                 * @param {Array} e.values
+                 * An array of values of the current positions of the first and second drag handle.
+                 *
                  */
                 SLIDE], options);
         },
@@ -503,55 +537,88 @@
 
     var Slider = SliderBase.extend(/** @lends kendo.ui.Slider.prototype */{
         /**
+         *
+         * Creates a Slider instance.
+         *
          * @constructs
          * @extends kendo.ui.Widget
+         *
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Boolean} [enabled] <true> Can be used to enable/disable the slider.
-         * @option {Number} [min] <0> The minimum value of the slider.
-         * @option {Number} [max] <10> The maximum value of the slider.
-         * @option {Boolean} [showButtons] <true> Can be used to show or hide the slider increase and decrease buttons. The buttons are used to increase or decrease the value. They are not available in the RangeSlider.
-         * @option {Object} [tooltip] Confituration of the slider tooltip.
-         * @option {Boolean} [tooltip.enabled] <true> Can be used to enable/disable the tooltip.
-         * @option {String} [tooltip.format] <"{0}"> Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the slider tick labels.
-         * @option {Number} [value] <0> The value of the slider.
-         * @option {String} [orientation] <"horizontal"> The orientation of the slider. Available options are "horizontal" and "vertical".
-         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
-         *     <dl>
+         *
+         * @option {Boolean} [enabled] <true>
+         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) the <strong>Slider</strong>. This
+         * option can be specified during initialization.
+         *
+         * @option {Number} [min] <0>
+         * The minimum value of the <strong>Slider</strong>.
+         *
+         * @option {Number} [max] <10>
+         * The maximum value of the <strong>Slider</strong>.
+         *
+         * @option {Boolean} [showButtons] <true>
+         * Can be used to show (<b>true</b>) or hide (<b>false</b>) the
+         * increase and decrease buttons of a <strong>Slider</strong>.
+         *
+         * @option {Object} [tooltip]
+         * Configuration of the <strong>Slider</strong> tooltip.
+         *
+         * @option {Boolean} [tooltip.enabled] <true>
+         * Disables (<b>false</b>) or enables (<b>true</b>) the tooltip of
+         * the <strong>Slider</strong>.
+         *
+         * @option {String} [tooltip.format] <"{0}">
+         * Format string for the text of the tooltip. Note: The applied
+         * format will also influence the appearance of the <strong>Slider</strong>
+         * tick labels.
+         *
+         * @option {Number} [value] <0>
+         * The underlying value of the <strong>Slider</strong>.
+         *
+         * @option {String} [orientation] <"horizontal">
+         * The orientation of a <strong>Slider</strong>; <strong>"horizontal"</strong> or <strong>"vertical"</strong>.
+         *
+         * @option {String} [tickPlacement] <"both">
+         * Denotes the location of the tick marks in the <strong>Slider</strong>. The available options are:
+         * <div class="details-list">
+         *    <dl>
          *         <dt>
-         *              "topLeft"
+         *              <code>"topLeft"</code>
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the top of the horizontal widget or on the left of the vertical widget.
+         *              Tick marks are located on the top of the horizontal widget or on the left of
+         *   the vertical widget.
          *         </dd>
          *         <dt>
-         *              "bottomRight"
+         *              <code>"bottomRight"</code>
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the bottom of the horizontal widget or on the right side of the vertical widget.
+         *             Tick marks are located on the bottom of the horizontal widget or on the
+         *   right side of the vertical widget.
          *         </dd>
          *         <dt>
-         *              "both"
+         *              <code>"both"</code>
          *         </dt>
          *         <dd>
-         *              Tick marks are located on both sides of the widget.
+         *             Tick marks are located on both sides of the widget.
          *         </dd>
-         *     </dl>
-         * @option {Number} [smallStep] <1> The small step of the slider. The Value will be changed with SmallStep when the end user:
-         *     <ul>
-         *         <li>
-         *             clicks on the Slider buttons
-         *         </li>
-         *         <li>
-         *             presses the arrow keys (the drag handle must be focused)
-         *         </li>
-         *         <li>
-         *             drag the drag handle
-         *         </li>
-         *     </ul>
-         * @option {Number} [largeStep] <5> The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused). Note that the allied largeStep will also set large tick for every large step.
-         * @option {String} [increaseButtonTitle] <"Increase"> The title of the increase button of the slider.
-         * @option {String} [decreaseButtonTitle] <"Decrease"> The title of the decrease button of the slider.
+         *    </dl>
+         * </div>
+         * @option {Number} [smallStep] <1>
+         * The small step value of the <strong>Slider</strong>. The underlying value will be changed when the end user
+         * (1) clicks on the increase or decrease buttons of the <strong>Slider</strong>, (2) presses the arrow keys
+         * (the drag handle must be focused), or (3) drags the drag handle.
+         *
+         * @option {Number} [largeStep] <5>
+         * The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
+         * handle must be focused). Note: The allied largeStep will also set large tick for every large step.
+         *
+         * @option {String} [increaseButtonTitle] <"Increase">
+         * The title of the increase button of the <strong>Slider</strong>.
+         *
+         * @option {String} [decreaseButtonTitle] <"Decrease">
+         * The title of the decrease button of the <strong>Slider</strong>.
+         *
          */
         init: function(element, options) {
             var that = this,
@@ -585,12 +652,13 @@
         },
 
         /**
-         * Enables the slider.
+         *
+         * Enables a <strong>Slider</strong> for handling user interactions (i.e. mouse click).
+         *
          * @example
          * var slider = $("#slider").data("kendoSlider");
-         *
-         * // enables the slider
          * slider.enable();
+         *
          */
         enable: function () {
             var that = this,
@@ -675,12 +743,13 @@
         },
 
         /**
-         * Disables the slider.
+         *
+         * Disables a <strong>Slider</strong> from handling user interactions (i.e. mouse click).
+         *
          * @example
          * var slider = $("#slider").data("kendoSlider");
-         *
-         * // disables the slider
          * slider.disable();
+         *
          */
         disable: function () {
             var that = this;
@@ -727,13 +796,17 @@
         },
 
         /**
-         * The value method gets or sets the value of the slider.
-         * The value method accepts a {String} or a {Number} as parameters, and returns a {Nubmer}.
+         *
+         * Gets or sets the value of a <strong>Slider</strong>. It accepts a string or number as parameters and returns
+         * a number representing the underlying value.
+         *
+         * @param {String} [value]
+         * The value to be set for a Slider.
+         *
          * @example
          * var slider = $("#slider").data("kendoSlider");
+         * var sliderValue = slider.value();
          *
-         * // Get or sets the value of the slider
-         * slider.value();
          */
         value: function (value) {
             var that = this,
@@ -1011,59 +1084,83 @@
 
     kendo.ui.plugin(Slider);
 
-    //
-    // RangeSlider
-    //
-
     var RangeSlider = SliderBase.extend(/** @lends kendo.ui.RangeSlider.prototype */{
         /**
+         *
+         * Creates a RangeSlider instance.
+         *
          * @constructs
          * @extends kendo.ui.Widget
+         *
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
-         * @option {Boolean} [enabled] <true> Can be used to enable/disable the rangeSlider.
-         * @option {Number} [min] <0> The minimum value of the rangeSlider.
-         * @option {Number} [max] <10> The maximum value of the rangeSlider.
-         * @option {Object} [tooltip] Confituration of the Rangelider tooltip.
-         * @option {Boolean} [tooltip.enabled] <true> Can be used to enable/disable the tooltip.
-         * @option {String} [tooltip.format] <"{0}"> Can be used to formatting of the text of the tooltip. Note that the applied format will also influence the appearance of the rangeSlider tick labels.
-         * @option {Number} [selectionStart] <0> The selection start value of the rangeSlider.
-         * @option {Number} [selectionEnd] <10> The selection end value of the rangeSlider.
-         * @option {String} [orientation] <"horizontal"> The orientation of the rangeSlider. Available options are "horizontal" and "vertical".
-         * @option {String} [tickPlacement] <"both"> the location of the tick marks in the widget. Available options are:
-         *     <dl>
+         *
+         * @option {Boolean} [enabled] <true>
+         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) the <strong>RangeSlider</strong>. This
+         * option can be specified during initialization.
+         *
+         * @option {Number} [min] <0>
+         * The minimum value of the <strong>RangeSlider</strong>.
+         *
+         * @option {Number} [max] <10>
+         * The maximum value of the <strong>RangeSlider</strong>.
+         *
+         * @option {Object} [tooltip]
+         * Configuration of the <strong>RangeSlider</strong> tooltip.
+         *
+         * @option {Boolean} [tooltip.enabled] <true>
+         * Disables (<b>false</b>) or enables (<b>true</b>) the tooltip of the <strong>RangeSlider</strong>.
+         *
+         * @option {String} [tooltip.format] <"{0}">
+         * Format string for the text of the tooltip. Note: The applied format will also influence the appearance of
+         * the <strong>RangeSlider</strong> tick labels.
+         *
+         * @option {String} [orientation] <"horizontal">
+         * The orientation of a <strong>RangeSlider</strong>; <strong>"horizontal"</strong> or
+         * <strong>"vertical"</strong>.
+         *
+         * @option {String} [tickPlacement] <"both">
+         * Denotes the location of the tick marks in the <strong>RangeSlider</strong>. The available options are:
+         * <div class="details-list">
+         *    <dl>
          *         <dt>
-         *              "topLeft"
+         *              <code>"topLeft"</code>
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the top of the horizontal widget or on the left of the vertical widget.
+         *              Tick marks are located on the top of the horizontal widget or on the left of
+         *   the vertical widget.
          *         </dd>
          *         <dt>
-         *              "bottomRight"
+         *              <code>"bottomRight"</code>
          *         </dt>
          *         <dd>
-         *              Tick marks are located on the bottom of the horizontal widget or on the right side of the vertical widget.
+         *             Tick marks are located on the bottom of the horizontal widget or on the
+         *   right side of the vertical widget.
          *         </dd>
          *         <dt>
-         *              "both"
+         *              <code>"both"</code>
          *         </dt>
          *         <dd>
-         *              Tick marks are located on both sides of the widget.
+         *             Tick marks are located on both sides of the widget.
          *         </dd>
-         *     </dl>
-         * @option {Number} [smallStep] <1> The small step of the rangeSlider. The Value will be changed with SmallStep when the end user:
-         *     <ul>
-         *         <li>
-         *             clicks on the Slider buttons
-         *         </li>
-         *         <li>
-         *             presses the arrow keys (the drag handle must be focused)
-         *         </li>
-         *         <li>
-         *             drag the drag handle
-         *         </li>
-         *     </ul>
-         * @option {Number} [largeStep] <5> The delta with which the value will change when the user presses the Page Up or Page Down key (the drag handle must be focused). Note that the allied largeStep will also set large ticks for every large step.
+         *    </dl>
+         * </div>
+         *
+         * @option {Number} [smallStep] <1>
+         * The small step value of the <strong>RangeSlider</strong>. The underlying value will be changed when the end
+         * user (1) clicks on the increase or decrease buttons of the <strong>RangeSlider</strong>, (2) presses the
+         * arrow keys (the drag handle must be focused), or (3) drags the drag handle.
+         *
+         * @option {Number} [largeStep] <5>
+         * The delta with which the value will change when the user presses the Page Up or Page Down key (the drag
+         * handle must be focused). Note: The allied largeStep will also set large tick for every large step.
+         *
+         * @option {Number} [selectionStart] <0>
+         * The selection start value of the <strong>RangeSlider</strong>.
+         *
+         * @option {Number} [selectionEnd] <10>
+         * The selection end value of the <strong>RangeSlider</strong>.
+         *
          */
         init: function(element, options) {
             var that = this,
@@ -1104,12 +1201,13 @@
         },
 
         /**
-         * Enables the rangeSlider.
+         *
+         * Enables a <strong>RangeSlider</strong> for handling user interactions (i.e. mouse click).
+         *
          * @example
          * var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
-         *
-         * // enables the rangeSlider
          * rangeSlider.enable();
+         *
          */
         enable: function () {
             var that = this,
@@ -1175,12 +1273,13 @@
         },
 
         /**
-         * Disables the rangeSlider.
+         *
+         * Disables a <strong>RangeSlider</strong> from handling user interactions (i.e. mouse click).
+         *
          * @example
          * var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
-         *
-         * // disables the rangeSlider
          * rangeSlider.disable();
+         *
          */
         disable: function () {
             var that = this,
@@ -1244,12 +1343,15 @@
         },
 
         /**
-         * The values method gets or sets the selection start and end of the RangeSlider. The values method accepts {String}, {Number} or {Array} object as parameters, and returns a {Array} object with start and end selection values.
+         *
+         * The value method gets or sets the start and end selection values of the <strong>RangeSlider</strong>. It
+         * accepts a string, a number, or an array as parameters, and returns an object array with the start and end
+         * selection values.
+         *
          * @example
          * var rangeSider = $("#rangeSlider").data("kendoRangeSlider");
-         *
-         * // Get or sets the selection start and end of the rangeSlider
          * rangeSlider.values();
+         *
          */
         values: function () {
             var that = this,
