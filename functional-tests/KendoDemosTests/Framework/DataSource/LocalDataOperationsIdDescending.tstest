@@ -23,7 +23,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ef9714b1-2fff-4f82-b9ff-f4a265c4be8e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>58990c81-e605-45ed-b4a4-cd7943c82c58</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +58,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>d6aa2613-cdb5-44f7-a0cd-974a930f2047</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1a87a37f-77ca-42b2-ae74-5baaf4735e6c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -141,7 +141,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>00bb4b5f-acde-444f-8afc-64883c95e48a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0934e533-46f3-4632-8a6e-9ea4246aedca</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -224,7 +224,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a53abbca-3139-4565-9274-001c0c55c0e3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7b2eadd5-7260-4e6c-bd18-7d1d0270cd80</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -307,7 +307,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>6d8cc4bb-97a2-4152-b351-a29bf8984713</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1c38bbfe-e3e9-4d81-a3a3-84704f0c671b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -378,6 +378,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
         <d2p1:ExpectedString>500</d2p1:ExpectedString>
@@ -394,7 +395,7 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e6a126e7-d084-4ca5-bf42-590c991111fd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>94e44531-5820-4413-b55c-b26398d5aeb4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -465,6 +466,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <d2p1:CheckInterval>500</d2p1:CheckInterval>
         <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
         <d2p1:ExpectedString>491</d2p1:ExpectedString>
@@ -501,7 +503,7 @@
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{b79fc1a9-a440-428f-800b-fab81887b1a4}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationFilePath>E:\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{b79fc1a9-a440-428f-800b-fab81887b1a4}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
@@ -515,11 +517,13 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
   <UniqueId>b79fc1a9-a440-428f-800b-fab81887b1a4</UniqueId>
+  <UseDefaultWpfAppPath>false</UseDefaultWpfAppPath>
   <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <WebKitExecutionDelay>0</WebKitExecutionDelay>
   <WpfAppPath i:nil="true" />
 </WebAiiTest>

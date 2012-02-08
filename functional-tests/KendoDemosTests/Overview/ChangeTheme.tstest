@@ -28,7 +28,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>bcae9946-c64a-445b-a1d0-59ab322c382a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>660ddcd6-dfe4-4330-8948-dd2d56de1626</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -65,7 +65,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>c0f6547e-19f0-47bb-a884-32402455a910</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f0ef8074-2db4-48cf-b8a7-e71e77d7252c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -152,7 +152,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>cf73ff7f-97ab-4ecf-a316-ea10ae68d542</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f0f8869b-1958-4f1c-be3f-b18a9fcf4f4d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -233,13 +233,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Verify attribute 'fill' has 'Contains' value of '#3d3d3d' on 'PathTag'</d2p1:Description>
+      <d2p1:Description>Wait for attribute 'fill' has 'Contains' value of '#3d3d3d' on 'PathTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>0177a86c-ca07-4acd-9c9e-8ea506d8d15e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1c19097b-ebe6-4a73-b00a-e711781f36e4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -306,7 +306,7 @@
         <d2p1:LogMessageOnFailure />
         <d2p1:Pause>None</d2p1:Pause>
         <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Verification</d2p1:StepType>
+        <d2p1:StepType>Wait</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
@@ -331,7 +331,7 @@
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>2657364c-5bb7-462b-ab06-e4af52c80cb2</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>140631cd-d036-4555-bb80-7f429b5f5c9f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -423,9 +423,7 @@
     <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
-    <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
   </CurrentReferences>
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
@@ -440,10 +438,10 @@
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{29423297-e6a4-4ecf-abf2-66972d57470c}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationFilePath>E:\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{29423297-e6a4-4ecf-abf2-66972d57470c}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <ProfilerResultsDirectory i:nil="true" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
   <ResourceFilePath>Overview\ChangeTheme.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
@@ -454,7 +452,7 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly />
-  <TestAssemblyPath />
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>

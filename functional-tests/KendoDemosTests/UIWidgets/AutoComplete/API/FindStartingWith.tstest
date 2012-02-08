@@ -61,50 +61,20 @@
     </ElementDescriptor>
   </IndependentDescriptors>
   <Name>FindStartingWith</Name>
+  <QcFilePath i:nil="true" />
+  <QcId>0</QcId>
+  <QcTestVersionStamp>0</QcTestVersionStamp>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/web/autocomplete/api.html'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>04ca57f9-41d4-487a-b0f9-54b1cc8654f4</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/web/autocomplete/api.html</d2p1:NavigateURL>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FindStartingWithexa5zygf.ljv</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Enter text 'Red' in 'WordText'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>84e2ec4d-3314-486e-9aaf-07ff96833257</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>1</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>11dfabbd-4899-4e9a-af62-2c38238904dc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -196,8 +166,10 @@
       <d2p1:Description>Click 'SearchButtonTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>94ef2c49-ec4a-4255-a9c5-0718c4c9f66c</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>2</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>e3992041-bae3-4945-b45e-0dd7c4634ab5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -279,8 +251,10 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' 'Red' on 'RedListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>e05c8985-bc59-4c83-9623-5668823942e2</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>9e16f5e0-35e3-443d-a580-1fb75f9d7d63</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -367,8 +341,10 @@
       <d2p1:Description>Click 'RedListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c9bc9290-aa55-43a4-8dee-4791eb01bf16</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>24dda6c6-4f3a-4912-8cd4-fc9ba54a577d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -450,8 +426,10 @@
       <d2p1:Description>Wait for input 'ProductsText' value 'Exact' 'Red'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0afc169d-0f84-4e02-933f-e7a0a7b38722</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>769de26c-d60f-457e-b534-63b141d9b497</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputValueVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -573,7 +551,7 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\bin</TestAssemblyPath>
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass>KendoDemosTests.FindStartingWith</TestClass>
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
@@ -589,5 +567,6 @@
       <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
     </d2p1:KeyValueOfstringstring>
   </VSProperties>
+  <WebKitExecutionDelay>0</WebKitExecutionDelay>
   <WpfAppPath i:nil="true" />
 </WebAiiTest>
