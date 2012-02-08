@@ -101,6 +101,17 @@
 
                 equal($.trim(dom.data("kendoGrid").tbody.find("tr:not(.k-grouping-row):first > td:not(.k-group-cell):first").html()), '<strong data-text="text">bar</strong>');
             });
+
+            test("destroys binding targets when datasource changes", function() {
+                var dom = $('<div data-role="grid" data-template="template-with-attributes" data-source="items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoGrid").refresh();
+
+                equal(observable.items[0]._events["change"].length, 2); //1 for the text and 1 because the observable array tracks its items
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

@@ -2242,11 +2242,14 @@
             }
 
             that.element.data("kendo" + that.options.name, that);
+        },
+
+        setOptions: function() {
         }
     });
 
     kendo.notify = noop;
-    kendo.binders = {};
+    kendo.roles = {};
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
@@ -2275,6 +2278,8 @@
             prefix = prefix || "";
 
             register[name] = widget;
+
+            kendo.roles[name.toLowerCase()] = widget;
 
             name = "kendo" + prefix + name;
             // expose a jQuery plugin
