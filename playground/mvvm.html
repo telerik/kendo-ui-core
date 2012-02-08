@@ -154,6 +154,15 @@ var viewModel = {
 &lt;select data-bind="textfield: name, valuefield: id, source: products, value: selectedProduct"&gt;
 &lt;/select&gt;
 The select value as JSON is &lt;span data-bind="text: selectedProductAsJson">&lt;/span&gt;
+&lt;script&gt;
+var viewModel = {
+    products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+    selectedProduct: null,
+    selectedProductAsJson: function() {
+        return kendo.stringify(this.get("selectedProduct"));
+    }
+};
+&lt;/script&gt;
 </pre>
                     </td>
                     <td>
