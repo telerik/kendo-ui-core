@@ -4755,19 +4755,21 @@
 
         createAxes: function() {
             var plotArea = this,
-                options = plotArea.options;
+                options = plotArea.options,
+                xAxesOptions = [].concat(options.xAxis),
+                yAxesOptions = [].concat(options.yAxis);
 
-            each([].concat(options.xAxis), function() {
+            each(xAxesOptions, function() {
                 plotArea.createXYAxis(this, false);
             });
 
-            each([].concat(options.yAxis), function() {
+            each(yAxesOptions, function() {
                 plotArea.createXYAxis(this, true);
             });
 
             // TODO: Remove axisX and axisY aliases
-            plotArea.axisX = plotArea.namedXAxes.primary;
-            plotArea.axisY = plotArea.namedYAxes.primary;
+            plotArea.axisX = plotArea.namedXAxes.primary || plotArea.namedXAxes[xAxesOptions[0].name];
+            plotArea.axisY = plotArea.namedYAxes.primary || plotArea.namedYAxes[yAxesOptions[0].name];
         }
     });
 

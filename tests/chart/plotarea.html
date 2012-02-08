@@ -963,6 +963,22 @@
                     );
                 });
 
+                test("assigns axisX alias to first named X axis", function() {
+                    createPlotArea(scatterSeriesData, {
+                        xAxis: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.axisX.options.name, "a");
+                });
+
+                test("assigns axisY alias to first named Y axis", function() {
+                    createPlotArea(scatterSeriesData, {
+                        yAxis: [{ name: "a" }, { name: "b" }]
+                    });
+
+                    equals(plotArea.axisY.options.name, "a");
+                });
+
                 // ------------------------------------------------------------
                 module("XY PlotArea / Multiple Axes", {
                     setup: function() {
