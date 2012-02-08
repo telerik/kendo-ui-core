@@ -100,7 +100,7 @@
 
         configuration: function() {
             return {
-                options: ["valueField", "template"],
+                options: ["textField", "valueField", "template"],
                 properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"]
             };
         },
@@ -209,7 +209,7 @@
 
         setOptions: function(options) {
             if (options.valueField && !options.template) {
-                options.template = kendo.template(kendo.format('<option value="#:{0}#">#:{0}#</option>', options.valueField));
+                options.template = kendo.template(kendo.format('<option value="#:{0}#">#:{1}#</option>', options.valueField, options.textField || options.valueField));
             }
 
             BindingTarget.fn.setOptions.call(this, options);

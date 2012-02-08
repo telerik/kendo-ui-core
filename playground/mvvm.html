@@ -2,10 +2,9 @@
 <html>
     <head>
         <title>MVVM</title>
-
-
         <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
         <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
 
         <script src="../demos/mvc/content/shared/js/less.js"></script>
 
@@ -16,635 +15,180 @@
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
-
-        <script>
-            var Class = kendo.Class,
-                Observable = kendo.Observable;
-var
-        CHANGE = "change",
-        GET = "get",
-        SET = "set",
-        push = [].push,
-        join = [].join,
-        pop = [].pop,
-        splice = [].splice,
-        slice = [].slice,
-        unshift = [].unshift,
-        toString = {}.toString;
-
-    function set(object, field, value) {
-        return kendo.setter(field)(object, value);
-    }
-
-    function get(object, field, call) {
-        var result;
-
-        if (field === "this") {
-            result = object;
-        } else {
-            result = kendo.getter(field, true)(object);
-
-            if (call && typeof result === "function") {
-                result = result.call(object);
-            }
-        }
-
-        return result;
-    }
-
-    var ObservableArray = Observable.extend({
-        init: function(array, type) {
-            var that = this,
-                member,
-                idx;
-
-            type = type || ObservableObject;
-
-            Observable.fn.init.call(that);
-
-            that.length = array.length;
-
-            for (idx = 0; idx < that.length; idx++) {
-                member = array[idx];
-
-                if ($.isPlainObject(member)) {
-                    member = new type(member);
-
-                    member.bind(CHANGE, function(e) {
-                        if (!e.isPropagationStopped()) {
-                            that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" });
-                        }
-                    });
-                }
-
-                that[idx] = member;
-            }
-        },
-
-        push: function() {
-            var index = this.length,
-                items = arguments,
-                result;
-
-            result = push.apply(this, items);
-
-            this.trigger(CHANGE, {
-                action: "add",
-                index: index,
-                items: items
-            });
-
-            return result;
-        },
-
-        slice: slice,
-
-        join: join,
-
-        pop: pop,
-
-        splice: function(index, howMany, item) {
-            var result = splice.apply(this, arguments);
-
-            if (result.length) {
-                this.trigger(CHANGE, {
-                    action: "remove",
-                    index: index,
-                    items: result
-                });
+        <script src="../demos/mvc/content/shared/js/prettify.js"></script>
+        <style>
+            table {
+                table-layout: fixed;
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
             }
 
-            if (item) {
-                this.trigger(CHANGE, {
-                    action: "add",
-                    index: index,
-                    items: slice.call(arguments, 2)
-                });
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
             }
-            return result;
-        },
-
-        unshift: function() {
-            var index = this.length,
-                items = arguments,
-                result;
-
-            result = unshift.apply(this, items);
-
-            this.trigger(CHANGE, {
-                action: "add",
-                index: 0,
-                items: items
-            });
-
-            return result;
-        },
-
-        indexOf: function(item) {
-            var that = this,
-                idx,
-                length;
-
-            for (idx = 0, length = that.length; idx < length; idx++) {
-                if (that[idx] === item) {
-                    return idx;
-                }
+            .prettyprint {
+                font-size: 1.2em;
             }
-            return -1;
-        }
-    });
-
-    var ObservableObject = Observable.extend({
-        init: function(value) {
-            var that = this,
-                member,
-                field,
-                type;
-
-            Observable.fn.init.call(this);
-
-            for (field in value) {
-                member = value[field];
-                type = toString.call(member);
-
-                if (type === "[object Object]") {
-                    member = new ObservableObject(member);
-
-                    (function(field) {
-                        member.bind(GET, function(e) {
-                            e.field = field + "." + e.field;
-                            that.trigger(GET, e);
-                        });
-
-                        member.bind(CHANGE, function(e) {
-                            e.field = field + "." + e.field;
-                            that.trigger(CHANGE, e);
-                        });
-                    })(field);
-                } else if (type === "[object Array]") {
-                    member = new ObservableArray(member);
-                }
-
-                that[field] = member;
-            }
-        },
-
-        shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function";
-        },
-
-        toJSON: function() {
-            var result = {}, field;
-
-            for (field in this) {
-                if (this.shouldSerialize(field)) {
-                    result[field] = this[field];
-                }
-            }
-
-            return result;
-        },
-
-        get: function(field) {
-            this.trigger(GET, { field: field });
-
-            return get(this, field);
-        },
-
-        set: function(field, value, initiator) {
-            var current = this[field], stopped = false;
-
-            if (current != value) {
-                if (!this.trigger("set", { field: field, value: value })) {
-                    set(this, field, value);
-
-                    this.trigger(CHANGE, {
-                        field: field,
-                        initiator: initiator,
-                        stopPropagation: function() {
-                            stopped = true;
-                        },
-                        isPropagationStopped: function() {
-                            return stopped;
-                        }
-                    });
-                }
-            }
-        }
-    });
-            var Binding = Observable.extend( {
-                init: function(source, path) {
-                    var that = this;
-
-                    Observable.fn.init.call(that);
-
-                    that.source = source;
-                    that.path = path;
-
-                    if (path != "this") {
-                        that.source.bind("change", function(e) {
-                            if (that.path.indexOf(e.field) >= 0) {
-                                that.change();
-                            }
-                        });
-                    }
-                },
-
-                change: function() {
-                    this.trigger("change");
-                },
-
-                get: function() {
-                    if (this.path == "this") {
-                        return this.source;
-                    }
-                    return this.source.get(this.path);
-                },
-
-                set: function(value) {
-                    this.source.set(this.path, value);
-                }
-            });
-
-            var BindingTarget = Class.extend( {
-                init: function(target) {
-                    this.target = target;
-                },
-
-                setTemplate: function(binding, template) {
-                    var property = new TemplateProperty(this.target, template);
-                    var expression = this.createExpression(property, binding);
-                    expression.updateTarget();
-                    binding.bind("change", function() {
-                        expression.updateTarget();
-                    });
-                },
-
-                setBinding: function(path, binding) {
-                    var property = this.createProperty(path);
-
-                    var expression = this.createExpression(property, binding);
-
-                    expression.updateTarget();
-
-                    property.bind("change", function() {
-                        expression.updateSource();
-                    });
-
-                    binding.bind("change", function() {
-                        expression.updateTarget();
-                    });
-                },
-
-                createExpression: function(property, binding) {
-                    return new BindingExpression(property, binding);
-                },
-
-                createProperty: function(path) {
-                    path = {
-                        "text": "innerText",
-                        "title": "title",
-                        "html": "innerHTML",
-                        "value": "value"
-                    }[path] || path;
-
-                    if (path == "value") {
-                        return new TwoWayProperty(this.target, path);
-                    }
-
-                    return new Property(this.target, path);
-                }
-            });
-
-            var SelectBindingTarget = BindingTarget.extend( {
-                init: function(target) {
-                    BindingTarget.fn.init.apply(this, arguments);
-                    this.template = kendo.template("<option>#:data#</option>");
-                },
-
-                setTemplate: function(binding, template) {
-                    this.template = template;
-                },
-
-                createExpression: function(property, binding) {
-                    return new MultipleBindingExpression(property, binding);
-                },
-
-                createProperty: function(path) {
-                    if (path == "value") {
-                        return new MultipleProperty(this.target, path);
-                    } else if (path == "source") {
-                        return new SourceProperty(this.target, path, this.template);
-                    }
-                }
-            });
-
-            var BindingExpression = Class.extend( {
-                init: function(property, binding) {
-                    this.property = property;
-                    this.binding = binding;
-                },
-
-                updateTarget: function() {
-                    this.property.set(this.binding.get());
-                },
-
-                updateSource: function() {
-                    this.binding.set(this.property.get());
-                }
-            });
-
-            var MultipleBindingExpression = BindingExpression.extend( {
-                updateSource: function() {
-                    var source = this.binding.get();
-                    var target = this.property.get();
-
-                    source.splice.apply(source, [0, source.length].concat(target));
-                }
-            });
-
-            var Property = Class.extend( {
-                init: function(target, path) {
-                    this.target = target;
-                    this.path = path;
-                },
-
-                bind: function() {
-                },
-
-                set: function(value) {
-                    this.target[this.path] = value;
-                }
-            });
-
-            var TemplateProperty = Class.extend( {
-                init: function(target, template) {
-                    this.target = target;
-                    this.template = template;
-                },
-
-                set: function(value) {
-                    var idx;
-
-                    this.target.innerHTML = this.template(value);
-
-                    for (idx = 0; idx < this.target.children.length; idx++) {
-                        bind(this.target.children[idx], value);
-                    }
-                }
-            });
-            var TwoWayProperty = Observable.extend( {
-                init: function(target, path) {
-                    Observable.fn.init.call(this);
-
-                    this.target = target;
-                    this.path = path;
-
-                    $(this.target).bind("change", $.proxy(this.change, this));
-                },
-
-                change: function() {
-                    this.trigger("change");
-                },
-
-                get: function() {
-                    return this.target[this.path];
-                },
-
-                set: function(value) {
-                    this.target[this.path] = value;
-                }
-            });
-
-            var MultipleProperty = TwoWayProperty.extend({
-                get: function() {
-                    var optionIndex, value = [];
-
-                    for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
-                        if (this.target[optionIndex].selected) {
-                            value.push(this.target[optionIndex].value);
-                        }
-                    }
-
-                    return value;
-                },
-
-                set: function(value) {
-                    var valueIndex, optionIndex;
-
-                    for (valueIndex = 0; valueIndex < value.length; valueIndex++) {
-                        for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
-                            if (this.target[optionIndex].value == value[valueIndex]) {
-                                this.target[optionIndex].selected = true;
-                            }
-                        }
-                    }
-                }
-            });
-
-            var SourceProperty = Property.extend({
-                init: function(target, path, template) {
-                    this.target = target;
-                    this.path = path;
-                    this.template = template;
-                },
-
-                set: function(value) {
-                    var that = this;
-
-                    value.bind("change", function(e) {
-                        if (e.action == "add") {
-                            that.add(e.index, e.items);
-                        } else if (e.action == "remove") {
-                            that.remove(e.index, e.items);
-                        }
-                    });
-
-                    this.target.innerHTML = kendo.render(this.template, value);
-                },
-
-                add: function(index, items) {
-                    var idx, length, clone = this.target.cloneNode();
-
-                    clone.innerHTML = kendo.render(this.template, items);
-
-                    for (idx = 0, length = items.length; idx < length; idx++) {
-                        this.target.insertBefore(clone.children[idx], this.target.children[index]);
-                    }
-                },
-
-                remove: function(index, items) {
-                    var idx, length;
-
-                    for (idx = 0, length = items.length; idx < length; idx++) {
-                        this.target.removeChild(this.target.children[index]);
-                    }
-                }
-            });
-
-            var WidgetBindingTarget = BindingTarget.extend( {
-                init: function(target) {
-                    BindingTarget.fn.init.apply(this, arguments);
-                },
-
-                setTemplate: function(binding, template) {
-                    this.target.template = template;
-                },
-
-                createProperty: function(path) {
-                    if (path == "source") {
-                        return new DataSourceWidgetProperty(this.target);
-                    }
-
-                    if (path == "template") {
-                        return new TemplateWidgetProperty(this.target, path, template);
-                    }
-
-                    return new WidgetProperty(this.target, path);
-                }
-            });
-
-            var WidgetProperty = Observable.extend( {
-                init: function(target, path) {
-                    Observable.fn.init.call(this);
-
-                    this.target = target;
-                    this.path = path;
-
-                    this.target.bind("change", $.proxy(this.change, this));
-                },
-
-                change: function() {
-                    this.trigger("change");
-                },
-
-                get: function() {
-                    return this.target[this.path]();
-                },
-
-                set: function(value) {
-                    this.target[this.path](value);
-                }
-            });
-
-            var TemplateWidgetProperty = Class.extend({
-                init: function(target, path, template) {
-                   this.target = target;
-                   this.template = template;
-                },
-
-                bind: function() {
-                },
-
-                set: function(value) {
-                    var target = this.target;
-                    target.template = template;
-                }
-            });
-
-            var DataSourceWidgetProperty = Class.extend({
-                init: function(target) {
-                   this.target = target;
-                },
-
-                bind: function() {
-                },
-
-                set: function(value) {
-                    var widget = this.target;
-
-                    widget.bind("dataBound", function() {
-                        var idx, length, view = widget.dataSource.view();
-                        for (idx = 0, length = view.length; idx < length; idx++) {
-                            bind(widget.ul[0].children[idx], view[idx]);
-                        }
-                    });
-
-                    widget.dataSource.data(value);
-                }
-            });
-
-            function bind(element, source) {
-                var role = element.getAttribute("data-role");
-                var target;
-
-                if (role) {
-                    target = new WidgetBindingTarget(new kendo.ui.DropDownList(element));
-                } else {
-                    target = element.nodeName.toLowerCase() === "select" ? new SelectBindingTarget(element) : new BindingTarget(element);
-                }
-
-                var template = element.getAttribute("data-template");
-
-                if (template) {
-                    var binding = new Binding(source, "");
-
-                    template = kendo.template($("#" + template).html());
-
-                    target.setTemplate(binding, template);
-                }
-
-                ["text", "html", "title", "source", "value"].forEach(function(path) {
-                    var sourcePath = element.getAttribute("data-" + path);
-
-                    if (sourcePath){
-                        var binding = new Binding(source, sourcePath);
-
-                        target.setBinding(path, binding);
-                    }
-                });
-            }
-        </script>
+        </style>
     </head>
     <body>
-        <form>
-            <div data-text="foo" data-title="bar"></div>
+        <table>
+            <col style="width:300px"/>
+            <col/>
+            <col/>
+            <tr>
+                <th>Binding</th>
+                <th>Code</th>
+                <th>Output</th>
+            </th>
+            <tr>
+                <td>Binding the text of html elements</td>
+                <td>
+<pre class="prettyprint">
+&lt;div data-bind="text: textValue"&gt;&lt;/div&gt;
+</pre>
+                </td>
+                <td>
+                    <div data-bind="text: textValue"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Binding the innerHTML of html elements</td>
+                <td>
+<pre class="prettyprint">
+&lt;div data-bind="html: htmlValue"&gt;&lt;/div&gt;
+</pre>
+                </td>
+                <td>
+                    <div data-bind="html: htmlValue"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Binding to a function</td>
+                <td>
+<pre class="prettyprint">
+&lt;div data-bind="html: someHtml"&gt;&lt;/div&gt;
+&lt;script&gt;
+var viewModel = {
+   someHtml: function() {
+        return "&lt;strong&gt;Yay, a function returns me!&lt;/strong&gt;");
+   }
+};
+&lt;/script&gt;
+</pre>
+</td>
+<td>
+    <div data-bind="html: someHtml"></div>
+</td>
+                </tr>
+                <tr>
+                    <td>Setting the template of html elements</td>
+                    <td>
+<pre class="prettyprint">
+&lt;div data-bind="template: div-template"&gt;&lt;/div&gt;
+&lt;script id="div-template" type="text/x-kendo-template"&gt;
+ #: templateExpression # &lt;span data-bind="text: bindingExpression"&gt;&lt;/span&gt;
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <div data-bind="template: div-template"></div>
+                        <script id="div-template" type="text/x-kendo-template">
+                            #: templateExpression # <span data-bind="text: bindingExpression"></span>
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Two-way binding the value of a textbox (also shows click event binding)</td>
+                    <td>
+<pre class="prettyprint">
+&lt;input data-bind="value: inputValue" /&gt;
+The input value is &lt;span data-bind="text: inputValue"&gt;&lt;/span&gt;
+&lt;button data-bind="click: resetInputValue"&gt;Reset the input to its initial value&lt;/button&gt;
+&lt;script&gt;
+var viewModel = {
+    resetInputValue: function() {
+        this.set("inputValue", "Hello");
+    },
+    inputValue: "Hello"
+};
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        Change the value and click outside of the input (to blur it)
+                        <div>
+                            <input data-bind="value: inputValue" />
+                            The input value is "<span data-bind="text: inputValue"></span>"
+                        </div>
+                        <button data-bind="click: resetInputValue">Reset the input to its initial value</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Binding a select</td>
+                    <td>
+<pre class="prettyprint">
+&lt;select data-bind="source: colors, value: selectedColor"&gt;&lt/select&gt;
+The select value is &lt;span data-bind="text: selectedColor">&lt/span&gt;
+&lt;script&gt;
+var viewModel = {
+    colors: ["red", "green", "blue"],
+    selectedColor: "green"
+};
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <select data-bind="source: colors, value: selectedColor"></select>
+                        The select value is <span data-bind="text: selectedColor"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Binding a select to array of complex objects
+                    </td>
+                    <td>
+<pre class="prettyprint">
+&lt;select data-bind="textfield: name, valuefield: id, source: products, value: selectedProduct"&gt;
+&lt;/select&gt;
+The select value as JSON is &lt;span data-bind="text: selectedProductAsJson">&lt;/span&gt;
+</pre>
+                    </td>
+                    <td>
+                        <select data-bind="textfield: name, valuefield: id, source: products, value: selectedProduct"></select>
+                        The select value as JSON is <span data-bind="text: selectedProductAsJson"></span>
+                    </td>
+                </tr>
+            </table>
 
-            <input data-value="baz" />
+            <script>
+                var viewModel = kendo.observable({
+                    textValue: "Sample value for text binding",
+                    htmlValue: "<strong>Sample value for html binding </strong>",
+                    templateExpression: "I was set via template expression - #: #",
+                    bindingExpression: "And I was set via binding expression - data-bind=\"text: bindingExpression\"",
+                    someHtml: function() {
+                        return "<strong>Yay, a function returns me!</strong>";
+                    },
+                    resetInputValue: function() {
+                        this.set("inputValue", "Hello");
+                    },
+                    colors: ["red", "green", "blue"],
+                    selectedColor: "green",
+                    products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+                    selectedProduct: null,
+                    selectedProductAsJson: function() {
+                        return kendo.stringify(this.get("selectedProduct"));
+                    },
+                    inputValue: "Hello"
+                });
 
-            Input value is: <span data-text="baz"></span>
+                viewModel.selectedProduct = viewModel.products[1];
 
-            <select multiple style="display:block" data-value="selectedValues">
-                <option>one</option>
-                <option>two</option>
-                <option>three</option>
-            </select>
-
-            <select data-role="dropdownlist" style="display:block" data-value="selectedValue" data-source="items" data-template="ddl">
-            </select>
-            DropDownList value is: <span id="selectedValue" data-text="selectedValue"></span>
-            <select style="display:block" data-source="items"></select>
-            <div id="html" data-html="baz"></div>
-            <div id="template" data-template="baz"></div>
-        </form>
-
-        <script id="baz" type="text/x-kendo-template">
-            Template: <span data-text="baz"></span>
-        </script>
-
-        <script id="ddl" type="text/x-kendo-template">
-            <li class="k-item" data-text="this"></li>
-        </script>
-
-        <script>
-            var viewModel = new ObservableObject({
-                foo: "foo",
-                bar: "bar",
-                baz: "baz",
-                selectedValues: ["two"],
-                selectedValue: "two",
-                items: ["one", "two", "three"]
-            });
-
-            bind($("div")[0], viewModel);
-            bind($("input")[0], viewModel);
-            bind($("span")[0], viewModel);
-            bind($("select")[0], viewModel);
-            bind($("select")[1], viewModel);
-            bind($("#selectedValue")[0], viewModel);
-            bind($("select")[2], viewModel);
-            bind($("#html")[0], viewModel);
-            bind($("#template")[0], viewModel);
-        </script>
-    </body>
-</html>
+                kendo.bind(document.body.children, viewModel);
+                prettyPrint();
+            </script>
+        </body>
+    </html>
