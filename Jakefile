@@ -241,3 +241,5 @@ function version() {
     var v = JSON.parse(kendoBuild.readText("VERSION"));
     return kendoBuild.buildVersion(v.year, v.release);
 }
+
+// vim:ft=javascript
