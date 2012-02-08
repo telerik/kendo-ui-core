@@ -232,6 +232,15 @@
         /**
          * Validates the input element(s) against the declared validation rules.
          * @returns {Boolean} If all rules are passed successfully.
+	 * @example
+	 * // get a reference to the validatable form
+	 * var validatable = $("#myform").kendoValidator().data("kendoValidator");
+      	 * // check validation on save button click
+	 * $("#save").click(function() {
+         *     if (validatable.validate()) {
+         *         save();
+         *     }
+         * });
          */
         validate: function() {
             var that = this,
@@ -308,6 +317,18 @@
         /**
          * Get the error messages if any.
          * @returns {Array} Messages for the failed validation rules.
+	 * @example
+	 * // get a reference to the validatable form
+	 * var validatable = $("#myform").kendoValidator().data("kendoValidator");
+ 	 * $("#save").click(function() {
+         *     if (validatable.validate() === false) {
+         *         // get the errors and write them out to the "errors" html container
+	 *         var errors = validatable.errors();
+	 *         $(errors).each(function() {
+	 *             $("#errors").html(this);
+	 *         });
+         *     }
+         * });
          */
         errors: function() {
             var results = [],
