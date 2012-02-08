@@ -98,6 +98,13 @@
             $.extend(this.options, options);
         },
 
+        configuration: function() {
+            return {
+                options: ["valueField", "template"],
+                properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"]
+            };
+        },
+
         setBinding: function(path, binding) {
             var property = this.createProperty(path),
                 that = this;
@@ -769,12 +776,37 @@
         }
     }
 
+    function parseBindAttribute(bind) {
+        var idx,
+            length,
+            bindings,
+            key,
+            value,
+            keyValuePair,
+            result = {};
+
+        bindings = bind.split(",");
+
+        for (idx = 0, length = bindings.length; idx < length; idx++) {
+            keyValuePair = bindings[idx].split(":");
+            key = $.trim(keyValuePair[0]);
+            value = $.trim(keyValuePair[1]);
+
+            result[key.toLowerCase()] = value;
+        }
+
+        return result;
+    }
+
     function bindElement(element, source) {
         var role = element.getAttribute("data-role"),
             idx,
             nodeName = element.nodeName.toLowerCase(),
+            bind,
+            configuration,
             deep = true,
             value,
+            bindings,
             options = {},
             option,
             target;
@@ -785,49 +817,57 @@
             target = bindingTargetForRole(role, element);
         }
 
-        if (!target) {
-            if (nodeName == "select") {
-                target = new SelectBindingTarget(element);
-            } else if (nodeName == "table") {
-                target = new TableBindingTarget(element);
-            } else if (nodeName == "ul" || nodeName == "ol") {
-                target = new ListBindingTarget(element);
-            } else {
-                target = new BindingTarget(element);
+        bind = element.getAttribute("data-" + kendo.ns + "bind");
+
+        if (bind) {
+            if (!target) {
+                if (nodeName == "select") {
+                    target = new SelectBindingTarget(element);
+                } else if (nodeName == "table") {
+                    target = new TableBindingTarget(element);
+                } else if (nodeName == "ul" || nodeName == "ol") {
+                    target = new ListBindingTarget(element);
+                } else {
+                    target = new BindingTarget(element);
+                }
             }
+
+            $.data(element, "kendoBindingTarget", target);
+
+            target.source = source;
+
+            bindings = parseBindAttribute(bind);
+
+            configuration = target.configuration();
+            configuration.options.forEach(function(path) {
+                var option = bindings[path.toLowerCase()];
+
+                if (option) {
+                    if (path == "template") {
+                        option =  $("#" + option).html();
+                    }
+                    options[path] = option;
+                }
+            });
+
+            target.setOptions(options);
+
+            configuration.properties.forEach(function(path) {
+                var sourcePath = bindings[path];
+
+                if (sourcePath) {
+                    if (path == "source") {
+                        deep = false;
+                    } else if (path == "template") {
+                        sourcePath = "";
+                    }
+
+                    var binding = new Binding(source, sourcePath);
+
+                    target.setBinding(path, binding);
+                }
+            });
         }
-
-        $.data(element, "kendoBindingTarget", target);
-
-        ["valueField", "template"].forEach(function(path) {
-            var option = element.getAttribute("data-" + path.toLowerCase());
-
-            if (option) {
-                if (path == "template") {
-                    option =  $("#" + option).html();
-                }
-                options[path] = option;
-            }
-        });
-
-        target.setOptions(options);
-
-        ["text", "checked", "template", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"].forEach(function(path) {
-            var sourcePath = element.getAttribute("data-" + path);
-
-            if (sourcePath) {
-                if (path == "source") {
-                    deep = false;
-                } else if (path == "template") {
-                    sourcePath = "";
-                }
-
-                var binding = new Binding(source, sourcePath);
-
-                target.setBinding(path, binding);
-                target.source = source;
-            }
-        });
 
         if (deep) {
             for (idx = 0; idx < element.children.length; idx++) {
