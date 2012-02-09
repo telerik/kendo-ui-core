@@ -17,6 +17,11 @@
         <script src="../src/kendo.dropdownlist.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
+            body {
+                padding: 1em;
+                margin: 1em;
+            }
+
             table {
                 table-layout: fixed;
                 width: 100%;
@@ -37,7 +42,7 @@
         <table>
             <col style="width:300px"/>
             <col/>
-            <col/>
+            <col style="width: 300px"/>
             <tr>
                 <th>Binding</th>
                 <th>Code</th>
@@ -156,7 +161,11 @@ var viewModel = {
 The select value as JSON is &lt;span data-bind="text: selectedProductAsJson">&lt;/span&gt;
 &lt;script&gt;
 var viewModel = {
-    products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+    products: [
+        { name: "Chai", id: 1 },
+        { name: "Chang", id: 2 },
+        { name: "Aniseed Syrup", id: 3 }
+    ],
     selectedProduct: null,
     selectedProductAsJson: function() {
         return kendo.stringify(this.get("selectedProduct"));
@@ -168,6 +177,101 @@ var viewModel = {
                     <td>
                         <select data-bind="textfield: name, valuefield: id, source: products, value: selectedProduct"></select>
                         The select value as JSON is <span data-bind="text: selectedProductAsJson"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Checkbox checked binding and visible binding (example inspired by KnockoutJS)
+                    </td>
+                    <td>
+<pre class="prettyprint">
+&lt;p&gt;Send me spam: &lt;input type="checkbox" data-bind="checked:wantsSpam" /&gt;&lt;/p&gt;
+&lt;div data-bind="visible:wantsSpam"&gt;
+    Preferred flavors of spam:
+    &lt;div&gt;&lt;input type="checkbox" value="monosodium" data-bind="checked:spamFlavors" /&gt;
+    Monosodium Glutamate &lt;/div&gt;
+    &lt;div&gt;&lt;input type="checkbox" value="cherry" data-bind="checked:spamFlavors" /&gt; Cherry&lt;/div&gt;
+    &lt;div&gt;&lt;input type="checkbox" value="almond" data-bind="checked:spamFlavors" /&gt; Almond&lt;/div&gt;
+&lt;/div&gt;
+&lt;fieldset&gt;
+    &lt;legend&gt; Selection&lt;/legend&gt;
+    &lt;div&gt;
+        wantsSpam: &lt;span data-bind="text:wantsSpam"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        spamTypes: &lt;span data-bind="text:selectedFlavors"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    spamFlavors: ["cherry","almond"],
+    wantsSpam: true,
+    selectedFlavors: function() {
+        return this.get("spamFlavors").join(",");
+    }
+});
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p>Send me spam: <input type="checkbox" data-bind="checked:wantsSpam" /></p>
+                        <div data-bind="visible:wantsSpam">
+                            Preferred flavors of spam:
+                            <div><label><input type="checkbox" value="monosodium" data-bind="checked:spamFlavors" /> Monosodium Glutamate</label> </div>
+                            <div><label><input type="checkbox" value="cherry" data-bind="checked:spamFlavors" /> Cherry</label></div>
+                            <div><label><input type="checkbox" value="almond" data-bind="checked:spamFlavors" /> Almond</label></div>
+                        </div>
+                        <fieldset>
+                            <legend> Selection</legend>
+                            <div>
+                                wantsSpam: <span data-bind="text:wantsSpam"></span>
+                            </div>
+                            <div>
+                                spamTypes: <span data-bind="text:selectedFlavors"></span>
+                            </div>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Radio button binding</td>
+                    <td>
+                        <pre class="prettyprint">
+Preferred flavors of spam:
+&lt;div&gt;&lt;label&gt;&lt;input type="radio" name="flavors" value="monosodium" data-bind="checked:radioButtonSpamFlavors" /&gt; Monosodium Glutamate&lt;/label&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label&gt;&lt;input type="radio" name="flavors" value="cherry" data-bind="checked:radioButtonSpamFlavors" /&gt; Cherry&lt;/label&gt;&lt;/div&gt;
+&lt;div&gt;&lt;label&gt;&lt;input type="radio" name="flavors" value="almond" data-bind="checked:radioButtonSpamFlavors" /&gt; Almond&lt;/label&gt;&lt;/div&gt;
+&lt;fieldset&gt;
+    &lt;legend&gt; Selection&lt;/legend&gt;
+    &lt;div&gt;
+        spamTypes: &lt;span data-bind="text:radioButtonSpamFlavors"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    radioButtonSpamFlavors: "cherry"
+});
+&lt;/script&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        Preferred flavors of spam:
+                        <div><label><input type="radio" name="flavors" value="monosodium" data-bind="checked:radioButtonSpamFlavors" /> Monosodium Glutamate</label></div>
+                        <div><label><input type="radio" name="flavors" value="cherry" data-bind="checked:radioButtonSpamFlavors" /> Cherry</label></div>
+                        <div><label><input type="radio" name="flavors" value="almond" data-bind="checked:radioButtonSpamFlavors" /> Almond</label></div>
+                        <fieldset>
+                            <legend> Selection</legend>
+                            <div>
+                                spamTypes: <span data-bind="text:radioButtonSpamFlavors"></span>
+                            </div>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Multiple selection</td>
+                    <td></td>
+                    <td>
+                        <select multiple="multiple" data-bind="source: products, textfield: name, valuefield: id, value: selectedProducts"></select>
+                        Selected products: <span data-bind="text: printSelectedProducts"></span>
                     </td>
                 </tr>
             </table>
@@ -188,10 +292,22 @@ var viewModel = {
                     selectedColor: "green",
                     products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
                     selectedProduct: null,
+                    selectedProducts: [],
                     selectedProductAsJson: function() {
                         return kendo.stringify(this.get("selectedProduct"));
                     },
-                    inputValue: "Hello"
+                    printSelectedProducts: function() {
+                        return $.map(this.get("selectedProducts"), function(product) {
+                            return product.name;
+                        }).join(",");
+                    },
+                    inputValue: "Hello",
+                    spamFlavors: ["cherry","almond"],
+                    wantsSpam: true,
+                    selectedFlavors: function() {
+                        return this.get("spamFlavors").join(",");
+                    },
+                    radioButtonSpamFlavors: "cherry"
                 });
 
                 viewModel.selectedProduct = viewModel.products[1];

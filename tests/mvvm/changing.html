@@ -105,6 +105,23 @@
                 equal(viewModel.selectedItems[1], "baz");
             });
 
+            test("select of multi select bound to complex objects", function() {
+                var viewModel = kendo.observable( {
+                    foo: [{name:"foo"}, {name:"bar"}],
+                    selectedItems: []
+                });
+
+                var dom = $('<select data-bind="source:foo,value:selectedItems,valuefield:name" multiple="multiple"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:first").attr("selected", "selected");
+                dom.find("option:last").attr("selected", "selected");
+                dom.trigger("change");
+
+                equal(viewModel.selectedItems[0], viewModel.foo[0]);
+                equal(viewModel.selectedItems[1], viewModel.foo[1]);
+            });
             test("select tracks complex value", function() {
                 var viewModel = kendo.observable( {
                     foo: [ { text: "foo" }, { text: "bar" } ],

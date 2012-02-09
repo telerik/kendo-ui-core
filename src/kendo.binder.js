@@ -328,21 +328,32 @@
     });
 
     var MultipleSelectValueExpression = BindingExpression.extend( {
-        updateSource: function() {
+        updateSource: function(options) {
             var source = this.binding.get();
             var target = this.property.get();
+
+            if (options.valueField) {
+                for (var idx = 0; idx < target.length; idx++) {
+                    for (var sourceIdx = 0; sourceIdx < options.source.length; sourceIdx++) {
+                        if (options.source[sourceIdx].get(options.valueField) == target[idx]) {
+                            target[idx] = options.source[sourceIdx];
+                            break;
+                        }
+                    }
+                }
+            }
 
             source.splice.apply(source, [0, source.length].concat(target));
         },
 
-        applyToTarget: function() {
+        applyToTarget: function(options) {
             var value = this.binding.get();
 
-            if (this.property.options.valueField) {
+            if (options.valueField) {
                 var values = [];
 
                 for (var idx = 0; idx < value.length; idx++) {
-                    values[idx] = value[idx].get(this.property.options.valueField)
+                    values[idx] = value[idx].get(options.valueField)
                 }
 
                 value = values;
