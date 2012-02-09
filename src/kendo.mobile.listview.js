@@ -319,7 +319,7 @@
 
             if (options.pullToRefresh) {
                 that.scroller.handlePull({
-                    offset: 40,
+                    offset: 100,
                     startPull: function() {
                         that.refreshHint.html(options.releaseMessage);
                     },
