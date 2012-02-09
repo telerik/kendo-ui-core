@@ -11,11 +11,7 @@
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
-        OUT_OF_BOUNDS_FRICTION = 0.70,
-        PULL = "pull",
-        START_PULL = "startPull",
-        CANCEL_PULL = "cancelPull",
-        PULL_THRESHOLD_RATIO = 4,
+        OUT_OF_BOUNDS_FRICTION = 0.5,
         CHANGE = "change";
 
     var DragInertia = Animation.extend({
@@ -204,45 +200,34 @@
 
             that._initAxis("x");
             that._initAxis("y");
-            that._initPull();
 
             boundary.refresh();
-
         },
 
-        events: [
-            START_PULL,
-            CANCEL_PULL,
-            PULL
-        ],
-
-        freeze: function(offset) {
-            this.yinertia.freeze(offset);
-        },
-
-        unfreeze: function() {
+        pullHandled: function() {
             this.yinertia.onEnd();
             this.xinertia.onEnd();
         },
 
-        _initPull: function() {
+        handlePull: function(options) {
             var that = this;
             that.draggable.y.bind("change", function() {
-                if (that.move.y > that.boundary.y.size / PULL_THRESHOLD_RATIO) {
+                if (that.move.y / OUT_OF_BOUNDS_FRICTION > options.offset) {
                     if (!that.pulled) {
                         that.pulled = true;
-                        that.trigger(START_PULL);
+                        options.startPull();
                     }
                 } else if (that.pulled) {
                     that.pulled = false;
-                    that.trigger(CANCEL_PULL);
+                    options.cancelPull();
                 }
             });
 
             that.swipe.bind("end", function() {
                 if(that.pulled) {
                     that.pulled = false;
-                    that.trigger(PULL);
+                    options.pull();
+                    that.yinertia.freeze(options.offset);
                 }
             });
         },

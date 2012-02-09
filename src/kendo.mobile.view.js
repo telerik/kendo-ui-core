@@ -41,17 +41,12 @@
 
             kendo.mobile.enhance(element);
 
-            that.content.kendoMobileScroller({
-                useOnDesktop: true,
-                startPull: function() { that.trigger(START_PULL); },
-                cancelPull: function() { that.trigger(CANCEL_PULL); },
-                pull: function() { that.trigger(PULL); }
-            });
+            that.content.kendoMobileScroller({ useOnDesktop: true });
 
             that.scroller = that.content.data("kendoMobileScroller");
             that.scrollerContent = that.scroller.scrollElement;
 
-            that.trigger(INIT, that);
+            that.trigger(INIT, {view: that});
 
             that._eachWidget(function(widget) {
                 widget.viewInit(that);
@@ -60,10 +55,7 @@
 
         events: [
             INIT,
-            SHOW,
-            START_PULL,
-            CANCEL_PULL,
-            PULL
+            SHOW
         ],
 
         onHideStart: function() {

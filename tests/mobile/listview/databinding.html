@@ -3,15 +3,28 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>kendo.ui.MobileListView DataBinding Tests</title>
+        <link rel="stylesheet/less" href="../../../styles/mobile/kendo.mobile.all.less" type="text/css" />
+        <script src="../../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../../src/jquery.js"></script>
         <script src="../../qunit/qunit/qunit.js"></script>
         <script src="../../qunit-runner.js"></script>
+        <script src="../../jquery.mockjax.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.history.js"></script>
         <script src="../../../src/kendo.model.js"></script>
         <script src="../../../src/kendo.mobile.core.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
+        <script src="../../../src/kendo.mobile.swipe.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+        <style>
+            #qunit-fixture {
+                height: 100px;
+            }
+        </style>
 
     </head>
     <body>
@@ -176,6 +189,61 @@
 
                 link.trigger(kendo.support.mousedown);
                 link.trigger(kendo.support.mouseup);
+            });
+
+            var application;
+
+            module("pull to refresh", {
+                setup: function() {
+                    location.hash = '';
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                    kendo.history.stop();
+                }
+            });
+
+            function setup(html, options) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+            }
+
+            asyncTest("refreshes on pull if configured", 2, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+                var ds = kendo.data.DataSource.create({ transport: { read: { url: "foo.json", type: "json" } } });
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({ dataSource: ds });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" data-pull-to-refresh="true" style="height:300px"></div></div>');
+                var swipe = application.view.scroller.swipe;
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+
+                function secondAssert() {
+                    start();
+                    equal(listview.children().length, 4);
+                }
+
+                function firstAssert() {
+                    equal(listview.children().length, 3);
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+                    swipe.trigger("start", swipe);
+                    swipe.y.delta = 200;
+                    swipe.trigger("move", swipe);
+                    swipe.trigger("end", swipe);
+                }
+
+                ds.bind("change", firstAssert);
+
             });
         </script>
     </body>

@@ -303,34 +303,57 @@
             name: "ListView",
             type: "flat",
             template: "${data}",
+            pullToRefresh: false,
+            appendOnRefresh: false,
+            pullMessage: "Pull to refresh",
+            releaseMessage: "Release to refresh",
+            refreshMessage: "Refreshing",
             headerTemplate: "${value}",
             style: ""
         },
 
         viewInit: function(view) {
-            var that = this;
-            that.view = view;
-            view.bind("pull", function() {
-                view.scroller.freeze(200);
-                that.dataSource.read();
-            });
+            var that = this,
+                options = that.options;
+            that.scroller = view.scroller;
+
+            if (options.pullToRefresh) {
+                that.scroller.handlePull({
+                    offset: 40,
+                    startPull: function() {
+                        that.refreshHint.html(options.releaseMessage);
+                    },
+
+                    cancelPull: function() {
+                        that.refreshHint.html(options.pullMessage);
+                    },
+
+                    pull: function() {
+                        that.refreshHint.html(options.refreshMessage);
+                        that.dataSource.read();
+                    }
+                });
+            }
         },
 
         _refresh: function() {
             var that = this,
                 dataSource = that.dataSource,
+                element = that.element,
                 grouped,
                 view = dataSource.view();
-
-            if (that.view) {
-                that.view.scroller.unfreeze();
-            }
 
             if (dataSource.group()[0]) {
                 that.options.type = "group";
                 that.element.html(kendo.render(that.groupTemplate, view));
             } else {
                 that.element.html(kendo.render(that.template, view));
+            }
+
+            if (that.options.pullToRefresh) {
+                that.element.prepend('<li class="km-listview-pull-to-refresh">Pull to refresh</li>');
+                that.refreshHint = that.element.find(".km-listview-pull-to-refresh");
+                that.scroller.pullHandled();
             }
 
             kendo.mobile.enhance(that.element.children());
