@@ -2,6 +2,8 @@
 <html>
     <head>
         <title>kendo.application tests</title>
+        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.all.less" type="text/css" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
@@ -15,6 +17,12 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <style>
+            #qunit-fixture {
+                height: 100px;
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
         <h1 id="qunit-header">kendo.application Tests</h1>
@@ -449,6 +457,40 @@
                 equal(links.eq(1).attr("sizes"), "76x76");
             });
 
+            test("Raises start pull to half of the screen", 1, function() {
+                window.startPull = function() { ok(true); }
+                setup('<div data-role="view" data-start-pull="startPull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
+
+                var swipe = application.view.scroller.swipe;
+                swipe.trigger("start", swipe);
+                swipe.y.delta = 200;
+                swipe.trigger("move", swipe);
+            });
+
+            test("Raises cancel pull when releasing back", 1, function() {
+                window.cancelPull = function() { ok(true); }
+                setup('<div data-role="view" data-cancel-pull="cancelPull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
+
+                var swipe = application.view.scroller.swipe;
+                swipe.trigger("start", swipe);
+
+                swipe.y.delta = 200;
+                swipe.trigger("move", swipe);
+
+                swipe.y.delta = -170;
+                swipe.trigger("move", swipe);
+            });
+
+            test("Raises pull when pulled", 1, function() {
+                window.pull = function() { ok(true); }
+                setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
+
+                var swipe = application.view.scroller.swipe;
+                swipe.trigger("start", swipe);
+                swipe.y.delta = 200;
+                swipe.trigger("move", swipe);
+                swipe.trigger("end", swipe);
+            });
         </script>
     </body>
 </html>
