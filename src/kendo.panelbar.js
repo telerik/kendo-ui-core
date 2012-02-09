@@ -1184,22 +1184,6 @@
         },
 
         /**
-         * Reloads PanelBar content with ajax request
-         * @param {Selector} element Target element
-         */
-        reload: function (element) {
-            var that = this;
-
-            $(element).each(function () {
-                var item = $(this);
-
-                that._ajaxRequest(item, item.children("." + CONTENT), !item.is(VISIBLE));
-            });
-
-            return that;
-        },
-
-        /**
          * Reloads the content of a <strong>PanelBar</strong> from an AJAX request.
          * @param {Selector} element Target element
          * @example
