@@ -171,12 +171,12 @@
 
     });
 
-    var GreedyInlineFormatFinder = InlineFormatter.extend({
+    var GreedyInlineFormatFinder = InlineFormatFinder.extend({
         init: function(format, greedyProperty) {
-            var formatter = this;
-            formatter.format = format;
-            formatter.greedyProperty = greedyProperty;
-            InlineFormatFinder.fn.init.call(formatter, format);
+            var that = this;
+            that.format = format;
+            that.greedyProperty = greedyProperty;
+            InlineFormatFinder.fn.init.call(that, format);
         },
 
         getInlineCssValue: function(node) {
@@ -244,13 +244,13 @@
 
     var GreedyInlineFormatter = InlineFormatter.extend({
         init: function(format, values, greedyProperty) {
-            var formatter = this;
+            var that = this;
 
-            InlineFormatter.fn.init.call(formatter, format, values);
+            InlineFormatter.fn.init.call(that, format, values);
 
-            this.greedyProperty = greedyProperty;
-            this.values = values;
-            this.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+            that.greedyProperty = greedyProperty;
+            that.values = values;
+            that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
         },
 
         activate: function(range, nodes) {
@@ -271,8 +271,7 @@
 
     var InlineFormatTool = FormatTool.extend({
         init: function(options) {
-            var tool = this;
-            FormatTool.fn.init.call(tool, extend(options, {
+            FormatTool.fn.init.call(this, extend(options, {
                 finder: new InlineFormatFinder(options.format),
                 formatter: function () { return new InlineFormatter(options.format) }
             }));

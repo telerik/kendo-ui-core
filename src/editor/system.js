@@ -16,10 +16,11 @@
 
 var Command = Class.extend({
     init: function(options) {
-        this.options = options;
-        this.restorePoint = new RestorePoint(options.range);
-        this.marker = new Marker();
-        this.formatter = options.formatter;
+        var that = this;
+        that.options = options;
+        that.restorePoint = new RestorePoint(options.range);
+        that.marker = new Marker();
+        that.formatter = options.formatter;
     },
 
     getRange: function () {
@@ -46,10 +47,11 @@ var Command = Class.extend({
     },
 
     exec: function () {
-        var range = this.lockRange(true);
-        this.formatter.editor = this.editor;
-        this.formatter.toggle(range);
-        this.releaseRange(range);
+        var that = this,
+        range = that.lockRange(true);
+        that.formatter.editor = that.editor;
+        that.formatter.toggle(range);
+        that.releaseRange(range);
     }
 });
 

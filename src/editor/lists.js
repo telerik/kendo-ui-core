@@ -143,9 +143,9 @@ var ListFormatter = Class.extend({
                 if (formatNode) {
                     var parents = $(formatNode).parents("ul,ol");
                     if (parents[0]) {
-                        this.split(range, parents.last()[0], true);
+                        RangeUtils.split(range, parents.last()[0], true);
                     } else {
-                        this.split(range, formatNode, true);
+                        RangeUtils.split(range, formatNode, true);
                     }
                 }
             }
@@ -228,7 +228,8 @@ var ListFormatter = Class.extend({
     },
 
     unwrap: function(ul) {
-        var fragment = document.createDocumentFragment(), 
+        var fragment = document.createDocumentFragment(),
+            unwrapTag = this.unwrapTag,
             parents,
             li,
             p,
@@ -305,7 +306,7 @@ var ListFormatter = Class.extend({
 
 var ListCommand = Command.extend({
     init: function(options) {
-        this.options = options;
+        options.formatter = new ListFormatter(options.tag);
         Command.fn.init.call(this, options);
     }
 });
@@ -319,7 +320,7 @@ var ListTool = FormatTool.extend({
     },
 
     command: function (commandArguments) { 
-        return new ListCommand(extend(commandArguments, { tag: options.tag }));
+        return new ListCommand(extend(commandArguments, { tag: this.options.tag }));
     }
 });
 
