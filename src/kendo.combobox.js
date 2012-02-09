@@ -336,71 +336,7 @@
 
             that._enable();
 
-            that.bind([
-                /**
-                * Fires when the drop-down list is opened
-                * @name kendo.ui.ComboBox#open
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#comboBox").kendoComboBox({
-                *     open: function(e) {
-                *             // handle event
-                *         }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to instance of the Kendo UI ComboBox
-                * var combobox = $("#comboBox").data("kendoComboBox");
-                * // bind to the open event
-                * combobox.bind("open", function(e) {
-                *     // handle event
-                * });
-                */
-                /**
-                * Fires when the drop-down list is closed
-                * @name kendo.ui.ComboBox#close
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#comboBox").kendoComboBox({
-                *     close: function(e) {
-                *         // handle event
-                *     }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to instance of the Kendo UI ComboBox
-                * var combobox = $("#comboBox").data("kendoComboBox");
-                * // bind to the close event
-                * combobox.bind("close", function(e) {
-                *     // handle event
-                * });
-                */
-                /**
-                * Fires when the value has been changed.
-                * @name kendo.ui.ComboBox#change
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#comboBox").kendoComboBox({
-                *     change: function(e) {
-                *         // handle event
-                *     }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to instance of the Kendo UI ComboBox
-                * var combobox = $("#comboBox").data("kendoComboBox");
-                * // bind to the change event
-                * combobox.bind("change", function(e) {
-                *     // handle event
-                * });
-                */
-                CHANGE,
-                "dataBinding",
-                "dataBound"
-            ], options);
+            that.bind(that.events, options);
 
             wrapper = that._inputWrapper;
 
@@ -454,11 +390,78 @@
             placeholder: "",
             suggest: false
         },
-
+        events:[
+            /**
+            * Fires when the drop-down list is opened
+            * @name kendo.ui.ComboBox#open
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#comboBox").kendoComboBox({
+            *     open: function(e) {
+            *             // handle event
+            *         }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to instance of the Kendo UI ComboBox
+            * var combobox = $("#comboBox").data("kendoComboBox");
+            * // bind to the open event
+            * combobox.bind("open", function(e) {
+            *     // handle event
+            * });
+            */
+            /**
+            * Fires when the drop-down list is closed
+            * @name kendo.ui.ComboBox#close
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#comboBox").kendoComboBox({
+            *     close: function(e) {
+            *         // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to instance of the Kendo UI ComboBox
+            * var combobox = $("#comboBox").data("kendoComboBox");
+            * // bind to the close event
+            * combobox.bind("close", function(e) {
+            *     // handle event
+            * });
+            */
+            /**
+            * Fires when the value has been changed.
+            * @name kendo.ui.ComboBox#change
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#comboBox").kendoComboBox({
+            *     change: function(e) {
+            *         // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to instance of the Kendo UI ComboBox
+            * var combobox = $("#comboBox").data("kendoComboBox");
+            * // bind to the change event
+            * combobox.bind("change", function(e) {
+            *     // handle event
+            * });
+            */
+            CHANGE,
+            "dataBinding",
+            "dataBound"
+        ],
         setOptions: function(options) {
             $.extend(this.options, options);
+
             this._template();
             this._accessors();
+
+            Select.fn.setOptions.call(this, options);
         },
 
         current: function(li) {

@@ -619,6 +619,7 @@
             this.property.set(source);
         }
     });
+
     var WidgetBindingTarget = BindingTarget.extend( {
         init: function(target) {
             BindingTarget.fn.init.apply(this, arguments);
@@ -667,6 +668,9 @@
         },
         createExpression: function(binding) {
             return new BindingExpression(this, binding);
+        },
+
+        destroy: function() {
         }
     });
 
@@ -698,45 +702,62 @@
     var DataSourceWidgetProperty = Class.extend({
         init: function(target) {
             this.target = target;
+
+            this._dataBindingHandler = $.proxy(this._dataBinding, this);
+            this._dataBoundHandler = $.proxy(this._dataBound, this);
         },
 
         bind: function() {
         },
 
+        _dataBinding: function() {
+            var idx,
+                length,
+                widget = this.target,
+                items = widget.items();
+
+            for (idx = 0, length = items.length; idx < length; idx++) {
+                unbindElement(items[idx]);
+            }
+        },
+
+        _dataBound: function() {
+            var idx,
+                length,
+                widget = this.target,
+                items = widget.items(),
+                dataSource = widget.dataSource,
+                view = dataSource.view(),
+                groups = dataSource.group() || [];
+
+            if (groups.length) {
+                view = flattenGroups(view);
+            }
+
+            for (idx = 0, length = view.length; idx < length; idx++) {
+                bindElement(items[idx], view[idx]);
+            }
+        },
+
         set: function(value) {
             var widget = this.target;
 
-            widget.bind("dataBinding", function() {
-                var idx,
-                    length,
-                    items = widget.items();
+            widget.bind("dataBinding", this._dataBindingHandler);
 
-                for (idx = 0, length = items.length; idx < length; idx++) {
-                    unbindElement(items[idx]);
-                }
-            });
-
-            widget.bind("dataBound", function() {
-                var idx,
-                    length,
-                    items = widget.items(),
-                    dataSource = widget.dataSource,
-                    view = dataSource.view(),
-                    groups = dataSource.group() || [];
-
-                if (groups.length) {
-                   view = flattenGroups(view);
-                }
-
-                for (idx = 0, length = view.length; idx < length; idx++) {
-                    bindElement(items[idx], view[idx]);
-                }
-            });
+            widget.bind("dataBound", this._dataBoundHandler);
 
             widget.dataSource.data(value);
         },
+
         createExpression: function(binding) {
             return new DataSourceBindingExpression(this, binding);
+        },
+
+        destroy: function() {
+            var widget = this.target;
+
+            widget.unbind("dataBinding", this._dataBindingHandler);
+            widget.unbind("dataBound", this._dataBoundHandler);
         }
     });
 
@@ -745,6 +766,8 @@
             option,
             type,
             name,
+            idx,
+            length,
             value;
 
         type = kendo.roles[role];
@@ -761,6 +784,20 @@
 
                 if (value !== null) {
                     options[option] = value;
+                }
+            }
+
+            for (idx = 0, length = type.fn.events.length; idx < length; idx++) {
+                option = type.fn.events[idx];
+
+                value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+
+                if (value === null) {
+                    value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                }
+
+                if (value !== null) {
+                    options[option] = window[value];
                 }
             }
 
@@ -809,6 +846,7 @@
             bindings,
             options = {},
             option,
+            setOptions,
             target;
 
         unbindElement(element);
@@ -830,6 +868,7 @@
                 } else {
                     target = new BindingTarget(element);
                 }
+                setOptions = true;
             }
 
             $.data(element, "kendoBindingTarget", target);

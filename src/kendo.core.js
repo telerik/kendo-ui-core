@@ -2244,7 +2244,10 @@
             that.element.data("kendo" + that.options.name, that);
         },
 
-        setOptions: function() {
+        events: [],
+
+        setOptions: function(options) {
+            this.bind(this.events, options);
         }
     });
 
