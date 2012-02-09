@@ -35,6 +35,8 @@
             if (!html.length && $.browser.mozilla)
                 html = '<br _moz_dirty="true" />';
 
+            var rtlStyle = $textarea.closest('.k-rtl').length ? 'direction:rtl;' : '';
+
             document.designMode = 'On';
             document.open();
             document.write(
@@ -43,7 +45,7 @@
                     '<style type="text/css">' +
                         'html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}' +
                         'html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;' +
-                            //.catIf('direction:rtl;', $textarea.closest('.k-rtl').length)
+                        rtlStyle +
                         '}' +
                         'h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}' +
                         'p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}' +
@@ -51,7 +53,7 @@
                         'a{color:#00a}' +
                         'code{font-size:1.23em}' +
                     '</style>' +
-                    //$.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join('') +
+                    $.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join('') +
                     '</head><body spellcheck="false">' + 
                     html +
                     '</body></html>'
