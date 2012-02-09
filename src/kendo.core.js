@@ -1235,6 +1235,7 @@
 (function() {
 
     var nonBreakingSpaceRegExp = /\u00A0/g,
+        exponentRegExp = /[eE][-+]?[0-9]+/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
 
     function outOfRange(value, start, end) {
@@ -1477,6 +1478,15 @@
             percentSymbol = percent.symbol,
             negative = value.indexOf("-") > -1,
             parts;
+
+        //handle exponential number
+        if (exponentRegExp.test(value)) {
+            value = parseFloat(value);
+            if (isNaN(value)) {
+                value = null;
+            }
+            return value;
+        }
 
         if (value.indexOf(symbol) > -1) {
             number = currency;
