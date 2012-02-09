@@ -3,6 +3,7 @@
         ui = kendo.ui,
         touch = kendo.support.touch,
         getOffset = kendo.getOffset,
+        bodyResizeEvent = $.browser.msie && $.browser.version < 9,
         OPEN = "open",
         CLOSE = "close",
         CENTER = "center",
@@ -112,7 +113,16 @@
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
             if (!touch) { //  On mobile device this closes the popup if keyboard is shown
-                $(window).bind("resize scroll", function() {
+                $(window).bind("resize scroll", function(e) {
+                    if (bodyResizeEvent) {
+                        var width = $(document).width();
+                        if (width == that._currentWidth) {
+                            return;
+                        }
+
+                        that._currentWidth = width;
+                    }
+
                     if (!that._hovered) {
                         that.close();
                     }

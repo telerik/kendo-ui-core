@@ -1855,7 +1855,6 @@ body .k-datetimepicker .k-select
 
 .k-calendar .k-content .k-link
 {
-    position: relative;
     display: block;
     overflow: hidden;
 }

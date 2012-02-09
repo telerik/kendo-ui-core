@@ -635,7 +635,7 @@
                 viewWidth = from.outerWidth(),
                 cell, position;
 
-            if (effects && effects.indexOf("zoomIn") != -1) {
+            if (effects && effects.indexOf("zoom") != -1) {
                 to.css({
                     position: "absolute",
                     top: from.prev().outerHeight(),

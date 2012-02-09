@@ -506,14 +506,16 @@
             if (transitions && "transition" in fx && useTransition) {
                 fx.transition(elements, properties, options);
             } else {
-                each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
-                    var params,
-                        currentValue = properties ? properties[value]+ " " : null; // We need to match
+                elements.each(function() {
+                    var element = $(this),
+                        multiple = {};
 
-                    elements.each(function() {
+                    each(transformProps, function(idx, value) { // remove transforms to avoid IE and older browsers confusion
+                        var params,
+                            currentValue = properties ? properties[value]+ " " : null; // We need to match
+
                         if (currentValue) {
-                            var element = $(this),
-                                single = properties;
+                            var single = properties;
 
                             if (value in scaleProperties && properties[value] !== undefined) {
                                 params = currentValue.match(cssParamsRegExp);
@@ -577,9 +579,15 @@
                             if (!transforms && value != "scale")
                                 value in single && delete single[value];
 
-                            element.animate(single, extend({ queue: false }, options, { show: false, hide: false })); // Stop animate from showing/hiding the element to be able to hide it later on.
+                            if (single)
+                                extend(multiple, single);
                         }
                     });
+
+                    if ($.browser.msie)
+                        delete multiple.scale;
+
+                    element.animate(multiple, extend({ queue: false, show: false, hide: false, duration: options.duration, complete: options.complete })); // Stop animate from showing/hiding the element to be able to hide it later on.
                 });
             }
         },
@@ -645,10 +653,15 @@
                 var reverse = options.effects.zoom.direction == "out";
 
                 if (hasZoom) {
-                    var half = $.browser.msie && $.browser.version >= 9 ? (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2 : 0; // Kill margins in IE7/8
+                    var version = $.browser.version,
+                        style = element[0].currentStyle,
+                        width = style.width.indexOf("%") != -1 ? element.parent().width() : element.width(),
+                        height = style.height.indexOf("%") != -1 ? element.parent().height() : parseInt(style.height, 10),
+                        half = version < 9 && options.effects.fade ? 0 : (1 - (parseInt(element.css("zoom"), 10) / 100)) / 2; // Kill margins in IE7/8 if using fade
+
                     element.css({
-                        marginLeft: element.width() * half,
-                        marginTop: element.width() * half
+                        marginLeft: width * (version < 8 ? 0 : half),
+                        marginTop: height * half
                     });
                 }
 
