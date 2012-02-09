@@ -453,11 +453,13 @@
     var formatRegExp = /{(\d+)(:[^\}]+)?}/g,
         dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
+        literalRegExp = /["'].*?["']/g,
         EMPTY = "",
         POINT = ".",
         COMMA = ",",
         SHARP = "#",
         ZERO = "0",
+        PLACEHOLDER = "??",
         EN = "en-US";
 
     //cultures
@@ -926,6 +928,7 @@
             decimal = numberFormat[POINT],
             precision = numberFormat.decimals,
             pattern = numberFormat.pattern[0],
+            literals = [],
             symbol,
             isCurrency, isPercent,
             customPrecision,
@@ -1065,6 +1068,13 @@
             format = format[0];
         }
 
+        if (format.indexOf("'") > -1 || format.indexOf("\"") > -1) {
+            format = format.replace(literalRegExp, function(match) {
+                literals.push(match);
+                return PLACEHOLDER;
+            });
+        }
+
         isCurrency = format.indexOf("$") != -1;
         isPercent = format.indexOf("%") != -1;
 
@@ -1196,6 +1206,13 @@
                     value += (ch === "$" || ch === "%") ? symbol : ch;
                 }
                 number = value;
+            }
+
+            if (literals[0]) {
+                length = literals.length;
+                for (idx = 0; idx < length; idx++) {
+                    number = number.replace(PLACEHOLDER, literals[idx]);
+                }
             }
         }
 

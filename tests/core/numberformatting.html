@@ -74,7 +74,6 @@
             });
 
             test("decimal if 0 in the decimal part of toString", function() {
-
                 equal(toString(10, "####.#0#"), "10.00");
             });
 
@@ -98,8 +97,20 @@
                 equal(toString(10.1, "'EFD' #"), "'EFD' 10");
             });
 
-            test("custom toString with %", function() {
+            test("toString with '# %'", function() {
                 equal(toString(10.1, "# %"), "1010 %");
+            });
+
+            test("toString with percent symbol as literal", function() {
+                equal(toString(10, "# '%'"), "10 '%'");
+            });
+
+            test("toString with quote as literal", function() {
+                equal(toString(10, "# \"%\""), "10 \"%\"");
+            });
+
+            test("toString does not crash when number placeholder is in literal", function() {
+                equal(toString(10.12, "#.# '# y.0'"), "10.12 '# y.0'");
             });
 
             //negative custom toString
