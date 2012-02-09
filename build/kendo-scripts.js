@@ -195,6 +195,7 @@ if (require.main !== module) {
     exports.mergeScripts = mergeScripts;
     exports.buildSuiteScripts = buildSuiteScripts;
     exports.buildCombinedScript = buildCombinedScript;
+    exports.buildCultures = buildCultures;
 } else {
     console.log("merging multipart scripts...");
     mergeScripts();

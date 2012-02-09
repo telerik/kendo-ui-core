@@ -79,6 +79,7 @@ var LATEST = "latest",
     DEPLOY_SOURCE = "source",
     DEPLOY_SCRIPTS = "js",
     DEPLOY_STYLES = "styles",
+    DEPLOY_CULTURES = path.join(DEPLOY_SCRIPTS, "cultures"),
     DEPLOY_EXAMPLES = "examples",
     DEPLOY_LEGAL_ROOT = "LicenseAgreements",
     DEPLOY_THIRD_PARTY_ROOT = "ThirdParty",
@@ -98,14 +99,18 @@ function clean() {
 
 function deployScripts(root, bundle, license, hasSource) {
     var scriptsDest = path.join(root, DEPLOY_SCRIPTS),
+        culturesDest = path.join(root, DEPLOY_CULTURES),
         sourceRoot = path.join(root, DEPLOY_SOURCE),
-        sourceDest = path.join(sourceRoot, DEPLOY_SCRIPTS);
+        sourceDest = path.join(sourceRoot, DEPLOY_SCRIPTS),
+        culturesSourceDest = path.join(sourceRoot, DEPLOY_CULTURES);
 
     mkdir(scriptsDest);
+    mkdir(culturesDest);
 
     if (hasSource) {
         mkdir(sourceRoot);
         mkdir(sourceDest);
+        mkdir(culturesSourceDest);
     }
 
     bundle.suites.forEach(function(suite) {
@@ -125,6 +130,12 @@ function deployScripts(root, bundle, license, hasSource) {
             buildSuitScripts(sourceDest, false);
         }
     });
+
+    kendoScripts.buildCultures(scriptsDest, license, true);
+
+    if (hasSource) {
+        kendoScripts.buildCultures(sourceDest, license, false);
+    }
 }
 
 function deployStyles(root, bundle, license, copySource) {
