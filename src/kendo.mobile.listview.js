@@ -341,14 +341,18 @@
                 dataSource = that.dataSource,
                 element = that.element,
                 grouped,
+                appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
+                contents,
                 view = dataSource.view();
 
             if (dataSource.group()[0]) {
                 that.options.type = "group";
-                that.element.html(kendo.render(that.groupTemplate, view));
+                contents = kendo.render(that.groupTemplate, view);
             } else {
-                that.element.html(kendo.render(that.template, view));
+                contents = kendo.render(that.template, view);
             }
+
+            that.element[appendMethod](contents);
 
             if (that.options.pullToRefresh) {
                 that.element.prepend('<li class="km-listview-pull-to-refresh">Pull to refresh</li>');
