@@ -327,72 +327,7 @@
 
             that._enable();
 
-            that.bind([
-                /**
-                * Fires when the drop-down list is opened
-                * @name kendo.ui.DropDownList#open
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#dropdownlist").kendoDropDownList({
-                *     open: function(e) {
-                *         // handle event
-                *     }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to the dropdown list
-                * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-                * // bind to the open event
-                * dropdownlist.bind("open", function(e) {
-                *     // handle event
-                * });
-                */
-                /**
-                * Fires when the drop-down list is closed
-                * @name kendo.ui.DropDownList#close
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#dropdownlist").kendoDropDownList({
-                *     close: function(e) {
-                *         // handle event
-                *     }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to the dropdown list
-                * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-                * // bind to the close event
-                * dropdownlist.bind("close", function(e) {
-                *     // handle event
-                * });
-                */
-                /**
-                * Fires when the value has been changed.
-                * @name kendo.ui.DropDownList#change
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#dropdownlist").kendoDropDownList({
-                *     change: function(e) {
-                *         // handle event
-                *     }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to the dropdown list
-                * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
-                * // bind to the change event
-                * dropdownlist.bind("change", function(e) {
-                *     // handle event
-                * });
-                */
-                CHANGE,
-                "dataBinding",
-                "dataBound"
-            ], options);
-
+            that.bind(that.events, options);
 
             that.selectedIndex = -1;
 
@@ -421,11 +356,81 @@
             dataValueField: "",
             height: 200
         },
+        events: [
+            /**
+            * Fires when the drop-down list is opened
+            * @name kendo.ui.DropDownList#open
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#dropdownlist").kendoDropDownList({
+            *     open: function(e) {
+            *         // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the dropdown list
+            * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+            * // bind to the open event
+            * dropdownlist.bind("open", function(e) {
+            *     // handle event
+            * });
+            */
+
+            /**
+            * Fires when the drop-down list is closed
+            * @name kendo.ui.DropDownList#close
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#dropdownlist").kendoDropDownList({
+            *     close: function(e) {
+            *         // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the dropdown list
+            * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+            * // bind to the close event
+            * dropdownlist.bind("close", function(e) {
+            *     // handle event
+            * });
+            */
+
+            /**
+            * Fires when the value has been changed.
+            * @name kendo.ui.DropDownList#change
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#dropdownlist").kendoDropDownList({
+            *     change: function(e) {
+            *         // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the dropdown list
+            * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+            * // bind to the change event
+            * dropdownlist.bind("change", function(e) {
+            *     // handle event
+            * });
+            */
+            CHANGE,
+            "dataBinding",
+            "dataBound"
+        ],
 
         setOptions: function(options) {
             $.extend(this.options, options);
+
             this._template();
             this._accessors();
+
+            Select.fn.setOptions.call(this, options);
         },
 
         /**

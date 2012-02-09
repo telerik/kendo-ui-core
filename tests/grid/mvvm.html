@@ -112,6 +112,44 @@
 
                 equal(observable.items[0]._events["change"].length, 2); //1 for the text and 1 because the observable array tracks its items
             });
+
+            test("destroys detaches the events to widget", function() {
+                var dom = $('<div data-role="grid" data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable);
+                kendo.unbind(dom);
+
+                var grid = dom.data("kendoGrid");
+                equal(grid._events["dataBound"].length, 0);
+                equal(grid._events["dataBinding"].length, 0);
+            });
+
+
+            test("dataBound event is raised if attached as option", 1, function() {
+                var dom = $('<div data-role="grid" data-dataBound="dataBound" data-bind="source:items" />');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+            });
+
+            function dataBound() {
+                ok(true);
+            }
+
+            test("dataBound event is raised if attached as option to a already initialized grid", 1, function() {
+                var dom = $('<div data-dataBound="dataBound" data-bind="source:items" />').kendoGrid();
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

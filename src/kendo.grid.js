@@ -755,208 +755,7 @@
 
             that._toolbar();
 
-            that.bind([
-                /**
-                 * Fires when the grid selection has changed.
-                 * @name kendo.ui.Grid#change
-                 * @event
-                 * @param {Event} e
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      change: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 *  @exampleTitle To set after initialization
-                 *  @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the change event
-                 *  grid.bind("change", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                CHANGE,
-                "dataBinding",
-                /**
-                 * Fires when the grid has received data from the data source.
-                 * @name kendo.ui.Grid#dataBound
-                 * @event
-                 * @param {Event} e
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      dataBound: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 *  @exampleTitle To set after initialization
-                 *  @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the dataBound event
-                 *  grid.bind("dataBound", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                DATABOUND,
-                /**
-                 * Fires when the grid detail row is expanded.
-                 * @name kendo.ui.Grid#detailExpand
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.masterRow The jQuery element representing master row.
-                 * @param {Object} e.detailRow The jQuery element representing detail row.
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      detailExpand: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 *  @exampleTitle To set after initialization
-                 *  @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the detailExpand event
-                 *  grid.bind("detailExpand", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                DETAILEXPAND,
-                /**
-                 * Fires when the grid detail row is collapsed.
-                 * @name kendo.ui.Grid#detailCollapse
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.masterRow The jQuery element representing master row.
-                 * @param {Object} e.detailRow The jQuery element representing detail row.
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      detailCollapse: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the detailCollapse event
-                 *  grid.bind("detailCollapse", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                DETAILCOLLAPSE,
-                /**
-                 * Fires when the grid detail is initialized.
-                 * @name kendo.ui.Grid#detailInit
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.masterRow The jQuery element representing master row.
-                 * @param {Object} e.detailRow The jQuery element representing detail row.
-                 * @param {Object} e.detailCell The jQuery element representing detail cell.
-                 * @param {Object} e.data The data for the master row.
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      detailInit: function(e) {
-                 *          // handle event
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the detailInit event
-                 *  grid.bind("detailInit", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                DETAILINIT,
-                /**
-                 * Fires when the grid enters edit mode.
-                 * @name kendo.ui.Grid#edit
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.container The jQuery element to be edited.
-                 * @param {Object} e.model The model to be edited.
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      edit: function(e) {
-                 *          // handle event
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the edit event
-                 *  grid.bind("edit", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                EDIT,
-                /**
-                 * Fires before the grid item is changed.
-                 * @name kendo.ui.Grid#save
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.values The values entered by the user.
-                 * @param {Object} e.container The jQuery element which is in edit mode.
-                 * @param {Object} e.model The edited model.
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      save: function(e) {
-                 *          // handle event
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the save event
-                 *  grid.bind("save", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                SAVE,
-                /**
-                 * Fires before the grid item is removed.
-                 * @name kendo.ui.Grid#remove
-                 * @event
-                 * @param {Event} e
-                 * @param {Object} e.row The row element to be deleted.
-                 * @param {Object} e.model The model which to be deleted.
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      remove: function(e) {
-                 *          // handle event
-                 *  });
-                 *  @exampleTitle To set after initialization
-                 *  @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the remove event
-                 *  grid.bind("remove", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                REMOVE,
-                /**
-                 * Fires before the grid calls DataSource sync.
-                 * @name kendo.ui.Grid#saveChanges
-                 * @event
-                 * @param {Event} e
-                 * @example
-                 *  $("#grid").kendoGrid({
-                 *      saveChanges: function(e) {
-                 *          // handle event
-                 *  });
-                 *  @exampleTitle To set after initialization
-                 *  @example
-                 *  // get a reference to the grid
-                 *  var grid = $("#grid").data("kendoGrid");
-                 *  // bind to the saveChanges event
-                 *  grid.bind("saveChanges", function(e) {
-                 *      // handle event
-                 *  }
-                 */
-                SAVECHANGES
-            ], that.options);
+            that.bind(that.events, that.options);
 
             that._thead();
 
@@ -977,6 +776,209 @@
             kendo.notify(that);
         },
 
+        events: [
+            /**
+             * Fires when the grid selection has changed.
+             * @name kendo.ui.Grid#change
+             * @event
+             * @param {Event} e
+             * @example
+             *  $("#grid").kendoGrid({
+             *      change: function(e) {
+             *          // handle event
+             *      }
+             *  });
+             *  @exampleTitle To set after initialization
+             *  @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the change event
+             *  grid.bind("change", function(e) {
+             *      // handle event
+             *  }
+             */
+            CHANGE,
+            "dataBinding",
+            /**
+             * Fires when the grid has received data from the data source.
+             * @name kendo.ui.Grid#dataBound
+             * @event
+             * @param {Event} e
+             * @example
+             *  $("#grid").kendoGrid({
+             *      dataBound: function(e) {
+             *          // handle event
+             *      }
+             *  });
+             *  @exampleTitle To set after initialization
+             *  @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the dataBound event
+             *  grid.bind("dataBound", function(e) {
+             *      // handle event
+             *  }
+             */
+            DATABOUND,
+            /**
+             * Fires when the grid detail row is expanded.
+             * @name kendo.ui.Grid#detailExpand
+             * @event
+             * @param {Event} e
+             * @param {Object} e.masterRow The jQuery element representing master row.
+             * @param {Object} e.detailRow The jQuery element representing detail row.
+             * @example
+             *  $("#grid").kendoGrid({
+             *      detailExpand: function(e) {
+             *          // handle event
+             *      }
+             *  });
+             *  @exampleTitle To set after initialization
+             *  @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the detailExpand event
+             *  grid.bind("detailExpand", function(e) {
+             *      // handle event
+             *  }
+             */
+            DETAILEXPAND,
+            /**
+             * Fires when the grid detail row is collapsed.
+             * @name kendo.ui.Grid#detailCollapse
+             * @event
+             * @param {Event} e
+             * @param {Object} e.masterRow The jQuery element representing master row.
+             * @param {Object} e.detailRow The jQuery element representing detail row.
+             * @example
+             *  $("#grid").kendoGrid({
+             *      detailCollapse: function(e) {
+             *          // handle event
+             *      }
+             *  });
+             * @exampleTitle To set after initialization
+             * @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the detailCollapse event
+             *  grid.bind("detailCollapse", function(e) {
+             *      // handle event
+             *  }
+             */
+            DETAILCOLLAPSE,
+            /**
+             * Fires when the grid detail is initialized.
+             * @name kendo.ui.Grid#detailInit
+             * @event
+             * @param {Event} e
+             * @param {Object} e.masterRow The jQuery element representing master row.
+             * @param {Object} e.detailRow The jQuery element representing detail row.
+             * @param {Object} e.detailCell The jQuery element representing detail cell.
+             * @param {Object} e.data The data for the master row.
+             * @example
+             *  $("#grid").kendoGrid({
+             *      detailInit: function(e) {
+             *          // handle event
+             *  });
+             * @exampleTitle To set after initialization
+             * @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the detailInit event
+             *  grid.bind("detailInit", function(e) {
+             *      // handle event
+             *  }
+             */
+            DETAILINIT,
+            /**
+             * Fires when the grid enters edit mode.
+             * @name kendo.ui.Grid#edit
+             * @event
+             * @param {Event} e
+             * @param {Object} e.container The jQuery element to be edited.
+             * @param {Object} e.model The model to be edited.
+             * @example
+             *  $("#grid").kendoGrid({
+             *      edit: function(e) {
+             *          // handle event
+             *  });
+             * @exampleTitle To set after initialization
+             * @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the edit event
+             *  grid.bind("edit", function(e) {
+             *      // handle event
+             *  }
+             */
+            EDIT,
+            /**
+             * Fires before the grid item is changed.
+             * @name kendo.ui.Grid#save
+             * @event
+             * @param {Event} e
+             * @param {Object} e.values The values entered by the user.
+             * @param {Object} e.container The jQuery element which is in edit mode.
+             * @param {Object} e.model The edited model.
+             * @example
+             *  $("#grid").kendoGrid({
+             *      save: function(e) {
+             *          // handle event
+             *  });
+             * @exampleTitle To set after initialization
+             * @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the save event
+             *  grid.bind("save", function(e) {
+             *      // handle event
+             *  }
+             */
+            SAVE,
+            /**
+             * Fires before the grid item is removed.
+             * @name kendo.ui.Grid#remove
+             * @event
+             * @param {Event} e
+             * @param {Object} e.row The row element to be deleted.
+             * @param {Object} e.model The model which to be deleted.
+             * @example
+             *  $("#grid").kendoGrid({
+             *      remove: function(e) {
+             *          // handle event
+             *  });
+             *  @exampleTitle To set after initialization
+             *  @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the remove event
+             *  grid.bind("remove", function(e) {
+             *      // handle event
+             *  }
+             */
+            REMOVE,
+            /**
+             * Fires before the grid calls DataSource sync.
+             * @name kendo.ui.Grid#saveChanges
+             * @event
+             * @param {Event} e
+             * @example
+             *  $("#grid").kendoGrid({
+             *      saveChanges: function(e) {
+             *          // handle event
+             *  });
+             *  @exampleTitle To set after initialization
+             *  @example
+             *  // get a reference to the grid
+             *  var grid = $("#grid").data("kendoGrid");
+             *  // bind to the saveChanges event
+             *  grid.bind("saveChanges", function(e) {
+             *      // handle event
+             *  }
+             */
+            SAVECHANGES
+        ],
+
         options: {
             name: "Grid",
             columns: [],
@@ -987,13 +989,17 @@
         },
 
         setOptions: function(options) {
+            var that = this;
+
             if (options.template) {
                 options.rowTemplate = options.template;
             }
 
-            extend(this.options, options);
+            extend(that.options, options);
 
-            this._templates();
+            that._templates();
+
+            Widget.fn.setOptions.call(this, options);
         },
 
         items: function() {
