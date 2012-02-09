@@ -112,6 +112,9 @@
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
+        * @option {String} [icon] <> The icon of the button. It can be either one of the built-in icons, or a custom one.
+        * _example
+        * var button = $("#button").kendoMobileButton({ icon: "stop" });
         */
         init: function(element, options) {
             var that = this;
@@ -119,6 +122,7 @@
             Widget.fn.init.call(that, element, options);
 
             that._wrap();
+            that._style();
 
             that._releaseProxy = proxy(that._release, that);
 
@@ -142,6 +146,7 @@
 
         options: {
             name: "Button",
+            icon: "",
             style: ""
         },
 
@@ -169,27 +174,18 @@
 
         _wrap: function() {
             var that = this,
-                element = that.element,
-                icon = element.data(kendo.ns + "icon"),
-                iconSpan = $('<span class="km-icon"/>'),
-                span;
-
-            span = element.addClass("km-button")
-                          .children("span");
-
-            that._style();
+                element = that.element.addClass("km-button"),
+                icon = that.options.icon,
+                iconSpan = $('<span class="km-icon km-' + icon + '"/>'),
+                span = element.children("span").addClass("km-text"),
+                image = element.find("img").addClass("km-image");
 
             if (!span[0]) {
-                span = element.wrapInner("<span/>").children("span");
+                span = element.wrapInner('<span class="km-text" />').children("span");
             }
-
-            var image = span.addClass("km-text")
-                            .find("img")
-                            .addClass("km-image");
 
             if (!image[0] && icon) {
                 element.prepend(iconSpan);
-                iconSpan.addClass("km-" + icon);
             }
         }
     });
