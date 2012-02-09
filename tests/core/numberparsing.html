@@ -180,6 +180,11 @@
 
                 kendo.culture("en-US");
             });
+
+            test("parse exponential number", function() {
+                equal(kendo.parseFloat("1e-7"), 0.0000001);
+                equal(kendo.parseFloat("1E-7"), 0.0000001);
+            });
         </script>
     </body>
 </html>

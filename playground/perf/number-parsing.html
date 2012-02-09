@@ -15,11 +15,11 @@
             $(document).ready(function() {
                 var suite = new Benchmark.Suite;
                 suite.add("Globalize number parsing", function() {
-                    Globalize.parseFloat("1,312.123")
+                    Globalize.parseFloat("1,321,312.123")
                 })
                 .add("Kendo date parsing", function() {
                     window.Globalize = null;
-                    kendo.parseFloat("1,312.123")
+                    kendo.parseFloat("1,321,312.123")
                 })
                 .on("complete", function() {
                     var message = "User agent: " + navigator.userAgent;
