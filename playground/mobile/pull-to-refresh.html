@@ -31,26 +31,25 @@
 
         <script>
             var dataSource = new kendo.data.DataSource({
-                        transport: {
-                            read: {
-                                url: "http://search.twitter.com/search.json", // the remove service url
-                                dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-                                data: { //additional parameters sent to the remote service
-                                    q: function() {
-                                        return "YouShouldNeverTrust";
-                                    }
-                                }
-                            }
-                        },
-
-                        schema: { // describe the result format
-                            data: "results" // the data which the data source will be bound to is in the "results" field
+                transport: {
+                    read: {
+                        url: "http://search.twitter.com/search.json", // the remove service url
+                        dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+                        data: { //additional parameters sent to the remote service
+                            q: "ifyouknowmeyouknow"
+                        }
                     }
+                },
+
+                schema: { // describe the result format
+                    data: "results" // the data which the data source will be bound to is in the "results" field
+                }
             });
 
             function makeListView() {
                 $("#listview").kendoMobileListView({
                     dataSource: dataSource,
+                    pullToRefresh: true,
                     template: $("#template").text()
                 });
             }
@@ -59,6 +58,14 @@
                 new kendo.mobile.Application();
             });
         </script>
+        <style>
+            .km-listview-pull-to-refresh {
+                position: absolute !important;
+                line-height: 40px;
+                -webkit-transform:translatey(-40px) !important;
+                overflow: visible !important;
+            }
+        </style>
     </head>
     <body>
         <div data-role="view" data-init="makeListView">
