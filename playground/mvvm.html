@@ -156,7 +156,10 @@ var viewModel = {
                     </td>
                     <td>
 <pre class="prettyprint">
-&lt;select data-bind="textfield: name, valuefield: id, source: products, value: selectedProduct"&gt;
+&lt;select
+    data-valuefield="id"
+    data-textfield="name"
+    data-bind="source: products, value: selectedProduct"&gt;
 &lt;/select&gt;
 The select value as JSON is &lt;span data-bind="text: selectedProductAsJson">&lt;/span&gt;
 &lt;script&gt;
@@ -175,7 +178,7 @@ var viewModel = {
 </pre>
                     </td>
                     <td>
-                        <select data-bind="textfield: name, valuefield: id, source: products, value: selectedProduct"></select>
+                        <select data-valuefield="id" data-textfield="name" data-bind="source: products, value: selectedProduct"></select>
                         The select value as JSON is <span data-bind="text: selectedProductAsJson"></span>
                     </td>
                 </tr>
@@ -295,7 +298,9 @@ var viewModel = kendo.observable({
                     <td>
                         <pre class="prettyprint">
 &lt;select multiple="multiple"
-    data-bind="source: products, textfield: name, valuefield: id, value: selectedProducts"&gt;
+    data-textfield="name"
+    data-valuefield="id"
+    data-bind="source: products, value: selectedProducts"&gt;
 &lt;/select&gt;
 Selected products: &lt;span data-bind="text: printSelectedProducts"&gt;&lt;/span&gt;
 &lt;script&gt;
@@ -315,7 +320,7 @@ var viewModel = kendo.observable({
                         </pre>
                     </td>
                     <td>
-                        <select multiple="multiple" data-bind="source: products, textfield: name, valuefield: id, value: selectedProducts"></select>
+                        <select multiple="multiple" data-textfield="name" data-valuefield="id" data-bind="source: products,value: selectedProducts"></select>
                         Selected products: <span data-bind="text: printSelectedProducts"></span>
                     </td>
                 </tr>
@@ -324,9 +329,9 @@ var viewModel = kendo.observable({
                     <td>
                         <pre class="prettyprint">
 &lt;select data-role="dropdownlist"
-           data-valuefield="id"
-           data-textfield="name"
-           data-bind="source: products, value: selectedProduct"&gt;
+    data-valuefield="id"
+    data-textfield="name"
+    data-bind="source: products, value: selectedProduct"&gt;
 &lt;/select&gt;
 Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt;
 &lt;script&gt;
