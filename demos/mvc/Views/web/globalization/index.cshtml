@@ -136,12 +136,14 @@
                     endTime = $("#endTime").kendoTimePicker().data("kendoTimePicker"),
                     initial = $("#initial").kendoNumericTextBox({ format: "c" }).data("kendoNumericTextBox"),
                     discount = $("#discount").kendoNumericTextBox({ format: "p" }).data("kendoNumericTextBox"),
+
                     today = new Date();
-
                     startDate.value(today);
-                    endDate.min(today)
+                    endDate.min(today);
 
+                    today = new Date(today);
                     today.setDate(today.getDate() + 1);
+
                     endDate.value(today);
                     startDate.max(today);
 
