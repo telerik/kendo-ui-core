@@ -104,6 +104,7 @@
         POINT = ".",
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        TYPE = touch ? "number" : "text",
         NULL = null,
         proxy = $.proxy,
         decimals = {
@@ -501,8 +502,8 @@
                 text = $("<input />").insertBefore(element).addClass(CLASSNAME);
             }
 
-            element.type = "text";
-            text[0].type = "text";
+            element.type = TYPE;
+            text[0].type = TYPE;
 
             text[0].style.cssText = element.style.cssText;
             that._text = text.attr("readonly", true).addClass(element.className);
