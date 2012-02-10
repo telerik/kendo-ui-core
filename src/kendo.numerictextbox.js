@@ -611,7 +611,6 @@
             }, timeout );
 
             that._step(step);
-            that.trigger(SPIN);
         },
 
         _step: function(step) {
@@ -626,6 +625,8 @@
             value += that.options.step * parse(step);
 
             that._update(that._adjust(value));
+
+            that.trigger(SPIN);
         },
 
         _toggleHover: function(e) {
