@@ -8,8 +8,13 @@
                         kendoConsole.log("Change :: " + this.value());
                     }
 
+                    function onSpin() {
+                        kendoConsole.log("Spin :: " + this.value());
+                    }
+
                     $("#numerictextbox").kendoNumericTextBox({
-                        change: onChange
+                        change: onChange,
+                        spin: onSpin
                     });
                 });
             </script>
