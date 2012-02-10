@@ -309,6 +309,17 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
+            test("binding select value to primitive value", function() {
+                var dom = $('<select data-bind="source:items, value:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: ["foo", "bar"],
+                    selectedItem: "bar"
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").last().is(":selected"));
+            });
             test("binding multi select value to multiple objects", function() {
                 var dom = $('<select multiple="multiple" data-valuefield="name" data-bind="source:items, value:selectedItem"/>');
 

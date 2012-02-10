@@ -228,10 +228,10 @@
         createProperty: function(path) {
             if (path == "value") {
                 if (this.target.getAttribute("multiple")) {
-                    return new MultipleSelectValueProperty(this.target, path, this.options);
+                    return new MultipleSelectValueProperty(this.target, path);
                 }
 
-                return new SelectValueProperty(this.target, path, this.options);
+                return new SelectValueProperty(this.target, path);
             }
 
             return SourceBindingTarget.fn.createProperty.call(this, path);
@@ -309,8 +309,7 @@
         updateSource: function(options) {
             var target = this.property.get(),
                 source = options.source,
-                propertyOptions = this.property.options,
-                field = propertyOptions.valueField || propertyOptions.dataValueField || propertyOptions.dataTextField,
+                field = options.valueField || options.dataValueField || options.dataTextField,
                 idx,
                 length;
 
@@ -326,10 +325,9 @@
             }
         },
 
-        applyToTarget: function() {
+        applyToTarget: function(options) {
             var value = this.binding.get(),
-                options = this.property.options,
-                field = options.valueField || options.dataValueField || options.dataTextField;
+                field = options.valueField || options.dataValueField || optoins.dataTextField;
 
             if (field) {
                 value = value.get(field);
@@ -479,7 +477,7 @@
     });
 
     var MultipleSelectValueProperty = TwoWayProperty.extend({
-        init: function(target, path, options) {
+        init: function(target, path) {
             TwoWayProperty.fn.init.apply(this, arguments);
         },
 
@@ -488,7 +486,7 @@
 
             for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
                 if (this.target[optionIndex].selected) {
-                    value.push(this.target[optionIndex].value);
+                    value.push(this.target[optionIndex].value || this.target[optionIndex].text);
                 }
             }
 
@@ -496,12 +494,18 @@
         },
 
         set: function(value) {
-            var valueIndex, optionIndex;
+            var valueIndex, optionIndex, options = this.target.options, optionValue;
 
             for (valueIndex = 0; valueIndex < value.length; valueIndex++) {
-                for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
-                    if (this.target[optionIndex].value == value[valueIndex]) {
-                        this.target[optionIndex].selected = true;
+                for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
+                    optionValue = options[optionIndex].value;
+
+                    if (optionValue === "" && value !== "") {
+                        optionValue = options[optionIndex].text;
+                    }
+
+                    if (optionValue == value[valueIndex]) {
+                        options[optionIndex].selected = true;
                     }
                 }
             }
@@ -512,6 +516,25 @@
     });
 
     var SelectValueProperty = TwoWayProperty.extend({
+        set: function(value) {
+            var optionIndex, options = this.target.options, optionValue;
+
+            for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
+                optionValue = options[optionIndex].value;
+                if (optionValue === "" && value !== "") {
+                    optionValue = options[optionIndex].text;
+                }
+
+                if (optionValue == value) {
+                    options[optionIndex].selected = true;
+                    break;
+                }
+            }
+        },
+        get: function() {
+            var option = this.target.options[this.target.selectedIndex];
+            return option.value || option.text;
+        },
         createExpression: function(binding) {
             return new SelectValueExpression(this, binding);
         }
@@ -664,6 +687,7 @@
         },
 
         setOptions: function(options) {
+            this.options = options;
             this.target.setOptions(options);
         },
 
@@ -677,7 +701,7 @@
             }
 
             if (path == "value") {
-                return new WidgetValueProperty(this.target, path, this.target.options);
+                return new WidgetValueProperty(this.target, path);
             }
 
             return new WidgetProperty(this.target, path);
@@ -876,6 +900,9 @@
     function bindElement(element, source) {
         var role = element.getAttribute("data-role"),
             idx,
+            length,
+            path,
+            sourcePath,
             nodeName = element.nodeName.toLowerCase(),
             bind,
             configuration,
@@ -919,22 +946,25 @@
                 options.template = $("#" + bindings.template).html();
             }
 
-            configuration.options.forEach(function(path) {
-                var option = element.getAttribute("data-" + kendo.ns + path.toLowerCase());
+            for (idx = 0, length = configuration.options.length; idx < length; idx++) {
+                path = configuration.options[idx];
+                option = element.getAttribute("data-" + kendo.ns + path.toLowerCase());
 
                 if (option) {
                     options[path] = option;
                 }
-            });
+            }
 
             target.setOptions(options);
 
-            configuration.properties.forEach(function(path) {
-                var sourcePath = bindings[path];
+            for (idx = 0, length = configuration.properties.length; idx < length; idx++) {
+                path = configuration.properties[idx];
+
+                sourcePath = bindings[path];
 
                 if (sourcePath) {
                     if (path == "source") {
-                        deep = false;
+                       deep = false;
                     } else if (path == "template") {
                         sourcePath = "";
                     }
@@ -943,7 +973,7 @@
 
                     target.setBinding(path, binding);
                 }
-            });
+            }
         }
 
         if (deep) {
