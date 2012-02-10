@@ -77,7 +77,7 @@
                 equal(typeof viewModel.foo.bind, "function");
             });
 
-            test("getting field raises get event", function() {
+            asyncTest("getting field raises get event", function() {
                 expect(1);
 
                 var viewModel = kendo.observable({ foo: "bar" });
@@ -91,12 +91,14 @@
                 viewModel.get("foo");
             });
 
-            test("setting a field raises set event", function() {
+            asyncTest("setting a field raises set event", function() {
                 expect(2);
 
                 var viewModel = kendo.observable({ foo: "bar" });
 
                 viewModel.bind("set", function(e) {
+                    start();
+
                     equal(e.field, "foo");
                     equal(e.value, "foo");
                 });
@@ -104,12 +106,13 @@
                 viewModel.set("foo", "foo");
             });
 
-            test("cancelling the set event prevents setting the field value", function() {
+            asyncTest("cancelling the set event prevents setting the field value", function() {
                 expect(1);
 
                 var viewModel = kendo.observable({ foo: "bar" });
 
                 viewModel.bind("set", function(e) {
+                    start();
                     e.preventDefault();
                 });
 
@@ -117,7 +120,7 @@
                 equal(viewModel.foo, "bar");
             });
 
-            test("getting nested field raises get event of parent", function() {
+            asyncTest("getting nested field raises get event of parent", function() {
                 expect(1);
 
                 var viewModel = kendo.observable({ foo: { bar: "bar" } });
