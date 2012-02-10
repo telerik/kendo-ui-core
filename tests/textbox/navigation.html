@@ -167,8 +167,8 @@
             test("Allow decimal separator '.' and do not allow ','", function() {
                 var textbox = new NumericTextBox(input);
 
-                ok(textbox._prevent("188"));
-                ok(!textbox._prevent("190"));
+                ok(textbox._prevent("188")); /* "," separator */
+                ok(!textbox._prevent("190")); /* "." separator */
             });
 
             test("Allow decimal separator ',' and do not allow '.' if diff culture", function() {
@@ -176,10 +176,18 @@
 
                 kendo.culture("bg-BG");
 
-                ok(!textbox._prevent("188"));
-                ok(textbox._prevent("190"));
+                ok(!textbox._prevent("188")); /* "," separator */
+                ok(textbox._prevent("190")); /* "." separator */
 
                 kendo.culture("en-US");
+            });
+
+            test("Prevent decimal separator if decimals: 0", function() {
+                var textbox = new NumericTextBox(input, {
+                    decimals: 0
+                });
+
+                ok(textbox._prevent("190")); /* "." separator */
             });
 
             test("110 key (numpad decimal point) should set '.'", function() {
@@ -200,6 +208,16 @@
                 equal(input.val(), ",");
 
                 kendo.culture("en-US");
+            });
+
+            test("110 key (numpad decimal point) should not modify if decimals:0", function() {
+                var textbox = new NumericTextBox(input, {
+                    decimals: 0
+                });
+
+                input.pressKey(110);
+
+                equal(input.val(), "");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
