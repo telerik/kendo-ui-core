@@ -248,6 +248,26 @@
              *     // handle event
              * });
              */
+             /**
+             * Fires when the value is changed from the spin buttons
+             * @name kendo.ui.NumericTextBox#spin
+             * @event
+             * @param {Event} e
+             * @example
+             * $("#numeric").kendoNumericTextBox({
+             *     spin: function(e) {
+             *         // handle event
+             *     }
+             * });
+             * @exampleTitle To set after initialization
+             * @example
+             * // get a reference to the numeric textbox widget
+             * var numeric = $("#numeric").data("kendoNumericTextBox");
+             * // bind to the spin event
+             * numeric.bind("spin", function(e) {
+             *     // handle event
+             * });
+             */
              that.bind([CHANGE, SPIN], options);
 
              that._text.focus(proxy(that._click, that));
