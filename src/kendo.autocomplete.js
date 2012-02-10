@@ -322,7 +322,57 @@
 
             that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
 
-            that.bind([
+            that.bind(that.events, that.options);
+
+            element[0].type = "text";
+            wrapper = that.wrapper;
+
+            element
+                .attr("autocomplete", "off")
+                .addClass("k-input")
+                .bind({
+                    keydown: proxy(that._keydown, that),
+                    paste: proxy(that._search, that),
+                    focus: function () {
+                        that._old = that.value();
+                        that._placeholder(false);
+                        wrapper.addClass(FOCUSED);
+                        clearTimeout(that._bluring);
+                    },
+                    blur: function () {
+                        if (!touch) {
+                            that._bluring = setTimeout(function () {
+                                that._blur();
+                                that._placeholder();
+                                wrapper.removeClass(FOCUSED);
+                            }, 100);
+                        } else {
+                            that._change();
+                            wrapper.removeClass(FOCUSED);
+                        }
+                    }
+                });
+
+            that._enable();
+
+            that._popup();
+
+            that._placeholder();
+
+            kendo.notify(that);
+        },
+
+        options: {
+            name: "AutoComplete",
+            suggest: false,
+            dataTextField: "",
+            minLength: 1,
+            delay: 200,
+            height: 200,
+            filter: "startswith",
+            placeholder: ""
+        },
+        events: [
             /**
             * Fires when the drop-down list is opened
             * @name kendo.ui.AutoComplete#open
@@ -375,57 +425,18 @@
             * $("#autoComplete").data("kendoAutoComplete").bind("change", function(e) {
             *     // handle event
             * });
-            */
-                CHANGE
-            ], that.options);
+                */
+               CHANGE,
+               "dataBinding",
+               "dataBound"
+            ],
+        setOptions: function(options) {
+            $.extend(this.options, options);
 
-            element[0].type = "text";
-            wrapper = that.wrapper;
+            this._template();
+            this._accessors();
 
-            element
-                .attr("autocomplete", "off")
-                .addClass("k-input")
-                .bind({
-                    keydown: proxy(that._keydown, that),
-                    paste: proxy(that._search, that),
-                    focus: function () {
-                        that._prev = that.value();
-                        that._placeholder(false);
-                        wrapper.addClass(FOCUSED);
-                        clearTimeout(that._bluring);
-                    },
-                    blur: function () {
-                        if (!touch) {
-                            that._bluring = setTimeout(function () {
-                                that._blur();
-                                that._placeholder();
-                                wrapper.removeClass(FOCUSED);
-                            }, 100);
-                        } else {
-                            that._change();
-                            wrapper.removeClass(FOCUSED);
-                        }
-                    }
-                });
-
-            that._enable();
-
-            that._popup();
-
-            that._old = that.value();
-
-            that._placeholder();
-        },
-
-        options: {
-            name: "AutoComplete",
-            suggest: false,
-            dataTextField: "",
-            minLength: 1,
-            delay: 200,
-            height: 200,
-            filter: "startswith",
-            placeholder: ""
+            List.fn.setOptions.call(this, options);
         },
 
         /**
@@ -496,6 +507,8 @@
             data = that.dataSource.view(),
             length = data.length;
 
+            that.trigger("dataBinding");
+
             ul.innerHTML = kendo.render(that.template, data);
 
             that._height(length);
@@ -514,9 +527,9 @@
                 that._open = false;
                 that.popup[length ? "open" : "close"]();
             }
+
+            that.trigger("dataBound");
         },
-
-
 
         /**
         * Selects drop-down list item and sets the text of the autocomplete.
