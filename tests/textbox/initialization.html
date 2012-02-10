@@ -80,13 +80,23 @@
                 ok(textbox._text.attr("readonly"));
             });
 
-            test("Change type of the element", function() {
-                input[0].type = "number";
+            if (kendo.support.touch) {
+                test("Change type of the element", function() {
+                    input[0].type = "text";
 
-                var textbox = new NumericTextBox(input);
+                    var textbox = new NumericTextBox(input);
 
-                equal(textbox.element[0].type, "text");
-            });
+                    equal(textbox.element[0].type, "number");
+                });
+            } else {
+                test("Change type of the element", function() {
+                    input[0].type = "number";
+
+                    var textbox = new NumericTextBox(input);
+
+                    equal(textbox.element[0].type, "text");
+                });
+            }
 
             test("Should get value from input", function() {
                 var textbox = new NumericTextBox(input.val("12"));
