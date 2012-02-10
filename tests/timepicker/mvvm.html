@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TimePicker MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a timepicker when data role is timepicker", function() {
+                var dom = $('<input data-role="timepicker"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoTimePicker") instanceof kendo.ui.TimePicker);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<input data-role="timepicker" data-interval="15" />');
+
+                kendo.bind(dom);
+
+                var timepicker = dom.data("kendoTimePicker");
+
+                equal(timepicker.options.interval, "15");
+                equal(timepicker.timeView.options.interval, "15");
+            });
+
+            test("initializes value from view model", function() {
+                var dom = $('<input data-role="timepicker" data-bind="value:value" />');
+                var value = new Date();
+
+                kendo.bind(dom, { value: value } );
+
+                equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
+            });
+
+            test("changing a value updates the view model", function() {
+                var dom = $('<input data-role="timepicker" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+                var value = new Date(2011, 1, 2);
+
+                dom.data("kendoTimePicker").value(value);
+                dom.data("kendoTimePicker").trigger("change");
+
+                equal(observable.value.getTime(), value.getTime());
+            });
+
+            test("binding timepicker initialized before binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var value = new Date(2011, 1, 2);
+                var observable = kendo.observable({ value: null });
+                observable.value = value;
+
+                dom.kendoTimePicker();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
+            });
+
+            test("binding timepicker initialized after binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                var value = new Date(2011, 1, 2);
+                observable.value = value;
+
+                kendo.bind(dom, observable);
+
+                dom.kendoTimePicker();
+
+                equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
+            });
+
+            test("updating model value updates the UI", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: value });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoTimePicker();
+
+                var value = new Date(2011, 1, 2);
+                observable.set("value", value)
+                equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
+            });
+
+            test("bindings are removed if element is rebind", 1, function() {
+                var dom = $('<input data-role="timepicker" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: new Date(2011, 1, 2) });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("expressions are destroyed", 1, function() {
+                var dom = $('<input data-role="timepicker" data-bind="value:value"/>');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("change event is raised if attached as option", 1, function() {
+                var dom = $('<input data-role="timepicker" data-change="change" />');
+
+                var observable = kendo.observable();
+
+                kendo.bind(dom, observable);
+                dom.data("kendoTimePicker").trigger("change");
+            });
+
+            function change() {
+                ok(true);
+            }
+
+            test("change event is raised if attached as option to a already initialized timepicker", 1, function() {
+                var dom = $('<input data-change="change" />').kendoTimePicker();
+
+                var observable = kendo.observable();
+
+                kendo.bind(dom, observable);
+                dom.data("kendoTimePicker").trigger("change");
+            });
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
