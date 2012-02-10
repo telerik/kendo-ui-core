@@ -389,7 +389,7 @@
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
                     focus: function () {
-                        that._old = that.value();
+                        that._prev = that.value();
                         that._placeholder(false);
                         wrapper.addClass(FOCUSED);
                         clearTimeout(that._bluring);
@@ -411,6 +411,8 @@
             that._enable();
 
             that._popup();
+
+            that._old = that.value();
 
             that._placeholder();
         },
@@ -754,8 +756,8 @@
             clearTimeout(that._typing);
 
             that._typing = setTimeout(function () {
-                if (that._old !== that.value()) {
-                    that._old = that.value();
+                if (that._prev !== that.value()) {
+                    that._prev = that.value();
                     that.search();
                 }
             }, that.options.delay);

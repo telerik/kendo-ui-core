@@ -23,6 +23,8 @@
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
+            QUnit.config.testTimeout = 500;
+
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
             }
@@ -50,6 +52,25 @@
                 ok(changeWasCalled);
             });
 
+            asyncTest("raise change after search()", function() {
+                expect(1);
+                var autocomplete = new AutoComplete(input, {
+                    delay: 0,
+                    dataSource: ["foo", "bar"],
+                    change: function() {
+                        start();
+                        ok(true);
+                    }
+                });
+
+                input.val("test");
+                autocomplete._search();
+
+                setTimeout(function() {
+                    autocomplete._change();
+                }, 100);
+            });
+
             test("_change raises the change event if value has changed", function() {
                 var changeWasCalled = false, autocomplete = new AutoComplete(input, {
                     change: function() {
@@ -57,7 +78,7 @@
                     }
                 });
 
-                autocomplete._old = "foo";
+                autocomplete._prev = "foo";
                 autocomplete.value("bar");
                 autocomplete._change();
                 ok(changeWasCalled);
@@ -87,12 +108,12 @@
                 ok(!changeWasCalled);
             });
 
-            test("_old is initialzed on focus", function() {
+            test("_prev is initialzed on focus", function() {
                 var autocomplete = new AutoComplete(input, {
                 });
 
                 input.val("foo").focus();
-                equal(autocomplete._old, "foo");
+                equal(autocomplete._prev, "foo");
             });
 
             test("select does not raise the change event", function() {
