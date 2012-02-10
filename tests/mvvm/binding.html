@@ -383,7 +383,7 @@
                 });
 
                 kendo.bind(dom, viewModel);
-                equal(dom.css("display"), "");
+                ok(dom.css("display") != "none", "Display is not 'none'");
             });
 
             test("visible binding hides the element", function() {

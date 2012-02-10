@@ -6,7 +6,17 @@
         data = kendo.data,
         Class = kendo.Class,
         GET = "get",
+        innerText,
         CHANGE = "change";
+
+    (function() {
+        var a = document.createElement("a");
+        if (a.innerText !== undefined) {
+            innerText = "innerText"
+        } else if (a.textContent !== undefined) {
+            innerText = "textContent";
+        }
+    })();
 
     kendo.observable = function(object) {
         if (!(object instanceof ObservableObject)) {
@@ -156,7 +166,7 @@
             }
 
             path = {
-                "text": "innerText",
+                "text": innerText,
                 "title": "title",
                 "html": "innerHTML",
                 "alt": "alt",
@@ -520,8 +530,13 @@
 
     var CheckBoxCheckedProperty = TwoWayProperty.extend({
         get: function() {
-            var value = this.target.getAttribute("value");
-            return value || this.target.checked;
+            var value = this.target.value;
+
+            if (value !== "on" && value !== "off") {
+                return value;
+            }
+
+            return this.target.checked;
         },
 
         set: function(value) {
@@ -576,13 +591,23 @@
             }
         },
 
+        set: function(html) {
+            $(this.target).html(html);
+        },
+
         add: function(index, html) {
-            var clone = this.target.cloneNode(), reference = this.target.children[index];
+            var clone = this.target.cloneNode(false), reference = this.target.children[index];
 
-            clone.innerHTML = html;
+            $(clone).html(html);
 
-            while (clone.firstChild) {
-                this.target.insertBefore(clone.firstChild, reference);
+            if (reference) {
+                while (clone.firstChild) {
+                    this.target.insertBefore(clone.firstChild, reference);
+                }
+            } else {
+                while (clone.firstChild) {
+                    this.target.appendChild(clone.firstChild);
+                }
             }
         },
 
