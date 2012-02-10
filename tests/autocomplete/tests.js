@@ -26,5 +26,9 @@ tests.push(
     {
         page: "autocomplete/placeholder.html",
         title: "autocomplete placeholder"
+    },
+    {
+        page: "autocomplete/mvvm.html",
+        title: "autocomplete mvvm"
     }
 );

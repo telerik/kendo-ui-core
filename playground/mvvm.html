@@ -15,6 +15,7 @@
         <script src="../src/kendo.popup.js"></script>
         <script src="../src/kendo.list.js"></script>
         <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.autocomplete.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -345,8 +346,33 @@ Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt
                         </pre>
                     </td>
                     <td>
-                        <select data-role="dropdownlist" data-valuefield="id" data-textfield="name" data-bind="source: products, value: selectedProduct">
+                        <select data-valuefield="id" data-textfield="name" data-bind="source: products, value: selectedProduct">
                         </select>
+                        Selected product <span data-bind="text:selectedProductAsJson"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kendo autocomplete declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+&lt;input data-role="autocomplete"
+    data-textfield="name"
+    data-bind="source: products, value: selectedProduct"&gt;
+&lt;/input&gt;
+Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt;
+&lt;script&gt;
+    var viewModel = {
+        products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+        selectedProductAsJson: function() {
+            return kendo.stringify(this.get("selectedProduct"));
+        }
+    };
+&lt;/script&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <input data-role="autocomplete" data-textfield="name" data-bind="source: products, value: selectedProduct">
+                        </input>
                         Selected product <span data-bind="text:selectedProductAsJson"></span>
                     </td>
                 </tr>

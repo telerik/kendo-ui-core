@@ -299,7 +299,8 @@
         updateSource: function(options) {
             var target = this.property.get(),
                 source = options.source,
-                field = this.property.options.valueField || this.property.options.dataValueField,
+                propertyOptions = this.property.options,
+                field = propertyOptions.valueField || propertyOptions.dataValueField || propertyOptions.dataTextField,
                 idx,
                 length;
 
@@ -317,7 +318,8 @@
 
         applyToTarget: function() {
             var value = this.binding.get(),
-                field = this.property.options.valueField || this.property.options.dataValueField;
+                options = this.property.options,
+                field = options.valueField || options.dataValueField || options.dataTextField;
 
             if (field) {
                 value = value.get(field);
