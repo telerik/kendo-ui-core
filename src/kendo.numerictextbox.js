@@ -279,6 +279,7 @@
 
         options: {
             name: "NumericTextBox",
+            decimals: NULL,
             min: NULL,
             max: NULL,
             value: NULL,
@@ -537,13 +538,20 @@
 
         _prevent: function(key) {
             var that = this,
-                prevent = true,
-                min = that.options.min,
                 element = that.element[0],
                 value = element.value,
-                separator = that._format(that.options.format)[POINT],
+                options = that.options,
+                min = options.min,
+                numberFormat = that._format(options.format),
+                separator = numberFormat[POINT],
+                precision = options.decimals,
                 idx = caret(element),
+                prevent = true,
                 end;
+
+            if (precision === NULL) {
+                precision = numberFormat.decimals;
+            }
 
             if ((key > 16 && key < 21)
              || (key > 32 && key < 37)
@@ -557,11 +565,11 @@
              || key == keys.BACKSPACE
              || key == keys.ENTER) {
                 prevent = false;
-            } else if (decimals[key] === separator && value.indexOf(separator) == -1) {
+            } else if (decimals[key] === separator && precision > 0 && value.indexOf(separator) == -1) {
                 prevent = false;
             } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && idx == 0) { //sign
                 prevent = false;
-            } else if (key == 110 && value.indexOf(separator) == -1) {
+            } else if (key == 110 && precision > 0 && value.indexOf(separator) == -1) {
                 end = value.substring(idx);
 
                 element.value = value.substring(0, idx) + separator + end;
@@ -619,7 +627,7 @@
                 numberFormat = that._format(format),
                 isNotNull;
 
-            if (decimals === undefined) {
+            if (decimals === NULL) {
                 decimals = numberFormat.decimals;
             }
 
