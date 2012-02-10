@@ -222,6 +222,30 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Category Axis / Horizontal / Label Step / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createCategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            labels: { step: 2 }
+                        });
+
+                        categoryAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Foo", "Baz"]);
+                });
+
+                test("labels are distributed horizontally", function() {
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [119, 652], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
                 module("Category Axis / Horizontal / Mirrored / Rendering", {
                     setup: function() {
                         moduleSetup();
@@ -387,6 +411,31 @@
                     $.each(view.log.line, function() {
                             equal(this.x1, 35);
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Vertical / Label Step / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createCategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            labels: { step: 2 },
+                            isVertical: true
+                        });
+
+                        categoryAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Foo", "Baz"]);
+                });
+
+                test("labels are distributed vertically", function() {
+                    same($.map(view.log.text, function(text) { return text.style.y }),
+                         [91, 491], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
