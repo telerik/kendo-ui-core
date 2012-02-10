@@ -93,6 +93,7 @@
         CHANGE = "change",
         DISABLED = "disabled",
         INPUT = "k-input",
+        SPIN = "spin",
         TOUCHEND = "touchend",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
@@ -247,7 +248,7 @@
              *     // handle event
              * });
              */
-             that.bind(CHANGE, options);
+             that.bind([CHANGE, SPIN], options);
 
              that._text.focus(proxy(that._click, that));
 
@@ -590,6 +591,7 @@
             }, timeout );
 
             that._step(step);
+            that.trigger(SPIN);
         },
 
         _step: function(step) {
