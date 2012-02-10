@@ -23,7 +23,7 @@
      * @example
      * $(document).ready(function(){
      *     $("#timePicker").kendoTimePicker();
-     * });  
+     * });
      *
      * @section
      * <p>
@@ -476,48 +476,12 @@
                     that.value(element[0].defaultValue);
                 });
 
-            /**
-             *
-             * Triggered when the underlying value of a TimePicker is changed.
-             *
-             * @name kendo.ui.TimePicker#change
-             * @event
-             *
-             * @param {Event} e
-             *
-             * @exampleTitle Attach change event handler during initialization; detach via unbind()
-             * @example
-             * // event change for expand
-             * var onChange = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach change event handler during initialization
-             * var timePicker = $("#timePicker").kendoTimePicker({
-             *     change: onChange
-             * });
-             *
-             * // detach change event handler via unbind()
-             * timePicker.data("kendoTimePicker").unbind("change", onChange);
-             *
-             * @exampleTitle Attach change event handler via bind(); detach via unbind()
-             * @example
-             * // event change for expand
-             * var onChange = function(e) {
-             *     // ...
-             * };
-             *
-             * // attach change event handler via bind()
-             * $("#timePicker").data("kendoTimePicker").bind("change", onChange);
-             *
-             * // detach change event handler via unbind()
-             * $("#timePicker").data("kendoTimePicker").unbind("change", onChange);
-             *
-             */
-            that.bind(CHANGE, options);
+            that.bind(that.events, options);
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || element.val());
+
+            kendo.notify(that);
         },
 
         options: {
@@ -527,6 +491,55 @@
             value: null,
             interval: 30,
             height: 200
+        },
+        events: [
+        /**
+         *
+         * Triggered when the underlying value of a TimePicker is changed.
+         *
+         * @name kendo.ui.TimePicker#change
+         * @event
+         *
+         * @param {Event} e
+         *
+         * @exampleTitle Attach change event handler during initialization; detach via unbind()
+         * @example
+         * // event change for expand
+         * var onChange = function(e) {
+         *     // ...
+         * };
+         *
+         * // attach change event handler during initialization
+         * var timePicker = $("#timePicker").kendoTimePicker({
+         *     change: onChange
+         * });
+         *
+         * // detach change event handler via unbind()
+         * timePicker.data("kendoTimePicker").unbind("change", onChange);
+         *
+         * @exampleTitle Attach change event handler via bind(); detach via unbind()
+         * @example
+         * // event change for expand
+         * var onChange = function(e) {
+         *     // ...
+         * };
+         *
+         * // attach change event handler via bind()
+         * $("#timePicker").data("kendoTimePicker").bind("change", onChange);
+         *
+         * // detach change event handler via unbind()
+         * $("#timePicker").data("kendoTimePicker").unbind("change", onChange);
+         *
+         */
+            CHANGE
+        ],
+
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+
+            $.extend(this.timeView.options, options);
+
+            this.timeView.refresh();
         },
 
         /**

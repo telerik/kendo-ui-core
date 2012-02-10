@@ -36,6 +36,7 @@
                 var datepicker = dom.data("kendoDatePicker");
 
                 equal(datepicker.options.start, "year");
+                equal(datepicker.dateView.options.start, "year");
             });
 
             test("initializes value from view model", function() {

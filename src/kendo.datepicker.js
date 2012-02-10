@@ -670,9 +670,8 @@
         },
 
         setOptions: function(options) {
-            $.extend(this.options, options);
-
-            Widget.fn.setOptions.call(this,options);
+            Widget.fn.setOptions.call(this, options);
+            $.extend(this.dateView.options, options);
         },
 
         /**

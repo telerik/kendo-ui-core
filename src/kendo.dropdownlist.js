@@ -425,12 +425,10 @@
         ],
 
         setOptions: function(options) {
-            $.extend(this.options, options);
+            Select.fn.setOptions.call(this, options);
 
             this._template();
             this._accessors();
-
-            Select.fn.setOptions.call(this, options);
         },
 
         /**

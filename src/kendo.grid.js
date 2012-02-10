@@ -995,11 +995,9 @@
                 options.rowTemplate = options.template;
             }
 
-            extend(that.options, options);
+            Widget.fn.setOptions.call(this, options);
 
             that._templates();
-
-            Widget.fn.setOptions.call(this, options);
         },
 
         items: function() {

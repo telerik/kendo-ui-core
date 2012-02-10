@@ -2247,6 +2247,8 @@
         events: [],
 
         setOptions: function(options) {
+            $.extend(this.options, options);
+
             this.bind(this.events, options);
         }
     });

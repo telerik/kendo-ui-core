@@ -373,41 +373,40 @@
             placeholder: ""
         },
         events: [
-            /**
-            * Fires when the drop-down list is opened
-            * @name kendo.ui.AutoComplete#open
-            * @event
-            * @param {Event} e
-            * @example
-            * $("#autoComplete").kendoAutoComplete({
-            *     open: function(e) {
-            *         // handle event
-            *     }
-            * });
-            * @exampleTitle To set after initialization
-            * @example
-            * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
-            * autoComplete.bind("open", function(e) {
-            *     // handle event
-            * });
-            */
-            /**
-            * Fires when the drop-down list is closed
-            * @name kendo.ui.AutoComplete#close
-            * @event
-            * @param {Event} e
-            * @example
-            * $("#autoComplete").kendoAutoComplete({
-            *     close: function(e) {
-            *         // handle event
-            *     }
-            * });
-            * @exampleTitle To set after initialization
-            * @example
-            * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
-            * autoComplete.bind("close", function(e) {
-            *     // handle event
-            * });
+        /**
+        * Fires when the drop-down list is opened
+        * @name kendo.ui.AutoComplete#open
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#autoComplete").kendoAutoComplete({
+        *     open: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @example
+        * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
+        * autoComplete.bind("open", function(e) {
+        *     // handle event
+        * });
+        */
+        /**
+        * Fires when the drop-down list is closed
+        * @name kendo.ui.AutoComplete#close
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#autoComplete").kendoAutoComplete({
+        *     close: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @exampleTitle To set after initialization
+        * @example
+        * var autoComplete = $("#autoComplete").data("kendoAutoComplete");
+        * autoComplete.bind("close", function(e) {
+        *     // handle event
+        * });
             */
             /**
             * Fires when the value has been changed.
@@ -431,12 +430,10 @@
                "dataBound"
             ],
         setOptions: function(options) {
-            $.extend(this.options, options);
+            List.fn.setOptions.call(this, options);
 
             this._template();
             this._accessors();
-
-            List.fn.setOptions.call(this, options);
         },
 
         /**

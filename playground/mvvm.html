@@ -18,6 +18,7 @@
         <script src="../src/kendo.autocomplete.js"></script>
         <script src="../src/kendo.calendar.js"></script>
         <script src="../src/kendo.datepicker.js"></script>
+        <script src="../src/kendo.timepicker.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -425,6 +426,31 @@ Selected date &lt;span data-bind="text:formatSelectedDate"&gt;&lt;/span&gt;
                         Selected date <span data-bind="text:formatSelectedDate"></span>
                     </td>
                 </tr>
+                <tr>
+                    <td>Kendo timepicker declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+&lt;input data-role="timepicker"
+    data-interval="15"
+    data-bind="value: selectedDate"&gt;
+&lt;/input&gt;
+Selected date &lt;span data-bind="text:formatSelectedDate"&gt;&lt;/span&gt;
+&lt;script&gt;
+    var viewModel = {
+        selectedDate: new Date(),
+        formatSelectedTime: function() {
+            return kendo.toString(this.selectedDate, "HH:mm");
+        }
+    };
+&lt;/script&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <input data-role="timepicker" data-interval="15" data-bind="value: selectedDate"/>
+                        Selected date <span data-bind="text:formatSelectedTime"></span>
+                    </td>
+                </tr>
+
 
             </table>
 
@@ -463,6 +489,9 @@ Selected date &lt;span data-bind="text:formatSelectedDate"&gt;&lt;/span&gt;
                     selectedDate: new Date(),
                     formatSelectedDate: function() {
                         return kendo.toString(this.get("selectedDate"), "MM/dd/yyyy");
+                    },
+                    formatSelectedTime: function() {
+                        return kendo.toString(this.get("selectedDate"), "HH:mm");
                     }
                 });
 
