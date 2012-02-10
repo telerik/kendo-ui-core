@@ -60,7 +60,77 @@
      *       });
      *   });
      *   </script>
+     *  @section <h4>Validation Rules</h4>
      *
+     *  @exampleTitle <strong>required</strong>- element should have a value
+     *  @example
+     *  <input type="text" name="firstName" required />
+     *
+     *  @exampleTitle <strong>pattern</strong>- constrains the value to match a specific regular expression
+     *  @example
+     *  <input type="text" name="twitter" pattern="https?://(?:www\.)?twitter\.com/.+i" />
+     *
+     *  @exampleTitle <strong>max/min</strong>- constrain the minimum and/or maximum numeric values that can be entered
+     *  @example
+     *  <input type="number" name="age" min="1" max="42" />
+     *
+     *  @exampleTitle <strong>step</strong>- when used in combination with the min and max attributes, constrains the granularity of values that can be entered
+     *  @example
+     *  <input type="number" name="age" min="1" max="100" step="2" />
+     *
+     *  @exampleTitle <strong>url</strong>- constrain the value to being a valid URL
+     *  @example
+     *  <input type="url" name="url" />
+     *
+     *  @exampleTitle <strong>email</strong>- constrain the value to being a valid email
+     *  @example
+     *  <input type="email" name="email" />
+     *
+     *  @section
+     *  <p>Beside the built-in validation rules, KendoUI Validator also provides a convenient way for setting custom rules through its rules configuration option. </p>
+     *
+     *  @exampleTitle
+     *  @example
+     *  $("#myform").kendoValidator({
+     *      rules: {
+     *        custom: function(input) {
+     *          // Only Tom will be a valid value for FirstName input
+     *          return input.is("[name=firstname]") && input.val() === "Tom";
+     *        }
+     *      }
+     * });
+     *
+     *  @section <h4>Validation Messages</h4>
+     *  <p>There are several ways to control the messages which appears if validation fails:</p>
+     *
+     *  @exampleTitle Set the validation messages for all input elements, through configuration options
+     *  @example
+     *   $("#myform").kendoValidator({
+     *      rules: {
+     *          custom: function(input) {
+     *                  //...
+     *          }
+     *      },
+     *      messages: {
+     *        // defines message for the 'custom' validation rule
+     *        custom: "Please enter valid value for my custom rule",
+     *        // overrides the built-in message for required rule
+     *        required: "My custom required message",
+     *        // overrides the built-in email rule message with a custom function which return the actual message
+     *        email: function(input) {
+     *          return getMessage(input);
+     *        }
+     *     }
+     *  });
+     *  @exampleTitle Use the title and validationMessage attributes to set per input element messages
+     *  @example
+     *     <input type="tel" pattern="\d{10}" validationMessage="Plase enter a ten digit phone number" />
+     *
+     *  @section <h4>Triggering validation</h4>
+     *  <p>In order to trigger the element(s) validation, <strong>validate</strong> method should be used. It will return either <em>true</em> if validation succeeded or <em>false</em> in case of a failure. </p>
+     *  <p>
+     *  Note that if a HTML form element is set as validation container, the form submits will be automatically prevented if validation fails.
+     *  </p>
      *  @section <h4>Initialize Kendo Validator with specific tooltip position</h4>
      *
      *  <p>
