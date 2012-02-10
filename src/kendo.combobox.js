@@ -718,20 +718,39 @@
         */
         text: function (text) {
             var that = this,
-                input = that.input[0];
+                input = that.input[0],
+                index = that.selectedIndex,
+                dataItem;
 
             if (text !== undefined) {
+                dataItem = that.dataItem();
+
+                if (dataItem && that._text(dataItem) === input.value) {
+                    return;
+                }
+
                 that._select(function(dataItem) {
                     return that._text(dataItem) === text;
                 });
 
-                if (that.selectedIndex < 0) {
+                if (index < 0) {
                     that._custom(text);
                 }
 
                 input.value = text;
             } else {
                 return input.value;
+            }
+        },
+
+        dataItem: function() {
+            var that = this,
+                index = that.selectedIndex;
+
+            if (index > 0) {
+                return that.dataSource.view()[index];
+            } else {
+                return null;
             }
         },
 
