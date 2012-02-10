@@ -14,5 +14,9 @@ tests.push(
     {
         page: "calendar/events.html",
         title: "calendar events"
+    },
+    {
+        page: "calendar/mvvm.html",
+        title: "calendar mvvm"
     }
 );

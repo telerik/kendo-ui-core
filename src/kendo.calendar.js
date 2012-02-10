@@ -281,50 +281,7 @@
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
                 .delegate(CELLSELECTOR, CLICK, proxy(that._click, that));
 
-            that.bind([
-                /**
-                * Fires when the selected date is changed
-                * @name kendo.ui.Calendar#change
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#calendar").kendoCalendar({
-                *     change: function(e) {
-                *         // handle event
-                *     });
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to the Kendo UI calendar widget
-                * var calendar = $("#calendar").data("kendoCalendar");
-                * // bind to the change event
-                * calendar.bind("change", function(e) {
-                *      // handle event
-                * });
-                */
-                /**
-                * Fires when navigate
-                * @name kendo.ui.Calendar#navigate
-                * @event
-                * @param {Event} e
-                * @example
-                * $("#calendar").kendoCalendar({
-                *     navigate: function(e) {
-                *          // handle event
-                *     }
-                * });
-                * @exampleTitle To set after initialization
-                * @example
-                * // get a reference to the Kendo UI calendar widget
-                * var calendar = $("#calendar").data("kendoCalendar");
-                * // bind to the change event
-                * calendar.bind("navigate", function(e) {
-                *      // handle event
-                * });
-                */
-                CHANGE,
-                NAVIGATE
-            ], options);
+            that.bind(that.events, options);
 
             value = options.value;
             validate(options);
@@ -333,6 +290,8 @@
             that._current = new DATE(restrictValue(value, options.min, options.max));
 
             that.value(value);
+
+            kendo.notify(that);
         },
 
         options: {
@@ -354,6 +313,57 @@
                     duration: 400
                 }
             }
+        },
+
+        events: [
+            /**
+            * Fires when the selected date is changed
+            * @name kendo.ui.Calendar#change
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#calendar").kendoCalendar({
+            *     change: function(e) {
+            *         // handle event
+            *     });
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the Kendo UI calendar widget
+            * var calendar = $("#calendar").data("kendoCalendar");
+            * // bind to the change event
+            * calendar.bind("change", function(e) {
+            *      // handle event
+            * });
+            */
+            /**
+            * Fires when navigate
+            * @name kendo.ui.Calendar#navigate
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#calendar").kendoCalendar({
+            *     navigate: function(e) {
+            *          // handle event
+            *     }
+            * });
+            * @exampleTitle To set after initialization
+            * @example
+            * // get a reference to the Kendo UI calendar widget
+            * var calendar = $("#calendar").data("kendoCalendar");
+            * // bind to the change event
+            * calendar.bind("navigate", function(e) {
+            *      // handle event
+            * });
+            */
+            CHANGE,
+            NAVIGATE
+        ],
+
+        setOptions: function(options) {
+            extend(this.options, options);
+
+            Widget.fn.setOptions.call(this, options);
         },
 
         /**
