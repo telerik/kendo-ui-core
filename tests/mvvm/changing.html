@@ -111,7 +111,7 @@
                     selectedItems: []
                 });
 
-                var dom = $('<select data-bind="source:foo,value:selectedItems,valuefield:name" multiple="multiple"/>');
+                var dom = $('<select data-valuefield="name" data-bind="source:foo,value:selectedItems" multiple="multiple"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -130,7 +130,7 @@
 
                 viewModel.selectedItem = viewModel.foo[0];
 
-                var dom = $('<select data-bind="source:foo,value:selectedItem,valuefield:text"/>');
+                var dom = $('<select data-valuefield="text" data-bind="source:foo,value:selectedItem"/>');
 
                 kendo.bind(dom, viewModel);
 

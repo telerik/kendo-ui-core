@@ -100,7 +100,7 @@
 
         configuration: function() {
             return {
-                options: ["textField", "valueField", "template"],
+                options: ["textField", "valueField"],
                 properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"]
             };
         },
@@ -857,7 +857,6 @@
             bindings,
             options = {},
             option,
-            setOptions,
             target;
 
         unbindElement(element);
@@ -879,7 +878,6 @@
                 } else {
                     target = new BindingTarget(element);
                 }
-                setOptions = true;
             }
 
             $.data(element, "kendoBindingTarget", target);
@@ -889,13 +887,15 @@
             bindings = parseBindAttribute(bind);
 
             configuration = target.configuration();
+
+            if (bindings.template) {
+                options.template = $("#" + bindings.template).html();
+            }
+
             configuration.options.forEach(function(path) {
-                var option = bindings[path.toLowerCase()];
+                var option = element.getAttribute("data-" + kendo.ns + path.toLowerCase());
 
                 if (option) {
-                    if (path == "template") {
-                        option =  $("#" + option).html();
-                    }
                     options[path] = option;
                 }
             });

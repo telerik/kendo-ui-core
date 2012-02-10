@@ -296,7 +296,7 @@
             });
 
             test("binding select value to object", function() {
-                var dom = $('<select data-bind="source:items, valuefield:name, value:selectedItem"/>');
+                var dom = $('<select data-valuefield="name" data-bind="source:items, value:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" } ],
@@ -310,7 +310,7 @@
             });
 
             test("binding multi select value to multiple objects", function() {
-                var dom = $('<select multiple="multiple" data-bind="valuefield:name, source:items, value:selectedItem"/>');
+                var dom = $('<select multiple="multiple" data-valuefield="name" data-bind="source:items, value:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
