@@ -501,7 +501,7 @@
                     view.log.line.shift();
 
                     same($.map(view.log.line, function(line) { return line.y1; }),
-                         [9, 106, 203, 300, 397, 494, 591], TOLERANCE);
+                         [591, 494, 397, 300, 203, 106, 9], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
@@ -520,12 +520,12 @@
                     view.log.line.shift();
 
                     same($.map(view.log.line, function(line) { return line.y1; }),
-                        [9, 28.4, 47.8, 67.2, 86.6, 106,
-                         125.4, 144.8, 164.2, 183.6, 203,
-                         222.4, 241.8, 261.2, 280.6, 300,
-                         319.4, 338.8, 358.2, 377.6, 397,
-                         416.4, 435.8, 455.2, 474.6, 494,
-                         513.4, 532.8, 552.2, 571.6, 591], TOLERANCE);
+                        [591, 571.6, 552.2, 532.8, 513.4,
+                        494, 474.6, 455.2, 435.8, 416.4,
+                        397, 377.6, 358.2, 338.8, 319.4,
+                        300, 280.6, 261.2, 241.8, 222.4,
+                        203, 183.6, 164.2, 144.8, 125.4,
+                        106, 86.6, 67.2, 47.8, 28.4, 9], TOLERANCE);
 
                 });
 
@@ -552,7 +552,7 @@
                     view.log.line.shift();
 
                     same($.map(view.log.line, function(line) { return line.y1; }),
-                        [47.8, 125.4, 203, 280.6, 358.2, 435.8, 513.4, 591], TOLERANCE);
+                        [591, 513.4, 435.8, 358.2, 280.6, 203, 125.4, 47.8], TOLERANCE);
                 });
 
                 test("major ticks are aligned to axis", 7, function() {
@@ -572,6 +572,30 @@
                     $.each(view.log.line, function() {
                             equal(this.x1, 31);
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Vertical / Label Step / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        numericAxis = new Chart.NumericAxis(0, 1, {
+                            labels: { step: 2 }
+                        });
+
+                        numericAxis.reflow(chartBox);
+                        numericAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         [0, 0.4, 0.8, 1.2]);
+                });
+
+                test("labels are distributed vertically", function() {
+                    same($.map(view.log.text, function(text) { return text.style.y }),
+                         [582, 388, 194, 0], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
@@ -762,6 +786,31 @@
                     $.each(view.log.line, function() {
                             equal(this.y2 - this.y1, MINOR_TICK_HEIGHT);
                     });
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Horizontal / Label Step / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        numericAxis = new Chart.NumericAxis(0, 1, {
+                            labels: { step: 2 },
+                            isVertical: false
+                        });
+
+                        numericAxis.reflow(chartBox);
+                        numericAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         [0, 0.4, 0.8, 1.2]);
+                });
+
+                test("labels are distributed horizontally", function() {
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [0, 253, 513, 774], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
