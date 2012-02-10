@@ -330,7 +330,7 @@ var viewModel = kendo.observable({
                     </td>
                 </tr>
                 <tr>
-                    <td>Kendo dropdown list declarative initialization</td>
+                    <td>Kendo DropDownList declarative initialization</td>
                     <td>
                         <pre class="prettyprint">
 &lt;select data-role="dropdownlist"
@@ -341,7 +341,11 @@ var viewModel = kendo.observable({
 Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt;
 &lt;script&gt;
     var viewModel = {
-        products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+        products: [
+            { name: "Chai", id: 1 },
+            { name: "Chang", id: 2 },
+            { name: "Aniseed Syrup", id: 3 }
+        ],
         selectedProductAsJson: function() {
             return kendo.stringify(this.get("selectedProduct"));
         }
@@ -356,7 +360,7 @@ Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt
                     </td>
                 </tr>
                 <tr>
-                    <td>Kendo autocomplete declarative initialization</td>
+                    <td>Kendo Autocomplete declarative initialization</td>
                     <td>
                         <pre class="prettyprint">
 &lt;input data-role="autocomplete"
@@ -366,7 +370,11 @@ Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt
 Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt;
 &lt;script&gt;
     var viewModel = {
-        products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+        products: [
+            { name: "Chai", id: 1 },
+            { name: "Chang", id: 2 },
+            { name: "Aniseed Syrup", id: 3 }
+        ],
         selectedProductAsJson: function() {
             return kendo.stringify(this.get("selectedProduct"));
         }
