@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DatePicker MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a datepicker when data role is datepicker", function() {
+                var dom = $('<input data-role="datepicker"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoDatePicker") instanceof kendo.ui.DatePicker);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<input data-role="datepicker" data-start="year" />');
+
+                kendo.bind(dom);
+
+                var datepicker = dom.data("kendoDatePicker");
+
+                equal(datepicker.options.start, "year");
+            });
+
+            test("initializes value from view model", function() {
+                var dom = $('<input data-role="datepicker" data-bind="value:value" />');
+                var value = new Date();
+
+                kendo.bind(dom, { value: value } );
+
+                equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+            });
+
+            test("changing a value updates the view model", function() {
+                var dom = $('<input data-role="datepicker" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+                var value = new Date(2011, 1, 2);
+
+                dom.data("kendoDatePicker").value(value);
+                dom.data("kendoDatePicker").trigger("change");
+
+                equal(observable.value.getTime(), value.getTime());
+            });
+
+            test("binding datepicker initialized before binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var value = new Date(2011, 1, 2);
+                var observable = kendo.observable({ value: null });
+                observable.value = value;
+
+                dom.kendoDatePicker();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+            });
+
+            test("binding datepicker initialized after binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                var value = new Date(2011, 1, 2);
+                observable.value = value;
+
+                kendo.bind(dom, observable);
+
+                dom.kendoDatePicker();
+
+                equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+            });
+
+            test("updating model value updates the UI", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: value });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoDatePicker();
+
+                var value = new Date(2011, 1, 2);
+                observable.set("value", value)
+                equal(dom.data("kendoDatePicker").value().getTime(), value.getTime());
+            });
+
+            test("bindings are removed if element is rebind", 1, function() {
+                var dom = $('<input data-role="datepicker" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: new Date(2011, 1, 2) });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("expressions are destroyed", 1, function() {
+                var dom = $('<input data-role="datepicker" data-bind="value:value"/>');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("dataBound event is raised if attached as option", 1, function() {
+                var dom = $('<input data-role="datepicker" data-change="change" />');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoDatePicker").trigger("change");
+            });
+
+            function change() {
+                ok(true);
+            }
+
+            test("dataBound event is raised if attached as option to a already initialized datepicker", 1, function() {
+                var dom = $('<input data-change="change" />').kendoDatePicker();
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoDatePicker").trigger("change");
+            });
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

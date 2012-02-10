@@ -14,5 +14,10 @@ tests.push(
     {
         page: "datepicker/events.html",
         title: "datepicker events"
+    },
+    {
+        page: "datepicker/mvvm.html",
+        title: "datepicker mvvm"
     }
+
 );

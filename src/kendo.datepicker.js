@@ -590,73 +590,75 @@
                     that.value(element[0].defaultValue);
                 });
 
-
-            /**
-            * Fires when the selected date is changed
-            * @name kendo.ui.DatePicker#change
-            * @event
-            * @param {Event} e
-            * @example
-            * $("#datePicker").kendoDatePicker({
-            *     change: function(e) {
-            *         // handle event
-            *     }
-            * });
-            * @exampleTitle To set after initialization
-            * @example
-            * // get a reference to the datePicker widget
-            * var datePicker = $("#datePicker").data("kendoDatePicker");
-            * // bind to the change event
-            * datePicker.bind("change", function(e) {
-            *     // handle event
-            * });
-            */
-            /**
-            * Fires when the calendar is opened
-            * @name kendo.ui.DatePicker#open
-            * @event
-            * @param {Event} e
-            * @example
-            * $("#datePicker").kendoDatePicker({
-            *     open: function(e) {
-            *         // handle event
-            *     }
-            * });
-            * @exampleTitle To set after initialization
-            * @example
-            * // get a reference to the datePicker widget
-            * var datePicker = $("#datePicker").data("kendoDatePicker");
-            * // bind to the open event
-            * datePicker.bind("open", function(e) {
-            *     // handle event
-            * });
-            */
-            /**
-            * Fires when the calendar is closed
-            * @name kendo.ui.DatePicker#close
-            * @event
-            * @param {Event} e
-            * @example
-            * $("#datePicker").kendoDatePicker({
-            *     close: function(e) {
-            *         // handle event
-            *     }
-            * });
-            * @exampleTitle To set after initialization
-            * @example
-            * // get a reference to the datePicker widget
-            * var datePicker = $("#datePicker").data("kendoDatePicker");
-            * // bind to the close event
-            * datePicker.bind("close", function(e) {
-            *     // handle event
-            * });
-            */
-            that.bind(CHANGE, options);
+            that.bind(that.events, options);
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
-        },
 
+            kendo.notify(that);
+        },
+        events: [
+        /**
+        * Fires when the selected date is changed
+        * @name kendo.ui.DatePicker#change
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#datePicker").kendoDatePicker({
+        *     change: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @exampleTitle To set after initialization
+        * @example
+        * // get a reference to the datePicker widget
+        * var datePicker = $("#datePicker").data("kendoDatePicker");
+        * // bind to the change event
+        * datePicker.bind("change", function(e) {
+        *     // handle event
+        * });
+        */
+        /**
+        * Fires when the calendar is opened
+        * @name kendo.ui.DatePicker#open
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#datePicker").kendoDatePicker({
+        *     open: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @exampleTitle To set after initialization
+        * @example
+        * // get a reference to the datePicker widget
+        * var datePicker = $("#datePicker").data("kendoDatePicker");
+        * // bind to the open event
+        * datePicker.bind("open", function(e) {
+        *     // handle event
+        * });
+        */
+        /**
+        * Fires when the calendar is closed
+        * @name kendo.ui.DatePicker#close
+        * @event
+        * @param {Event} e
+        * @example
+        * $("#datePicker").kendoDatePicker({
+        *     close: function(e) {
+        *         // handle event
+        *     }
+        * });
+        * @exampleTitle To set after initialization
+        * @example
+        * // get a reference to the datePicker widget
+        * var datePicker = $("#datePicker").data("kendoDatePicker");
+        * // bind to the close event
+        * datePicker.bind("close", function(e) {
+        *     // handle event
+        * });
+        */
+        CHANGE],
         options: {
             name: "DatePicker",
             value: null,
@@ -665,6 +667,12 @@
             footer: '#= kendo.toString(data,"D") #',
             start: MONTH,
             depth: MONTH
+        },
+
+        setOptions: function(options) {
+            $.extend(this.options, options);
+
+            Widget.fn.setOptions.call(this,options);
         },
 
         /**
