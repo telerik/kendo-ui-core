@@ -744,6 +744,8 @@
          *     },
          *     ...
          * });
+         * @option {Number} [valueAxis.labels.step] <1> Label rendering step.
+         * Every n-th label is rendered where n is the step
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
          * _example
          * $("#chart").kendoChart({
@@ -1361,6 +1363,8 @@
          *     },
          *     ...
          * });
+         * @option {Number} [categoryAxis.labels.step] <1> Label rendering step.
+         * Every n-th label is rendered where n is the step
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
          * _example
          * $("#chart").kendoChart({

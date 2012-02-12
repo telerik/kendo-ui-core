@@ -1416,7 +1416,8 @@
             labels: {
                 visible: true,
                 rotation: 0,
-                mirror: false
+                mirror: false,
+                step: 1
             },
             line: {
                 width: 1,
@@ -1446,7 +1447,8 @@
                 align = options.isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
-                });
+                }),
+                step = labelOptions.step;
 
             axis.labels = [];
             if (labelOptions.visible) {
@@ -1455,7 +1457,7 @@
                     label,
                     i;
 
-                for (i = 0; i < labelsCount; i++) {
+                for (i = 0; i < labelsCount; i += step) {
                     labelText = axis.getLabelText(i);
 
                     if (labelOptions.template) {
@@ -1665,6 +1667,7 @@
         arrangeLabels: function(maxLabelWidth, maxLabelHeight, position) {
             var axis = this,
                 options = axis.options,
+                labelStep = options.labels.step,
                 labels = axis.labels,
                 isVertical = options.isVertical,
                 lineBox = axis.lineBox(),
@@ -1678,7 +1681,7 @@
 
             for (i = 0; i < labels.length; i++) {
                 var label = labels[i],
-                    tickIx = isVertical ? (labels.length - 1 - i) : i,
+                    tickIx = labelStep * i,
                     labelSize = isVertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition,
@@ -1688,8 +1691,8 @@
 
                 if (isVertical) {
                     if (position == ON_MINOR_TICKS) {
-                        firstTickPosition = tickPositions[i];
-                        nextTickPosition = tickPositions[i + 1];
+                        firstTickPosition = tickPositions[tickIx];
+                        nextTickPosition = tickPositions[tickIx + 1];
 
                         middle = firstTickPosition + (nextTickPosition - firstTickPosition) / 2;
                         labelPos = middle - (labelSize / 2);
@@ -1706,8 +1709,8 @@
                     labelBox = label.box.move(labelX, labelPos);
                 } else {
                     if (position == ON_MINOR_TICKS) {
-                        firstTickPosition = tickPositions[i];
-                        nextTickPosition = tickPositions[i + 1];
+                        firstTickPosition = tickPositions[tickIx];
+                        nextTickPosition = tickPositions[tickIx + 1];
                     } else {
                         firstTickPosition = labelPos;
                         nextTickPosition = labelPos + labelSize;
@@ -1962,7 +1965,7 @@
                 pos = pos + step * multiplier;
             }
 
-            return isVertical ? positions.reverse() : positions;
+            return positions;
         },
 
         getMajorTickPositions: function() {
