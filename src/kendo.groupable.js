@@ -17,7 +17,8 @@
                 .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
-        dropCue = $('<div class="k-grouping-dropclue"/>');
+        dropCue = $('<div class="k-grouping-dropclue"/>'),
+        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g;
 
     function dropCueOffsetTop(element) {
         return $(element).children(".k-grid-toolbar").outerHeight() + 3;
@@ -114,7 +115,8 @@
                 that.dataSource.bind("change", function() {
                     groupContainer.empty().append(
                         $.map(this.group() || [], function(item) {
-                            var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + item.field + "]");
+                            var fieldName = item.field.replace(nameSpecialCharRegExp, "\\$1");
+                            var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + fieldName + "]");
                             return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
                         }).join("")
                     );
