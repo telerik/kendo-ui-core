@@ -1343,7 +1343,7 @@
         // Collect the src attributes of all iframes and then set them to empty string.
         // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
         iframeSrcAttributes = contentHtml.find("iframe").map(function(iframe) {
-            var src = this.src;
+            var src = this.getAttribute("src");
             this.src = "";
             return src;
         });
