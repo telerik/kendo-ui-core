@@ -1462,7 +1462,7 @@
                     }
 
                     currentProxy(currentTarget);
-                    if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
+                    if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
                         setTimeout(function() { wrapper.focus(); });
                     }
 
