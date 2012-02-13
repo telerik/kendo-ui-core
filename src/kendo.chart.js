@@ -39,7 +39,6 @@
         CLIP = "clip",
         COLUMN = "column",
         COORD_PRECISION = 3,
-        DATABINDING = "dataBinding",
         DATABOUND = "dataBound",
         DEFAULT_FONT = "12px sans-serif",
         DEFAULT_HEIGHT = 400,
@@ -105,8 +104,7 @@
             var chart = this,
                 options,
                 themeOptions,
-                theme,
-                e = {};
+                theme;
 
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
@@ -133,9 +131,7 @@
                     .bind(CHANGE, proxy(chart._onDataChanged, chart));
 
                 if (options.autoBind) {
-                    if (!chart.trigger(DATABINDING, e)) {
-                        chart.dataSource.query(e.data);
-                    }
+                    chart.dataSource.fetch();
                 }
             }
 
@@ -188,7 +184,7 @@
             applyDefaults(chart.options);
 
             if (chart.dataSource) {
-                chart._ajaxBinding();
+                chart.dataSource.read();
             } else {
                 chart._redraw();
             }
@@ -215,15 +211,6 @@
             chart._viewElement = view.renderTo(element[0]);
             chart._tooltip = new Tooltip(element, options.tooltip);
             chart._highlight = new Highlight(view, chart._viewElement);
-        },
-
-        _ajaxBinding: function(additionalData) {
-            var chart = this,
-                e = {};
-
-            if (!chart.trigger(DATABINDING, e)) {
-                chart.dataSource.read(extend({}, e.data, additionalData));
-            }
         },
 
         svg: function() {
