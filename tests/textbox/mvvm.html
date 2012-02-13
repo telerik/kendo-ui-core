@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>numerictextbox MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.numerictextbox.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a numerictextbox when data role is numerictextbox", function() {
+                var dom = $('<input data-role="numerictextbox"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoNumericTextBox") instanceof kendo.ui.NumericTextBox);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<input data-role="numerictextbox" data-format="p0" />');
+
+                kendo.bind(dom);
+
+                var numerictextbox = dom.data("kendoNumericTextBox");
+
+                equal(numerictextbox.options.format, "p0");
+            });
+
+            test("initializes value from view model", function() {
+                var dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
+
+                kendo.bind(dom, { value: 42 } );
+
+                equal(dom.data("kendoNumericTextBox").value(), 42);
+            });
+
+            test("changing a value updates the view model", function() {
+                var dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoNumericTextBox").value(42);
+                dom.data("kendoNumericTextBox").trigger("change");
+
+                equal(observable.value, 42);
+            });
+
+            test("binding numerictextbox initialized before binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                observable.value = 42;
+
+                dom.kendoNumericTextBox();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoNumericTextBox").value(), 42);
+            });
+
+            test("binding numerictextbox initialized after binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                observable.value = 42;
+
+                kendo.bind(dom, observable);
+
+                dom.kendoNumericTextBox();
+
+                equal(dom.data("kendoNumericTextBox").value(), 42);
+            });
+
+            test("updating model value updates the UI", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoNumericTextBox();
+
+                observable.set("value", 42)
+                equal(dom.data("kendoNumericTextBox").value(), 42);
+            });
+
+            test("bindings are removed if element is rebind", 1, function() {
+                var dom = $('<input data-role="numerictextbox" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: 42 });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("expressions are destroyed", 1, function() {
+                var dom = $('<input data-role="numerictextbox" data-bind="value:value"/>');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("dataBound event is raised if attached as option", 1, function() {
+                var dom = $('<input data-role="numerictextbox" data-change="change" />');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoNumericTextBox").trigger("change");
+            });
+
+            function change() {
+                ok(true);
+            }
+
+            test("dataBound event is raised if attached as option to a already initialized numerictextbox", 1, function() {
+                var dom = $('<input data-change="change" />').kendoNumericTextBox();
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoNumericTextBox").trigger("change");
+            });
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

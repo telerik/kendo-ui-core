@@ -228,47 +228,7 @@
              that._arrows();
              that._input();
 
-             /**
-             * Fires when the value is changed
-             * @name kendo.ui.NumericTextBox#change
-             * @event
-             * @param {Event} e
-             * @example
-             * $("#numeric").kendoNumericTextBox({
-             *     change: function(e) {
-             *         // handle event
-             *     }
-             * });
-             * @exampleTitle To set after initialization
-             * @example
-             * // get a reference to the numeric textbox widget
-             * var numeric = $("#numeric").data("kendoNumericTextBox");
-             * // bind to the change event
-             * numeric.bind("change", function(e) {
-             *     // handle event
-             * });
-             */
-             /**
-             * Fires when the value is changed from the spin buttons
-             * @name kendo.ui.NumericTextBox#spin
-             * @event
-             * @param {Event} e
-             * @example
-             * $("#numeric").kendoNumericTextBox({
-             *     spin: function(e) {
-             *         // handle event
-             *     }
-             * });
-             * @exampleTitle To set after initialization
-             * @example
-             * // get a reference to the numeric textbox widget
-             * var numeric = $("#numeric").data("kendoNumericTextBox");
-             * // bind to the spin event
-             * numeric.bind("spin", function(e) {
-             *     // handle event
-             * });
-             */
-             that.bind([CHANGE, SPIN], options);
+             that.bind(that.events, options);
 
              that._text.focus(proxy(that._click, that));
 
@@ -297,6 +257,8 @@
              that.value(value !== NULL ? value : element.val());
 
              that.enable(!element.is('[disabled]'));
+
+             kendo.notify(that);
          },
 
         options: {
@@ -310,7 +272,50 @@
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
         },
-
+        events: [
+             /**
+             * Fires when the value is changed
+             * @name kendo.ui.NumericTextBox#change
+             * @event
+             * @param {Event} e
+             * @example
+             * $("#numeric").kendoNumericTextBox({
+             *     change: function(e) {
+             *         // handle event
+             *     }
+             * });
+             * @exampleTitle To set after initialization
+             * @example
+             * // get a reference to the numeric textbox widget
+             * var numeric = $("#numeric").data("kendoNumericTextBox");
+             * // bind to the change event
+             * numeric.bind("change", function(e) {
+             *     // handle event
+             * });
+             */
+            CHANGE,
+             /**
+             * Fires when the value is changed from the spin buttons
+             * @name kendo.ui.NumericTextBox#spin
+             * @event
+             * @param {Event} e
+             * @example
+             * $("#numeric").kendoNumericTextBox({
+             *     spin: function(e) {
+             *         // handle event
+             *     }
+             * });
+             * @exampleTitle To set after initialization
+             * @example
+             * // get a reference to the numeric textbox widget
+             * var numeric = $("#numeric").data("kendoNumericTextBox");
+             * // bind to the spin event
+             * numeric.bind("spin", function(e) {
+             *     // handle event
+             * });
+             */
+            SPIN
+        ],
         /**
         * Enable/Disable the numerictextbox widget.
         * @param {Boolean} enable The argument, which defines whether to enable/disable tha numerictextbox.

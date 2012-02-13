@@ -14,5 +14,10 @@ tests.push(
     {
         page: "textbox/navigation.html",
         title: "textbox navigation"
+    },
+    {
+        page: "textbox/mvvm.html",
+        title: "textbox mvvm"
     }
+
 );
