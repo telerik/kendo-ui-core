@@ -1336,7 +1336,7 @@
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
                 that.selectable = new kendo.ui.Selectable(that.table, {
-                    filter: cell ? CELL_SELECTOR : ROW_SELECTOR,
+                    filter: ">" + (cell ? CELL_SELECTOR : ROW_SELECTOR),
                     multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
@@ -1346,8 +1346,9 @@
                 if (that.options.navigatable) {
                     that.wrapper.keydown(function(e) {
                         var current = that.current();
-                        if (e.keyCode === keys.SPACEBAR && !current.hasClass("k-edit-cell")) {
+                        if (e.keyCode === keys.SPACEBAR && e.target == that.wrapper[0] && !current.hasClass("k-edit-cell")) {
                             e.preventDefault();
+                            e.stopPropagation();
                             current = cell ? current : current.parent();
 
                             if(multi) {
@@ -1455,10 +1456,17 @@
                 selector = "." + FOCUSABLE + " " + CELL_SELECTOR,
                 browser = $.browser,
                 clickCallback = function(e) {
-                    currentProxy($(e.currentTarget));
-                    if(e.type == CLICK && !$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
-                        wrapper.focus();
+                    var currentTarget = $(e.currentTarget);
+                    if (currentTarget.closest("tbody")[0] !== that.tbody[0]) {
+                        return;
                     }
+
+                    currentProxy(currentTarget);
+                    if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea")) {
+                        setTimeout(function() { wrapper.focus(); });
+                    }
+
+                    e.stopPropagation();
                 };
 
             if (that.options.navigatable) {
@@ -1471,10 +1479,11 @@
                             currentProxy(that.table.find(FIRST_CELL_SELECTOR));
                         }
                     },
-                    focusout: function() {
+                    focusout: function(e) {
                         if (that._current) {
                             that._current.removeClass(FOCUSED);
                         }
+                        e.stopPropagation();
                     },
                     keydown: function(e) {
                         var key = e.keyCode,
@@ -1533,11 +1542,12 @@
 
                         if(handled) {
                             e.preventDefault();
+                            e.stopPropagation();
                         }
                     }
                 });
 
-                wrapper.delegate(selector, browser.msie ? CLICK : "mousedown", clickCallback);
+                wrapper.delegate(selector, "mousedown", clickCallback);
             }
         },
 
