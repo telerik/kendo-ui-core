@@ -1169,7 +1169,7 @@
 
             element.remove();
 
-            if (group && !group.children(ITEM).length) {
+            if (group && !group.hasClass("k-panelbar") && !group.children(ITEM).length) {
                 group.remove();
             }
 

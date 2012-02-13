@@ -32,6 +32,7 @@
             $("#PanelBar3").kendoPanelBar({ animation: { expand: { effects: { fadeIn: {}, "expand:vertical": {} } } }, expandMode: 0 });
             $("#PanelBar4").kendoPanelBar({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html' ] });
             $("#Panel").kendoPanelBar().css({ width: '300px', 'float': 'left' });
+            $("#emptyPanel").kendoPanelBar();
 
             var item = $("#PanelBar1 li:first").eq(0);
             panel1.expand(item).select(item);
@@ -46,6 +47,7 @@
     </script>
 </head>
 <body>
+    <a href="javascript:(function () {$('#emptyPanel').data('kendoPanelBar').remove('#redundantItem')})()">Remove Remove</a>
     <ul class="k-widget k-panelbar k-reset" id="PanelBar1" style="width: 300px; float: left; margin-bottom: 30px;">
         <li class="k-item k-state-default"><span class="k-link k-header"><img alt="Mail Icon" class="k-image"
                                                                               src="Icons/mail.gif">Mail<span
@@ -459,6 +461,9 @@
                 </li>
             </ul>
         </li>
+    </ul>
+    <ul id="emptyPanel">
+        <li id="redundantItem">Test Item</li>
     </ul>
 
 </body>
