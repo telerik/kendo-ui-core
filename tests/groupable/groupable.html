@@ -289,6 +289,19 @@
                equal(aggregates[1].field,"field2");
                equal(aggregates[1].aggregate,"sum");
            });
+
+           test("dropping over group container creates group indicator for complex field ", function() {
+               div.remove();
+               div = $("<div><div class='container'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").appendTo(document.body);
+
+                var groupContainer = $(".container"),
+                    groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
+                    th = div.find("th:first");
+
+                moveOverDropTarget(th, groupContainer);
+
+                equal(groupContainer.children().length, 1);
+            });
         </script>
     </body>
 </html>
