@@ -73,7 +73,7 @@
                 });
 
                 test("initial binding is done using fetch", 1, function() {
-                    stubMethod(kendo.data.DataSource, "fetch", function() {
+                    stubMethod(kendo.data.DataSource, "query", function() {
                         ok(true);
                     }, function() {
                         createChart({
