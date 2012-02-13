@@ -355,8 +355,7 @@
                 }
             }
 
-            wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length)
-                   .appendTo(body);
+            wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length);
 
             that.toFront();
 
@@ -1324,6 +1323,7 @@
 
     function createWindow(element, options) {
         var contentHtml = $(element),
+            iframeSrcAttributes,
             wrapper;
 
         if (options.scrollable === false) {
@@ -1340,9 +1340,22 @@
             wrapper.append(templates.titlebar(extend(templates, options)))
         }
 
+        // Collect the src attributes of all iframes and then set them to empty string.
+        // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4
+        iframeSrcAttributes = contentHtml.find("iframe").map(function(iframe) {
+            var src = this.src;
+            this.src = "";
+            return src;
+        });
+
+        // Make sure the wrapper is appended to the body only once. IE9+ will throw exceptions if you move iframes in DOM
         wrapper
+            .appendTo(body)
             .append(contentHtml)
-            .appendTo(body);
+            .find("iframe").each(function(index) {
+               // Restore the src attribute of the iframes when they are part of the live DOM tree
+               this.src = iframeSrcAttributes[index];
+            });
     }
 
     function WindowResizing(wnd) {
