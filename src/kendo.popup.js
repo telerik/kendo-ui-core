@@ -24,6 +24,7 @@
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         SCROLLER = "kendoMobileScroller",
+        DOCUMENT= $(document),
         cssPrefix = kendo.support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
@@ -113,13 +114,13 @@
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
             if (!touch) { //  On mobile device this closes the popup if keyboard is shown
-                $(window).bind("resize scroll", function(e) {
+                that._currentWidth = DOCUMENT.width();
+                $(window).bind("resize scroll", function() {
                     if (bodyResizeEvent) {
-                        var width = $(document).width();
+                        var width = DOCUMENT.width();
                         if (width == that._currentWidth) {
                             return;
                         }
-
                         that._currentWidth = width;
                     }
 
