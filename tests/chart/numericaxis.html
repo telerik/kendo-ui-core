@@ -396,6 +396,14 @@
                     );
                 })
 
+                test("should not create axis line if visible is false", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { line: { visible: false }});
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+                    ok(view.log.line.length == 0);
+                })
+
                 test("creates axis line when max is not multiple of majorUnit", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, { min: 0, max: 1, majorUnit: .3 });
                     numericAxis.reflow(chartBox);
@@ -652,6 +660,14 @@
                             TOLERANCE
                     );
                 });
+
+                test("should not create axis line if visible is false", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { line: { visible: false, isVertical: false  }});
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+                    ok(view.log.line.length == 0);
+                })
 
                 test("creates labels", 1, function() {
                     numericAxis.getViewElements(view);

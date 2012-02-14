@@ -60,6 +60,13 @@
                     );
                 });
 
+                test("should not create axis line if visible is false", function() {
+                    createCategoryAxis({ line: { visible: false } });
+
+                    categoryAxis.getViewElements(view);
+                    ok(view.log.line.length == 0);
+                });
+
                 test("creates labels", 1, function() {
                     categoryAxis.getViewElements(view);
 
@@ -296,6 +303,13 @@
                             LINE_X + MARGIN, chartBox.y2),
                             TOLERANCE
                     );
+                });
+
+                test("should not create axis line if visible is false", function() {
+                    createCategoryAxis({ line: { visible: false }, isVertical: true });
+
+                    categoryAxis.getViewElements(view);
+                    ok(view.log.line.length == 0);
                 });
 
                 test("creates axis with dash type", function() {
