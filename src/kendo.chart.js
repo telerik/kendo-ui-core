@@ -1421,7 +1421,8 @@
             },
             line: {
                 width: 1,
-                color: BLACK
+                color: BLACK,
+                visible: true
             },
             title: {
                 visible: true,
@@ -1834,15 +1835,16 @@
         getViewElements: function(view) {
             var axis = this,
                 options = axis.options,
+                line = options.line,
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 lineBox = axis.lineBox(),
                 lineOptions;
 
-            if (options.line.width > 0) {
+            if (line.width > 0 && line.visible) {
                 lineOptions = {
-                    strokeWidth: options.line.width,
-                    stroke: options.line.color,
-                    dashType: options.line.dashType,
+                    strokeWidth: line.width,
+                    stroke: line.color,
+                    dashType: line.dashType,
                     zIndex: options.zIndex
                 };
                 if (options.isVertical) {
@@ -2073,7 +2075,7 @@
                 childElements = ChartElement.fn.getViewElements.call(axis, view),
                 lineOptions;
 
-            if (line.width > 0) {
+            if (line.width > 0 && line.visible) {
                 lineOptions = {
                     strokeWidth: line.width,
                     stroke: line.color,
@@ -4403,7 +4405,7 @@
                         pos: pos,
                         options: options
                     };
-                }
+                };
 
             if (options.majorGridLines.visible) {
                 gridLines = map(majorTicks, function(pos) {
@@ -4433,7 +4435,7 @@
                     },
                     linePos = round(line.pos);
 
-                if (secAxisPos === linePos) {
+                if (secAxisPos === linePos && secondaryAxis.options.line.visible) {
                     return null;
                 }
 
