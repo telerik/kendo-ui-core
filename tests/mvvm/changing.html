@@ -264,13 +264,12 @@
             });
 
             test("tracking changes of fields bound to style", function() {
-                /*TODO
                 var viewModel = kendo.observable( {
                     foo: "none",
                     bar: "underline"
                 });
 
-                var dom = $('<div data-style="display:${foo};text-decoration:${bar}"/>');
+                var dom = $('<div data-bind="style: { display: foo, text-decoration: bar }"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -279,7 +278,6 @@
 
                 equal(dom.css("display"), "inline");
                 equal(dom.css("text-decoration"), "overline");
-                */
             });
 
             test("tracking changes of complex fields", function() {

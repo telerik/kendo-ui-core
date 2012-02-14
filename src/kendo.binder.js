@@ -111,17 +111,32 @@
         configuration: function() {
             return {
                 options: ["textField", "valueField"],
-                properties: ["text", "checked", "attr", "template", "disabled", "enabled", "click", "visible", "change", "html", "source", "value"]
+                properties: ["text", "checked", "style", "attr", "template", "disabled", "enabled", "click", "visible", "change", "html", "source", "value"]
             };
         },
 
         setAttributeBinding: function(path, binding) {
-            var property = new AttributeProperty(this.target, path);
+            var that = this,
+                property = new AttributeProperty(that.target, path);
 
             var expression = property.createExpression(binding);
-            this.expressions.push(expression);
+            that.expressions.push(expression);
 
-            expression.updateTarget(this.options);
+            expression.updateTarget(that.options);
+
+            binding.bind("change", function() {
+                expression.updateTarget(that.options);
+            });
+        },
+
+        setStyleBinding: function(path, binding) {
+            var that = this,
+                property = new StyleProperty(that.target, path);
+
+            var expression = property.createExpression(binding);
+            that.expressions.push(expression);
+
+            expression.updateTarget(that.options);
 
             binding.bind("change", function() {
                 expression.updateTarget(that.options);
@@ -412,6 +427,11 @@
         }
     });
 
+    var StyleProperty = Property.extend( {
+        set: function(value) {
+            this.target.style[this.path] = value;
+        }
+    });
 
     var EventProperty = Property.extend({
         set: function(value) {
@@ -894,10 +914,12 @@
     }
 
     var attrRegExp = /attr\s*:\s*{([^}]*)}/ig;
+    var styleRegExp = /style\s*:\s*{([^}]*)}/ig;
 
     function parseAttributeList(bind) {
         var result = {},
-            attr;
+            attr,
+            style;
 
         bind = bind.replace(attrRegExp, function($0, $1) {
             attr = attr || {};
@@ -906,6 +928,15 @@
 
         if (attr) {
             result.attr = attr;
+        }
+
+        bind = bind.replace(styleRegExp, function($0, $1) {
+            style = style || {};
+            appendAttributes(style, $1);
+        });
+
+        if (style) {
+            result.style = style;
         }
 
         appendAttributes(result, bind);
@@ -1001,6 +1032,10 @@
                     if (path == "attr") {
                         for (path in sourcePath) {
                             target.setAttributeBinding(path, new Binding(source, sourcePath[path]));
+                        }
+                    } else if (path == "style") {
+                        for (path in sourcePath) {
+                            target.setStyleBinding(path, new Binding(source, sourcePath[path]));
                         }
                     } else {
                         target.setBinding(path, new Binding(source, sourcePath));
