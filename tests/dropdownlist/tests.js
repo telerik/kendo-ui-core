@@ -18,9 +18,5 @@ tests.push(
     {
         page: "dropdownlist/searching.html",
         title: "dropdownlist searching"
-    },
-    {
-        page: "dropdownlist/mvvm.html",
-        title: "dropdownlist mvvm"
     }
 );
