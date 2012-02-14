@@ -10,18 +10,24 @@
     font: normal 1em Arial, Helvetica, sans-serif;
 }
 
+.km-blackberry
+{
+    background: linear-gradient(top, #eee, #ccc);
+}
+
+.km-blackberry .km-navbar,
 .km-blackberry .km-toolbar,
 .km-blackberry .km-button,
 .km-blackberry .km-buttongroup,
 .km-blackberry .km-tabstrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
-    color: #333;
+    color: #000;
     text-shadow: none;
-    border-color: #fff;
+    border: 1px solid rgba(0,0,0,.2);
     background-color: #d3d7d7;
-    -webkit-box-shadow: none;
-    background-image: linear-gradient(top, rgba(255, 255, 255, 1), rgba(210, 210, 210, 0));
+    background-image: linear-gradient(top, rgba(255,255,255,.8), rgba(255,255,255,0));
+    .box-shadow(0 1px 0 0 rgba(0,0,0,.1));
 }
 
 .km-blackberry .km-badge
@@ -30,12 +36,12 @@
 }
 
 .km-blackberry .km-button:not([disabled]):active,
+.km-blackberry .km-button.km-state-active:not([disabled]),
 .km-blackberry .km-buttongroup .km-state-active
 {
     color: #FFF;
-    border-color: #3f9fe5;
     background-color: #1b6ec0;
-    background-image: linear-gradient(top, rgba(255, 255, 255, 0.3), rgba(210, 210, 210, 0));
+    background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
 
 .km-blackberry .km-buttongroup
@@ -43,18 +49,150 @@
     font-size: 1em;
 }
 
+.km-blackberry .km-switch
+{
+    font-weight: normal;
+    font-family: HelveticaNeue, Arial, sans-serif;
+    line-height: 1.7rem;
+    width: 7.2rem;
+    -webkit-transform: translatez(0);
+}
+
+.km-blackberry .km-switch-background,
+.km-blackberry .km-slider-background
+{
+    background:
+        linear-gradient(top, rgb(219,219,219), rgb(238,238,238) 50%) 6em 0 no-repeat #007cb5;
+}
+
+.km-blackberry .km-switch-background:after
+{
+    content: "\a0";
+    display: inline-block;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 100%;
+    vertical-align: bottom;
+    background: linear-gradient(top,  rgba(255,255,255,.3), rgba(255,255,255,0));
+}
+
+.km-blackberry .km-switch-container
+{
+    border: 1px solid #999;
+    background: linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,0) 5%, rgba(0,0,0,0));
+}
+
+.km-blackberry .km-switch-handle
+{
+    width: 3.6rem;
+    border: 1px solid #969696;
+    background: #000 linear-gradient(top, rgba(255,255,255,.98), rgba(255,255,255,.9));
+    .box-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+}
+
+.km-blackberry .km-switch-label-off
+{
+    color: #000;
+    left: 3.8em;
+}
+
+.km-blackberry .km-switch-label-on
+{
+    color: #fff;
+    left: -3.8em;
+}
+
+.km-blackberry .km-switch-label-on,
+.km-blackberry .km-switch-label-off
+{
+    text-shadow: none;
+    font-size: .95rem;
+    width: 100%;
+}
+
+.km-blackberry .km-listinset,
+.km-blackberry .km-listgroupinset
+{
+    margin: 0;
+}
+
+.km-blackberry .km-listview
+{
+    margin: 0 1em;
+}
+
+.km-blackberry .km-listinset > li,
+.km-blackberry .km-listgroupinset > li
+{
+    margin-top: 0;
+}
+
+.km-blackberry .km-listview .km-list
+{
+    border-top: 1px solid #d5d6da;
+}
+
+.km-blackberry .km-list > li
+{
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: normal;
+    line-height: 2em;
+    border-bottom: 1px solid #d5d6da;
+    overflow: hidden;
+}
+
+.km-blackberry .km-list > li,
+.km-blackberry .km-list a:not(.km-button)
+{
+    color: #000;
+}
+
+.km-blackberry .km-listgroup > li,
+.km-blackberry .km-listgroupinset > li
+{
+    color: #333;
+    background: transparent;
+    padding-top: .2em;
+    line-height: inherit;
+}
+
+.km-blackberry .km-list
+{
+    color: #000;
+}
+
+.km-blackberry .km-listview-link:after
+{
+    display: none;
+}
+
+.km-blackberry .km-list .km-item
+{
+    height: 56px;
+}
+
+.km-blackberry .km-listview .km-switch
+{
+    margin-top: -.8em;
+    margin-top: ~"-.8rem";
+}
+
 .km-blackberry .km-toolbar,
 .km-blackberry .km-navbar
 {
-    background-color: #181E17;
-    background-image: linear-gradient(top, rgba(43, 49, 45, 1), rgba(24, 30, 23, 0) 100%);
+    border-bottom: 2px solid rgba(0,0,0,.3);
+    background-color: #2a3235;
+    background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2) 73%, rgba(255,255,255,.05));
 }
 
 .km-blackberry .km-tabstrip
 {
-    padding: .2em;
-    background-color: #333;
-    background-image: linear-gradient(top, rgba(188, 188, 188, 0.8), rgba(51, 51, 51, 0) 50%);
+    padding: .2em 0 0;
+    border-top: 2px solid rgba(0,0,0,.3);
+    background-color: #2a3235;
+    background-image: linear-gradient(top, rgba(255,255,255,.05), rgba(0,0,0,.2) 27%, rgba(0,0,0,0));
 }
 
 .km-blackberry .km-tabstrip .km-badge
@@ -65,9 +203,12 @@
 
 .km-blackberry .km-tabstrip .km-button
 {
-    .border-radius(5pt);
-    padding: .1em;
+    border: 0;
     margin: 0 1%;
+    padding: .2em 1.2em;
+    background: transparent;
+    .border-radius(5pt);
+    .box-shadow(none);
 }
 
 .km-blackberry .km-tabstrip .km-text
@@ -75,30 +216,29 @@
     display: none;
 }
 
+.km-blackberry .km-tabstrip .km-icon
+{
+    width: 1.8rem;
+    height: 1.8rem;
+    position: relative;
+    left: 50%;
+    margin: ~".3rem 0 .4rem -.9rem";
+}
+
+.km-blackberry .km-button .km-icon
+{
+    background-color: #1b6ec0;
+}
+
+.km-blackberry .km-button .km-icon,
+.km-blackberry .km-state-active .km-icon,
 .km-blackberry .km-tabstrip .km-button .km-icon
 {
-    opacity: 0.5;
-    background: transparent url('images/atabimg.png') no-repeat .5em 50%;
-    background-size: auto 100%;
+    background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.4));
 }
 
-.km-blackberry .km-tabstrip .km-button:nth-child(1) .km-icon
+.km-blackberry .km-state-active .km-icon,
+.km-blackberry .km-tabstrip .km-button .km-icon
 {
-    background-position: -1% 50%;
+    background-color: #ccc;
 }
-
-.km-blackberry .km-tabstrip .km-button:nth-child(2) .km-icon
-{
-    background-position: 33.5% 50%;
-}
-
-.km-blackberry .km-tabstrip .km-button:nth-child(3) .km-icon
-{
-    background-position: 67% 50%;
-}
-
-.km-blackberry .km-tabstrip .km-button:nth-child(4) .km-icon
-{
-    background-position: 100.5% 50%;
-}
-
