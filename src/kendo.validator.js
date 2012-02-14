@@ -290,11 +290,11 @@
 
             if (!that.element.is(INPUTSELECTOR)) {
                 that.element.delegate(INPUTSELECTOR, BLUR, function() {
-                    that._validateInput($(this));
+                    that.validateInput($(this));
                 });
             } else {
                 that.element.bind(BLUR, function() {
-                    that._validateInput(that.element);
+                    that.validateInput(that.element);
                 });
             }
         },
@@ -302,11 +302,11 @@
         /**
          * Validates the input element(s) against the declared validation rules.
          * @returns {Boolean} If all rules are passed successfully.
-	 * @example
-	 * // get a reference to the validatable form
-	 * var validatable = $("#myform").kendoValidator().data("kendoValidator");
-      	 * // check validation on save button click
-	 * $("#save").click(function() {
+         * @example
+         * // get a reference to the validatable form
+         * var validatable = $("#myform").kendoValidator().data("kendoValidator");
+         * // check validation on save button click
+         * $("#save").click(function() {
          *     if (validatable.validate()) {
          *         save();
          *     }
@@ -325,16 +325,23 @@
                 inputs = that.element.find(INPUTSELECTOR);
 
                 for (idx = 0, length = inputs.length; idx < length; idx++) {
-                    if (!that._validateInput(inputs.eq(idx))) {
+                    if (!that.validateInput(inputs.eq(idx))) {
                         invalid = true;
                     }
                 }
                 return !invalid;
             }
-            return that._validateInput(that.element);
+            return that.validateInput(that.element);
         },
 
-        _validateInput: function(input) {
+        /**
+         * Validates the input element against the declared validation rules.
+         * @param {DomElement} input Input element to be validated.
+         * @returns {Boolean} If all rules are passed successfully.
+         */
+        validateInput: function(input) {
+            input = $(input);
+
             var that = this,
                 template = that._errorTemplate,
                 result = that._checkValidity(input),
@@ -387,16 +394,16 @@
         /**
          * Get the error messages if any.
          * @returns {Array} Messages for the failed validation rules.
-	 * @example
-	 * // get a reference to the validatable form
-	 * var validatable = $("#myform").kendoValidator().data("kendoValidator");
- 	 * $("#save").click(function() {
+         * @example
+         * // get a reference to the validatable form
+         * var validatable = $("#myform").kendoValidator().data("kendoValidator");
+         * $("#save").click(function() {
          *     if (validatable.validate() === false) {
          *         // get the errors and write them out to the "errors" html container
-	 *         var errors = validatable.errors();
-	 *         $(errors).each(function() {
-	 *             $("#errors").html(this);
-	 *         });
+         *         var errors = validatable.errors();
+         *         $(errors).each(function() {
+         *             $("#errors").html(this);
+         *         });
          *     }
          * });
          */
