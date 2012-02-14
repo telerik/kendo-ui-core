@@ -443,7 +443,7 @@
 
     var StyleProperty = Property.extend( {
         set: function(value) {
-            this.target.style[this.path] = value;
+            $(this.target).css(this.path, value);
         }
     });
 
