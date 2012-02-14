@@ -1112,25 +1112,25 @@
          *              <code>"top"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the top (work only with vertical axis).
+         *              The axis title is positioned on the top (applicable to vertical axis).
          *         </dd>
          *         <dt>
          *              <code>"bottom"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the bottom (work only with vertical axis).
+         *              The axis title is positioned on the bottom (applicable to vertical axis).
          *         </dd>
          *         <dt>
          *              <code>"left"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the left (work only with horizontal axis).
+         *              The axis title is positioned on the left (applicable to horizontal axis).
          *         </dd>
          *         <dt>
          *              <code>"right"</code>
          *         </dt>
          *         <dd>
-         *              "The axis title is positioned on the right (work only with horizontal axis).
+         *              "The axis title is positioned on the right (applicable to horizontal axis).
          *         </dd>
          *         <dt>
          *             <code>"center"</code>
@@ -1306,7 +1306,6 @@
          * });
          * @option {Number} [categoryAxis.line.width] <1> The width of the line.  This will also effect the major and minor ticks, but
          * not the grid lines.
-         * _example
          * @option {String} [categoryAxis.line.color] <"black"> The color of the lines. Any valid CSS color string will work here, including hex and rgb.
          * <p><b>Note:</b> This will also effect the major and minor ticks, but not the grid lines.</p>
          * @option {Boolean} [categoryAxis.line.visible] <true> The visibility of the lines.
@@ -1709,25 +1708,25 @@
          *              <code>"top"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the top (work only with vertical axis)
+         *              The axis title is positioned on the top (applicable to vertical axis)
          *         </dd>
          *         <dt>
          *              <code>"bottom"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the bottom (work only with vertical axis)
+         *              The axis title is positioned on the bottom (applicable to vertical axis)
          *         </dd>
          *         <dt>
          *              <code>"left"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the left (work only with horizontal axis)
+         *              The axis title is positioned on the left (applicable to horizontal axis)
          *         </dd>
          *         <dt>
          *              <code>"right"</code>
          *         </dt>
          *         <dd>
-         *              The axis title is positioned on the right (work only with horizontal axis)
+         *              The axis title is positioned on the right (applicable to horizontal axis)
          *         </dd>
          *         <dt>
          *              <code>"center"</code>
@@ -2805,7 +2804,7 @@
          * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
          * @option {Object} [series.type="pie".connectors] The label connectors options.
          * @option {Number} [series.type="pie".connectors.width] <1> The width of the connector line.
-         * @option {String} [series.type="pie".connectors.color] <"#939393"> The color of the connector line.
+         * @option {String} [series.type="pie".connectors.color] The color of the connector line.
          * @option {Number} [series.type="pie".connectors.padding] <4>
          * The padding between the connector line and the label, and connector line and pie chart.
          * @option {number} [series.type="pie".startAngle] <90> The start angle of the first pie segment.
