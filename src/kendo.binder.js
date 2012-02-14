@@ -111,13 +111,27 @@
         configuration: function() {
             return {
                 options: ["textField", "valueField"],
-                properties: ["text", "checked", "style", "attr", "template", "disabled", "enabled", "click", "visible", "change", "html", "source", "value"]
+                properties: ["text", "checked", "style", "event", "attr", "template", "disabled", "enabled", "click", "visible", "html", "source", "value"]
             };
         },
 
         setAttributeBinding: function(path, binding) {
             var that = this,
                 property = new AttributeProperty(that.target, path);
+
+            var expression = property.createExpression(binding);
+            that.expressions.push(expression);
+
+            expression.updateTarget(that.options);
+
+            binding.bind("change", function() {
+                expression.updateTarget(that.options);
+            });
+        },
+
+        setEventBinding: function(path, binding) {
+            var that = this,
+                property = new EventProperty(that.target, path);
 
             var expression = property.createExpression(binding);
             that.expressions.push(expression);
@@ -165,7 +179,7 @@
         },
 
         createProperty: function(path) {
-            if (/click|change/.test(path)) {
+            if (/click/.test(path)) {
                 return new EventProperty(this.target, path);
             }
 
@@ -914,11 +928,13 @@
     }
 
     var attrRegExp = /attr\s*:\s*{([^}]*)}/ig;
+    var eventRegExp = /event\s*:\s*{([^}]*)}/ig;
     var styleRegExp = /style\s*:\s*{([^}]*)}/ig;
 
     function parseAttributeList(bind) {
         var result = {},
             attr,
+            event,
             style;
 
         bind = bind.replace(attrRegExp, function($0, $1) {
@@ -937,6 +953,15 @@
 
         if (style) {
             result.style = style;
+        }
+
+        bind = bind.replace(eventRegExp, function($0, $1) {
+            event = event || {};
+            appendAttributes(event, $1);
+        });
+
+        if (event) {
+            result.event = event;
         }
 
         appendAttributes(result, bind);
@@ -1036,6 +1061,10 @@
                     } else if (path == "style") {
                         for (path in sourcePath) {
                             target.setStyleBinding(path, new Binding(source, sourcePath[path]));
+                        }
+                    } else if (path == "event") {
+                        for (path in sourcePath) {
+                            target.setEventBinding(path, new Binding(source, sourcePath[path]));
                         }
                     } else {
                         target.setBinding(path, new Binding(source, sourcePath));
