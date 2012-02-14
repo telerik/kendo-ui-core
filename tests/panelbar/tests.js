@@ -22,5 +22,9 @@ tests.push(
     {
         page: "panelbar/AjaxLoading.html",
         title: "panelbar ajax loading"
+    },
+    {
+        page: "panelbar/mvvm.html",
+        title: "panelbar mvvm"
     }
 );
