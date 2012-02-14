@@ -1381,6 +1381,28 @@
          * $("#chart").kendoChart({
          *     categoryAxis: {
          *         label: {
+         *             // sets the top, right, bottom and left margin to 3px.
+         *             margin: 3
+         *         }
+         *     },
+         *     ...
+         * });
+         * //
+         * $("#chart").kendoChart({
+         *     categoryAxis: {
+         *         label: {
+         *             // sets the top and left margin to 1px
+         *             // margin right and bottom are with 0px (by default)
+         *             margin: { top: 1, left: 1 }
+         *         }
+         *     },
+         *     ...
+         * });
+         * @option {Number | Object} [categoryAxis.labels.padding] <0> The padding of the labels.
+         * _example
+         * $("#chart").kendoChart({
+         *     categoryAxis: {
+         *         label: {
          *             // sets the top, right, bottom and left padding to 3px.
          *             padding: 3
          *         }
