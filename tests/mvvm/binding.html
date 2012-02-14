@@ -308,14 +308,12 @@
             });
 
             test("binding the style attribute", function() {
-                /* TODO
-                var dom = $('<div data-style="display:${foo};text-decoration:${bar};"/>');
+                var dom = $('<div data-bind="style: { display:foo, text-decoration: bar }" />');
 
                 kendo.bind(dom, { foo: "none", bar: "underline" });
 
                 equal(dom.css("display"), "none");
                 equal(dom.css("text-decoration"), "underline");
-                */
             });
 
             test("binding select value to object", function() {
