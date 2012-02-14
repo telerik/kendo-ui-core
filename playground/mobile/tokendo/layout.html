@@ -11,9 +11,7 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.ios.less">
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less">
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.meego.less">
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.blackberry.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -132,122 +130,119 @@
         }
     </style>
 </head>
-<body>
+<body class="km-blackberry">
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
-                <a data-role="backbutton" data-align="left" class="pink">Pink</a>
+                <a data-role="backbutton" data-align="left">Back</a>
                 <span data-role="view-title">Layout</span>
-                <a data-role="button" data-align="right" class="pink" data-icon="toprated">Pink</a>
-                <a data-role="button" data-align="right" class="green" data-icon="search">Green</a>
-                <a data-role="button" data-align="right" class="fuchsia" data-icon="about">Fuchsia</a>
+                <a data-role="button" data-align="right" class="pink" data-icon="toprated">Pin</a>
+                <a data-role="button" data-align="right" class="green" data-icon="search">Grin</a>
+                <a data-role="button" data-align="right" class="fuchsia" data-icon="about">Fuch</a>
                 <!--<a data-role="button" data-align="right">HAbout</a>-->
             </div>
         </header>
+        <p>Text Shmext</p>
+        <div style="padding: 10px 0; text-align: center;">
+            <a data-role="button" data-icon="favorites">Pink</a>
+        </div>
+        <!--<div style="padding: 10px 0; text-align: center; background: #fff !important;">-->
+            <!--<a href="#" data-role="button">Pink</a>-->
+        <!--</div>-->
+        <ul data-role="listview">
+            <li>Albania<input type="checkbox" data-role="switch" /></li>
+            <li>Australia<input type="checkbox" data-role="switch" checked="checked" autocomplete="off" /></li>
+        </ul>
+        <!--<div class="sliderValue">0</div>-->
+        <!--<span class="km-slider" style="float: right; clear: both;"></span>-->
+        <ul data-role="listview">
+            <li data-icon="play"><a>Play</a></li>
+            <li data-icon="stop"><a>Stop</a></li>
+        </ul>
+        <ul data-role="listview" data-style="inset">
+            <li data-icon="play"><a>Albania<span data-role="detailbutton" data-style="contactadd"></span></a></li>
+            <li data-icon="stop"><a>Australia<span data-role="detailbutton" data-style="detaildisclose"></span></a></li>
+            <li><a>Australia<span data-role="detailbutton" data-icon="more"></span></a></li>
+            <li><a>Australia<span data-role="detailbutton" data-icon="battery"></span></a></li>
+        </ul>
+        <ul data-role="listview" data-type="group">
+            <li>ABC
+                <ul>
+                    <li>Albania<input type="checkbox" data-role="switch" /></li>
+                    <li>Australia<input type="checkbox" data-role="switch" /></li>
+                </ul>
+            </li>
+            <li>B
+                <ul>
+                    <li>Bangladesh<a data-role="detailbutton" data-style="rowinsert"></a></li>
+                    <li>Bulgaria<a data-role="detailbutton" data-style="rowdelete"></a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul data-role="listview" data-type="group" data-style="inset">
+            <li>A
+                <ul>
+                    <li>Albania<input type="checkbox" data-role="switch" /></li>
+                    <li>Australia</li>
+                </ul>
+            </li>
+            <li>B
+                <ul>
+                    <li>Bangladesh</li>
+                    <li>Bulgaria</li>
+                </ul>
+            </li>
+        </ul>
 
-        <content data-role="content">
-            <p>Text Shmext</p>
-            <div style="padding: 10px 0; text-align: center;">
-                <a data-role="button" data-icon="favorites">Pink</a>
-            </div>
-            <!--<div style="padding: 10px 0; text-align: center; background: #fff !important;">-->
-                <!--<a href="#" data-role="button">Pink</a>-->
-            <!--</div>-->
-            <ul data-role="listview">
-                <li>Albania<input type="checkbox" data-role="switch" /></li>
-                <li>Australia<input type="checkbox" data-role="switch" checked="checked" autocomplete="off" /></li>
-            </ul>
-            <!--<div class="sliderValue">0</div>-->
-            <!--<span class="km-slider" style="float: right; clear: both;"></span>-->
-            <ul data-role="listview">
-                <li data-icon="play"><a>Play</a></li>
-                <li data-icon="stop"><a>Stop</a></li>
-            </ul>
-            <ul data-role="listview" data-style="inset">
-                <li data-icon="play"><a>Albania<span data-role="detailbutton" data-style="contactadd"></span></a></li>
-                <li data-icon="stop"><a>Australia<span data-role="detailbutton" data-style="detaildisclose"></span></a></li>
-                <li><a>Australia<span data-role="detailbutton" data-icon="more"></span></a></li>
-                <li><a>Australia<span data-role="detailbutton" data-icon="battery"></span></a></li>
-            </ul>
-            <ul data-role="listview" data-type="group">
-                <li>ABC
-                    <ul>
-                        <li>Albania<input type="checkbox" data-role="switch" /></li>
-                        <li>Australia<input type="checkbox" data-role="switch" /></li>
-                    </ul>
-                </li>
-                <li>B
-                    <ul>
-                        <li>Bangladesh<a data-role="detailbutton" data-style="rowinsert"></a></li>
-                        <li>Bulgaria<a data-role="detailbutton" data-style="rowdelete"></a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul data-role="listview" data-type="group" data-style="inset">
-                <li>A
-                    <ul>
-                        <li>Albania<input type="checkbox" data-role="switch" /></li>
-                        <li>Australia</li>
-                    </ul>
-                </li>
-                <li>B
-                    <ul>
-                        <li>Bangladesh</li>
-                        <li>Bulgaria</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <ul data-role="listview" data-style="inset">
-                <li><a>Albania<span data-role="detailbutton" data-style="contactadd"></span></a></li>
-                <li><a>Australia<span data-role="detailbutton" data-style="detaildisclose"></span></a></li>
-                <li><a>Australia<span data-role="detailbutton" data-icon="more"></span></a></li>
-                <li><a>Australia<span data-role="detailbutton" data-icon="battery"></span></a></li>
-            </ul>
-            <ul data-role="listview" data-type="group">
-                <li>ABC
-                    <ul>
-                        <li>Albania<input type="checkbox" data-role="switch" /></li>
-                        <li>Australia<input type="checkbox" data-role="switch" /></li>
-                    </ul>
-                </li>
-                <li>B
-                    <ul>
-                        <li>Bangladesh<a data-role="detailbutton" data-style="rowinsert"></a></li>
-                        <li>Bulgaria<a data-role="detailbutton" data-style="rowdelete"></a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul data-role="listview" data-type="group" data-style="inset">
-                <li>A
-                    <ul>
-                        <li>Albania<input type="checkbox" data-role="switch" /></li>
-                        <li>Australia</li>
-                    </ul>
-                </li>
-                <li>B
-                    <ul>
-                        <li>Bangladesh</li>
-                        <li>Bulgaria</li>
-                    </ul>
-                </li>
-            </ul>
-            <!--Show message: <input type="checkbox" id="toggle" />-->
-            <!--<input id="checky" type="checkbox" />-->
-            <!--<div id="radio">-->
-                <!--<label for="radio1">Test 1</label>-->
-                <!--<input id="radio1" type="radio" name="three" />-->
-                <!--<label>Test 2-->
-                    <!--<input type="radio" name="three" />-->
-                <!--</label>-->
-            <!--</div>-->
-            <!--<label for="radioz">Test 1</label>-->
-            <!--<input id="radioz" type="radio" name="two" />-->
+        <ul data-role="listview" data-style="inset">
+            <li><a>Albania<span data-role="detailbutton" data-style="contactadd"></span></a></li>
+            <li><a>Australia<span data-role="detailbutton" data-style="detaildisclose"></span></a></li>
+            <li><a>Australia<span data-role="detailbutton" data-icon="more"></span></a></li>
+            <li><a>Australia<span data-role="detailbutton" data-icon="battery"></span></a></li>
+        </ul>
+        <ul data-role="listview" data-type="group">
+            <li>ABC
+                <ul>
+                    <li>Albania<input type="checkbox" data-role="switch" /></li>
+                    <li>Australia<input type="checkbox" data-role="switch" /></li>
+                </ul>
+            </li>
+            <li>B
+                <ul>
+                    <li>Bangladesh<a data-role="detailbutton" data-style="rowinsert"></a></li>
+                    <li>Bulgaria<a data-role="detailbutton" data-style="rowdelete"></a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul data-role="listview" data-type="group" data-style="inset">
+            <li>A
+                <ul>
+                    <li>Albania<input type="checkbox" data-role="switch" /></li>
+                    <li>Australia</li>
+                </ul>
+            </li>
+            <li>B
+                <ul>
+                    <li>Bangladesh</li>
+                    <li>Bulgaria</li>
+                </ul>
+            </li>
+        </ul>
+        <!--Show message: <input type="checkbox" id="toggle" />-->
+        <!--<input id="checky" type="checkbox" />-->
+        <!--<div id="radio">-->
+            <!--<label for="radio1">Test 1</label>-->
+            <!--<input id="radio1" type="radio" name="three" />-->
             <!--<label>Test 2-->
-                <!--<input type="radio" name="two" />-->
+                <!--<input type="radio" name="three" />-->
             <!--</label>-->
+        <!--</div>-->
+        <!--<label for="radioz">Test 1</label>-->
+        <!--<input id="radioz" type="radio" name="two" />-->
+        <!--<label>Test 2-->
             <!--<input type="radio" name="two" />-->
-        </content>
+        <!--</label>-->
+        <!--<input type="radio" name="two" />-->
         <footer data-role="footer">
             <div data-role="tabstrip">
                 <a data-icon="featured">Featured</a>
@@ -284,7 +279,7 @@
 //            buttongroup = $("#radioz").kendoMobileRadioGroup({ toggle: onToggle }).data("kendoMobileRadioGroup");
 //            slider = $(".km-slider").kendoMobileSlider({ slide: onSlide, change: onSlide }).data("kendoMobileSlider");
 
-        var app = new kendo.mobile.Application($(document.body));
+        var app = new kendo.mobile.Application(document.body);
 
         $(function () {
             var color = "";
