@@ -471,6 +471,26 @@
         },
 
         /**
+        * Gets the dataItem of the selected LI element.
+        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // get the dataItem.
+        * var text = combobox.dataItem();
+        */
+        dataItem: function() {
+            var that = this,
+                index = that.selectedIndex;
+
+            if (index > 0) {
+                return that.dataSource.view()[index];
+            } else {
+                return NULL;
+            }
+        },
+
+        /**
         * Closes the drop-down list.
         * @name kendo.ui.ComboBox#close
         * @function
@@ -718,39 +738,29 @@
         */
         text: function (text) {
             var that = this,
+                textAccessor = that._text,
                 input = that.input[0],
-                index = that.selectedIndex,
+                value = input.value,
                 dataItem;
 
             if (text !== undefined) {
                 dataItem = that.dataItem();
 
-                if (dataItem && that._text(dataItem) === input.value) {
+                if (dataItem && textAccessor(dataItem) === value) {
                     return;
                 }
 
-                that._select(function(dataItem) {
-                    return that._text(dataItem) === text;
+                that._select(function(dataElement) {
+                    return textAccessor(dataElement) === text;
                 });
 
-                if (index < 0) {
+                if (that.selectedIndex < 0) {
                     that._custom(text);
                 }
 
                 input.value = text;
             } else {
-                return input.value;
-            }
-        },
-
-        dataItem: function() {
-            var that = this,
-                index = that.selectedIndex;
-
-            if (index > 0) {
-                return that.dataSource.view()[index];
-            } else {
-                return null;
+                return value;
             }
         },
 
