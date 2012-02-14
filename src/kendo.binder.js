@@ -115,6 +115,19 @@
             };
         },
 
+        setAttributeBinding: function(path, binding) {
+            var property = new AttributeProperty(this.target, path);
+
+            var expression = property.createExpression(binding);
+            this.expressions.push(expression);
+
+            expression.updateTarget(this.options);
+
+            binding.bind("change", function() {
+                expression.updateTarget(that.options);
+            });
+        },
+
         setBinding: function(path, binding) {
             var property = this.createProperty(path),
                 that = this;
@@ -177,7 +190,6 @@
                 return new TwoWayProperty(this.target, path);
             }
 
-            return new AttributeProperty(this.target, path);
         },
 
         destroy: function() {
@@ -988,7 +1000,7 @@
 
                     if (path == "attr") {
                         for (path in sourcePath) {
-                            target.setBinding(path, new Binding(source, sourcePath[path]));
+                            target.setAttributeBinding(path, new Binding(source, sourcePath[path]));
                         }
                     } else {
                         target.setBinding(path, new Binding(source, sourcePath));
