@@ -130,7 +130,7 @@
 
 .km-blackberry .km-listview .km-list
 {
-    border-top: 1px solid #d5d6da;
+    border-top: 1px solid #b5b6ba;
 }
 
 .km-blackberry .km-list > li
@@ -139,7 +139,7 @@
     font-size: 1.1em;
     font-weight: normal;
     line-height: 2em;
-    border-bottom: 1px solid #d5d6da;
+    border-bottom: 1px solid #b5b6ba;
     overflow: hidden;
 }
 
@@ -161,6 +161,16 @@
 .km-blackberry .km-list
 {
     color: #000;
+}
+
+.km-blackberry .km-detail.km-state-active,
+.km-blackberry .km-state-active .km-detail,
+.km-blackberry a.km-listview-link:active,
+.km-blackberry .km-state-active a.km-listview-link
+{
+    color: #fff;
+    background-color: #1b6ec0;
+    background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
 
 .km-blackberry .km-listview-link:after
@@ -230,6 +240,11 @@
     background-color: #1b6ec0;
 }
 
+.km-blackberry .km-listview-link .km-icon
+{
+    background-color: #555;
+}
+
 .km-blackberry .km-button .km-icon,
 .km-blackberry .km-state-active .km-icon,
 .km-blackberry .km-tabstrip .km-button .km-icon
@@ -237,6 +252,7 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.4));
 }
 
+.km-blackberry .km-listview-link:active .km-icon,
 .km-blackberry .km-state-active .km-icon,
 .km-blackberry .km-tabstrip .km-button .km-icon
 {
