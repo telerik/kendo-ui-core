@@ -953,8 +953,6 @@
                 }
             }
 
-            $.data(element, "kendoBindingTarget", target);
-
             target.source = source;
 
             bindings = parseAttributeList(bind);
@@ -997,6 +995,10 @@
                     }
                 }
             }
+        }
+
+        if (target) {
+            $.data(element, "kendoBindingTarget", target);
         }
 
         if (deep) {

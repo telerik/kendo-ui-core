@@ -542,7 +542,24 @@
                 .delegate(clickableItems, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(disabledItems, CLICK, false);
 
-            that.bind([
+            that.bind(that.events, that.options);
+
+            if (that.options.contentUrls) {
+                element.find("> .k-item")
+                    .each(function(index, item) {
+                        $(item).find("." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
+                    });
+            }
+
+            content = element.find("li" + ACTIVECLASS + " > ." + CONTENT);
+
+            if (content.length > 0) {
+                that.expand(content.parent(), false);
+            }
+
+            kendo.notify(that);
+        },
+        events: [
                 /**
                  *
                  * Triggered when an item of a PanelBar is expanded.
@@ -719,21 +736,7 @@
                  * });
                  */
                 CONTENTLOAD
-            ], that.options);
-
-            if (that.options.contentUrls) {
-                element.find("> .k-item")
-                    .each(function(index, item) {
-                        $(item).find("." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
-                    });
-            }
-
-            content = element.find("li" + ACTIVECLASS + " > ." + CONTENT);
-
-            if (content.length > 0) {
-                that.expand(content.parent(), false);
-            }
-        },
+            ],
         options: {
             name: "PanelBar",
             animation: {
