@@ -111,7 +111,7 @@
         configuration: function() {
             return {
                 options: ["textField", "valueField"],
-                properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "change", "src", "href", "alt", "html", "title", "source", "value"]
+                properties: ["text", "checked", "attr", "template", "disabled", "enabled", "click", "visible", "change", "html", "source", "value"]
             };
         },
 
@@ -165,21 +165,19 @@
                 }
             }
 
-            path = {
-                "text": innerText,
-                "title": "title",
-                "html": "innerHTML",
-                "alt": "alt",
-                "value": "value",
-                "href": "href",
-                "src": "src"
-            }[path] || path;
+            if (path == "html") {
+                return new Property(this.target, "innerHTML");
+            }
+
+            if (path == "text") {
+                return new Property(this.target, innerText);
+            }
 
             if (path == "value") {
                 return new TwoWayProperty(this.target, path);
             }
 
-            return new Property(this.target, path);
+            return new AttributeProperty(this.target, path);
         },
 
         destroy: function() {
@@ -192,7 +190,7 @@
         }
     });
 
-    var SourceBindingTarget = BindingTarget.extend( {
+      var SourceBindingTarget = BindingTarget.extend( {
         init: function(target) {
             BindingTarget.fn.init.call(this, target);
         },
@@ -395,6 +393,13 @@
         destroy: function() {
         }
     });
+
+    var AttributeProperty = Property.extend( {
+        set: function(value) {
+            this.target.setAttribute(this.path, value);
+        }
+    });
+
 
     var EventProperty = Property.extend({
         set: function(value) {
@@ -876,27 +881,40 @@
         }
     }
 
-    function parseBindAttribute(bind) {
-        var idx,
-            length,
-            bindings,
-            key,
-            value,
-            keyValuePair,
-            result = {};
+    var attrRegExp = /attr\s*:\s*{([^}]*)}/ig;
 
-        bindings = bind.split(",");
+    function parseAttributeList(bind) {
+        var result = {},
+            attr;
 
-        for (idx = 0, length = bindings.length; idx < length; idx++) {
-            keyValuePair = bindings[idx].split(":");
-            key = $.trim(keyValuePair[0]);
-            value = $.trim(keyValuePair[1]);
+        bind = bind.replace(attrRegExp, function($0, $1) {
+            attr = attr || {};
+            appendAttributes(attr, $1);
+        });
 
-            result[key.toLowerCase()] = value;
+        if (attr) {
+            result.attr = attr;
         }
+
+        appendAttributes(result, bind);
 
         return result;
     }
+
+    function appendAttributes(attributes, commaSeparatedAttributes) {
+        var keyValuePairs, keyValuePair, idx, length;
+
+        keyValuePairs = commaSeparatedAttributes.split(",");
+
+        for (idx = 0, length = keyValuePairs.length; idx < length; idx++) {
+           keyValuePair = keyValuePairs[idx].split(":");
+
+           if (keyValuePair.length === 2) {
+               attributes[$.trim(keyValuePair[0]).toLowerCase()] = $.trim(keyValuePair[1]);
+           }
+        }
+    }
+
 
     function bindElement(element, source) {
         var role = element.getAttribute("data-role"),
@@ -939,7 +957,7 @@
 
             target.source = source;
 
-            bindings = parseBindAttribute(bind);
+            bindings = parseAttributeList(bind);
 
             configuration = target.configuration();
 
@@ -970,9 +988,13 @@
                         sourcePath = "";
                     }
 
-                    var binding = new Binding(source, sourcePath);
-
-                    target.setBinding(path, binding);
+                    if (path == "attr") {
+                        for (path in sourcePath) {
+                            target.setBinding(path, new Binding(source, sourcePath[path]));
+                        }
+                    } else {
+                        target.setBinding(path, new Binding(source, sourcePath));
+                    }
                 }
             }
         }

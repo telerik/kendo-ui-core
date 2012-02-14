@@ -283,7 +283,7 @@
             });
 
             test("tracking changes of complex fields", function() {
-                var dom = $('<div data-bind="title:bar,text:foo.bar"/>');
+                var dom = $('<div data-bind="attr: { title:bar }, text:foo.bar"/>');
 
                 var viewModel = kendo.observable({
                     foo: {
