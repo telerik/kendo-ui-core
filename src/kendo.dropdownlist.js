@@ -457,7 +457,10 @@
 
                 wrapper
                     .bind({
-                        click: function() { that.toggle() },
+                        click: function(e) {
+                            e.preventDefault();
+                            that.toggle();
+                        },
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
