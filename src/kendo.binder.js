@@ -831,7 +831,7 @@
                 items = widget.items();
 
             for (idx = 0, length = items.length; idx < length; idx++) {
-                unbindElement(items[idx]);
+                unbindElementTree(items[idx]);
             }
         },
 
@@ -1091,6 +1091,7 @@
         var idx, length;
 
         object = kendo.observable(object);
+        dom = $(dom);
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
             bindElement(dom[idx], object);
@@ -1098,23 +1099,33 @@
     }
 
     function unbindElement(element) {
-        var idx, length, bindingTarget = $.data(element, "kendoBindingTarget");
+        var bindingTarget = $.data(element, "kendoBindingTarget");
 
         if (bindingTarget) {
             bindingTarget.destroy();
             $.removeData(element, "kendoBindingTarget")
         }
+    }
 
-        for (idx = 0, length = element.children.length; idx < length; idx++) {
-            unbindElement(element.children[idx]);
+    function unbindElementTree(element) {
+        var idx,
+            length,
+            children = element.children;
+
+        unbindElement(element);
+
+        for (idx = 0, length = children.length; idx < length; idx++) {
+            unbindElementTree(children[idx]);
         }
     }
 
     function unbind(dom) {
         var idx, length;
 
+        dom = $(dom);
+
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            unbindElement(dom[idx]);
+            unbindElementTree(dom[idx]);
         }
     }
 
