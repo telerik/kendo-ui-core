@@ -102,12 +102,6 @@
     display: none;
 }
 
-.km-meego .km-switch
-{
-    background: transparent;
-    height: 1.4rem;
-}
-
 .km-meego .km-switch-container
 {
     overflow: hidden;
@@ -117,18 +111,6 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
     .border-radius(~".5rem");
     background: #f0f0f0;
-}
-
-.km-meego .km-switch-handle
-{
-    width: 1.2rem;
-    margin: 1.2rem;
-    height: 0;
-    margin-right: 0;
-    .border-radius(~".6rem");
-    .box-shadow(none);
-    .box-sizing(border-box);
-    background: #fff;
 }
 
 :-moz-any(.km-meego) .km-switch-handle
@@ -151,6 +133,52 @@
 {
     color: #fff;
     background: rgba(51,181,229,.8);
+}
+
+.km-meego .km-switch
+{
+    font-family: HelveticaNeue, Arial, sans-serif;
+    -webkit-transform: translatez(0);
+    background: transparent;
+    height: 1.5rem;
+    overflow: hidden;
+    width: 4rem;
+}
+
+.km-meego .km-switch-container
+{
+    border: 1px solid #999;
+    .box-shadow(inset 0 2px 2px 0 rgba(0,0,0,.3));
+    background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 95%, rgba(0,0,0,.2));
+}
+
+.km-meego .km-switch-handle
+{
+    border: 1px solid #969696;
+    background: linear-gradient(top, rgb(255, 255, 255), rgb(215, 215, 215) 5%, rgb(255, 255, 255));
+}
+
+.km-meego .km-switch-container
+{
+    padding: 1px 0 0 1px;
+    border-width: 0;
+}
+
+.km-meego .km-switch-handle
+{
+    width: 1.2rem;
+    height: 1.2rem;
+    background: #fff;
+    .box-sizing(border-box);
+    .border-radius(~".6rem");
+    .box-shadow(none);
+    margin: .2rem 0 0 .1rem;
+}
+
+.km-meego .km-switch-handle,
+.km-meego .km-switch-container
+{
+    .border-radius(~"1rem");
 }
 
 .km-meego .km-badge,
