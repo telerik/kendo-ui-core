@@ -37,7 +37,9 @@
 
             (function() {
                 var series = { data: [[1, 1], [2, 2]], labels: {} },
-                    sparseSeries = { data: [[1, 1], [2, 2], undefined, [2, 2]], labels: {} },
+                    sparseSeries = { data: [
+                                        [1, 1], [2, 2], undefined, [2, 2], [null, 1], [1, null]
+                                    ], labels: {} },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -199,11 +201,11 @@
                     same(scatterLineChart.yAxisRanges.primary.max, 2);
                 });
 
-                test("omits missing points by default", function() {
+                test("omits null points by default", function() {
                     equals(scatterLineChart.points[2], null);
                 });
 
-                test("omits missing points when interpolating", function() {
+                test("omits null points when interpolating", function() {
                     setupScatterLineChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)
@@ -211,6 +213,14 @@
                     });
 
                     equals(scatterLineChart.points[2], null);
+                });
+
+                test("point with missing X value is omitted", function() {
+                    equals(scatterLineChart.points[5], null);
+                });
+
+                test("point with missing Y value is omitted", function() {
+                    equals(scatterLineChart.points[6], null);
                 });
 
                 // ------------------------------------------------------------
