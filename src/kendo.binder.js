@@ -38,19 +38,17 @@
             that.dependencies[path] = true;
 
             that._access = $.proxy(that.access, that);
-            that._changeHandler = function(e) {
-                if (that.dependencies[e.field] && !e.isDefaultPrevented()) {
-                    that.change();
-                }
-            };
+            that._change = $.proxy(that.change, that);
 
             if (path != "this") {
-                that.source.bind("change", that._changeHandler);
+                that.source.bind("change", that._change);
             }
         },
 
-        change: function() {
-            this.trigger("change");
+        change: function(e) {
+            if (this.dependencies[e.field] && !e.isDefaultPrevented()) {
+                this.trigger("change");
+            }
         },
 
         access: function(e) {
@@ -89,7 +87,7 @@
 
         destroy: function() {
             if (this.path != "this") {
-                this.source.unbind("change", this._changeHandler);
+                this.source.unbind("change", this._change);
             }
         }
     });
