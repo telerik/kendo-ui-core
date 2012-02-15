@@ -67,7 +67,7 @@
         }
     });
 
-    var TRANSFORM_STYLE = kendo.support.transitions.prefix + "Transform";
+    var TRANSFORM_STYLE = support.transitions.prefix + "Transform";
 
     if (support.hasHW3D) {
         function translate(x, y) {
@@ -75,7 +75,7 @@
         }
     } else {
         function translate(x, y) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+            return "translate(" + round(x) + "px," + round(y) +"px)";
         }
     }
 
@@ -252,7 +252,7 @@
 
     var TICK_INTERVAL = 10;
 
-    animationFrame = (function(){
+    var animationFrame = (function(){
       return  window.requestAnimationFrame       ||
               window.webkitRequestAnimationFrame ||
               window.mozRequestAnimationFrame    ||

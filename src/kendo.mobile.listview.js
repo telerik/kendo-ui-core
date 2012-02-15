@@ -20,9 +20,9 @@
             return;
         }
 
-        var item = $(e.currentTarget);
+        var item = $(e.currentTarget),
             clickedLink = $(e.target).closest("a"),
-            intervalID = item.data(ACTIVE_STATE_TIMEOUT);
+            intervalID = item.data(ACTIVE_STATE_TIMEOUT),
             role = clickedLink.data(kendo.ns + "role") || "";
 
         if (clickedLink[0] && (!role.match(/button/))) {
