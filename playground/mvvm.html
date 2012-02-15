@@ -20,6 +20,9 @@
         <script src="../src/kendo.datepicker.js"></script>
         <script src="../src/kendo.timepicker.js"></script>
         <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.panelbar.js"></script>
+        <script src="../src/kendo.tabstrip.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -478,6 +481,61 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                     <td>
                         <input data-role="numerictextbox" data-format="c" data-bind="value: unitPrice"/>
                         Selected price <span data-bind="text:unitPrice"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kendo panelbar declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+&lt;ul data-role="panelbar"&gt;
+    &lt;li&gt;
+        Item 1
+        &lt;ul&gt;
+            &lt;li&gt;Sub Item 1&lt;/li&gt;
+            &lt;li&gt;Sub Item 2&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2 &lt;div data-bind="text:unitPrice"&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <ul data-role="panelbar" >
+                            <li>
+                                Item 1
+                                <ul>
+                                    <li>Sub Item 1</li>
+                                    <li>Sub Item 2</li>
+                                </ul>
+                            </li>
+                            <li>Item 2 <div data-bind="text:unitPrice"></div></li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Kendo tabstrip declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+&lt;div data-role="tabstrip"  data-animation="false"&gt;
+    &lt;ul&gt;
+        &lt;li&gt;First tab&lt;/li&gt;
+        &lt;li&gt;Second tab&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div&gt;First tab content&lt;/div&gt;
+    &lt;div&gt;Second tab content&lt;/div&gt;
+&lt;/div&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <div data-role="tabstrip"  data-animation="false">
+                            <ul>
+                                <li class="k-state-active">First tab</li>
+                                <li>Second tab</li>
+                            </ul>
+                            <div>First tab content</div>
+                            <div>Second tab content</div>
+                        </div>
                     </td>
                 </tr>
             </table>

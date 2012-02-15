@@ -888,18 +888,21 @@
 
         if (type) {
             name = type.fn.options.name;
+            element = $(element);
 
             for (option in type.fn.options) {
-                value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+                value =  element.data(kendo.ns + option.toLowerCase());
 
-                if (value === null) {
-                    value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                if (value === undefined) {
+                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
                 }
 
-                if (value !== null) {
+                if (value !== undefined) {
                     options[option] = value;
                 }
             }
+
+            element = element[0];
 
             for (idx = 0, length = type.fn.events.length; idx < length; idx++) {
                 option = type.fn.events[idx];
