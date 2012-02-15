@@ -535,6 +535,7 @@
          * _example
          * @option {Object} [valueAxis] The value axis configuration options.
          * @option {Object} [valueAxis.name] <primary> The unique axis name.
+         * @option {Boolean} [valueAxis.visible] <true> The visibility of the axis.
          * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the category axis crosses this axis.
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
          * This is often used in combination with the <b>max</b> configuration method
@@ -1182,6 +1183,7 @@
          *
          * @option {Object} [categoryAxis] The category axis configuration options.
          * @option {Object} [categoryAxis.name] <primary> The unique axis name.
+         * @option {Boolean} [categoryAxis.visible] <true> The visibility of the axis.
          * @option {Array} [categoryAxis.categories] Array of category names.
          * _example
          * $("#chart").kendoChart({
