@@ -6,5 +6,10 @@ tests.push(
     {
         page: "tabstrip/AjaxLoading.html",
         title: "tabstrip ajax loading"
+    },
+    {
+        page: "tabstrip/mvvm.html",
+        title: "tabstrip mvvm"
     }
+
 );

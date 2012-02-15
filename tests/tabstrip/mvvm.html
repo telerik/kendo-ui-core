@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>tabstrip MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.tabstrip.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" ></div>
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a tabstrip when data role is tabstrip", function() {
+                var dom = $('<div data-role="tabstrip"></div>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoTabStrip") instanceof kendo.ui.TabStrip);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<div data-role="tabstrip" data-animation="false"></div>');
+
+                kendo.bind(dom);
+
+                var tabstrip = dom.data("kendoTabStrip");
+
+                ok($.isEmptyObject(tabstrip.options.animation.effects));
+            });
+
+            test("binding tabstrip initialized before binding", function() {
+                var dom = $('<div data-animation="false"></div>');
+
+                var tabstrip = dom.kendoTabStrip().data("kendoTabStrip");
+
+                kendo.bind(dom);
+
+                ok($.isEmptyObject(tabstrip.options.animation.effects));
+            });
+
+            test("binding containing binding attributes", function() {
+                var dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
+
+                var observable = kendo.observable({ text:"foo" });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.find("span:first").html()), "foo");
+            });
+
+            test("updating viewModel updates the content", function() {
+                var dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
+
+                var observable = kendo.observable({ text:"foo" });
+
+                kendo.bind(dom, observable);
+
+                observable.set("text", "bar");
+
+                equal($.trim(dom.find("span:first").html()), "bar");
+            });
+
+            test("event is raised if attached as option", 1, function() {
+                var dom = $('<div data-role="tabstrip" data-select="select"></div>');
+
+                kendo.bind(dom);
+
+                dom.data("kendoTabStrip").trigger("select");
+            });
+
+            function select() {
+                ok(true);
+            }
+
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

@@ -314,9 +314,7 @@
 
             var that = this;
 
-            if (options && ("animation" in options) && !options.animation) {
-                options.animation = { open: { effects: {} }, close: { effects: {} } }; // No animation
-            }
+            that._animations(options);
 
             Widget.fn.init.call(that, element, options);
 
@@ -327,86 +325,7 @@
                 .delegate(HOVERABLEITEMS, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(DISABLEDLINKS, CLICK, false);
 
-            that.bind([
-                /**
-                 *
-                 * Triggered before a tab is selected.
-                 *
-                 * @name kendo.ui.TabStrip#select
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {HTMLElement} e.item
-                 * The selected item chosen by a user.
-                 *
-                 * @exampleTitle Attach select event handler during initialization; detach via unbind()
-                 * @example
-                 * // event handler for select
-                 * var onSelect = function(e) {
-                 *     // access the selected item via e.item (HTMLElement)
-                 * };
-                 *
-                 * // attach select event handler during initialization
-                 * var tabStrip = $("#tabStrip").kendoTabStrip({
-                 *     select: onSelect
-                 * });
-                 *
-                 * // detach select event handler via unbind()
-                 * tabStrip.data("kendoTabStrip").unbind("select", onSelect);
-                 *
-                 * @exampleTitle Attach select event handler via bind(); detach via unbind()
-                 * @example
-                 * // event handler for select
-                 * var onSelect = function(e) {
-                 *     // access the selected item via e.item (HTMLElement)
-                 * };
-                 *
-                 * // attach select event handler via bind()
-                 * $("#tabStrip").data("kendoTabStrip").bind("select", onSelect);
-                 *
-                 * // detach select event handler via unbind()
-                 * $("#tabStrip").data("kendoTabStrip").unbind("select", onSelect);
-                 *
-                 */
-                SELECT,
-
-                /**
-                 *
-                 * Triggered when an AJAX request results in an error.
-                 *
-                 * @name kendo.ui.TabStrip#error
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {jqXHR} e.xhr
-                 * The jqXHR object used to load the content
-                 *
-                 * @param {String} e.status
-                 * The returned status.
-                 *
-                 */
-                ERROR,
-
-                /**
-                 *
-                 * Triggered when content is fetched from an AJAX request.
-                 *
-                 * @name kendo.ui.TabStrip#contentLoad
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {Element} e.item
-                 * The selected item
-                 *
-                 * @param {Element} e.contentElement
-                 * The loaded content element that is retrieved via AJAX.
-                 *
-                 */
-                CONTENTLOAD
-            ], that.options);
+            that.bind(that.events, that.options);
 
             that._updateClasses();
 
@@ -431,7 +350,103 @@
             if (content.length > 0 && content[0].childNodes.length == 0) {
                 that.activateTab(selectedItems.eq(0));
             }
+
+            kendo.notify(that);
         },
+
+        _animations: function(options) {
+            var that = this;
+
+            if (options && ("animation" in options) && !options.animation) {
+                options.animation = { open: { effects: {}, show: true }, close: { effects: {} } }; // No animation
+            }
+        },
+
+        setOptions: function(options) {
+            this._animations(options);
+
+            Widget.fn.setOptions.call(this, options);
+        },
+
+        events: [
+            /**
+             *
+             * Triggered before a tab is selected.
+             *
+             * @name kendo.ui.TabStrip#select
+             * @event
+             *
+             * @param {Event} e
+             *
+             * @param {HTMLElement} e.item
+             * The selected item chosen by a user.
+             *
+             * @exampleTitle Attach select event handler during initialization; detach via unbind()
+             * @example
+             * // event handler for select
+             * var onSelect = function(e) {
+             *     // access the selected item via e.item (HTMLElement)
+             * };
+             *
+             * // attach select event handler during initialization
+             * var tabStrip = $("#tabStrip").kendoTabStrip({
+             *     select: onSelect
+             * });
+             *
+             * // detach select event handler via unbind()
+             * tabStrip.data("kendoTabStrip").unbind("select", onSelect);
+             *
+             * @exampleTitle Attach select event handler via bind(); detach via unbind()
+             * @example
+             * // event handler for select
+             * var onSelect = function(e) {
+             *     // access the selected item via e.item (HTMLElement)
+             * };
+             *
+             * // attach select event handler via bind()
+             * $("#tabStrip").data("kendoTabStrip").bind("select", onSelect);
+             *
+             * // detach select event handler via unbind()
+             * $("#tabStrip").data("kendoTabStrip").unbind("select", onSelect);
+             *
+             */
+            SELECT,
+            /**
+             *
+             * Triggered when an AJAX request results in an error.
+             *
+             * @name kendo.ui.TabStrip#error
+             * @event
+             *
+             * @param {Event} e
+             *
+             * @param {jqXHR} e.xhr
+             * The jqXHR object used to load the content
+             *
+             * @param {String} e.status
+             * The returned status.
+             *
+             */
+            ERROR,
+            /**
+             *
+             * Triggered when content is fetched from an AJAX request.
+             *
+             * @name kendo.ui.TabStrip#contentLoad
+             * @event
+             *
+             * @param {Event} e
+             *
+             * @param {Element} e.item
+             * The selected item
+             *
+             * @param {Element} e.contentElement
+             * The loaded content element that is retrieved via AJAX.
+             *
+             */
+            CONTENTLOAD
+        ],
+
         options: {
             name: "TabStrip",
             animation: {
