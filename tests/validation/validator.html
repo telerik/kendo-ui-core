@@ -123,6 +123,24 @@
                 ok(validator.validate());
             });
 
+            test("validate returns false if multi select is marked as required and no value is selected", function() {
+                container.append($('<select multiple required><option>foo</option></select>'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
+            test("validate returns true if multi select is marked as required and value is selected", function() {
+                container.append($('<select multiple required><option value="foo" selected="selected">foo</option></select>'));
+                var validator = setup(container);
+                ok(validator.validate());
+            });
+
+            test("validate returns false if select is marked as required and option with empty value is selected", function() {
+                container.append($('<select required><option value="" selected="selected">foo</option></select>'));
+                var validator = setup(container);
+                ok(!validator.validate());
+            });
+
             test("validate returns true container is empty", function() {
                 container.empty();
                 var validator = setup(container);
