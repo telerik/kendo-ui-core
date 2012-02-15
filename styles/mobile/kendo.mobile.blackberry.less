@@ -7,12 +7,12 @@
 .km-blackberry,
 .km-blackberry .km-button
 {
-    font: normal 1em Arial, Helvetica, sans-serif;
+    font: normal 1.2em Arial, Helvetica, sans-serif;
 }
 
 .km-blackberry
 {
-    background: linear-gradient(top, #eee, #ccc);
+    background: #fff; //linear-gradient(top, #eee, #ccc);
 }
 
 .km-blackberry .km-navbar,
@@ -25,8 +25,8 @@
     color: #000;
     text-shadow: none;
     border: 1px solid rgba(0,0,0,.2);
-    background-color: #d3d7d7;
-    background-image: linear-gradient(top, rgba(255,255,255,.8), rgba(255,255,255,0));
+    background-color: #cfd3d6;
+    background-image: linear-gradient(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
     .box-shadow(0 1px 0 0 rgba(0,0,0,.1));
 }
 
@@ -40,8 +40,14 @@
 .km-blackberry .km-buttongroup .km-state-active
 {
     color: #FFF;
-    background-color: #1b6ec0;
+    background-color: #057fe4;
     background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
+    .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.2)");
+}
+
+.km-blackberry .km-content .km-button
+{
+    padding: .6rem 3rem;
 }
 
 .km-blackberry .km-buttongroup
@@ -53,16 +59,18 @@
 {
     font-weight: normal;
     font-family: HelveticaNeue, Arial, sans-serif;
-    line-height: 1.7rem;
-    width: 7.2rem;
+    height: 2.3rem;
+    line-height: 2.3rem;
+    width: 10rem;
     -webkit-transform: translatez(0);
 }
 
 .km-blackberry .km-switch-background,
 .km-blackberry .km-slider-background
 {
+    margin-left: -100%;
     background:
-        linear-gradient(top, rgb(219,219,219), rgb(238,238,238) 50%) 6em 0 no-repeat #007cb5;
+        linear-gradient(top, rgb(219,219,219), rgb(238,238,238) 50%) 10.5em 0 no-repeat #0074dc;
 }
 
 .km-blackberry .km-switch-background:after
@@ -79,35 +87,37 @@
 
 .km-blackberry .km-switch-container
 {
-    border: 1px solid #999;
+    border: 1px solid #888;
     background: linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,0) 5%, rgba(0,0,0,0));
 }
 
 .km-blackberry .km-switch-handle
 {
-    width: 3.6rem;
-    border: 1px solid #969696;
-    background: #000 linear-gradient(top, rgba(255,255,255,.98), rgba(255,255,255,.9));
-    .box-shadow(0 0 3px rgba(0, 0, 0, 0.2));
+    margin: 0;
+    width: 5rem;
+    height: 100%;
+    background: #cfd3d6 linear-gradient(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
+    .border-radius(4px);
+    .box-shadow(~"inset 0 0 0 1px #fff, 0 0 3px rgba(0,0,0,.5)");
 }
 
 .km-blackberry .km-switch-label-off
 {
     color: #000;
-    left: 3.8em;
+    left: 4.2em;
 }
 
 .km-blackberry .km-switch-label-on
 {
     color: #fff;
-    left: -3.8em;
+    left: -4.2em;
 }
 
 .km-blackberry .km-switch-label-on,
 .km-blackberry .km-switch-label-off
 {
     text-shadow: none;
-    font-size: .95rem;
+    font-size: 1.2rem;
     width: 100%;
 }
 
@@ -119,7 +129,7 @@
 
 .km-blackberry .km-listview
 {
-    margin: 0 1em;
+    margin: 0;
 }
 
 .km-blackberry .km-listinset > li,
@@ -128,9 +138,16 @@
     margin-top: 0;
 }
 
+.km-blackberry .km-listview .km-group-title
+{
+    padding: .5rem 0;
+    border-top: 1px solid #999;
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,.1));
+}
+
 .km-blackberry .km-listview .km-list
 {
-    border-top: 1px solid #b5b6ba;
+    border-top: 1px solid #e6e6e6;
 }
 
 .km-blackberry .km-list > li
@@ -139,7 +156,7 @@
     font-size: 1.1em;
     font-weight: normal;
     line-height: 2em;
-    border-bottom: 1px solid #b5b6ba;
+    border-bottom: 1px solid #e6e6e6;
     overflow: hidden;
 }
 
@@ -160,6 +177,7 @@
 
 .km-blackberry .km-list
 {
+    margin-top: 0;
     color: #000;
 }
 
@@ -169,7 +187,7 @@
 .km-blackberry .km-state-active a.km-listview-link
 {
     color: #fff;
-    background-color: #1b6ec0;
+    background-color: #057fe4;
     background-image: linear-gradient(top, rgba(255,255,255,.3), rgba(255,255,255,0));
 }
 
@@ -185,8 +203,8 @@
 
 .km-blackberry .km-listview .km-switch
 {
-    margin-top: -.8em;
-    margin-top: ~"-.8rem";
+    margin-top: -1.2em;
+    margin-top: ~"-1.2rem";
 }
 
 .km-blackberry .km-toolbar,
@@ -228,16 +246,16 @@
 
 .km-blackberry .km-tabstrip .km-icon
 {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 2.4rem;
+    height: 2.4rem;
     position: relative;
-    left: 50%;
+    left: 30%;
     margin: ~".3rem 0 .4rem -.9rem";
 }
 
 .km-blackberry .km-button .km-icon
 {
-    background-color: #1b6ec0;
+    background-color: #057fe4;
 }
 
 .km-blackberry .km-listview-link .km-icon
@@ -256,5 +274,15 @@
 .km-blackberry .km-state-active .km-icon,
 .km-blackberry .km-tabstrip .km-button .km-icon
 {
-    background-color: #ccc;
+    background-color: #eee;
 }
+
+/* Scroller */
+
+.km-blackberry .km-touch-scrollbar
+{
+    background-color: #777;
+    border: 1px solid rgba(255,255,255,.5);
+    .box-sizing(border-box);
+}
+
