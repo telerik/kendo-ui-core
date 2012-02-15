@@ -209,6 +209,43 @@
                     dataSource.query( { filter: { field: "period", operator: "==", value: "Mar" } } );
                 });
 
+                // ------------------------------------------------------------
+                module("Binding to DataSource / Null values", {
+                    teardown: destroyChart
+                });
+
+                asyncTest("series points are populated", 1, function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, null],
+                        series: [{
+                            field: "sales"
+                        }],
+                        dataBound: function() {
+                            equal(this.options.series[0].data.length, 2);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("categories are populated", function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan",
+                            sales: 100
+                        }, null],
+                        categoryAxis: {
+                            field: "period"
+                        },
+                        dataBound: function() {
+                            same(this.options.categoryAxis.categories, ["Jan", null]);
+                            start();
+                        }
+                    });
+                });
+
             })();
         </script>
 

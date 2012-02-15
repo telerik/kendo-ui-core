@@ -420,7 +420,7 @@
                 row = data[dataIdx];
 
                 if (categoryAxis.field) {
-                    category = getter(categoryAxis.field, true)(row);
+                    category = getField(categoryAxis.field, row);
                     if (dataIdx === 0) {
                         categoryAxis.categories = [category];
                     } else {
@@ -432,9 +432,10 @@
                     currentSeries = series[seriesIdx];
 
                     if (currentSeries.field) {
-                        value = getter(currentSeries.field, true)(row);
+                        value = getField(currentSeries.field, row);
                     } else if (currentSeries.xField && currentSeries.yField) {
-                        value = [getter(currentSeries.xField, true)(row), getter(currentSeries.yField, true)(row)];
+                        value = [getField(currentSeries.xField, row),
+                                 getField(currentSeries.yField, row)];
                     } else {
                         value = undefined;
                     }
@@ -3748,7 +3749,7 @@
                 value = data[prop];
 
             if (valueField && series.dataItems) {
-                return getter(valueField, true)(series.dataItems[index]);
+                return getField(valueField, series.dataItems[index]);
             } else {
                 return defined(value) ? value : "";
             }
@@ -5997,6 +5998,18 @@
                    diff + first;
         }
     });
+
+    function getField(field, row) {
+        if (row === null) {
+            return null;
+        }
+
+        var get = getField.cache[field] =
+                getField.cache[field] || getter(field, true);
+
+        return get(row);
+    }
+    getField.cache = {};
 
     // Exports ================================================================
 
