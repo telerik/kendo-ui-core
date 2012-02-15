@@ -173,7 +173,7 @@
                 dropdownlist.dataSource.read();
                 dropdownlist.wrapper.focus().press(keys.UP);
 
-                ok(dropdownlist.ul.children().eq(0).hasClass(SELECTED));
+                equal(dropdownlist.selectedIndex, 0);
                 equal(dropdownlist.text(), data[0]);
                 equal(dropdownlist.value(), data[0]);
             });

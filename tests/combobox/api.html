@@ -302,6 +302,18 @@
                 equal(combobox.selectedIndex, 1);
                 equal(combobox.dataItem(), combobox.dataSource.view()[1]);
             });
+
+            test("value(value) calls dataSource.fetch if no data", function() {
+                var combobox = new ComboBox(input);
+
+                stub(combobox.dataSource, {
+                    fetch: combobox.dataSource.fetch
+                });
+
+                combobox.value("1");
+
+                equal(combobox.dataSource.calls("fetch"), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
