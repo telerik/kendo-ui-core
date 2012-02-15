@@ -109,7 +109,7 @@
         configuration: function() {
             return {
                 options: ["textField", "valueField"],
-                properties: ["text", "checked", "style", "event", "attr", "template", "disabled", "enabled", "click", "visible", "html", "source", "value"]
+                properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "html", "source", "value"]
             };
         },
 
@@ -984,7 +984,6 @@
         }
     }
 
-
     function bindElement(element, source) {
         var role = element.getAttribute("data-role"),
             idx,
@@ -1043,6 +1042,23 @@
 
             target.setOptions(options);
 
+            if (bindings.attr) {
+                for (path in bindings.attr) {
+                    target.setAttributeBinding(path, new Binding(source, bindings.attr[path]));
+                }
+            }
+
+            if (bindings.style) {
+                for (path in bindings.style) {
+                    target.setStyleBinding(path, new Binding(source, bindings.style[path]));
+                }
+            }
+            if (bindings.event) {
+                for (path in bindings.event) {
+                    target.setEventBinding(path, new Binding(source, bindings.event[path]));
+                }
+            }
+
             for (idx = 0, length = configuration.properties.length; idx < length; idx++) {
                 path = configuration.properties[idx];
 
@@ -1055,21 +1071,7 @@
                         sourcePath = "";
                     }
 
-                    if (path == "attr") {
-                        for (path in sourcePath) {
-                            target.setAttributeBinding(path, new Binding(source, sourcePath[path]));
-                        }
-                    } else if (path == "style") {
-                        for (path in sourcePath) {
-                            target.setStyleBinding(path, new Binding(source, sourcePath[path]));
-                        }
-                    } else if (path == "event") {
-                        for (path in sourcePath) {
-                            target.setEventBinding(path, new Binding(source, sourcePath[path]));
-                        }
-                    } else {
-                        target.setBinding(path, new Binding(source, sourcePath));
-                    }
+                    target.setBinding(path, new Binding(source, sourcePath));
                 }
             }
         }
