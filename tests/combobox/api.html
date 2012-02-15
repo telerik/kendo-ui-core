@@ -233,6 +233,27 @@
                 equal(combobox.text(), "custom");
             });
 
+            asyncTest("text should not change selection if selected item is equal to input.value", function() {
+                var combobox = $("<input/>").kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [
+                        { text: "Text1", value: 1},
+                        { text: "Text2", value: 2},
+                        { text: "Text1", value: 3}
+                    ]
+                }).data("kendoComboBox");
+
+                combobox.select(2);
+                combobox.input.focus().blur();
+
+                setTimeout(function() {
+                    start();
+                    equal(combobox.text(), "Text1");
+                    equal(combobox.value(), 3);
+                }, 200);
+            });
+
             test('enable(false) should disable combobox', function() {
                 var combobox = new ComboBox(input);
 
@@ -271,6 +292,28 @@
                 ok(!combobox.input.attr("disabled"));
             });
 
+            test("dataItem() returns null if no item is selected", function() {
+                equal(combobox.selectedIndex, -1);
+                equal(combobox.dataItem(), null);
+            });
+
+            test("dataItem() returns dataItem of the selected LI element", function() {
+                combobox.select(1);
+                equal(combobox.selectedIndex, 1);
+                equal(combobox.dataItem(), combobox.dataSource.view()[1]);
+            });
+
+            test("value(value) calls dataSource.fetch if no data", function() {
+                var combobox = new ComboBox(input);
+
+                stub(combobox.dataSource, {
+                    fetch: combobox.dataSource.fetch
+                });
+
+                combobox.value("1");
+
+                equal(combobox.dataSource.calls("fetch"), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

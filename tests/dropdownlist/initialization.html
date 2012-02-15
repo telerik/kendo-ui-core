@@ -422,21 +422,31 @@
                 input.attr("value", "1");
 
                 var form = $("<form/>").appendTo(document).append(input),
-                    combobox = new DropDownList(input, {
+                    dropdownlist = new DropDownList(input, {
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: [{text: 1, value: 1}, {text:2, value:2}]
                     });
 
-                combobox.select(1);
+                dropdownlist.select(1);
 
                 form[0].reset();
 
                 setTimeout(function() {
-                    equal(combobox.element.val(), "1");
-                    equal(combobox.span.text(), "1");
+                    equal(dropdownlist.element.val(), "1");
+                    equal(dropdownlist.span.text(), "1");
                     start();
                 }, 200);
+            });
+
+            test("do not recreate options if no dataSource", function() {
+                var dropdownlist = new DropDownList($("<select/>"));
+
+                stub(dropdownlist, "_options");
+
+                dropdownlist.refresh();
+
+                equal(dropdownlist.calls("_options"), 0);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

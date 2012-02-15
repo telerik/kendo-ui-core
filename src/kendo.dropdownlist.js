@@ -310,6 +310,8 @@
                 that.wrapper.focus();
             });
 
+            that._hasDataSource = options.dataSource;
+
             that._reset();
 
             that._word = "";
@@ -396,7 +398,7 @@
             that.selectedIndex = -1;
 
             if (options.autoBind) {
-                that.dataSource.fetch();
+                that._selectItem();
             } else if (element.is(SELECT)) {
                 that.text(element.children(":selected").text());
             }
@@ -457,7 +459,10 @@
 
                 wrapper
                     .bind({
-                        click: function() { that.toggle() },
+                        click: function(e) {
+                            e.preventDefault();
+                            that.toggle();
+                        },
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
@@ -488,7 +493,7 @@
 
             if (!that.ul[0].firstChild) {
                 that._open = true;
-                that.dataSource.fetch();
+                that._selectItem();
             } else {
                 that.popup.open();
                 if (current) {
@@ -523,8 +528,6 @@
         */
         refresh: function() {
             var that = this,
-                value = that.value(),
-                options = that.options,
                 data = that._data(),
                 length = data.length;
 
@@ -533,14 +536,8 @@
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
 
-            if (that.element.is(SELECT)) {
+            if (that._hasDataSource && that.element.is(SELECT)) {
                 that._options(data);
-            }
-
-            if (value) {
-                that.value(value);
-            } else {
-                that.select(options.index);
             }
 
             if (that._open) {
@@ -644,16 +641,33 @@
         */
         value: function(value) {
             var that = this,
-                idx,
-                element = that.element;
+                element = that.element,
+                idx;
 
             if (value !== undefined) {
+                if (that._valueOnFetch(value)) {
+                    return;
+                }
+
                 idx = that._index(value);
 
                 that.select(idx > -1 ? idx : 0);
             } else {
                 return that._accessor();
             }
+        },
+
+        _selectItem: function() {
+            var that = this;
+
+            that.dataSource.one(CHANGE, function() {
+                var value = that.value();
+                if (value) {
+                    that.value(value);
+                } else {
+                    that.select(that.options.index);
+                }
+            }).fetch();
         },
 
         _accept: function(li) {
