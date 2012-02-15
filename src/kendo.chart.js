@@ -3296,7 +3296,7 @@
                 xAxisRange = chart.xAxisRanges[xAxisName],
                 yAxisRange = chart.yAxisRanges[yAxisName];
 
-            if (defined(x)) {
+            if (defined(x) && x !== null) {
                 xAxisRange = chart.xAxisRanges[xAxisName] =
                     xAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
@@ -3304,7 +3304,7 @@
                 xAxisRange.max = math.max(xAxisRange.max, x);
             }
 
-            if (defined(y)) {
+            if (defined(y) && y !== null) {
                 yAxisRange = chart.yAxisRanges[yAxisName] =
                     yAxisRange || { min: MAX_VALUE, max: MIN_VALUE };
 
@@ -3315,9 +3315,11 @@
 
         createPoint: function(value, series, seriesIx) {
             var chart = this,
-                point;
+                point,
+                x = value.x,
+                y = value.y;
 
-            if (!defined(value.x) || !defined(value.y)) {
+            if (!defined(x) || x === null || !defined(y) || y === null) {
                 return null;
             }
 

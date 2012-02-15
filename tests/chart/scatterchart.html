@@ -21,7 +21,6 @@
                 scatterChart,
                 root,
                 view,
-                pointCoordinates,
                 TOLERANCE = 1;
 
             function setupScatterChart(plotArea, options) {
@@ -34,13 +33,13 @@
 
                 scatterChart.reflow();
                 scatterChart.getViewElements(view);
-
-                pointCoordinates = mapPoints(view.log.circle[0].center);
             }
 
             (function() {
                 var series = { data: [[1, 1], [2, 2]], labels: {} },
-                    sparseSeries = { data: [[1, 1], [2, 2], undefined, [2, 2]], labels: {} },
+                    sparseSeries = { data: [
+                                        [1, 1], [2, 2], undefined, [2, 2], [null, 1], [1, null]
+                                    ], labels: {} },
                     VALUE_AXIS_MAX = 2,
                     CATEGORY_AXIS_Y = 2;
 
@@ -202,11 +201,11 @@
                     same(scatterChart.yAxisRanges.primary.max, 2);
                 });
 
-                test("omits missing points by default", function() {
+                test("omits null points by default", function() {
                     equals(scatterChart.points[2], null);
                 });
 
-                test("omits missing points when interpolating", function() {
+                test("omits null points when interpolating", function() {
                     setupScatterChart(plotArea, {
                         series: [
                             $.extend({ missingValues: "interpolate" }, sparseSeries)
@@ -214,6 +213,14 @@
                     });
 
                     equals(scatterChart.points[2], null);
+                });
+
+                test("point with missing X value is omitted", function() {
+                    equals(scatterChart.points[5], null);
+                });
+
+                test("point with missing Y value is omitted", function() {
+                    equals(scatterChart.points[6], null);
                 });
 
                 // ------------------------------------------------------------
