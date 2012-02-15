@@ -394,7 +394,7 @@
                             MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
                             TOLERANCE
                     );
-                })
+                });
 
                 test("should not create axis line if visible is false", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, { line: { visible: false }});
@@ -402,7 +402,15 @@
 
                     numericAxis.getViewElements(view);
                     ok(view.log.line.length == 0);
-                })
+                });
+
+                test("should not render axis if visible is false", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { visible: false });
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+                    ok(view.log.line.length == 0 && view.log.line.length == 0);
+                });
 
                 test("creates axis line when max is not multiple of majorUnit", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, { min: 0, max: 1, majorUnit: .3 });
@@ -415,7 +423,7 @@
                             MAX_LABEL_WIDTH + MARGIN, chartBox.y2 - LABEL_HEIGHT / 2),
                             TOLERANCE
                     );
-                })
+                });
 
                 test("creates axis with dash type", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, {
@@ -662,12 +670,20 @@
                 });
 
                 test("should not create axis line if visible is false", function() {
-                    numericAxis = new Chart.NumericAxis(0, 1, { line: { visible: false, isVertical: false  }});
+                    numericAxis = new Chart.NumericAxis(0, 1, { line: { visible: false }, isVertical: false});
                     numericAxis.reflow(chartBox);
 
                     numericAxis.getViewElements(view);
                     ok(view.log.line.length == 0);
-                })
+                });
+
+                test("should not render axis if visible is false", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, { visible: false });
+                    numericAxis.reflow(chartBox);
+
+                    numericAxis.getViewElements(view);
+                    ok(view.log.line.length == 0 && view.log.line.length == 0);
+                });
 
                 test("creates labels", 1, function() {
                     numericAxis.getViewElements(view);

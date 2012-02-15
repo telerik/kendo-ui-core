@@ -67,6 +67,13 @@
                     ok(view.log.line.length == 0);
                 });
 
+                test("should not render axis if visible is false", function() {
+                    createCategoryAxis({ visible: false });
+
+                    categoryAxis.getViewElements(view);
+                    ok(view.log.line.length == 0 && view.log.line.length == 0);
+                });
+
                 test("creates labels", 1, function() {
                     categoryAxis.getViewElements(view);
 
@@ -310,6 +317,13 @@
 
                     categoryAxis.getViewElements(view);
                     ok(view.log.line.length == 0);
+                });
+
+                test("should not render axis if visible is false", function() {
+                    createCategoryAxis({ visible: false, isVertical: true });
+
+                    categoryAxis.getViewElements(view);
+                    ok(view.log.line.length == 0 && view.log.line.length == 0);
                 });
 
                 test("creates axis with dash type", function() {

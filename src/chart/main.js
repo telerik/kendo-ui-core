@@ -794,13 +794,13 @@
                 border = options.border || {},
                 box = root.box.clone().pad(options.margin).unpad(border.width),
                 elements = [
-                    view.createRect(box, {
-                        stroke: border.width ? border.color : "",
-                        strokeWidth: border.width,
-                        dashType: border.dashType,
-                        fill: options.background,
-                        zIndex: options.zIndex })
-                ];
+                        view.createRect(box, {
+                            stroke: border.width ? border.color : "",
+                            strokeWidth: border.width,
+                            dashType: border.dashType,
+                            fill: options.background,
+                            zIndex: options.zIndex })
+                    ];
 
             return elements.concat(
                 ChartElement.fn.getViewElements.call(root, view)
@@ -1409,6 +1409,20 @@
 
             ChartElement.fn.init.call(axis, options);
 
+            if (!axis.options.visible) {
+                axis.options = deepExtend({}, axis.options, {
+                    labels: {
+                        visible: false
+                    },
+                    line: {
+                        visible: false
+                    },
+                    margin: 0,
+                    majorTickSize: 0,
+                    minorTickSize: 0
+                });
+            }
+
             axis.createLabels();
             axis.createTitle();
         },
@@ -1440,7 +1454,8 @@
                 color: BLACK
             },
             // TODO: Move to line or labels options
-            margin: 5
+            margin: 5,
+            visible: true
         },
 
         createLabels: function() {
@@ -1532,7 +1547,7 @@
                 }));
             }
 
-            if (options.minorTickType.toLowerCase()  === OUTSIDE) {
+            if (options.minorTickType.toLowerCase() === OUTSIDE) {
                 ticks = ticks.concat(map(axis.getMinorTickPositions(), function(pos) {
                     if (options.majorTickType.toLowerCase() !== NONE) {
                         if (!inArray(pos, majorTicks)) {
