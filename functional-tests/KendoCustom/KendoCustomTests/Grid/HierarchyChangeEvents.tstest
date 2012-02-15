@@ -22,13 +22,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/grid/SelectableHierarchy.html'</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Description>Navigate to : '/Grid/SelectableHierarchy.html'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>50eba566-51b2-435a-8886-b5da0c3bff4f</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>11e104e2-8018-483b-81a4-878ff0b49629</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -49,8 +49,8 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl>http://aggeorgiev/kendo/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/grid/SelectableHierarchy.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/Grid/SelectableHierarchy.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>HierarchyChangeEventsnmrqv12z.fl1</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -60,12 +60,12 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Navigate to : 'C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\Grid\SelectableHierarchy.html'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>4597a412-34fd-49b2-ad86-7cd049d716ac</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>eb34e879-8312-442e-bc20-7b004f2678e4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -102,7 +102,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>7c196e98-8e56-45f7-b752-0e1883b6b870</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bf029d90-7ad4-46a5-97e3-f58fcbe54706</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -189,7 +189,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>c6bc5b05-da86-4137-8e0d-065088513320</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>78441e1a-2793-4d04-8d80-2f9de4fa8445</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -309,7 +309,7 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly />
-  <TestAssemblyPath />
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
