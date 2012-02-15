@@ -3,37 +3,379 @@
     <head>
         <title>MVVM binding</title>
         <script src="../../src/jquery.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.binder.js"></script>
         <script src="benchmark.js"></script>
-        <script src="http://knockoutjs.com/js/knockout-1.2.1.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <style>
+            body {
+                padding: 1em;
+                margin: 1em;
+            }
+
+            table {
+                table-layout: fixed;
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
+            }
         </style>
     </head>
     <body>
-        <div id="log">Running benchmark ... </div>
-        <div id="kendo-div" data-text="foo"></div>
-        <div id="kendo-div" data-bind="text: foo"></div>
-        <script>
-            var viewModel = kendo.observable({
-                foo: "foo"
-            });
+        <div id="log"></div>
+        <table>
+            <col style="width:300px"/>
+            <col/>
+            <col />
+            <tr>
+                <th>Binding</th>
+                <th>Code</th>
+                <th>Output</th>
+            </th>
+            <tr>
+                <td>Binding the text of html elements</td>
+                <td>
+<pre class="prettyprint">
+&lt;div data-bind="text: textValue"&gt;&lt;/div&gt;
+</pre>
+                </td>
+                <td>
+                    <div data-bind="text: textValue"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Binding the style</td>
+                <td>Binding the style</td>
+                <td>
+                    <div>
+                    <label>Red<input type="radio" name="color" value="red" data-bind="checked: color"></label>
+                    </div>
+                    <div>
+                    <label>Blue<input type="radio" name="color" value="blue" data-bind="checked: color"></label>
+                    </div>
+                    <div style="width: 100px; height: 100px" data-bind="style: { background-color: color }"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Binding the innerHTML of html elements</td>
+                <td>
+<pre class="prettyprint">
+&lt;div data-bind="html: htmlValue"&gt;&lt;/div&gt;
+</pre>
+                </td>
+                <td>
+                    <div data-bind="html: htmlValue"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Binding to a function</td>
+                <td>
+<pre class="prettyprint">
+&lt;div data-bind="html: someHtml"&gt;&lt;/div&gt;
+&lt;script&gt;
+var viewModel = {
+   someHtml: function() {
+        return "&lt;strong&gt;Yay, a function returns me!&lt;/strong&gt;");
+   }
+};
+&lt;/script&gt;
+</pre>
+</td>
+<td>
+    <div data-bind="html: someHtml"></div>
+</td>
+                </tr>
+                <tr>
+                    <td>Setting the template of html elements</td>
+                    <td>
+<pre class="prettyprint">
+&lt;div data-bind="template: div-template"&gt;&lt;/div&gt;
+&lt;script id="div-template" type="text/x-kendo-template"&gt;
+ #: templateExpression # &lt;span data-bind="text: bindingExpression"&gt;&lt;/span&gt;
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <div data-bind="template: div-template"></div>
+                        <script id="div-template" type="text/x-kendo-template">
+                            #: templateExpression # <span data-bind="text: bindingExpression"></span>
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Two-way binding the value of a textbox (also shows click event binding)</td>
+                    <td>
+<pre class="prettyprint">
+&lt;input data-bind="value: inputValue" /&gt;
+The input value is &lt;span data-bind="text: inputValue"&gt;&lt;/span&gt;
+&lt;button data-bind="click: resetInputValue"&gt;Reset the input to its initial value&lt;/button&gt;
+&lt;script&gt;
+var viewModel = {
+    resetInputValue: function() {
+        this.set("inputValue", "Hello");
+    },
+    inputValue: "Hello"
+};
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        Change the value and click outside of the input (to blur it)
+                        <div>
+                            <input data-bind="value: inputValue" />
+                            The input value is "<span data-bind="text: inputValue"></span>"
+                        </div>
+                        <button data-bind="click: resetInputValue">Reset the input to its initial value</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Binding a select</td>
+                    <td>
+<pre class="prettyprint">
+&lt;select data-bind="source: colors, value: selectedColor"&gt;&lt/select&gt;
+The select value is &lt;span data-bind="text: selectedColor">&lt/span&gt;
+&lt;script&gt;
+var viewModel = {
+    colors: ["red", "green", "blue"],
+    selectedColor: "green"
+};
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <select data-bind="source: colors, value: selectedColor"></select>
+                        The select value is <span data-bind="text: selectedColor"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Binding a select to array of complex objects
+                    </td>
+                    <td>
+<pre class="prettyprint">
+&lt;select
+    data-valuefield="id"
+    data-textfield="name"
+    data-bind="source: products, value: selectedProduct"&gt;
+&lt;/select&gt;
+The select value as JSON is &lt;span data-bind="text: selectedProductAsJson">&lt;/span&gt;
+&lt;script&gt;
+var viewModel = {
+    products: [
+        { name: "Chai", id: 1 },
+        { name: "Chang", id: 2 },
+        { name: "Aniseed Syrup", id: 3 }
+    ],
+    selectedProduct: null,
+    selectedProductAsJson: function() {
+        return kendo.stringify(this.get("selectedProduct"));
+    }
+};
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <select data-valuefield="id" data-textfield="name" data-bind="source: products, value: selectedProduct"></select>
+                        The select value as JSON is <span data-bind="text: selectedProductAsJson"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Checkbox checked binding and visible binding (example inspired by KnockoutJS)
+                    </td>
+                    <td>
+<pre class="prettyprint">
+&lt;p&gt;Send me spam: &lt;input type="checkbox" data-bind="checked:wantsSpam" /&gt;&lt;/p&gt;
+&lt;div data-bind="visible:wantsSpam"&gt;
+    Preferred flavors of spam:
+    &lt;div&gt;
+        &lt;input type="checkbox" value="monosodium" data-bind="checked:spamFlavors" /&gt;
+        Monosodium Glutamate
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="checkbox" value="cherry" data-bind="checked:spamFlavors" /&gt;
+        Cherry
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="checkbox" value="almond" data-bind="checked:spamFlavors" /&gt;
+        Almond
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;fieldset&gt;
+    &lt;legend&gt; Selection&lt;/legend&gt;
+    &lt;div&gt;
+        wantsSpam: &lt;span data-bind="text:wantsSpam"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        spamTypes: &lt;span data-bind="text:selectedFlavors"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    spamFlavors: ["cherry","almond"],
+    wantsSpam: true,
+    selectedFlavors: function() {
+        return this.get("spamFlavors").join(",");
+    }
+});
+&lt;/script&gt;
+</pre>
+                    </td>
+                    <td>
+                        <p>Send me spam: <input type="checkbox" data-bind="checked:wantsSpam" /></p>
+                        <div data-bind="visible:wantsSpam">
+                            Preferred flavors of spam:
+                            <div><label><input type="checkbox" value="monosodium" data-bind="checked:spamFlavors" /> Monosodium Glutamate</label> </div>
+                            <div><label><input type="checkbox" value="cherry" data-bind="checked:spamFlavors" /> Cherry</label></div>
+                            <div><label><input type="checkbox" value="almond" data-bind="checked:spamFlavors" /> Almond</label></div>
+                        </div>
+                        <fieldset>
+                            <legend> Selection</legend>
+                            <div>
+                                wantsSpam: <span data-bind="text:wantsSpam"></span>
+                            </div>
+                            <div>
+                                spamTypes: <span data-bind="text:selectedFlavors"></span>
+                            </div>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Radio button binding</td>
+                    <td>
+                        <pre class="prettyprint">
+Preferred flavors of spam:
+&lt;div&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="flavors" value="monosodium"
+            data-bind="checked:radioSpamFlavors" /&gt;
+            Monosodium Glutamate
+    &lt;/label&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="flavors" value="cherry"
+            data-bind="checked:radioSpamFlavors" /&gt; Cherry
+    &lt;/label&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;label&gt;
+        &lt;input type="radio" name="flavors" value="almond"
+            data-bind="checked:radioSpamFlavors" /&gt; Almond
+    &lt;/label&gt;
+&lt;/div&gt;
+&lt;fieldset&gt;
+    &lt;legend&gt; Selection&lt;/legend&gt;
+    &lt;div&gt;
+        spamTypes: &lt;span data-bind="text:radioSpamFlavors"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    radioSpamFlavors: "cherry"
+});
+&lt;/script&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        Preferred flavors of spam:
+                        <div><label><input type="radio" name="flavors" value="monosodium" data-bind="checked:radioSpamFlavors" /> Monosodium Glutamate</label></div>
+                        <div><label><input type="radio" name="flavors" value="cherry" data-bind="checked:radioSpamFlavors" /> Cherry</label></div>
+                        <div><label><input type="radio" name="flavors" value="almond" data-bind="checked:radioSpamFlavors" /> Almond</label></div>
+                        <fieldset>
+                            <legend> Selection</legend>
+                            <div>
+                                spamTypes: <span data-bind="text:radioSpamFlavors"></span>
+                            </div>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Multiple selection</td>
+                    <td>
+                        <pre class="prettyprint">
+&lt;select multiple="multiple"
+    data-textfield="name"
+    data-valuefield="id"
+    data-bind="source: products, value: selectedProducts"&gt;
+&lt;/select&gt;
+Selected products: &lt;span data-bind="text: printSelectedProducts"&gt;&lt;/span&gt;
+&lt;script&gt;
+var viewModel = kendo.observable({
+    products: [
+        { name: "Chai", id: 1 },
+        { name: "Chang", id: 2 },
+        { name: "Aniseed Syrup", id: 3 }
+    ],
+    printSelectedProducts: function() {
+        return $.map(this.get("selectedProducts"), function(product) {
+            return product.name;
+        }).join(",");
+    }
+});
+&lt;/script&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <select multiple="multiple" data-textfield="name" data-valuefield="id" data-bind="source: products,value: selectedProducts"></select>
+                        Selected products: <span data-bind="text: printSelectedProducts"></span>
+                    </td>
+                </tr>
+            </table>
 
-            var knockout = {
-                foo: ko.observable("foo")
-            };
+            <script>
+                var viewModel = kendo.observable({
+                    textValue: "Sample value for text binding",
+                    htmlValue: "<strong>Sample value for html binding </strong>",
+                    templateExpression: "I was set via template expression - #: #",
+                    bindingExpression: "And I was set via binding expression - data-bind=\"text: bindingExpression\"",
+                    someHtml: function() {
+                        return "<strong>Yay, a function returns me!</strong>";
+                    },
+                    resetInputValue: function() {
+                        this.set("inputValue", "Hello");
+                    },
+                    colors: ["red", "green", "blue"],
+                    selectedColor: "green",
+                    products: [ { name: "Chai", id: 1 }, { name: "Chang", id: 2 }, { name: "Aniseed Syrup", id: 3 }],
+                    selectedProduct: null,
+                    selectedProducts: [],
+                    selectedProductAsJson: function() {
+                        return kendo.stringify(this.get("selectedProduct"));
+                    },
+                    printSelectedProducts: function() {
+                        return $.map(this.get("selectedProducts"), function(product) {
+                            return product.name;
+                        }).join(",");
+                    },
+                    inputValue: "Hello",
+                    spamFlavors: ["cherry","almond"],
+                    wantsSpam: true,
+                    selectedFlavors: function() {
+                        return this.get("spamFlavors").join(",");
+                    },
+                    radioSpamFlavors: "cherry",
+                    selectedDate: new Date(),
+                    formatSelectedDate: function() {
+                        return kendo.toString(this.get("selectedDate"), "MM/dd/yyyy");
+                    },
+                    formatSelectedTime: function() {
+                        return kendo.toString(this.get("selectedDate"), "HH:mm");
+                    },
+                    color: "red",
+                    unitPrice: 123
+                });
 
-            $(document).ready(function() {
+                viewModel.selectedProduct = viewModel.products[1];
+
                 var suite = new Benchmark.Suite;
-
-                kendo.bind($("#kendo-div"), viewModel);
-                ko.applyBindings(knockout);
-
-                suite.add("kendo binding element text", function() {
-                    viewModel.set("foo", "bar");
-                })
-                .add("knockout binding element text", function() {
-                    knockout.foo("bar");
+                suite.add("binding performance", function() {
+                    kendo.bind(document.body.children, viewModel);
                 })
                 .on("complete", function() {
                     var message = "<div>User agent: " + navigator.userAgent;
@@ -48,7 +390,8 @@
                     $("#log").html(message);
                 })
                 .run(true);
-            });
-        </script>
+            </script>
+        </body>
+    </html>
     </body>
 </html>

@@ -170,27 +170,12 @@
         slice = [].slice,
         unshift = [].unshift,
         toString = {}.toString,
+        getterCache = {},
+        setterCache = {};
         dateRegExp = /^\/Date\((.*?)\)\/$/,
         quoteRegExp = /(?=['\\])/g;
 
     function set(object, field, value) {
-        return kendo.setter(field)(object, value);
-    }
-
-    function get(object, field, call) {
-        var result;
-
-        if (field === "this") {
-            result = object;
-        } else {
-            result = kendo.getter(field, true)(object);
-
-            if (call && typeof result === "function") {
-                result = result.call(object);
-            }
-        }
-
-        return result;
     }
 
     var ObservableArray = Observable.extend({
@@ -350,23 +335,38 @@
             return result;
         },
 
-        get: function(field) {
-            this.trigger(GET, { field: field });
+        get: function(field, call) {
+            var that = this, result, getter;
 
-            return get(this, field);
+            that.trigger(GET, { field: field });
+
+            if (field === "this") {
+                result = that;
+            } else {
+                getter =  getterCache[field] = getterCache[field] || kendo.getter(field, true);
+
+                result = getter(that);
+
+                if (call && typeof result === "function") {
+                    result = result.call(that);
+                }
+            }
+
+            return result;
         },
 
-        set: function(field, value, initiator) {
-            var current = this[field], stopped = false;
+        set: function(field, value) {
+            var that = this,
+                current = that[field],
+                setter;
 
             if (current != value) {
-                if (!this.trigger("set", { field: field, value: value })) {
-                    set(this, field, value);
+                if (!that.trigger("set", { field: field, value: value })) {
+                    setter = setterCache[field] = setterCache[field] || kendo.setter(field);
 
-                    this.trigger(CHANGE, {
-                        field: field,
-                        initiator: initiator
-                    });
+                    setter(that, value);
+
+                    that.trigger(CHANGE, { field: field });
                 }
             }
         }
