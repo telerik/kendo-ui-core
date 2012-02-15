@@ -218,8 +218,10 @@
             },
             rules: {
                 required: function(input) {
-                    var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked";
-                    return !(hasAttribute(input, "required") && (input.val() === "" || checkbox));
+                    var checkbox = input.filter("[type=checkbox]").length && input.attr("checked") !== "checked",
+                        value = input.val();
+
+                    return !(hasAttribute(input, "required") && (value === "" || !value  || checkbox));
 
                 },
                 pattern: function(input) {
