@@ -322,6 +322,8 @@
 
             options.placeholder = options.placeholder || element.attr("placeholder");
 
+            that._hasDataSource = options.dataSource;
+
             that._reset();
 
             that._wrapper();
@@ -471,6 +473,26 @@
         },
 
         /**
+        * Gets the dataItem of the selected LI element.
+        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @example
+        * var combobox = $("#combobox").data("kendoComboBox");
+        *
+        * // get the dataItem.
+        * var text = combobox.dataItem();
+        */
+        dataItem: function() {
+            var that = this,
+                index = that.selectedIndex;
+
+            if (index > 0) {
+                return that.dataSource.view()[index];
+            } else {
+                return NULL;
+            }
+        },
+
+        /**
         * Closes the drop-down list.
         * @name kendo.ui.ComboBox#close
         * @function
@@ -561,7 +583,7 @@
             ul.innerHTML = kendo.render(that.template, data);
             that._height(length);
 
-            if (that.element.is(SELECT)) {
+            if (that._hasDataSource && that.element.is(SELECT)) {
                 that._options(data);
             }
 
@@ -718,11 +740,20 @@
         */
         text: function (text) {
             var that = this,
-                input = that.input[0];
+                textAccessor = that._text,
+                input = that.input[0],
+                value = input.value,
+                dataItem;
 
             if (text !== undefined) {
-                that._select(function(dataItem) {
-                    return that._text(dataItem) === text;
+                dataItem = that.dataItem();
+
+                if (dataItem && textAccessor(dataItem) === value) {
+                    return;
+                }
+
+                that._select(function(dataElement) {
+                    return textAccessor(dataElement) === text;
                 });
 
                 if (that.selectedIndex < 0) {
@@ -731,7 +762,7 @@
 
                 input.value = text;
             } else {
-                return input.value;
+                return value;
             }
         },
 
@@ -768,10 +799,14 @@
         */
         value: function(value) {
             var that = this,
-                idx,
-                element = that.element;
+                element = that.element,
+                idx;
 
             if (value !== undefined) {
+                if (that._valueOnFetch(value)) {
+                    return;
+                }
+
                 idx = that._index(value);
 
                 if (idx > -1) {

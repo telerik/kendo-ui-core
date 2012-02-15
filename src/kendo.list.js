@@ -478,6 +478,21 @@
             return pressed;
         },
 
+        _valueOnFetch: function(value) {
+            var that = this;
+
+            if (!that.ul[0].firstChild && !that._fetch) {
+                that.dataSource.one(CHANGE, function() {
+                    that._fetch = true;
+                    that.value(value);
+                }).fetch();
+
+                return true;
+            }
+
+            that._fetch = false;
+        },
+
         _options: function(data) {
             var that = this,
                 element = that.element,
