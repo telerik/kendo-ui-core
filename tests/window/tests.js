@@ -10,5 +10,10 @@ tests.push(
     {
         page: "window/events.html",
         title: "window events"
+    },
+    {
+        page: "window/mvvm.html",
+        title: "window mvvm"
     }
+
 );
