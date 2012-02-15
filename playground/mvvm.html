@@ -68,6 +68,19 @@
                 </td>
             </tr>
             <tr>
+                <td>Binding the style</td>
+                <td>Binding the style</td>
+                <td>
+                    <div>
+                    <label>Red<input type="radio" name="color" value="red" data-bind="checked: color"></label>
+                    </div>
+                    <div>
+                    <label>Blue<input type="radio" name="color" value="blue" data-bind="checked: color"></label>
+                    </div>
+                    <div style="width: 100px; height: 100px" data-bind="style: { background-color: color }"></div>
+                </td>
+            </tr>
+            <tr>
                 <td>Binding the innerHTML of html elements</td>
                 <td>
 <pre class="prettyprint">
@@ -579,6 +592,7 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                     formatSelectedTime: function() {
                         return kendo.toString(this.get("selectedDate"), "HH:mm");
                     },
+                    color: "red",
                     unitPrice: 123
                 });
 
