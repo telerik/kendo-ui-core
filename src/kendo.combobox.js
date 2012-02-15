@@ -799,10 +799,14 @@
         */
         value: function(value) {
             var that = this,
-                idx,
-                element = that.element;
+                element = that.element,
+                idx;
 
             if (value !== undefined) {
+                if (that._valueOnFetch(value)) {
+                    return;
+                }
+
                 idx = that._index(value);
 
                 if (idx > -1) {
