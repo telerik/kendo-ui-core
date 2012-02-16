@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>upload MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.upload.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" ></link>
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div type="file" id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a upload when data role is upload", function() {
+                var dom = $('<input type="file" data-role="upload"></input>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoUpload") instanceof kendo.ui.Upload);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<input type="file" data-role="upload" data-enabled="false"></input>');
+
+                kendo.bind(dom);
+
+                var upload = dom.data("kendoUpload");
+
+                equal(upload.options.enabled, false);
+                ok(upload.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("binding upload initialized before binding", function() {
+                var dom = $('<input type="file" data-enabled="false"></input>');
+
+                var upload = dom.kendoUpload().data("kendoUpload");
+
+                kendo.bind(dom);
+
+                equal(upload.options.enabled, false);
+                ok(upload.wrapper.hasClass("k-state-disabled"));
+            });
+
+            test("event is raised if attached as option", 1, function() {
+                var dom = $('<input type="file" data-role="upload" data-select="select"></input>');
+
+                kendo.bind(dom);
+
+                dom.data("kendoUpload").trigger("select");
+            });
+
+            function select() {
+                ok(true);
+            }
+
+        </script>
+
+        <div type="file" id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

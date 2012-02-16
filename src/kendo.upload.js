@@ -47,7 +47,7 @@
      * <p>
      *  You can reference an existing <b>Upload</b> instance via
      *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Once a reference has been established, you can
-     *  use the API to control its behavior. 
+     *  use the API to control its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing Upload instance
@@ -191,274 +191,275 @@
             .delegate(".k-file", "t:upload-success", $.proxy(that._onUploadSuccess, that))
             .delegate(".k-file", "t:upload-error", $.proxy(that._onUploadError, that));
 
-            that.bind([
-                /**
-                 *
-                 * Triggered when a file(s) is selected. Note: Cancelling this event will prevent the selection from
-                 * occurring.
-                 *
-                 * @name kendo.ui.Upload#select
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {Array} e.files
-                 * An array of the selected files.
-                 *
-                 * <ul>
-                 *     <li>name - the name of a selected file, including its extension</li>
-                 *     <li>extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")</li>
-                 *     <li>size - the size (in bytes) of a selected file (null, if unavailable)</li>
-                 *     <li>rawFile - an in-memory representation of a selected file</li>
-                 * </ul>
-                 *
-                 * @exampleTitle Wire-up an event handler that triggered when a user selects a file(s)
-                 * @example
-                 * var onSelect = function(e) {
-                 *     $.each(e.files, function(index, value) {
-                 *         console.log("Name: " + value.name);
-                 *         console.log("Size: " + value.size + " bytes");
-                 *         console.log("Extension: " + value.extension);
-                 *     });
-                 * };
-                 *
-                 * // initialize and configure an Upload widget with a select event handler
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     select: onSelect
-                 * });
-                 *
-                 */
-                SELECT,
-
-                /**
-                 * Fires when one or more files are about to be uploaded.
-                 * Cancelling the event will prevent the upload.
-                 * <p>
-                 * Note: The upload event fires only when the upload is in
-                 * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
-                 * </p>
-                 * @name kendo.ui.Upload#upload
-                 * @event
-                 * @param {Event} e
-                 * @param {Array} e.files
-                 * List of the files that will be uploaded. Each file has:
-                 * <ul>
-                 *     <li>name</li>
-                 *     <li>
-                 *         extension - the file extension
-                 *         inlcuding the leading dot - ".jpg", ".png", etc.
-                 *      </li>
-                 *     <li>size - the file size in bytes (null if not available)</li>
-                 * </ul>
-                 * @param {Object} data Optional object that will be
-                 * sent to the save handler in the form of key/value pairs.
-                 * @example
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     upload: onUpload
-                 * });
-                 *
-                 * function onUpload(e) {
-                 *     // Array with information about the uploaded files
-                 *     var files = e.files;
-                 *
-                 *     // Check the extension of each file and abort the upload if it is not .jpg
-                 *     $.each(files, function() {
-                 *         if (this.extension != ".jpg") {
-                 *             alert("Only .jpg files can be uploaded")
-                 *             e.preventDefault();
-                 *         }
-                 *     });
-                 * }
-                 */
-                UPLOAD,
-
-                /**
-                 * Fires when an upload / remove operation has been completed successfully.
-                 * <p>
-                 * Note: The success event fires only when the upload is in
-                 * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
-                 * </p>
-                 * @name kendo.ui.Upload#success
-                 * @event
-                 * @param {Event} e
-                 * @param {Array} e.files
-                 * List of the files that were uploaded or removed . Each file has:
-                 * <ul>
-                 *     <li>name</li>
-                 *     <li>
-                 *         extension - the file extension
-                 *         inlcuding the leading dot - ".jpg", ".png", etc.
-                 *      </li>
-                 *     <li>size - the file size in bytes (null if not available)</li>
-                 * </ul>
-                 * @param {String} e.operation "upload" or "remove".
-                 * @param {String} e.response the response object returned by the server.
-                 * @param {Object} e.XMLHttpRequest
-                 * This is either the original XHR used for the operation or a stub containing:
-                 * <ul>
-                 *     <li>responseText</li>
-                 *     <li>status</li>
-                 *     <li>statusText</li>
-                 * </ul>
-                 * Verify that this is an actual XHR before accessing any other fields.
-                 * @example
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     success: onSuccess
-                 * });
-                 *
-                 * function onSuccess(e) {
-                 *     // Array with information about the uploaded files
-                 *     var files = e.files;
-                 *
-                 *     if (e.operation == "upload") {
-                 *         alert("Successfully uploaded " + files.length + " files");
-                 *     }
-                 * }
-                 */
-                SUCCESS,
-
-                /**
-                 * Fires when an upload / remove operation has failed.
-                 * <p>
-                 * Note: The error event fires only when the upload is in
-                 * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
-                 * </p>
-                 * @name kendo.ui.Upload#error
-                 * @event
-                 * @param {Event} e
-                 * @param {Array} e.files
-                 * List of the files that were uploaded or removed . Each file has:
-                 * <ul>
-                 *     <li>name</li>
-                 *     <li>
-                 *         extension - the file extension
-                 *         inlcuding the leading dot - ".jpg", ".png", etc.
-                 *      </li>
-                 *     <li>size - the file size in bytes (null if not available)</li>
-                 * </ul>
-                 * @param {String} e.operation - "upload" or "remove".
-                 * @param {Object} e.XMLHttpRequest
-                 * This is either the original XHR used for the operation or a stub containing:
-                 * <ul>
-                 *     <li>responseText</li>
-                 *     <li>status</li>
-                 *     <li>statusText</li>
-                 * </ul>
-                 * Verify that this is an actual XHR before accessing any other fields.
-                 * @example
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     error: onError
-                 * });
-                 *
-                 * function onError(e) {
-                 *     // Array with information about the uploaded files
-                 *     var files = e.files;
-                 *
-                 *     if (e.operation == "upload") {
-                 *         alert("Failed to uploaded " + files.length + " files");
-                 *     }
-                 *
-                 *     // Suppress the default error message
-                 *     e.preventDefault();
-                 * }
-                 */
-                ERROR,
-
-                /**
-                 * Fires when all active uploads have completed either successfully or with errors.
-                 * <p>
-                 * Note: The complete event fires only when the upload is in
-                 * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
-                 * </p>
-                 * @name kendo.ui.Upload#complete
-                 * @event
-                 * @param {Event} e
-                 * @example
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     complete: onComplete
-                 * });
-                 *
-                 * function onComplete(e) {
-                 *     // The upload is now idle
-                 * }
-                 */
-                COMPLETE,
-
-                /**
-                 * Fires when the upload has been cancelled while in progress.
-                 * <p>
-                 * Note: The cancel event fires only when the upload is in
-                 * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
-                 * </p>
-                 * @name kendo.ui.Upload#cancel
-                 * @event
-                 * @param {Event} e
-                 * @param {Array} e.files
-                 * List of the files that were uploaded or removed . Each file has:
-                 * <ul>
-                 *     <li>name</li>
-                 *     <li>
-                 *         extension - the file extension
-                 *         inlcuding the leading dot - ".jpg", ".png", etc.
-                 *      </li>
-                 *     <li>size - the file size in bytes (null if not available)</li>
-                 * </ul>
-                 * @example
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     cancel: onCancel
-                 * });
-                 *
-                 * function onCancel(e) {
-                 *     // Array with information about the uploaded files
-                 *     var files = e.files;
-                 *
-                 *     // Process the Cancel event
-                 * }
-                 */
-                CANCEL,
-
-                /**
-                 * Fires when an uploaded file is about to be removed.
-                 * Cancelling the event will prevent the remove.
-                 * @name kendo.ui.Upload#remove
-                 * @event
-                 * @param {Event} e
-                 * @param {Array} e.files
-                 * List of the files that were uploaded or removed . Each file has:
-                 * <ul>
-                 *     <li>name</li>
-                 *     <li>
-                 *         extension - the file extension
-                 *         inlcuding the leading dot - ".jpg", ".png", etc.
-                 *      </li>
-                 *     <li>size - the file size in bytes (null if not available)</li>
-                 * </ul>
-                 * @param {Object} data Optional object that will be
-                 * sent to the save handler in the form of key/value pairs.
-                 * @example
-                 * $("#photos").kendoUpload({
-                 *     // ...
-                 *     remove: onRemove
-                 * });
-                 *
-                 * function onRemove(e) {
-                 *     // Array with information about the removed files
-                 *     var files = e.files;
-                 *
-                 *     // Process the Remove event
-                 *     // Optionally cancel the remove operation by calling
-                 *     // e.preventDefault()
-                 * }
-                 */
-                REMOVE], that.options);
+            that.bind(that.events, that.options);
         },
 
+        events: [
+            /**
+            *
+            * Triggered when a file(s) is selected. Note: Cancelling this event will prevent the selection from
+            * occurring.
+            *
+            * @name kendo.ui.Upload#select
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Array} e.files
+            * An array of the selected files.
+            *
+            * <ul>
+            *     <li>name - the name of a selected file, including its extension</li>
+            *     <li>extension - the file extension of a selected file, including the leading dot (i.e. ".jpg")</li>
+            *     <li>size - the size (in bytes) of a selected file (null, if unavailable)</li>
+            *     <li>rawFile - an in-memory representation of a selected file</li>
+            * </ul>
+            *
+            * @exampleTitle Wire-up an event handler that triggered when a user selects a file(s)
+            * @example
+            * var onSelect = function(e) {
+            *     $.each(e.files, function(index, value) {
+            *         console.log("Name: " + value.name);
+            *         console.log("Size: " + value.size + " bytes");
+            *         console.log("Extension: " + value.extension);
+            *     });
+            * };
+            *
+            * // initialize and configure an Upload widget with a select event handler
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     select: onSelect
+            * });
+            *
+            */
+            SELECT,
+
+            /**
+            * Fires when one or more files are about to be uploaded.
+            * Cancelling the event will prevent the upload.
+            * <p>
+            * Note: The upload event fires only when the upload is in
+            * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
+            * </p>
+            * @name kendo.ui.Upload#upload
+            * @event
+            * @param {Event} e
+            * @param {Array} e.files
+            * List of the files that will be uploaded. Each file has:
+            * <ul>
+            *     <li>name</li>
+            *     <li>
+            *         extension - the file extension
+            *         inlcuding the leading dot - ".jpg", ".png", etc.
+            *      </li>
+            *     <li>size - the file size in bytes (null if not available)</li>
+            * </ul>
+            * @param {Object} data Optional object that will be
+            * sent to the save handler in the form of key/value pairs.
+            * @example
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     upload: onUpload
+            * });
+            *
+            * function onUpload(e) {
+            *     // Array with information about the uploaded files
+            *     var files = e.files;
+            *
+            *     // Check the extension of each file and abort the upload if it is not .jpg
+            *     $.each(files, function() {
+            *         if (this.extension != ".jpg") {
+            *             alert("Only .jpg files can be uploaded")
+            *             e.preventDefault();
+            *         }
+            *     });
+            * }
+            */
+            UPLOAD,
+
+            /**
+            * Fires when an upload / remove operation has been completed successfully.
+            * <p>
+            * Note: The success event fires only when the upload is in
+            * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
+            * </p>
+            * @name kendo.ui.Upload#success
+            * @event
+            * @param {Event} e
+            * @param {Array} e.files
+            * List of the files that were uploaded or removed . Each file has:
+            * <ul>
+            *     <li>name</li>
+            *     <li>
+            *         extension - the file extension
+            *         inlcuding the leading dot - ".jpg", ".png", etc.
+            *      </li>
+            *     <li>size - the file size in bytes (null if not available)</li>
+            * </ul>
+            * @param {String} e.operation "upload" or "remove".
+            * @param {String} e.response the response object returned by the server.
+            * @param {Object} e.XMLHttpRequest
+            * This is either the original XHR used for the operation or a stub containing:
+            * <ul>
+            *     <li>responseText</li>
+            *     <li>status</li>
+            *     <li>statusText</li>
+            * </ul>
+            * Verify that this is an actual XHR before accessing any other fields.
+            * @example
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     success: onSuccess
+            * });
+            *
+            * function onSuccess(e) {
+            *     // Array with information about the uploaded files
+            *     var files = e.files;
+            *
+            *     if (e.operation == "upload") {
+            *         alert("Successfully uploaded " + files.length + " files");
+            *     }
+            * }
+            */
+            SUCCESS,
+
+            /**
+            * Fires when an upload / remove operation has failed.
+            * <p>
+            * Note: The error event fires only when the upload is in
+            * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
+            * </p>
+            * @name kendo.ui.Upload#error
+            * @event
+            * @param {Event} e
+            * @param {Array} e.files
+            * List of the files that were uploaded or removed . Each file has:
+            * <ul>
+            *     <li>name</li>
+            *     <li>
+            *         extension - the file extension
+            *         inlcuding the leading dot - ".jpg", ".png", etc.
+            *      </li>
+            *     <li>size - the file size in bytes (null if not available)</li>
+            * </ul>
+            * @param {String} e.operation - "upload" or "remove".
+            * @param {Object} e.XMLHttpRequest
+            * This is either the original XHR used for the operation or a stub containing:
+            * <ul>
+            *     <li>responseText</li>
+            *     <li>status</li>
+            *     <li>statusText</li>
+            * </ul>
+            * Verify that this is an actual XHR before accessing any other fields.
+            * @example
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     error: onError
+            * });
+            *
+            * function onError(e) {
+            *     // Array with information about the uploaded files
+            *     var files = e.files;
+            *
+            *     if (e.operation == "upload") {
+            *         alert("Failed to uploaded " + files.length + " files");
+            *     }
+            *
+            *     // Suppress the default error message
+            *     e.preventDefault();
+            * }
+            */
+            ERROR,
+
+            /**
+            * Fires when all active uploads have completed either successfully or with errors.
+            * <p>
+            * Note: The complete event fires only when the upload is in
+            * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
+            * </p>
+            * @name kendo.ui.Upload#complete
+            * @event
+            * @param {Event} e
+            * @example
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     complete: onComplete
+            * });
+            *
+            * function onComplete(e) {
+            *     // The upload is now idle
+            * }
+            */
+            COMPLETE,
+
+            /**
+            * Fires when the upload has been cancelled while in progress.
+            * <p>
+            * Note: The cancel event fires only when the upload is in
+            * <a href="http://www.kendoui.com/documentation/ui-widgets/upload/modes.aspx#async">async mode</a>.
+            * </p>
+            * @name kendo.ui.Upload#cancel
+            * @event
+            * @param {Event} e
+            * @param {Array} e.files
+            * List of the files that were uploaded or removed . Each file has:
+            * <ul>
+            *     <li>name</li>
+            *     <li>
+            *         extension - the file extension
+            *         inlcuding the leading dot - ".jpg", ".png", etc.
+            *      </li>
+            *     <li>size - the file size in bytes (null if not available)</li>
+            * </ul>
+            * @example
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     cancel: onCancel
+            * });
+            *
+            * function onCancel(e) {
+            *     // Array with information about the uploaded files
+            *     var files = e.files;
+            *
+            *     // Process the Cancel event
+            * }
+            */
+            CANCEL,
+
+            /**
+            * Fires when an uploaded file is about to be removed.
+            * Cancelling the event will prevent the remove.
+            * @name kendo.ui.Upload#remove
+            * @event
+            * @param {Event} e
+            * @param {Array} e.files
+            * List of the files that were uploaded or removed . Each file has:
+            * <ul>
+            *     <li>name</li>
+            *     <li>
+            *         extension - the file extension
+            *         inlcuding the leading dot - ".jpg", ".png", etc.
+            *      </li>
+            *     <li>size - the file size in bytes (null if not available)</li>
+            * </ul>
+            * @param {Object} data Optional object that will be
+            * sent to the save handler in the form of key/value pairs.
+            * @example
+            * $("#photos").kendoUpload({
+            *     // ...
+            *     remove: onRemove
+            * });
+            *
+            * function onRemove(e) {
+            *     // Array with information about the removed files
+            *     var files = e.files;
+            *
+            *     // Process the Remove event
+            *     // Optionally cancel the remove operation by calling
+            *     // e.preventDefault()
+            * }
+            */
+        REMOVE],
         options: {
             name: "Upload",
             enabled: true,
@@ -479,6 +480,18 @@
                 "statusUploaded": "uploaded",
                 "statusFailed": "failed"
             }
+        },
+
+        setOptions: function(options) {
+            var that = this,
+                activeInput = that.element;
+
+            Widget.fn.setOptions.call(that, options);
+
+            that.multiple = that.options.multiple;
+
+            activeInput.attr("multiple", that._supportsMultiple() ? that.multiple : false)
+            that.toggle(that.options.enabled);
         },
 
         /**
