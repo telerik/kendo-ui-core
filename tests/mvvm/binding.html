@@ -575,22 +575,6 @@
                 equal(destroy.calls("destroy"), 1);
             });
 
-            test("expressions are destroyed", 1, function() {
-                var dom = $('<div data-bind="text:foo"/>');
-
-                var viewModel = kendo.observable({
-                    foo: "bar"
-                });
-
-                kendo.bind(dom, viewModel);
-
-                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
-
-                kendo.bind(dom, viewModel);
-
-                equal(destroy.calls("destroy"), 1);
-            });
-
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
