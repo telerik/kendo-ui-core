@@ -273,6 +273,19 @@
                 equal(dropdownlist.dataSource.calls("fetch"), 1);
             });
 
+            test("value('') clears selection and do not fetch", function() {
+                var dropdownlist = new DropDownList(input);
+
+                stub(dropdownlist.dataSource, {
+                    fetch: dropdownlist.dataSource.fetch
+                });
+
+                dropdownlist.value("");
+
+                equal(dropdownlist.selectedIndex, -1);
+                equal(dropdownlist.dataSource.calls("fetch"), 0);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
