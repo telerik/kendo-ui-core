@@ -18,5 +18,10 @@ tests.push(
     {
         page: "upload/syncupload.html",
         title: "upload syncupload"
+    },
+    {
+        page: "upload/mvvm.html",
+        title: "upload mvvm"
     }
+
 );
