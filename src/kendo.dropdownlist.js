@@ -164,6 +164,7 @@
         HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
         INPUTWRAPPER = ".k-dropdown-wrap",
+        trimRegExp = /^\s/,
         proxy = $.proxy;
 
     var DropDownList = Select.extend( /** @lends kendo.ui.DropDownList.prototype */ {
@@ -399,8 +400,14 @@
 
             if (options.autoBind) {
                 that._selectItem();
-            } else if (element.is(SELECT)) {
-                that.text(element.children(":selected").text());
+            } else {
+                if (element.is(SELECT)) {
+                    that.text(element.children(":selected").text());
+                }
+
+                if (!that.text().replace(trimRegExp, "") && options.optionLabel) {
+                    that.text(options.optionLabel);
+                }
             }
 
             kendo.notify(that);
@@ -688,11 +695,12 @@
             if (optionLabel && length) {
                 if (textField) {
                     first = {};
-                    first[textField] = optionLabel;
 
-                    if (valueField) {
-                        first[valueField] = "";
-                    }
+                    textField = textField.split(".");
+                    valueField = valueField.split(".");
+
+                    assign(first, textField, optionLabel);
+                    assign(first, valueField, "");
                 }
 
                 first = [first];
@@ -818,6 +826,24 @@
                               .addClass(DOMelement.className);
         }
     });
+
+    function assign(instance, fields, value) {
+        var idx = 0,
+            lastIndex = fields.length - 1,
+            field;
+
+        for (; idx < lastIndex; ++idx) {
+            field = fields[idx];
+
+            if (!(field in instance)) {
+                instance[field] = {};
+            }
+
+            instance = instance[field];
+        }
+
+        instance[fields[lastIndex]] = value;
+    }
 
     kendo.binders.dropdownlist = {
         bind: function(element, observable, reason) {

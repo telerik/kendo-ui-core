@@ -394,6 +394,23 @@
                 equal(dropdownlist._data()[0].value, "");
             });
 
+            test("optionLabel should create complex empty item", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                dropdownlist = new DropDownList(input, {
+                    dataTextField: "Order.Ship.City",
+                    dataValueField: "Order1.Ship1.City1",
+                    dataSource: [
+                        { Order: { Ship: { City: "1"} } }
+                    ],
+                    optionLabel: "Select..."
+                });
+
+                var first = dropdownlist._data()[0];
+
+                equal(first.Order.Ship.City, "Select...");
+                equal(first.Order1.Ship1.City1, "");
+            });
+
             test("should not set id to the popup if the input does not have", function() {
                 input.removeAttr("id");
                 dropdownlist = new DropDownList(input);
@@ -447,6 +464,24 @@
                 dropdownlist.refresh();
 
                 equal(dropdownlist.calls("_options"), 0);
+            });
+
+            test("set optionLabel on init if autoBind:false (select)", function() {
+                var dropdownlist = new DropDownList($("<select/>"), {
+                    autoBind: false,
+                    optionLabel: "Select..."
+                });
+
+                equal(dropdownlist.text(), "Select...");
+            });
+
+            test("set optionLabel on init if autoBind:false (input)", function() {
+                var dropdownlist = new DropDownList($("<input/>"), {
+                    autoBind: false,
+                    optionLabel: "Select..."
+                });
+
+                equal(dropdownlist.text(), "Select...");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
