@@ -652,7 +652,7 @@
                 idx;
 
             if (value !== undefined) {
-                if (that._valueOnFetch(value)) {
+                if (value && that._valueOnFetch(value)) {
                     return;
                 }
 
@@ -703,7 +703,7 @@
                     assign(first, valueField, "");
                 }
 
-                first = [first];
+                first = new kendo.data.ObservableArray([first]);
 
                 for (; idx < length; idx++) {
                     first.push(data[idx]);

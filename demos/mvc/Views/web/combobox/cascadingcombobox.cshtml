@@ -1,0 +1,101 @@
+<div id="example" class="k-content">
+
+            <p>
+                <label for="categories">Catergories:</label>
+                <input id="categories"/>
+            </p>
+            <p>
+                <label for="products">Products:</label>
+                <input id="products" disabled="disabled" />
+            </p>
+            <p>
+                <label for="orders">Orders:</label>
+                <input id="orders" disabled="disabled" />
+            </p>
+
+            <script>
+                $(document).ready(function() {
+                    var productsDataSource = new kendo.data.DataSource({
+                        type: "odata",
+                        serverFiltering: true,
+                        transport: {
+                            read: "http://demos.kendoui.com/service/Northwind.svc/Products"
+                        }
+                    });
+
+                    var ordersDataSource = new kendo.data.DataSource({
+                        type: "odata",
+                        serverFiltering: true,
+                        transport: {
+                            read: "http://demos.kendoui.com/service/Northwind.svc/Order_Details?$expand=Order"
+                        },
+                        change: function() {
+                            console.log(this.data());
+                        }
+                    });
+
+                    $("#categories").kendoComboBox({
+                        placeholder: "Select category...",
+                        dataTextField: "CategoryName",
+                        dataValueField: "CategoryID",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            transport: {
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+                            }
+                        },
+                        change: function() {
+                            var value = this.value();
+
+                            if (value) {
+                                productsDataSource.filter({
+                                    field: "CategoryID",
+                                    operator: "eq",
+                                    value: parseInt(value)
+                                });
+                                products.enable();
+                            } else {
+                                products.enable(false);
+                            }
+
+                            products.value("");
+                            orders.value("");
+                            orders.enable(false);
+                        }
+                    });
+
+                    var products = $("#products").kendoComboBox({
+                        autoBind: false,
+                        placeholder: "Select product...",
+                        dataTextField: "ProductName",
+                        dataValueField: "ProductID",
+                        dataSource: productsDataSource,
+                        change: function() {
+                            var value = this.value();
+
+                            if (value) {
+                                ordersDataSource.filter({
+                                    field: "ProductID",
+                                    operator: "eq",
+                                    value: parseInt(value)
+                                });
+                                orders.enable();
+                            } else {
+                                orders.enable(false);
+                            }
+
+                            orders.value("");
+                        }
+                    }).data("kendoComboBox");
+
+                    var orders = $("#orders").kendoComboBox({
+                        autoBind: false,
+                        placeholder: "Select order...",
+                        dataTextField: "Order.ShipCity",
+                        dataValueField: "OrderID",
+                        dataSource: ordersDataSource
+                    }).data("kendoComboBox");
+                });
+            </script>
+        </div>
