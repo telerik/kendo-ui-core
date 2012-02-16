@@ -48,7 +48,7 @@
 
                     ko.applyBindings(viewModel);
 
-                    $("#ticket").kendoDropDownList().trigger("change");
+                    $("#ticket").kendoDropDownList();
                     $("#ticket").bind("change", function() {
                         $(this).data("kendoDropDownList").select(this.selectedIndex);
                     });
