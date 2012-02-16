@@ -1653,24 +1653,6 @@
                     }
                 }
 
-                height -= header.outerHeight();
-
-                if (that.pager) {
-                    height -= that.pager.element.outerHeight();
-                }
-
-                if(options.groupable) {
-                    height -= $(".k-grouping-header").outerHeight();
-                }
-
-                if(options.toolbar) {
-                    height -= $(".k-grid-toolbar").outerHeight();
-                }
-
-                if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
-                    that.content.height(height);
-                }
-
                 var scrollables = header.find(">.k-grid-header-wrap, > .k-footer-template"); // add footer when implemented
 
                 if (scrollable.virtual) {
@@ -1681,6 +1663,35 @@
                     that.content.bind('scroll', function () {
                         scrollables.scrollLeft(this.scrollLeft);
                     });
+                }
+            }
+        },
+
+        _setContentHeight: function() {
+            var that = this,
+                options = that.options,
+                height = that.wrapper.innerHeight(),
+                header = that.wrapper.children(".k-grid-header"),
+                scrollbar = kendo.support.scrollbar();
+
+            if (options.scrollable) {
+
+                height -= header.outerHeight();
+
+                if (that.pager) {
+                    height -= that.pager.element.outerHeight();
+                }
+
+                if(options.groupable) {
+                    height -= that.wrapper.children(".k-grouping-header").outerHeight();
+                }
+
+                if(options.toolbar) {
+                    height -= that.wrapper.children(".k-grid-toolbar").outerHeight();
+                }
+
+                if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
+                    that.content.height(height);
                 }
             }
         },
@@ -2296,6 +2307,8 @@
             that._scrollable();
 
             that._updateCols();
+
+            that._setContentHeight();
         },
 
         _updateCols: function() {
