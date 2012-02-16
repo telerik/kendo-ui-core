@@ -271,7 +271,7 @@
         init: function(element, options) {
             var that = this,
                 wrapper,
-                titleBar, offset,
+                titleBar, offset, visibility, display,
                 isVisible = false,
                 content;
 
@@ -299,12 +299,11 @@
                     offset = element.offset();
                     isVisible = true;
                 } else {
-                    var visibility = element.css("visibility"),
-                        display = element.css("display");
+                    visibility = element.css("visibility");
+                    display = element.css("display");
 
                     element.css({ visibility: "hidden", display: "" });
                     offset = element.offset();
-
                     element.css({ visibility: visibility, display: display });
                 }
             }
@@ -345,8 +344,7 @@
                         left: offset.left
                     });
                 } else {
-                   wrapper
-                    .css({
+                   wrapper.css({
                         top: offset.top,
                         left: offset.left,
                         visibility: "visible",
@@ -354,8 +352,6 @@
                     });
                 }
             }
-
-            wrapper.toggleClass("k-rtl", that.wrapper.closest(".k-rtl").length);
 
             that.toFront();
 
@@ -1322,7 +1318,7 @@
     };
 
     function createWindow(element, options) {
-        var contentHtml = $(element),
+        var contentHtml = element,
             iframeSrcAttributes,
             wrapper;
 
@@ -1339,6 +1335,8 @@
         if (options.title !== false) {
             wrapper.append(templates.titlebar(extend(templates, options)))
         }
+
+        wrapper.toggleClass("k-rtl", !!element.closest(".k-rtl").length);
 
         // Collect the src attributes of all iframes and then set them to empty string.
         // This seems to fix this IE9 "feature": http://msdn.microsoft.com/en-us/library/gg622929%28v=VS.85%29.aspx?ppud=4

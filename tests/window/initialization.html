@@ -258,6 +258,21 @@
                 equal(dialog.wrapper.find(".k-window-titlebar").length, 0);
                 ok(dialog.wrapper.is(".k-window-titleless"));
             });
+
+            test("window does not render k-rtl class", function() {
+                var dialog = createWindow({
+                    title: "foo"
+                });
+
+                ok(!dialog.wrapper.hasClass("k-rtl"));
+            });
+
+            test("window gets k-rtl class if in k-rtl container", function() {
+                var element = $("<div class='k-rtl'><div /></div>").appendTo("body"),
+                    dialog = createWindow({}, element.find("> div"));
+
+                ok(dialog.wrapper.hasClass("k-rtl"));
+            });
         </script>
 
         <h1 id="qunit-header">kendo.ui.Window Tests</h1>
