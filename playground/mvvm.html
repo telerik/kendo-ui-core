@@ -558,14 +558,18 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                     <td>Kendo window declarative initialization</td>
                     <td>
                         <pre class="prettyprint">
-&lt;p data-role="window" data-title="foo" data-minWidth="400" data-minHeight="300"&gt;
+&lt;button data-bind="click: openWindow" class="k-button"&gt;Open&lt;/button&gt;
+&lt;p data-role="window" data-title="foo" data-minWidth="400" data-minHeight="100"&gt;
     Content of the Window
+    UnitPrice: &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
 &lt;/p&gt;
                         </pre>
                     </td>
                     <td>
-                        <p data-role="window" data-title="foo" data-minWidth="400" data-minHeight="300">
-                            Content of the Window
+                        <button data-bind="click: openWindow" class="k-button">Open</button>
+                        <p id="kendoWindow" data-role="window" data-title="foo" data-minWidth="400" data-minHeight="100">
+                            Content of the Window <br/>
+                            UnitPrice: <span data-bind="text:unitPrice"></span>
                         </p>
                     </td>
                 </tr>
@@ -574,12 +578,17 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                     <td>Kendo upload declarative initialization</td>
                     <td>
                         <pre class="prettyprint">
+&lt;form method="post"&gt;
+    &lt;div&gt;
+        &lt;input name="photos[]" id="photos" type="file" data-role="upload" data-multiple="false" /&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
                         </pre>
                     </td>
                     <td>
                         <form method="post">
                             <div>
-                                <input name="photos[]" id="photos" type="file" data-role="upload"/>
+                                <input name="photos[]" id="photos" type="file" data-role="upload" data-multiple="false" />
                             </div>
                         </form>
                     </td>
@@ -626,7 +635,10 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                         return kendo.toString(this.get("selectedDate"), "HH:mm");
                     },
                     color: "red",
-                    unitPrice: 123
+                    unitPrice: 123,
+                    openWindow: function() {
+                        $("#kendoWindow").data("kendoWindow").open();
+                    }
                 });
 
                 viewModel.selectedProduct = viewModel.products[1];
