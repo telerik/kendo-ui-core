@@ -671,6 +671,32 @@
                 y = ring.c.y - (ay * radius);
 
             return new Point2D(x, y);
+        },
+
+        getBBox: function() {
+            var ring = this,
+                sa = ring.startAngle,
+                ea = sa + ring.angle,
+                x1 = MAX_VALUE, x2 = MIN_VALUE, y1 = MAX_VALUE, y2 = MIN_VALUE,
+                point,
+                angles,
+                i;
+
+            function getAnglesInRange(element, index, array) {
+                return (element >= sa && element <= ea);
+            }
+
+            angles = grep([sa, ea, 0, 90, 180, 270], getAnglesInRange);
+
+            for (i = 0; i < angles.length; i++) {
+                point = ring.point(angles[i]);
+                x1 = math.min(x1, point.x);
+                y1 = math.min(y1, point.y);
+                x2 = math.max(x2, point.x);
+                y2 = math.max(y2, point.y);
+            }
+
+            return new Box2D(x1, y1, x2, y2);
         }
     });
 
@@ -6296,13 +6322,14 @@
             var scale = this,
                 options = scale.options,
                 center = box.center(),
-                radius = math.min(center.x, center.y);
+                radius = math.min(center.x, center.y),
+                ring = new Chart.Ring(
+                    center, radius - options.majorTickSize,
+                    radius, options.startAngle, options.angle
+                );
 
-            scale.ring = new Chart.Ring(
-                center, radius - options.majorTickSize, radius, options.startAngle, options.angle
-            );
-
-            scale.box = box;
+            scale.ring = ring;
+            scale.box = ring.getBox();
         },
 
         getSlotAngle: function(value) {
@@ -6322,9 +6349,10 @@
             function renderTickRing(ring, unit, skipUnit) {
                 var tickAngles = scale.getTickAngles(ring, unit),
                     i, innerPoint, outerPoint,
-                    skip = skipUnit / unit;
+                    skip = skipUnit / unit,
+                    count = tickAngles.length;
 
-                for (i = 0; i < tickAngles.length; i++) {
+                for (i = 0; i < count; i++) {
                     if (i % skip == 0) {
                         continue;
                     }
@@ -6419,7 +6447,8 @@
     var Gauge = Widget.extend({
         init: function(element, userOptions) {
             var gauge = this,
-                options;
+                options,
+                i = 0;
 
             Widget.fn.init.call(gauge, element);
             options = deepExtend({}, gauge.options, userOptions);
@@ -6430,12 +6459,10 @@
 
             gauge._redraw();
 
-
             gauge._plotArea.pointer.value(0);
-            var i = 0;
-            setInterval(function() {
-                gauge._plotArea.pointer.value((i+=.5) % 100);
-            }, 10);
+            //setInterval(function() {
+            //    gauge._plotArea.pointer.value((i+=.5) % 100);
+            //}, 10);
         },
 
         _redraw: function() {
