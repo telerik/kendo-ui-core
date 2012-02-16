@@ -92,6 +92,148 @@
         }
     });
 
+    var binders = {
+        text: {
+            init: function(element, bindings, options) {
+            },
+            update: function(element, bindings, options) {
+                element[innerText] = bindings["text"].get();
+            }
+        },
+
+        value: {
+            init: function(element, bindings, options) {
+                $(element).change(function() {
+                    bindings["value"].set(this.value);
+                });
+            },
+
+            update: function(element, bindings, options) {
+                element.value = bindings["value"].get();
+            }
+        },
+
+        source: {
+            init: function(element, bindings, options) {
+                var source = bindings["source"].get(),
+                that = this,
+                template = options.template;
+
+                source.bind(0, "change", function(e) {
+                    e.preventDefault();
+
+                    if (e.action == "add") {
+                        that.add(element, e.index, kendo.render(template, e.items));
+                    } else if (e.action == "remove") {
+                        that.remove(element, e.index, e.items.length);
+                    }
+                });
+            },
+
+            add: function(element, index, html) {
+                var clone = element.cloneNode(false),
+                reference = element.children[index];
+
+                $(clone).html(html);
+
+                if (reference) {
+                    while (clone.firstChild) {
+                        element.insertBefore(clone.firstChild, reference);
+                    }
+                } else {
+                    while (clone.firstChild) {
+                        element.appendChild(clone.firstChild);
+                    }
+                }
+            },
+
+            remove: function(element, index, length) {
+                var idx;
+
+                for (idx = 0; idx < length; idx++) {
+                    element.removeChild(element.children[index]);
+                }
+            },
+
+            update:function(element, bindings, options) {
+                var source = bindings["source"].get();
+                var template = options.template;
+
+                $(element).html(kendo.render(template, source));
+            }
+        },
+        input: {
+            checked: {
+                init: function(element, bindings, options) {
+                    $(element).change(function() {
+                        if (this.type == "radio") {
+                            bindings["checked"].set(this.value);
+                        } else if (this.type == "checkbox") {
+                            var source = bindings["checked"].get();
+                            var index;
+
+                            var value = this.value;
+
+                            if (value == "on" || value == "off") {
+                                value = this.checked;
+                            }
+
+                            if (source instanceof ObservableArray) {
+                                if (value !== false && value !== true) {
+                                    index = source.indexOf(value);
+                                    if (index > -1) {
+                                        source.splice(index, 1);
+                                    } else {
+                                        source.push(value);
+                                    }
+                                }
+                            } else {
+                                bindings["checked"].set(value);
+                            }
+                        }
+                    });
+                },
+
+                update: function(element, bindings, options) {
+                    var value = bindings["checked"].get();
+
+                    if (element.type == "checkbox") {
+                        element.checked = value === true;
+                    } else if (element.type == "radio") {
+                        if (element.value == value) {
+                            element.checked = true;
+                        }
+                    }
+                }
+            }
+        },
+        select: {
+            value: {
+                init: function(element, bindings, options) {
+                },
+
+                update: function(element, bindings) {
+                    var optionIndex,
+                    options = element.options,
+                    value = bindings["value"].get(),
+                    isArray = value instanceof ObservableArray,
+                    optionValue;
+
+                    for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
+                        optionValue = options[optionIndex].value;
+                        if (optionValue === "" && value !== "") {
+                            optionValue = options[optionIndex].text;
+                        }
+
+                        if ((isArray && value.indexOf(optionValue)) || optionValue == value) {
+                            options[optionIndex].selected = true;
+                        }
+                    }
+                }
+            }
+        }
+    };
+
     var BindingTarget = Class.extend( {
         init: function(target) {
             this.target = target;
@@ -104,6 +246,36 @@
                 options.template = kendo.template(options.template);
             }
             $.extend(this.options, options);
+        },
+
+        bind: function(bindings) {
+           var that = this;
+           var nodeName = this.target.nodeName.toLowerCase();
+           var specificBinders = binders[nodeName] || {};
+
+           for (var key in bindings) {
+                var binder = specificBinders[key] || binders[key];
+                var binding = bindings[key];
+                if (binder) {
+                   binder.init(this.target, bindings, this.options);
+
+                   binding.start();
+
+                   binder.update(this.target, bindings, this.options);
+
+                   binding.stop();
+
+                   binding.bind("change", function(e) {
+                       var method = "update"
+                       if (e.action) {
+                            if (binder[e.action]) {
+                                method = e.action;
+                            }
+                       }
+                       binder[method](that.target, bindings, that.options);
+                   });
+                }
+           }
         },
 
         configuration: function() {
@@ -1024,12 +1196,12 @@
 
             target.source = source;
 
-            bindings = parseAttributeList(bind);
+            bind = parseAttributeList(bind);
 
             configuration = target.configuration();
 
-            if (bindings.template) {
-                options.template = $("#" + bindings.template).html();
+            if (bind.template) {
+                options.template = $("#" + bind.template).html();
             }
 
             for (idx = 0, length = configuration.options.length; idx < length; idx++) {
@@ -1043,27 +1215,29 @@
 
             target.setOptions(options);
 
-            if (bindings.attr) {
-                for (path in bindings.attr) {
-                    target.setAttributeBinding(path, new Binding(source, bindings.attr[path]));
+            if (bind.attr) {
+                for (path in bind.attr) {
+                    target.setAttributeBinding(path, new Binding(source, bind.attr[path]));
                 }
             }
 
-            if (bindings.style) {
-                for (path in bindings.style) {
-                    target.setStyleBinding(path, new Binding(source, bindings.style[path]));
+            if (bind.style) {
+                for (path in bind.style) {
+                    target.setStyleBinding(path, new Binding(source, bind.style[path]));
                 }
             }
-            if (bindings.event) {
-                for (path in bindings.event) {
-                    target.setEventBinding(path, new Binding(source, bindings.event[path]));
+            if (bind.event) {
+                for (path in bind.event) {
+                    target.setEventBinding(path, new Binding(source, bind.event[path]));
                 }
             }
+
+            var bindings = {};
 
             for (idx = 0, length = configuration.properties.length; idx < length; idx++) {
                 path = configuration.properties[idx];
 
-                sourcePath = bindings[path];
+                sourcePath = bind[path];
 
                 if (sourcePath) {
                     if (path == "source") {
@@ -1072,9 +1246,12 @@
                         sourcePath = "";
                     }
 
-                    target.setBinding(path, new Binding(source, sourcePath));
+             //       target.setBinding(path, new Binding(source, sourcePath));
+                    bindings[path] = new Binding(source, sourcePath);
                 }
             }
+
+            target.bind(bindings);
         }
 
         if (target) {
