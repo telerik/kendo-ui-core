@@ -84,6 +84,10 @@
             that._downTarget = $(event.currentTarget);
             that._shiftPressed = shiftKey;
 
+            if (that._downTarget.closest("." + SELECTABLE)[0] !== that.element[0]) {
+                return;
+            }
+
             DOCUMENT
                 .unbind(MOUSEUP, that._upDelegate) // more cancel friendly
                 .bind(MOUSEUP, that._upDelegate);
