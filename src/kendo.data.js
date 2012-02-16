@@ -2149,7 +2149,14 @@
             if (that.options.autoSync && (action === "add" || action === "remove" || action === "itemchange")) {
                 that.sync();
             } else {
-                that._total = that.reader.total(that._pristine);
+                var total = that._total || that.reader.total(that._pristine);
+                if (action === "add") {
+                    total++;
+                } else if (action === "remove") {
+                    total--;
+                }
+
+                that._total = total;
                 that._process(that._data, e);
             }
         },
@@ -2314,7 +2321,7 @@
                     if (result.total !== undefined) {
                         that._total = result.total;
                     } else {
-                        that._total = that.reader.total(that._pristine);
+                        that._total = that._data.length;
                     }
                 }
 

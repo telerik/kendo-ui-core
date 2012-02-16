@@ -815,6 +815,111 @@
                 equal(dataSource.view().length, 1);
                 equal(dataSource.view()[0].foo, 1);
             });
+
+            test("removing model re-calculate the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.remove(dataSource.get(1));
+
+                equal(dataSource.view().length, 1);
+                equal(dataSource.total(), 1);
+            });
+
+            test("adding model re-calculate the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.add(new kendo.data.Model());
+
+                equal(dataSource.view().length, 3);
+                equal(dataSource.total(), 3);
+            });
+
+            test("total is calculated on initially empty DataSource", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.add(new kendo.data.Model());
+
+                equal(dataSource.view().length, 1);
+                equal(dataSource.total(), 1);
+            });
+
+            test("modify model re-calculate the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.add(new kendo.data.Model());
+                dataSource.get(1).set("bar", "foo");
+
+                equal(dataSource.view().length, 3);
+                equal(dataSource.total(), 3);
+            });
+
+            test("query with local transport calculates total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.remove(dataSource.get(1));
+                dataSource.query({ page: 1 });
+
+                equal(dataSource.view().length, 1);
+                equal(dataSource.total(), 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
