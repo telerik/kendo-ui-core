@@ -134,6 +134,10 @@
                     "url": "dropdownlist/template.html"
                 },
                 {
+                    "text": "Cascading DropDownList",
+                    "url": "dropdownlist/cascadingdropdownlist.html"
+                },
+                {
                     "text": "Events",
                     "url": "dropdownlist/events.html"
                 },
