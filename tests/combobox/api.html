@@ -314,6 +314,19 @@
 
                 equal(combobox.dataSource.calls("fetch"), 1);
             });
+
+            test("value('') clears selection and do not fetch", function() {
+                var combobox = new ComboBox(input);
+
+                stub(combobox.dataSource, {
+                    fetch: combobox.dataSource.fetch
+                });
+
+                combobox.value("");
+
+                equal(combobox.selectedIndex, -1);
+                equal(combobox.dataSource.calls("fetch"), 0);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
