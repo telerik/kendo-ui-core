@@ -68,6 +68,8 @@
         },
 
         get: function() {
+            this.start();
+
             var result = this.source;
 
             if (this.path != "this") {
@@ -77,7 +79,9 @@
                     result = $.proxy(result, this.source);
                 }
             }
+            this.stop();
 
+            console.log(this.dependencies);
             return result;
         },
 
@@ -93,11 +97,100 @@
     });
 
     var binders = {
+        attr: {
+            init: function(element, bindings, options) {
+            },
+
+            update: function(element, bindings, options) {
+                var attribute, attributes = bindings.attr;
+
+                for (attribute in attributes) {
+                    element.setAttribute(attribute, attributes[attribute].get());
+                }
+            }
+        },
+        enabled: {
+            init: function() {
+            },
+
+            update: function(element, bindings) {
+                if (bindings.enabled.get()) {
+                    element.removeAttribute("disabled");
+                } else {
+                    element.setAttribute("disabled", "disabled");
+                }
+            }
+        },
+        disabled: {
+            init: function() {
+            },
+
+            update: function(element, bindings) {
+                if (bindings.disabled.get()) {
+                    element.setAttribute("disabled", "disabled");
+                } else {
+                    element.removeAttribute("disabled");
+                }
+            }
+        },
+        event: {
+            init: function() {
+            },
+            update: function(element, bindings, options) {
+                var event, events = bindings.event;
+
+                for (event in events) {
+                    $(element).bind(event, events[event].get());
+                }
+            }
+        },
+        click: {
+            init: function() {
+            },
+            update: function(element, bindings, options) {
+                $(element).click(bindings.click.get());
+            }
+        },
         text: {
             init: function(element, bindings, options) {
             },
             update: function(element, bindings, options) {
-                element[innerText] = bindings["text"].get();
+                //TODO: evaluate the function in some common place
+                var text = bindings["text"].get();
+
+                if (typeof text == "function") {
+                    text = text();
+                }
+
+                element[innerText] = text;
+            }
+        },
+
+        visible: {
+            init: function() {
+            },
+
+            update: function(element, bindings, options) {
+                if (bindings["visible"].get()) {
+                    element.style.display = "";
+                } else {
+                    element.style.display = "none";
+                }
+            }
+        },
+
+        html: {
+            init: function(element, bindings, options) {
+            },
+            update: function(element, bindings, options) {
+                var template = options.template,
+                    html = bindings["html"].get();
+
+                if (template) {
+                   html = template(html);
+                }
+
+                element.innerHTML = html;
             }
         },
 
@@ -155,28 +248,36 @@
                 }
             },
 
-            update:function(element, bindings, options) {
+            update: function(element, bindings, options) {
                 var source = bindings["source"].get();
+                var idx, length;
                 var template = options.template;
 
+                if (element.nodeName.toLowerCase() == "table") {
+                   if (!element.tBodies[0]) {
+                        element.appendChild(document.createElement("tbody"));
+                   }
+                   element = element.tBodies[0];
+                }
+
                 $(element).html(kendo.render(template, source));
+
+                for (idx = 0, length = source.length; idx < length; idx++) {
+                    bindElement(element.children[idx], source[idx]);
+                }
             }
         },
         input: {
             checked: {
                 init: function(element, bindings, options) {
+                    var that = this;
                     $(element).change(function() {
+                        var value = that.value(this);
                         if (this.type == "radio") {
-                            bindings["checked"].set(this.value);
+                            bindings["checked"].set(value);
                         } else if (this.type == "checkbox") {
                             var source = bindings["checked"].get();
                             var index;
-
-                            var value = this.value;
-
-                            if (value == "on" || value == "off") {
-                                value = this.checked;
-                            }
 
                             if (source instanceof ObservableArray) {
                                 if (value !== false && value !== true) {
@@ -194,10 +295,28 @@
                     });
                 },
 
+                value: function(element) {
+                    var value = element.value;
+
+                    if (element.type == "checkbox") {
+                        if (value == "on" || value == "off") {
+                            value = element.checked;
+                        }
+                    }
+
+                    return value;
+                },
+
                 update: function(element, bindings, options) {
                     var value = bindings["checked"].get();
 
                     if (element.type == "checkbox") {
+                        if (value instanceof ObservableArray) {
+                            if (value.indexOf(this.value(element)) >= 0) {
+                                value = true;
+                            }
+                        }
+
                         element.checked = value === true;
                     } else if (element.type == "radio") {
                         if (element.value == value) {
@@ -212,21 +331,35 @@
                 init: function(element, bindings, options) {
                 },
 
-                update: function(element, bindings) {
+                update: function(element, bindings, options) {
                     var optionIndex,
-                    options = element.options,
-                    value = bindings["value"].get(),
-                    isArray = value instanceof ObservableArray,
-                    optionValue;
+                        value = bindings["value"].get(),
+                        values = value,
+                        field = options.valueField || options.textField,
+                        optionValue;
 
-                    for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
-                        optionValue = options[optionIndex].value;
-                        if (optionValue === "" && value !== "") {
-                            optionValue = options[optionIndex].text;
+                    if (!(values instanceof ObservableArray)) {
+                        values = new ObservableArray([value]);
+                    }
+
+                    options = element.options;
+
+                    for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
+                        value = values[valueIndex];
+
+                        if (field) {
+                            value = value.get(field);
                         }
 
-                        if ((isArray && value.indexOf(optionValue)) || optionValue == value) {
-                            options[optionIndex].selected = true;
+                        for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
+                            optionValue = options[optionIndex].value;
+                            if (optionValue === "" && value !== "") {
+                                optionValue = options[optionIndex].text;
+                            }
+
+                            if (optionValue == value) {
+                                options[optionIndex].selected = true;
+                            }
                         }
                     }
                 }
@@ -259,21 +392,19 @@
                 if (binder) {
                    binder.init(this.target, bindings, this.options);
 
-                   binding.start();
-
                    binder.update(this.target, bindings, this.options);
 
-                   binding.stop();
-
-                   binding.bind("change", function(e) {
-                       var method = "update"
-                       if (e.action) {
-                            if (binder[e.action]) {
-                                method = e.action;
-                            }
+                   if (key == "attr" || key == "event") {
+                       for (var attribute in binding) {
+                            binding[attribute].bind("change", function(e) {
+                                binder.update(that.target, bindings, that.options);
+                            });
                        }
-                       binder[method](that.target, bindings, that.options);
-                   });
+                   } else {
+                       binding.bind("change", function(e) {
+                           binder.update(that.target, bindings, that.options);
+                       });
+                   }
                 }
            }
         },
@@ -290,34 +421,6 @@
                     visible: VisibleProperty
                 }
             };
-        },
-
-        setAttributeBinding: function(path, binding) {
-            var that = this,
-                property = new AttributeProperty(that.target, path);
-
-            var expression = property.createExpression(binding);
-            that.expressions.push(expression);
-
-            expression.updateTarget(that.options);
-
-            binding.bind("change", function() {
-                expression.updateTarget(that.options);
-            });
-        },
-
-        setEventBinding: function(path, binding) {
-            var that = this,
-                property = new EventProperty(that.target, path);
-
-            var expression = property.createExpression(binding);
-            that.expressions.push(expression);
-
-            expression.updateTarget(that.options);
-
-            binding.bind("change", function() {
-                expression.updateTarget(that.options);
-            });
         },
 
         setStyleBinding: function(path, binding) {
@@ -1215,9 +1318,14 @@
 
             target.setOptions(options);
 
+            var bindings = {};
+
             if (bind.attr) {
+                bindings.attr = {
+                };
+
                 for (path in bind.attr) {
-                    target.setAttributeBinding(path, new Binding(source, bind.attr[path]));
+                    bindings.attr[path] = new Binding(source, bind.attr[path]);
                 }
             }
 
@@ -1227,12 +1335,12 @@
                 }
             }
             if (bind.event) {
+                bindings.event = {
+                };
                 for (path in bind.event) {
-                    target.setEventBinding(path, new Binding(source, bind.event[path]));
+                    bindings.event[path] = new Binding(source, bind.event[path]);
                 }
             }
-
-            var bindings = {};
 
             for (idx = 0, length = configuration.properties.length; idx < length; idx++) {
                 path = configuration.properties[idx];
@@ -1246,9 +1354,12 @@
                         sourcePath = "";
                     }
 
-             //       target.setBinding(path, new Binding(source, sourcePath));
                     bindings[path] = new Binding(source, sourcePath);
                 }
+            }
+
+            if (bindings.template && !bindings.source) {
+                bindings["html"] = new Binding(source, "");
             }
 
             target.bind(bindings);
