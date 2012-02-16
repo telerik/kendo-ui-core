@@ -1093,7 +1093,7 @@
         object = kendo.observable(object);
         dom = $(dom);
 
-        for (idx = 0, length = dom.length; idx < length; idx++ ) {
+        for (idx = 0; idx < dom.length; idx++ ) {
             bindElement(dom[idx], object);
         }
     }
