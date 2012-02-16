@@ -80,6 +80,10 @@
                     "url": "combobox/template.html"
                 },
                 {
+                    "text": "Cascading ComboBox",
+                    "url": "combobox/cascadingcombobox.html"
+                },
+                {
                     "text": "Events",
                     "url": "combobox/events.html"
                 },

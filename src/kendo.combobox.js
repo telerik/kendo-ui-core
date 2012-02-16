@@ -803,7 +803,7 @@
                 idx;
 
             if (value !== undefined) {
-                if (that._valueOnFetch(value)) {
+                if (value && that._valueOnFetch(value)) {
                     return;
                 }
 
