@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>treeview MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.treeview.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" ></div>
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a treeview when data role is treeview", function() {
+                var dom = $('<ul data-role="treeview"></ul>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoTreeView") instanceof kendo.ui.TreeView);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<ul data-role="treeview" data-animation="false"></ul>');
+
+                kendo.bind(dom);
+
+                var treeview = dom.data("kendoTreeView");
+
+                ok($.isEmptyObject(treeview.options.animation.effects));
+            });
+
+            test("binding treeview initialized before binding", function() {
+                var dom = $('<ul data-animation="false"></ul>');
+
+                var treeview = dom.kendoTreeView().data("kendoTreeView");
+
+                kendo.bind(dom);
+
+                ok($.isEmptyObject(treeview.options.animation.effects));
+            });
+
+            test("binding containing binding attributes", function() {
+                var dom = $('<ul data-role="treeview"><span data-bind="text:text"></span></ul>');
+
+                var observable = kendo.observable({ text:"foo" });
+
+                kendo.bind(dom, observable);
+
+                equal($.trim(dom.find("span:first").html()), "foo");
+            });
+
+            test("updating viewModel updates the content", function() {
+                var dom = $('<ul data-role="treeview"><span data-bind="text:text"></span></ul>');
+
+                var observable = kendo.observable({ text:"foo" });
+
+                kendo.bind(dom, observable);
+
+                observable.set("text", "bar");
+
+                equal($.trim(dom.find("span:first").html()), "bar");
+            });
+
+            test("event is raised if attached as option", 1, function() {
+                var dom = $('<ul data-role="treeview" data-select="select"></ul>');
+
+                kendo.bind(dom);
+
+                dom.data("kendoTreeView").trigger("select");
+            });
+
+            function select() {
+                ok(true);
+            }
+
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
