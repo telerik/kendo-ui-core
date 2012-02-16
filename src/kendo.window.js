@@ -1114,6 +1114,10 @@
          *
          * Maximizes a Window to the entire viewing area of the user agent.
          *
+         * @function
+         * @returns {Window}
+         * Returns the (Kendo UI) Window object to support chaining.
+         *
          * @exampleTitle Maximize a Window
          * @example
          * $("#window").data("kendoWindow").maximize();
@@ -1145,6 +1149,10 @@
         /**
          *
          * Maximizes a Window to its title bar.
+         *
+         * @function
+         * @returns {Window}
+         * Returns the (Kendo UI) Window object to support chaining.
          *
          * @exampleTitle Minimize a Window
          * @example
