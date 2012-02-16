@@ -353,12 +353,8 @@
             element = that.element;
             options = that.options;
 
-            if (options.animation === false) {
-                options.animation = {
-                    expand: { show: true, effects: {} },
-                    collapse: { hide: true, effects: {} }
-                };
-            }
+            that._animation();
+
 
             // render treeview if it's not already rendered
             if (!element.hasClass(TTREEVIEW)) {
@@ -391,154 +387,153 @@
                 .on(CLICK, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
 
             if (options.dragAndDrop) {
-                that.bind([
-                        /**
-                         *
-                         * Triggered before the dragging of a node starts.
-                         *
-                         * @name kendo.ui.TreeView#dragstart
-                         * @event
-                         *
-                         * @param {Event} e
-                         *
-                         * @param {Node} e.sourceNode
-                         * The node that will be dragged.
-                         *
-                         */
-                        DRAGSTART,
-
-                        /**
-                         *
-                         * Triggered while a node is being dragged.
-                         *
-                         * @name kendo.ui.TreeView#drag
-                         * @event
-                         *
-                         * @param {Event} e
-                         *
-                         * @param {Node} e.sourceNode
-                         * The node that is being dragged.
-                         *
-                         * @param {DomElement} e.dropTarget
-                         * The element that the node is placed over.
-                         *
-                         * @param {Integer} e.pageX
-                         * The x coordinate of the mouse.
-                         *
-                         * @param {Integer} e.pageY
-                         * The y coordinate of the mouse.
-                         *
-                         * @param {String} e.statusClass
-                         * The status that the drag clue shows.
-                         *
-                         * @param {Function} e.setStatusClass
-                         * Allows a custom drag clue status to be set.
-                         *
-                         */
-                        DRAG,
-
-                        /**
-                         *
-                         * Triggered when a node is being dropped.
-                         *
-                         * @name kendo.ui.TreeView#drop
-                         * @event
-                         *
-                         * @param {Event} e
-                         *
-                         * @param {Node} e.sourceNode
-                         * The node that is being dropped.
-                         *
-                         * @param {Node} e.destinationNode
-                         * The node that the sourceNode is being dropped upon.
-                         *
-                         * @param {Boolean} e.valid
-                         * Whether this drop operation is permitted.
-                         *
-                         * @param {Function} e.setValid
-                         * Allows the drop to be prevented.
-                         *
-                         * @param {DomElement} e.dropTarget
-                         * The element that the node is placed over.
-                         *
-                         * @param {String} e.dropPosition
-                         * Shows where the new sourceLocation would be.
-                         *
-                         */
-                        DROP,
-
-                        /**
-                         *
-                         * Triggered after a node is has been dropped.
-                         *
-                         * @name kendo.ui.TreeView#dragend
-                         * @event
-                         *
-                         * @param {Event} e
-                         *
-                         * @param {Node} e.sourceNode
-                         * The node that is being dropped.
-                         *
-                         * @param {Node} e.destinationNode
-                         * The node that the sourceNode is being dropped upon.
-                         *
-                         * @param {String} e.dropPosition
-                         * Shows where the new sourceLocation would be.
-                         *
-                         */
-                        DRAGEND
-                    ], options);
-
                 that.dragging = new TreeViewDragAndDrop(that);
             }
 
-            that.bind([
-                /**
-                 *
-                 * Triggered before a subgroup gets expanded.
-                 *
-                 * @name kendo.ui.TreeView#expand
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {Node} e.node
-                 * The expanded node
-                 *
-                 */
-                EXPAND,
-
-                /**
-                 *
-                 * Triggered before a subgroup gets collapsed.
-                 *
-                 * @name kendo.ui.TreeView#collapse
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {Node} e.node
-                 * The collapsed node
-                 *
-                 */
-                COLLAPSE,
-
-                /**
-                 *
-                 * Triggered when a node gets selected.
-                 *
-                 * @name kendo.ui.TreeView#select
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {Node} e.node
-                 * The selected node
-                 *
-                 */
-                SELECT
-            ], options);
+            that.bind(that.events, options);
         },
+
+        events: [
+            /**
+            *
+            * Triggered before the dragging of a node starts.
+            *
+            * @name kendo.ui.TreeView#dragstart
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.sourceNode
+            * The node that will be dragged.
+            *
+            */
+            DRAGSTART,
+
+            /**
+            *
+            * Triggered while a node is being dragged.
+            *
+            * @name kendo.ui.TreeView#drag
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.sourceNode
+            * The node that is being dragged.
+            *
+            * @param {DomElement} e.dropTarget
+            * The element that the node is placed over.
+            *
+            * @param {Integer} e.pageX
+            * The x coordinate of the mouse.
+            *
+            * @param {Integer} e.pageY
+            * The y coordinate of the mouse.
+            *
+            * @param {String} e.statusClass
+            * The status that the drag clue shows.
+            *
+            * @param {Function} e.setStatusClass
+            * Allows a custom drag clue status to be set.
+            *
+            */
+            DRAG,
+
+            /**
+            *
+            * Triggered when a node is being dropped.
+            *
+            * @name kendo.ui.TreeView#drop
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.sourceNode
+            * The node that is being dropped.
+            *
+            * @param {Node} e.destinationNode
+            * The node that the sourceNode is being dropped upon.
+            *
+            * @param {Boolean} e.valid
+            * Whether this drop operation is permitted.
+            *
+            * @param {Function} e.setValid
+            * Allows the drop to be prevented.
+            *
+            * @param {DomElement} e.dropTarget
+            * The element that the node is placed over.
+            *
+            * @param {String} e.dropPosition
+            * Shows where the new sourceLocation would be.
+            *
+            */
+            DROP,
+
+            /**
+            *
+            * Triggered after a node is has been dropped.
+            *
+            * @name kendo.ui.TreeView#dragend
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.sourceNode
+            * The node that is being dropped.
+            *
+            * @param {Node} e.destinationNode
+            * The node that the sourceNode is being dropped upon.
+            *
+            * @param {String} e.dropPosition
+            * Shows where the new sourceLocation would be.
+            *
+            */
+            DRAGEND,
+            /**
+            *
+            * Triggered before a subgroup gets expanded.
+            *
+            * @name kendo.ui.TreeView#expand
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.node
+            * The expanded node
+            *
+            */
+            EXPAND,
+
+            /**
+            *
+            * Triggered before a subgroup gets collapsed.
+            *
+            * @name kendo.ui.TreeView#collapse
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.node
+            * The collapsed node
+            *
+            */
+            COLLAPSE,
+
+            /**
+            *
+            * Triggered when a node gets selected.
+            *
+            * @name kendo.ui.TreeView#select
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Node} e.node
+            * The selected node
+            *
+            */
+            SELECT
+        ],
 
         options: {
             name: "TreeView",
@@ -552,7 +547,20 @@
                 collapse: {
                     duration: 100
                 }
+            },
+            dragAndDrop: false
+        },
+
+        setOptions: function(options) {
+            var that = this;
+
+            if (("dragAndDrop" in options) && options.dragAndDrop && !that.options.dragAndDrop) {
+                that.dragging = new TreeViewDragAndDrop(that);
             }
+
+            Widget.fn.setOptions.call(that, options);
+
+            that._animation();
         },
 
         _trigger: function (eventName, node) {

@@ -18,5 +18,10 @@ tests.push(
     {
         page: "treeview/events.html",
         title: "events"
+    },
+    {
+        page: "treeview/mvvm.html",
+        title: "mvvm"
     }
+
 );

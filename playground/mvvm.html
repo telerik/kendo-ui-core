@@ -26,6 +26,7 @@
         <script src="../src/kendo.tabstrip.js"></script>
         <script src="../src/kendo.window.js"></script>
         <script src="../src/kendo.upload.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -591,6 +592,33 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                                 <input name="photos[]" id="photos" type="file" data-role="upload" data-multiple="false" />
                             </div>
                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kendo treeView declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+ &lt;ul data-role="treeview" data-dragAndDrop="true" data-animation="false"&gt;
+    &lt;li&gt;Item 1
+        &lt;ul&gt;
+            &lt;li>Item 1.1&lt;/li&gt;
+            &lt;li>Item 1.2&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+&lt;ul&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <ul data-role="treeview" data-dragAndDrop="true" data-animation="false">
+                            <li>Item 1
+                                <ul>
+                                    <li>Item 1.1</li>
+                                    <li>Item 1.2</li>
+                                </ul>
+                            </li>
+                            <li>Item 2</li>
+                        </ul>
                     </td>
                 </tr>
             </table>
