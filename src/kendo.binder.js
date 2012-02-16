@@ -109,7 +109,14 @@
         configuration: function() {
             return {
                 options: ["textField", "valueField"],
-                properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "html", "source", "value"]
+                properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "html", "source", "value"],
+                props: {
+                    text: TextProperty,
+                    html: HtmlProperty,
+                    enabled: EnableProperty,
+                    disabled: DisableProperty,
+                    visible: VisibleProperty
+                }
             };
         },
 
@@ -177,24 +184,18 @@
         },
 
         createProperty: function(path) {
+            var properties = this.configuration().props;
+
+            if (path in properties) {
+                return new properties[path](this.target);
+            }
+
             if (/click/.test(path)) {
                 return new EventProperty(this.target, path);
             }
 
-            if (path == "visible") {
-                return new VisibleProperty(this.target, path);
-            }
-
             if (path == "template") {
                 return new TemplateProperty(this.target, "innerHTML");
-            }
-
-            if (path == "enabled") {
-                return new EnableProperty(this.target, path);
-            }
-
-            if (path == "disabled") {
-                return new DisableProperty(this.target, path);
             }
 
             if (path == "checked") {
@@ -205,18 +206,9 @@
                 }
             }
 
-            if (path == "html") {
-                return new Property(this.target, "innerHTML");
-            }
-
-            if (path == "text") {
-                return new Property(this.target, innerText);
-            }
-
             if (path == "value") {
                 return new TwoWayProperty(this.target, path);
             }
-
         },
 
         destroy: function() {
@@ -412,10 +404,9 @@
     });
 
     var Property = Class.extend( {
-        init: function(target, path, options) {
+        init: function(target, path) {
             this.target = target;
             this.path = path;
-            this.options = options;
         },
 
         bind: function() {
@@ -430,6 +421,18 @@
         },
 
         destroy: function() {
+        }
+    });
+
+    var TextProperty = Property.extend( {
+        set: function(value) {
+            this.target[innerText] = value;
+        }
+    });
+
+    var HtmlProperty = Property.extend( {
+        set: function(value) {
+            this.target.innerHTML = value;
         }
     });
 
