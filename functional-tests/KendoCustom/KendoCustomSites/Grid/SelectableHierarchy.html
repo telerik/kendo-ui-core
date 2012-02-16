@@ -44,7 +44,8 @@
                                 field: "Title"
                             }
                         ],
-                        selectable: "multiple",
+                            selectable: "cell",
+                        navigatable: false,
                         change: function () {
                             document.getElementById("info2").innerHTML = "outer grid: change event fired";                            
                         }
@@ -68,8 +69,9 @@
                 scrollable: false,
                 sortable: true,
                 pageable: true,
-                selectable: "cell",
+                selectable: "multiple cell",
                 columns: ["OrderID", "ShipCountry", "ShipAddress", "ShipName"],
+                navigatable: false,
                 change: function () {
                             document.getElementById("info").innerHTML = "inner grid: change event fired";                            
                         }
