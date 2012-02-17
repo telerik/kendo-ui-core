@@ -405,97 +405,59 @@
                 series = options.series,
                 categoryAxis = options.categoryAxis,
                 data = chart.dataSource.view(),
-                grouped = (chart.dataSource.group() || []).length > 0,
+                groups = chart.dataSource.group() || [],
+                grouped = groups.length > 0,
                 row,
                 category,
                 currentSeries,
                 value;
 
+            var groupSeries = [];
             for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                 currentSeries = series[seriesIdx];
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = [];
-                    currentSeries.dataItems = [];
-                }
-            }
 
-            if (grouped) {
-                // Bind categories from first group
-                // Bind series from first group
-                // Clone bound series for each additional group
-                // Bind cloned series
-                for (var groupIx = 0, groupsLength = data.length; groupIx < groupsLength; groupIx++) {
-                    var group = data[groupIx],
-                        items = group.items,
-                        groupSeries,
-                        groupNameTemplate;
+                    if (grouped) {
+                        var groupNameTemplate;
 
-                    if (groupIx === 0) {
-                        groupSeries = series;
-
-                        for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                            var source = series[seriesIx];
-                            source.dataGroup = group;
+                        if (currentSeries.groupNameTemplate) {
+                            groupNameTemplate = baseTemplate(currentSeries.groupNameTemplate);
                         }
-                    } else {
-                        groupSeries = [];
-                        for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                            var source = series[seriesIx];
-                            if (source.field || (currentSeries.xField && currentSeries.yField)) {
-                                var seriesCopy = deepExtend({}, source);
-                                seriesCopy.dataGroup = group;
-                                groupSeries.push(seriesCopy);
+
+                        // Clone series
+                        for (var i = 1; i < data.length; i++) {
+                            var clone = deepExtend({}, currentSeries);
+                            groupSeries.push(clone);
+
+                            clone.dataItems = data[i].items;
+                            if (groupNameTemplate) {
+                                clone.name = groupNameTemplate({
+                                    series: clone, group: data[i]
+                                });
                             }
                         }
 
-                        [].push.apply(series, groupSeries);
-                    }
-
-                    for (var dataIdx = 0, dataLength = items.length; dataIdx < dataLength; dataIdx++) {
-                        var row = items[dataIdx];
-
-                        if (groupIx === 0) {
-                            bindCategories(row);
+                        currentSeries.dataItems = data[0].items;
+                        if (groupNameTemplate) {
+                            currentSeries.name = groupNameTemplate({
+                                series: currentSeries, group: data[0]
+                            });
                         }
-
-                        bindSeries(groupSeries, row);
-                    }
-                }
-                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
-                    var source = series[seriesIx];
-                    if (source.field || (currentSeries.xField && currentSeries.yField)) {
-                        if (source.groupNameTemplate) {
-                            groupNameTemplate = baseTemplate(source.groupNameTemplate);
-                            source.name = groupNameTemplate({ series: source, group: source.dataGroup });
-                        }
-                    }
-                }
-            } else {
-                for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
-                    row = data[dataIdx];
-
-                    bindCategories(row);
-                    bindSeries(series, row);
-                }
-            }
-
-            chart.trigger(DATABOUND);
-            chart._redraw();
-
-            function bindCategories(row) {
-                if (categoryAxis.field) {
-                    category = getField(categoryAxis.field, row);
-                    if (dataIdx === 0) {
-                        categoryAxis.categories = [category];
                     } else {
-                        categoryAxis.categories.push(category);
+                        currentSeries.dataItems = data;
                     }
                 }
             }
 
-            function bindSeries(series, row) {
-                for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                    currentSeries = series[seriesIdx];
+            [].push.apply(series, groupSeries);
+
+            for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
+                currentSeries = series[seriesIdx];
+                var seriesData = currentSeries.dataItems || [];
+
+                for (var dataIdx = 0, dataLength = seriesData.length; dataIdx < dataLength; dataIdx++) {
+                    row = seriesData[dataIdx];
 
                     if (currentSeries.field) {
                         value = getField(currentSeries.field, row);
@@ -517,6 +479,23 @@
                     }
                 }
             }
+
+            var categoriesData = grouped ? data[0].items : data;
+            for (var dataIdx = 0, dataLength = categoriesData.length; dataIdx < dataLength; dataIdx++) {
+                row = categoriesData[dataIdx];
+
+                if (categoryAxis.field) {
+                    category = getField(categoryAxis.field, row);
+                    if (dataIdx === 0) {
+                        categoryAxis.categories = [category];
+                    } else {
+                        categoryAxis.categories.push(category);
+                    }
+                }
+            }
+
+            chart.trigger(DATABOUND);
+            chart._redraw();
         }
     });
 
