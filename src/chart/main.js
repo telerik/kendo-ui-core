@@ -6164,6 +6164,7 @@
         },
 
         reflow: function(targetBox) {
+            console.log(1)
             this.box = targetBox;
         },
 
@@ -6272,9 +6273,12 @@
             pointer.box = box;
         },
 
-        _createNeedle: function(view, box) {
+        _createNeedle: function(view) {
             var pointer = this,
-                box = pointer.box,
+                ring = pointer.scale.ring,
+                c = ring.c,
+                r = ring.r,
+                box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
                 center = box.center();
 
@@ -6289,7 +6293,7 @@
             var pointer = this,
                 shape = pointer.options.shape;
 
-            pointer.element = pointer._createNeedle(view, pointer.box);
+            pointer.element = pointer._createNeedle(view);
 
             return [pointer.element];
         }
@@ -6329,7 +6333,7 @@
                 );
 
             scale.ring = ring;
-            scale.box = ring.getBox();
+            scale.box = ring.getBBox();
         },
 
         getSlotAngle: function(value) {
@@ -6431,6 +6435,31 @@
             }
         },
 
+        reflow: function(box) {
+            var plotArea = this,
+                scale = plotArea.scale,
+                bBox;
+
+            scale.reflow(box);
+            scale = plotArea.alignScale(scale, box);
+            bBox = scale.ring.getBBox();
+            plotArea.pointer.scale = scale;
+            plotArea.pointer.reflow(box);
+            plotArea.box = bBox;
+        },
+
+        alignScale: function(scale, box) {
+            var scaleCenter = scale.box.center(),
+                boxCenter = box.center(),
+                padding = math.max(boxCenter.x - scaleCenter.x, boxCenter.y - scaleCenter.y);
+
+            scale.ring.c.y += padding;
+            scale.ring.ir += padding;
+            scale.ring.r += padding;
+
+            return scale;
+        },
+
         render: function() {
             var plotArea = this,
                 options = plotArea.options,
@@ -6459,7 +6488,7 @@
 
             gauge._redraw();
 
-            gauge._plotArea.pointer.value(0);
+            //gauge._plotArea.pointer.value(0);
             //setInterval(function() {
             //    gauge._plotArea.pointer.value((i+=.5) % 100);
             //}, 10);
