@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+    <title>Grid Hierarchy</title>        <link href="http://mvc-kendobuild/staging/content/cdn/styles/kendo.common.min.css" rel="stylesheet"/>        <link href="http://mvc-kendobuild/staging/content/cdn/styles/kendo.blueopal.min.css" rel="stylesheet"/>        <script src="http://mvc-kendobuild/staging/content/cdn/js/jquery.min.js"></script>        <script src="http://mvc-kendobuild/staging/content/cdn/js/kendo.all.min.js"></script>        <script src="http://mvc-kendobuild/staging/content/shared/js/people.js"></script></head>
+<body>
+    <div id="grid"></div>    
+    <script>
+        $(document).ready(function () {
+            var element = $("#grid").kendoGrid({
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.kendoui.com/service/Northwind.svc/Employees"
+                    },
+                    pageSize: 6,
+                    serverPaging: true,
+                    serverSorting: true
+                },
+                height: 450,
+                sortable: true,
+                pageable: true,
+                detailInit: detailInit,
+                dataBound: function () {
+                    this.expandRow(this.tbody.find("tr.k-master-row").first());
+                },
+                columns: [
+                            {
+                                field: "FirstName",
+                                title: "First Name"
+                            },
+                            {
+                                field: "LastName",
+                                title: "Last Name"
+                            },
+                            {
+                                field: "Country"
+                            },
+                            {
+                                field: "City"
+                            },
+                            {
+                                field: "Title"
+                            }
+                        ],
+                            selectable: "cell",
+                        navigatable: false                        
+            });
+
+        });
+
+        function detailInit(e) {
+            $("<div/>").appendTo(e.detailCell).kendoGrid({
+                dataSource: {
+                    type: "odata",
+                    transport: {
+                        read: "http://demos.kendoui.com/service/Northwind.svc/Orders"
+                    },
+                    serverPaging: true,
+                    serverSorting: true,
+                    serverFiltering: true,
+                    pageSize: 6,
+                    filter: { field: "EmployeeID", operator: "eq", value: e.data.EmployeeID }
+                },
+                scrollable: false,
+                sortable: true,
+                pageable: true,
+                selectable: "multiple cell",
+                columns: ["OrderID", "ShipCountry", "ShipAddress", "ShipName"],
+                navigatable: false,
+                groupable: true                
+            });
+        }
+    </script>
+</body>
+</html>
