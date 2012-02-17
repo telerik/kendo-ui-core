@@ -1312,7 +1312,7 @@
                 });
             }
 
-            that.table.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
+            that.tbody.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
                 var element = $(this),
                     group = element.closest("tr");
 
@@ -1322,6 +1322,7 @@
                     that.expandGroup(group);
                 }
                 e.preventDefault();
+                e.stopPropagation();
             });
         },
 

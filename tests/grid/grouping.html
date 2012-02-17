@@ -79,6 +79,30 @@
                 equal(groupingRowCell.attr("colspan"), 3);
             });
 
+            test("collapsing a group of the detail grid does not trigger master grid", function() {
+                var grid = new Grid(table(), {
+                        dataSource:[{foo: "foo"}, {foo: "bar"}],
+                        groupable: true,
+                        detailTemplate: ""
+                    }),
+                    innerGrid;
+
+                grid.bind("detailInit", function(e){
+                    innerGrid = $("<div/>").appendTo(e.detailCell).kendoGrid({
+                        dataSource: {
+                            data: [{ foo: "foo" }],
+                            group: {field: "foo" }
+                        },
+                        groupable: true
+                    }).data("kendoGrid");
+                });
+                grid.expandRow(grid.tbody.find("tr.k-master-row:first"));
+                var masterExpandGroup = stub(grid, "expandGroup");
+
+                innerGrid.tbody.find("tr.k-grouping-row:first > td:first a").click();
+                equal(masterExpandGroup.calls("expandGroup"), 0);
+            });
+
             test("nesting groups created grouping row for every group", function() {
 
                 var grid = new Grid(table(), {
