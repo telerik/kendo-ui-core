@@ -18,7 +18,6 @@
 .km-blackberry .km-navbar,
 .km-blackberry .km-toolbar,
 .km-blackberry .km-button,
-.km-blackberry .km-buttongroup,
 .km-blackberry .km-tabstrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
@@ -275,6 +274,26 @@
 .km-blackberry .km-tabstrip .km-button .km-icon
 {
     background-color: #eee;
+}
+
+/* ScrollView */
+
+.km-blackberry .km-pages
+{
+    display: table;
+    width: 100%;
+}
+
+.km-blackberry .km-pages li
+{
+    display: table-cell;
+    height: 2px;
+    background: transparent;
+}
+
+.km-blackberry .km-pages .km-current-page
+{
+    background: rgba(150,150,150,.7);
 }
 
 /* Scroller */
