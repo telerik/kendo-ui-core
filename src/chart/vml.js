@@ -339,7 +339,7 @@
             var path = this,
                 options = path.options,
                 element = $(domElement),
-                parentNode = domElement.parentNode;
+                parentNode = element[0].parentNode;
 
             if (parentNode) {
                 element.find("path")[0].v = this.renderPoints();
