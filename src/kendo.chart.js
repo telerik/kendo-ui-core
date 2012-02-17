@@ -5079,21 +5079,23 @@
                 finish = start + duration,
                 domElement = doc.getElementById(element.options.id),
                 easing = jQuery.easing[options.easing],
+                wallTime,
                 time,
                 pos,
                 easingPos;
 
             setTimeout(function() {
                 var loop = function() {
-                    time = +new Date();
-                    pos = time > finish ? 1 : (time - start) / duration;
-                    easingPos = easing(pos, time - start, 0, 1, duration);
+                    wallTime = +new Date();
+                    time = math.min(wallTime - start, duration);
+                    pos = time / duration;
+                    easingPos = easing(pos, time, 0, 1, duration);
 
                     anim.step(easingPos);
 
                     element.refresh(domElement);
 
-                    if (time < finish) {
+                    if (wallTime < finish) {
                         requestAnimFrame(loop, domElement);
                     }
                 };
