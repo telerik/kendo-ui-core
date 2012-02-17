@@ -275,7 +275,41 @@
                 equal(dataSource.filter().logic, "and");
             });
 
-             test("data source is not hit if no filters are specified", function() {
+            test("filtering on multiple fields twice", function() {
+                new FilterMenu(dom, {
+                    dataSource: dataSource
+                }).filter({
+                    filters: [
+                        { value: "1", field: "foo" },
+                        { value: "2", field: "foo" }
+                    ]
+                });
+
+                dom = $("<th data-kendo-field=bar />");
+
+                var filter = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+                filter.filter({
+                    filters: [
+                        { value: "1", field: "bar" },
+                        { value: "2", field: "bar" }
+                    ]
+                });
+                filter.filter({
+                    filters: [
+                        { value: "1", field: "bar" },
+                        { value: "2", field: "bar" }
+                    ]
+                });
+
+                equal(dataSource.filter().filters.length, 3);
+                equal(dataSource.filter().filters[0].field, "foo");
+                equal(dataSource.filter().filters[1].field, "foo");
+                equal(dataSource.filter().filters[2].filters.length, 2);
+            });
+
+            test("data source is not hit if no filters are specified", function() {
                 var called = false;
                 dataSource.bind("change", function() {
                     called = true;
