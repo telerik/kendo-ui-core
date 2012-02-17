@@ -244,7 +244,7 @@
 
             var source = bindings["source"].get(),
                 that = this,
-                template = options.template;
+                template = this.template();
 
             source.bind(0, "change", function(e) {
                 e.preventDefault();
@@ -257,6 +257,32 @@
             });
         },
 
+        template: function() {
+            var options = this.options,
+                template = options.template,
+                nodeName = this.element.nodeName.toLowerCase();
+
+            if (!template) {
+                if (nodeName == "select") {
+                    if (options.valueField) {
+                        template = kendo.format('<option value="#:{0}#">#:{1}#</option>',
+                            options.valueField, options.textField || options.valueField);
+                    } else {
+                        template = "<option>#:data#</option>";
+                    }
+                } else if (nodeName == "table") {
+                    template = "<tr><td>#:data#</td></tr>"
+                } else if (nodeName == "ul" || nodeName == "ol") {
+                    template = "<li>#:data#</li>"
+                } else {
+                    template = "#:data#";
+                }
+
+                template = kendo.template(template);
+            }
+
+            return template;
+        },
         add: function(index, html) {
             var clone = this.element.cloneNode(false),
                 reference = this.element.children[index];
@@ -286,7 +312,7 @@
             var source = this.bindings["source"].get();
             var idx, length;
             var element = this.element;
-            var template = this.options.template;
+            var template = this.template();
 
             if (element.nodeName.toLowerCase() == "table") {
                if (!element.tBodies[0]) {
@@ -506,79 +532,8 @@
 
         configuration: function() {
             return {
-                options: ["textField", "valueField"],
-                properties: ["text", "checked", "template", "disabled", "enabled", "click", "visible", "html", "source", "value"],
-                props: {
-                    text: TextProperty,
-                    html: HtmlProperty,
-                    enabled: EnableProperty,
-                    disabled: DisableProperty,
-                    visible: VisibleProperty
-                }
+                options: ["textField", "valueField"]
             };
-        },
-
-        setStyleBinding: function(path, binding) {
-            var that = this,
-                property = new StyleProperty(that.target, path);
-
-            var expression = property.createExpression(binding);
-            that.expressions.push(expression);
-
-            expression.updateTarget(that.options);
-
-            binding.bind("change", function() {
-                expression.updateTarget(that.options);
-            });
-        },
-
-        setBinding: function(path, binding) {
-            var property = this.createProperty(path),
-                that = this;
-
-            if (property) {
-                var expression = property.createExpression(binding);
-
-                this.expressions.push(expression);
-
-                expression.updateTarget(this.options);
-
-                property.bind("change", function() {
-                    expression.updateSource(that.options);
-                });
-
-                binding.bind("change", function() {
-                    expression.updateTarget(that.options);
-                });
-            }
-        },
-
-        createProperty: function(path) {
-            var properties = this.configuration().props;
-
-            if (path in properties) {
-                return new properties[path](this.target);
-            }
-
-            if (/click/.test(path)) {
-                return new EventProperty(this.target, path);
-            }
-
-            if (path == "template") {
-                return new TemplateProperty(this.target, "innerHTML");
-            }
-
-            if (path == "checked") {
-                if (this.target.type === "radio") {
-                    return new RadioCheckedProperty(this.target, path);
-                } else if(this.target.type === "checkbox") {
-                    return new CheckBoxCheckedProperty(this.target, path);
-                }
-            }
-
-            if (path == "value") {
-                return new TwoWayProperty(this.target, path);
-            }
         },
 
         destroy: function() {
@@ -592,81 +547,6 @@
             for (idx = 0, length = this.binders.length; idx < length; idx++) {
                 this.binders[idx].destroy();
             }
-        }
-    });
-
-      var SourceBindingTarget = BindingTarget.extend( {
-        init: function(target) {
-            BindingTarget.fn.init.call(this, target);
-        },
-
-        createProperty: function(path) {
-            if (path == "source") {
-                return new SourceProperty(this.target, "innerHTML");
-            }
-
-            if (path == "template") {
-                return null;
-            }
-
-            return BindingTarget.fn.createProperty.call(this, path);
-        }
-    });
-
-    var SelectBindingTarget = SourceBindingTarget.extend( {
-        init: function(target) {
-            SourceBindingTarget.fn.init.call(this, target);
-
-            this.options.template = kendo.template("<option>#:data#</option>");
-        },
-
-        setOptions: function(options) {
-            if (options.valueField && !options.template) {
-                options.template = kendo.template(kendo.format('<option value="#:{0}#">#:{1}#</option>', options.valueField, options.textField || options.valueField));
-            }
-
-            BindingTarget.fn.setOptions.call(this, options);
-        },
-
-        createProperty: function(path) {
-            if (path == "value") {
-                if (this.target.getAttribute("multiple")) {
-                    return new MultipleSelectValueProperty(this.target, path);
-                }
-
-                return new SelectValueProperty(this.target, path);
-            }
-
-            return SourceBindingTarget.fn.createProperty.call(this, path);
-        }
-    });
-
-    var ListBindingTarget = SourceBindingTarget.extend( {
-        init: function(target) {
-            SourceBindingTarget.fn.init.call(this, target);
-            this.options.template = kendo.template("<li>#:data#</li>");
-        }
-    });
-
-    var TableBindingTarget = SourceBindingTarget.extend( {
-        init: function(target) {
-            SourceBindingTarget.fn.init.call(this, target);
-            this.options.template = kendo.template("<tr><td>#:data#</td></tr>");
-        },
-
-        createProperty: function(path) {
-            if (path == "source") {
-                var tbody = this.target.tBodies[0];
-
-                if (!tbody) {
-                    tbody = document.createElement("tbody");
-                    this.target.appendChild(tbody);
-                }
-
-                return new SourceProperty(tbody, "innerHTML");
-            }
-
-            return SourceBindingTarget.fn.createProperty.call(this, path);
         }
     });
 
@@ -702,81 +582,6 @@
         }
     });
 
-    var EventBindingExpression = BindingExpression.extend( {
-        updateTarget: function() {
-            this.property.set(this.binding.get());
-        }
-    });
-
-    var SelectValueExpression = BindingExpression.extend( {
-        updateSource: function(options) {
-            var target = this.property.get(),
-                source = options.source,
-                field = options.valueField || options.textField,
-                idx,
-                length;
-
-
-            if (field) {
-                for (idx = 0, length = source.length; idx < length; idx++) {
-                    if (source[idx].get(field) == target) {
-                        this.binding.set(source[idx]);
-                        break;
-                    }
-                }
-            } else {
-                this.binding.set(target);
-            }
-        },
-
-        applyToTarget: function(options) {
-            var value = this.binding.get(),
-                field = options.valueField || options.textField;
-
-            if (field) {
-                value = value.get(field);
-            }
-
-            this.property.set(value);
-        }
-    });
-
-    var MultipleSelectValueExpression = BindingExpression.extend( {
-        updateSource: function(options) {
-            var source = this.binding.get();
-            var target = this.property.get();
-
-            if (options.valueField) {
-                for (var idx = 0; idx < target.length; idx++) {
-                    for (var sourceIdx = 0; sourceIdx < options.source.length; sourceIdx++) {
-                        if (options.source[sourceIdx].get(options.valueField) == target[idx]) {
-                            target[idx] = options.source[sourceIdx];
-                            break;
-                        }
-                    }
-                }
-            }
-
-            source.splice.apply(source, [0, source.length].concat(target));
-        },
-
-        applyToTarget: function(options) {
-            var value = this.binding.get();
-
-            if (options.valueField) {
-                var values = [];
-
-                for (var idx = 0; idx < value.length; idx++) {
-                    values[idx] = value[idx].get(options.valueField)
-                }
-
-                value = values;
-            }
-
-            this.property.set(value);
-        }
-    });
-
     var Property = Class.extend( {
         init: function(target, path) {
             this.target = target;
@@ -795,80 +600,6 @@
         },
 
         destroy: function() {
-        }
-    });
-
-    var TextProperty = Property.extend( {
-        set: function(value) {
-            this.target[innerText] = value;
-        }
-    });
-
-    var HtmlProperty = Property.extend( {
-        set: function(value) {
-            this.target.innerHTML = value;
-        }
-    });
-
-    var AttributeProperty = Property.extend( {
-        set: function(value) {
-            this.target.setAttribute(this.path, value);
-        }
-    });
-
-    var StyleProperty = Property.extend( {
-        set: function(value) {
-            $(this.target).css(this.path, value);
-        }
-    });
-
-    var EventProperty = Property.extend({
-        set: function(value) {
-            $(this.target).bind(this.path, value);
-        },
-
-        createExpression: function(binding) {
-            return new EventBindingExpression(this, binding);
-        }
-    });
-
-    var TemplateProperty = Property.extend( {
-        createExpression: function(binding) {
-            return new TemplateBindingExpression(this, binding);
-        }
-    });
-
-    var TemplateBindingExpression = BindingExpression.extend( {
-        applyToTarget: function(options) {
-            var source = this.binding.get();
-            var template = options.template;
-            this.property.set(template(source));
-        }
-    });
-
-    var VisibleProperty = Property.extend( {
-        set: function(value) {
-            if (value) {
-                this.target.style.display = "";
-            } else {
-                this.target.style.display = "none";
-            }
-        }
-    });
-
-    var EnableProperty = Property.extend( {
-        set: function(value) {
-            if (value) {
-                this.target.removeAttribute("disabled");
-            } else {
-                this.target.setAttribute("disabled", "disabled");
-            }
-        }
-    });
-
-    var DisableProperty = EnableProperty.extend( {
-        set: function(value) {
-            EnableProperty.fn.set.call(this, !value);
         }
     });
 
@@ -900,211 +631,6 @@
 
         destroy: function() {
            $(this.target).unbind("change", this._changeHandler);
-        }
-    });
-
-    var MultipleSelectValueProperty = TwoWayProperty.extend({
-        init: function(target, path) {
-            TwoWayProperty.fn.init.apply(this, arguments);
-        },
-
-        get: function() {
-            var optionIndex, value = [];
-
-            for (optionIndex = 0; optionIndex < this.target.length; optionIndex++) {
-                if (this.target[optionIndex].selected) {
-                    value.push(this.target[optionIndex].value || this.target[optionIndex].text);
-                }
-            }
-
-            return value;
-        },
-
-        set: function(value) {
-            var valueIndex, optionIndex, options = this.target.options, optionValue;
-
-            for (valueIndex = 0; valueIndex < value.length; valueIndex++) {
-                for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
-                    optionValue = options[optionIndex].value;
-
-                    if (optionValue === "" && value !== "") {
-                        optionValue = options[optionIndex].text;
-                    }
-
-                    if (optionValue == value[valueIndex]) {
-                        options[optionIndex].selected = true;
-                    }
-                }
-            }
-        },
-        createExpression: function(binding) {
-            return new MultipleSelectValueExpression(this, binding);
-        }
-    });
-
-    var SelectValueProperty = TwoWayProperty.extend({
-        set: function(value) {
-            var optionIndex, options = this.target.options, optionValue;
-
-            for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
-                optionValue = options[optionIndex].value;
-                if (optionValue === "" && value !== "") {
-                    optionValue = options[optionIndex].text;
-                }
-
-                if (optionValue == value) {
-                    options[optionIndex].selected = true;
-                    break;
-                }
-            }
-        },
-        get: function() {
-            var option = this.target.options[this.target.selectedIndex];
-            return option.value || option.text;
-        },
-        createExpression: function(binding) {
-            return new SelectValueExpression(this, binding);
-        }
-    });
-
-    var RadioCheckedProperty = TwoWayProperty.extend({
-        get: function() {
-            return this.target.value;
-        },
-        set: function(value) {
-            if (this.target.value == value) {
-                this.target.checked = true;
-            }
-        }
-    });
-
-    var CheckBoxCheckedProperty = TwoWayProperty.extend({
-        get: function() {
-            var value = this.target.value;
-
-            if (value !== "on" && value !== "off") {
-                return value;
-            }
-
-            return this.target.checked;
-        },
-
-        set: function(value) {
-            this.target.checked = value === true;
-        },
-
-        createExpression: function(binding) {
-            return new CheckBoxBindingExpression(this, binding);
-        }
-    });
-
-    var CheckBoxBindingExpression = BindingExpression.extend({
-        updateSource:function() {
-            var source = this.binding.get();
-            var target = this.property.get();
-            var index;
-
-            if (source instanceof ObservableArray) {
-                if (target !== false && target !== true) {
-                    index = source.indexOf(target);
-                    if (index > -1) {
-                        source.splice(index, 1);
-                    } else {
-                        source.push(target);
-                    }
-                }
-            } else {
-                this.binding.set(target);
-            }
-        },
-
-        applyToTarget: function() {
-            var source = this.binding.get();
-            var target = this.property.get();
-
-            if (source instanceof ObservableArray) {
-                if (source.indexOf(target) >= 0) {
-                    source = true;
-                }
-            }
-
-            this.property.set(source);
-        }
-    })
-
-    var SourceProperty = Property.extend({
-        bindChildren: function(value) {
-            var idx, length;
-
-            for (idx = 0, length = value.length; idx < length; idx++) {
-                bindElement(this.target.children[idx], value[idx]);
-            }
-        },
-
-        set: function(html) {
-            $(this.target).html(html);
-        },
-
-        add: function(index, html) {
-            var clone = this.target.cloneNode(false), reference = this.target.children[index];
-
-            $(clone).html(html);
-
-            if (reference) {
-                while (clone.firstChild) {
-                    this.target.insertBefore(clone.firstChild, reference);
-                }
-            } else {
-                while (clone.firstChild) {
-                    this.target.appendChild(clone.firstChild);
-                }
-            }
-        },
-
-        remove: function(index, length) {
-            var idx;
-
-            for (idx = 0; idx < length; idx++) {
-                this.target.removeChild(this.target.children[index]);
-            }
-        },
-
-        createExpression: function(binding) {
-            return new SourceBindingExpression(this, binding);
-        }
-    });
-
-    var SourceBindingExpression = BindingExpression.extend({
-        applyToTarget: function(options) {
-            var that = this;
-            var source = that.binding.get();
-            var template = options.template;
-            var property = that.property;
-
-            options.source = source;
-
-            source.bind(0, "change", function(e) {
-                e.preventDefault();
-
-                if (e.action == "add") {
-                    property.add(e.index, kendo.render(template, e.items));
-                } else if (e.action == "remove") {
-                    property.remove(e.index, e.items.length);
-                }
-            });
-
-            that.property.set(kendo.render(template, source));
-            that.property.bindChildren(source);
-        }
-    });
-
-    var DataSourceBindingExpression = BindingExpression.extend({
-        applyToTarget: function(options) {
-            var source = this.binding.get();
-
-            options.source = source;
-
-            this.property.set(source);
         }
     });
 
@@ -1385,15 +911,7 @@
 
         if (bind) {
             if (!target) {
-                if (nodeName == "select") {
-                    target = new SelectBindingTarget(element);
-                } else if (nodeName == "table") {
-                    target = new TableBindingTarget(element);
-                } else if (nodeName == "ul" || nodeName == "ol") {
-                    target = new ListBindingTarget(element);
-                } else {
-                    target = new BindingTarget(element);
-                }
+                target = new BindingTarget(element);
             }
 
             target.source = source;
@@ -1419,6 +937,28 @@
 
             var bindings = {};
 
+            for (path in bind) {
+                sourcePath = bind[path];
+
+                if (sourcePath) {
+                    if (path == "source") {
+                       deep = false;
+                    } else if (path == "template") {
+                        sourcePath = "";
+                    }
+
+                    bindings[path] = new Binding(source, sourcePath);
+                }
+            }
+
+            if (bindings.template) {
+                bindings.template = new TemplateBinding(source, "", options.template);
+            }
+
+            if (bindings.source) {
+                delete bindings.template;
+            }
+
             if (bind.attr) {
                 bindings.attr = {
                 };
@@ -1442,29 +982,6 @@
                 for (path in bind.event) {
                     bindings.event[path] = new Binding(source, bind.event[path]);
                 }
-            }
-
-            for (idx = 0, length = configuration.properties.length; idx < length; idx++) {
-                path = configuration.properties[idx];
-
-                sourcePath = bind[path];
-
-                if (sourcePath) {
-                    if (path == "source") {
-                       deep = false;
-                    } else if (path == "template") {
-                        sourcePath = "";
-                    }
-
-                    bindings[path] = new Binding(source, sourcePath);
-                }
-            }
-
-            if (bindings.template) {
-                bindings.template = new TemplateBinding(source, "", options.template);
-            }
-            if (bindings.source) {
-                delete bindings.template;
             }
 
             target.bind(bindings);
