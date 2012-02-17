@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gauge Plot Area</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="../chart/util.js"></script>
+        <script>
+            var Chart = kendo.ui.Chart,
+                COORD_PRECISION = Chart.COORD_PRECISION,
+                Gauge = kendo.ui.Gauge,
+                GaugePlotArea = Gauge.GaugePlotArea,
+                Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D,
+                RadialScale = Gauge.RadialScale,
+                radialScale,
+                ring,
+                radius = 100,
+                chartBox = new Box2D(0, 0, 200, 200);
+
+            // Tests expect particular font size
+            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+
+            function reflowScale(scaleOptions) {
+                plotArea.scale = new RadialScale(scaleOptions);
+
+                plotArea.reflow(chartBox);
+
+                ring = plotArea.scale.ring;
+            }
+
+            module("GaugePlotArea", {
+                setup: function() {
+                    plotArea = new GaugePlotArea({ pointer: false });
+                }
+            });
+
+            test("reflow calculates scale ring center for 90:180 gauge", function() {
+                reflowScale({ startAngle: 0, angle: 360 });
+
+                equal(ring.c.x, 100);
+                equal(ring.c.y, 100);
+            });
+
+            test("reflow calculates scale ring center for 90:180 gauge", function() {
+                reflowScale({ startAngle: 90, angle: 180 });
+
+                equal(ring.c.x, 50);
+                equal(ring.c.y, 100);
+            });
+
+            test("reflow calculates scale ring center for -30:240 gauge", function() {
+
+                reflowScale({ startAngle: -30, angle: 240 });
+
+                equal(ring.c.x, 100);
+                equal(ring.c.y, 125);
+            });
+
+            test("reflow calculates scale ring center for 0:180 gauge", function() {
+
+                reflowScale({ startAngle: 0, angle: 180 });
+
+                equal(ring.c.x, 100);
+                equal(ring.c.y, 150);
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
