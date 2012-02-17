@@ -56,7 +56,11 @@
         if (expression.filters) {
             expression.filters = $.grep(expression.filters, function(filter) {
                 removeFiltersForField(filter, field);
-                return filter.field != field;
+                if (filter.filters) {
+                    return filter.filters.length;
+                } else {
+                    return filter.field != field;
+                }
             });
         }
     }
