@@ -246,6 +246,147 @@
                     });
                 });
 
+                // ------------------------------------------------------------
+                function createGroupedChart(dataBound, series) {
+                    createChart({
+                        dataSource: {
+                            data: [{
+                                period: "Jan",
+                                product: "Foo",
+                                sales: 100
+                            }, {
+                                period: "Jan",
+                                product: "Bar",
+                                sales: 100
+                            }, {
+                                period: "Feb",
+                                product: "Foo",
+                                sales: 110
+                            }, {
+                                period: "Feb",
+                                product: "Bar",
+                                sales: 110
+                            }],
+                            group: {
+                                field: "product",
+                                dir: "desc"
+                            }
+                        },
+                        series: series || [{
+                            name: "Sales",
+                            field: "sales"
+                        }],
+                        categoryAxis: {
+                            field: "period"
+                        },
+                        dataBound: dataBound
+                    });
+                }
+
+                function groupSales(group) {
+                    return group.items.map(function(item) { return item.sales });
+                }
+
+                module("Binding to grouped DataSource", {
+                    teardown: destroyChart
+                });
+
+                asyncTest("creates series for each group bound to field", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series.length, 2);
+                        start();
+                    });
+                });
+
+                asyncTest("assigns grouped points to first series", 1, function() {
+                    createGroupedChart(function() {
+                        same(this.options.series[0].data,
+                             groupSales(this.dataSource.view()[0]));
+                        start();
+                    });
+                });
+
+                asyncTest("assigns grouped points to second series", 1, function() {
+                    createGroupedChart(function() {
+                        same(this.options.series[1].data,
+                             groupSales(this.dataSource.view()[1]));
+                        start();
+                    });
+                });
+
+                asyncTest("copies field to group series", 1, function() {
+                    createGroupedChart(function() {
+                        var series = this.options.series;
+                        equals(series[1].field, series[0].field);
+                        start();
+                    });
+                });
+
+                asyncTest("creates series for each group bound to x/yField", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series.length, 2);
+                        start();
+                    }, [{
+                        xField: "sales",
+                        yField: "sales"
+                    }]);
+                });
+
+                asyncTest("copies x/yField to group series", 2, function() {
+                    createGroupedChart(function() {
+                        var series = this.options.series;
+                        equals(series[1].xField, series[0].xField);
+                        equals(series[1].yField, series[0].yField);
+                        start();
+                    }, [{
+                        xField: "sales",
+                        yField: "sales"
+                    }]);
+                });
+
+                asyncTest("populates categories once", 1, function() {
+                    createGroupedChart(function() {
+                        same(this.options.categoryAxis.categories, ["Jan", "Feb"]);
+                        start();
+                    });
+                });
+
+                asyncTest("sets source series name to default groupNameTemplate", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series[0].name, "Foo: Sales");
+                        start();
+                    });
+                });
+
+                asyncTest("sets cloned series name to default groupNameTemplate", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series[1].name, "Bar: Sales");
+                        start();
+                    });
+                });
+
+                asyncTest("sets cloned series name to groupNameTemplate", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series[1].name, "Sales for product Bar");
+                        start();
+                    }, [{
+                        name: "Sales",
+                        field: "sales",
+                        groupNameTemplate: "#= series.name # for #= group.field # #= group.value #"
+                    }]);
+                });
+
+                asyncTest("does not overwrite name with empty groupNameTemplate", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series[1].name, "Sales");
+                        start();
+                    }, [{
+                        name: "Sales",
+                        field: "sales",
+                        groupNameTemplate: ""
+                    }]);
+                });
+
             })();
         </script>
 
