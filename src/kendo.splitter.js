@@ -245,8 +245,6 @@
         init: function(element, options) {
             var that = this,
                 panesConfig,
-                splitbarSelector,
-                expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)",
                 triggerResize = function() {
                     that.trigger(RESIZE);
                 };
@@ -256,207 +254,224 @@
             that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
             splitbarSelector = ".k-splitbar-draggable-" + that.orientation;
 
-            that.bind([
-                /**
-                 * Triggered when a pane of a Splitter is expanded.
-                 *
-                 * @name kendo.ui.Splitter#expand
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {Element} e.pane
-                 * The expanding pane of the Splitter.
-                 *
-                 * @exampleTitle Attach expand event handler during initialization; detach via unbind()
-                 * @example
-                 * // event handler for expand
-                 * var onExpand = function(e) {
-                 *     // access the expanded item via e.pane (HTMLElement)
-                 * };
-                 *
-                 * // attach expand event handler during initialization
-                 * var splitter = $("#splitter").kendoSplitter({
-                 *     expand: onExpand
-                 * });
-                 *
-                 * // detach expand event handler via unbind()
-                 * splitter.data("kendoSplitter").unbind("expand", onExpand);
-                 *
-                 * @exampleTitle Attach expand event handler via bind(); detach via unbind()
-                 * @example
-                 * // event handler for expand
-                 * var onExpand = function(e) {
-                 *     // access the expanded item via e.pane (HTMLElement)
-                 * };
-                 *
-                 * // attach expand event handler via bind()
-                 * $("#splitter").data("kendoSplitter").bind("expand", onExpand);
-                 *
-                 * // detach expand event handler via unbind()
-                 * $("#splitter").data("kendoSplitter").unbind("expand", onExpand);
-                 *
-                 */
-                EXPAND,
-
-                /**
-                 * Triggered when a pane of a Splitter is collapsed.
-                 *
-                 * @name kendo.ui.Splitter#collapse
-                 * @event
-                 *
-                 * @param {Event} e
-                 * @param {Element} e.pane
-                 * The collapsing pane of the Splitter.
-                 *
-                 * @exampleTitle Attach expand event handler during initialization; detach via unbind()
-                 * @example
-                 * // event handler for expand
-                 * var onCollapse = function(e) {
-                 *     // access the collapsed item via e.pane (HTMLElement)
-                 * };
-                 *
-                 * // attach collapse event handler during initialization
-                 * var splitter = $("#splitter").kendoSplitter({
-                 *     collapse: onCollapse
-                 * });
-                 *
-                 * // detach collapse event handler via unbind()
-                 * splitter.data("kendoSplitter").unbind("collapse", onCollapse);
-                 *
-                 * @exampleTitle Attach collapse event handler via bind(); detach via unbind()
-                 * @example
-                 * // event handler for collapse
-                 * var onExpand = function(e) {
-                 *     // access the collapsed item via e.pane (HTMLElement)
-                 * };
-                 *
-                 * // attach collapse event handler via bind()
-                 * $("#splitter").data("kendoSplitter").bind("collapse", onCollapse);
-                 *
-                 * // detach collapse event handler via unbind()
-                 * $("#splitter").data("kendoSplitter").unbind("collapse", onCollapse);
-                 *
-                 */
-                COLLAPSE,
-
-                /**
-                 * Triggered when the content for a pane has finished loading.
-                 *
-                 * @name kendo.ui.Splitter#contentLoad
-                 * @event
-                 *
-                 * @param {Event} e
-                 *
-                 * @param {HTMLElement} e.pane
-                 * The pane whose content has been loaded.
-                 *
-                 * @exampleTitle Attach contentLoad event handler during initialization; detach via unbind()
-                 * @example
-                 * // event handler for contentLoad
-                 * var onContentLoad = function(e) {
-                 *     // access the loaded pane via e.pane (HTMLElement)
-                 * };
-                 *
-                 * // attach contentLoad event handler during initialization
-                 * var splitter = $("#splitter").kendoSplitter({
-                 *     contentLoad: onContentLoad
-                 * });
-                 *
-                 * // detach contentLoad event handler via unbind()
-                 * splitter.data("kendoSplitter").unbind("contentLoad", onContentLoad);
-                 *
-                 * @exampleTitle Attach contentLoad event handler via bind(); detach via unbind()
-                 * @example
-                 * // event handler for contentLoad
-                 * var onContentLoad = function(e) {
-                 *     // access the loaded pane via e.pane (HTMLElement)
-                 * };
-                 *
-                 * // attach contentLoad event handler via bind()
-                 * $("#splitter").data("kendoSplitter").bind("contentLoad", onContentLoad);
-                 *
-                 * // detach contentLoad event handler via unbind()
-                 * $("#splitter").data("kendoSplitter").unbind("contentLoad", onContentLoad);
-                 *
-                 */
-                CONTENTLOAD,
-
-                /**
-                 * Triggered when a pane is resized.
-                 *
-                 * @name kendo.ui.Splitter#resize
-                 * @event
-                 * @param {Event} e
-                 *
-                 * @exampleTitle Attach resize event handler during initialization; detach via unbind()
-                 * @example
-                 * // event handler for resize
-                 * var onResize = function(e) {
-                 *     // ...
-                 * };
-                 *
-                 * // attach resize event handler during initialization
-                 * var splitter = $("#splitter").kendoSplitter({
-                 *     resize: onResize
-                 * });
-                 *
-                 * // detach resize event handler via unbind()
-                 * splitter.data("kendoSplitter").unbind("resize", onResize);
-
-                 * @exampleTitle Attach resize event handler via bind(); detach via unbind()
-                 * @example
-                 * // event handler for resize
-                 * var onResize = function(e) {
-                 *     // ...
-                 * };
-                 *
-                 * // attach resize event handler via bind()
-                 * $("#splitter").data("kendoSplitter").bind("resize", onResize);
-                 *
-                 * // detach resize event handler via unbind()
-                 * $("#splitter").data("kendoSplitter").unbind("resize", onResize);
-                 *
-                 */
-                RESIZE,
-
-                /**
-                 * Fires when the splitter layout has changed
-                 *
-                 * @name kendo.ui.Splitter#layoutChange
-                 * @event
-                 *
-                 * @exampleTitle Attach layoutChange event handler during initialization; detach via unbind()
-                 * @example
-                 * // event handler for resize
-                 * var onLayoutChange = function(e) {
-                 *     // ...
-                 * };
-                 *
-                 * $("#splitter").kendoSplitter({
-                 *     layoutChange: onLayoutChange
-                 * });
-                 *
-                 * @exampleTitle Attach layoutChange event handler via bind(); detach via unbind()
-                 * @example
-                 * // event handler for layoutChange
-                 * var onLayoutChange = function(e) {
-                 *     // ...
-                 * };
-                 *
-                 * // attach layoutChange event handler via bind()
-                 * $("#splitter").bind("layoutChange", onLayoutChange);
-                 *
-                 * // detach layoutChange event handler via unbind()
-                 * $("#splitter").unbind("layoutChange", onLayoutChange);
-                 *
-                 */
-                LAYOUTCHANGE
-            ], that.options);
+            that.bind(that.events, that.options);
 
             that.bind(RESIZE, proxy(that._resize, that));
 
             that._initPanes();
+
+            that._attachEvents();
+
+            $(window).resize(triggerResize);
+
+            that.resizing = new PaneResizing(that);
+        },
+        events: [
+            /**
+            * Triggered when a pane of a Splitter is expanded.
+            *
+            * @name kendo.ui.Splitter#expand
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {Element} e.pane
+            * The expanding pane of the Splitter.
+            *
+            * @exampleTitle Attach expand event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for expand
+            * var onExpand = function(e) {
+            *     // access the expanded item via e.pane (HTMLElement)
+            * };
+            *
+            * // attach expand event handler during initialization
+            * var splitter = $("#splitter").kendoSplitter({
+            *     expand: onExpand
+            * });
+            *
+            * // detach expand event handler via unbind()
+            * splitter.data("kendoSplitter").unbind("expand", onExpand);
+            *
+            * @exampleTitle Attach expand event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for expand
+            * var onExpand = function(e) {
+            *     // access the expanded item via e.pane (HTMLElement)
+            * };
+            *
+            * // attach expand event handler via bind()
+            * $("#splitter").data("kendoSplitter").bind("expand", onExpand);
+            *
+            * // detach expand event handler via unbind()
+            * $("#splitter").data("kendoSplitter").unbind("expand", onExpand);
+            *
+            */
+            EXPAND,
+
+            /**
+            * Triggered when a pane of a Splitter is collapsed.
+            *
+            * @name kendo.ui.Splitter#collapse
+            * @event
+            *
+            * @param {Event} e
+            * @param {Element} e.pane
+            * The collapsing pane of the Splitter.
+            *
+            * @exampleTitle Attach expand event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for expand
+            * var onCollapse = function(e) {
+            *     // access the collapsed item via e.pane (HTMLElement)
+            * };
+            *
+            * // attach collapse event handler during initialization
+            * var splitter = $("#splitter").kendoSplitter({
+            *     collapse: onCollapse
+            * });
+            *
+            * // detach collapse event handler via unbind()
+            * splitter.data("kendoSplitter").unbind("collapse", onCollapse);
+            *
+            * @exampleTitle Attach collapse event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for collapse
+            * var onExpand = function(e) {
+            *     // access the collapsed item via e.pane (HTMLElement)
+            * };
+            *
+            * // attach collapse event handler via bind()
+            * $("#splitter").data("kendoSplitter").bind("collapse", onCollapse);
+            *
+            * // detach collapse event handler via unbind()
+            * $("#splitter").data("kendoSplitter").unbind("collapse", onCollapse);
+            *
+            */
+            COLLAPSE,
+
+            /**
+            * Triggered when the content for a pane has finished loading.
+            *
+            * @name kendo.ui.Splitter#contentLoad
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {HTMLElement} e.pane
+            * The pane whose content has been loaded.
+            *
+            * @exampleTitle Attach contentLoad event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for contentLoad
+            * var onContentLoad = function(e) {
+            *     // access the loaded pane via e.pane (HTMLElement)
+            * };
+            *
+            * // attach contentLoad event handler during initialization
+            * var splitter = $("#splitter").kendoSplitter({
+            *     contentLoad: onContentLoad
+            * });
+            *
+            * // detach contentLoad event handler via unbind()
+            * splitter.data("kendoSplitter").unbind("contentLoad", onContentLoad);
+            *
+            * @exampleTitle Attach contentLoad event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for contentLoad
+            * var onContentLoad = function(e) {
+            *     // access the loaded pane via e.pane (HTMLElement)
+            * };
+            *
+            * // attach contentLoad event handler via bind()
+            * $("#splitter").data("kendoSplitter").bind("contentLoad", onContentLoad);
+            *
+            * // detach contentLoad event handler via unbind()
+            * $("#splitter").data("kendoSplitter").unbind("contentLoad", onContentLoad);
+            *
+            */
+            CONTENTLOAD,
+
+            /**
+            * Triggered when a pane is resized.
+            *
+            * @name kendo.ui.Splitter#resize
+            * @event
+            * @param {Event} e
+            *
+            * @exampleTitle Attach resize event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for resize
+            * var onResize = function(e) {
+            *     // ...
+            * };
+            *
+            * // attach resize event handler during initialization
+            * var splitter = $("#splitter").kendoSplitter({
+            *     resize: onResize
+            * });
+            *
+            * // detach resize event handler via unbind()
+            * splitter.data("kendoSplitter").unbind("resize", onResize);
+
+            * @exampleTitle Attach resize event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for resize
+            * var onResize = function(e) {
+            *     // ...
+            * };
+            *
+            * // attach resize event handler via bind()
+            * $("#splitter").data("kendoSplitter").bind("resize", onResize);
+            *
+            * // detach resize event handler via unbind()
+            * $("#splitter").data("kendoSplitter").unbind("resize", onResize);
+            *
+            */
+            RESIZE,
+
+            /**
+            * Fires when the splitter layout has changed
+            *
+            * @name kendo.ui.Splitter#layoutChange
+            * @event
+            *
+            * @exampleTitle Attach layoutChange event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for resize
+            * var onLayoutChange = function(e) {
+            *     // ...
+            * };
+            *
+            * $("#splitter").kendoSplitter({
+            *     layoutChange: onLayoutChange
+            * });
+            *
+            * @exampleTitle Attach layoutChange event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for layoutChange
+            * var onLayoutChange = function(e) {
+            *     // ...
+            * };
+            *
+            * // attach layoutChange event handler via bind()
+            * $("#splitter").bind("layoutChange", onLayoutChange);
+            *
+            * // detach layoutChange event handler via unbind()
+            * $("#splitter").unbind("layoutChange", onLayoutChange);
+            *
+            */
+            LAYOUTCHANGE
+        ],
+
+        _attachEvents: function() {
+            var that = this,
+                orientation = that.options.orientation,
+                splitbarSelector = ".k-splitbar-draggable-" + orientation,
+                expandCollapseSelector = ".k-splitbar .k-icon:not(.k-resize-handle)",
+                triggerResize = function() {
+                    that.trigger(RESIZE);
+                };
 
             that.element
                 .delegate(splitbarSelector, MOUSEENTER, function() { $(this).addClass("k-splitbar-" + that.orientation + "-hover"); })
@@ -469,12 +484,8 @@
                 .delegate(".k-splitbar .k-expand-next, .k-splitbar .k-expand-prev", CLICK, that._arrowClick(EXPAND))
                 .delegate(".k-splitbar", "dblclick", proxy(that._dbclick, that))
                 .parent().closest(".k-splitter").each(function() {
-                    $(this).data("kendoSplitter").bind(RESIZE, triggerResize);
+                    $(this).data("kendoSplitter").bind(RESIZE,  triggerResize);
                 });
-
-            $(window).resize(triggerResize);
-
-            that.resizing = new PaneResizing(that);
         },
 
         options: {

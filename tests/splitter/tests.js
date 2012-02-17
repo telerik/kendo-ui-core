@@ -26,5 +26,10 @@ tests.push(
     {
         page: "splitter/panesizing.html",
         title: "splitter sizing"
+    },
+    {
+        page: "splitter/mvvm.html",
+        title: "splitter mvvm"
     }
+
 );

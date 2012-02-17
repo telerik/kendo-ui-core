@@ -27,6 +27,8 @@
         <script src="../src/kendo.window.js"></script>
         <script src="../src/kendo.upload.js"></script>
         <script src="../src/kendo.treeview.js"></script>
+        <script src="../src/kendo.resizable.js"></script>
+        <script src="../src/kendo.splitter.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -601,8 +603,8 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
  &lt;ul data-role="treeview" data-dragAndDrop="true" data-animation="false"&gt;
     &lt;li&gt;Item 1
         &lt;ul&gt;
-            &lt;li>Item 1.1&lt;/li&gt;
-            &lt;li>Item 1.2&lt;/li&gt;
+            &lt;li&gt;Item 1.1&lt;/li&gt;
+            &lt;li&gt;Item 1.2&lt;/li&gt;
         &lt;/ul&gt;
     &lt;/li&gt;
     &lt;li&gt;Item 2&lt;/li&gt;
@@ -619,6 +621,19 @@ Selected price &lt;span data-bind="text:unitPrice"&gt;&lt;/span&gt;
                             </li>
                             <li>Item 2</li>
                         </ul>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Kendo splitter declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+                        </pre>
+                    </td>
+                    <td>
+                        <div data-role="splitter">
+                            <div>Area 1</div>
+                            <div>Area 2</div>
+                        </div>
                     </td>
                 </tr>
             </table>
