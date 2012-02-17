@@ -6437,27 +6437,27 @@
 
         reflow: function(box) {
             var plotArea = this,
-                scale = plotArea.scale,
-                bBox;
+                scale = plotArea.scale;
 
             scale.reflow(box);
-            scale = plotArea.alignScale(scale, box);
-            bBox = scale.ring.getBBox();
-            plotArea.pointer.scale = scale;
-            plotArea.pointer.reflow(box);
-            plotArea.box = bBox;
+            plotArea.alignScale(scale, box);
+
+            if (plotArea.options.pointer != false) {
+                plotArea.pointer.scale = scale;
+                plotArea.pointer.reflow(box);
+            }
+
+            plotArea.box = scale.ring.getBBox();
         },
 
         alignScale: function(scale, box) {
             var scaleCenter = scale.box.center(),
                 boxCenter = box.center(),
-                padding = math.max(boxCenter.x - scaleCenter.x, boxCenter.y - scaleCenter.y);
+                paddingX = boxCenter.x - scaleCenter.x,
+                paddingY = boxCenter.y - scaleCenter.y;
 
-            scale.ring.c.y += padding;
-            scale.ring.ir += padding;
-            scale.ring.r += padding;
-
-            return scale;
+            scale.ring.c.y += paddingY;
+            scale.ring.c.x += paddingX;
         },
 
         render: function() {
@@ -6466,10 +6466,12 @@
                 scale;
 
             scale = plotArea.scale = new RadialScale(options.scale);
-            plotArea.pointer = new Pointer(scale, options.pointer);
-
             plotArea.append(plotArea.scale);
-            plotArea.append(plotArea.pointer);
+
+            if (options.pointer !== false) {
+                plotArea.pointer = new Pointer(scale, options.pointer);
+                plotArea.append(plotArea.pointer);
+            }
         }
     });
 
@@ -6536,6 +6538,7 @@
 
     deepExtend(Gauge, {
         RadialScale: RadialScale,
+        GaugePlotArea: GaugePlotArea,
         Pointer: Pointer
     });
 
