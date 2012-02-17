@@ -162,10 +162,11 @@
 
         _style: function () {
             var style = this.options.style,
-                element = this.element;
+                element = this.element,
+                styles;
 
             if (style) {
-                var styles = style.split(" ");
+                styles = style.split(" ");
                 $.each(styles, function () {
                     element.addClass("km-" + this);
                 });
@@ -174,18 +175,21 @@
 
         _wrap: function() {
             var that = this,
-                element = that.element.addClass("km-button"),
                 icon = that.options.icon,
-                iconSpan = $('<span class="km-icon km-' + icon + '"/>'),
+                iconSpan = '<span class="km-icon km-' + icon,
+                element = that.element.addClass("km-button"),
                 span = element.children("span").addClass("km-text"),
                 image = element.find("img").addClass("km-image");
 
-            if (!span[0]) {
-                span = element.wrapInner('<span class="km-text" />').children("span");
+            if (!span[0] && element.html()) {
+                span = element.wrapInner('<span class="km-text" />').children("span.km-text");
             }
 
             if (!image[0] && icon) {
-                element.prepend(iconSpan);
+                if (!span[0]) {
+                    iconSpan += " km-notext";
+                }
+                element.prepend($(iconSpan + '" />'));
             }
         }
     });

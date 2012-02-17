@@ -112,6 +112,14 @@
 
                 click(dom);
             });
+
+            test("icon only button", function() {
+                var dom = $('<button data-icon="history"></button>');
+                var button = new Button(dom);
+
+                ok(!dom.find("span.km-text")[0]);
+                ok(dom.find("span.km-icon").hasClass("km-notext"));
+            });
         </script>
     </body>
 </html>
