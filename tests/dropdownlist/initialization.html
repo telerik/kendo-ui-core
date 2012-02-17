@@ -394,6 +394,18 @@
                 equal(dropdownlist._data()[0].value, "");
             });
 
+            test("optionLabel is not lost when textField and valueField are equal", function() {
+                var data = [{text: 1, value: 1}, {text:2, value:2}],
+                dropdownlist = new DropDownList(input, {
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    dataSource: data,
+                    optionLabel: "Select..."
+                });
+
+                equal(dropdownlist._data()[0].text, "Select...");
+            });
+
             test("optionLabel should create complex empty item", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                 dropdownlist = new DropDownList(input, {
