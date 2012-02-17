@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="km-root">
 <head>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-black" />
@@ -63,12 +63,6 @@
         .km-root .fuchsia .km-switch-on
         {
             background-color: #c0c;
-        }
-
-        .km-root .km-buttongroup,
-        .km-root .km-buttongroup:active
-        {
-            background-color: transparent;
         }
 
 /*
@@ -140,9 +134,22 @@
                 <a data-role="button" data-align="right" class="pink" data-icon="toprated">Pin</a>
                 <a data-role="button" data-align="right" class="green" data-icon="search">Grin</a>
                 <a data-role="button" data-align="right" class="fuchsia" data-icon="about">Fuch</a>
-                <!--<a data-role="button" data-align="right">HAbout</a>-->
             </div>
         </header>
+        <br />
+        <center>
+            <ul id="select-period" data-index="0" data-role="buttongroup">
+                <li>
+                    Month
+                </li>
+                <li>
+                    Quarter
+                </li>
+                <li>
+                    Year
+                </li>
+            </ul>
+        </center>
         <p>Text Shmext</p>
         <div style="padding: 10px 0; text-align: center;">
             <a data-role="button" data-icon="favorites">Pink</a>

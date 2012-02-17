@@ -18,6 +18,7 @@
 .km-blackberry .km-navbar,
 .km-blackberry .km-toolbar,
 .km-blackberry .km-button,
+.km-blackberry .km-buttongroup,
 .km-blackberry .km-tabstrip
 {
     font: normal 1em Arial, Helvetica, sans-serif;
@@ -26,7 +27,7 @@
     border: 1px solid rgba(0,0,0,.2);
     background-color: #cfd3d6;
     background-image: linear-gradient(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
-    .box-shadow(0 1px 0 0 rgba(0,0,0,.1));
+    .box-shadow(~"0 1px 0 0 rgba(0,0,0,.1)");
 }
 
 .km-blackberry .km-badge
@@ -118,6 +119,39 @@
     text-shadow: none;
     font-size: 1.2rem;
     width: 100%;
+}
+
+.km-blackberry .km-buttongroup
+{
+    .border-radius(5px);
+    border: 0;
+    border-collapse: separate;
+    .box-shadow(~"inset 0 0 0 1px rgba(0,0,0,.2), 0 1px 0 0 rgba(0,0,0,.1)");
+}
+
+.km-blackberry .km-buttongroup > .km-button
+{
+    display: inline-block;
+    border-right-width: 1px;
+    margin-right: 5px;
+    float: left;
+    .box-shadow(none);
+}
+
+.km-root .km-blackberry .km-view .km-buttongroup > .km-state-active
+{
+    .border-radius(5px);
+}
+
+.km-blackberry .km-buttongroup > .km-button:not(.km-state-active)
+{
+    border-color: transparent;
+    background: transparent;
+}
+
+.km-blackberry .km-buttongroup > .km-button:last-child
+{
+    margin-right: 0;
 }
 
 .km-blackberry .km-listinset,
