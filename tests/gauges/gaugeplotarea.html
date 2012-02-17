@@ -41,23 +41,23 @@
                 }
             });
 
-            test("reflow calculates scale ring center for 90:180 gauge", function() {
-                reflowScale({ startAngle: 0, angle: 360 });
+            test("reflow calculates scale ring center for 0:360 gauge", function() {
+                reflowScale({ startAngle: 0, endAngle: 360 });
 
                 equal(ring.c.x, 100);
                 equal(ring.c.y, 100);
             });
 
-            test("reflow calculates scale ring center for 90:180 gauge", function() {
-                reflowScale({ startAngle: 90, angle: 180 });
+            test("reflow calculates scale ring center for 90:270 gauge", function() {
+                reflowScale({ startAngle: 90, endAngle: 270 });
 
                 equal(ring.c.x, 50);
                 equal(ring.c.y, 100);
             });
 
-            test("reflow calculates scale ring center for -30:240 gauge", function() {
+            test("reflow calculates scale ring center for -30:210 gauge", function() {
 
-                reflowScale({ startAngle: -30, angle: 240 });
+                reflowScale({ startAngle: -30, endAngle: 210 });
 
                 equal(ring.c.x, 100);
                 equal(ring.c.y, 125);
@@ -65,7 +65,7 @@
 
             test("reflow calculates scale ring center for 0:180 gauge", function() {
 
-                reflowScale({ startAngle: 0, angle: 180 });
+                reflowScale({ startAngle: 0, endAngle: 180 });
 
                 equal(ring.c.x, 100);
                 equal(ring.c.y, 150);
