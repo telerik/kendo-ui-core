@@ -66,5 +66,13 @@
     <Item Type="System.String">Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
   </ProjectReferences>
   <ExcludedFiles />
-  <DisabledTranslators />
+  <DisabledTranslators>
+    <Item Type="System.String">KendoCalendar for KendoUI Translators</Item>
+    <Item Type="System.String">KendoGrid for KendoUI Translators</Item>
+    <Item Type="System.String">KendoInput for KendoUI Translators</Item>
+    <Item Type="System.String">KendoMenu for KendoUI Translators</Item>
+    <Item Type="System.String">KendoPanelBar for KendoUI Translators</Item>
+    <Item Type="System.String">KendoTabStrip for KendoUI Translators</Item>
+    <Item Type="System.String">KendoWindow for KendoUI Translators</Item>
+  </DisabledTranslators>
 </ProjectSettings>
