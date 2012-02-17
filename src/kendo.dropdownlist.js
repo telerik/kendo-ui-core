@@ -699,8 +699,8 @@
                     textField = textField.split(".");
                     valueField = valueField.split(".");
 
-                    assign(first, textField, optionLabel);
                     assign(first, valueField, "");
+                    assign(first, textField, optionLabel);
                 }
 
                 first = new kendo.data.ObservableArray([first]);
