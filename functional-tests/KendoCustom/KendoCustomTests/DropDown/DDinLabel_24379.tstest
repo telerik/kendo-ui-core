@@ -1,0 +1,400 @@
+﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+  <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:BuiltInData i:nil="true" />
+    <d2p1:BuiltInDocumentKey i:nil="true" />
+    <d2p1:ConnectionString />
+    <d2p1:DataEnabled>true</d2p1:DataEnabled>
+    <d2p1:DataProvider />
+    <d2p1:DataRange />
+    <d2p1:DataTableName />
+    <d2p1:DataType>None</d2p1:DataType>
+    <d2p1:DefaultToGrid>true</d2p1:DefaultToGrid>
+    <d2p1:HasBuiltinGrid>false</d2p1:HasBuiltinGrid>
+    <d2p1:TSQL />
+  </DataInfo>
+  <Description />
+  <IndependentDescriptors />
+  <Name>DDinLabel_24379</Name>
+  <QcFilePath i:nil="true" />
+  <QcId>0</QcId>
+  <QcTestVersionStamp>0</QcTestVersionStamp>
+  <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Navigate to : '/DropDown/DDWrappedInLabel.html'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>1</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>f27bdfe8-b4ae-4270-aada-1c14dce7153e</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/DropDown/DDWrappedInLabel.html</d2p1:NavigateURL>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DDinLabel_24379lihluk3x.asl</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Navigate to : 'C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\DropDown\DDWrappedInLabel.html'</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>2</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>0ca37bc0-0897-4b87-98db-7fa6014027f4</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>false</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>0</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:BaseUrl />
+        <d2p1:NavigateURL>C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\DropDown\DDWrappedInLabel.html</d2p1:NavigateURL>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DDinLabel_24379mhlntoet.i1u</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'SelectSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>5b30a494-8955-4423-b09c-3694076ad68c</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/label[1]/span[1]/span[1]/span[2]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TagIndex=span:4</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>SelectSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl />
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage4</d2p1:FriendlyName>
+                <d2p1:Path>C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\DropDown\DDWrappedInLabel.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DDinLabel_24379rold34fn.mj1</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'PulpFictionListItem'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>7aa1c54d-c46e-4694-88b8-eb817de10f91</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/ul[1]/li[5]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </ChainStops>
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>id=input-list</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagIndex=li:4</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>PulpFictionListItem</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl />
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage4</d2p1:FriendlyName>
+                <d2p1:Path>C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\DropDown\DDWrappedInLabel.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DDinLabel_243793czxl1b0.2ff</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for 'TextContent' 'Contains' 'Pulp Fiction' on 'PulpFictionSpan'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>4110dd6e-7df1-44a1-9837-c60763189803</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>textTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/label[1]/span[1]/span[1]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TagIndex=span:2</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>PulpFictionSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>textTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl />
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BasicUsage4</d2p1:FriendlyName>
+                <d2p1:Path>C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomSites\DropDown\DDWrappedInLabel.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Basic usage</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:CompareType>Contains</d2p1:CompareType>
+        <d2p1:ExpectedString>Pulp Fiction</d2p1:ExpectedString>
+        <d2p1:SegmentType>TextContent</d2p1:SegmentType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>DDinLabel_243795o1jhsq5.32t</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+  </Steps>
+  <Version>200</Version>
+  <BrowserType>NotSet</BrowserType>
+  <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:string>System</d2p1:string>
+    <d2p1:string>System.Core</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+  </CurrentReferences>
+  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <HasCodeBehind>false</HasCodeBehind>
+  <HtmlDescription />
+  <InheritParentDataSource>false</InheritParentDataSource>
+  <IsManual>false</IsManual>
+  <IsSilverlightApp>false</IsSilverlightApp>
+  <IsTestFragment>false</IsTestFragment>
+  <Owner i:nil="true" />
+  <Path>DropDown\DDinLabel_24379.tstest</Path>
+  <Priority>0</Priority>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomTests\Profiler Configurations\{a6423987-525d-4365-877c-1b1ac32457dd}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\1\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
+  <ResourceFilePath>DropDown\DDinLabel_24379.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
+  <SilverlightAppLocalDirectory />
+  <SilverlightAppOriginUri i:nil="true" />
+  <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
+  <SilverlightAppWebUrl />
+  <SilverlightEnabled>false</SilverlightEnabled>
+  <StopTestListOnFailure>false</StopTestListOnFailure>
+  <TestAssembly />
+  <TestAssemblyPath>bin</TestAssemblyPath>
+  <TestClass i:nil="true" />
+  <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
+  <TestType>Web</TestType>
+  <UniqueId>a6423987-525d-4365-877c-1b1ac32457dd</UniqueId>
+  <UseDefaultWpfAppPath>false</UseDefaultWpfAppPath>
+  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <WebKitExecutionDelay>0</WebKitExecutionDelay>
+  <WpfAppPath i:nil="true" />
+</WebAiiTest>
