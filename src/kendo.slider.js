@@ -176,34 +176,37 @@
 
             that.bind([
                 /**
-                 *
-                 * Triggered when the value of a <strong>RangeSlider</strong> is changed as the result of selecting a
-                 * new value with one of the drag handles or the keyboard.
-                 *
-                 * @name kendo.ui.RangeSlider#change
+                 * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
+                 * @name kendo.ui.Slider#change
                  * @event
-                 *
                  * @param {Event} e
-                 *
-                 * @param {Array} e.values
-                 * An array of values of the first and second drag handle.
-                 *
-                 */
-                CHANGE,
+                 * @param {Number} e.value Represents the updated value of the slider.
+                 **/
 
                 /**
-                 *
-                 * Triggered when a user moves the drag handle of a <strong>RangeSlider</strong> to a new position.
-                 *
+                 * Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
+                 * @name kendo.ui.RangeSlider#change
+                 * @event
+                 * @param {Event} e
+                 * @param {Number} e.values Represents the updated array of values of the first and second drag handle.
+                 **/
+                 CHANGE,
+
+                /**
+                 * Fires when the user drags the drag handle to a new position.
+                 * @name kendo.ui.Slider#slide
+                 * @event
+                 * @param {Event} e
+                 * @param {Number} e.value Represents the value from the current position of the drag handle.
+                 **/
+
+                /**
+                 * Fires when the user drags the drag handle to a new position.
                  * @name kendo.ui.RangeSlider#slide
                  * @event
-                 *
                  * @param {Event} e
-                 *
-                 * @param {Array} e.values
-                 * An array of values of the current positions of the first and second drag handle.
-                 *
-                 */
+                 * @param {Number} e.values Represents an array of values of the current positions of the first and second drag handle.
+                 **/
                 SLIDE], options);
         },
 
