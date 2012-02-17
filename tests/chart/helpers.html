@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.chart</title>
+        <title>Chart helpers</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
-        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
-        <script type="text/javascript">
+        <script>
             var Chart = kendo.ui.Chart,
                 Box2D = Chart.Box2D,
                 Point2D = Chart.Point2D,
@@ -278,51 +278,97 @@
                 equals(point.y, 20);
             });
 
-            // ------------------------------------------------------------
-            var sector;
+            (function() {
+                var sector;
 
-            module("Sector", {
-                setup: function() {
-                    sector = new Chart.Sector(new Point2D(10, 20), 30, 90, 180);
-                }
-            });
+                module("Sector", {
+                    setup: function() {
+                        sector = new Chart.Sector(new Point2D(10, 20), 30, 90, 180);
+                    }
+                });
 
-            test("constructor sets center", function() {
-                same([sector.c.x, sector.c.y], [10, 20]);
-            });
+                test("constructor sets center", function() {
+                    same([sector.c.x, sector.c.y], [10, 20]);
+                });
 
-            test("constructor sets r", function() {
-                equals(sector.r, 30);
-            });
+                test("constructor sets radius", function() {
+                    equals(sector.r, 30);
+                });
 
-            test("constructor sets start angle", function() {
-                equals(sector.startAngle, 90);
-            });
+                test("constructor sets start angle", function() {
+                    equals(sector.startAngle, 90);
+                });
 
-            test("constructor sets angle", function() {
-                equals(sector.angle, 180);
-            });
+                test("constructor sets angle", function() {
+                    equals(sector.angle, 180);
+                });
 
-            test("clone returns new sector instance", function() {
-                notEqual(sector.clone(), sector);
-            });
+                test("clone returns new sector instance", function() {
+                    notEqual(sector.clone(), sector);
+                    ok(sector instanceof Chart.Sector);
+                });
 
-            test("expand returns same instance", function() {
-                equals(sector.expand(100), sector);
-            });
+                test("expand returns same instance", function() {
+                    equals(sector.expand(100), sector);
+                });
 
-            test("expand increases radius", function() {
-                equals(sector.expand(100).r, 130);
-            });
+                test("expand increases radius", function() {
+                    equals(sector.expand(100).r, 130);
+                });
 
-            test("middle returns middle angle", function() {
-                equals(sector.middle(), 180);
-            });
+                test("point returns intersection point for angle", function() {
+                    var point = sector.point(180);
+                    same([point.x, point.y], [40, 20])
+                });
+            })();
 
-            test("point returns intersection point for angle", function() {
-                var point = sector.point(180);
-                same([point.x, point.y], [40, 20])
-            });
+            (function() {
+                var ring;
+
+                module("Ring", {
+                    setup: function() {
+                        ring = new Chart.Ring(new Point2D(100, 200), 20, 30, 90, 180);
+                    }
+                });
+
+                test("constructor sets center", function() {
+                    same([ring.c.x, ring.c.y], [100, 200]);
+                });
+
+                test("constructor sets radii", function() {
+                    equals(ring.ir, 20);
+                    equals(ring.r, 30);
+                });
+
+                test("constructor sets start angle", function() {
+                    equals(ring.startAngle, 90);
+                });
+
+                test("constructor sets angle", function() {
+                    equals(ring.angle, 180);
+                });
+
+                test("clone returns new ring instance", function() {
+                    notEqual(ring.clone(), ring);
+                });
+
+                test("middle returns middle angle", function() {
+                    equals(ring.middle(), 180);
+                });
+
+                test("point returns intersection point for angle", function() {
+                    var point = ring.point(180);
+                    same([point.x, point.y], [130, 200])
+                });
+
+                test("calculates inner point correctly", function() {
+                    var innerPoint = ring.point(90, true);
+
+                    equal(innerPoint.x, 100);
+                    equal(innerPoint.y, 180);
+                });
+            })();
+
 
             // ------------------------------------------------------------
             var deepExtend = Chart.deepExtend,

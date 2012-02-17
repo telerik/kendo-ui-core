@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UI5.Chart Tests - SVG</title>
+        <title>SVG tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -163,6 +163,29 @@
                     var circle = view.createCircle([], 10, { strokeWidth: 2});
 
                     equals(circle.options.strokeWidth, 2);
+                });
+
+                test("createRing returns SVGRing", function() {
+                    var ring = view.createRing();
+                    ok(ring instanceof Chart.SVGRing);
+                });
+
+                test("createRing sets fill color", function() {
+                    var ring = view.createRing({ }, { fill: "#cf0" });
+
+                    equals(ring.options.fill, "#cf0");
+                });
+
+                test("createRing sets stroke color", function() {
+                    var ring = view.createRing({ }, { stroke: "#cf0" });
+
+                    equals(ring.options.stroke, "#cf0");
+                });
+
+                test("createRing sets stroke width", function() {
+                    var ring = view.createRing({ }, { strokeWidth: 2});
+
+                    equals(ring.options.strokeWidth, 2);
                 });
 
                 test("createSector returns SVGSector", function() {
@@ -653,6 +676,14 @@
                     equals(line.clone().options.id, "1");
                 });
 
+                test("align=false skips point coordinate rounding", function() {
+                    line = new Chart.SVGLine([
+                        new Point2D(1.503, 2.103),
+                        new Point2D(2.506, 3.801)
+                    ], false, { align: false })
+
+                    equal(line.renderPoints(), "M1.503 2.103 2.506 3.801");
+                });
             })();
 
             (function() {
@@ -815,6 +846,29 @@
                 test("clone copies options", function() {
                     sector.options.id = "1";
                     equals(sector.clone().options.id, "1");
+                });
+
+            })();
+
+            (function() {
+                var ring;
+
+                module("SVGRing", {
+                    setup: function() {
+                        var ringConfig = new Chart.Ring(
+                                new Point2D(135, 135), 100, 135, -30, 240
+                            );
+                        ring = new Chart.SVGRing(ringConfig);
+                    }
+                });
+
+                test("renders path", function() {
+                    equal(ring.render().replace(/\<path.*?\>/, "<path>"),
+                        "<path></path>");
+                });
+
+                test("renders radius", function() {
+                    ok(ring.render().indexOf("A135 135") > -1);
                 });
 
             })();

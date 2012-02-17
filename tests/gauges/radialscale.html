@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radial Scale</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="util.js"></script>
+        <script>
+            var Chart = kendo.ui.Chart,
+                Gauge = kendo.ui.Gauge,
+                Box2D = Chart.Box2D,
+                Point2D = Chart.Point2D,
+                RadialScale = Gauge.RadialScale,
+                radialScale,
+                ring,
+                chartBox = new Box2D(0, 0, 400, 300);
+
+            // Tests expect particular font size
+            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+
+            module("RadialScal", {
+                setup: function() {
+                    radialScale = new RadialScale({
+                            min: 0,
+                            max: 100,
+                            majorTickSize: 10,
+                            angle: 180,
+                            startAngle: 0
+                        });
+
+                    ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
+
+                    radialScale.ring = ring;
+                }
+            });
+
+            test("reflow calculates scale ring position", function() {
+                radialScale.reflow(chartBox);
+
+                ring = radialScale.ring;
+                equals(ring.c.x, 200);
+                equals(ring.c.y, 150);
+                equals(ring.r, 150);
+                equals(ring.ir, 140);
+            });
+
+            test("getTickAngles returns array", function() {
+                var tickAngles = radialScale.getTickAngles(ring, 10);
+
+                ok(tickAngles instanceof Array);
+            });
+
+            test("getTickAngles returns proper amount of tick angles", function() {
+                radialScale.options.min = 0;
+                radialScale.options.max = 100;
+                var tickAngles = radialScale.getTickAngles(ring, 10);
+
+                equal(tickAngles.length, 11);
+
+                tickAngles = radialScale.getTickAngles(ring, 1);
+
+                equal(tickAngles.length, 101);
+            });
+
+            test("renderTicks does not render duplicate ticks for major and minor points", function() {
+                $.extend(radialScale.options, {
+                    min: 0,
+                    max: 100,
+                    majorUnit: 50,
+                    minorUnit: 25
+                });
+
+                var ticks = radialScale.renderTicks({
+                    createLine: function() {
+                        return {};
+                    }
+                });
+
+                equal(ticks.length, 5);
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

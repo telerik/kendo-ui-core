@@ -306,7 +306,7 @@
 
                 function createAnim() {
                     sector = {
-                        circleSector: {
+                        config: {
                             r: SIZE
                         },
                         options: {
@@ -332,7 +332,7 @@
 
                 test("setup sets radius 0", function() {
                     anim.setup();
-                    equals(sector.circleSector.r, 0);
+                    equals(sector.config.r, 0);
                 });
 
                 asyncTest("animates radius to final size", function() {
@@ -340,7 +340,7 @@
                     anim.play();
 
                     setTimeout(function() {
-                        equals(sector.circleSector.r, SIZE);
+                        equals(sector.config.r, SIZE);
 
                         start();
                     }, 100);

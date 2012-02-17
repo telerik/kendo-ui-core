@@ -155,6 +155,12 @@
             );
         },
 
+        createRing: function(ring, options) {
+            return this.decorate(
+                new SVGRing(ring, options)
+            );
+        },
+
         createGradient: function(options) {
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
@@ -278,6 +284,11 @@
             strokeOpacity: 1
         },
 
+        rotate: function(domElement, angle, center) {
+            $(domElement).attr("transform", "rotate(" + [angle, center.x, center.y].join(" ") + ")");
+        },
+
+
         refresh: function(domElement) {
             var options = this.options;
 
@@ -349,31 +360,81 @@
 
         _print: function(point) {
             var line = this,
-                strokeWidth = line.options.strokeWidth,
-                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                align = shouldAlign ? alignToPixel : math.round;
+                options = line.options,
+                strokeWidth = options.strokeWidth,
+                shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
+                align = shouldAlign ? alignToPixel : round;
 
-            return align(point.x) + " " + align(point.y);
+            return align(point.x, COORD_PRECISION) + " " + align(point.y, COORD_PRECISION);
         }
     });
 
-    var SVGSector = SVGPath.extend({
-        init: function(circleSector, options) {
+    var SVGRing = SVGPath.extend({
+        init: function(config, options) {
+            var ring = this;
+            SVGPath.fn.init.call(ring, options);
+
+            ring.pathTemplate = SVGRing.pathTemplate;
+            if (!ring.pathTemplate) {
+                ring.pathTemplate = SVGRing.pathTemplate = template(
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
+                    "A#= d.r # #= d.r # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
+                    "L #= d.secondInnerPoint.x # #= d.secondInnerPoint.y # " +
+                    "A#= d.ir # #= d.ir # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
+                    "#= d.firstInnerPoint.x # #= d.firstInnerPoint.y # z"
+                );
+            }
+
+            ring.config = config || {};
+        },
+
+        renderPoints: function() {
+            var ring = this,
+                ringConfig = ring.config,
+                startAngle = ringConfig.startAngle,
+                endAngle = ringConfig.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                isReflexAngle = (endAngle - startAngle) > 180,
+                r = math.max(ringConfig.r, 0),
+                ir = math.max(ringConfig.ir, 0),
+                center = ringConfig.c,
+                firstOuterPoint = ringConfig.point(startAngle),
+                firstInnerPoint = ringConfig.point(startAngle, true),
+                secondOuterPoint = ringConfig.point(endAngle),
+                secondInnerPoint = ringConfig.point(endAngle, true);
+
+            return ring.pathTemplate({
+                firstOuterPoint: firstOuterPoint,
+                secondOuterPoint: secondOuterPoint,
+                isReflexAngle: isReflexAngle,
+                r: r,
+                ir: ir,
+                cx: center.x,
+                cy: center.y,
+                firstInnerPoint: firstInnerPoint,
+                secondInnerPoint: secondInnerPoint
+            });
+        }
+    });
+
+    var SVGSector = SVGRing.extend({
+        init: function(config, options) {
             var sector = this;
-            SVGPath.fn.init.call(sector, options);
+            SVGRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = SVGSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = SVGSector.pathTemplate = template(
-                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
-                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
                     "L #= d.cx # #= d.cy # z"
                 );
             }
-
-            sector.circleSector = circleSector || {};
         },
 
         options: {
@@ -386,32 +447,9 @@
         clone: function() {
             var sector = this;
             return new SVGSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                circleSector = sector.circleSector,
-                startAngle = circleSector.startAngle,
-                endAngle = circleSector.angle + startAngle,
-                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
-                isReflexAngle = (endAngle - startAngle) > 180,
-                r = math.max(circleSector.r, 0),
-                cx = circleSector.c.x,
-                cy = circleSector.c.y,
-                firstPoint = circleSector.point(startAngle),
-                secondPoint = circleSector.point(endAngle);
-
-            return sector.pathTemplate({
-                firstPoint: firstPoint,
-                secondPoint: secondPoint,
-                isReflexAngle: isReflexAngle,
-                r: r,
-                cx: cx,
-                cy: cy
-            });
         }
     });
 
@@ -728,6 +766,7 @@
         SVGPath: SVGPath,
         SVGLine: SVGLine,
         SVGSector: SVGSector,
+        SVGRing: SVGRing,
         SVGCircle: SVGCircle,
         SVGGroup: SVGGroup,
         SVGClipPath: SVGClipPath,

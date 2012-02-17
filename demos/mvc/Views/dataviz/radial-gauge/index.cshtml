@@ -1,0 +1,34 @@
+        <div id="example" class="k-content">
+            <div id="gauge"></div>
+
+            <script>
+                function createGauge() {
+                    $("#gauge").kendoGauge({
+                        theme: $(document).data("kendoSkin") || "default",
+
+                        pointer: {
+                            value: 35,
+                            type: "needle"
+                        },
+
+                        scale: {
+                            minorUnit: 5
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    setTimeout(function() {
+                        createGauge();
+
+                        // Initialize the gauge with a delay to make sure
+                        // the initial animation is visible
+                    }, 400);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createGauge();
+                    });
+                });
+            </script>
+        </div>
+

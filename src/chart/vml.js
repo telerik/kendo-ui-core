@@ -137,6 +137,12 @@
             );
         },
 
+        createRing: function(ring, options) {
+            return this.decorate(
+                new VMLRing(ring, options)
+            );
+        },
+
         createGroup: function(options) {
             return this.decorate(
                 new VMLGroup(options)
@@ -320,11 +326,20 @@
             // Overriden by inheritors
         },
 
+        rotate: function(domElement, angle, center) {
+            var parentNode = domElement.parentNode;
+
+            if (parentNode) {
+                domElement.rotation = angle;
+                // TODO: Adjust left/top to match the center after rotation
+            }
+        },
+
         refresh: function(domElement) {
             var path = this,
                 options = path.options,
                 element = $(domElement),
-                parentNode = element[0].parentNode;
+                parentNode = domElement.parentNode;
 
             if (parentNode) {
                 element.find("path")[0].v = this.renderPoints();
@@ -389,40 +404,103 @@
         }
     });
 
-    var VMLSector = VMLPath.extend({
-        init: function(circleSector, options) {
+    var VMLRing = VMLPath.extend({
+        init: function(config, options) {
+            var ring = this;
+            VMLPath.fn.init.call(ring, options);
+
+            ring.pathTemplate = VMLRing.pathTemplate;
+            if (!ring.pathTemplate) {
+                ring.pathTemplate = VMLRing.pathTemplate = template(
+                   "M #= d.osp.x #,#= d.osp.y # " +
+                   "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
+                      "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
+                   "L #= d.iep.x #,#= d.iep.y # " +
+                   "AT #= d.ibb.l #,#= d.ibb.t # #= d.ibb.r #,#= d.ibb.b # " +
+                      "#= d.iep.x #,#= d.iep.y # #= d.isp.x #,#= d.isp.y # " +
+                   "X E"
+                );
+            }
+
+            ring.config = config;
+        },
+
+        renderPoints: function() {
+            var ring = this,
+                config = ring.config,
+                r = math.max(round(config.r), 0),
+                ir = math.max(round(config.ir), 0),
+                cx = round(config.c.x),
+                cy = round(config.c.y),
+                startAngle = config.startAngle,
+                endAngle = config.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                // outer bounding box
+                obb = {
+                    l: cx - r,
+                    t: cy - r,
+                    r: cx + r,
+                    b: cy + r
+                },
+                // inner bounding box
+                ibb = {
+                    l: cx - ir,
+                    t: cy - ir,
+                    r: cx + ir,
+                    b: cy + ir
+                },
+                // outer/inner start/end points
+                osp = roundPointCoordinates(config.point(startAngle)),
+                oep = roundPointCoordinates(config.point(endAngle)),
+                isp = roundPointCoordinates(config.point(startAngle, true)),
+                iep = roundPointCoordinates(config.point(endAngle, true));
+
+            function roundPointCoordinates(point) {
+                return new Point2D(round(point.x), round(point.y));
+            }
+
+            return ring.pathTemplate({
+                obb: obb,
+                ibb: ibb,
+                osp: osp,
+                isp: isp,
+                oep: oep,
+                iep: iep,
+                cx: cx,
+                cy: cy
+            });
+        },
+
+        clone: function() {
             var sector = this;
-            VMLPath.fn.init.call(sector, options);
+            return new VMLRing(
+                deepExtend({}, sector.config),
+                deepExtend({}, sector.options)
+            );
+        }
+    });
+
+    var VMLSector = VMLRing.extend({
+        init: function(config, options) {
+            var sector = this;
+            VMLRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = VMLSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = VMLSector.pathTemplate = template(
-                   "M #= d.cx # #= d.cy # " +
-                   "AE #= d.cx # #= d.cy # " +
-                   "#= d.r # #= d.r # " +
-                   "#= d.sa # #= d.a # X E"
+                   "M #= d.osp.x #,#= d.osp.y # " +
+                   "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
+                      "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
+                   "L #= d.cx #,#= d.cy # " +
+                   "X E"
                 );
             }
-
-            sector.circleSector = circleSector;
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                circleSector = sector.circleSector,
-                r = math.max(round(circleSector.r), 0),
-                cx = round(circleSector.c.x),
-                cy = round(circleSector.c.y),
-                sa = -round((circleSector.startAngle + 180) * 65535),
-                a = -round(circleSector.angle * 65536);
-
-            return sector.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
         },
 
         clone: function() {
             var sector = this;
             return new VMLSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
         }
@@ -700,6 +778,7 @@
         VMLPath: VMLPath,
         VMLLine: VMLLine,
         VMLSector: VMLSector,
+        VMLRing: VMLRing,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
         VMLClipRect: VMLClipRect,
