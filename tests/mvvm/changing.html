@@ -266,18 +266,18 @@
             test("tracking changes of fields bound to style", function() {
                 var viewModel = kendo.observable( {
                     foo: "none",
-                    bar: "underline"
+                    bar: "10px"
                 });
 
-                var dom = $('<div data-bind="style: { display: foo, text-decoration: bar }"/>');
+                var dom = $('<div data-bind="style: { display: foo, top: bar }"/>');
 
                 kendo.bind(dom, viewModel);
 
                 viewModel.set("foo", "inline");
-                viewModel.set("bar", "overline");
+                viewModel.set("bar", "20px");
 
                 equal(dom.css("display"), "inline");
-                equal(dom.css("text-decoration"), "overline");
+                equal(dom.css("top"), "20px")
             });
 
             test("tracking changes of complex fields", function() {

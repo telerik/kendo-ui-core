@@ -77,8 +77,11 @@
 
                 if (typeof result === "function") {
                     result = $.proxy(result, this.source);
+
+                    result = result();
                 }
             }
+
             this.stop();
 
             return result;
@@ -95,311 +98,364 @@
         }
     });
 
-    var binders = {
-        attr: {
-            init: function(element, bindings, options) {
-            },
+    var TemplateBinding = Binding.extend( {
+        init: function(source, path, template) {
+            var that = this;
 
-            update: function(element, bindings, options) {
-                var attribute, attributes = bindings.attr;
+            Binding.fn.init.call(that, source, path);
 
-                for (attribute in attributes) {
-                    element.setAttribute(attribute, attributes[attribute].get());
-                }
-            }
-        },
-        enabled: {
-            init: function() {
-            },
-
-            update: function(element, bindings) {
-                if (bindings.enabled.get()) {
-                    element.removeAttribute("disabled");
-                } else {
-                    element.setAttribute("disabled", "disabled");
-                }
-            }
-        },
-        disabled: {
-            init: function() {
-            },
-
-            update: function(element, bindings) {
-                if (bindings.disabled.get()) {
-                    element.setAttribute("disabled", "disabled");
-                } else {
-                    element.removeAttribute("disabled");
-                }
-            }
-        },
-        event: {
-            init: function() {
-            },
-            update: function(element, bindings, options) {
-                var event, events = bindings.event;
-
-                for (event in events) {
-                    $(element).bind(event, events[event].get());
-                }
-            }
-        },
-        click: {
-            init: function() {
-            },
-            update: function(element, bindings, options) {
-                $(element).click(bindings.click.get());
-            }
-        },
-        text: {
-            init: function(element, bindings, options) {
-            },
-            update: function(element, bindings, options) {
-                //TODO: evaluate the function in some common place
-                var text = bindings["text"].get();
-
-                if (typeof text == "function") {
-                    text = text();
-                }
-
-                element[innerText] = text;
-            }
+            that.template = template;
         },
 
-        visible: {
-            init: function() {
-            },
+        invoke: function(value) {
+            var html;
 
-            update: function(element, bindings, options) {
-                if (bindings["visible"].get()) {
-                    element.style.display = "";
-                } else {
-                    element.style.display = "none";
-                }
+            this.start();
+
+            html = this.template(value);
+
+            this.stop();
+
+            return html;
+        }
+    });
+
+    var Binder = Class.extend({
+       init: function(element, bindings, options) {
+            this.element = element;
+            this.bindings = bindings;
+            this.options = options;
+       },
+
+       destroy: function() {
+       }
+    });
+
+    var binders = {};
+
+    binders.attr = Binder.extend({
+        update: function() {
+            var attribute, attributes = this.bindings.attr;
+
+            for (attribute in attributes) {
+                this.element.setAttribute(attribute, attributes[attribute].get());
             }
+        }
+    });
+
+    binders.style = Binder.extend({
+        update: function() {
+            var key, style = this.bindings.style;
+
+            for (key in style) {
+                this.element.style[key] = style[key].get();
+            }
+        }
+    });
+
+    binders.enabled = Binder.extend({
+        update: function() {
+            if (this.bindings.enabled.get()) {
+                this.element.removeAttribute("disabled");
+            } else {
+                this.element.setAttribute("disabled", "disabled");
+            }
+        }
+    });
+
+    binders.disabled = Binder.extend({
+        update: function() {
+            if (this.bindings.disabled.get()) {
+                this.element.setAttribute("disabled", "disabled");
+            } else {
+                this.element.removeAttribute("disabled");
+            }
+        }
+    });
+
+    binders.event = Binder.extend({
+        update: function() {
+            var event, events = this.bindings.event;
+
+            for (event in events) {
+                $(this.element).bind(event, events[event].get());
+            }
+        }
+    });
+
+    binders.click = Binder.extend({
+        update: function() {
+            $(this.element).click(this.bindings.click.get());
+        }
+    });
+
+    binders.text = Binder.extend({
+        update: function() {
+            this.element[innerText] = this.bindings["text"].get();
+        }
+    });
+
+    binders.visible = Binder.extend({
+        update: function() {
+            if (this.bindings["visible"].get()) {
+                this.element.style.display = "";
+            } else {
+                this.element.style.display = "none";
+            }
+        }
+    });
+
+    binders.template = Binder.extend({
+        update: function() {
+            this.element.innerHTML = this.bindings.template.invoke(this.bindings.template.get());
+        }
+    });
+
+    binders.html = Binder.extend({
+        update: function() {
+            this.element.innerHTML = this.bindings["html"].get();
+        }
+    });
+
+    binders.value = Binder.extend({
+        init: function(element, bindings, options) {
+            Binder.fn.init.call(this, element, bindings, options);
+
+            this._change = $.proxy(this.change, this);
+            $(this.element).change(this._change)
         },
 
-        html: {
-            init: function(element, bindings, options) {
-            },
-            update: function(element, bindings, options) {
-                var template = options.template,
-                    html = bindings["html"].get();
-
-                if (template) {
-                   html = template(html);
-                }
-
-                element.innerHTML = html;
-            }
+        change: function() {
+            this.bindings["value"].set(this.element.value);
         },
 
-        value: {
-            init: function(element, bindings, options) {
-                $(element).change(function() {
-                    bindings["value"].set(this.value);
-                });
-            },
-
-            update: function(element, bindings, options) {
-                element.value = bindings["value"].get();
-            }
+        update: function() {
+            this.element.value = this.bindings["value"].get();
         },
 
-        source: {
-            init: function(element, bindings, options) {
-                var source = bindings["source"].get(),
+        destroy: function() {
+           $(this.element).unbind("change", this._change);
+        }
+    });
+
+    binders.source = Binder.extend({
+        init: function(element, bindings, options) {
+            Binder.fn.init.call(this, element, bindings, options);
+
+            var source = bindings["source"].get(),
                 that = this,
                 template = options.template;
 
-                source.bind(0, "change", function(e) {
-                    e.preventDefault();
+            source.bind(0, "change", function(e) {
+                e.preventDefault();
 
-                    if (e.action == "add") {
-                        that.add(element, e.index, kendo.render(template, e.items));
-                    } else if (e.action == "remove") {
-                        that.remove(element, e.index, e.items.length);
-                    }
-                });
-            },
-
-            add: function(element, index, html) {
-                var clone = element.cloneNode(false),
-                reference = element.children[index];
-
-                $(clone).html(html);
-
-                if (reference) {
-                    while (clone.firstChild) {
-                        element.insertBefore(clone.firstChild, reference);
-                    }
-                } else {
-                    while (clone.firstChild) {
-                        element.appendChild(clone.firstChild);
-                    }
+                if (e.action == "add") {
+                    that.add(e.index, kendo.render(template, e.items));
+                } else if (e.action == "remove") {
+                    that.remove(e.index, e.items.length);
                 }
-            },
+            });
+        },
 
-            remove: function(element, index, length) {
-                var idx;
+        add: function(index, html) {
+            var clone = this.element.cloneNode(false),
+                reference = this.element.children[index];
 
-                for (idx = 0; idx < length; idx++) {
-                    element.removeChild(element.children[index]);
+            $(clone).html(html);
+
+            if (reference) {
+                while (clone.firstChild) {
+                    this.element.insertBefore(clone.firstChild, reference);
                 }
-            },
-
-            update: function(element, bindings, options) {
-                var source = bindings["source"].get();
-                var idx, length;
-                var template = options.template;
-
-                if (element.nodeName.toLowerCase() == "table") {
-                   if (!element.tBodies[0]) {
-                        element.appendChild(document.createElement("tbody"));
-                   }
-                   element = element.tBodies[0];
-                }
-
-                $(element).html(kendo.render(template, source));
-
-                for (idx = 0, length = source.length; idx < length; idx++) {
-                    bindElement(element.children[idx], source[idx]);
+            } else {
+                while (clone.firstChild) {
+                    this.element.appendChild(clone.firstChild);
                 }
             }
         },
-        input: {
-            checked: {
-                init: function(element, bindings, options) {
-                    var that = this;
-                    $(element).change(function() {
-                        var value = that.value(this);
-                        if (this.type == "radio") {
-                            bindings["checked"].set(value);
-                        } else if (this.type == "checkbox") {
-                            var source = bindings["checked"].get();
-                            var index;
 
-                            if (source instanceof ObservableArray) {
-                                if (value !== false && value !== true) {
-                                    index = source.indexOf(value);
-                                    if (index > -1) {
-                                        source.splice(index, 1);
-                                    } else {
-                                        source.push(value);
-                                    }
-                                }
-                            } else {
-                                bindings["checked"].set(value);
-                            }
-                        }
-                    });
-                },
+        remove: function(index, length) {
+            var idx;
 
-                value: function(element) {
-                    var value = element.value;
-
-                    if (element.type == "checkbox") {
-                        if (value == "on" || value == "off") {
-                            value = element.checked;
-                        }
-                    }
-
-                    return value;
-                },
-
-                update: function(element, bindings, options) {
-                    var value = bindings["checked"].get();
-
-                    if (element.type == "checkbox") {
-                        if (value instanceof ObservableArray) {
-                            if (value.indexOf(this.value(element)) >= 0) {
-                                value = true;
-                            }
-                        }
-
-                        element.checked = value === true;
-                    } else if (element.type == "radio") {
-                        if (element.value == value) {
-                            element.checked = true;
-                        }
-                    }
-                }
+            for (idx = 0; idx < length; idx++) {
+                this.element.removeChild(this.element.children[index]);
             }
         },
-        select: {
-            value: {
-                init: function(element, bindings, options) {
-                    $(element).bind("change", function() {
-                        var values = [],
-                            source = bindings.source.get(),
-                            field = options.valueField || options.textField,
-                            idx,
-                            length;
 
-                        for (idx = 0, length = element.options.length; idx < length; idx++) {
-                            if (element.options[idx].selected) {
-                                values.push(element.options[idx].value || element.options[idx].text);
-                            }
-                        }
-                        if (field) {
-                            for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
-                                for (idx = 0, length = source.length; idx < length; idx++) {
-                                    if (source[idx].get(field) == values[valueIndex]) {
-                                        values[valueIndex] = source[idx];
-                                        break;
-                                    }
-                                }
-                            }
-                        }
+        update: function() {
+            var source = this.bindings["source"].get();
+            var idx, length;
+            var element = this.element;
+            var template = this.options.template;
 
-                        var value = bindings.value.get();
-                        if (value instanceof ObservableArray) {
-                            value.splice.apply(value, [0, value.length].concat(values));
-                        } else {
-                            bindings.value.set(values[0]);
-                        }
-                    });
-                },
-                update: function(element, bindings, options) {
-                    var optionIndex,
-                        value = bindings["value"].get(),
-                        values = value,
-                        field = options.valueField || options.textField,
-                        optionValue;
+            if (element.nodeName.toLowerCase() == "table") {
+               if (!element.tBodies[0]) {
+                    element.appendChild(document.createElement("tbody"));
+               }
+               element = element.tBodies[0];
+            }
 
-                    if (!(values instanceof ObservableArray)) {
-                        values = new ObservableArray([value]);
-                    }
+            $(element).html(kendo.render(template, source));
 
-                    options = element.options;
-
-                    for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
-                        value = values[valueIndex];
-
-                        if (field) {
-                            value = value.get(field);
-                        }
-
-                        for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
-                            optionValue = options[optionIndex].value;
-                            if (optionValue === "" && value !== "") {
-                                optionValue = options[optionIndex].text;
-                            }
-
-                            if (optionValue == value) {
-                                options[optionIndex].selected = true;
-                            }
-                        }
-                    }
-                }
+            for (idx = 0, length = source.length; idx < length; idx++) {
+                bindElement(element.children[idx], source[idx]);
             }
         }
-    };
+    });
+
+    binders.input = {
+        checked: Binder.extend({
+            init: function(element, bindings, options) {
+                Binder.fn.init.call(this, element, bindings, options);
+                this._change = $.proxy(this.change, this);
+                $(this.element).change(this._change);
+            },
+            change: function() {
+                var element = this.element;
+                var value = this.value();
+
+                if (element.type == "radio") {
+                    this.bindings["checked"].set(value);
+                } else if (element.type == "checkbox") {
+                    var source = this.bindings["checked"].get();
+                    var index;
+
+                    if (source instanceof ObservableArray) {
+                        if (value !== false && value !== true) {
+                            index = source.indexOf(value);
+                            if (index > -1) {
+                                source.splice(index, 1);
+                            } else {
+                                source.push(value);
+                            }
+                        }
+                    } else {
+                        this.bindings["checked"].set(value);
+                    }
+                }
+            },
+
+            update: function() {
+                var value = this.bindings["checked"].get();
+                var element = this.element;
+
+                if (element.type == "checkbox") {
+                    if (value instanceof ObservableArray) {
+                        if (value.indexOf(this.value(element)) >= 0) {
+                            value = true;
+                        }
+                    }
+
+                    element.checked = value === true;
+                } else if (element.type == "radio") {
+                    if (element.value == value) {
+                        element.checked = true;
+                    }
+                }
+            },
+
+            value: function() {
+                var element = this.element;
+                var value = element.value;
+
+                if (element.type == "checkbox") {
+                    if (value == "on" || value == "off") {
+                        value = element.checked;
+                    }
+                }
+
+                return value;
+            },
+            destroy: function() {
+                $(this.element).unbind("change", this._change);
+            }
+        })
+    }
+
+    binders.select = {
+        value: Binder.extend({
+            init: function(target, bindings, options) {
+                Binder.fn.init.call(this, target, bindings, options);
+
+                this._change = $.proxy(this.change, this);
+                $(this.element).change(this._change);
+            },
+
+            change: function() {
+                var values = [],
+                element = this.element,
+                source = this.bindings.source.get(),
+                field = this.options.valueField || this.options.textField,
+                idx,
+                length;
+
+                for (idx = 0, length = element.options.length; idx < length; idx++) {
+                    if (element.options[idx].selected) {
+                        values.push(element.options[idx].value || element.options[idx].text);
+                    }
+                }
+                if (field) {
+                    for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
+                        for (idx = 0, length = source.length; idx < length; idx++) {
+                            if (source[idx].get(field) == values[valueIndex]) {
+                                values[valueIndex] = source[idx];
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                var value = this.bindings["value"].get();
+                if (value instanceof ObservableArray) {
+                    value.splice.apply(value, [0, value.length].concat(values));
+                } else {
+                    this.bindings["value"].set(values[0]);
+                }
+            },
+            update: function() {
+                var optionIndex,
+                    element = this.element,
+                    options = element.options,
+                    value = this.bindings["value"].get(),
+                    values = value,
+                    field = this.options.valueField || this.options.textField,
+                    optionValue;
+
+                if (!(values instanceof ObservableArray)) {
+                    values = new ObservableArray([value]);
+                }
+
+                for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
+                    value = values[valueIndex];
+
+                    if (field) {
+                        value = value.get(field);
+                    }
+
+                    for (optionIndex = 0; optionIndex < options.length; optionIndex++) {
+                        optionValue = options[optionIndex].value;
+                        if (optionValue === "" && value !== "") {
+                            optionValue = options[optionIndex].text;
+                        }
+
+                        if (optionValue == value) {
+                            options[optionIndex].selected = true;
+                        }
+                    }
+                }
+            },
+            destroy: function() {
+                $(this.element).unbind("change", this._change);
+            }
+        })
+     }
 
     var BindingTarget = Class.extend( {
         init: function(target) {
             this.target = target;
             this.options = {};
-            this.expressions = [];
+            this.binders = [];
+            this.bindings = [];
         },
 
         setOptions: function(options) {
@@ -411,6 +467,7 @@
 
         bind: function(bindings) {
            var that = this;
+
            var nodeName = this.target.nodeName.toLowerCase();
            var specificBinders = binders[nodeName] || {};
 
@@ -418,20 +475,30 @@
                 var binder = specificBinders[key] || binders[key];
                 var binding = bindings[key];
                 if (binder) {
-                   binder.init(this.target, bindings, this.options);
+                   binder = new binder(this.target, bindings, this.options);
 
-                   binder.update(this.target, bindings, this.options);
+                   this.binders.push(binder);
 
-                   if (key == "attr" || key == "event") {
+                   var update = function() {
+                       binder.update();
+                   };
+
+                   update();
+
+                   if (key == "attr" || key == "event" || key == "style") {
                        for (var attribute in binding) {
-                            binding[attribute].bind("change", function(e) {
-                                binder.update(that.target, bindings, that.options);
+                            binding[attribute].bind("change", update);
+                            this.bindings.push({
+                                binding: binding[attribute],
+                                callback: update
                             });
                        }
                    } else {
-                       binding.bind("change", function(e) {
-                           binder.update(that.target, bindings, that.options);
-                       });
+                        binding.bind("change", update);
+                        this.bindings.push({
+                            binding: binding,
+                            callback: update
+                        });
                    }
                 }
            }
@@ -518,8 +585,12 @@
             var idx,
                 length;
 
-            for (idx = 0, length = this.expressions.length; idx < length; idx++) {
-                this.expressions[idx].destroy();
+            for (idx = 0, length = this.bindings.length; idx < length; idx++) {
+                this.bindings[idx].binding.unbind("change", this.bindings[idx].callback);
+            }
+
+            for (idx = 0, length = this.binders.length; idx < length; idx++) {
+                this.binders[idx].destroy();
             }
         }
     });
@@ -1283,7 +1354,7 @@
            keyValuePair = keyValuePairs[idx].split(":");
 
            if (keyValuePair.length === 2) {
-               attributes[$.trim(keyValuePair[0]).toLowerCase()] = $.trim(keyValuePair[1]);
+               attributes[$.trim(keyValuePair[0])] = $.trim(keyValuePair[1]);
            }
         }
     }
@@ -1358,8 +1429,11 @@
             }
 
             if (bind.style) {
+                bindings.style = {
+                };
+
                 for (path in bind.style) {
-                    target.setStyleBinding(path, new Binding(source, bind.style[path]));
+                    bindings.style[path] = new Binding(source, bind.style[path]);
                 }
             }
             if (bind.event) {
@@ -1386,8 +1460,11 @@
                 }
             }
 
-            if (bindings.template && !bindings.source) {
-                bindings["html"] = new Binding(source, "");
+            if (bindings.template) {
+                bindings.template = new TemplateBinding(source, "", options.template);
+            }
+            if (bindings.source) {
+                delete bindings.template;
             }
 
             target.bind(bindings);
