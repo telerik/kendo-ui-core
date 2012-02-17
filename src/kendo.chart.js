@@ -66,6 +66,7 @@
         OBJECT = "object",
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
+        INSIDE = "inside",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
@@ -628,19 +629,80 @@
         }
     });
 
-    var Sector = Class.extend({
-        init: function(c, r, startAngle, angle) {
-            var sector = this;
+    var Ring = Class.extend({
+        init: function(center, innerRadius, radius, startAngle, angle) {
+            var ring = this;
 
-            sector.c = c;
-            sector.r = r;
-            sector.startAngle = startAngle;
-            sector.angle = angle;
+            ring.c = center;
+            ring.ir = innerRadius;
+            ring.r = radius;
+            ring.startAngle = startAngle;
+            ring.angle = angle;
         },
 
         clone: function() {
-            var s = this;
-            return new Sector(s.c, s.r, s.startAngle, s.angle);
+            var r = this;
+            return new Ring(r.c, r.ir, r.r, r.startAngle, r.angle);
+        },
+
+        middle: function() {
+            return this.startAngle + this.angle / 2;
+        },
+
+        radius: function(newRadius, inner) {
+            var that = this;
+
+            if (inner) {
+                that.ir = newRadius;
+            } else {
+                that.r = newRadius;
+            }
+
+            return that;
+        },
+
+        point: function(angle, inner) {
+            var ring = this,
+                radianAngle = angle * DEGREE,
+                ax = math.cos(radianAngle),
+                ay = math.sin(radianAngle),
+                radius = inner ? ring.ir : ring.r,
+                x = ring.c.x - (ax * radius),
+                y = ring.c.y - (ay * radius);
+
+            return new Point2D(x, y);
+        },
+
+        getBBox: function() {
+            var ring = this,
+                sa = ring.startAngle,
+                ea = sa + ring.angle,
+                x1 = MAX_VALUE, x2 = MIN_VALUE, y1 = MAX_VALUE, y2 = MIN_VALUE,
+                point,
+                angles,
+                i;
+
+            function getAnglesInRange(element, index, array) {
+                return (element >= sa && element <= ea);
+            }
+
+            angles = grep([sa, ea, 0, 90, 180, 270], getAnglesInRange);
+
+            for (i = 0; i < angles.length; i++) {
+                point = ring.point(angles[i]);
+                x1 = math.min(x1, point.x);
+                y1 = math.min(y1, point.y);
+                x2 = math.max(x2, point.x);
+                y2 = math.max(y2, point.y);
+            }
+
+            return new Box2D(x1, y1, x2, y2);
+        }
+    });
+
+    var Sector = Ring.extend({
+        init: function(center, radius, startAngle, angle) {
+            Ring.fn.init.call(this, center, 0, radius, startAngle, angle);
         },
 
         expand: function(value) {
@@ -648,24 +710,17 @@
             return this;
         },
 
-        middle: function() {
-            return this.startAngle + this.angle / 2;
+        clone: function() {
+            var sector = this;
+            return new Sector(sector.c, sector.r, sector.startAngle, sector.angle);
         },
 
         radius: function(newRadius) {
-            this.r = newRadius;
-            return this;
+            return Ring.fn.radius.call(this, newRadius);
         },
 
         point: function(angle) {
-            var sector = this,
-                radianAngle = angle * DEGREE,
-                ax = math.cos(radianAngle),
-                ay = math.sin(radianAngle),
-                x = sector.c.x - (ax * sector.r),
-                y = sector.c.y - (ay * sector.r);
-
-            return new Point2D(x, y);
+            return Ring.fn.point.call(this, angle);
         }
     });
 
@@ -5234,7 +5289,7 @@
 
         setup: function() {
             var anim = this,
-                sector = anim.element.circleSector;
+                sector = anim.element.config;
 
             anim.endRadius = sector.r;
             sector.r = 0;
@@ -5243,7 +5298,7 @@
         step: function(pos) {
             var anim = this,
                 endRadius = anim.endRadius,
-                sector = anim.element.circleSector;
+                sector = anim.element.config;
 
             sector.r = interpolateValue(0, endRadius, pos);
         }
@@ -6049,6 +6104,7 @@
         Box2D: Box2D,
         Point2D: Point2D,
         Sector: Sector,
+        Ring: Ring,
         Text: Text,
         BarLabel: BarLabel,
         ChartElement: ChartElement,
@@ -6089,6 +6145,398 @@
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         categoriesCount: categoriesCount
+    });
+
+    // Gauge ===================================================
+
+    var GaugeSegment = ChartElement.extend({
+        init: function(ring, options) {
+            this.ring = ring;
+
+            ChartElement.fn.init.call(this, options);
+        },
+
+        options: {
+            color: "#ff0000",
+            border: {
+                width: 0.5
+            }
+        },
+
+        reflow: function(targetBox) {
+            console.log(1)
+            this.box = targetBox;
+        },
+
+        getViewElements: function(view) {
+            var segment = this,
+                ring = segment.ring,
+                options = segment.options,
+                borderOptions = options.border || {},
+                border = borderOptions.width > 0 ? {
+                    stroke: borderOptions.color,
+                    strokeWidth: borderOptions.width,
+                    dashType: borderOptions.dashType
+                } : {},
+                elements = [],
+                overlay = options.overlay;
+
+            elements.push(view.createRing(ring, deepExtend({
+                id: options.id,
+                fill: options.color,
+                overlay: overlay,
+                fillOpacity: options.opacity,
+                strokeOpacity: options.opacity
+            }, border)));
+
+            append(elements,
+                ChartElement.fn.getViewElements.call(segment, view)
+            );
+
+            return elements;
+        },
+
+        getOutlineElement: function(view, options) {
+            var segment = this,
+                highlight = segment.options.highlight || {},
+                border = highlight.border || {},
+                outlineId = segment.options.id + OUTLINE_SUFFIX,
+                element;
+
+            segment.registerId(outlineId);
+            options = deepExtend({}, options, { id: outlineId });
+
+            if (segment.value !== 0) {
+                element = view.createSector(segment.sector, deepExtend({}, options, {
+                    fill: highlight.color,
+                    fillOpacity: highlight.opacity,
+                    strokeOpacity: border.opacity,
+                    strokeWidth: border.width,
+                    stroke: border.color
+                }));
+            }
+
+            return element;
+        },
+
+        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
+            var w = tooltipWidth / 2,
+                h = tooltipHeight / 2,
+                r = math.sqrt((w * w) + (h * h)),
+                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
+                tooltipCenter = sector.point(sector.middle());
+
+            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
+        },
+
+        formatPointValue: function(format) {
+            var point = this;
+
+            return point.owner.formatPointValue(point.value, format);
+        }
+    });
+
+    var Pointer = ChartElement.extend({
+        init: function (scale, options) {
+            var pointer = this,
+                options;
+
+            ChartElement.fn.init.call(pointer, options);
+
+            options = pointer.options;
+
+            if (!options.id) {
+                options.id = uniqueId();
+            }
+
+            pointer.scale = scale;
+        },
+
+        options: {
+            shape: "needle",
+            fill: "red",
+            value: 0
+        },
+
+        value: function(newValue) {
+            var pointer = this,
+                options = pointer.options,
+                element = doc.getElementById(options.id);
+
+            // initial pointer position is at 90deg
+            pointer.element.rotate(element, pointer.scale.getSlotAngle(newValue) - 90, pointer.box.center());
+        },
+
+        reflow: function(box) {
+            var pointer = this;
+
+            pointer.box = box;
+        },
+
+        _createNeedle: function(view) {
+            var pointer = this,
+                ring = pointer.scale.ring,
+                c = ring.c,
+                r = ring.r,
+                box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
+                halfWidth = box.width() / 2,
+                center = box.center();
+
+            return view.createPolyline([
+                    new Point2D((box.x1 + box.x2) / 2, box.y1),
+                    new Point2D(center.x - 10, center.y + 50),
+                    new Point2D(center.x + 10, center.y + 50)
+                ], true, pointer.options)
+        },
+
+        getViewElements: function(view) {
+            var pointer = this,
+                shape = pointer.options.shape;
+
+            pointer.element = pointer._createNeedle(view);
+
+            return [pointer.element];
+        }
+    });
+
+    var RadialScale = NumericAxis.extend({
+        init: function (options) {
+            var scale = this;
+
+            options = deepExtend({}, scale.options, options);
+
+            NumericAxis.fn.init.call(scale, options.min, options.max, options);
+        },
+
+        options: {
+            min: 0,
+            max: 100,
+
+            majorTickSize: 15,
+            majorTickAlignment: INSIDE,
+
+            minorTickSize: 10,
+            minorTickAlignment: INSIDE,
+
+            startAngle: -30,
+            angle: 240
+        },
+
+        reflow: function(box) {
+            var scale = this,
+                options = scale.options,
+                center = box.center(),
+                radius = math.min(center.x, center.y),
+                ring = new Chart.Ring(
+                    center, radius - options.majorTickSize,
+                    radius, options.startAngle, options.angle
+                );
+
+            scale.ring = ring;
+            scale.box = ring.getBBox();
+        },
+
+        getSlotAngle: function(value) {
+            var options = this.options;
+
+            return value / options.max * options.angle + options.startAngle;
+        },
+
+        renderTicks: function(view) {
+            var scale = this,
+                ticks = [],
+                majorTickRing = scale.ring,
+                minorTickRing = majorTickRing.clone();
+                options = scale.options,
+                tickOptions = { stroke: "#000", strokeWidth: .5 };
+
+            function renderTickRing(ring, unit, skipUnit) {
+                var tickAngles = scale.getTickAngles(ring, unit),
+                    i, innerPoint, outerPoint,
+                    skip = skipUnit / unit,
+                    count = tickAngles.length;
+
+                for (i = 0; i < count; i++) {
+                    if (i % skip == 0) {
+                        continue;
+                    }
+
+                    outerPoint = ring.point(tickAngles[i]);
+                    innerPoint = ring.point(tickAngles[i], true);
+
+                    ticks.push(view.createLine(
+                        innerPoint.x, innerPoint.y,
+                        outerPoint.x, outerPoint.y,
+                        deepExtend(
+                            tickOptions,
+                            { align: false }
+                        )
+                    ));
+                }
+            }
+
+            renderTickRing(majorTickRing, options.majorUnit);
+            minorTickRing.radius(minorTickRing.r - options.minorTickSize, true);
+            renderTickRing(minorTickRing, options.minorUnit, options.majorUnit);
+
+            return ticks;
+        },
+
+        getTickAngles: function(ring, stepValue) {
+            var scale = this,
+                options = scale.options,
+                range = options.max - options.min,
+                angle = ring.angle,
+                tickCount = range / stepValue,
+                step = angle / tickCount,
+                startAngle = ring.startAngle,
+                pos = startAngle,
+                positions = [],
+                i;
+
+            for (i = 0; i < tickCount; i++) {
+                positions.push(round(pos, COORD_PRECISION));
+                pos += step;
+            }
+
+            positions.push(startAngle + angle);
+
+            return positions;
+        },
+
+        getViewElements: function(view) {
+            var scale = this,
+                options = scale.options,
+                isVertical = options.orientation === VERTICAL,
+                childElements = ChartElement.fn.getViewElements.call(scale, view),
+                tickPositions = scale.getMinorTickPositions(),
+                lineOptions;
+
+            append(childElements, scale.renderTicks(view));
+            // append(childElements, scale.renderPlotBands(view));
+
+            return childElements;
+        }
+    });
+
+    var GaugePlotArea = ChartElement.extend({
+        init: function(options) {
+            ChartElement.fn.init.call(this, options);
+
+            this.render();
+        },
+
+        options: {
+            margin: {},
+            background: "",
+            border: {
+                color: BLACK,
+                width: 0
+            }
+        },
+
+        reflow: function(box) {
+            var plotArea = this,
+                scale = plotArea.scale,
+                bBox;
+
+            scale.reflow(box);
+            scale = plotArea.alignScale(scale, box);
+            bBox = scale.ring.getBBox();
+            plotArea.pointer.scale = scale;
+            plotArea.pointer.reflow(box);
+            plotArea.box = bBox;
+        },
+
+        alignScale: function(scale, box) {
+            var scaleCenter = scale.box.center(),
+                boxCenter = box.center(),
+                padding = math.max(boxCenter.x - scaleCenter.x, boxCenter.y - scaleCenter.y);
+
+            scale.ring.c.y += padding;
+            scale.ring.ir += padding;
+            scale.ring.r += padding;
+
+            return scale;
+        },
+
+        render: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                scale;
+
+            scale = plotArea.scale = new RadialScale(options.scale);
+            plotArea.pointer = new Pointer(scale, options.pointer);
+
+            plotArea.append(plotArea.scale);
+            plotArea.append(plotArea.pointer);
+        }
+    });
+
+    var Gauge = Widget.extend({
+        init: function(element, userOptions) {
+            var gauge = this,
+                options,
+                i = 0;
+
+            Widget.fn.init.call(gauge, element);
+            options = deepExtend({}, gauge.options, userOptions);
+
+            gauge.options = deepExtend({}, options);
+
+            $(element).addClass("k-gauge");
+
+            gauge._redraw();
+
+            //gauge._plotArea.pointer.value(0);
+            //setInterval(function() {
+            //    gauge._plotArea.pointer.value((i+=.5) % 100);
+            //}, 10);
+        },
+
+        _redraw: function() {
+            var gauge = this,
+                options = gauge.options,
+                element = gauge.element,
+                model = gauge._model = gauge._getModel(),
+                plotArea = gauge._plotArea = model._plotArea,
+                viewClass = gauge._supportsSVG() ? Chart.SVGView : Chart.VMLView,
+                view = gauge._view = viewClass.fromModel(model);
+
+            element.css("position", "relative");
+            gauge._viewElement = view.renderTo(element[0]);
+        },
+
+        _getModel: function() {
+            var gauge = this,
+                options = gauge.options,
+                element = gauge.element,
+                model = new RootElement(deepExtend({
+                    width: element.width() || DEFAULT_WIDTH,
+                    height: element.height() || DEFAULT_HEIGHT
+                    }, options.gaugeArea)),
+                plotArea;
+
+            plotArea = model._plotArea = new GaugePlotArea(options);
+
+            model.append(plotArea);
+            model.reflow();
+
+            return model;
+        },
+
+        options: {
+            name: "Gauge"
+        },
+
+        _supportsSVG: supportsSVG
+    });
+
+    kendo.ui.plugin(Gauge);
+
+    deepExtend(Gauge, {
+        RadialScale: RadialScale,
+        Pointer: Pointer
     });
 
 })(jQuery);
@@ -6249,6 +6697,12 @@
             );
         },
 
+        createRing: function(ring, options) {
+            return this.decorate(
+                new SVGRing(ring, options)
+            );
+        },
+
         createGradient: function(options) {
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
@@ -6372,6 +6826,11 @@
             strokeOpacity: 1
         },
 
+        rotate: function(domElement, angle, center) {
+            $(domElement).attr("transform", "rotate(" + [angle, center.x, center.y].join(" ") + ")");
+        },
+
+
         refresh: function(domElement) {
             var options = this.options;
 
@@ -6443,31 +6902,81 @@
 
         _print: function(point) {
             var line = this,
-                strokeWidth = line.options.strokeWidth,
-                shouldAlign = strokeWidth && strokeWidth % 2 !== 0,
-                align = shouldAlign ? alignToPixel : math.round;
+                options = line.options,
+                strokeWidth = options.strokeWidth,
+                shouldAlign = options.align !== false && strokeWidth && strokeWidth % 2 !== 0,
+                align = shouldAlign ? alignToPixel : round;
 
-            return align(point.x) + " " + align(point.y);
+            return align(point.x, COORD_PRECISION) + " " + align(point.y, COORD_PRECISION);
         }
     });
 
-    var SVGSector = SVGPath.extend({
-        init: function(circleSector, options) {
+    var SVGRing = SVGPath.extend({
+        init: function(config, options) {
+            var ring = this;
+            SVGPath.fn.init.call(ring, options);
+
+            ring.pathTemplate = SVGRing.pathTemplate;
+            if (!ring.pathTemplate) {
+                ring.pathTemplate = SVGRing.pathTemplate = template(
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
+                    "A#= d.r # #= d.r # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
+                    "L #= d.secondInnerPoint.x # #= d.secondInnerPoint.y # " +
+                    "A#= d.ir # #= d.ir # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
+                    "#= d.firstInnerPoint.x # #= d.firstInnerPoint.y # z"
+                );
+            }
+
+            ring.config = config || {};
+        },
+
+        renderPoints: function() {
+            var ring = this,
+                ringConfig = ring.config,
+                startAngle = ringConfig.startAngle,
+                endAngle = ringConfig.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                isReflexAngle = (endAngle - startAngle) > 180,
+                r = math.max(ringConfig.r, 0),
+                ir = math.max(ringConfig.ir, 0),
+                center = ringConfig.c,
+                firstOuterPoint = ringConfig.point(startAngle),
+                firstInnerPoint = ringConfig.point(startAngle, true),
+                secondOuterPoint = ringConfig.point(endAngle),
+                secondInnerPoint = ringConfig.point(endAngle, true);
+
+            return ring.pathTemplate({
+                firstOuterPoint: firstOuterPoint,
+                secondOuterPoint: secondOuterPoint,
+                isReflexAngle: isReflexAngle,
+                r: r,
+                ir: ir,
+                cx: center.x,
+                cy: center.y,
+                firstInnerPoint: firstInnerPoint,
+                secondInnerPoint: secondInnerPoint
+            });
+        }
+    });
+
+    var SVGSector = SVGRing.extend({
+        init: function(config, options) {
             var sector = this;
-            SVGPath.fn.init.call(sector, options);
+            SVGRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = SVGSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = SVGSector.pathTemplate = template(
-                    "M #= d.firstPoint.x # #= d.firstPoint.y # " +
+                    "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
-                    "#= d.secondPoint.x # #= d.secondPoint.y # " +
+                    "#= d.secondOuterPoint.x # #= d.secondOuterPoint.y # " +
                     "L #= d.cx # #= d.cy # z"
                 );
             }
-
-            sector.circleSector = circleSector || {};
         },
 
         options: {
@@ -6480,32 +6989,9 @@
         clone: function() {
             var sector = this;
             return new SVGSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                circleSector = sector.circleSector,
-                startAngle = circleSector.startAngle,
-                endAngle = circleSector.angle + startAngle,
-                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
-                isReflexAngle = (endAngle - startAngle) > 180,
-                r = math.max(circleSector.r, 0),
-                cx = circleSector.c.x,
-                cy = circleSector.c.y,
-                firstPoint = circleSector.point(startAngle),
-                secondPoint = circleSector.point(endAngle);
-
-            return sector.pathTemplate({
-                firstPoint: firstPoint,
-                secondPoint: secondPoint,
-                isReflexAngle: isReflexAngle,
-                r: r,
-                cx: cx,
-                cy: cy
-            });
         }
     });
 
@@ -6822,6 +7308,7 @@
         SVGPath: SVGPath,
         SVGLine: SVGLine,
         SVGSector: SVGSector,
+        SVGRing: SVGRing,
         SVGCircle: SVGCircle,
         SVGGroup: SVGGroup,
         SVGClipPath: SVGClipPath,
@@ -6969,6 +7456,12 @@
         createSector: function(sector, options) {
             return this.decorate(
                 new VMLSector(sector, options)
+            );
+        },
+
+        createRing: function(ring, options) {
+            return this.decorate(
+                new VMLRing(ring, options)
             );
         },
 
@@ -7155,11 +7648,20 @@
             // Overriden by inheritors
         },
 
+        rotate: function(domElement, angle, center) {
+            var parentNode = domElement.parentNode;
+
+            if (parentNode) {
+                domElement.rotation = angle;
+                // TODO: Adjust left/top to match the center after rotation
+            }
+        },
+
         refresh: function(domElement) {
             var path = this,
                 options = path.options,
                 element = $(domElement),
-                parentNode = element[0].parentNode;
+                parentNode = domElement.parentNode;
 
             if (parentNode) {
                 element.find("path")[0].v = this.renderPoints();
@@ -7224,40 +7726,103 @@
         }
     });
 
-    var VMLSector = VMLPath.extend({
-        init: function(circleSector, options) {
+    var VMLRing = VMLPath.extend({
+        init: function(config, options) {
+            var ring = this;
+            VMLPath.fn.init.call(ring, options);
+
+            ring.pathTemplate = VMLRing.pathTemplate;
+            if (!ring.pathTemplate) {
+                ring.pathTemplate = VMLRing.pathTemplate = template(
+                   "M #= d.osp.x #,#= d.osp.y # " +
+                   "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
+                      "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
+                   "L #= d.iep.x #,#= d.iep.y # " +
+                   "AT #= d.ibb.l #,#= d.ibb.t # #= d.ibb.r #,#= d.ibb.b # " +
+                      "#= d.iep.x #,#= d.iep.y # #= d.isp.x #,#= d.isp.y # " +
+                   "X E"
+                );
+            }
+
+            ring.config = config;
+        },
+
+        renderPoints: function() {
+            var ring = this,
+                config = ring.config,
+                r = math.max(round(config.r), 0),
+                ir = math.max(round(config.ir), 0),
+                cx = round(config.c.x),
+                cy = round(config.c.y),
+                startAngle = config.startAngle,
+                endAngle = config.angle + startAngle,
+                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                // outer bounding box
+                obb = {
+                    l: cx - r,
+                    t: cy - r,
+                    r: cx + r,
+                    b: cy + r
+                },
+                // inner bounding box
+                ibb = {
+                    l: cx - ir,
+                    t: cy - ir,
+                    r: cx + ir,
+                    b: cy + ir
+                },
+                // outer/inner start/end points
+                osp = roundPointCoordinates(config.point(startAngle)),
+                oep = roundPointCoordinates(config.point(endAngle)),
+                isp = roundPointCoordinates(config.point(startAngle, true)),
+                iep = roundPointCoordinates(config.point(endAngle, true));
+
+            function roundPointCoordinates(point) {
+                return new Point2D(round(point.x), round(point.y));
+            }
+
+            return ring.pathTemplate({
+                obb: obb,
+                ibb: ibb,
+                osp: osp,
+                isp: isp,
+                oep: oep,
+                iep: iep,
+                cx: cx,
+                cy: cy
+            });
+        },
+
+        clone: function() {
             var sector = this;
-            VMLPath.fn.init.call(sector, options);
+            return new VMLRing(
+                deepExtend({}, sector.config),
+                deepExtend({}, sector.options)
+            );
+        }
+    });
+
+    var VMLSector = VMLRing.extend({
+        init: function(config, options) {
+            var sector = this;
+            VMLRing.fn.init.call(sector, config, options);
 
             sector.pathTemplate = VMLSector.pathTemplate;
             if (!sector.pathTemplate) {
                 sector.pathTemplate = VMLSector.pathTemplate = template(
-                   "M #= d.cx # #= d.cy # " +
-                   "AE #= d.cx # #= d.cy # " +
-                   "#= d.r # #= d.r # " +
-                   "#= d.sa # #= d.a # X E"
+                   "M #= d.osp.x #,#= d.osp.y # " +
+                   "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
+                      "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
+                   "L #= d.cx #,#= d.cy # " +
+                   "X E"
                 );
             }
-
-            sector.circleSector = circleSector;
-        },
-
-        renderPoints: function() {
-            var sector = this,
-                circleSector = sector.circleSector,
-                r = math.max(round(circleSector.r), 0),
-                cx = round(circleSector.c.x),
-                cy = round(circleSector.c.y),
-                sa = -round((circleSector.startAngle + 180) * 65535),
-                a = -round(circleSector.angle * 65536);
-
-            return sector.pathTemplate({ r: r, cx: cx, cy: cy, sa: sa, a: a });
         },
 
         clone: function() {
             var sector = this;
             return new VMLSector(
-                deepExtend({}, sector.circleSector),
+                deepExtend({}, sector.config),
                 deepExtend({}, sector.options)
             );
         }
@@ -7535,6 +8100,7 @@
         VMLPath: VMLPath,
         VMLLine: VMLLine,
         VMLSector: VMLSector,
+        VMLRing: VMLRing,
         VMLCircle: VMLCircle,
         VMLGroup: VMLGroup,
         VMLClipRect: VMLClipRect,

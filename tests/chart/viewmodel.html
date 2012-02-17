@@ -1323,6 +1323,53 @@
                 });
 
             })();
+
+            (function() {
+                var ring,
+                    ringBox;
+
+                function createRing(startAngle, angle) {
+                    ring = new Chart.Ring(
+                        new Chart.Point2D(100, 100), 0, 100,
+                        startAngle, angle - startAngle);
+                    var box = ring.getBBox();
+                    ringBox = [box.x1, box.y1, box.x2, box.y2]
+                }
+
+                // ------------------------------------------------------------
+                module("Ring");
+
+                test("get box with startAngle 10 and endAngle 190", function() {
+                    createRing(10, 190);
+                    same(ringBox, [1.519, 0, 200, 117.365]);
+                });
+
+                test("get box with startAngle 10 and endAngle 30", function() {
+                    createRing(10, 30);
+                    same(ringBox, [1.519, 50, 13.397, 82.635]);
+                });
+
+                test("get box with startAngle 0 and endAngle 90", function() {
+                    createRing(0, 90);
+                    same(ringBox, [0, 0, 100, 100]);
+                });
+
+                test("get box with startAngle 30 and endAngle 170", function() {
+                    createRing(30, 170);
+                    same(ringBox, [13.397, 0, 198.481, 82.635]);
+                });
+
+                test("get box with startAngle 0 and endAngle 360", function() {
+                    createRing(0, 360);
+                    same(ringBox, [0, 0, 200, 200]);
+                });
+
+                test("get box with startAngle 0 and endAngle 280", function() {
+                    createRing(0, 280);
+                    same(ringBox, [0, 0, 200, 200]);
+                });
+
+            })();
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

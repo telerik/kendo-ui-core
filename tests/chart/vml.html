@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UI5.Chart Tests - VML</title>
+        <title>VML tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -191,6 +191,29 @@
                     var sector = view.createSector({}, { strokeWidth: 2});
 
                     equals(sector.options.strokeWidth, 2);
+                });
+
+                test("createRing returns VMLRing", function() {
+                    var ring = view.createRing();
+                    ok(ring instanceof Chart.VMLRing);
+                });
+
+                test("createRing sets fill color", function() {
+                    var ring = view.createRing({}, { fill: "#cf0" });
+
+                    equals(ring.options.fill, "#cf0");
+                });
+
+                test("createRing sets stroke color", function() {
+                    var ring = view.createRing({}, { stroke: "#cf0" });
+
+                    equals(ring.options.stroke, "#cf0");
+                });
+
+                test("createRing sets stroke width", function() {
+                    var ring = view.createRing({}, { strokeWidth: 2});
+
+                    equals(ring.options.strokeWidth, 2);
                 });
 
                 test("renderTo returns DOM element", function() {
@@ -897,6 +920,29 @@
             })();
 
             (function() {
+                var ring;
+
+                module("VMLRing", {
+                    setup: function() {
+                        var ringConfig = new Chart.Ring(new Point2D(135, 135), 100, 130, -30, 240);
+                        ring = new Chart.VMLRing(ringConfig);
+                    }
+                });
+
+                test("renders outer arc", function() {
+                    ok(ring.render().indexOf("WA 5,5 265,265 22,200 248,200") > -1);
+                });
+
+                test("renders line", function() {
+                    ok(ring.render().indexOf("L 222,185") > -1);
+                });
+
+                test("renders inner arc", function() {
+                    ok(ring.render().indexOf("AT 35,35 235,235 222,185 48,185") > -1);
+                });
+            })();
+
+            (function() {
                 var sector;
 
                 function createSector(options) {
@@ -917,10 +963,6 @@
                     ok(sector.render().match(
                         /\<kvml:shape.*\>.*\<\/kvml:shape\>/
                     ));
-                });
-
-                test("renders path", function() {
-                    ok(sector.render().indexOf("<kvml:path v='M 150 150 AE 150 150 135 135 -17694450 -1310720 X E' />"));
                 });
 
                 test("creates fill", function() {
