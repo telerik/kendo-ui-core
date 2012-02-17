@@ -159,6 +159,7 @@
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
+                groupNameTemplate: "#= group.value #: #= series.name #",
                 bar: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
@@ -404,6 +405,7 @@
                 series = options.series,
                 categoryAxis = options.categoryAxis,
                 data = chart.dataSource.view(),
+                grouped = (chart.dataSource.group() || []).length > 0,
                 row,
                 category,
                 currentSeries,
@@ -417,9 +419,70 @@
                 }
             }
 
-            for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
-                row = data[dataIdx];
+            if (grouped) {
+                // Bind categories from first group
+                // Bind series from first group
+                // Clone bound series for each additional group
+                // Bind cloned series
+                for (var groupIx = 0, groupsLength = data.length; groupIx < groupsLength; groupIx++) {
+                    var group = data[groupIx],
+                        items = group.items,
+                        groupSeries,
+                        groupNameTemplate;
 
+                    if (groupIx === 0) {
+                        groupSeries = series;
+
+                        for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                            var source = series[seriesIx];
+                            source.dataGroup = group;
+                        }
+                    } else {
+                        groupSeries = [];
+                        for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                            var source = series[seriesIx];
+                            if (source.field || (currentSeries.xField && currentSeries.yField)) {
+                                var seriesCopy = deepExtend({}, source);
+                                seriesCopy.dataGroup = group;
+                                groupSeries.push(seriesCopy);
+                            }
+                        }
+
+                        [].push.apply(series, groupSeries);
+                    }
+
+                    for (var dataIdx = 0, dataLength = items.length; dataIdx < dataLength; dataIdx++) {
+                        var row = items[dataIdx];
+
+                        if (groupIx === 0) {
+                            bindCategories(row);
+                        }
+
+                        bindSeries(groupSeries, row);
+                    }
+                }
+                for (var seriesIx = 0; seriesIx < series.length; seriesIx++) {
+                    var source = series[seriesIx];
+                    if (source.field || (currentSeries.xField && currentSeries.yField)) {
+                        if (source.groupNameTemplate) {
+                            groupNameTemplate = baseTemplate(source.groupNameTemplate);
+                            source.name = groupNameTemplate({ series: source, group: source.dataGroup });
+                        }
+                    }
+                }
+            } else {
+                for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
+                    row = data[dataIdx];
+
+                    bindCategories(row);
+                    bindSeries(series, row);
+                }
+            }
+
+            chart.trigger(DATABOUND);
+            chart._redraw();
+
+            function bindCategories(row) {
                 if (categoryAxis.field) {
                     category = getField(categoryAxis.field, row);
                     if (dataIdx === 0) {
@@ -428,7 +491,9 @@
                         categoryAxis.categories.push(category);
                     }
                 }
+            }
 
+            function bindSeries(series, row) {
                 for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
                     currentSeries = series[seriesIdx];
 
@@ -452,9 +517,6 @@
                     }
                 }
             }
-
-            chart.trigger(DATABOUND);
-            chart._redraw();
         }
     });
 
