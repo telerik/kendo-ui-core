@@ -6319,7 +6319,7 @@
             minorTickAlignment: INSIDE,
 
             startAngle: -30,
-            angle: 240
+            endAngle: 240
         },
 
         reflow: function(box) {
@@ -6329,7 +6329,7 @@
                 radius = math.min(center.x, center.y),
                 ring = new Chart.Ring(
                     center, radius - options.majorTickSize,
-                    radius, options.startAngle, options.angle
+                    radius, options.startAngle, options.endAngle - options.startAngle
                 );
 
             scale.ring = ring;
@@ -6337,9 +6337,11 @@
         },
 
         getSlotAngle: function(value) {
-            var options = this.options;
+            var options = this.options,
+                startAngle = options.startAngle,
+                angle = options.endAngle - startAngle;
 
-            return value / options.max * options.angle + options.startAngle;
+            return (value / options.max * angle) + startAngle;
         },
 
         renderTicks: function(view) {
