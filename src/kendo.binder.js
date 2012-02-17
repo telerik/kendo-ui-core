@@ -81,7 +81,6 @@
             }
             this.stop();
 
-            console.log(this.dependencies);
             return result;
         },
 
@@ -329,8 +328,37 @@
         select: {
             value: {
                 init: function(element, bindings, options) {
-                },
+                    $(element).bind("change", function() {
+                        var values = [],
+                            source = bindings.source.get(),
+                            field = options.valueField || options.textField,
+                            idx,
+                            length;
 
+                        for (idx = 0, length = element.options.length; idx < length; idx++) {
+                            if (element.options[idx].selected) {
+                                values.push(element.options[idx].value || element.options[idx].text);
+                            }
+                        }
+                        if (field) {
+                            for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
+                                for (idx = 0, length = source.length; idx < length; idx++) {
+                                    if (source[idx].get(field) == values[valueIndex]) {
+                                        values[valueIndex] = source[idx];
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        var value = bindings.value.get();
+                        if (value instanceof ObservableArray) {
+                            value.splice.apply(value, [0, value.length].concat(values));
+                        } else {
+                            bindings.value.set(values[0]);
+                        }
+                    });
+                },
                 update: function(element, bindings, options) {
                     var optionIndex,
                         value = bindings["value"].get(),
