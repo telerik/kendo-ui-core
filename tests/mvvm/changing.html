@@ -50,6 +50,8 @@
 
                 kendo.bind(dom, viewModel);
 
+                equal(dom.find("span").text(), "foo");
+
                 dom.find("button").trigger("click");
 
                 equal(dom.find("span").text(), "baz");

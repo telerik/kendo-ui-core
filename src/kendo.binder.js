@@ -98,6 +98,13 @@
         }
     });
 
+    var EventBinding = Binding.extend( {
+        get: function() {
+            return $.proxy(this.source.get(this.path), this.source);
+
+        }
+    });
+
     var TemplateBinding = Binding.extend( {
         init: function(source, path, template) {
             var that = this;
@@ -940,22 +947,19 @@
             for (path in bind) {
                 sourcePath = bind[path];
 
-                if (sourcePath) {
-                    if (path == "source") {
-                       deep = false;
-                    } else if (path == "template") {
-                        sourcePath = "";
-                    }
-
-                    bindings[path] = new Binding(source, sourcePath);
-                }
+                bindings[path] = new Binding(source, sourcePath);
             }
 
             if (bindings.template) {
                 bindings.template = new TemplateBinding(source, "", options.template);
             }
 
+            if (bindings.click) {
+                bindings.click = new EventBinding(source, bind.click);
+            }
+
             if (bindings.source) {
+                deep = false;
                 delete bindings.template;
             }
 
@@ -980,7 +984,7 @@
                 bindings.event = {
                 };
                 for (path in bind.event) {
-                    bindings.event[path] = new Binding(source, bind.event[path]);
+                    bindings.event[path] = new EventBinding(source, bind.event[path]);
                 }
             }
 
