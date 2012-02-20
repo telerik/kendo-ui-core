@@ -365,6 +365,13 @@
                     });
                 });
 
+                asyncTest("sets cloned series color to next in palette", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series[1].color, "#a0a700");
+                        start();
+                    });
+                });
+
                 asyncTest("sets cloned series name to groupNameTemplate", 1, function() {
                     createGroupedChart(function() {
                         equals(this.options.series[1].name, "Sales for product Bar");
