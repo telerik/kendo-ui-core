@@ -159,6 +159,7 @@
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
+                groupNameTemplate: "#= group.value #: #= series.name #",
                 bar: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
@@ -402,35 +403,95 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
-                categoryAxis = options.categoryAxis,
+                seriesIx,
+                seriesLength = series.length,
                 data = chart.dataSource.view(),
-                row,
-                category,
-                currentSeries,
-                value;
+                grouped = (chart.dataSource.group() || []).length > 0,
+                groupSeries = [],
+                currentSeries;
 
-            for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                currentSeries = series[seriesIdx];
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = [];
-                    currentSeries.dataItems = [];
+                    currentSeries.dataItems = data;
+
+                    if (grouped) {
+                        [].push.apply(groupSeries,
+                            chart._createGroupedSeries(currentSeries, data)
+                        );
+                    }
                 }
             }
 
-            for (var dataIdx = 0, dataLength = data.length; dataIdx < dataLength; dataIdx++) {
-                row = data[dataIdx];
+            [].push.apply(series, groupSeries);
+            applySeriesColors(chart.options);
 
-                if (categoryAxis.field) {
-                    category = getField(categoryAxis.field, row);
-                    if (dataIdx === 0) {
-                        categoryAxis.categories = [category];
-                    } else {
-                        categoryAxis.categories.push(category);
-                    }
+            chart._bindSeries();
+            chart._bindCategories(grouped ? data[0].items : data);
+
+            chart.trigger(DATABOUND);
+            chart._redraw();
+        },
+
+        _createGroupedSeries: function(series, data) {
+            var groupSeries = [],
+                nameTemplate,
+                group,
+                groupIx,
+                dataLength = data.length,
+                firstGroup = data[0],
+                seriesClone;
+
+            if (series.groupNameTemplate) {
+                nameTemplate = baseTemplate(series.groupNameTemplate);
+            }
+
+            for (groupIx = 1; groupIx < dataLength; groupIx++) {
+                seriesClone = deepExtend({}, series);
+                seriesClone.color = undefined;
+                groupSeries.push(seriesClone);
+
+                group = data[groupIx];
+                seriesClone.dataItems = group.items;
+
+                if (nameTemplate) {
+                    seriesClone.name = nameTemplate({
+                        series: seriesClone, group: group
+                    });
                 }
+            }
 
-                for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                    currentSeries = series[seriesIdx];
+            series.dataItems = firstGroup.items;
+            if (nameTemplate) {
+                series.name = nameTemplate({
+                    series: series, group: firstGroup
+                });
+            }
+
+            return groupSeries;
+        },
+
+        _bindSeries: function() {
+            var chart = this,
+                series = chart.options.series,
+                seriesLength = series.length,
+                seriesIx,
+                currentSeries,
+                data,
+                dataIx,
+                dataLength,
+                row,
+                value;
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+                data = currentSeries.dataItems || [];
+                dataLength = data.length;
+
+                for (dataIx = 0; dataIx < dataLength; dataIx++) {
+                    row = data[dataIx];
 
                     if (currentSeries.field) {
                         value = getField(currentSeries.field, row);
@@ -442,7 +503,7 @@
                     }
 
                     if (defined(value)) {
-                        if (dataIdx === 0) {
+                        if (dataIx === 0) {
                             currentSeries.data = [value];
                             currentSeries.dataItems = [row];
                         } else {
@@ -452,9 +513,24 @@
                     }
                 }
             }
+        },
 
-            chart.trigger(DATABOUND);
-            chart._redraw();
+        _bindCategories: function(categoriesData) {
+            var categoryAxis = this.options.categoryAxis,
+                i,
+                category,
+                length = categoriesData.length;
+
+            if (categoryAxis.field) {
+                for (i = 0; i < length; i++) {
+                    category = getField(categoryAxis.field, categoriesData[i]);
+                    if (i === 0) {
+                        categoryAxis.categories = [category];
+                    } else {
+                        categoryAxis.categories.push(category);
+                    }
+                }
+            }
         }
     });
 
