@@ -1,0 +1,60 @@
+<div data-role="view" id="flat" data-init="mobileListViewPullToRefresh" data-title="Pull to refresh">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <ul id="pull-to-refresh-listview"></ul>
+</div>
+
+<style>
+    .km-listview-pull-to-refresh {
+        position: absolute;
+        line-height: 40px;
+        -webkit-transform:translatey(-40px);
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+</style>
+
+<script id="pull-to-refresh-template" type="text/x-kendo-template">
+    <div class="tweet k-header">
+        <img width="48" height="48" src="#= profile_image_url #" alt="#= from_user #" />
+        #= text #
+        <div class="metadata">
+            <a class="k-link" href="http://twitter.com/#= from_user #" rel="nofollow">#= from_user #</a>
+            |
+            #= kendo.toString(new Date(Date.parse(created_at)), "dd MMM HH:mm") #
+        </div>
+    </div>
+</script>
+
+<script>
+    function mobileListViewPullToRefresh() {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "http://search.twitter.com/search.json", // the remove service url
+                        dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
+                        data: { //additional parameters sent to the remote service
+                            q: "javascript"
+                        }
+                    }
+                },
+
+                schema: { // describe the result format
+                    data: "results" // the data which the data source will be bound to is in the "results" field
+                }
+            });
+
+        $("#pull-to-refresh-listview").kendoMobileListView({
+            dataSource: dataSource,
+            pullToRefresh: true,
+            appendOnRefresh: true,
+            template: $("#pull-to-refresh-template").text()
+        });
+    }
+</script>
