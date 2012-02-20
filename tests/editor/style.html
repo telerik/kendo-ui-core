@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kendo.ui.Editor Tests</title>
+
+<script src="../../src/jquery.js"></script>
+<script src="../qunit/qunit/qunit.js"></script>
+<script src="../qunit-runner.js"></script>
+<script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.editor.js"></script>
+<script src="util.js"></script>
+
+<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+<style> html { font-size: 12px; } </style>
+</head>
+<body>
+
+<script>
+
+var StyleCommand;
+
+$("#Editor1").kendoEditor({
+    tools: [
+        {"styles" : {
+            "Foo": "foo"
+        }}
+    ],
+    stylesheets: [
+        "styles.css"
+    ]
+});
+
+QUnit.testStart = function() {
+    editor = getEditor();
+    $('#Editor1 .k-style .k-input').click();
+    StyleCommand = kendo.ui.Editor.StyleCommand;
+}
+
+test('exec applies css class to inline element', function() {
+    var range = createRangeFromText(editor, '<span>|foo|</span>');
+    editor.selectRange(range);
+    editor.exec('style', {value:'bar'});
+    equal(editor.value(), '<span class="bar">foo</span>');
+});
+
+test('styles applied to list item', function() {
+    var span = $('.k-animation-container .k-item span')[0];
+        
+    if (!span) return; //does not currently work in IE!
+
+    equal($.telerik.editor.Dom.toHex(span.style.color), '#a0b0c0');
+        
+    equal(span.style.paddingLeft, "42px");
+    equal(span.style.paddingRight, "42px");
+    equal(span.style.paddingTop, "42px");
+    equal(span.style.paddingBottom, "42px");
+        
+    equal($.telerik.editor.Dom.toHex(span.style.backgroundColor), '#f1f1f1');
+    equal(span.style.backgroundAttachment, "fixed");
+    equal(span.style.backgroundImage, "none");
+    equal(span.style.backgroundRepeat, "no-repeat");
+
+    equal(span.style.borderTopStyle, "solid");
+    equal(span.style.borderTopWidth, "1px");
+    equal($.telerik.editor.Dom.toHex(span.style.borderTopColor), "#a0b0c0");
+        
+    equal(span.style.borderRightStyle, "solid");
+    equal(span.style.borderRightWidth, "1px");
+    equal($.telerik.editor.Dom.toHex(span.style.borderRightColor), "#a0b0c0");
+        
+    equal(span.style.borderLeftStyle, "solid");
+    equal(span.style.borderLeftWidth, "1px");
+    equal($.telerik.editor.Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
+        
+    equal(span.style.borderLeftStyle, "solid");
+    equal(span.style.borderLeftWidth, "1px");
+    equal($.telerik.editor.Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
+
+    equal(span.style.fontFamily, "Arial");
+    equal($.telerik.editor.Dom.toHex(span.style.fontSize), "42px");
+    equal(span.style.fontStyle, "italic");
+    equal(span.style.fontVariant, "small-caps");
+    equal(span.style.fontWeight, "800");
+    equal(span.style.lineHeight, "69px");
+});
+
+test('tool displays styles initially', function() {
+    editor.focus();
+    editor.value('');
+    $(editor.element).trigger('selectionChange');
+    equal($('.k-style .k-input').text(), 'Styles')
+});
+    
+test('tool displays known values', function() {
+    editor.focus();
+    var range = createRangeFromText(editor, '<span class="foo">|foo|</span>');
+    editor.selectRange(range);
+    $(editor.element).trigger('selectionChange');
+    equal($('.k-style .k-input').text(), 'Foo')
+});
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+</body>
+</html>

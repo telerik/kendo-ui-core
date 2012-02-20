@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kendo.ui.Editor Tests</title>
+
+<script src="../../src/jquery.js"></script>
+<script src="../qunit/qunit/qunit.js"></script>
+<script src="../qunit-runner.js"></script>
+<script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.editor.js"></script>
+<script src="util.js"></script>
+
+<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+<style> html { font-size: 12px; } </style>
+</head>
+<body>
+
+<script>
+
+var GreedyInlineFormatFinder,
+    enumerator;
+
+$("#Editor1").kendoEditor();
+
+QUnit.testStart = function() {
+    editor = getEditor();
+    GreedyInlineFormatFinder = kendo.ui.Editor.GreedyInlineFormatFinder;
+}
+test('getFormat returns inherit when called on unformatted node', function() {
+    editor.value('foo');
+
+    var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
+    equal(finder.getFormat([editor.body.firstChild]), 'inherit');
+});
+
+test('getFormat returns correct font when in format node', function() {
+    editor.value('foo<span style="font-family:Courier, monospace;">bar</span>baz');
+
+    var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
+
+    var span = editor.body.childNodes[1];
+    equal(finder.getFormat([span.firstChild]).replace(/\s+/g, ''), $(span).css('font-family').replace(/\s+/g, ''));
+});
+
+test('getFormat returns correct font when deep in format node', function() {
+    editor.value('foo<span style="font-family:Courier, monospace;"><del>bar</del></span>baz');
+
+    var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
+
+    var span = editor.body.childNodes[1];
+    equal(finder.getFormat([span.firstChild.firstChild]).replace(/\s+/g, ''), $(span).css('font-family').replace(/\s+/g, ''));
+});
+
+test('getFormat returns empty string when different fonts are encountered', function() {
+    editor.value('<span style="font-family:Verdana,sans-serif;">foo</span><span style="font-family:Courier,monospace;">bar</span>');
+
+    var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-family');
+
+    equal(finder.getFormat([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]), '');
+});
+
+test('getFormat returns relative font sizes when they are set', function() {
+    editor.value('<span style="font-size:x-large;">foo</span>');
+
+    var finder = new GreedyInlineFormatFinder([{ tags: ['span'] }], 'font-size');
+
+    equal(finder.getFormat([editor.body.firstChild.firstChild]), 'x-large');
+});
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+</body>
+</html>
