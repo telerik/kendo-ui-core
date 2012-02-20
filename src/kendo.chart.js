@@ -403,12 +403,10 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
-                categoryAxis = options.categoryAxis,
                 data = chart.dataSource.view(),
                 groups = chart.dataSource.group() || [],
                 grouped = groups.length > 0,
                 row,
-                category,
                 currentSeries,
                 value;
 
@@ -480,22 +478,28 @@
                 }
             }
 
-            var categoriesData = grouped ? data[0].items : data;
-            for (var dataIdx = 0, dataLength = categoriesData.length; dataIdx < dataLength; dataIdx++) {
-                row = categoriesData[dataIdx];
+            chart._bindCategories(grouped ? data[0].items : data);
 
-                if (categoryAxis.field) {
-                    category = getField(categoryAxis.field, row);
-                    if (dataIdx === 0) {
+            chart.trigger(DATABOUND);
+            chart._redraw();
+        },
+
+        _bindCategories: function(categoriesData) {
+            var categoryAxis = this.options.categoryAxis,
+                i,
+                category,
+                length = categoriesData.length;
+
+            if (categoryAxis.field) {
+                for (i = 0; i < length; i++) {
+                    category = getField(categoryAxis.field, categoriesData[i]);
+                    if (i === 0) {
                         categoryAxis.categories = [category];
                     } else {
                         categoryAxis.categories.push(category);
                     }
                 }
             }
-
-            chart.trigger(DATABOUND);
-            chart._redraw();
         }
     });
 
