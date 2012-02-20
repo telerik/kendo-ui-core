@@ -491,6 +491,8 @@
                  */
                 SELECT
             ], that.options);
+
+            kendo.notify(that);
         },
         options: {
             name: "Menu",
