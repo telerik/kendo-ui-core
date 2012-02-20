@@ -50,6 +50,25 @@
     padding: .6rem 3rem;
 }
 
+.km-blackberry .km-back:before
+{
+    width: .4rem;
+    height: .4rem;
+    content: "\a0";
+    display: inline-block;
+    vertical-align: middle;
+    margin: ~"-.35rem .3rem 0 0";
+    border: 0 solid #000;
+    border-width: .24rem 0 0 .24rem;
+    .transform(rotate(-45deg));
+}
+
+.km-blackberry .km-back:active:before,
+.km-blackberry .km-back.km-state-active:before
+{
+    border-color: #fff;
+}
+
 .km-blackberry .km-buttongroup
 {
     font-size: 1em;
