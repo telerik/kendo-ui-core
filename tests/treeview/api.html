@@ -417,6 +417,46 @@
                 ok(treeview.find("> .k-group").length);
                 ok(!treeview.hasClass("k-item"));
             });
+
+            test("expand() with selector string", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    calls = 0,
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.toggle = function() {
+                    calls++;
+                };
+
+                treeviewObject.expand(".k-item");
+
+                equal(calls, 1);
+            });
+
+            test("expand() with DOM elements", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    calls = 0,
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.toggle = function() {
+                    calls++;
+                };
+
+                treeviewObject.expand($(".k-item:first")[0]);
+
+                equal(calls, 1);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>
