@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kendo.ui.Editor Tests</title>
+
+<script src="../../src/jquery.js"></script>
+<script src="../qunit/qunit/qunit.js"></script>
+<script src="../qunit-runner.js"></script>
+<script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.editor.js"></script>
+<script src="util.js"></script>
+
+<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+<style> html { font-size: 12px; } </style>
+</head>
+<body>
+
+<script>
+
+var ListFormatFinder;
+
+$("#Editor1").kendoEditor();        
+
+module("Editor / ListFormatFinder", {
+    setup: function() {
+        editor = getEditor();
+        ListFormatFinder = kendo.ui.Editor.ListFormatFinder;
+    }
+});
+
+test('isFormatted returns false for text node', function() {
+    editor.value('test');
+    var finder = new ListFormatFinder('ul');
+    ok(!finder.isFormatted([editor.body.firstChild]));
+});
+
+test('isFormatted returns false for mixed selection node', function () {
+    editor.value('<ul><li>foo</li></ul><p>bar</p>');
+    var finder = new ListFormatFinder('ul');
+    ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild]));
+});
+
+test('isFormatted returns true for list', function() {
+    editor.value('<ul><li>foo</li></ul>');
+    var finder = new ListFormatFinder('ul');
+    ok(finder.isFormatted([editor.body.firstChild.firstChild.firstChild]));
+});
+
+test('isFormatted returns true for list items from the same list', function() {
+    editor.value('<ul><li>foo</li><li>bar</li></ul>');
+    var finder = new ListFormatFinder('ul');
+    ok(finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.firstChild.lastChild.firstChild]));
+});
+
+test('isFormatted returns false for two lists', function() {
+    editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>');
+    var finder = new ListFormatFinder('ul');
+    ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]));
+});
+
+test('findSuitable returns ul', function() {
+    editor.value('<ul><li>foo</li></ul>bar');
+    var finder = new ListFormatFinder('ul');
+    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild]), editor.body.firstChild);
+});
+        
+test('findSuitable returns first ul for adjacent lists', function() {
+    editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>');
+    var finder = new ListFormatFinder('ul');
+    equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]), editor.body.firstChild);
+});
+
+test('findSuitable returns null when ul is not fist sibling', function() {
+    editor.value('<ol><li>foo</li></ol><ul><li>bar</li></ul>');
+    var finder = new ListFormatFinder('ul');
+    ok(null === finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]));
+});
+
+test('isFormatted returns false in mixed list scenario', function() {
+    editor.value('<ol><li>foo<ul><li>bar</li></ul></li></ol>');
+    var finder = new ListFormatFinder('ol');
+    ok(!finder.isFormatted([$(editor.body).find('ul li')[0].firstChild]));
+});
+
+test('findSuitable returns null when ul is nested in ol', function() {
+    editor.value('<ol><li>foo<ul><li>bar</li></ul></li></ol>');
+    var finder = new ListFormatFinder('ol');
+    ok(null === finder.findSuitable([$(editor.body).find('ul li')[0].firstChild]));
+});
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+</body>
+</html>

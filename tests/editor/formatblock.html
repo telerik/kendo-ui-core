@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kendo.ui.Editor Tests</title>
+
+<script src="../../src/jquery.js"></script>
+<script src="../qunit/qunit/qunit.js"></script>
+<script src="../qunit-runner.js"></script>
+<script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.editor.js"></script>
+<script src="util.js"></script>
+
+<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+<style> html { font-size: 12px; } </style>
+</head>
+<body>
+
+<script>
+
+$("#Editor1").kendoEditor();
+
+QUnit.testStart = function() {
+    editor = getEditor();
+}
+
+test('tool should display format initially', function() {
+    editor.value('');
+    editor.focus();
+    $(editor.element).trigger('selectionChange');
+    equal($('.k-formatBlock .k-input').text(), 'Format')
+});
+
+test('tool displays known values', function() {
+    var range = createRangeFromText(editor, '<p>|foo|</p>');
+    editor.selectRange(range);
+    $(editor.element).trigger('selectionChange');
+    equal($('.k-formatBlock .k-input').text(), 'Paragraph')
+});
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+</body>
+</html>

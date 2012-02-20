@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>kendo.ui.Editor Tests</title>
+
+<script src="../../src/jquery.js"></script>
+<script src="../qunit/qunit/qunit.js"></script>
+<script src="../qunit-runner.js"></script>
+<script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.editor.js"></script>
+<script src="util.js"></script>
+
+<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+<style> html { font-size: 12px; } </style>
+</head>
+<body>
+
+<script>
+
+$("#Editor1").kendoEditor({
+    value: "foo",
+    selectionChange: onSelectionChange,
+    change: onChange,
+    execute: onExecute
+});
+
+function onSelectionChange() {
+    onSelectionChangeRaised = true;
+}
+
+function onChange() {
+    onChangeRaised = true;
+}
+
+function onExecute() {
+    onExecuteRaised = true;
+}
+
+var changeRaised = false,
+    onSelectionChangeRaised = false,
+    onChangeRaised = false,
+    onExecuteRaised = false;
+
+function type(keyCode, ctrl, alt, shift) {
+    var e = $.Event();
+    e.keyCode = keyCode;
+    e.ctrlKey = !!ctrl;
+    e.altKey = !!alt;
+    e.shiftKey = !!shift;
+    e.type = 'keyup';
+
+    var editor = getEditor();
+    $(editor.document).trigger(e);
+}
+
+module("Editor / ClientEvents", {
+    setup: function() {
+        changeRaised = false;
+        editor = getEditor();
+
+        $(editor.element).bind('selectionChange', function () {
+            changeRaised = true;
+        });
+
+        editor.focus();
+    }
+});
+
+test('onChange executed', function() {
+    editor.value('bar');
+    editor.body.innerHTML = 'foo';
+    $(editor.window).trigger('blur');
+    ok(onChangeRaised);
+});
+
+test('on selection change executed', function() {
+    onSelectionChangeRaised = false;
+    $(getEditor().element).trigger('selectionChange');
+    ok(onSelectionChangeRaised);
+});
+
+test('exec raises onExecute', function() {
+    editor.exec('undo');
+    ok(onExecuteRaised);
+});
+
+test('up arrow raises selection change', function() {
+    type(38);
+
+    ok(changeRaised);
+});
+
+test('mouseup raises selection change', function() {
+    $(getEditor().document).mouseup();
+    ok(changeRaised);
+});
+
+test('down arrow raises selection change', function() {
+    type(40);
+
+    ok(changeRaised);
+});
+
+test('left arrow raises selection change', function() {
+    type(37);
+
+    ok(changeRaised);
+});
+
+test('right arrow raises selection change', function() {
+    type(39);
+
+    ok(changeRaised);
+});
+
+test('home raises selection change', function() {
+    type(36);
+
+    ok(changeRaised);
+});
+
+test('end raises selection change', function() {
+    type(35);
+
+    ok(changeRaised);
+});
+
+test('pgup raises selection change', function() {
+    type(33);
+
+    ok(changeRaised);
+});
+
+test('pgdown raises selection change', function() {
+    type(34);
+
+    ok(changeRaised);
+});
+
+test('insert raises selection change', function() {
+    type(45);
+
+    ok(changeRaised);
+});
+
+test('backspace raises selection change', function() {
+    type(9);
+
+    ok(changeRaised);
+});
+        
+test('ctrl+a raises selection change', function() {
+    type(65, true);
+
+    ok(changeRaised);
+});
+        
+test('ctrl+shift+a, ctrl+alt+a, and ctrl+shift+alt+a do not raise selection change', function() {
+    type(65, true, true);
+    type(65, true, false, true);
+    type(65, true, true, true);
+
+    ok(!changeRaised);
+});
+
+test('exec raises selection change', function() {
+    var editor = getEditor();
+    editor.value('foo');
+    var range = editor.createRange();
+    range.selectNodeContents(editor.body.firstChild);
+    editor.getSelection().removeAllRanges();
+    editor.getSelection().addRange(range);
+
+    editor.exec('bold');
+    ok(changeRaised);
+});
+
+test('undo raises selection change', function() {
+    var editor = getEditor();
+    editor.exec('undo');
+
+    ok(changeRaised);
+});
+
+test('redo raises selection change', function() {
+    var editor = getEditor();
+    editor.exec('redo');
+
+    ok(changeRaised);
+});
+        
+test('exec supplies command name and object', function() {
+    var e;
+    $(editor.element).bind('execute', function() {
+        e = arguments[0];
+    });
+
+    editor.value('foo');
+    var range = editor.createRange();
+    range.selectNodeContents(editor.body.firstChild);
+    editor.getSelection().removeAllRanges();
+    editor.getSelection().addRange(range);
+
+    editor.exec('bold');
+
+    equal(e.name, 'bold');
+    ok(e.command instanceof $.telerik.editor.FormatCommand);
+});
+
+</script>
+
+<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture">test markup, will be hidden</div>
+<ul id="log"></ul>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+</body>
+</html>
