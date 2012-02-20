@@ -2046,6 +2046,39 @@
          * Each series type has a different set of options.
          * </p>
          * @option {String} [series.name] The series name visible in the legend.
+         * @option {String} [series.groupNameTemplate] Name template for auto-generated
+         * series when binding to grouped data.
+         * Template variables:
+         * <ul>
+         *     <li><strong>series</strong> - the series options</li>
+         *     <li><strong>group</strong> - the data group</li>
+         *     <li><strong>group.field</strong> - the name of the field used for grouping</li>
+         *     <li><strong>group.value</strong> - the field value for this group.</li>
+         * </ul>
+         * _example
+         * // chart intialization
+         * $("#chart").kendoChart({
+         *      title: {
+         *          text: "My Chart Title"
+         *      },
+         *      dataSource: {
+         *          data: seriesData,
+         *          group: {
+         *              field: "product",
+         *              dir: "desc"
+         *          }
+         *      },
+         *      series: [{
+         *              type: "bar",
+         *              name: "Sales",
+         *              fiels: "sales",
+         *              groupNameTemplate: "#= series.name # for #= group.field # #= group.value #"
+         *              // Sales for product Bar,
+         *              // Sales for product Foo,
+         *              // etc.
+         *          }
+         *      ]
+         * });
          * @option {Array} [series.data] Array of data points.
          * @option {String} [series.field] The data field containing the series value.
          * @option [series.type="bar"] Available options for bar series:
