@@ -184,7 +184,7 @@
 
                 kendo.bind(dom, observable);
 
-                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
 
                 kendo.bind(dom, observable);
 
