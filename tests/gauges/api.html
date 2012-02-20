@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gauge API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.chart.js"></script>
+        <script src="../chart/util.js"></script>
+        <script>
+            var Chart = kendo.ui.Chart,
+                gaugeElement,
+                gauge;
+
+            // Tests expect particular font size
+            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+
+            module("Gauge API", {
+                setup: function() {
+                    gaugeElement = $("<div />").kendoGauge({
+                        pointer: {
+                            value: 50
+                        },
+
+                        scale: {
+                            min: 0,
+                            max: 100
+                        }
+                    });
+
+                    gauge = gaugeElement.data("kendoGauge");
+                }
+            });
+
+            test("value() method calls pointer.value()", function() {
+                var calls = 0,
+                    usedValue;
+
+                gauge.pointers[0].value = function(value) {
+                    calls++;
+                    usedValue = value;
+                };
+
+                gauge.value(10);
+
+                equal(calls, 1);
+                equal(usedValue, 10);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.gauge</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

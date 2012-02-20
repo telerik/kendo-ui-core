@@ -1,17 +1,18 @@
         <div id="example" class="k-content">
-            <div id="gauge"></div>
+            <div id="gauge" style="border: 3px solid red"></div>
+
+            <button class="k-button" id="set-10">Set value to 10</button>
 
             <script>
                 function createGauge() {
                     $("#gauge").kendoGauge({
                         theme: $(document).data("kendoSkin") || "default",
 
-                        pointer: {
-                            value: 35,
-                            type: "needle"
-                        },
+                        pointer: true,
 
                         scale: {
+                            endAngle: 180,
+                            startAngle: 0,
                             minorUnit: 5
                         }
                     });
@@ -19,10 +20,15 @@
 
                 $(document).ready(function() {
                     setTimeout(function() {
-                        createGauge();
-
                         // Initialize the gauge with a delay to make sure
                         // the initial animation is visible
+                        createGauge();
+
+                        $("#set-10").click(function(e) {
+                            e.preventDefault();
+
+                            $("#gauge").data("kendoGauge").value(10);
+                        });
                     }, 400);
 
                     $(document).bind("kendo:skinChange", function(e) {

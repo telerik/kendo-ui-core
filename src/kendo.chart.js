@@ -6295,7 +6295,7 @@
 
         options: {
             shape: "needle",
-            fill: "red",
+            fill: "#EA7001",
             value: 0
         },
 
@@ -6305,7 +6305,7 @@
                 element = doc.getElementById(options.id);
 
             // initial pointer position is at 90deg
-            pointer.element.rotate(element, pointer.scale.getSlotAngle(newValue) - 90, pointer.box.center());
+            pointer.elements[0].rotate(element, pointer.scale.getSlotAngle(newValue) - 90, pointer.scale.ring.c);
         },
 
         reflow: function(box) {
@@ -6316,27 +6316,32 @@
 
         _createNeedle: function(view) {
             var pointer = this,
-                ring = pointer.scale.ring,
+                scale = pointer.scale,
+                ring = scale.ring,
                 c = ring.c,
                 r = ring.r,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
                 center = box.center();
 
-            return view.createPolyline([
-                    new Point2D((box.x1 + box.x2) / 2, box.y1),
-                    new Point2D(center.x - 10, center.y + 50),
-                    new Point2D(center.x + 10, center.y + 50)
-                ], true, pointer.options)
+            return [
+                view.createPolyline([
+                    new Point2D((box.x1 + box.x2) / 2, box.y1 + scale.options.majorTickSize),
+                    new Point2D(center.x - 5, center.y),
+                    new Point2D(center.x + 5, center.y)
+                ], true, pointer.options),
+                view.createCircle([center.x, center.y], 10, pointer.options)
+            ];
         },
 
         getViewElements: function(view) {
             var pointer = this,
-                shape = pointer.options.shape;
+                shape = pointer.options.shape,
+                elements = pointer._createNeedle(view);
 
-            pointer.element = pointer._createNeedle(view);
+            pointer.elements = elements;
 
-            return [pointer.element];
+            return elements;
         }
     });
 
@@ -6480,17 +6485,21 @@
 
         reflow: function(box) {
             var plotArea = this,
-                scale = plotArea.scale;
+                scale = plotArea.scale,
+                plotBox;
 
             scale.reflow(box);
             plotArea.alignScale(scale, box);
 
+            plotBox = scale.ring.getBBox().clone();
+
             if (plotArea.options.pointer != false) {
                 plotArea.pointer.scale = scale;
                 plotArea.pointer.reflow(box);
+                //plotBox.wrap(plotArea.pointer.getBBox());
             }
 
-            plotArea.box = scale.ring.getBBox();
+            plotArea.box = plotBox;
         },
 
         alignScale: function(scale, box) {
@@ -6539,6 +6548,10 @@
             //}, 10);
         },
 
+        value: function(value) {
+            this.pointers[0].value(value);
+        },
+
         _redraw: function() {
             var gauge = this,
                 options = gauge.options,
@@ -6563,6 +6576,8 @@
                 plotArea;
 
             plotArea = model._plotArea = new GaugePlotArea(options);
+
+            gauge.pointers = [plotArea.pointer];
 
             model.append(plotArea);
             model.reflow();
