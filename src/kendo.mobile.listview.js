@@ -9,6 +9,7 @@
         GROUP_CLASS = "km-group-title",
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '" />',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
+        WRAPPER = '<div class="km-listview-wrapper" />',
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
         MOUSEMOVE = support.mousemove,
@@ -251,6 +252,9 @@
             } else {
                 that._style();
             }
+
+            that.element.wrap(WRAPPER);
+            that.wrapper = that.element.parent();
         },
 
         events: [
@@ -315,11 +319,15 @@
         viewInit: function(view) {
             var that = this,
                 options = that.options;
+
             that.scroller = view.scroller;
 
             if (options.pullToRefresh) {
+                that.wrapper.prepend('<span class="km-listview-pull-to-refresh">' + options.pullMessage + '</span>');
+                that.refreshHint = that.wrapper.children().first();
+
                 that.scroller.handlePull({
-                    offset: 100,
+                    offset: that.refreshHint.height(),
                     startPull: function() {
                         that.refreshHint.html(options.releaseMessage);
                     },
@@ -355,9 +363,8 @@
             that.element[appendMethod](contents);
 
             if (that.options.pullToRefresh) {
-                that.element.prepend('<li class="km-listview-pull-to-refresh">Pull to refresh</li>');
-                that.refreshHint = that.element.find(".km-listview-pull-to-refresh");
                 that.scroller.pullHandled();
+                that.refreshHint.html(that.options.pullMessage);
             }
 
             kendo.mobile.enhance(that.element.children());
