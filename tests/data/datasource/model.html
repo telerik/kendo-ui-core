@@ -147,6 +147,42 @@
                 equal(dataSource.get(1).foo, "foo");
             });
 
+            test("cancelChanges restores updated model to its original state only for povided model", function() {
+                var model1 = dataSource.get(1),
+                    model2 = dataSource.get(2);
+                model1.set("foo", "baz");
+                model2.set("foo", "bar");
+
+                dataSource.cancelChanges(model1);
+
+                equal(dataSource.get(1).foo, "foo");
+                equal(dataSource.get(2).foo, "bar");
+            });
+
+            test("cancelChanges removes inserted model passed as parameter", function() {
+                var model;
+
+                dataSource.get(1).set("foo", "bar");
+                model = dataSource.insert({ foo: "baz" });
+
+                dataSource.cancelChanges(model);
+
+                equal(dataSource.get(1).foo, "bar");
+                equal(dataSource.data().length, 2);
+            });
+
+            test("cancelChanges does not revert it passed model is removed", function() {
+                var model = dataSource.get(1);
+
+                dataSource.get(2).set("foo", "bar");
+                dataSource.remove(model);
+
+                dataSource.cancelChanges(model);
+
+                equal(dataSource.get(2).foo, "bar");
+                equal(dataSource.data().length, 1);
+            });
+
             test("indexOf returns the index of model", function() {
                 var model = dataSource.get(1);
 

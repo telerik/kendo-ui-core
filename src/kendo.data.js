@@ -1983,11 +1983,25 @@
          * // we have updated 2 items and deleted 1. All of those changes will be discarded.
          * dataSource.cancelChanges();
          */
-        cancelChanges : function() {
-            var that = this;
+        cancelChanges: function(model) {
+            var that = this,
+                pristineIndex,
+                index;
 
-            that._data = that._observe(that.reader.data(that._pristine));
-            that._change();
+            if (model instanceof kendo.data.Model) {
+                pristineIndex = that._pristineIndex(model);
+                index = that.indexOf(model);
+                if (index != -1) {
+                    if (pristineIndex != -1) {
+                        that._data.splice(index, 1, that._pristine[pristineIndex]);
+                    } else {
+                        that._data.splice(index, 1);
+                    }
+                }
+            } else {
+                that._data = that._observe(that.reader.data(that._pristine));
+                that._change();
+            }
         },
 
         /**
@@ -2019,7 +2033,7 @@
             var idx, length, data = this._data;
 
             for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].id == model.id) {
+                if (data[idx].uid == model.uid) {
                     return idx;
                 }
             }
