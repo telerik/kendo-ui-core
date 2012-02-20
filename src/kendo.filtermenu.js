@@ -202,29 +202,40 @@
 
         refresh: function() {
             var that = this,
-                form = that.form,
-                expression = that.dataSource.filter() || { filters: [], logic: "and" },
+                expression = that.dataSource.filter() || { filters: [], logic: "and" };
+
+            if (that._populateForm(expression)) {
+                that.link.addClass("k-state-active");
+            } else {
+                that.link.removeClass("k-state-active");
+            }
+        },
+
+        _populateForm: function(expression) {
+            var that = this,
                 filters = expression.filters,
-                filter,
                 idx,
                 length,
-                current = 0;
+                form = that.form,
+                found = false,
+                current = 0,
+                filter;
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
                 if (filter.field == that.field) {
                     value(form.find("[name='filters[" + current + "].value']"), that._parse(filter.value));
                     value(form.find("[name='filters[" + current + "].operator']"), filter.operator);
+                    value(form.find("[name=logic]"), expression.logic);
+
                     current++;
+                    found = true;
+                } else if (filter.filters) {
+                    found = found || that._populateForm(filter);
                 }
             }
 
-            if (current > 0) {
-                value(form.find("[name=logic]"), expression.logic);
-                that.link.addClass("k-state-active");
-            } else {
-                that.link.removeClass("k-state-active");
-            }
+            return found;
         },
 
         _merge: function(expression) {

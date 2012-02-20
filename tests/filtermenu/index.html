@@ -279,6 +279,7 @@
                 new FilterMenu(dom, {
                     dataSource: dataSource
                 }).filter({
+                    logic: "and",
                     filters: [
                         { value: "1", field: "foo" },
                         { value: "2", field: "foo" }
@@ -291,12 +292,14 @@
                     dataSource: dataSource
                 });
                 filter.filter({
+                    logic: "and",
                     filters: [
                         { value: "1", field: "bar" },
                         { value: "2", field: "bar" }
                     ]
                 });
                 filter.filter({
+                    logic: "and",
                     filters: [
                         { value: "1", field: "bar" },
                         { value: "2", field: "bar" }
@@ -382,6 +385,7 @@
                 dataSource.filter({ value: "1", field: "bar" });
 
                 filterMenu.filter({
+                    logic: "and",
                     filters: [
                         { value: "1", field: "foo" },
                         { value: "2", field: "foo" }
@@ -426,6 +430,26 @@
                 equal(filterMenu.form.find("[name='logic']").val(), "or");
             });
 
+            test("populates the logic value from the datasource nested expression", function() {
+                dataSource.filter( { logic: "and", filters: [{logic: "or", filters: [{ field: "foo", value: "1" }, { field: "foo", value: "2" }]}]});
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='logic']").val(), "or");
+            });
+
+            test("populates the logic value from the last expression", function() {
+                dataSource.filter( { logic: "and", filters: [{logic: "or", filters: [{ field: "foo", value: "1" }]}, { field: "foo", value: "2" }]});
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                equal(filterMenu.form.find("[name='logic']").val(), "and");
+            });
+
             test("populates the operator from the datasource", function() {
                 dataSource.filter( { field: "foo", value: "1", operator: "neq" });
 
@@ -438,6 +462,16 @@
 
             test("applies active state", function() {
                 dataSource.filter( { field: "foo", value: "1", operator: "neq" });
+
+                var filterMenu = new FilterMenu(dom, {
+                    dataSource: dataSource
+                });
+
+                ok(filterMenu.link.hasClass("k-state-active"));
+            });
+
+            test("applies active state on nested expressions", function() {
+                dataSource.filter( { filters: [{ filters: [{ field: "foo", value: "1", operator: "neq" }] }] });
 
                 var filterMenu = new FilterMenu(dom, {
                     dataSource: dataSource
