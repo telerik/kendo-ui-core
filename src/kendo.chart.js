@@ -403,45 +403,25 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
+                seriesIx,
+                seriesLength = series.length,
                 data = chart.dataSource.view(),
                 groups = chart.dataSource.group() || [],
                 grouped = groups.length > 0,
+                groupSeries = [],
                 currentSeries;
 
-            var groupSeries = [];
-            for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                currentSeries = series[seriesIdx];
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+
                 if (currentSeries.field || (currentSeries.xField && currentSeries.yField)) {
                     currentSeries.data = [];
+                    currentSeries.dataItems = data;
 
                     if (grouped) {
-                        var groupNameTemplate;
-
-                        if (currentSeries.groupNameTemplate) {
-                            groupNameTemplate = baseTemplate(currentSeries.groupNameTemplate);
-                        }
-
-                        // Clone series
-                        for (var i = 1; i < data.length; i++) {
-                            var clone = deepExtend({}, currentSeries);
-                            groupSeries.push(clone);
-
-                            clone.dataItems = data[i].items;
-                            if (groupNameTemplate) {
-                                clone.name = groupNameTemplate({
-                                    series: clone, group: data[i]
-                                });
-                            }
-                        }
-
-                        currentSeries.dataItems = data[0].items;
-                        if (groupNameTemplate) {
-                            currentSeries.name = groupNameTemplate({
-                                series: currentSeries, group: data[0]
-                            });
-                        }
-                    } else {
-                        currentSeries.dataItems = data;
+                        [].push.apply(groupSeries,
+                            chart._createGroupedSeries(currentSeries, data)
+                        );
                     }
                 }
             }
@@ -453,6 +433,43 @@
 
             chart.trigger(DATABOUND);
             chart._redraw();
+        },
+
+        _createGroupedSeries: function(series, view) {
+            var groupSeries = [],
+                nameTemplate,
+                group,
+                groupIx,
+                viewLength = view.length,
+                firstGroup = view[0],
+                seriesClone;
+
+            if (series.groupNameTemplate) {
+                nameTemplate = baseTemplate(series.groupNameTemplate);
+            }
+
+            for (groupIx = 1; groupIx < viewLength; groupIx++) {
+                seriesClone = deepExtend({}, series);
+                groupSeries.push(seriesClone);
+
+                group = view[groupIx];
+                seriesClone.dataItems = group.items;
+
+                if (nameTemplate) {
+                    seriesClone.name = nameTemplate({
+                        series: seriesClone, group: group
+                    });
+                }
+            }
+
+            series.dataItems = firstGroup.items;
+            if (nameTemplate) {
+                series.name = nameTemplate({
+                    series: series, group: firstGroup
+                });
+            }
+
+            return groupSeries;
         },
 
         _bindSeries: function() {
