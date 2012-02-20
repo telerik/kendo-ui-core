@@ -52,8 +52,8 @@ tests.push(
         title: "in-memory cache"
     },
     {
-        page: "data/datasource/sync.html",
-        title: "datasource sync"
+        page: "data/datasource/model.html",
+        title: "datasource model"
     },
     {
         page: "data/datasource/sync-response.html",
