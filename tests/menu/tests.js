@@ -10,5 +10,10 @@ tests.push(
     {
         page: "menu/openOnClick.html",
         title: "menu open on click"
+    },
+    {
+        page: "menu/mvvm.html",
+        title: "menu mvvm"
     }
+
 );
