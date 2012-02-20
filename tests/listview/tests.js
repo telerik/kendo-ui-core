@@ -1,8 +1,8 @@
 tests.push({
-        page: "listView/listView.html",
+        page: "listview/listview.html",
         title: "listView"
     },
     {
-        page: "listView/editing.html",
+        page: "listview/editing.html",
         title: "editing"
     });
