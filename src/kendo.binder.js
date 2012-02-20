@@ -900,15 +900,13 @@
                 }
             }
 
-            element = element[0];
-
             for (idx = 0, length = type.fn.events.length; idx < length; idx++) {
                 option = type.fn.events[idx];
 
-                value = element.getAttribute("data-" + kendo.ns + option.toLowerCase());
+                value = element.data(kendo.ns + option.toLowerCase());
 
                 if (value === null) {
-                    value = element.getAttribute("data-" + kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
+                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
                 }
 
                 if (value !== null) {
@@ -916,13 +914,13 @@
                 }
             }
 
-            var widget = $.data(element, "kendo" + name);
+            var widget = element.data("kendo" + name);
 
             if (!widget) {
-                widget = new kendo.ui[name](element);
+                widget = new kendo.ui[name](element, options);
+            } else {
+                widget.setOptions(options);
             }
-
-            widget.setOptions(options);
 
             return new WidgetBindingTarget(widget);
         }
