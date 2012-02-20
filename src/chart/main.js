@@ -406,9 +406,7 @@
                 data = chart.dataSource.view(),
                 groups = chart.dataSource.group() || [],
                 grouped = groups.length > 0,
-                row,
-                currentSeries,
-                value;
+                currentSeries;
 
             var groupSeries = [];
             for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
@@ -450,12 +448,32 @@
 
             [].push.apply(series, groupSeries);
 
-            for (var seriesIdx = 0, seriesLength = series.length; seriesIdx < seriesLength; seriesIdx++) {
-                currentSeries = series[seriesIdx];
-                var seriesData = currentSeries.dataItems || [];
+            chart._bindSeries();
+            chart._bindCategories(grouped ? data[0].items : data);
 
-                for (var dataIdx = 0, dataLength = seriesData.length; dataIdx < dataLength; dataIdx++) {
-                    row = seriesData[dataIdx];
+            chart.trigger(DATABOUND);
+            chart._redraw();
+        },
+
+        _bindSeries: function() {
+            var chart = this,
+                series = chart.options.series,
+                seriesLength = series.length,
+                seriesIx,
+                currentSeries,
+                data,
+                dataIx,
+                dataLength,
+                row,
+                value;
+
+            for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
+                currentSeries = series[seriesIx];
+                data = currentSeries.dataItems || [];
+                dataLength = data.length;
+
+                for (dataIx = 0; dataIx < dataLength; dataIx++) {
+                    row = data[dataIx];
 
                     if (currentSeries.field) {
                         value = getField(currentSeries.field, row);
@@ -467,7 +485,7 @@
                     }
 
                     if (defined(value)) {
-                        if (dataIdx === 0) {
+                        if (dataIx === 0) {
                             currentSeries.data = [value];
                             currentSeries.dataItems = [row];
                         } else {
@@ -477,11 +495,6 @@
                     }
                 }
             }
-
-            chart._bindCategories(grouped ? data[0].items : data);
-
-            chart.trigger(DATABOUND);
-            chart._redraw();
         },
 
         _bindCategories: function(categoriesData) {
