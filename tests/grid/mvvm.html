@@ -36,7 +36,7 @@
             });
 
             test("binding grid initialized before binding", function() {
-                var dom = $('<div data-bind="source:items" />');
+                var dom = $('<table data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -48,7 +48,7 @@
             });
 
             test("binding grid initialized after binding", function() {
-                var dom = $('<div data-bind="source:items" />');
+                var dom = $('<table data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 

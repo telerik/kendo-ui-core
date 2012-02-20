@@ -176,14 +176,14 @@
                 equal(destroy.calls("destroy"), 1);
             });
 
-            test("expressions are destroyed", 1, function() {
+            test("binding target is destroyed", 1, function() {
                 var dom = $('<input data-role="autocomplete" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
                 kendo.bind(dom, observable);
 
-                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
 
                 kendo.bind(dom, observable);
 
