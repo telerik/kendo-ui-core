@@ -1602,6 +1602,7 @@
         createLabels: function() {
             var axis = this,
                 options = axis.options,
+                reverse = options.reverse,
                 align = options.isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
@@ -1617,7 +1618,7 @@
                     i;
 
                 for (i = 0; i < labelsCount; i += step) {
-                    labelText = axis.getLabelText(i);
+                    labelText = axis.getLabelText(reverse ? labelsCount - i - 1 : i);
 
                     if (labelOptions.template) {
                         labelTemplate = baseTemplate(labelOptions.template);
@@ -2137,12 +2138,13 @@
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
+                reverse = options.reverse,
                 isVertical = options.isVertical,
                 valueAxis = isVertical ? Y : X,
                 lineBox = axis.lineBox(),
-                lineStart = lineBox[valueAxis + 1],
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
-                scale = lineSize / (options.max - options.min),
+                scale = (reverse ? -1 : 1) * (lineSize / (options.max - options.min)),
                 a = defined(a) ? a : options.axisCrossingValue,
                 b = defined(b) ? b : options.axisCrossingValue,
                 a = math.max(math.min(a, options.max), options.min),
@@ -2257,6 +2259,7 @@
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
+                reverse = options.reverse,
                 isVertical = options.isVertical,
                 childrenCount = math.max(1, options.categories.length),
                 from = math.min(math.max(0, from), childrenCount),
@@ -2264,9 +2267,10 @@
                 to = math.max(math.min(childrenCount, to), from),
                 lineBox = axis.lineBox(),
                 size = isVertical ? lineBox.height() : lineBox.width(),
-                startPos = isVertical ? lineBox.y1 : lineBox.x1,
-                step = size / childrenCount,
-                p1 = startPos + (from * step),
+                valueAxis = isVertical ? Y : X,
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                step = (reverse ? -1 : 1) * (size / childrenCount),
+                p1 = lineStart + (from * step),
                 p2 = p1 + step,
                 length = to - from;
 
