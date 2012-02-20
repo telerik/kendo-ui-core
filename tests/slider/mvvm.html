@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>slider MVVM support</title>
+        <script src="../../src/jquery.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header"></h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            test("initializes a slider when data role is slider", function() {
+                var dom = $('<input data-role="slider"/>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoSlider") instanceof kendo.ui.Slider);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<input data-role="slider" data-max="100" />');
+
+                kendo.bind(dom);
+
+                var slider = dom.data("kendoSlider");
+
+                slider.value(80);
+
+                equal(slider.options.max, 100);
+                equal(slider.value(), 80);
+            });
+
+            test("initializes value from view model", function() {
+                var dom = $('<input data-role="slider" data-bind="value:value" />');
+
+                kendo.bind(dom, { value: 10 } );
+
+                equal(dom.data("kendoSlider").value(), 10);
+            });
+
+            test("changing a value updates the view model", function() {
+                var dom = $('<input data-role="slider" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoSlider").value(10);
+                dom.data("kendoSlider").trigger("change");
+
+                equal(observable.value, 10);
+            });
+
+            test("binding slider initialized before binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                observable.value = 10;
+
+                dom.kendoSlider();
+
+                kendo.bind(dom, observable);
+
+                equal(dom.data("kendoSlider").value(), 10);
+            });
+
+            test("binding slider initialized after binding", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                observable.value = 10;
+
+                kendo.bind(dom, observable);
+
+                dom.kendoSlider();
+
+                equal(dom.data("kendoSlider").value(), 10);
+            });
+
+            test("updating model value updates the UI", function() {
+                var dom = $('<input data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.kendoSlider();
+
+                observable.set("value", 10)
+                equal(dom.data("kendoSlider").value(), 10);
+            });
+
+            test("bindings are removed if element is rebind", 1, function() {
+                var dom = $('<input data-role="slider" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: 10 });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("expressions are destroyed", 1, function() {
+                var dom = $('<input data-role="slider" data-bind="value:value"/>');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable);
+
+                var destroy = stub(dom.data("kendoBindingTarget").expressions[0], "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("dataBound event is raised if attached as option", 1, function() {
+                var dom = $('<input data-role="slider" data-change="change" />');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoSlider").trigger("change");
+            });
+
+            function change() {
+                ok(true);
+            }
+
+            test("dataBound event is raised if attached as option to a already initialized slider", 1, function() {
+                var dom = $('<input data-change="change" />').kendoSlider();
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoSlider").trigger("change");
+            });
+        </script>
+
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>

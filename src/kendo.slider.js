@@ -174,41 +174,46 @@
                 34: step(-options.largeStep)  // page down
             };
 
-            that.bind([
-                /**
-                 * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
-                 * @name kendo.ui.Slider#change
-                 * @event
-                 * @param {Event} e
-                 * @param {Number} e.value Represents the updated value of the slider.
-                 **/
+            that.bind(that.events, options);
 
-                /**
-                 * Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
-                 * @name kendo.ui.RangeSlider#change
-                 * @event
-                 * @param {Event} e
-                 * @param {Number} e.values Represents the updated array of values of the first and second drag handle.
-                 **/
-                 CHANGE,
-
-                /**
-                 * Fires when the user drags the drag handle to a new position.
-                 * @name kendo.ui.Slider#slide
-                 * @event
-                 * @param {Event} e
-                 * @param {Number} e.value Represents the value from the current position of the drag handle.
-                 **/
-
-                /**
-                 * Fires when the user drags the drag handle to a new position.
-                 * @name kendo.ui.RangeSlider#slide
-                 * @event
-                 * @param {Event} e
-                 * @param {Number} e.values Represents an array of values of the current positions of the first and second drag handle.
-                 **/
-                SLIDE], options);
+            kendo.notify(that);
         },
+
+        events: [
+            /**
+            * Fires when the slider value changes as a result of selecting a new value with the drag handle, buttons or keyboard.
+            * @name kendo.ui.Slider#change
+            * @event
+            * @param {Event} e
+            * @param {Number} e.value Represents the updated value of the slider.
+            **/
+
+            /**
+            * Fires when the rangeSlider value changes as a result of selecting a new value with one of the drag handles or the keyboard.
+            * @name kendo.ui.RangeSlider#change
+            * @event
+            * @param {Event} e
+            * @param {Number} e.values Represents the updated array of values of the first and second drag handle.
+            **/
+            CHANGE,
+
+            /**
+            * Fires when the user drags the drag handle to a new position.
+            * @name kendo.ui.Slider#slide
+            * @event
+            * @param {Event} e
+            * @param {Number} e.value Represents the value from the current position of the drag handle.
+            **/
+
+            /**
+            * Fires when the user drags the drag handle to a new position.
+            * @name kendo.ui.RangeSlider#slide
+            * @event
+            * @param {Event} e
+            * @param {Number} e.values Represents an array of values of the current positions of the first and second drag handle.
+            **/
+            SLIDE
+        ],
 
         options: {
             enabled: true,
@@ -629,11 +634,13 @@
 
             element.type = "text";
 
+            element = $(element);
+
             options = extend({}, {
-                value: parseAttr(element, "value"),
-                min: parseAttr(element, "min"),
-                max: parseAttr(element, "max"),
-                smallStep: parseAttr(element, "step")
+                value: parseAttr(element[0], "value"),
+                min: parseAttr(element[0], "min"),
+                max: parseAttr(element[0], "max"),
+                smallStep: parseAttr(element[0], "step")
             }, options);
 
             SliderBase.fn.init.call(that, element, options);

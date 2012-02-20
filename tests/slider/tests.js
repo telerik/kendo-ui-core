@@ -14,5 +14,10 @@ tests.push(
     {
         page: "slider/Slider.html",
         title: "slider"
+    },
+    {
+        page: "slider/mvvm.html",
+        title: "mvvm"
     }
+
 );
