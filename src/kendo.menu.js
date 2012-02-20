@@ -423,77 +423,80 @@
             $(document).click(proxy( that._documentClick, that ));
             that.clicked = false;
 
-            that.bind([
-                /**
-                 * Fires before a sub menu gets opened.
-                 * @name kendo.ui.Menu#open
-                 * @event
-                 * @param {Event} e
-                 * @param {Element} e.item The opened item
-                 * @example
-                 *  $("#menu").kendoMenu({
-                 *      open: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the menu widget
-                 *  var menu = $("#menu").data("kendoMenu");
-                 *  // bind to the open event
-                 *  menu.bind("open", function(e) {
-                 *      // handle event
-                 *  });
-                 */
-                OPEN,
-                /**
-                 * Fires after a sub menu gets closed.
-                 * @name kendo.ui.Menu#close
-                 * @event
-                 * @param {Event} e
-                 * @param {Element} e.item The closed item
-                 * @example
-                 *  $("#menu").kendoMenu({
-                 *      close: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the menu widget
-                 *  var menu = $("#menu").data("kendoMenu");
-                 *  // bind to the close event
-                 *  menu.bind("close", function(e) {
-                 *      // handle event
-                 *  });
-                 */
-                CLOSE,
-                /**
-                 * Fires when a menu item gets selected.
-                 * @name kendo.ui.Menu#select
-                 * @event
-                 * @param {Event} e
-                 * @param {Element} e.item The selected item
-                 * @example
-                 *  $("#menu").kendoMenu({
-                 *      select: function(e) {
-                 *          // handle event
-                 *      }
-                 *  });
-                 * @exampleTitle To set after initialization
-                 * @example
-                 *  // get a reference to the menu widget
-                 *  var menu = $("#menu").data("kendoMenu");
-                 *  // bind to the select event
-                 *  menu.bind("select", function(e) {
-                 *      // handle event
-                 *  });
-                 */
-                SELECT
-            ], that.options);
+            that.bind(that.events, that.options);
 
             kendo.notify(that);
         },
+
+        events: [
+            /**
+            * Fires before a sub menu gets opened.
+            * @name kendo.ui.Menu#open
+            * @event
+            * @param {Event} e
+            * @param {Element} e.item The opened item
+            * @example
+            *  $("#menu").kendoMenu({
+            *      open: function(e) {
+            *          // handle event
+            *      }
+            *  });
+            * @exampleTitle To set after initialization
+            * @example
+            *  // get a reference to the menu widget
+            *  var menu = $("#menu").data("kendoMenu");
+            *  // bind to the open event
+            *  menu.bind("open", function(e) {
+            *      // handle event
+            *  });
+            */
+            OPEN,
+            /**
+            * Fires after a sub menu gets closed.
+            * @name kendo.ui.Menu#close
+            * @event
+            * @param {Event} e
+            * @param {Element} e.item The closed item
+            * @example
+            *  $("#menu").kendoMenu({
+            *      close: function(e) {
+            *          // handle event
+            *      }
+            *  });
+            * @exampleTitle To set after initialization
+            * @example
+            *  // get a reference to the menu widget
+            *  var menu = $("#menu").data("kendoMenu");
+            *  // bind to the close event
+            *  menu.bind("close", function(e) {
+            *      // handle event
+            *  });
+            */
+            CLOSE,
+            /**
+            * Fires when a menu item gets selected.
+            * @name kendo.ui.Menu#select
+            * @event
+            * @param {Event} e
+            * @param {Element} e.item The selected item
+            * @example
+            *  $("#menu").kendoMenu({
+            *      select: function(e) {
+            *          // handle event
+            *      }
+            *  });
+            * @exampleTitle To set after initialization
+            * @example
+            *  // get a reference to the menu widget
+            *  var menu = $("#menu").data("kendoMenu");
+            *  // bind to the select event
+            *  menu.bind("select", function(e) {
+            *      // handle event
+            *  });
+            */
+            SELECT
+        ],
+
         options: {
             name: "Menu",
             animation: {
