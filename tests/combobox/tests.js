@@ -26,5 +26,9 @@ tests.push(
     {
         page: "combobox/placeholder.html",
         title: "combobox placeholder"
+    },
+    {
+        page: "combobox/mvvm.html",
+        title: "combobox mvvm"
     }
 );

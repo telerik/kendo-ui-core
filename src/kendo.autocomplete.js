@@ -334,7 +334,7 @@
                     keydown: proxy(that._keydown, that),
                     paste: proxy(that._search, that),
                     focus: function () {
-                        that._old = that.value();
+                        that._prev = that.value();
                         that._placeholder(false);
                         wrapper.addClass(FOCUSED);
                         clearTimeout(that._bluring);
@@ -356,6 +356,8 @@
             that._enable();
 
             that._popup();
+
+            that._old = that.value();
 
             that._placeholder();
 
