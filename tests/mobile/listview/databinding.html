@@ -229,11 +229,11 @@
 
                 function secondAssert() {
                     start();
-                    equal(listview.children().length, 4);
+                    equal(listview.children().length, 3);
                 }
 
                 function firstAssert() {
-                    equal(listview.children().length, 3);
+                    equal(listview.children().length, 2);
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
                     swipe.trigger("start", swipe);
