@@ -14,6 +14,22 @@ var multipartScripts = [{
               path.join("chart", "svg.js"),
               path.join("chart", "vml.js"),
               path.join("chart", "themes.js")]
+    }, {
+    output:   "kendo.editor.js",
+    inputs: [ path.join("editor", "main.js"),
+              path.join("editor", "dom.js"),
+              path.join("editor", "serializer.js"),
+              path.join("editor", "range.js"),
+              path.join("editor", "system.js"),
+              path.join("editor", "inlineformat.js"),
+              path.join("editor", "formatblock.js"),
+              path.join("editor", "linebreak.js"),
+              path.join("editor", "lists.js"),
+              path.join("editor", "link.js"),
+              path.join("editor", "image.js"),
+              path.join("editor", "components.js"),
+              path.join("editor", "indent.js"),
+              path.join("editor", "pendingformats.js")]
     }
 ];
 
@@ -41,6 +57,7 @@ var suiteScripts = {
         "kendo.dropdownlist.js",
         "kendo.combobox.js",
         "kendo.grid.js",
+        "kendo.editor.js",
         "kendo.numerictextbox.js",
         "kendo.menu.js",
         "kendo.editable.js",
