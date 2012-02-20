@@ -106,6 +106,7 @@
             var chart = this,
                 options,
                 themeOptions,
+                dataSourceOptions = (userOptions || {}).dataSource,
                 theme;
 
             Widget.fn.init.call(chart, element);
@@ -127,14 +128,12 @@
 
             $(element).addClass("k-chart");
 
-            if (userOptions && userOptions.dataSource) {
-                chart.dataSource = DataSource
-                    .create(userOptions.dataSource)
-                    .bind(CHANGE, proxy(chart._onDataChanged, chart));
+            chart.dataSource = DataSource
+                .create(dataSourceOptions)
+                .bind(CHANGE, proxy(chart._onDataChanged, chart));
 
-                if (options.autoBind) {
-                    chart.dataSource.fetch();
-                }
+            if (dataSourceOptions && options.autoBind) {
+                chart.dataSource.fetch();
             }
 
             chart._redraw();

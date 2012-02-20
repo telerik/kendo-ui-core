@@ -30,6 +30,38 @@
                 }
 
                 // ------------------------------------------------------------
+                module("Unbound mode", {
+                    setup: function() {
+                        createChart();
+                    }
+                });
+
+                test("creates empty data source", function() {
+                    ok(chart.dataSource);
+                });
+
+                asyncTest("binds series when data becomes available", function() {
+                    createChart({
+                        series: [{
+                            field: "sales"
+                        }],
+                        dataBound: function() {
+                            equal(this.options.series[0].data.length, 2);
+                            start();
+                        }
+                    });
+
+                    chart.dataSource.data([{
+                            period: "Jan",
+                            sales: 100
+                        }, {
+                            period: "Feb",
+                            sales: 110
+                        }]
+                    );
+                });
+
+                // ------------------------------------------------------------
                 module("Binding to DataSource", {
                     teardown: destroyChart
                 });
