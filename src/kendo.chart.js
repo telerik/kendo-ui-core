@@ -6304,8 +6304,7 @@
                 options = pointer.options,
                 element = doc.getElementById(options.id);
 
-            // initial pointer position is at 90deg
-            pointer.elements[0].rotate(element, pointer.scale.getSlotAngle(newValue) - 90, pointer.scale.ring.c);
+            pointer.elements[0].rotate(element, pointer.scale.getSlotAngle(newValue), pointer.scale.ring.c);
         },
 
         reflow: function(box) {
@@ -6320,17 +6319,20 @@
                 ring = scale.ring,
                 c = ring.c,
                 r = ring.r,
+                capSize = r * 0.05,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
-                center = box.center();
+                center = box.center(),
+                // pointer calculation is done at 90deg, so points are rotated initially
+                rotation = scale.getSlotAngle(pointer.options.value) + 90;
 
             return [
                 view.createPolyline([
-                    new Point2D((box.x1 + box.x2) / 2, box.y1 + scale.options.majorTickSize),
-                    new Point2D(center.x - 5, center.y),
-                    new Point2D(center.x + 5, center.y)
+                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.majorTickSize, center.x, center.y, rotation),
+                    rotatePoint(center.x - capSize/2, center.y, center.x, center.y, rotation),
+                    rotatePoint(center.x + capSize/2, center.y, center.x, center.y, rotation)
                 ], true, pointer.options),
-                view.createCircle([center.x, center.y], 10, pointer.options)
+                view.createCircle([center.x, center.y], capSize, pointer.options)
             ];
         },
 
