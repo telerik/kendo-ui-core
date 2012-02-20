@@ -393,6 +393,17 @@
             that.bind(that.events, options);
         },
 
+        _animation: function() {
+            var options = this.options;
+
+            if (options.animation === false) {
+                options.animation = {
+                    expand: { show: true, effects: {} },
+                    collapse: { hide: true, effects: {} }
+                };
+            }
+        },
+
         events: [
             /**
             *
