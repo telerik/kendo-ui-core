@@ -406,8 +406,7 @@
                 seriesIx,
                 seriesLength = series.length,
                 data = chart.dataSource.view(),
-                groups = chart.dataSource.group() || [],
-                grouped = groups.length > 0,
+                grouped = (chart.dataSource.group() || []).length > 0,
                 groupSeries = [],
                 currentSeries;
 
@@ -427,6 +426,7 @@
             }
 
             [].push.apply(series, groupSeries);
+            applySeriesColors(chart.options);
 
             chart._bindSeries();
             chart._bindCategories(grouped ? data[0].items : data);
@@ -435,24 +435,25 @@
             chart._redraw();
         },
 
-        _createGroupedSeries: function(series, view) {
+        _createGroupedSeries: function(series, data) {
             var groupSeries = [],
                 nameTemplate,
                 group,
                 groupIx,
-                viewLength = view.length,
-                firstGroup = view[0],
+                dataLength = data.length,
+                firstGroup = data[0],
                 seriesClone;
 
             if (series.groupNameTemplate) {
                 nameTemplate = baseTemplate(series.groupNameTemplate);
             }
 
-            for (groupIx = 1; groupIx < viewLength; groupIx++) {
+            for (groupIx = 1; groupIx < dataLength; groupIx++) {
                 seriesClone = deepExtend({}, series);
+                seriesClone.color = undefined;
                 groupSeries.push(seriesClone);
 
-                group = view[groupIx];
+                group = data[groupIx];
                 seriesClone.dataItems = group.items;
 
                 if (nameTemplate) {
