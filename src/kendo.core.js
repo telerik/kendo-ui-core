@@ -21,6 +21,7 @@
         OBJECT = "object",
         NULL = "null",
         BOOLEAN = "boolean",
+        UNDEFINED = "undefined",
         globalize = window.Globalize;
 
     function Class() {}
@@ -1588,6 +1589,42 @@
         return element.parent();
     }
 
+    function deepExtend(destination) {
+        var i = 1,
+            length = arguments.length;
+
+        for (i = 1; i < length; i++) {
+            deepExtendOne(destination, arguments[i]);
+        }
+
+        return destination;
+    }
+
+    function deepExtendOne(destination, source) {
+        var property,
+            propValue,
+            propType,
+            destProp;
+
+        for (property in source) {
+            propValue = source[property];
+            propType = typeof propValue;
+            if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
+                destProp = destination[property];
+                if (typeof (destProp) === OBJECT) {
+                    destination[property] = destProp || {};
+                } else {
+                    destination[property] = {};
+                }
+                deepExtendOne(destination[property], propValue);
+            } else if (propType !== UNDEFINED) {
+                destination[property] = propValue;
+            }
+        }
+
+        return destination;
+    }
+
     /**
      * Contains results from feature detection.
      * @name kendo.support
@@ -1713,7 +1750,7 @@
                         os.minorVersion = match[3].replace("_", ".");
                         os.flatVersion = os.majorVersion + os.minorVersion.replace(".", "");
                         os.flatVersion = os.flatVersion + (new Array(4 - os.flatVersion.length).join("0")); // Pad with zeroes
-                        os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== "undefined"; // Use file protocol to detect appModes.
+                        os.appMode = window.navigator.standalone || (/file|local/).test(window.location.protocol) || typeof window.PhoneGap !== UNDEFINED; // Use file protocol to detect appModes.
 
                         break;
                     }
@@ -2101,6 +2138,7 @@
             return "data-" + kendo.ns + value;
         },
         wrap: wrap,
+        deepExtend: deepExtend,
         size: size,
         isNodeEmpty: isNodeEmpty,
         getOffset: getOffset,

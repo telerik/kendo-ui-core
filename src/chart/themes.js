@@ -3,7 +3,7 @@
     // Imports ================================================================
     var kendo = window.kendo,
         Chart = kendo.ui.Chart,
-        deepExtend = Chart.deepExtend;
+        deepExtend = kendo.deepExtend;
 
     // Constants ==============================================================
     var BLACK = "#000",
