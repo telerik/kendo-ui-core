@@ -227,7 +227,7 @@
                 if(that.pulled) {
                     that.pulled = false;
                     options.pull();
-                    that.yinertia.freeze(options.offset);
+                    that.yinertia.freeze(options.offset / 2);
                 }
             });
         },
