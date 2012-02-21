@@ -11,7 +11,7 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.ios.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.meego.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -125,8 +125,8 @@
         }
     </style>
 </head>
-<body class="km-blackberry">
-    <article data-role="view" data-init="mobileListViewDataBindInitGrouped">
+<body class="km-meego">
+    <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
                 <a data-role="backbutton" data-align="left">Back</a>
@@ -161,6 +161,8 @@
         <ul data-role="listview">
             <li>Albania<input type="checkbox" data-role="switch" /></li>
             <li>Australia<input type="checkbox" data-role="switch" checked="checked" autocomplete="off" /></li>
+            <li data-icon="play"><a>Albania<span data-role="detailbutton" data-style="contactadd"></span></a></li>
+            <li data-icon="stop"><a>Australia<span data-role="detailbutton" data-style="detaildisclose"></span></a></li>
         </ul>
         <!--<div class="sliderValue">0</div>-->
         <!--<span class="km-slider" style="float: right; clear: both;"></span>-->
