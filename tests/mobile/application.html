@@ -404,6 +404,35 @@
                 }, 150);
             });
 
+            test("append icon meta link", function() {
+                setup('<div data-role="view" id="test1">Page 1</div>', {
+                    icon: "icon.png"
+                });
+
+                var link = $(document.head).find("link[rel=apple-touch-icon]");
+
+                equal(link.length, 1);
+                equal(link.attr("href"), "icon.png");
+                equal(link.attr("sizes"), undefined);
+            });
+
+            test("append multiple icons", function() {
+                setup('<div data-role="view" id="test1">Page 1</div>', {
+                    icon: {
+                        "76x76": "icon76.png",
+                        "112x112": "icon112.png",
+                    }
+                });
+
+                var links = $(document.head).find("link[rel=apple-touch-icon]");
+
+                equal(links.eq(0).attr("href"), "icon112.png");
+                equal(links.eq(0).attr("sizes"), "112x112");
+
+                equal(links.eq(1).attr("href"), "icon76.png");
+                equal(links.eq(1).attr("sizes"), "76x76");
+            });
+
         </script>
     </body>
 </html>
