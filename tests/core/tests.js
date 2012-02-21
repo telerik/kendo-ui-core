@@ -4,6 +4,10 @@ tests.push(
         title: "class"
     },
     {
+        page: "core/init.html",
+        title: "init"
+    },
+    {
         page: "core/observable.html",
         title: "observable"
     },

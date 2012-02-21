@@ -2267,8 +2267,28 @@
         return element.data(kendo.ns + attribute.replace(dataRegExp, lowerCaseFirstLetter));
     }
 
+    function parseOptions(element, options) {
+        var result = {};
+
+        for (option in options) {
+            value = parseOption(element, option);
+
+            if (value !== undefined) {
+
+                if (templateRegExp.test(option)) {
+                    value = kendo.template($("#" + value).html());
+                }
+
+                result[option] = value;
+            }
+        }
+
+        return result;
+    }
+
     function init(element) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
+            result,
             option,
             widget,
             idx,
@@ -2283,18 +2303,7 @@
 
         element = $(element);
 
-        for (option in widget.fn.options) {
-            value = parseOption(element, option);
-
-            if (value !== undefined) {
-
-                if (templateRegExp.test(option)) {
-                    value = $("#" + value).html();
-                }
-
-                options[option] = value;
-            }
-        }
+        options = parseOptions(element, widget.fn.options);
 
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
             option = widget.fn.events[idx];
@@ -2306,7 +2315,13 @@
             }
         }
 
-        new widget(element, options);
+        result = element.data("kendo" + widget.fn.options.name);
+
+        if (!result) {
+            new widget(element, options);
+        } else {
+            result.setOptions(options);
+        }
     }
 
     kendo.init = function(element) {
@@ -2320,6 +2335,8 @@
             kendo.init(element[idx].querySelectorAll("[data-" + kendo.ns + "role]"));
         }
     }
+
+    kendo.parseOptions = parseOptions;
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,

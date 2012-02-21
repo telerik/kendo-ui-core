@@ -351,6 +351,7 @@
             enable: true,
             index: 0,
             autoBind: true,
+            template: "",
             delay: 500,
             dataTextField: "",
             dataValueField: "",

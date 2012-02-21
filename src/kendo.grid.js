@@ -984,6 +984,7 @@
             columns: [],
             autoBind: true,
             scrollable: true,
+            rowTemplate: "",
             groupable: false,
             dataSource: {}
         },
