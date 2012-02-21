@@ -49,7 +49,7 @@
 }
 
 .km-android .km-checkbox-checked:after,
-.km-android .km-listview .km-switch-on
+.km-android .km-listview .km-switch-on .km-switch-handle
 {
     background: transparent url("images/android-sprite.png") 0 8% no-repeat;
     background-size: 100% auto;
@@ -100,16 +100,6 @@
     .box-sizing(border-box);
 }
 
-.km-android .km-switch-on:after
-{
-    content: "on";
-}
-
-.km-android .km-switch-off:after
-{
-    content: "off";
-}
-
 .km-android .km-switch-wrapper
 {
     display: none;
@@ -138,7 +128,7 @@
     background: #bbb;
 }
 
-.km-android .km-switch-on:before
+.km-android .km-switch-label-on
 {
     background: #87DE13;
 }

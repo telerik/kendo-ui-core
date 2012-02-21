@@ -90,7 +90,7 @@
             element[0].type = "checkbox";
 
             width = that.wrapper.width();
-            handleWidth = that.handle.outerWidth();
+            handleWidth = that.handle.outerWidth(true);
 
             that.constrain = width - handleWidth;
             that.snapPoint = width / 2 - handleWidth / 2;
@@ -151,7 +151,7 @@
 
             that._position(check ? that.constrain : 0);
             element.checked = check;
-            that.handle
+            that.wrapper
                 .toggleClass(SWITCHON, check)
                 .toggleClass(SWITCHOFF, !check);
 
@@ -194,7 +194,7 @@
                 duration = 200,
                 distance;
 
-            handle
+            that.wrapper
                 .toggleClass(SWITCHON, checked)
                 .toggleClass(SWITCHOFF, !checked);
 
