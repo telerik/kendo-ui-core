@@ -322,8 +322,6 @@
 
             options.placeholder = options.placeholder || element.attr("placeholder");
 
-            that._hasDataSource = options.dataSource;
-
             that._reset();
 
             that._wrapper();
@@ -583,7 +581,7 @@
             ul.innerHTML = kendo.render(that.template, data);
             that._height(length);
 
-            if (that._hasDataSource && that.element.is(SELECT)) {
+            if (that.element.is(SELECT)) {
                 that._options(data);
             }
 
