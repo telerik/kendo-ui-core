@@ -107,6 +107,52 @@
                 equal(viewModel.selectedItems[1], "baz");
             });
 
+            test("tracking changes of the parent object", function() {
+                var dom = $('<div data-bind="text: current.name"/>');
+
+                var viewModel = kendo.observable({
+                    current: null,
+                    items: [ { name: "foo" }, { name: "bar" }]
+                });
+
+                viewModel.current = viewModel.items[0];
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("current", viewModel.items[1]);
+
+                equal(dom.text(), "bar");
+            });
+
+            test("tracking changes of array item members", function() {
+                var dom = $('<div data-bind="text: items[0].name"/>');
+
+                var viewModel = kendo.observable({
+                    items: [ { name: "foo" } ]
+                });
+
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.items[0].set("name", "bar");
+
+                equal(dom.text(), "bar");
+            });
+
+            test("tracking changes the array item", function() {
+                var dom = $('<div data-bind="text: items[0].name"/>');
+
+                var viewModel = kendo.observable({
+                    items: [ { name: "foo" } ]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.items.splice(0, 0, { name: "bar" });
+
+                equal(dom.text(), "bar");
+            });
+
             test("select of multi select bound to complex objects", function() {
                 var viewModel = kendo.observable( {
                     foo: [{name:"foo"}, {name:"bar"}],
@@ -124,6 +170,7 @@
                 equal(viewModel.selectedItems[0], viewModel.foo[0]);
                 equal(viewModel.selectedItems[1], viewModel.foo[1]);
             });
+
             test("select tracks complex value", function() {
                 var viewModel = kendo.observable( {
                     foo: [ { text: "foo" }, { text: "bar" } ],
