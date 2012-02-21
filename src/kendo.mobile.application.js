@@ -349,7 +349,7 @@
             var that = this,
                 platformAttr = kendo.ns + "platform";
 
-            element.find(kendo.roleSelector("layout")).each(function() {
+            element.find(roleSelector("layout")).each(function() {
                 var layout = $(this),
                     platform = layout.data(platformAttr);
 
