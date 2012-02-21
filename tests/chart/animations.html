@@ -181,7 +181,7 @@
                 });
 
                 test("setup shrinks rect onto base (horizontal bars below axis)", function() {
-                    createAnim({ normalAngle: 90, aboveAxis: false });
+                    createAnim({ normalAngle: 270 });
                     anim.setup();
 
                     equals(rect.points[0].x, 10);
@@ -197,7 +197,7 @@
                 });
 
                 test("setup shrinks rect onto base (vertical bars below axis)", function() {
-                    createAnim({ aboveAxis: false });
+                    createAnim({ normalAngle: 180 });
                     anim.setup();
 
                     equals(rect.points[2].y, 0);

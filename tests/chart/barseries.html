@@ -161,6 +161,19 @@
                     equal(typeof series.points[0].dataItem, "object");
                 });
 
+                test("sets bar aboveAxis", function() {
+                    equal(series.points[0].options.aboveAxis, true);
+                });
+
+                test("sets bar aboveAxis for reversed value axis", function() {
+                    plotArea.namedValueAxes.primary.options.reverse = true;
+
+                    setupBarChart(plotArea, { series: [ positiveSeries ] });
+                    equal(series.points[0].options.aboveAxis, false);
+
+                    plotArea.namedValueAxes.primary.options.reverse = false;
+                });
+
                 // ------------------------------------------------------------
                 module("Bar Chart / Negative Values", {
                     setup: function() {
@@ -190,6 +203,19 @@
                     });
 
                     same(barHeights, [1, 2]);
+                });
+
+                test("sets bar aboveAxis", function() {
+                    equal(series.points[0].options.aboveAxis, false);
+                });
+
+                test("sets bar aboveAxis for reversed value axis", function() {
+                    plotArea.namedValueAxes.primary.options.reverse = true;
+
+                    setupBarChart(plotArea, { series: [ negativeSeries ] });
+                    equal(series.points[0].options.aboveAxis, true);
+
+                    plotArea.namedValueAxes.primary.options.reverse = false;
                 });
 
                 // ------------------------------------------------------------
@@ -1462,11 +1488,21 @@
                     same(rect.style.fill, bar.options.color);
                 });
 
-                test("sets default normalAngle", function() {
+                test("sets normalAngle for vertical bars", function() {
                     same(rect.style.normalAngle, 0);
                 });
 
-                test("sets default rotation for overlay", function() {
+                test("sets normalAngle for vertical bars below axis", function() {
+                    createBar({ aboveAxis: false });
+                    same(rect.style.normalAngle, 180);
+                });
+
+                test("sets overlay rotation for vertical bars", function() {
+                    same(rect.style.overlay.rotation, 0);
+                });
+
+                test("sets same overlay rotation for vertical bars below axis", function() {
+                    createBar({ aboveAxis: false });
                     same(rect.style.overlay.rotation, 0);
                 });
 
@@ -1490,8 +1526,18 @@
                     same(rect.style.normalAngle, 90);
                 });
 
+                test("sets normalAngle for horizontal bars below axis", function() {
+                    createBar({ isVertical: false, aboveAxis: false });
+                    same(rect.style.normalAngle, 270);
+                });
+
                 test("sets overlay rotation for horizontal bars", function() {
                     createBar({ isVertical: false });
+                    same(rect.style.overlay.rotation, 90);
+                });
+
+                test("sets same overlay rotation for horizontal bars below axis", function() {
+                    createBar({ isVertical: false, aboveAxis: false });
                     same(rect.style.overlay.rotation, 90);
                 });
 
