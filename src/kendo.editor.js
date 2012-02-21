@@ -1,4 +1,4 @@
-(function($) {
+(function($,undefined) {
 
     // Imports ================================================================
     var kendo = window.kendo,
@@ -14,13 +14,13 @@
             editor.trigger('selectionChange', {});
         },
 
-        focusable: ".t-colorpicker,a.t-tool-icon:not(.t-state-disabled),.t-selectbox, .t-combobox .t-input",
+        focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
 
         createContentElement: function($textarea, stylesheets) {
             $textarea.hide();
             var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
                             .css('display', '')
-                            .addClass("t-content")
+                            .addClass("k-content")
                             .insertBefore($textarea)[0];
 
             var window = iframe.contentWindow || iframe;
@@ -35,28 +35,29 @@
             if (!html.length && $.browser.mozilla)
                 html = '<br _moz_dirty="true" />';
 
+            var rtlStyle = $textarea.closest('.k-rtl').length ? 'direction:rtl;' : '';
+
             document.designMode = 'On';
             document.open();
             document.write(
-                new $t.stringBuilder()
-                    .cat('<!DOCTYPE html><html><head>')
-                    .cat('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />')
-                    .cat('<style type="text/css">')
-                        .cat('html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}')
-                        .cat('html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;')
-                            .catIf('direction:rtl;', $textarea.closest('.t-rtl').length)
-                        .cat('}')
-                        .cat('h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}')
-                        .cat('p{margin:0 0 1em;padding:0 .2em}.t-marker{display:none;}.t-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}')
-                        .cat('ul,ol{padding-left:2.5em}')
-                        .cat('a{color:#00a}')
-                        .cat('code{font-size:1.23em}')
-                    .cat('</style>')
-                    .cat($.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join(''))
-                    .cat('</head><body spellcheck="false">')
-                    .cat(html)
-                    .cat('</body></html>')
-                .string());
+                    '<!DOCTYPE html><html><head>' +
+                    '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' +
+                    '<style type="text/css">' +
+                        'html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}' +
+                        'html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;' +
+                        rtlStyle +
+                        '}' +
+                        'h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}' +
+                        'p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}' +
+                        'ul,ol{padding-left:2.5em}' +
+                        'a{color:#00a}' +
+                        'code{font-size:1.23em}' +
+                    '</style>' +
+                    $.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join('') +
+                    '</head><body spellcheck="false">' + 
+                    html +
+                    '</body></html>'
+                );
         
             document.close();
 
@@ -66,7 +67,7 @@
         initializeContentElement: function(editor) {
             var isFirstKeyDown = true;
 
-            editor.window = this.createContentElement($(editor.textarea), editor.stylesheets);
+            editor.window = EditorUtils.createContentElement($(editor.textarea), editor.options.stylesheets);
             editor.document = editor.window.contentDocument || editor.window.document;
             editor.body = editor.document.body;
 
@@ -89,7 +90,7 @@
                             e.preventDefault();
                             return;
                         }
-                        var toolName = editor.keyboard.toolFromShortcut(editor.tools, e);
+                        var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
 
                         if (toolName) {
                             e.preventDefault();
@@ -159,7 +160,7 @@
                     editor.update(value);
 
                     if (value != old) {
-                        $t.trigger(editor.element, 'change');
+                        editor.trigger('change');
                     }
                 });
     
@@ -172,7 +173,8 @@
         fixBackspace: function(editor, e) {
 
             var range = editor.getRange(),
-                startContainer = range.startContainer;
+                startContainer = range.startContainer,
+                dom = Editor.Dom;
 
 	        if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
             || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, 'br'))))
@@ -206,8 +208,15 @@
             for (var i = 0; i < format.length; i++)
                 if ($.inArray(name, format[i].tags) >= 0)
                     return format[i];
-        }
+        },
 
+        registerTool: function(toolName, tool) {
+            Editor.fn.options.tools[toolName] = tool;
+        },
+
+        registerFormat: function(formatName, format) {
+            Editor.fn.options.formats[formatName] = format;
+        }
     };
     
     var selectionChanged = EditorUtils.selectionChanged,
@@ -216,8 +225,43 @@
         initializeContentElement = EditorUtils.initializeContentElement,
         fixBackspace = EditorUtils.fixBackspace;
 
+    var localization = {
+        bold: 'Bold',
+        italic: 'Italic',
+        underline: 'Underline',
+        strikethrough: 'Strikethrough',
+        superscript: 'Superscript',
+        subscript: 'Subscript',
+        justifyCenter: 'Center text',
+        justifyLeft: 'Align text left',
+        justifyRight: 'Align text right',
+        justifyFull: 'Justify',
+        insertUnorderedList: 'Insert unordered list',
+        insertOrderedList: 'Insert ordered list',
+        indent: 'Indent',
+        outdent: 'Outdent',
+        createLink: 'Insert hyperlink',
+        unlink: 'Remove hyperlink',
+        insertImage: 'Insert image',
+        insertHtml: 'Insert HTML',
+        fontName: 'Select font family',
+        fontNameInherit: '(inherited font)',
+        fontSize: 'Select font size',
+        fontSizeInherit: '(inherited size)',
+        formatBlock: 'Format',
+        style: 'Styles',
+        emptyFolder: 'Empty Folder',
+        uploadFile: 'Upload',
+        orderBy: 'Arrange by:',
+        orderBySize: 'Size',
+        orderByName: 'Name',
+        invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
+        deleteFile: 'Are you sure you want to delete "{0}"?',
+        overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
+        directoryNotFound: 'A directory with this name was not found.'
+    };
 
-    // Editor ==================================================================
+    var emptyFinder = function () { return { isFormatted: function () { return false } } };
 
     var Editor = Widget.extend({
         init: function (element, options) {
@@ -247,8 +291,8 @@
                 "paste"
             ], self.options);
 
-            for (var id in self.tools)
-                self.tools[id].name = id.toLowerCase();
+            for (var id in self.options.tools)
+                self.options.tools[id].name = id.toLowerCase();
         
             self.textarea = $element.find('textarea').attr('autocomplete', 'off')[0];
             initializeContentElement(this);
@@ -263,7 +307,7 @@
 
             function toolFromClassName(element) {
                 var tool = $.grep(element.className.split(' '), function (x) {
-                    return !/^t-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
+                    return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
                 });
                 return tool[0] ? tool[0].substring(2) : 'custom';
             }
@@ -272,24 +316,24 @@
                 if (!tool.key)
                     return localizedText;
 
-                return new $t.stringBuilder()
-                    .cat(localizedText)
-                    .cat(' (')
-                        .catIf('Ctrl + ', tool.ctrl)
-                        .catIf('Shift + ', tool.shift)
-                        .catIf('Alt + ', tool.alt)
-                        .cat(tool.key)
-                    .cat(')')
-                    .string();
+                var res = localizedText + ' (';
+
+                if (tool.ctrl) res += 'Ctrl + ';
+                if (tool.shift) res += 'Shift + ';
+                if (tool.alt) res += 'Alt + ';
+
+                res += tool.key + ')';
+
+                return res;
             }
 
-            var toolbarItems = '.t-editor-toolbar > li > *',
-                buttons = '.t-editor-button .t-tool-icon',
-                enabledButtons = buttons + ':not(.t-state-disabled)',
-                disabledButtons = buttons + '.t-state-disabled';
+            var toolbarItems = '.k-editor-toolbar > li > *',
+                buttons = '.k-editor-button .k-tool-icon',
+                enabledButtons = buttons + ':not(.k-state-disabled)',
+                disabledButtons = buttons + '.k-state-disabled';
 
-             $element.find(".t-combobox .t-input").keydown(function(e) {
-                var combobox = $(this).closest(".t-combobox").data("tComboBox"),
+             $element.find(".k-combobox .k-input").keydown(function(e) {
+                var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
                     key = e.keyCode;
 
                 if (key == 39 || key == 37) {
@@ -303,9 +347,9 @@
             });
 
             $element
-                .delegate(enabledButtons, 'mouseenter', $t.hover)
-                .delegate(enabledButtons, 'mouseleave', $t.leave)
-                .delegate(buttons, 'mousedown', $t.preventDefault)
+                .delegate(enabledButtons, 'mouseenter', function() { $(this).addClass("k-state-hover")})
+                .delegate(enabledButtons, 'mouseleave', function() { $(this).removeClass("k-state-hover")})
+                .delegate(buttons, 'mousedown', false)
                 .delegate(focusable, "keydown", function(e) {
                     if (e.keyCode == 39) {
                         $(this).closest("li").nextAll("li:has(" + focusable + ")").first().find(focusable).focus();
@@ -315,25 +359,27 @@
                         self.focus();
                     }
                 })
-                .delegate(enabledButtons, 'click', $t.stopAll(function (e) {
+                .delegate(enabledButtons, 'click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
                     self.exec(toolFromClassName(this));
-                }))
+                })
                 .delegate(disabledButtons, 'click', function(e) { e.preventDefault(); })
                 .find(toolbarItems)
                     .each(function () {
                         var toolName = toolFromClassName(this),
-                            tool = self.tools[toolName],
-                            description = self.localization[toolName],
+                            tool = self.options.tools[toolName],
+                            description = self.options.localization[toolName],
                             $this = $(this);
 
                         if (!tool)
                             return;
                     
                         if (toolName == 'fontSize' || toolName == 'fontName') {
-                            var inheritText = self.localization[toolName + 'Inherit'] || localization[toolName + 'Inherit']
+                            var inheritText = self.options.localization[toolName + 'Inherit'] || localization[toolName + 'Inherit']
                             self[toolName][0].Text = inheritText;
                             $this.find('input').val(inheritText).end()
-                                 .find('span.t-input').text(inheritText).end();
+                                 .find('span.k-input').text(inheritText).end();
                         }
 
                         tool.initialize($this, {
@@ -341,8 +387,8 @@
                             editor: self
                         });
 
-                    }).end()
-                .bind('selectionChange', function() {
+                    });/*.end()*/
+                self.bind('selectionChange', function() {
                     var range = self.getRange();
 
                     var nodes = Editor.RangeUtils.textNodes(range);
@@ -353,7 +399,7 @@
 
                     $element.find(toolbarItems)
                         .each(function () {
-                            var tool = self.tools[toolFromClassName(this)];
+                            var tool = self.options.tools[toolFromClassName(this)];
                             if (tool) {
                                 tool.update($(this), nodes, self.pendingFormats);
                             }
@@ -372,7 +418,7 @@
                 })
                 .bind('mousedown', function(e) {
                     try {
-                        if (self.keyboard.typingInProgress())
+                        if (self.keyboard.isTypingInProgress())
                             self.keyboard.endTyping(true);
                 
                         if (!self.selectionRestorePoint) {
@@ -383,8 +429,9 @@
         },
 
         options: {
+            name: "Editor",
             localization: localization,
-            formats: formats,
+            formats: {},
             encoded: true,
             stylesheets: [],
             dialogOptions: {
@@ -424,39 +471,14 @@
                 { Text: 'Heading 6', Value: 'h6' }
             ],
             tools: {
-                bold: new Editor.InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}),
-                italic: new Editor.InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}),
-                underline: new Editor.InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}),
-                strikethrough: new Editor.InlineFormatTool({format: formats.strikethrough}),
-                superscript: new Editor.InlineFormatTool({format: formats.superscript }),
-                subscript: new Editor.InlineFormatTool({format: formats.subscript }),
                 undo: { key: 'Z', ctrl: true },
-                redo: { key: 'Y', ctrl: true },
-                insertLineBreak: new Editor.Tool({ key: 13, shift: true, command: NewLineCommand }),
-                insertParagraph: new Editor.Tool({ key: 13, command: ParagraphCommand }),
-                justifyCenter: new Editor.BlockFormatTool({format: formats.justifyCenter}),
-                justifyLeft: new Editor.BlockFormatTool({format: formats.justifyLeft}),
-                justifyRight: new Editor.BlockFormatTool({format: formats.justifyRight}),
-                justifyFull: new Editor.BlockFormatTool({format: formats.justifyFull}),
-                insertUnorderedList: new Editor.ListTool({tag:'ul'}),
-                insertOrderedList: new Editor.ListTool({tag:'ol'}),
-                createLink: new Editor.Tool({ key: 'K', ctrl: true, command: LinkCommand}),
-                unlink: new Editor.UnlinkTool({ key: 'K', ctrl: true, shift: true}),
-                insertImage: new Editor.Tool({ command: ImageCommand }),
-                indent: new Editor.Tool({ command: IndentCommand }),
-                outdent: new Editor.OutdentTool(),
-                insertHtml: new Editor.InsertHtmlTool(),
-                style: new Editor.StyleTool(),
-                fontName: new Editor.FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}),
-                fontSize: new Editor.FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}),
-                formatBlock: new Editor.FormatBlockTool(),
-                foreColor: new Editor.ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}),
-                backColor: new Editor.ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'})
+                redo: { key: 'Y', ctrl: true }
             }
         },
 
         value: function (html) {
-            var body = this.body;
+            var body = this.body,
+                dom = Editor.Dom;
             if (html === undefined) return Editor.Serializer.domToXhtml(body);
 
             this.pendingFormats.clear();
@@ -513,11 +535,11 @@
         },
 
         update: function (value) {
-            this.textarea.value = value || this.encoded ? this.encodedValue() : this.value();
+            this.textarea.value = value || this.options.encoded ? this.encodedValue() : this.value();
         },
 
         encodedValue: function () {
-            return dom.encode(this.value());
+            return Editor.Dom.encode(this.value());
         },
 
         createRange: function (document) {
@@ -561,7 +583,7 @@
             name = name.toLowerCase();
 
             // restore selection
-            if (!this.keyboard.typingInProgress()) {
+            if (!this.keyboard.isTypingInProgress()) {
                 this.focus();
 
                 range = this.getRange();
@@ -569,9 +591,9 @@
             }
 
             // exec tool
-            for (id in this.tools)
+            for (id in this.options.tools)
                 if (id.toLowerCase() == name) {
-                    tool = this.tools[id];
+                    tool = this.options.tools[id];
                     break;
                 }
 
@@ -586,7 +608,7 @@
 
                 var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
 
-                $t.trigger(this.element, 'execute', { name: name, command: command });
+                this.trigger('execute', { name: name, command: command });
 
                 if (/undo|redo/i.test(name)) {
                     this.undoRedoStack[name]();
@@ -611,97 +633,17 @@
 
     kendo.ui.plugin(Editor);
 
-    var formats = {
-        bold: [
-            { tags: ['strong'] },
-            { tags: ['span'], attr: { style: { fontWeight: 'bold'}} }
-        ],
-
-        italic: [
-            { tags: ['em'] },
-            { tags: ['span'], attr: { style: { fontStyle: 'italic'}} }
-        ],
-
-        underline: [{ tags: ['span'], attr: { style: { textDecoration: 'underline'}}}],
-
-        strikethrough: [
-            { tags: ['del'] },
-            { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} }
-        ],
-    
-        superscript: [
-            { tags: ['sup'] }
-        ],
-    
-        subscript: [
-            { tags: ['sub'] }
-        ],
-    
-        justifyLeft: [
-            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'left'}} },
-            { tags: ['img'], attr: { style: { 'float': 'left'}} }
-        ],
-
-        justifyCenter: [
-            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'center'}} },
-            { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} }
-        ],
-
-        justifyRight: [
-            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'right'}} },
-            { tags: ['img'], attr: { style: { 'float': 'right'}} }
-        ],
-
-        justifyFull: [
-            { tags: Editor.Dom.blockElements, attr: { style: { textAlign: 'justify'}} }
-        ]
-    };
-
-    var emptyFinder = function () { return { isFormatted: function () { return false } } };
-
-    var localization = {
-        bold: 'Bold',
-        italic: 'Italic',
-        underline: 'Underline',
-        strikethrough: 'Strikethrough',
-        superscript: 'Superscript',
-        subscript: 'Subscript',
-        justifyCenter: 'Center text',
-        justifyLeft: 'Align text left',
-        justifyRight: 'Align text right',
-        justifyFull: 'Justify',
-        insertUnorderedList: 'Insert unordered list',
-        insertOrderedList: 'Insert ordered list',
-        indent: 'Indent',
-        outdent: 'Outdent',
-        createLink: 'Insert hyperlink',
-        unlink: 'Remove hyperlink',
-        insertImage: 'Insert image',
-        insertHtml: 'Insert HTML',
-        fontName: 'Select font family',
-        fontNameInherit: '(inherited font)',
-        fontSize: 'Select font size',
-        fontSizeInherit: '(inherited size)',
-        formatBlock: 'Format',
-        style: 'Styles',
-        emptyFolder: 'Empty Folder',
-        uploadFile: 'Upload',
-        orderBy: 'Arrange by:',
-        orderBySize: 'Size',
-        orderByName: 'Name',
-        invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
-        deleteFile: 'Are you sure you want to delete "{0}"?',
-        overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
-        directoryNotFound: 'A directory with this name was not found.'
-    };
-
     var Tool = Class.extend({
+        init: function(options) {
+            this.options = options;
+        },
+
         initialize: function($ui, options) {
             $ui.attr({ unselectable: 'on', title: options.title });
         },
 
         command: function (commandArguments) {
-            return new options.command(commandArguments);
+            return new this.options.command(commandArguments);
         },
 
         update: function() {
@@ -715,21 +657,26 @@
 
     Tool.exec = function (editor, name, value) {
         editor.exec(name, { value: value });
-    }
+    };
 
     var FormatTool = Tool.extend({
+        init: function (options) {
+            Tool.fn.init.call(this, options);
+        },
+
         command: function (commandArguments) {
-            return new FormatCommand(extend(commandArguments, {
-                    formatter: options.formatter
+            var that = this;
+            return new Editor.FormatCommand(extend(commandArguments, {
+                    formatter: that.options.formatter
                 }));
         },
 
         update: function($ui, nodes, pendingFormats) {
             var isPending = pendingFormats.isPending(this.name),
-                isFormatted = options.finder.isFormatted(nodes),
+                isFormatted = this.options.finder.isFormatted(nodes),
                 isActive = isPending ? !isFormatted : isFormatted;
 
-            $ui.toggleClass('t-state-active', isActive);
+            $ui.toggleClass('k-state-active', isActive);
         }
     });
 
@@ -779,7 +726,7 @@ if ($.browser.msie && parseInt($.browser.version) >= 8) {
             while (node = node.nextSibling) {
                 if (node.nodeType == 3 && prev.nodeType == 3) {
                     node.nodeValue = prev.nodeValue + node.nodeValue;
-                    dom.remove(prev);
+                    Dom.remove(prev);
                 }
                 prev = node;
             }
@@ -837,7 +784,7 @@ var Dom = {
         var newNode = node.cloneNode(false);
         node.deleteData(offset, node.length);
         newNode.deleteData(0, offset);
-        dom.insertAfter(newNode, node);
+        Dom.insertAfter(newNode, node);
     },
 
     attrEquals: function(node, attributes) {
@@ -858,14 +805,14 @@ var Dom = {
     },
 
     blockParentOrBody: function(node) {
-        return dom.parentOfType(node, blockElements) || node.ownerDocument.body;
+        return Dom.parentOfType(node, blockElements) || node.ownerDocument.body;
     },
 
     blockParents: function(nodes) {
         var blocks = [];
 
         for (var i = 0, len = nodes.length; i < len; i++) {
-            var block = dom.parentOfType(nodes[i], dom.blockElements);
+            var block = Dom.parentOfType(nodes[i], Dom.blockElements);
             if (block && $.inArray(block, blocks) < 0)
                 blocks.push(block);
         }
@@ -880,6 +827,7 @@ var Dom = {
     normalize: normalize,
     blockElements: blockElements,
     inlineElements: inlineElements,
+    empty: empty,
     fillAttrs: fillAttrs,
 
     toHex: function (color) {
@@ -905,7 +853,7 @@ var Dom = {
         
     significantChildNodes: function(node) {
         return $.grep(node.childNodes, function(child) {
-            return child.nodeType != 3 || !dom.isWhitespace(child);
+            return child.nodeType != 3 || !Dom.isWhitespace(child);
         });
     },
         
@@ -916,18 +864,18 @@ var Dom = {
         var result = null;
             
         for (var child = node.lastChild; child; child = child.previousSibling)
-            if (result = dom.lastTextNode(child))
+            if (result = Dom.lastTextNode(child))
                 return result;
                 
         return result;
     },
 
     is: function (node, nodeName) {
-        return dom.name(node) == nodeName;
+        return Dom.name(node) == nodeName;
     },
         
     isMarker: function(node) {
-        return node.className == 't-marker';
+        return node.className == 'k-marker';
     },
         
     isWhitespace: function(node) {
@@ -935,15 +883,15 @@ var Dom = {
     },
         
     isBlock: function(node) {
-        return block[dom.name(node)];
+        return block[Dom.name(node)];
     },
 
     isEmpty: function(node) {
-        return empty[dom.name(node)];
+        return empty[Dom.name(node)];
     },
         
     isInline: function(node) {
-        return inline[dom.name(node)];
+        return inline[Dom.name(node)];
     },
         
     scrollTo: function (node) {
@@ -974,13 +922,13 @@ var Dom = {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
                 if (node.nodeValue.replace(/\ufeff/g, '').length == 0)
-                    dom.remove(node);
-                if (dom.isWhitespace(node))
-                    dom.insertBefore(node, parent);
-            } else if (node.className != 't-marker') {
-                dom.trim(node);
-                if (node.childNodes.length == 0 && !dom.isEmpty(node))
-                    dom.remove(node);
+                    Dom.remove(node);
+                if (Dom.isWhitespace(node))
+                    Dom.insertBefore(node, parent);
+            } else if (node.className != 'k-marker') {
+                Dom.trim(node);
+                if (node.childNodes.length == 0 && !Dom.isEmpty(node))
+                    Dom.remove(node);
             }
         }
 
@@ -990,17 +938,17 @@ var Dom = {
     parentOfType: function (node, tags) {
         do {
             node = node.parentNode;
-        } while (node && !(dom.ofType(node, tags)));
+        } while (node && !(Dom.ofType(node, tags)));
 
         return node;
     },
 
     ofType: function (node, tags) {
-        return $.inArray(dom.name(node), tags) >= 0;
+        return $.inArray(Dom.name(node), tags) >= 0;
     },
 
     changeTag: function (referenceElement, tagName) {
-        var newElement = dom.create(referenceElement.ownerDocument, tagName);
+        var newElement = Dom.create(referenceElement.ownerDocument, tagName);
         var attributes = referenceElement.attributes;
 
         for (var i = 0; i < attributes.length; i++) {
@@ -1021,13 +969,13 @@ var Dom = {
         while (referenceElement.firstChild)
             newElement.appendChild(referenceElement.firstChild);
 
-        dom.insertBefore(newElement, referenceElement);
-        dom.remove(referenceElement);
+        Dom.insertBefore(newElement, referenceElement);
+        Dom.remove(referenceElement);
         return newElement;
     },
 
     wrap: function (node, wrapper) {
-        dom.insertBefore(wrapper, node);
+        Dom.insertBefore(wrapper, node);
         wrapper.appendChild(node);
         return wrapper;
     },
@@ -1041,14 +989,14 @@ var Dom = {
     },
 
     create: function (document, tagName, attributes) {
-        return dom.attr(document.createElement(tagName), attributes);
+        return Dom.attr(document.createElement(tagName), attributes);
     },
 
     attr: function (element, attributes) {
         attributes = extend({}, attributes);
 
         if (attributes && 'style' in attributes) {
-            dom.style(element, attributes.style);
+            Dom.style(element, attributes.style);
             delete attributes.style;
         }
         return extend(element, attributes);
@@ -1071,7 +1019,7 @@ var Dom = {
     },
 
     inlineStyle: function(document, name, attributes) {
-        var span = dom.create(document, name, attributes);
+        var span = Dom.create(document, name, attributes);
         
         document.body.appendChild(span);
                 
@@ -1135,7 +1083,7 @@ extend(kendo.ui.Editor, {
     Dom: Dom
 });
 
-})(jQuery);(function($) {
+})(jQuery);(function($, undefined) {
 
 // Imports ================================================================
 var doc = document,
@@ -1300,7 +1248,7 @@ var Serializer = {
 
                 attr(node);
 
-                if (empty[tagName]) {
+                if (dom.empty[tagName]) {
                     result.push(' />');
                 } else {
                     result.push('>');
@@ -1911,21 +1859,21 @@ var RangeEnumerator = Class.extend({
 
 var RestorePoint = Class.extend({
     init: function(range) {
-        this.rootNode = RangeUtils.documentFromRange(range);
-        this.body = this.rootNode.body;
-        this.html = this.body.innerHTML;
-        this.range = range;
+        var that = this;
+        that.range = range;
+        that.rootNode = RangeUtils.documentFromRange(range);
+        that.body = that.rootNode.body;
+        that.html = that.body.innerHTML;
 
-        this.startContainer = nodeToPath(range.startContainer);
-        this.endContainer = nodeToPath(range.endContainer);
-        this.startOffset = offset(range.startContainer, range.startOffset);
-        this.endOffset = offset(range.endContainer, range.endOffset);
-
-        range[start ? 'setStart' : 'setEnd'](node, offset);
+        that.startContainer = that.nodeToPath(range.startContainer);
+        that.endContainer = that.nodeToPath(range.endContainer);
+        that.startOffset = that.offset(range.startContainer, range.startOffset);
+        that.endOffset = that.offset(range.endContainer, range.endOffset);
     },
 
     index: function(node) {
-        var result = 0, lastType = node.nodeType;
+        var result = 0,
+            lastType = node.nodeType;
 
         while (node = node.previousSibling) {
             var nodeType = node.nodeType;
@@ -1951,7 +1899,7 @@ var RestorePoint = Class.extend({
         var path = [];
             
         while (node != this.rootNode) {
-            path.push(index(node));
+            path.push(this.index(node));
             node = node.parentNode;
         }
 
@@ -1971,13 +1919,15 @@ var RestorePoint = Class.extend({
             node = node.nextSibling;
         }
 
+        range[start ? 'setStart' : 'setEnd'](node, offset);
     },
 
     toRange: function () {
-        var result = this.range.cloneRange();
+        var that = this,
+            result = that.range.cloneRange();
 
-        toRangePoint(result, true, this.startContainer, this.startOffset);
-        toRangePoint(result, false, this.endContainer, this.endOffset);
+        that.toRangePoint(result, true, that.startContainer, that.startOffset);
+        that.toRangePoint(result, false, that.endContainer, that.endOffset);
 
         return result;
     }
@@ -1988,7 +1938,7 @@ var Marker = Class.extend({
     addCaret: function (range) {
         var caret = this.caret;
 
-        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 't-marker' });
+        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
         range.insertNode(caret);
         range.selectNode(caret);
         return caret;
@@ -2036,7 +1986,7 @@ var Marker = Class.extend({
         var rangeBoundary = range.cloneRange();
 
         rangeBoundary.collapse(false);
-        this.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 't-marker' });
+        this.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
         rangeBoundary.insertNode(this.end);
 
         rangeBoundary = range.cloneRange();
@@ -2205,7 +2155,7 @@ var RangeUtils = {
         var markers = [];
 
         new RangeIterator(range).traverse(function (node) {
-            if (node.className == 't-marker')
+            if (node.className == 'k-marker')
                 markers.push(node);
         });
 
@@ -2300,19 +2250,22 @@ extend(kendo.ui.Editor, {
         kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
+        registerTool = Editor.EditorUtils.registerTool,
         dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
         selectRange = RangeUtils.selectRange,
+        Tool = Editor.Tool,
         RestorePoint = Editor.RestorePoint,
         Marker = Editor.Marker,
         extend = $.extend;
 
 var Command = Class.extend({
     init: function(options) {
-        this.options = options;
-        this.restorePoint = new RestorePoint(options.range);
-        this.marker = new Marker();
-        this.formatter = options.formatter;
+        var that = this;
+        that.options = options;
+        that.restorePoint = new RestorePoint(options.range);
+        that.marker = new Marker();
+        that.formatter = options.formatter;
     },
 
     getRange: function () {
@@ -2339,10 +2292,11 @@ var Command = Class.extend({
     },
 
     exec: function () {
-        var range = this.lockRange(true);
-        this.formatter.editor = this.editor;
-        this.formatter.toggle(range);
-        this.releaseRange(range);
+        var that = this,
+        range = that.lockRange(true);
+        that.formatter.editor = that.editor;
+        that.formatter.toggle(range);
+        that.releaseRange(range);
     }
 });
 
@@ -2384,7 +2338,7 @@ var InsertHtmlCommand = Command.extend({
 var InsertHtmlTool = Tool.extend({
     initialize: function($ui, initOptions) {
         var editor = initOptions.editor;
-        var title = editor.localization.insertHtml;
+        var title = editor.options.localization.insertHtml;
         
         $ui.tSelectBox({
             data: editor['insertHtml'],
@@ -2395,7 +2349,7 @@ var InsertHtmlTool = Tool.extend({
                 Tool.exec(editor, 'insertHtml', e.value);
             },
             highlightFirst: false
-        }).find('.t-input').html(editor.localization.insertHtml);
+        }).find('.k-input').html(editor.options.localization.insertHtml);
     },
 
     command: function (commandArguments) {
@@ -2450,7 +2404,7 @@ var TypingHandler = Class.extend({
             keyboard = editor.keyboard;
             isTypingKey = keyboard.isTypingKey(e);
 
-        if (isTypingKey && !keyboard.typingInProgress()) {
+        if (isTypingKey && !keyboard.isTypingInProgress()) {
             var range = editor.getRange();
             this.startRestorePoint = new RestorePoint(range);
 
@@ -2468,7 +2422,7 @@ var TypingHandler = Class.extend({
     keyup: function (e) {
         var keyboard = this.editor.keyboard;
 
-        if (keyboard.typingInProgress()) {
+        if (keyboard.isTypingInProgress()) {
             keyboard.endTyping();
             return true;
         }
@@ -2502,7 +2456,7 @@ var SystemHandler = Class.extend({
 
         if (keyboard.isModifierKey(e)) {
 
-            if (keyboard.typingInProgress())
+            if (keyboard.isTypingInProgress())
                 keyboard.endTyping(true);
 
             this.startRestorePoint = new RestorePoint(editor.getRange());
@@ -2549,9 +2503,9 @@ var Keyboard = Class.extend({
         var key = String.fromCharCode(e.keyCode);
 
         for (var toolName in tools) {
-            var tool = tools[toolName];
+            var toolOptions = tools[toolName].options || {};
 
-            if ((tool.key == key || tool.key == e.keyCode) && !!tool.ctrl == e.ctrlKey && !!tool.alt == e.altKey && !!tool.shift == e.shiftKey)
+            if ((toolOptions.key == key || toolOptions.key == e.keyCode) && !!toolOptions.ctrl == e.ctrlKey && !!toolOptions.alt == e.altKey && !!toolOptions.shift == e.shiftKey)
                 return toolName;
         }
     },
@@ -2592,7 +2546,7 @@ var Keyboard = Class.extend({
             this.timeout = window.setTimeout(this.stopTyping, 1000);
     },
 
-    typingInProgress: function () {
+    isTypingInProgress: function () {
         return this.typingInProgress;
     },
 
@@ -2651,7 +2605,7 @@ var Clipboard = Class.extend({
         var editor = this.editor,
             range = editor.getRange(),
             startRestorePoint = new RestorePoint(range),
-            clipboardNode = dom.create(editor.document, 'div', {className:'t-paste-container', innerHTML: '\ufeff'});
+            clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: '\ufeff'});
 
         editor.body.appendChild(clipboardNode);
             
@@ -2679,7 +2633,7 @@ var Clipboard = Class.extend({
                 dom.remove(clipboardNode.lastChild);
                 
             var args = { html: clipboardNode.innerHTML };
-            $t.trigger(editor.element, "paste", args);
+            editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
             Editor.EditorUtils.selectionChanged(editor);
@@ -2740,7 +2694,7 @@ var Clipboard = Class.extend({
             
         var fragment = this.htmlToFragment(html);
         
-        if (fragment.firstChild && fragment.firstChild.className === "t-paste-container") {
+        if (fragment.firstChild && fragment.firstChild.className === "k-paste-container") {
             var fragmentsHtml = [];
             for (i = 0, l = fragment.childNodes.length; i < l; i++) {
                 fragmentsHtml.push(fragment.childNodes[i].innerHTML);
@@ -2886,17 +2840,22 @@ extend(kendo.ui.Editor, {
     MSWordFormatCleaner: MSWordFormatCleaner
 });
 
+registerTool("insertHtml", new InsertHtmlTool());
+
 })(jQuery);(function($) {
 
     // Imports ================================================================
     var kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
+        formats = Editor.fn.options.formats,
         Tool = Editor.Tool,
-        dom = Editor.dom,
+        FormatTool = Editor.FormatTool,
+        dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
-        extend = $.extend;
-
+        extend = $.extend,
+        registerTool = Editor.EditorUtils.registerTool,
+        registerFormat = Editor.EditorUtils.registerFormat;
 
     var InlineFormatFinder = Class.extend({
         init: function(format) {
@@ -2911,7 +2870,7 @@ extend(kendo.ui.Editor, {
 
             for (var node = parentNode.firstChild; node; node = node.nextSibling) {
                 if (node != referenceNode) {
-                    if (node.className == 't-marker') {
+                    if (node.className == 'k-marker') {
                         markerCount++;
                     } else if (node.nodeType == 3) {
                         textNodesCount++;
@@ -2921,7 +2880,7 @@ extend(kendo.ui.Editor, {
                 }
             }
 
-            if (markerCount > 1 && parentNode.firstChild.className == 't-marker' && parentNode.lastChild.className == 't-marker') {
+            if (markerCount > 1 && parentNode.firstChild.className == 'k-marker' && parentNode.lastChild.className == 'k-marker') {
                 // full node selection
                 return 0;
             } else {
@@ -2933,7 +2892,7 @@ extend(kendo.ui.Editor, {
             if (!skip && this.numberOfSiblings(sourceNode) > 0)
                 return null;
 
-            return dom.parentOfType(sourceNode, format[0].tags);
+            return dom.parentOfType(sourceNode, this.format[0].tags);
         },
 
         findFormat: function (sourceNode) {
@@ -3001,7 +2960,7 @@ extend(kendo.ui.Editor, {
                 if (formatNode)
                     dom.attr(formatNode, this.attributes);
                 else
-                    formatNode = wrap(node);
+                    formatNode = this.wrap(node);
 
                 formatNodes.push(formatNode);
             }
@@ -3042,7 +3001,7 @@ extend(kendo.ui.Editor, {
                 var node = nodes.pop();
                 var last = nodes[nodes.length - 1];
 
-                if (node.previousSibling && node.previousSibling.className == 't-marker') {
+                if (node.previousSibling && node.previousSibling.className == 'k-marker') {
                     last.appendChild(node.previousSibling);
                 }
 
@@ -3056,12 +3015,12 @@ extend(kendo.ui.Editor, {
 
     });
 
-    var GreedyInlineFormatFinder = InlineFormatter.extend({
+    var GreedyInlineFormatFinder = InlineFormatFinder.extend({
         init: function(format, greedyProperty) {
-            var formatter = this;
-            formatter.format = format;
-            formatter.greedyProperty = greedyProperty;
-            InlineFormatFinder.fn.init.call(formatter, format);
+            var that = this;
+            that.format = format;
+            that.greedyProperty = greedyProperty;
+            InlineFormatFinder.fn.init.call(that, format);
         },
 
         getInlineCssValue: function(node) {
@@ -3129,13 +3088,13 @@ extend(kendo.ui.Editor, {
 
     var GreedyInlineFormatter = InlineFormatter.extend({
         init: function(format, values, greedyProperty) {
-            var formatter = this;
+            var that = this;
 
-            InlineFormatter.fn.init.call(formatter, format, values);
+            InlineFormatter.fn.init.call(that, format, values);
 
-            this.greedyProperty = greedyProperty;
-            this.values = values;
-            this.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+            that.greedyProperty = greedyProperty;
+            that.values = values;
+            that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
         },
 
         activate: function(range, nodes) {
@@ -3156,8 +3115,7 @@ extend(kendo.ui.Editor, {
 
     var InlineFormatTool = FormatTool.extend({
         init: function(options) {
-            var tool = this;
-            FormatTool.fn.init.call(tool, extend(options, {
+            FormatTool.fn.init.call(this, extend(options, {
                 finder: new InlineFormatFinder(options.format),
                 formatter: function () { return new InlineFormatter(options.format) }
             }));
@@ -3227,7 +3185,7 @@ extend(kendo.ui.Editor, {
 
     var ColorTool = Tool.extend({
         init: function(options) {
-            Tool.fn.init.call(colorTool, options);
+            Tool.fn.init.call(this, options);
 
             this.options = options;
             this.format = [{ tags: dom.inlineElements }];
@@ -3287,12 +3245,12 @@ extend(kendo.ui.Editor, {
             list.value(this.finder.getFormat(nodes));
         },
 
-        init: function($ui, initOptions) {
+        initiliaze: function($ui, initOptions) {
             var editor = initOptions.editor;
         
             $ui.tSelectBox({
                 data: editor['style'],
-                title: editor.localization.style,
+                title: editor.options.localization.style,
                 onItemCreate: function (e) {
                     var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
                 
@@ -3317,6 +3275,34 @@ extend(kendo.ui.Editor, {
         StyleTool: StyleTool
     });
 
+    registerTool("style", new Editor.StyleTool());
+
+    registerFormat("bold", [ { tags: ['strong'] }, { tags: ['span'], attr: { style: { fontWeight: 'bold'}} } ]);
+    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}));
+
+    registerFormat("italic", [ { tags: ['em'] }, { tags: ['span'], attr: { style: { fontStyle: 'italic'}} } ]);
+    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}));
+
+    registerFormat("underline", [ { tags: ['span'], attr: { style: { textDecoration: 'underline'}} } ]);
+    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}));
+
+    registerFormat("strikethrough", [ { tags: ['del'] }, { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} } ]);
+    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough}));
+
+    registerFormat("superscript", [ { tags: ['sup'] } ]);
+    registerTool("superscript", new InlineFormatTool({format: formats.superscript}));
+
+    registerFormat("subscript", [ { tags: ['sub'] } ]);
+    registerTool("subscript", new InlineFormatTool({format: formats.subscript}));
+
+    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}));
+
+    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'}));
+
+    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}));
+
+    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}));
+
 })(jQuery);(function($) {
 
 // Imports ================================================================
@@ -3324,9 +3310,14 @@ var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
+    formats = Editor.fn.options.formats,
     dom = Editor.Dom,
     Command = Editor.Command,
+    Tool = Editor.Tool,
+    FormatTool = Editor.FormatTool,
     EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool,
+    registerFormat = EditorUtils.registerFormat,
     RangeUtils = Editor.RangeUtils;
 
 var BlockFormatFinder = Class.extend({
@@ -3447,10 +3438,10 @@ var BlockFormatter = Class.extend({
     apply: function (nodes) {
         var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : this.finder.findSuitable(nodes);
 
-        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), format) : format[0];
+        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), this.format) : this.format[0];
 
         var tag = formatToApply.tags[0];
-        var attributes = extend({}, formatToApply.attr, values);
+        var attributes = extend({}, formatToApply.attr, this.values);
 
         if (formatNodes.length)
             for (var i = 0; i < formatNodes.length; i++)
@@ -3559,8 +3550,8 @@ var FormatBlockTool = Tool.extend({
         var editor = initOptions.editor;
         
         $ui.tSelectBox({
-            data: editor.formatBlock,
-            title: editor.localization.formatBlock,
+            data: editor.options.formatBlock,
+            title: editor.options.localization.formatBlock,
             onItemCreate: function (e) {
                 var tagName = e.dataItem.Value;
                 e.html = '<' + tagName + ' unselectable="on" style="margin: .3em 0;' + dom.inlineStyle(editor.document, tagName) + '">' + e.dataItem.Text + '</' + tagName + '>';
@@ -3583,6 +3574,20 @@ extend(kendo.ui.Editor, {
     FormatBlockTool: FormatBlockTool
 });
 
+registerTool("formatBlock", new FormatBlockTool());
+
+registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: 'left'}} }, { tags: ['img'], attr: { style: { 'float': 'left'}} } ]);
+registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft}));
+
+registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: 'center'}} }, { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} } ]);
+registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter}));
+
+registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: 'right'}} }, { tags: ['img'], attr: { style: { 'float': 'right'}} } ]);
+registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight}));
+
+registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: 'justify'}} } ]);
+registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull}));
+
 })(jQuery);(function($) {
 
 // Imports ================================================================
@@ -3592,14 +3597,16 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     Command = Editor.Command,
+    Tool = Editor.Tool,
+    BlockFormatter = Editor.BlockFormatter,
     normalize = dom.normalize,
-    RangeUtils = Editor.RangeUtils;
+    RangeUtils = Editor.RangeUtils,
+    registerTool = Editor.EditorUtils.registerTool;
 
 var ParagraphCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        cmd.options = options;
-        Command.fn.init.call(cmd, options);
+        this.options = options;
+        Command.fn.init.call(this, options);
     },
 
     exec: function () {
@@ -3715,9 +3722,8 @@ var ParagraphCommand = Command.extend({
 
 var NewLineCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        cmd.options = options;
-        Command.fn.init.call(cmd, options);
+        this.options = options;
+        Command.fn.init.call(this, options);
     },
 
     exec: function () {
@@ -3744,6 +3750,9 @@ extend(kendo.ui.Editor, {
     NewLineCommand: NewLineCommand
 });
 
+registerTool("insertLineBreak", new Tool({ key: 13, shift: true, command: NewLineCommand }));
+registerTool("insertParagraph", new Tool({ key: 13, command: ParagraphCommand }));
+
 })(jQuery);(function($) {
 
 // Imports ================================================================
@@ -3753,16 +3762,18 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
+    Command = Editor.Command,
+    FormatTool = Editor.FormatTool,
     BlockFormatFinder = Editor.BlockFormatFinder,
-    textNodes = RangeUtils.textNodes;
+    textNodes = RangeUtils.textNodes,
+    registerTool = Editor.EditorUtils.registerTool;
 
 var ListFormatFinder = BlockFormatFinder.extend({
     init: function(tag) {
-        var finder = this;
-        finder.tag = tag;
-        var tags = finder.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
+        this.tag = tag;
+        var tags = this.tags = [tag == 'ul' ? 'ol' : 'ul', tag];
 
-        BlockFormatFinder.fn.init.call(finder, [{ tags: tags}]);
+        BlockFormatFinder.fn.init.call(this, [{ tags: tags}]);
     },
 
     isFormatted: function (nodes) {
@@ -3800,10 +3811,10 @@ var ListFormatFinder = BlockFormatFinder.extend({
 
 var ListFormatter = Class.extend({
     init: function(tag, unwrapTag) {
-        var formatter = this;
-        formatter.finder = new ListFormatFinder(tag);
-        formatter.tag = tag;
-        formatter.unwrapTag = unwrapTag;
+        var that = this;
+        that.finder = new ListFormatFinder(tag);
+        that.tag = tag;
+        that.unwrapTag = unwrapTag;
     },
 
     wrap: function(list, nodes) {
@@ -3857,7 +3868,7 @@ var ListFormatter = Class.extend({
     },
 
     suitable: function (candidate, nodes) {
-        if (candidate.className == "t-marker") {
+        if (candidate.className == "k-marker") {
             var sibling = candidate.nextSibling;
 
             if (sibling && dom.isBlock(sibling)) {
@@ -3871,7 +3882,7 @@ var ListFormatter = Class.extend({
             }
         }
 
-        return containsAny(candidate, nodes) || dom.isInline(candidate) || candidate.nodeType == 3;
+        return this.containsAny(candidate, nodes) || dom.isInline(candidate) || candidate.nodeType == 3;
     },
 
     split: function (range) {
@@ -3887,9 +3898,9 @@ var ListFormatter = Class.extend({
                 if (formatNode) {
                     var parents = $(formatNode).parents("ul,ol");
                     if (parents[0]) {
-                        this.split(range, parents.last()[0], true);
+                        RangeUtils.split(range, parents.last()[0], true);
                     } else {
-                        this.split(range, formatNode, true);
+                        RangeUtils.split(range, formatNode, true);
                     }
                 }
             }
@@ -3922,7 +3933,7 @@ var ListFormatter = Class.extend({
         for (var i = 0; i < childNodes.length; i++) {
             var child = childNodes[i];
             var nodeName = dom.name(child);
-            if (suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
+            if (this.suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
 
                 if (formatNode && (nodeName == 'ul' || nodeName == 'ol')) {
                     // merging lists
@@ -3948,7 +3959,7 @@ var ListFormatter = Class.extend({
             dom.changeTag(formatNode, tag);
 
         var prev = formatNode.previousSibling;
-        while (prev && (prev.className == "t-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) prev = prev.previousSibling;
+        while (prev && (prev.className == "k-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) prev = prev.previousSibling;
 
         // merge with previous list
         if (prev && dom.name(prev) == tag) {
@@ -3960,7 +3971,7 @@ var ListFormatter = Class.extend({
         }
 
         var next = formatNode.nextSibling;
-        while (next && (next.className == "t-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) next = next.nextSibling;
+        while (next && (next.className == "k-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) next = next.nextSibling;
 
         // merge with next list
         if (next && dom.name(next) == tag) {
@@ -3972,7 +3983,8 @@ var ListFormatter = Class.extend({
     },
 
     unwrap: function(ul) {
-        var fragment = document.createDocumentFragment(), 
+        var fragment = document.createDocumentFragment(),
+            unwrapTag = this.unwrapTag,
             parents,
             li,
             p,
@@ -4022,7 +4034,8 @@ var ListFormatter = Class.extend({
     },
 
     toggle: function (range) {
-        var nodes = textNodes(range),
+        var that = this,
+            nodes = textNodes(range),
             ancestor = range.commonAncestorContainer;
 
         if (!nodes.length) {
@@ -4036,11 +4049,11 @@ var ListFormatter = Class.extend({
             }
         }
             
-        if (this.finder.isFormatted(nodes)) {
-            this.split(range);
-            this.remove(nodes);
+        if (that.finder.isFormatted(nodes)) {
+            that.split(range);
+            that.remove(nodes);
         } else {
-            this.apply(nodes);
+            that.apply(nodes);
         }
     }
 
@@ -4048,23 +4061,21 @@ var ListFormatter = Class.extend({
 
 var ListCommand = Command.extend({
     init: function(options) {
-        this.options = options;
-        var cmd = this;
-        Command.fn.init.call(cmd, options);
+        options.formatter = new ListFormatter(options.tag);
+        Command.fn.init.call(this, options);
     }
 });
 
 var ListTool = FormatTool.extend({
     init: function(options) {
         this.options = options;
-        var tool = this;
-        FormatTool.fn.init.call(tool, extend(options, {
+        FormatTool.fn.init.call(this, extend(options, {
             finder: new ListFormatFinder(options.tag)
         }));
     },
 
     command: function (commandArguments) { 
-        return new ListCommand(extend(commandArguments, { tag: options.tag }));
+        return new ListCommand(extend(commandArguments, { tag: this.options.tag }));
     }
 });
 
@@ -4075,26 +4086,27 @@ extend(kendo.ui.Editor, {
     ListTool: ListTool
 });
 
-})(jQuery);(function($) {
+registerTool("insertUnorderedList", new ListTool({tag:'ul'}));
+registerTool("insertOrderedList", new ListTool({tag:'ol'}));
 
-// Imports ================================================================
+})(jQuery);(function($, undefined) {
+
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
-    textNodes = RangeUtils.textNodes;
+    Command = Editor.Command,
+    Tool = Editor.Tool,
+    InlineFormatter = Editor.InlineFormatter,
+    textNodes = RangeUtils.textNodes,
+    registerTool = Editor.EditorUtils.registerTool;
 
 var LinkFormatFinder = Class.extend({
-    init: function() {
-        
-    },
-
     findSuitable: function (sourceNode) {
         return dom.parentOfType(sourceNode, ['a']);
     }
-
 });
 
 var LinkFormatter = Class.extend({
@@ -4122,10 +4134,9 @@ var LinkFormatter = Class.extend({
             formatter.apply(nodes);
         }
     }
-
 });
 
-var UnlinkCommand = Class.extend({
+var UnlinkCommand = Command.extend({
     init: function(options) {
         options.formatter = {
             toggle : function(range) {
@@ -4140,6 +4151,7 @@ var UnlinkCommand = Class.extend({
 var LinkCommand = Command.extend({
     init: function(options) {
         var cmd = this;
+        cmd.options = options;
         Command.fn.init.call(cmd, options);
         cmd.attributes = null;
         cmd.async = true;
@@ -4160,20 +4172,20 @@ var LinkCommand = Command.extend({
         var self = this;
 
         function apply(e) {
-            var href = $('#t-editor-link-url', dialog.element).val();
+            var href = $('#k-editor-link-url', dialog.element).val();
 
             if (href && href != 'http://') {
                 self.attributes = { href: href };
 
-                var title = $('#t-editor-link-title', dialog.element).val();
+                var title = $('#k-editor-link-title', dialog.element).val();
                 if (title)
                     self.attributes.title = title;
 
-                var text = $('#t-editor-link-text', dialog.element).val();
+                var text = $('#k-editor-link-text', dialog.element).val();
                 if (text !== initialText)
                     self.attributes.innerHTML = text;
 
-                var target = $('#t-editor-link-target', dialog.element).is(':checked');
+                var target = $('#k-editor-link-target', dialog.element).is(':checked');
                 if (target)
                     self.attributes.target = '_blank';
 
@@ -4197,53 +4209,55 @@ var LinkCommand = Command.extend({
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var dialog = $t.window.create($.extend({}, this.editor.dialogOptions, {
+        var dialog = $t.window.create($.extend({}, this.editor.options.dialogOptions, {
             title: "Insert link",
             html: new $.telerik.stringBuilder()
-                .cat('<div class="t-editor-dialog">')
+                .cat('<div class="k-editor-dialog">')
                     .cat('<ol>')
-                        .cat('<li class="t-form-text-row"><label for="t-editor-link-url">Web address</label><input type="text" class="t-input" id="t-editor-link-url"/></li>')
-                        .catIf('<li class="t-form-text-row"><label for="t-editor-link-text">Text</label><input type="text" class="t-input" id="t-editor-link-text"/></li>', shouldShowText)
-                        .cat('<li class="t-form-text-row"><label for="t-editor-link-title">Tooltip</label><input type="text" class="t-input" id="t-editor-link-title"/></li>')
-                        .cat('<li class="t-form-checkbox-row"><input type="checkbox" id="t-editor-link-target"/><label for="t-editor-link-target">Open link in new window</label></li>')
+                        .cat('<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>')
+                        .catIf('<li class="k-form-text-row"><label for="k-editor-link-text">Text</label><input type="text" class="k-input" id="k-editor-link-text"/></li>', shouldShowText)
+                        .cat('<li class="k-form-text-row"><label for="k-editor-link-title">Tooltip</label><input type="text" class="k-input" id="k-editor-link-title"/></li>')
+                        .cat('<li class="k-form-checkbox-row"><input type="checkbox" id="k-editor-link-target"/><label for="k-editor-link-target">Open link in new window</label></li>')
                     .cat('</ol>')
-                    .cat('<div class="t-button-wrapper">')
-                        .cat('<button class="t-dialog-insert t-button">Insert</button>')
+                    .cat('<div class="k-button-wrapper">')
+                        .cat('<button class="k-dialog-insert k-button">Insert</button>')
                         .cat('&nbsp;or&nbsp;')
-                        .cat('<a href="#" class="t-dialog-close t-link">Close</a>')
+                        .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
                     .cat('</div>')
                 .cat('</div>')
                 .string(),
             onClose: close
         }))
             .hide()
-            .find('.t-dialog-insert').click(apply).end()
-            .find('.t-dialog-close').click(close).end()
-            .find('.t-form-text-row input').keydown(function (e) {
+            .find('.k-dialog-insert').click(apply).end()
+            .find('.k-dialog-close').click(close).end()
+            .find('.k-form-text-row input').keydown(function (e) {
                 if (e.keyCode == 13)
                     apply(e);
                 else if (e.keyCode == 27)
                     close(e);
             }).end()
             // IE < 8 returns absolute url if getAttribute is not used
-            .find('#t-editor-link-url').val(a ? a.getAttribute('href', 2) : 'http://').end()
-            .find('#t-editor-link-text').val(nodes.length > 0 ? (nodes.length == 1 ? nodes[0].nodeValue : nodes[0].nodeValue + nodes[1].nodeValue) : '').end()
-            .find('#t-editor-link-title').val(a ? a.title : '').end()
-            .find('#t-editor-link-target').attr('checked', a ? a.target == '_blank' : false).end()
+            .find('#k-editor-link-url').val(a ? a.getAttribute('href', 2) : 'http://').end()
+            .find('#k-editor-link-text').val(nodes.length > 0 ? (nodes.length == 1 ? nodes[0].nodeValue : nodes[0].nodeValue + nodes[1].nodeValue) : '').end()
+            .find('#k-editor-link-title').val(a ? a.title : '').end()
+            .find('#k-editor-link-target').attr('checked', a ? a.target == '_blank' : false).end()
             .show()
             .data('tWindow')
             .center();
 
         if (shouldShowText && nodes.length > 0)
-            initialText = $('#t-editor-link-text', dialog.element).val();
+            initialText = $('#k-editor-link-text', dialog.element).val();
 
-        $('#t-editor-link-url', dialog.element).focus().select();
+        $('#k-editor-link-url', dialog.element).focus().select();
     },
 
     redo: function () {
-        var range = this.lockRange(true);
-        this.formatter.apply(range, this.attributes);
-        this.releaseRange(range);
+        var that = this,
+            range = that.lockRange(true);
+
+        that.formatter.apply(range, that.attributes);
+        that.releaseRange(range);
     }
 
 });
@@ -4257,12 +4271,12 @@ var UnlinkTool = Tool.extend({
 
     initialize: function($ui) {
         $ui.attr('unselectable', 'on')
-           .addClass('t-state-disabled');
+           .addClass('k-state-disabled');
     },
 
     update: function ($ui, nodes) {
-        $ui.toggleClass('t-state-disabled', !this.finder.isFormatted(nodes))
-            .removeClass('t-state-hover');
+        $ui.toggleClass('k-state-disabled', !this.finder.isFormatted(nodes))
+            .removeClass('k-state-hover');
     }
 });
 
@@ -4274,22 +4288,26 @@ extend(kendo.ui.Editor, {
     UnlinkTool: UnlinkTool
 });
 
-})(jQuery);(function($) {
+registerTool("createLink", new Tool({ key: 'K', ctrl: true, command: LinkCommand}));
+registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true}));
+
+})(jQuery);(function($, undefined) {
 
 // Imports ================================================================
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
-    RangeUtils = Editor.RangeUtils;
+    registerTool = Editor.EditorUtils.registerTool,
+    RangeUtils = Editor.RangeUtils
+    Command = Editor.Command;
 
 var ImageCommand = Command.extend({
     init: function(options) {
-        var cmd = this;
-        Command.fn.init.call(cmd, options);
+        Command.fn.init.call(this, options);
 
-        cmd.async = true;
-        cmd.attributes = null;
+        this.async = true;
+        this.attributes = null;
     },
 
     insertImage: function(img, range) {
@@ -4317,23 +4335,20 @@ var ImageCommand = Command.extend({
 
     redo: function () {
         var range = this.lockRange();
-        if (!insertImage(RangeUtils.image(range), range))
+        if (!this.insertImage(RangeUtils.image(range), range))
             this.releaseRange(range);
     },
 
     exec: function () {
-        var range = this.lockRange();
-
-        var applied = false;
-
-        var img = RangeUtils.image(range);
-
-        var self = this;
+        var self = this,
+            range = self.lockRange(),
+            applied = false,
+            img = RangeUtils.image(range);
 
         function apply(e) {
             self.attributes = {
-                src: $('#t-editor-image-url', dialog.element).val(),
-                alt: $('#t-editor-image-title', dialog.element).val()
+                src: $('#k-editor-image-url', dialog.element).val(),
+                alt: $('#k-editor-image-title', dialog.element).val()
             };
 
             applied = insertImage(img, range);
@@ -4358,23 +4373,23 @@ var ImageCommand = Command.extend({
 //        
         function activate() {  
 //            if (showBrowser) {
-//                new $t.imageBrowser($(this).find(".t-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.localization }));
+//                new $t.imageBrowser($(this).find(".k-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.options.localization }));
 //            }
         }        
         
-        var dialog = $t.window.create($.extend({ width: 750 }, this.editor.dialogOptions, {
+        var dialog = $t.window.create(extend({ width: 750 }, this.editor.options.dialogOptions, {
             title: "Insert image",
             html: new $.telerik.stringBuilder()
-                        .cat('<div class="t-editor-dialog">')                        
-                            .catIf('<div class="t-image-browser"></div>', showBrowser)
+                        .cat('<div class="k-editor-dialog">')                        
+                            .catIf('<div class="k-image-browser"></div>', showBrowser)
                             .cat('<ol>')
-                                .cat('<li class="t-form-text-row"><label for="t-editor-image-url">Web address</label><input type="text" class="t-input" id="t-editor-image-url"/></li>')
-                                .cat('<li class="t-form-text-row"><label for="t-editor-image-title">Tooltip</label><input type="text" class="t-input" id="t-editor-image-title"/></li>')
+                                .cat('<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>')
+                                .cat('<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>')
                             .cat('</ol>')
-                            .cat('<div class="t-button-wrapper">')
-                                .cat('<button class="t-dialog-insert t-button">Insert</button>')
+                            .cat('<div class="k-button-wrapper">')
+                                .cat('<button class="k-dialog-insert k-button">Insert</button>')
                                 .cat('&nbsp;or&nbsp;')
-                                .cat('<a href="#" class="t-dialog-close t-link">Close</a>')
+                                .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
                             .cat('</div>')
                         .cat('</div>')
                     .string(),
@@ -4382,22 +4397,22 @@ var ImageCommand = Command.extend({
             onActivate: activate
         }))
         .hide()
-        .find('.t-dialog-insert').click(apply).end()
-        .find('.t-dialog-close').click(close).end()
-        .find('.t-form-text-row input').keydown(function (e) {
+        .find('.k-dialog-insert').click(apply).end()
+        .find('.k-dialog-close').click(close).end()
+        .find('.k-form-text-row input').keydown(function (e) {
             if (e.keyCode == 13)
                 apply(e);
             else if (e.keyCode == 27)
                 close(e);
         }).end()                
-        //.toggleClass("t-imagebrowser", showBrowser)
+        //.toggleClass("k-imagebrowser", showBrowser)
         // IE < 8 returns absolute url if getAttribute is not used
-        .find('#t-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
-        .find('#t-editor-image-title').val(img ? img.alt : '').end()
+        .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
+        .find('#k-editor-image-title').val(img ? img.alt : '').end()
         .show()
         .data('tWindow').center();
 
-        $('#t-editor-image-url', dialog.element).focus().select();
+        $('#k-editor-image-url', dialog.element).focus().select();
     }
 
 });
@@ -4406,14 +4421,16 @@ extend(kendo.ui.Editor, {
     ImageCommand: ImageCommand
 });
 
-})(jQuery);(function($) {
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand }));
+
+})(jQuery);(function($, undefined) {
 
 /* select box */
 
 $t.selectbox = function (element, options) {
     var selectedValue;
     var $element = $(element).attr("tabIndex", 0);
-    var $text = $element.find('.t-input');
+    var $text = $element.find('.k-input');
 
     var dropDown = this.dropDown = new $t.dropDown({
         effects: $t.fx.slide.defaults(),
@@ -4447,8 +4464,8 @@ $t.selectbox = function (element, options) {
         if (index != -1) {
 
             dropDown.$items
-                    .removeClass('t-state-selected')
-                    .eq(index).addClass('t-state-selected');
+                    .removeClass('k-state-selected')
+                    .eq(index).addClass('k-state-selected');
 
             text($(dropDown.$items[index]).text());
             selectedValue = options.data[index].Value;
@@ -4493,30 +4510,30 @@ $t.selectbox = function (element, options) {
             if (!dropDown.isOpened()) {
                 $element.click();
             } else {
-                selected = dropDown.$items.filter(".t-state-selected");
+                selected = dropDown.$items.filter(".k-state-selected");
                 if (!selected[0]) {
                     next = dropDown.$items.first();
                 } else {
                     next = selected.next();
                 }
                 if (next[0]) {
-                    selected.removeClass("t-state-selected");
-                    next.addClass("t-state-selected");
+                    selected.removeClass("k-state-selected");
+                    next.addClass("k-state-selected");
                 }
             }
             e.preventDefault();
         } else if (key === 38) {
             if (dropDown.isOpened()) {
-                selected = dropDown.$items.filter(".t-state-selected");
+                selected = dropDown.$items.filter(".k-state-selected");
                 prev = selected.prev();
                 if (prev[0]) {
-                    selected.removeClass("t-state-selected");
-                    prev.addClass("t-state-selected");
+                    selected.removeClass("k-state-selected");
+                    prev.addClass("k-state-selected");
                 }
             }
             e.preventDefault();
         } else if (key == 13) {
-            selected = dropDown.$items.filter(".t-state-selected");
+            selected = dropDown.$items.filter(".k-state-selected");
             if (selected[0]) {
                 selected.click();
             }
@@ -4535,7 +4552,7 @@ $t.selectbox = function (element, options) {
         });
     }
 
-    dropDown.$element.css('direction', $element.closest('.t-rtl').length > 0 ? 'rtl' : '');
+    dropDown.$element.css('direction', $element.closest('.k-rtl').length > 0 ? 'rtl' : '');
 
     $(document.documentElement).bind('mousedown', $.proxy(function (e) {
         var $dropDown = dropDown.$element;
@@ -4580,32 +4597,32 @@ $t.colorpicker = function (element, options) {
                     if (!popup.is(":visible")) {
                         that.open();
                     } else {
-                       selected = popup.find(".t-state-selected");
+                       selected = popup.find(".k-state-selected");
                        if (selected[0]) {
                            next = selected.next();
                        } else {
                            next = popup.find("li:first");
                        }
                        if (next[0]) {
-                            selected.removeClass("t-state-selected");
-                            next.addClass("t-state-selected");
+                            selected.removeClass("k-state-selected");
+                            next.addClass("k-state-selected");
                        } 
                     }
                     e.preventDefault();
                 } else if (e.keyCode == 38) {
                     if (popup.is(":visible")) {
-                       selected = popup.find(".t-state-selected");
+                       selected = popup.find(".k-state-selected");
                        prev = selected.prev();
                        if (prev[0]) {
-                            selected.removeClass("t-state-selected");
-                            prev.addClass("t-state-selected");
+                            selected.removeClass("k-state-selected");
+                            prev.addClass("k-state-selected");
                        } 
                     }
                     e.preventDefault();
                 } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
                     that.close();
                 } else if (e.keyCode == 13) {
-                   popup.find(".t-state-selected").click();
+                   popup.find(".k-state-selected").click();
                    e.preventDefault();
                 }
             })
@@ -4622,11 +4639,11 @@ $t.colorpicker = function (element, options) {
     }    
 
     if (that.selectedColor)
-        $element.find('.t-selected-color').css('background-color', this.selectedColor);
+        $element.find('.k-selected-color').css('background-color', this.selectedColor);
 
     $(element.ownerDocument.documentElement)
         .bind('mousedown', $.proxy(function (e) {
-            if (!$(e.target).closest('.t-colorpicker-popup').length) {
+            if (!$(e.target).closest('.k-colorpicker-popup').length) {
                 this.close();
             }
         }, that));
@@ -4641,12 +4658,12 @@ $t.colorpicker.prototype = {
     select: function(color) {
         if (color) {
             color = dom.toHex(color);
-            if (!$t.trigger(this.element, 'change', { value: color })) {
+            if (!this.trigger('change', { value: color })) {
                 this.value(color);
                 this.close();
             }
         } else
-            $t.trigger(this.element, 'change', { value: this.selectedColor })
+            this.trigger('change', { value: this.selectedColor })
     },
 
     open: function() {
@@ -4656,7 +4673,7 @@ $t.colorpicker.prototype = {
         var elementPosition = $element.offset();
         elementPosition.top += $element.outerHeight();
 
-        if ($element.closest('.t-rtl').length)
+        if ($element.closest('.k-rtl').length)
             elementPosition.left -= $popup.outerWidth() - $element.outerWidth();
 
         var zIndex = 'auto';
@@ -4675,7 +4692,7 @@ $t.colorpicker.prototype = {
         }, elementPosition));
         
         $popup
-            .find('.t-item').bind('click', $.proxy(function(e) {
+            .find('.k-item').bind('click', $.proxy(function(e) {
                 var color = $(e.currentTarget, e.target.ownerDocument).find("div").css('background-color');
                 this.select(color);
             }, this));
@@ -4704,7 +4721,7 @@ $t.colorpicker.prototype = {
     },
 
     click: function(e) {
-        if ($(e.target).closest('.t-tool-icon').length > 0)
+        if ($(e.target).closest('.k-tool-icon').length > 0)
             this.select();
         else
             this.toggle();
@@ -4718,7 +4735,7 @@ $t.colorpicker.prototype = {
 
         this.selectedColor = color;
 
-        $('.t-selected-color', this.element)
+        $('.k-selected-color', this.element)
             .css('background-color', color);
     },
 
@@ -4739,15 +4756,15 @@ $.extend($t.colorpicker, {
     buildPopup: function(component) {
         var html = new $t.stringBuilder();
 
-        html.cat('<div class="t-popup t-group t-colorpicker-popup">')
-            .cat('<ul class="t-reset">');
+        html.cat('<div class="k-popup k-group k-colorpicker-popup">')
+            .cat('<ul class="k-reset">');
 
         var data = component.data;
         var currentColor = (component.value() || '').substring(1);
 
         for (var i = 0, len = data.length; i < len; i++) {
-            html.cat('<li class="t-item')
-                .catIf(' t-state-selected', data[i] == currentColor)
+            html.cat('<li class="k-item')
+                .catIf(' k-state-selected', data[i] == currentColor)
                 .cat('"><div style="background-color:#')
                 .cat(data[i])
                 .cat('"></div></li>');
@@ -4775,7 +4792,7 @@ $.fn.tColorPicker.defaults = {
     effects: $t.fx.slide.defaults()
 };
 
-})(jQuery);(function($) {
+})(jQuery);(function($, undefined) {
 
 // Imports ================================================================
 var kendo = window.kendo,
@@ -4783,8 +4800,13 @@ var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
+    registerTool = Editor.EditorUtils.registerTool,
+    Command = Editor.Command,
+    Tool = Editor.Tool,
     RangeUtils = Editor.RangeUtils,
-    blockElements = dom.blockElements;
+    blockElements = dom.blockElements,
+    BlockFormatFinder = Editor.BlockFormatFinder,
+    BlockFormatter = Editor.BlockFormatter;
 
 function indent(node, value) {
     var property = dom.name(node) != 'td' ? 'marginLeft' : 'paddingLeft';
@@ -4804,7 +4826,7 @@ function indent(node, value) {
 
 var IndentFormatter = Class.extend({
     init: function() {
-        this.finder = new BlockFormatFinder([{tags:blockElements}]);
+        this.finder = new BlockFormatFinder([{tags:dom.blockElements}]);
     },
 
     apply: function (nodes) {
@@ -4938,11 +4960,11 @@ var OutdentTool = Tool.extend({
 
     initialize: function($ui) {
         $ui.attr('unselectable', 'on')
-           .addClass('t-state-disabled');
+           .addClass('k-state-disabled');
     },
 
     update: function ($ui, nodes) {
-        var suitable = finder.findSuitable(nodes),
+        var suitable = this.finder.findSuitable(nodes),
             isOutdentable, listParentsCount;
 
         for (var i = 0; i < suitable.length; i++) {
@@ -4955,12 +4977,12 @@ var OutdentTool = Tool.extend({
             }
 
             if (isOutdentable) {
-                $ui.removeClass('t-state-disabled');
+                $ui.removeClass('k-state-disabled');
                 return;
             }
         }
     
-        $ui.addClass('t-state-disabled').removeClass('t-state-hover');
+        $ui.addClass('k-state-disabled').removeClass('k-state-hover');
     }
 
 });
@@ -4972,6 +4994,9 @@ extend(kendo.ui.Editor, {
     OutdentTool: OutdentTool
 });
 
+registerTool("indent", new Tool({ command: IndentCommand }));
+registerTool("outdent", new OutdentTool());
+
 })(jQuery);(function($) {
 
 // Imports ================================================================
@@ -4980,7 +5005,8 @@ var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
-    RangeUtils = Editor.RangeUtils;
+    RangeUtils = Editor.RangeUtils,
+    Marker = Editor.Marker;
 
 var PendingFormats = Class.extend({
     init: function(editor) {
@@ -5008,7 +5034,7 @@ var PendingFormats = Class.extend({
 
         marker.add(range);
 
-        if (rangeUtils.textNodes(range).length == 0) {
+        if (RangeUtils.textNodes(range).length == 0) {
             marker.remove(range);
             range.collapse(true);
             this.editor.selectRange(range);
@@ -5017,12 +5043,13 @@ var PendingFormats = Class.extend({
 
         var textNode = marker.end.previousSibling.previousSibling;
 
-        var pendingFormat, formats = this.formats;
+        var pendingFormat,
+            formats = this.formats;
 
         for (var i = 0; i < formats.length; i++) {
             pendingFormat = formats[i];
             
-            var command = pendingFormat.command($.extend({ range: range }, pendingFormat.params));
+            var command = pendingFormat.command(extend({ range: range }, pendingFormat.params));
             command.editor = this.editor;
             command.exec();
 
