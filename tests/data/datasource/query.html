@@ -899,6 +899,29 @@
                 equal(dataSource.total(), 3);
             });
 
+            test("cancelChanges re-calculates the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                }),
+                model = new kendo.data.Model();
+
+                dataSource.read();
+                dataSource.add(model);
+                dataSource.cancelChanges(model);
+
+                equal(dataSource.view().length, 2);
+                equal(dataSource.total(), 2);
+            });
+
             test("query with local transport calculates total", function() {
                 var dataSource = new DataSource({
                     data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
