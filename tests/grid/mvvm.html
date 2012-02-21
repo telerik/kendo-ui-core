@@ -60,7 +60,7 @@
             });
 
             test("binding template", function() {
-                var dom = $('<div data-role="grid" data-bind="template:template, source:items" />');
+                var dom = $('<div data-role="grid" data-row-template="template" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -70,7 +70,7 @@
             });
 
             test("binding template containing binding attributes", function() {
-                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<div data-role="grid" data-row-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -80,7 +80,7 @@
             });
 
             test("updating an item from the data source updates the corresponding grid item", function() {
-                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes, source:items" />');
+                var dom = $('<div data-role="grid" data-row-template="template-with-attributes" data-bind=" source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -92,7 +92,7 @@
             });
 
             test("templates are updated when grid is grouped", function() {
-                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<div data-role="grid" data-row-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -103,7 +103,7 @@
             });
 
             test("destroys binding targets when datasource changes", function() {
-                var dom = $('<div data-role="grid" data-bind="template:template-with-attributes, source:items" />');
+                var dom = $('<div data-role="grid" data-row-template="template-with-attributes" data-bind=" source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -128,7 +128,7 @@
 
 
             test("dataBound event is raised if attached as option", 2, function() {
-                var dom = $('<div data-role="grid" data-dataBound="dataBound" data-bind="source:items" />');
+                var dom = $('<div data-role="grid" data-bound="dataBound" data-bind="source:items" />');
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]
@@ -142,7 +142,7 @@
             }
 
             test("dataBound event is raised if attached as option to a already initialized grid", 1, function() {
-                var dom = $('<div data-dataBound="dataBound" data-bind="source:items" />').kendoGrid();
+                var dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoGrid();
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]

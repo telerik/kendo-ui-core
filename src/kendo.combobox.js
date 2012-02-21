@@ -386,6 +386,7 @@
             minLength: 0,
             height: 200,
             highlightFirst: true,
+            template: "",
             filter: "none",
             placeholder: "",
             suggest: false

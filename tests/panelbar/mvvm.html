@@ -29,7 +29,7 @@
             });
 
             test("initializes a options from data attributes", function() {
-                var dom = $('<div data-role="panelbar" data-expandMode="single"></div>');
+                var dom = $('<div data-role="panelbar" data-expand-mode="single"></div>');
 
                 kendo.bind(dom);
 
@@ -39,7 +39,7 @@
             });
 
             test("binding panelbar initialized before binding", function() {
-                var dom = $('<div data-expandMode="single"></div>');
+                var dom = $('<div data-expand-mode="single"></div>');
 
                 dom.kendoPanelBar();
 

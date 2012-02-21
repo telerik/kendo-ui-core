@@ -367,6 +367,7 @@
         options: {
             name: "AutoComplete",
             suggest: false,
+            template: "",
             dataTextField: "",
             minLength: 1,
             delay: 200,

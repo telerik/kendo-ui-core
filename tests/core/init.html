@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.init tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.init Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Widget = kendo.ui.Widget.extend({
+                options: {
+                    name: "Widget",
+                    foo: "",
+                    template:"",
+                    altTemplate:"",
+                    dataMinHeight: "",
+                    dataBar:""
+                },
+
+                events: [ "click" ]
+            });
+
+            kendo.ui.plugin(Widget);
+
+            module("kendo.init", {
+                teardown: function() {
+                    kendo.ns = "";
+                }
+            });
+
+            test("initializes a new widget based on its role", function() {
+                var dom = $('<div data-role="widget"/>');
+
+                kendo.init(dom);
+
+                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("initializes a multiple widgets based on their role", function() {
+                var dom = $('<div data-role="widget"/><div data-role="widget"/>');
+
+                kendo.init(dom);
+
+                ok(dom.last().data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("initializes a new widget from dom element", function() {
+                var dom = $('<div data-role="widget"/>');
+
+                kendo.init(dom[0]);
+
+                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("initializes a widgets in dom tree", function() {
+                var dom = $('<div><div data-role="widget"/></div>');
+
+                kendo.init(dom);
+
+                ok(dom.find("div").data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("role respects the namespace", function() {
+                var dom = $('<div data-kendo-role="widget"/>');
+
+                kendo.ns = "kendo-";
+                kendo.init(dom);
+
+                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("parses options from data attributes", function() {
+                var dom = $('<div data-role="widget" data-foo="foo" />');
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.foo, "foo");
+            });
+
+            test("parses options which start with data", function() {
+                var dom = $('<div data-role="widget" data-bar="bar" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.dataBar, "bar");
+            });
+
+            test("parses camel case options that start with data", function() {
+                var dom = $('<div data-role="widget" data-min-height="bar" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.dataMinHeight, "bar");
+            });
+
+            test("options respect the namespace", function() {
+                var dom = $('<div data-kendo-role="widget" data-kendo-min-height="bar" />');
+
+                kendo.ns = "kendo-";
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.dataMinHeight, "bar");
+            });
+
+            function foo() { }
+
+            test("parses events from data attributes", function() {
+                var dom = $('<div data-role="widget" data-click="foo" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.click, foo);
+            });
+
+            test("parses templates from data attributes", function() {
+                var dom = $('<div data-role="widget" data-template="template" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.template({}), $("#template").html());
+            });
+
+            test("parses template options", function() {
+                var dom = $('<div data-role="widget" data-alt-template="template" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.altTemplate({}), $("#template").html());
+            });
+        </script>
+        <script id="template" type="text/x-kendo-template">
+            foo
+        </script>
+    </body>
+</html>

@@ -28,8 +28,8 @@
                 ok(dom.data("kendoComboBox") instanceof kendo.ui.ComboBox);
             });
 
-            test("initializes a options from data attributes", function() {
-                var dom = $('<select data-role="combobox" data-textfield="foo" data-valuefield="bar"/>');
+            test("initializes options from data attributes", function() {
+                var dom = $('<select data-role="combobox" data-text-field="foo" data-value-field="bar"/>');
 
                 kendo.bind(dom);
 
@@ -57,7 +57,7 @@
             });
 
             test("initalizes complex value from view model", function() {
-                var dom = $('<select data-valuefield="text" data-role="combobox" data-bind="value:value, source:items" />');
+                var dom = $('<select data-value-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -68,7 +68,7 @@
             });
 
             test("changing a value updates the view model", function() {
-                var dom = $('<select data-valuefield="text" data-role="combobox" data-bind="value:value, source:items" />');
+                var dom = $('<select data-value-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -81,7 +81,7 @@
             });
 
             test("binding combobox initialized before binding", function() {
-                var dom = $('<select data-valuefield="text" data-bind="value:value, source:items" />');
+                var dom = $('<select data-value-field="text" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -94,20 +94,20 @@
             });
 
             test("binding combobox initialized after binding", function() {
-                var dom = $('<select data-valuefield="text" data-bind="value:value, source:items" />');
+                var dom = $('<select data-value-field="text" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
 
                 kendo.bind(dom, observable);
 
-                dom.kendoComboBox({ dataValueField: "text" });
+                dom.kendoComboBox();
 
                 equal(dom.data("kendoComboBox").value(), "bar");
             });
 
             test("binding template", function() {
-                var dom = $('<select data-role="combobox" data-bind="template:template, source:items" />');
+                var dom = $('<select data-template="template" data-role="combobox" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -117,7 +117,7 @@
             });
 
             test("binding template containing binding attributes", function() {
-                var dom = $('<select data-role="combobox" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -127,7 +127,7 @@
             });
 
             test("updating an item from the data source updates the corresponding combobox item", function() {
-                var dom = $('<select data-role="combobox" data-bind="template:template-with-attributes, source:items" />');
+                var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -139,7 +139,7 @@
             });
 
             test("destroying binding targets when the datasource changes", function() {
-                var dom = $('<select data-role="combobox" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<select data-role="combobox" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"} ] });
 
@@ -207,7 +207,7 @@
 
 
             test("dataBound event is raised if attached as option", 2, function() {
-                var dom = $('<div data-role="combobox" data-dataBound="dataBound" data-bind="source:items" />');
+                var dom = $('<div data-role="combobox" data-bound="dataBound" data-bind="source:items" />');
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]
@@ -221,7 +221,7 @@
             }
 
             test("dataBound event is raised if attached as option to a already initialized combobox", 1, function() {
-                var dom = $('<div data-dataBound="dataBound" data-bind="source:items" />').kendoComboBox();
+                var dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoComboBox();
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]
