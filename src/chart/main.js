@@ -6333,7 +6333,7 @@
                 halfWidth = box.width() / 2,
                 center = box.center(),
                 // pointer calculation is done at 90deg, so points are rotated initially
-                rotation = scale.getSlotAngle(pointerOptions.value) + 90;
+                rotation = 90 - scale.getSlotAngle(pointerOptions.value);
 
             return [
                 view.createPolyline([
