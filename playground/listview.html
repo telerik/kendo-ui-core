@@ -50,9 +50,10 @@
         <div class="pager"></div>
 
         <script id="editTemplate" type="text/x-kendo-tmpl">
-            <li>Editing: <input type="text" data-value="foo" name="foo" required/><div><span data-for="foo"></span></div>
-            <input type="number" data-value="id" name="id" min="1"/>
-            <button class='k-close-button'>Save</button></li>
+            <li>Editing: <input type="text" data-bind="value:foo" name="foo" required/><div><span data-for="foo"></span></div>
+            <input type="number" data-bind="value:id" name="id" min="1"/>
+            <button class='k-close-button'>Save</button>
+            <button class='k-cancel-button'>Cancel</button></li>
         </script>
 
         <script>
@@ -104,6 +105,8 @@
                     if (confirm("Delete?")) {
                         listView.removeItem(item);
                     }
+                }).delegate(".k-cancel-button", "click", function() {
+                    listView.cancelItem();
                 }).data("kendoListView");
 
                 $(".k-add-button").click(function() {

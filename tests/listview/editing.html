@@ -343,6 +343,39 @@
                 ok(!editable.options.model.isNew());
             });
 
+            test("cancelItem calls cancelChanges of DataSource for the edited item", function() {
+                var listView = setup({
+                    editTemplate: '<li><input data-bind="value:foo" /></li>'
+                });
+
+                var cancelChanges = stub(dataSource, "cancelChanges");
+                listView.editItem(ul.children().eq(0));
+                listView.cancelItem();
+
+                equal(cancelChanges.calls("cancelChanges"), 1);
+                equal(cancelChanges.args("cancelChanges", 0)[0].id, 0);
+            });
+
+            test("cancelItem does not call cancelChanges of DataSource if no edited item", function() {
+                var listView = setup({
+                    editTemplate: '<li><input data-bind="value:foo" /></li>'
+                });
+
+                var cancelChanges = stub(dataSource, "cancelChanges");
+                listView.cancelItem();
+
+                equal(cancelChanges.calls("cancelChanges"), 0);
+            });
+            test("cancelItem revert the item to item template", function() {
+                var listView = setup({
+                    editTemplate: '<li><input data-bind="value:foo" /></li>'
+                });
+
+                listView.editItem(ul.children().eq(0));
+                listView.cancelItem();
+
+               equal(ul.children().eq(0).html(), "foo 0");
+            });
         </script>
     </body>
 </html>
