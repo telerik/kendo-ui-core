@@ -532,6 +532,21 @@
                          [591, 494, 397, 300, 203, 106, 9], TOLERANCE);
                 });
 
+                test("excess space is allocated after last major tick", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        max: 1.2,
+                        majorUnit: 0.5
+                    });
+
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    view.log.line.shift();
+
+                    same($.map(view.log.line, function(line) { return line.y1; }),
+                         [591, 348.5, 106], TOLERANCE);
+                });
+
                 test("major ticks are distributed vertically in reverse", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, {
                         reverse: true
@@ -544,6 +559,22 @@
 
                     same($.map(view.log.line, function(line) { return line.y1; }),
                          [591, 494, 397, 300, 203, 106, 9].reverse(), TOLERANCE);
+                });
+
+                test("excess space is allocated after last major tick in reverse", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        reverse: true,
+                        max: 1.2,
+                        majorUnit: 0.5
+                    });
+
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    view.log.line.shift();
+
+                    same($.map(view.log.line, function(line) { return line.y1; }),
+                         [9, 251.5, 494], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
@@ -787,6 +818,22 @@
                          [5, 135, 265, 396, 526, 656, 787], TOLERANCE);
                 });
 
+                test("excess space is allocated after last major tick", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        isVertical: false,
+                        max: 1.2,
+                        majorUnit: 0.5
+                    });
+
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    view.log.line.shift();
+
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [5, 334, 663], TOLERANCE);
+                });
+
                 test("major ticks are distributed horizontally in reverse", function() {
                     numericAxis = new Chart.NumericAxis(0, 1, { isVertical: false, reverse: true });
                     numericAxis.reflow(chartBox);
@@ -795,6 +842,23 @@
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
                          [5, 135, 265, 396, 526, 656, 787].reverse(), TOLERANCE);
+                });
+
+                test("excess space is allocated after last major tick in reverse", function() {
+                    numericAxis = new Chart.NumericAxis(0, 1, {
+                        isVertical: false,
+                        reverse: true,
+                        max: 1.2,
+                        majorUnit: 0.5
+                    });
+
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    view.log.line.shift();
+
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [795, 465.833, 136.667], TOLERANCE);
                 });
 
                 test("major ticks are vertical", 7, function() {
@@ -984,13 +1048,28 @@
                 });
 
                 test("positions slot for [0, 0.5]", function() {
+                    numericAxis.options.majorTickType = "none";
+                    numericAxis.options.minorTickType= "outside";
+                    numericAxis.reflow(chartBox);
                     var slot = numericAxis.getSlot(0, 0.5);
-                    same([slot.y1, slot.y2], [ 348.5, 591], TOLERANCE);
+                    same([slot.y1, slot.y2], [348.5, 591], TOLERANCE);
+                });
+
+                test("positions slot for [0, 0.5] when reversed", function() {
+                    numericAxis.options.reverse = true;
+                    var slot = numericAxis.getSlot(0, 0.5);
+                    same([slot.y1, slot.y2], [9, 251], TOLERANCE);
                 });
 
                 test("positions slot for [0.5, 1]", function() {
                     var slot = numericAxis.getSlot(0.5, 1);
                     same([slot.y1, slot.y2], [106, 348.5], TOLERANCE);
+                });
+
+                test("positions slot for [0.5, 1] when reversed", function() {
+                    numericAxis.options.reverse = true;
+                    var slot = numericAxis.getSlot(0.5, 1);
+                    same([slot.y1, slot.y2], [251.5, 494], TOLERANCE);
                 });
 
                 test("slot width is 0", function() {
@@ -1061,6 +1140,7 @@
                     same([slot.y1, slot.y2], [9, 591], TOLERANCE);
                 });
 
+                // ------------------------------------------------------------
                 module("Slots / Horizontal", {
                     setup: function() {
                         moduleSetup();
@@ -1075,9 +1155,21 @@
                     same([slot.x1, slot.x2], [5, 330.833], TOLERANCE);
                 });
 
+                test("positions slot for [0, 0.5] when reversed", function() {
+                    numericAxis.options.reverse = true;
+                    var slot = numericAxis.getSlot(0, 0.5);
+                    same([slot.x1, slot.x2], [461, 787], TOLERANCE);
+                });
+
                 test("positions slot for [0.5, 1]", function() {
                     var slot = numericAxis.getSlot(0.5, 1);
                     same([slot.x1, slot.x2], [330.833, 656.667], TOLERANCE);
+                });
+
+                test("positions slot for [0.5, 1] when reversed", function() {
+                    numericAxis.options.reverse = true;
+                    var slot = numericAxis.getSlot(0.5, 1);
+                    same([slot.x1, slot.x2], [135, 461], TOLERANCE);
                 });
 
                 test("slot height is 0", function() {

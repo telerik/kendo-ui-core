@@ -2079,14 +2079,15 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.isVertical,
+                reverse = options.reverse,
                 lineBox = axis.lineBox(),
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
                 step = stepValue * scale,
                 divisions = axis.getDivisions(stepValue),
-                pos = lineBox[isVertical ? "y2" : "x1"],
-                multiplier = isVertical ? -1 : 1,
+                pos = lineBox[isVertical ? (reverse ? "y1" : "y2") : (reverse ? "x2" : "x1")],
+                multiplier =(isVertical ? -1 : 1) * (reverse ? -1 : 1),
                 positions = [],
                 i;
 
@@ -2095,7 +2096,7 @@
                 pos = pos + step * multiplier;
             }
 
-            return options.reverse ? positions.reverse() : positions;
+            return positions;
         },
 
         getMajorTickPositions: function() {
@@ -2160,8 +2161,8 @@
                 p2 = lineStart + scale * (math.max(a, b) - options.min);
             }
 
-            slotBox[valueAxis + 1] = p1;
-            slotBox[valueAxis + 2] = p2;
+            slotBox[valueAxis + 1] = reverse ? p2 : p1;
+            slotBox[valueAxis + 2] = reverse ? p1 : p2;
 
             return slotBox;
         },
