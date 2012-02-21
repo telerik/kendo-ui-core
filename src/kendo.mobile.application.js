@@ -12,8 +12,9 @@
         Layout = mobile.Layout,
 
         OS = support.mobileOS,
-        OS_NAME = "km-" + (!OS ? "ios" : OS.name),
-        OS_CSS_CLASS = (OS_NAME + (OS ? " " + OS_NAME + OS.majorVersion : "")),
+        OS_NAME = !OS ? "ios" : OS.name,
+        OS_NAME_CLASS = "km-" + OS_NAME,
+        OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "")),
 
         TRANSFORM = support.transitions.css + "transform",
 
@@ -345,10 +346,16 @@
         },
 
         _setupLayouts: function(element) {
-            var that = this;
+            var that = this,
+                platformAttr = kendo.ns + "platform";
+
             element.find(kendo.roleSelector("layout")).each(function() {
-                var layout = $(this);
-                that.layouts[layout.data("id")] = new Layout(layout);
+                var layout = $(this),
+                    platform = layout.data(platformAttr);
+
+                if (platform === undefined || platform === OS_NAME) {
+                    that.layouts[layout.data("id")] = new Layout(layout);
+                }
             });
         },
 
