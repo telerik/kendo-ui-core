@@ -26,6 +26,7 @@
                 dataSource,
                 option,
                 value,
+                event,
                 handler;
 
             ui.Widget.fn.init.call(that, element, options);
