@@ -1606,8 +1606,9 @@
                     align: align, zIndex: options.zIndex
                 }),
                 step = labelOptions.step;
-
             axis.labels = [];
+
+
             if (labelOptions.visible) {
                 var labelsCount = axis.getLabelsCount(),
                     labelText,
@@ -6175,7 +6176,6 @@
         },
 
         reflow: function(targetBox) {
-            console.log(1)
             this.box = targetBox;
         },
 
@@ -6330,24 +6330,52 @@
     var RadialScale = NumericAxis.extend({
         init: function (options) {
             var scale = this;
+            scale.options.majorUnit = scale.autoMajorUnit(scale.options.min, scale.options.max);
 
-            options = deepExtend({}, scale.options, options);
-
-            NumericAxis.fn.init.call(scale, options.min, options.max, options);
+            Axis.fn.init.call(scale, options);
         },
 
         options: {
             min: 0,
             max: 100,
-
             majorTickSize: 15,
             majorTickAlignment: INSIDE,
-
             minorTickSize: 10,
             minorTickAlignment: INSIDE,
-
             startAngle: -30,
-            endAngle: 240
+            endAngle: 240,
+            labels: {
+                position: "inside",
+                padding: 10
+            }
+        },
+
+        autoMajorUnit: function (min, max) {
+            var diff = max - min;
+
+            if (diff == 0) {
+                if (max == 0) {
+                    return 0.1;
+                }
+
+                diff = math.abs(max);
+            }
+
+            var scale = math.pow(10, math.floor(math.log(diff) / math.log(10))),
+                relativeValue = round((diff / scale), DEFAULT_PRECISION),
+                scaleMultiplier = 1;
+
+            if (relativeValue < 1.904762) {
+                scaleMultiplier = 0.2;
+            } else if (relativeValue < 4.761904) {
+                scaleMultiplier = 0.5;
+            } else if (relativeValue < 9.523809) {
+                scaleMultiplier = 1;
+            } else {
+                scaleMultiplier = 2;
+            }
+
+            return round(scale * scaleMultiplier, DEFAULT_PRECISION);
         },
 
         reflow: function(box) {
@@ -6362,6 +6390,7 @@
 
             scale.ring = ring;
             scale.box = ring.getBBox();
+            scale.arrangeLabels();
         },
 
         getSlotAngle: function(value) {
@@ -6410,6 +6439,46 @@
             renderTickRing(minorTickRing, options.minorUnit, options.majorUnit);
 
             return ticks;
+        },
+
+        arrangeLabels: function() {
+            var scale = this,
+                options = scale.options,
+                ring = scale.ring,
+                tickAngels = scale.getTickAngles(ring, options.majorUnit),
+                labels = scale.labels,
+                count = labels.length,
+                labelsOptions = options.labels,
+                padding = labelsOptions.padding,
+                halfWidth,
+                halfHeight,
+                labelAngle,
+                angle,
+                label,
+                lp,
+                i,
+                cx,
+                cy;
+
+            for (i = 0; i < count; i++) {
+                label = labels[i];
+                halfWidth = label.box.width() / 2;
+                halfHeight = label.box.height() / 2;
+                angle = tickAngels[i];
+                labelAngle = angle * DEGREE;
+                if (labelsOptions.position == "inside") {
+                    lp = ring.point(angle, true);
+                    cx = lp.x + math.cos(labelAngle) * (halfWidth + padding);
+                    cy = lp.y + math.sin(labelAngle) * (halfHeight + padding);
+                } else if (labelsOptions.position == "outside") {
+                    lp = ring.point(angle);
+                    cx = lp.x - math.cos(labelAngle) * (halfWidth + padding);
+                    cy = lp.y - math.sin(labelAngle) * (halfHeight + padding);
+                }
+
+                label.reflow(new Box2D(cx - halfWidth, cy - halfHeight,
+                        cx + halfWidth, cy + halfHeight));
+            }
         },
 
         getTickAngles: function(ring, stepValue) {
@@ -6471,7 +6540,7 @@
                 plotBox;
 
             scale.reflow(box);
-            plotArea.alignScale(scale, box);
+            //plotArea.alignScale(scale, box);
 
             plotBox = scale.ring.getBBox().clone();
 
