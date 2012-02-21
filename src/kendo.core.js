@@ -41,7 +41,7 @@
         for (member in proto) {
             if (typeof proto[member] === OBJECT && !(proto[member] instanceof Array)) {
                 // Merge object members
-                fn[member] = extend({}, base.prototype[member], proto[member]);
+                fn[member] = extend(true, {}, base.prototype[member], proto[member]);
             } else {
                 fn[member] = proto[member];
             }
