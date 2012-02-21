@@ -206,10 +206,10 @@
                 kendoHistory.navigate("/new-location?foo=bar");
             });
 
-            test("supports :back pseudo url for going back", function() {
+            test("supports #:back pseudo url for going back", function() {
                 startWithHash();
                 kendoHistory.navigate("/new-location");
-                kendoHistory.navigate(":back");
+                kendoHistory.navigate("#:back");
                 url(initial + "#/new-location");
             });
         </script>
