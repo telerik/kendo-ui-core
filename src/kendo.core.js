@@ -2260,10 +2260,11 @@
         return $1.toLowerCase();
     }
 
-    var DATA_REGEXP = /^data(.)/;
+    var dataRegExp = /^data(.)/;
+    var templateRegExp = /template$/i;
 
-    function attributeValue(element, attribute) {
-        return element.data(kendo.ns + attribute.replace(DATA_REGEXP, lowerCaseFirstLetter));
+    function parseOption(element, attribute) {
+        return element.data(kendo.ns + attribute.replace(dataRegExp, lowerCaseFirstLetter));
     }
 
     function init(element) {
@@ -2283,9 +2284,14 @@
         element = $(element);
 
         for (option in widget.fn.options) {
-            value = attributeValue(element, option);
+            value = parseOption(element, option);
 
             if (value !== undefined) {
+
+                if (templateRegExp.test(option)) {
+                    value = $("#" + value).html();
+                }
+
                 options[option] = value;
             }
         }
@@ -2293,9 +2299,9 @@
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
             option = widget.fn.events[idx];
 
-            value = attributeValue(element, option);
+            value = parseOption(element, option);
 
-            if (value !== null) {
+            if (value !== undefined) {
                 options[option] = window[value];
             }
         }
