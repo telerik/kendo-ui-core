@@ -457,17 +457,6 @@
                     start();
                 }, 200);
             });
-
-            test("do not recreate options if no dataSource", function() {
-                var combobox = new ComboBox($("<select/>"));
-
-                stub(combobox, "_options");
-
-                combobox.refresh();
-
-                equal(combobox.calls("_options"), 0);
-            });
-
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
