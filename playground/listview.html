@@ -92,25 +92,25 @@
                 }).delegate(".k-edit-button", "click", function(e) {
                     var item = $(this).parent();
 
-                    listView.editItem(item);
+                    listView.edit(item);
 
                 }).delegate(".k-close-button", "click", function(e) {
                     var item = $(this).parent();
 
-                    listView.saveItem(item);
+                    listView.save(item);
 
                 }).delegate(".k-delete-button", "click", function(e) {
                     var item = $(this).parent();
 
                     if (confirm("Delete?")) {
-                        listView.removeItem(item);
+                        listView.remove(item);
                     }
                 }).delegate(".k-cancel-button", "click", function() {
-                    listView.cancelItem();
+                    listView.cancel();
                 }).data("kendoListView");
 
                 $(".k-add-button").click(function() {
-                    listView.addItem();
+                    listView.add();
                 });
 
             });

@@ -73,26 +73,26 @@
                 equal(listView.editTemplate({}), editTemplate);
             });
 
-            test("editItem renders editTemplate for the current item", function() {
+            test("edit renders editTemplate for the current item", function() {
                 var editTemplate = "<li>template</li>",
                     listView = setup({ editTemplate: editTemplate });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
                 equal(listView.element.children().first().html(), "template");
                 ok(listView.element.children().first().hasClass("k-edit-item"));
             });
 
-            test("editItem binds the edit template", function() {
+            test("edit binds the edit template", function() {
                 var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
                 equal(listView.element.children().first().html(), "edit foo 0");
             });
 
-            test("editItem instantiates editable for edited item", function() {
+            test("edit instantiates editable for edited item", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
                 ok(listView.element.children().first().data("kendoEditable"));
                 ok(listView.editable);
             });
@@ -100,7 +100,7 @@
             test("editable is destroyed on refresh", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
                 dataSource.read();
 
                 ok(!listView.editable);
@@ -115,7 +115,7 @@
 
             test("edited item is not refreshed on itemchange", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
-                listView.editItem(listView.element.find("li:first"));
+                listView.edit(listView.element.find("li:first"));
                 dataSource.get(0).set("foo", "bar");
 
                 ok(listView.element.find("li:first").hasClass("k-edit-item"));
@@ -125,7 +125,7 @@
             test("correct model is passed to editable", function() {
                 var listView = setup({ editTemplate: "<li></li>" });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
                 equal(listView.editable.options.model, dataSource.get(0));
             });
 
@@ -138,7 +138,7 @@
                         }
                     });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
                 ok(called);
             });
 
@@ -151,83 +151,83 @@
                         }
                     });
 
-                listView.editItem(listView.element.children().first());
+                listView.edit(listView.element.children().first());
 
                 equal(args.model, dataSource.get(0));
                 equal(args.item[0], listView.element.children()[0]);
             });
 
-            test("saveItem destroys the editable", function() {
+            test("save destroys the editable", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
-                listView.editItem(listView.element.children().first());
-                listView.saveItem();
+                listView.edit(listView.element.children().first());
+                listView.save();
 
                 ok(!listView.element.children().first().data("kendoEditable"));
                 ok(!listView.editable);
             });
 
-            test("saveItem renders item template", function() {
+            test("save renders item template", function() {
                 var listView = setup({ editTemplate: "<li>edit ${foo}</li>" });
 
-                listView.editItem(listView.element.children().first());
-                listView.saveItem();
+                listView.edit(listView.element.children().first());
+                listView.save();
 
                 equal(listView.element.children().first().html(), "foo 0");
             });
 
-            test("editItem closes previous edited item", function() {
+            test("edit closes previous edited item", function() {
                 var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
-                listView.editItem(listView.element.children().eq(0));
-                listView.editItem(listView.element.children().eq(1));
+                listView.edit(listView.element.children().eq(0));
+                listView.edit(listView.element.children().eq(1));
 
                 ok(!listView.element.children().eq(0).data("kendoEditable"));
                 ok(listView.element.children().eq(1).data("kendoEditable"));
             });
 
-            test("saveItem does not close edited item if validation fails", function() {
+            test("save does not close edited item if validation fails", function() {
                 var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
 
-                listView.editItem(listView.element.children().eq(0));
+                listView.edit(listView.element.children().eq(0));
                 listView.element.find(":input").val("");
-                listView.saveItem();
+                listView.save();
 
                 ok(listView.element.children().eq(0).data("kendoEditable"));
             });
 
-            test("editItem does not close previous edited item if validation fails", function() {
+            test("edit does not close previous edited item if validation fails", function() {
                 var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
 
-                listView.editItem(listView.element.children().eq(0));
+                listView.edit(listView.element.children().eq(0));
                 listView.element.find(":input").val("");
-                listView.editItem(listView.element.children().eq(1));
+                listView.edit(listView.element.children().eq(1));
 
                 ok(listView.element.children().eq(0).data("kendoEditable"));
                 ok(!listView.element.children().eq(1).data("kendoEditable"));
             });
 
-            test("removeItem hides the item", function() {
+            test("remove hides the item", function() {
                 var listView = setup(),
                     item = listView.element.children().first();
 
-                listView.removeItem(item);
+                listView.remove(item);
 
                 ok(!item.is(":visible"));
             });
 
-            test("removeItem calls dataSource remove", function() {
+            test("remove calls dataSource remove", function() {
                 var listView = setup(),
                     removeMethod = stub(dataSource, "remove");
 
-                listView.removeItem(listView.element.children().first());
+                listView.remove(listView.element.children().first());
 
                 ok(removeMethod.calls("remove"));
                 ok(removeMethod.args("remove", 0)[0] instanceof kendo.data.Model);
                 equal(removeMethod.args("remove", 0)[0].get("id"), 0);
             });
 
-            test("removeItem triggers remove event", function() {
+            test("remove triggers remove event", function() {
                 var called = false,
                     listView = setup({
                         remove: function() {
@@ -235,7 +235,7 @@
                         }
                     });
 
-                listView.removeItem(listView.element.children().first());
+                listView.remove(listView.element.children().first());
 
                 ok(called);
             });
@@ -249,7 +249,7 @@
                     }),
                     item = listView.element.children().first();
 
-                listView.removeItem(item);
+                listView.remove(item);
 
                 equal(args.item[0], item[0]);
                 equal(args.model.id, 0);
@@ -263,28 +263,28 @@
                     }),
                     item = listView.element.children().first();
 
-                listView.removeItem(item);
+                listView.remove(item);
 
                 ok(item.is(":visible"));
                 ok(dataSource.get(0));
             });
 
-            test("addItem adds new model in DataSource", function() {
+            test("add adds new model in DataSource", function() {
                 var listView = setup();
-                listView.addItem();
+                listView.add();
 
                 ok(dataSource.at(0).isNew());
             });
 
-            test("addItem  adds new model before first item in the view", function() {
+            test("add  adds new model before first item in the view", function() {
                 var listView = setup();
                 dataSource.query({ page: 2, pageSize: 1 });
-                listView.addItem();
+                listView.add();
 
                 ok(dataSource.at(1).isNew());
             });
 
-            test("addItem adds new model if DataSource has no data", function() {
+            test("add adds new model if DataSource has no data", function() {
                 var listView = setup({
                     template: "<li></li>",
                     dataSource: {
@@ -295,17 +295,17 @@
                         }
                     }
                 });
-                listView.addItem();
+                listView.add();
 
                 ok(listView.dataSource.at(0).isNew());
             });
 
-            test("addItem edit first item", function() {
+            test("add edit first item", function() {
                 var listView = setup({
                     editTemplate: '<li><input data-value="foo" /></li>'
                 });
 
-                listView.addItem ();
+                listView.add ();
 
                 var item = listView.element.children().first();
                 ok(item.hasClass("k-edit-item"));
@@ -313,7 +313,7 @@
                 equal(listView.editable.element[0], item[0]);
             });
 
-            test("addItem triggers edit event", function() {
+            test("add triggers edit event", function() {
                 var args,
                     listView = setup({
                     editTemplate: '<li><input data-value="foo" /></li>',
@@ -322,57 +322,57 @@
                     }
                 });
 
-                listView.addItem();
+                listView.add();
 
                 var item = listView.element.children().first();
                 equal(args.item[0], item[0]);
                 ok(args.model.isNew());
             });
 
-            test("addItem does not add new item if validation fails", function() {
+            test("add does not add new item if validation fails", function() {
                 var listView = setup({
                     editTemplate: '<li><input data-value="foo" required/></li>'
                 });
 
-                listView.editItem(ul.children().eq(0));
+                listView.edit(ul.children().eq(0));
                 ul.find(":input").val("");
-                listView.addItem();
+                listView.add();
 
                 var editable = ul.find(".k-edit-item").data("kendoEditable");
 
                 ok(!editable.options.model.isNew());
             });
 
-            test("cancelItem calls cancelChanges of DataSource for the edited item", function() {
+            test("cancel calls cancelChanges of DataSource for the edited item", function() {
                 var listView = setup({
                     editTemplate: '<li><input data-bind="value:foo" /></li>'
                 });
 
                 var cancelChanges = stub(dataSource, "cancelChanges");
-                listView.editItem(ul.children().eq(0));
-                listView.cancelItem();
+                listView.edit(ul.children().eq(0));
+                listView.cancel();
 
                 equal(cancelChanges.calls("cancelChanges"), 1);
                 equal(cancelChanges.args("cancelChanges", 0)[0].id, 0);
             });
 
-            test("cancelItem does not call cancelChanges of DataSource if no edited item", function() {
+            test("cancel does not call cancelChanges of DataSource if no edited item", function() {
                 var listView = setup({
                     editTemplate: '<li><input data-bind="value:foo" /></li>'
                 });
 
                 var cancelChanges = stub(dataSource, "cancelChanges");
-                listView.cancelItem();
+                listView.cancel();
 
                 equal(cancelChanges.calls("cancelChanges"), 0);
             });
-            test("cancelItem revert the item to item template", function() {
+            test("cancel revert the item to item template", function() {
                 var listView = setup({
                     editTemplate: '<li><input data-bind="value:foo" /></li>'
                 });
 
-                listView.editItem(ul.children().eq(0));
-                listView.cancelItem();
+                listView.edit(ul.children().eq(0));
+                listView.cancel();
 
                equal(ul.children().eq(0).html(), "foo 0");
             });
