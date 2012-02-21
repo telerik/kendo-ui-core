@@ -468,16 +468,6 @@
                 }, 200);
             });
 
-            test("do not recreate options if no dataSource", function() {
-                var dropdownlist = new DropDownList($("<select/>"));
-
-                stub(dropdownlist, "_options");
-
-                dropdownlist.refresh();
-
-                equal(dropdownlist.calls("_options"), 0);
-            });
-
             test("set optionLabel on init if autoBind:false (select)", function() {
                 var dropdownlist = new DropDownList($("<select/>"), {
                     autoBind: false,
