@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>kendo.init tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.init Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var Widget = kendo.ui.Widget.extend({
+                options: {
+                    name: "Widget"
+                }
+            });
+
+            kendo.ui.plugin(Widget);
+
+            module("kendo.init", {
+                teardown: function() {
+                    kendo.ns = "";
+                }
+            });
+
+            test("initializes a new widget based on its role", function() {
+                var dom = $('<div data-role="widget"/>');
+
+                kendo.init(dom);
+
+                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("initializes a multiple widgets based on their role", function() {
+                var dom = $('<div data-role="widget"/><div data-role="widget"/>');
+
+                kendo.init(dom);
+
+                ok(dom.last().data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("initializes a new widget from dom element", function() {
+                var dom = $('<div data-role="widget"/>');
+
+                kendo.init(dom[0]);
+
+                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("initializes a widgets in dom tree", function() {
+                var dom = $('<div><div data-role="widget"/></div>');
+
+                kendo.init(dom);
+
+                ok(dom.find("div").data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+            test("role respects the namespace", function() {
+                var dom = $('<div data-kendo-role="widget"/>');
+
+                kendo.ns = "kendo-";
+                kendo.init(dom);
+
+                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+            });
+
+        </script>
+    </body>
+</html>

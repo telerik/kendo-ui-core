@@ -2256,6 +2256,30 @@
     kendo.notify = noop;
     kendo.roles = {};
 
+    function init(element) {
+        var role = element.getAttribute("data-" + kendo.ns + "role");
+
+        if (!role) {
+            return;
+        }
+
+        var widget = kendo.roles[role];
+
+        new widget(element);
+    }
+
+    kendo.init = function(element) {
+        var idx, length;
+
+        element = $(element);
+
+        for (idx = 0, length = element.length; idx < length; idx++) {
+            init(element[idx]);
+
+            kendo.init(element[idx].querySelectorAll("[data-" + kendo.ns + "role]"));
+        }
+    }
+
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
         /**
