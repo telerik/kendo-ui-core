@@ -6552,11 +6552,6 @@
             $(element).addClass("k-gauge");
 
             gauge._redraw();
-
-            //gauge._plotArea.pointer.value(0);
-            //setInterval(function() {
-            //    gauge._plotArea.pointer.value((i+=.5) % 100);
-            //}, 10);
         },
 
         value: function(value) {
