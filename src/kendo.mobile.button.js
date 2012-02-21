@@ -4,14 +4,15 @@
         ui = mobile.ui,
         Widget = ui.Widget,
         support = kendo.support,
-        os = support.mobileOS,
         touch = support.touch,
         os = support.mobileOS,
+        ANDROID3UP = os.android && os.flatVersion >= 300,
         MOUSECANCEL = support.mousecancel,
         MOUSEDOWN = support.mousedown,
         MOUSEMOVE = support.mousemove,
         MOUSEUP = support.mouseup,
         CLICK = "click",
+        removeActiveID = 0,
         proxy = $.proxy;
 
     /**
@@ -119,11 +120,7 @@
         * var button = $("#button").kendoMobileButton({ icon: "stop" });
         */
         init: function(element, options) {
-            var that = this,
-                removeActiveID = 0,
-                removeActive = function (e) {
-                    $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
-                };
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -131,28 +128,18 @@
             that._style();
 
             that._releaseProxy = proxy(that._release, that);
+            that._removeProxy = proxy(that._removeActive, that);
 
             that.element.bind(MOUSEUP, that._releaseProxy);
+            that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, that._removeProxy);
 
-            if (os.android && os.flatVersion >= 300) {
+            if (ANDROID3UP) {
                 that.element.bind(MOUSEMOVE, function (e) {
                     if (!removeActiveID) {
-                        removeActiveID = setTimeout(function () {
-                            removeActive(e);
-                            removeActiveID = 0;
-                        }, 500);
+                        removeActiveID = setTimeout(that._removeProxy, 500 , e);
                     }
                 });
             }
-
-            that.element.bind(MOUSEDOWN + " " + MOUSECANCEL + " " + MOUSEUP, function (e) {
-                removeActive(e);
-
-                if (os.android && e.type == MOUSEUP && os.flatVersion >= 300) {
-                    clearTimeout(removeActiveID);
-                    removeActiveID = 0;
-                }
-            });
         },
 
         events: [
@@ -170,6 +157,15 @@
             name: "Button",
             icon: "",
             style: ""
+        },
+
+        _removeActive: function (e) {
+            $(e.target).closest(".km-button,.km-detail").toggleClass("km-state-active", e.type == MOUSEDOWN);
+
+            if (ANDROID3UP) {
+                clearTimeout(removeActiveID);
+                removeActiveID = 0;
+            }
         },
 
         _release: function(e) {
