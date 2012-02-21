@@ -7,6 +7,7 @@
         ITEM_SELECTOR = ".km-list > li",
         proxy = $.proxy,
         GROUP_CLASS = "km-group-title",
+        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '" />',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
@@ -380,9 +381,10 @@
             var that = this,
                 options = that.options,
                 grouped = options.type === "group",
+                element = that.element,
                 inset = options.style === "inset";
 
-            that.element.addClass("km-listview")
+            element.addClass("km-listview")
                 .toggleClass("km-list", !grouped)
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
@@ -390,20 +392,20 @@
                 .find("a:only-child:not([data-" + kendo.ns + "role])").each(enhanceLinkItem);
 
             if (grouped) {
-                that.element
+                element
                     .children()
                     .children("ul")
                     .addClass("km-list");
 
-                that.element.find(">li").each(function() {
+                element.find(">li").each(function() {
                     var groupHeader = $(this).contents().first();
                     if (!groupHeader.is("ul") && !groupHeader.is("div." + GROUP_CLASS)) {
-                        groupHeader.wrap('<div class="' + GROUP_CLASS + '" />');
+                        groupHeader.wrap(GROUP_WRAPPER);
                     }
                 });
             }
 
-            that.element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
+            element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         }
     });
 
