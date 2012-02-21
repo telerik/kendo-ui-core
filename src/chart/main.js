@@ -2472,7 +2472,8 @@
             var bar = this,
                 options = bar.options,
                 isVertical = options.isVertical,
-                normalAngle = isVertical ? 0 : 90,
+                aboveAxis = options.aboveAxis,
+                normalAngle = (isVertical ? 0 : 90) + (aboveAxis ? 0 : 180),
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width,
@@ -2483,7 +2484,6 @@
                     id: options.id,
                     fill: options.color,
                     normalAngle: normalAngle,
-                    aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
                     stackBase: options.stackBase,
@@ -2493,7 +2493,7 @@
                 label = bar.children[0];
 
             if (options.overlay) {
-                rectStyle.overlay = deepExtend({rotation: normalAngle }, options.overlay);
+                rectStyle.overlay = deepExtend({rotation: normalAngle % 180}, options.overlay);
             }
 
             elements.push(view.createRect(box, rectStyle));
@@ -2656,10 +2656,12 @@
                 chartPoints = chart.points,
                 categoryAxis = plotArea.categoryAxis,
                 valueAxis,
+                axisCrossingValue,
                 point;
 
             chart.traverseDataPoints(function(value, category, categoryIx, currentSeries) {
                 valueAxis = chart.seriesValueAxis(currentSeries);
+                axisCrossingValue = valueAxis.options.axisCrossingValue;
                 point = chartPoints[pointIx++];
                 if (point && point.plotValue) {
                     value = point.plotValue;
@@ -2670,7 +2672,8 @@
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                    aboveAxis = value >= valueAxis.options.axisCrossingValue;
+                    aboveAxis = valueAxis.options.reverse ?
+                                    value < axisCrossingValue : value >= axisCrossingValue;
 
                 if (point) {
                     point.options.aboveAxis = aboveAxis;
@@ -5233,9 +5236,9 @@
                 element = anim.element,
                 points = element.points,
                 options = element.options,
-                axis = options.normalAngle === 0 ? Y : X,
+                dir = options.normalAngle,
+                axis = dir % 180 === 0 ? Y : X,
                 stackBase = options.stackBase,
-                aboveAxis = options.aboveAxis,
                 startPosition,
                 endState = anim.endState = {
                     top: points[0].y,
@@ -5246,10 +5249,10 @@
 
             if (axis === Y) {
                 startPosition = defined(stackBase) ? stackBase :
-                    aboveAxis ? endState.bottom : endState.top;
+                    endState[dir === 0 ? BOTTOM : TOP];
             } else {
                 startPosition = defined(stackBase) ? stackBase :
-                    aboveAxis ? endState.left : endState.right;
+                    endState[dir === 90 ? LEFT : RIGHT];
             }
 
             anim.startPosition = startPosition;
@@ -5264,7 +5267,7 @@
                 element = anim.element,
                 points = element.points;
 
-            if (element.options.normalAngle === 0) {
+            if (element.options.normalAngle % 180 === 0) {
                 points[0].y = points[1].y =
                     interpolateValue(startPosition, endState.top, pos);
 
