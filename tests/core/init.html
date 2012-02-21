@@ -22,6 +22,8 @@
                 options: {
                     name: "Widget",
                     foo: "",
+                    template:"",
+                    altTemplate:"",
                     dataMinHeight: "",
                     dataBar:""
                 },
@@ -129,6 +131,29 @@
 
                 equal(widget.options.click, foo);
             });
+
+            test("parses templates from data attributes", function() {
+                var dom = $('<div data-role="widget" data-template="template" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.template, $("#template").html());
+            });
+
+            test("parses template options", function() {
+                var dom = $('<div data-role="widget" data-alt-template="template" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.altTemplate, $("#template").html());
+            });
+        </script>
+        <script id="template" type="text/x-kendo-template">
+            foo
         </script>
     </body>
 </html>
