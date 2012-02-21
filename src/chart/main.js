@@ -5124,69 +5124,6 @@
     }
 
     // Animations
-    var BarAnimationDecorator = Class.extend({
-        init: function(view) {
-            this.view = view;
-        },
-
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                animation = element.options.animation;
-
-            if (animation && view.options.transitions) {
-                if (animation.type === BAR) {
-                    view.animations.push(
-                        new BarAnimation(element)
-                    );
-                }
-            }
-
-            return element;
-        }
-    });
-
-    var PieAnimationDecorator = Class.extend({
-        init: function(view) {
-            this.view = view;
-        },
-
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                animation = element.options.animation;
-
-            if (animation && animation.type === PIE && view.options.transitions) {
-                view.animations.push(
-                    new PieAnimation(element, animation)
-                );
-            }
-
-            return element;
-        }
-    });
-
-    var FadeAnimationDecorator = Class.extend({
-        init: function(view) {
-            this.view = view;
-        },
-
-        decorate: function(element) {
-            var decorator = this,
-                view = decorator.view,
-                options = view.options,
-                animation = element.options.animation;
-
-            if (animation && animation.type === FADEIN && options.transitions) {
-                view.animations.push(
-                    new FadeAnimation(element, animation)
-                );
-            }
-
-            return element;
-        }
-    });
-
     var ElementAnimation = Class.extend({
         init: function(element, options) {
             var anim = this;
@@ -5379,6 +5316,35 @@
             sector.r = interpolateValue(0, endRadius, pos);
         }
     });
+
+    function animationDecorator(animationName, animationType) {
+        return Class.extend({
+            init: function(view) {
+                this.view = view;
+            },
+
+            decorate: function(element) {
+                var decorator = this,
+                    view = decorator.view,
+                    animation = element.options.animation;
+
+                if (animation && animation.type === animationName && view.options.transitions) {
+                    view.animations.push(
+                        new animationType(element, animation)
+                    );
+                }
+
+                return element;
+            }
+        });
+    }
+
+    var BarAnimationDecorator = animationDecorator(BAR, BarAnimation);
+
+    var PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
+
+    var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
+
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
