@@ -472,6 +472,58 @@
                 ok(editable.end());
             });
 
+            test("changing model field validates the input", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                validation: {
+                                    required: true
+                                }
+                            },
+                            bar: {
+                                field: "bar",
+                                validation: {
+                                    required: true
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: "bar" }),
+                    editable = new Editable(div, { fields: ["foo", "bar"], model: model }),
+                    validateInput = stub(editable.validatable, "validateInput");
+
+                model.set("foo", "baz");
+
+                equal(validateInput.calls("validateInput"), 1);
+                equal(validateInput.args("validateInput", 0)[0].data("bind"), "value:foo");
+            });
+
+            test("changing boolean model field validates the input", function() {
+                var MyModel = Model.define({
+                        fields: {
+                            foo: {
+                                field: "foo",
+                                type: "boolean"
+                            },
+                            bar: {
+                                field: "bar",
+                                validation: {
+                                    required: true
+                                }
+                            }
+                        }
+                    }),
+                    model = new MyModel({ foo: false }),
+                    editable = new Editable(div, { fields: ["foo", "bar"], model: model }),
+                    validateInput = stub(editable.validatable, "validateInput");
+
+                model.set("foo", true);
+
+                equal(validateInput.calls("validateInput"), 1);
+                equal(validateInput.args("validateInput", 0)[0].data("bind"), "checked:foo");
+            });
+
         </script>
     </body>
 </html>

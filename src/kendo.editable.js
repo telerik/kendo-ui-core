@@ -102,11 +102,16 @@
 
         _validate: function(e) {
             var that = this,
+                model = that.options.model,
+                isBoolean = typeof e.value === "boolean",
+                input,
                 values = {};
 
             values[e.field] = e.value;
 
-            if (!that.validatable.validate() || that.trigger(CHANGE, { values: values })) {
+            input = $(':input[' + kendo.attr("bind") + '="' + (isBoolean ? 'checked:' : 'value:') + e.field + '"]', that.element);
+
+            if (!that.validatable.validateInput(input) || that.trigger(CHANGE, { values: values })) {
                 e.preventDefault();
             }
         },
@@ -155,6 +160,7 @@
             that.options.model.bind("set", $.proxy(that._validate, that));
 
             that.validatable = container.kendoValidator({
+                validateOnBlur: false,
                 errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
                                 '${message}<div class="k-callout k-callout-n"></div></div>', rules: rules }).data("kendoValidator");
 
