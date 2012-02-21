@@ -184,31 +184,45 @@
                 member,
                 idx;
 
-            type = type || ObservableObject;
+            that.type = type || ObservableObject;
 
             Observable.fn.init.call(that);
 
             that.length = array.length;
 
             for (idx = 0; idx < that.length; idx++) {
-                member = array[idx];
-
-                if ($.isPlainObject(member)) {
-                    member = new type(member);
-
-                    member.bind(CHANGE, function(e) {
-                        that.trigger(CHANGE, { field: e.field, items: [this], action: "itemchange" }, e.isDefaultPrevented());
-                    });
-                }
-
-                that[idx] = member;
+                that[idx] = that.wrap(array[idx]);
             }
+        },
+
+        wrap: function(object) {
+            var that = this;
+
+            if ($.isPlainObject(object)) {
+                object = new that.type(object);
+
+                object.bind(CHANGE, function(e) {
+                    that.trigger(CHANGE, {
+                        field: e.field,
+                        items: [this],
+                        action: "itemchange"
+                    }, e.isDefaultPrevented());
+                });
+            }
+
+            return object;
         },
 
         push: function() {
             var index = this.length,
+                idx,
+                length,
                 items = arguments,
                 result;
+
+            for (idx = 0, length = items.length; idx < length; idx++) {
+                items[idx] = this.wrap(items[idx]);
+            }
 
             result = push.apply(this, items);
 

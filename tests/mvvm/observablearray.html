@@ -44,6 +44,13 @@
                 viewModel.foo.push({});
             });
 
+            test("items pushed to observable array are converted to observable objects", function() {
+                var viewModel = kendo.observable({ foo: [] });
+                viewModel.foo.push({});
+
+                ok(viewModel.foo[0] instanceof kendo.data.ObservableObject);
+            });
+
             test("pushing items to array raises the change event and sets the action to add", function() {
                 expect(1);
 
