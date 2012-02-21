@@ -18,14 +18,6 @@
         }
     })();
 
-    kendo.observable = function(object) {
-        if (!(object instanceof ObservableObject)) {
-            object = new ObservableObject(object);
-        }
-
-        return object;
-    };
-
     var Binding = Observable.extend( {
         init: function(source, path) {
             var that = this;
@@ -46,8 +38,15 @@
         },
 
         change: function(e) {
-            if (this.dependencies[e.field] && !e.isDefaultPrevented()) {
-                this.trigger("change");
+            if (!e.isDefaultPrevented()) {
+                var dependency;
+
+                for (dependency in this.dependencies) {
+                    if (dependency.indexOf(e.field) == 0) {
+                        this.trigger("change");
+                        break;
+                    }
+                }
             }
         },
 
@@ -101,7 +100,6 @@
     var EventBinding = Binding.extend( {
         get: function() {
             return $.proxy(this.source.get(this.path), this.source);
-
         }
     });
 
@@ -855,7 +853,7 @@
     }
 
     function bindElement(element, source) {
-        var role = element.getAttribute("data-role"),
+        var role = element.getAttribute("data-" + kendo.ns+ "role"),
             idx,
             length,
             path,
@@ -1021,4 +1019,13 @@
     kendo.bind = bind;
     kendo.data.binders = binders;
     kendo.notify = notify;
+
+    kendo.observable = function(object) {
+        if (!(object instanceof ObservableObject)) {
+            object = new ObservableObject(object);
+        }
+
+        return object;
+    };
+
 })(jQuery);

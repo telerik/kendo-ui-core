@@ -12,117 +12,46 @@
         <script src="../src/kendo.data.js"></script>
         <script src="../src/kendo.binder.js"></script>
 
-        <style>
-            table, td, th {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-        </style>
     </head>
     <body>
-        <fieldset id="checkboxes">
-            <legend>Checkboxes</legend>
-            <form>
-                <p>Send me spam: <input type="checkbox" data-checked="wantsSpam" /></p>
-                <div data-visible="wantsSpam">
-                    Preferred flavors of spam:
-                    <div><input type="checkbox" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
-                    <div><input type="checkbox" value="cherry" data-checked="spamFlavors" /> Cherry</div>
-                    <div><input type="checkbox" value="almond" data-checked="spamFlavors" /> Almond</div>
-                </div>
-                <fieldset>
-                    <legend> Selection</legend>
-                    <div>
-                        wantsSpam: <span data-text="wantsSpam"></span>
-                    </div>
-                    <div>
-                        spamTypes: <span data-text="selectedFlavors"></span>
-                    </div>
-                </fieldset>
-            </form>
-        </fieldset>
-        <fieldset id="radio">
-            <legend>Radio</legend>
-            <form>
-                Preferred flavors of spam:
-                <div><input type="radio" name="flavors" value="msg" data-checked="spamFlavors" /> Monosodium Glutamate </div>
-                <div><input type="radio" name="flavors" value="cherry" data-checked="spamFlavors" /> Cherry</div>
-                <div><input type="radio" name="flavors" value="almond" data-checked="spamFlavors" /> Almond</div>
-                <fieldset>
-                    <legend> Selection</legend>
-                    <div>
-                        spamTypes: <span data-text="spamFlavors"></span>
-                    </div>
-                </fieldset>
-            </form>
-        </fieldset>
-        <fieldset id="multiple">
-            <legend></legend>
-            <form>
-                <p> Enable: <input type="checkbox" data-checked="enabled" /></p>
-                <div>
-                    <select data-source="products" data-enabled="enabled" data-value="selected" multiple data-template="select-template">
-                    </select>
-                    Selected product <span data-text="selectedProducts"></span>
-                </div>
-                <div>
-                    <select data-source="spamFlavors" data-enabled="enabled" data-value="flavors" multiple>
-                    </select>
-                    Selected spam <span data-text="printFlavors"></span>
-                </div>
-                <div>
-                    Disable: <input type="checkbox" data-checked="disabled" /></p>
-                    <input type="input" value="Foo"  data-disabled="disabled"></input>
-                    <textarea data-disabled="disabled" data-value="selectedProducts"></textarea>
-                </div>
-            </form>
-        </fieldset>
-
-        <script id="select-template" type="text/x-kendo-template">
-            <option value="${id}">${name}</option>
-        </script>
-
+        <div>
+            <h1 data-bind="text: name"></h1>
+            <h2 data-bind="text: currentSection.name"></h2>
+            <h3 data-bind="text: activeSection().name"></h3>
+            <button data-bind="click:nextSection">Next Section</button>
+        </div>
+        <p style="margin-top:50px;display:block;">
+            PROBLEM: Why doesn't the first "Section 1" change when "Next Section" is clicked?
+            </p>
         <script>
-            var viewModel = kendo.observable({
-                spamFlavors: ["cherry","almond"],
-                wantsSpam: true,
-                selectedFlavors: function() {
-                    return this.get("spamFlavors").join(",");
-                }
-            });
+var vm = {
+    _idx: 0,
+    name: "Test Top Level",
+    currentSection: null,
+    activeSection: function(){
+      return this.sections[this.get("_idx")];
+    },
+    sections: [
+        { name: "Section 1"},
+        { name: "Section 2"}
+    ],
+    nextSection: function(){
+       if(this._idx >= this.sections.length - 1) return;
 
-            kendo.bind($("#checkboxes>form"), viewModel);
+       console.log("START", this.currentSection);
 
-            viewModel = kendo.observable({
-                spamFlavors: "almond"
-            });
+       this.set("_idx", this._idx + 1);
+       this.set("currentSection", this.sections[this._idx]);
 
-            kendo.bind($("#radio>form"), viewModel);
+       console.log("END", this.currentSection);
+    }
+};
 
-            viewModel = kendo.observable({
-                products: [ { id: 1,  name: "Food"}, { id: 2, name: "Beverages" }, { id: 3, name: "Beer" }],
-                selected: [],
-                enabled: true,
-                disabled: false,
-                selectedProducts: function() {
-                    var result = "",
-                        selected = this.get("selected");
-                    for (var idx = 0, length = selected.length; idx < length; idx++) {
-                        result += selected[idx].name + ",";
-                    }
-                    return result;
-                },
-                spamFlavors: ["cherry","almond"],
-                flavors: ["cherry"],
-                printFlavors: function() {
-                    return this.get("flavors").join(",");
-                }
-            });
-            viewModel.selected.push(viewModel.products[1]);
+vm = kendo.observable(vm);
+vm.currentSection = vm.sections[0];
 
-            kendo.bind($("#multiple>form"), viewModel);
+kendo.bind(document.body.children, vm);
         </script>
-
     </body>
 </html>
 
