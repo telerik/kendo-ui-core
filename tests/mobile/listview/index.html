@@ -26,12 +26,6 @@
             var ListView = kendo.mobile.ui.ListView;
 
             module("mobile listview", {
-                setup: function() {
-                    kendo.ns = "kendo-";
-                },
-                teardown: function() {
-
-                }
             });
 
             test("name is ListView", function() {
@@ -142,12 +136,12 @@
             });
 
             test("does not activate pushed state for buttons", function() {
-                var dom = $('<ul><li>Foo <a data-kendo-role="button" href="#">Foo</a></li></ul>'),
+                var dom = $('<ul><li>Foo <a data-role="button" href="#">Foo</a></li></ul>'),
                 item = dom.find("li");
 
                 new ListView(dom);
 
-                item.find("[data-kendo-role=button]").trigger(kendo.support.mousedown);
+                item.find("[data-role=button]").trigger(kendo.support.mousedown);
                 ok(!item.is(".km-state-active"), "list item is not marked as active");
             });
 
@@ -187,18 +181,44 @@
             });
 
             test("passes button if a button is clicked", function() {
-                var dom = $('<ul><li><a href="#" data-kendo-name="foo">Foo</a></li></ul>'),
+                var dom = $('<ul><li><a href="#" data-name="foo">Foo</a></li></ul>'),
                     link = dom.find("li>a");
 
                 var listView = new ListView(dom);
 
                 listView.bind("click", function(e) {
                     equal(e.buttonName, "foo", "event passes the clicked button name");
-                    equal(e.button, dom.find('[data-kendo-name=foo]').data("kendoMobileButton"), "event passes the clicked button name");
+                    equal(e.button, dom.find('[data-name=foo]').data("kendoMobileButton"), "event passes the clicked button name");
                 });
 
                 link.trigger(kendo.support.mousedown);
                 link.trigger(kendo.support.mouseup);
+            });
+
+            test("wraps group headers", function() {
+                var dom = $('<ul data-type="group">\
+                    <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
+                </ul>');
+                var listView = new ListView(dom);
+                ok(dom.find("li").contents().first().is("div.km-group-title"), "Header is wrapped correctly");
+            });
+
+            test("Does not wrap groups if headers missing", function() {
+                var dom = $('<ul data-type="group">\
+                    <li><ul><li>Bar</li><li>Baz</li></ul></li>\
+                </ul>');
+                var listView = new ListView(dom);
+                ok(!dom.find("li").contents().first().is("div.km-group-title"), "Groups are skipped");
+            });
+
+            test("Does not wrap groups if markup is present", function() {
+                var dom = $('<ul data-type="group">\
+                    <li><div class="km-group-title">Foo</div><ul><li>Bar</li><li>Baz</li></ul></li>\
+                </ul>');
+                var listView = new ListView(dom);
+                console.log(dom);
+                ok(dom.find("li").contents().first().is("div.km-group-title"), "Header is wrapped");
+                ok(!dom.find("li>div.km-group-title").contents().first().is("div.km-group-title"), "No bogus element is present");
             });
         </script>
     </body>
