@@ -1981,10 +1981,10 @@
                 index;
 
             if (model instanceof kendo.data.Model) {
-                pristineIndex = that._pristineIndex(model);
                 index = that.indexOf(model);
+                pristineIndex = that._pristineIndex(model);
                 if (index != -1) {
-                    if (pristineIndex != -1) {
+                    if (pristineIndex != -1 && !model.isNew()) {
                         that._data.splice(index, 1, that._pristine[pristineIndex]);
                     } else {
                         that._data.splice(index, 1);
@@ -2160,6 +2160,8 @@
                     total++;
                 } else if (action === "remove") {
                     total--;
+                } else if (action !== "itemchange") {
+                    total = that.reader.total(that._pristine);
                 }
 
                 that._total = total;
