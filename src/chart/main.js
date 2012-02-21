@@ -6295,13 +6295,22 @@
         options: {
             shape: "needle",
             fill: "#EA7001",
-            value: 0
+            value: 0,
+            capSize: 0.05
         },
 
         value: function(newValue) {
             var pointer = this,
                 options = pointer.options,
-                element = doc.getElementById(options.id);
+                element;
+
+            if (arguments.length == 0) {
+                return options.value;
+            }
+
+            options.value = newValue;
+
+            element = doc.getElementById(options.id);
 
             pointer.elements[0].rotate(element, pointer.scale.getSlotAngle(newValue), pointer.scale.ring.c);
         },
@@ -6318,20 +6327,21 @@
                 ring = scale.ring,
                 c = ring.c,
                 r = ring.r,
-                capSize = r * 0.05,
+                pointerOptions = pointer.options,
+                capSize = r * pointerOptions.capSize,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
                 center = box.center(),
                 // pointer calculation is done at 90deg, so points are rotated initially
-                rotation = scale.getSlotAngle(pointer.options.value) + 90;
+                rotation = scale.getSlotAngle(pointerOptions.value) + 90;
 
             return [
                 view.createPolyline([
                     rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.majorTickSize, center.x, center.y, rotation),
                     rotatePoint(center.x - capSize/2, center.y, center.x, center.y, rotation),
                     rotatePoint(center.x + capSize/2, center.y, center.x, center.y, rotation)
-                ], true, pointer.options),
-                view.createCircle([center.x, center.y], capSize, pointer.options)
+                ], true, pointerOptions),
+                view.createCircle([center.x, center.y], capSize, pointerOptions)
             ];
         },
 
@@ -6550,7 +6560,11 @@
         },
 
         value: function(value) {
-            this.pointers[0].value(value);
+            if (arguments.length === 0) {
+                return this._pointers[0].value();
+            }
+
+            this._pointers[0].value(value);
         },
 
         _redraw: function() {
@@ -6578,7 +6592,7 @@
 
             plotArea = model._plotArea = new GaugePlotArea(options);
 
-            gauge.pointers = [plotArea.pointer];
+            gauge._pointers = [plotArea.pointer];
 
             model.append(plotArea);
             model.reflow();
