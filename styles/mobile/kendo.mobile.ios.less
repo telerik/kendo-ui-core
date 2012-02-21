@@ -79,7 +79,7 @@
 
 .km-ios .km-back
 {
-    margin-left: 11px;
+    margin-left: 1em;
 }
 
 .km-ios .km-back .km-text
@@ -93,34 +93,39 @@
     margin-bottom: 2px;
     content: "\a0";
     background-color: inherit;
-    background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0) 90%, rgba(70,70,70,.5)),
-                      linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
+    background-image: linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 49%, rgba(255,255,255,0) 49%, rgba(255,255,255,0));
     -webkit-mask-image: -webkit-gradient(linear, left bottom, right top, from(#000000), color-stop(0.50,#000000), color-stop(0.50, transparent), to(transparent));
     border-left: solid 1px rgba(0,0,0,.5);
     border-bottom: solid 1px #aaa;
-    width: 1.6em;
-    height: 1.6em;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1em;
+    height: 1em;
     display: block;
     position: absolute;
     overflow: hidden;
-    left: -.76em;
-    left: ~"-.68rem";
-    top: 0.32em;
-    top: 0.3rem;
+    left: -.4em;
+    top: .12em;
+    zoom: 1.7;
     .transform(rotate(45deg));
     .box-sizing(border-box);
-    .border-radius(.2em 0 .2em .4em);
+    .border-radius(.2em);
+    .box-shadow(~"inset 0 -1px 1px 0px rgba(0,0,0,.4)");
+}
+
+.km-ios3 .km-back:before,
+.km-ios4 .km-back:before,
+.km-ios5 .km-back:before
+{
+    background-image: linear-gradient(left top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0));
+    zoom: 1.76;
 }
 
 .km-ios :-moz-first-node.km-back:before
 {
     border-radius: 0 1rem 0 0.4rem;
-    left: ~"-.56rem";
-    top: 0.28rem;
-    width: 1.36rem;
-    height: 1.36rem;
+    left: -.64em;
+    top: 0.28em;
+    width: 1.56em;
+    height: 1.56em;
 }
 
 .km-ios .km-switch

@@ -43,7 +43,7 @@
         proxy = $.proxy;
 
     function toRoleSelector(string) {
-        return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],")
+        return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],");
     }
 
     function toDom(html) {

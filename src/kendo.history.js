@@ -123,7 +123,7 @@
         navigate: function(to, silent) {
             var that = this;
 
-            if (to === ':back') {
+            if (to === '#:back') {
                 history.back();
                 return;
             }

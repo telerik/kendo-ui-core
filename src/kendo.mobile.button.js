@@ -220,7 +220,7 @@
         */
         init: function(element, options) {
             Button.fn.init.call(this, element, options);
-            this.element.attr("href", ":back");
+            this.element.attr("href", "#:back");
         }
     });
 
