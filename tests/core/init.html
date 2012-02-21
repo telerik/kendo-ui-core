@@ -139,7 +139,7 @@
 
                 var widget = dom.data("kendoWidget");
 
-                equal(widget.options.template, $("#template").html());
+                equal(widget.options.template({}), $("#template").html());
             });
 
             test("parses template options", function() {
@@ -149,7 +149,7 @@
 
                 var widget = dom.data("kendoWidget");
 
-                equal(widget.options.altTemplate, $("#template").html());
+                equal(widget.options.altTemplate({}), $("#template").html());
             });
         </script>
         <script id="template" type="text/x-kendo-template">

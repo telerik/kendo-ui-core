@@ -112,12 +112,12 @@
             that.template = template;
         },
 
-        invoke: function(value) {
+        render: function(value) {
             var html;
 
             this.start();
 
-            html = this.template(value);
+            html = kendo.render(this.template, value);
 
             this.stop();
 
@@ -210,12 +210,6 @@
         }
     });
 
-    binders.template = Binder.extend({
-        update: function() {
-            this.element.innerHTML = this.bindings.template.invoke(this.bindings.template.get());
-        }
-    });
-
     binders.html = Binder.extend({
         update: function() {
             this.element.innerHTML = this.bindings["html"].get();
@@ -255,12 +249,14 @@
         },
 
         change: function(e) {
-            e.preventDefault();
-
             if (e.action == "add") {
+                e.preventDefault();
                 this.add(e.index, kendo.render(this.template(), e.items));
             } else if (e.action == "remove") {
+                e.preventDefault();
                 this.remove(e.index, e.items.length);
+            } else {
+                this.update();
             }
         },
 
@@ -335,12 +331,21 @@
                 element = element.tBodies[0];
             }
 
-            $(element).html(kendo.render(template, source));
+            if (!(source instanceof ObservableArray)) {
+                source = new ObservableArray([source]);
+            }
 
-            if (element.children.length) {
-                for (idx = 0, length = source.length; idx < length; idx++) {
-                    bindElement(element.children[idx], source[idx]);
+            if (this.bindings.template) {
+                $(element).html(this.bindings.template.render(source));
+
+                if (element.children.length) {
+                    for (idx = 0, length = source.length; idx < length; idx++) {
+                        bindElement(element.children[idx], source[idx]);
+                    }
                 }
+            }
+            else {
+                $(element).html(kendo.render(template, source));
             }
         }
     });
@@ -564,7 +569,7 @@
                 var value = this.widget.value();
                 var idx, length;
 
-                var field = this.options.valueField || this.options.textField;
+                var field = this.options.dataValueField || this.options.dataTextField;
 
                 if (field) {
                     var source = this.bindings.source.get();
@@ -581,7 +586,7 @@
             },
 
             update: function() {
-                var field = this.options.valueField || this.options.textField;
+                var field = this.options.dataValueField || this.options.dataTextField;
                 var value = this.bindings.value.get();
 
                 if (field) {
@@ -598,18 +603,11 @@
     };
 
     var BindingTarget = Class.extend( {
-        init: function(target) {
+        init: function(target, options) {
             this.target = target;
-            this.options = {};
+            this.options = options;
             this.binders = [];
             this.bindings = [];
-        },
-
-        setOptions: function(options) {
-            if (options.template) {
-                options.template = kendo.template(options.template);
-            }
-            $.extend(this.options, options);
         },
 
         bind: function(bindings) {
@@ -650,12 +648,6 @@
             }
         },
 
-        configuration: function() {
-            return {
-                options: ["textField", "valueField"]
-            };
-        },
-
         destroy: function() {
             var idx, length;
 
@@ -673,11 +665,6 @@
     var WidgetBindingTarget = BindingTarget.extend( {
         init: function(target) {
             BindingTarget.fn.init.apply(this, arguments);
-        },
-
-        setOptions: function(options) {
-            this.options = options;
-            this.target.setOptions(options);
         },
 
         bind: function(bindings) {
@@ -713,7 +700,7 @@
             binding = bindings[name];
 
             if (binder) {
-                binder = new binder(this.target, bindings, this.options);
+                binder = new binder(this.target, bindings, this.target.options);
 
                 this.binders.push(binder);
 
@@ -744,55 +731,12 @@
     }
 
     function bindingTargetForRole(role, element) {
-        var options = {},
-            option,
-            type,
-            name,
-            idx,
-            length,
-            value;
-
-        type = kendo.roles[role];
+        var type = kendo.roles[role];
 
         if (type) {
-            name = type.fn.options.name;
-            element = $(element);
+            kendo.init(element);
 
-            for (option in type.fn.options) {
-                value =  element.data(kendo.ns + option.toLowerCase());
-
-                if (value === undefined) {
-                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
-                }
-
-                if (value !== undefined) {
-                    options[option] = value;
-                }
-            }
-
-            for (idx = 0, length = type.fn.events.length; idx < length; idx++) {
-                option = type.fn.events[idx];
-
-                value = element.data(kendo.ns + option.toLowerCase());
-
-                if (value === null) {
-                    value = element.data(kendo.ns + option.replace("data", "").toLowerCase()); //setting options that start with "data"
-                }
-
-                if (value !== null) {
-                    options[option] = window[value];
-                }
-            }
-
-            var widget = element.data("kendo" + name);
-
-            if (!widget) {
-                widget = new kendo.ui[name](element, options);
-            } else {
-                widget.setOptions(options);
-            }
-
-            return new WidgetBindingTarget(widget);
+            return new WidgetBindingTarget($.data(element, "kendo" + type.fn.options.name));
         }
     }
 
@@ -877,30 +821,14 @@
         bind = element.getAttribute("data-" + kendo.ns + "bind");
 
         if (bind) {
+            bind = parseAttributeList(bind);
+
             if (!target) {
-                target = new BindingTarget(element);
+                options = kendo.parseOptions($(element), { textField: "", valueField: "", template: "" });
+                target = new BindingTarget(element, options);
             }
 
             target.source = source;
-
-            bind = parseAttributeList(bind);
-
-            configuration = target.configuration();
-
-            if (bind.template) {
-                options.template = $("#" + bind.template).html();
-            }
-
-            for (idx = 0, length = configuration.options.length; idx < length; idx++) {
-                path = configuration.options[idx];
-                option = element.getAttribute("data-" + kendo.ns + path.toLowerCase());
-
-                if (option) {
-                    options[path] = option;
-                }
-            }
-
-            target.setOptions(options);
 
             var bindings = {};
 
@@ -910,7 +838,7 @@
                 bindings[path] = new Binding(source, sourcePath);
             }
 
-            if (bindings.template) {
+            if (options.template) {
                 bindings.template = new TemplateBinding(source, "", options.template);
             }
 
@@ -920,7 +848,6 @@
 
             if (bindings.source) {
                 deep = false;
-                delete bindings.template;
             }
 
             if (bind.attr) {
@@ -984,8 +911,8 @@
 
     function unbindElementTree(element) {
         var idx,
-        length,
-        children = element.children;
+            length,
+            children = element.children;
 
         unbindElement(element);
 

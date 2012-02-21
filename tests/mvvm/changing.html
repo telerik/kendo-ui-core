@@ -159,7 +159,7 @@
                     selectedItems: []
                 });
 
-                var dom = $('<select data-valuefield="name" data-bind="source:foo,value:selectedItems" multiple="multiple"/>');
+                var dom = $('<select data-value-field="name" data-bind="source:foo,value:selectedItems" multiple="multiple"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -179,7 +179,7 @@
 
                 viewModel.selectedItem = viewModel.foo[0];
 
-                var dom = $('<select data-valuefield="text" data-bind="source:foo,value:selectedItem"/>');
+                var dom = $('<select data-value-field="text" data-bind="source:foo,value:selectedItem"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -303,7 +303,7 @@
                     foo: [{ name: "foo" }]
                 });
 
-                var dom = $('<ul data-bind="source:foo,template:array-template"/>');
+                var dom = $('<ul data-template="array-template" data-bind="source:foo"/>');
 
                 kendo.bind(dom, viewModel);
 
@@ -349,7 +349,7 @@
             });
 
             test("tracking changes in templates", function() {
-                var dom = $('<div data-bind="template:simple-field-template" />');
+                var dom = $('<div data-template="simple-field-template" data-bind="source: this" />');
 
                 var viewModel = kendo.observable({ foo: "foo" });
 
@@ -361,7 +361,7 @@
             });
 
             test("dependencies are reavaluated", function() {
-                var dom = $('<div data-bind="template:if-else-template" />');
+                var dom = $('<div data-template="if-else-template" data-bind="source: this" />');
 
                 var viewModel = kendo.observable({ foo: "foo", bar: "bar" });
 
@@ -375,7 +375,7 @@
             });
 
             test("does not attach more than one change handler when monitoring for dependency changes", function() {
-                var dom = $('<div data-bind="template:counting-template" />');
+                var dom = $('<div data-template="counting-template" data-bind="source:this" />');
 
                 var viewModel = kendo.observable({ foo: "foo" });
 
@@ -391,7 +391,7 @@
             });
 
             test("tracking changes when direct access and set are used", function() {
-                var dom = $('<div data-bind="template:nested-field-template" />');
+                var dom = $('<div data-template="nested-field-template" data-bind="source:this"/>');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -407,7 +407,7 @@
             });
 
             test("tracking changes when single set is used", function() {
-                var dom = $('<div data-bind="template:nested-field-template" />');
+                var dom = $('<div data-template="nested-field-template" data-bind="source:this" />');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -423,7 +423,7 @@
             });
 
             test("tracking changes when direct access and set are used (multiple get template)", function() {
-                var dom = $('<div data-bind="template:nested-field-template-multiple-gets" />');
+                var dom = $('<div data-template="nested-field-template-multiple-gets" data-bind="source:this" />');
 
                 var viewModel = kendo.observable({
                     foo: {
@@ -439,7 +439,7 @@
             });
 
             test("tracking changes when single set is used (multiple get template)", function() {
-                var dom = $('<div data-bind="template:nested-field-template-multiple-gets" />');
+                var dom = $('<div data-bind="source:this" data-template="nested-field-template-multiple-gets" />');
 
                 var viewModel = kendo.observable({
                     foo: {
