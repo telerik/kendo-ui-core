@@ -57,7 +57,7 @@ var suiteScripts = {
         "kendo.dropdownlist.js",
         "kendo.combobox.js",
         "kendo.grid.js",
-        "kendo.editor.js",
+        //"kendo.editor.js",
         "kendo.numerictextbox.js",
         "kendo.menu.js",
         "kendo.editable.js",
