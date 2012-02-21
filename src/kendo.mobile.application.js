@@ -21,7 +21,7 @@
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
                 <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
                 <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
-        iconMeta = kendo.template('<link rel="apple-touch-icon" href="${icon}" />'),
+        iconMeta = kendo.template('<link rel="apple-touch-icon" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
         buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
@@ -478,12 +478,18 @@
         },
 
         _attachMeta: function() {
-            var icon = this.options.icon;
+            var icon = this.options.icon, size;
 
             HEAD.prepend(meta);
 
             if (icon) {
-                HEAD.prepend(iconMeta({icon: icon}));
+                if (typeof icon === "string") {
+                    icon = { "" : icon };
+                }
+
+                for(size in icon) {
+                    HEAD.prepend(iconMeta({ icon: icon[size], size: size }));
+                }
             }
         },
 
