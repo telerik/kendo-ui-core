@@ -24,7 +24,9 @@
                     foo: "",
                     dataMinHeight: "",
                     dataBar:""
-                }
+                },
+
+                events: [ "click" ]
             });
 
             kendo.ui.plugin(Widget);
@@ -114,6 +116,18 @@
                 var widget = dom.data("kendoWidget");
 
                 equal(widget.options.dataMinHeight, "bar");
+            });
+
+            function foo() { }
+
+            test("parses events from data attributes", function() {
+                var dom = $('<div data-role="widget" data-click="foo" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.click, foo);
             });
         </script>
     </body>
