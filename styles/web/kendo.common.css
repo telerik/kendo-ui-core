@@ -2228,22 +2228,22 @@ span.k-numerictextbox
 }
 
 .k-bold { background-position: -64px 0; }
-.k-italic { background-position: -64px -16px; }
-.k-underline { background-position: -64px -32px; }
-.k-strikethrough { background-position: -64px -48px; }
-.k-foreColor .k-tool-icon { background-position: -64px -64px; }
-.k-backColor .k-tool-icon { background-position: -64px -80px; }
-.k-justifyLeft { background-position: -64px -96px; }
-.k-justifyCenter { background-position: -64px -112px; }
-.k-justifyRight { background-position: -64px -128px; }
-.k-justifyFull { background-position: -64px -144px; }
-.k-insertUnorderedList { background-position: -64px -176px; }
-.k-insertOrderedList { background-position: -64px -192px; }
-.k-indent { background-position: -64px -208px; }
-.k-outdent { background-position: -64px -224px; }
-.k-createLink { background-position: -64px -240px; }
-.k-unlink { background-position: -64px -256px; }
-.k-insertImage { background-position: -64px -272px; }
+.k-italic { background-position: -64px -22px; }
+.k-underline { background-position: -64px -44px; }
+.k-strikethrough { background-position: -64px -66px; }
+.k-foreColor .k-tool-icon { background-position: -64px -88px; }
+.k-backColor .k-tool-icon { background-position: -64px -110px; }
+.k-justifyLeft { background-position: -64px -132px; }
+.k-justifyCenter { background-position: -64px -154px; }
+.k-justifyRight { background-position: -64px -176px; }
+.k-justifyFull { background-position: -64px -198px; }
+.k-insertUnorderedList { background-position: -64px -242px; }
+.k-insertOrderedList { background-position: -64px -264px; }
+.k-indent { background-position: -112px 0; }
+.k-outdent { background-position: -112px -22px; }
+.k-createLink { background-position: -112px -44px; }
+.k-unlink { background-position: -112px -66px; }
+.k-insertImage { background-position: -112px -88px; }
 
 /* default tool widths */
 .k-fontName { width: 110px; }
