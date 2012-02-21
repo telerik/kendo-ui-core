@@ -246,11 +246,11 @@ html body .k-button-bare
 .k-icon-clock { background-position: -32px -192px; }
 
 .k-search { background-position: -32px -240px; }
-.k-custom { background-position: -32px -256px; }
+.k-custom { background-position: -112px -110px; }
 
-.k-insert-top { background-position: -96px -32px; }
-.k-insert-middle { background-position: -96px -48px; }
-.k-insert-bottom { background-position: -96px -64px; }
+.k-insert-top { background-position: -160px -32px; }
+.k-insert-middle { background-position: -160px -48px; }
+.k-insert-bottom { background-position: -160px -64px; }
 .k-drop-hint { background-position: 0 -326px; }
 
 .k-warning { background-position: -96px -240px; }
@@ -1247,7 +1247,7 @@ div.k-grid-header .k-header
     width: 6px;
     height: 25px;
     background-repeat: no-repeat;
-    background-position: -101px -148px;
+    background-position: -165px -148px;
 }
 
 .k-grouping-header .k-group-indicator
@@ -2091,7 +2091,7 @@ span.k-numerictextbox
 
 .k-colorpicker .k-icon
 {
-    margin-top: 2px;
+    margin-top: 1px;
     vertical-align: middle;
 }
 
@@ -2728,12 +2728,12 @@ span.k-tooltip
 	top: -7px;
 	left: 49%;
 	margin-left: -5px;
-	background-position: -98px -181px;
+	background-position: -162px -181px;
 }
 
 .k-tooltip-validation .k-callout-n
 {
-    background-position: -114px -181px;
+    background-position: -178px -181px;
 }
 
 .k-callout-w
@@ -2741,12 +2741,12 @@ span.k-tooltip
 	top: 49%;
 	left: -7px;
 	margin-top: -5px;
-	background-position: -101px -226px;
+	background-position: -165px -226px;
 }
 
 .k-tooltip-validation .k-callout-w
 {
-    background-position: -117px -226px;
+    background-position: -181px -226px;
 }
 
 .k-callout-s
@@ -2755,12 +2755,12 @@ span.k-tooltip
 	left: 49%;
 	margin-top: 2px;
 	margin-left: -5px;
-	background-position: -98px -213px;
+	background-position: -162px -213px;
 }
 
 .k-tooltip-validation .k-callout-s
 {
-    background-position: -114px -213px;
+    background-position: -178px -213px;
 }
 
 .k-callout-e
@@ -2769,12 +2769,12 @@ span.k-tooltip
 	left: 100%;
 	margin-top: -5px;
 	margin-left: 2px;
-	background-position: -101px -194px;
+	background-position: -165px -194px;
 }
 
 .k-tooltip-validation .k-callout-e
 {
-    background-position: -117px -194px;
+    background-position: -181px -194px;
 }
 
 .k-tooltip-validation .k-warning
@@ -2905,7 +2905,7 @@ span.k-tooltip
     display: inline-block;
 }
 
-.k-splitbar-horizontal .k-resize-handle { background-position: -101px -6px; }
+.k-splitbar-horizontal .k-resize-handle { background-position: -165px -6px; }
 .k-splitbar-horizontal .k-collapse-prev,
 .k-splitbar-horizontal .k-expand-next { background-position: -6px -174px; }
 .k-splitbar-horizontal .k-collapse-next,
@@ -3013,11 +3013,11 @@ html .k-upload
 .k-upload .k-cancel,
 .k-upload .k-fail
 {
-    background-position: -100px -116px;
+    background-position: -164px -116px;
 }
 
-.k-retry { background-position: -100px -132px; }
-.k-success { background-position: -96px -96px; }
+.k-retry { background-position: -164px -132px; }
+.k-success { background-position: -160px -96px; }
 
 .k-filename
 {
