@@ -242,6 +242,12 @@
             imageClass: "k-delete",
             className: "k-grid-delete",
             iconClass: "k-icon"
+        },
+        update: {
+            text: "Edit",
+            imageClass: "k-edit",
+            className: "k-grid-edit",
+            iconClass: "k-icon"
         }
     }
 
@@ -1053,37 +1059,51 @@
                 };
 
             if (editable) {
+                var mode = "incell";
 
-                if (editable.update !== false) {
-                    that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", CLICK, function(e) {
-                        var td = $(this)
+                if (editable !== true) {
+                   mode = editable.mode || editable;
+                }
 
-                        if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
-                            return;
-                        }
+                if (mode === "incell") {
+                    if (editable.update !== false) {
+                        that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", CLICK, function(e) {
+                            var td = $(this)
 
-                        if (that.editable) {
-                            if (that.editable.end()) {
-                                that.closeCell();
+                            if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                                return;
+                            }
+
+                            if (that.editable) {
+                                if (that.editable.end()) {
+                                    that.closeCell();
+                                    that.editCell(td);
+                                }
+                            } else {
                                 that.editCell(td);
                             }
-                        } else {
-                            that.editCell(td);
-                        }
 
-                    });
+                        });
 
-                    that.wrapper.bind("focusin", function(e) {
-                        clearTimeout(that.timer);
-                        that.timer = null;
-                    });
-                    that.wrapper.bind("focusout", function(e) {
-                        that.timer = setTimeout(handler, 1);
-                    });
+                        that.wrapper.bind("focusin", function(e) {
+                            clearTimeout(that.timer);
+                            that.timer = null;
+                        });
+                        that.wrapper.bind("focusout", function(e) {
+                            that.timer = setTimeout(handler, 1);
+                        });
+                    }
+                } else {
+                    if (editable.update !== false) {
+                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-edit", CLICK, function(e) {
+                            e.preventDefault();
+                            that.editRow($(this).closest("tr"));
+                        });
+                    }
                 }
 
                 if (editable.destroy !== false) {
-                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-delete", "click", function(e) {
+                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-delete", CLICK, function(e) {
                         e.preventDefault();
                         that.removeRow($(this).closest("tr"));
                     });
@@ -1196,6 +1216,33 @@
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
+            }
+        },
+
+        editRow: function(row) {
+            var that = this,
+                model = that._modelForContainer(row),
+                column,
+                fields = [],
+                idx,
+                length;
+
+            if (model) {
+                for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                    column = that.columns[idx];
+
+                    if (model.editable(column.field)) {
+                        fields.push({ field: column.field, format: column.format, editor: column.editor });
+                    }
+                }
+                //that._editContainer = row;
+
+                that.editable = row
+                    .addClass("k-grid-edit-row")
+                    .kendoEditable({
+                        fields: fields,
+                        model: model,
+                    }).data("kendoEditable");
             }
         },
 

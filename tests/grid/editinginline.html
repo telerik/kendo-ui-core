@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grid Inline Editing</title>
+        <script src="../../src/jquery.min.js"></script>
+        <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
+        <script type="text/javascript" src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.pager.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.groupable.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.grid.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">Grid Inline Editing</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            var Grid = kendo.ui.Grid,
+                table,
+                DataSource = kendo.data.DataSource,
+                Model = kendo.data.Model,
+                dataSource;
+
+            function setup(options) {
+                options = $.extend({}, {
+                editable: true,
+                dataSource: new DataSource({
+                        schema: {
+                            model: {
+                                id: "foo",
+                                fields: {
+                                    foo: "foo",
+                                    name: "name"
+                                }
+                            }
+                        },
+                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                    })
+                }, options);
+                dataSource = options.dataSource;
+
+                return table.kendoGrid(options).data("kendoGrid");
+            }
+
+            module("grid inline editing", {
+                setup: function() {
+                    table = document.createElement("table");
+                    document.body.appendChild(table);
+
+                    table = $(table);
+                },
+                teardown: function() {
+                    table.closest(".k-grid").remove();
+                }
+            });
+
+            test("editing row passes column settings to Editable", function() {
+                var grid = setup({ columns: [{ field: "foo", format: "bar", editor: function(){} }, "name"] });
+                var tr = table.find("tr:first")
+
+                grid.editRow(tr);
+
+                equal(tr.data("kendoEditable").options.fields[0].field, "foo");
+                equal(tr.data("kendoEditable").options.fields[0].format, "bar");
+                ok(tr.data("kendoEditable").options.fields[0].editor);
+            });
+
+            test("column editor is not pass to the Editable if not set", function() {
+                var grid = setup({ columns: [{ field: "foo"}, "name"] });
+                var tr = table.find("tr:first")
+
+                grid.editRow(tr);
+
+                ok(!tr.data("kendoEditable").options.fields[0].editor);
+            });
+
+            test("correct model is passed to the editable instance", function() {
+                var grid = setup();
+
+                var tr = table.find("tr:first")
+
+                grid.editRow(tr);
+
+                equal(tr.data("kendoEditable").options.model, dataSource.get("bar"));
+            });
+
+            test("k-grid-edit-row is applied on edited cell tr", function() {
+                var grid = setup();
+
+                var tr = table.find("tr:first")
+
+                grid.editRow(tr);;
+
+                ok(tr.hasClass("k-grid-edit-row"));
+            });
+
+            test("editing row passes column fields to Editable", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var editable = tr.data("kendoEditable");
+                equal(editable.options.fields.length, 2);
+                equal(editable.options.fields[0].field, "foo");
+                equal(editable.options.fields[1].field, "name");
+            });
+
+            test("clicking update command calls editRow", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "update" }], editable: "inline" }),
+                    tr = table.find("tr:first"),
+                    editRow = stub(grid, "editRow");
+
+                tr.find("a.k-grid-edit").click();
+                equal(editRow.calls("editRow"), 1);
+            });
+
+            test("clicking update command calls editRow if edit mode is inline", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "update" }], editable: { mode: "inline" } }),
+                    tr = table.find("tr:first"),
+                    editRow = stub(grid, "editRow");
+
+                tr.find("a.k-grid-edit").click();
+                equal(editRow.calls("editRow"), 1);
+            });
+
+            test("clicking update command does not call editRow if edit mode is not inline", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "update" }], editable: true }),
+                    tr = table.find("tr:first"),
+                    editRow = stub(grid, "editRow");
+
+                tr.find("a.k-grid-edit").click();
+                equal(editRow.calls("editRow"), 0);
+            });
+
+            test("update column is rendered if set", function() {
+                var grid = setup( { editable: true, columns: [ { command: "update" }] });
+
+                ok(grid.table.find("tr:first > td:last").has("a.k-grid-edit").length);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
