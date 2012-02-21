@@ -329,10 +329,10 @@
                 paddingTop = parseInt(element.css("paddingTop"), 10),
                 win = $(window);
 
-            return({
+            return {
                 x: e.clientX - offset.left - paddingLeft + win.scrollLeft(),
                 y: e.clientY - offset.top - paddingTop + win.scrollTop()
-            });
+            };
         },
 
         _click: function(e) {
@@ -5012,8 +5012,7 @@
         },
 
         renderDefinitions: function() {
-            var view = this,
-                definitions = view.definitions,
+            var definitions = this.definitions,
                 definitionId,
                 output = "";
 
@@ -5027,15 +5026,14 @@
         },
 
         decorate: function(element) {
-            var view = this,
-                decorators = view.decorators,
+            var decorators = this.decorators,
                 i,
                 length = decorators.length,
                 currentDecorator;
 
             for (i = 0; i < length; i++) {
                 currentDecorator = decorators[i];
-                view._decorateChildren(currentDecorator, element);
+                this._decorateChildren(currentDecorator, element);
                 element = currentDecorator.decorate.call(currentDecorator, element);
             }
 
@@ -5065,10 +5063,9 @@
         },
 
         playAnimations: function() {
-            var view = this,
-                anim;
+            var anim;
 
-            while(anim = view.animations.shift()) {
+            while (anim = this.animations.shift()) {
                 anim.play();
             }
         },
@@ -5126,7 +5123,7 @@
                 duration = options.duration,
                 finish = start + duration,
                 domElement = doc.getElementById(element.options.id),
-                easing = jQuery.easing[options.easing],
+                easing = $.easing[options.easing],
                 wallTime,
                 time,
                 pos,
@@ -5188,17 +5185,15 @@
         },
 
         setup: function() {
-            var anim = this,
-                points = anim.element.points;
+            var points = this.element.points;
 
             points[1].x = points[2].x = points[0].x;
         },
 
         step: function(pos) {
-            var anim = this,
-                options = anim.options,
+            var options = this.options,
                 size = interpolateValue(0, options.size, pos),
-                points = anim.element.points;
+                points = this.element.points;
 
             // Expands rectangle to the right
             points[1].x = points[2].x = points[0].x + size;
@@ -5322,7 +5317,6 @@
     var PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
 
     var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
-
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
@@ -6026,7 +6020,7 @@
         return value * value;
     }
 
-    jQuery.extend(jQuery.easing, {
+    extend($.easing, {
         easeOutElastic: function (n, d, first, diff) {
             var s = 1.70158,
                 p = 0,
