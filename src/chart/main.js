@@ -1602,7 +1602,6 @@
         createLabels: function() {
             var axis = this,
                 options = axis.options,
-                reverse = options.reverse,
                 align = options.isVertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
@@ -1618,7 +1617,7 @@
                     i;
 
                 for (i = 0; i < labelsCount; i += step) {
-                    labelText = axis.getLabelText(reverse ? labelsCount - i - 1 : i);
+                    labelText = axis.getLabelText(i);
 
                     if (labelOptions.template) {
                         labelTemplate = baseTemplate(labelOptions.template);
@@ -2241,7 +2240,7 @@
 
             positions.push(isVertical ? axis.box.y2 : axis.box.x2);
 
-            return positions;
+            return options.reverse ? positions.reverse() : positions;
         },
 
         getMajorTickPositions: function() {
@@ -2279,8 +2278,8 @@
             }
 
             return isVertical ?
-                   new Box2D(lineBox.x2, p1, lineBox.x2, p2) :
-                   new Box2D(p1, lineBox.y1, p2, lineBox.y1);
+                   new Box2D(lineBox.x2, reverse ? p2 : p1, lineBox.x2, reverse ? p1 : p2) :
+                   new Box2D(reverse ? p2 : p1, lineBox.y1, reverse ? p1 : p2, lineBox.y1);
         },
 
         getLabelsCount: function() {
@@ -4308,12 +4307,14 @@
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
             var slot = axis.getSlot(crossingValue, crossingValue),
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue);
+                slotEdge = axis.options.reverse ? 2 : 1,
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
+                targetEdge = targetAxis.options.reverse ? 2 : 1;
 
             axis.reflow(
                 axis.box.translate(
-                    targetSlot.x1 - slot.x1,
-                    targetSlot.y1 - slot.y1
+                    targetSlot[X + targetEdge] - slot[X + slotEdge],
+                    targetSlot[Y + targetEdge] - slot[Y + slotEdge]
                 )
             );
         },
