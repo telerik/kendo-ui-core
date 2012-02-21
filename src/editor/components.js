@@ -2,7 +2,7 @@
 
 /* select box */
 
-$t.selectbox = function (element, options) {
+kendo.ui.selectbox = function (element, options) {
     var selectedValue;
     var $element = $(element).attr("tabIndex", 0);
     var $text = $element.find('.k-input');
@@ -156,7 +156,7 @@ $.fn.tSelectBox.defaults = {
 
 /* color picker */
 
-$t.colorpicker = function (element, options) {
+kendo.ui.colorpicker = function (element, options) {
     var that = this;
 
     that.element = element;
@@ -229,7 +229,7 @@ $t.colorpicker = function (element, options) {
     });
 }
 
-$t.colorpicker.prototype = {
+kendo.ui.colorpicker.prototype = {
     select: function(color) {
         if (color) {
             color = dom.toHex(color);
@@ -327,7 +327,7 @@ $t.colorpicker.prototype = {
     }
 }
 
-$.extend($t.colorpicker, {
+$.extend(kendo.ui.colorpicker, {
     buildPopup: function(component) {
         var html = new $t.stringBuilder();
 
