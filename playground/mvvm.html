@@ -31,6 +31,7 @@
         <script src="../src/kendo.splitter.js"></script>
         <script src="../src/kendo.slider.js"></script>
         <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.chart.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -680,6 +681,17 @@ Selected UnitPrice: &lt;span data-bind="text: unitPrice"&gt;lt;/span&gt;
                             </li>
                             <li>Item 2</li>
                         </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kendo chart declarative initialization</td>
+                    <td>
+                        <pre class="prettyprint">
+&lt;div data-role="chart" data-series='[{"field":"id"}]' data-bind="source:products"&gt;&lt;/div&gt;
+                        </pre>
+                    </td>
+                    <td>
+                        <div data-role="chart" data-series='[{"field":"id"}]' data-bind="source:products"></div>
                     </td>
                 </tr>
             </table>

@@ -82,5 +82,10 @@ tests.push(
     {
         page: "chart/scatterchart.html",
         title: "Scatter Chart"
+    },
+    {
+        page: "chart/mvvm.html",
+        title: "mvvm"
     }
+
 );

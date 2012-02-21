@@ -524,12 +524,14 @@
                 view = dataSource.view(),
                 groups = dataSource.group() || [];
 
-                if (groups.length) {
-                    view = flattenGroups(view);
-                }
+                if (items.length) {
+                    if (groups.length) {
+                        view = flattenGroups(view);
+                    }
 
-                for (idx = 0, length = view.length; idx < length; idx++) {
-                    bindElement(items[idx], view[idx]);
+                    for (idx = 0, length = view.length; idx < length; idx++) {
+                        bindElement(items[idx], view[idx]);
+                    }
                 }
             },
 
@@ -955,7 +957,7 @@
             $.data(element, "kendoBindingTarget", target);
         }
 
-        if (deep) {
+        if (deep && element.children) {
             for (idx = 0; idx < element.children.length; idx++) {
                 bindElement(element.children[idx], source);
             }
@@ -989,8 +991,10 @@
 
         unbindElement(element);
 
-        for (idx = 0, length = children.length; idx < length; idx++) {
-            unbindElementTree(children[idx]);
+        if (children) {
+            for (idx = 0, length = children.length; idx < length; idx++) {
+                unbindElementTree(children[idx]);
+            }
         }
     }
 
