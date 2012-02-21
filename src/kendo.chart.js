@@ -122,10 +122,7 @@
 
             applySeriesColors(chart.options);
 
-            chart.bind([
-                DATABOUND,
-                SERIES_CLICK
-            ], chart.options);
+            chart.bind(chart.events, chart.options);
 
             $(element).addClass("k-chart");
 
@@ -139,6 +136,17 @@
 
             chart._redraw();
             chart._attachEvents();
+
+            kendo.notify(chart);
+        },
+
+        events:[
+            DATABOUND,
+            SERIES_CLICK
+        ],
+
+        items: function() {
+            return $();
         },
 
         options: {
