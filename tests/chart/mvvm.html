@@ -142,7 +142,7 @@
 
 
             test("dataBound event is raised if attached as option", 1, function() {
-                var dom = $('<div data-role="chart" data-dataBound="dataBound" data-bind="source:items" />').data("series", [{ field: "text" }]);
+                var dom = $('<div data-role="chart" data-bound="dataBound" data-bind="source:items" />').data("series", [{ field: "text" }]);
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]
@@ -156,7 +156,7 @@
             }
 
             test("dataBound event is raised if attached as option to a already initialized chart", 1, function() {
-                var dom = $('<div data-dataBound="dataBound" data-bind="source:items" />').kendoChart( { series: [{ field: "text" }] });
+                var dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoChart( { series: [{ field: "text" }] });
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]

@@ -2256,6 +2256,88 @@
     kendo.notify = noop;
     kendo.roles = {};
 
+    function lowerCaseFirstLetter($0, $1) {
+        return $1.toLowerCase();
+    }
+
+    var dataRegExp = /^data(.)/;
+    var templateRegExp = /template$/i;
+
+    function parseOption(element, attribute) {
+        return element.data(kendo.ns + attribute.replace(dataRegExp, lowerCaseFirstLetter));
+    }
+
+    function parseOptions(element, options) {
+        var result = {};
+
+        for (option in options) {
+            value = parseOption(element, option);
+
+            if (value !== undefined) {
+
+                if (templateRegExp.test(option)) {
+                    value = kendo.template($("#" + value).html());
+                }
+
+                result[option] = value;
+            }
+        }
+
+        return result;
+    }
+
+    function init(element) {
+        var role = element.getAttribute("data-" + kendo.ns + "role"),
+            result,
+            option,
+            widget,
+            idx,
+            length,
+            options = {};
+
+        if (!role) {
+            return;
+        }
+
+        widget = kendo.roles[role];
+
+        element = $(element);
+
+        options = parseOptions(element, widget.fn.options);
+
+        for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
+            option = widget.fn.events[idx];
+
+            value = parseOption(element, option);
+
+            if (value !== undefined) {
+                options[option] = window[value];
+            }
+        }
+
+        result = element.data("kendo" + widget.fn.options.name);
+
+        if (!result) {
+            new widget(element, options);
+        } else {
+            result.setOptions(options);
+        }
+    }
+
+    kendo.init = function(element) {
+        var idx, length;
+
+        element = $(element);
+
+        for (idx = 0, length = element.length; idx < length; idx++) {
+            init(element[idx]);
+
+            kendo.init(element[idx].querySelectorAll("[data-" + kendo.ns + "role]"));
+        }
+    }
+
+    kendo.parseOptions = parseOptions;
+
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
         /**

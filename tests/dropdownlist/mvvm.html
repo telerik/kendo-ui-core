@@ -29,7 +29,7 @@
             });
 
             test("initializes options from data attributes", function() {
-                var dom = $('<select data-role="dropdownlist" data-textfield="foo" data-valuefield="bar"/>');
+                var dom = $('<select data-role="dropdownlist" data-text-field="foo" data-value-field="bar"/>');
 
                 kendo.bind(dom);
 
@@ -57,7 +57,7 @@
             });
 
             test("initializes complex value from view model", function() {
-                var dom = $('<select data-valuefield="text" data-role="dropdownlist" data-bind="value:value,source:items" />');
+                var dom = $('<select data-value-field="text" data-role="dropdownlist" data-bind="value:value,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -68,7 +68,7 @@
             });
 
             test("changing a value updates the view model", function() {
-                var dom = $('<select data-valuefield="text" data-role="dropdownlist" data-bind="value:value,source:items" />');
+                var dom = $('<select data-value-field="text" data-role="dropdownlist" data-bind="value:value,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -81,7 +81,7 @@
             });
 
             test("binding dropdownlist initialized before binding", function() {
-                var dom = $('<select data-valuefield="text" data-bind="value:value,source:items" />');
+                var dom = $('<select data-value-field="text" data-bind="value:value,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -94,7 +94,7 @@
             });
 
             test("binding dropdownlist initialized after binding", function() {
-                var dom = $('<select data-valuefield="text" data-bind="value:value,source:items" />');
+                var dom = $('<select data-value-field="text" data-bind="value:value,source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = observable.items[1];
@@ -107,7 +107,7 @@
             });
 
             test("binding template", function() {
-                var dom = $('<select data-role="dropdownlist" data-bind="template:template,source:items" />');
+                var dom = $('<select data-role="dropdownlist" data-template="template" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -117,7 +117,7 @@
             });
 
             test("binding template containing binding attributes", function() {
-                var dom = $('<select data-role="dropdownlist" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -127,7 +127,7 @@
             });
 
             test("updating an item from the data source updates the corresponding dropdownlist item", function() {
-                var dom = $('<select data-role="dropdownlist" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
@@ -139,7 +139,7 @@
             });
 
             test("destroying binding targets when the datasource changes", function() {
-                var dom = $('<select data-role="dropdownlist" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var observable = kendo.observable({ items: [{ text:"foo"} ] });
 
@@ -152,7 +152,7 @@
             });
 
             test("DropDownList is not replaced", function() {
-                var dom = $('<select data-role="dropdownlist" data-bind="template:template-with-attributes,source:items" />');
+                var dom = $('<select data-role="dropdownlist" data-template="template-with-attributes" data-bind="source:items" />');
 
                 var dropDownList = dom.kendoDropDownList().data("kendoDropDownList");
 
@@ -192,7 +192,7 @@
 
 
             test("dataBound event is raised if attached as option", 2, function() {
-                var dom = $('<div data-role="dropdownlist" data-dataBound="dataBound" data-bind="source:items" />');
+                var dom = $('<div data-role="dropdownlist" data-bound="dataBound" data-bind="source:items" />');
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]
@@ -206,7 +206,7 @@
             }
 
             test("dataBound event is raised if attached as option to a already initialized dropdownlist", 1, function() {
-                var dom = $('<div data-dataBound="dataBound" data-bind="source:items" />').kendoDropDownList();
+                var dom = $('<div data-bound="dataBound" data-bind="source:items" />').kendoDropDownList();
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}]

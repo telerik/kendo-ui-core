@@ -86,7 +86,7 @@
                     <div>
                     <label>Blue<input type="radio" name="color" value="blue" data-bind="checked: color"></label>
                     </div>
-                    <div style="width: 100px; height: 100px" data-bind="style: { background-color: color }"></div>
+                    <div style="width: 100px; height: 100px" data-bind="style: { backgroundColor: color }"></div>
                 </td>
             </tr>
             <tr>
@@ -122,14 +122,14 @@ var viewModel = {
                     <td>Setting the template of html elements</td>
                     <td>
 <pre class="prettyprint">
-&lt;div data-bind="template: div-template"&gt;&lt;/div&gt;
+&lt;div data-bind="source:this" data-template="div-template"&gt;&lt;/div&gt;
 &lt;script id="div-template" type="text/x-kendo-template"&gt;
  #: templateExpression # &lt;span data-bind="text: bindingExpression"&gt;&lt;/span&gt;
 &lt;/script&gt;
 </pre>
                     </td>
                     <td>
-                        <div data-bind="template: div-template"></div>
+                        <div data-template="div-template" data-bind="source:this"></div>
                         <script id="div-template" type="text/x-kendo-template">
                             #: templateExpression # <span data-bind="text: bindingExpression"></span>
                         </script>
@@ -165,8 +165,8 @@ var viewModel = {
                     <td>Binding a select</td>
                     <td>
 <pre class="prettyprint">
-&lt;select data-bind="source: colors, value: selectedColor"&gt;&lt/select&gt;
-The select value is &lt;span data-bind="text: selectedColor">&lt/span&gt;
+&lt;select data-bind="source: colors, value: selectedColor"&gt;&lt;/select&gt;
+The select value is &lt;span data-bind="text: selectedColor"&gt;&lt;/span&gt;
 &lt;script&gt;
 var viewModel = {
     colors: ["red", "green", "blue"],
@@ -187,8 +187,8 @@ var viewModel = {
                     <td>
 <pre class="prettyprint">
 &lt;select
-    data-valuefield="id"
-    data-textfield="name"
+    data-value-field="id"
+    data-text-field="name"
     data-bind="source: products, value: selectedProduct"&gt;
 &lt;/select&gt;
 The select value as JSON is &lt;span data-bind="text: selectedProductAsJson">&lt;/span&gt;
@@ -208,7 +208,7 @@ var viewModel = {
 </pre>
                     </td>
                     <td>
-                        <select data-valuefield="id" data-textfield="name" data-bind="source: products, value: selectedProduct"></select>
+                        <select data-value-field="id" data-text-field="name" data-bind="source: products, value: selectedProduct"></select>
                         The select value as JSON is <span data-bind="text: selectedProductAsJson"></span>
                     </td>
                 </tr>
@@ -328,8 +328,8 @@ var viewModel = kendo.observable({
                     <td>
                         <pre class="prettyprint">
 &lt;select multiple="multiple"
-    data-textfield="name"
-    data-valuefield="id"
+    data-text-field="name"
+    data-value-field="id"
     data-bind="source: products, value: selectedProducts"&gt;
 &lt;/select&gt;
 Selected products: &lt;span data-bind="text: printSelectedProducts"&gt;&lt;/span&gt;
@@ -350,7 +350,7 @@ var viewModel = kendo.observable({
                         </pre>
                     </td>
                     <td>
-                        <select multiple="multiple" data-textfield="name" data-valuefield="id" data-bind="source: products,value: selectedProducts"></select>
+                        <select multiple="multiple" data-text-field="name" data-value-field="id" data-bind="source: products,value: selectedProducts"></select>
                         Selected products: <span data-bind="text: printSelectedProducts"></span>
                     </td>
                 </tr>
@@ -359,8 +359,8 @@ var viewModel = kendo.observable({
                     <td>
                         <pre class="prettyprint">
 &lt;select data-role="dropdownlist"
-    data-valuefield="id"
-    data-textfield="name"
+    data-value-field="id"
+    data-text-field="name"
     data-bind="source: products, value: selectedProduct"&gt;
 &lt;/select&gt;
 Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt;
@@ -379,7 +379,7 @@ Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt
                         </pre>
                     </td>
                     <td>
-                        <select data-role="dropdownlist" data-valuefield="id" data-textfield="name" data-bind="source: products, value: selectedProduct">
+                        <select data-role="dropdownlist" data-value-field="id" data-text-field="name" data-bind="source: products, value: selectedProduct">
                         </select>
                         Selected product <span data-bind="text:selectedProductAsJson"></span>
                     </td>
@@ -389,7 +389,7 @@ Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt
                     <td>
                         <pre class="prettyprint">
 &lt;input data-role="autocomplete"
-    data-textfield="name"
+    data-text-field="name"
     data-bind="source: products, value: selectedProduct"&gt;
 &lt;/input&gt;
 Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt;
@@ -408,7 +408,7 @@ Selected product &lt;span data-bind="text:selectedProductAsJson"&gt;&lt;/span&gt
                         </pre>
                     </td>
                     <td>
-                        <input data-role="autocomplete" data-textfield="name" data-bind="source: products, value: selectedProduct">
+                        <input data-role="autocomplete" data-text-field="name" data-bind="source: products, value: selectedProduct">
                         </input>
                         Selected product <span data-bind="text:selectedProductAsJson"></span>
                     </td>

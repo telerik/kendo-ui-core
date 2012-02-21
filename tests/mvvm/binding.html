@@ -166,7 +166,7 @@
             });
 
             test("select binding with template", function() {
-                var dom = $('<select data-bind="source:foo,template:select-template"/>');
+                var dom = $('<select data-template="select-template" data-bind="source:foo"/>');
 
                 kendo.bind(dom, {
                     foo: [ {
@@ -262,7 +262,7 @@
             });
 
             test("binding child elements of template to data item", function() {
-                var dom = $('<div><ol data-bind="source:foo,template: ol-template"/></div>');
+                var dom = $('<div><ol data-template="ol-template" data-bind="source:foo"/></div>');
 
                 var viewModel = kendo.observable( {
                     foo: [{ name: "foo"}]
@@ -273,7 +273,7 @@
             });
 
             test("binding child elements of template to data item of primitive type", function() {
-                var dom = $('<ul data-bind="source:foo,template:ul-template"/>');
+                var dom = $('<ul data-template="ul-template" data-bind="source:foo"/>');
 
                 var viewModel = kendo.observable( {
                     foo: [1]
@@ -284,7 +284,7 @@
             });
 
             test("template binding without source", function() {
-                var dom = $('<div data-bind="template:div-template"/>');
+                var dom = $('<div data-template="div-template" data-bind="source:this"/>');
 
                 kendo.bind(dom, { foo: "foo" });
 
@@ -317,7 +317,7 @@
             });
 
             test("binding select value to object", function() {
-                var dom = $('<select data-valuefield="name" data-bind="source:items, value:selectedItem"/>');
+                var dom = $('<select data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" } ],
@@ -342,7 +342,7 @@
                 ok(dom.find("option").last().is(":selected"));
             });
             test("binding multi select value to multiple objects", function() {
-                var dom = $('<select multiple="multiple" data-valuefield="name" data-bind="source:items, value:selectedItem"/>');
+                var dom = $('<select multiple="multiple" data-value-field="name" data-bind="source:items, value:selectedItem"/>');
 
                 var viewModel = kendo.observable({
                     items: [  { name: "foo" }, { name: "bar" }, { name: "baz" } ],
@@ -524,7 +524,7 @@
 
 
             test("binding to getter", function() {
-                var dom = $('<div data-bind="template:get-template"/>');
+                var dom = $('<div data-template="get-template" data-bind="source:this"/>');
 
                 var viewModel = {
                     foo: "foo"
