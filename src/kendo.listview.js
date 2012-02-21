@@ -264,7 +264,7 @@
            return valid;
        },
 
-       editItem: function(item) {
+       edit: function(item) {
            var that = this,
                data = that.dataSource.view()[item.index()],
                container = $(that.editTemplate(data)).addClass(KEDITITEM);
@@ -277,11 +277,11 @@
             }
        },
 
-       saveItem: function() {
+       save: function() {
            this._closeEditable();
        },
 
-       removeItem: function(item) {
+       remove: function(item) {
            var that = this,
                data = that.dataSource.view()[item.index()];
 
@@ -291,7 +291,7 @@
            }
        },
 
-       addItem: function() {
+       add: function() {
            var that = this,
                dataSource = that.dataSource,
                index = dataSource.indexOf((dataSource.view() || [])[0]);
@@ -302,11 +302,11 @@
 
            if (that._closeEditable()) {
                dataSource.insert(index, {});
-               that.editItem(that.element.children().first());
+               that.edit(that.element.children().first());
            }
        },
 
-       cancelItem: function() {
+       cancel: function() {
            var that = this,
                dataSource = that.dataSource,
                data,
