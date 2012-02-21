@@ -270,7 +270,8 @@
                     }
                     return true;
                 }
-            }
+            },
+            validateOnBlur: true
         },
 
         _submit: function(e) {
@@ -290,14 +291,16 @@
                 that.element.submit(proxy(that._submit, that));
             }
 
-            if (!that.element.is(INPUTSELECTOR)) {
-                that.element.delegate(INPUTSELECTOR, BLUR, function() {
-                    that.validateInput($(this));
-                });
-            } else {
-                that.element.bind(BLUR, function() {
-                    that.validateInput(that.element);
-                });
+            if (that.options.validateOnBlur) {
+                if (!that.element.is(INPUTSELECTOR)) {
+                    that.element.delegate(INPUTSELECTOR, BLUR, function() {
+                        that.validateInput($(this));
+                    });
+                } else {
+                    that.element.bind(BLUR, function() {
+                        that.validateInput(that.element);
+                    });
+                }
             }
         },
 

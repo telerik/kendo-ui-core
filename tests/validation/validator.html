@@ -643,6 +643,15 @@
                 ok(input.hasClass("k-invalid"));
             });
 
+            test("field is not revalidated on blur validateonblur is false", function() {
+                var input = $('<input type="text" required />'),
+                    validator = setup(input, { validateOnBlur: false });
+
+                input.trigger("blur");
+
+                ok(!input.hasClass("k-invalid"));
+            });
+
             test("multiple errors are not added when invalid input is blured several times", function() {
                 var input = $('<input type="text" required />'),
                     validator = setup(input);
