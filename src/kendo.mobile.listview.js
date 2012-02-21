@@ -6,7 +6,8 @@
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li",
         proxy = $.proxy,
-        GROUP_TEMPLATE = kendo.template("<li><div class=\"km-group-title\">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>"),
+        GROUP_CLASS = "km-group-title",
+        GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
         MOUSEMOVE = support.mousemove,
@@ -393,6 +394,13 @@
                     .children()
                     .children("ul")
                     .addClass("km-list");
+
+                that.element.find(">li").each(function() {
+                    var groupHeader = $(this).contents().first();
+                    if (!groupHeader.is("ul") && !groupHeader.is("div." + GROUP_CLASS)) {
+                        groupHeader.wrap('<div class="' + GROUP_CLASS + '" />');
+                    }
+                });
             }
 
             that.element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
