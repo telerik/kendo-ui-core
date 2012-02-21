@@ -349,6 +349,22 @@
                 equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
             });
 
+            test("cache only platform specific layouts", function() {
+            setup('<div data-role="view" id="page1">Page 1</div> \
+                    <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \
+                    <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
+                    <div data-role="layout" data-id="default"><div data-role="footer">footer</div></div> \
+                    ', { layout: "foo" });
+
+                var foo = application.layouts.foo;
+                var defaultLayout = application.layouts.default;
+
+                equal(foo.element.attr("data-id"), "foo");
+                equal(foo.element.attr("data-platform"), "ios");
+                equal(defaultLayout.element.attr("data-id"), "default");
+                equal(defaultLayout.element.attr("data-platform"), undefined);
+            });
+
             test("Applies view title attribute contents to layout view title", function() {
                 setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
