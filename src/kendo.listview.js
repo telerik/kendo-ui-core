@@ -304,6 +304,22 @@
                dataSource.insert(index, {});
                that.editItem(that.element.children().first());
            }
+       },
+
+       cancelItem: function() {
+           var that = this,
+               dataSource = that.dataSource,
+               data,
+               index = -1;
+
+           if (that.editable) {
+               index = that.editable.element.index();
+           }
+
+           if (index != -1) {
+               data = dataSource.view()[index];
+               dataSource.cancelChanges(data);
+           }
        }
 
     });
