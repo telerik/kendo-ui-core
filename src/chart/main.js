@@ -11,6 +11,7 @@
         map = $.map,
         grep = $.grep,
         each = $.each,
+        noop = $.noop,
         math = Math,
         proxy = $.proxy,
         getter = kendo.getter,
@@ -1620,11 +1621,9 @@
             }
         },
 
-        getLabelsCount: function() {
-        },
+        getLabelsCount: noop,
 
-        getLabelText: function(index) {
-        },
+        getLabelText: noop,
 
         lineBox: function() {
             var axis = this,
@@ -5172,11 +5171,9 @@
             }, delay);
         },
 
-        setup: function() {
-        },
+        setup: noop,
 
-        step: function(pos) {
-        }
+        step: noop
     });
 
     var FadeAnimation = ElementAnimation.extend({
