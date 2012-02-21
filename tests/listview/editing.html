@@ -196,6 +196,17 @@
                 ok(listView.element.children().eq(0).data("kendoEditable"));
             });
 
+            test("save calls DataSource sync", function() {
+                var listView = setup({ editTemplate: '<li><input data-value="foo"/></li>' }),
+                    sync = stub(dataSource, "sync");
+
+                listView.edit(listView.element.children().eq(0));
+                listView.element.find(":input").val("");
+                listView.save();
+
+                ok(sync.calls("sync"));
+            });
+
             test("edit does not close previous edited item if validation fails", function() {
                 var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
 
@@ -366,6 +377,7 @@
 
                 equal(cancelChanges.calls("cancelChanges"), 0);
             });
+
             test("cancel revert the item to item template", function() {
                 var listView = setup({
                     editTemplate: '<li><input data-bind="value:foo" /></li>'
@@ -376,6 +388,7 @@
 
                equal(ul.children().eq(0).html(), "foo 0");
             });
+
         </script>
     </body>
 </html>

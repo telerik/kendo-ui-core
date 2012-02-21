@@ -278,7 +278,9 @@
        },
 
        save: function() {
-           this._closeEditable();
+           if (this._closeEditable()) {
+               this.dataSource.sync();
+           }
        },
 
        remove: function(item) {
