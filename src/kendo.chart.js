@@ -2095,7 +2095,7 @@
                 pos = pos + step * multiplier;
             }
 
-            return positions;
+            return options.reverse ? positions.reverse() : positions;
         },
 
         getMajorTickPositions: function() {
