@@ -23,7 +23,7 @@
             var that = this,
                 idx = 0,
                 events = that.events,
-                dataSource = element.data("source"),
+                dataSource,
                 option,
                 value,
                 handler;
@@ -31,6 +31,7 @@
             ui.Widget.fn.init.call(that, element, options);
             options = that.options;
             that.element.attr("data-" + kendo.ns + "widget", options.name);
+            dataSource = that.element.data("source");
 
             for (option in options) {
                 value = that.element.data(kendo.ns + option);
