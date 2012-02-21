@@ -20,7 +20,10 @@
         <script>
             var Widget = kendo.ui.Widget.extend({
                 options: {
-                    name: "Widget"
+                    name: "Widget",
+                    foo: "",
+                    dataMinHeight: "",
+                    dataBar:""
                 }
             });
 
@@ -73,6 +76,45 @@
                 ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
             });
 
+            test("parses options from data attributes", function() {
+                var dom = $('<div data-role="widget" data-foo="foo" />');
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.foo, "foo");
+            });
+
+            test("parses options which start with data", function() {
+                var dom = $('<div data-role="widget" data-bar="bar" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.dataBar, "bar");
+            });
+
+            test("parses camel case options that start with data", function() {
+                var dom = $('<div data-role="widget" data-min-height="bar" />');
+
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.dataMinHeight, "bar");
+            });
+
+            test("options respect the namespace", function() {
+                var dom = $('<div data-kendo-role="widget" data-kendo-min-height="bar" />');
+
+                kendo.ns = "kendo-";
+                kendo.init(dom);
+
+                var widget = dom.data("kendoWidget");
+
+                equal(widget.options.dataMinHeight, "bar");
+            });
         </script>
     </body>
 </html>
