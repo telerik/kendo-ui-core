@@ -2256,10 +2256,22 @@
     kendo.notify = noop;
     kendo.roles = {};
 
+    function lowerCaseFirstLetter($0, $1) {
+        return $1.toLowerCase();
+    }
+
+    var DATA_REGEXP = /^data(.)/;
+
+    function attributeValue(element, attribute) {
+        return element.data(kendo.ns + attribute.replace(DATA_REGEXP, lowerCaseFirstLetter));
+    }
+
     function init(element) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             option,
             widget,
+            idx,
+            length,
             options = {};
 
         if (!role) {
@@ -2271,13 +2283,20 @@
         element = $(element);
 
         for (option in widget.fn.options) {
-            //setting options that start with "data" without asking the people do to data-dataSomething
-            value = element.data(kendo.ns + option.replace(/^data(.)/, function($0, $1) {
-                return $1.toLowerCase();
-            }));
+            value = attributeValue(element, option);
 
             if (value !== undefined) {
                 options[option] = value;
+            }
+        }
+
+        for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
+            option = widget.fn.events[idx];
+
+            value = attributeValue(element, option);
+
+            if (value !== null) {
+                options[option] = window[value];
             }
         }
 
