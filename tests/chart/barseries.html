@@ -1488,13 +1488,12 @@
                     same(rect.style.fill, bar.options.color);
                 });
 
-                test("sets normalAngle for vertical bars", function() {
-                    same(rect.style.normalAngle, 0);
+                test("sets isVertical", function() {
+                    same(rect.style.isVertical, true);
                 });
 
-                test("sets normalAngle for vertical bars below axis", function() {
-                    createBar({ aboveAxis: false });
-                    same(rect.style.normalAngle, 180);
+                test("sets aboveAxis", function() {
+                    same(rect.style.aboveAxis, true);
                 });
 
                 test("sets overlay rotation for vertical bars", function() {
@@ -1519,16 +1518,6 @@
                 test("does not change border color if set", function() {
                     createBar({ border: { color: "" } });
                     equals(view.log.rect[0].style.stroke, "");
-                });
-
-                test("sets normalAngle for horizontal bars", function() {
-                    createBar({ isVertical: false });
-                    same(rect.style.normalAngle, 90);
-                });
-
-                test("sets normalAngle for horizontal bars below axis", function() {
-                    createBar({ isVertical: false, aboveAxis: false });
-                    same(rect.style.normalAngle, 270);
                 });
 
                 test("sets overlay rotation for horizontal bars", function() {

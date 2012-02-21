@@ -30,7 +30,8 @@
                             new Point2D(0, 10)
                         ],
                         options: {
-                            id: "id"
+                            id: "id",
+                            isVertical: true
                         },
                         refresh: function() {
                         },
@@ -98,7 +99,6 @@
                             options: {
                                 id: "id"
                             },
-                            normalAngle: 0,
                             aboveAxis: true
                         });
                         decorator = new Chart.BarAnimationDecorator(view);
@@ -133,7 +133,7 @@
                         ],
                         options: $.extend({
                             id: "id",
-                            normalAngle: 0,
+                            isVertical: true,
                             aboveAxis: true
                         }, rectOptions),
                         refresh: function() {
@@ -163,7 +163,7 @@
                 });
 
                 test("setup collapses rect onto stackBase (horizontal bars)", function() {
-                    createAnim({ stackBase: 10, normalAngle: 90 });
+                    createAnim({ stackBase: 10, isVertical: false });
                     anim.setup();
 
                     equals(rect.points[0].x, 10);
@@ -173,7 +173,7 @@
                 });
 
                 test("setup shrinks rect onto base (horizontal bars above axis)", function() {
-                    createAnim({ normalAngle: 90 });
+                    createAnim({ isVertical: false });
                     anim.setup();
 
                     equals(rect.points[1].x, 0);
@@ -181,7 +181,7 @@
                 });
 
                 test("setup shrinks rect onto base (horizontal bars below axis)", function() {
-                    createAnim({ normalAngle: 270 });
+                    createAnim({ isVertical: false, aboveAxis: false });
                     anim.setup();
 
                     equals(rect.points[0].x, 10);
@@ -197,7 +197,7 @@
                 });
 
                 test("setup shrinks rect onto base (vertical bars below axis)", function() {
-                    createAnim({ normalAngle: 180 });
+                    createAnim({ aboveAxis: false });
                     anim.setup();
 
                     equals(rect.points[2].y, 0);
@@ -218,7 +218,7 @@
                 });
 
                 asyncTest("animates right edge to final position", function() {
-                    createAnim({ normalAngle: 90 });
+                    createAnim({ isVertical: false });
                     anim.setup();
                     anim.play();
 
@@ -244,7 +244,7 @@
                 });
 
                 asyncTest("animates left edge to final position", function() {
-                    createAnim({ normalAngle: 90, aboveAxis: false });
+                    createAnim({ isVertical: false, aboveAxis: false });
                     anim.setup();
                     anim.play();
 
@@ -270,7 +270,6 @@
                         sector = {
                             options: $.extend({
                                 id: "id",
-                                normalAngle: 0,
                                 aboveAxis: true,
                                 animation: {
                                     type: "pie"
@@ -311,7 +310,6 @@
                         },
                         options: {
                             id: "id",
-                            normalAngle: 0,
                             aboveAxis: true
                         },
                         refresh: function() {

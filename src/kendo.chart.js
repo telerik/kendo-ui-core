@@ -2472,8 +2472,6 @@
             var bar = this,
                 options = bar.options,
                 isVertical = options.isVertical,
-                aboveAxis = options.aboveAxis,
-                normalAngle = (isVertical ? 0 : 90) + (aboveAxis ? 0 : 180),
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width,
@@ -2483,9 +2481,10 @@
                 rectStyle = deepExtend({
                     id: options.id,
                     fill: options.color,
-                    normalAngle: normalAngle,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
+                    isVertical: options.isVertical,
+                    aboveAxis: options.aboveAxis,
                     stackBase: options.stackBase,
                     animation: options.animation
                 }, border),
@@ -2493,7 +2492,7 @@
                 label = bar.children[0];
 
             if (options.overlay) {
-                rectStyle.overlay = deepExtend({rotation: normalAngle % 180}, options.overlay);
+                rectStyle.overlay = deepExtend({rotation: isVertical ? 0 : 90}, options.overlay);
             }
 
             elements.push(view.createRect(box, rectStyle));
@@ -5236,9 +5235,9 @@
                 element = anim.element,
                 points = element.points,
                 options = element.options,
-                dir = options.normalAngle,
-                axis = dir % 180 === 0 ? Y : X,
+                axis = options.isVertical ? Y : X,
                 stackBase = options.stackBase,
+                aboveAxis = options.aboveAxis,
                 startPosition,
                 endState = anim.endState = {
                     top: points[0].y,
@@ -5249,10 +5248,10 @@
 
             if (axis === Y) {
                 startPosition = defined(stackBase) ? stackBase :
-                    endState[dir === 0 ? BOTTOM : TOP];
+                    endState[aboveAxis ? BOTTOM : TOP];
             } else {
                 startPosition = defined(stackBase) ? stackBase :
-                    endState[dir === 90 ? LEFT : RIGHT];
+                    endState[aboveAxis ? LEFT : RIGHT];
             }
 
             anim.startPosition = startPosition;
@@ -5267,7 +5266,7 @@
                 element = anim.element,
                 points = element.points;
 
-            if (element.options.normalAngle % 180 === 0) {
+            if (element.options.isVertical) {
                 points[0].y = points[1].y =
                     interpolateValue(startPosition, endState.top, pos);
 
