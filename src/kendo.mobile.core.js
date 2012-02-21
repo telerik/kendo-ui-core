@@ -23,6 +23,7 @@
             var that = this,
                 idx = 0,
                 events = that.events,
+                dataSource = element.data("source"),
                 option,
                 value,
                 handler;
@@ -46,6 +47,10 @@
                 if (handler !== undefined) {
                     options[event] = window[handler];
                 }
+            }
+
+            if (dataSource) {
+                options["dataSource"] = window[dataSource];
             }
 
             that.bind(events, options);

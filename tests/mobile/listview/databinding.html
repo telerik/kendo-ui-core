@@ -45,6 +45,17 @@
                 equal(dom.children().length, 2);
             });
 
+            test("binds to datasource referenced by data attribute", function() {
+                var dom = $('<ul data-source="foo" />');
+
+                window.foo =  [1, 2];
+
+                new ListView(dom);
+
+                equal(dom.children().length, 2);
+            });
+
+
             test("default template expects string as data item", function() {
                 var dom = $("<ul/>");
 
