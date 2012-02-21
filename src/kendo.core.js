@@ -2257,15 +2257,31 @@
     kendo.roles = {};
 
     function init(element) {
-        var role = element.getAttribute("data-" + kendo.ns + "role");
+        var role = element.getAttribute("data-" + kendo.ns + "role"),
+            option,
+            widget,
+            options = {};
 
         if (!role) {
             return;
         }
 
-        var widget = kendo.roles[role];
+        widget = kendo.roles[role];
 
-        new widget(element);
+        element = $(element);
+
+        for (option in widget.fn.options) {
+            //setting options that start with "data" without asking the people do to data-dataSomething
+            value = element.data(kendo.ns + option.replace(/^data(.)/, function($0, $1) {
+                return $1.toLowerCase();
+            }));
+
+            if (value !== undefined) {
+                options[option] = value;
+            }
+        }
+
+        new widget(element, options);
     }
 
     kendo.init = function(element) {
