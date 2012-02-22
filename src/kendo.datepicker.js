@@ -162,9 +162,12 @@
                        .show();
 
                 calendar.unbind(CHANGE)
-                        .unbind(NAVIGATE)
-                        .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
+
+                if (!touch) {
+                    calendar.unbind(NAVIGATE)
+                            .bind(NAVIGATE, proxy(that._navigate, that))
+                }
 
                 calendar.month = that.month;
                 calendar.options.depth = options.depth;
