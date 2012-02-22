@@ -2145,7 +2145,8 @@
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
-                scale = (reverse ? -1 : 1) * (lineSize / (options.max - options.min)),
+                dir = reverse ? -1 : 1,
+                scale = lineSize / (options.max - options.min),
                 a = defined(a) ? a : options.axisCrossingValue,
                 b = defined(b) ? b : options.axisCrossingValue,
                 a = math.max(math.min(a, options.max), options.min),
@@ -2155,15 +2156,15 @@
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
             if (isVertical) {
-                p1 = lineStart + scale * (options.max - math.max(a, b));
-                p2 = lineStart + scale * (options.max - math.min(a, b));
+                p1 = options.max - math.max(a, b);
+                p2 = options.max - math.min(a, b);
             } else {
-                p1 = lineStart + scale * (math.min(a, b) - options.min);
-                p2 = lineStart + scale * (math.max(a, b) - options.min);
+                p1 = math.min(a, b) - options.min;
+                p2 = math.max(a, b) - options.min;
             }
 
-            slotBox[valueAxis + 1] = reverse ? p2 : p1;
-            slotBox[valueAxis + 2] = reverse ? p1 : p2;
+            slotBox[valueAxis + 1] = lineStart + scale * dir * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + scale * dir * (reverse ? p1 : p2);
 
             return slotBox;
         },
