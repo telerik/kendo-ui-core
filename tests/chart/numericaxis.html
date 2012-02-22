@@ -75,7 +75,7 @@
                         max = d[1],
                         mu = d[2];
 
-                    equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
+                    equals(Chart.autoMajorUnit(min, max), mu, "[" + min + ", " + max  + "]");
                 }
            });
 
@@ -86,7 +86,7 @@
                         max = -d[0],
                         mu = d[2];
 
-                    equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                    equals(Chart.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
                 }
            });
 
@@ -104,7 +104,7 @@
                         max = d[1] / 2,
                         mu = d[2];
 
-                    equals(numericAxis.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
+                    equals(Chart.autoMajorUnit(min, max), mu, "[" + min + ", " + max + "]");
                 }
            });
 
