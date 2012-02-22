@@ -5307,6 +5307,32 @@
         }
     });
 
+    var RotationAnimation = ElementAnimation.extend({
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                center = anim.options.center;
+
+            if (element.options.rotation) {
+                anim.endState = element.options.rotation[0];
+                element.options.rotation = [
+                    anim.options.startAngle,
+                    center.x,
+                    center.y
+                ];
+            }
+        },
+
+        step: function(pos) {
+            var anim = this,
+                element = anim.element;
+
+            if (element.options.rotation) {
+                element.options.rotation[0] = interpolateValue(anim.options.startAngle, anim.endState, pos);
+            }
+        }
+    });
+
     function animationDecorator(animationName, animationType) {
         return Class.extend({
             init: function(view) {
@@ -5331,7 +5357,8 @@
 
     var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
         PieAnimationDecorator = animationDecorator(PIE, PieAnimation),
-        FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
+        FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation),
+        PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
@@ -6257,24 +6284,6 @@
         }
     });
 
-    var ValueAnimation = ElementAnimation.extend({
-        setup: function(startValue) {
-            var anim = this,
-                options = anim.element.options;
-
-            anim.endValue = options.value;
-            startValue = anim.startValue = startValue || 0;
-            options.value = startValue;
-        },
-
-        step: function(pos) {
-            var anim = this,
-                options = anim.element.options;
-
-            options.value = interpolateValue(anim.startValue, anim.endValue, pos);
-        }
-    });
-
     var Pointer = ChartElement.extend({
         init: function (scale, options) {
             var pointer = this,
@@ -6297,7 +6306,7 @@
             value: 0,
             capSize: 0.05,
             animation: {
-                delay: 0
+                type: POINTER
             }
         },
 
@@ -6312,19 +6321,6 @@
             }
 
             options.value = newValue;
-
-            if (pointer.animation !== false) {
-                pointer._animation.setup(value);
-                pointer._animation.play();
-            }
-
-        },
-
-        refresh: function(element) {
-            var pointer = this,
-                scale = pointer.scale;
-
-            pointer.elements[0].rotate(element, scale.getSlotAngle(pointer.options.value), scale.ring.c);
         },
 
         reflow: function(box) {
@@ -6332,16 +6328,6 @@
                 options = pointer.options;
 
             pointer.box = box;
-
-            setTimeout(function() {
-
-                if (pointer.animation !== false) {
-                    pointer._animation = new ValueAnimation(pointer, options.animation);
-
-                    pointer._animation.setup();
-                    pointer._animation.play();
-                }
-            }, 1);
         },
 
         _createNeedle: function(view) {
@@ -6356,7 +6342,12 @@
                 halfWidth = box.width() / 2,
                 center = box.center(),
                 // pointer calculation is done at 90deg, so points are rotated initially
-                rotation = 90 - scale.getSlotAngle(scale.options.min);
+                rotation = 90 - scale.getSlotAngle(pointer.options.value);
+
+            deepExtend(pointer.options.animation, {
+                startAngle: rotation - 90 + scale.getSlotAngle(scale.options.min),
+                center: center
+            });
 
             return [
                 view.createPolyline([
@@ -6671,7 +6662,8 @@
     deepExtend(Gauge, {
         RadialScale: RadialScale,
         GaugePlotArea: GaugePlotArea,
-        Pointer: Pointer
+        Pointer: Pointer,
+        PointerAnimationDecorator: PointerAnimationDecorator
     });
 
 })(jQuery);
@@ -6729,7 +6721,8 @@
                 new Chart.BarAnimationDecorator(view),
                 new Chart.PieAnimationDecorator(view),
                 new SVGClipAnimationDecorator(view),
-                new Chart.FadeAnimationDecorator(view)
+                new Chart.FadeAnimationDecorator(view),
+                new Gauge.PointerAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -6956,13 +6949,9 @@
         options: {
             fill: "",
             fillOpacity: 1,
-            strokeOpacity: 1
+            strokeOpacity: 1,
+            rotation: [0,0,0]
         },
-
-        rotate: function(domElement, angle, center) {
-            $(domElement).attr("transform", "rotate(" + [angle, center.x, center.y].join(" ") + ")");
-        },
-
 
         refresh: function(domElement) {
             var options = this.options;
@@ -6970,7 +6959,8 @@
             $(domElement).attr({
                 "d": this.renderPoints(),
                 "fill-opacity": options.fillOpacity,
-                "stroke-opacity": options.strokeOpacity
+                "stroke-opacity": options.strokeOpacity,
+                "transform": "rotate(" + options.rotation.join(" ") + ")"
             });
         },
 
