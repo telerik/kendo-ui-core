@@ -77,6 +77,12 @@
                     pageSize: 10
                 });
 
+                $(".pager").kendoPager({
+                    dataSource: dataSource,
+                    selectTemplate: '<span class="currentPage">#=text#</span>',
+                    linkTemplate: '<a href="##" data-page="#=idx #">#=text#</a>'
+                });
+
                 var listView = $("#listView").kendoListView({
                     dataSource: dataSource,
                     selectable: false,
@@ -105,12 +111,6 @@
 
                 $(".k-add-button").click(function() {
                     listView.add();
-                });
-
-                $(".pager").kendoPager({
-                    dataSource: dataSource,
-                    selectTemplate: '<span class="currentPage">#=text#</span>',
-                    linkTemplate: '<a href="##" data-page="#=idx #">#=text#</a>'
                 });
 
             });
