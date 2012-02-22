@@ -164,7 +164,7 @@
                     checked: true
                 });
 
-                ok(theSwitch.handle.hasClass("km-switch-on"));
+                ok(theSwitch.wrapper.hasClass("km-switch-on"));
                 ok(theSwitch.element[0].checked);
             });
 
@@ -173,7 +173,7 @@
 
                 theSwitch.toggle(true);
 
-                ok(theSwitch.handle.hasClass("km-switch-on"));
+                ok(theSwitch.wrapper.hasClass("km-switch-on"));
                 ok(theSwitch.element[0].checked);
             });
 
@@ -184,7 +184,7 @@
 
                 theSwitch.toggle(false);
 
-                ok(!theSwitch.handle.hasClass("km-switch-on"));
+                ok(!theSwitch.wrapper.hasClass("km-switch-on"));
                 ok(!theSwitch.element[0].checked);
             });
 
@@ -193,7 +193,7 @@
 
                 theSwitch.toggle();
 
-                ok(theSwitch.handle.hasClass("km-switch-on"));
+                ok(theSwitch.wrapper.hasClass("km-switch-on"));
                 ok(theSwitch.element[0].checked);
             });
 
@@ -203,7 +203,7 @@
                 theSwitch.toggle(true);
                 theSwitch.toggle();
 
-                ok(!theSwitch.handle.hasClass("km-switch-on"));
+                ok(!theSwitch.wrapper.hasClass("km-switch-on"));
             });
         </script>
     </body>
