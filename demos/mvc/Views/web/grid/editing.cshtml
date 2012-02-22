@@ -46,17 +46,17 @@
 
                     $("#grid").kendoGrid({
                         dataSource: dataSource,
-                        navigatable: true,
+                        //navigatable: true,
                         pageable: true,
                         height: 400,
-                        toolbar: ["create", "save", "cancel"],
+                       // toolbar: ["create", "save", "cancel"],
                         columns: [
                             "ProductName",
                             { field: "UnitPrice", format: "{0:c}", width: "150px" },
                             { field: "UnitsInStock", width: "150px" },
                             { field: "Discontinued", width: "100px" },
-                            { command: "destroy", title: "&nbsp;", width: "110px" },
-                            { command: "edit", title: "&nbsp;", width: "110px" }],
+                            /*{ command: "destroy", title: "&nbsp;", width: "110px" },*/
+                            { command: "edit", title: "&nbsp;", width: "210px" }],
                         editable: "inline"
                     });
                 });
