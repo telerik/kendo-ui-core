@@ -1853,12 +1853,17 @@
 
     var fx = {
         promise: function (element, options) {
+            console.log("start");
             if (options.show) {
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
 
             if (options.hide) {
                 element.data("olddisplay", element.css("display")).hide();
+            }
+
+            if (options.init) {
+                options.init();
             }
 
             if (options.completeCallback) {

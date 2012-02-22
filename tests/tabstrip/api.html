@@ -14,7 +14,7 @@
 
         <script type="text/javascript">
 
-            var isRaised;
+            var isRaised, isActivateRaised;
 
             var argsCheck = false;
 
@@ -27,6 +27,11 @@
                     isRaised = true;
             }
 
+            function Activate(e) {
+                if ($(e.contentElement).is(":visible"))
+                    isActivateRaised = true;
+            }
+
             var onLoadTabStrip;
             function Load(e) {
                 isRaised = true;
@@ -34,7 +39,7 @@
             }
 
             $(document).ready(function() {
-                $("#TabStrip1").kendoTabStrip({ animation: false, select: Select });
+                $("#TabStrip1").kendoTabStrip({ animation: false, select: Select, activate: Activate });
             });
 
         </script>
@@ -182,6 +187,20 @@
             item.find('> .k-link').trigger('click');
 
             ok(isRaised);
+        });
+
+        asyncTest('clicking should raise onActivate event when the new contentElement is visible', function() {
+
+            var item = getRootItem(3);
+
+            isActivateRaised = false;
+
+            item.find('> .k-link').trigger('click');
+
+            setTimeout(function () {
+                ok(isActivateRaised);
+                start();
+            }, 10);
         });
 
         test('clicking first item should select it', function() {
