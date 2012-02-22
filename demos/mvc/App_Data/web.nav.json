@@ -223,6 +223,21 @@
             ]
         },
         {
+            "text": "ListView",
+            "name": "listview",
+            "spriteCssClass": "",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "listview/index.html"
+                },
+                {
+                    "text": "Binding to remote data",
+                    "url": "listview/remote-data.html"
+                }
+            ]
+        },
+        {
             "text": "Menu",
             "name": "menu",
             "spriteCssClass": "menuIcon",
