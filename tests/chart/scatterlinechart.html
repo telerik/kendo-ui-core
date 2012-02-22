@@ -32,7 +32,9 @@
 
                 scatterLineChart.reflow();
                 scatterLineChart.getViewElements(view);
-                pointCoordinates = mapPoints(view.log.path[0].points);
+                if (view.log.path[0]) {
+                    pointCoordinates = mapPoints(view.log.path[0].points);
+                }
             }
 
             (function() {
@@ -125,6 +127,14 @@
 
                 test("sets point dataItem", function() {
                     equal(typeof scatterLineChart.points[0].dataItem, "object");
+                });
+
+                test("renders empty scatter line series", function() {
+                    setupScatterLineChart(plotArea, { series: [ { data: [] } ] });
+                });
+
+                test("renders empty and non-empty scatter line series", function() {
+                    setupScatterLineChart(plotArea, { series: [ { data: [] }, series ] });
                 });
 
                 // ------------------------------------------------------------

@@ -127,6 +127,14 @@
                     equal(typeof scatterChart.points[0].dataItem, "object");
                 });
 
+                test("renders empty scatter line series", function() {
+                    setupScatterChart(plotArea, { series: [ { data: [] } ] });
+                });
+
+                test("renders empty and non-empty scatter line series", function() {
+                    setupScatterChart(plotArea, { series: [ { data: [] }, series ] });
+                });
+
                 // ------------------------------------------------------------
                 module("Scatter Chart / Multiple Axes", {
                     setup: function() {
