@@ -2146,7 +2146,7 @@
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 dir = reverse ? -1 : 1,
-                scale = lineSize / (options.max - options.min),
+                step = dir * (lineSize / (options.max - options.min)),
                 a = defined(a) ? a : options.axisCrossingValue,
                 b = defined(b) ? b : options.axisCrossingValue,
                 a = math.max(math.min(a, options.max), options.min),
@@ -2163,8 +2163,8 @@
                 p2 = math.max(a, b) - options.min;
             }
 
-            slotBox[valueAxis + 1] = lineStart + scale * dir * (reverse ? p2 : p1);
-            slotBox[valueAxis + 2] = lineStart + scale * dir * (reverse ? p1 : p2);
+            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
 
             return slotBox;
         },
@@ -2263,26 +2263,28 @@
                 options = axis.options,
                 reverse = options.reverse,
                 isVertical = options.isVertical,
-                childrenCount = math.max(1, options.categories.length),
-                from = math.min(math.max(0, from), childrenCount),
-                to = defined(to) ? to : from,
-                to = math.max(math.min(childrenCount, to), from),
                 lineBox = axis.lineBox(),
                 size = isVertical ? lineBox.height() : lineBox.width(),
+                categoriesLength = math.max(1, options.categories.length),
+                from = math.min(math.max(0, from), categoriesLength),
+                to = defined(to) ? to : from,
+                to = math.max(math.min(categoriesLength, to), from),
                 valueAxis = isVertical ? Y : X,
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                step = (reverse ? -1 : 1) * (size / childrenCount),
+                step = (reverse ? -1 : 1) * (size / categoriesLength),
                 p1 = lineStart + (from * step),
                 p2 = p1 + step,
-                length = to - from;
+                slotSize = to - from,
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
-            if (length > 0 || (from == to && childrenCount == from)) {
-                p2 = p1 + (length * step);
+            if (slotSize > 0 || (from == to && categoriesLength == from)) {
+                p2 = p1 + (slotSize * step);
             }
 
-            return isVertical ?
-                   new Box2D(lineBox.x2, reverse ? p2 : p1, lineBox.x2, reverse ? p1 : p2) :
-                   new Box2D(reverse ? p2 : p1, lineBox.y1, reverse ? p1 : p2, lineBox.y1);
+            slotBox[valueAxis + 1] = reverse ? p2 : p1;
+            slotBox[valueAxis + 2] = reverse ? p1 : p2;
+
+            return slotBox;
         },
 
         getLabelsCount: function() {
