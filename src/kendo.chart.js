@@ -13,6 +13,7 @@
         each = $.each,
         noop = $.noop,
         math = Math,
+        notify = kendo.notify,
         proxy = $.proxy,
         getter = kendo.getter,
         extend = $.extend,
@@ -138,7 +139,7 @@
             chart._redraw();
             chart._attachEvents();
 
-            kendo.notify(chart);
+            notify(chart);
         },
 
         events:[
