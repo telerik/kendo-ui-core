@@ -2,13 +2,16 @@
             <div id="gauge" style="border: 3px solid red"></div>
 
             <button class="k-button" id="set-10">Set value to 10</button>
+            <button class="k-button" id="set-60">Set value to 60</button>
 
             <script>
                 function createGauge() {
                     $("#gauge").kendoGauge({
                         theme: $(document).data("kendoSkin") || "default",
 
-                        pointer: true,
+                        pointer: {
+                            value: 95
+                        },
 
                         scale: {
                             endAngle: 180,
@@ -28,6 +31,12 @@
                             e.preventDefault();
 
                             $("#gauge").data("kendoGauge").value(10);
+                        });
+
+                        $("#set-60").click(function(e) {
+                            e.preventDefault();
+
+                            $("#gauge").data("kendoGauge").value(60);
                         });
                     }, 400);
 

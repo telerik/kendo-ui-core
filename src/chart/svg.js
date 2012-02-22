@@ -5,9 +5,7 @@
         kendo = window.kendo,
         Class = kendo.Class,
         Chart = kendo.ui.Chart,
-        BarAnimationDecorator = Chart.BarAnimationDecorator,
-        PieAnimationDecorator = Chart.PieAnimationDecorator,
-        FadeAnimationDecorator = Chart.FadeAnimationDecorator,
+        Gauge = kendo.ui.Gauge,
         Box2D = Chart.Box2D,
         Point2D = Chart.Point2D,
         ExpandAnimation = Chart.ExpandAnimation,
@@ -51,10 +49,10 @@
             view.decorators.push(
                 new SVGOverlayDecorator(view),
                 new SVGGradientDecorator(view),
-                new BarAnimationDecorator(view),
-                new PieAnimationDecorator(view),
+                new Chart.BarAnimationDecorator(view),
+                new Chart.PieAnimationDecorator(view),
                 new SVGClipAnimationDecorator(view),
-                new FadeAnimationDecorator(view)
+                new Chart.FadeAnimationDecorator(view)
             );
 
             view.template = SVGView.template;

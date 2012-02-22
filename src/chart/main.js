@@ -48,6 +48,7 @@
         DEFAULT_WIDTH = 600,
         DEGREE = math.PI / 180,
         FADEIN = "fadeIn",
+        POINTER = "pointer",
         GLASS = "glass",
         HEIGHT = "height",
         HORIZONTAL = "horizontal",
@@ -4984,6 +4985,8 @@
             return children.slice(0).sort(element.compareChildren);
         },
 
+        refresh: $.noop,
+
         compareChildren: function(a, b) {
             var aValue = a.options.zIndex || 0,
                 bValue = b.options.zIndex || 0;
@@ -5274,17 +5277,15 @@
         },
 
         setup: function() {
-            var anim = this,
-                sector = anim.element.config;
+            var sector = this.element.config;
 
-            anim.endRadius = sector.r;
+            this.endRadius = sector.r;
             sector.r = 0;
         },
 
         step: function(pos) {
-            var anim = this,
-                endRadius = anim.endRadius,
-                sector = anim.element.config;
+            var endRadius = this.endRadius,
+                sector = this.element.config;
 
             sector.r = interpolateValue(0, endRadius, pos);
         }
@@ -5312,11 +5313,9 @@
         });
     }
 
-    var BarAnimationDecorator = animationDecorator(BAR, BarAnimation);
-
-    var PieAnimationDecorator = animationDecorator(PIE, PieAnimation);
-
-    var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
+    var BarAnimationDecorator = animationDecorator(BAR, BarAnimation),
+        PieAnimationDecorator = animationDecorator(PIE, PieAnimation),
+        FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
 
     var Highlight = Class.extend({
         init: function(view, viewElement, options) {
@@ -6242,6 +6241,24 @@
         }
     });
 
+    var ValueAnimation = ElementAnimation.extend({
+        setup: function(startValue) {
+            var anim = this,
+                options = anim.element.options;
+
+            anim.endValue = options.value;
+            startValue = anim.startValue = startValue || 0;
+            options.value = startValue;
+        },
+
+        step: function(pos) {
+            var anim = this,
+                options = anim.element.options;
+
+            options.value = interpolateValue(anim.startValue, anim.endValue, pos);
+        }
+    });
+
     var Pointer = ChartElement.extend({
         init: function (scale, options) {
             var pointer = this,
@@ -6262,29 +6279,53 @@
             shape: "needle",
             fill: "#EA7001",
             value: 0,
-            capSize: 0.05
+            capSize: 0.05,
+            animation: {
+                delay: 0
+            }
         },
 
         value: function(newValue) {
             var pointer = this,
                 options = pointer.options,
+                value = options.value,
                 element;
 
             if (arguments.length == 0) {
-                return options.value;
+                return value;
             }
 
             options.value = newValue;
 
-            element = doc.getElementById(options.id);
+            if (pointer.animation !== false) {
+                pointer._animation.setup(value);
+                pointer._animation.play();
+            }
 
-            pointer.elements[0].rotate(element, pointer.scale.getSlotAngle(newValue), pointer.scale.ring.c);
+        },
+
+        refresh: function(element) {
+            var pointer = this,
+                scale = pointer.scale;
+
+            pointer.elements[0].rotate(element, scale.getSlotAngle(pointer.options.value), scale.ring.c);
         },
 
         reflow: function(box) {
-            var pointer = this;
+            var pointer = this,
+                options = pointer.options;
 
             pointer.box = box;
+
+            setTimeout(function() {
+
+                if (pointer.animation !== false) {
+                    pointer._animation = new ValueAnimation(pointer, options.animation);
+
+                    pointer._animation.setup();
+                    pointer._animation.play();
+                }
+            }, 1);
         },
 
         _createNeedle: function(view) {
@@ -6299,7 +6340,7 @@
                 halfWidth = box.width() / 2,
                 center = box.center(),
                 // pointer calculation is done at 90deg, so points are rotated initially
-                rotation = 90 - scale.getSlotAngle(pointerOptions.value);
+                rotation = 90 - scale.getSlotAngle(scale.options.min);
 
             return [
                 view.createPolyline([
@@ -6579,7 +6620,8 @@
                 element = gauge.element,
                 model = new RootElement(deepExtend({
                     width: element.width() || DEFAULT_WIDTH,
-                    height: element.height() || DEFAULT_HEIGHT
+                    height: element.height() || DEFAULT_HEIGHT,
+                    transitions: options.transitions
                     }, options.gaugeArea)),
                 plotArea;
 
@@ -6594,7 +6636,15 @@
         },
 
         options: {
-            name: "Gauge"
+            name: "Gauge",
+            transitions: true
+        },
+
+        svg: function() {
+            var model = this._getModel(),
+                view = Chart.SVGView.fromModel(model);
+
+            return view.render();
         },
 
         _supportsSVG: supportsSVG
