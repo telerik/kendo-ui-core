@@ -1,11 +1,12 @@
 (function($, undefined) {
     var kendo = window.kendo,
         mobile = kendo.mobile,
+        ui = mobile.ui,
         history = kendo.history,
         os = kendo.support.mobileOS,
         attr = kendo.attr,
         Class = kendo.Class,
-        Widget = mobile.ui.Widget,
+        Widget = ui.Widget,
         INIT = "init",
         SHOW = "show",
         PULL = "pull",
@@ -39,7 +40,7 @@
                 that.layout.setup(that);
             }
 
-            kendo.mobile.enhance(element);
+            kendo.mobile.init(element.children());
 
             that.content.kendoMobileScroller({ useOnDesktop: true });
 
@@ -57,6 +58,10 @@
             INIT,
             SHOW
         ],
+
+        options: {
+            name: "View"
+        },
 
         onHideStart: function() {
             var that = this;
@@ -85,10 +90,14 @@
             var role = kendo.ns + "role";
             this.element.find("[data-" + role + "]").each(function(){
                 var that = $(this),
-                    widget = kendo.roles[that.data(role)];
+                    widget = ui.roles[that.data(role)];
 
                 if (widget) {
-                    callback(that.data("kendo" + widget.fn.options.name));
+                    var instance = that.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
+                    if (!instance) {
+                        raise(that[0]);
+                    }
+                    callback(instance);
                 }
             });
         }
@@ -163,7 +172,7 @@
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
-            kendo.mobile.enhance(element);
+            kendo.mobile.init(that.element);
         },
 
         setup: function (view) {
@@ -198,6 +207,7 @@
         }
     });
 
+    ui.plugin(View);
     mobile.Layout = Layout;
     mobile.View = View;
     mobile.ViewSwitcher = ViewSwitcher;

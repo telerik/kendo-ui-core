@@ -218,10 +218,13 @@
 
                 window.initListView = function(e) {
                     listview = e.view.element.find("#listview");
-                    listview.kendoMobileListView({ dataSource: ds });
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        pullToRefresh: true
+                    });
                 }
 
-                setup('<div data-role="view" data-init="initListView"><div id="listview" data-pull-to-refresh="true" style="height:300px"></div></div>');
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
                 var swipe = application.view.scroller.swipe;
 
                 $.mockjaxClear();

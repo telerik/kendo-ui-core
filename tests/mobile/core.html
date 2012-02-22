@@ -54,37 +54,12 @@
                 equal(widget.element[0], dom[0]);
             });
 
-            test("options are read from data attributes", function() {
-                var dom = $('<div data-kendo-foo="bar" data-kendo-bar="baz" />');
-
-                var widget = new MyMobileWidget(dom);
-
-                equal(widget.options.foo, "bar");
-                equal(widget.options.bar, "baz");
-            });
-
-            test("camel-cased options are read from dashed data attributes", function() {
-                var dom = $('<div data-kendo-case-sensitive="bar" />');
-
-                var widget = new MyMobileWidget(dom);
-
-                equal(widget.options.caseSensitive, "bar");
-            });
-
-            test("default option values are preserved if matching data attribute is not present", function() {
-                var dom = $('<div data-kendo-bar="baz" />');
-
-                var widget = new MyMobileWidget(dom);
-
-                equal(widget.options.foo, "foo");
-            });
-
             test("instantiates mobile widgets by data attribute and container dom", function() {
                 expect(1);
 
                 var dom = $("<div><div data-kendo-role='my'></div></div>");
 
-                kendo.mobile.enhance(dom);
+                kendo.mobile.init(dom);
 
                 ok(dom.find("div").data("kendoMobileMy"), "Plugin instantiated");
             });
@@ -94,7 +69,7 @@
 
                 var dom = $("<div data-kendo-role='my'></div>");
 
-                kendo.mobile.enhance(dom);
+                kendo.mobile.init(dom);
 
                 ok(dom.data("kendoMobileMy"), "Plugin instantiated");
             });

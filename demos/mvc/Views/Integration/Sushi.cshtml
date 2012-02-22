@@ -215,7 +215,7 @@
             ds.fetch(function() {
                 item = ds.get(view.params.id);
                 view.scrollerContent.html(itemDetailsTemplate(item));
-                kendo.mobile.enhance(e.content);
+                kendo.mobile.init(e.content);
 
                 view.content.find("#add-to-cart").data("kendoMobileButton").bind("click", function(e) {
                     e.preventDefault();

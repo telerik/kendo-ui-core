@@ -2246,10 +2246,14 @@
                 that.element.attr(kendo.attr("role"), (that.options.name || "").toLowerCase());
             }
 
-            that.element.data("kendo" + that.options.name, that);
+            that.element.data("kendo" + that.options.prefix + that.options.name, that);
         },
 
         events: [],
+
+        options: {
+            prefix: ""
+        },
 
         setOptions: function(options) {
             $.extend(this.options, options);
@@ -2259,7 +2263,6 @@
     });
 
     kendo.notify = noop;
-    kendo.roles = {};
 
     function lowerCaseFirstLetter($0, $1) {
         return $1.toLowerCase();
@@ -2291,24 +2294,30 @@
         return result;
     }
 
-    function init(element) {
-        var role = element.getAttribute("data-" + kendo.ns + "role"),
+    kendo.initWidget = function(element, options, namespace) {
+        var role,
             result,
             option,
             widget,
             idx,
-            length,
-            options = {};
+            length;
+
+        element = $(element);
+
+        role = element.data(kendo.ns + "role");
 
         if (!role) {
             return;
         }
 
-        widget = kendo.roles[role];
+        widget = (namespace || kendo.ui).roles[role];
 
-        element = $(element);
+        if (!widget) {
+            return;
+        }
 
-        options = parseOptions(element, widget.fn.options);
+
+        options = $.extend({}, parseOptions(element, widget.fn.options), options);
 
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
             option = widget.fn.events[idx];
@@ -2323,28 +2332,25 @@
         result = element.data("kendo" + widget.fn.options.name);
 
         if (!result) {
-            new widget(element, options);
+            result = new widget(element, options);
         } else {
             result.setOptions(options);
         }
+
+        return result;
     }
 
-    kendo.init = function(element) {
-        var idx, length;
-
-        element = $(element);
-
-        for (idx = 0, length = element.length; idx < length; idx++) {
-            init(element[idx]);
-
-            kendo.init(element[idx].querySelectorAll("[data-" + kendo.ns + "role]"));
-        }
+    kendo.init = function(element, namespace) {
+        $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
+            kendo.initWidget(this, {}, namespace);
+        });
     }
 
     kendo.parseOptions = parseOptions;
 
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
+        roles: {},
         /**
          * Helper method for writing new widgets.
          * Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-* attribute.
@@ -2371,14 +2377,13 @@
 
             register[name] = widget;
 
-            kendo.roles[name.toLowerCase()] = widget;
+            register.roles[name.toLowerCase()] = widget;
 
             name = "kendo" + prefix + name;
             // expose a jQuery plugin
             $.fn[name] = function(options) {
                 $(this).each(function() {
-                    var comp = new widget(this, options);
-                    $(this).data(name, comp);
+                    new widget(this, options);
                 });
                 return this;
             }

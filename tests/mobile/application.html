@@ -38,7 +38,7 @@
             QUnit.config.testTimeout = 500;
             QUnit.config.reorder = false;
 
-            var enhance = kendo.mobile.enhance;
+            var init = kendo.mobile.init;
             module("kendo.Application", {
                 setup: function() {
                     location.hash = '';
@@ -47,7 +47,7 @@
                 },
 
                 teardown: function() {
-                    kendo.mobile.enhance = enhance;
+                    kendo.mobile.init = init;
                     $.mockjaxClear();
                     kendo.history.stop();
                 }
@@ -271,26 +271,26 @@
                 application.navigate("page2.html");
             });
 
-            test("calls enhance when a view is changed", function() {
+            test("calls init when a view is changed", function() {
                 expect(1);
 
                 setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
 
-                stub(kendo.mobile, "enhance");
+                stub(kendo.mobile, "init");
 
                 application.navigate("#page2");
 
-                equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
+                equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
             });
 
-            test("calls enhance when started", function() {
+            test("calls init when started", function() {
                 expect(1);
 
-                stub(kendo.mobile, "enhance");
+                stub(kendo.mobile, "init");
 
                 setup('<div data-role="view" id="page1">Page 1</div>');
 
-                equal(kendo.mobile.calls("enhance"), 1, "Calls kendo.mobile.enhance");
+                equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
             });
 
             asyncTest("does not raise error when trying to change to remote view starting with slash", function() {

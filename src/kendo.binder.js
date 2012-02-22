@@ -731,7 +731,7 @@
     }
 
     function bindingTargetForRole(role, element) {
-        var type = kendo.roles[role];
+        var type = kendo.ui.roles[role];
 
         if (type) {
             kendo.init(element);
