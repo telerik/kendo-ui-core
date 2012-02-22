@@ -3386,10 +3386,6 @@
 
             chart.updateRange(value, fields.series);
 
-            if (!seriesPoints) {
-                chart.seriesPoints[seriesIx] = seriesPoints = [];
-            }
-
             point = chart.createPoint(value, fields.series, seriesIx);
             if (point) {
                 extend(point, fields);
@@ -3509,15 +3505,23 @@
             var chart = this,
                 options = chart.options,
                 series = options.series,
+                seriesPoints = chart.seriesPoints,
                 pointIx = 0,
                 seriesIx,
                 currentSeries,
+                currentSeriesPoints,
                 dataItems,
                 value,
                 pointData;
 
             for (seriesIx = 0; seriesIx < series.length; seriesIx++) {
                 currentSeries = series[seriesIx];
+
+                currentSeriesPoints = seriesPoints[seriesIx];
+                if (!currentSeriesPoints) {
+                    seriesPoints[seriesIx] = [];
+                }
+
                 for (pointIx = 0; pointIx < currentSeries.data.length; pointIx++) {
                     pointData = currentSeries.data[pointIx] || [];
                     dataItems = currentSeries.dataItems;
