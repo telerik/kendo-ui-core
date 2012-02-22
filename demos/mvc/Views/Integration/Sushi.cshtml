@@ -103,7 +103,7 @@
     </div>
 
     <script id="menuTemplate" type="text/x-kendo-template">
-        <a data-role="button" data-name="add" href="\\#">${kendo.toString(price, "c")}</a>
+        <a data-role="button" href="\\#">${kendo.toString(price, "c")}</a>
         <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
             <img src="@Url.Content("~/content/integration/sushi/images/75/${image}")" />
             <h2>${name}</h2>
@@ -112,7 +112,7 @@
     </script>
 
     <script id="cartItemTemplate" type="text/x-kendo-template">
-        <a class="red-button" data-role="button" data-name="remove" href="\\#">&nbsp;&\\#x2716;&nbsp;</a>
+        <a class="red-button" data-role="button" href="\\#">&nbsp;&\\#x2716;&nbsp;</a>
         <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
             <img src="@Url.Content("~/content/integration/sushi/images/75/${image}")" />
             <h2>${name}</h2>
