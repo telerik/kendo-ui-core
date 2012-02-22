@@ -1,38 +1,97 @@
 <div id="example" class="k-content">
     <div class="registration code-sample">
         <h4 class="code-title">Registration Form</h4>
+        <form>
+            <div class="code-details">
+                <ul>
+                    <li><label>First Name:<input data-bind="value: firstName" /></label></li>
+                    <li><label>Last Name:<input data-bind="value: lastName" /></label></li>
+                    <li><label>Gender:<select data-bind="source: genders, value: gender"></select></label></li>
+                </ul>
+                <label><input type="checkbox" data-bind="checked: agreed" /> I have read the licence agreement</label>
+                <button data-bind="enabled: agreed, click: register" style="display: block">Register</button>
+            </div>
+        </form>
+    </div>
+    <div class="confirmation code-sample" data-bind="visible: confirmed">
+        <h4 class="code-title">Confirmation</h4>
         <div class="code-details">
-        <ul>
-            <li><label>First Name:<input data-bind="value: firstName" /></label></li>
-            <li><label>Last Name:<input data-bind="value: lastName" /></label></li>
-            <li><label>Gender:<select data-bind="source: genders, value: gender"></select></label></li>
-        </ul>
-        <label><input type="checkbox" data-bind="checked: agreed" /> I have read the licence agreement</label>
-        <button data-bind="enabled: agreed, click: displayViewModel" style="display: block">Register</button>
+            Thank you for your registration, <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>
+            <button data-bind="click: startOver">Start Over</button>
+        </div>
     </div>
-    </div>
+    <script>
+        $(document).ready(function() {
+            var viewModel = {
+                firstName: "John",
+                lastName: "Doe",
+                genders: ["Male", "Female"],
+                gender: "Male",
+                agreed: false,
+                confirmed: false,
+                register: function(e) {
+                    e.preventDefault();
+
+                    this.set("confirmed", true);
+                },
+                startOver: function() {
+                    this.set("confirmed", false);
+                    this.set("agreed", false);
+                    this.set("gender", "Male");
+                    this.set("firstName", "John");
+                    this.set("lastName", "Doe");
+                }
+            };
+
+            kendo.bind($("#example"), viewModel);
+        });
+    </script>
     <div class="current-state code-sample">
-    <h4 class="code-title">Current view model state</h4>
-<pre>
+        <h4 class="code-title">Current view model state</h4>
+        <div class="code-details">
+            <pre>
 {
     firstName: <span data-bind="text: firstName"></span>,
     lastName: <span data-bind="text: lastName"></span>,
     gender: <span data-bind="text: gender"></span>,
     agreed: <span data-bind="text: agreed"></span>
 }
-</pre>
+            </pre>
+        </div>
     </div>
-    <script>
-        var viewModel = {
-            firstName: "John",
-            lastName: "Doe",
-            genders: ["Male", "Female"],
-            gender: "Male",
-            agreed: false
-        };
+    <div class="source code-sample">
+        <h4 class="code-title">Source</h4>
+        <div class="code-details">
+            <pre class="prettyprint">
+&lt;form&gt;
+    &lt;label&gt;First Name: &lt;input data-bind=&quot;value: firstName&quot; /&gt;&lt;/label&gt;
+    &lt;label&gt;Last Name: &lt;input data-bind=&quot;value: lastName&quot; /&gt;&lt;/label&gt;
+    &lt;label&gt;Gender:
+        &lt;select data-bind=&quot;source: genders, value: gender&quot;&gt;&lt;/select&gt;
+    &lt;/label&gt;
+    &lt;label&gt;&lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: agreed&quot; /&gt; I have read the licence agreement&lt;/label&gt;
+    &lt;button data-bind=&quot;enabled: agreed, click: register&quot;&gt;Register&lt;/button&gt;
+&lt;/form&gt;
+&lt;script&gt;
+    var viewModel = {
+        firstName: &quot;John&quot;,
+        lastName: &quot;Doe&quot;,
+        genders: [&quot;Male&quot;, &quot;Female&quot;],
+        gender: &quot;Male&quot;,
+        agreed: false,
+        confirmed: false,
+        register: function(e) {
+            e.preventDefault();
 
-        kendo.bind($("#example"), viewModel);
-    </script>
+            this.set(&quot;confirmed&quot;, true);
+        }
+    };
+
+    kendo.bind($(&quot;form&quot;), viewModel);
+&lt;/script&gt;
+            </pre>
+        </div>
+    </div>
 
     <style scoped>
         .code-details > ul {
@@ -50,13 +109,19 @@
             padding: 1em;
         }
 
-        .registration label{
-            display: inline-block;
+        .confirmation {
+            float: left;
             width: 300px;
+            margin-left: 20px;
+        }
+
+        .source {
+            clear: right;
         }
 
         .current-state {
             float: right;
+            width: 180px;
         }
 
         .current-state pre {
