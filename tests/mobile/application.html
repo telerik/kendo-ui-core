@@ -521,6 +521,36 @@
                 swipe.trigger("move", swipe);
                 swipe.trigger("end", swipe);
             });
+
+            test("view notifies widget on init", 1, function(){
+                var Foo = kendo.mobile.ui.Widget.extend({
+                    options: {
+                        name: "Foo"
+                    },
+                    viewInit: function() {
+                        ok(true);
+                    }
+                });
+
+                kendo.mobile.ui.plugin(Foo);
+
+                setup('<div data-role="view"><i data-role="foo" /></div>');
+            });
+
+            test("view notifies widget on show", 1, function(){
+                var Foo = kendo.mobile.ui.Widget.extend({
+                    options: {
+                        name: "Foo"
+                    },
+                    viewShow: function() {
+                        ok(true);
+                    }
+                });
+
+                kendo.mobile.ui.plugin(Foo);
+
+                setup('<div data-role="view"><i data-role="foo" /></div>');
+            });
         </script>
     </body>
 </html>

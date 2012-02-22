@@ -2378,8 +2378,7 @@
             $.fn[name] = function(options) {
                 $(this).each(function() {
                     var comp = new widget(this, options);
-                    $(this).data(name, comp)
-                        .data("kendoWidget", comp);
+                    $(this).data(name, comp);
                 });
                 return this;
             }

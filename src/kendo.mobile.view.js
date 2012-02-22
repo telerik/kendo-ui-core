@@ -82,8 +82,14 @@
         },
 
         _eachWidget: function(callback) {
-            this.element.find("[data-" + kendo.ns + "widget]").each(function(){
-                callback($(this).data("kendoWidget"));
+            var role = kendo.ns + "role";
+            this.element.find("[data-" + role + "]").each(function(){
+                var that = $(this),
+                    widget = kendo.roles[that.data(role)];
+
+                if (widget) {
+                    callback(that.data("kendo" + widget.fn.options.name));
+                }
             });
         }
     });
