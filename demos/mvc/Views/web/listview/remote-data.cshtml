@@ -1,0 +1,49 @@
+<div id="example" class="k-content">
+
+    <div id="listView"></div>
+
+    <div class="k-grid-pager">
+        <div id="pager"></div>
+    </div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div>
+            <a class="t-link" href="http://www.twitter.com/${from_user}" >${from_user}</a>
+            <img width="48" height="48" src="${profile_image_url}" alt="${from_user}" />
+            ${text}
+        </div>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://search.twitter.com/search.json",
+                            contentType: "application/json; charset=utf-8",
+                            type: "GET",
+                            dataType: "jsonp",
+                            data: {
+                                q: "#kendoui"
+                            }
+                        }
+                    },
+                    schema: {
+                        data: "results",
+                        total: "results_per_page"
+                    },
+                    pageSize: 5
+                });
+
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
+        });
+    </script>
+
+</div>

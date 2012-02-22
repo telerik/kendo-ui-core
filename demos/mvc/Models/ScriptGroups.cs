@@ -35,6 +35,7 @@ namespace Kendo.Models
             "kendo.selectable.js",
             "kendo.sortable.js",
             "kendo.grid.js",
+            "kendo.listview.js",
             "kendo.menu.js",
             "kendo.panelbar.js",
             "kendo.slider.js",
