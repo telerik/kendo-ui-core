@@ -171,6 +171,14 @@
                          [185.5, 586.5], TOLERANCE);
                 });
 
+                test("labels are distributed horizontally in reverse", function() {
+                    createCategoryAxis({ reverse: true });
+                    categoryAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [586.5, 185.5], TOLERANCE);
+                });
+
                 test("labels are positioned below axis line", 2, function() {
                     categoryAxis.getViewElements(view);
                     $.each(view.log.text, function() {
@@ -183,6 +191,14 @@
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 400, 800], TOLERANCE);
+                });
+
+                test("major ticks are distributed horizontally in reverse", function() {
+                    createCategoryAxis({ reverse: true });
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [800, 400, 0], TOLERANCE);
                 });
 
                 test("major ticks can be disabled", function() {
@@ -199,6 +215,16 @@
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
                          [0, 200, 400, 600, 800], TOLERANCE);
+                });
+
+                test("minor ticks are distributed horizontally in reverse", function() {
+                    createCategoryAxis({ reverse: true });
+                    categoryAxis.options.majorTickType = "none";
+                    categoryAxis.options.minorTickType = "outside";
+                    categoryAxis.getViewElements(view);
+                    view.log.line.shift();
+                    same($.map(view.log.line, function(line) { return line.x1; }),
+                         [800, 600, 400, 200, 0], TOLERANCE);
                 });
 
                 test("minor ticks can be disabled", function() {
@@ -513,6 +539,12 @@
                     same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
                 });
 
+                test("positions slot for first category in reverse", function() {
+                    createCategoryAxis({ reverse: true });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                });
+
                 test("positions slot for first w/o labels", function() {
                     createCategoryAxis({ labels: { visible: false } });
                     var slot = categoryAxis.getSlot(0);
@@ -522,6 +554,12 @@
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
                     same([slot.x1, slot.x2], [chartBox.width() / 2, chartBox.width()]);
+                });
+
+                test("positions slot for second category in reverse", function() {
+                    createCategoryAxis({ reverse: true });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.x1, slot.x2], [0, chartBox.width() / 2]);
                 });
 
                 test("positions slot for second category w/o labels", function() {
@@ -585,9 +623,21 @@
                     same([slot.y1, slot.y2], [0, chartBox.height() / 2]);
                 });
 
+                test("positions slot for first category in reverse", function() {
+                    createCategoryAxis({ isVertical: true, reverse: true });
+                    var slot = categoryAxis.getSlot(0);
+                    same([slot.y1, slot.y2], [chartBox.height() / 2, chartBox.height()]);
+                });
+
                 test("positions slot for second category", function() {
                     var slot = categoryAxis.getSlot(1);
                     same([slot.y1, slot.y2], [chartBox.height() / 2, chartBox.height()]);
+                });
+
+                test("positions slot for second category in reverse", function() {
+                    createCategoryAxis({ isVertical: true, reverse: true });
+                    var slot = categoryAxis.getSlot(1);
+                    same([slot.y1, slot.y2], [0, chartBox.height() / 2]);
                 });
 
                 test("slot width is 0", function() {

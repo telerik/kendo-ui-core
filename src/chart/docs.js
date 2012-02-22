@@ -537,6 +537,8 @@
          * @option {Object} [valueAxis.name] <primary> The unique axis name.
          * @option {Boolean} [valueAxis.visible] <true> The visibility of the axis.
          * @option {Number} [valueAxis.axisCrossingValue] <0> Value at which the category axis crosses this axis.
+         * @option {Boolean} [valueAxis.reverse] <false> Reverses the axis direction -
+         * values increase from right to left and from top to bottom.
          * @option {Number} [valueAxis.min] <0> The minimum value of the axis.
          * This is often used in combination with the <b>max</b> configuration method
          * to adjust the size of the chart relative to the charting area.
@@ -1204,6 +1206,8 @@
          *     },
          *     ...
          * });
+         * @option {Boolean} [categoryAxis.reverse] <false> Reverses the axis direction -
+         * categories are listed from right to left and from top to bottom.
          * @option {Number} [categoryAxis.axisCrossingValue] <0>
          * Category index at which the first value axis crosses this axis.
           * @option {Array} [categoryAxis.axisCrossingValue] <[0]>

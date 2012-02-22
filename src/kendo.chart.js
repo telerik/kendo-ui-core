@@ -2079,20 +2079,22 @@
             var axis = this,
                 options = axis.options,
                 isVertical = options.isVertical,
+                reverse = options.reverse,
                 lineBox = axis.lineBox(),
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
                 step = stepValue * scale,
                 divisions = axis.getDivisions(stepValue),
-                pos = lineBox[isVertical ? "y2" : "x1"],
-                multiplier = isVertical ? -1 : 1,
+                dir = (isVertical ? -1 : 1) * (reverse ? -1 : 1),
+                startEdge = dir === 1 ? 1 : 2,
+                pos = lineBox[(isVertical ? Y : X) + startEdge],
                 positions = [],
                 i;
 
             for (i = 0; i < divisions; i++) {
                 positions.push(round(pos, COORD_PRECISION));
-                pos = pos + step * multiplier;
+                pos = pos + step * dir;
             }
 
             return positions;
@@ -2137,12 +2139,14 @@
         getSlot: function(a, b) {
             var axis = this,
                 options = axis.options,
+                reverse = options.reverse,
                 isVertical = options.isVertical,
                 valueAxis = isVertical ? Y : X,
                 lineBox = axis.lineBox(),
-                lineStart = lineBox[valueAxis + 1],
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 lineSize = isVertical ? lineBox.height() : lineBox.width(),
-                scale = lineSize / (options.max - options.min),
+                dir = reverse ? -1 : 1,
+                step = dir * (lineSize / (options.max - options.min)),
                 a = defined(a) ? a : options.axisCrossingValue,
                 b = defined(b) ? b : options.axisCrossingValue,
                 a = math.max(math.min(a, options.max), options.min),
@@ -2152,15 +2156,15 @@
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
             if (isVertical) {
-                p1 = lineStart + scale * (options.max - math.max(a, b));
-                p2 = lineStart + scale * (options.max - math.min(a, b));
+                p1 = options.max - math.max(a, b);
+                p2 = options.max - math.min(a, b);
             } else {
-                p1 = lineStart + scale * (math.min(a, b) - options.min);
-                p2 = lineStart + scale * (math.max(a, b) - options.min);
+                p1 = math.min(a, b) - options.min;
+                p2 = math.max(a, b) - options.min;
             }
 
-            slotBox[valueAxis + 1] = p1;
-            slotBox[valueAxis + 2] = p2;
+            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
 
             return slotBox;
         },
@@ -2239,7 +2243,7 @@
 
             positions.push(isVertical ? axis.box.y2 : axis.box.x2);
 
-            return positions;
+            return options.reverse ? positions.reverse() : positions;
         },
 
         getMajorTickPositions: function() {
@@ -2257,26 +2261,30 @@
         getSlot: function(from, to) {
             var axis = this,
                 options = axis.options,
+                reverse = options.reverse,
                 isVertical = options.isVertical,
-                childrenCount = math.max(1, options.categories.length),
-                from = math.min(math.max(0, from), childrenCount),
-                to = defined(to) ? to : from,
-                to = math.max(math.min(childrenCount, to), from),
                 lineBox = axis.lineBox(),
                 size = isVertical ? lineBox.height() : lineBox.width(),
-                startPos = isVertical ? lineBox.y1 : lineBox.x1,
-                step = size / childrenCount,
-                p1 = startPos + (from * step),
+                categoriesLength = math.max(1, options.categories.length),
+                from = math.min(math.max(0, from), categoriesLength),
+                to = defined(to) ? to : from,
+                to = math.max(math.min(categoriesLength, to), from),
+                valueAxis = isVertical ? Y : X,
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                step = (reverse ? -1 : 1) * (size / categoriesLength),
+                p1 = lineStart + (from * step),
                 p2 = p1 + step,
-                length = to - from;
+                slotSize = to - from,
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
-            if (length > 0 || (from == to && childrenCount == from)) {
-                p2 = p1 + (length * step);
+            if (slotSize > 0 || (from == to && categoriesLength == from)) {
+                p2 = p1 + (slotSize * step);
             }
 
-            return isVertical ?
-                   new Box2D(lineBox.x2, p1, lineBox.x2, p2) :
-                   new Box2D(p1, lineBox.y1, p2, lineBox.y1);
+            slotBox[valueAxis + 1] = reverse ? p2 : p1;
+            slotBox[valueAxis + 2] = reverse ? p1 : p2;
+
+            return slotBox;
         },
 
         getLabelsCount: function() {
@@ -2468,7 +2476,6 @@
             var bar = this,
                 options = bar.options,
                 isVertical = options.isVertical,
-                normalAngle = isVertical ? 0 : 90,
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width,
@@ -2478,10 +2485,10 @@
                 rectStyle = deepExtend({
                     id: options.id,
                     fill: options.color,
-                    normalAngle: normalAngle,
-                    aboveAxis: options.aboveAxis,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
+                    isVertical: options.isVertical,
+                    aboveAxis: options.aboveAxis,
                     stackBase: options.stackBase,
                     animation: options.animation
                 }, border),
@@ -2489,7 +2496,7 @@
                 label = bar.children[0];
 
             if (options.overlay) {
-                rectStyle.overlay = deepExtend({rotation: normalAngle }, options.overlay);
+                rectStyle.overlay = deepExtend({rotation: isVertical ? 0 : 90}, options.overlay);
             }
 
             elements.push(view.createRect(box, rectStyle));
@@ -2652,10 +2659,12 @@
                 chartPoints = chart.points,
                 categoryAxis = plotArea.categoryAxis,
                 valueAxis,
+                axisCrossingValue,
                 point;
 
             chart.traverseDataPoints(function(value, category, categoryIx, currentSeries) {
                 valueAxis = chart.seriesValueAxis(currentSeries);
+                axisCrossingValue = valueAxis.options.axisCrossingValue;
                 point = chartPoints[pointIx++];
                 if (point && point.plotValue) {
                     value = point.plotValue;
@@ -2666,7 +2675,8 @@
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
-                    aboveAxis = value >= valueAxis.options.axisCrossingValue;
+                    aboveAxis = valueAxis.options.reverse ?
+                                    value < axisCrossingValue : value >= axisCrossingValue;
 
                 if (point) {
                     point.options.aboveAxis = aboveAxis;
@@ -4304,12 +4314,14 @@
 
         alignAxisTo: function(axis, targetAxis, crossingValue, targetCrossingValue) {
             var slot = axis.getSlot(crossingValue, crossingValue),
-                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue);
+                slotEdge = axis.options.reverse ? 2 : 1,
+                targetSlot = targetAxis.getSlot(targetCrossingValue, targetCrossingValue),
+                targetEdge = targetAxis.options.reverse ? 2 : 1;
 
             axis.reflow(
                 axis.box.translate(
-                    targetSlot.x1 - slot.x1,
-                    targetSlot.y1 - slot.y1
+                    targetSlot[X + targetEdge] - slot[X + slotEdge],
+                    targetSlot[Y + targetEdge] - slot[Y + slotEdge]
                 )
             );
         },
@@ -5227,7 +5239,7 @@
                 element = anim.element,
                 points = element.points,
                 options = element.options,
-                axis = options.normalAngle === 0 ? Y : X,
+                axis = options.isVertical ? Y : X,
                 stackBase = options.stackBase,
                 aboveAxis = options.aboveAxis,
                 startPosition,
@@ -5240,10 +5252,10 @@
 
             if (axis === Y) {
                 startPosition = defined(stackBase) ? stackBase :
-                    aboveAxis ? endState.bottom : endState.top;
+                    endState[aboveAxis ? BOTTOM : TOP];
             } else {
                 startPosition = defined(stackBase) ? stackBase :
-                    aboveAxis ? endState.left : endState.right;
+                    endState[aboveAxis ? LEFT : RIGHT];
             }
 
             anim.startPosition = startPosition;
@@ -5258,7 +5270,7 @@
                 element = anim.element,
                 points = element.points;
 
-            if (element.options.normalAngle === 0) {
+            if (element.options.isVertical) {
                 points[0].y = points[1].y =
                     interpolateValue(startPosition, endState.top, pos);
 
