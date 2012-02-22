@@ -52,7 +52,8 @@
                 new Chart.BarAnimationDecorator(view),
                 new Chart.PieAnimationDecorator(view),
                 new SVGClipAnimationDecorator(view),
-                new Chart.FadeAnimationDecorator(view)
+                new Chart.FadeAnimationDecorator(view),
+                new Gauge.PointerAnimationDecorator(view)
             );
 
             view.template = SVGView.template;
@@ -279,13 +280,9 @@
         options: {
             fill: "",
             fillOpacity: 1,
-            strokeOpacity: 1
+            strokeOpacity: 1,
+            rotation: [0,0,0]
         },
-
-        rotate: function(domElement, angle, center) {
-            $(domElement).attr("transform", "rotate(" + [angle, center.x, center.y].join(" ") + ")");
-        },
-
 
         refresh: function(domElement) {
             var options = this.options;
@@ -293,7 +290,8 @@
             $(domElement).attr({
                 "d": this.renderPoints(),
                 "fill-opacity": options.fillOpacity,
-                "stroke-opacity": options.strokeOpacity
+                "stroke-opacity": options.strokeOpacity,
+                "transform": "rotate(" + options.rotation.join(" ") + ")"
             });
         },
 
