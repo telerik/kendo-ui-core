@@ -1331,7 +1331,7 @@
                 });
             }
 
-            that.tbody.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
+            that.table.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
                 var element = $(this),
                     group = element.closest("tr");
 
