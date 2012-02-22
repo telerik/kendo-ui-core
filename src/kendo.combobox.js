@@ -336,8 +336,6 @@
 
             that._enable();
 
-            that.bind(that.events, options);
-
             wrapper = that._inputWrapper;
 
             that.input.bind({

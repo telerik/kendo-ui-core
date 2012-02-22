@@ -228,8 +228,6 @@
              that._arrows();
              that._input();
 
-             that.bind(that.events, options);
-
              that._text.focus(proxy(that._click, that));
 
              min = parse(element.attr("min"));

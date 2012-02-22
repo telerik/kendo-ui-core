@@ -322,8 +322,6 @@
 
             that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
 
-            that.bind(that.events, that.options);
-
             element[0].type = "text";
             wrapper = that.wrapper;
 

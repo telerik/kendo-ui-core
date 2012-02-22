@@ -281,8 +281,6 @@
                 .delegate(CELLSELECTOR, MOUSELEAVE, mouseleave)
                 .delegate(CELLSELECTOR, CLICK, proxy(that._click, that));
 
-            that.bind(that.events, options);
-
             value = options.value;
             validate(options);
 

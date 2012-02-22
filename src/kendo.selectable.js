@@ -29,8 +29,9 @@
 
             that.element.addClass(SELECTABLE);
             that.element.delegate("." + SELECTABLE + " " + that.options.filter, MOUSEDOWN, proxy(that._down, that));
-            that.bind([CHANGE], that.options);
         },
+
+        events: [CHANGE],
 
         options: {
             name: "Selectable",

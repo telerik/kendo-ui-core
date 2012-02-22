@@ -389,8 +389,6 @@
             if (options.dragAndDrop) {
                 that.dragging = new TreeViewDragAndDrop(that);
             }
-
-            that.bind(that.events, options);
         },
 
         _animation: function() {

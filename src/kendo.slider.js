@@ -174,8 +174,6 @@
                 34: step(-options.largeStep)  // page down
             };
 
-            that.bind(that.events, options);
-
             kendo.notify(that);
         },
 

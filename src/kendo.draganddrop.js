@@ -74,34 +74,6 @@
                 .bind(MOUSEUP, proxy(that._drop, that))
                 .bind(MOUSELEAVE, proxy(that._out, that));
 
-            that.bind([
-                /**
-                 * Fires when draggable moves over the drop target.
-                 * @name kendo.ui.DropTarget#dragenter
-                 * @event
-                 * @param {Event} e
-                 * @param {jQueryObject} e.draggable Reference to the draggable that enters the drop target.
-                 */
-                DRAGENTER,
-                /**
-                 * Fires when draggable moves out of the drop target.
-                 * @name kendo.ui.DropTarget#dragleave
-                 * @event
-                 * @param {Event} e
-                 * @param {jQueryObject} e.draggable Reference to the draggable that leaves the drop target.
-                 */
-                DRAGLEAVE,
-                /**
-                 * Fires when draggable is dropped over the drop target.
-                 * @name kendo.ui.DropTarget#drop
-                 * @event
-                 * @param {Event} e
-                 * @param {jQueryObject} e.draggable Reference to the draggable that is dropped over the drop target.
-                 * @param {jQueryObject} e.draggable.currentTarget The element that the drag and drop operation started from.
-                 */
-                DROP
-            ], that.options);
-
             var group = that.options.group;
 
             if (!(group in dropTargets)) {
@@ -110,6 +82,34 @@
                 dropTargets[group].push( that );
             }
         },
+
+        events: [
+            /**
+             * Fires when draggable moves over the drop target.
+             * @name kendo.ui.DropTarget#dragenter
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.draggable Reference to the draggable that enters the drop target.
+             */
+            DRAGENTER,
+            /**
+             * Fires when draggable moves out of the drop target.
+             * @name kendo.ui.DropTarget#dragleave
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.draggable Reference to the draggable that leaves the drop target.
+             */
+            DRAGLEAVE,
+            /**
+             * Fires when draggable is dropped over the drop target.
+             * @name kendo.ui.DropTarget#drop
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.draggable Reference to the draggable that is dropped over the drop target.
+             * @param {jQueryObject} e.draggable.currentTarget The element that the drag and drop operation started from.
+             */
+            DROP
+        ],
 
         options: {
             name: "DropTarget",
@@ -196,32 +196,32 @@
 
             bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
 
-            that.bind([
-                /**
-                 * Fires when item drag starts.
-                 * @name kendo.ui.Draggable#dragstart
-                 * @event
-                 * @param {Event} e
-                 */
-                DRAGSTART,
-                 /**
-                 * Fires while dragging.
-                 * @name kendo.ui.Draggable#drag
-                 * @event
-                 * @param {Event} e
-                 */
-                DRAG,
-                 /**
-                 * Fires when item drag ends.
-                 * @name kendo.ui.Draggable#dragend
-                 * @event
-                 * @param {Event} e
-                 */
-                DRAGEND
-            ], that.options);
-
             bind(that.element, that.options.filter, DRAGSTART + NAMESPACE, false);
         },
+
+        events: [
+            /**
+             * Fires when item drag starts.
+             * @name kendo.ui.Draggable#dragstart
+             * @event
+             * @param {Event} e
+             */
+            DRAGSTART,
+             /**
+             * Fires while dragging.
+             * @name kendo.ui.Draggable#drag
+             * @event
+             * @param {Event} e
+             */
+            DRAG,
+             /**
+             * Fires when item drag ends.
+             * @name kendo.ui.Draggable#dragend
+             * @event
+             * @param {Event} e
+             */
+            DRAGEND
+        ],
 
         options: {
             name: "Draggable",

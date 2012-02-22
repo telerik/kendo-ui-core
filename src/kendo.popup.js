@@ -109,8 +109,6 @@
                 }
             });
 
-            that.bind([OPEN, CLOSE], options);
-
             $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
 
             if (!touch) { //  On mobile device this closes the popup if keyboard is shown
@@ -136,6 +134,12 @@
                 $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
             }
         },
+
+        events: [
+            OPEN,
+            CLOSE
+        ],
+
         options: {
             name: "Popup",
             toggleEvent: "click",

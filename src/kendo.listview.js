@@ -25,8 +25,6 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.bind([CHANGE,DATABOUND,EDIT,REMOVE], options);
-
             that._element();
 
             that._dataSource();
@@ -43,6 +41,14 @@
                 that.dataSource.fetch();
             }
         },
+
+        events: [
+            CHANGE,
+            DATABOUND,
+            EDIT,
+            REMOVE
+        ],
+
         options: {
             name: "ListView",
             autoBind: true,

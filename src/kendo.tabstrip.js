@@ -326,8 +326,6 @@
                 .delegate(HOVERABLEITEMS, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(DISABLEDLINKS, CLICK, false);
 
-            that.bind(that.events, that.options);
-
             that._updateClasses();
 
             if (options.dataSource) {
