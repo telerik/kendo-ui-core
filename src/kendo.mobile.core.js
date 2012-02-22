@@ -36,8 +36,6 @@
             if (dataSource) {
                 options["dataSource"] = window[dataSource];
             }
-
-            that.bind(events, options);
         },
 
         options: {

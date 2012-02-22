@@ -755,8 +755,6 @@
 
             that._toolbar();
 
-            that.bind(that.events, that.options);
-
             that._thead();
 
             that._templates();

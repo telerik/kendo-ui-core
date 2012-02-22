@@ -327,8 +327,6 @@
 
             that._enable();
 
-            that.bind(that.events, options);
-
             that.selectedIndex = -1;
 
             if (options.autoBind) {

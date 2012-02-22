@@ -74,10 +74,10 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.bind([CHANGE], that.options);
-
             that.refresh();
         },
+
+        events: [CHANGE],
 
         options: {
             name: "Editable",

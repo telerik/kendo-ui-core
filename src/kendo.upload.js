@@ -190,8 +190,6 @@
             .delegate(".k-file", "t:progress", $.proxy(that._onFileProgress, that))
             .delegate(".k-file", "t:upload-success", $.proxy(that._onUploadSuccess, that))
             .delegate(".k-file", "t:upload-error", $.proxy(that._onUploadError, that));
-
-            that.bind(that.events, that.options);
         },
 
         events: [

@@ -590,8 +590,6 @@
                     that.value(element[0].defaultValue);
                 });
 
-            that.bind(that.events, options);
-
             that.enable(!element.is('[disabled]'));
             that.value(options.value || that.element.val());
 

@@ -423,8 +423,6 @@
             $(document).click(proxy( that._documentClick, that ));
             that.clicked = false;
 
-            that.bind(that.events, that.options);
-
             kendo.notify(that);
         },
 

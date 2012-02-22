@@ -361,8 +361,6 @@
             wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
                 .on("mousedown", proxy(that.toFront, that));
 
-            that.bind(that.events, options);
-
             $(window).resize(proxy(that._onDocumentResize, that));
 
             if (!options.iframe && content.url) {

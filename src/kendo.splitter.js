@@ -254,8 +254,6 @@
             that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
             splitbarSelector = ".k-splitbar-draggable-" + that.orientation;
 
-            that.bind(that.events, that.options);
-
             that.bind(RESIZE, proxy(that._resize, that));
 
             that._initPanes();

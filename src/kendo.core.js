@@ -2247,6 +2247,8 @@
             }
 
             that.element.data("kendo" + that.options.prefix + that.options.name, that);
+
+            that.bind(that.events, that.options);
         },
 
         events: [],

@@ -22,8 +22,6 @@
             that._position = that.orientation == HORIZONTAL ? "left" : "top";
             that._sizingDom = that.orientation == HORIZONTAL ? "outerWidth" : "outerHeight";
 
-            that.bind([RESIZE,RESIZEEND,START], that.options);
-
             new ui.Draggable(element, {
                 distance: 0,
                 filter: options.handle,
@@ -32,6 +30,12 @@
                 dragend: proxy(that._stop, that)
             });
         },
+
+        events: [
+            RESIZE,
+            RESIZEEND,
+            START
+        ],
 
         options: {
             name: "Resizable",
