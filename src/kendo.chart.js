@@ -2086,14 +2086,15 @@
                 scale = lineSize / range,
                 step = stepValue * scale,
                 divisions = axis.getDivisions(stepValue),
-                pos = lineBox[isVertical ? (reverse ? "y1" : "y2") : (reverse ? "x2" : "x1")],
-                multiplier =(isVertical ? -1 : 1) * (reverse ? -1 : 1),
+                dir = (isVertical ? -1 : 1) * (reverse ? -1 : 1),
+                startEdge = dir === 1 ? 1 : 2,
+                pos = lineBox[(isVertical ? Y : X) + startEdge],
                 positions = [],
                 i;
 
             for (i = 0; i < divisions; i++) {
                 positions.push(round(pos, COORD_PRECISION));
-                pos = pos + step * multiplier;
+                pos = pos + step * dir;
             }
 
             return positions;
