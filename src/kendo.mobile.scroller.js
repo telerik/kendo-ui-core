@@ -121,7 +121,7 @@
         _move: function() {
             var that = this,
                 axis = that.axis,
-                boundary = that.boundary;
+                boundary = that.boundary,
                 boundarySize = boundary.size,
                 scrollMove = that.scrollMove,
                 sizeRatio = boundarySize / boundary.total,
