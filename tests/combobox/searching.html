@@ -19,7 +19,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            QUnit.config.testTimeout = 1000;
+            QUnit.config.testTimeout = 300;
 
             var ComboBox = kendo.ui.ComboBox,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
@@ -89,7 +89,7 @@
                     combobox.open();
                     equal(combobox.ul.find("li").length, data.length);
                     start();
-                }, 300);
+                }, 100);
             });
 
             test("search focus item if text number", function() {
@@ -180,7 +180,7 @@
                 setTimeout(function() {
                     ok(!opened);
                     start();
-                }, 800);
+                }, 100);
             });
 
            test("search with startswith rebind items", function() {
@@ -213,7 +213,7 @@
                     equal(combobox.value(), data[2].value);
                     equal(combobox.text(), data[2].text);
                     start();
-                },200);
+                },100);
             });
 
             asyncTest("reopen ul after filter should show all data", function() {
@@ -229,7 +229,7 @@
                     equal(combobox.ul.children().length, data.length);
                     ok(combobox._current.hasClass("k-state-selected"));
                     start();
-                },200);
+                },100);
             });
 
             asyncTest("rebound ul should has item selected", function() {
@@ -244,7 +244,7 @@
 
                     equal(combobox.ul.children().length, data.length);
                     start();
-                },200);
+                },100);
             });
 
             asyncTest("typing should trigger search", function() {
@@ -326,7 +326,7 @@
                 setTimeout(function() {
                     ok(!called);
                     start();
-                }, 500);
+                }, 100);
             });
 
             asyncTest("highlight first item on refresh", function() {
@@ -344,7 +344,7 @@
                 setTimeout(function() {
                     ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
-                }, 500);
+                }, 100);
             });
 
             asyncTest("no filter and highlightFirst should always focus first item", function() {
@@ -353,7 +353,7 @@
                 setTimeout(function() {
                     ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
-                }, 500);
+                }, 100);
             });
 
             asyncTest("no filter and highlightFirst=false should not focus first item", function() {
@@ -369,7 +369,7 @@
                 setTimeout(function() {
                     ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
-                }, 500);
+                }, 100);
             });
 
             asyncTest("failed filter should not focus first item", function() {
@@ -382,7 +382,7 @@
                 setTimeout(function() {
                     ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
-                }, 500);
+                }, 100);
             });
 
             asyncTest("startswith filter and highlightFirst should always focus first item", function() {
@@ -398,7 +398,7 @@
                 setTimeout(function() {
                     ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
-                }, 500);
+                }, 100);
             });
 
             asyncTest("startswith filter and highlightFirst=false should not focus first item", function() {
@@ -415,7 +415,7 @@
                 setTimeout(function() {
                     ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
                     start();
-                }, 500);
+                }, 100);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

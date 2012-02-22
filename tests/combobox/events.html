@@ -23,7 +23,7 @@
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 200;
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
@@ -227,7 +227,7 @@
                     equal(combobox._old, "foo");
                     equal(combobox.value(), "foo");
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("raise change on custom value if element is select", function() {
@@ -252,7 +252,7 @@
                     equal(combobox.value(), "custom value");
                     equal(combobox._old, "custom value");
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("raise change if empty input after selection", function() {
@@ -272,7 +272,7 @@
                     ok(origCalled);
                     equal(combobox.value(), "");
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("change on custom value and ENTER", function() {
@@ -294,7 +294,7 @@
                     equal(combobox.value(), "test");
                     equal(combobox.text(), "test");
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("open event when click _arrow", function() {
@@ -324,7 +324,7 @@
                 setTimeout(function() {
                     ok(!combobox.popup.visible());
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("open event should not raise twice on initial binding", function() {
@@ -344,7 +344,7 @@
                 setTimeout(function() {
                     equal(index, 1);
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("open event when ALT + down _arrow", function() {
@@ -391,7 +391,7 @@
                 setTimeout(function() {
                     ok(combobox.popup.visible());
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("close should not raise if no data", function() {
@@ -408,7 +408,7 @@
                 setTimeout(function() {
                     ok(!called);
                     start();
-                }, 200);
+                }, 100);
             });
 
             asyncTest("close event when ALT + up _arrow", function() {
