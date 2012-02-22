@@ -39,7 +39,6 @@ var suiteScripts = {
         "kendo.fx.js",
         "kendo.data.odata.js",
         "kendo.data.xml.js",
-        "kendo.model.js",
         "kendo.data.js",
         "kendo.binder.js",
         "kendo.validator.js",
@@ -76,13 +75,11 @@ var suiteScripts = {
         "kendo.core.js",
         "kendo.data.odata.js",
         "kendo.data.xml.js",
-        "kendo.model.js",
         "kendo.data.js",
         "kendo.chart.js"
     ],
     "mobile": [
         "kendo.core.js",
-        "kendo.model.js",
         "kendo.fx.js",
         "kendo.data.odata.js",
         "kendo.data.xml.js",
