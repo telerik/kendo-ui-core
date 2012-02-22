@@ -28,7 +28,7 @@
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
-            QUnit.config.testTimeout = 800;
+            QUnit.config.testTimeout = 300;
             QUnit.config.reorder = false;
 
             $.fn.press = function(key) {
@@ -105,10 +105,10 @@
                 combobox.input.val("").focus().press(keys.BACKSPACE);
 
                 setTimeout(function() {
+                    start();
                     ok(!combobox._current);
                     ok(!combobox.ul.find(".k-state-selected")[0]);
                     ok(!combobox.ul.find(".k-state-focused")[0]);
-                    start();
                 }, 200);
             });
 
@@ -136,7 +136,7 @@
                     equal(combobox.text(), data[1].text);
                     equal(combobox.value(), data[1].value);
                     start();
-                }, 300);
+                }, 100);
             });
 
             asyncTest("click li should remove readonly css", function() {
@@ -153,7 +153,7 @@
                     equal(combobox.text(), data[1].text);
                     ok(!combobox.input.hasClass("k-readonly"));
                     start();
-                }, 300);
+                }, 100);
             });
 
             asyncTest("value should be set to item.text if no item.value", function() {
@@ -170,7 +170,7 @@
                     equal(combobox.text(), data[1].text);
                     equal(combobox.value(), data[1].text);
                     start();
-                }, 300);
+                }, 100);
             });
 
             test("select li should update text and value", function() {

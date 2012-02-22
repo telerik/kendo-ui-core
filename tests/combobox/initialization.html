@@ -319,7 +319,7 @@
                    equal(children.eq(1).text(), "0");
                    equal(children.eq(1).val(), "5");
                    start();
-               }, 500);
+               }, 100);
 
                stop(1);
            });
@@ -336,7 +336,7 @@
                setTimeout(function() {
                    equal(combobox.value(), "Foo 1");
                    start();
-               }, 500);
+               }, 100);
 
                stop(1);
            });
@@ -435,7 +435,7 @@
                 setTimeout(function() {
                     start();
                     equal(document.activeElement.nodeName, "INPUT");
-                }, 200);
+                }, 100);
 
             });
 
@@ -455,7 +455,7 @@
                     equal(combobox.element.val(), "123");
                     equal(combobox.input.val(), "123");
                     start();
-                }, 200);
+                }, 100);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
