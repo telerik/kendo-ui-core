@@ -9,12 +9,15 @@
         GROUP_CLASS = "km-group-title",
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '" />',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
+        WRAPPER = '<div class="km-listview-wrapper" />',
         FUNCTION = "function",
         MOUSEDOWN = support.mousedown,
         MOUSEMOVE = support.mousemove,
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
         ACTIVE_STATE_TIMEOUT = "active-state-timeout",
+        RELEASECLASS = "km-listview-release",
+        REFRESHCLASS = "km-listview-refresh",
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
@@ -228,10 +231,15 @@
         * @param {DomElement} element DOM element.
         * @param {Object} options Configuration options.
         * @option {kendo.data.DataSource|Object} [dataSource] Instance of DataSource or the data that the mobile ListView will be bound to.
-        * @option {String} [type] The type of the control. Can be either <code>flat</code> (default) or <code>group</code>. Determined automatically in databound mode.
-        * @option {String} [style] The style of the control. Can be either empty string(""), or <code>inset</code>.
-        * @option {String} [template] <${data}> The item template.
-        * @option {String} [headerTemplate] <${value}> The header item template (applies for grouped mode).
+        * @option {String}  [type] The type of the control. Can be either <code>flat</code> (default) or <code>group</code>. Determined automatically in databound mode.
+        * @option {String}  [style] The style of the control. Can be either empty string(""), or <code>inset</code>.
+        * @option {String}  [template] <${data}> The item template.
+        * @option {String}  [headerTemplate] <${value}> The header item template (applies for grouped mode).
+        * @option {Boolean} [pullToRefresh] <false> If set to true, the listview will reload its data when the user pulls the view over the top limit.
+        * @option {Boolean} [appendOnRefresh] <false> Used in combination with pullToRefresh. If set to true, newly loaded data will be appended on top of old data when refershing.
+        * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
+        * @option {String}  [releaseTemplate] <"Release to refresh"> The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
+        * @option {String}  [refreshTemplate] <"Refreshing"> The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
         */
         init: function(element, options) {
             var that = this;
@@ -251,6 +259,9 @@
             } else {
                 that._style();
             }
+
+            that.element.wrap(WRAPPER);
+            that.wrapper = that.element.parent();
         },
 
         events: [
@@ -303,21 +314,73 @@
             name: "ListView",
             type: "flat",
             template: "${data}",
+            pullToRefresh: false,
+            appendOnRefresh: false,
+            pullTemplate: "Pull to refresh",
+            releaseTemplate: "Release to refresh",
+            refreshTemplate: "Refreshing",
             headerTemplate: "${value}",
+            pullOffset: 140,
             style: ""
+        },
+
+        viewInit: function(view) {
+            var that = this,
+                options = that.options,
+                pullTemplate = kendo.template(options.pullTemplate),
+                releaseTemplate = kendo.template(options.releaseTemplate),
+                refreshTemplate = kendo.template(options.refreshTemplate);
+
+            that.scroller = view.scroller;
+
+            if (options.pullToRefresh) {
+                that.wrapper.prepend('<span class="km-listview-pull"><span class="km-icon"></span><span class="km-template">' + pullTemplate({}) + '</span></span>');
+                that.refreshHint = that.wrapper.children().first();
+                that.refreshTemplate = that.refreshHint.children(".km-template");
+
+                that.scroller.handlePull({
+                    offset: options.pullOffset,
+                    startPull: function() {
+                        that.refreshHint.addClass(RELEASECLASS);
+                        that.refreshTemplate.html(releaseTemplate({}));
+                    },
+
+                    cancelPull: function() {
+                        that.refreshHint.removeClass(RELEASECLASS);
+                        that.refreshTemplate.html(pullTemplate({}));
+                    },
+
+                    pull: function() {
+                        that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
+                        that.refreshTemplate.html(refreshTemplate({}));
+                        that.dataSource.read();
+                    }
+                });
+            }
         },
 
         _refresh: function() {
             var that = this,
                 dataSource = that.dataSource,
+                element = that.element,
                 grouped,
+                appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
+                contents,
                 view = dataSource.view();
 
             if (dataSource.group()[0]) {
                 that.options.type = "group";
-                that.element.html(kendo.render(that.groupTemplate, view));
+                contents = kendo.render(that.groupTemplate, view);
             } else {
-                that.element.html(kendo.render(that.template, view));
+                contents = kendo.render(that.template, view);
+            }
+
+            that.element[appendMethod](contents);
+
+            if (that.options.pullToRefresh) {
+                that.scroller.pullHandled();
+                that.refreshHint.removeClass(REFRESHCLASS);
+                that.refreshTemplate.html(kendo.template(that.options.pullTemplate)({}));
             }
 
             kendo.mobile.enhance(that.element.children());

@@ -11,7 +11,7 @@
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
-        OUT_OF_BOUNDS_FRICTION = 0.70,
+        OUT_OF_BOUNDS_FRICTION = 0.5,
         CHANGE = "change";
 
     var DragInertia = Animation.extend({
@@ -28,7 +28,6 @@
                 })
             });
 
-
             that.tap.bind("press", function() { that.cancel(); });
             that.swipe.bind("end", proxy(that.start, that));
             that.swipe.bind("tap", proxy(that.onEnd, that));
@@ -36,6 +35,12 @@
 
         onCancel: function() {
             this.transition.cancel();
+        },
+
+        freeze: function(location) {
+            var that = this;
+            that.cancel();
+            that._moveTo(location);
         },
 
         onEnd: function() {
@@ -87,8 +92,11 @@
             var that = this,
                 boundary = that.boundary,
                 snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
+            that._moveTo(snapBack);
+        },
 
-            that.transition.moveTo({ location: snapBack, duration: SNAPBACK_DURATION, ease: Transition.easeOutExpo });
+        _moveTo: function(location) {
+            this.transition.moveTo({ location: location, duration: SNAPBACK_DURATION, ease: Transition.easeOutExpo });
         }
     });
 
@@ -186,16 +194,45 @@
                 swipe: swipe,
                 draggable: draggable,
                 tap: tap,
+                pulled: false,
                 scrollElement: inner
             });
 
-            that.initAxis("x");
-            that.initAxis("y");
+            that._initAxis("x");
+            that._initAxis("y");
 
             boundary.refresh();
         },
 
-        initAxis: function(axis) {
+        pullHandled: function() {
+            this.yinertia.onEnd();
+            this.xinertia.onEnd();
+        },
+
+        handlePull: function(options) {
+            var that = this;
+            that.draggable.y.bind("change", function() {
+                if (that.move.y / OUT_OF_BOUNDS_FRICTION > options.offset) {
+                    if (!that.pulled) {
+                        that.pulled = true;
+                        options.startPull();
+                    }
+                } else if (that.pulled) {
+                    that.pulled = false;
+                    options.cancelPull();
+                }
+            });
+
+            that.swipe.bind("end", function() {
+                if(that.pulled) {
+                    that.pulled = false;
+                    options.pull();
+                    that.yinertia.freeze(options.offset / 2);
+                }
+            });
+        },
+
+        _initAxis: function(axis) {
             var that = this,
             move = that.move,
             boundary = that.boundary[axis],
@@ -217,6 +254,8 @@
                 boundary: boundary,
                 end: function() { scrollBar.hide(); }
             });
+
+            that[axis + "inertia"] = inertia;
 
             draggable.bind(CHANGE, function() {
                 scrollBar.show();

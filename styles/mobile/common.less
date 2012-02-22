@@ -636,6 +636,38 @@
     margin-top: ~"-.25rem";
 }
 
+.km-listview-pull
+{
+    width: 100%;
+    display: block;
+    position: absolute;
+    line-height: 60px;
+    font-size: 1.4em;
+    text-align: center;
+    .transform(translate3d(0,-60px,0));
+}
+
+.km-root .km-listview-pull .km-icon
+{
+    display: inline-block;
+    height: 2em;
+    margin-right: 1em;
+    vertical-align: middle;
+    width: 2em;
+    .transform(rotate(0deg));
+    .pTransition(~"transform 400ms linear");
+}
+
+.km-root .km-listview-release .km-icon
+{
+    .transform(rotate(180deg));
+}
+
+.km-root .km-listview-refresh .km-icon
+{
+    .transition(none);
+}
+
 .km-default-content
 {
     padding: 1em;
@@ -908,7 +940,8 @@
     margin-top: 10px;
 }
 
-.km-loader .km-loading
+.km-loader .km-loading,
+.km-listview-refresh .km-icon
 {
     background-size: cover;
     background-image: url("http://a1.twimg.com/profile_images/1514396238/KendoUI-Figure.png");

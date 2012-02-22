@@ -74,6 +74,10 @@
                     "url": "listview/databinding.html"
                 },
                 {
+                    "text": "Pull to refresh",
+                    "url": "listview/pull-to-refresh.html"
+                },
+                {
                     "text": "Custom templates",
                     "url": "listview/templates.html"
                 }
