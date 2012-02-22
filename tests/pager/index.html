@@ -62,6 +62,25 @@
                 equal(links[4].innerHTML, "5");
             });
 
+            test("renders buttons initial load", function() {
+                var dataSource = new DataSource({
+                        data: [1,2,3],
+                        pageSize: 1
+                    });
+
+                dataSource.read();
+
+                var ul = $("<ul />").kendoPager({
+                    dataSource: dataSource
+                });
+
+                var links = ul.find("a").add(ul.find(".k-state-active"));
+                equal(links.length, 3);
+                equal(links[0].innerHTML, "1");
+                equal(links[1].innerHTML, "2");
+                equal(links[2].innerHTML, "3");
+            });
+
             test("page number buttons have data attribute assign exept for the current page index", function(){
                 var ul = setup();
 
