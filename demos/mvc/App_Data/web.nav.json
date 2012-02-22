@@ -548,6 +548,17 @@
             ]
         },
         {
+            "text": "MVVM",
+            "name": "mvvm",
+            "spriteCssClass": "",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "mvvm/index.html"
+                }
+            ]
+        },
+        {
             "text": "Drag & Drop",
             "name": "dragdrop",
             "spriteCssClass": "dragdropIcon",
@@ -575,7 +586,7 @@
         },
         {
             "text": "Globalization",
-			"name": "globalization",
+            "name": "globalization",
             "spriteCssClass": "globalizationIcon",
             "items": [
                 {
