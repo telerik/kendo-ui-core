@@ -31,25 +31,7 @@
 
             ui.Widget.fn.init.call(that, element, options);
             options = that.options;
-            that.element.attr("data-" + kendo.ns + "widget", options.name);
             dataSource = that.element.data("source");
-
-            for (option in options) {
-                value = that.element.data(kendo.ns + option);
-
-                if (value !== undefined) {
-                    options[option] = value;
-                }
-            }
-
-            for (; idx < events.length; idx ++) {
-                event = events[idx];
-                handler = that.element.data(kendo.ns + event);
-
-                if (handler !== undefined) {
-                    options[event] = window[handler];
-                }
-            }
 
             if (dataSource) {
                 options["dataSource"] = window[dataSource];
@@ -58,23 +40,16 @@
             that.bind(events, options);
         },
 
+        options: {
+            prefix: "Mobile"
+        },
 
-        options: {},
         events: [],
 
         viewShow: $.noop,
 
         viewInit: function(view) {
             this.view = view;
-        },
-
-        enhance: function(element) {
-            var options = this.options,
-                pluginMethod = "kendoMobile" + options.name,
-                selector = kendo.roleSelector(options.name.toLowerCase());
-
-                element.find(selector)
-                       .add(element.filter(selector))[pluginMethod]();
         }
     });
 
@@ -366,19 +341,8 @@
      * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
      */
     extend(kendo.mobile, {
-        enhance: function(element) {
-            var widget, prototype, ui = kendo.mobile.ui;
-
-            element = $(element);
-
-            for (widget in ui) {
-                widget = ui[widget];
-                prototype = widget.prototype;
-
-                if (prototype.enhance && prototype.options.name) {
-                    prototype.enhance(element);
-                }
-            }
+        init: function(element) {
+            kendo.init(element, kendo.mobile.ui);
         },
 
         /**
@@ -386,11 +350,12 @@
          * @namespace Contains all classes for the Kendo Mobile UI widgets.
          */
         ui: {
+            Widget: Widget,
+            roles: {},
             plugin: function(widget) {
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
             },
 
-            Widget: Widget
         },
 
         Move: Move,

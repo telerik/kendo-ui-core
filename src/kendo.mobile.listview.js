@@ -383,7 +383,7 @@
                 that.refreshTemplate.html(kendo.template(that.options.pullTemplate)({}));
             }
 
-            kendo.mobile.enhance(that.element.children());
+            kendo.mobile.init(that.element.children());
 
             that._style();
         },

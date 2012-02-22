@@ -408,7 +408,7 @@
                 layout = that.layouts[layout];
             }
 
-            var view = new View(element, {layout: layout});
+            var view = kendo.initWidget(element, {layout: layout}, kendo.mobile.ui);
 
             that.trigger(VIEW_INIT, {view: view});
 

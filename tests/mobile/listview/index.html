@@ -196,18 +196,19 @@
             });
 
             test("wraps group headers", function() {
-                var dom = $('<ul data-type="group">\
+                var dom = $('<ul data-role="listview" data-type="group">\
                     <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
                 </ul>');
-                var listView = new ListView(dom);
+
+                kendo.mobile.init(dom);
                 ok(dom.find("li").contents().first().is("div.km-group-title"), "Header is wrapped correctly");
             });
 
             test("Does not wrap groups if headers missing", function() {
-                var dom = $('<ul data-type="group">\
+                var dom = $('<ul data-role="listview" data-type="group">\
                     <li><ul><li>Bar</li><li>Baz</li></ul></li>\
                 </ul>');
-                var listView = new ListView(dom);
+                kendo.mobile.init(dom);
                 ok(!dom.find("li").contents().first().is("div.km-group-title"), "Groups are skipped");
             });
 
