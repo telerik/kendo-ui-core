@@ -56,6 +56,25 @@
                 equal(editable.element.find(":input").length, 1);
             });
 
+            test("does not clear container is set", function() {
+                var editable = div.append($('<div />')).kendoEditable({
+                    fields: "foo",
+                    model: defaultModel,
+                    clearContainer: false
+                });
+
+                equal(editable.find("div").length, 1);
+            });
+
+            test("renders input element within the child element container if specified", function() {
+                var editable = div.append($('<div data-container-for="foo"/>')).kendoEditable({
+                    fields: "foo",
+                    model: defaultModel,
+                    clearContainer: false
+                });
+                equal(editable.find("div > :input").length, 1);
+            });
+
             test("input name is same as field", function() {
                 var editable = setup({ fields: "foo", model: defaultModel });
 

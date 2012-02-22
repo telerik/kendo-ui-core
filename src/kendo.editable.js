@@ -60,6 +60,7 @@
         },
         "string": function(container, options) {
             var attr = createAttributes(options);
+
             $('<input type="text" class="k-input k-textbox"/>').attr(attr).appendTo(container);
         },
         "boolean": function(container, options) {
@@ -81,7 +82,8 @@
 
         options: {
             name: "Editable",
-            editors: editors
+            editors: editors,
+            clearContainer: true
         },
 
         editor: function(field, modelField) {
@@ -91,12 +93,14 @@
                 fieldName = isObject ? field.field : field,
                 model = that.options.model || {},
                 fieldType = modelField && modelField.type ? modelField.type : "string",
-                editor = isObject && field.editor ? field.editor : editors[fieldType];
+                editor = isObject && field.editor ? field.editor : editors[fieldType],
+                container = that.element.find("[data-container-for=" + fieldName + "]");
 
             editor = editor ? editor : editors["string"];
 
             if (modelField) {
-                editor(that.element, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
+                container = container.length ? container : that.element;
+                editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
             }
         },
 
@@ -130,7 +134,7 @@
                 idx,
                 length,
                 fields = that.options.fields || [],
-                container = that.options.fields ? that.element.empty() : that.element,
+                container = that.options.clearContainer ? that.element.empty() : that.element,
                 model = that.options.model || {},
                 rules = {};
 
