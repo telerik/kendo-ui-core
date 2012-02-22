@@ -400,32 +400,33 @@
             });
 
             test("Creates loader", function() {
+                setup('<div data-role="view">Page 1</div>');
                 var loader = application.loader;
 
-                console.log(application);
                 ok(loader);
                 ok(loader.hasClass("km-loader"));
             });
 
-            asyncTest("showLoading shows loading image", function() {
-                expect(1);
+            asyncTest("showLoading shows loading image", 1, function() {
+                setup('<div data-role="view">Page 1</div>');
                 application.showLoading();
 
                 setTimeout(function() {
                     start();
-                    equal(application.loader.css("display"), "");
-                }, 150);
+                    equal(application.loader.css("display"), "block");
+                }, 200);
             });
 
-            asyncTest("hideLoading hides loading image", function() {
+            asyncTest("hideLoading hides loading image", 1, function() {
                 expect(1);
+                setup('<div data-role="view">Page 1</div>');
                 application.showLoading();
 
                 setTimeout(function() {
                     start();
                     application.hideLoading();
                     equal(application.loader.css("display"), "none");
-                }, 150);
+                }, 200);
             });
 
             test("append icon meta link", function() {
@@ -501,7 +502,6 @@
             });
 
             asyncTest("Raises pull when pulled", 1, function() {
-                window.pull = function() { ok(true); }
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
                 var swipe = application.view.scroller.swipe;
