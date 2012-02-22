@@ -449,10 +449,9 @@
 
                         return;
                     }
-                }
-
-                if (options.show) {
+                } else if (options.show) {
                     element.css({ display: element.data("olddisplay") || "block" }).css("display");
+                    options.init();
                 }
 
                 deferred.resolve();

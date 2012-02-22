@@ -165,6 +165,7 @@
         IMAGE = "k-image",
         FIRST = "k-first",
         SELECT = "select",
+        ACTIVATE = "activate",
         CONTENT = "k-content",
         CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
@@ -381,6 +382,9 @@
              * @param {HTMLElement} e.item
              * The selected item chosen by a user.
              *
+             * @param {Element} e.contentElement
+             * The content element of the tab going to be selected.
+             *
              * @exampleTitle Attach select event handler during initialization; detach via unbind()
              * @example
              * // event handler for select
@@ -411,6 +415,50 @@
              *
              */
             SELECT,
+            /**
+             * Triggered just after a tab is being made visible, but before the end of the animation
+             *
+             * @name kendo.ui.TabStrip#activate
+             * @event
+             *
+             * @param {Event} e
+             *
+             * @param {HTMLElement} e.item
+             * The activated tab.
+             *
+             * @param {Element} e.contentElement
+             * The content element of the activated tab.
+             *
+             * @exampleTitle Attach activate event handler during initialization; detach via unbind()
+             * @example
+             * // event handler for activate
+             * var onActivate = function(e) {
+             *     // access the activated item via e.item (HTMLElement)
+             * };
+             *
+             * // attach activate event handler during initialization
+             * var tabStrip = $("#tabStrip").kendoTabStrip({
+             *     activate: onActivate
+             * });
+             *
+             * // detach activate event handler via unbind()
+             * tabStrip.data("kendoTabStrip").unbind("activate", onActivate);
+             *
+             * @exampleTitle Attach activate event handler via bind(); detach via unbind()
+             * @example
+             * // event handler for activate
+             * var onActivate = function(e) {
+             *     // access the activated item via e.item (HTMLElement)
+             * };
+             *
+             * // attach activate event handler via bind()
+             * $("#tabStrip").data("kendoTabStrip").bind("activate", onActivate);
+             *
+             * // detach activate event handler via unbind()
+             * $("#tabStrip").data("kendoTabStrip").unbind("activate", onActivate);
+             *
+             */
+            ACTIVATE,
             /**
              *
              * Triggered when an AJAX request results in an error.
@@ -1007,7 +1055,9 @@
                     content
                         .addClass(ACTIVESTATE)
                         .kendoStop(true, true)
-                        .kendoAnimate( animation );
+                        .kendoAnimate( extend({ init: function () {
+                            that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
+                        } }, animation) );
                 },
                 showContent = function() {
                     if (!isAjaxContent) {
