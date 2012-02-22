@@ -78,7 +78,7 @@
                 axis: "x",
                 move: move,
                 onEnd: function() {
-                    that.page = - move.x / boundary.size;
+                    that.page = Math.round(- move.x / boundary.size);
                     that._updatePage();
                 }
             });
