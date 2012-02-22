@@ -1935,22 +1935,22 @@
             var axis = this,
                 autoMin = axis.autoAxisMin(seriesMin, seriesMax),
                 autoMax = axis.autoAxisMax(seriesMin, seriesMax),
-                autoMajorUnit = axis.autoMajorUnit(autoMin, autoMax),
+                majorUnit = autoMajorUnit(autoMin, autoMax),
                 autoOptions = {
-                    majorUnit: autoMajorUnit
+                    majorUnit: majorUnit
                 },
                 userSetLimits;
 
             if (autoMin < 0) {
-                autoMin -= autoMajorUnit;
+                autoMin -= majorUnit;
             }
 
             if (autoMax > 0) {
-                autoMax += autoMajorUnit;
+                autoMax += majorUnit;
             }
 
-            autoOptions.min = floor(autoMin, autoMajorUnit);
-            autoOptions.max = ceil(autoMax, autoMajorUnit);
+            autoOptions.min = floor(autoMin, majorUnit);
+            autoOptions.max = ceil(autoMax, majorUnit);
 
             if (options) {
                 userSetLimits = defined(options.min) || defined(options.max);
@@ -1971,7 +1971,7 @@
                     options = deepExtend(autoOptions, options);
 
                     // Determine an auto major unit after min/max have been set
-                    autoOptions.majorUnit = axis.autoMajorUnit(options.min, options.max);
+                    autoOptions.majorUnit = autoMajorUnit(options.min, options.max);
                 }
             }
 
@@ -2019,34 +2019,6 @@
             }
 
             return childElements;
-        },
-
-        autoMajorUnit: function (min, max) {
-            var diff = max - min;
-
-            if (diff == 0) {
-                if (max == 0) {
-                    return 0.1;
-                }
-
-                diff = math.abs(max);
-            }
-
-            var scale = math.pow(10, math.floor(math.log(diff) / math.log(10))),
-                relativeValue = round((diff / scale), DEFAULT_PRECISION),
-                scaleMultiplier = 1;
-
-            if (relativeValue < 1.904762) {
-                scaleMultiplier = 0.2;
-            } else if (relativeValue < 4.761904) {
-                scaleMultiplier = 0.5;
-            } else if (relativeValue < 9.523809) {
-                scaleMultiplier = 1;
-            } else {
-                scaleMultiplier = 2;
-            }
-
-            return round(scale * scaleMultiplier, DEFAULT_PRECISION);
         },
 
         autoAxisMax: function(min, max) {
@@ -6095,6 +6067,34 @@
 
         return get(row);
     }
+
+    function autoMajorUnit(min, max) {
+        var diff = max - min;
+
+        if (diff == 0) {
+            if (max == 0) {
+                return 0.1;
+            }
+
+            diff = math.abs(max);
+        }
+
+        var scale = math.pow(10, math.floor(math.log(diff) / math.log(10))),
+            relativeValue = round((diff / scale), DEFAULT_PRECISION),
+            scaleMultiplier = 1;
+
+        if (relativeValue < 1.904762) {
+            scaleMultiplier = 0.2;
+        } else if (relativeValue < 4.761904) {
+            scaleMultiplier = 0.5;
+        } else if (relativeValue < 9.523809) {
+            scaleMultiplier = 1;
+        } else {
+            scaleMultiplier = 2;
+        }
+
+        return round(scale * scaleMultiplier, DEFAULT_PRECISION);
+    }
     getField.cache = {};
 
     // Exports ================================================================
@@ -6111,6 +6111,7 @@
         template: template,
         rotatePoint: rotatePoint,
         round: round,
+        autoMajorUnit: autoMajorUnit,
         supportsSVG: supportsSVG,
         uniqueId: uniqueId,
         Box2D: Box2D,
@@ -6309,8 +6310,8 @@
             return [
                 view.createPolyline([
                     rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.majorTickSize, center.x, center.y, rotation),
-                    rotatePoint(center.x - capSize/2, center.y, center.x, center.y, rotation),
-                    rotatePoint(center.x + capSize/2, center.y, center.x, center.y, rotation)
+                    rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, rotation),
+                    rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, rotation)
                 ], true, pointerOptions),
                 view.createCircle([center.x, center.y], capSize, pointerOptions)
             ];
@@ -6330,7 +6331,7 @@
     var RadialScale = NumericAxis.extend({
         init: function (options) {
             var scale = this;
-            scale.options.majorUnit = scale.autoMajorUnit(scale.options.min, scale.options.max);
+            scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
             Axis.fn.init.call(scale, options);
         },
@@ -6345,37 +6346,9 @@
             startAngle: -30,
             endAngle: 240,
             labels: {
-                position: "inside",
+                position: INSIDE,
                 padding: 10
             }
-        },
-
-        autoMajorUnit: function (min, max) {
-            var diff = max - min;
-
-            if (diff == 0) {
-                if (max == 0) {
-                    return 0.1;
-                }
-
-                diff = math.abs(max);
-            }
-
-            var scale = math.pow(10, math.floor(math.log(diff) / math.log(10))),
-                relativeValue = round((diff / scale), DEFAULT_PRECISION),
-                scaleMultiplier = 1;
-
-            if (relativeValue < 1.904762) {
-                scaleMultiplier = 0.2;
-            } else if (relativeValue < 4.761904) {
-                scaleMultiplier = 0.5;
-            } else if (relativeValue < 9.523809) {
-                scaleMultiplier = 1;
-            } else {
-                scaleMultiplier = 2;
-            }
-
-            return round(scale * scaleMultiplier, DEFAULT_PRECISION);
         },
 
         reflow: function(box) {
@@ -6466,11 +6439,11 @@
                 halfHeight = label.box.height() / 2;
                 angle = tickAngels[i];
                 labelAngle = angle * DEGREE;
-                if (labelsOptions.position == "inside") {
+                if (labelsOptions.position == INSIDE) {
                     lp = ring.point(angle, true);
                     cx = lp.x + math.cos(labelAngle) * (halfWidth + padding);
                     cy = lp.y + math.sin(labelAngle) * (halfHeight + padding);
-                } else if (labelsOptions.position == "outside") {
+                } else if (labelsOptions.position == OUTSIDE) {
                     lp = ring.point(angle);
                     cx = lp.x - math.cos(labelAngle) * (halfWidth + padding);
                     cy = lp.y - math.sin(labelAngle) * (halfHeight + padding);
@@ -6540,8 +6513,9 @@
                 plotBox;
 
             scale.reflow(box);
-            //plotArea.alignScale(scale, box);
+            box.y2 += 300;
 
+            scale.reflow(box);
             plotBox = scale.ring.getBBox().clone();
 
             if (plotArea.options.pointer != false) {
@@ -6551,16 +6525,6 @@
             }
 
             plotArea.box = plotBox;
-        },
-
-        alignScale: function(scale, box) {
-            var scaleCenter = scale.box.center(),
-                boxCenter = box.center(),
-                paddingX = boxCenter.x - scaleCenter.x,
-                paddingY = boxCenter.y - scaleCenter.y;
-
-            scale.ring.c.y += paddingY;
-            scale.ring.c.x += paddingX;
         },
 
         render: function() {
