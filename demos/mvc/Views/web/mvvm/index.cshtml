@@ -1,0 +1,66 @@
+<div id="example" class="k-content">
+    <div class="registration code-sample">
+        <h4 class="code-title">Registration Form</h4>
+        <div class="code-details">
+        <ul>
+            <li><label>First Name:<input data-bind="value: firstName" /></label></li>
+            <li><label>Last Name:<input data-bind="value: lastName" /></label></li>
+            <li><label>Gender:<select data-bind="source: genders, value: gender"></select></label></li>
+        </ul>
+        <label><input type="checkbox" data-bind="checked: agreed" /> I have read the licence agreement</label>
+        <button data-bind="enabled: agreed, click: displayViewModel" style="display: block">Register</button>
+    </div>
+    </div>
+    <div class="current-state code-sample">
+    <h4 class="code-title">Current view model state</h4>
+<pre>
+{
+    firstName: <span data-bind="text: firstName"></span>,
+    lastName: <span data-bind="text: lastName"></span>,
+    gender: <span data-bind="text: gender"></span>,
+    agreed: <span data-bind="text: agreed"></span>
+}
+</pre>
+    </div>
+    <script>
+        var viewModel = {
+            firstName: "John",
+            lastName: "Doe",
+            genders: ["Male", "Female"],
+            gender: "Male",
+            agreed: false
+        };
+
+        kendo.bind($("#example"), viewModel);
+    </script>
+
+    <style scoped>
+        .code-details > ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .registration {
+            float: left;
+            width: 400px;
+        }
+
+        .code-details {
+            padding: 1em;
+        }
+
+        .registration label{
+            display: inline-block;
+            width: 300px;
+        }
+
+        .current-state {
+            float: right;
+        }
+
+        .current-state pre {
+            font-size: 12px;
+        }
+    </style>
+</div>
