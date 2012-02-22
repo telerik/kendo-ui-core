@@ -80,24 +80,13 @@
             "hidden": true
         },
         {
-            "id": "model",
-            "name": "Model",
-            "category": "framework",
-            "source": "kendo.model.min.js",
-            "depends": [
-                "core"
-            ],
-            "hidden": true
-        },
-        {
             "id": "data",
             "name": "Data source",
             "category": "framework",
             "description": "Powerful component for using local and remote data.Fully supports CRUD, Sorting, Paging, Filtering, Grouping, and Aggregates.",
             "source": "kendo.data.min.js",
             "depends": [
-                "core",
-                "model"
+                "core"
             ],
             "features": [
                 {
