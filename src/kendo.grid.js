@@ -243,7 +243,7 @@
             className: "k-grid-delete",
             iconClass: "k-icon"
         },
-        update: {
+        edit: {
             text: "Edit",
             imageClass: "k-edit",
             className: "k-grid-edit",
@@ -1223,26 +1223,53 @@
             var that = this,
                 model = that._modelForContainer(row),
                 column,
+                cell,
                 fields = [],
                 idx,
                 length;
 
-            if (model) {
-                for (idx = 0, length = that.columns.length; idx < length; idx++) {
-                    column = that.columns[idx];
+            that.cancelRow();
 
-                    if (model.editable(column.field)) {
+            if (model) {
+                row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
+                    cell = $(this);
+                    column = that.columns[that.cellIndex(cell)];
+
+                    if (!column.command && model.editable(column.field)) {
                         fields.push({ field: column.field, format: column.format, editor: column.editor });
+                        cell.attr("data-container-for", column.field);
+                        cell.empty();
                     }
-                }
-                //that._editContainer = row;
+                });
+
+                that._editContainer = row;
 
                 that.editable = row
                     .addClass("k-grid-edit-row")
                     .kendoEditable({
                         fields: fields,
                         model: model,
+                        clearContainer: false
                     }).data("kendoEditable");
+            }
+        },
+
+        cancelRow: function() {
+            var that = this,
+                container = that._editContainer,
+                newRow,
+                model
+
+            if (container) {
+                model = that._modelForContainer(container);
+
+               that.dataSource.cancelChanges(model);
+
+                newRow = $((container.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model));
+
+                container.replaceWith(newRow);
+
+                that._distroyEditable();
             }
         },
 
@@ -1821,9 +1848,12 @@
                 row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 cell,
                 column,
-                isAlt = row.hasClass("k-alt");
+                isAlt = row.hasClass("k-alt"),
+                tmp,
+                idx,
+                length;
 
-            if (row.has(".k-edit-cell")) {
+            if (row.children(".k-edit-cell").length) {
                 row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
                     column = that.columns[that.cellIndex(cell)];
@@ -1838,8 +1868,19 @@
                     }
                 });
 
-            } else {
-                row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model)));
+            } else if (!row.hasClass("k-grid-edit-row")) {
+                tmp = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
+
+                row.replaceWith(tmp);
+
+                for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                    column = that.columns[idx];
+
+                    if (column.field === e.field) {
+                        cell = tmp.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(idx)
+                        $('<span class="k-dirty"/>').prependTo(cell);
+                    }
+                }
             }
         },
 

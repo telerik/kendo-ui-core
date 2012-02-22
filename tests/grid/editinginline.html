@@ -31,9 +31,9 @@
                 dataSource;
 
             function setup(options) {
-                options = $.extend({}, {
+                options = $.extend(true, {}, {
                 editable: true,
-                dataSource: new DataSource({
+                dataSource: {
                         schema: {
                             model: {
                                 id: "foo",
@@ -44,9 +44,9 @@
                             }
                         },
                         data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
-                    })
+                    }
                 }, options);
-                dataSource = options.dataSource;
+                options.dataSource = dataSource = new DataSource(options.dataSource);
 
                 return table.kendoGrid(options).data("kendoGrid");
             }
@@ -115,8 +115,8 @@
                 equal(editable.options.fields[1].field, "name");
             });
 
-            test("clicking update command calls editRow", function() {
-                var grid = setup({ columns: ["foo", "name", { command: "update" }], editable: "inline" }),
+            test("clicking edit command calls editRow", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: "inline" }),
                     tr = table.find("tr:first"),
                     editRow = stub(grid, "editRow");
 
@@ -124,8 +124,8 @@
                 equal(editRow.calls("editRow"), 1);
             });
 
-            test("clicking update command calls editRow if edit mode is inline", function() {
-                var grid = setup({ columns: ["foo", "name", { command: "update" }], editable: { mode: "inline" } }),
+            test("clicking edit command calls editRow if edit mode is inline", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: { mode: "inline" } }),
                     tr = table.find("tr:first"),
                     editRow = stub(grid, "editRow");
 
@@ -133,8 +133,8 @@
                 equal(editRow.calls("editRow"), 1);
             });
 
-            test("clicking update command does not call editRow if edit mode is not inline", function() {
-                var grid = setup({ columns: ["foo", "name", { command: "update" }], editable: true }),
+            test("clicking edit command does not call editRow if edit mode is not inline", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: true }),
                     tr = table.find("tr:first"),
                     editRow = stub(grid, "editRow");
 
@@ -142,10 +142,82 @@
                 equal(editRow.calls("editRow"), 0);
             });
 
-            test("update column is rendered if set", function() {
-                var grid = setup( { editable: true, columns: [ { command: "update" }] });
+            test("edit command column is rendered if set", function() {
+                var grid = setup( { editable: true, columns: [ { command: "edit" }] });
 
                 ok(grid.table.find("tr:first > td:last").has("a.k-grid-edit").length);
+            });
+
+            test("editRow does not remove the delete command buttons", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "destroy" }], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                ok(tr.find("a.k-grid-delete").length);
+            });
+
+            test("editRow editors for not editable cells are not created", function() {
+                var grid = setup({
+                        columns: ["foo", "name", { command: "destroy" }],
+                        editable: "inline",
+                        dataSource: { schema: { model: { fields: { foo: { editable:false } } } } }
+                    }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                ok(!tr.find("td:first > input").length);
+                ok(tr.find("td:eq(1) > input").length);
+            });
+
+            test("cancelRow switch edited row in display mode", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.cancelRow(tr);
+                ok(!table.find("tr:first").find(":input").length);
+            });
+
+            test("cancelRow destroyes Editable", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.cancelRow(tr);
+
+                ok(!table.find("tr:first").data("kendoEditable"));
+            });
+
+            test("cancelRow remove the css class from the edited row", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.cancelRow(tr);
+
+                ok(!table.find("tr:first").hasClass("k-grid-edit-row"));
+            });
+
+            test("cancelRow cancel changes made to the record", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.dataItem(tr).set("foo", "moo");
+                grid.cancelRow(tr);
+
+                equal(grid.dataItem(table.find("tr:first")).get("foo"), "bar");
+            });
+
+            test("updateRow switches other edited rows to display mode", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" });
+
+                grid.editRow(table.find("tr:first"));
+                grid.editRow(table.find("tr:eq(1)"));
+
+                ok(!table.find("tr:first").find(":input").length);
+                equal(table.find("tr.k-grid-edit-row").length, 1);
+                ok(table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
