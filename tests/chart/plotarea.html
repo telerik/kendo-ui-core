@@ -133,6 +133,22 @@
                     same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
                 });
 
+                test("aligns reversed axes at default crossing values", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: { reverse: true },
+                        valueAxis: { reverse: true }
+                    });
+
+                    var axisX = categoryAxis,
+                        axisY = primaryValueAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                });
+
                 test("aligns axises at non-default crossing values", function() {
                     var axisX = categoryAxis,
                         axisY = primaryValueAxis;
@@ -144,6 +160,22 @@
                     var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
                     same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1], TOLERANCE);
+                });
+
+                test("aligns reversed axes at non-default crossing values", function() {
+                    createPlotArea(columnSeriesData, {
+                        categoryAxis: { reverse: true, axisCrossingValue: 3 },
+                        valueAxis: { reverse: true }
+                    });
+
+                    var axisX = categoryAxis,
+                        axisY = primaryValueAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
@@ -600,6 +632,51 @@
 
                 test("applies gap from first series", function() {
                     equals(chartSeries.options.gap, GAP);
+                });
+
+                test("aligns axes at default crossing values", function() {
+                    var axisX = primaryValueAxis,
+                        axisY = categoryAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+                    same([crossingSlotY.x1, crossingSlotY.y1], [crossingSlotX.x1, crossingSlotX.y1]);
+                });
+
+                test("aligns reversed axes at default crossing values", function() {
+                    createPlotArea(barSeriesData, {
+                        categoryAxis: { reverse: true },
+                        valueAxis: { reverse: true }
+                    });
+
+                    var axisX = primaryValueAxis,
+                        axisY = categoryAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+
+                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                });
+
+                test("aligns reversed axes at non-default crossing values", function() {
+                    createPlotArea(barSeriesData, {
+                        categoryAxis: { reverse: true, axisCrossingValue: 0 },
+                        valueAxis: { reverse: true }
+                    });
+
+                    var axisX = primaryValueAxis,
+                        axisY = categoryAxis;
+
+                    plotArea.reflow(chartBox);
+
+                    var crossingSlotY = axisY.getSlot(axisY.options.axisCrossingValue),
+                        crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
+
+                    same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
                 });
 
             })();
