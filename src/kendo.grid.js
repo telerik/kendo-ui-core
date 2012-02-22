@@ -248,6 +248,18 @@
             imageClass: "k-edit",
             className: "k-grid-edit",
             iconClass: "k-icon"
+        },
+        update: {
+            text: "Update",
+            imageClass: "k-update",
+            className: "k-grid-update",
+            iconClass: "k-icon"
+        },
+        canceledit: {
+            text: "Cancel",
+            imageClass: "k-cancel",
+            className: "k-grid-cancel",
+            iconClass: "k-icon"
         }
     }
 
@@ -1099,6 +1111,16 @@
                             e.preventDefault();
                             that.editRow($(this).closest("tr"));
                         });
+
+                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-cancel", CLICK, function(e) {
+                            e.preventDefault();
+                            that.cancelRow();
+                        });
+
+                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-update", CLICK, function(e) {
+                            e.preventDefault();
+                            that.saveRow();
+                        });
                     }
                 }
 
@@ -1239,6 +1261,9 @@
                         fields.push({ field: column.field, format: column.format, editor: column.editor });
                         cell.attr("data-container-for", column.field);
                         cell.empty();
+                    } else if (column.command === "edit") {
+                        cell.empty();
+                        $(that._createButton("update") + that._createButton("canceledit")).appendTo(cell);
                     }
                 });
 
@@ -1263,14 +1288,32 @@
             if (container) {
                 model = that._modelForContainer(container);
 
-               that.dataSource.cancelChanges(model);
+                that.dataSource.cancelChanges(model);
 
-                newRow = $((container.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model));
-
-                container.replaceWith(newRow);
+                that._displayRow(container);
 
                 that._distroyEditable();
             }
+        },
+
+        saveRow: function() {
+            var that = this,
+                container = that._editContainer,
+                editable = that.editable;
+
+            if (container && editable && editable.end()) {
+                that._displayRow(container);
+                that._distroyEditable();
+                that.dataSource.sync();
+            }
+        },
+
+        _displayRow: function(row) {
+            var that = this,
+                model = that._modelForContainer(row),
+                newRow = $((row.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model));
+
+            row.replaceWith(newRow);
         },
 
         _showMessage: function(text) {

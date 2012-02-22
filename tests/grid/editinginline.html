@@ -156,6 +156,41 @@
                 ok(tr.find("a.k-grid-delete").length);
             });
 
+            test("editRow transforms the edit command column", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var commandCell = tr.find("td:last");
+                equal(commandCell.find("a.k-button").length, 2);
+                equal(commandCell.find("a.k-grid-update").length, 1);
+                equal(commandCell.find("a.k-grid-cancel").length, 1);
+            });
+
+            test("clicking on cancel button switch edited row in display mode", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                tr.find("a.k-grid-cancel").click();
+
+                ok(!table.find("tr:first").find(":input").length);
+            });
+
+            test("clicking cancel command calls cancelRow", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: "inline" }),
+                    tr = table.find("tr:first"),
+                    cancelRow = stub(grid, "cancelRow");
+
+                grid.editRow(tr);
+
+                tr.find("a.k-grid-cancel").click();
+
+                equal(cancelRow.calls("cancelRow"), 2); // the cancelRow is called withing the editRow
+            });
+
             test("editRow editors for not editable cells are not created", function() {
                 var grid = setup({
                         columns: ["foo", "name", { command: "destroy" }],
@@ -218,6 +253,82 @@
                 ok(!table.find("tr:first").find(":input").length);
                 equal(table.find("tr.k-grid-edit-row").length, 1);
                 ok(table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
+            });
+
+            test("saveRow switches edit row in display mode", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.saveRow();
+
+                ok(!table.find("tr:first").find(":input").length);
+            });
+
+            test("clicking update command calls saveRow", function() {
+                var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: "inline" }),
+                    tr = table.find("tr:first"),
+                    saveRow = stub(grid, "saveRow");
+
+                grid.editRow(tr);
+
+                tr.find("a.k-grid-update").click();
+
+                equal(saveRow.calls("saveRow"), 1);
+            });
+
+            test("saveRow destroyes Editable", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.saveRow(tr);
+
+                ok(!table.find("tr:first").data("kendoEditable"));
+            });
+
+            test("saveRow calls validate", function() {
+                 var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var validate = stub(tr.data("kendoValidator"), "validate");
+
+                grid.saveRow(tr);
+
+                ok(validate.calls("validate"));
+            });
+
+            test("saveRow item does not leave edit mode if validation fails", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline",
+                    dataSource: {
+                        schema: {
+                            model: {
+                                fields: {
+                                    foo: { validation: { custom: function() { return false; } } }
+                                }
+                            }
+                }}}),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                grid.saveRow();
+
+                ok(table.find("tr:first").find(":input").length);
+            });
+
+            test("saveRow calls DataSource sync", function() {
+                 var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var sync = stub(grid.dataSource, "sync");
+
+                grid.saveRow(tr);
+
+                ok(sync.calls("sync"));
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
