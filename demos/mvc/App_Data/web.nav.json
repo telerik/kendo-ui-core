@@ -559,6 +559,10 @@
                 {
                     "text": "HTML element binding",
                     "url": "mvvm/elements.html"
+                },
+                {
+                    "text": "Attribute binding",
+                    "url": "mvvm/attributes.html"
                 }
             ]
         },
