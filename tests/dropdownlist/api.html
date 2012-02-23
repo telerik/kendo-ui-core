@@ -34,9 +34,6 @@
                         dataValueField: "value",
                         dataSource: [{text: "foo", value: 1}, {text:2, value:2}]
                     });
-                },
-                teardown: function() {
-                    input.append($("ul")).parent(".k-widget").remove();
                 }
             });
 
@@ -284,6 +281,15 @@
 
                 equal(dropdownlist.selectedIndex, -1);
                 equal(dropdownlist.dataSource.calls("fetch"), 0);
+            });
+
+            test("value() returns value of the OPTION element", function() {
+                var select = $("<select><option value=''>Chai</option><option>Bar</option></select>");
+                dropdownlist = new DropDownList(select);
+
+                equal(dropdownlist.value(), "");
+                dropdownlist.select(1);
+                equal(dropdownlist.value(), "Bar");
             });
 
         </script>

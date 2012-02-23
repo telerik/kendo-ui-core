@@ -333,8 +333,14 @@
             if (value === undefined) {
                 if (isSelect) {
                     selectedIndex = element.selectedIndex;
-                    option = selectedIndex > -1 ? element.options[selectedIndex] : null;
-                    value = option ? (option.value || option.text) : "";
+
+                    if (selectedIndex > -1) {
+                        option = element.options[selectedIndex];
+
+                        if (option) {
+                            value = option.value;
+                        }
+                    }
                 } else {
                     value = element.value;
                 }
@@ -515,7 +521,7 @@
                 dataText = that._text(dataItem);
                 dataValue = that._value(dataItem);
 
-                if (dataValue || dataValue === 0) {
+                if (dataValue !== undefined) {
                     option += ' value="' + dataValue + '"';
                 }
 

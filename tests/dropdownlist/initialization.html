@@ -151,7 +151,7 @@
             });
 
             test("data source is initialized from OPTION items", function() {
-                var select = $("<select><option value=1>Chai</option><option value=1 selected='selected'>Chai</option></select>"),
+                var select = $("<select><option value=1>Chai</option><option value=2 selected='selected'>Chai</option></select>"),
                 dropdownlist = new DropDownList(select),
                 data;
 
@@ -161,7 +161,17 @@
                 equal(data.length, 2);
                 equal(data[0].text, "Chai");
                 equal(data[0].value, "1");
+            });
 
+            test("dataSource infer OPTION value correctly", function() {
+                var select = $("<select><option>Chai</option><option value=2>Chai</option></select>"),
+                dropdownlist = new DropDownList(select),
+                data;
+
+                data = dropdownlist.dataSource.view();
+
+                equal(data[0].value, "Chai");
+                equal(data[1].value, "2");
             });
 
             test("if no options, do not set index", function() {
