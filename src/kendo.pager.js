@@ -25,8 +25,10 @@
             that.selectTemplate = kendo.template(that.options.selectTemplate);
 
             that.dataSource.bind("change", proxy(that.refresh, that));
-            that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element).html(that.selectTemplate({ text: 1 }));
+            that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);//.html(that.selectTemplate({ text: 1 }));
             that.element.delegate("a", "click",  proxy(that._click, that));
+
+            that.refresh();
         },
 
         options: {
@@ -66,6 +68,10 @@
 
             if(end < totalPages) {
                 html += button(linkTemplate, idx, "...", false);
+            }
+
+            if (html === "") {
+                html = that.selectTemplate({ text: 1 });
             }
 
             that.list.empty().append(html);
