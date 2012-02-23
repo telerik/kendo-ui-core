@@ -63,6 +63,14 @@
                 }
             });
 
+            test("render multiple column commands", function() {
+                setup({ columns: [{ command: ["destroy", "edit"] }] });
+                var cell = table.find("tr:first").find("td:first");
+                equal(cell.find("a.k-button").length, 2);
+                equal(cell.find("a.k-grid-delete").length, 1);
+                equal(cell.find("a.k-grid-edit").length, 1);
+            });
+
             test("cell click enters edit mode", function() {
                 setup();
                 var cell = table.find("td:first").click();
@@ -98,6 +106,13 @@
                 var cell = table.find("td:first").click();
 
                 ok(!cell.data("kendoEditable").options.fields.editor);
+            });
+
+            test("cell click does not enter edit mode if editable mode is inline", function() {
+                setup({ editable: "inline" } );
+                var cell = table.find("td:first").click();
+
+                ok(!cell.find(":input").length);
             });
 
             test("cell click does not enter edit mode if editable is false", function() {
@@ -640,6 +655,18 @@
                 dataSource.get("bar").set("name", "moo");
 
                 ok(table.find("tr:first > td").eq(1).find("span.k-dirty").length);
+            });
+
+            test("editing row passes column fields to Editable", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var editable = tr.data("kendoEditable");
+                equal(editable.options.fields.length, 2);
+                equal(editable.options.fields[0].field, "foo");
+                equal(editable.options.fields[1].field, "name");
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>

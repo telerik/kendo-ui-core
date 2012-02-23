@@ -177,6 +177,10 @@
                     "url": "grid/editing.html"
                 },
                 {
+                    "text": "Inline Editing",
+                    "url": "grid/editing-inline.html"
+                },
+                {
                     "text": "Virtualization of local data",
                     "url": "grid/virtualization-local-data.html"
                 },
