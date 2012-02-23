@@ -1071,11 +1071,7 @@
                 };
 
             if (editable) {
-                var mode = "incell";
-
-                if (editable !== true) {
-                   mode = editable.mode || editable;
-                }
+                var mode = that._editMode();
 
                 if (mode === "incell") {
                     if (editable.update !== false) {
@@ -1238,7 +1234,22 @@
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
+
+                if (that._editMode() === "inline") {
+                    that.dataSource.sync();
+                }
             }
+        },
+
+        _editMode: function() {
+            var mode = "incell",
+                editable = this.options.editable;
+
+            if (editable !== true) {
+                mode = editable.mode || editable;
+            }
+
+            return mode;
         },
 
         editRow: function(row) {
@@ -1375,13 +1386,9 @@
                 var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
                     model = dataSource.insert(),
                     id = model.uid,
-                    mode = "incell",
+                    mode = that._editMode(),
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
                     cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").first();
-
-                if (options.editable !== true) {
-                   mode = options.editable.mode || options.editable;
-                }
 
                 if (mode === "inline" && row.length) {
                     that.editRow(row);
