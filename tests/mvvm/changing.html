@@ -190,6 +190,23 @@
                 strictEqual(viewModel.selectedItem, viewModel.foo[1]);
             });
 
+            test("select bound to complex object updates simple value", function() {
+                var viewModel = kendo.observable( {
+                    foo: [ { text: "foo" }, { text: "bar" } ],
+                    selectedItem: "foo"
+                });
+
+                var dom = $('<select data-value-field="text" data-bind="source:foo,value:selectedItem"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:last").attr("selected", "selected");
+
+                dom.trigger("change");
+
+                strictEqual(viewModel.selectedItem, "bar");
+            });
+
             test("multi select has same item count after change", function() {
                 var viewModel = kendo.observable( {
                     items: ["foo", "bar", "baz"],
