@@ -1,13 +1,13 @@
 <div id="example" class="k-content">
-    <img data-bind="attr: { src: selectedFood.url, alt: imageAlt, title: imageTitle }" />
+    <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
 
-    <label>src:<select data-text-field="name" data-value-field="url" data-bind="source: food, value: selectedFood" ></select></label>
+    <label>src:<select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select></label>
     <label>alt:<input type="textbox" data-bind="value: imageAlt" /></label>
     <label>title:<input type="textbox" data-bind="value: imageTitle" /></label>
     <script>
         $(document).ready(function() {
             var viewModel = kendo.observable({
-                selectedFood: null,
+                imageSrc: null,
                 food: [
                     { name: "Mishi Kobe Niku", url: "../../content/shared/images/foods/9.jpg" },
                     { name: "Chef Anton's Cajun Seasoning", url: "../../content/shared/images/foods/4.jpg" },
@@ -17,29 +17,23 @@
                 imageTitle: "Title attribute value"
             });
 
-            viewModel.selectedFood = viewModel.food[0];
+            viewModel.imageSrc = viewModel.food[0].url;
 
             kendo.bind($("#example"), viewModel);
         });
     </script>
 <pre>
-&lt;img src="<span data-bind='text: selectedFood.url'></span>" alt="<span data-bind='text: imageAlt'></span>" title="<span data-bind='text: imageTitle'></span>" /&gt;
+&lt;img src="<span data-bind='text: imageSrc'></span>" alt="<span data-bind='text: imageAlt'></span>" title="<span data-bind='text: imageTitle'></span>" /&gt;
 </pre>
     <div class="code-sample">
         <h4 class="code-title">View source code:</h4>
         <pre class="prettyprint">
 &lt;div id=&quot;example&quot;&gt;
-    &lt;img data-bind=&quot;attr: { src: selectedFood.url, alt: imageAlt, title: imageTitle }&quot; /&gt;
+    &lt;img data-bind=&quot;attr: { src: imageSrc, alt: imageAlt, title: imageTitle }&quot; /&gt;
 
-    &lt;label&gt;
-        src:&lt;select data-text-field=&quot;name&quot; data-value-field=&quot;url&quot; data-bind=&quot;source: food, value: selectedFood&quot;&gt;&lt;/select&gt;
-    &lt;/label&gt;
-    &lt;label&gt;
-        alt:&lt;input type=&quot;textbox&quot; data-bind=&quot;value: imageAlt&quot; /&gt;
-    &lt;/label&gt;
-    &lt;label&gt;
-        title:&lt;input type=&quot;textbox&quot; data-bind=&quot;value: imageTitle&quot; /&gt;
-    &lt;/label&gt;
+    &lt;label&gt;src:&lt;select data-text-field=&quot;name&quot; data-value-field=&quot;url&quot; data-bind=&quot;source: food, value: imageSrc&quot; &gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;label&gt;alt:&lt;input type=&quot;textbox&quot; data-bind=&quot;value: imageAlt&quot; /&gt;&lt;/label&gt;
+    &lt;label&gt;title:&lt;input type=&quot;textbox&quot; data-bind=&quot;value: imageTitle&quot; /&gt;&lt;/label&gt;
 &lt;/div&gt;
         </pre>
     </div>
@@ -47,19 +41,19 @@
         <h4 class="code-title">View model source code:</h4>
         <pre class="prettyprint">
 var viewModel = kendo.observable({
-    selectedFood: null,
+    imageSrc: null,
     food: [
-        { name: "Mishi Kobe Niku", url: "../../content/shared/images/foods/9.jpg" },
-        { name: "Chef Anton's Cajun Seasoning", url: "../../content/shared/images/foods/4.jpg" },
-        { name: "Queso Manchego La Pastora", url: "../../content/shared/images/foods/12.jpg" },
+        { name: &quot;Mishi Kobe Niku&quot;, url: &quot;../../content/shared/images/foods/9.jpg&quot; },
+        { name: &quot;Chef Anton's Cajun Seasoning&quot;, url: &quot;../../content/shared/images/foods/4.jpg&quot; },
+        { name: &quot;Queso Manchego La Pastora&quot;, url: &quot;../../content/shared/images/foods/12.jpg&quot; },
     ],
-    imageAlt: "Alt attribute value",
-    imageTitle: "Title attribute value"
+    imageAlt: &quot;Alt attribute value&quot;,
+    imageTitle: &quot;Title attribute value&quot;
 });
 
-viewModel.selectedFood = viewModel.food[0];
+viewModel.imageSrc = viewModel.food[0].url;
 
-kendo.bind($("#example"), viewModel);
+kendo.bind($(&quot;#example&quot;), viewModel);
         </pre>
     </div>
     <style scoped>
