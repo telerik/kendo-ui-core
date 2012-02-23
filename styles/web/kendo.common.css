@@ -1406,7 +1406,9 @@ html body .k-grid tbody .k-button-icon
 }
 
 .k-edit-cell .k-textbox,
-.k-edit-cell .k-widget
+.k-edit-cell .k-widget,
+.k-grid-edit-row .k-textbox,
+.k-grid-edit-row .k-widget
 {
     width: 100%;
     -moz-box-sizing: border-box;
@@ -1414,7 +1416,9 @@ html body .k-grid tbody .k-button-icon
 }
 
 *+html .k-edit-cell .k-textbox,
-*+html .k-edit-cell .k-widget
+*+html .k-edit-cell .k-widget,
+*+html .k-grid-edit-row .k-textbox,
+*+html .k-grid-edit-row .k-widget
 {
     width: 96%;
 }
