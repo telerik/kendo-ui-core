@@ -467,8 +467,10 @@
                 var value = this.bindings["value"].get();
                 if (value instanceof ObservableArray) {
                     value.splice.apply(value, [0, value.length].concat(values));
-                } else {
+                } else if (value instanceof ObservableObject || !field) {
                     this.bindings["value"].set(values[0]);
+                } else {
+                    this.bindings["value"].set(values[0].get(field));
                 }
             },
             update: function() {
@@ -487,7 +489,7 @@
                 for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
                     value = values[valueIndex];
 
-                    if (field) {
+                    if (field && value instanceof ObservableObject) {
                         value = value.get(field);
                     }
 
