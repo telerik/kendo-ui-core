@@ -6342,11 +6342,18 @@
             });
         },
 
-        reflow: function(box) {
+        reflow: function() {
             var pointer = this,
-                options = pointer.options;
+                options = pointer.options,
+                scale = pointer.scale,
+                ring = scale.ring,
+                c = ring.c,
+                capSize = ring.r * options.capSize;
 
-            pointer.box = box;
+            pointer.box = new Box2D(
+                c.x - capSize, c.y - capSize,
+                c.x + capSize, c.y + capSize
+            );
         },
 
         _createNeedle: function(view) {
@@ -6405,10 +6412,10 @@
             majorTickAlignment: INSIDE,
             minorTickSize: 10,
             minorTickAlignment: INSIDE,
-            startAngle: -30,
-            endAngle: 240,
+            startAngle: 0,
+            endAngle: 230,
             labels: {
-                position: INSIDE,
+                position: OUTSIDE,
                 padding: 10
             }
         },
@@ -6417,11 +6424,10 @@
             var scale = this,
                 options = scale.options,
                 center = box.center(),
-                radius = math.min(center.x, center.y),
-                ring = new Chart.Ring(
+                radius = math.min(box.height(), box.width()) / 2,
+                ring = scale.ring || new Chart.Ring(
                     center, radius - options.majorTickSize,
-                    radius, options.startAngle, options.endAngle - options.startAngle
-                );
+                    radius, options.startAngle, options.endAngle - options.startAngle);
 
             scale.ring = ring;
             scale.box = ring.getBBox();
@@ -6512,7 +6518,8 @@
                 }
 
                 label.reflow(new Box2D(cx - halfWidth, cy - halfHeight,
-                        cx + halfWidth, cy + halfHeight));
+                    cx + halfWidth, cy + halfHeight));
+                scale.box.wrap(label.box);
             }
         },
 
@@ -6566,27 +6573,70 @@
             border: {
                 color: BLACK,
                 width: 0
-            }
+            },
+            padding: getSpacing(10)
         },
 
         reflow: function(box) {
             var plotArea = this,
+                options = plotArea.options,
                 scale = plotArea.scale,
+                pointer = plotArea.pointer,
                 plotBox;
 
-            scale.reflow(box);
-            box.y2 += 300;
+            box = box.clone().unpad(options.padding);
 
             scale.reflow(box);
             plotBox = scale.ring.getBBox().clone();
 
             if (plotArea.options.pointer != false) {
-                plotArea.pointer.scale = scale;
-                plotArea.pointer.reflow(box);
-                //plotBox.wrap(plotArea.pointer.getBBox());
+                pointer.scale = scale;
+                pointer.reflow();
+                plotBox.wrap(pointer.box);
             }
 
             plotArea.box = plotBox;
+            plotArea.fitScale(box);
+            var plotBoxCenter = plotArea.box.center(),
+                boxCenter = box.center(),
+                paddingX = plotBoxCenter.x - boxCenter.x,
+                paddingY = plotBoxCenter.y - boxCenter.y,
+                ring = scale.ring;
+
+            ring.c.x -= paddingX;
+            ring.c.y -= paddingY;
+
+            scale.reflow(box);
+            pointer.reflow();
+
+            plotArea.box = plotBox;
+        },
+
+        fitScale: function(box) {
+            var plotArea = this,
+                options = plotArea.options,
+                padding = options.padding,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer,
+                ring = scale.ring,
+                radius = ring.r,
+                step = 1;
+
+            while (plotArea.box.width() < box.width() && plotArea.box.height() < box.height()) {
+                ring.r += step;
+                ring.ir += step;
+                scale.reflow(box);
+                pointer.reflow();
+                plotArea.box = scale.box.clone().wrap(pointer.box);
+            }
+
+            while (plotArea.box.width() > box.width() && plotArea.box.height() > box.height()) {
+                ring.r -= step;
+                ring.ir -= step;
+                scale.reflow(box);
+                pointer.reflow();
+                plotArea.box = scale.box.clone().wrap(pointer.box);
+            }
         },
 
         render: function() {
