@@ -12,7 +12,7 @@
         isFunction = $.isFunction,
         math = Math,
         Template,
-        JSON = JSON || {},
+        JSON = window.JSON || {},
         support = {},
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
         FUNCTION = "function",
