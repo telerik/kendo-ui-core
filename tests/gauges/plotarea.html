@@ -19,6 +19,7 @@
                 Box2D = Chart.Box2D,
                 Point2D = Chart.Point2D,
                 RadialScale = Gauge.RadialScale,
+                Pointer = Gauge.Pointer,
                 radialScale,
                 ring,
                 radius = 100,
@@ -28,16 +29,23 @@
             Chart.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function reflowScale(scaleOptions) {
-                plotArea.scale = new RadialScale(scaleOptions);
+                plotArea.scale = new RadialScale(
+                    $.extend({
+                        labels: { visible: false }
+                    }, scaleOptions));
+                plotArea.pointer = {
+                    reflow: function () {},
+                    box: new Box2D(100, 100, 100, 100)
+                };
 
                 plotArea.reflow(chartBox);
 
                 ring = plotArea.scale.ring;
             }
 
-            module("GaugePlotArea", {
+            module("PlotArea", {
                 setup: function() {
-                    plotArea = new GaugePlotArea({ pointer: false });
+                    plotArea = new GaugePlotArea();
                 }
             });
 
