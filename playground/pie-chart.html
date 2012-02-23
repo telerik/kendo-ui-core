@@ -21,34 +21,13 @@
         ];
 
         $(document).ready(function() {
-          $("#container").kendoChart({
-               title: {
-                   text: "My Chart Title"
-               },
-               seriesDefaults: {
-                   tooltip: {
-                       visible: true,
-                       template: "#= category # - #= value #"
-                   }
-               },
-               series: [
-                   {
-                       name: "Series 1",
-                       data: [200, 450, 300, 125]
-                   }
-               ],
-               categoryAxis: {
-                   categories: [2000, 2001, 2002, 2003]
-               }
-          });
-/*
-            $("#container1").kendoChart({
+            $("#container").kendoChart({
                 title: {
                     text: "Lollipop",
                     position: "top",
                     visible: false
                 },
-                theme: "kendo",
+                theme: "default",
                 legend: {
                     position: "left",
                     visible: false
@@ -56,11 +35,12 @@
                 dataSource: data,
                 seriesDefaults: {
                     type: "pie",
-                    padding: 100,
+                    padding: 10,
                     labels: {
                         visible: true,
                         distance: 35,
-                        font: "15px Arial, sans-serif"
+                        font: "15px Arial, sans-serif",
+                        position: "center"
                     }
                 },
                 transitions: true,
@@ -85,72 +65,6 @@
                       }, {
                           value: 1,
                           name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 40,
-                          name: "Value B"
-                      }, {
-                          value: 40,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value B"
-                      }, {
-                          value: 1,
-                          name: "Value H"
-                      }, {
-                          value: 1,
-                          name: "Value B"
-                      }, {
-                          value: 40,
-                          name: "Value B"
                       }]
                 }],
                 chartArea: {
@@ -160,6 +74,7 @@
                     }
                 }
             });
+/*
 
             $("#container2").kendoChart({
                 title: {
