@@ -555,6 +555,10 @@
                 {
                     "text": "Basic usage",
                     "url": "mvvm/index.html"
+                },
+                {
+                    "text": "HTML element binding",
+                    "url": "mvvm/elements.html"
                 }
             ]
         },
