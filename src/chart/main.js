@@ -6322,6 +6322,24 @@
             }
 
             options.value = newValue;
+
+            pointer.repaint();
+        },
+
+        repaint: function() {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                needle = pointer.elements[0];
+
+            needle.options.rotation[0] = scale.getSlotAngle(options.value)
+                                       - scale.getSlotAngle(pointer._initialValue);
+
+            needle.refresh(doc.getElementById(options.id));
+
+            deepExtend(options.animation, {
+                startAngle: 90 + scale.getSlotAngle(scale.options.min)
+            });
         },
 
         reflow: function(box) {
@@ -6342,8 +6360,9 @@
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
                 center = box.center(),
+                initialValue = pointer._initialValue = pointer.options.value,
                 // pointer calculation is done at 90deg, so points are rotated initially
-                rotation = 90 - scale.getSlotAngle(pointer.options.value);
+                rotation = 90 - scale.getSlotAngle(initialValue);
 
             deepExtend(pointer.options.animation, {
                 startAngle: rotation - 90 + scale.getSlotAngle(scale.options.min),
@@ -6352,7 +6371,7 @@
 
             return [
                 view.createPolyline([
-                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.majorTickSize, center.x, center.y, rotation),
+                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.minorTickSize, center.x, center.y, rotation),
                     rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, rotation),
                     rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, rotation)
                 ], true, pointerOptions),
