@@ -497,6 +497,7 @@
     <Content Include="Views\web\grid\aggregates.cshtml" />
     <Content Include="Views\web\listview\index.cshtml" />
     <Content Include="Views\web\listview\remote-data.cshtml" />
+    <Content Include="Views\web\listview\editing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

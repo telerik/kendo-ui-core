@@ -1,0 +1,117 @@
+<div id="example" class="k-content">
+    <div class="k-toolbar k-grid-toolbar">
+        <a class="k-button k-button-icontext k-add-button" href="#"><span class="k-icon k-add"></span>Add new record</a>
+    </div>
+    <div id="listView"></div>
+
+    <div class="k-grid-pager">
+        <div id="pager"></div>
+    </div>
+
+    <script type="text/x-kendo-tmpl" id="template">
+        <div>
+            <dl>
+                <dt>Product Name</dt>
+                <dd>${ProductName}</dd>
+                <dt>Unit Price</dt>
+                <dd>${kendo.toString(UnitPrice, "c")}</dd>
+                <dt>Units In Stock</dt>
+                <dd>${UnitsInStock}</dd>
+                <dt>Discontinued</dt>
+                <dd>${Discontinued}</dd>
+            </dl>
+            <a class="k-button k-button-icontext k-edit-button" href="\\#"><span class="k-icon k-edit"></span>Edit</a>
+            <a class="k-button k-button-icontext k-delete-button" href="\\#"><span class="k-icon k-delete"></span>Delete</a>
+        </div>
+    </script>
+
+    <script type="text/x-kendo-tmpl" id="editTemplate">
+        <div>
+            <dl>
+                <dt>Product Name</dt>
+                <dd><input type="text" data-bind="value:ProductName" name="ProductName" required="required" /></dd>
+                <dt>Unit Price</dt>
+                <dd><input type="text" data-bind="value:UnitPrice" data-role="numerictextbox" data-type="number" name="UnitPrice" required="required" min="1"/></dd>
+                <dt>Units In Stock</dt>
+                <dd><input type="text" data-bind="value:UnitsInStock" data-role="numerictextbox" name="UnitsInStock" required="required" data-type="number" min="0"/></dd>
+                <dt>Discontinued</dt>
+                <dd><input type="checkbox" name="Discontinued" data-bind="checked:Discontinued"></dd>
+            </dl>
+            <a class="k-button k-button-icontext k-update-button" href="\\#"><span class="k-icon k-update"></span>Save</a>
+            <a class="k-button k-button-icontext k-cancel-button" href="\\#"><span class="k-icon k-cancel"></span>Cancel</a>
+        </div>
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read:  {
+                            url: crudServiceBaseUrl + "/Products",
+                            dataType: "jsonp"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            dataType: "jsonp"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            dataType: "jsonp"
+                        },
+                        create: {
+                            url: crudServiceBaseUrl + "/Products/Create",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function(options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return {models: kendo.stringify(options.models)};
+                            }
+                        }
+                    },
+                    batch: true,
+                    pageSize: 3,
+                    schema: {
+                        model: {
+                            id: "ProductID",
+                            fields: {
+                                ProductID: { editable: false, nullable: true },
+                                ProductName: "ProductName",
+                                UnitPrice: { type: "number" },
+                                Discontinued: { type: "boolean" },
+                                UnitsInStock: { type: "number" }
+                            }
+                        }
+                    }
+                });
+
+
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
+
+            var listView = $("#listView").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html()),
+                editTemplate: kendo.template($("#editTemplate").html())
+            }).delegate(".k-edit-button", "click", function(e) {
+                listView.edit($(this).parent());
+                e.preventDefault();
+            }).delegate(".k-delete-button", "click", function(e) {
+                listView.remove($(this).parent());
+                e.preventDefault();
+            }).delegate(".k-update-button", "click", function(e) {
+                listView.save();
+                e.preventDefault();
+            }).delegate(".k-cancel-button", "click", function(e) {
+                listView.cancel();
+                e.preventDefault();
+            }).data("kendoListView");
+
+            $(".k-add-button").click(function(e) {
+                listView.add();
+                e.preventDefault();
+            });
+        });
+    </script>
+</div>
