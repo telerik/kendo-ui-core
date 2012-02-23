@@ -3,7 +3,7 @@
     <head>
         <title>Build your own Kendo</title>
         <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-        <script src="http://cdn.kendostatic.com/2011.3.1007/js/kendo.core.min.js"></script>
+        <script src="scripts/template.js"></script>
         <script src="scripts/script-resolver.js"></script>
         <link href="styles/configurator.css" rel="stylesheet"/>
     </head>
@@ -244,7 +244,7 @@
             }
 
             function formatBytes(value) {
-                return kendo.format("{0:N0} kB", value / 1024);
+                return (value / 1024) + "kB";
             }
         </script>
     </body>
