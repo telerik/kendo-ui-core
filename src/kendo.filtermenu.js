@@ -28,7 +28,7 @@
     var defaultTemplate =
             '<div>' +
                 '<input type="hidden" name="filters[0].field" value="#=field#"/>' +
-                '<input type="hidden" name="filters[1].field" value="#=field#"/>' +
+                '#if(extra){#' + '<input type="hidden" name="filters[1].field" value="#=field#"/>' + '#}#'+
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
                 '<select name="filters[0].operator">'+
                     '#for(var op in operators){#'+
