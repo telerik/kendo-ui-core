@@ -6437,9 +6437,11 @@
         getSlotAngle: function(value) {
             var options = this.options,
                 startAngle = options.startAngle,
-                angle = options.endAngle - startAngle;
+                angle = options.endAngle - startAngle,
+                min = options.min,
+                max = options.max;
 
-            return (value / options.max * angle) + startAngle;
+            return ((value - min) / (max - min) * angle) + startAngle;
         },
 
         renderTicks: function(view) {
