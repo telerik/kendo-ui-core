@@ -85,6 +85,12 @@
                 equal(filterMenu.form.find("input[name='filters[1].value']").length, 1);
             });
 
+            test("second hidden input should not be present if extra filters is false", function(){
+                filterMenu = new FilterMenu(dom, {dataSource: dataSource, extra: false});
+
+                equal(filterMenu.form.find("input[name='filters[1].field']").length, 0);
+            });
+
             test("initializes the name of the logical operation select from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
