@@ -728,7 +728,7 @@
 
             if (!template) {
                 that._toggle(false);
-                footer.remove();
+                footer.hide();
                 return;
             }
 
@@ -736,9 +736,10 @@
                 footer = $('<div class="k-footer"><a href="#" class="k-link k-nav-today"></a></div>').appendTo(element);
             }
 
-            that._today = footer.find("." + TODAY)
-                                 .html(template(today))
-                                 .attr("title", kendo.toString(today, "D"));
+            that._today = footer.show()
+                                .find("." + TODAY)
+                                .html(template(today))
+                                .attr("title", kendo.toString(today, "D"));
 
             that._toggle();
         },
