@@ -10,7 +10,7 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.chart.js"></script>
-        <script src="util.js"></script>
+        <script src="../chart/util.js"></script>
         <script>
             var Chart = kendo.ui.Chart,
                 Gauge = kendo.ui.Gauge,
@@ -18,27 +18,52 @@
                 Point2D = Chart.Point2D,
                 Pointer = Gauge.Pointer,
                 pointer,
-                ring,
                 chartBox = new Box2D(0, 0, 400, 300);
 
             // Tests expect particular font size
             Chart.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function stubScale() {
-                return new Gauge.RadialScale();
+                var scale = new Gauge.RadialScale();
+
+                scale.ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
+
+                return scale;
             }
 
             module("Pointer", {
                 setup: function() {
-                    pointer = new Pointer({
-                            scale: stubScale(),
+
+                    pointer = new Pointer(stubScale(), {
                             type: "needle"
                         });
+
+                    pointer.getViewElements(new Chart.SVGView());
                 }
             });
 
-            test("", function() {
+            test("value() updates value", function() {
+                pointer.value(10);
 
+                equal(pointer.options.value, 10);
+            });
+
+            test("value() returns value", function() {
+                pointer.options.value = 15;
+
+                equal(pointer.value(), 15);
+            });
+
+            test("value() calls repaint()", function() {
+                var called = false;
+
+                pointer.repaint = function() {
+                    called = true;
+                };
+
+                pointer.value(15);
+
+                ok(called);
             });
 
         </script>

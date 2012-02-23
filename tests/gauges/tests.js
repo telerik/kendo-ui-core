@@ -8,6 +8,10 @@ tests.push(
         title: "Radial Scale"
     },
     {
+        page: "gauges/pointer.html",
+        title: "Pointer"
+    },
+    {
         page: "gauges/gaugeplotarea.html",
         title: "PlotArea"
     }
