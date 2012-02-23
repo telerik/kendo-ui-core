@@ -1,5 +1,5 @@
         <div id="example" class="k-content">
-            <div id="gauge"></div>
+            <div id="gauge" style="width: 700px; height: 300px; border: 2px solid blue;"></div>
 
             <button class="k-button" id="set-10">Set value to 10</button>
             <button class="k-button" id="set-60">Set value to 60</button>
@@ -14,7 +14,13 @@
                         },
 
                         scale: {
-                            minorUnit: 5
+                            minorUnit: 5,
+                            startAngle: 0,
+                            endAngle: 230,
+                            max: 180,
+                            labels: {
+                                position: "outside"
+                            }
                         }
                     });
                 }
