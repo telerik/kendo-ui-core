@@ -149,6 +149,7 @@
          * @event
          * @param {Event} e
          * @param {jQueryObject} e.target The clicked DOM element
+         * @param {jQueryObject} e.button The button DOM element
          */
         CLICK
         ],
@@ -169,11 +170,12 @@
         },
 
         _release: function(e) {
+            var that = this;
             if (e.which > 1) {
                 return;
             }
 
-            if (this.trigger(CLICK, {target: $(e.target)})) {
+            if (that.trigger(CLICK, {target: $(e.target), button: that.element})) {
                 e.preventDefault();
             }
         },
