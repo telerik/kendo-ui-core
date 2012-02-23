@@ -63,6 +63,14 @@
                 }
             });
 
+            test("render multiple column commands", function() {
+                setup({ columns: [{ command: ["destroy", "edit"] }] });
+                var cell = table.find("tr:first").find("td:first");
+                equal(cell.find("a.k-button").length, 2);
+                equal(cell.find("a.k-grid-delete").length, 1);
+                equal(cell.find("a.k-grid-edit").length, 1);
+            });
+
             test("cell click enters edit mode", function() {
                 setup();
                 var cell = table.find("td:first").click();
