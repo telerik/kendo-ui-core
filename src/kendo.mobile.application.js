@@ -478,9 +478,7 @@
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
 
-                // Reset the visible scrollbar,
-                // TODO: make a scrollIntoView scroller method.
-                $(".km-scroll-container:visible").css(TRANSFORM, "none");
+                that.view.scroller.reset();
             });
         },
 
