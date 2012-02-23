@@ -2803,6 +2803,7 @@
             record,
             firstField = fields[0],
             secondField = fields[1],
+            value,
             option;
 
         for (idx = 0, length = options.length; idx < length; idx++) {
@@ -2810,7 +2811,16 @@
             option = options[idx];
 
             record[firstField.field] = option.text;
-            record[secondField.field] = option.value;
+
+            value = option.attributes.value;
+
+            if (value && value.specified) {
+                value = option.value;
+            } else {
+                value = option.text;
+            }
+
+            record[secondField.field] = value;
 
             data.push(record);
         }
