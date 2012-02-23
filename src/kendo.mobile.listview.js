@@ -7,7 +7,7 @@
         ITEM_SELECTOR = ".km-list > li",
         proxy = $.proxy,
         GROUP_CLASS = "km-group-title",
-        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '" />',
+        GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><span class="km-text"></span></div>',
         GROUP_TEMPLATE = kendo.template('<li><div class="' + GROUP_CLASS + '">#= this.headerTemplate(data) #</div><ul>#= kendo.render(this.template, data.items)#</ul></li>'),
         WRAPPER = '<div class="km-listview-wrapper" />',
         FUNCTION = "function",
@@ -319,7 +319,7 @@
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
-            headerTemplate: "${value}",
+            headerTemplate: '<span class="km-text">${value}</span>',
             pullOffset: 140,
             style: ""
         },
