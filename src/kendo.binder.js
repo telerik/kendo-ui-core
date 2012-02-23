@@ -433,14 +433,26 @@
                     element = this.element,
                     source = this.bindings.source.get(),
                     field = this.options.valueField || this.options.textField,
+                    option, value,
                     idx,
                     length;
 
                 for (idx = 0, length = element.options.length; idx < length; idx++) {
-                    if (element.options[idx].selected) {
-                        values.push(element.options[idx].value || element.options[idx].text);
+                    option = element.options[idx];
+
+                    if (option.selected) {
+                        value = option.attributes.value;
+
+                        if (value && value.specified) {
+                            value = option.value;
+                        } else {
+                            value = option.text;
+                        }
+
+                        values.push(value);
                     }
                 }
+
                 if (field) {
                     for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
                         for (idx = 0, length = source.length; idx < length; idx++) {
