@@ -273,7 +273,6 @@
              * @param {jQueryObject} e.item The selected list item.
              * @param {jQueryObject} e.target The clicked DOM element.
              * @param {Object} e.dataItem The corresponding dataItem associated with the item (available in databound mode only).
-             * @param {String} e.buttonName The name of the clicked Kendo mobile Button. Specified by setting the <code>name</code> data attribute of the button widget element.
              * @param {kendo.ui.MobileButton} e.button The clicked Kendo mobile Button.
              *
              * @exampleTitle Handling button clicks
@@ -284,7 +283,6 @@
              *
              * <script>
              *  function listViewClick(e) {
-             *      console.log(e.buttonName); // "foo" or "bar"
              *      console.log(e.button); // Kendo mobile Button instance
              *  }
              * </script>
@@ -428,14 +426,13 @@
                 item = $(e.currentTarget),
                 target = $(e.target),
                 button = target.closest("[" + kendo.attr("name") + "]", item),
-                buttonName = button.data(kendo.ns + "name"),
                 id = item.attr(kendo.attr("uid"));
 
             if (id) {
                 dataItem = that.dataSource.getByUid(id);
             }
 
-            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, buttonName: buttonName, button: button.data("kendoMobileButton")})) {
+            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, button: button.data("kendoMobileButton")})) {
                 e.preventDefault();
             }
         },

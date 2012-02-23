@@ -103,31 +103,45 @@
     </div>
 
     <script id="menuTemplate" type="text/x-kendo-template">
-        <a data-role="button" href="\\#">${kendo.toString(price, "c")}</a>
-        <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
-            <img src="@Url.Content("~/content/integration/sushi/images/75/${image}")" />
-            <h2>${name}</h2>
+        <a data-role="button"
+            data-click="addToCartFromList"
+            data-item-id="#:id#"
+            href="\\#">#:kendo.toString(price, "c")#</a>
+        <a
+            class="details-link"
+            data-role="listview-link"
+            href="\#details?id=#:id#">
+            <img src="@Url.Content("~/content/integration/sushi/images/75/#:image#")" />
+            <h2>#:name#</h2>
             <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added to cart</span>
         </a>
     </script>
 
     <script id="cartItemTemplate" type="text/x-kendo-template">
-        <a class="red-button" data-role="button" href="\\#">&nbsp;&\\#x2716;&nbsp;</a>
-        <a class="details-link" data-role="listview-link" href="\#details?id=${id}">
-            <img src="@Url.Content("~/content/integration/sushi/images/75/${image}")" />
-            <h2>${name}</h2>
-            <span class="price">${kendo.toString(price, "c")}</span>
+        <a
+            class="red-button"
+            data-click="removeItemFromList"
+            data-item-id="#:id#"
+            data-role="button"
+            href="\\#">&nbsp;&\\#x2716;&nbsp;</a>
+        <a
+            class="details-link"
+            data-role="listview-link"
+            href="\#details?id=#:id#">
+            <img src="@Url.Content("~/content/integration/sushi/images/75/#:image#")" />
+            <h2>#:name#</h2>
+            <span class="price">#:kendo.toString(price, "c")#</span>
         </a>
     </script>
 
     <script id="detailTemplate" type="text/x-kendo-template">
         <aside>
-        <img src="@Url.Content("~/content/integration/sushi/images/200/${image}")" />
-        <span class="price">${kendo.toString(price, "c")}</span>
+        <img src="@Url.Content("~/content/integration/sushi/images/200/#:image#")" />
+        <span class="price">#:kendo.toString(price, "c")#</span>
         <a data-role="button" href="\\#" id="add-to-cart">Order</a>
         </aside>
-        <h2>${name}</h2>
-        <p>${description}</p>
+        <h2>#:name#</h2>
+        <p>#:description#</p>
         <span class="added"#= cartDataSource.get(id) ? "" : 'style="display: none"' #>Item added to cart</span>
     </script>
 
@@ -167,19 +181,21 @@
         var itemDetailsTemplate = kendo.template($("#detailTemplate").text());
 
         function addToCartFromList(e) {
-            if (e.buttonName === "add") {
-                cartDataSource.add(e.dataItem);
-                e.button.element.parent().find(".added").show();
-                e.preventDefault();
-            }
+            var button = e.button,
+                item = ds.get(button.data("itemId"));
+
+            cartDataSource.add(item);
+            button.parent().find(".added").show();
+
+            e.preventDefault();
         }
 
         function removeItemFromList(e) {
-            if (e.buttonName === "remove") {
-                cartDataSource.remove(e.dataItem);
-                $(".km-scroll-container:visible").css(kendo.support.transitions.css + "transform", "none");
-                e.preventDefault();
-            }
+            var item = ds.get(e.button.data("itemId"));
+
+            cartDataSource.remove(item);
+            $(".km-scroll-container:visible").css(kendo.support.transitions.css + "transform", "none");
+            e.preventDefault();
         }
 
         function checkout() {
@@ -189,7 +205,6 @@
         function initCartView() {
             $("#cartList").kendoMobileListView({
                 dataSource: cartDataSource,
-                click: removeItemFromList,
                 template: $("#cartItemTemplate").text()
             });
         }
@@ -197,7 +212,6 @@
         function initIndexView() {
             $("#featured").kendoMobileListView({
                 dataSource: featured,
-                click: addToCartFromList,
                 template: $("#menuTemplate").text()
             });
         }
@@ -205,7 +219,6 @@
         function initMenuView() {
             $("#menuList").kendoMobileListView({
                 dataSource: ds,
-                click: addToCartFromList,
                 template: $("#menuTemplate").text()
             });
         }
