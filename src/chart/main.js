@@ -5312,12 +5312,14 @@
         setup: function() {
             var anim = this,
                 element = anim.element,
-                center = anim.options.center;
+                elementOptions = element.options,
+                animationOptions = anim.options,
+                center = animationOptions.center;
 
-            if (element.options.rotation) {
-                anim.endState = element.options.rotation[0];
-                element.options.rotation = [
-                    anim.options.startAngle,
+            if (elementOptions.rotation) {
+                anim.endState = elementOptions.rotation[0];
+                elementOptions.rotation = [
+                    animationOptions.startAngle,
                     center.x,
                     center.y
                 ];
@@ -6321,6 +6323,7 @@
                 return value;
             }
 
+            options._oldValue = options.value;
             options.value = newValue;
 
             pointer.repaint();
@@ -6335,11 +6338,15 @@
             needle.options.rotation[0] = scale.getSlotAngle(options.value)
                                        - scale.getSlotAngle(pointer._initialValue);
 
-            needle.refresh(doc.getElementById(options.id));
-
-            deepExtend(options.animation, {
-                startAngle: 90 + scale.getSlotAngle(scale.options.min)
-            });
+            if (options.animation === false) {
+                needle.refresh(doc.getElementById(options.id));
+            } else {
+                var animation = new RotationAnimation(needle, extend(options.animation, {
+                    startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(pointer._initialValue)
+                }));
+                animation.setup();
+                animation.play();
+            }
         },
 
         reflow: function() {
@@ -6371,10 +6378,12 @@
                 // pointer calculation is done at 90deg, so points are rotated initially
                 rotation = 90 - scale.getSlotAngle(initialValue);
 
-            deepExtend(pointer.options.animation, {
-                startAngle: rotation - 90 + scale.getSlotAngle(scale.options.min),
-                center: center
-            });
+            if (pointerOptions.animation !== false) {
+                deepExtend(pointerOptions.animation, {
+                    startAngle: rotation - 90 + scale.getSlotAngle(scale.options.min),
+                    center: center
+                });
+            }
 
             return [
                 view.createPolyline([
