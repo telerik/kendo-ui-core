@@ -37,31 +37,45 @@
         OrderDate: null
     }];
 
-        $("#grid").kendoGrid({
-            dataSource: {
-                data: data,
-                batch: true,
-                pageSize: 30,
-                schema: {
-                    model: {
-                        id: "ProductID",
-                        fields: {
-                            ProductID: { editable: false, nullable: true },
-                            ProductName: { validation: { required: true} },
-                            OrderDate: { type: "date" }
-                        }
+    $("#grid").kendoGrid({
+        dataSource: {
+            data: data,
+            batch: true,
+            pageSize: 30,
+            schema: {
+                model: {
+                    id: "ProductID",
+                    fields: {
+                        ProductID: { editable: false, nullable: true },
+                        ProductName: { validation: { required: true}, type: "string" },
+                        OrderDate: { type: "date" }
+                        
                     }
                 }
-            },
-            editable: true,
-            groupable: true,
-            filterable: true,
-            toolbar: ["create", "save", "cancel"],
-            columns: [
-        "ProductName",
+            }
+        },
+        editable: true,
+        groupable: true,
+        filterable: true,
+        toolbar: ["create", "save", "cancel"],
+        columns: [
+         { title: "ProductName", field: "ProductName",
+             filterable: {
+                 extra: false, //do not show extra filters
+                 operators: { // redefine the string operators
+                     string: {
+                         eq: "Is Equal To",
+                         neq: "Is Not Equal To",
+                         startswith: "Starts With",
+                         contains: "Contains"
+                     }
+                 }
+             }
+         },
+
         { field: "OrderDate", format: "{0:dd.MM.yyyy}" }
     ]
-        });
+    });
 
         window.onerror = function (message) {
 
