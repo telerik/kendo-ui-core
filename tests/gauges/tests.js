@@ -12,7 +12,7 @@ tests.push(
         title: "Pointer"
     },
     {
-        page: "gauges/gaugeplotarea.html",
+        page: "gauges/plotarea.html",
         title: "PlotArea"
     }
 );

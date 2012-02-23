@@ -31,12 +31,12 @@
                             max: 100,
                             majorTickSize: 10,
                             endAngle: 180,
-                            startAngle: 0
+                            startAngle: 0,
+                            labels: {
+                                visible: false
+                            }
                         });
 
-                    ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
-
-                    radialScale.ring = ring;
                 }
             });
 
@@ -75,6 +75,10 @@
                     majorUnit: 50,
                     minorUnit: 25
                 });
+
+                ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
+
+                radialScale.ring = ring;
 
                 var ticks = radialScale.renderTicks({
                     createLine: function() {

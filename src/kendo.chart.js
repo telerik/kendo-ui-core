@@ -6587,12 +6587,9 @@
 
             scale.reflow(box);
             plotBox = scale.box.clone();
-
-            if (plotArea.options.pointer != false) {
-                pointer.scale = scale;
-                pointer.reflow();
-                plotBox.wrap(pointer.box);
-            }
+            pointer.scale = scale;
+            pointer.reflow();
+            plotBox.wrap(pointer.box);
 
             plotArea.box = plotBox;
             plotArea.fitScale(box);
@@ -6645,11 +6642,8 @@
 
             scale = plotArea.scale = new RadialScale(options.scale);
             plotArea.append(plotArea.scale);
-
-            if (options.pointer !== false) {
-                plotArea.pointer = new Pointer(scale, options.pointer);
-                plotArea.append(plotArea.pointer);
-            }
+            plotArea.pointer = new Pointer(scale, options.pointer);
+            plotArea.append(plotArea.pointer);
         }
     });
 
