@@ -5312,12 +5312,14 @@
         setup: function() {
             var anim = this,
                 element = anim.element,
-                center = anim.options.center;
+                elementOptions = element.options,
+                animationOptions = anim.options,
+                center = animationOptions.center;
 
-            if (element.options.rotation) {
-                anim.endState = element.options.rotation[0];
-                element.options.rotation = [
-                    anim.options.startAngle,
+            if (elementOptions.rotation) {
+                anim.endState = elementOptions.rotation[0];
+                elementOptions.rotation = [
+                    animationOptions.startAngle,
                     center.x,
                     center.y
                 ];
@@ -6321,6 +6323,7 @@
                 return value;
             }
 
+            options._oldValue = options.value;
             options.value = newValue;
 
             pointer.repaint();
@@ -6330,16 +6333,21 @@
             var pointer = this,
                 scale = pointer.scale,
                 options = pointer.options,
-                needle = pointer.elements[0];
+                needle = pointer.elements[0],
+                animation;
 
             needle.options.rotation[0] = scale.getSlotAngle(options.value)
-                                       - scale.getSlotAngle(pointer._initialValue);
+                                       - scale.getSlotAngle(scale.options.min);
 
-            needle.refresh(doc.getElementById(options.id));
-
-            deepExtend(options.animation, {
-                startAngle: 90 + scale.getSlotAngle(scale.options.min)
-            });
+            if (options.animation === false) {
+                needle.refresh(doc.getElementById(options.id));
+            } else {
+                animation = new RotationAnimation(needle, extend(options.animation, {
+                    startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(scale.options.min)
+                }));
+                animation.setup();
+                animation.play();
+            }
         },
 
         reflow: function() {
@@ -6362,27 +6370,37 @@
                 ring = scale.ring,
                 c = ring.c,
                 r = ring.r,
-                pointerOptions = pointer.options,
-                capSize = r * pointerOptions.capSize,
+                options = pointer.options,
+                capSize = r * options.capSize,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
                 center = box.center(),
-                initialValue = pointer._initialValue = pointer.options.value,
+                minAngle = scale.getSlotAngle(scale.options.min),
                 // pointer calculation is done at 90deg, so points are rotated initially
-                rotation = 90 - scale.getSlotAngle(initialValue);
+                pointRotation = 90 - minAngle;
 
-            deepExtend(pointer.options.animation, {
-                startAngle: rotation - 90 + scale.getSlotAngle(scale.options.min),
-                center: center
-            });
+            if (options.animation !== false) {
+                deepExtend(options.animation, {
+                    startAngle: 0,
+                    center: center
+                });
+            }
+
+            extend(options, {
+                rotation: [
+                    scale.getSlotAngle(options.value) - minAngle,
+                    center.x,
+                    center.y
+                ]
+            })
 
             return [
                 view.createPolyline([
-                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.minorTickSize, center.x, center.y, rotation),
-                    rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, rotation),
-                    rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, rotation)
-                ], true, pointerOptions),
-                view.createCircle([center.x, center.y], capSize, pointerOptions)
+                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.minorTickSize, center.x, center.y, pointRotation),
+                    rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
+                    rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
+                ], true, options),
+                view.createCircle([center.x, center.y], capSize, options)
             ];
         },
 
