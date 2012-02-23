@@ -1362,15 +1362,24 @@
          */
         addRow: function() {
             var that = this,
+                options = that.options,
                 dataSource = that.dataSource;
 
             if ((that.editable && that.editable.end()) || !that.editable) {
                 var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
-                    model = dataSource.insert(index, {}),
+                    model = dataSource.insert(),
                     id = model.uid,
-                    cell = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
+                    mode = "incell",
+                    row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
+                    cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
-                if (cell.length) {
+                if (options.editable !== true) {
+                   mode = options.editable.mode || options.editable;
+                }
+
+                if (mode === "inline" && row.length) {
+                    that.editRow(row);
+                } else if (cell.length) {
                     that.editCell(cell);
                 }
             }

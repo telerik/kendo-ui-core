@@ -39,7 +39,7 @@
         fn = subclass.fn = subclass.prototype = new base;
 
         for (member in proto) {
-            if (typeof proto[member] === OBJECT && !(proto[member] instanceof Array)) {
+            if (typeof proto[member] === OBJECT && !(proto[member] instanceof Array) && proto[member] !== null) {
                 // Merge object members
                 fn[member] = extend(true, {}, base.prototype[member], proto[member]);
             } else {

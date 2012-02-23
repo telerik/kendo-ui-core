@@ -319,7 +319,7 @@
             });
 
             test("saveRow calls DataSource sync", function() {
-                 var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
                     tr = table.find("tr:first");
 
                 grid.editRow(tr);
@@ -329,6 +329,14 @@
                 grid.saveRow(tr);
 
                 ok(sync.calls("sync"));
+            });
+
+            test("addRow sets the first row in edit mode", function() {
+                var grid = setup({ columns: ["foo", "name"], editable: "inline" });
+
+                grid.addRow();
+
+                equal(table.find("tr:first").find("input").length, 2);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
