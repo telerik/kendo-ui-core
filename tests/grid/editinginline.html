@@ -168,6 +168,18 @@
                 equal(commandCell.find("a.k-grid-cancel").length, 1);
             });
 
+            test("editRow transforms the edit command column if column has multiple commands", function() {
+                var grid = setup({ columns: ["foo", "name", { command: ["edit", "destroy"] }], editable: "inline" }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+
+                var commandCell = tr.find("td:last");
+                equal(commandCell.find("a.k-button").length, 2);
+                equal(commandCell.find("a.k-grid-update").length, 1);
+                equal(commandCell.find("a.k-grid-cancel").length, 1);
+            });
+
             test("clicking on cancel button switch edited row in display mode", function() {
                 var grid = setup({ columns: ["foo", "name", { command: "edit" }], editable: "inline" }),
                     tr = table.find("tr:first");
@@ -337,6 +349,49 @@
                 grid.addRow();
 
                 equal(table.find("tr:first").find("input").length, 2);
+            });
+
+            test("edit event is raised when entering edit mode", 2, function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "inline",
+                    edit: function(e) {
+                        ok(e.container.find("input").length);
+                        equal(e.model, grid.dataSource.get("bar"));
+                    }
+                });
+
+                grid.editRow(table.find("tr:first"));
+            });
+
+            test("save event is raised when item is updated", 2, function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "inline",
+                    save: function(e) {
+                        equal(e.model, dataSource.get("bar"));
+                        ok(e.container.length);
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+                row.find("td:first input").val("baz").change();
+                grid.saveRow();
+            });
+            test("sync is not call if save event is canceled", function() {
+                var grid = setup({
+                    columns: ["foo", "name"],
+                    editable: "inline",
+                    save: function(e) {
+                        e.preventDefault();
+                    }
+                }),
+                row = table.find("tr:first");
+
+                grid.editRow(row);
+                grid.saveRow();
+                equal(row.find("input").length, 2);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
