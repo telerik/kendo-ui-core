@@ -314,18 +314,18 @@
 
             test("tracking changes of fields bound to style", function() {
                 var viewModel = kendo.observable( {
-                    foo: "none",
+                    foo: "1px",
                     bar: "10px"
                 });
 
-                var dom = $('<div data-bind="style: { display: foo, top: bar }"/>');
+                var dom = $('<span data-bind="style: { left: foo, top: bar }"/>');
 
                 kendo.bind(dom, viewModel);
 
-                viewModel.set("foo", "inline");
+                viewModel.set("foo", "2px");
                 viewModel.set("bar", "20px");
 
-                equal(dom.css("display"), "inline");
+                equal(dom.css("left"), "2px");
                 equal(dom.css("top"), "20px")
             });
 

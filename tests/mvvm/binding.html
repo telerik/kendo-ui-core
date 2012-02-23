@@ -308,7 +308,7 @@
             });
 
             test("binding the style attribute", function() {
-                var dom = $('<div data-bind="style: { display:foo, text-decoration: bar }" />');
+                var dom = $('<div data-bind="style: { display:foo, textDecoration: bar }" />');
 
                 kendo.bind(dom, { foo: "none", bar: "underline" });
 
