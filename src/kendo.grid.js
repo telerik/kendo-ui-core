@@ -1261,7 +1261,7 @@
                         fields.push({ field: column.field, format: column.format, editor: column.editor });
                         cell.attr("data-container-for", column.field);
                         cell.empty();
-                    } else if (column.command === "edit") {
+                    } else if (column.command && hasCommand(column.command, "edit")) {
                         cell.empty();
                         $(that._createButton("update") + that._createButton("canceledit")).appendTo(cell);
                     }
@@ -1276,6 +1276,8 @@
                         model: model,
                         clearContainer: false
                     }).data("kendoEditable");
+
+                that.trigger(EDIT, { container: row, model: model });
             }
         },
 
@@ -1299,9 +1301,12 @@
         saveRow: function() {
             var that = this,
                 container = that._editContainer,
+                model = that._modelForContainer(container),
                 editable = that.editable;
 
-            if (container && editable && editable.end()) {
+            if (container && editable && editable.end() &&
+                !that.trigger(SAVE, { container: container, model: model } )) {
+
                 that._displayRow(container);
                 that._distroyEditable();
                 that.dataSource.sync();
@@ -2738,6 +2743,25 @@
             that.trigger(DATABOUND);
        }
    });
+
+   function hasCommand(commands, name) {
+       var idx, length, command;
+
+       if (typeof commands === STRING) {
+           return commands === name;
+       }
+
+       if (isArray(commands)) {
+           for (idx = 0, length = commands.length; idx < length; idx++) {
+               command = commands[idx];
+
+               if ((typeof command === STRING && command === name) || (command.name === name)) {
+                   return true;
+               }
+           }
+       }
+       return false;
+   };
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
