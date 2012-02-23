@@ -372,7 +372,7 @@
                 element = views.first(),
                 view;
 
-            element.hide().data(kendo.ns + "url", url);
+            element.hide().attr(attr("url"), url);
 
             that._setupLayouts(dom);
             that.element.append(layouts);
