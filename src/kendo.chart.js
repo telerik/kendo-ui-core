@@ -6412,11 +6412,11 @@
             majorTickAlignment: INSIDE,
             minorTickSize: 10,
             minorTickAlignment: INSIDE,
-            startAngle: 0,
-            endAngle: 230,
+            startAngle: -30,
+            endAngle: 210,
             labels: {
-                position: OUTSIDE,
-                padding: 10
+                position: INSIDE,
+                padding: 2
             }
         },
 
@@ -6575,8 +6575,7 @@
             border: {
                 color: BLACK,
                 width: 0
-            },
-            padding: getSpacing(10)
+            }
         },
 
         reflow: function(box) {
@@ -6586,10 +6585,9 @@
                 pointer = plotArea.pointer,
                 plotBox;
 
-            box = box.clone().unpad(options.padding);
-
             scale.reflow(box);
-            plotBox = scale.ring.getBBox().clone();
+            plotBox = scale.box.clone();
+            console.log(plotBox.width(), box.width());
 
             if (plotArea.options.pointer != false) {
                 pointer.scale = scale;
@@ -6632,7 +6630,7 @@
                 plotArea.box = scale.box.clone().wrap(pointer.box);
             }
 
-            while (plotArea.box.width() > box.width() && plotArea.box.height() > box.height()) {
+            while (plotArea.box.width() > box.width() || plotArea.box.height() > box.height()) {
                 ring.r -= step;
                 ring.ir -= step;
                 scale.reflow(box);
