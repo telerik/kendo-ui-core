@@ -26,6 +26,7 @@
 
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+
             if (!element.has(contentSelector)[0]) {
               element.wrapInner("<div " + attr("role") + '="content"></div>');
             }
@@ -34,6 +35,7 @@
                                 .addClass("km-content");
 
             that.title = element.data(kendo.ns + "title");
+            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
 
             that.element.prepend(that.header).append(that.footer);
             if (that.layout) {

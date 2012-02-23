@@ -290,10 +290,14 @@
             var that = this;
 
             that._findView(url, function(view) {
+                if (that.view === view) {
+                    return;
+                }
+
                 history.navigate(url, true);
 
                 new ViewSwitcher(that).replace(that.view, view);
-                that._setCurrentView(view);
+                that.view = view;
             });
         },
 
@@ -326,40 +330,23 @@
             var that = this, views, historyEvents;
 
             views = that.element.find(roleSelector("view"));
-            views.first().attr(attr("url"), "/");
+            that.rootView = views.first();
 
             historyEvents = {
                 change: function(e) {
-                    that.showLoading();
                     that.navigate(e.string);
                 },
 
                 ready: function(e) {
-                    that.showLoading();
                     that._findView(e.string, function(view) {
-                        var element = view.element,
-                        id = element.attr("id"),
-                        url = element.attr(attr("url"));
-
                         views.not(view).hide();
                         view.onShowStart();
-                        that._setCurrentView(view);
-
-                        if (id && url == "/" || !url) {
-                            url = id;
-                        }
-
-                        history.navigate(url, true);
+                        that.view = view;
                     });
                 }
             };
 
             history.start($.extend(that.options, historyEvents));
-        },
-
-        _setCurrentView: function(view) {
-            this.view = view;
-            this.hideLoading();
         },
 
         _createView: function(element) {
@@ -385,7 +372,7 @@
                 element = views.first(),
                 view;
 
-            element.hide().attr(attr("url"), url);
+            element.hide().data(kendo.ns + "url", url);
 
             that._setupLayouts(dom);
             that.element.append(layouts);
@@ -404,10 +391,14 @@
                 remote = firstChar === "/",
                 element;
 
-            element = that.element.find("[" + attr("url") + "='" + url + "']");
+            if (!url) {
+                element = that.rootView;
+            } else {
+                element = that.element.find("[" + attr("url") + "='" + url + "']");
 
-            if (!element[0] && !remote) {
-                element = that.element.find(local ? url : "#" + url);
+                if (!element[0] && !remote) {
+                    element = that.element.find(local ? url : "#" + url);
+                }
             }
 
             view = element.data("kendoView");
@@ -421,8 +412,10 @@
                     that._xhr.abort();
                 }
 
+                that.showLoading();
                 that._xhr = $.get(url, function(html) {
                                 callback(that._createRemoteView(url, html));
+                                that.hideLoading();
                             })
                             .fail(function() {
                                 that.hideLoading();

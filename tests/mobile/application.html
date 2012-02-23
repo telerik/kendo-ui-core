@@ -58,11 +58,6 @@
                 application = new kendo.mobile.Application($("#qunit-fixture"), options);
             }
 
-            test("navigate silently on ready", function() {
-                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
-                equal(location.hash, "#page1");
-            });
-
             test("navigate to remote view silently on ready", function() {
                 location.hash = "#../../test1";
 

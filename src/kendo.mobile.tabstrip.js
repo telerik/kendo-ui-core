@@ -196,9 +196,7 @@
 
         viewShow: function(view) {
             var that = this;
-            setTimeout(function() {
-                that.switchTo(kendo.history.url().string);
-            });
+            that.switchTo(view.id);
         },
 
         options: {

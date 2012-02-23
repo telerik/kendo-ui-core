@@ -112,7 +112,7 @@
 
                 return that._stripRoot(current);
             } else {
-                return location.hash.replace(hashStrip, '') || '/';
+                return location.hash.replace(hashStrip, '');
             }
         },
 
