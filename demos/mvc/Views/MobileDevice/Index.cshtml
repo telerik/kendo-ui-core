@@ -41,7 +41,7 @@
     }
     </div>
 
-    <div data-id="examples" data-role="layout">
+    <div data-id="examples" data-role="layout" data-show="triggerIndexButton">
         <header data-role="header">
             <div data-role="navbar">
                 <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
@@ -53,19 +53,15 @@
 
     <script>
         document.title = "@ViewBag.Title";
+
+        function triggerIndexButton(e) {
+            var viewID = e.view.element.attr("id");
+            e.layout.header.find(".nav-button").css({visibility: viewID != "index" ? "visible" : "hidden"});
+        }
+
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
             layout: "examples",
-            transition: "slide",
-            scriptsAppend: function(e) {
-                if (typeof kendoDemoViewInit != "undefined") {
-                    kendoDemoViewInit(e);
-                }
-            },
-
-            viewShow: function(e) {
-                var viewID = e.view.element.attr("id");
-                e.view.element.find(".nav-button").css({visibility: viewID != "index" ? "visible" : "hidden"});
-            }
+            transition: "slide"
         });
     </script>
 </body>

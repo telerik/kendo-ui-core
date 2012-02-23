@@ -77,195 +77,50 @@
                 ok($("#page2").is(":visible"), "Second page is visible");
             });
 
-            asyncTest("switches to remote view", function() {
-                expect(3);
+            function remoteViewShow() {
+                start();
+                ok($("#page2").is(":visible"), "Second page is shown");
+            }
 
+            function remoteViewInit() {
+                equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
+            }
+
+            asyncTest("loads remote view", 2, function() {
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
+                    responseText: '<body><div data-init="remoteViewInit" data-show="remoteViewShow" data-role="view" id="page2">Page 2</div></body>'
                 });
 
                 setup('<div data-role="view" id="page1">Page 1</div>');
-
-                application.bind("viewShow", function() {
-                    start();
-                    ok(!$("#page1").is(":visible"), "First page is hidden");
-                    ok($("#page2").is(":visible"), "Second page is present");
-                    equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
-                });
 
                 application.navigate("page2.html");
             });
 
-            asyncTest("loads multiple remote views in document", 4, function() {
+            function multipleRemoteViewInit() {
+                start();
+                equal($("#qunit-fixture").has("#page3").length, 1, "Secondary view is inserted in the application DOM element");
+            }
+
+            asyncTest("loads multiple remote views in document", 1, function() {
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<body><div data-role="view" id="page2">Page 2</div><div data-role="view" id="page3">Page 3</div></body>'
+                    responseText: '<body><div data-init="multipleRemoteViewInit" data-role="view" id="page2">Page 2</div><div data-role="view" id="page3">Page 3</div></body>'
                 });
 
                 setup('<div data-role="view" id="page1">Page 1</div>');
-
-                application.bind("viewShow", function() {
-                    start();
-                    ok(!$("#page1").is(":visible"), "First page is hidden");
-                    ok($("#page2").is(":visible"), "Second page is present");
-                    equal($("#qunit-fixture").has("#page3").length, 1, "Secondary view is inserted in the application DOM element");
-
-                    application.unbind("viewShow");
-                    application.bind("viewShow", function(){
-                        ok($("#page3").is(":visible"), "Third page is present");
-                    });
-                    application.navigate("#page3");
-                });
 
                 application.navigate("page2.html");
 
             });
 
-            asyncTest("reuses an already loaded remote page", function() {
+            asyncTest("deals with various newline characters when loading remote view", 1, function() {
                 setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
                     url: "page2.html",
-                    responseText: '<div data-role="view" id="page2">Page 2</div>'
-                });
-
-                application.navigate("page2.html");
-
-                application.bind("viewShow", function() {
-                    application.unbind("viewShow");
-
-                    application.navigate("#page1");
-
-                    $.mockjaxClear();
-
-                    $.mockjax({
-                        url: "page2.html",
-                        response: function() {
-                            start();
-                            ok(false, "Does not make second ajax request");
-                        }
-                    });
-
-                    application.bind("viewShow", function() {
-                        start();
-                        ok($("#page2").is(":visible"), "Second page is present");
-                    });
-
-                    application.navigate("page2.html");
-                });
-            });
-
-            asyncTest("switches to partial remote view", function() {
-                expect(2);
-
-                setup('<div data-role="view" id="page1">Page 1</div>');
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<div data-role="view" id="page2">Page 2</div>'
-                });
-
-                application.bind("viewShow", function() {
-                    start();
-                    ok(!$("#page1").is(":visible"), "First page is hidden");
-                    ok($("#page2").is(":visible"), "Second page is present");
-                });
-
-                application.navigate("page2.html");
-            });
-
-            asyncTest("deals with various newline characters when loading remote view", function() {
-                expect(1);
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<html><head></head><body><div id="page2" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
-                });
-
-                application.bind("viewShow", function() {
-                    start();
-                    ok($("#page2").is(":visible"), "Second page is loaded");
-                });
-
-                application.navigate("page2.html");
-            });
-
-            test("raises viewInit when switching to a local view", function() {
-                expect(1);
-
-                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
-
-                application.bind("viewInit", function(e) {
-                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
-                });
-
-                application.navigate("#page2");
-            });
-
-            test("raises viewHide when switching to a local view", function() {
-                expect(1);
-
-                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
-
-                application.bind("viewHide", function(e) {
-                    equal(e.view.element[0], $("#page1")[0], "Event is raised");
-                });
-
-                application.navigate("#page2");
-            });
-
-            asyncTest("raises viewInit when switching to a remote view", function() {
-                expect(1);
-
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<div data-role="view" id="page2">Page 2</div>'
-                });
-
-                application.bind("viewInit", function(e) {
-                    start();
-                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
-                });
-
-                application.navigate("page2.html");
-            });
-
-            test("does not raise viewInit for already initialized local view", function() {
-                setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
-
-                application.navigate("#page2");
-
-                application.bind("viewInit", function(e) {
-                    ok(false, "Does not raise event");
-                });
-
-                application.navigate("#page1");
-            });
-
-            asyncTest("does not raise viewInit for already initialized remote view", function() {
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                $.mockjax({
-                    url: "page2.html",
-                    responseText: '<div data-role="view" id="page2">Page 2</div>'
-                });
-
-                application.bind("viewShow", function() {
-                    start();
-
-                    application.unbind("viewShow");
-
-                    application.navigate("#page1");
-
-                    application.bind("viewInit", function(e) {
-                        ok(false, "Does not raise event");
-                    });
-
-                    application.navigate("page2.html");
+                    responseText: '<html><head></head><body><div id="page2" data-show="remoteViewShow" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
                 });
 
                 application.navigate("page2.html");
@@ -291,24 +146,6 @@
                 setup('<div data-role="view" id="page1">Page 1</div>');
 
                 equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
-            });
-
-            asyncTest("does not raise error when trying to change to remote view starting with slash", function() {
-                expect(1);
-
-                setup('<div data-role="view" id="page1">Page 1</div>');
-
-                $.mockjax({
-                    url: "/page2",
-                    responseText: '<div data-role="view" id="page2">Page 2</div>'
-                });
-
-                application.bind("viewInit", function(e) {
-                    start();
-                    equal(e.view.element[0], $("#page2")[0], "Event is raised");
-                });
-
-                application.navigate("/page2");
             });
 
             test("uses content container if present", function() {
@@ -389,13 +226,13 @@
                 setup('<div data-init="foo" data-role="view">View</div>');
             });
 
-            test("passes url params to the view show event", function() {
-                setup('<div data-role="view" id="page1">Page 1</div><div id="page2" data-role="view"></div>');
-                application.bind("viewShow", function(e) {
+            function checkViewParams(e) {
                     equal(e.view.element.attr("id"), "page2");
-                    equal(e.params.foo, "bar");
-                });
+                    equal(e.view.params.foo, "bar");
+            };
 
+            test("passes url params to the view show event", function() {
+                setup('<div data-role="view" id="page1">Page 1</div><div data-show="checkViewParams" id="page2" data-role="view"></div>');
                 application.navigate("#page2?foo=bar");
             });
 
@@ -550,6 +387,18 @@
                 kendo.mobile.ui.plugin(Foo);
 
                 setup('<div data-role="view"><i data-role="foo" /></div>');
+            });
+
+            function success() {
+                ok(true);
+            }
+
+            test("layout triggers init", 1, function() {
+                setup('<div data-role="view"></div><div data-role="layout" data-init="success" />');
+            });
+
+            test("layout triggers show", 1, function() {
+                setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-show="success" />');
             });
         </script>
     </body>

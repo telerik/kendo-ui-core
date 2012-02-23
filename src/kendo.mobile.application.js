@@ -31,8 +31,6 @@
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
-        VIEW_INIT = "viewInit",
-        VIEW_SHOW = "viewShow",
         HREF = "href",
         DUMMY_HREF = "#!",
         BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
@@ -239,7 +237,7 @@
      *
      * <h3>View Parameters</h3>
      *
-     * <p>Navigational widgets can pass additional URL parameters when navigating to <strong>Views</strong>. The parameters will be available in the <code>viewShow</code> <strong>Application</strong> event.</p>
+     * <p>Navigational widgets can pass additional URL parameters when navigating to <strong>Views</strong>. The parameters will be available in the <code>show</code> <strong>View</strong> event.</p>
      *
      * @exampleTitle Button with additional URL parameters
      * @example
@@ -277,39 +275,6 @@
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 
-            that.bind([
-            /**
-             * Fires the first time when a View is displayed.
-             * @name kendo.mobile.Application#viewInit
-             * @event
-             * @param {Event} e
-             * @param {kendo.mobile.View} e.view The displayed View.
-             */
-              VIEW_INIT,
-            /**
-             * Fires when a View is displayed.
-             * @name kendo.mobile.Application#viewShow
-             * @event
-             * @param {Event} e
-             * @param {kendo.mobile.View} e.view The displayed View.
-             * @param {Object} e.params The URL params passed.
-             *
-             * @exampleTitle Display View with URL parameters
-             * @example
-             * <div id="foo" data-role="view"><a href="#bar?baz=qux">Go to bar</a></div>
-             * <div id="bar" data-role="view">Bar</div>
-             *
-             * <script>
-             *      // ...
-             *      application.bind("viewShow", function(e) {
-             *          console.log(e.view); // kendo.mobile.View instance
-             *          console.log(e.params); // {"baz": "qux"}
-             *      });
-             * </script>
-             */
-              VIEW_SHOW
-            ], that.options);
-
             $(function(){
                 that._attachHideBarHandlers();
                 that._attachOrientationChange();
@@ -326,8 +291,6 @@
 
             that._findView(url, function(view) {
                 history.navigate(url, true);
-
-                that.trigger("viewHide", { view: that.view });
 
                 new ViewSwitcher(that).replace(that.view, view);
                 that._setCurrentView(view);
@@ -354,7 +317,7 @@
                     platform = layout.data(platformAttr);
 
                 if (platform === undefined || platform === OS_NAME) {
-                    that.layouts[layout.data("id")] = new Layout(layout);
+                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
                 }
             });
         },
@@ -397,7 +360,6 @@
         _setCurrentView: function(view) {
             this.view = view;
             this.hideLoading();
-            this.trigger(VIEW_SHOW, {view: view, params: view.params});
         },
 
         _createView: function(element) {
@@ -410,7 +372,6 @@
 
             var view = kendo.initWidget(element, {layout: layout}, kendo.mobile.ui);
 
-            that.trigger(VIEW_INIT, {view: view});
 
             return view;
         },
