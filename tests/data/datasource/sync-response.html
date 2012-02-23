@@ -21,7 +21,7 @@
             var Model = kendo.data.Model, DataSource = kendo.data.DataSource, dataSource;
 
             function setup(options) {
-                dataSource = new DataSource($.extend({
+                dataSource = new DataSource($.extend(true, {
                     data: [ { id: 1, foo: "foo" }, { id: 2, foo: "foo2" }  ],
                     schema: {
                         model: $.extend({}, Model, { id: "id" })
@@ -374,15 +374,37 @@
                 ok(dataSource.get(3));
             });
 
-            test("cancelChanges does not revert the updated models after sync", function() {
-                stubTransport("update", [{ id: 2, foo: "moo" }]);
+            test("cancelChanges does not remove the added models after sync", function() {
+                stubTransport("create", [{ id: 3, foo: "moo" }]);
 
-                dataSource.get(2).set("foo", "moo");
+                dataSource.add({});
                 dataSource.sync();
 
                 dataSource.cancelChanges();
 
-                equal(dataSource.get(2).foo, "moo");
+                ok(dataSource.get(3));
+            });
+
+            test("cancelChanges does not revert the updated models after sync when Model has fields defined", function() {
+                setup({
+                    schema: {
+                        model: {
+                            fields: {
+                                foo: "foo"
+                            }
+                        }
+                    }
+                });
+
+                stubTransport("create", [{ id: 42, foo: "moo" }]);
+
+                dataSource.add();
+
+                dataSource.sync();
+
+                dataSource.cancelChanges();
+
+                equal(dataSource.get(42).foo, "moo");
             });
 
             test("cancelChanges does not revert the deleted models after sync", function() {

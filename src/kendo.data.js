@@ -1322,19 +1322,20 @@
                 that.data = function(data) {
                     var record,
                         getter,
+                        idx,
+                        length,
                         modelInstance = new that.model();
 
                     data = dataFunction(data);
                     if (!isEmptyObject(getters)) {
-                       return map(data, function(value) {
-                         record = value;
-                         for (getter in getters) {
-                             record[getter] = modelInstance._parse(getter, getters[getter](value));
-                         }
-                         return record;
-                       });
-                   }
-                   return data;
+                        for (idx = 0, length = data.length; idx < length; idx++) {
+                            record = data[idx];
+                            for (getter in getters) {
+                                record[getter] = modelInstance._parse(getter, getters[getter](record));
+                            }
+                        }
+                    }
+                    return data;
                 }
             }
         },
@@ -1992,6 +1993,7 @@
         cancelChanges: function(model) {
             var that = this,
                 pristineIndex,
+                pristine = that.reader.data(that._pristine),
                 index;
 
             if (model instanceof kendo.data.Model) {
@@ -1999,13 +2001,13 @@
                 pristineIndex = that._pristineIndex(model);
                 if (index != -1) {
                     if (pristineIndex != -1 && !model.isNew()) {
-                        extend(true, that._data[index], that._pristine[pristineIndex]);
+                        extend(true, that._data[index], pristine[pristineIndex]);
                     } else {
                         that._data.splice(index, 1);
                     }
                 }
             } else {
-                that._data = that._observe(that.reader.data(that._pristine));
+                that._data = that._observe(pristine);
                 that._change();
             }
         },
