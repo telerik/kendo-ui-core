@@ -129,11 +129,12 @@
         Widget = ui.Widget,
         parse = kendo.parseDate,
         template = kendo.template,
+        touch = kendo.support.touch,
         transitions = kendo.support.transitions,
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
-        CLICK = kendo.support.touch ? "touchend" : "click",
+        CLICK = touch ? "touchend" : "click",
         MIN = "min",
         LEFT = "left",
         SLIDE = "slide",
@@ -148,8 +149,8 @@
         OTHERMONTHCLASS = ' class="' + OTHERMONTH + '"',
         TODAY = "k-nav-today",
         CELLSELECTOR = "td:has(.k-link)",
-        MOUSEENTER = "mouseenter",
-        MOUSELEAVE = "mouseleave",
+        MOUSEENTER = touch ? "touchstart" : "mouseenter",
+        MOUSELEAVE = touch ? "touchend" : "mouseleave",
         MS_PER_MINUTE = 60000,
         MS_PER_DAY = 86400000,
         PREVARROW = "_prevArrow",
@@ -756,7 +757,8 @@
             }
 
             links = element.find(".k-link")
-                           .hover(mouseenter, mouseleave)
+                           .bind(MOUSEENTER, mouseenter)
+                           .bind(MOUSELEAVE, mouseleave)
                            .click(false);
 
             that._title = links.eq(1).bind(CLICK, proxy(that.navigateUp, that));
