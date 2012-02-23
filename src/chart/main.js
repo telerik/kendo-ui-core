@@ -6587,7 +6587,6 @@
 
             scale.reflow(box);
             plotBox = scale.box.clone();
-            console.log(plotBox.width(), box.width());
 
             if (plotArea.options.pointer != false) {
                 pointer.scale = scale;
