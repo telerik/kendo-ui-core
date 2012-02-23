@@ -277,7 +277,7 @@
 
             if (that._closeEditable()) {
                 item.replaceWith(container);
-                that.editable = container.kendoEditable({ model: data }).data("kendoEditable");
+                that.editable = container.kendoEditable({ model: data, clearContainer: false }).data("kendoEditable");
 
                 that.trigger(EDIT, { model: data, item: container });
             }
@@ -327,6 +327,7 @@
            if (index != -1) {
                data = dataSource.view()[index];
                dataSource.cancelChanges(data);
+               that._closeEditable();
            }
        }
 
