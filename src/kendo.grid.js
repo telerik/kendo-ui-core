@@ -1321,8 +1321,9 @@
         },
 
         _confirmation: function() {
-            var that = this;
-                confirmation = that.options.editable === true ? DELETECONFIRM : that.options.editable.confirmation;
+            var that = this,
+                editable = that.options.editable,
+                confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
             return confirmation !== false ? that._showMessage(confirmation) : true;
         },
@@ -2146,10 +2147,18 @@
                 template = column.template,
                 paramName = settings.paramName,
                 html = "",
+                idx,
+                length,
                 format = column.format,
                 type = typeof template;
 
             if (column.command) {
+                if (isArray(column.command)) {
+                    for (idx = 0, length = column.command.length; idx < length; idx++) {
+                        html += that._createButton(column.command[idx]);
+                    }
+                    return html.replace(templateHashRegExp, "\\#");
+                }
                 return that._createButton(column.command).replace(templateHashRegExp, "\\#");
             }
 
