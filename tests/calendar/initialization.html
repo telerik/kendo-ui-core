@@ -221,9 +221,19 @@
             });
 
             test("footer:false should not render footer", function() {
-                    var cal = new Calendar(div, {
-                        footer: false
-                    });
+                var cal = new Calendar(div, {
+                    footer: false
+                });
+
+                ok(!cal.footer);
+            });
+
+            test("_footer(false) should hide the footer", function() {
+                var cal = new Calendar(div);
+
+                cal._footer(false);
+
+                ok(!cal.element.find(".k-footer").is("visible"));
             });
 
         </script>
