@@ -79,7 +79,7 @@
                 that.layout.attach(that);
             }
 
-            that.trigger(SHOW, that);
+            that.trigger(SHOW, {view: that});
 
             that._eachWidget(function(widget) {
                 widget.viewShow(that);
@@ -124,9 +124,9 @@
 
             if (that.back && !that.parallax) {
                 view.element.css("z-index", 0);
-                  previous.element.css("z-index", 1);
+                previous.element.css("z-index", 1);
               } else {
-            view.element.css("z-index", 1);
+                view.element.css("z-index", 1);
                 previous.element.css("z-index", 0);
             }
 
@@ -165,15 +165,27 @@
         }
     });
 
-    var Layout = Class.extend({
-        init: function(element) {
+    var Layout = Widget.extend({
+        init: function(element, options) {
             var that = this;
+            Widget.fn.init.call(that, element, options);
+
             that.element = element.detach();
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
             that.elements = that.header.add(that.footer);
-            kendo.mobile.init(that.element);
+            kendo.mobile.init(that.element.children());
+            that.trigger(INIT, {layout: that});
         },
+
+        options: {
+            name: "Layout"
+        },
+
+        events: [
+            INIT,
+            SHOW
+        ],
 
         setup: function (view) {
             if (!view.header[0]) { view.header = this.header; }
@@ -204,11 +216,12 @@
                 view.element.find(roleSelector("footer")).remove();
                 view.element.append(that.footer);
             }
+
+            that.trigger(SHOW, {layout: that, view: view});
         }
     });
 
     ui.plugin(View);
-    mobile.Layout = Layout;
-    mobile.View = View;
+    ui.plugin(Layout);
     mobile.ViewSwitcher = ViewSwitcher;
 })(jQuery);
