@@ -42,3 +42,10 @@ test("cancelling select event clears active input", function() {
     equal($("#uploadInstance").val(), "");
 });
 
+test("cancelling select event removes input", function() {
+    uploadInstance = createUpload({ "select" : (function(e) { e.preventDefault(); }) });
+
+    simulateFileSelect()
+    equal($("input", uploadInstance.wrapper).length, 1);
+});
+
