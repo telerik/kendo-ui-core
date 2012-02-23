@@ -10,7 +10,7 @@
                         theme: $(document).data("kendoSkin") || "default",
 
                         pointer: {
-                            value: 95
+                            value: 65
                         },
 
                         scale: {
@@ -22,23 +22,22 @@
                 }
 
                 $(document).ready(function() {
-                    setTimeout(function() {
-                        // Initialize the gauge with a delay to make sure
-                        // the initial animation is visible
-                        createGauge();
+                    createGauge();
 
-                        $("#set-10").click(function(e) {
-                            e.preventDefault();
+                    //$("#gauge").data("kendoGauge").value(10);
 
-                            $("#gauge").data("kendoGauge").value(10);
-                        });
 
-                        $("#set-60").click(function(e) {
-                            e.preventDefault();
+                    $("#set-10").click(function(e) {
+                        e.preventDefault();
 
-                            $("#gauge").data("kendoGauge").value(60);
-                        });
-                    }, 400);
+                        $("#gauge").data("kendoGauge").value(10);
+                    });
+
+                    $("#set-60").click(function(e) {
+                        e.preventDefault();
+
+                        $("#gauge").data("kendoGauge").value(60);
+                    });
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauge();
