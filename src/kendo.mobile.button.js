@@ -198,7 +198,7 @@
                 icon = that.options.icon,
                 iconSpan = '<span class="km-icon km-' + icon,
                 element = that.element.addClass("km-button"),
-                span = element.children("span").addClass("km-text"),
+                span = element.children("span:not(.km-icon)").addClass("km-text"),
                 image = element.find("img").addClass("km-image");
 
             if (!span[0] && element.html()) {
@@ -281,7 +281,22 @@
                 $.each(styles, function () {
                     element.addClass("km-" + this);
                 });
-                element.removeClass("km-button");
+            }
+        },
+
+        _wrap: function() {
+            var that = this,
+                icon = that.options.icon,
+                iconSpan = '<span class="km-icon km-' + icon,
+                element = that.element,
+                span = element.children("span"),
+                image = element.find("img").addClass("km-image");
+
+            if (!image[0] && icon) {
+                if (!span[0]) {
+                    iconSpan += " km-notext";
+                }
+                element.prepend($(iconSpan + '" />'));
             }
         }
 

@@ -30,9 +30,63 @@
     .box-shadow(~"0 1px 0 0 rgba(0,0,0,.1)");
 }
 
+.km-blackberry .km-badge,
+.km-blackberry .km-detail
+{
+    color: #FFF;
+    background-color: #057fe4;
+}
+
 .km-blackberry .km-badge
 {
-    -webkit-box-shadow: none;
+    top: 3px;
+    font-size: .7rem;
+    background-clip: padding-box;
+    line-height: 1.1rem;
+    .border-radius(~"2rem");
+    .box-shadow(0 0 0 1px #fff);
+}
+
+.km-blackberry .km-detail
+{
+    line-height: .95rem;
+    background: #ccc;
+    .box-shadow(inset 0 1px 3px rgba(0,0,0,.4));
+    .border-radius(~".2rem");
+}
+
+.km-root .km-blackberry .km-detail
+{
+    width: 1.35rem;
+    height: 1.4rem;
+}
+
+.km-blackberry .km-detail .km-text
+{
+    display: none;
+}
+
+.km-blackberry .km-detail .km-icon
+{
+    left: 10%;
+    top: 12%;
+    width: 80%;
+    height: 80%;
+}
+
+.km-blackberry .km-rowdelete:after,
+.km-blackberry .km-rowinsert:after,
+.km-blackberry .km-rowinsert:before,
+.km-blackberry .km-contactadd:after,
+.km-blackberry .km-contactadd:before
+{
+    background: #fff;
+}
+
+.km-blackberry .km-listview-link:after,
+.km-blackberry .km-detaildisclose:after
+{
+    border-color: #fff;
 }
 
 .km-blackberry .km-button:not([disabled]):active,
@@ -272,12 +326,6 @@
     background-image: linear-gradient(top, rgba(255,255,255,.05), rgba(0,0,0,.2) 27%, rgba(0,0,0,0));
 }
 
-.km-blackberry .km-tabstrip .km-badge
-{
-    top: auto;
-    bottom: -10px;
-}
-
 .km-blackberry .km-tabstrip .km-button
 {
     border: 0;
@@ -290,16 +338,25 @@
 
 .km-blackberry .km-tabstrip .km-text
 {
-    display: none;
+    position: absolute;
+    display: block;
+    top: 0;
+    height: 0;
+    text-indent: -9999px;
+}
+
+.km-blackberry .km-tabstrip .km-badge
+{
+    text-indent: 0;
 }
 
 .km-blackberry .km-tabstrip .km-icon
 {
+    left: 0;
     width: 2.4rem;
     height: 2.4rem;
     position: relative;
-    left: 30%;
-    margin: ~".3rem 0 .4rem -.9rem";
+    margin: ~".3rem 0 .4rem 0";
 }
 
 .km-blackberry .km-button .km-icon
@@ -307,9 +364,15 @@
     background-color: #057fe4;
 }
 
-.km-blackberry .km-listview-link .km-icon
+.km-blackberry .km-listview-link .km-icon,
+.km-blackberry .km-detail .km-icon
 {
-    background-color: #555;
+    background-color: #fff;
+}
+
+.km-blackberry .km-detail .km-icon
+{
+    .transform(translatez(0));
 }
 
 .km-blackberry .km-button .km-icon,
