@@ -566,10 +566,11 @@
                 input = $(e.target),
                 prevented = upload.trigger(SELECT, { files: inputFiles(input) });
 
-            if (!prevented) {
-                input.trigger("t:select");
-            } else {
+            if (prevented) {
                 upload._addInput(input.clone().val(""));
+                input.remove();
+            } else {
+                input.trigger("t:select");
             }
         },
 
