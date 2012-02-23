@@ -84,6 +84,30 @@
 
                 equal(ticks.length, 5);
             });
+
+            test("getSlotAngle() returns startAngle/endAngle for extreme values", function() {
+                $.extend(radialScale.options, {
+                    min: 0,
+                    max: 100,
+                    startAngle: 27,
+                    endAngle: 48
+                });
+
+                equal(radialScale.getSlotAngle(0), 27);
+                equal(radialScale.getSlotAngle(100), 48);
+            });
+
+            test("getSlotAngle() takes options.min and options.max into account", function() {
+                $.extend(radialScale.options, {
+                    min: 38,
+                    max: 106,
+                    startAngle: 27,
+                    endAngle: 48
+                });
+
+                equal(radialScale.getSlotAngle(38), 27);
+                equal(radialScale.getSlotAngle(106), 48);
+            });
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
