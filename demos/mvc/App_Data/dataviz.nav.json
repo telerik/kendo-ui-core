@@ -39,6 +39,9 @@
                     "text": "Stacked bar chart",
                     "url": "bar-charts/stacked-bar.html"
                 }, {
+                    "text": "Multiple axes",
+                    "url": "bar-charts/multiple-axes.html"
+                }, {
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html"
                 }, {
