@@ -146,6 +146,8 @@
     </script>
 
     <script>
+        var app;
+
         var schema = {model: {}};
 
         var ds = kendo.data.DataSource.create({
@@ -194,7 +196,7 @@
             var item = ds.get(e.button.data("itemId"));
 
             cartDataSource.remove(item);
-            $(".km-scroll-container:visible").css(kendo.support.transitions.css + "transform", "none");
+            app.view.scroller.reset();
             e.preventDefault();
         }
 
@@ -242,7 +244,7 @@
             e.content.find(".item-list").data("kendoMobileListView")._refresh();
         }
 
-        var app = new kendo.mobile.Application($(document.body), { transition: "slide" });
+        app = new kendo.mobile.Application($(document.body), { transition: "slide" });
     </script>
 </body>
 </html>

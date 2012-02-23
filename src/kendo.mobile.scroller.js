@@ -204,6 +204,10 @@
             boundary.refresh();
         },
 
+        reset: function() {
+            this.move.moveTo({x: 0, y: 0});
+        },
+
         pullHandled: function() {
             this.yinertia.onEnd();
             this.xinertia.onEnd();
