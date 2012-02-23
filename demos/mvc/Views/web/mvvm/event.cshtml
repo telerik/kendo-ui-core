@@ -1,0 +1,33 @@
+<div id="example" class="k-content">
+    <button class="k-button" data-bind="event: { click: listener, dblclick: listener, mouseover: listener, mouseout: listener }">Button</button>
+    <script>
+        $(document).ready(function() {
+            var viewModel = {
+                listener: function(e) {
+                    kendoConsole.log("Event: " + e.type);
+                }
+            };
+
+            kendo.bind($("#example"), viewModel);
+        });
+    </script>
+    <div class="console"></div>
+    <div class="code-sample">
+        <h4 class="code-title">View source code</h4>
+<pre class="prettyprint">
+&lt;button data-bind=&quot;event:{ click: listener, dblclick: listener, mouseover: listener, mouseout: listener }&quot;&gt;Button&lt;/button&gt;
+</pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code</h4>
+<pre class="prettyprint">
+var viewModel = {
+    listener: function(e) {
+        kendoConsole.log(&quot;Event: &quot; + e.type);
+    }
+};
+
+kendo.bind($(&quot;#example&quot;), viewModel);
+</pre>
+    </div>
+</div>

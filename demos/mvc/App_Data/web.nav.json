@@ -567,6 +567,10 @@
                 {
                     "text": "Style binding",
                     "url": "mvvm/style.html"
+                },
+                {
+                    "text": "Event binding",
+                    "url": "mvvm/event.html"
                 }
             ]
         },
