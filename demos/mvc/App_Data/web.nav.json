@@ -563,6 +563,10 @@
                 {
                     "text": "Attribute binding",
                     "url": "mvvm/attributes.html"
+                },
+                {
+                    "text": "Style binding",
+                    "url": "mvvm/style.html"
                 }
             ]
         },

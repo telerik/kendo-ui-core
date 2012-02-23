@@ -1,0 +1,135 @@
+<div id="example" class="k-content">
+    <div style="width: 100px; height: 100px; border-width: 4px;padding: 1em; -webkit-transition: all 500ms; -moz-transition: all 500ms; transition: all 500ms"
+        data-bind="style: {
+            backgroundColor: selectedBackground,
+            color: selectedColor,
+            borderStyle: selectedBorderStyle,
+            borderColor: selectedBorderColor,
+            webkitBorderRadius: selectedBorderRadius,
+            mozBorderRadius: selectedBorderRadius,
+            borderRadius: selectedBorderRadius
+        }">
+        Lorem ipsum dolor sit amet.
+    </div>
+    <label>
+        color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedColor"></select>
+    </label>
+    <label>
+        background color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBackground"></select>
+    </label>
+    <label>
+        border color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBorderColor"></select>
+    </label>
+    <label>
+        border style: <select data-text-field="name" data-value-field="value" data-bind="source: borders, value: selectedBorderStyle"></select>
+    </label>
+    <label>
+        border radius: <select data-bind="source: radii, value: selectedBorderRadius"></select>
+    </label>
+    <script>
+        $(document).ready(function() {
+            var viewModel = {
+                selectedColor: "#8b0000",
+                selectedBorderRadius: "20px",
+                selectedBackground: "#ffd700",
+                selectedBorderStyle: "solid",
+                selectedBorderColor: "#ff8c00",
+                radii: [
+                    "0px",
+                    "5px",
+                    "10px",
+                    "20px"
+                ],
+                colors: [
+                    { name: "Dark Red", hex: "#8b0000" },
+                    { name: "Orange Red", hex: "#ff4500" },
+                    { name: "Dark Orange", hex: "#ff8c00" },
+                    { name: "Gold", hex: "#ffd700" }
+                ],
+                borders: [
+                    { name: "Solid", value: "solid" },
+                    { name: "Dashed", value: "dashed" },
+                    { name: "Double", value: "double" },
+                    { name: "Dotted", value: "dotted" },
+                    { name: "Ridge", value: "ridge" },
+                    { name: "None", value: "none" }
+                ]
+            };
+
+            kendo.bind($("#example"), viewModel);
+        });
+    </script>
+    <div class="code-sample">
+        <h4 class="code-title">View source code:</h4>
+        <pre class="prettyprint">
+&lt;div style=&quot;width: 100px;height:100px;border-width:4px;padding:1em;-webkit-transition:all 500ms;-moz-transition:all 500ms;transition: all 500ms&quot;
+    data-bind=&quot;style: {
+        backgroundColor: selectedBackground,
+        color: selectedColor,
+        borderStyle: selectedBorderStyle,
+        borderColor: selectedBorderColor,
+        webkitBorderRadius: selectedBorderRadius,
+        mozBorderRadius: selectedBorderRadius,
+        borderRadius: selectedBorderRadius
+    }&quot;&gt;
+    Lorem ipsum dolor sit amet.
+&lt;/div&gt;
+&lt;label&gt;
+    color: &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedColor&quot;&gt;&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+    background color:
+    &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedBackground&quot;&gt;&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+    border color:
+    &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedBorderColor&quot;&gt;&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+    border style:
+    &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;value&quot; data-bind=&quot;source: borders, value: selectedBorderStyle&quot;&gt;&lt;/select&gt;
+&lt;/label&gt;
+&lt;label&gt;
+    border radius: &lt;select data-bind=&quot;source: radii, value: selectedBorderRadius&quot;&gt;&lt;/select&gt;
+&lt;/label&gt;
+        </pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <pre class="prettyprint">
+var viewModel = {
+    selectedColor: "#8b0000",
+    selectedBorderRadius: "20px",
+    selectedBackground: "#ffd700",
+    selectedBorderStyle: "solid",
+    selectedBorderColor: "#ff8c00",
+    radii: [ "0px", "5px", "10px", "20px" ],
+    colors: [
+        { name: "Dark Red", hex: "#8b0000" },
+        { name: "Orange Red", hex: "#ff4500" },
+        { name: "Dark Orange", hex: "#ff8c00" },
+        { name: "Gold", hex: "#ffd700" }
+    ],
+    borders: [
+        { name: "Solid", value: "solid" },
+        { name: "Dashed", value: "dashed" },
+        { name: "Double", value: "double" },
+        { name: "Dotted", value: "dotted" },
+        { name: "Ridge", value: "ridge" },
+        { name: "None", value: "none" }
+    ]
+};
+
+kendo.bind($("#example"), viewModel);
+        </pre>
+    </div>
+    <style scoped>
+        label {
+            display: block;
+        }
+
+        #example pre {
+            font-size: 12px;
+        }
+    </style>
+</div>
