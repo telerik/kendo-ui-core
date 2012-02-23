@@ -242,6 +242,24 @@
             imageClass: "k-delete",
             className: "k-grid-delete",
             iconClass: "k-icon"
+        },
+        edit: {
+            text: "Edit",
+            imageClass: "k-edit",
+            className: "k-grid-edit",
+            iconClass: "k-icon"
+        },
+        update: {
+            text: "Update",
+            imageClass: "k-update",
+            className: "k-grid-update",
+            iconClass: "k-icon"
+        },
+        canceledit: {
+            text: "Cancel",
+            imageClass: "k-cancel",
+            className: "k-grid-cancel",
+            iconClass: "k-icon"
         }
     }
 
@@ -1053,37 +1071,57 @@
                 };
 
             if (editable) {
+                var mode = that._editMode();
 
-                if (editable.update !== false) {
-                    that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", CLICK, function(e) {
-                        var td = $(this)
+                if (mode === "incell") {
+                    if (editable.update !== false) {
+                        that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", CLICK, function(e) {
+                            var td = $(this)
 
-                        if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
-                            return;
-                        }
+                            if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
+                                return;
+                            }
 
-                        if (that.editable) {
-                            if (that.editable.end()) {
-                                that.closeCell();
+                            if (that.editable) {
+                                if (that.editable.end()) {
+                                    that.closeCell();
+                                    that.editCell(td);
+                                }
+                            } else {
                                 that.editCell(td);
                             }
-                        } else {
-                            that.editCell(td);
-                        }
 
-                    });
+                        });
 
-                    that.wrapper.bind("focusin", function(e) {
-                        clearTimeout(that.timer);
-                        that.timer = null;
-                    });
-                    that.wrapper.bind("focusout", function(e) {
-                        that.timer = setTimeout(handler, 1);
-                    });
+                        that.wrapper.bind("focusin", function(e) {
+                            clearTimeout(that.timer);
+                            that.timer = null;
+                        });
+                        that.wrapper.bind("focusout", function(e) {
+                            that.timer = setTimeout(handler, 1);
+                        });
+                    }
+                } else {
+                    if (editable.update !== false) {
+                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-edit", CLICK, function(e) {
+                            e.preventDefault();
+                            that.editRow($(this).closest("tr"));
+                        });
+
+                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-cancel", CLICK, function(e) {
+                            e.preventDefault();
+                            that.cancelRow();
+                        });
+
+                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-update", CLICK, function(e) {
+                            e.preventDefault();
+                            that.saveRow();
+                        });
+                    }
                 }
 
                 if (editable.destroy !== false) {
-                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-delete", "click", function(e) {
+                    that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-delete", CLICK, function(e) {
                         e.preventDefault();
                         that.removeRow($(this).closest("tr"));
                     });
@@ -1196,7 +1234,102 @@
 
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
+
+                if (that._editMode() === "inline") {
+                    that.dataSource.sync();
+                }
             }
+        },
+
+        _editMode: function() {
+            var mode = "incell",
+                editable = this.options.editable;
+
+            if (editable !== true) {
+                mode = editable.mode || editable;
+            }
+
+            return mode;
+        },
+
+        editRow: function(row) {
+            var that = this,
+                model = that._modelForContainer(row),
+                column,
+                cell,
+                fields = [],
+                idx,
+                length;
+
+            that.cancelRow();
+
+            if (model) {
+                row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
+                    cell = $(this);
+                    column = that.columns[that.cellIndex(cell)];
+
+                    if (!column.command && model.editable(column.field)) {
+                        fields.push({ field: column.field, format: column.format, editor: column.editor });
+                        cell.attr("data-container-for", column.field);
+                        cell.empty();
+                    } else if (column.command && hasCommand(column.command, "edit")) {
+                        cell.empty();
+                        $(that._createButton("update") + that._createButton("canceledit")).appendTo(cell);
+                    }
+                });
+
+                that._editContainer = row;
+
+                that.editable = row
+                    .addClass("k-grid-edit-row")
+                    .kendoEditable({
+                        fields: fields,
+                        model: model,
+                        clearContainer: false
+                    }).data("kendoEditable");
+
+                that.trigger(EDIT, { container: row, model: model });
+            }
+        },
+
+        cancelRow: function() {
+            var that = this,
+                container = that._editContainer,
+                newRow,
+                model
+
+            if (container) {
+                model = that._modelForContainer(container);
+
+                that.dataSource.cancelChanges(model);
+
+                that._displayRow(container);
+
+                that._distroyEditable();
+            }
+        },
+
+        saveRow: function() {
+            var that = this,
+                container = that._editContainer,
+                model = that._modelForContainer(container),
+                editable = that.editable;
+
+            if (container && editable && editable.end() &&
+                !that.trigger(SAVE, { container: container, model: model } )) {
+
+                that._displayRow(container);
+                that._distroyEditable();
+                that.dataSource.sync();
+            }
+        },
+
+        _displayRow: function(row) {
+            var that = this,
+                model = that._modelForContainer(row),
+                newRow = $((row.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model));
+
+            row.replaceWith(newRow);
         },
 
         _showMessage: function(text) {
@@ -1204,8 +1337,9 @@
         },
 
         _confirmation: function() {
-            var that = this;
-                confirmation = that.options.editable === true ? DELETECONFIRM : that.options.editable.confirmation;
+            var that = this,
+                editable = that.options.editable,
+                confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
             return confirmation !== false ? that._showMessage(confirmation) : true;
         },
@@ -1245,15 +1379,20 @@
          */
         addRow: function() {
             var that = this,
+                options = that.options,
                 dataSource = that.dataSource;
 
             if ((that.editable && that.editable.end()) || !that.editable) {
                 var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
-                    model = dataSource.insert(index, {}),
+                    model = dataSource.insert(),
                     id = model.uid,
-                    cell = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "] > td:not(.k-group-cell,.k-hierarchy-cell)").first();
+                    mode = that._editMode(),
+                    row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
+                    cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
-                if (cell.length) {
+                if (mode === "inline" && row.length) {
+                    that.editRow(row);
+                } else if (cell.length) {
                     that.editCell(cell);
                 }
             }
@@ -1774,9 +1913,12 @@
                 row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 cell,
                 column,
-                isAlt = row.hasClass("k-alt");
+                isAlt = row.hasClass("k-alt"),
+                tmp,
+                idx,
+                length;
 
-            if (row.has(".k-edit-cell")) {
+            if (row.children(".k-edit-cell").length) {
                 row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
                     column = that.columns[that.cellIndex(cell)];
@@ -1791,8 +1933,19 @@
                     }
                 });
 
-            } else {
-                row.replaceWith($((isAlt ? that.altRowTemplate : that.rowTemplate)(model)));
+            } else if (!row.hasClass("k-grid-edit-row")) {
+                tmp = $((isAlt ? that.altRowTemplate : that.rowTemplate)(model));
+
+                row.replaceWith(tmp);
+
+                for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                    column = that.columns[idx];
+
+                    if (column.field === e.field) {
+                        cell = tmp.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(idx)
+                        $('<span class="k-dirty"/>').prependTo(cell);
+                    }
+                }
             }
         },
 
@@ -2006,10 +2159,18 @@
                 template = column.template,
                 paramName = settings.paramName,
                 html = "",
+                idx,
+                length,
                 format = column.format,
                 type = typeof template;
 
             if (column.command) {
+                if (isArray(column.command)) {
+                    for (idx = 0, length = column.command.length; idx < length; idx++) {
+                        html += that._createButton(column.command[idx]);
+                    }
+                    return html.replace(templateHashRegExp, "\\#");
+                }
                 return that._createButton(column.command).replace(templateHashRegExp, "\\#");
             }
 
@@ -2589,6 +2750,25 @@
             that.trigger(DATABOUND);
        }
    });
+
+   function hasCommand(commands, name) {
+       var idx, length, command;
+
+       if (typeof commands === STRING) {
+           return commands === name;
+       }
+
+       if (isArray(commands)) {
+           for (idx = 0, length = commands.length; idx < length; idx++) {
+               command = commands[idx];
+
+               if ((typeof command === STRING && command === name) || (command.name === name)) {
+                   return true;
+               }
+           }
+       }
+       return false;
+   };
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);

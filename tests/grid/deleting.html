@@ -256,6 +256,19 @@
                 equal(cell.text(), "foo");
                 ok(!cell.data("field"));
             });
+
+            test("sync is called if edit mode is inline", function() {
+                var grid = setup( { editable: "inline" }),
+                    sync = stub(dataSource, "sync");
+
+                grid._showMessage = function() {
+                    return true;
+                }
+
+                grid.removeRow(table.find("tbody>tr:first"));
+
+                ok(sync.calls("sync"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -44,6 +44,11 @@ tests.push(
         title: "editing"
     },
     {
+        page: "grid/editinginline.html",
+        title: "editing inline"
+    },
+
+    {
         page: "grid/deleting.html",
         title: "deleting"
     },
