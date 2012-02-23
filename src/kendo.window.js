@@ -21,9 +21,9 @@
      *
      * @exampleTitle Create a simple HTML element with the Window content
      * @example
-     * <p id="window">
+     * <div id="window">
      *     Content of the Window
-     * </p>
+     * </div>
      *
      * @exampleTitle Initialize the Window using a selector
      * @example
