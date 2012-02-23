@@ -139,6 +139,7 @@
                     footer: "template"
                 });
 
+                dateView.calendar = new kendo.ui.Calendar($("<div/>"));
                 dateView._calendar();
 
                 equal(dateView.calendar._today.html(), "template");

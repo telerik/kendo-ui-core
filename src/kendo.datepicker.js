@@ -100,6 +100,7 @@
     DIV = "<div />",
     SPAN = "<span />",
     CLICK = (touch ? "touchend" : "click"),
+    CLICK_DATEPICKER = CLICK + ".datepicker",
     OPEN = "open",
     CLOSE = "close",
     CHANGE = "change",
@@ -154,15 +155,19 @@
 
                 element.appendTo(popup.element)
                        .data(DATEVIEW, that)
-                       .bind(CLICK, proxy(that._click, that))
+                       .undelegate(CLICK_DATEPICKER)
+                       .delegate("td:has(.k-link)", CLICK_DATEPICKER, proxy(that._click, that))
                        .unbind(MOUSEDOWN)
                        .bind(MOUSEDOWN, options.clearBlurTimeout)
                        .show();
 
                 calendar.unbind(CHANGE)
-                        .unbind(NAVIGATE)
-                        .bind(NAVIGATE, proxy(that._navigate, that))
                         .bind(CHANGE, options);
+
+                if (!touch) {
+                    calendar.unbind(NAVIGATE)
+                            .bind(NAVIGATE, proxy(that._navigate, that))
+                }
 
                 calendar.month = that.month;
                 calendar.options.depth = options.depth;

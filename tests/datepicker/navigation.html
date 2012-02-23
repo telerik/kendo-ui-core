@@ -24,7 +24,7 @@
                 keys = kendo.keys,
                 div, input;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 150;
 
             module("kendo.ui.DatePicker API", {
                 setup: function() {
@@ -51,7 +51,7 @@
                             preventDefault: function() { start(); }
                         });
 
-                }, 200);
+                }, 100);
             });
 
             test("click enter should raise change event if dateview is closed", function() {
@@ -272,7 +272,7 @@
                     equal(+dv._current, +focusedDate);
                     equal(dv.calendar._table.find(".k-state-focused").text(), "Mar");
                     start();
-                },300);
+                },100);
             });
 
             //DECADE VIEW
@@ -609,7 +609,7 @@
                     ok(dv.popup.visible());
                     equal(dv.calendar._table.find(".k-state-focused").length, 1);
                     start();
-                }, 400);
+                }, 100);
             });
 
             test("Enter should select date", function() {
@@ -694,10 +694,10 @@
                     equal(input.val(), value);
                     equal(datepicker.value(), null);
                     start();
-                }, 300);
+                }, 100);
             });
 
-            test("click on selected date should close the dateView", function() {
+            asyncTest("click on selected date should close the dateView", 1, function() {
                 var dv = new DateView({
                     min: new Date(1800, 1, 1),
                     max: new Date(2800, 1, 1),
@@ -706,13 +706,15 @@
                     anchor: $("<input />"),
                     clearBlurTimeout: $.noop,
                     close: function() {
+                        start();
                         ok(true);
                     }
                 });
 
                 dv.calendar = div.kendoCalendar().data("kendoCalendar");
-                dv.open();
                 dv.value(new Date());
+                dv.popup.open();
+                dv.open();
 
                 dv.calendar
                   .element
