@@ -238,6 +238,10 @@
                 {
                     "text": "Binding to remote data",
                     "url": "listview/remote-data.html"
+                },
+                {
+                    "text": "Editing",
+                    "url": "listview/editing.html"
                 }
             ]
         },
