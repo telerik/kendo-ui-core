@@ -391,6 +391,7 @@
         *     // handle event
         * });
         */
+        "open",
         /**
         * Fires when the drop-down list is closed
         * @name kendo.ui.AutoComplete#close
@@ -409,6 +410,7 @@
         *     // handle event
         * });
             */
+        "close",
             /**
             * Fires when the value has been changed.
             * @name kendo.ui.AutoComplete#change

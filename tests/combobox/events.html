@@ -298,13 +298,14 @@
             });
 
             asyncTest("open event when click _arrow", function() {
-                input.kendoComboBox({
+                var combobox = input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     open: function() {
                         ok(true);
+                        ok(this === combobox, "'this' is not the correct scope");
                         start();
                     }
-                });
+                }).data("kendoComboBox");
 
                 input.data("kendoComboBox")._arrow.trigger(CLICK);
             });
@@ -366,6 +367,7 @@
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {
                         ok(true);
+                        ok(this === combobox, "'this' is not the correct scope");
                         start();
                     }
                 });
