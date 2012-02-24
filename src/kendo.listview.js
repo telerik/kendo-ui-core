@@ -37,7 +37,7 @@
 
             that._selectable();
 
-            if(that.options.autoBind){
+            if (that.options.autoBind){
                 that.dataSource.fetch();
             }
         },
@@ -275,12 +275,11 @@
                data = that.dataSource.view()[item.index()],
                container = $(that.editTemplate(data)).addClass(KEDITITEM);
 
-            if (that._closeEditable()) {
-                item.replaceWith(container);
-                that.editable = container.kendoEditable({ model: data, clearContainer: false }).data("kendoEditable");
+            that.cancel();
+            item.replaceWith(container);
+            that.editable = container.kendoEditable({ model: data, clearContainer: false }).data("kendoEditable");
 
-                that.trigger(EDIT, { model: data, item: container });
-            }
+            that.trigger(EDIT, { model: data, item: container });
        },
 
        save: function() {
@@ -291,11 +290,13 @@
 
        remove: function(item) {
            var that = this,
-               data = that.dataSource.view()[item.index()];
+               dataSource = that.dataSource,
+               data = dataSource.view()[item.index()];
 
            if (!that.trigger(REMOVE, { model: data, item: item })) {
                item.hide();
-               that.dataSource.remove(data);
+               dataSource.remove(data);
+               dataSource.sync();
            }
        },
 
@@ -308,10 +309,9 @@
                index = 0;
            }
 
-           if (that._closeEditable()) {
-               dataSource.insert(index, {});
-               that.edit(that.element.children().first());
-           }
+           that.cancel();
+           dataSource.insert(index, {});
+           that.edit(that.element.children().first());
        },
 
        cancel: function() {
