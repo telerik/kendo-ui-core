@@ -26,6 +26,13 @@
             <br/>
             <label for="input4">Disabled AutoComplete:</label>
             <input id="input4" value=""/>
+            <br/>
+            <label for="input4">ComboBox from Select:</label>
+            <select id="Select1">
+                <option value="">buhal</option>
+                <option value="muhal">muhal</option>
+            </select>
+
             <script>
                 $(document).ready(function () {
                     var data = [
@@ -69,6 +76,12 @@
                         dataSource: data,
                         dataTextField: "",
                         filter: "contains",
+                        dataValueField: ""
+                    });
+
+                    $("#Select1").kendoComboBox({
+                        autoBind: false,                        
+                        dataTextField: "",
                         dataValueField: ""
                     });
                 });

@@ -15,6 +15,9 @@
   <Description />
   <IndependentDescriptors />
   <Name>SharedDataSourceYearDescending</Name>
+  <QcFilePath i:nil="true" />
+  <QcId>0</QcId>
+  <QcTestVersionStamp>0</QcTestVersionStamp>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
@@ -23,7 +26,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bafb6a13-c741-46c6-bd22-9b07aaf31609</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>9d8f0538-72d9-473f-9457-8215d57c719f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -58,7 +63,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>7402065a-1e91-4f37-9504-0b9ecc9d52da</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>5c54a042-7889-4dab-b496-29e4e09c0b11</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -143,7 +150,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>af791a4c-79f0-4cef-b559-17b6aaf0a715</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>0103bd11-0655-4d4e-8d6f-c13da3d39054</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -233,7 +242,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>b95d8731-74d3-41da-9d42-1e1f7de9a1d7</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>d0dda9bb-14fc-4cbf-9148-66d5c66e06d9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -331,7 +342,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>953cadf0-0391-4644-b605-3b781aa7d2fd</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>80eb5cb5-c571-4d48-ba3f-a9c59da8c440</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -419,7 +432,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ea0bd799-9772-4717-9cbd-15e37d510c34</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>4c426956-08de-4910-8c36-7dd0941ea23b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -528,7 +543,7 @@
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurationFilePath>E:\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{fc6e091f-1b8f-4bfb-9e6f-21f4025b91ac}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{fc6e091f-1b8f-4bfb-9e6f-21f4025b91ac}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:KeyValueOfstringbase64Binary>

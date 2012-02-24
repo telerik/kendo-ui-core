@@ -28,7 +28,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>d159df0f-6fd0-4595-bbbc-acc950f1944e</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c2c82e46-ef59-4ded-8cf1-73d6f4ebdd33</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -65,7 +65,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>35e679b2-5880-427a-b1b7-14044e9af324</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>85e7e8ac-fd58-4ed0-8569-51cc738161db</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -152,7 +152,181 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>4843505d-b5b9-4174-8b2c-e568afd5fd61</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>268178d4-ba91-41ff-890b-005fe29a8c84</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>textTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[1]/span[1]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TagIndex=span:362</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>IsEqualToSpan</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>textTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BindingToLocalData1</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/local-data.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Binding to local data</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:CompareType>Contains</d2p1:CompareType>
+        <d2p1:ExpectedString>Is equal to</d2p1:ExpectedString>
+        <d2p1:SegmentType>TextContent</d2p1:SegmentType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>AssertDefaultFilteringOptioncqvxw0ox.4vv</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for 'TextContent' 'Contains' 'Is equal to' on 'IsEqualToSpan0'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>8e4158d0-5c19-42c8-baf3-1207a6d3425a</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>textTarget</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[3]/span[1]/span[1]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TagIndex=span:372</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>IsEqualToSpan0</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>textTarget</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>BindingToLocalData1</d2p1:FriendlyName>
+                <d2p1:Path>/web/grid/local-data.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Binding to local data</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:CompareType>Contains</d2p1:CompareType>
+        <d2p1:ExpectedString>Is equal to</d2p1:ExpectedString>
+        <d2p1:SegmentType>TextContent</d2p1:SegmentType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>AssertDefaultFilteringOptionbq3asvca.f3y</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for 'TextContent' 'Contains' 'Is equal to' on 'IsEqualToSpan'</d2p1:Description>
+      <d2p1:Enabled>false</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>528ab706-e451-4924-8b03-aa83522d321d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -234,12 +408,12 @@
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
       <d2p1:Description>Wait for 'TextContent' 'Contains' 'Is equal to' on 'IsEqualToSpan0'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Enabled>false</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>de66a1d4-3f6c-483e-a67d-0a861863862c</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>db37cd53-4d5b-4ad2-b20f-08bd82cd5b3f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

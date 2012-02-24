@@ -68,13 +68,50 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Enter text 'Red' in 'WordText'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/autocomplete/api.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>11dfabbd-4899-4e9a-af62-2c38238904dc</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>60cd87f8-d9d7-424f-9c08-5571abb078be</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/web/autocomplete/api.html</d2p1:NavigateURL>
+      </d2p1:Step>
+      <d2p1:StepImageKey>FindStartingWithqvbl3pv0.qvf</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Enter text 'Red' in 'WordText'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>2</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>2fb6cc8d-b177-4bbe-b373-8bab8ce18010</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -166,10 +203,10 @@
       <d2p1:Description>Click 'SearchButtonTag'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>2</d2p1:Order>
+      <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>e3992041-bae3-4945-b45e-0dd7c4634ab5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>06dd737f-ba72-4dca-a88b-4997f3af287b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -251,10 +288,10 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' 'Red' on 'RedListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>3</d2p1:Order>
+      <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>9e16f5e0-35e3-443d-a580-1fb75f9d7d63</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>99c4ad10-66ad-4a6f-93c9-2a6328c16ebe</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -341,10 +378,10 @@
       <d2p1:Description>Click 'RedListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
+      <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>24dda6c6-4f3a-4912-8cd4-fc9ba54a577d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6f2caa62-eff1-4488-b878-1b505e4a563a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -426,10 +463,10 @@
       <d2p1:Description>Wait for input 'ProductsText' value 'Exact' 'Red'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
+      <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>769de26c-d60f-457e-b534-63b141d9b497</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>f0f6dcdd-1131-48b6-be9a-7893acffcdb4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputValueVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -515,11 +552,11 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
     <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>

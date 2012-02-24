@@ -74,28 +74,28 @@ namespace KendoDemosTests
 
         #endregion
 
-        [CodedStep(@"ASSERT_VALUE_IN_Discount_start_date:")]
-        public void Globalization_CodedStep()
-        {
+        //[CodedStep(@"ASSERT_VALUE_IN_Discount_start_date:")]
+        //public void Globalization_CodedStep()
+        //{
 
-            // Wait for '250' msec.
-            System.Threading.Thread.Sleep(250);
-            CultureInfo bgCulture = CultureInfo.CreateSpecificCulture("bg-BG");
-            DateTime Tomorrow = DateTime.Today.AddDays(1);
-            //DateTime Today = DateTime.Today;
-            //String format = "d.mm.yyyy";
-            //string TodayStr = Today.ToString(format);
+            //// Wait for '250' msec.
+            //System.Threading.Thread.Sleep(250);
+            //CultureInfo bgCulture = CultureInfo.CreateSpecificCulture("bg-BG");
+            //DateTime Tomorrow = DateTime.Today.AddDays(1);
+            ////DateTime Today = DateTime.Today;
+            ////String format = "d.mm.yyyy";
+            ////string TodayStr = Today.ToString(format);
 
 
-            //Console.WriteLine(thisDate.ToString("d", culture));
+            ////Console.WriteLine(thisDate.ToString("d", culture));
             
-            System.Threading.Thread.Sleep(250);
-            //MessageBox.Show(Tomorrow.ToString("d", bgCulture));
-            Assert.IsTrue(ArtOfTest.Common.CompareUtils.StringCompare(Pages.Globalization.StartDateText.Text, Tomorrow.ToString("d", bgCulture), ArtOfTest.Common.StringCompareType.Same));
+            //System.Threading.Thread.Sleep(250);
+            ////MessageBox.Show(Tomorrow.ToString("d", bgCulture));
+            //Assert.IsTrue(ArtOfTest.Common.CompareUtils.StringCompare(Pages.Globalization.StartDateText.Text, Tomorrow.ToString("d", bgCulture), ArtOfTest.Common.StringCompareType.Same));
             
             
             
-        }
+        //}
 
         [CodedStep(@"Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.")]
         public void Globalization_CodedStep1()

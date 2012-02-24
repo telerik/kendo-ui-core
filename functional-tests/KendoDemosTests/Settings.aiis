@@ -76,5 +76,6 @@
     <Item Type="System.String">KendoMenu for KendoUI Translators</Item>
     <Item Type="System.String">KendoPanelBar for KendoUI Translators</Item>
     <Item Type="System.String">KendoTabStrip for KendoUI Translators</Item>
+    <Item Type="System.String">KendoTreeView for KendoUI Translators</Item>
   </DisabledTranslators>
 </ProjectSettings>
