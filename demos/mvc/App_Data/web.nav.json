@@ -428,6 +428,10 @@
                     "url": "treeview/dragdrop.html"
                 },
                 {
+                    "text": "Images",
+                    "url": "treeview/images.html"
+                },
+                {
                     "text": "Events",
                     "url": "treeview/events.html"
                 },
