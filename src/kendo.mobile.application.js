@@ -172,6 +172,24 @@
     * </script>
     *
     * @section
+    * <p>The <strong>Application</strong> supports a platform specific layouts. They can be specified using <code>data-platform=""</code></p>
+    * @exampleTitle iOS and Android Application Layout
+    * @example
+    * <div data-role="view">Bar</div>
+    *
+    * <div data-role="layout" data-id="foo" data-platform="ios">
+    *   <div data-role="header">Header</div>
+    * </div>
+    *
+    * <div data-role="layout" data-id="foo" data-platform="android">
+    *   <div data-role="header">Header</div>
+    * </div>
+    *
+    * <script>
+    *      new kendo.mobile.Application($(document.body), { layout: "foo" });
+    * </script>
+    *
+    * @section
     *
     * <h3>Navigation</h3>
     * <p>When initialized, the mobile <strong>Application</strong> modifies the kendo mobile widgets' behavior so that they navigate between <strong>Views</strong> when pressed.
@@ -248,7 +266,7 @@
     *
     * <h3>Web Clip Icons</h3>
     *
-    * <p>The mobile devices can create a bookmark with a custom icon placed on the Home screen. Users tap the icon to reach the web page.</p>
+    * <p>The mobile devices can create a bookmark with a custom icon, placed on the Home screen. Users can use the shortcut to open that web page later.</p>
     *
     * @exampleTitle Define web clip icon
     * @example
