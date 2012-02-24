@@ -197,6 +197,30 @@
                 equal(viewModel.foo.indexOf({ bar: 42 }), -1);
             });
 
+            test("pop raises the change event and removes the last item", 2, function() {
+                var viewModel = kendo.observable({ foo: [ { bar: 1 } ] });
+                var last = viewModel.foo[0];
+
+
+                viewModel.foo.bind("change", function(e) {
+                    equal(e.items[0], last);
+                    equal(e.index, 0);
+                });
+
+                viewModel.foo.pop();
+            });
+
+            test("pop raises the change event and action is remove", 1, function() {
+                var viewModel = kendo.observable({ foo: [ { bar: 1 } ] });
+                var last = viewModel.foo[0];
+
+
+                viewModel.foo.bind("change", function(e) {
+                    equal(e.action, "remove");
+                });
+
+                viewModel.foo.pop();
+            });
         </script>
     </head>
 </html>

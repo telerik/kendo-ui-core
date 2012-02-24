@@ -175,9 +175,6 @@
         dateRegExp = /^\/Date\((.*?)\)\/$/,
         quoteRegExp = /(?=['\\])/g;
 
-    function set(object, field, value) {
-    }
-
     var ObservableArray = Observable.extend({
         init: function(array, type) {
             var that = this,
@@ -239,7 +236,17 @@
 
         join: join,
 
-        pop: pop,
+        pop: function() {
+            var index = this.length, result = pop.apply(this);
+
+            this.trigger(CHANGE, {
+                action: "remove",
+                index: index - 1,
+                items:[result]
+            });
+
+            return result;
+        },
 
         splice: function(index, howMany, item) {
             var result = splice.apply(this, arguments);
