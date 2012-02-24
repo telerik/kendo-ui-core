@@ -36,7 +36,13 @@
                 options = $.extend({
                     template: "<li>${foo}</li>",
                     dataSource: dataSource = new DataSource({
-                        data: data,
+                        transport: {
+                            read: function(options) {
+                                options.success(data);
+                            },
+                            destroy: function() {
+                            }
+                        },
                         schema: {
                             model: {
                                 id: "id",
@@ -186,6 +192,16 @@
                 ok(listView.element.children().eq(1).data("kendoEditable"));
             });
 
+            test("edit cancels previous edited item changes", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
+
+                listView.edit(listView.element.children().eq(0));
+                dataSource.get(0).set("foo", "bar");
+                listView.edit(listView.element.children().eq(1));
+
+                equal(dataSource.get(0).foo, "foo 0");
+            });
+
             test("save does not close edited item if validation fails", function() {
                 var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
 
@@ -205,17 +221,6 @@
                 listView.save();
 
                 ok(sync.calls("sync"));
-            });
-
-            test("edit does not close previous edited item if validation fails", function() {
-                var listView = setup({ editTemplate: '<li><input data-value="foo" required/></li>' });
-
-                listView.edit(listView.element.children().eq(0));
-                listView.element.find(":input").val("");
-                listView.edit(listView.element.children().eq(1));
-
-                ok(listView.element.children().eq(0).data("kendoEditable"));
-                ok(!listView.element.children().eq(1).data("kendoEditable"));
             });
 
             test("remove hides the item", function() {
@@ -280,6 +285,15 @@
                 ok(dataSource.get(0));
             });
 
+            test("remove calls dataSource sync", function() {
+                var listView = setup(),
+                    syncMethod= stub(dataSource, "sync");
+
+                listView.remove(listView.element.children().first());
+
+                ok(syncMethod.calls("sync"));
+            });
+
             test("add adds new model in DataSource", function() {
                 var listView = setup();
                 listView.add();
@@ -340,18 +354,14 @@
                 ok(args.model.isNew());
             });
 
-            test("add does not add new item if validation fails", function() {
-                var listView = setup({
-                    editTemplate: '<li><input data-value="foo" required/></li>'
-                });
+            test("add cancels previous edited item changes", function() {
+                var listView = setup({ editTemplate: "<li>${foo}</li>" });
 
-                listView.edit(ul.children().eq(0));
-                ul.find(":input").val("");
+                listView.edit(listView.element.children().eq(0));
+                dataSource.get(0).set("foo", "bar");
                 listView.add();
 
-                var editable = ul.find(".k-edit-item").data("kendoEditable");
-
-                ok(!editable.options.model.isNew());
+                equal(dataSource.get(0).foo, "foo 0");
             });
 
             test("cancel calls cancelChanges of DataSource for the edited item", function() {
