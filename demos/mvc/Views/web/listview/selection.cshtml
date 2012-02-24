@@ -1,0 +1,64 @@
+<div id="example" class="k-content">
+
+    <div id="listView"></div>
+
+    <div class="k-grid-pager">
+        <div id="pager"></div>
+    </div>
+
+    <div class="console"></div>
+    <script type="text/x-kendo-tmpl" id="template">
+        <div>
+            <img src="../../content/shared/images/foods/${ProductID}.jpg" alt="${ProductName} image" />
+            <dl>
+                <dt>Product Name</dt>
+                <dd>${ProductName}</dd>
+                <dt>Unit Price</dt>
+                <dd>${kendo.toString(UnitPrice, "c")}</dd>
+                <dt>Units In Stock</dt>
+                <dd>${UnitsInStock}</dd>
+            </dl>
+        </div>
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            var dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "http://demos.kendoui.com/service/Products",
+                            dataType: "jsonp"
+                        }
+                    },
+                    pageSize: 5
+                });
+
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                selectable: "multiple",
+                navigatable: true,
+                dataBound: onDataBound,
+                change: onChange,
+                template: kendo.template($("#template").html())
+            });
+
+            function onDataBound() {
+                kendoConsole.log("ListView data bound");
+            }
+
+            function onChange() {
+                var data = dataSource.view(),
+                    selected = $.map(this.select(), function(item) {
+                        return data[$(item).index()].ProductName;
+                    });
+
+                kendoConsole.log("Selected: " + selected.length + " item(s), [" + selected.join(", ") + "]");
+            }
+        });
+    </script>
+
+</div>
