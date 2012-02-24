@@ -59,11 +59,11 @@
             });
 
             test("binds to datasource referenced by data attribute", function() {
-                var dom = $('<ul data-source="foo" />');
+                var dom = $('<ul data-role="listview" data-source="foo" />');
 
                 window.foo =  [1, 2];
 
-                new ListView(dom);
+                kendo.mobile.init(dom);
 
                 equal(dom.children().length, 2);
             });
