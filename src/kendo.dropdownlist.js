@@ -376,6 +376,7 @@
             *     // handle event
             * });
             */
+            "open",
 
             /**
             * Fires when the drop-down list is closed
@@ -397,6 +398,7 @@
             *     // handle event
             * });
             */
+            "close",
 
             /**
             * Fires when the value has been changed.

@@ -113,6 +113,7 @@
                 var timepicker = input.kendoTimePicker({
                                             open: function() {
                                                 ok(true);
+                                                ok(this === timepicker);
                                                 start();
                                             }
                                        })
@@ -125,6 +126,7 @@
                 var timepicker = input.kendoTimePicker({
                                             close: function() {
                                                 ok(true);
+                                                ok(this === timepicker);
                                                 start();
                                             }
                                        })

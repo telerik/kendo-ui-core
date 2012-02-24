@@ -97,6 +97,7 @@
                 var datepicker = input.kendoDatePicker({
                                             open: function() {
                                                 ok(true);
+                                                ok(this === datepicker);
                                                 start();
                                             }
                                        })
@@ -124,6 +125,7 @@
                 var datepicker = input.kendoDatePicker({
                                             close: function() {
                                                 ok(true);
+                                                ok(this === datepicker);
                                                 start();
                                             }
                                        })

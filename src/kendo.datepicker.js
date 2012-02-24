@@ -575,7 +575,17 @@
                     that._change(this.value());
                     that.close();
                 },
-                clearBlurTimeout: proxy(that._clearBlurTimeout, that)
+                clearBlurTimeout: proxy(that._clearBlurTimeout, that),
+                close: function(e) {
+                    if (that.trigger(CLOSE)) {
+                        e.preventDefault();
+                    }
+                },
+                open: function(e) {
+                    if (that.trigger(OPEN)) {
+                        e.preventDefault();
+                    }
+                }
             }));
 
             that._icon();
@@ -661,6 +671,8 @@
         *     // handle event
         * });
         */
+        OPEN,
+        CLOSE,
         CHANGE],
         options: {
             name: "DatePicker",
