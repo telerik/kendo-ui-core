@@ -38,6 +38,7 @@
         scrollTo = window.scrollTo,
         WINDOW = $(window),
         HEAD = $("head"),
+        CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
 
         proxy = $.proxy;
 
@@ -283,6 +284,7 @@
                 that._setupAppLinks();
                 that._setupLayouts(that.element);
                 that._startHistory();
+                that._attachCapture();
             });
         },
 
@@ -490,6 +492,21 @@
             if (newHeight != element.height()) {
                 element.height(newHeight);
                 setTimeout(scrollTo, 0, 0, 1);
+            }
+        },
+
+        _attachCapture: function() {
+            var that = this;
+            that.transitioning = false;
+
+            function capture(e) {
+                if (that.transitioning) {
+                    e.stopPropagation();
+                }
+            }
+
+            for (var i = 0; i < CAPTURE_EVENTS.length; i ++) {
+                that.element[0].addEventListener(CAPTURE_EVENTS[i], capture, true);
             }
         },
 
