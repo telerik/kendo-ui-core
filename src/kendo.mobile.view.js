@@ -38,6 +38,7 @@
             that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
 
             that.element.prepend(that.header).append(that.footer);
+
             if (that.layout) {
                 that.layout.setup(that);
             }
@@ -112,9 +113,14 @@
 
         replace: function(previous, view) {
             var that = this,
-                callback = function() { previous.element.hide(); },
+                callback = function() {
+                    that.application.transitioning = false;
+                    previous.element.hide();
+                },
+
                 animationType;
 
+            that.application.transitioning = true;
             that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
 
             animationType = that.application.dataOrDefault((that.back ? previous : view).element, "transition");
