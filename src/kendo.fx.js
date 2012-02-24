@@ -597,7 +597,7 @@
                 originalOverflow = commonParent.css(OVERFLOW);
 
             options = parseTransitionEffects(options);
-            commonParent.css("overflow", "hidden");
+            commonParent.css(OVERFLOW, "hidden");
 
             $.each(options.effects, function(name, definition) {
                 direction = direction || definition.direction;

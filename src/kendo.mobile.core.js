@@ -327,8 +327,7 @@
             roles: {},
             plugin: function(widget) {
                 kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
-            },
-
+            }
         },
 
         Move: Move,

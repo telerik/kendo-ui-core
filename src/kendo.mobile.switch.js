@@ -203,7 +203,7 @@
             if (that._animateBackground) {
                 that.background
                     .kendoStop(true, true)
-                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: duration });
+                    .kendoAnimate({ effects: "slideMargin", offset: distance, reverse: !checked, axis: "left", duration: duration, ease: "linear" });
             }
 
             handle

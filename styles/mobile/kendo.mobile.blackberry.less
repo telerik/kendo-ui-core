@@ -339,10 +339,12 @@
 .km-blackberry .km-tabstrip .km-text
 {
     position: absolute;
-    display: block;
+    display: inline-block;
+    font-size: 0;
     top: 0;
+    right: 1rem;
+    width: 0;
     height: 0;
-    text-indent: -9999px;
 }
 
 .km-blackberry .km-tabstrip .km-badge
@@ -364,15 +366,22 @@
     background-color: #057fe4;
 }
 
-.km-blackberry .km-listview-link .km-icon,
+.km-blackberry .km-listview-link .km-icon
+{
+    background-color: #2a3235;
+}
+
 .km-blackberry .km-detail .km-icon
 {
     background-color: #fff;
 }
 
-.km-blackberry .km-detail .km-icon
+.km-blackberry .km-content,
+.km-blackberry .km-header,
+.km-blackberry .km-footer,
+.km-blackberry .km-icon
 {
-    .transform(translatez(0));
+    -webkit-transform: translatez(0);
 }
 
 .km-blackberry .km-button .km-icon,
