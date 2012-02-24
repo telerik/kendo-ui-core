@@ -698,6 +698,10 @@
      *       ";" - section separator
      *     </dt>
      *     <dd>Defines sections wih separate format strings for positive, negative, and zero numbers</dd>
+     *     <dt>
+     *       "string"/'string' - Literal string delimiter
+     *     </dt>
+     *     <dd>Indicates that the enclosed characters should be copied to the result string</dd>
      *   </dl>
      * </div>
      *
