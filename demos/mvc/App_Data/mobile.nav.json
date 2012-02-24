@@ -126,7 +126,7 @@
             ]
         },
         {
-            "text": "Tabstrip",
+            "text": "TabStrip",
             "name": "tabstrip",
             "spriteCssClass": "mobileTabStripIcon",
             "items": [
