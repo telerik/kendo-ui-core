@@ -173,12 +173,16 @@
                     "url": "grid/remote-data.html"
                 },
                 {
-                    "text": "Editing",
+                    "text": "Batch Editing",
                     "url": "grid/editing.html"
                 },
                 {
                     "text": "Inline Editing",
                     "url": "grid/editing-inline.html"
+                },
+                {
+                    "text": "Popup Editing",
+                    "url": "grid/editing-popup.html"
                 },
                 {
                     "text": "Virtualization of local data",

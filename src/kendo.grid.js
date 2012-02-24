@@ -1107,16 +1107,6 @@
                             e.preventDefault();
                             that.editRow($(this).closest("tr"));
                         });
-
-                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-cancel", CLICK, function(e) {
-                            e.preventDefault();
-                            that.cancelRow();
-                        });
-
-                        that.wrapper.delegate("tbody>tr:not(.k-detail-row,.k-grouping-row):visible a.k-grid-update", CLICK, function(e) {
-                            e.preventDefault();
-                            that.saveRow();
-                        });
                     }
                 }
 
@@ -1169,6 +1159,11 @@
             if (that.editable) {
                 that.editable.distroy();
                 delete that.editable;
+
+                if (that._editMode() === "popup") {
+                    that._editContainer.data("kendoWindow").close();
+                }
+
                 that._editContainer = null;
             }
         },
@@ -1223,7 +1218,8 @@
          */
         removeRow: function(row) {
             var that = this,
-                model;
+                model,
+                mode;
 
             if (!that._confirmation()) {
                 return;
@@ -1235,7 +1231,9 @@
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
 
-                if (that._editMode() === "inline") {
+                mode = that._editMode();
+
+                if (mode === "inline" || mode === "popup") {
                     that.dataSource.sync();
                 }
             }
@@ -1255,41 +1253,129 @@
         editRow: function(row) {
             var that = this,
                 model = that._modelForContainer(row),
+                container;
+
+            that.cancelRow();
+
+            if (model) {
+                if (that._editMode() === "popup") {
+                    that._createPopUpEditor(model);
+                } else {
+                    that._createInlineEditor(row, model);
+                }
+                container = that._editContainer;
+
+                container.delegate("a.k-grid-cancel", CLICK, function(e) {
+                    e.preventDefault();
+                    that.cancelRow();
+                });
+
+                container.delegate("a.k-grid-update", CLICK, function(e) {
+                    e.preventDefault();
+                    that.saveRow();
+                });
+            }
+        },
+
+        _createPopUpEditor: function(model) {
+            var that = this,
+                html = '<div><div class="k-edit-form-container">',
+                column,
+                fields = [],
+                idx,
+                length,
+                tmpl,
+                editable = that.options.editable,
+                options = isPlainObject(editable) ? editable.window : {},
+                settings = extend({}, kendo.Template, that.options.templateSettings);
+
+            for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                column = that.columns[idx];
+
+                if (!column.command) {
+                    html += '<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field) + '</label></div>';
+
+                    if (model.editable(column.field)) {
+                        fields.push({ field: column.field, format: column.format, editor: column.editor });
+                        html += '<div ' + kendo.attr("container-for") + '="' + column.field + '" class="k-edit-field"></div>';
+                    } else {
+                        var state = { storage: {}, count: 0 };
+
+                        tmpl = kendo.template(that._cellTmpl(column, state), settings);
+
+                        if (state.count > 0) {
+                            tmpl = proxy(tmpl, state.storage);
+                        }
+
+                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
+                    }
+                }
+            }
+
+            html += that._createButton("update") + that._createButton("canceledit");
+            html += '</div></div>';
+
+            var container = that._editContainer = $(html)
+                .appendTo(that.wrapper)
+                .kendoWindow(extend({
+                    modal: true,
+                    resizable: false,
+                    draggable: true,
+                    title: "Edit",
+                    visible: false
+                }, options));
+
+            var wnd = container.data("kendoWindow");
+
+            wnd.wrapper.delegate(".k-close", "click", function() {
+                    that.cancelRow();
+                });
+
+            that.editable = that._editContainer
+                .kendoEditable({
+                    fields: fields,
+                    model: model,
+                    clearContainer: false
+                }).data("kendoEditable");
+
+            wnd.center().open();
+
+            that.trigger(EDIT, { container: container, model: model });
+        },
+
+        _createInlineEditor: function(row, model) {
+            var that = this,
                 column,
                 cell,
                 fields = [],
                 idx,
                 length;
 
-            that.cancelRow();
+            row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
+                cell = $(this);
+                column = that.columns[that.cellIndex(cell)];
 
-            if (model) {
-                row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
-                    cell = $(this);
-                    column = that.columns[that.cellIndex(cell)];
+                if (!column.command && model.editable(column.field)) {
+                    fields.push({ field: column.field, format: column.format, editor: column.editor });
+                    cell.attr("data-container-for", column.field);
+                    cell.empty();
+                } else if (column.command && hasCommand(column.command, "edit")) {
+                    cell.empty();
+                    $(that._createButton("update") + that._createButton("canceledit")).appendTo(cell);
+                }
+            });
 
-                    if (!column.command && model.editable(column.field)) {
-                        fields.push({ field: column.field, format: column.format, editor: column.editor });
-                        cell.attr("data-container-for", column.field);
-                        cell.empty();
-                    } else if (column.command && hasCommand(column.command, "edit")) {
-                        cell.empty();
-                        $(that._createButton("update") + that._createButton("canceledit")).appendTo(cell);
-                    }
-                });
+            that._editContainer = row;
 
-                that._editContainer = row;
+            that.editable = row
+            .addClass("k-grid-edit-row")
+            .kendoEditable({
+                fields: fields,
+                model: model,
+                clearContainer: false
+            }).data("kendoEditable");
 
-                that.editable = row
-                    .addClass("k-grid-edit-row")
-                    .kendoEditable({
-                        fields: fields,
-                        model: model,
-                        clearContainer: false
-                    }).data("kendoEditable");
-
-                that.trigger(EDIT, { container: row, model: model });
-            }
+            that.trigger(EDIT, { container: row, model: model });
         },
 
         cancelRow: function() {
@@ -1303,7 +1389,9 @@
 
                 that.dataSource.cancelChanges(model);
 
-                that._displayRow(container);
+                if (that._editMode() !== "popup") {
+                    that._displayRow(container);
+                }
 
                 that._distroyEditable();
             }
@@ -1318,7 +1406,10 @@
             if (container && editable && editable.end() &&
                 !that.trigger(SAVE, { container: container, model: model } )) {
 
-                that._displayRow(container);
+                if (that._editMode() !== "popup") {
+                    that._displayRow(container);
+                }
+
                 that._distroyEditable();
                 that.dataSource.sync();
             }
@@ -1390,7 +1481,7 @@
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
                     cell = row.children("td:not(.k-group-cell,.k-hierarchy-cell)").first();
 
-                if (mode === "inline" && row.length) {
+                if ((mode === "inline" || mode === "popup") && row.length) {
                     that.editRow(row);
                 } else if (cell.length) {
                     that.editCell(cell);
