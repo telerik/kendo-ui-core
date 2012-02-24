@@ -2297,16 +2297,15 @@
     }
 
     kendo.initWidget = function(element, options, namespace) {
-        var role,
-            result,
+        element = $(element);
+
+        var result,
             option,
             widget,
             idx,
-            length;
-
-        element = $(element);
-
-        role = element.data(kendo.ns + "role");
+            length,
+            role = element.data(kendo.ns + "role"),
+            dataSource = element.data(kendo.ns + "source");
 
         if (!role) {
             return;
@@ -2318,8 +2317,11 @@
             return;
         }
 
-
         options = $.extend({}, parseOptions(element, widget.fn.options), options);
+
+        if (dataSource) {
+            options["dataSource"] = window[dataSource];
+        }
 
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
             option = widget.fn.events[idx];
