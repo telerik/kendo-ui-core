@@ -26,7 +26,8 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     BUILDER_PATH = "download-builder",
     BUILDER_STAGING_PATH = path.join(DEPLOY_PATH, "download-builder-staging"),
     BUILDER_STAGING_SERVICE = "http://mvc-kendobuild/staging/download-builder-service",
-    BUILDER_PROJECT = path.join("service", "Download.csproj"),
+    BUILDER_SERVICE_PATH = "service",
+    BUILDER_PROJECT = path.join(BUILDER_SERVICE_PATH, "Download.csproj"),
     BUILDER_CONFIG_NAME = path.join("config", "kendo-config.json"),
     BUILDER_CONFIG_TEMPLATE = path.join("config", "kendo-config.$VERSION.json"),
     RELEASE_PATH = "release",
@@ -140,7 +141,7 @@ namespace("download-builder", function() {
     desc("Build staging download builder site");
     task("staging", ["merge-scripts"], function() {
         var indexPath = path.join(BUILDER_STAGING_PATH, "index.html"),
-            appDataPath = path.join(BUILDER_STAGING_PATH, "App_Data"),
+            appDataPath = path.join(BUILDER_STAGING_PATH, BUILDER_SERVICE_PATH, "App_Data"),
             sourcePath = path.join(appDataPath, version());
 
         copyDir(BUILDER_PATH, BUILDER_STAGING_PATH);
