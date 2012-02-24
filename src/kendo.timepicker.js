@@ -87,6 +87,8 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         keys = kendo.keys,
+        OPEN = "open",
+        CLOSE = "close",
         CHANGE = "change",
         CLICK = (touch ? "touchend" : "click"),
         DEFAULT = "k-state-default",
@@ -457,6 +459,16 @@
                         element.val(value);
                     }
                 },
+                open: function(e) {
+                    if (that.trigger(OPEN)) {
+                        e.preventDefault();
+                    }
+                },
+                close: function(e) {
+                    if (that.trigger(CLOSE)) {
+                        e.preventDefault();
+                    }
+                },
                 clearBlurTimeout: proxy(that._clearBlurTimeout, that)
             }));
 
@@ -530,7 +542,9 @@
          * $("#timePicker").data("kendoTimePicker").unbind("change", onChange);
          *
          */
-            CHANGE
+         OPEN,
+         CLOSE,
+         CHANGE
         ],
 
         setOptions: function(options) {
