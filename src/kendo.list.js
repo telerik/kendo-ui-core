@@ -17,6 +17,8 @@
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         LOADING = "k-loading",
+        OPEN = "open",
+        CLOSE = "close",
         SELECT = "select",
         proxy = $.proxy;
 
@@ -186,8 +188,16 @@
 
             that.popup = new ui.Popup(list, {
                 anchor: wrapper,
-                open: options.open,
-                close: options.close,
+                open: function(e) {
+                    if (that.trigger(OPEN)) {
+                        e.preventDefault();
+                    }
+                },
+                close: function(e) {
+                    if (that.trigger(CLOSE)) {
+                        e.preventDefault();
+                    }
+                },
                 animation: options.animation
             });
 
@@ -208,7 +218,7 @@
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
-            that[open ? "open" : "close"]();
+            that[open ? OPEN : CLOSE]();
         },
         _scroll: function (item) {
 
