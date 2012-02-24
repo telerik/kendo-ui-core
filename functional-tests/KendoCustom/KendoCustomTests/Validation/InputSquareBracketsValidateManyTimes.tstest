@@ -22,13 +22,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/validation/SquareBracketsInput.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/Validation/SquareBracketsInput.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>29e1b4ba-02db-4cd1-b9f4-8cf4248355dd</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c2770108-6147-4f39-911d-6bb36e343d73</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -50,7 +50,7 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/validation/SquareBracketsInput.html</d2p1:NavigateURL>
+        <d2p1:NavigateURL>/Validation/SquareBracketsInput.html</d2p1:NavigateURL>
       </d2p1:Step>
       <d2p1:StepImageKey>InputSquareBracketsValidateManyTimesnpftixnh.02f</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
@@ -65,7 +65,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>93e7150e-fbc0-4c55-8f52-8d86630c49da</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bf904457-7bcc-4898-95e6-588090037c90</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -150,7 +150,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>2ea1d324-6d54-4d0a-bffe-e2fa4b61968a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6f24acbc-a185-4d92-a0af-8445a0f46ee7</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -185,7 +185,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>d6013500-e2ea-4de7-ae47-5ad16e562ce3</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>626d356b-7926-40af-adac-d6b9a4917731</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -270,7 +270,7 @@
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>f6bd2e90-8f7d-4244-b580-73c237027333</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7e5c39b0-6fd1-40c0-9a06-467eea8452cc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -305,7 +305,7 @@
       <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>6c3cd0f8-306a-4394-b9fc-547fb23ba9a9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>0f138d84-c19b-440d-915a-d2376816e5ac</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -390,7 +390,7 @@
       <d2p1:Order>7</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>5b31a016-8513-4e15-a92d-8c91e7539612</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>01bfac2a-078c-4069-8f9b-6d31d8f6ee8f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="SleepActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -425,7 +425,7 @@
       <d2p1:Order>8</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>3333c491-5562-41f3-a73c-f5d7a8be9828</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1846d711-36b6-4597-b4d3-38cdd881e261</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
