@@ -78,6 +78,18 @@
      *
      * @section
      * <p>Currently, the <strong>TreeView</strong> does not support binding to a remote data source.</p>
+     * @exampleTitle TreeView item JSON structure
+     * @example
+     * var item = {
+     *     text: "Item text",
+     *     imageUrl: "/images/icon.png", // renders a <img class="k-image" src="/images/icon.png" />
+     *     spriteCssClass: "icon save",  // renders a <span class="k-sprite icon save" />
+     *     items: [
+     *         // child items
+     *     ]
+     * }
+     *
+     * @section
      * <h3>Configuring TreeView Behavior</h3>
      * <p>
      *  A number of <strong>TreeView</strong> behaviors can be easily controlled by simple configuration properties,
