@@ -1,0 +1,62 @@
+
+
+        <div id="example" class="k-content">
+            <h3>TreeView with images</h3>
+
+            <div id="treeview-images"></div>
+
+            <script>
+                $("#treeview-images").kendoTreeView({
+                    dataSource: [
+                        {
+                            text: "All events", expanded: true, imageUrl: "../../content/web/calendar/party.png",
+                            items: [
+                                { text: "Birthdays", imageUrl: "../../content/web/calendar/cake.png" },
+                                { text: "Cocktails", imageUrl: "../../content/web/calendar/cocktail.png" },
+                                { text: "Exhibitions", imageUrl: "../../content/web/calendar/exhibition.png" }
+                            ]
+                        }
+                    ]
+                });
+            </script>
+
+            <h3>TreeView with sprites</h3>
+
+            <div id="treeview-sprites"></div>
+
+            <script>
+                $("#treeview-sprites").kendoTreeView({
+                    dataSource: [{
+                        text: "Kendo UI", expanded: true, spriteCssClass: "overviewIcon", items: [
+                            {
+                                text: "Web", expanded: true, items: [
+                                    { text: "Grid", spriteCssClass: "gridIcon" },
+                                    { text: "TreeView", spriteCssClass: "treeViewIcon" },
+                                    { text: "Upload", spriteCssClass: "uploadIcon" }
+                                ]
+                            },
+                            {
+                                text: "DataViz", expanded: true, items: [
+                                    { text: "Charts", spriteCssClass: "chartIcon" },
+                                    { text: "Gauges", spriteCssClass: "gaugeIcon" }
+                                ]
+                            },
+                            {
+                                text: "Mobile", expanded: true, items: [
+                                    { text: "NavBar", spriteCssClass: "mobileNavBarIcon" },
+                                    { text: "ListView", spriteCssClass: "mobileListViewIcon" },
+                                    { text: "TabStrip", spriteCssClass: "mobileTabStripIcon" }
+                                ]
+                            }
+                        ]
+                    }]
+                });
+            </script>
+
+            <style scoped>
+                #treeview-sprites .k-sprite {
+                    background-image: url("../../content/shared/styles/sprite.png");
+                    /* sprite background-positions inherited from online demos */
+                }
+            </style>
+        </div>
