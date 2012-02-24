@@ -6611,46 +6611,98 @@
 
             plotArea.box = plotBox;
             plotArea.fitScale(box);
-            var plotBoxCenter = plotArea.box.center(),
+            plotArea.alignScale(box);
+        },
+
+        alignScale: function(box) {
+            var plotArea = this,
+                plotBoxCenter = plotArea.box.center(),
                 boxCenter = box.center(),
                 paddingX = plotBoxCenter.x - boxCenter.x,
                 paddingY = plotBoxCenter.y - boxCenter.y,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer,
                 ring = scale.ring;
 
-            ring.c.x -= paddingX;
-            ring.c.y -= paddingY;
+            scale.ring.c.x -= paddingX;
+            scale.ring.c.y -= paddingY;
 
             scale.reflow(box);
             pointer.reflow();
 
-            plotArea.box = plotBox;
+            plotArea.box = scale.box.clone().wrap(pointer.box);
         },
 
         fitScale: function(box) {
             var plotArea = this,
-                options = plotArea.options,
-                padding = options.padding,
                 scale = plotArea.scale,
-                pointer = plotArea.pointer,
                 ring = scale.ring,
-                radius = ring.r,
-                step = 1;
+                plotAreaBox = plotArea.box,
+                step = math.abs(plotArea.getDiff(plotAreaBox, box)),
+                min = round(step, COORD_PRECISION),
+                max = round(-step, COORD_PRECISION),
+                midDiff,
+                minDiff,
+                maxDiff,
+                mid;
 
-            while (plotArea.box.width() < box.width() && plotArea.box.height() < box.height()) {
-                ring.r += step;
-                ring.ir += step;
-                scale.reflow(box);
-                pointer.reflow();
-                plotArea.box = scale.box.clone().wrap(pointer.box);
-            }
+            while (true) {
+                if (min != mid) {
+                    minDiff = plotArea.getPlotBox(min, box, ring);
+                    if (0 <= minDiff && minDiff <= 2) {
+                        break;
+                    }
+                }
 
-            while (plotArea.box.width() > box.width() || plotArea.box.height() > box.height()) {
-                ring.r -= step;
-                ring.ir -= step;
-                scale.reflow(box);
-                pointer.reflow();
-                plotArea.box = scale.box.clone().wrap(pointer.box);
+                if (max != mid) {
+                    maxDiff = plotArea.getPlotBox(max, box, ring);
+                    if (0 <= maxDiff && maxDiff <= 2) {
+                        break;
+                    }
+                }
+
+                if (minDiff > 0 && maxDiff > 0) {
+                    mid = min * 2;
+                } else if (minDiff < 0 && maxDiff < 0) {
+                    mid = max * 2;
+                } else {
+                    mid = round(((min + max) / 2) || 1, COORD_PRECISION);
+                }
+
+                midDiff = plotArea.getPlotBox(mid, box, ring);
+                if (0 <= midDiff && midDiff <= 2) {
+                    break;
+                }
+
+                if (midDiff > 0) {
+                    max = mid;
+                    maxDiff = midDiff;
+                } else {
+                    min = mid;
+                    minDiff = midDiff;
+                }
             }
+        },
+
+        getPlotBox: function(step, box, ring) {
+            var plotArea = this,
+                options = plotArea.options,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer;
+
+            ring = ring.clone();
+            ring.r += step;
+            ring.ir += step;
+            scale.ring = ring;
+            scale.reflow(box);
+            pointer.scale = scale;
+            pointer.reflow();
+            plotArea.box = scale.box.clone().wrap(pointer.box);
+            return plotArea.getDiff(plotArea.box, box);
+        },
+
+        getDiff: function(plotBox, box) {
+            return math.min(box.width() - plotBox.width(), box.height() - plotBox.height());
         },
 
         render: function() {
