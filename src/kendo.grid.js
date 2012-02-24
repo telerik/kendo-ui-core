@@ -2183,7 +2183,6 @@
                 idx,
                 length = that.columns.length,
                 template,
-                model = that.dataSource.options.schema.model,
                 state = { storage: {}, count: 0 },
                 id,
                 column,
@@ -2207,7 +2206,7 @@
                     rowTemplate += ' class="' + className.join(" ") + '"';
                 }
 
-                if (model) {
+                if (length) { // data item is an object
                     rowTemplate += ' ' + kendo.attr("uid") + '="#=uid#"';
                 }
 

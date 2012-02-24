@@ -331,10 +331,13 @@
 
                 that[field] = member;
             }
+
+            that.uid = kendo.guid();
         },
 
         shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function";
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function"
+                && field !== "uid";
         },
 
         toJSON: function() {
@@ -463,7 +466,6 @@
 
             ObservableObject.fn.init.call(that, data);
 
-            that.uid = kendo.guid();
 
             that.dirty = false;
 
@@ -475,7 +477,6 @@
 
         shouldSerialize: function(field) {
             return ObservableObject.fn.shouldSerialize.call(this, field)
-                && field !== "uid"
                 && !(this.idField !== "id" && field === "id")
                 && field !== "dirty" && field !== "_accessors";
         },
