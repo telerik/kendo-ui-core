@@ -242,28 +242,45 @@
             Binder.fn.init.call(this, element, bindings, options);
 
             var source = bindings["source"].get(),
-                that = this;
+            that = this;
 
             that._change = $.proxy(that.change, that);
             source.bind(0, "change", that._change)
         },
 
         change: function(e) {
-            if (e.action == "add") {
-                e.preventDefault();
-                this.add(e.index, kendo.render(this.template(), e.items));
-            } else if (e.action == "remove") {
-                e.preventDefault();
-                this.remove(e.index, e.items.length);
+            var source = this.bindings.source.get();
+
+            if (source instanceof ObservableArray) {
+                if (e.action == "add") {
+                    e.preventDefault();
+                    this.add(e.index, kendo.render(this.template(), e.items));
+                } else if (e.action == "remove") {
+                    e.preventDefault();
+                    this.remove(e.index, e.items.length);
+                }
             } else {
                 this.update();
             }
         },
 
+        container: function() {
+            var element = this.element;
+
+            if (element.nodeName.toLowerCase() == "table") {
+                if (!element.tBodies[0]) {
+                    element.appendChild(document.createElement("tbody"));
+                }
+                element = element.tBodies[0];
+            }
+
+            return element;
+        },
+
         template: function() {
             var options = this.options,
-                template = options.template,
-                nodeName = this.element.nodeName.toLowerCase();
+            template = options.template,
+            nodeName = this.container().nodeName.toLowerCase();
 
             if (!template) {
                 if (nodeName == "select") {
@@ -273,7 +290,7 @@
                     } else {
                         template = "<option>#:data#</option>";
                     }
-                } else if (nodeName == "table") {
+                } else if (nodeName == "tbody") {
                     template = "<tr><td>#:data#</td></tr>"
                 } else if (nodeName == "ul" || nodeName == "ol") {
                     template = "<li>#:data#</li>"
@@ -294,42 +311,37 @@
         },
 
         add: function(index, html) {
-            var clone = this.element.cloneNode(false),
-            reference = this.element.children[index];
+            var element = this.container(),
+            clone = element.cloneNode(false),
+            reference = element.children[index];
 
             $(clone).html(html);
 
             if (reference) {
                 while (clone.firstChild) {
-                    this.element.insertBefore(clone.firstChild, reference);
+                    element.insertBefore(clone.firstChild, reference);
                 }
             } else {
                 while (clone.firstChild) {
-                    this.element.appendChild(clone.firstChild);
+                    element.appendChild(clone.firstChild);
                 }
             }
         },
 
         remove: function(index, length) {
-            var idx;
+            var idx,
+            element = this.container();
 
             for (idx = 0; idx < length; idx++) {
-                this.element.removeChild(this.element.children[index]);
+                element.removeChild(element.children[index]);
             }
         },
 
         update: function() {
             var source = this.bindings["source"].get();
             var idx, length;
-            var element = this.element;
+            var element = this.container();
             var template = this.template();
-
-            if (element.nodeName.toLowerCase() == "table") {
-                if (!element.tBodies[0]) {
-                    element.appendChild(document.createElement("tbody"));
-                }
-                element = element.tBodies[0];
-            }
 
             if (!(source instanceof ObservableArray)) {
                 source = new ObservableArray([source]);

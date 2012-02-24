@@ -74,6 +74,23 @@
                 equal(dom.find("option").last().text(), "baz");
             });
 
+            test("removing item from array removes table rows", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "boo" // needed to test closure value assignment
+                });
+
+                var dom = $('<table data-bind="source:foo"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.splice(1, 1);
+
+                equal(dom.find("tr").length, 2);
+                equal(dom.find("tr").first().text(), "foo");
+                equal(dom.find("tr").last().text(), "baz");
+            });
+
             test("change event notifies value listeners", function() {
                 var viewModel = kendo.observable( {
                     foo: ["foo", "bar", "baz"],
