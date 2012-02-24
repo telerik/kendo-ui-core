@@ -23,6 +23,10 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
     DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
+    BUILDER_PATH = "download-builder",
+    BUILDER_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
+    BUILDER_STAGING_SERVICE = "http://mvc-kendobuild/staging/download-builder-service",
+    BUILDER_PROJECT = path.join("service", "Download.csproj"),
     RELEASE_PATH = "release",
     SUITES = ["web", "mobile", "dataviz"];
 
@@ -129,6 +133,35 @@ task("cdn", ["clean", "merge-scripts"], function() {
         kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + path.join("..", CDN_BUNDLE_PATH)]);
     });
 }, true);
+
+namespace("download-builder", function() {
+    desc("Build staging download builder site");
+    task("staging", ["merge-scripts"], function() {
+        var indexPath = path.join(BUILDER_STAGING_PATH, "index.html"),
+            appDataPath = path.join(BUILDER_STAGING_PATH, "App_Data"),
+            sourcePath = path.join(appDataPath, version());
+
+        copyDir(BUILDER_PATH, BUILDER_STAGING_PATH);
+
+        kendoBuild.rmdirSyncRecursive(CDN_BUNDLE_PATH);
+        bundles.buildBundle(CDN_BUNDLE, version(), function() {
+            mkdir(appDataPath);
+            mkdir(sourcePath);
+            copyDir(CDN_BUNDLE_PATH, sourcePath);
+        });
+
+        kendoBuild.writeText(indexPath,
+            kendoBuild.readText(indexPath)
+                .replace(/\$SERVICE_ROOT/g, BUILDER_STAGING_SERVICE)
+                .replace(/\$VERSION/g, version())
+        );
+
+        kendoBuild.msBuild(
+            path.join(BUILDER_STAGING_PATH, BUILDER_PROJECT),
+            [ "/t:Clean;Build", "/p:Configuration=Release" ]
+        );
+    });
+});
 
 // Helpers ====================================================================
 function buildDocs(sitefinity_path) {
