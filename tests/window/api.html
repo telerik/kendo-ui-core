@@ -180,6 +180,37 @@
                 dialog.refresh(url);
             });
 
+            test("refresh() creates iframe, if loading a remote url", function() {
+                var dialog = createWindow({}),
+                    url = "http://example.com/";
+
+                dialog.refresh(url);
+
+                var iframe = dialog.wrapper.find("iframe");
+
+                equal(iframe.length, 1);
+                equal(iframe.attr("src"), url);
+            });
+
+            test("refresh() of AJAX window with cross-domain URL", function() {
+                $.mockjax({
+                    url: "foo",
+                    responseText: "server foo"
+                });
+
+                var dialog = createWindow({
+                        content: "foo"
+                    }),
+                    url = "http://example.com/";
+
+                dialog.refresh(url);
+
+                var iframe = dialog.wrapper.find("iframe");
+
+                equal(iframe.length, 1);
+                equal(iframe.attr("src"), url);
+            });
+
             function wrapper(windowObject) {
                 return windowObject.element.closest(".k-window");
             }
@@ -228,6 +259,15 @@
                 ok(!firstWindow.element.find("> .k-overlay").length);
             });
 
+            test("toFront() moves modal overlay above other windows", function() {
+                var firstWindow = createWindow(),
+                    secondWindow = createWindow({
+                        modal: true
+                    });
+
+                    ok(parseInt(firstWindow.wrapper.css("zIndex")) < parseInt($(".k-overlay").css("zIndex")));
+            });
+
             test("open() calls toFront()", function() {
                 expect(1);
 
@@ -261,15 +301,6 @@
                 };
 
                 firstWindow.open();
-            });
-
-            test("toFront() moves modal overlay above other windows", function() {
-                var firstWindow = createWindow(),
-                    secondWindow = createWindow({
-                        modal: true
-                    });
-
-                ok(parseInt(firstWindow.wrapper.css("zIndex")) < parseInt($(".k-overlay").css("zIndex")));
             });
 
             test("title() on titleless window does not fail", function() {
