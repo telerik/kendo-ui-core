@@ -23,6 +23,7 @@
 
             var Grid = kendo.ui.Grid,
                 table,
+                ObservableObject = kendo.data.ObservableObject;
                 DataSource = kendo.data.DataSource;
 
             module("grid row template", {
@@ -44,19 +45,19 @@
             test("default rowTemplate renders table row element", function() {
                 var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
-                ok($(grid.rowTemplate({ foo: "foo", bar: "bar" })).is("tr"));
+                ok($(grid.rowTemplate(new ObservableObject({ foo: "foo", bar: "bar" }))).is("tr"));
             });
 
             test("default rowTemplate renders a table cell for each column", function() {
                 var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
-                equal($(grid.rowTemplate({ foo: "foo", bar: "bar" })).find(" > td").length, 2);
+                equal($(grid.rowTemplate(new ObservableObject({ foo: "foo", bar: "bar" }))).find(" > td").length, 2);
             });
 
             test("default rowTemplate renders data for the columns", function() {
                 var grid = new Grid(table, { dataSource: [], columns: [{ field: "foo" }, { field: "bar" }] });
 
-                var tr = $(grid.rowTemplate({ foo: "foo", bar: "bar" }));
+                var tr = $(grid.rowTemplate(new ObservableObject({ foo: "foo", bar: "bar" })));
                 equal(tr.find("td").eq(0).text(), "foo");
                 equal(tr.find("td").eq(1).text(), "bar");
             });
@@ -70,13 +71,13 @@
             test("default rowTemplate encodes html entities", function() {
                 var grid = new Grid(table,  { columns: [{ field: "foo" }] });
 
-                ok(grid.rowTemplate({ foo: "<" }).indexOf("&lt;") > -1);
+                ok(grid.rowTemplate(new ObservableObject({ foo: "<" })).indexOf("&lt;") > -1);
             });
 
             test("default rowTemplate does not encode html entities if encoded is false", function() {
                 var grid = new Grid(table,  { columns: [{ field: "foo", encoded: false }] });
 
-                ok(grid.rowTemplate({ foo: "<" }).indexOf("&lt;") == -1);
+                ok(grid.rowTemplate(new ObservableObject({ foo: "<" })).indexOf("&lt;") == -1);
             });
 
             test("rowTemplate initialization from options.rowTemplate", function() {
