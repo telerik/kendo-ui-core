@@ -268,7 +268,8 @@
                     "name": "Editing",
                     "description": "Support for record editing",
                     "depends": [
-                        "editable"
+                        "editable",
+                        "window"
                     ]
                 },
                 {
