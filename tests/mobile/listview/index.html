@@ -85,10 +85,12 @@
                 var dom = $('<ul> \
                     <li><a id="foo" href="foo">Foo</a></li> \
                     <li>Bar <a id="bar" href="bar">Bar</a></li> \
+                    <li><a id="baz" href="foo">Foo</a><a data-role="detailbutton"></a></li> \
                 </ul>');
 
                 new ListView(dom);
                 ok(dom.find("#foo").is(".km-listview-link"), "link item has correct CSS class");
+                ok(dom.find("#baz").is(".km-listview-link"), "link item has correct CSS class");
                 ok(!dom.find("#bar").is(".km-listview-link"), "mixed item does not receive CSS class");
             });
 

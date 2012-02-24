@@ -47,9 +47,11 @@
 
     function enhanceLinkItem(i, item) {
         item = $(item);
-        var parent = item.parent();
 
-        if (parent.contents().not(item)[0]) {
+        var parent = item.parent(),
+            itemAndDetailButtons = item.add(parent.children("[data-" + kendo.ns + "role=detailbutton]"));
+
+        if (parent.contents().not(itemAndDetailButtons)[0]) {
             return;
         }
 
@@ -448,8 +450,8 @@
                 .toggleClass("km-list", !grouped)
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
-                .toggleClass("km-listgroupinset", grouped && inset)
-                .find("a:only-child:not([data-" + kendo.ns + "role])").each(enhanceLinkItem);
+                .toggleClass("km-listgroupinset", grouped && inset);
+
 
             if (grouped) {
                 element
@@ -464,6 +466,8 @@
                     }
                 });
             }
+
+            element.find(".km-list").andSelf().find(">li>a").each(enhanceLinkItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         }
