@@ -190,7 +190,7 @@
             });
 
             test("cache only platform specific layouts", function() {
-            setup('<div data-role="view" id="page1">Page 1</div> \
+                setup('<div data-role="view" id="page1">Page 1</div> \
                     <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \
                     <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
                     <div data-role="layout" data-id="default"><div data-role="footer">footer</div></div> \
@@ -198,9 +198,14 @@
 
                 var foo = application.layouts.foo;
                 var defaultLayout = application.layouts.default;
+                var osName = kendo.support.mobileOS.name;
+
+                if (!osName) {
+                    osName = "ios";
+                }
 
                 equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), "ios");
+                equal(foo.element.attr("data-platform"), osName);
                 equal(defaultLayout.element.attr("data-id"), "default");
                 equal(defaultLayout.element.attr("data-platform"), undefined);
             });
@@ -261,34 +266,65 @@
                 }, 200);
             });
 
-            test("append icon meta link", function() {
-                setup('<div data-role="view" id="test1">Page 1</div>', {
-                    icon: "icon.png"
+            if (kendo.support.mobileOS.android) {
+                test("append precomposed icon meta link", function() {
+                    setup('<div data-role="view" id="test1">Page 1</div>', {
+                        icon: "icon.png"
+                    });
+
+                    var link = $(document.head).find("link[rel=apple-touch-icon-precomposed]");
+
+                    equal(link.length, 1);
+                    equal(link.attr("href"), "icon.png");
+                    equal(link.attr("sizes"), undefined);
                 });
 
-                var link = $(document.head).find("link[rel=apple-touch-icon]");
+                test("append multiple icons", function() {
+                    setup('<div data-role="view" id="test1">Page 1</div>', {
+                        icon: {
+                            "76x76": "icon76.png",
+                            "112x112": "icon112.png",
+                        }
+                    });
 
-                equal(link.length, 1);
-                equal(link.attr("href"), "icon.png");
-                equal(link.attr("sizes"), undefined);
-            });
+                    var links = $(document.head).find("link[rel=apple-touch-icon-precomposed]");
 
-            test("append multiple icons", function() {
-                setup('<div data-role="view" id="test1">Page 1</div>', {
-                    icon: {
-                        "76x76": "icon76.png",
-                        "112x112": "icon112.png",
-                    }
+                    equal(links.eq(0).attr("href"), "icon112.png");
+                    equal(links.eq(0).attr("sizes"), "112x112");
+
+                    equal(links.eq(1).attr("href"), "icon76.png");
+                    equal(links.eq(1).attr("sizes"), "76x76");
+                });
+            } else {
+                test("append icon meta link", function() {
+                    setup('<div data-role="view" id="test1">Page 1</div>', {
+                        icon: "icon.png"
+                    });
+
+                    var link = $(document.head).find("link[rel=apple-touch-icon]");
+
+                    equal(link.length, 1);
+                    equal(link.attr("href"), "icon.png");
+                    equal(link.attr("sizes"), undefined);
                 });
 
-                var links = $(document.head).find("link[rel=apple-touch-icon]");
+                test("append multiple icons", function() {
+                    setup('<div data-role="view" id="test1">Page 1</div>', {
+                        icon: {
+                            "76x76": "icon76.png",
+                            "112x112": "icon112.png",
+                        }
+                    });
 
-                equal(links.eq(0).attr("href"), "icon112.png");
-                equal(links.eq(0).attr("sizes"), "112x112");
+                    var links = $(document.head).find("link[rel=apple-touch-icon]");
 
-                equal(links.eq(1).attr("href"), "icon76.png");
-                equal(links.eq(1).attr("sizes"), "76x76");
-            });
+                    equal(links.eq(0).attr("href"), "icon112.png");
+                    equal(links.eq(0).attr("sizes"), "112x112");
+
+                    equal(links.eq(1).attr("href"), "icon76.png");
+                    equal(links.eq(1).attr("sizes"), "76x76");
+                });
+            }
 
             asyncTest("Raises start pull to half of the screen", 1, function() {
                 setup('<div data-role="view" id="page1"><div style="height:300px">View</div></div><div id="page2" data-role="view"></div>');
