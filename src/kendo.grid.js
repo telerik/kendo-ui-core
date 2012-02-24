@@ -1218,7 +1218,8 @@
          */
         removeRow: function(row) {
             var that = this,
-                model;
+                model,
+                mode;
 
             if (!that._confirmation()) {
                 return;
@@ -1230,7 +1231,9 @@
             if (model && !that.trigger(REMOVE, { row: row, model: model })) {
                 that.dataSource.remove(model);
 
-                if (that._editMode() === "inline") {
+                mode = that._editMode();
+
+                if (mode === "inline" || mode === "popup") {
                     that.dataSource.sync();
                 }
             }
