@@ -246,6 +246,10 @@
                 {
                     "text": "Editing",
                     "url": "listview/editing.html"
+                },
+                {
+                    "text": "Selection",
+                    "url": "listview/selection.html"
                 }
             ]
         },
