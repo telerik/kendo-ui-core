@@ -288,10 +288,6 @@
                 content = options.content = { url: content };
             }
 
-            if (typeof options.iframe == "undefined") {
-                options.iframe = content.url && !isLocalUrl(content.url);
-            }
-
             if (!element.parent().is("body")) {
                 if (element.is(VISIBLE)) {
                     offset = element.offset();
@@ -332,6 +328,10 @@
                 }
             }
 
+            if (content) {
+                that.refresh(content);
+            }
+
             that.toFront();
 
             if (options.modal) {
@@ -362,12 +362,6 @@
                 .on("mousedown", proxy(that.toFront, that));
 
             $(window).resize(proxy(that._onDocumentResize, that));
-
-            if (!options.iframe && content.url) {
-                that._ajaxRequest(content);
-            } else if (content.template) {
-                element.html(template(content.template)({}));
-            }
 
             if (wrapper.is(VISIBLE)) {
                 that.trigger(OPEN);
@@ -1208,8 +1202,10 @@
          * Refreshes the content of a Window from a remote URL.
          *
          * @param {Object|String} options
-         * Options for requesting data from the server. If omitted, the window uses the <code>content</code> property
-         * that was supplied when the window was created. Any options specified here are passed to jQuery.ajax().
+         * Options for requesting data from the server.
+         * If omitted, the window uses the <code>content</code> property
+         * that was supplied when the window was created.
+         * Any options specified here are passed to jQuery.ajax().
          *
          * @param {String} options.url
          * The server URL that will be requested.
@@ -1243,21 +1239,38 @@
          *
          */
         refresh: function (options) {
+            var that = this,
+                initOptions = that.options,
+                element = $(that.element),
+                iframe,
+                url;
+
             if (!isPlainObject(options)) {
                 options = { url: options };
             }
 
-            var that = this,
-                iframe,
-                url = options.url = options.url || that.options.content.url;
+            options = extend({}, initOptions.content, options);
 
-            if (!that.options.iframe) {
-                that._ajaxRequest(options);
-            } else {
-                iframe = $(that.element).find("." + KCONTENTFRAME)[0];
-                if (iframe) {
-                    iframe.src = url || iframe.src;
+            url = options.url;
+
+            if (url) {
+                if (that.options.iframe === false || isLocalUrl(url)) {
+                    // perform AJAX request
+                    that._ajaxRequest(options);
+                } else {
+                    iframe = element.find("." + KCONTENTFRAME)[0];
+
+                    if (iframe) {
+                        // refresh existing iframe
+                        iframe.src = url || iframe.src;
+                    } else {
+                        // render new iframe
+                        element.html(templates.contentFrame(extend({}, initOptions, { content: options })));
+                    }
                 }
+            } else if (options.template) {
+                // refresh template
+                that.content(template(options.template)({}));
             }
 
             return that;
@@ -1291,7 +1304,7 @@
 
                     that.trigger(REFRESH);
                 }, that)
-            }, that.options.content, options));
+            }, options));
         },
 
         /**

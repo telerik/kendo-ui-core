@@ -219,7 +219,7 @@
                 equal(parseInt(dialog.element.css("minHeight")), 200);
             });
 
-            test("specifying content template", function() {
+            test("content.template", function() {
                 var dialog = createWindow({
                         content: {
                             template: "foo #= 1 + 1 #"
@@ -229,7 +229,7 @@
                 equal(dialog.element.text(), "foo 2");
             });
 
-            test("content template is used when fetching jsonp data", function() {
+            test("content.template is used when fetching jsonp data", function() {
                 stop(1);
 
                 var dialog = createWindow({
@@ -259,7 +259,7 @@
                 ok(dialog.wrapper.is(".k-window-titleless"));
             });
 
-            test("window does not render k-rtl class", function() {
+            test("k-rtl class is not rendered by default", function() {
                 var dialog = createWindow({
                     title: "foo"
                 });
@@ -267,7 +267,7 @@
                 ok(!dialog.wrapper.hasClass("k-rtl"));
             });
 
-            test("window gets k-rtl class if in k-rtl container", function() {
+            test("k-rtl class is rendered when in k-rtl container", function() {
                 var element = $("<div class='k-rtl'><div /></div>").appendTo("body"),
                     dialog = createWindow({}, element.find("> div"));
 
