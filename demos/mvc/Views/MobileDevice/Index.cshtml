@@ -61,7 +61,12 @@
 
         window.kendoMobileApplication = new kendo.mobile.Application($(document.body), {
             layout: "examples",
-            transition: "slide"
+            transition: "slide",
+            icon: {
+                "" : '@Url.Content("~/favicon.png")',
+                "72x72" : '@Url.Content("~/favicon.png")',
+                "114x114" : '@Url.Content("~/favicon114.png")'
+            }
         });
     </script>
 </body>
