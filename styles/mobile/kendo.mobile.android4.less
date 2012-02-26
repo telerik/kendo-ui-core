@@ -362,11 +362,12 @@
     border-bottom: 1px solid rgba(255,255,255,.4);
 }
 
-.km-android .km-navbar,
-.km-android .km-toolbar
+.km-root .km-android .km-navbar,
+.km-root .km-android .km-toolbar
 {
     font-size: .8em;
     font-size: .8rem;
+    padding: 0 .5em;
 }
 
 .km-android .km-navbar .km-button,
@@ -390,8 +391,8 @@
     left: 0;
     top: 0;
     width: 100%;
-    height: 2.5em;
-    height: 2.5rem;
+    height: 2.2em;
+    height: 2.2rem;
     margin-top: -2.5em;
     margin-top: ~"-2.5rem";
     border: 1em solid transparent;
@@ -403,8 +404,6 @@
 
 .km-android .km-tabstrip .km-text
 {
-    margin-top: -2.2em;
-    margin-top: ~"-2.2rem";
     font-size: 0;
 }
 
@@ -436,6 +435,30 @@
     border-width: 0;
     background-clip: padding-box;
     min-width: 5em;
+}
+
+.km-android.km-horizontal .km-navbar .km-button,
+.km-android.km-horizontal .km-toolbar .km-button
+{
+    padding: .4em 0;
+    padding: .7rem 0;
+}
+
+.km-android.km-horizontal .km-tabstrip .km-text
+{
+    height: 2em;
+    height: 2rem;
+}
+
+.km-android.km-horizontal .km-tabstrip .km-text
+{
+    margin-top: -2.2em;
+    margin-top: ~"-2.2rem";
+}
+
+.km-android.km-horizontal .km-tabstrip .km-button
+{
+    padding: 0;
 }
 
 .km-android .km-tabstrip .km-badge
@@ -604,6 +627,12 @@
     left: 50%;
     margin-left: -2em;
     margin-left: ~"-1.25rem";
+    margin-bottom: .3em;
+}
+
+.km-android.km-horizontal .km-tabstrip .km-icon
+{
+    margin-bottom: 0;
 }
 
 .km-android .km-tabstrip .km-button .km-icon

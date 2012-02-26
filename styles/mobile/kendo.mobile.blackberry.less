@@ -318,6 +318,23 @@
     background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2) 73%, rgba(255,255,255,.05));
 }
 
+.km-blackberry .km-navbar .km-view-title,
+.km-blackberry .km-toolbar .km-button,
+.km-blackberry .km-navbar .km-button
+{
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.km-blackberry.km-vertical .km-navbar .km-view-title,
+.km-blackberry.km-vertical .km-toolbar .km-button,
+.km-blackberry.km-vertical .km-navbar .km-button
+{
+    margin-top: .2rem;
+    margin-bottom: .2rem;
+}
+
+
 .km-blackberry .km-tabstrip
 {
     padding: .2em 0 0;
@@ -358,7 +375,12 @@
     width: 2.4rem;
     height: 2.4rem;
     position: relative;
-    margin: ~".3rem 0 .4rem 0";
+    margin: ~".5rem 0";
+}
+
+.km-blackberry.km-vertical .km-tabstrip .km-icon
+{
+    margin: ~".1rem 0 .2rem 0";
 }
 
 .km-blackberry .km-button .km-icon

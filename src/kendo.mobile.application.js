@@ -481,7 +481,8 @@
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
 
-                that.view.scroller.reset();
+                if (that.view) // On desktop resize is fired rather early
+                    that.view.scroller.reset();
             });
         },
 
