@@ -1,0 +1,52 @@
+<div id="example" class="k-content">
+    <table data-template="row-template" data-bind="source: products">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Product price</th>
+                <th>Units in stock</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div data-template="div-template" data-bind="source: this">
+    </div>
+
+    <button data-bind="click: removeProduct">Remove last product</button>
+
+    <script id="row-template" type="text/x-kendo-template">
+        <tr>
+            <td data-bind="text: name">
+            </td>
+            <td>
+                #: kendo.toString(get("price"), "C") #
+            </td>
+            <td data-bind="text: unitsInStock"></td>
+        </tr>
+    </script>
+    <script id="div-template" type="text/x-kendo-template">
+        Total number or products: #: total() #
+    </script>
+    <script>
+        var viewModel = {
+            total: function() {
+                return this.get("products").length;
+            },
+
+            showDetails: function(product) {
+                console.log(product);
+            },
+
+            removeProduct: function() {
+                this.get("products").pop();
+            },
+
+            products: [
+                { name: "Chai", price: 18.00, unitsInStock: 39 },
+                { name: "Chang", price: 19.00, unitsInStock: 17 }
+            ]
+        };
+
+        kendo.bind($("#example"), viewModel);
+    </script>
+</div>
