@@ -1,0 +1,66 @@
+
+
+        <div id="example" class="k-content">
+            <h3>TabStrip with images</h3>
+
+            <div id="tabstrip-images"></div>
+
+            <script>
+                $("#tabstrip-images").kendoTabStrip({
+                    dataSource: [
+                        {
+                            text: "All events",
+                            imageUrl: "../../content/web/calendar/party.png",
+                            content: "List all events"
+                        },
+                        {
+                            text: "Birthdays",
+                            imageUrl: "../../content/web/calendar/cake.png",
+                            content: "List all birthdays"
+                        },
+                        {
+                            text: "Cocktails",
+                            imageUrl: "../../content/web/calendar/cocktail.png",
+                            content: "List all cocktails"
+                        },
+                        {
+                            text: "Exhibitions",
+                            imageUrl: "../../content/web/calendar/exhibition.png",
+                            content: "List all exhibitions"
+                        }
+                    ]
+                }).data("kendoTabStrip").select(2);
+            </script>
+
+            <h3>TabStrip with sprites</h3>
+
+            <div id="tabstrip-sprites"></div>
+
+            <script>
+                $("#tabstrip-sprites").kendoTabStrip({
+                    dataSource: [{
+                            text: "Web",
+                            spriteCssClass: "overviewIcon",
+                            content: "Web examples here"
+                        },
+                        {
+                            text: "DataViz",
+                            spriteCssClass: "chartPieIcon",
+                            content: "DataViz examples here"
+                        },
+                        {
+                            text: "Mobile",
+                            spriteCssClass: "mobileAppIcon",
+                            content: "Mobile examples here"
+
+                        }]
+                }).data("kendoTabStrip").select(1);
+            </script>
+
+            <style scoped>
+                #tabstrip-sprites .k-sprite {
+                    background-image: url("../../content/shared/styles/sprite.png");
+                    /* sprite background-positions inherited from online demos */
+                }
+            </style>
+        </div>
