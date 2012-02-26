@@ -212,11 +212,52 @@
 
             test("pop raises the change event and action is remove", 1, function() {
                 var viewModel = kendo.observable({ foo: [ { bar: 1 } ] });
-                var last = viewModel.foo[0];
-
 
                 viewModel.foo.bind("change", function(e) {
                     equal(e.action, "remove");
+                });
+
+                viewModel.foo.pop();
+            });
+
+            test("shift raises the change event and removes the first item", 2, function() {
+                var viewModel = kendo.observable({ foo: [ { bar: 1 }, { bar: 2}  ] });
+                var first = viewModel.foo[0];
+
+
+                viewModel.foo.bind("change", function(e) {
+                    equal(e.items[0], first);
+                    equal(e.index, 0);
+                });
+
+                viewModel.foo.shift();
+            });
+
+            test("shift raises the change event and action is remove", 1, function() {
+                var viewModel = kendo.observable({ foo: [ { bar: 1 } ] });
+
+                viewModel.foo.bind("change", function(e) {
+                    equal(e.action, "remove");
+                });
+
+                viewModel.foo.shift();
+            });
+
+            test("shift does not raise the change event when the array is empty", 0, function() {
+                var viewModel = kendo.observable({ foo: [ ] });
+
+                viewModel.foo.bind("change", function(e) {
+                    ok(false, "Should not raise the change event when empty");
+                });
+
+                viewModel.foo.shift();
+            });
+
+            test("pop does not raise the change event when the array is empty", 0, function() {
+                var viewModel = kendo.observable({ foo: [ ] });
+
+                viewModel.foo.bind("change", function(e) {
+                    ok(false, "Should not raise the change event when empty");
                 });
 
                 viewModel.foo.pop();
