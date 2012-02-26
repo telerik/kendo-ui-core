@@ -101,6 +101,28 @@
                 viewModel.foo.unshift({});
             });
 
+            test("items unshifted to array are converted to observable objects", 1, function() {
+                var viewModel = kendo.observable({ foo: [] });
+
+                viewModel.foo.bind("change", function(e) {
+                    ok(e.items[0] instanceof kendo.data.ObservableObject, "Should be ObservableObject");
+                });
+
+                viewModel.foo.unshift({});
+            });
+
+            test("items spliced to array items are converted to observable objects", 2, function() {
+                var viewModel = kendo.observable({ foo: [] });
+
+                viewModel.foo.bind("change", function(e) {
+                    ok(e.items[0] instanceof kendo.data.ObservableObject, "Should be ObservableObject");
+                });
+
+                viewModel.foo.splice(0, 0, {});
+
+                ok(viewModel.foo[0] instanceof kendo.data.ObservableObject, "Should be ObservableObject");
+            });
+
             test("splicing array items raises the change event with remove action", function() {
                 expect(1);
 

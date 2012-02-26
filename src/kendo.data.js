@@ -178,9 +178,7 @@
 
     var ObservableArray = Observable.extend({
         init: function(array, type) {
-            var that = this,
-            member,
-            idx;
+            var that = this;
 
             that.type = type || ObservableObject;
 
@@ -188,9 +186,19 @@
 
             that.length = array.length;
 
-            for (idx = 0; idx < that.length; idx++) {
-                that[idx] = that.wrap(array[idx]);
+            that.wrapAll(array, that);
+        },
+
+        wrapAll: function(source, target) {
+            var idx, length;
+
+            target = target || [];
+
+            for (idx = 0, length = source.length; idx < length; idx++) {
+                target[idx] = this.wrap(source[idx]);
             }
+
+            return target;
         },
 
         wrap: function(object) {
@@ -213,14 +221,8 @@
 
         push: function() {
             var index = this.length,
-            idx,
-            length,
-            items = arguments,
-            result;
-
-            for (idx = 0, length = items.length; idx < length; idx++) {
-                items[idx] = this.wrap(items[idx]);
-            }
+                items = this.wrapAll(arguments),
+                result;
 
             result = push.apply(this, items);
 
@@ -252,7 +254,10 @@
         },
 
         splice: function(index, howMany, item) {
-            var result = splice.apply(this, arguments);
+            var items = this.wrapAll(slice.call(arguments, 2)),
+                result;
+
+            result = splice.apply(this, [index, howMany].concat(items));
 
             if (result.length) {
                 this.trigger(CHANGE, {
@@ -266,7 +271,7 @@
                 this.trigger(CHANGE, {
                     action: "add",
                     index: index,
-                    items: slice.call(arguments, 2)
+                    items: items
                 });
             }
             return result;
@@ -287,8 +292,7 @@
         },
 
         unshift: function() {
-            var index = this.length,
-                items = arguments,
+            var items = this.wrapAll(arguments),
                 result;
 
             result = unshift.apply(this, items);
@@ -304,8 +308,8 @@
 
         indexOf: function(item) {
             var that = this,
-            idx,
-            length;
+                idx,
+                length;
 
             for (idx = 0, length = that.length; idx < length; idx++) {
                 if (that[idx] === item) {
