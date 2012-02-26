@@ -111,7 +111,7 @@
      * </p>
      * <ol>
      *  <li>Add a "k-state-active" class to the DOM element of the tab</li>
-     *  <li>Use select() to target and select a tab</li>
+     *  <li>Use select() to target and select a tab either by selector or index</li>
      * </ol>
      * <p>Both approaches produce the same result.</p>
      *
@@ -126,11 +126,18 @@
      *     <div></div>
      * </div>
      *
-     * @exampleTitle Initialize a TabStrip and select first tab via select()
+     * @exampleTitle Initialize a TabStrip and select first tab via select(element)
      * @example
      * $(document).ready(function(){
      *     var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
      *     tabstrip.select(tabstrip.tabGroup.children("li:first"));
+     * });
+     *
+     * @exampleTitle Initialize a TabStrip and select first tab via select(index)
+     * @example
+     * $(document).ready(function(){
+     *     var tabstrip = $("#tabstrip").kendoTabStrip().data("kendoTabStrip");
+     *     tabstrip.select(1);
      * });
      *
      * @section
@@ -354,8 +361,6 @@
         },
 
         _animations: function(options) {
-            var that = this;
-
             if (options && ("animation" in options) && !options.animation) {
                 options.animation = { open: { effects: {}, show: true }, close: { effects: {} } }; // No animation
             }
@@ -513,11 +518,14 @@
          * Selects the specified tab(s) within a <strong>TabStrip</strong>. If called without arguments, it returns the
          * currently selected tab.
          *
-         * @param {Selector} element
-         * The target tab(s), specified as a selector.
+         * @param {Selector/Index} element or index
+         * The target tab(s), specified as a selector or index in the tab group.
          *
          * @example
          * tabStrip.select("#tab1");
+         *
+         * @example
+         * tabStrip.select(1);
          *
          * @returns {TabStrip}
          * Returns the TabStrip object to support chaining.
@@ -528,6 +536,10 @@
 
             if (arguments.length == 0) {
                 return that.element.find("li." + ACTIVESTATE);
+            }
+
+            if (!isNaN(element)) {
+                element = that.tabGroup.children().get(element);
             }
 
             $(element).each(function (index, item) {

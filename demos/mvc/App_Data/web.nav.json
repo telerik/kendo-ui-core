@@ -263,6 +263,10 @@
                     "url": "menu/index.html"
                 },
                 {
+                    "text": "Images",
+                    "url": "menu/images.html"
+                },
+                {
                     "text": "Animation effects",
                     "url": "menu/animation.html"
                 },
@@ -303,6 +307,10 @@
                 {
                     "text": "Basic usage",
                     "url": "panelbar/index.html"
+                },
+                {
+                    "text": "Images",
+                    "url": "panelbar/images.html"
                 },
                 {
                     "text": "Loading content with AJAX",
@@ -372,6 +380,10 @@
                 {
                     "text": "Basic usage",
                     "url": "tabstrip/index.html"
+                },
+                {
+                    "text": "Images",
+                    "url": "tabstrip/images.html"
                 },
                 {
                     "text": "Loading content with AJAX",
