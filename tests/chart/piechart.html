@@ -17,6 +17,7 @@
                 Box2D = Chart.Box2D,
                 categoriesCount = Chart.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
+                padding = 60,
                 plotArea,
                 pieChart,
                 firstSegment,
@@ -27,7 +28,7 @@
             function setupPieChart(plotArea, options) {
                 view = new ViewStub();
 
-                pieChart = new Chart.PieChart(plotArea, options);
+                pieChart = new Chart.PieChart(plotArea, $.extend({}, { padding: 60 }, options));
 
                 root = new Chart.RootElement();
                 root.append(pieChart);
