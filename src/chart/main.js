@@ -3779,6 +3779,7 @@
         }
     });
 
+    M
     var PieChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
@@ -3933,7 +3934,6 @@
                 segment,
                 sector,
                 i;
-                console.log(padding);
 
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
 
