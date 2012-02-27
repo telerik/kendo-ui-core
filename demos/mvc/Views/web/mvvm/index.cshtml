@@ -60,9 +60,8 @@
         </div>
     </div>
     <div class="source code-sample">
-        <h4 class="code-title">Source</h4>
-        <div class="code-details">
-            <pre class="prettyprint">
+        <h4 class="code-title">View source code:</h4>
+        <pre class="prettyprint">
 &lt;form&gt;
     &lt;label&gt;First Name: &lt;input data-bind=&quot;value: firstName&quot; /&gt;&lt;/label&gt;
     &lt;label&gt;Last Name: &lt;input data-bind=&quot;value: lastName&quot; /&gt;&lt;/label&gt;
@@ -72,7 +71,11 @@
     &lt;label&gt;&lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: agreed&quot; /&gt; I have read the licence agreement&lt;/label&gt;
     &lt;button data-bind=&quot;enabled: agreed, click: register&quot;&gt;Register&lt;/button&gt;
 &lt;/form&gt;
-&lt;script&gt;
+        </pre>
+    </div>
+    <div class="source code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <pre class="prettyprint">
     var viewModel = {
         firstName: &quot;John&quot;,
         lastName: &quot;Doe&quot;,
@@ -88,9 +91,7 @@
     };
 
     kendo.bind($(&quot;form&quot;), viewModel);
-&lt;/script&gt;
-            </pre>
-        </div>
+        </pre>
     </div>
 
     <style scoped>
