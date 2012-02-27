@@ -10,13 +10,11 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
 
         <style>
-            body {
-                font: 12px/1.5 Tahoma,sans-serif;
-            }
-
             #gauge {
                 width: 300px;
                 height: 300px;
+                margin-left: 200px;
+                border: 1px solid red;
             }
         </style>
     </head>
@@ -24,7 +22,36 @@
         <div id="gauge"></div>
 
         <script>
-            $("#gauge").kendoRadialGauge();
+            $("#gauge").kendoGauge({
+                theme:"default",
+
+                pointer: {
+                    value: 65
+                },
+
+                scale: {
+                    minorUnit: 5,
+                    startAngle: 0,
+                    endAngle: 230,
+                    max: 180,
+                    labels: {
+                        position: "outside"
+                    },
+                    ranges: [{
+                        from: 20,
+                        to: 40,
+                        color: "white"
+                        }, {
+                        from: 60,
+                        to: 90,
+                        color: "green"
+                        }, {
+                        from: 120,
+                        to: 150,
+                        color: "red"
+                    }]
+                }
+            });
         </script>
     </body>
 </html>
