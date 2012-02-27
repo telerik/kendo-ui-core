@@ -454,13 +454,60 @@
             ]
         },
         {
+            "id": "dataviz-core",
+            "name": "DataViz Core",
+            "category": "dataviz",
+            "source": "kendo.dataviz.core.min.js",
+            "depends": [
+                "core"
+            ],
+            "hidden": true
+        },
+        {
+            "id": "dataviz-svg",
+            "name": "SVG View",
+            "category": "dataviz",
+            "source": "kendo.dataviz.svg.min.js",
+            "hidden": true
+        },
+        {
+            "id": "dataviz-vml",
+            "name": "VML View",
+            "category": "dataviz",
+            "source": "kendo.dataviz.vml.min.js",
+            "hidden": true
+        },
+        {
+            "id": "chart-themes",
+            "name": "Chart Themes",
+            "category": "dataviz",
+            "source": "kendo.dataviz.chart.themes.min.js",
+            "hidden": true
+        },
+        {
             "id": "chart",
             "name": "Chart",
             "category": "dataviz",
             "description": "The Chart widget uses modern browser technologies to render high-quality data visualizations in the browser.",
-            "source": "kendo.chart.min.js",
+            "source": "kendo.dataviz.chart.min.js",
             "depends": [
-                "data"
+                "data",
+                "dataviz-core",
+                "dataviz-svg",
+                "dataviz-vml",
+                "chart-themes"
+            ]
+        },
+        {
+            "id": "gauge",
+            "name": "Gauge",
+            "category": "dataviz",
+            "description": "Radial gauge.",
+            "source": "kendo.dataviz.gauge.min.js",
+            "depends": [
+                "dataviz-core",
+                "dataviz-svg",
+                "dataviz-vml"
             ]
         }
     ]
