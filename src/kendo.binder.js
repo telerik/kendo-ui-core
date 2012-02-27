@@ -971,12 +971,12 @@
         }
     }
 
-    function notify(widget) {
+    function notify(widget, namespace) {
         var element = widget.element;
         var bindingTarget = element.data("kendoBindingTarget");
 
         if (bindingTarget) {
-            bind(element, bindingTarget.source);
+            bind(element, bindingTarget.source, namespace);
         }
     }
 

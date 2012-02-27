@@ -25,7 +25,7 @@
 
         <script>
             test("initializes a listview when data role is listview", function() {
-                var dom = $('<div data-role="listview"/>');
+                var dom = $('<ul data-role="listview"/>');
 
                 kendo.bind(dom, {}, kendo.mobile.ui);
 
@@ -33,12 +33,36 @@
             });
 
             test("initalizes data source", function() {
-                var dom = $('<div data-role="listview" data-bind="source:items" />');
+                var dom = $('<ul data-role="listview" data-bind="source:items" />');
 
                 kendo.bind(dom, { items: ["foo", "bar"] }, kendo.mobile.ui );
 
                 equal(dom.data("kendoMobileListView").dataSource.view()[0], "foo");
                 equal(dom.data("kendoMobileListView").dataSource.view()[1], "bar");
+            });
+
+            test("binding listview initialized before binding", function() {
+                var dom = $('<ul data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
+
+                dom.kendoMobileListView();
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
+            });
+
+            test("binding listview initialized after binding", function() {
+                var dom = $('<ul data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                dom.kendoMobileListView();
+
+                equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
             });
 
         </script>

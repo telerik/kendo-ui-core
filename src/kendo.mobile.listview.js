@@ -265,6 +265,7 @@
 
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
+            kendo.notify(that, kendo.mobile.ui);
         },
 
         events: [
