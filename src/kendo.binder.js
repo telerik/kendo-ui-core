@@ -254,7 +254,7 @@
             if (source instanceof ObservableArray) {
                 if (e.action == "add") {
                     e.preventDefault();
-                    this.add(e.index, kendo.render(this.template(), e.items));
+                    this.add(e.index, e.items);
                 } else if (e.action == "remove") {
                     e.preventDefault();
                     this.remove(e.index, e.items.length);
@@ -310,20 +310,21 @@
             source.unbind("change", this._change);
         },
 
-        add: function(index, html) {
+        add: function(index, items) {
             var element = this.container(),
-            clone = element.cloneNode(false),
-            reference = element.children[index];
+                idx,
+                length,
+                child,
+                clone = element.cloneNode(false),
+                reference = element.children[index];
 
-            $(clone).html(html);
+            $(clone).html(kendo.render(this.template(), items));
 
-            if (reference) {
-                while (clone.firstChild) {
-                    element.insertBefore(clone.firstChild, reference);
-                }
-            } else {
-                while (clone.firstChild) {
-                    element.appendChild(clone.firstChild);
+            if (clone.children.length) {
+                for (idx = 0, length = items.length; idx < length; idx++) {
+                    child = clone.children[0];
+                    element.insertBefore(child, reference || null);
+                    bindElement(child, items[idx]);
                 }
             }
         },
