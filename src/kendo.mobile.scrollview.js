@@ -102,7 +102,7 @@
             });
 
             boundary = container.x;
-            boundary.bind("change", proxy(that.calculateDimensions, that));
+            boundary.bind("change", proxy(that.refresh, that));
 
             draggable = new mobile.Draggable({
                 boundary: container,
@@ -134,7 +134,17 @@
             this.container.refresh();
         },
 
-        calculateDimensions: function() {
+        /**
+        * Redraw the mobile ScrollView pager. Called automatically on device orientation change event.
+        *
+        * @example
+        * <div data-role="scrollview" id="scrollview"></div>
+        *
+        * <script>
+        *    $("#scrollview").data("kendoMobileScrollView").refresh();
+        * </script>
+        */
+        refresh: function() {
             var that = this,
                 pageHTML = "",
                 boundary = that.boundary,
