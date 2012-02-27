@@ -1866,6 +1866,10 @@
 
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
+        init: function(element) {
+            kendo.init(element, kendo.dataviz.ui);
+        },
+
         /**
          * @name kendo.dataviz.ui
          * @namespace Contains Kendo DataViz UI widgets.
@@ -1873,7 +1877,7 @@
         ui: {
             roles: {},
             plugin: function(widget) {
-                kendo.ui.plugin(widget, dataviz.ui, "DataViz");
+                kendo.ui.plugin(widget, dataviz.ui);
             }
         },
 
@@ -1904,9 +1908,11 @@
         ViewElement: ViewElement,
 
         animationDecorator: animationDecorator,
+        append: append,
         autoMajorUnit: autoMajorUnit,
         defined: defined,
         getSpacing: getSpacing,
+        inArray: inArray,
         interpolateValue: interpolateValue,
         measureText: measureText,
         rotatePoint: rotatePoint,

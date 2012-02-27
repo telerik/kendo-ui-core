@@ -15,6 +15,7 @@
         DataSource = kendo.data.DataSource,
         Widget = kendo.ui.Widget,
         baseTemplate = kendo.template,
+        deepExtend = kendo.deepExtend,
         format = kendo.format,
         getter = kendo.getter,
         notify = kendo.notify,
@@ -33,9 +34,10 @@
         Title = dataviz.Title,
         ViewElement = dataviz.ViewElement,
         animationDecorator = dataviz.animationDecorator,
-        deepExtend = kendo.deepExtend,
+        append = dataviz.append,
         defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
+        inArray = dataviz.inArray,
         interpolateValue = dataviz.interpolateValue,
         round = dataviz.round,
         template = dataviz.template,
@@ -220,7 +222,7 @@
                 element = chart.element,
                 model = chart._model = chart._getModel(),
                 plotArea = chart._plotArea = model._plotArea,
-                viewClass = chart._supportsSVG() ? Chart.SVGView : Chart.VMLView,
+                viewClass = chart._supportsSVG() ? dataviz.SVGView : dataviz.VMLView,
                 view = chart._view = viewClass.fromModel(model);
 
             element.css("position", "relative");
@@ -231,7 +233,7 @@
 
         svg: function() {
             var model = this._getModel(),
-                view = Chart.SVGView.fromModel(model);
+                view = dataviz.SVGView.fromModel(model);
 
             return view.render();
         },
@@ -4338,6 +4340,7 @@
         BarChart: BarChart,
         BarLabel: BarLabel,
         CategoricalPlotArea: CategoricalPlotArea,
+        CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
         Color: Color,
         Highlight: Highlight,
