@@ -1,4 +1,3 @@
-
 <!DOCTYPE dom>
 <html>
     <head>
@@ -31,6 +30,15 @@
                 kendo.bind(dom, {}, kendo.mobile.ui);
 
                 ok(dom.data("kendoMobileListView") instanceof kendo.mobile.ui.ListView);
+            });
+
+            test("initalizes data source", function() {
+                var dom = $('<div data-role="listview" data-bind="source:items" />');
+
+                kendo.bind(dom, { items: ["foo", "bar"] }, kendo.mobile.ui );
+
+                equal(dom.data("kendoMobileListView").dataSource.view()[0], "foo");
+                equal(dom.data("kendoMobileListView").dataSource.view()[1], "bar");
             });
 
         </script>
