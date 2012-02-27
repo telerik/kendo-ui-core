@@ -153,6 +153,7 @@
         DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         FOCUSED = "k-state-focused",
+        MOUSEDOWN = "mousedown",
         SELECT = "select",
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
@@ -513,7 +514,7 @@
             var that = this,
                 input = that.input.add(that.element),
                 wrapper = that._inputWrapper.unbind(HOVEREVENTS),
-                arrow = that._arrow.unbind(CLICK);
+                arrow = that._arrow.parent().unbind(CLICK + " " + MOUSEDOWN);
 
             if (enable === false) {
                 wrapper
@@ -528,7 +529,8 @@
                     .bind(HOVEREVENTS, that._toggleHover);
 
                 input.removeAttr(ATTRIBUTE);
-                arrow.bind(CLICK, function() { that.toggle() });
+                arrow.bind(CLICK, function() { that.toggle() })
+                     .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
         },
 
@@ -776,10 +778,6 @@
         */
         toggle: function(toggle) {
             var that = this;
-
-            if (that._focused[0] !== document.activeElement) {
-                that._focused.focus();
-            }
 
             that._toggle(toggle);
         },
