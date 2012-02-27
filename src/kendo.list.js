@@ -47,8 +47,8 @@
 
             that.list = list = $("<div class='k-list-container'/>")
                         .append(that.ul)
-                        .mousedown(function() {
-                            that._clearBlurTimeout();
+                        .mousedown(function(e) {
+                            e.preventDefault();
                         });
 
             id = that.element.attr(ID);
@@ -109,15 +109,6 @@
             that.close();
         },
 
-        _clearBlurTimeout: function() {
-            var that = this;
-
-            setTimeout(function() {
-                clearTimeout(that._bluring);
-                that._focused.focus();
-            });
-        },
-
         _change: function() {
             var that = this,
                 value = that.value();
@@ -152,10 +143,6 @@
 
             that._select(li);
             that._blur();
-
-            if (that._focused[0] !== document.activeElement) {
-                that._focused.focus();
-            }
         },
 
         _height: function(length) {
@@ -210,13 +197,17 @@
         },
 
         _toggleHover: function(e) {
-            if (!kendo.support.touch)
+            if (!touch)
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
         _toggle: function(open) {
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
+
+            if (!touch && that._focused[0] !== document.activeElement) {
+                that._focused.focus();
+            }
 
             that[open ? OPEN : CLOSE]();
         },

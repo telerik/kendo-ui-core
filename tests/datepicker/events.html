@@ -34,28 +34,22 @@
                 }
             });
 
-            asyncTest("blur should call _change event", function() {
-                var datepicker = stub(input.kendoDatePicker().data("kendoDatePicker"), {
-                    _change: function() {},
-                    close: function() {}
-                });
-
-                input[0].focus();
-                input[0].blur();
-
-                setTimeout(function() {
-                    equal(datepicker.calls("_change"), 1);
-                    equal(datepicker.calls("close"), 1);
-                    ok(!!datepicker._bluring);
-                    start();
-                }, 250);
-            });
-
-            asyncTest("raise change event", function() {
+            test("blur should call _change event", function() {
                 var datepicker = input.kendoDatePicker({
                                             change: function() {
                                                 ok(true);
-                                                start();
+                                            }
+                                       })
+                                      .data("kendoDatePicker");
+
+                input.val("10/10/2000").focus();
+                input[0].blur();
+            });
+
+            test("raise change event", 1, function() {
+                var datepicker = input.kendoDatePicker({
+                                            change: function() {
+                                                ok(true);
                                             }
                                        })
                                       .data("kendoDatePicker");
@@ -63,22 +57,20 @@
                 datepicker._change("10/10/2000");
             });
 
-            asyncTest("raise DOM change event", function() {
+            test("raise DOM change event", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 input.bind("change", function() {
                     ok(true);
-                    start();
                 });
 
                 datepicker._change("10/10/2000");
             });
 
-            asyncTest("do not raise change event", function() {
+            test("do not raise change event when use API", 1, function() {
                 var datepicker = input.kendoDatePicker({
                                             change: function() {
                                                 ok(false);
-                                                start();
                                             }
                                        })
                                       .data("kendoDatePicker");
@@ -87,18 +79,14 @@
 
                 input.focus().blur();
 
-                setTimeout(function() {
-                    ok(true);
-                    start();
-                }, 350);
+                ok(true);
             });
 
-            asyncTest("raise open event", function() {
+            test("raise open event", function() {
                 var datepicker = input.kendoDatePicker({
                                             open: function() {
                                                 ok(true);
                                                 ok(this === datepicker);
-                                                start();
                                             }
                                        })
                                       .data("kendoDatePicker");
@@ -106,36 +94,30 @@
                 input.next().click();
             });
 
-            asyncTest("raise close event", function() {
+            test("raise close event", function() {
                 var datepicker = input.kendoDatePicker({
                                             close: function() {
                                                 ok(true);
-                                                start();
                                             }
                                        })
                                       .data("kendoDatePicker");
 
                 datepicker.open();
-                setTimeout(function() {
-                    datepicker._icon.click();
-                }, 200);
+                datepicker._icon.click();
             });
 
-            asyncTest("raise close event document click", function() {
+           test ("raise close event document click", function() {
                 var datepicker = input.kendoDatePicker({
                                             close: function() {
                                                 ok(true);
                                                 ok(this === datepicker);
-                                                start();
                                             }
                                        })
                                       .data("kendoDatePicker");
 
                 datepicker.open();
 
-                setTimeout(function() {
-                    $(document.documentElement).mousedown();
-                }, 200);
+                $(document.documentElement).mousedown();
             });
 
         </script>

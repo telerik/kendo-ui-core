@@ -174,20 +174,6 @@
                 equal(+dv1._current, +dv1.calendar._current);
             });
 
-            test("dateView should call clearTimeout when click on calendar", function() {
-                var called = false,
-                datepicker = input.kendoDatePicker().data("kendoDatePicker");
-
-                datepicker.dateView.options.clearBlurTimeout = function() {
-                    called = true;
-                };
-
-                datepicker.open();
-                datepicker.dateView.calendar.element.mousedown();
-
-                ok(called);
-            });
-
             test("dateView should not create footer template", function() {
                 var datepicker = input.kendoDatePicker({
                     footer: false
@@ -266,15 +252,12 @@
                 equal(datepicker.calls("close"), 1);
             });
 
-            asyncTest("DatePicker wire icon click", function() {
+            test("DatePicker wire icon click", function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 datepicker.close();
                 datepicker._icon.click();
-                setTimeout(function() {
-                    ok(datepicker.dateView.popup.visible());
-                    start();
-                }, 200);
+                ok(datepicker.dateView.popup.visible());
             });
 
             asyncTest("form reset support", function() {
