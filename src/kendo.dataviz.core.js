@@ -1865,12 +1865,13 @@
     }
 
     // Exports ================================================================
-    deepExtend(dataviz, {
+    deepExtend(kendo.dataviz, {
         /**
          * @name kendo.dataviz.ui
          * @namespace Contains Kendo DataViz UI widgets.
          */
         ui: {
+            roles: {},
             plugin: function(widget) {
                 kendo.ui.plugin(widget, dataviz.ui, "DataViz");
             }
@@ -1883,12 +1884,14 @@
         DEFAULT_FONT: DEFAULT_FONT,
         INITIAL_ANIMATION_DURATION: INITIAL_ANIMATION_DURATION,
 
+        Axis: Axis,
         Box2D: Box2D,
         BoxElement: BoxElement,
         ChartElement: ChartElement,
+        ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
         FadeAnimation: FadeAnimation,
-        FadeAnimationDecorator: FadeAnimationDecorato,
+        FadeAnimationDecorator: FadeAnimationDecorator,
         NumericAxis: NumericAxis,
         Point2D: Point2D,
         Ring: Ring,
@@ -1900,8 +1903,10 @@
         ViewBase: ViewBase,
         ViewElement: ViewElement,
 
+        animationDecorator: animationDecorator,
         autoMajorUnit: autoMajorUnit,
         defined: defined,
+        getSpacing: getSpacing,
         measureText: measureText,
         rotatePoint: rotatePoint,
         round: round,
