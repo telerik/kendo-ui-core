@@ -145,7 +145,7 @@
             chart._redraw();
             chart._attachEvents();
 
-            notify(chart);
+            notify(chart, dataviz.ui);
         },
 
         events:[
