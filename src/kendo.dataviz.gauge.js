@@ -335,7 +335,12 @@
             }
 
             renderTickRing(majorTickRing, options.majorUnit);
-            minorTickRing.radius(minorTickRing.r - options.minorTickSize, true);
+            if (options.labels.position == INSIDE) {
+                minorTickRing.radius(minorTickRing.r - options.minorTickSize, true);
+            } else {
+                minorTickRing.radius(minorTickRing.ir + options.minorTickSize);
+            }
+
             renderTickRing(minorTickRing, options.minorUnit, options.majorUnit);
 
             return ticks;
