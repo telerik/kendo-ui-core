@@ -10,11 +10,15 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
 
-            var Chart = kendo.ui.Chart;
+            var dataviz = kendo.dataviz;
 
             (function() {
                 var chart,
@@ -55,10 +59,10 @@
                 }
 
                 function lineClick(seriesClickHandler, x, y) {
-                    var createSegment = Chart.LineChart.fn.createSegment,
+                    var createSegment = dataviz.LineChart.fn.createSegment,
                         id;
 
-                    stubMethod(Chart.LineChart, "createSegment",
+                    stubMethod(dataviz.LineChart, "createSegment",
                         function(lineId) {
                             id = lineId;
                             return createSegment.apply(this, arguments);

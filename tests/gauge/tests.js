@@ -1,18 +1,18 @@
 tests.push(
     {
-        page: "gauges/api.html",
+        page: "gauge/api.html",
         title: "API"
     },
     {
-        page: "gauges/radialscale.html",
+        page: "gauge/radialscale.html",
         title: "Radial Scale"
     },
     {
-        page: "gauges/pointer.html",
+        page: "gauge/pointer.html",
         title: "Pointer"
     },
     {
-        page: "gauges/plotarea.html",
+        page: "gauge/plotarea.html",
         title: "PlotArea"
     }
 );

@@ -10,14 +10,17 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                categoriesCount = Chart.categoriesCount,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                padding = 60,
                 plotArea,
                 pieChart,
                 firstSegment,
@@ -28,9 +31,9 @@
             function setupPieChart(plotArea, options) {
                 view = new ViewStub();
 
-                pieChart = new Chart.PieChart(plotArea, $.extend({}, { padding: 60 }, options));
+                pieChart = new dataviz.PieChart(plotArea, $.extend({}, { padding: 60 }, options));
 
-                root = new Chart.RootElement();
+                root = new dataviz.RootElement();
                 root.append(pieChart);
 
                 pieChart.reflow(chartBox);
@@ -216,9 +219,9 @@
                     SERIES_NAME = "series";
 
                 function createSegment(options) {
-                    segment = new Chart.PieSegment(
+                    segment = new dataviz.PieSegment(
                         VALUE,
-                        new Chart.Sector(new Chart.Point2D(0,0), 100, 90, 100),
+                        new dataviz.Sector(new dataviz.Point2D(0,0), 100, 90, 100),
                         options
                     );
 
@@ -227,7 +230,7 @@
                     box = new Box2D(0, 0, 100, 100);
                     segment.reflow(box);
 
-                    root = new Chart.RootElement();
+                    root = new dataviz.RootElement();
                     root.append(segment);
 
                     view = new ViewStub();
@@ -327,11 +330,11 @@
                 });
 
                 test("model is a RootElement", function() {
-                    ok(model instanceof Chart.RootElement);
+                    ok(model instanceof dataviz.RootElement);
                 });
 
                 test("title is created", function() {
-                    ok(title instanceof Chart.Title);
+                    ok(title instanceof dataviz.Title);
                 });
 
                 test("title text is set", function() {
@@ -343,7 +346,7 @@
                 });
 
                 test("legend is created", function() {
-                    ok(legend instanceof Chart.Legend);
+                    ok(legend instanceof dataviz.Legend);
                 });
 
                 test("legend series are populated", function() {
@@ -363,7 +366,7 @@
                 });
 
                 test("plotArea is created", function() {
-                    ok(plotArea instanceof Chart.PiePlotArea);
+                    ok(plotArea instanceof dataviz.PiePlotArea);
                 });
 
             })();

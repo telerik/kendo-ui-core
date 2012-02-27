@@ -2,33 +2,35 @@
 
     // Imports ================================================================
     var $ = jQuery,
+        doc = document,
+        math = Math,
+
         kendo = window.kendo,
         Class = kendo.Class,
-        Chart = kendo.ui.Chart,
-        Color = Chart.Color,
-        Box2D = Chart.Box2D,
-        Point2D = Chart.Point2D,
-        BarAnimationDecorator = Chart.BarAnimationDecorator,
-        PieAnimationDecorator = Chart.PieAnimationDecorator,
-        FadeAnimationDecorator = Chart.FadeAnimationDecorator,
-        ExpandAnimation = Chart.ExpandAnimation,
-        ViewBase = Chart.ViewBase,
-        ViewElement = Chart.ViewElement,
+
+        dataviz = kendo.dataviz,
+        Color = dataviz.Color,
+        Box2D = dataviz.Box2D,
+        Point2D = dataviz.Point2D,
+        BarAnimationDecorator = dataviz.BarAnimationDecorator,
+        PieAnimationDecorator = dataviz.PieAnimationDecorator,
+        FadeAnimationDecorator = dataviz.FadeAnimationDecorator,
+        ExpandAnimation = dataviz.ExpandAnimation,
+        ViewBase = dataviz.ViewBase,
+        ViewElement = dataviz.ViewElement,
         deepExtend = kendo.deepExtend,
-        template = Chart.template,
-        uniqueId = Chart.uniqueId,
-        rotatePoint = Chart.rotatePoint,
-        round = Chart.round,
-        supportsSVG = Chart.supportsSVG,
-        doc = document,
-        math = Math;
+        template = dataviz.template,
+        uniqueId = dataviz.uniqueId,
+        rotatePoint = dataviz.rotatePoint,
+        round = dataviz.round,
+        supportsSVG = dataviz.supportsSVG;
 
     // Constants ==============================================================
     var BLACK = "#000",
-        CLIP = Chart.CLIP,
-        DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
-        DEFAULT_FONT = Chart.DEFAULT_FONT,
+        CLIP = dataviz.CLIP,
+        DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
+        DEFAULT_FONT = dataviz.DEFAULT_FONT,
         OBJECT = "object",
         RADIAL = "radial";
 
@@ -769,22 +771,23 @@
     }
 
     // Exports ================================================================
-    deepExtend(Chart, {
-        VMLView: VMLView,
-        VMLText: VMLText,
-        VMLRotatedText: VMLRotatedText,
-        VMLStroke: VMLStroke,
-        VMLFill: VMLFill,
-        VMLPath: VMLPath,
-        VMLLine: VMLLine,
-        VMLSector: VMLSector,
-        VMLRing: VMLRing,
+    deepExtend(dataviz, {
         VMLCircle: VMLCircle,
-        VMLGroup: VMLGroup,
+        VMLClipAnimationDecorator: VMLClipAnimationDecorator,
         VMLClipRect: VMLClipRect,
+        VMLFill: VMLFill,
+        VMLGroup: VMLGroup,
+        VMLLine: VMLLine,
         VMLLinearGradient: VMLLinearGradient,
         VMLOverlayDecorator: VMLOverlayDecorator,
-        VMLClipAnimationDecorator: VMLClipAnimationDecorator,
+        VMLPath: VMLPath,
+        VMLRing: VMLRing,
+        VMLRotatedText: VMLRotatedText,
+        VMLSector: VMLSector,
+        VMLStroke: VMLStroke,
+        VMLText: VMLText,
+        VMLView: VMLView,
+
         blendColors: blendColors,
         blendGradient: blendGradient
     });

@@ -9,12 +9,16 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
 
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
                 chartBox = new Box2D(5, 5, 1000, 1000),
                 view,
                 TOLERANCE = 2;
@@ -45,14 +49,14 @@
                     setup: function() {
                         moduleSetup();
 
-                        chartElement = new Chart.ChartElement();
+                        chartElement = new dataviz.ChartElement();
                     }
                 });
 
                 test("box wraps children", function() {
                     var childStub = {
                         reflow: function() { },
-                        box: new Chart.Box2D(10, 10, 100, 100)
+                        box: new dataviz.Box2D(10, 10, 100, 100)
                     };
 
                     chartElement.children.push(childStub);
@@ -62,13 +66,13 @@
                 });
 
                 test("parent set to appended children", function() {
-                    var child = new Chart.ChartElement();
+                    var child = new dataviz.ChartElement();
                     chartElement.append(child);
                     ok(child.parent === chartElement);
                 });
 
                 test("getRoot returns root for first level children", function() {
-                    var child = new Chart.ChartElement();
+                    var child = new dataviz.ChartElement();
 
                     chartElement.getRoot = function() { return this; }
 
@@ -77,8 +81,8 @@
                 });
 
                 test("getRoot returns root for second level children", function() {
-                    var child1 = new Chart.ChartElement(),
-                        child2 = new Chart.ChartElement();
+                    var child1 = new dataviz.ChartElement(),
+                        child2 = new dataviz.ChartElement();
 
                     chartElement.getRoot = function() { return this; }
 
@@ -97,7 +101,7 @@
                     MARGIN = 10;
 
                 function createRoot(options) {
-                    rootElement = new Chart.RootElement(options);
+                    rootElement = new dataviz.RootElement(options);
 
                     rootElement.reflow();
                 }
@@ -131,7 +135,7 @@
                 test("reflow is called for all children", 2, function() {
                     var childStub = {
                         reflow: function() { ok(true); },
-                        box: new Chart.Box2D()
+                        box: new dataviz.Box2D()
                     };
 
                     rootElement.children.push(childStub, childStub);
@@ -231,7 +235,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        boxElement = new Chart.BoxElement({
+                        boxElement = new dataviz.BoxElement({
                             width: WIDTH,
                             height: HEIGHT
                         });
@@ -355,7 +359,7 @@
                 module("BoxElement / Alignment", {
                     setup: function() {
                         moduleSetup();
-                        boxElement = new Chart.BoxElement({
+                        boxElement = new dataviz.BoxElement({
                             width: WIDTH,
                             height: HEIGHT,
                             margin: MARGIN,
@@ -412,7 +416,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        boxElement = new Chart.BoxElement();
+                        boxElement = new dataviz.BoxElement();
                         childElements = [
                             new ChartElementStub(),
                             new ChartElementStub()
@@ -520,7 +524,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        boxElement = new Chart.BoxElement({
+                        boxElement = new dataviz.BoxElement({
                             width: WIDTH,
                             height: HEIGHT,
                             border: { width: 1 },
@@ -530,7 +534,7 @@
                 });
 
                 test("does not render rectangle when no border and background are set", function() {
-                    boxElement = new Chart.BoxElement();
+                    boxElement = new dataviz.BoxElement();
                     boxElement.reflow(targetBox);
                     boxElement.getViewElements(view);
                     equals(view.log.rect.length, 0);
@@ -661,7 +665,7 @@
                     PADDING = 5;
 
                 function createTitle(options) {
-                    title = new kendo.ui.Chart.Title($.extend({
+                    title = new dataviz.Title($.extend({
                         text: "Title",
                         font: SANS16,
                         margin: MARGIN,
@@ -766,13 +770,13 @@
                 });
 
                 test("positions title at top with margin 20", function() {
-                    title = new kendo.ui.Chart.Title({
+                    title = new dataviz.Title({
                         text: "Title",
                         margin: MARGIN * 2
                     });
                     title.reflow(chartBox);
 
-                    title1 = new kendo.ui.Chart.Title({
+                    title1 = new dataviz.Title({
                         text: "Title"
                     });
 
@@ -783,7 +787,7 @@
                 });
 
                 test("positions title at bottom with margin 20", function() {
-                    title = new kendo.ui.Chart.Title({
+                    title = new dataviz.Title({
                         text: "Title",
                         position: "bottom",
                         margin: MARGIN * 2
@@ -791,7 +795,7 @@
 
                     title.reflow(chartBox);
 
-                    title1 = new kendo.ui.Chart.Title({
+                    title1 = new dataviz.Title({
                         text: "Title",
                         position: "bottom"
                     });
@@ -811,7 +815,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        text = new Chart.Text("", { font: SANS12 });
+                        text = new dataviz.Text("", { font: SANS12 });
                     }
                 });
 
@@ -900,7 +904,7 @@
                     TEXT = "text";
 
                 function createTextBox(options) {
-                    textBox = new Chart.TextBox(TEXT, options);
+                    textBox = new dataviz.TextBox(TEXT, options);
                     textBox.reflow(new Box2D());
                     textBox.getViewElements(view);
                 }
@@ -935,7 +939,7 @@
                     MARGIN = 10;
 
                 function createLegend(options) {
-                    legend = new Chart.Legend($.extend(true,{
+                    legend = new dataviz.Legend($.extend(true,{
                         items: [ { name: "Series 1" } ],
                         labels: {
                             font: SANS12
@@ -1012,7 +1016,7 @@
                 });
 
                 test("positions legend to absolute vertical center (relative to y=0)", function() {
-                    legend = new Chart.Legend({
+                    legend = new dataviz.Legend({
                         items: [ { name: "Series 1" } ]
                     });
 
@@ -1139,7 +1143,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        legend = new Chart.Legend({
+                        legend = new dataviz.Legend({
                             items: [ { name: "Series 1", color: "#f00" } ],
                             labels: {
                                 font: SANS12
@@ -1194,7 +1198,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        legend = new Chart.Legend({
+                        legend = new dataviz.Legend({
                             items: [ { name: "Series 1", color: "#f00" } ],
                             labels: {
                                 font: SANS12
@@ -1242,7 +1246,7 @@
 
                 module("ViewBase", {
                     setup: function() {
-                        view = new Chart.ViewBase();
+                        view = new dataviz.ViewBase();
                     }
                 });
 
@@ -1301,7 +1305,7 @@
                 // ------------------------------------------------------------
                 module("ViewBase / buildGradient", {
                     setup: function() {
-                        view = new Chart.ViewBase();
+                        view = new dataviz.ViewBase();
                     }
                 });
 
@@ -1329,8 +1333,8 @@
                     ringBox;
 
                 function createRing(startAngle, angle) {
-                    ring = new Chart.Ring(
-                        new Chart.Point2D(100, 100), 0, 100,
+                    ring = new dataviz.Ring(
+                        new dataviz.Point2D(100, 100), 0, 100,
                         startAngle, angle - startAngle);
                     var box = ring.getBBox();
                     ringBox = [box.x1, box.y1, box.x2, box.y2]
