@@ -167,6 +167,26 @@
                 ok(elements.eq(1).hasClass("k-edit-field"));
             });
 
+            test("custom template is used if specified", function() {
+                var grid = setup({ editable: { mode: "popup", template:"<div>#=foo#</div>" } });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+                equal(container.find("div:first").text(), "bar");
+            });
+
+            test("update and cancel buttons are added if template is set", function() {
+                var grid = setup({ editable: { mode: "popup", template:"<div>#=foo#</div>" } });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+
+                equal(container.find("a.k-grid-update").length, 1);
+                equal(container.find("a.k-grid-cancel").length, 1);
+            });
+
             test("Update and cancel button are added to the edit form", function() {
                 var grid = setup();
 
