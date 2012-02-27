@@ -1,7 +1,7 @@
 (function () {
 
     /**
-     * @name kendo.ui.Chart.Description
+     * @name kendo.dataviz.ui.Chart.Description
      *
      * @section
      * <p>
@@ -152,7 +152,7 @@
      * Detailed reference is available in the Configuration, Methods and Events tabs.
      * </p>
      */
-     var ChartDocs = /** @lends kendo.ui.Chart.prototype */ {
+     var ChartDocs = /** @lends kendo.dataviz.ui.Chart.prototype */ {
         /**
          * @constructs
          * @extends kendo.ui.Widget
@@ -3860,7 +3860,7 @@
             /**
              * Fires when the chart has received data from the data source
              * and is about to render it.
-             * @name kendo.ui.Chart#dataBound
+             * @name kendo.dataviz.ui.Chart#dataBound
              * @event
              * @param {Event} e
              * @example
@@ -3871,7 +3871,7 @@
 
             /**
              * Fires when chart series are clicked.
-             * @name kendo.ui.Chart#seriesClick
+             * @name kendo.dataviz.ui.Chart#seriesClick
              * @event
              * @param {Event} e
              * @param {Object} e.value The data point value.
