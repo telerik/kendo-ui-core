@@ -9,24 +9,26 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="../chart/util.js"></script>
         <script>
-            var Chart = kendo.ui.Chart,
-                COORD_PRECISION = Chart.COORD_PRECISION,
-                Gauge = kendo.ui.Gauge,
-                GaugePlotArea = Gauge.GaugePlotArea,
-                Box2D = Chart.Box2D,
-                Point2D = Chart.Point2D,
-                RadialScale = Gauge.RadialScale,
-                Pointer = Gauge.Pointer,
+            var dataviz = kendo.dataviz,
+                COORD_PRECISION = dataviz.COORD_PRECISION,
+                GaugePlotArea = dataviz.GaugePlotArea,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
+                RadialScale = dataviz.RadialScale,
+                Pointer = dataviz.Pointer,
                 radialScale,
                 ring,
                 radius = 100,
                 chartBox = new Box2D(0, 0, 200, 200);
 
             // Tests expect particular font size
-            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+            dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function reflowScale(scaleOptions) {
                 plotArea.scale = new RadialScale(

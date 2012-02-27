@@ -1701,8 +1701,7 @@
         });
     }
 
-    var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation),
-        PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
+    var FadeAnimationDecorator = animationDecorator(FADEIN, FadeAnimation);
 
     // Helper functions========================================================
     function measureText(text, style, rotation) {
@@ -1965,6 +1964,7 @@
         Point2D: Point2D,
         Ring: Ring,
         RootElement: RootElement,
+        RotationAnimation: RotationAnimation,
         Sector: Sector,
         Text: Text,
         TextBox: TextBox,

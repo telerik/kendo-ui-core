@@ -9,24 +9,27 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="../chart/util.js"></script>
         <script>
-            var Chart = kendo.ui.Chart,
-                Gauge = kendo.ui.Gauge,
-                Box2D = Chart.Box2D,
-                Point2D = Chart.Point2D,
-                Pointer = Gauge.Pointer,
+            var dataviz = kendo.dataviz,
+                Gauge = dataviz.ui.Gauge,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
+                Pointer = dataviz.Pointer,
                 pointer,
                 chartBox = new Box2D(0, 0, 400, 300);
 
             // Tests expect particular font size
-            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+            dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function stubScale() {
-                var scale = new Gauge.RadialScale();
+                var scale = new dataviz.RadialScale();
 
-                scale.ring = new Chart.Ring(new Point2D(100, 100), 50, 100, 90, 180);
+                scale.ring = new dataviz.Ring(new Point2D(100, 100), 50, 100, 90, 180);
 
                 return scale;
             }
@@ -38,7 +41,7 @@
                             type: "needle"
                         });
 
-                    pointer.getViewElements(new Chart.SVGView());
+                    pointer.getViewElements(new dataviz.SVGView());
                 }
             });
 

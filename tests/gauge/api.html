@@ -9,15 +9,18 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="../chart/util.js"></script>
         <script>
-            var Chart = kendo.ui.Chart,
+            var dataviz = kendo.dataviz,
                 gaugeElement,
                 gauge;
 
             // Tests expect particular font size
-            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+            dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
             module("Gauge API", {
                 setup: function() {
