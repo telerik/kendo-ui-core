@@ -21,7 +21,6 @@
                 Box2D = dataviz.Box2D,
                 categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
-                padding = 60,
                 plotArea,
                 pieChart,
                 firstSegment,
@@ -32,7 +31,7 @@
             function setupPieChart(plotArea, options) {
                 view = new ViewStub();
 
-                pieChart = new dataviz.PieChart(plotArea, options);
+                pieChart = new dataviz.PieChart(plotArea, $.extend({}, { padding: 60 }, options));
 
                 root = new dataviz.RootElement();
                 root.append(pieChart);

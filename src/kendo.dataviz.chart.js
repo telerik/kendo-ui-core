@@ -2516,7 +2516,6 @@
 
         options: {
             startAngle: 90,
-            padding: 60,
             connectors: {
                 width: 1,
                 color: "#939393",
@@ -2639,9 +2638,12 @@
             var chart = this,
                 options = chart.options,
                 box = targetBox.clone(),
-                minWidth = math.min(box.width(), box.height()),
                 space = 5,
-                padding = options.padding > minWidth / 2 - space ? minWidth / 2 - space : options.padding,
+                minWidth = math.min(box.width(), box.height()),
+                halfMinWidth = minWidth / 2,
+                defaultPadding = minWidth - minWidth * 0.85,
+                padding = defined(options.padding) ? options.padding : defaultPadding,
+                padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
                 newBox = new Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
@@ -2661,7 +2663,7 @@
                 segment = segments[i];
 
                 sector = segment.sector;
-                sector.r = minWidth / 2 - padding;
+                sector.r = halfMinWidth - padding;
                 sector.c = new Point2D(
                     sector.r + newBox.x1 + padding,
                     sector.r + newBox.y1 + padding
