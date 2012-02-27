@@ -9,12 +9,6 @@ var SCRIPTS = "src",
     CULTURE_SCRIPTS = path.join(SCRIPTS, CULTURES);
 
 var multipartScripts = [{
-    output:   "kendo.chart.js",
-    inputs: [ path.join("chart", "main.js"),
-              path.join("chart", "svg.js"),
-              path.join("chart", "vml.js"),
-              path.join("chart", "themes.js")]
-    }, {
     output:   "kendo.editor.js",
     inputs: [ path.join("editor", "main.js"),
               path.join("editor", "dom.js"),
@@ -76,7 +70,12 @@ var suiteScripts = {
         "kendo.data.odata.js",
         "kendo.data.xml.js",
         "kendo.data.js",
-        "kendo.chart.js"
+        "kendo.dataviz.core.js",
+        "kendo.dataviz.chart.js",
+        "kendo.dataviz.chart.themes.js",
+        "kendo.dataviz.gauge.js",
+        "kendo.dataviz.svg.js",
+        "kendo.dataviz.vml.js"
     ],
     "mobile": [
         "kendo.core.js",
