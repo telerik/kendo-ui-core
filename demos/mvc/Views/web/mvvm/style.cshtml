@@ -1,6 +1,26 @@
 <div id="example" class="k-content">
-    <div style="width: 100px; height: 100px; border-width: 4px;padding: 1em; -webkit-transition: all 500ms; -moz-transition: all 500ms; transition: all 500ms"
-        data-bind="style: {
+    <div class="configuration">
+        <span class="configHead">Configuration</span>
+        <span class="configTitle">Style</span>
+        <ul class="options">
+            <li>
+                <label>Color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedColor"></select></label>
+            </li>
+            <li>
+                <label>Background color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBackground"></select></label>
+            </li>
+            <li>
+                <label>Border color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBorderColor"></select></label>
+            </li>
+            <li>
+                <label>Border style: <select data-text-field="name" data-value-field="value" data-bind="source: borders, value: selectedBorderStyle"></select></label>
+            </li>
+            <li>
+                <label>Border radius: <select data-bind="source: radii, value: selectedBorderRadius"></select></label>
+            </li>
+        </ul>
+    </div>
+    <div id="target" data-bind="style: {
             backgroundColor: selectedBackground,
             color: selectedColor,
             borderStyle: selectedBorderStyle,
@@ -11,21 +31,6 @@
         }">
         Lorem ipsum dolor sit amet.
     </div>
-    <label>
-        color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedColor"></select>
-    </label>
-    <label>
-        background color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBackground"></select>
-    </label>
-    <label>
-        border color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBorderColor"></select>
-    </label>
-    <label>
-        border style: <select data-text-field="name" data-value-field="value" data-bind="source: borders, value: selectedBorderStyle"></select>
-    </label>
-    <label>
-        border radius: <select data-bind="source: radii, value: selectedBorderRadius"></select>
-    </label>
     <script>
         $(document).ready(function() {
             var viewModel = {
@@ -62,8 +67,7 @@
     <div class="code-sample">
         <h4 class="code-title">View source code:</h4>
         <pre class="prettyprint">
-&lt;div style=&quot;width: 100px;height:100px;border-width:4px;padding:1em;-webkit-transition:all 500ms;-moz-transition:all 500ms;transition: all 500ms&quot;
-    data-bind=&quot;style: {
+&lt;div id=&quot;target&quot; data-bind=&quot;style: {
         backgroundColor: selectedBackground,
         color: selectedColor,
         borderStyle: selectedBorderStyle,
@@ -74,24 +78,26 @@
     }&quot;&gt;
     Lorem ipsum dolor sit amet.
 &lt;/div&gt;
-&lt;label&gt;
-    color: &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedColor&quot;&gt;&lt;/select&gt;
-&lt;/label&gt;
-&lt;label&gt;
-    background color:
-    &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedBackground&quot;&gt;&lt;/select&gt;
-&lt;/label&gt;
-&lt;label&gt;
-    border color:
-    &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedBorderColor&quot;&gt;&lt;/select&gt;
-&lt;/label&gt;
-&lt;label&gt;
-    border style:
-    &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;value&quot; data-bind=&quot;source: borders, value: selectedBorderStyle&quot;&gt;&lt;/select&gt;
-&lt;/label&gt;
-&lt;label&gt;
-    border radius: &lt;select data-bind=&quot;source: radii, value: selectedBorderRadius&quot;&gt;&lt;/select&gt;
-&lt;/label&gt;
+&lt;ul&gt;
+    &lt;li&gt;
+        Color: &lt;select data-text-field=&quot;name&quot; data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedColor&quot;&gt;&lt;/select&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;label&gt;Background color: &lt;select data-text-field=&quot;name&quot;
+            data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedBackground&quot;&gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;label&gt;Border color: &lt;select data-text-field=&quot;name&quot;
+            data-value-field=&quot;hex&quot; data-bind=&quot;source: colors, value: selectedBorderColor&quot;&gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;label&gt;Border style: &lt;select data-text-field=&quot;name&quot;
+            data-value-field=&quot;value&quot; data-bind=&quot;source: borders, value: selectedBorderStyle&quot;&gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+        &lt;label&gt;Border radius: &lt;select data-bind=&quot;source: radii, value: selectedBorderRadius&quot;&gt;&lt;/select&gt;&lt;/label&gt;
+    &lt;/li&gt;
+&lt;/ul&gt;
         </pre>
     </div>
     <div class="code-sample">
@@ -124,12 +130,34 @@ kendo.bind($("#example"), viewModel);
         </pre>
     </div>
     <style scoped>
-        label {
-            display: block;
+        .code-sample {
+            clear: both;
         }
 
-        #example pre {
-            font-size: 12px;
+        .configuration {
+            width: 300px;
+        }
+
+        .configuration label {
+            display: block;
+            float: none;
+        }
+
+        .configuration select {
+            float: right;
+            width: 120px;
+            clear: right;
+        }
+
+        #target {
+            width: 100px;
+            height: 100px;
+            border-width: 4px;
+            padding: 1em;
+            float: left;
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            transition: all 500ms
         }
     </style>
 </div>
