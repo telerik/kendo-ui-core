@@ -10,11 +10,16 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
 
-            var Chart = kendo.ui.Chart,
+            var dataviz = kendo.dataviz,
+                Chart = dataviz.ui.Chart,
                 EMPTY_DIV = "<div id='container' style='width: 0px; height: 0px; line-height: 0px;'></div>";
 
             (function() {
@@ -62,13 +67,13 @@
                 test("SVGView is created if browser supports SVG", function() {
                     Chart.prototype._supportsSVG = function() { return true; };
                     createChart();
-                    ok(chart._view instanceof Chart.SVGView);
+                    ok(chart._view instanceof dataviz.SVGView);
                 });
 
                 test("VMLView is created if browser does not support SVG", function() {
                     Chart.prototype._supportsSVG = function() { return false; };
                     createChart();
-                    ok(chart._view instanceof Chart.VMLView);
+                    ok(chart._view instanceof dataviz.VMLView);
                 });
 
                 test("sets dimensions on view element", 2, function() {
@@ -95,7 +100,7 @@
 
                 test("category axis is rendered horizontally by default", function() {
                     createChart();
-                    ok(plotArea.categoryAxis instanceof Chart.CategoryAxis);
+                    ok(plotArea.categoryAxis instanceof dataviz.CategoryAxis);
                 });
 
                 test("categories are empty by default", function() {
@@ -156,7 +161,7 @@
 
                 test("value axis is rendered vertically by default", function() {
                     createChart();
-                    ok(plotArea.namedValueAxes.primary instanceof Chart.NumericAxis);
+                    ok(plotArea.namedValueAxes.primary instanceof dataviz.NumericAxis);
                 });
 
                 test("global color is applied to line", function() {
@@ -392,40 +397,40 @@
                 // ------------------------------------------------------------
                 var plotAreaConfig = [{
                         series: "bar",
-                        plotArea: Chart.CategoricalPlotArea,
-                        chart: Chart.BarChart
+                        plotArea: dataviz.CategoricalPlotArea,
+                        chart: dataviz.BarChart
                     }, {
                         series: "column",
-                        plotArea: Chart.CategoricalPlotArea,
-                        chart: Chart.BarChart
+                        plotArea: dataviz.CategoricalPlotArea,
+                        chart: dataviz.BarChart
                     }, {
                         series: "line",
-                        plotArea: Chart.CategoricalPlotArea,
-                        chart: Chart.LineChart
+                        plotArea: dataviz.CategoricalPlotArea,
+                        chart: dataviz.LineChart
                     }, {
                         series: "verticalLine",
-                        plotArea: Chart.CategoricalPlotArea,
-                        chart: Chart.LineChart
+                        plotArea: dataviz.CategoricalPlotArea,
+                        chart: dataviz.LineChart
                     }, {
                         series: "area",
-                        plotArea: Chart.CategoricalPlotArea,
-                        chart: Chart.AreaChart
+                        plotArea: dataviz.CategoricalPlotArea,
+                        chart: dataviz.AreaChart
                     }, {
                         series: "verticalArea",
-                        plotArea: Chart.CategoricalPlotArea,
-                        chart: Chart.AreaChart
+                        plotArea: dataviz.CategoricalPlotArea,
+                        chart: dataviz.AreaChart
                     }, {
                         series: "pie",
-                        plotArea: Chart.PiePlotArea,
-                        chart: Chart.PieChart
+                        plotArea: dataviz.PiePlotArea,
+                        chart: dataviz.PieChart
                     }, {
                         series: "scatter",
-                        plotArea: Chart.XYPlotArea,
-                        chart: Chart.ScatterChart
+                        plotArea: dataviz.XYPlotArea,
+                        chart: dataviz.ScatterChart
                     }, {
                         series: "scatterLine",
-                        plotArea: Chart.XYPlotArea,
-                        chart: Chart.ScatterLineChart
+                        plotArea: dataviz.XYPlotArea,
+                        chart: dataviz.ScatterLineChart
                     }
                 ];
 
@@ -922,7 +927,7 @@
                             text: ""
                         }
                     });
-                    ok(!(chart._model.children[0] instanceof Chart.Title));
+                    ok(!(chart._model.children[0] instanceof dataviz.Title));
                 });
 
                 test("not created if no visible is false", function() {
@@ -932,7 +937,7 @@
                             visible: false
                         }
                     });
-                    ok(!(chart._model.children[0] instanceof Chart.Title));
+                    ok(!(chart._model.children[0] instanceof dataviz.Title));
                 });
 
                 // ------------------------------------------------------------
@@ -1175,7 +1180,7 @@
                 var animations;
                 function logAnimations(callback) {
                     animations = [];
-                    stubMethod(Chart.ViewBase, "playAnimations",
+                    stubMethod(dataviz.ViewBase, "playAnimations",
                         function() {
                             var view = this;
                             animations = view.animations;

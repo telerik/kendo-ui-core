@@ -1979,6 +1979,7 @@
         getSpacing: getSpacing,
         inArray: inArray,
         interpolateValue: interpolateValue,
+        last: last,
         measureText: measureText,
         rotatePoint: rotatePoint,
         round: round,

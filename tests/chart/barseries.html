@@ -10,12 +10,16 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                categoriesCount = Chart.categoriesCount,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
                 series,
                 view;
@@ -34,7 +38,7 @@
                 view = new ViewStub();
 
                 options.gap = 1.5;
-                series = new Chart.BarChart(plotArea, options);
+                series = new dataviz.BarChart(plotArea, options);
                 series.reflow();
             }
 
@@ -1115,7 +1119,7 @@
                 // ------------------------------------------------------------
                 module("Bar Chart / Configuration", {
                     setup: function() {
-                        barChart = new Chart.BarChart(plotArea, {
+                        barChart = new dataviz.BarChart(plotArea, {
                             series: [{
                                 data: [0, 1],
                                 color: "#f00",
@@ -1148,7 +1152,7 @@
                     TOLERANCE = 0.1;
 
                 function createCluster(options) {
-                    cluster = new Chart.ClusterLayout(options);
+                    cluster = new dataviz.ClusterLayout(options);
                     bars = [ new BarStub(barBox), new BarStub(barBox) ];
                     [].push.apply(cluster.children, bars);
                     cluster.reflow(clusterBox);
@@ -1221,7 +1225,7 @@
                 // ------------------------------------------------------------
                 module("Stack Layout / Vertical", {
                     setup: function() {
-                        stack = new Chart.StackLayout();
+                        stack = new dataviz.StackLayout();
 
                         stack.children.push(
                             new BarStub(new Box2D(0, 90, 100, 100)),
@@ -1275,7 +1279,7 @@
                 // ------------------------------------------------------------
                 module("Stack Layout / Vertical / Reversed", {
                     setup: function() {
-                        stack = new Chart.StackLayout({ isReversed: true });
+                        stack = new dataviz.StackLayout({ isReversed: true });
 
                         stack.children.push(
                             new BarStub(new Box2D(0, 90, 100, 100)),
@@ -1329,7 +1333,7 @@
                 // ------------------------------------------------------------
                 module("Stack Layout / Horizontal", {
                     setup: function() {
-                        stack = new Chart.StackLayout({ isVertical: false });
+                        stack = new dataviz.StackLayout({ isVertical: false });
                         stack.children.push(
                             new BarStub(new Box2D(0, 0, 20, 10)),
                             new BarStub(new Box2D(0, 0, 30, 10)),
@@ -1382,7 +1386,7 @@
                 // ------------------------------------------------------------
                 module("Stack Layout / Horizontal / Reversed", {
                     setup: function() {
-                        stack = new Chart.StackLayout({ isVertical: false, isReversed: true });
+                        stack = new dataviz.StackLayout({ isVertical: false, isReversed: true });
                         stack.children.push(
                             new BarStub(new Box2D(100, 0, 120, 10)),
                             new BarStub(new Box2D(100, 0, 130, 10)),
@@ -1435,7 +1439,7 @@
             })();
 
             (function() {
-                var Bar = Chart.Bar,
+                var Bar = dataviz.Bar,
                     bar,
                     label,
                     box,
@@ -1454,7 +1458,7 @@
                     bar.dataItem = { value: VALUE };
                     bar.series = { name: SERIES_NAME };
 
-                    root = new Chart.RootElement();
+                    root = new dataviz.RootElement();
                     root.append(bar);
 
                     bar.reflow(box);

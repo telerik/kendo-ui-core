@@ -26,7 +26,7 @@ ViewStub.prototype = {
             style: style
         });
 
-        return new kendo.ui.Chart.ViewElement(style);
+        return new kendo.dataviz.ViewElement(style);
     },
 
     createText: function(content, style) {
@@ -35,22 +35,22 @@ ViewStub.prototype = {
             style: style
         });
 
-        return new kendo.ui.Chart.ViewElement(style);
+        return new kendo.dataviz.ViewElement(style);
     },
 
     createGroup: function(options) {
         this.log.group.push({options: options});
-        return new kendo.ui.Chart.ViewElement(options);
+        return new kendo.dataviz.ViewElement(options);
     },
 
     createLine: function(x1, y1, x2, y2, options) {
         this.log.line.push({ x1: x1, y1: y1, x2: x2, y2: y2, options: options });
-        return new kendo.ui.Chart.ViewElement(options);
+        return new kendo.dataviz.ViewElement(options);
     },
 
     createPolyline: function(points, closed, style) {
         this.log.path.push({ points: points, closed: closed, style: style });
-        var element = new kendo.ui.Chart.ViewElement(style);
+        var element = new kendo.dataviz.ViewElement(style);
         element.points = points;
         element.closed = closed;
         element.clone = function() {
@@ -63,13 +63,13 @@ ViewStub.prototype = {
         this.log.circle.push({
             center: center, radius: radius, style: style });
 
-        return new kendo.ui.Chart.ViewElement(style);
+        return new kendo.dataviz.ViewElement(style);
     },
 
     createSector: function(sector, style) {
         this.log.sector.push({ sector: sector, style: style });
 
-        return new kendo.ui.Chart.ViewElement(style);
+        return new kendo.dataviz.ViewElement(style);
     }
 };
 
@@ -97,7 +97,7 @@ function mapPoints(points) {
 }
 
 // Primed cache for measureText - used to avoid browser rendering differences
-kendo.ui.Chart.measureText.cache = {
+kendo.dataviz.measureText.cache = {
     "Afont12px Arial,Helvetica,sans-serifundefined": {
         "width": 7,
         "height": 15,

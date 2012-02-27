@@ -10,10 +10,14 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script type="text/javascript">
 
-            var Chart = kendo.ui.Chart;
+            var dataviz = kendo.dataviz;
 
             (function() {
                 var chart,
@@ -54,11 +58,11 @@
                 });
 
                 test("model is a RootElement", function() {
-                    ok(model instanceof Chart.RootElement);
+                    ok(model instanceof dataviz.RootElement);
                 });
 
                 test("title is created", function() {
-                    ok(title instanceof Chart.Title);
+                    ok(title instanceof dataviz.Title);
                 });
 
                 test("title text is set", function() {
@@ -70,7 +74,7 @@
                 });
 
                 test("legend is created", function() {
-                    ok(legend instanceof Chart.Legend);
+                    ok(legend instanceof dataviz.Legend);
                 });
 
                 test("legend series are populated", function() {
@@ -90,7 +94,7 @@
                 });
 
                 test("Categorical plotArea is created", function() {
-                    ok(plotArea instanceof Chart.CategoricalPlotArea);
+                    ok(plotArea instanceof dataviz.CategoricalPlotArea);
                 });
 
             })();
