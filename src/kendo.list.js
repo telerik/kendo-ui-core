@@ -143,10 +143,6 @@
 
             that._select(li);
             that._blur();
-
-            if (that._focused[0] !== document.activeElement) {
-                that._focused.focus();
-            }
         },
 
         _height: function(length) {
@@ -201,7 +197,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!kendo.support.touch)
+            if (!touch)
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
         },
 
@@ -209,7 +205,7 @@
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
-            if (that._focused[0] !== document.activeElement) {
+            if (!touch && that._focused[0] !== document.activeElement) {
                 that._focused.focus();
             }
 
