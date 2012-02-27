@@ -3,8 +3,9 @@
     /**
     * @name kendo.ui.MVVM
     * @namespace
-    *
-    * @name kendo.ui.MVVM.Description
+    */
+
+    /** @name kendo.ui.MVVM.Description
     * @section
     *  <p>This is the MVVM </p>
     */
