@@ -239,7 +239,7 @@
         return head.innerHTML.match(/href=\W(.*)examples(\.min)?\.css/i)[1];
     }
 
-    var mobileClasses = "km-ios km-android";
+    var mobileClasses = "km-ios km-android km-blackberry km-ios4";
 
     function applyCurrentTheme() {
         try {
@@ -275,7 +275,8 @@
         var oses = new kendo.data.DataSource({
             data: [
                 { text: "iOS", value: "ios" },
-                { text: "Android", value: "android" }
+                { text: "Android", value: "android" },
+                { text: "Blackberry", value: "blackberry" }
             ]
         });
         
@@ -289,7 +290,7 @@
         deviceList.find(".thumbLink").click(function () {
             var value = $(this).closest(".thumbLink").children(".thumb").text();
             $(options.container).removeClass(mobileClasses).addClass("km-" + value);
-            $("#device-wrapper").removeClass("ios android").addClass(value);
+            $("#device-wrapper").removeClass("blackberry ios android").addClass(value);
             try {
                 sessionStorage.setItem("kendoMobileOS", value);
             } catch(err) {}

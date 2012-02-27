@@ -33,8 +33,11 @@
 
 <style scoped>
 .button {
-    margin: 0 0 0 1em;
+    margin: 0 0 0 .5em;
     text-align: center;
+}
+.button:first-of-type {
+    margin: 0 0 0 1em;
 }
 .home {
     background: url(../../content/mobile/shared/sports-home.jpg) no-repeat center center;	
@@ -54,9 +57,8 @@
     -webkit-background-size: 100% auto;
     background-size: 100% auto;
 }
-.km-ios #button-home .head,
-.km-ios #facility .head,
-.km-ios #sports .head {
+.km-ios .head,
+.km-blackberry .head {
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
