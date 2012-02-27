@@ -1,5 +1,5 @@
 <div id="example" class="k-content">
-    <table>
+    <table class="prettytable">
         <tr>
             <th>Element</th>
             <th>Current view model state</th>
@@ -201,20 +201,13 @@ kendo.bind($(&quot;table&quot;), viewModel);
         </div>
     </div>
     <style scoped>
-        table {
+        .prettytable {
             table-layout: fixed;
             width: 100%;
-            border: 1px solid black;
-            border-collapse: collapse;
         }
 
         td h4 {
             margin:0;
-        }
-
-        td, th {
-            border: 1px solid black;
-            padding: 1em;
         }
 
         td label {
