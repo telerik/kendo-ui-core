@@ -1423,7 +1423,8 @@ html body .k-grid tbody .k-button-icon
     width: 96%;
 }
 
-html .k-edit-cell .k-tooltip
+html .k-edit-cell .k-tooltip,
+html .k-grid-edit-row .k-tooltip
 {
     width: auto;
     max-width: 300px;
