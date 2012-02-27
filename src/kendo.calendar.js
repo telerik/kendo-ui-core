@@ -740,7 +740,7 @@
             }
 
             that._today = footer.show()
-                                .find("." + TODAY)
+                                .find(".k-link")
                                 .html(template(today))
                                 .attr("title", kendo.toString(today, "D"));
 
