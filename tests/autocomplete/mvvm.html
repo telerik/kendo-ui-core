@@ -79,6 +79,30 @@
                 equal(observable.value, observable.items[0]);
             });
 
+            test("changing value to a custom one updates the view model", function() {
+                var dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+
+                observable.value = observable.items[1];
+
+                kendo.bind(dom, observable);
+                dom.data("kendoAutoComplete").value("moo");
+                dom.data("kendoAutoComplete").trigger("change");
+
+                equal(observable.value, "moo");
+            });
+
+            test("custom view model value", function() {
+                var dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+                observable.value = "moo";
+
+                kendo.bind(dom, observable);
+                equal(dom.data("kendoAutoComplete").value(), "moo");
+            });
+
             test("binding autocomplete initialized before binding", function() {
                 var dom = $('<input data-text-field="text" data-bind="value:value, source:items" />');
 
