@@ -6,6 +6,7 @@
         map = $.map,
         math = Math,
         noop = $.noop,
+        extend = $.extend,
         proxy = $.proxy,
         doc = document,
 
@@ -19,9 +20,11 @@
         notify = kendo.notify,
 
         dataviz = kendo.dataviz,
+        Axis = dataviz.Axis,
         Box2D = dataviz.Box2D,
         BoxElement = dataviz.BoxElement,
         ChartElement = dataviz.ChartElement,
+        ElementAnimation = dataviz.ElementAnimation,
         NumericAxis = dataviz.NumericAxis,
         Point2D = dataviz.Point2D,
         RootElement = dataviz.RootElement,
@@ -29,8 +32,10 @@
         TextBox = dataviz.TextBox,
         Title = dataviz.Title,
         ViewElement = dataviz.ViewElement,
+        animationDecorator = dataviz.animationDecorator,
         deepExtend = kendo.deepExtend,
         defined = dataviz.defined,
+        getSpacing = dataviz.getSpacing,
         round = dataviz.round,
         template = dataviz.template,
         uniqueId = dataviz.uniqueId;
