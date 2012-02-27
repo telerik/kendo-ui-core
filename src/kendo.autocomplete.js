@@ -133,7 +133,6 @@
      */
     var kendo = window.kendo,
         support = kendo.support,
-        touch = support.touch,
         placeholderSupported = support.placeholder,
         ui = kendo.ui,
         keys = kendo.keys,
@@ -338,16 +337,9 @@
                         clearTimeout(that._bluring);
                     },
                     blur: function () {
-                        if (!touch) {
-                            that._bluring = setTimeout(function () {
-                                that._blur();
-                                that._placeholder();
-                                wrapper.removeClass(FOCUSED);
-                            }, 100);
-                        } else {
-                            that._change();
-                            wrapper.removeClass(FOCUSED);
-                        }
+                        that._change();
+                        that._placeholder();
+                        wrapper.removeClass(FOCUSED);
                     }
                 });
 
@@ -680,12 +672,7 @@
         _accept: function (li) {
             var that = this;
 
-            if (kendo.support.touch) {
-                setTimeout(function () { that._focus(li) }, 0);
-            } else {
-                that._focus(li);
-            }
-
+            that._focus(li);
             moveCaretAtEnd(that.element[0]);
         },
 
@@ -803,7 +790,7 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch) {
+            if (!support.touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
             }
         },

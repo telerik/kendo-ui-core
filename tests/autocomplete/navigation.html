@@ -88,7 +88,7 @@
                 ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
-            asyncTest("clicking an item focuses the input", function() {
+            test("clicking an item focuses the input", function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -101,13 +101,10 @@
                 autocomplete.search();
                 autocomplete.ul.children().first().trigger(CLICK);
 
-                setTimeout( function () {
-                    ok(wasFocused);
-                    start();
-                }, 0);
+                ok(wasFocused);
             });
 
-            asyncTest("pressing enter focuses the input", function() {
+            test("pressing enter focuses the input", function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -122,10 +119,7 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                setTimeout( function () {
-                    ok(wasFocused);
-                    start();
-                }, 0);
+                ok(wasFocused);
             });
 
             asyncTest("clicking an item applies selected style", function() {

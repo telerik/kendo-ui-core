@@ -47,8 +47,8 @@
 
             that.list = list = $("<div class='k-list-container'/>")
                         .append(that.ul)
-                        .mousedown(function() {
-                            that._clearBlurTimeout();
+                        .mousedown(function(e) {
+                            e.preventDefault();
                         });
 
             id = that.element.attr(ID);
@@ -107,15 +107,6 @@
 
             that._change();
             that.close();
-        },
-
-        _clearBlurTimeout: function() {
-            var that = this;
-
-            setTimeout(function() {
-                clearTimeout(that._bluring);
-                that._focused.focus();
-            });
         },
 
         _change: function() {
