@@ -36,6 +36,7 @@
         deepExtend = kendo.deepExtend,
         defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
+        interpolateValue = dataviz.interpolateValue,
         round = dataviz.round,
         template = dataviz.template,
         uniqueId = dataviz.uniqueId;
@@ -4328,13 +4329,14 @@
     dataviz.ui.plugin(Chart);
 
     deepExtend(dataviz, {
+        CLIP: CLIP,
+
         AreaChart: AreaChart,
         Bar: Bar,
         BarAnimation: BarAnimation,
         BarAnimationDecorator: BarAnimationDecorator,
         BarChart: BarChart,
         BarLabel: BarLabel,
-        CLIP: CLIP,
         CategoricalPlotArea: CategoricalPlotArea,
         ClusterLayout: ClusterLayout,
         Color: Color,
@@ -4351,6 +4353,7 @@
         StackLayout: StackLayout,
         Tooltip: Tooltip,
         XYPlotArea: XYPlotArea,
+
         categoriesCount: categoriesCount
     });
 

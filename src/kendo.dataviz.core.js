@@ -1907,6 +1907,7 @@
         autoMajorUnit: autoMajorUnit,
         defined: defined,
         getSpacing: getSpacing,
+        interpolateValue: interpolateValue,
         measureText: measureText,
         rotatePoint: rotatePoint,
         round: round,
