@@ -203,14 +203,11 @@
             }
        },
 
-        /**
-         * Clears currently selected items.
-         */
-        clearSelection: function() {
-            var that = this;
-            that.selectable.clear();
-            that.trigger(CHANGE);
-        },
+       clearSelection: function() {
+           var that = this;
+           that.selectable.clear();
+           that.trigger(CHANGE);
+       },
 
        select: function(items) {
            var that = this,
