@@ -139,7 +139,7 @@
     var binders = {};
 
     binders.attr = Binder.extend({
-        update: function() {
+        refresh: function() {
             var attribute, attributes = this.bindings.attr;
 
             for (attribute in attributes) {
@@ -149,7 +149,7 @@
     });
 
     binders.style = Binder.extend({
-        update: function() {
+        refresh: function() {
             var key, style = this.bindings.style;
 
             for (key in style) {
@@ -159,7 +159,7 @@
     });
 
     binders.enabled = Binder.extend({
-        update: function() {
+        refresh: function() {
             if (this.bindings.enabled.get()) {
                 this.element.removeAttribute("disabled");
             } else {
@@ -169,7 +169,7 @@
     });
 
     binders.disabled = Binder.extend({
-        update: function() {
+        refresh: function() {
             if (this.bindings.disabled.get()) {
                 this.element.setAttribute("disabled", "disabled");
             } else {
@@ -179,7 +179,7 @@
     });
 
     binders.event = Binder.extend({
-        update: function() {
+        refresh: function() {
             var event, events = this.bindings.event;
 
             for (event in events) {
@@ -189,19 +189,19 @@
     });
 
     binders.click = Binder.extend({
-        update: function() {
+        refresh: function() {
             $(this.element).click(this.bindings.click.get());
         }
     });
 
     binders.text = Binder.extend({
-        update: function() {
+        refresh: function() {
             this.element[innerText] = this.bindings["text"].get();
         }
     });
 
     binders.visible = Binder.extend({
-        update: function() {
+        refresh: function() {
             if (this.bindings["visible"].get()) {
                 this.element.style.display = "";
             } else {
@@ -211,7 +211,7 @@
     });
 
     binders.html = Binder.extend({
-        update: function() {
+        refresh: function() {
             this.element.innerHTML = this.bindings["html"].get();
         }
     });
@@ -228,7 +228,7 @@
             this.bindings["value"].set(this.element.value);
         },
 
-        update: function() {
+        refresh: function() {
             this.element.value = this.bindings["value"].get();
         },
 
@@ -260,7 +260,7 @@
                     this.remove(e.index, e.items.length);
                 }
             } else {
-                this.update();
+                this.refresh();
             }
         },
 
@@ -338,7 +338,7 @@
             }
         },
 
-        update: function() {
+        refresh: function() {
             var source = this.bindings["source"].get();
             var idx, length;
             var element = this.container();
@@ -395,7 +395,7 @@
                 }
             },
 
-            update: function() {
+            refresh: function() {
                 var value = this.bindings["checked"].get();
                 var element = this.element;
 
@@ -486,7 +486,7 @@
                     this.bindings["value"].set(values[0].get(field));
                 }
             },
-            update: function() {
+            refresh: function() {
                 var optionIndex,
                 element = this.element,
                 options = element.options,
@@ -565,7 +565,7 @@
                 }
             },
 
-            update: function() {
+            refresh: function() {
                 var widget = this.widget;
 
                 widget.bind("dataBinding", this._dataBinding);
@@ -623,7 +623,7 @@
                 this.bindings.value.set(value);
             },
 
-            update: function() {
+            refresh: function() {
                 var field = this.options.dataValueField || this.options.dataTextField;
                 var value = this.bindings.value.get();
 
@@ -668,19 +668,19 @@
 
                 this.binders.push(binder);
 
-                var update = function() {
-                    binder.update();
+                var refresh = function() {
+                    binder.refresh();
                 };
 
-                update();
+                refresh();
 
                 if (name == "attr" || name == "event" || name == "style") {
                     for (var attribute in binding) {
-                        binding[attribute].bind("change", update);
+                        binding[attribute].bind("change", refresh);
                         this.bindings.push(binding[attribute])
                     }
                 } else {
-                    binding.bind("change", update);
+                    binding.bind("change", refresh);
                     this.bindings.push(binding);
                 }
             }
@@ -742,13 +742,13 @@
 
                 this.binders.push(binder);
 
-                var update = function() {
-                    binder.update();
+                var refresh = function() {
+                    binder.refresh();
                 };
 
-                update();
+                refresh();
 
-                binding.bind("change", update);
+                binding.bind("change", refresh);
 
                 this.bindings.push(binding);
             }
