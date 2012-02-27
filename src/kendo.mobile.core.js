@@ -13,6 +13,16 @@
 
 
     var Widget = ui.Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
+        /**
+         * Initializes mobile widget. Sets `element` and `options` properties.
+         * @constructs
+         * @class Represents a mobile UI widget. Base class for all Kendo mobile widgets.
+         * @extends kendo.ui.Widget
+         */
+        init: function(element, options) {
+            ui.Widget.fn.init.call(this, element, options);
+        },
+
         options: {
             prefix: "Mobile"
         },
