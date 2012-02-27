@@ -163,8 +163,8 @@ function processFilesRecursive(dir, filterRegex, callback) {
         stat;
 
     for (var i = 0; i < files.length; i++) {
-        var fileName = dir + "/" + files[i];
-        var stat = fs.statSync(fileName);
+        fileName = dir + "/" + files[i];
+        stat = fs.statSync(fileName);
 
         if (!stat.isFile()) {
             processFilesRecursive(fileName, filterRegex, callback);
