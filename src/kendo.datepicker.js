@@ -872,7 +872,7 @@
             icon = element.next("span.k-select");
 
             if (!icon[0]) {
-                icon = $('<span class="k-select"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
+                icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
             that._icon = icon;
