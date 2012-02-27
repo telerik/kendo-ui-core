@@ -608,6 +608,12 @@
     background: #788193;
 }
 
+.km-ios .km-listview-refresh .km-icon
+{
+    width: 2rem;
+    height: 2rem;
+}
+
 /* ScrollView */
 
 .km-ios .km-pages li
@@ -673,4 +679,12 @@
     padding: .44em;
     .user-select(none);
     .border-radius(4px);
+}
+
+/* Loader */
+
+.km-ios .km-loading,
+.km-ios .km-listview-refresh .km-icon
+{
+    -webkit-animation: km-ios-spin 1.5s infinite linear;
 }
