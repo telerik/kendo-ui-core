@@ -1296,25 +1296,29 @@
                 options = isPlainObject(editable) ? editable.window : {},
                 settings = extend({}, kendo.Template, that.options.templateSettings);
 
-            for (idx = 0, length = that.columns.length; idx < length; idx++) {
-                column = that.columns[idx];
+            if (editable.template) {
+                html += (kendo.template(editable.template, settings))(model);
+            } else {
+                for (idx = 0, length = that.columns.length; idx < length; idx++) {
+                    column = that.columns[idx];
 
-                if (!column.command) {
-                    html += '<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field) + '</label></div>';
+                    if (!column.command) {
+                        html += '<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field) + '</label></div>';
 
-                    if (model.editable(column.field)) {
-                        fields.push({ field: column.field, format: column.format, editor: column.editor });
-                        html += '<div ' + kendo.attr("container-for") + '="' + column.field + '" class="k-edit-field"></div>';
-                    } else {
-                        var state = { storage: {}, count: 0 };
+                        if (model.editable(column.field)) {
+                            fields.push({ field: column.field, format: column.format, editor: column.editor });
+                            html += '<div ' + kendo.attr("container-for") + '="' + column.field + '" class="k-edit-field"></div>';
+                        } else {
+                            var state = { storage: {}, count: 0 };
 
-                        tmpl = kendo.template(that._cellTmpl(column, state), settings);
+                            tmpl = kendo.template(that._cellTmpl(column, state), settings);
 
-                        if (state.count > 0) {
-                            tmpl = proxy(tmpl, state.storage);
+                            if (state.count > 0) {
+                                tmpl = proxy(tmpl, state.storage);
+                            }
+
+                            html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                         }
-
-                        html += '<div class="k-edit-field">' + tmpl(model) + '</div>';
                     }
                 }
             }
