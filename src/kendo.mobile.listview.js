@@ -254,9 +254,10 @@
                 .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), ITEM_SELECTOR, toggleItemActiveClass)
                 .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
+            that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that._refresh, that));
+            that._template();
+
             if (options.dataSource) {
-                that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that._refresh, that));
-                that._template();
                 that.dataSource.fetch();
             } else {
                 that._style();
