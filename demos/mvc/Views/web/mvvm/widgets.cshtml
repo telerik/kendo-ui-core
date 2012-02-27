@@ -1,0 +1,202 @@
+<div id="example" class="k-content">
+    <table class="prettytable">
+        <tr>
+            <th>Widget</th>
+            <th>Current view model state</th>
+        </tr>
+        <tr>
+            <td>
+                <h4>AutoComplete</h4>
+                <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
+            </td>
+            <td rowspan="7">
+<pre>
+{
+    autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
+    comboBoxValue: <span data-bind="text: displayComboBoxValue"></span>,
+    datePickerValue: <span data-bind="text: displayDatePickerValue"></span>,
+    dropDownListValue: <span data-bind="text: displayDropDownListValue"></span>,
+    numericTextBoxValue: <span data-bind="text: displayNumericTextBoxValue"></span>,
+    timePickerValue: <span data-bind="text: displayTimePickerValue"></span>,
+}
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>ComboBox</h4>
+                <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>DatePicker</h4>
+                <input data-role="datepicker" data-bind="value: datePickerValue" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>DropDownList </h4>
+                <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>NumericTextBox</h4>
+                <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>TimePicker</h4>
+                <input data-role="timepicker" data-bind="value: timePickerValue" />
+            </td>
+        </tr>
+    </table>
+    <script>
+        $(document).ready(function() {
+            var viewModel = kendo.observable({
+                autoCompleteValue: null,
+                colors: [ {
+                    name: "Red", value: "#f00",
+                }, {
+                    name: "Green", value: "#0f0"
+                }, {
+                    name: "Blue", value: "#00f"
+                } ],
+                displayAutoCompleteValue: function() {
+                    var autoCompleteValue = this.get("autoCompleteValue");
+                    return kendo.stringify(autoCompleteValue);
+                },
+                comboBoxValue: null,
+                displayComboBoxValue: function() {
+                    var comboBoxValue = this.get("comboBoxValue");
+                    return kendo.stringify(comboBoxValue);
+                },
+                datePickerValue: new Date(),
+                displayDatePickerValue: function() {
+                    var datePickerValue = this.get("datePickerValue");
+                    return kendo.toString(datePickerValue, "yyyy-MM-dd");
+                },
+                dropDownListValue: null,
+                displayDropDownListValue: function() {
+                    var dropDownListValue = this.get("dropDownListValue");
+                    return kendo.stringify(dropDownListValue);
+                },
+                numericTextBoxValue: 10,
+                displayNumericTextBoxValue: function() {
+                    var numericTextBoxValue = this.get("numericTextBoxValue");
+
+                    return kendo.toString(numericTextBoxValue, "c");
+                },
+                timePickerValue: new Date(),
+                displayTimePickerValue: function() {
+                    var timePickerValue = this.get("timePickerValue");
+
+                    return kendo.toString(timePickerValue, "hh:mm:ss");
+                }
+            });
+
+            viewModel.autoCompleteValue = viewModel.colors[1];
+            viewModel.dropDownListValue = viewModel.colors[0];
+            viewModel.comboBoxValue = viewModel.colors[0];
+
+            kendo.bind($("table"), viewModel);
+        });
+    </script>
+    <div class="code-sample">
+        <h4 class="code-title">View source code:</h4>
+        <div class="code-details">
+<pre class="prettyprint">
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Element&lt;/th&gt;
+        &lt;th&gt;Current view model state&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Text&lt;/h4&gt;
+            &lt;input type=&quot;text&quot; data-bind=&quot;value: textValue&quot; /&gt;
+        &lt;/td&gt;
+        &lt;td rowspan=&quot;6&quot;&gt;
+&lt;pre&gt;
+{
+    textValue: &lt;span data-bind=&quot;text: textValue&quot;&gt;&lt;/span&gt;,
+    checkboxValue: &lt;span data-bind=&quot;text: checkboxValue&quot;&gt;&lt;/span&gt;,
+    radioValue: &lt;span data-bind=&quot;text: radioValue&quot;&gt;&lt;/span&gt;,
+    checkBoxListValue: [&lt;span data-bind=&quot;text: displayCheckBoxListValue&quot;&gt;&lt;/span&gt;],
+    selectValue: &lt;span data-bind=&quot;text: selectValue&quot;&gt;&lt;/span&gt;,
+    multipleSelectValue: [&lt;span data-bind=&quot;text: displayMultipleSelectValue&quot;&gt;&lt;/span&gt;]
+}
+&lt;/pre&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Textarea &lt;/h4&gt;
+            &lt;textarea data-bind=&quot;value: textareaValue&quot;&gt;&lt;/textarea&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Checkbox&lt;/h4&gt;
+            &lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: checkboxValue&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Radio&lt;/h4&gt;
+            &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;fruit&quot; value=&quot;Apple&quot; data-bind=&quot;checked: radioValue&quot; /&gt;Apple&lt;/label&gt;
+            &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;fruit&quot; value=&quot;Banana&quot; data-bind=&quot;checked: radioValue&quot; /&gt;Banana&lt;/label&gt;
+            &lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;fruit&quot; value=&quot;Orange&quot; data-bind=&quot;checked: radioValue&quot; /&gt;Orange&lt;/label&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Checkbox list&lt;/h4&gt;
+            &lt;label&gt;&lt;input type=&quot;checkbox&quot; value=&quot;Apple&quot; data-bind=&quot;checked: checkboxListValue&quot; /&gt;Apple&lt;/label&gt;
+            &lt;label&gt;&lt;input type=&quot;checkbox&quot; value=&quot;Banana&quot; data-bind=&quot;checked: checkboxListValue&quot; /&gt;Banana&lt;/label&gt;
+            &lt;label&gt;&lt;input type=&quot;checkbox&quot; value=&quot;Orange&quot; data-bind=&quot;checked: checkboxListValue&quot; /&gt;Orange&lt;/label&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Select&lt;/h4&gt;
+            &lt;select data-bind=&quot;source: fruits, value: selectValue&quot;&gt;&lt;/select&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Multiple select&lt;/h4&gt;
+            &lt;select multiple data-bind=&quot;source: fruits, value: multipleSelectValue&quot;&gt;&lt;/select&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+        </div>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <div class="code-details">
+        </div>
+    </div>
+    <style scoped>
+        .prettytable {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        td h4 {
+            margin:0;
+        }
+
+        td label {
+            float: left;
+            clear: left;
+        }
+
+        td pre {
+            font-size: 12px;
+        }
+    </style>
+</div>

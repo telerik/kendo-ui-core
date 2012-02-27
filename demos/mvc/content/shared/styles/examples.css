@@ -2247,8 +2247,8 @@ div.old-browser
     border-spacing: 0;
 }
 
-.prettytable th,
-.prettytable tfoot td {
+.prettytable > tbody > tr > th,
+.prettytable > tfoot > tr > td {
     background-color: #ef652a;
     padding: 9px 6px;
     color: #fff;
@@ -2259,7 +2259,7 @@ div.old-browser
     border-color: #d75b26 #d75b26 #d75b26 #f28455;
 }
 
-.prettytable td {
+.prettytable > tbody > tr > td {
     line-height: 23px;
     padding: 0 6px;
     background: #eaeaea;
