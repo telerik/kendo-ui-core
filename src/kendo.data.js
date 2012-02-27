@@ -2758,8 +2758,9 @@
                                 if (!found) {
                                     that._ranges.push(range);
                                 }
+
                                 data = that.reader.parse(data);
-                                range.data = that.reader.data(data);
+                                range.data = that._observe(that.reader.data(data));
                                 range.end = range.start + range.data.length;
                                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
                                 if (callback) {
