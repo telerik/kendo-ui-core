@@ -69,6 +69,22 @@
                 ok(called);
             });
 
+            test("value() takes scale.min into account", function() {
+                pointer.scale.options.min = -20;
+
+                pointer.value(-21);
+
+                equal(pointer.value(), -20);
+            });
+
+            test("value() takes scale.min into account", function() {
+                pointer.scale.options.max = 20;
+
+                pointer.value(21);
+
+                equal(pointer.value(), 20);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

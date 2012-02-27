@@ -155,6 +155,7 @@
             var pointer = this,
                 options = pointer.options,
                 value = options.value,
+                scaleOptions = pointer.scale.options,
                 element;
 
             if (arguments.length == 0) {
@@ -162,7 +163,7 @@
             }
 
             options._oldValue = options.value;
-            options.value = newValue;
+            options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
             pointer.repaint();
         },
