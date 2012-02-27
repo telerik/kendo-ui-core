@@ -3779,7 +3779,6 @@
         }
     });
 
-    M
     var PieChart = ChartElement.extend({
         init: function(plotArea, options) {
             var chart = this;
