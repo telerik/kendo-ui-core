@@ -2,7 +2,7 @@
 
     // Imports ================================================================
     var kendo = window.kendo,
-        Chart = kendo.ui.Chart,
+        dataviz = kendo.dataviz,
         deepExtend = kendo.deepExtend;
 
     // Constants ==============================================================
@@ -360,8 +360,8 @@
     });
 
     // Exports ================================================================
-    Chart.themes = themes;
-    Chart.prototype.options.theme = "default";
+    dataviz.ui.Chart.themes = themes;
+    dataviz.ui.Chart.prototype.options.theme = "default";
 
 })(jQuery);
 
