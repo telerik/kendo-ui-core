@@ -1847,6 +1847,10 @@
             destroyed = that._destroyed,
             data = that._data;
 
+            if (!that.reader.model) {
+                return;
+            }
+
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (data[idx].isNew()) {
                     created.push(data[idx]);
@@ -2008,7 +2012,13 @@
                 index = 0;
             }
 
-            model = model instanceof kendo.data.Model ? model : new this.reader.model(model);
+            if (!(model instanceof Model)) {
+                if (this.reader.model) {
+                    model = new this.reader.model(model);
+                } else {
+                    model = new ObservableObject(model);
+                }
+            }
 
             this._data.splice(index, 0, model);
 

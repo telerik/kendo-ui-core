@@ -999,8 +999,12 @@
         options: {
             name: "Grid",
             columns: [],
+            toolbar: null,
             autoBind: true,
             scrollable: true,
+            sortable: false,
+            pageable: false,
+            editable: false,
             rowTemplate: "",
             groupable: false,
             dataSource: {}
@@ -1130,7 +1134,8 @@
                 column = that.columns[that.cellIndex(cell)],
                 model = that._modelForContainer(cell);
 
-            if (model.editable(column.field) && !cell.has("a.k-grid-delete").length) {
+
+            if ((!model.editable || model.editable(column.field)) && !column.command) {
                 that._editContainer = cell;
 
                 that.editable = cell.addClass("k-edit-cell")
@@ -1305,11 +1310,11 @@
                     if (!column.command) {
                         html += '<div class="k-edit-label"><label for="' + column.field + '">' + (column.title || column.field) + '</label></div>';
 
-                        if (model.editable(column.field)) {
-                            fields.push({ field: column.field, format: column.format, editor: column.editor });
-                            html += '<div ' + kendo.attr("container-for") + '="' + column.field + '" class="k-edit-field"></div>';
-                        } else {
-                            var state = { storage: {}, count: 0 };
+                    if (!model.editable || model.editable(column.field)) {
+                        fields.push({ field: column.field, format: column.format, editor: column.editor });
+                        html += '<div ' + kendo.attr("container-for") + '="' + column.field + '" class="k-edit-field"></div>';
+                    } else {
+                        var state = { storage: {}, count: 0 };
 
                             tmpl = kendo.template(that._cellTmpl(column, state), settings);
 
@@ -1366,7 +1371,7 @@
                 cell = $(this);
                 column = that.columns[that.cellIndex(cell)];
 
-                if (!column.command && model.editable(column.field)) {
+                if (!column.command && (!model.editable || model.editable(column.field))) {
                     fields.push({ field: column.field, format: column.format, editor: column.editor });
                     cell.attr("data-container-for", column.field);
                     cell.empty();
