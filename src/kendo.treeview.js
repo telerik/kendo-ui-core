@@ -427,6 +427,14 @@
             * @param {Node} e.sourceNode
             * The node that will be dragged.
             *
+            * @exampleTitle Disable dragging of root nodes
+            * @example
+            * treeview.data("kendoTreeView").bind("dragstart", function(e) {
+            *     if ($(e.sourceNode).parentsUntil(".k-treeview", ".k-item").length == 0) {
+            *         e.preventDefault();
+            *     }
+            * });
+            *
             */
             DRAGSTART,
 
@@ -456,6 +464,35 @@
             *
             * @param {Function} e.setStatusClass
             * Allows a custom drag clue status to be set.
+            * <p>Pre-defined status classes are:
+            *     <ul>
+            *         <li><strong>k-insert-top</strong>
+            *             - Indicates that the item will be inserted on top.
+            *         </li>
+            *         <li><strong>k-insert-middle</strong>
+            *             - Indicates that the item will be inserted in the middle.
+            *         </li>
+            *         <li><strong>k-insert-bottom</strong>
+            *             - Indicates that the item will be inserted at the bottom.
+            *         </li>
+            *         <li><strong>k-add</strong>
+            *             - Indicates that the item will be added/appended.
+            *         </li>
+            *         <li><strong>k-denied</strong>
+            *             - Indicates an invalid operation. Using this class will automatically
+            *               make the drop operation invalid, so there will be no need to call
+            *               <code>setValid(false)</code> in the <code>drop</code> event.
+            *         </li>
+            *     </dl>
+            * </p>
+            *
+            * @exampleTitle Show the user that is not permitted to drop nodes outside of the #drop-area element
+            * @example
+            * treeview.data("kendoTreeView").bind("drag", function(e) {
+            *     if ($(e.dropTarget).parents("#drop-area").length ) {
+            *         e.setStatusClass("k-denied");
+            *     }
+            * });
             *
             */
             DRAG,
