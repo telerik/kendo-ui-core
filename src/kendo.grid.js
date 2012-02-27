@@ -586,6 +586,7 @@
          *          confirmation: "Are you sure you want to remove this item?"
          *      }
          *  });
+         * @option {String} [editable.mode] Indicates which of the available edit modes(incell(default)/inline/popup) will be used
          * @option {Boolean} [editable.update] Indicates whether item should be switched to edit mode on click.
          * @option {Boolean} [editable.destroy] Indicates whether item should be deleted when click on delete button.
          * @option {Boolean} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
@@ -1008,10 +1009,6 @@
         setOptions: function(options) {
             var that = this;
 
-            if (options.template) {
-                options.rowTemplate = options.template;
-            }
-
             Widget.fn.setOptions.call(this, options);
 
             that._templates();
@@ -1209,6 +1206,7 @@
 
         /**
          * Removes the specified row from the grid. The removeRow method triggers remove event.
+         * (Note: In inline or popup edit modes the changes will be automatically synced)
          * @param {Selector | DOM Element} row Row to be removed.
          * @example
          * // get a reference to the grid widget
@@ -1250,6 +1248,15 @@
             return mode;
         },
 
+        /**
+         * Switches the specified row from the grid into edit mode. The editRow method triggers edit event.
+         * @param {Selector | DOM Element} row Row to be edited.
+         * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
+         * // edit first table row
+         * grid.editRow(grid.tbody.find(">tr:first"));
+         */
         editRow: function(row) {
             var that = this,
                 model = that._modelForContainer(row),
@@ -1378,6 +1385,13 @@
             that.trigger(EDIT, { container: row, model: model });
         },
 
+        /**
+         * Switch the current edited row into dislay mode and revert changes made to the data
+         * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
+         * grid.cancelRow();
+         */
         cancelRow: function() {
             var that = this,
                 container = that._editContainer,
@@ -1397,6 +1411,14 @@
             }
         },
 
+        /**
+         * Switch the current edited row into dislay mode and save changes made to the data
+         * (Note: the changes will be automatically synced)
+         * @example
+         * // get a reference to the grid widget
+         * var grid = $("#grid").data("kendoGrid");
+         * grid.saveRow();
+         */
         saveRow: function() {
             var that = this,
                 container = that._editContainer,
