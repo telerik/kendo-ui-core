@@ -37,8 +37,6 @@
         POINTER = "pointer",
         OUTSIDE = "outside",
         INSIDE = "inside",
-        OUTLINE_SUFFIX = "_outline",
-        TOOLTIP_OFFSET = 5,
         VERTICAL = "vertical";
 
     // Gauge ==================================================================
@@ -98,7 +96,7 @@
             if (options.animation === false) {
                 needle.refresh(doc.getElementById(options.id));
             } else {
-                animation = new RotationAnimation(needle, extend(options.animation, {
+                animation = new RotationAnimation(needle, deepExtend(options.animation, {
                     startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(scale.options.min)
                 }));
                 animation.setup();
@@ -142,7 +140,7 @@
                 });
             }
 
-            extend(options, {
+            deepExtend(options, {
                 rotation: [
                     scale.getSlotAngle(options.value) - minAngle,
                     center.x,
@@ -266,12 +264,14 @@
         arrangeLabels: function() {
             var scale = this,
                 options = scale.options,
-                ring = scale.ring,
+                ring = scale.ring.clone(),
                 tickAngels = scale.getTickAngles(ring, options.majorUnit),
                 labels = scale.labels,
                 count = labels.length,
                 labelsOptions = options.labels,
                 padding = labelsOptions.padding,
+                ringDistance = scale.options.ringDistance = ring.r * 0.05,
+                ringSize = scale.options.ringSize = ring.r * 0.1,
                 halfWidth,
                 halfHeight,
                 labelAngle,
@@ -280,7 +280,13 @@
                 lp,
                 i,
                 cx,
-                cy;
+                cy,
+                isInside;
+
+            if (labelsOptions.position === INSIDE && options.ranges.length) {
+                ring.r -= ringSize + ringDistance;
+                ring.ir -= ringSize + ringDistance;
+            }
 
             for (i = 0; i < count; i++) {
                 label = labels[i];
@@ -288,15 +294,10 @@
                 halfHeight = label.box.height() / 2;
                 angle = tickAngels[i];
                 labelAngle = angle * DEGREE;
-                if (labelsOptions.position == INSIDE) {
-                    lp = ring.point(angle, true);
-                    cx = lp.x + math.cos(labelAngle) * (halfWidth + padding);
-                    cy = lp.y + math.sin(labelAngle) * (halfHeight + padding);
-                } else if (labelsOptions.position == OUTSIDE) {
-                    lp = ring.point(angle);
-                    cx = lp.x - math.cos(labelAngle) * (halfWidth + padding);
-                    cy = lp.y - math.sin(labelAngle) * (halfHeight + padding);
-                }
+                isInside = labelsOptions.position === INSIDE;
+                lp = ring.point(angle, isInside);
+                cx = lp.x + (math.cos(labelAngle) * (halfWidth + padding) * (isInside ? 1 : -1));
+                cy = lp.y + (math.sin(labelAngle) * (halfHeight + padding) * (isInside ? 1 : -1));
 
                 label.reflow(new Box2D(cx - halfWidth, cy - halfHeight,
                     cx + halfWidth, cy + halfHeight));
@@ -328,67 +329,69 @@
 
         renderRanges: function(view) {
             var scale = this,
-            options = scale.options,
-            ranges = options.ranges || [],
-            ring = scale.ring,
-            result = [],
-            from, to, r, ir, count = ranges.length,
-            i, range, color = "#aaa",
-            min = options.min,
-            max = options.max,
-            from, to;
+                options = scale.options,
+                ranges = options.ranges || [],
+                ring = scale.ring,
+                result = [],
+                from, to, r, ir, count = ranges.length,
+                range, defaultColor = "#aaa",
+                min = options.min,
+                max = options.max,
+                from, to, j, range,
+                segments = [],
+                segment,
+                ringDistance = options.ringDistance,
+                ringSize = options.ringSize,
+                i, segmentsCount;
 
-            if (options.labels.position === OUTSIDE) {
-                r = ring.ir - ring.ir * 0.05;
-                ir = r - r * 0.1;
-            } else {
-
+            function rangeSegment(from, to, color) {
+                return { from: from, to: to, color: color };
             }
+
+            segments.push(rangeSegment(min, max, defaultColor));
 
             if (count) {
-                var segments = [{
-                    from: min,
-                    to: max,
-                    color: color
-                }];
-            for (var j = 0; j < count; j++) {
-                var range = ranges[j];
-                from = defined(range.from) ? range.from : MIN_VALUE;
-                to = defined(range.to) ? range.to : MAX_VALUE;
-                range.from = math.max(math.min(to, from), min);
-                range.to = math.min(math.max(to, from), max);
-                for (var i = 0, length = segments.length; i < length; i++) {
-                    var segment = segments[i];
-                    if (segment.from <= range.from && range.from <= segment.to) {
-                        segments.push({
-                            from: range.from,
-                            to: range.to,
-                            color: range.color
-                        });
-                        if (segment.from <= range.to && range.to <= segment.to) {
-                            segments.push({
-                                from: range.to,
-                                to: segment.to,
-                                color: color
-                            });
+                if (options.labels.position === OUTSIDE) {
+                    r = ring.ir - ringDistance;
+                    ir = r - ringSize;
+                } else {
+                    r = ring.r;
+                    ir = r - ringSize;
+                    ring.r -= ringSize + ringDistance;
+                    ring.ir -= ringSize + ringDistance;
+                }
+
+                for (i = 0; i < count; i++) {
+                    range = ranges[i];
+                    from = defined(range.from) ? range.from : MIN_VALUE;
+                    to = defined(range.to) ? range.to : MAX_VALUE;
+                    range.from = math.max(math.min(to, from), min);
+                    range.to = math.min(math.max(to, from), max);
+                    segmentCount = segments.length;
+                    for (j = 0; j < segmentCount; j++) {
+                        segment = segments[j];
+                        if (segment.from <= range.from && range.from <= segment.to) {
+                            segments.push(rangeSegment(range.from, range.to,range.color));
+                            if (segment.from <= range.to && range.to <= segment.to) {
+                                segments.push(rangeSegment(range.to, segment.to, defaultColor));
+                            }
+                            segment.to = range.from;
+                            break;
                         }
-                        segment.to = range.from;
-                        break;
                     }
                 }
-            }
 
-            result = map(segments, function(item) {
-                from = scale.getSlotAngle(item.from);
-                to = scale.getSlotAngle(item.to);
-
-                return view.createRing(
-                    new Ring(ring.c, ir, r, from, to - from), {
-                        fill: item.color,
-                        fillOpacity: item.opacity,
-                        zIndex: -1
-                    });
-                });
+                for (i = 0; i < segments.length; i++) {
+                    segment = segments[i];
+                    from = scale.getSlotAngle(segment.from);
+                    to = scale.getSlotAngle(segment.to);
+                    result.push(view.createRing(
+                        new Ring(ring.c, ir, r, from, to - from), {
+                            fill: segment.color,
+                            fillOpacity: segment.opacity,
+                            zIndex: -1
+                    }));
+                }
             }
 
             return result;
@@ -402,8 +405,8 @@
                 tickPositions = scale.getMinorTickPositions(),
                 lineOptions;
 
-            append(childElements, scale.renderTicks(view));
             append(childElements, scale.renderRanges(view));
+            append(childElements, scale.renderTicks(view));
 
             return childElements;
         }

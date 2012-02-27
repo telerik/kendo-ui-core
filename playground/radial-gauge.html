@@ -10,16 +10,18 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
 
         <style>
-            #gauge {
+            #gauge, #gauge1 {
                 width: 300px;
                 height: 300px;
                 margin-left: 200px;
                 border: 1px solid red;
+                float: left
             }
         </style>
     </head>
     <body>
         <div id="gauge"></div>
+        <div id="gauge1"></div>
 
         <script>
             $("#gauge").kendoGauge({
@@ -35,17 +37,40 @@
                     endAngle: 230,
                     max: 180,
                     labels: {
-                        position: "outside"
+                        position: "inside"
                     },
                     ranges: [{
-                        from: 20,
-                        to: 40,
-                        color: "white"
-                        }, {
                         from: 60,
                         to: 90,
                         color: "green"
-                        }, {
+                    }, {
+                        from: 120,
+                        to: 150,
+                        color: "red"
+                    }]
+                }
+            });
+
+            $("#gauge1").kendoGauge({
+                theme:"default",
+
+                pointer: {
+                    value: 65
+                },
+
+                scale: {
+                    minorUnit: 5,
+                    startAngle: 0,
+                    endAngle: 230,
+                    max: 180,
+                    labels: {
+                        position: "outside"
+                    },
+                    ranges: [{
+                        from: 60,
+                        to: 90,
+                        color: "green"
+                    }, {
                         from: 120,
                         to: 150,
                         color: "red"
