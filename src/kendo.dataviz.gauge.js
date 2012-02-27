@@ -569,7 +569,7 @@
 
             $(element).addClass("k-gauge");
 
-            gauge._redraw();
+            gauge.redraw();
         },
 
         value: function(value) {
@@ -580,7 +580,7 @@
             this._pointers[0].value(value);
         },
 
-        _redraw: function() {
+        redraw: function() {
             var gauge = this,
                 options = gauge.options,
                 element = gauge.element,
