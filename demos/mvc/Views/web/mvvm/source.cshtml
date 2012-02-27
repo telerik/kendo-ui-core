@@ -59,6 +59,7 @@
         </tr>
     </script>
     <script>
+    $(document).ready(function() {
         var viewModel = {
             productName: "Product name",
             productPrice: 10,
@@ -103,7 +104,119 @@
         };
 
         kendo.bind($("#example"), viewModel);
+    });
     </script>
+    <div class="code-sample">
+        <h4 class="code-title">View source code:</h4>
+        <pre class="prettyprint">
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Product name&lt;/th&gt;
+            &lt;th&gt;Product price&lt;/th&gt;
+            &lt;th&gt;Units in stock&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody data-template=&quot;row-template&quot; data-bind=&quot;source: products&quot;&gt;&lt;/tbody&gt;
+    &lt;tfoot data-template=&quot;footer-template&quot; data-bind=&quot;source: this&quot;&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+
+&lt;div&gt;
+    &lt;span&gt;Configuration&lt;/span&gt;
+    &lt;span&gt;Add a product&lt;/span&gt;
+    &lt;ul&gt;
+        &lt;li&gt;
+            &lt;label&gt;Name:&lt;input type=&quot;text&quot; data-bind=&quot;value: productName&quot; /&gt;&lt;/label&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label&gt;Price:&lt;input type=&quot;number&quot; data-bind=&quot;value: productPrice&quot; /&gt;&lt;/label&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;label&gt;Units in stock:&lt;input type=&quot;number&quot; data-bind=&quot;value: productUnitsInStock&quot; /&gt;&lt;/label&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;button class=&quot;k-button&quot; data-bind=&quot;click: addProduct&quot;&gt;Add a new product&lt;/button&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;button class=&quot;k-button&quot; data-bind=&quot;click: removeProduct&quot;&gt;Remove last product&lt;/button&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script id=&quot;row-template&quot; type=&quot;text/x-kendo-template&quot;&gt;
+    &lt;tr&gt;
+        &lt;td data-bind=&quot;text: name&quot;&gt;
+        &lt;/td&gt;
+        &lt;td&gt;
+            #: kendo.toString(get(&quot;price&quot;), &quot;C&quot;) #
+        &lt;/td&gt;
+        &lt;td data-bind=&quot;text: unitsInStock&quot;&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/script&gt;
+&lt;script id=&quot;footer-template&quot; type=&quot;text/x-kendo-template&quot;&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            Total number or products: #: total() #
+        &lt;/td&gt;
+        &lt;td&gt;
+            Total price: #: totalPrice() #
+        &lt;/td&gt;
+        &lt;td&gt;
+            Total units in stock: #: totalUnitsInStock() #
+        &lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/script&gt;
+        </pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <pre class="prettyprint">
+var viewModel = {
+    productName: &quot;Product name&quot;,
+    productPrice: 10,
+    productUnitsInStock: 10,
+    addProduct: function() {
+        this.get(&quot;products&quot;).push({
+            name: this.get(&quot;productName&quot;),
+            price: parseFloat(this.get(&quot;productPrice&quot;)),
+            unitsInStock: parseFloat(this.get(&quot;productUnitsInStock&quot;))
+        });
+    },
+    removeProduct: function() {
+        this.get(&quot;products&quot;).pop();
+    },
+    total: function() {
+        return this.get(&quot;products&quot;).length;
+    },
+    totalPrice: function() {
+        var sum = 0;
+
+        $.each(this.get(&quot;products&quot;), function(index, product) {
+            sum += product.price;
+        });
+
+        return sum;
+    },
+    totalUnitsInStock: function() {
+        var sum = 0;
+
+        $.each(this.get(&quot;products&quot;), function(index, product) {
+            sum += product.unitsInStock;
+        });
+
+        return sum;
+    },
+    products: [
+        { name: &quot;Chai&quot;, price: 18.00, unitsInStock: 39 },
+        { name: &quot;Chang&quot;, price: 19.00, unitsInStock: 17 },
+        { name: &quot;Mishi Kobe Niku&quot;, price: 97.00, unitsInStock: 29 },
+        { name: &quot;Sir Rodney's Scones&quot;, price: 10.00, unitsInStock: 3 }
+    ]
+};
+
+kendo.bind($(&quot;#example&quot;), viewModel);
+        </pre>
+    </div>
     <style scoped>
 
         #products {
@@ -145,6 +258,9 @@
 
         .configuration input[type=text] {
             width: 130px;
+        }
+        .code-sample {
+            clear: right;
         }
     </style>
 </div>
