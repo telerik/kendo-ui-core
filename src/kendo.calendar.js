@@ -134,6 +134,7 @@
         transitionOrigin = transitions ? transitions.css + "transform-origin" : "",
         cellTemplate = template('<td#=data.cssClass#><a class="k-link" href="\\#" data-#=data.ns#value="#=data.dateString#">#=data.value#</a></td>', { useWithBlock: false }),
         emptyCellTemplate = template("<td>&nbsp;</td>", { useWithBlock: false }),
+        isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
         CLICK = touch ? "touchend" : "click",
         MIN = "min",
         LEFT = "left",
@@ -524,6 +525,8 @@
                     max: max,
                     date: value
                 }, that[currentView.name])));
+
+                makeUnselectable(to);
 
                 that._animate({
                     from: from,
@@ -1289,6 +1292,13 @@
         options.format = format;
     }
 
+    function makeUnselectable(element) {
+        if (isIE8) {
+            element.find("*").attr("unselectable", "on");
+        }
+    }
+
+    calendar.makeUnselectable =  makeUnselectable;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
     calendar.validate = validate;

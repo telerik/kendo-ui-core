@@ -132,6 +132,7 @@
 
         if (!sharedCalendar) {
             sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
+            calendar.makeUnselectable(sharedCalendar.element);
         }
 
         that.calendar = sharedCalendar;
