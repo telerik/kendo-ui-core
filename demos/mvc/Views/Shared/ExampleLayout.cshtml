@@ -126,7 +126,7 @@
 <script>
     setTimeout(function(){ prettyPrint(); }, 100);
 
-    document.title = "@ViewBag.Title";
+    document.title = "@Html.Raw(ViewBag.Title)";
 
     @if (ViewBag.suite == "mobile")
     {
