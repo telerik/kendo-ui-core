@@ -1858,7 +1858,6 @@
 
     var fx = {
         promise: function (element, options) {
-            console.log("start");
             if (options.show) {
                 element.css({ display: element.data("olddisplay") || "block" }).css("display");
             }
