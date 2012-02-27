@@ -565,6 +565,10 @@
                     "url": "mvvm/elements.html"
                 },
                 {
+                    "text": "Widget binding",
+                    "url": "mvvm/widgets.html"
+                },
+                {
                     "text": "Attribute binding",
                     "url": "mvvm/attributes.html"
                 },
@@ -581,8 +585,8 @@
                     "url": "mvvm/source.html"
                 },
                 {
-                    "text": "Widget binding",
-                    "url": "mvvm/widgets.html"
+                    "text": "Custom binding",
+                    "url": "mvvm/custom.html"
                 }
             ]
         },

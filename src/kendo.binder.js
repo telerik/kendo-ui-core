@@ -983,6 +983,7 @@
     kendo.unbind = unbind;
     kendo.bind = bind;
     kendo.data.binders = binders;
+    kendo.data.Binder = Binder;
     kendo.notify = notify;
 
     kendo.observable = function(object) {
