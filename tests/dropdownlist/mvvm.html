@@ -80,6 +80,38 @@
                 equal(observable.value, observable.items[0]);
             });
 
+            test("widget datasource is use if source binding is not set", function() {
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+                    observable.value = observable.items[1];
+
+
+                var dom = $('<select data-value-field="text" data-bind="value:value" />').
+                    kendoDropDownList( {
+                        dataSource: observable.items
+                    });
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoDropDownList").select(0);
+                dom.data("kendoDropDownList").trigger("change");
+
+                equal(observable.value, observable.items[0]);
+            });
+
+            test("changing a value updates the view model if bound to simple value", function() {
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+
+                var dom = $('<select data-role="dropdownlist" data-value-field="text" data-bind="value:value, source:items" />');
+                observable.value = "foo";
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoDropDownList").select(1);
+                dom.data("kendoDropDownList").trigger("change");
+
+                equal(observable.value, "bar");
+            });
+
             test("binding dropdownlist initialized before binding", function() {
                 var dom = $('<select data-value-field="text" data-bind="value:value,source:items" />');
 

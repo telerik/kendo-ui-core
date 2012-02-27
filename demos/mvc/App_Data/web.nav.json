@@ -185,6 +185,10 @@
                     "url": "grid/editing-popup.html"
                 },
                 {
+                    "text": "Editing Custom Editor",
+                    "url": "grid/editing-custom.html"
+                },
+                {
                     "text": "Virtualization of local data",
                     "url": "grid/virtualization-local-data.html"
                 },

@@ -599,11 +599,22 @@
                 var field = this.options.dataValueField || this.options.dataTextField;
 
                 if (field) {
-                    var source = this.bindings.source.get();
+                    var source,
+                        isObservableObject = this.bindings.value.get() instanceof ObservableObject;
+
+                    if (this.bindings.source) {
+                        source = this.bindings.source.get();
+                    } else {
+                        source = this.widget.dataSource.view();
+                    }
 
                     for (idx = 0, length = source.length; idx < length; idx++) {
                         if (source[idx].get(field) == value) {
-                            value = source[idx];
+                            if (isObservableObject) {
+                                value = source[idx];
+                            } else {
+                                value = source[idx].get(field);
+                            }
                             break;
                         }
                     }
@@ -616,7 +627,7 @@
                 var field = this.options.dataValueField || this.options.dataTextField;
                 var value = this.bindings.value.get();
 
-                if (field) {
+                if (field && value instanceof ObservableObject) {
                     value = value.get(field);
                 }
 
