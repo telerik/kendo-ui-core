@@ -57,11 +57,12 @@
                     var gauge = $("#gauge").data("kendoGauge"),
                         showLabels = $("#labels").prop("checked"),
                         positionInputs = $("input[name='labels-position']"),
-                        labelsPosition = positionInputs.filter(":checked").val();
+                        labelsPosition = positionInputs.filter(":checked").val(),
+                        options = gauge.options;
 
-                    gauge.options.transitions = false;
-                    gauge.options.scale.labels.visible = showLabels;
-                    gauge.options.scale.labels.position = labelsPosition;
+                    options.transitions = false;
+                    options.scale.labels.visible = showLabels;
+                    options.scale.labels.position = labelsPosition;
 
                     positionInputs.attr("disabled", !showLabels);
 
