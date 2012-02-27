@@ -127,8 +127,11 @@
             "text": "Radial Gauge",
             "spriteCssClass": "radialGaugeIcon",
             "items": [{
-                    "text": "Basic usage",
-                    "url": "radial-gauge/index.html"
+                "text": "Basic usage",
+                "url": "radial-gauge/index.html"
+            }, {
+                "text": "Gauge labels",
+                "url": "radial-gauge/gauge-labels.html"
             }],
             "name": "radial gauge"
         }
