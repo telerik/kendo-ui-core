@@ -1,5 +1,5 @@
         <div id="example" class="k-content">
-            <div id="gauge" style="width: 300px; height: 300px;"></div>
+            <div id="gauge" style=""></div>
 
             <input id="gauge-value" value="65">
 
@@ -16,10 +16,7 @@
                             minorUnit: 5,
                             startAngle: -30,
                             endAngle: 210,
-                            max: 180,
-                            labels: {
-                                position: "outside"
-                            }
+                            max: 180
                         }
                     });
                 }
@@ -40,5 +37,17 @@
                     });
                 });
             </script>
+
+            <style scoped>
+                #gauge {
+                    width: 300px;
+                    height: 300px;
+                    margin: 0 auto;
+                }
+
+                #example {
+                    text-align: center;
+                }
+            </style>
         </div>
 
