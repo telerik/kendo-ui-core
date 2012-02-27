@@ -5,15 +5,14 @@ var less = require("./less-js/lib/less"),
     cache = {};
 
 function buildThemes(themesFolder, outputFolder) {
-    var parser = new(less.Parser)({
-        paths: [ themesFolder ]
-    });
-
     kendoBuild.processFilesRecursive(themesFolder, /kendo\..+\.less/, function(file) {
-        var source = kendoBuild.readText(file),
-        theme = path.basename(file, ".less"),
-        output = path.join(outputFolder, theme + ".css"),
-        cacheEntry = cache[file];
+        var parser = new(less.Parser)({
+                paths: [ themesFolder ]
+            }),
+            source = kendoBuild.readText(file),
+            theme = path.basename(file, ".less"),
+            output = path.join(outputFolder, theme + ".css"),
+            cacheEntry = cache[file];
 
         if (cacheEntry) {
             kendoBuild.writeText(output, cacheEntry);
