@@ -1,0 +1,94 @@
+<div id="example" class="k-content">
+    <div class="configuration">
+        <span class="configHead">Configuration</span>
+        <span class="configTitle">Slide</span>
+        <label>
+            Toggle: <input type="checkbox" data-bind="checked: slideValue" />
+        </label>
+    </div>
+    <div id="target" data-bind="slide: slideValue">
+        Lorem ipsum dolor sit amet.
+    </div>
+    <script>
+        kendo.data.binders.slide = kendo.data.Binder.extend( {
+            update: function() {
+                var value = this.bindings["slide"].get();
+
+                if (value) {
+                    $(this.element).slideDown();
+                } else {
+                    $(this.element).slideUp();
+                }
+            }
+        });
+
+        $(document).ready(function() {
+            var viewModel = {
+                slideValue: true
+            };
+
+            kendo.bind($("#example"), viewModel);
+        });
+    </script>
+    <div class="code-sample">
+        <h4 class="code-title">View source code:</h4>
+        <pre class="prettyprint">
+&lt;label&gt;
+    Toggle: &lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: slideValue&quot; /&gt;
+&lt;/label&gt;
+&lt;div id=&quot;target&quot; data-bind=&quot;slide: slideValue&quot;&gt;
+    Lorem ipsum dolor sit amet.
+&lt;/div&gt;
+        </pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">Custom binder source code:</h4>
+        <pre class="prettyprint">
+kendo.data.binders.slide = kendo.data.Binder.extend( {
+    update: function() {
+        var value = this.bindings[&quot;slide&quot;].get();
+
+        if (value) {
+            $(this.element).slideDown();
+        } else {
+            $(this.element).slideUp();
+        }
+    }
+});
+        </pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <pre class="prettyprint">
+var viewModel = {
+    slideValue: true
+};
+
+kendo.bind($(&quot;#example&quot;), viewModel);
+        </pre>
+    </div>
+    <style scoped>
+        .configuration label {
+            display: block;
+            float: none;
+        }
+        .code-sample {
+            clear: right;
+        }
+        #target {
+            width: 100px;
+            height: 100px;
+            border-width: 4px;
+            padding: 1em;
+            float: left;
+            background-color: gold;
+            color: darkRed;
+            border-style: solid;
+            border-color: darkOrange;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -moz-border-radius: 10px;
+        }
+    </style>
+</div>

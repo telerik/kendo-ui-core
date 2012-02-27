@@ -9,7 +9,7 @@
                 <h4>AutoComplete</h4>
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
             </td>
-            <td rowspan="8">
+            <td rowspan="9">
 <pre>
 {
     autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
@@ -21,6 +21,7 @@
     ],
     numericTextBoxValue: <span data-bind="text: displayNumericTextBoxValue"></span>,
     timePickerValue: <span data-bind="text: displayTimePickerValue"></span>,
+    sliderValue: <span data-bind="text: sliderValue"></span>
 }
 </pre>
             </td>
@@ -53,6 +54,12 @@
             <td>
                 <h4>NumericTextBox</h4>
                 <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Slider</h4>
+                <input data-role="slider" data-bind="value: sliderValue" />
             </td>
         </tr>
         <tr>
@@ -134,7 +141,8 @@
                     var timePickerValue = this.get("timePickerValue");
 
                     return kendo.toString(timePickerValue, "hh:mm:ss");
-                }
+                },
+                sliderValue: 5
             });
 
             viewModel.autoCompleteValue = viewModel.colors[1];
@@ -150,27 +158,11 @@
 &lt;table&gt;
     &lt;tr&gt;
         &lt;th&gt;Widget&lt;/th&gt;
-        &lt;th&gt;Current view model state&lt;/th&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
         &lt;td&gt;
             &lt;h4&gt;AutoComplete&lt;/h4&gt;
             &lt;input data-role=&quot;autocomplete&quot; data-text-field=&quot;name&quot; data-bind=&quot;source: colors, value: autoCompleteValue&quot;/&gt;
-        &lt;/td&gt;
-        &lt;td rowspan=&quot;8&quot;&gt;
-&lt;pre&gt;
-{
-autoCompleteValue: &lt;span data-bind=&quot;text: displayAutoCompleteValue&quot;&gt;&lt;/span&gt;,
-comboBoxValue: &lt;span data-bind=&quot;text: displayComboBoxValue&quot;&gt;&lt;/span&gt;,
-datePickerValue: &lt;span data-bind=&quot;text: displayDatePickerValue&quot;&gt;&lt;/span&gt;,
-dropDownListValue: &lt;span data-bind=&quot;text: displayDropDownListValue&quot;&gt;&lt;/span&gt;,
-gridSource: [
-&lt;span data-bind=&quot;text: displayGridSource&quot;&gt;&lt;/span&gt;
-],
-numericTextBoxValue: &lt;span data-bind=&quot;text: displayNumericTextBoxValue&quot;&gt;&lt;/span&gt;,
-timePickerValue: &lt;span data-bind=&quot;text: displayTimePickerValue&quot;&gt;&lt;/span&gt;,
-}
-&lt;/pre&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -206,6 +198,12 @@ timePickerValue: &lt;span data-bind=&quot;text: displayTimePickerValue&quot;&gt;
         &lt;td&gt;
             &lt;h4&gt;NumericTextBox&lt;/h4&gt;
             &lt;input data-role=&quot;numerictextbox&quot; data-format=&quot;c&quot; data-bind=&quot;value: numericTextBoxValue&quot; /&gt;
+        &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;
+            &lt;h4&gt;Slider&lt;/h4&gt;
+            &lt;input data-role=&quot;slider&quot; data-bind=&quot;value: sliderValue&quot; /&gt;
         &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
