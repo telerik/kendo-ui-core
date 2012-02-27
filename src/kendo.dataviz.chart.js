@@ -1,24 +1,39 @@
 (function ($, undefined) {
 
     // Imports ================================================================
-    var doc = document,
-        kendo = window.kendo,
-        dataviz = kendo.dataviz,
-        Class = kendo.Class,
-        Widget = kendo.ui.Widget,
-        DataSource = kendo.data.DataSource,
-        baseTemplate = kendo.template,
-        template = dataviz.template,
-        format = kendo.format,
-        map = $.map,
+    var each = $.each,
         grep = $.grep,
-        each = $.each,
-        noop = $.noop,
+        map = $.map,
         math = Math,
-        notify = kendo.notify,
+        noop = $.noop,
         proxy = $.proxy,
+        doc = document,
+
+        kendo = window.kendo,
+        Class = kendo.Class,
+        DataSource = kendo.data.DataSource,
+        Widget = kendo.ui.Widget,
+        baseTemplate = kendo.template,
+        format = kendo.format,
         getter = kendo.getter,
-        deepExtend = kendo.deepExtend;
+        notify = kendo.notify,
+
+        dataviz = kendo.dataviz,
+        Box2D = dataviz.Box2D,
+        BoxElement = dataviz.BoxElement,
+        ChartElement = dataviz.ChartElement,
+        NumericAxis = dataviz.NumericAxis,
+        Point2D = dataviz.Point2D,
+        RootElement = dataviz.RootElement,
+        Text = dataviz.Text,
+        TextBox = dataviz.TextBox,
+        Title = dataviz.Title,
+        ViewElement = dataviz.ViewElement,
+        deepExtend = kendo.deepExtend,
+        defined = dataviz.defined,
+        round = dataviz.round,
+        template = dataviz.template,
+        uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
     var ABOVE = "above",
@@ -276,7 +291,7 @@
         },
 
         // Needs to be overridable in tests
-        _supportsSVG: supportsSVG,
+        _supportsSVG: dataviz.supportsSVG,
 
         _attachEvents: function() {
             var chart = this,
