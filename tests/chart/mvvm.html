@@ -25,7 +25,7 @@
             test("initializes a chart when data role is chart", function() {
                 var dom = $('<div data-role="chart"/>');
 
-                kendo.bind(dom);
+                kendo.bind(dom, {}, kendo.dataviz.ui);
 
                 ok(dom.data("kendoChart") instanceof kendo.dataviz.ui.Chart);
             });
@@ -33,7 +33,7 @@
             test("initializes a options from data attributes", function() {
                 var dom = $('<div data-role="chart" />').data("series", [{ field: "foo" }]);
 
-                kendo.bind(dom);
+                kendo.bind(dom, {}, kendo.dataviz.ui);
 
                 var chart = dom.data("kendoChart");
 
@@ -43,7 +43,7 @@
             test("initalizes data source", function() {
                 var dom = $('<div data-role="chart" data-bind="source:items" />');
 
-                kendo.bind(dom, { items: ["foo", "bar"] } );
+                kendo.bind(dom, { items: ["foo", "bar"] }, kendo.dataviz.ui );
 
                 equal(dom.data("kendoChart").dataSource.view()[0], "foo");
                 equal(dom.data("kendoChart").dataSource.view()[1], "bar");
@@ -56,7 +56,7 @@
 
                 var chart = dom.kendoChart().data("kendoChart");
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 equal(chart.dataSource.data().length, 2);
                 equal(chart.options.series.length, 1);
@@ -68,7 +68,7 @@
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 var chart =dom.kendoChart({series:[{ field: "text" }] }).data("kendoChart");
 
@@ -82,7 +82,7 @@
 
                 var observable = kendo.observable({ items: [{ text:"foo"} ] });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
                 dom.data("kendoChart").refresh();
 
                 equal(observable.items._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
@@ -93,7 +93,7 @@
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" },{ text: "baz" }] });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 var chart = dom.kendoChart().data("kendoChart");
 
@@ -107,11 +107,11 @@
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 equal(destroy.calls("destroy"), 1);
             });
@@ -121,11 +121,11 @@
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" } ] });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
 
                 equal(destroy.calls("destroy"), 1);
             });
@@ -135,7 +135,7 @@
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
                 kendo.unbind(dom);
 
                 var chart = dom.data("kendoChart");
@@ -152,7 +152,7 @@
                     items: [{text:"foo"}, {text:"bar"}]
                 });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
             });
 
             function dataBound() {
@@ -166,7 +166,7 @@
                     items: [{text:"foo"}, {text:"bar"}]
                 });
 
-                kendo.bind(dom, observable);
+                kendo.bind(dom, observable, kendo.dataviz.ui);
             });
         </script>
 
