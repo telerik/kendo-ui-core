@@ -641,6 +641,16 @@
                 equal(cal.calls("navigate"), 0);
             });
 
+            test("today link should be enabled on _footer(true)", function() {
+                var cal = new Calendar(div);
+
+                cal._toggle(false);
+                cal._footer(cal.footer);
+
+                ok(cal._today[0]);
+                ok(!cal._today.hasClass("t-state-disabled"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
