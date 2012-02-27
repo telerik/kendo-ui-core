@@ -50,9 +50,17 @@
 
             view.decorators.push(
                 new SVGOverlayDecorator(view),
-                new SVGGradientDecorator(view),
-                new dataviz.BarAnimationDecorator(view),
-                new dataviz.PieAnimationDecorator(view),
+                new SVGGradientDecorator(view)
+            );
+
+            if (dataviz.ui.Chart) {
+                view.decorators.push(
+                    new dataviz.BarAnimationDecorator(view),
+                    new dataviz.PieAnimationDecorator(view)
+                );
+            }
+
+            view.decorators.push(
                 new SVGClipAnimationDecorator(view),
                 new dataviz.FadeAnimationDecorator(view)
             );

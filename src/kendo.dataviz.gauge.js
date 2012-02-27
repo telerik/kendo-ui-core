@@ -2,13 +2,28 @@
 
     // Imports ================================================================
     var doc = document,
+        extend = $.extend,
+        math = Math,
+
         kendo = window.kendo,
-        dataviz = kendo.dataviz,
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
-        math = Math,
-        extend = $.extend,
-        deepExtend = kendo.deepExtend;
+        deepExtend = kendo.deepExtend,
+
+        dataviz = kendo.dataviz,
+        Axis = dataviz.Axis,
+        Box2D = dataviz.Box2D,
+        ChartElement = dataviz.ChartElement,
+        NumericAxis = dataviz.NumericAxis,
+        RootElement = dataviz.RootElement,
+        RotationAnimation = dataviz.RotationAnimation,
+        append = dataviz.append,
+        animationDecorator = dataviz.animationDecorator,
+        autoMajorUnit = dataviz.autoMajorUnit,
+        rotatePoint = dataviz.rotatePoint,
+        round = dataviz.round,
+        supportsSVG = dataviz.supportsSVG,
+        uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
     var BLACK = "#000",
@@ -266,7 +281,7 @@
                 options = scale.options,
                 center = box.center(),
                 radius = math.min(box.height(), box.width()) / 2,
-                ring = scale.ring || new Chart.Ring(
+                ring = scale.ring || new dataviz.Ring(
                     center, radius - options.majorTickSize,
                     radius, options.startAngle, options.endAngle - options.startAngle);
 
@@ -518,7 +533,7 @@
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
                 plotArea = gauge._plotArea = model._plotArea,
-                viewClass = gauge._supportsSVG() ? Chart.SVGView : Chart.VMLView,
+                viewClass = gauge._supportsSVG() ? dataviz.SVGView : dataviz.VMLView,
                 view = gauge._view = viewClass.fromModel(model);
 
             element.css("position", "relative");
@@ -561,13 +576,16 @@
         _supportsSVG: supportsSVG
     });
 
+    var PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
+
+    // Exports ================================================================
     dataviz.ui.plugin(Gauge);
 
     deepExtend(dataviz, {
-        RadialScale: RadialScale,
         GaugePlotArea: GaugePlotArea,
         Pointer: Pointer,
-        PointerAnimationDecorator: PointerAnimationDecorator
+        PointerAnimationDecorator: PointerAnimationDecorator,
+        RadialScale: RadialScale
     });
 
 })(jQuery);
