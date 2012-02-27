@@ -9,10 +9,14 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D;
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D;
 
             function ContentElementStub(content, options) {
                 this.content = content;
@@ -33,7 +37,7 @@
 
                 module("ViewElement", {
                     setup: function() {
-                        viewElement = new Chart.ViewElement();
+                        viewElement = new dataviz.ViewElement();
                     }
                 });
 

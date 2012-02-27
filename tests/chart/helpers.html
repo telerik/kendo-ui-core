@@ -9,11 +9,16 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script>
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                Point2D = Chart.Point2D,
+            var dataviz = kendo.dataviz,
+                Chart = dataviz.ui.Chart,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
                 box,
                 targetBox;
 
@@ -283,7 +288,7 @@
 
                 module("Sector", {
                     setup: function() {
-                        sector = new Chart.Sector(new Point2D(10, 20), 30, 90, 180);
+                        sector = new dataviz.Sector(new Point2D(10, 20), 30, 90, 180);
                     }
                 });
 
@@ -305,7 +310,7 @@
 
                 test("clone returns new sector instance", function() {
                     notEqual(sector.clone(), sector);
-                    ok(sector instanceof Chart.Sector);
+                    ok(sector instanceof dataviz.Sector);
                 });
 
                 test("expand returns same instance", function() {
@@ -327,7 +332,7 @@
 
                 module("Ring", {
                     setup: function() {
-                        ring = new Chart.Ring(new Point2D(100, 200), 20, 30, 90, 180);
+                        ring = new dataviz.Ring(new Point2D(100, 200), 20, 30, 90, 180);
                     }
                 });
 
@@ -371,7 +376,7 @@
 
 
             // ------------------------------------------------------------
-            var deepExtend = Chart.deepExtend,
+            var deepExtend = kendo.deepExtend,
                 extendSrc,
                 extendDst;
 
@@ -409,7 +414,7 @@
             });
 
             // ------------------------------------------------------------
-            var Color = Chart.Color;
+            var Color = dataviz.Color;
 
             module("Color");
 
@@ -462,11 +467,11 @@
             module("blendColors");
 
             test("#fff, #99c62a with alpha 0.2 => #add155", function() {
-                equals(Chart.blendColors("#99c62a", "#fff", 0.2), "#add155");
+                equals(dataviz.blendColors("#99c62a", "#fff", 0.2), "#add155");
             });
 
             // ------------------------------------------------------------
-            var blendGradient = Chart.blendGradient,
+            var blendGradient = dataviz.blendGradient,
                 gradient;
 
             module("blendGradient", {

@@ -10,12 +10,16 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                categoriesCount = Chart.categoriesCount,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                categoriesCount = dataviz.categoriesCount,
                 chartBox = new Box2D(0, 0, 800, 600),
                 lineChart,
                 root,
@@ -26,9 +30,9 @@
             function setupLineChart(plotArea, options) {
                 view = new ViewStub();
 
-                lineChart = new Chart.LineChart(plotArea, options);
+                lineChart = new dataviz.LineChart(plotArea, options);
 
-                root = new Chart.RootElement();
+                root = new dataviz.RootElement();
                 root.append(lineChart);
 
                 lineChart.reflow();
@@ -582,7 +586,7 @@
                 );
 
                 function createLineChart(options) {
-                    lineChart = new Chart.LineChart(plotArea, {
+                    lineChart = new dataviz.LineChart(plotArea, {
                         series: [$.extend({
                             data: [0, 1],
                             color: "#f00",
@@ -684,7 +688,7 @@
             })();
 
             (function() {
-                var LinePoint = Chart.LinePoint,
+                var LinePoint = dataviz.LinePoint,
                     point,
                     box,
                     marker,
@@ -715,7 +719,7 @@
                     box = new Box2D(0, 0, 100, 100);
                     point.reflow(box);
 
-                    root = new Chart.RootElement();
+                    root = new dataviz.RootElement();
                     root.append(point);
 
                     marker = point.marker;
@@ -734,7 +738,7 @@
                 });
 
                 test("creates marker", function() {
-                    ok(marker instanceof Chart.BoxElement);
+                    ok(marker instanceof dataviz.BoxElement);
                 });
 
                 test("sets marker width", function() {
@@ -1028,7 +1032,7 @@
             })();
 
             (function() {
-                var ShapeElement = Chart.ShapeElement,
+                var ShapeElement = dataviz.ShapeElement,
                     SIZE = 5,
                     BORDER = 2,
                     BORDER_COLOR = "#cf0",

@@ -9,17 +9,21 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
                 view,
                 TOLERANCE = 2;
 
             // Tests expect particular font size
-            Chart.Text.fn.options.font = "16px Verdana, sans-serif";
+            dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
             function moduleSetup() {
                 view = new ViewStub();
@@ -34,7 +38,7 @@
                     MARGIN = PADDING = 5;
 
                 function createCategoryAxis(options) {
-                    categoryAxis = new Chart.CategoryAxis(
+                    categoryAxis = new dataviz.CategoryAxis(
                         $.extend({
                             categories: ["Foo", "Bar"]
                         }, options)
@@ -574,7 +578,7 @@
                 });
 
                 test("assumes 1 category when no categories are defined", function() {
-                    categoryAxis = new Chart.CategoryAxis();
+                    categoryAxis = new dataviz.CategoryAxis();
                     categoryAxis.reflow(chartBox);
 
                     var slot = categoryAxis.getSlot(0);
@@ -662,7 +666,7 @@
                     }];
 
                 function createPlotArea(series, chartOptions) {
-                    plotArea = new Chart.CategoricalPlotArea(series, {
+                    plotArea = new dataviz.CategoricalPlotArea(series, {
                         categoryAxis: {
                             categories: ["A"],
                             plotBands: [{
@@ -747,7 +751,7 @@
                     }];
 
                 function createPlotArea(series, plotOptions) {
-                    plotArea = new Chart.CategoricalPlotArea(series, $.extend(true, {
+                    plotArea = new dataviz.CategoricalPlotArea(series, $.extend(true, {
                         categoryAxis: {
                             categories: ["A"],
                             title: {

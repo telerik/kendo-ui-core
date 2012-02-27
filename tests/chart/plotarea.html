@@ -9,12 +9,16 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
 
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
                 chartBox = new Box2D(100, 100, 1000, 1000),
                 view,
                 TOLERANCE = 1,
@@ -90,7 +94,7 @@
                     }]];
 
                 function createPlotArea(series, options) {
-                    plotArea = new Chart.CategoricalPlotArea(series,
+                    plotArea = new dataviz.CategoricalPlotArea(series,
                         $.extend({
                         categoryAxis: {
                             categories: ["A", "B", "C"]
@@ -179,19 +183,19 @@
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(Chart.CategoricalPlotArea, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea, "createAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 0);
                             equal(this.valueAxisRangeTracker.query("primary").max, 1);
                         },
                         function() {
-                            plotArea = new Chart.CategoricalPlotArea([]);
+                            plotArea = new dataviz.CategoricalPlotArea([]);
                         }
                     );
                 });
 
                 test("adds categories to match actual data", function() {
-                    var plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
+                    var plotArea = new dataviz.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B"]
                         }
@@ -201,7 +205,7 @@
                 });
 
                 test("accepts extra categories", function() {
-                    var plotArea = new Chart.CategoricalPlotArea([{
+                    var plotArea = new dataviz.CategoricalPlotArea([{
                             type: "column",
                             data: [100]
                         }], {
@@ -454,7 +458,7 @@
                 });
 
                 test("category axis crossing value can be changed", function() {
-                    plotArea = new Chart.CategoricalPlotArea(columnSeriesData, {
+                    plotArea = new dataviz.CategoricalPlotArea(columnSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
@@ -464,11 +468,11 @@
                 });
 
                 test("creates bar chart", function() {
-                    ok(chartSeries instanceof Chart.BarChart);
+                    ok(chartSeries instanceof dataviz.BarChart);
                 });
 
                 test("stacks series", function() {
-                    plotArea = new Chart.CategoricalPlotArea([{
+                    plotArea = new dataviz.CategoricalPlotArea([{
                             type: "column",
                             data: [],
                             stack: true
@@ -486,7 +490,7 @@
                 });
 
                 test("sets axis min/max to series limits", 2, function() {
-                    stubMethod(Chart.CategoricalPlotArea, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea, "createAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 10);
                             equal(this.valueAxisRangeTracker.query("primary").max, 300);
@@ -519,7 +523,7 @@
                 });
 
                 test("creates line chart", function() {
-                    ok(chartSeries instanceof Chart.LineChart);
+                    ok(chartSeries instanceof dataviz.LineChart);
                 });
 
                 // ------------------------------------------------------------
@@ -540,7 +544,7 @@
                 });
 
                 test("creates line chart", function() {
-                    ok(chartSeries instanceof Chart.LineChart);
+                    ok(chartSeries instanceof dataviz.LineChart);
                 });
 
                 // ------------------------------------------------------------
@@ -561,7 +565,7 @@
                 });
 
                 test("creates area chart", function() {
-                    ok(chartSeries instanceof Chart.AreaChart);
+                    ok(chartSeries instanceof dataviz.AreaChart);
                 });
 
                 // ------------------------------------------------------------
@@ -582,7 +586,7 @@
                 });
 
                 test("creates area chart", function() {
-                    ok(chartSeries instanceof Chart.AreaChart);
+                    ok(chartSeries instanceof dataviz.AreaChart);
                 });
 
                 // ------------------------------------------------------------
@@ -607,7 +611,7 @@
                 });
 
                 test("value axis crossing can be changed", function() {
-                    plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
+                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: {
                             categories: ["A", "B", "C"],
                             axisCrossingValue: 2
@@ -617,7 +621,7 @@
                 });
 
                 test("stacks series", function() {
-                    plotArea = new Chart.CategoricalPlotArea([{
+                    plotArea = new dataviz.CategoricalPlotArea([{
                             type: "bar",
                             data: [],
                             stack: true
@@ -690,15 +694,15 @@
                     }];
 
                 function createPlotArea(categoryAxis, valueAxis, options) {
-                    plotArea = new Chart.CategoricalPlotArea(barSeriesData, {
+                    plotArea = new dataviz.CategoricalPlotArea(barSeriesData, {
                         categoryAxis: categoryAxis,
                         valueAxis: valueAxis,
                         plotArea: options
                     });
 
-                    stubMethod(Chart.NumericAxis, "getViewElements", function() { return []; },
+                    stubMethod(dataviz.NumericAxis, "getViewElements", function() { return []; },
                         function() {
-                            stubMethod(Chart.CategoryAxis, "getViewElements", function() { return []; },
+                            stubMethod(dataviz.CategoryAxis, "getViewElements", function() { return []; },
                                 function() {
                                     plotArea.reflow(chartBox);
                                     plotArea.getViewElements(view);
@@ -917,7 +921,7 @@
                 });
 
                 test("applies margin", function() {
-                    var plotArea = new Chart.CategoricalPlotArea([{
+                    var plotArea = new dataviz.CategoricalPlotArea([{
                             data: [100]
                         }], {
                         categoryAxis: {
@@ -979,7 +983,7 @@
                     }];
 
                 function createPlotArea(series, options) {
-                    plotArea = new Chart.XYPlotArea(series, options);
+                    plotArea = new dataviz.XYPlotArea(series, options);
 
                     namedXAxes = plotArea.namedXAxes;
                     namedYAxes = plotArea.namedYAxes;
@@ -1035,25 +1039,25 @@
                 });
 
                 test("X axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(Chart.XYPlotArea, "createAxes",
+                    stubMethod(dataviz.XYPlotArea, "createAxes",
                         function() {
                             equal(this.xAxisRangeTracker.query("primary").min, 0);
                             equal(this.xAxisRangeTracker.query("primary").max, 1);
                         },
                         function() {
-                            plotArea = new Chart.XYPlotArea([]);
+                            plotArea = new dataviz.XYPlotArea([]);
                         }
                     );
                 });
 
                 test("Y axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(Chart.XYPlotArea, "createAxes",
+                    stubMethod(dataviz.XYPlotArea, "createAxes",
                         function() {
                             equal(this.yAxisRangeTracker.query("primary").min, 0);
                             equal(this.yAxisRangeTracker.query("primary").max, 1);
                         },
                         function() {
-                            plotArea = new Chart.XYPlotArea([]);
+                            plotArea = new dataviz.XYPlotArea([]);
                         }
                     );
                 });
