@@ -51,16 +51,17 @@
 }
 #custom-listview .item-title {
 	float: left;
-	font-size: 1.2em;
+	font-size: 1em;
+    line-height: 1.4em;
     margin: .3em 1em 0 .6em;
     width: 50%;
 }
 #custom-listview .item-info {
 	float: left;
-	font-size: .8em;
+	font-size: .7em;
 	line-height: 1em;
-    margin: 0 1em;
-    width: 50%;
+    margin: 0 0 0 .95em;
+    width: 45%;
 }
 .details-link {
     margin-top: -1em;
@@ -71,22 +72,21 @@
 .km-listview .km-list {
     margin: 0;
 }
-.km-ios .km-listgroup > li,
-.km-android .km-listgroup > li {
+.km-root .km-listview .km-group-title {
 	padding: 0;
 	border-top: 0;
 	box-shadow: none;
 }
-.km-ios .km-listgroup > li h2,
-.km-android .km-listgroup > li h2 {
+.km-root .km-group-title h2 {
 	margin: 0;
-	padding-top: .4em;
-	padding-bottom: .4em;
+	padding-top: .2em;
+	padding-bottom: .2em;
 	background-color: #ef652a;
 	color: #fff;
 	text-shadow: none;
 }
-.km-ios .km-listgroup > li h2 {
+.km-ios .km-group-title h2,
+.km-blackberry .km-group-title h2 {
 	background-image: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.45) 6%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(100, 100, 100, 0));
 	background-image: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, rgba(255, 255, 255, 0.5)), color-stop(0.06, rgba(255, 255, 255, 0.45)), color-stop(0.5, rgba(255, 255, 255, 0.2)), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(1, rgba(100, 100, 100, 0)));
 }
