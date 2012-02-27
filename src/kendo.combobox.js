@@ -146,9 +146,8 @@
         Select = ui.Select,
         support = kendo.support,
         placeholderSupported = support.placeholder,
-        touch = support.touch,
         keys = kendo.keys,
-        CLICK = touch ? "touchend" : "click",
+        CLICK = support.touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         DEFAULT = "k-state-default",
@@ -341,23 +340,15 @@
             that.input.bind({
                 keydown: proxy(that._keydown, that),
                 focus: function() {
-                    clearTimeout(that._bluring);
                     wrapper.addClass(FOCUSED);
                     that._placeholder(false);
                 },
                 blur: function() {
-                    if (!touch) {
-                        that._bluring = setTimeout(function() {
-                            wrapper.removeClass(FOCUSED);
-                            clearTimeout(that._typing);
-                            that.text(that.text());
-                            that._placeholder();
-                            that._blur();
-                        }, 100);
-                    } else {
-                        that._change();
-                        wrapper.removeClass(FOCUSED);
-                    }
+                    wrapper.removeClass(FOCUSED);
+                    clearTimeout(that._typing);
+                    that.text(that.text());
+                    that._placeholder();
+                    that._blur();
                 }
             });
 
@@ -786,8 +777,9 @@
         toggle: function(toggle) {
             var that = this;
 
-            clearTimeout(that._bluring);
-            that.input[0].focus();
+            if (that._focused[0] !== document.activeElement) {
+                that._focused.focus();
+            }
 
             that._toggle(toggle);
         },
@@ -840,7 +832,7 @@
                     that._state = STATE_ACCEPT;
                 }
 
-                setTimeout( function () { that._focus(li); });
+                that._focus(li);
             } else {
                 that.text(that.text());
                 that._change();

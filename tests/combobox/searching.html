@@ -306,14 +306,6 @@
                 }, 150);
             });
 
-            test("do not set custom value if _current", function() {
-                combobox._current = $('<li class="k-state-selected">Test</li>');
-
-                combobox.input.val("ffff").blur();
-
-                notEqual(combobox.value(), "ffff");
-            });
-
             asyncTest("do not search if text does not changed", function() {
                 var called = false;
 

@@ -209,6 +209,10 @@
             var that = this;
             open = open !== undefined? open : !that.popup.visible();
 
+            if (that._focused[0] !== document.activeElement) {
+                that._focused.focus();
+            }
+
             that[open ? OPEN : CLOSE]();
         },
         _scroll: function (item) {
