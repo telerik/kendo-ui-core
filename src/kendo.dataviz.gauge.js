@@ -3,6 +3,7 @@
     // Imports ================================================================
     var doc = document,
         extend = $.extend,
+        map = $.map,
         math = Math,
 
         kendo = window.kendo,
@@ -15,11 +16,13 @@
         Box2D = dataviz.Box2D,
         ChartElement = dataviz.ChartElement,
         NumericAxis = dataviz.NumericAxis,
+        Ring = dataviz.Ring,
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
+        defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
         round = dataviz.round,
         supportsSVG = dataviz.supportsSVG,
@@ -39,92 +42,6 @@
         VERTICAL = "vertical";
 
     // Gauge ==================================================================
-    var GaugeSegment = ChartElement.extend({
-        init: function(ring, options) {
-            this.ring = ring;
-
-            ChartElement.fn.init.call(this, options);
-        },
-
-        options: {
-            color: "#ff0000",
-            border: {
-                width: 0.5
-            }
-        },
-
-        reflow: function(targetBox) {
-            this.box = targetBox;
-        },
-
-        getViewElements: function(view) {
-            var segment = this,
-                ring = segment.ring,
-                options = segment.options,
-                borderOptions = options.border || {},
-                border = borderOptions.width > 0 ? {
-                    stroke: borderOptions.color,
-                    strokeWidth: borderOptions.width,
-                    dashType: borderOptions.dashType
-                } : {},
-                elements = [],
-                overlay = options.overlay;
-
-            elements.push(view.createRing(ring, deepExtend({
-                id: options.id,
-                fill: options.color,
-                overlay: overlay,
-                fillOpacity: options.opacity,
-                strokeOpacity: options.opacity
-            }, border)));
-
-            append(elements,
-                ChartElement.fn.getViewElements.call(segment, view)
-            );
-
-            return elements;
-        },
-
-        getOutlineElement: function(view, options) {
-            var segment = this,
-                highlight = segment.options.highlight || {},
-                border = highlight.border || {},
-                outlineId = segment.options.id + OUTLINE_SUFFIX,
-                element;
-
-            segment.registerId(outlineId);
-            options = deepExtend({}, options, { id: outlineId });
-
-            if (segment.value !== 0) {
-                element = view.createSector(segment.sector, deepExtend({}, options, {
-                    fill: highlight.color,
-                    fillOpacity: highlight.opacity,
-                    strokeOpacity: border.opacity,
-                    strokeWidth: border.width,
-                    stroke: border.color
-                }));
-            }
-
-            return element;
-        },
-
-        tooltipAnchor: function(tooltipWidth, tooltipHeight) {
-            var w = tooltipWidth / 2,
-                h = tooltipHeight / 2,
-                r = math.sqrt((w * w) + (h * h)),
-                sector = this.sector.clone().expand(r + TOOLTIP_OFFSET),
-                tooltipCenter = sector.point(sector.middle());
-
-            return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
-        },
-
-        formatPointValue: function(format) {
-            var point = this;
-
-            return point.owner.formatPointValue(point.value, format);
-        }
-    });
-
     var Pointer = ChartElement.extend({
         init: function (scale, options) {
             var pointer = this,
@@ -203,7 +120,7 @@
             );
         },
 
-        _createNeedle: function(view) {
+        renderNeedle: function(view) {
             var pointer = this,
                 scale = pointer.scale,
                 ring = scale.ring,
@@ -246,7 +163,7 @@
         getViewElements: function(view) {
             var pointer = this,
                 shape = pointer.options.shape,
-                elements = pointer._createNeedle(view);
+                elements = pointer.renderNeedle(view);
 
             pointer.elements = elements;
 
@@ -409,6 +326,74 @@
             return positions;
         },
 
+        renderRanges: function(view) {
+            var scale = this,
+            options = scale.options,
+            ranges = options.ranges || [],
+            ring = scale.ring,
+            result = [],
+            from, to, r, ir, count = ranges.length,
+            i, range, color = "#aaa",
+            min = options.min,
+            max = options.max,
+            from, to;
+
+            if (options.labels.position === OUTSIDE) {
+                r = ring.ir - ring.ir * 0.05;
+                ir = r - r * 0.1;
+            } else {
+
+            }
+
+            if (count) {
+                var segments = [{
+                    from: min,
+                    to: max,
+                    color: color
+                }];
+            for (var j = 0; j < count; j++) {
+                var range = ranges[j];
+                from = defined(range.from) ? range.from : MIN_VALUE;
+                to = defined(range.to) ? range.to : MAX_VALUE;
+                range.from = math.max(math.min(to, from), min);
+                range.to = math.min(math.max(to, from), max);
+                for (var i = 0, length = segments.length; i < length; i++) {
+                    var segment = segments[i];
+                    if (segment.from <= range.from && range.from <= segment.to) {
+                        segments.push({
+                            from: range.from,
+                            to: range.to,
+                            color: range.color
+                        });
+                        if (segment.from <= range.to && range.to <= segment.to) {
+                            segments.push({
+                                from: range.to,
+                                to: segment.to,
+                                color: color
+                            });
+                        }
+                        segment.to = range.from;
+                        break;
+                    }
+                }
+            }
+
+            result = map(segments, function(item) {
+                from = scale.getSlotAngle(item.from);
+                to = scale.getSlotAngle(item.to);
+
+                return view.createRing(
+                    new Ring(ring.c, ir, r, from, to - from), {
+                        fill: item.color,
+                        fillOpacity: item.opacity,
+                        zIndex: -1
+                    });
+                });
+            }
+
+            return result;
+        },
+
         getViewElements: function(view) {
             var scale = this,
                 options = scale.options,
@@ -418,7 +403,7 @@
                 lineOptions;
 
             append(childElements, scale.renderTicks(view));
-            // append(childElements, scale.renderPlotBands(view));
+            append(childElements, scale.renderRanges(view));
 
             return childElements;
         }
