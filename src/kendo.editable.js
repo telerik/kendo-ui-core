@@ -12,9 +12,13 @@
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
 
+    function fieldType(field) {
+        return field.type || $.type(field) || "string";
+    }
+
     function createAttributes(options) {
-        var field = options.model.fields[options.field],
-            type = field.type,
+        var field = (options.model.fields || options.model)[options.field],
+            type = fieldType(field),
             validation = field.validation,
             ruleName,
             DATATYPE = kendo.attr("type"),
@@ -92,8 +96,8 @@
                 isObject = isPlainObject(field),
                 fieldName = isObject ? field.field : field,
                 model = that.options.model || {},
-                fieldType = modelField && modelField.type ? modelField.type : "string",
-                editor = isObject && field.editor ? field.editor : editors[fieldType],
+                type = fieldType(modelField),
+                editor = isObject && field.editor ? field.editor : editors[type],
                 container = that.element.find("[data-container-for=" + fieldName + "]");
 
             editor = editor ? editor : editors["string"];
@@ -101,7 +105,7 @@
             if (modelField) {
                 container = container.length ? container : that.element;
                 editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
-            }
+           }
         },
 
         _validate: function(e) {
@@ -146,8 +150,8 @@
                 var field = fields[idx],
                     isObject = isPlainObject(field),
                     fieldName = isObject ? field.field : field,
-                    modelField = (model.fields || {})[fieldName],
-                    type = modelField ? modelField.type : null,
+                    modelField = (model.fields || model)[fieldName],
+                    type = fieldType(modelField),
                     validation = modelField ? (modelField.validation || {}) : {};
 
                 for (var rule in validation) {
