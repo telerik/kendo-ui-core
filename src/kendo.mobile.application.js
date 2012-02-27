@@ -14,7 +14,7 @@
         OS = support.mobileOS,
         OS_NAME = !OS ? "ios" : OS.name,
         OS_NAME_CLASS = "km-" + OS_NAME,
-        OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "")),
+        OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "") + (OS.appMode ? "km-app" : "")),
 
         TRANSFORM = support.transitions.css + "transform",
 
