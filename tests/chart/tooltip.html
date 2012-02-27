@@ -9,9 +9,13 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
+            var dataviz = kendo.dataviz,
                 TOLERANCE = 1;
 
             (function() {
@@ -23,7 +27,7 @@
                     BLUE = "rgb(0,0,255)";
 
                 function createTooltip(options) {
-                    tooltip = new Chart.Tooltip($("#chart"), options);
+                    tooltip = new dataviz.Tooltip($("#chart"), options);
                     element = tooltip.element;
                     element.css({ width: "45px", height: "35px" });
                 }
@@ -36,7 +40,7 @@
                 function createPoint(options) {
                     dataPointMock = {
                         value: 1,
-                        box: new Chart.Box2D(0, 0, 10, 10),
+                        box: new dataviz.Box2D(0, 0, 10, 10),
                         options: {
                             aboveAxis: true,
                             color: RED
@@ -52,7 +56,7 @@
                             field: "value"
                         },
                         tooltipAnchor: function() {
-                            return new Chart.Point2D();
+                            return new dataviz.Point2D();
                         },
                         owner: {
                             formatPointValue: function(value, tooltipFormat) {
@@ -185,7 +189,7 @@
                 });
 
                 test("positions tooltip on anchor", function() {
-                    dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 20) };
+                    dataPointMock.tooltipAnchor = function() { return new dataviz.Point2D(10, 20) };
                     tooltip.options.animation.duration = 0;
                     tooltip.options.offsetX = 0;
                     tooltip.options.offsetY = 0;
@@ -205,7 +209,7 @@
                     createTooltip();
                     createPoint();
 
-                    dataPointMock.tooltipAnchor = function() { return new Chart.Point2D(10, 20) };
+                    dataPointMock.tooltipAnchor = function() { return new dataviz.Point2D(10, 20) };
                     tooltip.options.animation.duration = 0;
                     showNow(dataPointMock);
 
@@ -235,7 +239,7 @@
                     RED = "rgb(255,0,0)";
 
                 function createTooltip() {
-                    tooltip = new Chart.Tooltip($("#chart"), {
+                    tooltip = new dataviz.Tooltip($("#chart"), {
                         background: "black",
                         border: {
                             width: 5,
@@ -256,7 +260,7 @@
                 function createSeriesPoint(options) {
                     dataPointMock = {
                         value: 1,
-                        box: new Chart.Box2D(0, 0, 10, 10),
+                        box: new dataviz.Box2D(0, 0, 10, 10),
                         options: {
                             aboveAxis: true,
                             color: RED,
@@ -276,7 +280,7 @@
                             field: "value"
                         },
                         tooltipAnchor: function() {
-                            return new Chart.Point2D();
+                            return new dataviz.Point2D();
                         },
                         owner: {
                             formatPointValue: function(value, tooltipFormat) {

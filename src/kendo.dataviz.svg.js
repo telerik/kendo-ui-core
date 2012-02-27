@@ -2,29 +2,31 @@
 
     // Imports ================================================================
     var $ = jQuery,
+        doc = document,
+        math = Math,
+
         kendo = window.kendo,
         Class = kendo.Class,
-        Chart = kendo.ui.Chart,
         Gauge = kendo.ui.Gauge,
-        Box2D = Chart.Box2D,
-        Point2D = Chart.Point2D,
-        ExpandAnimation = Chart.ExpandAnimation,
-        ViewBase = Chart.ViewBase,
-        ViewElement = Chart.ViewElement,
+
+        dataviz = kendo.dataviz,
+        Box2D = dataviz.Box2D,
+        ExpandAnimation = dataviz.ExpandAnimation,
+        Point2D = dataviz.Point2D,
+        ViewBase = dataviz.ViewBase,
+        ViewElement = dataviz.ViewElement,
         deepExtend = kendo.deepExtend,
-        defined = Chart.defined,
-        template = Chart.template,
-        uniqueId = Chart.uniqueId,
-        round = Chart.round,
-        doc = document,
-        math = Math;
+        defined = dataviz.defined,
+        round = dataviz.round,
+        template = dataviz.template,
+        uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var CLIP = Chart.CLIP,
-        COORD_PRECISION = Chart.COORD_PRECISION,
-        DEFAULT_WIDTH = Chart.DEFAULT_WIDTH,
-        DEFAULT_HEIGHT = Chart.DEFAULT_HEIGHT,
-        DEFAULT_FONT = Chart.DEFAULT_FONT,
+    var CLIP = dataviz.CLIP,
+        COORD_PRECISION = dataviz.COORD_PRECISION,
+        DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
+        DEFAULT_FONT = dataviz.DEFAULT_FONT,
         NONE = "none",
         RADIAL = "radial",
         SQUARE = "square",
@@ -48,13 +50,26 @@
 
             view.decorators.push(
                 new SVGOverlayDecorator(view),
-                new SVGGradientDecorator(view),
-                new Chart.BarAnimationDecorator(view),
-                new Chart.PieAnimationDecorator(view),
-                new SVGClipAnimationDecorator(view),
-                new Chart.FadeAnimationDecorator(view),
-                new Gauge.PointerAnimationDecorator(view)
+                new SVGGradientDecorator(view)
             );
+
+            if (dataviz.ui.Chart) {
+                view.decorators.push(
+                    new dataviz.BarAnimationDecorator(view),
+                    new dataviz.PieAnimationDecorator(view)
+                );
+            }
+
+            view.decorators.push(
+                new SVGClipAnimationDecorator(view),
+                new dataviz.FadeAnimationDecorator(view)
+            );
+
+            if (Gauge) {
+                view.decorators.push(
+                    new Gauge.PointerAnimationDecorator(view)
+                );
+            }
 
             view.template = SVGView.template;
             if (!view.template) {
@@ -757,21 +772,21 @@
     })();
 
     // Exports ================================================================
-    deepExtend(Chart, {
-        SVGView: SVGView,
-        SVGText: SVGText,
-        SVGPath: SVGPath,
-        SVGLine: SVGLine,
-        SVGSector: SVGSector,
-        SVGRing: SVGRing,
+    deepExtend(dataviz, {
         SVGCircle: SVGCircle,
-        SVGGroup: SVGGroup,
+        SVGClipAnimationDecorator: SVGClipAnimationDecorator,
         SVGClipPath: SVGClipPath,
-        SVGLinearGradient: SVGLinearGradient,
-        SVGRadialGradient: SVGRadialGradient,
-        SVGOverlayDecorator: SVGOverlayDecorator,
         SVGGradientDecorator: SVGGradientDecorator,
-        SVGClipAnimationDecorator: SVGClipAnimationDecorator
+        SVGGroup: SVGGroup,
+        SVGLine: SVGLine,
+        SVGLinearGradient: SVGLinearGradient,
+        SVGOverlayDecorator: SVGOverlayDecorator,
+        SVGPath: SVGPath,
+        SVGRadialGradient: SVGRadialGradient,
+        SVGRing: SVGRing,
+        SVGSector: SVGSector,
+        SVGText: SVGText,
+        SVGView: SVGView
     });
 
 })(jQuery);

@@ -9,12 +9,16 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                Point2D = Chart.Point2D;
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D;
 
             (function() {
                 var SIZE = 100,
@@ -39,7 +43,7 @@
                             return this;
                         }
                     };
-                    anim = new Chart.ExpandAnimation(
+                    anim = new dataviz.ExpandAnimation(
                         rect,
                         $.extend({ size: SIZE, duration: 50 }, options)
                     );
@@ -91,8 +95,8 @@
                 // ------------------------------------------------------------
                 module("BarAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView({ transitions: true });
-                        rect = new Chart.SVGPath({
+                        view = new dataviz.SVGView({ transitions: true });
+                        rect = new dataviz.SVGPath({
                             animation: {
                                 type: "bar"
                             },
@@ -101,13 +105,13 @@
                             },
                             aboveAxis: true
                         });
-                        decorator = new Chart.BarAnimationDecorator(view);
+                        decorator = new dataviz.BarAnimationDecorator(view);
                     }
                 });
 
                 test("registers bar animation", function() {
                     decorator.decorate(rect);
-                    ok(view.animations[0] instanceof Chart.BarAnimation);
+                    ok(view.animations[0] instanceof dataviz.BarAnimation);
                 });
 
                 test("does not decorate when view.options.transitions is false", function() {
@@ -142,7 +146,7 @@
                             return this;
                         }
                     };
-                    anim = new Chart.BarAnimation(rect, { duration: 50 });
+                    anim = new dataviz.BarAnimation(rect, { duration: 50 });
                 }
 
                 // ------------------------------------------------------------
@@ -266,7 +270,7 @@
                 // ------------------------------------------------------------
                 module("PieAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView({ transitions: true });
+                        view = new dataviz.SVGView({ transitions: true });
                         sector = {
                             options: $.extend({
                                 id: "id",
@@ -281,13 +285,13 @@
                                 return this;
                             }
                         };
-                        decorator = new Chart.PieAnimationDecorator(view);
+                        decorator = new dataviz.PieAnimationDecorator(view);
                     }
                 });
 
                 test("registers pie animation", function() {
                     decorator.decorate(sector);
-                    ok(view.animations[0] instanceof Chart.PieAnimation);
+                    ok(view.animations[0] instanceof dataviz.PieAnimation);
                 });
 
                 test("deos not registers pie animation when transitions are disabled", function() {
@@ -318,7 +322,7 @@
                             return this;
                         }
                     };
-                    anim = new Chart.PieAnimation(sector, { duration: 50 });
+                    anim = new dataviz.PieAnimation(sector, { duration: 50 });
                 }
 
                 // ------------------------------------------------------------
@@ -354,7 +358,7 @@
                 // ------------------------------------------------------------
                 module("FadeAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView({ transitions: true });
+                        view = new dataviz.SVGView({ transitions: true });
                         rect = {
                             options: {
                                 id: "id",
@@ -368,13 +372,13 @@
                                 return this;
                             }
                         };
-                        decorator = new Chart.FadeAnimationDecorator(view);
+                        decorator = new dataviz.FadeAnimationDecorator(view);
                     }
                 });
 
                 test("registers fade animation", function() {
                     decorator.decorate(rect);
-                    ok(view.animations[0] instanceof Chart.FadeAnimation);
+                    ok(view.animations[0] instanceof dataviz.FadeAnimation);
                 });
 
                 test("deos not registers fade animation when transitions are disabled", function() {
@@ -407,7 +411,7 @@
                             return this;
                         }
                     };
-                    anim = new Chart.FadeAnimation(rect, { duration: 50 });
+                    anim = new dataviz.FadeAnimation(rect, { duration: 50 });
                 }
 
                 // ------------------------------------------------------------

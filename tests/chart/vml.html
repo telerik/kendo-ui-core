@@ -9,12 +9,16 @@
     </head>
     <body>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                Point2D = Chart.Point2D,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
                 view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
@@ -39,7 +43,7 @@
 
                 module("VMLView", {
                     setup: function() {
-                        view = new Chart.VMLView();
+                        view = new dataviz.VMLView();
                     }
                 });
 
@@ -49,19 +53,19 @@
                 });
 
                 test("sets dimensions", function() {
-                    view = new Chart.VMLView({ width: "100px", height: "100px" });
+                    view = new dataviz.VMLView({ width: "100px", height: "100px" });
                     equal(view.options.width, "100px");
                     equal(view.options.height, "100px");
                 });
 
                 test("createGroup returns VMLGroup", function() {
                     var group = view.createGroup();
-                    ok(group instanceof Chart.VMLGroup);
+                    ok(group instanceof dataviz.VMLGroup);
                 });
 
                 test("createText returns VMLText", function() {
                     var text = view.createText("");
-                    ok(text instanceof Chart.VMLText);
+                    ok(text instanceof dataviz.VMLText);
                 });
 
                 test("createText sets content", function() {
@@ -71,7 +75,7 @@
 
                 test("createText with rotation returns VMLRotatedText", function() {
                     var text = view.createText("", { rotation: 45 });
-                    ok(text instanceof Chart.VMLRotatedText);
+                    ok(text instanceof dataviz.VMLRotatedText);
                 });
 
                 test("createText with rotation angle sets content", function() {
@@ -81,7 +85,7 @@
 
                 test("createRect returns VMLLine", function() {
                     var rect = view.createRect(new Box2D(10, 20, 110, 220));
-                    ok(rect instanceof Chart.VMLLine);
+                    ok(rect instanceof dataviz.VMLLine);
                 });
 
                 test("createRect draws rectangle", function() {
@@ -100,7 +104,7 @@
 
                 test("createLine returns VMLLine", function() {
                     var line = view.createLine();
-                    ok(line instanceof Chart.VMLLine);
+                    ok(line instanceof dataviz.VMLLine);
                 });
 
                 test("createLine draws a line", function() {
@@ -110,7 +114,7 @@
 
                 test("createPolyline returns VMLLine", function() {
                     var path = view.createPolyline();
-                    ok(path instanceof Chart.VMLPath);
+                    ok(path instanceof dataviz.VMLPath);
                 });
 
                 test("createPolyline sets fill color", function() {
@@ -139,7 +143,7 @@
 
                 test("createCircle returns VMLCircle", function() {
                     var circle = view.createCircle();
-                    ok(circle instanceof Chart.VMLCircle);
+                    ok(circle instanceof dataviz.VMLCircle);
                 });
 
                 test("createCircle sets center point", function() {
@@ -172,7 +176,7 @@
 
                 test("createSector returns VMLSector", function() {
                     var sector = view.createSector();
-                    ok(sector instanceof Chart.VMLSector);
+                    ok(sector instanceof dataviz.VMLSector);
                 });
 
                 test("createSector sets fill color", function() {
@@ -195,7 +199,7 @@
 
                 test("createRing returns VMLRing", function() {
                     var ring = view.createRing();
-                    ok(ring instanceof Chart.VMLRing);
+                    ok(ring instanceof dataviz.VMLRing);
                 });
 
                 test("createRing sets fill color", function() {
@@ -235,7 +239,7 @@
                 // ------------------------------------------------------------
                 module("VML View / Decorators", {
                     setup: function() {
-                        view = new Chart.VMLView();
+                        view = new dataviz.VMLView();
 
                         view.decorators.push({
                             decorate: function(element) {
@@ -281,7 +285,7 @@
 
                 module("VMLView", {
                     setup: function() {
-                        view = new Chart.VMLView();
+                        view = new dataviz.VMLView();
                     }
                 });
 
@@ -302,7 +306,7 @@
 
                 module("VMLText", {
                     setup: function() {
-                        text = new Chart.VMLText();
+                        text = new dataviz.VMLText();
                     }
                 });
 
@@ -345,7 +349,7 @@
                 });
 
                 test("clone returns VMLText", function() {
-                    ok(text.clone() instanceof Chart.VMLText);
+                    ok(text.clone() instanceof dataviz.VMLText);
                 });
 
                 test("clone copies content", function() {
@@ -374,7 +378,7 @@
                         }, options
                     );
 
-                    text = new Chart.VMLRotatedText(
+                    text = new dataviz.VMLRotatedText(
                         "test",
                         options
                     );
@@ -494,7 +498,7 @@
                     domElement;
 
                 function createPath(options) {
-                    path = new Chart.VMLPath(options);
+                    path = new dataviz.VMLPath(options);
                 }
 
                 module("VMLPath", {
@@ -529,7 +533,7 @@
                 });
 
                 test("creates stroke", function() {
-                    ok(path.stroke instanceof Chart.VMLStroke);
+                    ok(path.stroke instanceof dataviz.VMLStroke);
                 });
 
                 test("sets stroke color", function() {
@@ -565,7 +569,7 @@
                 });
 
                 test("creates fill", function() {
-                    ok(path.fill instanceof Chart.VMLFill);
+                    ok(path.fill instanceof dataviz.VMLFill);
                 });
 
                 test("sets fill color", function() {
@@ -621,7 +625,7 @@
 
                 module("VMLLine", {
                     setup: function() {
-                        line = new Chart.VMLLine([
+                        line = new dataviz.VMLLine([
                             new Point2D(10, 20),
                             new Point2D(20, 30)
                         ], false);
@@ -653,7 +657,7 @@
 
                 module("VMLStroke", {
                     setup: function() {
-                        stroke = new Chart.VMLStroke();
+                        stroke = new dataviz.VMLStroke();
                     }
                 });
 
@@ -699,7 +703,7 @@
 
                 module("VMLFill", {
                     setup: function() {
-                        fill = new Chart.VMLFill();
+                        fill = new dataviz.VMLFill();
                     }
                 });
 
@@ -740,7 +744,7 @@
 
                 module("VMLGroup", {
                     setup: function() {
-                        group = new Chart.VMLGroup();
+                        group = new dataviz.VMLGroup();
                     }
                 });
 
@@ -766,7 +770,7 @@
                 var circle;
 
                 function createCircle(options) {
-                    circle = new Chart.VMLCircle([10, 20], 10, options);
+                    circle = new dataviz.VMLCircle([10, 20], 10, options);
                 }
 
                 module("VMLCircle", {
@@ -798,7 +802,7 @@
                 });
 
                 test("creates fill", function() {
-                    ok(circle.fill instanceof Chart.VMLFill);
+                    ok(circle.fill instanceof dataviz.VMLFill);
                 });
 
                 test("sets fill color", function() {
@@ -816,7 +820,7 @@
                 });
 
                 test("creates stroke", function() {
-                    ok(circle.stroke instanceof Chart.VMLStroke);
+                    ok(circle.stroke instanceof dataviz.VMLStroke);
                 });
 
                 test("sets stroke color", function() {
@@ -854,7 +858,7 @@
                 var clipRect;
 
                 function createClipRect(options) {
-                    clipRect = new Chart.VMLClipRect(
+                    clipRect = new dataviz.VMLClipRect(
                         new Box2D(10, 20, 110, 220),
                         options
                     );
@@ -898,7 +902,7 @@
                 });
 
                 test("clone returns VMLClipRect", function() {
-                    ok(clipRect.clone() instanceof Chart.VMLClipRect);
+                    ok(clipRect.clone() instanceof dataviz.VMLClipRect);
                 });
 
                 test("clone copies box", function() {
@@ -924,8 +928,8 @@
 
                 module("VMLRing", {
                     setup: function() {
-                        var ringConfig = new Chart.Ring(new Point2D(135, 135), 100, 130, -30, 240);
-                        ring = new Chart.VMLRing(ringConfig);
+                        var ringConfig = new dataviz.Ring(new Point2D(135, 135), 100, 130, -30, 240);
+                        ring = new dataviz.VMLRing(ringConfig);
                     }
                 });
 
@@ -946,8 +950,8 @@
                 var sector;
 
                 function createSector(options) {
-                    sector = new Chart.VMLSector(
-                        new Chart.Sector(
+                    sector = new dataviz.VMLSector(
+                        new dataviz.Sector(
                             new Point2D(0, 0), 150, 90, 20
                         )
                     , options);
@@ -966,7 +970,7 @@
                 });
 
                 test("creates fill", function() {
-                    ok(sector.fill instanceof Chart.VMLFill);
+                    ok(sector.fill instanceof dataviz.VMLFill);
                 });
 
                 test("sets fill color", function() {
@@ -984,7 +988,7 @@
                 });
 
                 test("creates stroke", function() {
-                    ok(sector.stroke instanceof Chart.VMLStroke);
+                    ok(sector.stroke instanceof dataviz.VMLStroke);
                 });
 
                 test("sets stroke color", function() {
@@ -1025,8 +1029,8 @@
                 // ------------------------------------------------------------
                 module("VMLLinearGradient", {
                     setup: function() {
-                        view = new Chart.VMLView();
-                        linearGradient = new Chart.VMLLinearGradient(gradient);
+                        view = new dataviz.VMLView();
+                        linearGradient = new dataviz.VMLLinearGradient(gradient);
                     }
                 });
 
@@ -1061,17 +1065,17 @@
                 // ------------------------------------------------------------
                 module("VMLGradientDecorator", {
                     setup: function() {
-                        view = new Chart.VMLView();
-                        Chart.Gradients.test = gradient;
+                        view = new dataviz.VMLView();
+                        dataviz.Gradients.test = gradient;
                     },
                     teardown: function() {
-                        Chart.Gradients.test = null;
+                        dataviz.Gradients.test = null;
                     }
                 });
 
                 test("applies gradient fill from definition", function() {
                     var path = view.createRect(new Box2D(), { fill: gradient });
-                    ok(path.fill instanceof Chart.VMLLinearGradient);
+                    ok(path.fill instanceof dataviz.VMLLinearGradient);
                 });
 
                 test("applies gradient fill", function() {
@@ -1094,8 +1098,8 @@
 
                 module("VMLOverlayDecorator", {
                     setup: function() {
-                        view = new Chart.VMLView();
-                        rect = new Chart.VMLPath({
+                        view = new dataviz.VMLView();
+                        rect = new dataviz.VMLPath({
                             fill: "#fff",
                             fillOpacity: 0.5,
                             overlay: {
@@ -1103,7 +1107,7 @@
                                 rotation: 90
                             }
                         });
-                        decorator = new Chart.VMLOverlayDecorator(view);
+                        decorator = new dataviz.VMLOverlayDecorator(view);
                         glassyRect = decorator.decorate(rect);
                     }
                 });
@@ -1134,13 +1138,13 @@
 
                 module("VMLClipAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.VMLView({ transitions: true });
-                        rect = new Chart.VMLPath({
+                        view = new dataviz.VMLView({ transitions: true });
+                        rect = new dataviz.VMLPath({
                             animation: {
                                 type: "clip"
                             }
                         });
-                        decorator = new Chart.VMLClipAnimationDecorator(view);
+                        decorator = new dataviz.VMLClipAnimationDecorator(view);
                     }
                 });
 
@@ -1151,12 +1155,12 @@
                 });
 
                 test("wraps element in VMLClipRect", function() {
-                    ok(decorator.decorate(rect) instanceof Chart.VMLClipRect);
+                    ok(decorator.decorate(rect) instanceof dataviz.VMLClipRect);
                 });
 
                 test("registers clip animation", function() {
                     decorator.decorate(rect);
-                    ok(view.animations[0] instanceof Chart.ExpandAnimation);
+                    ok(view.animations[0] instanceof dataviz.ExpandAnimation);
                 });
 
             })();

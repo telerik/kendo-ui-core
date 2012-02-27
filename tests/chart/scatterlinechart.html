@@ -10,11 +10,15 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
                 chartBox = new Box2D(0, 0, 800, 600),
                 scatterLineChart,
                 root,
@@ -25,9 +29,9 @@
             function setupScatterLineChart(plotArea, options) {
                 view = new ViewStub();
 
-                scatterLineChart = new Chart.ScatterLineChart(plotArea, options);
+                scatterLineChart = new dataviz.ScatterLineChart(plotArea, options);
 
-                root = new Chart.RootElement();
+                root = new dataviz.RootElement();
                 root.append(scatterLineChart);
 
                 scatterLineChart.reflow();
@@ -359,7 +363,7 @@
 
                 function createScatterLineChart(options) {
                     plotArea = new PlotAreaStub();
-                    scatterLineChart = new Chart.ScatterLineChart(plotArea, {
+                    scatterLineChart = new dataviz.ScatterLineChart(plotArea, {
                         series: [$.extend({
                             data: [[0, 0], [1, 1]],
                             color: "#f00",

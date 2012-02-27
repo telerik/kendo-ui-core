@@ -10,12 +10,16 @@
     <body>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.chart.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
         <script type="text/javascript">
-            var Chart = kendo.ui.Chart,
-                Box2D = Chart.Box2D,
-                Point2D = Chart.Point2D,
+            var dataviz = kendo.dataviz,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
                 view = new ViewElementStub(),
                 contentElementStub = {
                     render: function() { return "Content"; }
@@ -40,7 +44,7 @@
 
                 module("SVGView", {
                     setup: function() {
-                        view = new Chart.SVGView();
+                        view = new dataviz.SVGView();
                     }
                 });
 
@@ -50,19 +54,19 @@
                 });
 
                 test("sets dimensions", function() {
-                    view = new Chart.SVGView({ width: "100px", height: "100px" });
+                    view = new dataviz.SVGView({ width: "100px", height: "100px" });
                     equal(view.options.width, "100px");
                     equal(view.options.height, "100px");
                 });
 
                 test("createGroup returns SVGGroup", function() {
                     var group = view.createGroup();
-                    ok(group instanceof Chart.SVGGroup);
+                    ok(group instanceof dataviz.SVGGroup);
                 });
 
                 test("createText returns SVGText", function() {
                     var text = view.createText();
-                    ok(text instanceof Chart.SVGText);
+                    ok(text instanceof dataviz.SVGText);
                 });
 
                 test("createText sets content", function() {
@@ -72,7 +76,7 @@
 
                 test("createRect returns SVGLine", function() {
                     var rect = view.createRect(new Box2D(10, 20, 110, 120));
-                    ok(rect instanceof Chart.SVGLine);
+                    ok(rect instanceof dataviz.SVGLine);
                 });
 
                 test("createRect draws rectangle", function() {
@@ -91,7 +95,7 @@
 
                 test("createLine returns SVGLine", function() {
                     var line = view.createLine();
-                    ok(line instanceof Chart.SVGLine);
+                    ok(line instanceof dataviz.SVGLine);
                 });
 
                 test("createLine draws a line", function() {
@@ -101,7 +105,7 @@
 
                 test("createPolyline returns SVGLine", function() {
                     var path = view.createPolyline();
-                    ok(path instanceof Chart.SVGLine);
+                    ok(path instanceof dataviz.SVGLine);
                 });
 
                 test("createPolyline sets closed option", function() {
@@ -135,7 +139,7 @@
 
                 test("createCircle returns SVGCircle", function() {
                     var circle = view.createCircle();
-                    ok(circle instanceof Chart.SVGCircle);
+                    ok(circle instanceof dataviz.SVGCircle);
                 });
 
                 test("createCircle sets center point", function() {
@@ -168,7 +172,7 @@
 
                 test("createRing returns SVGRing", function() {
                     var ring = view.createRing();
-                    ok(ring instanceof Chart.SVGRing);
+                    ok(ring instanceof dataviz.SVGRing);
                 });
 
                 test("createRing sets fill color", function() {
@@ -191,7 +195,7 @@
 
                 test("createSector returns SVGSector", function() {
                     var sector = view.createSector();
-                    ok(sector instanceof Chart.SVGSector);
+                    ok(sector instanceof dataviz.SVGSector);
                 });
 
                 test("createSector sets fill color", function() {
@@ -225,7 +229,7 @@
                 // ------------------------------------------------------------
                 module("SVGView / Rendering", {
                     setup: function() {
-                        view = new Chart.SVGView();
+                        view = new dataviz.SVGView();
                     }
                 });
 
@@ -259,11 +263,11 @@
                 // ------------------------------------------------------------
                 module("SVGView / Gradient fill", {
                     setup: function() {
-                        view = new Chart.SVGView();
-                        Chart.Gradients.test = gradient;
+                        view = new dataviz.SVGView();
+                        dataviz.Gradients.test = gradient;
                     },
                     teardown: function() {
-                        Chart.Gradients.test = null;
+                        dataviz.Gradients.test = null;
                     }
                 });
 
@@ -298,7 +302,7 @@
                 // ------------------------------------------------------------
                 module("SVG View / Decorators", {
                     setup: function() {
-                        view = new Chart.SVGView();
+                        view = new dataviz.SVGView();
 
                         view.decorators.push({
                             decorate: function(element) {
@@ -344,7 +348,7 @@
 
                 module("SVGGroup", {
                     setup: function() {
-                        group = new Chart.SVGGroup();
+                        group = new dataviz.SVGGroup();
                     }
                 });
 
@@ -373,7 +377,7 @@
                         }, options
                     );
 
-                    text = new Chart.SVGText(
+                    text = new dataviz.SVGText(
                         "Text",
                         options
                     );
@@ -494,7 +498,7 @@
                 });
 
                 test("clone returns SVGText", function() {
-                    ok(text.clone() instanceof Chart.SVGText);
+                    ok(text.clone() instanceof dataviz.SVGText);
                 });
 
                 test("clone copies text", function() {
@@ -520,7 +524,7 @@
 
                 module("SVGPath", {
                     setup: function() {
-                        path = new Chart.SVGPath();
+                        path = new dataviz.SVGPath();
                     }
                 });
 
@@ -575,7 +579,7 @@
 
                 module("SVGPath / Dash", {
                     setup: function() {
-                        path = new Chart.SVGPath({ strokeWidth: 1 });
+                        path = new dataviz.SVGPath({ strokeWidth: 1 });
                     }
                 });
 
@@ -619,7 +623,7 @@
                 });
 
                 test("clone returns SVGPath", function() {
-                    ok(path.clone() instanceof Chart.SVGPath);
+                    ok(path.clone() instanceof dataviz.SVGPath);
                 });
 
                 test("clone copies options", function() {
@@ -649,7 +653,7 @@
                 module("SVGLine");
 
                 test("draws line", function() {
-                    line = new Chart.SVGLine([
+                    line = new dataviz.SVGLine([
                         new Point2D(10, 20),
                         new Point2D(20, 30)
                     ], false);
@@ -657,7 +661,7 @@
                 });
 
                 test("draws closed line", function() {
-                    line = new Chart.SVGLine([
+                    line = new dataviz.SVGLine([
                         new Point2D(10, 20),
                         new Point2D(20, 30)
                     ], true);
@@ -669,7 +673,7 @@
                 });
 
                 test("clone returns SVGLine", function() {
-                    ok(line.clone() instanceof Chart.SVGLine);
+                    ok(line.clone() instanceof dataviz.SVGLine);
                 });
 
                 test("clone copies points", function() {
@@ -683,7 +687,7 @@
                 });
 
                 test("align=false skips point coordinate rounding", function() {
-                    line = new Chart.SVGLine([
+                    line = new dataviz.SVGLine([
                         new Point2D(1.503, 2.103),
                         new Point2D(2.506, 3.801)
                     ], false, { align: false })
@@ -697,7 +701,7 @@
 
                 module("SVGCircle", {
                     setup: function() {
-                        circle = new Chart.SVGCircle([10, 20], 30);
+                        circle = new dataviz.SVGCircle([10, 20], 30);
                     }
                 });
 
@@ -750,7 +754,7 @@
 
                 module("SVGClipPath", {
                     setup: function() {
-                        clipPath = new Chart.SVGClipPath();
+                        clipPath = new dataviz.SVGClipPath();
                     }
                 });
 
@@ -771,8 +775,8 @@
 
                 module("SVGSector", {
                     setup: function() {
-                        sector = new Chart.SVGSector(
-                            new Chart.Sector(
+                        sector = new dataviz.SVGSector(
+                            new dataviz.Sector(
                                 new Point2D(135, 135), 135, 90, 20
                             )
                         );
@@ -804,8 +808,8 @@
                 });
 
                 test("renders single pie sector with angle 360", function() {
-                    sector = new Chart.SVGSector(
-                            new Chart.Sector(
+                    sector = new dataviz.SVGSector(
+                            new dataviz.Sector(
                                 new Point2D(135, 135), 135, 90, 360
                             )
                         );
@@ -828,8 +832,8 @@
                 });
 
                 test("renders render curve with angle > 180 degrese", function() {
-                    sector = new Chart.SVGSector(
-                        new Chart.Sector(
+                    sector = new dataviz.SVGSector(
+                        new dataviz.Sector(
                             new Point2D(135, 135), 135, 90, 200
                         )
                     );
@@ -842,7 +846,7 @@
                 });
 
                 test("clone returns SVGSector", function() {
-                    ok(sector.clone() instanceof Chart.SVGSector);
+                    ok(sector.clone() instanceof dataviz.SVGSector);
                 });
 
                 test("clone copies circleSector", function() {
@@ -861,10 +865,10 @@
 
                 module("SVGRing", {
                     setup: function() {
-                        var ringConfig = new Chart.Ring(
+                        var ringConfig = new dataviz.Ring(
                                 new Point2D(135, 135), 100, 135, -30, 240
                             );
-                        ring = new Chart.SVGRing(ringConfig);
+                        ring = new dataviz.SVGRing(ringConfig);
                     }
                 });
 
@@ -889,21 +893,21 @@
 
                 module("SVGOverlayDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView();
-                        rect = new Chart.SVGPath({
+                        view = new dataviz.SVGView();
+                        rect = new dataviz.SVGPath({
                             id: ID,
                             overlay: {
                                 gradient: "glass"
                             }
                         });
-                        decorator = new Chart.SVGOverlayDecorator(view);
+                        decorator = new dataviz.SVGOverlayDecorator(view);
                         group = decorator.decorate(rect);
                         overlay = group.children[1];
                     }
                 });
 
                 test("creates overlay group", function() {
-                    ok(group instanceof Chart.SVGGroup);
+                    ok(group instanceof dataviz.SVGGroup);
                 });
 
                 test("moves id to overlay", function() {
@@ -916,7 +920,7 @@
 
                 test("does not decorate element if no overlay specified", function() {
                     var rect = view.createRect(new Box2D());
-                    ok(rect instanceof Chart.SVGPath);
+                    ok(rect instanceof dataviz.SVGPath);
                 });
 
             })();
@@ -928,14 +932,14 @@
 
                 module("SVGGradientDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView();
-                        rect = new Chart.SVGPath({
+                        view = new dataviz.SVGView();
+                        rect = new dataviz.SVGPath({
                             fill: {
                                 gradient: "glass",
                                 id: "fillId"
                             }
                         });
-                        decorator = new Chart.SVGGradientDecorator(view);
+                        decorator = new dataviz.SVGGradientDecorator(view);
                     }
                 });
 
@@ -950,7 +954,7 @@
                 });
 
                 test("sets transparent fill if gradient is invalid", function() {
-                    var rect = new Chart.SVGPath({ fill: { gradient: "" } });
+                    var rect = new dataviz.SVGPath({ fill: { gradient: "" } });
                     decorator.decorate(rect);
                     equals(rect.options.fill, "none");
                 });
@@ -964,13 +968,13 @@
 
                 module("SVGClipAnimationDecorator", {
                     setup: function() {
-                        view = new Chart.SVGView({ transitions: true });
-                        rect = new Chart.SVGPath({
+                        view = new dataviz.SVGView({ transitions: true });
+                        rect = new dataviz.SVGPath({
                             animation: {
                                 type: "clip"
                             }
                         });
-                        decorator = new Chart.SVGClipAnimationDecorator(view);
+                        decorator = new dataviz.SVGClipAnimationDecorator(view);
                     }
                 });
 
@@ -998,7 +1002,7 @@
 
                 test("registers clip animation", function() {
                     decorator.decorate(rect);
-                    ok(view.animations[0] instanceof Chart.ExpandAnimation);
+                    ok(view.animations[0] instanceof dataviz.ExpandAnimation);
                 });
 
             })();
