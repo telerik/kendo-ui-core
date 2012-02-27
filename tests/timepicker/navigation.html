@@ -183,15 +183,12 @@
                 equal(input.val(), "12:00 AM");
             });
 
-            asyncTest("click arrow should call _click", function() {
+            test("click arrow should call _click", function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
-                timepicker._arrow.mousedown();
+                timepicker._arrow.click();
 
-                setTimeout(function() {
-                    equal(document.activeElement, input[0]);
-                    start();
-                }, 100);
+                equal(document.activeElement, input[0]);
             });
 
             asyncTest("tabbing out should update timeView", function() {

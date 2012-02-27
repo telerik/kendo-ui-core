@@ -117,12 +117,15 @@
 
         that.ul = $('<ul class="k-list k-reset"/>')
                     .css({ overflow: "auto"})
-                    .bind(MOUSEDOWN, options.clearBlurTimeout)
                     .delegate(LI, CLICK, proxy(that._click, that))
                     .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                     .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); });
 
-        that.list = $("<div class='k-list-container'/>").append(that.ul);
+        that.list = $("<div class='k-list-container'/>")
+                    .append(that.ul)
+                    .mousedown(function(e) {
+                        e.preventDefault();
+                    });
 
         that._popup();
 
@@ -468,8 +471,7 @@
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
                     }
-                },
-                clearBlurTimeout: proxy(that._clearBlurTimeout, that)
+                }
             }));
 
             that._icon();
@@ -478,7 +480,6 @@
                 .bind({
                     keydown: proxy(that._keydown, that),
                     focus: function(e) {
-                        clearTimeout(that._bluring);
                         that._inputWrapper.addClass(FOCUSED);
                     },
                     blur: proxy(that._blur, that)
@@ -578,7 +579,7 @@
         enable: function(enable) {
             var that = this,
                 element = that.element,
-                arrow = that._arrow.unbind(CLICK).unbind(MOUSEDOWN),
+                arrow = that._arrow.unbind(CLICK + " " + MOUSEDOWN),
                 wrapper = that._inputWrapper.unbind(HOVEREVENTS);
 
             if (enable === false) {
@@ -597,7 +598,7 @@
                     .removeAttr(DISABLED);
 
                 arrow.bind(CLICK, proxy(that._click, that))
-                     .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that))
+                     .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
         },
 
@@ -711,28 +712,20 @@
         _blur: function() {
             var that = this;
 
-            that._bluring = setTimeout(function() {
-                that._change(that.element.val());
-                if (!touch) {
-                    that.close();
-                }
-                that._inputWrapper.removeClass(FOCUSED);
-            }, 100);
-        },
-
-        _clearBlurTimeout: function() {
-            var that = this;
-
-            if (!touch) {
-                setTimeout(function() {
-                    clearTimeout(that._bluring);
-                    that.element.focus();
-                });
-            }
+            that.close();
+            that._change(that.element.val());
+            that._inputWrapper.removeClass(FOCUSED);
         },
 
         _click: function() {
-            this.timeView.toggle();
+            var that = this,
+                element = that.element;
+
+            if (!touch && element[0] !== document.activeElement) {
+                element.focus();
+            }
+
+            that.timeView.toggle();
         },
 
         _change: function(value) {
@@ -757,7 +750,7 @@
             arrow = element.next("span.k-select");
 
             if (!arrow[0]) {
-                arrow = $('<span class="k-select"><span class="k-icon k-icon-clock">select</span></span>').insertAfter(element);
+                arrow = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-icon-clock">select</span></span>').insertAfter(element);
             }
 
             that._arrow = arrow;

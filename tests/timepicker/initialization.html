@@ -62,13 +62,12 @@
             test("TimeView wire required events of UL", function() {
                 var options = {
                     anchor: input,
-                    format: "hh:mm tt",
-                    clearBlurTimeout: function () { }
+                    format: "hh:mm tt"
                 },
                 tv = new TimeView(options);
 
                 ok(tv.ul.data("events").click);
-                ok(tv.ul.data("events").mousedown);
+                ok(tv.list.data("events").mousedown);
             });
 
             //TimePicker
@@ -116,15 +115,13 @@
                 equal(timeView.options.interval, timepicker.options.interval);
             });
 
-            asyncTest("timepicker wire icon click", function() {
+            test("timepicker wire icon click", function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
                 timepicker.close();
                 timepicker._arrow.click();
-                setTimeout(function() {
-                    ok(timepicker.timeView.popup.visible());
-                    start();
-                }, 200);
+
+                ok(timepicker.timeView.popup.visible());
             });
 
             asyncTest("form reset support", function() {

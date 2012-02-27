@@ -39,28 +39,22 @@
                 }
             });
 
-            asyncTest("blur should call _change event", function() {
-                var timepicker = stub(input.kendoTimePicker().data("kendoTimePicker"), {
-                    _change: function() {},
-                    close: function() {}
-                });
+            test("blur should call _change event", 1, function() {
+                 var timepicker = input.kendoTimePicker({
+                                            change: function() {
+                                                ok(true);
+                                            }
+                                       })
+                                      .data("kendoTimePicker");
 
-                input[0].focus();
+                input.val("10:00 AM").focus();
                 input[0].blur();
-
-                setTimeout(function() {
-                    equal(timepicker.calls("_change"), 1);
-                    equal(timepicker.calls("close"), 1);
-                    ok(!!timepicker._bluring);
-                    start();
-                }, 250);
             });
 
-            asyncTest("raise change event", function() {
+            test("raise change event", 1, function() {
                 var timepicker = input.kendoTimePicker({
                                             change: function() {
                                                 ok(true);
-                                                start();
                                             }
                                        })
                                       .data("kendoTimePicker");
@@ -68,39 +62,32 @@
                 timepicker._change("10:00");
             });
 
-            asyncTest("raise DOM change event", function() {
+            test("raise DOM change event", 1, function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
                 input.bind("change", function() {
                     ok(true);
-                    start();
                 });
 
                 timepicker._change("10:00");
             });
 
-            asyncTest("do not raise change event if no changes", function() {
+            test("do not raise change event if no changes", 0, function() {
                 var timepicker = input.kendoTimePicker({
                                             value: new Date(2000, 10, 10, 10, 0, 0),
                                             change: function() {
                                                 ok(false);
-                                                start();
                                             }
                                        })
                                       .data("kendoTimePicker");
 
                 input.focus().blur();
-
-                setTimeout(function() {
-                    start();
-                }, 300);
             });
 
-            asyncTest("click li raises change event", function() {
+            test("click li raises change event", 1, function() {
                 var timepicker = input.kendoTimePicker({
                                             change: function() {
                                                 ok(true);
-                                                start();
                                             }
                                        })
                                       .data("kendoTimePicker");
@@ -109,12 +96,11 @@
                     timepicker.timeView.ul.find("li:first").click();
             });
 
-            asyncTest("raise open event", function() {
+            test("raise open event", 2, function() {
                 var timepicker = input.kendoTimePicker({
                                             open: function() {
                                                 ok(true);
                                                 ok(this === timepicker);
-                                                start();
                                             }
                                        })
                                       .data("kendoTimePicker");
@@ -122,36 +108,29 @@
                 timepicker._arrow.click();
             });
 
-            asyncTest("raise close event", function() {
+            test("raise close event", 2, function() {
                 var timepicker = input.kendoTimePicker({
                                             close: function() {
                                                 ok(true);
                                                 ok(this === timepicker);
-                                                start();
                                             }
                                        })
                                       .data("kendoTimePicker");
 
                 timepicker.open();
-                setTimeout(function() {
-                    timepicker._arrow.click();
-                }, 200);
+                timepicker._arrow.click();
             });
 
-            asyncTest("raise close event document click", function() {
+            test("raise close event document click", 1, function() {
                 var timepicker = input.kendoTimePicker({
                                             close: function() {
                                                 ok(true);
-                                                start();
                                             }
                                        })
                                       .data("kendoTimePicker");
 
                 timepicker.open();
-
-                setTimeout(function() {
-                    $(document.documentElement).mousedown();
-                }, 200);
+                $(document.documentElement).mousedown();
             });
 
 
