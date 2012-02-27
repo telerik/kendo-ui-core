@@ -348,7 +348,7 @@
                 that.scroller.handlePull({
                     offset: options.pullOffset,
                     startPull: function() {
-                        that.refreshHint.addClass(RELEASECLASS);
+                        that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
                         that.refreshTemplate.html(releaseTemplate({}));
                     },
 

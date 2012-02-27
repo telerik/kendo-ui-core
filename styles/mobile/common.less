@@ -559,7 +559,7 @@
 
 /* Listview */
 
-.km-listview-wrapper > ul
+.km-listview-wrapper > ul:not(.km-listview)
 {
     margin: 0 auto;
 }
@@ -670,6 +670,13 @@
     .transform(translate3d(0,-60px,0));
 }
 
+.km-listview-pull .km-template
+{
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+}
+
 .km-root .km-listview-pull .km-icon
 {
     display: inline-block;
@@ -678,7 +685,7 @@
     vertical-align: middle;
     width: 2em;
     .transform(rotate(0deg));
-    .pTransition(~"transform 400ms linear");
+    .pTransition(~"transform 300ms linear");
 }
 
 .km-root .km-listview-release .km-icon
