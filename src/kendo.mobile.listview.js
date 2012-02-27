@@ -370,6 +370,8 @@
                 contents,
                 view = dataSource.view();
 
+            that.trigger("dataBinding");
+
             if (dataSource.group()[0]) {
                 that.options.type = "group";
                 contents = kendo.render(that.groupTemplate, view);
@@ -387,6 +389,7 @@
 
             kendo.mobile.init(that.element.children());
 
+            that.trigger("dataBound");
             that._style();
         },
 
@@ -441,6 +444,10 @@
             }
         },
 
+        items: function() {
+            return this.element.find(".km-list").andSelf().find(">li");
+        },
+
         _style: function() {
             var that = this,
                 options = that.options,
@@ -469,7 +476,7 @@
                 });
             }
 
-            element.find(".km-list").andSelf().find(">li>a").each(enhanceLinkItem);
+            that.items().find(">a").each(enhanceLinkItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         }
