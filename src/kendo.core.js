@@ -128,7 +128,8 @@
             }
 
             if (events) {
-                for (idx = 0, length = events.length; idx < length; idx++) {
+                //Do not cache the length of the events array as removing events attached through one will fail
+                for (idx = 0; idx < events.length; idx++) {
                     events[idx].call(that, e);
                 }
             }

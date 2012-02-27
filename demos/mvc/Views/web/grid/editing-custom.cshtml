@@ -1,0 +1,84 @@
+        <script src="../../content/shared/js/people.js"></script>
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <script>
+                var products = [ {
+                    "ProductID": 1,
+                        "ProductName": "Chai",
+                        "Category": "Beverages",
+                        "UnitPrice": "18.00"
+                }, {
+                    "ProductID": 2,
+                        "ProductName": "Chang",
+                        "Category": "Beverages",
+                        "UnitPrice": "19.00"
+                }, {
+                    "ProductID": 3,
+                        "ProductName": "Aniseed Syrup",
+                        "Category": "Condiments",
+                        "UnitPrice": "10.00"
+                }, {
+                    "ProductID": 4,
+                        "ProductName": "Chef Anton's Cajun Seasoning",
+                        "Category": "Condiments",
+                        "UnitPrice": "22.00"
+                }, {
+                    "ProductID": 5,
+                        "ProductName": "Chef Anton's Gumbo Mix",
+                        "Category": "Condiments",
+                        "UnitPrice": "21.35"
+                }, {
+                    "ProductID": 6,
+                        "ProductName": "Grandma's Boysenberry Spread",
+                        "Category": "Condiments",
+                        "UnitPrice": "25.00"
+                }];
+
+                $(document).ready(function () {
+                    var dataSource = new kendo.data.DataSource({
+                       pageSize: 30,
+                       data: products,
+                       schema: {
+                           model: {
+                             id: "ProductID",
+                             fields: {
+                                ProductID: { editable: false, nullable: true },
+                                ProductName: { validation: { required: true } },
+                                Category: "Category",
+                                UnitPrice: { type: "number", validation: { required: true, min: 1} }
+                             }
+                           }
+                       }
+                    });
+
+                    $("#grid").kendoGrid({
+                        dataSource: dataSource,
+                        pageable: true,
+                        height: 260,
+                        toolbar: ["create", "save", "cancel"],
+                        columns: [
+                            "ProductName",
+                            { field: "Category", width: "150px", editor: categoryDropDownEditor },
+                            { field: "UnitPrice", format: "{0:c}", width: "150px" },
+                            { command: "destroy", title: " ", width: "110px" }],
+                        editable: true
+                    });
+                });
+
+                function categoryDropDownEditor(container, options) {
+                    $('<input data-text-field="CategoryName" data-value-field="CategoryName" data-bind="value:' + options.field + '"/>')
+                        .appendTo(container)
+                        .kendoDropDownList({
+                            autoBind: false,
+                            dataSource: {
+                                type: "odata",
+                                transport: {
+                                    read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+                                }
+                            }
+                        });
+                }
+
+            </script>
+        </div>
