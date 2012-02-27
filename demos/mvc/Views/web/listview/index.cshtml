@@ -7,14 +7,13 @@
     </div>
 
     <script type="text/x-kendo-tmpl" id="template">
-        <div>
+        <div class="product">
             <img src="../../content/shared/images/foods/${ProductID}.jpg" alt="${ProductName} image" />
+            <h3>${ProductName}</h3>
             <dl>
-                <dt>Product Name</dt>
-                <dd>${ProductName}</dd>
-                <dt>Unit Price</dt>
+                <dt>Unit Price:</dt>
                 <dd>${kendo.toString(UnitPrice, "c")}</dd>
-                <dt>Units In Stock</dt>
+                <dt>Units In Stock:</dt>
                 <dd>${UnitsInStock}</dd>
             </dl>
         </div>
@@ -29,7 +28,7 @@
                             dataType: "jsonp"
                         }
                     },
-                    pageSize: 5
+                    pageSize: 12
                 });
 
             $("#pager").kendoPager({
@@ -43,4 +42,70 @@
         });
     </script>
 
+    <style scoped>
+        .product 
+        {
+        	float: left;
+        	width: 280px;
+        	height: 110px;
+        	margin: 10px;
+        	padding: 0;
+        	-moz-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            box-shadow: inner 0 0 20px rgba(0,0,0,0.2);
+
+        }
+        .product img 
+        {
+        	float: left;
+        	width: 110px;
+        	height: 110px;
+        }
+        .product h3 
+        {
+        	margin: 0;
+        	padding: 5px;
+        	color: #fff;
+        	font-size: 1em;
+        	float: left;
+        	max-width: 120px;
+        	text-transform: uppercase;
+        	background-color: rgb(129,174,20);
+        	-moz-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            -webkit-box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            box-shadow: inner 0 0 20px rgba(0,0,0,0.2);
+        }
+        .product dl 
+        {
+            float: left;
+            margin: 20px 0 0 0;
+        }
+        .product dt, dd
+        {
+        	float: left;
+        	margin: 0;
+        	padding: 0;
+        }
+        .product dt
+        {
+        	clear: left;
+        	width: 80px;
+        	padding: 0 5px 0 20px;
+        	text-align: right;
+        	opacity: 0.6;
+        }
+        .k-listview:after, .product dl:after
+        {
+        	content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        .k-listview 
+        {
+        	border: 0;
+        	padding: 0 0 20px 0
+        }
+    </style>
 </div>
