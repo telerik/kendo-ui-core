@@ -1,8 +1,7 @@
         <div id="example" class="k-content">
-            <div id="gauge" style="width: 300px; height: 300px; border: 2px solid blue;"></div>
+            <div id="gauge" style="width: 300px; height: 300px;"></div>
 
-            <button class="k-button" id="set-10">Set value to 10</button>
-            <button class="k-button" id="set-60">Set value to 60</button>
+            <input id="gauge-value" value="65">
 
             <script>
                 function createGauge() {
@@ -28,19 +27,12 @@
                 $(document).ready(function() {
                     createGauge();
 
-                    //$("#gauge").data("kendoGauge").value(10);
-
-
-                    $("#set-10").click(function(e) {
-                        e.preventDefault();
-
-                        $("#gauge").data("kendoGauge").value(10);
-                    });
-
-                    $("#set-60").click(function(e) {
-                        e.preventDefault();
-
-                        $("#gauge").data("kendoGauge").value(60);
+                    $("#gauge-value").kendoSlider({
+                        min: 0,
+                        max: 180,
+                        change: function() {
+                            $("#gauge").data("kendoGauge").value($("#gauge-value").val());
+                        }
                     });
 
                     $(document).bind("kendo:skinChange", function(e) {
