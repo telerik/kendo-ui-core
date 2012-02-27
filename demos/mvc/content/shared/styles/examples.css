@@ -1375,6 +1375,7 @@ pre.prettyprint
     text-indent:-4444px;
 }
 
+#deviceList .blackberryThumb { background-image: url("blackberry.png"); }
 #deviceList .androidThumb { background-image: url("android.png"); }
 #deviceList .iosThumb { background-image: url("ios.png"); }
 
@@ -1956,6 +1957,10 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
 
 #device-wrapper.android {
     background-image: url("nexus.png");
+}
+
+#device-wrapper.blackberry {
+    background-image: url("blackberrySkin.png");
 }
 
 #device-wrapper,

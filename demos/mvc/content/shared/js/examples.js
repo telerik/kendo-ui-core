@@ -261,7 +261,7 @@
         } catch(err) {}
 
         $(container).removeClass(mobileClasses).addClass("km-" + kendoMobileOS);
-        $("#device-wrapper").removeClass("ios android").addClass(kendoMobileOS);
+        $("#device-wrapper").removeClass("ios android blackberry").addClass(kendoMobileOS);
         $("#deviceList .selectedThumb").removeClass("selectedThumb");
         $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
     }
@@ -290,7 +290,7 @@
         deviceList.find(".thumbLink").click(function () {
             var value = $(this).closest(".thumbLink").children(".thumb").text();
             $(options.container).removeClass(mobileClasses).addClass("km-" + value);
-            $("#device-wrapper").removeClass("blackberry ios android").addClass(value);
+            $("#device-wrapper").removeClass(" ios android blackberry").addClass(value);
             try {
                 sessionStorage.setItem("kendoMobileOS", value);
             } catch(err) {}
