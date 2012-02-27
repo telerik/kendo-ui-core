@@ -2247,6 +2247,7 @@ div.old-browser
     border-spacing: 0;
 }
 
+.prettytable > thead > tr > th,
 .prettytable > tbody > tr > th,
 .prettytable > tfoot > tr > td {
     background-color: #ef652a;
