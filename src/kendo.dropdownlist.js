@@ -152,8 +152,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
-        touch = kendo.support.touch,
-        CLICK = touch ? "touchend" : "click",
+        CLICK = kendo.support.touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         SELECT = "select",
@@ -481,14 +480,11 @@
                         keydown: proxy(that._keydown, that),
                         keypress: proxy(that._keypress, that),
                         focusin: function() {
-                            that._inputWrapper.addClass(FOCUSED);
-                            clearTimeout(that._bluring);
+                            dropDownWrapper.addClass(FOCUSED);
                         },
                         focusout: function(e) {
-                            that._bluring = setTimeout(function() {
-                                that._blur();
-                                that._inputWrapper.removeClass(FOCUSED);
-                            }, 100);
+                            that._blur();
+                            dropDownWrapper.removeClass(FOCUSED);
                         }
                     });
             }
@@ -745,7 +741,7 @@
             setTimeout(function() {
                 that._word += String.fromCharCode(e.keyCode || e.charCode);
                 that._search();
-            }, 0);
+            });
         },
 
         _search: function() {
