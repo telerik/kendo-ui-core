@@ -1872,7 +1872,7 @@
          */
         ui: {
             plugin: function(widget) {
-                kendo.ui.plugin(widget, kendo.dataviz.ui, "DataViz");
+                kendo.ui.plugin(widget, dataviz.ui, "DataViz");
             }
         },
 
@@ -1885,7 +1885,6 @@
 
         Box2D: Box2D,
         BoxElement: BoxElement,
-        CategoryAxis: CategoryAxis,
         ChartElement: ChartElement,
         ExpandAnimation: ExpandAnimation,
         FadeAnimation: FadeAnimation,
@@ -1902,7 +1901,6 @@
         ViewElement: ViewElement,
 
         autoMajorUnit: autoMajorUnit,
-        deepExtend: deepExtend,
         defined: defined,
         measureText: measureText,
         rotatePoint: rotatePoint,
