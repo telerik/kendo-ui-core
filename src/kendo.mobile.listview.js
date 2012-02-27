@@ -254,8 +254,8 @@
                 .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), ITEM_SELECTOR, toggleItemActiveClass)
                 .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
-            that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that._refresh, that));
-            that._template();
+            that.dataSource = DataSource.create(options.dataSource).bind("change", $.proxy(that.refresh, that));
+            that._templates();
 
             if (options.dataSource) {
                 that.dataSource.fetch();
@@ -326,6 +326,11 @@
             style: ""
         },
 
+        setOptions: function(options) {
+            Widget.fn.setOptions.call(this, options);
+            this._templates();
+        },
+
         viewInit: function(view) {
             var that = this,
                 options = that.options,
@@ -361,7 +366,7 @@
             }
         },
 
-        _refresh: function() {
+        refresh: function() {
             var that = this,
                 dataSource = that.dataSource,
                 element = that.element,
@@ -393,7 +398,7 @@
             that._style();
         },
 
-        _template: function() {
+        _templates: function() {
             var that = this,
                 template = that.options.template,
                 headerTemplate = that.options.headerTemplate,
