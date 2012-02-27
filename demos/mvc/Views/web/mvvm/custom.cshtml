@@ -11,7 +11,7 @@
     </div>
     <script>
         kendo.data.binders.slide = kendo.data.Binder.extend( {
-            update: function() {
+            refresh: function() {
                 var value = this.bindings["slide"].get();
 
                 if (value) {
@@ -45,7 +45,7 @@
         <h4 class="code-title">Custom binder source code:</h4>
         <pre class="prettyprint">
 kendo.data.binders.slide = kendo.data.Binder.extend( {
-    update: function() {
+    refresh: function() {
         var value = this.bindings[&quot;slide&quot;].get();
 
         if (value) {
