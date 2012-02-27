@@ -313,7 +313,8 @@
         options: {
             fill: "",
             fillOpacity: 1,
-            strokeOpacity: 1
+            strokeOpacity: 1,
+            rotation: [0,0,0]
         },
 
         render: function() {
@@ -372,13 +373,17 @@
                 points = line.points,
                 i,
                 count = points.length,
-                result = "m " + line._print(points[0]);
+                rotate = function(point) {
+                    var rotation = line.options.rotation;
+                    return rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
+                },
+                result = "m " + line._print(rotate(points[0]));
 
             if (count > 1) {
                 result += " l ";
 
                 for (i = 1; i < count; i++) {
-                    result += line._print(points[i]);
+                    result += line._print(rotate(points[i]));
 
                     if (i < count - 1) {
                         result += ", ";
