@@ -42,6 +42,7 @@
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
         INSIDE = "inside",
+        RADIAL = "radial",
         RIGHT = "right",
         SWING = "swing",
         TOP = "top",
@@ -1475,7 +1476,7 @@
             if (options) {
                 hashCode = getHash(options);
                 overlay = cache[hashCode];
-                definition = Chart.Gradients[options.gradient];
+                definition = dataviz.Gradients[options.gradient];
                 if (!overlay && definition) {
                     overlay = deepExtend({ id: uniqueId() }, definition, options);
                     cache[hashCode] = overlay;
@@ -1485,6 +1486,70 @@
             return overlay;
         }
     });
+
+    dataviz.Gradients = {
+        glass: {
+            type: LINEAR,
+            rotation: 0,
+            stops: [{
+                offset: 0,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.1,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.25,
+                color: WHITE,
+                opacity: 0.3
+            }, {
+                offset: 0.92,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 1,
+                color: WHITE,
+                opacity: 0
+            }]
+        },
+        sharpBevel: {
+            type: RADIAL,
+            stops: [{
+                offset: 0,
+                color: WHITE,
+                opacity: 0.55
+            }, {
+                offset: 0.65,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.95,
+                color: WHITE,
+                opacity: 0
+            }, {
+                offset: 0.95,
+                color: WHITE,
+                opacity: 0.25
+            }]
+        },
+        roundedBevel: {
+            type: RADIAL,
+            stops: [{
+                offset: 0.33,
+                color: WHITE,
+                opacity: 0.06
+            }, {
+                offset: 0.83,
+                color: WHITE,
+                opacity: 0.2
+            }, {
+                offset: 0.95,
+                color: WHITE,
+                opacity: 0
+            }]
+        }
+    };
 
     // Animations =============================================================
     var ElementAnimation = Class.extend({
