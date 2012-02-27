@@ -198,6 +198,20 @@
                 equal(dom.find("option")[0], option);
             });
 
+            test("pushing items to array initializes child bindings", function() {
+                var dom = $('<ul data-bind="source:foo" data-template="ul-template"/>');
+
+                var viewModel = kendo.observable( {
+                    foo: [1, 2]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.foo.push(3, 4);
+
+                equal(dom.find("li:last").text(), "4");
+            });
+
             test("splicing items from array removes option elements without destroying the existing ones", function() {
                 var dom = $('<select data-bind="source:foo"/>');
 
