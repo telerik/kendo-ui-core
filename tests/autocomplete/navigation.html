@@ -23,7 +23,7 @@
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
-            QUnit.config.testTimeout = 800;
+            QUnit.config.testTimeout = 300;
 
             $.fn.press = function(key) {
                 return this.trigger({ type: "keydown", keyCode: key } );
@@ -88,32 +88,29 @@
                 ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
-            asyncTest("clicking an item focuses the input", function() {
+            asyntTest("clicking an item focuses the input", 1, function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
 
                 input.focus(function() {
-                    wasFocused = true;
+                    start();
+                    ok(true);
                 });
 
                 input.val("ba");
                 autocomplete.search();
                 autocomplete.ul.children().first().trigger(CLICK);
-
-                setTimeout( function () {
-                    ok(wasFocused);
-                    start();
-                }, 0);
             });
 
-            asyncTest("pressing enter focuses the input", function() {
+            asyntTest("pressing enter focuses the input", 1, function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
 
                 input.focus(function() {
-                    wasFocused = true;
+                    start();
+                    ok(true);
                 });
 
                 input.val("ba");
@@ -121,11 +118,6 @@
 
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
-
-                setTimeout( function () {
-                    ok(wasFocused);
-                    start();
-                }, 0);
             });
 
             asyncTest("clicking an item applies selected style", function() {

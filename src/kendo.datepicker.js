@@ -132,6 +132,7 @@
 
         if (!sharedCalendar) {
             sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
+            calendar.makeUnselectable(sharedCalendar.element);
         }
 
         that.calendar = sharedCalendar;
@@ -158,7 +159,7 @@
                        .undelegate(CLICK_DATEPICKER)
                        .delegate("td:has(.k-link)", CLICK_DATEPICKER, proxy(that._click, that))
                        .unbind(MOUSEDOWN)
-                       .bind(MOUSEDOWN, options.clearBlurTimeout)
+                       .bind(MOUSEDOWN, function(e) { e.preventDefault(); })
                        .show();
 
                 calendar.unbind(CHANGE)
@@ -186,7 +187,7 @@
             var that = this;
 
             that._calendar();
-            setTimeout( function () { that.popup.open(); });
+            that.popup.open();
         },
 
         close: function() {
@@ -575,7 +576,6 @@
                     that._change(this.value());
                     that.close();
                 },
-                clearBlurTimeout: proxy(that._clearBlurTimeout, that),
                 close: function(e) {
                     if (that.trigger(CLOSE)) {
                         e.preventDefault();
@@ -595,7 +595,6 @@
                 .bind({
                     keydown: proxy(that._keydown, that),
                     focus: function(e) {
-                        clearTimeout(that._bluring);
                         that._inputWrapper.addClass(FOCUSED);
                     },
                     blur: proxy(that._blur, that)
@@ -704,7 +703,7 @@
         */
         enable: function(enable) {
             var that = this,
-                icon = that._icon.unbind(CLICK).unbind(MOUSEDOWN),
+                icon = that._icon.unbind(CLICK + " " + MOUSEDOWN),
                 wrapper = that._inputWrapper.unbind(HOVEREVENTS),
                 element = that.element;
 
@@ -724,7 +723,7 @@
                     .removeAttr(DISABLED);
 
                 icon.bind(CLICK, proxy(that._click, that))
-                    .bind(MOUSEDOWN, proxy(that._clearBlurTimeout, that))
+                    .bind(MOUSEDOWN, function(e) { e.preventDefault(); })
             }
         },
 
@@ -823,35 +822,22 @@
         },
 
         _blur: function() {
-            var that = this,
-                element = that.element,
-                wrapper = that._inputWrapper;
-
-            if (!touch) {
-                that._bluring = setTimeout(function() {
-                    that.close();
-                    that._change(element.val());
-                    wrapper.removeClass(FOCUSED);
-                }, 100);
-            } else {
-                that._change(element.val());
-                wrapper.removeClass(FOCUSED);
-            }
-        },
-
-        _clearBlurTimeout: function() {
             var that = this;
 
-            if (!touch) {
-                setTimeout(function() {
-                    clearTimeout(that._bluring);
-                    that.element.focus();
-                });
-            }
+            that.close();
+            that._change(that.element.val());
+            that._inputWrapper.removeClass(FOCUSED);
         },
 
         _click: function() {
-            this.dateView.toggle();
+            var that = this,
+                element = that.element;
+
+            if (!touch && element[0] !== document.activeElement) {
+                element.focus();
+            }
+
+            that.dateView.toggle();
         },
 
         _change: function(value) {
@@ -887,7 +873,7 @@
             icon = element.next("span.k-select");
 
             if (!icon[0]) {
-                icon = $('<span class="k-select"><span class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
+                icon = $('<span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-icon-calendar">select</span></span>').insertAfter(element);
             }
 
             that._icon = icon;
