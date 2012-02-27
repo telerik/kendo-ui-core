@@ -90,6 +90,16 @@
                 equal(ranges[0].data[0].OrderID, 0);
             });
 
+            test("prefetched data is converted to ObservableArray", function() {
+                var dataSource = remoteDataSource();
+
+                dataSource.prefetch(0, 1);
+
+                var ranges = dataSource._ranges;
+                equal(ranges.length, 1);
+                ok(ranges[0].data instanceof kendo.data.ObservableArray);
+            });
+
             test("prefetch multiple calls for same range does not retrieve data multiple times", function() {
                 var called = 0,
                     dataSource = remoteDataSource(function () {
