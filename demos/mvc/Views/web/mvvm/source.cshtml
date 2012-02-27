@@ -1,5 +1,5 @@
 <div id="example" class="k-content">
-    <table data-template="row-template" data-bind="source: products">
+    <table id="products">
         <thead>
             <tr>
                 <th>Product name</th>
@@ -7,12 +7,33 @@
                 <th>Units in stock</th>
             </tr>
         </thead>
+        <tbody data-template="row-template" data-bind="source: products">
+        </tbody>
+        <tfoot data-template="footer-template" data-bind="source: this">
+        </tfoot>
     </table>
 
-    <div data-template="div-template" data-bind="source: this">
+    <div class="configuration">
+        <span class="configHead">Configuration</span>
+        <span class="configTitle">Add a product</span>
+        <ul class="options">
+            <li>
+                <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" /></label>
+            </li>
+            <li>
+                <label>Price:<input type="number" placeholder="Enter number" data-bind="value: productPrice" /></label>
+            </li>
+            <li>
+                <label>Units in stock:<input type="number" placeholder="Enter number" data-bind="value: productUnitsInStock" /></label>
+            </li>
+            <li>
+                <button class="k-button" data-bind="click: addProduct">Add a new product</button>
+            </li>
+            <li>
+                <button class="k-button" data-bind="click: removeProduct">Remove last product</button>
+            </li>
+        </ul>
     </div>
-
-    <button data-bind="click: removeProduct">Remove last product</button>
 
     <script id="row-template" type="text/x-kendo-template">
         <tr>
@@ -24,29 +45,106 @@
             <td data-bind="text: unitsInStock"></td>
         </tr>
     </script>
-    <script id="div-template" type="text/x-kendo-template">
-        Total number or products: #: total() #
+    <script id="footer-template" type="text/x-kendo-template">
+        <tr>
+            <td>
+                Total number or products: #: total() #
+            </td>
+            <td>
+                Total price: #: totalPrice() #
+            </td>
+            <td>
+                Total units in stock: #: totalUnitsInStock() #
+            </td>
+        </tr>
     </script>
     <script>
         var viewModel = {
-            total: function() {
-                return this.get("products").length;
+            productName: "Product name",
+            productPrice: 10,
+            productUnitsInStock: 10,
+            addProduct: function() {
+                this.get("products").push({
+                    name: this.get("productName"),
+                    price: parseFloat(this.get("productPrice")),
+                    unitsInStock: parseFloat(this.get("productUnitsInStock"))
+                });
             },
-
-            showDetails: function(product) {
-                console.log(product);
-            },
-
             removeProduct: function() {
                 this.get("products").pop();
             },
+            total: function() {
+                return this.get("products").length;
+            },
+            totalPrice: function() {
+                var sum = 0;
 
+                $.each(this.get("products"), function(index, product) {
+                    sum += product.price;
+                });
+
+                return sum;
+            },
+            totalUnitsInStock: function() {
+                var sum = 0;
+
+                $.each(this.get("products"), function(index, product) {
+                    sum += product.unitsInStock;
+                });
+
+                return sum;
+            },
             products: [
                 { name: "Chai", price: 18.00, unitsInStock: 39 },
-                { name: "Chang", price: 19.00, unitsInStock: 17 }
+                { name: "Chang", price: 19.00, unitsInStock: 17 },
+                { name: "Mishi Kobe Niku", price: 97.00, unitsInStock: 29 },
+                { name: "Sir Rodney's Scones", price: 10.00, unitsInStock: 3 }
             ]
         };
 
         kendo.bind($("#example"), viewModel);
     </script>
+    <style scoped>
+
+        #products {
+            border-collapse: separate;
+            border-spacing: 0;
+            float: left;
+        }
+
+        #products th,
+        #products tfoot td {
+            background-color: #ef652a;
+            padding: 9px 6px;
+            color: #fff;
+            text-align: left;
+            line-height: 14px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #d75b26 #d75b26 #d75b26 #f28455;
+        }
+
+        #products td {
+            line-height: 23px;
+            padding: 0 6px;
+            background: #eaeaea;
+            color: #3d3d3d;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #f4f4f4 #d6d6d6 #d6d6d6 #f4f4f4;
+        }
+
+        .configuration {
+            width: 200px;
+        }
+
+        .configuration label {
+            display: block;
+            float: none;
+        }
+
+        .configuration input[type=text] {
+            width: 130px;
+        }
+    </style>
 </div>
