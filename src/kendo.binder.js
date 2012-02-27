@@ -768,13 +768,13 @@
         return result;
     }
 
-    function bindingTargetForRole(role, element) {
-        var type = kendo.ui.roles[role];
+    function bindingTargetForRole(role, element, namespace) {
+        var type = (namespace || kendo.ui).roles[role];
 
         if (type) {
-            kendo.init(element);
+            kendo.init(element, namespace);
 
-            return new WidgetBindingTarget($.data(element, "kendo" + type.fn.options.name));
+            return new WidgetBindingTarget($.data(element, "kendo" + type.fn.options.prefix + type.fn.options.name));
         }
     }
 
@@ -834,7 +834,7 @@
         }
     }
 
-    function bindElement(element, source) {
+    function bindElement(element, source, namespace) {
         var role = element.getAttribute("data-" + kendo.ns+ "role"),
             idx,
             length,
@@ -853,7 +853,7 @@
         unbindElement(element);
 
         if (role) {
-            target = bindingTargetForRole(role, element);
+            target = bindingTargetForRole(role, element, namespace);
         }
 
         bind = element.getAttribute("data-" + kendo.ns + "bind");
@@ -927,14 +927,14 @@
         }
     }
 
-    function bind(dom, object) {
+    function bind(dom, object, namespace) {
         var idx, length;
 
         object = kendo.observable(object);
         dom = $(dom);
 
         for (idx = 0; idx < dom.length; idx++ ) {
-            bindElement(dom[idx], object);
+            bindElement(dom[idx], object, namespace);
         }
     }
 

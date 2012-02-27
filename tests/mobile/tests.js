@@ -33,6 +33,10 @@ tests.push(
         title: "listview databinding"
     },
     {
+        page: "mobile/listview/mvvm.html",
+        title: "listview mvvm"
+    },
+    {
         page: "mobile/navbar.html",
         title: "navbar"
     },
