@@ -23,6 +23,14 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
+        <script id="template" type="text/x-kendo-template">
+            <strong>#:text#</strong>
+        </script>
+
+        <script id="template-with-attributes" type="text/x-kendo-template">
+            <strong data-bind="text:text"></strong>
+        </script>
+
         <script>
             test("initializes a listview when data role is listview", function() {
                 var dom = $('<ul data-role="listview"/>');
@@ -63,6 +71,26 @@
                 dom.kendoMobileListView();
 
                 equal(dom.data("kendoMobileListView").dataSource.at(0).text, "foo");
+            });
+
+            test("binding template", function() {
+                var dom = $('<ul data-role="listview" data-template="template" data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                equal($.trim(dom.find("li:first").html()), "<strong>foo</strong>");
+            });
+
+            test("binding template containing binding attributes", function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}] });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                equal($.trim(dom.find("li:first").html()), '<strong data-bind="text:text">foo</strong>');
             });
 
         </script>
