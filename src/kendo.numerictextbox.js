@@ -483,7 +483,6 @@
 
         _focusin: function() {
             var that = this;
-            clearTimeout(that._bluring);
             that._toggleText(false);
             that.element.focus();
             that._inputWrapper.addClass(FOCUSED);
@@ -491,10 +490,9 @@
 
         _focusout: function() {
             var that = this;
-            that._bluring = setTimeout(function() {
-                that._inputWrapper.removeClass(FOCUSED);
-                that._blur();
-            }, 100);
+
+            that._inputWrapper.removeClass(FOCUSED);
+            that._blur();
         },
 
         _format: function(format) {
@@ -554,6 +552,7 @@
             var that = this,
                 element = e.target,
                 value = element.value;
+
             setTimeout(function() {
                 if (parse(element.value) === NULL) {
                     that._update(value);
@@ -691,7 +690,7 @@
     });
 
     function buttonHtml(className, text) {
-        return '<span unselectable="on" class="k-link"><span class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span></span>'
+        return '<span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span></span>'
     }
 
     function caret(element, position) {
