@@ -1285,7 +1285,7 @@ pre.prettyprint
     padding-left:0;
     padding-right:0;
 }
-            
+
 #downloadMobile
 {
     margin:20px;
@@ -1304,14 +1304,14 @@ pre.prettyprint
     line-height:1;
     font-weight:normal;
 }
-            
+
 #downloadMobile em
 {
     font-style:normal;
     color:#999;
     font-size:10px;
 }
-           
+
 #deviceList li
 {
     padding:0;
@@ -1361,7 +1361,7 @@ pre.prettyprint
 {
     font-style:normal;
     color:#444;
-    font-size:15px; 
+    font-size:15px;
 }
 
 #deviceList .thumb
@@ -1383,7 +1383,7 @@ pre.prettyprint
 {
     color:#444;
 }
-            
+
 #qr
 {
     display:inline-block;
@@ -1391,7 +1391,7 @@ pre.prettyprint
     color:#2175bd;
     text-decoration:none;
 }
-            
+
 #qr:hover
 {
     text-decoration:underline;
@@ -2239,4 +2239,32 @@ div.old-browser
 #navmainWrap .km-share
 {
     clip-path: url("iconmasks.svg#share");
+}
+
+
+.prettytable {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.prettytable th,
+.prettytable tfoot td {
+    background-color: #ef652a;
+    padding: 9px 6px;
+    color: #fff;
+    text-align: left;
+    line-height: 14px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #d75b26 #d75b26 #d75b26 #f28455;
+}
+
+.prettytable td {
+    line-height: 23px;
+    padding: 0 6px;
+    background: #eaeaea;
+    color: #3d3d3d;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f4f4f4 #d6d6d6 #d6d6d6 #f4f4f4;
 }
