@@ -19,10 +19,13 @@ tests.push(
         page: "mobile/buttongroup.html",
         title: "mobile buttongroup"
     },
-
     {
-        page: "mobile/switch.html",
-        title: "mobile switch"
+        page: "mobile/switch/index.html",
+        title: "switch"
+    },
+    {
+        page: "mobile/switch/mvvm.html",
+        title: "switch mvvm"
     },
     {
         page: "mobile/listview/index.html",

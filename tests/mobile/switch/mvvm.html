@@ -1,0 +1,79 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>kendo.ui.MobileSwitch MVVM Tests</title>
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.mobile.swipe.js"></script>
+        <script src="../../../src/kendo.mobile.core.js"></script>
+        <script src="../../../src/kendo.mobile.switch.js"></script>
+        <script src="../../../src/kendo.binder.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.Switch MVVM Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            test("initializes a switch when data role is switch", function() {
+                var dom = $('<input data-role="switch"/>');
+
+                kendo.bind(dom, {}, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileSwitch") instanceof kendo.mobile.ui.Switch);
+            });
+
+            test("initalizes checked value", function() {
+                var dom = $('<input data-role="switch" data-bind="checked:checked" />');
+
+                kendo.bind(dom, { checked: true }, kendo.mobile.ui );
+
+                equal(dom.prop("checked"), true);
+            });
+
+            test("initializes a options from data attributes", function() {
+                var dom = $('<input data-role="switch" data-checked="checked:checked" />');
+
+                kendo.bind(dom, { }, kendo.mobile.ui );
+
+                equal(dom.prop("checked"), true);
+            });
+
+            test("changing a checked value updates the view model", function() {
+                var dom = $('<input data-role="switch" data-bind="checked:checked" />');
+
+                var observable = kendo.observable({ checked: false });
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                dom.data("kendoMobileSwitch").toggle();
+                dom.data("kendoMobileSwitch").trigger("change");
+
+                equal(observable.checked, dom.prop("checked"));
+            });
+
+            test("binding switch initialized before binding", function() {
+                var dom = $('<input data-bind="checked:checked" />');
+
+                var checked = true;
+                var observable = kendo.observable({ checked: checked });
+
+                dom.kendoMobileSwitch();
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                equal(dom.prop("checked"), checked);
+            });
+        </script>
+    </body>
+</html>
+

@@ -97,11 +97,12 @@
             that._animateBackground = true;
 
             checked = that.options.checked;
-            if (checked === undefined) {
+            if (checked === null) {
                 checked = element[0].checked;
             }
 
             that.toggle(checked);
+            kendo.notify(that, kendo.mobile.ui);
         },
 
         events: [
@@ -128,7 +129,8 @@
         options: {
             name: "Switch",
             onLabel: "ON",
-            offLabel: "OFF"
+            offLabel: "OFF",
+            checked: null
         },
 
         /**
