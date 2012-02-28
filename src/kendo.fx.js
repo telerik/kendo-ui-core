@@ -15,6 +15,8 @@
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
         cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
         translateXRegExp = /translatex?$/i,
+        oldEffectsRegExp = /(zoom|fade|expand)(\w+)/,
+        singleEffectRegExp = /(zoom|fade|expand)/,
         transformProps = ["perspective", "rotate", "rotateX", "rotateY", "rotateZ", "rotate3d", "scale", "scaleX", "scaleY", "scaleZ", "scale3d", "skew", "skewX", "skewY", "translate", "translateX", "translateY", "translateZ", "translate3d", "matrix", "matrix3d"],
         cssPrefix = transforms.css,
         round = Math.round,
@@ -140,15 +142,16 @@
         var effects = {};
 
         if (typeof input === "string") {
-            each(input.split(" "), function() {
-                var resolved = this.replace(/(zoom|fade|expand)(\w+)/, function(match, $1, $2) {
+            each(input.split(" "), function(idx, value) {
+                var redirectedEffect = !singleEffectRegExp.test(value),
+                    resolved = value.replace(oldEffectsRegExp, function(match, $1, $2) {
                         return $1 + ":" + $2.toLowerCase();
                     }), // Support for old zoomIn/fadeOut style, now deprecated.
                     effect = resolved.split(":"),
                     direction = effect[1],
                     effectBody = {};
 
-                effect.length > 1 && (effectBody["direction"] = mirror ? kendo.directions[direction].reverse : direction);
+                effect.length > 1 && (effectBody["direction"] = mirror && redirectedEffect ? kendo.directions[direction].reverse : direction);
 
                 effects[effect[0]] = effectBody;
             });
