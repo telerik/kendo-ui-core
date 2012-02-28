@@ -525,6 +525,38 @@
     }
 
     binders.widget = {
+        checked: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                this.widget = widget;
+                this._change = $.proxy(this.change, this);
+                this.widget.bind("change", this._change);
+            },
+            change: function() {
+                this.bindings["checked"].set(this.value());
+            },
+
+            refresh: function() {
+                this.widget.check(this.bindings["checked"].get() === true);
+            },
+
+            value: function() {
+                var element = this.element,
+                    value = element.value;
+
+                if (value == "on" || value == "off") {
+                    value = element.checked;
+                }
+
+                return value;
+            },
+
+            destroy: function() {
+                this.widget.unbind("change", this._change);
+            }
+        }),
+
         source: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);

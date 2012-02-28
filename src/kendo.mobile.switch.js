@@ -97,11 +97,12 @@
             that._animateBackground = true;
 
             checked = that.options.checked;
-            if (checked === undefined) {
+            if (checked === null) {
                 checked = element[0].checked;
             }
 
-            that.toggle(checked);
+            that.check(checked);
+            kendo.notify(that, kendo.mobile.ui);
         },
 
         events: [
@@ -128,25 +129,34 @@
         options: {
             name: "Switch",
             onLabel: "ON",
-            offLabel: "OFF"
+            offLabel: "OFF",
+            checked: null
         },
 
         /**
-        * Toggle the checked state of the widget.
-        * @param {Boolean} check Wether to turn the widget on or off.
+        * Gets/Sets the checked state of the widget.
+        * @param {Boolean} check Whether to turn the widget on or off.
+        * @returns {Boolean} The checked state of the widget.
         * @example
         * <input data-role="switch" id="foo" />;
         *
-        * <script>;
-        *   $("#foo").data("kendoMobileSwitch").toggle(true);
-        * </script>;
+        * <script>
+        *   // get a referene to the switch
+        *   var switch = $("#foo").data("kendoMobileSwitch");
+        *
+        *   // get the checked state of the switch.
+        *   var checked = switch.check();
+        *
+        *   // set the checked state of the switch.
+        *   switch.check(true);
+        * </script>
         */
-        toggle: function(check) {
+        check: function(check) {
             var that = this,
                 element = that.element[0];
 
             if (check === undefined) {
-                check = !element.checked;
+                return element.checked;
             }
 
             that._position(check ? that.constrain : 0);
@@ -154,7 +164,25 @@
             that.wrapper
                 .toggleClass(SWITCHON, check)
                 .toggleClass(SWITCHOFF, !check);
+        },
 
+        /**
+        * Toggle the checked state of the widget.
+        * @example
+        * <input data-role="switch" id="foo" />;
+        *
+        * <script>
+        *   // get a referene to the switch
+        *   var switch = $("#foo").data("kendoMobileSwitch");
+        *
+        *   // toggle the checked state of the switch.
+        *   switch.toggle();
+        * </script>
+        */
+        toggle: function() {
+            var that = this;
+
+            that.check(!that.element[0].checked);
         },
 
         _move: function(e) {
