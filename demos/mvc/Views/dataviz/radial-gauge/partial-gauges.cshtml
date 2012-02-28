@@ -1,52 +1,146 @@
         <div id="example" class="k-content absConf">
-            <div id="gauge-container"></div>
+            <div id="gauge-container">
+                <div id="rpm"></div>
+                <div id="kmh"></div>
+                <div id="fuel"></div>
+                <div id="water-temprature"></div>
+            </div>
 
             <script>
-                var index = 0;
 
-                function createGauge(startAngle, endAngle) {
-                    $("<div id='gauge-" + (++index) + "' />")
-                        .appendTo("#gauge-container")
-                        .kendoGauge({
-                            theme: $(document).data("kendoSkin") || "default",
+                function createDashboard() {
+                    $("#rpm").kendoGauge({
+                        theme: "black",
 
-                            pointer: {
-                                value: 2
+                        pointer: {
+                            value: 2
+                        },
+
+                        scale: {
+                            startAngle: -45,
+                            endAngle: 120,
+
+                            min: 0,
+                            max: 6,
+
+                            majorUnit: 1,
+                            majorTicks: {
+                                size: 6
                             },
 
-                            scale: {
-                                startAngle: startAngle,
-                                endAngle: endAngle,
+                            minorUnit: .1,
+                            minorTicks: {
+                                size: 4
+                            },
 
-                                min: -5,
-                                max: 5,
+                            ranges: [{
+                                from: 4,
+                                to: 5,
+                                color: "#ff7a00"
+                            }, {
+                                from: 5,
+                                to: 6,
+                                color: "#c20000"
+                            }]
+                        }
+                    });
 
-                                majorUnit: 2,
-                                majorTickSize: 6,
+                    $("#kmh").kendoGauge({
+                        theme: "black",
 
-                                ranges: [
-                                    {
-                                        from: 1,
-                                        to: 3,
-                                        color: "#ff7a00"
-                                    }, {
-                                        from: 3,
-                                        to: 5,
-                                        color: "#c20000"
-                                    }
-                                ]
-                            }
-                        });
+                        pointer: {
+                            value: 68
+                        },
+
+                        scale: {
+                            startAngle: -60,
+                            endAngle: 240,
+
+                            min: 0,
+                            max: 220,
+
+                            minorTicks: {
+                                size: 10
+                            },
+
+                            majorTicks: {
+                                size: 14
+                            },
+
+                            minorUnit: 2
+                        }
+                    });
+
+                    $("#fuel").kendoGauge({
+                        theme: "black",
+
+                        pointer: {
+                            value: .3
+                        },
+
+                        scale: {
+                            startAngle: 90,
+                            endAngle: 180,
+
+                            min: 0,
+                            max: 1,
+
+                            minorUnit: .1,
+
+                            majorUnit: .5,
+
+                            labels: {
+                                font: "9px Arial,Helvetica,sans-serif"
+                            },
+
+                            ranges: [{
+                                from: 0,
+                                to: .1,
+                                color: "#c20000"
+                            }]
+                        }
+                    });
+
+                    $("#water-temprature").kendoGauge({
+                        theme: "black",
+
+                        pointer: {
+                            value: 68
+                        },
+
+                        scale: {
+                            startAngle: 180,
+                            endAngle: 270,
+
+                            min: 60,
+                            max: 120,
+
+                            majorUnit: 30,
+
+                            minorUnit: 10,
+
+                            labels: {
+                                font: "9px Arial,Helvetica,sans-serif"
+                            },
+
+                            ranges: [{
+                                from: 90,
+                                to: 100,
+                                color: "#ff7a00"
+                            }, {
+                                from: 100,
+                                to: 120,
+                                color: "#c20000"
+                            }]
+                        }
+                    });
                 }
 
                 $(document).ready(function() {
-                    createGauge(0, 110);
-                    createGauge(0, 180);
-                    createGauge(150, 210);
-                    createGauge(-90, 180);
+                    createDashboard();
 
                     $(document).bind("kendo:skinChange", function(e) {
-                        createGauge();
+                        createDashboard();
                     });
                 });
             </script>
@@ -55,14 +149,40 @@
                 #gauge-container {
                     margin: 0 auto;
                     overflow: hidden;
-                    width: 400px;
-                    height: 400px;
+                    width: 614px;
+                    height: 324px;
+
+                    background: transparent url("../../content/dataviz/gauge/car-dashboard.png") no-repeat 50% 50%;
                 }
 
                 .k-gauge {
-                    width: 50%;
-                    height: 50%;
                     float: left;
+                }
+
+                #rpm {
+                    width: 142px;
+                    height: 147px;
+                    margin: 85px 0 0 38px;
+                }
+
+                #kmh {
+                    width: 216px;
+                    height: 216px;
+                    margin: 57px 0 0 20px;
+                }
+
+                #fuel {
+                    width: 120px;
+                    height: 76px;
+
+                    margin: 87px 0 0 36px;
+                }
+
+                #water-temprature {
+                    width: 120px;
+                    height: 76px;
+
+                    margin: 0 0 0 36px;
                 }
             </style>
         </div>
