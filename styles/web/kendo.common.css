@@ -1520,6 +1520,7 @@ span.k-dropdown
 
 .k-widget,
 .k-chart,
+.k-gauge,
 .k-grid,
 .k-slider,
 .k-splitter,
@@ -3367,9 +3368,15 @@ html input.k-breadcrumbs-input
 
 /* Chart */
 
-div.k-chart
+div.k-chart,
+div.k-gauge
 {
     background-color: transparent;
+}
+
+.k-gauge
+{
+    text-align: left;
 }
 
 /* IE7 inline-block behavior */
