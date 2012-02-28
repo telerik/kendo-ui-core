@@ -448,6 +448,10 @@
                     "url": "treeview/dragdrop.html"
                 },
                 {
+                    "text": "Animation effects",
+                    "url": "treeview/animation.html"
+                },
+                {
                     "text": "Images",
                     "url": "treeview/images.html"
                 },
@@ -500,6 +504,10 @@
                 {
                     "text": "Loading content with AJAX",
                     "url": "window/ajax.html"
+                },
+                {
+                    "text": "Animation effects",
+                    "url": "window/animation.html"
                 },
                 {
                     "text": "Events",
