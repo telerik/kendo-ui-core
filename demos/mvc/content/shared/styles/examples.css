@@ -725,6 +725,7 @@ a.bigButton
     float: left;
     margin-top: 4px;
     margin-right: 8px;
+    -webkit-transform: translatez(0);
 }
 
 /*footer*/
