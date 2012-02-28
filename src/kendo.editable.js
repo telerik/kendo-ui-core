@@ -8,6 +8,8 @@
         inArray = $.inArray,
         Binder = kendo.data.ModelViewBinder,
         Validator = ui.Validator,
+        ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
+                    '${message}<div class="k-callout k-callout-n"></div></div>',
         CHANGE = "change";
 
     var specialRules = ["url", "email", "number", "date", "boolean"];
@@ -87,7 +89,8 @@
         options: {
             name: "Editable",
             editors: editors,
-            clearContainer: true
+            clearContainer: true,
+            errorTemplate: ERRORTEMPLATE
         },
 
         editor: function(field, modelField) {
@@ -169,8 +172,10 @@
 
             that.validatable = container.kendoValidator({
                 validateOnBlur: false,
-                errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
-                                '${message}<div class="k-callout k-callout-n"></div></div>', rules: rules }).data("kendoValidator");
+                errorTemplate: that.options.errorTemplate || undefined,
+                /*errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
+                    '${message}<div class="k-callout k-callout-n"></div></div>', */
+                rules: rules }).data("kendoValidator");
 
             container.find(":input:visible:first").focus();
         }
