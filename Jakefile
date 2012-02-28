@@ -12,6 +12,7 @@ var path = require("path"),
 // Configuration ==============================================================
 var CDN_ROOT = "http://cdn.kendostatic.com/",
     SOURCE_PATH = "src",
+    DOCS_PATH = path.join(SOURCE_PATH, "docs"),
     STYLES_PATH = "styles",
     SCRIPTS_PATH = "js",
     DEPLOY_PATH = "deploy",
@@ -249,10 +250,20 @@ function buildDocs(sitefinity_path) {
 
     kendoBuild.rmdirSyncRecursive(outputPath);
 
-    var sourceFiles = fs.readdirSync(SOURCE_PATH).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } );
-    for (var i = 0; i < sourceFiles.length; i++) {
-        params.push(path.join(SOURCE_PATH, sourceFiles[i]));
+    function enumerateSourceFiles(sourcePath) {
+        var files = fs.readdirSync(sourcePath).filter(function(file) { return file.indexOf(".js") > -1 && file.indexOf("jquery") === -1 } ),
+            paths = [];
+
+        for (var i = 0; i < files.length; i++) {
+            paths.push(path.join(sourcePath, files[i]));
+        }
+
+        return paths;
     }
+
+    params = params
+                .concat(enumerateSourceFiles(SOURCE_PATH))
+                .concat(enumerateSourceFiles(DOCS_PATH));
 
     jsdoctoolkit.run(params);
 
