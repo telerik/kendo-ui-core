@@ -106,7 +106,7 @@ namespace Kendo.Controllers
             } else {
                 switch(suite) {
                     case "dataviz":
-                        component = "ui.chart";
+                        component = "dataviz.ui.chart";
                         break;
                     case "mobile":
                         component = "mobile.ui." + component;
