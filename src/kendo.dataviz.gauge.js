@@ -272,6 +272,7 @@
                 padding = labelsOptions.padding,
                 ringDistance = scale.options.ringDistance = ring.r * 0.05,
                 ringSize = scale.options.ringSize = ring.r * 0.1,
+                ranges = options.ranges || [],
                 halfWidth,
                 halfHeight,
                 labelAngle,
@@ -283,7 +284,7 @@
                 cy,
                 isInside;
 
-            if (labelsOptions.position === INSIDE && options.ranges.length) {
+            if (labelsOptions.position === INSIDE && ranges.length) {
                 ring.r -= ringSize + ringDistance;
                 ring.ir -= ringSize + ringDistance;
             }
