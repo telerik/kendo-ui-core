@@ -11,6 +11,7 @@ app.js
 deploy/
 demos/examples/shared/js/kendo.examples.js
 docs/
+!src/docs
 live/
 node_modules
 obj/
