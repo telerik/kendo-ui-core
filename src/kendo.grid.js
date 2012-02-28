@@ -1136,6 +1136,9 @@
 
 
             if ((!model.editable || model.editable(column.field)) && !column.command) {
+
+                that._attachModelChange(model);
+
                 that._editContainer = cell;
 
                 that.editable = cell.addClass("k-edit-cell")
@@ -1159,6 +1162,8 @@
             var that = this;
 
             if (that.editable) {
+                that._detachModelChange();
+
                 that.editable.distroy();
                 delete that.editable;
 
@@ -1167,6 +1172,26 @@
                 }
 
                 that._editContainer = null;
+            }
+        },
+
+        _attachModelChange: function(model) {
+            var that = this;
+
+            that._modelChangeHandler = function(e) {
+                that._modelChange({ field: e.field, model: this });
+            };
+
+            model.bind("change", that._modelChangeHandler);
+        },
+
+        _detachModelChange: function() {
+            var that = this,
+                container = that._editContainer,
+                model = that._modelForContainer(container);
+
+            if (model) {
+                model.unbind(CHANGE, that._modelChangeHandler);
             }
         },
 
@@ -1187,13 +1212,14 @@
 
             cell.parent().removeClass("k-grid-edit-row");
 
+            that._distroyEditable(); // editable should be destoryed before content of the container is changed
+
             that._displayCell(cell, column, model);
 
             if (cell.hasClass("k-dirty-cell")) {
                 $('<span class="k-dirty"/>').prependTo(cell);
                 cell.removeClass("k-dirty-cell");
             }
-            that._distroyEditable();
         },
 
         _displayCell: function(cell, column, dataItem) {
@@ -1270,6 +1296,9 @@
             that.cancelRow();
 
             if (model) {
+
+                that._attachModelChange(model);
+
                 if (that._editMode() === "popup") {
                     that._createPopUpEditor(model);
                 } else {
@@ -2031,7 +2060,7 @@
 
         _modelChange: function(e) {
             var that = this,
-                model = e.items[0],
+                model = e.model,
                 row = that.tbody.find("tr[" + kendo.attr("uid") + "=" + model.uid +"]"),
                 cell,
                 column,
@@ -2816,8 +2845,7 @@
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
 
-            if (e && e.action === "itemchange") {
-                that._modelChange(e);
+            if (e && e.action === "itemchange" && that.editable) { // skip rebinding if editing is in progress
                 return;
             }
 

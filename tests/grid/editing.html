@@ -199,6 +199,17 @@
                 ok(cell.find(":input").length);
             });
 
+            test("model change handlers are distroyed", function() {
+                var grid = setup();
+
+                grid.editCell(table.find("td:first"));
+                grid.closeCell();
+                grid.editCell(table.find("td:first"));
+                grid.closeCell();
+
+                equal(dataSource.at(0)._events["change"].length, 1);
+            });
+
             test("clicking on k-hierarchy-cell does not edit the cell", function() {
                 setup({ detailTemplate: "" });
 
@@ -635,26 +646,6 @@
                 cell.find("input").val("baz").change();
                 grid.closeCell();
                 ok(cell.find("span.k-dirty").length);
-            });
-
-            test("dirty flag is shown for modified cell", function() {
-                var grid = setup({
-                    dataSource: new DataSource({
-                        schema: {
-                            model: {
-                                id: "foo",
-                                fields: {
-                                    foo: "foo"
-                                }
-                            }
-                        },
-                        data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
-                    })
-                });
-
-                dataSource.get("bar").set("name", "moo");
-
-                ok(table.find("tr:first > td").eq(1).find("span.k-dirty").length);
             });
 
             test("editing row passes column fields to Editable", function() {
