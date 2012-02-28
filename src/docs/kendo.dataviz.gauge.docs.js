@@ -5,7 +5,38 @@
      *
      * @section
      * <p>
-     * The Gauge...
+     * @section
+     * <p>
+     * The Gauge widget uses modern browser technologies to render dynamic data.
+     * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
+     * </p>
+     *
+     * <p>
+     * Supported gauge types:
+     * </p>
+     * <ul>
+     *     <li>Radial</li>
+     * </ul>
+     *
+     * <p>
+     * Please visit the Kendo UI Road Map for additional information about
+     * new Gauge types and features.
+     * </p>
+     *
+     * <h3>
+     * Getting Started
+     * </h3>
+     * @exampleTitle
+     * 1. Create a simple HTML div (optionally set a height and width with CSS)
+     * @example
+     * <div id="gauge"></div>
+     *
+     * @exampleTitle
+     * 2. Initialize the Kendo UI Gauge with default configuration
+     * @example
+     *    $(document).ready(function() {
+     *        $("#gauge").kendoGauge();
+     *    });
      * </p>
      */
      var GaugeDocs = /** @lends kendo.dataviz.ui.Gauge.prototype */ {
