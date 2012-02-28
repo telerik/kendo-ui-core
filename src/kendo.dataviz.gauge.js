@@ -25,7 +25,6 @@
         defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
         round = dataviz.round,
-        supportsSVG = dataviz.supportsSVG,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
@@ -604,8 +603,8 @@
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
                 plotArea = gauge._plotArea = model._plotArea,
-                viewClass = gauge._supportsSVG() ? dataviz.SVGView : dataviz.VMLView,
-                view = gauge._view = viewClass.fromModel(model);
+                viewType = dataviz.ui.defaultView(),
+                view = gauge._view = viewType.fromModel(model);
 
             element.css("position", "relative");
             gauge._viewElement = view.renderTo(element[0]);
@@ -645,9 +644,7 @@
                 view = Chart.SVGView.fromModel(model);
 
             return view.render();
-        },
-
-        _supportsSVG: supportsSVG
+        }
     });
 
     var PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
