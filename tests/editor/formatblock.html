@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -18,6 +25,8 @@
 </head>
 <body>
 
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
 <script>
 
 $("#Editor1").kendoEditor();
@@ -26,17 +35,18 @@ QUnit.testStart = function() {
     editor = getEditor();
 }
 
+// fails due to DropDownList usage, instead of selectBox
 test('tool should display format initially', function() {
     editor.value('');
     editor.focus();
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
     equal($('.k-formatBlock .k-input').text(), 'Format')
 });
 
 test('tool displays known values', function() {
     var range = createRangeFromText(editor, '<p>|foo|</p>');
     editor.selectRange(range);
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
     equal($('.k-formatBlock .k-input').text(), 'Paragraph')
 });
 
@@ -49,8 +59,6 @@ test('tool displays known values', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

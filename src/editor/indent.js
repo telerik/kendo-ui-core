@@ -6,9 +6,11 @@ var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
-    registerTool = Editor.EditorUtils.registerTool,
+    EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
     RangeUtils = Editor.RangeUtils,
     blockElements = dom.blockElements,
     BlockFormatFinder = Editor.BlockFormatFinder,
@@ -158,8 +160,8 @@ var OutdentCommand = Command.extend({
 });
 
 var OutdentTool = Tool.extend({
-    init: function() {
-        Tool.fn.init.call(this, {command:OutdentCommand});
+    init: function(options) {
+        Tool.fn.init.call(this, extend(options, {command:OutdentCommand}));
 
         this.finder = new BlockFormatFinder([{tags:blockElements}]);  
     },
@@ -200,7 +202,7 @@ extend(kendo.ui.Editor, {
     OutdentTool: OutdentTool
 });
 
-registerTool("indent", new Tool({ command: IndentCommand }));
-registerTool("outdent", new OutdentTool());
+registerTool("indent", new Tool({ command: IndentCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Indent"}) }));
+registerTool("outdent", new OutdentTool({template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Outdent"})}));
 
 })(jQuery);

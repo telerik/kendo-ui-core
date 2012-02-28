@@ -5,8 +5,10 @@ var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
-    registerTool = Editor.EditorUtils.registerTool,
-    RangeUtils = Editor.RangeUtils
+    EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool,
+    ToolTemplate = Editor.ToolTemplate,
+    RangeUtils = Editor.RangeUtils,
     Command = Editor.Command;
 
 var ImageCommand = Command.extend({
@@ -48,6 +50,7 @@ var ImageCommand = Command.extend({
 
     exec: function () {
         var self = this,
+            insertImage = self.insertImage,
             range = self.lockRange(),
             applied = false,
             img = RangeUtils.image(range);
@@ -58,7 +61,7 @@ var ImageCommand = Command.extend({
                 alt: $('#k-editor-image-title', dialog.element).val()
             };
 
-            applied = insertImage(img, range);
+            applied = self.insertImage(img, range);
 
             close(e);
 
@@ -84,24 +87,22 @@ var ImageCommand = Command.extend({
 //            }
         }        
         
-        var dialog = $t.window.create(extend({ width: 750 }, this.editor.options.dialogOptions, {
-            title: "Insert image",
-            html: new $.telerik.stringBuilder()
-                        .cat('<div class="k-editor-dialog">')                        
-                            .catIf('<div class="k-image-browser"></div>', showBrowser)
-                            .cat('<ol>')
-                                .cat('<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>')
-                                .cat('<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>')
-                            .cat('</ol>')
-                            .cat('<div class="k-button-wrapper">')
-                                .cat('<button class="k-dialog-insert k-button">Insert</button>')
-                                .cat('&nbsp;or&nbsp;')
-                                .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
-                            .cat('</div>')
-                        .cat('</div>')
-                    .string(),
-            onClose: close,
-            onActivate: activate
+        var windowContent =
+            '<div class="k-editor-dialog">' +
+                '<ol>' +
+                    '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
+                    '<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>' +
+                '</ol>' +
+                '<div class="k-button-wrapper">' +
+                    '<button class="k-dialog-insert k-button">Insert</button>' +
+                    '&nbsp;or&nbsp;' +
+                    '<a href="#" class="k-dialog-close k-link">Close</a>' +
+                '</div>' +
+            '</div>'
+
+        var dialog = $(windowContent).appendTo(document.body).kendoWindow(extend(this.editor.options.dialogOptions, {
+            title: "Insert Image",
+            close: close
         }))
         .hide()
         .find('.k-dialog-insert').click(apply).end()
@@ -117,7 +118,8 @@ var ImageCommand = Command.extend({
         .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
         .find('#k-editor-image-title').val(img ? img.alt : '').end()
         .show()
-        .data('tWindow').center();
+        .data('kendoWindow')
+        .center();
 
         $('#k-editor-image-url', dialog.element).focus().select();
     }
@@ -128,6 +130,6 @@ extend(kendo.ui.Editor, {
     ImageCommand: ImageCommand
 });
 
-registerTool("insertImage", new Editor.Tool({ command: ImageCommand }));
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Insert Image"}) }));
 
 })(jQuery);

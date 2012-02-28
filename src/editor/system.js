@@ -5,11 +5,13 @@
         kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
-        registerTool = Editor.EditorUtils.registerTool,
+        EditorUtils = Editor.EditorUtils,
+        registerTool = EditorUtils.registerTool,
         dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
         selectRange = RangeUtils.selectRange,
         Tool = Editor.Tool,
+        ToolTemplate = Editor.ToolTemplate,
         RestorePoint = Editor.RestorePoint,
         Marker = Editor.Marker,
         extend = $.extend;
@@ -58,16 +60,18 @@ var Command = Class.extend({
 var GenericCommand = Class.extend({
     init: function(startRestorePoint, endRestorePoint) {
         this.body = startRestorePoint.body;
+        this.startRestorePoint = startRestorePoint;
+        this.endRestorePoint = endRestorePoint;
     },
 
     redo: function () {
-        this.body.innerHTML = endRestorePoint.html;
-        selectRange(endRestorePoint.toRange());
+        this.body.innerHTML = this.endRestorePoint.html;
+        selectRange(this.endRestorePoint.toRange());
     },
 
     undo: function () {
-        this.body.innerHTML = startRestorePoint.html;
-        selectRange(startRestorePoint.toRange());
+        this.body.innerHTML = this.startRestorePoint.html;
+        selectRange(this.startRestorePoint.toRange());
     }
 });
 
@@ -83,7 +87,7 @@ var InsertHtmlCommand = Command.extend({
         var range = editor.getRange();
         var startRestorePoint = new RestorePoint(range);
 
-        editor.clipboard.paste(options.value || '');
+        editor.clipboard.paste(this.options.value || '');
         editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
 
         editor.focus();
@@ -95,12 +99,12 @@ var InsertHtmlTool = Tool.extend({
         var editor = initOptions.editor;
         var title = editor.options.localization.insertHtml;
         
-        $ui.tSelectBox({
+        $ui.kendoDropDownList({
             data: editor['insertHtml'],
-            onItemCreate: function (e) {
+            itemCreate: function (e) {
                 e.html = '<span unselectable="on">' + e.dataItem.Text + '</span>';
             },
-            onChange: function (e) {
+            change: function (e) {
                 Tool.exec(editor, 'insertHtml', e.value);
             },
             highlightFirst: false
@@ -112,7 +116,7 @@ var InsertHtmlTool = Tool.extend({
     },
 
     update: function($ui, nodes) {
-        var list = $ui.data('tSelectBox');
+        var list = $ui.data('kendoDropDownList');
         list.close();
         list.value(title);
     }
@@ -260,8 +264,12 @@ var Keyboard = Class.extend({
         for (var toolName in tools) {
             var toolOptions = tools[toolName].options || {};
 
-            if ((toolOptions.key == key || toolOptions.key == e.keyCode) && !!toolOptions.ctrl == e.ctrlKey && !!toolOptions.alt == e.altKey && !!toolOptions.shift == e.shiftKey)
+            if ((toolOptions.key == key || toolOptions.key == e.keyCode)
+                && !!toolOptions.ctrl == e.ctrlKey 
+                && !!toolOptions.alt == e.altKey 
+                && !!toolOptions.shift == e.shiftKey) {
                 return toolName;
+            }
         }
     },
 
@@ -391,7 +399,7 @@ var Clipboard = Class.extend({
             editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
-            Editor.EditorUtils.selectionChanged(editor);
+            Editor.EditorUtils.select(editor);
         });
     },
 
@@ -468,7 +476,7 @@ var Clipboard = Class.extend({
             dom.unwrap(caret.parentNode);
         }
             
-        normalize(range.commonAncestorContainer);
+        dom.normalize(range.commonAncestorContainer);
         caret.style.display = 'inline';
         dom.scrollTo(caret);
         marker.removeCaret(range);
@@ -595,6 +603,6 @@ extend(kendo.ui.Editor, {
     MSWordFormatCleaner: MSWordFormatCleaner
 });
 
-registerTool("insertHtml", new InsertHtmlTool());
+registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Insert HTML", initialValue: "Insert HTML"})}));
 
 })(jQuery);

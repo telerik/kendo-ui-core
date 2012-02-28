@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -46,7 +55,7 @@ test('applyFormat applies block format on full selection', function() {
     range.setStart(pararagraph, 0);
     range.setEnd(pararagraph, 13);
 
-    impl.formatRange(range, editor.formats.justifyCenter);
+    impl.formatRange(range, editor.options.formats.justifyCenter);
             
     equal(editor.value(), '<p style="text-align:center;">golgafrincham</p>');
 });
@@ -59,7 +68,7 @@ test('applyFormat applies block format on partial selection', function() {
     range.setStart(pararagraph, 5);
     range.setEnd(pararagraph, 10);
 
-    impl.formatRange(range, editor.formats.justifyCenter);
+    impl.formatRange(range, editor.options.formats.justifyCenter);
             
     equal(editor.value(), '<p style="text-align:center;">golgafrincham</p>');
 });
@@ -72,7 +81,7 @@ test('applyFormat applies block format on partial selection with line break', fu
     range.setStart(pararagraph.firstChild, 2);
     range.setEnd(pararagraph.lastChild, 4);
 
-    impl.formatRange(range, editor.formats.justifyCenter);
+    impl.formatRange(range, editor.options.formats.justifyCenter);
             
     equal(editor.value(), '<p style="text-align:center;">golga<br />frincham</p>');
 });
@@ -84,7 +93,7 @@ test('applyFormat applies block format on block level around selection', functio
     range.setStart(editor.body.firstChild, 5);
     range.setEnd(editor.body.firstChild, 9);
 
-    impl.formatRange(range, editor.formats.justifyCenter);
+    impl.formatRange(range, editor.options.formats.justifyCenter);
             
     equal(editor.value(), '<div style="text-align:center;">golgafrincham</div>');
 });
@@ -98,8 +107,6 @@ test('applyFormat applies block format on block level around selection', functio
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

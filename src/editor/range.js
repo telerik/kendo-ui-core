@@ -622,27 +622,31 @@ var RestorePoint = Class.extend({
 });
 
 var Marker = Class.extend({
-    addCaret: function (range) {
-        var caret = this.caret;
+    init: function() {
+        this.caret = null;
+    },
 
-        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
-        range.insertNode(caret);
-        range.selectNode(caret);
-        return caret;
+    addCaret: function (range) {
+        var that = this;
+
+        that.caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
+        range.insertNode(that.caret);
+        range.selectNode(that.caret);
+        return that.caret;
     },
 
     removeCaret: function (range) {
-        var caret = this.caret,
-            previous = caret.previousSibling;
+        var that = this,
+            previous = that.caret.previousSibling;
             startOffset = 0;
             
         if (previous)
             startOffset = isDataNode(previous) ? previous.nodeValue.length : findNodeIndex(previous);
 
-        var container = caret.parentNode;
+        var container = that.caret.parentNode;
         var containerIndex = previous ? findNodeIndex(previous) : 0;
 
-        dom.remove(caret);
+        dom.remove(that.caret);
         normalize(container);
 
         var node = container.childNodes[containerIndex];

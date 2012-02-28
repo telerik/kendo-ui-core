@@ -6,9 +6,12 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
+    EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
     InlineFormatter = Editor.InlineFormatter,
+    InlineFormatFinder = Editor.InlineFormatFinder,
     textNodes = RangeUtils.textNodes,
     registerTool = Editor.EditorUtils.registerTool;
 
@@ -92,7 +95,7 @@ var LinkCommand = Command.extend({
 
                 var text = $('#k-editor-link-text', dialog.element).val();
                 if (text !== initialText)
-                    self.attributes.innerHTML = text;
+                    self.attributes.innerHTML = text || href;
 
                 var target = $('#k-editor-link-target', dialog.element).is(':checked');
                 if (target)
@@ -118,24 +121,24 @@ var LinkCommand = Command.extend({
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var dialog = $t.window.create($.extend({}, this.editor.options.dialogOptions, {
+        var windowContent = 
+            '<div class="k-editor-dialog">' +
+                '<ol>' +
+                    '<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>' +
+                    (shouldShowText ? '<li class="k-form-text-row"><label for="k-editor-link-text">Text</label><input type="text" class="k-input" id="k-editor-link-text"/></li>' : '') +
+                    '<li class="k-form-text-row"><label for="k-editor-link-title">Tooltip</label><input type="text" class="k-input" id="k-editor-link-title"/></li>' +
+                    '<li class="k-form-checkbox-row"><input type="checkbox" id="k-editor-link-target"/><label for="k-editor-link-target">Open link in new window</label></li>' +
+                '</ol>' +
+                '<div class="k-button-wrapper">' +
+                    '<button class="k-dialog-insert k-button">Insert</button>' +
+                    '&nbsp;or&nbsp;' + 
+                    '<a href="#" class="k-dialog-close k-link">Close</a>' +
+                '</div>' +
+            '</div>';
+
+        var dialog = $(windowContent).appendTo(document.body).kendoWindow($.extend({}, this.editor.options.dialogOptions, {
             title: "Insert link",
-            html: new $.telerik.stringBuilder()
-                .cat('<div class="k-editor-dialog">')
-                    .cat('<ol>')
-                        .cat('<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>')
-                        .catIf('<li class="k-form-text-row"><label for="k-editor-link-text">Text</label><input type="text" class="k-input" id="k-editor-link-text"/></li>', shouldShowText)
-                        .cat('<li class="k-form-text-row"><label for="k-editor-link-title">Tooltip</label><input type="text" class="k-input" id="k-editor-link-title"/></li>')
-                        .cat('<li class="k-form-checkbox-row"><input type="checkbox" id="k-editor-link-target"/><label for="k-editor-link-target">Open link in new window</label></li>')
-                    .cat('</ol>')
-                    .cat('<div class="k-button-wrapper">')
-                        .cat('<button class="k-dialog-insert k-button">Insert</button>')
-                        .cat('&nbsp;or&nbsp;')
-                        .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
-                    .cat('</div>')
-                .cat('</div>')
-                .string(),
-            onClose: close
+            close: close
         }))
             .hide()
             .find('.k-dialog-insert').click(apply).end()
@@ -152,7 +155,7 @@ var LinkCommand = Command.extend({
             .find('#k-editor-link-title').val(a ? a.title : '').end()
             .find('#k-editor-link-target').attr('checked', a ? a.target == '_blank' : false).end()
             .show()
-            .data('tWindow')
+            .data('kendoWindow')
             .center();
 
         if (shouldShowText && nodes.length > 0)
@@ -174,6 +177,7 @@ var LinkCommand = Command.extend({
 var UnlinkTool = Tool.extend({
     init: function(options) {
         this.options = options;
+        this.finder = new InlineFormatFinder([{tags:['a']}]);
 
         Tool.fn.init.call(this, $.extend(options, {command:UnlinkCommand}));
     },
@@ -197,7 +201,7 @@ extend(kendo.ui.Editor, {
     UnlinkTool: UnlinkTool
 });
 
-registerTool("createLink", new Tool({ key: 'K', ctrl: true, command: LinkCommand}));
-registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true}));
+registerTool("createLink", new Tool({ key: 'K', ctrl: true, command: LinkCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Create Link"})}));
+registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
 })(jQuery);

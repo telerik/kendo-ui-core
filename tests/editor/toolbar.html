@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -18,11 +25,13 @@
 </head>
 <body>
 
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
 <script>
 
 $("#Editor1").kendoEditor();
         
-var componentType = $.browser.msie ? 'kendoSelectBox' : 'kendoComboBox';
+var componentType = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
 
 function value($ui) {
     return $.browser.msie ? $.trim($ui.text()) : $ui.val();
@@ -36,7 +45,7 @@ module("Editor / Toolbar", {
 
 test('initially fontName should have "inherit" value', function () {
 
-    var component = $('.k-fontSize', editor.element).data(componentType);
+    var component = $('select.k-fontSize').data(componentType);
 
     equal(component.value(), 'inherit');
 });
@@ -48,7 +57,7 @@ test('exec with node parameter calls exec', function() {
 
     editor.exec = function() { execArgs = arguments; };
 
-    $('.k-bold', editor.element).click();
+    $('.k-bold', editor.wrapper).click();
 
     equal(execArgs.length, 1);
     equal(execArgs[0], 'bold');
@@ -63,9 +72,9 @@ test('handle carret selection', function() {
     editor.getSelection().removeAllRanges();
     editor.getSelection().addRange(range);
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    ok($('.k-bold', editor.element).hasClass('k-state-active'));
+    ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
 });
 
 test('handle word selection', function() {
@@ -76,9 +85,9 @@ test('handle word selection', function() {
     editor.getSelection().removeAllRanges();
     editor.getSelection().addRange(range);
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    ok($('.k-bold', editor.element).hasClass('k-state-active'));
+    ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
 });
 
 test('handle mixed selection', function() {
@@ -90,9 +99,9 @@ test('handle mixed selection', function() {
     editor.getSelection().removeAllRanges();
     editor.getSelection().addRange(range);
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    ok(!$('k-insertUnorderedList', editor.element).hasClass('k-state-active'));
+    ok(!$('k-insertUnorderedList', editor.wrapper).hasClass('k-state-active'));
 });
 
 test('handle image selection', function() {
@@ -103,41 +112,41 @@ test('handle image selection', function() {
     editor.getSelection().removeAllRanges();
     editor.getSelection().addRange(range);
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    ok($('.k-justifyRight', editor.element).hasClass('k-state-active'));
+    ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-active'));
 });
 
 test('font size combobox on mixed content', function() {
     editor.selectRange(createRangeFromText(editor, '|foo<span style="font-size:8px;">bar|</span>'));
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    equal(value($('.k-fontSize .k-input', editor.element)), '');
+    equal(value($('.k-fontSize', editor.wrapper)), '');
 });
 
 test('font size combobox on custom font size', function() {
     editor.selectRange(createRangeFromText(editor, '<span style="font-size:8px;">f|o|o</span>'));
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    equal(value($('.k-fontSize .k-input', editor.element)), '8px');
+    equal(value($('.k-fontSize', editor.wrapper)), '8px');
 });        
         
 test('inherited font size', function() {
     editor.selectRange(createRangeFromText(editor, '<span>f|o|o</span>'));
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    equal(value($('.k-fontSize .k-input', editor.element)), editor.localization.fontSizeInherit);
+    equal(value($('.k-fontSize', editor.wrapper)), editor.options.localization.fontSizeInherit);
 });
 
 test('font size combobox on relative font size', function() {
     editor.selectRange(createRangeFromText(editor, '<span style="font-size:x-small;">f|o|o</span>'));
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
 
-    equal(value($('.k-fontSize .k-input', editor.element)), '2 (10pt)');
+    equal(value($('.k-fontSize', editor.wrapper)), '2 (10pt)');
 });
 
 test('clicking disabled links should not navigate', function() {
@@ -146,11 +155,11 @@ test('clicking disabled links should not navigate', function() {
             isDefaultPrevented = e.isDefaultPrevented();
         };
 
-    $(editor.element).bind('click', navigationListener);
+    editor.wrapper.bind('click', navigationListener);
 
     $('.k-editor-button .k-tool-icon.k-state-disabled').trigger('click');
 
-    $(editor.element).unbind('click', navigationListener);
+    editor.wrapper.unbind('click', navigationListener);
 
     ok(isDefaultPrevented);
 });
@@ -163,11 +172,11 @@ test('buttons honor to-be-applied pending formats', function() {
 
     editor.selectRange(range);
 
-    editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
             
-    ok($('.k-bold', editor.element).hasClass('k-state-active'));
+    ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
 });
 
 test('buttons honor to-be-removed pending formats', function() {
@@ -178,9 +187,9 @@ test('buttons honor to-be-removed pending formats', function() {
 
     editor.selectRange(range);
             
-    editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
             
     ok(!$('.k-bold', editor.element).hasClass('k-state-active'));
 });
@@ -193,11 +202,11 @@ test('combos honor to-be-applied pending formats', function() {
 
     editor.selectRange(range);
 
-    editor.pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.tools.fontSize.command });
+    editor.pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
 
-    $(editor.element).trigger('selectionChange');
+    editor.trigger('select');
             
-    equals($('.k-fontSize', editor.element).data(componentType).value(), 'xx-large');
+    equals($('select.k-fontSize').data(componentType).value(), 'xx-large');
 });
 
 </script>
@@ -209,8 +218,6 @@ test('combos honor to-be-applied pending formats', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

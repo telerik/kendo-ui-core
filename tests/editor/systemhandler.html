@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -38,7 +47,7 @@ test('keydown calls endTyping if typing in progress', function() {
         isModifierKey: function() { return true},
         endTyping: function () { force = arguments[0]; },
         startTyping: function () {},
-        typingInProgress: function() { return true}
+        isTypingInProgress: function() { return true}
     };
     var handler = new SystemHandler(editor);
     handler.keydown();
@@ -53,7 +62,7 @@ test('keydown does not call endTyping if not modifier key', function() {
         isSystem:function() { return false},
         endTyping: function () { called = true },
         startTyping: function () { },
-        typingInProgress: function () { return true }
+        isTypingInProgress: function () { return true }
     };
 
     var handler = new SystemHandler(editor);
@@ -68,7 +77,7 @@ test('keydown does not call endTyping if typing not in progress', function() {
         isModifierKey: function() { return true},
         endTyping: function () { called = true; },
         startTyping: function () { },
-        typingInProgress: function () { return true }
+        isTypingInProgress: function () { return true }
     };
 
     var handler = new SystemHandler(editor);
@@ -81,7 +90,7 @@ test('keydown does not call endTyping if typing not in progress', function() {
 test('keydown if modifier key creates start restore point', function() {
     editor.keyboard = {
         isModifierKey: function() { return true},
-        typingInProgress: function () { return false }
+        isTypingInProgress: function () { return false }
     };
 
     var handler = new SystemHandler(editor);
@@ -93,7 +102,7 @@ test('keydown if modifier key creates start restore point', function() {
 test('keydown returns true if modifier key', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false }
+        isTypingInProgress: function () { return false }
     };
 
     var handler = new SystemHandler(editor);
@@ -103,7 +112,7 @@ test('keydown returns true if modifier key', function() {
 test('keydown if system command and changed creates end restore point', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false },
+        isTypingInProgress: function () { return false },
         isSystem:function(){ return true}
     };
 
@@ -122,7 +131,7 @@ test('keydown if system command and changed creates end restore point', function
 test('keydown if system command and changed sets start restore point to end restore point', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false },
+        isTypingInProgress: function () { return false },
         isSystem: function () { return true }
     };
 
@@ -140,7 +149,7 @@ test('keydown if system command and changed sets start restore point to end rest
 test('keydown returns true if system command and changed', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false },
+        isTypingInProgress: function () { return false },
         isSystem: function () { return true }
     };
 
@@ -156,7 +165,7 @@ test('keydown returns true if system command and changed', function() {
 test('keydown creates undo command if system command and changed', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false },
+        isTypingInProgress: function () { return false },
         isSystem: function () { return true }
     };
 
@@ -182,7 +191,7 @@ test('keydown creates undo command if system command and changed', function() {
 test('changed returns false if editor contents remain the same', function() {
     editor.keyboard = {
         isModifierKey: function() { return true},
-        typingInProgress: function () { return false }
+        isTypingInProgress: function () { return false }
     };
 
     var handler = new SystemHandler(editor);
@@ -194,7 +203,7 @@ test('changed returns false if editor contents remain the same', function() {
 test('changed returns false if editor contents changed', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false }
+        isTypingInProgress: function () { return false }
     };
 
     var handler = new SystemHandler(editor);
@@ -207,7 +216,7 @@ test('changed returns false if editor contents changed', function() {
 test('keyup creates undo command if system command and changed', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false },
+        isTypingInProgress: function () { return false },
         isSystem: function () { return true }
     };
 
@@ -237,7 +246,7 @@ test('keyup creates undo command if system command and changed', function() {
 test('keyup does not create undo command if system command and changed', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
-        typingInProgress: function () { return false },
+        isTypingInProgress: function () { return false },
         isSystem: function () { return true }
     };
 
@@ -265,8 +274,6 @@ test('keyup does not create undo command if system command and changed', functio
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

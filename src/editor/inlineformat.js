@@ -5,7 +5,9 @@
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
         formats = Editor.fn.options.formats,
+        EditorUtils = Editor.EditorUtils,
         Tool = Editor.Tool,
+        ToolTemplate = Editor.ToolTemplate,
         FormatTool = Editor.FormatTool,
         dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
@@ -230,7 +232,7 @@
             var result = this.getFormatInner(nodes[0]);
 
             for (var i = 1, len = nodes.length; i < len; i++)
-                if (result != getFormatInner(nodes[i]))
+                if (result != this.getFormatInner(nodes[i]))
                     return '';
 
             return result;
@@ -287,7 +289,7 @@
 
             // IE has single selection hence we are using select box instead of combobox
             fontTool.options = options;
-            fontTool.type = $.browser.msie ? 'tSelectBox' : 'tComboBox';
+            fontTool.type = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
             fontTool.format = [{ tags: ['span'] }],
             fontTool.finder = new GreedyInlineFormatFinder(fontTool.format, options.cssAttr);
         },
@@ -321,20 +323,22 @@
         },
 
         initialize: function ($ui, initOptions) {
-            var editor = initOptions.editor;
+            var editor = initOptions.editor,
+                toolName = this.options.name;
 
-            $ui[type]({
-                data: editor[options.name],
-                onChange: function (e) {
-                    Tool.exec(editor, options.name, e.value);
-                },
-                onItemCreate: function (e) {
-                    e.html = '<span unselectable="on" style="display:block;">' + e.dataItem.Text + '</span>';
+            $ui[this.type]({
+                dataTextField: "Text",
+                dataValueField: "Value",
+                dataSource: editor.options[toolName],
+                change: function (e) {
+                    Tool.exec(editor, toolName, this.value());
                 },
                 highlightFirst: false
             });
+            
+            $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
 
-            $ui.data(type).value('inherit');
+            $ui.data(this.type).value('inherit');
         }
 
     });
@@ -348,17 +352,19 @@
         },
 
         update: function($ui) {
-            $ui.data('tColorPicker').close();
+            $ui.data('kendoColorPicker').close();
         },
 
         command: function (commandArguments) {
-            var options = this.options;
+            var options = this.options,
+                format = this.format;
+
             return new Editor.FormatCommand(extend(commandArguments, {
                 formatter: function () { 
                     var style = {};
                     style[options.domAttr] = commandArguments.value;
 
-                    return new GreedyInlineFormatter(this.format, { style: style }, options.cssAttr); 
+                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr); 
                 }
             }));
         },
@@ -366,12 +372,14 @@
         willDelayExecution: inlineFormatWillDelayExecution,
 
         initialize: function($ui, initOptions) {
-            var editor = initOptions.editor;
+            var editor = initOptions.editor,
+                toolName = this.name;
         
-            $ui.tColorPicker({
+            $ui.kendoColorPicker({
                 selectedColor: '#000000',
-                onChange: function (e) {
-                    Tool.exec(editor, this.options.name, e.value);
+                change: function (e) {
+                    //debugger;
+                    Tool.exec(editor, toolName, e.value);
                 }
             });
         }
@@ -379,9 +387,9 @@
     });
 
     var StyleTool = Tool.extend({
-        init: function() {
+        init: function(options) {
             var styleTool = this;
-            Tool.fn.init.call(styleTool);
+            Tool.fn.init.call(styleTool, options);
 
             styleTool.format = [{ tags: ['span'] }];
             styleTool.finder = new GreedyInlineFormatFinder(styleTool.format, 'className');
@@ -396,7 +404,7 @@
         },
 
         update: function($ui, nodes) {
-            var list = $ui.data('tSelectBox');
+            var list = $ui.data('kendoDropDownList');
             list.close();
             list.value(this.finder.getFormat(nodes));
         },
@@ -404,15 +412,15 @@
         initiliaze: function($ui, initOptions) {
             var editor = initOptions.editor;
         
-            $ui.tSelectBox({
+            $ui.kendoDropDownList({
                 data: editor['style'],
                 title: editor.options.localization.style,
-                onItemCreate: function (e) {
+                itemCreate: function (e) {
                     var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
                 
                     e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
                 },
-                onChange: function (e) {
+                change: function (e) {
                     Tool.exec(editor, 'style', e.value);
                 }
             });
@@ -431,32 +439,32 @@
         StyleTool: StyleTool
     });
 
-    registerTool("style", new Editor.StyleTool());
+    registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
 
     registerFormat("bold", [ { tags: ['strong'] }, { tags: ['span'], attr: { style: { fontWeight: 'bold'}} } ]);
-    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}));
+    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));
 
     registerFormat("italic", [ { tags: ['em'] }, { tags: ['span'], attr: { style: { fontStyle: 'italic'}} } ]);
-    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}));
+    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Italic"})}));
 
     registerFormat("underline", [ { tags: ['span'], attr: { style: { textDecoration: 'underline'}} } ]);
-    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}));
+    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Underline"})}));
 
     registerFormat("strikethrough", [ { tags: ['del'] }, { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} } ]);
-    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough}));
+    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Strikethrough"})}));
 
     registerFormat("superscript", [ { tags: ['sup'] } ]);
-    registerTool("superscript", new InlineFormatTool({format: formats.superscript}));
+    registerTool("superscript", new InlineFormatTool({format: formats.superscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Superscript"})}));
 
     registerFormat("subscript", [ { tags: ['sub'] } ]);
-    registerTool("subscript", new InlineFormatTool({format: formats.subscript}));
+    registerTool("subscript", new InlineFormatTool({format: formats.subscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Subscript"})}));
 
-    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}));
+    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Color"})}));
 
-    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'}));
+    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}));
+    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
 
-    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}));
+    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
 
 })(jQuery);

@@ -16,7 +16,7 @@
 .k-toolbar,
 .k-grouping-header,
 .k-tooltip,
-.k-grid-pager,
+.k-pager-wrap,
 .k-tabstrip-items .k-item,
 .k-link.k-state-hover,
 .k-autocomplete,
@@ -253,7 +253,7 @@ html body .k-button-bare
 .k-insert-bottom { background-position: -160px -64px; }
 .k-drop-hint { background-position: 0 -326px; }
 
-.k-warning { background-position: -96px -240px; }
+.k-warning { background-position: -160px -240px; }
 
 .k-image
 {
@@ -1024,13 +1024,18 @@ div.k-grid-header .k-header
 
 /* Grid :: paging */
 
-.k-grid-pager
+.k-pager-wrap
 {
     overflow: auto;
     border-style: solid;
-    border-width: 1px 0 0;
+    border-width: 1px;
     padding: .4em .6em;
     line-height: 1.8em;
+}
+
+.k-grid-pager
+{
+    border-width: 1px 0 0;
 }
 
 .k-grid-toolbar:first-child,
@@ -1038,8 +1043,6 @@ div.k-grid-header .k-header
 {
     border-width: 0 0 1px;
 }
-
-*+html .k-grid-pager input { vertical-align: middle; }
 
 .k-grid .k-pager,
 .k-grid .k-status-text,
@@ -2095,7 +2098,7 @@ span.k-numerictextbox
 
 .k-colorpicker .k-icon
 {
-    margin-top: 1px;
+    margin-top: 4px;
     vertical-align: middle;
 }
 
@@ -2122,6 +2125,13 @@ span.k-numerictextbox
     font-size: 0;
     margin: 0 1px 1px 0;
     padding: 0;
+}
+
+.k-colorpicker-popup .k-item div
+{
+    height: 100%;
+    margin: 1px;
+    width: 100%;
 }
 
 /* Editor */
@@ -2217,18 +2227,6 @@ span.k-numerictextbox
 .k-editor-colorpicker .k-selected-color
 {
     height: 3px;
-}
-
-.k-editor-combobox .k-input
-{
-    height: 20px;
-    line-height: 20px;
-}
-
-.k-editor-combobox .k-select
-{
-    height: 22px;
-    line-height: 22px;
 }
 
 .k-bold { background-position: -64px 0; }

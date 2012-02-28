@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -18,12 +25,16 @@
 </head>
 <body>
 
+<div><textarea cols="20" rows="4" id="EditorEncodeFalse" name="EditorEncodeFalse"></textarea></div>
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor"></textarea></div>
+<div><textarea cols="20" rows="4" id="EditorWithStyleSheets" name="EditorWithStyleSheets"></textarea></div>
+
 <script>
 
 $("#EditorEncodeFalse").kendoEditor({
     encoded:false
 });
-$("#Editor").kendoEditor();
+$("#Editor1").kendoEditor();
 $("#EditorWithStyleSheets").kendoEditor({
     stylesheets: [
         "telerik.common.css",
@@ -31,7 +42,7 @@ $("#EditorWithStyleSheets").kendoEditor({
     ]
 });
 
-var rootUrl/* = '<%= Url.Content("~/") %>'*/;
+var rootUrl = "Content/"/* = '<%= Url.Content("~/") %>'*/;
 
 QUnit.testStart = function() {
     editor = getEditor();
@@ -47,14 +58,14 @@ test('editor value should not be encoded', function() {
 });
 
 test('editor default Encode value must be true', function() {
-    equal(editor.encoded, true);
+    equal(editor.options.encoded, true);
 });
 
 test('editor should add stylesheets', function() {
     var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
 
-    equal(editorWithStyleSheets.stylesheets[0], rootUrl + 'Content/telerik.common.css');
-    equal(editorWithStyleSheets.stylesheets[1], rootUrl + 'Content/telerik.vista.css');
+    equal(editorWithStyleSheets.options.stylesheets[0], rootUrl + 'Content/telerik.common.css');
+    equal(editorWithStyleSheets.options.stylesheets[1], rootUrl + 'Content/telerik.vista.css');
 });
 
 test('editor outputs css links in iframe', function() {
@@ -76,10 +87,6 @@ test('editor outputs css links in iframe', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="EditorEncodeFalse" name="EditorEncodeFalse"></textarea></div>
-<div><textarea cols="20" rows="4" id="Editor" name="Editor"></textarea></div>
-<div><textarea cols="20" rows="4" id="EditorWithStyleSheets" name="EditorWithStyleSheets"></textarea></div>
 
 </body>
 </html>

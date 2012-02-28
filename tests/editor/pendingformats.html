@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -65,16 +74,16 @@ test('toggle() toggles multiple formats', function() {
 test('toggle() replaces format values, if any', function() {
     var pendingFormats = new PendingFormats(editor);
 
-    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.tools.fontSize.command });
+    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
             
     ok(pendingFormats.hasPending());
 
-    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.tools.fontSize.command });
+    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
             
     equals(pendingFormats.getPending('fontsize').params.value, 'xx-small');
     ok(pendingFormats.hasPending());
 
-    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.tools.fontSize.command });
+    pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
             
     ok(!pendingFormats.hasPending());
 });
@@ -92,7 +101,7 @@ test('clear() removes all pending formats', function() {
 test('apply() applies pending format to range', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'italic', params: undefined, command: editor.tools.italic.command });
+    pendingFormats.toggle(editor.options.tools.italic);
 
     editor.value('foo');
     var range = editor.createRange();
@@ -104,11 +113,29 @@ test('apply() applies pending format to range', function() {
     equals(editor.value(), 'f<em>o</em>o');
 });
 
+test('apply() applies pending format with parameter to range', function() {
+    var pendingFormats = new PendingFormats(editor);
+
+    var tool = $.extend({}, editor.options.tools.fontSize);
+    $.extend(tool.options, { params: { value: 'xx-large' } });
+
+    pendingFormats.toggle(tool);
+
+    editor.value('foo');
+    var range = editor.createRange();
+    range.setStart(editor.body.firstChild, 1);
+    range.setStart(editor.body.firstChild, 2);
+
+    pendingFormats.apply(range);
+
+    equals(editor.value(), 'f<span style="font-size:xx-large;">o</span>o');
+});
+
 test('apply() applies multiple pending formats to range', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'italic', params: undefined, command: editor.tools.italic.command });
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    pendingFormats.toggle(editor.options.tools.italic);
+    pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('foo');
     var range = editor.createRange();
@@ -123,7 +150,7 @@ test('apply() applies multiple pending formats to range', function() {
 test('apply() focuses end of format after apply', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'italic', params: undefined, command: editor.tools.italic.command });
+    pendingFormats.toggle(editor.options.tools.italic);
 
     editor.value('foo');
     var range = editor.createRange();
@@ -140,7 +167,7 @@ test('apply() focuses end of format after apply', function() {
 test('apply() removes pending format to range', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('<strong>foo</strong>');
     var range = editor.createRange();
@@ -155,8 +182,8 @@ test('apply() removes pending format to range', function() {
 test('apply() removes multiple pending formats to range', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
-    pendingFormats.toggle({ name: 'italic', params: undefined, command: editor.tools.italic.command });
+    pendingFormats.toggle(editor.options.tools.bold);
+    pendingFormats.toggle(editor.options.tools.italic);
 
     editor.value('<em><strong>foo</strong></em>');
     var range = editor.createRange();
@@ -171,8 +198,8 @@ test('apply() removes multiple pending formats to range', function() {
 test('apply() focuses end of range after remove', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
-    pendingFormats.toggle({ name: 'italic', params: undefined, command: editor.tools.italic.command });
+    pendingFormats.toggle(editor.options.tools.bold);
+    pendingFormats.toggle(editor.options.tools.italic);
 
     editor.value('<em><strong>foo</strong></em>');
     var range = editor.createRange();
@@ -193,7 +220,7 @@ test('apply() focuses end of range after remove', function() {
 test('apply() applies format on whitespace nodes', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('f o');
     var range = editor.createRange();
@@ -218,7 +245,7 @@ test('apply() applies format on whitespace nodes', function() {
 test('apply() removes format on whitespace nodes', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('<strong>f</strong>oo');
     var range = editor.createRange();
@@ -243,7 +270,7 @@ test('apply() removes format on whitespace nodes', function() {
 test('apply() removes format at start of node', function() {
     var pendingFormats = new PendingFormats(editor);
             
-    pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.tools.bold.command });
+    pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('<strong>af</strong>oo');
     var range = editor.createRange();
@@ -280,7 +307,7 @@ test('isPending() returns true if specified format is pending', function() {
 test('getPending() returns specified format if it is pending', function() {
     var pendingFormats = new PendingFormats(editor);
 
-    var format = { name: 'fontsize', params: { value: 'xx-large' }, command: editor.tools.fontSize.command };
+    var format = { name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command };
             
     pendingFormats.toggle(format);
         
@@ -296,8 +323,6 @@ test('getPending() returns specified format if it is pending', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>
