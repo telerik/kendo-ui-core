@@ -840,7 +840,7 @@
                                 anchor: li,
                                 appendTo: li,
                                 animation: {
-                                    open: extend( { effects: openEffects }, options.animation.open),
+                                    open: extend(true, { effects: openEffects }, options.animation.open),
                                     close: options.animation.close
                                 }
                             }).data(KENDOPOPUP);

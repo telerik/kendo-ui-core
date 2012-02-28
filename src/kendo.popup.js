@@ -71,7 +71,7 @@
             }
 
             if (!(EFFECTS in options.animation.close)) {
-                options.animation.close = extend({ reverse: true }, options.animation.open, options.animation.close);
+                options.animation.close = extend(true, { reverse: true }, options.animation.open, options.animation.close);
             }
 
             extend(options.animation.open, {
@@ -244,7 +244,7 @@
                     return;
                 }
 
-                animation = extend({}, options.animation.close);
+                animation = extend(true, {}, options.animation.close);
                 effects = that.element.data(EFFECTS);
 
                 that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN });

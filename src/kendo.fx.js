@@ -151,7 +151,7 @@
                     direction = effect[1],
                     effectBody = {};
 
-                effect.length > 1 && (effectBody["direction"] = mirror && redirectedEffect ? kendo.directions[direction].reverse : direction);
+                effect.length > 1 && (effectBody["direction"] = (mirror && redirectedEffect ? kendo.directions[direction].reverse : direction));
 
                 effects[effect[0]] = effectBody;
             });
@@ -393,7 +393,7 @@
             // create a promise for each effect
             promise = $.Deferred(function(deferred) {
                 if (size(effects)) {
-                    var opts = extend(true, {}, options, { complete: deferred.resolve });
+                    var opts = extend({}, options, { complete: deferred.resolve });
 
                     each(effects, function(effectName, settings) {
                         var effect = kendo.fx[effectName];
