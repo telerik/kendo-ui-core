@@ -8,7 +8,7 @@
         getOffset = kendo.getOffset,
         draggables = {},
         dropTargets = {},
-        lastDropTarget = { element: [ null ] },
+        lastDropTarget,
         NAMESPACE = ".kendo-dnd",
         MOUSEENTER = "mouseenter",
         MOUSEUP = touch? "touchend" : "mouseup",
@@ -24,22 +24,6 @@
         DRAGENTER = "dragenter",
         DRAGLEAVE = "dragleave",
         DROP = "drop";
-
-    function findTarget(needle, targets) {
-        var result = { element: [ null ] };
-
-        $.each(targets, function() {
-            var that = this,
-                element = that.element[0];
-
-            if (contains(element, needle)) {
-                result = that;
-                return false;
-            }
-        });
-
-        return result;
-    }
 
     function contains(parent, child) {
         try {
@@ -306,32 +290,53 @@
             }
         },
 
+        _withDropTarget: function(e, callback) {
+            var that = this,
+                target = kendo.eventTarget(e),
+                result,
+                options = that.options;
+
+            if (touch && kendo.size(dropTargets)) {
+
+                $.each(dropTargets[options.group], function() {
+                    var that = this,
+                        element = that.element[0];
+
+                    if (contains(element, target)) {
+                        result = that;
+                        return false;
+                    }
+                });
+
+                callback(result);
+            }
+        },
+
         _drag: function(e) {
             var that = this,
                 cursorOffset = that.options.cursorOffset,
                 location = kendo.touchLocation(e);
 
-            if (touch && kendo.size(dropTargets)) {
-                var options = that.options,
-                    dropTarget = kendo.eventTarget(e);
-
-                if (dropTarget) {
-                    var target = findTarget(dropTarget, dropTargets[options.group]),
-                        element = target.element[0],
-                        lastTarget = lastDropTarget.element[0],
-                        difference = lastTarget != element;
-
-                    if (difference) {
-                        if (lastTarget != null)
-                            lastDropTarget._trigger(DRAGLEAVE, e);
-
-                        if (contains(element, dropTarget))
-                            target._trigger(DRAGENTER, e);
-
-                        lastDropTarget = target;
+            that._withDropTarget(e, function(target) {
+                if (!target) {
+                    if (lastDropTarget) {
+                        lastDropTarget._trigger(DRAGLEAVE, e);
+                        lastDropTarget = null;
                     }
+                    return;
                 }
-            }
+
+                if (lastDropTarget) {
+                    if (target.element[0] === lastDropTarget.element[0]) {
+                        return;
+                    }
+
+                    lastDropTarget._trigger(DRAGLEAVE, e);
+                }
+
+                target._trigger(DRAGENTER, e);
+                lastDropTarget = target;
+            });
 
             that._trigger(DRAG, e);
 
@@ -348,28 +353,23 @@
                 destroy = proxy(that._destroy, that),
                 offset = getOffset(that.currentTarget);
 
-            if (e.type == MOUSEUP || e.keyCode == 27) {
-                if (touch && kendo.size(dropTargets)) {
-                    var options = that.options,
-                        dropTarget = kendo.eventTarget(e);
+            if (!(e.type == MOUSEUP || e.keyCode == 27)) {
+                return;
+            }
 
-                    if (dropTarget) {
-                        var target = findTarget(dropTarget, dropTargets[options.group]);
-
-                        if (target.element[0]) {
-                            lastDropTarget = { element: [ null ] };
-                            target._drop(e);
-                        }
-                    }
+            that._withDropTarget(e, function(target) {
+                if (target) {
+                    target._drop(e);
+                    lastDropTarget = null;
                 }
+            });
 
-                that._trigger(DRAGEND, e);
+            that._trigger(DRAGEND, e);
 
-                if (that.hint && !that.dropped) {
-                    that.hint.animate(offset, "fast", destroy);
-                } else {
-                    destroy();
-                }
+            if (that.hint && !that.dropped) {
+                that.hint.animate(offset, "fast", destroy);
+            } else {
+                destroy();
             }
         },
 
