@@ -12,9 +12,6 @@
         Color = dataviz.Color,
         Box2D = dataviz.Box2D,
         Point2D = dataviz.Point2D,
-        BarAnimationDecorator = dataviz.BarAnimationDecorator,
-        PieAnimationDecorator = dataviz.PieAnimationDecorator,
-        FadeAnimationDecorator = dataviz.FadeAnimationDecorator,
         ExpandAnimation = dataviz.ExpandAnimation,
         ViewBase = dataviz.ViewBase,
         ViewElement = dataviz.ViewElement,
@@ -47,8 +44,8 @@
 
             if (dataviz.ui.Chart) {
                 view.decorators.push(
-                    new BarAnimationDecorator(view),
-                    new PieAnimationDecorator(view)
+                    new dataviz.BarAnimationDecorator(view),
+                    new dataviz.PieAnimationDecorator(view)
                 );
             }
 
@@ -60,7 +57,7 @@
                 // Setting opacity on VML elements is broken in
                 // IE9 Compatibility View
                 view.decorators.push(
-                    new FadeAnimationDecorator(view)
+                    new dataviz.FadeAnimationDecorator(view)
                 );
             }
 
