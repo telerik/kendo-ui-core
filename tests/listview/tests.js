@@ -5,4 +5,8 @@ tests.push({
     {
         page: "listview/editing.html",
         title: "editing"
+    },
+    {
+        page: "listview/mvvm.html",
+        title: "mvvm"
     });
