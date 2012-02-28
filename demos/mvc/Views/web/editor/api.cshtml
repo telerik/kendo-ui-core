@@ -1,0 +1,63 @@
+
+        <div id="example" class="k-content">
+            <div class="configuration" style="width: 210px">
+                <span class="configHead">API Functions</span>
+                <span class="configTitle">Get value</span>
+                <ul class="options">
+                    <li>
+                        <button id="get" class="k-button">Get value</button>
+                    </li>
+                </ul>
+                <span class="configTitle">Set value</span>
+                <ul class="options">
+                    <li>
+                        <textarea id="value" style="width: 200px;" rows="4" cols="20">new value</textarea>
+                        <button id="set" class="k-button">Set value</button>
+                    </li>
+                </ul>
+            </div>
+            <textarea id="editor" rows="10" cols="30" style="width:600px;height:300px">Kendo UI Editor widget</textarea>
+
+            <script>
+                $(document).ready(function() {
+                    $("#editor").kendoEditor();
+
+                    var editor = $("#editor").data("kendoEditor");
+
+                    var setValue = function () {
+                        editor.value($("#value").val());
+                    };
+
+                    $("#get").click(function() {
+                        alert(editor.value());
+                    });
+
+                    $("#set").click(setValue);
+                });
+           </script>
+       </div>
+
+            <style scoped="scoped">
+                #example {
+                    padding-right: 240px;
+                }
+                .reports {
+                    width: 265px;
+                    height: 247px;
+                    padding: 108px 0 0 20px;
+                    background: url('../../content/web/calendar/reports.png') transparent no-repeat 0 0;
+                    margin: 30px auto 20px auto;
+                }
+                .configuration {
+                    height: 460px;
+                    width: 200px;
+                    margin-bottom: -21px;
+                    margin-right: -241px;
+                }
+                .configuration .console {
+                    background-color: transparent;
+                    border: 0;
+                    height: 420px;
+                    overflow: auto;
+                }
+            </style>
