@@ -325,7 +325,7 @@
 
             $(function(){
                 that._attachHideBarHandlers();
-                that._attachOrientationChange();
+                that._setupElementClass();
                 that._attachMeta();
                 that._loader();
                 that._setupAppLinks();
@@ -472,10 +472,13 @@
             }
         },
 
-        _attachOrientationChange: function() {
-            var that = this, element = that.element;
+        _setupElementClass: function() {
+            var that = this,
+                osCssClass = that.options.platform ? "km-" + that.options.platform : OS_CSS_CLASS;
+                element = that.element;
+
             element.parent().addClass("km-root");
-            element.addClass(OS_CSS_CLASS + " " + getOrientationClass());
+            element.addClass(osCssClass + " " + getOrientationClass());
 
             WINDOW.bind(ORIENTATIONEVENT, function(e) {
                 element.removeClass("km-horizontal km-vertical")
