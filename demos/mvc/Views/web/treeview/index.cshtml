@@ -1,26 +1,69 @@
 
         <div id="example" class="k-content">
+        <div class="wrapper">
             <ul id="treeview">
-                <li data-expanded="true">Item 1
+                <li data-expanded="true">
+                    <span class="k-sprite folder"></span>
+                    My Web Site
                     <ul>
-                        <li>Item 1.1</li>
-                        <li>Item 1.2</li>
-                        <li>Item 1.3</li>
+                        <li data-expanded="true">
+                            <span class="k-sprite folder"></span>images
+                            <ul>
+                                <li><span class="k-sprite image"></span>logo.png</li>
+                                <li><span class="k-sprite image"></span>body-back.png</li>
+                                <li><span class="k-sprite image"></span>my-photo.jpg</li>
+                            </ul>
+                        </li>
+                        <li data-expanded="true">
+                            <span class="k-sprite folder"></span>resources
+                            <ul>
+                                <li data-expanded="true">
+                                    <span class="k-sprite folder"></span>pdf
+                                    <ul>
+                                        <li><span class="k-sprite pdf"></span>brochure.pdf</li>
+                                        <li><span class="k-sprite pdf"></span>prices.pdf</li>
+                                    </ul>
+                                </li>
+                                <li><span class="k-sprite folder"></span>zip</li>
+                            </ul>
+                        </li>
+                        <li><span class="k-sprite html"></span>about.html</li>
+                        <li><span class="k-sprite html"></span>contacts.html</li>
+                        <li><span class="k-sprite html"></span>index.html</li>
+                        <li><span class="k-sprite html"></span>portfolio.html</li>
                     </ul>
                 </li>
-                <li>Item 2
-                    <ul>
-                        <li>Item 2.1</li>
-                        <li>Item 2.2</li>
-                        <li>Item 2.3</li>
-                    </ul>
-                </li>
-                <li>Item 3</li>
             </ul>
+        </div>
 
             <script>
                 $(document).ready(function() {
                     $("#treeview").kendoTreeView();
                 });
             </script>
+
+            <style scoped>
+                #treeview .k-sprite {
+                    background-image: url("../../content/web/treeview/coloricons-sprite.png");
+                }
+                
+                .rootfolder { background-position: 0 0; }
+                .folder { background-position: 0 -16px;	}
+                .pdf { background-position: 0 -32px; }
+                .html { background-position: 0 -48px; }
+                .image { background-position: 0 -64px; }
+                
+                .wrapper
+                {
+                	width: 200px;
+                	margin: 30px auto;
+                	padding: 20px;
+                	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45) inset 0 0 30px rgba(0,0,0,0.07);
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.45) inner 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    border-radius: 8px;
+                }
+            </style>
         </div>
