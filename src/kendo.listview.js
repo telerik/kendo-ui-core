@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         CHANGE = "change",
         DATABOUND = "dataBound",
+        DATABINDING = "dataBinding",
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
         FOCUSSELECTOR =  ">*",
@@ -25,11 +26,13 @@
 
             Widget.fn.init.call(that, element, options);
 
+            options = that.options;
+
             that._element();
 
             that._dataSource();
 
-            that.template = kendo.template(options.template);
+            that.template = kendo.template(options.template || "");
             that.altTemplate = kendo.template(options.altTemplate || options.template);
             that.editTemplate = kendo.template(options.editTemplate || "");
 
@@ -40,10 +43,13 @@
             if (that.options.autoBind){
                 that.dataSource.fetch();
             }
+
+            kendo.notify(that);
         },
 
         events: [
             CHANGE,
+            DATABINDING,
             DATABOUND,
             EDIT,
             REMOVE
@@ -52,7 +58,13 @@
         options: {
             name: "ListView",
             autoBind: true,
-            template: ""
+            template: "",
+            altTemplate: "",
+            editTemplate: ""
+        },
+
+        items: function() {
+            return this.element.find(FOCUSSELECTOR);
         },
 
         _dataSource: function() {
@@ -74,10 +86,12 @@
                 template = that.template,
                 altTemplate = that.altTemplate;
 
-            if (e && e.action === "itemchange") {
-                that._modelChange(e);
+            if (e && e.action === "itemchange" && that.editable) {
                 return;
             }
+
+            that.trigger(DATABINDING);
+
             that._destroyEditable();
 
             for (idx = 0, length = data.length; idx < length; idx++) {
@@ -224,18 +238,6 @@
             }
 
            return selectable.value();
-       },
-
-       _modelChange: function(e) {
-           var that = this,
-               model = e.items[0],
-               index = $.inArray(model, that.dataSource.view()),
-               isAlt = index % 2,
-               item = that.element.children().eq(index);
-
-            if (!item.hasClass(KEDITITEM)) {
-                item.replaceWith((isAlt ? that.altTemplate : that.template)(model));
-            }
        },
 
        _destroyEditable: function() {
