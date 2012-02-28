@@ -36,20 +36,9 @@
                 el.trigger($.Event(type, e));
             }
 
-            function ev(options) {
-                return $.extend(new $.Event, options);
-            }
-
             function setup(options) {
                 return new Draggable(span, options);
             }
-
-            test("stores the current position on mousedown", function() {
-                var draggable = setup();
-
-                draggable.element.trigger("mousedown");
-                ok(draggable._offset !== undefined);
-            });
 
             test("moving the mouse beyond the allowed distance triggers the dragstart event", function() {
                 var dragstartWasCalled = false,
@@ -60,7 +49,7 @@
                     });
 
                 trigger("mousedown", { pageX: 0, pageY: 0 });
-                trigger("mousemove", { pageX: 10, pageY: 0 }, $(document));
+                trigger("mousemove", { pageX: 10, pageY: 0 }, $(document.documentElement));
                 ok(dragstartWasCalled);
             });
 
@@ -72,12 +61,12 @@
                     });
 
                 trigger("mousedown", { pageX: 0, pageY: 0 });
-                trigger("mousemove", { pageX: 1, pageY: 0 }, $(document));
+                trigger("mousemove", { pageX: 1, pageY: 0 }, $(document.documentElement));
 
                 ok(!dragstartWasCalled);
             });
 
-            test("prevent default from drag start event should not triggered drag event", function() {
+            test("prevent default from drag start event does not trigger drag event", function() {
                 var dragWasCalled = false,
                     draggable = setup({
                         dragstart: function(e) {
