@@ -30,6 +30,11 @@
                 }
             });
 
+            function trigger(type, e, el) {
+                el = el || span;
+                el.trigger($.Event(type, e));
+            }
+
             function ev(options) {
                 return $.extend(new $.Event, options);
             }
@@ -53,23 +58,8 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX:0, pageY: 0 }));
-                draggable._start(ev({ pageX:10, pageY: 0 }));
-
-                ok(dragstartWasCalled);
-            });
-
-            test("dragstart is triggered after mouse down and mouse move", function() {
-                var dragstartWasCalled = false,
-                    draggable = setup({
-                        dragstart: function() {
-                            dragstartWasCalled = true;
-                        }
-                    });
-
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 0 }, $(document));
                 ok(dragstartWasCalled);
             });
 
@@ -80,8 +70,8 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX:0, pageY: 0 }));
-                draggable._start(ev({ pageX:0, pageY: 0 }));
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 1, pageY: 0 }, $(document));
 
                 ok(!dragstartWasCalled);
             });
@@ -98,8 +88,8 @@
                         }
                     });
 
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 0 });
             });
 
             test("drag event is raised during dragging", function() {
@@ -110,50 +100,20 @@
                         }
                     });
 
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-
-                ok(dragWasCalled);
-            });
-
-            test("drag event is raised when the user is moving the mouse", function() {
-                var dragWasCalled = false,
-                    draggable = setup({
-                        drag: function() {
-                            dragWasCalled = true;
-                        }
-                    });
-
-                draggable._drag({pageX:0, pageY:0});
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 2 });
 
                 ok(dragWasCalled);
             });
 
             test("dragend event is raised", function() {
                 var dragEndWasCalled = false,
-                    draggable = new Draggable(span, { dragend: function() {
-                            dragEndWasCalled = true;
-                        }
-                    });
+                    draggable = setup({ dragend: function() { dragEndWasCalled = true; } });
 
-                draggable._startDrag({ currentTarget: span[0] });
-                draggable._stop({type: "mouseup"});
-
-                ok(dragEndWasCalled);
-            });
-
-            test("dragend event is raised when the user releases the mouse", function() {
-                var dragEndWasCalled = false,
-                    draggable = new Draggable(span, { dragend: function() {
-                            dragEndWasCalled = true;
-                        }
-                    });
-
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                $(document).trigger( { type: "mouseup" } );
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 0 });
+                trigger("mouseup", { pageX: 10, pageY: 2 });
 
                 ok(dragEndWasCalled);
             });
@@ -167,8 +127,9 @@
                         filter: "span"
                     });
 
-                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
-                $(document).trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+
+                trigger("mousedown", { pageX: 0, pageY: 0 }, span.find("span"));
+                trigger("mousemove", { pageX: 10, pageY: 10 });
 
                 ok(dragstartWasCalled);
             });
@@ -181,8 +142,8 @@
                         filter: "span"
                     });
 
-                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
-                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+                trigger("mousedown", { pageX: 0, pageY: 0 }, span.find("span"));
+                trigger("mousemove", { pageX: 10, pageY: 10 }, span.find("span"));
 
                 ok(e.currentTarget[0] === span.find("span")[0]);
             });
@@ -195,9 +156,9 @@
                         filter: "span"
                     });
 
-                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
-                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
-                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
+                trigger("mousedown", { pageX: 0, pageY: 0 }, span.find("span"));
+                trigger("mousemove", { pageX: 10, pageY: 10 }, span.find("span"));
+                trigger("mousemove", { pageX: 20, pageY: 10 }, span.find("span"));
 
                 ok(e.currentTarget[0] === span.find("span")[0]);
             });
@@ -210,9 +171,9 @@
                         filter: "span"
                     });
 
-                span.find("span").trigger({ type: "mousedown", pageX: 0, pageY: 0 });
-                span.find("span").trigger({ type: "mousemove", pageX: 10, pageY: 10 });
-                span.find("span").trigger({ type: "mouseup", pageX: 10, pageY: 10 });
+                trigger("mousedown", { pageX: 0, pageY: 0 }, span.find("span"));
+                trigger("mousemove", { pageX: 10, pageY: 10 }, span.find("span"));
+                trigger("mouseup", { pageX: 20, pageY: 10 }, span.find("span"));
 
                 ok(e.currentTarget[0] === span.find("span")[0]);
             });
@@ -224,8 +185,8 @@
                         }
                     });
 
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 10 });
 
                 ok(e.pageX);
             });
@@ -237,9 +198,9 @@
                         }
                     });
 
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                $(document).trigger( { type: "mouseup", pageX: 10, pageY: 0 } );
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 10 });
+                trigger("mouseup", { pageX: 20, pageY: 10 });
 
                 ok(e.pageX);
             });
@@ -251,9 +212,9 @@
                         }
                     });
 
-                draggable.element.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                $(document).trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
+                trigger("mousedown", { pageX: 0, pageY: 0 });
+                trigger("mousemove", { pageX: 10, pageY: 10 });
+                trigger("mousemove", { pageX: 20, pageY: 10 });
 
                 ok(e.pageX);
             });
