@@ -312,8 +312,8 @@
             if (!path.template) {
                 path.template = VMLPath.template = template(
                     "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
-                    "style='position:absolute; width:1px; height:1px;' " +
-                    "coordorigin='0 0' coordsize='1 1'>" +
+                    "style='position:absolute; #= d.renderSize() #' " +
+                    "coordorigin='0 0' #= d.renderCoordsize() # >" +
                         "<kvml:path v='#= d.renderPoints() # e' />" +
                         "#= d.fill.render() + d.stroke.render() #" +
                     "</kvml:shape>"
@@ -329,6 +329,16 @@
             fillOpacity: 1,
             strokeOpacity: 1,
             rotation: [0,0,0]
+        },
+
+        renderCoordsize: function() {
+            var scale = this.options.align === false ?  10000 : 1;
+            return "coordsize='" + scale + " " + scale + "'"
+        },
+
+        renderSize: function() {
+            var scale = this.options.align === false ?  100 : 1;
+            return "width:" + scale + "px; height:" + scale + "px;"
         },
 
         render: function() {
@@ -421,7 +431,8 @@
         },
 
         _print: function(point) {
-            return math.round(point.x) + "," + math.round(point.y);
+            var scale = this.options.align === false ?  100 : 1;
+            return math.round(point.x * scale) + "," + math.round(point.y * scale);
         }
     });
 
