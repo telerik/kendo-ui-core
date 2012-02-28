@@ -225,8 +225,8 @@
                 element = chart.element,
                 model = chart._model = chart._getModel(),
                 plotArea = chart._plotArea = model._plotArea,
-                viewClass = chart._supportsSVG() ? dataviz.SVGView : dataviz.VMLView,
-                view = chart._view = viewClass.fromModel(model);
+                viewType = dataviz.ui.defaultView(),
+                view = chart._view = viewType.fromModel(model);
 
             element.css("position", "relative");
             chart._viewElement = view.renderTo(element[0]);
@@ -300,9 +300,6 @@
 
             return plotArea;
         },
-
-        // Needs to be overridable in tests
-        _supportsSVG: dataviz.supportsSVG,
 
         _attachEvents: function() {
             var chart = this,

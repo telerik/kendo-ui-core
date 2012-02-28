@@ -60,20 +60,41 @@
                 // ------------------------------------------------------------
                 module("View", {
                     setup: function() {
+                        dataviz.SVGView._available = dataviz.SVGView.available;
+                        dataviz.VMLView._available = dataviz.VMLView.available;
+
                         createChart();
+                    },
+                    teardown: function() {
+                        dataviz.SVGView.available = dataviz.SVGView._available;
+                        dataviz.VMLView.available = dataviz.VMLView._available;
                     }
                 });
 
                 test("SVGView is created if browser supports SVG", function() {
-                    Chart.prototype._supportsSVG = function() { return true; };
+                    dataviz.SVGView.available = function() { return true; };
                     createChart();
                     ok(chart._view instanceof dataviz.SVGView);
                 });
 
-                test("VMLView is created if browser does not support SVG", function() {
-                    Chart.prototype._supportsSVG = function() { return false; };
+                test("VMLView is created if browser does not support SVG, but supports VML", function() {
+                    dataviz.SVGView.available = function() { return false; };
+                    dataviz.VMLView.available = function() { return true; };
                     createChart();
                     ok(chart._view instanceof dataviz.VMLView);
+                });
+
+                test("SVGView is created if browser does supports both SVG and VML", function() {
+                    dataviz.SVGView.available = function() { return true; };
+                    dataviz.VMLView.available = function() { return true; };
+                    createChart();
+                    ok(chart._view instanceof dataviz.SVGView);
+                });
+
+                test("raises error if the browser does not support neither VML nor SVG", function() {
+                    dataviz.SVGView.available = function() { return false; };
+                    dataviz.VMLView.available = function() { return false; };
+                    raises(createChart, /Unsupported browser: Missing SVG and VML support./);
                 });
 
                 test("sets dimensions on view element", 2, function() {

@@ -175,7 +175,15 @@
         [].push.apply(view.children, model.getViewElements(view));
 
         return view;
-    }
+    };
+
+    VMLView.available = function() {
+        return $.browser.msie;
+    };
+
+    VMLView.preference = 50;
+
+    dataviz.ui.registerView(VMLView);
 
     // Primitives =============================================================
     var VMLText = ViewElement.extend({
