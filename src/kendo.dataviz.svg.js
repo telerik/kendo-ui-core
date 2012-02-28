@@ -7,8 +7,6 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
-        Gauge = kendo.dataviz.ui.Gauge,
-
         dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
         ExpandAnimation = dataviz.ExpandAnimation,
@@ -65,7 +63,7 @@
                 new dataviz.FadeAnimationDecorator(view)
             );
 
-            if (Gauge) {
+            if (dataviz.PointerAnimationDecorator) {
                 view.decorators.push(
                     new dataviz.PointerAnimationDecorator(view)
                 );
