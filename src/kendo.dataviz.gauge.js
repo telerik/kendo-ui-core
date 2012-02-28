@@ -373,7 +373,7 @@
                         segment = segments[j];
                         if (segment.from <= range.from && range.from <= segment.to) {
                             segments.push(rangeSegment(range.from, range.to,range.color));
-                            if (segment.from <= range.to && range.to <= segment.to) {
+                            if (segment.from <= range.to && range.to <= segment.to && range.to != max) {
                                 segments.push(rangeSegment(range.to, segment.to, defaultColor));
                             }
                             segment.to = range.from;
