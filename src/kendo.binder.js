@@ -538,7 +538,7 @@
             },
 
             refresh: function() {
-                this.widget.toggle(this.bindings["checked"].get() === true);
+                this.widget.check(this.bindings["checked"].get() === true);
             },
 
             value: function() {
@@ -553,7 +553,7 @@
             },
 
             destroy: function() {
-                $(this.element).unbind("change", this._change);
+                this.widget.unbind("change", this._change);
             }
         }),
 

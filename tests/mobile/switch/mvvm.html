@@ -24,6 +24,14 @@
         <ul id="log"></ul>
 
         <script>
+            var dom;
+
+            module("switch mvvm", {
+                setup: function() {
+                    dom = $('<input data-bind="checked:checked" />');
+                }
+            });
+
             test("initializes a switch when data role is switch", function() {
                 var dom = $('<input data-role="switch"/>');
 
@@ -62,16 +70,82 @@
             });
 
             test("binding switch initialized before binding", function() {
-                var dom = $('<input data-bind="checked:checked" />');
-
                 var checked = true;
                 var observable = kendo.observable({ checked: checked });
+                observable.value = value;
 
                 dom.kendoMobileSwitch();
 
                 kendo.bind(dom, observable, kendo.mobile.ui );
 
                 equal(dom.prop("checked"), checked);
+            });
+
+            test("binding switch initialized after binding", function() {
+                var checked = true;
+                var observable = kendo.observable({ checked: checked });
+                observable.value = value;
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                dom.kendoMobileSwitch();
+
+                equal(dom.prop("checked"), checked);
+            });
+
+            test("updating model value updates the UI", function() {
+                var observable = kendo.observable({ checked: null });
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                dom.kendoMobileSwitch();
+
+                observable.set("checked", true)
+                ok(dom.prop("checked"));
+            });
+
+            test("bindings are removed if element is rebind", 1, function() {
+                var dom = $('<input data-role="switch" data-bind="checked:value" />');
+
+                var observable = kendo.observable({ value: true });
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            function change() {
+                ok(true);
+            }
+
+            test("change event is raised if attached as option", 1, function() {
+                var dom = $('<input data-role="switch" data-change="change" />');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                dom.data("kendoMobileSwitch").trigger("change");
+            });
+
+            test("change event is raised if attached as option to a already initialized datepicker", 1, function() {
+                var dom = $('<input data-change="change" />');
+
+                dom.kendoMobileSwitch();
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}]
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui );
+
+                dom.data("kendoMobileSwitch").trigger("change");
             });
         </script>
     </body>
