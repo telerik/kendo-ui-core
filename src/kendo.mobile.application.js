@@ -298,6 +298,7 @@
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Application layout.
+         * @option {String} [loading] <Loading...> The text displayed in the loading popup. Setting this value to false will disable the loading popup.
          * @option {Boolean} [hideAddressBar] <true> Whether to hide the browser address bar.
          * _example
          * <div data-role="view">Bar</div>
