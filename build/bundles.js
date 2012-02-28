@@ -19,11 +19,11 @@ var productionLicenses = [
     commercialLicense,
     {name: "trial", source: false},
     {name: "open-source", source: true}
-]
+];
 
 var betaLicenses = [
     {name: "beta", source: true}
-]
+];
 
 
 // Configuration ==============================================================
@@ -31,7 +31,7 @@ var cdnBundle = {
     name: "kendoui.cdn",
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
-    licenses: [commercialLicense],
+    licenses: betaLicenses,
     eula: "eula",
 };
 
@@ -39,17 +39,17 @@ var bundles = [{
     name: "kendoui.complete",
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
-    licenses: productionLicenses,
+    licenses: betaLicenses,
     eula: "eula",
 }, {
     name: "kendoui.web",
     suites: ["web"],
-    licenses: productionLicenses,
+    licenses: betaLicenses,
     eula: "eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
-    licenses: productionLicenses,
+    licenses: betaLicenses,
     eula: "eula"
 }, {
     name: "kendoui.mobile",
