@@ -152,6 +152,25 @@
             ]
         },
         {
+            "text": "Editor",
+            "name": "editor",
+            "spriteCssClass": "editorIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "editor/index.html"
+                },
+                {
+                    "text": "Events",
+                    "url": "editor/events.html"
+                },
+                {
+                    "text": "API",
+                    "url": "editor/api.html"
+                }
+            ]
+        },
+        {
             "text": "Grid",
             "name": "grid",
             "spriteCssClass": "gridIcon",

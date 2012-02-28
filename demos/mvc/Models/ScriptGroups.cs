@@ -50,7 +50,8 @@ namespace Kendo.Models
             "kendo.timepicker.js",
             "kendo.treeview.js",
             "kendo.upload.js",
-            "kendo.window.js"
+            "kendo.window.js",
+            "kendo.editor.js"
 #else
             "http://code.jquery.com/jquery-1.7.1.min.js",
             "kendo.all.min.js"

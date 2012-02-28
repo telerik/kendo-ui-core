@@ -385,7 +385,6 @@
             self.options = deepExtend({}, self.options, options);
 
             self.bind([
-                "load",
                 "select",
                 "change",
                 "execute",
@@ -582,30 +581,30 @@
                 { Text: 'Heading 6', Value: 'h6' }
             ],
             tools: [
-                "backColor",
                 "bold",
-                "createLink",
+                "italic",
+                "underline",
+                "strikethrough",
                 "fontName",
                 "fontSize",
                 "foreColor",
-                "formatBlock",
-                "indent",
-                //"insertHtml",
-                "insertImage",
-                "insertOrderedList",
-                "insertUnorderedList",
-                "italic",
-                "justifyCenter",
-                "justifyFull",
+                "backColor",
                 "justifyLeft",
+                "justifyCenter",
                 "justifyRight",
+                "justifyFull",
+                "insertUnorderedList",
+                "insertOrderedList",
+                "indent",
                 "outdent",
-                "strikethrough",
+                "formatBlock",
+                "createLink",
+                "unlink",
+                "insertImage",
+                //"insertHtml",
                 //"style",
                 //"subscript",
                 //"superscript",
-                "underline",
-                "unlink"
             ]
         },
 
@@ -4910,6 +4909,7 @@ var ColorPicker = Widget.extend({
 
         kendo.wrap($popup).css($.extend({
             position: 'absolute',
+            overflow: 'hidden',
             zIndex: zIndex
         }, elementPosition));
         
@@ -4919,18 +4919,18 @@ var ColorPicker = Widget.extend({
                 this.select(color);
             }, that));
 
-        $popup.kendoAnimate({slideIn:"down", show: true});
+        $popup.kendoAnimate({ effects: "slideIn:down", show: true, duration: 200 });
     },
 
     close: function() {
         if (!this.$popup) return;
 
-        this.$popup.kendoAnimate("slideIn:down", true, $.proxy(function() {
+        this.$popup.kendoAnimate( { effects: "slideIn:down", hide: true, reverse: true, duration: 200, complete: $.proxy(function() {
             if (this.$popup) {
                 dom.remove(this.$popup[0].parentNode);
                 this.$popup = null;
             }
-        }, this));
+        }, this) });
 
     },
 

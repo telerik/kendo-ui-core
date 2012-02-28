@@ -498,6 +498,9 @@
     <Content Include="Views\web\listview\index.cshtml" />
     <Content Include="Views\web\listview\remote-data.cshtml" />
     <Content Include="Views\web\listview\editing.cshtml" />
+    <Content Include="Views\web\editor\api.cshtml" />
+    <Content Include="Views\web\editor\events.cshtml" />
+    <Content Include="Views\web\editor\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

@@ -385,7 +385,6 @@
             self.options = deepExtend({}, self.options, options);
 
             self.bind([
-                "load",
                 "select",
                 "change",
                 "execute",
@@ -582,30 +581,30 @@
                 { Text: 'Heading 6', Value: 'h6' }
             ],
             tools: [
-                "backColor",
                 "bold",
-                "createLink",
+                "italic",
+                "underline",
+                "strikethrough",
                 "fontName",
                 "fontSize",
                 "foreColor",
-                "formatBlock",
-                "indent",
-                //"insertHtml",
-                "insertImage",
-                "insertOrderedList",
-                "insertUnorderedList",
-                "italic",
-                "justifyCenter",
-                "justifyFull",
+                "backColor",
                 "justifyLeft",
+                "justifyCenter",
                 "justifyRight",
+                "justifyFull",
+                "insertUnorderedList",
+                "insertOrderedList",
+                "indent",
                 "outdent",
-                "strikethrough",
+                "formatBlock",
+                "createLink",
+                "unlink",
+                "insertImage",
+                //"insertHtml",
                 //"style",
                 //"subscript",
                 //"superscript",
-                "underline",
-                "unlink"
             ]
         },
 
