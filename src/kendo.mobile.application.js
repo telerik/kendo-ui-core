@@ -574,16 +574,26 @@
         showLoading: function() {
             var that = this;
 
+            if (that.options.loading === false) {
+                return;
+            }
+
             that._loading = setTimeout(function() {
                 that.loader.show();
             }, 100);
         },
 
         _loader: function() {
-            var that = this;
-            that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span><h1>Loading...</h1></div>')
-            .hide()
-            .appendTo(that.element);
+            var that = this,
+                text = that.options.loading;
+
+            if (text === undefined) {
+                text = "<h1>Loading...";
+            }
+
+            that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span>' + text + "</div>")
+                            .hide()
+                            .appendTo(that.element);
         }
     });
 
