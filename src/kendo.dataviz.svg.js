@@ -206,9 +206,13 @@
         [].push.apply(view.children, model.getViewElements(view));
 
         return view;
-    }
+    };
 
-    // Primitives =============================================================
+    SVGView.available = dataviz.supportsSVG;
+    SVGView.preference = 100;
+
+    dataviz.ui.registerView(SVGView);
+
     var SVGText = ViewElement.extend({
         init: function(content, options) {
             var text = this;
