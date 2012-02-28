@@ -389,8 +389,8 @@
                     for (j = 0; j < segmentCount; j++) {
                         segment = segments[j];
                         if (segment.from <= range.from && range.from <= segment.to) {
-                            segments.push(rangeSegment(range.from, range.to,range.color));
-                            if (segment.from <= range.to && range.to <= segment.to && range.to != max) {
+                            segments.push(rangeSegment(range.from, range.to, range.color));
+                            if (segment.from <= range.to && range.to <= segment.to) {
                                 segments.push(rangeSegment(range.to, segment.to, defaultColor));
                             }
                             segment.to = range.from;
@@ -403,12 +403,14 @@
                     segment = segments[i];
                     from = scale.getSlotAngle(segment.from);
                     to = scale.getSlotAngle(segment.to);
-                    result.push(view.createRing(
-                        new Ring(ring.c, ir, r, from, to - from), {
-                            fill: segment.color,
-                            fillOpacity: segment.opacity,
-                            zIndex: -1
-                    }));
+                    if (to - from != 0) {
+                        result.push(view.createRing(
+                            new Ring(ring.c, ir, r, from, to - from), {
+                                fill: segment.color,
+                                fillOpacity: segment.opacity,
+                                zIndex: -1
+                        }));
+                    }
                 }
             }
 
