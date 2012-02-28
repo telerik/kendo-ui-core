@@ -82,7 +82,7 @@
             Widget.fn.init.call(that, element, options);
 
             that._wrapper();
-            that._swipe();
+            that._drag();
             that._background();
             that._handle();
 
@@ -203,7 +203,7 @@
         },
 
         _start: function(e) {
-            this.swipe.capture();
+            this.drag.capture();
             this.handle.addClass(ACTIVE_STATE);
         },
 
@@ -285,10 +285,10 @@
             that.wrapper = wrapper;
         },
 
-        _swipe: function() {
+        _drag: function() {
             var that = this;
 
-            that.swipe = new kendo.mobile.Swipe(that.wrapper, {
+            that.drag = new kendo.Drag(that.wrapper, {
                 tap: function() {
                     that._toggle(!that.element[0].checked);
                 },

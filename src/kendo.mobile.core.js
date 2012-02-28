@@ -160,7 +160,7 @@
             Observable.fn.init.call(that);
         },
 
-        swipeMove: function(delta) {
+        dragMove: function(delta) {
             var that = this,
                 boundary = that.boundary,
                 axis = that.axis,
@@ -205,10 +205,10 @@
                 move: that.move
             });
 
-            that.swipe.bind(["move", "end"], {
+            that.drag.bind(["move", "end"], {
                 move: function(e) {
-                    x.swipeMove(e.x.delta);
-                    y.swipeMove(e.y.delta);
+                    x.dragMove(e.x.delta);
+                    y.dragMove(e.y.delta);
                     e.preventDefault();
                 },
 

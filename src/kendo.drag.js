@@ -19,7 +19,7 @@
                 END_EVENTS = "mouseup mouseleave";
         }
 
-    var SwipeAxis = Class.extend({
+    var DragAxis = Class.extend({
         start: function(location, timeStamp) {
             var that = this;
             that.location = location;
@@ -44,7 +44,7 @@
         return events.replace(/ /g, ns + " ");
     }
 
-    var Swipe = Observable.extend({
+    var Drag = Observable.extend({
         init: function(element, options) {
             var that = this,
                 eventMap = {},
@@ -61,8 +61,8 @@
             eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
 
             extend(that, {
-                x: new SwipeAxis(),
-                y: new SwipeAxis(),
+                x: new DragAxis(),
+                y: new DragAxis(),
                 element: element,
                 surface: options.global ? SURFACE : element,
                 pressed: false,
@@ -77,7 +77,7 @@
         },
 
         capture: function() {
-            Swipe.captured = true;
+            Drag.captured = true;
         },
 
         cancel: function() {
@@ -102,7 +102,7 @@
 
             that._perAxis(START, touch || e, e.timeStamp);
             that.surface.off(that.eventMap).on(that.eventMap);
-            Swipe.captured = false;
+            Drag.captured = false;
         },
 
         _move: function(e) {
@@ -119,7 +119,7 @@
                 }
 
                 if (!that.moved) {
-                    if (!Swipe.captured) {
+                    if (!Drag.captured) {
                         that._trigger(START, e);
                         that.moved = true;
                     } else {
@@ -222,6 +222,6 @@
         }
     });
 
-    kendo.mobile.Swipe = Swipe;
-    kendo.mobile.Tap = Tap;
+    kendo.Drag = Drag;
+    kendo.Tap = Tap;
 })(jQuery);
