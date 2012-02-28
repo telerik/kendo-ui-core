@@ -93,6 +93,19 @@
                 equal(observable.value, "moo");
             });
 
+            test("changing a value updates the view model if bound to simple value", function() {
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: "foo" });
+
+                var dom = $('<input data-role="autocomplete" data-text-field="text" data-bind="value:value, source:items" />');
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoAutoComplete").value("bar");
+                dom.data("kendoAutoComplete").trigger("change");
+
+                equal(observable.value, "bar");
+            });
+
             test("custom view model value", function() {
                 var dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
 
@@ -101,6 +114,38 @@
 
                 kendo.bind(dom, observable);
                 equal(dom.data("kendoAutoComplete").value(), "moo");
+            });
+
+            test("setting existing view model value after custom value", function() {
+                var dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoAutoComplete").value("moo");
+                dom.data("kendoAutoComplete").trigger("change");
+
+                dom.data("kendoAutoComplete").value("foo");
+                dom.data("kendoAutoComplete").trigger("change");
+
+                equal(observable.value, observable.items[0]);
+            });
+
+            test("setting custom value after existing view model value", function() {
+                var dom = $('<input data-text-field="text" data-role="autocomplete" data-bind="value:value, source:items" />');
+
+                var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoAutoComplete").value("foo");
+                dom.data("kendoAutoComplete").trigger("change");
+
+                dom.data("kendoAutoComplete").value("moo");
+                dom.data("kendoAutoComplete").trigger("change");
+
+                equal(observable.value, "moo");
             });
 
             test("binding autocomplete initialized before binding", function() {

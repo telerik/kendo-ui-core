@@ -590,6 +590,9 @@
                 this.widget = widget;
                 this._change = $.proxy(this.change, this);
                 this.widget.bind("change", this._change);
+
+                var value = this.bindings.value.get();
+                this._valueIsObservableObject = value === undefined || value === null || value instanceof ObservableObject;
             },
 
             change: function() {
@@ -600,7 +603,7 @@
 
                 if (field) {
                     var source,
-                        isObservableObject = this.bindings.value.get() instanceof ObservableObject;
+                        isObservableObject = this._valueIsObservableObject;
 
                     if (this.bindings.source) {
                         source = this.bindings.source.get();
