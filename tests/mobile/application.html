@@ -244,25 +244,32 @@
                 ok(loader.hasClass("km-loader"));
             });
 
-            asyncTest("showLoading shows loading image", 1, function() {
+            test("Loader uses default text", function() {
                 setup('<div data-role="view">Page 1</div>');
-                application.showLoading();
 
-                setTimeout(function() {
-                    start();
-                    equal(application.loader.css("display"), "block");
-                }, 200);
+                var loader = application.loader;
+                equal(loader.text(), "Loading...");
             });
 
-            asyncTest("hideLoading hides loading image", 1, function() {
-                expect(1);
-                setup('<div data-role="view">Page 1</div>');
+            test("Loader uses options.loading", function() {
+                setup('<div data-role="view">Page 1</div>', {
+                    loading: "Custom text"
+                });
+
+                var loader = application.loader;
+                equal(loader.text(), "Custom text");
+            });
+
+            asyncTest("Do not show loader if options.loading is false", function() {
+                setup('<div data-role="view">Page 1</div>', {
+                    loading: false
+                });
+
                 application.showLoading();
 
                 setTimeout(function() {
                     start();
-                    application.hideLoading();
-                    equal(application.loader.css("display"), "none");
+                    ok(!application.loader.is(":visible"));
                 }, 200);
             });
 
