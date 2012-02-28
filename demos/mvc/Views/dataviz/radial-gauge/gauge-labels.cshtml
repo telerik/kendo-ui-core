@@ -17,6 +17,11 @@
                         <input id="labels-outside" type="radio" value="outside" name="labels-position">
                         <label for="labels-outside">- outside of the gauge</label>
                     </li>
+
+                    <li>
+                        <input id="ranges" checked="checked" type="checkbox" autocomplete="off">
+                        <label for="ranges">Show ranges</label>
+                    </li>
                 </ul>
             </div>
 
@@ -66,11 +71,14 @@
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauge();
                     });
+
+                    window.configuredRanges = $("#gauge").data("kendoGauge").options.scale.ranges;
                 });
 
                 function refresh() {
                     var gauge = $("#gauge").data("kendoGauge"),
                         showLabels = $("#labels").prop("checked"),
+                        showRanges = $("#ranges").prop("checked"),
                         positionInputs = $("input[name='labels-position']"),
                         labelsPosition = positionInputs.filter(":checked").val(),
                         options = gauge.options;
@@ -78,6 +86,7 @@
                     options.transitions = false;
                     options.scale.labels.visible = showLabels;
                     options.scale.labels.position = labelsPosition;
+                    options.scale.ranges = showRanges ? window.configuredRanges : [];
 
                     gauge.redraw();
                 }
