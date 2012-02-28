@@ -4,18 +4,20 @@
                 <input id="titles"/>
             </div>
             <script>
-                $("#titles").kendoAutoComplete({
-                    minLength: 3,
-                    dataTextField: "Name",
-                    dataSource: {
-                        type: "odata",
-                        serverFiltering: true,
-                        serverPaging: true,
-                        pageSize: 20,
-                        transport: {
-                            read: "http://odata.netflix.com/Catalog/Titles"
+                $(document).ready(function() {
+                    $("#titles").kendoAutoComplete({
+                        minLength: 3,
+                        dataTextField: "Name",
+                        dataSource: {
+                            type: "odata",
+                            serverFiltering: true,
+                            serverPaging: true,
+                            pageSize: 20,
+                            transport: {
+                                read: "http://odata.netflix.com/Catalog/Titles"
+                            }
                         }
-                    }
+                    });
                 });
             </script>
 
