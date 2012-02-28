@@ -71,8 +71,8 @@ var suiteScripts = {
         "kendo.data.xml.js",
         "kendo.data.js",
         "kendo.dataviz.core.js",
+        "kendo.dataviz.themes.js",
         "kendo.dataviz.chart.js",
-        "kendo.dataviz.chart.themes.js",
         "kendo.dataviz.gauge.js",
         "kendo.dataviz.svg.js",
         "kendo.dataviz.vml.js"

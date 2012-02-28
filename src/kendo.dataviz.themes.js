@@ -42,9 +42,9 @@
             }
         };
 
-    var themes = { };
+    var chartThemes = { };
 
-    themes.black = deepExtend({}, baseTheme, {
+    chartThemes.black = deepExtend({}, baseTheme, {
         title: {
             color: WHITE
         },
@@ -127,7 +127,7 @@
         }
     });
 
-    themes["default"] = deepExtend({}, baseTheme, {
+    chartThemes["default"] = deepExtend({}, baseTheme, {
         title: {
             color: "#8e8e8e"
         },
@@ -180,7 +180,7 @@
         }
     });
 
-    themes.blueopal = deepExtend({}, baseTheme, {
+    chartThemes.blueopal = deepExtend({}, baseTheme, {
         title: {
             color: "#293135"
         },
@@ -233,7 +233,7 @@
         }
     });
 
-    themes.silver = deepExtend({}, baseTheme, {
+    chartThemes.silver = deepExtend({}, baseTheme, {
         title: {
             color: "#4e5968"
         },
@@ -309,7 +309,7 @@
         }
     });
 
-    themes.metro = deepExtend({}, baseTheme, {
+    chartThemes.metro = deepExtend({}, baseTheme, {
         title: {
             color: "#777777"
         },
@@ -360,8 +360,9 @@
     });
 
     // Exports ================================================================
-    dataviz.ui.Chart.themes = themes;
-    dataviz.ui.Chart.prototype.options.theme = "default";
+    deepExtend(dataviz.ui.themes, {
+        chart: chartThemes
+    });
 
 })(jQuery);
 
