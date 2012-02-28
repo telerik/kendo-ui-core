@@ -38,7 +38,22 @@
                             max: 180,
                             labels: {
                                 position: labelPosition || "inside"
-                            }
+                            },
+                            ranges: [
+                                {
+                                    from: 80,
+                                    to: 120,
+                                    color: "#ffc700"
+                                }, {
+                                    from: 120,
+                                    to: 150,
+                                    color: "#ff7a00"
+                                }, {
+                                    from: 150,
+                                    to: 180,
+                                    color: "#c20000"
+                                }
+                            ]
                         }
                     });
                 }
@@ -63,8 +78,6 @@
                     options.transitions = false;
                     options.scale.labels.visible = showLabels;
                     options.scale.labels.position = labelsPosition;
-
-                    positionInputs.attr("disabled", !showLabels);
 
                     gauge.redraw();
                 }
