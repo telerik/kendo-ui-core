@@ -610,7 +610,10 @@
 
         options: {
             name: "Gauge",
-            transitions: true
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            }
         },
 
         svg: function() {
