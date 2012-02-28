@@ -1,0 +1,69 @@
+        <div id="example" class="k-content absConf">
+            <div id="gauge-container"></div>
+
+            <script>
+                var index = 0;
+
+                function createGauge(startAngle, endAngle) {
+                    $("<div id='gauge-" + (++index) + "' />")
+                        .appendTo("#gauge-container")
+                        .kendoGauge({
+                            theme: $(document).data("kendoSkin") || "default",
+
+                            pointer: {
+                                value: 2
+                            },
+
+                            scale: {
+                                startAngle: startAngle,
+                                endAngle: endAngle,
+
+                                min: -5,
+                                max: 5,
+
+                                majorUnit: 2,
+                                majorTickSize: 6,
+
+                                ranges: [
+                                    {
+                                        from: 1,
+                                        to: 3,
+                                        color: "#ff7a00"
+                                    }, {
+                                        from: 3,
+                                        to: 5,
+                                        color: "#c20000"
+                                    }
+                                ]
+                            }
+                        });
+                }
+
+                $(document).ready(function() {
+                    createGauge(0, 110);
+                    createGauge(0, 180);
+                    createGauge(150, 210);
+                    createGauge(-90, 180);
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createGauge();
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #gauge-container {
+                    margin: 0 auto;
+                    overflow: hidden;
+                    width: 400px;
+                    height: 400px;
+                }
+
+                .k-gauge {
+                    width: 50%;
+                    height: 50%;
+                    float: left;
+                }
+            </style>
+        </div>
+
