@@ -168,21 +168,29 @@
                 ok(theSwitch.element[0].checked);
             });
 
-            test("Switch toggles to checked when toggle(true)", function() {
+            test("Switch returns current checked state", function() {
+                var theSwitch = new Switch(dom, {
+                    checked: true
+                });
+
+                ok(theSwitch.check());
+            });
+
+            test("Switch checks the input when check(true)", function() {
                 var theSwitch = new Switch(dom);
 
-                theSwitch.toggle(true);
+                theSwitch.check(true);
 
                 ok(theSwitch.wrapper.hasClass("km-switch-on"));
                 ok(theSwitch.element[0].checked);
             });
 
-            test("Switch toggles to checked when toggle(true)", function() {
-                var theSwitch = new Switch(dom);
+            test("Switch unchecks the input when check(false)", function() {
+                var theSwitch = new Switch(dom, {
+                    checked: true
+                });
 
-                theSwitch.toggle(true);
-
-                theSwitch.toggle(false);
+                theSwitch.check(false);
 
                 ok(!theSwitch.wrapper.hasClass("km-switch-on"));
                 ok(!theSwitch.element[0].checked);
@@ -197,10 +205,10 @@
                 ok(theSwitch.element[0].checked);
             });
 
-            test("Switch toggles to checked when toggle()", function() {
+            test("Switch toggles to unchecked when toggle()", function() {
                 var theSwitch = new Switch(dom);
 
-                theSwitch.toggle(true);
+                theSwitch.check(true);
                 theSwitch.toggle();
 
                 ok(!theSwitch.wrapper.hasClass("km-switch-on"));
