@@ -7,7 +7,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
-        Gauge = kendo.ui.Gauge,
+        Gauge = kendo.dataviz.ui.Gauge,
 
         dataviz = kendo.dataviz,
         Box2D = dataviz.Box2D,
@@ -67,7 +67,7 @@
 
             if (Gauge) {
                 view.decorators.push(
-                    new Gauge.PointerAnimationDecorator(view)
+                    new dataviz.PointerAnimationDecorator(view)
                 );
             }
 
