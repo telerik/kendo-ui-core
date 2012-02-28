@@ -1941,6 +1941,29 @@
         ui: {
             roles: {},
             themes: {},
+            views: [],
+            defaultView: function() {
+                var i,
+                    views = dataviz.ui.views,
+                    length = views.length;
+
+                for (i = 0; i < length; i++) {
+                    if (views[i].available()) {
+                        return views[i];
+                    }
+                }
+
+                throw Error("Unsupported browser: Missing SVG and VML support.");
+            },
+            registerView: function(viewType) {
+                var defaultView = dataviz.ui.views[0];
+
+                if (!defaultView || viewType.preference > defaultView.preference) {
+                    dataviz.ui.views.unshift(viewType);
+                } else {
+                    dataviz.ui.views.push(viewType);
+                }
+            },
             plugin: function(widget) {
                 kendo.ui.plugin(widget, dataviz.ui);
             }
