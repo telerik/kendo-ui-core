@@ -42,9 +42,17 @@
 
             view.decorators.push(
                 new VMLOverlayDecorator(view),
-                new VMLGradientDecorator(view),
-                new BarAnimationDecorator(view),
-                new PieAnimationDecorator(view),
+                new VMLGradientDecorator(view)
+            );
+
+            if (dataviz.ui.Chart) {
+                view.decorators.push(
+                    new BarAnimationDecorator(view),
+                    new PieAnimationDecorator(view)
+                );
+            }
+
+            view.decorators.push(
                 new VMLClipAnimationDecorator(view)
             );
 
