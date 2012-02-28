@@ -38,7 +38,7 @@
 
             test("_blur calls _change", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}]
+                    dataSource: ["foo", "bar"]
                 });
 
                 dropdownlist._change = function() {
@@ -52,7 +52,7 @@
 
             asyncTest("_blur calls popup close", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}]
+                    dataSource: ["foo", "bar"]
                 });
 
                 dropdownlist.dataSource.read();
@@ -81,7 +81,7 @@
 
             test("_change raises the input change event", function() {
                var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}]
+                    dataSource: ["foo", "bar"]
                 });
 
                 input.bind("change", function() {
@@ -96,7 +96,7 @@
 
             test("_change is not raised initially", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     autoBind: false,
                     change: function() {
                         changeWasCalled = true;
@@ -110,7 +110,7 @@
 
             test("_change does not raise change event if value has't changed", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
@@ -123,9 +123,23 @@
                 ok(!changeWasCalled);
             });
 
+            test("support setting a value in change event handler", function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["foo", "bar"],
+                    change: function() {
+                        dropdownlist.select(0);
+                    }
+                });
+
+                dropdownlist.open();
+                dropdownlist.ul.find("li:last").click();
+
+                equal(dropdownlist._old, "foo");
+            });
+
             test("select does not raise the change event", function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     change: function() {
                         changeWasCalled = true;
                     }
@@ -198,7 +212,7 @@
 
             asyncTest("open event when click arrow", function() {
                 input.kendoDropDownList({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     open: function() {
                         ok(true);
                         start();
@@ -210,7 +224,7 @@
 
             asyncTest("open event should be cancellable", function() {
                 input.kendoDropDownList({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     open: function(e) {
                         e.preventDefault();
                     }
@@ -228,7 +242,7 @@
 
             asyncTest("open event when ALT + down arrow", function() {
                 input.kendoDropDownList({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     open: function() {
                         ok(true);
                         start();
@@ -240,7 +254,7 @@
 
             asyncTest("close event when click arrow", function() {
                 input.kendoDropDownList({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     close: function() {
                         ok(true);
                         start();
@@ -254,6 +268,7 @@
 
             asyncTest("close event should be cancellable", function() {
                 input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function(e) {
                         e.preventDefault();
@@ -273,6 +288,7 @@
 
             asyncTest("close event when ALT + up arrow", function() {
                 input.kendoDropDownList({
+                    dataSource: ["foo", "bar"],
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {
                         ok(true);
@@ -287,7 +303,7 @@
 
             asyncTest("close event when select item", function() {
                 input.kendoDropDownList({
-                    dataSource: [{text: "foo"}, {text: "bar"}],
+                    dataSource: ["foo", "bar"],
                     close: function() {
                         ok(true);
                         start();

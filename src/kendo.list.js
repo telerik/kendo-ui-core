@@ -114,12 +114,12 @@
                 value = that.value();
 
             if (value !== that._old) {
+                that._old = value;
+
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
-
-                that._old = value;
             }
         },
 
