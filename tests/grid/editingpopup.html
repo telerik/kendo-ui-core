@@ -264,6 +264,26 @@
 
                 ok(grid._editContainer.data("kendoWindow"));
             });
+
+            test("cell content is updated during editing", function() {
+                var grid = setup();
+                grid.editRow(table.find("tr:first"));
+                grid._editContainer.find("input:first").val("moo").change();
+
+                equal(table.find("tr:first > td:first").text(), "moo");
+            });
+
+            test("model change handlers are distroyed", function() {
+                var grid = setup();
+
+                grid.editRow(table.find("tr:first"));
+                grid.cancelRow(table.find("tr:first"));
+
+                grid.editRow(table.find("tr:first"));
+                grid.cancelRow(table.find("tr:first"));
+
+                equal(dataSource.at(0)._events["change"].length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

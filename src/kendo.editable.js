@@ -132,6 +132,8 @@
         },
 
         distroy: function() {
+            kendo.unbind(this.element);
+
             this.element.removeData("kendoValidator")
                 .removeData("kendoEditable");
         },
