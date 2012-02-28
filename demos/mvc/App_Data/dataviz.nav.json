@@ -132,6 +132,9 @@
             }, {
                 "text": "Gauge labels",
                 "url": "radial-gauge/gauge-labels.html"
+            }, {
+                "text": "Partial gauges",
+                "url": "radial-gauge/partial-gauges.html"
             }],
             "name": "radial gauge"
         }
