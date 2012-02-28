@@ -229,8 +229,9 @@
     };
 
     var initialRelativePath = getInitialStylePath(),
-        kendoSkin = "default",
-        kendoMobileOS = "ios";
+        kendoSkin = "default";
+
+    window.kendoMobileOS = "ios";
 
     $(Application.init);
 
@@ -279,11 +280,11 @@
                 { text: "Blackberry", value: "blackberry" }
             ]
         });
-        
+
         oses.read();
 
         applyCurrentMobileOS(options.container);
-        
+
         var deviceTemplate = kendo.template($("#deviceThumbTemplate").html());
         deviceList.html(kendo.render(deviceTemplate, oses.view()));
 
@@ -293,9 +294,8 @@
             $("#device-wrapper").removeClass(" ios android blackberry").addClass(value);
             try {
                 sessionStorage.setItem("kendoMobileOS", value);
+                location.reload();
             } catch(err) {}
-            $("#deviceList .selectedThumb").removeClass("selectedThumb");
-            $("#deviceList ." + value + "Thumb").parent().addClass("selectedThumb");
         });
 
        return this;
