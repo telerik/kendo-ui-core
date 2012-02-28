@@ -1535,7 +1535,7 @@
 
             if ((that.editable && that.editable.end()) || !that.editable) {
                 var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
-                    model = dataSource.insert(),
+                    model = dataSource.insert(index, {}),
                     id = model.uid,
                     mode = that._editMode(),
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
