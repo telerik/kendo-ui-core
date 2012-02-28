@@ -7,14 +7,106 @@
         extend = $.extend,
         deepExtend = kendo.deepExtend;
 
-    // static functions =======================================================
-
-    var EditorUtils = {
-        selectionChanged: function(editor) {
-            editor.trigger('selectionChange', {});
+    // options can be: template (as string), cssClass, title, defaultValue
+    var ToolTemplate = Class.extend({
+        init: function(options) {
+            var that = this;
+            that.options = options;
         },
 
+        getHtml: function() {
+            var options = this.options;
+            return kendo.template(options.template)({
+                toolClass: options.cssClass,
+                toolTitle: options.title,
+                initialValue: options.initialValue
+            });
+        }
+    });
+
+    var EditorUtils = {
+        select: function(editor) {
+            editor.trigger('select', {});
+        },
+
+        editorWrapperTemplate:
+            '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header"><tbody>' +
+                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"><li>&nbsp;</li></ul></td></tr>' +
+                '<tr><td class="k-editable-area"></td></tr>' +
+            '</tbody></table>',
+
+        buttonTemplate:
+            '<li class="k-editor-button">' +
+                '<a href="" class="k-tool-icon k-#=toolClass#" unselectable="on" title="#=toolTitle#">#=toolTitle#</a>' +
+            '</li>',
+
+        colorPickerTemplate:
+            '<li class="k-editor-colorpicker">' + 
+                '<div class="k-widget k-colorpicker k-header k-#=toolClass#">' +
+                    '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-arrow-down"></span>' +
+            '</div></li>',
+
+        comboBoxTemplate:
+            '<li class="k-editor-combobox">' +
+                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
+//                '<div class="k-widget k-combobox k-header k-#=toolClass#">' +
+//                    '<div class="k-dropdown-wrap k-state-default">' +
+//                        '<input class="k-input" id="-input" title="#=toolTitle#" type="text" value="#=initialValue#" />' +
+//                        '<span class="k-select k-header"><span class="k-icon k-arrow-down">select</span></span>' +
+//                    '</div><input style="display:none" type="text" value="inherit" /></div>' +
+            '</li>',
+
+        dropDownListTemplate:
+            '<li class="k-editor-selectbox">' +
+                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
+//                '<div class="k-selectbox k-header k-#=toolClass#"><div class="k-dropdown-wrap k-state-default">' +
+//                    '<span class="k-input">#=initialValue#</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span>' +
+//                '</div></div>' +
+            '</li>',
+
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
+
+        wrapTextarea: function($textarea) {
+            
+            var w = $textarea.width(),
+                h = $textarea.height(),
+                template = EditorUtils.editorWrapperTemplate,
+                editorWrap = $(template).insertBefore($textarea).width(w).height(h),
+                editArea = editorWrap.find('.k-editable-area'),
+                toolsArea = editorWrap.find('.k-editor-toolbar');
+
+            $textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
+
+            return $textarea.closest(".k-editor");
+        },
+
+        renderTools: function(editor, tools) {
+            var toolsCollection = {},
+                toolsArea = $(editor.element).closest(".k-editor").find('.k-editor-toolbar');
+
+            toolsArea.empty();
+
+            if (tools && tools.length > 0) {
+                for (var j = 0; j < tools.length; j++) {
+                    var tool = editor._tools[tools[j]],
+                        toolName = tools[j];
+                    if (tool) {
+                        toolsCollection[tools[j]] = tool;
+                        if (tool.options.template) {
+                            $(tool.options.template.getHtml()).appendTo(toolsArea);
+                        }
+                    }
+                }
+            }
+
+            var nativeTools = editor._nativeTools;
+
+            for (var j = 0; j < nativeTools.length; j++) {
+                toolsCollection[nativeTools[j]] = editor._tools[nativeTools[j]];
+            }
+
+            editor.options.tools = toolsCollection;
+        },
 
         createContentElement: function($textarea, stylesheets) {
             $textarea.hide();
@@ -90,7 +182,11 @@
                             e.preventDefault();
                             return;
                         }
+                        console.log(editor.options.tools);
+
                         var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
+
+                        console.log(e, toolName);
 
                         if (toolName) {
                             e.preventDefault();
@@ -124,7 +220,7 @@
                 
                         if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
                             editor.pendingFormats.clear();
-                            selectionChanged(editor);
+                            select(editor);
                         }
                 
                         if (editor.keyboard.isTypingKey(e)) {
@@ -148,7 +244,7 @@
                         window.open(target.attr('href'), '_new');
                     },
                     mouseup: function () {
-                        selectionChanged(editor);
+                        select(editor);
                     }
                 });
 
@@ -211,7 +307,11 @@
         },
 
         registerTool: function(toolName, tool) {
-            Editor.fn.options.tools[toolName] = tool;
+            var tools = Editor.fn._tools;
+            tools[toolName] = tool;
+            if (tools[toolName].options && tools[toolName].options.template) {
+                tools[toolName].options.template.options.cssClass = toolName;
+            }
         },
 
         registerFormat: function(formatName, format) {
@@ -219,8 +319,10 @@
         }
     };
     
-    var selectionChanged = EditorUtils.selectionChanged,
+    var select = EditorUtils.select,
         focusable = EditorUtils.focusable,
+        wrapTextarea = EditorUtils.wrapTextarea,
+        renderTools = EditorUtils.renderTools,
         createContentElement = EditorUtils.createContentElement,
         initializeContentElement = EditorUtils.initializeContentElement,
         fixBackspace = EditorUtils.fixBackspace;
@@ -269,33 +371,38 @@
             if (/Mobile.*Safari/.test(navigator.userAgent))
                 return;
 
-            var self = this;
+            var self = this,
+                $element = $(element);
 
             self.element = element;
-
-            var $element = $(element);
 
             $element.closest('form').bind('submit', function () {
                 self.update();
             });
 
             Widget.fn.init.call(self, element);
+
             self.options = deepExtend({}, self.options, options);
 
             self.bind([
                 "load",
-                "selectionChange",
+                "select",
                 "change",
                 "execute",
                 "error",
                 "paste"
             ], self.options);
 
-            for (var id in self.options.tools)
-                self.options.tools[id].name = id.toLowerCase();
+            for (var id in self._tools)
+                self._tools[id].name = id.toLowerCase();
         
-            self.textarea = $element.find('textarea').attr('autocomplete', 'off')[0];
-            initializeContentElement(this);
+            self.textarea = $element.attr('autocomplete', 'off')[0];
+
+            var $wrapper = self.wrapper = wrapTextarea($element);
+
+            renderTools(self, self.options.tools);
+
+            initializeContentElement(self);
 
             self.keyboard = new Editor.Keyboard([new Editor.TypingHandler(self), new Editor.SystemHandler(self)]);
         
@@ -304,6 +411,10 @@
             self.pendingFormats = new Editor.PendingFormats(this);
         
             self.undoRedoStack = new Editor.UndoRedoStack();
+
+            if (options && options.value) {
+                self.value(options.value);
+            }
 
             function toolFromClassName(element) {
                 var tool = $.grep(element.className.split(' '), function (x) {
@@ -327,12 +438,12 @@
                 return res;
             }
 
-            var toolbarItems = '.k-editor-toolbar > li > *',
+            var toolbarItems = '.k-editor-toolbar > li > *, .k-editor-toolbar > li select',
                 buttons = '.k-editor-button .k-tool-icon',
                 enabledButtons = buttons + ':not(.k-state-disabled)',
                 disabledButtons = buttons + '.k-state-disabled';
 
-             $element.find(".k-combobox .k-input").keydown(function(e) {
+             $wrapper.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
                     key = e.keyCode;
 
@@ -346,7 +457,7 @@
                 }
             });
 
-            $element
+            $wrapper
                 .delegate(enabledButtons, 'mouseenter', function() { $(this).addClass("k-state-hover")})
                 .delegate(enabledButtons, 'mouseleave', function() { $(this).removeClass("k-state-hover")})
                 .delegate(buttons, 'mousedown', false)
@@ -377,7 +488,7 @@
                     
                         if (toolName == 'fontSize' || toolName == 'fontName') {
                             var inheritText = self.options.localization[toolName + 'Inherit'] || localization[toolName + 'Inherit']
-                            self[toolName][0].Text = inheritText;
+                            self.options[toolName][0].Text = inheritText;
                             $this.find('input').val(inheritText).end()
                                  .find('span.k-input').text(inheritText).end();
                         }
@@ -388,7 +499,7 @@
                         });
 
                     });/*.end()*/
-                self.bind('selectionChange', function() {
+                self.bind('select', function() {
                     var range = self.getRange();
 
                     var nodes = Editor.RangeUtils.textNodes(range);
@@ -397,7 +508,7 @@
                         nodes = [range.startContainer];
                     }
 
-                    $element.find(toolbarItems)
+                    $wrapper.find(toolbarItems)
                         .each(function () {
                             var tool = self.options.tools[toolFromClassName(this)];
                             if (tool) {
@@ -470,10 +581,44 @@
                 { Text: 'Heading 5', Value: 'h5' },
                 { Text: 'Heading 6', Value: 'h6' }
             ],
-            tools: {
-                undo: { key: 'Z', ctrl: true },
-                redo: { key: 'Y', ctrl: true }
-            }
+            tools: [
+                "backColor",
+                "bold",
+                "createLink",
+                "fontName",
+                "fontSize",
+                "foreColor",
+                "formatBlock",
+                "indent",
+                //"insertHtml",
+                "insertImage",
+                "insertOrderedList",
+                "insertUnorderedList",
+                "italic",
+                "justifyCenter",
+                "justifyFull",
+                "justifyLeft",
+                "justifyRight",
+                "outdent",
+                "strikethrough",
+                //"style",
+                //"subscript",
+                //"superscript",
+                "underline",
+                "unlink"
+            ]
+        },
+
+        _nativeTools: [
+            "insertLineBreak",
+            "insertParagraph",
+            "redo",
+            "undo"
+        ],
+
+        _tools: {
+            undo: { options: { key: 'Z', ctrl: true } },
+            redo: { options: { key: 'Y', ctrl: true } }
         },
 
         value: function (html) {
@@ -578,7 +723,7 @@
         },
 
         exec: function (name, params) {
-            var range, body, id, tool = '';
+            var range, body, id, tool = '', pendingTool;
 
             name = name.toLowerCase();
 
@@ -601,8 +746,11 @@
                 range = this.getRange();
 
                 if (!/undo|redo/i.test(name) && tool.willDelayExecution(range)) {
-                    this.pendingFormats.toggle({ name: name, params: params, command: tool.command });
-                    selectionChanged(this);
+                    // clone our tool to apply params only once
+                    pendingTool = $.extend({}, tool);
+                    $.extend(pendingTool.options, { params: params });
+                    this.pendingFormats.toggle(pendingTool);
+                    select(this);
                     return;
                 }
 
@@ -621,12 +769,12 @@
                     command.exec();
 
                     if (command.async) {
-                        command.change = $.proxy(function () { selectionChanged(this); }, this);
+                        command.change = $.proxy(function () { select(this); }, this);
                         return;
                     }
                 }
 
-                selectionChanged(this);
+                select(this);
             }
         }
     });
@@ -683,6 +831,7 @@
     // Exports ================================================================
 
     extend(kendo.ui.Editor, {
+        ToolTemplate: ToolTemplate,
         EditorUtils: EditorUtils,
         Tool: Tool,
         FormatTool: FormatTool
@@ -1035,6 +1184,23 @@ var Dom = {
         $span.remove();
         
         return style;
+    },
+
+    removeClass: function(node, classNames) {
+        var className = " " + node.className + " ",
+            classes = classNames.split(" ");
+
+        for (var i = 0; i < classes.length; i++) {
+            className = className.replace(" " + classes[i] + " ", " ");
+        }
+
+        className = $.trim(className);
+
+        if (className.length) {
+            node.className = className;
+        } else {
+            node.removeAttribute("class");
+        }
     },
 
     commonAncestor: function () {
@@ -1935,27 +2101,31 @@ var RestorePoint = Class.extend({
 });
 
 var Marker = Class.extend({
-    addCaret: function (range) {
-        var caret = this.caret;
+    init: function() {
+        this.caret = null;
+    },
 
-        caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
-        range.insertNode(caret);
-        range.selectNode(caret);
-        return caret;
+    addCaret: function (range) {
+        var that = this;
+
+        that.caret = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
+        range.insertNode(that.caret);
+        range.selectNode(that.caret);
+        return that.caret;
     },
 
     removeCaret: function (range) {
-        var caret = this.caret,
-            previous = caret.previousSibling;
+        var that = this,
+            previous = that.caret.previousSibling;
             startOffset = 0;
             
         if (previous)
             startOffset = isDataNode(previous) ? previous.nodeValue.length : findNodeIndex(previous);
 
-        var container = caret.parentNode;
+        var container = that.caret.parentNode;
         var containerIndex = previous ? findNodeIndex(previous) : 0;
 
-        dom.remove(caret);
+        dom.remove(that.caret);
         normalize(container);
 
         var node = container.childNodes[containerIndex];
@@ -2250,11 +2420,13 @@ extend(kendo.ui.Editor, {
         kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
-        registerTool = Editor.EditorUtils.registerTool,
+        EditorUtils = Editor.EditorUtils,
+        registerTool = EditorUtils.registerTool,
         dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
         selectRange = RangeUtils.selectRange,
         Tool = Editor.Tool,
+        ToolTemplate = Editor.ToolTemplate,
         RestorePoint = Editor.RestorePoint,
         Marker = Editor.Marker,
         extend = $.extend;
@@ -2303,16 +2475,18 @@ var Command = Class.extend({
 var GenericCommand = Class.extend({
     init: function(startRestorePoint, endRestorePoint) {
         this.body = startRestorePoint.body;
+        this.startRestorePoint = startRestorePoint;
+        this.endRestorePoint = endRestorePoint;
     },
 
     redo: function () {
-        this.body.innerHTML = endRestorePoint.html;
-        selectRange(endRestorePoint.toRange());
+        this.body.innerHTML = this.endRestorePoint.html;
+        selectRange(this.endRestorePoint.toRange());
     },
 
     undo: function () {
-        this.body.innerHTML = startRestorePoint.html;
-        selectRange(startRestorePoint.toRange());
+        this.body.innerHTML = this.startRestorePoint.html;
+        selectRange(this.startRestorePoint.toRange());
     }
 });
 
@@ -2328,7 +2502,7 @@ var InsertHtmlCommand = Command.extend({
         var range = editor.getRange();
         var startRestorePoint = new RestorePoint(range);
 
-        editor.clipboard.paste(options.value || '');
+        editor.clipboard.paste(this.options.value || '');
         editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
 
         editor.focus();
@@ -2340,12 +2514,12 @@ var InsertHtmlTool = Tool.extend({
         var editor = initOptions.editor;
         var title = editor.options.localization.insertHtml;
         
-        $ui.tSelectBox({
+        $ui.kendoDropDownList({
             data: editor['insertHtml'],
-            onItemCreate: function (e) {
+            itemCreate: function (e) {
                 e.html = '<span unselectable="on">' + e.dataItem.Text + '</span>';
             },
-            onChange: function (e) {
+            change: function (e) {
                 Tool.exec(editor, 'insertHtml', e.value);
             },
             highlightFirst: false
@@ -2357,7 +2531,7 @@ var InsertHtmlTool = Tool.extend({
     },
 
     update: function($ui, nodes) {
-        var list = $ui.data('tSelectBox');
+        var list = $ui.data('kendoDropDownList');
         list.close();
         list.value(title);
     }
@@ -2505,8 +2679,12 @@ var Keyboard = Class.extend({
         for (var toolName in tools) {
             var toolOptions = tools[toolName].options || {};
 
-            if ((toolOptions.key == key || toolOptions.key == e.keyCode) && !!toolOptions.ctrl == e.ctrlKey && !!toolOptions.alt == e.altKey && !!toolOptions.shift == e.shiftKey)
+            if ((toolOptions.key == key || toolOptions.key == e.keyCode)
+                && !!toolOptions.ctrl == e.ctrlKey 
+                && !!toolOptions.alt == e.altKey 
+                && !!toolOptions.shift == e.shiftKey) {
                 return toolName;
+            }
         }
     },
 
@@ -2636,7 +2814,7 @@ var Clipboard = Class.extend({
             editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
-            Editor.EditorUtils.selectionChanged(editor);
+            Editor.EditorUtils.select(editor);
         });
     },
 
@@ -2713,7 +2891,7 @@ var Clipboard = Class.extend({
             dom.unwrap(caret.parentNode);
         }
             
-        normalize(range.commonAncestorContainer);
+        dom.normalize(range.commonAncestorContainer);
         caret.style.display = 'inline';
         dom.scrollTo(caret);
         marker.removeCaret(range);
@@ -2840,7 +3018,7 @@ extend(kendo.ui.Editor, {
     MSWordFormatCleaner: MSWordFormatCleaner
 });
 
-registerTool("insertHtml", new InsertHtmlTool());
+registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Insert HTML", initialValue: "Insert HTML"})}));
 
 })(jQuery);(function($) {
 
@@ -2849,7 +3027,9 @@ registerTool("insertHtml", new InsertHtmlTool());
         Class = kendo.Class,
         Editor = kendo.ui.Editor,
         formats = Editor.fn.options.formats,
+        EditorUtils = Editor.EditorUtils,
         Tool = Editor.Tool,
+        ToolTemplate = Editor.ToolTemplate,
         FormatTool = Editor.FormatTool,
         dom = Editor.Dom,
         RangeUtils = Editor.RangeUtils,
@@ -3074,7 +3254,7 @@ registerTool("insertHtml", new InsertHtmlTool());
             var result = this.getFormatInner(nodes[0]);
 
             for (var i = 1, len = nodes.length; i < len; i++)
-                if (result != getFormatInner(nodes[i]))
+                if (result != this.getFormatInner(nodes[i]))
                     return '';
 
             return result;
@@ -3131,7 +3311,7 @@ registerTool("insertHtml", new InsertHtmlTool());
 
             // IE has single selection hence we are using select box instead of combobox
             fontTool.options = options;
-            fontTool.type = $.browser.msie ? 'tSelectBox' : 'tComboBox';
+            fontTool.type = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
             fontTool.format = [{ tags: ['span'] }],
             fontTool.finder = new GreedyInlineFormatFinder(fontTool.format, options.cssAttr);
         },
@@ -3165,20 +3345,22 @@ registerTool("insertHtml", new InsertHtmlTool());
         },
 
         initialize: function ($ui, initOptions) {
-            var editor = initOptions.editor;
+            var editor = initOptions.editor,
+                toolName = this.options.name;
 
-            $ui[type]({
-                data: editor[options.name],
-                onChange: function (e) {
-                    Tool.exec(editor, options.name, e.value);
-                },
-                onItemCreate: function (e) {
-                    e.html = '<span unselectable="on" style="display:block;">' + e.dataItem.Text + '</span>';
+            $ui[this.type]({
+                dataTextField: "Text",
+                dataValueField: "Value",
+                dataSource: editor.options[toolName],
+                change: function (e) {
+                    Tool.exec(editor, toolName, this.value());
                 },
                 highlightFirst: false
             });
+            
+            $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
 
-            $ui.data(type).value('inherit');
+            $ui.data(this.type).value('inherit');
         }
 
     });
@@ -3192,17 +3374,19 @@ registerTool("insertHtml", new InsertHtmlTool());
         },
 
         update: function($ui) {
-            $ui.data('tColorPicker').close();
+            $ui.data('kendoColorPicker').close();
         },
 
         command: function (commandArguments) {
-            var options = this.options;
+            var options = this.options,
+                format = this.format;
+
             return new Editor.FormatCommand(extend(commandArguments, {
                 formatter: function () { 
                     var style = {};
                     style[options.domAttr] = commandArguments.value;
 
-                    return new GreedyInlineFormatter(this.format, { style: style }, options.cssAttr); 
+                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr); 
                 }
             }));
         },
@@ -3210,12 +3394,14 @@ registerTool("insertHtml", new InsertHtmlTool());
         willDelayExecution: inlineFormatWillDelayExecution,
 
         initialize: function($ui, initOptions) {
-            var editor = initOptions.editor;
+            var editor = initOptions.editor,
+                toolName = this.name;
         
-            $ui.tColorPicker({
+            $ui.kendoColorPicker({
                 selectedColor: '#000000',
-                onChange: function (e) {
-                    Tool.exec(editor, this.options.name, e.value);
+                change: function (e) {
+                    //debugger;
+                    Tool.exec(editor, toolName, e.value);
                 }
             });
         }
@@ -3223,9 +3409,9 @@ registerTool("insertHtml", new InsertHtmlTool());
     });
 
     var StyleTool = Tool.extend({
-        init: function() {
+        init: function(options) {
             var styleTool = this;
-            Tool.fn.init.call(styleTool);
+            Tool.fn.init.call(styleTool, options);
 
             styleTool.format = [{ tags: ['span'] }];
             styleTool.finder = new GreedyInlineFormatFinder(styleTool.format, 'className');
@@ -3240,7 +3426,7 @@ registerTool("insertHtml", new InsertHtmlTool());
         },
 
         update: function($ui, nodes) {
-            var list = $ui.data('tSelectBox');
+            var list = $ui.data('kendoDropDownList');
             list.close();
             list.value(this.finder.getFormat(nodes));
         },
@@ -3248,15 +3434,15 @@ registerTool("insertHtml", new InsertHtmlTool());
         initiliaze: function($ui, initOptions) {
             var editor = initOptions.editor;
         
-            $ui.tSelectBox({
+            $ui.kendoDropDownList({
                 data: editor['style'],
                 title: editor.options.localization.style,
-                onItemCreate: function (e) {
+                itemCreate: function (e) {
                     var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
                 
                     e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
                 },
-                onChange: function (e) {
+                change: function (e) {
                     Tool.exec(editor, 'style', e.value);
                 }
             });
@@ -3275,33 +3461,33 @@ registerTool("insertHtml", new InsertHtmlTool());
         StyleTool: StyleTool
     });
 
-    registerTool("style", new Editor.StyleTool());
+    registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
 
     registerFormat("bold", [ { tags: ['strong'] }, { tags: ['span'], attr: { style: { fontWeight: 'bold'}} } ]);
-    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold}));
+    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));
 
     registerFormat("italic", [ { tags: ['em'] }, { tags: ['span'], attr: { style: { fontStyle: 'italic'}} } ]);
-    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic}));
+    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Italic"})}));
 
     registerFormat("underline", [ { tags: ['span'], attr: { style: { textDecoration: 'underline'}} } ]);
-    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline}));
+    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Underline"})}));
 
     registerFormat("strikethrough", [ { tags: ['del'] }, { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} } ]);
-    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough}));
+    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Strikethrough"})}));
 
     registerFormat("superscript", [ { tags: ['sup'] } ]);
-    registerTool("superscript", new InlineFormatTool({format: formats.superscript}));
+    registerTool("superscript", new InlineFormatTool({format: formats.superscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Superscript"})}));
 
     registerFormat("subscript", [ { tags: ['sub'] } ]);
-    registerTool("subscript", new InlineFormatTool({format: formats.subscript}));
+    registerTool("subscript", new InlineFormatTool({format: formats.subscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Subscript"})}));
 
-    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor'}));
+    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Color"})}));
 
-    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor'}));
+    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName'}));
+    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
 
-    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize'}));
+    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
 
 })(jQuery);(function($) {
 
@@ -3314,6 +3500,7 @@ var kendo = window.kendo,
     dom = Editor.Dom,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
     FormatTool = Editor.FormatTool,
     EditorUtils = Editor.EditorUtils,
     registerTool = EditorUtils.registerTool,
@@ -3454,9 +3641,15 @@ var BlockFormatter = Class.extend({
         for (var i = 0, l = nodes.length; i < l; i++) {
             var formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode)
-                if (dom.ofType(formatNode, ['p', 'img', 'li']))
-                    dom.unstyle(formatNode, EditorUtils.formatByName(dom.name(formatNode), this.format).attr.style);
-                else
+                if (dom.ofType(formatNode, ['p', 'img', 'li'])) {
+                    var namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
+                    if (namedFormat.attr.style) {
+                        dom.unstyle(formatNode, namedFormat.attr.style);
+                    }
+                    if (namedFormat.attr.className) {
+                        dom.removeClass(formatNode, namedFormat.attr.className);
+                    }
+                } else
                     dom.unwrap(formatNode);
         }
     },
@@ -3486,7 +3679,7 @@ var GreedyBlockFormatter = Class.extend({
             for (var i = 0, len = blocks.length; i < len; i++) {
                 if (dom.is(blocks[i], 'li')) {
                     var list = blocks[i].parentNode;
-                    var formatter = new ListFormatter(list.nodeName.toLowerCase(), formatTag);
+                    var formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
                     var range = this.editor.createRange();
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
@@ -3495,12 +3688,12 @@ var GreedyBlockFormatter = Class.extend({
                 }
             }
         } else {
-            new BlockFormatter(format, values).apply(nodes);
+            new BlockFormatter(format, this.values).apply(nodes);
         }
     },
 
     toggle: function (range) {
-        var nodes = textNodes(range);
+        var nodes = RangeUtils.textNodes(range);
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
             nodes = textNodes(range);
@@ -3529,8 +3722,8 @@ var BlockFormatTool = FormatTool.extend({
 });
 
 var FormatBlockTool = Tool.extend({
-    init: function () {
-        Tool.fn.init.call(this);
+    init: function (options) {
+        Tool.fn.init.call(this, options);
         this.finder = new BlockFormatFinder([{ tags: dom.blockElements }]);
     },
 
@@ -3541,26 +3734,32 @@ var FormatBlockTool = Tool.extend({
     },
     
     update: function($ui, nodes) {
-        var list = $ui.data('tSelectBox');
+        var list;
+        if ($ui.is("select")) {
+            list = $ui.data('kendoDropDownList');
+        } else {
+            list = $ui.find("select").data('kendoDropDownList');
+        }
         list.close();
-        list.value(finder.getFormat(nodes));
+        list.value(this.finder.getFormat(nodes));
     },
 
     initialize: function($ui, initOptions) {
-        var editor = initOptions.editor;
-        
-        $ui.tSelectBox({
-            data: editor.options.formatBlock,
+        var editor = initOptions.editor,
+            toolName = 'formatBlock';
+
+        $ui.kendoDropDownList({
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: editor.options.formatBlock,
             title: editor.options.localization.formatBlock,
-            onItemCreate: function (e) {
-                var tagName = e.dataItem.Value;
-                e.html = '<' + tagName + ' unselectable="on" style="margin: .3em 0;' + dom.inlineStyle(editor.document, tagName) + '">' + e.dataItem.Text + '</' + tagName + '>';
-            },
-            onChange: function (e) {
-                Tool.exec(editor, 'formatBlock', e.value);
+            change: function (e) {
+                Tool.exec(editor, toolName, this.value());
             },
             highlightFirst: false
         });
+
+        $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
     }
 
 });
@@ -3574,19 +3773,19 @@ extend(kendo.ui.Editor, {
     FormatBlockTool: FormatBlockTool
 });
 
-registerTool("formatBlock", new FormatBlockTool());
+registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format Block", initialValue: "Select Block Type"})}));
 
 registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: 'left'}} }, { tags: ['img'], attr: { style: { 'float': 'left'}} } ]);
-registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft}));
+registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
 
 registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: 'center'}} }, { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} } ]);
-registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter}));
+registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Center"})}));
 
 registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: 'right'}} }, { tags: ['img'], attr: { style: { 'float': 'right'}} } ]);
-registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight}));
+registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Right"})}));
 
 registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: 'justify'}} } ]);
-registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull}));
+registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
 })(jQuery);(function($) {
 
@@ -3762,7 +3961,9 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
+    EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
+    ToolTemplate = Editor.ToolTemplate,
     FormatTool = Editor.FormatTool,
     BlockFormatFinder = Editor.BlockFormatFinder,
     textNodes = RangeUtils.textNodes,
@@ -4041,7 +4242,7 @@ var ListFormatter = Class.extend({
         if (!nodes.length) {
             range.selectNodeContents(ancestor);
             nodes = textNodes(range);
-            if (!nodes.length && (dom.is(range.startContainer, 'li') || dom.parentOfType(range.startContainer, ['li']))) {
+            if (!nodes.length) {
                 var text = ancestor.ownerDocument.createTextNode("");
                 range.startContainer.appendChild(text);
                 nodes = [text];
@@ -4086,8 +4287,8 @@ extend(kendo.ui.Editor, {
     ListTool: ListTool
 });
 
-registerTool("insertUnorderedList", new ListTool({tag:'ul'}));
-registerTool("insertOrderedList", new ListTool({tag:'ol'}));
+registerTool("insertUnorderedList", new ListTool({tag:'ul', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
+registerTool("insertOrderedList", new ListTool({tag:'ol', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
 })(jQuery);(function($, undefined) {
 
@@ -4097,9 +4298,12 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
+    EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
     InlineFormatter = Editor.InlineFormatter,
+    InlineFormatFinder = Editor.InlineFormatFinder,
     textNodes = RangeUtils.textNodes,
     registerTool = Editor.EditorUtils.registerTool;
 
@@ -4183,7 +4387,7 @@ var LinkCommand = Command.extend({
 
                 var text = $('#k-editor-link-text', dialog.element).val();
                 if (text !== initialText)
-                    self.attributes.innerHTML = text;
+                    self.attributes.innerHTML = text || href;
 
                 var target = $('#k-editor-link-target', dialog.element).is(':checked');
                 if (target)
@@ -4209,24 +4413,24 @@ var LinkCommand = Command.extend({
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var dialog = $t.window.create($.extend({}, this.editor.options.dialogOptions, {
+        var windowContent = 
+            '<div class="k-editor-dialog">' +
+                '<ol>' +
+                    '<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>' +
+                    (shouldShowText ? '<li class="k-form-text-row"><label for="k-editor-link-text">Text</label><input type="text" class="k-input" id="k-editor-link-text"/></li>' : '') +
+                    '<li class="k-form-text-row"><label for="k-editor-link-title">Tooltip</label><input type="text" class="k-input" id="k-editor-link-title"/></li>' +
+                    '<li class="k-form-checkbox-row"><input type="checkbox" id="k-editor-link-target"/><label for="k-editor-link-target">Open link in new window</label></li>' +
+                '</ol>' +
+                '<div class="k-button-wrapper">' +
+                    '<button class="k-dialog-insert k-button">Insert</button>' +
+                    '&nbsp;or&nbsp;' + 
+                    '<a href="#" class="k-dialog-close k-link">Close</a>' +
+                '</div>' +
+            '</div>';
+
+        var dialog = $(windowContent).appendTo(document.body).kendoWindow($.extend({}, this.editor.options.dialogOptions, {
             title: "Insert link",
-            html: new $.telerik.stringBuilder()
-                .cat('<div class="k-editor-dialog">')
-                    .cat('<ol>')
-                        .cat('<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>')
-                        .catIf('<li class="k-form-text-row"><label for="k-editor-link-text">Text</label><input type="text" class="k-input" id="k-editor-link-text"/></li>', shouldShowText)
-                        .cat('<li class="k-form-text-row"><label for="k-editor-link-title">Tooltip</label><input type="text" class="k-input" id="k-editor-link-title"/></li>')
-                        .cat('<li class="k-form-checkbox-row"><input type="checkbox" id="k-editor-link-target"/><label for="k-editor-link-target">Open link in new window</label></li>')
-                    .cat('</ol>')
-                    .cat('<div class="k-button-wrapper">')
-                        .cat('<button class="k-dialog-insert k-button">Insert</button>')
-                        .cat('&nbsp;or&nbsp;')
-                        .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
-                    .cat('</div>')
-                .cat('</div>')
-                .string(),
-            onClose: close
+            close: close
         }))
             .hide()
             .find('.k-dialog-insert').click(apply).end()
@@ -4243,7 +4447,7 @@ var LinkCommand = Command.extend({
             .find('#k-editor-link-title').val(a ? a.title : '').end()
             .find('#k-editor-link-target').attr('checked', a ? a.target == '_blank' : false).end()
             .show()
-            .data('tWindow')
+            .data('kendoWindow')
             .center();
 
         if (shouldShowText && nodes.length > 0)
@@ -4265,6 +4469,7 @@ var LinkCommand = Command.extend({
 var UnlinkTool = Tool.extend({
     init: function(options) {
         this.options = options;
+        this.finder = new InlineFormatFinder([{tags:['a']}]);
 
         Tool.fn.init.call(this, $.extend(options, {command:UnlinkCommand}));
     },
@@ -4288,8 +4493,8 @@ extend(kendo.ui.Editor, {
     UnlinkTool: UnlinkTool
 });
 
-registerTool("createLink", new Tool({ key: 'K', ctrl: true, command: LinkCommand}));
-registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true}));
+registerTool("createLink", new Tool({ key: 'K', ctrl: true, command: LinkCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Create Link"})}));
+registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
 })(jQuery);(function($, undefined) {
 
@@ -4298,8 +4503,10 @@ var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
-    registerTool = Editor.EditorUtils.registerTool,
-    RangeUtils = Editor.RangeUtils
+    EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool,
+    ToolTemplate = Editor.ToolTemplate,
+    RangeUtils = Editor.RangeUtils,
     Command = Editor.Command;
 
 var ImageCommand = Command.extend({
@@ -4341,6 +4548,7 @@ var ImageCommand = Command.extend({
 
     exec: function () {
         var self = this,
+            insertImage = self.insertImage,
             range = self.lockRange(),
             applied = false,
             img = RangeUtils.image(range);
@@ -4351,7 +4559,7 @@ var ImageCommand = Command.extend({
                 alt: $('#k-editor-image-title', dialog.element).val()
             };
 
-            applied = insertImage(img, range);
+            applied = self.insertImage(img, range);
 
             close(e);
 
@@ -4377,24 +4585,22 @@ var ImageCommand = Command.extend({
 //            }
         }        
         
-        var dialog = $t.window.create(extend({ width: 750 }, this.editor.options.dialogOptions, {
-            title: "Insert image",
-            html: new $.telerik.stringBuilder()
-                        .cat('<div class="k-editor-dialog">')                        
-                            .catIf('<div class="k-image-browser"></div>', showBrowser)
-                            .cat('<ol>')
-                                .cat('<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>')
-                                .cat('<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>')
-                            .cat('</ol>')
-                            .cat('<div class="k-button-wrapper">')
-                                .cat('<button class="k-dialog-insert k-button">Insert</button>')
-                                .cat('&nbsp;or&nbsp;')
-                                .cat('<a href="#" class="k-dialog-close k-link">Close</a>')
-                            .cat('</div>')
-                        .cat('</div>')
-                    .string(),
-            onClose: close,
-            onActivate: activate
+        var windowContent =
+            '<div class="k-editor-dialog">' +
+                '<ol>' +
+                    '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
+                    '<li class="k-form-text-row"><label for="k-editor-image-title">Tooltip</label><input type="text" class="k-input" id="k-editor-image-title"/></li>' +
+                '</ol>' +
+                '<div class="k-button-wrapper">' +
+                    '<button class="k-dialog-insert k-button">Insert</button>' +
+                    '&nbsp;or&nbsp;' +
+                    '<a href="#" class="k-dialog-close k-link">Close</a>' +
+                '</div>' +
+            '</div>'
+
+        var dialog = $(windowContent).appendTo(document.body).kendoWindow(extend(this.editor.options.dialogOptions, {
+            title: "Insert Image",
+            close: close
         }))
         .hide()
         .find('.k-dialog-insert').click(apply).end()
@@ -4410,7 +4616,8 @@ var ImageCommand = Command.extend({
         .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
         .find('#k-editor-image-title').val(img ? img.alt : '').end()
         .show()
-        .data('tWindow').center();
+        .data('kendoWindow')
+        .center();
 
         $('#k-editor-image-url', dialog.element).focus().select();
     }
@@ -4421,256 +4628,271 @@ extend(kendo.ui.Editor, {
     ImageCommand: ImageCommand
 });
 
-registerTool("insertImage", new Editor.Tool({ command: ImageCommand }));
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Insert Image"}) }));
 
 })(jQuery);(function($, undefined) {
 
-/* select box */
+var kendo = window.kendo,
+    Class = kendo.Class,
+    Widget = kendo.ui.Widget,
+    extend = $.extend,
+    deepExtend = kendo.deepExtend;
+    Editor = kendo.ui.Editor,
+    dom = Editor.Dom;
 
-kendo.ui.selectbox = function (element, options) {
-    var selectedValue;
-    var $element = $(element).attr("tabIndex", 0);
-    var $text = $element.find('.k-input');
+///* select box */
 
-    var dropDown = this.dropDown = new $t.dropDown({
-        effects: $t.fx.slide.defaults(),
-        onItemCreate: options.onItemCreate,
-        onClick: function (e) {
-            select(options.data[$(e.item).index()].Value);
-            options.onChange({ value: selectedValue })
-        }
-    });
+//kendo.ui.selectbox = function (element, options) {
+//    var selectedValue;
+//    var $element = $(element).attr("tabIndex", 0);
+//    var $text = $element.find('.k-input');
 
-    function fill() {
-        if (!dropDown.$items)
-            dropDown.dataBind(options.data);
-    }
+//    var dropDown = this.dropDown = new $t.dropDown({
+//        //effects: $t.fx.slide.defaults(),
+//        onItemCreate: options.onItemCreate,
+//        onClick: function (e) {
+//            select(options.data[$(e.item).index()].Value);
+//            options.onChange({ value: selectedValue })
+//        }
+//    });
 
-    function text(value) {
-        $text.html(value ? value : '&nbsp;');
-    }
+//    function fill() {
+//        if (!dropDown.$items)
+//            dropDown.dataBind(options.data);
+//    }
 
-    function select(item) {
-        fill();
-        var index = -1;
+//    function text(value) {
+//        $text.html(value ? value : '&nbsp;');
+//    }
 
-        for (var i = 0, len = options.data.length; i < len; i++) {
-            if (options.data[i].Value == item) {
-                index = i;
-                break;
-            }
-        }
+//    function select(item) {
+//        fill();
+//        var index = -1;
 
-        if (index != -1) {
+//        for (var i = 0, len = options.data.length; i < len; i++) {
+//            if (options.data[i].Value == item) {
+//                index = i;
+//                break;
+//            }
+//        }
 
-            dropDown.$items
-                    .removeClass('k-state-selected')
-                    .eq(index).addClass('k-state-selected');
+//        if (index != -1) {
 
-            text($(dropDown.$items[index]).text());
-            selectedValue = options.data[index].Value;
-        }
-    }
+//            dropDown.$items
+//                    .removeClass('k-state-selected')
+//                    .eq(index).addClass('k-state-selected');
 
-    this.value = function (value) {
-        if (value == undefined)
-            return selectedValue;
+//            text($(dropDown.$items[index]).text());
+//            selectedValue = options.data[index].Value;
+//        }
+//    }
 
-        select(value);
+//    this.value = function (value) {
+//        if (value == undefined)
+//            return selectedValue;
 
-        if (selectedValue != value)
-            text(options.title || value);       
-    }
+//        select(value);
 
-    this.close = function () {
-        dropDown.close();
-    }
+//        if (selectedValue != value)
+//            text(options.title || value);       
+//    }
 
-    text(options.title || $text.text());
+//    this.close = function () {
+//        dropDown.close();
+//    }
 
-    $element.click(function (e) {
-        fill();
-        if (dropDown.isOpened())
-            dropDown.close();
-        else
-            dropDown.open({
-                offset: $element.offset(),
-                outerHeight: $element.outerHeight(),
-                outerWidth: $element.outerWidth(),
-                zIndex: $t.getElementZIndex($element[0])
-            });
-    })
-    .find('*')
-    .attr('unselectable', 'on')
-    .end()
-    .keydown(function(e) {
-        var key = e.keyCode, selected, prev, next;
+//    text(options.title || $text.text());
 
-        if (key === 40) {
-            if (!dropDown.isOpened()) {
-                $element.click();
-            } else {
-                selected = dropDown.$items.filter(".k-state-selected");
-                if (!selected[0]) {
-                    next = dropDown.$items.first();
-                } else {
-                    next = selected.next();
-                }
-                if (next[0]) {
-                    selected.removeClass("k-state-selected");
-                    next.addClass("k-state-selected");
-                }
-            }
-            e.preventDefault();
-        } else if (key === 38) {
-            if (dropDown.isOpened()) {
-                selected = dropDown.$items.filter(".k-state-selected");
-                prev = selected.prev();
-                if (prev[0]) {
-                    selected.removeClass("k-state-selected");
-                    prev.addClass("k-state-selected");
-                }
-            }
-            e.preventDefault();
-        } else if (key == 13) {
-            selected = dropDown.$items.filter(".k-state-selected");
-            if (selected[0]) {
-                selected.click();
-            }
-            e.preventDefault();
-        } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
-            dropDown.close();
-        }
-    });
+//    $element.click(function (e) {
+//        fill();
+//        if (dropDown.isOpened())
+//            dropDown.close();
+//        else
+//            dropDown.open({
+//                offset: $element.offset(),
+//                outerHeight: $element.outerHeight(),
+//                outerWidth: $element.outerWidth(),
+//                zIndex: $t.getElementZIndex($element[0])
+//            });
+//    })
+//    .find('*')
+//    .attr('unselectable', 'on')
+//    .end()
+//    .keydown(function(e) {
+//        var key = e.keyCode, selected, prev, next;
 
-    if ($.browser.msie) {
-        $element.focus(function() {
-            $element.css("outline", "1px dotted #000");
-        })
-        .blur(function() {
-            $element.css("outline", "");
-        });
-    }
+//        if (key === 40) {
+//            if (!dropDown.isOpened()) {
+//                $element.click();
+//            } else {
+//                selected = dropDown.$items.filter(".k-state-selected");
+//                if (!selected[0]) {
+//                    next = dropDown.$items.first();
+//                } else {
+//                    next = selected.next();
+//                }
+//                if (next[0]) {
+//                    selected.removeClass("k-state-selected");
+//                    next.addClass("k-state-selected");
+//                }
+//            }
+//            e.preventDefault();
+//        } else if (key === 38) {
+//            if (dropDown.isOpened()) {
+//                selected = dropDown.$items.filter(".k-state-selected");
+//                prev = selected.prev();
+//                if (prev[0]) {
+//                    selected.removeClass("k-state-selected");
+//                    prev.addClass("k-state-selected");
+//                }
+//            }
+//            e.preventDefault();
+//        } else if (key == 13) {
+//            selected = dropDown.$items.filter(".k-state-selected");
+//            if (selected[0]) {
+//                selected.click();
+//            }
+//            e.preventDefault();
+//        } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
+//            dropDown.close();
+//        }
+//    });
 
-    dropDown.$element.css('direction', $element.closest('.k-rtl').length > 0 ? 'rtl' : '');
+//    if ($.browser.msie) {
+//        $element.focus(function() {
+//            $element.css("outline", "1px dotted #000");
+//        })
+//        .blur(function() {
+//            $element.css("outline", "");
+//        });
+//    }
 
-    $(document.documentElement).bind('mousedown', $.proxy(function (e) {
-        var $dropDown = dropDown.$element;
-        var isDropDown = $dropDown && $dropDown.parent().length > 0;
+//    dropDown.$element.css('direction', $element.closest('.k-rtl').length > 0 ? 'rtl' : '');
 
-        if (isDropDown && !$.contains(element, e.target) && !$.contains($dropDown.parent()[0], e.target)) {
-            dropDown.close();
-        }
+//    $(document.documentElement).bind('mousedown', $.proxy(function (e) {
+//        var $dropDown = dropDown.$element;
+//        var isDropDown = $dropDown && $dropDown.parent().length > 0;
 
-    }, this));
-}
+//        if (isDropDown && !$.contains(element, e.target) && !$.contains($dropDown.parent()[0], e.target)) {
+//            dropDown.close();
+//        }
 
-$.fn.tSelectBox = function (options) {
-    return $t.create(this, {
-        name: 'tSelectBox',
-        init: function (element, options) {
-            return new $t.selectbox(element, options)
-        },
-        options: options
-    });
-};
+//    }, this));
+//}
 
-$.fn.tSelectBox.defaults = {
-    // effects: $t.fx.slide.defaults()
-};
+//$.fn.tSelectBox = function (options) {
+//    return $t.create(this, {
+//        name: 'tSelectBox',
+//        init: function (element, options) {
+//            return new $t.selectbox(element, options)
+//        },
+//        options: options
+//    });
+//};
 
 /* color picker */
 
-kendo.ui.colorpicker = function (element, options) {
-    var that = this;
+var ColorPicker = Widget.extend({
+    init: function(element, options) {
+        var that = this,
+        $element = $(element);
 
-    that.element = element;
-    var $element = $(element);
+        that.element = element;
 
-    $.extend(that, options);
+        $.extend(that.options, options);
+        that.selectedColor = that.options.selectedColor;
 
-    $element.attr("tabIndex", 0)
-            .click($.proxy(that.click, that))
-            .keydown(function(e) {
-                var popup = that.popup(), selected, next, prev;
-                if (e.keyCode == 40) {
-                    if (!popup.is(":visible")) {
-                        that.open();
-                    } else {
-                       selected = popup.find(".k-state-selected");
-                       if (selected[0]) {
-                           next = selected.next();
-                       } else {
-                           next = popup.find("li:first");
-                       }
-                       if (next[0]) {
-                            selected.removeClass("k-state-selected");
-                            next.addClass("k-state-selected");
-                       } 
+        Widget.fn.init.call(that, element);
+
+        $element.attr("tabIndex", 0)
+                .click($.proxy(that.click, that))
+                .keydown(function(e) {
+                    var popup = that.popup(), selected, next, prev;
+                    if (e.keyCode == 40) {
+                        if (!popup.is(":visible")) {
+                            that.open();
+                        } else {
+                           selected = popup.find(".k-state-selected");
+                           if (selected[0]) {
+                               next = selected.next();
+                           } else {
+                               next = popup.find("li:first");
+                           }
+                           if (next[0]) {
+                                selected.removeClass("k-state-selected");
+                                next.addClass("k-state-selected");
+                           } 
+                        }
+                        e.preventDefault();
+                    } else if (e.keyCode == 38) {
+                        if (popup.is(":visible")) {
+                           selected = popup.find(".k-state-selected");
+                           prev = selected.prev();
+                           if (prev[0]) {
+                                selected.removeClass("k-state-selected");
+                                prev.addClass("k-state-selected");
+                           } 
+                        }
+                        e.preventDefault();
+                    } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
+                        that.close();
+                    } else if (e.keyCode == 13) {
+                       popup.find(".k-state-selected").click();
+                       e.preventDefault();
                     }
-                    e.preventDefault();
-                } else if (e.keyCode == 38) {
-                    if (popup.is(":visible")) {
-                       selected = popup.find(".k-state-selected");
-                       prev = selected.prev();
-                       if (prev[0]) {
-                            selected.removeClass("k-state-selected");
-                            prev.addClass("k-state-selected");
-                       } 
-                    }
-                    e.preventDefault();
-                } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
-                    that.close();
-                } else if (e.keyCode == 13) {
-                   popup.find(".k-state-selected").click();
-                   e.preventDefault();
-                }
+                })
+                .find('*')
+                .attr('unselectable', 'on');
+
+        if ($.browser.msie) {
+            $element.focus(function () {
+                $element.css("outline", "1px dotted #000");
             })
-            .find('*')
-            .attr('unselectable', 'on');
+            .blur(function() {
+                $element.css("outline", "");
+            });
+        }    
 
-    if ($.browser.msie) {
-        $element.focus(function () {
-            $element.css("outline", "1px dotted #000");
-        })
-        .blur(function() {
-            $element.css("outline", "");
-        });
-    }    
+        if (that.selectedColor)
+            $element.find('.k-selected-color').css('background-color', that.selectedColor);
 
-    if (that.selectedColor)
-        $element.find('.k-selected-color').css('background-color', this.selectedColor);
+        $(element.ownerDocument.documentElement)
+            .bind('mousedown', $.proxy(function (e) {
+                if (!$(e.target).closest('.k-colorpicker-popup').length) {
+                    this.close();
+                }
+            }, that));
 
-    $(element.ownerDocument.documentElement)
-        .bind('mousedown', $.proxy(function (e) {
-            if (!$(e.target).closest('.k-colorpicker-popup').length) {
-                this.close();
-            }
-        }, that));
+        that.bind([
+            "change",
+            "load"
+        ], that.options);
+    },
 
-    $t.bind(that, {
-        change: that.onChange,
-        load: that.onLoad
-    });
-}
+    options: {
+        name: "ColorPicker",
+        data: '000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7'.split(','),
+        selectedColor: null
+    },
 
-kendo.ui.colorpicker.prototype = {
     select: function(color) {
+        var that = this;
         if (color) {
             color = dom.toHex(color);
-            if (!this.trigger('change', { value: color })) {
-                this.value(color);
-                this.close();
+            if (!that.trigger('change', { value: color })) {
+                that.value(color);
+                that.close();
             }
         } else
-            this.trigger('change', { value: this.selectedColor })
+            that.trigger('change', { value: that.selectedColor })
     },
 
     open: function() {
-        var $popup = this.popup();
-        var $element = $(this.element);
+        var that = this,
+            $popup = that.popup(),
+            $element = $(that.element),
+            elementPosition = $element.offset();
 
-        var elementPosition = $element.offset();
         elementPosition.top += $element.outerHeight();
 
         if ($element.closest('.k-rtl').length)
@@ -4686,7 +4908,7 @@ kendo.ui.colorpicker.prototype = {
             }
         });
 
-        $t.fx._wrap($popup).css($.extend({
+        kendo.wrap($popup).css($.extend({
             position: 'absolute',
             zIndex: zIndex
         }, elementPosition));
@@ -4695,28 +4917,29 @@ kendo.ui.colorpicker.prototype = {
             .find('.k-item').bind('click', $.proxy(function(e) {
                 var color = $(e.currentTarget, e.target.ownerDocument).find("div").css('background-color');
                 this.select(color);
-            }, this));
+            }, that));
 
-        // animate
-        $t.fx.play(this.effects, $popup, { direction: 'bottom' });
+        $popup.kendoAnimate({slideIn:"down", show: true});
     },
 
     close: function() {
         if (!this.$popup) return;
 
-        $t.fx.rewind(this.effects, this.$popup, { direction: 'bottom' }, $.proxy(function() {
+        this.$popup.kendoAnimate("slideIn:down", true, $.proxy(function() {
             if (this.$popup) {
                 dom.remove(this.$popup[0].parentNode);
                 this.$popup = null;
             }
         }, this));
+
     },
 
     toggle: function() {
-        if (!this.$popup || !this.$popup.is(':visible'))
-            this.open();
+        var that = this;
+        if (!that.$popup || !that.$popup.is(':visible'))
+            that.open();
         else {
-            this.close();
+            that.close();
         }
     },
 
@@ -4741,7 +4964,7 @@ kendo.ui.colorpicker.prototype = {
 
     popup: function() {
         if (!this.$popup)
-            this.$popup = $($t.colorpicker.buildPopup(this))
+            this.$popup = $(ColorPicker.buildPopup(this))
                     .hide()
                     .appendTo(document.body)
                     .find('*')
@@ -4750,50 +4973,34 @@ kendo.ui.colorpicker.prototype = {
 
         return this.$popup;
     }
-}
 
-$.extend(kendo.ui.colorpicker, {
-    buildPopup: function(component) {
-        var html = new $t.stringBuilder();
-
-        html.cat('<div class="k-popup k-group k-colorpicker-popup">')
-            .cat('<ul class="k-reset">');
-
-        var data = component.data;
-        var currentColor = (component.value() || '').substring(1);
-
-        for (var i = 0, len = data.length; i < len; i++) {
-            html.cat('<li class="k-item')
-                .catIf(' k-state-selected', data[i] == currentColor)
-                .cat('"><div style="background-color:#')
-                .cat(data[i])
-                .cat('"></div></li>');
-        }
-
-        html.cat('</ul></div>');
-
-        return html.string();
-    }
 });
 
-$.fn.tColorPicker = function (options) {
-    return $t.create(this, {
-        name: 'tColorPicker',
-        init: function (element, options) {
-            return new $t.colorpicker(element, options)
-        },
-        options: options
-    });
-};
+ColorPicker.buildPopup = function(component) {
 
-$.fn.tColorPicker.defaults = {
-    data: '000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7'.split(','),
-    selectedColor: null
-    //effects: $t.fx.slide.defaults()
-};
+    var html = '<div class="k-popup k-group k-colorpicker-popup">' +
+                    '<ul class="k-reset">',
+        data = component.options.data,
+        currentColor = (component.value() || '').substring(1),
+        itemHtml;
 
-})(jQuery);
-(function($, undefined) {
+    for (var i = 0, len = data.length; i < len; i++) {
+        var itemHtml = '<li class="k-item' +
+            (data[i] == currentColor ? ' k-state-selected' : '') +
+            '"><div style="background-color:#' +
+            data[i] +
+            '"></div></li>';
+        html += itemHtml;
+    }
+
+    html += '</ul></div>';
+
+    return html;
+}
+
+kendo.ui.plugin(ColorPicker);
+
+})(jQuery);(function($, undefined) {
 
 // Imports ================================================================
 var kendo = window.kendo,
@@ -4801,9 +5008,11 @@ var kendo = window.kendo,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
-    registerTool = Editor.EditorUtils.registerTool,
+    EditorUtils = Editor.EditorUtils,
+    registerTool = EditorUtils.registerTool,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
     RangeUtils = Editor.RangeUtils,
     blockElements = dom.blockElements,
     BlockFormatFinder = Editor.BlockFormatFinder,
@@ -4953,8 +5162,8 @@ var OutdentCommand = Command.extend({
 });
 
 var OutdentTool = Tool.extend({
-    init: function() {
-        Tool.fn.init.call(this, {command:OutdentCommand});
+    init: function(options) {
+        Tool.fn.init.call(this, extend(options, {command:OutdentCommand}));
 
         this.finder = new BlockFormatFinder([{tags:blockElements}]);  
     },
@@ -4995,8 +5204,8 @@ extend(kendo.ui.Editor, {
     OutdentTool: OutdentTool
 });
 
-registerTool("indent", new Tool({ command: IndentCommand }));
-registerTool("outdent", new OutdentTool());
+registerTool("indent", new Tool({ command: IndentCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Indent"}) }));
+registerTool("outdent", new OutdentTool({template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Outdent"})}));
 
 })(jQuery);(function($) {
 
@@ -5050,7 +5259,7 @@ var PendingFormats = Class.extend({
         for (var i = 0; i < formats.length; i++) {
             pendingFormat = formats[i];
             
-            var command = pendingFormat.command(extend({ range: range }, pendingFormat.params));
+            var command = pendingFormat.command(extend({ range: range }, pendingFormat.options.params));
             command.editor = this.editor;
             command.exec();
 

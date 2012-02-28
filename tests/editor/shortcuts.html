@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -31,12 +40,14 @@ function makeEvent(keyCode) {
     return e;
 }
         
-QUnit.testStart = function() {
-    editor = getEditor();
-}
+module("Shortcuts", {
+    setup: function() {
+        editor = getEditor();
+    }
+});
 
 test('find shorcut by single character', function() {
-    var commands = {bold:{key:'B'}}
+    var commands = { bold: { options: { key: 'B'} } }
 
     var e = makeEvent();
                 
@@ -46,7 +57,7 @@ test('find shorcut by single character', function() {
 });
 
 test('find shorcut with ctrl', function() {
-    var commands = { bold: { ctrl: true, key: 'B' } };
+    var commands = { bold: { options: { ctrl: true, key: 'B' } } };
 
     var e = makeEvent();
     e.ctrlKey = true;
@@ -57,7 +68,7 @@ test('find shorcut with ctrl', function() {
 });
 
 test('should not find shorcut with ctrl when ctrl is not pressed', function() {
-    var commands = { bold: { ctrl: true, key: 'B'} };
+    var commands = { bold: { options: { ctrl: true, key: 'B'} } };
 
     var e = makeEvent();
 
@@ -67,7 +78,7 @@ test('should not find shorcut with ctrl when ctrl is not pressed', function() {
 });
         
 test('should find shortcut with alt', function() {
-    var commands = { bold: { alt: true, key: 'B' } };
+    var commands = { bold: { options: { alt: true, key: 'B' } } };
 
     var e = makeEvent();
     e.altKey = true;
@@ -78,7 +89,7 @@ test('should find shortcut with alt', function() {
 });
         
 test('should find shortcut with shift', function() {
-    var commands = { bold: { shift: true, key: 'B'} };
+    var commands = { bold: { options: { shift: true, key: 'B'} } };
 
     var e = makeEvent();
     e.shiftKey  = true;
@@ -89,7 +100,7 @@ test('should find shortcut with shift', function() {
 });
 
 test('should find shortcut with all modifiers shift', function() {
-    var commands = { bold: { shift: true, alt: true, ctrl: true, key: 'B'} };
+    var commands = { bold: { options: { shift: true, alt: true, ctrl: true, key: 'B'} } };
 
     var e = makeEvent();
 
@@ -201,8 +212,6 @@ test('editor prevents default if shortcut is known', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

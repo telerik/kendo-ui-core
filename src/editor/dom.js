@@ -347,6 +347,23 @@ var Dom = {
         return style;
     },
 
+    removeClass: function(node, classNames) {
+        var className = " " + node.className + " ",
+            classes = classNames.split(" ");
+
+        for (var i = 0; i < classes.length; i++) {
+            className = className.replace(" " + classes[i] + " ", " ");
+        }
+
+        className = $.trim(className);
+
+        if (className.length) {
+            node.className = className;
+        } else {
+            node.removeAttribute("class");
+        }
+    },
+
     commonAncestor: function () {
         var count = arguments.length;
 

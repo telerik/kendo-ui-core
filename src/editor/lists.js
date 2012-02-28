@@ -7,7 +7,9 @@ var kendo = window.kendo,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
+    EditorUtils = Editor.EditorUtils,
     Command = Editor.Command,
+    ToolTemplate = Editor.ToolTemplate,
     FormatTool = Editor.FormatTool,
     BlockFormatFinder = Editor.BlockFormatFinder,
     textNodes = RangeUtils.textNodes,
@@ -286,7 +288,7 @@ var ListFormatter = Class.extend({
         if (!nodes.length) {
             range.selectNodeContents(ancestor);
             nodes = textNodes(range);
-            if (!nodes.length && (dom.is(range.startContainer, 'li') || dom.parentOfType(range.startContainer, ['li']))) {
+            if (!nodes.length) {
                 var text = ancestor.ownerDocument.createTextNode("");
                 range.startContainer.appendChild(text);
                 nodes = [text];
@@ -331,7 +333,7 @@ extend(kendo.ui.Editor, {
     ListTool: ListTool
 });
 
-registerTool("insertUnorderedList", new ListTool({tag:'ul'}));
-registerTool("insertOrderedList", new ListTool({tag:'ol'}));
+registerTool("insertUnorderedList", new ListTool({tag:'ul', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
+registerTool("insertOrderedList", new ListTool({tag:'ol', template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Remove Link"})}));
 
 })(jQuery);

@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -48,7 +57,7 @@ test('removeFormat removes format from text range', function() {
     range.setStart(strongContent, 0);
     range.setEnd(strongContent, 13);
             
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
             
     equal(editor.value(), '<p>golgafrincham telephone sanitisers</p>');
     equal(editor.body.firstChild.childNodes.length, 1);
@@ -61,7 +70,7 @@ test('removeFormat removes format from selected node contents', function() {
 
     var range = editor.createRange();
     range.selectNodeContents(strong);
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), 'golga<em>fr</em>in');
 });
@@ -75,7 +84,7 @@ test('removeFormat removes format from complete tags across paragraphs', functio
     range.setStartBefore($strongs[0]);
     range.setEndAfter($strongs[1]);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value().replace(/\s+/gi, ''), '<p>golgafrincham</p><p>telephone</p>');
 });
@@ -86,7 +95,7 @@ test('removeFormat when formatted and unformatted nodes are selected', function(
     range.setStart(editor.body, 0);
     range.setEnd(editor.body, 2);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), 'foo');
 });
@@ -96,7 +105,7 @@ test('removeFormat when there is unformatted content before formatted', function
     var range = editor.createRange();
     range.setStart(editor.body.firstChild, 0);
     range.setEnd(editor.body.childNodes[1].firstChild, 1);
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), 'foo');
 });
@@ -106,7 +115,7 @@ test('removeFormat when there is unformatted content after formatted', function(
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild, 0);
     range.setEnd(editor.body.lastChild, 1);
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), 'foob');
 });
@@ -117,7 +126,7 @@ test('remove styled format from selection', function() {
     range.setStart(editor.body.firstChild.firstChild, 1);
     range.setEnd(editor.body.firstChild.firstChild, 2);
             
-    impl.formatRange(range, editor.formats.underline);
+    impl.formatRange(range, editor.options.formats.underline);
             
     equal(editor.value(), '<span style="text-decoration:underline;">f</span>o<span style="text-decoration:underline;">o</span>');
 });
@@ -131,8 +140,6 @@ test('remove styled format from selection', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

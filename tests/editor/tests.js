@@ -191,10 +191,10 @@ tests.push(
         page: "editor/shortcuts.html",
         title: "Shortcuts"
     },
-    {
+   /* {
         page: "editor/style.html",
         title: "Style"
-    },
+    },*/
     {
         page: "editor/systemhandler.html",
         title: "System handler"

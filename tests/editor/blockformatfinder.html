@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -33,52 +42,52 @@ module("Editor / BlockFormatFinder", {
 
 test('findSuitable returns suitable container', function() {
     editor.value('<div>foo</div>');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     equal(finder.findSuitable([editor.body.firstChild.firstChild])[0], editor.body.firstChild);
 });
 
 test('findSuitable returns null if no suitable found', function() {
     editor.value('foo');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
     equal(finder.findSuitable([editor.body.firstChild]).length, 0);
 });
         
 test('findSuitable returns all suitable nodes null if no suitable found', function() {
     editor.value('<div>foo</div><div>bar</div>');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
     equal(finder.findSuitable([editor.body.firstChild.firstChild, editor.body.lastChild.firstChild]).length, 2);
 });
 
 test('findSuitable returns distinct nodes', function() {
     editor.value('<div><span>foo</span><span>bar</span></div><div>baz</div>');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
     equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.firstChild.lastChild.firstChild, editor.body.lastChild.firstChild]).length, 2);
 });
 
 test('findSuitable looks for common ancestor which is suitable', function() {
     editor.value('<div>foo</div>bar');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
     equal(finder.findSuitable([editor.body.firstChild.firstChild, editor.body.lastChild]).length, 0);
 });
 
 test('findSuitable looks for the outer most common ancestor which is suitable', function() {
     editor.value('<div><div>foo</div>bar</div>');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.firstChild.lastChild])[0], editor.body.firstChild);
 });
 
 test('findSuitable returns the inner suitable ancestor', function() {
     editor.value('<div><div>foo</div></div>');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild])[0], editor.body.firstChild.firstChild);
 });
 
 test('findSuitable tests against node in argument', function() {
     editor.value('<div></div>');
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     equal(finder.findSuitable([editor.body.firstChild])[0], editor.body.firstChild);
 });
@@ -86,7 +95,7 @@ test('findSuitable tests against node in argument', function() {
 test('find format finds formatted node by tag', function() {
     editor.value('<div style="text-align:center">foo</strong>');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
             
     equal(finder.findFormat(editor.body.firstChild.firstChild), editor.body.firstChild);
 });
@@ -94,7 +103,7 @@ test('find format finds formatted node by tag', function() {
 test('find suitable finds td', function() {
     editor.value('<table><tr><td>foo</td></tr></table>');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     var td = $('td', editor.body)[0];
     equal(finder.findSuitable([td.firstChild])[0], td);
@@ -103,7 +112,7 @@ test('find suitable finds td', function() {
 test('find format returns null if node does not match tag and style', function() {
     editor.value('<div>foo</div>');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     ok(null === finder.findFormat(editor.body.firstChild.firstChild));
 });
@@ -111,14 +120,14 @@ test('find format returns null if node does not match tag and style', function()
 test('find format checks all formats', function() {
     editor.value('<p style="text-align:center">foo</p>');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     equal(finder.findFormat(editor.body.firstChild.firstChild), editor.body.firstChild);
 });
 test('is formatted checks all formats', function() {
     editor.value('<p style="text-align:center">foo</p>');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
 
     ok(finder.isFormatted([editor.body.firstChild.firstChild]));
 });
@@ -126,21 +135,21 @@ test('is formatted checks all formats', function() {
 test('is formatted returns true if all nodes are formatted', function() {
     editor.value('<div style="text-align:center">foo</div>');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
     ok(finder.isFormatted([editor.body.firstChild.firstChild]));
 });
 
 test('is formatted returns true for formatted and unformatted nodes', function() {
     editor.value('<div style="text-align:center">foo</div>bar');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyCenter);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyCenter);
     ok(!finder.isFormatted([editor.body.firstChild.firstChild, editor.body.lastChild]));
 });
 
 test('is formatted returns true for image', function() {
     editor.value('<img style="float:right" />');
 
-    var finder = new BlockFormatFinder(editor.formats.justifyRight);
+    var finder = new BlockFormatFinder(editor.options.formats.justifyRight);
     ok(finder.isFormatted([editor.body.firstChild]));
 });
 
@@ -171,8 +180,6 @@ test('getFormat on body does not throw error', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

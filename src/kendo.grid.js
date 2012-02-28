@@ -2109,7 +2109,7 @@
                 wrapper = that.wrapper.children("div.k-grid-pager");
 
                 if (!wrapper.length) {
-                    wrapper = $('<div class="k-grid-pager"/>').appendTo(that.wrapper);
+                    wrapper = $('<div class="k-pager-wrap k-grid-pager"/>').appendTo(that.wrapper);
                 }
 
                 if (typeof pageable === "object" && pageable instanceof kendo.ui.Pager) {

@@ -50,7 +50,7 @@ var PendingFormats = Class.extend({
         for (var i = 0; i < formats.length; i++) {
             pendingFormat = formats[i];
             
-            var command = pendingFormat.command(extend({ range: range }, pendingFormat.params));
+            var command = pendingFormat.command(extend({ range: range }, pendingFormat.options.params));
             command.editor = this.editor;
             command.exec();
 

@@ -7,14 +7,106 @@
         extend = $.extend,
         deepExtend = kendo.deepExtend;
 
-    // static functions =======================================================
-
-    var EditorUtils = {
-        selectionChanged: function(editor) {
-            editor.trigger('selectionChange', {});
+    // options can be: template (as string), cssClass, title, defaultValue
+    var ToolTemplate = Class.extend({
+        init: function(options) {
+            var that = this;
+            that.options = options;
         },
 
+        getHtml: function() {
+            var options = this.options;
+            return kendo.template(options.template)({
+                toolClass: options.cssClass,
+                toolTitle: options.title,
+                initialValue: options.initialValue
+            });
+        }
+    });
+
+    var EditorUtils = {
+        select: function(editor) {
+            editor.trigger('select', {});
+        },
+
+        editorWrapperTemplate:
+            '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header"><tbody>' +
+                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"><li>&nbsp;</li></ul></td></tr>' +
+                '<tr><td class="k-editable-area"></td></tr>' +
+            '</tbody></table>',
+
+        buttonTemplate:
+            '<li class="k-editor-button">' +
+                '<a href="" class="k-tool-icon k-#=toolClass#" unselectable="on" title="#=toolTitle#">#=toolTitle#</a>' +
+            '</li>',
+
+        colorPickerTemplate:
+            '<li class="k-editor-colorpicker">' + 
+                '<div class="k-widget k-colorpicker k-header k-#=toolClass#">' +
+                    '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-arrow-down"></span>' +
+            '</div></li>',
+
+        comboBoxTemplate:
+            '<li class="k-editor-combobox">' +
+                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
+//                '<div class="k-widget k-combobox k-header k-#=toolClass#">' +
+//                    '<div class="k-dropdown-wrap k-state-default">' +
+//                        '<input class="k-input" id="-input" title="#=toolTitle#" type="text" value="#=initialValue#" />' +
+//                        '<span class="k-select k-header"><span class="k-icon k-arrow-down">select</span></span>' +
+//                    '</div><input style="display:none" type="text" value="inherit" /></div>' +
+            '</li>',
+
+        dropDownListTemplate:
+            '<li class="k-editor-selectbox">' +
+                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
+//                '<div class="k-selectbox k-header k-#=toolClass#"><div class="k-dropdown-wrap k-state-default">' +
+//                    '<span class="k-input">#=initialValue#</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span>' +
+//                '</div></div>' +
+            '</li>',
+
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
+
+        wrapTextarea: function($textarea) {
+            
+            var w = $textarea.width(),
+                h = $textarea.height(),
+                template = EditorUtils.editorWrapperTemplate,
+                editorWrap = $(template).insertBefore($textarea).width(w).height(h),
+                editArea = editorWrap.find('.k-editable-area'),
+                toolsArea = editorWrap.find('.k-editor-toolbar');
+
+            $textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
+
+            return $textarea.closest(".k-editor");
+        },
+
+        renderTools: function(editor, tools) {
+            var toolsCollection = {},
+                toolsArea = $(editor.element).closest(".k-editor").find('.k-editor-toolbar');
+
+            toolsArea.empty();
+
+            if (tools && tools.length > 0) {
+                for (var j = 0; j < tools.length; j++) {
+                    var tool = editor._tools[tools[j]],
+                        toolName = tools[j];
+                    if (tool) {
+                        toolsCollection[tools[j]] = tool;
+                        if (tool.options.template) {
+                            $(tool.options.template.getHtml()).appendTo(toolsArea);
+                        }
+                    }
+                }
+            }
+
+            var nativeTools = editor._nativeTools;
+
+            for (var j = 0; j < nativeTools.length; j++) {
+                toolsCollection[nativeTools[j]] = editor._tools[nativeTools[j]];
+            }
+
+            editor.options.tools = toolsCollection;
+        },
 
         createContentElement: function($textarea, stylesheets) {
             $textarea.hide();
@@ -90,7 +182,11 @@
                             e.preventDefault();
                             return;
                         }
+                        console.log(editor.options.tools);
+
                         var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
+
+                        console.log(e, toolName);
 
                         if (toolName) {
                             e.preventDefault();
@@ -124,7 +220,7 @@
                 
                         if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
                             editor.pendingFormats.clear();
-                            selectionChanged(editor);
+                            select(editor);
                         }
                 
                         if (editor.keyboard.isTypingKey(e)) {
@@ -148,7 +244,7 @@
                         window.open(target.attr('href'), '_new');
                     },
                     mouseup: function () {
-                        selectionChanged(editor);
+                        select(editor);
                     }
                 });
 
@@ -211,7 +307,11 @@
         },
 
         registerTool: function(toolName, tool) {
-            Editor.fn.options.tools[toolName] = tool;
+            var tools = Editor.fn._tools;
+            tools[toolName] = tool;
+            if (tools[toolName].options && tools[toolName].options.template) {
+                tools[toolName].options.template.options.cssClass = toolName;
+            }
         },
 
         registerFormat: function(formatName, format) {
@@ -219,8 +319,10 @@
         }
     };
     
-    var selectionChanged = EditorUtils.selectionChanged,
+    var select = EditorUtils.select,
         focusable = EditorUtils.focusable,
+        wrapTextarea = EditorUtils.wrapTextarea,
+        renderTools = EditorUtils.renderTools,
         createContentElement = EditorUtils.createContentElement,
         initializeContentElement = EditorUtils.initializeContentElement,
         fixBackspace = EditorUtils.fixBackspace;
@@ -269,33 +371,38 @@
             if (/Mobile.*Safari/.test(navigator.userAgent))
                 return;
 
-            var self = this;
+            var self = this,
+                $element = $(element);
 
             self.element = element;
-
-            var $element = $(element);
 
             $element.closest('form').bind('submit', function () {
                 self.update();
             });
 
             Widget.fn.init.call(self, element);
+
             self.options = deepExtend({}, self.options, options);
 
             self.bind([
                 "load",
-                "selectionChange",
+                "select",
                 "change",
                 "execute",
                 "error",
                 "paste"
             ], self.options);
 
-            for (var id in self.options.tools)
-                self.options.tools[id].name = id.toLowerCase();
+            for (var id in self._tools)
+                self._tools[id].name = id.toLowerCase();
         
-            self.textarea = $element.find('textarea').attr('autocomplete', 'off')[0];
-            initializeContentElement(this);
+            self.textarea = $element.attr('autocomplete', 'off')[0];
+
+            var $wrapper = self.wrapper = wrapTextarea($element);
+
+            renderTools(self, self.options.tools);
+
+            initializeContentElement(self);
 
             self.keyboard = new Editor.Keyboard([new Editor.TypingHandler(self), new Editor.SystemHandler(self)]);
         
@@ -304,6 +411,10 @@
             self.pendingFormats = new Editor.PendingFormats(this);
         
             self.undoRedoStack = new Editor.UndoRedoStack();
+
+            if (options && options.value) {
+                self.value(options.value);
+            }
 
             function toolFromClassName(element) {
                 var tool = $.grep(element.className.split(' '), function (x) {
@@ -327,12 +438,12 @@
                 return res;
             }
 
-            var toolbarItems = '.k-editor-toolbar > li > *',
+            var toolbarItems = '.k-editor-toolbar > li > *, .k-editor-toolbar > li select',
                 buttons = '.k-editor-button .k-tool-icon',
                 enabledButtons = buttons + ':not(.k-state-disabled)',
                 disabledButtons = buttons + '.k-state-disabled';
 
-             $element.find(".k-combobox .k-input").keydown(function(e) {
+             $wrapper.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
                     key = e.keyCode;
 
@@ -346,7 +457,7 @@
                 }
             });
 
-            $element
+            $wrapper
                 .delegate(enabledButtons, 'mouseenter', function() { $(this).addClass("k-state-hover")})
                 .delegate(enabledButtons, 'mouseleave', function() { $(this).removeClass("k-state-hover")})
                 .delegate(buttons, 'mousedown', false)
@@ -377,7 +488,7 @@
                     
                         if (toolName == 'fontSize' || toolName == 'fontName') {
                             var inheritText = self.options.localization[toolName + 'Inherit'] || localization[toolName + 'Inherit']
-                            self[toolName][0].Text = inheritText;
+                            self.options[toolName][0].Text = inheritText;
                             $this.find('input').val(inheritText).end()
                                  .find('span.k-input').text(inheritText).end();
                         }
@@ -388,7 +499,7 @@
                         });
 
                     });/*.end()*/
-                self.bind('selectionChange', function() {
+                self.bind('select', function() {
                     var range = self.getRange();
 
                     var nodes = Editor.RangeUtils.textNodes(range);
@@ -397,7 +508,7 @@
                         nodes = [range.startContainer];
                     }
 
-                    $element.find(toolbarItems)
+                    $wrapper.find(toolbarItems)
                         .each(function () {
                             var tool = self.options.tools[toolFromClassName(this)];
                             if (tool) {
@@ -470,10 +581,44 @@
                 { Text: 'Heading 5', Value: 'h5' },
                 { Text: 'Heading 6', Value: 'h6' }
             ],
-            tools: {
-                undo: { key: 'Z', ctrl: true },
-                redo: { key: 'Y', ctrl: true }
-            }
+            tools: [
+                "backColor",
+                "bold",
+                "createLink",
+                "fontName",
+                "fontSize",
+                "foreColor",
+                "formatBlock",
+                "indent",
+                //"insertHtml",
+                "insertImage",
+                "insertOrderedList",
+                "insertUnorderedList",
+                "italic",
+                "justifyCenter",
+                "justifyFull",
+                "justifyLeft",
+                "justifyRight",
+                "outdent",
+                "strikethrough",
+                //"style",
+                //"subscript",
+                //"superscript",
+                "underline",
+                "unlink"
+            ]
+        },
+
+        _nativeTools: [
+            "insertLineBreak",
+            "insertParagraph",
+            "redo",
+            "undo"
+        ],
+
+        _tools: {
+            undo: { options: { key: 'Z', ctrl: true } },
+            redo: { options: { key: 'Y', ctrl: true } }
         },
 
         value: function (html) {
@@ -578,7 +723,7 @@
         },
 
         exec: function (name, params) {
-            var range, body, id, tool = '';
+            var range, body, id, tool = '', pendingTool;
 
             name = name.toLowerCase();
 
@@ -601,8 +746,11 @@
                 range = this.getRange();
 
                 if (!/undo|redo/i.test(name) && tool.willDelayExecution(range)) {
-                    this.pendingFormats.toggle({ name: name, params: params, command: tool.command });
-                    selectionChanged(this);
+                    // clone our tool to apply params only once
+                    pendingTool = $.extend({}, tool);
+                    $.extend(pendingTool.options, { params: params });
+                    this.pendingFormats.toggle(pendingTool);
+                    select(this);
                     return;
                 }
 
@@ -621,12 +769,12 @@
                     command.exec();
 
                     if (command.async) {
-                        command.change = $.proxy(function () { selectionChanged(this); }, this);
+                        command.change = $.proxy(function () { select(this); }, this);
                         return;
                     }
                 }
 
-                selectionChanged(this);
+                select(this);
             }
         }
     });
@@ -683,6 +831,7 @@
     // Exports ================================================================
 
     extend(kendo.ui.Editor, {
+        ToolTemplate: ToolTemplate,
         EditorUtils: EditorUtils,
         Tool: Tool,
         FormatTool: FormatTool

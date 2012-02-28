@@ -9,6 +9,7 @@ var kendo = window.kendo,
     dom = Editor.Dom,
     Command = Editor.Command,
     Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
     FormatTool = Editor.FormatTool,
     EditorUtils = Editor.EditorUtils,
     registerTool = EditorUtils.registerTool,
@@ -149,9 +150,15 @@ var BlockFormatter = Class.extend({
         for (var i = 0, l = nodes.length; i < l; i++) {
             var formatNode = this.finder.findFormat(nodes[i]);
             if (formatNode)
-                if (dom.ofType(formatNode, ['p', 'img', 'li']))
-                    dom.unstyle(formatNode, EditorUtils.formatByName(dom.name(formatNode), this.format).attr.style);
-                else
+                if (dom.ofType(formatNode, ['p', 'img', 'li'])) {
+                    var namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
+                    if (namedFormat.attr.style) {
+                        dom.unstyle(formatNode, namedFormat.attr.style);
+                    }
+                    if (namedFormat.attr.className) {
+                        dom.removeClass(formatNode, namedFormat.attr.className);
+                    }
+                } else
                     dom.unwrap(formatNode);
         }
     },
@@ -181,7 +188,7 @@ var GreedyBlockFormatter = Class.extend({
             for (var i = 0, len = blocks.length; i < len; i++) {
                 if (dom.is(blocks[i], 'li')) {
                     var list = blocks[i].parentNode;
-                    var formatter = new ListFormatter(list.nodeName.toLowerCase(), formatTag);
+                    var formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
                     var range = this.editor.createRange();
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
@@ -190,12 +197,12 @@ var GreedyBlockFormatter = Class.extend({
                 }
             }
         } else {
-            new BlockFormatter(format, values).apply(nodes);
+            new BlockFormatter(format, this.values).apply(nodes);
         }
     },
 
     toggle: function (range) {
-        var nodes = textNodes(range);
+        var nodes = RangeUtils.textNodes(range);
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
             nodes = textNodes(range);
@@ -224,8 +231,8 @@ var BlockFormatTool = FormatTool.extend({
 });
 
 var FormatBlockTool = Tool.extend({
-    init: function () {
-        Tool.fn.init.call(this);
+    init: function (options) {
+        Tool.fn.init.call(this, options);
         this.finder = new BlockFormatFinder([{ tags: dom.blockElements }]);
     },
 
@@ -236,26 +243,32 @@ var FormatBlockTool = Tool.extend({
     },
     
     update: function($ui, nodes) {
-        var list = $ui.data('tSelectBox');
+        var list;
+        if ($ui.is("select")) {
+            list = $ui.data('kendoDropDownList');
+        } else {
+            list = $ui.find("select").data('kendoDropDownList');
+        }
         list.close();
-        list.value(finder.getFormat(nodes));
+        list.value(this.finder.getFormat(nodes));
     },
 
     initialize: function($ui, initOptions) {
-        var editor = initOptions.editor;
-        
-        $ui.tSelectBox({
-            data: editor.options.formatBlock,
+        var editor = initOptions.editor,
+            toolName = 'formatBlock';
+
+        $ui.kendoDropDownList({
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: editor.options.formatBlock,
             title: editor.options.localization.formatBlock,
-            onItemCreate: function (e) {
-                var tagName = e.dataItem.Value;
-                e.html = '<' + tagName + ' unselectable="on" style="margin: .3em 0;' + dom.inlineStyle(editor.document, tagName) + '">' + e.dataItem.Text + '</' + tagName + '>';
-            },
-            onChange: function (e) {
-                Tool.exec(editor, 'formatBlock', e.value);
+            change: function (e) {
+                Tool.exec(editor, toolName, this.value());
             },
             highlightFirst: false
         });
+
+        $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
     }
 
 });
@@ -269,18 +282,18 @@ extend(kendo.ui.Editor, {
     FormatBlockTool: FormatBlockTool
 });
 
-registerTool("formatBlock", new FormatBlockTool());
+registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format Block", initialValue: "Select Block Type"})}));
 
 registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: 'left'}} }, { tags: ['img'], attr: { style: { 'float': 'left'}} } ]);
-registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft}));
+registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
 
 registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: 'center'}} }, { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} } ]);
-registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter}));
+registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Center"})}));
 
 registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: 'right'}} }, { tags: ['img'], attr: { style: { 'float': 'right'}} } ]);
-registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight}));
+registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Right"})}));
 
 registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: 'justify'}} } ]);
-registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull}));
+registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
 })(jQuery);

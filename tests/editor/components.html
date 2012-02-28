@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -18,6 +25,8 @@
 </head>
 <body>
 
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
 <script>
 
 var colorpicker;
@@ -26,10 +35,11 @@ $("#Editor1").kendoEditor();
 
 QUnit.testStart = function() {
     editor = getEditor();
-    colorpicker = $(editor.element).find('.k-colorpicker').eq(0).data('kendoColorPicker');
+    colorpicker = $(editor.element).closest(".k-editor").find('.k-colorpicker').eq(0).data('kendoColorPicker');
 }
 
 test('colorpicker value returns black when no value has been selected', function() {
+    debugger;
     equal(colorpicker.value(), '#000000');
 });
 
@@ -42,8 +52,6 @@ test('colorpicker value returns black when no value has been selected', function
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

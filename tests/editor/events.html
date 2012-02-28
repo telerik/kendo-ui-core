@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -18,11 +25,13 @@
 </head>
 <body>
 
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
 <script>
 
 $("#Editor1").kendoEditor({
     value: "foo",
-    selectionChange: onSelectionChange,
+    select: onSelectionChange,
     change: onChange,
     execute: onExecute
 });
@@ -61,7 +70,7 @@ module("Editor / ClientEvents", {
         changeRaised = false;
         editor = getEditor();
 
-        $(editor.element).bind('selectionChange', function () {
+        editor.bind('select', function () {
             changeRaised = true;
         });
 
@@ -78,7 +87,7 @@ test('onChange executed', function() {
 
 test('on selection change executed', function() {
     onSelectionChangeRaised = false;
-    $(getEditor().element).trigger('selectionChange');
+    editor.trigger('select');
     ok(onSelectionChangeRaised);
 });
 
@@ -194,7 +203,7 @@ test('redo raises selection change', function() {
         
 test('exec supplies command name and object', function() {
     var e;
-    $(editor.element).bind('execute', function() {
+    editor.bind('execute', function() {
         e = arguments[0];
     });
 
@@ -207,7 +216,7 @@ test('exec supplies command name and object', function() {
     editor.exec('bold');
 
     equal(e.name, 'bold');
-    ok(e.command instanceof $.telerik.editor.FormatCommand);
+    ok(e.command instanceof kendo.ui.Editor.FormatCommand);
 });
 
 </script>
@@ -219,8 +228,6 @@ test('exec supplies command name and object', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>

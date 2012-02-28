@@ -8,6 +8,13 @@
 <script src="../qunit/qunit/qunit.js"></script>
 <script src="../qunit-runner.js"></script>
 <script src="../../src/kendo.core.js"></script>
+<script src="../../src/kendo.fx.js"></script>
+<script src="../../src/kendo.data.js"></script>
+<script src="../../src/kendo.popup.js"></script>
+<script src="../../src/kendo.list.js"></script>
+<script src="../../src/kendo.combobox.js"></script>
+<script src="../../src/kendo.dropdownlist.js"></script>
+<script src="../../src/kendo.window.js"></script>
 <script src="../../src/kendo.editor.js"></script>
 <script src="util.js"></script>
 
@@ -17,6 +24,8 @@
 <style> html { font-size: 12px; } </style>
 </head>
 <body>
+
+<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 <script>
 
@@ -46,7 +55,7 @@ test('applyFormat applies format on text range', function() {
     range.setStart(pararagraph, 0);
     range.setEnd(pararagraph, 13);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), '<p><strong>golgafrincham</strong> telephone sanitisers</p>');
 });
@@ -59,7 +68,7 @@ test('applyFormat applies inline formats properly on block elements', function()
     var range = editor.createRange();
     range.selectNode(pararagraph);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
             
     equal(editor.value(), '<p><strong>golgafrincham</strong></p>');
 });
@@ -73,7 +82,7 @@ test('applyFormat applies format on split text elements', function() {
     range.setStart(pararagraph.firstChild, 2);
     range.setEnd(pararagraph.lastChild, 2);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), '<p>go<strong>lga</strong><em><strong>frin</strong></em><strong>ch</strong>am</p>');
 });
@@ -86,7 +95,7 @@ test('applyFormat uses the supplied selector', function() {
     var range = editor.createRange();
     range.selectNode(pararagraph);
 
-    impl.formatRange(range, editor.formats.italic);
+    impl.formatRange(range, editor.options.formats.italic);
             
     equal(editor.value(), '<p><em>golgafrincham</em></p>');
 });
@@ -98,7 +107,7 @@ test('formatRange applies style commands', function() {
     range.setStart(editor.body.firstChild.firstChild, 5);
     range.setEnd(editor.body.firstChild.firstChild, 9);
 
-    impl.formatRange(range, editor.formats.underline);
+    impl.formatRange(range, editor.options.formats.underline);
 
     var span = $(editor.value()).find('span');
 
@@ -113,7 +122,7 @@ test('formatRange does not introduce blank text nodes', function() {
     range.setStart(editor.body, 0);
     range.setEnd(editor.body, 1);
             
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.body.childNodes.length, 1);
 });
@@ -125,7 +134,7 @@ test('formatRange does honor block elements', function() {
     range.setStart(editor.body, 0);
     range.setEnd(editor.body, 2);
             
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value().replace(/\s*/gi, ''), '<p><strong>golgafrincham</strong></p><p><strong>telephone</strong></p>');
 });
@@ -137,7 +146,7 @@ test('formatRange honors nested block element', function() {
     range.setStart(editor.body, 0);
     range.setEnd(editor.body, 1);
             
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value().replace(/\s*/gi, ''), '<div><div><strong>golgafrincham</strong></div></div>');
 });
@@ -149,7 +158,7 @@ test('formatRange honors multiple nested block elements', function() {
     range.setStart(editor.body, 0);
     range.setEnd(editor.body, 1);
             
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value().replace(/\s*/gi, ''), '<ul><li><strong>golgafrincham</strong></li><li><strong>telephone</strong></li></ul>');
 });
@@ -160,7 +169,7 @@ test('formatRange reuses span', function() {
     var range = editor.createRange();
     range.selectNode(editor.body.firstChild);
 
-    impl.formatRange(range, editor.formats.underline);
+    impl.formatRange(range, editor.options.formats.underline);
 
     equal(editor.value(), '<span style="text-decoration:underline;">golgafrincham</span>');
 });
@@ -171,7 +180,7 @@ test('formatRange reuses span when node contents are selected', function() {
     var range = editor.createRange();
     range.selectNodeContents(editor.body.firstChild);
             
-    impl.formatRange(range, editor.formats.underline);
+    impl.formatRange(range, editor.options.formats.underline);
 
     equal(editor.value(), '<span style="text-decoration:underline;">golgafrincham</span>');
 });
@@ -182,7 +191,7 @@ test('formatRange does not reuse span if tags are specified', function() {
     var range = editor.createRange();
     range.selectNode(editor.body.firstChild);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), '<span><strong>golgafrincham</strong></span>');
 });
@@ -194,7 +203,7 @@ test('formatRange with inline format on collapsed range formats to word boundary
     range.setStart(editor.body.firstChild, 1);
     range.setEnd(editor.body.firstChild, 1);
 
-    impl.formatRange(range, editor.formats.bold);
+    impl.formatRange(range, editor.options.formats.bold);
 
     equal(editor.value(), '<strong>foo</strong>');
 });
@@ -205,7 +214,7 @@ test('underline and collapsed range', function() {
     range.setStart(editor.body.firstChild, 1);
     range.setEnd(editor.body.firstChild, 1);
             
-    impl.formatRange(range, editor.formats.underline);
+    impl.formatRange(range, editor.options.formats.underline);
 
     equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
 });
@@ -219,8 +228,6 @@ test('underline and collapsed range', function() {
 <ol id="qunit-tests"></ol>
 <div id="qunit-fixture">test markup, will be hidden</div>
 <ul id="log"></ul>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
 </body>
 </html>
