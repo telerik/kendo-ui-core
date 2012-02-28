@@ -455,34 +455,43 @@
         },
         {
             "id": "dataviz-core",
-            "name": "DataViz Core",
+            "name": "Core",
+            "description": "The DataViz core functions",
             "category": "dataviz",
             "source": "kendo.dataviz.core.min.js",
             "depends": [
                 "core"
-            ],
-            "hidden": true
+            ]
         },
         {
             "id": "dataviz-svg",
-            "name": "SVG View",
+            "name": "Output: SVG",
+            "description": "Support for SVG rendering",
             "category": "dataviz",
             "source": "kendo.dataviz.svg.min.js",
-            "hidden": true
+            "depends": [
+                "dataviz-core"
+            ]
         },
         {
             "id": "dataviz-vml",
-            "name": "VML View",
+            "name": "Output: VML",
+            "description": "Support for VML rendering",
             "category": "dataviz",
             "source": "kendo.dataviz.vml.min.js",
-            "hidden": true
+            "depends": [
+                "dataviz-core"
+            ]
         },
         {
-            "id": "chart-themes",
-            "name": "Chart Themes",
+            "id": "themes",
+            "name": "Themes",
+            "description": "Built-in themes for the DataViz widgets",
             "category": "dataviz",
-            "source": "kendo.dataviz.chart.themes.min.js",
-            "hidden": true
+            "source": "kendo.dataviz.themes.min.js",
+            "depends": [
+                "dataviz-core"
+            ]
         },
         {
             "id": "chart",
@@ -493,9 +502,7 @@
             "depends": [
                 "data",
                 "dataviz-core",
-                "dataviz-svg",
-                "dataviz-vml",
-                "chart-themes"
+                "dataviz-svg"
             ]
         },
         {
@@ -506,8 +513,7 @@
             "source": "kendo.dataviz.gauge.min.js",
             "depends": [
                 "dataviz-core",
-                "dataviz-svg",
-                "dataviz-vml"
+                "dataviz-svg"
             ]
         }
     ]
