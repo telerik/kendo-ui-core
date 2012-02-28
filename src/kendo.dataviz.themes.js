@@ -13,8 +13,8 @@
         SANS16 = "16px " + SANS,
         WHITE = "#fff";
 
-    // Kendo themes ===========================================================
-    var baseTheme = {
+    // Chart themes ============================================================
+    var chartBaseTheme = {
             title: {
                 font: SANS16
             },
@@ -42,326 +42,354 @@
             }
         };
 
-    var chartThemes = { };
-
-    chartThemes.black = deepExtend({}, baseTheme, {
-        title: {
-            color: WHITE
-        },
-        legend: {
-            labels: {
-                color: WHITE
-            }
-        },
-        seriesDefaults: {
-            labels: {
+    var chartThemes = {
+        black: deepExtend({}, chartBaseTheme, {
+            title: {
                 color: WHITE
             },
-            pie: {
-                highlight: {
-                    opacity: 0.6,
-                    color: "#3d3d3d",
-                    border: {
-                        width: 0.5,
-                        opacity: 0.9,
-                        color: "#000"
+            legend: {
+                labels: {
+                    color: WHITE
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: WHITE
+                },
+                pie: {
+                    highlight: {
+                        opacity: 0.6,
+                        color: "#3d3d3d",
+                        border: {
+                            width: 0.5,
+                            opacity: 0.9,
+                            color: BLACK
+                        }
+                    },
+                    overlay: {
+                        gradient: "sharpBevel"
                     }
                 },
-                overlay: {
-                    gradient: "sharpBevel"
+                line: {
+                    markers: {
+                        background: "#3d3d3d"
+                    }
+                },
+                scatter: {
+                    markers: {
+                        background: "#3d3d3d"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#3d3d3d"
+                    }
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
                 }
             },
-            line: {
-                markers: {
-                    background: "#3d3d3d"
+            chartArea: {
+                background: "#3d3d3d"
+            },
+            seriesColors: ["#0081da", "#3aafff", "#99c900", "#ffeb3d", "#b20753", "#ff4195"],
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
                 }
             },
-            scatter: {
-                markers: {
-                    background: "#3d3d3d"
+            axisDefaults: {
+                line: {
+                    color: "#8e8e8e"
+                },
+                labels: {
+                    color: WHITE
+                },
+                majorGridLines: {
+                    color: "#545454"
+                },
+                minorGridLines: {
+                    color: "#454545"
+                },
+                title: {
+                    color: WHITE
                 }
             },
-            scatterLine: {
-                markers: {
-                    background: "#3d3d3d"
-                }
-            },
-            area: {
-                opacity: 0.4,
-                markers: {
-                    visible: false,
-                    size: 6
-                }
+            tooltip: {
+                background: "#3d3d3d",
+                color: WHITE,
+                opacity: 0.8
             }
-        },
-        chartArea: {
-            background: "#3d3d3d"
-        },
-        seriesColors: ["#0081da", "#3aafff", "#99c900", "#ffeb3d", "#b20753", "#ff4195"],
-        categoryAxis: {
-            majorGridLines: {
-                visible: true
-            }
-        },
-        axisDefaults: {
-            line: {
+        }),
+
+        "default": deepExtend({}, chartBaseTheme, {
+            title: {
                 color: "#8e8e8e"
             },
-            labels: {
-                color: WHITE
+            legend: {
+                labels: {
+                    color: "#232323"
+                }
             },
-            majorGridLines: {
-                color: "#545454"
+            seriesDefaults: {
+                labels: {
+                    color: BLACK,
+                    background: WHITE,
+                    opacity: 0.5
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                }
             },
-            minorGridLines: {
-                color: "#454545"
+            seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
+                }
             },
-            title: {
-                color: WHITE
-            }
-        },
-        tooltip: {
-            background: "#3d3d3d",
-            color: WHITE,
-            opacity: 0.8
-        }
-    });
-
-    chartThemes["default"] = deepExtend({}, baseTheme, {
-        title: {
-            color: "#8e8e8e"
-        },
-        legend: {
-            labels: {
-                color: "#232323"
-            }
-        },
-        seriesDefaults: {
-            labels: {
-                color: BLACK,
+            axisDefaults: {
+                line: {
+                    color: "#8e8e8e"
+                },
+                labels: {
+                    color: "#232323"
+                },
+                minorGridLines: {
+                    color: "#f0f0f0"
+                },
+                majorGridLines: {
+                    color: "#dfdfdf"
+                },
+                title: {
+                    color: "#232323"
+                }
+            },
+            tooltip: {
                 background: WHITE,
-                opacity: 0.5
-            },
-            area: {
-                opacity: 0.4,
-                markers: {
-                    visible: false,
-                    size: 6
-                }
-            }
-        },
-        seriesColors: ["#ff6800", "#a0a700", "#ff8d00", "#678900", "#ffb53c", "#396000"],
-        categoryAxis: {
-            majorGridLines: {
-                visible: true
-            }
-        },
-        axisDefaults: {
-            line: {
-                color: "#8e8e8e"
-            },
-            labels: {
-                color: "#232323"
-            },
-            minorGridLines: {
-                color: "#f0f0f0"
-            },
-            majorGridLines: {
-                color: "#dfdfdf"
-            },
-            title: {
-                color: "#232323"
-            }
-        },
-        tooltip: {
-            background: WHITE,
-            color: BLACK,
-            opacity: 0.8
-        }
-    });
-
-    chartThemes.blueopal = deepExtend({}, baseTheme, {
-        title: {
-            color: "#293135"
-        },
-        legend: {
-            labels: {
-                color: "#293135"
-            }
-        },
-        seriesDefaults: {
-            labels: {
                 color: BLACK,
+                opacity: 0.8
+            }
+        }),
+
+        blueopal: deepExtend({}, chartBaseTheme, {
+            title: {
+                color: "#293135"
+            },
+            legend: {
+                labels: {
+                    color: "#293135"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: BLACK,
+                    background: WHITE,
+                    opacity: 0.5
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                }
+            },
+            seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
+                }
+            },
+            axisDefaults: {
+                line: {
+                    color: "#9aabb2"
+                },
+                labels: {
+                    color: "#293135"
+                },
+                majorGridLines: {
+                    color: "#c4d0d5"
+                },
+                minorGridLines: {
+                    color: "#edf1f2"
+                },
+                title: {
+                    color: "#293135"
+                }
+            },
+            tooltip: {
                 background: WHITE,
-                opacity: 0.5
-            },
-            area: {
-                opacity: 0.4,
-                markers: {
-                    visible: false,
-                    size: 6
-                }
+                color: BLACK,
+                opacity: 0.8
             }
-        },
-        seriesColors: ["#0069a5", "#0098ee", "#7bd2f6", "#ffb800", "#ff8517", "#e34a00"],
-        categoryAxis: {
-            majorGridLines: {
-                visible: true
-            }
-        },
-        axisDefaults: {
-            line: {
-                color: "#9aabb2"
-            },
-            labels: {
-                color: "#293135"
-            },
-            majorGridLines: {
-                color: "#c4d0d5"
-            },
-            minorGridLines: {
-                color: "#edf1f2"
-            },
-            title: {
-                color: "#293135"
-            }
-        },
-        tooltip: {
-            background: WHITE,
-            color: BLACK,
-            opacity: 0.8
-        }
-    });
+        }),
 
-    chartThemes.silver = deepExtend({}, baseTheme, {
-        title: {
-            color: "#4e5968"
-        },
-        legend: {
-            labels: {
-                color: "#4e5968"
-            }
-        },
-        seriesDefaults: {
-            labels: {
-                color: "#293135",
-                background: "#eaeaec",
-                opacity: 0.5
-            },
-            line: {
-                markers: {
-                    background: "#eaeaec"
-                }
-            },
-            scatter: {
-                markers: {
-                    background: "#eaeaec"
-                }
-            },
-            scatterLine: {
-                markers: {
-                    background: "#eaeaec"
-                }
-            },
-            pie: {
-                connectors: {
-                    color: "#A6B1C0"
-                }
-            },
-            area: {
-                opacity: 0.4,
-                markers: {
-                    visible: false,
-                    size: 6
-                }
-            }
-        },
-        chartArea: {
-            background: "#eaeaec"
-        },
-        seriesColors: ["#007bc3", "#76b800", "#ffae00", "#ef4c00", "#a419b7", "#430B62"],
-        categoryAxis: {
-            majorGridLines: {
-                visible: true
-            }
-        },
-        axisDefaults: {
-            line: {
-                color: "#a6b1c0"
-            },
-            labels: {
-                color: "#4e5968"
-            },
-            majorGridLines: {
-                color: "#dcdcdf"
-            },
-            minorGridLines: {
-                color: "#eeeeef"
-            },
+        silver: deepExtend({}, chartBaseTheme, {
             title: {
                 color: "#4e5968"
+            },
+            legend: {
+                labels: {
+                    color: "#4e5968"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: "#293135",
+                    background: "#eaeaec",
+                    opacity: 0.5
+                },
+                line: {
+                    markers: {
+                        background: "#eaeaec"
+                    }
+                },
+                scatter: {
+                    markers: {
+                        background: "#eaeaec"
+                    }
+                },
+                scatterLine: {
+                    markers: {
+                        background: "#eaeaec"
+                    }
+                },
+                pie: {
+                    connectors: {
+                        color: "#A6B1C0"
+                    }
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                }
+            },
+            chartArea: {
+                background: "#eaeaec"
+            },
+            seriesColors: ["#007bc3", "#76b800", "#ffae00", "#ef4c00", "#a419b7", "#430B62"],
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
+                }
+            },
+            axisDefaults: {
+                line: {
+                    color: "#a6b1c0"
+                },
+                labels: {
+                    color: "#4e5968"
+                },
+                majorGridLines: {
+                    color: "#dcdcdf"
+                },
+                minorGridLines: {
+                    color: "#eeeeef"
+                },
+                title: {
+                    color: "#4e5968"
+                }
+            },
+            tooltip: {
+                background: WHITE,
+                color: "#4e5968",
+                opacity: 0.8
             }
-        },
-        tooltip: {
-            background: WHITE,
-            color: "#4e5968",
-            opacity: 0.8
-        }
-    });
+        }),
 
-    chartThemes.metro = deepExtend({}, baseTheme, {
-        title: {
-            color: "#777777"
-        },
-        legend: {
-            labels: {
-                color: "#777777"
-            }
-        },
-        seriesDefaults: {
-            labels: {
-                color: "#000000"
-            },
-            area: {
-                opacity: 0.4,
-                markers: {
-                    visible: false,
-                    size: 6
-                }
-            }
-        },
-        seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
-        categoryAxis: {
-            majorGridLines: {
-                visible: true
-            }
-        },
-        axisDefaults: {
-            line: {
-                color: "#c7c7c7"
-            },
-            labels: {
-                color: "#777777"
-            },
-            minorGridLines: {
-                color: "#c7c7c7"
-            },
-            majorGridLines: {
-                color: "#c7c7c7"
-            },
+        metro: deepExtend({}, chartBaseTheme, {
             title: {
                 color: "#777777"
+            },
+            legend: {
+                labels: {
+                    color: "#777777"
+                }
+            },
+            seriesDefaults: {
+                labels: {
+                    color: BLACK
+                },
+                area: {
+                    opacity: 0.4,
+                    markers: {
+                        visible: false,
+                        size: 6
+                    }
+                }
+            },
+            seriesColors: ["#25a0da", "#309b46", "#8ebc00", "#ff6900", "#e61e26", "#d8e404", "#16aba9", "#7e51a1", "#313131", "#ed1691"],
+            categoryAxis: {
+                majorGridLines: {
+                    visible: true
+                }
+            },
+            axisDefaults: {
+                line: {
+                    color: "#c7c7c7"
+                },
+                labels: {
+                    color: "#777777"
+                },
+                minorGridLines: {
+                    color: "#c7c7c7"
+                },
+                majorGridLines: {
+                    color: "#c7c7c7"
+                },
+                title: {
+                    color: "#777777"
+                }
+            },
+            tooltip: {
+                background: WHITE,
+                color: BLACK
             }
-        },
-        tooltip: {
-            background: WHITE,
-            color: BLACK
+        })
+    };
+
+
+    // Gauge themes ===========================================================
+
+    var gaugeBaseTheme = {
+        scale: {
+            labels: {
+                font: SANS12
+            }
         }
-    });
+    };
+
+    var gaugeThemes = {
+        black: deepExtend({}, gaugeBaseTheme, {
+            scale: {
+                labels: {
+                    color: WHITE
+                },
+                minorTicks: {
+                    color: WHITE
+                },
+                majorTicks: {
+                    color: WHITE
+                }
+            }
+        })
+    };
 
     // Exports ================================================================
     deepExtend(dataviz.ui.themes, {
-        chart: chartThemes
+        chart: chartThemes,
+        gauge: gaugeThemes
     });
 
 })(jQuery);
