@@ -24,7 +24,7 @@
                 keys = kendo.keys,
                 div, input;
 
-            QUnit.config.testTimeout = 300;
+            QUnit.config.testTimeout = 400;
             QUnit.config.reorder = false;
 
             module("kendo.ui.DatePicker API", {
@@ -52,7 +52,7 @@
                             preventDefault: function() { start(); }
                         });
 
-                }, 100);
+                }, 200);
             });
 
             test("click enter should raise change event if dateview is closed", function() {
@@ -273,7 +273,7 @@
                     equal(+dv._current, +focusedDate);
                     equal(dv.calendar._table.find(".k-state-focused").text(), "Mar");
                     start();
-                },100);
+                },200);
             });
 
             //DECADE VIEW
@@ -610,7 +610,7 @@
                     ok(dv.popup.visible());
                     equal(dv.calendar._table.find(".k-state-focused").length, 1);
                     start();
-                }, 100);
+                }, 200);
             });
 
             test("Enter should select date", function() {
@@ -695,7 +695,7 @@
                     equal(input.val(), value);
                     equal(datepicker.value(), null);
                     start();
-                }, 100);
+                }, 200);
             });
 
             asyncTest("click on selected date should close the dateView", 1, function() {
