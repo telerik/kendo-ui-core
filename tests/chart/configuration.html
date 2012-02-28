@@ -12,7 +12,7 @@
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.dataviz.core.js"></script>
         <script src="../../src/kendo.dataviz.chart.js"></script>
-        <script src="../../src/kendo.dataviz.chart.themes.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
         <script src="../../src/kendo.dataviz.svg.js"></script>
         <script src="../../src/kendo.dataviz.vml.js"></script>
         <script src="util.js"></script>
@@ -359,7 +359,7 @@
                 });
 
                 test("axisDefaults override theme base", function() {
-                    Chart.themes.test = {
+                    dataviz.ui.themes.chart.test = {
                         categoryAxis: {
                             flag: true
                         }
@@ -376,7 +376,7 @@
                 });
 
                 test("axisDefaults override theme with specific type", function() {
-                    Chart.themes.test = {
+                    dataviz.ui.themes.chart.test = {
                         axisDefaults: {
                             categoryAxis: {
                                 flag: true
@@ -1039,7 +1039,7 @@
                 // ------------------------------------------------------------
                 module("Themes", {
                     setup: function() {
-                        Chart.themes.test = {
+                        dataviz.ui.themes.chart.test = {
                             flag: true,
                             seriesColors: ["#f00", "#cf0"],
                             seriesDefaults: {
