@@ -335,7 +335,7 @@
                 ring = scale.ring,
                 result = [],
                 from, to, r, ir, count = ranges.length,
-                range, defaultColor = "#aaa",
+                range, defaultColor = "#dedede",
                 min = options.min,
                 max = options.max,
                 from, to, j, range,
