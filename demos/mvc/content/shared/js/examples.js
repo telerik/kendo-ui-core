@@ -319,8 +319,6 @@
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: themes,
-                    dataTextField: "text",
-                    dataValueField: "value",
                     template: "<span class='thumbLink'>" +
                         "<span class='thumb #= data.text.toLowerCase() #Thumb' " +
                             "style='background-image: url(" + initialRelativePath + "Menu/thumbSprite.png)'>" +
