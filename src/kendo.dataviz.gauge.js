@@ -43,7 +43,8 @@
     var Pointer = ChartElement.extend({
         init: function (scale, options) {
             var pointer = this,
-                options;
+                options,
+                scaleOptions = scale.options;
 
             ChartElement.fn.init.call(pointer, options);
 
@@ -54,6 +55,8 @@
             }
 
             pointer.scale = scale;
+
+            options.value = math.min(math.max(options.value, scaleOptions.min), scaleOptions.max);
         },
 
         options: {
