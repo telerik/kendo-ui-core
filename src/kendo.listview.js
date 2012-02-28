@@ -276,7 +276,7 @@
 
             that.cancel();
             item.replaceWith(container);
-            that.editable = container.kendoEditable({ model: data, clearContainer: false }).data("kendoEditable");
+            that.editable = container.kendoEditable({ model: data, clearContainer: false, errorTemplate: false }).data("kendoEditable");
 
             that.trigger(EDIT, { model: data, item: container });
        },
