@@ -151,7 +151,7 @@
             animation: {
                 open: {
                     effects: "slideIn:down",
-                    transition: !/chrome/i.test(navigator.userAgent),
+                    transition: true,
                     duration: 200,
                     show: true
                 },
@@ -200,15 +200,9 @@
                     wrapper.css(TOP, "-10000px");
                 }
 
-                animation = extend({}, options.animation.open);
-
-                if (that._update()) {
-                    if (typeof animation.effects == "string" && animation.effects.match(direction)) {
-                        direction = "up";
-                    }
-
-                    animation.effects = kendo.parseEffects(animation.effects, true);
-                }
+                animation = extend(true, {}, options.animation.open);
+                animation.effects = kendo.parseEffects(animation.effects, that._update());
+                direction = animation.effects.slideIn ? animation.effects.slideIn.direction : direction;
 
                 if (options.anchor != BODY) {
                     var dirClass = ACTIVEBORDER + "-" + direction;

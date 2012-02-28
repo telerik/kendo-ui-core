@@ -159,8 +159,8 @@
             each(input, function(idx) {
                 var direction = this.direction;
 
-                if (direction && mirror)
-                    direction = kendo.directions[direction].reverse;
+                if (direction && mirror && !singleEffectRegExp.test(idx))
+                    this.direction = kendo.directions[direction].reverse;
 
                 effects[idx] = this;
             });
@@ -380,11 +380,9 @@
     }
 
     kendo.fx.promise = function(element, options) {
-        var promises = [], effects = options.effects;
+        var promises = [], effects;
 
-        if (typeof effects === "string") {
-            effects = kendo.parseEffects(options.effects);
-        }
+        effects = kendo.parseEffects(options.effects);
         options.effects = effects;
 
         element.data("animating", true);
@@ -395,16 +393,16 @@
             // create a promise for each effect
             promise = $.Deferred(function(deferred) {
                 if (size(effects)) {
-                    var opts = extend({}, options, { complete: deferred.resolve });
+                    var opts = extend(true, {}, options, { complete: deferred.resolve });
 
                     each(effects, function(effectName, settings) {
                         var effect = kendo.fx[effectName];
 
                         if (effect) {
-                            var dir = kendo.directions[this.direction];
-                            if (this.direction && dir) {
-                                this.direction = (options.reverse ? dir.reverse : this.direction);
-                                element.data(effectName, this);
+                            var dir = kendo.directions[settings.direction];
+                            if (settings.direction && dir) {
+                                settings.direction = (options.reverse ? dir.reverse : settings.direction);
+                                element.data(effectName, settings);
                             }
 
                             opts = extend(true, opts, settings);
