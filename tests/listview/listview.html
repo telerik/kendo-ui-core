@@ -92,6 +92,23 @@
                 equal(ul.children().eq(1).html(), "2");
             });
 
+            test("progress mask is shown when request starts", function() {
+                var ul = setup();
+
+                dataSource.bind("requestStart", function() {
+                    equal(ul.find("div.k-loading-mask").length, 1);
+                });
+                dataSource.read();
+            });
+
+            test("progress mask is hidden when request finish", function() {
+                var ul = setup();
+
+                dataSource.read();
+
+                equal(ul.find("div.k-loading-mask").length, 0);
+            });
+
             test("selectable false does not instantiate Selectable object", function() {
                 var ul = setup({ selectable: false });
                 ok(!ul.data("kendoListView").selectable);

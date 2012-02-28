@@ -7,6 +7,8 @@
         keys = kendo.keys,
         FOCUSSELECTOR =  ">*",
         CHANGE = "change",
+        REQUESTSTART = "requestStart",
+        ERROR = "error",
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
@@ -16,6 +18,7 @@
         EDIT = "edit",
         REMOVE = "remove",
         proxy = $.proxy,
+        progress = kendo.ui.progress,
         DataSource = kendo.data.DataSource;
 
     var ListView = Widget.extend( {
@@ -70,7 +73,18 @@
         _dataSource: function() {
             var that = this;
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
+            that.dataSource = DataSource.create(that.options.dataSource)
+                .bind(CHANGE, proxy(that.refresh, that))
+                .bind(REQUESTSTART, proxy(that._requestStart, that))
+                .bind(ERROR, proxy(that._error, that));
+        },
+
+        _requestStart: function() {
+            progress(this.element, true);
+        },
+
+        _error: function() {
+            progress(this.element, false);
         },
 
         _element: function() {
