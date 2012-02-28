@@ -246,7 +246,7 @@
            }
        },
 
-       _closeEditable: function() {
+       _closeEditable: function(validate) {
            var that = this,
                editable = that.editable,
                data,
@@ -254,13 +254,15 @@
                valid = true;
 
            if (editable) {
-               if (editable.end()) {
+               if (validate) {
+                   valid = editable.end();
+               }
+
+               if (valid) {
                    data = that.dataSource.view()[editable.element.index()],
                    container = $(that.template(data))
                    that._destroyEditable();
                    editable.element.replaceWith(container);
-               } else {
-                   valid = false;
                }
            }
 
@@ -280,7 +282,7 @@
        },
 
        save: function() {
-           if (this._closeEditable()) {
+           if (this._closeEditable(true)) {
                this.dataSource.sync();
            }
        },
@@ -324,7 +326,7 @@
            if (index != -1) {
                data = dataSource.view()[index];
                dataSource.cancelChanges(data);
-               that._closeEditable();
+               that._closeEditable(false);
            }
        }
 
