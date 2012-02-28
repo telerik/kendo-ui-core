@@ -153,7 +153,7 @@
 
             return [
                 view.createPolyline([
-                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.minorTickSize, center.x, center.y, pointRotation),
+                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.minorTicks.size, center.x, center.y, pointRotation),
                     rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
                     rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
                 ], true, options),
@@ -175,6 +175,7 @@
     var RadialScale = NumericAxis.extend({
         init: function (options) {
             var scale = this;
+
             scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
             Axis.fn.init.call(scale, options);
@@ -183,12 +184,24 @@
         options: {
             min: 0,
             max: 100,
-            majorTickSize: 15,
-            majorTickAlignment: INSIDE,
-            minorTickSize: 10,
-            minorTickAlignment: INSIDE,
+
+            majorTicks: {
+                size: 15,
+                alignment: INSIDE,
+                color: BLACK,
+                width: .5
+            },
+
+            minorTicks: {
+                size: 10,
+                alignment: INSIDE,
+                color: BLACK,
+                width: .5
+            },
+
             startAngle: -30,
             endAngle: 210,
+
             labels: {
                 position: INSIDE,
                 padding: 2
@@ -201,7 +214,7 @@
                 center = box.center(),
                 radius = math.min(box.height(), box.width()) / 2,
                 ring = scale.ring || new dataviz.Ring(
-                    center, radius - options.majorTickSize,
+                    center, radius - options.majorTicks.size,
                     radius, options.startAngle, options.endAngle - options.startAngle);
 
             scale.ring = ring;
@@ -223,11 +236,11 @@
             var scale = this,
                 ticks = [],
                 majorTickRing = scale.ring,
-                minorTickRing = majorTickRing.clone();
+                minorTickRing = majorTickRing.clone(),
                 options = scale.options,
-                tickOptions = { stroke: "#000", strokeWidth: .5 };
+                minorTickSize = options.minorTicks.size;
 
-            function renderTickRing(ring, unit, skipUnit) {
+            function renderTickRing(ring, unit, tickOptions, skipUnit) {
                 var tickAngles = scale.getTickAngles(ring, unit),
                     i, innerPoint, outerPoint,
                     skip = skipUnit / unit,
@@ -244,22 +257,24 @@
                     ticks.push(view.createLine(
                         innerPoint.x, innerPoint.y,
                         outerPoint.x, outerPoint.y,
-                        deepExtend(
-                            tickOptions,
-                            { align: false }
-                        )
+                        {
+                            align: false,
+                            stroke: tickOptions.color,
+                            strokeWidth: tickOptions.width
+                        }
                     ));
                 }
             }
 
-            renderTickRing(majorTickRing, options.majorUnit);
+            renderTickRing(majorTickRing, options.majorUnit, options.majorTicks);
+
             if (options.labels.position == INSIDE) {
-                minorTickRing.radius(minorTickRing.r - options.minorTickSize, true);
+                minorTickRing.radius(minorTickRing.r - minorTickSize, true);
             } else {
-                minorTickRing.radius(minorTickRing.ir + options.minorTickSize);
+                minorTickRing.radius(minorTickRing.ir + minorTickSize);
             }
 
-            renderTickRing(minorTickRing, options.minorUnit, options.majorUnit);
+            renderTickRing(minorTickRing, options.minorUnit, options.minorTicks, options.majorUnit);
 
             return ticks;
         },
@@ -557,12 +572,18 @@
         init: function(element, userOptions) {
             var gauge = this,
                 options,
+                themeOptions,
+                themeName,
+                themes = dataviz.ui.themes.gauge || {},
                 i = 0;
 
             Widget.fn.init.call(gauge, element);
             options = deepExtend({}, gauge.options, userOptions);
 
-            gauge.options = deepExtend({}, options);
+            themeName = options.theme;
+            themeOptions = themeName ? themes[themeName] || themes[themeName.toLowerCase()] : {};
+
+            gauge.options = deepExtend({}, themeOptions, options);
 
             $(element).addClass("k-gauge");
 
