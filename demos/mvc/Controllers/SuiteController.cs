@@ -106,7 +106,7 @@ namespace Kendo.Controllers
             } else {
                 switch(suite) {
                     case "dataviz":
-                        component = "dataviz.ui.chart";
+                        component = "dataviz.ui." + (section.Contains("gauge") ? "gauge" : "chart");
                         break;
                     case "mobile":
                         component = "mobile.ui." + component;
