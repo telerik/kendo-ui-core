@@ -15,7 +15,7 @@
         <script src="../../../src/kendo.model.js"></script>
         <script src="../../../src/kendo.mobile.core.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
-        <script src="../../../src/kendo.mobile.swipe.js"></script>
+        <script src="../../../src/kendo.drag.js"></script>
         <script src="../../../src/kendo.mobile.scroller.js"></script>
         <script src="../../../src/kendo.mobile.view.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
@@ -225,7 +225,7 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var swipe = application.view.scroller.swipe;
+                var drag = application.view.scroller.drag;
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
@@ -239,10 +239,10 @@
                     equal(listview.children().length, 2);
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
-                    swipe.trigger("start", swipe);
-                    swipe.y.delta = 200;
-                    swipe.trigger("move", swipe);
-                    swipe.trigger("end", swipe);
+                    drag.trigger("start", drag);
+                    drag.y.delta = 200;
+                    drag.trigger("move", drag);
+                    drag.trigger("end", drag);
                 }
 
                 ds.bind("change", firstAssert);
