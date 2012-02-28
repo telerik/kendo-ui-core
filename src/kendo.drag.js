@@ -91,6 +91,7 @@
                 touches = originalEvent && originalEvent.changedTouches,
                 touch = touches && touches[0];
 
+
             if (that.pressed) { return; }
 
             that.pressed = true;
@@ -155,9 +156,15 @@
             this.y[method](location.pageY, timeStamp);
         },
 
-        _trigger: function(name, event) {
-            if(this.trigger(name, this)) {
-                event.preventDefault();
+        _trigger: function(name, e) {
+            var data = {
+                x: this.x,
+                y: this.y,
+                event: e
+            };
+
+            if(this.trigger(name, data)) {
+                e.preventDefault();
             }
         },
 

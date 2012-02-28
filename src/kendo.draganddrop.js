@@ -178,7 +178,13 @@
 
             Widget.fn.init.call(that, element, options);
 
-            bind(that.element, that.options.filter, MOUSEDOWN + NAMESPACE, proxy(that._wait, that));
+            that.drag = new kendo.Drag(that.element, {
+                global: true,
+                filter: that.options.filter,
+                start: proxy(that._start, that),
+                move: proxy(that._drag, that),
+                end: proxy(that._end, that)
+            });
 
             bind(that.element, that.options.filter, DRAGSTART + NAMESPACE, false);
         },
@@ -218,104 +224,45 @@
             dropped: false
         },
 
-        _startDrag: function(e) {
-            var that = this,
-                filter = that.options.filter;
-
-            that._offset = kendo.touchLocation(e);
-
-            if (filter) {
-                that.currentTarget = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
-            } else {
-                that.currentTarget = $(e.currentTarget);
-            }
-
-            $(document).bind(MOUSEMOVE + NAMESPACE, proxy(that._start, that))
-                       .bind(MOUSEUP + NAMESPACE, proxy(that._destroy, that));
-        },
-
-        _wait: function (e) {
-            var that = this;
-
-            e.stopImmediatePropagation();
-
-            that._startDrag(e);
-
-            // Prevent text selection for Gecko and WebKit
-            if (!touch) {
-                e.preventDefault();
-            }
-        },
-
         _start: function(e) {
-            var that = this,
-                location = kendo.touchLocation(e),
-                pageX = location.x,
-                pageY = location.y,
-                x = that._offset.x - pageX,
-                y = that._offset.y - pageY,
-                distance = Math.sqrt((x * x) + (y * y)),
+            var that = this;
                 options = that.options,
                 cursorOffset = options.cursorOffset,
+                event = e.event,
+                filter = that.options.filter,
                 hint = options.hint;
 
-            if (distance >= options.distance) {
-                if (touch)
-                    e.preventDefault();
-
-                if (hint) {
-                    that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
-
-                    that.hint.css( {
-                        position: "absolute",
-                        zIndex: 10010, //the Window's z-index is 10000
-                        left: pageX + cursorOffset.left,
-                        top: pageY + cursorOffset.top
-                    })
-                    .appendTo(document.body);
-                }
-
-                draggables[options.group] = that;
-
-                $(document).unbind(NAMESPACE)
-                           .bind(MOUSEUP + NAMESPACE + " " + KEYDOWN + NAMESPACE, proxy(that._stop, that))
-                           .bind(MOUSEMOVE + NAMESPACE, proxy(that._drag, that))
-                           .bind(SELECTSTART + NAMESPACE, false);
-
-                that.dropped = false;
-
-                if (that._trigger(DRAGSTART, e)) {
-                    that._destroy(e);
-                }
+            if (filter) {
+                that.currentTarget = $(event.target).is(filter) ? $(event.target) : $(event.target).closest(filter);
+            } else {
+                that.currentTarget = $(event.currentTarget);
             }
-        },
 
-        _withDropTarget: function(e, callback) {
-            var that = this,
-                target = kendo.eventTarget(e),
-                result,
-                options = that.options;
+            if (hint) {
+                that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
 
-            if (touch && kendo.size(dropTargets)) {
+                that.hint.css( {
+                    position: "absolute",
+                    zIndex: 10010, //the Window's z-index is 10000
+                    left: e.x.location + cursorOffset.left,
+                    top: e.y.location + cursorOffset.top
+                })
+                .appendTo(document.body);
+            }
 
-                $.each(dropTargets[options.group], function() {
-                    var that = this,
-                        element = that.element[0];
+            draggables[options.group] = that;
 
-                    if (contains(element, target)) {
-                        result = that;
-                        return false;
-                    }
-                });
+            that.dropped = false;
 
-                callback(result);
+            if (that._trigger(DRAGSTART, e)) {
+                that.drag.cancel();
+                that._destroy(e);
             }
         },
 
         _drag: function(e) {
             var that = this,
-                cursorOffset = that.options.cursorOffset,
-                location = kendo.touchLocation(e);
+                cursorOffset = that.options.cursorOffset;
 
             that._withDropTarget(e, function(target) {
                 if (!target) {
@@ -342,20 +289,16 @@
 
             if (that.hint) {
                 that.hint.css( {
-                    left: location.x + cursorOffset.left,
-                    top: location.y + cursorOffset.top
+                    left: e.x.location + cursorOffset.left,
+                    top: e.y.location + cursorOffset.top
                 });
             }
         },
 
-        _stop: function(e) {
+        _end: function(e) {
             var that = this,
                 destroy = proxy(that._destroy, that),
                 offset = getOffset(that.currentTarget);
-
-            if (!(e.type == MOUSEUP || e.keyCode == 27)) {
-                return;
-            }
 
             that._withDropTarget(e, function(target) {
                 if (target) {
@@ -379,9 +322,31 @@
 
             return that.trigger(eventName, extend({}, e, {
                 currentTarget: that.currentTarget,
-                pageX: location.x,
-                pageY: location.y
+                pageX: e.x.location,
+                pageY: e.y.location
             }));
+        },
+
+        _withDropTarget: function(e, callback) {
+            var that = this,
+                target = kendo.eventTarget(e),
+                result,
+                options = that.options;
+
+            if (touch && kendo.size(dropTargets)) {
+
+                $.each(dropTargets[options.group], function() {
+                    var that = this,
+                        element = that.element[0];
+
+                    if (contains(element, target)) {
+                        result = that;
+                        return false;
+                    }
+                });
+
+                callback(result);
+            }
         },
 
         _destroy: function(e) {
