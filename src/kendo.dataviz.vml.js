@@ -64,6 +64,12 @@
                 );
             }
 
+            if (dataviz.ui.Gauge) {
+                view.decorators.push(
+                    new dataviz.PointerAnimationDecorator(view)
+                );
+            }
+
             view.template = VMLView.template;
             if (!view.template) {
                 view.template = VMLView.template = template(
