@@ -26,8 +26,11 @@
             // Tests expect particular font size
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
-            function stubScale() {
-                var scale = new dataviz.RadialScale();
+            function stubScale(min, max) {
+                var scale = new dataviz.RadialScale({
+                    min: min,
+                    max: max
+                });
 
                 scale.ring = new dataviz.Ring(new Point2D(100, 100), 50, 100, 90, 180);
 
@@ -83,6 +86,20 @@
                 pointer.value(21);
 
                 equal(pointer.value(), 20);
+            });
+
+            test("initial pointer value is constrained within scale range", function() {
+                pointer = new Pointer(stubScale(-1, 11), {
+                    value: -2
+                });
+
+                equal(pointer.value(), -1);
+
+                pointer = new Pointer(stubScale(0, 11), {
+                    value: 12
+                });
+
+                equal(pointer.value(), 11);
             });
 
         </script>
