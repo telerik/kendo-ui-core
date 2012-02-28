@@ -31,7 +31,7 @@
                 <script id="deviceThumbTemplate" type="text/x-kendo-template">
                     <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
                 </script>
-                
+
             </div>
 
             <div id="device-wrapper">
@@ -133,12 +133,15 @@
         <text>
             kendo.history.stop();
 
-            window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"), 
-            {
-                layout: "examples"
-            });
+            $(function() {
+                applyCurrentMobileOS("#mobile-application-container");
 
-            $(function() { applyCurrentMobileOS("#mobile-application-container") });
+                window.kendoMobileApplication = new kendo.mobile.Application($("#mobile-application-container"),
+                {
+                    layout: "examples",
+                    platform: kendoMobileOS
+                });
+            });
         </text>
     }
     else
