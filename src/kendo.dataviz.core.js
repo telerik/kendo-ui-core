@@ -1940,6 +1940,7 @@
          */
         ui: {
             roles: {},
+            themes: {},
             plugin: function(widget) {
                 kendo.ui.plugin(widget, dataviz.ui);
             }

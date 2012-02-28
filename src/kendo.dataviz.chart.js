@@ -115,14 +115,15 @@
             var chart = this,
                 options,
                 themeOptions,
+                themes = dataviz.ui.themes.chart || {},
                 dataSourceOptions = (userOptions || {}).dataSource,
-                theme;
+                themeName;
 
             Widget.fn.init.call(chart, element);
             options = deepExtend({}, chart.options, userOptions);
 
-            theme = options.theme;
-            themeOptions = theme ? Chart.themes[theme] || Chart.themes[theme.toLowerCase()] : {};
+            themeName = options.theme;
+            themeOptions = themeName ? themes[themeName] || themes[themeName.toLowerCase()] : {};
 
             applyDefaults(options, themeOptions);
 
@@ -159,6 +160,7 @@
 
         options: {
             name: "Chart",
+            theme: "default",
             chartArea: {},
             title: {
                 visible: true
