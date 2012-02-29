@@ -164,7 +164,8 @@
          * @option {Object} [pointer] The pointer configuration options.
          * @option {String} [pointer.color] The color of the pointer.
          * Any valid CSS color string will work here, including hex and rgb.
-         * @option {String} [pointer.shape] The chape of the pointer.
+         * @option {String} [pointer.shape] The shape of the pointer.
+         * @option {String} [pointer.value] The value of the gauge.
          *
          */
         init: function() { },
