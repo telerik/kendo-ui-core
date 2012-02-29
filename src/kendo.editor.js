@@ -2833,7 +2833,8 @@ var Clipboard = Class.extend({
     },
 
     paste: function (html, clean) {
-        var i, l;
+        var editor = this.editor,
+            i, l;
 
         for (i = 0, l = this.cleaners.length; i < l; i++)
             if (this.cleaners[i].applicable(html))
