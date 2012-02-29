@@ -147,6 +147,34 @@
                 triggerEvent("mousedown", {pageX: 10, pageY: 20}, element.find("#bar"));
                 triggerEvent("mousemove", {pageX: 15, pageY: 25}, element.find("#bar"));
             });
+
+            module("drag threshold option", {
+                setup: function() {
+                    element = $('<div />');
+                    $("#qunit-fixture").empty().append(element);
+                    drag = new Drag(element, {
+                        threshold: 5
+                    });
+                }
+            });
+
+            test("ignores drag if less than threshold option", 0, function(){
+                drag.bind("start", function(e) {
+                    ok(false);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 11, pageY: 21});
+            });
+
+            test("raises start if distance more than threshold option", 1, function(){
+                drag.bind("start", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 14, pageY: 24});
+            });
         </script>
     </body>
 </html>

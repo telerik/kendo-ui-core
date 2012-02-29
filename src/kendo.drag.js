@@ -22,7 +22,7 @@
     var DragAxis = Class.extend({
         start: function(location, timeStamp) {
             var that = this;
-            that.location = location;
+            that.startLocation = that.location = location;
             that.velocity = that.delta = 0;
             that.timeStamp = timeStamp;
         },
@@ -34,6 +34,7 @@
 
             var that = this;
             that.delta = location - that.location;
+            that.initialDelta = location - that.startLocation;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
             that.location = location;
             that.timeStamp = timeStamp;
@@ -72,8 +73,9 @@
 
             element
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
-                .on("dragstart", function(e) { e.preventDefault(); });
+                .on("dragstart", false);
 
+            that.threshold = options.threshold || 0;
             that.bind([TAP, START, MOVE, END], options);
         },
 
@@ -108,7 +110,10 @@
         },
 
         _move: function(e) {
-            var that = this;
+            var that = this,
+                xDelta,
+                yDelta,
+                delta;
 
             if (!that.pressed) { return; }
 
@@ -116,7 +121,12 @@
 
                 that._perAxis(MOVE, location, e.timeStamp);
 
-                if (!that.x.delta && !that.y.delta) {
+                xDelta = that.x.initialDelta;
+                yDelta = that.y.initialDelta;
+
+                delta = Math.sqrt(xDelta * xDelta + yDelta * yDelta);
+
+                if (delta <= that.threshold) {
                     return;
                 }
 
