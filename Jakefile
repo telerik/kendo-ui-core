@@ -37,7 +37,7 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
 // CDN Configuration ===========================================================
 var CDN_PROJECT = path.join("build", "cdn.proj"),
     CDN_BUNDLE = bundles.cdnBundle,
-    CDN_BUNDLE_PATH = path.join(DEPLOY_PATH, "kendoui.cdn.commercial");
+    CDN_BUNDLE_PATH = path.join(DEPLOY_PATH, "kendoui.cdn.beta");
 
 // Tasks ======================================================================
 desc("Clean deploy working directory");
