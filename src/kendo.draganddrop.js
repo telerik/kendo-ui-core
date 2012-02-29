@@ -187,7 +187,7 @@
                 end: proxy(that._end, that)
             });
 
-            bind(that.element, that.options.filter, DRAGSTART + NAMESPACE, false);
+            that.element.on(DRAGSTART + " " + MOUSEDOWN, that.options.filter, false);
         },
 
         events: [
@@ -236,11 +236,15 @@
             if (filter) {
                 that.currentTarget = $(event.target).is(filter) ? $(event.target) : $(event.target).closest(filter);
             } else {
-                that.currentTarget = $(event.currentTarget);
+                that.currentTarget = that.element;
             }
+
+            console.log(that.currentTarget);
 
             if (hint) {
                 that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
+
+                console.log(that.hint);
 
                 that.hint.css( {
                     position: "absolute",
@@ -264,6 +268,8 @@
         _drag: function(e) {
             var that = this,
                 cursorOffset = that.options.cursorOffset;
+
+            e.preventDefault();
 
             that._withDropTarget(e, function(target) {
                 if (!target) {
@@ -318,8 +324,7 @@
         },
 
         _trigger: function(eventName, e) {
-            var that = this,
-                location = kendo.touchLocation(e);
+            var that = this;
 
             return that.trigger(eventName, extend({}, e, {
                 currentTarget: that.currentTarget,
@@ -359,7 +364,7 @@
 
             delete draggables[that.options.group];
 
-            $(document).unbind(NAMESPACE);
+            that.trigger("destroy");
         }
     });
 
