@@ -143,17 +143,28 @@
          * This is the length of the line in pixels that is drawn to indicate the tick on the scale.
          * @option {Number} [scale.majorTicks.width] <0.5> The width of the major ticks.
          * @option {String} [scale.majorTicks.color] The color of the major ticks.
+         * Any valid CSS color string will work here, including hex and rgb.
          * @option {Object} [scale.minorTicks] Configures the scale minor ticks.
          * @option {Number} [scale.minorTicks.size] The minor tick size.
          * This is the length of the line in pixels that is drawn to indicate the tick on the scale.
          * @option {Number} [scale.minorTicks.width] <0.5> The width of the minor ticks.
          * @option {String} [scale.minorTicks.color] The color of the minor ticks.
+         * Any valid CSS color string will work here, including hex and rgb.
          * @option {Number} [scale.majorUnit] The interval between major divisions.
          * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {number} [scale.startAngle] <-30> The start angle of the gauge.
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the axis.
          * @option {Number} [scale.max] <100> The maximum value of the axis.
+         * @option {Object} [gaugeArea] The gauge area configuration options.
+         * This is the entire visible area of the gauge.
+         * @option {Object} [gaugeArea.border] The border of the gauge area.
+         * @option {Number} [gaugeArea.border.width] <0> The width of the border.
+         * @option {String} [gaugeArea.border.color] <"black">
+         * @option {Object} [pointer] The pointer configuration options.
+         * @option {String} [pointer.color] The color of the pointer.
+         * Any valid CSS color string will work here, including hex and rgb.
+         * @option {String} [pointer.shape] The chape of the pointer.
          *
          */
         init: function() { },
