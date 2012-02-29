@@ -20,7 +20,8 @@
                     "url": "area-chart/index.html"
                 }, {
                     "text": "Binding to remote data",
-                    "url": "area-chart/remote-data.html"
+                    "url": "area-chart/remote-data.html",
+                    "onlineOnly": true
                 }, {
                     "text": "Binding to local data",
                     "url": "area-chart/local-data.html"
@@ -43,7 +44,8 @@
                     "url": "bar-charts/multiple-axes.html"
                 }, {
                     "text": "Binding to remote data",
-                    "url": "bar-charts/remote-data.html"
+                    "url": "bar-charts/remote-data.html",
+                    "onlineOnly": true
                 }, {
                     "text": "Binding to local data",
                     "url": "bar-charts/local-data.html"
@@ -59,7 +61,8 @@
                 },
                 {
                     "text": "Binding to remote data",
-                    "url": "line-chart/remote-data.html"
+                    "url": "line-chart/remote-data.html",
+                    "onlineOnly": true
                 },
                 {
                     "text": "Binding to local data",
@@ -78,7 +81,8 @@
                     "url": "pie-chart/pie-labels.html"
                 }, {
                     "text": "Binding to remote data",
-                    "url": "pie-chart/remote-data.html"
+                    "url": "pie-chart/remote-data.html",
+                    "onlineOnly": true
                 }, {
                     "text": "Binding to local data",
                     "url": "pie-chart/local-data.html"
@@ -98,7 +102,8 @@
                     "url": "scatter-charts/multiple-axes.html"
                 }, {
                     "text": "Binding to remote data",
-                    "url": "scatter-charts/remote-data.html"
+                    "url": "scatter-charts/remote-data.html",
+                    "onlineOnly": true
                 }, {
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html"

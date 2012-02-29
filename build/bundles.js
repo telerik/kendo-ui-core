@@ -218,6 +218,10 @@ function deployExamples(root, bundle) {
                     outputName = path.join(suiteDest, example.url),
                     exampleBody = readText(fileName);
 
+                    if (example.onlineOnly) {
+                        continue;
+                    }
+
                     exampleBody = exampleBody
                         .replace(/@section \w+ {(.|\n|\r)+?}/gi, "")
                         .replace(/@{(.|\n|\r)+?}/gi)
