@@ -5,10 +5,10 @@
                 <span class="configTitle">Animation Settings</span>
                 <ul class="options">
                     <li>
-                        <input id="toggle" name="animation" type="radio" /> <label for="toggle">toggle animation</label>
+                        <input id="default" name="animation" type="radio" checked="checked" /> <label for="default">default/zoom animation</label>
                     </li>
                     <li>
-                        <input id="slide" name="animation" type="radio" checked="checked" /> <label for="slide">slide animation</label>
+                        <input id="toggle" name="animation" type="radio" /> <label for="toggle">toggle animation</label>
                     </li>
                     <li>
                         <input id="expand" name="animation" type="radio" checked="checked" /> <label for="expand">expand animation</label>
@@ -51,7 +51,7 @@
                         var element = $("#window").parent(),
                             clone = original.clone(true);
 
-//                        window.close();
+                        window.close();
                         undo.hide();
                         element.empty().remove();
 
@@ -63,7 +63,6 @@
 
                     var getEffects = function () {
                         return (($("#expand")[0].checked ? "expand:vertical " : "") +
-                                ($("#slide")[0].checked ? "slideIn:down " : "") +
                                 ($("#opacity")[0].checked ? "fadeIn" : "")) || false;
                     };
 
@@ -73,13 +72,17 @@
 
                     var window, undo,
                         initWindow = function () {
-                            window = $("#window").kendoWindow({
-                                width: "500px",
-                                animation: { open: { effects: getEffects() }, close: { effects: getEffects(), reverse: true } },
-                                title: "Kendo Window",
-                                visible: false,
-                                close: onClose
-                            }).data("kendoWindow");
+                            var windowOptions = {
+                                                    width: "500px",
+                                                    title: "Kendo Window",
+                                                    visible: false,
+                                                    close: onClose
+                                                };
+
+                            if (!$("#default")[0].checked)
+                                windowOptions.animation = { open: { effects: getEffects() }, close: { effects: getEffects(), reverse: true } };
+
+                            window = $("#window").kendoWindow(windowOptions).data("kendoWindow");
 
                             undo = $("#undo")
                                 .bind("click", function() {
