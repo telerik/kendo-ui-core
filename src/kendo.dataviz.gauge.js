@@ -185,6 +185,7 @@
         options: {
             min: 0,
             max: 100,
+            minorUnit: 5,
 
             majorTicks: {
                 size: 15,
