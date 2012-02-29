@@ -104,7 +104,7 @@
                 commonLink = kendoLinks.filter("[href*='kendo.common']"),
                 skinLink = kendoLinks.filter(":not([href*='kendo.common'])"),
                 currentFolder = new Array(location.href.match(/\//g).length - initialFolder + 1).join("../"),
-                extension = skinLink.attr("rel") === "stylesheet" ? ".css" : ".less",
+                extension = /\.less$/.test(skinLink.attr("href")) ? ".less" : ".css",
                 url = currentFolder + commonLink.attr("href").replace(skinRegex, "kendo." + skinName + "$1" + extension),
                 exampleElement = $("#example");
 
@@ -113,7 +113,7 @@
                     newLink;
 
                 if ($.browser.msie) {
-                    newLink = doc.createStyleSheet(url);
+                    newLink = $(doc.createStyleSheet(url));
                 } else {
                     newLink = skinLink.eq(0).clone().attr("href", url);
                     skinLink.eq(0).before(newLink);
