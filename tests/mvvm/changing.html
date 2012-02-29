@@ -394,6 +394,20 @@
                 equal($.trim(dom.text()), "bar");
             });
 
+            test("change event is fired once", 1, function() {
+                var dom = $('<div data-template="simple-field-template" data-bind="source: this" />');
+
+                var viewModel = kendo.observable({ foo: "foo" });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.bind("change", function() {
+                    ok(true);
+                });
+
+                viewModel.set("foo", "bar");
+            });
+
             test("dependencies are reavaluated", function() {
                 var dom = $('<div data-template="if-else-template" data-bind="source: this" />');
 

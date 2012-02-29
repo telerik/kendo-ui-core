@@ -227,22 +227,6 @@
 
                 ok(that === observable);
             });
-
-            test("specifying handler index", function() {
-                var observable = new Observable, callback;
-
-                observable.bind("foo", function() {
-                    callback = "last";
-                });
-
-                observable.bind(0, "foo", function() {
-                    callback = "first";
-                });
-
-                observable.trigger("foo");
-
-                equal(callback, "last");
-            });
         </script>
     </body>
 </html>

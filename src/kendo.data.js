@@ -212,7 +212,7 @@
                         field: e.field,
                         items: [this],
                         action: "itemchange"
-                    }, e.isDefaultPrevented());
+                    });
                 });
             }
 
@@ -352,7 +352,7 @@
 
                     (function(field) {
                         member.bind(CHANGE, function(e) {
-                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action}, e.isDefaultPrevented());
+                            that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
                         });
                     })(field);
                 }
