@@ -372,7 +372,12 @@
 
     var gaugeThemes = {
         black: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#0070e4"
+            },
             scale: {
+                rangePlaceholderColor: "#1d1d1d",
+
                 labels: {
                     color: WHITE
                 },
@@ -381,6 +386,82 @@
                 },
                 majorTicks: {
                     color: WHITE
+                }
+            }
+        }),
+
+        blueopal: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#005c83"
+            },
+            scale: {
+                rangePlaceholderColor: "#daecf4",
+
+                labels: {
+                    color: "#293135"
+                },
+                minorTicks: {
+                    color: "#293135"
+                },
+                majorTicks: {
+                    color: "#293135"
+                }
+            }
+        }),
+
+        "default": deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#ea7001"
+            },
+            scale: {
+                rangePlaceholderColor: "#dedede",
+
+                labels: {
+                    color: "#2e2e2e"
+                },
+                minorTicks: {
+                    color: "#2e2e2e"
+                },
+                majorTicks: {
+                    color: "#2e2e2e"
+                }
+            }
+        }),
+
+        metro: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#8ebc00"
+            },
+            scale: {
+                rangePlaceholderColor: "#e6e6e6",
+
+                labels: {
+                    color: "#777"
+                },
+                minorTicks: {
+                    color: "#777"
+                },
+                majorTicks: {
+                    color: "#777"
+                }
+            }
+        }),
+
+        silver: deepExtend({}, gaugeBaseTheme, {
+            pointer: {
+                color: "#0879c0"
+            },
+            scale: {
+                rangePlaceholderColor: "#f3f3f4",
+
+                labels: {
+                    color: "#515967"
+                },
+                minorTicks: {
+                    color: "#515967"
+                },
+                majorTicks: {
+                    color: "#515967"
                 }
             }
         })
