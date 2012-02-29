@@ -39,7 +39,7 @@
 
             that._template();
 
-            that.ul = $('<ul class="k-list k-reset"/>')
+            that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                         .css({ overflow: "auto" })
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); })
@@ -115,7 +115,6 @@
 
             if (value !== that._old) {
                 that._old = value;
-
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified

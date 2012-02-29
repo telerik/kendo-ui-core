@@ -115,7 +115,7 @@
 
         that.options = options;
 
-        that.ul = $('<ul class="k-list k-reset"/>')
+        that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                     .css({ overflow: "auto"})
                     .delegate(LI, CLICK, proxy(that._click, that))
                     .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
