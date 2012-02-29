@@ -2,9 +2,9 @@
     <div class="container">
         <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
 
-        <label>src:<select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select></label>
-        <label>alt:<input type="textbox" data-bind="value: imageAlt" /></label>
-        <label>title:<input type="textbox" data-bind="value: imageTitle" /></label>
+        <label><select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select>src:</label>
+        <label><input type="textbox" data-bind="value: imageAlt" />alt:</label>
+        <label><input type="textbox" data-bind="value: imageTitle" />title:</label>
     </div>
     <script>
         $(document).ready(function() {
@@ -13,7 +13,7 @@
                 food: [
                     { name: "Mishi Kobe Niku", url: "../../content/shared/images/foods/9.jpg" },
                     { name: "Chef Anton's Cajun Seasoning", url: "../../content/shared/images/foods/4.jpg" },
-                    { name: "Queso Manchego La Pastora", url: "../../content/shared/images/foods/12.jpg" },
+                    { name: "Queso Manchego La Pastora", url: "../../content/shared/images/foods/12.jpg" }
                 ],
                 imageAlt: "Alt attribute value",
                 imageTitle: "Title attribute value"
