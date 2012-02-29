@@ -182,11 +182,7 @@
                             e.preventDefault();
                             return;
                         }
-                        console.log(editor.options.tools);
-
                         var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
-
-                        console.log(e, toolName);
 
                         if (toolName) {
                             e.preventDefault();
@@ -518,11 +514,11 @@
    
             $(document)
                 .bind('DOMNodeInserted', function(e) {
-                    if ($.contains(e.target, self.element) || self.element == e.target) {
+                    if ($.contains(e.target, self.wrapper[0]) || self.wrapper[0] == e.target) {
                         // preserve updated value before re-initializing
                         // don't use update() to prevent the editor from encoding the content too early
                         self.textarea.value = self.value();
-                        $(self.element).find('iframe').remove();
+                        self.wrapper.find('iframe').remove();
                         initializeContentElement(self);
                     }
                 })
@@ -3696,7 +3692,7 @@ var GreedyBlockFormatter = Class.extend({
         var nodes = RangeUtils.textNodes(range);
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
-            nodes = textNodes(range);
+            nodes = RangeUtils.textNodes(range);
             if (!nodes.length)
                 nodes = dom.significantChildNodes(range.commonAncestorContainer);
         }
