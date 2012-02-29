@@ -1,13 +1,14 @@
 <div id="example" class="k-content">
     <table class="prettytable">
+        <tbody>
         <tr>
-            <th>Widget</th>
-            <th>Current view model state</th>
+            <th class="k-header">Widget</th>
+            <th class="k-header">Current view model state</th>
         </tr>
         <tr>
             <td>
-                <h4>AutoComplete</h4>
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
+                <h4>AutoComplete</h4>
             </td>
             <td rowspan="9">
 <pre>
@@ -28,20 +29,20 @@
         </tr>
         <tr>
             <td>
-                <h4>ComboBox</h4>
                 <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
+                <h4>ComboBox</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>DatePicker</h4>
                 <input data-role="datepicker" data-bind="value: datePickerValue" />
+                <h4>DatePicker</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>DropDownList </h4>
                 <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+                <h4>DropDownList </h4>
             </td>
         </tr>
         <tr>
@@ -52,20 +53,20 @@
         </tr>
         <tr>
             <td>
-                <h4>NumericTextBox</h4>
                 <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+                <h4>NumericTextBox</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Slider</h4>
                 <input data-role="slider" data-bind="value: sliderValue" />
+                <h4>Slider</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>TimePicker</h4>
                 <input data-role="timepicker" data-bind="value: timePickerValue" />
+                <h4>TimePicker</h4>
             </td>
         </tr>
         <tr>
@@ -87,6 +88,7 @@
                 </div>
             </td>
         </tr>
+        </tbody>
     </table>
     <script>
         $(document).ready(function() {
@@ -128,7 +130,7 @@
 
                     return $.map(gridSource, function(product) {
                         return "\t" + kendo.stringify(product);
-                    }).join(",\r");
+                    }).join(",\r\n");
                 },
                 numericTextBoxValue: 10,
                 displayNumericTextBoxValue: function() {
@@ -302,6 +304,39 @@ kendo.bind($("table"), viewModel);
         .prettytable {
             table-layout: fixed;
             width: 100%;
+        }
+
+        .prettytable > tbody > tr > td {
+            padding: 5px;
+        }
+
+        .prettytable td > .k-autocomplete,
+        .prettytable td > .k-dropdown,
+        .prettytable td > .k-combobox,
+        .prettytable td > .k-datepicker,
+        .prettytable td > .k-numerictextbox,
+        .prettytable td > .k-timepicker,
+        .prettytable td > .k-slider
+        {
+            float: right;
+        }
+
+        .prettytable td > .k-slider
+        {
+            margin-bottom: 10px;
+        }
+
+        .prettytable > tbody > tr > th {
+            -moz-border-radius: 5px 0 0;
+            -webkit-border-radius: 5px 0 0;
+            border-radius: 5px 0 0;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+        }
+
+        .prettytable > tbody > tr > th:last-child {
+            -moz-border-radius: 0 5px 0 0;
+            -webkit-border-radius: 0 5px 0 0;
+            border-radius: 0 5px 0 0;
         }
 
         td h4 {
