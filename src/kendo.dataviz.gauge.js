@@ -53,6 +53,8 @@
                 options.id = uniqueId();
             }
 
+            options.fill = options.color;
+
             pointer.scale = scale;
 
             options.value = math.min(math.max(options.value, scaleOptions.min), scaleOptions.max);
@@ -60,7 +62,7 @@
 
         options: {
             shape: "needle",
-            fill: "#EA7001",
+            color: "#ea7001",
             value: 0,
             capSize: 0.05,
             animation: {
@@ -352,7 +354,7 @@
                 ring = scale.ring,
                 result = [],
                 from, to, r, ir, count = ranges.length,
-                range, defaultColor = "#dedede",
+                range, defaultColor = options.rangePlaceholderColor,
                 min = options.min,
                 max = options.max,
                 from, to, j, range,
