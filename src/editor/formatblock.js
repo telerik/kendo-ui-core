@@ -205,7 +205,7 @@ var GreedyBlockFormatter = Class.extend({
         var nodes = RangeUtils.textNodes(range);
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
-            nodes = textNodes(range);
+            nodes = RangeUtils.textNodes(range);
             if (!nodes.length)
                 nodes = dom.significantChildNodes(range.commonAncestorContainer);
         }
