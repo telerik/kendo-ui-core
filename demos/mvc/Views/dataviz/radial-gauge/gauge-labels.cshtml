@@ -25,7 +25,9 @@
                 </ul>
             </div>
 
-            <div id="gauge"></div>
+            <div id="gauge-container">
+                <div id="gauge"></div>
+            </div>
 
             <script>
                 function createGauge(labelPosition) {
@@ -93,10 +95,18 @@
             </script>
 
             <style scoped>
+                #gauge-container {
+                    background: transparent url("../../content/dataviz/gauge/gauge-container.png") no-repeat 50% 50%;
+                    width: 404px;
+                    height: 404px;
+                    text-align: center;
+                    margin: 0 20%;
+                }
+
                 #gauge {
                     width: 300px;
                     height: 300px;
-                    margin: 0 20%;
+                    margin: 20px auto 0;
                 }
             </style>
         </div>
