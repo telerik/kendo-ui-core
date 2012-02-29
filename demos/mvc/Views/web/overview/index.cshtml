@@ -7,210 +7,91 @@
 }
 
         <div id="example" class="k-content">
-            <div id="datasource-views" class="k-header" style="background-image:none">
-                <div class="selector">
-                    <h3>Estimated Internet Users (Source: ITU)</h3>
-                    <label for="country">Select country:</label>
-                    <input id="country" />
-                </div>
-                <div id="grid"></div>
-                <div id="chart" class="k-header"></div>
-            </div>
+            <ul id="chart-types">
+                    <li>
+                        <img src="../../content/web/overview/calendar.png" alt="Calendar">
+                        <h3><a href="../scatter-charts/index.html">Calendar</a></h3>
+                        <p>The Calendar renders a graphical calendar that supports navigation and selection.</p>
+                    </li>
+                    <li>
+                        <img src="../../content/web/overview/combobox.png" alt="ComboBox">
+                        <h3><a href="../combobox/index.html">ComboBox</a></h3>
+                        <p>The ComboBox widget allows the selection from pre-defined values or entering a new value.</p>
+                    </li>
+                    <li>
+                        <img src="../../content/web/overview/editor.png" alt="Editor">
+                        <h3><a href="../pie-chart/index.html">Editor</a></h3>
+                        <p>The Editor allows your users to edit HTML in a familiar, user-friendly way.</p>
+                    </li>
+                    <li>
+                        <img src="../../content/web/overview/grid.png" alt="Grid">
+                        <h3><a href="../grid/index.html">Grid</a></h3>
+                        <p>The Grid widget displays tabular data and offers rich support interacting with data, including paging, sorting, grouping, and selection.</p>
+                    </li>
+                    <li>
+                        <img src="../../content/web/overview/panelbar.png" alt="PanelBar">
+                        <h3><a href="../scatter-charts/index.html">PanelBar</a></h3>
+                        <p>The PanelBar displays hierarchical data as a multi-level, expandable widget that is useful for constained areas of a page.</p>
+                    </li>
+                    <li>
+                        <img src="../../content/web/overview/slider.png" alt="Slider">
+                        <h3><a href="../scatter-charts/index.html">Slider</a></h3>
+                        <p>The Slider provides a rich input for selecting values or ranges of values.</p>
+                    </li>
+                </ul>
+        </div>
 
-            <div class="configuration configuration-horizontal-bottom">
-                <span class="infoHead">Information</span>
-                <p>
-                    Multiple components can be bound to a single data source.
-                </p>
-                <p>
-                    Any operations on the data source (sorting, filtering, etc.)
-                    are automatically propagated to all bound components.
-                </p>
-                <p>
-                    <strong>Note:</strong>
-                    Security restrictions in Chrome prevent this
-                    example from working when the page is
-                    loaded from the file system (via file:// protocol).
-                </p>
-            </div>
+        <style scoped>
+                #overview-wrap {
+                    width: 690px;
+                    margin: 30px auto 0 auto;
+                    padding: 35px 0 0;
+                    background: transparent url(../../content/web/overview/overlay.png) no-repeat 50% 0;
+                }
 
-            <style scoped>
-                #datasource-views {
-                    padding: 20px;
-                    border-radius: 10px;
-                    border-style: solid;
-                    border-width: 1px;
+                #chartSlider {
+                    width: 600px;
+                    height: 250px;
+                    margin: 0 auto;
+                }
+
+                #overview-wrap p {
+                    padding: 30px 20px;
+                }
+
+                #chart-types {
                     overflow: hidden;
+                    list-style-type: none;
+                    margin: 40px 0 0 0;
+                    padding: 0 0 0 10%;
                 }
 
-                .selector {
-                    text-align: right;
-                }
-                *+html .selector { margin-bottom: 25px; }
-
-                .selector h3 {
+                #chart-types li {
+                    width: 45%;
                     float: left;
-                    margin: 0;
-                    font-size: 16px;
+                    padding-bottom: 46px;
+                }
+
+                #chart-types h3,
+                #chart-types a {
+                    color: #19a3ee;
+                    text-decoration: none;
                     font-weight: normal;
                 }
 
-                .selector h3,
-                .k-dropdown {
-                    vertical-align: middle;
+                #chart-types a:hover {
+                    text-decoration: underline;
                 }
 
-                .k-dropdown {
-                    text-align: left;
-                }
-
-                #country {
-                    width: 250px;
-                    text-align: left;
-                }
-
-                #grid {
-                    left: 480px;
-                    margin-left: 1%;
-                    top: 121px;
-                    position: absolute;
-                    right: 40px;
-                    height: 280px;
-                }
-
-                #grid .k-header .k-link {
-                    padding: 0.3em 0.6em;
-                }
-
-                #chart {
-                    width: 430px;
-                    height: 280px;
-                    margin-top: 25px;
+                #chart-types p {
                     padding: 0;
-                    border-style: solid;
-                    border-width: 1px;
+                }
+
+                #chart-types img {
+                    float: left;
+                    width: 100px;
+                    height: 100px;
+                    margin-right: 19px;
                 }
             </style>
 
-            <script>
-                var transport = {
-                    read: {
-                        url: "../../content/web/datasource/internet-users.json",
-                        dataType: "json"
-                    }
-                };
-
-                var countriesDataSource = new kendo.data.DataSource({
-                    transport: transport,
-                    group: {
-                        field: "country",
-                        dir: "asc"
-                    }
-                });
-
-                var sharedDataSource = new kendo.data.DataSource({
-                    transport: transport,
-                    sort: {
-                        field: "year",
-                        dir: "asc"
-                    }
-                });
-
-                function filterCountries() {
-                    sharedDataSource.filter([{
-                        field: "country",
-                        operator: "equals",
-                        value: $("#country").val()
-                    }, {
-                        field: "year",
-                        operator: "greaterThanEqual",
-                        value: 2000
-                    }]);
-                }
-
-                for (var group in countriesDataSource.view()) {
-                    group = countriesDataSource.view()[group];
-                    for (var i = 1; i < group.items.length; i++) group.items[i].growth = (group.items[i].value - group.items[i-1].value) / 100.0
-                }
-
-                function createGrid() {
-                    $("#grid").kendoGrid({
-                        dataSource: sharedDataSource,
-                        autoBind: false,
-                        sortable: {
-                            allowUnsort: false
-                        },
-                        columns: [
-                            {
-                                field: "year",
-                                title: "Year",
-                                width: "100px"
-                            },
-                            {
-                                field: "value",
-                                title: "Estimated Users",
-                                template: '#= kendo.toString(value, "N0") #'
-                            },
-                            {
-                                field: "growth",
-                                title: "Growth",
-                                template: '#= kendo.toString(growth, "p") #',
-                                width: "100px"
-                            }
-                        ]
-                    });
-                }
-
-                function createChart() {
-                    $("#chart").kendoChart({
-                        theme: $(document).data("kendoSkin") || "default",
-                        dataSource: sharedDataSource,
-                        autoBind: false,
-                        legend: {
-                            visible: false
-                        },
-                        series: [{
-                            type: "column",
-                            field: "value"
-                        }],
-                        axisDefaults: {
-                            labels: {
-                                font: "11px Tahoma, sans-serif"
-                            }
-                        },
-                        valueAxis: {
-                            labels: {
-                                format: "{0:N0}"
-                            }
-                        },
-                        categoryAxis: {
-                            field: "year"
-                        },
-                        tooltip: {
-                            visible: true,
-                            format: "{0:N0}"
-                        }
-                    });
-                }
-
-                $(document).ready(function() {
-                    $("#country")
-                        .val("United States")
-                        .kendoDropDownList({
-                            dataSource: countriesDataSource,
-                            dataTextField: "value",
-                            change: filterCountries
-                        });
-
-                    createGrid();
-                    createChart();
-
-                    filterCountries();
-
-                    $("#example").bind("kendo:skinChange", function(e) {
-                        createChart();
-                        sharedDataSource.read();
-                    });
-                });
-            </script>
-        </div>
