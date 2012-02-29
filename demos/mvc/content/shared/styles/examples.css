@@ -2242,6 +2242,29 @@ div.old-browser
     clip-path: url("iconmasks.svg#share");
 }
 
+#navmainWrap .km-ios .km-loading,
+#navmainWrap .km-ios .km-listview-refresh .km-icon
+{
+    clip-path: url("iconmasks.svg#iosrefresh");
+}
+
+#navmainWrap .km-meego .km-loading,
+#navmainWrap .km-meego .km-listview-refresh .km-icon
+{
+    clip-path: url("iconmasks.svg#berryrefresh");
+}
+
+#navmainWrap .km-blackberry .km-loading,
+#navmainWrap .km-blackberry .km-listview-refresh .km-icon
+{
+    clip-path: url("iconmasks.svg#berryrefresh");
+}
+
+#navmainWrap .km-listview-pull .km-icon
+{
+    clip-path: url("iconmasks.svg#pullrefresh");
+}
+
 
 .prettytable {
     border-collapse: separate;
