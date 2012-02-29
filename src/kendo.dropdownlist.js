@@ -556,6 +556,7 @@
             }
 
             that._hideBusy();
+            that._makeUnselectable();
 
             that.trigger("dataBound");
         },
@@ -794,7 +795,7 @@
             span = wrapper.find(SELECTOR);
 
             if (!span[0]) {
-                wrapper.append('<span class="k-dropdown-wrap k-state-default"><span class="k-input">&nbsp;</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><span unselectable="on" class="k-input">&nbsp;</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span></span>')
                        .append(that.element);
 
                 span = wrapper.find(SELECTOR);
@@ -826,6 +827,7 @@
             element.hide();
 
             that._focused = that.wrapper = wrapper
+                              .attr("unselectable", "on")
                               .addClass("k-widget k-dropdown k-header")
                               .addClass(DOMelement.className);
         }

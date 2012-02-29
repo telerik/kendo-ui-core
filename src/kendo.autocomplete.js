@@ -520,6 +520,8 @@
                 that.popup[length ? "open" : "close"]();
             }
 
+            that._makeUnselectable();
+
             that.trigger("dataBound");
         },
 
