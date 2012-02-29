@@ -25,12 +25,12 @@
 
                             majorUnit: 1,
                             majorTicks: {
-                                size: 6
+                                size: 7
                             },
 
-                            minorUnit: .1,
+                            minorUnit: 0.2,
                             minorTicks: {
-                                size: 4
+                                size: 5
                             },
 
                             ranges: [{
@@ -41,7 +41,10 @@
                                 from: 5,
                                 to: 6,
                                 color: "#c20000"
-                            }]
+                            }],
+                            labels: {
+                                font: "11px Arial,Helvetica,sans-serif"
+                            }
                         }
                     });
 
@@ -75,7 +78,7 @@
                         theme: "black",
 
                         pointer: {
-                            value: .3
+                            value: 0.5
                         },
 
                         scale: {
@@ -85,9 +88,15 @@
                             min: 0,
                             max: 1,
 
-                            minorUnit: .1,
+                            minorUnit: 0.25,
+                            minorTicks: {
+                                size: 3
+                            },
 
-                            majorUnit: .5,
+                            majorUnit: 0.5,
+                            majorTicks: {
+                                size: 6
+                            },
 
                             labels: {
                                 font: "9px Arial,Helvetica,sans-serif"
@@ -95,7 +104,7 @@
 
                             ranges: [{
                                 from: 0,
-                                to: .1,
+                                to: 0.1,
                                 color: "#c20000"
                             }]
                         }
@@ -105,7 +114,7 @@
                         theme: "black",
 
                         pointer: {
-                            value: 68
+                            value: 90
                         },
 
                         scale: {
@@ -116,7 +125,13 @@
                             max: 120,
 
                             majorUnit: 30,
+                            majorTicks: {
+                                size: 6
+                            },
 
+                            minorTicks: {
+                                size: 3
+                            },
                             minorUnit: 10,
 
                             labels: {
@@ -124,11 +139,7 @@
                             },
 
                             ranges: [{
-                                from: 90,
-                                to: 100,
-                                color: "#ff7a00"
-                            }, {
-                                from: 100,
+                                from: 110,
                                 to: 120,
                                 color: "#c20000"
                             }]
@@ -172,17 +183,17 @@
                 }
 
                 #fuel {
-                    width: 120px;
-                    height: 76px;
+                    width: 100px;
+                    height: 94px;
 
-                    margin: 87px 0 0 36px;
+                    margin: 86px 0 0 59px;
                 }
 
                 #water-temprature {
-                    width: 120px;
-                    height: 76px;
+                    width: 110px;
+                    height: 100px;
 
-                    margin: 0 0 0 36px;
+                    margin: 0 0 0 53px;
                 }
             </style>
         </div>
