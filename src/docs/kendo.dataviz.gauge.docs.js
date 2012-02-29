@@ -5,22 +5,8 @@
      *
      * @section
      * <p>
-     * @section
-     * <p>
-     * The Gauge widget uses modern browser technologies to render dynamic data.
+     * The Gauge widget is used to let users quickly understand where a value lies in a certain range.
      * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
-     * </p>
-     *
-     * <p>
-     * Supported gauge types:
-     * </p>
-     * <ul>
-     *     <li>Radial</li>
-     * </ul>
-     *
-     * <p>
-     * Please visit the Kendo UI Road Map for additional information about
-     * new Gauge types and features.
      * </p>
      *
      * <h3>
@@ -152,25 +138,24 @@
          * @option {Number} [scale.max] <100> The maximum value of the axis.
          *
          */
-        init: function() {
-        },
+        init: function() { },
 
         /**
          * Redraws the gauge.
          * @example
          * var gauge = $("#gauge").data("kendoGauge");
-         * gauge.refresh();
+         * gauge.redraw();
          */
         redraw: function() { },
 
         /**
-         * Returns the SVG representation of the current gauge.
+         * <p>Returns the SVG representation of the current gauge.
          * The returned string is a self-contained SVG document
          * that can be used as is or converted to other formats
          * using tools like <a href="http://inkscape.org/">Inkscape</a> and
          * <a href="http://www.imagemagick.org/">ImageMagick</a>.
          * Both programs provide command-line interface
-         * suitable for backend processing.
+         * suitable for backend processing.</p>
          * @example
          * var gauge = $("#gauge").data("kendoGauge");
          * var svgText = gauge.svg();
