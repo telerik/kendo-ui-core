@@ -167,7 +167,7 @@
                 triggerEvent("mousemove", {pageX: 11, pageY: 21});
             });
 
-            test("raises start if distance more than threshold option", 1, function(){
+            test("raises start if distance is more than threshold option", 1, function(){
                 drag.bind("start", function(e) {
                     ok(true);
                 });

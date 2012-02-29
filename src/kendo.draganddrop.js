@@ -181,6 +181,7 @@
             that.drag = new kendo.Drag(that.element, {
                 global: true,
                 filter: that.options.filter,
+                threshold: that.options.distance,
                 start: proxy(that._start, that),
                 move: proxy(that._drag, that),
                 end: proxy(that._end, that)
