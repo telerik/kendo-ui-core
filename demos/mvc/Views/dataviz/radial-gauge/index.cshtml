@@ -29,6 +29,7 @@
                     $("#gauge-value").kendoSlider({
                         min: 0,
                         max: 180,
+                        showButtons: false,
                         change: function() {
                             $("#gauge").data("kendoGauge").value($("#gauge-value").val());
                         }
@@ -57,6 +58,7 @@
 
                 #gauge-container .k-slider {
                     margin-top: -11px;
+                    width: 140px;
                 }
 
             </style>
