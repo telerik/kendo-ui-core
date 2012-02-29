@@ -24,6 +24,23 @@
      *        $("#gauge").kendoGauge();
      *    });
      * </p>
+     *
+     * @section
+     * <h3>Creating half- and quarter-circle gauges</h3>
+     *
+     * <p>The <code>startAngle</code> and <code>endAngle</code> configuration options enable you to create
+     * gauges that align with your design goals.</p>
+     *
+     * @exampleTitle
+     * Create a quarter-gauge, oriented to the top-right
+     * @example
+     *     $("#gauge").kendoGauge({
+     *         startAngle: 90,
+     *         endAngle: 180
+     *     });
+     *
+     * @section
+     * <p>For a real-world example for this functionality, see the car dashboard demo.</p>
      */
      var GaugeDocs = /** @lends kendo.dataviz.ui.Gauge.prototype */ {
         /**
