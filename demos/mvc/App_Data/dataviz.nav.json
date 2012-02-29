@@ -25,7 +25,7 @@
                     "text": "Binding to local data",
                     "url": "area-chart/local-data.html"
             }],
-            "name": "area chart"
+            "name": "area-chart"
         }, {
             "text": "Bar Charts",
             "spriteCssClass": "chartBarIcon",
@@ -48,7 +48,7 @@
                     "text": "Binding to local data",
                     "url": "bar-charts/local-data.html"
             }],
-            "name": "bar charts"
+            "name": "bar-charts"
         }, {
             "text": "Line Chart",
             "spriteCssClass": "chartLineIcon",
@@ -66,7 +66,7 @@
                     "url": "line-chart/local-data.html"
                 }
             ],
-            "name": "line chart"
+            "name": "line-chart"
         }, {
             "text": "Pie Chart",
             "spriteCssClass": "chartPieIcon",
@@ -83,7 +83,7 @@
                     "text": "Binding to local data",
                     "url": "pie-chart/local-data.html"
             }],
-            "name": "pie chart"
+            "name": "pie-chart"
         }, {
             "text": "Scatter Charts",
             "spriteCssClass": "chartScatterIcon",
@@ -103,7 +103,7 @@
                     "text": "Binding to local data",
                     "url": "scatter-charts/local-data.html"
             }],
-            "name": "scatter charts"
+            "name": "scatter-charts"
         }, {
             "text": "Customization",
             "spriteCssClass": "chartIcon",
@@ -136,7 +136,7 @@
                 "text": "Partial gauges",
                 "url": "radial-gauge/partial-gauges.html"
             }],
-            "name": "radial gauge"
+            "name": "radial-gauge"
         }
     ]
 }
