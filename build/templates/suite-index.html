@@ -18,6 +18,7 @@
                 <h2>#= children[i].text #</h2>
                 <ul>
                 # for (var k = 0, items = children[i].items; k < items.length; k++) { #
+                    #  if (items[k].onlineOnly) continue; #
                     <li><a href='#= items[k].url #'>#= items[k].text #</a></li>
                 # } #
                 </ul>
