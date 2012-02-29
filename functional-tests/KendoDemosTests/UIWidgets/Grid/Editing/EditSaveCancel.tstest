@@ -28,7 +28,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>e661cdc2-8784-4060-ba73-647d94e4cccf</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>db2c55b0-1593-418c-ac35-5a532f440017</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -65,7 +65,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>b9ccaf2a-22b1-49d8-a77c-2b94a95506c0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6d96252a-5249-4d92-8134-0e6d35ce8625</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -119,7 +119,7 @@
                 <d2p1:FriendlyName>Editing</d2p1:FriendlyName>
                 <d2p1:Path>/web/grid/editing.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Editing</d2p1:Title>
+                <d2p1:Title>Batch Editing</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -137,7 +137,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>EditSaveCancelp5p5ooyj.svn</d2p1:StepImageKey>
+      <d2p1:StepImageKey>EditSaveCancelzzrdfu4h.mb0</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -150,7 +150,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>2bb85364-3817-4074-9e1a-e15ec86e91f6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d68119a5-f71d-4f8a-963c-4bc2d4728a9b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -176,10 +176,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>name=ProductName</Clause>
+                          <Clause>tagname=input</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=input</Clause>
+                          <Clause>name=ProductName</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -204,7 +204,7 @@
                 <d2p1:FriendlyName>Editing</d2p1:FriendlyName>
                 <d2p1:Path>/web/grid/editing.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Editing</d2p1:Title>
+                <d2p1:Title>Batch Editing</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -223,7 +223,7 @@
         <d2p1:IsPassword>false</d2p1:IsPassword>
         <d2p1:KeyHoldTime>100</d2p1:KeyHoldTime>
         <d2p1:RawText>a</d2p1:RawText>
-        <d2p1:SimulateRealTyping>false</d2p1:SimulateRealTyping>
+        <d2p1:SimulateRealTyping>true</d2p1:SimulateRealTyping>
         <d2p1:TypingInfo xmlns:d5p1="http://schemas.datacontract.org/2004/07/ArtOfTest.Common.Design">
           <d5p1:_caretPosition>1</d5p1:_caretPosition>
           <d5p1:_elementText>a</d5p1:_elementText>
@@ -232,7 +232,7 @@
         </d2p1:TypingInfo>
         <d2p1:TypingSpeed>50</d2p1:TypingSpeed>
       </d2p1:Step>
-      <d2p1:StepImageKey>EditSaveCancelygneo2wq.qsg</d2p1:StepImageKey>
+      <d2p1:StepImageKey>EditSaveCancelzp4pkian.hk1</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -245,7 +245,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>a6bbef52-a1d6-4000-a4bb-decd006b9e1a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>4b3a8365-aeba-4067-ab11-39afd5309f0c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -299,7 +299,7 @@
                 <d2p1:FriendlyName>Editing</d2p1:FriendlyName>
                 <d2p1:Path>/web/grid/editing.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Editing</d2p1:Title>
+                <d2p1:Title>Batch Editing</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -317,7 +317,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>EditSaveCancelnwci4bdn.qyn</d2p1:StepImageKey>
+      <d2p1:StepImageKey>EditSaveCancelxw5x1gzj.r0r</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -330,7 +330,7 @@
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>6efb5f83-539a-4cac-a281-742b57a8ce3d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>e52d957d-9eea-4077-bac9-4927c069bbb6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -384,7 +384,7 @@
                 <d2p1:FriendlyName>Editing</d2p1:FriendlyName>
                 <d2p1:Path>/web/grid/editing.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Editing</d2p1:Title>
+                <d2p1:Title>Batch Editing</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -407,7 +407,7 @@
         <d2p1:ExpectedString>a</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
-      <d2p1:StepImageKey>EditSaveCancelovkesamd.dal</d2p1:StepImageKey>
+      <d2p1:StepImageKey>EditSaveCancelkcmvuyz3.vlx</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -420,7 +420,7 @@
       <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>73dd2da9-bb0f-403c-807e-01dd3975d336</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>21fad891-ec2e-4a5e-bcd9-2c91bda5c04a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -446,10 +446,10 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=Cancel changes</Clause>
+                          <Clause>tagname=a</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=a</Clause>
+                          <Clause>TextContent=Cancel changes</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
@@ -474,7 +474,7 @@
                 <d2p1:FriendlyName>Editing</d2p1:FriendlyName>
                 <d2p1:Path>/web/grid/editing.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Editing</d2p1:Title>
+                <d2p1:Title>Batch Editing</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -492,7 +492,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>EditSaveCancelnzqyq22o.zxs</d2p1:StepImageKey>
+      <d2p1:StepImageKey>EditSaveCancel2vcoimwf.5sa</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -505,7 +505,7 @@
       <d2p1:Order>7</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>5c85f66f-65a9-4583-a630-65056f574568</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>39c20c63-f587-43f7-a750-50a2ba66abc2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -559,7 +559,7 @@
                 <d2p1:FriendlyName>Editing</d2p1:FriendlyName>
                 <d2p1:Path>/web/grid/editing.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Editing</d2p1:Title>
+                <d2p1:Title>Batch Editing</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -582,7 +582,7 @@
         <d2p1:ExpectedString>a</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
-      <d2p1:StepImageKey>EditSaveCancelyeyn4kvx.y5m</d2p1:StepImageKey>
+      <d2p1:StepImageKey>EditSaveCancel5bgcbxbi.0i2</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -628,7 +628,7 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly />
-  <TestAssemblyPath />
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>

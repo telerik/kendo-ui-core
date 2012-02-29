@@ -74,7 +74,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>989ab679-2ed8-4021-866c-883d6e8533a9</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>9b44c0fe-5d08-4093-9bd2-5bdf30ad91d8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -111,7 +111,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>9806e367-36de-4ef2-a5e3-3e7d9cc051ae</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>c00b9a2e-6ad9-417f-906e-d6903125896b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -196,7 +196,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>4c2eb6ce-58fc-4dba-88ff-053c35f8b2c6</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>255d0c72-dc75-42b9-b9ab-464765bd4dbb</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -281,7 +281,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>422585bd-1ffa-44b6-b11b-4c6ab648262a</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>a6adfa3e-8292-46a6-aefd-33db23302861</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputValueVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -372,7 +372,7 @@
       <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>795984e7-bb4d-44f3-96a5-d80ecdb7ae48</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6c5647e8-aec0-42e2-819b-a66e9096263c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -455,13 +455,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>[Globalization_CodedStep1] : @"Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.</d2p1:Description>
+      <d2p1:Description>[Globalization_CodedStep1] : Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id>Globalization_CodedStep1</d2p1:Id>
       <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>2df74a12-cb4f-4256-828f-77274ecef1ec</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>2936c3db-20bd-4490-a4fd-adc843caafcc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:CodedStepDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -485,7 +485,6 @@
             // Verify textbox 'StartDateText' content 'Same' 'Fri Dec 2 11:49:59 UTC+0200 2011'.
             System.Threading.Thread.Sleep(250);
             
-
 </d2p1:Code>
         <d2p1:RequiresSilverlight>false</d2p1:RequiresSilverlight>
       </d2p1:Step>
@@ -496,13 +495,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'StartDateText' content 'Contains' '24.2.2012 г.'.</d2p1:Description>
+      <d2p1:Description>Wait for textbox 'StartDateText' content 'Contains' '2012 г.'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>7</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>3461e4dd-bba4-4725-9d6c-4e30a3603111</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>1153421e-8970-4f6b-a3ee-e7d5ecf93aa6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -576,7 +575,7 @@
         <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <CompareType>Contains</CompareType>
-        <ExpectedValue>24.2.2012 г.</ExpectedValue>
+        <ExpectedValue>2012 г.</ExpectedValue>
       </d2p1:Step>
       <d2p1:StepImageKey>Globalizationqvbgxiwg.bth</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
