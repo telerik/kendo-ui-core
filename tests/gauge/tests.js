@@ -14,5 +14,9 @@ tests.push(
     {
         page: "gauge/plotarea.html",
         title: "PlotArea"
+    },
+    {
+        page: "gauge/mvvm.html",
+        title: "MVVM"
     }
 );

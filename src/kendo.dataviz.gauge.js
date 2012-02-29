@@ -593,6 +593,8 @@
             $(element).addClass("k-gauge");
 
             gauge.redraw();
+
+            kendo.notify(gauge, dataviz.ui);
         },
 
         value: function(value) {
