@@ -13,7 +13,7 @@
                         theme: "black",
 
                         pointer: {
-                            value: 2,
+                            value: 0,
                             color: "#ea7001"
                         },
 
@@ -55,7 +55,7 @@
                         theme: "black",
 
                         pointer: {
-                            value: 68,
+                            value: 0,
                             color: "#ea7001"
                         },
 
@@ -156,8 +156,50 @@
                     });
                 }
 
+                function animateDashboard() {
+                    var rpm = $("#rpm").data("kendoGauge"),
+                        kmh = $("#kmh").data("kendoGauge");
+
+                    var GEARS = [0.14, 0.06, 0.035, 0.027, 0.019],
+                        IDLE_RPM = 0.9,
+                        CHANGE_RPM = 4,
+                        CHANGE_DELAY = 400,
+                        DECAY_RATE = 0.0017,
+                        TOP_SPEED = 210,
+                        ACCELERATION = 0.4,
+                        INTERVAL = 20;
+
+                    var speed = 0,
+                        skip = 0,
+                        ratio,
+                        gear = 0;
+
+                    function update() {
+                        rpm.value(GEARS[gear] * speed + IDLE_RPM);
+                        kmh.value(speed);
+                    }
+
+                    var interval = setInterval(function() {
+                        if(speed < TOP_SPEED) {
+                            if (GEARS[gear] * speed > CHANGE_RPM && gear < GEARS.length) {
+                                gear++;
+                                skip = CHANGE_DELAY / INTERVAL;
+                                update();
+                            }
+
+                            if (skip-- < 0) {
+                                speed += ACCELERATION - (DECAY_RATE * speed);
+                                update();
+                            }
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, INTERVAL);
+                }
+
                 $(document).ready(function() {
                     createDashboard();
+                    animateDashboard();
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createDashboard();
