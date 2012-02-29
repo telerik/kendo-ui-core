@@ -233,9 +233,10 @@
                     that.close();
                     prevent = true;
                 }
+                return;
             }
 
-            if (!that.popup.visible()) {
+            if (!that.popup.visible() || calendar._table.parent().data("animating")) {
                 return;
             }
 
