@@ -47,35 +47,14 @@
                         from: 120,
                         to: 150,
                         color: "red"
-                    }]
+                    }],
+                    labels: {
+                        margin: 20
+                    }
                 }
             });
 
             $("#gauge1").kendoGauge({
-                theme:"default",
-
-                pointer: {
-                    value: 65
-                },
-
-                scale: {
-                    minorUnit: 5,
-                    startAngle: 0,
-                    endAngle: 230,
-                    max: 180,
-                    labels: {
-                        position: "outside"
-                    },
-                    ranges: [{
-                        from: 60,
-                        to: 90,
-                        color: "green"
-                    }, {
-                        from: 120,
-                        to: 150,
-                        color: "red"
-                    }]
-                }
             });
         </script>
     </body>
