@@ -56,6 +56,7 @@
                 var bar = new NavBar(dom);
                 bar.title("foo");
                 equal(dom.find("[data-kendo-role=view-title]").text(), "foo");
+                equal(document.title, "foo");
             });
 
         </script>
