@@ -20,7 +20,8 @@
         OPEN = "open",
         CLOSE = "close",
         SELECT = "select",
-        proxy = $.proxy;
+        proxy = $.proxy,
+        isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9;
 
     function contains(container, target) {
         return container === target || $.contains(container, target);
@@ -39,7 +40,7 @@
 
             that._template();
 
-            that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
+            that.ul = $('<ul class="k-list k-reset"/>')
                         .css({ overflow: "auto" })
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); })
@@ -195,6 +196,12 @@
             });
         },
 
+        _makeUnselectable: function(element) {
+            if (isIE8) {
+                this.list.find("*").attr("unselectable", "on");
+            }
+        },
+
         _toggleHover: function(e) {
             if (!touch)
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
@@ -242,12 +249,11 @@
             }
 
             if (!template) {
-                //unselectable=on is required for IE to prevent the suggestion box from stealing focus from the input
-                that.template = kendo.template("<li class='k-item' unselectable='on'>${data" + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
+                that.template = kendo.template("<li class='k-item'>${data" + (options.dataTextField ? "." : "") + options.dataTextField + "}</li>", { useWithBlock: false });
             } else {
                 template = kendo.template(template);
                 that.template = function(data) {
-                    return "<li class='k-item' unselectable='on'>" + template(data) + "</li>";
+                    return "<li class='k-item'>" + template(data) + "</li>";
                 };
             }
         }
