@@ -53,10 +53,16 @@
                             var value = this.value();
 
                             if (value) {
+                                value = parseInt(value);
+
+                                if (isNaN(value)) {
+                                    return;
+                                }
+
                                 productsDataSource.filter({
                                     field: "CategoryID",
                                     operator: "eq",
-                                    value: parseInt(value)
+                                    value: value
                                 });
                                 products.enable();
                             } else {
@@ -79,10 +85,16 @@
                             var value = this.value();
 
                             if (value) {
+                                value = parseInt(value);
+
+                                if (isNaN(value)) {
+                                    return;
+                                }
+
                                 ordersDataSource.filter({
                                     field: "ProductID",
                                     operator: "eq",
-                                    value: parseInt(value)
+                                    value: value
                                 });
                                 orders.enable();
                             } else {
