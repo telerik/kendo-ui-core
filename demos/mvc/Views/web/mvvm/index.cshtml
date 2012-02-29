@@ -9,6 +9,7 @@
                     <li><label>Gender:<select data-bind="source: genders, value: gender"></select></label></li>
                 </ul>
                 <label><input type="checkbox" data-bind="checked: agreed" /> I have read the licence agreement</label>
+                <br /><br />
                 <button data-bind="enabled: agreed, click: register" style="display: block">Register</button>
             </div>
         </form>
@@ -17,6 +18,7 @@
         <h4 class="code-title">Confirmation</h4>
         <div class="code-details">
             Thank you for your registration, <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>
+            <br /><br />
             <button data-bind="click: startOver">Start Over</button>
         </div>
     </div>
@@ -99,6 +101,23 @@
             list-style: none;
             margin: 0;
             padding: 0;
+        }
+
+        .code-details li
+        {
+            height: 24px;
+        }
+
+        .code-details input,
+        .code-details select,
+        .code-details button
+        {
+            float: right;
+        }
+
+        .code-details input[type=checkbox]
+        {
+            float: left;
         }
 
         .registration {
