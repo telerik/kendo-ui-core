@@ -64,7 +64,9 @@
             shape: "needle",
             color: "#ea7001",
             value: 0,
-            capSize: 0.05,
+            cap: {
+                size: 0.05
+            },
             animation: {
                 type: POINTER
             }
@@ -114,7 +116,7 @@
                 scale = pointer.scale,
                 ring = scale.ring,
                 c = ring.c,
-                capSize = ring.r * options.capSize;
+                capSize = ring.r * options.cap.size;
 
             pointer.box = new Box2D(
                 c.x - capSize, c.y - capSize,
@@ -129,7 +131,7 @@
                 c = ring.c,
                 r = ring.r,
                 options = pointer.options,
-                capSize = r * options.capSize,
+                capSize = r * options.cap.size,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 halfWidth = box.width() / 2,
                 center = box.center(),
@@ -158,7 +160,7 @@
                     rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
                     rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
                 ], true, options),
-                view.createCircle([center.x, center.y], capSize, options)
+                view.createCircle([center.x, center.y], capSize, { fill: options.cap.color || options.color })
             ];
         },
 
