@@ -256,7 +256,7 @@
         {
             "text": "ListView",
             "name": "listview",
-            "spriteCssClass": "",
+            "spriteCssClass": "listViewIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -585,7 +585,7 @@
         {
             "text": "MVVM",
             "name": "mvvm",
-            "spriteCssClass": "",
+            "spriteCssClass": "mvvmIcon",
             "items": [
                 {
                     "text": "Basic usage",
