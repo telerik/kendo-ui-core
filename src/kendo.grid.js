@@ -1477,10 +1477,11 @@
 
         _displayRow: function(row) {
             var that = this,
-                model = that._modelForContainer(row),
-                newRow = $((row.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model));
+                model = that._modelForContainer(row);
 
-            row.replaceWith(newRow);
+            if (model) {
+                row.replaceWith($((row.hasClass("k-alt") ? that.altRowTemplate : that.rowTemplate)(model)));
+            }
         },
 
         _showMessage: function(text) {
