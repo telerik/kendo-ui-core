@@ -70,7 +70,8 @@
                 ns: ns
             });
 
-            element.on(START_EVENTS, proxy(that._start, that))
+            element
+                .on(START_EVENTS, options.filter, proxy(that._start, that))
                 .on("dragstart", function(e) { e.preventDefault(); });
 
             that.bind([TAP, START, MOVE, END], options);
