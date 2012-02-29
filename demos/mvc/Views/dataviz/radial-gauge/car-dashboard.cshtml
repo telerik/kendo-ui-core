@@ -156,9 +156,11 @@
                     });
                 }
 
+                var animateInterval;
                 function animateDashboard() {
-                    var rpm = $("#rpm").data("kendoGauge"),
-                        kmh = $("#kmh").data("kendoGauge");
+                    if (animateInterval) {
+                        return;
+                    }
 
                     var GEARS = [0.14, 0.06, 0.035, 0.027, 0.019],
                         IDLE_RPM = 0.9,
@@ -175,11 +177,11 @@
                         gear = 0;
 
                     function update() {
-                        rpm.value(GEARS[gear] * speed + IDLE_RPM);
-                        kmh.value(speed);
+                        $("#rpm").data("kendoGauge").value(GEARS[gear] * speed + IDLE_RPM);
+                        $("#kmh").data("kendoGauge").value(speed);
                     }
 
-                    var interval = setInterval(function() {
+                    animateInterval = setInterval(function() {
                         if(speed < TOP_SPEED) {
                             if (GEARS[gear] * speed > CHANGE_RPM && gear < GEARS.length) {
                                 gear++;
@@ -192,7 +194,9 @@
                                 update();
                             }
                         } else {
-                            clearInterval(interval);
+                            skip = 300;
+                            speed = 0;
+                            gear = 0;
                         }
                     }, INTERVAL);
                 }
@@ -205,28 +209,8 @@
                         createDashboard();
                     });
 
-                    // feed random data to gauges
-                    var interval = setInterval(function() {
-
-                        var fuelGauge = $("#fuel").data("kendoGauge"),
-                            kmhGauge = $("#kmh").data("kendoGauge"),
-                            rpmGauge = $("#rpm").data("kendoGauge"),
-                            speed = 10 + Math.random() * 120;
-
-                        if (fuelGauge.value() > .01) {
-                            fuelGauge.value(fuelGauge.value() - .01);
-                            kmhGauge.value(speed);
-                            rpmGauge.value(speed / 26);
-                        } else {
-                            kmhGauge.value(0);
-                            rpmGauge.value(0);
-                            clearInterval(interval);
-                        }
-
-                    }, 1500);
-
                     $(document).bind("kendo:pageUnload", function(e) {
-                        clearInterval(interval);
+                        clearInterval(animateInterval);
                     });
                 });
             </script>
