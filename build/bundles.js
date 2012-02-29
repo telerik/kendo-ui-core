@@ -32,7 +32,7 @@ var cdnBundle = {
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
     licenses: betaLicenses,
-    eula: "eula",
+    eula: "beta-eula",
 };
 
 var bundles = [{
@@ -40,17 +40,17 @@ var bundles = [{
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
     licenses: betaLicenses,
-    eula: "eula",
+    eula: "beta-eula",
 }, {
     name: "kendoui.web",
     suites: ["web"],
     licenses: betaLicenses,
-    eula: "eula",
+    eula: "beta-eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
     licenses: betaLicenses,
-    eula: "eula"
+    eula: "beta-eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
