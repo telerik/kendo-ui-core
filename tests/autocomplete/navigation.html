@@ -88,38 +88,6 @@
                 ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
-            asyncTest("clicking an item focuses the input", 1, function() {
-                var wasFocused = false, autocomplete = new AutoComplete(input, {
-                    dataSource: ["baz", "bar"]
-                });
-
-                input.focus(function() {
-                    start();
-                    ok(true);
-                });
-
-                input.val("ba");
-                autocomplete.search();
-                autocomplete.ul.children().first().trigger(CLICK);
-            });
-
-            asyncTest("pressing enter focuses the input", 1, function() {
-                var wasFocused = false, autocomplete = new AutoComplete(input, {
-                    dataSource: ["baz", "bar"]
-                });
-
-                input.focus(function() {
-                    start();
-                    ok(true);
-                });
-
-                input.val("ba");
-                autocomplete.search();
-
-                input.press(kendo.keys.DOWN);
-                input.press(kendo.keys.ENTER);
-            });
-
             asyncTest("clicking an item applies selected style", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
