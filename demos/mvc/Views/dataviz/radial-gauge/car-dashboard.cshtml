@@ -162,6 +162,25 @@
                     $(document).bind("kendo:skinChange", function(e) {
                         createDashboard();
                     });
+
+                    // feed random data to gauges
+                    setInterval(function() {
+
+                        var fuelGauge = $("#fuel").data("kendoGauge"),
+                            kmhGauge = $("#kmh").data("kendoGauge"),
+                            rpmGauge = $("#rpm").data("kendoGauge"),
+                            speed = 10 + Math.random() * 120;
+
+                        if (fuelGauge.value() > .01) {
+                            fuelGauge.value(fuelGauge.value() - .01);
+                            kmhGauge.value(speed);
+                            rpmGauge.value(speed / 26);
+                        } else {
+                            kmhGauge.value(0);
+                            rpmGauge.value(0);
+                        }
+
+                    }, 1500);
                 });
             </script>
 
