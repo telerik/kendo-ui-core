@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.drag.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
@@ -36,12 +37,20 @@
                 }
             });
 
-            function ev(options) {
-                return $.extend(new $.Event, options);
+            function trigger(type, e, el) {
+                el = el || span;
+                el.trigger($.Event(type, e));
+            }
+
+            function startDrag() {
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 10, pageY: 10 });
             }
 
             function setup(options) {
-                return new DropTarget(document.body, options);
+                var target = new DropTarget(document.body, options);
+                startDrag();
+                return target;
             }
 
             test("dragenter is raised", function() {
@@ -50,9 +59,6 @@
                             e = arguments[0];
                         }
                     });
-
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._over();
 
@@ -67,8 +73,6 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget.element.trigger({ type: "mouseenter" });
 
@@ -82,9 +86,6 @@
                             e = arguments[0];
                         }
                     });
-
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._over();
                 dropTarget._out();
@@ -100,9 +101,6 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
-
                 dropTarget.element.trigger({ type: "mouseleave" });
 
                 ok(e);
@@ -116,8 +114,7 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
+                startDrag();
 
                 dropTarget._over();
                 dropTarget._drop();
@@ -132,9 +129,6 @@
                             e = arguments[0];
                         }
                     });
-
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget.element.trigger({ type: "mouseup" });
 
@@ -151,9 +145,6 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
-
                 dropTarget._over();
 
                 ok(!e);
@@ -165,9 +156,6 @@
                             e = arguments[0];
                         }
                     });
-
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget.element.trigger({ type: "mouseup", pageX: 10 });
 
@@ -181,9 +169,6 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
-
                 dropTarget.element.trigger({ type: "mouseenter", pageX: 10 });
 
                 ok(e.pageX);
@@ -196,9 +181,6 @@
                         }
                     });
 
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
-
                 dropTarget.element.trigger({ type: "mouseleave", pageX: 10 });
 
                 ok(e.pageX);
@@ -206,9 +188,6 @@
 
             test("droptarget marks the draggable as dropped", function() {
                 var e, dropTarget = setup();
-
-                draggable._wait(ev({ pageX: 0, pageY: 0 }));
-                draggable._start(ev({ pageX: 10, pageY: 0 }));
 
                 dropTarget._drop();
 
