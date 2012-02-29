@@ -6,8 +6,8 @@
         </tr>
         <tr>
             <td>
-                <h4>Text </h4>
                 <input type="text" data-bind="value: textValue" />
+                <h4>Text </h4>
             </td>
             <td rowspan="7">
 <pre>
@@ -25,19 +25,18 @@
         </tr>
         <tr>
             <td>
-                <h4>Textarea </h4>
                 <textarea data-bind="value: textareaValue"></textarea>
+                <h4>Textarea </h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Checkbox</h4>
                 <input type="checkbox" data-bind="checked: checkboxValue" />
+                <h4>Checkbox</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Radio</h4>
                 <label>
                     <input type="radio" name="fruit" value="Apple"
                            data-bind="checked: radioValue" />Apple
@@ -50,11 +49,11 @@
                     <input type="radio" name="fruit" value="Orange"
                            data-bind="checked: radioValue" />Orange
                 </label>
+                <h4>Radio</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Checkbox list</h4>
                 <label>
                     <input type="checkbox" value="Apple"
                            data-bind="checked: checkboxListValue" />Apple
@@ -67,18 +66,19 @@
                     <input type="checkbox" value="Orange"
                            data-bind="checked: checkboxListValue" />Orange
                 </label>
+                <h4>Checkbox list</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Select</h4>
                 <select data-bind="source: fruits, value: selectValue"></select>
+                <h4>Select</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <h4>Multiple select</h4>
                 <select multiple data-bind="source: fruits, value: multipleSelectValue"></select>
+                <h4>Multiple select</h4>
             </td>
         </tr>
     </table>
@@ -204,6 +204,36 @@ kendo.bind($(&quot;table&quot;), viewModel);
         .prettytable {
             table-layout: fixed;
             width: 100%;
+        }
+
+        .prettytable > tbody > tr > td {
+            padding: 5px;
+        }
+
+        .prettytable td > input,
+        .prettytable td > textarea,
+        .prettytable td > label,
+        .prettytable td > select
+        {
+            float: right;
+        }
+
+        .prettytable td > .k-slider
+        {
+            margin-bottom: 10px;
+        }
+
+        .prettytable > tbody > tr > th {
+            -moz-border-radius: 5px 0 0;
+            -webkit-border-radius: 5px 0 0;
+            border-radius: 5px 0 0;
+            text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+        }
+
+        .prettytable > tbody > tr > th:last-child {
+            -moz-border-radius: 0 5px 0 0;
+            -webkit-border-radius: 0 5px 0 0;
+            border-radius: 0 5px 0 0;
         }
 
         td h4 {
