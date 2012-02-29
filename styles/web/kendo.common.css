@@ -1340,6 +1340,26 @@ div.k-grid-header .k-header
 .k-edit-form-container
 {
     position: relative;
+    width: 400px;
+}
+
+.k-edit-label,
+.k-edit-field
+{
+    display: inline-block;
+    padding-bottom: 1em;
+}
+
+.k-edit-label
+{
+    width: 30%;
+    text-align: right;
+    padding-right: 3%;
+}
+
+.k-edit-field
+{
+    width: 60%;
 }
 
 .k-grid .field-validation-error
@@ -2783,6 +2803,11 @@ span.k-tooltip
 {
     vertical-align: text-top;
     margin-right: 3px;
+}
+
+.k-window .k-tooltip-validation
+{
+    z-index: 10010;
 }
 
 /* Splitter */
