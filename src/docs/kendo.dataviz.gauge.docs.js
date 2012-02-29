@@ -33,6 +33,7 @@
          * @param {Object} options Configuration options.
          * @option {Boolean} [transitions] <true>
          * A value indicating if transition animations should be played.
+         * @option {Object} [scale] Configures the scale.
          * @option {Object} [scale.labels] Configures the scale labels.
          * @option {String} [scale.labels.color] The text color of the labels.
          * Any valid CSS color string will work here, including hex and rgb.
@@ -130,8 +131,8 @@
          * This is the length of the line in pixels that is drawn to indicate the tick on the scale.
          * @option {Number} [scale.minorTicks.width] <0.5> The width of the minor ticks.
          * @option {String} [scale.minorTicks.color] The color of the minor ticks.
-         * @option {Number} [scale.majorUnit] <20> The interval between major divisions.
-         * @option {Number} [scale.minorUnit] <5> The interval between minor divisions.
+         * @option {Number} [scale.majorUnit] The interval between major divisions.
+         * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {number} [scale.startAngle] <-30> The start angle of the gauge.
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the axis.

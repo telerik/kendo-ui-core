@@ -175,9 +175,11 @@
 
     var RadialScale = NumericAxis.extend({
         init: function (options) {
-            var scale = this;
+            var scale = this,
+                scaleOptions = scale.options;
 
-            scale.options.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+            scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+            scaleOptions.minorUnit = scaleOptions.majorUnit / 5;
 
             Axis.fn.init.call(scale, options);
         },
@@ -185,7 +187,6 @@
         options: {
             min: 0,
             max: 100,
-            minorUnit: 5,
 
             majorTicks: {
                 size: 15,
