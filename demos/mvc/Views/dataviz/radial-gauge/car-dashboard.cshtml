@@ -164,7 +164,7 @@
                     });
 
                     // feed random data to gauges
-                    setInterval(function() {
+                    var interval = setInterval(function() {
 
                         var fuelGauge = $("#fuel").data("kendoGauge"),
                             kmhGauge = $("#kmh").data("kendoGauge"),
@@ -178,9 +178,14 @@
                         } else {
                             kmhGauge.value(0);
                             rpmGauge.value(0);
+                            clearInterval(interval);
                         }
 
                     }, 1500);
+
+                    $(document).bind("kendo:pageUnload", function(e) {
+                        clearInterval(interval);
+                    });
                 });
             </script>
 
