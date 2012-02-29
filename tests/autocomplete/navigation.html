@@ -88,7 +88,7 @@
                 ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
-            asyntTest("clicking an item focuses the input", 1, function() {
+            asyncTest("clicking an item focuses the input", 1, function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -103,7 +103,7 @@
                 autocomplete.ul.children().first().trigger(CLICK);
             });
 
-            asyntTest("pressing enter focuses the input", 1, function() {
+            asyncTest("pressing enter focuses the input", 1, function() {
                 var wasFocused = false, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
