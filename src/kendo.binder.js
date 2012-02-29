@@ -32,18 +32,21 @@
             that._access = $.proxy(that.access, that);
             that._change = $.proxy(that.change, that);
 
-            if (path != "this") {
+            if (that.source instanceof Observable) {
                 that.source.bind("change", that._change);
             }
         },
 
         change: function(e) {
-            if (!e.isDefaultPrevented()) {
-                var dependency;
+            var dependency,
+                that = this;
 
-                for (dependency in this.dependencies) {
+            if (that.path === "this") {
+                that.trigger("change", e);
+            } else {
+                for (dependency in that.dependencies) {
                     if (dependency.indexOf(e.field) == 0) {
-                        this.trigger("change");
+                        that.trigger("change", e);
                         break;
                     }
                 }
@@ -55,13 +58,13 @@
         },
 
         start: function() {
-            if (this.path != "this") {
+            if (this.source instanceof Observable) {
                 this.source.bind("get", this._access);
             }
         },
 
         stop: function() {
-            if (this.path != "this") {
+            if (this.source instanceof Observable) {
                 this.source.unbind("get", this._access);
             }
         },
@@ -71,7 +74,7 @@
 
             var result = this.source;
 
-            if (this.path != "this") {
+            if (this.source instanceof Observable) {
                 result = this.source.get(this.path);
 
                 if (typeof result === "function") {
@@ -91,7 +94,7 @@
         },
 
         destroy: function() {
-            if (this.path != "this") {
+            if (this.source instanceof Observable) {
                 this.source.unbind("change", this._change);
             }
         }
@@ -241,26 +244,20 @@
         init: function(element, bindings, options) {
             Binder.fn.init.call(this, element, bindings, options);
 
-            var source = bindings["source"].get(),
-            that = this;
-
-            that._change = $.proxy(that.change, that);
-            source.bind(0, "change", that._change)
+            var source = bindings["source"].get();
         },
 
-        change: function(e) {
+        refresh: function(e) {
             var source = this.bindings.source.get();
 
-            if (source instanceof ObservableArray) {
+            if (source instanceof ObservableArray && e) {
                 if (e.action == "add") {
-                    e.preventDefault();
                     this.add(e.index, e.items);
                 } else if (e.action == "remove") {
-                    e.preventDefault();
                     this.remove(e.index, e.items.length);
                 }
             } else {
-                this.refresh();
+                this.render();
             }
         },
 
@@ -338,7 +335,7 @@
             }
         },
 
-        refresh: function() {
+        render: function() {
             var source = this.bindings["source"].get();
             var idx, length;
             var element = this.container();
@@ -703,8 +700,8 @@
 
                 this.binders.push(binder);
 
-                var refresh = function() {
-                    binder.refresh();
+                var refresh = function(e) {
+                    binder.refresh(e);
                 };
 
                 refresh();
@@ -777,8 +774,8 @@
 
                 this.binders.push(binder);
 
-                var refresh = function() {
-                    binder.refresh();
+                var refresh = function(e) {
+                    binder.refresh(e);
                 };
 
                 refresh();

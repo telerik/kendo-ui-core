@@ -63,23 +63,14 @@
             this._events = {};
         },
 
-        bind: function(index, eventNames, handlers, one) {
+        bind: function(eventName, handlers, one) {
             var that = this,
                 idx,
+                eventNames = typeof eventName === STRING ? [eventName] : eventName,
                 length,
-                eventName,
                 original,
                 handler,
                 events;
-
-            if (typeof index !== NUMBER) {
-                one = handlers;
-                handlers = eventNames;
-                eventNames = index;
-                index = -1;
-            }
-
-            eventNames = typeof eventNames === STRING ? [eventNames] : eventNames;
 
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
                 eventName = eventNames[idx];
@@ -95,11 +86,7 @@
                         }
                     }
                     events = that._events[eventName] = that._events[eventName] || [];
-                    if (index >= 0) {
-                        events.splice(index, 0, handler);
-                    } else {
-                        events.push(handler);
-                    }
+                    events.push(handler);
                 }
             }
 
@@ -110,14 +97,14 @@
             return this.bind(eventNames, handlers, true);
         },
 
-        trigger: function(eventName, e, isDefaultPrevented) {
+        trigger: function(eventName, e) {
             var that = this,
                 events = that._events[eventName],
                 idx,
+                isDefaultPrevented = false,
                 length;
 
             e = e || {};
-            isDefaultPrevented = !!isDefaultPrevented;
 
             e.preventDefault = function () {
                 isDefaultPrevented = true;
