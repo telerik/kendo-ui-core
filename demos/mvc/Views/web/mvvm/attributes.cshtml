@@ -1,9 +1,11 @@
 <div id="example" class="k-content">
-    <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
+    <div class="container">
+        <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
 
-    <label>src:<select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select></label>
-    <label>alt:<input type="textbox" data-bind="value: imageAlt" /></label>
-    <label>title:<input type="textbox" data-bind="value: imageTitle" /></label>
+        <label>src:<select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select></label>
+        <label>alt:<input type="textbox" data-bind="value: imageAlt" /></label>
+        <label>title:<input type="textbox" data-bind="value: imageTitle" /></label>
+    </div>
     <script>
         $(document).ready(function() {
             var viewModel = kendo.observable({
@@ -57,6 +59,28 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         </pre>
     </div>
     <style scoped>
+        #example .container
+        {
+            overflow: hidden;
+            width: 380px;
+        }
+
+        #example > div > label
+        {
+            height: 24px;
+        }
+
+        #example > div > label > input,
+        #example > div > label > select
+        {
+            float: right;
+        }
+
+        img {
+            float: left;
+            margin-right: 10px;
+        }
+
         label {
             display: block;
         }
