@@ -601,7 +601,9 @@
 
                 widget.bind("dataBound", this._dataBound);
 
-                widget.dataSource.data(this.bindings.source.get());
+                if (widget.dataSource instanceof kendo.data.DataSource) {
+                    widget.dataSource.data(this.bindings.source.get());
+                }
             },
 
             destroy: function() {

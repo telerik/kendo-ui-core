@@ -70,6 +70,16 @@
                 equal($.trim(dom.find("span:first").html()), "bar");
             });
 
+            test("source binding is skipped if set to target element", function() {
+                var dom = $('<ul id="container" data-template="template" data-bind="source:items"></ul>');
+
+                var observable = kendo.observable({ items: [{text: "foo"}, {text:"bar" }] });
+
+                kendo.bind(dom, observable);
+                dom.kendoPanelBar();
+                equal(dom.children().length, 2)
+            });
+
             test("event is raised if attached as option", 1, function() {
                 var dom = $('<div data-role="panelbar" data-expand="expand"></div>');
 
@@ -82,6 +92,10 @@
                 ok(true);
             }
 
+        </script>
+
+        <script type="text/x-kendo-template" id="template">
+            <li>${text}</li>
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
