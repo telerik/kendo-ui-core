@@ -377,7 +377,9 @@
         },
 
         _startHistory: function() {
-            var that = this, views, historyEvents;
+            var that = this,
+                views, historyEvents,
+                initial = that.options.initial;
 
             views = that.element.find(roleSelector("view"));
             that.rootView = views.first();
@@ -388,10 +390,21 @@
                 },
 
                 ready: function(e) {
-                    that._findView(e.string, function(view) {
+                    var url = e.string,
+                        navigateToInitial = !url && initial;
+
+                    if (navigateToInitial) {
+                        url = initial;
+                    }
+
+                    that._findView(url, function(view) {
                         views.not(view).hide();
                         view.onShowStart();
                         that.view = view;
+
+                        if (navigateToInitial) {
+                            history.navigate(initial, true);
+                        }
                     });
                 }
             };
