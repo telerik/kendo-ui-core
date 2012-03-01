@@ -213,6 +213,16 @@
         }
     });
 
+    binders.invisible = Binder.extend({
+        refresh: function() {
+            if (!this.bindings["invisible"].get()) {
+                this.element.style.display = "";
+            } else {
+                this.element.style.display = "none";
+            }
+        }
+    });
+
     binders.html = Binder.extend({
         refresh: function() {
             this.element.innerHTML = this.bindings["html"].get();

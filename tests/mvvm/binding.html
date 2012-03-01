@@ -446,6 +446,31 @@
                 equal(dom.css("display"), "none");
             });
 
+            test("invisible binding hides the element", function() {
+                var dom = $('<span data-bind="invisible:hide"/>');
+
+                var viewModel = kendo.observable({
+                    hide: true
+                });
+
+                kendo.bind(dom, viewModel);
+                equal(dom.css("display"), "none");
+            });
+
+            test("invisible binding shows the element", function() {
+                var dom = $('<span data-bind="invisible:hide" style="display:none" />');
+
+                var viewModel = kendo.observable({
+                    hide: true
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("hide", false);
+
+                ok(dom.css("display") != "none", "Display is not 'none'");
+            });
+
             test("enable binding enables the element", function() {
                 var dom = $('<input data-bind="enabled:enable" disabled="disabled"/>');
 
