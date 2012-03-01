@@ -59,6 +59,14 @@
                 equal(document.title, "foo");
             });
 
+            test("omit title if it is undefined", function() {
+                var dom = $('<div><span data-kendo-role="view-title"></span></div>');
+                var bar = new NavBar(dom);
+                bar.title(undefined);
+
+                notEqual(document.title, "undefined");
+            });
+
         </script>
     </body>
 </html>
