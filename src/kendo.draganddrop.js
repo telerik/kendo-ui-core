@@ -239,12 +239,8 @@
                 that.currentTarget = that.element;
             }
 
-            console.log(that.currentTarget);
-
             if (hint) {
                 that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
-
-                console.log(that.hint);
 
                 that.hint.css( {
                     position: "absolute",
@@ -335,7 +331,7 @@
 
         _withDropTarget: function(e, callback) {
             var that = this,
-                target = kendo.eventTarget(e),
+                target = kendo.eventTarget(e.event),
                 result,
                 options = that.options;
 
