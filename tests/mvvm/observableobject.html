@@ -39,6 +39,12 @@
                 ok(viewModel.foo.get);
             });
 
+            test("nested objects which are private are not observable", function() {
+                var viewModel = kendo.observable({ _foo: { bar: "baz" } });
+
+                ok(!(viewModel._foo instanceof kendo.data.ObservableObject));
+            });
+
             test("set triggers the change event", function() {
                 expect(1);
 
