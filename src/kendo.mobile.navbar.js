@@ -111,7 +111,10 @@
         */
         title: function(value) {
             this.element.find(roleSelector("view-title")).text(value);
-            document.title = value;
+
+            if (value) {
+                document.title = value;
+            }
         },
 
         viewShow: function(view) {
