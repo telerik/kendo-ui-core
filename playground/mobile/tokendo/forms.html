@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="km-root">
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-black" />
+    <meta content="minimum-scale=1.0, width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no" name="viewport" />
+    
+    <!-- Weinre Proxy, configure to your machine if you have it. -->
+    <!--<script src="http://bundev.telerik.com:8080/target/target-script-min.js"></script>-->
+    <link rel="apple-touch-icon" href="images/kendo.png" />
+    <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
+    <title>Mobile Test App</title>
+
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.blackberry.less"/>
+
+    <script src="../../../demos/mvc/content/shared/js/less.js"></script>
+    <script src="../../../src/jquery.js"></script>
+    <script src="../../../src/kendo.core.js"></script>
+    <script src="../../../src/kendo.fx.js"></script>
+    <script src="../../../src/kendo.data.js"></script>
+    <script src="../../../src/kendo.history.js"></script>
+    <script src="../../../src/kendo.mobile.core.js"></script>
+    <script src="../../../src/kendo.mobile.button.js"></script>
+    <script src="../../../src/kendo.mobile.switch.js"></script>
+    <script src="../../../src/kendo.mobile.swipe.js"></script>
+    <script src="../../../src/kendo.mobile.scroller.js"></script>
+    <script src="../../../src/kendo.mobile.buttongroup.js"></script>
+    <script src="../../../src/kendo.mobile.navbar.js"></script>
+    <script src="../../../src/kendo.mobile.tabstrip.js"></script>
+    <script src="../../../src/kendo.mobile.listview.js"></script>
+    <script src="../../../src/kendo.mobile.view.js"></script>
+    <script src="../../../src/kendo.mobile.application.js"></script>
+
+    <style type="text/css">
+        .km-root .pink
+        {
+            background-color: #f9f;
+        }
+
+        .km-root .pink.km-state-active,
+        .km-root .pink .km-switch-on
+        {
+            background-color: #c6c;
+        }
+
+        .km-root .green
+        {
+            background-color: #3c3;
+        }
+
+        .km-root .green.km-state-active,
+        .km-root .green .km-switch-on
+        {
+            background-color: #090;
+        }
+
+        .km-root .fuchsia
+        {
+            background-color: fuchsia;
+        }
+
+        .km-root .fuchsia.km-state-active,
+        .km-root .fuchsia .km-switch-on
+        {
+            background-color: #c0c;
+        }
+
+        .km-content {
+            background: #ccc;
+        }
+
+        .km-ios .km-tabstrip .km-state-active .km-toprated,
+        .km-ios .km-tabstrip .km-state-active .km-favorites
+        {
+            background: -moz-linear-gradient(top, #E4FFBC, #99D23F 50%, #BFE553);
+            background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #E4FFBC), color-stop(0.5, #99D23F), color-stop(1, #BFE553));
+        }
+
+        .km-ios .km-tabstrip .km-state-active .km-mostviewed
+        {
+            background: -moz-linear-gradient(top, #FFBCE4, #D23F99 50%, #E553BF);
+            background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #FFBCE4), color-stop(0.5, #D23F99), color-stop(1, #E553BF));
+        }
+
+        .km-ios .km-tabstrip .km-state-active .km-bookmarks
+        {
+            background: -moz-linear-gradient(top, #E4BCFF, #993FD2 50%, #BF53E5);
+            background: -webkit-gradient(linear, 50% 0, 50% 100%, color-stop(0, #E4BCFF), color-stop(0.5, #993FD2), color-stop(1, #BF53E5));
+        }
+    </style>
+</head>
+<body class="km-blackberry">
+    <article data-role="view">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="backbutton" data-align="left">Back</a>
+                <span data-role="view-title">Layout</span>
+                <a data-role="button" data-align="right" class="pink" data-icon="toprated">Pin</a>
+                <a data-role="button" data-align="right" class="green" data-icon="search">Grin</a>
+                <a data-role="button" data-align="right" class="fuchsia" data-icon="about">Fuch</a>
+            </div>
+        </header>
+        <br />
+        <center>
+            <input type="date" value="2012-03-22" />
+            <br />
+            <input type="date" value="2012-03-22" readonly />
+            <br />
+            <input type="time" value="22:30" />
+            <br />
+            <input type="time" value="16:50" readonly />
+            <br />
+            <input type="datetime" value="2012-03-22 20:15" />
+            <br />
+            <input type="datetime" value="2012-03-22 07:28" readonly />
+            <br />
+            <input type="text" value="Text Shmext" />
+            <br />
+            <input type="text" value="Text Shmext" readonly />
+            <br />
+            <select name="next" id="next">
+                <option value="First">First</option>
+                <option value="Second">Second</option>
+                <option value="Third">Third</option>
+                <option value="Fourth">Fourth</option>
+            </select>
+        </center>
+        <footer data-role="footer">
+            <div data-role="tabstrip">
+                <a data-icon="featured">Featured</a>
+                <a data-icon="favorites">Top Rated<span class="km-badge">3</span></a>
+                <a data-icon="mostviewed">Most Viewed</a>
+                <a data-icon="bookmarks">Favorites</a>
+                <a data-icon="more">More</a>
+            </div>
+        </footer>
+    </article>
+    <script>
+
+        var app = new kendo.mobile.Application(document.body);
+
+        var groupedData = [
+            {name: "Sashimi salad", letter: "S" },
+            {name: "Chirashi sushi", letter: "C" },
+            {name: "Seaweed salad", letter: "S" },
+            {name: "Edamame", letter: "E" },
+            {name: "Miso soup", letter: "M" },
+            {name: "Maguro", letter: "M" },
+            {name: "Shake", letter: "S" },
+            {name: "Shiromi", letter: "S" },
+            {name: "Tekka maki", letter: "T" },
+            {name: "Hosomaki Mix", letter: "H" },
+            {name: "California rolls", letter: "C" },
+            {name: "Seattle rolls", letter: "S" },
+            {name: "Spicy Tuna rolls", letter: "S" },
+            {name: "Ebi rolls", letter: "E" },
+            {name: "Chicken Teriyaki", letter: "C" },
+            {name: "Salmon Teriyaki", letter: "S" },
+            {name: "Gohan", letter: "G" },
+            {name: "Tori Katsu", letter: "T" },
+            {name: "Yaki Udon", letter: "Y" }
+        ];
+
+        function mobileListViewDataBindInitGrouped() {
+//            $("#grouped-listview").kendoMobileListView({
+//                dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
+//                template: "${name}"
+//            });
+        }
+
+        $(function () {
+            var color = "";
+
+            $(".km-navbar .km-button:not(.km-back)").each(function () {
+
+                $(this).bind("touchstart mousedown", function (e) {
+                    color = $(e.currentTarget).css("background-color");
+                });
+
+                $(this).data("kendoMobileButton").bind("click", function (e) {
+                    if ($.browser.mozilla)
+                        color = this.element.css("background-color");
+
+                    $(".km-navbar, .km-ios .km-switch-background, .km-ios .km-listgroup > li, .km-badge, .km-tabstrip").css("background-color", color); // .km-ios .km-listgroup > li,
+                    $(".km-insetcontent").css("background-color", color.replace(")", ",.3)").replace("rgb(", "rgba("));
+                    $(".km-buttongroup, .km-content [data-role=button], .km-android .km-switch, .km-touch-scrollbar").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>
+
+
+

@@ -2,6 +2,11 @@
 
 /* Common Platform CSS */
 
+*:focus
+{
+    outline: none;
+}
+
 .km-root,
 .km-vertical,
 .km-horizontal
@@ -872,9 +877,8 @@
 .km-scrollview,
 .km-scroll-container
 {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
+    .user-select(none);
+    -moz-user-select: -moz-none;
     -webkit-margin-collapse: separate;
 }
 
