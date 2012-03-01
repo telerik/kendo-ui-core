@@ -231,12 +231,12 @@
             var that = this;
                 options = that.options,
                 cursorOffset = options.cursorOffset,
-                event = e.event,
+                originalEvent = e.event,
                 filter = that.options.filter,
                 hint = options.hint;
 
             if (filter) {
-                that.currentTarget = $(event.target).is(filter) ? $(event.target) : $(event.target).closest(filter);
+                that.currentTarget = $(originalEvent.target).is(filter) ? $(originalEvent.target) : $(originalEvent.target).closest(filter);
             } else {
                 that.currentTarget = that.element;
             }
