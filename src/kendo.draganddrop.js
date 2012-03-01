@@ -54,9 +54,11 @@
 
             Widget.fn.init.call(that, element, options);
 
+            /*
             that.element.bind(MOUSEENTER, proxy(that._over, that))
                 .bind(MOUSEUP, proxy(that._drop, that))
                 .bind(MOUSELEAVE, proxy(that._out, that));
+            */
 
             var group = that.options.group;
 
@@ -331,11 +333,18 @@
 
         _withDropTarget: function(e, callback) {
             var that = this,
-                target = kendo.eventTarget(e.event),
+                target,
                 result,
                 options = that.options;
 
-            if (touch && kendo.size(dropTargets)) {
+            if (kendo.size(dropTargets)) {
+                target = kendo.eventTarget(e.event);
+
+                if ($.contains(that.hint, target)) {
+                    that.hint.hide();
+                    target = kendo.eventTarget(e.event);
+                    that.hint.show();
+                }
 
                 $.each(dropTargets[options.group], function() {
                     var that = this,
