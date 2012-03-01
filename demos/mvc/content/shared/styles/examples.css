@@ -433,7 +433,7 @@ a.bigButton:hover,
 
 .learnBlock
 {
-    margin: 54px 56px 0 0;
+    margin: 54px 120px 0 0;
     float: right;
     line-height: 1.692em;
     font-size: 13px;
@@ -533,6 +533,19 @@ a.bigButton
 #topnav a.last
 {
     border-right-width: 1px;
+}
+
+.beta-ribbon
+{
+    position:absolute;
+    top:0;
+    right:-4px;
+    width:85px;
+    height:120px;
+    background:no-repeat url(launch-q1-beta.png);
+    text-align:center;
+    text-indent:-4444px;
+    overflow:hidden;
 }
 
 /*left navigation*/
