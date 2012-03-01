@@ -438,6 +438,27 @@
             test("layout triggers show", 1, function() {
                 setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-show="success" />');
             });
+
+            test("load initial view depending on options", function() {
+                setup('<div data-role="view" id="test1">Page 1</div><div data-role="view" id="page2">Page 2</div>', {
+                    initial: "page2"
+                });
+
+                equal(location.hash, "#page2");
+                equal(application.view.id, "#page2");
+            });
+
+            test("Omit options.initial if location.hash", function() {
+                location.hash = "#../../test1";
+
+                setup('<div data-role="view" id="test1">Page 1</div><div data-url="../../test1" data-role="view" id="page2">Page 2</div>', {
+                    initial: "test1"
+                });
+
+                equal(location.hash, "#../../test1");
+                equal(application.view.id, "../../test1");
+                equal(application.view.content.find(".km-scroll-container").html(), "Page 2");
+            });
         </script>
     </body>
 </html>
