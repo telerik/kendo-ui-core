@@ -17,7 +17,6 @@
         KEYDOWN = "keydown",
         MOUSELEAVE = "mouseleave",
         SELECTSTART = "selectstart",
-
         DRAGSTART = "dragstart",
         DRAGEND = "dragend",
         DRAG = "drag",
@@ -39,6 +38,10 @@
         } else {
             element.bind(eventName, handler);
         }
+    }
+
+    function elementUnderCursor(e) {
+        return document.elementFromPoint(e.x.location, e.y.location);
     }
 
     var DropTarget = Widget.extend(/** @lends kendo.ui.DropTarget.prototype */ {
@@ -220,17 +223,13 @@
             name: "Draggable",
             distance: 5,
             group: "default",
-            cursorOffset: {
-                left: 10,
-                top: touch ? -40 / kendo.support.zoomLevel() : 10
-            },
+            cursorOffset: null,
             dropped: false
         },
 
         _start: function(e) {
             var that = this;
                 options = that.options,
-                cursorOffset = options.cursorOffset,
                 originalEvent = e.event,
                 filter = that.options.filter,
                 hint = options.hint;
@@ -244,11 +243,13 @@
             if (hint) {
                 that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
 
+                var offset = getOffset(that.currentTarget);
+                that.hintOffset = offset;
                 that.hint.css( {
                     position: "absolute",
                     zIndex: 10010, //the Window's z-index is 10000
-                    left: e.x.location + cursorOffset.left,
-                    top: e.y.location + cursorOffset.top
+                    left: offset.x,
+                    top: offset.y
                 })
                 .appendTo(document.body);
             }
@@ -261,6 +262,23 @@
                 that.drag.cancel();
                 that._destroy(e);
             }
+        },
+
+        updateHint: function(e) {
+            var that = this,
+                coordinates,
+                offset = that.initialOffset,
+                cursorOffset = that.options.cursorOffset;
+
+            if (cursorOffset) {
+               coordinates = { left: e.x.location + cursorOffset.left, top: e.y.location + cursorOffset.top };
+            } else {
+               that.hintOffset.left += e.x.delta;
+               that.hintOffset.top += e.y.delta;
+               coordinates = that.hintOffset;
+            }
+
+            that.hint.css(coordinates);
         },
 
         _drag: function(e) {
@@ -293,10 +311,7 @@
             that._trigger(DRAG, e);
 
             if (that.hint) {
-                that.hint.css( {
-                    left: e.x.location + cursorOffset.left,
-                    top: e.y.location + cursorOffset.top
-                });
+                that.updateHint(e);
             }
         },
 
@@ -338,11 +353,11 @@
                 options = that.options;
 
             if (kendo.size(dropTargets)) {
-                target = kendo.eventTarget(e.event);
+                target = elementUnderCursor(e);
 
                 if ($.contains(that.hint, target)) {
                     that.hint.hide();
-                    target = kendo.eventTarget(e.event);
+                    target = elementUnderCursor(e);
                     that.hint.show();
                 }
 
