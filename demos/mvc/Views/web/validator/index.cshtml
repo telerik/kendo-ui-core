@@ -5,17 +5,15 @@
             <ul>
                 <li>
                     <label for="fullname" class="required">Your Name</label>
-                    <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Please enter {0}!" />
+                    <input type="text" id="fullname" name="fullname" class="k-textbox" placeholder="Full name" required validationMessage="Please enter {0}" />
                 </li>
                 <li>
                     <label for="search" class="required">Movie</label>
-                    <input type="search" id="search" name="search" required validationMessage="Please select movie"/>
-                    <span class="k-invalid-msg" data-for="search"></span>
+                    <input type="search" id="search" name="search" required validationMessage="Please select movie"/><span class="k-invalid-msg" data-for="search"></span>
                 </li>
                 <li>
                     <label for="amount">Amount</label>
-                    <input id="amount" name="Amount" type="number" min="1" max="10" value="1" class="k-textbox k-input" required />
-                    <span class="k-invalid-msg" data-for="amount"></span>
+                    <input id="amount" name="Amount" type="number" min="1" max="10" value="1" class="k-textbox k-input" required data-max-msg="Enter value between 1 and 10" /><span class="k-invalid-msg" data-for="amount"></span>
                 </li>
                 <li>
                     <label for="email" class="required">Email</label>
@@ -27,7 +25,7 @@
                         validationMessage="Please enter a ten digit phone number"/>
                 </li>
                     <li  class="accept">
-                    <input type="checkbox" name="Accept" required validationMessage="Acceptance is required!" /> I accept the terms and condition of service
+                    <input type="checkbox" name="Accept" required validationMessage="Acceptance is required" /> I accept the terms and condition of service
                 </li>
 
                 <li  class="accept">
@@ -87,6 +85,9 @@
 
                 .invalid {
                     color: red;
+                }
+                span.k-tooltip {
+                    margin-left: 6px;
                 }
             </style>
 
