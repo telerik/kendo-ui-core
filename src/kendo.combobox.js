@@ -659,7 +659,9 @@
             var that = this,
                 length = word.length,
                 options = that.options,
-                filter = options.filter;
+                filter = options.filter,
+                field = options.dataTextField,
+                expression;
 
             clearTimeout(that._typing);
 
@@ -669,11 +671,14 @@
                 } else {
                     that._open = true;
                     that._state = STATE_FILTER;
-                    that.dataSource.filter( {
-                        field: options.dataTextField,
-                        operator: filter,
-                        value: word
-                    });
+
+                    expression = that.dataSource.filter() || {};
+                    removeFiltersForField(expression, field);
+
+                    filters = expression.filters || [];
+                    filters.push({ field: field, operator: filter, value: word });
+
+                    that.dataSource.filter(filters);
                 }
             }
         },
@@ -1037,7 +1042,11 @@
         },
 
         _selectItem: function() {
-            var that = this;
+            var that = this,
+                dataSource = that.dataSource,
+                expression = dataSource.filter() || {};
+
+            removeFiltersForField(expression, that.options.dataTextField);
 
             that.dataSource.one(CHANGE, function() {
                 var value = that.value();
@@ -1046,8 +1055,7 @@
                 } else {
                     that.select(that.options.index);
                 }
-            }).filter({});
-            //should not clear filtering
+            }).filter(expression);
         },
 
         _wrapper: function() {
@@ -1065,6 +1073,23 @@
             that.wrapper = wrapper.addClass("k-widget k-combobox k-header").show();
         }
     });
+
+    function removeFiltersForField(expression, field) {
+        if (!field) {
+            return;
+        }
+
+        if (expression.filters) {
+            expression.filters = $.grep(expression.filters, function(filter) {
+                removeFiltersForField(filter, field);
+                if (filter.filters) {
+                    return filter.filters.length;
+                } else {
+                    return filter.field != field;
+                }
+            });
+        }
+    }
 
     ui.plugin(ComboBox);
 })(jQuery);

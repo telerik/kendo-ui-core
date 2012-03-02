@@ -20,6 +20,7 @@
         <ol id="qunit-tests"></ol>
         <script>
             QUnit.config.testTimeout = 300;
+            QUnit.config.reorder = false;
 
             var ComboBox = kendo.ui.ComboBox,
                 data = [{text: "Foo", value: 1}, {text:"Bar", value:2}, {text:"Baz", value:3}],
@@ -442,6 +443,118 @@
                 combobox.search("fa");
 
                 equal(combobox.popup.calls("_update"), 2);
+            });
+
+            test("do not remove default filter expression", function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                ok(combobox.dataSource.filter());
+                equal(combobox.dataSource.filter().filters.length, 1);
+            });
+
+            test("append combobox filter expression ot the default one", function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                combobox.search("foo1");
+
+                ok(combobox.dataSource.filter());
+                equal(combobox.dataSource.filter().filters.length, 2);
+            });
+
+            test("do not append combobox filter twice", function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                combobox.search("foo1");
+                combobox.search("foo2");
+
+                equal(combobox.dataSource.filter().filters.length, 2);
+            });
+
+            test("remove only combobox filter expression on rebind", function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: {
+                        data: [
+                            {text: "foo", value: "1", parent: 1},
+                            {text: "foo1", value: "2", parent: 1},
+                            {text: "foo2", value: "3", parent: 1},
+                            {text: "foo3", value: "4", parent: 2},
+                            {text: "foo4", value: "5", parent: 2},
+                            {text: "foo5", value: "6", parent: 3},
+                        ],
+                        filter: {
+                            field: "parent",
+                            operation: "eq",
+                            value: 1
+                        }
+                    },
+                    filter: "contains"
+                });
+
+                combobox.search("foo1");
+                combobox._selectItem();
+
+                ok(combobox.dataSource.filter());
+                equal(combobox.dataSource.filter().filters.length, 1);
+                equal(combobox.dataSource.filter().filters[0].field, "parent");
             });
 
         </script>
