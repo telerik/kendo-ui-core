@@ -87,10 +87,8 @@
 
                 var offset = kendo.getOffset(span);
 
-                console.log(offset.top, offset.left);
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 21, pageY: 21 });
-                console.log(offset.top, offset.left);
 
                 equal(hint.css("top"), offset.top + 20 + "px");
                 equal(hint.css("left"), offset.left + 20 + "px");
