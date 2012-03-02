@@ -306,12 +306,29 @@
                 });
 
                 // ------------------------------------------------------------
+                var oldGetSlot;
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
+                        oldGetSlot = plotArea.namedValueAxes.primary.getSlot;
+
+                        plotArea.namedValueAxes.primary.getSlot = function(a, b) {
+                            var a = typeof a === "undefined" ? 0 : a,
+                                b = typeof b === "undefined" ? a : b,
+                                top = VALUE_AXIS_MAX - Math.max(a, b),
+                                bottom = VALUE_AXIS_MAX - Math.min(a, b),
+                                slotTop = top,
+                                slotBottom = bottom;
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        };
+
                         setupBarChart(plotArea, {
                             series: [ positiveSeries, positiveSeries ],
                             isStacked: true }
                         );
+                    },
+                    teardown: function() {
+                        plotArea.namedValueAxes.primary.getSlot = oldGetSlot;
                     }
                 });
 
@@ -423,8 +440,22 @@
                 });
 
                 // ------------------------------------------------------------
+                var oldGetSlot;
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
+                        oldGetSlot = plotArea.namedValueAxes.primary.getSlot;
+
+                        plotArea.namedValueAxes.primary.getSlot = function(a, b) {
+                            var a = typeof a === "undefined" ? 0 : a,
+                                b = typeof b === "undefined" ? a : b,
+                                top = VALUE_AXIS_MAX - Math.max(a, b),
+                                bottom = VALUE_AXIS_MAX - Math.min(a, b),
+                                slotTop = top,
+                                slotBottom = bottom;
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        };
+
                         setupBarChart(plotArea, {
                             series: [{
                                 data: [1, -1],
@@ -432,6 +463,9 @@
                             }],
                             isStacked: true
                         });
+                    },
+                    teardown: function() {
+                        plotArea.namedValueAxes.primary.getSlot = oldGetSlot;
                     }
                 });
 
