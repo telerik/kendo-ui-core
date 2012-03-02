@@ -263,6 +263,19 @@
     * <a data-role="button" href="#foo?bar=baz">Link to FOO <strong>View</strong> with bar parameter set to baz</a>
     *
     * @section
+    * <h3> Initial View</h3>
+    *
+    * <p> The <strong>Application</strong> provides a way to specify the initial view to show. The initial view can be set by
+    * passing the view id in the options parameter of the Application's constructor:
+    * @exampleTitle Define initial view
+    * @example
+    * <script>
+    *      new kendo.mobile.Application($(document.body), {
+    *          initial: "ViewID"
+    *      });
+    * </script>
+
+    * @section
     *
     * <h3>Web Clip Icons</h3>
     *
@@ -298,6 +311,7 @@
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Application layout.
+         * @option {String} [initial] <> The id of a View.
          * @option {String} [loading] <Loading...> The text displayed in the loading popup. Setting this value to false will disable the loading popup.
          * @option {Boolean} [hideAddressBar] <true> Whether to hide the browser address bar.
          * _example
