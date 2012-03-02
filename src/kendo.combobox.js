@@ -362,6 +362,8 @@
                 that.input.val(element.children(":selected").text());
             }
 
+            //that._placeholder();
+
             kendo.notify(that);
         },
 
@@ -542,13 +544,14 @@
         * combobox.open();
         */
         open: function() {
-            var that = this;
+            var that = this,
+                serverFiltering = that.dataSource.options.serverFiltering;
 
             if (that.popup.visible()) {
                 return;
             }
 
-            if (!that.ul[0].firstChild || that._state === STATE_ACCEPT) {
+            if (!that.ul[0].firstChild || (that._state === STATE_ACCEPT && !serverFiltering)) {
                 that._open = true;
                 that._state = "";
                 that._selectItem();
@@ -573,6 +576,7 @@
         refresh: function() {
             var that = this,
                 ul = that.ul[0],
+                popup = that.popup,
                 options = that.options,
                 suggest = options.suggest,
                 height = options.height,
@@ -596,6 +600,10 @@
                 if (suggest && that.input.val()) {
                     that.suggest(that._current);
                 }
+            }
+
+            if (popup.visible()) {
+                popup._update();
             }
 
             if (that._open) {
@@ -1037,8 +1045,9 @@
                 } else {
                     that.select(that.options.index);
                 }
-                that._placeholder();
+                that._placeholder(); //remove from here
             }).filter({});
+            //should not clear filtering
         },
 
         _wrapper: function() {
