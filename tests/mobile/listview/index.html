@@ -218,7 +218,6 @@
                     <li><div class="km-group-title">Foo</div><ul><li>Bar</li><li>Baz</li></ul></li>\
                 </ul>');
                 var listView = new ListView(dom);
-                console.log(dom);
                 ok(dom.find("li").contents().first().is("div.km-group-title"), "Header is wrapped");
                 ok(!dom.find("li>div.km-group-title").contents().first().is("div.km-group-title"), "No bogus element is present");
             });
