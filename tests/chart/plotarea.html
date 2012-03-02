@@ -471,20 +471,6 @@
                     ok(chartSeries instanceof dataviz.BarChart);
                 });
 
-                test("stacks series", function() {
-                    plotArea = new dataviz.CategoricalPlotArea([{
-                            type: "column",
-                            data: [],
-                            stack: true
-                        }], {
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
-                    });
-
-                    ok(plotArea.charts[0].options.isStacked);
-                });
-
                 test("groups bar series into bar chart", function() {
                     equal(chartSeries.options.series.length, 2);
                 });
@@ -526,6 +512,16 @@
                     ok(chartSeries instanceof dataviz.LineChart);
                 });
 
+                test("sets isStacked when first series is stacked", function() {
+                    createPlotArea([{ type: "line", data: [], stack: true }, { type: "line", data: [] }]);
+                    ok(chartSeries.options.isStacked);
+                });
+
+                test("does not set isStacked when first and only series is stacked", function() {
+                    createPlotArea([{ type: "line", data: [], stack: true }]);
+                    ok(!chartSeries.options.isStacked);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Vertical line series", {
                     setup: function() {
@@ -545,6 +541,16 @@
 
                 test("creates line chart", function() {
                     ok(chartSeries instanceof dataviz.LineChart);
+                });
+
+                test("sets isStacked when first series is stacked", function() {
+                    createPlotArea([{ type: "verticalLine", data: [], stack: true }, { type: "verticalLine", data: [] }]);
+                    ok(chartSeries.options.isStacked);
+                });
+
+                test("does not set isStacked when first and only series is stacked", function() {
+                    createPlotArea([{ type: "verticalLine", data: [], stack: true }]);
+                    ok(!chartSeries.options.isStacked);
                 });
 
                 // ------------------------------------------------------------
@@ -568,6 +574,16 @@
                     ok(chartSeries instanceof dataviz.AreaChart);
                 });
 
+                test("sets isStacked when first series is stacked", function() {
+                    createPlotArea([{ type: "area", data: [], stack: true }, { type: "area", data: [] }]);
+                    ok(chartSeries.options.isStacked);
+                });
+
+                test("does not set isStacked when first and only series is stacked", function() {
+                    createPlotArea([{ type: "area", data: [], stack: true }]);
+                    ok(!chartSeries.options.isStacked);
+                });
+
                 // ------------------------------------------------------------
                 module("Categorical PlotArea / Verical area series", {
                     setup: function() {
@@ -587,6 +603,16 @@
 
                 test("creates area chart", function() {
                     ok(chartSeries instanceof dataviz.AreaChart);
+                });
+
+                test("sets isStacked when first series is stacked", function() {
+                    createPlotArea([{ type: "verticalArea", data: [], stack: true }, { type: "verticalArea", data: [] }]);
+                    ok(chartSeries.options.isStacked);
+                });
+
+                test("does not set isStacked when first and only series is stacked", function() {
+                    createPlotArea([{ type: "verticalArea", data: [], stack: true }]);
+                    ok(!chartSeries.options.isStacked);
                 });
 
                 // ------------------------------------------------------------
@@ -618,20 +644,6 @@
                         }
                     });
                     equal(plotArea.categoryAxis.options.axisCrossingValue, 2);
-                });
-
-                test("stacks series", function() {
-                    plotArea = new dataviz.CategoricalPlotArea([{
-                            type: "bar",
-                            data: [],
-                            stack: true
-                        }], {
-                        categoryAxis: {
-                            categories: ["A"]
-                        }
-                    });
-
-                    ok(plotArea.charts[0].options.isStacked);
                 });
 
                 test("applies gap from first series", function() {
@@ -681,6 +693,16 @@
                         crossingSlotX = axisX.getSlot(axisX.options.axisCrossingValue);
 
                     same([crossingSlotY.x2, crossingSlotY.y2], [crossingSlotX.x2, crossingSlotX.y2]);
+                });
+
+                test("sets isStacked when first series is stacked", function() {
+                    createPlotArea([{ type: "bar", data: [], stack: true }, { type: "bar", data: [] }]);
+                    ok(chartSeries.options.isStacked);
+                });
+
+                test("does not set isStacked when first and only series is stacked", function() {
+                    createPlotArea([{ type: "bar", data: [], stack: true }]);
+                    ok(!chartSeries.options.isStacked);
                 });
 
             })();

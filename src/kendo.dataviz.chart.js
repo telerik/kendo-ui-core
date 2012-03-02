@@ -3444,7 +3444,7 @@
                 barChart = new BarChart(plotArea, {
                     series: series,
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack,
+                    isStacked: firstSeries.stack && series.length > 1,
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
                 });
@@ -3462,7 +3462,7 @@
                 firstSeries = series[0],
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack,
+                    isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
@@ -3479,7 +3479,7 @@
                 firstSeries = series[0],
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack,
+                    isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
