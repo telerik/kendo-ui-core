@@ -362,7 +362,7 @@
                 that.input.val(element.children(":selected").text());
             }
 
-            //that._placeholder();
+            that._placeholder();
 
             kendo.notify(that);
         },
@@ -1032,6 +1032,7 @@
 
                 that._prev = that.input[0].value = text;
                 that._accessor(value != undefined ? value : text, idx);
+                that._placeholder();
             }
         },
 
@@ -1045,7 +1046,6 @@
                 } else {
                     that.select(that.options.index);
                 }
-                that._placeholder(); //remove from here
             }).filter({});
             //should not clear filtering
         },
