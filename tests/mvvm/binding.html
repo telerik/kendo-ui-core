@@ -198,6 +198,18 @@
                 equal(dom.find("option")[0], option);
             });
 
+            test("value of private field is shown", function() {
+                var dom = $('<span data-bind="text:_foo"/>');
+
+                var viewModel = kendo.observable( {
+                    _foo:"bar"
+                });
+
+                kendo.bind(dom, viewModel);
+
+                equal(dom.text(), "bar");
+            });
+
             test("pushing items to array initializes child bindings", function() {
                 var dom = $('<ul data-bind="source:foo" data-template="ul-template"/>');
 
