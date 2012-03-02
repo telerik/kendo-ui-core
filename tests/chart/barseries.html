@@ -76,11 +76,13 @@
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
                         },
-                        function(value) {
-                            var value = typeof value === "undefined" ? 0 : value,
-                                valueY = VALUE_AXIS_MAX - value,
-                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+                        function(a, b) {
+                            var a = typeof a === "undefined" ? 0 : a,
+                                b = typeof b === "undefined" ? a : b,
+                                top = VALUE_AXIS_MAX - Math.max(a, b),
+                                bottom = VALUE_AXIS_MAX - Math.min(a, b),
+                                slotTop = Math.min(CATEGORY_AXIS_Y, top),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, bottom);
 
                             return new Box2D(0, slotTop, 0, slotBottom);
                         },
@@ -370,6 +372,20 @@
                     });
 
                     same(barHeights, [1, 1, 2, 2]);
+                });
+
+                test("stack tops are aligned to 0 line when category axis crossing value is changed", function() {
+                    CATEGORY_AXIS_Y = 4;
+
+                    setupBarChart(plotArea, {
+                        series: [ negativeSeries, negativeSeries ],
+                        isStacked: true
+                    });
+
+                    same([series.points[0].box.y1, series.points[2].box.y1],
+                         [2, 2]);
+
+                    CATEGORY_AXIS_Y = 2;
                 });
 
                 // ------------------------------------------------------------
