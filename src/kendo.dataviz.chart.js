@@ -1392,7 +1392,7 @@
                     value = point.plotValue;
                 }
 
-                var categorySlot = categoryAxis.getSlot(categoryIx),
+                var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
                     valueSlot = chart.valueSlot(valueAxis, value),
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
@@ -1419,6 +1419,10 @@
 
         valueSlot: function(valueAxis, value) {
             return valueAxis.getSlot(value);
+        },
+
+        categorySlot: function(categoryAxis, categoryIx) {
+            return categoryAxis.getSlot(categoryIx);
         },
 
         traverseDataPoints: function(callback) {
@@ -1571,6 +1575,22 @@
 
         valueSlot: function(valueAxis, value) {
             return valueAxis.getSlot(value, this.options.isStacked ? 0 : undefined);
+        },
+
+        categorySlot: function(categoryAxis, categoryIx, valueAxis) {
+            var chart = this,
+                options = chart.options,
+                categorySlot = categoryAxis.getSlot(categoryIx),
+                stackAxis,
+                zeroSlot;
+
+            if (options.isStacked) {
+                zeroSlot = valueAxis.getSlot(0, 0);
+                stackAxis = options.invertAxes ? X : Y;
+                categorySlot[stackAxis + 1] = categorySlot[stackAxis + 2] = zeroSlot[stackAxis + 1];
+            }
+
+            return categorySlot;
         },
 
         reflowCategories: function(categorySlots) {
