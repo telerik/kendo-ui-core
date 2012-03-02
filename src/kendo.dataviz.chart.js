@@ -18,7 +18,6 @@
         deepExtend = kendo.deepExtend,
         format = kendo.format,
         getter = kendo.getter,
-        notify = kendo.notify,
 
         dataviz = kendo.dataviz,
         Axis = dataviz.Axis,
@@ -146,7 +145,7 @@
             chart._redraw();
             chart._attachEvents();
 
-            notify(chart, dataviz.ui);
+            kendo.notify(chart, dataviz.ui);
         },
 
         events:[

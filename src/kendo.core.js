@@ -70,12 +70,13 @@
                 length,
                 original,
                 handler,
+                handlersIsFunction = typeof handlers === FUNCTION,
                 events;
 
             for (idx = 0, length = eventNames.length; idx < length; idx++) {
                 eventName = eventNames[idx];
 
-                handler = isFunction(handlers) ? handlers : handlers[eventName];
+                handler = handlersIsFunction ? handlers : handlers[eventName];
 
                 if (handler) {
                     if (one) {
@@ -101,20 +102,19 @@
             var that = this,
                 events = that._events[eventName],
                 idx,
-                isDefaultPrevented = false,
-                length;
-
-            e = e || {};
-
-            e.preventDefault = function () {
-                isDefaultPrevented = true;
-            }
-
-            e.isDefaultPrevented = function() {
-                return isDefaultPrevented;
-            }
+                isDefaultPrevented = false;
 
             if (events) {
+                e = e || {};
+
+                e.preventDefault = function () {
+                    isDefaultPrevented = true;
+                }
+
+                e.isDefaultPrevented = function() {
+                    return isDefaultPrevented;
+                }
+
                 //Do not cache the length of the events array as removing events attached through one will fail
                 for (idx = 0; idx < events.length; idx++) {
                     events[idx].call(that, e);
@@ -2264,15 +2264,34 @@
     var dataRegExp = /^data(.)/;
     var templateRegExp = /template$/i;
 
-    function parseOption(element, attribute) {
-        return element.data(kendo.ns + attribute.replace(dataRegExp, lowerCaseFirstLetter));
+    function parseOption(data, option, ns) {
+        var value;
+
+        if (option.indexOf("data") === 0) {
+            if (ns) {
+                value = data[ns + option.substring(4)];
+            } else {
+                value = data[option.replace(dataRegExp, lowerCaseFirstLetter)];
+            }
+        } else {
+            if (ns) {
+                value = data[ns + option.charAt(0).toUpperCase() + option.substring(1)];
+            } else {
+                value = data[option];
+            }
+        }
+
+        return value;
     }
 
     function parseOptions(element, options) {
-        var result = {};
+        var result = {},
+            value,
+            data = element.data(),
+            ns = kendo.ns.substring(0, kendo.ns.length - 1);
 
         for (option in options) {
-            value = parseOption(element, option);
+            value = parseOption(data, option, ns);
 
             if (value !== undefined) {
 
@@ -2295,6 +2314,8 @@
             widget,
             idx,
             length,
+            data = element.data(),
+            ns = kendo.ns.substring(0, kendo.ns.length - 1),
             role = element.data(kendo.ns + "role"),
             dataSource = element.data(kendo.ns + "source");
 
@@ -2317,7 +2338,7 @@
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
             option = widget.fn.events[idx];
 
-            value = parseOption(element, option);
+            value = parseOption(data, option, ns);
 
             if (value !== undefined) {
                 options[option] = window[value];
