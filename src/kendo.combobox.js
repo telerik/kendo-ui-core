@@ -965,6 +965,8 @@
 
             that._last = key;
 
+            clearTimeout(that._typing);
+
             if (key == keys.TAB) {
                 that.text(input.val());
 
@@ -1008,7 +1010,6 @@
 
         _search: function() {
             var that = this;
-            clearTimeout(that._typing);
 
             that._typing = setTimeout(function() {
                 var value = that.text();
