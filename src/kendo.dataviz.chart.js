@@ -1393,7 +1393,7 @@
                 }
 
                 var categorySlot = categoryAxis.getSlot(categoryIx),
-                    valueSlot = valueAxis.getSlot(value),
+                    valueSlot = chart.valueSlot(valueAxis, value),
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
@@ -1416,6 +1416,10 @@
         },
 
         reflowCategories: function() { },
+
+        valueSlot: function(valueAxis, value) {
+            return valueAxis.getSlot(value);
+        },
 
         traverseDataPoints: function(callback) {
             var chart = this,
@@ -1563,6 +1567,10 @@
                 chart,
                 options.isStacked ? chart.options.series[0] : series
             );
+        },
+
+        valueSlot: function(valueAxis, value) {
+            return valueAxis.getSlot(value, this.options.isStacked ? 0 : undefined);
         },
 
         reflowCategories: function(categorySlots) {
