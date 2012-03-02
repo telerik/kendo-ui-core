@@ -5,9 +5,6 @@
         <script src="../../src/jquery.js"></script>
         <script src="benchmark.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.binder.js"></script>
-        <script src="http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.0.0.js"></script>
         <style>
             body {
                 padding: 1em;
@@ -29,35 +26,24 @@
     </head>
     <body>
         <div id="log"></div>
-        <div id="kendo">
-            <span data-bind="text: foo"></span>
-            <select data-text-field="name" data-value-field="id" data-bind="source: products"></select>
-        </div>
-        <div id="ko">
-            <span data-bind="text: foo"></span>
-            <select data-bind="optionsText: 'name', optionsValue: 'id', options: products"></select>
-        </div>
         <script>
                 var suite = new Benchmark.Suite;
+                var callback = function() {}
 
-                var kendoViewModel = kendo.observable({
-                    foo: "foo",
-                    products: [ { id: 1, name: "Coffee"}, { id: 2, name: "Tea" }]
-                });
+                var observable = new kendo.Observable();
+                observable.bind("event", callback);
+                observable.bind("event", callback);
 
-                var koViewModel = {
-                    foo: "foo",
-                    products: [ { id: 1, name: "Coffee"}, { id: 2, name: "Tea" }]
-                };
+                var jq = $({});
 
-                var kendoDiv = $("#kendo");
-                var koDiv = $("#ko");
+                jq.bind("event", callback);
+                jq.bind("event", callback);
 
-                suite.add("Kendo MVVM", function() {
-                    kendo.bind(kendoDiv[0], kendoViewModel);
+                suite.add("Kendo Observable", function() {
+                    observable.trigger("event");
                 })
-                .add("KnockoutJS", function() {
-                    ko.applyBindings(koViewModel, koDiv[0]);
+                .add("jQuery", function() {
+                    jq.triggerHandler("event");
                 })
                 .on("complete", function() {
                     var message = "<div>User agent: " + navigator.userAgent;

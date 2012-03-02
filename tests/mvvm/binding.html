@@ -99,14 +99,6 @@
                 equal(dom.attr("custom"), "foo");
             });
 
-            test("binding multiple attr declarations", function() {
-                var dom = $('<a data-bind="attr: { href: foo }, attr: { title: foo } "/>');
-
-                kendo.bind(dom, { foo: "foo" });
-                equal(dom.attr("href"), "foo");
-                equal(dom.attr("title"), "foo");
-            });
-
             asyncTest("click binding", function() {
                 expect(1);
 

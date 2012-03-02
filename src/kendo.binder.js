@@ -28,11 +28,17 @@
             that.path = path;
             that.dependencies = {};
             that.dependencies[path] = true;
+            that.observable = that.source instanceof Observable;
 
-            that._access = $.proxy(that.access, that);
-            that._change = $.proxy(that.change, that);
+            that._access = function(e) {
+                that.dependencies[e.field] = true;
+            };
 
-            if (that.source instanceof Observable) {
+            if (that.observable) {
+                that._change = function(e) {
+                    that.change(e);
+                };
+
                 that.source.bind("change", that._change);
             }
         },
@@ -53,38 +59,35 @@
             }
         },
 
-        access: function(e) {
-            this.dependencies[e.field] = true;
-        },
-
         start: function() {
-            if (this.source instanceof Observable) {
+            if (this.observable) {
                 this.source.bind("get", this._access);
             }
         },
 
         stop: function() {
-            if (this.source instanceof Observable) {
+            if (this.observable) {
                 this.source.unbind("get", this._access);
             }
         },
 
         get: function() {
-            this.start();
+            var that = this,
+                result = that.source;
 
-            var result = this.source;
+            that.start();
 
-            if (this.source instanceof Observable) {
-                result = this.source.get(this.path);
+            if (that.observable) {
+                result = that.source.get(that.path);
 
                 if (typeof result === "function") {
-                    result = $.proxy(result, this.source);
+                    result = $.proxy(result, that.source);
 
                     result = result();
                 }
             }
 
-            this.stop();
+            that.stop();
 
             return result;
         },
@@ -94,7 +97,7 @@
         },
 
         destroy: function() {
-            if (this.source instanceof Observable) {
+            if (this.observable) {
                 this.source.unbind("change", this._change);
             }
         }
@@ -688,58 +691,56 @@
         init: function(target, options) {
             this.target = target;
             this.options = options;
-            this.binders = [];
-            this.bindings = [];
+            this.toDestroy = [];
         },
 
         bind: function(bindings) {
-            var that = this;
+            var that = this,
+                nodeName = this.target.nodeName.toLowerCase(),
+                key,
+                specificBinders = binders[nodeName] || {};
 
-            var nodeName = this.target.nodeName.toLowerCase();
-            var specificBinders = binders[nodeName] || {};
-
-            for (var key in bindings) {
+            for (key in bindings) {
                 this.applyBinding(key, bindings, specificBinders);
             }
         },
 
         applyBinding: function(name, bindings, specificBinders) {
             var binder = specificBinders[name] || binders[name],
+                toDestroy = this.toDestroy,
                 binding = bindings[name];
 
             if (binder) {
                 binder = new binder(this.target, bindings, this.options);
 
-                this.binders.push(binder);
+                toDestroy.push(binder);
 
                 var refresh = function(e) {
                     binder.refresh(e);
                 };
 
-                refresh();
+                binder.refresh();
 
-                if (name == "attr" || name == "event" || name == "style") {
+                if (binding instanceof Binding) {
+                    binding.bind("change", refresh);
+                    toDestroy.push(binding);
+                } else {
                     for (var attribute in binding) {
                         binding[attribute].bind("change", refresh);
-                        this.bindings.push(binding[attribute])
+                        toDestroy.push(binding[attribute])
                     }
-                } else {
-                    binding.bind("change", refresh);
-                    this.bindings.push(binding);
                 }
             }
         },
 
         destroy: function() {
-            var idx, length;
+            var idx,
+                length,
+                toDestroy = this.toDestroy;
 
 
-            for (idx = 0, length = this.binders.length; idx < length; idx++) {
-                this.binders[idx].destroy();
-            }
-
-            for (idx = 0, length = this.bindings.length; idx < length; idx++) {
-                this.bindings[idx].destroy();
+            for (idx = 0, length = toDestroy.length; idx < length; idx++) {
+                toDestroy[idx].destroy();
             }
         }
     });
@@ -779,22 +780,22 @@
 
         applyBinding: function(name, bindings) {
             var binder = binders.widget[name],
-            binding = bindings[name];
+                binding = bindings[name];
 
             if (binder) {
                 binder = new binder(this.target, bindings, this.target.options);
 
-                this.binders.push(binder);
+                this.toDestroy.push(binder);
 
                 var refresh = function(e) {
                     binder.refresh(e);
                 };
 
-                refresh();
+                binder.refresh();
 
                 binding.bind("change", refresh);
 
-                this.bindings.push(binding);
+                this.toDestroy.push(binding);
             }
         }
     });
@@ -822,88 +823,73 @@
         }
     }
 
-    var attrRegExp = /attr\s*:\s*{([^}]*)}/ig;
-    var eventRegExp = /event\s*:\s*{([^}]*)}/ig;
-    var styleRegExp = /style\s*:\s*{([^}]*)}/ig;
+    var keyValueRegExp = /\w+:({([^}]*)}|[^,}]+)/g;
+    var whiteSpaceRegExp = /\s/g;
 
     function parseAttributeList(bind) {
         var result = {},
-            attr,
-            event,
-            style;
+            idx,
+            length,
+            token,
+            colonIndex,
+            key,
+            value,
+            tokens;
 
-        bind = bind.replace(attrRegExp, function($0, $1) {
-            attr = attr || {};
-            appendAttributes(attr, $1);
-        });
+        tokens = bind.match(keyValueRegExp);
 
-        if (attr) {
-            result.attr = attr;
+        for (idx = 0, length = tokens.length; idx < length; idx++) {
+            token = tokens[idx];
+            colonIndex = token.indexOf(":");
+
+            key = token.substring(0, colonIndex);
+            value = token.substring(colonIndex + 1);
+
+            if (value.charAt(0) == "{") {
+                value = parseAttributeList(value);
+            }
+
+            result[key] = value;
         }
-
-        bind = bind.replace(styleRegExp, function($0, $1) {
-            style = style || {};
-            appendAttributes(style, $1);
-        });
-
-        if (style) {
-            result.style = style;
-        }
-
-        bind = bind.replace(eventRegExp, function($0, $1) {
-            event = event || {};
-            appendAttributes(event, $1);
-        });
-
-        if (event) {
-            result.event = event;
-        }
-
-        appendAttributes(result, bind);
 
         return result;
     }
 
-    function appendAttributes(attributes, commaSeparatedAttributes) {
-        var keyValuePairs, keyValuePair, idx, length;
+    function createBindings(bindings, source, type) {
+        var binding,
+            result = {};
 
-        keyValuePairs = commaSeparatedAttributes.split(",");
-
-        for (idx = 0, length = keyValuePairs.length; idx < length; idx++) {
-            keyValuePair = keyValuePairs[idx].split(":");
-
-            if (keyValuePair.length === 2) {
-                attributes[$.trim(keyValuePair[0])] = $.trim(keyValuePair[1]);
-            }
+        for (binding in bindings) {
+            result[binding] = new type(source, bindings[binding]);
         }
+
+        return result;
     }
 
+    var bindingTargetCache = {};
+
     function bindElement(element, source, namespace) {
-        var role = element.getAttribute("data-" + kendo.ns+ "role"),
+        var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             length,
-            path,
-            sourcePath,
-            nodeName = element.nodeName.toLowerCase(),
-            bind,
-            configuration,
+            bind = element.getAttribute("data-" + kendo.ns + "bind"),
+            children = element.children,
             deep = true,
-            value,
             bindings,
             options = {},
-            option,
             target;
 
-        unbindElement(element);
+
+        if (role || bind) {
+            unbindElement(element);
+        }
 
         if (role) {
             target = bindingTargetForRole(role, element, namespace);
         }
 
-        bind = element.getAttribute("data-" + kendo.ns + "bind");
-
         if (bind) {
-            bind = parseAttributeList(bind);
+            bind = parseAttributeList(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
                 options = kendo.parseOptions($(element), { textField: "", valueField: "", template: "" });
@@ -912,13 +898,7 @@
 
             target.source = source;
 
-            var bindings = {};
-
-            for (path in bind) {
-                sourcePath = bind[path];
-
-                bindings[path] = new Binding(source, sourcePath);
-            }
+            bindings = createBindings(bind, source, Binding);
 
             if (options.template) {
                 bindings.template = new TemplateBinding(source, "", options.template);
@@ -933,28 +913,15 @@
             }
 
             if (bind.attr) {
-                bindings.attr = {
-                };
-
-                for (path in bind.attr) {
-                    bindings.attr[path] = new Binding(source, bind.attr[path]);
-                }
+                bindings.attr = createBindings(bind.attr, source, Binding);
             }
 
             if (bind.style) {
-                bindings.style = {
-                };
-
-                for (path in bind.style) {
-                    bindings.style[path] = new Binding(source, bind.style[path]);
-                }
+                bindings.style = createBindings(bind.style, source, Binding);
             }
+
             if (bind.event) {
-                bindings.event = {
-                };
-                for (path in bind.event) {
-                    bindings.event[path] = new EventBinding(source, bind.event[path]);
-                }
+                bindings.event = createBindings(bind.event, source, EventBinding);
             }
 
             target.bind(bindings);
@@ -964,9 +931,9 @@
             $.data(element, "kendoBindingTarget", target);
         }
 
-        if (deep && element.children) {
-            for (idx = 0; idx < element.children.length; idx++) {
-                bindElement(element.children[idx], source);
+        if (deep && children) {
+            for (idx = 0; idx < children.length; idx++) {
+                bindElement(children[idx], source);
             }
         }
     }
@@ -977,7 +944,7 @@
         object = kendo.observable(object);
         dom = $(dom);
 
-        for (idx = 0; idx < dom.length; idx++ ) {
+        for (idx = 0, length = dom.length; idx < length; idx++ ) {
             bindElement(dom[idx], object, namespace);
         }
     }
