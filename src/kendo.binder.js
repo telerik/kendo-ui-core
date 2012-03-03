@@ -145,22 +145,14 @@
     var binders = {};
 
     binders.attr = Binder.extend({
-        refresh: function() {
-            var attribute, attributes = this.bindings.attr;
-
-            for (attribute in attributes) {
-                this.element.setAttribute(attribute, attributes[attribute].get());
-            }
+        refresh: function(key) {
+            this.element.setAttribute(key, this.bindings.attr[key].get());
         }
     });
 
     binders.style = Binder.extend({
-        refresh: function() {
-            var key, style = this.bindings.style;
-
-            for (key in style) {
-                this.element.style[key] = style[key].get();
-            }
+        refresh: function(key) {
+            this.element.style[key] = this.bindings.style[key].get();
         }
     });
 
@@ -185,12 +177,8 @@
     });
 
     binders.event = Binder.extend({
-        refresh: function() {
-            var event, events = this.bindings.event;
-
-            for (event in events) {
-                $(this.element).bind(event, events[event].get());
-            }
+        refresh: function(key) {
+            $(this.element).bind(key, this.bindings.event[key].get());
         }
     });
 
@@ -715,18 +703,20 @@
 
                 toDestroy.push(binder);
 
-                var refresh = function(e) {
-                    binder.refresh(e);
-                };
-
-                binder.refresh();
-
                 if (binding instanceof Binding) {
-                    binding.bind("change", refresh);
+                    binding.bind("change", function(e){
+                        binder.refresh(e);
+                    });
+                    binder.refresh();
                     toDestroy.push(binding);
                 } else {
                     for (var attribute in binding) {
-                        binding[attribute].bind("change", refresh);
+                        (function(attribute) {
+                            binding[attribute].bind("change", function() {
+                                binder.refresh(attribute);
+                            });
+                        })(attribute);
+                        binder.refresh(attribute);
                         toDestroy.push(binding[attribute])
                     }
                 }
