@@ -2272,12 +2272,21 @@
         option = option.replace(dashRegExp, "-$1");
         value = element.getAttribute("data-" + kendo.ns + option);
 
-        return value === null ? undefined :
-               value === "true" ? true :
-               value === "false" ? false :
-               value === "null" ? null :
-               !isNaN(parseFloat(value)) ? parseFloat(value) :
-               jsonRegExp.test(value) ? $.parseJSON(value) : value
+        if (value === null) {
+            value = undefined;
+        } else if (value === "null") {
+            value = null;
+        } else if (value === "true") {
+            value = true;
+        } else if (value === "false") {
+            value = false;
+        } else if (!isNaN(parseFloat(value))) {
+            value = parseFloat(value);
+        } else if (jsonRegExp.test(value)) {
+           value = $.parseJSON(value);
+        }
+
+        return value;
     }
 
     function parseOptions(element, options) {
