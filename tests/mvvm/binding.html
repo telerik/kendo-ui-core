@@ -599,7 +599,7 @@
                 };
 
                 kendo.bind(dom, viewModel);
-                ok(dom.data("kendoBindingTarget"));
+                ok(dom[0].kendoBindingTarget);
             });
 
             test("binding are removed if element is rebind", 1, function() {
@@ -611,7 +611,7 @@
 
                 kendo.bind(dom, viewModel);
 
-                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+                var destroy = stub(dom[0].kendoBindingTarget, "destroy");
 
                 kendo.bind(dom, viewModel);
 

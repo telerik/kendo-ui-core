@@ -111,7 +111,7 @@
 
                 kendo.bind(dom, observable, kendo.mobile.ui );
 
-                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+                var destroy = stub(dom[0].kendoBindingTarget, "destroy");
 
                 kendo.bind(dom, observable, kendo.mobile.ui );
 

@@ -866,8 +866,6 @@
         return result;
     }
 
-    var bindingTargetCache = {};
-
     function bindElement(element, source, namespace) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
@@ -892,7 +890,7 @@
             bind = parseAttributeList(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions($(element), { textField: "", valueField: "", template: "" });
+                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "" });
                 target = new BindingTarget(element, options);
             }
 
@@ -928,7 +926,7 @@
         }
 
         if (target) {
-            $.data(element, "kendoBindingTarget", target);
+            element.kendoBindingTarget = target;
         }
 
         if (deep && children) {
@@ -950,11 +948,11 @@
     }
 
     function unbindElement(element) {
-        var bindingTarget = $.data(element, "kendoBindingTarget");
+        var bindingTarget = element.kendoBindingTarget;
 
         if (bindingTarget) {
             bindingTarget.destroy();
-            $.removeData(element, "kendoBindingTarget")
+            delete element.kendoBindingTarget;
         }
     }
 
@@ -984,7 +982,7 @@
 
     function notify(widget, namespace) {
         var element = widget.element;
-        var bindingTarget = element.data("kendoBindingTarget");
+        var bindingTarget = element[0].kendoBindingTarget;
 
         if (bindingTarget) {
             bind(element, bindingTarget.source, namespace);

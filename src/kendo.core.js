@@ -2257,41 +2257,35 @@
 
     kendo.notify = noop;
 
-    function lowerCaseFirstLetter($0, $1) {
-        return $1.toLowerCase();
-    }
+    var templateRegExp = /template$/i,
+        jsonRegExp = /^(?:\{.*\}|\[.*\])$/,
+        dashRegExp = /([A-Z])/g;
 
-    var dataRegExp = /^data(.)/;
-    var templateRegExp = /template$/i;
-
-    function parseOption(data, option, ns) {
+    function parseOption(element, option) {
         var value;
 
         if (option.indexOf("data") === 0) {
-            if (ns) {
-                value = data[ns + option.substring(4)];
-            } else {
-                value = data[option.replace(dataRegExp, lowerCaseFirstLetter)];
-            }
-        } else {
-            if (ns) {
-                value = data[ns + option.charAt(0).toUpperCase() + option.substring(1)];
-            } else {
-                value = data[option];
-            }
+            option = option.substring(4);
+            option = option.charAt(0).toLowerCase() + option.substring(1);
         }
 
-        return value;
+        option = option.replace(dashRegExp, "-$1");
+        value = element.getAttribute("data-" + kendo.ns + option);
+
+        return value === null ? undefined :
+               value === "true" ? true :
+               value === "false" ? false :
+               value === "null" ? null :
+               !isNaN(parseFloat(value)) ? parseFloat(value) :
+               jsonRegExp.test(value) ? $.parseJSON(value) : value
     }
 
     function parseOptions(element, options) {
         var result = {},
-            value,
-            data = element.data(),
-            ns = kendo.ns.substring(0, kendo.ns.length - 1);
+            value;
 
         for (option in options) {
-            value = parseOption(data, option, ns);
+            value = parseOption(element, option);
 
             if (value !== undefined) {
 
@@ -2307,21 +2301,23 @@
     }
 
     kendo.initWidget = function(element, options, namespace) {
-        element = $(element);
-
         var result,
             option,
             widget,
             idx,
             length,
-            data = element.data(),
-            ns = kendo.ns.substring(0, kendo.ns.length - 1),
-            role = element.data(kendo.ns + "role"),
-            dataSource = element.data(kendo.ns + "source");
+            role,
+            dataSource;
+
+        element = element.nodeType ? element : element[0];
+
+        role = element.getAttribute("data-" + kendo.ns + "role");
 
         if (!role) {
             return;
         }
+
+        dataSource = element.getAttribute("data-" + kendo.ns + "source");
 
         widget = (namespace || kendo.ui).roles[role];
 
@@ -2338,14 +2334,14 @@
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {
             option = widget.fn.events[idx];
 
-            value = parseOption(data, option, ns);
+            value = parseOption(element, option);
 
             if (value !== undefined) {
                 options[option] = window[value];
             }
         }
 
-        result = element.data("kendo" + widget.fn.options.name);
+        result = $(element).data("kendo" + widget.fn.options.name);
 
         if (!result) {
             result = new widget(element, options);
