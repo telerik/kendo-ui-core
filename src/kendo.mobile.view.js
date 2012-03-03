@@ -21,6 +21,8 @@
 
             Widget.fn.init.call(that, element, options);
 
+            element = that.element;
+
             that.layout = options.layout;
             that.element.data("kendoView", that).addClass("km-view");
 
@@ -177,6 +179,8 @@
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
+
+            element = that.element;
 
             that.element = element.detach();
             that.header = element.find(roleSelector("header")).addClass("km-header");

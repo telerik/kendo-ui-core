@@ -30,8 +30,8 @@
                 ok(dom.data("kendoChart") instanceof kendo.dataviz.ui.Chart);
             });
 
-            test("initializes a options from data attributes", function() {
-                var dom = $('<div data-role="chart" />').data("series", [{ field: "foo" }]);
+            test("initializes options from data attributes", function() {
+                var dom = $('<div data-role="chart" data-series=\'[{"field":"foo"}]\'"/>');
 
                 kendo.bind(dom, {}, kendo.dataviz.ui);
 
@@ -50,7 +50,7 @@
             });
 
             test("binding chart initialized before binding", function() {
-                var dom = $('<div data-bind="source:items" />').data("series", [{ field: "text" }]);
+                var dom = $('<div data-bind="source:items" data-series=\'[{"field":"text"}]\'"/>');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}]});
 
@@ -89,7 +89,7 @@
             });
 
             test("removing items from the model updates the UI", function() {
-                var dom = $('<div data-bind="source:items" />').data("series", [{ field: "text" }]);
+                var dom = $('<div data-bind="source:items" data-series=\'[{"field":"text"}]\'"/>');
 
                 var observable = kendo.observable({ items: [{ text:"foo"},{ text: "bar" },{ text: "baz" }] });
 
@@ -109,7 +109,7 @@
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
-                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+                var destroy = stub(dom[0].kendoBindingTarget, "destroy");
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
@@ -123,7 +123,7 @@
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
-                var destroy = stub(dom.data("kendoBindingTarget"), "destroy");
+                var destroy = stub(dom[0].kendoBindingTarget, "destroy");
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
