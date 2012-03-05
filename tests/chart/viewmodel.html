@@ -1373,6 +1373,11 @@
                     same(ringBox, [0, 0, 200, 200]);
                 });
 
+                test("get box with startAngle 5 and endAngle 450", function() {
+                    createRing(90, 450);
+                    same(ringBox, [0, 0, 200, 200]);
+                });
+
             })();
         </script>
 
