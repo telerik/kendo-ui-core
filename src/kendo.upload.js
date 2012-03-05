@@ -915,7 +915,10 @@
             var upload = this.upload;
             var sourceInput = $(e.target);
             upload._addInput(sourceInput.clone().val(""));
-            var file = upload._enqueueFile(getFileName(sourceInput), { relatedInput : sourceInput });
+            var file = upload._enqueueFile(getFileName(sourceInput), {
+                "relatedInput" : sourceInput, "fileNames": inputFiles(sourceInput)
+            });
+
             upload._fileAction(file, REMOVE);
         },
 
