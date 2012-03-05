@@ -22,7 +22,8 @@
                 RadialScale = dataviz.RadialScale,
                 radialScale,
                 ring,
-                chartBox = new Box2D(0, 0, 400, 300);
+                chartBox = new Box2D(0, 0, 400, 300),
+                view;
 
             // Tests expect particular font size
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
@@ -116,6 +117,80 @@
 
                 equal(radialScale.getSlotAngle(38), 27);
                 equal(radialScale.getSlotAngle(106), 48);
+            });
+
+            test("getSlotAngle() takes options.min and options.max into account", function() {
+                $.extend(radialScale.options, {
+                    min: 38,
+                    max: 106,
+                    startAngle: 27,
+                    endAngle: 48
+                });
+
+                equal(radialScale.getSlotAngle(38), 27);
+                equal(radialScale.getSlotAngle(106), 48);
+            });
+
+            function createScale(options) {
+                radialScale = new RadialScale(options);
+                view = new ViewStub();
+            }
+
+            module("RadialScale / Ranges");
+
+            test("render default range", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 100
+                    }]
+                });
+                radialScale.reflow(chartBox);
+                radialScale.getViewElements(view);
+                var ranges = view.log.ring,
+                    ring = ranges[0].ring;
+
+                equal(ring.startAngle, radialScale.getSlotAngle(0));
+                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(10));
+            });
+
+            test("render range from 10 to 100", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 100
+                    }]
+                });
+                radialScale.reflow(chartBox);
+                radialScale.getViewElements(view);
+                var ranges = view.log.ring;
+
+                ring = ranges[1].ring;
+                equal(ring.startAngle, radialScale.getSlotAngle(10));
+                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(100));
+            });
+
+            test("render range from 10 to 50 and from 50 to 100", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 50
+                    }, {
+                        from: 50,
+                        to: 100
+                    }]
+                });
+                radialScale.reflow(chartBox);
+                radialScale.getViewElements(view);
+                var ranges = view.log.ring;
+
+                ring = ranges[1].ring;
+                equal(ring.startAngle, radialScale.getSlotAngle(10));
+                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(50));
+
+                ring = ranges[2].ring;
+                equal(ring.startAngle, radialScale.getSlotAngle(50));
+                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(100));
             });
         </script>
 

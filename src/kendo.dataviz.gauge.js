@@ -296,16 +296,8 @@
                 ringDistance = scale.options.ringDistance = ring.r * 0.05,
                 ringSize = scale.options.ringSize = ring.r * 0.1,
                 ranges = options.ranges || [],
-                halfWidth,
-                halfHeight,
-                labelAngle,
-                angle,
-                label,
-                lp,
-                i,
-                cx,
-                cy,
-                isInside;
+                halfWidth, halfHeight, labelAngle,
+                angle, label, lp, i, cx, cy, isInside;
 
             if (labelsOptions.position === INSIDE && ranges.length) {
                 ring.r -= ringSize + ringDistance;
@@ -499,9 +491,7 @@
                 step = math.abs(plotArea.getDiff(plotAreaBox, box)),
                 min = round(step, COORD_PRECISION),
                 max = round(-step, COORD_PRECISION),
-                midDiff,
-                minDiff,
-                maxDiff,
+                minDiff, midDiff, maxDiff,
                 mid;
 
             while (true) {
