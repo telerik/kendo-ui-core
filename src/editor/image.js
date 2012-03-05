@@ -80,13 +80,13 @@ var ImageCommand = Command.extend({
 
 //        var fileBrowser = this.editor.fileBrowser;
 //        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
-//        
-        function activate() {  
+//
+        function activate() {
 //            if (showBrowser) {
 //                new $t.imageBrowser($(this).find(".k-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.options.localization }));
 //            }
-        }        
-        
+        }
+
         var windowContent =
             '<div class="k-editor-dialog">' +
                 '<ol>' +
@@ -112,7 +112,7 @@ var ImageCommand = Command.extend({
                 apply(e);
             else if (e.keyCode == 27)
                 close(e);
-        }).end()                
+        }).end()
         //.toggleClass("k-imagebrowser", showBrowser)
         // IE < 8 returns absolute url if getAttribute is not used
         .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()

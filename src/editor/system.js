@@ -98,7 +98,7 @@ var InsertHtmlTool = Tool.extend({
     initialize: function($ui, initOptions) {
         var editor = initOptions.editor;
         var title = editor.options.localization.insertHtml;
-        
+
         $ui.kendoDropDownList({
             data: editor['insertHtml'],
             itemCreate: function (e) {
@@ -187,7 +187,7 @@ var TypingHandler = Class.extend({
         }
 
         return false;
-    }    
+    }
 });
 
 var SystemHandler = Class.extend({
@@ -265,8 +265,8 @@ var Keyboard = Class.extend({
             var toolOptions = tools[toolName].options || {};
 
             if ((toolOptions.key == key || toolOptions.key == e.keyCode)
-                && !!toolOptions.ctrl == e.ctrlKey 
-                && !!toolOptions.alt == e.altKey 
+                && !!toolOptions.ctrl == e.ctrlKey
+                && !!toolOptions.alt == e.altKey
                 && !!toolOptions.shift == e.shiftKey) {
                 return toolName;
             }
@@ -341,21 +341,21 @@ var Clipboard = Class.extend({
     htmlToFragment: function(html) {
         var editor = this.editor,
             container = dom.create(editor.document, 'div');
-        
+
         container.innerHTML = html;
-            
+
         var fragment = editor.document.createDocumentFragment();
-            
+
         while (container.firstChild)
             fragment.appendChild(container.firstChild);
-            
+
         return fragment;
     },
 
     isBlock: function(html) {
         return /<(div|p|ul|ol|table|h[1-6])/i.test(html);
     },
-        
+
     oncut: function(e) {
         var editor = this.editor,
             startRestorePoint = new RestorePoint(editor.getRange());
@@ -371,7 +371,7 @@ var Clipboard = Class.extend({
             clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: '\ufeff'});
 
         editor.body.appendChild(clipboardNode);
-            
+
         if (editor.body.createTextRange) {
             e.preventDefault();
             var r = editor.createRange();
@@ -387,14 +387,14 @@ var Clipboard = Class.extend({
             clipboardRange.selectNodeContents(clipboardNode);
             selectRange(clipboardRange);
         }
-            
+
         setTimeout(function() {
             selectRange(range);
             dom.remove(clipboardNode);
-                
+
             if (clipboardNode.lastChild && dom.is(clipboardNode.lastChild, 'br'))
                 dom.remove(clipboardNode.lastChild);
-                
+
             var args = { html: clipboardNode.innerHTML };
             editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
@@ -406,15 +406,15 @@ var Clipboard = Class.extend({
     splittableParent: function(block, node) {
         if (block)
             return dom.parentOfType(node, ['p', 'ul', 'ol']) || node.parentNode;
-            
+
         var parent = node.parentNode;
         var body = node.ownerDocument.body;
-            
+
         if (dom.isInline(parent)) {
             while (parent.parentNode != body && !dom.isBlock(parent.parentNode))
                 parent = parent.parentNode;
         }
-            
+
         return parent;
     },
 
@@ -425,7 +425,7 @@ var Clipboard = Class.extend({
         for (i = 0, l = this.cleaners.length; i < l; i++)
             if (this.cleaners[i].applicable(html))
                 html = this.cleaners[i].clean(html);
-            
+
         if (clean) {
             // remove br elements which immediately precede block elements
             html = html.replace(/(<br>(\s|&nbsp;)*)+(<\/?(div|p|li|col|t))/ig, "$3");
@@ -443,21 +443,21 @@ var Clipboard = Class.extend({
 
         if (range.startContainer == editor.document)
             range.selectNodeContents(editor.body);
-            
+
         var marker = new Marker();
         var caret = marker.addCaret(range)
-            
+
         var parent = this.splittableParent(block, caret);
         var unwrap = false;
-            
+
         if (!/body|td/.test(dom.name(parent)) && (block || dom.isInline(parent))) {
             range.selectNode(caret);
             RangeUtils.split(range, parent, true);
             unwrap = true;
         }
-            
+
         var fragment = this.htmlToFragment(html);
-        
+
         if (fragment.firstChild && fragment.firstChild.className === "k-paste-container") {
             var fragmentsHtml = [];
             for (i = 0, l = fragment.childNodes.length; i < l; i++) {
@@ -468,15 +468,15 @@ var Clipboard = Class.extend({
         }
 
         range.insertNode(fragment);
-                
+
         parent = this.splittableParent(block, caret);
         if (unwrap) {
             while (caret.parentNode != parent)
                 dom.unwrap(caret.parentNode);
-                
+
             dom.unwrap(caret.parentNode);
         }
-            
+
         dom.normalize(range.commonAncestorContainer);
         caret.style.display = 'inline';
         dom.scrollTo(caret);
@@ -491,7 +491,7 @@ var MSWordFormatCleaner = Class.extend({
             /<!--(.|\n)*?-->/g, '', /* comments */
             /&quot;/g, "'", /* encoded quotes (in attributes) */
             /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
-            /<br><br>/g, '<BR><BR>', 
+            /<br><br>/g, '<BR><BR>',
             /<br>/g, ' ',
             /<BR><BR>/g, '<br>',
             /^\s*(&nbsp;)+/gi, '',
@@ -507,11 +507,11 @@ var MSWordFormatCleaner = Class.extend({
     applicable: function(html) {
         return /class="?Mso|style="[^"]*mso-/i.test(html);
     },
-        
+
     listType: function(html) {
         if (/^[\u2022\u00b7\u00a7\u00d8o]\u00a0+/.test(html))
             return 'ul';
-            
+
         if (/^\s*\w+[\.\)]\u00a0{2,}/.test(html))
             return 'ol';
     },
@@ -519,15 +519,15 @@ var MSWordFormatCleaner = Class.extend({
     lists: function(html) {
         var placeholder = dom.create(document, 'div', {innerHTML: html});
         var blockChildren = $(dom.blockElements.join(','), placeholder);
-            
+
         var lastMargin = -1, lastType, levels = {'ul':{}, 'ol':{}}, li = placeholder;
-            
+
         for (var i = 0; i < blockChildren.length; i++) {
             var p = blockChildren[i];
-            var html = p.innerHTML.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');      
+            var html = p.innerHTML.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');
             var type = this.listType(html);
-                
-            if (!type || dom.name(p) != 'p') { 
+
+            if (!type || dom.name(p) != 'p') {
                 if (p.innerHTML == '') {
                     dom.remove(p);
                 } else {
@@ -537,21 +537,21 @@ var MSWordFormatCleaner = Class.extend({
                 }
                 continue;
             }
-                
+
             var margin = parseFloat(p.style.marginLeft || 0);
             var list = levels[type][margin];
 
             if (margin > lastMargin || !list) {
                 list = dom.create(document, type);
-                    
+
                 if (li == placeholder)
                     dom.insertBefore(list, p);
-                else 
+                else
                     li.appendChild(list);
-                    
+
                 levels[type][margin] = list;
             }
-                
+
             if (lastType != type) {
                 for (var key in levels)
                     for (var child in levels[key])
@@ -586,7 +586,7 @@ var MSWordFormatCleaner = Class.extend({
         html = this.stripEmptyAnchors(html);
         html = this.lists(html);
         html = html.replace(/\s+class="?[^"\s>]*"?/ig, '');
-           
+
         return html;
     }
 });

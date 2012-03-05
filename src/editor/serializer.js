@@ -116,7 +116,7 @@ var Serializer = {
 
                             if (property.indexOf('color') >= 0)
                                 value = dom.toHex(value);
-                        
+
                             if (property.indexOf('font') >= 0) {
                                 value = value.replace(quoteRe, "'");
                             }
@@ -174,7 +174,7 @@ var Serializer = {
                 }
             } else if (nodeType == 3) {
                 var value = node.nodeValue;
-                
+
                 if (!skip && $.support.leadingWhitespace) {
                     var parent = node.parentNode;
                     var previous = node.previousSibling;
@@ -185,12 +185,12 @@ var Serializer = {
 
                     if (!previous || previous.innerHTML == '' || dom.isBlock(previous))
                         value = value.replace(/^[\r\n\v\f\t ]+/, '');
-                    
+
                     value = value.replace(/ +/, ' ');
                 }
-                
+
                 result.push(dom.encode(value));
-            
+
             } else if (nodeType == 4) {
                 result.push('<![CDATA[');
                 result.push(node.data);
