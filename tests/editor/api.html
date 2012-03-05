@@ -1,92 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="EditorEncodeFalse" name="EditorEncodeFalse"></textarea></div>
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor"></textarea></div>
-<div><textarea cols="20" rows="4" id="EditorWithStyleSheets" name="EditorWithStyleSheets"></textarea></div>
+        <div><textarea cols="20" rows="4" id="EditorEncodeFalse" name="EditorEncodeFalse"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor"></textarea></div>
+        <div><textarea cols="20" rows="4" id="EditorWithStyleSheets" name="EditorWithStyleSheets"></textarea></div>
 
-<script>
+        <script>
 
-$("#EditorEncodeFalse").kendoEditor({
-    encoded:false
-});
-$("#Editor1").kendoEditor();
-$("#EditorWithStyleSheets").kendoEditor({
-    stylesheets: [
-        "telerik.common.css",
-        "telerik.vista.css"
-    ]
-});
+            $("#EditorEncodeFalse").kendoEditor({
+                encoded: false
+            });
 
-var rootUrl = "Content/"/* = '<%= Url.Content("~/") %>'*/;
+            $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
-    editor = getEditor();
-}
+            $("#EditorWithStyleSheets").kendoEditor({
+                stylesheets: [
+                    "kendo.common.css",
+                    "kendo.theme.css"
+                ]
+            });
 
-test('editor value should not be encoded', function() {
-    var editorEncodeFalse = getEditor('#EditorEncodeFalse');
-    editorEncodeFalse.value('<p>foo</p>');
+            test('editor value should not be encoded', function() {
+                var editorEncodeFalse = getEditor('#EditorEncodeFalse');
+                editorEncodeFalse.value('<p>foo</p>');
 
-    editorEncodeFalse.update();
+                editorEncodeFalse.update();
 
-    equal(editorEncodeFalse.textarea.value, '<p>foo</p>');
-});
+                equal(editorEncodeFalse.textarea.value, '<p>foo</p>');
+            });
 
-test('editor default Encode value must be true', function() {
-    equal(editor.options.encoded, true);
-});
+            test('editor default Encode value must be true', function() {
+                equal(getEditor().options.encoded, true);
+            });
 
-test('editor should add stylesheets', function() {
-    var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
+            test('editor should add stylesheets', function() {
+                var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
 
-    equal(editorWithStyleSheets.options.stylesheets[0], rootUrl + 'Content/telerik.common.css');
-    equal(editorWithStyleSheets.options.stylesheets[1], rootUrl + 'Content/telerik.vista.css');
-});
+                equal(editorWithStyleSheets.options.stylesheets[0], "kendo.common.css");
+                equal(editorWithStyleSheets.options.stylesheets[1], "kendo.theme.css");
+            });
 
-test('editor outputs css links in iframe', function() {
-    var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
-            
-    var links = $('link', editorWithStyleSheets.document);
-            
-    equal(links.eq(0).attr('href'), rootUrl + 'Content/telerik.common.css');
-    equal(links.eq(1).attr('href'), rootUrl + 'Content/telerik.vista.css');
-});
+            test('editor outputs css links in iframe', function() {
+                var editorWithStyleSheets = getEditor('#EditorWithStyleSheets');
+
+                var links = $('link', editorWithStyleSheets.document);
+
+                equal(links.eq(0).attr('href'), "kendo.common.css");
+                equal(links.eq(1).attr('href'), "kendo.theme.css");
+            });
 
 
-</script>
+        </script>
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
-
-</body>
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
 </html>
