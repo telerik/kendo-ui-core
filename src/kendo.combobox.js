@@ -750,13 +750,12 @@
             var that = this,
                 textAccessor = that._text,
                 input = that.input[0],
-                value = input.value,
                 dataItem;
 
             if (text !== undefined) {
                 dataItem = that.dataItem();
 
-                if (dataItem && textAccessor(dataItem) === value) {
+                if (dataItem && textAccessor(dataItem) === text) {
                     return;
                 }
 
@@ -770,7 +769,7 @@
 
                 input.value = text;
             } else {
-                return value;
+                return input.value;
             }
         },
 
