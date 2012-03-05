@@ -76,11 +76,13 @@
                             return new Box2D(categoryIndex, CATEGORY_AXIS_Y,
                             categoryIndex + 1, CATEGORY_AXIS_Y);
                         },
-                        function(value) {
-                            var value = typeof value === "undefined" ? 0 : value,
-                                valueY = VALUE_AXIS_MAX - value,
-                                slotTop = Math.min(CATEGORY_AXIS_Y, valueY),
-                                slotBottom = Math.max(CATEGORY_AXIS_Y, valueY);
+                        function(a, b) {
+                            var a = typeof a === "undefined" ? 0 : a,
+                                b = typeof b === "undefined" ? a : b,
+                                top = VALUE_AXIS_MAX - Math.max(a, b),
+                                bottom = VALUE_AXIS_MAX - Math.min(a, b),
+                                slotTop = Math.min(CATEGORY_AXIS_Y, top),
+                                slotBottom = Math.max(CATEGORY_AXIS_Y, bottom);
 
                             return new Box2D(0, slotTop, 0, slotBottom);
                         },
@@ -304,12 +306,29 @@
                 });
 
                 // ------------------------------------------------------------
+                var oldGetSlot;
                 module("Bar Chart / Stack / Positive Values", {
                     setup: function() {
+                        oldGetSlot = plotArea.namedValueAxes.primary.getSlot;
+
+                        plotArea.namedValueAxes.primary.getSlot = function(a, b) {
+                            var a = typeof a === "undefined" ? 0 : a,
+                                b = typeof b === "undefined" ? a : b,
+                                top = VALUE_AXIS_MAX - Math.max(a, b),
+                                bottom = VALUE_AXIS_MAX - Math.min(a, b),
+                                slotTop = top,
+                                slotBottom = bottom;
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        };
+
                         setupBarChart(plotArea, {
                             series: [ positiveSeries, positiveSeries ],
                             isStacked: true }
                         );
+                    },
+                    teardown: function() {
+                        plotArea.namedValueAxes.primary.getSlot = oldGetSlot;
                     }
                 });
 
@@ -335,6 +354,23 @@
                     });
 
                     same(barHeights, [1, 1, 2, 2]);
+                });
+
+                test("stack base is set to zero value slot", function() {
+                    equals(series.points[0].options.stackBase, 2);
+                });
+
+                test("stack base is set to zero value slot when category axis is moved to top", function() {
+                    CATEGORY_AXIS_Y = 0;
+
+                    setupBarChart(plotArea, {
+                        series: [ positiveSeries, positiveSeries ],
+                        isStacked: true }
+                    );
+
+                    equals(series.points[0].options.stackBase, 2);
+
+                    CATEGORY_AXIS_Y = 2;
                 });
 
                 // ------------------------------------------------------------
@@ -372,9 +408,54 @@
                     same(barHeights, [1, 1, 2, 2]);
                 });
 
+                test("stack tops are aligned to 0 line when category axis crossing value is changed", function() {
+                    CATEGORY_AXIS_Y = 4;
+
+                    setupBarChart(plotArea, {
+                        series: [ negativeSeries, negativeSeries ],
+                        isStacked: true
+                    });
+
+                    same([series.points[0].box.y1, series.points[2].box.y1],
+                         [2, 2]);
+
+                    CATEGORY_AXIS_Y = 2;
+                });
+
+                test("stack base is set to zero value slot", function() {
+                    equals(series.points[0].options.stackBase, 2);
+                });
+
+                test("stack base is set to zero value slot when category axis is moved to bottom", function() {
+                    CATEGORY_AXIS_Y = 4;
+
+                    setupBarChart(plotArea, {
+                        series: [ negativeSeries, negativeSeries ],
+                        isStacked: true }
+                    );
+
+                    equals(series.points[0].options.stackBase, 2);
+
+                    CATEGORY_AXIS_Y = 2;
+                });
+
                 // ------------------------------------------------------------
+                var oldGetSlot;
                 module("Bar Chart / Stack / Mixed Values", {
                     setup: function() {
+                        oldGetSlot = plotArea.namedValueAxes.primary.getSlot;
+
+                        plotArea.namedValueAxes.primary.getSlot = function(a, b) {
+                            var a = typeof a === "undefined" ? 0 : a,
+                                b = typeof b === "undefined" ? a : b,
+                                top = VALUE_AXIS_MAX - Math.max(a, b),
+                                bottom = VALUE_AXIS_MAX - Math.min(a, b),
+                                slotTop = top,
+                                slotBottom = bottom;
+
+                            return new Box2D(0, slotTop, 0, slotBottom);
+                        };
+
                         setupBarChart(plotArea, {
                             series: [{
                                 data: [1, -1],
@@ -382,6 +463,9 @@
                             }],
                             isStacked: true
                         });
+                    },
+                    teardown: function() {
+                        plotArea.namedValueAxes.primary.getSlot = oldGetSlot;
                     }
                 });
 
@@ -399,6 +483,62 @@
                     });
 
                     same(barHeights, [1, 1]);
+                });
+
+                test("stack base is set to zero value slot", function() {
+                    equals(series.points[0].options.stackBase, 2);
+                });
+
+                test("stack base is set to zero value slot when category axis is moved to bottom (negative series first)", function() {
+                    CATEGORY_AXIS_Y = 4;
+
+                    setupBarChart(plotArea, {
+                        series: [ negativeSeries, positiveSeries ],
+                        isStacked: true }
+                    );
+
+                    equals(series.points[0].options.stackBase, 2);
+
+                    CATEGORY_AXIS_Y = 2;
+                });
+
+                test("stack base is set to zero value slot when category axis is moved to bottom (positive series first)", function() {
+                    CATEGORY_AXIS_Y = 4;
+
+                    setupBarChart(plotArea, {
+                        series: [ positiveSeries, negativeSeries ],
+                        isStacked: true }
+                    );
+
+                    equals(series.points[0].options.stackBase, 2);
+
+                    CATEGORY_AXIS_Y = 2;
+                });
+
+                test("stack base is set to zero value slot when category axis is moved to top (negative series first)", function() {
+                    CATEGORY_AXIS_Y = 0;
+
+                    setupBarChart(plotArea, {
+                        series: [ negativeSeries, positiveSeries ],
+                        isStacked: true }
+                    );
+
+                    equals(series.points[0].options.stackBase, 2);
+
+                    CATEGORY_AXIS_Y = 2;
+                });
+
+                test("stack base is set to zero value slot when category axis is moved to top (positive series first)", function() {
+                    CATEGORY_AXIS_Y = 0;
+
+                    setupBarChart(plotArea, {
+                        series: [ positiveSeries, negativeSeries ],
+                        isStacked: true }
+                    );
+
+                    equals(series.points[0].options.stackBase, 2);
+
+                    CATEGORY_AXIS_Y = 2;
                 });
 
                 // ------------------------------------------------------------

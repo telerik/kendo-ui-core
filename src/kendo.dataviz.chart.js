@@ -1392,8 +1392,8 @@
                     value = point.plotValue;
                 }
 
-                var categorySlot = categoryAxis.getSlot(categoryIx),
-                    valueSlot = valueAxis.getSlot(value),
+                var categorySlot = chart.categorySlot(categoryAxis, categoryIx, valueAxis),
+                    valueSlot = chart.valueSlot(valueAxis, value),
                     slotX = invertAxes ? valueSlot : categorySlot,
                     slotY = invertAxes ? categorySlot : valueSlot,
                     pointSlot = new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
@@ -1416,6 +1416,14 @@
         },
 
         reflowCategories: function() { },
+
+        valueSlot: function(valueAxis, value) {
+            return valueAxis.getSlot(value);
+        },
+
+        categorySlot: function(categoryAxis, categoryIx) {
+            return categoryAxis.getSlot(categoryIx);
+        },
 
         traverseDataPoints: function(callback) {
             var chart = this,
@@ -1563,6 +1571,26 @@
                 chart,
                 options.isStacked ? chart.options.series[0] : series
             );
+        },
+
+        valueSlot: function(valueAxis, value) {
+            return valueAxis.getSlot(value, this.options.isStacked ? 0 : undefined);
+        },
+
+        categorySlot: function(categoryAxis, categoryIx, valueAxis) {
+            var chart = this,
+                options = chart.options,
+                categorySlot = categoryAxis.getSlot(categoryIx),
+                stackAxis,
+                zeroSlot;
+
+            if (options.isStacked) {
+                zeroSlot = valueAxis.getSlot(0, 0);
+                stackAxis = options.invertAxes ? X : Y;
+                categorySlot[stackAxis + 1] = categorySlot[stackAxis + 2] = zeroSlot[stackAxis + 1];
+            }
+
+            return categorySlot;
         },
 
         reflowCategories: function(categorySlots) {
@@ -3416,7 +3444,7 @@
                 barChart = new BarChart(plotArea, {
                     series: series,
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack,
+                    isStacked: firstSeries.stack && series.length > 1,
                     gap: firstSeries.gap,
                     spacing: firstSeries.spacing
                 });
@@ -3434,7 +3462,7 @@
                 firstSeries = series[0],
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack,
+                    isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
@@ -3451,7 +3479,7 @@
                 firstSeries = series[0],
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
-                    isStacked: firstSeries.stack,
+                    isStacked: firstSeries.stack && series.length > 1,
                     series: series
                 });
 
