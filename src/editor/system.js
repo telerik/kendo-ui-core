@@ -302,11 +302,13 @@ var Keyboard = Class.extend({
     },
 
     endTyping: function (force) {
-        this.clearTimeout();
-        if (force)
-            this.stopTyping();
-        else
-            this.timeout = window.setTimeout(this.stopTyping, 1000);
+        var that = this;
+        that.clearTimeout();
+        if (force) {
+            that.stopTyping();
+        } else {
+            that.timeout = window.setTimeout($.proxy(that.stopTyping, that), 1000);
+        }
     },
 
     isTypingInProgress: function () {
