@@ -58,11 +58,11 @@ tests.push(
     {
         page: "editor/filelistview.html",
         title: "File list view"
-    }*/,
+    },
     {
         page: "editor/formatblock.html",
         title: "FormatBlock"
-    },
+    }*/,
     {
         page: "editor/formatcommand.html",
         title: "FormatCommand"
