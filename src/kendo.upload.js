@@ -500,8 +500,8 @@
          * // enables the upload
          * upload.enable();
          */
-        enable: function() {
-            this.toggle(true);
+        enable: function(enable) {
+            this.toggle(enable);
         },
 
         /**

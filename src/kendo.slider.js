@@ -668,16 +668,22 @@
          * slider.enable();
          *
          */
-        enable: function () {
+        enable: function (enable) {
             var that = this,
                 options = that.options,
                 clickHandler,
                 move;
 
+            if (enable === false) {
+                that.disable();
+                return;
+            }
+
             that.wrapper
-                .removeAttr(DISABLED)
                 .removeClass(STATE_DISABLED)
                 .addClass(STATE_DEFAULT);
+
+            that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
                 if ($(e.target).hasClass("k-draghandle")) {
@@ -763,9 +769,10 @@
             var that = this;
 
             that.wrapper
-                .attr(DISABLED, DISABLED)
                 .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
+
+            $(that.element).attr(DISABLED, DISABLED);
 
             that.wrapper
                 .find(".k-button")
@@ -1217,15 +1224,21 @@
          * rangeSlider.enable();
          *
          */
-        enable: function () {
+        enable: function (enable) {
             var that = this,
                 options = that.options,
                 clickHandler;
 
+            if (enable === false) {
+                that.disable();
+                return;
+            }
+
             that.wrapper
-                .removeAttr(DISABLED)
                 .removeClass(STATE_DISABLED)
                 .addClass(STATE_DEFAULT);
+
+            that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
                 if ($(e.target).hasClass("k-draghandle")) {
@@ -1294,9 +1307,10 @@
                 options = that.options;
 
             that.wrapper
-                .attr(DISABLED, DISABLED)
                 .removeClass(STATE_DEFAULT)
                 .addClass(STATE_DISABLED);
+
+            that.wrapper.find("input").attr(DISABLED, DISABLED);
 
             that.wrapper
                 .find(TICK_SELECTOR).unbind(MOUSE_DOWN)

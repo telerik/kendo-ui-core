@@ -153,6 +153,54 @@
                 kendo.bind(dom, observable);
                 dom.data("kendoSlider").trigger("change");
             });
+
+            test("binding enabled to false disables the widget", function() {
+                var dom = $('<input data-bind="enabled:enabled" data-role="slider"/>');
+
+                var observable = kendo.observable({
+                    enabled: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.is(":disabled"));
+            });
+
+            test("binding enabled to true enables the widget", function() {
+                var dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="slider" />');
+
+                var observable = kendo.observable({
+                    enabled: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(!dom.is(":disabled"));
+            });
+
+            test("binding disable to true disables the widget", function() {
+                var dom = $('<input data-bind="disabled:disabled" disabled="disabled" data-role="slider" />');
+
+                var observable = kendo.observable({
+                    disabled: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(!dom.is(":disabled"));
+            });
+
+            test("binding disabled to false enables the widget", function() {
+                var dom = $('<input data-bind="disabled:disabled" data-role="slider" />');
+
+                var observable = kendo.observable({
+                    disabled: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.is(":disabled"));
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
