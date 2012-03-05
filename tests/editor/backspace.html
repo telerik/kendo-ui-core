@@ -1,99 +1,99 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-$("#Editor1").kendoEditor({ value: "foo" });
+            $("#Editor1").kendoEditor({ value: "foo" });
 
-module("Editor / Backspace", {
-    setup: function() {
-        editor = getEditor();
-        editor.focus();
-    }
-});
+            module("Editor / Backspace", {
+                setup: function() {
+                    editor = getEditor();
+                    editor.focus();
+                }
+            });
 
-// the keyboard event can be triggered only in mozilla
-if ($.browser.mozilla) {
+            // the keyboard event can be triggered only in mozilla
+            if ($.browser.mozilla) {
 
-    function triggerBackspace() {
-        var keyEvent = editor.document.createEvent("KeyboardEvent");
-        keyEvent.initKeyEvent("keydown", true, true, null, false, false, false, false, 8, 0);
-        editor.document.dispatchEvent(keyEvent);
-        keyEvent.initKeyEvent("keyup", true, true, null, false, false, false, false, 8, 0);
-        editor.document.dispatchEvent(keyEvent);
-        keyEvent.initKeyEvent("keypress", true, true, null, false, false, false, false, 8, 0);
-        editor.document.dispatchEvent(keyEvent);
-    }
+                function triggerBackspace() {
+                    var keyEvent = editor.document.createEvent("KeyboardEvent");
+                    keyEvent.initKeyEvent("keydown", true, true, null, false, false, false, false, 8, 0);
+                    editor.document.dispatchEvent(keyEvent);
+                    keyEvent.initKeyEvent("keyup", true, true, null, false, false, false, false, 8, 0);
+                    editor.document.dispatchEvent(keyEvent);
+                    keyEvent.initKeyEvent("keypress", true, true, null, false, false, false, false, 8, 0);
+                    editor.document.dispatchEvent(keyEvent);
+                }
 
-    test('hitting backspace deletes text content', function() {
-        editor.value('<p></p><p>f</p>');
-        var range = editor.createRange();
-        range.setStart(editor.body.lastChild.firstChild, 1);
-        range.collapse(true);
+                test('hitting backspace deletes text content', function() {
+                    editor.value('<p></p><p>f</p>');
+                    var range = editor.createRange();
+                    range.setStart(editor.body.lastChild.firstChild, 1);
+                    range.collapse(true);
 
-        editor.selectRange(range);
+                    editor.selectRange(range);
 
-        triggerBackspace();
-        editor.getRange().insertNode(editor.document.createElement('a'));
+                    triggerBackspace();
+                    editor.getRange().insertNode(editor.document.createElement('a'));
 
-        equals(editor.value(), '<p></p><p><a></a></p>');
-    });
+                    equals(editor.value(), '<p></p><p><a></a></p>');
+                });
 
-    test('hitting backspace deletes current empty paragraph and moves to previous one', function() {
-        editor.value('<p></p><p></p>');
-        var range = editor.createRange();
-        range.setStart(editor.body.lastChild, 0);
-        range.collapse(true);
+                test('hitting backspace deletes current empty paragraph and moves to previous one', function() {
+                    editor.value('<p></p><p></p>');
+                    var range = editor.createRange();
+                    range.setStart(editor.body.lastChild, 0);
+                    range.collapse(true);
 
-        editor.selectRange(range);
+                    editor.selectRange(range);
 
-        triggerBackspace();
+                    triggerBackspace();
 
-        range = editor.getRange();
+                    range = editor.getRange();
 
-        equals(range.startContainer, editor.body.firstChild);
-        equals(range.startOffset, 0);
-        equals(range.collapsed, true);
-    });
-}
+                    equals(range.startContainer, editor.body.firstChild);
+                    equals(range.startOffset, 0);
+                    equals(range.collapsed, true);
+                });
+            }
 
-test('dummy', function() { ok(true) });
+            test('dummy', function() { ok(true) });
 
-</script>
+        </script>
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
 
-</body>
+    </body>
 </html>
