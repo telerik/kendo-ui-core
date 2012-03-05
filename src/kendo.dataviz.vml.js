@@ -646,22 +646,13 @@
         }
     });
 
-    var VMLLinearGradient = ViewElement.extend({
+    var VMLGradient = ViewElement.extend({
         init: function(options) {
             var gradient = this;
             ViewElement.fn.init.call(gradient, options);
-
-            gradient.template = VMLLinearGradient.template;
-            if (!gradient.template) {
-                gradient.template = VMLLinearGradient.template = template(
-                    "<kvml:fill type='gradient' angle='#= 270 - d.options.rotation #' " +
-                    "colors='#= d.renderColors() #' opacity='#= d.options.opacity #' />"
-                );
-            }
         },
 
         options: {
-            rotation: 0,
             opacity: 1
         },
 
@@ -687,10 +678,29 @@
         }
     });
 
-    var VMLRadialGradient = ViewElement.extend({
+    var VMLLinearGradient = VMLGradient.extend({
         init: function(options) {
             var gradient = this;
-            ViewElement.fn.init.call(gradient, options);
+            VMLGradient.fn.init.call(gradient, options);
+
+            gradient.template = VMLLinearGradient.template;
+            if (!gradient.template) {
+                gradient.template = VMLLinearGradient.template = template(
+                    "<kvml:fill type='gradient' angle='#= 270 - d.options.rotation #' " +
+                    "colors='#= d.renderColors() #' opacity='#= d.options.opacity #' />"
+                );
+            }
+        },
+
+        options: {
+            rotation: 0
+        }
+    });
+
+    var VMLRadialGradient = VMLGradient.extend({
+        init: function(options) {
+            var gradient = this;
+            VMLGradient.fn.init.call(gradient, options);
 
             gradient.template = VMLRadialGradient.template;
             if (!gradient.template) {
@@ -701,47 +711,26 @@
             }
         },
 
-        options: {
-            rotation: 0,
-            opacity: 1
-        },
-
-        renderColors: function() {
-            var gradient = this,
-                options = gradient.options,
-                stops = options.stops,
-                currentStop,
-                i,
-                length = stops.length,
-                output = [],
-                round = math.round;
-
-            for (i = 0; i < length; i++) {
-                currentStop = stops[i];
-                output.push(
-                    round(currentStop.offset * 100) + "% " +
-                    currentStop.color
-                );
-            }
-
-            return output.join(",");
-        },
-
         focusPosition: function() {
-            var bbox = this.options.bbox,
-                cx = this.options.cx,
-                cy = this.options.cy;
+            var options = this.options,
+                bbox = options.bbox,
+                cx = options.cx,
+                cy = options.cy,
+                focusx = Math.min(1, (cx - bbox.x1) / bbox.width()),
+                focusy = Math.min(1, (cy - bbox.y1) / bbox.height());
 
-                return Math.min(1, round((cx - bbox.x1) / bbox.width(), COORD_PRECISION)) + " " +
-                Math.min(1, round((cy - bbox.y1) / bbox.height(), COORD_PRECISION));
+            return round(focusx, COORD_PRECISION) + " " +
+                   round(focusy, COORD_PRECISION);
         },
 
         firstColor: function() {
-            return this.options.stops[0].color;
+            var stops = this.options.stops;
+            return stops[0].color;
         },
 
         lastColor: function() {
-            return this.options.stops[this.options.stops.length - 1].color;
+            var stops = this.options.stops;
+            return stops[stops.length - 1].color;
         }
     });
 
