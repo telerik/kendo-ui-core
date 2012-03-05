@@ -542,7 +542,7 @@
             stylesheets: [],
             dialogOptions: {
                 modal: true, resizable: false, draggable: true,
-                effects: {list:[{name:'toggle'}]}
+                animation: false
             },
             fontName: [
                 { Text: localization.fontNameInherit,  Value: 'inherit' },
