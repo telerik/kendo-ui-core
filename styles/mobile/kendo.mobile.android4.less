@@ -758,3 +758,93 @@
     height: 2rem;
     display: inline-block;
 }
+
+/* Forms */
+
+.km-android select,
+.km-android input
+{
+    font-size: 1.2rem;
+}
+
+.km-android input[type=text],
+.km-android input[type=date],
+.km-android input[type=time],
+.km-android input[type=datetime],
+.km-android select:not([multiple])
+{
+    border: 0;
+    border-bottom: 1px solid rgba(0,0,0,.3);
+    margin-bottom: 1px;
+    padding: .4em;
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    .border-radius(0);
+    .box-sizing(padding-box);
+}
+
+.km-android input[type=text]
+{
+    .user-select(text);
+    background-clip: padding-box;
+    background: linear-gradient(top, rgba(0,0,0,0) 90%, rgba(0,0,0,.3) 90%, rgba(0,0,0,.3)),
+                linear-gradient(top, rgba(0,0,0,0) 90%, rgba(0,0,0,.3) 90%, rgba(0,0,0,.3)) transparent;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+    background-size: 1px 100%;
+}
+
+.km-android input[type=text]:focus
+{
+    background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)),
+                linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6));
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+    background-size: 2px 100%;
+    margin-bottom: 0;
+    border-bottom: 2px solid rgba(40,170,220,.6);
+}
+
+.km-android input[type=date],
+.km-android input[type=time],
+.km-android input[type=datetime],
+.km-android select:not([multiple])
+{
+    background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;
+    background-clip: padding-box;
+    min-width: 6em;
+    .user-select(none);
+    background-size: auto 100%;
+}
+
+.km-android input[type=date]:active,
+.km-android input[type=time]:active,
+.km-android input[type=datetime]:active,
+.km-android input[type=date]:focus,
+.km-android input[type=time]:focus,
+.km-android input[type=datetime]:focus,
+.km-android select:not([multiple]):focus
+{
+    color: #fff;
+    background-color: rgba(51,181,229,.6);
+}
+
+.km-android select:not([multiple]):focus option
+{
+    color: #000;
+    background-color: #fff;
+}
+
+.km-android input[type=text],
+.km-android input[type=date],
+.km-android input[type=time],
+.km-android input[type=datetime]
+{
+    .user-select(text);
+}
+
+.km-android input[readonly]
+{
+    .user-select(none);
+}
