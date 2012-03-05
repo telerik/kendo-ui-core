@@ -29,8 +29,9 @@
         <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
         <script>
+            var sequential = true;
 
-            var ImageCommand;
+            var ImageCommand = kendo.ui.Editor.ImageCommand;
 
             $("#Editor1").kendoEditor();
 
@@ -45,11 +46,9 @@
             module("Editor / ImageCommand", {
                 setup: function() {
                     editor = getEditor();
-                    ImageCommand = kendo.ui.Editor.ImageCommand;
                 },
                 teardown: function() {
-                    var wnd = $('.k-window').data('tWindow');
-                    if (wnd) wnd.destroy();
+                    $('.k-window,.k-overlay').remove()
                 }
             });
 
@@ -64,7 +63,7 @@
                 var range = createRangeFromText(editor, '|foo|');
                 execImageCommandOnRange(range);
 
-                $('.k-dialog-close').click();
+                $('.k-window-action .k-close').click();
                 equal($('.k-window').length, 0)
             });
 
@@ -85,7 +84,7 @@
                 equal(editor.value(), '<img alt="" src="foo" />')
             });
 
-            test('clicking insert does not inserts image if url is not set', function() {
+            test('clicking insert does not insert image if url is not set', function() {
                 var range = createRangeFromText(editor, '|foo|');
                 execImageCommandOnRange(range);
 
@@ -123,8 +122,8 @@
                 e.keyCode = 13;
 
                 $('#k-editor-image-url')
-                .val('http://foo')
-                .trigger(e);
+                    .val('http://foo')
+                    .trigger(e);
 
                 equal(editor.value(), '<img alt="" src="http://foo" />')
                 equal($('.k-window').length, 0);
@@ -154,8 +153,7 @@
                 e.type = 'keydown';
                 e.keyCode = 13;
 
-                $('#k-editor-image-url')
-                .val('http://foo')
+                $('#k-editor-image-url').val('http://foo')
                 $('#k-editor-image-title').trigger(e);
 
                 equal(editor.value(), '<img alt="" src="http://foo" />')
@@ -244,8 +242,7 @@
                 var range = createRangeFromText(editor, '|foo|bar');
                 execImageCommandOnRange(range);
 
-                $('#k-editor-image-url')
-                .val('http://foo');
+                $('#k-editor-image-url').val('http://foo');
 
                 $('.k-dialog-insert').click();
 
