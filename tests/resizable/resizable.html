@@ -93,9 +93,9 @@
                             called = true;
                         }
                     });
-                handle.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                handle.trigger( { type: "mousemove", pageX: 0, pageY: 10 } );
-                handle.trigger( { type: "mousemove", pageX: 0, pageY: 11 } );
+                handle.trigger(ev({ type: "mousedown", pageX:1, pageY: 1 }));
+                handle.trigger( { type: "mousemove", pageX: 1, pageY: 10 } );
+                handle.trigger( { type: "mousemove", pageX: 1, pageY: 11 } );
                 ok(called);
             });
 
@@ -107,12 +107,13 @@
                             called = true;
                         }
                     });
-                handle.trigger(ev({ type: "mousedown", pageX:0, pageY: 0 }));
-                handle.trigger( { type: "mousemove", pageX: 10, pageY: 0 } );
-                handle.trigger( { type: "mousemove", pageX: 11, pageY: 0 } );
-                $(document).trigger( { type: "mouseup" } );
+                handle.trigger(ev({ type: "mousedown", pageX:1, pageY: 1 }));
+                handle.trigger( { type: "mousemove", pageX: 10, pageY: 1 } );
+                handle.trigger( { type: "mousemove", pageX: 11, pageY: 1 } );
+                $(document.documentElement).trigger( { type: "mouseup" } );
                 ok(called);
             });
+
             test("hint is moved during horizontal dragging", function() {
                 var resizable = setup({
                         handle: "span",
