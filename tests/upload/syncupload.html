@@ -133,6 +133,15 @@
                 ok(removeFired);
             });
 
+            test("remove event contains list of files", 1, function() {
+                uploadInstance = createUpload({ "remove" :
+                    (function(e) { equals(e.files.length, 1); })
+                });
+
+                simulateFileSelect();
+                simulateRemoveClick();
+            });
+
             test("cancelling remove prevents file from being removed", function() {
                 uploadInstance = createUpload({ "remove" : (function(e) { e.preventDefault(); }) });
 
