@@ -114,6 +114,44 @@
                 dom.trigger("click");
             });
 
+            asyncTest("click event binding is detached", function() {
+                expect(1);
+
+                var dom = $('<span data-bind="click:foo"/>');
+
+                kendo.bind(dom, {
+                    foo: function() {
+                        start();
+                        ok(true, "click is raised");
+                    }
+                });
+
+                dom.trigger("click");
+
+                kendo.unbind(dom);
+
+                dom.trigger("click");
+            });
+
+            asyncTest("events binding is detached", function() {
+                expect(1);
+
+                var dom = $('<span data-bind="event: { click:foo }"/>');
+
+                kendo.bind(dom, {
+                    foo: function() {
+                        start();
+                        ok(true, "click is raised");
+                    }
+                });
+
+                dom.trigger("click");
+
+                kendo.unbind(dom);
+
+                dom.trigger("click");
+            });
+
             asyncTest("change binding", function() {
                 expect(1);
 

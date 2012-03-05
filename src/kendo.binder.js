@@ -177,14 +177,34 @@
     });
 
     binders.event = Binder.extend({
+        init: function(element, bindings, options) {
+            Binder.fn.init.call(this, element, bindings, options);
+            this.handlers = {};
+        },
+
         refresh: function(key) {
-            $(this.element).bind(key, this.bindings.event[key].get());
+            var handler = this.handlers[key] = this.bindings.event[key].get();
+
+            $(this.element).bind(key, handler);
+        },
+
+        destroy: function() {
+            var element = $(this.element),
+                handler;
+
+            for (handler in this.handlers) {
+                element.unbind(handler, this.handlers[handler]);
+            }
         }
     });
 
     binders.click = Binder.extend({
         refresh: function() {
-            $(this.element).click(this.bindings.click.get());
+            this.handler = this.bindings.click.get();
+            $(this.element).click(this.handler);
+        },
+        destroy: function() {
+            $(this.element).unbind("click", this.handler);
         }
     });
 
