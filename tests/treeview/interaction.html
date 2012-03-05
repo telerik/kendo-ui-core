@@ -144,8 +144,7 @@
                 sourceNode
                     .trigger(extend({ type: "mousedown" }, sourcePosition));
 
-                destinationNode
-                    .trigger(extend({ type: "mousemove"}, destinationPosition))
+                $(document.documentElement)
                     .trigger(extend({ type: "mousemove"}, destinationPosition))
                     .trigger(extend({ type: "mouseup"}, destinationPosition));
             }

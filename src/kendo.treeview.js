@@ -1167,6 +1167,10 @@
            hint: function(node) {
                return templates.dragClue({ text: node.text() });
            },
+           cursorOffset: {
+               left: 10,
+               top: kendo.support.touch ? -40 / kendo.support.zoomLevel() : 10
+           },
            dragstart: proxy(that.dragstart, that),
            drag: proxy(that.drag, that),
            dragend: proxy(that.dragend, that)

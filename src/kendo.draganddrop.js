@@ -107,6 +107,7 @@
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
                 .on("dragstart", false);
 
+            that.filter = options.filter;
             that.threshold = options.threshold || 0;
             that.bind([TAP, START, MOVE, END], options);
         },
@@ -122,12 +123,18 @@
 
         _start: function(e) {
             var that = this,
+                filter = that.filter,
                 originalEvent = e.originalEvent,
                 touches = originalEvent && originalEvent.changedTouches,
                 touch = touches && touches[0];
 
-
             if (that.pressed) { return; }
+
+            if (filter) {
+                that.target = $(e.target).is(filter) ? $(e.target) : $(e.target).closest(filter);
+            } else {
+                that.target = that.element;
+            }
 
             that.pressed = true;
             that.moved = false;
@@ -452,16 +459,9 @@
         _start: function(e) {
             var that = this,
                 options = that.options,
-                originalEvent = e.event,
-                filter = that.options.filter,
                 hint = options.hint;
 
-            if (filter) {
-                that.currentTarget = $(originalEvent.target).is(filter) ? $(originalEvent.target) : $(originalEvent.target).closest(filter);
-            } else {
-                that.currentTarget = that.element;
-            }
-
+            that.currentTarget = that.drag.target;
             if (hint) {
                 that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
 
@@ -561,10 +561,8 @@
         _trigger: function(eventName, e) {
             var that = this;
 
-            return that.trigger(eventName, extend({}, e, {
-                currentTarget: that.currentTarget,
-                pageX: e.x.location,
-                pageY: e.y.location
+            return that.trigger(eventName, extend({}, e.event, {
+                currentTarget: that.currentTarget
             }));
         },
 
