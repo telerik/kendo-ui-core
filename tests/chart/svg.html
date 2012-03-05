@@ -24,10 +24,26 @@
                 contentElementStub = {
                     render: function() { return "Content"; }
                 },
-                gradient = {
+                linearGradient = {
                     id: "testGradient",
                     type: "linear",
                     rotation: 0,
+                    stops: [{
+                        offset: 0,
+                        color: "#f00",
+                        opacity: 1
+                    }, {
+                        offset: 1,
+                        color: "#00f",
+                        opacity: 1
+                    }]
+                },
+                radialGradient = {
+                    id: "testGradient",
+                    type: "radial",
+                    cx: 25,
+                    cy: 50,
+                    r: 100,
                     stops: [{
                         offset: 0,
                         color: "#f00",
@@ -264,7 +280,7 @@
                 module("SVGView / Gradient fill", {
                     setup: function() {
                         view = new dataviz.SVGView();
-                        dataviz.Gradients.test = gradient;
+                        dataviz.Gradients.test = linearGradient;
                     },
                     teardown: function() {
                         dataviz.Gradients.test = null;
@@ -288,12 +304,12 @@
 
                 test("defines gradient", function() {
                     var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    ok(view.definitions[gradient.id]);
+                    ok(view.definitions[linearGradient.id]);
                 });
 
                 test("reuses existing gradient definition", function() {
                     var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
-                    view.definitions[gradient.id] = { options: { id: "existingGradient" } };
+                    view.definitions[linearGradient.id] = { options: { id: "existingGradient" } };
                     path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
 
                     equals(path.options.fill, "url(#existingGradient)");
@@ -921,6 +937,78 @@
                 test("does not decorate element if no overlay specified", function() {
                     var rect = view.createRect(new Box2D());
                     ok(rect instanceof dataviz.SVGPath);
+                });
+
+            })();
+
+            (function() {
+                var gradient;
+
+                // ------------------------------------------------------------
+                module("SVGLinearGradient", {
+                    setup: function() {
+                        gradient = new dataviz.SVGLinearGradient(linearGradient);
+                    }
+                });
+
+                test("renders id", function() {
+                    ok(gradient.render().indexOf("id='testGradient'") > -1);
+                });
+
+                test("renders rotation", function() {
+                    ok(gradient.render().indexOf("gradientTransform='rotate(0)'") > -1);
+                });
+
+                test("renders stops", function() {
+                    console.log(gradient.render());
+                    ok(gradient.render().indexOf(
+                        "<stop offset='0%' style='stop-color:#f00;stop-opacity:1' />" +
+                        "<stop offset='100%' style='stop-color:#00f;stop-opacity:1' />") > -1
+                    );
+                });
+
+            })();
+
+            (function() {
+                var gradient;
+
+                // ------------------------------------------------------------
+                module("SVGRadialGradient", {
+                    setup: function() {
+                        gradient = new dataviz.SVGRadialGradient(radialGradient);
+                    }
+                });
+
+                test("renders id", function() {
+                    ok(gradient.render().indexOf("id='testGradient'") > -1);
+                });
+
+                test("renders stops", function() {
+                    console.log(gradient.render());
+                    ok(gradient.render().indexOf(
+                        "<stop offset='0%' style='stop-color:#f00;stop-opacity:1' />" +
+                        "<stop offset='100%' style='stop-color:#00f;stop-opacity:1' />") > -1
+                    );
+                });
+
+                test("renders cx", function() {
+                    ok(gradient.render().indexOf("cx='25'") > -1);
+                });
+
+                test("renders cy", function() {
+                    ok(gradient.render().indexOf("cy='50'") > -1);
+                });
+
+                test("renders fx", function() {
+                    ok(gradient.render().indexOf("fx='25'") > -1);
+                });
+
+                test("renders fy", function() {
+                    ok(gradient.render().indexOf("fy='50'") > -1);
+                });
+
+                test("renders r", function() {
+                    ok(gradient.render().indexOf("r='100'") > -1);
                 });
 
             })();
