@@ -61,12 +61,8 @@
         },
 
         options: {
-            shape: "needle",
             color: "#ea7001",
             value: 0,
-            cap: {
-                size: 0.05
-            },
             animation: {
                 type: POINTER
             }
@@ -89,6 +85,39 @@
             pointer.repaint();
         },
 
+        getViewElements: function(view) {
+            var pointer = this,
+                shape = pointer.options.shape,
+                elements = pointer.renderNeedle(view);
+
+            pointer.elements = elements;
+
+            return elements;
+        }
+    });
+
+    var RadialPointer = Pointer.extend({
+        options: {
+            shape: "needle",
+            cap: {
+                size: 0.05
+            }
+        },
+
+        reflow: function() {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                ring = scale.ring,
+                c = ring.c,
+                capSize = ring.r * options.cap.size;
+
+            pointer.box = new Box2D(
+                c.x - capSize, c.y - capSize,
+                c.x + capSize, c.y + capSize
+            );
+        },
+
         repaint: function() {
             var pointer = this,
                 scale = pointer.scale,
@@ -108,20 +137,6 @@
                 animation.setup();
                 animation.play();
             }
-        },
-
-        reflow: function() {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                ring = scale.ring,
-                c = ring.c,
-                capSize = ring.r * options.cap.size;
-
-            pointer.box = new Box2D(
-                c.x - capSize, c.y - capSize,
-                c.x + capSize, c.y + capSize
-            );
         },
 
         renderNeedle: function(view) {
@@ -162,16 +177,6 @@
                 ], true, options),
                 view.createCircle([center.x, center.y], capSize, { fill: options.cap.color || options.color })
             ];
-        },
-
-        getViewElements: function(view) {
-            var pointer = this,
-                shape = pointer.options.shape,
-                elements = pointer.renderNeedle(view);
-
-            pointer.elements = elements;
-
-            return elements;
         }
     });
 
@@ -560,7 +565,7 @@
 
             scale = plotArea.scale = new RadialScale(options.scale);
             plotArea.append(plotArea.scale);
-            plotArea.pointer = new Pointer(scale, options.pointer);
+            plotArea.pointer = new RadialPointer(scale, options.pointer);
             plotArea.append(plotArea.pointer);
         }
     });
@@ -654,7 +659,7 @@
 
     deepExtend(dataviz, {
         GaugePlotArea: GaugePlotArea,
-        Pointer: Pointer,
+        RadialPointer: RadialPointer,
         PointerAnimationDecorator: PointerAnimationDecorator,
         RadialScale: RadialScale
     });
