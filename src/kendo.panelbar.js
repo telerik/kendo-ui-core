@@ -196,7 +196,7 @@
         MOUSELEAVE = "mouseleave",
         CONTENTLOAD = "contentLoad",
         ACTIVECLASS = ".k-state-active",
-        GROUPS = "> .k-group",
+        GROUPS = "> .k-panel",
         CONTENTS = "> .k-content",
         SELECTEDCLASS = ".k-state-selected",
         DISABLEDCLASS = ".k-state-disabled",
@@ -292,7 +292,7 @@
                 return group.expanded !== true ? " style='display:none'" : "";
             },
             groupCssClass: function(group) {
-                return "k-group";
+                return "k-group k-panel";
             },
             contentAttributes: function(content) {
                 return content.active !== true ? " style='display:none'" : "";
@@ -305,7 +305,7 @@
             }
         };
 
-    function updateItemClasses (item, menuElement) {
+    function updateItemClasses (item, panelElement) {
         item = $(item).addClass("k-item");
 
         item
@@ -344,7 +344,7 @@
             }
         });
 
-        menuElement
+        panelElement
             .find(" > li > ." + LINK)
             .addClass("k-header");
     }
@@ -355,7 +355,7 @@
         items.children(".k-link").children(".k-icon").remove();
 
         items
-            .filter(":has(.k-group),:has(.k-content)")
+            .filter(":has(.k-panel),:has(.k-content)")
             .children(".k-link:not(:has([class*=k-arrow]))")
             .each(function () {
                 var item = $(this),
@@ -1007,7 +1007,7 @@
         append: function (item, referenceItem) {
             referenceItem = $(referenceItem);
 
-            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group") : null);
+            var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find(GROUPS) : null);
 
             each(inserted.items, function (idx) {
                 inserted.group.append(this);
@@ -1265,14 +1265,19 @@
 
             that.element.addClass("k-widget k-reset k-header k-panelbar");
 
-            var items = that.element
-                            .find("li > ul")
-                            .addClass("k-group")
-                            .end()
-                            .find("li:not(" + ACTIVECLASS + ") > ul")
+            var panels = that.element
+                                .find("li > ul")
+                                .not(function () {
+                                        return !!$(this).parentsUntil(".k-panelbar", "div").length;
+                                    })
+                                .addClass("k-group k-panel")
+                                .add(that.element);
+
+            var items = panels
+                            .find("> li:not(" + ACTIVECLASS + ") > ul")
                             .css({ display: "none" })
                             .end()
-                            .find("> li,.k-group > li");
+                            .find("> li");
 
             items.each(function () {
                 updateItemClasses(this, that.element);
@@ -1339,7 +1344,7 @@
 
         _toggleItem: function (element, isVisible, e) {
             var that = this,
-                childGroup = element.find("> .k-group");
+                childGroup = element.find(GROUPS);
 
             if (childGroup.length) {
 

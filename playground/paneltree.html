@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../src/jquery.js"></script>
+    <script type="text/javascript" src="../src/kendo.core.js"></script>
+    <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.panelbar.js"></script>
+    <script type="text/javascript" src="../src/kendo.data.js"></script>
+    <script type="text/javascript" src="../src/kendo.treeview.js"></script>
+    <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+    <style type="text/css">
+        html
+        {
+            font: 12px Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <ul id="formNavPanel">
+            <li>Mailbox
+                <ul>
+                    <li>Test 1
+                        <ul>
+                            <li>Test 2
+                                <div>
+                                    <ul id="forms-1">
+                                        <li id="form-10">Inbox
+                                            <ul>
+                                                <li>SubItem 1</li>
+                                                <li>SubItem 2</li>
+                                                <li>SubItem 3</li>
+                                            </ul>
+                                        </li>
+                                        <li id="form-11">Unread
+                                            <ul>
+                                                <li>SubItem 1</li>
+                                                <li>SubItem 2</li>
+                                                <li>SubItem 3</li>
+                                            </ul>
+                                        </li>
+                                        <li id="form-12">Outbox</li>
+                                        <li id="form-13">Draft</li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        <li>Hailbox
+            <ul>
+                <li>Test 1
+                    <ul>
+                        <li>Test 2
+                            <div>
+                                <ul>
+                                    <li>Inbox
+                                        <ul>
+                                            <li>SubItem 1
+                                                <ul id="panelbarings">
+                                                    <li>Inbox
+                                                        <ul>
+                                                            <li>SubItem 1</li>
+                                                            <li>SubItem 2</li>
+                                                            <li>SubItem 3</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Unread
+                                                        <ul>
+                                                            <li>SubItem 1</li>
+                                                            <li>SubItem 2</li>
+                                                            <li>SubItem 3</li>
+                                                        </ul>
+                                                    </li>
+                                                    <li>Outbox</li>
+                                                    <li>Draft</li>
+                                                </ul>
+                                            </li>
+                                            <li>SubItem 2</li>
+                                            <li>SubItem 3</li>
+                                        </ul>
+                                    </li>
+                                    <li>Unread
+                                        <ul>
+                                            <li>SubItem 1</li>
+                                            <li>SubItem 2</li>
+                                            <li>SubItem 3</li>
+                                        </ul>
+                                    </li>
+                                    <li>Outbox</li>
+                                    <li>Draft</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                    </ul>
+                </li>
+                <li>Test 1
+                    <ul>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                    </ul>
+                </li>
+                <li>Test 1
+                    <ul>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                        <li>Test 2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+            <li>Tender
+                <div>
+                    <ul id="forms-2">
+                            <li id="form-20">Tender Document</li>
+                            <li id="form-21">Decision Required</li>
+                            <li id="form-22">Request for Information</li>
+                            <li id="form-23">Response</li>
+                    </ul>
+                </div>
+            </li>
+            <li>Design
+                <div>
+                    <ul id="forms-3">
+                            <li id="form-30">Design Document</li>
+                            <li id="form-31">Design Variation</li>
+                            <li id="form-32">Meeting Request</li>
+                    </ul>
+                </div>
+            </li>
+    </ul>
+    <ul id="forms-4">
+        <li>Inbox
+            <ul>
+                <li>SubItem 1</li>
+                <li>SubItem 2</li>
+                <li>SubItem 3</li>
+            </ul>
+        </li>
+        <li>Unread
+            <ul>
+                <li>SubItem 1</li>
+                <li>SubItem 2</li>
+                <li>SubItem 3</li>
+            </ul>
+        </li>
+        <li>Outbox</li>
+        <li>Draft</li>
+    </ul>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#formNavPanel").kendoPanelBar({
+                expandMode: "single"
+            });
+            $("#panelbarings").kendoPanelBar({
+                expandMode: "single"
+            });
+            $("#forms-1").kendoTreeView();
+            $("#forms-2").kendoTreeView();
+            $("#forms-3").kendoTreeView();
+            $("#forms-4").kendoTreeView();
+        });
+    </script>
+</body>
+</html>
