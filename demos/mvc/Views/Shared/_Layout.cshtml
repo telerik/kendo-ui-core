@@ -78,6 +78,12 @@
 
             </div>
         }
+        @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
+            <div id="examplesThemeChooser">
+                <label for="skinSelector">Theme</label>
+                <ul id="skinSelector" class="themeChooser" />
+            </div>
+        }
 
         @RenderBody()
     </div>
