@@ -471,7 +471,7 @@
                 cy = round(config.c.y),
                 startAngle = config.startAngle,
                 endAngle = config.angle + startAngle,
-                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
+                endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.22 : endAngle,
                 // outer bounding box
                 obb = {
                     l: cx - r,
