@@ -140,11 +140,30 @@
             }, {
                 "text": "Gauge labels",
                 "url": "radial-gauge/gauge-labels.html"
-            }, {
+            }],
+            "name": "radial-gauge"
+        }
+    ],
+    "Sample Dashboard": [
+        {
+            "text": "High performance chart",
+            "spriteCssClass": "highPerfIcon",
+            "expanded": true,
+            "items": [{
+                "text": "High performance",
+                "url": "overview/high-performance.html"
+            }],
+            "name": "highperformancechart"
+        },
+        {
+            "text": "Car dashboard",
+            "spriteCssClass": "carDashboardIcon",
+            "expanded": true,
+            "items": [{
                 "text": "Car dashboard",
                 "url": "radial-gauge/car-dashboard.html"
             }],
-            "name": "radial-gauge"
+            "name": "cardashboard"
         }
     ]
 }
