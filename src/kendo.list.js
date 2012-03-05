@@ -329,6 +329,17 @@
             this.popup.close();
         },
 
+        dataItem: function() {
+            var that = this,
+                index = that.selectedIndex;
+
+            if (index > -1) {
+                return that.dataSource.view()[index];
+            } else {
+                return null;
+            }
+        },
+
         _accessor: function(value, idx) {
             var element = this.element,
                 isSelect = element.is(SELECT),

@@ -443,6 +443,18 @@
         */
 
         /**
+        * Gets the dataItem of the selected LI element.
+        * @name kendo.ui.DropDownList#dataItem
+        * @function
+        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @example
+        * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
+        *
+        * // get the dataItem.
+        * var dataItem = dropdownlist.dataItem();
+        */
+
+        /**
         * Enables/disables the dropdownlist widget
         * @param {Boolean} enable Desired state
         * @example
