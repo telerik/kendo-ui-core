@@ -84,6 +84,12 @@ var IndentFormatter = Class.extend({
                 } else {
                     var marginLeft = parseInt(indent(formatNode)) + 30;
                     indent(formatNode, marginLeft);
+
+                    for (var targetIndex = 0; targetIndex < targets.length; targetIndex++) {
+                        if ($.contains(formatNode, targets[targetIndex])) {
+                            targets.splice(targetIndex, 1);
+                        }
+                    }
                 }
             }
         } else {
@@ -105,6 +111,11 @@ var IndentFormatter = Class.extend({
                 var $listParent = $list.parent();
                 // $listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
                 if ($listParent.is('li,ul,ol') && !indent($list[0])) {
+                    // skip already processed nodes
+                    if (targetNode && $.contains(targetNode, $listParent[0])) {
+                        continue;
+                    }
+
                     var $siblings = $formatNode.nextAll('li');
                     if ($siblings.length)
                         $($list[0].cloneNode(false)).appendTo($formatNode).append($siblings);

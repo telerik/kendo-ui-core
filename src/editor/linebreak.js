@@ -101,8 +101,14 @@ var ParagraphCommand = Command.extend({
                     node = node.parentNode;
                 }
 
-                if (node && !dom.is(node, 'img') && node.innerHTML == '') {
-                    node.innerHTML = emptyParagraphContent;
+                if (node && !dom.is(node, 'img')) {
+                    while (node.firstChild && node.firstChild.nodeType == 1) {
+                        node = node.firstChild;
+                    }
+
+                    if (node.innerHTML == '') {
+                        node.innerHTML = emptyParagraphContent;
+                    }
                 }
             }
 
