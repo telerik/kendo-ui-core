@@ -14,6 +14,7 @@ function ViewStub() {
     log.path = [];
     log.circle = [];
     log.sector = [];
+    log.ring = [];
 }
 
 ViewStub.prototype = {
@@ -68,6 +69,12 @@ ViewStub.prototype = {
 
     createSector: function(sector, style) {
         this.log.sector.push({ sector: sector, style: style });
+
+        return new kendo.dataviz.ViewElement(style);
+    },
+
+    createRing: function(ring, style) {
+        this.log.ring.push({ ring: ring, style: style });
 
         return new kendo.dataviz.ViewElement(style);
     }
