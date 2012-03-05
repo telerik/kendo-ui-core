@@ -292,6 +292,23 @@
                 equal(dropdownlist.value(), "Bar");
             });
 
+            test("dataItem() returns dataItem of the selected LI on init", function() {
+                var select = $("<select><option value=''>Chai</option><option>Bar</option></select>");
+                dropdownlist = new DropDownList(select);
+
+                equal(dropdownlist.selectedIndex, 0);
+                equal(dropdownlist.dataItem(), dropdownlist.dataSource.view()[0]);
+            });
+
+            test("dataItem() returns dataItem of the selected LI element", function() {
+                var select = $("<select><option value=''>Chai</option><option>Bar</option></select>");
+                dropdownlist = new DropDownList(select);
+
+                dropdownlist.select(1);
+                equal(dropdownlist.selectedIndex, 1);
+                equal(dropdownlist.dataItem(), dropdownlist.dataSource.view()[1]);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

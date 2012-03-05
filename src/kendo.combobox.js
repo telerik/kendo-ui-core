@@ -476,23 +476,15 @@
 
         /**
         * Gets the dataItem of the selected LI element.
+        * @name kendo.ui.ComboBox#dataItem
+        * @function
         * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
         * @example
         * var combobox = $("#combobox").data("kendoComboBox");
         *
         * // get the dataItem.
-        * var text = combobox.dataItem();
+        * var dataItem = combobox.dataItem();
         */
-        dataItem: function() {
-            var that = this,
-                index = that.selectedIndex;
-
-            if (index > 0) {
-                return that.dataSource.view()[index];
-            } else {
-                return NULL;
-            }
-        },
 
         /**
         * Closes the drop-down list.
