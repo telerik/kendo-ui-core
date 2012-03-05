@@ -54,9 +54,5 @@ tests.push(
     {
         page: "core/template.html",
         title: "template"
-     },
-    {
-        page: "core/drag.html",
-        title: "drag"
-    }
+     }
 );
