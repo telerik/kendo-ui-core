@@ -19,7 +19,7 @@
                 Gauge = dataviz.ui.Gauge,
                 Box2D = dataviz.Box2D,
                 Point2D = dataviz.Point2D,
-                Pointer = dataviz.Pointer,
+                RadialPointer = dataviz.RadialPointer,
                 pointer,
                 chartBox = new Box2D(0, 0, 400, 300);
 
@@ -37,10 +37,10 @@
                 return scale;
             }
 
-            module("Pointer", {
+            module("RadialPointer", {
                 setup: function() {
 
-                    pointer = new Pointer(stubScale(), {
+                    pointer = new RadialPointer(stubScale(), {
                             type: "needle"
                         });
 
@@ -89,13 +89,13 @@
             });
 
             test("initial pointer value is constrained within scale range", function() {
-                pointer = new Pointer(stubScale(-1, 11), {
+                pointer = new RadialPointer(stubScale(-1, 11), {
                     value: -2
                 });
 
                 equal(pointer.value(), -1);
 
-                pointer = new Pointer(stubScale(0, 11), {
+                pointer = new RadialPointer(stubScale(0, 11), {
                     value: 12
                 });
 
