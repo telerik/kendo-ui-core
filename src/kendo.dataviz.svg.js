@@ -526,30 +526,14 @@
         }
     });
 
-    var SVGLinearGradient = ViewElement.extend({
+    var SVGGradient = ViewElement.extend({
         init: function(options) {
             var gradient = this;
             ViewElement.fn.init.call(gradient, options);
-
-            gradient.template = SVGLinearGradient.template;
-            gradient.stopTemplate = SVGLinearGradient.stopTemplate;
-            if (!gradient.template) {
-                gradient.template = SVGLinearGradient.template = template(
-                    "<linearGradient id='#= d.options.id #' " +
-                    "gradientTransform='rotate(#= d.options.rotation #)'> " +
-                    "#= d.renderStops() #" +
-                    "</linearGradient>"
-                );
-
-                gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
-                    "<stop offset='#= Math.round(d.offset * 100) #%' " +
-                    "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
-            }
         },
 
         options: {
-            id: "",
-            rotation: 0
+            id: ""
         },
 
         renderStops: function() {
@@ -570,11 +554,36 @@
         }
     });
 
-    var SVGRadialGradient = ViewElement.extend({
+    var SVGLinearGradient = SVGGradient.extend({
         init: function(options) {
             var gradient = this;
+            SVGGradient.fn.init.call(gradient, options);
 
-            ViewElement.fn.init.call(gradient, options);
+            gradient.template = SVGLinearGradient.template;
+            gradient.stopTemplate = SVGLinearGradient.stopTemplate;
+            if (!gradient.template) {
+                gradient.template = SVGLinearGradient.template = template(
+                    "<linearGradient id='#= d.options.id #' " +
+                    "gradientTransform='rotate(#= d.options.rotation #)'> " +
+                    "#= d.renderStops() #" +
+                    "</linearGradient>"
+                );
+
+                gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
+                    "<stop offset='#= Math.round(d.offset * 100) #%' " +
+                    "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
+            }
+        },
+
+        options: {
+            rotation: 0
+        }
+    });
+
+    var SVGRadialGradient = SVGGradient.extend({
+        init: function(options) {
+            var gradient = this;
+            SVGGradient.fn.init.call(gradient, options);
 
             gradient.template = SVGRadialGradient.template;
             gradient.stopTemplate = SVGRadialGradient.stopTemplate;
@@ -592,28 +601,6 @@
                     "<stop offset='#= Math.round(d.offset * 100) #%' " +
                     "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
             }
-        },
-
-        options: {
-            id: "",
-            rotation: 0
-        },
-
-        renderStops: function() {
-            var gradient = this,
-                stops = gradient.options.stops,
-                stopTemplate = gradient.stopTemplate,
-                length = stops.length,
-                currentStop,
-                output = '',
-                i;
-
-            for (i = 0; i < length; i++) {
-                currentStop = stops[i];
-                output += stopTemplate(currentStop);
-            }
-
-            return output;
         }
     });
 
