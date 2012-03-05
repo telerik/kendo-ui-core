@@ -1268,7 +1268,7 @@
             var panels = that.element
                                 .find("li > ul")
                                 .not(function () {
-                                        return !!$(this).parentsUntil(".k-panelbar", "div").length;
+                                        return $(this).parentsUntil(".k-panelbar", "div").length;
                                     })
                                 .addClass("k-group k-panel")
                                 .add(that.element);
