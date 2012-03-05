@@ -488,18 +488,23 @@ var Clipboard = Class.extend({
 var MSWordFormatCleaner = Class.extend({
     init: function() {
         this.replacements = [
+            /<\?xml[^>]*>/gi, '',
             /<!--(.|\n)*?-->/g, '', /* comments */
             /&quot;/g, "'", /* encoded quotes (in attributes) */
             /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
             /<br><br>/g, '<BR><BR>',
             /<br>/g, ' ',
+            /<table([^>]*)>(\s|&nbsp;)+<t/gi, '<table$1><t',
+            /<tr[^>]*>(\s|&nbsp;)*<\/tr>/gi, '',
+            /<tbody[^>]*>(\s|&nbsp;)*<\/tbody>/gi, '',
+            /<table[^>]*>(\s|&nbsp;)*<\/table>/gi, '',
             /<BR><BR>/g, '<br>',
             /^\s*(&nbsp;)+/gi, '',
             /(&nbsp;|<br[^>]*>)+\s*$/gi, '',
             /mso-[^;"]*;?/ig, '', /* office-related CSS attributes */
             /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
             /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
-            /<\/?(meta|link|style|o:|v:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:)[^>]*>)?/ig, '', /* external references and namespaced tags */
+            /<\/?(meta|link|style|o:|v:|x:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:|x:)[^>]*>)?/ig, '', /* external references and namespaced tags */
             /style=(["|'])\s*\1/g, '' /* empty style attributes */
         ];
     },

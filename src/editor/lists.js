@@ -173,6 +173,10 @@ var ListFormatter = Class.extend({
 
         var childNodes = dom.significantChildNodes(commonAncestor);
 
+        if (!childNodes.length) {
+            childNodes = nodes;
+        }
+
         if (/table|tbody/.test(dom.name(commonAncestor))) {
             childNodes = $.map(nodes, function(node) { return dom.parentOfType(node, ["td"]) });
         }

@@ -1391,13 +1391,17 @@ var Serializer = {
         }
 
         function child(node, skip) {
-            var nodeType = node.nodeType;
+            var nodeType = node.nodeType,
+                tagName, mapper,
+                parent, value, previous;
+
             if (nodeType == 1) {
-                if (node.attributes['_moz_dirty'] && dom.is(node, 'br'))
+                tagName = dom.name(node);
+
+                if (tagName == "" || (node.attributes['_moz_dirty'] && dom.is(node, 'br')))
                     return;
 
-                var tagName = dom.name(node);
-                var mapper = tagMap[tagName];
+                mapper = tagMap[tagName];
 
                 if (mapper) {
                     mapper.start(node);
@@ -1421,11 +1425,11 @@ var Serializer = {
                     result.push('>');
                 }
             } else if (nodeType == 3) {
-                var value = node.nodeValue;
+                value = node.nodeValue;
 
                 if (!skip && $.support.leadingWhitespace) {
-                    var parent = node.parentNode;
-                    var previous = node.previousSibling;
+                    parent = node.parentNode;
+                    previous = node.previousSibling;
 
                     if (!previous) {
                          previous = (dom.isInline(parent) ? parent : node).previousSibling;
@@ -2902,18 +2906,23 @@ var Clipboard = Class.extend({
 var MSWordFormatCleaner = Class.extend({
     init: function() {
         this.replacements = [
+            /<\?xml[^>]*>/gi, '',
             /<!--(.|\n)*?-->/g, '', /* comments */
             /&quot;/g, "'", /* encoded quotes (in attributes) */
             /(?:<br>&nbsp;[\s\r\n]+|<br>)*(<\/?(h[1-6]|hr|p|div|table|tbody|thead|tfoot|th|tr|td|li|ol|ul|caption|address|pre|form|blockquote|dl|dt|dd|dir|fieldset)[^>]*>)(?:<br>&nbsp;[\s\r\n]+|<br>)*/g, '$1',
             /<br><br>/g, '<BR><BR>',
             /<br>/g, ' ',
+            /<table([^>]*)>(\s|&nbsp;)+<t/gi, '<table$1><t',
+            /<tr[^>]*>(\s|&nbsp;)*<\/tr>/gi, '',
+            /<tbody[^>]*>(\s|&nbsp;)*<\/tbody>/gi, '',
+            /<table[^>]*>(\s|&nbsp;)*<\/table>/gi, '',
             /<BR><BR>/g, '<br>',
             /^\s*(&nbsp;)+/gi, '',
             /(&nbsp;|<br[^>]*>)+\s*$/gi, '',
             /mso-[^;"]*;?/ig, '', /* office-related CSS attributes */
             /<(\/?)b(\s[^>]*)?>/ig, '<$1strong$2>',
             /<(\/?)i(\s[^>]*)?>/ig, '<$1em$2>',
-            /<\/?(meta|link|style|o:|v:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:)[^>]*>)?/ig, '', /* external references and namespaced tags */
+            /<\/?(meta|link|style|o:|v:|x:)[^>]*>((?:.|\n)*?<\/(meta|link|style|o:|v:|x:)[^>]*>)?/ig, '', /* external references and namespaced tags */
             /style=(["|'])\s*\1/g, '' /* empty style attributes */
         ];
     },
@@ -3893,8 +3902,14 @@ var ParagraphCommand = Command.extend({
                     node = node.parentNode;
                 }
 
-                if (node && !dom.is(node, 'img') && node.innerHTML == '') {
-                    node.innerHTML = emptyParagraphContent;
+                if (node && !dom.is(node, 'img')) {
+                    while (node.firstChild && node.firstChild.nodeType == 1) {
+                        node = node.firstChild;
+                    }
+
+                    if (node.innerHTML == '') {
+                        node.innerHTML = emptyParagraphContent;
+                    }
                 }
             }
 
@@ -4130,6 +4145,10 @@ var ListFormatter = Class.extend({
             formatNode = new ListFormatFinder(tag == 'ul' ? 'ol' : 'ul').findSuitable(nodes);
 
         var childNodes = dom.significantChildNodes(commonAncestor);
+
+        if (!childNodes.length) {
+            childNodes = nodes;
+        }
 
         if (/table|tbody/.test(dom.name(commonAncestor))) {
             childNodes = $.map(nodes, function(node) { return dom.parentOfType(node, ["td"]) });
@@ -4645,363 +4664,237 @@ var kendo = window.kendo,
     extend = $.extend,
     deepExtend = kendo.deepExtend;
     Editor = kendo.ui.Editor,
-    dom = Editor.Dom;
-
-///* select box */
-
-//kendo.ui.selectbox = function (element, options) {
-//    var selectedValue;
-//    var $element = $(element).attr("tabIndex", 0);
-//    var $text = $element.find('.k-input');
-
-//    var dropDown = this.dropDown = new $t.dropDown({
-//        //effects: $t.fx.slide.defaults(),
-//        onItemCreate: options.onItemCreate,
-//        onClick: function (e) {
-//            select(options.data[$(e.item).index()].Value);
-//            options.onChange({ value: selectedValue })
-//        }
-//    });
-
-//    function fill() {
-//        if (!dropDown.$items)
-//            dropDown.dataBind(options.data);
-//    }
-
-//    function text(value) {
-//        $text.html(value ? value : '&nbsp;');
-//    }
-
-//    function select(item) {
-//        fill();
-//        var index = -1;
-
-//        for (var i = 0, len = options.data.length; i < len; i++) {
-//            if (options.data[i].Value == item) {
-//                index = i;
-//                break;
-//            }
-//        }
-
-//        if (index != -1) {
-
-//            dropDown.$items
-//                    .removeClass('k-state-selected')
-//                    .eq(index).addClass('k-state-selected');
-
-//            text($(dropDown.$items[index]).text());
-//            selectedValue = options.data[index].Value;
-//        }
-//    }
-
-//    this.value = function (value) {
-//        if (value == undefined)
-//            return selectedValue;
-
-//        select(value);
-
-//        if (selectedValue != value)
-//            text(options.title || value);
-//    }
-
-//    this.close = function () {
-//        dropDown.close();
-//    }
-
-//    text(options.title || $text.text());
-
-//    $element.click(function (e) {
-//        fill();
-//        if (dropDown.isOpened())
-//            dropDown.close();
-//        else
-//            dropDown.open({
-//                offset: $element.offset(),
-//                outerHeight: $element.outerHeight(),
-//                outerWidth: $element.outerWidth(),
-//                zIndex: $t.getElementZIndex($element[0])
-//            });
-//    })
-//    .find('*')
-//    .attr('unselectable', 'on')
-//    .end()
-//    .keydown(function(e) {
-//        var key = e.keyCode, selected, prev, next;
-
-//        if (key === 40) {
-//            if (!dropDown.isOpened()) {
-//                $element.click();
-//            } else {
-//                selected = dropDown.$items.filter(".k-state-selected");
-//                if (!selected[0]) {
-//                    next = dropDown.$items.first();
-//                } else {
-//                    next = selected.next();
-//                }
-//                if (next[0]) {
-//                    selected.removeClass("k-state-selected");
-//                    next.addClass("k-state-selected");
-//                }
-//            }
-//            e.preventDefault();
-//        } else if (key === 38) {
-//            if (dropDown.isOpened()) {
-//                selected = dropDown.$items.filter(".k-state-selected");
-//                prev = selected.prev();
-//                if (prev[0]) {
-//                    selected.removeClass("k-state-selected");
-//                    prev.addClass("k-state-selected");
-//                }
-//            }
-//            e.preventDefault();
-//        } else if (key == 13) {
-//            selected = dropDown.$items.filter(".k-state-selected");
-//            if (selected[0]) {
-//                selected.click();
-//            }
-//            e.preventDefault();
-//        } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
-//            dropDown.close();
-//        }
-//    });
-
-//    if ($.browser.msie) {
-//        $element.focus(function() {
-//            $element.css("outline", "1px dotted #000");
-//        })
-//        .blur(function() {
-//            $element.css("outline", "");
-//        });
-//    }
-
-//    dropDown.$element.css('direction', $element.closest('.k-rtl').length > 0 ? 'rtl' : '');
-
-//    $(document.documentElement).bind('mousedown', $.proxy(function (e) {
-//        var $dropDown = dropDown.$element;
-//        var isDropDown = $dropDown && $dropDown.parent().length > 0;
-
-//        if (isDropDown && !$.contains(element, e.target) && !$.contains($dropDown.parent()[0], e.target)) {
-//            dropDown.close();
-//        }
-
-//    }, this));
-//}
-
-//$.fn.tSelectBox = function (options) {
-//    return $t.create(this, {
-//        name: 'tSelectBox',
-//        init: function (element, options) {
-//            return new $t.selectbox(element, options)
-//        },
-//        options: options
-//    });
-//};
+    dom = Editor.Dom,
+    CHANGE = "change",
+    VISIBLE = ":visible",
+    KSTATESELECTED = "k-state-selected",
+    SELECTEDCLASS = "." + KSTATESELECTED;
 
 /* color picker */
 
 var ColorPicker = Widget.extend({
     init: function(element, options) {
-        var that = this,
-        $element = $(element);
+        var that = this;
 
-        that.element = element;
+        Widget.fn.init.call(that, element, options);
 
-        $.extend(that.options, options);
+        element = that.element;
+
         that.selectedColor = that.options.selectedColor;
 
-        Widget.fn.init.call(that, element);
-
-        $element.attr("tabIndex", 0)
+        element.attr("tabIndex", 0)
                 .click($.proxy(that.click, that))
                 .keydown(function(e) {
-                    var popup = that.popup(), selected, next, prev;
-                    if (e.keyCode == 40) {
-                        if (!popup.is(":visible")) {
+                    var popup = that.popup(),
+                        selected, next, prev,
+                        keyCode = e.keyCode;
+
+                    if (keyCode == 40) {
+                        if (!popup.is(VISIBLE)) {
                             that.open();
                         } else {
-                           selected = popup.find(".k-state-selected");
+                           selected = popup.find(SELECTEDCLASS);
+
                            if (selected[0]) {
                                next = selected.next();
                            } else {
                                next = popup.find("li:first");
                            }
+
                            if (next[0]) {
-                                selected.removeClass("k-state-selected");
-                                next.addClass("k-state-selected");
+                                selected.removeClass(KSTATESELECTED);
+                                next.addClass(KSTATESELECTED);
                            }
                         }
+
                         e.preventDefault();
-                    } else if (e.keyCode == 38) {
-                        if (popup.is(":visible")) {
-                           selected = popup.find(".k-state-selected");
+                    } else if (keyCode == 38) {
+                        if (popup.is(VISIBLE)) {
+                           selected = popup.find(SELECTEDCLASS);
                            prev = selected.prev();
+
                            if (prev[0]) {
-                                selected.removeClass("k-state-selected");
-                                prev.addClass("k-state-selected");
+                                selected.removeClass(KSTATESELECTED);
+                                prev.addClass(KSTATESELECTED);
                            }
                         }
                         e.preventDefault();
-                    } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
+                    } else if (keyCode == 9 || keyCode == 39 || keyCode == 37) {
                         that.close();
-                    } else if (e.keyCode == 13) {
-                       popup.find(".k-state-selected").click();
+                    } else if (keyCode == 13) {
+                       popup.find(SELECTEDCLASS).click();
                        e.preventDefault();
                     }
                 })
-                .find('*')
-                .attr('unselectable', 'on');
+                .find("*")
+                .attr("unselectable", "on");
 
         if ($.browser.msie) {
-            $element.focus(function () {
-                $element.css("outline", "1px dotted #000");
+            element.focus(function () {
+                element.css("outline", "1px dotted #000");
             })
             .blur(function() {
-                $element.css("outline", "");
+                element.css("outline", "");
             });
         }
 
         if (that.selectedColor)
-            $element.find('.k-selected-color').css('background-color', that.selectedColor);
+            element.find(".k-selected-color").css("background-color", that.selectedColor);
 
-        $(element.ownerDocument.documentElement)
-            .bind('mousedown', $.proxy(function (e) {
-                if (!$(e.target).closest('.k-colorpicker-popup').length) {
+        $(element[0].ownerDocument.documentElement)
+            .bind("mousedown", $.proxy(function (e) {
+                if (!$(e.target).closest(".k-colorpicker-popup").length) {
                     this.close();
                 }
             }, that));
 
         that.bind([
-            "change",
+            CHANGE,
             "load"
         ], that.options);
     },
 
     options: {
         name: "ColorPicker",
-        data: '000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7'.split(','),
+        data: "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7".split(","),
         selectedColor: null
     },
 
     select: function(color) {
         var that = this;
+
         if (color) {
             color = dom.toHex(color);
-            if (!that.trigger('change', { value: color })) {
+            if (!that.trigger(CHANGE, { value: color })) {
                 that.value(color);
                 that.close();
             }
-        } else
-            that.trigger('change', { value: that.selectedColor })
+        } else {
+            that.trigger(CHANGE, { value: that.selectedColor })
+        }
     },
 
     open: function() {
         var that = this,
-            $popup = that.popup(),
-            $element = $(that.element),
-            elementPosition = $element.offset();
+            popup = that.popup(),
+            element = that.element,
+            zIndex = "auto",
+            elementPosition = element.offset();
 
-        elementPosition.top += $element.outerHeight();
+        elementPosition.top += element.outerHeight();
 
-        if ($element.closest('.k-rtl').length)
-            elementPosition.left -= $popup.outerWidth() - $element.outerWidth();
+        if (element.closest(".k-rtl").length)
+            elementPosition.left -= popup.outerWidth() - element.outerWidth();
 
-        var zIndex = 'auto';
-
-        $element.parents().andSelf().each(function () {
-            zIndex = $(this).css('zIndex');
+        element.parents().andSelf().each(function () {
+            zIndex = $(this).css("zIndex");
             if (Number(zIndex)) {
                 zIndex = Number(zIndex) + 1;
                 return false;
             }
         });
 
-        kendo.wrap($popup).css($.extend({
-            position: 'absolute',
-            overflow: 'hidden',
+        kendo.wrap(popup).css(extend({
+            position: "absolute",
+            overflow: "hidden",
             zIndex: zIndex
         }, elementPosition));
 
-        $popup
-            .find('.k-item').bind('click', $.proxy(function(e) {
-                var color = $(e.currentTarget, e.target.ownerDocument).find("div").css('background-color');
-                this.select(color);
-            }, that));
+        popup.find(".k-item").bind("click", function(e) {
+                var color = $(e.currentTarget, e.target.ownerDocument).find("div").css("background-color");
+                that.select(color);
+            });
 
-        $popup.kendoAnimate({ effects: "slideIn:down", show: true, duration: 200 });
+        popup.kendoAnimate({
+            effects: "slideIn:down",
+            show: true,
+            duration: 200
+        });
     },
 
     close: function() {
-        if (!this.$popup) return;
+        var that = this;
 
-        this.$popup.kendoAnimate( { effects: "slideIn:down", hide: true, reverse: true, duration: 200, complete: $.proxy(function() {
-            if (this.$popup) {
-                dom.remove(this.$popup[0].parentNode);
-                this.$popup = null;
+        if (!that._popup) {
+            return;
+        }
+
+        that._popup.kendoAnimate({
+            effects: "slideIn:down",
+            hide: true,
+            reverse: true,
+            duration: 200,
+            complete: function() {
+                if (that.popup) {
+                    dom.remove(that.popup[0].parentNode);
+                    that.popup = null;
+                }
             }
-        }, this) });
-
+        });
     },
 
     toggle: function() {
         var that = this;
-        if (!that.$popup || !that.$popup.is(':visible'))
+        if (!that.popup || !that.popup.is(VISIBLE)) {
             that.open();
-        else {
+        } else {
             that.close();
         }
     },
 
     click: function(e) {
-        if ($(e.target).closest('.k-tool-icon').length > 0)
+        if ($(e.target).closest(".k-tool-icon").length > 0) {
             this.select();
-        else
+        } else {
             this.toggle();
+        }
     },
 
     value: function(color) {
-        if (!color)
+        if (!color) {
             return this.selectedColor;
+        }
 
         color = dom.toHex(color);
 
         this.selectedColor = color;
 
-        $('.k-selected-color', this.element)
-            .css('background-color', color);
+        this.element.find(".k-selected-color")
+            .css("background-color", color);
     },
 
     popup: function() {
-        if (!this.$popup)
-            this.$popup = $(ColorPicker.buildPopup(this))
+        var popup = this._popup;
+        if (!popup) {
+            this._popup = popup = $(ColorPicker.buildPopup(this))
                     .hide()
                     .appendTo(document.body)
-                    .find('*')
-                    .attr('unselectable', 'on')
-                    .end();
+                    .find("*").attr("unselectable", "on").end();
+        }
 
-        return this.$popup;
+        return popup;
     }
 
 });
 
 ColorPicker.buildPopup = function(component) {
-
     var html = '<div class="k-popup k-group k-colorpicker-popup">' +
                     '<ul class="k-reset">',
         data = component.options.data,
-        currentColor = (component.value() || '').substring(1),
-        itemHtml;
+        currentColor = (component.value() || "").substring(1),
+        itemHtml,
+        i, len, itemHtml;
 
-    for (var i = 0, len = data.length; i < len; i++) {
-        var itemHtml = '<li class="k-item' +
-            (data[i] == currentColor ? ' k-state-selected' : '') +
+    for (i = 0, len = data.length; i < len; i++) {
+        itemHtml = '<li class="k-item' +
+            (data[i] == currentColor ? ' ' + KSTATESELECTED : '') +
             '"><div style="background-color:#' +
             data[i] +
             '"></div></li>';
         html += itemHtml;
     }
 
-    html += '</ul></div>';
+    html += "</ul></div>";
 
     return html;
 }
@@ -5095,6 +4988,12 @@ var IndentFormatter = Class.extend({
                 } else {
                     var marginLeft = parseInt(indent(formatNode)) + 30;
                     indent(formatNode, marginLeft);
+
+                    for (var targetIndex = 0; targetIndex < targets.length; targetIndex++) {
+                        if ($.contains(formatNode, targets[targetIndex])) {
+                            targets.splice(targetIndex, 1);
+                        }
+                    }
                 }
             }
         } else {
@@ -5116,6 +5015,11 @@ var IndentFormatter = Class.extend({
                 var $listParent = $list.parent();
                 // $listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
                 if ($listParent.is('li,ul,ol') && !indent($list[0])) {
+                    // skip already processed nodes
+                    if (targetNode && $.contains(targetNode, $listParent[0])) {
+                        continue;
+                    }
+
                     var $siblings = $formatNode.nextAll('li');
                     if ($siblings.length)
                         $($list[0].cloneNode(false)).appendTo($formatNode).append($siblings);

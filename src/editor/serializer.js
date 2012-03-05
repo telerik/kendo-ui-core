@@ -143,13 +143,17 @@ var Serializer = {
         }
 
         function child(node, skip) {
-            var nodeType = node.nodeType;
+            var nodeType = node.nodeType,
+                tagName, mapper,
+                parent, value, previous;
+
             if (nodeType == 1) {
-                if (node.attributes['_moz_dirty'] && dom.is(node, 'br'))
+                tagName = dom.name(node);
+
+                if (tagName == "" || (node.attributes['_moz_dirty'] && dom.is(node, 'br')))
                     return;
 
-                var tagName = dom.name(node);
-                var mapper = tagMap[tagName];
+                mapper = tagMap[tagName];
 
                 if (mapper) {
                     mapper.start(node);
@@ -173,11 +177,11 @@ var Serializer = {
                     result.push('>');
                 }
             } else if (nodeType == 3) {
-                var value = node.nodeValue;
+                value = node.nodeValue;
 
                 if (!skip && $.support.leadingWhitespace) {
-                    var parent = node.parentNode;
-                    var previous = node.previousSibling;
+                    parent = node.parentNode;
+                    previous = node.previousSibling;
 
                     if (!previous) {
                          previous = (dom.isInline(parent) ? parent : node).previousSibling;
