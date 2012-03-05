@@ -49,14 +49,36 @@
                 <ul class="nav">
                     @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
                     {
-                    <li class="@(Request.Path.EndsWith(example.Url) ? "k-state-active k-state-highlighted" : "")">
-                    <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
-                        href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
-                    </li>
+                        <li class="@(Request.Path.EndsWith(example.Url) ? "k-state-active k-state-highlighted" : "")">
+                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                                href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                        </li>
                     }
                 </ul>
+
+                @if (ViewBag.suite == "mobile")
+                {
+                    <p id="qrWrap">Open this demo with an iOS/Android mobile device for a full experience. <a href="#" id="qr"><span class="k-icon k-qr"></span><em>Show QR Code</em></a></p>
+                    <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
+                }
             </div>
         }
+
+        @if (ViewBag.suite == "mobile")
+        {
+            <div class="configuration mobileConfiguration">
+                <input id="deviceChooser" type="hidden" />
+                <ul id="deviceList" class="options">
+                    <li></li>
+                </ul>
+
+                <script id="deviceThumbTemplate" type="text/x-kendo-template">
+                    <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+                </script>
+
+            </div>
+        }
+
         @RenderBody()
     </div>
 
