@@ -275,7 +275,8 @@
                 i;
 
             function getAnglesInRange(element, index, array) {
-                return (element >= sa && element <= ea);
+                var overflow = math.max(0, ea - 360);
+                return (element >= (sa - overflow) && element <= ea);
             }
 
             angles = grep([sa, ea, 0, 90, 180, 270], getAnglesInRange);
