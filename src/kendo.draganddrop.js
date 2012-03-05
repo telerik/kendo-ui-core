@@ -24,7 +24,7 @@
         // DropTarget events
         DRAGENTER = "dragenter",
         DRAGLEAVE = "dragleave",
-        DROP = "drop"
+        DROP = "drop",
 
         // Drag events
         START = "start",
