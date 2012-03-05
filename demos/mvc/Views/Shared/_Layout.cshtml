@@ -22,35 +22,41 @@
     @Html.Partial("Header")
 
     <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
-        <div id="navWrap">
+        <div id="topNav">
             @foreach (string category in ViewBag.Navigation.Keys)
             {
                 if (ViewBag.Navigation.Keys.Count > 1)
                 {
                     <h3>@category</h3>
                 }
-                <ul class="nav">
-                @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-                {
-                    <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
-                        <span class="k-link k-header">
-                            <span class="k-sprite @widget.SpriteCssClass"></span>
-                            @widget.Text
-                        </span>
-                        <ul>
-                            @foreach (NavigationExample example in widget.Items)
-                            {
-                                <li>
-                                    <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
-                                        href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
-                                </li>
-                            }
-                        </ul>
-                    </li>
-                }
+                <ul>
+                    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                    {
+                        if (widget.Name != "overview")
+                        {
+                            <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
+                                <a class="k-link @(ViewBag.Section == widget.Name ? "chosen" : "")"
+                                    href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
+                            </li>
+                        }
+                    }
                 </ul>
             }
         </div>
+        @if (ViewBag.CurrentWidget.Name != "overview")
+        {
+            <div id="navWrap">
+                <ul class="nav">
+                    @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+                    {
+                    <li class="@(Request.Path.EndsWith(example.Url) ? "k-state-active k-state-highlighted" : "")">
+                    <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                        href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                    </li>
+                    }
+                </ul>
+            </div>
+        }
         @RenderBody()
     </div>
 
