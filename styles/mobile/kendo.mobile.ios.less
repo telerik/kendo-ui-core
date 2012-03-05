@@ -689,3 +689,70 @@
 {
     -webkit-animation: km-ios-spin 1.5s infinite linear;
 }
+
+/* Forms */
+
+.km-ios select,
+.km-ios input
+{
+    font-size: 1.2rem;
+}
+
+.km-ios input[type=text],
+.km-ios input[type=date],
+.km-ios input[type=time],
+.km-ios input[type=datetime],
+.km-ios select:not([multiple])
+{
+    border: 0;
+    padding: .4em;
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    text-align: right;
+}
+
+.km-ios input[type=text]
+{
+    .user-select(text);
+}
+
+.km-ios input[type=date],
+.km-ios input[type=time],
+.km-ios input[type=datetime],
+.km-ios select:not([multiple])
+{
+    min-width: 6em;
+    .user-select(none);
+}
+
+.km-ios input[type=text]:focus,
+.km-ios input[type=date]:active,
+.km-ios input[type=time]:active,
+.km-ios input[type=datetime]:active,
+.km-ios input[type=date]:focus,
+.km-ios input[type=time]:focus,
+.km-ios input[type=datetime]:focus,
+.km-ios select:not([multiple]):focus
+{
+    color: #45bfff;
+}
+
+.km-ios select:not([multiple]):focus option
+{
+    color: #000;
+}
+
+.km-ios input[type=text],
+.km-ios input[type=date],
+.km-ios input[type=time],
+.km-ios input[type=datetime]
+{
+    .user-select(text);
+}
+
+.km-ios input[readonly]
+{
+    .user-select(none);
+}
