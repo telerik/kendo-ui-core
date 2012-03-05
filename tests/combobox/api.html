@@ -254,6 +254,14 @@
                 }, 200);
             });
 
+            test("text should set empty text to the combobox", function() {
+                combobox.select(0);
+                combobox.text("");
+
+                equal(combobox.value(), "");
+                equal(combobox.text(), "");
+            })
+
             test('enable(false) should disable combobox', function() {
                 var combobox = new ComboBox(input);
 
