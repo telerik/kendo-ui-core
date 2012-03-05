@@ -555,6 +555,34 @@
             }
         }),
 
+        enabled: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                this.widget = widget;
+            },
+
+            refresh: function() {
+                if (this.widget.enable) {
+                    this.widget.enable(this.bindings.enabled.get());
+                }
+            }
+        }),
+
+        disabled: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                this.widget = widget;
+            },
+
+            refresh: function() {
+                if (this.widget.enable) {
+                    this.widget.enable(!this.bindings.disabled.get());
+                }
+            }
+        }),
+
         source: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);

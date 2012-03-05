@@ -14,5 +14,10 @@ tests.push(
     {
         page: "timepicker/events.html",
         title: "timepicker events"
+    },
+    {
+        page: "timepicker/mvvm.html",
+        title: "timepicker mvvm"
     }
+
 );
