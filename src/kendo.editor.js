@@ -3266,9 +3266,8 @@ registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({templ
             var result = this.getFormatInner(nodes[0]);
 
             for (var i = 1, len = nodes.length; i < len; i++)
-                if (result != this.getFormatInner(nodes[i])) {
+                if (result != this.getFormatInner(nodes[i]))
                     return '';
-                }
 
             return result;
         },
@@ -3368,7 +3367,6 @@ registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({templ
                 change: function (e) {
                     Tool.exec(editor, toolName, this.value());
                 },
-                animation: false,
                 highlightFirst: false
             });
 
