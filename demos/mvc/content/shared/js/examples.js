@@ -304,43 +304,42 @@
     $.fn.themeChooser = function(options) {
         options = extend({ largeIcons: true }, options);
 
-        var themes = new kendo.data.DataSource({
-                data: [
-                    { text: "Black", value: "black" },
-                    { text: "Blue Opal", value: "blueopal" },
-                    { text: "Default", value: "default" },
-                    { text: "Metro", value: "metro" },
-                    { text: "Silver", value: "silver" }
-                ]
-            });
+        var themes = [
+                { text: "Black", value: "black" },
+                { text: "Blue Opal", value: "blueopal" },
+                { text: "Default", value: "default" },
+                { text: "Metro", value: "metro" },
+                { text: "Silver", value: "silver" }
+            ]
+            template = kendo.template("<li data-value='#=value#'><span class='thumbLink'>" +
+                        "<span class='thumb #= text.toLowerCase() #Thumb' " +
+                            "style='background-image: url(" + initialRelativePath + "Menu/thumbSprite.png)'>" +
+                            "<span class='gloss'></span></span><span class='skinTitle'>#= text #</span></span></li>"),
+            changeTheme = function(theme) {
+                Application.changeTheme(theme, true);
+
+                try {
+                    sessionStorage.setItem("kendoSkin", theme);
+                } catch(err) {}
+            };
 
         return this.each(function() {
-            var themeChooser  = $(this).val(kendoSkin).kendoDropDownList({
-                    dataTextField: "text",
-                    dataValueField: "value",
-                    dataSource: themes,
-                    template: "<span class='thumbLink'>" +
-                        "<span class='thumb #= data.text.toLowerCase() #Thumb' " +
-                            "style='background-image: url(" + initialRelativePath + "Menu/thumbSprite.png)'>" +
-                            "<span class='gloss'></span></span><span class='skinTitle'>#= data.text #</span></span>",
-                    change: function(e) {
-                        var theme = (this.value() || "default").toLowerCase();
+            var theme = sessionStorage.getItem("kendoSkin") || "default";
+            $(this).html(kendo.render(template, themes))
+                   .on("click", "li", function() {
+                       var li = $(this).addClass("k-state-selected"),
+                           theme = themes[li.index()];
 
-                        Application.changeTheme(theme, true);
+                       li.siblings().removeClass("k-state-selected");
 
-                        try {
-                            sessionStorage.setItem("kendoSkin", theme);
-                        } catch(err) {}
-                    }
-                }).data("kendoDropDownList");
+                       changeTheme(theme.value);
+                   })
+                   .children()
+                   .filter(function() {
+                       return $(this).data("value") === theme;
+                   }).addClass("k-state-selected");
 
-            if (options.largeIcons) {
-                themeChooser.list.width(279).append("<a href='" + $("#themebuilder").attr("href") + "' id='launch-themebuilder'>Launch ThemeBuilder</a>");
-                themeChooser.popup.options = extend(themeChooser.popup.options, {
-                    origin: "bottom right",
-                    position: "top right"
-                });
-            }
+                   changeTheme(theme);
         });
     };
 
