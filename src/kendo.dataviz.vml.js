@@ -7,6 +7,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
         Color = dataviz.Color,
@@ -15,7 +16,7 @@
         ExpandAnimation = dataviz.ExpandAnimation,
         ViewBase = dataviz.ViewBase,
         ViewElement = dataviz.ViewElement,
-        deepExtend = kendo.deepExtend,
+        defined = dataviz.defined,
         template = dataviz.template,
         uniqueId = dataviz.uniqueId,
         rotatePoint = dataviz.rotatePoint,
@@ -25,10 +26,12 @@
     // Constants ==============================================================
     var BLACK = "#000",
         CLIP = dataviz.CLIP,
+        COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         OBJECT = "object",
+        LINEAR = "linear",
         RADIAL = "radial";
 
     // View ===================================================================
@@ -163,7 +166,15 @@
         },
 
         createGradient: function(options) {
-            return new VMLLinearGradient(options);
+            var validRadial = defined(options.cx) && defined(options.cy) && defined(options.bbox);
+
+            if (options.type === RADIAL && validRadial) {
+                return new VMLRadialGradient(options);
+            } else if (options.type === LINEAR) {
+                return new VMLLinearGradient(options);
+            } else {
+                return BLACK;
+            }
         }
     });
 
@@ -676,6 +687,64 @@
         }
     });
 
+    var VMLRadialGradient = ViewElement.extend({
+        init: function(options) {
+            var gradient = this;
+            ViewElement.fn.init.call(gradient, options);
+
+            gradient.template = VMLRadialGradient.template;
+            if (!gradient.template) {
+                gradient.template = VMLRadialGradient.template = template(
+                    "<kvml:fill type='gradienttitle' focus='100%' focusposition='#= d.focusPosition() #'" +
+                    "colors='#= d.renderColors() #' color='#= d.firstColor() #' color2='#= d.lastColor() #' opacity='#= d.options.opacity #' />"
+                );
+            }
+        },
+
+        options: {
+            rotation: 0,
+            opacity: 1
+        },
+
+        renderColors: function() {
+            var gradient = this,
+                options = gradient.options,
+                stops = options.stops,
+                currentStop,
+                i,
+                length = stops.length,
+                output = [],
+                round = math.round;
+
+            for (i = 0; i < length; i++) {
+                currentStop = stops[i];
+                output.push(
+                    round(currentStop.offset * 100) + "% " +
+                    currentStop.color
+                );
+            }
+
+            return output.join(",");
+        },
+
+        focusPosition: function() {
+            var bbox = this.options.bbox,
+                cx = this.options.cx,
+                cy = this.options.cy;
+
+                return Math.min(1, round((cx - bbox.x1) / bbox.width(), COORD_PRECISION)) + " " +
+                Math.min(1, round((cy - bbox.y1) / bbox.height(), COORD_PRECISION));
+        },
+
+        firstColor: function() {
+            return this.options.stops[0].color;
+        },
+
+        lastColor: function() {
+            return this.options.stops[this.options.stops.length - 1].color;
+        }
+    });
+
     // Decorators =============================================================
     function VMLOverlayDecorator(view) {
         this.view = view;
@@ -696,7 +765,7 @@
                 );
             }
 
-            if (!overlay || overlay.type === RADIAL) {
+            if (!overlay) {
                 return element;
             }
 
@@ -816,6 +885,7 @@
         VMLLinearGradient: VMLLinearGradient,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLPath: VMLPath,
+        VMLRadialGradient: VMLRadialGradient,
         VMLRing: VMLRing,
         VMLRotatedText: VMLRotatedText,
         VMLSector: VMLSector,

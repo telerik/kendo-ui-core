@@ -2464,7 +2464,8 @@
                 overlay = deepExtend({}, options.overlay, {
                     r: sector.r,
                     cx: sector.c.x,
-                    cy: sector.c.y
+                    cy: sector.c.y,
+                    bbox: sector.getBBox()
                 })
             }
 
