@@ -62,7 +62,7 @@ var kendo = window.kendo,
 //        select(value);
 
 //        if (selectedValue != value)
-//            text(options.title || value);       
+//            text(options.title || value);
 //    }
 
 //    this.close = function () {
@@ -189,7 +189,7 @@ var ColorPicker = Widget.extend({
                            if (next[0]) {
                                 selected.removeClass("k-state-selected");
                                 next.addClass("k-state-selected");
-                           } 
+                           }
                         }
                         e.preventDefault();
                     } else if (e.keyCode == 38) {
@@ -199,7 +199,7 @@ var ColorPicker = Widget.extend({
                            if (prev[0]) {
                                 selected.removeClass("k-state-selected");
                                 prev.addClass("k-state-selected");
-                           } 
+                           }
                         }
                         e.preventDefault();
                     } else if (e.keyCode == 9 || e.keyCode == 39 || e.keyCode == 37) {
@@ -219,7 +219,7 @@ var ColorPicker = Widget.extend({
             .blur(function() {
                 $element.css("outline", "");
             });
-        }    
+        }
 
         if (that.selectedColor)
             $element.find('.k-selected-color').css('background-color', that.selectedColor);
@@ -281,7 +281,7 @@ var ColorPicker = Widget.extend({
             overflow: 'hidden',
             zIndex: zIndex
         }, elementPosition));
-        
+
         $popup
             .find('.k-item').bind('click', $.proxy(function(e) {
                 var color = $(e.currentTarget, e.target.ownerDocument).find("div").css('background-color');

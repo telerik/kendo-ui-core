@@ -121,7 +121,7 @@ var LinkCommand = Command.extend({
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
-        var windowContent = 
+        var windowContent =
             '<div class="k-editor-dialog">' +
                 '<ol>' +
                     '<li class="k-form-text-row"><label for="k-editor-link-url">Web address</label><input type="text" class="k-input" id="k-editor-link-url"/></li>' +
@@ -131,7 +131,7 @@ var LinkCommand = Command.extend({
                 '</ol>' +
                 '<div class="k-button-wrapper">' +
                     '<button class="k-dialog-insert k-button">Insert</button>' +
-                    '&nbsp;or&nbsp;' + 
+                    '&nbsp;or&nbsp;' +
                     '<a href="#" class="k-dialog-close k-link">Close</a>' +
                 '</div>' +
             '</div>';

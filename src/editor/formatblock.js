@@ -241,7 +241,7 @@ var FormatBlockTool = Tool.extend({
             formatter: function () { return new GreedyBlockFormatter([{ tags: [commandArguments.value] }], {}); }
         }));
     },
-    
+
     update: function($ui, nodes) {
         var list;
         if ($ui.is("select")) {

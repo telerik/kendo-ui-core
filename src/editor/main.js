@@ -41,7 +41,7 @@
             '</li>',
 
         colorPickerTemplate:
-            '<li class="k-editor-colorpicker">' + 
+            '<li class="k-editor-colorpicker">' +
                 '<div class="k-widget k-colorpicker k-header k-#=toolClass#">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-arrow-down"></span>' +
             '</div></li>',
@@ -67,7 +67,7 @@
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
 
         wrapTextarea: function($textarea) {
-            
+
             var w = $textarea.width(),
                 h = $textarea.height(),
                 template = EditorUtils.editorWrapperTemplate,
@@ -117,7 +117,7 @@
 
             var window = iframe.contentWindow || iframe;
             var document = window.document || iframe.contentDocument;
-    
+
             var html = $textarea.val()
                         // <img>\s+\w+ creates invalid nodes after cut in IE
                         .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, '$1')
@@ -146,11 +146,11 @@
                         'code{font-size:1.23em}' +
                     '</style>' +
                     $.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join('') +
-                    '</head><body spellcheck="false">' + 
+                    '</head><body spellcheck="false">' +
                     html +
                     '</body></html>'
                 );
-        
+
             document.close();
 
             return window;
@@ -170,13 +170,13 @@
                             //Using the timeout to avoid the default IE menu when F10 is pressed
                             setTimeout(function() {
                                 var tabIndex = $(editor.element).attr("tabIndex");
-    
+
                                 //Chrome can't focus something which has already been focused
                                 $(editor.element).attr("tabIndex", tabIndex || 0).focus().find(focusable).first().focus();
-    
+
                                 if (!tabIndex && tabIndex !== 0) {
-                                   $(editor.element).removeAttr("tabIndex"); 
-                                } 
+                                   $(editor.element).removeAttr("tabIndex");
+                                }
 
                             }, 100);
                             e.preventDefault();
@@ -200,7 +200,7 @@
                                 var range = editor.getRange();
                                 editor.pendingFormats.apply(range);
                                 editor.selectRange(range);
-                            } 
+                            }
                         }
 
                         editor.keyboard.clearTimeout();
@@ -213,12 +213,12 @@
                         if ($.browser.mozilla && e.keyCode == 8) {
                             fixBackspace(editor, e);
                         }
-                
+
                         if ($.inArray(e.keyCode, selectionCodes) > -1 || (e.keyCode == 65 && e.ctrlKey && !e.altKey && !e.shiftKey)) {
                             editor.pendingFormats.clear();
                             select(editor);
                         }
-                
+
                         if (editor.keyboard.isTypingKey(e)) {
                             if (editor.pendingFormats.hasPending()) {
                                 var range = editor.getRange();
@@ -255,7 +255,7 @@
                         editor.trigger('change');
                     }
                 });
-    
+
             $(editor.body)
                 .bind('cut paste', function (e) {
                       editor.clipboard['on' + e.type](e);
@@ -268,30 +268,30 @@
                 startContainer = range.startContainer,
                 dom = Editor.Dom;
 
-	        if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
+            if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
             || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, 'br'))))
                 return;
-			
-	        var previousBlock = startContainer.previousSibling;
 
-	        while (previousBlock && !dom.isBlock(previousBlock))
+            var previousBlock = startContainer.previousSibling;
+
+            while (previousBlock && !dom.isBlock(previousBlock))
                 previousBlock = previousBlock.previousSibling;
 
-	        if (!previousBlock)
+            if (!previousBlock)
                 return;
 
-	        var walker = editor.document.createTreeWalker(previousBlock, NodeFilter.SHOW_TEXT, null, false);
+            var walker = editor.document.createTreeWalker(previousBlock, NodeFilter.SHOW_TEXT, null, false);
 
             var textNode;
 
-	        while (textNode = walker.nextNode())
-		        previousBlock = textNode;
+            while (textNode = walker.nextNode())
+                previousBlock = textNode;
 
-	        range.setStart(previousBlock, dom.isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
-	        range.collapse(true);
-	        Editor.RangeUtils.selectRange(range);
+            range.setStart(previousBlock, dom.isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
+            range.collapse(true);
+            Editor.RangeUtils.selectRange(range);
 
-	        dom.remove(startContainer);
+            dom.remove(startContainer);
 
             e.preventDefault();
         },
@@ -314,7 +314,7 @@
             Editor.fn.options.formats[formatName] = format;
         }
     };
-    
+
     var select = EditorUtils.select,
         focusable = EditorUtils.focusable,
         wrapTextarea = EditorUtils.wrapTextarea,
@@ -390,7 +390,7 @@
 
             for (var id in self._tools)
                 self._tools[id].name = id.toLowerCase();
-        
+
             self.textarea = $element.attr('autocomplete', 'off')[0];
 
             var $wrapper = self.wrapper = wrapTextarea($element);
@@ -400,11 +400,11 @@
             initializeContentElement(self);
 
             self.keyboard = new Editor.Keyboard([new Editor.TypingHandler(self), new Editor.SystemHandler(self)]);
-        
+
             self.clipboard = new Editor.Clipboard(this);
 
             self.pendingFormats = new Editor.PendingFormats(this);
-        
+
             self.undoRedoStack = new Editor.UndoRedoStack();
 
             if (options && options.value) {
@@ -480,7 +480,7 @@
 
                         if (!tool)
                             return;
-                    
+
                         if (toolName == 'fontSize' || toolName == 'fontName') {
                             var inheritText = self.options.localization[toolName + 'Inherit'] || localization[toolName + 'Inherit']
                             self.options[toolName][0].Text = inheritText;
@@ -511,7 +511,7 @@
                             }
                         });
                 });
-   
+
             $(document)
                 .bind('DOMNodeInserted', function(e) {
                     if ($.contains(e.target, self.wrapper[0]) || self.wrapper[0] == e.target) {
@@ -526,10 +526,10 @@
                     try {
                         if (self.keyboard.isTypingInProgress())
                             self.keyboard.endTyping(true);
-                
+
                         if (!self.selectionRestorePoint) {
                             self.selectionRestorePoint = new Editor.RestorePoint(self.getRange());
-                        } 
+                        }
                     } catch (e) { }
                 });
         },
@@ -665,7 +665,7 @@
                     dom.normalize(body);
                 }
             }
-        
+
             this.selectionRestorePoint = null;
             this.update();
         },
@@ -689,7 +689,7 @@
         getSelection: function () {
             return Editor.SelectionUtils.selectionFromDocument(this.document);
         },
-        
+
         selectRange: function(range) {
             this.focus();
             var selection = this.getSelection();
@@ -712,7 +712,7 @@
         selectedHtml: function() {
             return Editor.Serializer.domToXhtml(this.getRange().cloneContents());
         },
-    
+
         paste: function (html) {
             this.clipboard.paste(html);
         },
@@ -759,7 +759,7 @@
                     if (!command.managesUndoRedo) {
                         this.undoRedoStack.push(command);
                     }
-                    
+
                     command.editor = this;
                     command.exec();
 
