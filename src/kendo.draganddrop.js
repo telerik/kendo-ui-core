@@ -4,22 +4,18 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         extend = $.extend,
-        touch = kendo.support.touch,
         getOffset = kendo.getOffset,
         draggables = {},
         dropTargets = {},
         lastDropTarget,
-        NAMESPACE = ".kendo-dnd",
-        MOUSEENTER = "mouseenter",
-        MOUSEUP = touch? "touchend" : "mouseup",
-        MOUSEDOWN = touch? "touchstart" : "mousedown",
-        MOUSEMOVE = touch? "touchmove" : "mousemove",
         KEYDOWN = "keydown",
-        MOUSELEAVE = "mouseleave",
-        SELECTSTART = "selectstart",
+
+        // Draggable events
         DRAGSTART = "dragstart",
-        DRAGEND = "dragend",
         DRAG = "drag",
+        DRAGEND = "dragend",
+
+        // DropTarget events
         DRAGENTER = "dragenter",
         DRAGLEAVE = "dragleave",
         DROP = "drop";
@@ -56,12 +52,6 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-
-            /*
-            that.element.bind(MOUSEENTER, proxy(that._over, that))
-                .bind(MOUSEUP, proxy(that._drop, that))
-                .bind(MOUSELEAVE, proxy(that._out, that));
-            */
 
             var group = that.options.group;
 
@@ -192,7 +182,7 @@
                 end: proxy(that._end, that)
             });
 
-            that.element.on(DRAGSTART + " " + MOUSEDOWN, that.options.filter, false);
+            that.element.on("selectstart", that.options.filter, false);
         },
 
         events: [
