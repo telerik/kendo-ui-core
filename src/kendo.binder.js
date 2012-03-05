@@ -176,14 +176,14 @@
         }
     });
 
-    binders.event = Binder.extend({
+    binders.events = Binder.extend({
         init: function(element, bindings, options) {
             Binder.fn.init.call(this, element, bindings, options);
             this.handlers = {};
         },
 
         refresh: function(key) {
-            var handler = this.handlers[key] = this.bindings.event[key].get();
+            var handler = this.handlers[key] = this.bindings.events[key].get();
 
             $(this.element).bind(key, handler);
         },
@@ -956,8 +956,8 @@
                 bindings.style = createBindings(bind.style, source, Binding);
             }
 
-            if (bind.event) {
-                bindings.event = createBindings(bind.event, source, EventBinding);
+            if (bind.events) {
+                bindings.events = createBindings(bind.events, source, EventBinding);
             }
 
             target.bind(bindings);

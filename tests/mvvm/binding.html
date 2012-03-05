@@ -136,7 +136,7 @@
             asyncTest("events binding is detached", function() {
                 expect(1);
 
-                var dom = $('<span data-bind="event: { click:foo }"/>');
+                var dom = $('<span data-bind="events: { click:foo }"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
@@ -155,7 +155,7 @@
             asyncTest("change binding", function() {
                 expect(1);
 
-                var dom = $('<input data-bind="event: { change:foo }"/>');
+                var dom = $('<input data-bind="events: { change:foo }"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
