@@ -54,7 +54,7 @@
                     @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
                     {
                         <li class="@(Request.Path.EndsWith(example.Url) ? "k-state-active k-state-highlighted" : "")">
-                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
+                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "k-state-selected chosen" : "")"
                                 href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
                         </li>
                     }
@@ -96,7 +96,7 @@
     @Html.Partial("Footer")
 
     <script>
-        $(".nav").kendoPanelBar({
+        var panelbar = $(".nav").kendoPanelBar({
             animation: { open: { effects: "fadeIn expandVertical" } },
             expand: function() {
                 $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
@@ -105,12 +105,84 @@
                 });
             },
             expandMode: "single"
-        });
+        }).data("kendoPanelBar");
 
         $(".themeChooser").themeChooser();
 
         $("#deviceChooser").mobileOsChooser({
             container: "#mobile-application-container"
+        });
+
+        $("#pager a:first").click(function(e) {
+            var element = $(this),
+                url = element.attr("href"),
+                next = element.next(),
+                prev = panelbar.select().prev();
+
+            if (prev[0]) {
+                e.preventDefault();
+
+                panelbar.select(prev);
+
+                //update links
+                next.attr("href", location.href);
+
+                prev = prev.prev();
+                if (prev[0]) {
+                    element.attr("href", prev.children("a").attr("href"));
+                } else {
+                    var widget = $("#topNav").find(".k-state-highlighted");
+                    prev = widget.prev();
+
+                    if (!prev[0]) {
+                        prev = widget.parent().prevAll("ul").eq(0).children("li:last");
+                    }
+
+                    if (prev[0]) {
+                        element.attr("href", prev.find("a").attr("href"));
+                    } else {
+                        element.attr("href", "#").addClass("k-state-disabled");
+                    }
+                }
+
+                Application.load(url);
+            }
+        });
+
+        $("#pager a:last").click(function(e) {
+            var element = $(this),
+                url = element.attr("href"),
+                prev = element.prev(),
+                next = panelbar.select().next();
+
+            if (next[0]) {
+                e.preventDefault();
+
+                panelbar.select(next);
+
+                //update links
+                prev.attr("href", location.href);
+
+                next = next.next();
+                if (next[0]) {
+                    element.attr("href", next.children("a").attr("href"));
+                } else {
+                    var widget = $("#topNav").find(".k-state-highlighted");
+                    next = widget.next();
+
+                    if (!next[0]) {
+                        next = widget.parent().nextAll("ul").eq(0).children("li:first");
+                    }
+
+                    if (next[0]) {
+                        element.attr("href", next.find("a").attr("href"));
+                    } else {
+                        element.attr("href", "#").addClass("k-state-disabled");
+                    }
+                }
+
+                Application.load(url);
+            }
         });
     </script>
 </body>
