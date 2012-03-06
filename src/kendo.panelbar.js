@@ -776,10 +776,10 @@
          *
          */
         expand: function (element, useAnimation) {
-            element = $(element);
             var that = this,
                 animBackup = {};
             useAnimation = useAnimation !== false;
+            element = this.element.find(element);
 
             element.each(function (index, item) {
                 item = $(item);
@@ -842,8 +842,9 @@
             var that = this,
                 animBackup = {};
             useAnimation = useAnimation !== false;
+            element = that.element.find(element);
 
-            $(element).each(function (index, item) {
+            element.each(function (index, item) {
                 item = $(item);
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
 
@@ -870,7 +871,8 @@
         },
 
         _toggleDisabled: function (element, enable) {
-            $(element)
+            element = this.element.find(element);
+            element
                 .toggleClass(defaultState, enable)
                 .toggleClass(DISABLEDCLASS.substr(1), !enable);
         },
@@ -893,12 +895,13 @@
          */
         select: function (element) {
             var that = this;
+            element = that.element.find(element);
 
             if (arguments.length === 0) {
                 return that.element.find(".k-item > " + SELECTEDCLASS).parent();
             }
 
-            $(element).each(function (index, item) {
+            element.each(function (index, item) {
                 item = $(item);
                 var link = item.children("." + LINK);
 
@@ -1005,7 +1008,7 @@
          *
          */
         append: function (item, referenceItem) {
-            referenceItem = $(referenceItem);
+            referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find(GROUPS) : null);
 
@@ -1073,7 +1076,7 @@
          *
          */
         insertBefore: function (item, referenceItem) {
-            referenceItem = $(referenceItem);
+            referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
@@ -1129,7 +1132,7 @@
          * );
          */
         insertAfter: function (item, referenceItem) {
-            referenceItem = $(referenceItem);
+            referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
@@ -1163,7 +1166,7 @@
          *
          */
         remove: function (element) {
-            element = $(element);
+            element = this.element.find(element);
 
             var that = this,
                 parent = element.parentsUntil(that.element, ITEM),
@@ -1196,8 +1199,9 @@
          */
         reload: function (element) {
             var that = this;
+            element = that.element.find(element);
 
-            $(element).each(function () {
+            element.each(function () {
                 var item = $(this);
 
                 that._ajaxRequest(item, item.children("." + CONTENT), !item.is(VISIBLE));

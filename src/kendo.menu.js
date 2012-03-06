@@ -585,7 +585,7 @@
          * );
          */
         append: function (item, referenceItem) {
-            referenceItem = $(referenceItem);
+            referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, .k-animation-container > .k-group") : null);
 
@@ -640,7 +640,7 @@
          * );
          */
         insertBefore: function (item, referenceItem) {
-            referenceItem = $(referenceItem);
+            referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
@@ -695,7 +695,7 @@
          *
          */
         insertAfter: function (item, referenceItem) {
-            referenceItem = $(referenceItem);
+            referenceItem = this.element.find(referenceItem);
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
@@ -763,7 +763,7 @@
          *
          */
         remove: function (element) {
-            element = $(element);
+            element = this.element.find(element);
 
             var that = this,
                 parent = element.parentsUntil(that.element, allItemsSelector),
@@ -808,12 +808,13 @@
                 options = that.options,
                 horizontal = options.orientation == "horizontal",
                 direction = options.direction;
+            element = that.element.find(element);
 
             if (/^(top|bottom|default)$/.test(direction)) {
                 direction = horizontal ? (direction + " right").replace("default", "bottom") : "right";
             }
 
-            $(element).each(function () {
+            element.each(function () {
                 var li = $(this);
 
                 clearTimeout(li.data(TIMER));
@@ -878,8 +879,9 @@
          */
         close: function (element) {
             var that = this;
+            element = that.element.find(element);
 
-            $(element).each(function () {
+            element.each(function () {
                 var li = $(this);
 
                 clearTimeout(li.data(TIMER));
@@ -900,7 +902,8 @@
         },
 
         _toggleDisabled: function (element, enable) {
-            $(element).each(function () {
+            element = this.element.find(element);
+            element.each(function () {
                 $(this)
                     .toggleClass(DEFAULTSTATE, enable)
                     .toggleClass(DISABLEDSTATE, !enable);
