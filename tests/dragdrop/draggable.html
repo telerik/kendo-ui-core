@@ -102,15 +102,12 @@
                 trigger("mouseup", { pageX: 10, pageY: 2 });
             });
 
-            test("dragend event is raised when pressing escape", function() {
-                var dragEndWasCalled = false,
-                    draggable = setup({ dragend: function() { dragEndWasCalled = true; } });
+            test("dragend event is raised when pressing escape", 1, function() {
+                setup({ dragcancel: function() { ok(true) } });
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 1 });
                 trigger("keyup", { keyCode: 27});
-
-                ok(dragEndWasCalled);
             });
 
             test("specifying filter", function() {
@@ -159,9 +156,9 @@
             });
 
             test("with filter - the dragged element is currentTarget during the dragend event", function() {
-                var e, draggable = new Draggable(span.append("<span>foo</span>"), {
-                        dragend: function() {
-                            e = arguments[0];
+                new Draggable(span.append("<span>foo</span>"), {
+                        dragend: function(e) {
+                            ok(e.currentTarget[0] === span.find("span")[0]);
                         },
                         filter: "span"
                     });
@@ -170,7 +167,6 @@
                 trigger("mousemove", { pageX: 10, pageY: 10 }, span.find("span"));
                 trigger("mouseup", { pageX: 20, pageY: 10 }, span.find("span"));
 
-                ok(e.currentTarget[0] === span.find("span")[0]);
             });
 
             test("dom event argument is passed to the dragstart event", function() {
