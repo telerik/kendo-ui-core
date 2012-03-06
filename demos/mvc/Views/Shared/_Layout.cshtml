@@ -50,6 +50,7 @@
             @Html.Partial("Pager");
 
             <div id="navWrap">
+                <input type="hidden" value="@(ViewBag.PrevUrl != null ? Url.Content(ViewBag.PrevUrl) : "")" />
                 <ul class="nav">
                     @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
                     {
@@ -125,24 +126,15 @@
                 panelbar.select(prev);
 
                 //update links
-                next.attr("href", location.href);
+                next.removeClass("k-state-disabled").attr("href", location.href);
 
                 prev = prev.prev();
                 if (prev[0]) {
                     element.attr("href", prev.children("a").attr("href"));
                 } else {
-                    var widget = $("#topNav").find(".k-state-highlighted");
-                    prev = widget.prev();
+                    var prevUrl = $("#navWrap").find("[type=hidden]").val();
 
-                    if (!prev[0]) {
-                        prev = widget.parent().prevAll("ul").eq(0).children("li:last");
-                    }
-
-                    if (prev[0]) {
-                        element.attr("href", prev.find("a").attr("href"));
-                    } else {
-                        element.attr("href", "#").addClass("k-state-disabled");
-                    }
+                    element.attr("href", prevUrl || "#").toggleClass("k-state-disabled", !prevUrl);
                 }
 
                 Application.load(url);
@@ -161,7 +153,7 @@
                 panelbar.select(next);
 
                 //update links
-                prev.attr("href", location.href);
+                prev.removeClass("k-state-disabled").attr("href", location.href);
 
                 next = next.next();
                 if (next[0]) {
