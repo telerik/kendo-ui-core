@@ -1332,45 +1332,103 @@
                 var ring,
                     ringBox;
 
-                function createRing(startAngle, angle) {
+                function createRing(startAngle, angle, innerRadius) {
                     ring = new dataviz.Ring(
-                        new dataviz.Point2D(100, 100), 0, 100,
+                        new dataviz.Point2D(100, 100), innerRadius || 0, 100,
                         startAngle, angle - startAngle);
                     var box = ring.getBBox();
                     ringBox = [box.x1, box.y1, box.x2, box.y2]
                 }
 
                 // ------------------------------------------------------------
-                module("Ring");
+                module("Ring with zero inner radius");
 
                 test("get box with startAngle 10 and endAngle 190", function() {
                     createRing(10, 190);
-                    same(ringBox, [1.519, 0, 200, 117.365]);
+                    same(ringBox, [1, 0, 200, 117], TOLERANCE);
                 });
 
                 test("get box with startAngle 10 and endAngle 30", function() {
                     createRing(10, 30);
-                    same(ringBox, [1.519, 50, 13.397, 82.635]);
+                    same(ringBox, [1, 50, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 90", function() {
                     createRing(0, 90);
-                    same(ringBox, [0, 0, 100, 100]);
+                    same(ringBox, [0, 0, 100, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 30 and endAngle 170", function() {
                     createRing(30, 170);
-                    same(ringBox, [13.397, 0, 198.481, 82.635]);
+                    same(ringBox, [13, 0, 198, 100], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 360", function() {
                     createRing(0, 360);
-                    same(ringBox, [0, 0, 200, 200]);
+                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
                 });
 
                 test("get box with startAngle 0 and endAngle 280", function() {
                     createRing(0, 280);
-                    same(ringBox, [0, 0, 200, 200]);
+                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                });
+
+                test("get box with startAngle 90 and endAngle 90 (full circle)", function() {
+                    createRing(90, 90);
+                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                });
+
+                test("get box with startAngle 180 and endAngle 0", function() {
+                    createRing(180, 0);
+                    same(ringBox, [0, 100, 200, 200], TOLERANCE);
+                });
+
+                test("get box with startAngle 180.1 and endAngle 0", function() {
+                    createRing(180.1, 0);
+                    same(ringBox, [0, 100, 200, 200], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Ring with inner radius");
+
+                test("get box with startAngle 10 and endAngle 190", function() {
+                    createRing(10, 190, 50);
+                    same(ringBox, [1, 0, 200, 117], TOLERANCE);
+                });
+
+                test("get box with startAngle 10 and endAngle 30", function() {
+                    createRing(10, 30, 50);
+                    same(ringBox, [1, 50, 13, 83], TOLERANCE);
+                });
+
+                test("get box with startAngle 0 and endAngle 90", function() {
+                    createRing(0, 90, 50);
+                    same(ringBox, [0, 0, 100, 100], TOLERANCE);
+                });
+
+                test("get box with startAngle 30 and endAngle 170", function() {
+                    createRing(30, 170, 50);
+                    same(ringBox, [13, 0, 198, 83], TOLERANCE);
+                });
+
+                test("get box with startAngle 0 and endAngle 360", function() {
+                    createRing(0, 360, 50);
+                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                });
+
+                test("get box with startAngle 0 and endAngle 280", function() {
+                    createRing(0, 280, 50);
+                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                });
+
+                test("get box with startAngle 90 and endAngle 450", function() {
+                    createRing(90, 450, 50);
+                    same(ringBox, [0, 0, 200, 200], TOLERANCE);
+                });
+
+                test("get box with startAngle 410 and endAngle 450", function() {
+                    createRing(410, 450, 50);
+                    same(ringBox, [35, 0, 100, 23], TOLERANCE);
                 });
 
             })();
