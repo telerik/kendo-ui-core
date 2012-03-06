@@ -7,6 +7,7 @@
 
         kendo = window.kendo,
         Class = kendo.Class,
+        deepExtend = kendo.deepExtend,
 
         dataviz = kendo.dataviz,
         Color = dataviz.Color,
@@ -15,7 +16,7 @@
         ExpandAnimation = dataviz.ExpandAnimation,
         ViewBase = dataviz.ViewBase,
         ViewElement = dataviz.ViewElement,
-        deepExtend = kendo.deepExtend,
+        defined = dataviz.defined,
         template = dataviz.template,
         uniqueId = dataviz.uniqueId,
         rotatePoint = dataviz.rotatePoint,
@@ -25,10 +26,12 @@
     // Constants ==============================================================
     var BLACK = "#000",
         CLIP = dataviz.CLIP,
+        COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         OBJECT = "object",
+        LINEAR = "linear",
         RADIAL = "radial";
 
     // View ===================================================================
@@ -163,7 +166,15 @@
         },
 
         createGradient: function(options) {
-            return new VMLLinearGradient(options);
+            var validRadial = defined(options.cx) && defined(options.cy) && defined(options.bbox);
+
+            if (options.type === RADIAL && validRadial) {
+                return new VMLRadialGradient(options);
+            } else if (options.type === LINEAR) {
+                return new VMLLinearGradient(options);
+            } else {
+                return BLACK;
+            }
         }
     });
 
@@ -635,22 +646,13 @@
         }
     });
 
-    var VMLLinearGradient = ViewElement.extend({
+    var VMLGradient = ViewElement.extend({
         init: function(options) {
             var gradient = this;
             ViewElement.fn.init.call(gradient, options);
-
-            gradient.template = VMLLinearGradient.template;
-            if (!gradient.template) {
-                gradient.template = VMLLinearGradient.template = template(
-                    "<kvml:fill type='gradient' angle='#= 270 - d.options.rotation #' " +
-                    "colors='#= d.renderColors() #' opacity='#= d.options.opacity #' />"
-                );
-            }
         },
 
         options: {
-            rotation: 0,
             opacity: 1
         },
 
@@ -676,6 +678,62 @@
         }
     });
 
+    var VMLLinearGradient = VMLGradient.extend({
+        init: function(options) {
+            var gradient = this;
+            VMLGradient.fn.init.call(gradient, options);
+
+            gradient.template = VMLLinearGradient.template;
+            if (!gradient.template) {
+                gradient.template = VMLLinearGradient.template = template(
+                    "<kvml:fill type='gradient' angle='#= 270 - d.options.rotation #' " +
+                    "colors='#= d.renderColors() #' opacity='#= d.options.opacity #' />"
+                );
+            }
+        },
+
+        options: {
+            rotation: 0
+        }
+    });
+
+    var VMLRadialGradient = VMLGradient.extend({
+        init: function(options) {
+            var gradient = this;
+            VMLGradient.fn.init.call(gradient, options);
+
+            gradient.template = VMLRadialGradient.template;
+            if (!gradient.template) {
+                gradient.template = VMLRadialGradient.template = template(
+                    "<kvml:fill type='gradienttitle' focus='100%' focusposition='#= d.focusPosition() #'" +
+                    "colors='#= d.renderColors() #' color='#= d.firstColor() #' color2='#= d.lastColor() #' opacity='#= d.options.opacity #' />"
+                );
+            }
+        },
+
+        focusPosition: function() {
+            var options = this.options,
+                bbox = options.bbox,
+                cx = options.cx,
+                cy = options.cy,
+                focusx = Math.max(0, Math.min(1, (cx - bbox.x1) / bbox.width())),
+                focusy = Math.max(0, Math.min(1, (cy - bbox.y1) / bbox.height()));
+
+            return round(focusx, COORD_PRECISION) + " " +
+                   round(focusy, COORD_PRECISION);
+        },
+
+        firstColor: function() {
+            var stops = this.options.stops;
+            return stops[0].color;
+        },
+
+        lastColor: function() {
+            var stops = this.options.stops;
+            return stops[stops.length - 1].color;
+        }
+    });
+
     // Decorators =============================================================
     function VMLOverlayDecorator(view) {
         this.view = view;
@@ -685,18 +743,22 @@
         decorate: function(element) {
             var options = element.options,
                 view = this.view,
-                overlay;
+                overlay,
+                bbox;
 
             if (options.overlay) {
+                bbox = options.overlay.bbox;
                 overlay = view.buildGradient(
                     deepExtend({}, options.overlay, {
                         // Make the gradient definition unique for this color
-                        _overlayFill: options.fill
+                        _overlayFill: options.fill,
+                        // and for the radial gradient bounding box, if specified
+                        _bboxHash: defined(bbox) ? bbox.getHash() : ""
                     })
                 );
             }
 
-            if (!overlay || overlay.type === RADIAL) {
+            if (!overlay) {
                 return element;
             }
 
@@ -816,6 +878,7 @@
         VMLLinearGradient: VMLLinearGradient,
         VMLOverlayDecorator: VMLOverlayDecorator,
         VMLPath: VMLPath,
+        VMLRadialGradient: VMLRadialGradient,
         VMLRing: VMLRing,
         VMLRotatedText: VMLRotatedText,
         VMLSector: VMLSector,

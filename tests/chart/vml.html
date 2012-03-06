@@ -23,10 +23,27 @@
                 contentElementStub = {
                     render: function() { return "Content"; }
                 },
-                gradient = {
+                linearGradient = {
                     id: "gradient",
                     type: "linear",
                     rotation: 0,
+                    stops: [{
+                        offset: 0,
+                        color: "#f00",
+                        opacity: 1
+                    }, {
+                        offset: 1,
+                        color: "#00f",
+                        opacity: 1
+                    }]
+                },
+                radialGradient = {
+                    id: "gradient",
+                    type: "radial",
+                    cx: 100,
+                    cy: 100,
+                    r: 100,
+                    bbox: new Box2D(0, 0, 200, 100),
                     stops: [{
                         offset: 0,
                         color: "#f00",
@@ -1023,37 +1040,88 @@
             })();
 
             (function() {
-                var view,
-                    linearGradient;
+                var gradient;
 
                 // ------------------------------------------------------------
                 module("VMLLinearGradient", {
                     setup: function() {
-                        view = new dataviz.VMLView();
-                        linearGradient = new dataviz.VMLLinearGradient(gradient);
+                        gradient = new dataviz.VMLLinearGradient(linearGradient);
                     }
                 });
 
                 test("renders fill tag", function() {
-                    equal(linearGradient.render().replace(/\<kvml:fill.*?\/\>/, "<kvml:fill/>"),
+                    equal(gradient.render().replace(/\<kvml:fill.*?\/\>/, "<kvml:fill/>"),
                     "<kvml:fill/>");
                 });
 
                 test("renders type", function() {
-                    ok(linearGradient.render().indexOf("type='gradient'") > -1);
+                    ok(gradient.render().indexOf("type='gradient'") > -1);
                 });
 
                 test("renders angle", function() {
-                    ok(linearGradient.render().indexOf("angle='270'") > -1);
+                    ok(gradient.render().indexOf("angle='270'") > -1);
                 });
 
                 test("renders colors", function() {
-                    ok(linearGradient.render().indexOf("colors='0% #f00,100% #00f'") > -1);
+                    ok(gradient.render().indexOf("colors='0% #f00,100% #00f'") > -1);
                 });
 
                 test("renders opacity", function() {
-                    linearGradient.options.opacity = 0.5;
-                    ok(linearGradient.render().indexOf("opacity='0.5'") > -1);
+                    gradient.options.opacity = 0.5;
+                    ok(gradient.render().indexOf("opacity='0.5'") > -1);
+                });
+
+            })();
+
+            (function() {
+                var gradient;
+
+                // ------------------------------------------------------------
+                module("VMLRadialGradient", {
+                    setup: function() {
+                        gradient = new dataviz.VMLRadialGradient(radialGradient);
+                    }
+                });
+
+                test("renders fill tag", function() {
+                    equal(gradient.render().replace(/\<kvml:fill.*?\/\>/, "<kvml:fill/>"),
+                    "<kvml:fill/>");
+                });
+
+                test("renders type", function() {
+                    ok(gradient.render().indexOf("type='gradienttitle'") > -1);
+                });
+
+                test("renders colors", function() {
+                    ok(gradient.render().indexOf("colors='0% #f00,100% #00f'") > -1);
+                });
+
+                test("renders opacity", function() {
+                    gradient.options.opacity = 0.5;
+                    ok(gradient.render().indexOf("opacity='0.5'") > -1);
+                });
+
+                test("renders focus", function() {
+                    ok(gradient.render().indexOf("focus='100%'") > -1);
+                });
+
+                test("caps focus position to 1", function() {
+                    ok(gradient.render().indexOf("focusposition='0.5 1'") > -1);
+                });
+
+                test("caps focus position to 0", function() {
+                    var gradientCopy = new dataviz.VMLRadialGradient(radialGradient);
+                    gradientCopy.options.bbox = new Box2D(150, 0, 200, 100);
+
+                    ok(gradientCopy.render().indexOf("focusposition='0 1'") > -1);
+                });
+
+                test("renders first color", function() {
+                    ok(gradient.render().indexOf("color='#f00'") > -1);
+                });
+
+                test("renders last color", function() {
+                    ok(gradient.render().indexOf("color2='#00f'") > -1);
                 });
 
             })();
@@ -1066,19 +1134,32 @@
                 module("VMLGradientDecorator", {
                     setup: function() {
                         view = new dataviz.VMLView();
-                        dataviz.Gradients.test = gradient;
+                        dataviz.Gradients.test = linearGradient;
                     },
                     teardown: function() {
                         dataviz.Gradients.test = null;
                     }
                 });
 
-                test("applies gradient fill from definition", function() {
-                    var path = view.createRect(new Box2D(), { fill: gradient });
+                test("applies linear gradient fill from definition", function() {
+                    var path = view.createRect(new Box2D(), { fill: linearGradient });
                     ok(path.fill instanceof dataviz.VMLLinearGradient);
                 });
 
-                test("applies gradient fill", function() {
+                test("applies radial gradient fill from definition", function() {
+                    var path = view.createRect(new Box2D(), { fill: radialGradient });
+                    ok(path.fill instanceof dataviz.VMLRadialGradient);
+                });
+
+                test("does not apply radial gradient fill if it lacks cx, cy and bbox", function() {
+                    var gradient = $.extend(true, {}, radialGradient);
+                    gradient.cx = gradient.cy = gradient.bbox = undefined;
+
+                    var path = view.createRect(new Box2D(), { fill: gradient });
+                    equals(path.fill, "#000");
+                });
+
+                test("applies gradient fill by name", function() {
                     var path = view.createRect(new Box2D(), { fill: { gradient: "test" } });
                     equals(path.fill.options.stops.length, 2);
                 });
@@ -1127,6 +1208,20 @@
 
                 test("adds fill color to make overlay definition unique", function() {
                     equals(rect.options.fill._overlayFill, "#fff");
+                });
+
+                test("adds bounding box has to make overlay definition unique", function() {
+                    dataviz.Gradients.test = radialGradient;
+                    rect = new dataviz.VMLPath({
+                        fill: "#fff",
+                        fillOpacity: 0.5,
+                        overlay: { gradient: "test", bbox: new Box2D(0, 0, 1, 1) }
+                    });
+
+                    decorator.decorate(rect);
+                    equals(rect.options.fill._bboxHash, "0,0,1,1");
+
+                    dataviz.Gradients.test = null;
                 });
 
             })();
