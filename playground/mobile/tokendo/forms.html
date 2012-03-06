@@ -11,7 +11,7 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.ios.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.all.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -65,10 +65,6 @@
             background-color: #c0c;
         }
 
-        .km-content {
-            background: #ccc;
-        }
-
         .km-ios .km-tabstrip .km-state-active .km-toprated,
         .km-ios .km-tabstrip .km-state-active .km-favorites
         {
@@ -89,7 +85,7 @@
         }
     </style>
 </head>
-<body class="km-ios">
+<body>
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
@@ -101,24 +97,19 @@
             </div>
         </header>
         <br />
-        <center>
-            <input type="date" value="2012-03-22" />
-            <br />
-            <input type="time" value="22:30" />
-            <br />
-            <input type="datetime" value="2012-03-22 20:15" />
-            <br />
-            <input type="text" value="Text Shmext" />
-            <br />
-            <input type="text" value="Text Shmext" readonly />
-            <br />
-            <select name="next" id="next">
-                <option value="First">First</option>
-                <option value="Second">Second</option>
-                <option value="Third">Third</option>
-                <option value="Fourth">Fourth</option>
-            </select>
-        </center>
+        <ul data-role="listview" data-style="inset">
+            <li data-icon="play"><input type="date" value="2012-03-22" /><a class="km-listview-link">Albania</a></li>
+            <li data-icon="stop"><input type="time" value="22:30" /><a class="km-listview-link">Australia</a></li>
+            <li><input type="datetime" value="2012-03-22 20:15" /><a class="km-listview-link">Australia</a></li>
+            <li><input type="text" value="Text Shmext" /><a class="km-listview-link">Australia</a></li>
+            <li><select name="next" id="next">
+                                        <option value="First">First</option>
+                                        <option value="Second">Second</option>
+                                        <option value="Third">Third</option>
+                                        <option value="Fourth">Fourth</option>
+                                    </select><a class="km-listview-link">Australia</a></li>
+            <li><input type="text" value="Text Shmext" readonly /><a class="km-listview-link">Australia</a></li>
+        </ul>
         <footer data-role="footer">
             <div data-role="tabstrip">
                 <a data-icon="featured">Featured</a>

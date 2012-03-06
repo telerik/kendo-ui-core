@@ -761,35 +761,27 @@
 
 /* Forms */
 
-.km-android select,
-.km-android input
-{
-    font-size: 1.2rem;
-}
-
 .km-android input[type=text],
 .km-android input[type=date],
 .km-android input[type=time],
 .km-android input[type=datetime],
 .km-android select:not([multiple])
 {
+    color: #fff;
     border: 0;
-    border-bottom: 1px solid rgba(0,0,0,.3);
+    border-bottom: 1px solid rgba(127,127,127,.5);
     margin-bottom: 1px;
     padding: .4em;
     outline: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
     .border-radius(0);
     .box-sizing(padding-box);
 }
 
 .km-android input[type=text]
 {
-    .user-select(text);
     background-clip: padding-box;
-    background: linear-gradient(top, rgba(0,0,0,0) 90%, rgba(0,0,0,.3) 90%, rgba(0,0,0,.3)),
-                linear-gradient(top, rgba(0,0,0,0) 90%, rgba(0,0,0,.3) 90%, rgba(0,0,0,.3)) transparent;
+    background: linear-gradient(top, rgba(127,127,127,0) 90%, rgba(127,127,127,1) 90%, rgba(127,127,127,1)),
+                linear-gradient(top, rgba(127,127,127,0) 90%, rgba(127,127,127,1) 90%, rgba(127,127,127,1)) transparent;
     background-position: 0 0, 100% 0;
     background-repeat: no-repeat;
     background-size: 1px 100%;
@@ -813,8 +805,6 @@
 {
     background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;
     background-clip: padding-box;
-    min-width: 6em;
-    .user-select(none);
     background-size: auto 100%;
 }
 
@@ -826,7 +816,6 @@
 .km-android input[type=datetime]:focus,
 .km-android select:not([multiple]):focus
 {
-    color: #fff;
     background-color: rgba(51,181,229,.6);
 }
 

@@ -692,10 +692,9 @@
 
 /* Forms */
 
-.km-ios select,
-.km-ios input
+.km-ios select:not([multiple])
 {
-    font-size: 1.2rem;
+    direction: rtl;
 }
 
 .km-ios input[type=text],
@@ -704,27 +703,18 @@
 .km-ios input[type=datetime],
 .km-ios select:not([multiple])
 {
+    color: #333;
     border: 0;
     padding: .4em;
     outline: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
     background: transparent;
     text-align: right;
 }
 
-.km-ios input[type=text]
+.km-ios select:not([multiple]) option
 {
-    .user-select(text);
-}
-
-.km-ios input[type=date],
-.km-ios input[type=time],
-.km-ios input[type=datetime],
-.km-ios select:not([multiple])
-{
-    min-width: 6em;
-    .user-select(none);
+    color: #333;
+    direction: ltr;
 }
 
 .km-ios input[type=text]:focus,
@@ -736,23 +726,14 @@
 .km-ios input[type=datetime]:focus,
 .km-ios select:not([multiple]):focus
 {
-    color: #45bfff;
+    color: #086aff;
 }
 
-.km-ios select:not([multiple]):focus option
+.km-ios .km-list .km-state-active input[type=text],
+.km-ios .km-list .km-state-active input[type=date],
+.km-ios .km-list .km-state-active input[type=time],
+.km-ios .km-list .km-state-active input[type=datetime],
+.km-ios .km-list .km-state-active select:not([multiple])
 {
-    color: #000;
-}
-
-.km-ios input[type=text],
-.km-ios input[type=date],
-.km-ios input[type=time],
-.km-ios input[type=datetime]
-{
-    .user-select(text);
-}
-
-.km-ios input[readonly]
-{
-    .user-select(none);
+    color: #fff;
 }

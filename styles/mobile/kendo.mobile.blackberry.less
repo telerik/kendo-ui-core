@@ -494,12 +494,6 @@
 
 /* Forms */
 
-.km-blackberry select,
-.km-blackberry input
-{
-    font-size: 1.2rem;
-}
-
 .km-blackberry input[type=text],
 .km-blackberry input[type=date],
 .km-blackberry input[type=time],
@@ -509,14 +503,11 @@
     border: 1px solid rgba(0,0,0,.5);
     padding: .4em;
     outline: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
     .border-radius(~".3em");
 }
 
 .km-blackberry input[type=text]
 {
-    .user-select(text);
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
 }
 
@@ -533,8 +524,6 @@
 {
     background: 100% 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAMAAAB28zu6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIVBMVEX////19fT19fX19fX19fT19fT19fX19fP19fT19fT19fRLB2KYAAAACnRSTlMA7xBQr5/PMN+AkwDcBAAAANFJREFUeF7t2LuVwzAAA0HKpPxh/wVfiFS+SPCbqQDBRhg/BAAAAAAAAAAAAAAAAACA13Nf93yNW3jvb7zHLezvGP1v5/7GOW7hcezrjse4h7mvm+Mu1r5qjSgIJHHcxSyKI1ZTHAmkJ46YRXHEaoojgfTEEbMojlhNcSSQnjhiFsURqymOBNITR8yiOGI1xZFAeuKIWRRHrKY4EkhPHDGL4ojVFkcCSRwdZlEcsZriSCCJo8dMHEXOPKRFPsc+PuO3AQAAAAAAAAAAAAAAAADwB5LFJn8OLOPPAAAAAElFTkSuQmCC"),
                 100% 0 no-repeat linear-gradient(left, rgba(0,0,0,.3), rgba(0,0,0,.3)), linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2)) #eee;
-    min-width: 6em;
-    .user-select(none);
     background-size: auto 100%, 1.8em 100%, auto;
     .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.2)");
 }
@@ -569,3 +558,13 @@
 {
     .user-select(none);
 }
+
+.km-blackberry .km-list input[type=text],
+.km-blackberry .km-list input[type=date],
+.km-blackberry .km-list input[type=time],
+.km-blackberry .km-list input[type=datetime],
+.km-blackberry .km-list select:not([multiple])
+{
+    right: .8em;
+}
+
