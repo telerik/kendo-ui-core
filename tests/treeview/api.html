@@ -418,6 +418,25 @@
                 ok(!treeview.hasClass("k-item"));
             });
 
+            test("remove('.k-item') works only with own items", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo", items: [
+                                { text: "bar" }
+                            ] }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                var arbitraryItem = $("<div class='k-item' />").appendTo(document.body);
+
+                treeviewObject.remove(".k-item:last");
+
+                equal(arbitraryItem.closest("body").length, 1);
+
+                arbitraryItem.remove();
+            });
+
             test("expand() with selector string", function() {
                 var treeview = createTreeView({
                         dataSource: [

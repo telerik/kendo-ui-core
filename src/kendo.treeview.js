@@ -1101,12 +1101,14 @@
          *
          */
         remove: function (node) {
-            node = $(node);
+            var parentNode,
+                prevSibling, nextSibling;
 
-            var that = this,
-                parentNode = node.parent().parent(),
-                prevSibling = node.prev(),
-                nextSibling = node.next();
+            node = $(node, this.element);
+
+            parentNode = node.parent().parent();
+            prevSibling = node.prev();
+            nextSibling = node.next();
 
             node.remove();
 
