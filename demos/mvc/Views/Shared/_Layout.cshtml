@@ -96,18 +96,18 @@
     @Html.Partial("Footer")
 
     <script>
-        var prevUrl = "@(ViewBag.PrevUrl != null ? Url.Content(ViewBag.PrevUrl) : "")",
-            nextUrl = "@(ViewBag.nextUrl != null ? Url.Content(ViewBag.nextUrl) : "")",
+        var firstUrl = "@(ViewBag.FirstUrl != null ? Url.Content(ViewBag.FirstUrl) : "")",
+            lastUrl = "@(ViewBag.LastUrl != null ? Url.Content(ViewBag.LastUrl) : "")",
             panelbar = $(".nav").kendoPanelBar({
-            animation: { open: { effects: "fadeIn expandVertical" } },
-            expand: function() {
-                $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
-                    $(this)
-                        .find(".k-link").removeClass("k-state-selected k-state-highlighted");
-                });
-            },
-            expandMode: "single"
-        }).data("kendoPanelBar");
+                animation: { open: { effects: "fadeIn expandVertical" } },
+                expand: function() {
+                    $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
+                        $(this)
+                            .find(".k-link").removeClass("k-state-selected k-state-highlighted");
+                    });
+                },
+                expandMode: "single"
+            }).data("kendoPanelBar");
 
         $(".themeChooser").themeChooser();
 
@@ -122,7 +122,7 @@
                 sibling = element[method == "prev" ? "next" : "prev"](),
                 current = panelbar.select(),
                 next = current[method](),
-                lastUrl = window[method + "Url"];
+                navigateUrl;
 
             if (next[0]) {
                 e.preventDefault();
@@ -133,14 +133,23 @@
 
                 sibling.removeClass("k-state-disabled").attr("href", location.href);
 
+                if (method == "prev") {
+                    navigateUrl = lastUrl;
+                } else {
+                    navigateUrl = firstUrl;
+                }
+
                 next = next[method]();
+
                 if (next[0]) {
                     element.attr("href", next.children("a").attr("href"));
                 } else {
-                    element.attr("href", lastUrl || "#").toggleClass("k-state-disabled", !lastUrl);
+                    element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
                 }
 
                 Application.load(url);
+            } else if (url == "#") {
+                e.preventDefault();
             }
         });
     </script>
