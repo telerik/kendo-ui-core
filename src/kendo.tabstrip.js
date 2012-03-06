@@ -533,6 +533,7 @@
          */
         select: function (element) {
             var that = this;
+            element = that.element.find(element);
 
             if (arguments.length == 0) {
                 return that.element.find("li." + ACTIVESTATE);
@@ -603,9 +604,10 @@
          *
          */
         reload: function (element) {
+            element = this.tabGroup.find(element);
             var that = this;
 
-            $(element).each(function () {
+            element.each(function () {
                 var item = $(this),
                     contentUrl = item.find("." + LINK).data(CONTENTURL);
 
@@ -795,7 +797,7 @@
          *
          */
         remove: function (element) {
-            element = $(element);
+            element = this.tabGroup.find(element);
 
             var that = this,
                 content = $(that.contentElement(element.index()));
@@ -835,7 +837,8 @@
         },
 
         _toggleDisabled: function(element, enable) {
-            $(element).each(function () {
+            element = this.tabGroup.find(element);
+            element.each(function () {
                 $(this)
                     .toggleClass(DEFAULTSTATE, enable)
                     .toggleClass(DISABLEDSTATE, !enable);
@@ -972,6 +975,7 @@
                 animation = animationSettings.open,
                 close = extend({}, animationSettings.close),
                 hasCloseAnimation = close && "effects" in close;
+            item = that.tabGroup.find(item);
 
             close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
 
@@ -1008,6 +1012,8 @@
          *
          */
         activateTab: function (item) {
+            item = this.tabGroup.find(item);
+
             var that = this,
                 animationSettings = that.options.animation,
                 animation = animationSettings.open,
@@ -1123,6 +1129,7 @@
         },
 
         ajaxRequest: function (element, content, complete, url) {
+            element = this.tabGroup.find(element);
             if (element.find(".k-loading").length)
                 return;
 
