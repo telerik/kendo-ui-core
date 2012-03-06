@@ -30,6 +30,7 @@
         START = "start",
         MOVE = "move",
         END = "end",
+        CANCEL = "cancel",
         TAP = "tap";
 
     if (kendo.support.touch) {
@@ -83,7 +84,6 @@
             that.client = location["client" + that.axis];
             that.initialDelta = offset - that.startLocation;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
-            that.location = location;
             that.timeStamp = timeStamp;
         }
     });
@@ -111,8 +111,8 @@
             eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
 
             extend(that, {
-                x: new DragAxis(),
-                y: new DragAxis(),
+                x: new DragAxis("X"),
+                y: new DragAxis("Y"),
                 element: element,
                 surface: options.global ? SURFACE : element,
                 pressed: false,
@@ -124,7 +124,7 @@
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
                 .on("mousedown dragstart selectstart", that.filter, preventDefault);
 
-            that.bind([TAP, START, MOVE, END], options);
+            that.bind([TAP, START, MOVE, END, CANCEL], options);
         },
 
         capture: function() {
@@ -132,8 +132,10 @@
         },
 
         cancel: function() {
-            this.pressed = false;
-            this.surface.off(this.ns);
+            var that = this;
+            that.pressed = false;
+            that.surface.off(that.ns);
+            that.trigger(CANCEL);
         },
 
         _start: function(e) {
