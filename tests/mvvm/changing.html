@@ -19,11 +19,14 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
         <script>
+            var sourceBinder;
 
             module("mvvm observing", {
                 setup: function() {
+                    sourceBinder = kendo.data.binders.source;
                 },
                 teardown: function() {
+                    kendo.data.binders.source = sourceBinder;
                 }
             });
 
@@ -562,6 +565,29 @@
 
                 equal(dom.val(), "foo");
             });
+
+            test("changing a field does not triger changing of another field starting with the same name", function() {
+                var viewModel = kendo.observable({
+                    foo1: [{ name: "foo" }, { name: "bar" }]
+                });
+
+                var calls = 0;
+
+                kendo.data.binders.source = kendo.data.Binder.extend({
+                    refresh: function() {
+                        calls ++;
+                    }
+                });
+
+                var dom = $('<select data-value-field="name" data-bind="source: foo1"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.trigger("change", { field: "foo" } );
+
+                equal(calls, 1);
+            });
+
         </script>
 
         <script id="array-template" type="text/x-kendo-template">

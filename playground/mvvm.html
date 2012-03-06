@@ -55,22 +55,24 @@
         </style>
     </head>
     <body>
-        <ul data-bind="source: tabs">
+        <ul data-role="tabstrip" data-text-field="name" data-bind="value: tab, source: tabs">
         </ul>
 
+        <span data-bind="text: tabAsJson"></span>
         <button data-bind="click:removelast">remove last tab</button>
         <script>
             var viewModel = kendo.observable({
-                tabs: ["one", "two"],
+                tabs: [{ name:"foo" },{ name: "bar" }],
                 removelast: function() {
                     this.get("tabs").pop();
+                },
+                tabAsJson: function() {
+                    return kendo.stringify(this.get("tab"));
                 }
             });
 
+            viewModel.tab = viewModel.tabs[1];
             kendo.bind(document.body, viewModel);
-
-            $("ul").kendoTabStrip();
-
         </script>
     </body>
-    </html>
+</html>
