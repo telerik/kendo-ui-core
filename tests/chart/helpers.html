@@ -41,6 +41,10 @@
                      [box.x1, box.y1, box.x2, box.y2]);
             });
 
+            test("getHash returns hash code", function() {
+                equals(box.getHash(), "0,0,20,20");
+            });
+
             test("translate on x-axis", function() {
                 var clone = box.clone().translate(10, 0);
 

@@ -716,8 +716,8 @@
                 bbox = options.bbox,
                 cx = options.cx,
                 cy = options.cy,
-                focusx = Math.min(1, (cx - bbox.x1) / bbox.width()),
-                focusy = Math.min(1, (cy - bbox.y1) / bbox.height());
+                focusx = Math.max(0, Math.min(1, (cx - bbox.x1) / bbox.width())),
+                focusy = Math.max(0, Math.min(1, (cy - bbox.y1) / bbox.height()));
 
             return round(focusx, COORD_PRECISION) + " " +
                    round(focusy, COORD_PRECISION);
@@ -743,13 +743,17 @@
         decorate: function(element) {
             var options = element.options,
                 view = this.view,
-                overlay;
+                overlay,
+                bbox;
 
             if (options.overlay) {
+                bbox = options.overlay.bbox;
                 overlay = view.buildGradient(
                     deepExtend({}, options.overlay, {
                         // Make the gradient definition unique for this color
-                        _overlayFill: options.fill
+                        _overlayFill: options.fill,
+                        // and for the radial gradient bounding box, if specified
+                        _bboxHash: defined(bbox) ? bbox.getHash() : ""
                     })
                 );
             }
