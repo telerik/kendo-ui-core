@@ -600,7 +600,13 @@
         _trigger: function(eventName, e) {
             var that = this;
 
-            return that.trigger(eventName, extend({}, e.event, {
+            return that.trigger(
+            eventName, extend(
+            {},
+            e.event,
+            {
+                x: e.x,
+                y: e.y,
                 currentTarget: that.currentTarget
             }));
         },
