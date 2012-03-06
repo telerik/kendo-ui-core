@@ -24,7 +24,7 @@
 
             module("api", {
                 teardown: function () {
-                    $(".k-treeview").remove();
+                    $(".k-treeview,.k-item").remove();
                 }
             });
 
@@ -101,6 +101,20 @@
                 var node = treeview.find(".k-item:last");
 
                 treeview.data("kendoTreeView").select(node);
+
+                equals(treeview.find(".k-state-selected").length, 1);
+            });
+
+            test("select(selector) limits selector to treeview", function() {
+                var treeview = createTreeView({
+                        dataSource: [
+                            { text: "foo" }
+                        ]
+                    });
+
+                $("<div class='k-item' />").appendTo(document.body);
+
+                treeview.data("kendoTreeView").select(".k-item:last");
 
                 equals(treeview.find(".k-state-selected").length, 1);
             });
@@ -433,8 +447,6 @@
                 treeviewObject.remove(".k-item:last");
 
                 equal(arbitraryItem.closest("body").length, 1);
-
-                arbitraryItem.remove();
             });
 
             test("expand() with selector string", function() {
