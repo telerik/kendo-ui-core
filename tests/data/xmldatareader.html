@@ -301,6 +301,25 @@
                 equal(model.id, "bar");
             });
 
+            test("model id is field from the processed data", function() {
+                var reader = new XmlDataReader({
+                    model: {
+                        id: "baz",
+                        fields: {
+                            baz: "@id"
+                        }
+                    },
+                    data: "/root/foo"
+                });
+
+                var result = reader.parse('<root><foo id="bar" /><foo id="baz" /></root>');
+                var data = reader.data(result);
+
+                var model = new reader.model(data[0]);
+
+                equal(model.id, "bar");
+            });
+
             test("model fields as object is parsed", function() {
                 var reader = new XmlDataReader({
                     model: {
