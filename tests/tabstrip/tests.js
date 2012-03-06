@@ -8,6 +8,10 @@ tests.push(
         title: "tabstrip initialization"
     },
     {
+        page: "tabstrip/databinding.html",
+        title: "tabstrip databinding"
+    },
+    {
         page: "tabstrip/AjaxLoading.html",
         title: "tabstrip ajax loading"
     },
@@ -15,5 +19,4 @@ tests.push(
         page: "tabstrip/mvvm.html",
         title: "tabstrip mvvm"
     }
-
 );

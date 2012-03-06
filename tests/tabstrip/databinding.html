@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TabStrip DataBinding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.tabstrip.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+</head>
+<body>
+    <script type="text/javascript">
+        test("binding to data source", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataSource: [{}, {}]
+            });
+
+            equal(dom.find("li").length, 2);
+        });
+
+        test("the dataSource field is instance of kendo.data.DataSource", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataSource: [{}, {}]
+            });
+
+            ok(tabstrip.dataSource instanceof kendo.data.DataSource, "dataSource is instanceof kendo.data.DataSource");
+        });
+
+        test("binding to array of primitive types", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataSource: ["foo"]
+            });
+
+            equal(dom.find("li").text(), "foo");
+        });
+
+        test("binding to array of complex objects displays [object Object] by default", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataSource: [{}]
+            });
+
+            equal(dom.find("li").text(), "[object Object]");
+        });
+
+        test("binding to array of complex objects displays the dataTextField", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataTextField: "foo",
+                dataSource: [{ foo: "foo" }]
+            });
+
+            equal(dom.find("li").text(), "foo");
+        });
+
+        test("binding raises the dataBinding event", 1, function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataBinding: function() {
+                    ok(true, "Event is raised");
+                },
+                dataSource: [{}]
+            });
+        });
+
+        test("binding raises the dataBound event", 1, function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataBound: function() {
+                    ok(true, "Event is raised");
+                },
+                dataSource: [{}]
+            });
+        });
+    </script>
+
+    <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <ul id="log"></ul>
+</body>
+</html>
