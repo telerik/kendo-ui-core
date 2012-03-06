@@ -218,6 +218,12 @@
                 new Point2D(box.x2, box.y2),
                 new Point2D(box.x1, box.y2)
             ];
+        },
+
+        getHash: function() {
+            var box = this;
+
+            return [box.x1, box.y1, box.x2, box.y2].join(",");
         }
     });
 

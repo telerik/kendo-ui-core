@@ -1105,8 +1105,15 @@
                     ok(gradient.render().indexOf("focus='100%'") > -1);
                 });
 
-                test("renders focus position", function() {
+                test("caps focus position to 1", function() {
                     ok(gradient.render().indexOf("focusposition='0.5 1'") > -1);
+                });
+
+                test("caps focus position to 0", function() {
+                    var gradientCopy = new dataviz.VMLRadialGradient(radialGradient);
+                    gradientCopy.options.bbox = new Box2D(150, 0, 200, 100);
+
+                    ok(gradientCopy.render().indexOf("focusposition='0 1'") > -1);
                 });
 
                 test("renders first color", function() {
@@ -1201,6 +1208,20 @@
 
                 test("adds fill color to make overlay definition unique", function() {
                     equals(rect.options.fill._overlayFill, "#fff");
+                });
+
+                test("adds bounding box has to make overlay definition unique", function() {
+                    dataviz.Gradients.test = radialGradient;
+                    rect = new dataviz.VMLPath({
+                        fill: "#fff",
+                        fillOpacity: 0.5,
+                        overlay: { gradient: "test", bbox: new Box2D(0, 0, 1, 1) }
+                    });
+
+                    decorator.decorate(rect);
+                    equals(rect.options.fill._bboxHash, "0,0,1,1");
+
+                    dataviz.Gradients.test = null;
                 });
 
             })();
