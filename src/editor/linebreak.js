@@ -44,7 +44,7 @@ var ParagraphCommand = Command.extend({
         if (li) {
             rng = range.cloneRange();
             rng.selectNode(li);
-            
+
             // hitting 'enter' in empty li
             if (RangeUtils.textNodes(rng).length == 0) {
                 paragraph = dom.create(document, 'p');
@@ -101,8 +101,14 @@ var ParagraphCommand = Command.extend({
                     node = node.parentNode;
                 }
 
-                if (node && !dom.is(node, 'img') && node.innerHTML == '') {
-                    node.innerHTML = emptyParagraphContent;
+                if (node && !dom.is(node, 'img')) {
+                    while (node.firstChild && node.firstChild.nodeType == 1) {
+                        node = node.firstChild;
+                    }
+
+                    if (node.innerHTML == '') {
+                        node.innerHTML = emptyParagraphContent;
+                    }
                 }
             }
 
@@ -142,8 +148,8 @@ var NewLineCommand = Command.extend({
         var br = dom.create(RangeUtils.documentFromRange(range), 'br');
         range.insertNode(br);
         normalize(br.parentNode);
-        
-        if (!$.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) { 
+
+        if (!$.browser.msie && (!br.nextSibling || dom.isWhitespace(br.nextSibling))) {
             //Gecko and WebKit cannot put the caret after only one br.
             var filler = br.cloneNode(true);
             filler.setAttribute('_moz_dirty', '');

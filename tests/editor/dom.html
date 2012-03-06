@@ -1,212 +1,214 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-$("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor();
 
-var Dom;
-var enumerator;
+            var Dom;
+            var enumerator;
 
-QUnit.testStart = function() {
-    editor = getEditor();
-    Dom = kendo.ui.Editor.Dom;
-}
+            module("DOM", {
+                setup: function() {
+                    editor = getEditor();
+                    Dom = kendo.ui.Editor.Dom;
+                }
+            });
 
-test('commonAncestor returns common ancestor for root nodes returns body', function() {
-    editor.value('<span>foo</span><span>bar</span>');
-    equal(Dom.commonAncestor(editor.body.firstChild.firstChild, editor.body.lastChild.lastChild), editor.body);
-});
-        
-test('commonAncestor single node returns same element', function() {
-    editor.value('<span>foo</span><span>bar</span>');
-    equal(Dom.commonAncestor(editor.body.firstChild.firstChild), editor.body.firstChild.firstChild);
-});
+            test('commonAncestor returns common ancestor for root nodes returns body', function() {
+                editor.value('<span>foo</span><span>bar</span>');
+                equal(Dom.commonAncestor(editor.body.firstChild.firstChild, editor.body.lastChild.lastChild), editor.body);
+            });
 
-test('commonAncestor returns common ancestor for parent and child', function() {
-    editor.value('<span>foo</span>');
-    equal(Dom.commonAncestor(editor.body.firstChild.firstChild, editor.body.firstChild), editor.body.firstChild);
-});
+            test('commonAncestor single node returns same element', function() {
+                editor.value('<span>foo</span><span>bar</span>');
+                equal(Dom.commonAncestor(editor.body.firstChild.firstChild), editor.body.firstChild.firstChild);
+            });
 
-test('commonAncestor returns null when called with empty arguments', function() {
-    ok(null === Dom.commonAncestor());
-});
+            test('commonAncestor returns common ancestor for parent and child', function() {
+                editor.value('<span>foo</span>');
+                equal(Dom.commonAncestor(editor.body.firstChild.firstChild, editor.body.firstChild), editor.body.firstChild);
+            });
 
-test('style applies specified style', function() {
-    var element = document.createElement('span');
-    Dom.style(element, {color:'red'});
-    equal(element.style.color, 'red');
-});
+            test('commonAncestor returns null when called with empty arguments', function() {
+                ok(null === Dom.commonAncestor());
+            });
 
-test('style does nothing if no style specified', function() {
-    var element = document.createElement('span');
-    Dom.style(element);
-    equal(element.style.cssText, '');
-});
+            test('style applies specified style', function() {
+                var element = document.createElement('span');
+                Dom.style(element, {color:'red'});
+                equal(element.style.color, 'red');
+            });
 
-test('unstyle does nothing if no style specified', function() {
-    var element = document.createElement('span');
-    Dom.style(element, {color:'red'});
-    Dom.unstyle(element);
-    equal(element.style.color, 'red');
-});
+            test('style does nothing if no style specified', function() {
+                var element = document.createElement('span');
+                Dom.style(element);
+                equal(element.style.cssText, '');
+            });
 
-test('unstyle removes the specified attributes', function() {
-    var element = document.createElement('span');
-    Dom.style(element, { color: 'red' });
-    Dom.unstyle(element, { color: 'red' });
-    equal(element.style.cssText, '');
-});
+            test('unstyle does nothing if no style specified', function() {
+                var element = document.createElement('span');
+                Dom.style(element, {color:'red'});
+                Dom.unstyle(element);
+                equal(element.style.color, 'red');
+            });
 
-test('createElement creates element', function() {
-    var element = Dom.create(document, 'span');
-    ok(undefined !== element);
-    equal(element.tagName.toLowerCase(), 'span');
-});
+            test('unstyle removes the specified attributes', function() {
+                var element = document.createElement('span');
+                Dom.style(element, { color: 'red' });
+                Dom.unstyle(element, { color: 'red' });
+                equal(element.style.cssText, '');
+            });
 
-test('createElement creates element and sets attributes', function() {
-    var element = Dom.create(document, 'span', {className:'test'});
-    equal(element.className, 'test');
-});
-        
-test('createElement can set style', function() {
-    var element = Dom.create(document, 'span', { style: {color:'red'}});
-    equal(element.style.color, 'red');
-});
+            test('createElement creates element', function() {
+                var element = Dom.create(document, 'span');
+                ok(undefined !== element);
+                equal(element.tagName.toLowerCase(), 'span');
+            });
 
-test('change tag updates the element tag name', function() {
-    var source = Dom.create(document, 'div');
-    document.body.appendChild(source);
-    var result = Dom.changeTag(source, 'span');
-    equal(result.tagName.toLowerCase(), 'span');
-    equal(result.parentNode, document.body);
-});
+            test('createElement creates element and sets attributes', function() {
+                var element = Dom.create(document, 'span', {className:'test'});
+                equal(element.className, 'test');
+            });
 
-test('change tag clones attributes', function() {
-    var source = Dom.create(document, 'div', {className:'test'});
-    document.body.appendChild(source);
-            
-    var result = Dom.changeTag(source, 'span');
-    equal(result.className, 'test');
-});
-        
-test('change tag clones style', function() {
-    var source = Dom.create(document, 'div', { style: {textAlign:'center'}});
-            
-    document.body.appendChild(source);
-    var result = Dom.changeTag(source, 'span');
-    equal(result.style.textAlign, 'center');
-});
+            test('createElement can set style', function() {
+                var element = Dom.create(document, 'span', { style: {color:'red'}});
+                equal(element.style.color, 'red');
+            });
 
-test('find last text node single node', function() {
-    var node = Dom.create(document, 'div');
-    node.innerHTML = 'foo';
+            test('change tag updates the element tag name', function() {
+                var source = Dom.create(document, 'div');
+                document.body.appendChild(source);
+                var result = Dom.changeTag(source, 'span');
+                equal(result.tagName.toLowerCase(), 'span');
+                equal(result.parentNode, document.body);
+            });
 
-    equal(Dom.lastTextNode(node), node.firstChild);
-});
-        
-test('find last text node when it is first', function() {
-    var node = Dom.create(document, 'div');
-    node.innerHTML = 'foo<span></span>';
-            
-    equal(Dom.lastTextNode(node), node.firstChild);
-});
-        
-test('find last text node when it is child of child', function() {
-    var node = Dom.create(document, 'div');
-    node.innerHTML = '<span>foo</span>';
-            
-    equal(Dom.lastTextNode(node), node.firstChild.firstChild);
-});
-        
-test('find last text returns null', function() {
-    var node = Dom.create(document, 'div');
-    node.innerHTML = '<span></span>';
+            test('change tag clones attributes', function() {
+                var source = Dom.create(document, 'div', {className:'test'});
+                document.body.appendChild(source);
 
-    equal(Dom.lastTextNode(node), null);
-});
+                var result = Dom.changeTag(source, 'span');
+                equal(result.className, 'test');
+            });
 
-test('find last text node first child of child', function() {
-    var node = Dom.create(document, 'div');
-    node.innerHTML = '<span>foo<span></span></span>';
-            
-    equal(Dom.lastTextNode(node), node.firstChild.firstChild);
-});
+            test('change tag clones style', function() {
+                var source = Dom.create(document, 'div', { style: {textAlign:'center'}});
 
-test("normalize of empty node", function() {
-    var node = Dom.create(document, "div");
-    Dom.normalize(node);
-    equal(node.childNodes.length, 0);
-    equal(node.innerHTML, "");
-});        
-        
-test("normalize one text node", function() {
-    var node = Dom.create(document, "div");
-    node.appendChild(document.createTextNode("foo"));
-    Dom.normalize(node);
-    equal(node.childNodes.length, 1);
-    equal(node.innerHTML, "foo");
-});        
-        
-test("normalize two text nodes", function() {
-    var node = Dom.create(document, "div");
-    node.appendChild(document.createTextNode("foo"));
-    node.appendChild(document.createTextNode("bar"));
-    Dom.normalize(node);
-    equal(node.childNodes.length, 1);
-    equal(node.innerHTML, "foobar");
-});        
-        
-test("normalize mixed content nodes", function() {
-    var node = Dom.create(document, "div");
-    node.appendChild(document.createTextNode("foo"));
-    node.appendChild(document.createTextNode("bar"));
-            
-    node.appendChild(document.createElement("span"));
-            
-    node.appendChild(document.createTextNode("foo"));
-    node.appendChild(document.createTextNode("bar"));
-            
-    Dom.normalize(node);
-    equal(node.childNodes.length, 3);
-    equal(node.innerHTML.toLowerCase(), "foobar<span></span>foobar");
-});
+                document.body.appendChild(source);
+                var result = Dom.changeTag(source, 'span');
+                equal(result.style.textAlign, 'center');
+            });
 
-</script>
+            test('find last text node single node', function() {
+                var node = Dom.create(document, 'div');
+                node.innerHTML = 'foo';
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+                equal(Dom.lastTextNode(node), node.firstChild);
+            });
 
-</body>
+            test('find last text node when it is first', function() {
+                var node = Dom.create(document, 'div');
+                node.innerHTML = 'foo<span></span>';
+
+                equal(Dom.lastTextNode(node), node.firstChild);
+            });
+
+            test('find last text node when it is child of child', function() {
+                var node = Dom.create(document, 'div');
+                node.innerHTML = '<span>foo</span>';
+
+                equal(Dom.lastTextNode(node), node.firstChild.firstChild);
+            });
+
+            test('find last text returns null', function() {
+                var node = Dom.create(document, 'div');
+                node.innerHTML = '<span></span>';
+
+                equal(Dom.lastTextNode(node), null);
+            });
+
+            test('find last text node first child of child', function() {
+                var node = Dom.create(document, 'div');
+                node.innerHTML = '<span>foo<span></span></span>';
+
+                equal(Dom.lastTextNode(node), node.firstChild.firstChild);
+            });
+
+            test("normalize of empty node", function() {
+                var node = Dom.create(document, "div");
+                Dom.normalize(node);
+                equal(node.childNodes.length, 0);
+                equal(node.innerHTML, "");
+            });        
+
+            test("normalize one text node", function() {
+                var node = Dom.create(document, "div");
+                node.appendChild(document.createTextNode("foo"));
+                Dom.normalize(node);
+                equal(node.childNodes.length, 1);
+                equal(node.innerHTML, "foo");
+            });        
+
+            test("normalize two text nodes", function() {
+                var node = Dom.create(document, "div");
+                node.appendChild(document.createTextNode("foo"));
+                node.appendChild(document.createTextNode("bar"));
+                Dom.normalize(node);
+                equal(node.childNodes.length, 1);
+                equal(node.innerHTML, "foobar");
+            });        
+
+            test("normalize mixed content nodes", function() {
+                var node = Dom.create(document, "div");
+                node.appendChild(document.createTextNode("foo"));
+                node.appendChild(document.createTextNode("bar"));
+
+                node.appendChild(document.createElement("span"));
+
+                node.appendChild(document.createTextNode("foo"));
+                node.appendChild(document.createTextNode("bar"));
+
+                Dom.normalize(node);
+                equal(node.childNodes.length, 3);
+                equal(node.innerHTML.toLowerCase(), "foobar<span></span>foobar");
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

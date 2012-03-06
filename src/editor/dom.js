@@ -8,10 +8,10 @@
 
 function makeMap(items) {
     var obj = {};
-        
+
     for (var i = 0; i < items.length; i++)
         obj[items[i]] = true;
-        
+
     return obj;
 }
 
@@ -32,7 +32,7 @@ if ($.browser.msie && parseInt($.browser.version) >= 8) {
         if (parent.nodeType == 1 && parent.firstChild) {
             var prev = parent.firstChild,
                 node = prev;
-            
+
             while (node = node.nextSibling) {
                 if (node.nodeType == 3 && prev.nodeType == 3) {
                     node.nodeValue = prev.nodeValue + node.nodeValue;
@@ -160,38 +160,38 @@ var Dom = {
     name: function (node) {
         return node.nodeName.toLowerCase();
     },
-        
+
     significantChildNodes: function(node) {
         return $.grep(node.childNodes, function(child) {
             return child.nodeType != 3 || !Dom.isWhitespace(child);
         });
     },
-        
+
     lastTextNode: function(node) {
         if (node.nodeType == 3)
             return node;
-            
+
         var result = null;
-            
+
         for (var child = node.lastChild; child; child = child.previousSibling)
             if (result = Dom.lastTextNode(child))
                 return result;
-                
+
         return result;
     },
 
     is: function (node, nodeName) {
         return Dom.name(node) == nodeName;
     },
-        
+
     isMarker: function(node) {
         return node.className == 'k-marker';
     },
-        
+
     isWhitespace: function(node) {
         return whitespace.test(node.nodeValue);
     },
-        
+
     isBlock: function(node) {
         return block[Dom.name(node)];
     },
@@ -199,11 +199,11 @@ var Dom = {
     isEmpty: function(node) {
         return empty[Dom.name(node)];
     },
-        
+
     isInline: function(node) {
         return inline[Dom.name(node)];
     },
-        
+
     scrollTo: function (node) {
         node.ownerDocument.body.scrollTop = $(Dom.isDataNode(node) ? node.parentNode : node).offset().top;
     },
@@ -330,20 +330,20 @@ var Dom = {
 
     inlineStyle: function(document, name, attributes) {
         var span = Dom.create(document, name, attributes);
-        
+
         document.body.appendChild(span);
-                
+
         var $span = $(span);
-                
+
         var style = map(cssAttributes, function(value) {
             if ($.browser.msie && value == 'line-height' && $span.css(value) == "1px")
                 return 'line-height:1.5';
             else
                 return value + ':' + $span.css(value);
         }).join(';');
-                
+
         $span.remove();
-        
+
         return style;
     },
 

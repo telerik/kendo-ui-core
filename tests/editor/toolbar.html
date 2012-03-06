@@ -1,223 +1,223 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-$("#Editor1").kendoEditor();
-        
-var componentType = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
+            $("#Editor1").kendoEditor();
 
-function value($ui) {
-    return $.browser.msie ? $.trim($ui.text()) : $ui.val();
-}
+            var componentType = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
 
-module("Editor / Toolbar", {
-    setup: function() {
-        window.editor = getEditor();
-    }
-});
+            function value($ui) {
+                return $.browser.msie ? $.trim($ui.text()) : $ui.val();
+            }
 
-test('initially fontName should have "inherit" value', function () {
+            module("Editor / Toolbar", {
+                setup: function() {
+                    window.editor = getEditor();
+                }
+            });
 
-    var component = $('select.k-fontSize').data(componentType);
+            test('initially fontName should have "inherit" value', function () {
 
-    equal(component.value(), 'inherit');
-});
+                var component = $('select.k-fontSize').data(componentType);
 
-test('exec with node parameter calls exec', function() {
-    var editor = getEditor();
+                equal(component.value(), 'inherit');
+            });
 
-    var execArgs = [];
+            test('exec with node parameter calls exec', function() {
+                var editor = getEditor();
 
-    editor.exec = function() { execArgs = arguments; };
+                var execArgs = [];
 
-    $('.k-bold', editor.wrapper).click();
+                editor.exec = function() { execArgs = arguments; };
 
-    equal(execArgs.length, 1);
-    equal(execArgs[0], 'bold');
-});
+                $('.k-bold', editor.wrapper).click();
 
-test('handle carret selection', function() {
-    editor.value('<strong>foo</strong>')
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild, 1);
-    range.setEnd(editor.body.firstChild.firstChild, 1);
+                equal(execArgs.length, 1);
+                equal(execArgs[0], 'bold');
+            });
 
-    editor.getSelection().removeAllRanges();
-    editor.getSelection().addRange(range);
+            test('handle carret selection', function() {
+                editor.value('<strong>foo</strong>')
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild.firstChild, 1);
+                range.setEnd(editor.body.firstChild.firstChild, 1);
 
-    editor.trigger('select');
+                editor.getSelection().removeAllRanges();
+                editor.getSelection().addRange(range);
 
-    ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
-});
+                editor.trigger('select');
 
-test('handle word selection', function() {
-    editor.value('<strong>foo</strong>')
-    var range = editor.createRange();
-    range.selectNodeContents(editor.body.firstChild);
+                ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
+            });
 
-    editor.getSelection().removeAllRanges();
-    editor.getSelection().addRange(range);
+            test('handle word selection', function() {
+                editor.value('<strong>foo</strong>')
+                var range = editor.createRange();
+                range.selectNodeContents(editor.body.firstChild);
 
-    editor.trigger('select');
+                editor.getSelection().removeAllRanges();
+                editor.getSelection().addRange(range);
 
-    ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
-});
+                editor.trigger('select');
 
-test('handle mixed selection', function() {
-    editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>')
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
-    range.setEnd(editor.body.firstChild.firstChild.firstChild, 1);
+                ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
+            });
 
-    editor.getSelection().removeAllRanges();
-    editor.getSelection().addRange(range);
+            test('handle mixed selection', function() {
+                editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>')
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild.firstChild.firstChild, 1);
+                range.setEnd(editor.body.firstChild.firstChild.firstChild, 1);
 
-    editor.trigger('select');
+                editor.getSelection().removeAllRanges();
+                editor.getSelection().addRange(range);
 
-    ok(!$('k-insertUnorderedList', editor.wrapper).hasClass('k-state-active'));
-});
+                editor.trigger('select');
 
-test('handle image selection', function() {
-    editor.value('<img style="float:right" src="foo" />');
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
+                ok(!$('k-insertUnorderedList', editor.wrapper).hasClass('k-state-active'));
+            });
 
-    editor.getSelection().removeAllRanges();
-    editor.getSelection().addRange(range);
+            test('handle image selection', function() {
+                editor.value('<img style="float:right" src="foo" />');
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
 
-    editor.trigger('select');
+                editor.getSelection().removeAllRanges();
+                editor.getSelection().addRange(range);
 
-    ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-active'));
-});
+                editor.trigger('select');
 
-test('font size combobox on mixed content', function() {
-    editor.selectRange(createRangeFromText(editor, '|foo<span style="font-size:8px;">bar|</span>'));
+                ok($('.k-justifyRight', editor.wrapper).hasClass('k-state-active'));
+            });
 
-    editor.trigger('select');
+            test('font size combobox on mixed content', function() {
+                editor.selectRange(createRangeFromText(editor, '|foo<span style="font-size:8px;">bar|</span>'));
 
-    equal(value($('.k-fontSize', editor.wrapper)), '');
-});
+                editor.trigger('select');
 
-test('font size combobox on custom font size', function() {
-    editor.selectRange(createRangeFromText(editor, '<span style="font-size:8px;">f|o|o</span>'));
+                equal(value($('.k-fontSize', editor.wrapper)), '');
+            });
 
-    editor.trigger('select');
+            test('font size combobox on custom font size', function() {
+                editor.selectRange(createRangeFromText(editor, '<span style="font-size:8px;">f|o|o</span>'));
 
-    equal(value($('.k-fontSize', editor.wrapper)), '8px');
-});        
-        
-test('inherited font size', function() {
-    editor.selectRange(createRangeFromText(editor, '<span>f|o|o</span>'));
+                editor.trigger('select');
 
-    editor.trigger('select');
+                equal(value($('.k-fontSize', editor.wrapper)), '8px');
+            });
 
-    equal(value($('.k-fontSize', editor.wrapper)), editor.options.localization.fontSizeInherit);
-});
+            test('inherited font size', function() {
+                editor.selectRange(createRangeFromText(editor, '<span>f|o|o</span>'));
 
-test('font size combobox on relative font size', function() {
-    editor.selectRange(createRangeFromText(editor, '<span style="font-size:x-small;">f|o|o</span>'));
+                editor.trigger('select');
 
-    editor.trigger('select');
+                equal(value($('.k-fontSize', editor.wrapper)), editor.options.localization.fontSizeInherit);
+            });
 
-    equal(value($('.k-fontSize', editor.wrapper)), '2 (10pt)');
-});
+            test('font size combobox on relative font size', function() {
+                editor.selectRange(createRangeFromText(editor, '<span style="font-size:x-small;">f|o|o</span>'));
 
-test('clicking disabled links should not navigate', function() {
-    var isDefaultPrevented = false,
-        navigationListener = function(e) {
-            isDefaultPrevented = e.isDefaultPrevented();
-        };
+                editor.trigger('select');
 
-    editor.wrapper.bind('click', navigationListener);
+                equal(value($('.k-fontSize', editor.wrapper)), '2 (10pt)');
+            });
 
-    $('.k-editor-button .k-tool-icon.k-state-disabled').trigger('click');
+            test('clicking disabled links should not navigate', function() {
+                var isDefaultPrevented = false,
+                navigationListener = function(e) {
+                    isDefaultPrevented = e.isDefaultPrevented();
+                };
 
-    editor.wrapper.unbind('click', navigationListener);
+                editor.wrapper.bind('click', navigationListener);
 
-    ok(isDefaultPrevented);
-});
+                $('.k-editor-button .k-tool-icon.k-state-disabled').trigger('click');
 
-test('buttons honor to-be-applied pending formats', function() {
-    editor.value('foo')
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.collapse(true);
+                editor.wrapper.unbind('click', navigationListener);
 
-    editor.selectRange(range);
+                ok(isDefaultPrevented);
+            });
 
-    editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
+            test('buttons honor to-be-applied pending formats', function() {
+                editor.value('foo')
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 1);
+                range.collapse(true);
 
-    editor.trigger('select');
-            
-    ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
-});
+                editor.selectRange(range);
 
-test('buttons honor to-be-removed pending formats', function() {
-    editor.value('<strong>foo</strong>')
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild, 1);
-    range.collapse(true);
+                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
 
-    editor.selectRange(range);
-            
-    editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
+                editor.trigger('select');
 
-    editor.trigger('select');
-            
-    ok(!$('.k-bold', editor.element).hasClass('k-state-active'));
-});
+                ok($('.k-bold', editor.wrapper).hasClass('k-state-active'));
+            });
 
-test('combos honor to-be-applied pending formats', function() {
-    editor.value('foo')
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.collapse(true);
+            test('buttons honor to-be-removed pending formats', function() {
+                editor.value('<strong>foo</strong>')
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild.firstChild, 1);
+                range.collapse(true);
 
-    editor.selectRange(range);
+                editor.selectRange(range);
 
-    editor.pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
+                editor.pendingFormats.toggle({ name: 'bold', params: undefined, command: editor.options.tools.bold.command });
 
-    editor.trigger('select');
-            
-    equals($('select.k-fontSize').data(componentType).value(), 'xx-large');
-});
+                editor.trigger('select');
 
-</script>
+                ok(!$('.k-bold', editor.element).hasClass('k-state-active'));
+            });
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+            test('combos honor to-be-applied pending formats', function() {
+                editor.value('foo')
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 1);
+                range.collapse(true);
 
-</body>
+                editor.selectRange(range);
+
+                editor.pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
+
+                editor.trigger('select');
+
+                equals($('select.k-fontSize').data(componentType).value(), 'xx-large');
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-var GreedyInlineFormatter;
+            var GreedyInlineFormatter;
 
-$("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor();
 
-module("Editor / GreedyInlineFormatter", {
-    setup: function() {
-        editor = getEditor();
-        GreedyInlineFormatter = kendo.ui.Editor.GreedyInlineFormatter;
-    }
-});
+            module("Editor / GreedyInlineFormatter", {
+                setup: function() {
+                    editor = getEditor();
+                    GreedyInlineFormatter = kendo.ui.Editor.GreedyInlineFormatter;
+                }
+            });
 
-test('toggle applies format on simple selection', function() {
-    var range = createRangeFromText(editor, "|foo|");
-    var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
-    formatter.toggle(range);
-    equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
-});
+            test('toggle applies format on simple selection', function() {
+                var range = createRangeFromText(editor, "|foo|");
+                var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
+                formatter.toggle(range);
+                equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
+            });
 
-test('toggle applies format on suitable node', function() {
-    var range = createRangeFromText(editor, '|<span style="font-family:Courier;">foo</span>|');
-    var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
-    formatter.toggle(range);
-    equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
-});
+            test('toggle applies format on suitable node', function() {
+                var range = createRangeFromText(editor, '|<span style="font-family:Courier;">foo</span>|');
+                var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
+                formatter.toggle(range);
+                equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
+            });
 
-test('formats split existing format nodes', function() {
-    var range = createRangeFromText(editor, '<span style="font-family:Courier;">fo|o</span>bar|');
-    var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
-            
-    var marker = new kendo.ui.Editor.Marker();
-    marker.add(range);
-    formatter.toggle(range);
-    marker.remove(range);
+            test('formats split existing format nodes', function() {
+                var range = createRangeFromText(editor, '<span style="font-family:Courier;">fo|o</span>bar|');
+                var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
 
-    equal(editor.value(), '<span style="font-family:Courier;">fo</span><span style="font-family:Arial;">obar</span>');
-});
+                var marker = new kendo.ui.Editor.Marker();
+                marker.add(range);
+                formatter.toggle(range);
+                marker.remove(range);
 
-test('format splits span when inherit is supplied', function() {
-    var range = createRangeFromText(editor, '<span style="font-family:Courier;">fo|o</span>bar|');
-    var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'inherit' } }, 'font-family');
-            
-    var marker = new kendo.ui.Editor.Marker();
-    marker.add(range);
-    formatter.toggle(range);
-    marker.remove(range);
+                equal(editor.value(), '<span style="font-family:Courier;">fo</span><span style="font-family:Arial;">obar</span>');
+            });
 
-    equal(editor.value(), '<span style="font-family:Courier;">fo</span>obar');
-});
+            test('format splits span when inherit is supplied', function() {
+                var range = createRangeFromText(editor, '<span style="font-family:Courier;">fo|o</span>bar|');
+                var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'inherit' } }, 'font-family');
 
-</script>
+                var marker = new kendo.ui.Editor.Marker();
+                marker.add(range);
+                formatter.toggle(range);
+                marker.remove(range);
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+                equal(editor.value(), '<span style="font-family:Courier;">fo</span>obar');
+            });
 
-</body>
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

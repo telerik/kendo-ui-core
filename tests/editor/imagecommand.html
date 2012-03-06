@@ -1,278 +1,275 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
-
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.draganddrop.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
-
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
-
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
-
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
-
-<script>
-
-var ImageCommand;
-
-$("#Editor1").kendoEditor();
-
-function execImageCommandOnRange(range) {
-    var command = new ImageCommand({ range: range });
-    command.editor = editor;
-    command.exec();
-
-    return command;
-}
-
-module("Editor / ImageCommand", {
-    setup: function() {
-        editor = getEditor();
-        ImageCommand = kendo.ui.Editor.ImageCommand;
-    },
-    teardown: function() {
-        var wnd = $('.k-window').data('tWindow');
-        if (wnd) wnd.destroy();
-    }
-});
-
-test('exec creates window', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    equal($('.k-window').length, 1)
-});
-
-test('clicking close closes the window', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    $('.k-dialog-close').click();
-    equal($('.k-window').length, 0)
-});
-
-test('clicking insert closes the window', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    $('.k-dialog-insert').click();
-    equal($('.k-window').length, 0)
-});
-
-test('clicking insert inserts image if url is set', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    $('#k-editor-image-url').val('foo');
-    $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="" src="foo" />')
-});
-
-test('clicking insert does not inserts image if url is not set', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    $('#k-editor-image-url').val('');
-    $('.k-dialog-insert').click();
-    equal(editor.value(), 'foo')
-});
-
-test('clicking insert updates existing src', function() {
-    editor.value('<img src="bar" style="float:left" />');
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
-    execImageCommandOnRange(range);
-
-    $('#k-editor-image-url').val('foo');
-    $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="" src="foo" style="float:left;" />')
-});
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
+
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
+
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
+
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+
+        <script>
+            var sequential = true;
+
+            var ImageCommand = kendo.ui.Editor.ImageCommand;
+
+            $("#Editor1").kendoEditor();
+
+            function execImageCommandOnRange(range) {
+                var command = new ImageCommand({ range: range });
+                command.editor = editor;
+                command.exec();
+
+                return command;
+            }
+
+            module("Editor / ImageCommand", {
+                setup: function() {
+                    editor = getEditor();
+                },
+                teardown: function() {
+                    $('.k-window,.k-overlay').remove()
+                }
+            });
+
+            test('exec creates window', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                equal($('.k-window').length, 1)
+            });
+
+            test('clicking close closes the window', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('.k-window-action .k-close').click();
+                equal($('.k-window').length, 0)
+            });
+
+            test('clicking insert closes the window', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('.k-dialog-insert').click();
+                equal($('.k-window').length, 0)
+            });
+
+            test('clicking insert inserts image if url is set', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url').val('foo');
+                $('.k-dialog-insert').click();
+                equal(editor.value(), '<img alt="" src="foo" />')
+            });
+
+            test('clicking insert does not insert image if url is not set', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url').val('');
+                $('.k-dialog-insert').click();
+                equal(editor.value(), 'foo')
+            });
+
+            test('clicking insert updates existing src', function() {
+                editor.value('<img src="bar" style="float:left" />');
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url').val('foo');
+                $('.k-dialog-insert').click();
+                equal(editor.value(), '<img alt="" src="foo" style="float:left;" />')
+            });
 
-test('url text is set', function() {
-    editor.value('<img src="bar" />');
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
-    execImageCommandOnRange(range);
+            test('url text is set', function() {
+                editor.value('<img src="bar" />');
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
+                execImageCommandOnRange(range);
 
-    equal($('#k-editor-image-url').val(), 'bar');
-});
+                equal($('#k-editor-image-url').val(), 'bar');
+            });
 
-test('hitting enter in url inserts image', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
+            test('hitting enter in url inserts image', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
 
-    var e = new $.Event();
-    e.type = 'keydown';
-    e.keyCode = 13;
+                var e = new $.Event();
+                e.type = 'keydown';
+                e.keyCode = 13;
 
-    $('#k-editor-image-url')
-        .val('http://foo')
-        .trigger(e);
+                $('#k-editor-image-url')
+                    .val('http://foo')
+                    .trigger(e);
 
-    equal(editor.value(), '<img alt="" src="http://foo" />')
-    equal($('.k-window').length, 0);
-});
+                equal(editor.value(), '<img alt="" src="http://foo" />')
+                equal($('.k-window').length, 0);
+            });
 
-test('hitting esc in url cancels', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
+            test('hitting esc in url cancels', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
 
-    var e = new $.Event();
-    e.type = 'keydown';
-    e.keyCode = 27;
+                var e = new $.Event();
+                e.type = 'keydown';
+                e.keyCode = 27;
 
-    $('#k-editor-image-url')
-        .val('foo')
-        .trigger(e);
+                $('#k-editor-image-url')
+                .val('foo')
+                .trigger(e);
 
-    equal(editor.value(), 'foo')
-    equal($('.k-window').length, 0);
-});
+                equal(editor.value(), 'foo')
+                equal($('.k-window').length, 0);
+            });
 
-test('hitting enter in title field inserts link', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    var e = new $.Event();
-    e.type = 'keydown';
-    e.keyCode = 13;
-
-    $('#k-editor-image-url')
-        .val('http://foo')
-    $('#k-editor-image-title').trigger(e);
-
-    equal(editor.value(), '<img alt="" src="http://foo" />')
-    equal($('.k-window').length, 0);
-});
-
-test('hitting esc in title cancels', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    var e = new $.Event();
-    e.type = 'keydown';
-    e.keyCode = 27;
-
-    $('#k-editor-image-url')
-        .val('foo')
-
-    $('#k-editor-image-title').trigger(e);
-
-    equal(editor.value(), 'foo')
-    equal($('.k-window').length, 0);
-});
-
-test('setting title sets alt', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-
-    $('#k-editor-image-url')
-        .val('http://foo');
-
-    $('#k-editor-image-title')
-        .val('bar')
-
-    $('.k-dialog-insert').click();
-    equal(editor.value(), '<img alt="bar" src="http://foo" />')
-});
-
-test('title text box is filled from alt', function() {
-    editor.value('<img src="foo" alt="bar" />');
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
-    execImageCommandOnRange(range);
-
-    equal($('#k-editor-image-title').val(), 'bar');
-});
-
-test('undo restores content', function() {
-    var range = createRangeFromText(editor, '|foo|');
-
-    var command = execImageCommandOnRange(range);
-
-    $('#k-editor-image-url')
-        .val('foo');
-
-    $('.k-dialog-insert').click();
-    command.undo();
-    equal(editor.value(), 'foo');
-});
-
-
-test('exec inserts image with empty range', function() {
-    editor.value('foo ');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 4);
-    range.setEnd(editor.body.firstChild, 4);
-            
-    execImageCommandOnRange(range);
-
-    $('#k-editor-image-url')
-        .val('http://foo');
-
-    $('.k-dialog-insert').click();
-    equal(editor.value(), 'foo <img alt="" src="http://foo" />')
-});
-
-test('link is not created if url is http slash slash', function() {
-    var range = createRangeFromText(editor, '|foo|');
-            
-    execImageCommandOnRange(range);
-
-    $('.k-dialog-insert').click();
-    equal(editor.value(), 'foo')
-});
-
-test('cursor is put after image', function() {
-    var range = createRangeFromText(editor, '|foo|bar');
-    execImageCommandOnRange(range);
-
-    $('#k-editor-image-url')
-        .val('http://foo');
-            
-    $('.k-dialog-insert').click();
-            
-    range = editor.getRange();
-    range.insertNode(editor.document.createElement('span'));
-    equal(editor.value(), '<img alt="" src="http://foo" /><span></span>bar');
-});
-
-test('closing the window restores content', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    execImageCommandOnRange(range);
-            
-    $('.k-window').css({width:200,height:300}).find('.k-close').click();
-
-    equal(editor.value(), 'foo')
-    equal($('.k-window').length, 0);
-});
-
-</script>
-
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
-
-</body>
+            test('hitting enter in title field inserts link', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                var e = new $.Event();
+                e.type = 'keydown';
+                e.keyCode = 13;
+
+                $('#k-editor-image-url').val('http://foo')
+                $('#k-editor-image-title').trigger(e);
+
+                equal(editor.value(), '<img alt="" src="http://foo" />')
+                equal($('.k-window').length, 0);
+            });
+
+            test('hitting esc in title cancels', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                var e = new $.Event();
+                e.type = 'keydown';
+                e.keyCode = 27;
+
+                $('#k-editor-image-url')
+                .val('foo')
+
+                $('#k-editor-image-title').trigger(e);
+
+                equal(editor.value(), 'foo')
+                equal($('.k-window').length, 0);
+            });
+
+            test('setting title sets alt', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url')
+                .val('http://foo');
+
+                $('#k-editor-image-title')
+                .val('bar')
+
+                $('.k-dialog-insert').click();
+                equal(editor.value(), '<img alt="bar" src="http://foo" />')
+            });
+
+            test('title text box is filled from alt', function() {
+                editor.value('<img src="foo" alt="bar" />');
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
+                execImageCommandOnRange(range);
+
+                equal($('#k-editor-image-title').val(), 'bar');
+            });
+
+            test('undo restores content', function() {
+                var range = createRangeFromText(editor, '|foo|');
+
+                var command = execImageCommandOnRange(range);
+
+                $('#k-editor-image-url')
+                .val('foo');
+
+                $('.k-dialog-insert').click();
+                command.undo();
+                equal(editor.value(), 'foo');
+            });
+
+
+            test('exec inserts image with empty range', function() {
+                editor.value('foo ');
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 4);
+                range.setEnd(editor.body.firstChild, 4);
+
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url')
+                .val('http://foo');
+
+                $('.k-dialog-insert').click();
+                equal(editor.value(), 'foo <img alt="" src="http://foo" />')
+            });
+
+            test('link is not created if url is http slash slash', function() {
+                var range = createRangeFromText(editor, '|foo|');
+
+                execImageCommandOnRange(range);
+
+                $('.k-dialog-insert').click();
+                equal(editor.value(), 'foo')
+            });
+
+            test('cursor is put after image', function() {
+                var range = createRangeFromText(editor, '|foo|bar');
+                execImageCommandOnRange(range);
+
+                $('#k-editor-image-url').val('http://foo');
+
+                $('.k-dialog-insert').click();
+
+                range = editor.getRange();
+                range.insertNode(editor.document.createElement('span'));
+                equal(editor.value(), '<img alt="" src="http://foo" /><span></span>bar');
+            });
+
+            test('closing the window restores content', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                execImageCommandOnRange(range);
+
+                $('.k-window').css({width:200,height:300}).find('.k-close').click();
+
+                equal(editor.value(), 'foo')
+                equal($('.k-window').length, 0);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

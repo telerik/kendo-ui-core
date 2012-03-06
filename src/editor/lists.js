@@ -25,7 +25,7 @@ var ListFormatFinder = BlockFormatFinder.extend({
 
     isFormatted: function (nodes) {
         var formatNodes = [], formatNode;
-            
+
         for (var i = 0; i < nodes.length; i++)
             if ((formatNode = this.findFormat(nodes[i])) && dom.name(formatNode) == this.tag)
                 formatNodes.push(formatNode);
@@ -81,7 +81,7 @@ var ListFormatter = Class.extend({
                 }
                 continue;
             }
-            
+
             if (dom.is(node, "td")) {
                 while (node.firstChild) {
                     li.appendChild(node.firstChild);
@@ -157,7 +157,7 @@ var ListFormatter = Class.extend({
     apply: function (nodes) {
         var tag = this.tag,
             commonAncestor = nodes.length == 1 ? dom.parentOfType(nodes[0], ['ul','ol']) : dom.commonAncestor.apply(null, nodes);
-            
+
         if (!commonAncestor)
             commonAncestor = dom.parentOfType(nodes[0], ["td"]) || nodes[0].ownerDocument.body;
 
@@ -170,9 +170,13 @@ var ListFormatter = Class.extend({
 
         if (!formatNode)
             formatNode = new ListFormatFinder(tag == 'ul' ? 'ol' : 'ul').findSuitable(nodes);
-        
+
         var childNodes = dom.significantChildNodes(commonAncestor);
-        
+
+        if (!childNodes.length) {
+            childNodes = nodes;
+        }
+
         if (/table|tbody/.test(dom.name(commonAncestor))) {
             childNodes = $.map(nodes, function(node) { return dom.parentOfType(node, ["td"]) });
         }
@@ -239,7 +243,7 @@ var ListFormatter = Class.extend({
 
         for (li = ul.firstChild; li; li = li.nextSibling) {
             p = dom.create(ul.ownerDocument, unwrapTag || 'p');
-                
+
             while(li.firstChild) {
                 child = li.firstChild;
 
@@ -260,7 +264,7 @@ var ListFormatter = Class.extend({
                 fragment.appendChild(p);
             }
         }
-            
+
         parents = $(ul).parents('ul,ol');
 
         if (parents[0]) {
@@ -295,7 +299,7 @@ var ListFormatter = Class.extend({
                 range.selectNode(text.parentNode);
             }
         }
-            
+
         if (that.finder.isFormatted(nodes)) {
             that.split(range);
             that.remove(nodes);
@@ -321,7 +325,7 @@ var ListTool = FormatTool.extend({
         }));
     },
 
-    command: function (commandArguments) { 
+    command: function (commandArguments) {
         return new ListCommand(extend(commandArguments, { tag: this.options.tag }));
     }
 });

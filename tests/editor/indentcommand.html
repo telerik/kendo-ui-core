@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-var IndentCommand;
+            var IndentCommand = kendo.ui.Editor.IndentCommand;
 
-$("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
-    editor = getEditor();
-    IndentCommand = kendo.ui.Editor.IndentCommand;
-}
+            module("IndentCommand", {
+                setup: function() {
+                    editor = getEditor();
+                }
+            });
 
-test('exec indents', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    var command = new IndentCommand({range:range});
-    command.exec();
-    equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
-});
+            test('exec indents', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                var command = new IndentCommand({range:range});
+                command.exec();
+                equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
+            });
 
-test('undo removes margin', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    var command = new IndentCommand({range:range});
-    command.exec();
-    command.undo();
+            test('undo removes margin', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                var command = new IndentCommand({range:range});
+                command.exec();
+                command.undo();
 
-    equal(editor.value(), 'foo');
-});
-        
-test('redo indents', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    var command = new IndentCommand({ range: range });
-    command.exec();
-    command.undo();
-    command.exec();
+                equal(editor.value(), 'foo');
+            });
 
-    equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
-});
+            test('redo indents', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                var command = new IndentCommand({ range: range });
+                command.exec();
+                command.undo();
+                command.exec();
 
-test('indent list', function() {
-    editor.focus();
-    var range = createRangeFromText(editor, '<ul><li>foo</li><li>|b|ar</li></ul>');
-    var command = new IndentCommand({ range: range });
-    command.exec();
-    equal(editor.value(), '<ul><li>foo<ul><li>bar</li></ul></li></ul>');
-});
+                equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
+            });
 
-</script>
+            test('indent list', function() {
+                editor.focus();
+                var range = createRangeFromText(editor, '<ul><li>foo</li><li>|b|ar</li></ul>');
+                var command = new IndentCommand({ range: range });
+                command.exec();
+                equal(editor.value(), '<ul><li>foo<ul><li>bar</li></ul></li></ul>');
+            });
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+        </script>
 
-</body>
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

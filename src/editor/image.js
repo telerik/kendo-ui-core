@@ -80,13 +80,13 @@ var ImageCommand = Command.extend({
 
 //        var fileBrowser = this.editor.fileBrowser;
 //        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
-//        
-        function activate() {  
+//
+        function activate() {
 //            if (showBrowser) {
 //                new $t.imageBrowser($(this).find(".k-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.options.localization }));
 //            }
-        }        
-        
+        }
+
         var windowContent =
             '<div class="k-editor-dialog">' +
                 '<ol>' +
@@ -100,26 +100,28 @@ var ImageCommand = Command.extend({
                 '</div>' +
             '</div>'
 
-        var dialog = $(windowContent).appendTo(document.body).kendoWindow(extend(this.editor.options.dialogOptions, {
-            title: "Insert Image",
-            close: close
-        }))
-        .hide()
-        .find('.k-dialog-insert').click(apply).end()
-        .find('.k-dialog-close').click(close).end()
-        .find('.k-form-text-row input').keydown(function (e) {
-            if (e.keyCode == 13)
-                apply(e);
-            else if (e.keyCode == 27)
-                close(e);
-        }).end()                
-        //.toggleClass("k-imagebrowser", showBrowser)
-        // IE < 8 returns absolute url if getAttribute is not used
-        .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
-        .find('#k-editor-image-title').val(img ? img.alt : '').end()
-        .show()
-        .data('kendoWindow')
-        .center();
+        var dialog = $(windowContent)
+                .appendTo(document.body)
+                .kendoWindow(extend({}, this.editor.options.dialogOptions, {
+                    title: "Insert Image",
+                    close: close
+                }))
+                .hide()
+                .find('.k-dialog-insert').click(apply).end()
+                .find('.k-dialog-close').click(close).end()
+                .find('.k-form-text-row input').keydown(function (e) {
+                    if (e.keyCode == 13)
+                        apply(e);
+                    else if (e.keyCode == 27)
+                        close(e);
+                }).end()
+                //.toggleClass("k-imagebrowser", showBrowser)
+                // IE < 8 returns absolute url if getAttribute is not used
+                .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
+                .find('#k-editor-image-title').val(img ? img.alt : '').end()
+                .show()
+                .data('kendoWindow')
+                .center();
 
         $('#k-editor-image-url', dialog.element).focus().select();
     }
