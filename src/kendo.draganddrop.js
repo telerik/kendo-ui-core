@@ -14,7 +14,8 @@
         START_EVENTS = "mousedown",
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave";
-        KEYDOWN = "keydown",
+        KEYUP = "keyup",
+        ESCAPE = 27,
 
         // Draggable events
         DRAGSTART = "dragstart",
@@ -132,10 +133,13 @@
         },
 
         cancel: function() {
-            var that = this;
-            that.pressed = false;
-            that.surface.off(that.ns);
-            that.trigger(CANCEL);
+            this._cancel();
+            this.trigger(CANCEL);
+        },
+
+        _cancel: function() {
+            this.pressed = false;
+            this.surface.off(this.ns);
         },
 
         _start: function(e) {
@@ -191,7 +195,7 @@
                         that._trigger(START, e);
                         that.moved = true;
                     } else {
-                        return that.cancel();
+                        return that._cancel();
                     }
                 }
 
@@ -208,7 +212,7 @@
             if (!that.pressed) { return; }
 
             that._withEvent(e, function() {
-                that.cancel();
+                that._cancel();
 
                 if (that.moved) {
                     that._trigger(END, e);
@@ -433,8 +437,16 @@
                 threshold: that.options.distance,
                 start: proxy(that._start, that),
                 move: proxy(that._drag, that),
-                end: proxy(that._end, that)
+                end: proxy(that._end, that),
+                cancel: proxy(that._cancel, that)
             });
+
+            that.destroy = proxy(that._destroy, that);
+            that.captureEscape = function(e) {
+                if (e.keyCode === ESCAPE) {
+                    that.drag.cancel();
+                }
+            }
         },
 
         events: [
@@ -495,8 +507,10 @@
 
             if (that._trigger(DRAGSTART, e)) {
                 that.drag.cancel();
-                that._destroy(e);
+                that.destroy();
             }
+
+            $(document).on(KEYUP, that.captureEscape);
         },
 
         updateHint: function(e) {
@@ -551,9 +565,7 @@
         },
 
         _end: function(e) {
-            var that = this,
-                destroy = proxy(that._destroy, that),
-                offset = getOffset(that.currentTarget);
+            var that = this;
 
             that._withDropTarget(e, function(target) {
                 if (target) {
@@ -562,12 +574,19 @@
                 }
             });
 
-            that._trigger(DRAGEND, e);
+            that._cancel(e.event);
+        },
+
+        _cancel: function(e) {
+            var that = this,
+                offset = getOffset(that.currentTarget);
+
+            that._trigger(DRAGEND, {event: e});
 
             if (that.hint && !that.dropped) {
-                that.hint.animate(offset, "fast", destroy);
+                that.hint.animate(offset, "fast", that.destroy);
             } else {
-                destroy();
+                that.destroy();
             }
         },
 
@@ -609,7 +628,7 @@
             }
         },
 
-        _destroy: function(e) {
+        _destroy: function() {
             var that = this;
 
             if (that.hint) {
@@ -619,6 +638,7 @@
             delete draggables[that.options.group];
 
             that.trigger("destroy");
+            $(document).off(KEYUP, that.captureEscape);
         }
     });
 

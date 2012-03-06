@@ -20,13 +20,16 @@
 
         <script>
             var Draggable = kendo.ui.Draggable,
+                draggable,
                 span;
             module("kendo.ui.Draggable", {
                 setup: function() {
                     span = $("<span/>").appendTo(document.body);
                 },
+
                 teardown: function() {
                     span.remove();
+                    draggable && draggable._destroy();
                 }
             });
 
@@ -39,35 +42,30 @@
                 return new Draggable(span, options);
             }
 
-            test("moving the mouse beyond the allowed distance triggers the dragstart event", function() {
-                var dragstartWasCalled = false,
-                    draggable = setup({
+            test("moving the mouse beyond the allowed distance triggers the dragstart event", 1, function() {
+                    setup({
                         dragstart: function() {
-                            dragstartWasCalled = true;
+                            ok(true);
                         }
                     });
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 1 }, $(document.documentElement));
-                ok(dragstartWasCalled);
             });
 
-            test("moving the mouse within the allowed distance does not trigger the dragstart event", function() {
-                var dragstartWasCalled = false,
+            test("moving the mouse within the allowed distance does not trigger the dragstart event", 0, function() {
                     draggable = new Draggable(span, { dragstart: function() {
-                            dragstartWasCalled = true;
+                            ok(false);
                         }
                     });
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 1, pageY: 1 }, $(document.documentElement));
 
-                ok(!dragstartWasCalled);
             });
 
-            test("prevent default from drag start event does not trigger drag event", function() {
-                var dragWasCalled = false,
-                    draggable = setup({
+            test("prevent default from drag start event does not trigger drag event", 1, function() {
+                    setup({
                         dragstart: function(e) {
                             e.preventDefault();
                             ok(true);
@@ -81,11 +79,10 @@
                 trigger("mousemove", { pageX: 10, pageY: 1 });
             });
 
-            test("drag event is raised during dragging", function() {
-                var dragWasCalled = false,
-                    draggable = setup({
+            test("drag event is raised during dragging", 2, function() {
+                    setup({
                         drag: function() {
-                            dragWasCalled = true;
+                            ok(true);
                         }
                     });
 
@@ -93,16 +90,25 @@
                 trigger("mousemove", { pageX: 10, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 2 });
 
-                ok(dragWasCalled);
             });
 
-            test("dragend event is raised", function() {
+            test("dragend event is raised", 1, function() {
+                setup({ dragend: function() {
+                    ok(true);
+                }});
+
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 10, pageY: 1 });
+                trigger("mouseup", { pageX: 10, pageY: 2 });
+            });
+
+            test("dragend event is raised when pressing escape", function() {
                 var dragEndWasCalled = false,
                     draggable = setup({ dragend: function() { dragEndWasCalled = true; } });
 
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 10, pageY: 1 });
-                trigger("mouseup", { pageX: 10, pageY: 2 });
+                trigger("keyup", { keyCode: 27});
 
                 ok(dragEndWasCalled);
             });
