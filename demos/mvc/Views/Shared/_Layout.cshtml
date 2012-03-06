@@ -50,7 +50,6 @@
             @Html.Partial("Pager");
 
             <div id="navWrap">
-                <input type="hidden" value="@(ViewBag.PrevUrl != null ? Url.Content(ViewBag.PrevUrl) : "")" />
                 <ul class="nav">
                     @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
                     {
@@ -97,7 +96,9 @@
     @Html.Partial("Footer")
 
     <script>
-        var panelbar = $(".nav").kendoPanelBar({
+        var prevUrl = "@(ViewBag.PrevUrl != null ? Url.Content(ViewBag.PrevUrl) : "")",
+            nextUrl = "@(ViewBag.nextUrl != null ? Url.Content(ViewBag.nextUrl) : "")",
+            panelbar = $(".nav").kendoPanelBar({
             animation: { open: { effects: "fadeIn expandVertical" } },
             expand: function() {
                 $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
@@ -114,63 +115,29 @@
             container: "#mobile-application-container"
         });
 
-        $("#pager a:first").click(function(e) {
+        $("#pager a").click(function(e) {
             var element = $(this),
                 url = element.attr("href"),
-                next = element.next(),
-                prev = panelbar.select().prev();
-
-            if (prev[0]) {
-                e.preventDefault();
-
-                panelbar.select(prev);
-
-                //update links
-                next.removeClass("k-state-disabled").attr("href", location.href);
-
-                prev = prev.prev();
-                if (prev[0]) {
-                    element.attr("href", prev.children("a").attr("href"));
-                } else {
-                    var prevUrl = $("#navWrap").find("[type=hidden]").val();
-
-                    element.attr("href", prevUrl || "#").toggleClass("k-state-disabled", !prevUrl);
-                }
-
-                Application.load(url);
-            }
-        });
-
-        $("#pager a:last").click(function(e) {
-            var element = $(this),
-                url = element.attr("href"),
-                prev = element.prev(),
-                next = panelbar.select().next();
+                method = element.hasClass("prev") ? "prev" : "next",
+                sibling = element[method == "prev" ? "next" : "prev"](),
+                current = panelbar.select(),
+                next = current[method](),
+                lastUrl = window[method + "Url"];
 
             if (next[0]) {
                 e.preventDefault();
 
                 panelbar.select(next);
+                next.children().addClass("chosen");
+                current.children().removeClass("chosen");
 
-                //update links
-                prev.removeClass("k-state-disabled").attr("href", location.href);
+                sibling.removeClass("k-state-disabled").attr("href", location.href);
 
-                next = next.next();
+                next = next[method]();
                 if (next[0]) {
                     element.attr("href", next.children("a").attr("href"));
                 } else {
-                    var widget = $("#topNav").find(".k-state-highlighted");
-                    next = widget.next();
-
-                    if (!next[0]) {
-                        next = widget.parent().nextAll("ul").eq(0).children("li:first");
-                    }
-
-                    if (next[0]) {
-                        element.attr("href", next.find("a").attr("href"));
-                    } else {
-                        element.attr("href", "#").addClass("k-state-disabled");
-                    }
+                    element.attr("href", lastUrl || "#").toggleClass("k-state-disabled", !lastUrl);
                 }
 
                 Application.load(url);
