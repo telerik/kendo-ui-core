@@ -40,8 +40,8 @@ namespace Kendo.Controllers
             LoadNavigation(suite);
 
             FindCurrentExample();
-
-            FindPrevNextUrls();
+            FindSiblingExamples();
+            FindEdgeExamples();
 
             if (suite == "mobile") {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
@@ -94,7 +94,7 @@ namespace Kendo.Controllers
             }
         }
 
-        protected void FindPrevNextUrls()
+        protected void FindSiblingExamples()
         {
             if (ViewBag.CurrentExample != null)
             {
@@ -109,6 +109,27 @@ namespace Kendo.Controllers
                 if (index < examplesUrl.Count - 1)
                 {
                     ViewBag.NextUrl = examplesUrl[index + 1];
+                }
+            }
+        }
+
+        protected void FindEdgeExamples()
+        {
+            if (ViewBag.CurrentWidget != null)
+            {
+                var index = -1;
+                var items = ViewBag.CurrentWidget.Items;
+                var first = string.Format("~/{0}/{1}", ViewBag.Suite, items[0].Url);
+                var last = string.Format("~/{0}/{1}", ViewBag.Suite, items[items.Length - 1].Url);
+
+                index = examplesUrl.IndexOf(first);
+                if (index > 0) {
+                    ViewBag.LastUrl = examplesUrl[index - 1];
+                }
+
+                index = examplesUrl.IndexOf(last);
+                if (index < examplesUrl.Count - 1) {
+                    ViewBag.FirstUrl = examplesUrl[index + 1];
                 }
             }
         }
