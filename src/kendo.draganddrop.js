@@ -77,6 +77,10 @@
         }
     });
 
+    function preventDefault(e) {
+        e.preventDefault();
+    }
+
     var Drag = Observable.extend({
         init: function(element, options) {
             var that = this,
@@ -84,6 +88,8 @@
                 ns = "." + kendo.guid();
 
             options = options || {};
+            that.filter = options.filter;
+            that.threshold = options.threshold || 0;
 
             element = $(element);
             Observable.fn.init.call(that);
@@ -105,10 +111,8 @@
 
             element
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
-                .on("dragstart", false);
+                .on("mousedown dragstart selectstart", that.filter, preventDefault);
 
-            that.filter = options.filter;
-            that.threshold = options.threshold || 0;
             that.bind([TAP, START, MOVE, END], options);
         },
 
@@ -420,8 +424,6 @@
                 move: proxy(that._drag, that),
                 end: proxy(that._end, that)
             });
-
-            that.element.on("selectstart", that.options.filter, false);
         },
 
         events: [
