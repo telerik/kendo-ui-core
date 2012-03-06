@@ -31,7 +31,7 @@
                         var idField = {};
 
                         idField[that.xpathToMember(id, true)] = { field : that.getter(id) };
-                        model.fields = extend(model.fields, idField);
+                        model.fields = extend(idField, model.fields);
                         model.id = that.xpathToMember(id);
                     }
                     model = kendo.data.Model.define(model);
