@@ -253,10 +253,10 @@
             return this.startAngle + this.angle / 2;
         },
 
-        radius: function(newRadius, inner) {
+        radius: function(newRadius, innerRadius) {
             var that = this;
 
-            if (inner) {
+            if (innerRadius) {
                 that.ir = newRadius;
             } else {
                 that.r = newRadius;
@@ -265,12 +265,12 @@
             return that;
         },
 
-        point: function(angle, inner) {
+        point: function(angle, innerRadius) {
             var ring = this,
                 radianAngle = angle * DEGREE,
                 ax = math.cos(radianAngle),
                 ay = math.sin(radianAngle),
-                radius = inner ? ring.ir : ring.r,
+                radius = innerRadius ? ring.ir : ring.r,
                 x = ring.c.x - (ax * radius),
                 y = ring.c.y - (ay * radius);
 
@@ -279,21 +279,35 @@
 
         getBBox: function() {
             var ring = this,
-                box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),
-                sa = ring.startAngle,
-                ea = sa + ring.angle,
-                angles,
-                i;
+            box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),
+            sa = round(ring.startAngle % 360),
+            ea = round((sa + ring.angle) % 360),
+            innerRadius = ring.ir,
+            primaryAngles = [0, 90, 180, 270],
+            angles = [],
+            i,
+            point;
 
-            function getAnglesInRange(element, index, array) {
-                var overflow = math.max(0, ea - 360);
-                return (element >= (sa - overflow) && element <= ea);
+            if (sa == ea) {
+                angles = primaryAngles;
+            } else {
+                for (i = sa; i != ea; i = (i + 1) % 360) {
+                    if (inArray(i, primaryAngles)) {
+                        angles.push(i);
+                    }
+                }
             }
 
-            angles = grep([sa, ea, 0, 90, 180, 270], getAnglesInRange);
+            angles.push(sa, ea);
 
             for (i = 0; i < angles.length; i++) {
-                box.wrapPoint(ring.point(angles[i]));
+                point = ring.point(angles[i]);
+                box.wrapPoint(point);
+                box.wrapPoint(point, innerRadius);
+            }
+
+            if (innerRadius == 0) {
+                box.wrapPoint(ring.c);
             }
 
             return box;
