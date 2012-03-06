@@ -435,7 +435,7 @@
         }
     });
 
-    var GaugePlotArea = ChartElement.extend({
+    var RadialGaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
 
@@ -570,6 +570,40 @@
         }
     });
 
+    var LinearGaugePlotArea = ChartElement.extend({
+        init: function(options) {
+            ChartElement.fn.init.call(this, options);
+
+            this.render();
+        },
+
+        options: {
+            margin: {},
+            background: "",
+            border: {
+                color: BLACK,
+                width: 0
+            }
+        },
+
+        reflow: function(box){
+            var plotArea = this;
+
+            plotArea.box = box;
+        },
+
+        render: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                scale;
+
+            scale = plotArea.scale = new LinearScale(options.scale);
+            plotArea.append(plotArea.scale);
+            plotArea.pointer = new LinearPointer(scale, options.pointer);
+            plotArea.append(plotArea.pointer);
+        }
+    });
+
     var Gauge = Widget.extend({
         init: function(element, userOptions) {
             var gauge = this,
@@ -590,8 +624,6 @@
             $(element).addClass("k-gauge");
 
             gauge.redraw();
-
-            kendo.notify(gauge, dataviz.ui);
         },
 
         value: function(value) {
@@ -615,7 +647,14 @@
             gauge._viewElement = view.renderTo(element[0]);
         },
 
-        _getModel: function() {
+        svg: function() {
+            var model = this._getModel(),
+                view = Chart.SVGView.fromModel(model);
+
+            return view.render();
+        },
+
+        _createModel: function() {
             var gauge = this,
                 options = gauge.options,
                 element = gauge.element,
@@ -623,7 +662,57 @@
                     width: element.width() || DEFAULT_WIDTH,
                     height: element.height() || DEFAULT_HEIGHT,
                     transitions: options.transitions
-                    }, options.gaugeArea)),
+                    }, options.gaugeArea));
+
+            return model;
+        }
+    });
+
+    var RadialGauge = Gauge.extend({
+        init: function(element, options) {
+            var radialGauge = this;
+            Gauge.fn.init.call(radialGauge, element, options);
+            kendo.notify(radialGauge, dataviz.ui);
+        },
+
+        options: {
+            name: "RadialGauge",
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            }
+        },
+
+        _getModel: function() {
+            var gauge = this,
+                options = gauge.options,
+                model = gauge._createModel(),
+                plotArea;
+
+            plotArea = model._plotArea = new RadialGaugePlotArea(options);
+
+            gauge._pointers = [plotArea.pointer];
+
+            model.append(plotArea);
+            model.reflow();
+
+            return model;
+        }
+    });
+
+    var LinearGauge = Gauge.extend({
+        options: {
+            name: "LinearGauge",
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            }
+        },
+
+        _getModel: function() {
+            var gauge = this,
+                options = gauge.options,
+                model = gauge._createModel(),
                 plotArea;
 
             plotArea = model._plotArea = new GaugePlotArea(options);
@@ -634,31 +723,17 @@
             model.reflow();
 
             return model;
-        },
-
-        options: {
-            name: "Gauge",
-            transitions: true,
-            gaugeArea: {
-                background: ""
-            }
-        },
-
-        svg: function() {
-            var model = this._getModel(),
-                view = Chart.SVGView.fromModel(model);
-
-            return view.render();
         }
     });
 
     var PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
 
     // Exports ================================================================
-    dataviz.ui.plugin(Gauge);
+    dataviz.ui.plugin(RadialGauge);
+    dataviz.ui.plugin(LinearGauge);
 
     deepExtend(dataviz, {
-        GaugePlotArea: GaugePlotArea,
+        GaugePlotArea: RadialGaugePlotArea,
         RadialPointer: RadialPointer,
         PointerAnimationDecorator: PointerAnimationDecorator,
         RadialScale: RadialScale

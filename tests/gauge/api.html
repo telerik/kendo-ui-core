@@ -24,7 +24,7 @@
 
             module("Gauge API", {
                 setup: function() {
-                    gaugeElement = $("<div />").kendoGauge({
+                    gaugeElement = $("<div />").kendoRadialGauge({
                         pointer: {
                             value: 50
                         },
@@ -35,7 +35,7 @@
                         }
                     });
 
-                    gauge = gaugeElement.data("kendoGauge");
+                    gauge = gaugeElement.data("kendoRadialGauge");
                 }
             });
 
