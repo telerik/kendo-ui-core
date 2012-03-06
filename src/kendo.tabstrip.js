@@ -335,9 +335,10 @@
 
             that._updateClasses();
 
+            that.dataSource = kendo.data.DataSource.create(options.dataSource);
+            that.dataSource.bind("change", $.proxy(that.refresh, that));
+
             if (options.dataSource) {
-                that.dataSource = kendo.data.DataSource.create(options.dataSource);
-                that.dataSource.bind("change", $.proxy(that.refresh, that));
                 that.dataSource.fetch();
             }
 
@@ -384,7 +385,29 @@
 
             that.tabGroup[0].innerHTML = html;
 
+            updateFirstLast(that.tabGroup);
+
             that.trigger("dataBound");
+        },
+
+        value: function(value) {
+            var that = this;
+
+            if (value !== undefined) {
+                if (value != that.value()) {
+                   that.tabGroup.children().each(function() {
+                        if ($.trim($(this).text()) == value) {
+                            that.select(this);
+                        }
+                   });
+                }
+            } else {
+                return that.select().text();
+            }
+        },
+
+        items: function() {
+            return this.tabGroup[0].children;
         },
 
         setOptions: function(options) {
@@ -517,6 +540,7 @@
              *
              */
             CONTENTLOAD,
+            "change",
             "dataBinding",
             "dataBound"
         ],
@@ -1062,6 +1086,14 @@
             var contentElements = that.contentElements;
 
             if (contentElements.length == 0) {
+                oldTab.removeClass(TABONTOP);
+                item.addClass(TABONTOP) // change these directly to bring the tab on top.
+                    .css("z-index");
+
+                item.addClass(ACTIVESTATE);
+
+                that.trigger("change");
+
                 return false;
             }
 
@@ -1102,9 +1134,11 @@
                 showContent = function() {
                     if (!isAjaxContent) {
                         showContentElement();
+                        that.trigger("change");
                     } else
                         that.ajaxRequest(item, content, function () {
                             showContentElement();
+                            that.trigger("change");
                         });
                 };
 

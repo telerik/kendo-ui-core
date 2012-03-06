@@ -45,15 +45,23 @@
 
         change: function(e) {
             var dependency,
+                idx,
+                ch,
                 that = this;
 
             if (that.path === "this") {
                 that.trigger("change", e);
             } else {
                 for (dependency in that.dependencies) {
-                    if (dependency.indexOf(e.field) == 0) {
-                        that.trigger("change", e);
-                        break;
+                    idx = dependency.indexOf(e.field);
+
+                    if (idx === 0) {
+                       ch = dependency.charAt(e.field.length);
+
+                       if (!ch || ch === "." || ch === "[") {
+                            that.trigger("change", e);
+                            break;
+                       }
                     }
                 }
             }
