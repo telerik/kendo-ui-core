@@ -314,21 +314,21 @@
          *
          */
         init: function(element, options) {
-            element = $(element);
-
-            if (element.is("ul")) {
-                element = element.wrapAll("<div />").parent();
-            }
-
             var that = this;
 
             that._animations(options);
 
             Widget.fn.init.call(that, element, options);
 
+            if (that.element.is("ul")) {
+                that.wrapper = that.element.wrapAll("<div />").parent();
+            } else {
+                that.wrapper = that.element;
+            }
+
             options = that.options;
 
-            element
+            that.wrapper
                 .delegate(CLICKABLEITEMS, CLICK, $.proxy(that._click, that))
                 .delegate(HOVERABLEITEMS, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(DISABLEDLINKS, CLICK, false);
@@ -337,20 +337,20 @@
 
             if (options.dataSource) {
                 that.tabGroup.empty().detach();
-                that.element.empty();
-                that.tabGroup.appendTo(that.element);
+                that.wrapper.empty();
+                that.tabGroup.appendTo(that.wrapper);
 
                 that.append(options.dataSource);
             }
 
             if (that.options.contentUrls) {
-                element.find(".k-tabstrip-items > .k-item")
+                that.wrapper.find(".k-tabstrip-items > .k-item")
                     .each(function(index, item) {
                         $(item).find(">." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
                     });
             }
 
-            var selectedItems = element.find("li." + ACTIVESTATE),
+            var selectedItems = that.wrapper.find("li." + ACTIVESTATE),
                 content = $(that.contentElement(selectedItems.parent().children().index(selectedItems)));
 
             if (content.length > 0 && content[0].childNodes.length == 0) {
@@ -536,7 +536,7 @@
             element = that.element.find(element);
 
             if (arguments.length == 0) {
-                return that.element.find("li." + ACTIVESTATE);
+                return that.wrapper.find("li." + ACTIVESTATE);
             }
 
             if (!isNaN(element)) {
@@ -661,7 +661,7 @@
 
             each(inserted.tabs, function (idx) {
                 that.tabGroup.append(this);
-                that.element.append(inserted.contents[idx]);
+                that.wrapper.append(inserted.contents[idx]);
             });
 
             updateFirstLast(that.tabGroup);
@@ -849,12 +849,13 @@
             var that = this,
                 tabs, activeItem, activeTab;
 
-            that.element.addClass("k-widget k-header k-tabstrip");
+            that.wrapper.addClass("k-widget k-header k-tabstrip");
 
-            that.tabGroup = that.element.children("ul").addClass("k-tabstrip-items k-reset");
+            that.tabGroup = that.wrapper.children("ul").addClass("k-tabstrip-items k-reset");
 
-            if (!that.tabGroup.length)
-                that.tabGroup = $("<ul class='k-tabstrip-items k-reset'/>").appendTo(that.element);
+            if (!that.tabGroup[0]) {
+                that.tabGroup = $("<ul class='k-tabstrip-items k-reset'/>").appendTo(that.wrapper);
+            }
 
             tabs = that.tabGroup.find("li").addClass("k-item");
 
@@ -870,7 +871,7 @@
 
             tabs.eq(activeItem).addClass(TABONTOP);
 
-            that.contentElements = that.element.children("div");
+            that.contentElements = that.wrapper.children("div");
 
             that.contentElements
                 .addClass(CONTENT)
@@ -890,7 +891,7 @@
             var that = this,
                 tabStripID = that.element.attr("id");
 
-            that.contentElements = that.element.children("div");
+            that.contentElements = that.wrapper.children("div");
 
             that.tabGroup.find(".k-item").each(function(idx) {
                 var currentContent = that.contentElements.eq(idx),
@@ -898,13 +899,13 @@
                     href = $(this).children("." + LINK).attr(HREF);
 
                 if (!currentContent.length) {
-                    $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.element);
+                    $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.wrapper);
                 } else {
                     currentContent.attr("id", id);
                 }
             });
 
-            that.contentElements = that.element.children("div"); // refresh the contents
+            that.contentElements = that.wrapper.children("div"); // refresh the contents
         },
 
         _toggleHover: function(e) {
@@ -919,7 +920,7 @@
                 collapse = that.options.collapsible,
                 content = $(that.contentElement(item.index()));
 
-            if (item.closest(".k-widget")[0] != that.element[0]) {
+            if (item.closest(".k-widget")[0] != that.wrapper[0]) {
                 return;
             }
 
@@ -928,7 +929,7 @@
                 return;
             }
 
-            if ($("." + CONTENT, this.element).filter(function() { return $(this).data("animating"); }).length) {
+            if ($("." + CONTENT, that.wrapper).filter(function() { return $(this).data("animating"); }).length) {
                 return;
             }
 
@@ -953,7 +954,6 @@
                 if (that.activateTab(item)) {
                     e.preventDefault();
                 }
-
             }
         },
 
