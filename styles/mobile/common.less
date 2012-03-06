@@ -1026,3 +1026,49 @@
     99.99% { -webkit-transform: rotate(330deg); }
     100% { -webkit-transform: rotate(360deg); }
 }
+
+/* Form elements */
+
+input[type=text],
+input[type=date],
+input[type=time],
+input[type=datetime],
+select:not([multiple])
+{
+    font-size: 1.2rem;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type=text],
+input[type=date],
+input[type=time],
+input[type=datetime]
+{
+    .user-select(text);
+}
+
+input[readonly],
+select:not([multiple])
+{
+    .user-select(none);
+}
+
+.km-list input[type=text],
+.km-list input[type=date],
+.km-list input[type=time],
+.km-list input[type=datetime],
+.km-list select:not([multiple])
+{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -.95em;
+    z-index: 1;
+}
+
+input ~ .km-listview-link:after,
+select ~ .km-listview-link:after
+{
+    display: none;
+}
