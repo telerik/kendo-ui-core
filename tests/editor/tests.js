@@ -1,218 +1,218 @@
 tests.push(
     {
         page: "editor/api.html",
-        title: "API"
+        title: "editor api"
     },
     {
         page: "editor/apply-block-formats.html",
-        title: "Apply block formats"
+        title: "editor Apply block formats"
     },
     {
         page: "editor/apply-inline-formats.html",
-        title: "Apply inline formats"
+        title: "editor Apply inline formats"
     },
     {
         page: "editor/backspace.html",
-        title: "Backspace"
+        title: "editor Backspace"
     },
     {
         page: "editor/blockformatfinder.html",
-        title: "Block format finder"
+        title: "editor Block format finder"
     },
     {
         page: "editor/blockformatter.html",
-        title: "BlockFormatter"
+        title: "editor BlockFormatter"
     }/*,
     {
         page: "editor/breadcrumbs.html",
-        title: "Breadcrumbs"
+        title: "editor Breadcrumbs"
     }*/,
     {
         page: "editor/clipboard.html",
-        title: "Clipboard"
+        title: "editor Clipboard"
     }/*,
     {
         page: "editor/components.html",
-        title: "Components"
+        title: "editor Components"
     }*/,
     {
         page: "editor/dom.html",
-        title: "DOM"
+        title: "editor DOM"
     },
     {
         page: "editor/events.html",
-        title: "Events"
+        title: "editor Events"
     },
     {
         page: "editor/exec.html",
-        title: "Exec"
+        title: "editor Exec"
     },
     {
         page: "editor/expand-range.html",
-        title: "Expand range"
+        title: "editor Expand range"
     }/*,
     {
         page: "editor/fileinforeader.html",
-        title: "File info reader"
+        title: "editor File info reader"
     },
     {
         page: "editor/filelistview.html",
-        title: "File list view"
+        title: "editor File list view"
     },
     {
         page: "editor/formatblock.html",
-        title: "FormatBlock"
+        title: "editor FormatBlock"
     }*/,
     {
         page: "editor/formatcommand.html",
-        title: "FormatCommand"
+        title: "editor FormatCommand"
     },
     {
         page: "editor/genericcommand.html",
-        title: "GenericCommand"
+        title: "editor GenericCommand"
     },
     {
         page: "editor/greedyblockformatter.html",
-        title: "GreedyBlockFormatter"
+        title: "editor GreedyBlockFormatter"
     },
     {
         page: "editor/greedyinlineformatfinder.html",
-        title: "GreedyInlineFormatFinder"
+        title: "editor GreedyInlineFormatFinder"
     },
     {
         page: "editor/greedyinlineformatter.html",
-        title: "GreedyInlineFormatter"
+        title: "editor GreedyInlineFormatter"
     },
     {
         page: "editor/imagecommand.html",
-        title: "ImageCommand"
+        title: "editor ImageCommand"
     },
     {
         page: "editor/indentcommand.html",
-        title: "IndentCommand"
+        title: "editor IndentCommand"
     },
     {
         page: "editor/indentformatter.html",
-        title: "IndentFormatter"
+        title: "editor IndentFormatter"
     },
     {
         page: "editor/inlineformatfinder.html",
-        title: "InlineFormatFinder"
+        title: "editor InlineFormatFinder"
     },
     {
         page: "editor/inlineformatter.html",
-        title: "InlineFormatter"
+        title: "editor InlineFormatter"
     },
     {
         page: "editor/inserthtmlcommand.html",
-        title: "InsertHtmlCommand"
+        title: "editor InsertHtmlCommand"
     },
     {
         page: "editor/keyboard.html",
-        title: "Keyboard"
+        title: "editor Keyboard"
     },
     {
         page: "editor/linkcommand.html",
-        title: "LinkCommand"
+        title: "editor LinkCommand"
     },
     {
         page: "editor/listcommand.html",
-        title: "ListCommand"
+        title: "editor ListCommand"
     },
     {
         page: "editor/listformatfinder.html",
-        title: "ListFormatFinder"
+        title: "editor ListFormatFinder"
     },
     {
         page: "editor/listformatter.html",
-        title: "ListFormatter"
+        title: "editor ListFormatter"
     },
     {
         page: "editor/marker.html",
-        title: "Marker"
+        title: "editor Marker"
     },
     {
         page: "editor/mswordformatcleaner.html",
-        title: "MSWordFormatCleaner"
+        title: "editor MSWordFormatCleaner"
     },
     {
         page: "editor/newline.html",
-        title: "NewLine"
+        title: "editor NewLine"
     },
     {
         page: "editor/outdentcommand.html",
-        title: "OutdentCommand"
+        title: "editor OutdentCommand"
     },
     {
         page: "editor/paragraph.html",
-        title: "Paragraph"
+        title: "editor Paragraph"
     },
     {
         page: "editor/pendingformats.html",
-        title: "PendingFormats"
+        title: "editor PendingFormats"
     },
     {
         page: "editor/range.html",
-        title: "Range"
+        title: "editor Range"
     },
     {
         page: "editor/rangeenumerator.html",
-        title: "RangeEnumerator"
+        title: "editor RangeEnumerator"
     },
     {
         page: "editor/remove-block-formats.html",
-        title: "Remove block formats"
+        title: "editor Remove block formats"
     },
     {
         page: "editor/remove-inline-formats.html",
-        title: "Remove inline formats"
+        title: "editor Remove inline formats"
     },
     {
         page: "editor/restorepoint.html",
-        title: "Restore point"
+        title: "editor Restore point"
     },
     {
         page: "editor/rtl.html",
-        title: "RTL support"
+        title: "editor RTL support"
     }/*,
     {
         page: "editor/searchbox.html",
-        title: "SeachBox"
+        title: "editor SeachBox"
     }*/,
     {
         page: "editor/selection.html",
-        title: "Selection"
+        title: "editor Selection"
     },
     {
         page: "editor/serialization.html",
-        title: "Serialization"
+        title: "editor Serialization"
     },
     {
         page: "editor/shortcuts.html",
-        title: "Shortcuts"
+        title: "editor Shortcuts"
     },
    /* {
         page: "editor/style.html",
-        title: "Style"
+        title: "editor Style"
     },*/
     {
         page: "editor/systemhandler.html",
-        title: "System handler"
+        title: "editor System handler"
     },
     {
         page: "editor/typinghandler.html",
-        title: "Typing handler"
+        title: "editor Typing handler"
     },
     {
         page: "editor/toolbar.html",
-        title: "Toolbar"
+        title: "editor Toolbar"
     },
     {
         page: "editor/undoredostack.html",
-        title: "UndoRedoStack"
+        title: "editor UndoRedoStack"
     },
     {
         page: "editor/unlinkcommand.html",
-        title: "UnlinkCommand"
+        title: "editor UnlinkCommand"
     }
 );
