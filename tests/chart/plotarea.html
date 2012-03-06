@@ -1165,7 +1165,7 @@
 
                     plotArea.reflow(chartBox);
 
-                    equals(secondaryYAxis.lineBox().y1, primaryYAxis.lineBox().y1);
+                    equals(secondaryYAxis.lineBox().y1, primaryYAxis.lineBox().y1, TOLERANCE);
                 });
 
                 test("secondary Y axis on bottom is contained in plot area", function() {

@@ -1463,7 +1463,7 @@
 
                 test("does not change line box height", function() {
                     var box = plotArea.axisY.lineBox();
-                    same([box.y1, box.y2], [9, 573]);
+                    same([box.y1, box.y2], [9, 573], TOLERANCE);
                 });
 
                 test("position at center", function() {
@@ -1509,7 +1509,7 @@
 
                 test("does not change line box height", function() {
                     var box = plotArea.axisY.lineBox();
-                    same([box.y1, box.y2], [9, 573]);
+                    same([box.y1, box.y2], [9, 573], TOLERANCE);
                 });
 
                 test("position at center", function() {
