@@ -4,6 +4,10 @@ tests.push(
         title: "tabstrip api"
     },
     {
+        page: "tabstrip/initialization.html",
+        title: "tabstrip initialization"
+    },
+    {
         page: "tabstrip/AjaxLoading.html",
         title: "tabstrip ajax loading"
     },
