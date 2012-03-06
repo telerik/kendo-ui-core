@@ -43,8 +43,12 @@
                 </ul>
             }
         </div>
+
         @if (ViewBag.CurrentWidget.Name != "overview")
         {
+
+            @Html.Partial("Pager");
+
             <div id="navWrap">
                 <ul class="nav">
                     @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
@@ -62,22 +66,23 @@
                     <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
                 }
             </div>
+
+            if (ViewBag.suite == "mobile")
+            {
+                <div class="configuration mobileConfiguration">
+                    <input id="deviceChooser" type="hidden" />
+                    <ul id="deviceList" class="options">
+                        <li></li>
+                    </ul>
+
+                    <script id="deviceThumbTemplate" type="text/x-kendo-template">
+                        <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+                    </script>
+
+                </div>
+            }
         }
 
-        @if (ViewBag.suite == "mobile")
-        {
-            <div class="configuration mobileConfiguration">
-                <input id="deviceChooser" type="hidden" />
-                <ul id="deviceList" class="options">
-                    <li></li>
-                </ul>
-
-                <script id="deviceThumbTemplate" type="text/x-kendo-template">
-                    <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
-                </script>
-
-            </div>
-        }
         @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
             <div id="examplesThemeChooser">
                 <label for="skinSelector">Theme</label>

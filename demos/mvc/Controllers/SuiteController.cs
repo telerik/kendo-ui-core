@@ -16,6 +16,9 @@ namespace Kendo.Controllers
                 { "web.datasource", "data.datasource" },
                 { "web.templates", "template" }
             };
+
+        private List<string> examplesUrl = new List<string>();
+
         //
         // GET: /Web/
         public ActionResult Index(string suite, string section, string example)
@@ -37,6 +40,8 @@ namespace Kendo.Controllers
             LoadNavigation(suite);
 
             FindCurrentExample();
+
+            FindPrevNextUrls();
 
             if (suite == "mobile") {
                 ViewBag.scripts = Kendo.Models.ScriptGroups.Mobile;
@@ -72,15 +77,38 @@ namespace Kendo.Controllers
                 {
                     foreach (NavigationExample example in widget.Items)
                     {
+                        if (!example.Url.Contains("overview")) {
+                            examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
+                        }
+
                         if (Request.Path.EndsWith(example.Url))
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;
                             ViewBag.Title = example.Text;
 
-                            return;
+                            //return;
                         }
                     }
+                }
+            }
+        }
+
+        protected void FindPrevNextUrls()
+        {
+            if (ViewBag.CurrentExample != null)
+            {
+                var url = string.Format("~/{0}/{1}", ViewBag.Suite, ViewBag.CurrentExample.Url);
+                var index = examplesUrl.IndexOf(url);
+
+                if (index > 0)
+                {
+                    ViewBag.PrevUrl = examplesUrl[index - 1];
+                }
+
+                if (index < examplesUrl.Count - 1)
+                {
+                    ViewBag.NextUrl = examplesUrl[index + 1];
                 }
             }
         }
