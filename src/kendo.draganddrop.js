@@ -56,21 +56,32 @@
     }
 
     var DragAxis = Class.extend({
+        init: function(axis) {
+            this.axis = axis;
+        },
+
         start: function(location, timeStamp) {
-            var that = this;
-            that.startLocation = that.location = location;
+            var that = this,
+                offset = location["page" + that.axis];
+
+            that.startLocation = that.location = offset;
+            that.client = location["client" + that.axis];
             that.velocity = that.delta = 0;
             that.timeStamp = timeStamp;
         },
 
         move: function(location, timeStamp) {
-            if (!location) {
+            var that = this,
+                offset = location["page" + that.axis];
+
+            if (!offset) {
                 return;
             }
 
-            var that = this;
-            that.delta = location - that.location;
-            that.initialDelta = location - that.startLocation;
+            that.delta = offset - that.location;
+            that.location = offset;
+            that.client = location["client" + that.axis];
+            that.initialDelta = offset - that.startLocation;
             that.velocity = that.delta / (timeStamp - that.timeStamp);
             that.location = location;
             that.timeStamp = timeStamp;
@@ -206,10 +217,8 @@
         },
 
         _perAxis: function(method, location, timeStamp) {
-            this.x[method](location.pageX, timeStamp);
-            this.y[method](location.pageY, timeStamp);
-            this.x.client = location.clientX;
-            this.y.client = location.clientY;
+            this.x[method](location, timeStamp);
+            this.y[method](location, timeStamp);
         },
 
         _trigger: function(name, e) {
