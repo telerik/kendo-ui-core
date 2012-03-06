@@ -175,6 +175,11 @@
             while (currentNode && currentNode.nodeName.toLowerCase() != "ul") {
                 tmp = currentNode;
                 currentNode = currentNode.nextSibling;
+
+                if (tmp.nodeType == 3) {
+                    tmp.nodeValue = $.trim(tmp.nodeValue);
+                }
+
                 innerWrapper.appendChild(tmp);
             }
         }
