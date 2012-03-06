@@ -10,6 +10,7 @@
         map = $.map,
         grep = $.grep,
         noop = $.noop,
+        indexOf = $.inArray,
         math = Math,
         deepExtend = kendo.deepExtend;
 
@@ -279,26 +280,29 @@
 
         getBBox: function() {
             var ring = this,
-            box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),
-            sa = round(ring.startAngle % 360),
-            ea = round((sa + ring.angle) % 360),
-            innerRadius = ring.ir,
-            primaryAngles = [0, 90, 180, 270],
-            angles = [],
-            i,
-            point;
+                box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),
+                sa = round(ring.startAngle % 360),
+                ea = round((sa + ring.angle) % 360),
+                innerRadius = ring.ir,
+                allAngles = [0, 90, 180, 270, sa, ea].sort(numericComparer),
+                saIndex = indexOf(sa, allAngles),
+                eaIndex = indexOf(ea, allAngles),
+                angles,
+                i,
+                point;
 
             if (sa == ea) {
-                angles = primaryAngles;
+                angles = allAngles;
             } else {
-                for (i = sa; i != ea; i = (i + 1) % 360) {
-                    if (inArray(i, primaryAngles)) {
-                        angles.push(i);
-                    }
+                if (saIndex < eaIndex) {
+                    angles = allAngles.slice(saIndex, eaIndex + 1);
+                } else {
+                    angles = [].concat(
+                        allAngles.slice(0, eaIndex + 1),
+                        allAngles.slice(saIndex, allAngles.length)
+                    );
                 }
             }
-
-            angles.push(sa, ea);
 
             for (i = 0; i < angles.length; i++) {
                 point = ring.point(angles[i]);
@@ -2048,7 +2052,7 @@
         };
 
     function inArray(value, array) {
-        return $.inArray(value, array) != -1;
+        return indexOf(value, array) != -1;
     }
 
     function last(array) {
@@ -2078,6 +2082,10 @@
 
     function defined(value) {
         return typeof value !== UNDEFINED;
+    }
+
+    function numericComparer(a, b) {
+        return a - b;
     }
 
     // Exports ================================================================
