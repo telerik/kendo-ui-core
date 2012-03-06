@@ -57,6 +57,15 @@
                equal(options.foo, "bar");
             });
 
+            test("unneeded whitespace is stripped from item text", function() {
+                list.remove();
+                list = $("<ul><li>foo    </li></ul>").appendTo(document.body);
+
+                list.kendoTreeView();
+
+                equal(list.data("kendoTreeView").findByText("foo").length, 1);
+            });
+
             module("initialization from array");
 
             test("initializing from array", function() {
