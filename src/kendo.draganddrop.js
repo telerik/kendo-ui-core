@@ -15,12 +15,12 @@
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave";
         KEYUP = "keyup",
-        ESCAPE = 27,
 
         // Draggable events
         DRAGSTART = "dragstart",
         DRAG = "drag",
         DRAGEND = "dragend",
+        DRAGCANCEL = "dragcancel",
 
         // DropTarget events
         DRAGENTER = "dragenter",
@@ -443,7 +443,8 @@
 
             that.destroy = proxy(that._destroy, that);
             that.captureEscape = function(e) {
-                if (e.keyCode === ESCAPE) {
+                if (e.keyCode === kendo.keys.ESC) {
+                    that._trigger(DRAGCANCEL, {event: e});
                     that.drag.cancel();
                 }
             }
@@ -470,7 +471,14 @@
              * @event
              * @param {Event} e
              */
-            DRAGEND
+            DRAGEND,
+             /**
+             * Fires when item drag is canceled by pressing the Escape key.
+             * @name kendo.ui.Draggable#dragcancel
+             * @event
+             * @param {Event} e
+             */
+            DRAGCANCEL
         ],
 
         options: {
@@ -574,14 +582,13 @@
                 }
             });
 
+            that._trigger(DRAGEND, {event: e});
             that._cancel(e.event);
         },
 
         _cancel: function(e) {
             var that = this,
                 offset = getOffset(that.currentTarget);
-
-            that._trigger(DRAGEND, {event: e});
 
             if (that.hint && !that.dropped) {
                 that.hint.animate(offset, "fast", that.destroy);
