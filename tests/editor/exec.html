@@ -1,163 +1,165 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.draganddrop.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<iframe src="toolbar.html"></iframe>
+        <iframe src="toolbar.html"></iframe>
 
-<script>
+        <script>
 
-$("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor();
 
-function assertCommand(type, name) {
-    var original = editor.undoRedoStack.push
-    try {
-        var command;
-        editor.value('foo');
-        var range = editor.createRange();
-        range.selectNodeContents(editor.body);
-        editor.getSelection().removeAllRanges();
-        editor.getSelection().addRange(range);
-        editor.undoRedoStack.push = function () {
-            command = arguments[0];
-        }
-        editor.exec(name);
+            function assertCommand(type, name) {
+                var original = editor.undoRedoStack.push
+                try {
+                    var command;
+                    editor.value('foo');
+                    var range = editor.createRange();
+                    range.selectNodeContents(editor.body);
+                    editor.getSelection().removeAllRanges();
+                    editor.getSelection().addRange(range);
+                    editor.undoRedoStack.push = function () {
+                        command = arguments[0];
+                    }
+                    editor.exec(name);
 
-        ok(command instanceof type);
-    } finally {
-        editor.undoRedoStack.push = original;
-    }
-}
+                    ok(command instanceof type);
+                    } finally {
+                    editor.undoRedoStack.push = original;
+                }
+            }
 
-QUnit.testStart = function() {
-    editor = getEditor();
-    editor.focus();
-}
-        
-test('exec pushes command to undo stack', function() {
-    editor.value('foo');
-    var range = editor.createRange();
-    range.selectNodeContents(editor.body.firstChild);
-    editor.getSelection().removeAllRanges();
-    editor.getSelection().addRange(range);
-            
-    var pushArgument;
+            module("Exec", {
+                setup: function() {
+                    editor = getEditor();
+                    editor.focus();
+                }
+            });
 
-    editor.undoRedoStack.push = function() { pushArgument = arguments[0] }
-            
-    editor.exec('bold');
+            test('exec pushes command to undo stack', function() {
+                editor.value('foo');
+                var range = editor.createRange();
+                range.selectNodeContents(editor.body.firstChild);
+                editor.getSelection().removeAllRanges();
+                editor.getSelection().addRange(range);
 
-    ok(undefined !== pushArgument);
-});
-        
-test('exec undo performs undo', function() {
-    var original = editor.undoRedoStack.undo;
-    try {
-        var undoIsCalled = false;
-        editor.undoRedoStack.undo = function() { undoIsCalled = true; }
-        editor.exec('undo');
+                var pushArgument;
 
-        ok(undoIsCalled);
-    } finally {
-        editor.undoRedoStack.undo = original;
-    }
-});
-        
-test('exec redo performs redo', function() {
-    var original = editor.undoRedoStack.redo;
-    try {
-        var redoIsCalled = false;
-        editor.undoRedoStack.redo = function () { redoIsCalled = true; }
-        editor.exec('redo');
+                editor.undoRedoStack.push = function() { pushArgument = arguments[0] }
 
-        ok(redoIsCalled);
-    } finally {
-        editor.undoRedoStack.redo = original;
-    }
-});
+                editor.exec('bold');
 
-test('exec inline command', function() {
-    $.each(['bold', 'italic', 'underline', 'strikethrough'], function() {
-        assertCommand(kendo.ui.Editor.FormatCommand, this);
-    });
-});
-        
-test('exec unordered list', function() {
-    assertCommand(kendo.ui.Editor.ListCommand, 'insertUnorderedList');
-});
-        
-test('exec ordered list', function() {
-    assertCommand(kendo.ui.Editor.ListCommand, 'insertOrderedList');
-});
+                ok(undefined !== pushArgument);
+            });
 
-test('exec block command', function() {
-    $.each(['justifyCenter', 'justifyLeft', 'justifyRight', 'justifyFull'], function() {
-        assertCommand(kendo.ui.Editor.FormatCommand, this);
-    });
-});
+            test('exec undo performs undo', function() {
+                var original = editor.undoRedoStack.undo;
+                try {
+                    var undoIsCalled = false;
+                    editor.undoRedoStack.undo = function() { undoIsCalled = true; }
+                    editor.exec('undo');
 
-test('exec insertLineBreak creates newLineCommand', function() {
-    assertCommand(kendo.ui.Editor.NewLineCommand, 'insertLineBreak');
-});
-        
-test('exec insertParagraph creates paragraph command', function() {
-    assertCommand(kendo.ui.Editor.ParagraphCommand, 'insertParagraph');
-});
+                    ok(undoIsCalled);
+                    } finally {
+                    editor.undoRedoStack.undo = original;
+                }
+            });
 
-test('exec createLink creates LinkCommand', function() {
-    assertCommand(kendo.ui.Editor.LinkCommand, 'createLink');
-});
-        
-test('exec unlink creates UnlinkCommand', function() {
-    assertCommand(kendo.ui.Editor.UnlinkCommand, 'unlink');
-});
-       
-test('exec insertImage creates image command', function() {
-    assertCommand(kendo.ui.Editor.ImageCommand, 'insertImage');
-});
+            test('exec redo performs redo', function() {
+                var original = editor.undoRedoStack.redo;
+                try {
+                    var redoIsCalled = false;
+                    editor.undoRedoStack.redo = function () { redoIsCalled = true; }
+                    editor.exec('redo');
 
-test('exec indent creates indent command', function() {
-    assertCommand(kendo.ui.Editor.IndentCommand, 'indent');
-});
+                    ok(redoIsCalled);
+                    } finally {
+                    editor.undoRedoStack.redo = original;
+                }
+            });
 
-test('exec outdent creates indent command', function() {
-    assertCommand(kendo.ui.Editor.OutdentCommand, 'outdent');
-});
+            test('exec inline command', function() {
+                $.each(['bold', 'italic', 'underline', 'strikethrough'], function() {
+                    assertCommand(kendo.ui.Editor.FormatCommand, this);
+                });
+            });
 
-</script>
+            test('exec unordered list', function() {
+                assertCommand(kendo.ui.Editor.ListCommand, 'insertUnorderedList');
+            });
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+            test('exec ordered list', function() {
+                assertCommand(kendo.ui.Editor.ListCommand, 'insertOrderedList');
+            });
 
-</body>
+            test('exec block command', function() {
+                $.each(['justifyCenter', 'justifyLeft', 'justifyRight', 'justifyFull'], function() {
+                    assertCommand(kendo.ui.Editor.FormatCommand, this);
+                });
+            });
+
+            test('exec insertLineBreak creates newLineCommand', function() {
+                assertCommand(kendo.ui.Editor.NewLineCommand, 'insertLineBreak');
+            });
+
+            test('exec insertParagraph creates paragraph command', function() {
+                assertCommand(kendo.ui.Editor.ParagraphCommand, 'insertParagraph');
+            });
+
+            test('exec createLink creates LinkCommand', function() {
+                assertCommand(kendo.ui.Editor.LinkCommand, 'createLink');
+            });
+
+            test('exec unlink creates UnlinkCommand', function() {
+                assertCommand(kendo.ui.Editor.UnlinkCommand, 'unlink');
+            });
+
+            test('exec insertImage creates image command', function() {
+                assertCommand(kendo.ui.Editor.ImageCommand, 'insertImage');
+            });
+
+            test('exec indent creates indent command', function() {
+                assertCommand(kendo.ui.Editor.IndentCommand, 'indent');
+            });
+
+            test('exec outdent creates indent command', function() {
+                assertCommand(kendo.ui.Editor.OutdentCommand, 'outdent');
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

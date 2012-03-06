@@ -58,7 +58,14 @@
          *          "insertImage"
          *      ]
          *  });
-
+         * @option {Array} [stylesheets] Allows custom stylesheets to be included within the editing area.
+         * _example
+         *  $("#editor").kendoEditor({
+         *      stylesheets: [
+         *          "common-styles.css",
+         *          "green-theme.css",
+         *      ]
+         *  });
          */
         init: function() {
             /**

@@ -50,7 +50,7 @@ var IndentFormatter = Class.extend({
                 }
                 else
                     targets.push(formatNodes[i]);
-            
+
             while (targets.length) {
                 var formatNode = targets.shift();
                 if (dom.is(formatNode, 'li')) {
@@ -59,15 +59,15 @@ var IndentFormatter = Class.extend({
                     var $siblingList = $sibling.find('ul,ol').last();
 
                     var nestedList = $(formatNode).children('ul,ol')[0];
-                    
+
                     if (nestedList && $sibling[0]) {
                         if ($siblingList[0]) {
                            $siblingList.append(formatNode);
-                           $siblingList.append($(nestedList).children()); 
+                           $siblingList.append($(nestedList).children());
                            dom.remove(nestedList);
                         } else {
                             $sibling.append(nestedList);
-                            nestedList.insertBefore(formatNode, nestedList.firstChild);                        
+                            nestedList.insertBefore(formatNode, nestedList.firstChild);
                         }
                     } else {
                         nestedList = $sibling.children('ul,ol')[0];
@@ -75,7 +75,7 @@ var IndentFormatter = Class.extend({
                             nestedList = dom.create(formatNode.ownerDocument, dom.name(parentList));
                             $sibling.append(nestedList);
                         }
-                        
+
                         while (formatNode && formatNode.parentNode == parentList) {
                             nestedList.appendChild(formatNode);
                             formatNode = targets.shift();
@@ -84,6 +84,12 @@ var IndentFormatter = Class.extend({
                 } else {
                     var marginLeft = parseInt(indent(formatNode)) + 30;
                     indent(formatNode, marginLeft);
+
+                    for (var targetIndex = 0; targetIndex < targets.length; targetIndex++) {
+                        if ($.contains(formatNode, targets[targetIndex])) {
+                            targets.splice(targetIndex, 1);
+                        }
+                    }
                 }
             }
         } else {
@@ -99,25 +105,30 @@ var IndentFormatter = Class.extend({
 
         for (var i = 0; i < formatNodes.length; i++) {
             var $formatNode = $(formatNodes[i]);
-            
+
             if ($formatNode.is('li')) {
                 var $list = $formatNode.parent();
                 var $listParent = $list.parent();
-                // $listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>   
+                // $listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
                 if ($listParent.is('li,ul,ol') && !indent($list[0])) {
+                    // skip already processed nodes
+                    if (targetNode && $.contains(targetNode, $listParent[0])) {
+                        continue;
+                    }
+
                     var $siblings = $formatNode.nextAll('li');
                     if ($siblings.length)
                         $($list[0].cloneNode(false)).appendTo($formatNode).append($siblings);
-                                        
+
                     if ($listParent.is("li")) {
                         $formatNode.insertAfter($listParent);
                     } else {
                         $formatNode.appendTo($listParent);
-                    } 
+                    }
 
                     if (!$list.children('li').length)
                         $list.remove();
-                        
+
                     continue;
                 } else {
                     if (targetNode == $list[0]) {
@@ -129,7 +140,7 @@ var IndentFormatter = Class.extend({
             } else {
                 targetNode = formatNodes[i];
             }
-                
+
             var marginLeft = parseInt(indent(targetNode)) - 30;
             indent(targetNode, marginLeft);
         }
@@ -163,7 +174,7 @@ var OutdentTool = Tool.extend({
     init: function(options) {
         Tool.fn.init.call(this, extend(options, {command:OutdentCommand}));
 
-        this.finder = new BlockFormatFinder([{tags:blockElements}]);  
+        this.finder = new BlockFormatFinder([{tags:blockElements}]);
     },
 
     initialize: function($ui) {
@@ -189,7 +200,7 @@ var OutdentTool = Tool.extend({
                 return;
             }
         }
-    
+
         $ui.addClass('k-state-disabled').removeClass('k-state-hover');
     }
 

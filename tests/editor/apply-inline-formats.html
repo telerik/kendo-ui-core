@@ -1,233 +1,235 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-$("#Editor1").kendoEditor({ tools: ["bold", "italic"] });
+            $("#Editor1").kendoEditor({ tools: ["bold", "italic"] });
 
-QUnit.testStart = function() {
-    editor = getEditor();
-    impl = {
-        formatRange: function(range, format) {
-            var command = new kendo.ui.Editor.FormatCommand({
-                range:range,
-                format: format,
-                formatter: function() {
-                    return new kendo.ui.Editor.InlineFormatter(format);
+            module("Apply inline formats", {
+                setup: function() {
+                    editor = getEditor();
+                    impl = {
+                        formatRange: function(range, format) {
+                            var command = new kendo.ui.Editor.FormatCommand({
+                                range:range,
+                                format: format,
+                                formatter: function() {
+                                    return new kendo.ui.Editor.InlineFormatter(format);
+                                }
+                            })
+                            command.exec();
+                        }
+                    }
                 }
-            })
-            command.exec();
-        }
-    }
-}
+            });
 
-test('applyFormat applies format on text range', function() {
-    editor.value('<p>golgafrincham telephone sanitisers</p>');
+            test('applyFormat applies format on text range', function() {
+                editor.value('<p>golgafrincham telephone sanitisers</p>');
 
-    var pararagraph = $('p', editor.document)[0].firstChild;
-    var range = editor.createRange();
-    range.setStart(pararagraph, 0);
-    range.setEnd(pararagraph, 13);
+                var pararagraph = $('p', editor.document)[0].firstChild;
+                var range = editor.createRange();
+                range.setStart(pararagraph, 0);
+                range.setEnd(pararagraph, 13);
 
-    impl.formatRange(range, editor.options.formats.bold);
+                impl.formatRange(range, editor.options.formats.bold);
 
-    equal(editor.value(), '<p><strong>golgafrincham</strong> telephone sanitisers</p>');
-});
-        
-test('applyFormat applies inline formats properly on block elements', function() {
-    editor.value('<p>golgafrincham</p>');
+                equal(editor.value(), '<p><strong>golgafrincham</strong> telephone sanitisers</p>');
+            });
 
-    var pararagraph = $('p', editor.document)[0];
+            test('applyFormat applies inline formats properly on block elements', function() {
+                editor.value('<p>golgafrincham</p>');
 
-    var range = editor.createRange();
-    range.selectNode(pararagraph);
+                var pararagraph = $('p', editor.document)[0];
 
-    impl.formatRange(range, editor.options.formats.bold);
-            
-    equal(editor.value(), '<p><strong>golgafrincham</strong></p>');
-});
-        
-test('applyFormat applies format on split text elements', function() {
-    editor.value('<p>golga<em>frin</em>cham</p>');
+                var range = editor.createRange();
+                range.selectNode(pararagraph);
 
-    var pararagraph = $('p', editor.document)[0];
+                impl.formatRange(range, editor.options.formats.bold);
 
-    var range = editor.createRange();
-    range.setStart(pararagraph.firstChild, 2);
-    range.setEnd(pararagraph.lastChild, 2);
+                equal(editor.value(), '<p><strong>golgafrincham</strong></p>');
+            });
 
-    impl.formatRange(range, editor.options.formats.bold);
+            test('applyFormat applies format on split text elements', function() {
+                editor.value('<p>golga<em>frin</em>cham</p>');
 
-    equal(editor.value(), '<p>go<strong>lga</strong><em><strong>frin</strong></em><strong>ch</strong>am</p>');
-});
-        
-test('applyFormat uses the supplied selector', function() {
-    editor.value('<p>golgafrincham</p>');
+                var pararagraph = $('p', editor.document)[0];
 
-    var pararagraph = $('p', editor.document)[0];
+                var range = editor.createRange();
+                range.setStart(pararagraph.firstChild, 2);
+                range.setEnd(pararagraph.lastChild, 2);
 
-    var range = editor.createRange();
-    range.selectNode(pararagraph);
+                impl.formatRange(range, editor.options.formats.bold);
 
-    impl.formatRange(range, editor.options.formats.italic);
-            
-    equal(editor.value(), '<p><em>golgafrincham</em></p>');
-});
-        
-test('formatRange applies style commands', function() {
-    editor.value('<p>golgafrincham</p>');
+                equal(editor.value(), '<p>go<strong>lga</strong><em><strong>frin</strong></em><strong>ch</strong>am</p>');
+            });
 
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild.firstChild, 5);
-    range.setEnd(editor.body.firstChild.firstChild, 9);
+            test('applyFormat uses the supplied selector', function() {
+                editor.value('<p>golgafrincham</p>');
 
-    impl.formatRange(range, editor.options.formats.underline);
+                var pararagraph = $('p', editor.document)[0];
 
-    var span = $(editor.value()).find('span');
+                var range = editor.createRange();
+                range.selectNode(pararagraph);
 
-    equal(span.length, 1);
-    equal(span.css('textDecoration'), 'underline');
-});
-        
-test('formatRange does not introduce blank text nodes', function() {
-    editor.value('golgafrincham');
+                impl.formatRange(range, editor.options.formats.italic);
 
-    var range = editor.createRange();
-    range.setStart(editor.body, 0);
-    range.setEnd(editor.body, 1);
-            
-    impl.formatRange(range, editor.options.formats.bold);
+                equal(editor.value(), '<p><em>golgafrincham</em></p>');
+            });
 
-    equal(editor.body.childNodes.length, 1);
-});
+            test('formatRange applies style commands', function() {
+                editor.value('<p>golgafrincham</p>');
 
-test('formatRange does honor block elements', function() {
-    editor.value('<p>golgafrincham</p><p>telephone</p>');
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild.firstChild, 5);
+                range.setEnd(editor.body.firstChild.firstChild, 9);
 
-    var range = editor.createRange();
-    range.setStart(editor.body, 0);
-    range.setEnd(editor.body, 2);
-            
-    impl.formatRange(range, editor.options.formats.bold);
+                impl.formatRange(range, editor.options.formats.underline);
 
-    equal(editor.value().replace(/\s*/gi, ''), '<p><strong>golgafrincham</strong></p><p><strong>telephone</strong></p>');
-});
+                var span = $(editor.value()).find('span');
 
-test('formatRange honors nested block element', function() {
-    editor.value('<div><div>golgafrincham</div></div>');
+                equal(span.length, 1);
+                equal(span.css('textDecoration'), 'underline');
+            });
 
-    var range = editor.createRange();
-    range.setStart(editor.body, 0);
-    range.setEnd(editor.body, 1);
-            
-    impl.formatRange(range, editor.options.formats.bold);
+            test('formatRange does not introduce blank text nodes', function() {
+                editor.value('golgafrincham');
 
-    equal(editor.value().replace(/\s*/gi, ''), '<div><div><strong>golgafrincham</strong></div></div>');
-});
+                var range = editor.createRange();
+                range.setStart(editor.body, 0);
+                range.setEnd(editor.body, 1);
 
-test('formatRange honors multiple nested block elements', function() {
-    editor.value('<ul><li>golgafrincham</li><li>telephone</li></ul>');
-            
-    var range = editor.createRange();
-    range.setStart(editor.body, 0);
-    range.setEnd(editor.body, 1);
-            
-    impl.formatRange(range, editor.options.formats.bold);
+                impl.formatRange(range, editor.options.formats.bold);
 
-    equal(editor.value().replace(/\s*/gi, ''), '<ul><li><strong>golgafrincham</strong></li><li><strong>telephone</strong></li></ul>');
-});
-        
-test('formatRange reuses span', function() {
-    editor.value('<span>golgafrincham</span>');
+                equal(editor.body.childNodes.length, 1);
+            });
 
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
+            test('formatRange does honor block elements', function() {
+                editor.value('<p>golgafrincham</p><p>telephone</p>');
 
-    impl.formatRange(range, editor.options.formats.underline);
+                var range = editor.createRange();
+                range.setStart(editor.body, 0);
+                range.setEnd(editor.body, 2);
 
-    equal(editor.value(), '<span style="text-decoration:underline;">golgafrincham</span>');
-});
-        
-test('formatRange reuses span when node contents are selected', function() {
-    editor.value('<span>golgafrincham</span>');
+                impl.formatRange(range, editor.options.formats.bold);
 
-    var range = editor.createRange();
-    range.selectNodeContents(editor.body.firstChild);
-            
-    impl.formatRange(range, editor.options.formats.underline);
+                equal(editor.value().replace(/\s*/gi, ''), '<p><strong>golgafrincham</strong></p><p><strong>telephone</strong></p>');
+            });
 
-    equal(editor.value(), '<span style="text-decoration:underline;">golgafrincham</span>');
-});
+            test('formatRange honors nested block element', function() {
+                editor.value('<div><div>golgafrincham</div></div>');
 
-test('formatRange does not reuse span if tags are specified', function() {
-    editor.value('<span>golgafrincham</span>');
+                var range = editor.createRange();
+                range.setStart(editor.body, 0);
+                range.setEnd(editor.body, 1);
 
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
+                impl.formatRange(range, editor.options.formats.bold);
 
-    impl.formatRange(range, editor.options.formats.bold);
+                equal(editor.value().replace(/\s*/gi, ''), '<div><div><strong>golgafrincham</strong></div></div>');
+            });
 
-    equal(editor.value(), '<span><strong>golgafrincham</strong></span>');
-});
-        
-test('formatRange with inline format on collapsed range formats to word boundary', function() {
-    editor.value('foo');
+            test('formatRange honors multiple nested block elements', function() {
+                editor.value('<ul><li>golgafrincham</li><li>telephone</li></ul>');
 
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setEnd(editor.body.firstChild, 1);
+                var range = editor.createRange();
+                range.setStart(editor.body, 0);
+                range.setEnd(editor.body, 1);
 
-    impl.formatRange(range, editor.options.formats.bold);
+                impl.formatRange(range, editor.options.formats.bold);
 
-    equal(editor.value(), '<strong>foo</strong>');
-});
+                equal(editor.value().replace(/\s*/gi, ''), '<ul><li><strong>golgafrincham</strong></li><li><strong>telephone</strong></li></ul>');
+            });
 
-test('underline and collapsed range', function() {
-    editor.value('foo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setEnd(editor.body.firstChild, 1);
-            
-    impl.formatRange(range, editor.options.formats.underline);
+            test('formatRange reuses span', function() {
+                editor.value('<span>golgafrincham</span>');
 
-    equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
-});
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
 
-</script>
+                impl.formatRange(range, editor.options.formats.underline);
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+                equal(editor.value(), '<span style="text-decoration:underline;">golgafrincham</span>');
+            });
 
-</body>
+            test('formatRange reuses span when node contents are selected', function() {
+                editor.value('<span>golgafrincham</span>');
+
+                var range = editor.createRange();
+                range.selectNodeContents(editor.body.firstChild);
+
+                impl.formatRange(range, editor.options.formats.underline);
+
+                equal(editor.value(), '<span style="text-decoration:underline;">golgafrincham</span>');
+            });
+
+            test('formatRange does not reuse span if tags are specified', function() {
+                editor.value('<span>golgafrincham</span>');
+
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
+
+                impl.formatRange(range, editor.options.formats.bold);
+
+                equal(editor.value(), '<span><strong>golgafrincham</strong></span>');
+            });
+
+            test('formatRange with inline format on collapsed range formats to word boundary', function() {
+                editor.value('foo');
+
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 1);
+                range.setEnd(editor.body.firstChild, 1);
+
+                impl.formatRange(range, editor.options.formats.bold);
+
+                equal(editor.value(), '<strong>foo</strong>');
+            });
+
+            test('underline and collapsed range', function() {
+                editor.value('foo');
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 1);
+                range.setEnd(editor.body.firstChild, 1);
+
+                impl.formatRange(range, editor.options.formats.underline);
+
+                equal(editor.value(), '<span style="text-decoration:underline;">foo</span>');
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

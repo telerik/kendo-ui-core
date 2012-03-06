@@ -23,8 +23,8 @@ var SelectionUtils = {
         if ($.browser.msie && $.browser.version < 9) {
             return new W3CSelection(window.document);
         }
-    
-        return window.getSelection(); 
+
+        return window.getSelection();
     },
 
     selectionFromRange: function(range) {
@@ -114,7 +114,7 @@ var W3CRange = Class.extend({
                                             : iterator.remove();
         })(new RangeIterator(range));
     },
-    
+
     cloneContents: function () {
         // clone subtree
         var document = RangeUtils.documentFromRange(this);
@@ -407,7 +407,7 @@ var W3CSelection = Class.extend({
 
     getRangeAt: function () {
         var textRange, range = new W3CRange(this.ownerDocument), selection = this.ownerDocument.selection, element;
-        
+
         try {
             textRange = selection.createRange();
             element = textRange.item ? textRange.item(0) : textRange.parentElement();
@@ -426,17 +426,17 @@ var W3CSelection = Class.extend({
 
             if (range.startContainer.nodeType == 9)
                 range.setStart(range.endContainer, range.startOffset);
-                
+
             if (range.endContainer.nodeType == 9)
                 range.setEnd(range.startContainer, range.endOffset);
 
             if (textRange.compareEndPoints('StartToEnd', textRange) == 0)
                 range.collapse(false);
-                
+
             var startContainer = range.startContainer,
                 endContainer = range.endContainer,
                 body = this.ownerDocument.body;
-                
+
             if (!range.collapsed && range.startOffset == 0 && range.endOffset == getNodeLength(range.endContainer) // check for full body selection
             && !(startContainer == endContainer && isDataNode(startContainer) && startContainer.parentNode == body)) { // but not when single textnode is selected
                 var movedStart = false,
@@ -564,13 +564,13 @@ var RestorePoint = Class.extend({
 
         while (node = node.previousSibling) {
             var nodeType = node.nodeType;
-                
+
             if (nodeType != 3 || lastType != nodeType)
                 result ++;
-                
+
             lastType = nodeType;
         }
-            
+
         return result;
     },
 
@@ -584,7 +584,7 @@ var RestorePoint = Class.extend({
 
     nodeToPath: function(node) {
         var path = [];
-            
+
         while (node != this.rootNode) {
             path.push(this.index(node));
             node = node.parentNode;
@@ -639,7 +639,7 @@ var Marker = Class.extend({
         var that = this,
             previous = that.caret.previousSibling;
             startOffset = 0;
-            
+
         if (previous)
             startOffset = isDataNode(previous) ? previous.nodeValue.length : findNodeIndex(previous);
 
@@ -650,7 +650,7 @@ var Marker = Class.extend({
         normalize(container);
 
         var node = container.childNodes[containerIndex];
-            
+
         if (isDataNode(node))
             range.setStart(node, startOffset);
         else if (node) {
@@ -662,7 +662,7 @@ var Marker = Class.extend({
         } else {
             if (!$.browser.msie && container.innerHTML == '')
                 container.innerHTML = '<br _moz_dirty="" />';
-                
+
             range.selectNodeContents(container);
         }
         range.collapse(true);
@@ -766,7 +766,7 @@ var Marker = Class.extend({
                 range.setStart(start, startOffset);
             else
                 range[collapsedToStart ? 'setStartAfter' : 'setStartBefore'](start);
-                
+
             range.collapse(true);
 
         } else {
@@ -813,7 +813,7 @@ var RangeUtils = {
         if ($.browser.msie && $.browser.version < 9) {
             return new W3CRange(document);
         }
-    
+
         return document.createRange();
     },
 

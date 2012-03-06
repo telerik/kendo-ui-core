@@ -1,123 +1,125 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>kendo.ui.Editor Tests</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>kendo.ui.Editor Tests</title>
 
-<script src="../../src/jquery.js"></script>
-<script src="../qunit/qunit/qunit.js"></script>
-<script src="../qunit-runner.js"></script>
-<script src="../../src/kendo.core.js"></script>
-<script src="../../src/kendo.fx.js"></script>
-<script src="../../src/kendo.data.js"></script>
-<script src="../../src/kendo.popup.js"></script>
-<script src="../../src/kendo.list.js"></script>
-<script src="../../src/kendo.combobox.js"></script>
-<script src="../../src/kendo.dropdownlist.js"></script>
-<script src="../../src/kendo.window.js"></script>
-<script src="../../src/kendo.editor.js"></script>
-<script src="util.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.combobox.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.editor.js"></script>
+        <script src="util.js"></script>
 
-<link rel="stylesheet" href="../qunit/qunit/qunit.css" />
-<link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
 
-<style> html { font-size: 12px; } </style>
-</head>
-<body>
+        <style> html { font-size: 12px; } </style>
+    </head>
+    <body>
 
-<div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
+        <div><textarea cols="20" rows="4" id="Editor1" name="Editor1"></textarea></div>
 
-<script>
+        <script>
 
-var FormatCommand;
+            var FormatCommand;
 
-$("#Editor1").kendoEditor();
+            $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
-    editor = getEditor();
-    FormatCommand = kendo.ui.Editor.FormatCommand;
-}
-        
-test('undo restores original content', function() {
-    editor.value('foo');
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
+            module("FormatCommand", {
+                setup: function() {
+                    editor = getEditor();
+                    FormatCommand = kendo.ui.Editor.FormatCommand;
+                }
+            });
 
-    var command = editor.options.tools['bold'].command({range:range});
-    command.exec();
-    equal(editor.value(), '<strong>foo</strong>');
-    command.undo();
-    equal(editor.value(), 'foo');
-});
+            test('undo restores original content', function() {
+                editor.value('foo');
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
 
-test('undo restores selection', function() {
-    editor.value('foo');
-    var range = editor.createRange();
-    range.setStart(editor.body.firstChild, 1);
-    range.setEnd(editor.body.firstChild, 2);
+                var command = editor.options.tools['bold'].command({range:range});
+                command.exec();
+                equal(editor.value(), '<strong>foo</strong>');
+                command.undo();
+                equal(editor.value(), 'foo');
+            });
 
-    var command = editor.options.tools['bold'].command({range:range});
-    command.exec();
-    command.undo();
+            test('undo restores selection', function() {
+                editor.value('foo');
+                var range = editor.createRange();
+                range.setStart(editor.body.firstChild, 1);
+                range.setEnd(editor.body.firstChild, 2);
 
-    var selectionRange = editor.getRange();
-    equal(selectionRange.startOffset, 1);
-    equal(selectionRange.endOffset, 2);
-    equal(selectionRange.startContainer, editor.body.firstChild);
-    equal(selectionRange.endContainer, editor.body.firstChild);
-});
+                var command = editor.options.tools['bold'].command({range:range});
+                command.exec();
+                command.undo();
 
-test('redo executes the command', function() {
-    editor.value('foo');
-    var range = editor.createRange();
-    range.selectNode(editor.body.firstChild);
+                var selectionRange = editor.getRange();
+                equal(selectionRange.startOffset, 1);
+                equal(selectionRange.endOffset, 2);
+                equal(selectionRange.startContainer, editor.body.firstChild);
+                equal(selectionRange.endContainer, editor.body.firstChild);
+            });
 
-    var command = editor.options.tools['bold'].command({range:range});
-    command.exec();
-    equal(editor.value(), '<strong>foo</strong>');
-    command.undo();
-    equal(editor.value(), 'foo');
-    command.exec();
-    equal(editor.value(), '<strong>foo</strong>');
-});
+            test('redo executes the command', function() {
+                editor.value('foo');
+                var range = editor.createRange();
+                range.selectNode(editor.body.firstChild);
 
-test('fontName exec', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    editor.selectRange(range);
-    editor.exec('fontName', {value: 'Arial'});
-    equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
-});        
-        
-test('fontSize exec', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    editor.selectRange(range);
-    editor.exec('fontSize', {value: '8pt'});
-    equal(editor.value(), '<span style="font-size:8pt;">foo</span>');
-});        
-        
-test('foreColor exec', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    editor.selectRange(range);
-    editor.exec('foreColor', {value: '#a0b0c0'});
-    equal(editor.value(), '<span style="color:#a0b0c0;">foo</span>');
-});        
-        
-test('backColor exec', function() {
-    var range = createRangeFromText(editor, '|foo|');
-    editor.selectRange(range);
-    editor.exec('backColor', {value: '#a0b0c0'});
-    equal(editor.value(), '<span style="background-color:#a0b0c0;">foo</span>');
-});
+                var command = editor.options.tools['bold'].command({range:range});
+                command.exec();
+                equal(editor.value(), '<strong>foo</strong>');
+                command.undo();
+                equal(editor.value(), 'foo');
+                command.exec();
+                equal(editor.value(), '<strong>foo</strong>');
+            });
 
-</script>
+            test('fontName exec', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                editor.selectRange(range);
+                editor.exec('fontName', {value: 'Arial'});
+                equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
+            });        
 
-<h1 id="qunit-header">kendo.ui.Editor Tests</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture">test markup, will be hidden</div>
-<ul id="log"></ul>
+            test('fontSize exec', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                editor.selectRange(range);
+                editor.exec('fontSize', {value: '8pt'});
+                equal(editor.value(), '<span style="font-size:8pt;">foo</span>');
+            });        
 
-</body>
+            test('foreColor exec', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                editor.selectRange(range);
+                editor.exec('foreColor', {value: '#a0b0c0'});
+                equal(editor.value(), '<span style="color:#a0b0c0;">foo</span>');
+            });        
+
+            test('backColor exec', function() {
+                var range = createRangeFromText(editor, '|foo|');
+                editor.selectRange(range);
+                editor.exec('backColor', {value: '#a0b0c0'});
+                equal(editor.value(), '<span style="background-color:#a0b0c0;">foo</span>');
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.ui.Editor Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
 </html>

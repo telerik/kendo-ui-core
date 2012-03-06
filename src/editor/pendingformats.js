@@ -18,9 +18,9 @@ var PendingFormats = Class.extend({
     apply: function(range) {
         if (!this.hasPending())
             return;
-            
+
         var marker = new Marker();
-        
+
         marker.addCaret(range);
 
         var caret = range.startContainer.childNodes[range.startOffset];
@@ -49,7 +49,7 @@ var PendingFormats = Class.extend({
 
         for (var i = 0; i < formats.length; i++) {
             pendingFormat = formats[i];
-            
+
             var command = pendingFormat.command(extend({ range: range }, pendingFormat.options.params));
             command.editor = this.editor;
             command.exec();
@@ -63,7 +63,7 @@ var PendingFormats = Class.extend({
             range.setStart(textNode, 1);
             range.collapse(true);
         }
-        
+
         this.clear();
 
         this.editor.selectRange(range);

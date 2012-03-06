@@ -193,7 +193,7 @@
                     attributeValue = attribute.nodeValue;
 
                 if (attribute.specified && name == 'style') {
-                
+
                     var css = trim(attributeValue || node.style.cssText).split(';');
 
                     for (var cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
@@ -298,13 +298,13 @@
             var options = this.options;
                 format = this.format;
             return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () { 
+                formatter: function () {
                     var style = {};
                     style[options.domAttr] = commandArguments.value;
 
-                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr); 
+                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
                 }
-            }))        
+            }))
         },
 
         willDelayExecution: inlineFormatWillDelayExecution,
@@ -335,7 +335,7 @@
                 },
                 highlightFirst: false
             });
-            
+
             $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
 
             $ui.data(this.type).value('inherit');
@@ -360,11 +360,11 @@
                 format = this.format;
 
             return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () { 
+                formatter: function () {
                     var style = {};
                     style[options.domAttr] = commandArguments.value;
 
-                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr); 
+                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
                 }
             }));
         },
@@ -374,7 +374,7 @@
         initialize: function($ui, initOptions) {
             var editor = initOptions.editor,
                 toolName = this.name;
-        
+
             $ui.kendoColorPicker({
                 selectedColor: '#000000',
                 change: function (e) {
@@ -397,8 +397,8 @@
 
         command: function (commandArguments) {
             return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () { 
-                    return new GreedyInlineFormatter(this.format, { className: commandArguments.value }); 
+                formatter: function () {
+                    return new GreedyInlineFormatter(this.format, { className: commandArguments.value });
                 }
             }));
         },
@@ -411,20 +411,20 @@
 
         initiliaze: function($ui, initOptions) {
             var editor = initOptions.editor;
-        
+
             $ui.kendoDropDownList({
                 data: editor['style'],
                 title: editor.options.localization.style,
                 itemCreate: function (e) {
                     var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
-                
+
                     e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
                 },
                 change: function (e) {
                     Tool.exec(editor, 'style', e.value);
                 }
             });
-        } 
+        }
 
     });
 
