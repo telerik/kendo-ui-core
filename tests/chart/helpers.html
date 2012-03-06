@@ -72,6 +72,15 @@
                 equal(box.wrap(targetBox), box);
             });
 
+            test("wrapPoint increases box size to fit point", function() {
+                box.wrapPoint(new Point2D(40, 40));
+                same([box.x1, box.y1, box.x2, box.y2], [0, 0, 40, 40]);
+            });
+
+            test("wrapPoint returns box instance", function() {
+                equal(box.wrapPoint(new Point2D(40, 40)), box);
+            });
+
             test("snapTo moves box to target location", function() {
                 box.snapTo(targetBox);
 

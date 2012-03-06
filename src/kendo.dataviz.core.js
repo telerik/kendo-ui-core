@@ -114,6 +114,12 @@
             return box;
         },
 
+        wrapPoint: function(point) {
+            this.wrap(new Box2D(point.x, point.y, point.x, point.y));
+
+            return this;
+        },
+
         snapTo: function(targetBox, axis) {
             var box = this;
 
@@ -273,10 +279,9 @@
 
         getBBox: function() {
             var ring = this,
+                box = new Box2D(MAX_VALUE, MAX_VALUE, MIN_VALUE, MIN_VALUE),
                 sa = ring.startAngle,
                 ea = sa + ring.angle,
-                x1 = MAX_VALUE, x2 = MIN_VALUE, y1 = MAX_VALUE, y2 = MIN_VALUE,
-                point,
                 angles,
                 i;
 
@@ -288,14 +293,10 @@
             angles = grep([sa, ea, 0, 90, 180, 270], getAnglesInRange);
 
             for (i = 0; i < angles.length; i++) {
-                point = ring.point(angles[i]);
-                x1 = math.min(x1, point.x);
-                y1 = math.min(y1, point.y);
-                x2 = math.max(x2, point.x);
-                y2 = math.max(y2, point.y);
+                box.wrapPoint(ring.point(angles[i]));
             }
 
-            return new Box2D(x1, y1, x2, y2);
+            return box;
         }
     });
 
