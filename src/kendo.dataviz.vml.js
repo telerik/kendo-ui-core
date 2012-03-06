@@ -379,6 +379,10 @@
         },
 
         refresh: function(domElement) {
+            if (!domElement) {
+                return;
+            }
+
             var path = this,
                 options = path.options,
                 element = $(domElement),
