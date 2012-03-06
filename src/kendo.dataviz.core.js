@@ -58,8 +58,8 @@
     var Point2D = Class.extend({
         init: function(x, y) {
             var point = this;
-            point.x = round(x, COORD_PRECISION);
-            point.y = round(y, COORD_PRECISION);
+            point.x = round(x || 0, COORD_PRECISION);
+            point.y = round(y || 0, COORD_PRECISION);
         }
     });
 
