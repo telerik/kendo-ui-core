@@ -336,11 +336,9 @@
             that._updateClasses();
 
             if (options.dataSource) {
-                that.tabGroup.empty().detach();
-                that.wrapper.empty();
-                that.tabGroup.appendTo(that.wrapper);
-
-                that.append(options.dataSource);
+                that.dataSource = kendo.data.DataSource.create(options.dataSource);
+                that.dataSource.bind("change", $.proxy(that.refresh, that));
+                that.dataSource.fetch();
             }
 
             if (that.options.contentUrls) {
@@ -364,6 +362,29 @@
             if (options && ("animation" in options) && !options.animation) {
                 options.animation = { open: { effects: {}, show: true }, close: { effects: {} } }; // No animation
             }
+        },
+
+        refresh: function() {
+            var that = this,
+                html = "",
+                getter = kendo.getter(that.options.dataTextField),
+                idx,
+                view = that.dataSource.view(),
+                length;
+
+            that.trigger("dataBinding");
+
+            for (idx = 0, length = view.length; idx < length; idx ++) {
+                html += TabStrip.renderItem({
+                    item: {
+                        text: getter(view[idx])
+                    }
+                });
+            }
+
+            that.tabGroup[0].innerHTML = html;
+
+            that.trigger("dataBound");
         },
 
         setOptions: function(options) {
@@ -495,11 +516,14 @@
              * The loaded content element that is retrieved via AJAX.
              *
              */
-            CONTENTLOAD
+            CONTENTLOAD,
+            "dataBinding",
+            "dataBound"
         ],
 
         options: {
             name: "TabStrip",
+            dataTextField: "",
             animation: {
                 open: {
                     effects: "expand:vertical fadeIn",
