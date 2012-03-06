@@ -582,7 +582,7 @@
                 }
             });
 
-            that._trigger(DRAGEND, {event: e});
+            that._trigger(DRAGEND, e);
             that._cancel(e.event);
         },
 
