@@ -846,7 +846,7 @@
                 return element.find(".k-state-selected").closest(NODE);
             }
 
-            node = $(node).closest(NODE);
+            node = $(node, element).closest(NODE);
 
             if (node.length) {
                 element.find(".k-in").removeClass("k-state-hover k-state-selected");
