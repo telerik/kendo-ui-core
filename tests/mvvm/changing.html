@@ -210,6 +210,44 @@
                 strictEqual(viewModel.selectedItem, viewModel.foo[1]);
             });
 
+            test("select tracks complex value if text-field is set", function() {
+                var viewModel = kendo.observable( {
+                    foo: [ { text: "foo" }, { text: "bar" } ],
+                    selectedItem: null
+                });
+
+                viewModel.selectedItem = viewModel.foo[0];
+
+                var dom = $('<select data-text-field="text" data-bind="source:foo,value:selectedItem"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:last").attr("selected", "selected");
+
+                dom.trigger("change");
+
+                strictEqual(viewModel.selectedItem, viewModel.foo[1]);
+            });
+
+            test("multi select tracks complex value if text-field is set", function() {
+                var viewModel = kendo.observable( {
+                    foo: [ { text: "foo" }, { text: "bar" } ],
+                    selectedItems: []
+                });
+
+                viewModel.selectedItem = viewModel.foo[0];
+
+                var dom = $('<select multiple="multiple" data-text-field="text" data-bind="source:foo,value:selectedItems"/>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("option:last").attr("selected", "selected");
+
+                dom.trigger("change");
+
+                strictEqual(viewModel.selectedItems[0], viewModel.foo[1]);
+            });
+
             test("select bound to complex object updates simple value", function() {
                 var viewModel = kendo.observable( {
                     foo: [ { text: "foo" }, { text: "bar" } ],

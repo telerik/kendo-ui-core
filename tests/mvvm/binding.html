@@ -386,6 +386,20 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
+            test("binding select value to object specifing only text-field", function() {
+                var dom = $('<select data-text-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: [  { name: "foo" }, { name: "bar" } ],
+                    selectedItem: {}
+                });
+
+                viewModel.set("selectedItem", viewModel.items[1]);
+
+                kendo.bind(dom, viewModel);
+                ok(dom.find("option").last().is(":selected"));
+            });
+
             test("binding select value to primitive value", function() {
                 var dom = $('<select data-bind="source:items, value:selectedItem"/>');
 

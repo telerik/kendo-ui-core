@@ -305,14 +305,14 @@
 
         template: function() {
             var options = this.options,
-            template = options.template,
-            nodeName = this.container().nodeName.toLowerCase();
+                template = options.template,
+                nodeName = this.container().nodeName.toLowerCase();
 
             if (!template) {
                 if (nodeName == "select") {
-                    if (options.valueField) {
+                    if (options.valueField || options.textField) {
                         template = kendo.format('<option value="#:{0}#">#:{1}#</option>',
-                        options.valueField, options.textField || options.valueField);
+                            options.valueField || options.textField, options.textField || options.valueField);
                     } else {
                         template = "<option>#:data#</option>";
                     }
