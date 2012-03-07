@@ -98,6 +98,9 @@
     <script>
         var firstUrl = "@(ViewBag.FirstUrl != null ? Url.Content(ViewBag.FirstUrl) : "")",
             lastUrl = "@(ViewBag.LastUrl != null ? Url.Content(ViewBag.LastUrl) : "")",
+            links = $("#pager a"),
+            prevLink = links.eq(0),
+            nextLink = links.eq(1)
             panelbar = $(".nav").kendoPanelBar({
                 animation: { open: { effects: "fadeIn expandVertical" } },
                 expand: function() {
@@ -108,21 +111,11 @@
                 },
                 select: function() {
                     var item = this.select(),
-                        next = item.next(),
-                        prev = item.prev(),
-                        links = $("#pager a");
-
-                    if (prev[0]) {
-                        links.eq(0).attr("href", prev.find("a").attr("href"));
-                    } else {
-                        links.eq(0).attr("href", lastUrl);
-                    }
-
-                    if (next[0]) {
-                        links.eq(1).attr("href", next.find("a").attr("href"));
-                    } else {
-                        links.eq(1).attr("href", firstUrl);
-                    }
+                        links = $("#pager a"),
+                        prevUrl = item.prev().find("a").attr("href"),
+                        nextUrl = item.next().find("a").attr("href"),
+                        prevLink = links.eq(0).attr("href", prevUrl || lastUrl),
+                        nextLink = links.eq(1).attr("href", nextUrl || firstUrl);
                 },
                 expandMode: "single"
             }).data("kendoPanelBar");
@@ -136,36 +129,34 @@
         $("#pager a").click(function(e) {
             var element = $(this),
                 url = element.attr("href"),
+                sibling = element.siblings(),
                 method = element.hasClass("prev") ? "prev" : "next",
-                sibling = element[method == "prev" ? "next" : "prev"](),
-                current = panelbar.select(),
-                next = current[method](),
+                currentItem = panelbar.select(),
+                nextItem = currentItem[method](),
                 navigateUrl;
 
-            if (next[0]) {
+            if (nextItem[0]) {
                 e.preventDefault();
 
-                panelbar.select(next);
-                next.children().addClass("chosen");
-                current.children().removeClass("chosen");
+                panelbar.select(nextItem);
+                nextItem.children().addClass("chosen");
+                currentItem.children().removeClass("chosen");
 
-                sibling.removeClass("k-state-disabled").attr("href", location.href);
+                sibling.removeClass("k-state-disabled")
+                       .attr("href", location.href);
 
-                if (method == "prev") {
-                    navigateUrl = lastUrl;
+                nextItem = nextItem[method]();
+
+                if (nextItem[0]) {
+                    element.attr("href", nextItem.children("a").attr("href"));
                 } else {
-                    navigateUrl = firstUrl;
-                }
+                    navigateUrl = method == "next" ? firstUrl : lastUrl;
 
-                next = next[method]();
-
-                if (next[0]) {
-                    element.attr("href", next.children("a").attr("href"));
-                } else {
                     element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
                 }
 
                 Application.load(url);
+
             } else if (url == "#") {
                 e.preventDefault();
             }
