@@ -17,6 +17,7 @@
         defined = dataviz.defined,
         round = dataviz.round,
         template = dataviz.template,
+        rotatePoint = dataviz.rotatePoint,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
@@ -285,7 +286,6 @@
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
                     "#= d.renderDashType() # " +
-                    "transform='rotate(#= d.options.rotation.join(\" \") #)' " +
                     "stroke-linecap='#= d.renderLinecap() #' " +
                     "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -308,8 +308,7 @@
             $(domElement).attr({
                 "d": this.renderPoints(),
                 "fill-opacity": options.fillOpacity,
-                "stroke-opacity": options.strokeOpacity,
-                "transform": "rotate(" + options.rotation.join(" ") + ")"
+                "stroke-opacity": options.strokeOpacity
             });
         },
 
@@ -350,11 +349,14 @@
                 points = line.points,
                 i,
                 count = points.length,
-                first = points[0],
-                result = "M" + line._print(first);
+                rotate = function(point) {
+                    var rotation = line.options.rotation;
+                    return rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
+                },
+                result = "M" + line._print(rotate(points[0]));
 
             for (i = 1; i < count; i++) {
-                result += " " + line._print(points[i]);
+                result += " " + line._print(rotate(points[i]));
             }
 
             if (line.closed) {
