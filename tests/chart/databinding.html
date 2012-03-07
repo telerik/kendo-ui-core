@@ -320,7 +320,7 @@
                 }
 
                 function groupSales(group) {
-                    return group.items.map(function(item) { return item.sales });
+                    return $.map(group.items, function(item) { return item.sales });
                 }
 
                 module("Binding to grouped DataSource", {

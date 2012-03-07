@@ -998,7 +998,14 @@
 
         if (bindingTarget) {
             bindingTarget.destroy();
-            delete element.kendoBindingTarget;
+
+            if ($.support.deleteExpando) {
+                delete element.kendoBindingTarget;
+            } else if (element.removeAttribute) {
+                element.removeAttribute("kendoBindingTarget");
+            } else {
+                element.kendoBindingTarget = null;
+            }
         }
     }
 

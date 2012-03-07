@@ -296,6 +296,14 @@
                 equals(point.y, 20);
             });
 
+            test("x defaults to 0", function() {
+                equals(new Point2D().x, 0);
+            });
+
+            test("y defaults to 0", function() {
+                equals(new Point2D().y, 0);
+            });
+
             (function() {
                 var sector;
 
