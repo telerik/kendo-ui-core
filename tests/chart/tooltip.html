@@ -110,7 +110,7 @@
 
                 test("sets white-space: nowrap", function() {
                     createTooltip();
-                    equals(element.css("white-space"), "nowrap");
+                    equals(element[0].style.whiteSpace, "nowrap");
                 });
 
                 asyncTest("show displays tooltip for last point with a delay", function() {
