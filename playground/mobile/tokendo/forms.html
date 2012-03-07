@@ -11,7 +11,7 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.all.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -30,6 +30,9 @@
     <script src="../../../src/kendo.mobile.listview.js"></script>
     <script src="../../../src/kendo.mobile.view.js"></script>
     <script src="../../../src/kendo.mobile.application.js"></script>
+    <script src="../../../src/kendo.popup.js"></script>
+    <script src="../../../src/kendo.list.js"></script>
+    <script src="../../../src/kendo.dropdownlist.js"></script>
 
     <style type="text/css">
         .km-root .pink
@@ -85,7 +88,7 @@
         }
     </style>
 </head>
-<body>
+<body class="km-android km-android2">
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
@@ -108,6 +111,12 @@
                                         <option value="Third">Third</option>
                                         <option value="Fourth">Fourth</option>
                                     </select><a class="km-listview-link">Australia</a></li>
+            <li><select name="next">
+                                        <option value="First">First</option>
+                                        <option value="Second">Second</option>
+                                        <option value="Third">Third</option>
+                                        <option value="Fourth">Fourth</option>
+                                    </select><a class="km-listview-link">Australia</a></li>
             <li><input type="text" value="Text Shmext" readonly /><a class="km-listview-link">Australia</a></li>
         </ul>
         <footer data-role="footer">
@@ -122,7 +131,12 @@
     </article>
     <script>
 
-        var app = new kendo.mobile.Application(document.body);
+        var app = new kendo.mobile.Application(document.body),
+            os = kendo.support.mobileOS;
+
+        if ((os && os.android && os.flatVersion <= 300) || $(document.body).hasClass("km-android2")) {
+            $("select").addClass("km-select").kendoDropDownList();
+        }
 
         var groupedData = [
             {name: "Sashimi salad", letter: "S" },

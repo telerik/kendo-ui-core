@@ -190,7 +190,6 @@
             extend(that, {
                 boundary: boundary,
                 move: move,
-                boundary: boundary,
                 swipe: swipe,
                 draggable: draggable,
                 tap: tap,
