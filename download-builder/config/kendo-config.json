@@ -370,7 +370,7 @@
             "description": "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
             "source": "kendo.panelbar.min.js",
             "depends": [
-                "core"
+                "data"
             ]
         },
         {
