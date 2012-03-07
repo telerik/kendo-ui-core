@@ -470,7 +470,7 @@
             change: function() {
                 var values = [],
                     element = this.element,
-                    source = this.bindings.source.get(),
+                    source,
                     field = this.options.valueField || this.options.textField,
                     option, value,
                     idx,
@@ -493,6 +493,7 @@
                 }
 
                 if (field) {
+                    source = this.bindings.source.get();
                     for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
                         for (idx = 0, length = source.length; idx < length; idx++) {
                             if (source[idx].get(field) == values[valueIndex]) {
