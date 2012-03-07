@@ -14,30 +14,6 @@
     <body>
         <script type="text/javascript">
 
-            var data = [
-                {
-                    name: "Jan",
-                    rain: 50,
-                    temp: 7,
-                    press: 1000
-                }, {
-                    name: "Feb",
-                    rain: 75,
-                    temp: 5,
-                    press: 990
-                }, {
-                    name: "Mar",
-                    rain: 110,
-                    temp: 9,
-                    press: 1010
-                }, {
-                    name: "Apr",
-                    rain: 140,
-                    temp: 14,
-                    press: 990
-                }
-            ];
-
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
@@ -47,56 +23,26 @@
                         visible: true,
                         position: "bottom"
                     },
-                    dataSource: data,
                     seriesDefaults: {
-                        stack: false
+                        type: "column",
+                        stack: true
                     },
                     series: [{
-                            type: "column",
-                            name: "Rain",
-                            field: "rain",
-                            color: "blue"
+                            name: "Apples",
+                            data: [10, 15, 12, 16],
+                            stack: "fruits"
                         }, {
-                            type: "area",
-                            name: "Temperature",
-                            field: "temp",
-                            axis: "temp",
-                            color: "green"
+                            name: "Cabbages",
+                            data: [25, 30, 15, 20],
+                            stack: "vegetables"
                         }, {
-                            type: "line",
-                            name: "Pressure",
-                            field: "press",
-                            axis: "press",
-                            color: "red"
-                        }],
+                            name: "Pears",
+                            data: [5, 8, 6, 8],
+                            stack: "fruits"
+                    }],
                     categoryAxis: {
-                        field: "name",
-                        axisCrossingValue: [0, 3, 4]
-                    },
-                    valueAxis: [{
-                        line: {
-                            color: "blue"
-                        },
-                        labels: {
-                            template: "${ value } mm"
-                        }
-                    }, {
-                        name: "temp",
-                        line: {
-                            color: "green"
-                        },
-                        labels: {
-                            template: "${ value } C"
-                        }
-                    }, {
-                        name: "press",
-                        line: {
-                            color: "red"
-                        },
-                        labels: {
-                            template: "${ value } mb"
-                        }
-                    }]
+                        categories: ["Aug", "Sep", "Oct", "Nov"]
+                    }
                 });
             });
         </script>
