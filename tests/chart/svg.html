@@ -233,6 +233,10 @@
                 });
 
                 test("renderElement returns element", function() {
+                    if ($.browser.msie && $.browser.version < 8) {
+                        return;
+                    }
+
                     element = view.renderElement({
                         render: function() {
                             return "<g></g>";
