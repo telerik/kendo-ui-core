@@ -492,6 +492,7 @@
             "text": "Upload",
             "name": "upload",
             "spriteCssClass": "uploadIcon",
+            "onlineOnly": true,
             "items": [
                 {
                     "text": "Basic usage",

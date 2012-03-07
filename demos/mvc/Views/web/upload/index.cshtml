@@ -10,17 +10,12 @@
                     This "synchronous" mode does not require
                     special handling on the server.
                 </p>
-                <p>
-                    <strong>Note:</strong>
-                    Form submit action is not configured in this demo.
-                </p>
             </div>
-            <form method="post" style="width:60%">
+            <form method="post" action="submit" style="width:60%">
                 <div>
                     <input name="files" id="files" type="file" />
                     <p>
-                        <button type="button" class="k-button k-state-disabled"
-                            disabled="disabled">Submit</button>
+                        <input type="submit" value="Submit" class="k-button" />
                     </p>
                 </div>
             </form>

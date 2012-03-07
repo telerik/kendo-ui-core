@@ -9,8 +9,10 @@
 
 <div id="main">
     <h1 id="exampleTitle" class="k-content">
-        <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
-        @ViewBag.CurrentExample.Text
+        @if (ViewBag.CurrentExample != null) {
+            <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
+            @ViewBag.CurrentExample.Text
+        }
     </h1>
 
     <div id="exampleWrap">
