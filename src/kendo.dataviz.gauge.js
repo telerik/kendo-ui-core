@@ -186,7 +186,6 @@
                 scaleOptions = scale.options;
 
             scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
-            scaleOptions.minorUnit = scaleOptions.majorUnit / 5;
 
             Axis.fn.init.call(scale, options);
         },
@@ -570,6 +569,43 @@
         }
     });
 
+    var LinearScale = NumericAxis.extend({
+        init: function (options) {
+            var scale = this,
+                scaleOptions = scale.options;
+
+            scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+
+            options = deepExtend({}, scaleOptions, options);
+
+            NumericAxis.fn.init.call(scale, 0, 1, options);
+        },
+
+        options: {
+            min: 0,
+            max: 100,
+
+            majorTicks: {
+                size: 15,
+                alignment: INSIDE,
+                color: BLACK,
+                width: .5
+            },
+
+            minorTicks: {
+                size: 10,
+                alignment: INSIDE,
+                color: BLACK,
+                width: .5
+            },
+
+            labels: {
+                position: INSIDE,
+                padding: 2
+            }
+        }
+    });
+
     var LinearGaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
@@ -587,8 +623,10 @@
         },
 
         reflow: function(box){
-            var plotArea = this;
+            var plotArea = this,
+                scale = plotArea.scale;
 
+            scale.reflow(box);
             plotArea.box = box;
         },
 
@@ -599,8 +637,8 @@
 
             scale = plotArea.scale = new LinearScale(options.scale);
             plotArea.append(plotArea.scale);
-            plotArea.pointer = new LinearPointer(scale, options.pointer);
-            plotArea.append(plotArea.pointer);
+            //plotArea.pointer = new LinearPointer(scale, options.pointer);
+            //plotArea.append(plotArea.pointer);
         }
     });
 
@@ -715,9 +753,9 @@
                 model = gauge._createModel(),
                 plotArea;
 
-            plotArea = model._plotArea = new GaugePlotArea(options);
+            plotArea = model._plotArea = new LinearGaugePlotArea(options);
 
-            gauge._pointers = [plotArea.pointer];
+            //gauge._pointers = [ plotArea.pointer ];
 
             model.append(plotArea);
             model.reflow();
