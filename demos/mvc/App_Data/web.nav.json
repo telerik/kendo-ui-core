@@ -475,6 +475,10 @@
                     "url": "treeview/images.html"
                 },
                 {
+                    "text": "Templates",
+                    "url": "treeview/templates.html"
+                },
+                {
                     "text": "Events",
                     "url": "treeview/events.html"
                 },
