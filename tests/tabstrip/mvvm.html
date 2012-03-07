@@ -116,6 +116,31 @@
                 equal(dom.find("li:last").text(), "baz");
             });
 
+            test("inserting items to array adds tabs to tabstrip", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+                var viewModel = kendo.observable({
+                    tabs: ["foo", "bar"]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.tabs.splice(1, 0, "baz");
+                equal(dom.find("li:eq(1)").text(), "baz");
+            });
+
+            test("adding items to array does not recreate all tabs", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+                var viewModel = kendo.observable({
+                    tabs: ["foo", "bar"]
+                });
+
+                kendo.bind(dom, viewModel);
+                var firstTab = dom.find("li:first")[0];
+
+                viewModel.tabs.push("baz");
+                strictEqual(dom.find("li:first")[0], firstTab);
+            });
+
             test("removing items from array adds tabs to tabstrip", function() {
                 var dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
                 var viewModel = kendo.observable({
@@ -126,6 +151,19 @@
 
                 viewModel.tabs.pop();
                 equal(dom.find("li:last").text(), "foo");
+            });
+
+            test("removing items from array does not recreate all tabs", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="source: tabs"></div>');
+                var viewModel = kendo.observable({
+                    tabs: ["foo", "bar"]
+                });
+
+                kendo.bind(dom, viewModel);
+
+                var firstTab = dom.find("li:first")[0];
+                viewModel.tabs.pop();
+                strictEqual(dom.find("li:first")[0], firstTab);
             });
 
             test("setting the value of the tabstrip", function() {
@@ -182,6 +220,19 @@
                 dom.find("li:first").click();
 
                 equal(viewModel.tab, viewModel.tabs[0]);
+            });
+
+            test("updating an item from the array updates the corresponding tab", function() {
+                var dom = $('<div data-role="tabstrip" data-text-field="name" data-bind="source: tabs"></div>');
+
+                var viewModel = kendo.observable({
+                    tabs: [{ name:"foo" }]
+                });
+
+                kendo.bind(dom, viewModel);
+                viewModel.tabs[0].set("name", "bar");
+
+                equal(dom.find("li").text(), "bar");
             });
         </script>
 

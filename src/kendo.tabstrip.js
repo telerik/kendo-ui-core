@@ -367,7 +367,7 @@
             }
         },
 
-        refresh: function() {
+        refresh: function(e) {
             var that = this,
                 html = "",
                 options = that.options,
@@ -380,11 +380,17 @@
                 idx,
                 tabs = [],
                 tab,
+                action,
                 view = that.dataSource.view(),
                 length;
 
-            that.trigger("dataBinding");
-            that.tabGroup.empty();
+
+            e = e || {};
+            action = e.action;
+
+            if (action) {
+               view = e.items;
+            }
 
             for (idx = 0, length = view.length; idx < length; idx ++) {
                 tab = {
@@ -414,9 +420,26 @@
                 tabs[idx] = tab;
             }
 
-            that.append(tabs);
-
-            that.trigger("dataBound");
+            if (e.action == "add") {
+                if (e.index < that.tabGroup.children().length) {
+                    that.insertBefore(tabs, that.tabGroup.children().eq(e.index));
+                } else {
+                    that.append(tabs);
+                }
+            } else if (e.action == "remove") {
+                for (idx = 0; idx < view.length; idx++) {
+                   that.remove(e.index);
+                }
+            } else if (e.action == "itemchange") {
+                idx = that.dataSource.view().indexOf(view[0]);
+                if (e.field === options.dataTextField) {
+                    that.tabGroup.children().eq(idx).find(".k-link").text(view[0].get(e.field));
+                }
+            } else {
+                that.trigger("dataBinding");
+                that.append(tabs);
+                that.trigger("dataBound");
+            }
         },
 
         value: function(value) {
@@ -879,10 +902,17 @@
          *
          */
         remove: function (element) {
-            element = this.tabGroup.find(element);
-
             var that = this,
-                content = $(that.contentElement(element.index()));
+                type = typeof element,
+                content;
+
+            if (type === "string") {
+                element = that.tabGroup.find(element);
+            } else if (type === "number") {
+                element = that.tabGroup.children().eq(element);
+            }
+
+            content = $(that.contentElement(element.index()));
 
             content.remove();
             element.remove();
