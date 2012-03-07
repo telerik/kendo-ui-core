@@ -83,6 +83,11 @@
                 ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
             });
 
+            test("enable does not disable the upload", function () {
+                uploadInstance.enable();
+                ok(!uploadInstance.wrapper.hasClass("k-state-disabled"));
+            });
+
             test("initially disabled state is applied", function () {
                 uploadInstance = createUpload({ enabled: false });
                 ok(uploadInstance.wrapper.hasClass("k-state-disabled"));
