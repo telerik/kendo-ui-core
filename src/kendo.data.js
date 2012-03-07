@@ -323,9 +323,9 @@
     var ObservableObject = Observable.extend({
         init: function(value) {
             var that = this,
-            member,
-            field,
-            type;
+                member,
+                field,
+                type;
 
             Observable.fn.init.call(this);
 
@@ -334,29 +334,7 @@
                 if (field.charAt(0) != "_") {
                     type = toString.call(member);
 
-                    if (type === "[object Object]") {
-                        member = new ObservableObject(member);
-
-                        (function(field) {
-                            member.bind(GET, function(e) {
-                                e.field = field + "." + e.field;
-                                that.trigger(GET, e);
-                            });
-
-                            member.bind(CHANGE, function(e) {
-                                e.field = field + "." + e.field;
-                                that.trigger(CHANGE, e);
-                            });
-                        })(field);
-                    } else if (type === "[object Array]") {
-                        member = new ObservableArray(member);
-
-                        (function(field) {
-                            member.bind(CHANGE, function(e) {
-                                that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
-                            });
-                        })(field);
-                    }
+                    member = that._wrap(member, field);
                 }
                 that[field] = member;
             }
@@ -402,9 +380,9 @@
         },
 
         _set: function(field, value) {
+            var that = this;
             if (field.indexOf(".")) {
-                var that = this,
-                    paths = field.split("."),
+                var paths = field.split("."),
                     path = "";
 
                 while (paths.length > 1) {
@@ -418,7 +396,7 @@
                 }
             }
 
-            setter = setterCache[field] = setterCache[field] || kendo.setter(field);
+            var setter = setterCache[field] = setterCache[field] || kendo.setter(field);
             setter(that, value);
         },
 
@@ -430,11 +408,41 @@
             if (current != value) {
                 if (!that.trigger("set", { field: field, value: value })) {
 
-                    that._set(field, value);
+                    that._set(field, that._wrap(value, field));
 
                     that.trigger(CHANGE, { field: field });
                 }
             }
+        },
+
+        _wrap: function(object, field) {
+            var that = this,
+                type = toString.call(object);
+
+            if (type === "[object Object]" && !(object instanceof ObservableObject)) {
+                object = new ObservableObject(object);
+
+                (function(field) {
+                    object.bind(GET, function(e) {
+                        e.field = field + "." + e.field;
+                        that.trigger(GET, e);
+                    });
+
+                    object.bind(CHANGE, function(e) {
+                        e.field = field + "." + e.field;
+                        that.trigger(CHANGE, e);
+                    });
+                })(field);
+            } else if (type === "[object Array]") {
+                object = new ObservableArray(object);
+
+                (function(field) {
+                    object.bind(CHANGE, function(e) {
+                        that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
+                    });
+                })(field);
+            }
+            return object;
         }
     });
 

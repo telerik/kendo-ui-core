@@ -168,6 +168,54 @@
                 observable.set("baz[0].moo", "42");
                 equal(set.calls("set"), 1);
             });
+
+            test("set object is wrapped", function() {
+                var observable = kendo.observable({ foo: {} });
+
+                observable.set("foo", { bar: "baz" });
+
+                ok(observable.foo instanceof kendo.data.ObservableObject);
+            });
+
+            test("change event is raised if wrapped object is modified", 1, function() {
+                var observable = kendo.observable({ foo: {} });
+
+                observable.set("foo", { bar: "baz" });
+
+                observable.bind("change", function() {
+                    ok(true);
+                });
+
+                observable.foo.set("bar", "moo");
+            });
+
+            test("ObservableObject are not wrapped if attached through set", function() {
+                var observable = kendo.observable({ foo: {} });
+                var nested = new kendo.data.ObservableObject({ bar: "baz" });
+                observable.set("foo", nested);
+
+                strictEqual(observable.foo, nested);
+            });
+
+            test("set Array is wrapped", function() {
+                var observable = kendo.observable({ foo: [] });
+
+                observable.set("foo", [1,2,3]);
+
+                ok(observable.foo instanceof kendo.data.ObservableArray);
+            });
+
+            test("change event is raised if wrapped array is modified", 1, function() {
+                var observable = kendo.observable({ foo: [] });
+
+                observable.set("foo", []);
+
+                observable.bind("change", function() {
+                    ok(true);
+                });
+
+                observable.foo.push(1);
+            });
         </script>
     </head>
 </html>
