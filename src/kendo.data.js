@@ -334,7 +334,7 @@
                 if (field.charAt(0) != "_") {
                     type = toString.call(member);
 
-                    member = that._wrap(member, field);
+                    member = that.wrap(member, field);
                 }
                 that[field] = member;
             }
@@ -408,14 +408,14 @@
             if (current != value) {
                 if (!that.trigger("set", { field: field, value: value })) {
 
-                    that._set(field, that._wrap(value, field));
+                    that._set(field, that.wrap(value, field));
 
                     that.trigger(CHANGE, { field: field });
                 }
             }
         },
 
-        _wrap: function(object, field) {
+        wrap: function(object, field) {
             var that = this,
                 type = toString.call(object);
 

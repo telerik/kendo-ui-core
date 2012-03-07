@@ -33,6 +33,16 @@
                 equal(viewModel.foo, "bar");
             });
 
+            test("context of methods is the view model", function() {
+                var viewModel = kendo.observable({
+                    foo: function() {
+                        strictEqual(this, viewModel);
+                    }
+                });
+
+                viewModel.foo();
+            });
+
             test("nested objects are observable as well", function() {
                 var viewModel = kendo.observable({ foo: { bar: "baz" } });
 
