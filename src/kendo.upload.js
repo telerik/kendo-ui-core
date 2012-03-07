@@ -501,6 +501,7 @@
          * upload.enable();
          */
         enable: function(enable) {
+            enable = typeof (enable) === "undefined" ? true : enable;
             this.toggle(enable);
         },
 
@@ -526,7 +527,7 @@
          * upload.toggle();
          */
         toggle: function(enable) {
-            enable = typeof enable === "undefined" ? enable : !enable;
+            enable = typeof (enable) === "undefined" ? enable : !enable;
             this.wrapper.toggleClass("k-state-disabled", enable);
         },
 
