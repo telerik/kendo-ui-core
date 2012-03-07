@@ -369,15 +369,6 @@
             // Overriden by inheritors
         },
 
-        rotate: function(domElement, angle, center) {
-            var parentNode = domElement.parentNode;
-
-            if (parentNode) {
-                domElement.rotation = angle;
-                // TODO: Adjust left/top to match the center after rotation
-            }
-        },
-
         refresh: function(domElement) {
             if (!domElement) {
                 return;
