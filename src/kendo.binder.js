@@ -840,7 +840,9 @@
 
                 binder.refresh();
 
-                binding.bind("change", refresh);
+                if (name != "source") {
+                    binding.bind("change", refresh);
+                }
 
                 this.toDestroy.push(binding);
             }
