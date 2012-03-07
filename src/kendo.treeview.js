@@ -237,7 +237,8 @@
             "<div class='#= cssClass(group, item) #'>" +
                 "#= toggleButton(data) #" +
                 "<#= tag(item) # class='#= textClass(item) #'#= textAttributes(item) #>" +
-                    "#= image(item) ##= sprite(item) ##= text(item) #" +
+                    "#= image(item) ##= sprite(item) #" +
+                    "#= treeview.template ? template(treeview, item) : text(item) #" +
                 "</#= tag(item) #>" +
             "</div>"
         ),
@@ -245,7 +246,7 @@
             "<li class='#= wrapperCssClass(group, item) #'>" +
                 "#= itemWrapper(data) #" +
                 "# if (item.items) { #" +
-                "#= subGroup({ items: item.items, treeview: treeview, group: { expanded: item.expanded } }) #" +
+                "#= subGroup(treeview, group, item) #" +
                 "# } #" +
             "</li>"
         ),
@@ -372,6 +373,9 @@
 
             that._animation();
 
+            if (options.template && typeof options.template == "string") {
+                options.template = template(options.template);
+            }
 
             // render treeview if it's not already rendered
             if (!element.hasClass(TTREEVIEW)) {
@@ -384,7 +388,7 @@
                             firstLevel: true,
                             expanded: true
                         },
-                        treeview: {}
+                        treeview: options
                     })).children("ul");
                 } else {
                     that._group(that.wrapper);
@@ -1338,7 +1342,15 @@
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
                 toggleButton: item.items ? templates.toggleButton : empty,
-                subGroup: TreeView.renderGroup
+                subGroup: function(treeview, group, item) {
+                    return TreeView.renderGroup({
+                        items: item.items,
+                        treeview: treeview,
+                        group: {
+                           expanded: item.expanded
+                        }
+                    });
+                }
             }, rendering));
         },
 
@@ -1431,6 +1443,9 @@
         },
         text: function(item) {
             return item.encoded === false ? item.text : kendo.htmlEncode(item.text);
+        },
+        template: function(treeview, item) {
+            return treeview.template(extend({ item: item }, rendering));
         },
         tag: function(item) {
             return item.url ? "a" : "span";
