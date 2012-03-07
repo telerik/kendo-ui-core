@@ -296,6 +296,32 @@
                 equal(viewmodel.foo, "bar");
             });
 
+            test("changing the value of pre populated select updates the view model", function() {
+                var dom = $('<select data-bind="value:foo"><option value="foo">foo</option><option value="bar">bar</option>');
+
+                var viewmodel = kendo.observable( { foo: "foo" });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.find("option:last").attr("selected", "selected");
+                dom.trigger("change");
+
+                equal(viewmodel.foo, "bar");
+            });
+
+            test("changing the value of pre populated multi select updates the view model", function() {
+                var dom = $('<select data-bind="value:foo"><option value="foo">foo</option><option value="bar">bar</option>');
+
+                var viewmodel = kendo.observable( { foo: [] });
+
+                kendo.bind(dom, viewmodel);
+
+                dom.find("option:last").attr("selected", "selected");
+                dom.trigger("change");
+
+                equal(viewmodel.foo[0], "bar");
+            });
+
             test("changing radiobutton value updates the view model", function() {
                 var dom = $('<input type="radio" value="bar"  data-bind="checked:foo"/>');
 
