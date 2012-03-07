@@ -1,0 +1,73 @@
+<div id="example" class="k-content">
+        <div id="treeview"></div>
+
+        <script id="treeview-template" type="text/kendo-ui-template">
+            #= item.text #
+            # if (!item.items) { #
+            <a class='delete-link' href='\#'>Delete</a>
+            # } #
+        </script>
+
+        <script>
+            $("#treeview").kendoTreeView({
+                template: kendo.template($("#treeview-template").html()),
+
+                dataSource: [{
+                    text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
+                        {
+                            text: "Kendo UI Project", expanded: true, spriteCssClass: "folder", items: [
+                                { text: "about.html", spriteCssClass: "html" },
+                                { text: "index.html", spriteCssClass: "html" },
+                                { text: "logo.png", spriteCssClass: "image" }
+                            ]
+                        },
+                        {
+                            text: "New Web Site", expanded: true, spriteCssClass: "folder", items: [
+                                { text: "mockup.jpg", spriteCssClass: "image" },
+                                { text: "Research.pdf", spriteCssClass: "pdf" },
+                            ]
+                        },
+                        {
+                            text: "Reports", expanded: true, spriteCssClass: "folder", items: [
+                                { text: "February.pdf", spriteCssClass: "pdf" },
+                                { text: "March.pdf", spriteCssClass: "pdf" },
+                                { text: "April.pdf", spriteCssClass: "pdf" }
+                            ]
+                        }
+                    ]
+                }]
+            });
+
+            $(document).on("click", ".delete-link", function() {
+                var treeview = $("#treeview").data("kendoTreeView");
+                treeview.remove($(this).closest(".k-item"));
+            });
+        </script>
+
+        <style scoped>
+            #treeview .k-sprite {
+                background-image: url("../../content/web/treeview/coloricons-sprite.png");
+            }
+
+            .rootfolder { background-position: 0 0; }
+            .folder     { background-position: 0 -16px; }
+            .pdf        { background-position: 0 -32px; }
+            .html       { background-position: 0 -48px; }
+            .image      { background-position: 0 -64px; }
+
+            .delete-link {
+                width: 14px;
+                height: 14px;
+                border: 1px solid #000;
+                background: red;
+                overflow: hidden;
+                display: inline-block;
+                font-size: 0;
+                line-height: 0;
+                vertical-align: middle;
+                -webkit-border-radius: 5px;
+                -mox-border-radius: 5px;
+                border-radius: 5px;
+            }
+        </style>
+    </div>

@@ -357,6 +357,11 @@
          *     }
          * });
          *
+         * @option {String|Function} [template] Template to be used for rendering the nodes of the treeview.
+         * _example
+         * $("#treeview").kendoTreeView({
+         *     template: "#= item.text # <a href='\\#'>Delete</a>"
+         * });
          */
         init: function (element, options) {
             var that = this,
