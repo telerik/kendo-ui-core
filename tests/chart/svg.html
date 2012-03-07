@@ -587,11 +587,6 @@
                     ok(path.render().indexOf("fill-opacity='0.5'") > -1);
                 });
 
-                test("renders transform", function() {
-                    path.options.rotation = [12,34,56];
-                    ok(path.render().indexOf("transform='rotate(12 34 56)'") > -1);
-                });
-
                 test("renders id", function() {
                     path.options.id = "id";
                     ok(path.render().indexOf("id='id'") > -1);
