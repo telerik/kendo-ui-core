@@ -492,18 +492,17 @@
             "text": "Upload",
             "name": "upload",
             "spriteCssClass": "uploadIcon",
+            "onlineOnly": true,
             "items": [
                 {
                     "text": "Basic usage",
                     "url": "upload/index.html"
                 },
                 {
-                    "onlineOnly": true,
                     "text": "Asynchronous Upload",
                     "url": "upload/async.html"
                 },
                 {
-                    "onlineOnly": true,
                     "text": "Events",
                     "url": "upload/events.html"
                 },
