@@ -84,6 +84,50 @@
                 dataSource: [{}]
             });
         });
+
+        test("dataContentField", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataContentField: "foo",
+                dataSource: [{foo:"foo"}]
+            });
+
+            equal(tabstrip.contentElements.first().text(), "foo")
+        });
+
+        test("dataImageUrlField", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataImageUrlField: "foo",
+                dataSource: [{foo:"http://example.com"}]
+            });
+
+            equal(tabstrip.tabGroup.find("img").attr("src"), "http://example.com")
+        });
+
+        test("dataUrlField", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataUrlField: "foo",
+                dataSource: [{foo:"http://example.com"}]
+            });
+
+            equal(tabstrip.tabGroup.find("a").attr("href"), "http://example.com")
+        });
+
+        test("dataSpriteCssClass", function() {
+            var dom = $("<ul/>");
+
+            var tabstrip = new kendo.ui.TabStrip(dom, {
+                dataSpriteCssClass: "foo",
+                dataSource: [{foo:"foo"}]
+            });
+
+            ok(tabstrip.tabGroup.find("span.k-sprite").hasClass("foo"));
+        });
     </script>
 
     <h1 id="qunit-header">kendo.ui.TabStrip Tests</h1>

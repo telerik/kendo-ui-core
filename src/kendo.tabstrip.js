@@ -43,6 +43,8 @@
      * @example
      * $(document).ready(function() {
      *     $("#tabstrip").kendoTabStrip({
+     *         dataTextField: "text",
+     *         dataContentField: "content",
      *         dataSource:
      *         [
      *             { text: "Tab 1", content: "Tab 1 content" },
@@ -368,24 +370,51 @@
         refresh: function() {
             var that = this,
                 html = "",
-                getter = kendo.getter(that.options.dataTextField),
+                options = that.options,
+                text = kendo.getter(options.dataTextField),
+                content = kendo.getter(options.dataContentField),
+                contentUrl = kendo.getter(options.dataContentUrlField),
+                image = kendo.getter(options.dataImageUrlField),
+                url = kendo.getter(options.dataUrlField),
+                sprite = kendo.getter(options.dataSpriteCssClass),
                 idx,
+                tabs = [],
+                tab,
                 view = that.dataSource.view(),
                 length;
 
             that.trigger("dataBinding");
+            that.tabGroup.empty();
 
             for (idx = 0, length = view.length; idx < length; idx ++) {
-                html += TabStrip.renderItem({
-                    item: {
-                        text: getter(view[idx])
-                    }
-                });
+                tab = {
+                    text: text(view[idx])
+                };
+
+                if (options.dataContentField) {
+                    tab.content = content(view[idx]);
+                }
+
+                if (options.dataContentUrlField) {
+                    tab.contentUrl = contentUrl(view[idx]);
+                }
+
+                if (options.dataUrlField) {
+                    tab.url = url(view[idx]);
+                }
+
+                if (options.dataImageUrlField) {
+                    tab.imageUrl = image(view[idx]);
+                }
+
+                if (options.dataSpriteCssClass) {
+                    tab.spriteCssClass = sprite(view[idx]);
+                }
+
+                tabs[idx] = tab;
             }
 
-            that.tabGroup[0].innerHTML = html;
-
-            updateFirstLast(that.tabGroup);
+            that.append(tabs);
 
             that.trigger("dataBound");
         },
@@ -548,6 +577,11 @@
         options: {
             name: "TabStrip",
             dataTextField: "",
+            dataContentField: "",
+            dataImageUrlField: "",
+            dataUrlField: "",
+            dataSpriteCssClass: "",
+            dataContentUrlField: "",
             animation: {
                 open: {
                     effects: "expand:vertical fadeIn",
@@ -862,17 +896,22 @@
             var plain = $.isPlainObject(tab),
                 that = this, tabs, contents;
 
-            if (plain || $.isArray(tab)) { // is JSON
-                tabs = map(plain ? [ tab ] : tab, function (value, idx) {
+            if (plain || $.isArray(tab)) {
+                tab = $.isArray(tab) ? tab : [tab];
+
+                tabs = map(tab, function (value, idx) {
                             return $(TabStrip.renderItem({
                                 group: that.tabGroup,
                                 item: extend(value, { index: idx })
                             }));
                         });
-                contents = map(plain ? [ tab ] : tab, function (value, idx) {
-                            return $(TabStrip.renderContent({
-                                item: extend(value, { index: idx })
-                            }));
+
+                contents = map( tab, function (value, idx) {
+                            if (value.content || value.contentUrl) {
+                                return $(TabStrip.renderContent({
+                                    item: extend(value, { index: idx })
+                                }));
+                            }
                         });
             } else {
                 tabs = $(tab);
@@ -937,6 +976,7 @@
 
         _updateContentElements: function() {
             var that = this,
+                contentUrls = that.options.contentUrls || [],
                 tabStripID = that.element.attr("id");
 
             that.contentElements = that.wrapper.children("div");
@@ -946,7 +986,7 @@
                     id = tabStripID + "-" + (idx+1),
                     href = $(this).children("." + LINK).attr(HREF);
 
-                if (!currentContent.length) {
+                if (!currentContent.length && contentUrls[idx]) {
                     $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.wrapper);
                 } else {
                     currentContent.attr("id", id);
@@ -1072,7 +1112,6 @@
                 itemIndex = neighbours.index(item);
 
             close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
-
             // deactivate previously active tab
             if (kendo.size(animation.effects)) {
                 oldTab.kendoRemoveClass(ACTIVESTATE, { duration: close.duration });
