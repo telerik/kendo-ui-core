@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM binding</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="benchmark.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="http://cloud.github.com/downloads/SteveSanderson/knockout/knockout-2.0.0.js"></script>
+        <style>
+            body {
+                padding: 1em;
+                margin: 1em;
+            }
+
+            table {
+                table-layout: fixed;
+                width: 100%;
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+
+            table td, table th {
+                border: 1px solid black;
+                padding: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="log"></div>
+        <div id="kendo">
+            <input data-bind="value: foo.bar"></input>
+        </div>
+        <script>
+                var suite = new Benchmark.Suite;
+
+                var kendoViewModel = kendo.observable({
+                    foo: { bar: "baz" }
+                });
+
+                var kendoDiv = $("#kendo");
+                var koDiv = $("#ko");
+
+                suite.add("Kendo MVVM", function() {
+                    kendo.bind(kendoDiv[0], kendoViewModel);
+                    kendoViewModel.set("foo.bar", new Date().getTime());
+                })
+                .on("complete", function() {
+                    var message = "<div>User agent: " + navigator.userAgent;
+                    message += "<table><tr><th>Position</th><th>Contender</th><th>Ops/sec (higher is better)</th></tr>";
+                        var results = $.makeArray(this);
+                        results.sort(function(a, b) { return b.hz - a.hz });
+                        $.each(results, function(index) {
+                            message += "<tr><td>" + (index + 1) + "</td><td>" + this.name + "</td><td>" + this.hz + "</td></tr>";
+                        });
+                        message += "</table></div>";
+
+                    $("#log").html(message);
+                })
+                .run(true);
+            </script>
+        </body>
+    </html>
+    </body>
+</html>

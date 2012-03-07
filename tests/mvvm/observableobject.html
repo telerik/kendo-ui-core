@@ -153,6 +153,21 @@
                 equal(json.foo, "bar");
             });
 
+            test("set uses the nested observable object set method", function() {
+                var observable = kendo.observable({ foo: "bar", baz: { moo: "moo" } }),
+                    set  = stub(observable.baz, "set");
+
+                observable.set("baz.moo", "42");
+                equal(set.calls("set"), 1);
+            });
+
+            test("set uses the nested array with observable objects", function() {
+                var observable = kendo.observable({ foo: "bar", baz: [{ moo: "moo" }] }),
+                    set  = stub(observable.baz[0], "set");
+
+                observable.set("baz[0].moo", "42");
+                equal(set.calls("set"), 1);
+            });
         </script>
     </head>
 </html>
