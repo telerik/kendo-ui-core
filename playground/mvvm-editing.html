@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.autocomplete.js"></script>
+        <script src="../src/kendo.calendar.js"></script>
+        <script src="../src/kendo.datepicker.js"></script>
+        <script src="../src/kendo.timepicker.js"></script>
+        <script src="../src/kendo.numerictextbox.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.panelbar.js"></script>
+        <script src="../src/kendo.tabstrip.js"></script>
+        <script src="../src/kendo.window.js"></script>
+        <script src="../src/kendo.upload.js"></script>
+        <script src="../src/kendo.treeview.js"></script>
+        <script src="../src/kendo.resizable.js"></script>
+        <script src="../src/kendo.splitter.js"></script>
+        <script src="../src/kendo.slider.js"></script>
+        <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.chart.js"></script>
+    </head>
+    <body>
+
+        <div id="container">
+            Edit Product: <input type="text" id="products" data-bind="value: selectedProduct" />
+
+            <fieldset>
+                <legend>Product</legend>
+                <ul>
+                    <li><label>ID</label>: <span data-bind="text:selectedProduct.ProductID"></span></li>
+                    <li><label>Name</label>: <input type="text" id="products" data-bind="value: selectedProduct.ProductName" /></li>
+                    <li><label>UnitPrice</label>: <input type="text" data-role="numerictextbox" data-bind="value: selectedProduct.UnitPrice" /></li>
+                </ul>
+                <button id="save" data-bind="click: save"></button>
+            </fieldset>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var crudServiceBaseUrl = "http://demos.kendoui.com/service",
+                    dataSource = new kendo.data.DataSource({
+                        transport: {
+                            read: {
+                                url: crudServiceBaseUrl + "/Products",
+                                dataType: "jsonp"
+                            },
+                            update: {
+                                url: crudServiceBaseUrl + "/Products/Update",
+                                dataType: "jsonp"
+                            },
+                            destroy: {
+                                url: crudServiceBaseUrl + "/Products/Destroy",
+                                dataType: "jsonp"
+                            },
+                            create: {
+                                url: crudServiceBaseUrl + "/Products/Create",
+                                dataType: "jsonp"
+                            },
+                            parameterMap: function(options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {
+                                        models: kendo.stringify(options.models)
+                                    };
+                                }
+                            }
+                        },
+                        batch: true,
+                        schema: {
+                            model: {
+                                id: "ProductID",
+                                fields: {
+                                    ProductID: {
+                                        editable: false,
+                                        nullable: true
+                                    },
+                                    ProductName: {
+                                        validation: {
+                                            required: true
+                                        }
+                                    },
+                                    UnitPrice: {
+                                        type: "number",
+                                        validation: {
+                                            required: true,
+                                            min: 1
+                                        }
+                                    },
+                                    Discontinued: {
+                                        type: "boolean"
+                                    },
+                                    UnitsInStock: {
+                                        type: "number",
+                                        validation: {
+                                            min: 0,
+                                            required: true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+                    dataSource.one("change", function() {
+                        var selectedProduct = this.view()[0];
+
+                        var viewModel = new kendo.data.ObservableObject({
+                            selectedProduct: selectedProduct,
+                            save: function() {
+                                dataSource.sync();
+                            }
+                        });
+
+
+                        kendo.bind($("#container"), viewModel);
+
+                        $("#products").kendoDropDownList({ dataSource: this, dataTextField: "ProductName", dataValueField: "ProductID" });
+                    });
+
+                    dataSource.read();
+
+            });
+        </script>
+    </body>
+</html>

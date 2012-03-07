@@ -389,7 +389,7 @@
             if (field === "this") {
                 result = that;
             } else {
-                getter =  getterCache[field] = getterCache[field] || kendo.getter(field, true);
+                getter = getterCache[field] = getterCache[field] || kendo.getter(field, true);
 
                 result = getter(that);
 
@@ -401,16 +401,36 @@
             return result;
         },
 
+        _set: function(field, value) {
+            if (field.indexOf(".")) {
+                var that = this,
+                    paths = field.split("."),
+                    path = "";
+
+                while (paths.length > 1) {
+                    path += paths.shift();
+                    var obj = (getterCache[path] = getterCache[path] || kendo.getter(path, true))(that);
+                    if (obj instanceof ObservableObject) {
+                        obj.set(paths.join("."), value);
+                        return;
+                    }
+                    path += ".";
+                }
+            }
+
+            setter = setterCache[field] = setterCache[field] || kendo.setter(field);
+            setter(that, value);
+        },
+
         set: function(field, value) {
             var that = this,
-            current = that[field],
-            setter;
+                current = that[field],
+                setter;
 
             if (current != value) {
                 if (!that.trigger("set", { field: field, value: value })) {
-                    setter = setterCache[field] = setterCache[field] || kendo.setter(field);
 
-                    setter(that, value);
+                    that._set(field, value);
 
                     that.trigger(CHANGE, { field: field });
                 }
