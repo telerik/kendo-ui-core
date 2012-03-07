@@ -765,7 +765,8 @@
 .km-android input[type=date],
 .km-android input[type=time],
 .km-android input[type=datetime],
-.km-android select:not([multiple])
+.km-android select:not([multiple]),
+.km-android2 .km-select .k-dropdown-wrap
 {
     color: #fff;
     border: 0;
@@ -801,7 +802,8 @@
 .km-android input[type=date],
 .km-android input[type=time],
 .km-android input[type=datetime],
-.km-android select:not([multiple])
+.km-android select:not([multiple]),
+.km-android2 .km-select .k-dropdown-wrap
 {
     background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;
     background-clip: padding-box;
@@ -814,7 +816,8 @@
 .km-android input[type=date]:focus,
 .km-android input[type=time]:focus,
 .km-android input[type=datetime]:focus,
-.km-android select:not([multiple]):focus
+.km-android select:not([multiple]):focus,
+.km-android2 .km-select .k-state-focused
 {
     background-color: rgba(51,181,229,.6);
 }
@@ -836,4 +839,87 @@
 .km-android input[readonly]
 {
     .user-select(none);
+}
+
+/* Workaround for the Android 2 broken select */
+
+.km-android2 .km-select
+{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    line-height: normal;
+    margin-top: -.6em;
+    z-index: 1;
+}
+
+.km-android2 .km-select select,
+.km-android2 .km-select .k-select
+{
+    display: none;
+}
+
+.km-android2 .k-animation-container
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0,0,0,.7);
+}
+
+.km-android2 .k-list-container
+{
+    position: static !important;
+    margin-left: 10% !important;
+    width: 80% !important;
+    display: inline-block !important;
+    max-height: 80%;
+    background: #333;
+    color: #fff;
+    vertical-align: middle;
+}
+
+.km-android2 > .k-list-container
+{
+    display: none !important;
+}
+
+.km-android2 .k-animation-container:before
+{
+    content: "\a0";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0;
+}
+
+.km-android2 .k-list-container .k-list
+{
+    padding: 0;
+    margin: 0;
+}
+
+.km-android2 .k-list-container .k-item
+{
+    list-style-type: none;
+    line-height: 3em;
+    padding-left: 1em;
+    border-bottom: 1px solid #555;
+}
+
+.km-android2 .k-list-container .k-state-focused,
+.km-android2 .k-list-container .k-state-selected
+{
+    background: #33b5e5;
+}
+
+.km-android2 .k-list-container .k-state-hover
+{
+    background: rgba(51,181,229,.6);
+}
+
+.km-android2 .k-list-container .k-item:last-child
+{
+    border: 0;
 }
