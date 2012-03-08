@@ -345,6 +345,12 @@
 
                 ok(dom.is(":disabled"));
             });
+
+            test("setting non existing binding throws an error", function() {
+                var dom = $('<input data-bind="nonexisting:foo" data-role="autocomplete" />');
+
+                raises(function() { kendo.bind(dom, {}); }, "Error is not thrown");
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">
