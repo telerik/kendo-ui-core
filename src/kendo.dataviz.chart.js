@@ -1502,12 +1502,25 @@
             }
 
             if (isStacked) {
-                var stackWrap = cluster.children[0],
+                var groupWraps = cluster.children,
+                    stackWrap,
                     positiveStack,
                     negativeStack;
 
+                if (typeof series.stack === "string") {
+                    for (var i = 0; i < groupWraps.length; i++) {
+                        if (groupWraps[i]._stackName === series.stack) {
+                            stackWrap = groupWraps[i];
+                            break;
+                        }
+                    }
+                } else {
+                    stackWrap = groupWraps[0];
+                }
+
                 if (!stackWrap) {
                     stackWrap = new ChartElement();
+                    stackWrap._stackName = series.stack;
                     cluster.append(stackWrap);
 
                     positiveStack = new StackLayout({
