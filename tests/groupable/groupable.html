@@ -305,7 +305,7 @@
 
            test("dropping over group container creates group indicator for complex field ", function() {
                div.remove();
-               div = $("<div><div class='container' style='height:10px;'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").appendTo(document.body);
+               div = $("<div><div class='container' style='height:10px;'></div><table><thead><th data-kendo-field='field1.foo'></th><th data-kendo-field='field2.foo'></th></thead></table></div>").prependTo(document.body);
 
                 var groupContainer = $(".container"),
                     groupable = new Groupable(div, { groupContainer:  groupContainer, dataSource: new kendo.data.DataSource() }),
