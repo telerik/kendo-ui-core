@@ -40,6 +40,9 @@
                     "text": "Stacked bar chart",
                     "url": "bar-charts/stacked-bar.html"
                 }, {
+                    "text": "Stacked and grouped bar chart",
+                    "url": "bar-charts/grouped-stacked-bar.html"
+                }, {
                     "text": "Multiple axes",
                     "url": "bar-charts/multiple-axes.html"
                 }, {
