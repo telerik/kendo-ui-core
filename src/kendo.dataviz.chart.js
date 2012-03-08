@@ -92,6 +92,7 @@
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
+        STRING = "string",
         SQUARE = "square",
         SWING = "swing",
         TOP = "top",
@@ -1475,7 +1476,9 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                labelOptions = deepExtend({}, series.labels);
+                labelOptions = deepExtend({}, series.labels),
+                bar,
+                cluster;
 
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
@@ -1483,7 +1486,7 @@
                 }
             }
 
-            var bar = new Bar(value,
+            bar = new Bar(value,
                 deepExtend({}, {
                     isVertical: !options.invertAxes,
                     overlay: series.overlay,
@@ -1491,7 +1494,7 @@
                     isStacked: isStacked
                 }, series));
 
-            var cluster = children[categoryIx];
+            cluster = children[categoryIx];
             if (!cluster) {
                 cluster = new ClusterLayout({
                     isVertical: options.invertAxes,
@@ -1502,27 +1505,11 @@
             }
 
             if (isStacked) {
-                var groupWraps = cluster.children,
-                    stackWrap,
+                var stackWrap = barChart.getStackWrap(series, cluster),
                     positiveStack,
                     negativeStack;
 
-                if (typeof series.stack === "string") {
-                    for (var i = 0; i < groupWraps.length; i++) {
-                        if (groupWraps[i]._stackName === series.stack) {
-                            stackWrap = groupWraps[i];
-                            break;
-                        }
-                    }
-                } else {
-                    stackWrap = groupWraps[0];
-                }
-
-                if (!stackWrap) {
-                    stackWrap = new ChartElement();
-                    stackWrap._stackName = series.stack;
-                    cluster.append(stackWrap);
-
+                if (stackWrap.children.length === 0) {
                     positiveStack = new StackLayout({
                         isVertical: !options.invertAxes
                     });
@@ -1546,6 +1533,33 @@
             }
 
             return bar;
+        },
+
+        getStackWrap: function(series, cluster) {
+            var wraps = cluster.children,
+                stackGroup = series.stack,
+                stackWrap,
+                i,
+                length = wraps.length;
+
+            if (typeof stackGroup === STRING) {
+                for (i = 0; i < length; i++) {
+                    if (wraps[i]._stackGroup === stackGroup) {
+                        stackWrap = wraps[i];
+                        break;
+                    }
+                }
+            } else {
+                stackWrap = wraps[0];
+            }
+
+            if (!stackWrap) {
+                stackWrap = new ChartElement();
+                stackWrap._stackGroup = stackGroup;
+                cluster.append(stackWrap);
+            }
+
+            return stackWrap;
         },
 
         updateRange: function(value, categoryIx, series) {
@@ -1623,7 +1637,7 @@
 
         groupTotals: function(stackGroup) {
             var chart = this,
-                groupName = typeof stackGroup === "string" ? stackGroup : "default",
+                groupName = typeof stackGroup === STRING ? stackGroup : "default",
                 totals = chart._groupTotals[groupName];
 
             if (!totals) {
