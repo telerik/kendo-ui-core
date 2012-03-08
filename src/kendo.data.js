@@ -14,6 +14,7 @@
         Observable = kendo.Observable,
         Class = kendo.Class,
         STRING = "string",
+        FUNCTION = "function",
         CREATE = "create",
         READ = "read",
         UPDATE = "update",
@@ -70,7 +71,7 @@
         wrap: function(object) {
             var that = this;
 
-            if ($.isPlainObject(object)) {
+            if (isPlainObject(object)) {
                 object = new that.type(object);
 
                 object.bind(CHANGE, function(e) {
@@ -209,7 +210,7 @@
         },
 
         shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== "function"
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== FUNCTION
             && field !== "uid";
         },
 
@@ -237,7 +238,7 @@
 
                 result = getter(that);
 
-                if (call && typeof result === "function") {
+                if (call && typeof result === FUNCTION) {
                     result = result.call(that);
                 }
             }
@@ -346,7 +347,7 @@
         },
 
         "date": function(value) {
-            if (typeof value === "string") {
+            if (typeof value === STRING) {
                 var date = dateRegExp.exec(value);
                 if (date) {
                     return new Date(parseInt(date[1]));
@@ -356,7 +357,7 @@
         },
 
         "boolean": function(value) {
-            if (typeof value === "string") {
+            if (typeof value === STRING) {
                 return value.toLowerCase() === "true";
             }
             return !!value;
@@ -690,14 +691,14 @@
                 operatorFunctions.push.apply(operatorFunctions, expr.operators);
                 fieldFunctions.push.apply(fieldFunctions, expr.fields);
             } else {
-                if (typeof field === "function") {
+                if (typeof field === FUNCTION) {
                     expr = "__f[" + fieldFunctions.length +"](d)";
                     fieldFunctions.push(field);
                 } else {
                     expr = kendo.expr(field);
                 }
 
-                if (typeof operator === "function") {
+                if (typeof operator === FUNCTION) {
                     filter = "__o[" + operatorFunctions.length + "](" + expr + ", " + filter.value + ")";
                     operatorFunctions.push(operator);
                 } else {
@@ -1132,10 +1133,10 @@
 
         read: function(options) {
             var that = this,
-            success,
-            error,
-            result,
-            cache = that.cache;
+                success,
+                error,
+                result,
+                cache = that.cache;
 
             options = that.setup(options, READ);
 
@@ -1169,11 +1170,18 @@
             options = options || {};
 
             var that = this,
-            operation = that.options[type],
-            data = isFunction(operation.data) ? operation.data() : operation.data;
+                parameters,
+                operation = that.options[type],
+                data = isFunction(operation.data) ? operation.data() : operation.data;
 
             options = extend(true, {}, operation, options);
-            options.data = that.parameterMap(extend(data, options.data), type);
+            parameters = extend(data, options.data);
+
+            options.data = that.parameterMap(parameters, type);
+
+            if (isFunction(options.url)) {
+                options.url = options.url(options.data);
+            }
 
             return options;
         }
