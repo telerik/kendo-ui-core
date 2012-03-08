@@ -58,7 +58,7 @@ body {
     color: #afafaf;
 }
 
-#kendo-themebuilder #stylable-elements,
+#stylable-elements,
 #kendo-themebuilder .k-style-apply {
     margin: .6em 0 0;
 }
@@ -127,7 +127,7 @@ body {
 
 .k-colorpicker .k-input,
 .k-color-name,
-#download-overlay textarea {
+textarea {
     font: 12px Consolas, Courier, monospace;
 }
 
@@ -144,7 +144,7 @@ body {
     width: 100%;
 }
 
-#download-overlay {
+.ktb-overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -155,11 +155,11 @@ body {
     background-color: #3d3d3d;
 }
 
-#download-overlay .ktb-content {
+.ktb-overlay .ktb-content {
     overflow: hidden;
 }
 
-#download-overlay textarea {
+.ktb-overlay textarea {
     color: #fff;
     background-color: #3d3d3d;
     border: 0;
@@ -180,3 +180,6 @@ body {
     color: #39c3fe;
 }
 
+.ktb-action-import {
+    float: right;
+}

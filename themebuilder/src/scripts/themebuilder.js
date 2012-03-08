@@ -7,6 +7,7 @@
         Widget = ui.Widget,
         colorPicker = "ktb-colorpicker",
         numeric = "ktb-numeric",
+        CLICK = "click",
         propertyEditors = {
             "color": colorPicker,
             "background-color": colorPicker,
@@ -268,8 +269,9 @@
                         change: changeHandler
                     }).end();
 
-                $(".ktb-action-get-css,.ktb-action-get-less").click(proxy(that.showSource, that));
-                $(".ktb-action-back").click(proxy(that.hideDownload, that));
+                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showSource, that));
+                $(".ktb-action-show-import").on(CLICK, proxy(that.showImport, that));
+                $(".ktb-action-back").on(CLICK, proxy(that.hideOverlay, that));
             },
             showSource: function(e) {
                 e.preventDefault();
@@ -277,15 +279,21 @@
                 var less = $(e.target).hasClass("ktb-action-get-less");
 
                 this._generateTheme(function(constants, css) {
-                    constants += '\n@import "template.less";';
+                    constants += '\n@require "template.less";';
                     $("#download-overlay").slideDown()
                         .find("textarea").val(less ? constants : css);
                 });
             },
-            hideDownload: function(e) {
+            showImport: function(e) {
                 e.preventDefault();
 
-                $("#download-overlay").slideUp();
+                $("#import-overlay").slideDown()
+                        .find("textarea").val("/*************************\n * paste LESS or CSS here *\n *************************/").select();
+            },
+            hideOverlay: function(e) {
+                e.preventDefault();
+
+                $(".ktb-overlay:visible").slideUp();
             },
             _generateTheme: function(callback) {
                 var constants = this.constants.serialize();
@@ -344,16 +352,24 @@
                     );
 
                 $("<div id='kendo-themebuilder'>" +
-                        "<div id='download-overlay' class='ktb-view'>" +
+                        "<div id='download-overlay' class='ktb-view ktb-overlay'>" +
                             "<button class='ktb-action-back k-button'>Back</button>" +
                             "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>" +
                             "<div class='ktb-content'>" +
                                 "<textarea readonly></textarea>" +
                             "</div>" +
                         "</div>" +
+                        "<div id='import-overlay' class='ktb-view ktb-overlay'>" +
+                            "<button class='ktb-action-back k-button'>Back</button>" +
+                            "<button class='ktb-action-import k-button'>Import</button>" +
+                            "<div class='ktb-content'>" +
+                                "<textarea></textarea>" +
+                            "</div>" +
+                        "</div>" +
                         "<div id='advanced-mode' class='ktb-view'>" +
                             "<button class='ktb-action-get-css k-button'>Get CSS...</button>" +
                             "<button class='ktb-action-get-less k-button'>Get LESS...</button>" +
+                            "<button class='ktb-action-show-import k-button'>Import...</button>" +
                             "<div class='ktb-content'>" +
                                 "<ul id='stylable-elements'>" +
                                     $.map(that.constantsHierarchy || {}, function(section, title) {
