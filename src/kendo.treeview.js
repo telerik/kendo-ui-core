@@ -1279,15 +1279,16 @@
                 dropPosition = "over",
                 sourceNode = that.sourceNode,
                 destinationNode,
+                dropHint = that.dropHint,
                 valid, dropPrevented;
 
             if (e.keyCode == kendo.keys.ESC){
-                that.dropHint.remove();
+                dropHint.remove();
                 //treeview.trigger("nodeDragCancelled", { item: sourceNode[0] });
             } else {
-                if (that.dropHint.css(VISIBILITY) == "visible") {
-                    dropPosition = that.dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
-                    destinationNode = that.dropHint.closest(NODE);
+                if (dropHint.css(VISIBILITY) == "visible") {
+                    dropPosition = dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
+                    destinationNode = dropHint.closest(NODE);
                 } else if (that.dropTarget) {
                     destinationNode = that.dropTarget.closest(NODE);
                 }
@@ -1303,7 +1304,7 @@
                     dropPosition: dropPosition
                 });
 
-                that.dropHint.remove();
+                dropHint.remove();
 
                 if (!valid || dropPrevented) {
                     that._draggable.dropped = valid;
