@@ -11,7 +11,7 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.all.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
@@ -88,7 +88,7 @@
         }
     </style>
 </head>
-<body class="km-android km-android2">
+<body>
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
@@ -116,6 +116,9 @@
                                         <option value="Second">Second</option>
                                         <option value="Third">Third</option>
                                         <option value="Fourth">Fourth</option>
+                                        <option value="Fourth">Fifth</option>
+                                        <option value="Fourth">Sixth</option>
+                                        <option value="Fourth">Seventh</option>
                                     </select><a class="km-listview-link">Australia</a></li>
             <li><input type="text" value="Text Shmext" readonly /><a class="km-listview-link">Australia</a></li>
         </ul>
@@ -134,8 +137,27 @@
         var app = new kendo.mobile.Application(document.body),
             os = kendo.support.mobileOS;
 
-        if ((os && os.android && os.flatVersion <= 300) || $(document.body).hasClass("km-android2")) {
-            $("select").addClass("km-select").kendoDropDownList();
+        var options = {};
+
+        if (os && os.android) {
+            options.animation = { open: { effects : "fadeIn" } };
+        }
+
+        if (os && os.ios) {
+            options.animation = { open: { effects : "slideIn:up" } };
+        }
+
+        $("select")
+                .addClass("km-select")
+                .append(os && os.ios ? "<option value='cancel'>Cancel</option>" : "")
+                .kendoDropDownList(options);
+
+        if (os && os.ios) {
+            $("select").each(function () {
+                var popupOptions = $(this).data("kendoDropDownList").popup.options;
+                popupOptions.origin = "bottom center";
+                popupOptions.position = "top center";
+            });
         }
 
         var groupedData = [

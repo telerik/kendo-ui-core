@@ -34,7 +34,8 @@
 .km-ios .km-toolbar,
 .km-ios .km-navbar,
 .km-ios .km-button,
-.km-ios .km-tabstrip
+.km-ios .km-tabstrip,
+.km-ios .k-list-container .k-item
 {
     background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -692,17 +693,14 @@
 
 /* Forms */
 
-.km-ios select:not([multiple])
-{
-    direction: rtl;
-}
-
 .km-ios input[type=text],
 .km-ios input[type=date],
 .km-ios input[type=time],
 .km-ios input[type=datetime],
-.km-ios select:not([multiple])
+.km-ios select:not([multiple]),
+.km-ios .km-select .k-dropdown-wrap
 {
+    min-width: 6em;
     color: #333;
     border: 0;
     padding: .4em;
@@ -714,7 +712,6 @@
 .km-ios select:not([multiple]) option
 {
     color: #333;
-    direction: ltr;
 }
 
 .km-ios input[type=text]:focus,
@@ -724,7 +721,8 @@
 .km-ios input[type=date]:focus,
 .km-ios input[type=time]:focus,
 .km-ios input[type=datetime]:focus,
-.km-ios select:not([multiple]):focus
+.km-ios select:not([multiple]):focus,
+.km-ios .km-select .k-state-focused
 {
     color: #086aff;
 }
@@ -736,4 +734,56 @@
 .km-ios .km-list .km-state-active select:not([multiple])
 {
     color: #fff;
+}
+
+.km-ios .k-list-container .k-item
+{
+    background-color: #ddd;
+    line-height: 2em;
+    margin: .5em 1em;
+    color: #000;
+    border-color: #32353a;
+    border-width: 3px;
+    .border-radius(.7em);
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+                linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.2)) #fff;
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.5)");
+    background-clip: padding-box;
+}
+
+.km-ios .k-list-container .k-item:first-child
+{
+    margin: 1em 1em .5em;
+}
+
+.km-ios .k-list-container .k-item:last-child
+{
+    margin: 1em;
+}
+
+.km-ios .k-list-container .k-state-selected
+{
+    color: #fff;
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #263e6c;
+}
+
+.km-ios .k-animation-container
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0,0,0,.6);
+}
+
+.km-ios .k-list-container
+{
+    width: 100% !important;
+    height: auto !important;
+    max-height: 80%;
+    background: rgba(67,73,85,.7) linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 10%, rgba(255,255,255,0) 10%, rgba(255,255,255,0));
+    color: #fff;
+    bottom: 0;
+    border-top: 1px solid rgba(255,255,255,.5);
 }
