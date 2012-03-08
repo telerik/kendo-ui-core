@@ -33,6 +33,7 @@ function buildGeneratedSources() {
             "build/ecma-5.js",
             "lib/less/parser.js",
             "lib/less/functions.js",
+            "lib/less/colors.js",
             "lib/less/tree/*.js",
             "lib/less/tree.js"
         ].map(function(relativePath) {
