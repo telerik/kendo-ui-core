@@ -1,13 +1,15 @@
 ;(function($, kendo) {
 
     var proxy = $.proxy,
+        extend = $.extend,
+        map = $.map,
+        CLICK = "click",
         CHANGE = "change",
         doc = (window.parent || window).document,
         ui = kendo.ui,
         Widget = ui.Widget,
         colorPicker = "ktb-colorpicker",
         numeric = "ktb-numeric",
-        CLICK = "click",
         propertyEditors = {
             "color": colorPicker,
             "background-color": colorPicker,
@@ -16,10 +18,11 @@
             "border-radius": numeric,
             "background-image": "ktb-combo"
         },
+        whitespaceRe = /\s/g,
         processors = {
             "box-shadow": function(value) {
                 if (value && value != "none") {
-                    return value.replace(/((\d+(px|em))|inset)/g,"").replace(/\s/g, "");
+                    return value.replace(/((\d+(px|em))|inset)/g,"").replace(whitespaceRe, "");
                 } else {
                     return "#000000";
                 }
@@ -85,6 +88,8 @@
                              pad((+b).toString(16));
             });
         },
+        lessEOLRe = /;$/m,
+        lessConstantPairRe = /(@[a-z\-]+):\s*(.*)/i,
         LessConstants = kendo.Observable.extend({
             // TODO: can this be converted to an array-like object?
             init: function(constants) {
@@ -99,9 +104,21 @@
             },
 
             serialize: function() {
-                return $.map(this.constants, function(item, key) {
+                return map(this.constants, function(item, key) {
                     return key + ": " + item.value + ";"
                 }).join("\n");
+            },
+
+            deserialize: function(content) {
+                var that = this;
+
+                $.each(content.split(lessEOLRe), function() {
+                    var result = lessConstantPairRe.exec(this);
+
+                    if (result) {
+                        that.update(result[1], result[2]);
+                    }
+                });
             },
 
             colors: function() {
@@ -247,7 +264,7 @@
 
                             data.splice(0, 0, { text: "unchanged", value: this.value });
 
-                            data = $.map(data, function(x) {
+                            data = map(data, function(x) {
                                 return { text: x.text, value: x.value.replace(/"|'/g, "") };
                             });
 
@@ -374,12 +391,12 @@
                             button({ id: "show-import", text: "Import..." }) +
                             "<div class='ktb-content'>" +
                                 "<ul id='stylable-elements'>" +
-                                    $.map(that.constantsHierarchy || {}, function(section, title) {
+                                    map(that.constantsHierarchy || {}, function(section, title) {
                                         var matchedConstants = {},
                                             constants = that.constants.constants;
 
                                         for (var constant in section) {
-                                            matchedConstants[constant] = $.extend({}, constants[constant]);
+                                            matchedConstants[constant] = extend({}, constants[constant]);
                                         }
 
                                         return propertyGroupTemplate({
@@ -397,14 +414,14 @@
             }
         });
 
-    ColorPicker.fn.options = $.extend(kendo.ui.ComboBox.fn.options, {
+    ColorPicker.fn.options = extend(kendo.ui.ComboBox.fn.options, {
         name: "ColorPicker",
         autoBind: false,
         template: "<span style='background-color: ${ data.value }' "+
                         "class='k-icon k-color-preview' " +
                         "title='${ data.text }'></span> ",
         dataSource: new kendo.data.DataSource({
-            data: $.map("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0,#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
+            data: map("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0,#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
                 return { text: x, value: x };
             })
         })
@@ -412,7 +429,7 @@
 
     kendo.ui.plugin(ColorPicker);
 
-    $.extend(kendo, {
+    extend(kendo, {
         LessConstants: LessConstants,
         ThemeBuilder: ThemeBuilder
     });
