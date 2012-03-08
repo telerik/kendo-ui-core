@@ -8,7 +8,7 @@
                     $("#chart").kendoChart({
                         theme: $(document).data("kendoSkin") || "default",
                         title: {
-                            text: "Population by age group and sex"
+                            text: "World population by age group and sex"
                         },
                         legend: {
                             visible: false
@@ -61,7 +61,7 @@
                                        "#009bd7", "#26aadd", "#4db9e3", "#73c8e9", "#99d7ef"],
                         valueAxis: {
                             labels: {
-                                format: "{0:N0}"
+                                template: "#= kendo.format('{0:N0}', value / 1000) # M"
                             }
                         },
                         categoryAxis: {
