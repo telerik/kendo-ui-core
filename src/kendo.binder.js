@@ -777,6 +777,8 @@
                         toDestroy.push(binding[attribute])
                     }
                 }
+            } else if (name !== "template") {
+                throw new Error("The " + name + "binding is not supported");
             }
         },
 
@@ -845,6 +847,8 @@
                 }
 
                 this.toDestroy.push(binding);
+            } else {
+                throw new Error("The " + name + "binding is not supported");
             }
         }
     });

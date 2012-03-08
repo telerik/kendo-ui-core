@@ -683,6 +683,12 @@
                 equal(destroy.calls("destroy"), 1);
             });
 
+            test("error is thrown if binding is not find", function() {
+                var dom = $('<div data-bind="nonexisting:foo"/>');
+
+                raises(function() { kendo.bind(dom, {}); }, "Error should be thrown");
+            });
+
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
