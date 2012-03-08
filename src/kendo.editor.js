@@ -623,6 +623,8 @@
 
             this.pendingFormats.clear();
 
+            html = html || "";
+
             // Some browsers do not allow setting CDATA sections through innerHTML so we encode them as comments
             html = html.replace(/<!\[CDATA\[(.*)?\]\]>/g, '<!--[CDATA[$1]]-->');
 
@@ -835,27 +837,33 @@
 })(jQuery);
 (function($) {
 
-    // Imports ================================================================
-    var kendo = window.kendo,
-        Class = kendo.Class,
-        map = $.map,
-        extend = $.extend;
+var kendo = window.kendo,
+    Class = kendo.Class,
+    map = $.map,
+    extend = $.extend,
+    STYLE = "style",
+    FLOAT = "float",
+    CSSFLOAT = "cssFloat",
+    STYLEFLOAT = "styleFloat",
+    CLASS = "class",
+    KMARKER = "k-marker";
 
 function makeMap(items) {
-    var obj = {};
+    var obj = {},
+        i, len;
 
-    for (var i = 0; i < items.length; i++)
+    for (i = 0, len = items.length; i < len; i++) {
         obj[items[i]] = true;
-
+    }
     return obj;
 }
 
-var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,isindex,link,meta,param,embed'.split(',')),
-    blockElements = 'div,p,h1,h2,h3,h4,h5,h6,address,applet,blockquote,button,center,dd,dir,dl,dt,fieldset,form,frameset,hr,iframe,isindex,li,map,menu,noframes,noscript,object,ol,pre,script,table,tbody,td,tfoot,th,thead,tr,ul'.split(','),
+var empty = makeMap("area,base,basefont,br,col,frame,hr,img,input,isindex,link,meta,param,embed".split(",")),
+    blockElements = "div,p,h1,h2,h3,h4,h5,h6,address,applet,blockquote,button,center,dd,dir,dl,dt,fieldset,form,frameset,hr,iframe,isindex,li,map,menu,noframes,noscript,object,ol,pre,script,table,tbody,td,tfoot,th,thead,tr,ul".split(","),
     block = makeMap(blockElements),
-    inlineElements = 'span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var'.split(','),
+    inlineElements = "span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var".split(","),
     inline = makeMap(inlineElements),
-    fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected'.split(','));
+    fillAttrs = makeMap("checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected".split(","));
 
 var normalize = function (node) {
     if (node.nodeType == 1)
@@ -879,16 +887,21 @@ if ($.browser.msie && parseInt($.browser.version) >= 8) {
     }
 }
 
-var whitespace = /^\s+$/;
-var rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i;
-var cssAttributes = ('color,padding-left,padding-right,padding-top,padding-bottom,\
+var whitespace = /^\s+$/,
+    rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
+    amp = /&/g,
+    openTag = /</g,
+    closeTag = />/g,
+    nbsp = /\u00a0/g,
+    bom = /\ufeff/g;
+var cssAttributes = ("color,padding-left,padding-right,padding-top,padding-bottom,\
 background-color,background-attachment,background-image,background-position,background-repeat,\
 border-top-style,border-top-width,border-top-color,\
 border-bottom-style,border-bottom-width,border-bottom-color,\
 border-left-style,border-left-width,border-left-color,\
 border-right-style,border-right-width,border-right-color,\
-font-family,font-size,font-style,font-variant,font-weight,line-height'
-).split(',');
+font-family,font-size,font-style,font-variant,font-weight,line-height"
+).split(",");
 
 var Dom = {
     findNodeIndex: function(node) {
@@ -936,10 +949,10 @@ var Dom = {
         for (var key in attributes) {
             var value = node[key];
 
-            if (key == 'float')
-                value = node[$.support.cssFloat ? "cssFloat" : "styleFloat"];
+            if (key == FLOAT)
+                value = node[$.support.cssFloat ? CSSFLOAT : STYLEFLOAT];
 
-            if (typeof value == 'object') {
+            if (typeof value == "object") {
                 if (!Dom.attrEquals(value, attributes[key]))
                     return false;
             } else if (value != attributes[key])
@@ -954,9 +967,10 @@ var Dom = {
     },
 
     blockParents: function(nodes) {
-        var blocks = [];
+        var blocks = [],
+            i, len;
 
-        for (var i = 0, len = nodes.length; i < len; i++) {
+        for (i = 0, len = nodes.length; i < len; i++) {
             var block = Dom.parentOfType(nodes[i], Dom.blockElements);
             if (block && $.inArray(block, blocks) < 0)
                 blocks.push(block);
@@ -980,16 +994,16 @@ var Dom = {
 
         if (!matches) return color;
 
-        return '#' + map(matches.slice(1), function (x) {
-            return x = parseInt(x).toString(16), x.length > 1 ? x : '0' + x;
-        }).join('');
+        return "#" + map(matches.slice(1), function (x) {
+            return x = parseInt(x).toString(16), x.length > 1 ? x : "0" + x;
+        }).join("");
     },
 
     encode: function (value) {
-        return value.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/\u00a0/g, '&nbsp;');
+        return value.replace(amp, "&amp;")
+                .replace(openTag, "&lt;")
+                .replace(closeTag, "&gt;")
+                .replace(nbsp, "&nbsp;");
     },
 
     name: function (node) {
@@ -1020,7 +1034,7 @@ var Dom = {
     },
 
     isMarker: function(node) {
-        return node.className == 'k-marker';
+        return node.className == KMARKER;
     },
 
     isWhitespace: function(node) {
@@ -1066,11 +1080,11 @@ var Dom = {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
-                if (node.nodeValue.replace(/\ufeff/g, '').length == 0)
+                if (node.nodeValue.replace(bom, "").length == 0)
                     Dom.remove(node);
                 if (Dom.isWhitespace(node))
                     Dom.insertBefore(node, parent);
-            } else if (node.className != 'k-marker') {
+            } else if (node.className != KMARKER) {
                 Dom.trim(node);
                 if (node.childNodes.length == 0 && !Dom.isEmpty(node))
                     Dom.remove(node);
@@ -1093,26 +1107,29 @@ var Dom = {
     },
 
     changeTag: function (referenceElement, tagName) {
-        var newElement = Dom.create(referenceElement.ownerDocument, tagName);
-        var attributes = referenceElement.attributes;
+        var newElement = Dom.create(referenceElement.ownerDocument, tagName),
+            attributes = referenceElement.attributes,
+            i, len, name, value, attribute;
 
-        for (var i = 0; i < attributes.length; i++) {
-            var attribute = attributes[i];
+        for (i = 0, len = attributes.length; i < len; i++) {
+            attribute = attributes[i];
             if (attribute.specified) {
                 // IE < 8 cannot set class or style via setAttribute
-                var name = attribute.nodeName;
-                var value = attribute.nodeValue;
-                if (name == 'class')
+                name = attribute.nodeName;
+                value = attribute.nodeValue;
+                if (name == CLASS) {
                     newElement.className = value;
-                else if (name == 'style')
+                } else if (name == STYLE) {
                     newElement.style.cssText = referenceElement.style.cssText;
-                else
+                } else {
                     newElement.setAttribute(name, value);
+                }
             }
         }
 
-        while (referenceElement.firstChild)
+        while (referenceElement.firstChild) {
             newElement.appendChild(referenceElement.firstChild);
+        }
 
         Dom.insertBefore(newElement, referenceElement);
         Dom.remove(referenceElement);
@@ -1140,7 +1157,7 @@ var Dom = {
     attr: function (element, attributes) {
         attributes = extend({}, attributes);
 
-        if (attributes && 'style' in attributes) {
+        if (attributes && STYLE in attributes) {
             Dom.style(element, attributes.style);
             delete attributes.style;
         }
@@ -1153,40 +1170,41 @@ var Dom = {
 
     unstyle: function (node, value) {
         for (var key in value) {
-            if (key == 'float')
-                key = $.support.cssFloat ? "cssFloat" : "styleFloat";
+            if (key == FLOAT)
+                key = $.support.cssFloat ? CSSFLOAT : STYLEFLOAT;
 
-            node.style[key] = '';
+            node.style[key] = "";
         }
 
-        if (node.style.cssText == '')
-            node.removeAttribute('style');
+        if (node.style.cssText == "")
+            node.removeAttribute(STYLE);
     },
 
     inlineStyle: function(document, name, attributes) {
-        var span = Dom.create(document, name, attributes);
+        var span = $(Dom.create(document, name, attributes)),
+            style;
 
-        document.body.appendChild(span);
+        document.body.appendChild(span[0]);
 
-        var $span = $(span);
+        style = map(cssAttributes, function(value) {
+            if ($.browser.msie && value == "line-height" && span.css(value) == "1px") {
+                return "line-height:1.5";
+            } else {
+                return value + ":" + span.css(value);
+            }
+        }).join(";");
 
-        var style = map(cssAttributes, function(value) {
-            if ($.browser.msie && value == 'line-height' && $span.css(value) == "1px")
-                return 'line-height:1.5';
-            else
-                return value + ':' + $span.css(value);
-        }).join(';');
-
-        $span.remove();
+        span.remove();
 
         return style;
     },
 
     removeClass: function(node, classNames) {
         var className = " " + node.className + " ",
-            classes = classNames.split(" ");
+            classes = classNames.split(" "),
+            i, len;
 
-        for (var i = 0; i < classes.length; i++) {
+        for (i = 0, len = classes.length; i < len; i++) {
             className = className.replace(" " + classes[i] + " ", " ");
         }
 
@@ -1195,25 +1213,28 @@ var Dom = {
         if (className.length) {
             node.className = className;
         } else {
-            node.removeAttribute("class");
+            node.removeAttribute(CLASS);
         }
     },
 
     commonAncestor: function () {
-        var count = arguments.length;
+        var count = arguments.length,
+            paths = [],
+            minPathLength = Infinity,
+            output = null,
+            i, ancestors, node, first, j;
 
-        if (!count)
+        if (!count) {
             return null;
+        }
 
-        if (count == 1)
+        if (count == 1) {
             return arguments[0];
+        }
 
-        var paths = [];
-        var minPathLength = Infinity;
-
-        for (var i = 0; i < count; i++) {
-            var ancestors = [];
-            var node = arguments[i];
+        for (i = 0; i < count; i++) {
+            ancestors = [];
+            node = arguments[i];
             while (node) {
                 ancestors.push(node);
                 node = node.parentNode;
@@ -1222,14 +1243,14 @@ var Dom = {
             minPathLength = Math.min(minPathLength, ancestors.length);
         }
 
-        if (count == 1)
+        if (count == 1) {
             return paths[0][0];
+        }
 
-        var output = null;
         for (i = 0; i < minPathLength; i++) {
-            var first = paths[0][i];
+            first = paths[0][i];
 
-            for (var j = 1; j < count; j++)
+            for (j = 1; j < count; j++)
                 if (first != paths[j][i])
                     return output;
 
@@ -1239,14 +1260,9 @@ var Dom = {
     }
 }
 
-// exports
+kendo.ui.Editor.Dom = Dom;
 
-extend(kendo.ui.Editor, {
-    Dom: Dom
-});
-
-})(jQuery);
-(function($, undefined) {
+})(jQuery);(function($, undefined) {
 
 // Imports ================================================================
 var doc = document,
@@ -3034,477 +3050,502 @@ registerTool("insertHtml", new InsertHtmlTool({template: new ToolTemplate({templ
 })(jQuery);
 (function($) {
 
-    // Imports ================================================================
-    var kendo = window.kendo,
-        Class = kendo.Class,
-        Editor = kendo.ui.Editor,
-        formats = Editor.fn.options.formats,
-        EditorUtils = Editor.EditorUtils,
-        Tool = Editor.Tool,
-        ToolTemplate = Editor.ToolTemplate,
-        FormatTool = Editor.FormatTool,
-        dom = Editor.Dom,
-        RangeUtils = Editor.RangeUtils,
-        extend = $.extend,
-        registerTool = Editor.EditorUtils.registerTool,
-        registerFormat = Editor.EditorUtils.registerFormat;
+var kendo = window.kendo,
+    Class = kendo.Class,
+    Editor = kendo.ui.Editor,
+    formats = Editor.fn.options.formats,
+    EditorUtils = Editor.EditorUtils,
+    Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
+    FormatTool = Editor.FormatTool,
+    dom = Editor.Dom,
+    RangeUtils = Editor.RangeUtils,
+    extend = $.extend,
+    registerTool = Editor.EditorUtils.registerTool,
+    registerFormat = Editor.EditorUtils.registerFormat,
+    KMARKER = "k-marker";
 
-    var InlineFormatFinder = Class.extend({
-        init: function(format) {
-            this.format = format;
-        },
+var InlineFormatFinder = Class.extend({
+    init: function(format) {
+        this.format = format;
+    },
 
-        numberOfSiblings: function(referenceNode) {
-            var textNodesCount = 0,
-                elementNodesCount = 0,
-                markerCount = 0,
-                parentNode = referenceNode.parentNode;
+    numberOfSiblings: function(referenceNode) {
+        var textNodesCount = 0,
+            elementNodesCount = 0,
+            markerCount = 0,
+            parentNode = referenceNode.parentNode,
+            node;
 
-            for (var node = parentNode.firstChild; node; node = node.nextSibling) {
-                if (node != referenceNode) {
-                    if (node.className == 'k-marker') {
-                        markerCount++;
-                    } else if (node.nodeType == 3) {
-                        textNodesCount++;
-                    } else {
-                        elementNodesCount++;
-                    }
+        for (node = parentNode.firstChild; node; node = node.nextSibling) {
+            if (node != referenceNode) {
+                if (node.className == KMARKER) {
+                    markerCount++;
+                } else if (node.nodeType == 3) {
+                    textNodesCount++;
+                } else {
+                    elementNodesCount++;
                 }
             }
-
-            if (markerCount > 1 && parentNode.firstChild.className == 'k-marker' && parentNode.lastChild.className == 'k-marker') {
-                // full node selection
-                return 0;
-            } else {
-                return elementNodesCount + textNodesCount;
-            }
-        },
-
-        findSuitable: function (sourceNode, skip) {
-            if (!skip && this.numberOfSiblings(sourceNode) > 0)
-                return null;
-
-            return dom.parentOfType(sourceNode, this.format[0].tags);
-        },
-
-        findFormat: function (sourceNode) {
-            var format = this.format,
-                attrEquals = dom.attrEquals;
-            for (var i = 0; i < format.length; i++) {
-                var node = sourceNode;
-                var tags = format[i].tags;
-                var attributes = format[i].attr;
-
-                if (node && dom.ofType(node, tags) && attrEquals(node, attributes))
-                    return node;
-
-                while (node) {
-                    node = dom.parentOfType(node, tags);
-                    if (node && attrEquals(node, attributes))
-                        return node;
-                }
-            }
-
-            return null;
-        },
-
-        isFormatted: function (nodes) {
-            for (var i = 0; i < nodes.length; i++)
-                if (this.findFormat(nodes[i]))
-                    return true;
-
-            return false;
         }
-    });
 
-    var InlineFormatter = Class.extend({
-        init: function(format, values) {
-            this.finder = new InlineFormatFinder(format);
-            this.attributes = extend({}, format[0].attr, values);
-            this.tag = format[0].tags[0];
-        },
+        if (markerCount > 1 && parentNode.firstChild.className == KMARKER && parentNode.lastChild.className == KMARKER) {
+            // full node selection
+            return 0;
+        } else {
+            return elementNodesCount + textNodesCount;
+        }
+    },
 
-        wrap: function(node) {
-            return dom.wrap(node, dom.create(node.ownerDocument, this.tag, this.attributes));
-        },
+    findSuitable: function (sourceNode, skip) {
+        if (!skip && this.numberOfSiblings(sourceNode) > 0) {
+            return null;
+        }
 
-        activate: function(range, nodes) {
-            if (this.finder.isFormatted(nodes)) {
-                this.split(range);
-                this.remove(nodes);
-            } else
-                this.apply(nodes);
-        },
+        return dom.parentOfType(sourceNode, this.format[0].tags);
+    },
 
-        toggle: function (range) {
-            var nodes = RangeUtils.textNodes(range);
+    findFormat: function (sourceNode) {
+        var format = this.format,
+            attrEquals = dom.attrEquals,
+            i, len, node, tags, attributes;
 
-            if (nodes.length > 0)
-                this.activate(range, nodes);
-        },
+        for (i = 0, len = format.length; i < len; i++) {
+            node = sourceNode;
+            tags = format[i].tags;
+            attributes = format[i].attr;
 
-        apply: function (nodes) {
-            var formatNodes = [];
-            for (var i = 0, l = nodes.length; i < l; i++) {
-                var node = nodes[i];
-
-                var formatNode = this.finder.findSuitable(node);
-                if (formatNode)
-                    dom.attr(formatNode, this.attributes);
-                else
-                    formatNode = this.wrap(node);
-
-                formatNodes.push(formatNode);
+            if (node && dom.ofType(node, tags) && attrEquals(node, attributes)) {
+                return node;
             }
 
-            this.consolidate(formatNodes);
-        },
+            while (node) {
+                node = dom.parentOfType(node, tags);
+                if (node && attrEquals(node, attributes)) {
+                    return node;
+                }
+            }
+        }
 
-        remove: function (nodes) {
-            for (var i = 0, l = nodes.length; i < l; i++) {
-                var formatNode = this.finder.findFormat(nodes[i]);
-                if (formatNode) {
-                    if (this.attributes && this.attributes.style) {
-                        dom.unstyle(formatNode, this.attributes.style);
-                        if (!formatNode.style.cssText) {
-                            dom.unwrap(formatNode);
-                        }
-                    } else {
+        return null;
+    },
+
+    isFormatted: function (nodes) {
+        var i, len;
+
+        for (i = 0, len = nodes.length; i < len; i++) {
+            if (this.findFormat(nodes[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+});
+
+var InlineFormatter = Class.extend({
+    init: function(format, values) {
+        var that = this;
+        that.finder = new InlineFormatFinder(format);
+        that.attributes = extend({}, format[0].attr, values);
+        that.tag = format[0].tags[0];
+    },
+
+    wrap: function(node) {
+        return dom.wrap(node, dom.create(node.ownerDocument, this.tag, this.attributes));
+    },
+
+    activate: function(range, nodes) {
+        var that = this;
+        if (that.finder.isFormatted(nodes)) {
+            that.split(range);
+            that.remove(nodes);
+        } else {
+            that.apply(nodes);
+        }
+    },
+
+    toggle: function (range) {
+        var nodes = RangeUtils.textNodes(range);
+
+        if (nodes.length > 0) {
+            this.activate(range, nodes);
+        }
+    },
+
+    apply: function (nodes) {
+        var that = this,
+        formatNodes = [],
+        i, l, node, formatNode;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            node = nodes[i];
+            formatNode = that.finder.findSuitable(node);
+            if (formatNode) {
+                dom.attr(formatNode, that.attributes);
+            } else {
+                formatNode = that.wrap(node);
+            }
+
+            formatNodes.push(formatNode);
+        }
+
+        that.consolidate(formatNodes);
+    },
+
+    remove: function (nodes) {
+        var that = this,
+        i, l, formatNode;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            formatNode = that.finder.findFormat(nodes[i]);
+            if (formatNode) {
+                if (that.attributes && that.attributes.style) {
+                    dom.unstyle(formatNode, that.attributes.style);
+                    if (!formatNode.style.cssText) {
                         dom.unwrap(formatNode);
                     }
-                }
-            }
-        },
-
-        split: function (range) {
-            var nodes = RangeUtils.textNodes(range);
-
-            if (nodes.length > 0) {
-                for (var i = 0, l = nodes.length; i < l; i++) {
-                    var formatNode = this.finder.findFormat(nodes[i]);
-                    if (formatNode)
-                        RangeUtils.split(range, formatNode, true);
-                }
-            }
-        },
-
-        consolidate: function (nodes) {
-            while (nodes.length > 1) {
-                var node = nodes.pop();
-                var last = nodes[nodes.length - 1];
-
-                if (node.previousSibling && node.previousSibling.className == 'k-marker') {
-                    last.appendChild(node.previousSibling);
-                }
-
-                if (node.tagName == last.tagName && node.previousSibling == last && node.style.cssText == last.style.cssText) {
-                    while (node.firstChild)
-                        last.appendChild(node.firstChild);
-                    dom.remove(node);
+                } else {
+                    dom.unwrap(formatNode);
                 }
             }
         }
+    },
 
-    });
+    split: function (range) {
+        var nodes = RangeUtils.textNodes(range),
+        l = nodes.length,
+        i, formatNode;
 
-    var GreedyInlineFormatFinder = InlineFormatFinder.extend({
-        init: function(format, greedyProperty) {
-            var that = this;
-            that.format = format;
-            that.greedyProperty = greedyProperty;
-            InlineFormatFinder.fn.init.call(that, format);
-        },
+        if (l > 0) {
+            for (i = 0; i < l; i++) {
+                formatNode = this.finder.findFormat(nodes[i]);
+                if (formatNode) {
+                    RangeUtils.split(range, formatNode, true);
+                }
+            }
+        }
+    },
 
-        getInlineCssValue: function(node) {
-            var attributes = node.attributes,
-                trim = $.trim;
+    consolidate: function (nodes) {
+        var node, last;
 
-            if (!attributes) return;
+        while (nodes.length > 1) {
+            node = nodes.pop();
+            last = nodes[nodes.length - 1];
 
-            for (var i = 0, l = attributes.length; i < l; i++) {
-                var attribute = attributes[i],
-                    name = attribute.nodeName,
-                    attributeValue = attribute.nodeValue;
+            if (node.previousSibling && node.previousSibling.className == KMARKER) {
+                last.appendChild(node.previousSibling);
+            }
 
-                if (attribute.specified && name == 'style') {
+            if (node.tagName == last.tagName && node.previousSibling == last && node.style.cssText == last.style.cssText) {
+                while (node.firstChild) {
+                    last.appendChild(node.firstChild);
+                }
+                dom.remove(node);
+            }
+        }
+    }
+});
 
-                    var css = trim(attributeValue || node.style.cssText).split(';');
+var GreedyInlineFormatFinder = InlineFormatFinder.extend({
+    init: function(format, greedyProperty) {
+        var that = this;
+        that.format = format;
+        that.greedyProperty = greedyProperty;
+        InlineFormatFinder.fn.init.call(that, format);
+    },
 
-                    for (var cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
-                        var pair = css[cssIndex];
-                        if (pair.length) {
-                            var propertyAndValue = pair.split(':');
-                            var property = trim(propertyAndValue[0].toLowerCase()),
-                                value = trim(propertyAndValue[1]);
+    getInlineCssValue: function(node) {
+        var attributes = node.attributes,
+            trim = $.trim,
+            i, l, attribute, name, attributeValue, css, pair, cssIndex, len, propertyAndValue, property, value;
 
-                            if (property != this.greedyProperty)
-                                continue;
+        if (!attributes) return;
 
-                            return property.indexOf('color') >= 0 ? dom.toHex(value) : value;
+        for (i = 0, l = attributes.length; i < l; i++) {
+            attribute = attributes[i];
+            name = attribute.nodeName;
+            attributeValue = attribute.nodeValue;
+
+            if (attribute.specified && name == "style") {
+
+                css = trim(attributeValue || node.style.cssText).split(";");
+
+                for (cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
+                    pair = css[cssIndex];
+                    if (pair.length) {
+                        propertyAndValue = pair.split(":");
+                        property = trim(propertyAndValue[0].toLowerCase());
+                        value = trim(propertyAndValue[1]);
+
+                        if (property != this.greedyProperty) {
+                            continue;
                         }
+
+                        return property.indexOf("color") >= 0 ? dom.toHex(value) : value;
                     }
                 }
             }
-
-            return;
-        },
-
-        getFormatInner: function (node) {
-            var $node = $(dom.isDataNode(node) ? node.parentNode : node);
-            var parents = $node.parents().andSelf();
-
-            for (var i = 0, len = parents.length; i < len; i++) {
-                var value = this.greedyProperty == 'className' ? parents[i].className : this.getInlineCssValue(parents[i]);
-                if (value)
-                    return value;
-            }
-
-            return 'inherit';
-        },
-
-        getFormat: function (nodes) {
-            var result = this.getFormatInner(nodes[0]);
-
-            for (var i = 1, len = nodes.length; i < len; i++)
-                if (result != this.getFormatInner(nodes[i]))
-                    return '';
-
-            return result;
-        },
-
-        isFormatted: function (nodes) {
-            return this.getFormat(nodes) !== '';
         }
 
-    });
+        return;
+    },
 
-    var GreedyInlineFormatter = InlineFormatter.extend({
-        init: function(format, values, greedyProperty) {
-            var that = this;
+    getFormatInner: function (node) {
+        var $node = $(dom.isDataNode(node) ? node.parentNode : node),
+            parents = $node.parents().andSelf(),
+            i, len, value;
 
-            InlineFormatter.fn.init.call(that, format, values);
-
-            that.greedyProperty = greedyProperty;
-            that.values = values;
-            that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
-        },
-
-        activate: function(range, nodes) {
-            this.split(range);
-
-            if (this.greedyProperty) {
-                var camelCase = this.greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
-                this[this.values.style[camelCase] == 'inherit' ? 'remove' : 'apply'](nodes);
-            } else {
-                this.apply(nodes);
+        for (i = 0, len = parents.length; i < len; i++) {
+            value = this.greedyProperty == "className" ? parents[i].className : this.getInlineCssValue(parents[i]);
+            if (value) {
+                return value;
             }
         }
-    });
 
-    function inlineFormatWillDelayExecution (range) {
-        return range.collapsed && !RangeUtils.isExpandable(range);
+        return "inherit";
+    },
+
+    getFormat: function (nodes) {
+        var result = this.getFormatInner(nodes[0]),
+        i, len;
+
+        for (i = 1, len = nodes.length; i < len; i++) {
+            if (result != this.getFormatInner(nodes[i])) {
+                return "";
+            }
+        }
+
+        return result;
+    },
+
+    isFormatted: function (nodes) {
+        return this.getFormat(nodes) !== "";
+    }
+});
+
+var GreedyInlineFormatter = InlineFormatter.extend({
+    init: function(format, values, greedyProperty) {
+        var that = this;
+
+        InlineFormatter.fn.init.call(that, format, values);
+
+        that.greedyProperty = greedyProperty;
+        that.values = values;
+        that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+    },
+
+    activate: function(range, nodes) {
+        var that = this;
+        that.split(range);
+
+        if (that.greedyProperty) {
+            var camelCase = that.greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
+            that[that.values.style[camelCase] == "inherit" ? "remove" : "apply"](nodes);
+        } else {
+            that.apply(nodes);
+        }
+    }
+});
+
+function inlineFormatWillDelayExecution (range) {
+    return range.collapsed && !RangeUtils.isExpandable(range);
+}
+
+var InlineFormatTool = FormatTool.extend({
+    init: function(options) {
+        FormatTool.fn.init.call(this, extend(options, {
+            finder: new InlineFormatFinder(options.format),
+            formatter: function () { return new InlineFormatter(options.format) }
+        }));
+
+        this.willDelayExecution = inlineFormatWillDelayExecution;
+    }
+});
+
+var FontTool = Tool.extend({
+    init: function(options) {
+        var that = this;
+        Tool.fn.init.call(that, options);
+
+        // IE has single selection hence we are using select box instead of combobox
+        that.options = options;
+        that.type = $.browser.msie ? "kendoDropDownList" : "kendoComboBox";
+        that.format = [{ tags: ["span"] }],
+        that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
+    },
+
+    command: function (commandArguments) {
+        var options = this.options;
+            format = this.format,
+            style = {};
+        return new Editor.FormatCommand(extend(commandArguments, {
+            formatter: function () {
+                style[options.domAttr] = commandArguments.value;
+
+                return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
+            }
+        }))
+    },
+
+    willDelayExecution: inlineFormatWillDelayExecution,
+
+    update: function(ui, nodes, pendingFormats) {
+        var that = this,
+            list = ui.data(that.type),
+            pendingFormat = pendingFormats.getPending(that.name),
+            format = (pendingFormat && pendingFormat.params) ? pendingFormat.params.value : that.finder.getFormat(nodes);
+
+        list.close();
+        list.value(format);
+    },
+
+    initialize: function (ui, initOptions) {
+        var editor = initOptions.editor,
+            toolName = this.options.name;
+
+        ui[this.type]({
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: editor.options[toolName],
+            change: function (e) {
+                Tool.exec(editor, toolName, this.value());
+            },
+            highlightFirst: false
+        });
+
+        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+
+        ui.data(this.type).value("inherit");
     }
 
-    var InlineFormatTool = FormatTool.extend({
-        init: function(options) {
-            FormatTool.fn.init.call(this, extend(options, {
-                finder: new InlineFormatFinder(options.format),
-                formatter: function () { return new InlineFormatter(options.format) }
-            }));
+});
 
-            this.willDelayExecution = inlineFormatWillDelayExecution;
-        }
-    });
+var ColorTool = Tool.extend({
+    init: function(options) {
+        Tool.fn.init.call(this, options);
 
-    var FontTool = Tool.extend({
-        init: function(options) {
-            var fontTool = this;
-            Tool.fn.init.call(fontTool, options);
+        this.options = options;
+        this.format = [{ tags: dom.inlineElements }];
+    },
 
-            // IE has single selection hence we are using select box instead of combobox
-            fontTool.options = options;
-            fontTool.type = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
-            fontTool.format = [{ tags: ['span'] }],
-            fontTool.finder = new GreedyInlineFormatFinder(fontTool.format, options.cssAttr);
-        },
+    update: function(ui) {
+        ui.data("kendoColorPicker").close();
+    },
 
-        command: function (commandArguments) {
-            var options = this.options;
-                format = this.format;
-            return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () {
-                    var style = {};
-                    style[options.domAttr] = commandArguments.value;
+    command: function (commandArguments) {
+        var options = this.options,
+            format = this.format,
+            style = {};
 
-                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
-                }
-            }))
-        },
+        return new Editor.FormatCommand(extend(commandArguments, {
+            formatter: function () {
+                style[options.domAttr] = commandArguments.value;
 
-        willDelayExecution: inlineFormatWillDelayExecution,
+                return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
+            }
+        }));
+    },
 
-        update: function($ui, nodes, pendingFormats) {
-            var that = this,
-                list = $ui.data(that.type);
+    willDelayExecution: inlineFormatWillDelayExecution,
 
-            list.close();
+    initialize: function(ui, initOptions) {
+        var editor = initOptions.editor,
+            toolName = this.name;
 
-            var pendingFormat = pendingFormats.getPending(that.name);
+        ui.kendoColorPicker({
+            selectedColor: "#000000",
+            change: function (e) {
+                Tool.exec(editor, toolName, e.value);
+            }
+        });
+    }
 
-            var format = (pendingFormat && pendingFormat.params) ? pendingFormat.params.value : that.finder.getFormat(nodes);
+});
 
-            list.value(format);
-        },
+var StyleTool = Tool.extend({
+    init: function(options) {
+        var that = this;
+        Tool.fn.init.call(that, options);
 
-        initialize: function ($ui, initOptions) {
-            var editor = initOptions.editor,
-                toolName = this.options.name;
+        that.format = [{ tags: ["span"] }];
+        that.finder = new GreedyInlineFormatFinder(that.format, "className");
+    },
 
-            $ui[this.type]({
-                dataTextField: "Text",
-                dataValueField: "Value",
-                dataSource: editor.options[toolName],
-                change: function (e) {
-                    Tool.exec(editor, toolName, this.value());
-                },
-                highlightFirst: false
-            });
+    command: function (commandArguments) {
+        return new Editor.FormatCommand(extend(commandArguments, {
+            formatter: function () {
+                return new GreedyInlineFormatter(this.format, { className: commandArguments.value });
+            }
+        }));
+    },
 
-            $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+    update: function(ui, nodes) {
+        var list = ui.data("kendoDropDownList");
+        list.close();
+        list.value(this.finder.getFormat(nodes));
+    },
 
-            $ui.data(this.type).value('inherit');
-        }
+    initiliaze: function(ui, initOptions) {
+        var editor = initOptions.editor;
 
-    });
+        ui.kendoDropDownList({
+            data: editor["style"],
+            title: editor.options.localization.style,
+            itemCreate: function (e) {
+                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.Value});
 
-    var ColorTool = Tool.extend({
-        init: function(options) {
-            Tool.fn.init.call(this, options);
+                e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
+            },
+            change: function (e) {
+                Tool.exec(editor, "style", e.value);
+            }
+        });
+    }
 
-            this.options = options;
-            this.format = [{ tags: dom.inlineElements }];
-        },
+});
 
-        update: function($ui) {
-            $ui.data('kendoColorPicker').close();
-        },
+extend(kendo.ui.Editor, {
+    InlineFormatFinder: InlineFormatFinder,
+    InlineFormatter: InlineFormatter,
+    GreedyInlineFormatFinder: GreedyInlineFormatFinder,
+    GreedyInlineFormatter: GreedyInlineFormatter,
+    InlineFormatTool: InlineFormatTool,
+    FontTool: FontTool,
+    ColorTool: ColorTool,
+    StyleTool: StyleTool
+});
 
-        command: function (commandArguments) {
-            var options = this.options,
-                format = this.format;
+registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
 
-            return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () {
-                    var style = {};
-                    style[options.domAttr] = commandArguments.value;
+registerFormat("bold", [ { tags: ["strong"] }, { tags: ["span"], attr: { style: { fontWeight: "bold"}} } ]);
+registerTool("bold", new InlineFormatTool({ key: "B", ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));
 
-                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
-                }
-            }));
-        },
+registerFormat("italic", [ { tags: ["em"] }, { tags: ["span"], attr: { style: { fontStyle: "italic"}} } ]);
+registerTool("italic", new InlineFormatTool({ key: "I", ctrl: true, format: formats.italic, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Italic"})}));
 
-        willDelayExecution: inlineFormatWillDelayExecution,
+registerFormat("underline", [ { tags: ["span"], attr: { style: { textDecoration: "underline"}} } ]);
+registerTool("underline", new InlineFormatTool({ key: "U", ctrl: true, format: formats.underline, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Underline"})}));
 
-        initialize: function($ui, initOptions) {
-            var editor = initOptions.editor,
-                toolName = this.name;
+registerFormat("strikethrough", [ { tags: ["del"] }, { tags: ["span"], attr: { style: { textDecoration: "line-through"}} } ]);
+registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Strikethrough"})}));
 
-            $ui.kendoColorPicker({
-                selectedColor: '#000000',
-                change: function (e) {
-                    //debugger;
-                    Tool.exec(editor, toolName, e.value);
-                }
-            });
-        }
+registerFormat("superscript", [ { tags: ["sup"] } ]);
+registerTool("superscript", new InlineFormatTool({format: formats.superscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Superscript"})}));
 
-    });
+registerFormat("subscript", [ { tags: ["sub"] } ]);
+registerTool("subscript", new InlineFormatTool({format: formats.subscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Subscript"})}));
 
-    var StyleTool = Tool.extend({
-        init: function(options) {
-            var styleTool = this;
-            Tool.fn.init.call(styleTool, options);
+registerTool("foreColor", new ColorTool({cssAttr:"color", domAttr:"color", name:"foreColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Color"})}));
 
-            styleTool.format = [{ tags: ['span'] }];
-            styleTool.finder = new GreedyInlineFormatFinder(styleTool.format, 'className');
-        },
+registerTool("backColor", new ColorTool({cssAttr:"background-color", domAttr: "backgroundColor", name:"backColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-        command: function (commandArguments) {
-            return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () {
-                    return new GreedyInlineFormatter(this.format, { className: commandArguments.value });
-                }
-            }));
-        },
+registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
 
-        update: function($ui, nodes) {
-            var list = $ui.data('kendoDropDownList');
-            list.close();
-            list.value(this.finder.getFormat(nodes));
-        },
+registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
 
-        initiliaze: function($ui, initOptions) {
-            var editor = initOptions.editor;
+})(jQuery);(function($) {
 
-            $ui.kendoDropDownList({
-                data: editor['style'],
-                title: editor.options.localization.style,
-                itemCreate: function (e) {
-                    var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
-
-                    e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
-                },
-                change: function (e) {
-                    Tool.exec(editor, 'style', e.value);
-                }
-            });
-        }
-
-    });
-
-    extend(kendo.ui.Editor, {
-        InlineFormatFinder: InlineFormatFinder,
-        InlineFormatter: InlineFormatter,
-        GreedyInlineFormatFinder: GreedyInlineFormatFinder,
-        GreedyInlineFormatter: GreedyInlineFormatter,
-        InlineFormatTool: InlineFormatTool,
-        FontTool: FontTool,
-        ColorTool: ColorTool,
-        StyleTool: StyleTool
-    });
-
-    registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
-
-    registerFormat("bold", [ { tags: ['strong'] }, { tags: ['span'], attr: { style: { fontWeight: 'bold'}} } ]);
-    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));
-
-    registerFormat("italic", [ { tags: ['em'] }, { tags: ['span'], attr: { style: { fontStyle: 'italic'}} } ]);
-    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Italic"})}));
-
-    registerFormat("underline", [ { tags: ['span'], attr: { style: { textDecoration: 'underline'}} } ]);
-    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Underline"})}));
-
-    registerFormat("strikethrough", [ { tags: ['del'] }, { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} } ]);
-    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Strikethrough"})}));
-
-    registerFormat("superscript", [ { tags: ['sup'] } ]);
-    registerTool("superscript", new InlineFormatTool({format: formats.superscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Superscript"})}));
-
-    registerFormat("subscript", [ { tags: ['sub'] } ]);
-    registerTool("subscript", new InlineFormatTool({format: formats.subscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Subscript"})}));
-
-    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Color"})}));
-
-    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
-
-    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
-
-    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
-
-})(jQuery);
-(function($) {
-
-// Imports ================================================================
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
@@ -3526,8 +3567,10 @@ var BlockFormatFinder = Class.extend({
     },
 
     contains: function(node, children) {
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
+        var i, len, child;
+
+        for (i = 0, len = children.length; i < len; i++) {
+            child = children[i];
             if (child == null || !dom.isAncestorOrSelf(node, child))
                 return false;
         }
@@ -3537,17 +3580,18 @@ var BlockFormatFinder = Class.extend({
 
     findSuitable: function (nodes) {
         var format = this.format,
-            suitable = [];
+            suitable = [],
+            i, len, candidate;
 
-        for (var i = 0; i < nodes.length; i++) {
-            var candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
+        for (i = 0, len = nodes.length; i < len; i++) {
+            candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
             if (!candidate)
                 return [];
             if ($.inArray(candidate, suitable) < 0)
                 suitable.push(candidate);
         }
 
-        for (var i = 0; i < suitable.length; i++)
+        for (i = 0, len = suitable.length; i < len; i++)
             if (this.contains(suitable[i], suitable))
                 return [suitable[i]];
 
@@ -3555,11 +3599,13 @@ var BlockFormatFinder = Class.extend({
     },
 
     findFormat: function (sourceNode) {
-        var format = this.format;
-        for (var i = 0; i < format.length; i++) {
-            var node = sourceNode;
-            var tags = format[i].tags;
-            var attributes = format[i].attr;
+        var format = this.format,
+        i, len, node, tags, attributes;
+
+        for (i = 0, len = format.length; i < len; i++) {
+            node = sourceNode;
+            tags = format[i].tags;
+            attributes = format[i].attr;
 
             while (node) {
                 if (dom.ofType(node, tags) && dom.attrEquals(node, attributes))
@@ -3572,26 +3618,26 @@ var BlockFormatFinder = Class.extend({
 
     getFormat: function (nodes) {
         var findFormat = $.proxy(function(node) { return this.findFormat(dom.isDataNode(node) ? node.parentNode : node); }, this),
-            result = findFormat(nodes[0]);
+            result = findFormat(nodes[0]),
+            i;
 
         if (!result)
-            return '';
+            return "";
 
-        for (var i = 1, len = nodes.length; i < len; i++)
+        for (i = 1, len = nodes.length; i < len; i++)
             if (result != findFormat(nodes[i]))
-                return '';
+                return "";
 
         return result.nodeName.toLowerCase();
     },
 
     isFormatted: function (nodes) {
-        for (var i = 0; i < nodes.length; i++)
+        for (var i = 0, len = nodes.length; i < len; i++)
             if (!this.findFormat(nodes[i]))
                 return false;
 
         return true;
     }
-
 });
 
 var BlockFormatter = Class.extend({
@@ -3607,14 +3653,13 @@ var BlockFormatter = Class.extend({
         if (dom.isInline(commonAncestor))
             commonAncestor = dom.blockParentOrBody(commonAncestor);
 
-        var ancestors = dom.significantChildNodes(commonAncestor);
+        var ancestors = dom.significantChildNodes(commonAncestor),
+            position = dom.findNodeIndex(ancestors[0]),
+            wrapper = dom.create(commonAncestor.ownerDocument, tag, attributes),
+            i, ancestor;
 
-        var position = dom.findNodeIndex(ancestors[0]);
-
-        var wrapper = dom.create(commonAncestor.ownerDocument, tag, attributes);
-
-        for (var i = 0; i < ancestors.length; i++) {
-            var ancestor = ancestors[i];
+        for (i = 0; i < ancestors.length; i++) {
+            ancestor = ancestors[i];
             if (dom.isBlock(ancestor)) {
                 dom.attr(ancestor, attributes);
 
@@ -3636,64 +3681,75 @@ var BlockFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : this.finder.findSuitable(nodes);
+        var that = this,
+            formatNodes = dom.is(nodes[0], "img") ? [nodes[0]] : that.finder.findSuitable(nodes),
+            formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), that.format) : that.format[0],
+            tag = formatToApply.tags[0],
+            attributes = extend({}, formatToApply.attr, that.values),
+            i, len;
 
-        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), this.format) : this.format[0];
-
-        var tag = formatToApply.tags[0];
-        var attributes = extend({}, formatToApply.attr, this.values);
-
-        if (formatNodes.length)
-            for (var i = 0; i < formatNodes.length; i++)
+        if (formatNodes.length) {
+            for (i = 0, len = formatNodes.length; i < len; i++) {
                 dom.attr(formatNodes[i], attributes);
-        else
-            this.wrap(tag, attributes, nodes);
+            }
+        } else {
+            that.wrap(tag, attributes, nodes);
+        }
     },
 
     remove: function (nodes) {
-        for (var i = 0, l = nodes.length; i < l; i++) {
-            var formatNode = this.finder.findFormat(nodes[i]);
-            if (formatNode)
-                if (dom.ofType(formatNode, ['p', 'img', 'li'])) {
-                    var namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
+        var i, l, formatNode, namedFormat;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            formatNode = this.finder.findFormat(nodes[i]);
+            if (formatNode) {
+                if (dom.ofType(formatNode, ["p", "img", "li"])) {
+                    namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
                     if (namedFormat.attr.style) {
                         dom.unstyle(formatNode, namedFormat.attr.style);
                     }
                     if (namedFormat.attr.className) {
                         dom.removeClass(formatNode, namedFormat.attr.className);
                     }
-                } else
+                } else {
                     dom.unwrap(formatNode);
+                }
+            }
         }
     },
 
     toggle: function (range) {
-        var nodes = RangeUtils.nodes(range);
-        if (this.finder.isFormatted(nodes))
-            this.remove(nodes);
-        else
-            this.apply(nodes);
+        var that = this,
+            nodes = RangeUtils.nodes(range);
+
+        if (that.finder.isFormatted(nodes)) {
+            that.remove(nodes);
+        } else {
+            that.apply(nodes);
+        }
     }
 });
 
 var GreedyBlockFormatter = Class.extend({
     init: function (format, values) {
-        this.format = format;
-        this.values = values;
-        this.finder = new BlockFormatFinder(format);
+        var that = this;
+        that.format = format;
+        that.values = values;
+        that.finder = new BlockFormatFinder(format);
     },
 
     apply: function (nodes) {
         var format = this.format,
             blocks = dom.blockParents(nodes),
-            formatTag = format[0].tags[0];
+            formatTag = format[0].tags[0],
+            i, len, list, formatter, range;
 
         if (blocks.length) {
-            for (var i = 0, len = blocks.length; i < len; i++) {
-                if (dom.is(blocks[i], 'li')) {
-                    var list = blocks[i].parentNode;
-                    var formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
-                    var range = this.editor.createRange();
+            for (i = 0, len = blocks.length; i < len; i++) {
+                if (dom.is(blocks[i], "li")) {
+                    list = blocks[i].parentNode;
+                    formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
+                    range = this.editor.createRange();
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
                 } else {
@@ -3710,8 +3766,9 @@ var GreedyBlockFormatter = Class.extend({
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
             nodes = RangeUtils.textNodes(range);
-            if (!nodes.length)
+            if (!nodes.length) {
                 nodes = dom.significantChildNodes(range.commonAncestorContainer);
+            }
         }
 
         this.apply(nodes);
@@ -3746,22 +3803,22 @@ var FormatBlockTool = Tool.extend({
         }));
     },
 
-    update: function($ui, nodes) {
+    update: function(ui, nodes) {
         var list;
-        if ($ui.is("select")) {
-            list = $ui.data('kendoDropDownList');
+        if (ui.is("select")) {
+            list = ui.data("kendoDropDownList");
         } else {
-            list = $ui.find("select").data('kendoDropDownList');
+            list = ui.find("select").data("kendoDropDownList");
         }
         list.close();
         list.value(this.finder.getFormat(nodes));
     },
 
-    initialize: function($ui, initOptions) {
+    initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
-            toolName = 'formatBlock';
+            toolName = "formatBlock";
 
-        $ui.kendoDropDownList({
+        ui.kendoDropDownList({
             dataTextField: "Text",
             dataValueField: "Value",
             dataSource: editor.options.formatBlock,
@@ -3772,7 +3829,7 @@ var FormatBlockTool = Tool.extend({
             highlightFirst: false
         });
 
-        $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
     }
 
 });
@@ -3788,16 +3845,16 @@ extend(kendo.ui.Editor, {
 
 registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format Block", initialValue: "Select Block Type"})}));
 
-registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: 'left'}} }, { tags: ['img'], attr: { style: { 'float': 'left'}} } ]);
+registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: "left"}} }, { tags: ["img"], attr: { style: { "float": "left"}} } ]);
 registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
 
-registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: 'center'}} }, { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} } ]);
+registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: "center"}} }, { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto"}} } ]);
 registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Center"})}));
 
-registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: 'right'}} }, { tags: ['img'], attr: { style: { 'float': 'right'}} } ]);
+registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: "right"}} }, { tags: ["img"], attr: { style: { "float": "right"}} } ]);
 registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Right"})}));
 
-registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: 'justify'}} } ]);
+registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: "justify"}} } ]);
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
 })(jQuery);
@@ -4525,34 +4582,38 @@ registerTool("unlink", new UnlinkTool({ key: 'K', ctrl: true, shift: true, templ
 })(jQuery);
 (function($, undefined) {
 
-// Imports ================================================================
 var kendo = window.kendo,
-    Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     EditorUtils = Editor.EditorUtils,
+    dom = Editor.Dom,
     registerTool = EditorUtils.registerTool,
     ToolTemplate = Editor.ToolTemplate,
     RangeUtils = Editor.RangeUtils,
-    Command = Editor.Command;
+    Command = Editor.Command,
+    keys = kendo.keys,
+    INSERTIMAGE = "Insert Image",
+    KEDITORIMAGEURL = "#k-editor-image-url",
+    KEDITORIMAGETITLE = "#k-editor-image-title";
 
 var ImageCommand = Command.extend({
     init: function(options) {
-        Command.fn.init.call(this, options);
+        var that = this;
+        Command.fn.init.call(that, options);
 
-        this.async = true;
-        this.attributes = null;
+        that.async = true;
+        that.attributes = {};
     },
 
     insertImage: function(img, range) {
         var attributes = this.attributes;
-        if (attributes.src && attributes.src != 'http://') {
+        if (attributes.src && attributes.src != "http://") {
             if (!img) {
-                img = dom.create(RangeUtils.documentFromRange(range), 'img', attributes);
+                img = dom.create(RangeUtils.documentFromRange(range), "img", attributes);
                 img.onload = img.onerror = function () {
-                    img.removeAttribute('complete');
-                    img.removeAttribute('width');
-                    img.removeAttribute('height');
+                    img.removeAttribute("complete");
+                    img.removeAttribute("width");
+                    img.removeAttribute("height");
                 }
                 range.deleteContents();
                 range.insertNode(img);
@@ -4560,38 +4621,44 @@ var ImageCommand = Command.extend({
                 range.setEndAfter(img);
                 RangeUtils.selectRange(range);
                 return true;
-            } else
+            } else {
                 dom.attr(img, attributes);
+            }
         }
 
         return false;
     },
 
     redo: function () {
-        var range = this.lockRange();
-        if (!this.insertImage(RangeUtils.image(range), range))
-            this.releaseRange(range);
+        var that = this,
+            range = that.lockRange();
+
+        if (!that.insertImage(RangeUtils.image(range), range)) {
+            that.releaseRange(range);
+        }
     },
 
     exec: function () {
-        var self = this,
-            insertImage = self.insertImage,
-            range = self.lockRange(),
+        var that = this,
+            insertImage = that.insertImage,
+            range = that.lockRange(),
             applied = false,
-            img = RangeUtils.image(range);
+            img = RangeUtils.image(range),
+            windowContent, dialog;
 
         function apply(e) {
-            self.attributes = {
-                src: $('#k-editor-image-url', dialog.element).val(),
-                alt: $('#k-editor-image-title', dialog.element).val()
+            that.attributes = {
+                src: $(KEDITORIMAGEURL, dialog.element).val(),
+                alt: $(KEDITORIMAGETITLE, dialog.element).val()
             };
 
-            applied = self.insertImage(img, range);
+            applied = that.insertImage(img, range);
 
             close(e);
 
-            if (self.change)
-                self.change();
+            if (that.change) {
+                that.change();
+            }
         }
 
         function close(e) {
@@ -4599,20 +4666,29 @@ var ImageCommand = Command.extend({
             dialog.destroy();
 
             dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
-            if (!applied)
-                self.releaseRange(range);
+            if (!applied) {
+                that.releaseRange(range);
+            }
         }
 
-//        var fileBrowser = this.editor.fileBrowser;
+        function keyDown(e) {
+            if (e.keyCode == keys.ENTER) {
+                apply(e);
+            } else if (e.keyCode == keys.ESC) {
+                close(e);
+            }
+        }
+
+//        var fileBrowser = that.editor.fileBrowser;
 //        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
 //
         function activate() {
 //            if (showBrowser) {
-//                new $t.imageBrowser($(this).find(".k-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.options.localization }));
+//                new $t.imageBrowser($(this).find(".k-image-browser"), extend(fileBrowser, { apply: apply, element: that.editor.element, localization: that.editor.options.localization }));
 //            }
         }
 
-        var windowContent =
+        windowContent =
             '<div class="k-editor-dialog">' +
                 '<ol>' +
                     '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
@@ -4623,58 +4699,74 @@ var ImageCommand = Command.extend({
                     '&nbsp;or&nbsp;' +
                     '<a href="#" class="k-dialog-close k-link">Close</a>' +
                 '</div>' +
-            '</div>'
+            '</div>';
 
-        var dialog = $(windowContent)
+        dialog = $(windowContent)
                 .appendTo(document.body)
-                .kendoWindow(extend({}, this.editor.options.dialogOptions, {
-                    title: "Insert Image",
+                .kendoWindow(extend({}, that.editor.options.dialogOptions, {
+                    title: INSERTIMAGE,
                     close: close
                 }))
                 .hide()
-                .find('.k-dialog-insert').click(apply).end()
-                .find('.k-dialog-close').click(close).end()
-                .find('.k-form-text-row input').keydown(function (e) {
-                    if (e.keyCode == 13)
-                        apply(e);
-                    else if (e.keyCode == 27)
-                        close(e);
-                }).end()
+                .find(".k-dialog-insert").click(apply).end()
+                .find(".k-dialog-close").click(close).end()
+                .find(".k-form-text-row input").keydown(keyDown).end()
                 //.toggleClass("k-imagebrowser", showBrowser)
                 // IE < 8 returns absolute url if getAttribute is not used
-                .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
-                .find('#k-editor-image-title').val(img ? img.alt : '').end()
+                .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
+                .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
                 .show()
-                .data('kendoWindow')
+                .data("kendoWindow")
                 .center();
 
-        $('#k-editor-image-url', dialog.element).focus().select();
+        $(KEDITORIMAGEURL, dialog.element).focus().select();
     }
 
 });
 
-extend(kendo.ui.Editor, {
-    ImageCommand: ImageCommand
-});
+kendo.ui.Editor.ImageCommand = ImageCommand;
 
-registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Insert Image"}) }));
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: INSERTIMAGE}) }));
 
-})(jQuery);
-(function($, undefined) {
+})(jQuery);(function($, undefined) {
 
 var kendo = window.kendo,
     Class = kendo.Class,
     Widget = kendo.ui.Widget,
     extend = $.extend,
-    deepExtend = kendo.deepExtend;
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     CHANGE = "change",
     VISIBLE = ":visible",
     KSTATESELECTED = "k-state-selected",
-    SELECTEDCLASS = "." + KSTATESELECTED;
+    SELECTEDCLASS = "." + KSTATESELECTED,
+    SELECTEDCOLORCLASS = ".k-selected-color",
+    UNSELECTABLE = "unselectable",
+    BACKGROUNDCOLOR = "background-color",
+    keys = kendo.keys;
 
-/* color picker */
+function buildPopup(colorPicker) {
+    var html = '<div class="k-popup k-group k-colorpicker-popup">' +
+                    '<ul class="k-reset">',
+        data = colorPicker.options.data,
+        currentColor = (colorPicker.value() || "").substring(1),
+        i, len, itemHtml;
+
+    for (i = 0, len = data.length; i < len; i++) {
+        itemHtml = '<li class="k-item' +
+            (data[i] == currentColor ? ' ' + KSTATESELECTED : '') +
+            '"><div style="' + BACKGROUNDCOLOR + ':#' +
+            data[i] +
+            '"></div></li>';
+        html += itemHtml;
+    }
+
+    html += "</ul></div>";
+
+    return html;
+}
+
+/* ColorPicker */
 
 var ColorPicker = Widget.extend({
     init: function(element, options) {
@@ -4688,50 +4780,9 @@ var ColorPicker = Widget.extend({
 
         element.attr("tabIndex", 0)
                 .click($.proxy(that.click, that))
-                .keydown(function(e) {
-                    var popup = that.popup(),
-                        selected, next, prev,
-                        keyCode = e.keyCode;
-
-                    if (keyCode == 40) {
-                        if (!popup.is(VISIBLE)) {
-                            that.open();
-                        } else {
-                           selected = popup.find(SELECTEDCLASS);
-
-                           if (selected[0]) {
-                               next = selected.next();
-                           } else {
-                               next = popup.find("li:first");
-                           }
-
-                           if (next[0]) {
-                                selected.removeClass(KSTATESELECTED);
-                                next.addClass(KSTATESELECTED);
-                           }
-                        }
-
-                        e.preventDefault();
-                    } else if (keyCode == 38) {
-                        if (popup.is(VISIBLE)) {
-                           selected = popup.find(SELECTEDCLASS);
-                           prev = selected.prev();
-
-                           if (prev[0]) {
-                                selected.removeClass(KSTATESELECTED);
-                                prev.addClass(KSTATESELECTED);
-                           }
-                        }
-                        e.preventDefault();
-                    } else if (keyCode == 9 || keyCode == 39 || keyCode == 37) {
-                        that.close();
-                    } else if (keyCode == 13) {
-                       popup.find(SELECTEDCLASS).click();
-                       e.preventDefault();
-                    }
-                })
+                .keydown($.proxy(that.keydown, that))
                 .find("*")
-                .attr("unselectable", "on");
+                .attr(UNSELECTABLE, "on");
 
         if ($.browser.msie) {
             element.focus(function () {
@@ -4743,7 +4794,7 @@ var ColorPicker = Widget.extend({
         }
 
         if (that.selectedColor)
-            element.find(".k-selected-color").css("background-color", that.selectedColor);
+            element.find(SELECTEDCOLORCLASS).css(BACKGROUNDCOLOR, that.selectedColor);
 
         $(element[0].ownerDocument.documentElement)
             .bind("mousedown", $.proxy(function (e) {
@@ -4751,11 +4802,6 @@ var ColorPicker = Widget.extend({
                     this.close();
                 }
             }, that));
-
-        that.bind([
-            CHANGE,
-            "load"
-        ], that.options);
     },
 
     options: {
@@ -4763,6 +4809,22 @@ var ColorPicker = Widget.extend({
         data: "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7".split(","),
         selectedColor: null
     },
+
+    events: [
+             /**
+             * Fires when the value is changed
+             * @name kendo.ui.ColorPicker#change
+             * @event
+             * @param {Event} e
+             * @example
+             * $("#colorpicker").kendoColorPicker({
+             *     change: function(e) {
+             *         // handle event
+             *     }
+             * });
+             */
+        CHANGE
+    ],
 
     select: function(color) {
         var that = this;
@@ -4805,7 +4867,7 @@ var ColorPicker = Widget.extend({
         }, elementPosition));
 
         popup.find(".k-item").bind("click", function(e) {
-                var color = $(e.currentTarget, e.target.ownerDocument).find("div").css("background-color");
+                var color = $(e.currentTarget, e.target.ownerDocument).find("div").css(BACKGROUNDCOLOR);
                 that.select(color);
             });
 
@@ -4829,9 +4891,9 @@ var ColorPicker = Widget.extend({
             reverse: true,
             duration: 200,
             complete: function() {
-                if (that.popup) {
-                    dom.remove(that.popup[0].parentNode);
-                    that.popup = null;
+                if (that._popup) {
+                    dom.remove(that._popup[0].parentNode);
+                    that._popup = null;
                 }
             }
         });
@@ -4839,7 +4901,7 @@ var ColorPicker = Widget.extend({
 
     toggle: function() {
         var that = this;
-        if (!that.popup || !that.popup.is(VISIBLE)) {
+        if (!that._popup || !that._popup.is(VISIBLE)) {
             that.open();
         } else {
             that.close();
@@ -4854,6 +4916,50 @@ var ColorPicker = Widget.extend({
         }
     },
 
+    keydown: function(e) {
+        var that = this,
+            popup = that.popup(),
+            selected, next, prev,
+            keyCode = e.keyCode;
+
+        if (keyCode == keys.DOWN) {
+            if (!popup.is(VISIBLE)) {
+                that.open();
+            } else {
+                selected = popup.find(SELECTEDCLASS);
+
+                if (selected[0]) {
+                    next = selected.next();
+                } else {
+                    next = popup.find("li:first");
+                }
+
+                if (next[0]) {
+                    selected.removeClass(KSTATESELECTED);
+                    next.addClass(KSTATESELECTED);
+                }
+            }
+
+            e.preventDefault();
+        } else if (keyCode == keys.UP) {
+            if (popup.is(VISIBLE)) {
+                selected = popup.find(SELECTEDCLASS);
+                prev = selected.prev();
+
+                if (prev[0]) {
+                    selected.removeClass(KSTATESELECTED);
+                    prev.addClass(KSTATESELECTED);
+                }
+            }
+            e.preventDefault();
+        } else if (keyCode == keys.TAB || keyCode == keys.RIGHT || keyCode == keys.LEFT) {
+            that.close();
+        } else if (keyCode == keys.ENTER) {
+            popup.find(SELECTEDCLASS).click();
+            e.preventDefault();
+        }
+    },
+
     value: function(color) {
         if (!color) {
             return this.selectedColor;
@@ -4863,45 +4969,23 @@ var ColorPicker = Widget.extend({
 
         this.selectedColor = color;
 
-        this.element.find(".k-selected-color")
-            .css("background-color", color);
+        this.element.find(SELECTEDCOLORCLASS)
+            .css(BACKGROUNDCOLOR, color);
     },
 
     popup: function() {
         var popup = this._popup;
         if (!popup) {
-            this._popup = popup = $(ColorPicker.buildPopup(this))
+            this._popup = popup = $(buildPopup(this))
                     .hide()
                     .appendTo(document.body)
-                    .find("*").attr("unselectable", "on").end();
+                    .find("*").attr(UNSELECTABLE, "on").end();
         }
 
         return popup;
     }
 
 });
-
-ColorPicker.buildPopup = function(component) {
-    var html = '<div class="k-popup k-group k-colorpicker-popup">' +
-                    '<ul class="k-reset">',
-        data = component.options.data,
-        currentColor = (component.value() || "").substring(1),
-        itemHtml,
-        i, len, itemHtml;
-
-    for (i = 0, len = data.length; i < len; i++) {
-        itemHtml = '<li class="k-item' +
-            (data[i] == currentColor ? ' ' + KSTATESELECTED : '') +
-            '"><div style="background-color:#' +
-            data[i] +
-            '"></div></li>';
-        html += itemHtml;
-    }
-
-    html += "</ul></div>";
-
-    return html;
-}
 
 kendo.ui.plugin(ColorPicker);
 
@@ -4925,7 +5009,7 @@ var kendo = window.kendo,
     BlockFormatter = Editor.BlockFormatter;
 
 function indent(node, value) {
-    var property = dom.name(node) != 'td' ? 'marginLeft' : 'paddingLeft';
+    var property = dom.name(node) != "td" ? "marginLeft" : "paddingLeft";
     if (value === undefined) {
         return node.style[property] || 0;
     } else {
@@ -4946,42 +5030,46 @@ var IndentFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var formatNodes = this.finder.findSuitable(nodes);
+        var formatNodes = this.finder.findSuitable(nodes),
+            targets = [],
+            i, len, formatNode, parentList, sibling;
+
         if (formatNodes.length) {
-            var targets = [];
-            for (var i = 0; i < formatNodes.length;i++)
-                if (dom.is(formatNodes[i], 'li')) {
-                    if ($(formatNodes[i]).index() == 0)
+            for (i = 0, len = formatNodes.length; i < len; i++) {
+                if (dom.is(formatNodes[i], "li")) {
+                    if ($(formatNodes[i]).index() == 0) {
                         targets.push(formatNodes[i].parentNode);
-                    else if ($.inArray(formatNodes[i].parentNode, targets) < 0)
+                    } else if ($.inArray(formatNodes[i].parentNode, targets) < 0) {
                         targets.push(formatNodes[i]);
-                }
-                else
+                    }
+                } else {
                     targets.push(formatNodes[i]);
+                }
+            }
 
             while (targets.length) {
-                var formatNode = targets.shift();
-                if (dom.is(formatNode, 'li')) {
-                    var parentList = formatNode.parentNode;
-                    var $sibling = $(formatNode).prev('li');
-                    var $siblingList = $sibling.find('ul,ol').last();
+                formatNode = targets.shift();
+                if (dom.is(formatNode, "li")) {
+                    parentList = formatNode.parentNode;
+                    sibling = $(formatNode).prev("li");
+                    var siblingList = sibling.find("ul,ol").last();
 
-                    var nestedList = $(formatNode).children('ul,ol')[0];
+                    var nestedList = $(formatNode).children("ul,ol")[0];
 
-                    if (nestedList && $sibling[0]) {
-                        if ($siblingList[0]) {
-                           $siblingList.append(formatNode);
-                           $siblingList.append($(nestedList).children());
+                    if (nestedList && sibling[0]) {
+                        if (siblingList[0]) {
+                           siblingList.append(formatNode);
+                           siblingList.append($(nestedList).children());
                            dom.remove(nestedList);
                         } else {
-                            $sibling.append(nestedList);
+                            sibling.append(nestedList);
                             nestedList.insertBefore(formatNode, nestedList.firstChild);
                         }
                     } else {
-                        nestedList = $sibling.children('ul,ol')[0];
+                        nestedList = sibling.children("ul,ol")[0];
                         if (!nestedList) {
                             nestedList = dom.create(formatNode.ownerDocument, dom.name(parentList));
-                            $sibling.append(nestedList);
+                            sibling.append(nestedList);
                         }
 
                         while (formatNode && formatNode.parentNode == parentList) {
@@ -5009,41 +5097,42 @@ var IndentFormatter = Class.extend({
 
     remove: function(nodes) {
         var formatNodes = this.finder.findSuitable(nodes),
-            targetNode;
+            targetNode, i, len, list, listParent, siblings;
 
-        for (var i = 0; i < formatNodes.length; i++) {
-            var $formatNode = $(formatNodes[i]);
+        for (i = 0, len = formatNodes.length; i < len; i++) {
+            var formatNode = $(formatNodes[i]);
 
-            if ($formatNode.is('li')) {
-                var $list = $formatNode.parent();
-                var $listParent = $list.parent();
-                // $listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
-                if ($listParent.is('li,ul,ol') && !indent($list[0])) {
+            if (formatNode.is("li")) {
+                list = formatNode.parent();
+                listParent = list.parent();
+                // listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
+                if (listParent.is("li,ul,ol") && !indent(list[0])) {
                     // skip already processed nodes
-                    if (targetNode && $.contains(targetNode, $listParent[0])) {
+                    if (targetNode && $.contains(targetNode, listParent[0])) {
                         continue;
                     }
 
-                    var $siblings = $formatNode.nextAll('li');
-                    if ($siblings.length)
-                        $($list[0].cloneNode(false)).appendTo($formatNode).append($siblings);
+                    siblings = formatNode.nextAll("li");
+                    if (siblings.length)
+                        $(list[0].cloneNode(false)).appendTo(formatNode).append(siblings);
 
-                    if ($listParent.is("li")) {
-                        $formatNode.insertAfter($listParent);
+                    if (listParent.is("li")) {
+                        formatNode.insertAfter(listParent);
                     } else {
-                        $formatNode.appendTo($listParent);
+                        formatNode.appendTo(listParent);
                     }
 
-                    if (!$list.children('li').length)
-                        $list.remove();
+                    if (!list.children("li").length) {
+                        list.remove();
+                    }
 
                     continue;
                 } else {
-                    if (targetNode == $list[0]) {
+                    if (targetNode == list[0]) {
                         // removing format on sibling LI elements
                         continue;
                     }
-                    targetNode = $list[0];
+                    targetNode = list[0];
                 }
             } else {
                 targetNode = formatNodes[i];
@@ -5085,33 +5174,32 @@ var OutdentTool = Tool.extend({
         this.finder = new BlockFormatFinder([{tags:blockElements}]);
     },
 
-    initialize: function($ui) {
-        $ui.attr('unselectable', 'on')
-           .addClass('k-state-disabled');
+    initialize: function(ui) {
+        ui.attr("unselectable", "on")
+           .addClass("k-state-disabled");
     },
 
-    update: function ($ui, nodes) {
+    update: function (ui, nodes) {
         var suitable = this.finder.findSuitable(nodes),
-            isOutdentable, listParentsCount;
+            isOutdentable, listParentsCount, i, len;
 
-        for (var i = 0; i < suitable.length; i++) {
+        for (i = 0, len = suitable.length; i < len; i++) {
             isOutdentable = indent(suitable[i]);
 
             if (!isOutdentable) {
-                listParentsCount = $(suitable[i]).parents('ul,ol').length;
-                isOutdentable = (dom.is(suitable[i], 'li') && (listParentsCount > 1 || indent(suitable[i].parentNode)))
-                             || (dom.ofType(suitable[i], ['ul','ol']) && listParentsCount > 0);
+                listParentsCount = $(suitable[i]).parents("ul,ol").length;
+                isOutdentable = (dom.is(suitable[i], "li") && (listParentsCount > 1 || indent(suitable[i].parentNode)))
+                             || (dom.ofType(suitable[i], ["ul","ol"]) && listParentsCount > 0);
             }
 
             if (isOutdentable) {
-                $ui.removeClass('k-state-disabled');
+                ui.removeClass("k-state-disabled");
                 return;
             }
         }
 
-        $ui.addClass('k-state-disabled').removeClass('k-state-hover');
+        ui.addClass("k-state-disabled").removeClass("k-state-hover");
     }
-
 });
 
 extend(kendo.ui.Editor, {

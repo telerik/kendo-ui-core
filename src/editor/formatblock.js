@@ -1,6 +1,5 @@
 (function($) {
 
-// Imports ================================================================
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
@@ -22,8 +21,10 @@ var BlockFormatFinder = Class.extend({
     },
 
     contains: function(node, children) {
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
+        var i, len, child;
+
+        for (i = 0, len = children.length; i < len; i++) {
+            child = children[i];
             if (child == null || !dom.isAncestorOrSelf(node, child))
                 return false;
         }
@@ -33,17 +34,18 @@ var BlockFormatFinder = Class.extend({
 
     findSuitable: function (nodes) {
         var format = this.format,
-            suitable = [];
+            suitable = [],
+            i, len, candidate;
 
-        for (var i = 0; i < nodes.length; i++) {
-            var candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
+        for (i = 0, len = nodes.length; i < len; i++) {
+            candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
             if (!candidate)
                 return [];
             if ($.inArray(candidate, suitable) < 0)
                 suitable.push(candidate);
         }
 
-        for (var i = 0; i < suitable.length; i++)
+        for (i = 0, len = suitable.length; i < len; i++)
             if (this.contains(suitable[i], suitable))
                 return [suitable[i]];
 
@@ -51,11 +53,13 @@ var BlockFormatFinder = Class.extend({
     },
 
     findFormat: function (sourceNode) {
-        var format = this.format;
-        for (var i = 0; i < format.length; i++) {
-            var node = sourceNode;
-            var tags = format[i].tags;
-            var attributes = format[i].attr;
+        var format = this.format,
+        i, len, node, tags, attributes;
+
+        for (i = 0, len = format.length; i < len; i++) {
+            node = sourceNode;
+            tags = format[i].tags;
+            attributes = format[i].attr;
 
             while (node) {
                 if (dom.ofType(node, tags) && dom.attrEquals(node, attributes))
@@ -68,26 +72,26 @@ var BlockFormatFinder = Class.extend({
 
     getFormat: function (nodes) {
         var findFormat = $.proxy(function(node) { return this.findFormat(dom.isDataNode(node) ? node.parentNode : node); }, this),
-            result = findFormat(nodes[0]);
+            result = findFormat(nodes[0]),
+            i;
 
         if (!result)
-            return '';
+            return "";
 
-        for (var i = 1, len = nodes.length; i < len; i++)
+        for (i = 1, len = nodes.length; i < len; i++)
             if (result != findFormat(nodes[i]))
-                return '';
+                return "";
 
         return result.nodeName.toLowerCase();
     },
 
     isFormatted: function (nodes) {
-        for (var i = 0; i < nodes.length; i++)
+        for (var i = 0, len = nodes.length; i < len; i++)
             if (!this.findFormat(nodes[i]))
                 return false;
 
         return true;
     }
-
 });
 
 var BlockFormatter = Class.extend({
@@ -103,14 +107,13 @@ var BlockFormatter = Class.extend({
         if (dom.isInline(commonAncestor))
             commonAncestor = dom.blockParentOrBody(commonAncestor);
 
-        var ancestors = dom.significantChildNodes(commonAncestor);
+        var ancestors = dom.significantChildNodes(commonAncestor),
+            position = dom.findNodeIndex(ancestors[0]),
+            wrapper = dom.create(commonAncestor.ownerDocument, tag, attributes),
+            i, ancestor;
 
-        var position = dom.findNodeIndex(ancestors[0]);
-
-        var wrapper = dom.create(commonAncestor.ownerDocument, tag, attributes);
-
-        for (var i = 0; i < ancestors.length; i++) {
-            var ancestor = ancestors[i];
+        for (i = 0; i < ancestors.length; i++) {
+            ancestor = ancestors[i];
             if (dom.isBlock(ancestor)) {
                 dom.attr(ancestor, attributes);
 
@@ -132,64 +135,75 @@ var BlockFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var formatNodes = dom.is(nodes[0], 'img') ? [nodes[0]] : this.finder.findSuitable(nodes);
+        var that = this,
+            formatNodes = dom.is(nodes[0], "img") ? [nodes[0]] : that.finder.findSuitable(nodes),
+            formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), that.format) : that.format[0],
+            tag = formatToApply.tags[0],
+            attributes = extend({}, formatToApply.attr, that.values),
+            i, len;
 
-        var formatToApply = formatNodes.length ? EditorUtils.formatByName(dom.name(formatNodes[0]), this.format) : this.format[0];
-
-        var tag = formatToApply.tags[0];
-        var attributes = extend({}, formatToApply.attr, this.values);
-
-        if (formatNodes.length)
-            for (var i = 0; i < formatNodes.length; i++)
+        if (formatNodes.length) {
+            for (i = 0, len = formatNodes.length; i < len; i++) {
                 dom.attr(formatNodes[i], attributes);
-        else
-            this.wrap(tag, attributes, nodes);
+            }
+        } else {
+            that.wrap(tag, attributes, nodes);
+        }
     },
 
     remove: function (nodes) {
-        for (var i = 0, l = nodes.length; i < l; i++) {
-            var formatNode = this.finder.findFormat(nodes[i]);
-            if (formatNode)
-                if (dom.ofType(formatNode, ['p', 'img', 'li'])) {
-                    var namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
+        var i, l, formatNode, namedFormat;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            formatNode = this.finder.findFormat(nodes[i]);
+            if (formatNode) {
+                if (dom.ofType(formatNode, ["p", "img", "li"])) {
+                    namedFormat = EditorUtils.formatByName(dom.name(formatNode), this.format);
                     if (namedFormat.attr.style) {
                         dom.unstyle(formatNode, namedFormat.attr.style);
                     }
                     if (namedFormat.attr.className) {
                         dom.removeClass(formatNode, namedFormat.attr.className);
                     }
-                } else
+                } else {
                     dom.unwrap(formatNode);
+                }
+            }
         }
     },
 
     toggle: function (range) {
-        var nodes = RangeUtils.nodes(range);
-        if (this.finder.isFormatted(nodes))
-            this.remove(nodes);
-        else
-            this.apply(nodes);
+        var that = this,
+            nodes = RangeUtils.nodes(range);
+
+        if (that.finder.isFormatted(nodes)) {
+            that.remove(nodes);
+        } else {
+            that.apply(nodes);
+        }
     }
 });
 
 var GreedyBlockFormatter = Class.extend({
     init: function (format, values) {
-        this.format = format;
-        this.values = values;
-        this.finder = new BlockFormatFinder(format);
+        var that = this;
+        that.format = format;
+        that.values = values;
+        that.finder = new BlockFormatFinder(format);
     },
 
     apply: function (nodes) {
         var format = this.format,
             blocks = dom.blockParents(nodes),
-            formatTag = format[0].tags[0];
+            formatTag = format[0].tags[0],
+            i, len, list, formatter, range;
 
         if (blocks.length) {
-            for (var i = 0, len = blocks.length; i < len; i++) {
-                if (dom.is(blocks[i], 'li')) {
-                    var list = blocks[i].parentNode;
-                    var formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
-                    var range = this.editor.createRange();
+            for (i = 0, len = blocks.length; i < len; i++) {
+                if (dom.is(blocks[i], "li")) {
+                    list = blocks[i].parentNode;
+                    formatter = new Editor.ListFormatter(list.nodeName.toLowerCase(), formatTag);
+                    range = this.editor.createRange();
                     range.selectNode(blocks[i]);
                     formatter.toggle(range);
                 } else {
@@ -206,8 +220,9 @@ var GreedyBlockFormatter = Class.extend({
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
             nodes = RangeUtils.textNodes(range);
-            if (!nodes.length)
+            if (!nodes.length) {
                 nodes = dom.significantChildNodes(range.commonAncestorContainer);
+            }
         }
 
         this.apply(nodes);
@@ -242,22 +257,22 @@ var FormatBlockTool = Tool.extend({
         }));
     },
 
-    update: function($ui, nodes) {
+    update: function(ui, nodes) {
         var list;
-        if ($ui.is("select")) {
-            list = $ui.data('kendoDropDownList');
+        if (ui.is("select")) {
+            list = ui.data("kendoDropDownList");
         } else {
-            list = $ui.find("select").data('kendoDropDownList');
+            list = ui.find("select").data("kendoDropDownList");
         }
         list.close();
         list.value(this.finder.getFormat(nodes));
     },
 
-    initialize: function($ui, initOptions) {
+    initialize: function(ui, initOptions) {
         var editor = initOptions.editor,
-            toolName = 'formatBlock';
+            toolName = "formatBlock";
 
-        $ui.kendoDropDownList({
+        ui.kendoDropDownList({
             dataTextField: "Text",
             dataValueField: "Value",
             dataSource: editor.options.formatBlock,
@@ -268,7 +283,7 @@ var FormatBlockTool = Tool.extend({
             highlightFirst: false
         });
 
-        $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
     }
 
 });
@@ -284,16 +299,16 @@ extend(kendo.ui.Editor, {
 
 registerTool("formatBlock", new FormatBlockTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Format Block", initialValue: "Select Block Type"})}));
 
-registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: 'left'}} }, { tags: ['img'], attr: { style: { 'float': 'left'}} } ]);
+registerFormat("justifyLeft", [ { tags: dom.blockElements, attr: { style: { textAlign: "left"}} }, { tags: ["img"], attr: { style: { "float": "left"}} } ]);
 registerTool("justifyLeft", new BlockFormatTool({format: formats.justifyLeft, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Left"})}));
 
-registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: 'center'}} }, { tags: ['img'], attr: { style: { display: 'block', marginLeft: 'auto', marginRight: 'auto'}} } ]);
+registerFormat("justifyCenter", [ { tags: dom.blockElements, attr: { style: { textAlign: "center"}} }, { tags: ["img"], attr: { style: { display: "block", marginLeft: "auto", marginRight: "auto"}} } ]);
 registerTool("justifyCenter", new BlockFormatTool({format: formats.justifyCenter, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Center"})}));
 
-registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: 'right'}} }, { tags: ['img'], attr: { style: { 'float': 'right'}} } ]);
+registerFormat("justifyRight", [ { tags: dom.blockElements, attr: { style: { textAlign: "right"}} }, { tags: ["img"], attr: { style: { "float": "right"}} } ]);
 registerTool("justifyRight", new BlockFormatTool({format: formats.justifyRight, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Right"})}));
 
-registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: 'justify'}} } ]);
+registerFormat("justifyFull", [ { tags: dom.blockElements, attr: { style: { textAlign: "justify"}} } ]);
 registerTool("justifyFull", new BlockFormatTool({format: formats.justifyFull, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Justify Full"})}));
 
 })(jQuery);

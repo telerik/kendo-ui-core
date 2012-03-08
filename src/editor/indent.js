@@ -17,7 +17,7 @@ var kendo = window.kendo,
     BlockFormatter = Editor.BlockFormatter;
 
 function indent(node, value) {
-    var property = dom.name(node) != 'td' ? 'marginLeft' : 'paddingLeft';
+    var property = dom.name(node) != "td" ? "marginLeft" : "paddingLeft";
     if (value === undefined) {
         return node.style[property] || 0;
     } else {
@@ -38,42 +38,46 @@ var IndentFormatter = Class.extend({
     },
 
     apply: function (nodes) {
-        var formatNodes = this.finder.findSuitable(nodes);
+        var formatNodes = this.finder.findSuitable(nodes),
+            targets = [],
+            i, len, formatNode, parentList, sibling;
+
         if (formatNodes.length) {
-            var targets = [];
-            for (var i = 0; i < formatNodes.length;i++)
-                if (dom.is(formatNodes[i], 'li')) {
-                    if ($(formatNodes[i]).index() == 0)
+            for (i = 0, len = formatNodes.length; i < len; i++) {
+                if (dom.is(formatNodes[i], "li")) {
+                    if ($(formatNodes[i]).index() == 0) {
                         targets.push(formatNodes[i].parentNode);
-                    else if ($.inArray(formatNodes[i].parentNode, targets) < 0)
+                    } else if ($.inArray(formatNodes[i].parentNode, targets) < 0) {
                         targets.push(formatNodes[i]);
-                }
-                else
+                    }
+                } else {
                     targets.push(formatNodes[i]);
+                }
+            }
 
             while (targets.length) {
-                var formatNode = targets.shift();
-                if (dom.is(formatNode, 'li')) {
-                    var parentList = formatNode.parentNode;
-                    var $sibling = $(formatNode).prev('li');
-                    var $siblingList = $sibling.find('ul,ol').last();
+                formatNode = targets.shift();
+                if (dom.is(formatNode, "li")) {
+                    parentList = formatNode.parentNode;
+                    sibling = $(formatNode).prev("li");
+                    var siblingList = sibling.find("ul,ol").last();
 
-                    var nestedList = $(formatNode).children('ul,ol')[0];
+                    var nestedList = $(formatNode).children("ul,ol")[0];
 
-                    if (nestedList && $sibling[0]) {
-                        if ($siblingList[0]) {
-                           $siblingList.append(formatNode);
-                           $siblingList.append($(nestedList).children());
+                    if (nestedList && sibling[0]) {
+                        if (siblingList[0]) {
+                           siblingList.append(formatNode);
+                           siblingList.append($(nestedList).children());
                            dom.remove(nestedList);
                         } else {
-                            $sibling.append(nestedList);
+                            sibling.append(nestedList);
                             nestedList.insertBefore(formatNode, nestedList.firstChild);
                         }
                     } else {
-                        nestedList = $sibling.children('ul,ol')[0];
+                        nestedList = sibling.children("ul,ol")[0];
                         if (!nestedList) {
                             nestedList = dom.create(formatNode.ownerDocument, dom.name(parentList));
-                            $sibling.append(nestedList);
+                            sibling.append(nestedList);
                         }
 
                         while (formatNode && formatNode.parentNode == parentList) {
@@ -101,41 +105,42 @@ var IndentFormatter = Class.extend({
 
     remove: function(nodes) {
         var formatNodes = this.finder.findSuitable(nodes),
-            targetNode;
+            targetNode, i, len, list, listParent, siblings;
 
-        for (var i = 0; i < formatNodes.length; i++) {
-            var $formatNode = $(formatNodes[i]);
+        for (i = 0, len = formatNodes.length; i < len; i++) {
+            var formatNode = $(formatNodes[i]);
 
-            if ($formatNode.is('li')) {
-                var $list = $formatNode.parent();
-                var $listParent = $list.parent();
-                // $listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
-                if ($listParent.is('li,ul,ol') && !indent($list[0])) {
+            if (formatNode.is("li")) {
+                list = formatNode.parent();
+                listParent = list.parent();
+                // listParent will be ul or ol in case of invalid dom - <ul><li></li><ul><li></li></ul></ul>
+                if (listParent.is("li,ul,ol") && !indent(list[0])) {
                     // skip already processed nodes
-                    if (targetNode && $.contains(targetNode, $listParent[0])) {
+                    if (targetNode && $.contains(targetNode, listParent[0])) {
                         continue;
                     }
 
-                    var $siblings = $formatNode.nextAll('li');
-                    if ($siblings.length)
-                        $($list[0].cloneNode(false)).appendTo($formatNode).append($siblings);
+                    siblings = formatNode.nextAll("li");
+                    if (siblings.length)
+                        $(list[0].cloneNode(false)).appendTo(formatNode).append(siblings);
 
-                    if ($listParent.is("li")) {
-                        $formatNode.insertAfter($listParent);
+                    if (listParent.is("li")) {
+                        formatNode.insertAfter(listParent);
                     } else {
-                        $formatNode.appendTo($listParent);
+                        formatNode.appendTo(listParent);
                     }
 
-                    if (!$list.children('li').length)
-                        $list.remove();
+                    if (!list.children("li").length) {
+                        list.remove();
+                    }
 
                     continue;
                 } else {
-                    if (targetNode == $list[0]) {
+                    if (targetNode == list[0]) {
                         // removing format on sibling LI elements
                         continue;
                     }
-                    targetNode = $list[0];
+                    targetNode = list[0];
                 }
             } else {
                 targetNode = formatNodes[i];
@@ -177,33 +182,32 @@ var OutdentTool = Tool.extend({
         this.finder = new BlockFormatFinder([{tags:blockElements}]);
     },
 
-    initialize: function($ui) {
-        $ui.attr('unselectable', 'on')
-           .addClass('k-state-disabled');
+    initialize: function(ui) {
+        ui.attr("unselectable", "on")
+           .addClass("k-state-disabled");
     },
 
-    update: function ($ui, nodes) {
+    update: function (ui, nodes) {
         var suitable = this.finder.findSuitable(nodes),
-            isOutdentable, listParentsCount;
+            isOutdentable, listParentsCount, i, len;
 
-        for (var i = 0; i < suitable.length; i++) {
+        for (i = 0, len = suitable.length; i < len; i++) {
             isOutdentable = indent(suitable[i]);
 
             if (!isOutdentable) {
-                listParentsCount = $(suitable[i]).parents('ul,ol').length;
-                isOutdentable = (dom.is(suitable[i], 'li') && (listParentsCount > 1 || indent(suitable[i].parentNode)))
-                             || (dom.ofType(suitable[i], ['ul','ol']) && listParentsCount > 0);
+                listParentsCount = $(suitable[i]).parents("ul,ol").length;
+                isOutdentable = (dom.is(suitable[i], "li") && (listParentsCount > 1 || indent(suitable[i].parentNode)))
+                             || (dom.ofType(suitable[i], ["ul","ol"]) && listParentsCount > 0);
             }
 
             if (isOutdentable) {
-                $ui.removeClass('k-state-disabled');
+                ui.removeClass("k-state-disabled");
                 return;
             }
         }
 
-        $ui.addClass('k-state-disabled').removeClass('k-state-hover');
+        ui.addClass("k-state-disabled").removeClass("k-state-hover");
     }
-
 });
 
 extend(kendo.ui.Editor, {

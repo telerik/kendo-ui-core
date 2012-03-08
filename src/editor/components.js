@@ -4,15 +4,39 @@ var kendo = window.kendo,
     Class = kendo.Class,
     Widget = kendo.ui.Widget,
     extend = $.extend,
-    deepExtend = kendo.deepExtend;
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     CHANGE = "change",
     VISIBLE = ":visible",
     KSTATESELECTED = "k-state-selected",
-    SELECTEDCLASS = "." + KSTATESELECTED;
+    SELECTEDCLASS = "." + KSTATESELECTED,
+    SELECTEDCOLORCLASS = ".k-selected-color",
+    UNSELECTABLE = "unselectable",
+    BACKGROUNDCOLOR = "background-color",
+    keys = kendo.keys;
 
-/* color picker */
+function buildPopup(colorPicker) {
+    var html = '<div class="k-popup k-group k-colorpicker-popup">' +
+                    '<ul class="k-reset">',
+        data = colorPicker.options.data,
+        currentColor = (colorPicker.value() || "").substring(1),
+        i, len, itemHtml;
+
+    for (i = 0, len = data.length; i < len; i++) {
+        itemHtml = '<li class="k-item' +
+            (data[i] == currentColor ? ' ' + KSTATESELECTED : '') +
+            '"><div style="' + BACKGROUNDCOLOR + ':#' +
+            data[i] +
+            '"></div></li>';
+        html += itemHtml;
+    }
+
+    html += "</ul></div>";
+
+    return html;
+}
+
+/* ColorPicker */
 
 var ColorPicker = Widget.extend({
     init: function(element, options) {
@@ -26,50 +50,9 @@ var ColorPicker = Widget.extend({
 
         element.attr("tabIndex", 0)
                 .click($.proxy(that.click, that))
-                .keydown(function(e) {
-                    var popup = that.popup(),
-                        selected, next, prev,
-                        keyCode = e.keyCode;
-
-                    if (keyCode == 40) {
-                        if (!popup.is(VISIBLE)) {
-                            that.open();
-                        } else {
-                           selected = popup.find(SELECTEDCLASS);
-
-                           if (selected[0]) {
-                               next = selected.next();
-                           } else {
-                               next = popup.find("li:first");
-                           }
-
-                           if (next[0]) {
-                                selected.removeClass(KSTATESELECTED);
-                                next.addClass(KSTATESELECTED);
-                           }
-                        }
-
-                        e.preventDefault();
-                    } else if (keyCode == 38) {
-                        if (popup.is(VISIBLE)) {
-                           selected = popup.find(SELECTEDCLASS);
-                           prev = selected.prev();
-
-                           if (prev[0]) {
-                                selected.removeClass(KSTATESELECTED);
-                                prev.addClass(KSTATESELECTED);
-                           }
-                        }
-                        e.preventDefault();
-                    } else if (keyCode == 9 || keyCode == 39 || keyCode == 37) {
-                        that.close();
-                    } else if (keyCode == 13) {
-                       popup.find(SELECTEDCLASS).click();
-                       e.preventDefault();
-                    }
-                })
+                .keydown($.proxy(that.keydown, that))
                 .find("*")
-                .attr("unselectable", "on");
+                .attr(UNSELECTABLE, "on");
 
         if ($.browser.msie) {
             element.focus(function () {
@@ -81,7 +64,7 @@ var ColorPicker = Widget.extend({
         }
 
         if (that.selectedColor)
-            element.find(".k-selected-color").css("background-color", that.selectedColor);
+            element.find(SELECTEDCOLORCLASS).css(BACKGROUNDCOLOR, that.selectedColor);
 
         $(element[0].ownerDocument.documentElement)
             .bind("mousedown", $.proxy(function (e) {
@@ -89,11 +72,6 @@ var ColorPicker = Widget.extend({
                     this.close();
                 }
             }, that));
-
-        that.bind([
-            CHANGE,
-            "load"
-        ], that.options);
     },
 
     options: {
@@ -101,6 +79,22 @@ var ColorPicker = Widget.extend({
         data: "000000,7f7f7f,880015,ed1c24,ff7f27,fff200,22b14c,00a2e8,3f48cc,a349a4,ffffff,c3c3c3,b97a57,ffaec9,ffc90e,efe4b0,b5e61d,99d9ea,7092be,c8bfe7".split(","),
         selectedColor: null
     },
+
+    events: [
+             /**
+             * Fires when the value is changed
+             * @name kendo.ui.ColorPicker#change
+             * @event
+             * @param {Event} e
+             * @example
+             * $("#colorpicker").kendoColorPicker({
+             *     change: function(e) {
+             *         // handle event
+             *     }
+             * });
+             */
+        CHANGE
+    ],
 
     select: function(color) {
         var that = this;
@@ -143,7 +137,7 @@ var ColorPicker = Widget.extend({
         }, elementPosition));
 
         popup.find(".k-item").bind("click", function(e) {
-                var color = $(e.currentTarget, e.target.ownerDocument).find("div").css("background-color");
+                var color = $(e.currentTarget, e.target.ownerDocument).find("div").css(BACKGROUNDCOLOR);
                 that.select(color);
             });
 
@@ -167,9 +161,9 @@ var ColorPicker = Widget.extend({
             reverse: true,
             duration: 200,
             complete: function() {
-                if (that.popup) {
-                    dom.remove(that.popup[0].parentNode);
-                    that.popup = null;
+                if (that._popup) {
+                    dom.remove(that._popup[0].parentNode);
+                    that._popup = null;
                 }
             }
         });
@@ -177,7 +171,7 @@ var ColorPicker = Widget.extend({
 
     toggle: function() {
         var that = this;
-        if (!that.popup || !that.popup.is(VISIBLE)) {
+        if (!that._popup || !that._popup.is(VISIBLE)) {
             that.open();
         } else {
             that.close();
@@ -192,6 +186,50 @@ var ColorPicker = Widget.extend({
         }
     },
 
+    keydown: function(e) {
+        var that = this,
+            popup = that.popup(),
+            selected, next, prev,
+            keyCode = e.keyCode;
+
+        if (keyCode == keys.DOWN) {
+            if (!popup.is(VISIBLE)) {
+                that.open();
+            } else {
+                selected = popup.find(SELECTEDCLASS);
+
+                if (selected[0]) {
+                    next = selected.next();
+                } else {
+                    next = popup.find("li:first");
+                }
+
+                if (next[0]) {
+                    selected.removeClass(KSTATESELECTED);
+                    next.addClass(KSTATESELECTED);
+                }
+            }
+
+            e.preventDefault();
+        } else if (keyCode == keys.UP) {
+            if (popup.is(VISIBLE)) {
+                selected = popup.find(SELECTEDCLASS);
+                prev = selected.prev();
+
+                if (prev[0]) {
+                    selected.removeClass(KSTATESELECTED);
+                    prev.addClass(KSTATESELECTED);
+                }
+            }
+            e.preventDefault();
+        } else if (keyCode == keys.TAB || keyCode == keys.RIGHT || keyCode == keys.LEFT) {
+            that.close();
+        } else if (keyCode == keys.ENTER) {
+            popup.find(SELECTEDCLASS).click();
+            e.preventDefault();
+        }
+    },
+
     value: function(color) {
         if (!color) {
             return this.selectedColor;
@@ -201,45 +239,23 @@ var ColorPicker = Widget.extend({
 
         this.selectedColor = color;
 
-        this.element.find(".k-selected-color")
-            .css("background-color", color);
+        this.element.find(SELECTEDCOLORCLASS)
+            .css(BACKGROUNDCOLOR, color);
     },
 
     popup: function() {
         var popup = this._popup;
         if (!popup) {
-            this._popup = popup = $(ColorPicker.buildPopup(this))
+            this._popup = popup = $(buildPopup(this))
                     .hide()
                     .appendTo(document.body)
-                    .find("*").attr("unselectable", "on").end();
+                    .find("*").attr(UNSELECTABLE, "on").end();
         }
 
         return popup;
     }
 
 });
-
-ColorPicker.buildPopup = function(component) {
-    var html = '<div class="k-popup k-group k-colorpicker-popup">' +
-                    '<ul class="k-reset">',
-        data = component.options.data,
-        currentColor = (component.value() || "").substring(1),
-        itemHtml,
-        i, len, itemHtml;
-
-    for (i = 0, len = data.length; i < len; i++) {
-        itemHtml = '<li class="k-item' +
-            (data[i] == currentColor ? ' ' + KSTATESELECTED : '') +
-            '"><div style="background-color:#' +
-            data[i] +
-            '"></div></li>';
-        html += itemHtml;
-    }
-
-    html += "</ul></div>";
-
-    return html;
-}
 
 kendo.ui.plugin(ColorPicker);
 

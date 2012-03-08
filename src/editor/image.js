@@ -1,33 +1,37 @@
 (function($, undefined) {
 
-// Imports ================================================================
 var kendo = window.kendo,
-    Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.Editor,
     EditorUtils = Editor.EditorUtils,
+    dom = Editor.Dom,
     registerTool = EditorUtils.registerTool,
     ToolTemplate = Editor.ToolTemplate,
     RangeUtils = Editor.RangeUtils,
-    Command = Editor.Command;
+    Command = Editor.Command,
+    keys = kendo.keys,
+    INSERTIMAGE = "Insert Image",
+    KEDITORIMAGEURL = "#k-editor-image-url",
+    KEDITORIMAGETITLE = "#k-editor-image-title";
 
 var ImageCommand = Command.extend({
     init: function(options) {
-        Command.fn.init.call(this, options);
+        var that = this;
+        Command.fn.init.call(that, options);
 
-        this.async = true;
-        this.attributes = null;
+        that.async = true;
+        that.attributes = {};
     },
 
     insertImage: function(img, range) {
         var attributes = this.attributes;
-        if (attributes.src && attributes.src != 'http://') {
+        if (attributes.src && attributes.src != "http://") {
             if (!img) {
-                img = dom.create(RangeUtils.documentFromRange(range), 'img', attributes);
+                img = dom.create(RangeUtils.documentFromRange(range), "img", attributes);
                 img.onload = img.onerror = function () {
-                    img.removeAttribute('complete');
-                    img.removeAttribute('width');
-                    img.removeAttribute('height');
+                    img.removeAttribute("complete");
+                    img.removeAttribute("width");
+                    img.removeAttribute("height");
                 }
                 range.deleteContents();
                 range.insertNode(img);
@@ -35,38 +39,44 @@ var ImageCommand = Command.extend({
                 range.setEndAfter(img);
                 RangeUtils.selectRange(range);
                 return true;
-            } else
+            } else {
                 dom.attr(img, attributes);
+            }
         }
 
         return false;
     },
 
     redo: function () {
-        var range = this.lockRange();
-        if (!this.insertImage(RangeUtils.image(range), range))
-            this.releaseRange(range);
+        var that = this,
+            range = that.lockRange();
+
+        if (!that.insertImage(RangeUtils.image(range), range)) {
+            that.releaseRange(range);
+        }
     },
 
     exec: function () {
-        var self = this,
-            insertImage = self.insertImage,
-            range = self.lockRange(),
+        var that = this,
+            insertImage = that.insertImage,
+            range = that.lockRange(),
             applied = false,
-            img = RangeUtils.image(range);
+            img = RangeUtils.image(range),
+            windowContent, dialog;
 
         function apply(e) {
-            self.attributes = {
-                src: $('#k-editor-image-url', dialog.element).val(),
-                alt: $('#k-editor-image-title', dialog.element).val()
+            that.attributes = {
+                src: $(KEDITORIMAGEURL, dialog.element).val(),
+                alt: $(KEDITORIMAGETITLE, dialog.element).val()
             };
 
-            applied = self.insertImage(img, range);
+            applied = that.insertImage(img, range);
 
             close(e);
 
-            if (self.change)
-                self.change();
+            if (that.change) {
+                that.change();
+            }
         }
 
         function close(e) {
@@ -74,20 +84,29 @@ var ImageCommand = Command.extend({
             dialog.destroy();
 
             dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
-            if (!applied)
-                self.releaseRange(range);
+            if (!applied) {
+                that.releaseRange(range);
+            }
         }
 
-//        var fileBrowser = this.editor.fileBrowser;
+        function keyDown(e) {
+            if (e.keyCode == keys.ENTER) {
+                apply(e);
+            } else if (e.keyCode == keys.ESC) {
+                close(e);
+            }
+        }
+
+//        var fileBrowser = that.editor.fileBrowser;
 //        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
 //
         function activate() {
 //            if (showBrowser) {
-//                new $t.imageBrowser($(this).find(".k-image-browser"), $.extend(fileBrowser, { apply: apply, element: self.editor.element, localization: self.editor.options.localization }));
+//                new $t.imageBrowser($(this).find(".k-image-browser"), extend(fileBrowser, { apply: apply, element: that.editor.element, localization: that.editor.options.localization }));
 //            }
         }
 
-        var windowContent =
+        windowContent =
             '<div class="k-editor-dialog">' +
                 '<ol>' +
                     '<li class="k-form-text-row"><label for="k-editor-image-url">Web address</label><input type="text" class="k-input" id="k-editor-image-url"/></li>' +
@@ -98,40 +117,33 @@ var ImageCommand = Command.extend({
                     '&nbsp;or&nbsp;' +
                     '<a href="#" class="k-dialog-close k-link">Close</a>' +
                 '</div>' +
-            '</div>'
+            '</div>';
 
-        var dialog = $(windowContent)
+        dialog = $(windowContent)
                 .appendTo(document.body)
-                .kendoWindow(extend({}, this.editor.options.dialogOptions, {
-                    title: "Insert Image",
+                .kendoWindow(extend({}, that.editor.options.dialogOptions, {
+                    title: INSERTIMAGE,
                     close: close
                 }))
                 .hide()
-                .find('.k-dialog-insert').click(apply).end()
-                .find('.k-dialog-close').click(close).end()
-                .find('.k-form-text-row input').keydown(function (e) {
-                    if (e.keyCode == 13)
-                        apply(e);
-                    else if (e.keyCode == 27)
-                        close(e);
-                }).end()
+                .find(".k-dialog-insert").click(apply).end()
+                .find(".k-dialog-close").click(close).end()
+                .find(".k-form-text-row input").keydown(keyDown).end()
                 //.toggleClass("k-imagebrowser", showBrowser)
                 // IE < 8 returns absolute url if getAttribute is not used
-                .find('#k-editor-image-url').val(img ? img.getAttribute('src', 2) : 'http://').end()
-                .find('#k-editor-image-title').val(img ? img.alt : '').end()
+                .find(KEDITORIMAGEURL).val(img ? img.getAttribute("src", 2) : "http://").end()
+                .find(KEDITORIMAGETITLE).val(img ? img.alt : "").end()
                 .show()
-                .data('kendoWindow')
+                .data("kendoWindow")
                 .center();
 
-        $('#k-editor-image-url', dialog.element).focus().select();
+        $(KEDITORIMAGEURL, dialog.element).focus().select();
     }
 
 });
 
-extend(kendo.ui.Editor, {
-    ImageCommand: ImageCommand
-});
+kendo.ui.Editor.ImageCommand = ImageCommand;
 
-registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Insert Image"}) }));
+registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: INSERTIMAGE}) }));
 
 })(jQuery);
