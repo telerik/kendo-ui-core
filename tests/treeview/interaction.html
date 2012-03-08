@@ -10,6 +10,8 @@
         <script src="../../src/kendo.treeview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link rel="stylesheet" href="../../styles/web/kendo.common.css" />
+        <link rel="stylesheet/less" href="../../styles/web/kendo.default.less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
     </head>
     <body>
         <h1 id="qunit-header">TreeView interaction</h1>
@@ -118,7 +120,7 @@
                 teardown: removeTreeViews
             });
 
-            function moveNode(treeview, sourceText, destinationText) {
+            function moveNode(treeview, sourceText, destinationText, dropPosition) {
                 var sourceNode = treeview.findByText(sourceText).find(".k-in:first"),
                     destinationNode = treeview.findByText(destinationText).find(".k-in:first"),
                     startOffset = sourceNode.offset(),
@@ -129,9 +131,13 @@
                         pageY: startOffset.top + 5,
                         relatedTarget: sourceNode[0]
                     },
+                    nodeHeight = destinationNode.height(),
+                    endOffsetDelta = dropPosition == "below" ? nodeHeight-1 :
+                                     dropPosition == "above" ? 1 :
+                                     nodeHeight / 2,
                     destinationPosition = {
                         pageX: endOffset.left + 5,
-                        pageY: endOffset.top + 7,
+                        pageY: endOffset.top + endOffsetDelta,
                         target: destinationNode[0]
                     };
 
@@ -144,7 +150,7 @@
                     .trigger(extend({ type: "mouseup"}, destinationPosition));
             }
 
-            test("moving item between parents", function () {
+            test("moving item across parents", function () {
                 var treeview = createTreeView({
                         dragAndDrop: true,
                         dataSource: [
@@ -173,6 +179,22 @@
                 moveNode(treeviewObject, "foo", "bar");
 
                 ok(treeviewObject.findByText("foo").parent().hasClass("k-treeview-lines"));
+            });
+
+            test("moving node above another", function() {
+                var treeview = createTreeView({
+                        dragAndDrop: true,
+                        dataSource: [
+                            { text: "foo" },
+                            { text: "bar" },
+                            { text: "baz" }
+                        ]
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                moveNode(treeviewObject, "foo", "baz", "above");
+
+                equal(treeview.text(), "barfoobaz");
             });
         </script>
 
