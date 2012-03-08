@@ -8,7 +8,7 @@
         <script src="../../qunit-runner.js"></script>
         <script src="../../../src/kendo.core.js"></script>
         <script src="../../../src/kendo.data.js"></script>
-        <script src="../../../src/kendo.mobile.swipe.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.mobile.core.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
@@ -218,7 +218,6 @@
                     <li><div class="km-group-title">Foo</div><ul><li>Bar</li><li>Baz</li></ul></li>\
                 </ul>');
                 var listView = new ListView(dom);
-                console.log(dom);
                 ok(dom.find("li").contents().first().is("div.km-group-title"), "Header is wrapped");
                 ok(!dom.find("li>div.km-group-title").contents().first().is("div.km-group-title"), "No bogus element is present");
             });

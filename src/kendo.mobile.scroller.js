@@ -29,8 +29,8 @@
             });
 
             that.tap.bind("press", function() { that.cancel(); });
-            that.swipe.bind("end", proxy(that.start, that));
-            that.swipe.bind("tap", proxy(that.onEnd, that));
+            that.drag.bind("end", proxy(that.start, that));
+            that.drag.bind("tap", proxy(that.onEnd, that));
         },
 
         onCancel: function() {
@@ -64,7 +64,7 @@
             if (that._outOfBounds()) {
                 that._snapBack();
             } else {
-                that.velocity = that.swipe[that.axis].velocity * 16;
+                that.velocity = that.drag[that.axis].velocity * 16;
                 if (that.velocity) {
                     that.tap.captureNext();
                     Animation.fn.start.call(that);
@@ -165,7 +165,7 @@
 
             var inner = element.children().first(),
 
-                tap = new mobile.Tap(element),
+                tap = new kendo.Tap(element),
 
                 move = new Move(inner),
 
@@ -174,7 +174,7 @@
                     container: element
                 }),
 
-                swipe = new mobile.Swipe(element, {
+                drag = new kendo.Drag(element, {
                     start: function() {
                         boundary.refresh();
                     }
@@ -183,14 +183,14 @@
                 draggable = new mobile.Draggable({
                     move: move,
                     boundary: boundary,
-                    swipe: swipe,
+                    drag: drag,
                     elastic: true
                 });
 
             extend(that, {
-                boundary: boundary,
                 move: move,
-                swipe: swipe,
+                boundary: boundary,
+                drag: drag,
                 draggable: draggable,
                 tap: tap,
                 pulled: false,
@@ -226,7 +226,7 @@
                 }
             });
 
-            that.swipe.bind("end", function() {
+            that.drag.bind("end", function() {
                 if(that.pulled) {
                     that.pulled = false;
                     options.pull();
@@ -253,7 +253,7 @@
                 axis: axis,
                 move: move,
                 tap: tap,
-                swipe: that.swipe,
+                drag: that.drag,
                 boundary: boundary,
                 end: function() { scrollBar.hide(); }
             });

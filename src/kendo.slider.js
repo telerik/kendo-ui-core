@@ -907,26 +907,28 @@
         that.type = type;
 
         that.draggable = new Draggable(dragHandle, {
+            threshold: 0,
             dragstart: proxy(that._dragstart, that),
             drag: proxy(that.drag, that),
-            dragend: proxy(that.dragend, that)
+            dragend: proxy(that.dragend, that),
+            dragcancel: proxy(that.dragcancel, that)
         });
 
         dragHandle.click(false);
     };
 
     Slider.Drag.prototype = {
-        dragstart: function (e) {
-            this.draggable._startDrag(e);
+        dragstart: function(e) {
+            // HACK to initiate click on the line
+            this.draggable.drag._start(e);
         },
 
-        _dragstart: function (e) {
+        _dragstart: function(e) {
             var that = this,
                 owner = that.owner,
                 options = that.options;
 
             if (!options.enabled) {
-                e.preventDefault();
                 return false;
             }
 
@@ -968,14 +970,17 @@
             var that = this,
                 owner = that.owner,
                 options = that.options,
-                location = kendo.touchLocation(e),
+                x = e.x.location,
+                y = e.y.location,
                 startPoint = that.dragableArea.startPoint,
                 endPoint = that.dragableArea.endPoint;
 
+            e.preventDefault();
+
             if (owner._isHorizontal) {
-                that.val = that.constrainValue(location.x, startPoint, endPoint, location.x >= endPoint);
+                that.val = that.constrainValue(x, startPoint, endPoint, x >= endPoint);
             } else {
-                that.val = that.constrainValue(location.y, endPoint, startPoint, location.y <= endPoint);
+                that.val = that.constrainValue(y, endPoint, startPoint, y <= endPoint);
             }
 
             if (that.oldVal != that.val) {
@@ -1018,19 +1023,27 @@
             }
         },
 
-        dragend: function (e) {
+        dragcancel: function(e) {
+            this.owner.refresh();
+            return this._end();
+        },
+
+        dragend: function(e) {
             var that = this,
                 owner = that.owner;
 
-            if (e.keyCode == kendo.keys.ESC) {
-                owner.refresh();
+            if (that.type) {
+                owner._update(that.selectionStart, that.selectionEnd);
             } else {
-                if (that.type) {
-                    owner._update(that.selectionStart, that.selectionEnd);
-                } else {
-                    owner._update(that.val);
-                }
+                owner._update(that.val);
             }
+
+            return that._end();
+        },
+
+        _end: function() {
+            var that = this,
+                owner = that.owner;
 
             if (owner.options.tooltip.enabled) {
                 that.tooltipDiv.remove();

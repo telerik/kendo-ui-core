@@ -15,6 +15,10 @@
                     kendoConsole.log("drag");
                 }
 
+                function draggableOnCancel(e) {
+                    kendoConsole.log("drag cancel");
+                }
+
                 function draggableOnDragEnd(e) {
                     kendoConsole.log("dragend");
 
@@ -54,7 +58,8 @@
                         },
                         dragstart: draggableOnDragStart,
                         drag: draggableOnDrag,
-                        dragend: draggableOnDragEnd
+                        dragend: draggableOnDragEnd,
+                        dragcancel: draggableOnCancel
                     });
 
                     $("#droptarget").kendoDropTarget({
