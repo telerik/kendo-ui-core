@@ -3,6 +3,7 @@
         Observable = kendo.Observable,
         ObservableObject = kendo.data.ObservableObject,
         ObservableArray = kendo.data.ObservableArray,
+        toString = {}.toString,
         data = kendo.data,
         Class = kendo.Class,
         GET = "get",
@@ -370,7 +371,7 @@
             var element = this.container();
             var template = this.template();
 
-            if (!(source instanceof ObservableArray)) {
+            if (!(source instanceof ObservableArray) && toString.call(source) !== "[object Array]") {
                 source = new ObservableArray([source]);
             }
 
@@ -515,12 +516,12 @@
             },
             refresh: function() {
                 var optionIndex,
-                element = this.element,
-                options = element.options,
-                value = this.bindings["value"].get(),
-                values = value,
-                field = this.options.valueField || this.options.textField,
-                optionValue;
+                    element = this.element,
+                    options = element.options,
+                    value = this.bindings["value"].get(),
+                    values = value,
+                    field = this.options.valueField || this.options.textField,
+                    optionValue;
 
                 if (!(values instanceof ObservableArray)) {
                     values = new ObservableArray([value]);
