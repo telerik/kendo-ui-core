@@ -2326,7 +2326,7 @@
             return;
         }
 
-        dataSource = element.getAttribute("data-" + kendo.ns + "source");
+        dataSource = parseOption(element, "dataSource");
 
         widget = (namespace || kendo.ui).roles[role];
 
@@ -2337,7 +2337,11 @@
         options = $.extend({}, parseOptions(element, widget.fn.options), options);
 
         if (dataSource) {
-            options["dataSource"] = window[dataSource];
+            if (typeof dataSource === STRING) {
+                options.dataSource = window[dataSource];
+            } else {
+                options.dataSource = dataSource;
+            }
         }
 
         for (idx = 0, length = widget.fn.events.length; idx < length; idx++) {

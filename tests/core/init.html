@@ -6,6 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -18,9 +19,14 @@
         <ul id="log"></ul>
 
         <script>
-            var Widget = kendo.ui.Widget.extend({
+            var TestWidget = kendo.ui.Widget.extend({
+                init: function(element, options) {
+                    kendo.ui.Widget.fn.init.call(this, element, options);
+
+                    this.dataSource = kendo.data.DataSource.create(options.dataSource);
+                },
                 options: {
-                    name: "Widget",
+                    name: "TestWidget",
                     foo: "",
                     template:"",
                     altTemplate:"",
@@ -31,7 +37,7 @@
                 events: [ "click" ]
             });
 
-            kendo.ui.plugin(Widget);
+            kendo.ui.plugin(TestWidget);
 
             module("kendo.init", {
                 teardown: function() {
@@ -39,119 +45,140 @@
                 }
             });
 
-            test("initializes a new widget based on its role", function() {
-                var dom = $('<div data-role="widget"/>');
+            test("initializes a new testwidget based on its role", function() {
+                var dom = $('<div data-role="testwidget"/>');
 
                 kendo.init(dom);
 
-                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+                ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
             test("initializes a multiple widgets based on their role", function() {
-                var dom = $('<div data-role="widget"/><div data-role="widget"/>');
+                var dom = $('<div data-role="testwidget"/><div data-role="testwidget"/>');
 
                 kendo.init(dom);
 
-                ok(dom.last().data("kendoWidget") instanceof Widget, "Widget is initialized");
+                ok(dom.last().data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
-            test("initializes a new widget from dom element", function() {
-                var dom = $('<div data-role="widget"/>');
+            test("initializes a new testwidget from dom element", function() {
+                var dom = $('<div data-role="testwidget"/>');
 
                 kendo.init(dom[0]);
 
-                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+                ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
             test("initializes a widgets in dom tree", function() {
-                var dom = $('<div><div data-role="widget"/></div>');
+                var dom = $('<div><div data-role="testwidget"/></div>');
 
                 kendo.init(dom);
 
-                ok(dom.find("div").data("kendoWidget") instanceof Widget, "Widget is initialized");
+                ok(dom.find("div").data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
             test("role respects the namespace", function() {
-                var dom = $('<div data-kendo-role="widget"/>');
+                var dom = $('<div data-kendo-role="testwidget"/>');
 
                 kendo.ns = "kendo-";
                 kendo.init(dom);
 
-                ok(dom.data("kendoWidget") instanceof Widget, "Widget is initialized");
+                ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
             });
 
             test("parses options from data attributes", function() {
-                var dom = $('<div data-role="widget" data-foo="foo" />');
+                var dom = $('<div data-role="testwidget" data-foo="foo" />');
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.foo, "foo");
+                equal(testwidget.options.foo, "foo");
             });
 
             test("parses options which start with data", function() {
-                var dom = $('<div data-role="widget" data-bar="bar" />');
+                var dom = $('<div data-role="testwidget" data-bar="bar" />');
 
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.dataBar, "bar");
+                equal(testwidget.options.dataBar, "bar");
             });
 
             test("parses camel case options that start with data", function() {
-                var dom = $('<div data-role="widget" data-min-height="bar" />');
+                var dom = $('<div data-role="testwidget" data-min-height="bar" />');
 
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.dataMinHeight, "bar");
+                equal(testwidget.options.dataMinHeight, "bar");
             });
 
             test("options respect the namespace", function() {
-                var dom = $('<div data-kendo-role="widget" data-kendo-min-height="bar" />');
+                var dom = $('<div data-kendo-role="testwidget" data-kendo-min-height="bar" />');
 
 
                 kendo.ns = "kendo-";
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.dataMinHeight, "bar");
+                equal(testwidget.options.dataMinHeight, "bar");
             });
 
             function foo() { }
 
             test("parses events from data attributes", function() {
-                var dom = $('<div data-role="widget" data-click="foo" />');
+                var dom = $('<div data-role="testwidget" data-click="foo" />');
 
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.click, foo);
+                equal(testwidget.options.click, foo);
             });
 
             test("parses templates from data attributes", function() {
-                var dom = $('<div data-role="widget" data-template="template" />');
+                var dom = $('<div data-role="testwidget" data-template="template" />');
 
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.template({}), $("#template").html());
+                equal(testwidget.options.template({}), $("#template").html());
             });
 
             test("parses template options", function() {
-                var dom = $('<div data-role="widget" data-alt-template="template" />');
+                var dom = $('<div data-role="testwidget" data-alt-template="template" />');
 
                 kendo.init(dom);
 
-                var widget = dom.data("kendoWidget");
+                var testwidget = dom.data("kendoTestWidget");
 
-                equal(widget.options.altTemplate({}), $("#template").html());
+                equal(testwidget.options.altTemplate({}), $("#template").html());
             });
+
+            var testDataSource = new kendo.data.DataSource();
+
+            test("initializes data source by field name", function() {
+                var dom = $('<div data-role="testwidget" data-source="testDataSource" />');
+
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+                equal(testwidget.dataSource, testDataSource);
+            });
+
+            test("initializes data source by configuration", function() {
+                var dom = $('<div data-role="testwidget" data-source=\'{"transport":{"read":"http://example.com"}}\'"/>');
+
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+                equal(testwidget.dataSource.transport.options.read.url, "http://example.com");
+            });
+
         </script>
         <script id="template" type="text/x-kendo-template">
             foo
