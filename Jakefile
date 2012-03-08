@@ -178,7 +178,7 @@ function buildDocs(sitefinity_path) {
     var mappings = {
             "ui.slider": ["ui.slider", "ui.rangeslider"],
             "mobile.ui.button": ["mobile.ui.button", "mobile.ui.backbutton", "mobile.ui.detailbutton"],
-            "ui.dragdrop": ["ui.draggable", "ui.droptarget", "drag"]
+            "ui.dragdrop": ["ui.draggable", "ui.droptarget", "drag", "dragaxis"]
         },
         sections = ["description", "configuration", "methods", "events"];
 

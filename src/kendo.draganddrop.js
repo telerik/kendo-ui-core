@@ -56,7 +56,39 @@
         return events.replace(/ /g, ns + " ");
     }
 
-    var DragAxis = Class.extend({
+    function preventDefault(e) {
+        e.preventDefault();
+    }
+
+    /**
+     * @name kendo.DragAxis.Description
+     *
+     * @section <h4>DragAxis</h4>
+     * The DragAxis is used internally by the kendo.Drag component to store and calculate event data.
+     * The Drag component contains two DragAxis instances: <code>x</code> for the horizontal coordinates, and <code>y</code> for the vertical.
+     * The two DragAxis instances are available in each Drag event parameter.
+     * @exampleTitle Access DragAxis information in Drag start event
+     * @example
+     * new kendo.Drag($("#foo"), {
+     *  start: function(e) {
+     *      console.log(x); // Horizontal axis
+     *      console.log(y); // Vertical axis
+     *  }
+     * });
+     *
+     * @section Each axis instance contains the following fields:
+     * <ul>
+     *   <li><b>location</b> - the offset of the mouse/touch relative to the entire document (pageX/Y);</li>
+     *   <li><b>startLocation</b> - the offset of the mouse/touch relative to the document when the drag started;</li>
+     *   <li><b>client</b> - the offset of the mouse/touch relative to the viewport (clientX/Y);</li>
+     *   <li><b>delta</b> - the change from the previous event location</li>
+     *   <li><b>velocity</b> - the pixels per millisecond speed of the current move.</li>
+     * </ul>
+     */
+    var DragAxis = Class.extend(/** @lends kendo.DragAxis.prototype */{
+        /**
+         * @constructs
+         */
         init: function(axis) {
             this.axis = axis;
         },
@@ -88,18 +120,14 @@
         }
     });
 
-    function preventDefault(e) {
-        e.preventDefault();
-    }
-
     /**
      * @name kendo.Drag.Description
-     * @section The kendo Drag component provides a cross-browser, touch-friendly way to handle mouse and touch drag events.
+     * @section <h4>Drag</h4> The kendo Drag component provides a cross-browser, touch-friendly way to handle mouse and touch drag events.
      * @exampleTitle <b>Drag</b> initialization
      * @example
      * var drag = new kendo.Drag($("#draggable"));
      */
-    var Drag = Observable.extend(/** @lends kendo.Drag */{
+    var Drag = Observable.extend(/** @lends kendo.Drag.prototype */{
         /**
          * @constructs
          * @extends kendo.Observable
@@ -479,7 +507,8 @@
     /**
      * @name kendo.ui.Draggable.Description
      *
-     * @section Enable draggable functionality on any DOM element.
+     * @section <h4>Draggable</h4>
+     * Enable draggable functionality on any DOM element.
      *
      * @exampleTitle <b>Draggable</b> initialization
      * @example
@@ -487,7 +516,8 @@
      *
      * @name kendo.ui.DropTarget.Description
      *
-     * @section Enable any DOM element to be a target for draggable elements.
+     * @section <h4>DropTarget</h4>
+     * Enable any DOM element to be a target for draggable elements.
      *
      * @exampleTitle <b>DropTarget</b> initialization
      * @example
