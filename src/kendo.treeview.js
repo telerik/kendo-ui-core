@@ -478,27 +478,26 @@
             *
             * @param {Function} e.setStatusClass
             * Allows a custom drag clue status to be set.
-            * <p>Pre-defined status classes are:
-            *     <ul>
-            *         <li><strong>k-insert-top</strong>
-            *             - Indicates that the item will be inserted on top.
-            *         </li>
-            *         <li><strong>k-insert-middle</strong>
-            *             - Indicates that the item will be inserted in the middle.
-            *         </li>
-            *         <li><strong>k-insert-bottom</strong>
-            *             - Indicates that the item will be inserted at the bottom.
-            *         </li>
-            *         <li><strong>k-add</strong>
-            *             - Indicates that the item will be added/appended.
-            *         </li>
-            *         <li><strong>k-denied</strong>
-            *             - Indicates an invalid operation. Using this class will automatically
-            *               make the drop operation invalid, so there will be no need to call
-            *               <code>setValid(false)</code> in the <code>drop</code> event.
-            *         </li>
-            *     </dl>
-            * </p>
+            * <p>Pre-defined status classes are:</p>
+            * <ul>
+            *     <li><strong>k-insert-top</strong>
+            *         - Indicates that the item will be inserted on top.
+            *     </li>
+            *     <li><strong>k-insert-middle</strong>
+            *         - Indicates that the item will be inserted in the middle.
+            *     </li>
+            *     <li><strong>k-insert-bottom</strong>
+            *         - Indicates that the item will be inserted at the bottom.
+            *     </li>
+            *     <li><strong>k-add</strong>
+            *         - Indicates that the item will be added/appended.
+            *     </li>
+            *     <li><strong>k-denied</strong>
+            *         - Indicates an invalid operation. Using this class will automatically
+            *           make the drop operation invalid, so there will be no need to call
+            *           <code>setValid(false)</code> in the <code>drop</code> event.
+            *     </li>
+            * </ul>
             *
             * @exampleTitle Show the user that is not permitted to drop nodes outside of the #drop-area element
             * @example
