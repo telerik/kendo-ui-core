@@ -583,7 +583,6 @@
 
                 test("minor ticks can be disabled", function() {
                     numericAxis.options.line.width = 0;
-                    numericAxis.options.majorTickType = "none";
                     numericAxis.getViewElements(view);
 
                     equal(view.log.line.length, 0);
@@ -591,8 +590,8 @@
 
                 test("minor ticks are distributed vertically", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -612,8 +611,8 @@
                 test("minor ticks are distributed vertically in reverse", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         reverse: true,
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
 
                     numericAxis.reflow(chartBox);
@@ -633,8 +632,6 @@
 
                 test("major ticks can be disabled", function() {
                     numericAxis.options.line.width = 0;
-                    numericAxis.options.majorTickType = "none";
-                    numericAxis.options.minorTickType = "none";
                     numericAxis.getViewElements(view);
 
                     equal(view.log.line.length, 0);
@@ -645,8 +642,8 @@
                         min: 0,
                         max: 0.3,
                         majorUnit: 0.2,
-                        minorTickType: "outside",
-                        majorTickType: "none"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -667,8 +664,8 @@
 
                 test("minor ticks are aligned to axis", 31, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -728,8 +725,8 @@
 
                 test("minor ticks are aligned to axis", 31, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         labels: {
                             mirror: true
                         }
@@ -903,8 +900,8 @@
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         isVertical: false,
                         reverse: true,
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -921,8 +918,8 @@
 
                 test("minor ticks are distributed horizontally in reverse", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: false
                     });
                     numericAxis.reflow(chartBox);
@@ -943,8 +940,8 @@
                         min: 0,
                         max: 0.3,
                         majorUnit: 0.2,
-                        minorTickType: "outside",
-                        majorTickType: "none"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -957,8 +954,8 @@
 
                 test("minor ticks are vertical", 31, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: false
                     });
                     numericAxis.reflow(chartBox);
@@ -971,8 +968,8 @@
 
                 test("minor ticks are aligned to axis", 31, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: false
                     });
                     numericAxis.reflow(chartBox);
@@ -985,8 +982,8 @@
 
                 test("minor ticks are of predefined height", 31, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: false
                     });
                     numericAxis.reflow(chartBox);
@@ -1056,8 +1053,8 @@
 
                 test("minor ticks are aligned to axis", 31, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: false,
                         labels: {
                             mirror: true
@@ -1083,10 +1080,7 @@
                 });
 
                 test("positions slot for [0, 0.5]", function() {
-                    numericAxis = new dataviz.NumericAxis(0, 1, {
-                        majorTickType: "none",
-                        minorTickType: "outside"
-                    });
+                    numericAxis = new dataviz.NumericAxis(0, 1, { });
                     numericAxis.reflow(chartBox);
                     var slot = numericAxis.getSlot(0, 0.5);
                     same([slot.y1, slot.y2], [348.5, 591], TOLERANCE);

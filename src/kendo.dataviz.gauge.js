@@ -196,14 +196,14 @@
 
             majorTicks: {
                 size: 15,
-                alignment: INSIDE,
+                align: INSIDE,
                 color: BLACK,
                 width: .5
             },
 
             minorTicks: {
                 size: 10,
-                alignment: INSIDE,
+                align: INSIDE,
                 color: BLACK,
                 width: .5
             },
@@ -447,6 +447,9 @@
             border: {
                 color: BLACK,
                 width: 0
+            },
+            minorTicks: {
+                align: "inside"
             }
         },
 
@@ -587,14 +590,14 @@
 
             majorTicks: {
                 size: 15,
-                alignment: INSIDE,
+                align: INSIDE,
                 color: BLACK,
                 width: .5
             },
 
             minorTicks: {
                 size: 10,
-                alignment: INSIDE,
+                align: INSIDE,
                 color: BLACK,
                 width: .5
             },
