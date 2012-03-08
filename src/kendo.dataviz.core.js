@@ -754,7 +754,7 @@
                 visible: axis.options.minorTickType != NONE
             }, axis.options.minorTicks, {
                 size: axis.options.minorTickSize,
-                aligment: axis.options.minorTickType
+                align: axis.options.minorTickType
             });
 
             axis.options.majorTicks = deepExtend({}, {
@@ -763,7 +763,7 @@
                 visible: axis.options.majorTickType != NONE
             }, axis.options.majorTicks, {
                 size: axis.options.majorTickSize,
-                aligment: axis.options.majorTickType
+                align: axis.options.majorTickType
             });
 
             axis.createLabels();
@@ -786,10 +786,16 @@
                 visible: true,
                 position: CENTER
             },
-            majorTickType: OUTSIDE,
-            majorTickSize: 4,
-            minorTickType: NONE,
-            minorTickSize: 3,
+            majorTicks: {
+                align: OUTSIDE,
+                size: 4,
+                visible: true
+            },
+            minorTicks: {
+                align: OUTSIDE,
+                size: 3,
+                visible: false
+            },
             axisCrossingValue: 0,
             minorGridLines: {
                 visible: false,
@@ -932,12 +938,12 @@
                 options = axis.options,
                 tickSize = 0;
 
-            if (options.majorTickType != NONE && options.minorTickType != NONE ) {
-                tickSize = math.max(options.majorTickSize, options.minorTickSize);
-            } else if (options.majorTickType != NONE) {
-                tickSize = options.majorTickSize;
-            } else if (options.minorTickType != NONE) {
-                tickSize = options.minorTickSize;
+            if (options.majorTicks.visible && options.minorTicks.visible) {
+                tickSize = math.max(options.majorTicks.size, options.minorTicks.size);
+            } else if (options.majorTicks.visible) {
+                tickSize = options.majorTicks.size;
+            } else if (options.minorTicks.visible) {
+                tickSize = options.minorTicks.size;
             }
 
             return tickSize;

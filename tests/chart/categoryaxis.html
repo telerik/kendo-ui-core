@@ -206,7 +206,7 @@
                 });
 
                 test("major ticks can be disabled", function() {
-                    createCategoryAxis({ majorTickType: "none" });
+                    createCategoryAxis({ majorTicks: { visible: false }});
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     equal(view.log.line.length, 0);
@@ -214,8 +214,8 @@
 
                 test("minor ticks are distributed horizontally", function() {
                     createCategoryAxis({
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
@@ -226,8 +226,8 @@
                 test("minor ticks are distributed horizontally in reverse", function() {
                     createCategoryAxis({
                         reverse: true,
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                      });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
@@ -236,8 +236,6 @@
                 });
 
                 test("minor ticks can be disabled", function() {
-                    createCategoryAxis({ majorTickType: "none" });
-                    categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     equal(view.log.line.length, 0);
                 });
@@ -258,8 +256,8 @@
 
                 test("minor ticks are aligned to axis", 5, function() {
                     createCategoryAxis({
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
@@ -320,8 +318,8 @@
                 test("minor ticks are aligned to axis", 5, function() {
                     createCategoryAxis({
                         labels: { mirror: true },
-                        majorTickType: "none",
-                        minorTickType: "outside"
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
@@ -415,8 +413,8 @@
 
                 test("minor ticks are distributed vertically", function() {
                     createCategoryAxis({
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: true
                     });
                     categoryAxis.getViewElements(view);
@@ -470,8 +468,8 @@
 
                 test("minor ticks are aligned to axis", 5, function() {
                     createCategoryAxis({
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         isVertical: true
                     });
                     categoryAxis.getViewElements(view);
@@ -531,8 +529,8 @@
 
                 test("minor ticks are aligned to axis", 5, function() {
                     createCategoryAxis({
-                        majorTickType: "none",
-                        minorTickType: "outside",
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
                         labels: { mirror: true },
                         isVertical: true
                     });
