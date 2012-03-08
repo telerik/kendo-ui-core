@@ -1062,17 +1062,51 @@ select:not([multiple])
 .km-list input[type=date],
 .km-list input[type=time],
 .km-list input[type=datetime],
-.km-list select:not([multiple])
+.km-list select:not([multiple]),
+.km-list .km-select
 {
     position: absolute;
     right: 0;
     top: 50%;
+    line-height: normal;
     margin-top: -.95em;
     z-index: 1;
 }
 
+.km-list .km-select .k-dropdown-wrap
+{
+    display: block;
+}
+
 input ~ .km-listview-link:after,
-select ~ .km-listview-link:after
+select ~ .km-listview-link:after,
+.km-select ~ .km-listview-link:after
 {
     display: none;
 }
+
+.km-select select,
+.km-select .k-select
+{
+    display: none;
+}
+
+.k-list-container .k-item
+{
+    list-style-type: none;
+    line-height: 3em;
+    padding-left: 1em;
+    border-bottom: 1px solid #555;
+}
+
+.k-list-container .k-list
+{
+    padding: 0;
+    margin: 0;
+}
+
+.k-list-container .k-item:last-child
+{
+    border: 0;
+}
+
