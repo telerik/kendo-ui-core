@@ -1,470 +1,497 @@
 (function($) {
 
-    // Imports ================================================================
-    var kendo = window.kendo,
-        Class = kendo.Class,
-        Editor = kendo.ui.Editor,
-        formats = Editor.fn.options.formats,
-        EditorUtils = Editor.EditorUtils,
-        Tool = Editor.Tool,
-        ToolTemplate = Editor.ToolTemplate,
-        FormatTool = Editor.FormatTool,
-        dom = Editor.Dom,
-        RangeUtils = Editor.RangeUtils,
-        extend = $.extend,
-        registerTool = Editor.EditorUtils.registerTool,
-        registerFormat = Editor.EditorUtils.registerFormat;
+var kendo = window.kendo,
+    Class = kendo.Class,
+    Editor = kendo.ui.Editor,
+    formats = Editor.fn.options.formats,
+    EditorUtils = Editor.EditorUtils,
+    Tool = Editor.Tool,
+    ToolTemplate = Editor.ToolTemplate,
+    FormatTool = Editor.FormatTool,
+    dom = Editor.Dom,
+    RangeUtils = Editor.RangeUtils,
+    extend = $.extend,
+    registerTool = Editor.EditorUtils.registerTool,
+    registerFormat = Editor.EditorUtils.registerFormat,
+    KMARKER = "k-marker";
 
-    var InlineFormatFinder = Class.extend({
-        init: function(format) {
-            this.format = format;
-        },
+var InlineFormatFinder = Class.extend({
+    init: function(format) {
+        this.format = format;
+    },
 
-        numberOfSiblings: function(referenceNode) {
-            var textNodesCount = 0,
-                elementNodesCount = 0,
-                markerCount = 0,
-                parentNode = referenceNode.parentNode;
+    numberOfSiblings: function(referenceNode) {
+        var textNodesCount = 0,
+            elementNodesCount = 0,
+            markerCount = 0,
+            parentNode = referenceNode.parentNode,
+            node;
 
-            for (var node = parentNode.firstChild; node; node = node.nextSibling) {
-                if (node != referenceNode) {
-                    if (node.className == 'k-marker') {
-                        markerCount++;
-                    } else if (node.nodeType == 3) {
-                        textNodesCount++;
-                    } else {
-                        elementNodesCount++;
-                    }
+        for (node = parentNode.firstChild; node; node = node.nextSibling) {
+            if (node != referenceNode) {
+                if (node.className == KMARKER) {
+                    markerCount++;
+                } else if (node.nodeType == 3) {
+                    textNodesCount++;
+                } else {
+                    elementNodesCount++;
                 }
             }
-
-            if (markerCount > 1 && parentNode.firstChild.className == 'k-marker' && parentNode.lastChild.className == 'k-marker') {
-                // full node selection
-                return 0;
-            } else {
-                return elementNodesCount + textNodesCount;
-            }
-        },
-
-        findSuitable: function (sourceNode, skip) {
-            if (!skip && this.numberOfSiblings(sourceNode) > 0)
-                return null;
-
-            return dom.parentOfType(sourceNode, this.format[0].tags);
-        },
-
-        findFormat: function (sourceNode) {
-            var format = this.format,
-                attrEquals = dom.attrEquals;
-            for (var i = 0; i < format.length; i++) {
-                var node = sourceNode;
-                var tags = format[i].tags;
-                var attributes = format[i].attr;
-
-                if (node && dom.ofType(node, tags) && attrEquals(node, attributes))
-                    return node;
-
-                while (node) {
-                    node = dom.parentOfType(node, tags);
-                    if (node && attrEquals(node, attributes))
-                        return node;
-                }
-            }
-
-            return null;
-        },
-
-        isFormatted: function (nodes) {
-            for (var i = 0; i < nodes.length; i++)
-                if (this.findFormat(nodes[i]))
-                    return true;
-
-            return false;
         }
-    });
 
-    var InlineFormatter = Class.extend({
-        init: function(format, values) {
-            this.finder = new InlineFormatFinder(format);
-            this.attributes = extend({}, format[0].attr, values);
-            this.tag = format[0].tags[0];
-        },
+        if (markerCount > 1 && parentNode.firstChild.className == KMARKER && parentNode.lastChild.className == KMARKER) {
+            // full node selection
+            return 0;
+        } else {
+            return elementNodesCount + textNodesCount;
+        }
+    },
 
-        wrap: function(node) {
-            return dom.wrap(node, dom.create(node.ownerDocument, this.tag, this.attributes));
-        },
+    findSuitable: function (sourceNode, skip) {
+        if (!skip && this.numberOfSiblings(sourceNode) > 0) {
+            return null;
+        }
 
-        activate: function(range, nodes) {
-            if (this.finder.isFormatted(nodes)) {
-                this.split(range);
-                this.remove(nodes);
-            } else
-                this.apply(nodes);
-        },
+        return dom.parentOfType(sourceNode, this.format[0].tags);
+    },
 
-        toggle: function (range) {
-            var nodes = RangeUtils.textNodes(range);
+    findFormat: function (sourceNode) {
+        var format = this.format,
+            attrEquals = dom.attrEquals,
+            i, len, node, tags, attributes;
 
-            if (nodes.length > 0)
-                this.activate(range, nodes);
-        },
+        for (i = 0, len = format.length; i < len; i++) {
+            node = sourceNode;
+            tags = format[i].tags;
+            attributes = format[i].attr;
 
-        apply: function (nodes) {
-            var formatNodes = [];
-            for (var i = 0, l = nodes.length; i < l; i++) {
-                var node = nodes[i];
-
-                var formatNode = this.finder.findSuitable(node);
-                if (formatNode)
-                    dom.attr(formatNode, this.attributes);
-                else
-                    formatNode = this.wrap(node);
-
-                formatNodes.push(formatNode);
+            if (node && dom.ofType(node, tags) && attrEquals(node, attributes)) {
+                return node;
             }
 
-            this.consolidate(formatNodes);
-        },
+            while (node) {
+                node = dom.parentOfType(node, tags);
+                if (node && attrEquals(node, attributes)) {
+                    return node;
+                }
+            }
+        }
 
-        remove: function (nodes) {
-            for (var i = 0, l = nodes.length; i < l; i++) {
-                var formatNode = this.finder.findFormat(nodes[i]);
-                if (formatNode) {
-                    if (this.attributes && this.attributes.style) {
-                        dom.unstyle(formatNode, this.attributes.style);
-                        if (!formatNode.style.cssText) {
-                            dom.unwrap(formatNode);
-                        }
-                    } else {
+        return null;
+    },
+
+    isFormatted: function (nodes) {
+        var i, len;
+
+        for (i = 0, len = nodes.length; i < len; i++) {
+            if (this.findFormat(nodes[i])) {
+                return true;
+            }
+        }
+        return false;
+    }
+});
+
+var InlineFormatter = Class.extend({
+    init: function(format, values) {
+        var that = this;
+        that.finder = new InlineFormatFinder(format);
+        that.attributes = extend({}, format[0].attr, values);
+        that.tag = format[0].tags[0];
+    },
+
+    wrap: function(node) {
+        return dom.wrap(node, dom.create(node.ownerDocument, this.tag, this.attributes));
+    },
+
+    activate: function(range, nodes) {
+        var that = this;
+        if (that.finder.isFormatted(nodes)) {
+            that.split(range);
+            that.remove(nodes);
+        } else {
+            that.apply(nodes);
+        }
+    },
+
+    toggle: function (range) {
+        var nodes = RangeUtils.textNodes(range);
+
+        if (nodes.length > 0) {
+            this.activate(range, nodes);
+        }
+    },
+
+    apply: function (nodes) {
+        var that = this,
+        formatNodes = [],
+        i, l, node, formatNode;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            node = nodes[i];
+            formatNode = that.finder.findSuitable(node);
+            if (formatNode) {
+                dom.attr(formatNode, that.attributes);
+            } else {
+                formatNode = that.wrap(node);
+            }
+
+            formatNodes.push(formatNode);
+        }
+
+        that.consolidate(formatNodes);
+    },
+
+    remove: function (nodes) {
+        var that = this,
+        i, l, formatNode;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            formatNode = that.finder.findFormat(nodes[i]);
+            if (formatNode) {
+                if (that.attributes && that.attributes.style) {
+                    dom.unstyle(formatNode, that.attributes.style);
+                    if (!formatNode.style.cssText) {
                         dom.unwrap(formatNode);
                     }
-                }
-            }
-        },
-
-        split: function (range) {
-            var nodes = RangeUtils.textNodes(range);
-
-            if (nodes.length > 0) {
-                for (var i = 0, l = nodes.length; i < l; i++) {
-                    var formatNode = this.finder.findFormat(nodes[i]);
-                    if (formatNode)
-                        RangeUtils.split(range, formatNode, true);
-                }
-            }
-        },
-
-        consolidate: function (nodes) {
-            while (nodes.length > 1) {
-                var node = nodes.pop();
-                var last = nodes[nodes.length - 1];
-
-                if (node.previousSibling && node.previousSibling.className == 'k-marker') {
-                    last.appendChild(node.previousSibling);
-                }
-
-                if (node.tagName == last.tagName && node.previousSibling == last && node.style.cssText == last.style.cssText) {
-                    while (node.firstChild)
-                        last.appendChild(node.firstChild);
-                    dom.remove(node);
+                } else {
+                    dom.unwrap(formatNode);
                 }
             }
         }
+    },
 
-    });
+    split: function (range) {
+        var nodes = RangeUtils.textNodes(range),
+        l = nodes.length,
+        i, formatNode;
 
-    var GreedyInlineFormatFinder = InlineFormatFinder.extend({
-        init: function(format, greedyProperty) {
-            var that = this;
-            that.format = format;
-            that.greedyProperty = greedyProperty;
-            InlineFormatFinder.fn.init.call(that, format);
-        },
+        if (l > 0) {
+            for (i = 0; i < l; i++) {
+                formatNode = this.finder.findFormat(nodes[i]);
+                if (formatNode) {
+                    RangeUtils.split(range, formatNode, true);
+                }
+            }
+        }
+    },
 
-        getInlineCssValue: function(node) {
-            var attributes = node.attributes,
-                trim = $.trim;
+    consolidate: function (nodes) {
+        var node, last;
 
-            if (!attributes) return;
+        while (nodes.length > 1) {
+            node = nodes.pop();
+            last = nodes[nodes.length - 1];
 
-            for (var i = 0, l = attributes.length; i < l; i++) {
-                var attribute = attributes[i],
-                    name = attribute.nodeName,
-                    attributeValue = attribute.nodeValue;
+            if (node.previousSibling && node.previousSibling.className == KMARKER) {
+                last.appendChild(node.previousSibling);
+            }
 
-                if (attribute.specified && name == 'style') {
+            if (node.tagName == last.tagName && node.previousSibling == last && node.style.cssText == last.style.cssText) {
+                while (node.firstChild) {
+                    last.appendChild(node.firstChild);
+                }
+                dom.remove(node);
+            }
+        }
+    }
+});
 
-                    var css = trim(attributeValue || node.style.cssText).split(';');
+var GreedyInlineFormatFinder = InlineFormatFinder.extend({
+    init: function(format, greedyProperty) {
+        var that = this;
+        that.format = format;
+        that.greedyProperty = greedyProperty;
+        InlineFormatFinder.fn.init.call(that, format);
+    },
 
-                    for (var cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
-                        var pair = css[cssIndex];
-                        if (pair.length) {
-                            var propertyAndValue = pair.split(':');
-                            var property = trim(propertyAndValue[0].toLowerCase()),
-                                value = trim(propertyAndValue[1]);
+    getInlineCssValue: function(node) {
+        var attributes = node.attributes,
+            trim = $.trim,
+            i, l, attribute, name, attributeValue, css, pair, cssIndex, len, propertyAndValue, property, value;
 
-                            if (property != this.greedyProperty)
-                                continue;
+        if (!attributes) return;
 
-                            return property.indexOf('color') >= 0 ? dom.toHex(value) : value;
+        for (i = 0, l = attributes.length; i < l; i++) {
+            attribute = attributes[i];
+            name = attribute.nodeName;
+            attributeValue = attribute.nodeValue;
+
+            if (attribute.specified && name == "style") {
+
+                css = trim(attributeValue || node.style.cssText).split(";");
+
+                for (cssIndex = 0, len = css.length; cssIndex < len; cssIndex++) {
+                    pair = css[cssIndex];
+                    if (pair.length) {
+                        propertyAndValue = pair.split(":");
+                        property = trim(propertyAndValue[0].toLowerCase());
+                        value = trim(propertyAndValue[1]);
+
+                        if (property != this.greedyProperty) {
+                            continue;
                         }
+
+                        return property.indexOf("color") >= 0 ? dom.toHex(value) : value;
                     }
                 }
             }
-
-            return;
-        },
-
-        getFormatInner: function (node) {
-            var $node = $(dom.isDataNode(node) ? node.parentNode : node);
-            var parents = $node.parents().andSelf();
-
-            for (var i = 0, len = parents.length; i < len; i++) {
-                var value = this.greedyProperty == 'className' ? parents[i].className : this.getInlineCssValue(parents[i]);
-                if (value)
-                    return value;
-            }
-
-            return 'inherit';
-        },
-
-        getFormat: function (nodes) {
-            var result = this.getFormatInner(nodes[0]);
-
-            for (var i = 1, len = nodes.length; i < len; i++)
-                if (result != this.getFormatInner(nodes[i]))
-                    return '';
-
-            return result;
-        },
-
-        isFormatted: function (nodes) {
-            return this.getFormat(nodes) !== '';
         }
 
-    });
+        return;
+    },
 
-    var GreedyInlineFormatter = InlineFormatter.extend({
-        init: function(format, values, greedyProperty) {
-            var that = this;
+    getFormatInner: function (node) {
+        var $node = $(dom.isDataNode(node) ? node.parentNode : node),
+            parents = $node.parents().andSelf(),
+            i, len, value;
 
-            InlineFormatter.fn.init.call(that, format, values);
-
-            that.greedyProperty = greedyProperty;
-            that.values = values;
-            that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
-        },
-
-        activate: function(range, nodes) {
-            this.split(range);
-
-            if (this.greedyProperty) {
-                var camelCase = this.greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
-                this[this.values.style[camelCase] == 'inherit' ? 'remove' : 'apply'](nodes);
-            } else {
-                this.apply(nodes);
+        for (i = 0, len = parents.length; i < len; i++) {
+            value = this.greedyProperty == "className" ? parents[i].className : this.getInlineCssValue(parents[i]);
+            if (value) {
+                return value;
             }
         }
-    });
 
-    function inlineFormatWillDelayExecution (range) {
-        return range.collapsed && !RangeUtils.isExpandable(range);
+        return "inherit";
+    },
+
+    getFormat: function (nodes) {
+        var result = this.getFormatInner(nodes[0]),
+        i, len;
+
+        for (i = 1, len = nodes.length; i < len; i++) {
+            if (result != this.getFormatInner(nodes[i])) {
+                return "";
+            }
+        }
+
+        return result;
+    },
+
+    isFormatted: function (nodes) {
+        return this.getFormat(nodes) !== "";
+    }
+});
+
+var GreedyInlineFormatter = InlineFormatter.extend({
+    init: function(format, values, greedyProperty) {
+        var that = this;
+
+        InlineFormatter.fn.init.call(that, format, values);
+
+        that.greedyProperty = greedyProperty;
+        that.values = values;
+        that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+    },
+
+    activate: function(range, nodes) {
+        var that = this;
+        that.split(range);
+
+        if (that.greedyProperty) {
+            var camelCase = that.greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
+            that[that.values.style[camelCase] == "inherit" ? "remove" : "apply"](nodes);
+        } else {
+            that.apply(nodes);
+        }
+    }
+});
+
+function inlineFormatWillDelayExecution (range) {
+    return range.collapsed && !RangeUtils.isExpandable(range);
+}
+
+var InlineFormatTool = FormatTool.extend({
+    init: function(options) {
+        FormatTool.fn.init.call(this, extend(options, {
+            finder: new InlineFormatFinder(options.format),
+            formatter: function () { return new InlineFormatter(options.format) }
+        }));
+
+        this.willDelayExecution = inlineFormatWillDelayExecution;
+    }
+});
+
+var FontTool = Tool.extend({
+    init: function(options) {
+        var that = this;
+        Tool.fn.init.call(that, options);
+
+        // IE has single selection hence we are using select box instead of combobox
+        that.options = options;
+        that.type = $.browser.msie ? "kendoDropDownList" : "kendoComboBox";
+        that.format = [{ tags: ["span"] }],
+        that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
+    },
+
+    command: function (commandArguments) {
+        var options = this.options;
+            format = this.format,
+            style = {};
+        return new Editor.FormatCommand(extend(commandArguments, {
+            formatter: function () {
+                style[options.domAttr] = commandArguments.value;
+
+                return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
+            }
+        }))
+    },
+
+    willDelayExecution: inlineFormatWillDelayExecution,
+
+    update: function(ui, nodes, pendingFormats) {
+        var that = this,
+            list = ui.data(that.type),
+            pendingFormat = pendingFormats.getPending(that.name),
+            format = (pendingFormat && pendingFormat.params) ? pendingFormat.params.value : that.finder.getFormat(nodes);
+
+        list.close();
+        list.value(format);
+    },
+
+    initialize: function (ui, initOptions) {
+        var editor = initOptions.editor,
+            toolName = this.options.name;
+
+        ui[this.type]({
+            dataTextField: "Text",
+            dataValueField: "Value",
+            dataSource: editor.options[toolName],
+            change: function (e) {
+                Tool.exec(editor, toolName, this.value());
+            },
+            highlightFirst: false
+        });
+
+        ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+
+        ui.data(this.type).value("inherit");
     }
 
-    var InlineFormatTool = FormatTool.extend({
-        init: function(options) {
-            FormatTool.fn.init.call(this, extend(options, {
-                finder: new InlineFormatFinder(options.format),
-                formatter: function () { return new InlineFormatter(options.format) }
-            }));
+});
 
-            this.willDelayExecution = inlineFormatWillDelayExecution;
-        }
-    });
+var ColorTool = Tool.extend({
+    init: function(options) {
+        Tool.fn.init.call(this, options);
 
-    var FontTool = Tool.extend({
-        init: function(options) {
-            var fontTool = this;
-            Tool.fn.init.call(fontTool, options);
+        this.options = options;
+        this.format = [{ tags: dom.inlineElements }];
+    },
 
-            // IE has single selection hence we are using select box instead of combobox
-            fontTool.options = options;
-            fontTool.type = $.browser.msie ? 'kendoDropDownList' : 'kendoComboBox';
-            fontTool.format = [{ tags: ['span'] }],
-            fontTool.finder = new GreedyInlineFormatFinder(fontTool.format, options.cssAttr);
-        },
+    update: function(ui) {
+        ui.data("kendoColorPicker").close();
+    },
 
-        command: function (commandArguments) {
-            var options = this.options;
-                format = this.format;
-            return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () {
-                    var style = {};
-                    style[options.domAttr] = commandArguments.value;
+    command: function (commandArguments) {
+        var options = this.options,
+            format = this.format,
+            style = {};
 
-                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
-                }
-            }))
-        },
+        return new Editor.FormatCommand(extend(commandArguments, {
+            formatter: function () {
+                style[options.domAttr] = commandArguments.value;
 
-        willDelayExecution: inlineFormatWillDelayExecution,
+                return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
+            }
+        }));
+    },
 
-        update: function($ui, nodes, pendingFormats) {
-            var that = this,
-                list = $ui.data(that.type);
+    willDelayExecution: inlineFormatWillDelayExecution,
 
-            list.close();
+    initialize: function(ui, initOptions) {
+        var editor = initOptions.editor,
+            toolName = this.name;
 
-            var pendingFormat = pendingFormats.getPending(that.name);
+        ui.kendoColorPicker({
+            selectedColor: "#000000",
+            change: function (e) {
+                Tool.exec(editor, toolName, e.value);
+            }
+        });
+    }
 
-            var format = (pendingFormat && pendingFormat.params) ? pendingFormat.params.value : that.finder.getFormat(nodes);
+});
 
-            list.value(format);
-        },
+var StyleTool = Tool.extend({
+    init: function(options) {
+        var that = this;
+        Tool.fn.init.call(that, options);
 
-        initialize: function ($ui, initOptions) {
-            var editor = initOptions.editor,
-                toolName = this.options.name;
+        that.format = [{ tags: ["span"] }];
+        that.finder = new GreedyInlineFormatFinder(that.format, "className");
+    },
 
-            $ui[this.type]({
-                dataTextField: "Text",
-                dataValueField: "Value",
-                dataSource: editor.options[toolName],
-                change: function (e) {
-                    Tool.exec(editor, toolName, this.value());
-                },
-                highlightFirst: false
-            });
+    command: function (commandArguments) {
+        return new Editor.FormatCommand(extend(commandArguments, {
+            formatter: function () {
+                return new GreedyInlineFormatter(this.format, { className: commandArguments.value });
+            }
+        }));
+    },
 
-            $ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
+    update: function(ui, nodes) {
+        var list = ui.data("kendoDropDownList");
+        list.close();
+        list.value(this.finder.getFormat(nodes));
+    },
 
-            $ui.data(this.type).value('inherit');
-        }
+    initiliaze: function(ui, initOptions) {
+        var editor = initOptions.editor;
 
-    });
+        ui.kendoDropDownList({
+            data: editor["style"],
+            title: editor.options.localization.style,
+            itemCreate: function (e) {
+                var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.Value});
 
-    var ColorTool = Tool.extend({
-        init: function(options) {
-            Tool.fn.init.call(this, options);
+                e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
+            },
+            change: function (e) {
+                Tool.exec(editor, "style", e.value);
+            }
+        });
+    }
 
-            this.options = options;
-            this.format = [{ tags: dom.inlineElements }];
-        },
+});
 
-        update: function($ui) {
-            $ui.data('kendoColorPicker').close();
-        },
+extend(kendo.ui.Editor, {
+    InlineFormatFinder: InlineFormatFinder,
+    InlineFormatter: InlineFormatter,
+    GreedyInlineFormatFinder: GreedyInlineFormatFinder,
+    GreedyInlineFormatter: GreedyInlineFormatter,
+    InlineFormatTool: InlineFormatTool,
+    FontTool: FontTool,
+    ColorTool: ColorTool,
+    StyleTool: StyleTool
+});
 
-        command: function (commandArguments) {
-            var options = this.options,
-                format = this.format;
+registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
 
-            return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () {
-                    var style = {};
-                    style[options.domAttr] = commandArguments.value;
+registerFormat("bold", [ { tags: ["strong"] }, { tags: ["span"], attr: { style: { fontWeight: "bold"}} } ]);
+registerTool("bold", new InlineFormatTool({ key: "B", ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));
 
-                    return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
-                }
-            }));
-        },
+registerFormat("italic", [ { tags: ["em"] }, { tags: ["span"], attr: { style: { fontStyle: "italic"}} } ]);
+registerTool("italic", new InlineFormatTool({ key: "I", ctrl: true, format: formats.italic, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Italic"})}));
 
-        willDelayExecution: inlineFormatWillDelayExecution,
+registerFormat("underline", [ { tags: ["span"], attr: { style: { textDecoration: "underline"}} } ]);
+registerTool("underline", new InlineFormatTool({ key: "U", ctrl: true, format: formats.underline, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Underline"})}));
 
-        initialize: function($ui, initOptions) {
-            var editor = initOptions.editor,
-                toolName = this.name;
+registerFormat("strikethrough", [ { tags: ["del"] }, { tags: ["span"], attr: { style: { textDecoration: "line-through"}} } ]);
+registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Strikethrough"})}));
 
-            $ui.kendoColorPicker({
-                selectedColor: '#000000',
-                change: function (e) {
-                    //debugger;
-                    Tool.exec(editor, toolName, e.value);
-                }
-            });
-        }
+registerFormat("superscript", [ { tags: ["sup"] } ]);
+registerTool("superscript", new InlineFormatTool({format: formats.superscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Superscript"})}));
 
-    });
+registerFormat("subscript", [ { tags: ["sub"] } ]);
+registerTool("subscript", new InlineFormatTool({format: formats.subscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Subscript"})}));
 
-    var StyleTool = Tool.extend({
-        init: function(options) {
-            var styleTool = this;
-            Tool.fn.init.call(styleTool, options);
+registerTool("foreColor", new ColorTool({cssAttr:"color", domAttr:"color", name:"foreColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Color"})}));
 
-            styleTool.format = [{ tags: ['span'] }];
-            styleTool.finder = new GreedyInlineFormatFinder(styleTool.format, 'className');
-        },
+registerTool("backColor", new ColorTool({cssAttr:"background-color", domAttr: "backgroundColor", name:"backColor", template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
 
-        command: function (commandArguments) {
-            return new Editor.FormatCommand(extend(commandArguments, {
-                formatter: function () {
-                    return new GreedyInlineFormatter(this.format, { className: commandArguments.value });
-                }
-            }));
-        },
+registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFamily", name:"fontName", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
 
-        update: function($ui, nodes) {
-            var list = $ui.data('kendoDropDownList');
-            list.close();
-            list.value(this.finder.getFormat(nodes));
-        },
-
-        initiliaze: function($ui, initOptions) {
-            var editor = initOptions.editor;
-
-            $ui.kendoDropDownList({
-                data: editor['style'],
-                title: editor.options.localization.style,
-                itemCreate: function (e) {
-                    var style = dom.inlineStyle(editor.document, 'span', {className : e.dataItem.Value});
-
-                    e.html = '<span unselectable="on" style="display:block;' + style +'">' + e.html + '</span>';
-                },
-                change: function (e) {
-                    Tool.exec(editor, 'style', e.value);
-                }
-            });
-        }
-
-    });
-
-    extend(kendo.ui.Editor, {
-        InlineFormatFinder: InlineFormatFinder,
-        InlineFormatter: InlineFormatter,
-        GreedyInlineFormatFinder: GreedyInlineFormatFinder,
-        GreedyInlineFormatter: GreedyInlineFormatter,
-        InlineFormatTool: InlineFormatTool,
-        FontTool: FontTool,
-        ColorTool: ColorTool,
-        StyleTool: StyleTool
-    });
-
-    registerTool("style", new Editor.StyleTool({template: new ToolTemplate({template: EditorUtils.dropDownListTemplate, title: "Indent", initialValue: "Styles"})}));
-
-    registerFormat("bold", [ { tags: ['strong'] }, { tags: ['span'], attr: { style: { fontWeight: 'bold'}} } ]);
-    registerTool("bold", new InlineFormatTool({ key: 'B', ctrl: true, format: formats.bold, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Bold"}) }));
-
-    registerFormat("italic", [ { tags: ['em'] }, { tags: ['span'], attr: { style: { fontStyle: 'italic'}} } ]);
-    registerTool("italic", new InlineFormatTool({ key: 'I', ctrl: true, format: formats.italic, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Italic"})}));
-
-    registerFormat("underline", [ { tags: ['span'], attr: { style: { textDecoration: 'underline'}} } ]);
-    registerTool("underline", new InlineFormatTool({ key: 'U', ctrl: true, format: formats.underline, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Underline"})}));
-
-    registerFormat("strikethrough", [ { tags: ['del'] }, { tags: ['span'], attr: { style: { textDecoration: 'line-through'}} } ]);
-    registerTool("strikethrough", new InlineFormatTool({format: formats.strikethrough, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Strikethrough"})}));
-
-    registerFormat("superscript", [ { tags: ['sup'] } ]);
-    registerTool("superscript", new InlineFormatTool({format: formats.superscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Superscript"})}));
-
-    registerFormat("subscript", [ { tags: ['sub'] } ]);
-    registerTool("subscript", new InlineFormatTool({format: formats.subscript, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: "Subscript"})}));
-
-    registerTool("foreColor", new ColorTool({cssAttr:'color', domAttr:'color', name:'foreColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Color"})}));
-
-    registerTool("backColor", new ColorTool({cssAttr:'background-color', domAttr: 'backgroundColor', name:'backColor', template: new ToolTemplate({template: EditorUtils.colorPickerTemplate, title: "Background Color"})}));
-
-    registerTool("fontName", new FontTool({cssAttr:'font-family', domAttr: 'fontFamily', name:'fontName', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Name", initialValue: "(inherited font)"})}));
-
-    registerTool("fontSize", new FontTool({cssAttr:'font-size', domAttr:'fontSize', name:'fontSize', template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
+registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
 
 })(jQuery);

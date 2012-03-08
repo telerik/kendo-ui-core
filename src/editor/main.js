@@ -623,6 +623,8 @@
 
             this.pendingFormats.clear();
 
+            html = html || "";
+
             // Some browsers do not allow setting CDATA sections through innerHTML so we encode them as comments
             html = html.replace(/<!\[CDATA\[(.*)?\]\]>/g, '<!--[CDATA[$1]]-->');
 

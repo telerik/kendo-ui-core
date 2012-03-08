@@ -1,26 +1,32 @@
 (function($) {
 
-    // Imports ================================================================
-    var kendo = window.kendo,
-        Class = kendo.Class,
-        map = $.map,
-        extend = $.extend;
+var kendo = window.kendo,
+    Class = kendo.Class,
+    map = $.map,
+    extend = $.extend,
+    STYLE = "style",
+    FLOAT = "float",
+    CSSFLOAT = "cssFloat",
+    STYLEFLOAT = "styleFloat",
+    CLASS = "class",
+    KMARKER = "k-marker";
 
 function makeMap(items) {
-    var obj = {};
+    var obj = {},
+        i, len;
 
-    for (var i = 0; i < items.length; i++)
+    for (i = 0, len = items.length; i < len; i++) {
         obj[items[i]] = true;
-
+    }
     return obj;
 }
 
-var empty = makeMap('area,base,basefont,br,col,frame,hr,img,input,isindex,link,meta,param,embed'.split(',')),
-    blockElements = 'div,p,h1,h2,h3,h4,h5,h6,address,applet,blockquote,button,center,dd,dir,dl,dt,fieldset,form,frameset,hr,iframe,isindex,li,map,menu,noframes,noscript,object,ol,pre,script,table,tbody,td,tfoot,th,thead,tr,ul'.split(','),
+var empty = makeMap("area,base,basefont,br,col,frame,hr,img,input,isindex,link,meta,param,embed".split(",")),
+    blockElements = "div,p,h1,h2,h3,h4,h5,h6,address,applet,blockquote,button,center,dd,dir,dl,dt,fieldset,form,frameset,hr,iframe,isindex,li,map,menu,noframes,noscript,object,ol,pre,script,table,tbody,td,tfoot,th,thead,tr,ul".split(","),
     block = makeMap(blockElements),
-    inlineElements = 'span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var'.split(','),
+    inlineElements = "span,em,a,abbr,acronym,applet,b,basefont,bdo,big,br,button,cite,code,del,dfn,font,i,iframe,img,input,ins,kbd,label,map,object,q,s,samp,script,select,small,strike,strong,sub,sup,textarea,tt,u,var".split(","),
     inline = makeMap(inlineElements),
-    fillAttrs = makeMap('checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected'.split(','));
+    fillAttrs = makeMap("checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected".split(","));
 
 var normalize = function (node) {
     if (node.nodeType == 1)
@@ -44,16 +50,21 @@ if ($.browser.msie && parseInt($.browser.version) >= 8) {
     }
 }
 
-var whitespace = /^\s+$/;
-var rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i;
-var cssAttributes = ('color,padding-left,padding-right,padding-top,padding-bottom,\
+var whitespace = /^\s+$/,
+    rgb = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
+    amp = /&/g,
+    openTag = /</g,
+    closeTag = />/g,
+    nbsp = /\u00a0/g,
+    bom = /\ufeff/g;
+var cssAttributes = ("color,padding-left,padding-right,padding-top,padding-bottom,\
 background-color,background-attachment,background-image,background-position,background-repeat,\
 border-top-style,border-top-width,border-top-color,\
 border-bottom-style,border-bottom-width,border-bottom-color,\
 border-left-style,border-left-width,border-left-color,\
 border-right-style,border-right-width,border-right-color,\
-font-family,font-size,font-style,font-variant,font-weight,line-height'
-).split(',');
+font-family,font-size,font-style,font-variant,font-weight,line-height"
+).split(",");
 
 var Dom = {
     findNodeIndex: function(node) {
@@ -101,10 +112,10 @@ var Dom = {
         for (var key in attributes) {
             var value = node[key];
 
-            if (key == 'float')
-                value = node[$.support.cssFloat ? "cssFloat" : "styleFloat"];
+            if (key == FLOAT)
+                value = node[$.support.cssFloat ? CSSFLOAT : STYLEFLOAT];
 
-            if (typeof value == 'object') {
+            if (typeof value == "object") {
                 if (!Dom.attrEquals(value, attributes[key]))
                     return false;
             } else if (value != attributes[key])
@@ -119,9 +130,10 @@ var Dom = {
     },
 
     blockParents: function(nodes) {
-        var blocks = [];
+        var blocks = [],
+            i, len;
 
-        for (var i = 0, len = nodes.length; i < len; i++) {
+        for (i = 0, len = nodes.length; i < len; i++) {
             var block = Dom.parentOfType(nodes[i], Dom.blockElements);
             if (block && $.inArray(block, blocks) < 0)
                 blocks.push(block);
@@ -145,16 +157,16 @@ var Dom = {
 
         if (!matches) return color;
 
-        return '#' + map(matches.slice(1), function (x) {
-            return x = parseInt(x).toString(16), x.length > 1 ? x : '0' + x;
-        }).join('');
+        return "#" + map(matches.slice(1), function (x) {
+            return x = parseInt(x).toString(16), x.length > 1 ? x : "0" + x;
+        }).join("");
     },
 
     encode: function (value) {
-        return value.replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/\u00a0/g, '&nbsp;');
+        return value.replace(amp, "&amp;")
+                .replace(openTag, "&lt;")
+                .replace(closeTag, "&gt;")
+                .replace(nbsp, "&nbsp;");
     },
 
     name: function (node) {
@@ -185,7 +197,7 @@ var Dom = {
     },
 
     isMarker: function(node) {
-        return node.className == 'k-marker';
+        return node.className == KMARKER;
     },
 
     isWhitespace: function(node) {
@@ -231,11 +243,11 @@ var Dom = {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
-                if (node.nodeValue.replace(/\ufeff/g, '').length == 0)
+                if (node.nodeValue.replace(bom, "").length == 0)
                     Dom.remove(node);
                 if (Dom.isWhitespace(node))
                     Dom.insertBefore(node, parent);
-            } else if (node.className != 'k-marker') {
+            } else if (node.className != KMARKER) {
                 Dom.trim(node);
                 if (node.childNodes.length == 0 && !Dom.isEmpty(node))
                     Dom.remove(node);
@@ -258,26 +270,29 @@ var Dom = {
     },
 
     changeTag: function (referenceElement, tagName) {
-        var newElement = Dom.create(referenceElement.ownerDocument, tagName);
-        var attributes = referenceElement.attributes;
+        var newElement = Dom.create(referenceElement.ownerDocument, tagName),
+            attributes = referenceElement.attributes,
+            i, len, name, value, attribute;
 
-        for (var i = 0; i < attributes.length; i++) {
-            var attribute = attributes[i];
+        for (i = 0, len = attributes.length; i < len; i++) {
+            attribute = attributes[i];
             if (attribute.specified) {
                 // IE < 8 cannot set class or style via setAttribute
-                var name = attribute.nodeName;
-                var value = attribute.nodeValue;
-                if (name == 'class')
+                name = attribute.nodeName;
+                value = attribute.nodeValue;
+                if (name == CLASS) {
                     newElement.className = value;
-                else if (name == 'style')
+                } else if (name == STYLE) {
                     newElement.style.cssText = referenceElement.style.cssText;
-                else
+                } else {
                     newElement.setAttribute(name, value);
+                }
             }
         }
 
-        while (referenceElement.firstChild)
+        while (referenceElement.firstChild) {
             newElement.appendChild(referenceElement.firstChild);
+        }
 
         Dom.insertBefore(newElement, referenceElement);
         Dom.remove(referenceElement);
@@ -305,7 +320,7 @@ var Dom = {
     attr: function (element, attributes) {
         attributes = extend({}, attributes);
 
-        if (attributes && 'style' in attributes) {
+        if (attributes && STYLE in attributes) {
             Dom.style(element, attributes.style);
             delete attributes.style;
         }
@@ -318,40 +333,41 @@ var Dom = {
 
     unstyle: function (node, value) {
         for (var key in value) {
-            if (key == 'float')
-                key = $.support.cssFloat ? "cssFloat" : "styleFloat";
+            if (key == FLOAT)
+                key = $.support.cssFloat ? CSSFLOAT : STYLEFLOAT;
 
-            node.style[key] = '';
+            node.style[key] = "";
         }
 
-        if (node.style.cssText == '')
-            node.removeAttribute('style');
+        if (node.style.cssText == "")
+            node.removeAttribute(STYLE);
     },
 
     inlineStyle: function(document, name, attributes) {
-        var span = Dom.create(document, name, attributes);
+        var span = $(Dom.create(document, name, attributes)),
+            style;
 
-        document.body.appendChild(span);
+        document.body.appendChild(span[0]);
 
-        var $span = $(span);
+        style = map(cssAttributes, function(value) {
+            if ($.browser.msie && value == "line-height" && span.css(value) == "1px") {
+                return "line-height:1.5";
+            } else {
+                return value + ":" + span.css(value);
+            }
+        }).join(";");
 
-        var style = map(cssAttributes, function(value) {
-            if ($.browser.msie && value == 'line-height' && $span.css(value) == "1px")
-                return 'line-height:1.5';
-            else
-                return value + ':' + $span.css(value);
-        }).join(';');
-
-        $span.remove();
+        span.remove();
 
         return style;
     },
 
     removeClass: function(node, classNames) {
         var className = " " + node.className + " ",
-            classes = classNames.split(" ");
+            classes = classNames.split(" "),
+            i, len;
 
-        for (var i = 0; i < classes.length; i++) {
+        for (i = 0, len = classes.length; i < len; i++) {
             className = className.replace(" " + classes[i] + " ", " ");
         }
 
@@ -360,25 +376,28 @@ var Dom = {
         if (className.length) {
             node.className = className;
         } else {
-            node.removeAttribute("class");
+            node.removeAttribute(CLASS);
         }
     },
 
     commonAncestor: function () {
-        var count = arguments.length;
+        var count = arguments.length,
+            paths = [],
+            minPathLength = Infinity,
+            output = null,
+            i, ancestors, node, first, j;
 
-        if (!count)
+        if (!count) {
             return null;
+        }
 
-        if (count == 1)
+        if (count == 1) {
             return arguments[0];
+        }
 
-        var paths = [];
-        var minPathLength = Infinity;
-
-        for (var i = 0; i < count; i++) {
-            var ancestors = [];
-            var node = arguments[i];
+        for (i = 0; i < count; i++) {
+            ancestors = [];
+            node = arguments[i];
             while (node) {
                 ancestors.push(node);
                 node = node.parentNode;
@@ -387,14 +406,14 @@ var Dom = {
             minPathLength = Math.min(minPathLength, ancestors.length);
         }
 
-        if (count == 1)
+        if (count == 1) {
             return paths[0][0];
+        }
 
-        var output = null;
         for (i = 0; i < minPathLength; i++) {
-            var first = paths[0][i];
+            first = paths[0][i];
 
-            for (var j = 1; j < count; j++)
+            for (j = 1; j < count; j++)
                 if (first != paths[j][i])
                     return output;
 
@@ -404,10 +423,6 @@ var Dom = {
     }
 }
 
-// exports
-
-extend(kendo.ui.Editor, {
-    Dom: Dom
-});
+kendo.ui.Editor.Dom = Dom;
 
 })(jQuery);

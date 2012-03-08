@@ -30,11 +30,11 @@ tests.push(
     {
         page: "editor/clipboard.html",
         title: "editor Clipboard"
-    }/*,
+    },
     {
         page: "editor/components.html",
         title: "editor Components"
-    }*/,
+    },
     {
         page: "editor/dom.html",
         title: "editor DOM"
