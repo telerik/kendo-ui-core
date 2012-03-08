@@ -42,5 +42,9 @@ tests.push(
     {
         page: "mobile/navbar.html",
         title: "navbar"
+    },
+    {
+        page: "mobile/integration.html",
+        title: "integration"
     }
 );
