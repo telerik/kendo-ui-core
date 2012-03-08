@@ -36,8 +36,8 @@
     <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $("#Menu").kendoMenu();
-            $("#Menu1").kendoMenu({ animation: { open: { effects: { zoomIn: {}, fadeIn: {} } } } });
+            $("#Menu").kendoMenu({ openOnClick: true });
+            $("#Menu1").kendoMenu({ animation: false });
             $("#Menu2").kendoMenu({ orientation: 'vertical' }).css({ width: '200px' });
             $("#Menu3").kendoMenu();
             $("#Menu4").kendoMenu({
@@ -173,22 +173,16 @@
         <img src="Icons/Suites/mvc.png" alt="image">ASP.NET MVC
         <ul>
             <li>
-                <div>
-                    <ul>
-                        <li>
-                            <img src="Icons/Mvc/Grid.png" alt="image">Grid
-                        </li>
-                        <li>
-                            <img src="Icons/Mvc/Menu.png" alt="image">Menu
-                        </li>
-                        <li>
-                            <img src="Icons/Mvc/PanelBar.png" alt="image">PanelBar
-                        </li>
-                        <li>
-                            <img src="Icons/Mvc/TabStrip.png" alt="image">TabStrip
-                        </li>
-                    </ul>
-                </div>
+                <img src="Icons/Mvc/Grid.png" alt="image">Grid
+            </li>
+            <li>
+                <img src="Icons/Mvc/Menu.png" alt="image">Menu
+            </li>
+            <li>
+                <img src="Icons/Mvc/PanelBar.png" alt="image">PanelBar
+            </li>
+            <li>
+                <img src="Icons/Mvc/TabStrip.png" alt="image">TabStrip
             </li>
         </ul>
     </li>
