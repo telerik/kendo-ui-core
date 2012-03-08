@@ -48,7 +48,6 @@
         }
     }
 
-
     function elementUnderCursor(e) {
         return document.elementFromPoint(e.x.client, e.y.client);
     }
@@ -93,7 +92,24 @@
         e.preventDefault();
     }
 
-    var Drag = Observable.extend({
+    /**
+     * @name kendo.Drag.Description
+     * @section The kendo Drag component provides a cross-browser, touch-friendly way to handle mouse and touch drag events.
+     * @exampleTitle <b>Drag</b> initialization
+     * @example
+     * var drag = new kendo.Drag($("#draggable"));
+     */
+    var Drag = Observable.extend(/** @lends kendo.Drag */{
+        /**
+         * @constructs
+         * @extends kendo.Observable
+         * @param {DomElement} element the DOM element from which the drag event starts.
+         * @param {Object} options Configuration options.
+         * @option {Integer} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
+         * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
+         * If set to false, dragging outside of the element boundaries will trigger the <code>end</code> event.
+         * @option {Selector} [filter] If passed, the filter limits the child elements that will trigger the event sequence.
+         */
         init: function(element, options) {
             var that = this,
                 eventMap = {},
@@ -125,13 +141,88 @@
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
                 .on("mousedown dragstart selectstart", that.filter, preventDefault);
 
-            that.bind([TAP, START, MOVE, END, CANCEL], options);
+            that.bind([
+            /**
+             * Fires when the user presses and releases the element without any movement or with a movement below the <code>threshold</code> specified.
+             * @name kendo.Drag#tap
+             * @event
+             * @param {Event} e
+             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
+             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
+             * @param {jQueryEvent} e.event Reference to the jQuery event object.
+             * @param {Element} e.target Reference to the DOM element from which the Drag started.
+             * It is different from the element only if <code>filter</code> option is specified.
+             */
+            TAP,
+            /**
+             * Fires when the user starts dragging the element.
+             * @name kendo.Drag#start
+             * @event
+             * @param {Event} e
+             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
+             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
+             * @param {jQueryEvent} e.event Reference to the jQuery event object.
+             * @param {Element} e.target Reference to the DOM element from which the Drag started.
+             * It is different from the element only if <code>filter</code> option is specified.
+             */
+            START,
+            /**
+             * Fires while dragging.
+             * @name kendo.Drag#move
+             * @event
+             * @param {Event} e
+             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
+             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
+             * @param {jQueryEvent} e.event Reference to the jQuery event object.
+             * @param {Element} e.target Reference to the DOM element from which the Drag started.
+             * It is different from the element only if <code>filter</code> option is specified.
+             */
+            MOVE,
+            /**
+             * Fires when the drag ends.
+             * @name kendo.Drag#end
+             * @event
+             * @param {Event} e
+             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
+             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
+             * @param {jQueryEvent} e.event Reference to the jQuery event object.
+             * @param {Element} e.target Reference to the DOM element from which the Drag started.
+             * It is different from the element only if <code>filter</code> option is specified.
+             */
+            END,
+            /**
+             * Fires when the drag is canceled. This  when the <code>cancel</code> method is called.
+             * @name kendo.Drag#cancel
+             * @event
+             * @param {Event} e
+             * @param {DragAxis} e.x Reference to the horizontal drag axis instance.
+             * @param {DragAxis} e.y Reference to the vertical drag axis instance.
+             * @param {jQueryEvent} e.event Reference to the jQuery event object.
+             * @param {Element} e.target Reference to the DOM element from which the Drag started.
+             * It is different from the element only if <code>filter</code> option is specified.
+             */
+            CANCEL], options);
         },
 
+        /**
+         * Capture the current drag, so that Drag listeners bound to parent elements will not trigger.
+         * This method will not have any effect if the current drag instance is instantiated with the <code>global</code> option set to true.
+         */
         capture: function() {
             Drag.captured = true;
         },
 
+        /**
+         * Discard the current drag. Calling the <code>cancel</code> method will trigger the <code>cancel</code> event.
+         * The correct moment to call this method would be in the <code>start</code> event handler.
+         * @exampleTitle Cancel the drag event sequence
+         * @example
+         * new kendo.Drag($("#foo"), {
+         *  start: function(e) {
+         *      e.cancel();
+         *  }
+         * });
+         */
         cancel: function() {
             this._cancel();
             this.trigger(CANCEL);
@@ -231,6 +322,7 @@
             var data = {
                 x: this.x,
                 y: this.y,
+                target: this.target,
                 event: e
             };
 
