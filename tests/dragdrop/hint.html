@@ -23,19 +23,29 @@
                 span,
                 hint;
 
-            module("kendo.ui.Draggable", {
+            module("kendo Draggable", {
                 setup: function() {
                     span = $("<span/>").appendTo(document.body);
                     hint = span.clone();
                 },
+
                 teardown: function() {
                     span.remove();
-                    hint.remove();
+
+                    if (!$.isFunction(hint)) {
+                        hint.remove();
+                    }
                 }
             });
 
-            function ev(options) {
-                return $.extend(new $.Event, options);
+            function trigger(type, e, el) {
+                el = el || span;
+                el.trigger($.Event(type, e));
+            }
+
+            function startDrag() {
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 10, pageY: 10 });
             }
 
             function setup(options) {
@@ -45,8 +55,7 @@
             test("the hint is appended to the body", function() {
                 var draggable = setup();
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 } ));
-                draggable._start( { pageX: 10, pageY: 0 });
+                startDrag();
 
                 ok(hint.parent().is("body"));
             });
@@ -54,38 +63,59 @@
             test("the hint is made absolute", function() {
                 var draggable = setup();
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 } ));
-                draggable._start( { pageX: 10, pageY: 0 });
+                startDrag();
 
                 equal(hint.css("position"), "absolute");
             });
 
-            test("the hint is removed from DOM after the draggable is destroyed", function() {
+            asyncTest("the hint is removed from DOM after the draggable is destroyed", 1, function() {
                 var draggable = setup();
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 } ));
-                draggable._start( { pageX: 10, pageY: 0 });
-                draggable._destroy();
+                draggable.bind("destroy", function() {
+                    start();
+                    equal(hint.parents().length, 0);
+                });
 
-                equal(hint.parents().length, 0);
+                startDrag();
+                trigger("mouseup", {pageX: 10, pageY: 10});
+
             });
 
-            test("the hint is positioned using options.cursorAt", function() {
+            test("the hint is auto-postioned when dragged", function() {
+                var draggable = setup();
+
+                var offset = kendo.getOffset(span);
+
+                trigger("mousedown", { pageX: 1, pageY: 1 });
+                trigger("mousemove", { pageX: 21, pageY: 21 });
+
+                equal(hint.css("top"), offset.top + 20 + "px");
+                equal(hint.css("left"), offset.left + 20 + "px");
+            });
+
+            test("the hint is positioned using options.cursorOffset", function() {
                 var draggable = setup({ cursorOffset: { left: 1, top: 1 } });
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 } ));
-                draggable._start( { pageX: 10, pageY: 0 });
+                startDrag();
 
-                equal(hint.css("top"), "1px");
+                equal(hint.css("top"), "11px");
+                equal(hint.css("left"), "11px");
+            });
+
+            test("the hint is positioned using options.cursorOffset", function() {
+                var draggable = setup({ cursorOffset: { left: 1, top: 1 } });
+
+                startDrag();
+
+                equal(hint.css("top"), "11px");
                 equal(hint.css("left"), "11px");
             });
 
             test("the hint is repositioned during dragging", function() {
-                var draggable = setup();
+                var draggable = setup({ cursorOffset: { left: 10, top: 10 } });
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 }));
-                draggable._start( { pageX: 10, pageY: 0 });
-                draggable._drag( { pageX: 100, pageY: 100 });
+                startDrag();
+                trigger("mousemove", {pageX: 100, pageY: 100});
 
                 equal(hint.css("top"), "110px");
                 equal(hint.css("left"), "110px");
@@ -95,20 +125,20 @@
                 var h = new $("<span/>"),
                     draggable = setup({ hint : function() { return h; } });
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 }) );
-                draggable._start( { pageX: 10, pageY: 0 });
+                startDrag();
 
                 ok(draggable.hint[0] === h[0]);
+                trigger("mouseup", {pageX: 10, pageY: 10});
             });
 
             test("hint as a function which returns a string", function() {
                 var draggable = setup({ hint : function() { return "<span>foo</span>"; } });
 
-                draggable._wait(ev( { pageX: 0, pageY: 0 }) );
-                draggable._start( { pageX: 10, pageY: 0 });
+                startDrag();
 
                 ok(draggable.hint.is("span"));
                 equal(draggable.hint.text(), "foo");
+                trigger("mouseup", {pageX: 10, pageY: 10});
             });
       </script>
     </body>

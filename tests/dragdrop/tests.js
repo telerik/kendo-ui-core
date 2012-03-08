@@ -1,5 +1,9 @@
 tests.push(
     {
+        page: "dragdrop/drag.html",
+        title: "drag"
+    },
+    {
         page: "dragdrop/draggable.html",
         title: "draggable"
     },

@@ -67,7 +67,7 @@
 
             var move,
                 transition,
-                swipe,
+                drag,
                 container,
                 bounary,
                 draggable;
@@ -83,17 +83,17 @@
                 }
             });
 
-            swipe = new mobile.Swipe(element, {
+            drag = new kendo.Drag(element, {
                 start: function() {
-                    if (abs(swipe.x.velocity)*2 >= abs(swipe.y.velocity)) {
-                        swipe.capture();
+                    if (abs(drag.x.velocity) * 2 >= abs(drag.y.velocity)) {
+                        drag.capture();
                     } else {
-                        swipe.cancel();
+                        drag.cancel();
                     }
 
                     transition.cancel();
                 },
-                end: $.proxy(that._swipeEnd, that)
+                end: $.proxy(that._dragEnd, that)
             });
 
             container = new mobile.ContainerBoundary({
@@ -106,7 +106,7 @@
 
             draggable = new mobile.Draggable({
                 boundary: container,
-                swipe: swipe,
+                drag: drag,
                 move: move,
                 elastic: true
             });
@@ -114,7 +114,7 @@
             $.extend(that, {
                 move: move,
                 transition: transition,
-                swipe: swipe,
+                drag: drag,
                 container: container,
                 boundary: boundary,
                 draggable: draggable
@@ -166,7 +166,7 @@
             that._updatePage();
         },
 
-        _swipeEnd: function(e) {
+        _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
                 width = that.boundary.size,

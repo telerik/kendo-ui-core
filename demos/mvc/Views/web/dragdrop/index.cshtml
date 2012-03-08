@@ -1,5 +1,12 @@
 
         <div id="example">
+
+            <div class="configuration">
+                <span class="configHead">Configuration</span>
+                <ul class="options">
+                    <li><label for="cursorOffset"><input type="checkbox" id="cursorOffset"> Enable <code>cursorOffset</code></label></li>
+                </ul>
+            </div>
             <div id="draggable"></div>
             <div id="droptarget">Start dragging.</div>
 
@@ -48,6 +55,16 @@
                         dragleave: droptargetOnDragLeave,
                         drop: droptargetOnDrop
                     });
+
+                    var draggable = $("#draggable").data("kendoDraggable");
+
+                    $("#cursorOffset").click(function(e) {
+                        if (this.checked) {
+                            draggable.options.cursorOffset = { top: 10, left: 10 };
+                        } else {
+                            draggable.options.cursorOffset = null;
+                        }
+                    });
                 });
             </script>
 
@@ -83,6 +100,7 @@
                 {
                     border: 1px solid #959595;
                     height: 198px;
+                    width: 398px;
                     font-size: 36px;
                     border-radius: 37px;
                     text-align: center;

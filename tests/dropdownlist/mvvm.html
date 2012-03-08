@@ -178,8 +178,6 @@
                 kendo.bind(dom, observable);
                 dom.data("kendoDropDownList").refresh();
 
-                console.log(observable.items[0]._events["change"]);
-
                 equal(observable.items[0]._events["change"].length, 2); //1 for the text binding and 1 for the ObservableArray
             });
 

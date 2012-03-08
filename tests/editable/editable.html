@@ -7,9 +7,8 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.model.js"></script>
-        <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js" ></script>
         <script src="../../src/kendo.numerictextbox.js" ></script>
@@ -30,7 +29,7 @@
             var Editable = kendo.ui.Editable,
                 Model = kendo.data.Model,
                 div,
-                defaultModel = new Model.define({ fields: { foo: "foo" } });
+                defaultModel = new (Model.define({ fields: { foo: "foo" } }))();
 
             module("kendo.ui.Editable", {
                 setup: function() {
@@ -88,7 +87,7 @@
             });
 
             test("input is rendered for every field", function() {
-                var editable = setup({ fields: ["foo", "bar"], model: new Model.define({ fields: { foo: "foo", bar: "bar" } }) }),
+                var editable = setup({ fields: ["foo", "bar"], model: new (Model.define({ fields: { foo: "foo", bar: "bar" } }))() }),
                     elements = editable.element.find(":input");
 
                 equal(elements.length, 2);

@@ -1,0 +1,180 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>kendo.Drag Tests</title>
+            <script src="../../src/jquery.js"></script>
+            <script src="../qunit/qunit/qunit.js"></script>
+            <script src="../qunit-runner.js"></script>
+            <script src="../../src/kendo.core.js"></script>
+            <script src="../../src/kendo.draganddrop.js"></script>
+            <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        </head>
+        <body>
+            <h1 id="qunit-header">kendo.Drag Tests</h1>
+            <h2 id="qunit-banner"></h2>
+            <div id="qunit-testrunner-toolbar"></div>
+            <h2 id="qunit-userAgent"></h2>
+            <ol id="qunit-tests"></ol>
+            <ul id="log"></ul>
+            <div id="qunit-fixture">test markup, will be hidden</div>
+
+            <script>
+                var drag,
+                    Drag = kendo.Drag,
+                    element;
+
+            function triggerEvent(type, e, el) {
+                el = el || element;
+                el.trigger($.Event(type, e));
+            }
+
+            function triggerTouchEvent(type, e) {
+                for (var i = 0; i < e.length; i ++) {
+                    e[i].identifier = i;
+                }
+
+                element.trigger($.Event(type, { originalEvent: { changedTouches: e }}));
+            }
+
+            module("drag", {
+                setup: function() {
+                    element = $('<div />');
+                    $("#qunit-fixture").empty().append(element);
+                    drag = new Drag(element);
+                }
+            });
+
+            test("raises start on first mouse move", 2, function(){
+                drag.bind("start", function(e) {
+                    equal(e.x.location, 15);
+                    equal(e.y.location, 25);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 15, pageY: 25});
+            });
+
+            test("raises tap on tap", 1, function(){
+                drag.bind("tap", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mouseup");
+            });
+
+            asyncTest("resets velocity on direction change", 2, function(){
+                drag.bind("end", function(e) {
+                    start();
+                    ok(e.x.velocity > 0);
+                    ok(e.y.velocity < 0);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 1, pageY: 30});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 10, pageY: 20});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mouseup", {pageX: 10, pageY: 20});
+                }, 1);
+            });
+
+            test("passes delta on mousemove", 2, function(){
+                drag.bind("move", function(e) {
+                    equal(e.x.delta, 10);
+                    equal(e.y.delta, 20);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 20, pageY: 40});
+            });
+
+            test("does not track unpressed mousemove", 0, function(){
+                drag.bind("move", function(e) {
+                    ok(false);
+                });
+
+                triggerEvent("mousemove", {pageX: 20, pageY: 40});
+            });
+
+            asyncTest("calculates velocity on mouseup", 2, function(){
+                drag.bind("end", function(e) {
+                    start();
+                    ok(e.x.velocity > 0);
+                    ok(e.y.velocity < 0);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                setTimeout(function() {
+                    triggerEvent("mousemove", {pageX: 20, pageY: 10});
+                }, 1);
+
+                setTimeout(function() {
+                    triggerEvent("mouseup", {pageX: 20, pageY: 0});
+                }, 1);
+            });
+
+            module("drag filter option", {
+                setup: function() {
+                    element = $('<div><div id="foo" /><div id="bar" /></div>');
+                    $("#qunit-fixture").empty().append(element);
+                    drag = new Drag(element, {
+                        filter: "#foo"
+                    });
+                }
+            });
+
+            test("binds to drag performed on elements matching filter", 1, function(){
+                drag.bind("start", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20}, element.find("#foo"));
+                triggerEvent("mousemove", {pageX: 15, pageY: 25}, element.find("#foo"));
+            });
+
+            test("ignores drag performed on elements not matching filter", 0, function(){
+                drag.bind("start", function(e) {
+                    ok(false);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20}, element.find("#bar"));
+                triggerEvent("mousemove", {pageX: 15, pageY: 25}, element.find("#bar"));
+            });
+
+            module("drag threshold option", {
+                setup: function() {
+                    element = $('<div />');
+                    $("#qunit-fixture").empty().append(element);
+                    drag = new Drag(element, {
+                        threshold: 5
+                    });
+                }
+            });
+
+            test("ignores drag if less than threshold option", 0, function(){
+                drag.bind("start", function(e) {
+                    ok(false);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 11, pageY: 21});
+            });
+
+            test("raises start if distance is more than threshold option", 1, function(){
+                drag.bind("start", function(e) {
+                    ok(true);
+                });
+
+                triggerEvent("mousedown", {pageX: 10, pageY: 20});
+                triggerEvent("mousemove", {pageX: 14, pageY: 24});
+            });
+        </script>
+    </body>
+</html>

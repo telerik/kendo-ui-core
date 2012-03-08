@@ -6,9 +6,9 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
         <script src="../../src/kendo.history.js"></script>
-        <script src="../../src/kendo.mobile.swipe.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
@@ -336,7 +336,7 @@
             asyncTest("Raises start pull to half of the screen", 1, function() {
                 setup('<div data-role="view" id="page1"><div style="height:300px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var swipe = application.view.scroller.swipe;
+                var drag = application.view.scroller.drag;
 
                 application.view.scroller.handlePull({
                     offset: 100,
@@ -346,15 +346,15 @@
                     }
                 })
 
-                swipe.trigger("start", swipe);
-                swipe.y.delta = 200;
-                swipe.trigger("move", swipe);
+                drag.trigger("start", drag);
+                drag.y.delta = 200;
+                drag.trigger("move", drag);
             });
 
             asyncTest("Raises cancel pull when releasing back", 2, function() {
                 setup('<div data-role="view" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var swipe = application.view.scroller.swipe;
+                var drag = application.view.scroller.drag;
 
                 application.view.scroller.handlePull({
                     offset: 100,
@@ -367,19 +367,19 @@
                     }
                 })
 
-                swipe.trigger("start", swipe);
+                drag.trigger("start", drag);
 
-                swipe.y.delta = 200;
-                swipe.trigger("move", swipe);
+                drag.y.delta = 200;
+                drag.trigger("move", drag);
 
-                swipe.y.delta = -170;
-                swipe.trigger("move", swipe);
+                drag.y.delta = -170;
+                drag.trigger("move", drag);
             });
 
             asyncTest("Raises pull when pulled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var swipe = application.view.scroller.swipe;
+                var drag = application.view.scroller.drag;
 
                 application.view.scroller.handlePull({
                     offset: 100,
@@ -391,10 +391,10 @@
                     }
                 })
 
-                swipe.trigger("start", swipe);
-                swipe.y.delta = 200;
-                swipe.trigger("move", swipe);
-                swipe.trigger("end", swipe);
+                drag.trigger("start", drag);
+                drag.y.delta = 200;
+                drag.trigger("move", drag);
+                drag.trigger("end", drag);
             });
 
             test("view notifies widget on init", 1, function(){

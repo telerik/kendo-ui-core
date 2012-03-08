@@ -54,5 +54,5 @@ tests.push(
     {
         page: "core/template.html",
         title: "template"
-    }
+     }
 );
