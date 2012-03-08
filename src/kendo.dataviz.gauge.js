@@ -586,20 +586,24 @@
 
         options: {
             min: 0,
-            max: 100,
+            max: 50,
+
+            minorUnit: 1,
 
             majorTicks: {
                 size: 15,
                 align: INSIDE,
                 color: BLACK,
-                width: .5
+                width: 1,
+                visible: true
             },
 
             minorTicks: {
                 size: 10,
                 align: INSIDE,
                 color: BLACK,
-                width: .5
+                width: 1,
+                visible: true
             },
 
             labels: {
@@ -630,7 +634,31 @@
                 scale = plotArea.scale;
 
             scale.reflow(box);
+            plotArea.alignAxis(box);
             plotArea.box = box;
+        },
+
+        alignAxis: function(box) {
+            var plotArea = this,
+                options = plotArea.options,
+                scale = plotArea.scale,
+                scaleBox = scale.box,
+                boxCenter = box.center(),
+                size;
+
+            if (scale.options.isVertical) {
+                size = scaleBox.width() / 2;
+                scale.reflow(new Box2D(
+                    boxCenter.x - size, box.y1,
+                    boxCenter.x + size, box.y2
+                ));
+            } else {
+                size = scaleBox.height() / 2;
+                scale.reflow(new Box2D(
+                    box.x1, boxCenter.y - size,
+                    box.x2, boxCenter.y + size
+                ));
+            }
         },
 
         render: function() {

@@ -21,10 +21,23 @@
     </head>
     <body>
         <div id="gauge"></div>
+        <div id="gauge1"></div>
 
         <script>
             $("#gauge").kendoLinearGauge({
-                theme:"default"
+                theme:"default",
+
+                scale: {
+                    isVertical: true
+                }
+            });
+
+            $("#gauge1").kendoLinearGauge({
+                theme:"default",
+
+                scale: {
+                    isVertical: false
+                }
             });
         </script>
     </body>
