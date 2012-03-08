@@ -55,7 +55,7 @@
         </style>
     </head>
     <body>
-        <ul data-role="tabstrip" data-text-field="name" data-bind="value: tab, source: tabs">
+        <ul data-role="tabstrip" data-text-field="name" data-bind="events:{click:click}, value: tab, source: tabs">
         </ul>
 
         <span data-bind="text: tabAsJson"></span>
@@ -63,6 +63,9 @@
         <script>
             var viewModel = kendo.observable({
                 tabs: [{ name:"foo" },{ name: "bar" }],
+                click: function() {
+                    console.log(arguments);
+                },
                 removelast: function() {
                     this.get("tabs").pop();
                 },
