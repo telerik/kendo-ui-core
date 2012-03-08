@@ -300,6 +300,8 @@
             min: new DATE(1900, 0, 1),
             max: new DATE(2099, 11, 31),
             footer : '#= kendo.toString(data,"D") #',
+            format : "",
+            month : {},
             start: MONTH,
             depth: MONTH,
             animation: {
@@ -870,7 +872,7 @@
             var that = this,
                 options = that.options,
                 footer = options.footer,
-                month = options.month || {},
+                month = options.month,
                 content = month.content,
                 empty = month.empty;
 
