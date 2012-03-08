@@ -11,8 +11,8 @@
         })(),
         FAST = "fast",
         // caution: variables below are generated during builds. update build/themebuilder.js if you change them!
-        KENDO_LOCATION = applicationRoot + "../../deploy/kendoui.web-dataviz.commercial/",
-        JQUERY_LOCATION = KENDO_LOCATION + "js/jquery.min.js",
+        KENDO_LOCATION = "http://mvc-kendobuild/staging/content/cdn/",
+        JQUERY_LOCATION = "/kendo-demos/src/js/jquery.js",
         requiredJs = ["scripts/less.js", "scripts/themebuilder.js", "scripts/colorengine.js", "scripts/template.js"],
         requiredCss = ["styles/kendo.black.css", "styles/styles.css"],
         // </generated variables>
