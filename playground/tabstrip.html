@@ -9,8 +9,8 @@
     <script src="../src/jquery.js"></script>
     <script src="../src/kendo.core.js"></script>
     <script src="../src/kendo.fx.js"></script>
-    <script src="../src/kendo.tabstrip.js"></script>
     <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.tabstrip.js"></script>
     <script src="../demos/mvc/content/shared/js/less.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -19,6 +19,8 @@
             $("#TabStrip3").kendoTabStrip({ contentUrls: [ 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html', 'AjaxView1.html', 'AjaxView2.html' ] });
             $("#TabStrip4").kendoTabStrip();
             $("#TabStrip5").kendoTabStrip({
+                dataTextField: "text",
+                dataContentField: "content",
                 dataSource: [
                     {
                         text: "Beep",
