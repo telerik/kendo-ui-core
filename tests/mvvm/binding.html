@@ -386,6 +386,46 @@
                 ok(dom.find("option").last().is(":selected"));
             });
 
+            test("binding select to array of objects", function() {
+                var dom = $('<select data-value-field="name" data-bind="source:items, value:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: function() { return [  { name: "foo" }, { name: "bar" } ] },
+                    selectedItem: {}
+                });
+
+                viewModel.set("selectedItem", viewModel.items()[1]);
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("option").length, 2);
+                equal(dom.find("option").first().text(), "foo");
+                equal(dom.find("option").first().val(), "foo");
+                equal(dom.find("option").last().text(), "bar");
+                equal(dom.find("option").last().val(), "bar");
+
+                ok(dom.find("option").last().is(":selected"));
+            });
+
+            test("binding select to array of strings", function() {
+                var dom = $('<select data-bind="source:items, value:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    items: function() { return [  "foo","bar" ] },
+                    selectedItem: {}
+                });
+
+                viewModel.set("selectedItem", viewModel.items()[1]);
+
+                kendo.bind(dom, viewModel);
+                equal(dom.find("option").length, 2);
+                equal(dom.find("option").first().text(), "foo");
+                equal(dom.find("option").first().val(), "foo");
+                equal(dom.find("option").last().text(), "bar");
+                equal(dom.find("option").last().val(), "bar");
+
+                ok(dom.find("option").last().is(":selected"));
+            });
+
             test("binding select value to object specifing only text-field", function() {
                 var dom = $('<select data-text-field="name" data-bind="source:items, value:selectedItem"/>');
 
