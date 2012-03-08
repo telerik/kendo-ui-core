@@ -337,7 +337,8 @@
             },
             render: function() {
                 var that = this,
-                    propertyGroupTemplate = kendo.template(
+                    template = kendo.template,
+                    propertyGroupTemplate = template(
                         "<li>#= title #" +
                             "<div class='styling-options'>" +
                                 "# for (var name in constants) {" +
@@ -349,27 +350,28 @@
                                 "# } #" +
                             "</div>" +
                         "</li>"
-                    );
+                    ),
+                    button = template("<button class='k-button ktb-action-#= id #'>#= text #</button>");
 
                 $("<div id='kendo-themebuilder'>" +
                         "<div id='download-overlay' class='ktb-view ktb-overlay'>" +
-                            "<button class='ktb-action-back k-button'>Back</button>" +
+                            button({ id: "back", text: "Back" }) +
                             "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>" +
                             "<div class='ktb-content'>" +
                                 "<textarea readonly></textarea>" +
                             "</div>" +
                         "</div>" +
                         "<div id='import-overlay' class='ktb-view ktb-overlay'>" +
-                            "<button class='ktb-action-back k-button'>Back</button>" +
-                            "<button class='ktb-action-import k-button'>Import</button>" +
+                            button({ id: "back", text: "Back" }) +
+                            button({ id: "import", text: "Import" }) +
                             "<div class='ktb-content'>" +
                                 "<textarea></textarea>" +
                             "</div>" +
                         "</div>" +
                         "<div id='advanced-mode' class='ktb-view'>" +
-                            "<button class='ktb-action-get-css k-button'>Get CSS...</button>" +
-                            "<button class='ktb-action-get-less k-button'>Get LESS...</button>" +
-                            "<button class='ktb-action-show-import k-button'>Import...</button>" +
+                            button({ id: "get-css", text: "Get CSS..." }) +
+                            button({ id: "get-less", text: "Get LESS..." }) +
+                            button({ id: "show-import", text: "Import..." }) +
                             "<div class='ktb-content'>" +
                                 "<ul id='stylable-elements'>" +
                                     $.map(that.constantsHierarchy || {}, function(section, title) {
