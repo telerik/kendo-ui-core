@@ -733,7 +733,6 @@
                     element.css(direction.property); // Read a style to force Chrome to apply the change.
                 }
 
-
                 return extend(extender, options.properties);
             }
         },
