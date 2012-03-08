@@ -463,7 +463,11 @@
         },
 
         setOptions: function(options) {
+            var animation = this.options.animation;
+
             this._animations(options);
+
+            options.animation = extend(true, animation, options.animation);
 
             Widget.fn.setOptions.call(this, options);
         },

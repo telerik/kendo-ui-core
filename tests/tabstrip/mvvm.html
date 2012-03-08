@@ -57,6 +57,16 @@
                 equal($.trim(dom.find("span:first").html()), "foo");
             });
 
+            test("animation is extended if widget is initialized before the binding", function() {
+                var dom = $('<div data-role="tabstrip" data-animation=\"{"open":{"effects":"fadeIn"}}\"/>');
+
+                dom.kendoTabStrip();
+
+                kendo.bind(dom);
+
+                equal(dom.data("kendoTabStrip").options.animation.open.duration, 200);
+            });
+
             test("updating viewModel updates the content", function() {
                 var dom = $('<div data-role="tabstrip"><span data-bind="text:text"></span></div>');
 

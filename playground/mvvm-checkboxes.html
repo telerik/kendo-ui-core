@@ -14,43 +14,17 @@
 
     </head>
     <body>
-        <div>
-            <h1 data-bind="text: name"></h1>
-            <h2 data-bind="text: currentSection.name"></h2>
-            <h3 data-bind="text: activeSection().name"></h3>
-            <button data-bind="click:nextSection">Next Section</button>
+        <div id="form">
+            <span data-bind="text:foo"></span>
         </div>
-        <p style="margin-top:50px;display:block;">
-            PROBLEM: Why doesn't the first "Section 1" change when "Next Section" is clicked?
-            </p>
         <script>
-var vm = {
-    _idx: 0,
-    name: "Test Top Level",
-    currentSection: null,
-    activeSection: function(){
-      return this.sections[this.get("_idx")];
-    },
-    sections: [
-        { name: "Section 1"},
-        { name: "Section 2"}
-    ],
-    nextSection: function(){
-       if(this._idx >= this.sections.length - 1) return;
+            var MyClass = kendo.Class.extend({
+                foo: ""
+            });
 
-       console.log("START", this.currentSection);
-
-       this.set("_idx", this._idx + 1);
-       this.set("currentSection", this.sections[this._idx]);
-
-       console.log("END", this.currentSection);
-    }
-};
-
-vm = kendo.observable(vm);
-vm.currentSection = vm.sections[0];
-
-kendo.bind(document.body.children, vm);
+            var viewModel = new MyClass();
+            viewModel.foo = "bar";
+            kendo.bind($("#form"), viewModel);
         </script>
     </body>
 </html>
