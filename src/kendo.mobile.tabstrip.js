@@ -160,8 +160,11 @@
                 return;
             }
 
-            that.trigger(SELECT, {item: item});
-            that._setActiveItem(item);
+            if (that.trigger(SELECT, {item: item})) {
+                e.preventDefault();
+            } else {
+                that._setActiveItem(item);
+            };
         },
 
         _setActiveItem: function(item) {
