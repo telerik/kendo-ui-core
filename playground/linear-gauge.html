@@ -11,8 +11,8 @@
 
         <style>
             #gauge, #gauge1 {
-                width: 300px;
-                height: 300px;
+                width: 200px;
+                height: 200px;
                 margin-left: 200px;
                 border: 1px solid red;
                 float: left;
@@ -26,17 +26,23 @@
         <script>
             $("#gauge").kendoLinearGauge({
                 theme:"default",
-
                 scale: {
                     isVertical: true
+                },
+
+                pointer: {
+                    value: 10
                 }
             });
 
             $("#gauge1").kendoLinearGauge({
                 theme:"default",
-
                 scale: {
                     isVertical: false
+                },
+
+                pointer: {
+                    value: 10
                 }
             });
         </script>

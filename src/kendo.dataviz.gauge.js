@@ -22,6 +22,7 @@
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
+        getSpacing = dataviz.getSpacing,
         defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
         round = dataviz.round,
@@ -88,7 +89,7 @@
         getViewElements: function(view) {
             var pointer = this,
                 shape = pointer.options.shape,
-                elements = pointer.renderNeedle(view);
+                elements = pointer.renderPointer(view);
 
             pointer.elements = elements;
 
@@ -139,7 +140,7 @@
             }
         },
 
-        renderNeedle: function(view) {
+        renderPointer: function(view) {
             var pointer = this,
                 scale = pointer.scale,
                 ring = scale.ring,
@@ -433,7 +434,6 @@
             return childElements;
         }
     });
-
     var RadialGaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
@@ -613,6 +613,111 @@
         }
     });
 
+
+    var LinearPointer = Pointer.extend({
+        options: {
+            shape: "barIndicator",
+
+            track: {
+                width: 6,
+                border: {
+                    width: 1
+                }
+            },
+
+            color: "#286793",
+            size: 6,
+            border: {
+                width: 1
+            },
+
+            padding: getSpacing(3)
+        },
+
+        renderPointer: function(view) {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                border = defined(options.border) ? {
+                    stroke: options.border.color || options.color,
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType
+                } : {},
+                box,
+                halfSize = options.size / 2,
+                padding = options.padding,
+                shape,
+                trackBoxCenter = pointer.trackBox.center(),
+                slot = scale.getSlot(options.value);
+
+            if (options.shape == "barIndicator") {
+                if (scale.options.isVertical) {
+                    box = new Box2D(
+                        trackBoxCenter.x - halfSize, slot.y1,
+                        trackBoxCenter.x + halfSize, slot.y2);
+                } else {
+                    box = new Box2D(
+                        slot.x1, trackBoxCenter.y - halfSize,
+                        slot.x2, trackBoxCenter.y + halfSize);
+                }
+                shape = view.createRect(box, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity
+                    }, border)
+                );
+            }
+
+            return shape;
+        },
+
+        renderTrack: function(view) {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                trackOptions = options.track,
+                border = defined(trackOptions.border) ? {
+                    stroke: trackOptions.border.color,
+                    strokeWidth: trackOptions.border.width,
+                    dashType: trackOptions.border.dashType
+                } : {},
+                box,
+                scaleLine = scale.lineBox(),
+                scaleBox = scale.box,
+                width = trackOptions.width,
+                padding = options.padding;
+
+            if (scale.options.isVertical) {
+                box = new Box2D(
+                    scaleBox.x2 + padding.left, scaleLine.y1,
+                    scaleBox.x2 + padding.left + width, scaleLine.y2);
+            } else {
+                box = new Box2D(
+                    scaleLine.x1, scaleBox.y1 - padding.bottom - width,
+                    scaleLine.x2, scaleBox.y1 - padding.bottom);
+            }
+
+            pointer.trackBox = box;
+            return view.createRect(box, deepExtend({
+                        fill: trackOptions.color,
+                        fillOpacity: trackOptions.opacity
+                    }, border)
+            );
+        },
+
+        getViewElements: function(view) {
+            var pointer = this,
+                shape = pointer.options.shape,
+                elements = [];
+
+            elements.push(pointer.renderTrack(view))
+            elements.push(pointer.renderPointer(view));
+
+            pointer.elements = elements;
+
+            return elements;
+        }
+    });
+
     var LinearGaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
@@ -668,8 +773,8 @@
 
             scale = plotArea.scale = new LinearScale(options.scale);
             plotArea.append(plotArea.scale);
-            //plotArea.pointer = new LinearPointer(scale, options.pointer);
-            //plotArea.append(plotArea.pointer);
+            plotArea.pointer = new LinearPointer(scale, options.pointer);
+            plotArea.append(plotArea.pointer);
         }
     });
 
@@ -804,6 +909,8 @@
     deepExtend(dataviz, {
         GaugePlotArea: RadialGaugePlotArea,
         RadialPointer: RadialPointer,
+        LinearPointer: LinearPointer,
+        LinearScale: LinearScale,
         PointerAnimationDecorator: PointerAnimationDecorator,
         RadialScale: RadialScale
     });
