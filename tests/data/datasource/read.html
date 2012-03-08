@@ -221,9 +221,12 @@
                     status: 500,
                     responseText: 'A text response from the server'
                 });
-                dataSource.bind("error", function() {
+                dataSource.bind("error", function(e) {
                     start();
-                    ok(arguments);
+                    ok(e);
+                    ok(e.xhr);
+                    ok(e.status);
+                    ok(errorThrown in e);
                 });
                 stop(1);
                 dataSource.read();

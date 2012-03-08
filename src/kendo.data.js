@@ -1622,8 +1622,8 @@
             }
         },
 
-        error: function() {
-            this.trigger(ERROR, arguments);
+        error: function(xhr, status, errorThrown) {
+            this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
         success: function(data) {
