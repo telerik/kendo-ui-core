@@ -92,6 +92,7 @@
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
+        STRING = "string",
         SQUARE = "square",
         SWING = "swing",
         TOP = "top",
@@ -1457,8 +1458,8 @@
         init: function(plotArea, options) {
             var chart = this;
 
-            chart._categoryTotalsPos = [];
-            chart._categoryTotalsNeg = [];
+            chart._groupTotals = {};
+            chart._groups = [];
 
             CategoricalChart.fn.init.call(chart, plotArea, options);
         },
@@ -1475,7 +1476,9 @@
                 options = barChart.options,
                 children = barChart.children,
                 isStacked = barChart.options.isStacked,
-                labelOptions = deepExtend({}, series.labels);
+                labelOptions = deepExtend({}, series.labels),
+                bar,
+                cluster;
 
             if (isStacked) {
                 if (labelOptions.position == OUTSIDE_END) {
@@ -1483,7 +1486,7 @@
                 }
             }
 
-            var bar = new Bar(value,
+            bar = new Bar(value,
                 deepExtend({}, {
                     isVertical: !options.invertAxes,
                     overlay: series.overlay,
@@ -1491,7 +1494,7 @@
                     isStacked: isStacked
                 }, series));
 
-            var cluster = children[categoryIx];
+            cluster = children[categoryIx];
             if (!cluster) {
                 cluster = new ClusterLayout({
                     isVertical: options.invertAxes,
@@ -1502,14 +1505,11 @@
             }
 
             if (isStacked) {
-                var stackWrap = cluster.children[0],
+                var stackWrap = barChart.getStackWrap(series, cluster),
                     positiveStack,
                     negativeStack;
 
-                if (!stackWrap) {
-                    stackWrap = new ChartElement();
-                    cluster.append(stackWrap);
-
+                if (stackWrap.children.length === 0) {
                     positiveStack = new StackLayout({
                         isVertical: !options.invertAxes
                     });
@@ -1535,15 +1535,43 @@
             return bar;
         },
 
+        getStackWrap: function(series, cluster) {
+            var wraps = cluster.children,
+                stackGroup = series.stack,
+                stackWrap,
+                i,
+                length = wraps.length;
+
+            if (typeof stackGroup === STRING) {
+                for (i = 0; i < length; i++) {
+                    if (wraps[i]._stackGroup === stackGroup) {
+                        stackWrap = wraps[i];
+                        break;
+                    }
+                }
+            } else {
+                stackWrap = wraps[0];
+            }
+
+            if (!stackWrap) {
+                stackWrap = new ChartElement();
+                stackWrap._stackGroup = stackGroup;
+                cluster.append(stackWrap);
+            }
+
+            return stackWrap;
+        },
+
         updateRange: function(value, categoryIx, series) {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                totalsPos = chart._categoryTotalsPos,
-                totalsNeg = chart._categoryTotalsNeg;
+                totals = chart.groupTotals(series.stack),
+                positive = totals.positive,
+                negative = totals.negative;
 
             if (defined(value)) {
                 if (isStacked) {
-                    incrementSlot(value > 0 ? totalsPos : totalsNeg, categoryIx, value);
+                    incrementSlot(value > 0 ? positive : negative, categoryIx, value);
                 } else {
                     CategoricalChart.fn.updateRange.apply(chart, arguments);
                 }
@@ -1553,13 +1581,15 @@
         computeAxisRanges: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                axisName;
+                axisName,
+                categoryTotals;
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis || PRIMARY;
+                categoryTotals = chart.categoryTotals();
                 chart.valueAxisRanges[axisName] = {
-                    min: sparseArrayMin(chart._categoryTotalsNeg.concat(0)),
-                    max: sparseArrayMax(chart._categoryTotalsPos.concat(0))
+                    min: sparseArrayMin(categoryTotals.negative.concat(0)),
+                    max: sparseArrayMax(categoryTotals.positive.concat(0))
                 };
             }
         },
@@ -1603,6 +1633,43 @@
             for (i = 0; i < childrenLength; i++) {
                 children[i].reflow(categorySlots[i]);
             }
+        },
+
+        groupTotals: function(stackGroup) {
+            var chart = this,
+                groupName = typeof stackGroup === STRING ? stackGroup : "default",
+                totals = chart._groupTotals[groupName];
+
+            if (!totals) {
+                totals = chart._groupTotals[groupName] = {
+                    positive: [],
+                    negative: []
+                };
+
+                chart._groups.push(groupName);
+            }
+
+            return totals;
+        },
+
+        categoryTotals: function() {
+            var chart = this,
+                groups = chart._groups,
+                groupTotals = chart._groupTotals,
+                name,
+                totals,
+                categoryTotals = { positive: [], negative: [] },
+                i,
+                length = groups.length;
+
+            for (i = 0; i < length; i++) {
+                name = groups[i];
+                totals = groupTotals[name];
+                append(categoryTotals.positive, totals.positive);
+                append(categoryTotals.negative, totals.negative);
+            }
+
+            return categoryTotals;
         }
     });
 
