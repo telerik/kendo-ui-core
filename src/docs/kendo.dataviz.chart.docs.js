@@ -1743,7 +1743,7 @@
          *    </dl>
          * </div>
          * @option {Object} [seriesDefaults] Default values for each series.
-         * @option {Boolean} [seriesDefaults.stacked] <false>
+         * @option {Boolean} [seriesDefaults.stack] <false>
          * A value indicating if the series should be stacked.
          * @option {Number} [seriesDefaults.gap] <1.5> The distance between category clusters.
          * @option {Number} [seriesDefaults.spacing] <0.4> Space between bars.
@@ -2086,8 +2086,10 @@
          * @option {Array} [series.data] Array of data points.
          * @option {String} [series.field] The data field containing the series value.
          * @option [series.type="bar"] Available options for bar series:
-         * @option {Boolean} [series.type="bar".stacked] <false>
+         * @option {Boolean} [series.type="bar".stack] <false>
          * A value indicating if the series should be stacked.
+         * @option {String} [series.type="bar".stack]
+         * Indicates that the series should be stacked in a group with the specified name.
          * @option {Number} [series.type="bar".gap] <1.5> The distance between category clusters.
          * @option {Number} [series.type="bar".spacing] <0.4> Space between bars.
          * @option {String} [series.type="bar".name] The series name.
@@ -2342,7 +2344,7 @@
          * The difference is that column series are rendered on a horizontal category axis.
          *
          * @option [series.type="line"] Available options for line series:
-         * @option {Boolean} [series.type="line".stacked] <false>
+         * @option {Boolean} [series.type="line".stack] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="line".name] The series name.
          * @option {String} [series.type="line".axis] <primary> The name of the value axis to use.
@@ -3416,7 +3418,7 @@
          * @option {Number} [series.type="scatterLine".width] <1> The line width of the scatter line chart.
          *
          * @option [series.type="area"] Available options for area series:
-         * @option {Boolean} [series.type="area".stacked] <false>
+         * @option {Boolean} [series.type="area".stack] <false>
          * A value indicating if the series should be stacked.
          * @option {String} [series.type="area".name] The series name.
          * @option {String} [series.type="area".line] The line of the area chart.
