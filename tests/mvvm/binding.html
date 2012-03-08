@@ -689,6 +689,48 @@
                 raises(function() { kendo.bind(dom, {}); }, "Error should be thrown");
             });
 
+            test("widget initialization", function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="testwidget"></div>');
+
+                kendo.bind(dom);
+
+                ok(dom.data("kendoTestWidget") instanceof TestWidget, "TestWidget is initialized");
+            });
+
+            test("child widget is initialized only once", function() {
+                var ParentWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "ParentWidget"
+                    }
+                });
+
+                kendo.ui.plugin(ParentWidget);
+
+                var TestWidget = kendo.ui.Widget.extend({
+                    init: function() {
+                        kendo.ui.Widget.fn.init.call(this, arguments);
+
+                    },
+                    setOptions: function() {
+                        ok(false, "Widget is initialized only once");
+                    },
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="parentwidget"><div data-role="testwidget"></div></div>');
+
+                kendo.bind(dom, {});
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">

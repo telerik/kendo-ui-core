@@ -778,7 +778,7 @@
                     }
                 }
             } else if (name !== "template") {
-                throw new Error("The " + name + "binding is not supported");
+                throw new Error("The " + name + "binding is not supported by the " + name + " element");
             }
         },
 
@@ -848,7 +848,7 @@
 
                 this.toDestroy.push(binding);
             } else {
-                throw new Error("The " + name + "binding is not supported");
+                throw new Error("The " + name + "binding is not supported by the " + name + " widget");
             }
         }
     });
@@ -870,16 +870,14 @@
         var type = (namespace || kendo.ui).roles[role];
 
         if (type) {
-            kendo.init(element, namespace);
-
-            return new WidgetBindingTarget($.data(element, "kendo" + type.fn.options.prefix + type.fn.options.name));
+            return new WidgetBindingTarget(kendo.initWidget(element, type.options, namespace));
         }
     }
 
     var keyValueRegExp = /\w+:({([^}]*)}|[^,}]+)/g;
     var whiteSpaceRegExp = /\s/g;
 
-    function parseAttributeList(bind) {
+    function parseBindings(bind) {
         var result = {},
             idx,
             length,
@@ -899,7 +897,7 @@
             value = token.substring(colonIndex + 1);
 
             if (value.charAt(0) == "{") {
-                value = parseAttributeList(value);
+                value = parseBindings(value);
             }
 
             result[key] = value;
@@ -930,7 +928,6 @@
             options = {},
             target;
 
-
         if (role || bind) {
             unbindElement(element);
         }
@@ -940,7 +937,7 @@
         }
 
         if (bind) {
-            bind = parseAttributeList(bind.replace(whiteSpaceRegExp, ""));
+            bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
                 options = kendo.parseOptions(element, { textField: "", valueField: "", template: "" });
