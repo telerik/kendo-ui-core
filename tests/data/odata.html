@@ -46,6 +46,59 @@
                 equal(read.jsonp, "$callback");
             });
 
+            test("datasource with type odata creates remote transport and sets default values for update", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        update: {
+                            url: "foo"
+                        }
+                    }
+                });
+
+                var update = dataSource.transport.options.update;
+                equal(update.url, "foo");
+                equal(update.dataType, "json");
+                equal(update.cache, true);
+                equal(update.contentType, "application/json");
+                equal(update.type, "PUT");
+            });
+
+            test("datasource with type odata creates remote transport and sets default values for create", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        create: {
+                            url: "foo"
+                        }
+                    }
+                });
+
+                var create = dataSource.transport.options.create;
+                equal(create.url, "foo");
+                equal(create.dataType, "json");
+                equal(create.cache, true);
+                equal(create.contentType, "application/json");
+                equal(create.type, "POST");
+            });
+
+            test("datasource with type odata creates remote transport and sets default values for destroy", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        destroy: {
+                            url: "foo"
+                        }
+                    }
+                });
+
+                var destroy = dataSource.transport.options.destroy;
+                equal(destroy.url, "foo");
+                equal(destroy.dataType, "json");
+                equal(destroy.cache, true);
+                equal(destroy.type, "DELETE");
+            });
+
             test("datasource with type odata initializes odata schema", function() {
                 var dataSource = new DataSource({
                     type: "odata",

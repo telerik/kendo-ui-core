@@ -125,6 +125,23 @@
                     dataType: "jsonp",
                     jsonp: "$callback"
                 },
+                update: {
+                    cache: true,
+                    dataType: "json",
+                    contentType: "application/json", // to inform the server the the request body is JSON encoded
+                    type: "PUT" // can be PUT or MERGE
+                },
+                create: {
+                    cache: true,
+                    dataType: "json",
+                    contentType: "application/json",
+                    type: "POST" // must be POST to create new entity
+                },
+                destroy: {
+                    cache: true,
+                    dataType: "json",
+                    type: "DELETE"
+                },
                 parameterMap: function(options, type) {
                     type = type || "read";
 
