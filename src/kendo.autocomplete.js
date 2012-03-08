@@ -363,6 +363,8 @@
             delay: 200,
             height: 200,
             filter: "startswith",
+            highlightFirst: false,
+            separator: null,
             placeholder: ""
         },
         events: [
