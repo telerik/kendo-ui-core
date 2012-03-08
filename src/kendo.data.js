@@ -1748,6 +1748,8 @@
             if (value !== undefined) {
                 that._data = this._observe(value);
 
+                that._total = that._data.length;
+
                 that._process(that._data);
             } else {
                 return that._data;

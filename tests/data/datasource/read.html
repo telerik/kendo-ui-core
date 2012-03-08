@@ -345,6 +345,42 @@
                     ok(called);
             });
 
+            test("setting data updates the total", function() {
+                var called = false,
+                    dataSource = new DataSource({
+                    });
+
+                dataSource.data([6,7,8,9,10]);
+                equal(dataSource.total(), 5);
+            });
+
+            test("setting data persist the total after query", function() {
+                var called = false,
+                    dataSource = new DataSource({
+                        pageSize: 2
+                    });
+
+                dataSource.data([6,7,8,9,10]);
+                dataSource.page(2);
+
+                equal(dataSource.total(), 5);
+            });
+
+            test("setting data persist the total after query with initial data", function() {
+                var called = false,
+                    dataSource = new DataSource({
+                        data: { data: [ { foo: "bar" } ] },
+                        schema: {
+                            data: "data"
+                        },
+                        pageSize: 2
+                    });
+
+                dataSource.data([6,7,8,9,10]);
+                dataSource.page(2);
+                equal(dataSource.total(), 5);
+            });
+
             test("setting data should updates the dataSource data", function() {
                 var dataSource = new DataSource({
                         data: [1,2,3,4,5],
