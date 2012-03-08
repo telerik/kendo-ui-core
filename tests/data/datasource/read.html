@@ -232,6 +232,55 @@
                 dataSource.read();
             });
 
+            test("url as a function", 1, function() {
+                var dataSource = new DataSource({
+                        transport: {
+                            read: {
+                                url: function() {
+                                    ok(true, "url() is called");
+                                    return "foo";
+                                }
+                            }
+                        },
+                        schema: schema
+                    }),
+                    args;
+
+                $.mockjax({
+                    contentType: "text/json",
+                    url: "foo",
+                    responseText: '[]'
+                });
+
+                dataSource.read();
+            });
+
+            test("transport data is passed to url when it is a function", 1, function() {
+                var dataSource = new DataSource({
+                        transport: {
+                            read: {
+                                url: function(options) {
+                                    ok(options.foo, "bar");
+                                    return "foo";
+                                },
+                                data: {
+                                    foo: "bar"
+                                }
+                            }
+                        },
+                        schema: schema
+                    }),
+                    args;
+
+                $.mockjax({
+                    contentType: "text/json",
+                    url: "foo",
+                    responseText: '[]'
+                });
+
+                dataSource.read();
+            });
+
             test("read filters if filter is set", function() {
                 var dataSource = new DataSource({
                     data: [{ id:1, bar: "foo" },{ id: 2, bar: "baz" }],
