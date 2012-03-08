@@ -26,7 +26,7 @@
 
     var EditorUtils = {
         select: function(editor) {
-            editor.trigger('select', {});
+            editor.trigger("select", {});
         },
 
         editorWrapperTemplate:
@@ -72,8 +72,8 @@
                 h = $textarea.height(),
                 template = EditorUtils.editorWrapperTemplate,
                 editorWrap = $(template).insertBefore($textarea).width(w).height(h),
-                editArea = editorWrap.find('.k-editable-area'),
-                toolsArea = editorWrap.find('.k-editor-toolbar');
+                editArea = editorWrap.find(".k-editable-area"),
+                toolsArea = editorWrap.find(".k-editor-toolbar");
 
             $textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
 
@@ -82,7 +82,7 @@
 
         renderTools: function(editor, tools) {
             var toolsCollection = {},
-                toolsArea = $(editor.element).closest(".k-editor").find('.k-editor-toolbar');
+                toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
 
             toolsArea.empty();
 
@@ -110,8 +110,8 @@
 
         createContentElement: function($textarea, stylesheets) {
             $textarea.hide();
-            var iframe = $('<iframe />', { src: 'javascript:"<html></html>"', frameBorder: '0' })
-                            .css('display', '')
+            var iframe = $("<iframe />", { src: 'javascript:"<html></html>"', frameBorder: "0" })
+                            .css("display", "")
                             .addClass("k-content")
                             .insertBefore($textarea)[0];
 
@@ -120,16 +120,16 @@
 
             var html = $textarea.val()
                         // <img>\s+\w+ creates invalid nodes after cut in IE
-                        .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, '$1')
+                        .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1")
                         // indented HTML introduces problematic ranges in IE
-                        .replace(/[\r\n\v\f\t ]+/ig, ' ');
+                        .replace(/[\r\n\v\f\t ]+/ig, " ");
 
             if (!html.length && $.browser.mozilla)
                 html = '<br _moz_dirty="true" />';
 
-            var rtlStyle = $textarea.closest('.k-rtl').length ? 'direction:rtl;' : '';
+            var rtlStyle = $textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
 
-            document.designMode = 'On';
+            document.designMode = "On";
             document.open();
             document.write(
                     '<!DOCTYPE html><html><head>' +
@@ -236,8 +236,8 @@
 
                         var target = $(e.target);
 
-                        if (!$.browser.gecko && e.which == 2 && target.is('a[href]'))
-                        window.open(target.attr('href'), '_new');
+                        if (!$.browser.gecko && e.which == 2 && target.is("a[href]"))
+                        window.open(target.attr("href"), "_new");
                     },
                     mouseup: function () {
                         select(editor);
@@ -245,20 +245,20 @@
                 });
 
             $(editor.window)
-                .bind('blur', function () {
+                .bind("blur", function () {
                     var old = editor.textarea.value,
                     value = editor.encodedValue();
 
                     editor.update(value);
 
                     if (value != old) {
-                        editor.trigger('change');
+                        editor.trigger("change");
                     }
                 });
 
             $(editor.body)
-                .bind('cut paste', function (e) {
-                      editor.clipboard['on' + e.type](e);
+                .bind("cut paste", function (e) {
+                      editor.clipboard["on" + e.type](e);
                   });
         },
 
@@ -269,7 +269,7 @@
                 dom = Editor.Dom;
 
             if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
-            || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, 'br'))))
+            || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, "br"))))
                 return;
 
             var previousBlock = startContainer.previousSibling;
@@ -324,39 +324,39 @@
         fixBackspace = EditorUtils.fixBackspace;
 
     var localization = {
-        bold: 'Bold',
-        italic: 'Italic',
-        underline: 'Underline',
-        strikethrough: 'Strikethrough',
-        superscript: 'Superscript',
-        subscript: 'Subscript',
-        justifyCenter: 'Center text',
-        justifyLeft: 'Align text left',
-        justifyRight: 'Align text right',
-        justifyFull: 'Justify',
-        insertUnorderedList: 'Insert unordered list',
-        insertOrderedList: 'Insert ordered list',
-        indent: 'Indent',
-        outdent: 'Outdent',
-        createLink: 'Insert hyperlink',
-        unlink: 'Remove hyperlink',
-        insertImage: 'Insert image',
-        insertHtml: 'Insert HTML',
-        fontName: 'Select font family',
-        fontNameInherit: '(inherited font)',
-        fontSize: 'Select font size',
-        fontSizeInherit: '(inherited size)',
-        formatBlock: 'Format',
-        style: 'Styles',
-        emptyFolder: 'Empty Folder',
-        uploadFile: 'Upload',
-        orderBy: 'Arrange by:',
-        orderBySize: 'Size',
-        orderByName: 'Name',
+        bold: "Bold",
+        italic: "Italic",
+        underline: "Underline",
+        strikethrough: "Strikethrough",
+        superscript: "Superscript",
+        subscript: "Subscript",
+        justifyCenter: "Center text",
+        justifyLeft: "Align text left",
+        justifyRight: "Align text right",
+        justifyFull: "Justify",
+        insertUnorderedList: "Insert unordered list",
+        insertOrderedList: "Insert ordered list",
+        indent: "Indent",
+        outdent: "Outdent",
+        createLink: "Insert hyperlink",
+        unlink: "Remove hyperlink",
+        insertImage: "Insert image",
+        insertHtml: "Insert HTML",
+        fontName: "Select font family",
+        fontNameInherit: "(inherited font)",
+        fontSize: "Select font size",
+        fontSizeInherit: "(inherited size)",
+        formatBlock: "Format",
+        style: "Styles",
+        emptyFolder: "Empty Folder",
+        uploadFile: "Upload",
+        orderBy: "Arrange by:",
+        orderBySize: "Size",
+        orderByName: "Name",
         invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
         deleteFile: 'Are you sure you want to delete "{0}"?',
         overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
-        directoryNotFound: 'A directory with this name was not found.'
+        directoryNotFound: "A directory with this name was not found."
     };
 
     var emptyFinder = function () { return { isFormatted: function () { return false } } };
@@ -372,7 +372,7 @@
 
             self.element = element;
 
-            $element.closest('form').bind('submit', function () {
+            $element.closest("form").bind("submit", function () {
                 self.update();
             });
 
@@ -391,7 +391,7 @@
             for (var id in self._tools)
                 self._tools[id].name = id.toLowerCase();
 
-            self.textarea = $element.attr('autocomplete', 'off')[0];
+            self.textarea = $element.attr("autocomplete", "off")[0];
 
             var $wrapper = self.wrapper = wrapTextarea($element);
 
@@ -412,31 +412,31 @@
             }
 
             function toolFromClassName(element) {
-                var tool = $.grep(element.className.split(' '), function (x) {
+                var tool = $.grep(element.className.split(" "), function (x) {
                     return !/^k-(widget|tool-icon|state-hover|header|combobox|dropdown|selectbox|colorpicker)$/i.test(x);
                 });
-                return tool[0] ? tool[0].substring(2) : 'custom';
+                return tool[0] ? tool[0].substring(2) : "custom";
             }
 
             function appendShortcutSequence(localizedText, tool) {
                 if (!tool.key)
                     return localizedText;
 
-                var res = localizedText + ' (';
+                var res = localizedText + " (";
 
-                if (tool.ctrl) res += 'Ctrl + ';
-                if (tool.shift) res += 'Shift + ';
-                if (tool.alt) res += 'Alt + ';
+                if (tool.ctrl) res += "Ctrl + ";
+                if (tool.shift) res += "Shift + ";
+                if (tool.alt) res += "Alt + ";
 
-                res += tool.key + ')';
+                res += tool.key + ")";
 
                 return res;
             }
 
-            var toolbarItems = '.k-editor-toolbar > li > *, .k-editor-toolbar > li select',
-                buttons = '.k-editor-button .k-tool-icon',
-                enabledButtons = buttons + ':not(.k-state-disabled)',
-                disabledButtons = buttons + '.k-state-disabled';
+            var toolbarItems = ".k-editor-toolbar > li > *, .k-editor-toolbar > li select",
+                buttons = ".k-editor-button .k-tool-icon",
+                enabledButtons = buttons + ":not(.k-state-disabled)",
+                disabledButtons = buttons + ".k-state-disabled";
 
              $wrapper.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
@@ -453,9 +453,9 @@
             });
 
             $wrapper
-                .delegate(enabledButtons, 'mouseenter', function() { $(this).addClass("k-state-hover")})
-                .delegate(enabledButtons, 'mouseleave', function() { $(this).removeClass("k-state-hover")})
-                .delegate(buttons, 'mousedown', false)
+                .delegate(enabledButtons, "mouseenter", function() { $(this).addClass("k-state-hover")})
+                .delegate(enabledButtons, "mouseleave", function() { $(this).removeClass("k-state-hover")})
+                .delegate(buttons, "mousedown", false)
                 .delegate(focusable, "keydown", function(e) {
                     if (e.keyCode == 39) {
                         $(this).closest("li").nextAll("li:has(" + focusable + ")").first().find(focusable).focus();
@@ -465,12 +465,12 @@
                         self.focus();
                     }
                 })
-                .delegate(enabledButtons, 'click', function (e) {
+                .delegate(enabledButtons, "click", function (e) {
                     e.preventDefault();
                     e.stopPropagation();
                     self.exec(toolFromClassName(this));
                 })
-                .delegate(disabledButtons, 'click', function(e) { e.preventDefault(); })
+                .delegate(disabledButtons, "click", function(e) { e.preventDefault(); })
                 .find(toolbarItems)
                     .each(function () {
                         var toolName = toolFromClassName(this),
@@ -481,11 +481,11 @@
                         if (!tool)
                             return;
 
-                        if (toolName == 'fontSize' || toolName == 'fontName') {
-                            var inheritText = self.options.localization[toolName + 'Inherit'] || localization[toolName + 'Inherit']
+                        if (toolName == "fontSize" || toolName == "fontName") {
+                            var inheritText = self.options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"]
                             self.options[toolName][0].Text = inheritText;
-                            $this.find('input').val(inheritText).end()
-                                 .find('span.k-input').text(inheritText).end();
+                            $this.find("input").val(inheritText).end()
+                                 .find("span.k-input").text(inheritText).end();
                         }
 
                         tool.initialize($this, {
@@ -494,7 +494,7 @@
                         });
 
                     });/*.end()*/
-                self.bind('select', function() {
+                self.bind("select", function() {
                     var range = self.getRange();
 
                     var nodes = Editor.RangeUtils.textNodes(range);
@@ -513,16 +513,16 @@
                 });
 
             $(document)
-                .bind('DOMNodeInserted', function(e) {
+                .bind("DOMNodeInserted", function(e) {
                     if ($.contains(e.target, self.wrapper[0]) || self.wrapper[0] == e.target) {
                         // preserve updated value before re-initializing
                         // don't use update() to prevent the editor from encoding the content too early
                         self.textarea.value = self.value();
-                        self.wrapper.find('iframe').remove();
+                        self.wrapper.find("iframe").remove();
                         initializeContentElement(self);
                     }
                 })
-                .bind('mousedown', function(e) {
+                .bind("mousedown", function(e) {
                     try {
                         if (self.keyboard.isTypingInProgress())
                             self.keyboard.endTyping(true);
@@ -545,36 +545,36 @@
                 animation: false
             },
             fontName: [
-                { Text: localization.fontNameInherit,  Value: 'inherit' },
-                { Text: 'Arial', Value: "Arial,Helvetica,sans-serif" },
-                { Text: 'Courier New', Value: "'Courier New',Courier,monospace" },
-                { Text: 'Georgia', Value: "Georgia,serif" },
-                { Text: 'Impact', Value: "Impact,Charcoal,sans-serif" },
-                { Text: 'Lucida Console', Value: "'Lucida Console',Monaco,monospace" },
-                { Text: 'Tahoma', Value: "Tahoma,Geneva,sans-serif" },
-                { Text: 'Times New Roman', Value: "'Times New Roman',Times,serif" },
-                { Text: 'Trebuchet MS', Value: "'Trebuchet MS',Helvetica,sans-serif" },
-                { Text: 'Verdana', Value: "Verdana,Geneva,sans-serif" }
+                { Text: localization.fontNameInherit,  Value: "inherit" },
+                { Text: "Arial", Value: "Arial,Helvetica,sans-serif" },
+                { Text: "Courier New", Value: "'Courier New',Courier,monospace" },
+                { Text: "Georgia", Value: "Georgia,serif" },
+                { Text: "Impact", Value: "Impact,Charcoal,sans-serif" },
+                { Text: "Lucida Console", Value: "'Lucida Console',Monaco,monospace" },
+                { Text: "Tahoma", Value: "Tahoma,Geneva,sans-serif" },
+                { Text: "Times New Roman", Value: "'Times New Roman',Times,serif" },
+                { Text: "Trebuchet MS", Value: "'Trebuchet MS',Helvetica,sans-serif" },
+                { Text: "Verdana", Value: "Verdana,Geneva,sans-serif" }
             ],
             fontSize: [
-                { Text: localization.fontSizeInherit,  Value: 'inherit' },
-                { Text: '1 (8pt)',  Value: 'xx-small' },
-                { Text: '2 (10pt)', Value: 'x-small' },
-                { Text: '3 (12pt)', Value: 'small' },
-                { Text: '4 (14pt)', Value: 'medium' },
-                { Text: '5 (18pt)', Value: 'large' },
-                { Text: '6 (24pt)', Value: 'x-large' },
-                { Text: '7 (36pt)', Value: 'xx-large' }
+                { Text: localization.fontSizeInherit,  Value: "inherit" },
+                { Text: "1 (8pt)",  Value: "xx-small" },
+                { Text: "2 (10pt)", Value: "x-small" },
+                { Text: "3 (12pt)", Value: "small" },
+                { Text: "4 (14pt)", Value: "medium" },
+                { Text: "5 (18pt)", Value: "large" },
+                { Text: "6 (24pt)", Value: "x-large" },
+                { Text: "7 (36pt)", Value: "xx-large" }
             ],
             formatBlock: [
-                { Text: 'Paragraph', Value: 'p' },
-                { Text: 'Quotation', Value: 'blockquote' },
-                { Text: 'Heading 1', Value: 'h1' },
-                { Text: 'Heading 2', Value: 'h2' },
-                { Text: 'Heading 3', Value: 'h3' },
-                { Text: 'Heading 4', Value: 'h4' },
-                { Text: 'Heading 5', Value: 'h5' },
-                { Text: 'Heading 6', Value: 'h6' }
+                { Text: "Paragraph", Value: "p" },
+                { Text: "Quotation", Value: "blockquote" },
+                { Text: "Heading 1", Value: "h1" },
+                { Text: "Heading 2", Value: "h2" },
+                { Text: "Heading 3", Value: "h3" },
+                { Text: "Heading 4", Value: "h4" },
+                { Text: "Heading 5", Value: "h5" },
+                { Text: "Heading 6", Value: "h6" }
             ],
             tools: [
                 "bold",
@@ -612,8 +612,8 @@
         ],
 
         _tools: {
-            undo: { options: { key: 'Z', ctrl: true } },
-            redo: { options: { key: 'Y', ctrl: true } }
+            undo: { options: { key: "Z", ctrl: true } },
+            redo: { options: { key: "Y", ctrl: true } }
         },
 
         value: function (html) {
@@ -623,13 +623,14 @@
 
             this.pendingFormats.clear();
 
+            // handle null value passed as a parameter
             html = html || "";
 
             // Some browsers do not allow setting CDATA sections through innerHTML so we encode them as comments
-            html = html.replace(/<!\[CDATA\[(.*)?\]\]>/g, '<!--[CDATA[$1]]-->');
+            html = html.replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->");
 
             // Encode script tags to avoid execution and lost content (IE)
-            html = html.replace(/<script([^>]*)>(.*)?<\/script>/ig, '<telerik:script $1>$2<\/telerik:script>');
+            html = html.replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script $1>$2<\/telerik:script>");
 
             // Add <br/>s to empty paragraphs in mozilla
             if ($.browser.mozilla)
@@ -637,10 +638,10 @@
 
             if ($.browser.msie && parseInt($.browser.version) < 9) {
                 // Internet Explorer removes comments from the beginning of the html
-                html = '<br/>' + html;
+                html = "<br/>" + html;
 
-                var originalSrc = 'originalsrc',
-                    originalHref = 'originalhref';
+                var originalSrc = "originalsrc",
+                    originalHref = "originalhref";
 
                 // IE < 8 makes href and src attributes absolute
                 html = html.replace(/href\s*=\s*(?:'|")?([^'">\s]*)(?:'|")?/, originalHref + '="$1"');
@@ -649,14 +650,14 @@
                 body.innerHTML = html;
                 dom.remove(body.firstChild);
 
-                $(body).find('telerik\\:script,script,link,img,a').each(function () {
+                $(body).find("telerik\\:script,script,link,img,a").each(function () {
                     var node = this;
                     if (node[originalHref]) {
-                        node.setAttribute('href', node[originalHref]);
+                        node.setAttribute("href", node[originalHref]);
                         node.removeAttribute(originalHref);
                     }
                     if (node[originalSrc]) {
-                        node.setAttribute('src', node[originalSrc]);
+                        node.setAttribute("src", node[originalSrc]);
                         node.removeAttribute(originalSrc);
                     }
                 });
@@ -720,7 +721,7 @@
         },
 
         exec: function (name, params) {
-            var range, body, id, tool = '', pendingTool;
+            var range, body, id, tool = "", pendingTool;
 
             name = name.toLowerCase();
 
@@ -753,7 +754,7 @@
 
                 var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
 
-                this.trigger('execute', { name: name, command: command });
+                this.trigger("execute", { name: name, command: command });
 
                 if (/undo|redo/i.test(name)) {
                     this.undoRedoStack[name]();
@@ -784,7 +785,7 @@
         },
 
         initialize: function($ui, options) {
-            $ui.attr({ unselectable: 'on', title: options.title });
+            $ui.attr({ unselectable: "on", title: options.title });
         },
 
         command: function (commandArguments) {
@@ -821,7 +822,7 @@
                 isFormatted = this.options.finder.isFormatted(nodes),
                 isActive = isPending ? !isFormatted : isFormatted;
 
-            $ui.toggleClass('k-state-active', isActive);
+            $ui.toggleClass("k-state-active", isActive);
         }
     });
 
