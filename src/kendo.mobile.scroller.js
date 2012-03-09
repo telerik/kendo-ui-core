@@ -161,6 +161,7 @@
 
             element
                 .css("overflow", "hidden")
+                .addClass("km-scroll-wrapper")
                 .wrapInner('<div class="km-scroll-container"/>');
 
             var inner = element.children().first(),
@@ -175,8 +176,9 @@
                 }),
 
                 drag = new kendo.Drag(element, {
-                    start: function() {
+                    start: function(e) {
                         boundary.refresh();
+                        drag.capture();
                     }
                 }),
 
