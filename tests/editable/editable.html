@@ -12,6 +12,8 @@
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js" ></script>
         <script src="../../src/kendo.numerictextbox.js" ></script>
+        <script src="../../src/kendo.list.js" ></script>
+        <script src="../../src/kendo.dropdownlist.js" ></script>
         <script src="../../src/kendo.validator.js"></script>
         <script src="../../src/kendo.editable.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
@@ -209,6 +211,51 @@
                     });
 
                 ok(wasCalled);
+            });
+
+            test("custom editor is bind by name", function() {
+                var model = kendo.observable({ foo: "bar" }),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: function(container) {
+                                container.append($('<input name="foo" />'));
+                            }
+                        },
+                        model: model
+                    });
+
+                equal(div.find("input").val(), "bar");
+            });
+
+            test("custom editor name binding is added to already existing", function() {
+                var model = kendo.observable({ foo: "bar", items: ["foo", "bar"] }),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: function(container) {
+                                container.append($('<select name="foo" data-bind="source:items"/>'));
+                            }
+                        },
+                        model: model
+                    });
+
+                equal(div.find("select").val(), "bar");
+            });
+
+            test("custom editor widget is bind by name", function() {
+                var model = kendo.observable({ foo: "bar", items: ["foo", "bar"] }),
+                    editable = setup({
+                        fields: {
+                            field: "foo",
+                            editor: function(container) {
+                                container.append($('<select data-role="dropdownlist" name="foo" data-bind="source:items"/>'));
+                            }
+                        },
+                        model: model
+                    });
+
+                equal(div.find("select").data("kendoDropDownList").value(), "bar");
             });
 
             test("input[type=text] is created for field with type set to date", function() {
