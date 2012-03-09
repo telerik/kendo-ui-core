@@ -239,6 +239,12 @@
 
                 observable.foo.push(1);
             });
+
+            test("DataSource is not wrapped if set as ViewModel property",function() {
+                var observable = kendo.observable({ dataSource: new kendo.data.DataSource() });
+
+                ok(!(observable.dataSource instanceof kendo.data.ObservableObject))
+            });
         </script>
     </head>
 </html>
