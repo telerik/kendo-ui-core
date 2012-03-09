@@ -289,6 +289,7 @@
                 $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showSource, that));
                 $(".ktb-action-show-import").on(CLICK, proxy(that.showImport, that));
                 $(".ktb-action-back").on(CLICK, proxy(that.hideOverlay, that));
+                $(".ktb-action-import").on(CLICK, proxy(that.importTheme, that));
             },
             showSource: function(e) {
                 e.preventDefault();
@@ -306,6 +307,21 @@
 
                 $("#import-overlay").slideDown()
                         .find("textarea").val("/*************************\n * paste LESS or CSS here *\n *************************/").select();
+            },
+            importTheme: function(e) {
+                e.preventDefault();
+
+                var themeContent = $(e.target).closest(".ktb-view").find("textarea").val();
+
+                if (lessConstantPairRe.test(themeContent)) {
+                    this.constants.deserialize(themeContent);
+                } else {
+                    this.updateStyleSheet(themeContent);
+
+                    this.constants.infer();
+                }
+
+                this._propertyChange({});
             },
             hideOverlay: function(e) {
                 e.preventDefault();
