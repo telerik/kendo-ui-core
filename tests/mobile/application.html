@@ -333,49 +333,6 @@
                 });
             }
 
-            asyncTest("Raises start pull to half of the screen", 1, function() {
-                setup('<div data-role="view" id="page1"><div style="height:300px">View</div></div><div id="page2" data-role="view"></div>');
-
-                var drag = application.view.scroller.drag;
-
-                application.view.scroller.handlePull({
-                    offset: 100,
-                    startPull: function() {
-                        start();
-                        ok(true);
-                    }
-                })
-
-                drag.trigger("start", drag);
-                drag.y.delta = 200;
-                drag.trigger("move", drag);
-            });
-
-            asyncTest("Raises cancel pull when releasing back", 2, function() {
-                setup('<div data-role="view" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
-
-                var drag = application.view.scroller.drag;
-
-                application.view.scroller.handlePull({
-                    offset: 100,
-                    startPull: function() {
-                        ok(true);
-                    },
-                    cancelPull: function() {
-                        start();
-                        ok(true);
-                    }
-                })
-
-                drag.trigger("start", drag);
-
-                drag.y.delta = 200;
-                drag.trigger("move", drag);
-
-                drag.y.delta = -170;
-                drag.trigger("move", drag);
-            });
-
             asyncTest("Raises pull when pulled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
