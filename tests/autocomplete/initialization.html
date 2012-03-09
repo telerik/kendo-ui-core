@@ -126,6 +126,34 @@
                 ok(autocomplete.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
+            test("resetting dataSource detaches the previouse events", function() {
+                var autocomplete = new AutoComplete($("<input/>"));
+
+                var dataSource = autocomplete.dataSource;
+
+                autocomplete._dataSource();
+
+                autocomplete.bind("dataBound", function() {
+                    ok(false, "Change event is not detached");
+                });
+
+                dataSource.read();
+            });
+
+            test("resetting DataSource rebinds the widget", function() {
+                var autocomplete = new AutoComplete($("<input/>"),{
+                    dataTextField: "text"
+                });
+
+                var dataSource = new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                });
+
+                autocomplete.setDataSource(dataSource);
+
+                strictEqual(autocomplete.dataSource, dataSource);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

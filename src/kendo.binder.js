@@ -673,7 +673,12 @@
                     widget.bind("dataBound", that._dataBound);
 
                     if (widget.dataSource instanceof kendo.data.DataSource) {
-                        widget.dataSource.data(that.bindings.source.get());
+                        var source = this.bindings.source.get();
+                        if (source instanceof kendo.data.DataSource) {
+                            widget.setDataSource(source);
+                        } else {
+                            widget.dataSource.data(source);
+                        }
                     }
                 }
             },
