@@ -71,7 +71,7 @@
         wrap: function(object) {
             var that = this;
 
-            if (isPlainObject(object)) {
+            if (toString.call(object) === "[object Object]" && !(object instanceof ObservableObject)) {
                 object = new that.type(object);
 
                 object.bind(CHANGE, function(e) {
