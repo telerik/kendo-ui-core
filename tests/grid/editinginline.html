@@ -216,6 +216,19 @@
                 ok(tr.find("td:eq(1) > input").length);
             });
 
+            test("editRow editors for columns without field are not created", function() {
+                var grid = setup({
+                        columns: [{ template: "foo" }, "name"],
+                        editable: "inline"
+                    }),
+                    tr = table.find("tr:first");
+
+                grid.editRow(tr);
+                ok(!tr.find("td:first > input").length);
+                equal(tr.find("td:first").text(), "foo");
+                ok(tr.find("td:eq(1) > input").length);
+            });
+
             test("cancelRow switch edited row in display mode", function() {
                 var grid = setup({ columns: ["foo", "name"], editable: "inline" }),
                     tr = table.find("tr:first");

@@ -85,6 +85,20 @@
                 ok(!cell.hasClass("k-edit-cell"));
             });
 
+            test("clicking edit command cell does not switch to edit mode in cell edit mode", function() {
+                setup({ columns: [{ command: "edit" }] });
+                var cell = table.find("td:last").click();
+
+                ok(!cell.hasClass("k-edit-cell"));
+            });
+
+            test("clicking custom button does not switch cell to edit mode", function() {
+                setup({ columns: [{ template: '<a href="\\#">Custom</a>' }] });
+                var cell = table.find("td:last a").click();
+
+                ok(!cell.hasClass("k-edit-cell"));
+            });
+
             test("editing cell passes column field to Editable", function() {
                 setup({ columns: ["foo", "name"] });
                 var cell = table.find("td:first").click();
