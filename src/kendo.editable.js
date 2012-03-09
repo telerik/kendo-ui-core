@@ -100,7 +100,8 @@
                 fieldName = isObject ? field.field : field,
                 model = that.options.model || {},
                 type = fieldType(modelField),
-                editor = isObject && field.editor ? field.editor : editors[type],
+                isCustomEditor = isObject && field.editor,
+                editor = isCustomEditor ? field.editor : editors[type],
                 container = that.element.find("[data-container-for=" + fieldName + "]");
 
             editor = editor ? editor : editors["string"];
@@ -108,6 +109,19 @@
             if (modelField) {
                 container = container.length ? container : that.element;
                 editor(container, extend(true, {}, isObject ? field : { field: fieldName }, { model: model }));
+
+                if (isCustomEditor) {
+                    container.find(":input:not(:button), select").each(function() {
+                        var bindAttr = kendo.attr("bind"),
+                            binding = this.getAttribute(bindAttr) || "";
+
+                        if (binding.indexOf("value:") === -1) {
+                            binding += ",value:" + fieldName;
+
+                            $(this).attr(bindAttr, binding);
+                        }
+                    });
+                }
            }
         },
 
