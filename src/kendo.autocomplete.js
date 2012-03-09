@@ -319,7 +319,7 @@
 
             that._accessors();
 
-            that.dataSource = DataSource.create(that.options.dataSource).bind(CHANGE, proxy(that.refresh, that));
+            that._dataSource();
 
             element[0].type = "text";
             wrapper = that.wrapper;
@@ -367,6 +367,26 @@
             separator: null,
             placeholder: ""
         },
+
+        _dataSource: function() {
+            var that = this;
+
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
+            } else {
+                that._refreshHandler = proxy(that.refresh, that);
+            }
+
+            that.dataSource = DataSource.create(that.options.dataSource)
+                .bind(CHANGE, that._refreshHandler);
+        },
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+        },
+
         events: [
         /**
         * Fires when the drop-down list is opened
