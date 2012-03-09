@@ -28,7 +28,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>849d7668-000c-4cc5-a0b0-c9ee5b0facb5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7ff33e8e-9cbb-45a0-9ebd-60e2857c28c4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -65,7 +65,7 @@
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>97195e95-cdff-4f6f-bab3-2adb60f712ef</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>6491d790-4323-46e4-9cbd-90a38cdf0db2</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:VisibleVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -155,7 +155,7 @@
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>95f015c4-7f37-49e9-a9d7-c2fba98083a0</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>83b28281-24d7-41dd-b5c4-120750a2b6bc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -227,52 +227,22 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>PickRangecalqjmc0.pv1</d2p1:StepImageKey>
+      <d2p1:StepImageKey>PickRangenaovabft.mqu</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
+      <d2p1:Description>Click 'FridayLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>113e6d34-3a58-40ef-8865-ae2fd8068143</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>500</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>PickRangemtw40if3.e53</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'FridayLink1'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>f436f517-8aff-4d0a-9647-9e9ddde975b5</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>047f44c2-6a65-4f80-a562-6477c9b4f389</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -298,14 +268,14 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TagIndex=a:158</Clause>
+                          <Clause>TagIndex=a:164</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>FridayLink1</Name>
+                <Name>FridayLink</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -341,37 +311,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>PickRange4axnz4rb.ctv</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>4ad88097-704d-4296-82f4-44be8def0176</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>500</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>PickRangesi4kwgrb.5du</d2p1:StepImageKey>
+      <d2p1:StepImageKey>PickRangenba0qfzo.mwo</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -381,10 +321,10 @@
       <d2p1:Description>Click 'SelectSpan0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
+      <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>dd2317e3-03d1-4d88-bb90-b1b669f7881b</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>968ba889-3d87-49be-ae45-620fa30fb5d8</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -456,22 +396,22 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>PickRange3pbi3eif.kyz</d2p1:StepImageKey>
+      <d2p1:StepImageKey>PickRangegbl5ll3a.lww</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'SundayLink2'</d2p1:Description>
+      <d2p1:Description>Click 'SundayLink'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
+      <d2p1:Order>6</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>452d29ce-41f2-480d-bf3d-bfe888274719</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>d9a1eec9-0b56-46cd-9307-35d6d7fabd3b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -497,14 +437,14 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TagIndex=a:153</Clause>
+                          <Clause>TagIndex=a:159</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>SundayLink2</Name>
+                <Name>SundayLink</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -540,126 +480,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>PickRangejuzzjvkx.i2m</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>9</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>fd597061-e222-4a4a-83be-4563e263ec8b</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="SleepActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <WaitTime>500</WaitTime>
-      </d2p1:Step>
-      <d2p1:StepImageKey>PickRangedrgrnu1v.jdp</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for textbox 'EndText' content 'Contains' '9/30/2012'.</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>10</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>f2e5806c-f71a-47bc-bcba-9b5768a9f925</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>TargetKey1</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[2]/div[1]/input[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>id=end</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagname=input</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>EndText</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputText</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>TargetKey1</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>RangeSelection</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/live/datepicker/rangeselection.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Range selection</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Wait</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:CheckInterval>500</d2p1:CheckInterval>
-        <d2p1:DataBindVariableName i:nil="true" />
-        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
-        <d2p1:Timeout>10000</d2p1:Timeout>
-        <CompareType>Contains</CompareType>
-        <ExpectedValue>9/30/2012</ExpectedValue>
-      </d2p1:Step>
-      <d2p1:StepImageKey>PickRange3ebx0hsv.c31</d2p1:StepImageKey>
+      <d2p1:StepImageKey>PickRangeukzcnsdk.abv</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -669,10 +490,10 @@
       <d2p1:Description>Wait for textbox 'StartText' content 'Contains' '9/30/2011'.</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>11</d2p1:Order>
+      <d2p1:Order>7</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>0ccc70b3-858f-4bd6-b858-b9074f373e4d</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>7549de92-e308-4507-b71d-ccac92e6bcc9</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="InputTextBoxVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">

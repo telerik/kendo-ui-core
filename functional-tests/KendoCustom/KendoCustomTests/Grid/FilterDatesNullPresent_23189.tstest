@@ -28,7 +28,7 @@
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>a9e6bead-5061-4600-8491-fc6673ea0495</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>bf448325-5063-41ef-9ea5-48516f64c9f5</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -59,13 +59,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'Span'</d2p1:Description>
+      <d2p1:Description>Click 'Span0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>760c3e64-697b-47ad-8518-e9c8eda1c357</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>ede02819-4fc1-4b8b-9f1c-29dee924098f</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -103,7 +103,7 @@
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>Span</Name>
+                <Name>Span0</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -114,12 +114,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>GridVirtualizationUsing3</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/functional-tests/KendoCustom/KendoCustomSites/grid/GroupDates.html</d2p1:Path>
+                <d2p1:FriendlyName>GridVirtualizationUsing8</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDates.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Grid virtualization using local data</d2p1:Title>
               </Page>
@@ -139,21 +139,21 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterdatesNullPresentbka4wu3d.ujf</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterDatesNullPresent_23189dkpyrjuz.3d3</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>KendoInputvalue '02/02/2011' entered.</d2p1:Description>
+      <d2p1:Description>Enter text '02/02/2011' in 'Filters0ValueText'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>3</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>403a96a0-5093-4962-9727-5ef878cc1f72</d2p1:Runtime_x0020_ID>
-      <d2p1:Step xmlns:d4p1="http://schemas.datacontract.org/2004/07/Telerik.TestStudio.Translators.KendoUI.Input" i:type="d4p1:KendoInputTypeAction">
+      <d2p1:Runtime_x0020_ID>bb674401-e90b-443a-b477-19c8bbe5db7f</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:SetTextActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
             <d6p1:KeyValueOfstringstring>
@@ -166,11 +166,11 @@
         <d2p1:EditorType />
         <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
           <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>KendoInput</d5p1:Key>
+            <d5p1:Key>textTarget</d5p1:Key>
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[6]/form[1]/div[1]/span[2]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/span[2]/span[1]/input[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -178,30 +178,30 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TagIndex=span:25</Clause>
+                          <Clause>TagIndex=input:4</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>Span0</Name>
+                <Name>Filters0ValueText</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
               <FindInfo i:nil="true" />
               <Frame i:nil="true" />
-              <HtmlControlType>Telerik.TestingFramework.Controls.KendoUI.KendoInput</HtmlControlType>
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlInputText</HtmlControlType>
               <IsIndependent>false</IsIndependent>
-              <Name>KendoInput</Name>
+              <Name>textTarget</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>GridVirtualizationUsing3</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/functional-tests/KendoCustom/KendoCustomSites/grid/GroupDates.html</d2p1:Path>
+                <d2p1:FriendlyName>GridVirtualizationUsing8</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDates.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Grid virtualization using local data</d2p1:Title>
               </Page>
@@ -219,14 +219,19 @@
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <CustomPrefix i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/Telerik.TestStudio.Translators.KendoUI.Common" />
-        <d4p1:ClearBeforeTyping>false</d4p1:ClearBeforeTyping>
-        <d4p1:InputValue>02/02/2011</d4p1:InputValue>
-        <d4p1:KeyHoldTime>50</d4p1:KeyHoldTime>
-        <d4p1:KeyPressTime>50</d4p1:KeyPressTime>
-        <d4p1:UseClientApi>false</d4p1:UseClientApi>
+        <d2p1:IsPassword>false</d2p1:IsPassword>
+        <d2p1:KeyHoldTime>100</d2p1:KeyHoldTime>
+        <d2p1:RawText>02/02/2011</d2p1:RawText>
+        <d2p1:SimulateRealTyping>false</d2p1:SimulateRealTyping>
+        <d2p1:TypingInfo xmlns:d5p1="http://schemas.datacontract.org/2004/07/ArtOfTest.Common.Design">
+          <d5p1:_caretPosition>10</d5p1:_caretPosition>
+          <d5p1:_elementText>02/02/2011</d5p1:_elementText>
+          <d5p1:_isTextArea>false</d5p1:_isTextArea>
+          <d5p1:_typedText>02/02/2011</d5p1:_typedText>
+        </d2p1:TypingInfo>
+        <d2p1:TypingSpeed>50</d2p1:TypingSpeed>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterdatesNullPresentdxsk5pcb.guq</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterDatesNullPresent_23189qsw3plqe.tvp</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -239,7 +244,7 @@
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>2a536eda-5027-470a-86c7-bb8c613a7927</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>db781033-943a-4305-a2fe-0b7fee55a5bc</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -257,7 +262,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[6]/form[1]/div[1]/button[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[4]/form[1]/div[1]/button[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -283,12 +288,12 @@
               <Name>target</Name>
               <Page i:type="d2p1:PageUri">
                 <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>GridVirtualizationUsing3</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/functional-tests/KendoCustom/KendoCustomSites/grid/GroupDates.html</d2p1:Path>
+                <d2p1:FriendlyName>GridVirtualizationUsing8</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDates.html</d2p1:Path>
                 <d2p1:Query />
                 <d2p1:Title>Grid virtualization using local data</d2p1:Title>
               </Page>
@@ -308,99 +313,7 @@
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>FilterdatesNullPresentexv5h1el.2ps</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for 'TextContent' 'Contains' '02.02.2011' on 'x02022011TableCell'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>d9d0aad5-4e89-469d-9627-5d03bba3cd06</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>textTarget</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[4]/table[1]/tbody[1]/tr[1]/td[2]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops>
-                        <d5p1:int>1</d5p1:int>
-                      </ChainStops>
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>id=grid</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagIndex=td:1</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>x02022011TableCell</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>textTarget</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl />
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>GridVirtualizationUsing3</d2p1:FriendlyName>
-                <d2p1:Path>http://aggeorgiev/kendo/functional-tests/KendoCustom/KendoCustomSites/grid/GroupDates.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Grid virtualization using local data</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Wait</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:CheckInterval>500</d2p1:CheckInterval>
-        <d2p1:DataBindVariableName i:nil="true" />
-        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
-        <d2p1:Timeout>10000</d2p1:Timeout>
-        <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>02.02.2011</d2p1:ExpectedString>
-        <d2p1:SegmentType>TextContent</d2p1:SegmentType>
-      </d2p1:Step>
-      <d2p1:StepImageKey>FilterdatesNullPresentom5ydsg5.zsg</d2p1:StepImageKey>
+      <d2p1:StepImageKey>FilterDatesNullPresent_23189kmz1wkpf.3yb</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -410,10 +323,10 @@
       <d2p1:Description>Wait for 'TextContent' 'Contains' 'clear' on 'InfoDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
+      <d2p1:Order>5</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>e9d6dcc3-79c9-4c12-b9a9-21ea74d28dab</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b1f6d7eb-7386-4b2d-9ca9-9b7d59d62b38</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
