@@ -143,15 +143,32 @@
                     type: "DELETE"
                 },
                 parameterMap: function(options, type) {
-                    type = type || "read";
-
                     var params = {
                             $format: "json",
                             $inlinecount: "allpages"
                         },
+                        field,
+                        value,
                         option,
-                        dataType = (this.options || defaultDataType)[type].dataType;
+                        dataType;
 
+                    type = type || "read";
+                    if (type === "destroy") {
+                        return;
+                    }
+
+                    if (type !== "read") {
+                        for (field in options) {
+                            value = options[field];
+                            if (typeof value === "number") {
+                                options[field] = value + "";
+                            }
+                        }
+
+                        return kendo.stringify(options);
+                    }
+
+                    dataType = (this.options || defaultDataType)[type].dataType;
                     options = options || {};
 
                     for (option in options) {
