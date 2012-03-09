@@ -71,8 +71,10 @@
         wrap: function(object) {
             var that = this;
 
-            if (object !== null && toString.call(object) === "[object Object]" && !(object instanceof ObservableObject)) {
-                object = new that.type(object);
+            if (toString.call(object) === "[object Object]") {
+                if (!(object instanceof ObservableObject)) {
+                    object = new that.type(object);
+                }
 
                 object.bind(CHANGE, function(e) {
                     that.trigger(CHANGE, {
@@ -286,8 +288,11 @@
             var that = this,
                 type = toString.call(object);
 
-            if (object !== null && type === "[object Object]" && !(object instanceof ObservableObject)) {
-                object = new ObservableObject(object);
+            if (type === "[object Object]" ) {
+
+                if (!(object instanceof ObservableObject)) {
+                    object = new ObservableObject(object);
+                }
 
                 (function(field) {
                     object.bind(GET, function(e) {
