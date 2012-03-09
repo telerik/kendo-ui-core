@@ -58,7 +58,7 @@
                 application = new kendo.mobile.Application($("#qunit-fixture"), options);
             }
 
-            test("navigate to remote view silently on ready", function() {
+            test("Navigates to remote view silently on ready", function() {
                 location.hash = "#../../test1";
 
                 setup('<div data-role="view" id="test1">Page 1</div><div data-url="../../test1" data-role="view" id="page2">Page 2</div>');
@@ -81,7 +81,7 @@
                 equal($("#qunit-fixture").has("#page2").length, 1, "Remote view is inserted in the application DOM element");
             }
 
-            asyncTest("loads remote view", 2, function() {
+            asyncTest("Loads remote view", 2, function() {
                 $.mockjax({
                     url: "page2.html",
                     responseText: '<body><div data-init="remoteViewInit" data-show="remoteViewShow" data-role="view" id="page2">Page 2</div></body>'
@@ -97,7 +97,7 @@
                 equal($("#qunit-fixture").has("#page3").length, 1, "Secondary view is inserted in the application DOM element");
             }
 
-            asyncTest("loads multiple remote views in document", 1, function() {
+            asyncTest("Loads multiple remote views in document", 1, function() {
 
                 $.mockjax({
                     url: "page2.html",
@@ -110,7 +110,7 @@
 
             });
 
-            asyncTest("deals with various newline characters when loading remote view", 1, function() {
+            asyncTest("Deals with various newline characters when loading remote view", 1, function() {
                 setup('<div data-role="view" id="page1">Page 1</div>');
 
                 $.mockjax({
@@ -121,7 +121,7 @@
                 application.navigate("page2.html");
             });
 
-            test("calls init when a view is changed", function() {
+            test("Calls init when a view is changed", function() {
                 expect(1);
 
                 setup('<div data-role="view" id="page1">Page 1</div><div data-role="view" id="page2">Page 2</div>');
@@ -133,7 +133,7 @@
                 equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
             });
 
-            test("calls init when started", function() {
+            test("Calls init when started", function() {
                 expect(1);
 
                 stub(kendo.mobile, "init");
@@ -143,12 +143,12 @@
                 equal(kendo.mobile.calls("init"), 1, "Calls kendo.mobile.init");
             });
 
-            test("uses content container if present", function() {
+            test("Uses content container if present", function() {
                 setup('<div data-role="view" id="page1"><div data-role="content">Header</div></div>');
                 equal($("#page1").find("[data-role=content]").length, 1);
             });
 
-            test("uses layout header if specified", function() {
+            test("Uses layout header if specified", function() {
             setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
                     <div data-role="layout" data-id="foo"><div data-role="header">header</div></div> \
                  ');
@@ -156,7 +156,7 @@
                 equal(application.element.find(".km-header").text(), "header", "Layout header is present");
             });
 
-            test("uses layout footer if specified", function() {
+            test("Uses layout footer if specified", function() {
             setup('<div data-layout="foo" data-role="view" id="page1">Page 1</div> \
                     <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
                  ');
@@ -164,7 +164,7 @@
                 equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
             });
 
-            test("allows layout header/footer overriding", function() {
+            test("Allows layout header/footer overriding", function() {
             setup('<div data-layout="foo" data-role="view" id="page1">Page 1<div data-role="header">custom header</div><div data-role="footer">custom footer</div></div> \
                     <div data-role="layout" data-id="foo"><div data-role="header">header</div><div data-role="footer">footer</div></div> \
                  ');
@@ -173,7 +173,7 @@
                 equal(application.element.find(".km-footer").text(), "custom footer", "Custom footer is present");
             });
 
-            test("applied default layout if passed", function() {
+            test("Applies default layout if passed", function() {
             setup('<div data-role="view" id="page1">Page 1</div> \
                     <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
                     ', { layout: "foo" });
@@ -181,7 +181,7 @@
                 equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
             });
 
-            test("overrides default layout if none specified", function() {
+            test("Overrides default layout if none specified", function() {
             setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
                     <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
                     ', { layout: "foo" });
@@ -189,7 +189,7 @@
                 equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
             });
 
-            test("cache only platform specific layouts", function() {
+            test("Caches only platform specific layouts", function() {
                 setup('<div data-role="view" id="page1">Page 1</div> \
                     <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \
                     <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
@@ -231,7 +231,7 @@
                     equal(e.view.params.foo, "bar");
             };
 
-            test("passes url params to the view show event", function() {
+            test("Passes url params to the view show event", function() {
                 setup('<div data-role="view" id="page1">Page 1</div><div data-show="checkViewParams" id="page2" data-role="view"></div>');
                 application.navigate("#page2?foo=bar");
             });
@@ -260,7 +260,7 @@
                 equal(loader.text(), "Custom text");
             });
 
-            asyncTest("Do not show loader if options.loading is false", function() {
+            asyncTest("Does not show loader if options.loading is false", function() {
                 setup('<div data-role="view">Page 1</div>', {
                     loading: false
                 });
@@ -274,7 +274,7 @@
             });
 
             if (kendo.support.mobileOS.android) {
-                test("append precomposed icon meta link", function() {
+                test("Appends precomposed icon meta link", function() {
                     setup('<div data-role="view" id="test1">Page 1</div>', {
                         icon: "icon.png"
                     });
@@ -286,7 +286,7 @@
                     equal(link.attr("sizes"), undefined);
                 });
 
-                test("append multiple icons", function() {
+                test("Appends multiple icons", function() {
                     setup('<div data-role="view" id="test1">Page 1</div>', {
                         icon: {
                             "76x76": "icon76.png",
@@ -303,7 +303,7 @@
                     equal(links.eq(1).attr("sizes"), "76x76");
                 });
             } else {
-                test("append icon meta link", function() {
+                test("Appends icon meta link", function() {
                     setup('<div data-role="view" id="test1">Page 1</div>', {
                         icon: "icon.png"
                     });
@@ -354,7 +354,7 @@
                 drag.trigger("end", drag);
             });
 
-            test("view notifies widget on init", 1, function(){
+            test("View notifies widget on init", 1, function(){
                 var Foo = kendo.mobile.ui.Widget.extend({
                     options: {
                         name: "Foo"
@@ -369,7 +369,7 @@
                 setup('<div data-role="view"><i data-role="foo" /></div>');
             });
 
-            test("view notifies widget on show", 1, function(){
+            test("View notifies widget on show", 1, function(){
                 var Foo = kendo.mobile.ui.Widget.extend({
                     options: {
                         name: "Foo"
@@ -388,15 +388,15 @@
                 ok(true);
             }
 
-            test("layout triggers init", 1, function() {
+            test("Layout triggers init", 1, function() {
                 setup('<div data-role="view"></div><div data-role="layout" data-init="success" />');
             });
 
-            test("layout triggers show", 1, function() {
+            test("Layout triggers show", 1, function() {
                 setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-show="success" />');
             });
 
-            test("load initial view depending on options", function() {
+            test("Loads initial view depending on options", function() {
                 setup('<div data-role="view" id="test1">Page 1</div><div data-role="view" id="page2">Page 2</div>', {
                     initial: "page2"
                 });
