@@ -833,21 +833,6 @@
     background-color: #fff;
 }
 
-.km-android input[type=text],
-.km-android input[type=date],
-.km-android input[type=time],
-.km-android input[type=datetime]
-{
-    .user-select(text);
-}
-
-.km-android input[readonly]
-{
-    .user-select(none);
-}
-
-/* Workaround for the Android 2 broken select */
-
 .km-android .km-select
 {
     margin-top: -.6em;
@@ -898,3 +883,9 @@
 {
     background: rgba(51,181,229,.6);
 }
+
+.km-android .k-list-container .k-item
+{
+    line-height: 3em;
+}
+

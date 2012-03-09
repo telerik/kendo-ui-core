@@ -14,7 +14,7 @@
         lastDropTarget,
         START_EVENTS = "mousedown",
         MOVE_EVENTS = "mousemove",
-        END_EVENTS = "mouseup mouseleave";
+        END_EVENTS = "mouseup mouseleave",
         KEYUP = "keyup",
 
         // Draggable events
@@ -151,7 +151,7 @@
             element = $(element);
             Observable.fn.init.call(that);
 
-            var eventMap = {};
+            eventMap = {};
 
             eventMap[addNS(MOVE_EVENTS, ns)] = proxy(that._move, that);
             eventMap[addNS(END_EVENTS, ns)] = proxy(that._end, that);
@@ -168,7 +168,7 @@
 
             element
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
-                .on("mousedown dragstart selectstart", that.filter, preventDefault);
+                .on("dragstart", that.filter, preventDefault);
 
             that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
 

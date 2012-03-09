@@ -11,18 +11,18 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.all.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.blackberry.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
     <script src="../../../src/kendo.data.js"></script>
     <script src="../../../src/kendo.history.js"></script>
     <script src="../../../src/kendo.mobile.core.js"></script>
     <script src="../../../src/kendo.mobile.button.js"></script>
     <script src="../../../src/kendo.mobile.switch.js"></script>
-    <script src="../../../src/kendo.mobile.swipe.js"></script>
     <script src="../../../src/kendo.mobile.scroller.js"></script>
     <script src="../../../src/kendo.mobile.buttongroup.js"></script>
     <script src="../../../src/kendo.mobile.navbar.js"></script>
@@ -88,7 +88,7 @@
         }
     </style>
 </head>
-<body>
+<body class="km-blackberry">
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
@@ -149,7 +149,6 @@
 
         $("select")
                 .addClass("km-select")
-                .append(os && os.ios ? "<option value='cancel'>Cancel</option>" : "")
                 .kendoDropDownList(options);
 
         if (os && os.ios) {
