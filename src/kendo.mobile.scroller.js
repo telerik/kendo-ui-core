@@ -207,8 +207,34 @@
             boundary.refresh();
         },
 
+        options: {
+            name: "Scroller",
+            pullOffset: 140,
+            pullTemplate: "Pull to refresh",
+            releaseTemplate: "Release to refresh",
+            refreshTemplate: "Refreshing"
+        },
+
         reset: function() {
             this.move.moveTo({x: 0, y: 0});
+        },
+
+        handlePull: function(options) {
+            var that = this;
+
+            that.pullTemplate = kendo.template(options.pullTemplate || that.options.pullTemplate);
+            that.releaseTemplate = kendo.template(options.releaseTemplate || that.options.releaseTemplate);
+            that.refreshTemplate = kendo.template(options.refreshTemplate || that.options.refreshTemplate);
+
+            that.pullOffset = options.pullOffset || that.options.pullOffset;
+            that.pullCallback = options.pull;
+
+            that.scrollElement.prepend('<span class="km-scroller-pull"><span class="km-icon"></span><span class="km-template">' + that.pullTemplate({}) + '</span></span>');
+            that.refreshHint = that.scrollElement.children().first();
+            that.hintContainer = that.refreshHint.children(".km-template");
+
+            that.draggable.y.bind("change", proxy(that._draggableChange, that));
+            that.drag.bind("end", proxy(that._dragEnd, that));
         },
 
         pullHandled: function() {
@@ -219,42 +245,34 @@
             that.xinertia.onEnd();
         },
 
-        handlePull: function(options) {
-            var that = this,
-                pullTemplate = kendo.template(options.pullTemplate || that.options.pullTemplate),
-                releaseTemplate = kendo.template(options.releaseTemplate || that.options.releaseTemplate),
-                refreshTemplate = kendo.template(options.refreshTemplate || that.options.refreshTemplate),
-                offset = 140;
+        _dragEnd: function() {
+            var that = this;
 
-            that.pullTemplate = pullTemplate;
+            if(!that.pulled) {
+                return;
+            }
 
-            that.scrollElement.prepend('<span class="km-scroller-pull"><span class="km-icon"></span><span class="km-template">' + pullTemplate({}) + 'pull</span></span>');
-            that.refreshHint = that.scrollElement.children().first();
-            that.refreshTemplate = that.refreshHint.children(".km-template");
+            that.pulled = false;
+            that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
+            that.hintContainer.html(that.refreshTemplate({}));
+            that.pullCallback();
+            that.yinertia.freeze(that.pullOffset / 2);
+        },
 
-            that.draggable.y.bind("change", function() {
-                if (that.move.y / OUT_OF_BOUNDS_FRICTION > offset) {
-                    if (!that.pulled) {
-                        that.pulled = true;
-                        that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
-                        that.refreshTemplate.html(releaseTemplate({}));
-                    }
-                } else if (that.pulled) {
-                    that.pulled = false;
-                    that.refreshHint.removeClass(RELEASECLASS);
-                    that.refreshTemplate.html(pullTemplate({}));
+        _draggableChange: function() {
+            var that = this;
+
+            if (that.move.y / OUT_OF_BOUNDS_FRICTION > that.pullOffset) {
+                if (!that.pulled) {
+                    that.pulled = true;
+                    that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
+                    that.hintContainer.html(that.releaseTemplate({}));
                 }
-            });
-
-            that.drag.bind("end", function() {
-                if(that.pulled) {
-                    that.pulled = false;
-                    that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
-                    that.refreshTemplate.html(refreshTemplate({}));
-                    options.pull();
-                    that.yinertia.freeze(offset / 2);
-                }
-            });
+            } else if (that.pulled) {
+                that.pulled = false;
+                that.refreshHint.removeClass(RELEASECLASS);
+                that.hintContainer.html(that.pullTemplate({}));
+            }
         },
 
         _initAxis: function(axis) {
@@ -285,13 +303,6 @@
             draggable.bind(CHANGE, function() {
                 scrollBar.show();
             });
-        },
-
-        options: {
-            name: "Scroller",
-            pullTemplate: "Pull to refresh",
-            releaseTemplate: "Release to refresh",
-            refreshTemplate: "Refreshing"
         }
     });
 
