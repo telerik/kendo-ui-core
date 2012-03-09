@@ -662,7 +662,7 @@
 
 /* Pull to refresh */
 
-.km-listview-pull
+.km-scroller-pull
 {
     width: 100%;
     display: block;
@@ -673,14 +673,14 @@
     .transform(translate3d(0,-60px,0));
 }
 
-.km-listview-pull .km-template
+.km-scroller-pull .km-template
 {
     display: inline-block;
     width: 200px;
     text-align: left;
 }
 
-.km-root .km-listview-pull .km-icon
+.km-root .km-scroller-pull .km-icon
 {
     display: inline-block;
     height: 2em;
@@ -691,12 +691,12 @@
     .pTransition(~"transform 300ms linear");
 }
 
-.km-root .km-listview-release .km-icon
+.km-root .km-scroller-release .km-icon
 {
     .transform(rotate(180deg));
 }
 
-.km-root .km-listview-refresh .km-icon
+.km-root .km-scroller-refresh .km-icon
 {
     .transition(none);
 }
@@ -980,7 +980,7 @@
 }
 
 .km-loader .km-loading,
-.km-listview-refresh .km-icon
+.km-scroller-refresh .km-icon
 {
     background-color: #fff;
     -webkit-animation: km-spin 1s infinite linear;

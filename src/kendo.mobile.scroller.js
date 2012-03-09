@@ -12,6 +12,8 @@
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
         OUT_OF_BOUNDS_FRICTION = 0.5,
+        RELEASECLASS = "km-scroller-release",
+        REFRESHCLASS = "km-scroller-refresh",
         CHANGE = "change";
 
     var DragInertia = Animation.extend({
@@ -210,29 +212,47 @@
         },
 
         pullHandled: function() {
-            this.yinertia.onEnd();
-            this.xinertia.onEnd();
+            var that = this;
+            that.refreshHint.removeClass(REFRESHCLASS);
+            that.refreshTemplate.html(that.pullTemplate({}));
+            that.yinertia.onEnd();
+            that.xinertia.onEnd();
         },
 
         handlePull: function(options) {
-            var that = this;
+            var that = this,
+                pullTemplate = kendo.template(options.pullTemplate || that.options.pullTemplate),
+                releaseTemplate = kendo.template(options.releaseTemplate || that.options.releaseTemplate),
+                refreshTemplate = kendo.template(options.refreshTemplate || that.options.refreshTemplate),
+                offset = 140;
+
+            that.pullTemplate = pullTemplate;
+
+            that.scrollElement.prepend('<span class="km-scroller-pull"><span class="km-icon"></span><span class="km-template">' + pullTemplate({}) + 'pull</span></span>');
+            that.refreshHint = that.scrollElement.children().first();
+            that.refreshTemplate = that.refreshHint.children(".km-template");
+
             that.draggable.y.bind("change", function() {
-                if (that.move.y / OUT_OF_BOUNDS_FRICTION > options.offset) {
+                if (that.move.y / OUT_OF_BOUNDS_FRICTION > offset) {
                     if (!that.pulled) {
                         that.pulled = true;
-                        options.startPull();
+                        that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
+                        that.refreshTemplate.html(releaseTemplate({}));
                     }
                 } else if (that.pulled) {
                     that.pulled = false;
-                    options.cancelPull();
+                    that.refreshHint.removeClass(RELEASECLASS);
+                    that.refreshTemplate.html(pullTemplate({}));
                 }
             });
 
             that.drag.bind("end", function() {
                 if(that.pulled) {
                     that.pulled = false;
+                    that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
+                    that.refreshTemplate.html(refreshTemplate({}));
                     options.pull();
-                    that.yinertia.freeze(options.offset / 2);
+                    that.yinertia.freeze(offset / 2);
                 }
             });
         },
@@ -268,7 +288,10 @@
         },
 
         options: {
-            name: "Scroller"
+            name: "Scroller",
+            pullTemplate: "Pull to refresh",
+            releaseTemplate: "Release to refresh",
+            refreshTemplate: "Refreshing"
         }
     });
 

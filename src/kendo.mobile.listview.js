@@ -16,8 +16,6 @@
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
         ACTIVE_STATE_TIMEOUT = "active-state-timeout",
-        RELEASECLASS = "km-listview-release",
-        REFRESHCLASS = "km-listview-refresh",
         CLICK = "click";
 
     function toggleItemActiveClass(e) {
@@ -333,35 +331,16 @@
 
         viewInit: function(view) {
             var that = this,
-                options = that.options,
-                pullTemplate = kendo.template(options.pullTemplate),
-                releaseTemplate = kendo.template(options.releaseTemplate),
-                refreshTemplate = kendo.template(options.refreshTemplate);
+                options = that.options;
 
             that.scroller = view.scroller;
 
             if (options.pullToRefresh) {
-                that.wrapper.prepend('<span class="km-listview-pull"><span class="km-icon"></span><span class="km-template">' + pullTemplate({}) + '</span></span>');
-                that.refreshHint = that.wrapper.children().first();
-                that.refreshTemplate = that.refreshHint.children(".km-template");
-
                 that.scroller.handlePull({
-                    offset: options.pullOffset,
-                    startPull: function() {
-                        that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
-                        that.refreshTemplate.html(releaseTemplate({}));
-                    },
-
-                    cancelPull: function() {
-                        that.refreshHint.removeClass(RELEASECLASS);
-                        that.refreshTemplate.html(pullTemplate({}));
-                    },
-
-                    pull: function() {
-                        that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
-                        that.refreshTemplate.html(refreshTemplate({}));
-                        that.dataSource.read();
-                    }
+                    pull: function() { that.dataSource.read(); },
+                    pullTemplate: options.pullTemplate,
+                    releaseTemplate: options.releaseTemplate,
+                    refreshTemplate: options.refreshTemplate
                 });
             }
         },
@@ -388,8 +367,6 @@
 
             if (that.options.pullToRefresh) {
                 that.scroller.pullHandled();
-                that.refreshHint.removeClass(REFRESHCLASS);
-                that.refreshTemplate.html(kendo.template(that.options.pullTemplate)({}));
             }
 
             kendo.mobile.init(that.element.children());
