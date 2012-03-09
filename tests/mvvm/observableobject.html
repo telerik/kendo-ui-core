@@ -207,6 +207,19 @@
                 strictEqual(observable.foo, nested);
             });
 
+            test("change event is raised for wrapped ObservableObject", 1, function() {
+                var observable = kendo.observable({ foo: {} });
+                var nested = new kendo.data.ObservableObject({ bar: "baz" });
+                observable.set("foo", nested);
+
+                observable.bind("change", function() {
+                    ok(true);
+                });
+
+                observable.foo.set("bar", "moo");
+            });
+
+
             test("set Array is wrapped", function() {
                 var observable = kendo.observable({ foo: [] });
 
