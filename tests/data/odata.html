@@ -269,6 +269,30 @@
                 equal(result.foo, "bar");
             });
 
+            test("model is stringified if type is update", function() {
+                var result = parameterMap({ foo: "bar" }, "update");
+
+                equal(result, kendo.stringify({ foo: "bar" }));
+            });
+
+            test("model is stringified if type is create", function() {
+                var result = parameterMap({ foo: "bar" }, "create");
+
+                equal(result, kendo.stringify({ foo: "bar" }));
+            });
+
+            test("does not proccess the arguments if type is destroy", function() {
+                var result = parameterMap({ foo: "bar" }, "destroy");
+
+                ok(!result);
+            });
+
+            test("number values is serialized as string", function() {
+                var result = parameterMap({ foo: 1 }, "update");
+
+                equal(result, '{"foo":"1"}');
+            });
+
         </script>
     </body>
 </html>
