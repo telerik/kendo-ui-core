@@ -299,6 +299,25 @@
 
                 ok(dom.is(":disabled"));
             });
+
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<select data-text-field="text" data-bind="source:dataSource" data-role="combobox" />');
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var combobox = dom.data("kendoComboBox");
+
+                strictEqual(combobox.dataSource, dataSource);
+
+                equal($.trim(combobox.ul.children().eq(0).text()), "foo");
+                equal($.trim(combobox.ul.children().eq(1).text()), "bar");
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

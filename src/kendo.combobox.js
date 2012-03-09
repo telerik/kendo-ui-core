@@ -383,6 +383,7 @@
             placeholder: "",
             suggest: false
         },
+
         events:[
             /**
             * Fires when the drop-down list is opened
