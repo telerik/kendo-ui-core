@@ -633,7 +633,7 @@
         },
 
         refresh: function(domElement) {
-            $(domElement).css(CLIP, this._renderClip());
+            domElement.style.clip = this._renderClip();
         },
 
         _renderClip: function() {
@@ -806,7 +806,7 @@
 
             if (animation && animation.type === CLIP && options.transitions) {
                 clipRect = new VMLClipRect(
-                    new Box2D(0, 0, 0, options.height),
+                    new Box2D(0, 0, options.width, options.height),
                     { id: uniqueId() }
                 );
 

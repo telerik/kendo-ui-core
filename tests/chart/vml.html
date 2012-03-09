@@ -934,7 +934,7 @@
                 test("refresh updates clip attribute", function() {
                     var domElement = $("<div />")[0];
                     clipRect.refresh(domElement);
-                    equals(domElement.style.clip.replace(/,/g, ''),
+                    equals(domElement.style.clip.replace(/,/g, " ").replace(/\s+/g," "),
                            "rect(20px 110px 220px 10px)");
                 });
 
@@ -1233,7 +1233,7 @@
 
                 module("VMLClipAnimationDecorator", {
                     setup: function() {
-                        view = new dataviz.VMLView({ transitions: true });
+                        view = new dataviz.VMLView({ transitions: true, width: 100, height: 50 });
                         rect = new dataviz.VMLPath({
                             animation: {
                                 type: "clip"
@@ -1258,6 +1258,13 @@
                     ok(view.animations[0] instanceof dataviz.ExpandAnimation);
                 });
 
+                test("sets clip rect width", function() {
+                    equals(decorator.decorate(rect).box.width(), 100);
+                });
+
+                test("sets clip rect height", function() {
+                    equals(decorator.decorate(rect).box.height(), 50);
+                });
             })();
 
        </script>
