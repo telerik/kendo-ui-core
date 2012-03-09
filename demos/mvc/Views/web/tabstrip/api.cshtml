@@ -74,19 +74,22 @@
                         append = function (e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                                 tabStrip.append({
-                                    text: $("#appendText").val()
+                                    text: $("#appendText").val(),
+                                    content: "<br>"
                                 });
                         },
                         before = function (e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                                 tabStrip.insertBefore({
-                                    text: $("#beforeText").val()
+                                    text: $("#beforeText").val(),
+                                    content: "<br>"
                                 }, tabStrip.select());
                         },
                         after = function (e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
                                 tabStrip.insertAfter({
-                                    text: $("#afterText").val()
+                                    text: $("#afterText").val(),
+                                    content: "<br>"
                                 }, tabStrip.select());
                         };
 
