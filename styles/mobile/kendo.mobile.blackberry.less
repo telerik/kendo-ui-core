@@ -502,10 +502,15 @@
 .km-blackberry .km-select .k-dropdown-wrap
 {
     border: 1px solid rgba(0,0,0,.5);
-    margin-right: .8em;
+    right: .8em;
     padding: .4em;
     outline: none;
     .border-radius(~".3em");
+}
+
+.km-blackberry .km-select
+{
+    right: .8em;
 }
 
 .km-blackberry select:not([multiple]),
@@ -556,3 +561,66 @@
     color: #000;
     background-color: #fff;
 }
+
+.km-blackberry .k-list-container .k-item
+{
+    color: #000;
+    background: #fff;
+    padding: 0 1em;
+    border: 0;
+}
+
+.km-blackberry .k-list-container .k-state-selected
+{
+    color: #fff;
+    background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2)) #0990e9;
+}
+
+.km-blackberry .k-list-container
+{
+    background: #fff;
+    padding: 3px 3px 0;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    border: 1px solid #777;
+}
+
+.km-select.k-state-border-up
+{
+    background: linear-gradient(top, #777, #777 10%, transparent 10%),
+                linear-gradient(top, #777, #777 10%, transparent 10%),
+                linear-gradient(top, #fff, #fff 10%, transparent 10%);
+}
+
+.km-select.k-state-border-down
+{
+    background: linear-gradient(top, transparent 90%, #777 90%, #777),
+                linear-gradient(top, transparent 90%, #777 90%, #777),
+                linear-gradient(top, transparent 90%, #fff 90%, #fff);
+}
+
+.km-select.k-state-border-up,
+.km-select.k-state-border-down
+{
+    background-position: 0 0, 100% 0, 0 0;
+    background-repeat: no-repeat;
+    background-size: 1px 100%, 1px 100%, auto;
+}
+
+.k-calendar-container.k-state-border-up,
+.k-list-container.k-state-border-up
+{
+    border-top: 0;
+    .border-radius(0 0 4px 4px);
+    .box-shadow(~"1px 1px 1px rgba(0,0,0,.3)");
+}
+
+.k-calendar-container.k-state-border-down,
+.k-list-container.k-state-border-down
+{
+    border-bottom: 0;
+    margin-top: 1px;
+    .border-radius(4px 4px 0 0);
+    .box-shadow(~"1px 0 1px rgba(0,0,0,.3)");
+}
+

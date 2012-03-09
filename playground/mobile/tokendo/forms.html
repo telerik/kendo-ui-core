@@ -103,14 +103,6 @@
         <ul data-role="listview" data-style="inset">
             <li data-icon="play"><input type="date" value="2012-03-22" /><a class="km-listview-link">Albania</a></li>
             <li data-icon="stop"><input type="time" value="22:30" /><a class="km-listview-link">Australia</a></li>
-            <li><input type="datetime" value="2012-03-22 20:15" /><a class="km-listview-link">Australia</a></li>
-            <li><input type="text" value="Text Shmext" /><a class="km-listview-link">Australia</a></li>
-            <li><select name="next" id="next">
-                                        <option value="First">First</option>
-                                        <option value="Second">Second</option>
-                                        <option value="Third">Third</option>
-                                        <option value="Fourth">Fourth</option>
-                                    </select><a class="km-listview-link">Australia</a></li>
             <li><select name="next">
                                         <option value="First">First</option>
                                         <option value="Second">Second</option>
@@ -119,6 +111,14 @@
                                         <option value="Fourth">Fifth</option>
                                         <option value="Fourth">Sixth</option>
                                         <option value="Fourth">Seventh</option>
+                                    </select><a class="km-listview-link">Australia</a></li>
+            <li><input type="datetime" value="2012-03-22 20:15" /><a class="km-listview-link">Australia</a></li>
+            <li><input type="text" value="Text Shmext" /><a class="km-listview-link">Australia</a></li>
+            <li><select name="next" id="next">
+                                        <option value="First">First</option>
+                                        <option value="Second">Second</option>
+                                        <option value="Third">Third</option>
+                                        <option value="Fourth">Fourth</option>
                                     </select><a class="km-listview-link">Australia</a></li>
             <li><input type="text" value="Text Shmext" readonly /><a class="km-listview-link">Australia</a></li>
         </ul>
@@ -136,28 +136,6 @@
 
         var app = new kendo.mobile.Application(document.body),
             os = kendo.support.mobileOS;
-
-        var options = {};
-
-        if (os && os.android) {
-            options.animation = { open: { effects : "fadeIn" } };
-        }
-
-        if (os && os.ios) {
-            options.animation = { open: { effects : "slideIn:up" } };
-        }
-
-        $("select")
-                .addClass("km-select")
-                .kendoDropDownList(options);
-
-        if (os && os.ios) {
-            $("select").each(function () {
-                var popupOptions = $(this).data("kendoDropDownList").popup.options;
-                popupOptions.origin = "bottom center";
-                popupOptions.position = "top center";
-            });
-        }
 
         var groupedData = [
             {name: "Sashimi salad", letter: "S" },
@@ -189,6 +167,28 @@
         }
 
         $(function () {
+            var options = {};
+
+            if (os && os.android) {
+                options.animation = { open: { effects : "fadeIn" } };
+            }
+
+            if (os && os.ios) {
+                options.animation = { open: { effects : "slideIn:up" } };
+            }
+
+            $("select")
+                    .addClass("km-select")
+                    .kendoDropDownList(options);
+
+            if (os && os.ios) {
+                $("select").each(function () {
+                    var popupOptions = $(this).data("kendoDropDownList").popup.options;
+                    popupOptions.origin = "bottom center";
+                    popupOptions.position = "top center";
+                });
+            }
+
             var color = "";
 
             $(".km-navbar .km-button:not(.km-back)").each(function () {
