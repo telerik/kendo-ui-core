@@ -167,6 +167,23 @@
                 ok(elements.eq(1).hasClass("k-edit-field"));
             });
 
+            test("editor is not created for columns without field set", function() {
+                var grid = setup({
+                    columns: [ { template: "foo" }, "name" ]
+                });
+
+                grid.editRow(table.find("tr:first"));
+
+                var container = grid._editContainer.children("div.k-edit-form-container");
+                var elements = container.children("div");
+
+                equal(elements.length, 4);
+                ok(elements.eq(0).hasClass("k-edit-label"));
+                equal(elements.eq(0).find("label").text(), "");
+                equal(elements.eq(1).text(), "foo");
+                ok(elements.eq(1).hasClass("k-edit-field"));
+            });
+
             test("custom template is used if specified", function() {
                 var grid = setup({ editable: { mode: "popup", template:"<div>#=foo#</div>" } });
 
