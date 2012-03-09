@@ -1423,13 +1423,17 @@
         _accept: function(result) {
             var that = this,
             models = result.models,
-            response = result.response || {},
+            response = result.response,
             idx = 0,
             pristine = that.reader.data(that._pristine),
             type = result.type,
             length;
 
-            response = that.reader.data(that.reader.parse(response));
+            if (response) {
+                response = that.reader.data(that.reader.parse(response));
+            } else {
+                response = {};
+            }
 
             if (!$.isArray(response)) {
                 response = [response];
