@@ -1,44 +1,76 @@
-
-        <div id="example" class="k-content">
-            <div class="configuration">
-                <span class="infoHead">Information</span>
-                <p>
-                    <strong>Note:</strong>
-                    Security restrictions in Chrome prevent this
-                    example from working when the page is
-                    loaded from the file system (via file:// protocol).
-                </p>
-            </div>
-            <div id="tabstrip">
-                <ul>
-                    <li class="k-state-active">
-                        First Ajax Tab
-                    </li>
-                    <li>
-                        Second Ajax Tab
-                    </li>
-                    <li>
-                        Third Ajax Tab
-                    </li>
-                    <li>
-                        Fourth Ajax Tab
-                    </li>
-                    <li>
-                        Fifth Ajax Tab
-                    </li>
-                </ul>
-            </div>
+<div id="example" class="k-content">
+    <div class="wrapper">
+        <img class="bmw" src="../../content/web/tabstrip/bmw.png" />
+        <div id="tabstrip">
+            <ul>
+                <li class="k-state-active">Dimensions & Weights</li>
+                <li>Engine</li>
+                <li>Chassis</li>
+            </ul>
         </div>
-        <script>
-            $(document).ready(function() {
-                $("#tabstrip").css({ marginRight: "220px" }).kendoTabStrip({
-                    contentUrls: [
+    </div>
+    <div class="configuration configuration-horizontal-bottom">
+        <span class="infoHead">Information</span>
+        <p>
+            <strong>Note:</strong> Security restrictions in Chrome prevent this example from
+            working when the page is loaded from the file system (via file:// protocol).
+        </p>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#tabstrip").kendoTabStrip({
+            animation: { open: { effects: "fadeIn"} },
+            contentUrls: [
                         '../../content/web/tabstrip/ajax/ajaxContent1.html',
                         '../../content/web/tabstrip/ajax/ajaxContent2.html',
-                        '../../content/web/tabstrip/ajax/ajaxContent3.html',
-                        '../../content/web/tabstrip/ajax/ajaxContent4.html',
-                        '../../content/web/tabstrip/ajax/ajaxContent5.html'
+                        '../../content/web/tabstrip/ajax/ajaxContent3.html'
                     ]
-                });
-            });
-        </script>
+        });
+    });
+</script>
+
+<style scoped>
+    .wrapper {
+        width: 750px;
+        padding: 30px;
+        margin: 20px auto;
+    }
+    .bmw {
+        float: left;
+        margin: 20px 0;
+    }
+    #tabstrip {
+        width: 320px;
+        float: right;
+        margin-bottom: 20px;
+    }
+    .specification {
+        max-width: 670px;
+        margin: 10px 0;
+        padding: 0;
+    }
+    .specification dt, dd {
+        width: 160px;
+        float: left;
+        margin: 0;
+        padding: 5px 0 7px 0;
+        border-top: 1px solid rgba(0,0,0,0.3);
+    }
+    .specification dt {
+        clear: left;
+        width: 120px;
+        margin-right: 7px;
+        padding-right: 0;
+        text-align: right;
+        opacity: 0.7;
+    }
+    .specification:after, .wrapper:after {
+        content: ".";
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+</style>
