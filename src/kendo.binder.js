@@ -254,7 +254,9 @@
             Binder.fn.init.call(this, element, bindings, options);
 
             this._change = $.proxy(this.change, this);
-            $(this.element).change(this._change)
+            this.eventName = options.valueUpdate || "change";
+
+            $(this.element).bind(this.eventName, this._change);
         },
 
         change: function() {
@@ -266,7 +268,7 @@
         },
 
         destroy: function() {
-            $(this.element).unbind("change", this._change);
+            $(this.element).unbind(this.eventName, this._change);
         }
     });
 
@@ -395,6 +397,7 @@
             init: function(element, bindings, options) {
                 Binder.fn.init.call(this, element, bindings, options);
                 this._change = $.proxy(this.change, this);
+
                 $(this.element).change(this._change);
             },
             change: function() {
@@ -941,7 +944,7 @@
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "" });
+                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "", valueUpdate: "change" });
                 target = new BindingTarget(element, options);
             }
 

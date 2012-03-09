@@ -109,6 +109,21 @@
                 equal(dom.find("span").text(), "foo");
             });
 
+            test("keyup event notifies value listeners", function() {
+                var viewModel = kendo.observable( {
+                    foo: ["foo", "bar", "baz"],
+                    bar: "bar"
+                });
+
+                var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"/></div>');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("input").val("foo").trigger("keyup");
+
+                equal(dom.find("span").text(), "foo");
+            });
+
             test("select of multi select updates the viewModel", function() {
                 var viewModel = kendo.observable( {
                     foo: ["foo", "bar", "baz"],
