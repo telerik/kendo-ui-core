@@ -1037,7 +1037,8 @@ input[type=text],
 input[type=date],
 input[type=time],
 input[type=datetime],
-select:not([multiple])
+select:not([multiple]),
+.km-select
 {
     font-size: 1.2rem;
     -moz-appearance: none;
@@ -1075,7 +1076,7 @@ select:not([multiple])
 
 .km-list .km-select .k-dropdown-wrap
 {
-    display: block;
+    display: inline-block;
 }
 
 input ~ .km-listview-link:after,
@@ -1095,8 +1096,9 @@ select ~ .km-listview-link:after,
 {
     list-style-type: none;
     line-height: 2em;
-    padding-left: 1em;
+    padding: inherit 1em;
     border-bottom: 1px solid #555;
+    .box-sizing(border-box);
 }
 
 .k-list-container .k-list
