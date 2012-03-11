@@ -16,3 +16,7 @@ div.k-gauge
     text-align: left;
 }
 
+.k-baseline-marker {
+    zoom: 1;
+    *display: inline;
+}

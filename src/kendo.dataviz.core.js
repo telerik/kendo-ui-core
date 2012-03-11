@@ -18,6 +18,8 @@
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
     }
 
+    var CSS_PREFIX = "k-";
+
     // Constants ==============================================================
     var ANIMATION_STEP = 10,
         BASELINE_MARKER_SIZE = 1,
@@ -1914,9 +1916,10 @@
 
     measureText.cache = {};
     measureText.baselineMarker =
-        $("<div style='display: inline-block; vertical-align: baseline;" +
-                  "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
-                  "zoom: 1; *display: inline; overflow: hidden;' />")[0];
+        $("<div class='" + CSS_PREFIX + "baseline-marker' " +
+            "style='display: inline-block; vertical-align: baseline;" +
+            "width: " + BASELINE_MARKER_SIZE + "px; height: " + BASELINE_MARKER_SIZE + "px;" +
+            "overflow: hidden;' />")[0];
 
     function autoMajorUnit(min, max) {
         var diff = max - min;
