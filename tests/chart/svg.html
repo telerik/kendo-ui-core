@@ -233,7 +233,7 @@
                 });
 
                 test("renderElement returns element", function() {
-                    if ($.browser.msie && $.browser.version < 8) {
+                    if ($.browser.msie && $.browser.version < 9) {
                         return;
                     }
 
@@ -278,6 +278,10 @@
                 });
 
                 test("renderTo returns DOM element", function() {
+                    if ($.browser.msie && $.browser.version < 9) {
+                        return;
+                    }
+
                     var container = $("<div />").appendTo(document.body);
                     equals(view.renderTo(container[0]), container[0].firstChild.nextSibling);
                     container.remove();
