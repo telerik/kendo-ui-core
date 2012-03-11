@@ -233,7 +233,7 @@
                 });
 
                 test("renderElement returns element", function() {
-                    if ($.browser.msie && $.browser.version < 8) {
+                    if ($.browser.msie && $.browser.version < 9) {
                         return;
                     }
 
@@ -255,6 +255,7 @@
 
                 test("renders svg tag with default size", function() {
                     equal(view.render(),
+                        "<?xml version='1.0' ?>" +
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative; display: block;'></svg>");
                 });
@@ -262,6 +263,7 @@
                 test("renders children", function() {
                     view.children.push(contentElementStub);
                     equal(view.render(),
+                        "<?xml version='1.0' ?>" +
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative; display: block;'>Content</svg>");
                 });
@@ -269,14 +271,19 @@
                 test("renders definitions", function() {
                     view.definitions.test = contentElementStub;
                     equal(view.render(),
+                        "<?xml version='1.0' ?>" +
                         "<svg xmlns='http://www.w3.org/2000/svg' version='1.1' " +
                         "width='600px' height='400px' style='position: relative; display: block;'>" +
                         "<defs>Content</defs></svg>");
                 });
 
                 test("renderTo returns DOM element", function() {
+                    if ($.browser.msie && $.browser.version < 9) {
+                        return;
+                    }
+
                     var container = $("<div />").appendTo(document.body);
-                    equals(view.renderTo(container[0]), container[0].firstChild);
+                    equals(view.renderTo(container[0]), container[0].firstChild.nextSibling);
                     container.remove();
                 });
 

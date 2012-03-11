@@ -73,6 +73,7 @@
             view.template = SVGView.template;
             if (!view.template) {
                 view.template = SVGView.template = template(
+                    "<?xml version='1.0' ?>" +
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='#= d.options.width #px' height='#= d.options.height #px' " +
                     "style='position: relative; display: block;'>" +
@@ -95,7 +96,7 @@
             view.setupAnimations();
 
             renderSVG(container, view.render());
-            viewElement = container.firstChild;
+            viewElement = container.firstChild.nextSibling;
             view.alignToScreen(viewElement);
 
             view.playAnimations();
@@ -115,12 +116,13 @@
                 element;
 
             renderSVG(container,
+                "<?xml version='1.0' ?>" +
                 "<svg xmlns='" + SVG_NS + "' version='1.1'>" +
                 element.render() +
                 "</svg>"
             );
 
-            element = container.firstChild.firstChild;
+            element = container.firstChild.nextSibling.firstChild;
 
             return element;
         },
