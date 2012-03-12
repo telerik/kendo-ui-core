@@ -237,10 +237,13 @@
             that.drag.bind("end", proxy(that._dragEnd, that));
         },
 
+        /**
+         * Indicate that the pull event is handled (i.e. Data from the server has been retrieved).
+         */
         pullHandled: function() {
             var that = this;
             that.refreshHint.removeClass(REFRESHCLASS);
-            that.refreshTemplate.html(that.pullTemplate({}));
+            that.hintContainer.html(that.pullTemplate({}));
             that.yinertia.onEnd();
             that.xinertia.onEnd();
         },
