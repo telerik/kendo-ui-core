@@ -781,22 +781,22 @@
                 });
 
                 test("marker is positioned at top", function() {
-                    createPoint({ isVertical: true, aboveAxis: true });
+                    createPoint({ vertical: true, aboveAxis: true });
                     sameBox(marker.box, new Box2D(44, -6, 56, 6));
                 });
 
                 test("marker is positioned at bottom", function() {
-                    createPoint({ isVertical: true, aboveAxis: false });
+                    createPoint({ vertical: true, aboveAxis: false });
                     sameBox(marker.box, new Box2D(44, 94, 56, 106));
                 });
 
                 test("marker is positioned at right", function() {
-                    createPoint({ isVertical: false, aboveAxis: true });
+                    createPoint({ vertical: false, aboveAxis: true });
                     sameBox(marker.box, new Box2D(94, 44, 106, 56));
                 });
 
                 test("marker is positioned at left", function() {
-                    createPoint({ isVertical: false, aboveAxis: false });
+                    createPoint({ vertical: false, aboveAxis: false });
                     sameBox(marker.box, new Box2D(-6, 44, 6, 56));
                 });
 

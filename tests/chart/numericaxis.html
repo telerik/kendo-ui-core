@@ -737,7 +737,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis = new dataviz.NumericAxis(0, 1, { isVertical: false });
+                        numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false });
                         numericAxis.reflow(chartBox);
                     }
                 });
@@ -753,7 +753,7 @@
                 });
 
                 test("should not create axis line if visible is false", function() {
-                    numericAxis = new dataviz.NumericAxis(0, 1, { line: { visible: false }, isVertical: false});
+                    numericAxis = new dataviz.NumericAxis(0, 1, { line: { visible: false }, vertical: false});
                     numericAxis.reflow(chartBox);
 
                     numericAxis.getViewElements(view);
@@ -783,7 +783,7 @@
                 });
 
                 test("labels are distributed horizontally in reverse", function() {
-                    numericAxis = new dataviz.NumericAxis(0, 1, { isVertical: false, reverse: true });
+                    numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false, reverse: true });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
 
@@ -801,7 +801,7 @@
 
                 test("labels are aligned top", 7, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        isVertical: false,
+                        vertical: false,
                         labels: {
                             margin: MARGIN,
                             padding: PADDING
@@ -824,7 +824,7 @@
 
                 test("excess space is allocated after last major tick", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        isVertical: false,
+                        vertical: false,
                         max: 1.2,
                         majorUnit: 0.5
                     });
@@ -839,7 +839,7 @@
                 });
 
                 test("major ticks are distributed horizontally in reverse", function() {
-                    numericAxis = new dataviz.NumericAxis(0, 1, { isVertical: false, reverse: true });
+                    numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false, reverse: true });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
 
@@ -850,7 +850,7 @@
 
                 test("excess space is allocated after last major tick in reverse", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        isVertical: false,
+                        vertical: false,
                         reverse: true,
                         max: 1.2,
                         majorUnit: 0.5
@@ -890,7 +890,7 @@
                 });
 
                 test("minor ticks are distributed horizontally", function() {
-                    numericAxis = new dataviz.NumericAxis(0, 1, { isVertical: false, reverse: true });
+                    numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false, reverse: true });
                     numericAxis.options.majorTickType = "none",
                     numericAxis.options.minorTickType= "outside",
                     numericAxis.reflow(chartBox);
@@ -923,7 +923,7 @@
 
                 test("minor ticks are rendered after last major tick", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        isVertical: false,
+                        vertical: false,
                         min: 0,
                         max: 0.3,
                         majorUnit: 0.2,
@@ -979,7 +979,7 @@
 
                         numericAxis = new dataviz.NumericAxis(0, 1, {
                             labels: { step: 2 },
-                            isVertical: false
+                            vertical: false
                         });
 
                         numericAxis.reflow(chartBox);
@@ -1003,7 +1003,7 @@
                         moduleSetup();
 
                         numericAxis = new dataviz.NumericAxis(0, 1, {
-                            isVertical: false,
+                            vertical: false,
                             labels: {
                                 mirror: true
                             }
@@ -1149,7 +1149,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis = new dataviz.NumericAxis(0, 1, { isVertical: false });
+                        numericAxis = new dataviz.NumericAxis(0, 1, { vertical: false });
                         numericAxis.reflow(chartBox);
                     }
                 });
@@ -1201,7 +1201,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        numericAxis = new dataviz.NumericAxis(-1, 0, { isVertical: false });
+                        numericAxis = new dataviz.NumericAxis(-1, 0, { vertical: false });
                         numericAxis.reflow(chartBox);
                     }
                 });

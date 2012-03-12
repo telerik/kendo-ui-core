@@ -573,7 +573,7 @@
                 color: ""
             },
             aboveAxis: true,
-            isVertical: false,
+            vertical: false,
             animation: {
                 type: FADEIN,
                 delay: INITIAL_ANIMATION_DURATION
@@ -584,17 +584,17 @@
         reflow: function(targetBox) {
             var barLabel = this,
                 options = barLabel.options,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 aboveAxis = options.aboveAxis,
                 text = barLabel.children[0],
                 box = text.box,
                 padding = text.options.padding;
 
-            text.options.align = isVertical ? CENTER : LEFT;
-            text.options.vAlign = isVertical ? TOP : CENTER;
+            text.options.align = vertical ? CENTER : LEFT;
+            text.options.vAlign = vertical ? TOP : CENTER;
 
             if (options.position == INSIDE_END) {
-                if (isVertical) {
+                if (vertical) {
                     text.options.vAlign = TOP;
 
                     if (!aboveAxis && box.height() < targetBox.height()) {
@@ -607,13 +607,13 @@
                 text.options.vAlign = CENTER;
                 text.options.align = CENTER;
             } else if (options.position == INSIDE_BASE) {
-                if (isVertical) {
+                if (vertical) {
                     text.options.vAlign = aboveAxis ? BOTTOM : TOP;
                 } else {
                     text.options.align = aboveAxis ? LEFT : RIGHT;
                 }
             } else if (options.position == OUTSIDE_END) {
-                if (isVertical) {
+                if (vertical) {
                     if (aboveAxis) {
                         targetBox = new Box2D(
                             targetBox.x1, targetBox.y1 - box.height(),
@@ -641,7 +641,7 @@
                 }
             }
 
-            if (isVertical) {
+            if (vertical) {
                 padding.left = padding.right =
                     (targetBox.width() - text.contentBox.width()) / 2;
             } else {
@@ -908,7 +908,7 @@
     var CategoryAxis = Axis.extend({
         options: {
             categories: [],
-            isVertical: false,
+            vertical: false,
             majorGridLines: {
                 visible: false,
                 width: 1,
@@ -955,10 +955,10 @@
         getTickPositions: function(itemsCount) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
-                size = isVertical ? axis.box.height() : axis.box.width(),
+                vertical = options.vertical,
+                size = vertical ? axis.box.height() : axis.box.width(),
                 step = size / itemsCount,
-                pos = isVertical ? axis.box.y1 : axis.box.x1,
+                pos = vertical ? axis.box.y1 : axis.box.x1,
                 positions = [],
                 i;
 
@@ -967,7 +967,7 @@
                 pos += step;
             }
 
-            positions.push(isVertical ? axis.box.y2 : axis.box.x2);
+            positions.push(vertical ? axis.box.y2 : axis.box.x2);
 
             return options.reverse ? positions.reverse() : positions;
         },
@@ -988,14 +988,14 @@
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 lineBox = axis.lineBox(),
-                size = isVertical ? lineBox.height() : lineBox.width(),
+                size = vertical ? lineBox.height() : lineBox.width(),
                 categoriesLength = math.max(1, options.categories.length),
                 from = math.min(math.max(0, from), categoriesLength),
                 to = defined(to) ? to : from,
                 to = math.max(math.min(categoriesLength, to), from),
-                valueAxis = isVertical ? Y : X,
+                valueAxis = vertical ? Y : X,
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 step = (reverse ? -1 : 1) * (size / categoriesLength),
                 p1 = lineStart + (from * step),
@@ -1030,7 +1030,7 @@
         },
 
         options: {
-            isVertical: false,
+            vertical: false,
             gap: 0,
             spacing: 0
         },
@@ -1038,14 +1038,14 @@
         reflow: function(box) {
             var cluster = this,
                 options = cluster.options,
-                isVertical = options.isVertical,
-                axis = isVertical ? Y : X,
+                vertical = options.vertical,
+                axis = vertical ? Y : X,
                 children = cluster.children,
                 gap = options.gap,
                 spacing = options.spacing,
                 count = children.length,
                 slots = count + gap + (spacing * (count - 1)),
-                slotSize = (isVertical ? box.height() : box.width()) / slots,
+                slotSize = (vertical ? box.height() : box.width()) / slots,
                 position = box[axis + 1] + slotSize * (gap / 2),
                 childBox,
                 i;
@@ -1073,16 +1073,16 @@
         },
 
         options: {
-            isVertical: true,
+            vertical: true,
             isReversed: false
         },
 
         reflow: function(targetBox) {
             var stack = this,
                 options = stack.options,
-                isVertical = options.isVertical,
-                positionAxis = isVertical ? X : Y,
-                stackAxis = isVertical ? Y : X,
+                vertical = options.vertical,
+                positionAxis = vertical ? X : Y,
+                stackAxis = vertical ? Y : X,
                 stackBase = targetBox[stackAxis + 2],
                 children = stack.children,
                 box = stack.box = new Box2D(),
@@ -1091,9 +1091,9 @@
                 i;
 
             if (options.isReversed) {
-                stackDirection = isVertical ? BOTTOM : LEFT;
+                stackDirection = vertical ? BOTTOM : LEFT;
             } else {
-                stackDirection = isVertical ? TOP : RIGHT;
+                stackDirection = vertical ? TOP : RIGHT;
             }
 
             for (i = 0; i < childrenCount; i++) {
@@ -1133,7 +1133,7 @@
             border: {
                 width: 1
             },
-            isVertical: true,
+            vertical: true,
             overlay: {
                 gradient: GLASS
             },
@@ -1174,7 +1174,7 @@
 
                 bar.append(
                     new BarLabel(labelText, deepExtend({
-                            isVertical: options.isVertical,
+                            vertical: options.vertical,
                             id: uniqueId()},
                         options.labels)
                     )
@@ -1201,7 +1201,7 @@
         getViewElements: function(view) {
             var bar = this,
                 options = bar.options,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 border = options.border.width > 0 ? {
                     stroke: bar.getBorderColor(),
                     strokeWidth: options.border.width,
@@ -1213,7 +1213,7 @@
                     fill: options.color,
                     fillOpacity: options.opacity,
                     strokeOpacity: options.opacity,
-                    isVertical: options.isVertical,
+                    vertical: options.vertical,
                     aboveAxis: options.aboveAxis,
                     stackBase: options.stackBase,
                     animation: options.animation
@@ -1222,7 +1222,7 @@
                 label = bar.children[0];
 
             if (options.overlay) {
-                rectStyle.overlay = deepExtend({rotation: isVertical ? 0 : 90}, options.overlay);
+                rectStyle.overlay = deepExtend({rotation: vertical ? 0 : 90}, options.overlay);
             }
 
             elements.push(view.createRect(box, rectStyle));
@@ -1267,12 +1267,12 @@
             var bar = this,
                 options = bar.options,
                 box = bar.box,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 aboveAxis = options.aboveAxis,
                 x,
                 y;
 
-            if (isVertical) {
+            if (vertical) {
                 x = box.x2 + TOOLTIP_OFFSET;
                 y = aboveAxis ? box.y1 : box.y2 - tooltipHeight;
             } else {
@@ -1490,7 +1490,7 @@
 
             bar = new Bar(value,
                 deepExtend({}, {
-                    isVertical: !options.invertAxes,
+                    vertical: !options.invertAxes,
                     overlay: series.overlay,
                     labels: labelOptions,
                     isStacked: isStacked
@@ -1499,7 +1499,7 @@
             cluster = children[categoryIx];
             if (!cluster) {
                 cluster = new ClusterLayout({
-                    isVertical: options.invertAxes,
+                    vertical: options.invertAxes,
                     gap: options.gap,
                     spacing: options.spacing
                 });
@@ -1513,10 +1513,10 @@
 
                 if (stackWrap.children.length === 0) {
                     positiveStack = new StackLayout({
-                        isVertical: !options.invertAxes
+                        vertical: !options.invertAxes
                     });
                     negativeStack = new StackLayout({
-                        isVertical: !options.invertAxes,
+                        vertical: !options.invertAxes,
                         isReversed: true
                     });
                     stackWrap.append(positiveStack, negativeStack);
@@ -1728,7 +1728,7 @@
 
         options: {
             aboveAxis: true,
-            isVertical: true,
+            vertical: true,
             markers: {
                 visible: true,
                 background: WHITE,
@@ -1818,7 +1818,7 @@
         reflow: function(targetBox) {
             var point = this,
                 options = point.options,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 aboveAxis = options.aboveAxis,
                 childBox;
 
@@ -1827,7 +1827,7 @@
             point.box = targetBox;
             childBox = targetBox.clone();
 
-            if (isVertical) {
+            if (vertical) {
                 if (aboveAxis) {
                     childBox.y1 -= childBox.height();
                 } else {
@@ -2032,7 +2032,7 @@
 
             var point = new LinePoint(value,
                 deepExtend({
-                    isVertical: !options.invertAxes,
+                    vertical: !options.invertAxes,
                     markers: {
                         border: {
                             color: series.color
@@ -3253,19 +3253,19 @@
                 overflowX = axisBox.width() - box.width(),
                 axes = plotArea.axes,
                 currentAxis,
-                isVertical,
+                vertical,
                 i,
                 length = axes.length;
 
             // Shrink all axes so they don't overflow out of the bounding box
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
-                isVertical = currentAxis.options.isVertical;
+                vertical = currentAxis.options.vertical;
 
                 currentAxis.reflow(
                     currentAxis.box.shrink(
-                        isVertical ? 0 : overflowX,
-                        isVertical ? overflowY : 0
+                        vertical ? 0 : overflowX,
+                        vertical ? overflowY : 0
                     )
                 );
             }
@@ -3280,14 +3280,14 @@
                 overflowX,
                 overflowY,
                 currentAxis,
-                isVertical,
+                vertical,
                 lineBox,
                 i,
                 length = axes.length;
 
             for (i = 0; i < length; i++) {
                 currentAxis = axes[i];
-                isVertical = currentAxis.options.isVertical;
+                vertical = currentAxis.options.vertical;
                 lineBox = currentAxis.lineBox();
 
                 overflowX = math.max(0, lineBox.x2 - anchorLineBox.x2) +
@@ -3298,8 +3298,8 @@
 
                 currentAxis.reflow(
                     currentAxis.box.shrink(
-                        isVertical ? 0 : overflowX,
-                        isVertical ? overflowY : 0
+                        vertical ? 0 : overflowX,
+                        vertical ? overflowY : 0
                     )
                 );
             }
@@ -3328,8 +3328,8 @@
         reflowAxes: function() {
             var plotArea = this,
                 axes = plotArea.axes,
-                xAxes = grep(axes, (function(axis) { return !axis.options.isVertical; })),
-                yAxes = grep(axes, (function(axis) { return axis.options.isVertical; })),
+                xAxes = grep(axes, (function(axis) { return !axis.options.vertical; })),
+                yAxes = grep(axes, (function(axis) { return axis.options.vertical; })),
                 i,
                 length = axes.length;
 
@@ -3361,12 +3361,12 @@
 
         renderGridLines: function(view, axis, secondaryAxis) {
             var options = axis.options,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 crossingSlot = axis.getSlot(options.axisCrossingValue),
-                secAxisPos = round(crossingSlot[isVertical ? "y1" : "x1"]),
+                secAxisPos = round(crossingSlot[vertical ? "y1" : "x1"]),
                 lineBox = secondaryAxis.lineBox(),
-                lineStart = lineBox[isVertical ? "x1" : "y1"],
-                lineEnd = lineBox[isVertical ? "x2" : "y2" ],
+                lineStart = lineBox[vertical ? "x1" : "y1"],
+                lineEnd = lineBox[vertical ? "x2" : "y2" ],
                 majorTicks = axis.getMajorTickPositions(),
                 gridLines = [],
                 gridLine = function (pos, options) {
@@ -3408,7 +3408,7 @@
                     return null;
                 }
 
-                if (isVertical) {
+                if (vertical) {
                     return view.createLine(
                         lineStart, linePos, lineEnd, linePos,
                         gridLineOptions);
@@ -3564,7 +3564,7 @@
                 invertAxes = plotArea.invertAxes,
                 categoriesCount = options.categoryAxis.categories.length,
                 categoryAxis = new CategoryAxis(deepExtend({
-                        isVertical: invertAxes,
+                        vertical: invertAxes,
                         axisCrossingValue: invertAxes ? categoriesCount : 0
                     },
                     options.categoryAxis)
@@ -3581,7 +3581,7 @@
 
                 axis = namedValueAxes[axisName] =
                     new NumericAxis(range.min, range.max, deepExtend({
-                        isVertical: !invertAxes
+                        vertical: !invertAxes
                     },
                     this)
                 );
@@ -3711,14 +3711,14 @@
             }
         },
 
-        createXYAxis: function(options, isVertical) {
+        createXYAxis: function(options, vertical) {
             var plotArea = this,
                 axisName = options.name || PRIMARY,
-                namedAxes = isVertical ? plotArea.namedYAxes : plotArea.namedXAxes,
-                axisRanges = isVertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
-                rangeTracker = isVertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
+                namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
+                axisRanges = vertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
+                rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
-                options = deepExtend({}, options, { isVertical: isVertical }),
+                options = deepExtend({}, options, { vertical: vertical }),
                 axis = new NumericAxis(range.min, range.max, options);
 
             namedAxes[axisName] = axis;
@@ -3792,7 +3792,7 @@
                 element = anim.element,
                 points = element.points,
                 options = element.options,
-                axis = options.isVertical ? Y : X,
+                axis = options.vertical ? Y : X,
                 stackBase = options.stackBase,
                 aboveAxis = options.aboveAxis,
                 startPosition,
@@ -3823,7 +3823,7 @@
                 element = anim.element,
                 points = element.points;
 
-            if (element.options.isVertical) {
+            if (element.options.vertical) {
                 points[0].y = points[1].y =
                     interpolateValue(startPosition, endState.top, pos);
 

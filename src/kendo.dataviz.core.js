@@ -786,7 +786,7 @@
         createLabels: function() {
             var axis = this,
                 options = axis.options,
-                align = options.isVertical ? RIGHT : CENTER,
+                align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
                 }),
@@ -823,12 +823,12 @@
             var axis = this,
                 options = axis.options,
                 box = axis.box,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 mirror = options.labels.mirror,
                 axisX = mirror ? box.x1 : box.x2,
                 axisY = mirror ? box.y2 : box.y1;
 
-            if (isVertical) {
+            if (vertical) {
                 return new Box2D(axisX, box.y1, axisX, box.y2);
             }
 
@@ -839,7 +839,7 @@
             var axis = this,
                 options = axis.options,
                 titleOptions = deepExtend({
-                    rotation: options.isVertical ? -90 : 0,
+                    rotation: options.vertical ? -90 : 0,
                     text: "",
                     zIndex: 1
                 }, options.title),
@@ -897,7 +897,7 @@
                 var tickX = mirror ? lineBox.x2 : lineBox.x2 - tick.size,
                     tickY = mirror ? lineBox.y1 - tick.size : lineBox.y1;
 
-                if (options.isVertical) {
+                if (options.vertical) {
                     return view.createLine(
                         tickX, tick.pos, tickX + tick.size, tick.pos,
                         {
@@ -937,7 +937,7 @@
             var axis = this,
                 options = axis.options,
                 plotBands = options.plotBands || [],
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 result = [],
                 plotArea = axis.parent,
                 slotX,
@@ -951,8 +951,8 @@
                     to = defined(item.to) ? item.to : MAX_VALUE;
                     item.from = math.min(from, to);
                     item.to = math.max(from, to);
-                    slotX = isVertical ? plotArea.axisX.lineBox()  : plotArea.axisX.getSlot(item.from, item.to);
-                    slotY = isVertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.lineBox();
+                    slotX = vertical ? plotArea.axisX.lineBox()  : plotArea.axisX.getSlot(item.from, item.to);
+                    slotY = vertical ? plotArea.axisY.getSlot(item.from, item.to) : plotArea.axisY.lineBox();
                     return view.createRect(
                             new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                             { fill: item.color, fillOpacity: item.opacity, zIndex: -1 });
@@ -965,7 +965,7 @@
         reflowAxis: function(box, position) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 labels = axis.labels,
                 count = labels.length,
                 space = axis.getActualTickSize() + options.margin,
@@ -982,14 +982,14 @@
             }
 
             if (title) {
-                if (isVertical) {
+                if (vertical) {
                     maxLabelWidth += title.box.width()
                 } else {
                     maxLabelHeight += title.box.height();
                 }
             }
 
-            if (isVertical) {
+            if (vertical) {
                 axis.box = new Box2D(
                     box.x1, box.y1,
                     box.x1 + maxLabelWidth + space, box.y2
@@ -1010,7 +1010,7 @@
                 options = axis.options,
                 labelStep = options.labels.step,
                 labels = axis.labels,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
                 tickPositions = axis.getMajorTickPositions(),
@@ -1023,14 +1023,14 @@
             for (i = 0; i < labels.length; i++) {
                 var label = labels[i],
                     tickIx = labelStep * i,
-                    labelSize = isVertical ? label.box.height() : label.box.width(),
+                    labelSize = vertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition,
                     nextTickPosition,
                     middle,
                     labelX;
 
-                if (isVertical) {
+                if (vertical) {
                     if (position == ON_MINOR_TICKS) {
                         firstTickPosition = tickPositions[tickIx];
                         nextTickPosition = tickPositions[tickIx + 1];
@@ -1077,11 +1077,11 @@
             var axis = this,
                 options = axis.options,
                 mirror = options.labels.mirror,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 title = axis.title;
 
             if (title) {
-                if (isVertical) {
+                if (vertical) {
                     title.options.align = mirror ? RIGHT : LEFT;
                     title.options.vAlign = title.options.position;
                 } else {
@@ -1107,7 +1107,7 @@
         options: {
             min: 0,
             max: 1,
-            isVertical: true,
+            vertical: true,
             majorGridLines: {
                 visible: true,
                 width: 1,
@@ -1187,7 +1187,7 @@
                     dashType: line.dashType,
                     zIndex: options.zIndex
                 };
-                if (options.isVertical) {
+                if (options.vertical) {
                     childElements.push(view.createLine(
                         lineBox.x1, lineBox.y1,
                         lineBox.x1, lineBox.y2,
@@ -1262,17 +1262,17 @@
         getTickPositions: function(stepValue) {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
+                vertical = options.vertical,
                 reverse = options.reverse,
                 lineBox = axis.lineBox(),
-                lineSize = isVertical ? lineBox.height() : lineBox.width(),
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
                 range = options.max - options.min,
                 scale = lineSize / range,
                 step = stepValue * scale,
                 divisions = axis.getDivisions(stepValue),
-                dir = (isVertical ? -1 : 1) * (reverse ? -1 : 1),
+                dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
                 startEdge = dir === 1 ? 1 : 2,
-                pos = lineBox[(isVertical ? Y : X) + startEdge],
+                pos = lineBox[(vertical ? Y : X) + startEdge],
                 positions = [],
                 i;
 
@@ -1299,8 +1299,8 @@
         lineBox: function() {
             var axis = this,
                 options = axis.options,
-                isVertical = options.isVertical,
-                labelSize = isVertical ? "height" : "width",
+                vertical = options.vertical,
+                labelSize = vertical ? "height" : "width",
                 labels = axis.labels,
                 baseBox = Axis.fn.lineBox.call(axis),
                 startMargin = 0,
@@ -1311,7 +1311,7 @@
                 endMargin = last(labels).box[labelSize]() / 2;
             }
 
-            if (isVertical) {
+            if (vertical) {
                return new Box2D(baseBox.x1, baseBox.y1 + startMargin,
                  baseBox.x1, baseBox.y2 - endMargin);
             } else {
@@ -1324,11 +1324,11 @@
             var axis = this,
                 options = axis.options,
                 reverse = options.reverse,
-                isVertical = options.isVertical,
-                valueAxis = isVertical ? Y : X,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
                 lineBox = axis.lineBox(),
                 lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
-                lineSize = isVertical ? lineBox.height() : lineBox.width(),
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
                 dir = reverse ? -1 : 1,
                 step = dir * (lineSize / (options.max - options.min)),
                 a = defined(a) ? a : options.axisCrossingValue,
@@ -1339,7 +1339,7 @@
                 p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
 
-            if (isVertical) {
+            if (vertical) {
                 p1 = options.max - math.max(a, b);
                 p2 = options.max - math.min(a, b);
             } else {

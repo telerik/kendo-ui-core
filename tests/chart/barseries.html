@@ -1455,7 +1455,7 @@
                 // ------------------------------------------------------------
                 module("Cluster Layout / Vertical", {
                     setup: function() {
-                        createCluster({ isVertical: true, gap: 0 });
+                        createCluster({ vertical: true, gap: 0 });
                     }
                 });
 
@@ -1472,7 +1472,7 @@
                 });
 
                 test("positions children next to each other with spacing", function() {
-                    createCluster({ isVertical: true, gap: 0, spacing: 1 });
+                    createCluster({ vertical: true, gap: 0, spacing: 1 });
                     $.each(bars, function(index) {
                         equal(this.box.y1, (this.box.height() * 2) * index, TOLERANCE)
                     });
@@ -1594,7 +1594,7 @@
                 // ------------------------------------------------------------
                 module("Stack Layout / Horizontal", {
                     setup: function() {
-                        stack = new dataviz.StackLayout({ isVertical: false });
+                        stack = new dataviz.StackLayout({ vertical: false });
                         stack.children.push(
                             new BarStub(new Box2D(0, 0, 20, 10)),
                             new BarStub(new Box2D(0, 0, 30, 10)),
@@ -1647,7 +1647,7 @@
                 // ------------------------------------------------------------
                 module("Stack Layout / Horizontal / Reversed", {
                     setup: function() {
-                        stack = new dataviz.StackLayout({ isVertical: false, isReversed: true });
+                        stack = new dataviz.StackLayout({ vertical: false, isReversed: true });
                         stack.children.push(
                             new BarStub(new Box2D(100, 0, 120, 10)),
                             new BarStub(new Box2D(100, 0, 130, 10)),
@@ -1753,8 +1753,8 @@
                     same(rect.style.fill, bar.options.color);
                 });
 
-                test("sets isVertical", function() {
-                    same(rect.style.isVertical, true);
+                test("sets vertical", function() {
+                    same(rect.style.vertical, true);
                 });
 
                 test("sets aboveAxis", function() {
@@ -1786,12 +1786,12 @@
                 });
 
                 test("sets overlay rotation for horizontal bars", function() {
-                    createBar({ isVertical: false });
+                    createBar({ vertical: false });
                     same(rect.style.overlay.rotation, 90);
                 });
 
                 test("sets same overlay rotation for horizontal bars below axis", function() {
-                    createBar({ isVertical: false, aboveAxis: false });
+                    createBar({ vertical: false, aboveAxis: false });
                     same(rect.style.overlay.rotation, 90);
                 });
 
@@ -1856,56 +1856,56 @@
 
                 test("tooltipAnchor is top right corner / vertical / above axis",
                 function() {
-                    createBar({ isVertical: true, aboveAxis: true, isStacked: false });
+                    createBar({ vertical: true, aboveAxis: true, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is top right corner / vertical / above axis / stacked",
                 function() {
-                    createBar({ isVertical: true, aboveAxis: true, isStacked: true });
+                    createBar({ vertical: true, aboveAxis: true, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is bottom right corner / vertical / below axis",
                 function() {
-                    createBar({ isVertical: true, aboveAxis: false, isStacked: false });
+                    createBar({ vertical: true, aboveAxis: false, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y2 - 10])
                 });
 
                 test("tooltipAnchor is bottom right corner / vertical / below axis / stacked",
                 function() {
-                    createBar({ isVertical: true, aboveAxis: false, isStacked: true });
+                    createBar({ vertical: true, aboveAxis: false, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y2 - 10])
                 });
 
                 test("tooltipAnchor is top right corner / horizontal / above axis",
                 function() {
-                    createBar({ isVertical: false, aboveAxis: true, isStacked: false });
+                    createBar({ vertical: false, aboveAxis: true, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is above top right corner / horizontal / above axis / stacked",
                 function() {
-                    createBar({ isVertical: false, aboveAxis: true, isStacked: true });
+                    createBar({ vertical: false, aboveAxis: true, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 - 10, bar.box.y1 - 10 - TOOLTIP_OFFSET])
                 });
 
                 test("tooltipAnchor is top right corner / horizontal / below axis",
                 function() {
-                    createBar({ isVertical: false, aboveAxis: true, isStacked: false });
+                    createBar({ vertical: false, aboveAxis: true, isStacked: false });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 + TOOLTIP_OFFSET, bar.box.y1])
                 });
 
                 test("tooltipAnchor is above top right corner / horizontal / below axis / stacked",
                 function() {
-                    createBar({ isVertical: false, aboveAxis: false, isStacked: true });
+                    createBar({ vertical: false, aboveAxis: false, isStacked: true });
                     var anchor = bar.tooltipAnchor(10, 10);
                     same([anchor.x, anchor.y], [bar.box.x2 - 10, bar.box.y1 - 10 - TOOLTIP_OFFSET])
                 });

@@ -418,7 +418,7 @@
         getViewElements: function(view) {
             var scale = this,
                 options = scale.options,
-                isVertical = options.orientation === VERTICAL,
+                vertical = options.orientation === VERTICAL,
                 childElements = ChartElement.fn.getViewElements.call(scale, view),
                 tickPositions = scale.getMinorTickPositions(),
                 lineOptions;
