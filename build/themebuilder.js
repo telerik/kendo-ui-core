@@ -1,14 +1,14 @@
 var kendoBuild = require("./kendo-build"),
     less = require("./less-js/lib/less"),
     path = require("path"),
-    KENDO_STYLES = "styles",
+    KENDO_STYLES = path.join("styles", "web"),
     SOURCE_PATH = path.join("themebuilder", "src"),
     SOURCE_STYLES = path.join(SOURCE_PATH, "styles"),
     SOURCE_SCRIPTS = path.join(SOURCE_PATH, "scripts"),
     DEPLOY_PATH = path.join("themebuilder", "live"),
     DEPLOY_STYLES = path.join(DEPLOY_PATH, "styles"),
     DEPLOY_SCRIPTS = path.join(DEPLOY_PATH, "scripts"),
-    KENDO_CDN = process.argv[2] || "http://cdn.kendostatic.com/2011.3.1130/";
+    KENDO_CDN = process.argv[2] || "http://cdn.kendostatic.com/2011.3.1129/";
 
 function wrap(source) {
     return "(function(window, undefined){\r\n" + source + "\r\n})(window);"
@@ -33,6 +33,7 @@ function buildGeneratedSources() {
             "build/ecma-5.js",
             "lib/less/parser.js",
             "lib/less/functions.js",
+            "lib/less/colors.js",
             "lib/less/tree/*.js",
             "lib/less/tree.js"
         ].map(function(relativePath) {
@@ -47,7 +48,8 @@ function buildGeneratedSources() {
 
     console.log("\tconverting template.less to JSON...");
 
-    var lessJsonString = lessToJsonString(path.join(KENDO_STYLES, "template.less")),
+    var template = path.join(KENDO_STYLES, "template.less"),
+        lessJsonString = lessToJsonString(template),
         templateInfoSource = kendoBuild.readText(path.join(SOURCE_SCRIPTS, "constants.js"));
 
     templateInfoSource = replaceVariable(templateInfoSource, "lessTemplate", lessJsonString);
@@ -61,10 +63,9 @@ function buildGeneratedSources() {
     console.log("\tgenerating themebuilder css...");
 
     var parser = new(less.Parser)({}),
-        skinTemplate = kendoBuild.readText(path.join(KENDO_STYLES, "black.less"));
+        skinTemplate = kendoBuild.readText(path.join(KENDO_STYLES, "kendo.black.less"));
 
-    skinTemplate = skinTemplate.replace(/@import.*;/gm, "") +
-        kendoBuild.readText(path.join(KENDO_STYLES, "template.less"));
+    skinTemplate = skinTemplate.replace(/@require.*;/gm, "") + kendoBuild.readText(template);
 
     parser.parse(skinTemplate, function (e, tree) {
         kendoBuild.writeText(path.join(SOURCE_STYLES, "kendo.black.css"), tree.toCSS());

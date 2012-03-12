@@ -1,6 +1,9 @@
 ;(function($, kendo) {
 
     var proxy = $.proxy,
+        extend = $.extend,
+        map = $.map,
+        CLICK = "click",
         CHANGE = "change",
         doc = (window.parent || window).document,
         ui = kendo.ui,
@@ -15,10 +18,11 @@
             "border-radius": numeric,
             "background-image": "ktb-combo"
         },
+        whitespaceRe = /\s/g,
         processors = {
             "box-shadow": function(value) {
                 if (value && value != "none") {
-                    return value.replace(/((\d+(px|em))|inset)/g,"").replace(/\s/g, "");
+                    return value.replace(/((\d+(px|em))|inset)/g,"").replace(whitespaceRe, "");
                 } else {
                     return "#000000";
                 }
@@ -84,6 +88,8 @@
                              pad((+b).toString(16));
             });
         },
+        lessEOLRe = /;$/m,
+        lessConstantPairRe = /(@[a-z\-]+):\s*(.*)/i,
         LessConstants = kendo.Observable.extend({
             // TODO: can this be converted to an array-like object?
             init: function(constants) {
@@ -98,9 +104,21 @@
             },
 
             serialize: function() {
-                return $.map(this.constants, function(item, key) {
+                return map(this.constants, function(item, key) {
                     return key + ": " + item.value + ";"
                 }).join("\n");
+            },
+
+            deserialize: function(content) {
+                var that = this;
+
+                $.each(content.split(lessEOLRe), function() {
+                    var result = lessConstantPairRe.exec(this);
+
+                    if (result) {
+                        that.update(result[1], result[2]);
+                    }
+                });
             },
 
             colors: function() {
@@ -246,7 +264,7 @@
 
                             data.splice(0, 0, { text: "unchanged", value: this.value });
 
-                            data = $.map(data, function(x) {
+                            data = map(data, function(x) {
                                 return { text: x.text, value: x.value.replace(/"|'/g, "") };
                             });
 
@@ -268,8 +286,10 @@
                         change: changeHandler
                     }).end();
 
-                $(".ktb-action-get-css,.ktb-action-get-less").click(proxy(that.showSource, that));
-                $(".ktb-action-back").click(proxy(that.hideDownload, that));
+                $(".ktb-action-get-css,.ktb-action-get-less").on(CLICK, proxy(that.showSource, that));
+                $(".ktb-action-show-import").on(CLICK, proxy(that.showImport, that));
+                $(".ktb-action-back").on(CLICK, proxy(that.hideOverlay, that));
+                $(".ktb-action-import").on(CLICK, proxy(that.importTheme, that));
             },
             showSource: function(e) {
                 e.preventDefault();
@@ -277,15 +297,53 @@
                 var less = $(e.target).hasClass("ktb-action-get-less");
 
                 this._generateTheme(function(constants, css) {
-                    constants += '\n@import "template.less";';
+                    constants += '\n@require "template.less";';
                     $("#download-overlay").slideDown()
                         .find("textarea").val(less ? constants : css);
                 });
             },
-            hideDownload: function(e) {
+            showImport: function(e) {
                 e.preventDefault();
 
-                $("#download-overlay").slideUp();
+                $("#import-overlay").slideDown()
+                        .find("textarea").val("/**************************\n * paste LESS or CSS here *\n **************************/").select();
+            },
+            importTheme: function(e) {
+                e.preventDefault();
+
+                var themeContent = $(e.target).closest(".ktb-view").find("textarea").val(),
+                    constants = this.constants;
+
+                if (lessConstantPairRe.test(themeContent)) {
+                    constants.deserialize(themeContent);
+                } else {
+                    this.updateStyleSheet(themeContent);
+
+                    constants.infer();
+                }
+
+                this._propertyChange({});
+
+                var clientObjects = {
+                    "ktb-colorpicker": "kendoColorPicker",
+                    "ktb-numeric": "kendoNumericTextBox",
+                    "ktb-combo": "kendoComboBox"
+                };
+
+                $("input.ktb-colorpicker,input.ktb-numeric,input.ktb-combo").each(function() {
+                    var that = this,
+                        dataType = that.className.replace(/k-formatted-value|k-input|\s+/gi, ""),
+                        clientObject = $(that).data(clientObjects[dataType]);
+
+                    if (clientObject) {
+                        clientObject.value(constants.constants[that.id].value);
+                    }
+                });
+            },
+            hideOverlay: function(e) {
+                e.preventDefault();
+
+                $(".ktb-overlay:visible").slideUp();
             },
             _generateTheme: function(callback) {
                 var constants = this.constants.serialize();
@@ -329,7 +387,8 @@
             },
             render: function() {
                 var that = this,
-                    propertyGroupTemplate = kendo.template(
+                    template = kendo.template,
+                    propertyGroupTemplate = template(
                         "<li>#= title #" +
                             "<div class='styling-options'>" +
                                 "# for (var name in constants) {" +
@@ -341,27 +400,36 @@
                                 "# } #" +
                             "</div>" +
                         "</li>"
-                    );
+                    ),
+                    button = template("<button class='k-button ktb-action-#= id #'>#= text #</button>");
 
                 $("<div id='kendo-themebuilder'>" +
-                        "<div id='download-overlay' class='ktb-view'>" +
-                            "<button class='ktb-action-back k-button'>Back</button>" +
+                        "<div id='download-overlay' class='ktb-view ktb-overlay'>" +
+                            button({ id: "back", text: "Back" }) +
                             "<a href='http://www.kendoui.com/documentation/themebuilder.aspx' id='docs-link' target='_blank'>What should I do with this?</a>" +
                             "<div class='ktb-content'>" +
                                 "<textarea readonly></textarea>" +
                             "</div>" +
                         "</div>" +
+                        "<div id='import-overlay' class='ktb-view ktb-overlay'>" +
+                            button({ id: "back", text: "Back" }) +
+                            button({ id: "import", text: "Import" }) +
+                            "<div class='ktb-content'>" +
+                                "<textarea></textarea>" +
+                            "</div>" +
+                        "</div>" +
                         "<div id='advanced-mode' class='ktb-view'>" +
-                            "<button class='ktb-action-get-css k-button'>Get CSS...</button>" +
-                            "<button class='ktb-action-get-less k-button'>Get LESS...</button>" +
+                            button({ id: "get-css", text: "Get CSS..." }) +
+                            button({ id: "get-less", text: "Get LESS..." }) +
+                            button({ id: "show-import", text: "Import..." }) +
                             "<div class='ktb-content'>" +
                                 "<ul id='stylable-elements'>" +
-                                    $.map(that.constantsHierarchy || {}, function(section, title) {
+                                    map(that.constantsHierarchy || {}, function(section, title) {
                                         var matchedConstants = {},
                                             constants = that.constants.constants;
 
                                         for (var constant in section) {
-                                            matchedConstants[constant] = $.extend({}, constants[constant]);
+                                            matchedConstants[constant] = extend({}, constants[constant]);
                                         }
 
                                         return propertyGroupTemplate({
@@ -379,14 +447,14 @@
             }
         });
 
-    ColorPicker.fn.options = $.extend(kendo.ui.ComboBox.fn.options, {
+    ColorPicker.fn.options = extend(kendo.ui.ComboBox.fn.options, {
         name: "ColorPicker",
         autoBind: false,
         template: "<span style='background-color: ${ data.value }' "+
                         "class='k-icon k-color-preview' " +
                         "title='${ data.text }'></span> ",
         dataSource: new kendo.data.DataSource({
-            data: $.map("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0,#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
+            data: map("#c00000,#ff0000,#ffc000,#ffff00,#92d050,#00b050,#00b0f0,#0070c0,#002060,#7030a0,#ffffff,#e3e3e3,#c4c4c4,#a8a8a8,#8a8a8a,#6e6e6e,#525252,#363636,#1a1a1a,#000000".split(","), function(x) {
                 return { text: x, value: x };
             })
         })
@@ -394,7 +462,7 @@
 
     kendo.ui.plugin(ColorPicker);
 
-    $.extend(kendo, {
+    extend(kendo, {
         LessConstants: LessConstants,
         ThemeBuilder: ThemeBuilder
     });
