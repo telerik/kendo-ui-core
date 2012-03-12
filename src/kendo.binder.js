@@ -282,11 +282,15 @@
         refresh: function(e) {
             var source = this.bindings.source.get();
 
-            if (source instanceof ObservableArray && e) {
+            if (source instanceof ObservableArray) {
+                e = e || {};
+
                 if (e.action == "add") {
                     this.add(e.index, e.items);
                 } else if (e.action == "remove") {
-                    this.remove(e.index, e.items.length);
+                    this.remove(e.index, e.items);
+                } else if (e.action != "itemchange") {
+                    this.render();
                 }
             } else {
                 this.render();
@@ -358,11 +362,11 @@
             }
         },
 
-        remove: function(index, length) {
+        remove: function(index, items) {
             var idx,
             element = this.container();
 
-            for (idx = 0; idx < length; idx++) {
+            for (idx = 0; idx < items.length; idx++) {
                 element.removeChild(element.children[index]);
             }
         },
