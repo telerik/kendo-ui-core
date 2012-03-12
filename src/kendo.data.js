@@ -71,7 +71,7 @@
         wrap: function(object) {
             var that = this;
 
-            if (toString.call(object) === "[object Object]" && !(object instanceof ObservableObject)) {
+            if (object !== null && toString.call(object) === "[object Object]" && !(object instanceof ObservableObject)) {
                 object = new that.type(object);
 
                 object.bind(CHANGE, function(e) {
@@ -286,7 +286,7 @@
             var that = this,
                 type = toString.call(object);
 
-            if (type === "[object Object]" && !(object instanceof ObservableObject)) {
+            if (object !== null && type === "[object Object]" && !(object instanceof ObservableObject)) {
                 object = new ObservableObject(object);
 
                 (function(field) {
