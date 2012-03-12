@@ -107,6 +107,10 @@
                 {
                     "text": "Basic usage",
                     "url": "scroller/index.html"
+                },
+                {
+                    "text": "Pull to refresh",
+                    "url": "scroller/pull-to-refresh.html"
                 }
             ]
         },
