@@ -20,11 +20,12 @@
     })();
 
     var Binding = Observable.extend( {
-        init: function(source, path) {
+        init: function(root, source, path) {
             var that = this;
 
             Observable.fn.init.call(that);
 
+            that.root = root;
             that.source = source;
             that.path = path;
             that.dependencies = {};
@@ -114,12 +115,20 @@
 
     var EventBinding = Binding.extend( {
         get: function() {
-            return $.proxy(this.source.get(this.path), this.source);
+            var source = this.source,
+                handler = source.get(this.path);
+
+            if (handler === undefined) {
+                handler = this.root.get(this.path);
+                source = this.root;
+            }
+
+            return $.proxy(handler, source);
         }
     });
 
     var TemplateBinding = Binding.extend( {
-        init: function(source, path, template) {
+        init: function(root, source, path, template) {
             var that = this;
 
             Binding.fn.init.call(that, source, path);
@@ -280,20 +289,21 @@
         },
 
         refresh: function(e) {
-            var source = this.bindings.source.get();
+            var that = this,
+                source = that.bindings.source.get();
 
             if (source instanceof ObservableArray) {
                 e = e || {};
 
                 if (e.action == "add") {
-                    this.add(e.index, e.items);
+                    that.add(e.index, e.items);
                 } else if (e.action == "remove") {
-                    this.remove(e.index, e.items);
+                    that.remove(e.index, e.items);
                 } else if (e.action != "itemchange") {
-                    this.render();
+                    that.render();
                 }
             } else {
-                this.render();
+                that.render();
             }
         },
 
@@ -357,7 +367,11 @@
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
-                    bindElement(child, items[idx]);
+                    if (this.bindings.template) {
+                        bindElement(child, this.bindings.source.root, items[idx]);
+                    } else {
+                        bindElement(child, items[idx]);
+                    }
                 }
             }
         },
@@ -386,7 +400,7 @@
 
                 if (element.children.length) {
                     for (idx = 0, length = source.length; idx < length; idx++) {
-                        bindElement(element.children[idx], source[idx]);
+                        bindElement(element.children[idx], this.bindings.source.root, source[idx]);
                     }
                 }
             }
@@ -923,18 +937,18 @@
         return result;
     }
 
-    function createBindings(bindings, source, type) {
+    function createBindings(bindings, root, source, type) {
         var binding,
             result = {};
 
         for (binding in bindings) {
-            result[binding] = new type(source, bindings[binding]);
+            result[binding] = new type(root, source, bindings[binding]);
         }
 
         return result;
     }
 
-    function bindElement(element, source, namespace) {
+    function bindElement(element, root, source, namespace) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             length,
@@ -944,6 +958,12 @@
             bindings,
             options = {},
             target;
+
+        if (!namespace) {
+           if (!source) {
+               source = root;
+           }
+        }
 
         if (role || bind) {
             unbindElement(element);
@@ -963,14 +983,14 @@
 
             target.source = source;
 
-            bindings = createBindings(bind, source, Binding);
+            bindings = createBindings(bind, root, source, Binding);
 
             if (options.template) {
-                bindings.template = new TemplateBinding(source, "", options.template);
+                bindings.template = new TemplateBinding(root, source, "", options.template);
             }
 
             if (bindings.click) {
-                bindings.click = new EventBinding(source, bind.click);
+                bindings.click = new EventBinding(root, source, bind.click);
             }
 
             if (bindings.source) {
@@ -978,15 +998,15 @@
             }
 
             if (bind.attr) {
-                bindings.attr = createBindings(bind.attr, source, Binding);
+                bindings.attr = createBindings(bind.attr, root, source, Binding);
             }
 
             if (bind.style) {
-                bindings.style = createBindings(bind.style, source, Binding);
+                bindings.style = createBindings(bind.style, root, source, Binding);
             }
 
             if (bind.events) {
-                bindings.events = createBindings(bind.events, source, EventBinding);
+                bindings.events = createBindings(bind.events, root, source, EventBinding);
             }
 
             target.bind(bindings);
