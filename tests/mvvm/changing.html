@@ -428,6 +428,20 @@
                 equal(dom.find("li").text(), "bar");
             });
 
+            test("replacing the source array rebinds the element", function() {
+                var viewModel = kendo.observable( {
+                    foo: [{ name: "foo" }]
+                });
+
+                var dom = $('<ul data-template="array-template" data-bind="source:foo"/>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.set("foo", [{ name: "bar" }]);
+
+                equal(dom.find("li").text(), "bar");
+            });
+
             test("tracking changes of fields bound to style", function() {
                 var viewModel = kendo.observable( {
                     foo: "1px",
