@@ -583,7 +583,7 @@
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
         * // Selects item which starts with "In".
-        * autocomplete.search("In");
+        * dropdownlist.search("In");
         */
         search: function(word) {
             if(word){
