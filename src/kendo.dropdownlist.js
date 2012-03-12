@@ -326,6 +326,8 @@
 
             that._enable();
 
+            that.popup.wrapper = kendo.wrap(that.popup.element).addClass("km-popup");
+
             that.selectedIndex = -1;
 
             if (options.autoBind) {
