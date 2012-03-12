@@ -100,6 +100,21 @@
             ]
         },
         {
+            "text": "Scroller",
+            "name": "scroller",
+            "spriteCssClass": "mobileScrollViewIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "scroller/index.html"
+                },
+                {
+                    "text": "Pull to refresh",
+                    "url": "scroller/pull-to-refresh.html"
+                }
+            ]
+        },
+        {
             "text": "ScrollView",
             "name": "scrollview",
             "spriteCssClass": "mobileScrollViewIcon",

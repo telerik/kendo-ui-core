@@ -1,22 +1,49 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>Scrollview</title>
-        <link rel="stylesheet/less" href="../../styles/mobile/kendo.mobile.ios.less">
+        <title>Scroller</title>
+        <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
-        <script src="../../src/jquery.min.js"></script>
+        <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.data.odata.js"></script>
+        <script src="../../src/kendo.data.xml.js"></script>
+        <script src="../../src/kendo.model.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
+        <script src="../../src/kendo.list.js"></script>
+        <script src="../../src/kendo.dropdownlist.js"></script>
+        <script src="../../src/kendo.tabstrip.js"></script>
+        <script src="../../src/kendo.panelbar.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
-        <script src="../../src/kendo.mobile.swipe.js"></script>
-        <script src="../../src/kendo.mobile.scroller.js"></script>
-        <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
-        <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
         <script src="../../src/kendo.mobile.listview.js"></script>
-        <script>
+        <script src="../../src/kendo.mobile.scrollview.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.buttongroup.js"></script>
+        <script src="../../src/kendo.mobile.switch.js"></script>
+        <script src="../../src/kendo.mobile.tabstrip.js"></script>
 
+        <style>
+            #foo {
+                margin: 50px;
+                height: 500px;
+            }
+
+            [data-role=scroller] {
+                position: relative;
+            }
+        </style>
+        <script>
             $(function() {
                     new kendo.mobile.Application();
             });
@@ -24,44 +51,16 @@
     </head>
     <body>
         <div data-role="view">
-            <ul data-role="listview" data-style="inset">
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-                <li><a href="#next">Wireless networks</a></li>
-            </ul>
-        </div>
+            <div data-role="scroller" id="foo">
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
 
-        <div data-role="view" id="next">
-            <a data-role="backbutton">Back</a>
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+            </div>
         </div>
     </body>
 </html>

@@ -1,0 +1,29 @@
+<div data-role="view" data-title="Pull to refresh" id="scroller-view" data-init="initPullToRefreshScroller">
+    <h2 id="pull-to-refresh-clock"></h2>
+</div>
+
+<style scoped>
+    #pull-to-refresh-clock {
+        padding: 190px 0px 300px 0px;
+        text-align: center;
+    }
+
+</style>
+<script>
+    function updateClock() {
+        pullTime = kendo.toString(new Date(), "hh:mm:ss tt" );
+        $("#pull-to-refresh-clock").html("Last update at " + pullTime + ". <br /> Pull to refresh.");
+    }
+    function initPullToRefreshScroller(e) {
+        var scroller = e.view.scroller;
+        updateClock();
+
+        scroller.handlePull({
+            pull: function() {
+                updateClock();
+                setTimeout(function() { scroller.pullHandled(); }, 400);
+            }
+        })
+    }
+</script>
+
