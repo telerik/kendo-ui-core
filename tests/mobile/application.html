@@ -338,10 +338,9 @@
 
                 var drag = application.view.scroller.drag;
 
-                application.view.scroller.handlePull({
-                    offset: 100,
-                    startPull: $.noop,
-                    cancelPull: $.noop,
+                application.view.scroller.setOptions({
+                    pullToRefresh: true,
+                    pullOffset: 100,
                     pull: function() {
                         start();
                         ok(true);
