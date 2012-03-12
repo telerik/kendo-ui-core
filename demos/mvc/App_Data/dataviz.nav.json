@@ -144,14 +144,14 @@
             "name": "radial-gauge"
         }
     ],
-    "Sample Dashboard": [
+    "Sample Dashboards": [
         {
             "text": "High performance chart",
             "spriteCssClass": "highPerfIcon",
             "expanded": true,
             "items": [{
                 "text": "High performance",
-                "url": "overview/high-performance.html"
+                "url": "dashboards/high-performance.html"
             }],
             "name": "highperformancechart"
         },
@@ -161,9 +161,19 @@
             "expanded": true,
             "items": [{
                 "text": "Car dashboard",
-                "url": "radial-gauge/car-dashboard.html"
+                "url": "dashboards/car-dashboard.html"
             }],
             "name": "cardashboard"
+        },
+        {
+            "text": "World popuplation dashboard",
+            "spriteCssClass": "worldPopulationIcon",
+            "expanded": true,
+            "items": [{
+                "text": "World population dashboard",
+                "url": "dashboards/world-population.html"
+            }],
+            "name": "worldpopulatondashboard"
         }
     ]
 }
