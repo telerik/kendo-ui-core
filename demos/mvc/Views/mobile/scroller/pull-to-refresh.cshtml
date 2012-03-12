@@ -14,11 +14,13 @@
         pullTime = kendo.toString(new Date(), "hh:mm:ss tt" );
         $("#pull-to-refresh-clock").html("Last update at " + pullTime + ". <br /> Pull to refresh.");
     }
+
     function initPullToRefreshScroller(e) {
         var scroller = e.view.scroller;
         updateClock();
 
-        scroller.handlePull({
+        scroller.setOptions({
+            pullToRefresh: true,
             pull: function() {
                 updateClock();
                 setTimeout(function() { scroller.pullHandled(); }, 400);

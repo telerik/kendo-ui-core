@@ -336,7 +336,8 @@
             that.scroller = view.scroller;
 
             if (options.pullToRefresh) {
-                that.scroller.handlePull({
+                that.scroller.setOptions({
+                    pullToRefresh: true,
                     pull: function() { that.dataSource.read(); },
                     pullTemplate: options.pullTemplate,
                     releaseTemplate: options.releaseTemplate,
