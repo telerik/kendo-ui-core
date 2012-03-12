@@ -32,7 +32,6 @@ functional-tests/KendoCustom/**/TestResults/
 functional-tests/KendoDemosTests/bin
 styles/*.css
 !styles/kendo.common.css
-themebuilder/src/scripts/less.js
 themebuilder/src/scripts/template.js
 themebuilder/src/styles/kendo.black.css
 themebuilder/src/styles/Black/
