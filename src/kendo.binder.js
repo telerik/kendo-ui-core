@@ -656,15 +656,21 @@
                 }
             },
 
-            refresh: function() {
-                var widget = this.widget;
+            refresh: function(e) {
+                var that = this,
+                    widget = that.widget;
 
-                widget.bind("dataBinding", this._dataBinding);
+                e = e || {};
 
-                widget.bind("dataBound", this._dataBound);
+                if (!e.action) {
+                    that.destroy();
 
-                if (widget.dataSource instanceof kendo.data.DataSource) {
-                    widget.dataSource.data(this.bindings.source.get());
+                    widget.bind("dataBinding", that._dataBinding);
+                    widget.bind("dataBound", that._dataBound);
+
+                    if (widget.dataSource instanceof kendo.data.DataSource) {
+                        widget.dataSource.data(that.bindings.source.get());
+                    }
                 }
             },
 
@@ -846,9 +852,7 @@
 
                 binder.refresh();
 
-                if (name != "source") {
-                    binding.bind("change", refresh);
-                }
+                binding.bind("change", refresh);
 
                 this.toDestroy.push(binding);
             } else {
