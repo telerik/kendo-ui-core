@@ -365,10 +365,20 @@
          *     }
          * });
          *
-         * @option {String|Function} [template] Template to be used for rendering the nodes of the treeview.
+         * @option {String|Function} [template] Template for rendering of the nodes of the treeview.
          * _example
          * $("#treeview").kendoTreeView({
          *     template: "#= item.text # <a href='\\#'>Delete</a>"
+         * });
+         *
+         * @option {String|Function} [checkboxTemplate] Template for rendering of the treeview checkboxes.
+         * _example
+         * $("#treeview").kendoTreeView({
+         *     template: kendo.template(
+         *         "<input type='checkbox' name='checkedFiles[" +
+         *             item.id +
+         *         "]' value='true' />"
+         *     )
          * });
          */
         init: function (element, options) {
