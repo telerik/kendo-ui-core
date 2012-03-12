@@ -1985,6 +1985,7 @@ div.k-treeview
 .k-treeview .k-icon,
 .k-treeview .k-image,
 .k-treeview .k-sprite,
+.k-treeview .k-checkbox,
 .k-treeview .k-in
 {
     display: inline-block;
