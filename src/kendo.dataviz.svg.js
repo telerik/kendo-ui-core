@@ -16,7 +16,7 @@
         deepExtend = kendo.deepExtend,
         defined = dataviz.defined,
         round = dataviz.round,
-        template = dataviz.template,
+        renderTemplate = dataviz.renderTemplate,
         rotatePoint = dataviz.rotatePoint,
         uniqueId = dataviz.uniqueId;
 
@@ -72,7 +72,7 @@
 
             view.template = SVGView.template;
             if (!view.template) {
-                view.template = SVGView.template = template(
+                view.template = SVGView.template = renderTemplate(
                     "<?xml version='1.0' ?>" +
                     "<svg xmlns='" + SVG_NS + "' version='1.1' " +
                     "width='#= d.options.width #px' height='#= d.options.height #px' " +
@@ -222,7 +222,7 @@
             text.content = content;
             text.template = SVGText.template;
             if (!text.template) {
-                text.template = SVGText.template = template(
+                text.template = SVGText.template = renderTemplate(
                     "<text #= d.renderAttr(\"id\", d.options.id) # " +
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
@@ -282,7 +282,7 @@
 
             path.template = SVGPath.template;
             if (!path.template) {
-                path.template = SVGPath.template = template(
+                path.template = SVGPath.template = renderTemplate(
                     "<path #= d.renderAttr(\"id\", d.options.id) #" +
                     "d='#= d.renderPoints() #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
@@ -394,7 +394,7 @@
 
             ring.pathTemplate = SVGRing.pathTemplate;
             if (!ring.pathTemplate) {
-                ring.pathTemplate = SVGRing.pathTemplate = template(
+                ring.pathTemplate = SVGRing.pathTemplate = renderTemplate(
                     "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
@@ -445,7 +445,7 @@
 
             sector.pathTemplate = SVGSector.pathTemplate;
             if (!sector.pathTemplate) {
-                sector.pathTemplate = SVGSector.pathTemplate = template(
+                sector.pathTemplate = SVGSector.pathTemplate = renderTemplate(
                     "M #= d.firstOuterPoint.x # #= d.firstOuterPoint.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,1 " +
@@ -481,7 +481,7 @@
 
             circle.template = SVGCircle.template;
             if (!circle.template) {
-                circle.template = SVGCircle.template = template(
+                circle.template = SVGCircle.template = renderTemplate(
                     "<circle #= d.renderAttr(\"id\", d.options.id) # " +
                     "cx='#= d.center[0] #' cy='#= d.center[1] #' " +
                     "r='#= d.radius #' " +
@@ -509,7 +509,7 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                template("<g#= d.renderAttr(\"id\", d.options.id) #" +
+                renderTemplate("<g#= d.renderAttr(\"id\", d.options.id) #" +
                            "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
                          "#= d.renderContent() #</g>");
             }
@@ -524,7 +524,7 @@
             clip.template = SVGClipPath.template;
             if (!clip.template) {
                 clip.template = SVGClipPath.template =
-                template("<clipPath#= d.renderAttr(\"id\", d.options.id) #>" +
+                renderTemplate("<clipPath#= d.renderAttr(\"id\", d.options.id) #>" +
                          "#= d.renderContent() #</clipPath>");
             }
         }
@@ -566,14 +566,14 @@
             gradient.template = SVGLinearGradient.template;
             gradient.stopTemplate = SVGLinearGradient.stopTemplate;
             if (!gradient.template) {
-                gradient.template = SVGLinearGradient.template = template(
+                gradient.template = SVGLinearGradient.template = renderTemplate(
                     "<linearGradient id='#= d.options.id #' " +
                     "gradientTransform='rotate(#= d.options.rotation #)'> " +
                     "#= d.renderStops() #" +
                     "</linearGradient>"
                 );
 
-                gradient.stopTemplate = SVGLinearGradient.stopTemplate = template(
+                gradient.stopTemplate = SVGLinearGradient.stopTemplate = renderTemplate(
                     "<stop offset='#= Math.round(d.offset * 100) #%' " +
                     "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
             }
@@ -592,7 +592,7 @@
             gradient.template = SVGRadialGradient.template;
             gradient.stopTemplate = SVGRadialGradient.stopTemplate;
             if (!gradient.template) {
-                gradient.template = SVGRadialGradient.template = template(
+                gradient.template = SVGRadialGradient.template = renderTemplate(
                     "<radialGradient id='#= d.options.id #' " +
                     "cx='#= d.options.cx #' cy='#= d.options.cy #' " +
                     "fx='#= d.options.cx #' fy='#= d.options.cy #' " +
@@ -601,7 +601,7 @@
                     "</radialGradient>"
                 );
 
-                gradient.stopTemplate = SVGRadialGradient.stopTemplate = template(
+                gradient.stopTemplate = SVGRadialGradient.stopTemplate = renderTemplate(
                     "<stop offset='#= Math.round(d.offset * 100) #%' " +
                     "style='stop-color:#= d.color #;stop-opacity:#= d.opacity #' />");
             }
