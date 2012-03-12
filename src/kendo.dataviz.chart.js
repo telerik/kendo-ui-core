@@ -42,7 +42,7 @@
         interpolateValue = dataviz.interpolateValue,
         last = dataviz.last,
         round = dataviz.round,
-        template = dataviz.template,
+        renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId;
 
     var CSS_PREFIX = "k-";
@@ -3932,7 +3932,7 @@
 
             tooltip.template = Tooltip.template;
             if (!tooltip.template) {
-                tooltip.template = Tooltip.template = template(
+                tooltip.template = Tooltip.template = renderTemplate(
                     "<div class='" + CSS_PREFIX + "tooltip' " +
                     "style='display:none; position: absolute; font: #= d.font #;" +
                     "border: #= d.border.width #px solid;" +

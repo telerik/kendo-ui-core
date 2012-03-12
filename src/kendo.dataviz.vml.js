@@ -17,7 +17,7 @@
         ViewBase = dataviz.ViewBase,
         ViewElement = dataviz.ViewElement,
         defined = dataviz.defined,
-        template = dataviz.template,
+        renderTemplate = dataviz.renderTemplate,
         uniqueId = dataviz.uniqueId,
         rotatePoint = dataviz.rotatePoint,
         round = dataviz.round,
@@ -72,7 +72,7 @@
 
             view.template = VMLView.template;
             if (!view.template) {
-                view.template = VMLView.template = template(
+                view.template = VMLView.template = renderTemplate(
                     "<div style='width:#= d.options.width #px; " +
                     "height:#= d.options.height #px; " +
                     "position: relative;'>" +
@@ -202,7 +202,7 @@
             text.content = content;
             text.template = VMLText.template;
             if (!text.template) {
-                text.template = VMLText.template = template(
+                text.template = VMLText.template = renderTemplate(
                     "<kvml:textbox #= d.renderAttr(\"id\", d.options.id) # " +
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
@@ -243,7 +243,7 @@
             text.content = content;
             text.template = VMLRotatedText.template;
             if (!text.template) {
-                text.template = VMLRotatedText.template = template(
+                text.template = VMLRotatedText.template = renderTemplate(
                     "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
                     "style='position: absolute; top: 0px; left: 0px; " +
                     "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
@@ -291,7 +291,7 @@
 
             stroke.template = VMLStroke.template;
             if (!stroke.template) {
-                stroke.template = VMLStroke.template = template(
+                stroke.template = VMLStroke.template = renderTemplate(
                     "<kvml:stroke on='#= !!d.options.stroke #' " +
                     "#= d.renderAttr(\"color\", d.options.stroke) #" +
                     "#= d.renderAttr(\"weight\", d.options.strokeWidth) #" +
@@ -309,7 +309,7 @@
 
             stroke.template = VMLFill.template;
             if (!stroke.template) {
-                stroke.template = VMLFill.template = template(
+                stroke.template = VMLFill.template = renderTemplate(
                     "<kvml:fill on='#= !!d.options.fill #' " +
                     "#= d.renderAttr(\"color\", d.options.fill) #" +
                     "#= d.renderAttr(\"weight\", d.options.fillWidth) #" +
@@ -326,7 +326,7 @@
 
             path.template = VMLPath.template;
             if (!path.template) {
-                path.template = VMLPath.template = template(
+                path.template = VMLPath.template = renderTemplate(
                     "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
                     "style='position:absolute; #= d.renderSize() #' " +
                     "coordorigin='0 0' #= d.renderCoordsize() # >" +
@@ -454,7 +454,7 @@
 
             ring.pathTemplate = VMLRing.pathTemplate;
             if (!ring.pathTemplate) {
-                ring.pathTemplate = VMLRing.pathTemplate = template(
+                ring.pathTemplate = VMLRing.pathTemplate = renderTemplate(
                    "M #= d.osp.x #,#= d.osp.y # " +
                    "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
                       "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
@@ -530,7 +530,7 @@
 
             sector.pathTemplate = VMLSector.pathTemplate;
             if (!sector.pathTemplate) {
-                sector.pathTemplate = VMLSector.pathTemplate = template(
+                sector.pathTemplate = VMLSector.pathTemplate = renderTemplate(
                    "M #= d.osp.x #,#= d.osp.y # " +
                    "WA #= d.obb.l #,#= d.obb.t # #= d.obb.r #,#= d.obb.b # " +
                       "#= d.osp.x #,#= d.osp.y # #= d.oep.x #,#= d.oep.y # " +
@@ -559,7 +559,7 @@
 
             circle.template = VMLCircle.template;
             if (!circle.template) {
-                circle.template = VMLCircle.template = template(
+                circle.template = VMLCircle.template = renderTemplate(
                     "<kvml:oval #= d.renderAttr(\"id\", d.options.id) # " +
                             "style='position:absolute; " +
                             "width:#= d.radius * 2 #px; height:#= d.radius * 2 #px; " +
@@ -586,7 +586,7 @@
 
             group.template = VMLGroup.template;
             if (!group.template) {
-                group.template = VMLGroup.template = template(
+                group.template = VMLGroup.template = renderTemplate(
                     "<div #= d.renderAttr(\"id\", d.options.id) #" +
                     "style='position: absolute; white-space: nowrap;'>" +
                     "#= d.renderContent() #</div>"
@@ -603,7 +603,7 @@
             clipRect.template = VMLClipRect.template;
             clipRect.clipTemplate = VMLClipRect.clipTemplate;
             if (!clipRect.template) {
-                clipRect.template = VMLClipRect.template = template(
+                clipRect.template = VMLClipRect.template = renderTemplate(
                     "<div #= d.renderAttr(\"id\", d.options.id) #" +
                         "style='position:absolute; " +
                         "width:#= d.box.width() #px; height:#= d.box.height() #px; " +
@@ -613,7 +613,7 @@
                     "#= d.renderContent() #</div>"
                 );
 
-                clipRect.clipTemplate = VMLClipRect.clipTemplate = template(
+                clipRect.clipTemplate = VMLClipRect.clipTemplate = renderTemplate(
                     "rect(#= d.points[0].y #px #= d.points[1].x #px " +
                          "#= d.points[2].y #px #= d.points[0].x #px)"
                 );
@@ -680,7 +680,7 @@
 
             gradient.template = VMLLinearGradient.template;
             if (!gradient.template) {
-                gradient.template = VMLLinearGradient.template = template(
+                gradient.template = VMLLinearGradient.template = renderTemplate(
                     "<kvml:fill type='gradient' angle='#= 270 - d.options.rotation #' " +
                     "colors='#= d.renderColors() #' opacity='#= d.options.opacity #' />"
                 );
@@ -699,7 +699,7 @@
 
             gradient.template = VMLRadialGradient.template;
             if (!gradient.template) {
-                gradient.template = VMLRadialGradient.template = template(
+                gradient.template = VMLRadialGradient.template = renderTemplate(
                     "<kvml:fill type='gradienttitle' focus='100%' focusposition='#= d.focusPosition() #'" +
                     "colors='#= d.renderColors() #' color='#= d.firstColor() #' color2='#= d.lastColor() #' opacity='#= d.options.opacity #' />"
                 );

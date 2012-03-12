@@ -14,7 +14,7 @@
         math = Math,
         deepExtend = kendo.deepExtend;
 
-    var template = function(definition) {
+    var renderTemplate = function(definition) {
         return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
     }
 
@@ -2172,7 +2172,7 @@
         rotatePoint: rotatePoint,
         round: round,
         supportsSVG: supportsSVG,
-        template: template,
+        renderTemplate: renderTemplate,
         uniqueId: uniqueId
     });
 
