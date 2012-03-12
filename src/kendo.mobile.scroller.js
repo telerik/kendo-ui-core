@@ -154,7 +154,38 @@
         }
     });
 
-    var Scroller = Widget.extend({
+    /**
+    * @name kendo.mobile.ui.Scroller.Description
+    * @section The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.
+    *
+    * <h3>Getting Started</h3>
+    * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
+    * <code>role</code> data attribute set to <code>scroller</code></p>. Alternatively, it can be initialized using jQuery selector.
+    * @exampleTitle Initialize mobile Scroller using a role data attribute.
+    * @example
+    * <div data-role="scroller">
+    *   Foo
+    * </div>
+    *
+    * @exampleTitle Initialize mobile Scroller using a jQuery selector.
+    * @example
+    * <div id="scroller"></div>
+    * <script>
+    * var listView = $("#scroller").kendoMobileScroller();
+    * </script>
+    *
+    */
+    var Scroller = Widget.extend(/** @lends kendo.mobile.ui.Scroller.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Widget
+        * @param {DomElement} element DOM element
+        * @param {Object} options
+        * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. See handlePull for details.
+        * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. See handlePull for details.
+        * @option {String} [releaseTemplate] <Release to refresh> The message template indicating that pullToRefresh will occur. See handlePull for details.
+        * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh. See handlePull for details.
+        */
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
@@ -215,10 +246,23 @@
             refreshTemplate: "Refreshing"
         },
 
+
+        /**
+         * Scrolls the container to the top.
+         */
         reset: function() {
             this.move.moveTo({x: 0, y: 0});
         },
 
+        /**
+         * Enables and subscribes the pull to refresh functionality.
+         * @param {Object} options pull to refresh configuration options.
+         * @param {String} options.pullTemplate  The message template displayed when the user pulls the scroller. See <code>handlePull</code> for details.
+         * @param {String} options.releaseTemplate The message template indicating that pullToRefresh will occur. See <code>handlePull</code> for details.
+         * @param {String} options.refreshTemplate The message template displayed during the refresh. See <code>handlePull</code> for details.
+         * @param {Number} options.pullOffset  The threshold after which a scroll pull will trigger the pull to refresh event. See <code>handlePull</code> for details.
+         * @param {Function} options.pull The callback to execute when a pull to refresh happens.
+         */
         handlePull: function(options) {
             var that = this;
 
