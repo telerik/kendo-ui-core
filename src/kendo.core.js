@@ -107,6 +107,8 @@
             if (events) {
                 e = e || {};
 
+                e.sender = that;
+
                 e.preventDefault = function () {
                     isDefaultPrevented = true;
                 }
