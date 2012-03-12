@@ -12,6 +12,8 @@
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
         OUT_OF_BOUNDS_FRICTION = 0.5,
+        RELEASECLASS = "km-scroller-release",
+        REFRESHCLASS = "km-scroller-refresh",
         CHANGE = "change";
 
     var DragInertia = Animation.extend({
@@ -152,7 +154,38 @@
         }
     });
 
-    var Scroller = Widget.extend({
+    /**
+    * @name kendo.mobile.ui.Scroller.Description
+    * @section The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.
+    *
+    * <h3>Getting Started</h3>
+    * <p>Each mobile View initializes a scroller for its content element. In addition to that, a scroller will be initialized for every element with a
+    * <code>role</code> data attribute set to <code>scroller</code></p>. Alternatively, it can be initialized using jQuery selector.
+    * @exampleTitle Initialize mobile Scroller using a role data attribute.
+    * @example
+    * <div data-role="scroller">
+    *   Foo
+    * </div>
+    *
+    * @exampleTitle Initialize mobile Scroller using a jQuery selector.
+    * @example
+    * <div id="scroller"></div>
+    * <script>
+    * var listView = $("#scroller").kendoMobileScroller();
+    * </script>
+    *
+    */
+    var Scroller = Widget.extend(/** @lends kendo.mobile.ui.Scroller.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Widget
+        * @param {DomElement} element DOM element
+        * @param {Object} options
+        * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. See handlePull for details.
+        * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. See handlePull for details.
+        * @option {String} [releaseTemplate] <Release to refresh> The message template indicating that pullToRefresh will occur. See handlePull for details.
+        * @option {String} [refreshTemplate] <Refreshing> The message template displayed during the refresh. See handlePull for details.
+        */
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
@@ -161,6 +194,7 @@
 
             element
                 .css("overflow", "hidden")
+                .addClass("km-scroll-wrapper")
                 .wrapInner('<div class="km-scroll-container"/>');
 
             var inner = element.children().first(),
@@ -175,8 +209,9 @@
                 }),
 
                 drag = new kendo.Drag(element, {
-                    start: function() {
+                    start: function(e) {
                         boundary.refresh();
+                        drag.capture();
                     }
                 }),
 
@@ -203,36 +238,88 @@
             boundary.refresh();
         },
 
+        options: {
+            name: "Scroller",
+            pullOffset: 140,
+            pullTemplate: "Pull to refresh",
+            releaseTemplate: "Release to refresh",
+            refreshTemplate: "Refreshing"
+        },
+
+
+        /**
+         * Scrolls the container to the top.
+         */
         reset: function() {
             this.move.moveTo({x: 0, y: 0});
         },
 
-        pullHandled: function() {
-            this.yinertia.onEnd();
-            this.xinertia.onEnd();
-        },
-
+        /**
+         * Enables and subscribes the pull to refresh functionality.
+         * @param {Object} options pull to refresh configuration options.
+         * @param {String} options.pullTemplate  The message template displayed when the user pulls the scroller. See <code>handlePull</code> for details.
+         * @param {String} options.releaseTemplate The message template indicating that pullToRefresh will occur. See <code>handlePull</code> for details.
+         * @param {String} options.refreshTemplate The message template displayed during the refresh. See <code>handlePull</code> for details.
+         * @param {Number} options.pullOffset  The threshold after which a scroll pull will trigger the pull to refresh event. See <code>handlePull</code> for details.
+         * @param {Function} options.pull The callback to execute when a pull to refresh happens.
+         */
         handlePull: function(options) {
             var that = this;
-            that.draggable.y.bind("change", function() {
-                if (that.move.y / OUT_OF_BOUNDS_FRICTION > options.offset) {
-                    if (!that.pulled) {
-                        that.pulled = true;
-                        options.startPull();
-                    }
-                } else if (that.pulled) {
-                    that.pulled = false;
-                    options.cancelPull();
-                }
-            });
 
-            that.drag.bind("end", function() {
-                if(that.pulled) {
-                    that.pulled = false;
-                    options.pull();
-                    that.yinertia.freeze(options.offset / 2);
+            that.pullTemplate = kendo.template(options.pullTemplate || that.options.pullTemplate);
+            that.releaseTemplate = kendo.template(options.releaseTemplate || that.options.releaseTemplate);
+            that.refreshTemplate = kendo.template(options.refreshTemplate || that.options.refreshTemplate);
+
+            that.pullOffset = options.pullOffset || that.options.pullOffset;
+            that.pullCallback = options.pull;
+
+            that.scrollElement.prepend('<span class="km-scroller-pull"><span class="km-icon"></span><span class="km-template">' + that.pullTemplate({}) + '</span></span>');
+            that.refreshHint = that.scrollElement.children().first();
+            that.hintContainer = that.refreshHint.children(".km-template");
+
+            that.draggable.y.bind("change", proxy(that._draggableChange, that));
+            that.drag.bind("end", proxy(that._dragEnd, that));
+        },
+
+        /**
+         * Indicate that the pull event is handled (i.e. Data from the server has been retrieved).
+         */
+        pullHandled: function() {
+            var that = this;
+            that.refreshHint.removeClass(REFRESHCLASS);
+            that.hintContainer.html(that.pullTemplate({}));
+            that.yinertia.onEnd();
+            that.xinertia.onEnd();
+        },
+
+        _dragEnd: function() {
+            var that = this;
+
+            if(!that.pulled) {
+                return;
+            }
+
+            that.pulled = false;
+            that.refreshHint.removeClass(RELEASECLASS).addClass(REFRESHCLASS);
+            that.hintContainer.html(that.refreshTemplate({}));
+            that.pullCallback();
+            that.yinertia.freeze(that.pullOffset / 2);
+        },
+
+        _draggableChange: function() {
+            var that = this;
+
+            if (that.move.y / OUT_OF_BOUNDS_FRICTION > that.pullOffset) {
+                if (!that.pulled) {
+                    that.pulled = true;
+                    that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
+                    that.hintContainer.html(that.releaseTemplate({}));
                 }
-            });
+            } else if (that.pulled) {
+                that.pulled = false;
+                that.refreshHint.removeClass(RELEASECLASS);
+                that.hintContainer.html(that.pullTemplate({}));
+            }
         },
 
         _initAxis: function(axis) {
@@ -263,10 +350,6 @@
             draggable.bind(CHANGE, function() {
                 scrollBar.show();
             });
-        },
-
-        options: {
-            name: "Scroller"
         }
     });
 
