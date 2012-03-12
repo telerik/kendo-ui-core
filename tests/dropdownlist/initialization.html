@@ -495,6 +495,21 @@
 
                 equal(dropdownlist.text(), "Select...");
             });
+
+            test("Wrap popup.element on init", function() {
+                var dropdownlist = new DropDownList($("<input/>"));
+                var animationContainer = dropdownlist.popup.element.parent();
+
+                ok(animationContainer.hasClass("k-animation-container"));
+            });
+
+            test("Add km-popup class to the animation container", function() {
+                var dropdownlist = new DropDownList($("<input/>"));
+                var animationContainer = dropdownlist.popup.element.parent();
+
+                ok(animationContainer.hasClass("k-animation-container"));
+                ok(animationContainer.hasClass("km-popup"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
