@@ -101,6 +101,17 @@
                 ok(ths.eq(0).attr("data-kendo-field") === "foo");
                 ok(ths.eq(1).attr("data-kendo-field") === "bar");
             });
+            test("resetting DataSource instantiate new Sortable", 1, function() {
+                var grid = new Grid("<table />", { sortable: true, columns: ["text", "value"] });
+
+                var sortable = grid.thead.find("th:first").data("kendoSortable");
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                notStrictEqual(grid.thead.find("th:first").data("kendoSortable"), sortable);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

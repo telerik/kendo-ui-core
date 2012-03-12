@@ -112,22 +112,37 @@
             that.dataSource = that.options.dataSource;
 
             if(that.dataSource) {
-                that.dataSource.bind("change", function() {
-                    groupContainer.empty().append(
-                        $.map(this.group() || [], function(item) {
-                            var fieldName = item.field.replace(nameSpecialCharRegExp, "\\$1");
-                            var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + fieldName + "]");
-                            return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
-                        }).join("")
-                    );
-                    that._invalidateGroupContainer();
-                });
+                that._refreshHandler = proxy(that.refresh, that);
+                that.dataSource.bind("change", that._refreshHandler);
             }
         },
+
+        refresh: function() {
+            var that = this,
+                dataSource = that.dataSource;
+
+            that.groupContainer.empty().append(
+                $.map(dataSource.group() || [], function(item) {
+                    var fieldName = item.field.replace(nameSpecialCharRegExp, "\\$1");
+                    var element = that.element.find(that.options.filter).filter("[" + kendo.attr("field") + "=" + fieldName + "]");
+                    return that.buildIndicator(item.field, element.attr(kendo.attr("title")), item.dir);
+                }).join("")
+            );
+            that._invalidateGroupContainer();
+        },
+
+        destroy: function() {
+            var that = this;
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind("change", that._refreshHandler);
+            }
+        },
+
         options: {
             name: "Groupable",
             filter: "th"
         },
+
         indicator: function(field) {
             var indicators = $(".k-group-indicator", this.groupContainer);
             return $.grep(indicators, function (item)

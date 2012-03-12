@@ -24,11 +24,23 @@
             that.linkTemplate = kendo.template(that.options.linkTemplate);
             that.selectTemplate = kendo.template(that.options.selectTemplate);
 
-            that.dataSource.bind("change", proxy(that.refresh, that));
+            that._refreshHandler = proxy(that.refresh, that);
+
+            that.dataSource.bind("change", that._refreshHandler);
+
             that.list = $('<ul class="k-pager k-reset k-numeric" />').appendTo(that.element);//.html(that.selectTemplate({ text: 1 }));
-            that.element.delegate("a", "click",  proxy(that._click, that));
+            that._clickHandler = proxy(that._click, that);
+
+            that.element.delegate("a", "click", that._clickHandler);
 
             that.refresh();
+        },
+
+        destroy: function() {
+            var that = this;
+
+            that.element.undelegate("a", "click", that._clickHandler);
+            that.dataSource.unbind("change", that._refreshHandler);
         },
 
         options: {
