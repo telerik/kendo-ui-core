@@ -2340,7 +2340,7 @@
 
         if (dataSource) {
             if (typeof dataSource === STRING) {
-                options.dataSource = window[dataSource];
+                options.dataSource = kendo.getter(dataSource)(window);
             } else {
                 options.dataSource = dataSource;
             }
@@ -2352,7 +2352,7 @@
             value = parseOption(element, option);
 
             if (value !== undefined) {
-                options[option] = window[value];
+                options[option] = kendo.getter(value)(window);
             }
         }
 
