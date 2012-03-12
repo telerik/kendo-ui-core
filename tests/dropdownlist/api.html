@@ -143,7 +143,7 @@
             });
 
             asyncTest("open should call _scroll method", function () {
-                dropdownlist.popup.bind("open", function(){
+                dropdownlist.bind("open", function(){
                     ok(true);
                     start();
                 });
@@ -154,7 +154,7 @@
             asyncTest("open should bind and open after this if no items", function () {
                 var dropdownlist = input.kendoDropDownList({autoBind: false, dataSource: data}).data("kendoDropDownList");
 
-                dropdownlist.popup.bind("open", function(){
+                dropdownlist.bind("open", function(){
                     ok(true);
                     start();
                 });
@@ -163,7 +163,7 @@
             });
 
             asyncTest("close should close popup", function () {
-                dropdownlist.popup.bind("close", function(){
+                dropdownlist.bind("close", function(){
                     ok(true);
                     start();
                 });

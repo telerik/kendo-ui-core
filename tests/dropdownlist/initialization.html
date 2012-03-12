@@ -496,16 +496,11 @@
                 equal(dropdownlist.text(), "Select...");
             });
 
-            test("Wrap popup.element on init", function() {
-                var dropdownlist = new DropDownList($("<input/>"));
-                var animationContainer = dropdownlist.popup.element.parent();
-
-                ok(animationContainer.hasClass("k-animation-container"));
-            });
-
             test("Add km-popup class to the animation container", function() {
                 var dropdownlist = new DropDownList($("<input/>"));
-                var animationContainer = dropdownlist.popup.element.parent();
+                dropdownlist.popup.trigger("open");
+
+                var animationContainer = dropdownlist.popup.wrapper;
 
                 ok(animationContainer.hasClass("k-animation-container"));
                 ok(animationContainer.hasClass("km-popup"));
