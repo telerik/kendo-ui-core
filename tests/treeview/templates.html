@@ -75,6 +75,20 @@
                 equal(items.eq(0).text(), "foo bar");
                 equal(items.eq(1).text(), "foo baz");
             });
+
+            test("checkboxTemplate renders k-checkbox wrappers around the template", function() {
+                var treeview = createTreeView({
+                    dataSource: [
+                        { text: "bar" }
+                    ],
+                    checkboxTemplate: kendo.template("<input type='checkbox' />")
+                });
+
+                var items = treeview.find("span.k-checkbox");
+
+                equal(items.length, 1);
+                equal(items.eq(0).find(":checkbox").length, 1);
+            });
         </script>
 
         <div id="qunit-fixture"> </div>

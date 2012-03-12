@@ -236,6 +236,7 @@
         itemWrapper: template(
             "<div class='#= cssClass(group, item) #'>" +
                 "#= toggleButton(data) #" +
+                "#= checkbox(data) #" +
                 "<#= tag(item) # class='#= textClass(item) #'#= textAttributes(item) #>" +
                     "#= image(item) ##= sprite(item) #" +
                     "#= treeview.template ? template(treeview, item) : text(item) #" +
@@ -249,6 +250,13 @@
                 "#= subGroup(treeview, group, item) #" +
                 "# } #" +
             "</li>"
+        ),
+        checkbox: template(
+            "# if (treeview.checkboxTemplate) { #" +
+                "<span class='k-checkbox'>" +
+                    "#= checkboxTemplate(treeview, group, item) #" +
+                "</span>" +
+            "# } #"
         ),
         image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
         toggleButton: template("<span class='#= toggleButtonClass(item) #'></span>"),
@@ -1351,6 +1359,7 @@
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
                 toggleButton: item.items ? templates.toggleButton : empty,
+                checkbox: treeview.checkboxTemplate ? templates.checkbox : empty,
                 subGroup: function(treeview, group, item) {
                     return TreeView.renderGroup({
                         items: item.items,
@@ -1455,6 +1464,13 @@
         },
         template: function(treeview, item) {
             return treeview.template(extend({ item: item }, rendering));
+        },
+        checkboxTemplate: function(treeview, group, item) {
+            return treeview.checkboxTemplate(extend({
+                treeview: treeview,
+                group: group,
+                item: item
+            }, rendering));
         },
         tag: function(item) {
             return item.url ? "a" : "span";
