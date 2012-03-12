@@ -2,48 +2,51 @@
         <div id="example" class="k-content">
             <ul id="panelbar">
                 <li class="k-state-active">
-                    First Item
+                    Metallica - Master of Puppets 1986
                     <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
+                        <li>Battery</li>
+                        <li>Master of Puppets</li>
+                        <li>The Thing That Should Not Be</li>
+                        <li>Welcome Home (Sanitarium)</li>
+                        <li>Disposable Heroes</li>
+                        <li>Leper Messiah</li>
+                        <li>Orion (Instrumental)</li>
+                        <li>Damage, Inc.</li>
                     </ul>
                 </li>
-                <li>
-                    Second Item
+                <!--li>
+                    Scorpions - Unbreakable 2004
                     <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
+                        <li>New Generation</li>
+                        <li>Love ´Em or Leave ´Em</li>
+                        <li>Deep and Dark</li>
+                        <li>Borderline</li>
+                        <li>Blood Too Hot</li>
+                        <li>Maybe I Maybe You</li>
+                        <li>Someday Is Now</li>
+                        <li>My City My Town</li>
+                        <li>Through My Eyes</li>
+                        <li>Can You Feel It</li>
+                        <li>This Time</li>
+                        <li>She Said</li>
+                        <li>Remember the Good Times</li>
+                        <li>Dreamers(Bonus Track Japan Edition)</li>
+                        <li>Too far(Bonus Track Japan Edition)</li>
                     </ul>
-                </li>
+                </li-->
                 <li>
-                    Third Item
+                    Iron Maiden - Brave New World 2000
                     <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li>
-                    Fourth Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
-                    </ul>
-                </li>
-                <li>
-                    Fifth Item
-                    <ul>
-                        <li>Sub Item 1</li>
-                        <li>Sub Item 2</li>
-                        <li>Sub Item 3</li>
-                        <li>Sub Item 4</li>
+                        <li>The Wicker Man</li>
+                        <li>Ghost Of The Navigator</li>
+                        <li>Brave New World</li>
+                        <li>Blood Brothers</li>
+                        <li>The Mercenary</li>
+                        <li>Dream Of Mirrors</li>
+                        <li>The Fallen Angel</li>
+                        <li>The Nomad</li>
+                        <li>Out Of The Silent Planet</li>
+                        <li>The Thin Line Between Love And Hate</li>
                     </ul>
                 </li>
                 <li>
@@ -81,10 +84,11 @@
             $("#panelbar").kendoPanelBar({
                 select: onSelect,
                 expand: onExpand,
+                expandMode: "single",
                 collapse: onCollapse,
                 contentLoad: onContentLoad,
                 error: onError,
-                contentUrls: [ , , , , , "../../content/web/panelbar/ajax/ajaxContent1.html", "error.html" ]
-            });
+                contentUrls: [ , , "../../content/web/panelbar/ajax/ajaxContent1.html", "error.html" ]
+            }).css({ width: "250px" }).css({ margin: "20px auto" });
         </script>
         <div class="console"></div>
