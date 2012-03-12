@@ -306,22 +306,39 @@
                 e.preventDefault();
 
                 $("#import-overlay").slideDown()
-                        .find("textarea").val("/*************************\n * paste LESS or CSS here *\n *************************/").select();
+                        .find("textarea").val("/**************************\n * paste LESS or CSS here *\n **************************/").select();
             },
             importTheme: function(e) {
                 e.preventDefault();
 
-                var themeContent = $(e.target).closest(".ktb-view").find("textarea").val();
+                var themeContent = $(e.target).closest(".ktb-view").find("textarea").val(),
+                    constants = this.constants;
 
                 if (lessConstantPairRe.test(themeContent)) {
-                    this.constants.deserialize(themeContent);
+                    constants.deserialize(themeContent);
                 } else {
                     this.updateStyleSheet(themeContent);
 
-                    this.constants.infer();
+                    constants.infer();
                 }
 
                 this._propertyChange({});
+
+                var clientObjects = {
+                    "ktb-colorpicker": "kendoColorPicker",
+                    "ktb-numeric": "kendoNumericTextBox",
+                    "ktb-combo": "kendoComboBox"
+                };
+
+                $("input.ktb-colorpicker,input.ktb-numeric,input.ktb-combo").each(function() {
+                    var that = this,
+                        dataType = that.className.replace(/k-formatted-value|k-input|\s+/gi, ""),
+                        clientObject = $(that).data(clientObjects[dataType]);
+
+                    if (clientObject) {
+                        clientObject.value(constants.constants[that.id].value);
+                    }
+                });
             },
             hideOverlay: function(e) {
                 e.preventDefault();
