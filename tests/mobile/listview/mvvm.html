@@ -93,6 +93,23 @@
                 equal($.trim(dom.find("li:first").html()), '<strong data-bind="text:text">foo</strong>');
             });
 
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-attributes" data-bind="source:dataSource" />');
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                var listView = dom.data("kendoMobileListView");
+
+                strictEqual(listView.dataSource, dataSource);
+            });
         </script>
     </body>
 </html>

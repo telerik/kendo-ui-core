@@ -404,6 +404,19 @@
 
                 equal(grid.tbody.find("tr>td:first").text(), "foo : 1 count: 1");
             });
+
+            test("resetting DataSource instantiate new Groupable", 1, function() {
+                var grid = new Grid("<table />", { groupable: true, columns: ["text", "value"] });
+
+                var groupable = grid.groupable;
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                notStrictEqual(grid.groupable, groupable);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

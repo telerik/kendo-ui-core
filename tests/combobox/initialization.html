@@ -458,6 +458,33 @@
                     start();
                 }, 100);
             });
+
+            test("resetting dataSource detaches the previouse events", function() {
+                var combobox = new ComboBox($("<input/>"));
+
+                var dataSource = combobox.dataSource;
+
+                combobox._dataSource();
+
+                combobox.bind("dataBound", function() {
+                    ok(false, "Change event is not detached");
+                });
+
+                dataSource.read();
+            });
+
+            test("resetting DataSource rebinds the widget", function() {
+                var combobox = new ComboBox($("<input/>"),{
+                    dataTextField: "text",
+                    dataValueField: "value"
+                });
+
+                combobox.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                equal(combobox.ul.children().length, 2);
+            });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

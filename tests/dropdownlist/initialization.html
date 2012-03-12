@@ -505,6 +505,33 @@
                 ok(animationContainer.hasClass("k-animation-container"));
                 ok(animationContainer.hasClass("km-popup"));
             });
+
+            test("resetting dataSource detaches the previouse events", function() {
+                var dropdownlist = new DropDownList($("<input/>"));
+
+                var dataSource = dropdownlist.dataSource;
+
+                dropdownlist._dataSource();
+
+                dropdownlist.bind("dataBound", function() {
+                    ok(false, "Change event is not detached");
+                });
+
+                dataSource.read();
+            });
+
+            test("resetting DataSource rebinds the widget", function() {
+                var dropdownlist = new DropDownList($("<input/>"),{
+                    dataTextField: "text",
+                    dataValueField: "value"
+                });
+
+                dropdownlist.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                equal(dropdownlist.ul.children().length, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
