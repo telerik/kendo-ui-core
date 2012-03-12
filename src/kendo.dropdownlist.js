@@ -326,8 +326,6 @@
 
             that._enable();
 
-            that.popup.wrapper = kendo.wrap(that.popup.element).addClass("km-popup");
-
             that.selectedIndex = -1;
 
             if (options.autoBind) {
@@ -756,6 +754,14 @@
             setTimeout(function() {
                 that._word += String.fromCharCode(e.keyCode || e.charCode);
                 that._search();
+            });
+        },
+
+        _popup: function() {
+            Select.fn._popup.call(this);
+            this.popup.one("open", function() {
+                this.wrapper = kendo.wrap(this.element)
+                                    .addClass("km-popup");
             });
         },
 

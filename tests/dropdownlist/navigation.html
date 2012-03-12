@@ -35,17 +35,9 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
-                    var ul = $(document.body).children(":last");
-                    if(!ul[0].id) {
-                        ul.remove();
-                    }
-
-                    var parent = input.parent();
-                    if (parent.is("div")) {
-                        parent.remove();
-                    } else {
-                        input.remove();
-                    }
+                    var ddl = input.data("kendoDropDownList");
+                    ddl.popup.wrapper.remove();
+                    ddl.wrapper.remove();
                 }
             });
 
@@ -280,13 +272,13 @@
                 ok(blurWasCalled);
             });
 
-            asyncTest("pressing alt + down should open popup", function() {
-                var blurWasCalled, dropdownlist = new DropDownList(input, {
-                    dataSource: data
-                });
-                dropdownlist.popup.bind("open", function(){
-                    ok(true);
-                    start();
+            asyncTest("pressing alt + down should open popup", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: data,
+                    open: function() {
+                        ok(true);
+                        start();
+                    }
                 });
 
                 dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
