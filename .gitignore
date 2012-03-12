@@ -10,7 +10,7 @@
 app.js
 deploy/
 demos/examples/shared/js/kendo.examples.js
-docs/
+demos/mvc/content/docs/
 !src/docs
 live/
 node_modules
