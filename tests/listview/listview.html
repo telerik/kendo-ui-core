@@ -273,6 +273,29 @@
                 ok(triggered);
             });
 
+            test("resetting dataSource detaches the previouse events",1, function() {
+                var listView = new kendo.ui.ListView($("<ul/>"), { template: "<li></li>" });
+
+                var dataSource = listView.dataSource;
+                listView._dataSource();
+
+                listView.bind("dataBound", function() {
+                    ok(false, "Change event is not detached");
+                });
+
+                dataSource.read();
+                notStrictEqual(listView.dataSource, dataSource);
+            });
+
+            test("resetting DataSource rebinds the widget", function() {
+                var listView = new kendo.ui.ListView($("<ul/>"), { template: "<li></li>" });
+
+                listView.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                equal(listView.element.find("li").length, 2);
+            });
         </script>
     </body>
 </html>

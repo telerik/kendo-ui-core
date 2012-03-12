@@ -70,13 +70,30 @@
             return this.element.find(FOCUSSELECTOR);
         },
 
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+            this._dataSource();
+
+            dataSource.fetch();
+        },
+
         _dataSource: function() {
             var that = this;
 
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler)
+                                .unbind(REQUESTSTART, that._requestStartHandler)
+                                .unbind(ERROR, that._errorHandler);
+            } else {
+                that._refreshHandler = proxy(that.refresh, that);
+                that._requestStartHandler = proxy(that._requestStart, that);
+                that._errorHandler = proxy(that._error, that);
+            }
+
             that.dataSource = DataSource.create(that.options.dataSource)
-                .bind(CHANGE, proxy(that.refresh, that))
-                .bind(REQUESTSTART, proxy(that._requestStart, that))
-                .bind(ERROR, proxy(that._error, that));
+                                .bind(CHANGE, that._refreshHandler)
+                                .bind(REQUESTSTART, that._requestStartHandler)
+                                .bind(ERROR, that._errorHandler);
         },
 
         _requestStart: function() {

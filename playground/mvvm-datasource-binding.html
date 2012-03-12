@@ -25,13 +25,6 @@
         <script src="../src/kendo.dropdownlist.js"></script>
         <script src="../src/kendo.autocomplete.js"></script>
         <script src="../src/kendo.combobox.js"></script>
-        <script src="../src/kendo.dataviz.core.js"></script>
-        <script src="../src/kendo.dataviz.themes.js"></script>
-        <script src="../src/kendo.dataviz.svg.js"></script>
-        <script src="../src/kendo.dataviz.vml.js"></script>
-        <script src="../src/kendo.dataviz.chart.js"></script>
-        <script src="../src/kendo.dataviz.gauge.js"></script>
-
     </head>
     <body>
 
@@ -40,7 +33,7 @@
             <select data-role="combobox" data-bind="source:products, value:selectedProduct" data-text-field="ProductName" data-value-field="ProductID"></select>
             <input data-role="autocomplete" data-bind="source:products, value:selectedProduct" data-text-field="ProductName" />
             -->
-            <div data-role="chart" data-bind="source:chartSource" data-series='[{ "field": "nuclear", "name": "Nuclear" }, { "field": "hydro", "name": "Hydro" }]'></div>
+            <div data-role="grid"  data-groupable="true" data-bind="source:products" data-sortable="true" data-pageable="true" data-columns='["ProductName", "UnitPrice", "UnitsInStock"]'></div>
         </div>
 
         <script>
@@ -55,18 +48,10 @@
                         },
                         pageSize: 15
                     }),
-                    selectedProduct: {},
-                    chartSource: new kendo.data.DataSource({
-                        transport: {
-                            read: {
-                                url: "chart-data.json",
-                                dataType: "json"
-                            }
-                        }
-                    }),
+                    selectedProduct: {}
                 });
 
-                kendo.bind($("#container"), viewModel, kendo.dataviz.ui);
+                kendo.bind($("#container"), viewModel);
             });
         </script>
     </body>
