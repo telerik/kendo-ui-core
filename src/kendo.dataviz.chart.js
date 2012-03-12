@@ -14,7 +14,7 @@
         Class = kendo.Class,
         DataSource = kendo.data.DataSource,
         Widget = kendo.ui.Widget,
-        baseTemplate = kendo.template,
+        template = kendo.template,
         deepExtend = kendo.deepExtend,
         format = kendo.format,
         getter = kendo.getter,
@@ -464,7 +464,7 @@
                 seriesClone;
 
             if (series.groupNameTemplate) {
-                nameTemplate = baseTemplate(series.groupNameTemplate);
+                nameTemplate = template(series.groupNameTemplate);
             }
 
             for (groupIx = 1; groupIx < dataLength; groupIx++) {
@@ -1163,7 +1163,7 @@
 
             if (labels.visible && value) {
                 if (labels.template) {
-                    labelTemplate = baseTemplate(labels.template);
+                    labelTemplate = template(labels.template);
                     labelText = labelTemplate({
                         dataItem: bar.dataItem,
                         category: bar.category,
@@ -1786,7 +1786,7 @@
 
             if (labels.visible) {
                 if (labels.template) {
-                    var labelTemplate = baseTemplate(labels.template);
+                    var labelTemplate = template(labels.template);
                     labelText = labelTemplate({
                         dataItem: point.dataItem,
                         category: point.category,
@@ -2442,7 +2442,7 @@
             }
 
             if (labels.template) {
-                labelTemplate = baseTemplate(labels.template);
+                labelTemplate = template(labels.template);
                 labelText = labelTemplate({
                     dataItem: segment.dataItem,
                     category: segment.category,
@@ -3971,7 +3971,7 @@
                 options = tooltip.options,
                 chartPadding = tooltip.chartPadding,
                 anchor,
-                template,
+                tooltipTemplate,
                 content,
                 tooltipOptions,
                 top,
@@ -3985,8 +3985,8 @@
             tooltipOptions = deepExtend({}, tooltip.options, point.options.tooltip);
 
             if (tooltipOptions.template) {
-                template = baseTemplate(tooltipOptions.template);
-                content = template({
+                tooltipTemplate = template(tooltipOptions.template);
+                content = tooltipTemplate({
                     value: point.value,
                     category: point.category,
                     series: point.series,

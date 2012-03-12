@@ -5,7 +5,7 @@
         kendo = window.kendo,
         dataviz = kendo.dataviz = {},
         Class = kendo.Class,
-        baseTemplate = kendo.template,
+        template = kendo.template,
         format = kendo.format,
         map = $.map,
         grep = $.grep,
@@ -15,7 +15,7 @@
         deepExtend = kendo.deepExtend;
 
     var renderTemplate = function(definition) {
-        return baseTemplate(definition, { useWithBlock: false, paramName: "d" });
+        return template(definition, { useWithBlock: false, paramName: "d" });
     }
 
     var CSS_PREFIX = "k-";
@@ -804,7 +804,7 @@
                     labelText = axis.getLabelText(i);
 
                     if (labelOptions.template) {
-                        labelTemplate = baseTemplate(labelOptions.template);
+                        labelTemplate = template(labelOptions.template);
                         labelText = labelTemplate({ value: labelText });
                     }
 
