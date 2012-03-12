@@ -138,9 +138,11 @@
 
             $(element).addClass("k-chart");
 
+            chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
+
             chart.dataSource = DataSource
                 .create(dataSourceOptions)
-                .bind(CHANGE, proxy(chart._onDataChanged, chart));
+                .bind(CHANGE, chart._dataChangeHandler);
 
             if (dataSourceOptions && options.autoBind) {
                 chart.dataSource.fetch();
@@ -150,6 +152,20 @@
             chart._attachEvents();
 
             kendo.notify(chart, dataviz.ui);
+        },
+
+        setDataSource: function(dataSource) {
+            var chart = this;
+
+            if (chart.dataSource) {
+                chart.dataSource.unbind(CHANGE, chart._dataChangeHandler);
+            }
+
+            chart.dataSource = dataSource;
+
+            dataSource.bind(CHANGE, chart._dataChangeHandler);
+
+            dataSource.fetch();
         },
 
         events:[
