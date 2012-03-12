@@ -227,6 +227,16 @@
 
                 ok(that === observable);
             });
+
+            test("the observable is passed as sender in the event arguments", 1, function() {
+                var observable = new Observable();
+
+                observable.bind("foo", function(e) {
+                    strictEqual(e.sender, observable);
+                });
+
+                observable.trigger("foo");
+            });
         </script>
     </body>
 </html>
