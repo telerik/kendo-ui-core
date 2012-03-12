@@ -139,6 +139,20 @@
                 equal(testwidget.options.click, foo);
             });
 
+            var bar = {
+                baz: function() {}
+            }
+
+            test("parses nested events from data attributes", function() {
+                var dom = $('<div data-role="testwidget" data-click="bar.baz" />');
+
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+
+                equal(testwidget.options.click, bar.baz);
+            });
+
             test("parses templates from data attributes", function() {
                 var dom = $('<div data-role="testwidget" data-template="template" />');
 
