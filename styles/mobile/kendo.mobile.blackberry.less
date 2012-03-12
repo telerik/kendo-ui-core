@@ -19,7 +19,8 @@
 .km-blackberry .km-toolbar,
 .km-blackberry .km-button,
 .km-blackberry .km-buttongroup,
-.km-blackberry .km-tabstrip
+.km-blackberry .km-tabstrip,
+.km-blackberry input[type=file]
 {
     font: normal 1em Arial, Helvetica, sans-serif;
     color: #000;
@@ -91,7 +92,9 @@
 
 .km-blackberry .km-button:not([disabled]):active,
 .km-blackberry .km-button.km-state-active:not([disabled]),
-.km-blackberry .km-buttongroup .km-state-active
+.km-blackberry .km-buttongroup .km-state-active,
+.km-blackberry input[type=file]:active,
+.km-blackberry input[type=file]:focus
 {
     color: #FFF;
     background-color: #057fe4;
@@ -496,10 +499,7 @@
 
 /* Forms */
 
-.km-blackberry input[type=text],
-.km-blackberry input[type=date],
-.km-blackberry input[type=time],
-.km-blackberry input[type=datetime],
+.km-blackberry input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]),
 .km-blackberry select:not([multiple]),
 .km-blackberry .km-select .k-dropdown-wrap
 {
@@ -507,7 +507,16 @@
     right: .8em;
     padding: .4em;
     outline: none;
+    margin-top: -1.05em;
     .border-radius(~".3em");
+}
+
+.km-root .km-blackberry .km-view .km-content input[type=file]
+{
+    padding: .2em;
+    outline: none;
+    right: .8em;
+    margin-top: -1.1em;
 }
 
 .km-blackberry .km-select
@@ -522,19 +531,34 @@
     padding-right: 3em;
 }
 
+.km-blackberry input[type=password],
+.km-blackberry input[type=search],
+.km-blackberry input[type=number],
+.km-blackberry input[type=tel],
+.km-blackberry input[type=url],
+.km-blackberry input[type=email],
 .km-blackberry input[type=text]
 {
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
 }
 
+.km-blackberry input[type=password]:focus,
+.km-blackberry input[type=search]:focus,
+.km-blackberry input[type=number]:focus,
+.km-blackberry input[type=tel]:focus,
+.km-blackberry input[type=url]:focus,
+.km-blackberry input[type=email]:focus,
 .km-blackberry input[type=text]:focus
 {
     border: 1px solid rgba(0,50,100,.7);
     .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 0 2px rgba(5,127,228,.6)");
 }
 
+.km-blackberry input[type=color],
+.km-blackberry input[type=week],
 .km-blackberry input[type=date],
 .km-blackberry input[type=time],
+.km-blackberry input[type=month],
 .km-blackberry input[type=datetime],
 .km-blackberry select:not([multiple]),
 .km-blackberry .km-select .k-dropdown-wrap
@@ -545,11 +569,17 @@
     .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.2)");
 }
 
+.km-blackberry input[type=color]:active,
+.km-blackberry input[type=week]:active,
 .km-blackberry input[type=date]:active,
 .km-blackberry input[type=time]:active,
+.km-blackberry input[type=month]:active,
 .km-blackberry input[type=datetime]:active,
+.km-blackberry input[type=color]:focus,
+.km-blackberry input[type=week]:focus,
 .km-blackberry input[type=date]:focus,
 .km-blackberry input[type=time]:focus,
+.km-blackberry input[type=month]:focus,
 .km-blackberry input[type=datetime]:focus,
 .km-blackberry select:not([multiple]):focus,
 .km-blackberry .km-select .k-state-focused

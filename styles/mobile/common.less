@@ -1039,10 +1039,7 @@
 
 /* Form elements */
 
-input[type=text],
-input[type=date],
-input[type=time],
-input[type=datetime],
+input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
 select:not([multiple]),
 .km-select
 {
@@ -1051,10 +1048,7 @@ select:not([multiple]),
     -webkit-appearance: none;
 }
 
-input[type=text],
-input[type=date],
-input[type=time],
-input[type=datetime]
+input
 {
     .user-select(text);
 }
@@ -1065,10 +1059,7 @@ select:not([multiple])
     .user-select(none);
 }
 
-.km-list input[type=text],
-.km-list input[type=date],
-.km-list input[type=time],
-.km-list input[type=datetime],
+.km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
 .km-list select:not([multiple]),
 .km-list .km-select
 {

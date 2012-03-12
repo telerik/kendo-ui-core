@@ -73,7 +73,9 @@
     background: #d6d6d6;
 }
 
-.km-android .km-button.km-state-active
+.km-android .km-button.km-state-active,
+.km-android input[type=file]:active,
+.km-android input[type=file]:focus
 {
     background: #4cbee8;
     overflow: visible;
@@ -766,25 +768,35 @@
 
 /* Forms */
 
-.km-android input[type=text],
-.km-android input[type=date],
-.km-android input[type=time],
-.km-android input[type=datetime],
+.km-android input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]),
 .km-android select:not([multiple]),
 .km-android .km-select .k-dropdown-wrap
 {
     color: #fff;
-    border: 0;
-    border-bottom: 1px solid rgba(127,127,127,.5);
-    margin-bottom: 1px;
     padding: .4em;
     outline: none;
     .border-radius(0);
     .box-sizing(padding-box);
 }
 
+.km-android input[type=file]
+{
+    color: #fff;
+    padding: .25em;
+    outline: none;
+}
+
+.km-android input[type=password],
+.km-android input[type=search],
+.km-android input[type=number],
+.km-android input[type=tel],
+.km-android input[type=url],
+.km-android input[type=email],
 .km-android input[type=text]
 {
+    border: 0;
+    border-bottom: 1px solid rgba(127,127,127,.5);
+    margin-bottom: 1px;
     background-clip: padding-box;
     background: linear-gradient(top, transparent 90%, #777 90%, #777),
                 linear-gradient(top, transparent 90%, #777 90%, #777) transparent;
@@ -793,6 +805,12 @@
     background-size: 1px 100%;
 }
 
+.km-android input[type=password]:focus,
+.km-android input[type=search]:focus,
+.km-android input[type=number]:focus,
+.km-android input[type=tel]:focus,
+.km-android input[type=url]:focus,
+.km-android input[type=email]:focus,
 .km-android input[type=text]:focus
 {
     background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)),
@@ -804,20 +822,37 @@
     border-bottom: 2px solid rgba(40,170,220,.6);
 }
 
+.km-android input[type=month],
+.km-android input[type=color],
+.km-android input[type=week],
 .km-android input[type=date],
 .km-android input[type=time],
 .km-android input[type=datetime],
 .km-android select:not([multiple]),
 .km-android .km-select .k-dropdown-wrap
 {
+    border: 0;
+    border-bottom: 1px solid rgba(127,127,127,.5);
+    margin-bottom: 1px;
     background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;
     background-clip: padding-box;
     background-size: auto 100%;
 }
 
+.km-android input:focus
+{
+    display: none;
+}
+
+.km-android input[type=month]:active,
+.km-android input[type=color]:active,
+.km-android input[type=week]:active,
 .km-android input[type=date]:active,
 .km-android input[type=time]:active,
 .km-android input[type=datetime]:active,
+.km-android input[type=month]:focus,
+.km-android input[type=color]:focus,
+.km-android input[type=week]:focus,
 .km-android input[type=date]:focus,
 .km-android input[type=time]:focus,
 .km-android input[type=datetime]:focus,
