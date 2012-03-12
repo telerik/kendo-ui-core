@@ -172,7 +172,7 @@
          *    max: 1,
          *    step: 0.01
          * });
-         * @option {String} [placeholder] <Enter value> Specifies the text displayed when the input is empty.
+         * @option {String} [placeholder] <""> Specifies the text displayed when the input is empty.
          * _example
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
@@ -267,6 +267,7 @@
             value: NULL,
             step: 1,
             format: "n",
+            placeholder: "",
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
         },
