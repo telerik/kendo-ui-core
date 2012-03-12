@@ -59,6 +59,39 @@
                 var grid = new Grid(table(), { data:[], pageable: { pageSize: 42 } });
                 equal(grid.dataSource.pageSize(), 42);
             });
+
+            test("resetting DataSource initialize the pager", function() {
+                var grid = new Grid(table(), { pageable: true });
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}],
+                    pageSize: 1
+                }));
+
+                equal(grid.wrapper.find(".k-pager-wrap li").length, 2)
+            });
+
+            test("resetting DataSource does remove previous Pager instance", 2, function() {
+                var grid = new Grid(table(), { pageable: true });
+
+                var pager = grid.pager.bind("change", function() {
+                    ok(false, "Original Pager change event is raised");
+                });
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}],
+                    pageSize: 1
+                }));
+
+                grid.pager.bind("change", function() {
+                    ok(true);
+                });
+
+                grid.wrapper.find(".k-pager-wrap li:last > a").click();
+
+                notStrictEqual(pager, grid.pager);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -288,8 +288,7 @@
             var that = this,
                 type = toString.call(object);
 
-            if (type === "[object Object]" ) {
-
+            if (type === "[object Object]" && !(object instanceof DataSource)) {
                 if (!(object instanceof ObservableObject)) {
                     object = new ObservableObject(object);
                 }

@@ -191,6 +191,36 @@
                 link.trigger(kendo.support.mouseup);
             });
 
+            test("resetting dataSource detaches the previouse events", function() {
+                dom = $("<ul/>");
+
+                listView = new ListView(dom, {dataSource: dataSource});
+
+                var dataSource = listView.dataSource;
+
+                listView._dataSource();
+
+                listView.bind("dataBound", function() {
+                    ok(false, "Change event is not detached");
+                });
+
+                dataSource.read();
+
+                notStrictEqual(listView.dataSource, dataSource);
+            });
+
+            test("resetting DataSource rebinds the widget", function() {
+                dom = $("<ul/>");
+
+                listView = new ListView(dom, {dataSource: dataSource});
+
+                listView.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                equal(dom.find("li").length, 2);
+            });
+
             var application;
 
             module("pull to refresh", {

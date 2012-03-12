@@ -168,6 +168,24 @@
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
             });
+
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<div data-role="chart" data-bind="source:dataSource" />').data("series", [{ field: "text" }]);
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                var chart = dom.data("kendoChart");
+
+                strictEqual(chart.dataSource, dataSource);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

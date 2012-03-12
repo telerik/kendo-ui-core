@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MVVM</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.fx.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.data.odata.js"></script>
+        <script src="../src/kendo.binder.js"></script>
+        <script src="../src/kendo.draganddrop.js"></script>
+        <script src="../src/kendo.groupable.js"></script>
+        <script src="../src/kendo.pager.js"></script>
+        <script src="../src/kendo.sortable.js"></script>
+        <script src="../src/kendo.grid.js"></script>
+        <script src="../src/kendo.popup.js"></script>
+        <script src="../src/kendo.list.js"></script>
+        <script src="../src/kendo.dropdownlist.js"></script>
+        <script src="../src/kendo.autocomplete.js"></script>
+        <script src="../src/kendo.combobox.js"></script>
+    </head>
+    <body>
+
+        <div id="container">
+<!--            <select data-role="dropdownlist" data-bind="source:products, value:selectedProduct" data-text-field="ProductName" data-value-field="ProductID"></select>
+            <select data-role="combobox" data-bind="source:products, value:selectedProduct" data-text-field="ProductName" data-value-field="ProductID"></select>
+            <input data-role="autocomplete" data-bind="source:products, value:selectedProduct" data-text-field="ProductName" />
+            -->
+            <div data-role="grid"  data-groupable="true" data-bind="source:products" data-sortable="true" data-pageable="true" data-columns='["ProductName", "UnitPrice", "UnitsInStock"]'></div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                var viewModel = kendo.observable({
+                    products: new kendo.data.DataSource({
+                        transport: {
+                            read: {
+                                url: "http://demos.kendoui.com/service/Products",
+                                dataType: "jsonp"
+                            }
+                        },
+                        pageSize: 15
+                    }),
+                    selectedProduct: {}
+                });
+
+                kendo.bind($("#container"), viewModel);
+            });
+        </script>
+    </body>
+</html>

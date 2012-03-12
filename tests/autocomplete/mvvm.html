@@ -351,6 +351,24 @@
 
                 raises(function() { kendo.bind(dom, {}); }, "Error is not thrown");
             });
+
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<input data-text-field="text" data-bind="source:dataSource" data-role="autocomplete" />');
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var autocomplete = dom.data("kendoAutoComplete");
+
+                strictEqual(autocomplete.dataSource, dataSource);
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">

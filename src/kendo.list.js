@@ -317,6 +317,15 @@
             List.fn.init.call(this, element, options);
         },
 
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+
+            this._dataSource();
+
+            this._selectItem();
+        },
+
+
         /**
         * Closes the drop-down list.
         * @example
@@ -413,9 +422,17 @@
                                      { field: options.dataValueField }];
             }
 
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler)
+                               .unbind("requestStart", that._requestStartHandler);
+            } else {
+                that._refreshHandler = proxy(that.refresh, that);
+                that._requestStartHandler = proxy(that._showBusy, that);
+            }
+
             that.dataSource = kendo.data.DataSource.create(dataSource)
-                                   .bind(CHANGE, proxy(that.refresh, that))
-                                   .bind("requestStart", proxy(that._showBusy, that));
+                                   .bind(CHANGE, that._refreshHandler)
+                                   .bind("requestStart", that._requestStartHandler);
         },
 
         _index: function(value) {

@@ -996,6 +996,22 @@
             SAVECHANGES
         ],
 
+        setDataSource: function(dataSource) {
+            var that = this;
+
+            that.options.dataSource = dataSource;
+
+            that._dataSource();
+
+            that._pageable();
+
+            that._groupable();
+
+            that._thead();
+
+            dataSource.fetch();
+        },
+
         options: {
             name: "Grid",
             columns: [],
@@ -1608,9 +1624,28 @@
                 wrapper = that.wrapper,
                 groupable = that.options.groupable;
 
+            if (!that.groupable) {
+                that.table.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
+                    var element = $(this),
+                    group = element.closest("tr");
+
+                    if(element.hasClass('k-collapse')) {
+                        that.collapseGroup(group);
+                    } else {
+                        that.expandGroup(group);
+                    }
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            }
+
             if (groupable) {
                 if(!wrapper.has("div.k-grouping-header")[0]) {
                     $("<div />").addClass("k-grouping-header").html("&nbsp;").prependTo(wrapper);
+                }
+
+                if (that.groupable) {
+                    that.groupable.destroy();
                 }
 
                 that.groupable = new Groupable(wrapper, {
@@ -1619,19 +1654,6 @@
                     dataSource: that.dataSource
                 });
             }
-
-            that.table.delegate(".k-grouping-row .k-collapse, .k-grouping-row .k-expand", CLICK, function(e) {
-                var element = $(this),
-                    group = element.closest("tr");
-
-                if(element.hasClass('k-collapse')) {
-                    that.collapseGroup(group);
-                } else {
-                    that.expandGroup(group);
-                }
-                e.preventDefault();
-                e.stopPropagation();
-            });
         },
 
         _selectable: function() {
@@ -2045,10 +2067,20 @@
                 }
             }
 
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler)
+                                .unbind(REQUESTSTART, that._requestStartHandler)
+                                .unbind(ERROR, that._errorHandler);
+            } else {
+                that._refreshHandler = proxy(that.refresh, that);
+                that._requestStartHandler = proxy(that._requestStart, that);
+                that._errorHandler = proxy(that._error, that);
+            }
+
             that.dataSource = DataSource.create(dataSource)
-                                .bind(CHANGE, proxy(that.refresh, that))
-                                .bind(REQUESTSTART, proxy(that._requestStart, that))
-                                .bind(ERROR, proxy(that._error, that));
+                                .bind(CHANGE, that._refreshHandler)
+                                .bind(REQUESTSTART, that._requestStartHandler)
+                                .bind(ERROR, that._errorHandler);
         },
 
         _error: function() {
@@ -2107,10 +2139,14 @@
                 pageable = that.options.pageable;
 
             if (pageable) {
-                wrapper = that.wrapper.children("div.k-grid-pager");
+                wrapper = that.wrapper.children("div.k-grid-pager").empty();
 
                 if (!wrapper.length) {
                     wrapper = $('<div class="k-pager-wrap k-grid-pager"/>').appendTo(that.wrapper);
+                }
+
+                if (that.pager) {
+                    that.pager.destroy();
                 }
 
                 if (typeof pageable === "object" && pageable instanceof kendo.ui.Pager) {
