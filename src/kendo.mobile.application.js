@@ -579,12 +579,38 @@
             return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
         },
 
+        /**
+        * Hides the loading animation.
+        * @example
+        * <script>
+        *   // kendo mobile Application
+        *   var app = new kendo.mobile.Application();
+        * </script>
+        * <script>
+        *   // hides the loading animation
+        *
+        *   app.hideLoading();
+        * </script>
+        */
         hideLoading: function() {
             var that = this;
             clearTimeout(that._loading);
             that.loader.hide();
         },
 
+        /**
+        * Shows the loading animation.
+        * @example
+        * <script>
+        *   // kendo mobile Application
+        *   var app = new kendo.mobile.Application();
+        * </script>
+        * <script>
+        *   // shows the loading animation
+        *
+        *   app.showLoading();
+        * </script>
+        */
         showLoading: function() {
             var that = this;
 
