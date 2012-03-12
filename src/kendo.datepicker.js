@@ -683,8 +683,8 @@
             footer: '#= kendo.toString(data,"D") #',
             start: MONTH,
             depth: MONTH,
-            month : {},
-            animation: {}
+            animation: {},
+            month : {}
         },
 
         setOptions: function(options) {
