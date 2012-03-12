@@ -201,9 +201,10 @@
         },
 
         refresh: function(key) {
-            var handler = this.handlers[key] = this.bindings.events[key].get();
+            var binding = this.bindings.events[key],
+                handler = this.handlers[key] = binding.get();
 
-            $(this.element).bind(key, handler);
+            $(this.element).bind(key, binding.source, handler);
         },
 
         destroy: function() {
@@ -213,16 +214,6 @@
             for (handler in this.handlers) {
                 element.unbind(handler, this.handlers[handler]);
             }
-        }
-    });
-
-    binders.click = Binder.extend({
-        refresh: function() {
-            this.handler = this.bindings.click.get();
-            $(this.element).click(this.handler);
-        },
-        destroy: function() {
-            $(this.element).unbind("click", this.handler);
         }
     });
 
@@ -645,9 +636,9 @@
 
             dataBinding: function() {
                 var idx,
-                length,
-                widget = this.widget,
-                items = widget.items();
+                    length,
+                    widget = this.widget,
+                    items = widget.items();
 
                 for (idx = 0, length = items.length; idx < length; idx++) {
                     unbindElementTree(items[idx]);
@@ -656,12 +647,12 @@
 
             dataBound: function() {
                 var idx,
-                length,
-                widget = this.widget,
-                items = widget.items(),
-                dataSource = widget.dataSource,
-                view = dataSource.view(),
-                groups = dataSource.group() || [];
+                    length,
+                    widget = this.widget,
+                    items = widget.items(),
+                    dataSource = widget.dataSource,
+                    view = dataSource.view(),
+                    groups = dataSource.group() || [];
 
                 if (items.length) {
                     if (groups.length) {
@@ -669,7 +660,7 @@
                     }
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], view[idx]);
+                        bindElement(items[idx], this.bindings.source.root, view[idx]);
                     }
                 }
             },
@@ -811,7 +802,7 @@
                     }
                 }
             } else if (name !== "template") {
-                throw new Error("The " + name + "binding is not supported by the " + name + " element");
+                throw new Error("The " + name + " binding is not supported by the " + this.target.nodeName.toLowerCase() + " element");
             }
         },
 
@@ -898,7 +889,7 @@
     }
 
     function bindingTargetForRole(role, element, namespace) {
-        var type = (namespace || kendo.ui).roles[role];
+        var type = namespace.roles[role];
 
         if (type) {
             return new WidgetBindingTarget(kendo.initWidget(element, type.options, namespace));
@@ -960,9 +951,7 @@
             target;
 
         if (!namespace) {
-           if (!source) {
-               source = root;
-           }
+            namespace = kendo.ui;
         }
 
         if (role || bind) {
@@ -990,7 +979,9 @@
             }
 
             if (bindings.click) {
-                bindings.click = new EventBinding(root, source, bind.click);
+                bind.events = bind.events || {};
+                bind.events.click = bind.click;
+                delete bindings.click;
             }
 
             if (bindings.source) {
@@ -1018,7 +1009,7 @@
 
         if (deep && children) {
             for (idx = 0; idx < children.length; idx++) {
-                bindElement(children[idx], source, namespace);
+                bindElement(children[idx], root, source, namespace);
             }
         }
     }
@@ -1030,7 +1021,7 @@
         dom = $(dom);
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object, namespace);
+            bindElement(dom[idx], object, object, namespace);
         }
     }
 
@@ -1075,8 +1066,8 @@
     }
 
     function notify(widget, namespace) {
-        var element = widget.element;
-        var bindingTarget = element[0].kendoBindingTarget;
+        var element = widget.element,
+            bindingTarget = element[0].kendoBindingTarget;
 
         if (bindingTarget) {
             bind(element, bindingTarget.source, namespace);
