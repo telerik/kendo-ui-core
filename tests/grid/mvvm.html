@@ -150,6 +150,23 @@
 
                 kendo.bind(dom, observable);
             });
+
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<div data-role="grid" data-bind="source:dataSource" />');
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var grid = dom.data("kendoGrid");
+
+                strictEqual(grid.dataSource, dataSource);
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

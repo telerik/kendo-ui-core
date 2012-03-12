@@ -111,6 +111,30 @@
                 equal(grid.dataItem(rows.first()).foo, "baz");
             });
 
+            test("resetting dataSource detaches the previouse events", function() {
+                var grid = new Grid($("<table><tbody/></table>")[0]);
+
+                var dataSource = grid.dataSource;
+
+                grid._dataSource();
+
+                grid.bind("dataBound", function() {
+                    ok(false, "Change event is not detached");
+                });
+
+                dataSource.read();
+            });
+
+            test("resetting DataSource rebinds the widget", function() {
+                var grid = new Grid($("<table><tbody/></table>")[0]);
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}]
+                }));
+
+                equal(grid.table.find("tr").length, 2);
+                equal(grid.columns.length, 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
