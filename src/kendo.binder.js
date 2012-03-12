@@ -998,7 +998,7 @@
 
         if (deep && children) {
             for (idx = 0; idx < children.length; idx++) {
-                bindElement(children[idx], source);
+                bindElement(children[idx], source, namespace);
             }
         }
     }
