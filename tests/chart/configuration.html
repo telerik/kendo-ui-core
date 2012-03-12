@@ -261,8 +261,8 @@
                 });
 
                 test("xAxis can't be set to vertical", function() {
-                    createScatterChart({ xAxis: { isVertical: true } });
-                    same(plotArea.namedXAxes.primary.options.isVertical, false);
+                    createScatterChart({ xAxis: { vertical: true } });
+                    same(plotArea.namedXAxes.primary.options.vertical, false);
                 });
 
                 test("yAxis settings are applied to primary Y Axis", function() {
@@ -271,8 +271,8 @@
                 });
 
                 test("yAxis can't be set to horizontal", function() {
-                    createScatterChart({ yAxis: { isVertical: false } });
-                    same(plotArea.namedYAxes.primary.options.isVertical, true);
+                    createScatterChart({ yAxis: { vertical: false } });
+                    same(plotArea.namedYAxes.primary.options.vertical, true);
                 });
 
                 // ------------------------------------------------------------

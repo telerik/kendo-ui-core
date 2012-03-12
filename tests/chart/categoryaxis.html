@@ -329,7 +329,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ isVertical: true });
+                        createCategoryAxis({ vertical: true });
                     }
                 });
 
@@ -343,14 +343,14 @@
                 });
 
                 test("should not create axis line if visible is false", function() {
-                    createCategoryAxis({ line: { visible: false }, isVertical: true });
+                    createCategoryAxis({ line: { visible: false }, vertical: true });
 
                     categoryAxis.getViewElements(view);
                     ok(view.log.line.length == 0);
                 });
 
                 test("should not render axis if visible is false", function() {
-                    createCategoryAxis({ visible: false, isVertical: true });
+                    createCategoryAxis({ visible: false, vertical: true });
 
                     categoryAxis.getViewElements(view);
                     ok(view.log.line.length == 0 && view.log.line.length == 0);
@@ -427,7 +427,7 @@
 
                 test("labels have set background", 1, function() {
                     createCategoryAxis({
-                        isVertical: true,
+                        vertical: true,
                         labels: {
                             background: "#f0f"
                         }
@@ -440,7 +440,7 @@
 
                 test("labels are positioned to the left of the axis line with margin and padding", function() {
                     createCategoryAxis({
-                        isVertical: true,
+                        vertical: true,
                         labels: {
                             margin: MARGIN,
                             padding: PADDING
@@ -479,7 +479,7 @@
                         createCategoryAxis({
                             categories: ["Foo", "Bar", "Baz"],
                             labels: { step: 2 },
-                            isVertical: true
+                            vertical: true
                         });
 
                         categoryAxis.getViewElements(view);
@@ -501,7 +501,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ labels: { mirror: true }, isVertical: true });
+                        createCategoryAxis({ labels: { mirror: true }, vertical: true });
                     }
                 });
 
@@ -618,7 +618,7 @@
                     setup: function() {
                         moduleSetup();
 
-                        createCategoryAxis({ isVertical: true });
+                        createCategoryAxis({ vertical: true });
                     }
                 });
 
@@ -628,7 +628,7 @@
                 });
 
                 test("positions slot for first category in reverse", function() {
-                    createCategoryAxis({ isVertical: true, reverse: true });
+                    createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(0);
                     same([slot.y1, slot.y2], [chartBox.height() / 2, chartBox.height()]);
                 });
@@ -639,7 +639,7 @@
                 });
 
                 test("positions slot for second category in reverse", function() {
-                    createCategoryAxis({ isVertical: true, reverse: true });
+                    createCategoryAxis({ vertical: true, reverse: true });
                     var slot = categoryAxis.getSlot(1);
                     same([slot.y1, slot.y2], [0, chartBox.height() / 2]);
                 });

@@ -35,7 +35,7 @@
                         ],
                         options: {
                             id: "id",
-                            isVertical: true
+                            vertical: true
                         },
                         refresh: function() {
                         },
@@ -137,7 +137,7 @@
                         ],
                         options: $.extend({
                             id: "id",
-                            isVertical: true,
+                            vertical: true,
                             aboveAxis: true
                         }, rectOptions),
                         refresh: function() {
@@ -167,7 +167,7 @@
                 });
 
                 test("setup collapses rect onto stackBase (horizontal bars)", function() {
-                    createAnim({ stackBase: 10, isVertical: false });
+                    createAnim({ stackBase: 10, vertical: false });
                     anim.setup();
 
                     equals(rect.points[0].x, 10);
@@ -177,7 +177,7 @@
                 });
 
                 test("setup shrinks rect onto base (horizontal bars above axis)", function() {
-                    createAnim({ isVertical: false });
+                    createAnim({ vertical: false });
                     anim.setup();
 
                     equals(rect.points[1].x, 0);
@@ -185,7 +185,7 @@
                 });
 
                 test("setup shrinks rect onto base (horizontal bars below axis)", function() {
-                    createAnim({ isVertical: false, aboveAxis: false });
+                    createAnim({ vertical: false, aboveAxis: false });
                     anim.setup();
 
                     equals(rect.points[0].x, 10);
@@ -222,7 +222,7 @@
                 });
 
                 asyncTest("animates right edge to final position", function() {
-                    createAnim({ isVertical: false });
+                    createAnim({ vertical: false });
                     anim.setup();
                     anim.play();
 
@@ -248,7 +248,7 @@
                 });
 
                 asyncTest("animates left edge to final position", function() {
-                    createAnim({ isVertical: false, aboveAxis: false });
+                    createAnim({ vertical: false, aboveAxis: false });
                     anim.setup();
                     anim.play();
 
