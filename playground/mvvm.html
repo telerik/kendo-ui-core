@@ -30,7 +30,7 @@
         <script src="../src/kendo.resizable.js"></script>
         <script src="../src/kendo.splitter.js"></script>
         <script src="../src/kendo.slider.js"></script>
-        <script src="../src/kendo.menu.js"></script>
+        <script src="../src/kendo.grid.js"></script>
         <script src="../demos/mvc/content/shared/js/prettify.js"></script>
         <style>
             body {
@@ -55,26 +55,26 @@
         </style>
     </head>
     <body>
-        <ul data-role="tabstrip" data-text-field="name" data-bind="events:{click:click}, value: tab, source: tabs">
-        </ul>
+        <div
+            data-role="grid"
+            data-columns='[{ "field": "Type", "title": "Type" },{ "field": "Name", "title": "Name" },{ "field": "Identifier", "title": "Identifier" },{ "field": "ExpirationDate", "title": "Expiration Date" }]'
+            data-bind="source: provisions">
+        </div>
 
-        <span data-bind="text: tabAsJson"></span>
-        <button data-bind="click:removelast">remove last tab</button>
+        <button data-bind="click: click">Change</button>
+
         <script>
             var viewModel = kendo.observable({
-                tabs: [{ name:"foo" },{ name: "bar" }],
+                provisions: [ { Type: 1, Name: "Name 1", Identifier: "1", ExpirationDate: new Date() } ],
                 click: function() {
-                    console.log(arguments);
-                },
-                removelast: function() {
-                    this.get("tabs").pop();
-                },
-                tabAsJson: function() {
-                    return kendo.stringify(this.get("tab"));
+                    var provisions = [ { Type: 2, Name: "Name 2", Identifier: "2", ExpirationDate: new Date() } ];
+
+                    this.set("provisions", provisions);
                 }
+            }).bind("change", function(e) {
+                console.log(e);
             });
 
-            viewModel.tab = viewModel.tabs[1];
             kendo.bind(document.body, viewModel);
         </script>
     </body>
