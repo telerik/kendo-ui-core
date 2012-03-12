@@ -1,7 +1,29 @@
 
         <div id="example" class="k-content">
-            <div class="configuration">
+            <div class="wrapper">
+                <ul id="panelbar">
+                    <li>
+                        BODY
+                        <div></div>
+                    </li>
+                    <li>
+                        ENGINE
+                        <div></div>
+                    </li>
+                    <li>
+                        TRANSMISSION
+                        <div></div>
+                    </li>
+                    <li>
+                        PERFORMANCE
+                        <div></div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="configuration configuration-horizontal-bottom">
                 <span class="infoHead">Information</span>
+                <p>Image courtesy of Aston Martin</p>
                 <p>
                     <strong>Note:</strong>
                     Security restrictions in Chrome prevent this
@@ -9,40 +31,36 @@
                     loaded from the file system (via file:// protocol).
                 </p>
             </div>
-            <ul id="panelbar">
-                <li class="k-state-active">
-                    First Ajax Item
-                    <div></div>
-                </li>
-                <li>
-                    Second Ajax Item
-                    <div></div>
-                </li>
-                <li>
-                    Third Ajax Item
-                    <div></div>
-                </li>
-                <li>
-                    Fourth Ajax Item
-                    <div></div>
-                </li>
-                <li>
-                    Fifth Ajax Item
-                    <div></div>
-                </li>
-            </ul>
+
         </div>
+
         <script>
             $(document).ready(function() {
-                $("#panelbar").css({ marginRight: "220px" }).kendoPanelBar({
+                $("#panelbar").kendoPanelBar({
                     expandMode: "single",
                     contentUrls: [
                         '../../content/web/panelbar/ajax/ajaxContent1.html',
                         '../../content/web/panelbar/ajax/ajaxContent2.html',
                         '../../content/web/panelbar/ajax/ajaxContent3.html',
-                        '../../content/web/panelbar/ajax/ajaxContent4.html',
-                        '../../content/web/panelbar/ajax/ajaxContent5.html'
+                        '../../content/web/panelbar/ajax/ajaxContent4.html'
                     ]
                 });
             });
         </script>
+
+        <style scoped>
+            .wrapper {
+                width: 310px;
+                height: 400px;
+                margin: 20px auto;
+                padding: 75px 0 0 390px;
+                background: url('../../content/web/panelbar/astonmartin.png') no-repeat 0 50px transparent;
+            }
+            #panelbar {
+                width: 300px;
+            }
+            #panelbar p {
+                margin-left: 1em;
+                margin-right: 1em;
+            }
+        </style>
