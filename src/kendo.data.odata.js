@@ -143,41 +143,46 @@
                     type: "DELETE"
                 },
                 parameterMap: function(options, type) {
-                    var params = {
-                            $format: "json",
-                            $inlinecount: "allpages"
-                        },
-                        field,
+                    var params,
                         value,
                         option,
                         dataType;
 
+                    options = options || {};
                     type = type || "read";
-                    if (type === "destroy") {
-                        return;
-                    }
+                    dataType = (this.options || defaultDataType)[type];
+                    dataType = dataType ? dataType.dataType : "json";
 
-                    if (type !== "read") {
-                        for (field in options) {
-                            value = options[field];
-                            if (typeof value === "number") {
-                                options[field] = value + "";
+                    if (type === "read") {
+                        params = {
+                            $format: "json",
+                            $inlinecount: "allpages"
+                        };
+
+                        for (option in options) {
+                            if (mappers[option]) {
+                                mappers[option](params, options[option]);
+                            } else {
+                                params[option] = options[option];
                             }
                         }
+                    } else {
+                        if (dataType !== "json") {
+                            throw new Error("Only json dataType can be used for " + type + " operation.");
+                        }
 
-                        return kendo.stringify(options);
-                    }
+                        if (type !== "destroy") {
+                            for (option in options) {
+                                value = options[option];
+                                if (typeof value === "number") {
+                                    options[option] = value + "";
+                                }
+                            }
 
-                    dataType = (this.options || defaultDataType)[type].dataType;
-                    options = options || {};
-
-                    for (option in options) {
-                        if (mappers[option]) {
-                            mappers[option](params, options[option]);
-                        } else {
-                            params[option] = options[option];
+                            params = kendo.stringify(options);
                         }
                     }
+
                     return params;
                 }
             }
