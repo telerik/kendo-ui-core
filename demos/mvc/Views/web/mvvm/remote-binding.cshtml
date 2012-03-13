@@ -1,0 +1,186 @@
+<div id="example" class="k-content">
+    <div id="form-container">
+        <div class="selector">
+            Select Product: <select data-role="dropdownlist" data-value-field="ProductID" data-text-field="ProductName"
+                             data-bind="source: productsSource, value: selectedProduct"></select>
+
+            <button data-bind="click: save, enabled: hasChanges">Submit All Changes</button>
+        </div>
+        <div class="form" data-bind="visible: showForm">
+            <ul>
+                <li><label>ID</label> <span data-bind="text:selectedProduct.ProductID, events: { change: change }"></span></li>
+                <li><label>Name</label> <input type="text" class="k-textbox" id="products" data-bind="value: selectedProduct.ProductName, events: { change: change }" /></li>
+                <li><label>UnitPrice</label> <input type="text" data-role="numerictextbox" data-bind="value: selectedProduct.UnitPrice, events: { change: change }" /></li>
+            </ul>
+
+            <button data-bind="click: remove">Delete Product</button>
+        </div>
+    </div>
+    <script>
+        var crudServiceBaseUrl = "http://demos.kendoui.com/service";
+
+        $(document).ready(function() {
+            var viewModel = kendo.observable({
+                productsSource: new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: crudServiceBaseUrl + "/Products",
+                            dataType: "jsonp"
+                        },
+                        update: {
+                            url: crudServiceBaseUrl + "/Products/Update",
+                            dataType: "jsonp"
+                        },
+                        destroy: {
+                            url: crudServiceBaseUrl + "/Products/Destroy",
+                            dataType: "jsonp"
+                        },
+                        parameterMap: function(options, operation) {
+                            if (operation !== "read" && options.models) {
+                                return {
+                                    models: kendo.stringify(options.models)
+                                };
+                            }
+                            return options;
+                        }
+                    },
+                    batch: true,
+                    schema: {
+                        model: {
+                            id: "ProductID"
+                        }
+                    }
+                }),
+                selectedProduct: null,
+                hasChanges: false,
+                save: function() {
+                    this.productsSource.sync();
+                    this.set("hasChanges", false);
+                },
+                remove: function() {
+                    if (confirm("Are you sure you want to delete this product?")) {
+                        this.productsSource.remove(this.selectedProduct);
+                        this.set("selectedProduct", this.productsSource.view()[0]);
+                        this.change();
+                    }
+                },
+                showForm: function() {
+                   return this.get("selectedProduct") !== null;
+                },
+                change: function() {
+                    this.set("hasChanges", true);
+                }
+            });
+
+            kendo.bind($("#form-container"), viewModel);
+        });
+    </script>
+    <div class="code-sample">
+        <h4 class="code-title">View source code:</h4>
+        <pre class="prettyprint">
+&lt;div id="form-container"&gt;
+    &lt;div class="selector"&gt;
+        Select Product: &lt;select data-role="dropdownlist" data-value-field="ProductID" data-text-field="ProductName"
+                         data-bind="source: productsSource, value: selectedProduct"&gt;&lt;/select&gt;
+
+        &lt;button data-bind="click: save, enabled: hasChanges"&gt;Publish All Changes&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="form" data-bind="visible: showForm"&gt;
+        &lt;ul&gt;
+            &lt;li>&lt;label>ID&lt;/label&gt; &lt;span data-bind="text:selectedProduct.ProductID, events: { change: change }"&gt;&lt;/span>&lt;/li>
+            &lt;li>&lt;label>Name&lt;/label&gt; &lt;input type="text" class="k-textbox" id="products" data-bind="value: selectedProduct.ProductName, events: { change: change }" /&gt;&lt;/li&gt;
+            &lt;li>&lt;label>UnitPrice&lt;/label> &lt;input type="text" data-role="numerictextbox" data-bind="value: selectedProduct.UnitPrice, events: { change: change }" /&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+
+        &lt;button data-bind="click: remove">Delete Product&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+    </div>
+    <div class="code-sample">
+        <h4 class="code-title">View model source code:</h4>
+        <pre class="prettyprint">
+var viewModel = kendo.observable({
+    productsSource: new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: crudServiceBaseUrl + "/Products",
+                dataType: "jsonp"
+            },
+            update: {
+                url: crudServiceBaseUrl + "/Products/Update",
+                dataType: "jsonp"
+            },
+            destroy: {
+                url: crudServiceBaseUrl + "/Products/Destroy",
+                dataType: "jsonp"
+            },
+            parameterMap: function(options, operation) {
+                if (operation !== "read" && options.models) {
+                    return {
+                        models: kendo.stringify(options.models)
+                    };
+                }
+                return options;
+            }
+        },
+        batch: true,
+        schema: {
+            model: {
+                id: "ProductID"
+            }
+        }
+    }),
+    selectedProduct: null,
+    hasChanges: false,
+    save: function() {
+        this.productsSource.sync();
+        this.set("hasChanges", false);
+    },
+    remove: function() {
+        if (confirm("Are you sure you want to delete this product?")) {
+            this.productsSource.remove(this.selectedProduct);
+            this.set("selectedProduct", this.productsSource.view()[0]);
+            this.change();
+        }
+    },
+    showForm: function() {
+       return this.get("selectedProduct") !== null;
+    },
+    change: function() {
+        this.set("hasChanges", true);
+    }
+});
+
+kendo.bind($("#form-container"), viewModel);
+</pre>
+    </div>
+
+    <style scoped>
+        .form label {
+            display: inline-block;
+            width: 80px;
+        }
+
+        .form li {
+          padding-bottom: 5px;
+          list-style: none;
+        }
+
+        .form {
+           background-color: #eeeeee;
+           width: 400px;
+           padding: 10px;
+        }
+
+        .selector {
+            padding: 10px;
+            width: 400px;
+            background-color: #D75B26;
+        }
+
+        #form-container button {
+            height: 30px;
+        }
+    </style>
+</div>

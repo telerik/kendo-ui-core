@@ -311,6 +311,26 @@
                 equal($.trim(dropdownlist.ul.children().eq(0).text()), "foo");
                 equal($.trim(dropdownlist.ul.children().eq(1).text()), "bar");
             });
+
+            test("ViewModel is updated when source is DataSource", function() {
+                var dom = $('<select data-value-field="text" data-bind="source:dataSource, value: selected" data-role="dropdownlist" />');
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource,
+                    selected: {}
+                });
+
+                kendo.bind(dom, observable);
+                var dropdownlist = dom.data("kendoDropDownList");
+                dropdownlist.select(1);
+                dropdownlist.trigger("change");
+
+                equal(observable.selected, observable.dataSource.data()[1]);
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
