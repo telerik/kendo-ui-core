@@ -515,6 +515,137 @@
                 "dataviz-core",
                 "dataviz-svg"
             ]
+        },
+        {
+            "id": "mobile.core",
+            "name": "Mobile Core",
+            "category": "mobile",
+            "description": "Mobile Core",
+            "source": "kendo.mobile.core.min.js",
+            "depends": [
+                "core",
+                "fx"
+            ],
+            "hidden": true
+        },
+        {
+            "id": "history",
+            "name": "History",
+            "category": "mobile",
+            "description": "History",
+            "source": "kendo.history.min.js",
+            "depends": [
+                "core"
+            ],
+            "hidden": true
+        },
+        {
+            "id": "mobile.view",
+            "name": "Mobile View",
+            "category": "mobile",
+            "description": "Mobile View",
+            "source": "kendo.mobile.view.min.js",
+            "depends": [
+                "mobile.core",
+                "mobile.scroller",
+                "history"
+            ],
+            "hidden": true
+        },
+        {
+            "id": "mobile.application",
+            "name": "Mobile Application",
+            "category": "mobile",
+            "description": "The Mobile application provides a framework to build native looking web applications on mobile devices.",
+            "source": "kendo.mobile.application.min.js",
+            "depends": [
+                "mobile.core",
+                "mobile.view",
+                "history"
+            ]
+        },
+        {
+            "id": "mobile.scroller",
+            "name": "Mobile Scroller",
+            "category": "mobile",
+            "description": "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
+            "source": "kendo.mobile.scroller.min.js",
+            "depends": [
+                "mobile.application",
+                "draganddrop"
+            ]
+        },
+        {
+            "id": "mobile.scrollview",
+            "name": "Mobile Scrollview",
+            "category": "mobile",
+            "description": "The Kendo Mobile ScrollView widget is used to scroll content wider than the device screen.",
+            "source": "kendo.mobile.scrollview.min.js",
+            "depends": [
+                "mobile.application",
+                "draganddrop"
+            ]
+        },
+        {
+            "id": "mobile.switch",
+            "name": "Mobile Switch",
+            "category": "mobile",
+            "description": "The mobile Switch widget is used to display two exclusive choices.",
+            "source": "kendo.mobile.switch.min.js",
+            "depends": [
+                "mobile.application",
+                "draganddrop"
+            ]
+        },
+        {
+            "id": "mobile.button",
+            "name": "Mobile Button",
+            "category": "mobile",
+            "description": "The Button widget navigates between mobile Application views when pressed.",
+            "source": "kendo.mobile.button.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.buttongroup",
+            "name": "Mobile ButtonGroup",
+            "category": "mobile",
+            "description": "The Kendo mobile ButtonGroup widget is a linear set of grouped buttons.",
+            "source": "kendo.mobile.buttongroup.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.listview",
+            "name": "Mobile ListView",
+            "category": "mobile",
+            "description": "The Kendo Mobile ListView widget is used to display flat or grouped list of items.",
+            "source": "kendo.mobile.listview.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.navbar",
+            "name": "Mobile NavBar",
+            "category": "mobile",
+            "description": "The Kendo mobile NavBar widget is used inside a mobile View or Layout Header element to display an application navigation bar.",
+            "source": "kendo.mobile.navbar.min.js",
+            "depends": [
+                "mobile.application"
+            ]
+        },
+        {
+            "id": "mobile.tabstrip",
+            "name": "Mobile TabStrip",
+            "category": "mobile",
+            "description": "The mobile TabStrip widget is used inside a mobile view or layout footer element to display an application-wide group of navigation buttons.",
+            "source": "kendo.mobile.tabstrip.min.js",
+            "depends": [
+                "mobile.application"
+            ]
         }
     ]
 }
