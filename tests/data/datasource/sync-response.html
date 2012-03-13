@@ -149,8 +149,7 @@
             test("sync updates created model when response is empty", function() {
                 stubTransport("create", null );
 
-                var model = new Model({ foo: "foo" });
-                dataSource.add(model);
+                var model = dataSource.add({ foo: "foo" });
                 dataSource.sync();
 
                 equal(model.get("foo"), "foo");
@@ -166,6 +165,7 @@
 
                 equal(model.get("foo"), "bar");
                 equal(model.dirty, false);
+                equal(dataSource._pristine[0].foo, "bar");
             });
 
             test("sync updates all created models with server response", function() {
