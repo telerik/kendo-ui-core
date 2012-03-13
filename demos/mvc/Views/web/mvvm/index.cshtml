@@ -24,7 +24,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            var viewModel = {
+            var viewModel = kendo.observable({
                 firstName: "John",
                 lastName: "Doe",
                 genders: ["Male", "Female"],
@@ -43,7 +43,7 @@
                     this.set("firstName", "John");
                     this.set("lastName", "Doe");
                 }
-            };
+            });
 
             kendo.bind($("#example"), viewModel);
         });
@@ -78,7 +78,7 @@
     <div class="source code-sample">
         <h4 class="code-title">View model source code:</h4>
         <pre class="prettyprint">
-    var viewModel = {
+    var viewModel = kendo.observable({
         firstName: &quot;John&quot;,
         lastName: &quot;Doe&quot;,
         genders: [&quot;Male&quot;, &quot;Female&quot;],
@@ -90,7 +90,7 @@
 
             this.set(&quot;confirmed&quot;, true);
         }
-    };
+    });
 
     kendo.bind($(&quot;form&quot;), viewModel);
         </pre>

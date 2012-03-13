@@ -23,9 +23,9 @@
         });
 
         $(document).ready(function() {
-            var viewModel = {
+            var viewModel = kendo.observable({
                 slideValue: true
-            };
+            });
 
             kendo.bind($("#example"), viewModel);
         });
@@ -60,9 +60,9 @@ kendo.data.binders.slide = kendo.data.Binder.extend( {
     <div class="code-sample">
         <h4 class="code-title">View model source code:</h4>
         <pre class="prettyprint">
-var viewModel = {
+var viewModel = kendo.observable({
     slideValue: true
-};
+});
 
 kendo.bind($(&quot;#example&quot;), viewModel);
         </pre>

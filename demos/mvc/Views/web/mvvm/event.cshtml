@@ -2,11 +2,11 @@
     <button class="k-button" data-bind="events: { click: listener, dblclick: listener, mouseover: listener, mouseout: listener }">Button</button>
     <script>
         $(document).ready(function() {
-            var viewModel = {
+            var viewModel = kendo.observable({
                 listener: function(e) {
                     kendoConsole.log("Event: " + e.type);
                 }
-            };
+            });
 
             kendo.bind($("#example"), viewModel);
         });
@@ -23,11 +23,11 @@
     <div class="code-sample">
         <h4 class="code-title">View model source code</h4>
 <pre class="prettyprint">
-var viewModel = {
+var viewModel = kendo.observable({
     listener: function(e) {
         kendoConsole.log(&quot;Event: &quot; + e.type);
     }
-};
+});
 
 kendo.bind($(&quot;#example&quot;), viewModel);
 </pre>

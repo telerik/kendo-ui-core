@@ -90,7 +90,7 @@
     </table>
     <script>
         $(document).ready(function() {
-            var viewModel = {
+            var viewModel = kendo.observable({
                 textValue: "Text value",
                 textareaValue: "Textarea value",
                 checkboxValue: false,
@@ -105,7 +105,7 @@
                 displayMultipleSelectValue: function() {
                     return this.get("multipleSelectValue").join(", ");
                 }
-            };
+            });
 
             kendo.bind($("table"), viewModel);
         });
@@ -185,7 +185,7 @@
         <h4 class="code-title">View model source code:</h4>
         <div class="code-details">
 <pre class="prettyprint">
-var viewModel = {
+var viewModel = kendo.observable({
     textValue: "Text value",
     textareaValue: "Textarea value",
     checkboxValue: false,
@@ -200,7 +200,7 @@ var viewModel = {
     displayMultipleSelectValue: function() {
         return this.get("multipleSelectValue").join(", ");
     }
-};
+});
 
 kendo.bind($(&quot;table&quot;), viewModel);
 </pre>
