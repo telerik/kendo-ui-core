@@ -362,7 +362,6 @@
             }
         },
 
-
         /**
          * Repaints the listview (works only in databound mode).
          * @example
