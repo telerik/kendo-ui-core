@@ -123,6 +123,19 @@
                 ok(!changeWasCalled);
             });
 
+            test("_change raises change event if selectedIndex has changed", 1, function() {
+                var select = $("<select/>"),
+                    dropdownlist = new DropDownList(select, {
+                        dataSource: ["foo", "bar"],
+                        change: function() {
+                            ok(true);
+                        }
+                    });
+
+                dropdownlist.selectedIndex = 1;
+                dropdownlist._change();
+            });
+
             test("support setting a value in change event handler", function() {
                 var dropdownlist = new DropDownList(input, {
                     dataSource: ["foo", "bar"],
