@@ -1184,7 +1184,7 @@
             options.data = that.parameterMap(parameters, type);
 
             if (isFunction(options.url)) {
-                options.url = options.url(options.data);
+                options.url = options.url(parameters);
             }
 
             return options;
