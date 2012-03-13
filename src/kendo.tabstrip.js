@@ -337,8 +337,7 @@
 
             that._updateClasses();
 
-            that.dataSource = kendo.data.DataSource.create(options.dataSource);
-            that.dataSource.bind("change", $.proxy(that.refresh, that));
+            that._dataSource();
 
             if (options.dataSource) {
                 that.dataSource.fetch();
@@ -359,6 +358,25 @@
             }
 
             kendo.notify(that);
+        },
+
+        _dataSource: function() {
+            var that = this;
+
+            if (that.dataSource && that._refreshHandler) {
+                that.dataSource.unbind("change", that._refreshHandler);
+            } else {
+                that._refreshHandler = $.proxy(that.refresh, that);
+            }
+
+            that.dataSource = kendo.data.DataSource.create(that.options.dataSource)
+                                .bind("change", that._refreshHandler);
+        },
+
+        setDataSource: function(dataSource) {
+            this.options.dataSource = dataSource;
+            this._dataSource();
+            dataSource.fetch();
         },
 
         _animations: function(options) {

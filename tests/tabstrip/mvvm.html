@@ -244,6 +244,23 @@
 
                 equal(dom.find("li").text(), "bar");
             });
+
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="source:dataSource" />');
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var tabstrip = dom.data("kendoTabStrip");
+
+                strictEqual(tabstrip.dataSource, dataSource);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
