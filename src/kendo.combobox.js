@@ -353,7 +353,7 @@
                 }
             });
 
-            that.selectedIndex = -1;
+            that._oldIndex = that.selectedIndex = -1;
             that._old = that.value();
 
             if (options.autoBind) {
@@ -636,6 +636,7 @@
             } else {
                 that._select(li);
                 that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
             }
         },
 
@@ -824,6 +825,8 @@
                 }
 
                 that._old = that._accessor();
+                //check
+                //that._oldIndex = that.selectedIndex;
             } else {
                 return that._accessor();
             }

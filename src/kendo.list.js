@@ -112,10 +112,20 @@
 
         _change: function() {
             var that = this,
-                value = that.value();
+                index = that.selectedIndex,
+                value = that.value(),
+                trigger;
 
             if (value !== that._old) {
+                trigger = true;
+            } else if (index !== undefined && index !== that._oldIndex) {
+                trigger = true;
+            }
+
+            if (trigger) {
                 that._old = value;
+                that._oldIndex = index;
+
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified

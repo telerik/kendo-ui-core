@@ -635,6 +635,7 @@
             } else {
                 that._select(li);
                 that._old = that._accessor();
+                that._oldIndex = that.selectedIndex;
             }
         },
 
