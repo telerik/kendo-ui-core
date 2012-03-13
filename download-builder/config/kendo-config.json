@@ -19,17 +19,6 @@
     },
     "components": [
         {
-            "id": "binder",
-            "name": "Binder",
-            "category": "framework",
-            "source": "kendo.binder.min.js",
-            "depends": [
-                "core",
-                "data"
-            ],
-            "hidden": true
-        },
-        {
             "id": "core",
             "name": "Core",
             "category": "framework",
@@ -105,6 +94,17 @@
                         "xml"
                     ]
                 }
+            ]
+        },
+        {
+            "id": "binder",
+            "name": "MVVM",
+            "category": "framework",
+            "source": "kendo.binder.min.js",
+            "description": "Model View ViewModel (MVVM) is a design pattern which helps developers separate the Model (the data) from the View (the UI).",
+            "depends": [
+                "core",
+                "data"
             ]
         },
         {
