@@ -771,10 +771,47 @@
 
                 kendo.bind(dom, {});
             });
+
+            test("binding events in template to the root view model", function() {
+                var viewModel = {
+                    items: [ {} ]
+                };
+
+                stub(viewModel, "clickHandler");
+
+                var dom = $('<ul data-bind="source: items" data-template="event-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("li").click();
+
+                equal(viewModel.calls("clickHandler"), 1);
+            });
+
+            test("bound events in template receive the current item in the event argument", function() {
+                var viewModel = kendo.observable({
+                    items: [ {} ]
+                });
+
+                stub(viewModel, "clickHandler");
+
+                var dom = $('<ul data-bind="source: items" data-template="event-template" />');
+
+                kendo.bind(dom, viewModel);
+
+                dom.find("li").click();
+
+                equal(viewModel.args("clickHandler", 0)[0].data, viewModel.items[0]);
+            });
+
         </script>
 
         <script id="select-template" type="text/x-kendo-template">
             <option value="${id}">${name}</option>
+        </script>
+
+        <script id="event-template" type="text/x-kendo-template">
+            <li data-bind="click: clickHandler"></li>
         </script>
 
         <script id="get-template" type="text/x-kendo-template">
