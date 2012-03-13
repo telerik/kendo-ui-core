@@ -394,13 +394,15 @@
 
             ObservableObject.fn.init.call(that, data);
 
-
             that.dirty = false;
 
             if (that.idField) {
                 that.id = that.get(that.idField);
-            }
 
+                if (that.id === undefined) {
+                    that.id = that._defaultId;
+                }
+            }
         },
 
         shouldSerialize: function(field) {
@@ -1432,7 +1434,7 @@
             if (response) {
                 response = that.reader.data(that.reader.parse(response));
             } else {
-                response = {};
+                response = $.map(models, function(model) { return model.toJSON(); } );
             }
 
             if (!$.isArray(response)) {

@@ -114,7 +114,9 @@
         schemas: {
             odata: {
                 type: "json",
-                data: "d.results",
+                data: function(data) {
+                    return data.d.results || [data.d];
+                },
                 total: "d.__count"
             }
         },

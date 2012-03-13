@@ -109,7 +109,7 @@
 
                 var schema = dataSource.options.schema;
                 equal(schema.total, "d.__count");
-                equal(schema.data, "d.results");
+                ok($.isFunction(schema.data));
             });
 
             test("parameterMap adds $format and $inlinecount to the request", function() {
