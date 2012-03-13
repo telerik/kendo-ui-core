@@ -261,6 +261,47 @@
 
                 strictEqual(tabstrip.dataSource, dataSource);
             });
+
+            test("binding visible to true shows the tabstrip", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var tabstrip = dom.data("kendoTabStrip");
+
+                ok(tabstrip.wrapper.css("display") != "none", "TabStrip is visible");
+            });
+
+            test("binding visible to false hides the tabstrip", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var tabstrip = dom.data("kendoTabStrip");
+
+                ok(tabstrip.wrapper.css("display") == "none", "TabStrip is not visible");
+            });
+
+            test("binding invisible to true hides the tabstrip", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var tabstrip = dom.data("kendoTabStrip");
+
+                ok(tabstrip.wrapper.css("display") == "none", "TabStrip is invisible");
+            });
+
+            test("binding invisible to false shows the tabstrip", function() {
+                var dom = $('<div data-role="tabstrip" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var tabstrip = dom.data("kendoTabStrip");
+
+                ok(tabstrip.wrapper.css("display") != "none", "TabStrip is not invisible");
+            });
+
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
