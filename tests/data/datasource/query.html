@@ -922,6 +922,64 @@
                 equal(dataSource.total(), 2);
             });
 
+            test("cancelChanges without arguments re-calculates the total", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],
+                    schema: {
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.add(new kendo.data.Model());
+                dataSource.cancelChanges();
+
+                equal(dataSource.view().length, 2);
+                equal(dataSource.total(), 2);
+            });
+
+            test("sync with serverPaging re-calculates the total", function() {
+                var dataSource = new DataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success({
+                                data: [{ foo: 1, bar: "bar 1" }],
+                                total: 2
+                            });
+                        },
+                        create: function(options) {
+                            options.success();
+                        }
+                    },
+                    pageSize: 1,
+                    serverPaging: true,
+                    schema: {
+                        data: "data",
+                        total: "total",
+                        model: {
+                            id: "foo",
+                            fields: {
+                                foo: { type: "number" },
+                                bar: "bar"
+                            }
+                        }
+                    }
+                });
+
+                dataSource.read();
+                dataSource.add({});
+                dataSource.sync();
+
+                equal(dataSource.view().length, 2);
+                equal(dataSource.total(), 3);
+            });
+
             test("query with local transport calculates total", function() {
                 var dataSource = new DataSource({
                     data: [{ foo: 1, bar: "bar 1" }, { foo: 2, bar: "bar 2" }],

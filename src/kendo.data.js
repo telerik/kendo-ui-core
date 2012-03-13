@@ -1705,7 +1705,7 @@
                     total++;
                 } else if (action === "remove") {
                     total--;
-                } else if (action !== "itemchange") {
+                } else if (action !== "itemchange" && !that.options.serverPaging) {
                     total = that.reader.total(that._pristine);
                 }
 
