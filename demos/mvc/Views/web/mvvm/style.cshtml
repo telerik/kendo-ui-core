@@ -33,7 +33,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            var viewModel = {
+            var viewModel = kendo.observable({
                 selectedColor: "#8b0000",
                 selectedBorderRadius: "20px",
                 selectedBackground: "#ffd700",
@@ -59,7 +59,7 @@
                     { name: "Ridge", value: "ridge" },
                     { name: "None", value: "none" }
                 ]
-            };
+            });
 
             kendo.bind($("#example"), viewModel);
         });
@@ -103,7 +103,7 @@
     <div class="code-sample">
         <h4 class="code-title">View model source code:</h4>
         <pre class="prettyprint">
-var viewModel = {
+var viewModel = kendo.observable({
     selectedColor: "#8b0000",
     selectedBorderRadius: "20px",
     selectedBackground: "#ffd700",
@@ -124,7 +124,7 @@ var viewModel = {
         { name: "Ridge", value: "ridge" },
         { name: "None", value: "none" }
     ]
-};
+});
 
 kendo.bind($("#example"), viewModel);
         </pre>

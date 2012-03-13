@@ -60,7 +60,7 @@
     </script>
     <script>
     $(document).ready(function() {
-        var viewModel = {
+        var viewModel = kendo.observable({
             productName: "Product name",
             productPrice: 10,
             productUnitsInStock: 10,
@@ -101,7 +101,7 @@
                 { name: "Mishi Kobe Niku", price: 97.00, unitsInStock: 29 },
                 { name: "Sir Rodney's Scones", price: 10.00, unitsInStock: 3 }
             ]
-        };
+        });
 
         kendo.bind($("#example"), viewModel);
     });
@@ -171,7 +171,7 @@
     <div class="code-sample">
         <h4 class="code-title">View model source code:</h4>
         <pre class="prettyprint">
-var viewModel = {
+var viewModel = kendo.observable({
     productName: &quot;Product name&quot;,
     productPrice: 10,
     productUnitsInStock: 10,
@@ -212,7 +212,7 @@ var viewModel = {
         { name: &quot;Mishi Kobe Niku&quot;, price: 97.00, unitsInStock: 29 },
         { name: &quot;Sir Rodney's Scones&quot;, price: 10.00, unitsInStock: 3 }
     ]
-};
+});
 
 kendo.bind($(&quot;#example&quot;), viewModel);
         </pre>
