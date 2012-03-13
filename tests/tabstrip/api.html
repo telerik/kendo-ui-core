@@ -220,6 +220,14 @@
             ok(item.hasClass('k-state-active'));
         });
 
+        test('select method should be able to select by number', function() {
+            var tabstrip = getTabStrip();
+
+            tabstrip.select(3);
+
+            ok(getRootItem(3).hasClass('k-state-active'));
+        });
+
         test('disable method should disable item', function() {
             var tabstrip = getTabStrip();
 
