@@ -804,7 +804,8 @@
             },
             // TODO: Move to line or labels options
             margin: 5,
-            visible: true
+            visible: true,
+            _align: true
         },
 
         createLabels: function() {
@@ -882,7 +883,8 @@
                 options = axis.options,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
-                tickX, tickY, pos;
+                tickX, tickY, pos,
+                lineOptions;
 
             function render(tickPositions, unit, tick, visible, skipUnit) {
                 var skip = skipUnit / unit, i,
@@ -897,40 +899,39 @@
                         tickX = mirror ? lineBox.x2 : lineBox.x2 - tick.size;
                         tickY = mirror ? lineBox.y1 - tick.size : lineBox.y1;
                         pos = tickPositions[i];
+                        lineOptions = {
+                                strokeWidth: tick.width,
+                                stroke: tick.color,
+                                align: axis.shouldAlign()
+                            };
 
                         if (options.isVertical) {
                             ticks.push(view.createLine(
-                                tickX, pos, tickX + tick.size, pos, {
-                                    strokeWidth: tick.width,
-                                    stroke: tick.color
-                                }
-                            ));
+                                tickX, pos, tickX + tick.size, pos, lineOptions));
                         } else {
                             ticks.push(view.createLine(
-                                pos, tickY, pos, tickY + tick.size, {
-                                    strokeWidth: tick.width,
-                                    stroke: tick.color
-                                }
-                            ));
+                                pos, tickY, pos, tickY + tick.size, lineOptions));
                         }
                     }
                 }
             }
 
             render(
-                axis.getMajorTickPositions(),
-                options.majorUnit,
-                options.majorTicks,
-                options.majorTicks.visible);
+                axis.getMajorTickPositions(), options.majorUnit,
+                options.majorTicks, options.majorTicks.visible
+            );
 
             render(
-                axis.getMinorTickPositions(),
-                options.minorUnit,
-                options.minorTicks,
-                options.minorTicks.visible,
-                options.majorTicks.visible ? options.majorUnit : 0);
+                axis.getMinorTickPositions(), options.minorUnit,
+                options.minorTicks, options.minorTicks.visible,
+                options.majorTicks.visible ? options.majorUnit : 0
+            );
 
             return ticks;
+        },
+
+        shouldAlign: function() {
+            return true;
         },
 
         getActualTickSize: function () {
@@ -1205,7 +1206,8 @@
                     strokeWidth: line.width,
                     stroke: line.color,
                     dashType: line.dashType,
-                    zIndex: options.zIndex
+                    zIndex: options.zIndex,
+                    align: axis.shouldAlign()
                 };
                 if (options.vertical) {
                     childElements.push(view.createLine(

@@ -594,7 +594,7 @@
                 size: 15,
                 align: INSIDE,
                 color: BLACK,
-                width: 1,
+                width: 0.5,
                 visible: true
             },
 
@@ -602,14 +602,22 @@
                 size: 10,
                 align: INSIDE,
                 color: BLACK,
-                width: 1,
+                width: 0.5,
                 visible: true
+            },
+
+            line: {
+                width: 0.5
             },
 
             labels: {
                 position: INSIDE,
                 padding: 2
             }
+        },
+
+        shouldAlign: function() {
+            return false;
         }
     });
 
@@ -621,17 +629,57 @@
             track: {
                 width: 6,
                 border: {
-                    width: 1
+                    width: 0
                 }
             },
 
             color: "#286793",
             size: 6,
             border: {
-                width: 1
+                width: 0
             },
 
             padding: getSpacing(3)
+        },
+
+        reflow: function(box) {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                slot = scale.getSlot(options.value),
+                scaleLine = scale.lineBox(),
+                scaleBox = scale.box,
+                width = options.track.width,
+                padding = options.padding,
+                halfSize = options.size / 2,
+                trackBoxCenter,
+                trackBox,
+                pointerBox;
+
+            if (scale.options.isVertical) {
+                trackBox = new Box2D(
+                    scaleBox.x2 + padding.left, scaleLine.y1,
+                    scaleBox.x2 + padding.left + width, scaleLine.y2);
+
+                trackBoxCenter = trackBox.center();
+                pointerBox = new Box2D(
+                    trackBoxCenter.x - halfSize, slot.y1,
+                    trackBoxCenter.x + halfSize, slot.y2);
+            } else {
+                trackBox = new Box2D(
+                    scaleLine.x1, scaleBox.y1 - padding.bottom - width,
+                    scaleLine.x2, scaleBox.y1 - padding.bottom);
+
+                trackBoxCenter = trackBox.center();
+                pointerBox = new Box2D(
+                    slot.x1, trackBoxCenter.y - halfSize,
+                    slot.x2, trackBoxCenter.y + halfSize);
+            }
+
+            pointer.trackBox = trackBox;
+            pointer.pointerBox = pointerBox;
+
+            pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
         },
 
         renderPointer: function(view) {
@@ -643,24 +691,10 @@
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType
                 } : {},
-                box,
-                halfSize = options.size / 2,
-                padding = options.padding,
-                shape,
-                trackBoxCenter = pointer.trackBox.center(),
-                slot = scale.getSlot(options.value);
+                shape;
 
             if (options.shape == "barIndicator") {
-                if (scale.options.isVertical) {
-                    box = new Box2D(
-                        trackBoxCenter.x - halfSize, slot.y1,
-                        trackBoxCenter.x + halfSize, slot.y2);
-                } else {
-                    box = new Box2D(
-                        slot.x1, trackBoxCenter.y - halfSize,
-                        slot.x2, trackBoxCenter.y + halfSize);
-                }
-                shape = view.createRect(box, deepExtend({
+                shape = view.createRect(pointer.pointerBox, deepExtend({
                         fill: options.color,
                         fillOpacity: options.opacity
                     }, border)
@@ -679,28 +713,12 @@
                     stroke: trackOptions.border.color,
                     strokeWidth: trackOptions.border.width,
                     dashType: trackOptions.border.dashType
-                } : {},
-                box,
-                scaleLine = scale.lineBox(),
-                scaleBox = scale.box,
-                width = trackOptions.width,
-                padding = options.padding;
+                } : {};
 
-            if (scale.options.isVertical) {
-                box = new Box2D(
-                    scaleBox.x2 + padding.left, scaleLine.y1,
-                    scaleBox.x2 + padding.left + width, scaleLine.y2);
-            } else {
-                box = new Box2D(
-                    scaleLine.x1, scaleBox.y1 - padding.bottom - width,
-                    scaleLine.x2, scaleBox.y1 - padding.bottom);
-            }
-
-            pointer.trackBox = box;
-            return view.createRect(box, deepExtend({
-                        fill: trackOptions.color,
-                        fillOpacity: trackOptions.opacity
-                    }, border)
+            return view.createRect(pointer.trackBox, deepExtend({
+                    fill: trackOptions.color,
+                    fillOpacity: trackOptions.opacity
+                }, border)
             );
         },
 
@@ -709,7 +727,7 @@
                 shape = pointer.options.shape,
                 elements = [];
 
-            elements.push(pointer.renderTrack(view))
+            elements.push(pointer.renderTrack(view));
             elements.push(pointer.renderPointer(view));
 
             pointer.elements = elements;
@@ -736,34 +754,57 @@
 
         reflow: function(box){
             var plotArea = this,
-                scale = plotArea.scale;
+                scale = plotArea.scale,
+                pointer = plotArea.pointer;
 
             scale.reflow(box);
-            plotArea.alignAxis(box);
-            plotArea.box = box;
+            pointer.reflow(box);
+            plotArea.box = plotArea.calculateBox(box);
+            plotArea.alignElements();
         },
 
-        alignAxis: function(box) {
+        calculateBox: function(box) {
             var plotArea = this,
                 options = plotArea.options,
                 scale = plotArea.scale,
-                scaleBox = scale.box,
+                pointer = plotArea.pointer,
                 boxCenter = box.center(),
+                plotAreaBox = pointer.box.clone().wrap(scale.box),
                 size;
 
             if (scale.options.isVertical) {
-                size = scaleBox.width() / 2;
-                scale.reflow(new Box2D(
+                size = plotAreaBox.width() / 2;
+                plotAreaBox = new Box2D(
                     boxCenter.x - size, box.y1,
                     boxCenter.x + size, box.y2
-                ));
+                );
             } else {
-                size = scaleBox.height() / 2;
-                scale.reflow(new Box2D(
+                size = plotAreaBox.height() / 2;
+                plotAreaBox = new Box2D(
                     box.x1, boxCenter.y - size,
                     box.x2, boxCenter.y + size
+                );
+            }
+
+            return plotAreaBox;
+        },
+
+        alignElements: function() {
+            var plotArea = this,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer,
+                scaleBox = scale.box;
+                console.log(pointer.box);
+
+            if (scale.options.isVertical) {
+                scale.reflow(plotArea.box);
+            } else {
+                scale.reflow(new Box2D(
+                    scaleBox.x1, plotArea.box.y1 + pointer.box.height(),
+                    scaleBox.x2, plotArea.box.y2
                 ));
             }
+            pointer.reflow(plotArea.box);
         },
 
         render: function() {
@@ -775,6 +816,25 @@
             plotArea.append(plotArea.scale);
             plotArea.pointer = new LinearPointer(scale, options.pointer);
             plotArea.append(plotArea.pointer);
+        },
+
+        getViewElements: function(view) {
+            var plotArea = this,
+                options = plotArea.options.plotArea,
+                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
+                border = options.border || {},
+                elements = [
+                    view.createRect(plotArea.box, {
+                        fill: options.background,
+                        stroke: border.width ? border.color : "",
+                        strokeWidth: border.width,
+                        dashType: border.dashType
+                    })
+                ];
+
+            append(elements, childElements);
+
+            return elements;
         }
     });
 
@@ -798,6 +858,10 @@
             $(element).addClass("k-gauge");
 
             gauge.redraw();
+        },
+
+        options: {
+            plotArea: {}
         },
 
         value: function(value) {
