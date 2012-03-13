@@ -898,7 +898,7 @@
 
                 test("minor ticks are distributed horizontally", function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, {
-                        isVertical: false,
+                        vertical: false,
                         reverse: true,
                         majorTicks: { visible: false },
                         minorTicks: { visible: true }
@@ -920,7 +920,7 @@
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         majorTicks: { visible: false },
                         minorTicks: { visible: true },
-                        isVertical: false
+                        vertical: false
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -956,7 +956,7 @@
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         majorTicks: { visible: false },
                         minorTicks: { visible: true },
-                        isVertical: false
+                        vertical: false
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -970,7 +970,7 @@
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         majorTicks: { visible: false },
                         minorTicks: { visible: true },
-                        isVertical: false
+                        vertical: false
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -984,7 +984,7 @@
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         majorTicks: { visible: false },
                         minorTicks: { visible: true },
-                        isVertical: false
+                        vertical: false
                     });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
@@ -1055,7 +1055,7 @@
                     numericAxis = new dataviz.NumericAxis(0, 1, {
                         majorTicks: { visible: false },
                         minorTicks: { visible: true },
-                        isVertical: false,
+                        vertical: false,
                         labels: {
                             mirror: true
                         }
