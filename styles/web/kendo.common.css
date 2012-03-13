@@ -658,12 +658,6 @@ div.k-window-content
     vertical-align: middle;
 }
 
-.k-panelbar .k-panel .k-image,
-.k-panelbar .k-panel .k-sprite
-{
-    margin-top: 1px;
-}
-
 .k-panelbar > .k-item > .k-link,
 .k-panel > .k-item > .k-link
 {
