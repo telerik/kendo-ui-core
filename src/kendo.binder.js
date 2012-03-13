@@ -620,6 +620,32 @@
             }
         }),
 
+        visible: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                this.widget = widget;
+            },
+
+            refresh: function() {
+                var visible = this.bindings.visible.get();
+                this.widget.wrapper[0].style.display = visible ? "" : "none";
+            }
+        }),
+
+        invisible: Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+
+                this.widget = widget;
+            },
+
+            refresh: function() {
+                var invisible = this.bindings.invisible.get();
+                this.widget.wrapper[0].style.display = invisible ? "none" : "";
+            }
+        }),
+
         enabled: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
