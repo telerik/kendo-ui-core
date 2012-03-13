@@ -7,6 +7,9 @@
 
             <script>
                 $("#tabstrip-images").kendoTabStrip({
+                    dataTextField: "text",
+                    dataImageUrlField: "imageUrl",
+                    dataContentField: "content",
                     dataSource: [
                         {
                             text: "Baseball",
@@ -39,6 +42,9 @@
 
             <script>
                 $("#tabstrip-sprites").kendoTabStrip({
+                    dataTextField: "text",
+                    dataSpriteCssClass: "spriteCssClass",
+                    dataContentField: "content",
                     dataSource: [{
                             text: "Web",
                             spriteCssClass: "overviewIcon",

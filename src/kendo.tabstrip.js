@@ -642,7 +642,6 @@
          */
         select: function (element) {
             var that = this;
-            element = that.element.find(element);
 
             if (arguments.length == 0) {
                 return that.wrapper.find("li." + ACTIVESTATE);
@@ -652,6 +651,7 @@
                 element = that.tabGroup.children().get(element);
             }
 
+            element = that.element.find(element);
             $(element).each(function (index, item) {
                 item = $(item);
                 if (!item.hasClass(ACTIVESTATE) && !that.trigger(SELECT, { item: item[0], contentElement: that.contentElement(item.index()) })) {
