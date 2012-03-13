@@ -804,6 +804,67 @@
                 equal(viewModel.args("clickHandler", 0)[0].data, viewModel.items[0]);
             });
 
+            test("widget event binding", 1, function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="testwidget" data-bind="events:{ foo: bar }"></div>');
+                var viewModel = {
+                    bar: function() {
+                        ok(true, "Event handler is bound");
+                    }
+                };
+
+                kendo.bind(dom, viewModel);
+
+                dom.data("kendoTestWidget").trigger("foo");
+            });
+
+            test("this is the view model during widget event binding", 1, function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="testwidget" data-bind="events:{ foo: bar }"></div>');
+                var viewModel = kendo.observable({
+                    bar: function() {
+                        strictEqual(this, viewModel);
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.data("kendoTestWidget").trigger("foo");
+            });
+            test("the widget is the sender during widget event binding", 1, function() {
+                var TestWidget = kendo.ui.Widget.extend({
+                    options: {
+                        name: "TestWidget"
+                    }
+                });
+
+                kendo.ui.plugin(TestWidget);
+
+                var dom = $('<div data-role="testwidget" data-bind="events:{ foo: bar }"></div>');
+                var viewModel = kendo.observable({
+                    bar: function(e) {
+                        strictEqual(e.sender, dom.data("kendoTestWidget"));
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
+
+                dom.data("kendoTestWidget").trigger("foo");
+            });
         </script>
 
         <script id="select-template" type="text/x-kendo-template">

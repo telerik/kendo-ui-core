@@ -565,6 +565,29 @@
     }
 
     binders.widget = {
+        events : Binder.extend({
+            init: function(widget, bindings, options) {
+                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                this.widget = widget;
+                this.handlers = {};
+            },
+
+            refresh: function(key) {
+                var binding = this.bindings.events[key],
+                    handler = this.handlers[key] = binding.get();
+
+                this.widget.bind(key, handler);
+            },
+
+            destroy: function() {
+                var handler;
+
+                for (handler in this.handlers) {
+                    this.element.unbind(handler, this.handlers[handler]);
+                }
+            }
+        }),
+
         checked: Binder.extend({
             init: function(widget, bindings, options) {
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
@@ -819,27 +842,20 @@
     });
 
     var WidgetBindingTarget = BindingTarget.extend( {
-        init: function(target) {
-            BindingTarget.fn.init.apply(this, arguments);
-        },
-
         bind: function(bindings) {
-            var that = this, hasValue = false, hasSource = false;
+            var that = this,
+                binding,
+                hasValue = false,
+                hasSource = false;
 
-            var specificBinders = binders.widget;
-
-            for (var key in bindings) {
-                if (key == "value") {
+            for (binding in bindings) {
+                if (binding == "value") {
                     hasValue = true;
-                    continue;
-                }
-
-                if (key == "source") {
+                } else if (binding == "source") {
                     hasSource = true;
-                    continue;
+                } else {
+                    this.applyBinding(binding, bindings);
                 }
-
-                this.applyBinding(key, bindings);
             }
 
             if (hasSource) {
@@ -853,24 +869,37 @@
 
         applyBinding: function(name, bindings) {
             var binder = binders.widget[name],
+                toDestroy = this.toDestroy,
                 binding = bindings[name];
 
             if (binder) {
                 binder = new binder(this.target, bindings, this.target.options);
 
-                this.toDestroy.push(binder);
+                toDestroy.push(binder);
 
-                var refresh = function(e) {
-                    binder.refresh(e);
-                };
 
-                binder.refresh();
+                if (binding instanceof Binding) {
+                    binding.bind("change", function(e) {
+                        binder.refresh(e);
+                    });
 
-                binding.bind("change", refresh);
+                    binder.refresh();
 
-                this.toDestroy.push(binding);
+                    toDestroy.push(binding);
+                } else {
+                     for (var attribute in binding) {
+                        (function(attribute) {
+                            binding[attribute].bind("change", function() {
+                                binder.refresh(attribute);
+                            });
+                        })(attribute);
+                        binder.refresh(attribute);
+                        toDestroy.push(binding[attribute])
+                    }
+
+                }
             } else {
-                throw new Error("The " + name + "binding is not supported by the " + name + " widget");
+                throw new Error("The " + name + " binding is not supported by the " + this.target.options.name + " widget");
             }
         }
     });
