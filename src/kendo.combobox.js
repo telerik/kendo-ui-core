@@ -381,7 +381,8 @@
             template: "",
             filter: "none",
             placeholder: "",
-            suggest: false
+            suggest: false,
+            animation: {}
         },
 
         events:[

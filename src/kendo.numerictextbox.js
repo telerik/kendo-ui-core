@@ -164,6 +164,17 @@
          *     step: 0.1,
          *     decimals: 1
          * });
+         * @option {Number} [step] <1> Specifies the increment/decrement step.
+         * _example
+         *  // specify in the HTML
+         * &lt;input id="numeric" value="10" type="number" /&gt;
+         * <br />
+         * // specify on widget initialization
+         * $("#numeric").kendoNumericTextBox({
+         *     min: 0,
+         *     max: 1,
+         *     step: 0.1
+         * });
          * @option {String} [format] <n> Specifies the format of the number. Any valid number format is allowed.
          * _example
          * $("#numeric").kendoNumericTextBox({
@@ -172,7 +183,7 @@
          *    max: 1,
          *    step: 0.01
          * });
-         * @option {String} [placeholder] <Enter value> Specifies the text displayed when the input is empty.
+         * @option {String} [placeholder] <""> Specifies the text displayed when the input is empty.
          * _example
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
@@ -267,6 +278,7 @@
             value: NULL,
             step: 1,
             format: "n",
+            placeholder: "",
             upArrowText: "Increase value",
             downArrowText: "Decrease value"
         },
