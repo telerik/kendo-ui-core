@@ -55,6 +55,15 @@
     -webkit-box-shadow: @arguments;
 }
 
+.window-shadow(@shadow-color) when not (@shadow-color = transparent) {
+    border-color: @shadow-color;
+    .box-shadow(1px 1px 7px 1px @shadow-color);
+}
+
+.window-shadow(@shadow-color) when (@shadow-color = transparent) {
+    border-color: @widget-border-color;
+}
+
 .box-sizing(@type) {
     -moz-box-sizing: @type;
     -webkit-box-sizing: @type;
@@ -513,8 +522,7 @@ span.k-numeric-wrap.k-state-active,
 
 .k-window
 {
-    border-color: @shadow-color;
-    .box-shadow(1px 1px 7px 1px @shadow-color);
+    .window-shadow(@shadow-color);
 }
 
 .k-autocomplete .k-input,
