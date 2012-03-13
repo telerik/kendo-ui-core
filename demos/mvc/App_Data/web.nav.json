@@ -621,6 +621,10 @@
                     "url": "mvvm/source.html"
                 },
                 {
+                    "text": "Remote binding",
+                    "url": "mvvm/remote-binding.html"
+                },
+                {
                     "text": "Custom binding",
                     "url": "mvvm/custom.html"
                 }

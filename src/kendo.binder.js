@@ -743,9 +743,12 @@
 
                     if (this.bindings.source) {
                         source = this.bindings.source.get();
-                    } else {
+                    }
+
+                    if (!source || source instanceof kendo.data.DataSource) {
                         source = this.widget.dataSource.view();
                     }
+
 
                     for (idx = 0, length = source.length; idx < length; idx++) {
                         if (source[idx].get(field) == value) {
