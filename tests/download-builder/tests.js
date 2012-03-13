@@ -1,6 +1,10 @@
 tests.push(
     {
-        page: "download-builder/scriptresolver.html",
+        page: "scriptresolver.html",
         title: "Script Resolver"
+    },
+    {
+        page: "kendo.html",
+        title: "Kendo Config"
     }
 );

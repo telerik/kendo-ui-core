@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Configurator</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../download-builder/scripts/script-resolver.js"></script>
+        <script type="text/javascript">
+
+            var STAGING_BASE = "http://mvc-kendobuild/staging/content/cdn/js/";
+
+            // ------------------------------------------------------------
+            function loadConfig(callback) {
+                $.getJSON("../../download-builder/config/kendo-config.VERSION_NUMBER.json", function(data) {
+                    components = data.components;
+
+                    resolver = new ScriptResolver(components);
+
+                    callback(resolver, components);
+                });
+            }
+
+            function dryRun(component, scripts) {
+                stop(1);
+
+                var scripts = $.map(scripts, function(s) {
+                                  return "<script src='" + STAGING_BASE + s + "'><\/script>";
+                              }).join("\n");
+
+                var iframe = $("<iframe />", { src: "javascript: '<html></html>';" } )
+                             .css("display", "none")
+                             .appendTo(document.body)[0];
+
+                var frameWindow = iframe.contentWindow || iframe;
+                var frameDocument = frameWindow.frameDocument || iframe.contentDocument;
+
+                frameDocument.open();
+                frameDocument.write(
+                        '<!DOCTYPE html><html><head>' +
+                        scripts +
+                        '</head><body>' +
+                        "<script>parent.window.ok(typeof kendo !== 'undefined', '" + component.id + "'); parent.window.start();<\/script>" +
+                        '</body></html>'
+                );
+
+                frameDocument.close();
+            }
+
+            // ------------------------------------------------------------
+            module("Kendo configuration");
+
+            asyncTest("component scripts", function() {
+                loadConfig(function(resolver, components) {
+                    $.each(components, function(i, c) {
+                        resolver.reset();
+
+                        var features = $.map(c.features || [], function(f) { return f.id; });
+                        resolver.addComponent(c.id, features);
+
+                        dryRun(c, ["jquery.min.js"].concat(resolver.scripts));
+                    });
+
+                    start();
+                });
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.configurator</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
