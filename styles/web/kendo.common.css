@@ -575,11 +575,6 @@ div.k-window-content
     z-index: 1;
 }
 
-.k-tabstrip-items .k-state-hover
-{
-    z-index: 2;
-}
-
 .k-tabstrip-items .k-link,
 .k-panelbar .k-tabstrip-items .k-link
 {
@@ -769,18 +764,28 @@ div.k-window-content
 
 }
 
+.k-menu .k-icon,
 .k-menu .k-image,
 .k-menu .k-sprite
 {
-    margin: 0 4px 0 -4px;
-    vertical-align: top;
+    margin: -2px 4px 0 -4px;
+    vertical-align: middle;
 }
+
+.k-menu .k-icon
+{
+    margin: -2px 0 0;
+}
+
+*+html .k-menu .k-icon,
+*+html .k-menu .k-image,
+*+html .k-menu .k-sprite { margin-top: 0; }
 
 .k-menu .k-link
 {
     display: block;
-    padding: .5em .9em;
-    line-height: 1.34;
+    padding: .5em .9em .4em;
+    line-height: 1.34em;
 }
 
 .k-menu .k-group
@@ -811,13 +816,13 @@ div.k-window-content
 .k-menu .k-arrow-down
 {
     margin-right: -8px;
-    vertical-align: top;
 }
 
 .k-menu .k-arrow-next
 {
     position: absolute;
-    top: 3px;
+    top: 50%;
+    margin-top: -8px;
     right: 2px;
 }
 
