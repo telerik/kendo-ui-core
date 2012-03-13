@@ -656,7 +656,7 @@
                 trackBox,
                 pointerBox;
 
-            if (scale.options.isVertical) {
+            if (scale.options.vertical) {
                 trackBox = new Box2D(
                     scaleBox.x2 + padding.left, scaleLine.y1,
                     scaleBox.x2 + padding.left + width, scaleLine.y2);
@@ -691,7 +691,9 @@
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType
                 } : {},
-                shape;
+                shape,
+                scaleLine = scale.lineBox(),
+                slot = scale.getSlot(options.value);
 
             if (options.shape == "barIndicator") {
                 shape = view.createRect(pointer.pointerBox, deepExtend({
@@ -699,6 +701,20 @@
                         fillOpacity: options.opacity
                     }, border)
                 );
+            } else {
+                if (scale.options.vertical) {
+                    shape = view.createPolyline([
+                        new Point2D(box.x1 + halfWidth, box.y1),
+                        new Point2D(box.x1, box.y2),
+                        new Point2D(box.x2, box.y2)
+                    ], true, element.options);
+                } else {
+                    shape = view.createPolyline([
+                        new Point2D(box.x1 + halfWidth, box.y1),
+                        new Point2D(box.x1, box.y2),
+                        new Point2D(box.x2, box.y2)
+                    ], true, element.options);
+                }
             }
 
             return shape;
@@ -772,7 +788,7 @@
                 plotAreaBox = pointer.box.clone().wrap(scale.box),
                 size;
 
-            if (scale.options.isVertical) {
+            if (scale.options.vertical) {
                 size = plotAreaBox.width() / 2;
                 plotAreaBox = new Box2D(
                     boxCenter.x - size, box.y1,
@@ -794,9 +810,8 @@
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
                 scaleBox = scale.box;
-                console.log(pointer.box);
 
-            if (scale.options.isVertical) {
+            if (scale.options.vertical) {
                 scale.reflow(plotArea.box);
             } else {
                 scale.reflow(new Box2D(

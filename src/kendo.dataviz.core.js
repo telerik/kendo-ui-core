@@ -905,7 +905,7 @@
                                 align: axis.shouldAlign()
                             };
 
-                        if (options.isVertical) {
+                        if (options.vertical) {
                             ticks.push(view.createLine(
                                 tickX, pos, tickX + tick.size, pos, lineOptions));
                         } else {
