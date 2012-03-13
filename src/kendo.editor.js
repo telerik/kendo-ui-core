@@ -367,48 +367,38 @@
             if (/Mobile.*Safari/.test(navigator.userAgent))
                 return;
 
-            var self = this,
+            var that = this,
                 $element = $(element);
 
-            self.element = element;
-
             $element.closest("form").bind("submit", function () {
-                self.update();
+                that.update();
             });
 
-            Widget.fn.init.call(self, element);
+            Widget.fn.init.call(that, element, options);
 
-            self.options = deepExtend({}, self.options, options);
+            that.options = deepExtend({}, that.options, options);
 
-            self.bind([
-                "select",
-                "change",
-                "execute",
-                "error",
-                "paste"
-            ], self.options);
+            for (var id in that._tools)
+                that._tools[id].name = id.toLowerCase();
 
-            for (var id in self._tools)
-                self._tools[id].name = id.toLowerCase();
+            that.textarea = $element.attr("autocomplete", "off")[0];
 
-            self.textarea = $element.attr("autocomplete", "off")[0];
+            var $wrapper = that.wrapper = wrapTextarea($element);
 
-            var $wrapper = self.wrapper = wrapTextarea($element);
+            renderTools(that, that.options.tools);
 
-            renderTools(self, self.options.tools);
+            initializeContentElement(that);
 
-            initializeContentElement(self);
+            that.keyboard = new Editor.Keyboard([new Editor.TypingHandler(that), new Editor.SystemHandler(that)]);
 
-            self.keyboard = new Editor.Keyboard([new Editor.TypingHandler(self), new Editor.SystemHandler(self)]);
+            that.clipboard = new Editor.Clipboard(this);
 
-            self.clipboard = new Editor.Clipboard(this);
+            that.pendingFormats = new Editor.PendingFormats(this);
 
-            self.pendingFormats = new Editor.PendingFormats(this);
-
-            self.undoRedoStack = new Editor.UndoRedoStack();
+            that.undoRedoStack = new Editor.UndoRedoStack();
 
             if (options && options.value) {
-                self.value(options.value);
+                that.value(options.value);
             }
 
             function toolFromClassName(element) {
@@ -462,40 +452,40 @@
                     } else if (e.keyCode == 37) {
                         $(this).closest("li").prevAll("li:has(" + focusable + ")").last().find(focusable).focus();
                     } else if (e.keyCode == 27) {
-                        self.focus();
+                        that.focus();
                     }
                 })
                 .delegate(enabledButtons, "click", function (e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    self.exec(toolFromClassName(this));
+                    that.exec(toolFromClassName(this));
                 })
                 .delegate(disabledButtons, "click", function(e) { e.preventDefault(); })
                 .find(toolbarItems)
                     .each(function () {
                         var toolName = toolFromClassName(this),
-                            tool = self.options.tools[toolName],
-                            description = self.options.localization[toolName],
+                            tool = that.options.tools[toolName],
+                            description = that.options.localization[toolName],
                             $this = $(this);
 
                         if (!tool)
                             return;
 
                         if (toolName == "fontSize" || toolName == "fontName") {
-                            var inheritText = self.options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"]
-                            self.options[toolName][0].Text = inheritText;
+                            var inheritText = that.options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"]
+                            that.options[toolName][0].Text = inheritText;
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
                         }
 
                         tool.initialize($this, {
                             title: appendShortcutSequence(description, tool),
-                            editor: self
+                            editor: that
                         });
 
                     });/*.end()*/
-                self.bind("select", function() {
-                    var range = self.getRange();
+                that.bind("select", function() {
+                    var range = that.getRange();
 
                     var nodes = Editor.RangeUtils.textNodes(range);
 
@@ -505,36 +495,44 @@
 
                     $wrapper.find(toolbarItems)
                         .each(function () {
-                            var tool = self.options.tools[toolFromClassName(this)];
+                            var tool = that.options.tools[toolFromClassName(this)];
                             if (tool) {
-                                tool.update($(this), nodes, self.pendingFormats);
+                                tool.update($(this), nodes, that.pendingFormats);
                             }
                         });
                 });
 
             $(document)
                 .bind("DOMNodeInserted", function(e) {
-                    if ($.contains(e.target, self.wrapper[0]) || self.wrapper[0] == e.target) {
+                    if ($.contains(e.target, that.wrapper[0]) || that.wrapper[0] == e.target) {
                         // preserve updated value before re-initializing
                         // don't use update() to prevent the editor from encoding the content too early
-                        self.textarea.value = self.value();
-                        self.wrapper.find("iframe").remove();
-                        initializeContentElement(self);
+                        that.textarea.value = that.value();
+                        that.wrapper.find("iframe").remove();
+                        initializeContentElement(that);
                     }
                 })
                 .bind("mousedown", function(e) {
                     try {
-                        if (self.keyboard.isTypingInProgress())
-                            self.keyboard.endTyping(true);
+                        if (that.keyboard.isTypingInProgress())
+                            that.keyboard.endTyping(true);
 
-                        if (!self.selectionRestorePoint) {
-                            self.selectionRestorePoint = new Editor.RestorePoint(self.getRange());
+                        if (!that.selectionRestorePoint) {
+                            that.selectionRestorePoint = new Editor.RestorePoint(that.getRange());
                         }
                     } catch (e) { }
                 });
 
-            kendo.notify(this);
+            kendo.notify(that);
         },
+
+        events: [
+            "select",
+            "change",
+            "execute",
+            "error",
+            "paste"
+        ],
 
         options: {
             name: "Editor",
