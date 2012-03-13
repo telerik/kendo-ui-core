@@ -540,6 +540,7 @@
             var that = this,
                 element = that.element,
                 selectedIndex = element[0].selectedIndex,
+                label = that.options.optionLabel,
                 value = that.value(),
                 length = data.length,
                 options = "",
@@ -547,9 +548,14 @@
                 dataItem,
                 dataText,
                 dataValue,
-                idx;
+                idx = 0;
 
-            for (idx = 0; idx < length; idx++) {
+            if (label && length > 0) {
+                options += '<option value="">' + label + "</option>";
+                idx += 1;
+            }
+
+            for (; idx < length; idx++) {
                 option = "<option";
                 dataItem = data[idx];
                 dataText = that._text(dataItem);

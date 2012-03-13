@@ -433,6 +433,16 @@
                 equal(first.Order1.Ship1.City1, "");
             });
 
+            test("_options should render option with value if optionLabel", function() {
+                var select = $("<select/>"),
+                    dropdownlist = new DropDownList(select, {
+                        dataSource: ["item1", "item2"],
+                        optionLabel: "Select..."
+                    });
+
+                    equal(select[0].children[0].outerHTML, '<option value="">Select...</option>');
+            });
+
             test("should not set id to the popup if the input does not have", function() {
                 input.removeAttr("id");
                 dropdownlist = new DropDownList(input);
