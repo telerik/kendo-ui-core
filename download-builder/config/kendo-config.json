@@ -254,6 +254,18 @@
             ]
         },
         {
+            "id": "editor",
+            "name": "Editor",
+            "category": "web",
+            "description": "Rich text editor component",
+            "source": "kendo.editor.min.js",
+            "depends": [
+                "combobox",
+                "dropdownlist",
+                "window"
+            ]
+        },
+        {
             "id": "grid",
             "name": "Grid",
             "category": "web",
@@ -370,7 +382,7 @@
             "description": "The PanelBar widget displays hierarchical data as a multi-level expandable panel bar.",
             "source": "kendo.panelbar.min.js",
             "depends": [
-                "data"
+                "core"
             ]
         },
         {
@@ -400,7 +412,7 @@
             "description": "The TabStrip widget displays a collection of tabs with associated tab content.",
             "source": "kendo.tabstrip.min.js",
             "depends": [
-                "core"
+                "data"
             ]
         },
         {
