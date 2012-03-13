@@ -254,8 +254,6 @@
 
             that._dataSource();
 
-            that._templates();
-
             if (options.dataSource) {
                 that.dataSource.fetch();
             } else {
@@ -276,6 +274,7 @@
              * @param {jQueryObject} e.item The selected list item.
              * @param {jQueryObject} e.target The clicked DOM element.
              * @param {Object} e.dataItem The corresponding dataItem associated with the item (available in databound mode only).
+             * Note: The dataItem must be from a non-primitive type (Object).
              * @param {kendo.ui.MobileButton} e.button The clicked Kendo mobile Button.
              *
              * @exampleTitle Handling button clicks
@@ -290,16 +289,14 @@
              *  }
              * </script>
              *
-             * @exampleTitle Making dataItem available in events
+             * @exampleTitle Accessing dataItem in event
              * @example
              * <ul id="foo"></ul>
              *
              * <script>
-             *  // for the dataItem to be present in the click event, The datasource must have schema definition.
              *  $("#foo").kendoMobileListView({
              *     dataSource: new kendo.data.DataSource({
-             *          data:   [{title: "foo"}, {title: "bar"}],
-             *          schema: {model: {}}
+             *          data:   [{title: "foo"}, {title: "bar"}]
              *     }),
              *
              *     click: function(e) {
@@ -327,7 +324,6 @@
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
-            this._templates();
         },
 
         setDataSource: function(dataSource) {
@@ -366,6 +362,15 @@
             }
         },
 
+
+        /**
+         * Repaints the listview (works only in databound mode).
+         * @example
+         * // get a reference to the mobile listview widget
+         * var listView = $("#listView").data("kendoMobileListView");
+         * // refreshes the listview
+         * listview.refresh();
+         */
         refresh: function() {
             var that = this,
                 dataSource = that.dataSource,
@@ -375,6 +380,7 @@
                 contents,
                 view = dataSource.view();
 
+            this._templates();
             that.trigger("dataBinding");
 
             if (dataSource.group()[0]) {
@@ -400,12 +406,11 @@
             var that = this,
                 template = that.options.template,
                 headerTemplate = that.options.headerTemplate,
-                model = that.dataSource.options.schema.model,
                 dataIDAttribute = "",
                 templateProxy = {},
                 groupTemplateProxy = {};
 
-            if (model) {
+            if (that.dataSource.view()[0] instanceof kendo.data.ObservableObject) {
                 dataIDAttribute = ' data-uid="#=uid#"';
             }
 

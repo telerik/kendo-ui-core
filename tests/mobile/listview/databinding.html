@@ -165,7 +165,7 @@
             test("data-uid attribute is rendered for each row when model is defined", function() {
                 dom = $("<ul/>");
                 listView = new ListView(dom, {
-                    dataSource: {schema: {model: {id: "foo"}}, data: [{foo: "bar"}]}
+                    dataSource: {data: [{foo: "bar"}]}
                 });
 
                 equal(dom.find("li").data("uid"), listView.dataSource.view()[0].uid);
@@ -175,7 +175,7 @@
                 expect(1);
                 var model = {foo: "bar"},
                     link,
-                    dataSource = {schema: {model: {id: "foo"}}, data: [model]};
+                        dataSource = { data: [model]};
 
                 dom = $("<ul/>");
 
