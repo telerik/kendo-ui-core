@@ -967,10 +967,13 @@ less.Parser = function Parser(env) {
                         ruleset = $(this.block);
 
                         if (ruleset) {
-                            if (!tree.mixinlist[mixid]) {
-                                tree.mixinlist[mixid] = true;
-                                return new(tree.mixin.Definition)(name, params, ruleset, cond);
+                            if (tree.mixinlist[mixid] && !cond) {
+                                // skip overridden mixins
+                                return;
                             }
+
+                            tree.mixinlist[mixid] = true;
+                            return new(tree.mixin.Definition)(name, params, ruleset, cond);
                         } else {
                             restore();
                         }
