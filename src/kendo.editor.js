@@ -532,6 +532,8 @@
                         }
                     } catch (e) { }
                 });
+
+            kendo.notify(this);
         },
 
         options: {
