@@ -677,11 +677,14 @@
         options: {
             name: "DatePicker",
             value: null,
+            format: "",
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
             footer: '#= kendo.toString(data,"D") #',
             start: MONTH,
-            depth: MONTH
+            depth: MONTH,
+            animation: {},
+            month : {}
         },
 
         setOptions: function(options) {

@@ -499,9 +499,11 @@
             name: "TimePicker",
             min: TODAY,
             max: TODAY,
+            format: "",
             value: null,
             interval: 30,
-            height: 200
+            height: 200,
+            animation: {}
         },
 
         events: [

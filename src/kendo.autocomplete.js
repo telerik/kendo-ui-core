@@ -365,7 +365,8 @@
             filter: "startswith",
             highlightFirst: false,
             separator: null,
-            placeholder: ""
+            placeholder: "",
+            animation: {}
         },
 
         _dataSource: function() {

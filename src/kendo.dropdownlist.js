@@ -352,7 +352,9 @@
             delay: 500,
             dataTextField: "",
             dataValueField: "",
-            height: 200
+            optionLabel: "",
+            height: 200,
+            animation: {}
         },
         events: [
             /**
