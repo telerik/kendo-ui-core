@@ -1,7 +1,49 @@
         <div id="example" class="k-content absConf">
+            <h3>World<span>Population</span></h3>
+            <h4>Kendo UI Data Visualization Project</h4>
 
-            <script></script>
+            <ul id="filtering-tabs">
+                <li>1950s</li>
+                <li>1960s</li>
+                <li>1970s</li>
+                <li>1980s</li>
+                <li>1990s</li>
+                <li>2000s</li>
+            </ul>
 
-            <style scoped></style>
+            <h5>Population through the decade</h5>
+
+            <div>Chart type</div>
+            <ul class="chart-type">
+                <li><label><input type="radio" name="chart-type" checked>Area</label></li>
+                <li><label><input type="radio" name="chart-type">Line</label></li>
+                <li><label><input type="radio" name="chart-type">Bar</label></li>
+            </ul>
+
+            <h5>World total population</h5>
+            <div class="metric">thousands</div>
+
+            <h5>Female / male ratio</h5>
+            <h5>Women</h5>
+            <div class="metric">thousands</div>
+
+            <h5>Men</h5>
+            <div class="metric">thousands</div>
+
+            <h5>Age group poulation</h5>
+            <div class="metric">thousands</div>
+
+            <h5>Age group ratio of total</h5>
+            <div class="metric">percents</div>
+
+            <script>
+                $("#filtering-tabs").kendoTabStrip();
+            </script>
+
+            <style scoped>
+                h3, h5 {
+                    text-transform: uppercase;
+                }
+            </style>
         </div>
 
