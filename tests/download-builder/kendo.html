@@ -11,7 +11,7 @@
         <script src="../../download-builder/scripts/script-resolver.js"></script>
         <script type="text/javascript">
 
-            var STAGING_BASE = "http://mvc-kendobuild/staging/content/cdn/js/";
+            var STAGING_BASE = "../../src/";
 
             // ------------------------------------------------------------
             function loadConfig(callback) {
@@ -28,7 +28,7 @@
                 stop(1);
 
                 var scripts = $.map(scripts, function(s) {
-                                  return "<script src='" + STAGING_BASE + s + "'><\/script>";
+                                  return "<script src='" + STAGING_BASE + s.replace(".min", "") + "'><\/script>";
                               }).join("\n");
 
                 var iframe = $("<iframe />", { src: "javascript: '<html></html>';" } )
