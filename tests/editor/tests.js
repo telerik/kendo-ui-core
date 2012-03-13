@@ -20,6 +20,10 @@ tests.push(
         title: "editor Block format finder"
     },
     {
+        page: "editor/mvvm.html",
+        title: "editor MVVM"
+    },
+    {
         page: "editor/blockformatter.html",
         title: "editor BlockFormatter"
     }/*,
