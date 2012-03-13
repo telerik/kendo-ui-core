@@ -571,7 +571,7 @@
             "description": "The Kendo Mobile Scroller widget enables touch friendly kinetic scrolling for the contents of a given DOM element.",
             "source": "kendo.mobile.scroller.min.js",
             "depends": [
-                "mobile.application",
+                "mobile.core",
                 "draganddrop"
             ]
         },
