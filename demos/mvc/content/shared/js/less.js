@@ -968,7 +968,7 @@ less.Parser = function Parser(env) {
 
                         if (ruleset) {
                             if (tree.mixinlist[mixid] && !cond) {
-                                // skip overridden mixins
+                                // skip overridden, non-conditional mixins
                                 return;
                             }
 
@@ -2393,7 +2393,7 @@ tree.Import.prototype = {
         if (this.css || tree.skiplist[this.path]) {
             return this;
         } else {
-            if (!tree.skiplist[this.path]) {
+            if (!tree.skiplist[this.path] && this.root) {
                 ruleset = new(tree.Ruleset)([], this.root.rules.slice(0));
 
                 for (var i = 0; i < ruleset.rules.length; i++) {
