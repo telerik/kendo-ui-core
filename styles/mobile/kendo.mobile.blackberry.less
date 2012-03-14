@@ -404,8 +404,7 @@
 .km-blackberry .km-header,
 .km-blackberry .km-footer,
 .km-blackberry .km-icon,
-.km-blackberry .k-list-container,
-.km-blackberry .k-animation-container
+.km-blackberry .km-popup .k-item
 {
     -webkit-transform: translatez(0);
 }
@@ -501,7 +500,7 @@
 
 .km-blackberry input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]),
 .km-blackberry select:not([multiple]),
-.km-blackberry .km-select .k-dropdown-wrap
+.km-blackberry .k-dropdown
 {
     border: 1px solid rgba(0,0,0,.5);
     right: .8em;
@@ -519,16 +518,26 @@
     margin-top: -1.1em;
 }
 
-.km-blackberry .km-select
+.km-blackberry .k-dropdown
 {
-    right: .8em;
+    border: 0;
+    padding: 0;
+    width: 10em;
+    .border-radius(0);
 }
 
-.km-blackberry select:not([multiple]),
-.km-blackberry .km-select .k-dropdown-wrap
+.km-blackberry .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    padding: .2em 2em .2em .4em;
+    border: 1px solid rgba(0,0,0,.5);
+    .border-radius(~".3em");
+}
+
+.km-blackberry select:not([multiple])
 {
     min-width: 6em;
-    padding-right: 3em;
+    padding-right: 2em;
 }
 
 .km-blackberry input[type=password],
@@ -561,7 +570,7 @@
 .km-blackberry input[type=month],
 .km-blackberry input[type=datetime],
 .km-blackberry select:not([multiple]),
-.km-blackberry .km-select .k-dropdown-wrap
+.km-blackberry .k-dropdown-wrap
 {
     background: 100% 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAMAAAB28zu6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIVBMVEX////19fT19fX19fX19fT19fT19fX19fP19fT19fT19fRLB2KYAAAACnRSTlMA7xBQr5/PMN+AkwDcBAAAANFJREFUeF7t2LuVwzAAA0HKpPxh/wVfiFS+SPCbqQDBRhg/BAAAAAAAAAAAAAAAAACA13Nf93yNW3jvb7zHLezvGP1v5/7GOW7hcezrjse4h7mvm+Mu1r5qjSgIJHHcxSyKI1ZTHAmkJ46YRXHEaoojgfTEEbMojlhNcSSQnjhiFsURqymOBNITR8yiOGI1xZFAeuKIWRRHrKY4EkhPHDGL4ojVFkcCSRwdZlEcsZriSCCJo8dMHEXOPKRFPsc+PuO3AQAAAAAAAAAAAAAAAADwB5LFJn8OLOPPAAAAAElFTkSuQmCC"),
                 100% 0 no-repeat linear-gradient(left, rgba(0,0,0,.3), rgba(0,0,0,.3)), linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2)) #eee;
@@ -582,10 +591,15 @@
 .km-blackberry input[type=month]:focus,
 .km-blackberry input[type=datetime]:focus,
 .km-blackberry select:not([multiple]):focus,
-.km-blackberry .km-select .k-state-focused
+.km-blackberry .k-dropdown .k-state-focused
 {
     color: #fff;
     background-color: #45bfff;
+}
+
+.km-blackberry .k-dropdown .k-state-focused .k-input
+{
+    color: #fff;
 }
 
 .km-blackberry select:not([multiple]):focus option
@@ -602,10 +616,17 @@
     border: 0;
 }
 
+.km-blackberry .km-popup .k-state-hover,
+.km-blackberry .km-popup .k-state-focused,
 .km-blackberry .km-popup .k-state-selected
 {
     color: #fff;
     background: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2)) #0990e9;
+}
+
+.km-blackberry .km-popup .k-state-hover
+{
+    background-color: rgba(9,144,233,.8);
 }
 
 .km-blackberry .km-popup .k-list-container
@@ -617,36 +638,36 @@
     border: 1px solid #777;
 }
 
-.km-select.k-state-border-up
+.km-blackberry .k-dropdown.k-state-border-up
 {
     background: linear-gradient(top, #777, #777 10%, transparent 10%),
                 linear-gradient(top, #777, #777 10%, transparent 10%),
-                linear-gradient(top, #fff, #fff 10%, transparent 10%);
+                linear-gradient(top, #fff, #fff 10%, transparent 10%) transparent;
 }
 
-.km-select.k-state-border-down
+.km-blackberry .k-dropdown.k-state-border-down
 {
     background: linear-gradient(top, transparent 90%, #777 90%, #777),
                 linear-gradient(top, transparent 90%, #777 90%, #777),
-                linear-gradient(top, transparent 90%, #fff 90%, #fff);
+                linear-gradient(top, transparent 90%, #fff 90%, #fff) transparent;
 }
 
-.km-select.k-state-border-up,
-.km-select.k-state-border-down
+.km-blackberry .k-dropdown.k-state-border-up,
+.km-blackberry .k-dropdown.k-state-border-down
 {
     background-position: 0 0, 100% 0, 0 0;
     background-repeat: no-repeat;
     background-size: 1px 100%, 1px 100%, auto;
 }
 
-.km-popup .k-state-border-up
+.km-blackberry .km-popup .k-state-border-up
 {
     border-top: 0;
     .border-radius(0 0 4px 4px);
     .box-shadow(~"1px 1px 1px rgba(0,0,0,.3)");
 }
 
-.km-popup .k-state-border-down
+.km-blackberry .km-popup .k-state-border-down
 {
     border-bottom: 0;
     margin-top: 1px;

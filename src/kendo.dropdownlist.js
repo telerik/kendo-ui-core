@@ -880,10 +880,10 @@
         _mobile: function() {
             var that = this,
                 popup = that.popup,
-                root = popup.element.parents(".km-root");
+                root = popup.element.parents(".km-root").eq(0);
 
-            if (root.length) {
-                popup.options.animation.open.effects = root.children(".km-android")[0] ? "fadeIn" : root.children(".km-ios")[0] ? "slideIn:up" : popup.options.animation.open.effects;
+            if (root.length && os) {
+                popup.options.animation.open.effects = os.android ? "fadeIn" : os.ios ? "slideIn:up" : popup.options.animation.open.effects;
             }
         },
 

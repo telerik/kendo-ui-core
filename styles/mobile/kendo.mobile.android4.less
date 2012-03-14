@@ -770,7 +770,7 @@
 
 .km-android input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]),
 .km-android select:not([multiple]),
-.km-android .km-select .k-dropdown-wrap
+.km-android .k-dropdown
 {
     color: #fff;
     padding: .4em;
@@ -784,6 +784,28 @@
     color: #fff;
     padding: .25em;
     outline: none;
+}
+
+.km-android .k-dropdown
+{
+    padding: 0;
+    width: auto;
+    min-width: 8em;
+    margin-top: -1.2rem;
+}
+
+.km-android .k-dropdown .k-dropdown-wrap
+{
+    width: 100%;
+    padding: .25em .4em;
+    .border-radius(0);
+    .box-sizing(border-box);
+}
+
+.km-android .k-dropdown .k-input
+{
+    color: #fff;
+    .border-radius(0);
 }
 
 .km-android input[type=password],
@@ -829,7 +851,7 @@
 .km-android input[type=time],
 .km-android input[type=datetime],
 .km-android select:not([multiple]),
-.km-android .km-select .k-dropdown-wrap
+.km-android .k-dropdown .k-dropdown-wrap
 {
     border: 0;
     border-bottom: 1px solid rgba(127,127,127,.5);
@@ -852,7 +874,7 @@
 .km-android input[type=time]:focus,
 .km-android input[type=datetime]:focus,
 .km-android select:not([multiple]):focus,
-.km-android .km-select .k-state-focused
+.km-android .k-dropdown .k-state-focused
 {
     background-color: rgba(51,181,229,.6);
 }
@@ -863,12 +885,7 @@
     background-color: #fff;
 }
 
-.km-android .km-select
-{
-    margin-top: -.6em;
-}
-
-.km-android .k-animation-container
+.km-android .km-popup
 {
     left: 0 !important;
     top: 0 !important;
@@ -877,16 +894,19 @@
     background: rgba(0,0,0,.7);
 }
 
-.km-android .k-list-container
+.km-android .km-popup .k-list-container
 {
     position: static !important;
     margin-left: 10% !important;
     width: 80% !important;
     display: inline-block !important;
     max-height: 80%;
+    border: 0;
+    padding: 0;
     background: #333;
     color: #fff;
     vertical-align: middle;
+    .border-radius(0);
 }
 
 .km-android > .k-list-container
@@ -894,7 +914,7 @@
     display: none !important;
 }
 
-.km-android .k-animation-container:before
+.km-android .km-popup:before
 {
     content: "\a0";
     display: inline-block;
@@ -903,19 +923,23 @@
     width: 0;
 }
 
-.km-android .k-list-container .k-state-focused,
-.km-android .k-list-container .k-state-selected
+.km-android .km-popup .k-state-focused,
+.km-android .km-popup .k-state-selected
 {
     background: #33b5e5;
 }
 
-.km-android .k-list-container .k-state-hover
+.km-android .km-popup .k-state-hover
 {
+    color: #fff;
     background: rgba(51,181,229,.6);
 }
 
-.km-android .k-list-container .k-item
+.km-android .km-popup .k-item
 {
     line-height: 3em;
+    border-width: 0 0 1px 0;
+    padding: 0 .5em;
+    .border-radius(0);
 }
 
