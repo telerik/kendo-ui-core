@@ -8,7 +8,6 @@
         Observable = kendo.Observable,
         mobile;
 
-
     var Widget = ui.Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
         /**
          * Initializes mobile widget. Sets `element` and `options` properties.
@@ -155,106 +154,6 @@
         }
     });
 
-    var TICK_INTERVAL = 10;
-
-    var animationFrame = (function(){
-      return  window.requestAnimationFrame       ||
-              window.webkitRequestAnimationFrame ||
-              window.mozRequestAnimationFrame    ||
-              window.oRequestAnimationFrame      ||
-              window.msRequestAnimationFrame     ||
-              function(callback){
-                window.setTimeout(callback, 1000 / 60);
-              };
-    })();
-
-    var Animation = Class.extend({
-        init: function() {
-            var that = this;
-            that._tickProxy = proxy(that._tick, that);
-            that._started = false;
-        },
-
-        tick: $.noop,
-        done: $.noop,
-        onEnd: $.noop,
-        onCancel: $.noop,
-
-        start: function() {
-            this._started = true;
-            animationFrame(this._tickProxy);
-        },
-
-        cancel: function() {
-            this._started = false;
-            this.onCancel();
-        },
-
-        _tick: function() {
-            var that = this;
-            if (!that._started) { return; }
-
-            that.tick();
-
-            if (!that.done()) {
-                animationFrame(that._tickProxy);
-            } else {
-                that._started = false;
-                that.onEnd();
-            }
-        }
-    });
-
-    var Transition = Animation.extend({
-        init: function(options) {
-            var that = this;
-            extend(that, options);
-            Animation.fn.init.call(that);
-        },
-
-        done: function() {
-            return this.timePassed() >= this.duration;
-        },
-
-        timePassed: function() {
-            return Math.min(this.duration, (+new Date()) - this.startDate);
-        },
-
-        moveTo: function(options) {
-            var that = this,
-                movable = that.movable;
-
-            that.initial = movable[that.axis];
-            that.delta = options.location - that.initial;
-
-            that.duration = options.duration || 300;
-
-            that.tick = that._easeProxy(options.ease || Ease.easeOutQuad);
-
-            that.startDate = +new Date();
-            that.start();
-        },
-
-        _easeProxy: function(ease) {
-            var that = this;
-
-            return function() {
-                that.movable.moveAxis(that.axis, ease(that.timePassed(), that.initial, that.delta, that.duration));
-            }
-        }
-    });
-
-    extend(Transition, {
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
-        },
-
-        easeOutBack: function (t, b, c, d, s) {
-            s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-        }
-    });
-
     /**
      * @name kendo.mobile
      * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
@@ -277,8 +176,6 @@
         },
 
         PaneDimensions: PaneDimensions,
-        Animation: Animation,
-        Transition: Transition,
         Pane: Pane
     });
 })(jQuery);

@@ -3,7 +3,7 @@
         ui = mobile.ui,
         proxy = $.proxy,
         Class = kendo.Class,
-        Transition = mobile.Transition,
+        Transition = kendo.fx.Transition,
         Widget = ui.Widget,
 
         // Math
