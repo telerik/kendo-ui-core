@@ -7,6 +7,8 @@
         </tr>
         <tr>
             <td>
+                <input type="checkbox" data-bind="checked:show"/>
+
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
                 <h4>AutoComplete</h4>
             </td>
@@ -29,7 +31,7 @@
         </tr>
         <tr>
             <td>
-                <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue"></select>
+                <select data-role="combobox" data-text-field="name" data-value-field="value" data-bind="source: colors, value: comboBoxValue, visible: show"></select>
                 <h4>ComboBox</h4>
             </td>
         </tr>
@@ -41,7 +43,7 @@
         </tr>
         <tr>
             <td>
-                <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue"></select>
+                <select data-role="dropdownlist" data-text-field="name" data-value-field="value" data-bind="source: colors, value: dropDownListValue, visible: show"></select>
                 <h4>DropDownList </h4>
             </td>
         </tr>
@@ -53,7 +55,7 @@
         </tr>
         <tr>
             <td>
-                <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue" />
+                <input data-role="numerictextbox" data-format="c" data-bind="value: numericTextBoxValue, visible: show" />
                 <h4>NumericTextBox</h4>
             </td>
         </tr>
@@ -93,6 +95,7 @@
     <script>
         $(document).ready(function() {
             var viewModel = kendo.observable({
+                show: true,
                 autoCompleteValue: null,
                 colors: [ {
                     name: "Red", value: "#f00",
