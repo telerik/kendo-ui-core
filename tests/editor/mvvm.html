@@ -97,6 +97,47 @@
 
                 equal(dom.data("kendoEditor").value(), "foo");
             });
+
+            test("binding visible to true shows the editor", function() {
+                dom.attr("data-bind", "visible: visible");
+
+                kendo.bind(dom, { visible: true });
+
+                var editor = dom.data("kendoEditor");
+
+                ok(editor.wrapper.css("display") != "none", "editor is visible");
+            });
+
+            test("binding visible to false hides the editor", function() {
+                dom.attr("data-bind", "visible: visible");
+
+                kendo.bind(dom, { visible: false });
+
+                var editor = dom.data("kendoEditor");
+
+                ok(editor.wrapper.css("display") == "none", "editor is not visible");
+            });
+
+            test("binding invisible to true hides the editor", function() {
+                dom.attr("data-bind", "invisible: invisible");
+
+                kendo.bind(dom, { invisible: true });
+
+                var editor = dom.data("kendoEditor");
+
+                ok(editor.wrapper.css("display") == "none", "editor is invisible");
+            });
+
+            test("binding invisible to false shows the editor", function() {
+                dom.attr("data-bind", "invisible: invisible");
+
+                kendo.bind(dom, { invisible: false });
+
+                var editor = dom.data("kendoEditor");
+
+                ok(editor.wrapper.css("display") != "none", "editor is not invisible");
+            });
+
         </script>
 
         <h1 id="qunit-header">Editor MVVM Tests</h1>
