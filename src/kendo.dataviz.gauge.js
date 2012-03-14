@@ -19,6 +19,7 @@
         Ring = dataviz.Ring,
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,
+        BarAnimation = dataviz.BarAnimation,
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
@@ -31,13 +32,14 @@
 
     // Constants ==============================================================
     var ARROW = "arrow",
-        BAR_INDICATOR = "barIndicator",
+        ARROW_POINTER = "arrowPointer",
+        BAR = "bar",
         BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEGREE = math.PI / 180,
-        POINTER = "pointer",
+        RADIAL_POINTER = "radialPointer",
         OUTSIDE = "outside",
         INSIDE = "inside",
         VERTICAL = "vertical";
@@ -68,7 +70,7 @@
             color: "#ea7001",
             value: 0,
             animation: {
-                type: POINTER
+                type: RADIAL_POINTER
             }
         },
 
@@ -87,16 +89,6 @@
             options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
             pointer.repaint();
-        },
-
-        getViewElements: function(view) {
-            var pointer = this,
-                shape = pointer.options.shape,
-                elements = pointer.renderPointer(view);
-
-            pointer.elements = elements;
-
-            return elements;
         }
     });
 
@@ -181,6 +173,16 @@
                 ], true, options),
                 view.createCircle([center.x, center.y], capSize, { fill: options.cap.color || options.color })
             ];
+        },
+
+        getViewElements: function(view) {
+            var pointer = this,
+                shape = pointer.options.shape,
+                elements = pointer.renderPointer(view);
+
+            pointer.elements = elements;
+
+            return elements;
         }
     });
 
@@ -627,7 +629,7 @@
 
     var LinearPointer = Pointer.extend({
         options: {
-            shape: BAR_INDICATOR,
+            shape: "barIndicator",
 
             track: {
                 width: 6,
@@ -643,7 +645,30 @@
             },
             opacity: 1,
 
-            padding: getSpacing(3)
+            padding: getSpacing(3),
+            animation: {
+                type: "fadeIn"
+            }
+        },
+
+        repaint: function() {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                needle = pointer.elements[0],
+                animation;
+                console.log(pointer.children);
+
+
+            if (options.animation === false) {
+                needle.refresh(doc.getElementById(options.id));
+            } else {
+                animation = new RotationAnimation(needle, deepExtend(options.animation, {
+                    startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(scale.options.min)
+                }));
+                animation.setup();
+                animation.play();
+            }
         },
 
         reflow: function(box) {
@@ -726,7 +751,9 @@
             } else {
                 shape = view.createRect(pointer.pointerBox, deepExtend({
                         fill: options.color,
-                        fillOpacity: options.opacity
+                        fillOpacity: options.opacity,
+                        animation: options.animation,
+                        kur: "kur"
                     }, border)
                 );
             }
@@ -756,13 +783,12 @@
 
         getViewElements: function(view) {
             var pointer = this,
-                shape = pointer.options.shape,
                 elements = [];
 
             elements.push(pointer.renderTrack(view));
             elements.push(pointer.renderPointer(view));
 
-            pointer.elements = elements;
+            append(elements, Pointer.fn.getViewElements.call(pointer, view));
 
             return elements;
         }
@@ -995,7 +1021,9 @@
         }
     });
 
-    var PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
+    var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
+    var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, RotationAnimation);
+    var BarIndicatorAnimationDecorator = animationDecorator(BAR, BarAnimation);
 
     // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);
@@ -1006,7 +1034,9 @@
         RadialPointer: RadialPointer,
         LinearPointer: LinearPointer,
         LinearScale: LinearScale,
-        PointerAnimationDecorator: PointerAnimationDecorator,
+        RadialPointerAnimationDecorator: RadialPointerAnimationDecorator,
+        ArrowPointerAnimationDecorator: ArrowPointerAnimationDecorator,
+        BarIndicatorAnimationDecorator: BarIndicatorAnimationDecorator,
         RadialScale: RadialScale
     });
 

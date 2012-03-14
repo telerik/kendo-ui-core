@@ -64,9 +64,17 @@
                 new dataviz.FadeAnimationDecorator(view)
             );
 
-            if (dataviz.PointerAnimationDecorator) {
+            if (dataviz.RadialPointerAnimationDecorator) {
                 view.decorators.push(
-                    new dataviz.PointerAnimationDecorator(view)
+                    new dataviz.RadialPointerAnimationDecorator(view)
+                );
+            }
+
+            if (dataviz.ui.Gauge) {
+                view.decorators.push(
+                    new dataviz.RadialPointerAnimationDecorator(view),
+                    new dataviz.ArrowPointerAnimationDecorator(view),
+                    new dataviz.BarPointerAnimationDecorator(view)
                 );
             }
 
