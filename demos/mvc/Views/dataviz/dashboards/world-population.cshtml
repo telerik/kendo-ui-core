@@ -1,6 +1,6 @@
         <div id="example" class="k-content absConf">
-            <h3>World<span>Population</span></h3>
-            <h4>Kendo UI Data Visualization Project</h4>
+            <h3 class="example-title">World<span>Population</span></h3>
+            <h4 class="example-description">Kendo UI Data Visualization Project</h4>
 
             <ul id="filtering-tabs">
                 <li>1950s</li>
@@ -11,7 +11,7 @@
                 <li>2000s</li>
             </ul>
 
-            <h5>Population through the decade</h5>
+            <h5 class="example-subtitle">Population through the decade</h5>
 
             <div>Chart type</div>
             <ul class="chart-type">
@@ -20,29 +20,115 @@
                 <li><label><input type="radio" name="chart-type">Bar</label></li>
             </ul>
 
-            <h5>World total population</h5>
+            <div id="decade-population-chart"></div>
+
+            <h5 class="example-subtitle">World total population</h5>
             <div class="metric">thousands</div>
 
-            <h5>Female / male ratio</h5>
-            <h5>Women</h5>
+            <h5 class="example-subtitle">Female / male ratio</h5>
+            <h5 class="example-subtitle">Women</h5>
             <div class="metric">thousands</div>
 
-            <h5>Men</h5>
+            <h5 class="example-subtitle">Men</h5>
             <div class="metric">thousands</div>
 
-            <h5>Age group poulation</h5>
+            <h5 class="example-subtitle">Age group poulation</h5>
             <div class="metric">thousands</div>
 
-            <h5>Age group ratio of total</h5>
+            <h5 class="example-subtitle">Age group ratio of total</h5>
             <div class="metric">percents</div>
 
             <script>
                 $("#filtering-tabs").kendoTabStrip();
+
+                var totalPopulationDataSource = new kendo.data.DataSource({
+                        transport: {
+                            read: {
+                                url: "../../content/dataviz/dashboards/world-population.json",
+                                dataType: "json"
+                            }
+                        },
+                        sort: {
+                            field: "year",
+                            dir: "asc"
+                        },
+                        filter: [{
+                            field: "year",
+                            operator: "lte",
+                            value: 1959
+                        }, {
+                            field: "year",
+                            operator: "gte",
+                            value: 1950
+                        }]
+                    });
+
+                $("#decade-population-chart").kendoChart({
+                    dataSource: totalPopulationDataSource,
+                    seriesDefaults: {
+                        type: "column"
+                    },
+                    series: [{
+                        field: "male",
+                        name: "male"
+                    }, {
+                        field: "female",
+                        name: "female"
+                    }],
+                    categoryAxis: {
+                        field: "year"
+                    },
+                    legend: {
+                        visible: false
+                    }
+                });
             </script>
 
+            <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
             <style scoped>
-                h3, h5 {
+                .example-title,
+                .example-subtitle,
+                .metric,
+                .example-description {
+                    font-family: 'Open Sans Condensed', Verdana, sans-serif;
+                }
+
+                .example-title,
+                .example-subtitle {
                     text-transform: uppercase;
+                }
+
+                .example-title {
+                    color: #2b8abe;
+                    font-size: 48px;
+                    font-weight: 300;
+                }
+
+                .example-title span {
+                    font-weight: 700;
+                }
+
+                .example-description {
+                    font-size: 18px;
+                    font-weight: 300;
+                    color: #1a364a;
+                }
+
+                .example-subtitle {
+                    font-size: 13px;
+                    margin-bottom: 0;
+                }
+
+                .metric {
+                    font-size: 12px;
+                    color: #727f8e;
+                    margin: 0;
+                }
+
+                .example-title,
+                .example-description {
+                    display: inline-block;
+                    margin: 0;
                 }
             </style>
         </div>
