@@ -30,7 +30,9 @@
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var BLACK = "#000",
+    var ARROW = "arrow",
+        BAR_INDICATOR = "barIndicator",
+        BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
@@ -625,7 +627,7 @@
 
     var LinearPointer = Pointer.extend({
         options: {
-            shape: "barIndicator",
+            shape: BAR_INDICATOR,
 
             track: {
                 width: 6,
@@ -698,15 +700,8 @@
                 slot = scale.getSlot(options.value),
                 trackBox = pointer.trackBox,
                 size = options.size;
-                console.log(border);
 
-            if (options.shape == "barIndicator") {
-                shape = view.createRect(pointer.pointerBox, deepExtend({
-                        fill: options.color,
-                        fillOpacity: options.opacity
-                    }, border)
-                );
-            } else {
+            if (options.shape == ARROW) {
                 if (scale.options.vertical) {
                     shape = view.createPolyline([
                         new Point2D(trackBox.x1 - size, slot.y1),
@@ -728,6 +723,12 @@
                         zIndex: 2
                     }, border));
                 }
+            } else {
+                shape = view.createRect(pointer.pointerBox, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity
+                    }, border)
+                );
             }
 
             return shape;
@@ -739,6 +740,10 @@
                 options = pointer.options,
                 trackOptions = options.track,
                 border = trackOptions.border || {};
+
+            if (options.shape == ARROW) {
+                trackOptions.color = trackOptions.color || options.color;
+            }
 
             return view.createRect(pointer.trackBox, {
                 fill: trackOptions.color,
