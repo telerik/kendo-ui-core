@@ -14,16 +14,15 @@ var fs = require("fs"),
     zip = kendoBuild.zip;
 
 var commercialLicense = {name: "commercial", source: true};
+var openSourceLicense = {name: "open-source", source: true};
+var trialLicense = {name: "trial", source: false};
+var betaLicense = {name: "beta", source: true};
 
 var productionLicenses = [
     commercialLicense,
-    {name: "trial", source: false},
-    {name: "open-source", source: true}
+    trialLicense
 ];
 
-var betaLicenses = [
-    {name: "beta", source: true}
-];
 
 
 // Configuration ==============================================================
@@ -31,31 +30,36 @@ var cdnBundle = {
     name: "kendoui.cdn",
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
-    licenses: betaLicenses,
-    eula: "beta-eula",
+    sourceLicense: "src-license-complete.txt",
+    licenses: [commercialLicense],
+    eula: "eula",
 };
 
 var bundles = [{
     name: "kendoui.complete",
     suites: ["web", "dataviz", "mobile"],
     combinedScript: "all",
-    licenses: betaLicenses,
-    eula: "beta-eula",
+    sourceLicense: "src-license-complete.txt",
+    licenses: productionLicenses,
+    eula: "eula",
 }, {
     name: "kendoui.web",
     suites: ["web"],
-    licenses: betaLicenses,
-    eula: "beta-eula",
+    sourceLicense: "src-license-web.txt",
+    licenses: productionLicenses.concat(openSourceLicense),
+    eula: "eula",
 }, {
     name: "kendoui.dataviz",
     suites: ["dataviz"],
-    licenses: betaLicenses,
-    eula: "beta-eula"
+    sourceLicense: "src-license-dataviz.txt",
+    licenses: productionLicenses,
+    eula: "eula"
 }, {
     name: "kendoui.mobile",
     suites: ["mobile"],
-    licenses: betaLicenses,
-    eula: "beta-eula"
+    sourceLicense: "src-license-mobile.txt",
+    licenses: productionLicenses,
+    eula: "eula"
 }];
 
 var thirdPartyScripts = [
@@ -86,8 +90,7 @@ var LATEST = "latest",
     DEPLOY_ONLINEEXAMPLES = "online-examples",
     ONLINE_EXAMPLES_PACKAGE = "kendoui-online-examples.zip";
 
-    var startDate = new Date(),
-        licenseTemplate = template(readText(path.join(LEGAL_ROOT,  "src-license.txt")));
+    var startDate = new Date();
 
 // Implementation ==============================================================
 function clean() {
@@ -249,7 +252,8 @@ function deployThirdPartyScripts(outputRoot) {
 
 function buildBundle(bundle, version, success) {
     var name = bundle.name,
-        zips = 0;
+        zips = 0,
+        licenseTemplate = template(readText(path.join(LEGAL_ROOT, bundle.sourceLicense)));
 
     bundle.licenses.forEach(function(license) {
         var licenseName = license.name,
