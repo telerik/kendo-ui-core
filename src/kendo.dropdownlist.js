@@ -43,12 +43,14 @@
      * @exampleTitle Initialize a DropDownList using a selector within $(document).ready()
      * @example
      * $(document).ready(function() {
-     *     $("#dropDownList").kendoDropDownList(
-     *         [
+     *     $("#dropDownList").kendoDropDownList({
+     *         dataTextField: "text",
+     *         dataValueField: "value",
+     *         dataSource: [
      *             { text: "Item1", value: "1" },
      *             { text: "Item2", value: "2" }
      *         ]
-     *     );
+     *     });
      * });
      *
      * @exampleTitle Create a DropDownList from existing select HTML element with a defined structure
@@ -59,12 +61,11 @@
      *     <option>Item 3</option>
      * </select>
      *
-     * @exampleTitle Initialize a DropDownList using a selector within $(document).ready()
-     * @example
-     * $(document).ready(function(){
-     *     $("#dropDownList").kendoDropDownList();
-     * });
-     *
+     * <script>
+     *    $(document).ready(function(){
+     *       $("#dropDownList").kendoDropDownList();
+     *    });
+     * </script>
      * @section
      * <h3>Binding to Data</h3>
      * <p>
@@ -219,7 +220,7 @@
          * $("#dropdownlist").kendoDropDownList({
          *     delay: 1000 // wait 1 second before clearing the user input
          * });
-         * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+         * @option {String} [dataTextField] <""> Sets the field of the data item that provides the text content of the list items.
          * _example
          * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
          * $("#dropdownlist").kendoDropDownList({
@@ -227,7 +228,7 @@
          *     dataTextField: "Title",
          *     dataValueField: "Id"
          * });
-         * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+         * @option {String} [dataValueField] <""> Sets the field of the data item that provides the value content of the list items.
          * _example
          * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
          * $("#dropdownlist").kendoDropDownList({
@@ -612,6 +613,7 @@
         /**
         * Selects drop-down list item and sets the value and the text of the dropdownlist.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
+        * @returns {Integer} The index of the selected LI element.
         * @example
         * // get a reference to the dropdown list
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
