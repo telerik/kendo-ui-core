@@ -1,0 +1,490 @@
+[
+    {
+        "year": 1950,
+        "total": 2532229,
+        "male": 1265120,
+        "female": 1267109,
+        "males / 100 people": "49.96073687",
+        "females / 100 people": "50.03926313"
+    },
+    {
+        "year": 1951,
+        "total": 2580960,
+        "male": 1290291,
+        "female": 1290669,
+        "males / 100 people": "49.99267588",
+        "females / 100 people": "50.00732412"
+    },
+    {
+        "year": 1952,
+        "total": 2628448,
+        "male": 1314647,
+        "female": 1313801,
+        "males / 100 people": "50.01607977",
+        "females / 100 people": "49.98392023"
+    },
+    {
+        "year": 1953,
+        "total": 2675766,
+        "male": 1338828,
+        "female": 1336938,
+        "males / 100 people": "50.03532244",
+        "females / 100 people": "49.96467756"
+    },
+    {
+        "year": 1954,
+        "total": 2723726,
+        "male": 1363315,
+        "female": 1360411,
+        "males / 100 people": "50.05330457",
+        "females / 100 people": "49.94669543"
+    },
+    {
+        "year": 1955,
+        "total": 2772882,
+        "male": 1388426,
+        "female": 1384456,
+        "males / 100 people": "50.07159305",
+        "females / 100 people": "49.92840695"
+    },
+    {
+        "year": 1956,
+        "total": 2823513,
+        "male": 1414311,
+        "female": 1409202,
+        "males / 100 people": "50.09048548",
+        "females / 100 people": "49.90951452"
+    },
+    {
+        "year": 1957,
+        "total": 2875642,
+        "male": 1440961,
+        "female": 1434681,
+        "males / 100 people": "50.10918168",
+        "females / 100 people": "49.89081832"
+    },
+    {
+        "year": 1958,
+        "total": 2929069,
+        "male": 1468227,
+        "female": 1460842,
+        "males / 100 people": "50.12606382",
+        "females / 100 people": "49.87393618"
+    },
+    {
+        "year": 1959,
+        "total": 2983435,
+        "male": 1495866,
+        "female": 1487569,
+        "males / 100 people": "50.13905976",
+        "females / 100 people": "49.86094024"
+    },
+    {
+        "year": 1960,
+        "total": 3038413,
+        "male": 1523658,
+        "female": 1514755,
+        "males / 100 people": "50.14651966",
+        "females / 100 people": "49.85348034"
+    },
+    {
+        "year": 1961,
+        "total": 3093909,
+        "male": 1551535,
+        "female": 1542374,
+        "males / 100 people": "50.14804071",
+        "females / 100 people": "49.85195929"
+    },
+    {
+        "year": 1962,
+        "total": 3150242,
+        "male": 1579692,
+        "female": 1570550,
+        "males / 100 people": "50.14510043",
+        "females / 100 people": "49.85489957"
+    },
+    {
+        "year": 1963,
+        "total": 3208212,
+        "male": 1608636,
+        "female": 1599576,
+        "males / 100 people": "50.1412049",
+        "females / 100 people": "49.8587951"
+    },
+    {
+        "year": 1964,
+        "total": 3268896,
+        "male": 1639052,
+        "female": 1629844,
+        "males / 100 people": "50.14083601",
+        "females / 100 people": "49.85916399"
+    },
+    {
+        "year": 1965,
+        "total": 3333007,
+        "male": 1671397,
+        "female": 1661610,
+        "males / 100 people": "50.14681864",
+        "females / 100 people": "49.85318136"
+    },
+    {
+        "year": 1966,
+        "total": 3400823,
+        "male": 1705848,
+        "female": 1694975,
+        "males / 100 people": "50.15985156",
+        "females / 100 people": "49.84014844"
+    },
+    {
+        "year": 1967,
+        "total": 3471955,
+        "male": 1742169,
+        "female": 1729786,
+        "males / 100 people": "50.17832582",
+        "females / 100 people": "49.82167418"
+    },
+    {
+        "year": 1968,
+        "total": 3545613,
+        "male": 1779892,
+        "female": 1765720,
+        "males / 100 people": "50.19985615",
+        "females / 100 people": "49.80014385"
+    },
+    {
+        "year": 1969,
+        "total": 3620652,
+        "male": 1818337,
+        "female": 1802315,
+        "males / 100 people": "50.22124632",
+        "females / 100 people": "49.77875368"
+    },
+    {
+        "year": 1970,
+        "total": 3696186,
+        "male": 1856974,
+        "female": 1839212,
+        "males / 100 people": "50.2402663",
+        "females / 100 people": "49.7597337"
+    },
+    {
+        "year": 1971,
+        "total": 3772048,
+        "male": 1895709,
+        "female": 1876339,
+        "males / 100 people": "50.25674893",
+        "females / 100 people": "49.74325107"
+    },
+    {
+        "year": 1972,
+        "total": 3848319,
+        "male": 1934597,
+        "female": 1913723,
+        "males / 100 people": "50.27121489",
+        "females / 100 people": "49.72878511"
+    },
+    {
+        "year": 1973,
+        "total": 3924668,
+        "male": 1973447,
+        "female": 1951221,
+        "males / 100 people": "50.28315168",
+        "females / 100 people": "49.71684832"
+    },
+    {
+        "year": 1974,
+        "total": 4000764,
+        "male": 2012069,
+        "female": 1988695,
+        "males / 100 people": "50.29211077",
+        "females / 100 people": "49.70788923"
+    },
+    {
+        "year": 1975,
+        "total": 4076419,
+        "male": 2050355,
+        "female": 2026064,
+        "males / 100 people": "50.297952",
+        "females / 100 people": "49.702048"
+    },
+    {
+        "year": 1976,
+        "total": 4151410,
+        "male": 2088178,
+        "female": 2063232,
+        "males / 100 people": "50.30045629",
+        "females / 100 people": "49.69954371"
+    },
+    {
+        "year": 1977,
+        "total": 4225864,
+        "male": 2125614,
+        "female": 2100250,
+        "males / 100 people": "50.30009523",
+        "females / 100 people": "49.69990477"
+    },
+    {
+        "year": 1978,
+        "total": 4300402,
+        "male": 2163027,
+        "female": 2137375,
+        "males / 100 people": "50.29825815",
+        "females / 100 people": "49.70174185"
+    },
+    {
+        "year": 1979,
+        "total": 4375899,
+        "male": 2200934,
+        "female": 2174965,
+        "males / 100 people": "50.29672262",
+        "females / 100 people": "49.70327738"
+    },
+    {
+        "year": 1980,
+        "total": 4453007,
+        "male": 2239717,
+        "female": 2213290,
+        "males / 100 people": "50.29672977",
+        "females / 100 people": "49.70327023"
+    },
+    {
+        "year": 1981,
+        "total": 4531799,
+        "male": 2279430,
+        "female": 2252369,
+        "males / 100 people": "50.29857259",
+        "females / 100 people": "49.70142741"
+    },
+    {
+        "year": 1982,
+        "total": 4612120,
+        "male": 2319987,
+        "female": 2292133,
+        "males / 100 people": "50.30196477",
+        "females / 100 people": "49.69803523"
+    },
+    {
+        "year": 1983,
+        "total": 4694097,
+        "male": 2361450,
+        "female": 2332647,
+        "males / 100 people": "50.30679297",
+        "females / 100 people": "49.69320703"
+    },
+    {
+        "year": 1984,
+        "total": 4777828,
+        "male": 2403858,
+        "female": 2373970,
+        "males / 100 people": "50.31277659",
+        "females / 100 people": "49.68722341"
+    },
+    {
+        "year": 1985,
+        "total": 4863290,
+        "male": 2447192,
+        "female": 2416098,
+        "males / 100 people": "50.31967219",
+        "females / 100 people": "49.68032781"
+    },
+    {
+        "year": 1986,
+        "total": 4950591,
+        "male": 2491505,
+        "female": 2459086,
+        "males / 100 people": "50.3274262",
+        "females / 100 people": "49.6725738"
+    },
+    {
+        "year": 1987,
+        "total": 5039478,
+        "male": 2536672,
+        "female": 2502807,
+        "males / 100 people": "50.33599458",
+        "females / 100 people": "49.66400542"
+    },
+    {
+        "year": 1988,
+        "total": 5129113,
+        "male": 2582259,
+        "female": 2546854,
+        "males / 100 people": "50.34513646",
+        "females / 100 people": "49.65486354"
+    },
+    {
+        "year": 1989,
+        "total": 5218375,
+        "male": 2627690,
+        "female": 2590684,
+        "males / 100 people": "50.3545721",
+        "females / 100 people": "49.6454279"
+    },
+    {
+        "year": 1990,
+        "total": 5306425,
+        "male": 2672530,
+        "female": 2633895,
+        "males / 100 people": "50.36404774",
+        "females / 100 people": "49.63595226"
+    },
+    {
+        "year": 1991,
+        "total": 5392939,
+        "male": 2716618,
+        "female": 2676321,
+        "males / 100 people": "50.37360761",
+        "females / 100 people": "49.62639239"
+    },
+    {
+        "year": 1992,
+        "total": 5478009,
+        "male": 2759992,
+        "female": 2718018,
+        "males / 100 people": "50.3831141",
+        "females / 100 people": "49.6168859"
+    },
+    {
+        "year": 1993,
+        "total": 5561744,
+        "male": 2802672,
+        "female": 2759072,
+        "males / 100 people": "50.39196533",
+        "females / 100 people": "49.60803467"
+    },
+    {
+        "year": 1994,
+        "total": 5644416,
+        "male": 2844753,
+        "female": 2799663,
+        "males / 100 people": "50.39942893",
+        "females / 100 people": "49.60057107"
+    },
+    {
+        "year": 1995,
+        "total": 5726239,
+        "male": 2886315,
+        "female": 2839924,
+        "males / 100 people": "50.40506974",
+        "females / 100 people": "49.59493026"
+    },
+    {
+        "year": 1996,
+        "total": 5807212,
+        "male": 2927335,
+        "female": 2879877,
+        "males / 100 people": "50.4086114",
+        "females / 100 people": "49.5913886"
+    },
+    {
+        "year": 1997,
+        "total": 5887260,
+        "male": 2967789,
+        "female": 2919470,
+        "males / 100 people": "50.4103682",
+        "females / 100 people": "49.5896318"
+    },
+    {
+        "year": 1998,
+        "total": 5966465,
+        "male": 3007767,
+        "female": 2958698,
+        "males / 100 people": "50.41120369",
+        "females / 100 people": "49.58879631"
+    },
+    {
+        "year": 1999,
+        "total": 6044931,
+        "male": 3047387,
+        "female": 2997544,
+        "males / 100 people": "50.41227553",
+        "females / 100 people": "49.58772447"
+    },
+    {
+        "year": 2000,
+        "total": 6122770,
+        "male": 3086755,
+        "female": 3036016,
+        "males / 100 people": "50.41434547",
+        "females / 100 people": "49.58565453"
+    },
+    {
+        "year": 2001,
+        "total": 6200003,
+        "male": 3125898,
+        "female": 3074105,
+        "males / 100 people": "50.41768725",
+        "females / 100 people": "49.58231275"
+    },
+    {
+        "year": 2002,
+        "total": 6276722,
+        "male": 3164845,
+        "female": 3111877,
+        "males / 100 people": "50.42194586",
+        "females / 100 people": "49.57805414"
+    },
+    {
+        "year": 2003,
+        "total": 6353196,
+        "male": 3203693,
+        "female": 3149502,
+        "males / 100 people": "50.42648602",
+        "females / 100 people": "49.57351398"
+    },
+    {
+        "year": 2004,
+        "total": 6429758,
+        "male": 3242553,
+        "female": 3187204,
+        "males / 100 people": "50.43041362",
+        "females / 100 people": "49.56958638"
+    },
+    {
+        "year": 2005,
+        "total": 6506649,
+        "male": 3281507,
+        "female": 3225142,
+        "males / 100 people": "50.43313138",
+        "females / 100 people": "49.56686862"
+    },
+    {
+        "year": 2006,
+        "total": 6583959,
+        "male": 3320583,
+        "female": 3263375,
+        "males / 100 people": "50.43445156",
+        "females / 100 people": "49.56554844"
+    },
+    {
+        "year": 2007,
+        "total": 6661637,
+        "male": 3359774,
+        "female": 3301864,
+        "males / 100 people": "50.4346522",
+        "females / 100 people": "49.5653478"
+    },
+    {
+        "year": 2008,
+        "total": 6739610,
+        "male": 3399066,
+        "female": 3340544,
+        "males / 100 people": "50.43416659",
+        "females / 100 people": "49.56583341"
+    },
+    {
+        "year": 2009,
+        "total": 6817737,
+        "male": 3438431,
+        "female": 3379306,
+        "males / 100 people": "50.43360707",
+        "females / 100 people": "49.56639293"
+    },
+    {
+        "year": 2010,
+        "total": 6895889,
+        "male": 3477830,
+        "female": 3418059,
+        "males / 100 people": "50.43337601",
+        "females / 100 people": "49.56662399"
+    }
+]
