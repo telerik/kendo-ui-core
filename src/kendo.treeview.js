@@ -998,7 +998,7 @@
                 }
 
                 if (node.closest(".k-treeview")[0] == that.wrapper[0]) {
-                    that.remove(node);
+                    that.detach(node);
                 }
             }
 
@@ -1118,6 +1118,29 @@
             });
         },
 
+        _remove: function (node, keepData) {
+            var parentNode,
+                prevSibling, nextSibling;
+
+            node = $(node, this.element);
+
+            parentNode = node.parent().parent();
+            prevSibling = node.prev();
+            nextSibling = node.next();
+
+            node[keepData ? "detach" : "remove"]();
+
+            if (parentNode.hasClass("k-item")) {
+                updateNodeHtml(parentNode);
+                updateNodeClasses(parentNode);
+            }
+
+            updateNodeClasses(prevSibling);
+            updateNodeClasses(nextSibling);
+
+            return node;
+        },
+
         /**
          *
          * Removes a node from a TreeView.
@@ -1132,24 +1155,30 @@
          *
          */
         remove: function (node) {
-            var parentNode,
-                prevSibling, nextSibling;
+            return this._remove(node, false);
+        },
 
-            node = $(node, this.element);
-
-            parentNode = node.parent().parent();
-            prevSibling = node.prev();
-            nextSibling = node.next();
-
-            node.remove();
-
-            if (parentNode.hasClass("k-item")) {
-                updateNodeHtml(parentNode);
-                updateNodeClasses(parentNode);
-            }
-
-            updateNodeClasses(prevSibling);
-            updateNodeClasses(nextSibling);
+        /**
+         *
+         * Removes a node from a TreeView, but keeps its jQuery.data() objects.
+         *
+         * @param {Selector} node
+         * The node that is to be detached.
+         *
+         * @returns {jQueryObject}
+         * The node that has been detached.
+         *
+         * @exampleTitle Remove the node with ID, firstItem
+         * @example
+         * var treeView = $("#treeView").data("kendoTreeView");
+         * var firstItem = $("#firstItem");
+         * firstItem.data("id", 1);
+         * treeview.detach(firstItem);
+         * firstItem.data("id") == 1;
+         *
+         */
+        detach: function (node) {
+            return this._remove(node, true);
         },
 
         /**

@@ -320,6 +320,34 @@
                 equals(treeview.find(".k-group").children().length, 2);
             });
 
+            test("append() persists node data", function() {
+                var treeview = createTreeView([
+                            { text: "foo" },
+                            { text: "bar" }
+                        ]).data("kendoTreeView");
+
+                treeview.findByText("foo").data("id", 1);
+
+                treeview.append(treeview.findByText("foo"), treeview.findByText("bar"));
+
+                equals(treeview.findByText("foo").data("id"), 1);
+            });
+
+            test("detach() removes node and persists data", function() {
+                var treeview = createTreeView([
+                            { text: "foo" },
+                            { text: "bar" }
+                        ]).data("kendoTreeView");
+
+                var foo = treeview.findByText("foo");
+
+                foo.data("id", 1);
+
+                foo = treeview.detach(foo);
+
+                equal(foo.data("id"), 1);
+            });
+
             test("insertAfter(nodeData, element) inserts new node after element", function() {
                 var treeview = createTreeView({
                         dataSource: [
