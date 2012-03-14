@@ -872,5 +872,4 @@
 
     fx.Animation = Animation;
     fx.Transition = Transition;
-    console.log(kendo.fx);
 })(jQuery);
