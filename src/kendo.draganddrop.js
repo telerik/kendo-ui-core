@@ -1,5 +1,6 @@
 (function ($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         document = window.document,
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
@@ -541,6 +542,69 @@
         }
     });
 
+    var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
+        round = Math.round,
+        translate;
+
+    if (support.hasHW3D) {
+        translate = function(x, y) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        }
+    } else {
+        translate = function(x, y) {
+            return "translate(" + round(x) + "px," + round(y) +"px)";
+        }
+    }
+
+    var Movable = Observable.extend({
+        init: function(element) {
+            var that = this;
+
+            Observable.fn.init.call(that);
+
+            that.element = $(element);
+            that.x = 0;
+            that.y = 0;
+            that._saveCoordinates(translate(that.x, that.y));
+        },
+
+        translateAxis: function(axis, by) {
+            this[axis] += by;
+            this.refresh();
+        },
+
+        translate: function(coordinates) {
+            this.x += coordinates.x;
+            this.y += coordinates.y;
+            this.refresh();
+        },
+
+        moveAxis: function(axis, value) {
+            this[axis] = value;
+            this.refresh();
+        },
+
+        moveTo: function(coordinates) {
+            extend(this, coordinates);
+            this.refresh();
+        },
+
+        refresh: function() {
+            var that = this,
+                newCoordinates = translate(that.x, that.y);
+
+            if (newCoordinates != that.coordinates) {
+                that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
+                that._saveCoordinates(newCoordinates);
+                that.trigger("change");
+            }
+        },
+
+        _saveCoordinates: function(coordinates) {
+            this.coordinates = coordinates;
+        }
+    });
+
     var DropTarget = Widget.extend(/** @lends kendo.ui.DropTarget.prototype */ {
         /**
          * @constructs
@@ -908,6 +972,11 @@
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
     kendo.Tap = Tap;
-    kendo.ui.Pane = Pane;
-    kendo.ui.PaneDimensions = PaneDimensions;
+
+    extend(kendo.ui, {
+        Pane: Pane,
+        PaneDimensions: PaneDimensions,
+        Movable: Movable
+    });
+
  })(jQuery);
