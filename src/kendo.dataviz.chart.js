@@ -136,7 +136,9 @@
 
             chart.bind(chart.events, chart.options);
 
-            $(element).addClass("k-chart");
+            chart.element.addClass("k-chart");
+
+            chart.wrapper = chart.element;
 
             chart._dataChangeHandler = proxy(chart._onDataChanged, chart);
 
