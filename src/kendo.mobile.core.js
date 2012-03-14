@@ -6,10 +6,7 @@
         proxy = $.proxy,
         Class = kendo.Class,
         Observable = kendo.Observable,
-        mobile,
-
-        //Math
-        round = Math.round;
+        mobile;
 
 
     var Widget = ui.Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
@@ -34,68 +31,6 @@
 
         viewInit: function(view) {
             this.view = view;
-        }
-    });
-
-    var TRANSFORM_STYLE = support.transitions.prefix + "Transform";
-
-    if (support.hasHW3D) {
-        function translate(x, y) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
-        }
-    } else {
-        function translate(x, y) {
-            return "translate(" + round(x) + "px," + round(y) +"px)";
-        }
-    }
-
-    var Move = Observable.extend({
-        init: function(element) {
-            var that = this;
-
-            Observable.fn.init.call(that);
-
-            that.element = $(element);
-            that.domElement = that.element[0];
-            that.x = 0;
-            that.y = 0;
-            that._saveCoordinates(translate(that.x, that.y));
-        },
-
-        translateAxis: function(axis, by) {
-            this[axis] += by;
-            this._redraw();
-        },
-
-        translate: function(coordinates) {
-            this.x += coordinates.x;
-            this.y += coordinates.y;
-            this._redraw();
-        },
-
-        moveAxis: function(axis, value) {
-            this[axis] = value;
-            this._redraw();
-        },
-
-        moveTo: function(coordinates) {
-            extend(this, coordinates);
-            this._redraw();
-        },
-
-        _redraw: function() {
-            var that = this,
-                newCoordinates = translate(that.x, that.y);
-
-            if (newCoordinates != that.coordinates) {
-                that.domElement.style[TRANSFORM_STYLE] = newCoordinates;
-                that._saveCoordinates(newCoordinates);
-                that.trigger("change");
-            }
-        },
-
-        _saveCoordinates: function(coordinates) {
-            this.coordinates = coordinates;
         }
     });
 
@@ -140,7 +75,7 @@
     var PaneDimensions = Class.extend({
         init: function(options) {
             var that = this,
-                move = options.move;
+                movable = options.movable;
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
@@ -165,8 +100,8 @@
             var that = this,
                 dimension = that.dimension,
                 axis = that.axis,
-                move = that.move,
-                position = move[axis] + delta;
+                movable = that.movable,
+                position = movable[axis] + delta;
 
             if (!dimension.present()) {
                 return;
@@ -176,7 +111,7 @@
                 delta *= that.resistance;
             }
 
-            move.translateAxis(axis, delta);
+            movable.translateAxis(axis, delta);
             that.trigger("change", that);
         }
     });
@@ -196,14 +131,14 @@
                 axis: "x",
                 dimension: that.dimensions.x,
                 resistance: resistance,
-                move: that.move
+                movable: that.movable
             });
 
             that.y = y = new PaneAxis({
                 axis: "y",
                 dimension: that.dimensions.y,
                 resistance: resistance,
-                move: that.move
+                movable: that.movable
             });
 
             that.drag.bind(["move", "end"], {
@@ -287,9 +222,9 @@
 
         moveTo: function(options) {
             var that = this,
-                move = that.move;
+                movable = that.movable;
 
-            that.initial = move[that.axis];
+            that.initial = movable[that.axis];
             that.delta = options.location - that.initial;
 
             that.duration = options.duration || 300;
@@ -304,7 +239,7 @@
             var that = this;
 
             return function() {
-                that.move.moveAxis(that.axis, ease(that.timePassed(), that.initial, that.delta, that.duration));
+                that.movable.moveAxis(that.axis, ease(that.timePassed(), that.initial, that.delta, that.duration));
             }
         }
     });
@@ -341,7 +276,6 @@
             }
         },
 
-        Move: Move,
         PaneDimensions: PaneDimensions,
         Animation: Animation,
         Transition: Transition,
