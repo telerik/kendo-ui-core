@@ -81,6 +81,46 @@
                 ok(true);
             }
 
+            test("binding visible to true shows the treeview", function() {
+                var dom = $('<div data-role="treeview" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var treeview = dom.data("kendoTreeView");
+
+                ok(treeview.wrapper.css("display") != "none", "treeview is visible");
+            });
+
+            test("binding visible to false hides the treeview", function() {
+                var dom = $('<div data-role="treeview" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var treeview = dom.data("kendoTreeView");
+
+                ok(treeview.wrapper.css("display") == "none", "treeview is not visible");
+            });
+
+            test("binding invisible to true hides the treeview", function() {
+                var dom = $('<div data-role="treeview" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var treeview = dom.data("kendoTreeView");
+
+                ok(treeview.wrapper.css("display") == "none", "treeview is invisible");
+            });
+
+            test("binding invisible to false shows the treeview", function() {
+                var dom = $('<div data-role="treeview" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var treeview = dom.data("kendoTreeView");
+
+                ok(treeview.wrapper.css("display") != "none", "treeview is not invisible");
+            });
+
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
