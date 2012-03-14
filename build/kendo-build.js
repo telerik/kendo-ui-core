@@ -262,23 +262,33 @@ function mkdir(newDir) {
 }
 
 function deployStyles(stylesRoot, outputRoot, header, compress) {
-    var filesRegex = compress ? /\.(css|png|jpg|jpeg|gif|svg)$/i : /\.(less|css|png|jpg|jpeg|gif|svg)$/i,
-        stylesRegex = compress ? /\.css$/ : /\.(less|css)$/ ;
+    var resourcesRegex = compress ? /\.(png|jpg|jpeg|gif|svg)$/i : /\.(png|jpg|jpeg|gif|svg)$/i,
+        lessTemp = path.join(outputRoot, "_less");
 
     mkdir(outputRoot);
-    copyDirSyncRecursive(stylesRoot, outputRoot, true, filesRegex);
-    themes.buildThemes(stylesRoot, outputRoot);
-    processFilesRecursive(outputRoot, stylesRegex, function(fileName) {
-        if (fileName.indexOf(".min.") === -1) {
-            var css = stripBOM(readText(fileName)),
-                output = compress ? cssmin(css) : css;
+    mkdir(lessTemp);
 
-            writeText(fileName, header + output);
+    copyDirSyncRecursive(stylesRoot, outputRoot, true, resourcesRegex);
 
-            if (compress) {
-                fs.renameSync(fileName, fileName.replace(".css", ".min.css"));
-            }
-        }
+    processStyles(stylesRoot, outputRoot, header, compress);
+
+    themes.buildThemes(stylesRoot, lessTemp);
+    processStyles(lessTemp, outputRoot, header, compress);
+
+    rmdirSyncRecursive(lessTemp);
+}
+
+function processStyles(stylesRoot, outputRoot, header, compress) {
+    var stylesRegex = compress ? /\.css$/ : /\.(less|css)$/;
+
+    processFilesRecursive(stylesRoot, stylesRegex, function(fileName) {
+        var css = stripBOM(readText(fileName)),
+            output = compress ? cssmin(css) : css,
+            outputFileName = (compress ? fileName.replace(".css", ".min.css") : fileName);
+
+        outputFileName = outputFileName.substr(stylesRoot.length, outputFileName.length);
+        outputFileName = path.join(outputRoot, outputFileName);
+        writeText(outputFileName, header + output);
     });
 }
 
