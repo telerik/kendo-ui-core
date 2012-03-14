@@ -234,13 +234,13 @@
         * $("#comboBox").kendoComboBox({
         *     minLength: 3
         * });
-        * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+        * @option {String} [dataTextField] <""> Sets the field of the data item that provides the text content of the list items.
         * _example
         * $("#comboBox").kendoComboBox({
         *     dataTextField: "Name",
         *     dataValueField: "ID"
         * });
-        * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+        * @option {String} [dataValueField] <""> Sets the field of the data item that provides the value content of the list items.
         * _example
         * $("#comboBox").kendoComboBox({
         *     dataTextField: "Name",
@@ -297,6 +297,7 @@
         *          }
         *      });
         *  &lt;/script&gt;
+        *
         * @option {Object} [animation.close] <> Animation to be used for closing of the popup.
         * _example
         *  //combobox initialization
@@ -313,6 +314,24 @@
         *          }
         *      });
         *  &lt;/script&gt;
+        *  @option {String} [placeholder] <""> A string that appears in the textbox when the combobox has no value.
+        *  _example
+        *  //combobox initialization
+        *  <script>
+        *      $("#combobox").kendoComboBox({
+        *          dataSource: dataSource,
+        *          placeholder: "Select..."
+        *      });
+        *  </script>
+        *  _example
+        *  <input id="combobox" placeholder="Select..." />
+        *
+        *  //combobox initialization
+        *  <script>
+        *      $("#combobox").kendoComboBox({
+        *          dataSource: dataSource
+        *      });
+        *  </script>
         */
         init: function(element, options) {
             var that = this, wrapper;
