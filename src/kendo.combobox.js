@@ -36,10 +36,14 @@
      * @exampleTitle ComboBox initialization
      * @example
      * $(document).ready(function(){
-     *  $("#comboBox").kendoComboBox([
-     *   {text: "Item1", value: "1"},
-     *   {text: "Item2", value: "2"}
-     *  ]);
+     *     $("#comboBox").kendoComboBox({
+     *         dataTextField: "text",
+     *         dataValueField: "value",
+     *         dataSource: [
+     *             { text: "Item1", value: "1" },
+     *             { text: "Item2", value: "2" }
+     *         ]
+     *     });
      * });
      *
      * @exampleTitle Creating a ComboBox from existing select HTML element
@@ -50,11 +54,11 @@
      *  <option>Item 3</option>
      * </select>
      *
-     * @exampleTitle ComboBox initialization
-     * @example
-     * $(document).ready(function(){
-     *  $("#comboBox").kendoComboBox();
-     * });
+     * <script>
+     *    $(document).ready(function(){
+     *      $("#comboBox").kendoComboBox();
+     *    });
+     * </script>
      *
      * @section
      * <h3>Binding to Data</h3>
@@ -173,6 +177,8 @@
         * _example
         * var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
         * $("#comboBox").kendoComboBox({
+        *     dataTextField: "text",
+        *     dataValueField: "value",
         *     dataSource: items
         * });
         * _exampleTitle To set after initialization
@@ -181,7 +187,7 @@
         *     dataSource: new kendo.data.DataSource({
         *         transport: {
         *             read: {
-        *                 url: "Get/Items" // url to remote data source
+        *                 url: "Get/Items" // url to remote data source (simple list of strings)
         *             }
         *         }
         *     });
