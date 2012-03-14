@@ -36,10 +36,14 @@
      * @exampleTitle ComboBox initialization
      * @example
      * $(document).ready(function(){
-     *  $("#comboBox").kendoComboBox([
-     *   {text: "Item1", value: "1"},
-     *   {text: "Item2", value: "2"}
-     *  ]);
+     *     $("#comboBox").kendoComboBox({
+     *         dataTextField: "text",
+     *         dataValueField: "value",
+     *         dataSource: [
+     *             { text: "Item1", value: "1" },
+     *             { text: "Item2", value: "2" }
+     *         ]
+     *     });
      * });
      *
      * @exampleTitle Creating a ComboBox from existing select HTML element
@@ -50,11 +54,11 @@
      *  <option>Item 3</option>
      * </select>
      *
-     * @exampleTitle ComboBox initialization
-     * @example
-     * $(document).ready(function(){
-     *  $("#comboBox").kendoComboBox();
-     * });
+     * <script>
+     *    $(document).ready(function(){
+     *      $("#comboBox").kendoComboBox();
+     *    });
+     * </script>
      *
      * @section
      * <h3>Binding to Data</h3>
@@ -173,6 +177,8 @@
         * _example
         * var items = [{ text: "Item 1", value: "1" }, { text: "Item 2", value: "2" }];
         * $("#comboBox").kendoComboBox({
+        *     dataTextField: "text",
+        *     dataValueField: "value",
         *     dataSource: items
         * });
         * _exampleTitle To set after initialization
@@ -181,7 +187,7 @@
         *     dataSource: new kendo.data.DataSource({
         *         transport: {
         *             read: {
-        *                 url: "Get/Items" // url to remote data source
+        *                 url: "Get/Items" // url to remote data source (simple list of strings)
         *             }
         *         }
         *     });
@@ -228,13 +234,13 @@
         * $("#comboBox").kendoComboBox({
         *     minLength: 3
         * });
-        * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+        * @option {String} [dataTextField] <""> Sets the field of the data item that provides the text content of the list items.
         * _example
         * $("#comboBox").kendoComboBox({
         *     dataTextField: "Name",
         *     dataValueField: "ID"
         * });
-        * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+        * @option {String} [dataValueField] <""> Sets the field of the data item that provides the value content of the list items.
         * _example
         * $("#comboBox").kendoComboBox({
         *     dataTextField: "Name",
@@ -291,6 +297,7 @@
         *          }
         *      });
         *  &lt;/script&gt;
+        *
         * @option {Object} [animation.close] <> Animation to be used for closing of the popup.
         * _example
         *  //combobox initialization
@@ -307,6 +314,24 @@
         *          }
         *      });
         *  &lt;/script&gt;
+        *  @option {String} [placeholder] <""> A string that appears in the textbox when the combobox has no value.
+        *  _example
+        *  //combobox initialization
+        *  <script>
+        *      $("#combobox").kendoComboBox({
+        *          dataSource: dataSource,
+        *          placeholder: "Select..."
+        *      });
+        *  </script>
+        *  _example
+        *  <input id="combobox" placeholder="Select..." />
+        *
+        *  //combobox initialization
+        *  <script>
+        *      $("#combobox").kendoComboBox({
+        *          dataSource: dataSource
+        *      });
+        *  </script>
         */
         init: function(element, options) {
             var that = this, wrapper;
@@ -614,6 +639,7 @@
         /**
         * Selects drop-down list item and sets the value and the text of the combobox.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
+        * @returns {Integer} The index of the selected LI element.
         * @example
         * var combobox = $("#combobox").data("kendoComboBox");
         *

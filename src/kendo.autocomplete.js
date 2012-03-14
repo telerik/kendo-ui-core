@@ -299,6 +299,24 @@
         *          }
         *      });
         *  &lt;/script&gt;
+        *  @option {String} [placeholder] <""> A string that appears in the textbox when it has no value.
+        *  _example
+        *  //autocomplete initialization
+        *  <script>
+        *      $("#autocomplete").kendoAutoComplete({
+        *          dataSource: dataSource,
+        *          placeholder: "Enter value..."
+        *      });
+        *  </script>
+        *  _example
+        *  <input id="autocomplete" placeholder="Enter value..." />
+        *
+        *  //combobox initialization
+        *  <script>
+        *      $("#autocomplete").kendoAutoComplete({
+        *          dataSource: dataSource
+        *      });
+        *  </script>
         */
         init: function (element, options) {
             var that = this, wrapper, placeholder;
