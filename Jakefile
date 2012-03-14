@@ -29,8 +29,7 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     BUILDER_STAGING_SERVICE = "http://mvc-kendobuild/staging/download-builder-service",
     BUILDER_SERVICE_PATH = "service",
     BUILDER_PROJECT = path.join(BUILDER_SERVICE_PATH, "Download.csproj"),
-    BUILDER_CONFIG_NAME = path.join("config", "kendo-config.json"),
-    BUILDER_CONFIG_TEMPLATE = path.join("config", "kendo-config.$VERSION.json"),
+    BUILDER_CONFIG_NAME = path.join("config", "kendo-config.VERSION_NUMBER.json"),
     RELEASE_PATH = "release",
     SUITES = ["web", "mobile", "dataviz"];
 
@@ -156,13 +155,13 @@ namespace("download-builder", function() {
 
         kendoBuild.writeText(indexPath,
             kendoBuild.readText(indexPath)
-                .replace(/\$SERVICE_ROOT/g, BUILDER_STAGING_SERVICE)
-                .replace(/\$VERSION/g, version())
+                .replace(/SERVICE_ROOT/g, BUILDER_STAGING_SERVICE)
+                .replace(/VERSION_NUMBER/g, version())
         );
 
         fs.renameSync(path.join(BUILDER_STAGING_PATH, BUILDER_CONFIG_NAME),
                       path.join(BUILDER_STAGING_PATH,
-                                BUILDER_CONFIG_TEMPLATE.replace("$VERSION", version)
+                                BUILDER_CONFIG_NAME.replace("VERSION_NUMBER", version)
                       )
         );
 
