@@ -1,4 +1,4 @@
-<div id="music" data-role="view" data-title="Form Elements">
+<div id="music" data-role="view" data-title="Form Elements" data-init="initForm">
     <ul data-role="listview" data-style="inset">
         <li>
             <input type="text" value="Text" />
@@ -53,5 +53,21 @@
             </select>
             Select element
         </li>
+        <li>
+            <select id="dropdown">
+                <option value="First Option">First Option</option>
+                <option value="Second Option">Second Option</option>
+                <option value="Third Option">Third Option</option>
+                <option value="Fourth Option">Fourth Option</option>
+            </select>
+            Kendo DropDownList
+        </li>
     </ul>
 </div>
+<script>
+    function initForm() {
+        var list = $("#dropdown").kendoDropDownList()
+                                  .data("kendoDropDownList");
+        list.popup.options.appendTo = list.popup.options.anchor = list.element.parents(".km-vertical");
+    }
+</script>
