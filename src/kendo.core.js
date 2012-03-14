@@ -2129,6 +2129,7 @@
             SPACEBAR: 32,
             PAGEUP: 33,
             PAGEDOWN: 34,
+            F10: 121,
             F12: 123
         },
         support: support,

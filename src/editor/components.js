@@ -4,6 +4,7 @@ var kendo = window.kendo,
     Class = kendo.Class,
     Widget = kendo.ui.Widget,
     extend = $.extend,
+    proxy = $.proxy,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     CHANGE = "change",
@@ -49,25 +50,23 @@ var ColorPicker = Widget.extend({
         that.selectedColor = that.options.selectedColor;
 
         element.attr("tabIndex", 0)
-                .click($.proxy(that.click, that))
-                .keydown($.proxy(that.keydown, that))
-                .find("*")
-                .attr(UNSELECTABLE, "on");
+                .click(proxy(that.click, that))
+                .keydown(proxy(that.keydown, that))
+                .find("*").attr(UNSELECTABLE, "on");
 
-        if ($.browser.msie) {
-            element.focus(function () {
+        element
+            .focus(function () {
                 element.css("outline", "1px dotted #000");
             })
             .blur(function() {
                 element.css("outline", "");
-            });
-        }
+            })
 
         if (that.selectedColor)
             element.find(SELECTEDCOLORCLASS).css(BACKGROUNDCOLOR, that.selectedColor);
 
         $(element[0].ownerDocument.documentElement)
-            .bind("mousedown", $.proxy(function (e) {
+            .bind("mousedown", proxy(function (e) {
                 if (!$(e.target).closest(".k-colorpicker-popup").length) {
                     this.close();
                 }
@@ -162,7 +161,7 @@ var ColorPicker = Widget.extend({
             duration: 200,
             complete: function() {
                 if (that._popup) {
-                    dom.remove(that._popup[0].parentNode);
+                    dom.remove(that._popup);
                     that._popup = null;
                 }
             }
