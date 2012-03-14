@@ -1019,6 +1019,8 @@
             autoBind: true,
             scrollable: true,
             sortable: false,
+            selectable: false,
+            navigatable: false,
             pageable: false,
             editable: false,
             rowTemplate: "",
