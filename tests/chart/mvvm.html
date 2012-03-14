@@ -186,6 +186,47 @@
 
                 strictEqual(chart.dataSource, dataSource);
             });
+
+            test("binding visible to true shows the chart", function() {
+                var dom = $('<div data-role="chart" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true }, kendo.dataviz.ui);
+
+                var chart = dom.data("kendoChart");
+
+                ok(chart.wrapper.css("display") != "none", "chart is visible");
+            });
+
+            test("binding visible to false hides the chart", function() {
+                var dom = $('<div data-role="chart" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false }, kendo.dataviz.ui);
+
+                var chart = dom.data("kendoChart");
+
+                ok(chart.wrapper.css("display") == "none", "chart is not visible");
+            });
+
+            test("binding invisible to true hides the chart", function() {
+                var dom = $('<div data-role="chart" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true }, kendo.dataviz.ui);
+
+                var chart = dom.data("kendoChart");
+
+                ok(chart.wrapper.css("display") == "none", "chart is invisible");
+            });
+
+            test("binding invisible to false shows the chart", function() {
+                var dom = $('<div data-role="chart" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false }, kendo.dataviz.ui);
+
+                var chart = dom.data("kendoChart");
+
+                ok(chart.wrapper.css("display") != "none", "chart is not invisible");
+            });
+
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
