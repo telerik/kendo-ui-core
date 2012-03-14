@@ -1,0 +1,38 @@
+<div id="music" data-role="view" data-init="viewInit" data-title="My Music">
+    <div class="head">&nbsp;</div>
+    <h2>Welcome to "My Music" App</h2>
+    <p>A native-looking web based mobile application.</p>
+    <button id="show">Show loading</button>
+</div>
+<script>
+    function viewInit(e) {
+
+        $("#show").hide().click(function() {
+            $(this).hide();
+            startLoading();
+        })
+
+        startLoading();
+    }
+
+    function startLoading() {
+        kendoMobileApplication.showLoading();
+
+        var seconds = 5;
+        var heading = kendoMobileApplication.loader.find("h1");
+
+        heading.text(seconds + " seconds left!")
+
+        var interval = setInterval(function() {
+            heading.text(--seconds + " seconds left!")
+        }, 1000);
+
+        setTimeout(function() {
+            clearInterval(interval);
+
+            kendoMobileApplication.hideLoading();
+
+            $("#show").show();
+        }, 5000);
+    }
+</script>
