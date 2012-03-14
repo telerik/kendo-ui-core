@@ -17,6 +17,7 @@ namespace Kendo.Models
             "kendo.model.js",
             "kendo.data.js",
             "kendo.draganddrop.js",
+            "kendo.mobile.scroller.js",
             "kendo.popup.js",
             "kendo.list.js",
             "kendo.autocomplete.js",

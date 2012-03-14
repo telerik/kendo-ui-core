@@ -23,7 +23,6 @@
         ACTIVEBORDER = "k-state-border",
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
-        SCROLLER = "kendoMobileScroller",
         DOCUMENT= $(document),
         cssPrefix = kendo.support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
@@ -126,9 +125,9 @@
                         that.close();
                     }
                 });
-            } else if (SCROLLER in element) {
-                element[SCROLLER]();
             }
+
+            kendo.touchScroller(element);
 
             if (options.toggleTarget) {
                 $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));

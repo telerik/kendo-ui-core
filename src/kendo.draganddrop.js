@@ -170,6 +170,8 @@
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
                 .on("mousedown dragstart selectstart", that.filter, preventDefault);
 
+            that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
+
             that.bind([
             /**
              * Fires when the user presses and releases the element without any movement or with a movement below the <code>threshold</code> specified.
@@ -336,6 +338,7 @@
 
                 if (that.moved) {
                     that._trigger(END, e);
+                    that.moved = false;
                 } else {
                     that._trigger(TAP, e);
                 }

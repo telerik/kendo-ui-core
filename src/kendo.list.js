@@ -42,7 +42,7 @@
             that._template();
 
             that.ul = $('<ul class="k-list k-reset"/>')
-                        .css({ overflow: "auto" })
+                        .css({ overflow: kendo.support.touch ? "": "auto" })
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); })
                         .delegate(LI, CLICK, proxy(that._click, that));
@@ -145,7 +145,9 @@
         },
 
         _click: function(e) {
-            this._accept($(e.currentTarget));
+            if (!e.isDefaultPrevented()) {
+                this._accept($(e.currentTarget));
+            }
         },
 
         _enable: function() {

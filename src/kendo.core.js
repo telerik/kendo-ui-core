@@ -2462,4 +2462,11 @@
             }
         }
     });
+
+    kendo.touchScroller = function(element) {
+        if (support.touch && kendo.mobile.ui.Scroller) {
+            console.log("making scroller");
+            element.kendoMobileScroller();
+        }
+    }
 })(jQuery);
