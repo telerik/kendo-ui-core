@@ -82,6 +82,45 @@
                 ok(true);
             }
 
+            test("binding visible to true shows the window", function() {
+                var dom = $('<div data-role="window" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var window = dom.data("kendoWindow");
+
+                ok(window.wrapper.css("display") != "none", "window is visible");
+            });
+
+            test("binding visible to false hides the window", function() {
+                var dom = $('<div data-role="window" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var window = dom.data("kendoWindow");
+
+                ok(window.wrapper.css("display") == "none", "window is not visible");
+            });
+
+            test("binding invisible to true hides the window", function() {
+                var dom = $('<div data-role="window" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var window = dom.data("kendoWindow");
+
+                ok(window.wrapper.css("display") == "none", "window is invisible");
+            });
+
+            test("binding invisible to false shows the window", function() {
+                var dom = $('<div data-role="window" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var window = dom.data("kendoWindow");
+
+                ok(window.wrapper.css("display") != "none", "window is not invisible");
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
