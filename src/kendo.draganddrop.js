@@ -622,6 +622,8 @@
                 hint = options.hint;
 
             that.currentTarget = that.drag.target;
+            that.currentTargetOffset = getOffset(that.currentTarget);
+
             if (hint) {
                 that.hint = $.isFunction(hint) ? $(hint(that.currentTarget)) : hint;
 
@@ -714,11 +716,10 @@
         },
 
         _cancel: function(e) {
-            var that = this,
-                offset = getOffset(that.currentTarget);
+            var that = this;
 
             if (that.hint && !that.dropped) {
-                that.hint.animate(offset, "fast", that.destroy);
+                that.hint.animate(that.currentTargetOffset, "fast", that.destroy);
             } else {
                 that.destroy();
             }
