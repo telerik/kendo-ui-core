@@ -1920,7 +1920,7 @@
         },
 
         total: function() {
-            return this._total;
+            return this._total || 0;
         },
 
         aggregate: function(val) {
@@ -1964,6 +1964,8 @@
             data;
 
             data = that._findRange(skip, math.min(skip + take, that.total()));
+            console.log(data, skip, take, that.total());
+
             if (data.length) {
                 that._skip = skip > that.skip() ? math.min(size, (that.totalPages() - 1) * that.take()) : pageSkip;
 
@@ -2004,20 +2006,19 @@
 
         _findRange: function(start, end) {
             var that = this,
-            length,
-            ranges = that._ranges,
-            range,
-            data = [],
-            skipIdx,
-            takeIdx,
-            startIndex,
-            endIndex,
-            rangeData,
-            rangeEnd,
-            processed,
-            options = that.options,
-            remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates;
-            length;
+                ranges = that._ranges,
+                range,
+                data = [],
+                skipIdx,
+                takeIdx,
+                startIndex,
+                endIndex,
+                rangeData,
+                rangeEnd,
+                processed,
+                options = that.options,
+                remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates;
+                length;
 
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
                 range = ranges[skipIdx];
@@ -2027,7 +2028,7 @@
                     for (takeIdx = skipIdx; takeIdx < length; takeIdx++) {
                         range = ranges[takeIdx];
 
-                        if (range.data.length && start + count >= range.start && count + count <= range.end) {
+                        if (range.data.length && start + count >= range.start /*&& count + count <= range.end*/) {
                             rangeData = range.data;
                             rangeEnd = range.end;
 
