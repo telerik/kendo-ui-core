@@ -428,7 +428,7 @@
          * @option {Object} [animation] <>
          * Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
          *
-         * @option {Function} [animation.open] <>
+         * @option {Object} [animation.open] <>
          * Animation to be used for opening of the popup.
          *
          * _exampleTitle Intialize a TimePicker that fades-in the time drop-down list over 300 milliseconds
@@ -443,7 +443,7 @@
          *     }
          * });
          *
-         * @option {Function} [animation.close] <>
+         * @option {Object} [animation.close] <>
          * Animation to be used for closing of the popup.
          *
          * _exampleTitle Initialize a TimePicker that fades-out the time drop-down list over 300 milliseconds

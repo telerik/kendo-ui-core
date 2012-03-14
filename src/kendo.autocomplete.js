@@ -268,7 +268,7 @@
         *      });
         *  &lt;/script&gt;
         * @option {Object} [animation] <> Animations to be used for opening/closing the popup. Setting to false will turn of the animation.
-        * @option {Function} [animation.open] <> Animation to be used for opening of the popup.
+        * @option {Object} [animation.open] <> Animation to be used for opening of the popup.
         * _example
         *  //autocomplete initialization
         *  &lt;script&gt;
@@ -283,7 +283,7 @@
         *          }
         *      });
         *  &lt;/script&gt;
-        * @option {Function} [animation.close] <> Animation to be used for closing of the popup.
+        * @option {Object} [animation.close] <> Animation to be used for closing of the popup.
         * _example
         *  //autocomplete initialization
         *  &lt;script&gt;
