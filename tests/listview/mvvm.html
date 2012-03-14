@@ -162,6 +162,47 @@
 
                 kendo.bind(dom, observable);
             });
+
+
+            test("binding visible to true shows the listview", function() {
+                var dom = $('<div data-role="listview" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var listview = dom.data("kendoListView");
+
+                ok(listview.wrapper.css("display") != "none", "listview is visible");
+            });
+
+            test("binding visible to false hides the listview", function() {
+                var dom = $('<div data-role="listview" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var listview = dom.data("kendoListView");
+
+                ok(listview.wrapper.css("display") == "none", "listview is not visible");
+            });
+
+            test("binding invisible to true hides the listview", function() {
+                var dom = $('<div data-role="listview" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var listview = dom.data("kendoListView");
+
+                ok(listview.wrapper.css("display") == "none", "listview is invisible");
+            });
+
+            test("binding invisible to false shows the listview", function() {
+                var dom = $('<div data-role="listview" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var listview = dom.data("kendoListView");
+
+                ok(listview.wrapper.css("display") != "none", "listview is not invisible");
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

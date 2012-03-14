@@ -31,6 +31,8 @@
 
             options = that.options;
 
+            that.wrapper = that.element;
+
             that._element();
 
             that._dataSource();
