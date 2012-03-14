@@ -65,20 +65,20 @@
             that.pager = element.children().last();
             that.page = 0;
 
-            var move,
+            var movable,
                 transition,
                 drag,
                 dimensions,
                 dimension,
                 pane;
 
-            move = new mobile.Move(that.inner);
+            movable = new kendo.ui.Movable(that.inner);
 
             transition = new Transition({
                 axis: "x",
-                move: move,
+                movable: movable,
                 onEnd: function() {
-                    that.page = Math.round(- move.x / dimension.size);
+                    that.page = Math.round(- movable.x / dimension.size);
                     that._updatePage();
                 }
             });
@@ -107,12 +107,12 @@
             pane = new mobile.Pane({
                 dimensions: dimensions,
                 drag: drag,
-                move: move,
+                movable: movable,
                 elastic: true
             });
 
             $.extend(that, {
-                move: move,
+                movable: movable,
                 transition: transition,
                 drag: drag,
                 dimensions: dimensions,
@@ -151,7 +151,7 @@
                 width = dimension.size,
                 pages;
 
-            that.page = Math.round(-that.move.x / width);
+            that.page = Math.round(-that.movable.x / width);
 
             pages = that.pages = ceil(dimension.total / width);
 
@@ -186,7 +186,7 @@
                 ease = Transition.easeOutBack;
             }
 
-            snap = max(that.minSnap, min(approx(that.move.x / width) * width, that.maxSnap));
+            snap = max(that.minSnap, min(approx(that.movable.x / width) * width, that.maxSnap));
 
             that.transition.moveTo({ location: snap, duration: options.duration, ease: ease });
         },

@@ -5,7 +5,7 @@
         extend = $.extend,
         Widget = ui.Widget,
         Class = kendo.Class,
-        Move = mobile.Move,
+        Movable = kendo.ui.Movable,
         Transition = mobile.Transition,
         Animation = mobile.Animation,
         SNAPBACK_DURATION = 500,
@@ -26,7 +26,7 @@
             extend(that, options, {
                 transition: new Transition({
                     axis: options.axis,
-                    move: options.move,
+                    movable: options.movable,
                     onEnd: function() { that._end(); }
                 })
             });
@@ -79,7 +79,7 @@
             var that = this,
                 friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
 
-            that.move.translateAxis(that.axis, that.velocity *= friction);
+            that.movable.translateAxis(that.axis, that.velocity *= friction);
         },
 
         _end: function() {
@@ -88,13 +88,13 @@
         },
 
         _outOfBounds: function() {
-            return this.dimension.outOfBounds(this.move[this.axis]);
+            return this.dimension.outOfBounds(this.movable[this.axis]);
         },
 
         _snapBack: function() {
             var that = this,
                 dimension = that.dimension,
-                snapBack = that.move[that.axis] > dimension.max ? dimension.max : dimension.min;
+                snapBack = that.movable[that.axis] > dimension.max ? dimension.max : dimension.min;
             that._moveTo(snapBack);
         },
 
@@ -112,12 +112,12 @@
             extend(that, options, {
                 element: element,
                 elementSize: 0,
-                move: new Move(element),
-                scrollMove: options.move,
+                movable: new Movable(element),
+                scrollMovable: options.movable,
                 size: horizontal ? "width" : "height"
             });
 
-            that.scrollMove.bind(CHANGE, proxy(that._move, that));
+            that.scrollMovable.bind(CHANGE, proxy(that._move, that));
             that.container.append(element);
         },
 
@@ -126,9 +126,9 @@
                 axis = that.axis,
                 dimension = that.dimension,
                 paneSize = dimension.size,
-                scrollMove = that.scrollMove,
+                scrollMovable = that.scrollMovable,
                 sizeRatio = paneSize / dimension.total,
-                position = Math.round(-scrollMove[axis] * sizeRatio),
+                position = Math.round(-scrollMovable[axis] * sizeRatio),
                 size = Math.round(paneSize * sizeRatio);
 
                 if (position + size > paneSize) {
@@ -143,7 +143,7 @@
                 that.elementSize = size;
             }
 
-            that.move.moveAxis(axis, position);
+            that.movable.moveAxis(axis, position);
         },
 
         show: function() {
@@ -204,7 +204,7 @@
 
                 tap = new kendo.Tap(element),
 
-                move = new Move(inner),
+                movable = new Movable(inner),
 
                 dimensions = new mobile.PaneDimensions({
                     element: inner,
@@ -219,14 +219,14 @@
                 }),
 
                 pane = new mobile.Pane({
-                    move: move,
+                    movable: movable,
                     dimensions: dimensions,
                     drag: drag,
                     elastic: true
                 });
 
             extend(that, {
-                move: move,
+                movable: movable,
                 dimensions: dimensions,
                 drag: drag,
                 pane: pane,
@@ -275,7 +275,7 @@
          * Scrolls the container to the top.
          */
         reset: function() {
-            this.move.moveTo({x: 0, y: 0});
+            this.movable.moveTo({x: 0, y: 0});
         },
 
         /**
@@ -321,7 +321,7 @@
         _paneChange: function() {
             var that = this;
 
-            if (that.move.y / OUT_OF_BOUNDS_FRICTION > that.options.pullOffset) {
+            if (that.movable.y / OUT_OF_BOUNDS_FRICTION > that.options.pullOffset) {
                 if (!that.pulled) {
                     that.pulled = true;
                     that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
@@ -336,20 +336,20 @@
 
         _initAxis: function(axis) {
             var that = this,
-            move = that.move,
+            movable = that.movable,
             dimension = that.dimensions[axis],
             tap = that.tap,
 
             scrollBar = new ScrollBar({
                 axis: axis,
-                move: move,
+                movable: movable,
                 dimension: dimension,
                 container: that.element
             }),
 
             inertia = new DragInertia({
                 axis: axis,
-                move: move,
+                movable: movable,
                 tap: tap,
                 drag: that.drag,
                 dimension: dimension,

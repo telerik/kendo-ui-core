@@ -2376,8 +2376,74 @@
 
     kendo.parseOptions = parseOptions;
 
+    var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
+        round = math.round,
+        translate;
+
+    if (support.hasHW3D) {
+        translate = function(x, y) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        }
+    } else {
+        translate = function(x, y) {
+            return "translate(" + round(x) + "px," + round(y) +"px)";
+        }
+    }
+
+    var Movable = Observable.extend({
+        init: function(element) {
+            var that = this;
+
+            Observable.fn.init.call(that);
+
+            that.element = $(element);
+            that.domElement = that.element[0];
+            that.x = 0;
+            that.y = 0;
+            that._saveCoordinates(translate(that.x, that.y));
+        },
+
+        translateAxis: function(axis, by) {
+            this[axis] += by;
+            this._redraw();
+        },
+
+        translate: function(coordinates) {
+            this.x += coordinates.x;
+            this.y += coordinates.y;
+            this._redraw();
+        },
+
+        moveAxis: function(axis, value) {
+            this[axis] = value;
+            this._redraw();
+        },
+
+        moveTo: function(coordinates) {
+            extend(this, coordinates);
+            this._redraw();
+        },
+
+        _redraw: function() {
+            var that = this,
+                newCoordinates = translate(that.x, that.y);
+
+            if (newCoordinates != that.coordinates) {
+                that.domElement.style[TRANSFORM_STYLE] = newCoordinates;
+                that._saveCoordinates(newCoordinates);
+                that.trigger("change");
+            }
+        },
+
+        _saveCoordinates: function(coordinates) {
+            this.coordinates = coordinates;
+        }
+    });
+
+
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
+        Movable: Movable,
         roles: {},
         /**
          * Helper method for writing new widgets.
