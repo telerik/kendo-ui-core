@@ -3,7 +3,7 @@
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
         CONTAINER_EMPTY_TEXT = "Drag a column header and drop it here to group by that column",
-        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title}" data-#=data.ns#dir="${data.dir || "asc"}">' +
+        indicatorTmpl = kendo.template('<div class="k-group-indicator" data-#=data.ns#field="${data.field}" data-#=data.ns#title="${data.title || ""}" data-#=data.ns#dir="${data.dir || "asc"}">' +
                 '<a href="\\#" class="k-link">' +
                     '<span class="k-icon k-arrow-${(data.dir || "asc") == "asc" ? "up" : "down"}-small">(sorted ${(data.dir || "asc") == "asc" ? "ascending": "descending"})</span>' +
                     '${data.title ? data.title: data.field}' +
@@ -54,6 +54,7 @@
                     dragend: function(e) {
                         that._dragEnd(this, e);
                     },
+                    dragcancel: proxy(that._dragCancel, that),
                     dragstart: function(e) {
                         var element = e.currentTarget,
                             marginLeft = parseInt(element.css("marginLeft")),
@@ -85,6 +86,7 @@
                 dragend: function(e) {
                     that._dragEnd(this, e);
                 },
+                dragcancel: proxy(that._dragCancel, that),
                 dragstart: function(e) {
                     var element, marginRight, left,
                         field = e.currentTarget.attr(kendo.attr("field"));
@@ -275,8 +277,11 @@
                 }
             }
 
+            that._dragCancel();
+        },
+        _dragCancel: function() {
             dropCue.remove();
-            dropCuePositions = [];
+            this._dropCuePositions = [];
         },
         _intializePositions: function() {
             var that = this,
