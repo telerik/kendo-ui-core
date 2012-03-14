@@ -168,7 +168,7 @@
             if (dataSource.inRange(skip, take)) {
                 dataSource.range(skip, take);
             } else {
-                kendo.ui.progress(that.wrapper, true);
+                kendo.ui.progress(that.wrapper.parent(), true);
                 that._timeout = setTimeout(function() {
                     dataSource.range(skip, take);
                 }, 100);
@@ -187,7 +187,7 @@
                 idx,
                 itemHeight;
 
-            kendo.ui.progress(that.wrapper, false);
+            kendo.ui.progress(that.wrapper.parent(), false);
             clearTimeout(that._timeout);
 
             itemHeight = that.itemHeight = that.options.itemHeight() || 0;
