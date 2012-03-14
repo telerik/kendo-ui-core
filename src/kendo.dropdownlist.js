@@ -43,12 +43,14 @@
      * @exampleTitle Initialize a DropDownList using a selector within $(document).ready()
      * @example
      * $(document).ready(function() {
-     *     $("#dropDownList").kendoDropDownList(
-     *         [
+     *     $("#dropDownList").kendoDropDownList({
+     *         dataTextField: "text",
+     *         dataValueField: "value",
+     *         dataSource: [
      *             { text: "Item1", value: "1" },
      *             { text: "Item2", value: "2" }
      *         ]
-     *     );
+     *     });
      * });
      *
      * @exampleTitle Create a DropDownList from existing select HTML element with a defined structure
@@ -59,12 +61,11 @@
      *     <option>Item 3</option>
      * </select>
      *
-     * @exampleTitle Initialize a DropDownList using a selector within $(document).ready()
-     * @example
-     * $(document).ready(function(){
-     *     $("#dropDownList").kendoDropDownList();
-     * });
-     *
+     * <script>
+     *    $(document).ready(function(){
+     *       $("#dropDownList").kendoDropDownList();
+     *    });
+     * </script>
      * @section
      * <h3>Binding to Data</h3>
      * <p>
