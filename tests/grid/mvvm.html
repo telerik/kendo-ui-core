@@ -167,6 +167,47 @@
 
                 strictEqual(grid.dataSource, dataSource);
             });
+
+            test("binding visible to true shows the grid", function() {
+                var dom = $('<div data-role="grid" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var grid = dom.data("kendoGrid");
+
+                ok(grid.wrapper.css("display") != "none", "grid is visible");
+            });
+
+            test("binding visible to false hides the grid", function() {
+                var dom = $('<div data-role="grid" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var grid = dom.data("kendoGrid");
+
+                ok(grid.wrapper.css("display") == "none", "grid is not visible");
+            });
+
+            test("binding invisible to true hides the grid", function() {
+                var dom = $('<div data-role="grid" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var grid = dom.data("kendoGrid");
+
+                ok(grid.wrapper.css("display") == "none", "grid is invisible");
+            });
+
+            test("binding invisible to false shows the grid", function() {
+                var dom = $('<div data-role="grid" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var grid = dom.data("kendoGrid");
+
+                ok(grid.wrapper.css("display") != "none", "grid is not invisible");
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
