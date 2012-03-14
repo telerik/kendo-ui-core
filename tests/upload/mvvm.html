@@ -109,6 +109,105 @@
                 ok(dom.data("kendoUpload").wrapper.hasClass("k-state-disabled"));
             });
 
+            test("binding visible to false hides the widget", function() {
+                var dom = $('<input type="file" data-bind="visible:visible" data-role="upload"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding visible to true shows the widget", function() {
+                var dom = $('<input type="file" data-bind="visible:visible" data-role="upload" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing visible to false hides the widget", function() {
+                var dom = $('<input type="file" data-bind="visible:visible" data-role="upload"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", false);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing visible to true shows the widget", function() {
+                var dom = $('<input type="file" data-bind="visible:visible" data-role="upload"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", true);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("binding invisible to true hides the widget", function() {
+                var dom = $('<input type="file" data-bind="invisible:invisible" data-role="upload"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("binding invisible to false shows the widget", function() {
+                var dom = $('<input type="file" data-bind="invisible:invisible" data-role="upload" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("changing invisible to true hides the widget", function() {
+                var dom = $('<input type="file" data-bind="invisible:invisible" data-role="upload"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", true);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("changing invisible to false shows the widget", function() {
+                var dom = $('<input type="file" data-bind="invisible:invisible" data-role="upload"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", false);
+
+                ok(dom.data("kendoUpload").wrapper.css("display") != "none", "display is not 'none'");
+            });
         </script>
 
         <div type="file" id="qunit-fixture">test markup, will be hidden</div>
