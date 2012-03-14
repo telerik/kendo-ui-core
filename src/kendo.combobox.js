@@ -620,6 +620,7 @@
         /**
         * Selects drop-down list item and sets the value and the text of the combobox.
         * @param {jQueryObject | Number | Function} li LI element or index of the item or predicate function, which defines the item that should be selected.
+        * @returns {Integer} The index of the selected LI element.
         * @example
         * var combobox = $("#combobox").data("kendoComboBox");
         *
