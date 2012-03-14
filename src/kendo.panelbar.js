@@ -511,17 +511,17 @@
          *
          */
         init: function(element, options) {
-            element = $(element);
-
             var that = this,
                 content;
 
             Widget.fn.init.call(that, element, options);
 
+            element = that.wrapper = that.element;
+
             options = that.options;
 
             if (options.dataSource) {
-                that.element.empty().append($(PanelBar.renderGroup({
+                element.empty().append($(PanelBar.renderGroup({
                     items: options.dataSource,
                     group: {
                         firstLevel: true,
@@ -542,10 +542,10 @@
                 .delegate(clickableItems, MOUSEENTER + " " + MOUSELEAVE, that._toggleHover)
                 .delegate(disabledItems, CLICK, false);
 
-            if (that.options.contentUrls) {
+            if (options.contentUrls) {
                 element.find("> .k-item")
                     .each(function(index, item) {
-                        $(item).find("." + LINK).data(CONTENTURL, that.options.contentUrls[index]);
+                        $(item).find("." + LINK).data(CONTENTURL, options.contentUrls[index]);
                     });
             }
 

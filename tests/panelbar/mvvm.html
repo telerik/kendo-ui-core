@@ -92,6 +92,46 @@
                 ok(true);
             }
 
+            test("binding visible to true shows the panelbar", function() {
+                var dom = $('<div data-role="panelbar" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var panelbar = dom.data("kendoPanelBar");
+
+                ok(panelbar.wrapper.css("display") != "none", "panelbar is visible");
+            });
+
+            test("binding visible to false hides the panelbar", function() {
+                var dom = $('<div data-role="panelbar" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var panelbar = dom.data("kendoPanelBar");
+
+                ok(panelbar.wrapper.css("display") == "none", "panelbar is not visible");
+            });
+
+            test("binding invisible to true hides the panelbar", function() {
+                var dom = $('<div data-role="panelbar" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var panelbar = dom.data("kendoPanelBar");
+
+                ok(panelbar.wrapper.css("display") == "none", "panelbar is invisible");
+            });
+
+            test("binding invisible to false shows the panelbar", function() {
+                var dom = $('<div data-role="panelbar" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var panelbar = dom.data("kendoPanelBar");
+
+                ok(panelbar.wrapper.css("display") != "none", "panelbar is not invisible");
+            });
+
         </script>
 
         <script type="text/x-kendo-template" id="template">
