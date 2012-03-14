@@ -251,6 +251,8 @@
 
             Widget.fn.init.call(that, element, options);
 
+            that.wrapper = that.element;
+
             that.orientation = that.options.orientation.toLowerCase() != VERTICAL ? HORIZONTAL : VERTICAL;
             splitbarSelector = ".k-splitbar-draggable-" + that.orientation;
 
