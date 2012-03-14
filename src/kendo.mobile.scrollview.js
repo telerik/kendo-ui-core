@@ -68,8 +68,8 @@
             var move,
                 transition,
                 drag,
-                container,
-                bounary,
+                dimensions,
+                dimension,
                 draggable;
 
             move = new mobile.Move(that.inner);
@@ -78,7 +78,7 @@
                 axis: "x",
                 move: move,
                 onEnd: function() {
-                    that.page = Math.round(- move.x / boundary.size);
+                    that.page = Math.round(- move.x / dimension.size);
                     that._updatePage();
                 }
             });
@@ -96,16 +96,16 @@
                 end: $.proxy(that._dragEnd, that)
             });
 
-            container = new mobile.ContainerBoundary({
+            dimensions = new mobile.PaneDimensions({
                 element: that.inner,
                 container: that.element
             });
 
-            boundary = container.x;
-            boundary.bind("change", proxy(that.refresh, that));
+            dimension = dimensions.x;
+            dimension.bind("change", proxy(that.refresh, that));
 
             draggable = new mobile.Draggable({
-                boundary: container,
+                dimensions: dimensions,
                 drag: drag,
                 move: move,
                 elastic: true
@@ -115,12 +115,12 @@
                 move: move,
                 transition: transition,
                 drag: drag,
-                container: container,
-                boundary: boundary,
+                dimensions: dimensions,
+                dimension: dimension,
                 draggable: draggable
             });
 
-            container.refresh();
+            dimensions.refresh();
         },
 
         options: {
@@ -131,7 +131,7 @@
         },
 
         viewShow: function(view) {
-            this.container.refresh();
+            this.dimensions.refresh();
         },
 
         /**
@@ -147,13 +147,13 @@
         refresh: function() {
             var that = this,
                 pageHTML = "",
-                boundary = that.boundary,
-                width = boundary.size,
+                dimension = that.dimension,
+                width = dimension.size,
                 pages;
 
             that.page = Math.round(-that.move.x / width);
 
-            pages = that.pages = ceil(boundary.total / width);
+            pages = that.pages = ceil(dimension.total / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
@@ -169,7 +169,7 @@
         _dragEnd: function(e) {
             var that = this,
                 velocity = e.x.velocity,
-                width = that.boundary.size,
+                width = that.dimension.size,
                 options = that.options,
                 velocityThreshold = options.velocityThreshold,
                 snap,

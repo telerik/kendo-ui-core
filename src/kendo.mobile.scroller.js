@@ -62,7 +62,7 @@
         start: function() {
             var that = this;
 
-            if (!that.boundary.present()) { return; }
+            if (!that.dimension.present()) { return; }
 
             if (that._outOfBounds()) {
                 that._snapBack();
@@ -88,13 +88,13 @@
         },
 
         _outOfBounds: function() {
-            return this.boundary.outOfBounds(this.move[this.axis]);
+            return this.dimension.outOfBounds(this.move[this.axis]);
         },
 
         _snapBack: function() {
             var that = this,
-                boundary = that.boundary,
-                snapBack = that.move[that.axis] > boundary.max ? boundary.max : boundary.min;
+                dimension = that.dimension,
+                snapBack = that.move[that.axis] > dimension.max ? dimension.max : dimension.min;
             that._moveTo(snapBack);
         },
 
@@ -124,15 +124,15 @@
         _move: function() {
             var that = this,
                 axis = that.axis,
-                boundary = that.boundary,
-                boundarySize = boundary.size,
+                dimension = that.dimension,
+                paneSize = dimension.size,
                 scrollMove = that.scrollMove,
-                sizeRatio = boundarySize / boundary.total,
+                sizeRatio = paneSize / dimension.total,
                 position = Math.round(-scrollMove[axis] * sizeRatio),
-                size = Math.round(boundarySize * sizeRatio);
+                size = Math.round(paneSize * sizeRatio);
 
-                if (position + size > boundarySize) {
-                    size = boundarySize - position;
+                if (position + size > paneSize) {
+                    size = paneSize - position;
                 } else if (position < 0) {
                     size += position;
                     position = 0;
@@ -206,28 +206,28 @@
 
                 move = new Move(inner),
 
-                boundary = new mobile.ContainerBoundary({
+                dimensions = new mobile.PaneDimensions({
                     element: inner,
                     container: element
                 }),
 
                 drag = new kendo.Drag(element, {
                     start: function(e) {
-                        boundary.refresh();
+                        dimensions.refresh();
                         drag.capture();
                     }
                 }),
 
                 draggable = new mobile.Draggable({
                     move: move,
-                    boundary: boundary,
+                    dimensions: dimensions,
                     drag: drag,
                     elastic: true
                 });
 
             extend(that, {
                 move: move,
-                boundary: boundary,
+                dimensions: dimensions,
                 drag: drag,
                 draggable: draggable,
                 tap: tap,
@@ -238,7 +238,7 @@
             that._initAxis("x");
             that._initAxis("y");
 
-            boundary.refresh();
+            dimensions.refresh();
 
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
@@ -337,14 +337,14 @@
         _initAxis: function(axis) {
             var that = this,
             move = that.move,
-            boundary = that.boundary[axis],
+            dimension = that.dimensions[axis],
             draggable = that.draggable[axis],
             tap = that.tap,
 
             scrollBar = new ScrollBar({
                 axis: axis,
                 move: move,
-                boundary: boundary,
+                dimension: dimension,
                 container: that.element
             }),
 
@@ -353,7 +353,7 @@
                 move: move,
                 tap: tap,
                 drag: that.drag,
-                boundary: boundary,
+                dimension: dimension,
                 end: function() { scrollBar.hide(); }
             });
 
