@@ -154,6 +154,47 @@
                 kendo.bind(dom, observable);
                 dom.data("kendoCalendar").trigger("change");
             });
+
+            test("binding visible to true shows the calendar", function() {
+                var dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true });
+
+                var calendar = dom.data("kendoCalendar");
+
+                ok(calendar.wrapper.css("display") != "none", "calendar is visible");
+            });
+
+            test("binding visible to false hides the calendar", function() {
+                var dom = $('<div data-role="calendar" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false });
+
+                var calendar = dom.data("kendoCalendar");
+
+                ok(calendar.wrapper.css("display") == "none", "calendar is not visible");
+            });
+
+            test("binding invisible to true hides the calendar", function() {
+                var dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true });
+
+                var calendar = dom.data("kendoCalendar");
+
+                ok(calendar.wrapper.css("display") == "none", "calendar is invisible");
+            });
+
+            test("binding invisible to false shows the calendar", function() {
+                var dom = $('<div data-role="calendar" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false });
+
+                var calendar = dom.data("kendoCalendar");
+
+                ok(calendar.wrapper.css("display") != "none", "calendar is not invisible");
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
