@@ -10,6 +10,11 @@
         <script src="../../../src/kendo.data.js"></script>
         <script src="../../../src/kendo.draganddrop.js"></script>
         <script src="../../../src/kendo.mobile.core.js"></script>
+        <script src="../../../src/kendo.history.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
     </head>
@@ -23,10 +28,15 @@
         <ul id="log"></ul>
 
         <script>
-            var ListView = kendo.mobile.ui.ListView;
+            var ListView = kendo.mobile.ui.ListView, application;
 
             module("mobile listview", {
             });
+
+            function setup(html, options) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+            }
 
             test("name is ListView", function() {
                 equal(ListView.fn.options.name, "ListView", "Name is properly set");
@@ -220,6 +230,15 @@
                 var listView = new ListView(dom);
                 ok(dom.find("li").contents().first().is("div.km-group-title"), "Header is wrapped");
                 ok(!dom.find("li>div.km-group-title").contents().first().is("div.km-group-title"), "No bogus element is present");
+            });
+
+            test("Cache show/hide loading methods of the application", function() {
+                setup('<div data-role="view" id="page1"><ul data-role="listview"><li><a href="#">Foo</a></li></ul></div>');
+
+                var listView = $("#qunit-fixture").find("ul").data("kendoMobileListView");
+
+                ok(listView._showLoadingProxy);
+                ok(listView._hideLoadingProxy);
             });
         </script>
     </body>

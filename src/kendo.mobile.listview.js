@@ -16,7 +16,8 @@
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
         ACTIVE_STATE_TIMEOUT = "active-state-timeout",
-        CLICK = "click";
+        CLICK = "click",
+        REQUEST_START = "requestStart";
 
     function toggleItemActiveClass(e) {
         if (e.which > 1) {
@@ -336,25 +337,36 @@
             var that = this;
 
             if (that.dataSource && that._refreshHandler) {
-                that.dataSource.unbind("change", that._refreshHandler);
+                that.dataSource.unbind("change", that._refreshHandler)
+                               .unbind(REQUEST_START, that._showLoadingProxy);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
 
             that.dataSource = DataSource.create(that.options.dataSource)
                                         .bind("change", that._refreshHandler);
+
+            if (that._showLoadingProxy) {
+                that.dataSource.bind(REQUEST_START, that._showLoadingProxy);
+            }
         },
 
         viewInit: function(view) {
             var that = this,
-                options = that.options;
+                options = that.options,
+                dataSource = that.dataSource,
+                application = view.application;
 
             that.scroller = view.scroller;
+            that._hideLoadingProxy = proxy(application.hideLoading, application);
+            that._showLoadingProxy = proxy(application.showLoading, application);
+
+            dataSource.bind(REQUEST_START, that._showLoadingProxy);
 
             if (options.pullToRefresh) {
                 that.scroller.setOptions({
                     pullToRefresh: true,
-                    pull: function() { that.dataSource.read(); },
+                    pull: function() { dataSource.read(); },
                     pullTemplate: options.pullTemplate,
                     releaseTemplate: options.releaseTemplate,
                     refreshTemplate: options.refreshTemplate
@@ -396,6 +408,10 @@
             }
 
             kendo.mobile.init(that.element.children());
+
+            if (that._hideLoadingProxy) {
+                that._hideLoadingProxy();
+            }
 
             that.trigger("dataBound");
             that._style();
