@@ -214,10 +214,10 @@
                 kendo.bind(dom, observable);
                 kendo.unbind(dom);
 
-                var combobox = dom.data("kendoDropDownList");
+                var dropdownlist = dom.data("kendoDropDownList");
 
-                equal(combobox._events["dataBound"].length, 0);
-                equal(combobox._events["dataBinding"].length, 0);
+                equal(dropdownlist._events["dataBound"].length, 0);
+                equal(dropdownlist._events["dataBinding"].length, 0);
             });
 
 
@@ -329,6 +329,106 @@
                 dropdownlist.trigger("change");
 
                 equal(observable.selected, observable.dataSource.data()[1]);
+            });
+
+            test("binding invisible to true hides the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="dropdownlist"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding invisible to false shows the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="dropdownlist" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing invisible to true hides the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="dropdownlist"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", true);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing invisible to false shows the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="dropdownlist"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", false);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("binding visible to false hides the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="dropdownlist"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding visible to true shows the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="dropdownlist" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing visible to false hides the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="dropdownlist"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", false);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing visible to true shows the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="dropdownlist"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", true);
+
+                ok(dom.data("kendoDropDownList").wrapper.css("display") != "none", "Display is not 'none'");
             });
 
         </script>
