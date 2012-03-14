@@ -19,7 +19,12 @@
                 {
                     "text": "Overview",
                     "url": "application/index.html"
+                },
+                {
+                    "text": "Show/Hide Loading Animation",
+                    "url": "application/loadinganimation.html"
                 }
+
             ]
         },
         {
