@@ -25,6 +25,7 @@
         getSpacing = dataviz.getSpacing,
         defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
+        Point2D = dataviz.Point2D,
         round = dataviz.round,
         uniqueId = dataviz.uniqueId;
 
@@ -638,6 +639,7 @@
             border: {
                 width: 0
             },
+            opacity: 1,
 
             padding: getSpacing(3)
         },
@@ -687,13 +689,16 @@
                 scale = pointer.scale,
                 options = pointer.options,
                 border = defined(options.border) ? {
-                    stroke: options.border.color || options.color,
+                    stroke: options.border.width ? options.border.color || options.color : "",
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType
                 } : {},
                 shape,
                 scaleLine = scale.lineBox(),
-                slot = scale.getSlot(options.value);
+                slot = scale.getSlot(options.value),
+                trackBox = pointer.trackBox,
+                size = options.size;
+                console.log(border);
 
             if (options.shape == "barIndicator") {
                 shape = view.createRect(pointer.pointerBox, deepExtend({
@@ -704,16 +709,24 @@
             } else {
                 if (scale.options.vertical) {
                     shape = view.createPolyline([
-                        new Point2D(box.x1 + halfWidth, box.y1),
-                        new Point2D(box.x1, box.y2),
-                        new Point2D(box.x2, box.y2)
-                    ], true, element.options);
+                        new Point2D(trackBox.x1 - size, slot.y1),
+                        new Point2D(trackBox.x1, slot.y1 - size / 2),
+                        new Point2D(trackBox.x1, slot.y1 + size / 2)
+                    ], true, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity,
+                        zIndex: 2
+                    }, border));
                 } else {
                     shape = view.createPolyline([
-                        new Point2D(box.x1 + halfWidth, box.y1),
-                        new Point2D(box.x1, box.y2),
-                        new Point2D(box.x2, box.y2)
-                    ], true, element.options);
+                        new Point2D(slot.x2, trackBox.y2 + size),
+                        new Point2D(slot.x2 - size / 2, trackBox.y2),
+                        new Point2D(slot.x2 + size / 2, trackBox.y2)
+                    ], true, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity,
+                        zIndex: 2
+                    }, border));
                 }
             }
 
@@ -725,17 +738,15 @@
                 scale = pointer.scale,
                 options = pointer.options,
                 trackOptions = options.track,
-                border = defined(trackOptions.border) ? {
-                    stroke: trackOptions.border.color,
-                    strokeWidth: trackOptions.border.width,
-                    dashType: trackOptions.border.dashType
-                } : {};
+                border = trackOptions.border || {};
 
-            return view.createRect(pointer.trackBox, deepExtend({
-                    fill: trackOptions.color,
-                    fillOpacity: trackOptions.opacity
-                }, border)
-            );
+            return view.createRect(pointer.trackBox, {
+                fill: trackOptions.color,
+                fillOpacity: trackOptions.opacity,
+                stroke: border.width ? border.color || options.color : "",
+                strokeWidth: border.width,
+                dashType: border.dashType
+            });
         },
 
         getViewElements: function(view) {
