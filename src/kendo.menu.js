@@ -381,10 +381,11 @@
          * });
          */
         init: function(element, options) {
-            element = $(element);
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+
+            element = that.wrapper = that.element;
 
             options = that.options;
 
