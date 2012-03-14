@@ -83,6 +83,57 @@
                 ok(!span.is(":visible"));
             });
 
+            module("animationFrame Animation", {});
+
+            asyncTest("executes callbacks", 1, function() {
+                var animation = kendo.fx.Animation.extend({
+                    counter: 0,
+                    tick: function() {
+                        this.counter ++;
+                    },
+
+                    onEnd: function() {
+                        start();
+                        equal(this.counter, 3);
+                    },
+
+                    done: function() {
+                        return this.counter === 3;
+                    }
+                });
+
+                new animation().start();
+            });
+
+            asyncTest("is cancellable", 1, function() {
+                var animation = kendo.fx.Animation.extend({
+                    counter: 0,
+                    tick: function() {
+                        this.counter ++;
+                        if (this.counter === 2) {
+                            this.cancel();
+                        }
+                    },
+
+                    onCancel: function() {
+                        start();
+                        equal(this.counter, 2);
+                    },
+
+                    onEnd: function() {
+                        ok(false);
+                    },
+
+                    done: function() {
+                        return this.counter === 3;
+                    }
+                });
+
+                new animation().start();
+            });
+
+
+
        </script>
     </body>
 </html>
