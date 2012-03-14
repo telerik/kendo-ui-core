@@ -23,8 +23,6 @@ var productionLicenses = [
     trialLicense
 ];
 
-
-
 // Configuration ==============================================================
 var cdnBundle = {
     name: "kendoui.cdn",
