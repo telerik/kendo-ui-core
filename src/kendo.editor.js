@@ -5,7 +5,8 @@
         Class = kendo.Class,
         Widget = kendo.ui.Widget,
         extend = $.extend,
-        deepExtend = kendo.deepExtend;
+        deepExtend = kendo.deepExtend,
+        keys = kendo.keys;
 
     // options can be: template (as string), cssClass, title, defaultValue
     var ToolTemplate = Class.extend({
@@ -166,22 +167,26 @@
             $(editor.document)
                 .bind({
                     keydown: function (e) {
-                        if (e.keyCode === 121) {
-                            //Using the timeout to avoid the default IE menu when F10 is pressed
+                        if (e.keyCode === keys.F10) {
+                            // Handling with timeout to avoid the default IE menu
                             setTimeout(function() {
-                                var tabIndex = $(editor.element).attr("tabIndex");
+                                var TABINDEX = "tabIndex",
+                                    element = editor.wrapper,
+                                    tabIndex = element.attr(TABINDEX);
 
-                                //Chrome can't focus something which has already been focused
-                                $(editor.element).attr("tabIndex", tabIndex || 0).focus().find(focusable).first().focus();
+                                // Chrome can't focus something which has already been focused
+                                element.attr(TABINDEX, tabIndex || 0).focus().find("li:has(" + focusable + ")").first().focus();
 
                                 if (!tabIndex && tabIndex !== 0) {
-                                   $(editor.element).removeAttr("tabIndex");
+                                   element.removeAttr(TABINDEX);
                                 }
 
                             }, 100);
+
                             e.preventDefault();
                             return;
                         }
+
                         var toolName = editor.keyboard.toolFromShortcut(editor.options.tools, e);
 
                         if (toolName) {
@@ -210,7 +215,7 @@
                     keyup: function (e) {
                         var selectionCodes = [8, 9, 33, 34, 35, 36, 37, 38, 39, 40, 40, 45, 46];
 
-                        if ($.browser.mozilla && e.keyCode == 8) {
+                        if ($.browser.mozilla && e.keyCode == keys.BACKSPACE) {
                             fixBackspace(editor, e);
                         }
 
@@ -368,22 +373,25 @@
                 return;
 
             var that = this,
-                $element = $(element);
-
-            $element.closest("form").bind("submit", function () {
-                that.update();
-            });
+                wrapper;
 
             Widget.fn.init.call(that, element, options);
 
             that.options = deepExtend({}, that.options, options);
 
-            for (var id in that._tools)
+            element = $(element);
+
+            element.closest("form").bind("submit", function () {
+                that.update();
+            });
+
+            for (var id in that._tools) {
                 that._tools[id].name = id.toLowerCase();
+            }
 
-            that.textarea = $element.attr("autocomplete", "off")[0];
+            that.textarea = element.attr("autocomplete", "off")[0];
 
-            var $wrapper = that.wrapper = wrapTextarea($element);
+            wrapper = that.wrapper = wrapTextarea(element);
 
             renderTools(that, that.options.tools);
 
@@ -428,13 +436,13 @@
                 enabledButtons = buttons + ":not(.k-state-disabled)",
                 disabledButtons = buttons + ".k-state-disabled";
 
-             $wrapper.find(".k-combobox .k-input").keydown(function(e) {
+             wrapper.find(".k-combobox .k-input").keydown(function(e) {
                 var combobox = $(this).closest(".k-combobox").data("kendoComboBox"),
                     key = e.keyCode;
 
-                if (key == 39 || key == 37) {
+                if (key == keys.RIGHT || key == keys.LEFT) {
                     combobox.close();
-                } else if (key == 40) {
+                } else if (key == keys.DOWN) {
                     if (!combobox.dropDown.isOpened()) {
                         e.stopImmediatePropagation();
                         combobox.open();
@@ -442,17 +450,45 @@
                 }
             });
 
-            $wrapper
+            wrapper
                 .delegate(enabledButtons, "mouseenter", function() { $(this).addClass("k-state-hover")})
                 .delegate(enabledButtons, "mouseleave", function() { $(this).removeClass("k-state-hover")})
                 .delegate(buttons, "mousedown", false)
                 .delegate(focusable, "keydown", function(e) {
-                    if (e.keyCode == 39) {
-                        $(this).closest("li").nextAll("li:has(" + focusable + ")").first().find(focusable).focus();
-                    } else if (e.keyCode == 37) {
-                        $(this).closest("li").prevAll("li:has(" + focusable + ")").last().find(focusable).focus();
-                    } else if (e.keyCode == 27) {
-                        that.focus();
+                    var closestLi = $(this).closest("li"),
+                    focusableTool = "li:has(" + focusable + ")",
+                    focusElement,
+                    keyCode = e.keyCode;
+
+                    if (keyCode == keys.RIGHT) {
+                        focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
+                    } else if (keyCode == keys.LEFT) {
+                        focusElement = closestLi.prevAll(focusableTool).last().find(focusable);
+                    } else if (keyCode == keys.ESC) {
+                        focusElement = that;
+                    } else if (keyCode == keys.TAB && !(e.ctrlKey || e.altKey)) {
+                        // skip tabbing to disabled tools, and focus the editing area when running out of tools
+                        if (e.shiftKey) {
+                            focusElement = closestLi.prevAll(focusableTool).last().find(focusable);
+
+                            if (focusElement.length) {
+                                e.preventDefault();
+                            } else {
+                                return;
+                            }
+                        } else {
+                            e.preventDefault();
+
+                            focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
+
+                            if (focusElement.length == 0) {
+                                focusElement = that;
+                            }
+                        }
+                    }
+
+                    if (focusElement) {
+                        focusElement.focus();
                     }
                 })
                 .delegate(enabledButtons, "click", function (e) {
@@ -464,16 +500,18 @@
                 .find(toolbarItems)
                     .each(function () {
                         var toolName = toolFromClassName(this),
-                            tool = that.options.tools[toolName],
-                            description = that.options.localization[toolName],
+                            options = that.options,
+                            tool = options.tools[toolName],
+                            description = options.localization[toolName],
                             $this = $(this);
 
-                        if (!tool)
+                        if (!tool) {
                             return;
+                        }
 
                         if (toolName == "fontSize" || toolName == "fontName") {
-                            var inheritText = that.options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"]
-                            that.options[toolName][0].Text = inheritText;
+                            var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"]
+                            options[toolName][0].Text = inheritText;
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
                         }
@@ -483,7 +521,8 @@
                             editor: that
                         });
 
-                    });/*.end()*/
+                    });
+
                 that.bind("select", function() {
                     var range = that.getRange();
 
@@ -493,7 +532,7 @@
                         nodes = [range.startContainer];
                     }
 
-                    $wrapper.find(toolbarItems)
+                    wrapper.find(toolbarItems)
                         .each(function () {
                             var tool = that.options.tools[toolFromClassName(this)];
                             if (tool) {
@@ -4735,6 +4774,7 @@ var kendo = window.kendo,
     Class = kendo.Class,
     Widget = kendo.ui.Widget,
     extend = $.extend,
+    proxy = $.proxy,
     Editor = kendo.ui.Editor,
     dom = Editor.Dom,
     CHANGE = "change",
@@ -4780,25 +4820,23 @@ var ColorPicker = Widget.extend({
         that.selectedColor = that.options.selectedColor;
 
         element.attr("tabIndex", 0)
-                .click($.proxy(that.click, that))
-                .keydown($.proxy(that.keydown, that))
-                .find("*")
-                .attr(UNSELECTABLE, "on");
+                .click(proxy(that.click, that))
+                .keydown(proxy(that.keydown, that))
+                .find("*").attr(UNSELECTABLE, "on");
 
-        if ($.browser.msie) {
-            element.focus(function () {
+        element
+            .focus(function () {
                 element.css("outline", "1px dotted #000");
             })
             .blur(function() {
                 element.css("outline", "");
-            });
-        }
+            })
 
         if (that.selectedColor)
             element.find(SELECTEDCOLORCLASS).css(BACKGROUNDCOLOR, that.selectedColor);
 
         $(element[0].ownerDocument.documentElement)
-            .bind("mousedown", $.proxy(function (e) {
+            .bind("mousedown", proxy(function (e) {
                 if (!$(e.target).closest(".k-colorpicker-popup").length) {
                     this.close();
                 }
@@ -4893,7 +4931,7 @@ var ColorPicker = Widget.extend({
             duration: 200,
             complete: function() {
                 if (that._popup) {
-                    dom.remove(that._popup[0].parentNode);
+                    dom.remove(that._popup);
                     that._popup = null;
                 }
             }
