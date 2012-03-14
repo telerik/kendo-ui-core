@@ -174,6 +174,8 @@
             var that = this,
                 options = that.options,
                 format = options.format,
+                offset = dst(),
+                ignoreDST = offset < 0,
                 min = options.min,
                 max = options.max,
                 msMin = getMilliseconds(min),
@@ -182,9 +184,15 @@
                 toString = kendo.toString,
                 template = that.template,
                 start = new DATE(min),
-                length = MS_PER_DAY / msInterval,
-                idx = 0,
+                idx = 0, length,
                 html = "";
+
+            if (ignoreDST) {
+                length = (MS_PER_DAY + (offset * MS_PER_MINUTE)) / msInterval;
+            } else {
+                length = MS_PER_DAY / msInterval;
+            }
+
 
             if (msMin != msMax) {
                 if (msMin > msMax) {
@@ -195,7 +203,7 @@
 
             for (; idx < length; idx++) {
                 if (idx) {
-                    setTime(start, msInterval);
+                    setTime(start, msInterval, ignoreDST);
                 }
 
                 if (msMax && getMilliseconds(start) > msMax) {
@@ -343,12 +351,24 @@
         }
     };
 
-    function setTime(date, time) {
-        var tzOffsetBefore = date.getTimezoneOffset(),
-        resultDATE = new DATE(date.getTime() + time),
-        tzOffsetDiff = resultDATE.getTimezoneOffset() - tzOffsetBefore;
+    function setTime(date, time, ignoreDST) {
+        var offset = date.getTimezoneOffset(),
+            offsetDiff;
 
-        date.setTime(resultDATE.getTime() + tzOffsetDiff * MS_PER_MINUTE);
+        date.setTime(date.getTime() + time);
+
+        if (!ignoreDST) {
+            offsetDiff = date.getTimezoneOffset() - offset;
+            date.setTime(date.getTime() + offsetDiff * MS_PER_MINUTE);
+        }
+    }
+
+    function dst() {
+        var today = new DATE(),
+            midnight = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0),
+            noon = new DATE(today.getFullYear(), today.getMonth(), today.getDate(), 12, 0, 0);
+
+        return -1 * (midnight.getTimezoneOffset() - noon.getTimezoneOffset());
     }
 
     function getMilliseconds(date) {
