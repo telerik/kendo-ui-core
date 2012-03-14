@@ -13,7 +13,7 @@
         <script>
             tests = $.map(tests, function(test) {
                 return { 
-                    page: test.page.replace(/\w+\//, ""), 
+                    page: test.page.replace(/[\w-]+\//, ""), 
                     title: test.title 
                 };
             });
