@@ -98,7 +98,7 @@
         }
     });
 
-    var Boundary = Observable.extend({
+    var PaneDimension = Observable.extend({
         init: function(options) {
             var that = this;
             Observable.fn.init.call(that);
@@ -136,13 +136,13 @@
         }
     });
 
-    var ContainerBoundary = Class.extend({
+    var PaneDimensions = Class.extend({
         init: function(options) {
             var that = this,
                 move = options.move;
 
-            that.x = new Boundary(extend({horizontal: true}, options));
-            that.y = new Boundary(extend({horizontal: false}, options));
+            that.x = new PaneDimension(extend({horizontal: true}, options));
+            that.y = new PaneDimension(extend({horizontal: false}, options));
 
             $(window).bind("orientationchange resize", proxy(that.refresh, that));
         },
@@ -162,16 +162,16 @@
 
         dragMove: function(delta) {
             var that = this,
-                boundary = that.boundary,
+                dimension = that.dimension,
                 axis = that.axis,
                 move = that.move,
                 position = move[axis] + delta;
 
-            if (!boundary.present()) {
+            if (!dimension.present()) {
                 return;
             }
 
-            if ((position < boundary.min && delta < 0) || (position > boundary.max && delta > 0)) {
+            if ((position < dimension.min && delta < 0) || (position > dimension.max && delta > 0)) {
                 delta *= that.resistance;
             }
 
@@ -193,14 +193,14 @@
 
             that.x = x = new DraggableAxis({
                 axis: "x",
-                boundary: that.boundary.x,
+                dimension: that.dimensions.x,
                 resistance: resistance,
                 move: that.move
             });
 
             that.y = y = new DraggableAxis({
                 axis: "y",
-                boundary: that.boundary.y,
+                dimension: that.dimensions.y,
                 resistance: resistance,
                 move: that.move
             });
@@ -341,7 +341,7 @@
         },
 
         Move: Move,
-        ContainerBoundary: ContainerBoundary,
+        PaneDimensions: PaneDimensions,
         Animation: Animation,
         Transition: Transition,
         Draggable: Draggable
