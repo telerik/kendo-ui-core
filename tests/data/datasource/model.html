@@ -66,6 +66,7 @@
                 var model = dataSource.add( { foo: "bar" } );
 
                 ok(model instanceof kendo.data.Model);
+                ok(model.isNew());
                 equal(model.foo, "bar");
             });
 
@@ -92,6 +93,7 @@
                 var model = dataSource.insert({ foo: "bar" });
 
                 ok(model instanceof kendo.data.Model);
+                ok(model.isNew());
             });
 
             test("removes the specified model", function() {

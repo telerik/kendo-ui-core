@@ -76,6 +76,32 @@
                 equal(dataSource.data()[0].foo, "bar");
             });
 
+            test("sync updates data if server response without content", function() {
+                dataSource = new DataSource({
+                    schema: {
+                        model: {
+                            id: "id"
+                        },
+                        data: "d.d"
+                    },
+                    transport: {
+                        read: function(options) {
+                            options.success({ d: { d: [{ id: 1, foo: "foo" }] } });
+                        },
+                        update: function(options) {
+                            options.success(null);
+                        }
+                    }
+                });
+
+                dataSource.read();
+                var model = dataSource.get(1);
+                model.set("foo", "bar");
+                dataSource.sync();
+
+                equal(dataSource.data()[0].foo, "bar");
+            });
+
             test("sync updates the fields of created model from single object server response", function() {
                 stubTransport("create", { id: 1, foo: "foo" } );
 
@@ -123,8 +149,7 @@
             test("sync updates created model when response is empty", function() {
                 stubTransport("create", null );
 
-                var model = new Model({ foo: "foo" });
-                dataSource.add(model);
+                var model = dataSource.add({ foo: "foo" });
                 dataSource.sync();
 
                 equal(model.get("foo"), "foo");
@@ -140,6 +165,7 @@
 
                 equal(model.get("foo"), "bar");
                 equal(model.dirty, false);
+                equal(dataSource._pristine[0].foo, "bar");
             });
 
             test("sync updates all created models with server response", function() {
