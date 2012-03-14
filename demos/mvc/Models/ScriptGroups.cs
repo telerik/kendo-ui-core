@@ -76,7 +76,6 @@ namespace Kendo.Models
             "kendo.popup.js",
             "kendo.history.js",
             "kendo.draganddrop.js",
-            "kendo.mobile.core.js",
             "kendo.mobile.view.js",
             "kendo.mobile.application.js",
             "kendo.mobile.button.js",

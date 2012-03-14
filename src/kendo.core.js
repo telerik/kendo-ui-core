@@ -1845,101 +1845,6 @@
         return effects;
     }
 
-    var animationFrame  = window.requestAnimationFrame       ||
-                          window.webkitRequestAnimationFrame ||
-                          window.mozRequestAnimationFrame    ||
-                          window.oRequestAnimationFrame      ||
-                          window.msRequestAnimationFrame     ||
-                          function(callback){ setTimeout(callback, 1000 / 60); };
-
-    var Animation = Class.extend({
-        init: function() {
-            var that = this;
-            that._tickProxy = proxy(that._tick, that);
-            that._started = false;
-        },
-
-        tick: $.noop,
-        done: $.noop,
-        onEnd: $.noop,
-        onCancel: $.noop,
-
-        start: function() {
-            this._started = true;
-            animationFrame(this._tickProxy);
-        },
-
-        cancel: function() {
-            this._started = false;
-            this.onCancel();
-        },
-
-        _tick: function() {
-            var that = this;
-            if (!that._started) { return; }
-
-            that.tick();
-
-            if (!that.done()) {
-                animationFrame(that._tickProxy);
-            } else {
-                that._started = false;
-                that.onEnd();
-            }
-        }
-    });
-
-    var Transition = Animation.extend({
-        init: function(options) {
-            var that = this;
-            extend(that, options);
-            Animation.fn.init.call(that);
-        },
-
-        done: function() {
-            return this.timePassed() >= this.duration;
-        },
-
-        timePassed: function() {
-            return Math.min(this.duration, (+new Date()) - this.startDate);
-        },
-
-        moveTo: function(options) {
-            var that = this,
-                movable = that.movable;
-
-            that.initial = movable[that.axis];
-            that.delta = options.location - that.initial;
-
-            that.duration = options.duration || 300;
-
-            that.tick = that._easeProxy(options.ease || Ease.easeOutQuad);
-
-            that.startDate = +new Date();
-            that.start();
-        },
-
-        _easeProxy: function(ease) {
-            var that = this;
-
-            return function() {
-                that.movable.moveAxis(that.axis, ease(that.timePassed(), that.initial, that.delta, that.duration));
-            }
-        }
-    });
-
-    extend(Transition, {
-        easeOutExpo: function (t, b, c, d) {
-            return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
-        },
-
-        easeOutBack: function (t, b, c, d, s) {
-            s = 1.70158;
-            return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
-        }
-    });
-
-
     var fx = {
         promise: function (element, options) {
             if (options.show) {
@@ -1973,10 +1878,7 @@
             }
 
             return element;
-        },
-
-        Animation: Animation,
-        Transition: Transition
+        }
     };
 
     function prepareAnimationOptions(options, duration, reverse, complete) {
@@ -2474,73 +2376,8 @@
 
     kendo.parseOptions = parseOptions;
 
-    var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
-        round = math.round,
-        translate;
-
-    if (support.hasHW3D) {
-        translate = function(x, y) {
-            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
-        }
-    } else {
-        translate = function(x, y) {
-            return "translate(" + round(x) + "px," + round(y) +"px)";
-        }
-    }
-
-    var Movable = Observable.extend({
-        init: function(element) {
-            var that = this;
-
-            Observable.fn.init.call(that);
-
-            that.element = $(element);
-            that.domElement = that.element[0];
-            that.x = 0;
-            that.y = 0;
-            that._saveCoordinates(translate(that.x, that.y));
-        },
-
-        translateAxis: function(axis, by) {
-            this[axis] += by;
-            this._redraw();
-        },
-
-        translate: function(coordinates) {
-            this.x += coordinates.x;
-            this.y += coordinates.y;
-            this._redraw();
-        },
-
-        moveAxis: function(axis, value) {
-            this[axis] = value;
-            this._redraw();
-        },
-
-        moveTo: function(coordinates) {
-            extend(this, coordinates);
-            this._redraw();
-        },
-
-        _redraw: function() {
-            var that = this,
-                newCoordinates = translate(that.x, that.y);
-
-            if (newCoordinates != that.coordinates) {
-                that.domElement.style[TRANSFORM_STYLE] = newCoordinates;
-                that._saveCoordinates(newCoordinates);
-                that.trigger("change");
-            }
-        },
-
-        _saveCoordinates: function(coordinates) {
-            this.coordinates = coordinates;
-        }
-    });
-
     extend(kendo.ui, /** @lends kendo.ui */{
         Widget: Widget,
-        Movable: Movable,
         roles: {},
         /**
          * Helper method for writing new widgets.
@@ -2576,6 +2413,52 @@
                     new widget(this, options);
                 });
                 return this;
+            }
+        }
+    });
+
+    var MobileWidget = Widget.extend(/** @lends kendo.mobile.ui.Widget.prototype */{
+        /**
+         * Initializes mobile widget. Sets `element` and `options` properties.
+         * @constructs
+         * @class Represents a mobile UI widget. Base class for all Kendo mobile widgets.
+         * @extends kendo.ui.Widget
+         */
+        init: function(element, options) {
+            Widget.fn.init.call(this, element, options);
+        },
+
+        options: {
+            prefix: "Mobile"
+        },
+
+        events: [],
+
+        viewShow: $.noop,
+
+        viewInit: function(view) {
+            this.view = view;
+        }
+    });
+
+    /**
+     * @name kendo.mobile
+     * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
+     */
+    $.extend(kendo.mobile, {
+        init: function(element) {
+            kendo.init(element, kendo.mobile.ui);
+        },
+
+        /**
+         * @name kendo.mobile.ui
+         * @namespace Contains all classes for the Kendo Mobile UI widgets.
+         */
+        ui: {
+            Widget: MobileWidget,
+            roles: {},
+            plugin: function(widget) {
+                kendo.ui.plugin(widget, kendo.mobile.ui, "Mobile");
             }
         }
     });
