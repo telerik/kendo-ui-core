@@ -394,13 +394,15 @@
 
             ObservableObject.fn.init.call(that, data);
 
-
             that.dirty = false;
 
             if (that.idField) {
                 that.id = that.get(that.idField);
-            }
 
+                if (that.id === undefined) {
+                    that.id = that._defaultId;
+                }
+            }
         },
 
         shouldSerialize: function(field) {
@@ -1184,7 +1186,7 @@
             options.data = that.parameterMap(parameters, type);
 
             if (isFunction(options.url)) {
-                options.url = options.url(options.data);
+                options.url = options.url(parameters);
             }
 
             return options;
@@ -1423,13 +1425,17 @@
         _accept: function(result) {
             var that = this,
             models = result.models,
-            response = result.response || {},
+            response = result.response,
             idx = 0,
             pristine = that.reader.data(that._pristine),
             type = result.type,
             length;
 
-            response = that.reader.data(that.reader.parse(response));
+            if (response) {
+                response = that.reader.data(that.reader.parse(response));
+            } else {
+                response = $.map(models, function(model) { return model.toJSON(); } );
+            }
 
             if (!$.isArray(response)) {
                 response = [response];
@@ -1699,7 +1705,7 @@
                     total++;
                 } else if (action === "remove") {
                     total--;
-                } else if (action !== "itemchange") {
+                } else if (action !== "itemchange" && !that.options.serverPaging) {
                     total = that.reader.total(that._pristine);
                 }
 

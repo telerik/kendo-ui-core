@@ -114,7 +114,9 @@
         schemas: {
             odata: {
                 type: "json",
-                data: "d.results",
+                data: function(data) {
+                    return data.d.results || [data.d];
+                },
                 total: "d.__count"
             }
         },
@@ -125,25 +127,64 @@
                     dataType: "jsonp",
                     jsonp: "$callback"
                 },
+                update: {
+                    cache: true,
+                    dataType: "json",
+                    contentType: "application/json", // to inform the server the the request body is JSON encoded
+                    type: "PUT" // can be PUT or MERGE
+                },
+                create: {
+                    cache: true,
+                    dataType: "json",
+                    contentType: "application/json",
+                    type: "POST" // must be POST to create new entity
+                },
+                destroy: {
+                    cache: true,
+                    dataType: "json",
+                    type: "DELETE"
+                },
                 parameterMap: function(options, type) {
-                    type = type || "read";
-
-                    var params = {
-                            $format: "json",
-                            $inlinecount: "allpages"
-                        },
+                    var params,
+                        value,
                         option,
-                        dataType = (this.options || defaultDataType)[type].dataType;
+                        dataType;
 
                     options = options || {};
+                    type = type || "read";
+                    dataType = (this.options || defaultDataType)[type];
+                    dataType = dataType ? dataType.dataType : "json";
 
-                    for (option in options) {
-                        if (mappers[option]) {
-                            mappers[option](params, options[option]);
-                        } else {
-                            params[option] = options[option];
+                    if (type === "read") {
+                        params = {
+                            $format: "json",
+                            $inlinecount: "allpages"
+                        };
+
+                        for (option in options) {
+                            if (mappers[option]) {
+                                mappers[option](params, options[option]);
+                            } else {
+                                params[option] = options[option];
+                            }
+                        }
+                    } else {
+                        if (dataType !== "json") {
+                            throw new Error("Only json dataType can be used for " + type + " operation.");
+                        }
+
+                        if (type !== "destroy") {
+                            for (option in options) {
+                                value = options[option];
+                                if (typeof value === "number") {
+                                    options[option] = value + "";
+                                }
+                            }
+
+                            params = kendo.stringify(options);
                         }
                     }
+
                     return params;
                 }
             }
