@@ -24,6 +24,7 @@
             element = that.element;
 
             that.layout = options.layout;
+            that.application = options.application;
             that.element.data("kendoView", that).addClass("km-view");
 
             that.header = element.find(roleSelector("header")).addClass("km-header");

@@ -226,6 +226,11 @@
                 setup('<div data-init="foo" data-role="view">View</div>');
             });
 
+            test("Pass application instance to the view", function() {
+                setup('<div data-init="foo" data-role="view">View</div>');
+                equal(application.view.application, application);
+            });
+
             function checkViewParams(e) {
                     equal(e.view.element.attr("id"), "page2");
                     equal(e.view.params.foo, "bar");
