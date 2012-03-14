@@ -220,7 +220,7 @@
          * $("#dropdownlist").kendoDropDownList({
          *     delay: 1000 // wait 1 second before clearing the user input
          * });
-         * @option {String} [dataTextField] <"text"> Sets the field of the data item that provides the text content of the list items.
+         * @option {String} [dataTextField] <""> Sets the field of the data item that provides the text content of the list items.
          * _example
          * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
          * $("#dropdownlist").kendoDropDownList({
@@ -228,7 +228,7 @@
          *     dataTextField: "Title",
          *     dataValueField: "Id"
          * });
-         * @option {String} [dataValueField] <"value"> Sets the field of the data item that provides the value content of the list items.
+         * @option {String} [dataValueField] <""> Sets the field of the data item that provides the value content of the list items.
          * _example
          * var items = [ { Id: 0, Title: "Manager" }, { Id: 1, Title: "Developer" }, { Id: 2, Title: "Vice President" } ];
          * $("#dropdownlist").kendoDropDownList({
