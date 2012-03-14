@@ -153,7 +153,7 @@
         }
     });
 
-    var DraggableAxis = Observable.extend({
+    var PaneAxis = Observable.extend({
         init: function(options) {
             var that = this;
             extend(that, options);
@@ -180,7 +180,7 @@
         }
     });
 
-    var Draggable = Class.extend({
+    var Pane = Class.extend({
         init: function(options) {
             var that = this,
                 x,
@@ -191,14 +191,14 @@
 
             resistance = that.elastic ? 0.5 : 0;
 
-            that.x = x = new DraggableAxis({
+            that.x = x = new PaneAxis({
                 axis: "x",
                 dimension: that.dimensions.x,
                 resistance: resistance,
                 move: that.move
             });
 
-            that.y = y = new DraggableAxis({
+            that.y = y = new PaneAxis({
                 axis: "y",
                 dimension: that.dimensions.y,
                 resistance: resistance,
@@ -344,6 +344,6 @@
         PaneDimensions: PaneDimensions,
         Animation: Animation,
         Transition: Transition,
-        Draggable: Draggable
+        Pane: Pane
     });
 })(jQuery);
