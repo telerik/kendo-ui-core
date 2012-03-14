@@ -4,6 +4,8 @@
         proxy = $.proxy,
         Class = kendo.Class,
         Transition = kendo.fx.Transition,
+        Pane = kendo.ui.Pane,
+        PaneDimensions = kendo.ui.PaneDimensions,
         Widget = ui.Widget,
 
         // Math
@@ -96,7 +98,7 @@
                 end: $.proxy(that._dragEnd, that)
             });
 
-            dimensions = new mobile.PaneDimensions({
+            dimensions = new PaneDimensions({
                 element: that.inner,
                 container: that.element
             });
@@ -104,7 +106,7 @@
             dimension = dimensions.x;
             dimension.bind("change", proxy(that.refresh, that));
 
-            pane = new mobile.Pane({
+            pane = new Pane({
                 dimensions: dimensions,
                 drag: drag,
                 movable: movable,

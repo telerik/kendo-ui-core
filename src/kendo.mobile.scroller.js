@@ -7,6 +7,8 @@
         Widget = ui.Widget,
         Class = kendo.Class,
         Movable = kendo.ui.Movable,
+        Pane = kendo.ui.Pane,
+        PaneDimensions = kendo.ui.PaneDimensions,
         Transition = fx.Transition,
         Animation = fx.Animation,
         SNAPBACK_DURATION = 500,
@@ -207,7 +209,7 @@
 
                 movable = new Movable(inner),
 
-                dimensions = new mobile.PaneDimensions({
+                dimensions = new PaneDimensions({
                     element: inner,
                     container: element
                 }),
@@ -219,7 +221,7 @@
                     }
                 }),
 
-                pane = new mobile.Pane({
+                pane = new Pane({
                     movable: movable,
                     dimensions: dimensions,
                     drag: drag,

@@ -420,6 +420,127 @@
         }
     });
 
+    var PaneDimension = Observable.extend({
+        init: function(options) {
+            var that = this;
+            Observable.fn.init.call(that);
+
+            $.extend(that, options);
+
+            that.max = 0;
+
+            if (that.horizontal) {
+                that.measure = "width";
+                that.scrollSize = "scrollWidth";
+                that.axis = "x";
+            } else {
+                that.measure = "height";
+                that.scrollSize = "scrollHeight";
+                that.axis = "y";
+            }
+        },
+
+        outOfBounds: function(offset) {
+            return  offset > this.max || offset < this.min;
+        },
+
+        present: function() {
+            return this.max - this.min;
+        },
+
+        update: function() {
+            var that = this;
+
+            that.size = that.container[that.measure]();
+            that.total = that.element[0][that.scrollSize];
+            that.min = Math.min(that.max, that.size - that.total);
+            that.trigger("change", that);
+        }
+    });
+
+    var PaneDimensions = Class.extend({
+        init: function(options) {
+            var that = this,
+                movable = options.movable;
+
+            that.x = new PaneDimension(extend({horizontal: true}, options));
+            that.y = new PaneDimension(extend({horizontal: false}, options));
+
+            $(window).bind("orientationchange resize", proxy(that.refresh, that));
+        },
+
+        refresh: function() {
+            this.x.update();
+            this.y.update();
+        }
+    });
+
+    var PaneAxis = Observable.extend({
+        init: function(options) {
+            var that = this;
+            extend(that, options);
+            Observable.fn.init.call(that);
+        },
+
+        dragMove: function(delta) {
+            var that = this,
+                dimension = that.dimension,
+                axis = that.axis,
+                movable = that.movable,
+                position = movable[axis] + delta;
+
+            if (!dimension.present()) {
+                return;
+            }
+
+            if ((position < dimension.min && delta < 0) || (position > dimension.max && delta > 0)) {
+                delta *= that.resistance;
+            }
+
+            movable.translateAxis(axis, delta);
+            that.trigger("change", that);
+        }
+    });
+
+    var Pane = Class.extend({
+        init: function(options) {
+            var that = this,
+                x,
+                y,
+                resistance;
+
+            extend(that, {elastic: true}, options);
+
+            resistance = that.elastic ? 0.5 : 0;
+
+            that.x = x = new PaneAxis({
+                axis: "x",
+                dimension: that.dimensions.x,
+                resistance: resistance,
+                movable: that.movable
+            });
+
+            that.y = y = new PaneAxis({
+                axis: "y",
+                dimension: that.dimensions.y,
+                resistance: resistance,
+                movable: that.movable
+            });
+
+            that.drag.bind(["move", "end"], {
+                move: function(e) {
+                    x.dragMove(e.x.delta);
+                    y.dragMove(e.y.delta);
+                    e.preventDefault();
+                },
+
+                end: function(e) {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+
     var DropTarget = Widget.extend(/** @lends kendo.ui.DropTarget.prototype */ {
         /**
          * @constructs
@@ -787,4 +908,6 @@
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
     kendo.Tap = Tap;
+    kendo.ui.Pane = Pane;
+    kendo.ui.PaneDimensions = PaneDimensions;
  })(jQuery);
