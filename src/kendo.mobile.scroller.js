@@ -218,7 +218,7 @@
                     }
                 }),
 
-                draggable = new mobile.Draggable({
+                pane = new mobile.Pane({
                     move: move,
                     dimensions: dimensions,
                     drag: drag,
@@ -229,7 +229,7 @@
                 move: move,
                 dimensions: dimensions,
                 drag: drag,
-                draggable: draggable,
+                pane: pane,
                 tap: tap,
                 pulled: false,
                 scrollElement: inner
@@ -300,7 +300,7 @@
             that.refreshHint = that.scrollElement.children().first();
             that.hintContainer = that.refreshHint.children(".km-template");
 
-            that.draggable.y.bind("change", proxy(that._draggableChange, that));
+            that.pane.y.bind("change", proxy(that._paneChange, that));
             that.drag.bind("end", proxy(that._dragEnd, that));
         },
 
@@ -318,7 +318,7 @@
             that.yinertia.freeze(that.options.pullOffset / 2);
         },
 
-        _draggableChange: function() {
+        _paneChange: function() {
             var that = this;
 
             if (that.move.y / OUT_OF_BOUNDS_FRICTION > that.options.pullOffset) {
@@ -338,7 +338,6 @@
             var that = this,
             move = that.move,
             dimension = that.dimensions[axis],
-            draggable = that.draggable[axis],
             tap = that.tap,
 
             scrollBar = new ScrollBar({
@@ -359,7 +358,7 @@
 
             that[axis + "inertia"] = inertia;
 
-            draggable.bind(CHANGE, function() {
+            that.pane[axis].bind(CHANGE, function() {
                 scrollBar.show();
             });
         }

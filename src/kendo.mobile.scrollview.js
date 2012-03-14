@@ -70,7 +70,7 @@
                 drag,
                 dimensions,
                 dimension,
-                draggable;
+                pane;
 
             move = new mobile.Move(that.inner);
 
@@ -104,7 +104,7 @@
             dimension = dimensions.x;
             dimension.bind("change", proxy(that.refresh, that));
 
-            draggable = new mobile.Draggable({
+            pane = new mobile.Pane({
                 dimensions: dimensions,
                 drag: drag,
                 move: move,
@@ -117,7 +117,7 @@
                 drag: drag,
                 dimensions: dimensions,
                 dimension: dimension,
-                draggable: draggable
+                pane: pane
             });
 
             dimensions.refresh();
