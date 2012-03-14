@@ -1,6 +1,26 @@
 <div id="music" data-role="view" data-title="Form Elements" data-init="initForm">
     <ul data-role="listview" data-style="inset">
         <li>
+            <select>
+                <option value="First Option">First Option</option>
+                <option value="Second Option">Second Option</option>
+                <option value="Third Option">Third Option</option>
+                <option value="Fourth Option">Fourth Option</option>
+            </select>
+            Select element
+        </li>
+        <li>
+            <select id="dropdown">
+                <option value="First Option">First Option</option>
+                <option value="Second Option">Second Option</option>
+                <option value="Third Option">Third Option</option>
+                <option value="Fourth Option">Fourth Option</option>
+                <option value="First Option">Fifth Option</option>
+                <option value="Sixth Option">Fifth Option</option>
+            </select>
+            Kendo DropDownList
+        </li>
+        <li>
             <input type="text" value="Text" />
             Type text
         </li>
@@ -44,30 +64,19 @@
             <input type="datetime" value="2012-03-22T20:15Z" />
             Type datetime
         </li>
-        <li>
-            <select>
-                <option value="First Option">First Option</option>
-                <option value="Second Option">Second Option</option>
-                <option value="Third Option">Third Option</option>
-                <option value="Fourth Option">Fourth Option</option>
-            </select>
-            Select element
-        </li>
-        <li>
-            <select id="dropdown">
-                <option value="First Option">First Option</option>
-                <option value="Second Option">Second Option</option>
-                <option value="Third Option">Third Option</option>
-                <option value="Fourth Option">Fourth Option</option>
-            </select>
-            Kendo DropDownList
-        </li>
     </ul>
 </div>
 <script>
     function initForm() {
         var list = $("#dropdown").kendoDropDownList()
                                   .data("kendoDropDownList");
-        list.popup.options.appendTo = list.popup.options.anchor = list.element.parents(".km-vertical");
+
+        // The following is only intended for the Desktop examples. You don't need to run this on mobile.
+        var body = list.element.parents(".km-vertical:not(.km-blackberry)");
+        if (body.length) {
+            list.popup.options.appendTo = body;
+            list.popup.element.appendTo(body);
+            list.popup.options.animation.open.effects = body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") ? "slideIn:up" : list.popup.options.animation.open.effects;
+        }
     }
 </script>
