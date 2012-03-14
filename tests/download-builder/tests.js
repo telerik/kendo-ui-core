@@ -1,10 +1,10 @@
 tests.push(
     {
-        page: "scriptresolver.html",
+        page: "script-resolver.html",
         title: "Script Resolver"
     },
     {
-        page: "kendo.html",
+        page: "kendo-config.html",
         title: "Kendo Config"
     }
 );
