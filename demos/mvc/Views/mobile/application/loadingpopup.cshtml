@@ -8,7 +8,7 @@
         showButton = $("#show").click(function() {
                         showButton.fadeOut();
                         startLoading();
-                     })
+                     });
 
         startLoading();
     }
@@ -33,13 +33,18 @@
     }
 </script>
 <style scoped>
-    .km-ios #loading .km-content {
+    .km-ios #loading .km-content
+    {
         background: transparent;
     }
 
+    #loading .km-content
+    {
+        text-align: center;
+    }
+
     #show {
-        width: 150px;
-        height: 150px;
+        margin-top: 100px;
         font-size: 1.5rem;
     }
 </style>
