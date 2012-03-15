@@ -6,6 +6,8 @@
         <script src="../../demos/mvc/content/shared/js/less.js"></script>
         <script src="../../src/jquery.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
         <script src="../../src/kendo.history.js"></script>
@@ -409,7 +411,7 @@
                 equal(application.view.id, "#page2");
             });
 
-            test("Omit options.initial if location.hash", function() {
+            test("Omits options.initial if location.hash", function() {
                 location.hash = "#../../test1";
 
                 setup('<div data-role="view" id="test1">Page 1</div><div data-url="../../test1" data-role="view" id="page2">Page 2</div>', {
@@ -419,6 +421,31 @@
                 equal(location.hash, "#../../test1");
                 equal(application.view.id, "../../test1");
                 equal(application.view.content.find(".km-scroll-container").html(), "Page 2");
+            });
+
+            test("View gets VM from data-model attr", function(){
+                window.foo = {
+                    id: 1,
+                    bar: {
+                        baz: "baz"
+                    }
+                }
+
+                setup('<div data-role="view" data-model="foo.bar"></div>');
+
+                equal(application.view.model, window.foo.bar);
+            });
+
+            test("View parses data-model value if JSON", function() {
+                setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
+                equal(application.view.model.bar, 1);
+            });
+
+            test("View call kendo.bind if data-model", function() {
+                stub(kendo, { bind: kendo.bind });
+                setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
+
+                equal(kendo.calls("bind"), 1);
             });
         </script>
     </body>
