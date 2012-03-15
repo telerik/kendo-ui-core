@@ -19,21 +19,27 @@
         Ring = dataviz.Ring,
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,
+        BarAnimation = dataviz.BarAnimation,
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
+        getSpacing = dataviz.getSpacing,
         defined = dataviz.defined,
         rotatePoint = dataviz.rotatePoint,
+        Point2D = dataviz.Point2D,
         round = dataviz.round,
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var BLACK = "#000",
+    var ARROW = "arrow",
+        ARROW_POINTER = "arrowPointer",
+        BAR = "bar",
+        BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEGREE = math.PI / 180,
-        POINTER = "pointer",
+        RADIAL_POINTER = "radialPointer",
         OUTSIDE = "outside",
         INSIDE = "inside",
         VERTICAL = "vertical";
@@ -61,14 +67,10 @@
         },
 
         options: {
-            shape: "needle",
             color: "#ea7001",
             value: 0,
-            cap: {
-                size: 0.05
-            },
             animation: {
-                type: POINTER
+                type: RADIAL_POINTER
             }
         },
 
@@ -87,6 +89,29 @@
             options.value = math.min(math.max(newValue, scaleOptions.min), scaleOptions.max);
 
             pointer.repaint();
+        }
+    });
+
+    var RadialPointer = Pointer.extend({
+        options: {
+            shape: "needle",
+            cap: {
+                size: 0.05
+            }
+        },
+
+        reflow: function() {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                ring = scale.ring,
+                c = ring.c,
+                capSize = ring.r * options.cap.size;
+
+            pointer.box = new Box2D(
+                c.x - capSize, c.y - capSize,
+                c.x + capSize, c.y + capSize
+            );
         },
 
         repaint: function() {
@@ -110,21 +135,7 @@
             }
         },
 
-        reflow: function() {
-            var pointer = this,
-                options = pointer.options,
-                scale = pointer.scale,
-                ring = scale.ring,
-                c = ring.c,
-                capSize = ring.r * options.cap.size;
-
-            pointer.box = new Box2D(
-                c.x - capSize, c.y - capSize,
-                c.x + capSize, c.y + capSize
-            );
-        },
-
-        renderNeedle: function(view) {
+        renderPointer: function(view) {
             var pointer = this,
                 scale = pointer.scale,
                 ring = scale.ring,
@@ -167,7 +178,7 @@
         getViewElements: function(view) {
             var pointer = this,
                 shape = pointer.options.shape,
-                elements = pointer.renderNeedle(view);
+                elements = pointer.renderPointer(view);
 
             pointer.elements = elements;
 
@@ -181,7 +192,6 @@
                 scaleOptions = scale.options;
 
             scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
-            scaleOptions.minorUnit = scaleOptions.majorUnit / 5;
 
             Axis.fn.init.call(scale, options);
         },
@@ -192,14 +202,14 @@
 
             majorTicks: {
                 size: 15,
-                alignment: INSIDE,
+                align: INSIDE,
                 color: BLACK,
                 width: .5
             },
 
             minorTicks: {
                 size: 10,
-                alignment: INSIDE,
+                align: INSIDE,
                 color: BLACK,
                 width: .5
             },
@@ -429,8 +439,7 @@
             return childElements;
         }
     });
-
-    var GaugePlotArea = ChartElement.extend({
+    var RadialGaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
 
@@ -443,6 +452,9 @@
             border: {
                 color: BLACK,
                 width: 0
+            },
+            minorTicks: {
+                align: "inside"
             }
         },
 
@@ -560,8 +572,326 @@
 
             scale = plotArea.scale = new RadialScale(options.scale);
             plotArea.append(plotArea.scale);
-            plotArea.pointer = new Pointer(scale, options.pointer);
+            plotArea.pointer = new RadialPointer(scale, options.pointer);
             plotArea.append(plotArea.pointer);
+        }
+    });
+
+    var LinearScale = NumericAxis.extend({
+        init: function (options) {
+            var scale = this,
+                scaleOptions = scale.options;
+
+            scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
+
+            options = deepExtend({}, scaleOptions, options);
+
+            NumericAxis.fn.init.call(scale, 0, 1, options);
+        },
+
+        options: {
+            min: 0,
+            max: 50,
+
+            minorUnit: 1,
+
+            majorTicks: {
+                size: 15,
+                align: INSIDE,
+                color: BLACK,
+                width: 0.5,
+                visible: true
+            },
+
+            minorTicks: {
+                size: 10,
+                align: INSIDE,
+                color: BLACK,
+                width: 0.5,
+                visible: true
+            },
+
+            line: {
+                width: 0.5
+            },
+
+            labels: {
+                position: INSIDE,
+                padding: 2
+            }
+        },
+
+        shouldAlign: function() {
+            return false;
+        }
+    });
+
+
+    var LinearPointer = Pointer.extend({
+        options: {
+            shape: "barIndicator",
+
+            track: {
+                width: 6,
+                border: {
+                    width: 0
+                }
+            },
+
+            color: "#286793",
+            size: 6,
+            border: {
+                width: 0
+            },
+            opacity: 1,
+
+            padding: getSpacing(3),
+            animation: {
+                type: "fadeIn"
+            }
+        },
+
+        repaint: function() {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                needle = pointer.elements[0],
+                animation;
+                console.log(pointer.children);
+
+
+            if (options.animation === false) {
+                needle.refresh(doc.getElementById(options.id));
+            } else {
+                animation = new RotationAnimation(needle, deepExtend(options.animation, {
+                    startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(scale.options.min)
+                }));
+                animation.setup();
+                animation.play();
+            }
+        },
+
+        reflow: function(box) {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                slot = scale.getSlot(options.value),
+                scaleLine = scale.lineBox(),
+                scaleBox = scale.box,
+                width = options.track.width,
+                padding = options.padding,
+                halfSize = options.size / 2,
+                trackBoxCenter,
+                trackBox,
+                pointerBox;
+
+            if (scale.options.vertical) {
+                trackBox = new Box2D(
+                    scaleBox.x2 + padding.left, scaleLine.y1,
+                    scaleBox.x2 + padding.left + width, scaleLine.y2);
+
+                trackBoxCenter = trackBox.center();
+                pointerBox = new Box2D(
+                    trackBoxCenter.x - halfSize, slot.y1,
+                    trackBoxCenter.x + halfSize, slot.y2);
+            } else {
+                trackBox = new Box2D(
+                    scaleLine.x1, scaleBox.y1 - padding.bottom - width,
+                    scaleLine.x2, scaleBox.y1 - padding.bottom);
+
+                trackBoxCenter = trackBox.center();
+                pointerBox = new Box2D(
+                    slot.x1, trackBoxCenter.y - halfSize,
+                    slot.x2, trackBoxCenter.y + halfSize);
+            }
+
+            pointer.trackBox = trackBox;
+            pointer.pointerBox = pointerBox;
+
+            pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
+        },
+
+        renderPointer: function(view) {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                border = defined(options.border) ? {
+                    stroke: options.border.width ? options.border.color || options.color : "",
+                    strokeWidth: options.border.width,
+                    dashType: options.border.dashType
+                } : {},
+                shape,
+                scaleLine = scale.lineBox(),
+                slot = scale.getSlot(options.value),
+                trackBox = pointer.trackBox,
+                size = options.size;
+
+            if (options.shape == ARROW) {
+                if (scale.options.vertical) {
+                    shape = view.createPolyline([
+                        new Point2D(trackBox.x1 - size, slot.y1),
+                        new Point2D(trackBox.x1, slot.y1 - size / 2),
+                        new Point2D(trackBox.x1, slot.y1 + size / 2)
+                    ], true, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity,
+                        zIndex: 2
+                    }, border));
+                } else {
+                    shape = view.createPolyline([
+                        new Point2D(slot.x2, trackBox.y2 + size),
+                        new Point2D(slot.x2 - size / 2, trackBox.y2),
+                        new Point2D(slot.x2 + size / 2, trackBox.y2)
+                    ], true, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity,
+                        zIndex: 2
+                    }, border));
+                }
+            } else {
+                shape = view.createRect(pointer.pointerBox, deepExtend({
+                        fill: options.color,
+                        fillOpacity: options.opacity,
+                        animation: options.animation,
+                        kur: "kur"
+                    }, border)
+                );
+            }
+
+            return shape;
+        },
+
+        renderTrack: function(view) {
+            var pointer = this,
+                scale = pointer.scale,
+                options = pointer.options,
+                trackOptions = options.track,
+                border = trackOptions.border || {};
+
+            if (options.shape == ARROW) {
+                trackOptions.color = trackOptions.color || options.color;
+            }
+
+            return view.createRect(pointer.trackBox, {
+                fill: trackOptions.color,
+                fillOpacity: trackOptions.opacity,
+                stroke: border.width ? border.color || options.color : "",
+                strokeWidth: border.width,
+                dashType: border.dashType
+            });
+        },
+
+        getViewElements: function(view) {
+            var pointer = this,
+                elements = [];
+
+            elements.push(pointer.renderTrack(view));
+            elements.push(pointer.renderPointer(view));
+
+            append(elements, Pointer.fn.getViewElements.call(pointer, view));
+
+            return elements;
+        }
+    });
+
+    var LinearGaugePlotArea = ChartElement.extend({
+        init: function(options) {
+            ChartElement.fn.init.call(this, options);
+
+            this.render();
+        },
+
+        options: {
+            margin: {},
+            background: "",
+            border: {
+                color: BLACK,
+                width: 0
+            }
+        },
+
+        reflow: function(box){
+            var plotArea = this,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer;
+
+            scale.reflow(box);
+            pointer.reflow(box);
+            plotArea.box = plotArea.calculateBox(box);
+            plotArea.alignElements();
+        },
+
+        calculateBox: function(box) {
+            var plotArea = this,
+                options = plotArea.options,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer,
+                boxCenter = box.center(),
+                plotAreaBox = pointer.box.clone().wrap(scale.box),
+                size;
+
+            if (scale.options.vertical) {
+                size = plotAreaBox.width() / 2;
+                plotAreaBox = new Box2D(
+                    boxCenter.x - size, box.y1,
+                    boxCenter.x + size, box.y2
+                );
+            } else {
+                size = plotAreaBox.height() / 2;
+                plotAreaBox = new Box2D(
+                    box.x1, boxCenter.y - size,
+                    box.x2, boxCenter.y + size
+                );
+            }
+
+            return plotAreaBox;
+        },
+
+        alignElements: function() {
+            var plotArea = this,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer,
+                scaleBox = scale.box;
+
+            if (scale.options.vertical) {
+                scale.reflow(plotArea.box);
+            } else {
+                scale.reflow(new Box2D(
+                    scaleBox.x1, plotArea.box.y1 + pointer.box.height(),
+                    scaleBox.x2, plotArea.box.y2
+                ));
+            }
+            pointer.reflow(plotArea.box);
+        },
+
+        render: function() {
+            var plotArea = this,
+                options = plotArea.options,
+                scale;
+
+            scale = plotArea.scale = new LinearScale(options.scale);
+            plotArea.append(plotArea.scale);
+            plotArea.pointer = new LinearPointer(scale, options.pointer);
+            plotArea.append(plotArea.pointer);
+        },
+
+        getViewElements: function(view) {
+            var plotArea = this,
+                options = plotArea.options.plotArea,
+                childElements = ChartElement.fn.getViewElements.call(plotArea, view),
+                border = options.border || {},
+                elements = [
+                    view.createRect(plotArea.box, {
+                        fill: options.background,
+                        stroke: border.width ? border.color : "",
+                        strokeWidth: border.width,
+                        dashType: border.dashType
+                    })
+                ];
+
+            append(elements, childElements);
+
+            return elements;
         }
     });
 
@@ -585,8 +915,10 @@
             $(element).addClass("k-gauge");
 
             gauge.redraw();
+        },
 
-            kendo.notify(gauge, dataviz.ui);
+        options: {
+            plotArea: {}
         },
 
         value: function(value) {
@@ -610,7 +942,14 @@
             gauge._viewElement = view.renderTo(element[0]);
         },
 
-        _getModel: function() {
+        svg: function() {
+            var model = this._getModel(),
+                view = Chart.SVGView.fromModel(model);
+
+            return view.render();
+        },
+
+        _createModel: function() {
             var gauge = this,
                 options = gauge.options,
                 element = gauge.element,
@@ -618,10 +957,34 @@
                     width: element.width() || DEFAULT_WIDTH,
                     height: element.height() || DEFAULT_HEIGHT,
                     transitions: options.transitions
-                    }, options.gaugeArea)),
+                    }, options.gaugeArea));
+
+            return model;
+        }
+    });
+
+    var RadialGauge = Gauge.extend({
+        init: function(element, options) {
+            var radialGauge = this;
+            Gauge.fn.init.call(radialGauge, element, options);
+            kendo.notify(radialGauge, dataviz.ui);
+        },
+
+        options: {
+            name: "RadialGauge",
+            transitions: true,
+            gaugeArea: {
+                background: ""
+            }
+        },
+
+        _getModel: function() {
+            var gauge = this,
+                options = gauge.options,
+                model = gauge._createModel(),
                 plotArea;
 
-            plotArea = model._plotArea = new GaugePlotArea(options);
+            plotArea = model._plotArea = new RadialGaugePlotArea(options);
 
             gauge._pointers = [plotArea.pointer];
 
@@ -629,33 +992,51 @@
             model.reflow();
 
             return model;
-        },
+        }
+    });
 
+    var LinearGauge = Gauge.extend({
         options: {
-            name: "Gauge",
+            name: "LinearGauge",
             transitions: true,
             gaugeArea: {
                 background: ""
             }
         },
 
-        svg: function() {
-            var model = this._getModel(),
-                view = Chart.SVGView.fromModel(model);
+        _getModel: function() {
+            var gauge = this,
+                options = gauge.options,
+                model = gauge._createModel(),
+                plotArea;
 
-            return view.render();
+            plotArea = model._plotArea = new LinearGaugePlotArea(options);
+
+            //gauge._pointers = [ plotArea.pointer ];
+
+            model.append(plotArea);
+            model.reflow();
+
+            return model;
         }
     });
 
-    var PointerAnimationDecorator = animationDecorator(POINTER, RotationAnimation);
+    var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
+    var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, RotationAnimation);
+    var BarIndicatorAnimationDecorator = animationDecorator(BAR, BarAnimation);
 
     // Exports ================================================================
-    dataviz.ui.plugin(Gauge);
+    dataviz.ui.plugin(RadialGauge);
+    dataviz.ui.plugin(LinearGauge);
 
     deepExtend(dataviz, {
-        GaugePlotArea: GaugePlotArea,
-        Pointer: Pointer,
-        PointerAnimationDecorator: PointerAnimationDecorator,
+        GaugePlotArea: RadialGaugePlotArea,
+        RadialPointer: RadialPointer,
+        LinearPointer: LinearPointer,
+        LinearScale: LinearScale,
+        RadialPointerAnimationDecorator: RadialPointerAnimationDecorator,
+        ArrowPointerAnimationDecorator: ArrowPointerAnimationDecorator,
+        BarIndicatorAnimationDecorator: BarIndicatorAnimationDecorator,
         RadialScale: RadialScale
     });
 

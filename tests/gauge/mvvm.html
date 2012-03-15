@@ -21,40 +21,40 @@
         <ol id="qunit-tests"></ol>
         <script>
             test("initializes a radial gauge when data role is gauge", function() {
-                var dom = $('<div data-role="gauge" />');
+                var dom = $('<div data-role="radialgauge" />');
 
                 kendo.bind(dom, {}, kendo.dataviz.ui);
 
-                ok(dom.data("kendoGauge") instanceof kendo.dataviz.ui.Gauge);
+                ok(dom.data("kendoRadialGauge") instanceof kendo.dataviz.ui.RadialGauge);
             });
 
             test("initializes options from data attributes", function() {
-                var dom = $('<div data-role="gauge" data-transitions="false" />');
+                var dom = $('<div data-role="radialgauge" data-transitions="false" />');
 
                 kendo.bind(dom, {}, kendo.dataviz.ui);
 
-                var gauge = dom.data("kendoGauge");
+                var gauge = dom.data("kendoRadialGauge");
 
                 equal(gauge.options.transitions, false);
             });
 
             test("initializes value from view model", function() {
-                var dom = $('<div data-role="gauge" data-bind="value:value" />');
+                var dom = $('<div data-role="radialgauge" data-bind="value:value" />');
 
                 kendo.bind(dom, { value: 10 }, kendo.dataviz.ui);
 
-                equal(dom.data("kendoGauge").value(), 10);
+                equal(dom.data("kendoRadialGauge").value(), 10);
             });
 
             test("changing a value updates the view model", function() {
-                var dom = $('<div data-role="gauge" data-bind="value:value" />');
+                var dom = $('<div data-role="radialgauge" data-bind="value:value" />');
 
                 var observable = kendo.observable({ value: null });
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
-                dom.data("kendoGauge").value(10);
-                dom.data("kendoGauge").trigger("change");
+                dom.data("kendoRadialGauge").value(10);
+                dom.data("kendoRadialGauge").trigger("change");
 
                 equal(observable.value, 10);
             });
@@ -65,11 +65,11 @@
                 var observable = kendo.observable({ value: null });
                 observable.value = 10;
 
-                dom.kendoGauge();
+                dom.kendoRadialGauge();
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
-                equal(dom.data("kendoGauge").value(), 10);
+                equal(dom.data("kendoRadialGauge").value(), 10);
             });
 
             test("binding gauge initialized after binding", function() {
@@ -80,9 +80,9 @@
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
-                dom.kendoGauge();
+                dom.kendoRadialGauge();
 
-                equal(dom.data("kendoGauge").value(), 10);
+                equal(dom.data("kendoRadialGauge").value(), 10);
             });
 
             test("updating model value updates the UI", function() {
@@ -92,14 +92,14 @@
 
                 kendo.bind(dom, observable, kendo.dataviz.ui);
 
-                dom.kendoGauge();
+                dom.kendoRadialGauge();
 
                 observable.set("value", 10)
-                equal(dom.data("kendoGauge").value(), 10);
+                equal(dom.data("kendoRadialGauge").value(), 10);
             });
 
             test("bindings are removed if element is rebind", 1, function() {
-                var dom = $('<div data-role="gauge" data-bind="value:value" />');
+                var dom = $('<div data-role="radialgauge" data-bind="value:value" />');
 
                 var observable = kendo.observable({ value: 10 });
 
@@ -113,7 +113,7 @@
             });
 
             test("binding target is destroyed", 1, function() {
-                var dom = $('<div data-role="gauge" data-bind="value:value"/>');
+                var dom = $('<div data-role="radialgauge" data-bind="value:value"/>');
 
                 var observable = kendo.observable({ value: null });
 

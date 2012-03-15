@@ -206,15 +206,17 @@
                 });
 
                 test("major ticks can be disabled", function() {
-                    categoryAxis.options.majorTickType = "none";
+                    createCategoryAxis({ majorTicks: { visible: false }});
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     equal(view.log.line.length, 0);
                 });
 
                 test("minor ticks are distributed horizontally", function() {
-                    categoryAxis.options.majorTickType = "none";
-                    categoryAxis.options.minorTickType = "outside";
+                    createCategoryAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
@@ -222,9 +224,11 @@
                 });
 
                 test("minor ticks are distributed horizontally in reverse", function() {
-                    createCategoryAxis({ reverse: true });
-                    categoryAxis.options.majorTickType = "none";
-                    categoryAxis.options.minorTickType = "outside";
+                    createCategoryAxis({
+                        reverse: true,
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                     });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.x1; }),
@@ -232,17 +236,12 @@
                 });
 
                 test("minor ticks can be disabled", function() {
-                    categoryAxis.options.majorTickType = "none";
-                    categoryAxis.options.minorTickType = "none";
-                    categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     equal(view.log.line.length, 0);
                 });
 
                 test("line width 0 remove all ticks", function() {
                     categoryAxis.options.line.width = 0;
-                    categoryAxis.options.majorTickType = "outside";
-                    categoryAxis.options.minorTickType = "outside";
                     categoryAxis.getViewElements(view);
                     equal(view.log.line.length, 0);
                 });
@@ -256,8 +255,10 @@
                 });
 
                 test("minor ticks are aligned to axis", 5, function() {
-                    categoryAxis.options.majorTickType = "none";
-                    categoryAxis.options.minorTickType = "outside";
+                    createCategoryAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     $.each(view.log.line, function() {
@@ -302,7 +303,7 @@
                     categoryAxis.getViewElements(view);
 
                     $.each(view.log.text, function() {
-                            equal(this.style.y, 0);
+                        equal(this.style.y, 0);
                     })
                 });
 
@@ -310,17 +311,20 @@
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     $.each(view.log.line, function() {
-                            equal(this.y1, 23);
+                        equal(this.y1, 23);
                     });
                 });
 
                 test("minor ticks are aligned to axis", 5, function() {
-                    categoryAxis.options.majorTickType = "none";
-                    categoryAxis.options.minorTickType = "outside";
+                    createCategoryAxis({
+                        labels: { mirror: true },
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true }
+                    });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     $.each(view.log.line, function() {
-                            equal(this.y1, 24);
+                        equal(this.y1, 23);
                     });
                 });
 
@@ -408,8 +412,11 @@
                 });
 
                 test("minor ticks are distributed vertically", function() {
-                    categoryAxis.options.majorTickType = "none";
-                    categoryAxis.options.minorTickType = "outside";
+                    createCategoryAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
+                        vertical: true
+                    });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     same($.map(view.log.line, function(line) { return line.y1; }),
@@ -418,8 +425,6 @@
 
                 test("line width 0 remove all ticks", function() {
                     categoryAxis.options.line.width = 0;
-                    categoryAxis.options.majorTickType = "outside";
-                    categoryAxis.options.minorTickType = "outside";
                     categoryAxis.getViewElements(view);
 
                     equal(view.log.line.length, 0);
@@ -457,17 +462,20 @@
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     $.each(view.log.line, function() {
-                            equal(this.x1, 34);
+                        equal(this.x1, 34);
                     });
                 });
 
                 test("minor ticks are aligned to axis", 5, function() {
-                    categoryAxis.options.majorTickType = "none",
-                    categoryAxis.options.minorTickType= "outside",
+                    createCategoryAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
+                        vertical: true
+                    });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     $.each(view.log.line, function() {
-                            equal(this.x1, 35);
+                        equal(this.x1, 34);
                     });
                 });
 
@@ -520,12 +528,16 @@
                 });
 
                 test("minor ticks are aligned to axis", 5, function() {
-                    categoryAxis.options.majorTickType = "none",
-                    categoryAxis.options.minorTickType= "outside",
+                    createCategoryAxis({
+                        majorTicks: { visible: false },
+                        minorTicks: { visible: true },
+                        labels: { mirror: true },
+                        vertical: true
+                    });
                     categoryAxis.getViewElements(view);
                     view.log.line.shift();
                     $.each(view.log.line, function() {
-                            equal(this.x1, 0);
+                        equal(this.x1, 0);
                     });
                 });
 
