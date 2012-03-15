@@ -463,7 +463,8 @@
                 */
                CHANGE,
                "dataBinding",
-               "dataBound"
+               "dataBound",
+               "select"
             ],
         setOptions: function(options) {
             List.fn.setOptions.call(this, options);
