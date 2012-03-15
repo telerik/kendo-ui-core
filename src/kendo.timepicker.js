@@ -104,6 +104,7 @@
         MS_PER_DAY = 86400000,
         SELECTED = "k-state-selected",
         STATEDISABLED = "k-state-disabled",
+        extend = $.extend,
         proxy = $.proxy,
         DATE = Date,
         TODAY = new DATE();
@@ -305,12 +306,12 @@
                 anchor = options.anchor,
                 width;
 
-            that.popup = new ui.Popup(list, {
+            that.popup = new ui.Popup(list, extend(options.popup, {
                 anchor: anchor,
                 open: options.open,
                 close: options.close,
                 animation: options.animation
-            });
+            }));
 
             width = anchor.outerWidth() - (list.outerWidth() - list.width());
 
@@ -472,7 +473,7 @@
 
             that._wrapper();
 
-            that.timeView = new TimeView($.extend({}, options, {
+            that.timeView = new TimeView(extend({}, options, {
                 anchor: that.wrapper,
                 format: options.format,
                 change: function(value, trigger) {
@@ -573,7 +574,7 @@
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
 
-            $.extend(this.timeView.options, options);
+            extend(this.timeView.options, options);
 
             this.timeView.refresh();
         },
