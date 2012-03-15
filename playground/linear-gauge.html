@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Radial Gauge</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.gauge.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+
+        <style>
+            #gauge, #gauge1 {
+                width: 200px;
+                height: 200px;
+                margin-left: 200px;
+                border: 1px solid red;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gauge"></div>
+        <div id="gauge1"></div>
+
+        <script>
+            $("#gauge").kendoLinearGauge({
+                theme:"default",
+                scale: {
+                    vertical: true
+                },
+
+                pointer: {
+                    value: 10,
+                    track: {
+                        color: "#000"
+                    },
+                    size: 12
+                }
+            });
+
+            $("#gauge1").kendoLinearGauge({
+                theme:"default",
+                scale: {
+                    vertical: false
+                },
+
+                pointer: {
+                    value: 10,
+                    track: {
+                        color: "#000"
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
