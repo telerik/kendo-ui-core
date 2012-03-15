@@ -328,6 +328,34 @@
 
                 ddl.ul.children().eq(0).trigger(CLICK);
             });
+
+            test("click item raises select event", 1, function() {
+                var dropdownlist = input.kendoDropDownList({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        ok(e.item);
+                    }
+                }).data("kendoDropDownList");
+
+                dropdownlist.ul.children().first().trigger(CLICK);
+            });
+
+            test("prevent select event should only close the popup", 2, function() {
+                var dropdownlist = input.kendoDropDownList({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        ok(true);
+                        e.preventDefault();
+                    },
+                    change: function() {
+                        ok(false);
+                    }
+                }).data("kendoDropDownList");
+
+                dropdownlist.ul.children().first().trigger(CLICK);
+
+                ok(!dropdownlist.popup.visible());
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

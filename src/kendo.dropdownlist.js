@@ -424,7 +424,8 @@
             */
             CHANGE,
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "select"
         ],
 
         setOptions: function(options) {
