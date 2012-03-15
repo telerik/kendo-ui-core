@@ -76,8 +76,13 @@
                     seriesColors: [ "#2b8abe", "#d7445c", "#45cd74", "#fb02b8" ],
 
                     valueAxis: {
+                        line: {
+                            visible: false
+                        },
+
                         labels: {
-                            format: "${0}"
+                            format: "${0}",
+                            color: "#727f8e"
                         }
                     },
 
@@ -86,7 +91,8 @@
 
                         labels: {
                             format: "{0:d}",
-                            step: 110
+                            step: 110,
+                            color: "#727f8e"
                         },
 
                         line: {
