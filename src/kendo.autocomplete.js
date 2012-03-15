@@ -462,9 +462,50 @@
             * });
                 */
                CHANGE,
+               /**
+               *
+               * Triggered when a Li element is selected.
+               *
+               * @name kendo.ui.AutoComplete#select
+               * @event
+               *
+               * @param {Event} e
+               *
+               * @param {jQuery} e.item
+               * The selected item chosen by a user.
+               *
+               * @exampleTitle Attach select event handler during initialization; detach via unbind()
+               * @example
+               * // event handler for select
+               * var onSelect = function(e) {
+               *     // access the selected item via e.item (jQuery object)
+               * };
+               *
+               * // attach select event handler during initialization
+               * var autocomplete = $("#autocomplete").kendoAutoComplete({
+               *     select: onSelect
+               * });
+               *
+               * // detach select event handler via unbind()
+               * autocomplete.data("kendoAutoComplete").unbind("select", onSelect);
+               *
+               * @exampleTitle Attach select event handler via bind(); detach via unbind()
+               * @example
+               * // event handler for select
+               * var onSelect = function(e) {
+               *     // access the selected item via e.item (jQuery object)
+               * };
+               *
+               * // attach select event handler via bind()
+               * $("#autocomplete").data("kendoAutoComplete").bind("select", onSelect);
+               *
+               * // detach select event handler via unbind()
+               * $("#autocomplete").data("kendoAutoComplete").unbind("select", onSelect);
+               *
+               */
+               "select",
                "dataBinding",
-               "dataBound",
-               "select"
+               "dataBound"
             ],
         setOptions: function(options) {
             List.fn.setOptions.call(this, options);

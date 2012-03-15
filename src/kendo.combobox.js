@@ -69,7 +69,7 @@
      *  appropriate for limited value options, while remote data binding is
      *  better for larger data sets. With remote binding, options will be
      *  loaded on-demand, similar to an
-     *  <a href="../autocomplete/index.html">AutoComplete</a>.
+     *  <a href="../combobox/index.html">combobox</a>.
      * </p>
      * @exampleTitle Binding to a remote OData service
      * @example
@@ -476,9 +476,50 @@
             * });
             */
             CHANGE,
+            /**
+            *
+            * Triggered when a Li element is selected.
+            *
+            * @name kendo.ui.ComboBox#select
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {jQuery} e.item
+            * The selected item chosen by a user.
+            *
+            * @exampleTitle Attach select event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler during initialization
+            * var combobox = $("#combobox").kendoComboBox({
+            *     select: onSelect
+            * });
+            *
+            * // detach select event handler via unbind()
+            * combobox.data("kendoComboBox").unbind("select", onSelect);
+            *
+            * @exampleTitle Attach select event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler via bind()
+            * $("#combobox").data("kendoComboBox").bind("select", onSelect);
+            *
+            * // detach select event handler via unbind()
+            * $("#combobox").data("kendoComboBox").unbind("select", onSelect);
+            *
+            */
+            "select",
             "dataBinding",
-            "dataBound",
-            "select"
+            "dataBound"
         ],
         setOptions: function(options) {
             Select.fn.setOptions.call(this, options);
@@ -960,7 +1001,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-arrow-down">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" combobox="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-arrow-down">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);
