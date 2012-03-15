@@ -5,6 +5,7 @@
                 <th>Product name</th>
                 <th>Product price</th>
                 <th>Units in stock</th>
+                <th>Delete product</th>
             </tr>
         </thead>
         <tbody data-template="row-template" data-bind="source: products">
@@ -14,8 +15,7 @@
     </table>
 
     <div class="configuration">
-        <span class="configHead">Configuration</span>
-        <span class="configTitle">Add a product</span>
+        <span class="configHead">Add a product</span>
         <ul class="options">
             <li>
                 <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" /></label>
@@ -29,9 +29,6 @@
             <li>
                 <button class="k-button" data-bind="click: addProduct">Add a new product</button>
             </li>
-            <li>
-                <button class="k-button" data-bind="click: removeProduct">Remove last product</button>
-            </li>
         </ul>
     </div>
 
@@ -43,6 +40,7 @@
                 #: kendo.toString(get("price"), "C") #
             </td>
             <td data-bind="text: unitsInStock"></td>
+            <td><button class="k-button" data-bind="click: deleteProduct">Delete</button></td>
         </tr>
     </script>
     <script id="footer-template" type="text/x-kendo-template">
@@ -53,7 +51,7 @@
             <td>
                 Total price: #: totalPrice() #
             </td>
-            <td>
+            <td colspan="2">
                 Total units in stock: #: totalUnitsInStock() #
             </td>
         </tr>
@@ -71,8 +69,16 @@
                     unitsInStock: parseFloat(this.get("productUnitsInStock"))
                 });
             },
-            removeProduct: function() {
-                this.get("products").pop();
+            deleteProduct: function(e) {
+                // the current data item (product) is passed as the "data" field of the event argument
+                var product = e.data;
+
+                var products = this.get("products");
+
+                var index = products.indexOf(product);
+
+                // remove the product by using the splice method
+                products.splice(index, 1);
             },
             total: function() {
                 return this.get("products").length;
@@ -109,40 +115,38 @@
     <div class="code-sample">
         <h4 class="code-title">View source code:</h4>
         <pre class="prettyprint">
-&lt;table&gt;
-    &lt;thead&gt;
-        &lt;tr&gt;
-            &lt;th&gt;Product name&lt;/th&gt;
-            &lt;th&gt;Product price&lt;/th&gt;
-            &lt;th&gt;Units in stock&lt;/th&gt;
-        &lt;/tr&gt;
-    &lt;/thead&gt;
-    &lt;tbody data-template=&quot;row-template&quot; data-bind=&quot;source: products&quot;&gt;&lt;/tbody&gt;
-    &lt;tfoot data-template=&quot;footer-template&quot; data-bind=&quot;source: this&quot;&gt;&lt;/tfoot&gt;
-&lt;/table&gt;
+&lt;div id=&quot;example&quot;&gt;
+    &lt;table&gt;
+        &lt;thead&gt;
+            &lt;tr&gt;
+                &lt;th&gt;Product name&lt;/th&gt;
+                &lt;th&gt;Product price&lt;/th&gt;
+                &lt;th&gt;Units in stock&lt;/th&gt;
+                &lt;th&gt;Delete product&lt;/th&gt;
+            &lt;/tr&gt;
+        &lt;/thead&gt;
+        &lt;tbody data-template=&quot;row-template&quot; data-bind=&quot;source: products&quot;&gt;&lt;/tbody&gt;
+        &lt;tfoot data-template=&quot;footer-template&quot; data-bind=&quot;source: this&quot;&gt;&lt;/tfoot&gt;
+    &lt;/table&gt;
 
-&lt;div&gt;
-    &lt;span&gt;Configuration&lt;/span&gt;
-    &lt;span&gt;Add a product&lt;/span&gt;
-    &lt;ul&gt;
-        &lt;li&gt;
-            &lt;label&gt;Name:&lt;input type=&quot;text&quot; data-bind=&quot;value: productName&quot; /&gt;&lt;/label&gt;
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;label&gt;Price:&lt;input type=&quot;number&quot; data-bind=&quot;value: productPrice&quot; /&gt;&lt;/label&gt;
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;label&gt;Units in stock:&lt;input type=&quot;number&quot; data-bind=&quot;value: productUnitsInStock&quot; /&gt;&lt;/label&gt;
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;button class=&quot;k-button&quot; data-bind=&quot;click: addProduct&quot;&gt;Add a new product&lt;/button&gt;
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;button class=&quot;k-button&quot; data-bind=&quot;click: removeProduct&quot;&gt;Remove last product&lt;/button&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;
+    &lt;div&gt;
+        &lt;span&gt;Add a product&lt;/span&gt;
+        &lt;ul&gt;
+            &lt;li&gt;
+                &lt;label&gt;Name:&lt;input type=&quot;text&quot; placeholder=&quot;Enter name&quot; data-bind=&quot;value: productName&quot; /&gt;&lt;/label&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;label&gt;Price:&lt;input type=&quot;number&quot; placeholder=&quot;Enter number&quot; data-bind=&quot;value: productPrice&quot; /&gt;&lt;/label&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;label&gt;Units in stock:&lt;input type=&quot;number&quot; placeholder=&quot;Enter number&quot; data-bind=&quot;value: productUnitsInStock&quot; /&gt;&lt;/label&gt;
+            &lt;/li&gt;
+            &lt;li&gt;
+                &lt;button data-bind=&quot;click: addProduct&quot;&gt;Add a new product&lt;/button&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;script id=&quot;row-template&quot; type=&quot;text/x-kendo-template&quot;&gt;
     &lt;tr&gt;
         &lt;td data-bind=&quot;text: name&quot;&gt;
@@ -151,17 +155,18 @@
             #: kendo.toString(get(&quot;price&quot;), &quot;C&quot;) #
         &lt;/td&gt;
         &lt;td data-bind=&quot;text: unitsInStock&quot;&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;button data-bind=&quot;click: deleteProduct&quot;&gt;Delete&lt;/button&gt;&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/script&gt;
 &lt;script id=&quot;footer-template&quot; type=&quot;text/x-kendo-template&quot;&gt;
     &lt;tr&gt;
         &lt;td&gt;
-            Total number or products: #: total() #
+            Total number of products: #: total() #
         &lt;/td&gt;
         &lt;td&gt;
             Total price: #: totalPrice() #
         &lt;/td&gt;
-        &lt;td&gt;
+        &lt;td colspan=&quot;2&quot;&gt;
             Total units in stock: #: totalUnitsInStock() #
         &lt;/td&gt;
     &lt;/tr&gt;
@@ -182,8 +187,16 @@ var viewModel = kendo.observable({
             unitsInStock: parseFloat(this.get(&quot;productUnitsInStock&quot;))
         });
     },
-    removeProduct: function() {
-        this.get(&quot;products&quot;).pop();
+    deleteProduct: function(e) {
+        // the current data item (product) is passed as the &quot;data&quot; field of the event argument
+        var product = e.data;
+
+        var products = this.get(&quot;products&quot;);
+
+        var index = products.indexOf(product);
+
+        // remove the product by using the splice method
+        products.splice(index, 1);
     },
     total: function() {
         return this.get(&quot;products&quot;).length;
@@ -215,7 +228,7 @@ var viewModel = kendo.observable({
 });
 
 kendo.bind($(&quot;#example&quot;), viewModel);
-        </pre>
+</pre>
     </div>
     <style scoped>
         #products {
