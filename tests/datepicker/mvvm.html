@@ -205,6 +205,106 @@
 
                 ok(dom.is(":disabled"));
             });
+
+            test("binding visible to false hides the widget", function() {
+                var dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding visible to true shows the widget", function() {
+                var dom = $('<input data-bind="visible:visible" data-role="datepicker" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing visible to false hides the widget", function() {
+                var dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", false);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing visible to true shows the widget", function() {
+                var dom = $('<input data-bind="visible:visible" data-role="datepicker"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", true);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("binding invisible to true hides the widget", function() {
+                var dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("binding invisible to false shows the widget", function() {
+                var dom = $('<input data-bind="invisible:invisible" data-role="datepicker" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("changing invisible to true hides the widget", function() {
+                var dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", true);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("changing invisible to false shows the widget", function() {
+                var dom = $('<input data-bind="invisible:invisible" data-role="datepicker"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", false);
+
+                ok(dom.data("kendoDatePicker").wrapper.css("display") != "none", "display is not 'none'");
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>
