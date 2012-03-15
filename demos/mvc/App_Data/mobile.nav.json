@@ -19,7 +19,12 @@
                 {
                     "text": "Overview",
                     "url": "application/index.html"
+                },
+                {
+                    "text": "Loading popup",
+                    "url": "application/loadingpopup.html"
                 }
+
             ]
         },
         {
