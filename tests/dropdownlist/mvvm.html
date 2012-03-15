@@ -431,6 +431,40 @@
                 ok(dom.data("kendoDropDownList").wrapper.css("display") != "none", "Display is not 'none'");
             });
 
+            test("selecting the default value sets the view model field to null", function() {
+                var dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-placeholder="placeholder"/>');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}],
+                    bar: null
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoDropDownList").select(1);
+                dom.data("kendoDropDownList").trigger("change");
+
+                dom.data("kendoDropDownList").select(0);
+                dom.data("kendoDropDownList").trigger("change");
+                strictEqual(observable.bar, null);
+            });
+
+            test("selecting the default value sets the view model field to emtpy string", function() {
+                var dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-placeholder="placeholder"/>');
+
+                var observable = kendo.observable({
+                    items: [{text:"foo"}, {text:"bar"}],
+                    bar: ""
+                });
+
+                kendo.bind(dom, observable);
+                dom.data("kendoDropDownList").select(1);
+                dom.data("kendoDropDownList").trigger("change");
+
+                dom.data("kendoDropDownList").select(0);
+                dom.data("kendoDropDownList").trigger("change");
+                strictEqual(observable.bar, "");
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
