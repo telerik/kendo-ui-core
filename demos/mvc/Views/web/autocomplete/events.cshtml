@@ -28,6 +28,13 @@
                         }
                     };
 
+                    function onSelect(e) {
+                        if ("kendoConsole" in window) {
+                            var dataItem = this.dataItem(e.item.index());
+                            kendoConsole.log("event :: select (" + dataItem + ")" );
+                        }
+                    };
+
                     var data = [
                             "Alabama",
                             "Alaska",
@@ -89,6 +96,7 @@
 
                     $("#products").kendoAutoComplete({
                         dataSource: data,
+                        select: onSelect,
                         change: onChange,
                         close: onClose,
                         open: onOpen
