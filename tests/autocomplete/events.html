@@ -215,6 +215,37 @@
                 autocomplete.search();
                 autocomplete._accept(autocomplete.ul.eq(0));
             });
+
+            test("click item raises select event", 1, function() {
+                var autocomplete = input.kendoAutoComplete({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        ok(e.item);
+                    }
+                }).data("kendoAutoComplete");
+
+                input.focus().val("f");
+                autocomplete.search();
+                autocomplete.ul.children().first().trigger(CLICK);
+            });
+
+            test("prevent select event should only close the popup", function() {
+                var autocomplete = input.kendoAutoComplete({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        e.preventDefault();
+                    },
+                    change: function() {
+                        ok(false);
+                    }
+                }).data("kendoAutoComplete");
+
+                input.focus().val("f");
+                autocomplete.search();
+                autocomplete.ul.children().first().trigger(CLICK);
+
+                ok(!autocomplete.popup.visible());
+            });
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

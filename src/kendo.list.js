@@ -152,6 +152,11 @@
         _focus: function(li) {
             var that = this;
 
+            if (that.trigger(SELECT, {item: li})) {
+                that.close();
+                return;
+            }
+
             that._select(li);
             that._blur();
         },
@@ -253,7 +258,7 @@
                 template = options.template,
                 hasDataSource = options.dataSource;
 
-            if (that.element.is("select") && that.element[0].length) {
+            if (that.element.is(SELECT) && that.element[0].length) {
                 if (!hasDataSource) {
                     options.dataTextField = options.dataTextField || "text";
                     options.dataValueField = options.dataValueField || "value";
