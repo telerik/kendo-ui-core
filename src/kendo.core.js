@@ -2463,9 +2463,18 @@
         }
     });
 
+    /**
+     * Enables kinetic scrolling on touch devices
+     * @name kendo.touchScroller
+     * @function
+     * @param {Selector} element The container element to enable scrolling for.
+     */
     kendo.touchScroller = function(element) {
         if (support.touch && kendo.mobile.ui.Scroller) {
             element.kendoMobileScroller();
+            return element.data("kendoMobileScroller");
+        } else {
+            return false;
         }
     }
 })(jQuery);
