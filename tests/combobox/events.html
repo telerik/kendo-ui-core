@@ -441,6 +441,36 @@
 
                 combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.UP, altKey: true } );
             });
+
+            test("click item raises select event", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        ok(e.item);
+                    }
+                }).data("kendoComboBox");
+
+                combobox.open();
+                combobox.ul.children().first().trigger(CLICK);
+            });
+
+            test("prevent select event should only close the popup", 2, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["foo"],
+                    select: function(e) {
+                        ok(true);
+                        e.preventDefault();
+                    },
+                    change: function() {
+                        ok(false);
+                    }
+                }).data("kendoComboBox");
+
+                combobox.open();
+                combobox.ul.children().first().trigger(CLICK);
+
+                ok(!combobox.popup.visible());
+            });
        </script>
        <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

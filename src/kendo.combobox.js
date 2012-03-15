@@ -477,7 +477,8 @@
             */
             CHANGE,
             "dataBinding",
-            "dataBound"
+            "dataBound",
+            "select"
         ],
         setOptions: function(options) {
             Select.fn.setOptions.call(this, options);
@@ -851,8 +852,7 @@
                 }
 
                 that._old = that._accessor();
-                //check
-                //that._oldIndex = that.selectedIndex;
+                that._oldIndex = that.selectedIndex;
             } else {
                 return that._accessor();
             }
