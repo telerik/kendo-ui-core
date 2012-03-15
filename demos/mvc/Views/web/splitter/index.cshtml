@@ -1,34 +1,39 @@
 
         <div id="example" class="k-content">
-            <div id="vertical" style="height: 300px">
-                <div>
-                    <p>
-                        Outer splitter : top pane (resizable and collapsible)
-                    </p>
-                </div>
-                <div>
+            <div id="vertical">
+                <div id="top-pane">
                     <div id="horizontal" style="height: 100%; width: 100%;">
-                        <div>
-                            <p>
-                                Inner splitter :: left pane
-                            </p>
+                        <div id="left-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / left pane</h3>
+                                <p>Resizable and collapsible.</p>
+                            </div>
                         </div>
-                        <div>
-                            <p>
-                                Inner splitter :: center pane
-                            </p>
+                        <div id="center-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / center pane</h3>
+                                <p>Resizable only.</p>
+                            </div>
                         </div>
-                        <div>
-                            <p>
-                                Inner splitter :: right pane
-                            </p>
+                        <div id="right-pane">
+                            <div class="pane-content">
+                                <h3>Inner splitter / right pane</h3>
+                                <p>Resizable and collapsible.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <p>
-                        Outer splitter : bottom pane (non-resizable, non-collapsible)
-                    </p>
+                <div id="middle-pane">
+                    <div class="pane-content">
+                        <h3>Outer splitter / middle pane</h3>
+                        <p>Resizable only.</p>
+                    </div>
+                </div>
+                <div id="bottom-pane">
+                    <div class="pane-content">
+                        <h3>Outer splitter / bottom pane</h3>
+                        <p>Non-resizable and non-collapsible.</p>
+                    </div>
                 </div>
             </div>
 
@@ -37,20 +42,45 @@
                     $("#vertical").kendoSplitter({
                         orientation: "vertical",
                         panes: [
-                            { collapsible: true, size: "100px" },
                             { collapsible: false },
-                            { collapsible: false, resizable: false, size: "20%" }
+                            { collapsible: false, size: "100px" },
+                            { collapsible: false, resizable: false, size: "100px" }
                         ]
                     });
 
                     $("#horizontal").kendoSplitter({
                         panes: [
-                            { collapsible: true, size: "150px" },
+                            { collapsible: true, size: "220px" },
                             { collapsible: false },
-                            { collapsible: true, size: "20%" }
+                            { collapsible: true, size: "220px" }
                         ]
                     });
                 });
             </script>
 
+            <style scoped>
+                #vertical {
+                	height: 380px;
+                	width: 700px;
+                	margin: 0 auto;
+                }
+                #middle-pane {
+                	background-color: rgba(60, 70, 80, 0.10);
+                }
+                #bottom-pane {
+                	background-color: rgba(60, 70, 80, 0.15);
+                }
+                #left-pane {
+                	background-color: rgba(60, 70, 80, 0.05);
+                }
+                #center-pane {
+                	background-color: rgba(60, 70, 80, 0.05);
+                }
+                #right-pane {
+                	background-color: rgba(60, 70, 80, 0.05);
+                }
+                .pane-content {
+                	padding: 0 10px;
+                }
+            </style>
         </div>
