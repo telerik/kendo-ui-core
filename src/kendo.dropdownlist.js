@@ -15,7 +15,7 @@
      * </p>
      * <p>
      *  If you want to allow user input, use the
-     *  <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
+     *  <a href="../dropdownlist/index.html" title="Kendo UI dropdownlist">Kendo UI dropdownlist</a>.
      * </p>
      * <h3>Getting Started</h3>
      * <p>There are two basic ways to create a <strong>DropDownList</strong>:</p>
@@ -423,9 +423,50 @@
             * });
             */
             CHANGE,
+            /**
+            *
+            * Triggered when a Li element is selected.
+            *
+            * @name kendo.ui.DropDownList#select
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {jQuery} e.item
+            * The selected item chosen by a user.
+            *
+            * @exampleTitle Attach select event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler during initialization
+            * var dropdownlist = $("#dropdownlist").kendoDropDownList({
+            *     select: onSelect
+            * });
+            *
+            * // detach select event handler via unbind()
+            * dropdownlist.data("kendoDropDownList").unbind("select", onSelect);
+            *
+            * @exampleTitle Attach select event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler via bind()
+            * $("#dropdownlist").data("kendoDropDownList").bind("select", onSelect);
+            *
+            * // detach select event handler via unbind()
+            * $("#dropdownlist").data("kendoDropDownList").unbind("select", onSelect);
+            *
+            */
+            "select",
             "dataBinding",
-            "dataBound",
-            "select"
+            "dataBound"
         ],
 
         setOptions: function(options) {
