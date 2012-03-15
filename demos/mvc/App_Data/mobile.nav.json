@@ -21,8 +21,8 @@
                     "url": "application/index.html"
                 },
                 {
-                    "text": "Show/Hide Loading Animation",
-                    "url": "application/loadinganimation.html"
+                    "text": "Loading popup",
+                    "url": "application/loadingpopup.html"
                 }
 
             ]
