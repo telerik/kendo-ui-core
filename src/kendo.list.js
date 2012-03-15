@@ -84,6 +84,20 @@
             }
         },
 
+        dataItem: function(index) {
+            var that = this;
+
+            if (index === undefined) {
+                index = that.selectedIndex;
+            }
+
+            if (index > -1) {
+                return that.dataSource.view()[index];
+            } else {
+                return null;
+            }
+        },
+
         _accessors: function() {
             var that = this,
                 element = that.element,
@@ -342,7 +356,6 @@
             this._selectItem();
         },
 
-
         /**
         * Closes the drop-down list.
         * @example
@@ -353,17 +366,6 @@
         */
         close: function() {
             this.popup.close();
-        },
-
-        dataItem: function() {
-            var that = this,
-                index = that.selectedIndex;
-
-            if (index > -1) {
-                return that.dataSource.view()[index];
-            } else {
-                return null;
-            }
         },
 
         _accessor: function(value, idx) {
