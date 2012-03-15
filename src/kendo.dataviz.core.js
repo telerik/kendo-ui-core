@@ -1730,6 +1730,64 @@
         }
     });
 
+    var BarAnimation = ElementAnimation.extend({
+        options: {
+            easing: SWING,
+            above: true
+        },
+
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                points = element.points,
+                options = element.options,
+                axis = options.vertical ? Y : X,
+                stackBase = options.stackBase,
+                aboveAxis = options.aboveAxis || true,
+                startPosition,
+                endState = anim.endState = {
+                    top: points[0].y,
+                    right: points[1].x,
+                    bottom: points[3].y,
+                    left: points[0].x
+                };
+
+            if (axis === Y) {
+                startPosition = defined(stackBase) ? stackBase :
+                    endState[aboveAxis ? BOTTOM : TOP];
+            } else {
+                startPosition = defined(stackBase) ? stackBase :
+                    endState[aboveAxis ? LEFT : RIGHT];
+            }
+
+            anim.startPosition = startPosition;
+
+            updateArray(points, axis, startPosition);
+        },
+
+        step: function(pos) {
+            var anim = this,
+                startPosition = anim.startPosition,
+                endState = anim.endState,
+                element = anim.element,
+                points = element.points;
+
+            if (element.options.vertical) {
+                points[0].y = points[1].y =
+                    interpolateValue(startPosition, endState.top, pos);
+
+                points[2].y = points[3].y =
+                    interpolateValue(startPosition, endState.bottom, pos);
+            } else {
+                points[0].x = points[3].x =
+                    interpolateValue(startPosition, endState.left, pos);
+
+                points[1].x = points[2].x =
+                    interpolateValue(startPosition, endState.right, pos);
+            }
+        }
+    });
+
     function animationDecorator(animationName, animationType) {
         return Class.extend({
             init: function(view) {
@@ -2114,6 +2172,15 @@
         return a - b;
     }
 
+    function updateArray(arr, prop, value) {
+        var i,
+            length = arr.length;
+
+        for(i = 0; i < length; i++) {
+            arr[i][prop] = value;
+        }
+    }
+
     // Exports ================================================================
     deepExtend(kendo.dataviz, {
         init: function(element) {
@@ -2169,6 +2236,7 @@
         Color: Color,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
+        BarAnimation: BarAnimation,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         NumericAxis: NumericAxis,
