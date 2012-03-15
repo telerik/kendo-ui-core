@@ -754,7 +754,7 @@
                 this.widget.bind("change", this._change);
 
                 var value = this.bindings.value.get();
-                this._valueIsObservableObject = value === undefined || value === null || value instanceof ObservableObject;
+                this._valueIsObservableObject = value == null || value instanceof ObservableObject;
             },
 
             change: function() {
@@ -771,19 +771,22 @@
                         source = this.bindings.source.get();
                     }
 
-                    if (!source || source instanceof kendo.data.DataSource) {
-                        source = this.widget.dataSource.view();
-                    }
+                    if (value === "" && isObservableObject) {
+                        value = null;
+                    } else {
+                        if (!source || source instanceof kendo.data.DataSource) {
+                            source = this.widget.dataSource.view();
+                        }
 
-
-                    for (idx = 0, length = source.length; idx < length; idx++) {
-                        if (source[idx].get(field) == value) {
-                            if (isObservableObject) {
-                                value = source[idx];
-                            } else {
-                                value = source[idx].get(field);
+                        for (idx = 0, length = source.length; idx < length; idx++) {
+                            if (source[idx].get(field) == value) {
+                                if (isObservableObject) {
+                                    value = source[idx];
+                                } else {
+                                    value = source[idx].get(field);
+                                }
+                                break;
                             }
-                            break;
                         }
                     }
                 }
