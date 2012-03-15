@@ -147,6 +147,106 @@
 
                 dom.data("kendoMobileSwitch").trigger("change");
             });
+
+            test("binding visible to false hides the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="visible:visible"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding visible to true shows the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="visible:visible" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing visible to false hides the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="visible:visible"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("visible", false);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing visible to true shows the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="visible:visible"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("visible", true);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("binding invisible to true hides the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("binding invisible to false shows the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="invisible:invisible" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("changing invisible to true hides the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("invisible", true);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("changing invisible to false shows the widget", function() {
+                var dom = $('<input data-role="switch" data-bind="invisible:invisible"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("invisible", false);
+
+                ok(dom.data("kendoMobileSwitch").wrapper.css("display") != "none", "display is not 'none'");
+            });
         </script>
     </body>
 </html>
