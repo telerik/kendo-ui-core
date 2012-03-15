@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
     @foreach (string styleName in ViewBag.styles) {
     <link href="@Url.Style(styleName)" rel="@(styleName.ToLowerInvariant().EndsWith("less") ? "stylesheet/less" : "stylesheet")" />
@@ -21,52 +22,69 @@
 <body>
     @Html.Partial("Header")
 
-    <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
-        <div id="topNav">
-            @foreach (string category in ViewBag.Navigation.Keys)
+    <div class="demos-nav widgetGrid">
+        <div class="centerWrap floatWrap">
+
+        @foreach (string category in ViewBag.Navigation.Keys)
+        {
+            if (ViewBag.Navigation.Keys.Count > 1)
             {
-                if (ViewBag.Navigation.Keys.Count > 1)
-                {
-                    <h3>@category</h3>
-                }
-                <ul>
-                    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-                    {
-                        if (widget.Name != "overview")
+                <div class="wideCol floatWrap">
+                    <h2>@category</h2>
+                    <ul>
+                        @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                         {
-                            <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
-                                <a class="k-link @(ViewBag.Section == widget.Name ? "chosen" : "")"
-                                    href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
-                            </li>
+                            if (widget.Name != "overview")
+                            {
+                                <li class="@(ViewBag.Section == widget.Name ? "active" : "")">
+                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
+                                </li>
+                            }
                         }
+                    </ul>
+                </div>
+            }
+        }
+        </div>
+    </div>
+
+    <div class="centerWrap floatWrap" id="mainWrap">
+
+        @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
+        <div id="themeWrap">
+            <p class="choose-theme">Choose Theme:</p>
+            <ul id="themeChooser"><li></li></ul>
+        </div>
+        }
+
+        <div id="mainWrapInner" class="floatWrap clear">
+            <div id="examples-nav">
+
+            @if (ViewBag.CurrentWidget.Name != "overview")
+            {
+                @Html.Partial("Pager");
+
+                <ul id="examples-list">
+                    @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+                    {
+                    <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
+                        <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                    </li>
                     }
                 </ul>
             }
-        </div>
+
+            @if (ViewBag.suite == "mobile")
+            {
+                <p id="qrWrap">Open this demo with an iOS/Android mobile device for a full experience. <a href="#" id="qr"><span class="k-icon k-qr"></span><em>Show QR Code</em></a></p>
+                <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
+            }
+
+                <a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui">Get KendoUI</a>
+            </div>
 
         @if (ViewBag.CurrentWidget.Name != "overview")
         {
-
-            @Html.Partial("Pager");
-
-            <div id="navWrap">
-                <ul class="nav">
-                    @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
-                    {
-                        <li class="@(Request.Path.EndsWith(example.Url) ? "k-state-active k-state-highlighted" : "")">
-                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "k-state-selected chosen" : "")"
-                                href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
-                        </li>
-                    }
-                </ul>
-
-                @if (ViewBag.suite == "mobile")
-                {
-                    <p id="qrWrap">Open this demo with an iOS/Android mobile device for a full experience. <a href="#" id="qr"><span class="k-icon k-qr"></span><em>Show QR Code</em></a></p>
-                    <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
-                }
-            </div>
-
             if (ViewBag.suite == "mobile")
             {
                 <div class="configuration mobileConfiguration">
@@ -83,14 +101,11 @@
             }
         }
 
-        @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
-            <div id="examplesThemeChooser">
-                <label for="skinSelector">Theme</label>
-                <ul id="skinSelector" class="themeChooser" />
-            </div>
-        }
 
         @RenderBody()
+
+        </div>
+
     </div>
 
     @Html.Partial("Footer")

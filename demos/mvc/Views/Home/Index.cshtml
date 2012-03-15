@@ -3,190 +3,187 @@
 }
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta content="width=device-width" name="viewport">
-        <meta charset="utf-8">
-        <title>KendoUI Demos</title>
-        <link rel="shortcut icon" href="@Url.Content("~/content/shared/styles/favicon.ico")"/>
-        <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
-        @Html.Partial("GoogleAnalytics")
-    </head>
-    <body class="overview">
-        <div id="exceptFooterWrap">
-        <div id="exceptFooter">
-            <div id="header">
-                <div id="navi-back">
-                    <div class="centerWrap">
-                        <div id="navi-top">
-                            <ul>
-                                <li><a title="" href="http://www.kendoui.com/blogs">Blogs</a></li>
-                                <li><a title="" href="http://www.kendoui.com/forums">Forums</a></li>
-                                <li><a title="" href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
-                                <li><a title="" href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
-                                <li><a title="" href="http://www.kendoui.com/about">About</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="centerWrap">
-                    <h1><a id="logo" href="http://www.kendoui.com">Kendo</a></h1>
-                    <div id="navi">
-                        <ul>
-                            <li style="margin-left: 0;"><a accesskey="1" title="Link to home page" href="http://www.kendoui.com/web">Web</a></li>
-                            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
-                            <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
-                            <li class="active">
-                                <a href="http://demos.kendoui.com">Demos</a>
-                                <em class="shadow"></em>
-                                <em></em>
-                            </li>
-                            <li><a id="download" onclick="_gaq.push(['_trackPageview','/download-button']);" href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+<head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta content="width=device-width" name="viewport">
+    <meta charset="utf-8">
+    <title>KendoUI Demos</title>
+    <link rel="shortcut icon" href="@Url.Content("~/content/shared/styles/favicon.ico")"/>
+    <link href="@Url.Content("~/content/shared/styles/examples.css")" rel="stylesheet" />
+    @Html.Partial("GoogleAnalytics")
+</head>
+<body class="overview">
 
-            <div id="flowerWrap">
-                <div class="flowers">
-                    <div class="centerWrap">
-                        <div class="learnBlock">
-                            <h1>See Kendo UI in action</h1>
-                            Explore the dozens of examples to learn key features and<br />
-                            techniques. Review the sample code, relevant CSS styles,<br />
-                            methods and events. Switch themes to alter the look-and-feel.<br />
-                            <a class="bigButton" href="web/">Launch Demos</a>
-                        </div>
-                        <img src="@Url.Content("~/content/shared/styles/overview.png")" alt="Kendo UI Overview" />
-                        <a href="http://demos.kendoui.com/beta/web/" class="beta-ribbon">Q1 2012 Beta, Available NOW</a>
-                    </div>
-                </div>
-            </div>
+<div id="header">
+    <div class="centerWrap floatWrap">
+        <h1><a href="http://www.kendoui.com/" id="logo">KendoUI - the Art of Web Development</a></h1>
+        <ul class="main-nav">
+            <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
+            <li><a href="http://www.kendoui.com/forums">Forums</a></li>
+            <li><a href="http://www.kendoui.com/blogs">Documentation</a></li>
+            <li><a href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
+            <li><a href="http://www.kendoui.com/roadmap">Roadmap</a></li>
+            <li><a href="http://www.kendoui.com/faq" title="Frequently Asked Questions">FAQ</a></li>
+            <li><a href="http://www.kendoui.com/blogs">Search</a></li>
+        </ul>
 
-            <div id="navmainWrap" class="floatWrap centerWrap">
-                <div id="main">
-                    <div id="exampleWrap">
-                        <div id="example" class="k-content">
-                            <ul class="itemsOutline">
-                                <li class="web-box">
-                                    <h2><a href="web/"><strong>Kendo UI</strong> Web Widgets &amp; Framework</a></h2>
-                                    Learn how to use each of the Kendo UI widgets, including quick API reference
-                                    <a href="web/">Web demos &raquo;</a>
-                                </li>
-                                <li class="dataviz-box">
-                                    <h2><a href="dataviz/"><strong>Kendo UI</strong> DataViz Widgets</a></h2>
-                                    Render high-quality data visualizations in the browser using SVG &amp; VML.
-                                    <a href="dataviz/">DataViz demos &raquo;</a>
-                                </li>
-                                <li class="mobile-box">
-                                    <h2><a href="mobile/"><strong>Kendo UI</strong> Mobile Widgets</a></h2>
-                                    Native UI widgets for building HTML5- powered apps and sites for modern mobile devices.
-                                    <a href="mobile/">Mobile Demos &raquo;</a>
-                                </li>
-                            </ul>
+        <ul class="kendo-nav">
+            <li><a href="http://www.kendoui.com/web">Web</a></li>
+            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+            <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+            <li class="active"><a href="http://demos.kendoui.com/">Demos</a></li>
+            <li><a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Get KendoUI</a></li>
+        </ul>
+    </div>
+</div>
 
-                            <div class="floatWrap feature themebuilder-box">
-                                <a href="themebuilder/" class="launch-image">
-                                    <img src="@Url.Content("~/content/shared/styles/themebuilder.png")" alt="ThemeBuilder" />
-                                </a>
-                                <h2>ThemeBuilder</h2>
-                                <p>The ThemeBuilder is a powerful visual tool for quickly customizing the look-and-feel of Kendo UI widgets. Using a simple
-                                point-and-click configuration wizard, anyone can transform Kendo UI CSS to precisely match their site stylesheet. The ThemeBuilder
-                                can also be used to directly modify the styles of Kendo UI widgets as they exist in your sites and apps with an easy to use
-                                a bookmarklet.</p>
-                                <a href="themebuilder/" class="launch-button">Try it now!</a>
-                            </div>
+<div id="banner">
+    <div id="bannerInner">
+        <div class="centerWrap">
+            <h1>See KendoUI in action</h1>
 
-                            <div class="floatWrap feature sushi-box">
-                                <a href="@Url.Content("~/mobile/simulator/")" class="launch-image">
-                                    <img src="@Url.Content("~/content/shared/styles/sushi.png")" alt="Sushi" />
-                                </a>
-                                <h2>Sushi</h2>
-                                <p>Native UI widgets for building HTML5-powered apps and sites for modern mobile devices.
-                                   Making your mobile user interface touch responsive and with native look and feel.
-                                Only Webkit based browsers are fully supported.</p>
-                                <a href="@Url.Content("~/mobile/simulator/")" class="launch-button">Launch</a>
-                            </div>
-
-                            <div class="floatWrap feature xview-box">
-                                <a href="http://demos.telerik.com/teampulse-demo/xview" class="launch-image">
-                                    <img src="@Url.Content("~/content/shared/styles/xview.png")" alt="Cross-project Dashboard - TeamPulse xView&trade;" />
-                                </a>
-                                <h2>Cross-project Dashboard - TeamPulse xView&trade;</h2>
-                                <p>TeamPulse xView&trade; is a powerful tracking and analytics tool that helps you identify project hot spots with a single glance. The tool alerts users about potential problems like late work, blocking bugs, excessive workload thus allowing you to address those issues as early as possible and keep your projects on track. TeamPulse xView™ uses the following Kendo UI Web controls: Chart, Grid, TreeView, DropDownList, NumericTextBox, TabStrip. The tool comes as an extension of Telerik’s project management solution TeamPulse.</p>
-                                <a href="http://demos.telerik.com/teampulse-demo/xview" class="launch-button">Try it now!</a>
-                            </div>
-
-                            <div class="floatWrap feature aeroviewr-box">
-                                <a href="http://www.kendoui.com/aeroviewr/" class="launch-image">
-                                    <img src="@Url.Content("~/content/shared/styles/aeroviewr.png")" alt="AeroViewr" />
-                                </a>
-                                <h2>Aeroviewr</h2>
-                                <p>This rich HTML5 integration demo shows Kendo UI in action to interact with Flickr photo streams. The demo features several Kendo UI
-                                controls, Kendo UI DataSource, and other Kendo UI framework elements. Check it out online and in mobile browsers to see how Kendo UI helps
-                                create universally accessible apps.</p>
-                                <a href="http://www.kendoui.com/aeroviewr/" class="launch-button">Launch</a>
-                            </div>
-
-                            <div style="text-align:center;">
-                                <div class="overview-box mobile-info">
-                                    <h2>Mobile Device Compatibility</h2>
-                                    <p>Kendo UI is built to work seamlessly across desktop browsers and mobile touchscreen devices. Kendo UI offers full support for touch
-                                    interactions and is tested against the following mobile platform browsers:</p>
-                                    <ul>
-                                        <li>Android 2.0+</li>
-                                        <li>iOS 3.0+</li>
-                                        <li>BlackBerry OS 6.0+</li>
-                                        <li>webOS 2.2+</li>
-                                    </ul>
-                                    <p style="background-image: none;">
-                                        Kendo UI Mobile Beta currently supports <br />
-                                        <b>iOS 3.0+</b> and <b>Android 2.0+</b>.
-                                    </p>
-                                </div>
-
-                                <div class="overview-box browser-info">
-                                    <h2>Supported browsers</h2>
-                                    <ul>
-                                        <li>Internet Explorer 7+</li>
-                                        <li>Firefox 3+</li>
-                                        <li>Safari 4+</li>
-                                        <li>Chrome</li>
-                                        <li>Opera 10+</li>
-                                    </ul>
-                                    <p>Please note that Internet Explorer Quirksmode is not supported as it uses IE 5.5 rendering engine. Always specify <a href="http://reference.sitepoint.com/html/doctypes">DOCTYPE</a> on your pages!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>Explore the dozens of examples to learn key features and techniques. Review the sample code, relevant CSS styles, methods and events.
+            Switch themes to alter the look-and-feel.</p>
         </div>
-        </div>
+    </div>
+</div>
 
-        <div id="footer">
-        <div class="floatWrap centerWrap">
+<div class="suite-demos-nav">
+    <ul class="centerWrap floatWrap">
+        <li class="active"><a href="#">Overview</a></li>
+        <li><a href="web/">Web Demos</a></li>
+        <li><a href="mobile/">Mobile Demos</a></li>
+        <li><a href="dataviz/">DataViz Demos</a></li>
+        <li><a href="themebuilder/">ThemeBuilder</a></li>
+    </ul>
+</div>
+
+<div class="demos-nav">
+    <div class="centerWrap floatWrap">
+        <div class="box">
+            <a href="web/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-web.png")" alt="Web Demos" /></a>
+            <h2><a href="web/">Web Demos</a></h2>
+            <p>Learn how to use each of the KendoUI widgets, including quick API reference.</p>
+        </div>
+        <div class="box">
+            <a href="mobile/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-mobile.png")" alt="Mobile Demos" /></a>
+            <h2><a href="mobile/">Mobile Demos</a></h2>
+            <p>Native UI widgets for building HTML5-powered apps and sites for modern mobile devices.</p>
+        </div>
+        <div class="box">
+            <a href="dataviz/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/demos-dataviz.png")" alt="DataViz Demos" /></a>
+            <h2><a href="dataviz/">DataViz Demos</a></h2>
+            <p>Render high-quality data visualizations in the browser using SVG &amp; VML.</p>
+        </div>
+    </div>
+</div>
+
+<div class="centerWrap floatWrap">
+
+    <h2>KendoUI Tools and Integration Examples</h2>
+
+    <div class="box">
+        <a href="themebuilder/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/themebuilder.png")" alt="ThemeBuilder" /></a>
+        <h3><a href="themebuilder/">ThemeBuilder</a></h3>
+        <p>The ThemeBuilder is a powerful visual tool for quickly customizing the look-and-feel of KendoUI widgets.</p>
+        <p>Using a simple point-and-click configuration wizard, anyone can transform KendoUI CSS to precisely match their site stylesheet.</p>
+        <p>The ThemeBuilder can also be used to directly modify the styles of KendoUI widgets as they exist in your sites and apps with an easy to use a bookmarklet.</p>
+    </div>
+    <div class="box">
+        <a href="http://www.kendoui.com/aeroviewr/" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/aeroviewr.png")" alt="AeroViewr" /></a>
+        <h3><a href="http://www.kendoui.com/aeroviewr/">AeroViewr</a></h3>
+        <p>This rich HTML5 integration demo shows KendoUI in action to interact with Flickr photo streams.</p>
+        <p>The demo features several KendoUI controls, KendoUI DataSource, and other KendoUI framework elements.</p>
+        <p>Check it out online and in mobile browsers to see how KendoUI helps create universally accessible apps.</p>
+    </div>
+    <div class="box new">
+        <a href="@Url.Content("~/mobile/simulator/")" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/sushi.png")" alt="Sushi" /></a>
+        <h3><a href="@Url.Content("~/mobile/simulator/")">Sushi</a></h3>
+        <p>Native UI widgets for building HTML5-powered apps and sites for modern mobile devices. Making your mobile user interface touch responsive and with native look and feel.</p>
+        <p><em>Only Webkit based browsers are fully supported.</em></p>
+    </div>
+
+    <div class="box clear widebox floatWrap new">
+        <a href="http://demos.telerik.com/teampulse-demo/xview" class="imgPlate"><img src="@Url.Content("~/content/shared/styles/xview.png")" alt="Cross-project Dashboard TeamPulse xView" /></a>
+        <h3><a href="http://demos.telerik.com/teampulse-demo/xview">Cross-project Dashboard TeamPulse xView&trade;</a></h3>
+        <p>TeamPulse xView&trade; is a powerful tracking and analytics tool that helps you identify project hot spots with a single glance.
+        The tool alerts users about potential problems like late work, blocking bugs, excessive workload thus allowing you to address those issues
+        as early as possible and keep your projects on track.</p> 
+        <p>TeamPulse xView&trade; uses the following KendoUI Web controls: Chart, Grid, TreeView, DropDownList, NumericTextBox, TabStrip.
+        The tool comes as an extension of Telerik's project management solution TeamPulse.</p>
+    </div>
+
+    <h2>KendoUI Compatibility</h2>
+
+    <div class="column13">
+        <h3>Supported Browsers</h3>
+
+        <ul>
+            <li>Internet Explorer 7+</li>
+            <li>Google Chrome</li>
+            <li>Mozilla Firefox 3+</li>
+            <li>Safari 4+</li>
+            <li>Opera 10+</li>
+        </ul>
+
+        <p><em>Please note that Internet Explorer's quirks mode is not supported, as it uses the IE 5.5 rendering engine.</em></p>
+
+        <p>Always specify a DOCTYPE on your pages!</p>
+    </div>
+
+    <div class="column23">
+        <h3>Mobile Device Compatibility</h3>
+
+        <p>KendoUI is built to work seamlessly across desktop browsers and mobile touchscreen devices. KendoUI offers full support for touch interactions and
+        is tested against the following mobile platform browsers:</p>
+
+        <ul>
+            <li>Android 2.0+</li>
+            <li>iOS 3.0+</li>
+            <li>BlackBerry OS 6.0+</li>
+            <li>webOS 2.2+</li>
+        </ul>
+
+        <p><em>KendoUI Mobile currently supports iOS 3.0+, Android 2.0+ and BlackBerry touchscreen devices.</em></p>
+    </div>
+
+</div>
+
+<div id="footer">
+    <div class="centerWrap">
+        <ul class="bottom-nav">
+            <li><a href="http://www.kendoui.com/">Home</a></li>
+            <li><a href="http://www.kendoui.com/web">Web</a></li>
+            <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
+            <li class="active"><a href="http://demos.kendoui.com/">Demos</a></li>
+            <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
+            <li><a href="http://www.kendoui.com/forums">Forums</a></li>
+            <li><a href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
+            <li><a href="http://www.kendoui.com/roadmap">Roadmap</a></li>
+            <li><a href="http://www.kendoui.com/faq" title="Frequently Asked Questions">FAQ</a></li>
+            <li><a href="http://www.kendoui.com/get-kendo-ui">Get KendoUI</a></li>
+        </ul>
+
+        <p>Take your time to truly experience the power of KendoUI with a free 60-day trial or GPL compatible open source package.</p>
+        <p><a href="http://www.kendoui.com/get-kendo-ui">Download</a> your KendoUI and jumpstart your development with the available <a href="http://www.kendoui.com/get-help">support resources</a>.</p>
+        <p>If you have any questions, do not hesitate to contact us at <a href="mailto:clientservice@kendoui.com">clientservice@kendoui.com</a>.</p>
+
+        <div id="social">
+            <h2>Get Social!</h2>
+
             <ul>
-                <li><a href="http://www.kendoui.com">Home</a></li>
-                <li><a href="http://www.kendoui.com/web">Web</a></li>
-                <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
-                <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
-                <li><a href="http://demos.kendoui.com/">Demos</a></li>
-                <li><a href="http://www.kendoui.com/blogs">Blogs</a></li>
-                <li><a href="http://www.kendoui.com/forums">Forums</a></li>
-                <li><a href="http://www.kendoui.com/get-help">Support &amp; Resources</a></li>
-                <li><a href="http://www.kendoui.com/roadmap.aspx">Roadmap</a></li>
-                <li><a href="http://www.kendoui.com/about">About</a></li>
-                <li><a href="http://www.kendoui.com/get-kendo-ui">Get Kendo UI</a></li>
                 <li><a href="http://twitter.com/#!/KendoUI" class="icon tw" title="Follow us on Twitter">Follow us on Twitter</a></li>
                 <li><a href="http://www.facebook.com/KendoUI" class="icon fb" title="Become a fan on Facebook">Become a fan on Facebook</a></li>
                 <li><a href="https://plus.google.com/117798269023828336983/posts" class="icon gplus" title="Follow us on Google+">Follow us on Google+</a></li>
                 <li><a href="http://www.kendoui.com/blogs/blogs.rss" class="icon rss" title="Subscribe to our RSS feed">Subscribe to our RSS feed</a></li>
             </ul>
-            <p id="telerik"><a href="http://www.telerik.com/">Kendo UI is powered by Telerik</a></p>
-            <p id="copy">Copyright &copy; @(DateTime.Now.Year) Telerik Inc. All rights reserved.</p>
         </div>
-        </div>
-    </body>
+
+        <p id="copy">Copyright &copy; 2011 - @(DateTime.Now.Year) Telerik Inc. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
 </html>

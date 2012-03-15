@@ -8,10 +8,10 @@
 }
 
 <div id="main">
-    <h1 id="exampleTitle" class="k-content">
+    <h1 id="exampleTitle">
         @if (ViewBag.CurrentExample != null) {
             <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
-            @ViewBag.CurrentWidget.Text <span>/</span> @ViewBag.CurrentExample.Text
+            <strong>@ViewBag.CurrentWidget.Text /</strong> @ViewBag.CurrentExample.Text
         }
     </h1>
 
