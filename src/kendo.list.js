@@ -162,7 +162,7 @@
         _focus: function(li) {
             var that = this;
 
-            if (that.trigger(SELECT, {item: li})) {
+            if (that.popup.visible() && that.trigger(SELECT, {item: li})) {
                 that.close();
                 return;
             }
