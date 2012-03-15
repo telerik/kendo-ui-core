@@ -80,9 +80,17 @@
 
         tick: function() {
             var that = this,
-                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
+                dimension = that.dimension,
+                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION,
+                delta = (that.velocity *= friction),
+                location = that.movable[that.axis] + delta;
 
-            that.movable.translateAxis(that.axis, that.velocity *= friction);
+                if (!that.elastic && dimension.outOfBounds(location)) {
+                    location = Math.max(Math.min(location, dimension.max), dimension.min);
+                    that.velocity = 0;
+                }
+
+            that.movable.moveAxis(that.axis, location);
         },
 
         _end: function() {
@@ -185,6 +193,7 @@
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element
         * @param {Object} options
+        * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
         * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. Has effect only when the pull option is set to true.
         * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. Has effect only when the pull option is set to true.
         * @option {Boolean} [pullToRefresh] <false> If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
@@ -225,7 +234,7 @@
                     movable: movable,
                     dimensions: dimensions,
                     drag: drag,
-                    elastic: true
+                    elastic: that.options.elastic,
                 });
 
             extend(that, {
@@ -251,6 +260,7 @@
         options: {
             name: "Scroller",
             pullOffset: 140,
+            elastic: true,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing"
@@ -356,6 +366,7 @@
                 tap: tap,
                 drag: that.drag,
                 dimension: dimension,
+                elastic: that.options.elastic,
                 end: function() { scrollBar.hide(); }
             });
 
