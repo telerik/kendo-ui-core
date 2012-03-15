@@ -1,38 +1,45 @@
-<div id="music" data-role="view" data-init="viewInit" data-title="My Music">
-    <div class="head">&nbsp;</div>
-    <h2>Welcome to "My Music" App</h2>
-    <p>A native-looking web based mobile application.</p>
-    <button id="show">Show loading</button>
+<div id="loading" data-role="view" class="km-insetcontent" data-init="viewInit" data-title="Loading Popup">
+    <button id="show" data-role="button" style="display:none">Show Loading Popup</button>
 </div>
 <script>
-    function viewInit(e) {
+    var showButton;
 
-        $("#show").hide().click(function() {
-            $(this).hide();
-            startLoading();
-        })
+    function viewInit(e) {
+        showButton = $("#show").click(function() {
+                        showButton.fadeOut();
+                        startLoading();
+                     })
 
         startLoading();
     }
 
     function startLoading() {
-        kendoMobileApplication.showLoading();
+        var seconds = 5,
+            headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!"),
+            interval;
 
-        var seconds = 5;
-        var heading = kendoMobileApplication.loader.find("h1");
+        kendoMobileApplication.showLoading(); //show loading popup
 
-        heading.text(seconds + " seconds left!")
+        interval = setInterval(function() {
+            headingTag.text(--seconds + " seconds left!"); //update text of the loading popup
 
-        var interval = setInterval(function() {
-            heading.text(--seconds + " seconds left!")
+            if (seconds == 0) {
+                clearInterval(interval);
+                kendoMobileApplication.hideLoading(); //hide loading popup
+                showButton.fadeIn();
+            }
+
         }, 1000);
-
-        setTimeout(function() {
-            clearInterval(interval);
-
-            kendoMobileApplication.hideLoading();
-
-            $("#show").show();
-        }, 5000);
     }
 </script>
+<style scoped>
+    .km-ios #loading .km-content {
+        background: transparent;
+    }
+
+    #show {
+        width: 150px;
+        height: 150px;
+        font-size: 1.5rem;
+    }
+</style>
