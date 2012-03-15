@@ -1,15 +1,8 @@
         <div id="example" class="k-content absConf">
-            <h3 class="example-title">World<span>Population</span></h3>
+            <h3 class="example-title">Stock<span>History</span></h3>
             <h4 class="example-description">Kendo UI Data Visualization Project</h4>
 
-            <ul id="filtering-tabs">
-                <li>1950s</li>
-                <li>1960s</li>
-                <li>1970s</li>
-                <li>1980s</li>
-                <li>1990s</li>
-                <li>2000s</li>
-            </ul>
+            <div id="filtering-tabs"></div>
 
             <h5 class="example-subtitle">Population through the decade</h5>
 
@@ -20,66 +13,106 @@
                 <li><label><input type="radio" name="chart-type">Bar</label></li>
             </ul>
 
-            <div id="decade-population-chart"></div>
+            <div id="yearly-stock-values"></div>
 
             <h5 class="example-subtitle">World total population</h5>
             <div class="metric">thousands</div>
 
-            <h5 class="example-subtitle">Female / male ratio</h5>
-            <h5 class="example-subtitle">Women</h5>
-            <div class="metric">thousands</div>
-
-            <h5 class="example-subtitle">Men</h5>
-            <div class="metric">thousands</div>
-
-            <h5 class="example-subtitle">Age group poulation</h5>
-            <div class="metric">thousands</div>
-
-            <h5 class="example-subtitle">Age group ratio of total</h5>
-            <div class="metric">percents</div>
+            <div id="total-population"></div>
 
             <script>
                 $("#filtering-tabs").kendoTabStrip();
 
-                var totalPopulationDataSource = new kendo.data.DataSource({
+                var stocksDataSource = new kendo.data.DataSource({
                         transport: {
                             read: {
-                                url: "../../content/dataviz/dashboards/world-population.json",
+                                url: "../../content/dataviz/dashboards/stock-data.json",
                                 dataType: "json"
                             }
                         },
                         sort: {
-                            field: "year",
+                            field: "date",
                             dir: "asc"
                         },
                         filter: [{
-                            field: "year",
-                            operator: "lte",
-                            value: 1959
-                        }, {
-                            field: "year",
+                            field: "date",
                             operator: "gte",
-                            value: 1950
-                        }]
+                            value: new Date(2011, 3, 14)
+                        }, {
+                            field: "date",
+                            operator: "lte",
+                            value: new Date(2012, 3, 14)
+                        }],
+
+                        group: {
+                            field: "symbol"
+                        },
+
+                        schema: {
+                            model: {
+                                fields: {
+                                    date: {
+                                        type: "date"
+                                    }
+                                }
+                            }
+                        },
+
+                        change: function() {
+                            //$("#total-population").text(this.view()[this.view().length-1].total);
+                        }
                     });
 
-                $("#decade-population-chart").kendoChart({
-                    dataSource: totalPopulationDataSource,
+                $("#yearly-stock-values").kendoChart({
+                    dataSource: stocksDataSource,
                     seriesDefaults: {
-                        type: "column"
+                        type: "line",
+                        overlay: {
+                            gradient: "none"
+                        },
+                        markers: {
+                            visible: false
+                        },
+                        majorTickSize: 0,
+                        opacity: .8
                     },
+
                     series: [{
-                        field: "male",
-                        name: "male"
-                    }, {
-                        field: "female",
-                        name: "female"
+                        field: "high",
+                        name: ""
                     }],
-                    categoryAxis: {
-                        field: "year"
+
+                    seriesColors: [ "#2b8abe", "#d7445c", "#45cd74", "#fb02b8" ],
+
+                    valueAxis: {
+                        labels: {
+                            format: "${0}"
+                        }
                     },
+
+                    categoryAxis: {
+                        field: "date",
+
+                        labels: {
+                            format: "{0:d}",
+                            step: 110
+                        },
+
+                        line: {
+                            visible: false
+                        },
+
+                        majorTicks: {
+                            visible: false
+                        },
+
+                        majorGridLines: {
+                            visible: false
+                        }
+                    },
+
                     legend: {
-                        visible: false
+                        visible: true
                     }
                 });
             </script>
