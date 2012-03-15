@@ -12,12 +12,29 @@
         PULL = "pull",
         START_PULL = "startPull",
         CANCEL_PULL = "cancelPull",
-        roleSelector = kendo.roleSelector;
+        roleSelector = kendo.roleSelector,
+        jsonRegExp = /^(?:\{.*\}|\[.*\])$/;
 
+    function parseModelOption(element) {
+        var model = element.getAttribute("data-" + kendo.ns + "model");
+
+        if (model === null) {
+            model = undefined;
+        } else if (model === "null") {
+            model = null;
+        } else if (jsonRegExp.test(model)) {
+            model = $.parseJSON(model);
+        } else {
+            model = kendo.getter(model)(window);
+        }
+
+        return model;
+    }
     var View = Widget.extend({
         init: function(element, options) {
             var that = this,
-                contentSelector = roleSelector("content");
+                contentSelector = roleSelector("content"),
+                model;
 
             Widget.fn.init.call(that, element, options);
 
@@ -46,7 +63,12 @@
                 that.layout.setup(that);
             }
 
-            kendo.mobile.init(element.children());
+            that.model = model = parseModelOption(element[0]);
+            if (model) {
+                kendo.bind(element.children(), model, ui);
+            } else {
+                kendo.mobile.init(element.children());
+            }
 
             that.content.kendoMobileScroller({ useOnDesktop: true });
 
