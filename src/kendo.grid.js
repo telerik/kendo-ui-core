@@ -1236,7 +1236,6 @@
 
             if (cell.hasClass("k-dirty-cell")) {
                 $('<span class="k-dirty"/>').prependTo(cell);
-                cell.removeClass("k-dirty-cell");
             }
         },
 
