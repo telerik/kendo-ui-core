@@ -506,6 +506,16 @@
                 equal(dropdownlist.text(), "Select...");
             });
 
+            test("use placeholder option", function() {
+                var dropdownlist = new DropDownList($("<input/>"), {
+                    autoBind: false,
+                    placeholder: "Select...",
+                    optionLabel: "do not use it"
+                });
+
+                equal(dropdownlist.text(), "Select...");
+            });
+
             test("Add km-popup class to the animation container", function() {
                 var dropdownlist = new DropDownList($("<input/>"));
                 dropdownlist.popup.trigger("open");

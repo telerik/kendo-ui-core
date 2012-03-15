@@ -241,10 +241,10 @@
          * $("#dropdownlist").kendoDropDownList({
          *     height: 400
          * });
-         * @option {String} [optionLabel] Define the text of the default empty item.
+         * @option {String} [placeholder] Define the text of the default empty item.
          * _example
          * $("#dropdownlist").kendoDropDownList({
-         *     optionLabel: "Select An Option"
+         *     placeholder: "Select An Option"
          * });
          * @option {Function} [template] Template to be used for rendering the items in the list.
          * _example
@@ -311,6 +311,10 @@
                 that.wrapper.focus();
             });
 
+            if (options.optionLabel && !options.placeholder) {
+                options.placeholder = options.optionLabel;
+            }
+
             that._reset();
 
             that._word = "";
@@ -336,8 +340,8 @@
                     that.text(element.children(":selected").text());
                 }
 
-                if (!that.text().replace(trimRegExp, "") && options.optionLabel) {
-                    that.text(options.optionLabel);
+                if (!that.text().replace(trimRegExp, "") && options.placeholder) {
+                    that.text(options.placeholder);
                 }
             }
 
@@ -353,7 +357,7 @@
             delay: 500,
             dataTextField: "",
             dataValueField: "",
-            optionLabel: "",
+            placeholder: "",
             height: 200,
             animation: {}
         },
@@ -760,15 +764,15 @@
         _data: function() {
             var that = this,
                 options = that.options,
-                optionLabel = options.optionLabel,
+                placeholder = options.placeholder,
                 textField = options.dataTextField,
                 valueField = options.dataValueField,
                 data = that.dataSource.view(),
                 length = data.length,
-                first = optionLabel,
+                first = placeholder,
                 idx = 0;
 
-            if (optionLabel && length) {
+            if (placeholder && length) {
                 if (textField) {
                     first = {};
 
@@ -776,7 +780,7 @@
                     valueField = valueField.split(".");
 
                     assign(first, valueField, "");
-                    assign(first, textField, optionLabel);
+                    assign(first, textField, placeholder);
                 }
 
                 first = new kendo.data.ObservableArray([first]);
