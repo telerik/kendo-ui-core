@@ -7,10 +7,7 @@
             "items": [{
                     "text": "Chart Gallery",
                     "url": "overview/index.html"
-                }, {
-                    "text": "High performance",
-                    "url": "overview/high-performance.html"
-            }],
+                }],
             "name": "overview"
         }, {
             "text": "Area Chart",
