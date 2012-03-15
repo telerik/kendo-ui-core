@@ -455,15 +455,19 @@
         */
 
         /**
-        * Gets the dataItem of the selected LI element.
+        * Returns the raw data record at the specified index. If the index is not specified, the selected index will be used.
         * @name kendo.ui.DropDownList#dataItem
         * @function
-        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @param {Number} index The zero-based index of the data record
+        * @returns {Object} The raw data record. Returns <i>undefined</i> if no data.
         * @example
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
-        * // get the dataItem.
+        * // get the dataItem corresponding to the selectedIndex.
         * var dataItem = dropdownlist.dataItem();
+        *
+        * // get the dataItem corresponding to the passed index.
+        * var dataItem = dropdownlist.dataItem(1);
         */
 
         /**

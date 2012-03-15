@@ -11,7 +11,7 @@
      * </p>
      * <p>
      *  To prevent user input, use the
-     *  <a href="../dropdownlist/index.html">DropDownList</a>.
+     *  <a href="../combobox/index.html">combobox</a>.
      * </p>
      * <h3>Getting Started</h3>
      * <p>There are two basic ways to create a <b>ComboBox</b>:</p>
@@ -503,15 +503,19 @@
         },
 
         /**
-        * Gets the dataItem of the selected LI element.
+        * Returns the raw data record at the specified index. If the index is not specified, the selected index will be used.
         * @name kendo.ui.ComboBox#dataItem
         * @function
-        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @param {Number} index The zero-based index of the data record
+        * @returns {Object} The raw data record. Returns <i>undefined</i> if no data.
         * @example
         * var combobox = $("#combobox").data("kendoComboBox");
         *
-        * // get the dataItem.
+        * // get the dataItem corresponding to the selectedIndex.
         * var dataItem = combobox.dataItem();
+        *
+        * // get the dataItem corresponding to the passed index.
+        * var dataItem = combobox.dataItem(1);
         */
 
         /**

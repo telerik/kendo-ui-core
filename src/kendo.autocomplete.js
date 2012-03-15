@@ -474,6 +474,19 @@
         },
 
         /**
+        * Returns the raw data record at the specified index
+        * @name kendo.ui.AutoComplete#dataItem
+        * @function
+        * @param {Number} index The zero-based index of the data record
+        * @returns {Object} The raw data record. Returns <i>undefined</i> if no data.
+        * @example
+        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        *
+        * // get the dataItem corresponding to the passed index.
+        * var dataItem = autocomplete.dataItem(1);
+        */
+
+        /**
         * Enable/Disable the autocomplete widget.
         * @param {Boolean} enable The argument, which defines whether to enable/disable the autocomplete.
         * @example
