@@ -703,7 +703,6 @@
     padding: .4em;
     outline: none;
     background: transparent;
-    text-align: right;
 }
 
 .km-ios .k-dropdown-wrap .k-input
@@ -715,11 +714,23 @@
 {
     right: .4em;
     margin-top: -1.2em;
+    font-weight: normal;
 }
+
+.km-ios input[type=color],
+.km-ios input[type=week],
+.km-ios input[type=date],
+.km-ios input[type=time],
+.km-ios input[type=month],
+.km-ios input[type=datetime],
+.km-ios .k-dropdown
+{
+    text-align: right;
+}
+
 
 .km-ios .k-dropdown .k-dropdown-wrap
 {
-    font-weight: normal;
     display: block;
     .border-radius(0);
     background: transparent;
