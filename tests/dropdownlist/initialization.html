@@ -437,7 +437,7 @@
                 var select = $("<select/>"),
                     dropdownlist = new DropDownList(select, {
                         dataSource: ["item1", "item2"],
-                        optionLabel: "Select..."
+                        placeholder: "Select..."
                     });
 
                     equal(select[0].children[0].outerHTML, '<option value="">Select...</option>');

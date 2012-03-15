@@ -613,7 +613,8 @@
         refresh: function() {
             var that = this,
                 data = that._data(),
-                length = data.length;
+                length = data.length,
+                placeholder = that.options.placeholder;
 
             that.trigger("dataBinding");
 
@@ -621,7 +622,11 @@
             that._height(length);
 
             if (that.element.is(SELECT)) {
-                that._options(data);
+                if (placeholder && length) {
+                    placeholder = '<option value="">' + placeholder + "</option>";
+                }
+
+                that._options(data, placeholder);
             }
 
             if (that._open) {
