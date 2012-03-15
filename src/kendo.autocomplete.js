@@ -462,6 +462,48 @@
             * });
                 */
                CHANGE,
+               /**
+               *
+               * Triggered when a Li element is selected.
+               *
+               * @name kendo.ui.AutoComplete#select
+               * @event
+               *
+               * @param {Event} e
+               *
+               * @param {jQuery} e.item
+               * The selected item chosen by a user.
+               *
+               * @exampleTitle Attach select event handler during initialization; detach via unbind()
+               * @example
+               * // event handler for select
+               * var onSelect = function(e) {
+               *     // access the selected item via e.item (jQuery object)
+               * };
+               *
+               * // attach select event handler during initialization
+               * var autocomplete = $("#autocomplete").kendoAutoComplete({
+               *     select: onSelect
+               * });
+               *
+               * // detach select event handler via unbind()
+               * autocomplete.data("kendoAutoComplete").unbind("select", onSelect);
+               *
+               * @exampleTitle Attach select event handler via bind(); detach via unbind()
+               * @example
+               * // event handler for select
+               * var onSelect = function(e) {
+               *     // access the selected item via e.item (jQuery object)
+               * };
+               *
+               * // attach select event handler via bind()
+               * $("#autocomplete").data("kendoAutoComplete").bind("select", onSelect);
+               *
+               * // detach select event handler via unbind()
+               * $("#autocomplete").data("kendoAutoComplete").unbind("select", onSelect);
+               *
+               */
+               "select",
                "dataBinding",
                "dataBound"
             ],
@@ -471,6 +513,19 @@
             this._template();
             this._accessors();
         },
+
+        /**
+        * Returns the raw data record at the specified index
+        * @name kendo.ui.AutoComplete#dataItem
+        * @function
+        * @param {Number} index The zero-based index of the data record
+        * @returns {Object} The raw data record. Returns <i>undefined</i> if no data.
+        * @example
+        * var autocomplete = $("#autocomplete").data("kendoAutoComplete");
+        *
+        * // get the dataItem corresponding to the passed index.
+        * var dataItem = autocomplete.dataItem(1);
+        */
 
         /**
         * Enable/Disable the autocomplete widget.

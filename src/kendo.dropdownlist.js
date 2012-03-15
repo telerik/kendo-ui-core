@@ -15,7 +15,7 @@
      * </p>
      * <p>
      *  If you want to allow user input, use the
-     *  <a href="../combobox/index.html" title="Kendo UI ComboBox">Kendo UI ComboBox</a>.
+     *  <a href="../dropdownlist/index.html" title="Kendo UI dropdownlist">Kendo UI dropdownlist</a>.
      * </p>
      * <h3>Getting Started</h3>
      * <p>There are two basic ways to create a <strong>DropDownList</strong>:</p>
@@ -423,6 +423,48 @@
             * });
             */
             CHANGE,
+            /**
+            *
+            * Triggered when a Li element is selected.
+            *
+            * @name kendo.ui.DropDownList#select
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {jQuery} e.item
+            * The selected item chosen by a user.
+            *
+            * @exampleTitle Attach select event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler during initialization
+            * var dropdownlist = $("#dropdownlist").kendoDropDownList({
+            *     select: onSelect
+            * });
+            *
+            * // detach select event handler via unbind()
+            * dropdownlist.data("kendoDropDownList").unbind("select", onSelect);
+            *
+            * @exampleTitle Attach select event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler via bind()
+            * $("#dropdownlist").data("kendoDropDownList").bind("select", onSelect);
+            *
+            * // detach select event handler via unbind()
+            * $("#dropdownlist").data("kendoDropDownList").unbind("select", onSelect);
+            *
+            */
+            "select",
             "dataBinding",
             "dataBound"
         ],
@@ -454,15 +496,19 @@
         */
 
         /**
-        * Gets the dataItem of the selected LI element.
+        * Returns the raw data record at the specified index. If the index is not specified, the selected index will be used.
         * @name kendo.ui.DropDownList#dataItem
         * @function
-        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @param {Number} index The zero-based index of the data record
+        * @returns {Object} The raw data record. Returns <i>undefined</i> if no data.
         * @example
         * var dropdownlist = $("#dropdownlist").data("kendoDropDownList");
         *
-        * // get the dataItem.
+        * // get the dataItem corresponding to the selectedIndex.
         * var dataItem = dropdownlist.dataItem();
+        *
+        * // get the dataItem corresponding to the passed index.
+        * var dataItem = dropdownlist.dataItem(1);
         */
 
         /**

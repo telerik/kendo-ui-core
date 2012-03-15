@@ -84,6 +84,16 @@
             }
         },
 
+        dataItem: function(index) {
+            var that = this;
+
+            if (index === undefined) {
+                index = that.selectedIndex;
+            }
+
+            return that.dataSource.view()[index];
+        },
+
         _accessors: function() {
             var that = this,
                 element = that.element,
@@ -151,6 +161,11 @@
 
         _focus: function(li) {
             var that = this;
+
+            if (that.popup.visible() && that.trigger(SELECT, {item: li})) {
+                that.close();
+                return;
+            }
 
             that._select(li);
             that._blur();
@@ -253,7 +268,7 @@
                 template = options.template,
                 hasDataSource = options.dataSource;
 
-            if (that.element.is("select") && that.element[0].length) {
+            if (that.element.is(SELECT) && that.element[0].length) {
                 if (!hasDataSource) {
                     options.dataTextField = options.dataTextField || "text";
                     options.dataValueField = options.dataValueField || "value";
@@ -337,7 +352,6 @@
             this._selectItem();
         },
 
-
         /**
         * Closes the drop-down list.
         * @example
@@ -348,17 +362,6 @@
         */
         close: function() {
             this.popup.close();
-        },
-
-        dataItem: function() {
-            var that = this,
-                index = that.selectedIndex;
-
-            if (index > -1) {
-                return that.dataSource.view()[index];
-            } else {
-                return null;
-            }
         },
 
         _accessor: function(value, idx) {

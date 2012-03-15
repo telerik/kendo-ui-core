@@ -11,7 +11,7 @@
      * </p>
      * <p>
      *  To prevent user input, use the
-     *  <a href="../dropdownlist/index.html">DropDownList</a>.
+     *  <a href="../combobox/index.html">combobox</a>.
      * </p>
      * <h3>Getting Started</h3>
      * <p>There are two basic ways to create a <b>ComboBox</b>:</p>
@@ -69,7 +69,7 @@
      *  appropriate for limited value options, while remote data binding is
      *  better for larger data sets. With remote binding, options will be
      *  loaded on-demand, similar to an
-     *  <a href="../autocomplete/index.html">AutoComplete</a>.
+     *  <a href="../combobox/index.html">combobox</a>.
      * </p>
      * @exampleTitle Binding to a remote OData service
      * @example
@@ -476,6 +476,48 @@
             * });
             */
             CHANGE,
+            /**
+            *
+            * Triggered when a Li element is selected.
+            *
+            * @name kendo.ui.ComboBox#select
+            * @event
+            *
+            * @param {Event} e
+            *
+            * @param {jQuery} e.item
+            * The selected item chosen by a user.
+            *
+            * @exampleTitle Attach select event handler during initialization; detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler during initialization
+            * var combobox = $("#combobox").kendoComboBox({
+            *     select: onSelect
+            * });
+            *
+            * // detach select event handler via unbind()
+            * combobox.data("kendoComboBox").unbind("select", onSelect);
+            *
+            * @exampleTitle Attach select event handler via bind(); detach via unbind()
+            * @example
+            * // event handler for select
+            * var onSelect = function(e) {
+            *     // access the selected item via e.item (jQuery object)
+            * };
+            *
+            * // attach select event handler via bind()
+            * $("#combobox").data("kendoComboBox").bind("select", onSelect);
+            *
+            * // detach select event handler via unbind()
+            * $("#combobox").data("kendoComboBox").unbind("select", onSelect);
+            *
+            */
+            "select",
             "dataBinding",
             "dataBound"
         ],
@@ -502,15 +544,19 @@
         },
 
         /**
-        * Gets the dataItem of the selected LI element.
+        * Returns the raw data record at the specified index. If the index is not specified, the selected index will be used.
         * @name kendo.ui.ComboBox#dataItem
         * @function
-        * @returns {Object} The dataItem of the selected LI element or null if no item is selected.
+        * @param {Number} index The zero-based index of the data record
+        * @returns {Object} The raw data record. Returns <i>undefined</i> if no data.
         * @example
         * var combobox = $("#combobox").data("kendoComboBox");
         *
-        * // get the dataItem.
+        * // get the dataItem corresponding to the selectedIndex.
         * var dataItem = combobox.dataItem();
+        *
+        * // get the dataItem corresponding to the passed index.
+        * var dataItem = combobox.dataItem(1);
         */
 
         /**
@@ -851,8 +897,7 @@
                 }
 
                 that._old = that._accessor();
-                //check
-                //that._oldIndex = that.selectedIndex;
+                that._oldIndex = that.selectedIndex;
             } else {
                 return that._accessor();
             }
@@ -956,7 +1001,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-arrow-down">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" combobox="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-arrow-down">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);

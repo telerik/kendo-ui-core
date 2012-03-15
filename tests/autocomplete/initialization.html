@@ -154,6 +154,24 @@
                 strictEqual(autocomplete.dataSource, dataSource);
             });
 
+            test("dataItem() returns dataItem depending on passed index", function() {
+                var autocomplete = new AutoComplete($("<input/>"),{
+                    dataTextField: "text",
+                    dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+                });
+
+                equal(autocomplete.dataItem(1), autocomplete.dataSource.view()[1]);
+            });
+
+            test("dataItem() returns null if no argument", function() {
+                var autocomplete = new AutoComplete($("<input/>"),{
+                    dataTextField: "text",
+                    dataSource:[{text: 1, value: 1}, {text:2, value:2}]
+                });
+
+                equal(autocomplete.dataItem(), null);
+            });
+
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
