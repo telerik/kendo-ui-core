@@ -551,11 +551,10 @@
             that._fetch = false;
         },
 
-        _options: function(data) {
+        _options: function(data, placeholder) {
             var that = this,
                 element = that.element,
                 selectedIndex = element[0].selectedIndex,
-                label = that.options.placeholder,
                 value = that.value(),
                 length = data.length,
                 options = "",
@@ -565,8 +564,8 @@
                 dataValue,
                 idx = 0;
 
-            if (label && length > 0) {
-                options += '<option value="">' + label + "</option>";
+            if (placeholder) {
+                options = placeholder;
                 idx += 1;
             }
 
@@ -592,6 +591,7 @@
 
             element.html(options);
             element[0].selectedIndex = selectedIndex;
+            console.log(element);
         },
 
         _reset: function() {
