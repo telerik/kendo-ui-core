@@ -21,6 +21,13 @@
                         }
                     }
 
+                    function onSelect(e) {
+                        if ("kendoConsole" in window) {
+                            var dataItem = this.dataItem(e.item.index());
+                            kendoConsole.log("event :: select (" + dataItem.text + " : " + dataItem.value + ")" );
+                        }
+                    };
+
                     var data = [
                         { text: "Item 1", value:"1" },
                         { text: "Item 2", value:"2" },
@@ -31,6 +38,7 @@
                         dataTextField: "text",
                         dataValueField: "value",
                         dataSource: data,
+                        select: onSelect,
                         change: onChange,
                         close: onClose,
                         open: onOpen
