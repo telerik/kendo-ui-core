@@ -126,6 +126,45 @@
                 equal(destroy.calls("destroy"), 1);
             });
 
+            test("binding visible to true shows the radialgauge", function() {
+                var dom = $('<div data-role="radialgauge" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoRadialGauge");
+
+                ok(radialgauge.wrapper.css("display") != "none", "radialgauge is visible");
+            });
+
+            test("binding visible to false hides the radialgauge", function() {
+                var dom = $('<div data-role="radialgauge" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoRadialGauge");
+
+                ok(radialgauge.wrapper.css("display") == "none", "radialgauge is not visible");
+            });
+
+            test("binding invisible to true hides the radialgauge", function() {
+                var dom = $('<div data-role="radialgauge" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoRadialGauge");
+
+                ok(radialgauge.wrapper.css("display") == "none", "radialgauge is invisible");
+            });
+
+            test("binding invisible to false shows the radialgauge", function() {
+                var dom = $('<div data-role="radialgauge" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoRadialGauge");
+
+                ok(radialgauge.wrapper.css("display") != "none", "radialgauge is not invisible");
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

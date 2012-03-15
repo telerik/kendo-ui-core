@@ -905,6 +905,9 @@
                 i = 0;
 
             Widget.fn.init.call(gauge, element);
+
+            gauge.wrapper = gauge.element;
+
             options = deepExtend({}, gauge.options, userOptions);
 
             themeName = options.theme;
@@ -912,7 +915,7 @@
 
             gauge.options = deepExtend({}, themeOptions, options);
 
-            $(element).addClass("k-gauge");
+            gauge.element.addClass("k-gauge");
 
             gauge.redraw();
         },
