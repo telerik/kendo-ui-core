@@ -737,13 +737,14 @@
 
 .km-android .km-loader
 {
-    width: 2rem;
-    height: 2rem;
+    width: 100%;
+    height: 3rem;
     padding: 0;
-    margin-left: -1rem;
-    margin-top: 0;
+    margin: 0;
     top: auto;
-    bottom: .6rem;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.5);
     .border-radius(0);
 }
 
@@ -757,6 +758,10 @@
     width: 2rem;
     height: 2rem;
     display: inline-block;
+    position: absolute;
+    left: 50%;
+    margin-left: -1rem;
+    bottom: .6rem;
 }
 
 /* Forms */
