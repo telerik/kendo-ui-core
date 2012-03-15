@@ -15,21 +15,6 @@
         roleSelector = kendo.roleSelector,
         jsonRegExp = /^(?:\{.*\}|\[.*\])$/;
 
-    function parseModelOption(element) {
-        var model = element.getAttribute("data-" + kendo.ns + "model");
-
-        if (model === null) {
-            model = undefined;
-        } else if (model === "null") {
-            model = null;
-        } else if (jsonRegExp.test(model)) {
-            model = $.parseJSON(model);
-        } else {
-            model = kendo.getter(model)(window);
-        }
-
-        return model;
-    }
     var View = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -63,7 +48,14 @@
                 that.layout.setup(that);
             }
 
-            that.model = model = parseModelOption(element[0]);
+            model = options.model;
+
+            if (typeof model === "string") {
+                model = kendo.getter(model)(window);
+            }
+
+            that.model = model;
+
             if (model) {
                 kendo.bind(element.children(), model, ui);
             } else {
@@ -88,7 +80,8 @@
         ],
 
         options: {
-            name: "View"
+            name: "View",
+            model: null
         },
 
         onHideStart: function() {
