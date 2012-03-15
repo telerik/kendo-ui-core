@@ -2469,9 +2469,9 @@
      * @function
      * @param {Selector} element The container element to enable scrolling for.
      */
-    kendo.touchScroller = function(element) {
+    kendo.touchScroller = function(element, options) {
         if (support.touch && kendo.mobile.ui.Scroller) {
-            element.kendoMobileScroller();
+            element.kendoMobileScroller(options);
             return element.data("kendoMobileScroller");
         } else {
             return false;
