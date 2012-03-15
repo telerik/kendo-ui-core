@@ -555,7 +555,7 @@
             var that = this,
                 element = that.element,
                 selectedIndex = element[0].selectedIndex,
-                label = that.options.optionLabel,
+                label = that.options.placeholder,
                 value = that.value(),
                 length = data.length,
                 options = "",
