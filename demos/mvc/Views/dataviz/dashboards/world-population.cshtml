@@ -21,8 +21,6 @@
             <div id="total-population"></div>
 
             <script>
-                $("#filtering-tabs").kendoTabStrip();
-
                 var stocksDataSource = new kendo.data.DataSource({
                         transport: {
                             read: {
@@ -30,19 +28,11 @@
                                 dataType: "json"
                             }
                         },
+
                         sort: {
                             field: "date",
                             dir: "asc"
                         },
-                        filter: [{
-                            field: "date",
-                            operator: "gte",
-                            value: new Date(2011, 3, 14)
-                        }, {
-                            field: "date",
-                            operator: "lte",
-                            value: new Date(2012, 3, 14)
-                        }],
 
                         group: {
                             field: "symbol"
@@ -65,6 +55,7 @@
 
                 $("#yearly-stock-values").kendoChart({
                     dataSource: stocksDataSource,
+                    autoBind: false,
                     seriesDefaults: {
                         type: "line",
                         overlay: {
@@ -79,7 +70,7 @@
 
                     series: [{
                         field: "high",
-                        name: ""
+                        name: "high"
                     }],
 
                     seriesColors: [ "#2b8abe", "#d7445c", "#45cd74", "#fb02b8" ],
@@ -115,6 +106,24 @@
                         visible: true
                     }
                 });
+
+                $("#filtering-tabs").kendoTabStrip({
+                    dataSource: ["2008","2009","2010","2011","2012"],
+                    change: function(e) {
+                        var endYear = this.value();
+
+                        stocksDataSource.filter([{
+                            field: "date",
+                            operator: "gte",
+                            value: new Date(endYear - 1, 3, 14)
+                        }, {
+                            field: "date",
+                            operator: "lte",
+                            value: new Date(endYear, 3, 14)
+                        }]);
+                    }
+                }).data("kendoTabStrip").select(4);
+
             </script>
 
             <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
