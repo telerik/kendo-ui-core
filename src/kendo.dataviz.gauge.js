@@ -647,7 +647,7 @@
 
             padding: getSpacing(3),
             animation: {
-                type: "fadeIn"
+                type: "bar"
             }
         },
 
@@ -657,8 +657,6 @@
                 options = pointer.options,
                 needle = pointer.elements[0],
                 animation;
-                console.log(pointer.children);
-
 
             if (options.animation === false) {
                 needle.refresh(doc.getElementById(options.id));
@@ -753,7 +751,8 @@
                         fill: options.color,
                         fillOpacity: options.opacity,
                         animation: options.animation,
-                        kur: "kur"
+                        vertical: scale.options.vertical,
+                        id: options.id
                     }, border)
                 );
             }
@@ -921,7 +920,8 @@
         },
 
         options: {
-            plotArea: {}
+            plotArea: {},
+            name: "Gauge"
         },
 
         value: function(value) {
@@ -1031,6 +1031,7 @@
     // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);
     dataviz.ui.plugin(LinearGauge);
+    dataviz.ui.plugin(Gauge);
 
     deepExtend(dataviz, {
         GaugePlotArea: RadialGaugePlotArea,
