@@ -91,11 +91,7 @@
                 index = that.selectedIndex;
             }
 
-            if (index > -1) {
-                return that.dataSource.view()[index];
-            } else {
-                return null;
-            }
+            return that.dataSource.view()[index];
         },
 
         _accessors: function() {
