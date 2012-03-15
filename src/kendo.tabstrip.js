@@ -1029,12 +1029,11 @@
         _updateContentElements: function() {
             var that = this,
                 contentUrls = that.options.contentUrls || [],
-                tabStripID = that.element.attr("id");
-
-            that.contentElements = that.wrapper.children("div");
+                tabStripID = that.element.attr("id"),
+                contentElements = that.wrapper.children("div");
 
             that.tabGroup.find(".k-item").each(function(idx) {
-                var currentContent = that.contentElements.eq(idx),
+                var currentContent = contentElements.eq(idx),
                     id = tabStripID + "-" + (idx+1),
                     href = $(this).children("." + LINK).attr(HREF);
 
@@ -1045,7 +1044,12 @@
                 }
             });
 
-            that.contentElements = that.wrapper.children("div"); // refresh the contents
+            that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
+
+            if (kendo.support.touch) {
+                kendo.touchScroller(that.contentElements);
+                that.contentElements = that.contentElements.children(".km-scroll-container");
+            }
         },
 
         _toggleHover: function(e) {
@@ -1119,7 +1123,6 @@
 
             close = extend( hasCloseAnimation ? close : extend({ reverse: true }, animation), { show: false, hide: true });
 
-
             if (kendo.size(animation.effects)) {
                 item.kendoAddClass(DEFAULTSTATE, { duration: animation.duration });
                 item.kendoRemoveClass(ACTIVESTATE, { duration: animation.duration });
@@ -1128,7 +1131,7 @@
                 item.removeClass(ACTIVESTATE);
             }
 
-            that.contentElements
+            that.contentAnimators
                     .filter("." + ACTIVESTATE)
                     .kendoStop(true, true)
                     .kendoAnimate( close )
@@ -1174,9 +1177,9 @@
             }
 
             // handle content elements
-            var contentElements = that.contentElements;
+            var contentAnimators = that.contentAnimators;
 
-            if (contentElements.length == 0) {
+            if (contentAnimators.length == 0) {
                 oldTab.removeClass(TABONTOP);
                 item.addClass(TABONTOP) // change these directly to bring the tab on top.
                     .css("z-index");
@@ -1188,13 +1191,13 @@
                 return false;
             }
 
-            var visibleContentElements = contentElements.filter("." + ACTIVESTATE);
+            var visibleContents = contentAnimators.filter("." + ACTIVESTATE);
 
             // find associated content element
             var content = $(that.contentElement(itemIndex));
 
             if (content.length == 0) {
-                visibleContentElements
+                visibleContents
                     .removeClass( ACTIVESTATE )
                     .kendoStop(true, true)
                     .kendoAnimate( close );
@@ -1216,6 +1219,7 @@
                     }
 
                     content
+                        .closest(".k-content")
                         .addClass(ACTIVESTATE)
                         .kendoStop(true, true)
                         .kendoAnimate( extend({ init: function () {
@@ -1233,11 +1237,11 @@
                         });
                 };
 
-            visibleContentElements
+            visibleContents
                     .removeClass(ACTIVESTATE);
 
-            if (visibleContentElements.length) {
-                visibleContentElements
+            if (visibleContents.length) {
+                visibleContents
                     .kendoStop(true, true)
                     .kendoAnimate(extend( {
                         complete: showContent
@@ -1271,7 +1275,7 @@
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
 
             for (var i = 0, len = contentElements.length; i < len; i++) {
-                if (idTest.test(contentElements[i].id)) {
+                if (idTest.test(contentElements.closest(".k-content")[i].id)) {
                     return contentElements[i];
                 }
             }
