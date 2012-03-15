@@ -361,6 +361,8 @@
             wrapper.add(wrapper.find(".k-resize-handle,.k-window-titlebar"))
                 .on("mousedown", proxy(that.toFront, that));
 
+            that.touchScroller = kendo.touchScroller(element);
+
             $(window).resize(proxy(that._onDocumentResize, that));
 
             if (wrapper.is(VISIBLE)) {
@@ -1438,18 +1440,18 @@
                 },
                 resizeHandlers = {
                     "e": function () {
-                        var newWidth = e.pageX - wnd.initialCursorPosition.left;
+                        var newWidth = e.x.location - wnd.initialCursorPosition.left;
 
                         wrapper.width(constrain(newWidth, options.minWidth, options.maxWidth));
                     },
                     "s": function () {
-                        var newHeight = e.pageY - wnd.initialCursorPosition.top - wnd.elementPadding;
+                        var newHeight = e.y.location - wnd.initialCursorPosition.top - wnd.elementPadding;
 
                         wrapper.height(constrain(newHeight, options.minHeight, options.maxHeight));
                     },
                     "w": function () {
                         var windowRight = wnd.initialCursorPosition.left + wnd.initialSize.width,
-                            newWidth = constrain(windowRight - e.pageX, options.minWidth, options.maxWidth);
+                            newWidth = constrain(windowRight - e.x.location, options.minWidth, options.maxWidth);
 
                         wrapper.css({
                             left: windowRight - newWidth,
@@ -1458,7 +1460,7 @@
                     },
                     "n": function () {
                         var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
-                            newHeight = constrain(windowBottom - e.pageY, options.minHeight, options.maxHeight);
+                            newHeight = constrain(windowBottom - e.y.location, options.minHeight, options.maxHeight);
 
                         wrapper.css({
                             top: windowBottom - newHeight,
@@ -1483,6 +1485,9 @@
 
             $(body).css(CURSOR, "");
 
+            if (wnd.touchScroller) {
+               wnd.touchScroller.reset();
+            }
             if (e.keyCode == 27) {
                 wrapper.css(wnd.initialCursorPosition)
                     .css(wnd.initialSize);
@@ -1501,7 +1506,8 @@
             group: wnd.wrapper.id + "-moving",
             dragstart: proxy(that.dragstart, that),
             drag: proxy(that.drag, that),
-            dragend: proxy(that.dragend, that)
+            dragend: proxy(that.dragend, that),
+            dragcancel: proxy(that.dragcancel, that)
         });
     }
 
@@ -1516,8 +1522,8 @@
             wnd.initialWindowPosition = wnd.wrapper.position();
 
             wnd.startPosition = {
-                left: e.pageX - wnd.initialWindowPosition.left,
-                top: e.pageY - wnd.initialWindowPosition.top
+                left: e.x.client - wnd.initialWindowPosition.left,
+                top: e.y.client - wnd.initialWindowPosition.top
             };
 
             if (actions.length > 0) {
@@ -1532,15 +1538,29 @@
 
             $(body).css(CURSOR, e.currentTarget.css(CURSOR));
         },
+
         drag: function (e) {
             var wnd = this.owner,
                 coordinates = {
-                    left: Math.max(e.pageX - wnd.startPosition.left, wnd.minLeftPosition),
-                    top: Math.max(e.pageY - wnd.startPosition.top, 0)
+                    left: Math.max(e.x.client - wnd.startPosition.left, wnd.minLeftPosition),
+                    top: Math.max(e.y.client - wnd.startPosition.top, 0)
                 };
 
             $(wnd.wrapper).css(coordinates);
         },
+
+        dragcancel: function (e) {
+            var wnd = this.owner;
+
+            wnd.wrapper
+                .find(KWINDOWRESIZEHANDLES).show().end()
+                .find(KOVERLAY).remove();
+
+            $(body).css(CURSOR, "");
+
+            e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
+        },
+
         dragend: function (e) {
             var wnd = this.owner;
 
@@ -1550,11 +1570,7 @@
 
             $(body).css(CURSOR, "");
 
-            if (e.keyCode == 27) {
-                e.currentTarget.closest(KWINDOW).css(wnd.initialWindowPosition);
-            } else {
-                wnd.trigger(DRAGEND);
-            }
+            wnd.trigger(DRAGEND);
 
             return false;
         }
