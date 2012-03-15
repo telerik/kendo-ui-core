@@ -72,6 +72,14 @@
     &lt;/label&gt;
     &lt;label&gt;&lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: agreed&quot; /&gt; I have read the licence agreement&lt;/label&gt;
     &lt;button data-bind=&quot;enabled: agreed, click: register&quot;&gt;Register&lt;/button&gt;
+    &lt;div data-bind=&quot;visible: confirmed&quot;&gt;
+        &lt;h4&gt;Confirmation&lt;/h4&gt;
+        &lt;div&gt;
+            Thank you for your registration, &lt;span data-bind=&quot;text: firstName&quot;&gt;&lt;/span&gt; &lt;span data-bind=&quot;text: lastName&quot;&gt;&lt;/span&gt;
+            &lt;br /&gt;&lt;br /&gt;
+            &lt;button data-bind=&quot;click: startOver&quot;&gt;Start Over&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
 &lt;/form&gt;
         </pre>
     </div>
@@ -89,6 +97,13 @@
             e.preventDefault();
 
             this.set(&quot;confirmed&quot;, true);
+        },
+        startOver: function() {
+            this.set(&quot;confirmed&quot;, false);
+            this.set(&quot;agreed&quot;, false);
+            this.set(&quot;gender&quot;, &quot;Male&quot;);
+            this.set(&quot;firstName&quot;, &quot;John&quot;);
+            this.set(&quot;lastName&quot;, &quot;Doe&quot;);
         }
     });
 
