@@ -68,7 +68,7 @@
                 view.decorators.push(
                     new dataviz.RadialPointerAnimationDecorator(view),
                     new dataviz.ArrowPointerAnimationDecorator(view),
-                    new dataviz.BarPointerAnimationDecorator(view)
+                    new dataviz.BarIndicatorAnimationDecorator(view)
                 );
             }
 

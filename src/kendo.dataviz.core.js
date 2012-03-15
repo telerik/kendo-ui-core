@@ -1732,8 +1732,7 @@
 
     var BarAnimation = ElementAnimation.extend({
         options: {
-            easing: SWING,
-            above: true
+            easing: SWING
         },
 
         setup: function() {
@@ -1784,6 +1783,53 @@
 
                 points[1].x = points[2].x =
                     interpolateValue(startPosition, endState.right, pos);
+            }
+        }
+    });
+
+    var ArrowAnimation = ElementAnimation.extend({
+        options: {
+            easing: SWING,
+            duration: 1000
+        },
+
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                points = element.points,
+                options = element.options,
+                axis = options.vertical ? "y" : "x",
+                pos = options.vertical ? "y1" : "x1",
+                startPosition = options.startPosition[pos],
+                halfSize = options.size / 2,
+                count = points.length,
+                padding = halfSize,
+                point,
+                i;
+
+            anim.axis = axis;
+            anim.endState = [];
+            anim.startPositions = [];
+            for (i = 0; i < count; i++) {
+                point = deepExtend({}, points[i]);
+                anim.endState[i] = point[axis];
+                anim.startPositions[i] = startPosition - padding;
+                points[i][axis] = startPosition - padding;
+                padding -= halfSize;
+            }
+        },
+
+        step: function(pos) {
+            var anim = this,
+                startPositions = anim.startPositions,
+                endState = anim.endState,
+                element = anim.element,
+                points = element.points,
+                axis = anim.axis,
+                count = points.length;
+
+            for (i = 0; i < count; i++) {
+                points[i][axis] = interpolateValue(startPositions[i], endState[i], pos);
             }
         }
     });
@@ -2236,6 +2282,7 @@
         Color: Color,
         ElementAnimation:ElementAnimation,
         ExpandAnimation: ExpandAnimation,
+        ArrowAnimation: ArrowAnimation,
         BarAnimation: BarAnimation,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,

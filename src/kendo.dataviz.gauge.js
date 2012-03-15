@@ -20,6 +20,7 @@
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,
         BarAnimation = dataviz.BarAnimation,
+        ArrowAnimation = dataviz.ArrowAnimation,
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
         autoMajorUnit = dataviz.autoMajorUnit,
@@ -647,7 +648,8 @@
 
             padding: getSpacing(3),
             animation: {
-                type: "bar"
+                type: BAR,
+                duration: 1000
             }
         },
 
@@ -722,39 +724,36 @@
                 scaleLine = scale.lineBox(),
                 slot = scale.getSlot(options.value),
                 trackBox = pointer.trackBox,
-                size = options.size;
-
-            if (options.shape == ARROW) {
-                if (scale.options.vertical) {
-                    shape = view.createPolyline([
-                        new Point2D(trackBox.x1 - size, slot.y1),
-                        new Point2D(trackBox.x1, slot.y1 - size / 2),
-                        new Point2D(trackBox.x1, slot.y1 + size / 2)
-                    ], true, deepExtend({
-                        fill: options.color,
-                        fillOpacity: options.opacity,
-                        zIndex: 2
-                    }, border));
-                } else {
-                    shape = view.createPolyline([
-                        new Point2D(slot.x2, trackBox.y2 + size),
-                        new Point2D(slot.x2 - size / 2, trackBox.y2),
-                        new Point2D(slot.x2 + size / 2, trackBox.y2)
-                    ], true, deepExtend({
-                        fill: options.color,
-                        fillOpacity: options.opacity,
-                        zIndex: 2
-                    }, border));
-                }
-            } else {
-                shape = view.createRect(pointer.pointerBox, deepExtend({
+                size = options.size,
+                shapeOptions = deepExtend({
                         fill: options.color,
                         fillOpacity: options.opacity,
                         animation: options.animation,
                         vertical: scale.options.vertical,
-                        id: options.id
-                    }, border)
-                );
+                        id: options.id,
+                        zIndex: 2,
+                        size: options.size,
+                        startPosition: scale.getSlot(options.min)
+                    }, border),
+                halfSize = size / 2;
+
+            if (options.shape == ARROW) {
+                shapeOptions.animation.type = ARROW_POINTER;
+                if (scale.options.vertical) {
+                    shape = view.createPolyline([
+                        new Point2D(trackBox.x1, slot.y1 - halfSize),
+                        new Point2D(trackBox.x1 - size, slot.y1),
+                        new Point2D(trackBox.x1, slot.y1 + halfSize)
+                    ], true, shapeOptions);
+                } else {
+                    shape = view.createPolyline([
+                        new Point2D(slot.x2 - halfSize, trackBox.y2),
+                        new Point2D(slot.x2, trackBox.y2 + size),
+                        new Point2D(slot.x2 + halfSize, trackBox.y2)
+                    ], true, shapeOptions);
+                }
+            } else {
+                shape = view.createRect(pointer.pointerBox, shapeOptions);
             }
 
             return shape;
@@ -766,10 +765,6 @@
                 options = pointer.options,
                 trackOptions = options.track,
                 border = trackOptions.border || {};
-
-            if (options.shape == ARROW) {
-                trackOptions.color = trackOptions.color || options.color;
-            }
 
             return view.createRect(pointer.trackBox, {
                 fill: trackOptions.color,
@@ -1025,7 +1020,7 @@
     });
 
     var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
-    var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, RotationAnimation);
+    var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
     var BarIndicatorAnimationDecorator = animationDecorator(BAR, BarAnimation);
 
     // Exports ================================================================
