@@ -143,6 +143,16 @@
                 }, 200);
             });
 
+            test("extend popup options if timepicker.options.popup", function() {
+                var appendTo = "fake",
+                    timepicker = new kendo.ui.TimePicker(input, {
+                        popup: {
+                            appendTo: appendTo
+                        }
+                    });
+
+                equal(timepicker.timeView.popup.options.appendTo, appendTo);
+            })
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

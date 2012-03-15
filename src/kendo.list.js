@@ -20,6 +20,7 @@
         OPEN = "open",
         CLOSE = "close",
         SELECT = "select",
+        extend = $.extend,
         proxy = $.proxy,
         isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9;
 
@@ -180,10 +181,11 @@
                 computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth(),
                 width;
 
-            if (computedStyle && ($.browser.mozilla || $.browser.msie)) // getComputedStyle returns different box in FF and IE.
+            if (computedStyle && ($.browser.mozilla || $.browser.msie)) { // getComputedStyle returns different box in FF and IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
+            }
 
-            that.popup = new ui.Popup(list, {
+            that.popup = new ui.Popup(list, extend({}, options.popup, {
                 anchor: wrapper,
                 open: function(e) {
                     if (that.trigger(OPEN)) {
@@ -196,7 +198,7 @@
                     }
                 },
                 animation: options.animation
-            });
+            }));
 
             width = computedWidth - (list.outerWidth() - list.width());
 
@@ -269,7 +271,7 @@
         }
     });
 
-    $.extend(List, {
+    extend(List, {
         caret: function(element) {
             var caret,
                 selection = element.ownerDocument.selection;
