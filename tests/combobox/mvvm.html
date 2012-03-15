@@ -80,7 +80,7 @@
                 equal(observable.value, observable.items[0]);
             });
             test("changing value to a custom one updates the view model", function() {
-                var dom = $('<input data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
+                var dom = $('<select data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
 
@@ -94,7 +94,7 @@
             });
 
             test("custom view model value", function() {
-                var dom = $('<input data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
+                var dom = $('<select data-text-field="text" data-role="combobox" data-bind="value:value, source:items" />');
 
                 var observable = kendo.observable({ items: [{text:"foo"}, {text:"bar"}], value: null });
                 observable.value = "moo";
@@ -253,7 +253,7 @@
             });
 
             test("binding enabled to false disables the widget", function() {
-                var dom = $('<input data-bind="enabled:enabled" data-role="combobox"/>');
+                var dom = $('<select data-bind="enabled:enabled" data-role="combobox"/>');
 
                 var observable = kendo.observable({
                     enabled: false
@@ -265,7 +265,7 @@
             });
 
             test("binding enabled to true enables the widget", function() {
-                var dom = $('<input data-bind="enabled:enabled" disabled="disabled" data-role="combobox" />');
+                var dom = $('<select data-bind="enabled:enabled" disabled="disabled" data-role="combobox" />');
 
                 var observable = kendo.observable({
                     enabled: true
@@ -277,7 +277,7 @@
             });
 
             test("binding disable to true disables the widget", function() {
-                var dom = $('<input data-bind="disabled:disabled" disabled="disabled" data-role="combobox" />');
+                var dom = $('<select data-bind="disabled:disabled" disabled="disabled" data-role="combobox" />');
 
                 var observable = kendo.observable({
                     disabled: false
@@ -289,7 +289,7 @@
             });
 
             test("binding disabled to false enables the widget", function() {
-                var dom = $('<input data-bind="disabled:disabled" data-role="combobox" />');
+                var dom = $('<select data-bind="disabled:disabled" data-role="combobox" />');
 
                 var observable = kendo.observable({
                     disabled: true
@@ -298,6 +298,119 @@
                 kendo.bind(dom, observable);
 
                 ok(dom.is(":disabled"));
+            });
+
+            test("binding invisible to true hides the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding invisible to false shows the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="combobox" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing invisible to true hides the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", true);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing invisible to false shows the widget", function() {
+                var dom = $('<select data-bind="invisible:invisible" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("invisible", false);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+
+            test("binding enabled to false disables the widget", function() {
+                var dom = $('<select data-bind="enabled:enabled" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    enabled: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.is(":disabled"));
+            });
+
+            test("binding visible to false hides the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding visible to true shows the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="combobox" style="display:none"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing visible to false hides the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", false);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing visible to true shows the widget", function() {
+                var dom = $('<select data-bind="visible:visible" data-role="combobox"/>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable);
+                observable.set("visible", true);
+
+                ok(dom.data("kendoComboBox").wrapper.css("display") != "none", "Display is not 'none'");
             });
 
             test("assign to DataSource as ViewModel field", function() {

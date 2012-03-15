@@ -6,6 +6,8 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.mobile.core.js"></script>
         <script src="../../src/kendo.mobile.buttongroup.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
@@ -164,6 +166,106 @@
                 segmented._mousedown({
                     currentTarget: dom.find("li:last")[0]
                 });
+            });
+
+            test("binding visible to false hides the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("binding visible to true shows the widget", function() {
+                var dom = $('<ul data-role="buttongroup" style="display:none" data-bind="visible:visible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("changing visible to false hides the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    visible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("visible", false);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") == "none", "Display is 'none'");
+            });
+
+            test("changing visible to true shows the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="visible:visible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    visible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("visible", true);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") != "none", "Display is not 'none'");
+            });
+
+            test("binding invisible to true hides the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("binding invisible to false shows the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible" style="display:none"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("changing invisible to true hides the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    invisible: false
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("invisible", true);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") == "none", "display is 'none'");
+            });
+
+            test("changing invisible to false shows the widget", function() {
+                var dom = $('<ul data-role="buttongroup" data-bind="invisible:invisible"><li></li></ul>');
+
+                var observable = kendo.observable({
+                    invisible: true
+                });
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+                observable.set("invisible", false);
+
+                ok(dom.data("kendoMobileButtonGroup").wrapper.css("display") != "none", "display is not 'none'");
             });
         </script>
     </body>

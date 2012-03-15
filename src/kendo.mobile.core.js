@@ -21,6 +21,7 @@
          */
         init: function(element, options) {
             ui.Widget.fn.init.call(this, element, options);
+            this.wrapper = this.element;
         },
 
         options: {
