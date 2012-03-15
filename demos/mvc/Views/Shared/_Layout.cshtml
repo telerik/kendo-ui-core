@@ -22,56 +22,144 @@
     @Html.Partial("Header")
 
     <div id="navmainWrap" class="floatWrap centerWrap hasNavigation">
-        <div id="navWrap">
+        <div id="topNav">
             @foreach (string category in ViewBag.Navigation.Keys)
             {
                 if (ViewBag.Navigation.Keys.Count > 1)
                 {
                     <h3>@category</h3>
                 }
-                <ul class="nav">
-                @foreach (NavigationWidget widget in ViewBag.Navigation[category])
-                {
-                    <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
-                        <span class="k-link k-header">
-                            <span class="k-sprite @widget.SpriteCssClass"></span>
-                            @widget.Text
-                        </span>
-                        <ul>
-                            @foreach (NavigationExample example in widget.Items)
-                            {
-                                <li>
-                                    <a class="k-link @(Request.Path.EndsWith(example.Url) ? "chosen" : "")"
-                                        href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
-                                </li>
-                            }
-                        </ul>
-                    </li>
-                }
+                <ul>
+                    @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                    {
+                        if (widget.Name != "overview")
+                        {
+                            <li class="@(ViewBag.Section == widget.Name ? "k-state-active k-state-highlighted" : "")">
+                                <a class="k-link @(ViewBag.Section == widget.Name ? "chosen" : "")"
+                                    href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
+                            </li>
+                        }
+                    }
                 </ul>
             }
         </div>
+
+        @if (ViewBag.CurrentWidget.Name != "overview")
+        {
+
+            @Html.Partial("Pager");
+
+            <div id="navWrap">
+                <ul class="nav">
+                    @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+                    {
+                        <li class="@(Request.Path.EndsWith(example.Url) ? "k-state-active k-state-highlighted" : "")">
+                            <a class="k-link @(Request.Path.EndsWith(example.Url) ? "k-state-selected chosen" : "")"
+                                href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                        </li>
+                    }
+                </ul>
+
+                @if (ViewBag.suite == "mobile")
+                {
+                    <p id="qrWrap">Open this demo with an iOS/Android mobile device for a full experience. <a href="#" id="qr"><span class="k-icon k-qr"></span><em>Show QR Code</em></a></p>
+                    <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
+                }
+            </div>
+
+            if (ViewBag.suite == "mobile")
+            {
+                <div class="configuration mobileConfiguration">
+                    <input id="deviceChooser" type="hidden" />
+                    <ul id="deviceList" class="options">
+                        <li></li>
+                    </ul>
+
+                    <script id="deviceThumbTemplate" type="text/x-kendo-template">
+                        <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+                    </script>
+
+                </div>
+            }
+        }
+
+        @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
+            <div id="examplesThemeChooser">
+                <label for="skinSelector">Theme</label>
+                <ul id="skinSelector" class="themeChooser" />
+            </div>
+        }
+
         @RenderBody()
     </div>
 
     @Html.Partial("Footer")
 
     <script>
-        $(".nav").kendoPanelBar({
-            animation: { open: { effects: "fadeIn expandVertical" } },
-            expand: function() {
-                $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
-                    $(this)
-                        .find(".k-link").removeClass("k-state-selected k-state-highlighted");
-                });
-            },
-            expandMode: "single"
-        });
+        var firstUrl = "@(ViewBag.FirstUrl != null ? Url.Content(ViewBag.FirstUrl) : "")",
+            lastUrl = "@(ViewBag.LastUrl != null ? Url.Content(ViewBag.LastUrl) : "")",
+            links = $("#pager a"),
+            prevLink = links.eq(0),
+            nextLink = links.eq(1)
+            panelbar = $(".nav").kendoPanelBar({
+                animation: { open: { effects: "fadeIn expandVertical" } },
+                expand: function() {
+                    $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
+                        $(this)
+                            .find(".k-link").removeClass("k-state-selected k-state-highlighted");
+                    });
+                },
+                select: function() {
+                    var item = this.select(),
+                        links = $("#pager a"),
+                        prevUrl = item.prev().find("a").attr("href"),
+                        nextUrl = item.next().find("a").attr("href"),
+                        prevLink = links.eq(0).attr("href", prevUrl || lastUrl),
+                        nextLink = links.eq(1).attr("href", nextUrl || firstUrl);
+                },
+                expandMode: "single"
+            }).data("kendoPanelBar");
 
         $(".themeChooser").themeChooser();
 
         $("#deviceChooser").mobileOsChooser({
             container: "#mobile-application-container"
+        });
+
+        $("#pager a").click(function(e) {
+            var element = $(this),
+                url = element.attr("href"),
+                sibling = element.siblings(),
+                method = element.hasClass("prev") ? "prev" : "next",
+                currentItem = panelbar.select(),
+                nextItem = currentItem[method](),
+                navigateUrl;
+
+            if (nextItem[0]) {
+                e.preventDefault();
+
+                panelbar.select(nextItem);
+                nextItem.children().addClass("chosen");
+                currentItem.children().removeClass("chosen");
+
+                sibling.removeClass("k-state-disabled")
+                       .attr("href", location.href);
+
+                nextItem = nextItem[method]();
+
+                if (nextItem[0]) {
+                    element.attr("href", nextItem.children("a").attr("href"));
+                } else {
+                    navigateUrl = method == "next" ? firstUrl : lastUrl;
+
+                    element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
+                }
+
+                Application.load(url);
+
+            } else if (url == "#") {
+                e.preventDefault();
+            }
         });
     </script>
 </body>
