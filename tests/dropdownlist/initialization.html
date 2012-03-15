@@ -542,6 +542,17 @@
 
                 equal(dropdownlist.ul.children().length, 2);
             });
+
+            test("extend popup options if dropdownlist.options.popup", function() {
+                var appendTo = "fake",
+                    dropdownlist = new DropDownList($("<input/>"), {
+                    popup: {
+                        appendTo: appendTo
+                    }
+                });
+
+                equal(dropdownlist.popup.options.appendTo, appendTo);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -122,6 +122,7 @@
     views = calendar.viewsEnum,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
+    extend = $.extend,
     proxy = $.proxy,
     DATE = Date,
     sharedCalendar;
@@ -137,7 +138,7 @@
 
         that.calendar = sharedCalendar;
         that.options = options = options || {};
-        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), options);
+        that.popup = new ui.Popup($(DIV).addClass("k-calendar-container").appendTo(body), extend(options.popup, options));
 
         that._templates();
 
@@ -570,7 +571,7 @@
 
             that._wrapper();
 
-            that.dateView = dateView = new DateView($.extend({}, options, {
+            that.dateView = dateView = new DateView(extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
@@ -689,7 +690,7 @@
 
         setOptions: function(options) {
             Widget.fn.setOptions.call(this, options);
-            $.extend(this.dateView.options, options);
+            extend(this.dateView.options, options);
         },
 
         /**
