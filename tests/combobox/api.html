@@ -310,11 +310,10 @@
                 equal(combobox.selectedIndex, 1);
                 equal(combobox.dataItem(), combobox.dataSource.view()[1]);
             });
-/*
+
             test("dataItem() returns dataItem depending on passed index", function() {
                 equal(combobox.dataItem(1), combobox.dataSource.view()[1]);
             });
-            */
 
             test("value(value) calls dataSource.fetch if no data", function() {
                 var combobox = new ComboBox(input);
