@@ -277,6 +277,17 @@
                     start();
                 }, 200);
             });
+
+            test("extend popup options if datepicker.options.popup", function() {
+                var appendTo = "fake",
+                    datepicker = new kendo.ui.DatePicker(input, {
+                        popup: {
+                            appendTo: appendTo
+                        }
+                    });
+
+                equal(datepicker.dateView.popup.options.appendTo, appendTo);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
