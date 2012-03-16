@@ -38,6 +38,7 @@
         slice = [].slice,
         unshift = [].unshift,
         toString = {}.toString,
+        stableSort = kendo.support.stableSort,
         dateRegExp = /^\/Date\((.*?)\)\/$/,
         quoteRegExp = /(?=['\\])/g;
 
@@ -549,6 +550,57 @@
         }
     };
 
+    var PositionComparer = {
+        selector: function(field) {
+            return isFunction(field) ? field : getter(field);
+        },
+
+        asc: function(field) {
+            var selector = this.selector(field);
+            return function (a, b) {
+                var valueA = selector(a);
+                var valueB = selector(b);
+
+                if (valueA === valueB) {
+                    return a.__position - b.__position;
+                }
+                return valueA > valueB ? 1 : (valueA < valueB ? -1 : 0);
+            };
+        },
+
+        desc: function(field) {
+            var selector = this.selector(field);
+            return function (a, b) {
+                var valueA = selector(a);
+                var valueB = selector(b);
+
+                if (valueA === valueB) {
+                    return a.__position - b.__position;
+                }
+
+                return valueA < valueB ? 1 : (valueA > valueB ? -1 : 0);
+            };
+        },
+
+        create: function(descriptor) {
+            return PositionComparer[descriptor.dir.toLowerCase()](descriptor.field);
+        },
+
+        combine: function(comparers) {
+             return function(a, b) {
+                 var result = comparers[0](a, b),
+                     idx,
+                     length;
+
+                 for (idx = 1, length = comparers.length; idx < length; idx ++) {
+                     result = result || comparers[idx](a, b);
+                 }
+
+                 return result;
+             }
+        }
+    };
+
     map = function (array, callback) {
         var idx, length = array.length, result = new Array(length);
 
@@ -828,18 +880,20 @@
         orderByDescending: function (selector) {
             return new Query(this.data.slice(0).sort(Comparer.desc(selector)));
         },
-        sort: function(field, dir) {
+        sort: function(field, dir, comparer) {
             var idx,
             length,
             descriptors = normalizeSort(field, dir),
             comparers = [];
 
+            comparer = comparer || Comparer;
+
             if (descriptors.length) {
                 for (idx = 0, length = descriptors.length; idx < length; idx++) {
-                    comparers.push(Comparer.create(descriptors[idx]));
+                    comparers.push(comparer.create(descriptors[idx]));
                 }
 
-                return this.orderBy({ compare: Comparer.combine(comparers) });
+                return this.orderBy({ compare: comparer.combine(comparers) });
             }
 
             return this;
@@ -908,25 +962,26 @@
             }
             return result;
         },
+
         groupBy: function(descriptor) {
             if (isEmptyObject(descriptor) || !this.data.length) {
                 return new Query([]);
             }
 
             var field = descriptor.field,
-            sorted = this.sort(field, descriptor.dir || "asc").toArray(),
-            accessor = kendo.accessor(field),
-            item,
-            groupValue = accessor.get(sorted[0], field),
-            group = {
-                field: field,
-                value: groupValue,
-                items: []
-            },
-            currentValue,
-            idx,
-            len,
-            result = [group];
+                sorted = this._sortForGrouping(field, descriptor.dir || "asc"),
+                accessor = kendo.accessor(field),
+                item,
+                groupValue = accessor.get(sorted[0], field),
+                group = {
+                    field: field,
+                    value: groupValue,
+                    items: []
+                },
+                currentValue,
+                idx,
+                len,
+                result = [group];
 
             for(idx = 0, len = sorted.length; idx < len; idx++) {
                 item = sorted[idx];
@@ -944,6 +999,26 @@
             }
             return new Query(result);
         },
+
+        _sortForGrouping: function(field, dir) {
+            var idx, length,
+                data = this.data;
+
+            if (!stableSort) {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    data[idx].__position = idx;
+                }
+
+                data = new Query(data).sort(field, dir, PositionComparer).toArray();
+
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    delete data[idx].__position;
+                }
+                return data;
+            }
+            return this.sort(field, dir).toArray();
+        },
+
         aggregate: function (aggregates) {
             var idx,
             len,
