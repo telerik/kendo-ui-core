@@ -4,7 +4,7 @@
 
             <div id="filtering-tabs"></div>
 
-            <h5 class="example-subtitle">Stock prices throughout the year</h5>
+            <h5 class="example-subtitle">Closing stock prices throughout the year</h5>
 
             <div id="chart-type-chooser">
                 <strong class="example-subtitle radio-group-label">Chart type</strong>
@@ -51,8 +51,7 @@
 
                     autoBind: false,
 
-                    series: [{
-                        field: "high",
+                    seriesDefaults: {
                         type: "area",
                         overlay: {
                             gradient: "none"
@@ -62,6 +61,10 @@
                         },
                         majorTickSize: 0,
                         opacity: .8
+                    },
+
+                    series: [{
+                        field: "close"
                     }],
 
                     seriesColors: [ "#cd1533", "#009bd7", "#454447" ],
