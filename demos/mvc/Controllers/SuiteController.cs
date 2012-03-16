@@ -69,6 +69,25 @@ namespace Kendo.Controllers
             return redirect;
         }
 
+        //
+        // GET: /Web/
+        public ActionResult Navigation(string suite, string section, string example)
+        {
+#if DEBUG
+            ViewBag.Debug = true;
+#else
+            ViewBag.Debug = false;
+#endif
+
+            LoadNavigation(suite);
+
+            FindCurrentExample();
+            FindSiblingExamples();
+            FindEdgeExamples();
+
+            return PartialView("~/Views/Shared/Navigation.cshtml");
+        }
+
         protected void FindCurrentExample()
         {
             var found = false;
