@@ -199,7 +199,7 @@
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
-                groupNameTemplate: "#= group.value #: #= series.name #",
+                groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
                 bar: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
