@@ -75,6 +75,16 @@
                                 .bind("DOMMouseScroll", proxy(that._wheelScroll, that))
                                 .bind("mousewheel", proxy(that._wheelScroll, that));
 
+            if (kendo.support.touch) {
+                that.drag = new kendo.Drag(that.wrapper, {
+                    global: true,
+                    move: function(e) {
+                        that.verticalScrollbar.scrollTop(that.verticalScrollbar.scrollTop() - e.y.delta);
+                        e.preventDefault();
+                    }
+                });
+            }
+
             that.verticalScrollbar = $('<div class="k-scrollbar k-scrollbar-vertical" />')
                                         .css({
                                             width: scrollbar
@@ -206,6 +216,10 @@
 
             that.verticalScrollbar.html(html);
             wrapperElement.scrollTop = that._scrollTop;
+
+            if (that.drag) {
+                that.drag.cancel();
+            }
 
             if (rangeStart && !that._fetching) { // we are rebound from outside local range should be reset
                 that._rangeStart = dataSource.skip();
@@ -1995,6 +2009,8 @@
                     that.content.bind('scroll', function () {
                         scrollables.scrollLeft(this.scrollLeft);
                     });
+
+                    kendo.touchScroller(that.content);
                 }
             }
         },
