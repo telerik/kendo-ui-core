@@ -71,7 +71,7 @@
         var body = $(".km-vertical");
 
         $("#dropdown").kendoDropDownList({
-            popup: { appendTo: body,  },
+            popup: { appendTo: body },
             animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") ? "slideIn:up" : undefined } }
         });
     }
