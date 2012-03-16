@@ -112,31 +112,10 @@
     * </body>
     *
     * @section
-    * <h3>View Structure</h3>
+    * <h3>Mobile Views</h3>
     *
     * <p>The mobile <strong>Application</strong> consists of a single HTML page with one or more mobile Views, linked with navigational widgets (Buttons, TabStrip, etc.).
     * A mobile <strong>View</strong> is considered each child of the application element (<code>&lt;body&gt;</code> by default) that is decorated with <code>data-role="view"</code>.
-    *
-    * @exampleTitle Define mobile View
-    * @example
-    * <div data-role="view">Foo</div>
-    *
-    * @section
-    * <h3>Headers and Footers</h3>
-    * <p>By default, the mobile <strong>View</strong> contents stretch to fit the application element. The mobile <strong>View</strong> can also have a header and a footer.
-    * In order to mark header and footer elements, add elements with attribute <code>data-role="header"</code> and <code>data-role="footer"</code>. </p>
-    *
-    * @exampleTitle Mobile View with Header and Footer
-    * @example
-    * <div data-role="view">
-    *   <div data-role="header">Header</div>
-    *   Hello world!
-    *   <div data-role="footer">Footer</div>
-    * </div>
-    *
-    * @section
-    * <strong>Important:</strong>
-    * <p>Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected. Usually the footer hosts a MobileTabstrip widget, which is located at the bottom of the screen on iOS, and at the top of the screen in Android applications.  </p>
     *
     * @section
     * <h3>Layout</h3>
@@ -310,8 +289,8 @@
          * @extends kendo.Observable
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
-         * @option {String} [layout] <> The id of the default Application layout.
-         * @option {String} [initial] <> The id of a View.
+         * @option {String} [layout] <> The id of the default Application Layout.
+         * @option {String} [initial] <> The id of the initial mobilie View to display.
          * _example
          * <script>
          *      new kendo.mobile.Application($(document.body), {

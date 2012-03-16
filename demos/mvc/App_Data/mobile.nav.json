@@ -1,5 +1,5 @@
 {
-    "Mobile Framework": [
+    "Mobile Widgets": [
         {
             "text": "Overview",
             "name": "overview",
@@ -9,22 +9,6 @@
                     "text": "Overview",
                     "url": "overview/index.html"
                 }
-            ]
-        },
-        {
-            "text": "Application",
-            "name": "application",
-            "spriteCssClass": "mobileAppIcon",
-            "items": [
-                {
-                    "text": "Overview",
-                    "url": "application/index.html"
-                },
-                {
-                    "text": "Loading popup",
-                    "url": "application/loadingpopup.html"
-                }
-
             ]
         },
         {
@@ -157,6 +141,36 @@
                 {
                     "text": "Customizing Appearance",
                     "url": "tabstrip/appearance.html"
+                }
+            ]
+        }
+     ],
+
+    "Mobile Framework": [
+        {
+            "text": "Application",
+            "name": "application",
+            "spriteCssClass": "mobileAppIcon",
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "application/index.html"
+                },
+                {
+                    "text": "Loading popup",
+                    "url": "application/loadingpopup.html"
+                }
+
+            ]
+        },
+        {
+            "text": "View",
+            "name": "view",
+            "spriteCssClass": "mobileAppIcon",
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "view/index.html"
                 }
             ]
         }
