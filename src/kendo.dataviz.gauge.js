@@ -659,15 +659,23 @@
             var pointer = this,
                 scale = pointer.scale,
                 options = pointer.options,
-                needle = pointer.elements[0],
+                element = pointer.element,
                 animation;
 
-            if (options.animation === false) {
-                needle.refresh(doc.getElementById(options.id));
+            if (options.animation === false && element) {
+                element.refresh(doc.getElementById(options.id));
             } else {
-                animation = new RotationAnimation(needle, deepExtend(options.animation, {
-                    startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(scale.options.min)
-                }));
+                if (options.shape == ARROW) {
+                    element.points = pointer.getShape(options.value);
+                    animation = new ArrowAnimation(element, deepExtend(options.animation, {
+                        type: ARROW_POINTER,
+                        startPosition: scale.getSlot(options.min)
+                    }));
+                } else {
+                    animation = new BarAnimation(element, deepExtend(options.animation, {
+                        startPosition: scale.getSlot(options.min)
+                    }));
+                }
                 animation.setup();
                 animation.play();
             }
@@ -692,25 +700,15 @@
                     scaleBox.x2 + padding.left, scaleLine.y1,
                     scaleBox.x2 + padding.left + width, scaleLine.y2);
 
-                trackBoxCenter = trackBox.center();
-                pointerBox = new Box2D(
-                    trackBoxCenter.x - halfSize, slot.y1,
-                    trackBoxCenter.x + halfSize, slot.y2);
             } else {
                 trackBox = new Box2D(
                     scaleLine.x1, scaleBox.y1 - padding.bottom - width,
                     scaleLine.x2, scaleBox.y1 - padding.bottom);
-
-                trackBoxCenter = trackBox.center();
-                pointerBox = new Box2D(
-                    slot.x1, trackBoxCenter.y - halfSize,
-                    slot.x2, trackBoxCenter.y + halfSize);
             }
 
             pointer.trackBox = trackBox;
-            pointer.pointerBox = pointerBox;
 
-            pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
+            pointer.box = trackBox.clone().pad(padding);
         },
 
         renderPointer: function(view) {
@@ -722,12 +720,8 @@
                     strokeWidth: options.border.width,
                     dashType: options.border.dashType
                 } : {},
-                shape,
-                scaleLine = scale.lineBox(),
-                slot = scale.getSlot(options.value),
-                trackBox = pointer.trackBox,
-                size = options.size,
-                shapeOptions = deepExtend({
+                element,
+                elementOptions = deepExtend({
                         fill: options.color,
                         fillOpacity: options.opacity,
                         animation: options.animation,
@@ -738,25 +732,53 @@
                         startPosition: scale.getSlot(options.min),
                         align: false
                     }, border),
-                halfSize = size / 2;
+                shape = pointer.getShape(options.value);
 
             if (options.shape == ARROW) {
-                shapeOptions.animation.type = ARROW_POINTER;
+                elementOptions.animation.type = ARROW_POINTER;
+                element = view.createPolyline(shape, true, elementOptions);
+            } else {
+                element = view.createRect(shape, elementOptions);
+            }
+
+            return element;
+        },
+
+        getShape: function(value) {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                slot = scale.getSlot(value),
+                size = options.size,
+                halfSize = size / 2,
+                trackBox = pointer.trackBox,
+                trackBoxCenter = trackBox.center(),
+                shape;
+
+            if (options.shape == ARROW) {
                 if (scale.options.vertical) {
-                    shape = view.createPolyline([
+                    shape = [
                         new Point2D(trackBox.x1, slot.y1 - halfSize),
                         new Point2D(trackBox.x1 - size, slot.y1),
                         new Point2D(trackBox.x1, slot.y1 + halfSize)
-                    ], true, shapeOptions);
+                    ];
                 } else {
-                    shape = view.createPolyline([
+                    shape = [
                         new Point2D(slot.x2 - halfSize, trackBox.y2),
                         new Point2D(slot.x2, trackBox.y2 + size),
                         new Point2D(slot.x2 + halfSize, trackBox.y2)
-                    ], true, shapeOptions);
+                    ];
                 }
             } else {
-                shape = view.createRect(pointer.pointerBox, shapeOptions);
+                if (scale.options.vertical) {
+                    shape = new Box2D(
+                        trackBoxCenter.x - halfSize, slot.y1,
+                        trackBoxCenter.x + halfSize, slot.y2);
+                } else {
+                    shape = new Box2D(
+                        slot.x1, trackBoxCenter.y - halfSize,
+                        slot.x2, trackBoxCenter.y + halfSize);
+                }
             }
 
             return shape;
@@ -785,7 +807,8 @@
                 elements = [];
 
             if (options.visible) {
-                elements.push(pointer.renderPointer(view));
+                pointer.element = pointer.renderPointer(view);
+                elements.push(pointer.element);
                 if (options.track.visible) {
                     elements.push(pointer.renderTrack(view));
                 }
