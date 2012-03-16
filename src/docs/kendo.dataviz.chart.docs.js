@@ -2667,7 +2667,7 @@
          *  // ...
          * @option {String} [series.type="pie".explodeField]
          * The data field containing a boolean value that indicates if the sector is exploded.
-         * @option {Number} [series.type="pie".padding] <60> The padding around the pie chart (equal on all sides).
+         * @option {Number} [series.type="pie".padding] The padding around the pie chart (equal on all sides).
          * @option {Number} [series.type="pie".opacity] <1> The series opacity.
          * @option {Object} [series.type="pie".labels] Configures the series data labels.
          * @option {String} [series.type="pie".labels.color] The text color of the labels.
