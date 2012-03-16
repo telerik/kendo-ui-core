@@ -118,29 +118,19 @@
     @Html.Partial("Footer")
 
     <script>
-        var firstUrl = "@(ViewBag.FirstUrl != null ? Url.Content(ViewBag.FirstUrl) : "")",
-            lastUrl = "@(ViewBag.LastUrl != null ? Url.Content(ViewBag.LastUrl) : "")",
+        var prevWidgetUrl = "@(ViewBag.PrevWidgetUrl != null ? Url.Content(ViewBag.PrevWidgetUrl) : "")",
+            nextWidgetUrl = "@(ViewBag.NextWidgetUrl != null ? Url.Content(ViewBag.NextWidgetUrl) : "")",
             links = $("#pager a"),
             prevLink = links.eq(0),
-            nextLink = links.eq(1)
-            panelbar = $(".nav").kendoPanelBar({
-                animation: { open: { effects: "fadeIn expandVertical" } },
-                expand: function() {
-                    $(this.element).closest(".nav").siblings(".k-panelbar").each(function() {
-                        $(this)
-                            .find(".k-link").removeClass("k-state-selected k-state-highlighted");
-                    });
-                },
-                select: function() {
-                    var item = this.select(),
-                        links = $("#pager a"),
-                        prevUrl = item.prev().find("a").attr("href"),
-                        nextUrl = item.next().find("a").attr("href"),
-                        prevLink = links.eq(0).attr("href", prevUrl || lastUrl),
-                        nextLink = links.eq(1).attr("href", nextUrl || firstUrl);
-                },
-                expandMode: "single"
-            }).data("kendoPanelBar");
+            nextLink = links.eq(1);
+
+
+        $("#examples-list").on("click", "a", function() {
+            var item = $(this).parent();
+
+            prevLink.attr("href", item.prev().find("a").attr("href") || prevWidgetUrl),
+            nextLink.attr("href", item.next().find("a").attr("href") || nextWidgetUrl);
+        });
 
         $(".themeChooser").themeChooser();
 
@@ -148,21 +138,20 @@
             container: "#mobile-application-container"
         });
 
-        $("#pager a").click(function(e) {
+        links.click(function(e) {
             var element = $(this),
                 url = element.attr("href"),
                 sibling = element.siblings(),
                 method = element.hasClass("prev") ? "prev" : "next",
-                currentItem = panelbar.select(),
+                currentItem = $("#examples-nav li.active"),
                 nextItem = currentItem[method](),
                 navigateUrl;
 
             if (nextItem[0]) {
                 e.preventDefault();
 
-                panelbar.select(nextItem);
-                nextItem.children().addClass("chosen");
-                currentItem.children().removeClass("chosen");
+                nextItem.addClass("active");
+                currentItem.removeClass("active");
 
                 sibling.removeClass("k-state-disabled")
                        .attr("href", location.href);
@@ -172,7 +161,7 @@
                 if (nextItem[0]) {
                     element.attr("href", nextItem.children("a").attr("href"));
                 } else {
-                    navigateUrl = method == "next" ? firstUrl : lastUrl;
+                    navigateUrl = method == "next" ? nextWidgetUrl : prevWidgetUrl;
 
                     element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
                 }

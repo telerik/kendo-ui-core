@@ -124,12 +124,12 @@ namespace Kendo.Controllers
 
                 index = examplesUrl.IndexOf(first);
                 if (index > 0) {
-                    ViewBag.LastUrl = examplesUrl[index - 1];
+                    ViewBag.PrevWidgetUrl = examplesUrl[index - 1];
                 }
 
                 index = examplesUrl.IndexOf(last);
                 if (index < examplesUrl.Count - 1) {
-                    ViewBag.FirstUrl = examplesUrl[index + 1];
+                    ViewBag.NextWidgetUrl = examplesUrl[index + 1];
                 }
             }
         }
