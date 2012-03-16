@@ -775,7 +775,8 @@
                 visible: true,
                 rotation: 0,
                 mirror: false,
-                step: 1
+                step: 1,
+                skip: 0
             },
             line: {
                 width: 1,
@@ -825,7 +826,7 @@
                     label,
                     i;
 
-                for (i = 0; i < labelsCount; i += step) {
+                for (i = labelOptions.skip; i < labelsCount; i += step) {
                     labelText = axis.getLabelText(i);
 
                     if (labelOptions.template) {
@@ -1025,7 +1026,7 @@
         arrangeLabels: function(maxLabelWidth, maxLabelHeight, position) {
             var axis = this,
                 options = axis.options,
-                labelStep = options.labels.step,
+                labelOptions = options.labels,
                 labels = axis.labels,
                 vertical = options.vertical,
                 lineBox = axis.lineBox(),
@@ -1039,7 +1040,7 @@
 
             for (i = 0; i < labels.length; i++) {
                 var label = labels[i],
-                    tickIx = labelStep * i,
+                    tickIx = labelOptions.skip + labelOptions.step * i,
                     labelSize = vertical ? label.box.height() : label.box.width(),
                     labelPos = tickPositions[tickIx] - (labelSize / 2),
                     firstTickPosition,
