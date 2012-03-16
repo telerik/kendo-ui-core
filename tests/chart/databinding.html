@@ -298,10 +298,6 @@
                                 period: "Feb",
                                 product: "Foo",
                                 sales: 110
-                            }, {
-                                period: "Feb",
-                                product: "Bar",
-                                sales: 110
                             }],
                             group: {
                                 field: "product",
@@ -334,7 +330,7 @@
                     });
                 });
 
-                asyncTest("does not create series on rebind", 1, function() {
+                asyncTest("does not duplicate series on rebind", 1, function() {
                     var firstCall = true;
                     createGroupedChart(function() {
                         if (firstCall) {
@@ -342,6 +338,38 @@
                             this.dataSource.read();
                         } else {
                             equals(this.options.series.length, 2);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("creates series on rebind when new group is added", 2, function() {
+                    var firstCall = true;
+                    createGroupedChart(function() {
+                        if (firstCall) {
+                            firstCall = false;
+                            this.dataSource.add({
+                                period: "Jan",
+                                product: "Baz",
+                                sales: 120
+                            });
+                        } else {
+                            equals(this.options.series.length, 3);
+                            equals(this.options.series[1].name, "Baz: Sales");
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("removes series on rebind when group is removed", 2, function() {
+                    var firstCall = true;
+                    createGroupedChart(function() {
+                        if (firstCall) {
+                            firstCall = false;
+                            this.dataSource.remove(this.dataSource.at(1));
+                        } else {
+                            equals(this.options.series.length, 1);
+                            equals(this.options.series[0].name, "Foo: Sales");
                             start();
                         }
                     });
