@@ -21,6 +21,7 @@
 
         dataviz = kendo.dataviz,
         Axis = dataviz.Axis,
+        BarAnimation = dataviz.BarAnimation,
         Box2D = dataviz.Box2D,
         BoxElement = dataviz.BoxElement,
         ChartElement = dataviz.ChartElement,
