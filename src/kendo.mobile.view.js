@@ -46,7 +46,7 @@
      *
      * @section
      * <h3>View DOM elements</h3>
-     * <p>The mobile View exposes the following fields:</p>
+     * <p>Each mobile View instance exposes the following fields:</p>
      * <ul>
      *  <li><b>header</b> - the view (or the applied mobile layout) header DOM element;</li>
      *  <li><b>footer</b> - the view (or the applied mobile layout) footer DOM element;</li>
@@ -263,7 +263,82 @@
         }
     });
 
-    var Layout = Widget.extend({
+    /**
+     * @name kendo.mobile.ui.Layout.Description
+     *
+     * @section
+     *
+     * <p>A mobile <strong>Layout</strong> is used to share headers and footers between multiple <strong>Views</strong>.
+     * The header and/or footer element of the <strong>Layout</strong> are applied to any <strong>View</strong> that uses it.</p>
+     *
+     * <p>To define a <strong>Layout</strong> set <code>data-role="layout"</code> to an element.
+     * To associate a <strong>View</strong> to a <strong>Layout</strong> set <code>data-layout</code> attribute. Once
+     * instantiated, the layout detaches its element from the DOM. When a view with the given layout is displayed,
+     * the layout attaches its header and footer to it.</p>
+     *
+     * <p>A <strong>View</strong> is associated with a <strong>Layout</strong> by setting its <code>data-layout</code> attribute value
+     * to the value of the layout's <code>data-id</code> attribute:</p>
+     *
+     * @exampleTitle Views with Layout
+     * @example
+     * <div data-role="view" data-layout="foo">Foo</div>
+     * <div data-role="view" data-layout="foo">Bar</div>
+     *
+     * <div data-role="layout" data-id="foo">
+     *   <div data-role="header">Header</div>
+     *   <div data-role="footer">Footer</div>
+     * </div>
+     *
+     * @section
+     * <p>A default <strong>Application</strong> layout can be set by passing the layout id in the <code>options</code> parameter of the <strong>Application</strong>'s constructor.
+     * A mobile <strong>View</strong> can remove the default application <strong>Layout</strong> by setting <code>data-layout=""</code>.</p>
+     *
+     * @exampleTitle Default Application Layout
+     * @example
+     * <div data-role="view">Bar</div>
+     *
+     * <div data-role="layout" data-id="foo">
+     *   <div data-role="header">Header</div>
+     * </div>
+     *
+     * <script>
+     *    new kendo.mobile.Application($(document.body), { layout: "foo" });
+     * </script>
+     *
+     * @section
+     * <p>Layouts can be platform specific, allowing for different layout and behavior per platform.
+     * A layout platform can be specified using <code>data-platform=""</code></p>
+     *
+     * @exampleTitle iOS and Android Application Layout
+     * @example
+     * <div data-role="view">Bar</div>
+     *
+     * <div data-role="layout" data-id="foo" data-platform="ios">
+     *   <div data-role="header">Header</div>
+     * </div>
+     *
+     * <div data-role="layout" data-id="foo" data-platform="android">
+     *   <div data-role="header">Header</div>
+     * </div>
+     *
+     * @section
+     * <h3>Layout DOM elements</h3>
+     * <p>Each mobile Layout instance exposes the following fields:</p>
+     * <ul>
+     *  <li><b>header</b> - the header DOM element;</li>
+     *  <li><b>footer</b> - the footer DOM element;</li>
+     * </ul>
+     */
+    var Layout = Widget.extend(/** @lends kendo.mobile.ui.Layout.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.mobile.ui.Widget
+         * @param {DomElement} element DOM element.
+         * @param {Object} options Configuration options.
+         * @option {String} [id] <null> The id of the layout. Required.
+         * @option {String} [platform] <> The specific platform this layout targets. By default, layouts are displayed
+         * on all platforms.
+         */
         init: function(element, options) {
             var that = this;
             Widget.fn.init.call(that, element, options);
@@ -283,7 +358,21 @@
         },
 
         events: [
+            /**
+             * Fires after a mobile Layout and its child widgets is initialized.
+             * @name kendo.mobile.ui.Layout#init
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.layout The mobile layout instance
+             */
             INIT,
+            /**
+             * Fires when a mobile View using the layout becomes visible.
+             * @name kendo.mobile.ui.Layout#show
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.layout The mobile layout instance
+             */
             SHOW
         ],
 

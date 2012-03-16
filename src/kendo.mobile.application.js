@@ -118,57 +118,6 @@
     * A mobile <strong>View</strong> is considered each child of the application element (<code>&lt;body&gt;</code> by default) that is decorated with <code>data-role="view"</code>.
     *
     * @section
-    * <h3>Layout</h3>
-    * <p>A mobile <strong>Layout</strong> is used to share headers and footers between multiple <strong>Views</strong>. The header and/or footer element of the <strong>Layout</strong> are applied to any <strong>View</strong> that uses it.
-    * To define a <strong>Layout</strong> set <code>data-role="layout"</code> to an element. To associate a <strong>View</strong> to a <strong>Layout</strong> set <code>data-layout</code> attribute.
-    * A <strong>View</strong> is associated with a <strong>Layout</strong> by setting its <code>data-layout</code> attribute value
-    * to the value of the layout's <code>data-id</code> attribute:</p>
-    *
-    * @exampleTitle Views with Layout
-    * @example
-    * <div data-role="view" data-layout="foo">Foo</div>
-    * <div data-role="view" data-layout="foo">Bar</div>
-    *
-    * <div data-role="layout" data-id="foo">
-    *   <div data-role="header">Header</div>
-    *   <div data-role="footer">Footer</div>
-    * </div>
-    *
-    * @section
-    * <p>A default <strong>Application</strong> layout can be set by passing the layout id in the <code>options</code> parameter of the <strong>Application</strong>'s constructor.
-    * A mobile <strong>View</strong> can remove the default application <strong>Layout</strong> by setting <code>data-layout=""</code>.</p>
-    *
-    * @exampleTitle Default Application Layout
-    * @example
-    * <div data-role="view">Bar</div>
-    *
-    * <div data-role="layout" data-id="foo">
-    *   <div data-role="header">Header</div>
-    * </div>
-    *
-    * <script>
-    *      new kendo.mobile.Application($(document.body), { layout: "foo" });
-    * </script>
-    *
-    * @section
-    * <p>The <strong>Application</strong> supports a platform specific layouts. They can be specified using <code>data-platform=""</code></p>
-    * @exampleTitle iOS and Android Application Layout
-    * @example
-    * <div data-role="view">Bar</div>
-    *
-    * <div data-role="layout" data-id="foo" data-platform="ios">
-    *   <div data-role="header">Header</div>
-    * </div>
-    *
-    * <div data-role="layout" data-id="foo" data-platform="android">
-    *   <div data-role="header">Header</div>
-    * </div>
-    *
-    * <script>
-    *      new kendo.mobile.Application($(document.body), { layout: "foo" });
-    * </script>
-    *
-    * @section
     *
     * <h3>Navigation</h3>
     * <p>When initialized, the mobile <strong>Application</strong> modifies the kendo mobile widgets' behavior so that they navigate between <strong>Views</strong> when pressed.
