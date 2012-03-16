@@ -34,7 +34,7 @@
     // Constants ==============================================================
     var ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
-        BAR = "bar",
+        BAR_INDICATOR = "BAR_INDICATOR",
         BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -630,7 +630,7 @@
 
     var LinearPointer = Pointer.extend({
         options: {
-            shape: "barIndicator",
+            shape: BAR_INDICATOR,
 
             track: {
                 width: 6,
@@ -649,7 +649,7 @@
 
             margin: getSpacing(3),
             animation: {
-                type: BAR,
+                type: BAR_INDICATOR,
                 duration: 1000
             },
             visible: true
@@ -1030,7 +1030,7 @@
 
     var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
     var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
-    var BarIndicatorAnimationDecorator = animationDecorator(BAR, BarAnimation);
+    var BarIndicatorAnimationDecorator = animationDecorator(BAR_INDICATOR, BarAnimation);
 
     // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);
@@ -1042,10 +1042,10 @@
         RadialPointer: RadialPointer,
         LinearPointer: LinearPointer,
         LinearScale: LinearScale,
+        RadialScale: RadialScale,
         RadialPointerAnimationDecorator: RadialPointerAnimationDecorator,
         ArrowPointerAnimationDecorator: ArrowPointerAnimationDecorator,
-        BarIndicatorAnimationDecorator: BarIndicatorAnimationDecorator,
-        RadialScale: RadialScale
+        BarIndicatorAnimationDecorator: BarIndicatorAnimationDecorator
     });
 
 })(jQuery);
