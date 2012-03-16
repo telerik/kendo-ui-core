@@ -23,5 +23,15 @@ namespace Kendo.Extensions
                 )
             );
         }
+
+        public static IHtmlString ActiveSuiteClass(this HtmlHelper html, string title)
+        {
+            if (html.ViewContext.HttpContext.Request.Path.Contains(title.ToLowerInvariant()))
+            {
+                return html.Raw(" class=\"active\"");
+            }
+
+            return html.Raw("");
+        }
     }
 }
