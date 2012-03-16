@@ -177,6 +177,17 @@
                     "url": "view/index.html"
                 }
             ]
+        },
+        {
+            "text": "Layout",
+            "name": "layout",
+            "spriteCssClass": "mobileAppIcon",
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "layout/index.html"
+                }
+            ]
         }
      ]
 }
