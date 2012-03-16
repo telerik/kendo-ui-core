@@ -22,6 +22,8 @@
         NULL = "null",
         BOOLEAN = "boolean",
         UNDEFINED = "undefined",
+        getterCache = {},
+        setterCache = {},
         globalize = window.Globalize;
 
     function Class() {}
@@ -2186,11 +2188,11 @@
         },
         /** @ignore */
         getter: function(expression, safe) {
-            return new Function("d", "return " + kendo.expr(expression, safe));
+            return getterCache[expression] = getterCache[expression] || new Function("d", "return " + kendo.expr(expression, safe));
         },
         /** @ignore */
         setter: function(expression) {
-            return new Function("d,value", "d." + expression + "=value");
+            return setterCache[expression] = setterCache[expression] || new Function("d,value", "d." + expression + "=value");
         },
         /** @ignore */
         accessor: function(expression) {
