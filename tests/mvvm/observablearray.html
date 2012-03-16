@@ -60,6 +60,15 @@
                 ok(viewModel.foo[0] instanceof kendo.data.ObservableObject);
             });
 
+            test("ObservableObjects should be converted if type is set", function() {
+                var ModelType = kendo.data.Model.define({});
+
+                var array = new kendo.data.ObservableArray([new kendo.data.ObservableObject({})], ModelType);
+
+                ok(array[0] instanceof kendo.data.ObservableObject);
+                ok(array[0] instanceof ModelType);
+            });
+
             test("pushing items to array raises the change event and sets the action to add", function() {
                 expect(1);
 

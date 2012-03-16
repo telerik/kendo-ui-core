@@ -72,7 +72,9 @@
             var that = this;
 
             if (toString.call(object) === "[object Object]") {
-                if (!(object instanceof ObservableObject)) {
+                var observable = object instanceof that.type || object instanceof Model;
+                if (!observable) {
+                    object = observable instanceof ObservableObject ? object.toJSON : object;
                     object = new that.type(object);
                 }
 
@@ -1679,9 +1681,15 @@
         },
 
         _observe: function(data) {
-            var that = this;
+            var that = this,
+                model = that.reader.model,
+                wrap = false;
 
-            data = data instanceof ObservableArray ? data : new ObservableArray(data, that.reader.model);
+            if (model && data.length) {
+                wrap = !(data[0] instanceof model);
+            }
+
+            data = data instanceof ObservableArray && !wrap ? data : new ObservableArray(data, that.reader.model);
 
             return data.bind(CHANGE, proxy(that._change, that));
         },
