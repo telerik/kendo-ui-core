@@ -635,22 +635,24 @@
             track: {
                 width: 6,
                 border: {
-                    width: 0
-                }
+                    width: 1
+                },
+                visible: false
             },
 
             color: "#286793",
             size: 6,
             border: {
-                width: 0
+                width: 1
             },
             opacity: 1,
 
-            padding: getSpacing(3),
+            margin: getSpacing(3),
             animation: {
                 type: BAR,
                 duration: 1000
-            }
+            },
+            visible: true
         },
 
         repaint: function() {
@@ -679,7 +681,7 @@
                 scaleLine = scale.lineBox(),
                 scaleBox = scale.box,
                 width = options.track.width,
-                padding = options.padding,
+                padding = getSpacing(options.margin),
                 halfSize = options.size / 2,
                 trackBoxCenter,
                 trackBox,
@@ -733,7 +735,8 @@
                         id: options.id,
                         zIndex: 2,
                         size: options.size,
-                        startPosition: scale.getSlot(options.min)
+                        startPosition: scale.getSlot(options.min),
+                        align: false
                     }, border),
                 halfSize = size / 2;
 
@@ -769,18 +772,24 @@
             return view.createRect(pointer.trackBox, {
                 fill: trackOptions.color,
                 fillOpacity: trackOptions.opacity,
-                stroke: border.width ? border.color || options.color : "",
+                stroke: border.width ? border.color || trackOptions.color : "",
                 strokeWidth: border.width,
-                dashType: border.dashType
+                dashType: border.dashType,
+                align: false
             });
         },
 
         getViewElements: function(view) {
             var pointer = this,
+                options = pointer.options,
                 elements = [];
 
-            elements.push(pointer.renderTrack(view));
-            elements.push(pointer.renderPointer(view));
+            if (options.visible) {
+                elements.push(pointer.renderPointer(view));
+                if (options.track.visible) {
+                    elements.push(pointer.renderTrack(view));
+                }
+            }
 
             append(elements, Pointer.fn.getViewElements.call(pointer, view));
 
