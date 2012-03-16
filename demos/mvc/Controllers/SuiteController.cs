@@ -73,11 +73,7 @@ namespace Kendo.Controllers
         // GET: /Web/
         public ActionResult Navigation(string suite, string section, string example)
         {
-#if DEBUG
-            ViewBag.Debug = true;
-#else
-            ViewBag.Debug = false;
-#endif
+            ViewBag.Suite = suite;
 
             LoadNavigation(suite);
 
