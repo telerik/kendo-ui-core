@@ -38,8 +38,6 @@
         slice = [].slice,
         unshift = [].unshift,
         toString = {}.toString,
-        getterCache = {},
-        setterCache = {};
         dateRegExp = /^\/Date\((.*?)\)\/$/,
         quoteRegExp = /(?=['\\])/g;
 
@@ -238,7 +236,7 @@
             if (field === "this") {
                 result = that;
             } else {
-                getter = getterCache[field] = getterCache[field] || kendo.getter(field, true);
+                getter = kendo.getter(field, true);
 
                 result = getter(that);
 
@@ -258,7 +256,7 @@
 
                 while (paths.length > 1) {
                     path += paths.shift();
-                    var obj = (getterCache[path] = getterCache[path] || kendo.getter(path, true))(that);
+                    var obj = kendo.getter(path, true)(that);
                     if (obj instanceof ObservableObject) {
                         obj.set(paths.join("."), value);
                         return;
@@ -267,8 +265,7 @@
                 }
             }
 
-            var setter = setterCache[field] = setterCache[field] || kendo.setter(field);
-            setter(that, value);
+            kendo.setter(field)(that, value);
         },
 
         set: function(field, value) {
