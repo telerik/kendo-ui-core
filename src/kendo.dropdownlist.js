@@ -153,6 +153,7 @@
     var kendo = window.kendo,
         ui = kendo.ui,
         Select = ui.Select,
+        os = kendo.support.mobileOS,
         CLICK = kendo.support.touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
@@ -324,6 +325,8 @@
             that._span();
 
             that._popup();
+
+            that._mobile();
 
             that._accessors();
 
@@ -871,6 +874,16 @@
                     that._accessor(value != undefined ? value : text, idx);
                     that.current(li.addClass(SELECTED));
                 }
+            }
+        },
+
+        _mobile: function() {
+            var that = this,
+                popup = that.popup,
+                root = popup.element.parents(".km-root").eq(0);
+
+            if (root.length && os) {
+                popup.options.animation.open.effects = os.android ? "fadeIn" : os.ios ? "slideIn:up" : popup.options.animation.open.effects;
             }
         },
 

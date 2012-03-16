@@ -11,18 +11,18 @@
     <link rel="apple-touch-startup-image" href="images/kendo_big.png" />
     <title>Mobile Test App</title>
 
-    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.android4.less"/>
+    <link rel="stylesheet/less" type="text/css" href="../../../styles/mobile/kendo.mobile.blackberry.less"/>
 
     <script src="../../../demos/mvc/content/shared/js/less.js"></script>
     <script src="../../../src/jquery.js"></script>
     <script src="../../../src/kendo.core.js"></script>
     <script src="../../../src/kendo.fx.js"></script>
+    <script src="../../../src/kendo.draganddrop.js"></script>
     <script src="../../../src/kendo.data.js"></script>
     <script src="../../../src/kendo.history.js"></script>
     <script src="../../../src/kendo.mobile.core.js"></script>
     <script src="../../../src/kendo.mobile.button.js"></script>
     <script src="../../../src/kendo.mobile.switch.js"></script>
-    <script src="../../../src/kendo.mobile.swipe.js"></script>
     <script src="../../../src/kendo.mobile.scroller.js"></script>
     <script src="../../../src/kendo.mobile.buttongroup.js"></script>
     <script src="../../../src/kendo.mobile.navbar.js"></script>
@@ -88,7 +88,7 @@
         }
     </style>
 </head>
-<body class="km-android km-android2">
+<body class="km-blackberry">
     <article data-role="view">
         <header data-role="header">
             <div data-role="navbar">
@@ -103,15 +103,22 @@
         <ul data-role="listview" data-style="inset">
             <li data-icon="play"><input type="date" value="2012-03-22" /><a class="km-listview-link">Albania</a></li>
             <li data-icon="stop"><input type="time" value="22:30" /><a class="km-listview-link">Australia</a></li>
-            <li><input type="datetime" value="2012-03-22 20:15" /><a class="km-listview-link">Australia</a></li>
-            <li><input type="text" value="Text Shmext" /><a class="km-listview-link">Australia</a></li>
-            <li><select name="next" id="next">
+            <li data-icon="stop">
+                <input type="color" value="22">
+                Input type="month"
+            </li>
+            <li><select name="next">
                                         <option value="First">First</option>
                                         <option value="Second">Second</option>
                                         <option value="Third">Third</option>
                                         <option value="Fourth">Fourth</option>
+                                        <option value="Fourth">Fifth</option>
+                                        <option value="Fourth">Sixth</option>
+                                        <option value="Fourth">Seventh</option>
                                     </select><a class="km-listview-link">Australia</a></li>
-            <li><select name="next">
+            <li><input type="datetime" value="2012-03-22 20:15" /><a class="km-listview-link">Australia</a></li>
+            <li><input type="text" value="Text Shmext" /><a class="km-listview-link">Australia</a></li>
+            <li><select name="next" id="next">
                                         <option value="First">First</option>
                                         <option value="Second">Second</option>
                                         <option value="Third">Third</option>
@@ -134,40 +141,29 @@
         var app = new kendo.mobile.Application(document.body),
             os = kendo.support.mobileOS;
 
-        if ((os && os.android && os.flatVersion <= 300) || $(document.body).hasClass("km-android2")) {
-            $("select").addClass("km-select").kendoDropDownList();
-        }
-
-        var groupedData = [
-            {name: "Sashimi salad", letter: "S" },
-            {name: "Chirashi sushi", letter: "C" },
-            {name: "Seaweed salad", letter: "S" },
-            {name: "Edamame", letter: "E" },
-            {name: "Miso soup", letter: "M" },
-            {name: "Maguro", letter: "M" },
-            {name: "Shake", letter: "S" },
-            {name: "Shiromi", letter: "S" },
-            {name: "Tekka maki", letter: "T" },
-            {name: "Hosomaki Mix", letter: "H" },
-            {name: "California rolls", letter: "C" },
-            {name: "Seattle rolls", letter: "S" },
-            {name: "Spicy Tuna rolls", letter: "S" },
-            {name: "Ebi rolls", letter: "E" },
-            {name: "Chicken Teriyaki", letter: "C" },
-            {name: "Salmon Teriyaki", letter: "S" },
-            {name: "Gohan", letter: "G" },
-            {name: "Tori Katsu", letter: "T" },
-            {name: "Yaki Udon", letter: "Y" }
-        ];
-
-        function mobileListViewDataBindInitGrouped() {
-//            $("#grouped-listview").kendoMobileListView({
-//                dataSource: kendo.data.DataSource.create({data: groupedData, group: "letter" }),
-//                template: "${name}"
-//            });
-        }
-
         $(function () {
+            var options = {};
+
+            if (os && os.android) {
+                options.animation = { open: { effects : "fadeIn" } };
+            }
+
+            if (os && os.ios) {
+                options.animation = { open: { effects : "slideIn:up" } };
+            }
+
+            $("select")
+                    .addClass("km-select")
+                    .kendoDropDownList(options);
+
+            if (os && os.ios) {
+                $("select").each(function () {
+                    var popupOptions = $(this).data("kendoDropDownList").popup.options;
+                    popupOptions.origin = "bottom center";
+                    popupOptions.position = "top center";
+                });
+            }
+
             var color = "";
 
             $(".km-navbar .km-button:not(.km-back)").each(function () {
@@ -180,7 +176,7 @@
                     if ($.browser.mozilla)
                         color = this.element.css("background-color");
 
-                    $(".km-navbar, .km-ios .km-switch-background, .km-ios .km-listgroup > li, .km-badge, .km-tabstrip").css("background-color", color); // .km-ios .km-listgroup > li,
+                    $(".km-navbar, .km-ios .km-switch-background, .km-ios .km-listgroup > li, .km-badge, .km-tabstrip").css("background-color", color);
                     $(".km-insetcontent").css("background-color", color.replace(")", ",.3)").replace("rgb(", "rgba("));
                     $(".km-buttongroup, .km-content [data-role=button], .km-android .km-switch, .km-touch-scrollbar").removeClass("pink green fuchsia").addClass(this.element[0].className.match(/pink|green|fuchsia|/)[0]);
                 });

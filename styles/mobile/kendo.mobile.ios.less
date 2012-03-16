@@ -34,7 +34,8 @@
 .km-ios .km-toolbar,
 .km-ios .km-navbar,
 .km-ios .km-button,
-.km-ios .km-tabstrip
+.km-ios .km-tabstrip,
+.km-ios .k-list-container .k-item
 {
     background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -548,7 +549,7 @@
 }
 
 .km-ios .km-list,
-.km-ios .km-content
+.km-ios .km-view
 {
     background: #f9f9f9;
 }
@@ -692,48 +693,122 @@
 
 /* Forms */
 
-.km-ios select:not([multiple])
+.km-ios input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
+.km-ios select:not([multiple]),
+.km-ios .k-dropdown-wrap
 {
-    direction: rtl;
-}
-
-.km-ios input[type=text],
-.km-ios input[type=date],
-.km-ios input[type=time],
-.km-ios input[type=datetime],
-.km-ios select:not([multiple])
-{
-    color: #333;
+    color: #385487;
+    min-width: 6em;
     border: 0;
     padding: .4em;
     outline: none;
     background: transparent;
+}
+
+.km-ios .k-dropdown-wrap .k-input
+{
+    color: #385487;
+}
+
+.km-ios .k-dropdown
+{
+    right: .4em;
+    margin-top: -1.2em;
+    font-weight: normal;
+}
+
+.km-ios input[type=color],
+.km-ios input[type=week],
+.km-ios input[type=date],
+.km-ios input[type=time],
+.km-ios input[type=month],
+.km-ios input[type=datetime],
+.km-ios .k-dropdown
+{
     text-align: right;
+}
+
+
+.km-ios .k-dropdown .k-dropdown-wrap
+{
+    display: block;
+    .border-radius(0);
+    background: transparent;
+    .box-shadow(none);
 }
 
 .km-ios select:not([multiple]) option
 {
     color: #333;
-    direction: ltr;
 }
 
-.km-ios input[type=text]:focus,
-.km-ios input[type=date]:active,
-.km-ios input[type=time]:active,
-.km-ios input[type=datetime]:active,
-.km-ios input[type=date]:focus,
-.km-ios input[type=time]:focus,
-.km-ios input[type=datetime]:focus,
-.km-ios select:not([multiple]):focus
-{
-    color: #086aff;
-}
-
-.km-ios .km-list .km-state-active input[type=text],
-.km-ios .km-list .km-state-active input[type=date],
-.km-ios .km-list .km-state-active input[type=time],
-.km-ios .km-list .km-state-active input[type=datetime],
+.km-ios .km-list .km-state-active input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
 .km-ios .km-list .km-state-active select:not([multiple])
 {
     color: #fff;
+}
+
+.km-ios .km-popup .k-item
+{
+    background-color: #ddd;
+    margin: .5em 0;
+    padding: 0 0 0 .6em;
+    color: #000;
+    border-color: #32353a;
+    border-width: 3px;
+    .border-radius(.6em);
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+                linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.2)) #fff;
+    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.5)");
+    .box-sizing(border-box);
+    background-clip: padding-box;
+}
+
+.km-ios .km-popup .k-item:first-child
+{
+    margin: 1em 0 .5em;
+}
+
+.km-ios .km-popup .k-item:last-child
+{
+    margin: .5em 0 1em;
+}
+
+.km-ios .km-popup .k-state-hover,
+.km-ios .km-popup .k-state-focused,
+.km-ios .km-popup .k-state-selected
+{
+    color: #fff;
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #263e6c;
+}
+
+.km-ios .km-popup .k-state-hover
+{
+    background-color: rgba(38,62,108,.8);
+}
+
+.km-ios .km-popup
+{
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0,0,0,.6);
+    .box-sizing(border-box);
+}
+
+.km-ios .km-popup .k-list-container
+{
+    width: 100% !important;
+    height: auto !important;
+    max-height: 80%;
+    background: rgba(67,73,85,.7) linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 10%, rgba(255,255,255,0) 10%, rgba(255,255,255,0));
+    color: #fff;
+    bottom: 0;
+    border: 0;
+    padding: 0 .5em;
+    border-top: 1px solid rgba(255,255,255,.5);
+    .border-radius(0);
+    .box-sizing(border-box);
 }
