@@ -159,6 +159,10 @@
                 {
                     "text": "Loading popup",
                     "url": "application/loadingpopup.html"
+                },
+                {
+                    "text": "Form Elements",
+                    "url": "application/forms.html"
                 }
 
             ]

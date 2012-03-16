@@ -398,7 +398,9 @@
                 horizontalOrigin = origin[1],
                 verticalPosition = position[0],
                 horizontalPosition = position[1],
-                anchorOffset = isPosition ? { top: 0, left: 0 } : getOffset(anchor),
+                anchorOff = getOffset(anchor),
+                appendOff = getOffset($(that.options.appendTo)),
+                anchorOffset = isPosition ? { top: anchorOff.top - appendOff.top , left: anchorOff.left - appendOff.left } : anchorOff,
                 width = element.outerWidth(),
                 height = element.outerHeight(),
                 anchorWidth = anchor.outerWidth(),
@@ -408,6 +410,7 @@
                 round = Math.round,
                 verticalFlip = verticalOrigin !== verticalPosition,
                 horizontalflip = horizontalOrigin !== horizontalPosition;
+
 
             if (verticalOrigin === TOP && isPosition && verticalFlip) {
                 top -= height;

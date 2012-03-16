@@ -73,7 +73,9 @@
     background: #d6d6d6;
 }
 
-.km-android .km-button.km-state-active
+.km-android .km-button.km-state-active,
+.km-android input[type=file]:active,
+.km-android input[type=file]:focus
 {
     background: #4cbee8;
     overflow: visible;
@@ -766,37 +768,75 @@
 
 /* Forms */
 
-.km-android input[type=text],
-.km-android input[type=date],
-.km-android input[type=time],
-.km-android input[type=datetime],
+.km-android input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]),
 .km-android select:not([multiple]),
-.km-android2 .km-select .k-dropdown-wrap
+.km-android .k-dropdown
 {
     color: #fff;
-    border: 0;
-    border-bottom: 1px solid rgba(127,127,127,.5);
-    margin-bottom: 1px;
     padding: .4em;
     outline: none;
     .border-radius(0);
     .box-sizing(padding-box);
 }
 
+.km-android input[type=file]
+{
+    color: #fff;
+    padding: .25em;
+    outline: none;
+}
+
+.km-android .k-dropdown
+{
+    padding: 0;
+    width: auto;
+    min-width: 8em;
+    margin-top: -1.2rem;
+}
+
+.km-android .k-dropdown .k-dropdown-wrap
+{
+    width: 100%;
+    padding: .25em .4em;
+    .border-radius(0);
+    .box-sizing(border-box);
+}
+
+.km-android .k-dropdown .k-input
+{
+    color: #fff;
+    .border-radius(0);
+}
+
+.km-android input[type=password],
+.km-android input[type=search],
+.km-android input[type=number],
+.km-android input[type=tel],
+.km-android input[type=url],
+.km-android input[type=email],
 .km-android input[type=text]
 {
+    border: 0;
+    border-bottom: 1px solid rgba(127,127,127,.5);
+    margin-bottom: 1px;
     background-clip: padding-box;
-    background: linear-gradient(top, rgba(127,127,127,0) 90%, rgba(127,127,127,1) 90%, rgba(127,127,127,1)),
-                linear-gradient(top, rgba(127,127,127,0) 90%, rgba(127,127,127,1) 90%, rgba(127,127,127,1)) transparent;
+    background: linear-gradient(top, transparent 90%, #777 90%, #777),
+                linear-gradient(top, transparent 90%, #777 90%, #777) transparent;
     background-position: 0 0, 100% 0;
     background-repeat: no-repeat;
     background-size: 1px 100%;
 }
 
+.km-android input[type=password]:focus,
+.km-android input[type=search]:focus,
+.km-android input[type=number]:focus,
+.km-android input[type=tel]:focus,
+.km-android input[type=url]:focus,
+.km-android input[type=email]:focus,
 .km-android input[type=text]:focus
 {
     background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)),
-                linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6));
+                linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) transparent;
     background-position: 0 0, 100% 0;
     background-repeat: no-repeat;
     background-size: 2px 100%;
@@ -804,25 +844,37 @@
     border-bottom: 2px solid rgba(40,170,220,.6);
 }
 
+.km-android input[type=month],
+.km-android input[type=color],
+.km-android input[type=week],
 .km-android input[type=date],
 .km-android input[type=time],
 .km-android input[type=datetime],
 .km-android select:not([multiple]),
-.km-android2 .km-select .k-dropdown-wrap
+.km-android .k-dropdown .k-dropdown-wrap
 {
+    border: 0;
+    border-bottom: 1px solid rgba(127,127,127,.5);
+    margin-bottom: 1px;
     background: 100% 100% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAACWCAQAAABj2vCcAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAf0lEQVR4XuzLsQkAAAwCsP7/tD1CcAqZcykMsizLsizLsizLsizLsizLsizLsizL8ncuxzYAgEAAhJz893BazVfXE2quGc9z32asZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqGWoZahlqOUq5CrkKuStlKuS3QdJPtFaleZ1DgAAAABJRU5ErkJggg==") transparent;
     background-clip: padding-box;
     background-size: auto 100%;
 }
 
+.km-android input[type=month]:active,
+.km-android input[type=color]:active,
+.km-android input[type=week]:active,
 .km-android input[type=date]:active,
 .km-android input[type=time]:active,
 .km-android input[type=datetime]:active,
+.km-android input[type=month]:focus,
+.km-android input[type=color]:focus,
+.km-android input[type=week]:focus,
 .km-android input[type=date]:focus,
 .km-android input[type=time]:focus,
 .km-android input[type=datetime]:focus,
 .km-android select:not([multiple]):focus,
-.km-android2 .km-select .k-state-focused
+.km-android .k-dropdown .k-state-focused
 {
     background-color: rgba(51,181,229,.6);
 }
@@ -833,38 +885,7 @@
     background-color: #fff;
 }
 
-.km-android input[type=text],
-.km-android input[type=date],
-.km-android input[type=time],
-.km-android input[type=datetime]
-{
-    .user-select(text);
-}
-
-.km-android input[readonly]
-{
-    .user-select(none);
-}
-
-/* Workaround for the Android 2 broken select */
-
-.km-android2 .km-select
-{
-    position: absolute;
-    right: 0;
-    top: 50%;
-    line-height: normal;
-    margin-top: -.6em;
-    z-index: 1;
-}
-
-.km-android2 .km-select select,
-.km-android2 .km-select .k-select
-{
-    display: none;
-}
-
-.km-android2 .k-animation-container
+.km-android .km-popup
 {
     left: 0 !important;
     top: 0 !important;
@@ -873,24 +894,27 @@
     background: rgba(0,0,0,.7);
 }
 
-.km-android2 .k-list-container
+.km-android .km-popup .k-list-container
 {
     position: static !important;
     margin-left: 10% !important;
     width: 80% !important;
     display: inline-block !important;
     max-height: 80%;
+    border: 0;
+    padding: 0;
     background: #333;
     color: #fff;
     vertical-align: middle;
+    .border-radius(0);
 }
 
-.km-android2 > .k-list-container
+.km-android > .k-list-container
 {
     display: none !important;
 }
 
-.km-android2 .k-animation-container:before
+.km-android .km-popup:before
 {
     content: "\a0";
     display: inline-block;
@@ -899,32 +923,23 @@
     width: 0;
 }
 
-.km-android2 .k-list-container .k-list
-{
-    padding: 0;
-    margin: 0;
-}
-
-.km-android2 .k-list-container .k-item
-{
-    list-style-type: none;
-    line-height: 3em;
-    padding-left: 1em;
-    border-bottom: 1px solid #555;
-}
-
-.km-android2 .k-list-container .k-state-focused,
-.km-android2 .k-list-container .k-state-selected
+.km-android .km-popup .k-state-focused,
+.km-android .km-popup .k-state-selected
 {
     background: #33b5e5;
 }
 
-.km-android2 .k-list-container .k-state-hover
+.km-android .km-popup .k-state-hover
 {
+    color: #fff;
     background: rgba(51,181,229,.6);
 }
 
-.km-android2 .k-list-container .k-item:last-child
+.km-android .km-popup .k-item
 {
-    border: 0;
+    line-height: 3em;
+    border-width: 0 0 1px 0;
+    padding: 0 .5em;
+    .border-radius(0);
 }
+
