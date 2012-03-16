@@ -157,14 +157,15 @@
 
             if (pushState) {
                 $(doc)
-                    .on("click", "#navWrap li a", function(e) {
+                    .on("click", "#examples-nav li a", function(e) {
                         e.preventDefault();
 
                         if (!location.href.match($(this).attr("href"))) {
-                            var element = $(this);
+                            var element = $(this),
+                                li = element.parent();
 
-                            $("#navWrap .chosen").removeClass("chosen");
-                            element.addClass("chosen");
+                            li.siblings().removeClass("active")
+                              .end().addClass("active");
 
                             Application.load(element.attr("href"));
                         }
