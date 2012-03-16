@@ -1,20 +1,13 @@
 
         <div id="example" class="k-content">
-            <h3>Creating a TimePicker from <code>&lt;input /&gt;</code></h3>
-            <div class="code-sample">
-                <h4 class="code-title">Source:</h4>
-                <pre class="prettyprint">
-&lt;input id="timepicker" value="10:00 AM"/&gt;
-
-&lt;script&gt;
-    $("#timepicker").kendoTimePicker();
-&lt;/script&gt;
-</pre>
-            </div>
-            <div class="code-sample output">
-                <h4 class="code-title">Output:</h4>
-                <div class="prettyprint">
+            <div id="alarm-settings">
+                <div style="margin-top: -7px; margin-left: 180px">
                     <input id="timepicker" value="10:00 AM" />
+                </div>
+                <div style="margin-top: 59px; margin-left: 180px">
+                    <span style="" class="k-widget k-autocomplete k-header k-state-default">
+                        <input id="descr" class="k-input" type="text" value="Wake up" style="width: 100%" />
+                    </span>
                 </div>
             </div>
             <script>
@@ -25,20 +18,12 @@
             </script>
 
             <style scoped>
-                #example h3 {
-                    clear: both;
-                }
-
-                #example .code-sample {
-                    width: 60%;
-                    float:left;
-                    margin-bottom: 20px;
-                }
-
-                #example .output {
-                    width: 24%;
-                    margin-left: 4%;
-                    float:left;
+                #alarm-settings {
+                    height: 135px;
+                    width: 395px;
+                    margin: 30px auto;
+                    padding: 110px 0 0 30px;
+                    background: url('../../content/web/timepicker/alarmSettings.png') transparent no-repeat 0 0;
                 }
             </style>
         </div>
