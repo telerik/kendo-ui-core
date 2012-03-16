@@ -225,6 +225,23 @@
                 equal(dataSource._sort[0].field, "foo");
                 equal(dataSource._sort[0].dir, "asc");
             });
+
+            test("Data is converted to ObservableArray", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1 }]
+                });
+                dataSource.read();
+                ok(dataSource.data() instanceof kendo.data.ObservableArray);
+                ok(dataSource.view() instanceof kendo.data.ObservableArray);
+            });
+
+            test("Data initial value is ObservableArray", function() {
+                var dataSource = new DataSource({
+                    data: [{ foo: 1 }]
+                });
+                ok(dataSource.data() instanceof kendo.data.ObservableArray);
+            });
+
             </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

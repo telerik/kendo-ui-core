@@ -61,6 +61,25 @@
 
                 ok(dataSource.data()[0] instanceof kendo.data.Model);
             });
+
+            test("ObservableObject are converted to Model if such is set", function() {
+                var data = new kendo.data.ObservableArray([ {foo: 1 }]),
+                    ModelType = kendo.data.Model.define({
+                        fields: {
+                            foo: "foo"
+                        }
+                    }),
+                    dataSource = new kendo.data.DataSource({
+                        data: data,
+                        schema: {
+                            model: ModelType
+                        }
+                    });
+
+                dataSource.read();
+
+                ok(dataSource.at(0) instanceof ModelType);
+            });
         </script>
     </body>
 </html>
