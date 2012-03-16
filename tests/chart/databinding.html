@@ -334,6 +334,19 @@
                     });
                 });
 
+                asyncTest("does not create series on rebind", 1, function() {
+                    var firstCall = true;
+                    createGroupedChart(function() {
+                        if (firstCall) {
+                            firstCall = false;
+                            this.dataSource.read();
+                        } else {
+                            equals(this.options.series.length, 2);
+                            start();
+                        }
+                    });
+                });
+
                 asyncTest("assigns grouped points to first series", 1, function() {
                     createGroupedChart(function() {
                         same(this.options.series[0].data,
@@ -392,6 +405,13 @@
                         equals(this.options.series[0].name, "Foo: Sales");
                         start();
                     });
+                });
+
+                asyncTest("default groupNameTemplate renders only group name when no series name is defined", 1, function() {
+                    createGroupedChart(function() {
+                        equals(this.options.series[0].name, "Foo");
+                        start();
+                    }, [{ field: "sales" }]);
                 });
 
                 asyncTest("sets cloned series name to default groupNameTemplate", 1, function() {
