@@ -1742,7 +1742,7 @@
                 options = element.options,
                 axis = options.vertical ? Y : X,
                 stackBase = options.stackBase,
-                aboveAxis = options.aboveAxis || true,
+                aboveAxis = defined(options.aboveAxis) ? options.aboveAxis : true,
                 startPosition,
                 endState = anim.endState = {
                     top: points[0].y,
