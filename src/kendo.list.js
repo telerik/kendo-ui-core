@@ -593,7 +593,6 @@
 
             element.html(options);
             element[0].selectedIndex = selectedIndex;
-            console.log(element);
         },
 
         _reset: function() {
