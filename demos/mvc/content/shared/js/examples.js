@@ -90,6 +90,26 @@
             }, "html");
         },
 
+        fetchNav: function(href) {
+            var navWrap = $("#examples-nav");
+
+            href = href.split("/");
+            href.splice(href.length - 3, 0, "navigation");
+            href = href.join("/");
+
+            $.get(href, function(html) {
+                navWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                    navWrap.replaceWith(html);
+                    setTimeout(function() {
+                        $("#examples-nav")
+                            .css("visibility", "visible")
+                            .kendoStop(true)
+                            .kendoAnimate(animation.show);
+                    }, 100);
+                }}));
+            }, "html");
+        },
+
         preloadStylesheet: function (file, callback) {
             var element = $("<link rel='stylesheet' media='print' href='" + file + "'").appendTo("head");
 
