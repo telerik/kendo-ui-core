@@ -226,7 +226,7 @@
                     ok(e);
                     ok(e.xhr);
                     ok(e.status);
-                    ok(errorThrown in e);
+                    ok("errorThrown" in e);
                 });
                 stop(1);
                 dataSource.read();
