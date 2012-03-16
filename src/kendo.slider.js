@@ -608,6 +608,12 @@
          *         <dd>
          *             Tick marks are located on both sides of the widget.
          *         </dd>
+         *         <dt>
+         *              <code>"none"</code>
+         *         </dt>
+         *         <dd>
+         *             Tick marks are not visible.
+         *         </dd>
          *    </dl>
          * </div>
          * @option {Number} [smallStep] <1>
@@ -1170,6 +1176,12 @@
          *         </dt>
          *         <dd>
          *             Tick marks are located on both sides of the widget.
+         *         </dd>
+         *         <dt>
+         *              <code>"none"</code>
+         *         </dt>
+         *         <dd>
+         *             Tick marks are not visible.
          *         </dd>
          *    </dl>
          * </div>
