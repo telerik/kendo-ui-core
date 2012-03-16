@@ -291,6 +291,30 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Category Axis / Horizontal / Label Step and skip / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createCategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            labels: { step: 2, skip: 2 }
+                        });
+
+                        categoryAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label, starting from the third", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Baz"]);
+                });
+
+                test("labels are distributed horizontally, starting from the third", function() {
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [652], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
                 module("Category Axis / Horizontal / Mirrored / Rendering", {
                     setup: function() {
                         moduleSetup();
@@ -502,6 +526,31 @@
                 test("labels are distributed vertically", function() {
                     same($.map(view.log.text, function(text) { return text.style.y }),
                          [91, 491], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Category Axis / Vertical / Label Step and skip / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        createCategoryAxis({
+                            categories: ["Foo", "Bar", "Baz"],
+                            labels: { step: 2, skip: 2 },
+                            vertical: true
+                        });
+
+                        categoryAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label, starting from the third", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["Baz"]);
+                });
+
+                test("labels are distributed vertically, starting from the third", function() {
+                    same($.map(view.log.text, function(text) { return text.style.y }),
+                         [491], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
