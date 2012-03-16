@@ -2089,6 +2089,7 @@
          * });
          * @option {Array} [series.data] Array of data points.
          * @option {String} [series.field] The data field containing the series value.
+         * @option {Boolean} [series.visibleInLegend] <true> A value indicating whether to show the series in the legend.
          * @option [series.type="bar"] Available options for bar series:
          * @option {Boolean} [series.type="bar".stack] <false>
          * A value indicating if the series should be stacked.
@@ -2639,6 +2640,12 @@
          *         </dt>
          *         <dd>
          *              A boolean value indicating whether to explode the sector.
+         *         </dd>
+         *         <dt>
+         *              <code>"visibleInLegend"</code>
+         *         </dt>
+         *         <dd>
+         *              A boolean value indicating whether to show the sector in the legend.
          *         </dd>
          *    </dl>
          * </div>
