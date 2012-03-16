@@ -71,6 +71,8 @@ namespace Kendo.Controllers
 
         protected void FindCurrentExample()
         {
+            var found = false;
+
             foreach (string category in ViewBag.Navigation.Keys)
             {
                 foreach (NavigationWidget widget in ViewBag.Navigation[category])
@@ -81,13 +83,13 @@ namespace Kendo.Controllers
                             examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
                         }
 
-                        if (Request.Path.EndsWith(example.Url))
+                        if (!found && Request.Path.EndsWith(example.Url))
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;
                             ViewBag.Title = example.Text;
 
-                            //return;
+                            found = true;
                         }
                     }
                 }
