@@ -199,7 +199,7 @@
             seriesDefaults: {
                 type: COLUMN,
                 data: [],
-                groupNameTemplate: "#= group.value #: #= series.name #",
+                groupNameTemplate: "#= group.value + (kendo.dataviz.defined(series.name) ? ': ' + series.name : '') #",
                 bar: {
                     gap: BAR_GAP,
                     spacing: BAR_SPACING
@@ -439,12 +439,12 @@
         _onDataChanged: function() {
             var chart = this,
                 options = chart.options,
-                series = options.series,
+                series = chart._sourceSeries || options.series,
                 seriesIx,
                 seriesLength = series.length,
                 data = chart.dataSource.view(),
                 grouped = (chart.dataSource.group() || []).length > 0,
-                groupSeries = [],
+                processedSeries = [],
                 currentSeries;
 
             for (seriesIx = 0; seriesIx < seriesLength; seriesIx++) {
@@ -454,15 +454,18 @@
                     currentSeries.data = [];
                     currentSeries.dataItems = data;
 
-                    if (grouped) {
-                        [].push.apply(groupSeries,
-                            chart._createGroupedSeries(currentSeries, data)
-                        );
-                    }
+                    [].push.apply(processedSeries, grouped ?
+                        chart._createGroupedSeries(currentSeries, data) :
+                        [ currentSeries ]
+                    );
+                } else {
+                    processedSeries.push(currentSeries);
                 }
             }
 
-            [].push.apply(series, groupSeries);
+            chart._sourceSeries = series;
+            options.series = processedSeries;
+
             applySeriesColors(chart.options);
 
             chart._bindSeries();
@@ -478,14 +481,13 @@
                 group,
                 groupIx,
                 dataLength = data.length,
-                firstGroup = data[0],
                 seriesClone;
 
             if (series.groupNameTemplate) {
                 nameTemplate = template(series.groupNameTemplate);
             }
 
-            for (groupIx = 1; groupIx < dataLength; groupIx++) {
+            for (groupIx = 0; groupIx < dataLength; groupIx++) {
                 seriesClone = deepExtend({}, series);
                 seriesClone.color = undefined;
                 groupSeries.push(seriesClone);
@@ -498,13 +500,6 @@
                         series: seriesClone, group: group
                     });
                 }
-            }
-
-            series.dataItems = firstGroup.items;
-            if (nameTemplate) {
-                series.name = nameTemplate({
-                    series: series, group: firstGroup
-                });
             }
 
             return groupSeries;
