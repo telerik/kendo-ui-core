@@ -62,7 +62,7 @@
                 kendo.mobile.init(element.children());
             }
 
-            that.content.kendoMobileScroller({ useOnDesktop: true });
+            that.content.kendoMobileScroller();
 
             that.scroller = that.content.data("kendoMobileScroller");
             that.scrollerContent = that.scroller.scrollElement;

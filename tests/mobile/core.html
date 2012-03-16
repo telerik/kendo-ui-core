@@ -6,7 +6,7 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.mobile.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -73,57 +73,6 @@
 
                 ok(dom.data("kendoMobileMy"), "Plugin instantiated");
             });
-
-            module("mobile Animation", {});
-
-            asyncTest("executes callbacks", 1, function() {
-                var animation = kendo.mobile.Animation.extend({
-                    counter: 0,
-                    tick: function() {
-                        this.counter ++;
-                    },
-
-                    onEnd: function() {
-                        start();
-                        equal(this.counter, 3);
-                    },
-
-                    done: function() {
-                        return this.counter === 3;
-                    }
-                });
-
-                new animation().start();
-            });
-
-            asyncTest("is cancellable", 1, function() {
-                var animation = kendo.mobile.Animation.extend({
-                    counter: 0,
-                    tick: function() {
-                        this.counter ++;
-                        if (this.counter === 2) {
-                            this.cancel();
-                        }
-                    },
-
-                    onCancel: function() {
-                        start();
-                        equal(this.counter, 2);
-                    },
-
-                    onEnd: function() {
-                        ok(false);
-                    },
-
-                    done: function() {
-                        return this.counter === 3;
-                    }
-                });
-
-                new animation().start();
-            });
-
-
         </script>
     </body>
 </html>

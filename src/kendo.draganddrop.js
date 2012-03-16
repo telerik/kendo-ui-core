@@ -1,5 +1,6 @@
 (function ($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         document = window.document,
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
@@ -169,6 +170,8 @@
                 .on(START_EVENTS, options.filter, proxy(that._start, that))
                 .on("mousedown dragstart selectstart", that.filter, preventDefault);
 
+            that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
+
             that.bind([
             /**
              * Fires when the user presses and releases the element without any movement or with a movement below the <code>threshold</code> specified.
@@ -335,6 +338,7 @@
 
                 if (that.moved) {
                     that._trigger(END, e);
+                    that.moved = false;
                 } else {
                     that._trigger(TAP, e);
                 }
@@ -417,6 +421,190 @@
 
         cancelCapture: function() {
             this.capture = false;
+        }
+    });
+
+    var PaneDimension = Observable.extend({
+        init: function(options) {
+            var that = this;
+            Observable.fn.init.call(that);
+
+            $.extend(that, options);
+
+            that.max = 0;
+
+            if (that.horizontal) {
+                that.measure = "width";
+                that.scrollSize = "scrollWidth";
+                that.axis = "x";
+            } else {
+                that.measure = "height";
+                that.scrollSize = "scrollHeight";
+                that.axis = "y";
+            }
+        },
+
+        outOfBounds: function(offset) {
+            return  offset > this.max || offset < this.min;
+        },
+
+        present: function() {
+            return this.max - this.min;
+        },
+
+        update: function() {
+            var that = this;
+
+            that.size = that.container[that.measure]();
+            that.total = that.element[0][that.scrollSize];
+            that.min = Math.min(that.max, that.size - that.total);
+            that.trigger("change", that);
+        }
+    });
+
+    var PaneDimensions = Class.extend({
+        init: function(options) {
+            var that = this,
+                movable = options.movable;
+
+            that.x = new PaneDimension(extend({horizontal: true}, options));
+            that.y = new PaneDimension(extend({horizontal: false}, options));
+
+            $(window).bind("orientationchange resize", proxy(that.refresh, that));
+        },
+
+        refresh: function() {
+            this.x.update();
+            this.y.update();
+        }
+    });
+
+    var PaneAxis = Observable.extend({
+        init: function(options) {
+            var that = this;
+            extend(that, options);
+            Observable.fn.init.call(that);
+        },
+
+        dragMove: function(delta) {
+            var that = this,
+                dimension = that.dimension,
+                axis = that.axis,
+                movable = that.movable,
+                position = movable[axis] + delta;
+
+            if (!dimension.present()) {
+                return;
+            }
+
+            if ((position < dimension.min && delta < 0) || (position > dimension.max && delta > 0)) {
+                delta *= that.resistance;
+            }
+
+            movable.translateAxis(axis, delta);
+            that.trigger("change", that);
+        }
+    });
+
+    var Pane = Class.extend({
+        init: function(options) {
+            var that = this,
+                x,
+                y,
+                resistance;
+
+            extend(that, {elastic: true}, options);
+
+            resistance = that.elastic ? 0.5 : 0;
+
+            that.x = x = new PaneAxis({
+                axis: "x",
+                dimension: that.dimensions.x,
+                resistance: resistance,
+                movable: that.movable
+            });
+
+            that.y = y = new PaneAxis({
+                axis: "y",
+                dimension: that.dimensions.y,
+                resistance: resistance,
+                movable: that.movable
+            });
+
+            that.drag.bind(["move", "end"], {
+                move: function(e) {
+                    x.dragMove(e.x.delta);
+                    y.dragMove(e.y.delta);
+                    e.preventDefault();
+                },
+
+                end: function(e) {
+                    e.preventDefault();
+                }
+            });
+        }
+    });
+
+    var TRANSFORM_STYLE = support.transitions.prefix + "Transform",
+        round = Math.round,
+        translate;
+
+    if (support.hasHW3D) {
+        translate = function(x, y) {
+            return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
+        }
+    } else {
+        translate = function(x, y) {
+            return "translate(" + round(x) + "px," + round(y) +"px)";
+        }
+    }
+
+    var Movable = Observable.extend({
+        init: function(element) {
+            var that = this;
+
+            Observable.fn.init.call(that);
+
+            that.element = $(element);
+            that.x = 0;
+            that.y = 0;
+            that._saveCoordinates(translate(that.x, that.y));
+        },
+
+        translateAxis: function(axis, by) {
+            this[axis] += by;
+            this.refresh();
+        },
+
+        translate: function(coordinates) {
+            this.x += coordinates.x;
+            this.y += coordinates.y;
+            this.refresh();
+        },
+
+        moveAxis: function(axis, value) {
+            this[axis] = value;
+            this.refresh();
+        },
+
+        moveTo: function(coordinates) {
+            extend(this, coordinates);
+            this.refresh();
+        },
+
+        refresh: function() {
+            var that = this,
+                newCoordinates = translate(that.x, that.y);
+
+            if (newCoordinates != that.coordinates) {
+                that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
+                that._saveCoordinates(newCoordinates);
+                that.trigger("change");
+            }
+        },
+
+        _saveCoordinates: function(coordinates) {
+            this.coordinates = coordinates;
         }
     });
 
@@ -787,4 +975,11 @@
     kendo.ui.plugin(Draggable);
     kendo.Drag = Drag;
     kendo.Tap = Tap;
+
+    extend(kendo.ui, {
+        Pane: Pane,
+        PaneDimensions: PaneDimensions,
+        Movable: Movable
+    });
+
  })(jQuery);

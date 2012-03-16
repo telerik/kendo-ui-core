@@ -1,13 +1,16 @@
 (function($, undefined) {
     var mobile = kendo.mobile,
+        fx = kendo.fx,
         ui = mobile.ui,
         proxy = $.proxy,
         extend = $.extend,
         Widget = ui.Widget,
         Class = kendo.Class,
-        Move = mobile.Move,
-        Transition = mobile.Transition,
-        Animation = mobile.Animation,
+        Movable = kendo.ui.Movable,
+        Pane = kendo.ui.Pane,
+        PaneDimensions = kendo.ui.PaneDimensions,
+        Transition = fx.Transition,
+        Animation = fx.Animation,
         SNAPBACK_DURATION = 500,
         SCROLLBAR_OPACITY = 0.7,
         FRICTION = 0.93,
@@ -26,7 +29,7 @@
             extend(that, options, {
                 transition: new Transition({
                     axis: options.axis,
-                    move: options.move,
+                    movable: options.movable,
                     onEnd: function() { that._end(); }
                 })
             });
@@ -77,9 +80,17 @@
 
         tick: function() {
             var that = this,
-                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION;
+                dimension = that.dimension,
+                friction = that._outOfBounds() ? OUT_OF_BOUNDS_FRICTION : FRICTION,
+                delta = (that.velocity *= friction),
+                location = that.movable[that.axis] + delta;
 
-            that.move.translateAxis(that.axis, that.velocity *= friction);
+                if (!that.elastic && dimension.outOfBounds(location)) {
+                    location = Math.max(Math.min(location, dimension.max), dimension.min);
+                    that.velocity = 0;
+                }
+
+            that.movable.moveAxis(that.axis, location);
         },
 
         _end: function() {
@@ -88,13 +99,13 @@
         },
 
         _outOfBounds: function() {
-            return this.dimension.outOfBounds(this.move[this.axis]);
+            return this.dimension.outOfBounds(this.movable[this.axis]);
         },
 
         _snapBack: function() {
             var that = this,
                 dimension = that.dimension,
-                snapBack = that.move[that.axis] > dimension.max ? dimension.max : dimension.min;
+                snapBack = that.movable[that.axis] > dimension.max ? dimension.max : dimension.min;
             that._moveTo(snapBack);
         },
 
@@ -112,12 +123,12 @@
             extend(that, options, {
                 element: element,
                 elementSize: 0,
-                move: new Move(element),
-                scrollMove: options.move,
+                movable: new Movable(element),
+                scrollMovable: options.movable,
                 size: horizontal ? "width" : "height"
             });
 
-            that.scrollMove.bind(CHANGE, proxy(that._move, that));
+            that.scrollMovable.bind(CHANGE, proxy(that._move, that));
             that.container.append(element);
         },
 
@@ -126,9 +137,9 @@
                 axis = that.axis,
                 dimension = that.dimension,
                 paneSize = dimension.size,
-                scrollMove = that.scrollMove,
+                scrollMovable = that.scrollMovable,
                 sizeRatio = paneSize / dimension.total,
-                position = Math.round(-scrollMove[axis] * sizeRatio),
+                position = Math.round(-scrollMovable[axis] * sizeRatio),
                 size = Math.round(paneSize * sizeRatio);
 
                 if (position + size > paneSize) {
@@ -143,7 +154,7 @@
                 that.elementSize = size;
             }
 
-            that.move.moveAxis(axis, position);
+            that.movable.moveAxis(axis, position);
         },
 
         show: function() {
@@ -182,6 +193,7 @@
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element
         * @param {Object} options
+        * @option {Boolean} [elastic] <true> Weather or not to allow out of bounds dragging and easing.
         * @option {Number} [pullOffset] <140> The threshold after which a scroll pull will trigger the pull to refresh event. Has effect only when the pull option is set to true.
         * @option {String} [pullTemplate] <Pull to refresh> The message template displayed when the user pulls the scroller. Has effect only when the pull option is set to true.
         * @option {Boolean} [pullToRefresh] <false> If set to true, the scroller will display a hint when the user pulls the container beyond its top limit.
@@ -204,9 +216,9 @@
 
                 tap = new kendo.Tap(element),
 
-                move = new Move(inner),
+                movable = new Movable(inner),
 
-                dimensions = new mobile.PaneDimensions({
+                dimensions = new PaneDimensions({
                     element: inner,
                     container: element
                 }),
@@ -218,15 +230,15 @@
                     }
                 }),
 
-                pane = new mobile.Pane({
-                    move: move,
+                pane = new Pane({
+                    movable: movable,
                     dimensions: dimensions,
                     drag: drag,
-                    elastic: true
+                    elastic: that.options.elastic,
                 });
 
             extend(that, {
-                move: move,
+                movable: movable,
                 dimensions: dimensions,
                 drag: drag,
                 pane: pane,
@@ -248,6 +260,7 @@
         options: {
             name: "Scroller",
             pullOffset: 140,
+            elastic: true,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing"
@@ -275,7 +288,7 @@
          * Scrolls the container to the top.
          */
         reset: function() {
-            this.move.moveTo({x: 0, y: 0});
+            this.movable.moveTo({x: 0, y: 0});
         },
 
         /**
@@ -321,7 +334,7 @@
         _paneChange: function() {
             var that = this;
 
-            if (that.move.y / OUT_OF_BOUNDS_FRICTION > that.options.pullOffset) {
+            if (that.movable.y / OUT_OF_BOUNDS_FRICTION > that.options.pullOffset) {
                 if (!that.pulled) {
                     that.pulled = true;
                     that.refreshHint.removeClass(REFRESHCLASS).addClass(RELEASECLASS);
@@ -336,23 +349,24 @@
 
         _initAxis: function(axis) {
             var that = this,
-            move = that.move,
+            movable = that.movable,
             dimension = that.dimensions[axis],
             tap = that.tap,
 
             scrollBar = new ScrollBar({
                 axis: axis,
-                move: move,
+                movable: movable,
                 dimension: dimension,
                 container: that.element
             }),
 
             inertia = new DragInertia({
                 axis: axis,
-                move: move,
+                movable: movable,
                 tap: tap,
                 drag: that.drag,
                 dimension: dimension,
+                elastic: that.options.elastic,
                 end: function() { scrollBar.hide(); }
             });
 
