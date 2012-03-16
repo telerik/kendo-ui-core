@@ -568,7 +568,7 @@
 
             if (placeholder) {
                 options = placeholder;
-                idx += 1;
+                idx = 1;
             }
 
             for (; idx < length; idx++) {
