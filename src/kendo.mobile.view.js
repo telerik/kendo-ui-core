@@ -15,8 +15,8 @@
     /**
      * @name kendo.mobile.ui.View.Description
      *
-     * @section <p>The Kendo mobile View widget represents a screen in the kendo mobile Application. The mobile
-     * application automatically instantiates a mobile View for each element with a <code>role</code> data attribute set
+     * @section <p>The Kendo mobile View widget represents a screen in the kendo mobile Application. The
+     * Application automatically instantiates a mobile View for each element with a <code>role</code> data attribute set
      * to <b>view</b>.</p>
      *
      * @exampleTitle Hello World mobile View
