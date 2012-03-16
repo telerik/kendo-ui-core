@@ -2685,7 +2685,7 @@
                         dataItem: dataItems ? dataItems[i] : { value: currentData },
                         percentage: value / total,
                         explode: explode,
-                        currentData: currentData
+                        visibleInLegend: currentData.visibleInLegend
                     });
 
                     startAngle += angle;
@@ -2716,7 +2716,8 @@
                 value: chart.pointValue(data),
                 category: chart.pointGetter(series, index, "category"),
                 color: chart.pointGetter(series, index, "color"),
-                explode: chart.pointGetter(series, index, "explode")
+                explode: chart.pointGetter(series, index, "explode"),
+                visibleInLegend: chart.pointGetter(series, index, "visibleInLegend")
             };
         },
 
@@ -3109,10 +3110,14 @@
             var series = chart.options.series,
                 count = series.length,
                 data = [],
-                i;
+                i,
+                currentSeries;
 
             for (i = 0; i < count; i++) {
-                data.push({ name: series[i].name || "", color: series[i].color });
+                currentSeries = series[i];
+                if (currentSeries.visibleInLegend !== false) {
+                    data.push({ name: currentSeries.name || "", color: currentSeries.color });
+                }
             }
 
             append(this.options.legend.items, data);
@@ -3786,12 +3791,17 @@
                 options = plotArea.options,
                 segments = chart.segments,
                 count = segments.length,
-                i;
+                i,
+                currentSegment;
 
             for (i = 0; i < count; i++) {
-                options.legend.items.push({
-                    name: segments[i].category,
-                    color: segments[i].options.color });
+                currentSegment = segments[i];
+                if (currentSegment.visibleInLegend !== false) {
+                    options.legend.items.push({
+                        name: currentSegment.category,
+                        color: currentSegment.options.color
+                    });
+                }
             }
         }
     });

@@ -27,30 +27,34 @@
                     plotArea
                     MARGIN = 10;
 
+                function createChart(series) {
+                    $("#container").kendoChart({
+                        title: {
+                            text: "Chart Title"
+                        },
+                        series: series,
+                        categoryAxis: {
+                            categories: ["Alpha", "Beta", "Charlie"]
+                        },
+                        chartArea: {
+                            margin: 0
+                        }
+                    });
+
+                    chart = $("#container").data("kendoChart");
+                    model = chart._model;
+                    title = model.children[0];
+                    legend = model.children[1];
+                    plotArea = model.children[2];
+                }
+
                 module("Bar Chart Model", {
                     setup: function() {
-                        $("#container").kendoChart({
-                            title: {
-                                text: "Chart Title"
-                            },
-                            series: [{
-                                name: "Value",
-                                type: "bar",
-                                data: [100, 200, 300]
-                            }],
-                            categoryAxis: {
-                                categories: ["Alpha", "Beta", "Charlie"]
-                            },
-                            chartArea: {
-                                margin: 0
-                            }
-                        });
-
-                        chart = $("#container").data("kendoChart");
-                        model = chart._model;
-                        title = model.children[0];
-                        legend = model.children[1];
-                        plotArea = model.children[2];
+                        createChart([{
+                            name: "Value",
+                            type: "bar",
+                            data: [100, 200, 300]
+                        }]);
                     },
                     teardown: function() {
                         $("#container").empty();
@@ -79,6 +83,17 @@
 
                 test("legend series are populated", function() {
                     equal(legend.options.items[0].name, "Value");
+                });
+
+                test("series can be excluded from leged", function() {
+                    createChart([{
+                        name: "Value",
+                        type: "bar",
+                        data: [100, 200, 300],
+                        visibleInLegend: false
+                    }]);
+
+                    equal(legend.options.items.length, 0);
                 });
 
                 test("legend is positioned at right", function() {
