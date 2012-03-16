@@ -119,7 +119,7 @@
         },
 
         viewShow: function(view) {
-            this.title(view.title);
+            this.title(view.options.title);
         }
     });
 

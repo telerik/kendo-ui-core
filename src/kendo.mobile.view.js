@@ -9,13 +9,71 @@
         Widget = ui.Widget,
         INIT = "init",
         SHOW = "show",
-        PULL = "pull",
-        START_PULL = "startPull",
-        CANCEL_PULL = "cancelPull",
         roleSelector = kendo.roleSelector,
         jsonRegExp = /^(?:\{.*\}|\[.*\])$/;
 
-    var View = Widget.extend({
+    /**
+     * @name kendo.mobile.ui.View.Description
+     *
+     * @section <p>The Kendo mobile View widget represents a screen in the kendo mobile Application. The mobile
+     * application automatically instantiates a mobile View for each element with a <code>role</code> data attribute set
+     * to <b>view</b>.</p>
+     *
+     * @exampleTitle Hello World mobile View
+     * @example
+     * <div data-role="view">Hello world!</div>
+     *
+     * @section
+     * <h3>Headers and Footers</h3>
+     * <p>By default, the mobile <strong>View</strong> contents stretch to fit the application element.
+     * The mobile <strong>View</strong> can also have a header and a footer.
+     * In order to mark header and footer elements, add elements with attribute <code>data-role="header"</code> and
+     * <code>data-role="footer"</code>. </p>
+     *
+     * @exampleTitle Mobile View with Header and Footer
+     * @example
+     * <div data-role="view">
+     *   <div data-role="header">Header</div>
+     *   Hello world!
+     *   <div data-role="footer">Footer</div>
+     * </div>
+     *
+     * @section
+     * <strong>Important:</strong>
+     * <p>Because of the OS UI design conventions, the header and the footer switch positions when an Android device is detected.
+     * Usually the footer hosts a MobileTabstrip widget, which is located at the bottom of the screen on iOS,
+     * and at the top of the screen in Android applications.  </p>
+     *
+     * @section
+     * <h3>View DOM elements</h3>
+     * <p>The mobile View exposes the following fields:</p>
+     * <ul>
+     *  <li><b>header</b> - the view (or the applied mobile layout) header DOM element;</li>
+     *  <li><b>footer</b> - the view (or the applied mobile layout) footer DOM element;</li>
+     *  <li><b>content</b> - the view content DOM element;</li>
+     *  <li><b>scrollerContent</b> - the view mobile scroller container DOM element. Recommended if the mobile View
+     *  contents need to be manipulated or <b>replaced</b>.</li>
+     * </ul>
+     */
+    var View = Widget.extend(/** @lends kendo.mobile.ui.View.prototype */{
+        /**
+         * @constructs
+         * @extends kendo.mobile.ui.Widget
+         * @param {DomElement} element DOM element.
+         * @param {Object} options Configuration options.
+         * @option {String} [title] <> The text to display in the navbar title (if present) and the browser title.
+         * @option {String | ObservableObject} [model] <null> The MVVM model to bind to. If a string is passed, The view
+         * will try to resolve a reference to the view model variable in the global scope.
+         * _exampleTitle Bind a Mobile View
+         * _example
+         * <script>
+         *  var foo = { bar: "baz" }
+         * </script>
+         *
+         * <div data-role="view" data-model="foo">
+         *    <span data-bind="text:bar"></span>
+         * </div>
+         */
         init: function(element, options) {
             var that = this,
                 contentSelector = roleSelector("content"),
@@ -39,10 +97,9 @@
             that.content = element.find(roleSelector("content"))
                                 .addClass("km-content");
 
-            that.title = element.data(kendo.ns + "title");
-            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
-
             that.element.prepend(that.header).append(that.footer);
+
+            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
 
             if (that.layout) {
                 that.layout.setup(that);
@@ -75,12 +132,27 @@
         },
 
         events: [
+            /**
+             * Fires after a mobile View and its child widgets is initialized.
+             * @name kendo.mobile.ui.View#init
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.view The mobile view instance
+             */
             INIT,
+            /**
+             * Fires when a mobile View becomes visible.
+             * @name kendo.mobile.ui.View#show
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.view The mobile view instance
+             */
             SHOW
         ],
 
         options: {
             name: "View",
+            title: "",
             model: null
         },
 
