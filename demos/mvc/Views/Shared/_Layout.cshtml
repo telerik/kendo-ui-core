@@ -24,13 +24,13 @@
 
     <div class="demos-nav widgetGrid">
         <div class="centerWrap floatWrap">
-
         @foreach (string category in ViewBag.Navigation.Keys)
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="wideCol floatWrap">
+                <div class="@(category.ToLower().Contains("widget") ? "wideCol" : "narrowCol") floatWrap">
                     <h2>@category</h2>
+                    @{ var idx = 0; }
                     <ul>
                         @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                         {
@@ -39,7 +39,14 @@
                                 <li class="@(ViewBag.Section == widget.Name ? "active" : "")">
                                     <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
                                 </li>
+
+                                if (idx > 0 && idx % 5 == 0)
+                                {
+                                    @Html.Raw("</ul><ul>")
+                                }
                             }
+
+                            idx++;
                         }
                     </ul>
                 </div>
