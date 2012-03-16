@@ -749,6 +749,8 @@
          * });
          * @option {Number} [valueAxis.labels.step] <1> Label rendering step.
          * Every n-th label is rendered where n is the step
+         * @option {Number} [valueAxis.labels.skip] <1> Number of labels to skip.
+         * Skips rendering the first n labels.
          * @option {Boolean} [valueAxis.labels.visible] <true> The visibility of the labels.
          * _example
          * $("#chart").kendoChart({
@@ -1370,6 +1372,8 @@
          * });
          * @option {Number} [categoryAxis.labels.step] <1> Label rendering step.
          * Every n-th label is rendered where n is the step
+         * @option {Number} [categoryAxis.labels.skip] <1> Number of labels to skip.
+         * Skips rendering the first n labels.
          * @option {Boolean} [categoryAxis.labels.visible] <true> The visibility of the labels.
          * _example
          * $("#chart").kendoChart({
