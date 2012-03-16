@@ -700,6 +700,30 @@
                 });
 
                 // ------------------------------------------------------------
+                module("Numeric Axis / Vertical / Label Step and skip / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        numericAxis = new dataviz.NumericAxis(0, 1, {
+                            labels: { step: 2, skip: 2 }
+                        });
+
+                        numericAxis.reflow(chartBox);
+                        numericAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label, starting from the third", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         [0.4, 0.8, 1.2]);
+                });
+
+                test("labels are distributed vertically, starting from the third", function() {
+                    same($.map(view.log.text, function(text) { return text.style.y }),
+                         [388, 194, 0], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
                 module("Numeric Axis / Vertical / Mirrored / Rendering", {
                     setup: function() {
                         moduleSetup();
@@ -1017,6 +1041,31 @@
                 test("labels are distributed horizontally", function() {
                     same($.map(view.log.text, function(text) { return text.style.x }),
                          [0, 253, 513, 774], TOLERANCE);
+                });
+
+                // ------------------------------------------------------------
+                module("Numeric Axis / Horizontal / Label Step and skip / Rendering", {
+                    setup: function() {
+                        moduleSetup();
+
+                        numericAxis = new dataviz.NumericAxis(0, 1, {
+                            labels: { step: 2, skip: 2 },
+                            vertical: false
+                        });
+
+                        numericAxis.reflow(chartBox);
+                        numericAxis.getViewElements(view);
+                    }
+                });
+
+                test("renders every second label, starting from the third label", function() {
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         [0.4, 0.8, 1.2]);
+                });
+
+                test("labels are distributed horizontally, starting from the thrid label", function() {
+                    same($.map(view.log.text, function(text) { return text.style.x }),
+                         [258, 516, 774], TOLERANCE);
                 });
 
                 // ------------------------------------------------------------
