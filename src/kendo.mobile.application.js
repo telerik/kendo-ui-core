@@ -130,6 +130,14 @@
     *
     * @section
     *
+    * <p>By default, all navigational widgets treat the links' hrefs as mobile views. This behavior can be overriden by setting <code>data-rel="external" attribute to the link element.  </p>
+    *
+    * @exampleTitle External links
+    * @example
+    * <a href="http://kendoui.com/" data-rel="external">Visit KendoUI</a>
+    *
+    * @section
+    *
     * <h3>View Transitions</h3>
     * <p><strong>View</strong> transitions are defined by setting a <code>data-transition</code> attribute to the <strong>View</strong> DOM element.
     * A default <strong>View</strong> transition may be set using the <code>transition</code> parameter in the options parameter of the <strong>Application</strong> constructor.
@@ -236,7 +244,7 @@
         /**
          * @constructs
          * @extends kendo.Observable
-         * @param {DomElement} element DOM element.
+         * @param {DomElement} element DOM element. By default, the body element is used.
          * @param {Object} options Configuration options.
          * @option {String} [layout] <> The id of the default Application Layout.
          * @option {String} [initial] <> The id of the initial mobilie View to display.
@@ -284,6 +292,24 @@
             });
         },
 
+        /**
+         * Navigate the local or remote view.
+         * @param {String} url The id or url of the view.
+         *
+         * @exampleTitle Navigate to a remote view
+         * @example
+         * var app = new kendo.mobile.Application();
+         * app.navigate("settings.html");
+         *
+         * @exampleTitle Navigate to a local view
+         * @example
+         * <div data-role="view" id="foo"> ... </div>
+         *
+         * <script>
+         * var app = new kendo.mobile.Application();
+         * app.navigate("#foo");
+         * </script>
+         */
         navigate: function(url) {
             var that = this;
 
@@ -299,8 +325,46 @@
             });
         },
 
+        /**
+         * Get a reference to the current view's scroller widget instance.
+         * @returns {kendo.mobile.ui.Scroller} the scroller widget instance.
+         */
         scroller: function() {
             return this.view.content.data("kendoScroller");
+        },
+
+        /**
+         * Hide the loading animation.
+         * @example
+         * <script>
+         *   var app = new kendo.mobile.Application();
+         *   app.hideLoading();
+         * </script>
+         */
+        hideLoading: function() {
+            var that = this;
+            clearTimeout(that._loading);
+            that.loader.hide();
+        },
+
+        /**
+         * Show the loading animation.
+         * @example
+         * <script>
+         *   var app = new kendo.mobile.Application();
+         *   app.showLoading();
+         * </script>
+         */
+        showLoading: function() {
+            var that = this;
+
+            if (that.options.loading === false) {
+                return;
+            }
+
+            that._loading = setTimeout(function() {
+                that.loader.show();
+            }, 100);
         },
 
         _setupAppLinks: function() {
@@ -525,50 +589,6 @@
 
         dataOrDefault: function(element, option) {
             return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
-        },
-
-        /**
-        * Hides the loading animation.
-        * @example
-        * <script>
-        *   // kendo mobile Application
-        *   var app = new kendo.mobile.Application();
-        * </script>
-        * <script>
-        *   // hides the loading animation
-        *
-        *   app.hideLoading();
-        * </script>
-        */
-        hideLoading: function() {
-            var that = this;
-            clearTimeout(that._loading);
-            that.loader.hide();
-        },
-
-        /**
-        * Shows the loading animation.
-        * @example
-        * <script>
-        *   // kendo mobile Application
-        *   var app = new kendo.mobile.Application();
-        * </script>
-        * <script>
-        *   // shows the loading animation
-        *
-        *   app.showLoading();
-        * </script>
-        */
-        showLoading: function() {
-            var that = this;
-
-            if (that.options.loading === false) {
-                return;
-            }
-
-            that._loading = setTimeout(function() {
-                that.loader.show();
-            }, 100);
         },
 
         _loader: function() {

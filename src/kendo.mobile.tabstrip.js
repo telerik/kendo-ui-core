@@ -124,26 +124,26 @@
         ],
 
         /**
-        * Set the mobile TabStrip active tab to the tab with the specified url.
-        * @param {String} url The url of the tab.
-        *
-        * @example
-        * <div data-role="tabstrip" id="tabstrip"> <a href="#foo">Foo</a> </div>
-        *
-        * <script>
-        *     $(function() {
-        *         $("#tabstrip").data("kendoMobileTabStrip").switchTo("#foo");
-        *     });
-        * </script>
-        */
+         * Set the mobile TabStrip active tab to the tab with the specified url.
+         * @param {String} url The url of the tab.
+         *
+         * @example
+         * <div data-role="tabstrip" id="tabstrip"> <a href="#foo">Foo</a> </div>
+         *
+         * <script>
+         *     $(function() {
+         *         $("#tabstrip").data("kendoMobileTabStrip").switchTo("#foo");
+         *     });
+         * </script>
+         */
         switchTo: function(url) {
             this._setActiveItem(this.element.find('a[href$="' + url + '"]'));
         },
 
         /**
-        * Get the currently selected tab DOM element.
-        * @returns {jQueryObject} the currently selected tab DOM element.
-        */
+         * Get the currently selected tab DOM element.
+         * @returns {jQueryObject} the currently selected tab DOM element.
+         */
         currentItem: function() {
             return this.element.children("." + ACTIVE_STATE_CLASS);
         },
