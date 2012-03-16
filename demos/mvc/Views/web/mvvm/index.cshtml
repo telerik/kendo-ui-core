@@ -1,26 +1,31 @@
 <div id="example" class="k-content">
-    <div class="registration code-sample">
-        <h4 class="code-title">Registration Form</h4>
+    <div class="current-state">
+        <h4>Current view model state:</h4>
+        <pre>
+    {
+        firstName: <span data-bind="text: firstName"></span>,
+        lastName: <span data-bind="text: lastName"></span>,
+        gender: <span data-bind="text: gender"></span>,
+        agreed: <span data-bind="text: agreed"></span>
+    }
+        </pre>
+    </div>
+    <div class="registration">
         <form>
-            <div class="code-details">
-                <ul>
-                    <li><label>First Name:<input data-bind="value: firstName" /></label></li>
-                    <li><label>Last Name:<input data-bind="value: lastName" /></label></li>
-                    <li><label>Gender:<select data-bind="source: genders, value: gender"></select></label></li>
-                </ul>
-                <label><input type="checkbox" data-bind="checked: agreed" /> I have read the licence agreement</label>
-                <br /><br />
-                <button data-bind="enabled: agreed, click: register" style="display: block">Register</button>
-            </div>
+            <ul>
+                <li><label for="fname">First Name:</label><input id="fname" data-bind="value: firstName" /></li>
+                <li><label for="lname">Last Name:</label><input id="lname" data-bind="value: lastName" /></li>
+                <li><label for="gender">Gender:</label><select id="gender" data-bind="source: genders, value: gender"></select></li>
+            </ul>
+            <input type="checkbox" id="agree" data-bind="checked: agreed" /> <label for="agree">I have read the licence agreement</label>
+            <br /><br />
+            <button data-bind="enabled: agreed, click: register" style="display: block">Register</button>
         </form>
     </div>
-    <div class="confirmation code-sample" data-bind="visible: confirmed">
-        <h4 class="code-title">Confirmation</h4>
-        <div class="code-details">
-            Thank you for your registration, <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>
-            <br /><br />
-            <button data-bind="click: startOver">Start Over</button>
-        </div>
+    <div class="confirmation" data-bind="visible: confirmed">
+        Thank you for your registration, <span data-bind="text: firstName"></span> <span data-bind="text: lastName"></span>
+        <br /><br />
+        <button data-bind="click: startOver">Start Over</button>
     </div>
     <script>
         $(document).ready(function() {
@@ -48,19 +53,7 @@
             kendo.bind($("#example"), viewModel);
         });
     </script>
-    <div class="current-state code-sample">
-        <h4 class="code-title">Current view model state</h4>
-        <div class="code-details">
-            <pre>
-{
-    firstName: <span data-bind="text: firstName"></span>,
-    lastName: <span data-bind="text: lastName"></span>,
-    gender: <span data-bind="text: gender"></span>,
-    agreed: <span data-bind="text: agreed"></span>
-}
-            </pre>
-        </div>
-    </div>
+
     <div class="source code-sample">
         <h4 class="code-title">View source code:</h4>
         <pre class="prettyprint">
@@ -112,6 +105,70 @@
     </div>
 
     <style scoped>
+        .current-state {
+            float: right;
+            width: 200px;
+            margin: 100px 100px 0 0;
+        }
+        
+        .current-state pre {
+            font-size: 12px;
+        }
+        
+        .registration h3 {
+            font-size: 2.5em;
+            color: #787878;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .registration {
+            float: left;
+            clear: left;
+            width: 370px;
+            height: 131px;
+            margin: 30px 0 30px 30px;
+            padding: 60px 0 30px 30px;
+            background: url('../../content/web/mvvm/regForm.png') transparent no-repeat 0 0;
+        }
+        
+        .registration ul {
+        	list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .registration li {
+        	height: 28px;
+        	vertical-align: middle;
+        }
+        
+        .registration ul label {
+        	display: inline-block;
+        	width: 100px;
+        	text-align: right;
+        	padding-right: 5px;
+        }
+        
+        .registration ul input {
+        	border: 1px solid #ddd;
+        }
+        
+        .registration button {
+        	float: right;
+        	margin-right: 85px;
+        }
+        
+        .confirmation {
+            float: left;
+            clear: left;
+            width: 274px;
+            height: 65px;
+            margin: 30px 0 30px 30px;
+            padding: 20px 30px;
+            background: url('../../content/web/mvvm/confirm.png') transparent no-repeat 0 0;
+            text-align: center;
+        }
+        
         .code-details > ul {
             list-style: none;
             margin: 0;
@@ -125,44 +182,12 @@
             vertical-align: middle;
         }
 
-        .code-details input,
-        .code-details select,
-        .code-details button
-        {
-            float: right;
-        }
-
-        .code-details input[type=checkbox]
-        {
-            float: left;
-        }
-
-        .registration {
-            float: left;
-            width: 400px;
-        }
-
         .code-details {
             padding: 1em;
         }
-
-        .confirmation {
-            float: left;
-            width: 300px;
-            margin-left: 20px;
-        }
-
+        
         .source {
-            clear: right;
-        }
-
-        .current-state {
-            float: right;
-            width: 180px;
-        }
-
-        .current-state pre {
-            font-size: 12px;
+            clear: both;
         }
     </style>
 </div>
