@@ -125,7 +125,12 @@
             nextLink.attr("href", item.next().find("a").attr("href") || nextWidgetUrl);
         });
 
-        $("#themeChooser").themeChooser();
+        $(".demos-nav").on("click", "a", function(e) {
+            e.preventDefault();
+            Application.changeWidget(this.href);
+        });
+
+        $(".themeChooser").themeChooser();
 
         $("#deviceChooser").mobileOsChooser({
             container: "#mobile-application-container"
@@ -138,7 +143,7 @@
                 method = element.hasClass("prev") ? "prev" : "next",
                 currentItem = $("#examples-nav li.active"),
                 nextItem = currentItem[method](),
-                navigateUrl;
+                navigateUrl = method == "next" ? nextWidgetUrl : prevWidgetUrl;
 
             if (nextItem[0]) {
                 e.preventDefault();
@@ -154,13 +159,13 @@
                 if (nextItem[0]) {
                     element.attr("href", nextItem.children("a").attr("href"));
                 } else {
-                    navigateUrl = method == "next" ? nextWidgetUrl : prevWidgetUrl;
-
                     element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
                 }
 
                 Application.load(url);
-
+            } else if (navigateUrl) {
+                e.preventDefault();
+                Application.changeWidget(navigateUrl);
             } else if (url == "#") {
                 e.preventDefault();
             }

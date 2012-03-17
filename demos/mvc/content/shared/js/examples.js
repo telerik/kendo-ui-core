@@ -107,6 +107,11 @@
             }, "html");
         },
 
+        changeWidget: function(href) {
+            this.fetchNav(href);
+            this.load(href);
+        },
+
         preloadStylesheet: function (file, callback) {
             var element = $("<link rel='stylesheet' media='print' href='" + file + "'").appendTo("head");
 
