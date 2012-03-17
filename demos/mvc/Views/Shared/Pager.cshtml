@@ -1,5 +1,5 @@
 <div id="pager">
-    <a class="prev k-link@(ViewBag.PrevUrl == null ? " k-state-disabled": "")" href="@(ViewBag.PrevUrl != null ? Url.Content(ViewBag.PrevUrl) : "#")">Prev</a>
+    <a class="prev k-link@(ViewBag.PrevUrl == null ? " k-state-disabled": "")" href="@(ViewBag.PrevUrl != null ? Url.Content(ViewBag.PrevUrl) : "#")" data-widget="@(ViewBag.PrevWidgetUrl != null ? Url.Content(ViewBag.PrevWidgetUrl) : "")">Prev</a>
     &nbsp;|&nbsp;
-    <a class="next k-link@(ViewBag.NextUrl == null ? " k-state-disabled": "")" href="@(ViewBag.NextUrl != null ? Url.Content(ViewBag.NextUrl) : "#")">Next</a>
+    <a class="next k-link@(ViewBag.NextUrl == null ? " k-state-disabled": "")" href="@(ViewBag.NextUrl != null ? Url.Content(ViewBag.NextUrl) : "#")" data-widget="@(ViewBag.NextWidgetUrl != null ? Url.Content(ViewBag.NextWidgetUrl) : "")">Next</a>
 </div>
