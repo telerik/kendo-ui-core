@@ -63,7 +63,7 @@ namespace Kendo
 
            routes.MapRoute(
                 "Navigation",
-                "navigation/{suite}/{section}/{example}.html",
+                "{suite}/{section}/{example}.nav",
                 new { controller = "Suite", action = "Navigation" },
                 suiteConstraint
             );

@@ -77,7 +77,7 @@ namespace Kendo.Controllers
 
             LoadNavigation(suite);
 
-            FindCurrentExample();
+            FindExample(Request.Path.Replace(".nav", ".html"));
             FindSiblingExamples();
             FindEdgeExamples();
 
@@ -85,6 +85,11 @@ namespace Kendo.Controllers
         }
 
         protected void FindCurrentExample()
+        {
+            FindExample(Request.Path);
+        }
+
+        protected void FindExample(string url)
         {
             var found = false;
 
@@ -98,7 +103,7 @@ namespace Kendo.Controllers
                             examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
                         }
 
-                        if (!found && Request.Path.EndsWith(example.Url))
+                        if (!found && url.EndsWith(example.Url))
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;

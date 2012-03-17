@@ -1,14 +1,12 @@
 <div id="examples-nav">
-@ViewBag.Suite
 @if (ViewBag.CurrentWidget.Name != "overview")
 {
     @Html.Partial("Pager");
-
     <ul id="examples-list">
         @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
         {
             <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
-                <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                <a href="@Url.Content("~/" + ViewBag.Suite + "/" + example.Url)">@example.Text</a>
                 </li>
         }
     </ul>
