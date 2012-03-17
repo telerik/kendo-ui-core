@@ -111,21 +111,16 @@
 
     <script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
     <script>
-        var prevWidgetUrl = "@(ViewBag.PrevWidgetUrl != null ? Url.Content(ViewBag.PrevWidgetUrl) : "")",
-            nextWidgetUrl = "@(ViewBag.NextWidgetUrl != null ? Url.Content(ViewBag.NextWidgetUrl) : "")",
-            links = $("#pager a"),
-            prevLink = links.eq(0),
-            nextLink = links.eq(1);
-
-
+        //move to Application - changeWidget
         $("#examples-list").on("click", "a", function() {
             var item = $(this).parent();
 
-            prevLink.attr("href", item.prev().find("a").attr("href") || prevWidgetUrl),
-            nextLink.attr("href", item.next().find("a").attr("href") || nextWidgetUrl);
+            $("#pager a:first").attr("href", item.prev().find("a").attr("href") || $("#pager a:first").data("widget")),
+            $("#pager a:last").attr("href", item.next().find("a").attr("href") || $("#pager a:last").data("widget"));
         });
 
         $(".demos-nav").on("click", "a", function(e) {
+            //set active state to the li
             e.preventDefault();
             Application.changeWidget(this.href);
         });
@@ -136,18 +131,18 @@
             container: "#mobile-application-container"
         });
 
-        links.click(function(e) {
+        //move to Application - changeWidget
+        $("#pager").on("click", "a", function(e) {
             var element = $(this),
                 url = element.attr("href"),
                 sibling = element.siblings(),
                 method = element.hasClass("prev") ? "prev" : "next",
                 currentItem = $("#examples-nav li.active"),
                 nextItem = currentItem[method](),
-                navigateUrl = method == "next" ? nextWidgetUrl : prevWidgetUrl;
+                navigateUrl = method == "next" ? $("#pager a:last").data("widget") : $("#pager a:first").data("widget");
 
+            e.preventDefault();
             if (nextItem[0]) {
-                e.preventDefault();
-
                 nextItem.addClass("active");
                 currentItem.removeClass("active");
 
@@ -164,10 +159,7 @@
 
                 Application.load(url);
             } else if (navigateUrl) {
-                e.preventDefault();
                 Application.changeWidget(navigateUrl);
-            } else if (url == "#") {
-                e.preventDefault();
             }
         });
     </script>
