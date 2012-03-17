@@ -93,10 +93,7 @@
         fetchNav: function(href) {
             var navWrap = $("#examples-nav");
 
-            href = href.split("/");
-            href.splice(href.length - 3, 0, "navigation");
-            href = href.join("/");
-
+            href = href.replace(".html", ".nav");
             $.get(href, function(html) {
                 navWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     navWrap.replaceWith(html);
