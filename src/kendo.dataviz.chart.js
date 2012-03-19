@@ -62,7 +62,7 @@
         CHANGE = "change",
         CIRCLE = "circle",
         CLICK = "click",
-        CLIP = "clip",
+        CLIP = dataviz.CLIP,
         COLUMN = "column",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DATABOUND = "dataBound",
@@ -4195,8 +4195,6 @@
     dataviz.ui.plugin(Chart);
 
     deepExtend(dataviz, {
-        CLIP: CLIP,
-
         AreaChart: AreaChart,
         Bar: Bar,
         BarAnimationDecorator: BarAnimationDecorator,
