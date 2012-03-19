@@ -136,16 +136,18 @@
          * @param {Object} options Configuration options.
          * @option {Integer} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
          * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
+         * @option {Boolean} [allowSelection] <false> If set to true, the mousedown and selectstart events will not be prevented.
          * If set to false, dragging outside of the element boundaries will trigger the <code>end</code> event.
          * @option {Selector} [filter] If passed, the filter limits the child elements that will trigger the event sequence.
          */
         init: function(element, options) {
             var that = this,
                 eventMap = {},
+                filter,
                 ns = "." + kendo.guid();
 
             options = options || {};
-            that.filter = options.filter;
+            filter = that.filter = options.filter;
             that.threshold = options.threshold || 0;
 
             element = $(element);
@@ -167,8 +169,12 @@
             });
 
             element
-                .on(START_EVENTS, options.filter, proxy(that._start, that))
-                .on("dragstart", that.filter, preventDefault);
+                .on(START_EVENTS, filter, proxy(that._start, that))
+                .on("dragstart", filter, preventDefault);
+
+            if (!options.allowSelection) {
+                element.on("mousedown selectstart", filter, preventDefault);
+            }
 
             that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
 
