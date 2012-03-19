@@ -19,7 +19,7 @@
         Ring = dataviz.Ring,
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,
-        BarAnimation = dataviz.BarAnimation,
+        BarIndicator = dataviz.BarIndicator,
         ArrowAnimation = dataviz.ArrowAnimation,
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
@@ -665,16 +665,14 @@
             if (options.animation === false && element) {
                 element.refresh(doc.getElementById(options.id));
             } else {
+                element.endPosition = scale.getSlot(options.value);
                 if (options.shape == ARROW) {
                     element.points = pointer.getShape(options.value);
                     animation = new ArrowAnimation(element, deepExtend(options.animation, {
-                        type: ARROW_POINTER,
-                        startPosition: scale.getSlot(options.min)
+                        type: ARROW_POINTER
                     }));
                 } else {
-                    animation = new BarAnimation(element, deepExtend(options.animation, {
-                        startPosition: scale.getSlot(options.min)
-                    }));
+                    animation = new BarIndicator(element, options.animation);
                 }
                 animation.setup();
                 animation.play();
@@ -729,7 +727,6 @@
                         id: options.id,
                         zIndex: 2,
                         size: options.size,
-                        startPosition: scale.getSlot(options.min),
                         align: false
                     }, border),
                 shape = pointer.getShape(options.value);
@@ -1053,7 +1050,7 @@
 
     var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
     var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
-    var BarIndicatorAnimationDecorator = animationDecorator(BAR_INDICATOR, BarAnimation);
+    var BarIndicatorAnimationDecorator = animationDecorator(BAR_INDICATOR, BarIndicator);
 
     // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);

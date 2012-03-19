@@ -1743,7 +1743,7 @@
                 options = element.options,
                 axis = options.vertical ? Y : X,
                 stackBase = options.stackBase,
-                aboveAxis = defined(options.aboveAxis) ? options.aboveAxis : true,
+                aboveAxis = options.aboveAxis,
                 startPosition,
                 endState = anim.endState = {
                     top: points[0].y,
@@ -1784,6 +1784,65 @@
 
                 points[1].x = points[2].x =
                     interpolateValue(startPosition, endState.right, pos);
+            }
+        }
+    });
+
+    var BarIndicator = ElementAnimation.extend({
+        options: {
+            easing: SWING
+        },
+
+        setup: function() {
+            var anim = this,
+                element = anim.element,
+                points = element.points,
+                options = element.options,
+                vertical = options.vertical,
+                pos = vertical ? "y1" : "x2",
+                axis = vertical ? "y" : "x",
+                start,
+                end,
+                endPosition = element.endPosition,
+                initialState = anim.initialState = {
+                    top: points[0].y,
+                    right: points[1].x,
+                    bottom: points[3].y,
+                    left: points[0].x
+                },
+                initial = !defined(element.endPosition);
+
+            if (vertical) {
+                start = initialState[initial ? BOTTOM : TOP];
+                end = initial ? initialState[TOP] : endPosition[pos];
+            } else {
+                start = initialState[initial ? LEFT : RIGHT];
+                end = initial ? initialState[RIGHT] : endPosition[pos];
+            }
+
+            anim.start = start;
+            anim.end = end;
+            anim.axis = axis;
+            if (initial) {
+                updateArray(points, axis, start);
+            }
+        },
+
+        step: function(pos) {
+            var anim = this,
+                start = anim.start,
+                end = anim.end,
+                initialState = anim.initialState,
+                element = anim.element,
+                points = element.points,
+                axis = anim.axis;
+
+            if (element.options.vertical) {
+                points[0][axis] = points[1][axis] =
+                    interpolateValue(start, end, pos);
+            } else {
+                points[1][axis] = points[2][axis] =
+                    interpolateValue(start, end, pos);
             }
         }
     });
@@ -2286,6 +2345,7 @@
         ExpandAnimation: ExpandAnimation,
         ArrowAnimation: ArrowAnimation,
         BarAnimation: BarAnimation,
+        BarIndicator: BarIndicator,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         NumericAxis: NumericAxis,
