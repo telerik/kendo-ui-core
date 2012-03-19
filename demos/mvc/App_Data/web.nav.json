@@ -15,7 +15,7 @@
         {
             "text": "AutoComplete",
             "name": "autocomplete",
-            "spriteCssClass": "autocompleteIcon",
+            "spriteCssClass": "autoCompleteIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -96,7 +96,7 @@
         {
             "text": "DatePicker",
             "name": "datepicker",
-            "spriteCssClass": "datepickerIcon",
+            "spriteCssClass": "datePickerIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -310,7 +310,7 @@
         {
             "text": "NumericTextBox",
             "name": "numerictextbox",
-            "spriteCssClass": "numerictextboxIcon",
+            "spriteCssClass": "numericTextBoxIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -433,7 +433,7 @@
         {
             "text": "TimePicker",
             "name": "timepicker",
-            "spriteCssClass": "timepickerIcon",
+            "spriteCssClass": "timePickerIcon",
             "items": [
                 {
                     "text": "Basic usage",
@@ -637,7 +637,7 @@
         {
             "text": "Drag & Drop",
             "name": "dragdrop",
-            "spriteCssClass": "dragdropIcon",
+            "spriteCssClass": "dragDropIcon",
             "items": [
                 {
                     "text": "Basic usage",
