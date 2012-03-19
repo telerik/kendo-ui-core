@@ -2196,6 +2196,7 @@
                                 range.data = that._observe(that.reader.data(data));
                                 range.end = range.start + range.data.length;
                                 that._ranges.sort( function(x, y) { return x.start - y.start; } );
+                                that._total = that.reader.total(data);
                                 if (callback) {
                                     callback();
                                 }
