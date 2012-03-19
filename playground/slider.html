@@ -22,10 +22,13 @@
             <input />
             <input />
         </div>
+        <br />
+        <input id="slider" />
         <script type="text/javascript">
             $(document).ready(function() {
-                $("#rangeslider").kendoRangeSlider();
+                $("#rangeslider").kendoRangeSlider({ tooltip: { template: "#= selectionStart #aaaaaaaaaaaa#= selectionEnd #" , format: "{0}"} });
                 $("#rangeslider1").kendoRangeSlider();
+                $("#slider").kendoSlider({ tooltip: { template: "#= value #aaaa" } });
             });
         </script>
 

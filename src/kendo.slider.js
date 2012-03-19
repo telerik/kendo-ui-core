@@ -105,6 +105,7 @@
         Draggable = kendo.ui.Draggable,
         keys = kendo.keys,
         extend = $.extend,
+        format = kendo.format,
         parse = kendo.parseFloat,
         proxy = $.proxy,
         math = Math,
@@ -277,7 +278,7 @@
                 increment = that._isHorizontal ? 1 : -1;
 
             for (; i - limit != 0 ; i += increment) {
-                $(items[i]).attr("title", kendo.format(options.tooltip.format, round(titleNumber)));
+                $(items[i]).attr("title", format(options.tooltip.format, round(titleNumber)));
                 titleNumber += options.smallStep;
             }
         },
@@ -662,7 +663,8 @@
             value: 0,
             showButtons: true,
             increaseButtonTitle: "Increase",
-            decreaseButtonTitle: "Decrease"
+            decreaseButtonTitle: "Decrease",
+            tooltip: { template: "#= value #" }
         },
 
         /**
@@ -932,7 +934,12 @@
         _dragstart: function(e) {
             var that = this,
                 owner = that.owner,
-                options = that.options;
+                options = that.options,
+                tooltip = options.tooltip,
+                html = '',
+                tooltipTemplate,
+                formattedSelectionStart,
+                formattedSelectionEnd;
 
             if (!options.enabled) {
                 return false;
@@ -952,18 +959,35 @@
                 that.oldVal = that.val = options.value;
             }
 
-            if (options.tooltip.enabled) {
+            if (tooltip.enabled) {
+                if (tooltip.template) {
+                    tooltipTemplate = that.tooltipTemplate = kendo.template(tooltip.template);
+                }
+
                 that.tooltipDiv = $("<div class='k-widget k-tooltip'><!-- --></div>").appendTo(document.body);
-                var html = "";
 
                 if (that.type) {
-                    var formattedSelectionStart = kendo.format(options.tooltip.format, that.selectionStart),
-                        formattedSelectionEnd = kendo.format(options.tooltip.format, that.selectionEnd);
+                    if (that.tooltipTemplate) {
+                        html = tooltipTemplate({
+                            selectionStart: that.selectionStart,
+                            selectionEnd: that.selectionEnd
+                        });
+                    } else {
+                        formattedSelectionStart = format(tooltip.format, that.selectionStart);
+                        formattedSelectionEnd = format(tooltip.format, that.selectionEnd);
 
-                    html = formattedSelectionStart + " - " + formattedSelectionEnd;
+                        html = formattedSelectionStart + ' - ' + formattedSelectionEnd;
+                    }
                 } else {
-                    that.tooltipInnerDiv = "<div class='k-callout k-callout-" + (owner._isHorizontal ? "s" : "e") + "'><!-- --></div>";
-                    html = kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv;
+                    that.tooltipInnerDiv = "<div class='k-callout k-callout-" + (owner._isHorizontal ? 's' : 'e') + "'><!-- --></div>";
+                    if (that.tooltipTemplate) {
+                        html = tooltipTemplate({
+                            value: that.val
+                        });
+                    } else {
+                        html = format(tooltip.format, that.val);
+                    }
+                    html += that.tooltipInnerDiv;
                 }
 
                 that.tooltipDiv.html(html);
@@ -979,7 +1003,13 @@
                 x = e.x.location,
                 y = e.y.location,
                 startPoint = that.dragableArea.startPoint,
-                endPoint = that.dragableArea.endPoint;
+                endPoint = that.dragableArea.endPoint,
+                tooltip = options.tooltip,
+                html = "",
+                tooltipTemplate = that.tooltipTemplate,
+                slideParams,
+                formattedSelectionStart,
+                formattedSelectionEnd;
 
             e.preventDefault();
 
@@ -1006,24 +1036,37 @@
                             that.selectionStart = that.selectionEnd = that.val;
                         }
                     }
-
-                    owner.trigger(SLIDE, { values: [that.selectionStart, that.selectionEnd] });
-
-                    if (options.tooltip.enabled) {
-                        var formattedSelectionStart = kendo.format(options.tooltip.format, that.selectionStart),
-                            formattedSelectionEnd = kendo.format(options.tooltip.format, that.selectionEnd);
-
-                        that.tooltipDiv.html(formattedSelectionStart + " - " + formattedSelectionEnd );
-                    }
+                    slideParams = { values: [that.selectionStart, that.selectionEnd] };
                 } else {
-                    owner.trigger(SLIDE, { value: that.val });
-
-                    if (options.tooltip.enabled) {
-                        that.tooltipDiv.html(kendo.format(options.tooltip.format, that.val) + that.tooltipInnerDiv);
-                    }
+                    slideParams = { value: that.val };
                 }
 
-                if (options.tooltip.enabled) {
+                owner.trigger(SLIDE, slideParams);
+
+                if (tooltip.enabled) {
+                    if (that.type) {
+                        if (that.tooltipTemplate) {
+                            html = tooltipTemplate({
+                                selectionStart: that.selectionStart,
+                                selectionEnd: that.selectionEnd
+                        });
+                        } else {
+                            formattedSelectionStart = format(tooltip.format, that.selectionStart);
+                            formattedSelectionEnd = format(tooltip.format, that.selectionEnd);
+                            html = formattedSelectionStart + " - " + formattedSelectionEnd;
+                        }
+                    } else {
+                        if (that.tooltipTemplate) {
+                            html = tooltipTemplate({
+                                value: that.val
+                            });
+                        } else {
+                            html = format(tooltip.format, that.val);
+                        }
+
+                        html += that.tooltipInnerDiv;
+                    }
+                    that.tooltipDiv.html(html);
                     that.moveTooltip();
                 }
             }
@@ -1237,7 +1280,8 @@
         options: {
             name: "RangeSlider",
             selectionStart: 0,
-            selectionEnd: 10
+            selectionEnd: 10,
+            tooltip: { template: "#= selectionStart # - #= selectionEnd #" }
         },
 
         /**
