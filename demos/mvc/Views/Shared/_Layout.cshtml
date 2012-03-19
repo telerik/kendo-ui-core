@@ -82,7 +82,11 @@
         }
 
         <div id="mainWrapInner" class="floatWrap clear">
-        @Html.Partial("Navigation")
+        @if (ViewBag.CurrentWidget.Name != "overview")
+        {
+            @Html.Partial("Navigation")
+        }
+        
         @if (ViewBag.CurrentWidget.Name != "overview")
         {
             if (ViewBag.suite == "mobile")

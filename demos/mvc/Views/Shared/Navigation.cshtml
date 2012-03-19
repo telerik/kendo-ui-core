@@ -1,7 +1,5 @@
 <div id="examples-nav">
-@if (ViewBag.CurrentWidget.Name != "overview")
-{
-    @Html.Partial("Pager");
+    @Html.Partial("Pager")
     <ul id="examples-list">
         @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
         {
@@ -10,7 +8,6 @@
                 </li>
         }
     </ul>
-}
 
 @if (ViewBag.suite == "mobile")
 {

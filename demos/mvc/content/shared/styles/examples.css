@@ -1,6 +1,6 @@
 /*reset*/
 
-body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,#footer ul,#footer p,#pager,#examples-list,#themeChooser,.widgetGrid ul
+body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#footer p,#pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
     padding:0;
@@ -491,6 +491,28 @@ html
 .browsers .ff{background-position:-160px -75px;}
 .browsers .safari{background-position:-224px -75px;}
 .browsers .opera{background-position:-256px -75px;}
+
+.mobileOSs li
+{
+    float:left;
+    margin:0 40px 0 10px;
+    text-align:center;
+    font-size:1.2em;
+    color:#3c3c3c;
+}
+
+.mobileOS
+{
+    display:block;
+    width:90px;
+    height:76px;
+    background:url(sprite.misc.png);
+}
+
+.mobileOSs .android{background-position:0 -107px;}
+.mobileOSs .iOS{background-position:-90px -107px;}
+.mobileOSs .blackberry{background-position:-180px -107px;}
+.mobileOSs .webOS{background-position:-270px -107px;}
 
 /*footer*/
 
@@ -1200,7 +1222,7 @@ pre.prettyprint
     left: 50%;
     margin: 0 0 0 -6px;
     position: absolute;
-    top: 33px;
+    top: 32px;
     width: 0;
     height:0;
 }
