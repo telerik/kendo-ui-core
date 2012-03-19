@@ -1,0 +1,25 @@
+<div id="mainWrapInner" class="floatWrap clear">
+    @Html.Partial("Navigation")
+    @if (ViewBag.CurrentWidget.Name != "overview")
+    {
+        if (ViewBag.suite == "mobile")
+        {
+        <div class="configuration mobileConfiguration">
+            <input id="deviceChooser" type="hidden" />
+            <ul id="deviceList" class="options">
+                <li></li>
+            </ul>
+
+            <script id="deviceThumbTemplate" type="text/x-kendo-template">
+                <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+            </script>
+
+        </div>
+        }
+    }
+
+    @RenderBody()
+
+</div>
+
+

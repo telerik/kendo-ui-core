@@ -21,7 +21,7 @@ namespace Kendo.Controllers
 
         //
         // GET: /Web/
-        public ActionResult Index(string suite, string section, string example)
+        public ActionResult Index(string suite, string section, string example, bool? nav)
         {
             ViewBag.ShowCodeStrip = true;
             ViewBag.Suite = suite;
@@ -71,7 +71,7 @@ namespace Kendo.Controllers
 
         protected void FindCurrentExample()
         {
-            var found = false;
+           var found = false;
 
             foreach (string category in ViewBag.Navigation.Keys)
             {

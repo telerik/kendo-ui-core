@@ -1,0 +1,22 @@
+<div id="examples-nav">
+@if (ViewBag.CurrentWidget.Name != "overview")
+{
+    @Html.Partial("Pager");
+    <ul id="examples-list">
+        @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
+        {
+            <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
+                <a href="@Url.Content("~/" + ViewBag.Suite + "/" + example.Url)">@example.Text</a>
+                </li>
+        }
+    </ul>
+}
+
+@if (ViewBag.suite == "mobile")
+{
+    <p id="qrWrap">Open this demo with an iOS/Android mobile device for a full experience. <a href="#" id="qr"><span class="k-icon k-qr"></span><em>Show QR Code</em></a></p>
+        <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
+}
+
+<a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui">Get KendoUI</a>
+</div>
