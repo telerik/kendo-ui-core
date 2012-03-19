@@ -675,7 +675,6 @@
             } else {
                 element.endPosition = scale.getSlot(options.value);
                 if (options.shape == ARROW) {
-                    element.points = pointer.getShape(options.value);
                     animation = new ArrowAnimation(element, deepExtend(options.animation, {
                         type: ARROW_POINTER
                     }));
@@ -735,6 +734,7 @@
                         id: options.id,
                         zIndex: 2,
                         size: options.size,
+                        startPosition: scale.getSlot(options.min),
                         align: false
                     }, border),
                 shape = pointer.getShape(options.value);
