@@ -1,23 +1,22 @@
 tests.push(
     {
-        page: "slider/ClientSideAPI.html",
+        page: "slider/clientsideapi.html",
         title: "slider client api"
     },
     {
-        page: "slider/RangeSlider.html",
+        page: "slider/rangeslider.html",
         title: "range slider"
     },
     {
-        page: "slider/Rendering.html",
+        page: "slider/rendering.html",
         title: "slider rendering"
     },
     {
-        page: "slider/Slider.html",
+        page: "slider/slider.html",
         title: "slider"
     },
     {
         page: "slider/mvvm.html",
         title: "mvvm"
     }
-
 );
