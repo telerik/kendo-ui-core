@@ -1,6 +1,6 @@
 /*reset*/
 
-body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,#footer ul,#footer p,.pager,#examples-list,#themeChooser,.widgetGrid ul
+body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,#footer ul,#footer p,#pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
     padding:0;
@@ -551,6 +551,7 @@ p#copy
 #exampleTitle
 {
     float:left;
+    margin:-56px 0 0 -181px;
     font-size:23px;
     line-height:1.6;
     font-weight:normal;
@@ -560,6 +561,7 @@ p#copy
 .widgetOverview #exampleTitle
 {
     float:none;
+    margin:0;
 }
 
 #exampleTitle strong
@@ -578,7 +580,7 @@ p#copy
     -webkit-transform: translatez(0);
 }
 
-
+.overviewIcon{display:none;}
 .applicationIcon{background-position:0 0;}
 .autoCompleteIcon{background-position:-20px 0;}
 .mobileButtonIcon{background-position:-40px 0;}
@@ -721,25 +723,25 @@ p#copy
 
 /*pager*/
 
-#examples-nav .pager
+#pager
 {
     margin-right:14px;
 }
 
-.pager li
+#pager li
 {
     display:inline;
     padding-left:8px;
     font-size:.9em;
 }
 
-.pager li:first-child
+#pager li:first-child
 {
     border-right:1px solid #d9d9d9;
     padding-right:8px;
 }
 
-.pager a
+#pager a
 {
     text-transform:uppercase;
     color:#e26b1d;

@@ -130,7 +130,7 @@
             "name": "api"
         }, {
             "text": "Radial Gauge",
-            "spriteCssClass": "radialGaugeIcon",
+            "spriteCssClass": "gaugeRadialIcon",
             "items": [{
                 "text": "Basic usage",
                 "url": "radial-gauge/index.html"
@@ -144,7 +144,7 @@
     "Sample Dashboards": [
         {
             "text": "High performance chart",
-            "spriteCssClass": "highPerfIcon",
+            "spriteCssClass": "chartIcon",
             "expanded": true,
             "items": [{
                 "text": "High performance",
@@ -154,7 +154,7 @@
         },
         {
             "text": "Car dashboard",
-            "spriteCssClass": "carDashboardIcon",
+            "spriteCssClass": "gaugeRadialIcon",
             "expanded": true,
             "items": [{
                 "text": "Car dashboard",
@@ -164,7 +164,7 @@
         },
         {
             "text": "World popuplation dashboard",
-            "spriteCssClass": "worldPopulationIcon",
+            "spriteCssClass": "chartAreaIcon",
             "expanded": true,
             "items": [{
                 "text": "World population dashboard",

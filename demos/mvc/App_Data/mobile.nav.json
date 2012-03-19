@@ -91,7 +91,7 @@
         {
             "text": "Scroller",
             "name": "scroller",
-            "spriteCssClass": "mobileScrollViewIcon",
+            "spriteCssClass": "mobileScrollerIcon",
             "items": [
                 {
                     "text": "Basic usage",
