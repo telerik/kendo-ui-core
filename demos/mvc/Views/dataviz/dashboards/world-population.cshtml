@@ -1,275 +1,275 @@
-        <div id="example" class="k-content absConf">
-            <h3 class="example-title">Stock<span>History</span></h3>
-            <h4 class="example-description">Kendo UI Data Visualization Project</h4>
+<div id="example" class="k-content absConf">
+    <h3 class="example-title">Stock<span>History</span></h3>
+    <h4 class="example-description">Kendo UI Data Visualization Project</h4>
 
-            <div id="filtering-tabs"></div>
+    <div id="filtering-tabs"></div>
 
-            <h5 class="example-subtitle">Closing stock prices throughout the year</h5>
+    <h5 class="example-subtitle">Closing stock prices</h5>
+    <span class="metric">throughout <span class="selected-year"></span></span>
 
-            <div id="chart-type-chooser">
-                <strong class="example-subtitle radio-group-label">Chart type</strong>
+    <div id="chart-type-chooser">
+        <strong class="example-subtitle radio-group-label">Chart type</strong>
 
-                <ul class="radio-group">
-                    <li><input type="radio" name="chart-type" value="area" id="chart-type-area" checked><label for="chart-type-area">Area</label></li>
-                    <li><input type="radio" name="chart-type" value="line" id="chart-type-line"><label for="chart-type-line">Line</label></li>
-                </ul>
-            </div>
+        <ul class="radio-group">
+            <li><input type="radio" name="chart-type" value="area" id="chart-type-area" checked><label for="chart-type-area">Area</label></li>
+            <li><input type="radio" name="chart-type" value="line" id="chart-type-line"><label for="chart-type-line">Line</label></li>
+        </ul>
+    </div>
 
-            <div id="yearly-stock-prices"></div>
+    <div id="yearly-stock-prices"></div>
 
-            <script>
-                var stocksDataSource = new kendo.data.DataSource({
-                        transport: {
-                            read: {
-                                url: "../../content/dataviz/dashboards/stock-data.json",
-                                dataType: "json"
-                            }
-                        },
+    <script>
+        var selectedYear = 2011;
 
-                        sort: {
-                            field: "date",
-                            dir: "asc"
-                        },
-
-                        group: {
-                            field: "symbol"
-                        },
-
-                        schema: {
-                            model: {
-                                fields: {
-                                    date: {
-                                        type: "date"
-                                    }
-                                }
-                            }
-                        }
-                    });
-
-                $("#yearly-stock-prices").kendoChart({
-                    dataSource: stocksDataSource,
-
-                    autoBind: false,
-
-                    seriesDefaults: {
-                        type: "area",
-                        overlay: {
-                            gradient: "none"
-                        },
-                        markers: {
-                            visible: false
-                        },
-                        majorTickSize: 0,
-                        opacity: .8
+        var stocksDataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: function() {
+                        return "../../content/dataviz/dashboards/stock-data-" + selectedYear + ".json";
                     },
+                    dataType: "json"
+                }
+            },
 
-                    series: [{
-                        field: "close"
-                    }],
+            group: {
+                field: "symbol"
+            },
 
-                    seriesColors: [ "#cd1533", "#009bd7", "#454447" ],
+            sort: {
+                field: "date",
+                dir: "asc"
+            },
 
-                    valueAxis: {
-                        line: {
-                            visible: false
-                        },
-
-                        labels: {
-                            format: "${0}",
-                            skip: 2,
-                            step: 2,
-                            color: "#727f8e"
+            schema: {
+                model: {
+                    fields: {
+                        date: {
+                            type: "date"
                         }
-                    },
-
-                    categoryAxis: {
-                        field: "date",
-
-                        labels: {
-                            format: "{0:MMM}",
-                            step: 27,
-                            color: "#727f8e"
-                        },
-
-                        line: {
-                            visible: false
-                        },
-
-                        majorTicks: {
-                            visible: false
-                        },
-
-                        majorGridLines: {
-                            visible: false
-                        }
-                    },
-
-                    legend: {
-                        visible: false
                     }
-                });
-
-                $("[name=chart-type]").on("click", function() {
-                    var chart = $("#yearly-stock-prices").data("kendoChart"),
-                        allSeries = chart.options.series,
-                        newSeriesType = $(this).val();
-
-                    chart.options.seriesDefaults.type = newSeriesType;
-
-                    for (var series in allSeries) {
-                        allSeries[series].type = newSeriesType;
-                        allSeries[series].opacity = newSeriesType == "area" ? .8 : 1;
-                    }
-
-                    chart.redraw();
-                });
-
-                $("#filtering-tabs").kendoTabStrip({
-                    dataSource: ["2007","2008","2009","2010","2011"],
-                    change: function(e) {
-                        var endYear = this.value();
-
-                        stocksDataSource.filter([{
-                            field: "date",
-                            operator: "gte",
-                            value: new Date(endYear, 0, 1)
-                        }, {
-                            field: "date",
-                            operator: "lte",
-                            value: new Date(endYear, 11, 31)
-                        }]);
-                    }
-                }).data("kendoTabStrip").select(4);
-
-            </script>
-
-            <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
-            <style scoped>
-                .example-title,
-                .example-subtitle,
-                .metric,
-                .example-description {
-                    font-family: 'Open Sans Condensed', Verdana, sans-serif;
                 }
+            }
+        });
 
-                .example-title,
-                .example-subtitle {
-                    text-transform: uppercase;
+        $("#yearly-stock-prices").kendoChart({
+            dataSource: stocksDataSource,
+
+            autoBind: false,
+
+            seriesDefaults: {
+                type: "area",
+                overlay: {
+                    gradient: "none"
+                },
+                markers: {
+                    visible: false
+                },
+                majorTickSize: 0,
+                opacity: .8
+            },
+
+            series: [{
+                field: "close"
+            }],
+
+            seriesColors: [ "#cd1533", "#009bd7", "#454447" ],
+
+            valueAxis: {
+                line: {
+                    visible: false
+                },
+
+                labels: {
+                    format: "${0}",
+                    skip: 2,
+                    step: 2,
+                    color: "#727f8e"
                 }
+            },
 
-                .example-title {
-                    color: #2b8abe;
-                    font-size: 48px;
-                    font-weight: 300;
+            categoryAxis: {
+                field: "date",
+
+                labels: {
+                    format: "{0:MMM}",
+                    step: 27,
+                    color: "#727f8e"
+                },
+
+                line: {
+                    visible: false
+                },
+
+                majorTicks: {
+                    visible: false
+                },
+
+                majorGridLines: {
+                    visible: false
                 }
+            },
 
-                .example-title span {
-                    font-weight: 700;
-                }
+            legend: {
+                visible: false
+            }
+        });
 
-                .example-description {
-                    font-size: 18px;
-                    font-weight: 300;
-                    color: #1a364a;
-                }
+        $("[name=chart-type]").on("click", function() {
+            var chart = $("#yearly-stock-prices").data("kendoChart"),
+            allSeries = chart.options.series,
+            newSeriesType = $(this).val();
 
-                .example-subtitle {
-                    font-size: 13px;
-                    margin-bottom: 0;
-                }
+            chart.options.seriesDefaults.type = newSeriesType;
 
-                .metric {
-                    font-size: 12px;
-                    color: #727f8e;
-                    margin: 0;
-                }
+            for (var series in allSeries) {
+                allSeries[series].type = newSeriesType;
+                allSeries[series].opacity = newSeriesType == "area" ? .8 : 1;
+            }
 
-                .example-title,
-                .example-description {
-                    display: inline-block;
-                    margin: 0;
-                }
+            chart.redraw();
+        });
 
-                #chart-type-chooser {
-                    float: right;
-                    width: 170px;
-                    text-align: right;
-                    line-height: 32px;
-                }
+        $("#filtering-tabs").kendoTabStrip({
+            dataSource: ["2007","2008","2009","2010","2011"],
+            change: function(e) {
+                selectedYear = this.value();
 
-                .radio-group-label {
-                    margin-right: 12px;
-                    color: #727f8e;
-                }
+                $(".selected-year").text(selectedYear);
 
-                .radio-group {
-                    margin: 0;
-                    padding: 0;
-                    list-style-type: none;
-                    display: inline-block;
-                    vertical-align: top;
-                }
+                stocksDataSource.read();
+            }
+        }).data("kendoTabStrip").select(4);
 
-                .radio-group > li {
-                    display: inline-block;
-                }
+    </script>
 
-                .radio-group label {
-                    width: 32px;
-                    height: 32px;
-                    background: #b3bbc5 no-repeat center center;
-                    display: inline-block;
-                    border-radius: 16px;
-                    overflow: hidden;
-                    font: 0/0;
-                    color: transparent;
-                }
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
+    <style scoped>
+        .example-title,
+        .example-subtitle,
+        .metric,
+        .example-description {
+            font-family: 'Open Sans Condensed', Verdana, sans-serif;
+        }
 
-                .radio-group input {
-                    display: none;
-                }
+        .example-title,
+        .example-subtitle {
+            text-transform: uppercase;
+        }
 
-                .radio-group input:checked+label {
-                    background-color: #2b8abe;
-                }
+        .example-title {
+            color: #2b8abe;
+            font-size: 48px;
+            font-weight: 300;
+        }
 
-                .radio-group label[for=chart-type-area] { background-image: url("../../content/dataviz/dashboards/area-chart.png"); }
-                .radio-group label[for=chart-type-line] { background-image: url("../../content/dataviz/dashboards/line-chart.png"); }
+        .example-title span {
+            font-weight: 700;
+        }
 
-                #filtering-tabs {
-                    border: 0;
-                    background: none;
-                }
+        .example-description {
+            font-size: 18px;
+            font-weight: 300;
+            color: #1a364a;
+        }
 
-                #filtering-tabs .k-item {
-                    width: 19%;
-                    border: 0;
-                    margin: 0 .5%;
-                    padding: 0 0 2px;
-                    text-align: center;
-                    cursor: pointer;
-                    border-bottom: 6px solid #b3bbc5;
-                    font: 16px/2em Arial,sans-serif;
-                    color: #727f8e;
-                }
+        .example-subtitle {
+            font-size: 13px;
+            margin-bottom: 0;
+        }
 
-                #filtering-tabs .k-state-hover {
-                    background: none;
-                }
+        .metric {
+            font-size: 12px;
+            color: #727f8e;
+            margin: 0;
+        }
 
-                #filtering-tabs .k-state-active {
-                    padding: 0;
-                    border-bottom: 8px solid #2b8abe;
-                }
+        .example-title,
+        .example-description {
+            display: inline-block;
+            margin: 0;
+        }
 
-                #filtering-tabs .k-link {
-                    padding: 0;
-                }
+        #chart-type-chooser {
+            float: right;
+            width: 170px;
+            text-align: right;
+            line-height: 32px;
+        }
 
-                #yearly-stock-prices {
-                    height: 200px;
-                    clear: both;
-                }
-            </style>
-        </div>
+        .radio-group-label {
+            margin-right: 12px;
+            color: #727f8e;
+        }
+
+        .radio-group {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .radio-group > li {
+            display: inline-block;
+        }
+
+        .radio-group label {
+            width: 32px;
+            height: 32px;
+            background: #b3bbc5 no-repeat center center;
+            display: inline-block;
+            border-radius: 16px;
+            overflow: hidden;
+            font: 0/0;
+            color: transparent;
+        }
+
+        .radio-group input {
+            display: none;
+        }
+
+        .radio-group input:checked+label {
+            background-color: #2b8abe;
+        }
+
+        .radio-group label[for=chart-type-area] { background-image: url("../../content/dataviz/dashboards/area-chart.png"); }
+        .radio-group label[for=chart-type-line] { background-image: url("../../content/dataviz/dashboards/line-chart.png"); }
+
+        #filtering-tabs {
+            border: 0;
+            background: none;
+        }
+
+        #filtering-tabs .k-item {
+            width: 19.6%;
+            border: 0;
+            margin: 0 .2%;
+            padding: 0 0 2px;
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 6px solid #b3bbc5;
+            font: 16px/2em Arial,sans-serif;
+            color: #727f8e;
+        }
+
+        #filtering-tabs .k-state-hover {
+            background: none;
+        }
+
+        #filtering-tabs .k-state-active {
+            padding: 0;
+            color: #2b8abe;
+            border-bottom: 8px solid #2b8abe;
+        }
+
+        #filtering-tabs .k-link {
+            padding: 0;
+        }
+
+        #yearly-stock-prices {
+            height: 200px;
+            clear: both;
+        }
+    </style>
+</div>
 
