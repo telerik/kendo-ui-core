@@ -1805,20 +1805,20 @@
             var anim = this,
                 element = anim.element,
                 points = element.points,
-                options = element.options,
+                options = element.options.animation,
                 vertical = options.vertical,
                 pos = vertical ? "y1" : "x2",
                 axis = vertical ? "y" : "x",
                 start,
                 end,
-                endPosition = element.endPosition,
+                endPosition = anim.options.endPosition,
                 initialState = anim.initialState = {
                     top: points[0].y,
                     right: points[1].x,
                     bottom: points[3].y,
                     left: points[0].x
                 },
-                initial = !defined(element.endPosition);
+                initial = !defined(anim.options.endPosition);
 
             if (vertical) {
                 start = initialState[initial ? BOTTOM : TOP];
@@ -1845,7 +1845,7 @@
                 points = element.points,
                 axis = anim.axis;
 
-            if (element.options.vertical) {
+            if (element.options.animation.vertical) {
                 points[0][axis] = points[1][axis] =
                     interpolateValue(start, end, pos);
             } else {
@@ -1865,14 +1865,14 @@
             var anim = this,
                 element = anim.element,
                 points = element.points,
-                options = element.options,
+                options = element.options.animation,
                 vertical = options.vertical,
                 axis = options.vertical ? "y" : "x",
                 pos = options.vertical ? "y1" : "x2",
                 startPosition = options.startPosition[pos],
                 halfSize = options.size / 2,
                 count = points.length,
-                initial = !defined(element.endPosition),
+                initial = !defined(anim.options.endPosition),
                 padding = halfSize,
                 point,
                 i;
@@ -1883,7 +1883,7 @@
 
             if (!initial) {
                 startPosition = points[1][axis];
-                end = element.endPosition[pos];
+                end = anim.options.endPosition[pos];
             }
 
             for (i = 0; i < count; i++) {

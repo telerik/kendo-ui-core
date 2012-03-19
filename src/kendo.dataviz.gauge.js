@@ -448,6 +448,7 @@
             return childElements;
         }
     });
+
     var RadialGaugePlotArea = ChartElement.extend({
         init: function(options) {
             ChartElement.fn.init.call(this, options);
@@ -673,11 +674,11 @@
             if (options.animation === false && element) {
                 element.refresh(doc.getElementById(options.id));
             } else {
-                element.endPosition = scale.getSlot(options.value);
-                if (options.shape == ARROW) {
-                    animation = new ArrowAnimation(element, deepExtend(options.animation, {
-                        type: ARROW_POINTER
-                    }));
+                options.animation = deepExtend({}, options.animation, {
+                        endPosition: scale.getSlot(options.value)
+                    });
+                if (options.shape === ARROW) {
+                    animation = new ArrowAnimation(element, options.animation);
                 } else {
                     animation = new BarIndicator(element, options.animation);
                 }
@@ -729,17 +730,18 @@
                 elementOptions = deepExtend({
                         fill: options.color,
                         fillOpacity: options.opacity,
-                        animation: options.animation,
-                        vertical: scale.options.vertical,
+                        animation: deepExtend(options.animation, {
+                            startPosition: scale.getSlot(options.min),
+                            size: options.size,
+                            vertical: scale.options.vertical
+                        }),
                         id: options.id,
                         zIndex: 2,
-                        size: options.size,
-                        startPosition: scale.getSlot(options.min),
                         align: false
                     }, border),
                 shape = pointer.getShape(options.value);
 
-            if (options.shape == ARROW) {
+            if (options.shape === ARROW) {
                 elementOptions.animation.type = ARROW_POINTER;
                 element = view.createPolyline(shape, true, elementOptions);
             } else {
@@ -1046,8 +1048,6 @@
                 plotArea;
 
             plotArea = model._plotArea = new LinearGaugePlotArea(options);
-
-            //gauge._pointers = [ plotArea.pointer ];
 
             model.append(plotArea);
             model.reflow();
