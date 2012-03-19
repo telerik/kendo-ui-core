@@ -1,5 +1,4 @@
 (function ($, undefined) {
-
     // Imports ================================================================
     var each = $.each,
         grep = $.grep,
@@ -1935,6 +1934,7 @@
                 currentSeriesPoints,
                 linePoints,
                 point,
+                pointIx,
                 pointCount,
                 lines = [];
 
