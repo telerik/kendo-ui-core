@@ -2719,7 +2719,7 @@
             for (i = 0; i < count; i++) {
                 dataItemText = dataItems[i];
                 dataItemValue = chart.pointGetter(series, index, dataItemText);
-                if (defined(dataItemValue)) {
+                if (dataItemValue != "") {
                     result[dataItemText] = dataItemValue;
                 }
             }
