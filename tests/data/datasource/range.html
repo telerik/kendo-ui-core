@@ -554,6 +554,35 @@
 
                 equal(dataSource.view().length, 40);
             });
+
+            test("range total is updated", function() {
+                var totalCount = 47,
+                    dataSource = new DataSource({
+                        pageSize: 40,
+                        serverPaging: true,
+                        transport: {
+                            read: function(options) {
+                                var data = [];
+                                var skip = options.data.skip;
+                                var take = options.data.take;
+                                for (var i = skip; i < Math.min(skip + take, totalCount); i++) {
+                                    data.push({ foo: i });
+                                }
+                                options.success({ data: data, total: totalCount });
+                            }
+                        },
+                        schema: {
+                            data: "data",
+                            total: "total"
+                        }
+                    });
+
+                dataSource.read();
+                totalCount = 80;
+                dataSource.range(6, 40);
+
+                equal(dataSource.total(), 80);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
