@@ -27,6 +27,7 @@
         BOTTOM = "bottom",
         CENTER = "center",
         COORD_PRECISION = 3,
+        CLIP = "clip",
         DEFAULT_FONT = "12px sans-serif",
         DEFAULT_HEIGHT = 400,
         DEFAULT_PRECISION = 6,
@@ -2274,6 +2275,7 @@
         DEFAULT_HEIGHT: DEFAULT_HEIGHT,
         DEFAULT_FONT: DEFAULT_FONT,
         INITIAL_ANIMATION_DURATION: INITIAL_ANIMATION_DURATION,
+        CLIP: CLIP,
 
         Axis: Axis,
         Box2D: Box2D,
