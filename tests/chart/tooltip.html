@@ -108,11 +108,6 @@
                     equals(element.css("opacity"), 0.5);
                 });
 
-                test("sets white-space: nowrap", function() {
-                    createTooltip();
-                    equals(element[0].style.whiteSpace, "nowrap");
-                });
-
                 asyncTest("show displays tooltip for last point with a delay", function() {
                     tooltip.show({ /* Fake */ });
                     tooltip.show(dataPointMock);

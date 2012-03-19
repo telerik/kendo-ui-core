@@ -3910,8 +3910,8 @@
                     "<div class='" + CSS_PREFIX + "tooltip' " +
                     "style='display:none; position: absolute; font: #= d.font #;" +
                     "border: #= d.border.width #px solid;" +
-                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);" +
-                    "padding: 2px 6px; white-space: nowrap; z-index: 1000;'></div>"
+                    "opacity: #= d.opacity #; filter: alpha(opacity=#= d.opacity * 100 #);'>" +
+                    "</div>"
                 );
             }
 
