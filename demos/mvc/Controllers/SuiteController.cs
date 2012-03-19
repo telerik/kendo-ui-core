@@ -21,7 +21,7 @@ namespace Kendo.Controllers
 
         //
         // GET: /Web/
-        public ActionResult Index(string suite, string section, string example)
+        public ActionResult Index(string suite, string section, string example, bool? nav)
         {
             ViewBag.ShowCodeStrip = true;
             ViewBag.Suite = suite;
@@ -69,29 +69,9 @@ namespace Kendo.Controllers
             return redirect;
         }
 
-        //
-        // GET: /Web/
-        public ActionResult Navigation(string suite, string section, string example)
-        {
-            ViewBag.Suite = suite;
-
-            LoadNavigation(suite);
-
-            FindExample(Request.Path.Replace(".nav", ".html"));
-            FindSiblingExamples();
-            FindEdgeExamples();
-
-            return PartialView("~/Views/Shared/Navigation.cshtml");
-        }
-
         protected void FindCurrentExample()
         {
-            FindExample(Request.Path);
-        }
-
-        protected void FindExample(string url)
-        {
-            var found = false;
+           var found = false;
 
             foreach (string category in ViewBag.Navigation.Keys)
             {
@@ -103,7 +83,7 @@ namespace Kendo.Controllers
                             examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
                         }
 
-                        if (!found && url.EndsWith(example.Url))
+                        if (!found && Request.Path.EndsWith(example.Url))
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;

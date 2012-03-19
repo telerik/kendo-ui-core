@@ -61,13 +61,6 @@ namespace Kendo
                suiteConstraint
            );
 
-           routes.MapRoute(
-                "Navigation",
-                "{suite}/{section}/{example}.nav",
-                new { controller = "Suite", action = "Navigation" },
-                suiteConstraint
-            );
-
             routes.MapRoute(
                 "Suite",
                 "{suite}/{section}/{example}.html",
