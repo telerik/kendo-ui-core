@@ -883,7 +883,7 @@
                 root = popup.element.parents(".km-root").eq(0);
 
             if (root.length && os) {
-                popup.options.animation.open.effects = os.android ? "fadeIn" : os.ios ? "slideIn:up" : popup.options.animation.open.effects;
+                popup.options.animation.open.effects = (os.android || os.meego) ? "fadeIn" : os.ios ? "slideIn:up" : popup.options.animation.open.effects;
             }
         },
 
