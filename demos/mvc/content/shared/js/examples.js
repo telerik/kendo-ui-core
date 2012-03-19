@@ -73,19 +73,7 @@
                             .kendoStop(true)
                             .kendoAnimate(animation.show);
 
-                            $("#qr").click(function(e){
-                                var bigQR = $("#qrBig");
-                                bigQR.toggle();
-                                var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
-                                $(this).children("em").html(newText);
-                                e.preventDefault();
-                                e.stopPropagation();
-                            });
-
-                        $("#deviceChooser").mobileOsChooser({
-                            container: "#mobile-application-container"
-                        });
-                        applyCurrentMobileOS("#mobile-application-container");
+                        Application.initMobile();
 
                     }, 100);
                 }}));
@@ -103,6 +91,9 @@
                             .css("visibility", "visible")
                             .kendoStop(true)
                             .kendoAnimate(animation.show);
+
+                        Application.initMobile();
+
                     }, 100);
                 }}));
             }, "html");
@@ -300,6 +291,23 @@
                 e.preventDefault();
                 e.stopPropagation();
             });
+        },
+
+        initMobile: function() {
+            $("#qr").click(function(e){
+                var bigQR = $("#qrBig");
+                bigQR.toggle();
+                var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
+                $(this).children("em").html(newText);
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $("#deviceChooser").mobileOsChooser({
+                container: "#mobile-application-container"
+            });
+
+            applyCurrentMobileOS("#mobile-application-container");
         }
     };
 
