@@ -47,15 +47,18 @@ html
     width:976px;
 }
 
-h2,h3
+.overview h2,
+.overview h3,
+.box h2,
+.box h3
 {
     margin:2em 0 0;
     font:21px arial,sans-serif;
     color:#2e2e2e;
 }
 
-h3,
-.box h2
+.overview h3,
+.overview .box h2
 {
     margin-top:1em;
     font-size:18px;
@@ -543,7 +546,7 @@ h3,
     text-indent:-4444px;
     overflow:hidden;
     text-align:center;
-    background:#fff url(sprite.png);
+    background:#fff url(sprite.misc.png);
 }
 
 p#copy
@@ -827,6 +830,7 @@ p#copy
 
 #qrWrap
 {
+    padding-right:14px;
     color:#444;
 }
 
@@ -834,13 +838,22 @@ p#copy
 {
     display:inline-block;
     margin-top:1em;
-    color:#2175bd;
+    color:#e26b1d;
     text-decoration:none;
 }
 
 #qr:hover
 {
     text-decoration:underline;
+}
+
+.k-qr
+{
+    width:16px;
+    height:16px;
+    margin-right:8px;
+    vertical-align:text-top;
+    background:-288px -75px no-repeat url(sprite.misc.png)
 }
 
 #qr em
