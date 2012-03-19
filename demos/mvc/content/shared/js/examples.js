@@ -34,17 +34,19 @@
 
     Application = {
         load: function(href) {
-            $(doc)
-                .trigger("kendo:pageUnload")
-                .find(".k-window-content")
-                    .each(function(index, kendoWindow) {
-                        kendoWindow = $(kendoWindow).data("kendoWindow");
-                        if (kendoWindow) {
-                            kendoWindow.close();
-                        }
-                    });
+            this.unload();
 
             Application.fetch(href);
+
+            try {
+                history.pushState({ href: href }, null, href);
+            } catch(err) {}
+        },
+
+        loadWidget: function(href) {
+            this.unload();
+
+            this.fetchWidget(href);
 
             try {
                 history.pushState({ href: href }, null, href);
@@ -71,23 +73,45 @@
                             .kendoStop(true)
                             .kendoAnimate(animation.show);
 
-                            $("#qr").click(function(e){
-                                var bigQR = $("#qrBig");
-                                bigQR.toggle();
-                                var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
-                                $(this).children("em").html(newText);
-                                e.preventDefault();
-                                e.stopPropagation();
-                            });
-
-                        $("#deviceChooser").mobileOsChooser({
-                            container: "#mobile-application-container"
-                        });
-                        applyCurrentMobileOS("#mobile-application-container");
+                        Application.initMobile();
 
                     }, 100);
                 }}));
             }, "html");
+        },
+
+        fetchWidget: function(href) {
+            var wrapInner = $("#mainWrapInner");
+
+            $.get(href + "?nav=true", function(html) {
+                wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                    wrapInner.replaceWith(html);
+                    setTimeout(function() {
+                        $("#exampleWrap")
+                            .css("visibility", "visible")
+                            .kendoStop(true)
+                            .kendoAnimate(animation.show);
+
+                        Application.initMobile();
+
+                    }, 100);
+                }}));
+            }, "html");
+        },
+
+        unload: function() {
+            $(doc)
+                .find(".k-animation-container, .k-list-container, .k-calendar-container, .k-calendar")
+                .remove()
+                .end()
+                .find(".k-window-content")
+                .each(function(index, kendoWindow) {
+                    kendoWindow = $(kendoWindow).data("kendoWindow");
+                    if (kendoWindow) {
+                        kendoWindow.close();
+                    }
+                })
+                .trigger("kendo:pageUnload")
         },
 
         preloadStylesheet: function (file, callback) {
@@ -158,16 +182,57 @@
             if (pushState) {
                 $(doc)
                     .on("click", "#examples-nav li a", function(e) {
+                        var element = $(this),
+                            href = this.href,
+                            links, li, prev, next;
+
                         e.preventDefault();
 
-                        if (!location.href.match($(this).attr("href"))) {
-                            var element = $(this),
-                                li = element.parent();
+                        if (!location.href.match(href)) {
+                            li = element.parent();
+                            links = $("#pager a");
+                            prev = links.eq(0);
+                            next = links.eq(1);
 
                             li.siblings().removeClass("active")
                               .end().addClass("active");
 
-                            Application.load(element.attr("href"));
+                            prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget")),
+                            next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
+
+                            Application.load(href);
+                        }
+                    })
+                    .on("click", "#pager a", function(e) {
+                        var element = $(this),
+                            url = element.attr("href"),
+                            sibling = element.siblings(),
+                            method = element.hasClass("prev") ? "prev" : "next",
+                            currentItem = $("#examples-nav li.active"),
+                            nextItem = currentItem[method](),
+                            pagerLink = $("#pager a").eq(method == "next" ? 1 : 0),
+                            navigateUrl = pagerLink.data("widget");
+
+                        e.preventDefault();
+
+                        if (nextItem[0]) {
+                            nextItem.addClass("active");
+                            currentItem.removeClass("active");
+
+                            sibling.removeClass("k-state-disabled")
+                                   .attr("href", location.href);
+
+                            nextItem = nextItem[method]();
+
+                            if (nextItem[0]) {
+                                element.attr("href", nextItem.children("a").attr("href"));
+                            } else {
+                                element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
+                            }
+
+                            Application.load(url);
+                        } else if (navigateUrl) {
+                            Application.loadWidget(navigateUrl);
                         }
                     });
 
@@ -226,6 +291,23 @@
                 e.preventDefault();
                 e.stopPropagation();
             });
+        },
+
+        initMobile: function() {
+            $("#qr").click(function(e){
+                var bigQR = $("#qrBig");
+                bigQR.toggle();
+                var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
+                $(this).children("em").html(newText);
+                e.preventDefault();
+                e.stopPropagation();
+            });
+
+            $("#deviceChooser").mobileOsChooser({
+                container: "#mobile-application-container"
+            });
+
+            applyCurrentMobileOS("#mobile-application-container");
         }
     };
 
@@ -311,7 +393,7 @@
                 { text: "Default", value: "default" },
                 { text: "Metro", value: "metro" },
                 { text: "Silver", value: "silver" }
-            ]
+            ],
             template = kendo.template("<li data-value='#=value#'><span>#= text #</span></li>"),
             changeTheme = function(theme) {
                 Application.changeTheme(theme, true);
