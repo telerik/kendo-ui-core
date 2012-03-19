@@ -31,7 +31,7 @@
 
             <script>
                 function createGauge(labelPosition) {
-                    $("#gauge").kendoGauge({
+                    $("#gauge").kendoRadialGauge({
                         theme: $(document).data("kendoSkin") || "default",
 
                         pointer: {
@@ -74,11 +74,11 @@
                         createGauge();
                     });
 
-                    window.configuredRanges = $("#gauge").data("kendoGauge").options.scale.ranges;
+                    window.configuredRanges = $("#gauge").data("kendoRadialGauge").options.scale.ranges;
                 });
 
                 function refresh() {
-                    var gauge = $("#gauge").data("kendoGauge"),
+                    var gauge = $("#gauge").data("kendoRadialGauge"),
                         showLabels = $("#labels").prop("checked"),
                         showRanges = $("#ranges").prop("checked"),
                         positionInputs = $("input[name='labels-position']"),

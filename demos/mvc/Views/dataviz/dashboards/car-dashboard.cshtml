@@ -9,7 +9,7 @@
             <script>
 
                 function createDashboard() {
-                    $("#rpm").kendoGauge({
+                    $("#rpm").kendoRadialGauge({
                         theme: "black",
 
                         pointer: {
@@ -51,7 +51,7 @@
                         }
                     });
 
-                    $("#kmh").kendoGauge({
+                    $("#kmh").kendoRadialGauge({
                         theme: "black",
 
                         pointer: {
@@ -79,7 +79,7 @@
                         }
                     });
 
-                    $("#fuel").kendoGauge({
+                    $("#fuel").kendoRadialGauge({
                         theme: "black",
 
                         pointer: {
@@ -117,7 +117,7 @@
                         }
                     });
 
-                    $("#water-temprature").kendoGauge({
+                    $("#water-temprature").kendoRadialGauge({
                         theme: "black",
 
                         pointer: {
@@ -169,7 +169,7 @@
                         DECAY_RATE = 0.0017,
                         TOP_SPEED = 210,
                         ACCELERATION = 0.4,
-                        INTERVAL = 20;
+                        INTERVAL = 50;
 
                     var speed = 0,
                         skip = 0,
@@ -177,8 +177,8 @@
                         gear = 0;
 
                     function update() {
-                        $("#rpm").data("kendoGauge").value(GEARS[gear] * speed + IDLE_RPM);
-                        $("#kmh").data("kendoGauge").value(speed);
+                        $("#rpm").data("kendoRadialGauge").value(GEARS[gear] * speed + IDLE_RPM);
+                        $("#kmh").data("kendoRadialGauge").value(speed);
                     }
 
                     animateInterval = setInterval(function() {
@@ -194,7 +194,7 @@
                                 update();
                             }
                         } else {
-                            skip = 300;
+                            skip = 100;
                             speed = 0;
                             gear = 0;
                         }
