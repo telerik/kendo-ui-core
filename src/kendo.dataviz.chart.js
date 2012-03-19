@@ -2648,7 +2648,6 @@
                 colorsCount = colors.length,
                 series = options.series,
                 dataItems,
-                currentName,
                 currentSeries,
                 currentData,
                 seriesIx,
@@ -2671,18 +2670,17 @@
                     currentData = chart.pointData(currentSeries, i);
                     value = currentData.value;
                     angle = round(value * anglePerValue, DEFAULT_PRECISION);
-                    currentName = currentData.category;
                     explode = data.length != 1 && !!currentData.explode;
                     currentSeries.color = currentData.color ?
                         currentData.color : colors[i % colorsCount];
 
                     callback(value, new Sector(null, 0, startAngle, angle), {
                         owner: chart,
-                        category: currentName,
+                        category: currentData.category || "",
                         categoryIx: i,
                         series: currentSeries,
                         seriesIx: seriesIx,
-                        dataItem: dataItems ? dataItems[i] : { value: currentData },
+                        dataItem: dataItems ? dataItems[i] : currentData,
                         percentage: value / total,
                         explode: explode,
                         visibleInLegend: currentData.visibleInLegend
@@ -2710,15 +2708,24 @@
 
         pointData: function(series, index) {
             var chart = this,
-                data = series.data[index];
+                data = series.data[index],
+                dataItems = [ "category", "color", "explode", "visibleInLegend" ],
+                count = dataItems.length,
+                dataItemValue,
+                dataItemText,
+                result = {},
+                i;
 
-            return {
-                value: chart.pointValue(data),
-                category: chart.pointGetter(series, index, "category"),
-                color: chart.pointGetter(series, index, "color"),
-                explode: chart.pointGetter(series, index, "explode"),
-                visibleInLegend: chart.pointGetter(series, index, "visibleInLegend")
-            };
+            for (i = 0; i < count; i++) {
+                dataItemText = dataItems[i];
+                dataItemValue = chart.pointGetter(series, index, dataItemText);
+                if (defined(dataItemValue)) {
+                    result[dataItemText] = dataItemValue;
+                }
+            }
+            result.value = chart.pointValue(data);
+
+            return result;
         },
 
         pointGetter: function(series, index, prop) {
