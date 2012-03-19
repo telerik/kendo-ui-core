@@ -55,9 +55,9 @@
         </div>
     </div>
 
-    <div class="centerWrap floatWrap" id="mainWrap">
+    <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 ? " widgetOverview" : "")' id="mainWrap">
 
-        @if (ViewBag.suite == "web" || ViewBag.suite == "dataviz") {
+        @if ((ViewBag.suite == "web" || ViewBag.suite == "dataviz") && Request.Path.IndexOf("overview") < 0) {
         <div id="themeWrap">
             <p class="choose-theme">Choose Theme:</p>
             <ul id="themeChooser"><li></li></ul>
@@ -65,6 +65,8 @@
         }
 
         <div id="mainWrapInner" class="floatWrap clear">
+
+        @if (Request.Path.IndexOf("overview") < 0) {
             <div id="examples-nav">
 
             @if (ViewBag.CurrentWidget.Name != "overview")
@@ -87,8 +89,9 @@
                 <img src="@Url.Content("~/content/mobile/shared/qr.png")" id="qrBig" />
             }
 
-                <a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui">Get KendoUI</a>
+                <a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui">Get Kendo UI</a>
             </div>
+        }
 
         @if (ViewBag.CurrentWidget.Name != "overview")
         {
