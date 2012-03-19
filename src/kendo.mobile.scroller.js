@@ -224,6 +224,7 @@
                 }),
 
                 drag = new kendo.Drag(element, {
+                    allowSelection: true,
                     start: function(e) {
                         dimensions.refresh();
                         drag.capture();
