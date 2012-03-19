@@ -1,7 +1,11 @@
 @{
     // WebKit's back button caches ajax responses so we are not relying on IsAjaxRequest
 
-    if (!Request.Params.AllKeys.Contains("partial"))
+    if (Request.Params.AllKeys.Contains("nav"))
+    {
+        Layout = "~/Views/Shared/_LayoutWidget.cshtml";
+    }
+    else if (!Request.Params.AllKeys.Contains("partial"))
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
     }

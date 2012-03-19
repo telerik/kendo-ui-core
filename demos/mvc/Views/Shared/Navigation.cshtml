@@ -5,7 +5,7 @@
     <ul id="examples-list">
         @foreach (NavigationExample example in ViewBag.CurrentWidget.Items)
         {
-            <li class="@(Request.Path.Replace(".nav", ".html").EndsWith(example.Url) ? "active" : "")">
+            <li class="@(Request.Path.EndsWith(example.Url) ? "active" : "")">
                 <a href="@Url.Content("~/" + ViewBag.Suite + "/" + example.Url)">@example.Text</a>
                 </li>
         }

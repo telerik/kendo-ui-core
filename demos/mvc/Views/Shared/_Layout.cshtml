@@ -111,14 +111,6 @@
 
     <script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
     <script>
-        //move to Application - changeWidget
-        $("#examples-list").on("click", "a", function() {
-            var item = $(this).parent();
-
-            $("#pager a:first").attr("href", item.prev().find("a").attr("href") || $("#pager a:first").data("widget")),
-            $("#pager a:last").attr("href", item.next().find("a").attr("href") || $("#pager a:last").data("widget"));
-        });
-
         $(".demos-nav").on("click", "a", function(e) {
             //set active state to the li
             e.preventDefault();
@@ -131,37 +123,6 @@
             container: "#mobile-application-container"
         });
 
-        //move to Application - changeWidget
-        $("#pager").on("click", "a", function(e) {
-            var element = $(this),
-                url = element.attr("href"),
-                sibling = element.siblings(),
-                method = element.hasClass("prev") ? "prev" : "next",
-                currentItem = $("#examples-nav li.active"),
-                nextItem = currentItem[method](),
-                navigateUrl = method == "next" ? $("#pager a:last").data("widget") : $("#pager a:first").data("widget");
-
-            e.preventDefault();
-            if (nextItem[0]) {
-                nextItem.addClass("active");
-                currentItem.removeClass("active");
-
-                sibling.removeClass("k-state-disabled")
-                       .attr("href", location.href);
-
-                nextItem = nextItem[method]();
-
-                if (nextItem[0]) {
-                    element.attr("href", nextItem.children("a").attr("href"));
-                } else {
-                    element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
-                }
-
-                Application.load(url);
-            } else if (navigateUrl) {
-                Application.changeWidget(navigateUrl);
-            }
-        });
     </script>
 </body>
 </html>

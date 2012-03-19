@@ -91,14 +91,13 @@
         },
 
         fetchNav: function(href) {
-            var navWrap = $("#examples-nav");
+            var wrapInner = $("#mainWrapInner");
 
-            href = href.replace(".html", ".nav");
-            $.get(href, function(html) {
-                navWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
-                    navWrap.replaceWith(html);
+            $.get(href + "?nav=true", function(html) {
+                wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                    wrapInner.replaceWith(html);
                     setTimeout(function() {
-                        $("#examples-nav")
+                        $("#mainWrapInner")
                             .css("visibility", "visible")
                             .kendoStop(true)
                             .kendoAnimate(animation.show);
@@ -180,16 +179,57 @@
             if (pushState) {
                 $(doc)
                     .on("click", "#examples-nav li a", function(e) {
+                        var element = $(this),
+                            href = this.href,
+                            links, li, prev, next;
+
                         e.preventDefault();
 
-                        if (!location.href.match($(this).attr("href"))) {
-                            var element = $(this),
-                                li = element.parent();
+                        if (!location.href.match(href)) {
+                            li = element.parent();
+                            links = $("#pager a");
+                            prev = links.eq(0);
+                            next = links.eq(1);
 
                             li.siblings().removeClass("active")
                               .end().addClass("active");
 
-                            Application.load(element.attr("href"));
+                            prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget")),
+                            next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
+
+                            Application.load(href);
+                        }
+                    })
+                    .on("click", "#pager a", function(e) {
+                        var element = $(this),
+                            url = element.attr("href"),
+                            sibling = element.siblings(),
+                            method = element.hasClass("prev") ? "prev" : "next",
+                            currentItem = $("#examples-nav li.active"),
+                            nextItem = currentItem[method](),
+                            pagerLink = $("#pager a").eq(method == "next" ? 1 : 0),
+                            navigateUrl = pagerLink.data("widget");
+
+                        e.preventDefault();
+
+                        if (nextItem[0]) {
+                            nextItem.addClass("active");
+                            currentItem.removeClass("active");
+
+                            sibling.removeClass("k-state-disabled")
+                                   .attr("href", location.href);
+
+                            nextItem = nextItem[method]();
+
+                            if (nextItem[0]) {
+                                element.attr("href", nextItem.children("a").attr("href"));
+                            } else {
+                                element.attr("href", navigateUrl || "#").toggleClass("k-state-disabled", !navigateUrl);
+                            }
+
+                            Application.load(url);
+                        } else if (navigateUrl) {
+                            Application.changeWidget(navigateUrl);
                         }
                     });
 
