@@ -108,10 +108,13 @@
                 }
             });
 
-            $(document.documentElement).bind(MOUSEDOWN, proxy(that._mousedown, that));
+            that._mousedownProxy = function(e) {
+                that._mousedown(e);
+            }
 
             if (!touch) { //  On mobile device this closes the popup if keyboard is shown
                 that._currentWidth = DOCUMENT.width();
+                /*
                 $(window).bind("resize scroll", function() {
                     if (bodyResizeEvent) {
                         var width = DOCUMENT.width();
@@ -125,6 +128,7 @@
                         that.close();
                     }
                 });
+                */
             }
 
             kendo.touchScroller(element);
@@ -172,6 +176,9 @@
                 style, idx = 0;
 
             if (!that.visible()) {
+
+                $(document.documentElement).unbind(MOUSEDOWN, that._mousedownProxy)
+                                           .bind(MOUSEDOWN, that._mousedownProxy);
 
                 for (; idx < 6; idx++) {
                     style = styles[idx];
@@ -238,10 +245,11 @@
                 effects;
 
             if (that.visible()) {
-
                 if (that._closing || that.trigger(CLOSE)) {
                     return;
                 }
+
+                $(document.documentElement).unbind(MOUSEDOWN, that._mousedownProxy);
 
                 animation = extend(true, {}, options.animation.close);
                 effects = that.element.data(EFFECTS);
