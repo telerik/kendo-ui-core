@@ -365,12 +365,14 @@
     };
 
     var emptyFinder = function () { return { isFormatted: function () { return false } } };
+    var supportedBrowser = !kendo.support.mobileOS || (kendo.support.mobileOS.ios && kendo.support.mobileOS.majorVersion >= 5);
 
     var Editor = Widget.extend({
         init: function (element, options) {
             /* suppress initialization in mobile webkit devices (w/o proper contenteditable support) */
-            if (/Mobile.*Safari/.test(navigator.userAgent))
+            if (!supportedBrowser) {
                 return;
+            }
 
             var that = this,
                 wrapper;
@@ -3584,7 +3586,8 @@ registerTool("fontName", new FontTool({cssAttr:"font-family", domAttr: "fontFami
 
 registerTool("fontSize", new FontTool({cssAttr:"font-size", domAttr:"fontSize", name:"fontSize", template: new ToolTemplate({template: EditorUtils.comboBoxTemplate, title: "Font Size", initialValue: "(inherited size)"})}));
 
-})(jQuery);(function($) {
+})(jQuery);
+(function($) {
 
 var kendo = window.kendo,
     Class = kendo.Class,
