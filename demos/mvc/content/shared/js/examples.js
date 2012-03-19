@@ -34,17 +34,19 @@
 
     Application = {
         load: function(href) {
-            $(doc)
-                .trigger("kendo:pageUnload")
-                .find(".k-window-content")
-                    .each(function(index, kendoWindow) {
-                        kendoWindow = $(kendoWindow).data("kendoWindow");
-                        if (kendoWindow) {
-                            kendoWindow.close();
-                        }
-                    });
+            this.unload();
 
             Application.fetch(href);
+
+            try {
+                history.pushState({ href: href }, null, href);
+            } catch(err) {}
+        },
+
+        loadWidget: function(href) {
+            this.unload();
+
+            this.fetchWidget(href);
 
             try {
                 history.pushState({ href: href }, null, href);
@@ -90,14 +92,14 @@
             }, "html");
         },
 
-        fetchNav: function(href) {
+        fetchWidget: function(href) {
             var wrapInner = $("#mainWrapInner");
 
             $.get(href + "?nav=true", function(html) {
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     wrapInner.replaceWith(html);
                     setTimeout(function() {
-                        $("#mainWrapInner")
+                        $("#exampleWrap")
                             .css("visibility", "visible")
                             .kendoStop(true)
                             .kendoAnimate(animation.show);
@@ -106,9 +108,19 @@
             }, "html");
         },
 
-        changeWidget: function(href) {
-            this.fetchNav(href);
-            this.load(href);
+        unload: function() {
+            $(doc)
+                .find(".k-animation-container, .k-list-container, .k-calendar-container, .k-calendar")
+                .remove()
+                .end()
+                .find(".k-window-content")
+                .each(function(index, kendoWindow) {
+                    kendoWindow = $(kendoWindow).data("kendoWindow");
+                    if (kendoWindow) {
+                        kendoWindow.close();
+                    }
+                })
+                .trigger("kendo:pageUnload")
         },
 
         preloadStylesheet: function (file, callback) {
@@ -229,7 +241,7 @@
 
                             Application.load(url);
                         } else if (navigateUrl) {
-                            Application.changeWidget(navigateUrl);
+                            Application.loadWidget(navigateUrl);
                         }
                     });
 

@@ -112,9 +112,12 @@
     <script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
     <script>
         $(".demos-nav").on("click", "a", function(e) {
-            //set active state to the li
             e.preventDefault();
-            Application.changeWidget(this.href);
+
+            $(".demos-nav").find("li.active").removeClass("active");
+            $(this).parent().addClass("active");
+
+            Application.loadWidget(this.href);
         });
 
         $(".themeChooser").themeChooser();
