@@ -69,10 +69,7 @@
 
         options: {
             color: "#ea7001",
-            value: 0,
-            animation: {
-                type: RADIAL_POINTER
-            }
+            value: 0
         },
 
         value: function(newValue) {
@@ -98,6 +95,10 @@
             shape: "needle",
             cap: {
                 size: 0.05
+            },
+            animation: {
+                type: RADIAL_POINTER,
+                speed: 142
             }
         },
 
@@ -120,16 +121,23 @@
                 scale = pointer.scale,
                 options = pointer.options,
                 needle = pointer.elements[0],
-                animation;
+                animation = pointer._animation,
+                animationOptions = options.animation,
+                currentAngle = needle.options.rotation[0],
+                minSlotAngle = scale.getSlotAngle(scale.options.min),
+                endAngle = needle.options.rotation[0] = scale.getSlotAngle(options.value) - minSlotAngle,
+                oldAngle = scale.getSlotAngle(options._oldValue) - minSlotAngle;
 
-            needle.options.rotation[0] = scale.getSlotAngle(options.value)
-                                       - scale.getSlotAngle(scale.options.min);
+            if (animation) {
+                animation.abort();
+            }
 
-            if (options.animation === false) {
+            if (animationOptions === false) {
                 needle.refresh(doc.getElementById(options.id));
             } else {
-                animation = new RotationAnimation(needle, deepExtend(options.animation, {
-                    startAngle: scale.getSlotAngle(options._oldValue) - scale.getSlotAngle(scale.options.min)
+                animation = pointer._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
+                    startAngle: currentAngle || oldAngle,
+                    duration: (Math.abs(currentAngle - endAngle) / animationOptions.speed) * 1000
                 }));
                 animation.setup();
                 animation.play();
@@ -1055,7 +1063,6 @@
     // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);
     dataviz.ui.plugin(LinearGauge);
-    dataviz.ui.plugin(Gauge);
 
     deepExtend(dataviz, {
         GaugePlotArea: RadialGaugePlotArea,

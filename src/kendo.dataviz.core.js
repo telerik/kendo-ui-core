@@ -1634,6 +1634,10 @@
 
             setTimeout(function() {
                 var loop = function() {
+                    if (anim._stopped) {
+                        return;
+                    }
+
                     wallTime = +new Date();
                     time = math.min(wallTime - start, duration);
                     pos = time / duration;
@@ -1650,6 +1654,10 @@
 
                 loop();
             }, delay);
+        },
+
+        abort: function() {
+            this._stopped = true;
         },
 
         setup: noop,

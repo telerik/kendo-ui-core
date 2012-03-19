@@ -1,11 +1,11 @@
 (function () {
 
     /**
-     * @name kendo.dataviz.ui.Gauge.Description
+     * @name kendo.dataviz.ui.RadialGauge.Description
      *
      * @section
      * <p>
-     * The Gauge widget is used to let users quickly understand where a value lies in a certain range.
+     * The Radial Gauge widget is used to let users quickly understand where a value lies in a certain range.
      * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
      * </p>
      *
@@ -15,13 +15,13 @@
      * @exampleTitle
      * 1. Create a simple HTML div (optionally set a height and width with CSS)
      * @example
-     * <div id="gauge"></div>
+     * <div id="radial-gauge"></div>
      *
      * @exampleTitle
-     * 2. Initialize the Kendo UI Gauge with default configuration
+     * 2. Initialize the Kendo UI RadialGauge with default configuration
      * @example
      *    $(document).ready(function() {
-     *        $("#gauge").kendoGauge();
+     *        $("#radial-gauge").kendoRadialGauge();
      *    });
      * </p>
      *
@@ -34,7 +34,7 @@
      * @exampleTitle
      * Create a quarter-gauge, oriented to the top-right
      * @example
-     *     $("#gauge").kendoGauge({
+     *     $("#radial-gauge").kendoRadialGauge({
      *         startAngle: 90,
      *         endAngle: 180
      *     });
@@ -42,7 +42,7 @@
      * @section
      * <p>For a real-world example for this functionality, see the car dashboard demo.</p>
      */
-     var GaugeDocs = /** @lends kendo.dataviz.ui.Gauge.prototype */ {
+     var RadialGaugeDocs = /** @lends kendo.dataviz.ui.RadialGauge.prototype */ {
         /**
          * @constructs
          * @extends kendo.ui.Widget
@@ -120,7 +120,7 @@
          * </ul>
          * _example
          * // chart intialization
-         * $("#gauge").kendoGauge({
+         * $("#radial-gauge").kendoRadialGauge({
          *      scale: {
          *          labels: {
          *              // labels template
@@ -130,7 +130,7 @@
          * });
          * @option {String} [scale.labels.format] The format of the labels.
          * _example
-         * $("#gauge").kendoGauge({
+         * $("#radial-gauge").kendoRadialGauge({
          *     scale: {
          *        labels: {
          *            // set the format to currency
@@ -173,7 +173,7 @@
         /**
          * Redraws the gauge.
          * @example
-         * var gauge = $("#gauge").data("kendoGauge");
+         * var gauge = $("#radial-gauge").data("kendoRadialGauge");
          * gauge.redraw();
          */
         redraw: function() { },
@@ -187,7 +187,7 @@
          * Both programs provide command-line interface
          * suitable for backend processing.</p>
          * @example
-         * var gauge = $("#gauge").data("kendoGauge");
+         * var gauge = $("#radial-gauge").data("kendoRadialGauge");
          * var svgText = gauge.svg();
          */
         svg: function() { }

@@ -7,7 +7,7 @@
 
             <script>
                 function createGauge() {
-                    $("#gauge").kendoGauge({
+                    $("#gauge").kendoRadialGauge({
                         theme: $(document).data("kendoSkin") || "default",
 
                         pointer: {
@@ -31,7 +31,7 @@
                         max: 180,
                         showButtons: false,
                         change: function() {
-                            $("#gauge").data("kendoGauge").value($("#gauge-value").val());
+                            $("#gauge").data("kendoRadialGauge").value($("#gauge-value").val());
                         }
                     });
 
