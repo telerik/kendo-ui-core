@@ -1,24 +1,65 @@
-<div data-role="view" data-layout="">
-
+<div data-role="view" data-layout="layout" data-title="Platform" data-show="layoutShow" id="layoutView">
+    <p>
+        This examples demos the platform specific layouts. Change the OS to see how the header and footer changes.
+    </p>
 </div>
 
-<div data-role="layout" data-id="mobile-tabstrip">
+<div data-role="layout" data-id="layout" data-platform="ios">
     <header data-role="header">
         <div data-role="navbar">
-            <!--<a class="nav-button" data-align="left" data-role="backbutton">Back</a>-->
-            <span data-role="view-title"></span>
+            <a data-align="left" data-role="button" class="nav-button" href="#index">Index</a>
+            <span data-role="title">iOS Platform</span>
+        </div>
+    </header>
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="contacts">Profile</a>
+            <a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<div data-role="layout" data-id="layout" data-platform="android">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="title">Android Platform</span>
             <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
         </div>
     </header>
 
-    <p>TabStrip</p>
-
-    <div data-role="footer">
+    <footer data-role="footer">
         <div data-role="tabstrip">
-            <a href="#tabstrip-profile" data-icon="contacts">Profile</a>
-            <a href="#tabstrip-sales" data-icon="history">Sales</a>
-            <a href="#tabstrip-rating" data-icon="favorites">Rating</a>
-            <a href="#tabstrip-settings" data-icon="settings">Settings</a>
+            <a data-icon="history">Sales</a>
+            <a data-icon="settings">Settings</a>
         </div>
-    </div>
+    </footer>
 </div>
+
+<div data-role="layout" data-id="layout" data-platform="blackberry">
+    <header data-role="header">
+        <div data-role="navbar">
+            <a data-align="left" data-role="button" class="nav-button" href="#index">Index</a>
+            <span data-role="title">BlackBerry platform</span>
+        </div>
+    </header>
+
+    <footer data-role="footer">
+        <div data-role="tabstrip">
+            <a data-icon="favorites">Rating</a>
+            <a data-icon="settings">Settings</a>
+        </div>
+    </footer>
+</div>
+
+<style scoped>
+    #layoutView .km-view-title
+    {
+        display: inherit;
+    }
+
+    .km-android #layoutView .km-view-title
+    {
+        display: block;
+        position: static;
+    }
+</style>

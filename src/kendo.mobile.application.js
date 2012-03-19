@@ -12,9 +12,13 @@
         Layout = mobile.Layout,
 
         OS = support.mobileOS,
-        OS_NAME = !OS ? "ios" : OS.name,
-        OS_NAME_CLASS = "km-" + OS_NAME,
-        OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "") + (OS.appMode ? " km-app" : "")),
+        OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
+        MOBILE_UA = {
+            ios: "iPhone OS 4_3",
+            android: "Android 2.3.3",
+            blackberry: "PlayBook Version/7.2.0.0",
+            meego: "MeeGo NokiaBrowser/8.5.0"
+        },
 
         TRANSFORM = support.transitions.css + "transform",
 
@@ -281,6 +285,7 @@
             that.element = element ? $(element) : $(document.body);
 
             $(function(){
+                that._setupPlatform();
                 that._attachHideBarHandlers();
                 that._setupElementClass();
                 that._attachMeta();
@@ -372,6 +377,22 @@
                 .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
                 .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
                 .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
+        },
+
+        _setupPlatform: function() {
+            var that = this,
+                platform = that.options.platform,
+                isString = typeof platform == "string";
+
+            if (platform) {
+                OS = isString ? support.detectOS(MOBILE_UA[platform]) : platform;
+                support.mobileOS = OS; // reset mobileOS with custom platform
+            }
+
+            OS_NAME = !OS ? "ios" : OS.name;
+            OS_NAME_CLASS = "km-" + OS_NAME;
+            OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "") + (OS.appMode ? " km-app" : ""));
+
         },
 
         _setupLayouts: function(element) {
@@ -500,7 +521,7 @@
 
         _setupElementClass: function() {
             var that = this,
-                osCssClass = that.options.platform ? "km-" + that.options.platform : OS_CSS_CLASS;
+                osCssClass = that.options.platform ? "km-" + that.options.platform : OS_CSS_CLASS,
                 element = that.element;
 
             element.parent().addClass("km-root");
