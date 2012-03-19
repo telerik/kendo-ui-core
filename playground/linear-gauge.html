@@ -5,10 +5,9 @@
         <script src="../src/jquery.js"></script>
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.gauge.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
-        <script src="../src/kendo.dataviz.gauge.js"></script>
-        <script src="../src/kendo.dataviz.chart.js"></script>
 
         <style>
             #gauge, #gauge1 {
@@ -26,13 +25,14 @@
 
         <script>
             $("#gauge").kendoLinearGauge({
+                theme:"default",
+                scale: {
+                    vertical: true
+                },
+
                 pointer: {
-                    value: 40,
-                    shape: "arrow",
-                    track: {
-                        color: "red",
-                        visible: true
-                    }
+                    value: 50,
+                    shape: "arrow"
                 }
             });
 
@@ -43,14 +43,8 @@
                 },
 
                 pointer: {
-                    shape: "arrow",
-                    value: 10,
-                    track: {
-                        visible: true,
-                        border: {
-                            color: "#287693"
-                        }
-                    }
+                    value: 50,
+                    shape: "arrow"
                 }
             });
         </script>

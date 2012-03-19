@@ -1866,11 +1866,13 @@
                 element = anim.element,
                 points = element.points,
                 options = element.options,
+                vertical = options.vertical,
                 axis = options.vertical ? "y" : "x",
-                pos = options.vertical ? "y1" : "x1",
+                pos = options.vertical ? "y1" : "x2",
                 startPosition = options.startPosition[pos],
                 halfSize = options.size / 2,
                 count = points.length,
+                initial = !defined(element.endPosition),
                 padding = halfSize,
                 point,
                 i;
@@ -1878,11 +1880,16 @@
             anim.axis = axis;
             anim.endState = [];
             anim.startPositions = [];
+
+            if (!initial) {
+                startPosition = points[1][axis];
+                end = element.endPosition[pos];
+            }
+
             for (i = 0; i < count; i++) {
                 point = deepExtend({}, points[i]);
-                anim.endState[i] = point[axis];
-                anim.startPositions[i] = startPosition - padding;
-                points[i][axis] = startPosition - padding;
+                anim.endState[i] = initial ? point[axis] : end - padding;
+                anim.startPositions[i] = initial ? startPosition - padding : point[axis];
                 padding -= halfSize;
             }
         },
