@@ -1713,7 +1713,7 @@
         support.transforms = transforms;
         support.transitions = transitions;
 
-        function detectOS(ua) {
+        support.detectOS = function (ua) {
             var os = false, match = [],
                 agentRxs = {
                     fire: /(Silk)\/(\d+)\.(\d+(\.\d+)?)/,
@@ -1755,13 +1755,13 @@
                 }
             }
             return os;
-        }
+        };
 
         /**
          * Parses the mobile OS type and version from the browser user agent.
          * @name kendo.support.mobileOS
          */
-        support.mobileOS = detectOS(navigator.userAgent);
+        support.mobileOS = support.detectOS(navigator.userAgent);
 
         support.zoomLevel = function() {
             return support.touch ? (document.documentElement.clientWidth / window.innerWidth) : 1;

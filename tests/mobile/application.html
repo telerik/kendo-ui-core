@@ -184,9 +184,9 @@
             });
 
             test("Overrides default layout if none specified", function() {
-            setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
-                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
-                    ', { layout: "foo" });
+                setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
+                       <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
+                      ', { layout: "foo" });
 
                 equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
             });
@@ -212,6 +212,34 @@
                 equal(defaultLayout.element.attr("data-platform"), undefined);
             });
 
+            test("Forces specific layout, if platform specified", function() {
+                setup('<div data-role="view" id="page1" data-id="foo">Page 1</div> \
+                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer">footer</div></div> \
+                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer">footer</div></div> \
+                      ', { layout: "foo", platform: "android" });
+
+                var foo = application.layouts.foo;
+
+                equal(foo.element.attr("data-id"), "foo");
+                equal(foo.element.attr("data-platform"), "android");
+            });
+
+            test("Forces specific layout, if platform specified as object", function() {
+                setup('<div data-role="view" id="page1" data-id="foo">Page 1</div> \
+                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer">footer</div></div> \
+                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer">footer</div></div> \
+                      ', { layout: "foo", platform: {
+                            name: "android",
+                            device: "android",
+                            android: true
+                        } });
+
+                var foo = application.layouts.foo;
+
+                equal(foo.element.attr("data-id"), "foo");
+                equal(foo.element.attr("data-platform"), "android");
+            });
+
             test("Applies view title attribute contents to layout view title", function() {
                 setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
@@ -223,7 +251,7 @@
             test("Runs attached view event handlers", 1, function() {
                 window.foo = function() {
                     ok(true, "view init event handler is called");
-                }
+                };
 
                 setup('<div data-init="foo" data-role="view">View</div>');
             });
@@ -236,7 +264,7 @@
             function checkViewParams(e) {
                     equal(e.view.element.attr("id"), "page2");
                     equal(e.view.params.foo, "bar");
-            };
+            }
 
             test("Passes url params to the view show event", function() {
                 setup('<div data-role="view" id="page1">Page 1</div><div data-show="checkViewParams" id="page2" data-role="view"></div>');
