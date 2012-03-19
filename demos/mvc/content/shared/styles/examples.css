@@ -1,6 +1,6 @@
 /*reset*/
 
-body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,#footer ul,#footer p,#pager,#examples-list,#themeChooser,.widgetGrid ul
+body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,#footer ul,#footer p,#pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
     padding:0;
@@ -49,6 +49,7 @@ html
 
 .overview h2,
 .overview h3,
+.widgetGrid h2,
 .box h2,
 .box h3
 {
@@ -100,12 +101,12 @@ html
     text-indent:-4444px;
     text-align:center;
     overflow:hidden;
-    background:url(kendo-logo.png);
+    background:-224px 0 url(sprite.misc.png);
 }
 
 .overview #logo
 {
-    background:url(kendo-logo-big.png);
+    background-position:0 0;
 }
 
 #header ul
@@ -467,6 +468,29 @@ html
     width:614px;
 }
 
+.browsers
+{
+    margin:12px 0 0;
+    font-size:1.1em;
+    line-height:32px;
+}
+
+.browser
+{
+    display:inline-block;
+    vertical-align:top;
+    width:32px;
+    height:32px;
+    margin-right:10px;
+    background:url(sprite.misc.png);
+}
+
+.browsers .ie{background-position:-128px -75px;}
+.browsers .chrome{background-position:-192px -75px;}
+.browsers .ff{background-position:-160px -75px;}
+.browsers .safari{background-position:-224px -75px;}
+.browsers .opera{background-position:-256px -75px;}
+
 /*footer*/
 
 #footer
@@ -529,7 +553,7 @@ html
     margin:0;
     text-indent:-4444px;
     text-align:center;
-    background:url(get-social.png);
+    background:-224px -51px url(sprite.misc.png);
 }
 
 #social li
@@ -546,8 +570,13 @@ html
     text-indent:-4444px;
     overflow:hidden;
     text-align:center;
-    background:#fff url(sprite.misc.png);
+    background:url(sprite.misc.png);
 }
+
+#social .tw{background-position:0 -75px;}
+#social .fb{background-position:-32px -75px;}
+#social .gplus{background-position:-64px -75px;}
+#social .rss{background-position:-96px -75px;}
 
 p#copy
 {
@@ -708,16 +737,6 @@ p#copy
     overflow:hidden;
 }
 
-#themeChooser,
-#themeChooser .k-state-selected span
-{
-    line-height:27px;
-    cursor:default;
-    
-    -moz-box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
-    -webkit-box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
-    box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
-}
 
 #themeChooser li
 {
@@ -734,7 +753,17 @@ p#copy
 #themeChooser span
 {
     padding:0 9px;
+    line-height:27px;
     cursor:pointer;
+    
+    -moz-box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
+    -webkit-box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
+    box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
+}
+
+#themeChooser .k-state-selected span
+{
+    cursor:default;
 }
 
 /*pager*/
@@ -869,7 +898,8 @@ p#copy
 
 #example
 {
-    padding:0 0 18px 15px;
+    position:relative;
+    padding:15px 0 18px 15px;
 }
 
 .widgetOverview #example
@@ -936,6 +966,7 @@ p#copy
 pre.prettyprint
 {
     overflow: hidden;
+    font-family:courier,monospace;
 }
 
 /*console*/
@@ -1168,7 +1199,7 @@ pre.prettyprint
     left: 50%;
     margin: 0 0 0 -6px;
     position: absolute;
-    top: 32px;
+    top: 33px;
     width: 0;
     height:0;
 }
