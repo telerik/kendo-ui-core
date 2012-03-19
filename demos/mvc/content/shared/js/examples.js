@@ -312,10 +312,7 @@
                 { text: "Metro", value: "metro" },
                 { text: "Silver", value: "silver" }
             ]
-            template = kendo.template("<li data-value='#=value#'><span class='thumbLink'>" +
-                        "<span class='thumb #= text.toLowerCase() #Thumb' " +
-                            "style='background-image: url(" + initialRelativePath + "Menu/thumbSprite.png)'>" +
-                            "<span class='gloss'></span></span><span class='skinTitle'>#= text #</span></span></li>"),
+            template = kendo.template("<li data-value='#=value#'><span>#= text #</span></li>"),
             changeTheme = function(theme) {
                 Application.changeTheme(theme, true);
 
@@ -328,17 +325,17 @@
             var theme = sessionStorage.getItem("kendoSkin") || "default";
             $(this).html(kendo.render(template, themes))
                    .on("click", "li", function() {
-                       var li = $(this).addClass("k-state-selected"),
+                       var li = $(this).children("span").addClass("k-state-selected").end(),
                            theme = themes[li.index()];
 
-                       li.siblings().removeClass("k-state-selected");
+                       li.siblings().children("span").removeClass("k-state-selected");
 
                        changeTheme(theme.value);
                    })
                    .children()
                    .filter(function() {
                        return $(this).data("value") === theme;
-                   }).addClass("k-state-selected");
+                   }).children("span").addClass("k-state-selected");
 
                    changeTheme(theme);
         });

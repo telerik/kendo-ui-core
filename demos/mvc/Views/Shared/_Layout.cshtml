@@ -28,7 +28,7 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@(category.ToLower().Contains("widget") ? "wideCol" : "narrowCol") floatWrap">
+                <div class="@(category.ToLower().Contains("ui") ? "wideCol" : "narrowCol") floatWrap">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
@@ -52,10 +52,27 @@
                 </div>
             }
         }
+
+        @if (ViewBag.CurrentWidget.Name != "overview" && ViewBag.suite == "mobile")
+        {
+            <div class="narrowCol mobile-devices">
+                <h2>OS Simulator Mode</h2>
+                <input id="deviceChooser" type="hidden" />
+                <ul id="deviceList" class="options">
+                    <li></li>
+                </ul>
+
+                <script id="deviceThumbTemplate" type="text/x-kendo-template">
+                    <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+                </script>
+
+            </div>
+        }
+
         </div>
     </div>
 
-    <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 ? " widgetOverview" : "")' id="mainWrap">
+    <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
 
         @if ((ViewBag.suite == "web" || ViewBag.suite == "dataviz") && Request.Path.IndexOf("overview") < 0) {
         <div id="themeWrap">
@@ -93,25 +110,6 @@
             </div>
         }
 
-        @if (ViewBag.CurrentWidget.Name != "overview")
-        {
-            if (ViewBag.suite == "mobile")
-            {
-                <div class="configuration mobileConfiguration">
-                    <input id="deviceChooser" type="hidden" />
-                    <ul id="deviceList" class="options">
-                        <li></li>
-                    </ul>
-
-                    <script id="deviceThumbTemplate" type="text/x-kendo-template">
-                        <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
-                    </script>
-
-                </div>
-            }
-        }
-
-
         @RenderBody()
 
         </div>
@@ -135,7 +133,7 @@
             nextLink.attr("href", item.next().find("a").attr("href") || nextWidgetUrl);
         });
 
-        $(".themeChooser").themeChooser();
+        $("#themeChooser").themeChooser();
 
         $("#deviceChooser").mobileOsChooser({
             container: "#mobile-application-container"
