@@ -235,7 +235,7 @@
                     movable: movable,
                     dimensions: dimensions,
                     drag: drag,
-                    elastic: that.options.elastic,
+                    elastic: that.options.elastic
                 });
 
             extend(that, {
