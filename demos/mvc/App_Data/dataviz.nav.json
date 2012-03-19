@@ -163,14 +163,14 @@
             "name": "cardashboard"
         },
         {
-            "text": "World popuplation dashboard",
+            "text": "Stock history dashboard",
             "spriteCssClass": "chartAreaIcon",
             "expanded": true,
             "items": [{
-                "text": "World population dashboard",
-                "url": "dashboards/world-population.html"
+                "text": "Stock history dashboard",
+                "url": "dashboards/stock-history.html"
             }],
-            "name": "worldpopulatondashboard"
+            "name": "stockhistorydashboard"
         }
     ]
 }
