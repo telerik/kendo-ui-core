@@ -17,19 +17,20 @@
                 Departure:
                 <input id="departure" data-bind="value: departure" />
 
-                Quantity:
-                <input id="quantity" data-bind="value: quantity" />
+                Seat:
+                <input id="seat" data-bind="value: quantity" />
             </div>
-            <hr/>
-            <p data-bind="template: 'ticketTemplate'"></p>
+            <div id="boardingpass" data-bind="template: 'ticketTemplate'"></div>
             <script id="ticketTemplate" type="text/x-jquery-tmpl">
                 {{if chosenTicket}}
-                    <p> You have chosen: <b>${ chosenTicket().name }</b> ($${ chosenTicket().price }) </p>
-                    <p>Departure: ${ kendo.toString(kendo.parseDate(departure()), "MM/dd/yyyy") } </p>
-                    <p>Quantity: ${ quantity() } </p>
-                    <p><button data-bind="click: resetTicket">Clear</button></p>
+                    <span class="class-ticket"><b>${ chosenTicket().name }</b> ($${ chosenTicket().price }) </span>
+                    <span class="class-card"><b>${ chosenTicket().name }</b></span>
+                    <span class="date">${ kendo.toString(kendo.parseDate(departure()), "MM/dd/yyyy") } </span>
+                    <span class="seat-ticket">${ quantity() } </span>
+                    <span class="seat-card">${ quantity() } </span>
+                    <button class="clear-button" data-bind="click: resetTicket">Clear</button>
                 {{else}}
-                    No tickets...
+                    
                 {{/if}}
             </script>
             <script>
@@ -53,8 +54,9 @@
                         $(this).data("kendoDropDownList").select(this.selectedIndex);
                     });
 
-                    $("#quantity").kendoNumericTextBox({
+                    $("#seat").kendoNumericTextBox({
                         min: 1,
+                        max: 60,
                         format: "n0",
                         decimals: 0
                     });
@@ -64,4 +66,37 @@
                     departure.value(kendo.parseDate(departure.element.val()));
                 });
             </script>
+            <style scoped>
+                #boardingpass {
+                	width: 575px;
+                	min-height: 270px;
+                	margin: 20px auto;
+                	position: relative;
+                	background: url('../../content/web/integration/boardingPass.png') transparent no-repeat 0 0;
+                }
+                .class-ticket {
+                    position: absolute;
+                    margin: 26px 0 0 45px;	
+                }
+                .class-card {
+                    position: absolute;
+                    margin: 58px 0 0 430px;	
+                }
+                .date {
+                    position: absolute;
+                    margin: 58px 0 0 45px;	
+                }
+                .seat-ticket {
+                    position: absolute;
+                    margin: 58px 0 0 270px;	
+                }
+                .seat-card {
+                    position: absolute;
+                    margin: 58px 0 0 530px;	
+                }
+                .clear-button {
+                    position: absolute;
+                    margin: 240px 0 0 0;	
+                }
+            </style>
         </div>
