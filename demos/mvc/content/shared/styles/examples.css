@@ -32,11 +32,7 @@ h3>a,
 html
 {
     overflow-y:scroll;
-}
-
-body
-{
-    font:75% 'lucida sans',arial,helvetica,sans-serif;
+    font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
 }
 
 .centerWrap
@@ -487,7 +483,7 @@ h2+.box,
 .bottom-nav li
 {
     display:inline;
-    margin-right:20px;
+    margin-right:16px;
 }
 
 #footer p
@@ -561,19 +557,71 @@ p#copy
     color:#4e4e4e;
 }
 
+.widgetOverview #exampleTitle
+{
+    float:none;
+}
+
 #exampleTitle strong
 {
     color:#e26b1d;
     font-weight:normal;
 }
 
-#exampleTitle .icon
+.exampleIcon
 {
     width:20px;
     height:20px;
-    display:inline-block;
-    margin:0 11px 0 0;
+    float: left;
+    margin:8px 11px 0 0;
+    background:no-repeat url(sprite.widgets.png);
+    -webkit-transform: translatez(0);
 }
+
+
+.applicationIcon{background-position:0 0;}
+.autoCompleteIcon{background-position:-20px 0;}
+.mobileButtonIcon{background-position:-40px 0;}
+.mobileButtonGroupIcon{background-position:-60px 0;}
+.calendarIcon{background-position:-80px 0;}
+.chartIcon{background-position:-100px 0;}
+.chartAreaIcon{background-position:-120px 0;}
+.chartBarIcon{background-position:-140px 0;}
+.chartLineIcon{background-position:0px -20px;}
+.chartPieIcon{background-position:-20px -20px;}
+.chartScatterIcon{background-position:-40px -20px;}
+.comboBoxIcon{background-position:-60px -20px;}
+.dataSourceIcon{background-position:-80px -20px;}
+.datePickerIcon{background-position:-100px -20px;}
+.dragDropIcon{background-position:-120px -20px;}
+.dropDownListIcon{background-position:-140px -20px;}
+.editorIcon{background-position:0px -40px;}
+.gaugeLinearIcon{background-position:-20px -40px;}
+.gaugeRadialIcon{background-position:-40px -40px;}
+.globalizationIcon{background-position:-60px -40px;}
+.gridIcon{background-position:-80px -40px;}
+.mobileHistoryIcon{background-position:-100px -40px;}
+.integrationIcon{background-position:-120px -40px;}
+.mobileListViewIcon{background-position:-140px -40px;}
+.listViewIcon{background-position:0 -60px;}
+.menuIcon{background-position:-20px -60px;}
+.mvvmIcon{background-position:-40px -60px;}
+.mobileNavBarIcon{background-position:-60px -60px;}
+.numericTextBoxIcon{background-position:-80px -60px;}
+.panelBarIcon{background-position:-100px -60px;}
+.mobileScrollIcon{background-position:-120px -60px;}
+.mobileScrollViewIcon{background-position:-140px -60px;}
+.sliderIcon{background-position:0 -80px;}
+.splitterIcon{background-position:-20px -80px;}
+.mobileTabStripIcon{background-position:-40px -80px;}
+.tabStripIcon{background-position:-60px -80px;}
+.templatesIcon{background-position:-80px -80px;}
+.timePickerIcon{background-position:-100px -80px;}
+.mobileToggleButtonIcon{background-position:-120px -80px;}
+.treeViewIcon{background-position:-140px -80px;}
+.uploadIcon{background-position:0 -100px;}
+.validatorIcon{background-position:-20px -100px;}
+.windowIcon{background-position:-40px -100px;}
 
 #mainWrapInner
 {
@@ -595,6 +643,14 @@ p#copy
     width:759px;
     border-left:1px solid #dfdfdf;
     margin-left:-1px;
+}
+
+.widgetOverview #main
+{
+    float:none;
+    width:auto;
+    border:0;
+    margin:0;
 }
 
 #themeWrap
