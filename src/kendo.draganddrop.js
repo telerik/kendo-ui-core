@@ -12,6 +12,7 @@
         draggables = {},
         dropTargets = {},
         lastDropTarget,
+        RESIZE_EVENT = "resize",
         START_EVENTS = "mousedown",
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave",
@@ -36,6 +37,7 @@
         TAP = "tap";
 
     if (kendo.support.touch) {
+        RESIZE_EVENT = "orientationchange";
         START_EVENTS = "touchstart";
         MOVE_EVENTS = "touchmove";
         END_EVENTS = "touchend touchcancel";
@@ -476,7 +478,7 @@
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
 
-            $(window).bind("orientationchange resize", proxy(that.refresh, that));
+            $(window).bind(RESIZE_EVENT, proxy(that.refresh, that));
         },
 
         refresh: function() {
