@@ -14,7 +14,7 @@
         },
         "mobile": {
             "name": "Mobile",
-            "description": "Framework for Mobile Applications"
+            "description": "Framework and Widgets for Mobile Applications"
         }
     },
     "components": [
