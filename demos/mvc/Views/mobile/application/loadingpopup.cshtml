@@ -5,17 +5,16 @@
     var showButton;
 
     function viewInit(e) {
-        showButton = $("#show").click(function() {
+        showButton = $("#show").bind(kendo.support.mouseup, function() {
                         showButton.fadeOut();
                         startLoading();
                      });
-
         startLoading();
     }
 
     function startLoading() {
         var seconds = 5,
-            headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!"),
+            headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!").addClass("loaderHeading"),
             interval;
 
         kendoMobileApplication.showLoading(); //show loading popup
@@ -45,6 +44,26 @@
 
     #show {
         margin-top: 100px;
+        font-size: 1.5rem;
+    }
+
+    /* Example Counter */
+    .km-android h1.loaderHeading,
+    .km-blackberry h1.loaderHeading
+    {
+        display: block;
+        position: absolute;
+        overflow: hidden;
+        width: 1em;
+        left: 50%;
+        height: 1em;
+        top: 50%;
+        font-size: 1.2rem;
+        margin: -.65em 0 0 -.5em;
+    }
+
+    .km-blackberry h1.loaderHeading
+    {
         font-size: 1.5rem;
     }
 </style>
