@@ -4,6 +4,8 @@ features in Internet Explorer, such as support for touch events. If you're looki
 Windows 8-like controls, we include the Metro theme in Kendo UI Web, which provides a look-and-feel
 that mimics that experience. It's pretty nice, in fact.
 
+Also check [this blog post](http://www.kendoui.com/blogs/teamblog/posts/12-02-06/kendo_ui_on_windows_phone.aspx) on the subject.
+
 ## Does Kendo UI Mobile support Blackberry?
 
 Blackberry support is a first-grade, in fact. Check out our [online
