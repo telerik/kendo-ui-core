@@ -391,10 +391,17 @@
         * numerictextbox.value("10.20");
         */
         value: function(value) {
-            var that = this;
+            var that = this, adjusted;
 
             if (value === undefined) {
                 return that._value;
+            }
+
+            value = parse(value);
+            adjusted = that._adjust(value);
+
+            if (value !== adjusted) {
+                return;
             }
 
             that._update(value);

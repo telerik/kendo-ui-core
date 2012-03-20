@@ -189,7 +189,7 @@
                 equal(textbox._text.val(), kendo.toString(value, "n3"));
             });
 
-            test("value() adjust value", function() {
+            test("value() does not set value if it is out of range", function() {
                 var textbox = new NumericTextBox(input, {
                     max: 12.35
                 }),
@@ -197,7 +197,18 @@
 
                 textbox.value(value);
 
-                equal(textbox._value, 12.35);
+                equal(textbox._value, null);
+            });
+
+            test("value() can set null", function() {
+                var textbox = new NumericTextBox(input, {
+                    value: 10,
+                    max: 12.35
+                });
+
+                textbox.value(null);
+
+                equal(textbox._value, null);
             });
 
             test("enable(false) should disable input element", function() {
