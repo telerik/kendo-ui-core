@@ -3,7 +3,7 @@
         {
             "text": "Overview",
             "spriteCssClass": "overviewIcon",
-            "expanded": true,
+            "expanded": "true",
             "items": [{
                     "text": "Chart Gallery",
                     "url": "overview/index.html"
@@ -145,7 +145,7 @@
         {
             "text": "High performance chart",
             "spriteCssClass": "chartIcon",
-            "expanded": true,
+            "expanded": "true",
             "items": [{
                 "text": "High performance",
                 "url": "dashboards/high-performance.html"
@@ -155,7 +155,7 @@
         {
             "text": "Car dashboard",
             "spriteCssClass": "gaugeRadialIcon",
-            "expanded": true,
+            "expanded": "true",
             "items": [{
                 "text": "Car dashboard",
                 "url": "dashboards/car-dashboard.html"
@@ -165,7 +165,8 @@
         {
             "text": "Stock history dashboard",
             "spriteCssClass": "chartAreaIcon",
-            "expanded": true,
+            "expanded": "true",
+            "onlineOnly": "true",
             "items": [{
                 "text": "Stock history dashboard",
                 "url": "dashboards/stock-history.html"
