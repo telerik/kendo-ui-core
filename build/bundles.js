@@ -225,7 +225,7 @@ function deployExamples(root, bundle) {
 
                     exampleBody = exampleBody
                         .replace(/@section \w+ {(.|\n|\r)+?}/gi, "")
-                        .replace(/@{(.|\n|\r)+?}/gi)
+                        .replace(/@{(.|\n|\r)+?}/gi, "")
                         .replace(/@@/gi, "");
 
                     kendoBuild.mkdir(path.dirname(outputName));
