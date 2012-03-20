@@ -27,10 +27,10 @@
 
         <script>
             $("#button1").click(function () {
-                $("#gauge").data("kendoLinearGauge")._plotArea.pointer.value(10);
+                $("#gauge").data("kendoLinearGauge").value(10);
             });
             $("#button2").click(function () {
-                $("#gauge").data("kendoLinearGauge")._plotArea.pointer.value(40);
+                $("#gauge").data("kendoLinearGauge").value(40);
             });
             $("#gauge").kendoLinearGauge({
                 theme:"default",
@@ -48,28 +48,19 @@
                 },
 
                 pointer: {
-                    value: 25,
-                    shape: "arrow"
+                    value: 50,
+                    shape: "barIndicator"
                 }
             });
 
             $("#gauge1").kendoLinearGauge({
                 theme:"default",
                 scale: {
-                    vertical: false,
-                    ranges: [{
-                        from: 40,
-                        to: 50,
-                        color: "red"
-                    },{
-                        from: 30,
-                        to: 40,
-                        color: "green"
-                    }]
+                    vertical: false
                 },
 
                 pointer: {
-                    value: 25,
+                    value: 50,
                     shape: "arrow"
                 }
             });

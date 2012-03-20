@@ -693,6 +693,12 @@
 
 
     var LinearPointer = Pointer.extend({
+        init: function(scale, options) {
+            var pointer = this;
+            Pointer.fn.init.call(pointer, scale, options);
+            pointer.options = deepExtend(pointer.options, { size: pointer.getPointerSize() });
+        },
+
         options: {
             shape: BAR_INDICATOR,
 
@@ -705,13 +711,12 @@
             },
 
             color: BLACK,
-            size: 6,
             border: {
                 width: 1
             },
             opacity: 1,
 
-            margin: getSpacing(3),
+            margin: getSpacing(1.5),
             animation: {
                 type: BAR_INDICATOR,
                 speed: 120
@@ -848,6 +853,22 @@
             }
 
             return shape;
+        },
+
+        getPointerSize: function(shape) {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                tickSize = scale.options.majorTicks.size,
+                size;
+
+            if (options.shape === ARROW) {
+                size = tickSize * 0.6;
+            } else {
+                size = tickSize * 0.3;
+            }
+
+            return size;
         },
 
         renderTrack: function(view) {
@@ -1107,6 +1128,7 @@
                 plotArea;
 
             plotArea = model._plotArea = new LinearGaugePlotArea(options);
+            gauge._pointers = [plotArea.pointer];
 
             model.append(plotArea);
             model.reflow();
