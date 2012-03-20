@@ -83,8 +83,9 @@
             });
 
             test("click() select li and set date", function() {
-                tv = new TimeView({
+                var tv = new TimeView({
                     anchor: input,
+                    format: "h:mm tt",
                     min: MIDNIGHT,
                     max: MIDNIGHT,
                     interval: 30,
@@ -98,7 +99,7 @@
                                return $(this).text() == "2:00 PM";
                            });
 
-                tv._click({currentTarget: li[0]});
+                tv._click({ currentTarget: li[0], isDefaultPrevented: function () { return false; } });
 
                 equal(tv.ul.find("li.k-state-selected")[0], li[0]);
             });

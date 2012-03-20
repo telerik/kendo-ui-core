@@ -131,7 +131,7 @@
         that._popup();
 
         that.template = kendo.template('<li class="k-item" unselectable="on">#=data#</li>', { useWithBlock: false });
-    }
+    };
 
     TimeView.prototype = {
         current: function(candidate) {
@@ -321,6 +321,8 @@
                 fontFamily: anchor.css("font-family"),
                 width: width
             });
+
+            kendo.touchScroller(that.popup.element);
         },
 
         move: function(e) {

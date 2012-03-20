@@ -6,6 +6,9 @@
         <script type="text/javascript" src="../qunit/qunit/qunit.js"></script>
         <script type="text/javascript" src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.popup.js"></script>
         <script src="../../src/kendo.selectable.js"></script>
@@ -29,6 +32,9 @@
                     input = $("<input />").appendTo(document.body);
                 },
                 teardown: function() {
+                    kendo.support.touch = false;
+                    kendo.support.mobileOS = false;
+
                     var ul = $(document.body).children(":last");
                     if(!ul[0].id) {
                         ul.remove();
@@ -563,6 +569,16 @@
 
                 equal(dropdownlist.popup.options.appendTo, appendTo);
             });
+
+            test("dropdownlist initializes a touch scroller when in mobile", function() {
+                kendo.support.touch = true;
+                kendo.support.mobileOS = kendo.support.detectOS("iPhone OS 4_3");
+
+                var dropdownlist = new DropDownList($("<input/>"));
+
+                ok(dropdownlist.popup.element.hasClass("km-scroll-wrapper"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
