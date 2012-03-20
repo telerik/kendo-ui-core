@@ -35,6 +35,11 @@ html
     font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
 }
 
+.overview
+{
+    font-size:13px;
+}
+
 .centerWrap
 {
     width:940px;
@@ -469,11 +474,18 @@ html
     width:614px;
 }
 
+.column23 p,
+.mobileOSs
+{
+    color:#6f6f6f;    
+}
+
 .browsers
 {
     margin:12px 0 0;
     font-size:1.1em;
     line-height:32px;
+    color:#3c3c3c;
 }
 
 .browser
@@ -495,10 +507,10 @@ html
 .mobileOSs li
 {
     float:left;
-    margin:0 40px 0 10px;
+    width:110px;
+    margin:22px 30px 0 10px;
     text-align:center;
     font-size:1.2em;
-    color:#3c3c3c;
 }
 
 .mobileOS
@@ -506,6 +518,7 @@ html
     display:block;
     width:90px;
     height:76px;
+    margin:12px auto 0;
     background:url(sprite.misc.png);
 }
 
@@ -513,6 +526,12 @@ html
 .mobileOSs .iOS{background-position:-90px -107px;}
 .mobileOSs .blackberry{background-position:-180px -107px;}
 .mobileOSs .webOS{background-position:-270px -107px;}
+
+.mobileOSs + p a
+{
+    text-decoration:none;
+    color:#e26b1d;
+}
 
 /*footer*/
 
