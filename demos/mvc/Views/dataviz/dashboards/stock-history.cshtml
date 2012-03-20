@@ -33,6 +33,7 @@
                 <span class="metric">US dollars</span>
             </dt>
             <dd class="highest"></dd>
+            <dd class="sparkline highest-sparkline"></dd>
         </dl>
 
         <dl class="stat">
@@ -41,6 +42,7 @@
                 <span class="metric">US dollars</span>
             </dt>
             <dd class="lowest"></dd>
+            <dd class="sparkline lowest-sparkline"></dd>
         </dl>
     </script>
 
@@ -98,6 +100,27 @@
                 lowest = yearlyStockValues[0].low,
                 format = function(number) {
                     return kendo.toString(number, "n");
+                },
+                sparklineOptions = function(field, color) {
+                    return {
+                        dataSource: yearlyStockValues,
+                        series: [{
+                            field: field,
+                            type: "line",
+                            markers: {
+                                visible: false
+                            },
+                            color: color,
+                            width: 2
+                        }],
+                        axisDefaults: {
+                            visible: false,
+                            majorGridLines: {
+                                visible: false
+                            }
+                        },
+                        legend: { visible: false }
+                    };
                 };
 
             $.each(yearlyStockValues, function() {
@@ -108,7 +131,9 @@
             container
                 .find(".eoy-closing").text(format(yearlyStockValues[yearlyStockValues.length - 1].close)).end()
                 .find(".highest").text(format(highest)).end()
-                .find(".lowest").text(format(lowest)).end();
+                .find(".lowest").text(format(lowest)).end()
+                .find(".lowest-sparkline").kendoChart(sparklineOptions("low", "#cd1533")).end()
+                .find(".highest-sparkline").kendoChart(sparklineOptions("high", "#009bd7")).end();
         }
 
         $("#yearly-stock-prices").kendoChart({
@@ -384,6 +409,11 @@
 
         .highest {
             color: #009bd7;
+        }
+
+        .sparkline {
+            height: 60px;
+            width: 100px;
         }
     </style>
 </div>
