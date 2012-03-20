@@ -58,7 +58,7 @@ html
 .box h2,
 .box h3
 {
-    margin:2em 0 0;
+    margin:1.6em 0 0;
     font:21px arial,sans-serif;
     color:#2e2e2e;
 }
@@ -128,7 +128,7 @@ html
 *+html .kendo-nav
 {
     /*otherwise items will wrap*/
-    min-width:48em;
+    min-width:580px;
 }
 
 #header li
@@ -384,7 +384,7 @@ html
 {
     margin-left:35px;
     margin-right:0;
-    padding:44px 0 30px;
+    padding:44px 0 20px;
     min-height:0;
 }
 
@@ -472,6 +472,12 @@ html
 {
     float:left;
     width:614px;
+}
+
+.column13 em,
+.column23 em
+{
+    font-family:arial,helvetica,sans-serif;
 }
 
 .column23 p,
@@ -628,31 +634,20 @@ p#copy
 
 /*inner pages*/
 
-#mainWrap,
-#mainWrap.mobileDemos.widgetOverview
+#mainWrap
 {
-    padding-top:26px;
-}
-
-#mainWrap.mobileDemos
-{
-    padding-top:63px;
+    padding-top:70px;
+    position:relative;
 }
 
 #exampleTitle
 {
-    float:left;
-    margin:-56px 0 0 -181px;
-    font-size:23px;
-    line-height:1.6;
+    position:absolute;
+    top:28px;
+    left:0;
+    font:23px/1.6 arial,helvetica,sans-serif;
     font-weight:normal;
     color:#4e4e4e;
-}
-
-.widgetOverview #exampleTitle
-{
-    float:none;
-    margin:-40px 0 30px;
 }
 
 #exampleTitle strong
@@ -722,12 +717,6 @@ p#copy
     padding-top:18px;
 }
 
-.widgetOverview #mainWrapInner
-{
-    margin-top:32px;
-    padding-top:0;
-}
-
 #examples-nav
 {
     float:left;
@@ -754,8 +743,9 @@ p#copy
 
 #themeWrap
 {
-    float:right;
-    margin-bottom:8px;
+    position:absolute;
+    top:32px;
+    right:1px;
     font-size:.9em;
 }
 
@@ -803,9 +793,25 @@ p#copy
     box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
 }
 
-#themeChooser .k-state-selected span
+#themeChooser .k-state-selected
 {
     cursor:default;
+    position:relative;
+}
+
+#themeChooser .k-state-selected:after
+{
+    content:" ";
+    display:block;
+    border-color: #fff transparent transparent;
+    border-style: solid;
+    border-width: 5px 5px 0;
+    left: 50%;
+    margin: 0 0 0 -5px;
+    position: absolute;
+    top: 0;
+    width: 0;
+    height:0;
 }
 
 /*nav-pager*/
@@ -1060,7 +1066,7 @@ pre.prettyprint
     min-height: 220px;
     border: 1px solid #dedede;
     height: 100%;
-    margin: -19px 0 0 0;
+    margin: -15px 0 0 0;
     padding: 0 20px 30px;
     background: #f2f2f2;
     color: #000;
@@ -1262,6 +1268,7 @@ pre.prettyprint
     margin: -1px 0 0;
     padding: 20px 0 0;
     overflow: hidden;
+    color:#2e2e2e;
 }
 
 #codeStrip .description
@@ -1458,6 +1465,11 @@ pre.prettyprint
     background: -ms-linear-gradient(top, #ebebeb 0%,#dedede 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebebeb', endColorstr='#dedede',GradientType=0 );
     background: linear-gradient(top, #ebebeb 0%,#dedede 100%);
+}
+
+#example .code-sample
+{
+    margin-right:15px;
 }
 
 .prettyprint,

@@ -1,11 +1,11 @@
 {
     "chart": [
         {
-            "text": "Overview",
+            "text": "DataViz Widgets",
             "spriteCssClass": "overviewIcon",
             "expanded": "true",
             "items": [{
-                    "text": "Chart Gallery",
+                    "text": "Overview",
                     "url": "overview/index.html"
                 }],
             "name": "overview"
