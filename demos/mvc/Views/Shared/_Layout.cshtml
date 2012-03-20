@@ -93,18 +93,16 @@
 
     <script>
         $(".demos-nav").on("click", "a", function(e) {
-            var li = $(this).parent();
-
             e.preventDefault();
+
+            var a = $(this),
+                li = a.parent();
 
             if (li.hasClass("active")) {
                 return;
             }
 
-            $(".demos-nav").find("li.active").removeClass("active");
-            li.addClass("active");
-
-            Application.loadWidget(this.href);
+            Application.loadWidget(a.attr("href"));
         });
 
         $("#themeChooser").themeChooser();

@@ -84,9 +84,20 @@
             var wrapInner = $("#mainWrapInner");
 
             $.get(href + "?nav=true", function(html) {
+                var items = $(".demos-nav").find("li").removeClass("active"),
+                widget = href.split("/");
+                widget = widget[widget.length - 2];
+
+                $($.grep(items, function(li) {
+                        var splits = $(li.children[0]).attr("href").split("/");
+                        return splits[splits.length - 2] == widget;
+                }))
+                .addClass("active");
+
                 if (href.indexOf("mobile") == -1) {
                     $("#themeWrap").show();
                 }
+
                 $("#mainWrap").removeClass("widgetOverview");
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     wrapInner.replaceWith(html);
