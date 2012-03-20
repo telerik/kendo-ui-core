@@ -320,7 +320,7 @@ var FontTool = Tool.extend({
 
         // IE has single selection hence we are using select box instead of combobox
         that.options = options;
-        that.type = $.browser.msie ? "kendoDropDownList" : "kendoComboBox";
+        that.type = ($.browser.msie || kendo.support.touch) ? "kendoDropDownList" : "kendoComboBox";
         that.format = [{ tags: ["span"] }],
         that.finder = new GreedyInlineFormatFinder(that.format, options.cssAttr);
     },
