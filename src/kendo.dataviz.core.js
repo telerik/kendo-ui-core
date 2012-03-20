@@ -1796,9 +1796,10 @@
         }
     });
 
-    var BarIndicator = ElementAnimation.extend({
+    var BarIndicatorAnimatin = ElementAnimation.extend({
         options: {
-            easing: SWING
+            easing: SWING,
+            duration: 1000
         },
 
         setup: function() {
@@ -1833,6 +1834,8 @@
             anim.axis = axis;
             if (initial) {
                 updateArray(points, axis, start);
+            } else {
+                anim.options.duration = math.max((math.abs(start - end) / options.speed) * 1000, 1);
             }
         },
 
@@ -1877,6 +1880,7 @@
                 point,
                 i;
 
+
             anim.axis = axis;
             anim.endState = [];
             anim.startPositions = [];
@@ -1884,6 +1888,7 @@
             if (!initial) {
                 startPosition = points[1][axis];
                 end = anim.options.endPosition[pos];
+                anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
             }
 
             for (i = 0; i < count; i++) {
@@ -1918,12 +1923,12 @@
             decorate: function(element) {
                 var decorator = this,
                     view = decorator.view,
-                    animation = element.options.animation;
+                    animation = element.options.animation,
+                    animationObject;
 
                 if (animation && animation.type === animationName && view.options.transitions) {
-                    view.animations.push(
-                        new animationType(element, animation)
-                    );
+                    animationObject = element._animation = new animationType(element, animation);
+                    view.animations.push(animationObject);
                 }
 
                 return element;
@@ -2360,7 +2365,7 @@
         ExpandAnimation: ExpandAnimation,
         ArrowAnimation: ArrowAnimation,
         BarAnimation: BarAnimation,
-        BarIndicator: BarIndicator,
+        BarIndicatorAnimatin: BarIndicatorAnimatin,
         FadeAnimation: FadeAnimation,
         FadeAnimationDecorator: FadeAnimationDecorator,
         NumericAxis: NumericAxis,

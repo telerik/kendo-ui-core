@@ -22,8 +22,16 @@
     <body>
         <div id="gauge"></div>
         <div id="gauge1"></div>
+        <input type="button" value="value 10" id="button1" />
+        <input type="button" value="value 40" id="button2" />
 
         <script>
+            $("#button1").click(function () {
+                $("#gauge").data("kendoLinearGauge")._plotArea.pointer.value(10);
+            });
+            $("#button2").click(function () {
+                $("#gauge").data("kendoLinearGauge")._plotArea.pointer.value(40);
+            });
             $("#gauge").kendoLinearGauge({
                 theme:"default",
                 scale: {
@@ -32,7 +40,7 @@
 
                 pointer: {
                     value: 50,
-                    shape: "arrow"
+                    shape: "barIndicator"
                 }
             });
 
