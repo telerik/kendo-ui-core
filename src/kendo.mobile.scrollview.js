@@ -169,7 +169,8 @@
         },
 
         /**
-         * Scroll to the given page. Pages have zero-based indexing.
+         * Scroll to the given page. Pages are zero-based indexed.
+         * @param {Number} page The page to scroll to.
          * @example
          * <div data-role="scrollview" id="scrollview"></div>
          *
