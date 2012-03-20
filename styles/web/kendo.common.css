@@ -744,7 +744,7 @@ div.k-window-content
 {
     content: '\A0';
     display: block;
-    width: 100%;
+    width: 99.99%;
     height: 0;
     overflow: hidden;
 }

@@ -223,6 +223,8 @@
                 fontFamily: wrapper.css("font-family"),
                 width: width
             });
+
+            kendo.touchScroller(that.popup.element);
         },
 
         _makeUnselectable: function(element) {
