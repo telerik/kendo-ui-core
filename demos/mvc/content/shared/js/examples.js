@@ -194,7 +194,7 @@
 
                         if (!location.href.match(href)) {
                             li = element.parent();
-                            links = $("#pager a");
+                            links = $("#nav-pager a");
                             prev = links.eq(0);
                             next = links.eq(1);
 
@@ -207,14 +207,14 @@
                             Application.load(href);
                         }
                     })
-                    .on("click", "#pager a", function(e) {
+                    .on("click", "#nav-pager a", function(e) {
                         var element = $(this),
                             url = element.attr("href"),
                             sibling = element.siblings(),
                             method = element.hasClass("prev") ? "prev" : "next",
                             currentItem = $("#examples-nav li.active"),
                             nextItem = currentItem[method](),
-                            pagerLink = $("#pager a").eq(method == "next" ? 1 : 0),
+                            pagerLink = $("#nav-pager a").eq(method == "next" ? 1 : 0),
                             navigateUrl = pagerLink.data("widget");
 
                         e.preventDefault();
