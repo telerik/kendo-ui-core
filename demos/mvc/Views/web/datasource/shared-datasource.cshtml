@@ -1,26 +1,41 @@
         <div id="example" class="k-content">
-            <div id="datasource-views" class="k-header" style="background-image:none">
+            <div id="datasource-views">
                 <div class="selector">
                     <h3>Estimated Internet Users (Source: ITU)</h3>
-                    <label for="country">Select country:</label>
-                    <input id="country" />
+                    <div class="section-box">
+                        <label for="country">Select country:</label>
+                        <input id="country" />
+                    </div>
                 </div>
+                <div id="chart"></div>
                 <div id="grid"></div>
-                <div id="chart" class="k-header"></div>
-            </div>
-
-            <div class="configuration configuration-horizontal-bottom">
-                <span class="infoHead">Information</span>
-                <p>
-                    Multiple components can be bound to a single data source.
-                </p>
-                <p>
-                    Any operations on the data source (sorting, filtering, etc.)
-                    are automatically propagated to all bound components.
-                </p>
             </div>
 
             <style scoped>
+                .k-chart {
+                    height: 200px;
+                    margin: 30px auto;
+                }
+                #datasource-views {
+                	padding: 20px;
+                	margin: 30px;
+                }
+                .section-box {
+                	margin-top: 20px;
+                	padding: 10px;
+                	text-align: center;
+                }
+                .section-box span {
+                	text-align: left;
+                }
+                #datasource-views, .section-box {
+                	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    border-radius: 8px;
+                }
             </style>
 
             <script>
@@ -128,6 +143,7 @@
                 $(document).ready(function() {
                     $("#country")
                         .val("United States")
+                        .width(220)
                         .kendoDropDownList({
                             dataSource: countriesDataSource,
                             dataTextField: "value",
