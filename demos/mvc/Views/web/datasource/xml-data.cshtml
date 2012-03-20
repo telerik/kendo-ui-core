@@ -55,18 +55,24 @@
             <style scoped>
                 #books {
                     list-style-type: none;
-                    float:left;
-                    width: 65%;
                     margin: 0;
                     padding: 0;
+                }
+                
+                #books:after {
+                    content: ".";
+                    display: block;
+                    clear: both;
+                    height: 0;
+                    visibility: hidden;
                 }
 
                 .book {
                     float:left;
-                    width: 32%;
+                    width: 28%;
                     height:240px;
                     text-align: center;
-                    margin-bottom: 2em;
+                    padding: 0 1em;
                 }
 
                 .book h3 {
@@ -76,27 +82,29 @@
                 .book a {
                     display: inline-block;
                     max-width: 128px;
-                    border: 1px solid #b6b6b6;
-                    box-shadow: 0 0 4px #ccf;
+                    margin-bottom: 1em;
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    border-radius: 8px;
+                    box-shadow: 0 0 4px #CCCCFF;
+                    border: 5px solid transparent;
                 }
 
                 .book a:hover {
-                    box-shadow: 0 0 6px #99f;
+                    border-color: #e26b1d;
                 }
 
                 .book img {
                     vertical-align: middle;
                     border: 0;
                     max-width: 100%;
+                    -webkit-border-radius: 3px;
+                    -moz-border-radius: 3px;
+                    border-radius: 3px;
                 }
-
-                .configuration {
-                    width: 32%;
-                }
-
             </style>
 
-            <div class="configuration">
+            <div class="configuration configuration-horizontal-bottom">
                 <span class="infoHead">Information</span>
                 This example is bound to XML in the following format:
 
