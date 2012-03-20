@@ -1712,6 +1712,11 @@
     });
 
     var RotationAnimation = ElementAnimation.extend({
+        options: {
+            easing: LINEAR,
+            duration: 900
+        },
+
         setup: function() {
             var anim = this,
                 element = anim.element,

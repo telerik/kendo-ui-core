@@ -22,13 +22,21 @@
     <body>
         <div id="gauge"></div>
         <div id="gauge1"></div>
+        <input type="button" value="value 10" id="button1" />
+        <input type="button" value="value 40" id="button2" />
 
         <script>
+            $("#button1").click(function () {
+                $("#gauge").data("kendoRadialGauge")._plotArea.pointer.value(10);
+            });
+            $("#button2").click(function () {
+                $("#gauge").data("kendoRadialGauge")._plotArea.pointer.value(40);
+            });
             $("#gauge").kendoRadialGauge({
                 theme:"default",
 
                 pointer: {
-                    value: 55
+                    value: 180
                 },
 
                 scale: {
