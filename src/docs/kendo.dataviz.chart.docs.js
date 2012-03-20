@@ -10,7 +10,7 @@
      * </p>
      *
      * <p>
-     * Supported chart types:
+     * Kendo UI DataViz includes the following chart types:
      * </p>
      * <ul>
      *     <li>Bar / Column</li>
@@ -30,118 +30,76 @@
      * <h3>
      * Getting Started
      * </h3>
-     * @exampleTitle
-     * 1. Create a simple HTML div (optionally set a height and width with CSS)
+     * <h4>
+     * Creating a Chart
+     * </h4>
+     * To create a chart, add an empty div in the HTML and give it an ID.
      * @example
      * <div id="chart"></div>
      *
-     * @exampleTitle
-     * 2. Initialize the Kendo UI Chart with configuration and data
-     * @example
-     *    $(document).ready(function() {
-     *        $("#chart").kendoChart({
-     *            title: {
-     *                text: "My Chart Title"
-     *            },
-     *            series: [
-     *                {
-     *                    name: "Series 1",
-     *                    data: [200, 450, 300, 125]
-     *                }
-     *            ],
-     *            categoryAxis: {
-     *                categories: [2000, 2001, 2002, 2003]
-     *            }
-     *        });
-     *    });
      * @section
-     * <p>
-     * The minimal configuration requires series data points and a list of categories.
-     * </p>
-     * <p>
-     * The default chart type is column (vertical bars).
-     * </p>
-     *
-     * <h3>
-     * Binding to Data
-     * </h3>
-     * <p>
-     * A chart can be bound to both local and remote data.
-     * <p>
-     * </p>
-     * The Chart DataSource is used to bind to an Array objects or to a remote data service.
-     * </p>
-     * @exampleTitle
-     * Binding a line chart to local JavaScript object array
+     * Optionally, set the width and height of the desired chart inline or with CSS.
      * @example
-     * var salesData = [{
-     *     employee: "Joe Smith",
-     *     sales: 2000
-     * }, {
-     *     employee: "Jane Smith",
-     *     sales: 2250
-     * }, {
-     *     employee: "Will Roberts",
-     *     sales: 1550
-     * }]
+     * <div id="chart" style="width: 400px; height: 600px"></div>
      *
-     * $(document).ready(function() {
-     *     $("#chart").kendoChart({
-     *         title: {
-     *             text: "Employee Sales"
-     *         },
-     *         dataSource:{
-     *             data: salesData
-     *         },
-     *         series:[{
-     *             type: "line",
-     *             field: "sales",
-     *             name: "Sales in Units"
-     *         }],
-     *         categoryAxis:{
-     *             field: "employee"
-     *         }
-     *     });
+     * @section
+     * The chart is rendered by selecting the div with a jQuery selector and calling the kendoChart() function.
+     * @example
+     * $("#chart").kendoChart();
+     *
+     * @section
+     * This will render the chart shown below:
+     * <img src="http://www.kendoui.com/Libraries/Documentation/chart-empty.sflb.ashx" alt="Empty Chart"></img>
+     *
+     * @section
+     * The chart can then be given a title by specifying the "text" property of the "title" object in the Kendo Chart.
+     * @example
+     * $("#chart").kendoChart({
+     *     title: {
+     *          text: "Kendo Chart Example"
+     *     }
      * });
      *
-     * @exampleTitle
-     * Binding to remote JSON data with multiple series
+     * @section
+     * <h4>
+     * Data Binding
+     * </h4>
+     * <p>
+     * The Charts can visualize series bound to both local and remote data.
+     * </p>
+     * Start by creating a series that displays inline data.
      * @example
-     * $(document).ready(function(){
-     *     $("#chart").kendoChart({
-     *         title: {
-     *             text: "Division Sales"
-     *         },
-     *         dataSource:{
-     *             transport:{
-     *                 read:{
-     *                     url: "company-sales.json",
-     *                     dataType: "json"
-     *                 }
-     *             },
-     *             sort: {
-     *                 field: "year",
-     *                 dir: "asc"
-     *             }
-     *         },
-     *         series: [{
-     *             field: "americaSales",
-     *             name: "North America"
-     *         }, {
-     *             field: "asiaSales",
-     *             name: "Asia"
-     *         }, {
-     *             field: "europeSales",
-     *             name: "Europe"
-     *         }],
-     *         categoryAxis:{
-     *             field: "year"
-     *         },
-     *         valueAxis: {
-     *             majorUnit: 1000
-     *         }
-     *     });
+     * $("#chart").kendoChart({
+     *     title: {
+     *          text: "Kendo Chart Example"
+     *     },
+     *     series: [
+     *          { name: "Example Series", data: [200, 450, 300, 125] }
+     *     ]
      * });
+     *
+     * @section
+     * This will render a column chart by default.
+     * <img src="http://www.kendoui.com/Libraries/Documentation/chart-column-no-categories.sflb.ashx" alt="Column Chart without categories"></img>
+     *
+     * @section
+     * You will notice that the columns have no label across the category axis.
+     * You specify the labeling for the series in the categoryAxis property.
+     * @example
+     * $("#chart").kendoChart({
+     *     title: {
+     *          text: "Kendo Chart Example"
+     *     },
+     *     series: [
+     *          { name: "Example Series", data: [200, 450, 300, 125] }
+     *     ],
+     *     categoryAxis:{
+     *          categories: [ 2000, 2001, 2002, 2003 ]
+     *     }
+     * });
+     *
+     * @section
+     * <img src="http://www.kendoui.com/Libraries/Documentation/chart-column-categories.sflb.ashx" alt="Column Chart with categories"></img>
      *
      * @section
      * <h3>
