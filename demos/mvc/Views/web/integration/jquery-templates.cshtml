@@ -6,40 +6,82 @@ a template for the grid row.
 }
 
         <div id="example" class="k-content">
-            <select id="netflixDropDown" style="width:500px"></select>
-
-            <table id="netflixTable">
-                <thead>
-                    <tr>
-                        <th>
-                            Cover
-                        </th>
-                        <th>
-                            Title
-                        </th>
-                        <th>
-                            Rating
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="3"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="section-box">
+                <select id="netflixDropDown" style="width:300px"></select>
+            </div>
+            <div class="section-box">
+                <table id="netflixTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Cover
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Rating
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <style scoped="scoped">
-
-            .k-grid
-            {
-                margin-top:1.6em;
-            }
+                
+                .section-box {
+                    padding: 10px;
+                    width: 500px;
+                    margin: 20px auto;
+                    border: 1px solid #bbb;
+                    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
+                    box-shadow: 0 1px 1px rgba(0,0,0,0.25), inner 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    border-radius: 8px;
+                }
+                
+                .section-box img, .k-item img {
+                    height: 90px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    border-radius: 5px;
+                    margin: 5px;
+                }
+                
+                .k-item img {
+                	float: left;
+                    margin-top: 10px;
+                }
+                
+                .k-item img {
+                	float: left;
+                	width: auto;
+                    margin-top: 10px;
+                }
+                
+                .k-item:after {
+                    content: ".";
+                    display: block;
+                    clear: both;
+                    height: 0;
+                    visibility: hidden;
+                }
+                
+                .k-item h4 {
+                   font-size: 1.05em;
+                }
 
             </style>
 
             <script id="dropDownTemplate" type="text/x-jquery-tmpl">
-                <img src="${ BoxArt.SmallUrl }" alt="${ Name }" /> ${ Name }
+                <img src="${ BoxArt.SmallUrl }" alt="${ Name }" /> <h4>${ Name }</h4>
             </script>
             <script id="rowTemplate" type="text/x-jquery-tmpl">
                 <tr>
@@ -76,14 +118,15 @@ a template for the grid row.
                     $("#netflixTable").kendoGrid({
                         dataSource: dataSource,
                         rowTemplate: $.template($("#rowTemplate")),
-                        height: 200
+                        height: 370
                     });
 
                     $("#netflixDropDown").kendoDropDownList({
                         dataTextField: "Name",
                         dataValueField: "Id",
                         template: $.template($("#dropDownTemplate")),
-                        dataSource: dataSource
+                        dataSource: dataSource,
+                        height: 320
                     });
                 });
             </script>
