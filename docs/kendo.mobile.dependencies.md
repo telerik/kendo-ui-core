@@ -4,7 +4,6 @@ Mobile Application
 * kendo.history.js
 * kendo.fx.js
 * kendo.draganddrop.js
-* kendo.mobile.core.js
 * kendo.mobile.view.js
 * kendo.mobile.scroller.js
 * kendo.mobile.application.js
@@ -14,7 +13,6 @@ Mobile Button
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
@@ -26,7 +24,6 @@ Mobile ButtonGroup
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
@@ -42,7 +39,6 @@ Mobile ListView
 * kendo.model.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
@@ -54,7 +50,6 @@ Mobile NavBar
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
@@ -66,7 +61,6 @@ Mobile Scroller
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.scroller.js
 
@@ -75,7 +69,6 @@ Mobile ScrollView
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
@@ -87,7 +80,6 @@ Mobile Switch
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
@@ -99,7 +91,6 @@ Mobile TabStrip
 * kendo.core.js
 * kendo.history.js
 * kendo.fx.js
-* kendo.mobile.core.js
 * kendo.draganddrop.js
 * kendo.mobile.view.js
 * kendo.mobile.application.js
