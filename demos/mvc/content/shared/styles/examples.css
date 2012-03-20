@@ -1033,7 +1033,7 @@ pre.prettyprint
     text-align: left;
 }
 
-.console .count
+.km-root .console .count
 {
     background-color: #91AFEF;
     -moz-border-radius: 15px;
