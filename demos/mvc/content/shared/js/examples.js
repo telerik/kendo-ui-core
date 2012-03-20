@@ -405,11 +405,8 @@
         deviceList.html(kendo.render(deviceTemplate, oses.view()));
 
         deviceList.find(".thumbLink").click(function () {
-            var value = $(this).closest(".thumbLink").children(".thumb").text();
-            $(options.container).removeClass(mobileClasses).addClass("km-" + value);
-            $("#device-wrapper").removeClass(" ios android blackberry").addClass(value);
             try {
-                sessionStorage.setItem("kendoMobileOS", value);
+                sessionStorage.setItem("kendoMobileOS", $(this).closest(".thumbLink").children(".thumb").text());
                 location.reload();
             } catch(err) {}
         });
