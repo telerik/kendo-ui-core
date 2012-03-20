@@ -1,6 +1,6 @@
 /*reset*/
 
-body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#footer p,#pager,#examples-list,#themeChooser,.widgetGrid ul
+body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#footer p,#nav-pager,#examples-list,#themeChooser,.widgetGrid ul
 {
     margin:0;
     padding:0;
@@ -199,10 +199,10 @@ html
     padding:0 16px;
     color:#fff;
 
-    -moz-border-radius:5px;   
-    -webkit-border-radius:5px;   
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
     border-radius:5px;
-        
+
     background: #313131; /* Old browsers */
     background: -moz-linear-gradient(top,  #313131 0%, #242424 50%, #232323 51%, #222222 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#313131), color-stop(50%,#242424), color-stop(51%,#232323), color-stop(100%,#222222)); /* Chrome,Safari4+ */
@@ -263,7 +263,7 @@ html
 {
     background:50% 50% url(flowerWrap.png);
     color:#fff;
-    min-height:5px;    
+    min-height:5px;
 }
 
 .overview #banner
@@ -349,7 +349,7 @@ html
 .demos-nav
 {
     border-bottom:1px solid #b2b2b2;
-    
+
     background: #f6f6f6; /* Old browsers */
     background: -moz-linear-gradient(top,  #ffffff 0%, #f8f8f8 50%, #eaeaea 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(50%,#f8f8f8), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
@@ -357,7 +357,7 @@ html
     background: -o-linear-gradient(top,  #ffffff 0%,#f8f8f8 50%,#eaeaea 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top,  #ffffff 0%,#f8f8f8 50%,#eaeaea 100%); /* IE10+ */
     background: linear-gradient(top,  #ffffff 0%,#f8f8f8 50%,#eaeaea 100%); /* W3C */
-    
+
     -moz-box-shadow:0 1px 3px 0 #b2b2b2;
     -webkit-box-shadow:0 1px 3px 0 #b2b2b2;
     box-shadow:0 1px 3px 0 #b2b2b2;
@@ -450,7 +450,7 @@ html
     position:absolute;
     bottom:-17px;
     right:15px;
-    
+
     -webkit-border-radius:0 0 4px 4px;
     -moz-border-radius:0 0 4px 4px;
     border-radius:0 0 4px 4px;
@@ -753,7 +753,7 @@ p#copy
     background:#eee;
     border:solid #dadada;
     border-width:0 1px;
-    
+
     -moz-border-radius:5px;
     -webkit-border-radius:5px;
     border-radius:5px;
@@ -778,7 +778,7 @@ p#copy
     padding:0 9px;
     line-height:27px;
     cursor:pointer;
-    
+
     -moz-box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
     -webkit-box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
     box-shadow:inset 0 3px 1px -2px rgba(204, 204, 204, 1);
@@ -789,27 +789,27 @@ p#copy
     cursor:default;
 }
 
-/*pager*/
+/*nav-pager*/
 
-#pager
+#nav-pager
 {
     margin-right:14px;
     font-size:.9em;
 }
 
-#pager a
+#nav-pager a
 {
     text-transform:uppercase;
     color:#e26b1d;
     position:relative;
 }
 
-#pager .prev
+#nav-pager .prev
 {
     padding-left:11px;
 }
 
-#pager .prev:after
+#nav-pager .prev:after
 {
     content:" ";
     width:0;
@@ -821,12 +821,12 @@ p#copy
     border-color:transparent #888 transparent transparent;
 }
 
-#pager .next
+#nav-pager .next
 {
     padding-right:11px;
 }
 
-#pager .next:after
+#nav-pager .next:after
 {
     content:" ";
     width:0;
@@ -848,7 +848,7 @@ p#copy
     display:inline-block;
     padding:4px 14px 5px 8px;
     color:#4e4e4e;
-    
+
     -moz-border-radius:3px 0 0 3px;
     -webkit-border-radius:3px 0 0 3px;
     border-radius:3px 0 0 3px;
@@ -862,7 +862,7 @@ p#copy
 #examples-list .active a
 {
     color:#fff;
-    
+
     background: #f06f1c; /* Old browsers */
     background: -moz-linear-gradient(top, #f06f1c 0%, #e95e1a 50%, #e24a17 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f06f1c), color-stop(50%,#e95e1a), color-stop(100%,#e24a17)); /* Chrome,Safari4+ */
@@ -1171,7 +1171,7 @@ pre.prettyprint
     padding: 0;
     position: relative;
     z-index:1;
-    
+
     background: #eaeaea; /* Old browsers */
     background: -moz-linear-gradient(top, #eeeeee 0%, #eaeaea 50%, #e3e3e3 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(50%,#eaeaea), color-stop(100%,#e3e3e3)); /* Chrome,Safari4+ */
@@ -1187,7 +1187,7 @@ pre.prettyprint
 {
     border:0;
     background:none;
-    
+
     -moz-border-radius:0;
     -webkit-border-radius:0;
     border-radius:0;
@@ -1937,22 +1937,22 @@ div.old-browser
     border-color: #f4f4f4 #d6d6d6 #d6d6d6 #f4f4f4;
 }
 
-.metrotable > thead > tr > th { 
-    padding: 2em 1em 0 0; 
-    text-transform: lowercase; 
-    text-align: left; 
-    font-size: 2em; 
-    font-weight: lighter; 
-    color: #bbb; 
-    border-bottom: 1px solid #ccc; 
-} 
+.metrotable > thead > tr > th {
+    padding: 2em 1em 0 0;
+    text-transform: lowercase;
+    text-align: left;
+    font-size: 2em;
+    font-weight: lighter;
+    color: #bbb;
+    border-bottom: 1px solid #ccc;
+}
 
-.metrotable > tbody > tr > td { 
-    padding: .5em 1em .5em 0; 
-    text-transform: lowercase; 
-    text-align: left; 
-    font-size: 1.2em; 
-    font-weight: lighter; 
-    color: #787878; 
-    border-bottom: 1px solid #e1e1e1; 
+.metrotable > tbody > tr > td {
+    padding: .5em 1em .5em 0;
+    text-transform: lowercase;
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: lighter;
+    color: #787878;
+    border-bottom: 1px solid #e1e1e1;
 }
