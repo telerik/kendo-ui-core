@@ -138,6 +138,7 @@
                         kendoWindow.close();
                     }
                 })
+                .end()
                 .trigger("kendo:pageUnload")
         },
 
