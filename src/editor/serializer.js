@@ -3,7 +3,7 @@
 // Imports ================================================================
 var doc = document,
     kendo = window.kendo,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     dom = Editor.Dom,
     extend = $.extend;
 

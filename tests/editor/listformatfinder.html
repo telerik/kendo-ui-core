@@ -31,12 +31,12 @@
 
 var ListFormatFinder;
 
-$("#Editor1").kendoEditor();        
+$("#Editor1").kendoEditor();
 
 module("Editor / ListFormatFinder", {
     setup: function() {
         editor = getEditor();
-        ListFormatFinder = kendo.ui.Editor.ListFormatFinder;
+        ListFormatFinder = kendo.ui.editor.ListFormatFinder;
     }
 });
 
@@ -75,7 +75,7 @@ test('findSuitable returns ul', function() {
     var finder = new ListFormatFinder('ul');
     equal(finder.findSuitable([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild]), editor.body.firstChild);
 });
-        
+
 test('findSuitable returns first ul for adjacent lists', function() {
     editor.value('<ul><li>foo</li></ul><ul><li>bar</li></ul>');
     var finder = new ListFormatFinder('ul');

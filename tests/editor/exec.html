@@ -105,50 +105,50 @@
 
             test('exec inline command', function() {
                 $.each(['bold', 'italic', 'underline', 'strikethrough'], function() {
-                    assertCommand(kendo.ui.Editor.FormatCommand, this);
+                    assertCommand(kendo.ui.editor.FormatCommand, this);
                 });
             });
 
             test('exec unordered list', function() {
-                assertCommand(kendo.ui.Editor.ListCommand, 'insertUnorderedList');
+                assertCommand(kendo.ui.editor.ListCommand, 'insertUnorderedList');
             });
 
             test('exec ordered list', function() {
-                assertCommand(kendo.ui.Editor.ListCommand, 'insertOrderedList');
+                assertCommand(kendo.ui.editor.ListCommand, 'insertOrderedList');
             });
 
             test('exec block command', function() {
                 $.each(['justifyCenter', 'justifyLeft', 'justifyRight', 'justifyFull'], function() {
-                    assertCommand(kendo.ui.Editor.FormatCommand, this);
+                    assertCommand(kendo.ui.editor.FormatCommand, this);
                 });
             });
 
             test('exec insertLineBreak creates newLineCommand', function() {
-                assertCommand(kendo.ui.Editor.NewLineCommand, 'insertLineBreak');
+                assertCommand(kendo.ui.editor.NewLineCommand, 'insertLineBreak');
             });
 
             test('exec insertParagraph creates paragraph command', function() {
-                assertCommand(kendo.ui.Editor.ParagraphCommand, 'insertParagraph');
+                assertCommand(kendo.ui.editor.ParagraphCommand, 'insertParagraph');
             });
 
             test('exec createLink creates LinkCommand', function() {
-                assertCommand(kendo.ui.Editor.LinkCommand, 'createLink');
+                assertCommand(kendo.ui.editor.LinkCommand, 'createLink');
             });
 
             test('exec unlink creates UnlinkCommand', function() {
-                assertCommand(kendo.ui.Editor.UnlinkCommand, 'unlink');
+                assertCommand(kendo.ui.editor.UnlinkCommand, 'unlink');
             });
 
             test('exec insertImage creates image command', function() {
-                assertCommand(kendo.ui.Editor.ImageCommand, 'insertImage');
+                assertCommand(kendo.ui.editor.ImageCommand, 'insertImage');
             });
 
             test('exec indent creates indent command', function() {
-                assertCommand(kendo.ui.Editor.IndentCommand, 'indent');
+                assertCommand(kendo.ui.editor.IndentCommand, 'indent');
             });
 
             test('exec outdent creates indent command', function() {
-                assertCommand(kendo.ui.Editor.OutdentCommand, 'outdent');
+                assertCommand(kendo.ui.editor.OutdentCommand, 'outdent');
             });
 
         </script>

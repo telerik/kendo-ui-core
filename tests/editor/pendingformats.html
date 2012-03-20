@@ -35,7 +35,7 @@ $("#Editor1").kendoEditor();
 
 module("Editor / PendingFormats", {
     setup: function() {
-        PendingFormats = kendo.ui.Editor.PendingFormats;
+        PendingFormats = kendo.ui.editor.PendingFormats;
         editor = getEditor();
         editor.focus();
     }
@@ -51,11 +51,11 @@ test('toggle() toggles pending format', function() {
     var pendingFormats = new PendingFormats(editor);
 
     pendingFormats.toggle({ name: 'italic', params: undefined });
-            
+
     ok(pendingFormats.hasPending());
 
     pendingFormats.toggle({ name: 'italic', params: undefined });
-            
+
     ok(!pendingFormats.hasPending());
 });
 
@@ -63,11 +63,11 @@ test('toggle() toggles multiple formats', function() {
     var pendingFormats = new PendingFormats(editor);
 
     pendingFormats.toggle({ name: 'italic', params: undefined });
-            
+
     ok(pendingFormats.hasPending());
 
     pendingFormats.toggle({ name: 'bold', params: undefined });
-            
+
     ok(pendingFormats.hasPending());
 });
 
@@ -75,16 +75,16 @@ test('toggle() replaces format values, if any', function() {
     var pendingFormats = new PendingFormats(editor);
 
     pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command });
-            
+
     ok(pendingFormats.hasPending());
 
     pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
-            
+
     equals(pendingFormats.getPending('fontsize').params.value, 'xx-small');
     ok(pendingFormats.hasPending());
 
     pendingFormats.toggle({ name: 'fontsize', params: { value: 'xx-small' }, command: editor.options.tools.fontSize.command });
-            
+
     ok(!pendingFormats.hasPending());
 });
 
@@ -94,13 +94,13 @@ test('clear() removes all pending formats', function() {
     pendingFormats.toggle({ name: 'italic', params: undefined });
 
     pendingFormats.clear();
-            
+
     ok(!pendingFormats.hasPending());
 });
 
 test('apply() applies pending format to range', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.italic);
 
     editor.value('foo');
@@ -133,7 +133,7 @@ test('apply() applies pending format with parameter to range', function() {
 
 test('apply() applies multiple pending formats to range', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.italic);
     pendingFormats.toggle(editor.options.tools.bold);
 
@@ -149,7 +149,7 @@ test('apply() applies multiple pending formats to range', function() {
 
 test('apply() focuses end of format after apply', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.italic);
 
     editor.value('foo');
@@ -166,7 +166,7 @@ test('apply() focuses end of format after apply', function() {
 
 test('apply() removes pending format to range', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('<strong>foo</strong>');
@@ -181,7 +181,7 @@ test('apply() removes pending format to range', function() {
 
 test('apply() removes multiple pending formats to range', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.bold);
     pendingFormats.toggle(editor.options.tools.italic);
 
@@ -197,7 +197,7 @@ test('apply() removes multiple pending formats to range', function() {
 
 test('apply() focuses end of range after remove', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.bold);
     pendingFormats.toggle(editor.options.tools.italic);
 
@@ -219,7 +219,7 @@ test('apply() focuses end of range after remove', function() {
 
 test('apply() applies format on whitespace nodes', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('f o');
@@ -234,7 +234,7 @@ test('apply() applies format on whitespace nodes', function() {
     ok(pendingFormats.hasPending());
 
     range = editor.getRange();
-            
+
     ok(range.collapsed);
 
     range.insertNode(editor.document.createElement('a'));
@@ -244,7 +244,7 @@ test('apply() applies format on whitespace nodes', function() {
 
 test('apply() removes format on whitespace nodes', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('<strong>f</strong>oo');
@@ -259,7 +259,7 @@ test('apply() removes format on whitespace nodes', function() {
     ok(!pendingFormats.hasPending());
 
     range = editor.getRange();
-            
+
     ok(range.collapsed);
 
     range.insertNode(editor.document.createElement('a'));
@@ -269,7 +269,7 @@ test('apply() removes format on whitespace nodes', function() {
 
 test('apply() removes format at start of node', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle(editor.options.tools.bold);
 
     editor.value('<strong>af</strong>oo');
@@ -284,7 +284,7 @@ test('apply() removes format at start of node', function() {
     ok(!pendingFormats.hasPending());
 
     range = editor.getRange();
-            
+
     ok(range.collapsed);
 
     range.insertNode(editor.document.createElement('a'));
@@ -294,7 +294,7 @@ test('apply() removes format at start of node', function() {
 
 test('isPending() returns true if specified format is pending', function() {
     var pendingFormats = new PendingFormats(editor);
-            
+
     pendingFormats.toggle({ name: 'bold', params: undefined });
 
     ok(pendingFormats.isPending('bold'));
@@ -308,9 +308,9 @@ test('getPending() returns specified format if it is pending', function() {
     var pendingFormats = new PendingFormats(editor);
 
     var format = { name: 'fontsize', params: { value: 'xx-large' }, command: editor.options.tools.fontSize.command };
-            
+
     pendingFormats.toggle(format);
-        
+
     equals(pendingFormats.getPending('fontsize'), format);
 });
 

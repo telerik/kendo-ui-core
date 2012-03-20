@@ -4,7 +4,7 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
     Marker = Editor.Marker;
@@ -108,7 +108,7 @@ var PendingFormats = Class.extend({
 
 });
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     PendingFormats: PendingFormats
 });
 

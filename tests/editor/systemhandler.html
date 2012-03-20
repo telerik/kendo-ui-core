@@ -35,7 +35,7 @@ $("#Editor1").kendoEditor();
 
 module("Editor / SystemHandler", {
     setup: function() {
-        SystemHandler = kendo.ui.Editor.SystemHandler;
+        SystemHandler = kendo.ui.editor.SystemHandler;
         editor = getEditor();
         editor.focus();
     }
@@ -54,7 +54,7 @@ test('keydown calls endTyping if typing in progress', function() {
 
     ok(force);
 });
-        
+
 test('keydown does not call endTyping if not modifier key', function() {
     var called = false;
     editor.keyboard = {
@@ -70,7 +70,7 @@ test('keydown does not call endTyping if not modifier key', function() {
 
     ok(!called);
 });
-        
+
 test('keydown does not call endTyping if typing not in progress', function() {
     var called = false;
     editor.keyboard = {
@@ -98,7 +98,7 @@ test('keydown if modifier key creates start restore point', function() {
 
     ok(undefined !== handler.startRestorePoint);
 });
-        
+
 test('keydown returns true if modifier key', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
@@ -120,14 +120,14 @@ test('keydown if system command and changed creates end restore point', function
     handler.changed = function() {
         return true;
     }
-            
+
     handler.keydown();
     editor.keyboard.isModifierKey = function() { return false};
     handler.keydown();
 
     ok(undefined !== handler.endRestorePoint);
 });
-        
+
 test('keydown if system command and changed sets start restore point to end restore point', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
@@ -174,7 +174,7 @@ test('keydown creates undo command if system command and changed', function() {
         return false;
     }
     var command;
-            
+
     editor.undoRedoStack.push = function() {
         command = arguments[0];
     }
@@ -184,7 +184,7 @@ test('keydown creates undo command if system command and changed', function() {
         return true;
     }
     handler.keydown()
-            
+
     ok(undefined !== command);
 });
 
@@ -225,24 +225,24 @@ test('keyup creates undo command if system command and changed', function() {
         return false;
     }
     var command;
-            
+
     editor.undoRedoStack.push = function() {
         command = arguments[0];
     }
-            
+
     handler.keydown()
     editor.keyboard.isModifierKey = function() { return false};
     handler.keydown()
     handler.changed = function () {
         return true;
     }
-            
+
     handler.keyup()
-            
+
     ok(undefined !== command);
 });
 
-        
+
 test('keyup does not create undo command if system command and changed', function() {
     editor.keyboard = {
         isModifierKey: function () { return true },
@@ -255,13 +255,13 @@ test('keyup does not create undo command if system command and changed', functio
         return true;
     }
     var command;
-            
+
     editor.undoRedoStack.push = function() {
         command = arguments[0];
     }
-            
+
     handler.keyup()
-            
+
     ok(undefined === command);
 });
 

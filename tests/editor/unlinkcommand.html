@@ -36,7 +36,7 @@ $("#Editor1").kendoEditor();
 module("Editor / UnlinkCommand", {
     setup: function() {
         editor = getEditor();
-        UnlinkCommand = kendo.ui.Editor.UnlinkCommand;
+        UnlinkCommand = kendo.ui.editor.UnlinkCommand;
     }
 });
 
@@ -45,8 +45,8 @@ test('exec removes link', function() {
     var command = new UnlinkCommand({range:range});
     command.exec();
     equal(editor.value(), 'foo');
-});        
-        
+});
+
 test('exec removes link with mixed selection', function() {
     var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
     var command = new UnlinkCommand({range:range});
@@ -62,7 +62,7 @@ test('exec maintains selection', function() {
     equal(range.startOffset, 0);
     equal(range.endOffset, 3);
 });
-        
+
 test('exec from cursor', function() {
     editor.value('<a>foo</a>');
     var range = editor.createRange();
@@ -82,21 +82,21 @@ test('unlink tool is initially disabled', function() {
     editor.trigger('select');
     ok($('.k-unlink').hasClass('k-state-disabled'));
 });
-        
+
 test('unlink tool is enabled when cursor is inside a link', function() {
     editor.focus();
     var range = createRangeFromText(editor, '<a>|foo|</a>');
     editor.selectRange(range);
-            
+
     editor.trigger('select');
     ok(!$('.k-unlink').hasClass('k-state-disabled'));
 });
-        
+
 test('unlink tool is enabled when there is a link in the selection', function() {
     editor.focus();
     var range = createRangeFromText(editor, '|foo<a>bar</a>baz|');
     editor.selectRange(range);
-            
+
     editor.trigger('select');
     ok(!$('.k-unlink').hasClass('k-state-disabled'));
 });

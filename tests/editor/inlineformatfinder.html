@@ -36,7 +36,7 @@ $("#Editor1").kendoEditor();
 
 QUnit.testStart = function() {
     editor = getEditor();
-    InlineFormatFinder = kendo.ui.Editor.InlineFormatFinder;
+    InlineFormatFinder = kendo.ui.editor.InlineFormatFinder;
 }
 
 test('findSuitable() does not return for single text node', function() {
@@ -103,7 +103,7 @@ test('findFormat() finds formatterd node by tag and style', function() {
 
     equal(finder.findFormat(editor.body.firstChild.firstChild), editor.body.firstChild);
 });
-    
+
 test('findFormat() returns null if node does not match tag and style', function() {
     editor.value('<span>foo</span>');
 
@@ -134,7 +134,7 @@ test('isFormatted() returns true if at least one node has format', function() {
     ok(finder.isFormatted([editor.body.firstChild.firstChild]));
 });
 
-test('isFormatted() returns false if all nodes dont have format', function() {    
+test('isFormatted() returns false if all nodes dont have format', function() {
     editor.value('foo');
 
     var finder = new InlineFormatFinder(editor.options.formats.bold);

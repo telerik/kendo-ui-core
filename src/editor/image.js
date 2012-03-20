@@ -2,7 +2,7 @@
 
 var kendo = window.kendo,
     extend = $.extend,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     EditorUtils = Editor.EditorUtils,
     dom = Editor.Dom,
     registerTool = EditorUtils.registerTool,
@@ -142,7 +142,7 @@ var ImageCommand = Command.extend({
 
 });
 
-kendo.ui.Editor.ImageCommand = ImageCommand;
+kendo.ui.editor.ImageCommand = ImageCommand;
 
 registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: new ToolTemplate({template: EditorUtils.buttonTemplate, title: INSERTIMAGE}) }));
 

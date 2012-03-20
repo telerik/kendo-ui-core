@@ -36,11 +36,11 @@
                     editor = getEditor();
                     impl = {
                         formatRange: function(range, format) {
-                            var command = new kendo.ui.Editor.FormatCommand({
+                            var command = new kendo.ui.editor.FormatCommand({
                                 range:range,
                                 format: format,
                                 formatter: function() {
-                                    return new kendo.ui.Editor.BlockFormatter(format);
+                                    return new kendo.ui.editor.BlockFormatter(format);
                                 }
                             })
                             command.exec();

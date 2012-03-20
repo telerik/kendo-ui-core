@@ -37,7 +37,7 @@
             module("DOM", {
                 setup: function() {
                     editor = getEditor();
-                    Dom = kendo.ui.Editor.Dom;
+                    Dom = kendo.ui.editor.Dom;
                 }
             });
 
@@ -166,7 +166,7 @@
                 Dom.normalize(node);
                 equal(node.childNodes.length, 0);
                 equal(node.innerHTML, "");
-            });        
+            });
 
             test("normalize one text node", function() {
                 var node = Dom.create(document, "div");
@@ -174,7 +174,7 @@
                 Dom.normalize(node);
                 equal(node.childNodes.length, 1);
                 equal(node.innerHTML, "foo");
-            });        
+            });
 
             test("normalize two text nodes", function() {
                 var node = Dom.create(document, "div");
@@ -183,7 +183,7 @@
                 Dom.normalize(node);
                 equal(node.childNodes.length, 1);
                 equal(node.innerHTML, "foobar");
-            });        
+            });
 
             test("normalize mixed content nodes", function() {
                 var node = Dom.create(document, "div");

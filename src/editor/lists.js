@@ -4,7 +4,7 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
     EditorUtils = Editor.EditorUtils,
@@ -330,7 +330,7 @@ var ListTool = FormatTool.extend({
     }
 });
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     ListFormatFinder: ListFormatFinder,
     ListFormatter: ListFormatter,
     ListCommand: ListCommand,

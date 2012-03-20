@@ -5,7 +5,7 @@
         kendo = window.kendo,
         Class = kendo.Class,
         extend = $.extend,
-        Editor = kendo.ui.Editor,
+        Editor = kendo.ui.editor,
         dom = Editor.Dom,
         findNodeIndex = dom.findNodeIndex,
         isDataNode = dom.isDataNode,
@@ -923,7 +923,7 @@ var RangeUtils = {
     }
 };
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     SelectionUtils: SelectionUtils,
     W3CRange: W3CRange,
     RangeIterator: RangeIterator,
