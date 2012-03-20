@@ -79,6 +79,7 @@
                 dataSource.read();
 
                 ok(dataSource.at(0) instanceof ModelType);
+                strictEqual(dataSource.data(), data);
             });
         </script>
     </body>
