@@ -642,6 +642,52 @@
 
         shouldAlign: function() {
             return false;
+        },
+
+        renderRanges: function(view) {
+            var axis = this,
+                options = axis.options,
+                ranges = options.ranges || [],
+                vertical = options.vertical,
+                result = [],
+                plotArea = axis.parent,
+                count = ranges.length,
+                range, slotX, slotY,
+                from, to, i,
+                rangeSize = options.minorTicks.size / 2;
+
+            if (count) {
+                for (i = 0; i < count; i++) {
+                    range = ranges[i];
+                    from = defined(range.from) ? range.from : MIN_VALUE;
+                    to = defined(range.to) ? range.to : MAX_VALUE;
+                    range.from = math.min(from, to);
+                    range.to = math.max(from, to);
+                    if (vertical) {
+                        slotX = axis.lineBox();
+                        slotX.x1 -= rangeSize;
+                        slotY = axis.getSlot(range.from, range.to);
+                    } else {
+                        slotX = axis.getSlot(range.from, range.to);
+                        slotY = axis.lineBox();
+                        slotY.y2 += rangeSize;
+                    }
+                    result.push(view.createRect(
+                            new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
+                            { fill: range.color, fillOpacity: range.opacity }));
+                }
+            }
+
+            return result;
+        },
+
+        getViewElements: function(view) {
+            var axis = this,
+                elements = NumericAxis.fn.getViewElements.call(axis, view);
+
+            append(elements, axis.renderRanges(view));
+
+            return elements;
         }
     });
 

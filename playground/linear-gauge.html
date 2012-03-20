@@ -35,11 +35,20 @@
             $("#gauge").kendoLinearGauge({
                 theme:"default",
                 scale: {
-                    vertical: true
+                    vertical: true,
+                    ranges: [{
+                        from: 40,
+                        to: 50,
+                        color: "red"
+                    },{
+                        from: 30,
+                        to: 40,
+                        color: "green"
+                    }]
                 },
 
                 pointer: {
-                    value: 50,
+                    value: 25,
                     shape: "arrow"
                 }
             });
@@ -47,11 +56,20 @@
             $("#gauge1").kendoLinearGauge({
                 theme:"default",
                 scale: {
-                    vertical: false
+                    vertical: false,
+                    ranges: [{
+                        from: 40,
+                        to: 50,
+                        color: "red"
+                    },{
+                        from: 30,
+                        to: 40,
+                        color: "green"
+                    }]
                 },
 
                 pointer: {
-                    value: 50,
+                    value: 25,
                     shape: "arrow"
                 }
             });
