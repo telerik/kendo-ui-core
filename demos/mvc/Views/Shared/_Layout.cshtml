@@ -86,7 +86,7 @@
         {
             @Html.Partial("Navigation")
         }
-        
+
         @RenderBody()
 
         </div>
@@ -106,7 +106,7 @@
             Application.loadWidget(this.href);
         });
 
-        $(".themeChooser").themeChooser();
+        $("#themeChooser").themeChooser();
 
         $("#deviceChooser").mobileOsChooser({
             container: "#mobile-application-container"

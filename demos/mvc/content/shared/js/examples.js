@@ -84,6 +84,7 @@
             var wrapInner = $("#mainWrapInner");
 
             $.get(href + "?nav=true", function(html) {
+                $("#mainWrap").removeClass("widgetOverview");
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     wrapInner.replaceWith(html);
                     setTimeout(function() {
