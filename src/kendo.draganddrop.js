@@ -456,6 +456,10 @@
             return  offset > this.max || offset < this.min;
         },
 
+        totalSize: function() {
+            return this.element[0][this.scrollSize];
+        },
+
         present: function() {
             return this.max - this.min;
         },

@@ -39,6 +39,18 @@
     * var listView = $("#scrollView").kendoMobileScrollView();
     * </script>
     *
+    * @section
+    * <h3>Pages</h3>
+    * Content pages can be defined in order to display exactly one item per page. Pages are automatically resized
+    * on device orientation change. To define a page, wrap the content in a div with <code>role</code> data attribute
+    * set to <code>page</code>.
+    *
+    * @exampleTitle ScrollView with pages
+    * @example
+    * <div id="scrollView">
+    *    <div data-role="page">Foo</div>
+    *    <div data-role="page">Bar</div>
+    * </div>
     */
     var ScrollView = Widget.extend(/** @lends kendo.mobile.ui.ScrollView.prototype */{
         /**
@@ -46,6 +58,7 @@
         * @extends kendo.mobile.ui.Widget
         * @param {DomElement} element DOM element
         * @param {Object} options
+        * @option {Number} [page] <0> The initial page to display.
         * @option {Number} [duration] <300> The milliseconds that take the ScrollView to snap to the current page after released.
         * @option {Number} [velocityThreshold] <0.8> The velocity threshold after which a swipe will navigate to the next page (as opposed to snapping back to the current view).
         * The swipe velocity equal the pixels per millisecond change for a swipe.
@@ -122,11 +135,13 @@
                 pane: pane
             });
 
+            that.page = that.options.page;
             dimensions.refresh();
         },
 
         options: {
             name: "ScrollView",
+            page: 0,
             duration: 300,
             velocityThreshold: 0.8,
             bounceVelocityThreshold: 1.6
@@ -153,9 +168,12 @@
                 width = dimension.size,
                 pages;
 
-            that.page = Math.round(-that.movable.x / width);
+            that.element.find("[data-role=page]").width(width);
 
-            pages = that.pages = ceil(dimension.total / width);
+            // that.page = Math.round(-that.movable.x / width);
+            that.scrollTo(that.page);
+
+            pages = that.pages = ceil(dimension.totalSize() / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
