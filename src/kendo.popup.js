@@ -121,8 +121,6 @@
                 that._resize(e);
             };
 
-            kendo.touchScroller(element);
-
             if (options.toggleTarget) {
                 $(options.toggleTarget).bind(options.toggleEvent, $.proxy(that.toggle, that));
             }

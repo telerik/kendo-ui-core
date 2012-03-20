@@ -740,7 +740,7 @@ div.k-window-content
     box-sizing: content-box;
 }
 
-.k-menu:after /* add a clear fix to expand content */
+.k-menu:after /* clear fix to expand content */
 {
     content: '\A0';
     display: block;
