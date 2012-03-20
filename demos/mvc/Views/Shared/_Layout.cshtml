@@ -28,7 +28,7 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@(category.ToLower().Contains("ui") ? "wideCol" : "narrowCol") floatWrap">
+                <div class="@(category.ToLower().Contains("ui") ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
@@ -36,8 +36,22 @@
                         {
                             if (widget.Name != "overview")
                             {
+                                var isActive = false;
 
-                                <li class="@(ViewBag.Section == widget.Name ? "active" : "")">
+                                if (ViewBag.Section == "dashboards")
+                                {
+                                    isActive = ViewBag.Example == widget.Name;
+                                }
+                                else
+                                {
+                                    isActive = ViewBag.Section == widget.Name;
+                                }
+
+                                <li class="@(isActive ? "active" : "")">
+                                @if (widget.Items[0].Url.IndexOf("dashboard") == 0)
+                                {
+                                    <img src="@widget.SpriteCssClass" alt="@widget.Name" />
+                                }
                                     <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
                                 </li>
 
@@ -72,7 +86,7 @@
         </div>
     </div>
     <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
-        <div id="themeWrap" style="@(ViewBag.suite == "mobile" || Request.Path.IndexOf("overview") > -1 ? "display:none" : "")">
+        <div id="themeWrap" style="@(ViewBag.suite == "mobile" || Request.Path.IndexOf("overview") > -1 || ViewBag.CurrentExample.Url.IndexOf("dashboard") != -1  ? "display:none" : "")">
             <p class="choose-theme">Choose Theme:</p>
             <ul id="themeChooser"><li></li></ul>
         </div>

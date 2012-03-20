@@ -158,7 +158,7 @@
                 "text": "High performance",
                 "url": "dashboards/high-performance.html"
             }],
-            "name": "highperformancechart"
+            "name": "high-performance"
         },
         {
             "text": "Car dashboard",
@@ -168,7 +168,7 @@
                 "text": "Car dashboard",
                 "url": "dashboards/car-dashboard.html"
             }],
-            "name": "cardashboard"
+            "name": "car-dashboard"
         },
         {
             "text": "Stock history dashboard",
@@ -179,7 +179,7 @@
                 "text": "Stock history dashboard",
                 "url": "dashboards/stock-history.html"
             }],
-            "name": "stockhistorydashboard"
+            "name": "stock-history"
         }
     ]
 }

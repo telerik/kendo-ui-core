@@ -84,15 +84,25 @@
             var wrapInner = $("#mainWrapInner");
 
             $.get(href + "?nav=true", function(html) {
-                var items = $(".narrowCol:not(.mobile-devices), .wideCol").find("li").removeClass("active"),
-                widget = href.split("/");
-                widget = widget[widget.length - 2];
+                var parts = href.split("/"),
+                    widget = parts[parts.length - 2],
+                    dashboards = $(".dashboards li").removeClass("active"),
+                    items = $(".narrowCol:not(.mobile-devices, .dashboards), .wideCol").find("li").removeClass("active"),
+                    condition;
 
-                $($.grep(items, function(li) {
+                if (widget == "dashboards") {
+                    items = dashboards;
+                    condition = function(li) {
+                        return href == $(li).find("a").attr("href");
+                    };
+                } else {
+                    condition = function(li) {
                         var splits = $(li.children[0]).attr("href").split("/");
                         return splits[splits.length - 2] == widget;
-                }))
-                .addClass("active");
+                    };
+                }
+
+                $($.grep(items, condition)).addClass("active");
 
                 if (href.indexOf("mobile") == -1) {
                     $("#themeWrap").show();
