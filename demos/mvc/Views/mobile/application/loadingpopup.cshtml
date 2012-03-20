@@ -1,5 +1,5 @@
 <div id="loading" data-role="view" class="km-insetcontent" data-init="viewInit" data-title="Loading Popup">
-    <button id="show" data-role="button" style="display:none">Show Loading Popup</button>
+    <button id="show" data-role="button">Show Loading Popup</button>
 </div>
 <script>
     var showButton;
@@ -9,7 +9,6 @@
                         showButton.fadeOut();
                         startLoading();
                      });
-        startLoading();
     }
 
     function startLoading() {
@@ -26,6 +25,7 @@
                 clearInterval(interval);
                 kendoMobileApplication.hideLoading(); //hide loading popup
                 showButton.fadeIn();
+                headingTag.removeClass("loaderHeading");
             }
 
         }, 1000);
