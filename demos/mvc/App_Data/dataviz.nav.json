@@ -10,7 +10,7 @@
                 }],
             "name": "overview"
         }, {
-            "text": "Area Chart",
+            "text": "Area Charts",
             "spriteCssClass": "chartAreaIcon",
             "items": [{
                     "text": "Basic usage",
@@ -52,7 +52,7 @@
             }],
             "name": "bar-charts"
         }, {
-            "text": "Line Chart",
+            "text": "Line Charts",
             "spriteCssClass": "chartLineIcon",
             "items": [
                 {
@@ -71,7 +71,7 @@
             ],
             "name": "line-chart"
         }, {
-            "text": "Pie Chart",
+            "text": "Pie Charts",
             "spriteCssClass": "chartPieIcon",
             "items": [{
                     "text": "Basic usage",
@@ -139,6 +139,14 @@
                 "url": "radial-gauge/gauge-labels.html"
             }],
             "name": "radial-gauge"
+        }, {
+            "text": "Linear Gauge",
+            "spriteCssClass": "gaugeLinearIcon",
+            "items": [{
+                "text": "Basic usage",
+                "url": "linear-gauge/index.html"
+            }],
+            "name": "linear-gauge"
         }
     ],
     "Sample Dashboards": [

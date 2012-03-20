@@ -1,0 +1,77 @@
+        <div id="example" class="k-content">
+            <div id="gauge-container">
+                <div id="vertical-gauge"></div>
+                <div id="horizontal-gauge"></div>
+
+            </div>
+
+            <input id="gauge-value" value="40">
+
+            <script>
+                function createGauges() {
+                    var theme = $(document).data("kendoSkin") || "default",
+                        value = $("#gauge-value").val();
+
+                    $("#vertical-gauge").kendoLinearGauge({
+                        theme: theme,
+
+                        pointer: {
+                            value: value
+                        },
+
+                        scale: {
+                            max: 50,
+                            vertical: true
+                        }
+                    });
+
+                    $("#horizontal-gauge").kendoLinearGauge({
+                        theme: theme,
+
+                        pointer: {
+                            value: value
+                        },
+
+                        scale: {
+                            max: 50,
+                            vertical: false
+                        }
+                    });
+                }
+
+                $(document).ready(function() {
+                    createGauges();
+
+                    $("#gauge-value").kendoSlider({
+                        min: 0,
+                        max: 50,
+                        showButtons: false,
+                        change: function() {
+                            var value = $("#gauge-value").val();
+                            $("#vertical-gauge").data("kendoLinearGauge").value(value);
+                            $("#horizontal-gauge").data("kendoLinearGauge").value(value);
+                        }
+                    });
+
+                    $(document).bind("kendo:skinChange", function(e) {
+                        createGauges();
+                    });
+                });
+            </script>
+
+            <style scoped>
+                #gauge-container {
+                    text-align: center;
+                    margin: 0 auto;
+                }
+
+                #vertical-gauge,
+                #horizontal-gauge {
+                    width: 200px;
+                    height: 200px;
+                    display: inline-block;
+                    *display: inline;
+                    zoom: 1;
+                }
+            </style>
+        </div>
