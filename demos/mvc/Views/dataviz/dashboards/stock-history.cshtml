@@ -106,18 +106,16 @@
                         dataSource: yearlyStockValues,
                         series: [{
                             field: field,
-                            type: "line",
-                            markers: {
-                                visible: false
-                            },
-                            color: color,
-                            width: 2
+                            color: color
                         }],
+                        seriesDefaults: {
+                            type: "line",
+                            markers: { visible: false },
+                            line: { width: 2 }
+                        },
                         axisDefaults: {
                             visible: false,
-                            majorGridLines: {
-                                visible: false
-                            }
+                            majorGridLines: { visible: false }
                         },
                         legend: { visible: false }
                     };
@@ -246,7 +244,7 @@
 
         .stat {
             width: 20%;
-            margin-top: 35px;
+            margin-top: 48px;
         }
 
         .first {
