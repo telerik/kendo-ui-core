@@ -404,7 +404,7 @@ var ColorTool = Tool.extend({
             toolName = this.name;
 
         ui.kendoColorPicker({
-            selectedColor: "#000000",
+            value: "#000000",
             change: function (e) {
                 Tool.exec(editor, toolName, e.value);
             }
