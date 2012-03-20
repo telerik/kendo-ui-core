@@ -161,6 +161,10 @@
                     "url": "editor/index.html"
                 },
                 {
+                    "text": "Custom tools",
+                    "url": "editor/custom-tools.html"
+                },
+                {
                     "text": "Events",
                     "url": "editor/events.html"
                 },

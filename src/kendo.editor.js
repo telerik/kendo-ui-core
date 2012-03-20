@@ -18,8 +18,8 @@
         getHtml: function() {
             var options = this.options;
             return kendo.template(options.template)({
-                toolClass: options.cssClass,
-                toolTitle: options.title,
+                cssClass: options.cssClass,
+                tooltip: options.title,
                 initialValue: options.initialValue
             });
         }
@@ -38,29 +38,29 @@
 
         buttonTemplate:
             '<li class="k-editor-button">' +
-                '<a href="" class="k-tool-icon k-#=toolClass#" unselectable="on" title="#=toolTitle#">#=toolTitle#</a>' +
+                '<a href="" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
             '</li>',
 
         colorPickerTemplate:
             '<li class="k-editor-colorpicker">' +
-                '<div class="k-widget k-colorpicker k-header k-#=toolClass#">' +
+                '<div class="k-widget k-colorpicker k-header #= cssClass #">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-arrow-down"></span>' +
             '</div></li>',
 
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
-                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
-//                '<div class="k-widget k-combobox k-header k-#=toolClass#">' +
+                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+//                '<div class="k-widget k-combobox k-header #= cssClass #">' +
 //                    '<div class="k-dropdown-wrap k-state-default">' +
-//                        '<input class="k-input" id="-input" title="#=toolTitle#" type="text" value="#=initialValue#" />' +
+//                        '<input class="k-input" id="-input" title="#= tooltip #" type="text" value="#=initialValue#" />' +
 //                        '<span class="k-select k-header"><span class="k-icon k-arrow-down">select</span></span>' +
 //                    '</div><input style="display:none" type="text" value="inherit" /></div>' +
             '</li>',
 
         dropDownListTemplate:
             '<li class="k-editor-selectbox">' +
-                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
-//                '<div class="k-selectbox k-header k-#=toolClass#"><div class="k-dropdown-wrap k-state-default">' +
+                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+//                '<div class="k-selectbox k-header #= cssClass #"><div class="k-dropdown-wrap k-state-default">' +
 //                    '<span class="k-input">#=initialValue#</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span>' +
 //                '</div></div>' +
             '</li>',
@@ -82,31 +82,49 @@
         },
 
         renderTools: function(editor, tools) {
-            var toolsCollection = {},
+            var editorTools = {},
+                currentTool, tool, i,
+                nativeTools = editor._nativeTools,
+                template,
                 toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
 
             toolsArea.empty();
 
-            if (tools && tools.length > 0) {
-                for (var j = 0; j < tools.length; j++) {
-                    var tool = editor._tools[tools[j]],
-                        toolName = tools[j];
-                    if (tool) {
-                        toolsCollection[tools[j]] = tool;
-                        if (tool.options.template) {
-                            $(tool.options.template.getHtml()).appendTo(toolsArea);
+            if (tools) {
+                for (j = 0; j < tools.length; j++) {
+                    currentTool = tools[j];
+
+                    if ($.isPlainObject(currentTool)) {
+                        toolOptions = extend({ cssClass: "k-custom", tooltip: "" }, currentTool);
+                    } else if (editor._tools[currentTool]) {
+                        editorTools[currentTool] = editor._tools[currentTool];
+                        toolOptions = editorTools[currentTool].options;
+                    }
+
+                    template = toolOptions.template;
+
+                    if (template) {
+
+                        if (template.getHtml) {
+                            template = template.getHtml();
+                        } else {
+                            if (!$.isFunction(template)) {
+                                template = kendo.template(template);
+                            }
+
+                            template = template(toolOptions);
                         }
+
+                        $(template).appendTo(toolsArea);
                     }
                 }
             }
 
-            var nativeTools = editor._nativeTools;
-
-            for (var j = 0; j < nativeTools.length; j++) {
-                toolsCollection[nativeTools[j]] = editor._tools[nativeTools[j]];
+            for (j = 0; j < nativeTools.length; j++) {
+                editorTools[nativeTools[j]] = editor._tools[nativeTools[j]];
             }
 
-            editor.options.tools = toolsCollection;
+            editor.options.tools = editorTools;
         },
 
         createContentElement: function($textarea, stylesheets) {
@@ -311,7 +329,7 @@
             var tools = Editor.fn._tools;
             tools[toolName] = tool;
             if (tools[toolName].options && tools[toolName].options.template) {
-                tools[toolName].options.template.options.cssClass = toolName;
+                tools[toolName].options.template.options.cssClass = "k-" + toolName;
             }
         },
 
