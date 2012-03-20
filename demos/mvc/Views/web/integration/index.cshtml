@@ -8,16 +8,16 @@
 
         <div id="example" class="k-content">
             <div id="options">
-                Choose a ticket class:
+                <label for="ticket">Ticket class:</label>
                 <select id="ticket" style="vertical-align: middle" data-bind="options: tickets,
                     optionsCaption: 'Choose...',
                     optionsText: 'name',
                     value: chosenTicket"></select>
 
-                Departure:
+                <label for="departure">Departure:</label>
                 <input id="departure" data-bind="value: departure" />
 
-                Seat:
+                <label for="seat">Seat:</label>
                 <input id="seat" data-bind="value: quantity" />
             </div>
             <div id="boardingpass" data-bind="template: 'ticketTemplate'"></div>
@@ -67,6 +67,21 @@
                 });
             </script>
             <style scoped>
+                #options {
+                	width: 660px;
+                	margin: 20px auto;
+                	padding: 10px;
+                    border: 1px solid #bbb;
+                    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.25), inset 0 0 30px rgba(0,0,0,0.07);
+                    box-shadow: 0 1px 1px rgba(0,0,0,0.25), inner 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    border-radius: 8px;
+                }
+                #options label {
+                	padding-left: 5px;
+                }                
                 #boardingpass {
                 	width: 575px;
                 	min-height: 270px;
@@ -74,26 +89,32 @@
                 	position: relative;
                 	background: url('../../content/web/integration/boardingPass.png') transparent no-repeat 0 0;
                 }
+                
                 .class-ticket {
                     position: absolute;
                     margin: 26px 0 0 45px;	
                 }
+                
                 .class-card {
                     position: absolute;
                     margin: 58px 0 0 430px;	
                 }
+                
                 .date {
                     position: absolute;
                     margin: 58px 0 0 45px;	
                 }
+                
                 .seat-ticket {
                     position: absolute;
                     margin: 58px 0 0 270px;	
                 }
+                
                 .seat-card {
                     position: absolute;
                     margin: 58px 0 0 530px;	
                 }
+                
                 .clear-button {
                     position: absolute;
                     margin: 240px 0 0 0;	
