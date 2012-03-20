@@ -262,6 +262,8 @@
         },
 
         _resize: function(e) {
+            var that = this;
+
             if (appendingToBodyTriggersResize) {
                 var width = DOCUMENT.width();
                 if (width == that._currentWidth) {
