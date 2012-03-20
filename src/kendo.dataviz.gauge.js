@@ -98,7 +98,7 @@
             },
             animation: {
                 type: RADIAL_POINTER,
-                speed: 142
+                speed: 177
             }
         },
 
@@ -125,7 +125,8 @@
                 currentAngle = needle.options.rotation[0],
                 minSlotAngle = scale.getSlotAngle(scale.options.min),
                 endAngle = needle.options.rotation[0] = scale.getSlotAngle(options.value) - minSlotAngle,
-                oldAngle = scale.getSlotAngle(options._oldValue) - minSlotAngle;
+                oldAngle = scale.getSlotAngle(options._oldValue) - minSlotAngle,
+                animation = needle._animation;
 
             if (animation) {
                 animation.abort();
@@ -134,9 +135,9 @@
             if (animationOptions === false) {
                 needle.refresh(doc.getElementById(options.id));
             } else {
-                animation = pointer._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
+                animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
                     startAngle: currentAngle || oldAngle,
-                    duration: (Math.abs(currentAngle - endAngle) / animationOptions.speed) * 1000
+                    duration: math.max((math.abs(currentAngle - endAngle) / animationOptions.speed) * 1000, 1)
                 }));
                 animation.setup();
                 animation.play();
