@@ -32,17 +32,22 @@
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var ARROW = "arrow",
+    var ANGULAR_SPEED = 177,
+        ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
         BAR_INDICATOR = "barIndicator",
         BLACK = "#000",
+        CAP_SIZE = 0.05,
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
+        DEFAULT_LINE_WIDTH = 0.5,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEGREE = math.PI / 180,
-        RADIAL_POINTER = "radialPointer",
-        OUTSIDE = "outside",
         INSIDE = "inside",
+        NEEDLE = "needle",
+        OUTSIDE = "outside",
+        RADIAL_POINTER = "radialPointer",
+        ROTATION_ORIGIN = 90,
         VERTICAL = "vertical";
 
     // Gauge ==================================================================
@@ -68,7 +73,7 @@
         },
 
         options: {
-            color: "#ea7001",
+            color: BLACK,
             value: 0
         },
 
@@ -92,13 +97,13 @@
 
     var RadialPointer = Pointer.extend({
         options: {
-            shape: "needle",
+            shape: NEEDLE,
             cap: {
-                size: 0.05
+                size: CAP_SIZE
             },
             animation: {
                 type: RADIAL_POINTER,
-                speed: 177
+                speed: ANGULAR_SPEED
             }
         },
 
@@ -124,7 +129,8 @@
                 animationOptions = options.animation,
                 currentAngle = needle.options.rotation[0],
                 minSlotAngle = scale.getSlotAngle(scale.options.min),
-                endAngle = needle.options.rotation[0] = scale.getSlotAngle(options.value) - minSlotAngle,
+                endAngle = needle.options.rotation[0] =
+                    scale.getSlotAngle(options.value) - minSlotAngle,
                 oldAngle = scale.getSlotAngle(options._oldValue) - minSlotAngle,
                 animation = needle._animation;
 
@@ -156,8 +162,7 @@
                 halfWidth = box.width() / 2,
                 center = box.center(),
                 minAngle = scale.getSlotAngle(scale.options.min),
-                // pointer calculation is done at 90deg, so points are rotated initially
-                pointRotation = 90 - minAngle;
+                pointRotation = ROTATION_ORIGIN - minAngle;
 
             if (options.animation !== false) {
                 deepExtend(options.animation, {
@@ -176,11 +181,15 @@
 
             return [
                 view.createPolyline([
-                    rotatePoint((box.x1 + box.x2) / 2, box.y1 + scale.options.minorTicks.size, center.x, center.y, pointRotation),
+                    rotatePoint((box.x1 + box.x2) / 2,
+                        box.y1 + scale.options.minorTicks.size, center.x, center.y, pointRotation
+                    ),
                     rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
                     rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
                 ], true, options),
-                view.createCircle([center.x, center.y], capSize, { fill: options.cap.color || options.color })
+                view.createCircle([center.x, center.y], capSize, {
+                    fill: options.cap.color || options.color
+                })
             ];
         },
 
@@ -213,14 +222,14 @@
                 size: 15,
                 align: INSIDE,
                 color: BLACK,
-                width: .5
+                width: DEFAULT_LINE_WIDTH
             },
 
             minorTicks: {
                 size: 10,
                 align: INSIDE,
                 color: BLACK,
-                width: .5
+                width: DEFAULT_LINE_WIDTH
             },
 
             startAngle: -30,
@@ -464,7 +473,7 @@
                 width: 0
             },
             minorTicks: {
-                align: "inside"
+                align: INSIDE
             }
         },
 
@@ -488,7 +497,7 @@
 
         alignScale: function(box) {
             var plotArea = this,
-            plotBoxCenter = plotArea.box.center(),
+                plotBoxCenter = plotArea.box.center(),
                 boxCenter = box.center(),
                 paddingX = plotBoxCenter.x - boxCenter.x,
                 paddingY = plotBoxCenter.y - boxCenter.y,
@@ -609,7 +618,7 @@
                 size: 15,
                 align: INSIDE,
                 color: BLACK,
-                width: 0.5,
+                width: DEFAULT_LINE_WIDTH,
                 visible: true
             },
 
@@ -617,12 +626,12 @@
                 size: 10,
                 align: INSIDE,
                 color: BLACK,
-                width: 0.5,
+                width: DEFAULT_LINE_WIDTH,
                 visible: true
             },
 
             line: {
-                width: 0.5
+                width: DEFAULT_LINE_WIDTH
             },
 
             labels: {
@@ -649,7 +658,7 @@
                 visible: false
             },
 
-            color: "#286793",
+            color: BLACK,
             size: 6,
             border: {
                 width: 1
