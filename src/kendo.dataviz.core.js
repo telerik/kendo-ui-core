@@ -1885,9 +1885,8 @@
                 point,
                 i;
 
-
             anim.axis = axis;
-            anim.endState = [];
+            anim.endPositions = [];
             anim.startPositions = [];
 
             if (!initial) {
@@ -1898,8 +1897,13 @@
 
             for (i = 0; i < count; i++) {
                 point = deepExtend({}, points[i]);
-                anim.endState[i] = initial ? point[axis] : end - padding;
-                anim.startPositions[i] = initial ? startPosition - padding : point[axis];
+                if (initial) {
+                    anim.endPositions[i] = point[axis];
+                    points[i][axis] = startPosition - padding;
+                } else {
+                    anim.endPositions[i] = end - padding;
+                }
+                anim.startPositions[i] = points[i][axis];
                 padding -= halfSize;
             }
         },
@@ -1907,14 +1911,14 @@
         step: function(pos) {
             var anim = this,
                 startPositions = anim.startPositions,
-                endState = anim.endState,
+                endPositions = anim.endPositions,
                 element = anim.element,
                 points = element.points,
                 axis = anim.axis,
                 count = points.length;
 
             for (i = 0; i < count; i++) {
-                points[i][axis] = interpolateValue(startPositions[i], endState[i], pos);
+                points[i][axis] = interpolateValue(startPositions[i], endPositions[i], pos);
             }
         }
     });
