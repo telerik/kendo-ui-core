@@ -1,3 +1,9 @@
+## Why would I choose Kendo UI Mobile vs jQuery Mobile?
+In the simplest terms, there are two ways we provide extended benefit and a differentiated approach than jQuery Mobile. First, Kendo UI Mobile is a cohesive mobile framework for all of your HTML/JS development, whereas jQuery Mobile is primarily focused on UI (and mostly mobile UI at that). Kendo UI provides core framework components, like templating, MVVM, validation, and a data source, as well as UI for mobile touch interfaces.  
+
+Second, our approach to solving the mobile UI problem is different than jQuery Mobile. Where jQuery Mobile tends to promote a "one size fits all" UI model, we think UIs should be tailored to touch interaction mode and platform (iOS/Android/BlackBerry/etc.). Kendo UI Mobile exemplifies this by providing UI widgets that "look right" wherever they run. On iOS, they look like iOS widgets. On Android, they look like Android widgets.
+
+
 ## Does Kendo UI Mobile support Windows Phone?
 Currently, Kendo UI Mobile does not support Windows Phone 7 due to a combination of missing
 features in Internet Explorer, such as support for touch events. If you're looking for Metro-style,
