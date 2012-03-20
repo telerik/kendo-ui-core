@@ -97,7 +97,7 @@
                         options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
 
                         if (options.name) {
-                            editorTools[options.name] = options;
+                            options.cssClass = "k-" + options.name;
                         }
 
                         if (!options.template) {
