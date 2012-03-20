@@ -26,10 +26,11 @@
 
         var item = $(e.currentTarget),
             clickedLink = $(e.target).closest("a"),
+            prevented = e.originalEvent && e.originalEvent.defaultPrevented;
             role = clickedLink.data(kendo.ns + "role") || "";
 
         if (clickedLink[0] && (!role.match(/button/))) {
-            item.toggleClass("km-state-active", e.type === MOUSEDOWN && !e.originalEvent.defaultPrevented)
+            item.toggleClass("km-state-active", e.type === MOUSEDOWN && !prevented);
         }
     }
 
