@@ -396,7 +396,7 @@
             var that = this;
 
             that.capture = false;
-            element.on(START_EVENTS, proxy(that._press, that));
+            element[0].addEventListener(START_EVENTS, proxy(that._press, that), true);
             element.on(END_EVENTS, proxy(that._release, that));
             Observable.fn.init.call(that);
 

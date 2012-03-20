@@ -26,21 +26,10 @@
 
         var item = $(e.currentTarget),
             clickedLink = $(e.target).closest("a"),
-            intervalID = item.data(ACTIVE_STATE_TIMEOUT),
             role = clickedLink.data(kendo.ns + "role") || "";
 
         if (clickedLink[0] && (!role.match(/button/))) {
-            clearTimeout(intervalID);
-            if (e.type === MOUSEDOWN) {
-                intervalID = setTimeout(function(){
-                    if (!e.originalEvent || !e.originalEvent.defaultPrevented) {
-                        item.toggleClass("km-state-active", true);
-                    }
-                }, 30);
-                item.data(ACTIVE_STATE_TIMEOUT, intervalID);
-            } else {
-                item.toggleClass("km-state-active", false);
-            }
+            item.toggleClass("km-state-active", e.type === MOUSEDOWN && !e.originalEvent.defaultPrevented)
         }
     }
 
