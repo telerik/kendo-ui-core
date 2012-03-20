@@ -305,14 +305,162 @@
          * @param {Object} options Configuration options.
          *
          * @option {Object} [animation]
-         * A collection of <strong>Animation</strong> objects, used to change default animations. A value of
-         * <strong>false</strong> will disable all animations.
+         * A collection of visual animations used when <strong>TabStrip</strong> tab are selected through
+         * user interactions. Setting this option to <strong>false</strong> will disable all animations.
          *
-         * @option {Animation} [animation.open]
-         * The animation that will be used when opening content.
+         * _exampleTitle Defining custom animations when selecting tabs
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     animation: {
+         *         // fade-out current tab over 1000 milliseconds
+         *         close: {
+         *             duration: 1000,
+         *             effects: "fadeOut"
+         *         },
+         *        // fade-in new tab over 500 milliseconds
+         *        open: {
+         *            duration: 500,
+         *            effects: "fadeIn"
+         *        }
+         *    }
+         * });
          *
-         * @option {Animation} [animation.close]
-         * The animation that will be used when closing content.
+         * @option {Object} [animation.open]
+         * The visual animation(s) that will be used when the new tab is shown.
+         *
+         * _exampleTitle Defining a custom animation when new tab is shown that executes over 200 milliseconds
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     animation: {
+         *         open: {
+         *             duration: 200,
+         *             effects: "expand:vertical"
+         *         }
+         *     }
+         * });
+         *
+         * @option {Number} [animation.open.duration] <200>
+         * The number of milliseconds used for the visual animation when a new tab is shown.
+         *
+         * _exampleTitle Defining animation when a new tab is shown that executes over 1000 milliseconds
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *  animation: {
+         *       open: {
+         *           duration: 1000
+         *       }
+         *    }
+         * });
+         *
+         * @option {String} [animation.open.effects] <"expand:vertical fadeIn">
+         * A whitespace-separated string of animation effects that are used when a new tab is shown. Options include
+         * <strong>"expand:vertical"</strong> and <strong>"fadeIn"</strong>.
+         *
+         * @option {Boolean} [animation.open.show] <true>
+         *
+         * @option {Object} [animation.close]
+         * The visual animation(s) that will be used when the current tab is closed.
+         *
+         * _exampleTitle Defining a custom animation for the current tab that
+         * executes over 200 milliseconds
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     animation: {
+         *         close: {
+         *             duration: 200,
+         *             effects: "fadeOut"
+         *         }
+         *     }
+         * });
+         *
+         * @option {Number} [animation.close.duration] <200>
+         * The number of milliseconds used for the visual animation when the current tab is closed.
+         *
+         * _exampleTitle Animating the current tab for 1000 milliseconds
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     animation: {
+         *         close: {
+                       duration: 1000
+                   }
+         *   }
+         * });
+         *
+         * @option {String} [animation.close.effects]
+         * A whitespace-delimited string of animation effects that are utilized when the current tab
+         * is closed. By default not specified - uses the opening animation with reverse.
+         *
+         * _exampleTitle Fading-out the current tab for 1000 milliseconds
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     animation: {
+         *         close: {
+         *             duration: 1000,
+         *             effects: "fadeOut"
+         *         }
+         *     }
+         * });
+         *
+         * @option {String} [dataTextField] <""> Sets the field of the data item that provides the text name of the tab.
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     dataTextField: "Name",
+         *     dataSource: data
+         * });
+         *
+         * @option {String} [dataContentField] <""> Sets the field of the data item that provides the text content of
+         * the tab content element.
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     dataTextField: "Name",
+         *     dataContentField: "Content",
+         *     dataSource: data
+         * });
+         *
+         * @option {String} [dataImageUrlField] <""> Sets the field of the data item that provides the image URL of
+         * the tab.
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     dataTextField: "Name",
+         *     dataImageUrlField: "ImageUrl",
+         *     dataSource: data
+         * });
+         *
+         * @option {String} [dataUrlField] <""> Sets the field of the data item that provides the link URL for the
+         * tab.
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     dataTextField: "Name",
+         *     dataUrlField: "Url",
+         *     dataSource: data
+         * });
+         *
+         * @option {String} [dataSpriteCssClass] <""> Sets the field of the data item that provides the CSS class of
+         * the tab.
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     dataTextField: "Name",
+         *     dataSpriteCssClass: "CssClass",
+         *     dataSource: data
+         * });
+         *
+         * @option {String} [dataContentUrlField] <""> Sets the field of the data item that provides the URL for
+         * the ajax loaded tab content.
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     dataTextField: "Name",
+         *     dataContentUrlField: "ContentUrl",
+         *     dataSource: data
+         * });
+         *
+         * @option {Boolean} [collapsible] <false>
+         * Specifies whether the TabStrip should be able to collapse completely when clicking an expanded tab.
+         *
+         * _exampleTitle Turning on tab collapsing
+         * _example
+         * $("#tabstrip").kendoTabStrip({
+         *     collapsible: true
+         * });
          *
          */
         init: function(element, options) {
