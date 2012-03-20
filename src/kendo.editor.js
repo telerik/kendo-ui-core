@@ -32,7 +32,7 @@
 
         editorWrapperTemplate:
             '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header"><tbody>' +
-                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"><li>&nbsp;</li></ul></td></tr>' +
+                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"></ul></td></tr>' +
                 '<tr><td class="k-editable-area"></td></tr>' +
             '</tbody></table>',
 
@@ -67,18 +67,18 @@
 
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
 
-        wrapTextarea: function($textarea) {
+        wrapTextarea: function(textarea) {
 
-            var w = $textarea.width(),
-                h = $textarea.height(),
+            var w = textarea.width(),
+                h = textarea.height(),
                 template = EditorUtils.editorWrapperTemplate,
-                editorWrap = $(template).insertBefore($textarea).width(w).height(h),
+                editorWrap = $(template).insertBefore(textarea).width(w).height(h),
                 editArea = editorWrap.find(".k-editable-area"),
                 toolsArea = editorWrap.find(".k-editor-toolbar");
 
-            $textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
+            textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
 
-            return $textarea.closest(".k-editor");
+            return textarea.closest(".k-editor");
         },
 
         renderTools: function(editor, tools) {
@@ -86,22 +86,31 @@
                 currentTool, tool, i,
                 nativeTools = editor._nativeTools,
                 template,
+                options,
                 toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
-
-            toolsArea.empty();
 
             if (tools) {
                 for (j = 0; j < tools.length; j++) {
                     currentTool = tools[j];
 
                     if ($.isPlainObject(currentTool)) {
-                        toolOptions = extend({ cssClass: "k-custom", tooltip: "" }, currentTool);
+                        options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
+
+                        if (options.name) {
+                            editorTools[options.name] = options;
+                        }
+
+                        if (!options.template) {
+                            if (options.type == "button") {
+                                options.template = EditorUtils.buttonTemplate;
+                            }
+                        }
                     } else if (editor._tools[currentTool]) {
                         editorTools[currentTool] = editor._tools[currentTool];
-                        toolOptions = editorTools[currentTool].options;
+                        options = editorTools[currentTool].options;
                     }
 
-                    template = toolOptions.template;
+                    template = options.template;
 
                     if (template) {
 
@@ -112,10 +121,14 @@
                                 template = kendo.template(template);
                             }
 
-                            template = template(toolOptions);
+                            template = template(options);
                         }
 
-                        $(template).appendTo(toolsArea);
+                        tool = $(template).appendTo(toolsArea);
+
+                        if (options.type == "button" && options.exec) {
+                            tool.find(".k-tool-icon").click($.proxy(options.exec, editor.element[0]));
+                        }
                     }
                 }
             }
@@ -780,58 +793,61 @@
         },
 
         exec: function (name, params) {
-            var range, body, id, tool = "", pendingTool;
+            var that = this,
+                range, body, id,
+                tool = "", pendingTool;
 
             name = name.toLowerCase();
 
             // restore selection
-            if (!this.keyboard.isTypingInProgress()) {
-                this.focus();
+            if (!that.keyboard.isTypingInProgress()) {
+                that.focus();
 
-                range = this.getRange();
-                body = this.document.body;
+                range = that.getRange();
+                body = that.document.body;
             }
 
             // exec tool
-            for (id in this.options.tools)
+            for (id in that.options.tools) {
                 if (id.toLowerCase() == name) {
-                    tool = this.options.tools[id];
+                    tool = that.options.tools[id];
                     break;
                 }
+            }
 
             if (tool) {
-                range = this.getRange();
+                range = that.getRange();
 
                 if (!/undo|redo/i.test(name) && tool.willDelayExecution(range)) {
                     // clone our tool to apply params only once
                     pendingTool = $.extend({}, tool);
                     $.extend(pendingTool.options, { params: params });
-                    this.pendingFormats.toggle(pendingTool);
-                    select(this);
+                    that.pendingFormats.toggle(pendingTool);
+                    select(that);
                     return;
                 }
 
                 var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
 
-                this.trigger("execute", { name: name, command: command });
+                that.trigger("execute", { name: name, command: command });
 
                 if (/undo|redo/i.test(name)) {
-                    this.undoRedoStack[name]();
+                    that.undoRedoStack[name]();
                 } else if (command) {
                     if (!command.managesUndoRedo) {
-                        this.undoRedoStack.push(command);
+                        that.undoRedoStack.push(command);
                     }
 
-                    command.editor = this;
+                    command.editor = that;
                     command.exec();
 
                     if (command.async) {
-                        command.change = $.proxy(function () { select(this); }, this);
+                        command.change = $.proxy(function () { select(that); }, that);
                         return;
                     }
                 }
 
-                select(this);
+                select(that);
             }
         }
     });

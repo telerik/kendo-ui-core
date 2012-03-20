@@ -22,17 +22,49 @@
             &lt;/p&gt;
     </textarea>
 
-    <script>
+    <script type="text/x-kendo-template" id="viewHtml-template">
+        <div>
+            <textarea style="width: 400px; height: 300px;"></textarea>
+            <div class="viewHtml-actions">
+                <button class="k-button viewHtml-update">Update</button>
+                <button class="k-button viewHtml-cancel">Cancel</button>
+            </div>
+        </div>
+    </script>
 
-        var buttonTemplate = kendo.ui.Editor.EditorUtils.buttonTemplate;
+    <script>
 
         $("#editor").kendoEditor({
             tools: [
                 {
                     name: "viewHtml",
-                    cssClass: "k-custom viewHtml",
                     tooltip: "View HTML",
-                    template: buttonTemplate
+                    exec: function(e) {
+                        var editor = $(this).data("kendoEditor");
+
+                        var dialog = $($("#viewHtml-template").html())
+                            .find("textarea").val(editor.value()).end()
+                            .find(".viewHtml-update")
+                                .click(function() {
+                                    editor.value(dialog.element.find("textarea").val());
+                                    dialog.close();
+                                })
+                            .end()
+                            .find(".viewHtml-cancel")
+                                .click(function() {
+                                    dialog.close();
+                                })
+                            .end()
+                            .kendoWindow({
+                                modal: true,
+                                title: "View HTML",
+                                deactivate: function() {
+                                    dialog.destroy();
+                                }
+                            }).data("kendoWindow");
+
+                        dialog.center().open();
+                    }
                 }
             ]
         });
