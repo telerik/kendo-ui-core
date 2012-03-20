@@ -18,6 +18,36 @@
 
     <div id="yearly-stock-prices"></div>
 
+    <script type="text/x-kendo-template" id="company-info-template">
+        <dl class="stat first">
+            <dt class="example-subtitle">
+                #= name # stock price
+                <span class="metric">US dollars</span>
+            </dt>
+            <dd class="eoy-closing"></dd>
+        </dl>
+
+        <dl class="stat">
+            <dt class="example-subtitle">
+                Highest
+                <span class="metric">US dollars</span>
+            </dt>
+            <dd class="highest"></dd>
+        </dl>
+
+        <dl class="stat">
+            <dt class="example-subtitle">
+                Lowest
+                <span class="metric">US dollars</span>
+            </dt>
+            <dd class="lowest"></dd>
+        </dl>
+    </script>
+
+    <div class="company-info" id="google"></div>
+    <div class="company-info" id="apple"></div>
+    <div class="company-info" id="amazon"></div>
+
     <script>
         var selectedYear = 2011;
 
@@ -52,8 +82,34 @@
 
             change: function() {
                 $("[name=chart-type][value=area]").prop("checked", true);
+
+                var view = this.view();
+
+                // populate detailed stock prices
+                populateStockPrices($("#google"), view[0]);
+                populateStockPrices($("#apple"), view[1]);
+                populateStockPrices($("#amazon"), view[2]);
             }
         });
+
+        function populateStockPrices(container, data) {
+            var yearlyStockValues = data.items,
+                highest = yearlyStockValues[0].high,
+                lowest = yearlyStockValues[0].low,
+                format = function(number) {
+                    return kendo.toString(number, "n");
+                };
+
+            $.each(yearlyStockValues, function() {
+                highest = this.high > highest ? this.high : highest;
+                lowest = this.low < lowest ? this.low : lowest;
+            });
+
+            container
+                .find(".eoy-closing").text(format(yearlyStockValues[yearlyStockValues.length - 1].close)).end()
+                .find(".highest").text(format(highest)).end()
+                .find(".lowest").text(format(lowest)).end();
+        }
 
         $("#yearly-stock-prices").kendoChart({
             dataSource: stocksDataSource,
@@ -133,6 +189,13 @@
             chart.redraw();
         });
 
+        var companyInfoTemplate = kendo.template($("#company-info-template").html());
+
+        $(".company-info").each(function() {
+            var panel = $(this);
+            panel.html(companyInfoTemplate({ name: panel.attr("id") }));
+        });
+
         $("#filtering-tabs").kendoTabStrip({
             dataSource: ["2007","2008","2009","2010","2011"],
             change: function(e) {
@@ -151,8 +214,31 @@
         .example-title,
         .example-subtitle,
         .metric,
-        .example-description {
+        .example-description,
+        .eoy-closing {
             font-family: 'Open Sans Condensed', Verdana, sans-serif;
+        }
+
+        .stat {
+            width: 20%;
+            margin-top: 35px;
+        }
+
+        .first {
+            width: 40%;
+            margin-top: 0;
+        }
+
+        .stat dd {
+            margin: 0;
+            line-height: 1em;
+        }
+
+        .stat {
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            vertical-align: top;
         }
 
         .example-title,
@@ -166,7 +252,8 @@
             font-weight: 300;
         }
 
-        .example-title span {
+        .example-title span,
+        .eoy-closing {
             font-weight: 700;
         }
 
@@ -178,10 +265,14 @@
 
         .example-subtitle {
             font-size: 13px;
+            font-weight: 700;
             margin-bottom: 0;
         }
 
         .metric {
+            display: block;
+            text-transform: none;
+            font-weight: 300;
             font-size: 12px;
             color: #727f8e;
             margin: 0;
@@ -241,6 +332,10 @@
         .radio-group label[for=chart-type-area] { background-image: url("../../content/dataviz/dashboards/area-chart.png"); }
         .radio-group label[for=chart-type-line] { background-image: url("../../content/dataviz/dashboards/line-chart.png"); }
 
+        .eoy-closing {
+            font-size: 100px;
+        }
+
         #filtering-tabs {
             border: 0;
             background: none;
@@ -281,6 +376,14 @@
             height: 200px;
             margin-top: 20px;
             clear: both;
+        }
+
+        .lowest {
+            color: #cd1533;
+        }
+
+        .highest {
+            color: #009bd7;
         }
     </style>
 </div>
