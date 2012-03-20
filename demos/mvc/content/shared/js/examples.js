@@ -84,7 +84,7 @@
             var wrapInner = $("#mainWrapInner");
 
             $.get(href + "?nav=true", function(html) {
-                var items = $(".demos-nav").find("li").removeClass("active"),
+                var items = $(".narrowCol:not(.mobile-devices), .wideCol").find("li").removeClass("active"),
                 widget = href.split("/");
                 widget = widget[widget.length - 2];
 
