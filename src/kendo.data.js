@@ -73,7 +73,7 @@
             if (toString.call(object) === "[object Object]") {
                 var observable = object instanceof that.type || object instanceof Model;
                 if (!observable) {
-                    object = observable instanceof ObservableObject ? object.toJSON : object;
+                    object = object instanceof ObservableObject ? object.toJSON() : object;
                     object = new that.type(object);
                 }
 
@@ -463,8 +463,8 @@
 
     Model.define = function(options) {
         var model,
-        proto = extend({}, { defaults: {} }, options),
-        id = proto.id;
+            proto = extend({}, { defaults: {} }, options),
+            id = proto.id;
 
         if (id) {
             proto.idField = id;
@@ -474,7 +474,9 @@
             delete proto.id;
         }
 
-        proto.defaults[id] = proto._defaultId = "";
+        if (id) {
+            proto.defaults[id] = proto._defaultId = "";
+        }
 
         for (var name in proto.fields) {
             var field = proto.fields[name],
@@ -1761,7 +1763,14 @@
                 wrap = !(data[0] instanceof model);
             }
 
-            data = data instanceof ObservableArray && !wrap ? data : new ObservableArray(data, that.reader.model);
+            if (data instanceof ObservableArray) {
+                if (wrap) {
+                    data.type = that.reader.model;
+                    data.wrapAll(data, data);
+                }
+            } else {
+                data = new ObservableArray(data, that.reader.model);
+            }
 
             return data.bind(CHANGE, proxy(that._change, that));
         },

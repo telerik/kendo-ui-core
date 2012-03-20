@@ -103,6 +103,13 @@
                 equal(model.id, 1);
             });
 
+            test("id is implicitly set if not set in metadata and no data", function() {
+                var MyModel = Model.define();
+                var model = new MyModel({});
+
+                ok(!("undefined" in model));
+            });
+
             test("define assigns field validation rules", function() {
                 var MyModel = Model.define({
                     fields: {
