@@ -1,4 +1,4 @@
-<div id="music" data-role="view" data-title="Form Elements" data-init="initForm">
+<div id="forms" data-role="view" data-title="Form Elements" data-init="initForm">
     <ul data-role="listview" data-style="inset">
         <li>
             <select>
@@ -18,7 +18,7 @@
                 <option value="First Option">Fifth Option</option>
                 <option value="Sixth Option">Fifth Option</option>
             </select>
-            Kendo DropDownList
+            DropDownList
         </li>
         <li>
             <input type="text" value="Text" />
@@ -71,8 +71,20 @@
         var body = $(".km-vertical");
 
         $("#dropdown").kendoDropDownList({
+            // The options are needed only for the desktop demo, remove them for mobile.
             popup: { appendTo: body },
             animation: { open: { effects: body.hasClass("km-android") ? "fadeIn" : body.hasClass("km-ios") ? "slideIn:up" : undefined } }
         });
     }
 </script>
+
+<style scoped>
+    #forms input,
+    #forms select,
+    #forms .k-dropdown
+    {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 50%;
+    }
+</style>
