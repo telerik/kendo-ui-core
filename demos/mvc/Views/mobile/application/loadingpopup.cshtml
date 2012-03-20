@@ -1,8 +1,8 @@
-<div id="loading" data-role="view" class="km-insetcontent" data-init="viewInit" data-title="Loading Popup">
+<div id="loading" data-role="view" class="km-insetcontent" data-init="viewInit" data-hide="viewHide" data-title="Loading Popup">
     <button id="show" data-role="button">Show Loading Popup</button>
 </div>
 <script>
-    var showButton;
+    var showButton, interval;
 
     function viewInit(e) {
         showButton = $("#show").bind(kendo.support.mouseup, function() {
@@ -11,10 +11,20 @@
                      });
     }
 
+    function hideLoader() {
+        clearInterval(interval);
+        showButton.fadeIn();
+        kendoMobileApplication.hideLoading(); //hide loading popup
+        kendoMobileApplication.loader.find("h1").removeClass("loaderHeading");
+    }
+
+    function viewHide(e) {
+        hideLoader();
+    }
+
     function startLoading() {
         var seconds = 5,
-            headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!").addClass("loaderHeading"),
-            interval;
+            headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!").addClass("loaderHeading");
 
         kendoMobileApplication.showLoading(); //show loading popup
 
@@ -22,12 +32,8 @@
             headingTag.text(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
-                clearInterval(interval);
-                kendoMobileApplication.hideLoading(); //hide loading popup
-                showButton.fadeIn();
-                headingTag.removeClass("loaderHeading");
+                hideLoader();
             }
-
         }, 1000);
     }
 </script>

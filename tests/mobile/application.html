@@ -248,12 +248,19 @@
                 equal(application.element.find("#view-title").text(), "foo", "view title applies view title attribute");
             });
 
-            test("Runs attached view event handlers", 1, function() {
+            test("Runs attached view event handlers", 3, function() {
                 window.foo = function() {
                     ok(true, "view init event handler is called");
                 };
+                window.bar = function() {
+                    ok(true, "view show event handler is called");
+                };
+                window.baz = function() {
+                    ok(true, "view hide event handler is called");
+                };
 
-                setup('<div data-init="foo" data-role="view">View</div>');
+                setup('<div data-init="foo" data-show="bar" data-hide="baz" data-role="view">View</div><div id="view2" data-role="view">View 2</div>');
+                application.navigate("view2");
             });
 
             test("Pass application instance to the view", function() {
@@ -380,7 +387,7 @@
                         start();
                         ok(true);
                     }
-                })
+                });
 
                 drag.trigger("start", drag);
                 drag.y.delta = 200;
@@ -430,6 +437,11 @@
                 setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-show="success" />');
             });
 
+            test("Layout triggers hide", 1, function() {
+                setup('<div data-role="view" data-layout="foo"></div><div data-id="foo" data-role="layout" data-hide="success" /><div id="view2" data-role="view">View 2</div>');
+                application.navigate("view2");
+            });
+
             test("Loads initial view depending on options", function() {
                 setup('<div data-role="view" id="test1">Page 1</div><div data-role="view" id="page2">Page 2</div>', {
                     initial: "page2"
@@ -457,7 +469,7 @@
                     bar: {
                         baz: "baz"
                     }
-                }
+                };
 
                 setup('<div data-role="view" data-model="foo.bar"></div>');
 
