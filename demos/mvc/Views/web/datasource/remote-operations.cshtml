@@ -14,7 +14,7 @@
                         <select id="order" style="width:115px;float:right;">
                             <option value="Id">Id</option>
                             <option value="Name">Name</option>
-                            <option value="AverageRating">Average Rating</option>
+                            <option value="AverageRating">Rating</option>
                             <option value="ReleaseYear">Release Year</option>
                         </select>
                     </li>
@@ -31,7 +31,7 @@
                 </ul>
             </div>
 
-            <div id="movies-container" class="k-widget k-header k-menu-vertical">
+            <div id="movies-container">
                 <ul id="movies"></ul>
             </div>
 
@@ -40,12 +40,8 @@
                     # if (BoxArt.LargeUrl) { #
                         <img src="#= BoxArt.LargeUrl #" />
                     # } #
-                    <dl>
-                        <dt>Name:</dt>
-                        <dd>#= Name #</dd>
-                        <dt>Average Rating:</dt>
-                        <dd>#= AverageRating #</dd>
-                    </dl>
+                    <h4>#= Name #</h4>
+                    <p>Rating: #= AverageRating #</p>
                 </li>
             </script>
 
@@ -103,9 +99,16 @@
                 #movies-container {
                     padding: 10px;
                     overflow: auto;
-                    height: 400px;
-                    margin: 0 220px 0 0;
-                    border-radius: 5px;
+                    width: 650px;
+                    height: 500px;
+                    margin: 30px auto;
+                    border: 1px solid #bbb;
+                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+                    -webkit-border-radius: 8px;
+                    -moz-border-radius: 8px;
+                    border-radius: 8px;
                 }
 
                 #movies {
@@ -118,27 +121,27 @@
                     width: 47%;
                     list-style-type: none;
                     margin: 0 0 20px;
-                    height: 160px;
+                    height: 170px;
                     overflow: hidden;
                 }
 
                 .title img {
                     float: left;
-                    border-radius: 3px;
-                    box-shadow: 0 0 5px #ccc;
+                    height: 150px;
+                    -webkit-border-radius: 13px;
+                    -moz-border-radius: 13px;
+                    border-radius: 13px;
+                    box-shadow: 0 0 4px #CCCCFF;
+                    border: 5px solid transparent;
                 }
-
-                .title dl {
+                
+                .title h4, .title p {
                     margin-left: 133px;
                 }
-
-                .title dt {
-                    font-weight: bold;
-                }
-
-                .title dd {
-                    padding: 5px 0 10px;
-                    margin: 0;
+                
+                .title h4 {
+                   font-size: 1.1em;
+                   color: #e26b1d;
                 }
             </style>
         </div>
