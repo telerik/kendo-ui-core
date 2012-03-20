@@ -48,6 +48,10 @@
                         }
                     }
                 }
+            },
+
+            change: function() {
+                $("[name=chart-type][value=area]").prop("checked", true);
             }
         });
 
@@ -116,8 +120,8 @@
 
         $("[name=chart-type]").on("click", function() {
             var chart = $("#yearly-stock-prices").data("kendoChart"),
-            allSeries = chart.options.series,
-            newSeriesType = $(this).val();
+                allSeries = chart.options.series,
+                newSeriesType = $(this).val();
 
             chart.options.seriesDefaults.type = newSeriesType;
 
@@ -191,9 +195,11 @@
 
         #chart-type-chooser {
             float: right;
+            margin-right: .2%;
             width: 170px;
             text-align: right;
             line-height: 32px;
+            margin-top: -30px;
         }
 
         .radio-group-label {
@@ -240,6 +246,10 @@
             background: none;
         }
 
+        #filtering-tabs .k-tabstrip-items {
+            padding: 0;
+        }
+
         #filtering-tabs .k-item {
             width: 19.6%;
             border: 0;
@@ -247,6 +257,7 @@
             padding: 0 0 2px;
             text-align: center;
             cursor: pointer;
+            background: none;
             border-bottom: 6px solid #b3bbc5;
             font: 16px/2em Arial,sans-serif;
             color: #727f8e;
@@ -268,6 +279,7 @@
 
         #yearly-stock-prices {
             height: 200px;
+            margin-top: 20px;
             clear: both;
         }
     </style>
