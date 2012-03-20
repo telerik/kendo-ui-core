@@ -397,14 +397,11 @@
          *         close: {
          *             duration: 1000,
          *             effects: "fadeOut"
-         *             hide: true,
-         *             show: false
          *         },
          *        // fade-in and expand opening items over 500 milliseconds
          *        open: {
          *            duration: 500,
-         *            effects: "expandVertical fadeIn",
-         *            show: true
+         *            effects: "expandVertical fadeIn"
          *        }
          *    }
          * });
@@ -418,8 +415,7 @@
          *     animation: {
          *         open: {
          *             duration: 200,
-         *             effects: "expandVertical",
-         *             show: true
+         *             effects: "expandVertical"
          *         }
          *     }
          * });
@@ -440,8 +436,6 @@
          * @option {String} [animation.open.effects] <"expandVertical">
          * A whitespace-delimited string of animation effects that are used when an item is expanded. Options include
          * <strong>"expandVertical"</strong> and <strong>"fadeIn"</strong>.
-         *
-         * @option {Boolean} [animation.open.hide]
          *
          * @option {Boolean} [animation.open.show] <true>
          *
@@ -487,10 +481,6 @@
          *         }
          *     }
          * });
-         *
-         * @option {Boolean} [animation.close.hide] <true>
-         *
-         * @option {Boolean} [animation.close.show] <false>
          *
          * @option {String} [expandMode] <"multiple">
          * Specifies how the <strong>PanelBar</strong> items are displayed when opened and closed. The following values
