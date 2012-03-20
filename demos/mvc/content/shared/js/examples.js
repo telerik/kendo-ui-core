@@ -104,7 +104,9 @@
 
                 $($.grep(items, condition)).addClass("active");
 
-                if (href.indexOf("mobile") == -1) {
+                if (widget == "dashboards") {
+                    $("#themeWrap").hide();
+                } else if (href.indexOf("mobile") == -1) {
                     $("#themeWrap").show();
                 }
 
