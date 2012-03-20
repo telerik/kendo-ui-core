@@ -545,9 +545,11 @@
 
             that.drag.bind(["move", "end"], {
                 move: function(e) {
-                    x.dragMove(e.x.delta);
-                    y.dragMove(e.y.delta);
-                    e.preventDefault();
+                    if (x.dimension.present() || y.dimension.present()) {
+                        x.dragMove(e.x.delta);
+                        y.dragMove(e.y.delta);
+                        e.preventDefault();
+                    }
                 },
 
                 end: function(e) {
