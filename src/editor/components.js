@@ -161,7 +161,7 @@ var ColorPicker = Widget.extend({
             duration: 200,
             complete: function() {
                 if (that._popup) {
-                    dom.remove(that._popup);
+                    dom.remove(that._popup[0]);
                     that._popup = null;
                 }
             }
