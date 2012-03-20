@@ -84,6 +84,9 @@
             var wrapInner = $("#mainWrapInner");
 
             $.get(href + "?nav=true", function(html) {
+                if (href.indexOf("mobile") == -1) {
+                    $("#themeWrap").show();
+                }
                 $("#mainWrap").removeClass("widgetOverview");
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     wrapInner.replaceWith(html);
@@ -419,8 +422,6 @@
                    .filter(function() {
                        return $(this).data("value") === theme;
                    }).children("span").addClass("k-state-selected");
-
-                   changeTheme(theme);
         });
     };
 
