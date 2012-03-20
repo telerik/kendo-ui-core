@@ -2,8 +2,8 @@
 
 var kendo = window.kendo,
     Class = kendo.Class,
-    Editor = kendo.ui.Editor,
-    formats = Editor.fn.options.formats,
+    Editor = kendo.ui.editor,
+    formats = kendo.ui.Editor.fn.options.formats,
     EditorUtils = Editor.EditorUtils,
     Tool = Editor.Tool,
     ToolTemplate = Editor.ToolTemplate,
@@ -455,7 +455,7 @@ var StyleTool = Tool.extend({
 
 });
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     InlineFormatFinder: InlineFormatFinder,
     InlineFormatter: InlineFormatter,
     GreedyInlineFormatFinder: GreedyInlineFormatFinder,

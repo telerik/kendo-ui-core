@@ -48,7 +48,7 @@ function getRangeFromHtml(html) {
 
     return range;
 }
-        
+
 module("Editor / Range", {
     setup: function() {
         editor = getEditor();
@@ -191,7 +191,7 @@ test('insertNode on expanded range inserts node at start', function() {
 });
 
 test('insertNode on collapsed range at end of text element', function() {
-        
+
     editor.value('golgafrincham<br />');
 
     var range = editor.createRange();
@@ -221,12 +221,12 @@ test('extractContents extracts tags', function() {
     editor.value('golga<strong>frincham</strong>');
 
     var range = editor.createRange();
-            
+
     range.setStart(editor.body.lastChild.firstChild, 4);
     range.setEndAfter(editor.body.lastChild);
 
     var contents = range.extractContents();
-            
+
     equal(contents.childNodes.length, 1);
     equal(contents.firstChild.tagName.toLowerCase(), 'strong');
     equal(contents.firstChild.innerHTML.toLowerCase(), 'cham');
@@ -246,7 +246,7 @@ test('extractContents after range manipulation', function() {
     range.setEndAfter(editor.body.lastChild);
 
     var contents = range.extractContents();
-            
+
     equal(editor.value(), 'golg');
     equal(contents.childNodes.length, 2);
     equal(contents.firstChild.nodeValue, 'a');
@@ -270,8 +270,8 @@ test('extractContents updates original range when container is text node', funct
 
 test('extractContents updates original range when container is element node', function() {
     var range = createRangeFromText(editor, '<strong>|fo|o</strong>');
-        
-    var marker = new kendo.ui.Editor.Marker();
+
+    var marker = new kendo.ui.editor.Marker();
     marker.add(range);
 
     var leftRange = range.cloneRange();
@@ -420,7 +420,7 @@ test('setEndAfter validation across sibling containers', function() {
 test('getRange returns body when editor is empty', function() {
     editor.value('');
     editor.focus();
-            
+
     var range = editor.getRange();
 
     equal(range.startContainer, editor.body);

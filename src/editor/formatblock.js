@@ -3,8 +3,8 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    Editor = kendo.ui.Editor,
-    formats = Editor.fn.options.formats,
+    Editor = kendo.ui.editor,
+    formats = kendo.ui.Editor.fn.options.formats,
     dom = Editor.Dom,
     Command = Editor.Command,
     Tool = Editor.Tool,
@@ -288,7 +288,7 @@ var FormatBlockTool = Tool.extend({
 
 });
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     BlockFormatFinder: BlockFormatFinder,
     BlockFormatter: BlockFormatter,
     GreedyBlockFormatter: GreedyBlockFormatter,

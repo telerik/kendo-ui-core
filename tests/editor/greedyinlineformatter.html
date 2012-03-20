@@ -36,7 +36,7 @@
             module("Editor / GreedyInlineFormatter", {
                 setup: function() {
                     editor = getEditor();
-                    GreedyInlineFormatter = kendo.ui.Editor.GreedyInlineFormatter;
+                    GreedyInlineFormatter = kendo.ui.editor.GreedyInlineFormatter;
                 }
             });
 
@@ -58,7 +58,7 @@
                 var range = createRangeFromText(editor, '<span style="font-family:Courier;">fo|o</span>bar|');
                 var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'Arial' } }, 'font-family');
 
-                var marker = new kendo.ui.Editor.Marker();
+                var marker = new kendo.ui.editor.Marker();
                 marker.add(range);
                 formatter.toggle(range);
                 marker.remove(range);
@@ -70,7 +70,7 @@
                 var range = createRangeFromText(editor, '<span style="font-family:Courier;">fo|o</span>bar|');
                 var formatter = new GreedyInlineFormatter([{ tags: ['span'] }], { style: { fontFamily: 'inherit' } }, 'font-family');
 
-                var marker = new kendo.ui.Editor.Marker();
+                var marker = new kendo.ui.editor.Marker();
                 marker.add(range);
                 formatter.toggle(range);
                 marker.remove(range);

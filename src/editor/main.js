@@ -302,7 +302,7 @@
 
             var range = editor.getRange(),
                 startContainer = range.startContainer,
-                dom = Editor.Dom;
+                dom = kendo.ui.editor.Dom;
 
             if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
             || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, "br"))))
@@ -325,7 +325,7 @@
 
             range.setStart(previousBlock, dom.isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
             range.collapse(true);
-            Editor.RangeUtils.selectRange(range);
+            kendo.ui.editor.RangeUtils.selectRange(range);
 
             dom.remove(startContainer);
 
@@ -347,7 +347,7 @@
         },
 
         registerFormat: function(formatName, format) {
-            Editor.fn.options.formats[formatName] = format;
+            kendo.ui.Editor.fn.options.formats[formatName] = format;
         }
     };
 
@@ -430,13 +430,13 @@
 
             initializeContentElement(that);
 
-            that.keyboard = new Editor.Keyboard([new Editor.TypingHandler(that), new Editor.SystemHandler(that)]);
+            that.keyboard = new kendo.ui.editor.Keyboard([new kendo.ui.editor.TypingHandler(that), new kendo.ui.editor.SystemHandler(that)]);
 
-            that.clipboard = new Editor.Clipboard(this);
+            that.clipboard = new kendo.ui.editor.Clipboard(this);
 
-            that.pendingFormats = new Editor.PendingFormats(this);
+            that.pendingFormats = new kendo.ui.editor.PendingFormats(this);
 
-            that.undoRedoStack = new Editor.UndoRedoStack();
+            that.undoRedoStack = new kendo.ui.editor.UndoRedoStack();
 
             if (options && options.value) {
                 that.value(options.value);
@@ -559,7 +559,7 @@
                 that.bind("select", function() {
                     var range = that.getRange();
 
-                    var nodes = Editor.RangeUtils.textNodes(range);
+                    var nodes = kendo.ui.editor.RangeUtils.textNodes(range);
 
                     if (!nodes.length) {
                         nodes = [range.startContainer];
@@ -590,7 +590,7 @@
                             that.keyboard.endTyping(true);
 
                         if (!that.selectionRestorePoint) {
-                            that.selectionRestorePoint = new Editor.RestorePoint(that.getRange());
+                            that.selectionRestorePoint = new kendo.ui.editor.RestorePoint(that.getRange());
                         }
                     } catch (e) { }
                 });
@@ -690,8 +690,8 @@
 
         value: function (html) {
             var body = this.body,
-                dom = Editor.Dom;
-            if (html === undefined) return Editor.Serializer.domToXhtml(body);
+                dom = kendo.ui.editor.Dom;
+            if (html === undefined) return kendo.ui.editor.Serializer.domToXhtml(body);
 
             this.pendingFormats.clear();
 
@@ -754,15 +754,15 @@
         },
 
         encodedValue: function () {
-            return Editor.Dom.encode(this.value());
+            return kendo.ui.editor.Dom.encode(this.value());
         },
 
         createRange: function (document) {
-            return Editor.RangeUtils.createRange(document || this.document);
+            return kendo.ui.editor.RangeUtils.createRange(document || this.document);
         },
 
         getSelection: function () {
-            return Editor.SelectionUtils.selectionFromDocument(this.document);
+            return kendo.ui.editor.SelectionUtils.selectionFromDocument(this.document);
         },
 
         selectRange: function(range) {
@@ -785,7 +785,7 @@
         },
 
         selectedHtml: function() {
-            return Editor.Serializer.domToXhtml(this.getRange().cloneContents());
+            return kendo.ui.editor.Serializer.domToXhtml(this.getRange().cloneContents());
         },
 
         paste: function (html) {
@@ -887,7 +887,7 @@
 
         command: function (commandArguments) {
             var that = this;
-            return new Editor.FormatCommand(extend(commandArguments, {
+            return new kendo.ui.editor.FormatCommand(extend(commandArguments, {
                     formatter: that.options.formatter
                 }));
         },
@@ -903,11 +903,13 @@
 
     // Exports ================================================================
 
-    extend(kendo.ui.Editor, {
-        ToolTemplate: ToolTemplate,
-        EditorUtils: EditorUtils,
-        Tool: Tool,
-        FormatTool: FormatTool
+    extend(kendo.ui, {
+        editor:{
+            ToolTemplate: ToolTemplate,
+            EditorUtils: EditorUtils,
+            Tool: Tool,
+            FormatTool: FormatTool
+        }
     });
 
 })(jQuery);

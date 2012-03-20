@@ -46,7 +46,7 @@ module("Style", {
     setup: function() {
         editor = getEditor();
         $('#Editor1 .k-style .k-input').click();
-        StyleCommand = kendo.ui.Editor.StyleCommand;
+        StyleCommand = kendo.ui.editor.StyleCommand;
     }
 });
 
@@ -59,16 +59,16 @@ test('exec applies css class to inline element', function() {
 
 test('styles applied to list item', function() {
     var span = $('.k-animation-container .k-item span')[0];
-        
+
     if (!span) return; //does not currently work in IE!
 
     equal($.telerik.editor.Dom.toHex(span.style.color), '#a0b0c0');
-        
+
     equal(span.style.paddingLeft, "42px");
     equal(span.style.paddingRight, "42px");
     equal(span.style.paddingTop, "42px");
     equal(span.style.paddingBottom, "42px");
-        
+
     equal($.telerik.editor.Dom.toHex(span.style.backgroundColor), '#f1f1f1');
     equal(span.style.backgroundAttachment, "fixed");
     equal(span.style.backgroundImage, "none");
@@ -77,15 +77,15 @@ test('styles applied to list item', function() {
     equal(span.style.borderTopStyle, "solid");
     equal(span.style.borderTopWidth, "1px");
     equal($.telerik.editor.Dom.toHex(span.style.borderTopColor), "#a0b0c0");
-        
+
     equal(span.style.borderRightStyle, "solid");
     equal(span.style.borderRightWidth, "1px");
     equal($.telerik.editor.Dom.toHex(span.style.borderRightColor), "#a0b0c0");
-        
+
     equal(span.style.borderLeftStyle, "solid");
     equal(span.style.borderLeftWidth, "1px");
     equal($.telerik.editor.Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
-        
+
     equal(span.style.borderLeftStyle, "solid");
     equal(span.style.borderLeftWidth, "1px");
     equal($.telerik.editor.Dom.toHex(span.style.borderLeftColor), "#a0b0c0");
@@ -104,7 +104,7 @@ test('tool displays styles initially', function() {
     $(editor.element).trigger('selectionChange');
     equal($('.k-style .k-input').text(), 'Styles')
 });
-    
+
 test('tool displays known values', function() {
     editor.focus();
     var range = createRangeFromText(editor, '<span class="foo">|foo|</span>');

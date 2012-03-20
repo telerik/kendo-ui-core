@@ -4,7 +4,7 @@
     var doc = document,
         kendo = window.kendo,
         Class = kendo.Class,
-        Editor = kendo.ui.Editor,
+        Editor = kendo.ui.editor,
         EditorUtils = Editor.EditorUtils,
         registerTool = EditorUtils.registerTool,
         dom = Editor.Dom,
@@ -598,7 +598,7 @@ var MSWordFormatCleaner = Class.extend({
     }
 });
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     Command: Command,
     GenericCommand: GenericCommand,
     InsertHtmlCommand: InsertHtmlCommand,

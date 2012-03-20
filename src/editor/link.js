@@ -3,7 +3,7 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     dom = Editor.Dom,
     RangeUtils = Editor.RangeUtils,
     EditorUtils = Editor.EditorUtils,
@@ -193,7 +193,7 @@ var UnlinkTool = Tool.extend({
     }
 });
 
-extend(kendo.ui.Editor, {
+extend(kendo.ui.editor, {
     LinkFormatFinder: LinkFormatFinder,
     LinkFormatter: LinkFormatter,
     UnlinkCommand: UnlinkCommand,

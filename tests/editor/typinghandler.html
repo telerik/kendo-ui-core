@@ -36,7 +36,7 @@ $("#Editor1").kendoEditor();
 
 module("Editor / TypingHandler", {
     setup: function() {
-        TypingHandler = kendo.ui.Editor.TypingHandler;
+        TypingHandler = kendo.ui.editor.TypingHandler;
         editor = getEditor();
         editor.focus();
 
@@ -85,7 +85,7 @@ test('typing handler keydown returns true', function() {
     var handler = new TypingHandler(editor);
     ok(handler.keydown())
 });
-        
+
 test('typing handler keydown returns false if typing is in progress', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
@@ -117,11 +117,11 @@ test('typing handler keyup creates end restore point if typing', function() {
     };
 
     var handler = new TypingHandler(editor);
-            
+
     handler.keydown();
-            
+
     editor.keyboard.isTypingInProgress = function() { return true};
-            
+
     handler.keyup();
 
     ok(undefined !== handler.endRestorePoint);
@@ -137,15 +137,15 @@ test('typing handler keyup creates undo command', function() {
 
     var command;
     editor.undoRedoStack.push = function(){ command = arguments[0] };
-            
+
     var handler = new TypingHandler(editor);
-            
+
     handler.keydown();
-            
+
     editor.keyboard.isTypingInProgress = function() { return true};
-            
+
     handler.keyup();
-            
+
     ok(undefined !== command);
 });
 
@@ -159,16 +159,16 @@ test('typing handler keyup returns true when typing', function() {
 
     var command;
     editor.undoRedoStack.push = function(){ command = arguments[0] };
-            
+
     var handler = new TypingHandler(editor);
-            
+
     handler.keydown();
-            
+
     editor.keyboard.isTypingInProgress = function() { return true};
-            
+
     ok(handler.keyup())
 });
-        
+
 test('typing handler keyup returns false when not typing', function() {
     editor.keyboard = {
         isTypingKey: function () { return true; },
@@ -179,11 +179,11 @@ test('typing handler keyup returns false when not typing', function() {
 
     var command;
     editor.undoRedoStack.push = function(){ command = arguments[0] };
-            
+
     var handler = new TypingHandler(editor);
-            
+
     handler.keydown();
-            
+
     ok(!handler.keyup())
 });
 

@@ -36,7 +36,7 @@
             module("FormatCommand", {
                 setup: function() {
                     editor = getEditor();
-                    FormatCommand = kendo.ui.Editor.FormatCommand;
+                    FormatCommand = kendo.ui.editor.FormatCommand;
                 }
             });
 
@@ -88,21 +88,21 @@
                 editor.selectRange(range);
                 editor.exec('fontName', {value: 'Arial'});
                 equal(editor.value(), '<span style="font-family:Arial;">foo</span>');
-            });        
+            });
 
             test('fontSize exec', function() {
                 var range = createRangeFromText(editor, '|foo|');
                 editor.selectRange(range);
                 editor.exec('fontSize', {value: '8pt'});
                 equal(editor.value(), '<span style="font-size:8pt;">foo</span>');
-            });        
+            });
 
             test('foreColor exec', function() {
                 var range = createRangeFromText(editor, '|foo|');
                 editor.selectRange(range);
                 editor.exec('foreColor', {value: '#a0b0c0'});
                 equal(editor.value(), '<span style="color:#a0b0c0;">foo</span>');
-            });        
+            });
 
             test('backColor exec', function() {
                 var range = createRangeFromText(editor, '|foo|');

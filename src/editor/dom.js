@@ -423,6 +423,6 @@ var Dom = {
     }
 }
 
-kendo.ui.Editor.Dom = Dom;
+kendo.ui.editor.Dom = Dom;
 
 })(jQuery);

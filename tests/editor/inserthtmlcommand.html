@@ -35,7 +35,7 @@ $("#Editor1").kendoEditor();
 
 QUnit.testStart = function() {
     editor = getEditor();
-    InsertHtmlCommand = kendo.ui.Editor.InsertHtmlCommand;
+    InsertHtmlCommand = kendo.ui.editor.InsertHtmlCommand;
 }
 
 test('exec calls clipboard paste', function() {
@@ -43,8 +43,8 @@ test('exec calls clipboard paste', function() {
 
     var oldPaste = editor.clipboard.paste;
     var argument;
-            
-    try { 
+
+    try {
         editor.clipboard.paste = function() { argument = arguments[0]; }
 
         var command = new InsertHtmlCommand({ range:range, value: '<span class="test-icon"></span>' });

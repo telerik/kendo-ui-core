@@ -34,14 +34,14 @@
             });
 
             function expandRange(range) {
-                var marker = new kendo.ui.Editor.Marker(range);
+                var marker = new kendo.ui.editor.Marker(range);
                 marker.addCaret(range);
                 return impl.expand(range);
             }
 
             module("Editor / ExpandRange", {
                 setup: function() {
-                    impl = kendo.ui.Editor.RangeUtils;
+                    impl = kendo.ui.editor.RangeUtils;
 
                     editor = getEditor();
                     editor.focus();

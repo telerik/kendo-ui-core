@@ -2,7 +2,7 @@
 
 var kendo = window.kendo,
     Widget = kendo.ui.Widget,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     dom = Editor.Dom,
     CHANGE = "change",
     KSTATESELECTED = "k-state-selected",

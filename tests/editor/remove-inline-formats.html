@@ -36,11 +36,11 @@ $("#Editor1").kendoEditor({
 QUnit.testStart = function() {
     impl = {
         formatRange: function(range, format) {
-            var command = new kendo.ui.Editor.FormatCommand({
+            var command = new kendo.ui.editor.FormatCommand({
                 range:range,
                 format: format,
                 formatter: function() {
-                    return new kendo.ui.Editor.InlineFormatter(format);
+                    return new kendo.ui.editor.InlineFormatter(format);
                 }
             })
             command.exec();
@@ -56,13 +56,13 @@ test('removeFormat removes format from text range', function() {
     var range = editor.createRange();
     range.setStart(strongContent, 0);
     range.setEnd(strongContent, 13);
-            
+
     impl.formatRange(range, editor.options.formats.bold);
-            
+
     equal(editor.value(), '<p>golgafrincham telephone sanitisers</p>');
     equal(editor.body.firstChild.childNodes.length, 1);
 });
-        
+
 test('removeFormat removes format from selected node contents', function() {
     editor.value('<strong>golga<em>fr</em>in</strong>');
 
@@ -109,7 +109,7 @@ test('removeFormat when there is unformatted content before formatted', function
 
     equal(editor.value(), 'foo');
 });
-        
+
 test('removeFormat when there is unformatted content after formatted', function() {
     editor.value('<strong>fo</strong>ob');
     var range = editor.createRange();
@@ -125,9 +125,9 @@ test('remove styled format from selection', function() {
     var range = editor.createRange();
     range.setStart(editor.body.firstChild.firstChild, 1);
     range.setEnd(editor.body.firstChild.firstChild, 2);
-            
+
     impl.formatRange(range, editor.options.formats.underline);
-            
+
     equal(editor.value(), '<span style="text-decoration:underline;">f</span>o<span style="text-decoration:underline;">o</span>');
 });
 

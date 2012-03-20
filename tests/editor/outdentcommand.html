@@ -36,7 +36,7 @@ var OutdentCommand;
 module("Editor / OutdentCommand", {
     setup: function() {
         editor = getEditor();
-        OutdentCommand = kendo.ui.Editor.OutdentCommand;
+        OutdentCommand = kendo.ui.editor.OutdentCommand;
     }
 });
 
@@ -55,7 +55,7 @@ test('undo removes margin', function() {
 
     equal(editor.value(), '<div style="margin-left:30px;">foo</div>');
 });
-        
+
 test('redo indents', function() {
     var range = createRangeFromText(editor, '<div style="margin-left:30px;">|foo|</div>');
     var command = new OutdentCommand({ range: range });
@@ -71,8 +71,8 @@ test('tool is initially disabled', function() {
     editor.focus();
     editor.trigger('select');
     ok($('.k-outdent').hasClass('k-state-disabled'));
-});    
-        
+});
+
 test('tool is enabled when cursor is inside block node with marginLeft', function() {
     var range = createRangeFromText(editor, '<p style="margin-left:10px">|foo|</p>');
     editor.selectRange(range);
@@ -88,7 +88,7 @@ test('tool is enabled for nested list item', function() {
     editor.trigger('select');
     ok(!$('.k-outdent').hasClass('k-state-disabled'));
 });
-        
+
 test('tool is disabled for first-level lists', function() {
     var range = createRangeFromText(editor, '<ul><li>|foo|</li></ul>');
     editor.selectRange(range);
@@ -96,7 +96,7 @@ test('tool is disabled for first-level lists', function() {
     editor.trigger('select');
     ok($('.k-outdent').hasClass('k-state-disabled'));
 });
-        
+
 test('tool is enabled for first-level lists with marginLeft', function() {
     var range = createRangeFromText(editor, '<ul style="margin-left:30px;"><li>|foo|</li></ul>');
     editor.selectRange(range);

@@ -4,7 +4,7 @@
 var kendo = window.kendo,
     Class = kendo.Class,
     extend = $.extend,
-    Editor = kendo.ui.Editor,
+    Editor = kendo.ui.editor,
     dom = Editor.Dom,
     EditorUtils = Editor.EditorUtils,
     registerTool = EditorUtils.registerTool,
@@ -210,7 +210,7 @@ var OutdentTool = Tool.extend({
     }
 });
 
-extend(kendo.ui.Editor, {
+extend(Editor, {
     IndentFormatter: IndentFormatter,
     IndentCommand: IndentCommand,
     OutdentCommand: OutdentCommand,

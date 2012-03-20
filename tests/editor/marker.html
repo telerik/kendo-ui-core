@@ -53,19 +53,19 @@ function createRange(startContainer, startOffset, endContainer, endOffset) {
 
 QUnit.testStart = function() {
     editor = getEditor();
-    Marker = kendo.ui.Editor.Marker;
+    Marker = kendo.ui.editor.Marker;
 }
 
 test('addMarker inserts markers', function() {
     editor.value('foo');
-            
+
     var range = createRange(editor.body.firstChild, 1, editor.body.firstChild, 2);
 
     var marker = new Marker();
     marker.add(range);
 
     equal(editor.value(), 'f<span class="k-marker"></span>o<span class="k-marker"></span>o');
-        
+
 });
 test('addMarker normalizes', function() {
     editor.value('foo');
@@ -74,13 +74,13 @@ test('addMarker normalizes', function() {
 
     var marker = new Marker();
     marker.add(range);
-            
+
     ok(editor.body.childNodes.length < 5);
 });
 
 test('addMarker does not remove line breaks', function() {
     editor.value('foo<br />bar');
-            
+
     var range = createRange(editor.body.firstChild, 0, editor.body.firstChild, 3);
 
     var marker = new Marker();
@@ -91,7 +91,7 @@ test('addMarker does not remove line breaks', function() {
 
 test('addMarker on collapsed range', function() {
     editor.value('foo');
-            
+
     var range = createCollapsedRange(editor.body.firstChild, 1);
 
     var marker = new Marker();
@@ -99,37 +99,37 @@ test('addMarker on collapsed range', function() {
 
     equal(editor.value(), 'f<span class="k-marker"></span><span class="k-marker"></span>oo');
 });
-        
+
 test('removeMarker removes markers', function() {
     var range = createRangeFromText(editor, '|foo|');
-            
+
     var marker = new Marker();
     marker.add(range);
     marker.remove(range);
 
     equal(editor.value(), 'foo');
 });
-        
+
 test('removeMarker restores range', function() {
     var range = createRangeFromText(editor, '|foo|');
 
     var marker = new Marker();
     marker.add(range);
     marker.remove(range);
-            
+
     equal(range.startContainer, editor.body.firstChild);
     equal(range.endContainer, editor.body.firstChild);
     equal(range.startOffset, 0);
     equal(range.endOffset, 3);
 });
-        
+
 test('removeMarker normalizes neighbouring text nodes', function() {
     var range = createRangeFromText(editor, 'foo|bar|baz');
 
     var marker = new Marker();
     marker.add(range);
     marker.remove(range);
-            
+
     equal(editor.body.childNodes.length, 1);
     equal(range.startContainer, editor.body.firstChild);
     equal(range.endContainer, editor.body.firstChild);
@@ -144,7 +144,7 @@ test('removeMarker on collapsed range', function() {
     var marker = new Marker();
     marker.add(range);
     marker.remove(range);
-            
+
     equal(range.startContainer, editor.body.firstChild);
     equal(range.startOffset, 1);
     equal(range.collapsed, true);
@@ -156,8 +156,8 @@ test('addMarker on collapsed range selects markers', function() {
     var range = editor.createRange();
     range.setStart(editor.body.firstChild, 3);
     range.collapse(true);
-        
-    var marker = new kendo.ui.Editor.Marker();
+
+    var marker = new kendo.ui.editor.Marker();
     range = marker.add(range, true);
 
     equal(range.startContainer, editor.body);
@@ -168,7 +168,7 @@ test('addMarker on collapsed range selects markers', function() {
 
 test('addCaretMarker inserts caret marker', function() {
     editor.value('foo');
-            
+
     var range = createCollapsedRange(editor.body.firstChild, 2);
 
     var marker = new Marker();
@@ -179,7 +179,7 @@ test('addCaretMarker inserts caret marker', function() {
 
 test('addCaretMarker updates range to include caret marker', function() {
     editor.value('foo');
-            
+
     var range = createCollapsedRange(editor.body.firstChild, 2);
 
     var marker = new Marker();
@@ -193,7 +193,7 @@ test('addCaretMarker updates range to include caret marker', function() {
 
 test('removeCaretMarker removes caret marker', function() {
     editor.value('foo');
-            
+
     var range = createRange(editor.body.firstChild, 1, editor.body.firstChild, 2);
     var marker = new Marker();
     marker.addCaret(range);
@@ -204,7 +204,7 @@ test('removeCaretMarker removes caret marker', function() {
 
 test('removeCaretMarker normalizes dom', function() {
     editor.value('foo');
-            
+
     var range = createRange(editor.body.firstChild, 1, editor.body.firstChild, 2);
     var marker = new Marker();
     marker.addCaret(range);
@@ -215,7 +215,7 @@ test('removeCaretMarker normalizes dom', function() {
 
 test('removeCaretMarker updates range to collapsed state', function() {
     editor.value('foo');
-            
+
     var range = createRange(editor.body.firstChild, 1, editor.body.firstChild, 2);
     var marker = new Marker();
     marker.addCaret(range);
@@ -230,14 +230,14 @@ test('removeCaretMarker updates range to collapsed state', function() {
 test('removeCaretMarker when caret at the beginning', function() {
     editor.value('foo');
     var range = createRange(editor.body.firstChild, 0, editor.body.firstChild, 0);
-            
+
     var marker = new Marker();
     marker.addCaret(range);
-            
+
     editor.body.normalize();
 
     marker.removeCaret(range);
-            
+
     equal(range.startOffset, 0);
     equal(range.startContainer, editor.body.firstChild);
     ok(range.collapsed);
@@ -245,14 +245,14 @@ test('removeCaretMarker when caret at the beginning', function() {
 
 test('removeCaretMarker within element', function() {
     editor.value('foo<strong></strong> bar');
-            
+
     var range = createRange(editor.body.childNodes[1], 0, editor.body.childNodes[1], 0);
-        
+
     var marker = new Marker();
     marker.addCaret(range);
 
     marker.removeCaret(range);
-            
+
     equal(range.startOffset, 0);
     equal(range.startContainer, editor.body.childNodes[1]);
     ok(range.collapsed);
@@ -277,7 +277,7 @@ test('remove marker after element', function() {
     range.collapse(false);
     var marker = new Marker();
     marker.add(range);
-            
+
     marker.remove(range);
     equal(range.startOffset, 1);
     equal(range.startContainer, editor.body);
@@ -290,7 +290,7 @@ test('remove caret after element', function() {
     range.collapse(false);
     var marker = new Marker();
     marker.addCaret(range);
-            
+
     marker.removeCaret(range);
     equal(range.startOffset, 1);
     equal(range.startContainer, editor.body);
@@ -303,12 +303,12 @@ test('remove marker before element', function() {
     range.collapse(true);
     var marker = new Marker();
     marker.add(range);
-            
+
     marker.remove(range);
     equal(range.startOffset, 0);
     equal(range.startContainer, editor.body);
 });
-        
+
 test('remove caret before element', function() {
     editor.value('<a></a>');
     var range = editor.getRange();
