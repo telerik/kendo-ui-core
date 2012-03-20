@@ -1,13 +1,13 @@
 {   "UI Widgets": [
         {
-            "text": "Overview",
+            "text": "UI Widgets",
             "name": "overview",
             "spriteCssClass": "overviewIcon",
             "expanded": true,
             "onlineOnly": true,
             "items": [
                 {
-                    "text": "Web widgets",
+                    "text": "Overview",
                     "url": "overview/index.html"
                 }
             ]
