@@ -18,8 +18,8 @@
         getHtml: function() {
             var options = this.options;
             return kendo.template(options.template)({
-                toolClass: options.cssClass,
-                toolTitle: options.title,
+                cssClass: options.cssClass,
+                tooltip: options.title,
                 initialValue: options.initialValue
             });
         }
@@ -32,81 +32,112 @@
 
         editorWrapperTemplate:
             '<table cellspacing="4" cellpadding="0" class="k-widget k-editor k-header"><tbody>' +
-                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"><li>&nbsp;</li></ul></td></tr>' +
+                '<tr><td class="k-editor-toolbar-wrap"><ul class="k-editor-toolbar"></ul></td></tr>' +
                 '<tr><td class="k-editable-area"></td></tr>' +
             '</tbody></table>',
 
         buttonTemplate:
             '<li class="k-editor-button">' +
-                '<a href="" class="k-tool-icon k-#=toolClass#" unselectable="on" title="#=toolTitle#">#=toolTitle#</a>' +
+                '<a href="" class="k-tool-icon #= cssClass #" unselectable="on" title="#= tooltip #">#= tooltip #</a>' +
             '</li>',
 
         colorPickerTemplate:
             '<li class="k-editor-colorpicker">' +
-                '<div class="k-widget k-colorpicker k-header k-#=toolClass#">' +
+                '<div class="k-widget k-colorpicker k-header #= cssClass #">' +
                     '<span class="k-tool-icon"><span class="k-selected-color"></span></span><span class="k-icon k-arrow-down"></span>' +
             '</div></li>',
 
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
-                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
-//                '<div class="k-widget k-combobox k-header k-#=toolClass#">' +
+                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+//                '<div class="k-widget k-combobox k-header #= cssClass #">' +
 //                    '<div class="k-dropdown-wrap k-state-default">' +
-//                        '<input class="k-input" id="-input" title="#=toolTitle#" type="text" value="#=initialValue#" />' +
+//                        '<input class="k-input" id="-input" title="#= tooltip #" type="text" value="#=initialValue#" />' +
 //                        '<span class="k-select k-header"><span class="k-icon k-arrow-down">select</span></span>' +
 //                    '</div><input style="display:none" type="text" value="inherit" /></div>' +
             '</li>',
 
         dropDownListTemplate:
             '<li class="k-editor-selectbox">' +
-                '<select title="#=toolTitle#" class="k-#=toolClass#"></select>' +
-//                '<div class="k-selectbox k-header k-#=toolClass#"><div class="k-dropdown-wrap k-state-default">' +
+                '<select title="#= tooltip #" class="#= cssClass #"></select>' +
+//                '<div class="k-selectbox k-header #= cssClass #"><div class="k-dropdown-wrap k-state-default">' +
 //                    '<span class="k-input">#=initialValue#</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span>' +
 //                '</div></div>' +
             '</li>',
 
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
 
-        wrapTextarea: function($textarea) {
+        wrapTextarea: function(textarea) {
 
-            var w = $textarea.width(),
-                h = $textarea.height(),
+            var w = textarea.width(),
+                h = textarea.height(),
                 template = EditorUtils.editorWrapperTemplate,
-                editorWrap = $(template).insertBefore($textarea).width(w).height(h),
+                editorWrap = $(template).insertBefore(textarea).width(w).height(h),
                 editArea = editorWrap.find(".k-editable-area"),
                 toolsArea = editorWrap.find(".k-editor-toolbar");
 
-            $textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
+            textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
 
-            return $textarea.closest(".k-editor");
+            return textarea.closest(".k-editor");
         },
 
         renderTools: function(editor, tools) {
-            var toolsCollection = {},
+            var editorTools = {},
+                currentTool, tool, i,
+                nativeTools = editor._nativeTools,
+                template,
+                options,
                 toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
 
-            toolsArea.empty();
+            if (tools) {
+                for (j = 0; j < tools.length; j++) {
+                    currentTool = tools[j];
 
-            if (tools && tools.length > 0) {
-                for (var j = 0; j < tools.length; j++) {
-                    var tool = editor._tools[tools[j]],
-                        toolName = tools[j];
-                    if (tool) {
-                        toolsCollection[tools[j]] = tool;
-                        if (tool.options.template) {
-                            $(tool.options.template.getHtml()).appendTo(toolsArea);
+                    if ($.isPlainObject(currentTool)) {
+                        options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
+
+                        if (options.name) {
+                            options.cssClass = "k-" + options.name;
+                        }
+
+                        if (!options.template) {
+                            if (options.type == "button") {
+                                options.template = EditorUtils.buttonTemplate;
+                            }
+                        }
+                    } else if (editor._tools[currentTool]) {
+                        editorTools[currentTool] = editor._tools[currentTool];
+                        options = editorTools[currentTool].options;
+                    }
+
+                    template = options.template;
+
+                    if (template) {
+
+                        if (template.getHtml) {
+                            template = template.getHtml();
+                        } else {
+                            if (!$.isFunction(template)) {
+                                template = kendo.template(template);
+                            }
+
+                            template = template(options);
+                        }
+
+                        tool = $(template).appendTo(toolsArea);
+
+                        if (options.type == "button" && options.exec) {
+                            tool.find(".k-tool-icon").click($.proxy(options.exec, editor.element[0]));
                         }
                     }
                 }
             }
 
-            var nativeTools = editor._nativeTools;
-
-            for (var j = 0; j < nativeTools.length; j++) {
-                toolsCollection[nativeTools[j]] = editor._tools[nativeTools[j]];
+            for (j = 0; j < nativeTools.length; j++) {
+                editorTools[nativeTools[j]] = editor._tools[nativeTools[j]];
             }
 
-            editor.options.tools = toolsCollection;
+            editor.options.tools = editorTools;
         },
 
         createContentElement: function($textarea, stylesheets) {
@@ -311,7 +342,7 @@
             var tools = Editor.fn._tools;
             tools[toolName] = tool;
             if (tools[toolName].options && tools[toolName].options.template) {
-                tools[toolName].options.template.options.cssClass = toolName;
+                tools[toolName].options.template.options.cssClass = "k-" + toolName;
             }
         },
 
@@ -762,58 +793,61 @@
         },
 
         exec: function (name, params) {
-            var range, body, id, tool = "", pendingTool;
+            var that = this,
+                range, body, id,
+                tool = "", pendingTool;
 
             name = name.toLowerCase();
 
             // restore selection
-            if (!this.keyboard.isTypingInProgress()) {
-                this.focus();
+            if (!that.keyboard.isTypingInProgress()) {
+                that.focus();
 
-                range = this.getRange();
-                body = this.document.body;
+                range = that.getRange();
+                body = that.document.body;
             }
 
             // exec tool
-            for (id in this.options.tools)
+            for (id in that.options.tools) {
                 if (id.toLowerCase() == name) {
-                    tool = this.options.tools[id];
+                    tool = that.options.tools[id];
                     break;
                 }
+            }
 
             if (tool) {
-                range = this.getRange();
+                range = that.getRange();
 
                 if (!/undo|redo/i.test(name) && tool.willDelayExecution(range)) {
                     // clone our tool to apply params only once
                     pendingTool = $.extend({}, tool);
                     $.extend(pendingTool.options, { params: params });
-                    this.pendingFormats.toggle(pendingTool);
-                    select(this);
+                    that.pendingFormats.toggle(pendingTool);
+                    select(that);
                     return;
                 }
 
                 var command = tool.command ? tool.command(extend({ range: range }, params)) : null;
 
-                this.trigger("execute", { name: name, command: command });
+                that.trigger("execute", { name: name, command: command });
 
                 if (/undo|redo/i.test(name)) {
-                    this.undoRedoStack[name]();
+                    that.undoRedoStack[name]();
                 } else if (command) {
                     if (!command.managesUndoRedo) {
-                        this.undoRedoStack.push(command);
+                        that.undoRedoStack.push(command);
                     }
 
-                    command.editor = this;
+                    command.editor = that;
                     command.exec();
 
                     if (command.async) {
-                        command.change = $.proxy(function () { select(this); }, this);
+                        command.change = $.proxy(function () { select(that); }, that);
                         return;
                     }
                 }
 
-                select(this);
+                select(that);
             }
         }
     });
