@@ -71,15 +71,11 @@
 
         </div>
     </div>
-
     <div class='centerWrap floatWrap@(Request.Path.IndexOf("overview") != -1 ? " widgetOverview" : "")@(ViewBag.suite == "mobile" ? " mobileDemos" : "")' id="mainWrap">
-
-        @if ((ViewBag.suite == "web" || ViewBag.suite == "dataviz") && Request.Path.IndexOf("overview") < 0) {
-        <div id="themeWrap">
+        <div id="themeWrap" style="@(ViewBag.suite == "mobile" || Request.Path.IndexOf("overview") > -1 ? "display:none" : "")">
             <p class="choose-theme">Choose Theme:</p>
             <ul id="themeChooser"><li></li></ul>
         </div>
-        }
 
         <div id="mainWrapInner" class="floatWrap clear">
         @if (ViewBag.CurrentWidget.Name != "overview")
@@ -95,7 +91,6 @@
 
     @Html.Partial("Footer")
 
-    <script src="https://platform.twitter.com/widgets.js" type="text/javascript"></script>
     <script>
         $(".demos-nav").on("click", "a", function(e) {
             e.preventDefault();
