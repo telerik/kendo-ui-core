@@ -113,7 +113,7 @@
 
             that._mousedownProxy = function(e) {
                 that._mousedown(e);
-            }
+            };
 
             that._currentWidth = DOCUMENT.width();
 
@@ -338,7 +338,6 @@
                 origins = options.origin.toLowerCase().split(" "),
                 positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
-                aligned = false,
                 zoomLevel = support.zoomLevel(),
                 zIndex = 10002;
 
