@@ -14,7 +14,7 @@
   </DataInfo>
   <Description />
   <IndependentDescriptors />
-  <Name>SwitchexpandedPanel</Name>
+  <Name>KnockoutJS</Name>
   <QcFilePath i:nil="true" />
   <QcId>0</QcId>
   <QcTestVersionStamp>0</QcTestVersionStamp>
@@ -22,13 +22,13 @@
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Navigate to : '/web/panelbar/ajax.html'</d2p1:Description>
+      <d2p1:Description>Navigate to : '/web/integration/index.html'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>09a6d380-a02c-4e9b-8adb-978e37942037</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>951b03fd-bf1c-4b8f-8a02-2ea932e7d231</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -46,117 +46,27 @@
         <d2p1:RunsAgainstVersion />
         <d2p1:StepType>Action</d2p1:StepType>
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:WaitOnElements>false</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>0</d2p1:WaitOnElementsTimeout>
         <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
-        <d2p1:NavigateURL>/web/panelbar/ajax.html</d2p1:NavigateURL>
+        <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/web/integration/index.html</d2p1:NavigateURL>
       </d2p1:Step>
-      <d2p1:StepImageKey>SwitchexpandedPaneldkvgc3lp.nkt</d2p1:StepImageKey>
+      <d2p1:StepImageKey>KnockoutJSg34yqpih.spn</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for 'TextContent' 'Contains' 'BODY' on 'BODYSpan'</d2p1:Description>
+      <d2p1:Description>Click 'ChooseSpan'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>93b7df0f-ae15-4ff1-bf2e-f0b595ab6abb</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>textTarget</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[5]/div[2]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[1]/span[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>TextContent=BODY</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagname=span</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>BODYSpan</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlSpan</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>textTarget</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>LoadingContentWithAJAX</d2p1:FriendlyName>
-                <d2p1:Path>/web/panelbar/ajax.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Loading content with AJAX</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Wait</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <d2p1:CheckInterval>500</d2p1:CheckInterval>
-        <d2p1:DataBindVariableName i:nil="true" />
-        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
-        <d2p1:Timeout>10000</d2p1:Timeout>
-        <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>BODY</d2p1:ExpectedString>
-        <d2p1:SegmentType>TextContent</d2p1:SegmentType>
-      </d2p1:Step>
-      <d2p1:StepImageKey>SwitchexpandedPanelhzi30e55.55j</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Click 'PERFORMANCESpan'</d2p1:Description>
-      <d2p1:Enabled>true</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>3</d2p1:Order>
-      <d2p1:QcId>0</d2p1:QcId>
-      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>a4a45634-9433-4e7a-8b57-926dd5caf9a4</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>81af39cb-395f-4433-8be6-afcdaf7f075a</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ClickActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -174,7 +84,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[5]/div[2]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[4]/span[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[5]/div[2]/div[2]/div[1]/div[1]/div[1]/span[1]/span[1]/span[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -182,7 +92,7 @@
                       <ChainStops />
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=PERFORMANCE</Clause>
+                          <Clause>TextContent=Choose...</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
                           <Clause>tagname=span</Clause>
@@ -192,7 +102,7 @@
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>PERFORMANCESpan</Name>
+                <Name>ChooseSpan</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -207,10 +117,10 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>LoadingContentWithAJAX</d2p1:FriendlyName>
-                <d2p1:Path>/web/panelbar/ajax.html</d2p1:Path>
+                <d2p1:FriendlyName>UsingKnockoutJSWithKendo</d2p1:FriendlyName>
+                <d2p1:Path>/web/integration/index.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Loading content with AJAX</d2p1:Title>
+                <d2p1:Title>Using KnockoutJS with Kendo</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -227,22 +137,138 @@
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
         <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:SimulateRealClick>false</d2p1:SimulateRealClick>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
       </d2p1:Step>
-      <d2p1:StepImageKey>SwitchexpandedPanelhmxhlqia.40k</d2p1:StepImageKey>
+      <d2p1:StepImageKey>KnockoutJS0wswnjnf.ifq</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
       <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Wait for 'TextContent' 'Contains' 'Acceleration 0 - 100 km/h (62 mph) in under 3.7 seconds' on 'AccelerationPTag'</d2p1:Description>
+      <d2p1:Description>Wait for '750' msec.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>55f88994-df57-41d0-9f0d-b4706fece2cb</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="SleepActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <WaitTime>750</WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>KnockoutJShypip3ok.noo</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'BusinessListItem'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>4</d2p1:Order>
       <d2p1:QcId>0</d2p1:QcId>
       <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
-      <d2p1:Runtime_x0020_ID>b53be59e-05a8-4dbf-84a0-659e0ae22f25</d2p1:Runtime_x0020_ID>
+      <d2p1:Runtime_x0020_ID>b698de47-0c0c-49e6-9b1e-85540f5b4450</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints>
+          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value>
+              <DomStateKey />
+              <FindExpression i:type="HtmlFindExpressionElement">
+                <BackupSearchClause>/html[1]/body[1]/div[7]/div[1]/ul[1]/li[3]</BackupSearchClause>
+                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="HtmlFindExpression">
+                      <ChainStops />
+                      <Clauses>
+                        <HtmlFindClause>
+                          <Clause>TextContent=Business</Clause>
+                        </HtmlFindClause>
+                        <HtmlFindClause>
+                          <Clause>tagname=li</Clause>
+                        </HtmlFindClause>
+                      </Clauses>
+                      <Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </FindExpressions>
+                <Name>BusinessListItem</Name>
+                <NodeKind>4</NodeKind>
+                <TechnologyType>Html</TechnologyType>
+              </FindExpression>
+              <FindInfo i:nil="true" />
+              <Frame i:nil="true" />
+              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlControl</HtmlControlType>
+              <IsIndependent>false</IsIndependent>
+              <Name>target</Name>
+              <Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>UsingKnockoutJSWithKendo</d2p1:FriendlyName>
+                <d2p1:Path>/web/integration/index.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Using KnockoutJS with Kendo</d2p1:Title>
+              </Page>
+              <Region i:nil="true" />
+              <TechnologyType>Html</TechnologyType>
+              <Version>200</Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>KnockoutJSxa4pg3c2.vqs</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for 'TextContent' 'Contains' 'Business' on 'BusinessBTag'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>54592923-9364-4fd4-877c-6cfd55b86fc0</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -260,25 +286,27 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[5]/div[2]/div[2]/div[1]/div[1]/div[1]/ul[1]/li[4]/div[1]/p[4]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[5]/div[2]/div[2]/div[1]/div[1]/div[2]/span[1]/b[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
                     <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops />
+                      <ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </ChainStops>
                       <Clauses>
                         <HtmlFindClause>
-                          <Clause>TextContent=^Acceleration 0 </Clause>
+                          <Clause>id=boardingpass</Clause>
                         </HtmlFindClause>
                         <HtmlFindClause>
-                          <Clause>tagname=p</Clause>
+                          <Clause>tagIndex=b:0</Clause>
                         </HtmlFindClause>
                       </Clauses>
                       <Constraints />
                     </d9p1:value>
                   </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                 </FindExpressions>
-                <Name>AccelerationPTag</Name>
+                <Name>BusinessBTag</Name>
                 <NodeKind>4</NodeKind>
                 <TechnologyType>Html</TechnologyType>
               </FindExpression>
@@ -293,10 +321,10 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>LoadingContentWithAJAX</d2p1:FriendlyName>
-                <d2p1:Path>/web/panelbar/ajax.html</d2p1:Path>
+                <d2p1:FriendlyName>UsingKnockoutJSWithKendo</d2p1:FriendlyName>
+                <d2p1:Path>/web/integration/index.html</d2p1:Path>
                 <d2p1:Query />
-                <d2p1:Title>Loading content with AJAX</d2p1:Title>
+                <d2p1:Title>Using KnockoutJS with Kendo</d2p1:Title>
               </Page>
               <Region i:nil="true" />
               <TechnologyType>Html</TechnologyType>
@@ -316,10 +344,10 @@
         <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
         <d2p1:Timeout>10000</d2p1:Timeout>
         <d2p1:CompareType>Contains</d2p1:CompareType>
-        <d2p1:ExpectedString>Acceleration 0 - 100 km/h (62 mph) in under 3.7 seconds</d2p1:ExpectedString>
+        <d2p1:ExpectedString>Business</d2p1:ExpectedString>
         <d2p1:SegmentType>TextContent</d2p1:SegmentType>
       </d2p1:Step>
-      <d2p1:StepImageKey>SwitchexpandedPanelqs0vq1eb.ihj</d2p1:StepImageKey>
+      <d2p1:StepImageKey>KnockoutJSeuyw4ld4.3zo</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -341,22 +369,22 @@
   <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <HasCodeBehind>false</HasCodeBehind>
-  <HtmlDescription i:nil="true" />
+  <HtmlDescription />
   <InheritParentDataSource>false</InheritParentDataSource>
   <IsManual>false</IsManual>
   <IsSilverlightApp>false</IsSilverlightApp>
   <IsTestFragment>false</IsTestFragment>
   <Owner i:nil="true" />
-  <Path>UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.tstest</Path>
+  <Path>Framework\Integration\KnockoutJS.tstest</Path>
   <Priority>0</Priority>
   <ProfilerBenchmarkResultsFilePath i:nil="true" />
   <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
-  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{47ce1c5e-c389-4ba5-8429-17f2c3c9b935}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoDemosTests\Profiler Configurations\{0c597c77-3ae8-4067-837b-528de01ae21c}.tsprofconfig</ProfilerConfigurationFilePath>
   <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
   <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\</ProfilerResultsDirectory>
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\1\</ProfilerResultsDirectory>
   <ProfilerServerName i:nil="true" />
-  <ResourceFilePath>UIWidgets\PanelBar\AjaxLoading\SwitchexpandedPanel.resx</ResourceFilePath>
+  <ResourceFilePath>Framework\Integration\KnockoutJS.resx</ResourceFilePath>
   <ReuseAppWindow>0</ReuseAppWindow>
   <SilverlightAppLocalDirectory />
   <SilverlightAppOriginUri i:nil="true" />
@@ -364,23 +392,14 @@
   <SilverlightAppWebUrl />
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
-  <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>bin</TestAssemblyPath>
+  <TestAssembly />
+  <TestAssemblyPath />
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
-  <UniqueId>47ce1c5e-c389-4ba5-8429-17f2c3c9b935</UniqueId>
+  <UniqueId>0c597c77-3ae8-4067-837b-528de01ae21c</UniqueId>
   <UseDefaultWpfAppPath>false</UseDefaultWpfAppPath>
-  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>Timeout</d2p1:Key>
-      <d2p1:Value>0</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-    <d2p1:KeyValueOfstringstring>
-      <d2p1:Key>ExecId</d2p1:Key>
-      <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
-    </d2p1:KeyValueOfstringstring>
-  </VSProperties>
+  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <WebKitExecutionDelay>0</WebKitExecutionDelay>
   <WpfAppPath i:nil="true" />
 </WebAiiTest>
