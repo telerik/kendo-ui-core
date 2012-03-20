@@ -9,6 +9,7 @@
         Widget = ui.Widget,
         INIT = "init",
         SHOW = "show",
+        HIDE = "hide",
         roleSelector = kendo.roleSelector,
         jsonRegExp = /^(?:\{.*\}|\[.*\])$/;
 
@@ -147,7 +148,15 @@
              * @param {Event} e
              * @param {jQueryObject} e.view The mobile view instance
              */
-            SHOW
+            SHOW,
+            /**
+             * Fires when a mobile View becomes hidden.
+             * @name kendo.mobile.ui.View#hide
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.view The mobile view instance
+             */
+            HIDE
         ],
 
         options: {
@@ -206,6 +215,8 @@
                 callback = function() {
                     that.application.transitioning = false;
                     previous.element.hide();
+
+                    previous.trigger(HIDE, {view: previous});
                 },
 
                 animationType;
@@ -373,7 +384,15 @@
              * @param {Event} e
              * @param {jQueryObject} e.layout The mobile layout instance
              */
-            SHOW
+            SHOW,
+            /**
+             * Fires when a mobile View using the layout becomes hidden.
+             * @name kendo.mobile.ui.Layout#hide
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.layout The mobile layout instance
+             */
+            HIDE
         ],
 
         setup: function (view) {
@@ -390,6 +409,8 @@
             if (view.footer === that.footer) {
                 view.element.append(that.footer.detach().clone(true));
             }
+
+            that.trigger(HIDE, {layout: that, view: view});
         },
 
         attach: function(view) {
