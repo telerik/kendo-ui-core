@@ -64,7 +64,7 @@
                 );
             }
 
-            if (dataviz.ui.Gauge) {
+            if (dataviz.Gauge) {
                 view.decorators.push(
                     new dataviz.RadialPointerAnimationDecorator(view),
                     new dataviz.ArrowPointerAnimationDecorator(view),

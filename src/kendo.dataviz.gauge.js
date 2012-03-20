@@ -19,7 +19,7 @@
         Ring = dataviz.Ring,
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,
-        BarIndicator = dataviz.BarIndicator,
+        BarIndicatorAnimatin = dataviz.BarIndicatorAnimatin,
         ArrowAnimation = dataviz.ArrowAnimation,
         append = dataviz.append,
         animationDecorator = dataviz.animationDecorator,
@@ -34,7 +34,7 @@
     // Constants ==============================================================
     var ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
-        BAR_INDICATOR = "BAR_INDICATOR",
+        BAR_INDICATOR = "barIndicator",
         BLACK = "#000",
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
@@ -121,7 +121,6 @@
                 scale = pointer.scale,
                 options = pointer.options,
                 needle = pointer.elements[0],
-                animation = pointer._animation,
                 animationOptions = options.animation,
                 currentAngle = needle.options.rotation[0],
                 minSlotAngle = scale.getSlotAngle(scale.options.min),
@@ -659,7 +658,7 @@
             margin: getSpacing(3),
             animation: {
                 type: BAR_INDICATOR,
-                duration: 1000
+                speed: 120
             },
             visible: true
         },
@@ -669,18 +668,22 @@
                 scale = pointer.scale,
                 options = pointer.options,
                 element = pointer.element,
-                animation;
+                animation = element._animation;
+
+            if (animation) {
+                animation.abort();
+            }
 
             if (options.animation === false && element) {
                 element.refresh(doc.getElementById(options.id));
             } else {
                 options.animation = deepExtend({}, options.animation, {
-                        endPosition: scale.getSlot(options.value)
-                    });
+                    endPosition: scale.getSlot(options.value)
+                });
                 if (options.shape === ARROW) {
-                    animation = new ArrowAnimation(element, options.animation);
+                    animation = element._animation = new ArrowAnimation(element, options.animation);
                 } else {
-                    animation = new BarIndicator(element, options.animation);
+                    animation = element._animation = new BarIndicatorAnimatin(element, options.animation);
                 }
                 animation.setup();
                 animation.play();
@@ -1058,13 +1061,14 @@
 
     var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
     var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
-    var BarIndicatorAnimationDecorator = animationDecorator(BAR_INDICATOR, BarIndicator);
+    var BarIndicatorAnimationDecorator = animationDecorator(BAR_INDICATOR, BarIndicatorAnimatin);
 
     // Exports ================================================================
     dataviz.ui.plugin(RadialGauge);
     dataviz.ui.plugin(LinearGauge);
 
     deepExtend(dataviz, {
+        Gauge: Gauge,
         GaugePlotArea: RadialGaugePlotArea,
         RadialPointer: RadialPointer,
         LinearPointer: LinearPointer,
