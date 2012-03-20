@@ -1,9 +1,11 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        touch = kendo.support.touch,
+        Widget = ui.Widget,
+        support = kendo.support,
+        touch = support.touch,
         getOffset = kendo.getOffset,
-        bodyResizeEvent = $.browser.msie && $.browser.version < 9,
+        appendingToBodyTriggersResize = $.browser.msie && $.browser.version < 9,
         OPEN = "open",
         CLOSE = "close",
         CENTER = "center",
@@ -24,11 +26,12 @@
         ACTIVECHILDREN = ".k-picker-wrap, .k-dropdown-wrap, .k-link",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         DOCUMENT= $(document),
-        cssPrefix = kendo.support.transitions.css,
+        WINDOW = $(window),
+        DOCUMENT_ELEMENT = $(document.documentElement),
+        RESIZE_SCROLL = "resize scroll",
+        cssPrefix = support.transitions.css,
         TRANSFORM = cssPrefix + "transform",
         extend = $.extend,
-        proxy = $.proxy,
-        Widget = ui.Widget,
         styles = ["font-family",
                    "font-size",
                    "font-stretch",
@@ -112,29 +115,16 @@
                 that._mousedown(e);
             }
 
-            if (!touch) { //  On mobile device this closes the popup if keyboard is shown
-                that._currentWidth = DOCUMENT.width();
-                /*
-                $(window).bind("resize scroll", function() {
-                    if (bodyResizeEvent) {
-                        var width = DOCUMENT.width();
-                        if (width == that._currentWidth) {
-                            return;
-                        }
-                        that._currentWidth = width;
-                    }
+            that._currentWidth = DOCUMENT.width();
 
-                    if (!that._hovered) {
-                        that.close();
-                    }
-                });
-                */
-            }
+            that._resizeProxy = function(e) {
+                that._resize(e);
+            };
 
             kendo.touchScroller(element);
 
             if (options.toggleTarget) {
-                $(options.toggleTarget).bind(options.toggleEvent, proxy(that.toggle, that));
+                $(options.toggleTarget).bind(options.toggleEvent, $.proxy(that.toggle, that));
             }
         },
 
@@ -173,20 +163,24 @@
                 direction = "down",
                 animation, wrapper,
                 anchor = $(options.anchor),
-                style, idx = 0;
+                style,
+                idx;
 
             if (!that.visible()) {
-
-                $(document.documentElement).unbind(MOUSEDOWN, that._mousedownProxy)
-                                           .bind(MOUSEDOWN, that._mousedownProxy);
-
-                for (; idx < 6; idx++) {
+                for (idx = 0; idx < styles.length; idx++) {
                     style = styles[idx];
                     element.css(style, anchor.css(style));
                 }
 
                 if (element.data("animating") || that.trigger(OPEN)) {
                     return;
+                }
+
+                DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy)
+                                .bind(MOUSEDOWN, that._mousedownProxy);
+                if (!touch) {
+                    WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
+                          .bind(RESIZE_SCROLL, that._resizeProxy)
                 }
 
                 that.wrapper = wrapper = kendo.wrap(element)
@@ -196,7 +190,7 @@
                                             position: ABSOLUTE
                                         });
 
-                if (kendo.support.mobileOS.android) {
+                if (support.mobileOS.android) {
                     wrapper.add(anchor).css(TRANSFORM, "translatez(0)"); // Android is VERY slow otherwise. Should be tested in other droids as well since it may cause blur.
                 }
 
@@ -249,7 +243,8 @@
                     return;
                 }
 
-                $(document.documentElement).unbind(MOUSEDOWN, that._mousedownProxy);
+                DOCUMENT_ELEMENT.unbind(MOUSEDOWN, that._mousedownProxy);
+                WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
 
                 animation = extend(true, {}, options.animation.close);
                 effects = that.element.data(EFFECTS);
@@ -263,6 +258,20 @@
                 that._closing = true;
 
                 that.element.kendoStop(true).kendoAnimate(animation);
+            }
+        },
+
+        _resize: function(e) {
+            if (appendingToBodyTriggersResize) {
+                var width = DOCUMENT.width();
+                if (width == that._currentWidth) {
+                    return;
+                }
+                that._currentWidth = width;
+            }
+
+            if (!that._hovered) {
+                that.close();
             }
         },
 
@@ -328,7 +337,7 @@
                 positions = options.position.toLowerCase().split(" "),
                 collisions = that.collisions,
                 aligned = false,
-                zoomLevel = kendo.support.zoomLevel(),
+                zoomLevel = support.zoomLevel(),
                 zIndex = 10002;
 
             var siblingContainer = anchor.parents().filter(wrapper.siblings());
