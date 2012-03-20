@@ -93,10 +93,16 @@
 
     <script>
         $(".demos-nav").on("click", "a", function(e) {
+            var li = $(this).parent();
+
             e.preventDefault();
 
+            if (li.hasClass("active")) {
+                return;
+            }
+
             $(".demos-nav").find("li.active").removeClass("active");
-            $(this).parent().addClass("active");
+            li.addClass("active");
 
             Application.loadWidget(this.href);
         });

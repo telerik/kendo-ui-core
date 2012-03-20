@@ -236,6 +236,7 @@
 
                             Application.load(url);
                         } else if (navigateUrl) {
+                            element.add(sibling).bind("click", stopDefaults);
                             Application.loadWidget(navigateUrl);
                         }
                     });
@@ -352,6 +353,10 @@
         $("#device-wrapper").removeClass("ios android blackberry").addClass(kendoMobileOS);
         $("#deviceList .selectedThumb").removeClass("selectedThumb");
         $("#deviceList ." + kendoMobileOS + "Thumb").parent().addClass("selectedThumb");
+    }
+
+    function stopDefaults() {
+        return false;
     }
 
     $.fn.mobileOsChooser = function(options) {
