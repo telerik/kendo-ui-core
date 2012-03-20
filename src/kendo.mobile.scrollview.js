@@ -137,15 +137,15 @@
         },
 
         /**
-        * Redraw the mobile ScrollView pager. Called automatically on device orientation change event.
-        *
-        * @example
-        * <div data-role="scrollview" id="scrollview"></div>
-        *
-        * <script>
-        *    $("#scrollview").data("kendoMobileScrollView").refresh();
-        * </script>
-        */
+         * Redraw the mobile ScrollView pager. Called automatically on device orientation change event.
+         *
+         * @example
+         * <div data-role="scrollview" id="scrollview"></div>
+         *
+         * <script>
+         *    $("#scrollview").data("kendoMobileScrollView").refresh();
+         * </script>
+         */
         refresh: function() {
             var that = this,
                 pageHTML = "",
@@ -166,6 +166,24 @@
 
             that.pager.html(pageHTML);
             that._updatePage();
+        },
+
+        /**
+         * Scroll to the given page. Pages have zero-based indexing.
+         * @example
+         * <div data-role="scrollview" id="scrollview"></div>
+         *
+         * <script>
+         *    // Scroll to the second page of the scrollView
+         *    $("#scrollview").data("kendoMobileScrollView").scrollTo(1);
+         * </script>
+         */
+        scrollTo: function(page) {
+            this._moveTo(- page * this.dimension.size, Transition.easeOutExpo);
+        },
+
+        _moveTo: function(location, ease) {
+            this.transition.moveTo({ location: location, duration: this.options.duration, ease: ease });
         },
 
         _dragEnd: function(e) {
@@ -190,7 +208,7 @@
 
             snap = max(that.minSnap, min(approx(that.movable.x / width) * width, that.maxSnap));
 
-            that.transition.moveTo({ location: snap, duration: options.duration, ease: ease });
+            this._moveTo(snap, ease);
         },
 
         _updatePage: function() {
