@@ -108,18 +108,21 @@
     @Html.Partial("Footer")
 
     <script>
-        $(".demos-nav").on("click", "a", function(e) {
-            e.preventDefault();
 
-            var a = $(this),
-                li = a.parent();
+        if ("pushState" in history) {
+            $(".demos-nav").on("click", "a", function(e) {
+                e.preventDefault();
 
-            if (li.hasClass("active")) {
-                return;
-            }
+                var a = $(this),
+                    li = a.parent();
 
-            Application.loadWidget(a.attr("href"));
-        });
+                if (li.hasClass("active")) {
+                    return;
+                }
+
+                Application.loadWidget(a.attr("href"));
+            });
+        }
 
         $("#themeChooser").themeChooser();
 
