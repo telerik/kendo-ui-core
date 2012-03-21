@@ -44,6 +44,12 @@ html
     font-size:13px;
 }
 
+.overview>div
+{
+    /*iPad fix*/
+    min-width:990px;
+}
+
 .centerWrap
 {
     width:940px;
