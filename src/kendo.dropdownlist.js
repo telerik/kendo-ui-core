@@ -575,17 +575,14 @@
         * dropdownlist.open();
         */
         open: function() {
-            var that = this,
-                current = that._current;
+            var that = this;
 
             if (!that.ul[0].firstChild) {
                 that._open = true;
                 that._selectItem();
             } else {
                 that.popup.open();
-                if (current) {
-                    that._scroll(current[0]);
-                }
+                that._scroll(that._current);
             }
         },
 

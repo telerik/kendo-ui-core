@@ -75,7 +75,7 @@
 
                 if (candidate) {
                     candidate.addClass(FOCUSED);
-                    that._scroll(candidate[0]);
+                    that._scroll(candidate);
                 }
 
                 that._current = candidate;
@@ -248,9 +248,14 @@
 
             that[open ? OPEN : CLOSE]();
         },
+
         _scroll: function (item) {
 
             if (!item) return;
+
+            if (item[0]) {
+                item = item[0];
+            }
 
             var ul = this.ul[0],
                 itemOffsetTop = item.offsetTop,

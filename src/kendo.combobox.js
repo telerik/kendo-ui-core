@@ -622,9 +622,7 @@
                 that._selectItem();
             } else {
                 that.popup.open();
-                if (that.selectedIndex > -1) {
-                    that._scroll(that._current);
-                }
+                that._scroll(that._current);
             }
         },
 
