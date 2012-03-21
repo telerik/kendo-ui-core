@@ -957,7 +957,16 @@ div.k-window-content
 
 .k-grid-edit-row td
 {
-   text-overflow: clip;
+    padding-top:.32em;
+    padding-bottom:.34em;
+    text-overflow: clip;
+}
+
+.k-grid-edit-row .k-textbox
+{
+    /*reset default webkit styles*/
+    margin-top:0;
+    margin-bottom:0;
 }
 
 .k-grid-header-wrap,
