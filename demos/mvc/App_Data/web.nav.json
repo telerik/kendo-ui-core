@@ -232,6 +232,10 @@
                     "url": "grid/toolbar-template.html"
                 },
                 {
+                    "text": "Custom command",
+                    "url": "grid/custom-command.html"
+                },
+                {
                     "text": "Aggregates",
                     "url": "grid/aggregates.html"
                 },

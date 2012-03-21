@@ -1,0 +1,78 @@
+        <script src="../../content/shared/js/people.js"></script>
+
+        <div id="example" class="k-content">
+            <div id="grid"></div>
+
+            <div id="details"></div>
+
+            <script>
+                $(document).ready(function () {
+                    var grid = $("#grid").kendoGrid({
+                        dataSource: {
+                           pageSize: 10,
+                           data: createRandomData(50)
+                        },
+                        pageable: true,
+                        height: 260,
+                        columns: [
+                            { field: "FirstName", title: "First Name" },
+                            { field: "LastName", title: "Last Name" },
+                            { field: "Title" },
+                            { command: { text: "Details", className: "details-button" }, title: " ", width: "110px" }]
+                    }).data("kendoGrid");
+
+                    var wnd = $("#details")
+                        .kendoWindow({
+                            title: "Customer Details",
+                            modal: true,
+                            visible: false,
+                            resizable: false,
+                            width: 300
+                        }).data("kendoWindow");
+
+                    var detailsTemplate = kendo.template($("#template").html());
+
+                    $("#grid").delegate(".details-button", "click", function(e) {
+                        e.preventDefault();
+
+                        var dataItem = grid.dataItem($(this).closest("tr"));
+                        wnd.content(detailsTemplate(dataItem));
+                        wnd.center().open();
+                    });
+                });
+            </script>
+
+            <script type="text/x-kendo-template" id="template">
+                <div id="details-container">
+                    <h2>#= FirstName # #= LastName #</h2>
+                    <em>#= Title #</em>
+                    <dl>
+                        <dt>City: #= City #</dt>
+                        <dt>Birth Date: #= kendo.toString(BirthDate, "MM/dd/yyyy") #</dt>
+                    </dl>
+                </div>
+            </script>
+
+            <style type="text/css">
+                #details-container
+                {
+                    padding: 10px;
+                }
+
+                #details-container h2
+                {
+                    margin: 0;
+                }
+
+                #details-container em
+                {
+                    color: #8c8c8c;
+                }
+
+                #details-container dt,
+                {
+                    margin:0;
+                    display: inline;
+                }
+            </style>
+        </div>
