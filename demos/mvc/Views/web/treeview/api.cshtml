@@ -27,7 +27,9 @@
                 </ul>
             </div>
 
-            <div id="treeview" class="demo-section"></div>
+            <div class="demo-section">
+                <div id="treeview"></div>
+            </div>
 
             <script>
                 $(document).ready(function() {
@@ -95,5 +97,11 @@
                     $("#text").keypress(append);
                 });
             </script>
+
+            <style scoped>
+                .demo-section {
+                    width: 200px;
+                }
+            </style>
 
         </div>
