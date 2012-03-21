@@ -15,6 +15,7 @@
         {
             "text": "AutoComplete",
             "name": "autocomplete",
+            "documentation": "ui-widgets/autocomplete/",
             "spriteCssClass": "autoCompleteIcon",
             "items": [
                 {
@@ -42,6 +43,7 @@
         {
             "text": "Calendar",
             "name": "calendar",
+            "documentation": "ui-widgets/calendar/",
             "spriteCssClass": "calendarIcon",
             "items": [
                 {
@@ -65,6 +67,7 @@
         {
             "text": "ComboBox",
             "name": "combobox",
+            "documentation": "ui-widgets/combobox",
             "spriteCssClass": "comboBoxIcon",
             "items": [
                 {
@@ -96,6 +99,7 @@
         {
             "text": "DatePicker",
             "name": "datepicker",
+            "documentation": "ui-widgets/datepicker",
             "spriteCssClass": "datePickerIcon",
             "items": [
                 {
@@ -123,6 +127,7 @@
         {
             "text": "DropDownList",
             "name": "dropdownlist",
+            "documentation": "ui-widgets/dropdownlist",
             "spriteCssClass": "dropDownListIcon",
             "items": [
                 {
@@ -154,7 +159,7 @@
         {
             "text": "Editor",
             "name": "editor",
-            "documentation": "ui-widgets/editor/",
+            "documentation": "ui-widgets/editor",
             "spriteCssClass": "editorIcon",
             "items": [
                 {
@@ -182,6 +187,7 @@
         {
             "text": "Grid",
             "name": "grid",
+            "documentation": "ui-widgets/grid",
             "spriteCssClass": "gridIcon",
             "items": [
                 {
@@ -269,6 +275,7 @@
         {
             "text": "ListView",
             "name": "listview",
+            "documentation": "ui-widgets/listview",
             "spriteCssClass": "listViewIcon",
             "items": [
                 {
@@ -292,6 +299,7 @@
         {
             "text": "Menu",
             "name": "menu",
+            "documentation": "ui-widgets/menu",
             "spriteCssClass": "menuIcon",
             "items": [
                 {
@@ -323,6 +331,7 @@
         {
             "text": "NumericTextBox",
             "name": "numerictextbox",
+            "documentation": "ui-widgets/numerictextbox",
             "spriteCssClass": "numericTextBoxIcon",
             "items": [
                 {
@@ -342,6 +351,7 @@
         {
             "text": "PanelBar",
             "name": "panelbar",
+            "documentation": "ui-widgets/panelbar",
             "spriteCssClass": "panelBarIcon",
             "items": [
                 {
@@ -373,6 +383,7 @@
         {
             "text": "Slider",
             "name": "slider",
+            "documentation": "ui-widgets/slider",
             "spriteCssClass": "sliderIcon",
             "items": [
                 {
@@ -392,6 +403,7 @@
         {
             "text": "Splitter",
             "name": "splitter",
+            "documentation": "ui-widgets/splitter",
             "spriteCssClass": "splitterIcon",
             "items": [
                 {
@@ -415,6 +427,7 @@
         {
             "text": "TabStrip",
             "name": "tabstrip",
+            "documentation": "ui-widgets/tabstrip",
             "spriteCssClass": "tabStripIcon",
             "items": [
                 {
@@ -446,6 +459,7 @@
         {
             "text": "TimePicker",
             "name": "timepicker",
+            "documentation": "ui-widgets/timepicker",
             "spriteCssClass": "timePickerIcon",
             "items": [
                 {
@@ -469,6 +483,7 @@
         {
             "text": "TreeView",
             "name": "treeview",
+            "documentation": "ui-widgets/treeview",
             "spriteCssClass": "treeViewIcon",
             "items": [
                 {
@@ -504,6 +519,7 @@
         {
             "text": "Upload",
             "name": "upload",
+            "documentation": "ui-widgets/upload",
             "spriteCssClass": "uploadIcon",
             "onlineOnly": true,
             "items": [
@@ -528,6 +544,7 @@
         {
             "text": "Window",
             "name": "window",
+            "documentation": "ui-widgets/window",
             "spriteCssClass": "windowIcon",
             "items": [
                 {
@@ -561,6 +578,7 @@
         {
             "text": "DataSource",
             "name": "datasource",
+            "documentation": "framework/datasource",
             "spriteCssClass": "dataSourceIcon",
             "items": [
                 {
@@ -592,6 +610,7 @@
         {
             "text": "Templates",
             "name": "templates",
+            "documentation": "framework/templates",
             "spriteCssClass": "templatesIcon",
             "items": [
                 {
@@ -607,6 +626,7 @@
         {
             "text": "MVVM",
             "name": "mvvm",
+            "documentation": "framework/mvvm",
             "spriteCssClass": "mvvmIcon",
             "items": [
                 {
@@ -650,6 +670,7 @@
         {
             "text": "Drag & Drop",
             "name": "dragdrop",
+            "documentation": "framework/draganddrop",
             "spriteCssClass": "dragDropIcon",
             "items": [
                 {
@@ -665,6 +686,7 @@
         {
             "text": "Validator",
             "name": "validator",
+            "documentation": "framework/validator",
             "spriteCssClass": "validatorIcon",
             "items": [
                 {
@@ -676,6 +698,7 @@
         {
             "text": "Globalization",
             "name": "globalization",
+            "documentation": "framework/globalization",
             "spriteCssClass": "globalizationIcon",
             "items": [
                 {
