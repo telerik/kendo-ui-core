@@ -3532,14 +3532,13 @@ var ColorTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = this.name;
 
-        ui.kendoColorPicker({
+        new Editor.ColorPicker(ui, {
             value: "#000000",
             change: function (e) {
                 Tool.exec(editor, toolName, e.value);
             }
         });
     }
-
 });
 
 var StyleTool = Tool.extend({
@@ -3886,9 +3885,9 @@ var FormatBlockTool = Tool.extend({
     update: function(ui, nodes) {
         var list;
         if (ui.is("select")) {
-            list = ui.data("kendoDropDownList");
+            list = ui.data("kendoSelectBox");
         } else {
-            list = ui.find("select").data("kendoDropDownList");
+            list = ui.find("select").data("kendoSelectBox");
         }
         list.close();
         list.value(this.finder.getFormat(nodes));
@@ -3898,7 +3897,7 @@ var FormatBlockTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = "formatBlock";
 
-        ui.kendoDropDownList({
+        new Editor.SelectBox(ui, {
             dataTextField: "Text",
             dataValueField: "Value",
             dataSource: editor.options.formatBlock,
@@ -3911,7 +3910,6 @@ var FormatBlockTool = Tool.extend({
 
         ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
     }
-
 });
 
 extend(Editor, {
@@ -4813,6 +4811,7 @@ registerTool("insertImage", new Editor.Tool({ command: ImageCommand, template: n
 
 var kendo = window.kendo,
     Widget = kendo.ui.Widget,
+    DropDownList = kendo.ui.DropDownList,
     Editor = kendo.ui.editor,
     dom = Editor.Dom,
     CHANGE = "change",
@@ -4985,7 +4984,33 @@ var ColorPicker = Widget.extend({
     }
 });
 
-kendo.ui.plugin(ColorPicker);
+var SelectBox = DropDownList.extend({
+    init: function(element, options) {
+        DropDownList.fn.init.call(this, element, options);
+
+        this.value(this.options.title);
+    },
+    options: {
+        name: "SelectBox"
+    },
+    value: function(value) {
+        var result = DropDownList.fn.value.call(this, value);
+
+        if (value === undefined) {
+            return result;
+        }
+
+        if (value !== DropDownList.fn.value.call(this)) {
+           this.text(this.options.title);
+           this._current.removeClass("k-state-selected");
+           this.current(null);
+           this._oldIndex = this.selectedIndex = -1;
+        }
+    }
+});
+
+kendo.ui.editor.ColorPicker = ColorPicker;
+kendo.ui.editor.SelectBox = SelectBox;
 
 })(jQuery);
 (function($, undefined) {

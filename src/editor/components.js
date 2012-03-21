@@ -2,6 +2,7 @@
 
 var kendo = window.kendo,
     Widget = kendo.ui.Widget,
+    DropDownList = kendo.ui.DropDownList,
     Editor = kendo.ui.editor,
     dom = Editor.Dom,
     CHANGE = "change",
@@ -174,6 +175,35 @@ var ColorPicker = Widget.extend({
     }
 });
 
-kendo.ui.plugin(ColorPicker);
+var SelectBox = DropDownList.extend({
+    init: function(element, options) {
+        var that = this;
+
+        DropDownList.fn.init.call(that, element, options);
+
+        that.value(that.options.title);
+    },
+    options: {
+        name: "SelectBox"
+    },
+    value: function(value) {
+        var that = this,
+            result = DropDownList.fn.value.call(that, value);
+
+        if (value === undefined) {
+            return result;
+        }
+
+        if (value !== DropDownList.fn.value.call(that)) {
+           that.text(that.options.title);
+           that._current.removeClass("k-state-selected");
+           that.current(null);
+           that._oldIndex = that.selectedIndex = -1;
+        }
+    }
+});
+
+kendo.ui.editor.ColorPicker = ColorPicker;
+kendo.ui.editor.SelectBox = SelectBox;
 
 })(jQuery);

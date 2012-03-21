@@ -260,9 +260,9 @@ var FormatBlockTool = Tool.extend({
     update: function(ui, nodes) {
         var list;
         if (ui.is("select")) {
-            list = ui.data("kendoDropDownList");
+            list = ui.data("kendoSelectBox");
         } else {
-            list = ui.find("select").data("kendoDropDownList");
+            list = ui.find("select").data("kendoSelectBox");
         }
         list.close();
         list.value(this.finder.getFormat(nodes));
@@ -272,7 +272,7 @@ var FormatBlockTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = "formatBlock";
 
-        ui.kendoDropDownList({
+        new Editor.SelectBox(ui, {
             dataTextField: "Text",
             dataValueField: "Value",
             dataSource: editor.options.formatBlock,
@@ -285,7 +285,6 @@ var FormatBlockTool = Tool.extend({
 
         ui.closest(".k-widget").removeClass("k-" + toolName).find("*").andSelf().attr("unselectable", "on");
     }
-
 });
 
 extend(Editor, {
