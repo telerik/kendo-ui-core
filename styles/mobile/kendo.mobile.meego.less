@@ -50,7 +50,6 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.1));
     .border-radius(~".8rem");
 
-    padding: .5rem 1rem;
     border: 1px solid transparent;
     border-color: rgba(0,0,0,.1) rgba(0,0,0,.2) rgba(0,0,0,.4);
     background: #f5f5f5;
@@ -270,6 +269,16 @@
     background-image: linear-gradient(top, rgba(255,255,255,0), rgba(255,255,255,.2));
 }
 
+.km-meego .km-navbar,
+.km-meego .km-toolbar
+{
+    background: #e5e5e5;
+    background-image: linear-gradient(top, rgba(0,0,0,.2), rgba(0,0,0,0));
+    background-clip: padding-box;
+    border-bottom: 1px solid #fff;
+    .box-shadow(0 0 5px rgba(0,0,0,.8))
+}
+
 .km-meego .km-tabstrip
 {
     display: table;
@@ -279,38 +288,6 @@
     background-clip: padding-box;
     border-top: 1px solid #fff;
     .box-shadow(0 0 5px rgba(0,0,0,.8))
-}
-
-.km-meego .km-navbar,
-.km-meego .km-toolbar
-{
-    display: none;
-}
-
-.km-meego .km-navbar .km-button,
-.km-meego .km-toolbar .km-button
-{
-    margin: 0;
-    padding: 1rem 0;
-    border: 0;
-    .box-shadow(none);
-    background: none;
-    color: #fff;
-    text-transform: uppercase;
-}
-
-.km-meego .km-navbar .km-text
-{
-    float: none;
-    border: 0;
-    padding: 0 .7rem;
-}
-
-.km-meego .km-navbar .km-button:last-child .km-text,
-.km-meego .km-toolbar .km-button:last-child .km-text,
-.km-meego .km-tabstrip .km-button:last-child .km-text
-{
-    border-right: 0;
 }
 
 .km-meego .km-tabstrip .km-button
@@ -540,6 +517,7 @@
 /* Icon styles */
 
 .km-meego .km-list .km-icon,
+.km-meego .km-navbar .km-icon,
 .km-meego .km-button .km-icon
 {
     background: linear-gradient(top, rgba(0,0,0,.7), rgba(0,0,0,.9));
@@ -548,18 +526,7 @@
 .km-meego .km-button.km-state-active .km-icon
 {
     background: #768694;
-}
-
-.km-meego .km-navbar .km-icon,
-.km-meego .km-button.km-state-active .km-icon
-{
     background: linear-gradient(top, rgba(255,255,255,.7), rgba(255,255,255,.9));
-}
-
-.km-meego .km-navbar .km-icon
-{
-    margin-left: .5rem;
-    margin-right: ~"-.3rem";
 }
 
 .km-meego .km-tabstrip .km-icon
@@ -671,7 +638,7 @@
     margin: .4rem;
     font-size: 1.3rem;
     text-align: center;
-    padding: .44rem;
+    padding: .3rem;
     .user-select(none);
     .border-radius(4px);
 }
