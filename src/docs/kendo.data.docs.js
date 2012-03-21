@@ -463,8 +463,14 @@
         get: function(id) {
         },
 
-        getByUid: function(id) {
+        /**
+        * Retrieves a Model instance by its UID.
+        * @param {String} uid The uid of the record to be retrieved
+        * @returns {Object} Model instance if found
+        */
+        getByUid: function(uid) {
         },
+
         /**
         * Synchronizes changes through the transport. Any pending CRUD operations will be sent to the server.
         * <p>If the DataSource is in <b>batch</b> mode, only one call will be made for each type of operation.
