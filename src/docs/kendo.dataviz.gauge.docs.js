@@ -161,6 +161,7 @@
          * @option {Object} [gaugeArea.border] The border of the gauge area.
          * @option {Number} [gaugeArea.border.width] <0> The width of the border.
          * @option {String} [gaugeArea.border.color] <"black">
+         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
          * @option {Object} [pointer] The pointer configuration options.
          * @option {String} [pointer.color] The color of the pointer.
          * Any valid CSS color string will work here, including hex and rgb.
@@ -177,6 +178,14 @@
          * gauge.redraw();
          */
         redraw: function() { },
+
+        /**
+         * Change the value of the gauge.
+         * @example
+         * var gauge = $("#radial-gauge").data("kendoRadialGauge");
+         * gauge.redraw();
+         */
+        value: function() { },
 
         /**
          * <p>Returns the SVG representation of the current gauge.
@@ -358,7 +367,7 @@
          * // sets the top and left margin to 1px
          * // margin right and bottom are with 5px (by default)
          * margin: { top: 1, left: 1 }
-         * @option {Object} [gaugeArea.background] The background of the gauge area.
+         * @option {Object} [gaugeArea.background] <"white"> The background of the gauge area.
          * @option {Number} [gaugeArea.width] <vertical gauge: 60; horizontal gauge: 200>
          * The width of the gauge area.
          * @option {Number} [gaugeArea.height] <vertical gauge: 200; horizontal gauge: 60>
@@ -366,6 +375,7 @@
          * @option {Object} [gaugeArea.border] The border of the gauge area.
          * @option {Number} [gaugeArea.border.width] <0> The width of the border.
          * @option {String} [gaugeArea.border.color] <"black">
+         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [gaugeArea.border.dashType] <"solid">
          * The dash type of the border.
          * <div class="details-list">
@@ -419,6 +429,7 @@
          * @option {Object} [plotArea.border] The border of the gauge area.
          * @option {Number} [plotArea.border.width] <0> The width of the border.
          * @option {String} [plotArea.border.color] <"black">
+         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [plotArea.border.dashType] <"solid">
          * The dash type of the border.
          * <div class="details-list">
@@ -471,7 +482,131 @@
          * @option {String} [pointer.color] The color of the pointer.
          * Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [pointer.shape] The shape of the pointer.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"barIndicator"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a filling bar indicator.
+         *         </dd>
+         *         <dt>
+         *              <code>"arrow"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a arrow shape.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {String} [pointer.value] The value of the gauge.
+         * @option {Number} [pointer.size] The size of the pointer.
+         * @option {Object} [pointer.track] The element arround/under the pointer.
+         * (available only for 'barIndicator' shape)
+         * @option {Object} [pointer.border] The border of the pointer.
+         * @option {Number} [pointer.border.width] <1> The width of the border.
+         * @option {String} [pointer.border.color]
+         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
+         * @option {String} [pointer.track.border.dashType] <"solid">
+         * The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * @option {Number} [pointer.track.size] The size of the track of the pointer.
+         * @option {Object} [pointer.track.border] The border of the track of the pointer.
+         * @option {Number} [pointer.track.border.width] <1> The width of the border.
+         * @option {String} [pointer.track.border.color]
+         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
+         * @option {String} [pointer.track.border.dashType] <"solid">
+         * The dash type of the border.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"solid"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a solid line.
+         *         </dd>
+         *         <dt>
+         *              <code>"dot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dots.
+         *         </dd>
+         *         <dt>
+         *              <code>"dash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of dashes.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDash"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash.
+         *         </dd>
+         *         <dt>
+         *              <code>"dashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
+         *         </dd>
+         *         <dt>
+         *              <code>"longDashDotDot"</code>
+         *         </dt>
+         *         <dd>
+         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
+         *         </dd>
+         *    </dl>
+         * </div>
          *
          */
         init: function() { },
@@ -479,10 +614,18 @@
         /**
          * Redraws the gauge.
          * @example
-         * var gauge = $("#radial-gauge").data("kendoRadialGauge");
+         * var gauge = $("#linear-gauge").data("kendoLinearGauge");
          * gauge.redraw();
          */
         redraw: function() { },
+
+        /**
+         * Change the value of the gauge.
+         * @example
+         * var gauge = $("#linear-gauge").data("kendoLinearGauge");
+         * gauge.redraw();
+         */
+        value: function() { },
 
         /**
          * <p>Returns the SVG representation of the current gauge.
@@ -493,7 +636,7 @@
          * Both programs provide command-line interface
          * suitable for backend processing.</p>
          * @example
-         * var gauge = $("#radial-gauge").data("kendoRadialGauge");
+         * var gauge = $("#linear-gauge").data("kendoLinearGauge");
          * var svgText = gauge.svg();
          */
         svg: function() { }
