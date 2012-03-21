@@ -28,7 +28,7 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")">
+                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")@(category.ToLower().Contains("mobile framework") ? "mobile-framework" : "")">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
@@ -79,7 +79,7 @@
                 </ul>
 
                 <script id="deviceThumbTemplate" type="text/x-kendo-template">
-                    <li><span class="thumbLink"><span class="thumb #= value #Thumb">#= value #</span><span class="skinTitle"><em>#= text #</em> Simulator</span></span></li>
+                    <li><span class="osName"><strong>#= text #</strong> Simulator</span> <span class="osThumb #= value #Thumb">#= value #</span></li>
                 </script>
 
             </div>

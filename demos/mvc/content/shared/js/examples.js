@@ -427,10 +427,10 @@
         var deviceTemplate = kendo.template($("#deviceThumbTemplate").html());
         deviceList.html(kendo.render(deviceTemplate, oses.view()));
 
-        deviceList.find(".thumbLink").click(function () {
+        deviceList.find(".osName,.osThumb").click(function () {
             try {
-                sessionStorage.setItem("kendoMobileOS", $(this).closest(".thumbLink").children(".thumb").text());
-                Application.fetch(location.href, true);
+                sessionStorage.setItem("kendoMobileOS", $(this).closest("li").children(".osThumb").text());
+                location.reload();
             } catch(err) {}
         });
 
