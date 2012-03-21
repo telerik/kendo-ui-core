@@ -221,6 +221,65 @@
                 ok(table.find("tr>td:first").hasClass("k-state-focused"));
             });
 
+            test("pressing enter key edit the row in inline mode", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.wrapper.focus().press(kendo.keys.ENTER);
+
+                ok(table.find("tr:first").hasClass("k-grid-edit-row"));
+                equal(table.find("tr:first").data("role"), "editable");
+            });
+
+            test("pressing enter key on edited item closes edit form in inline mode", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.wrapper.focus().press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+
+                ok(!table.find("tr:first").hasClass("k-grid-edit-row"));
+            });
+
+            test("pressing enter key on edited cell restores current in inline mode", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ENTER);
+
+                ok(table.find("tr:eq(1)>td:first")[0] === grid.current()[0]);
+                ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));
+            });
+
+            test("pressing enter key on edited row does not exits edit mode if validation fails in inline mode", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").val("").press(kendo.keys.ENTER);
+
+                ok(table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
+                ok(table.find("tr>td>input:first")[0] === document.activeElement);
+                equal(table.find("tr:eq(1)>td:first")[0], grid.current()[0]);
+            });
+
+            test("pressing enter on row when another item is edited and validation fails in inline mode", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER);
+                table.find("tr>td>input:first").val("");
+                grid.current(table.find("tr>td"));
+                grid.current().press(kendo.keys.ENTER);
+
+                equal(table.find("tr:eq(1)>td")[0], grid.current()[0]);
+                ok(table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
+                ok(!table.find("tr:first").hasClass("k-grid-edit-row"));
+            });
+
+            test("pressing escape key on edited row exits edit mode when in inline", function() {
+                var grid = setup({ editable: "inline" });
+
+                grid.wrapper.focus().press(kendo.keys.DOWN).press(kendo.keys.ENTER).press(kendo.keys.ESC);
+
+                ok(!table.find("tr:eq(1)").hasClass("k-grid-edit-row"));
+                ok(table.find("tr:eq(1)>td:first").hasClass("k-state-focused"));
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

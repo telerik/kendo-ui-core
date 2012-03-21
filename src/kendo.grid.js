@@ -1168,7 +1168,7 @@
                 model = that._modelForContainer(cell);
 
 
-            if ((!model.editable || model.editable(column.field)) && !column.command && column.field) {
+            if (model && (!model.editable || model.editable(column.field)) && !column.command && column.field) {
 
                 that._attachModelChange(model);
 
@@ -1810,7 +1810,7 @@
 
                     currentProxy(currentTarget);
                     if(!$(e.target).is(":button,a,:input,a>.k-icon,textarea,span.k-icon,.k-input")) {
-                        setTimeout(function() { wrapper.focus(); });
+                        setTimeout(function() { wrapper.focus(); } );
                     }
 
                     e.stopPropagation();
@@ -1839,6 +1839,9 @@
                             dataSource = that.dataSource,
                             pageable = that.options.pageable,
                             canHandle = !$(e.target).is(":button,a,:input,a>.t-icon"),
+                            isInCell = that._editMode() == "incell",
+                            currentIndex,
+                            cell,
                             handled = false;
 
                         if (canHandle && keys.UP === key) {
@@ -1866,8 +1869,8 @@
                             if (keys.ENTER == key || keys.F12 == key) {
                                 that._handleEditing(current);
                                 handled = true;
-                            } else if (keys.TAB == key) {
-                                var cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
+                            } else if (keys.TAB == key && isInCell) {
+                                cell = shiftKey ? current.prevAll(DATA_CELL + ":first") : current.nextAll(":visible:first");
                                 if (!cell.length) {
                                     cell = current.parent()[shiftKey ? "prevAll" : "nextAll"]("tr:not(.k-grouping-row,.k-detail-row):visible")
                                         .children(DATA_CELL + (shiftKey ? ":last" : ":first"));
@@ -1877,13 +1880,25 @@
                                     that._handleEditing(current, cell);
                                     handled = true;
                                 }
-                            } else if (keys.ESC == key && current.hasClass("k-edit-cell")) {
-                                that.closeCell();
-                                if (browser.msie && parseInt(browser.version) < 9) {
-                                    document.body.focus();
+                            } else if (keys.ESC == key && that._editContainer) {
+                                if (that._editContainer.has(current[0]) || current[0] === that._editContainer[0]) {
+                                    if (isInCell) {
+                                        that.closeCell();
+                                    } else {
+                                        currentIndex = that.items().index(current.parent());
+                                        document.activeElement.blur();
+                                        that.cancelRow();
+                                        if (currentIndex >= 0) {
+                                            that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
+                                        }
+                                    }
+
+                                    if (browser.msie && parseInt(browser.version) < 9) {
+                                        document.body.focus();
+                                    }
+                                    wrapper.focus();
+                                    handled = true;
                                 }
-                                wrapper.focus();
-                                handled = true;
                             }
                         }
 
@@ -1894,24 +1909,47 @@
                     }
                 });
 
-                wrapper.delegate(selector, "mousedown", clickCallback);
-            }
+                wrapper.delegate(selector, "mousedown", clickCallback); }
         },
 
         _handleEditing: function(current, next) {
             var that = this,
+                mode = that._editMode(),
+                editContainer = that._editContainer,
+                idx,
+                isEdited;
+
+            if (mode == "incell") {
                 isEdited = current.hasClass("k-edit-cell");
+            } else {
+                isEdited = current.parent().hasClass("k-grid-edit-row");
+            }
 
             if (that.editable) {
-                if ($.contains(that._editContainer[0], document.activeElement)) {
+                if ($.contains(editContainer[0], document.activeElement)) {
                     document.activeElement.blur();
                 }
 
                 if (that.editable.end()) {
-                    that.closeCell();
+                    if (mode == "incell") {
+                        that.closeCell();
+                    } else {
+                        if (current.parent()[0] === editContainer[0]) {
+                            idx = that.items().index(current.parent());
+                        } else {
+                            idx = that.items().index(editContainer);
+                        }
+                        that.saveRow();
+                        that.current(that.items().eq(idx).children().filter(DATA_CELL).first());
+                        isEdited = true;
+                    }
                 } else {
-                    that.current(that._editContainer);
-                    that._editContainer.find(":input:visible:first").focus();
+                    if (mode == "incell") {
+                        that.current(editContainer);
+                    } else {
+                        that.current(editContainer.children().filter(DATA_CELL).first());
+                    }
+                    editContainer.find(":input:visible:first").focus();
                     return;
                 }
             }
@@ -1922,7 +1960,11 @@
 
             that.wrapper.focus();
             if ((!isEdited && !next) || next) {
-                that.editCell(that.current());
+                if (mode == "incell") {
+                    that.editCell(that.current());
+                } else {
+                    that.editRow(that.current().parent());
+                }
             }
         },
 
@@ -2897,6 +2939,8 @@
                 data = that.dataSource.view(),
                 tbody,
                 placeholder,
+                currentIndex,
+                current = that.current(),
                 groups = (that.dataSource.group() || []).length,
                 colspan = groups + that.columns.length;
 
@@ -2905,6 +2949,10 @@
             }
 
             that.trigger("dataBinding");
+
+            if (current && current.hasClass("k-state-focused")) {
+                currentIndex = that.items().index(current.parent());
+            }
 
             that._distroyEditable();
 
@@ -2950,6 +2998,10 @@
             }
 
             that._footer();
+
+            if (currentIndex >= 0) {
+                that.current(that.items().eq(currentIndex).children().filter(DATA_CELL).first());
+            }
 
             that.trigger(DATABOUND);
        }
