@@ -124,15 +124,15 @@
     restrictValue = calendar.restrictValue,
     extend = $.extend,
     proxy = $.proxy,
-    DATE = Date,
-    sharedCalendar;
+    DATE = Date;
 
     var DateView = function(options) {
         var that = this,
-            body = document.body;
+            body = document.body,
+            sharedCalendar = DatePicker.sharedCalendar;
 
         if (!sharedCalendar) {
-            sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
+            sharedCalendar = DatePicker.sharedCalendar = new ui.Calendar($(DIV).hide().appendTo(body));
             calendar.makeUnselectable(sharedCalendar.element);
         }
 
