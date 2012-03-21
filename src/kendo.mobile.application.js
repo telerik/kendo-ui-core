@@ -455,7 +455,6 @@
 
             var view = kendo.initWidget(element, {application: this, layout: layout}, kendo.mobile.ui);
 
-
             return view;
         },
 
