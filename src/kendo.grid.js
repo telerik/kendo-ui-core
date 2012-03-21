@@ -103,7 +103,7 @@
             if (originalEvent.wheelDelta) {
                 delta = originalEvent.wheelDelta;
             } else if (originalEvent.detail) {
-                delta = -originalEvent.detail;
+                delta = (-originalEvent.detail) * 10;
             } else if ($.browser.opera) {
                 delta = -originalEvent.wheelDelta;
             }
