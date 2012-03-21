@@ -1134,7 +1134,8 @@ p#copy
 #deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: -97px 0;}
 #deviceList .selectedThumb .blackberryThumb,#deviceList li:hover .blackberryThumb{background-position: -194px 0;}
 
-#deviceList .selectedThumb
+#deviceList .selectedThumb,
+#deviceList li:hover
 {
     color:#e26b1d;
 }
