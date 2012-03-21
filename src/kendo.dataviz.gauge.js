@@ -765,7 +765,6 @@
                 trackBoxCenter,
                 trackBox,
                 pointerBox;
-                console.log(options.size);
 
             if (scale.options.vertical) {
                 trackBox = new Box2D(

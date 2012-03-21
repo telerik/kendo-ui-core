@@ -156,6 +156,41 @@
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the axis.
          * @option {Number} [scale.max] <100> The maximum value of the axis.
+         * @option {Array} [scale.ranges] The ranges of the scale.
+         * The range fields:
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"from"</code>
+         *         </dt>
+         *         <dd>
+         *              The start position of the range in scale units.
+         *         </dd>
+         *         <dt>
+         *             <code>"to"</code>
+         *         </dt>
+         *         <dd>
+         *              The end position of the range in scale units.
+         *         </dd>
+         *         <dt>
+         *              <code>"color"</code>
+         *         </dt>
+         *         <dd>
+         *              The color of the range.
+         * Any valid CSS color string will work here, including hex and rgb.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * _example
+         * $("#radial-gauge").kendoRadialGauge({
+         *     scale: {
+         *         ranges: [{
+         *             from: 10,
+         *             to: 20,
+         *             color: "green"
+         *         }]
+         *     }
+         *  });
          * @option {Object} [gaugeArea] The gauge area configuration options.
          * This is the entire visible area of the gauge.
          * @option {Object} [gaugeArea.border] The border of the gauge area.
@@ -357,6 +392,41 @@
          * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {Number} [scale.min] <0> The minimum value of the axis.
          * @option {Number} [scale.max] <100> The maximum value of the axis.
+         * @option {Array} [scale.ranges] The ranges of the scale.
+         * The range fields:
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              <code>"from"</code>
+         *         </dt>
+         *         <dd>
+         *              The start position of the range in scale units.
+         *         </dd>
+         *         <dt>
+         *             <code>"to"</code>
+         *         </dt>
+         *         <dd>
+         *              The end position of the range in scale units.
+         *         </dd>
+         *         <dt>
+         *              <code>"color"</code>
+         *         </dt>
+         *         <dd>
+         *              The color of the range.
+         * Any valid CSS color string will work here, including hex and rgb.
+         *         </dd>
+         *    </dl>
+         * </div>
+         * _example
+         * $("#linear-gauge").kendoLinearGauge({
+         *     scale: {
+         *         ranges: [{
+         *             from: 10,
+         *             to: 20,
+         *             color: "green"
+         *         }]
+         *     }
+         *  });
          * @option {Object} [gaugeArea] The gauge area configuration options.
          * This is the entire visible area of the gauge.
          * @option {Number|Object} [gaugeArea.margin] <5> The margin of the gauge area.
