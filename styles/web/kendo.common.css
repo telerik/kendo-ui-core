@@ -72,7 +72,7 @@
 {
     display: inline-block;
     margin: 0;
-    padding: 1px 7px 3px;
+    padding: 2px 7px 2px;
     font-family: inherit;
     line-height: 1.66em;
     text-align: center;
@@ -1929,6 +1929,8 @@ span.k-datepicker
     cursor: pointer;
 }
 
+.k-button,
+.k-textbox,
 .k-timepicker,
 .k-datepicker,
 .k-datetimepicker

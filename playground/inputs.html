@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Autocomplete</title>
+        <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.autocomplete.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.combobox.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.dropdownlist.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.timepicker.js" type="text/javascript" charset="utf-8"></script>
+        <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
+        <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+        <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+        <style type="text/css">
+            html {
+                font: 12px Arial, Helvetica, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <label for="autocomplete">AutoComplete</label>
+        <input type="text" id="autocomplete" value="test 1" />
+        <input type="text" id="combo" value="test 2" />
+        <input type="text" id="dropdown" value="test 3" />
+        <input type="text" id="datepicker" value="3/14/2012" />
+        <input type="text" id="timepicker" value="1:00 AM" />
+        <input type="text" class="k-textbox" />
+        <button class="k-button">Butty</button>
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $("#autocomplete").kendoAutoComplete({
+                    dataSource: ["foo", "bar", "baz"]
+                });
+                $("#combo").kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    dataSource: [ { text: "foo" }, { text: "bar" }, { text: "baz" }]
+                });
+                $("#dropdown").kendoDropDownList({
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    dataSource: [ { text: "foo" }, { text: "bar" }, { text: "baz" }]
+                });
+                $("#datepicker").kendoDatePicker();
+                $("#timepicker").kendoTimePicker();
+            });
+        </script>
+    </body>
+</html>
