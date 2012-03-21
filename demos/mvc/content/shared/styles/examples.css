@@ -487,7 +487,7 @@ html
 .column23 p,
 .mobileOSs
 {
-    color:#6f6f6f;    
+    color:#6f6f6f;
 }
 
 .browsers
@@ -1209,6 +1209,14 @@ pre.prettyprint
     background: -o-linear-gradient(top, #eeeeee 0%,#eaeaea 50%,#e3e3e3 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, #eeeeee 0%,#eaeaea 50%,#e3e3e3 100%); /* IE10+ */
     background: linear-gradient(top, #eeeeee 0%,#eaeaea 50%,#e3e3e3 100%); /* W3C */
+}
+
+#codeStrip a.documentation-link {
+    display: block;
+    float: right;
+    position: relative;
+    background: #d3d3d3;
+    z-index: 2
 }
 
 #codeStrip .k-content,
@@ -1992,3 +2000,4 @@ div.old-browser
     color: #787878;
     border-bottom: 1px solid #e1e1e1;
 }
+

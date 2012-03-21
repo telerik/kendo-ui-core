@@ -154,6 +154,7 @@
         {
             "text": "Editor",
             "name": "editor",
+            "documentation": "ui-widgets/editor/",
             "spriteCssClass": "editorIcon",
             "items": [
                 {
