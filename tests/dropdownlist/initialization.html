@@ -443,7 +443,7 @@
                 var select = $("<select/>"),
                     dropdownlist = new DropDownList(select, {
                         dataSource: ["item1", "item2"],
-                        placeholder: "Select..."
+                        optionLabel: "Select..."
                     });
 
                     equal(select[0].children[0].outerHTML, '<option value="">Select...</option>');
@@ -512,11 +512,10 @@
                 equal(dropdownlist.text(), "Select...");
             });
 
-            test("use placeholder option", function() {
+            test("use optionLabel option", function() {
                 var dropdownlist = new DropDownList($("<input/>"), {
                     autoBind: false,
-                    placeholder: "Select...",
-                    optionLabel: "do not use it"
+                    optionLabel: "Select..."
                 });
 
                 equal(dropdownlist.text(), "Select...");
