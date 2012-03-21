@@ -3,6 +3,7 @@
         {
             "text": "DataViz Widgets",
             "spriteCssClass": "overviewIcon",
+            "documentation": "dataviz/chart",
             "expanded": "true",
             "items": [{
                     "text": "Overview",
@@ -11,6 +12,7 @@
             "name": "overview"
         }, {
             "text": "Area Charts",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartAreaIcon",
             "items": [{
                     "text": "Basic usage",
@@ -26,6 +28,7 @@
             "name": "area-chart"
         }, {
             "text": "Bar Charts",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartBarIcon",
             "items": [{
                     "text": "Basic usage",
@@ -53,6 +56,7 @@
             "name": "bar-charts"
         }, {
             "text": "Line Charts",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartLineIcon",
             "items": [
                 {
@@ -72,6 +76,7 @@
             "name": "line-chart"
         }, {
             "text": "Pie Charts",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartPieIcon",
             "items": [{
                     "text": "Basic usage",
@@ -90,6 +95,7 @@
             "name": "pie-chart"
         }, {
             "text": "Scatter Charts",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartScatterIcon",
             "items": [{
                     "text": "Basic usage",
@@ -111,6 +117,7 @@
             "name": "scatter-charts"
         }, {
             "text": "Customization",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartIcon",
             "items": [{
                     "text": "PlotBands",
@@ -119,6 +126,7 @@
             "name": "customization"
         }, {
             "text": "API",
+            "documentation": "dataviz/chart",
             "spriteCssClass": "chartIcon",
             "items": [{
                     "text": "Methods",
