@@ -27,25 +27,27 @@
                 </ul>
             </div>
 
-            <div id="treeview"></div>
+            <div id="treeview" class="demo-section"></div>
 
             <script>
                 $(document).ready(function() {
                     var treeview = $("#treeview").kendoTreeView({
-                            dataSource: [
-                                { text: "Item 1", expanded: true, items: [
-                                    { text: "Item 1.1" },
-                                    { text: "Item 1.2" },
-                                    { text: "Item 1.3" }
-                                ] },
-                                { text: "Item 2", items: [
-                                    { text: "Item 2.1" },
-                                    { text: "Item 2.2" },
-                                    { text: "Item 2.3" }
-                                ] },
-                                { text: "Item 3" }
+                        dataSource: [
+                            { text: "Furniture", expanded: true, items: [
+                                { text: "Tables & Chairs" },
+                                { text: "Sofas" },
+                                { text: "Occasional Furniture" }
                             ]
-                        }).data("kendoTreeView"),
+                            },
+                            { text: "Decor", items: [
+                                { text: "Bed Linen" },
+                                { text: "Curtains & Blinds" },
+                                { text: "Carpets" }
+                            ]
+                            },
+                            { text: "Storage" }
+                            ]
+                    }).width(300).data("kendoTreeView"),
                         append = function(e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
                                 var selectedNode = treeview.select();

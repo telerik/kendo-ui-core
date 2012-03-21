@@ -1,24 +1,45 @@
 
         <div id="example" class="k-content">
-            <div id="treeview-left"></div>
+            <div class="demo-section">
 
-            <div id="treeview-right"></div>
+                <div id="treeview-left"></div>
+
+                <div id="treeview-right"></div>
+
+            </div>
 
             <script>
-                $("#treeview-left, #treeview-right").kendoTreeView({
+                $("#treeview-left").kendoTreeView({
                     dragAndDrop: true,
                     dataSource: [
-                        { text: "Item 1", expanded: true, items: [
-                            { text: "Item 1.1" },
-                            { text: "Item 1.2" },
-                            { text: "Item 1.3" }
+                        { text: "Furniture", expanded: true, items: [
+                            { text: "Tables & Chairs" },
+                            { text: "Sofas" },
+                            { text: "Occasional Furniture" }
                         ] },
-                        { text: "Item 2", items: [
-                            { text: "Item 2.1" },
-                            { text: "Item 2.2" },
-                            { text: "Item 2.3" }
-                        ] },
-                        { text: "Item 3" }
+                        { text: "Decor", items: [
+                            { text: "Bed Linen" },
+                            { text: "Curtains & Blinds" },
+                            { text: "Carpets" }
+                        ] }
+                    ]
+                }).data("kendoTreeView");
+
+                $("#treeview-right").kendoTreeView({
+                    dragAndDrop: true,
+                    dataSource: [
+                        { text: "Storage", expanded: true, items: [
+                            { text: "Wall Shelving" },
+                            { text: "Floor Shelving" },
+                            { text: "Kids Storage" }
+                        ]
+                        },
+                        { text: "Lights", items: [
+                            { text: "Ceiling" },
+                            { text: "Table" },
+                            { text: "Floor" }
+                        ]
+                        }
                     ]
                 }).data("kendoTreeView");
             </script>
@@ -28,8 +49,17 @@
                 #treeview-right
                 {
                     float: left;
-                    width: 25%;
-                    margin-top: 2em;
+                    width: 220px;
+                }
+                .demo-section {
+                	width: 500px;
+                }
+                .demo-section:after {
+                	content: ".";
+                    display: block;
+                    height: 0;
+                    clear: both;
+                    visibility: hidden;
                 }
             </style>
         </div>
