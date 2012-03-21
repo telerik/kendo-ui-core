@@ -994,6 +994,11 @@ div.k-grid-header .k-header
     border-bottom-width: 0;
 }
 
+.k-grid
+{
+    outline: 0;
+}
+
 .k-grid-content
 {
     width: 100%;

@@ -909,6 +909,11 @@ p#copy
     line-height:30px;
 }
 
+#example .k-grid-content table
+{
+    -webkit-transform: translatez(0);
+}
+
 #qrWrap
 {
     padding-right:14px;
