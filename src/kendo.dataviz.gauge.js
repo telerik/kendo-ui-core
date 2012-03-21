@@ -698,14 +698,13 @@
         init: function(scale, options) {
             var pointer = this;
             Pointer.fn.init.call(pointer, scale, options);
-            pointer.options = deepExtend(pointer.options, { size: pointer.getPointerSize() });
+            pointer.options = deepExtend({ size: pointer.getPointerSize() }, pointer.options);
         },
 
         options: {
             shape: BAR_INDICATOR,
 
             track: {
-                width: 6,
                 border: {
                     width: 1
                 },
@@ -718,7 +717,7 @@
             },
             opacity: 1,
 
-            margin: getSpacing(1.5),
+            margin: getSpacing(2.5),
             animation: {
                 type: BAR_INDICATOR,
                 speed: 120
@@ -760,12 +759,13 @@
                 slot = scale.getSlot(options.value),
                 scaleLine = scale.lineBox(),
                 scaleBox = scale.box,
-                width = options.track.width,
+                width = options.track.size || options.size,
                 padding = getSpacing(options.margin),
                 halfSize = options.size / 2,
                 trackBoxCenter,
                 trackBox,
                 pointerBox;
+                console.log(options.size);
 
             if (scale.options.vertical) {
                 trackBox = new Box2D(
@@ -805,7 +805,7 @@
                         zIndex: 2,
                         align: false
                     }, border),
-                shape = pointer.getShape(options.value);
+                shape = pointer.getPointerShape(options.value);
 
             if (options.shape === ARROW) {
                 elementOptions.animation.type = ARROW_POINTER;
@@ -817,7 +817,7 @@
             return element;
         },
 
-        getShape: function(value) {
+        getPointerShape: function(value) {
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
@@ -870,7 +870,7 @@
                 size = tickSize * 0.3;
             }
 
-            return size;
+            return round(size);
         },
 
         renderTrack: function(view) {
@@ -898,7 +898,7 @@
             if (options.visible) {
                 pointer.element = pointer.renderPointer(view);
                 elements.push(pointer.element);
-                if (options.track.visible) {
+                if (options.track.visible && options.shape === BAR_INDICATOR) {
                     elements.push(pointer.renderTrack(view));
                 }
             }
@@ -1077,16 +1077,15 @@
                 options = gauge.options,
                 element = gauge.element,
                 width = element.width(),
-                height = element.height(),
-                vertical = options.scale.vertical;
+                height = element.height();
 
             if (options.name === "LinearGauge") {
                 if (!width) {
-                    width = vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
+                    width = options.scale.vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
                 }
 
                 if (!height) {
-                    height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
+                    height = options.scale.vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
                 }
             } else {
                 if (!width) {
