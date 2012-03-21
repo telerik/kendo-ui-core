@@ -53,12 +53,12 @@
             } catch(err) {}
         },
 
-        fetch: function(href) {
+        fetch: function(href, forced) {
             var exampleWrap = $("#exampleWrap"),
                 currentHref = this.href,
                 mainWrap = $("#main");
 
-            if (href === currentHref) {
+            if (href === currentHref && !forced) {
                 return;
             }
 
@@ -426,7 +426,7 @@
         deviceList.find(".thumbLink").click(function () {
             try {
                 sessionStorage.setItem("kendoMobileOS", $(this).closest(".thumbLink").children(".thumb").text());
-                location.reload();
+                Application.fetch(Application.href, true);
             } catch(err) {}
         });
 
