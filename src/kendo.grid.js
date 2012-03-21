@@ -1525,7 +1525,7 @@
                 editable = that.options.editable,
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
-            return confirmation !== false ? that._showMessage(confirmation) : true;
+            return confirmation !== false && confirmation != undefined ? that._showMessage(confirmation) : true;
         },
 
         /**
