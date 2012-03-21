@@ -1,6 +1,6 @@
 
         <div id="example" class="k-content">
-            <div class="configuration">
+            <div class="configuration k-widget k-header" style="width: 250px">
                 <span class="configHead">Events log</span>
                 <div class="console"></div>
             </div>
@@ -14,26 +14,26 @@
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event :: open");
                         }
-                    };
+                    }
 
                     function onClose() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event :: close");
                         }
-                    };
+                    }
 
                     function onChange() {
                         if ("kendoConsole" in window) {
                             kendoConsole.log("event :: change");
                         }
-                    };
+                    }
 
                     function onSelect(e) {
                         if ("kendoConsole" in window) {
                             var dataItem = this.dataItem(e.item.index());
                             kendoConsole.log("event :: select (" + dataItem + ")" );
                         }
-                    };
+                    }
 
                     var data = [
                             "Alabama",
@@ -104,13 +104,13 @@
                 });
             </script>
 
-            <style scoped="scoped">
+            <style scoped>
                 #taxi {
                     width: 240px;
                     height: 160px;
                     padding: 80px 0 0 200px;
                     background: url('../../content/web/autocomplete/taxi.png') transparent no-repeat 0 0;
-                    margin: 40px 0 30px 100px;
+                    margin: 40px 0 30px 40px;
  				}
                 #taxi label {
                     display: block;

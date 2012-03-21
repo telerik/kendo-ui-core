@@ -3,8 +3,8 @@
         <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
 
         <label><select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select>src:</label>
-        <label><input type="textbox" data-bind="value: imageAlt" />alt:</label>
-        <label><input type="textbox" data-bind="value: imageTitle" />title:</label>
+        <label><input type="textbox" data-bind="value: imageAlt" class="k-textbox" />alt:</label>
+        <label><input type="textbox" data-bind="value: imageTitle" class="k-textbox" />title:</label>
     </div>
     <script>
         $(document).ready(function() {

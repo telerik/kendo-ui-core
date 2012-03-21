@@ -2,16 +2,16 @@
 
         <div id="example" class="k-content">
 
-            <div class="configuration">
+            <div class="configuration k-widget k-header">
                 <span class="configHead">Configure</span>
                 <ul class="options">
                     <li>
                         <label for="page">Page:</label>
-                        <input type="number" value="1" id="page" min="1" />
+                        <input type="number" value="1" id="page" min="1" class="k-textbox" style="margin: -3px 0 3px;" />
                     </li>
                     <li>
                         <label for="order">Order by:</label>
-                        <select id="order" style="width:115px;float:right;">
+                        <select id="order" style="width:115px;float:right;margin-top: -3px;">
                             <option value="Id">Id</option>
                             <option value="FirstName">First Name</option>
                             <option value="LastName">Last Name</option>
@@ -20,7 +20,7 @@
                     </li>
                     <li>
                         <label for="dir">Direction:</label>
-                        <select id="dir" style="width:115px;float:right;">
+                        <select id="dir" style="width:115px;float:right;margin-top: -3px;">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
@@ -107,9 +107,15 @@
 
             <style scoped>
                 .metrotable {
-                	width: 650px;
-                	margin: 0 auto 20px auto;
+                	width: 520px;
+                	margin: 0 0 20px;
                 	border-collapse: collapse;
+                }
+
+                table.metrotable > thead > tr > th
+                {
+                    padding-top: 0;
+                    font-size: 1.8em;
                 }
             </style>
             <!--style scoped>

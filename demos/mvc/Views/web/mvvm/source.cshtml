@@ -14,17 +14,17 @@
         </tfoot>
     </table>
 
-    <div class="configuration">
+    <div class="configuration k-widget k-header">
         <span class="configHead">Add a product</span>
         <ul class="options">
             <li>
-                <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" /></label>
+                <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" class="k-textbox"/></label>
             </li>
             <li>
-                <label>Price:<input type="number" placeholder="Enter number" data-bind="value: productPrice" /></label>
+                <label>Price:<input type="number" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" /></label>
             </li>
             <li>
-                <label>Units in stock:<input type="number" placeholder="Enter number" data-bind="value: productUnitsInStock" /></label>
+                <label>Units in stock:<input type="number" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" /></label>
             </li>
             <li>
                 <button class="k-button" data-bind="click: addProduct">Add a new product</button>
@@ -235,7 +235,8 @@ kendo.bind($(&quot;#example&quot;), viewModel);
             float: left;
         }
 
-        .configuration {
+        #example .configuration {
+            margin-bottom: 10px;
             width: 200px;
         }
 
@@ -245,6 +246,7 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         }
 
         .configuration input[type=text] {
+            margin-top: -3px;
             width: 130px;
         }
         .code-sample {

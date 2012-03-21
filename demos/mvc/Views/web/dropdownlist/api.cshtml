@@ -75,9 +75,8 @@
                     $("#word").keypress(setSearch);
                 });
            </script>
-            <div class="configuration" style="width: 210px">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
+            <div class="configuration k-widget k-header" style="width: 210px">
+                <span class="configHead">API Functions</span>
                 <ul class="options">
                     <li>
                         <button id="enable" class="k-button">Enable</button> or <button id="disable" class="k-button">Disable</button>
@@ -89,13 +88,13 @@
                         <button id="getValue" class="k-button">Get value</button> or <button id="getText" class="k-button">Get text</button>
                     </li>
                     <li>
-                        <input id="index" value="0" /> <button id="select" class="k-button">Select by index</button>
+                        <input id="index" value="0" class="k-textbox" /> <button id="select" class="k-button">Select by index</button>
                     </li>
                     <li>
-                        <input id="value" value="1" /> <button id="setValue" class="k-button">Select by value</button>
+                        <input id="value" value="1" class="k-textbox" /> <button id="setValue" class="k-button">Select by value</button>
                     </li>
                     <li>
-                        <input id="word" value="Pulp" /> <button id="find" class="k-button">Select item starting with</button>
+                        <input id="word" value="Pulp" class="k-textbox" /> <button id="find" class="k-button">Select item starting with</button>
                     </li>
                 </ul>
             </div>

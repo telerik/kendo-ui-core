@@ -2,16 +2,16 @@
         <div id="example" class="k-content">
 
 
-            <div class="configuration">
+            <div class="configuration k-widget k-header">
                 <span class="configHead">Configure</span>
                 <ul class="options">
                     <li>
                         <label for="page">Page:</label>
-                        <input type="number" value="1" id="page" min="1" />
+                        <input type="number" value="1" id="page" min="1" class="k-textbox" style="margin: -3px 0 3px;" />
                     </li>
                     <li>
                         <label for="order">Order by:</label>
-                        <select id="order" style="width:115px;float:right;">
+                        <select id="order" style="width:115px;float:right;margin-top: -3px;">
                             <option value="Id">Id</option>
                             <option value="Name">Name</option>
                             <option value="AverageRating">Rating</option>
@@ -20,7 +20,7 @@
                     </li>
                     <li>
                         <label for="dir">Direction:</label>
-                        <select id="dir" style="width:115px;float:right;">
+                        <select id="dir" style="width:115px;float:right;margin-top: -3px;">
                             <option value="asc">Ascending</option>
                             <option value="desc">Descending</option>
                         </select>
@@ -97,11 +97,11 @@
 
             <style scoped>
                 #movies-container {
-                    padding: 10px;
+                    margin: 0 5px;
                     overflow: auto;
-                    width: 650px;
+                    padding: 10px;
+                    width: 492px;
                     height: 500px;
-                    margin: 30px auto;
                     border: 1px solid #bbb;
                     -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
                     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);

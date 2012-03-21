@@ -5,7 +5,7 @@
                              data-value-field="ProductID" data-text-field="ProductName"
                              data-bind="source: productsSource, value: selectedProduct"></select>
 
-            <button data-bind="click: save, enabled: hasChanges">Submit All Changes</button>
+            <button data-bind="click: save, enabled: hasChanges" class="k-button">Submit All Changes</button>
         </div>
         <div class="form" data-bind="visible: showForm">
             <ul>
@@ -14,7 +14,7 @@
                 <li><label>UnitPrice</label> <input type="text" data-role="numerictextbox" data-bind="value: selectedProduct.UnitPrice, events: { change: change }" /></li>
             </ul>
 
-            <button data-bind="click: remove">Delete Product</button>
+            <button data-bind="click: remove" class="k-button">Delete Product</button>
         </div>
     </div>
     <script>
@@ -180,8 +180,5 @@ kendo.bind($("#form-container"), viewModel);
             background-color: #D75B26;
         }
 
-        #form-container button {
-            height: 30px;
-        }
     </style>
 </div>
