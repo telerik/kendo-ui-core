@@ -987,13 +987,14 @@ div.k-grid-header .k-header
 
 .k-grid-content
 {
-    position: relative;
     width: 100%;
     overflow: auto;
     overflow-x: auto;
     overflow-y: scroll;
     zoom: 1;
 }
+
+*+html .k-grid-content { position: relative; } /* Apply position: relative only in IE7, 'cause it shifts WebKit's scrollbar */
 
 .k-virtual-scrollable-wrap
 {
