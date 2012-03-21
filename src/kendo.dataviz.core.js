@@ -2341,7 +2341,7 @@
                     }
                 }
 
-                throw Error("Unsupported browser: Missing SVG and VML support.");
+                kendo.logToConsole("Warning: Missing SVG and VML support. KendoUI DataViz will not render.");
             },
             registerView: function(viewType) {
                 var defaultView = dataviz.ui.views[0];

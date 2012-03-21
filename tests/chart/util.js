@@ -89,13 +89,13 @@ function sameBox(a, b, tolerance) {
 }
 
 function stubMethod(fn, methodName, stub, callback) {
-    var oldMethod = fn.prototype[methodName];
-    fn.prototype[methodName] = stub;
+    var oldMethod = fn[methodName];
+    fn[methodName] = stub;
     try {
         callback();
     }
     finally {
-        fn.prototype[methodName] = oldMethod;
+        fn[methodName] = oldMethod;
     }
 }
 
