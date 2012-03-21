@@ -403,14 +403,13 @@ var ColorTool = Tool.extend({
         var editor = initOptions.editor,
             toolName = this.name;
 
-        ui.kendoColorPicker({
+        new Editor.ColorPicker(ui, {
             value: "#000000",
             change: function (e) {
                 Tool.exec(editor, toolName, e.value);
             }
         });
     }
-
 });
 
 var StyleTool = Tool.extend({
