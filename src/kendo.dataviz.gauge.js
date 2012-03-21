@@ -1075,33 +1075,31 @@
         _createModel: function() {
             var gauge = this,
                 options = gauge.options,
+                size = gauge._getSize();
+
+
+            return new RootElement(deepExtend({
+                width: size.width,
+                height: size.height,
+                transitions: options.transitions
+            }, options.gaugeArea));
+        },
+
+        _getSize: function() {
+            var gauge = this,
                 element = gauge.element,
                 width = element.width(),
                 height = element.height();
 
-            if (options.name === "LinearGauge") {
-                if (!width) {
-                    width = options.scale.vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
-                }
-
-                if (!height) {
-                    height = options.scale.vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
-                }
-            } else {
-                if (!width) {
-                    width = DEFAULT_WIDTH;
-                }
-
-                if (!height) {
-                    height = DEFAULT_HEIGHT;
-                }
+            if (!width) {
+                width = DEFAULT_WIDTH;
             }
 
-            return new RootElement(deepExtend({
-                width: width,
-                height: height,
-                transitions: options.transitions
-            }, options.gaugeArea));
+            if (!height) {
+                height = DEFAULT_HEIGHT;
+            }
+
+            return { width: width, height: height };
         }
     });
 
@@ -1165,6 +1163,24 @@
             model.reflow();
 
             return model;
+        },
+
+        _getSize: function() {
+            var gauge = this,
+                element = gauge.element,
+                width = element.width(),
+                height = element.height(),
+                vertical = gauge.options.scale.vertical;
+
+            if (!width) {
+                width = vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
+            }
+
+            if (!height) {
+                height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
+            }
+
+            return { width: width, height: height };
         }
     });
 
