@@ -590,6 +590,7 @@
         refresh: function () {
             var that = this,
             ul = that.ul[0],
+            popup = that.popup,
             options = that.options,
             suggest = options.suggest,
             data = that.dataSource.view(),
@@ -613,7 +614,11 @@
 
             if (that._open) {
                 that._open = false;
-                that.popup[length ? "open" : "close"]();
+                popup[length ? "open" : "close"]();
+            }
+
+            if (that._touchScroller) {
+                that._touchScroller.reset();
             }
 
             that._makeUnselectable();

@@ -665,13 +665,13 @@
                 }
             }
 
-            if (popup.visible()) {
-                popup._update();
-            }
-
             if (that._open) {
                 that._open = false;
                 that.toggle(!!length);
+            }
+
+            if (that._touchScroller) {
+                that._touchScroller.reset();
             }
 
             that._makeUnselectable();

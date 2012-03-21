@@ -429,22 +429,6 @@
                 }, 100);
             });
 
-            test("reposition popup on refresh", function() {
-                var combobox = new ComboBox(input, {
-                    dataSource: ["foo", "faa", "bar"],
-                    filter: "contains"
-                });
-
-                stub(combobox.popup, {
-                    _update: combobox.popup._update
-                });
-
-                combobox.search("f");
-                combobox.search("fa");
-
-                equal(combobox.popup.calls("_update"), 2);
-            });
-
             test("do not remove default filter expression", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",

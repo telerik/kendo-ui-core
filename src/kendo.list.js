@@ -224,7 +224,7 @@
                 width: width
             });
 
-            kendo.touchScroller(that.popup.element);
+            that._touchScroller = kendo.touchScroller(that.popup.element);
         },
 
         _makeUnselectable: function(element) {
