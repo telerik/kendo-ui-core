@@ -977,7 +977,7 @@ p#copy
 .widgetGrid .narrowCol:first-child
 {
     background:#eee;
-    background:rgba(206,206,206,.2);
+    background:rgba(191,191,191,.2);
 }
 
 .widgetGrid .wideCol
@@ -990,6 +990,13 @@ p#copy
 {
     float:left;
     width:310px;
+}
+
+.widgetGrid .mobile-framework
+{
+    width:276px;
+    background:rgba(221, 221, 221, 0.2);
+    min-height:158px;
 }
 
 .widgetGrid h2
@@ -1027,7 +1034,8 @@ p#copy
 
 /*DataViz dashboard navigation*/
 
-.dashboards ul
+.dashboards ul,
+#deviceList
 {
     width:auto;
     margin-top:30px;
@@ -1049,6 +1057,68 @@ p#copy
 {
     width:90px;
     padding-left:12px;
+}
+
+/*mobile device selector*/
+
+.widgetGrid .mobile-devices
+{
+    width:380px;
+}
+
+#deviceList
+{
+    margin-top:13px;
+    padding-bottom:0;
+    color:#4e4e4e;
+}
+
+#deviceList li
+{
+    position:relative;
+    float:left;
+    width:97px;
+    padding-bottom:73px;
+    margin-right:12px;
+    text-align:center;
+}
+
+.osName,
+.osThumb
+{
+    cursor:pointer;
+}
+
+.osName strong
+{
+    display:block;
+    margin:0 auto;
+}
+
+#deviceList .osThumb
+{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:97px;
+    height:63px;
+    margin:0 auto;
+    background:no-repeat url(../../mobile/shared/sprite.devices.png);
+    text-indent:-4444px;
+    text-align:center;
+}
+
+#deviceList .iosThumb{background-position: 0 15px;}
+#deviceList .androidThumb{background-position: -97px 15px;}
+#deviceList .blackberryThumb{background-position: -194px 15px;}
+
+#deviceList .selectedThumb .iosThumb{background-position: 0 0;}
+#deviceList .selectedThumb .androidThumb{background-position: -97px 0;}
+#deviceList .selectedThumb .blackberryThumb{background-position: -194px 0;}
+
+#deviceList .selectedThumb
+{
+    color:#e26b1d;
 }
 
 /*previous demo site styles*/
