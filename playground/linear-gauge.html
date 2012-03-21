@@ -11,8 +11,6 @@
 
         <style>
             #gauge, #gauge1 {
-                width: 200px;
-                height: 200px;
                 margin-left: 200px;
                 border: 1px solid red;
                 float: left;
@@ -47,6 +45,24 @@
                     }]
                 },
 
+                gaugeArea: {
+                    border: {
+                        color: "red",
+                        width: 1,
+                        dashType: "dot"
+                    },
+                    background: "green"
+                },
+
+                plotArea: {
+                    border: {
+                        color: "blue",
+                        width: 1,
+                        dashType: "dot"
+                    },
+                    background: "white"
+                },
+
                 pointer: {
                     value: 50,
                     shape: "barIndicator"
@@ -62,6 +78,24 @@
                 pointer: {
                     value: 50,
                     shape: "arrow"
+                },
+
+                gaugeArea: {
+                    border: {
+                        color: "red",
+                        width: 1,
+                        dashType: "dot"
+                    },
+                    background: "green"
+                },
+
+                plotArea: {
+                    border: {
+                        color: "blue",
+                        width: 1,
+                        dashType: "dot"
+                    },
+                    background: "white"
                 }
             });
         </script>

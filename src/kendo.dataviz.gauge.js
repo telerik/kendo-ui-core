@@ -39,9 +39,11 @@
         BLACK = "#000",
         CAP_SIZE = 0.05,
         COORD_PRECISION = dataviz.COORD_PRECISION,
-        DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
+        DEFAULT_HEIGHT = 200,
         DEFAULT_LINE_WIDTH = 0.5,
-        DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
+        DEFAULT_WIDTH = 200,
+        DEFAULT_MIN_WIDTH = 60,
+        DEFAULT_MIN_HEIGHT = 60,
         DEGREE = math.PI / 180,
         INSIDE = "inside",
         NEEDLE = "needle",
@@ -1074,13 +1076,25 @@
             var gauge = this,
                 options = gauge.options,
                 element = gauge.element,
-                model = new RootElement(deepExtend({
-                    width: element.width() || DEFAULT_WIDTH,
-                    height: element.height() || DEFAULT_HEIGHT,
-                    transitions: options.transitions
-                    }, options.gaugeArea));
+                width = element.width(),
+                height = element.height(),
+                vertical = options.scale.vertical;
 
-            return model;
+            if (options.name === "LinearGauge") {
+                if (!width) {
+                    width = vertical ? DEFAULT_MIN_WIDTH : DEFAULT_WIDTH;
+                }
+
+                if (!height) {
+                    height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
+                }
+            }
+
+            return new RootElement(deepExtend({
+                width: width,
+                height: height,
+                transitions: options.transitions
+            }, options.gaugeArea));
         }
     });
 
@@ -1117,6 +1131,12 @@
     });
 
     var LinearGauge = Gauge.extend({
+        init: function(element, options) {
+            var linearGauge = this;
+            Gauge.fn.init.call(linearGauge, element, options);
+            kendo.notify(linearGauge, dataviz.ui);
+        },
+
         options: {
             name: "LinearGauge",
             transitions: true,
