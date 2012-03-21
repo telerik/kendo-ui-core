@@ -4342,7 +4342,7 @@ var ListFormatter = Class.extend({
     },
 
     unwrap: function(ul) {
-        var fragment = document.createDocumentFragment(),
+        var fragment = ul.ownerDocument.createDocumentFragment(),
             unwrapTag = this.unwrapTag,
             parents,
             li,
