@@ -604,6 +604,7 @@
          * @option {Boolean} [editable.update] Indicates whether item should be switched to edit mode on click.
          * @option {Boolean} [editable.destroy] Indicates whether item should be deleted when click on delete button.
          * @option {Boolean} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
+         * @option {Boolean} [editable.template] Template which will be use during popup editing
          * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
          * _example
          *  $("#grid").kendoGrid({
