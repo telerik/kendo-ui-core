@@ -10,7 +10,7 @@
         },
         "dataviz": {
             "name": "DataViz",
-            "description": "Data Visualization Widgets"
+            "description": "Data Visualization Widgets for Desktop and Mobile web apps"
         },
         "mobile": {
             "name": "Mobile",
