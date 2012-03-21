@@ -221,7 +221,6 @@
 
                 animationType;
 
-            that.application.transitioning = true;
             that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
 
             animationType = that.application.dataOrDefault((that.back ? previous : view).element, "transition");

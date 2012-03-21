@@ -317,6 +317,7 @@
          */
         navigate: function(url) {
             var that = this;
+            that.transitioning = true;
 
             that._findView(url, function(view) {
                 if (that.view === view) {
