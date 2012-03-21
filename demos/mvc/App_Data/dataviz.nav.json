@@ -135,8 +135,8 @@
                 "text": "Basic usage",
                 "url": "radial-gauge/index.html"
             }, {
-                "text": "Gauge labels",
-                "url": "radial-gauge/gauge-labels.html"
+                "text": "Scale options",
+                "url": "radial-gauge/scale-options.html"
             }],
             "name": "radial-gauge"
         }, {
