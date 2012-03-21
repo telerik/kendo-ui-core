@@ -134,7 +134,7 @@
     *
     * @section
     *
-    * <p>By default, all navigational widgets treat the links' hrefs as mobile views. This behavior can be overriden by setting <code>data-rel="external" attribute to the link element.  </p>
+    * <p>By default, all navigational widgets treat the links' hrefs as mobile views. This behavior can be overriden by setting <code>data-rel="external"</code> attribute to the link element.  </p>
     *
     * @exampleTitle External links
     * @example
