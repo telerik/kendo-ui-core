@@ -1,4 +1,9 @@
 (function($, undefined) {
+    /**
+     * @name kendo.fx
+     * @namespace This object contains the fx library that is used by all widgets using animation.
+     * If this file is not included, all animations will be disabled but the basic functionality preserved.
+     */
     var kendo = window.kendo,
         fx = kendo.fx,
         each = $.each,

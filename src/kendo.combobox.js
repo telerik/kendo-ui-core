@@ -1010,7 +1010,7 @@
                  .val(element.value)
                  .css({
                     width: "100%",
-                    height: "auto"
+                    height: element.style.height
                  })
                  .show();
 

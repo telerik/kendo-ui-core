@@ -72,9 +72,9 @@
 {
     display: inline-block;
     margin: 0;
-    padding: 0 7px 1px;
+    padding: 1px 7px 3px;
     font-family: inherit;
-    line-height: 1.9;
+    line-height: 1.66em;
     text-align: center;
     cursor: pointer;
     outline: 0;
@@ -744,7 +744,7 @@ div.k-window-content
 {
     content: '\A0';
     display: block;
-    width: 99.99%;
+    width: 99%;
     height: 0;
     overflow: hidden;
 }
@@ -994,7 +994,7 @@ div.k-grid-header .k-header
     zoom: 1;
 }
 
-*+html .k-grid-content { position: relative; } /* Apply position: relative only in IE7, 'cause it shifts WebKit's scrollbar */
+.k-grid-content table { position: relative; } /* Move position: relative to the table, 'cause it shifts WebKit's scrollbar */
 
 .k-virtual-scrollable-wrap
 {
@@ -1730,7 +1730,7 @@ span.k-datetimepicker .k-select+.k-select
 .k-dropdown-wrap .k-input,
 .k-selectbox .k-input
 {
-    min-height: 1.31em;
+    height: 1.31em;
     line-height: 1.31em;
     padding: 0.18em 0;
     text-indent: 4px;
@@ -2053,13 +2053,16 @@ div.k-treeview
 .k-input
 {
     padding: 0.25em 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .k-textbox
 {
-    padding: .4em .2em;
+    outline: 0;
+    height: 1.66em;
+    line-height: 1.66em;
+    padding: 2px .2em;
 }
 
 /* NumericTextBox */

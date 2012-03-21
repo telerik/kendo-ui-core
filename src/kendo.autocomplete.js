@@ -909,7 +909,7 @@
             wrapper[0].style.cssText = DOMelement.style.cssText;
             element.css({
                 width: "100%",
-                height: "auto"
+                height: DOMelement.style.height
             });
 
             that._focused = that.element;

@@ -881,7 +881,7 @@
             wrapper[0].style.cssText = element[0].style.cssText;
             element.css({
                 width: "100%",
-                height: "auto"
+                height: element[0].style.height
             });
 
             that.wrapper = wrapper.addClass("k-widget k-timepicker k-header");
