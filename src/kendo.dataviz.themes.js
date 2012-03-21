@@ -386,6 +386,9 @@
                 },
                 majorTicks: {
                     color: WHITE
+                },
+                line: {
+                    color: WHITE
                 }
             }
         }),
@@ -404,6 +407,9 @@
                     color: "#293135"
                 },
                 majorTicks: {
+                    color: "#293135"
+                },
+                line: {
                     color: "#293135"
                 }
             }
@@ -424,6 +430,9 @@
                 },
                 majorTicks: {
                     color: "#2e2e2e"
+                },
+                line: {
+                    color: "#2e2e2e"
                 }
             }
         }),
@@ -443,6 +452,9 @@
                 },
                 majorTicks: {
                     color: "#777"
+                },
+                line: {
+                    color: "#777"
                 }
             }
         }),
@@ -461,6 +473,9 @@
                     color: "#515967"
                 },
                 majorTicks: {
+                    color: "#515967"
+                },
+                line: {
                     color: "#515967"
                 }
             }
