@@ -162,32 +162,29 @@
     ],
     "Sample Dashboards": [
         {
-            "text": "High performance chart",
-            "spriteCssClass": "chartIcon",
+            "text": "High Performance Chart",
+            "spriteCssClass": "content/dataviz/dashboards/performance.gif",
             "expanded": "true",
             "items": [{
-                "text": "High performance",
                 "url": "dashboards/high-performance.html"
             }],
             "name": "high-performance"
         },
         {
-            "text": "Car dashboard",
-            "spriteCssClass": "gaugeRadialIcon",
+            "text": "Car Dashboard",
+            "spriteCssClass": "content/dataviz/dashboards/car.gif",
             "expanded": "true",
             "items": [{
-                "text": "Car dashboard",
                 "url": "dashboards/car-dashboard.html"
             }],
             "name": "car-dashboard"
         },
         {
-            "text": "Stock history dashboard",
-            "spriteCssClass": "chartAreaIcon",
+            "text": "Stock History Dashboard",
+            "spriteCssClass": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
             "onlineOnly": "true",
             "items": [{
-                "text": "Stock history dashboard",
                 "url": "dashboards/stock-history.html"
             }],
             "name": "stock-history"

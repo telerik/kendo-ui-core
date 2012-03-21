@@ -932,7 +932,7 @@ p#copy
 {
     width:16px;
     height:16px;
-    margin-right:8px;
+    margin-left:8px;
     vertical-align:text-top;
     background:-288px -75px no-repeat url(sprite.misc.png)
 }
@@ -957,6 +957,18 @@ p#copy
 .widgetOverview #example
 {
     padding-left:0;
+}
+
+.demo-section
+{
+    margin: 20px auto; 
+    padding: 10px; 
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07); 
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07); 
+    box-shadow: 0 1px 1px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07); 
+    -webkit-border-radius: 8px; 
+    -moz-border-radius: 8px; 
+    border-radius: 8px; 
 }
 
 /*widget grid*/
@@ -1011,6 +1023,32 @@ p#copy
 .widgetGrid a:hover
 {
     color:#e26b1d;
+}
+
+/*DataViz dashboard navigation*/
+
+.dashboards ul
+{
+    width:auto;
+    margin-top:30px;
+}
+
+.dashboards li
+{
+    float:left;
+    width:200px;
+}
+
+.dashboards a
+{
+    float:left;
+    width:68px;
+}
+
+.dashboards a+a
+{
+    width:90px;
+    padding-left:12px;
 }
 
 /*previous demo site styles*/
