@@ -36,7 +36,7 @@
         CANCEL = "cancel",
         TAP = "tap";
 
-    if (kendo.support.touch) {
+    if (support.touch) {
         RESIZE_EVENT = "orientationchange";
         START_EVENTS = "touchstart";
         MOVE_EVENTS = "touchmove";
@@ -178,7 +178,9 @@
                 element.on("mousedown selectstart", filter, preventDefault);
             }
 
-            that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
+            if (support.touch) {
+                that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
+            }
 
             that.bind([
             /**
