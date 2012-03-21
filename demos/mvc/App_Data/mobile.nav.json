@@ -3,6 +3,7 @@
         {
             "text": "Mobile Widgets",
             "name": "overview",
+            "documentation": "mobile",
             "spriteCssClass": "overviewIcon",
             "items": [
                 {
@@ -14,6 +15,7 @@
         {
             "text": "Button",
             "name": "button",
+            "documentation": "mobile",
             "spriteCssClass": "mobileButtonIcon",
             "items": [
                 {
@@ -33,6 +35,7 @@
         {
             "text": "ButtonGroup",
             "name": "buttongroup",
+            "documentation": "mobile/buttongroup",
             "spriteCssClass": "mobileButtonGroupIcon",
             "items": [
                 {
@@ -52,6 +55,7 @@
         {
             "text": "ListView",
             "name": "listview",
+            "documentation": "mobile/listview",
             "spriteCssClass": "mobileListViewIcon",
             "items": [
                 {
@@ -76,6 +80,7 @@
                 {
             "text": "NavBar",
             "name": "navbar",
+            "documentation": "mobile/navbar",
             "spriteCssClass": "mobileNavBarIcon",
             "items": [
                 {
@@ -106,6 +111,7 @@
         {
             "text": "ScrollView",
             "name": "scrollview",
+            "documentation": "mobile/scrollview",
             "spriteCssClass": "mobileScrollViewIcon",
             "items": [
                 {
@@ -117,6 +123,7 @@
         {
             "text": "Switch",
             "name": "Switch",
+            "documentation": "mobile/switch",
             "spriteCssClass": "mobileSwitchIcon",
             "items": [
                 {
@@ -132,6 +139,7 @@
         {
             "text": "TabStrip",
             "name": "tabstrip",
+            "documentation": "mobile/tabstrip",
             "spriteCssClass": "mobileTabStripIcon",
             "items": [
                 {
@@ -150,6 +158,7 @@
         {
             "text": "Application",
             "name": "application",
+            "documentation": "mobile/application",
             "spriteCssClass": "mobileAppIcon",
             "items": [
                 {
