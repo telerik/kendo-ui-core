@@ -44,7 +44,11 @@ html
     font-size:13px;
 }
 
-.overview>div
+.overview .header,
+.overview #banner,
+.overview .suite-demos-nav,
+.overview .demos-nav,
+.overview #footer
 {
     /*iPad fix*/
     min-width:990px;
