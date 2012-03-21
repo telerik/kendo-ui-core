@@ -95,7 +95,7 @@
                     dataviz.SVGView.available = function() { return false; };
                     dataviz.VMLView.available = function() { return false; };
 
-                    stubMethod({ prototype: kendo }, "logToConsole", function(message) {
+                    stubMethod(kendo, "logToConsole", function(message) {
                         equals(message, "Warning: Missing SVG and VML support. KendoUI DataViz will not render.");
                         start();
                     }, function() {
@@ -1207,7 +1207,7 @@
                 var animations;
                 function logAnimations(callback) {
                     animations = [];
-                    stubMethod(dataviz.ViewBase, "playAnimations",
+                    stubMethod(dataviz.ViewBase.fn, "playAnimations",
                         function() {
                             var view = this;
                             animations = view.animations;

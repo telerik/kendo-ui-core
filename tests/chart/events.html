@@ -62,7 +62,7 @@
                     var createSegment = dataviz.LineChart.fn.createSegment,
                         id;
 
-                    stubMethod(dataviz.LineChart, "createSegment",
+                    stubMethod(dataviz.LineChart.fn, "createSegment",
                         function(lineId) {
                             id = lineId;
                             return createSegment.apply(this, arguments);
