@@ -321,7 +321,7 @@
 
             $(doc).data("kendoSkin", kendoSkin);
 
-            $("#qr").click(function(e){
+            $("#qr").off().click(function(e){
                 var bigQR = $("#qrBig");
                 bigQR.toggle();
                 var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
@@ -332,7 +332,7 @@
         },
 
         initMobile: function() {
-            $("#qr").click(function(e){
+            $("#qr").off().click(function(e){
                 var bigQR = $("#qrBig");
                 bigQR.toggle();
                 var newText = bigQR.is(":visible") ? "Hide QR Code" : "Show QR Code";
