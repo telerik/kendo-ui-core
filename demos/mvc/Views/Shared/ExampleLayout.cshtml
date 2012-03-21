@@ -58,8 +58,12 @@
     @if (ViewBag.ShowCodeStrip == true)
     {
         <div id="codeStrip">
+            @if (!string.IsNullOrEmpty(ViewBag.Documentation))
+            {
+                <a class="documentation-link k-link" href="http://www.kendoui.com/documentation/@ViewBag.Documentation">Documentation</a>
+            }
             <ul>
-                <li class="k-state-active">Description</li>
+                <li class="k-state-active">Getting started</li>
                 <li>View Code</li>
 
                 @if (ViewBag.ConfigurationDocPath != null)
@@ -77,6 +81,7 @@
                     <li>Events</li>
                 }
             </ul>
+
             <div class="description">
                 @Html.Raw(ViewBag.Description)
                 @RenderSection("Description", false)

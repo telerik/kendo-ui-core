@@ -7,6 +7,7 @@ namespace Kendo.Models
     {
         public string Name { get; set; }
         public string Text { get; set; }
+        public string Documentation { get; set; }
         public string SpriteCssClass { get; set; }
         public bool Expanded { get; set; }
         public NavigationExample[] Items { get; set; }

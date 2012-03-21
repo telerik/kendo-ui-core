@@ -51,6 +51,8 @@ namespace Kendo.Controllers
                 ViewBag.styles = Kendo.Models.StyleGroups.All;
             }
 
+            ViewBag.Documentation = ViewBag.CurrentExample.Documentation ?? ViewBag.CurrentWidget.Documentation;
+
             return View(
                 string.Format("~/Views/{0}/{1}/{2}.cshtml", suite, section, example)
             );
