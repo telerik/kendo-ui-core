@@ -501,6 +501,14 @@
     <Content Include="Views\web\editor\api.cshtml" />
     <Content Include="Views\web\editor\events.cshtml" />
     <Content Include="Views\web\editor\index.cshtml" />
+    <Content Include="Views\web\window\animation.cshtml" />
+    <Content Include="Views\Shared\Navigation.cshtml" />
+    <Content Include="Views\Shared\GoogleAnalytics.cshtml" />
+    <Content Include="Views\Shared\Pager.cshtml" />
+    <Content Include="Views\Shared\_LayoutWidget.cshtml" />
+    <Content Include="Views\web\grid\editing-custom.cshtml" />
+    <Content Include="Views\web\grid\editing-inline.cshtml" />
+    <Content Include="Views\web\grid\editing-popup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\Debug\TempPE\" />

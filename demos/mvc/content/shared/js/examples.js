@@ -456,7 +456,7 @@
                 { text: "Metro", value: "metro" },
                 { text: "Silver", value: "silver" }
             ],
-            template = kendo.template("<li data-value='#=value#'><span>#= text #</span></li>"),
+            template = kendo.template("<li data-value='#=value#' class='skin-#=value#'><span>#= text #</span></li>"),
             changeTheme = function(theme) {
                 Application.changeTheme(theme, true);
 
