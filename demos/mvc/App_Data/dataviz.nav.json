@@ -145,6 +145,9 @@
             "items": [{
                 "text": "Basic usage",
                 "url": "linear-gauge/index.html"
+            }, {
+                "text": "Scale options",
+                "url": "linear-gauge/scale-options.html"
             }],
             "name": "linear-gauge"
         }
