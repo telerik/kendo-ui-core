@@ -5,7 +5,7 @@
     <h3 class="example-title">Stock<span>History</span></h3>
     <h4 class="example-description">Kendo UI Data Visualization Project</h4>
 
-    <div id="filtering-tabs"></div>
+    <div id="year-filtering-tabs" class="filtering-tabs"></div>
 
     <h5 class="example-subtitle">Closing stock prices</h5>
     <span class="metric">throughout <span class="selected-year"></span></span>
@@ -30,7 +30,7 @@
             <dd class="eoy-closing"></dd>
         </dl>
 
-        <dl class="stat">
+        <dl class="stat highest-container">
             <dt class="example-subtitle">
                 Highest
                 <span class="metric">US dollars</span>
@@ -39,7 +39,7 @@
             <dd class="sparkline highest-sparkline"></dd>
         </dl>
 
-        <dl class="stat">
+        <dl class="stat lowest-container">
             <dt class="example-subtitle">
                 Lowest
                 <span class="metric">US dollars</span>
@@ -47,11 +47,25 @@
             <dd class="lowest"></dd>
             <dd class="sparkline lowest-sparkline"></dd>
         </dl>
+
+        <hr>
+
+        <dl class="stat first">
+            <dt class="example-subtitle">
+                #= name # volume of traded stocks
+                <span class="metric">traded stocks</span>
+            </dt>
+            <dd class="volume"></dd>
+        </dl>
+
+        <div class="volume-chart"></div>
     </script>
 
+    <hr>
+
+    <div id="company-filtering-tabs" class="filtering-tabs"></div>
+
     <div class="company-info" id="google"></div>
-    <div class="company-info" id="apple"></div>
-    <div class="company-info" id="amazon"></div>
 
     <script>
         var selectedYear = 2011;
@@ -91,16 +105,17 @@
                 var view = this.view();
 
                 // populate detailed stock prices
-                populateStockPrices($("#google"), view[0]);
-                populateStockPrices($("#apple"), view[1]);
-                populateStockPrices($("#amazon"), view[2]);
+                populateStockPrices(view[0]);
             }
         });
 
-        function populateStockPrices(container, data) {
-            var yearlyStockValues = data.items,
+        function populateStockPrices(data) {
+            var container = $(".company-info"),
+                yearlyStockValues = data.items,
                 highest = yearlyStockValues[0].high,
                 lowest = yearlyStockValues[0].low,
+                volume = 0,
+                metric = "",
                 format = function(number) {
                     return kendo.toString(number, "n");
                 },
@@ -127,14 +142,40 @@
             $.each(yearlyStockValues, function() {
                 highest = this.high > highest ? this.high : highest;
                 lowest = this.low < lowest ? this.low : lowest;
+                volume += this.volume;
             });
+
+            if (volume > 999999999) {
+                volume /= 1000000000;
+                metric = "billions stocks";
+            } else if (volume > 999999) {
+                volume /= 1000000;
+                metric = "millions stocks";
+            }
 
             container
                 .find(".eoy-closing").text(format(yearlyStockValues[yearlyStockValues.length - 1].close)).end()
                 .find(".highest").text(format(highest)).end()
                 .find(".lowest").text(format(lowest)).end()
                 .find(".lowest-sparkline").kendoChart(sparklineOptions("low", "#cd1533")).end()
-                .find(".highest-sparkline").kendoChart(sparklineOptions("high", "#009bd7")).end();
+                .find(".highest-sparkline").kendoChart(sparklineOptions("high", "#009bd7")).end()
+                .find(".first dt .metric").eq(1).text(metric).end().end()
+                .find(".volume").text(format(volume)).end()
+                .find(".volume-chart").kendoChart({
+                    dataSource: yearlyStockValues,
+                    series: [{
+                        field: "volume"
+                    }],
+                    seriesDefaults: {
+                        type: "column",
+                        color: "#009bd7"
+                    },
+                    axisDefaults: {
+                        visible: false,
+                        majorGridLines: { visible: false }
+                    },
+                    legend: { visible: false }
+                }).end();
         }
 
         $("#yearly-stock-prices").kendoChart({
@@ -222,7 +263,7 @@
             panel.html(companyInfoTemplate({ name: panel.attr("id") }));
         });
 
-        $("#filtering-tabs").kendoTabStrip({
+        $("#year-filtering-tabs").kendoTabStrip({
             dataSource: ["2007","2008","2009","2010","2011"],
             change: function(e) {
                 selectedYear = this.value();
@@ -233,6 +274,20 @@
             }
         }).data("kendoTabStrip").select(4);
 
+        $("#company-filtering-tabs").kendoTabStrip({
+            dataSource: ["Google", "Apple", "Amazon"],
+            change: function() {
+                var company = this.value().toLowerCase(),
+                    view = stocksDataSource.view();
+
+                if (view.length) {
+                    $(".company-info").html(companyInfoTemplate({ name: company }));
+
+                    populateStockPrices(view[this.select().index()]);
+                }
+            }
+        }).data("kendoTabStrip").select(0);
+
     </script>
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300" rel="stylesheet">
@@ -241,23 +296,38 @@
         .example-subtitle,
         .metric,
         .example-description,
-        .eoy-closing {
+        .first dd {
             font-family: 'Open Sans Condensed', Verdana, sans-serif;
         }
 
         .stat {
-            width: 20%;
-            margin-top: 48px;
+            width: 25%;
         }
 
         .first {
             width: 40%;
-            margin-top: 0;
         }
 
         .stat dd {
+            margin: 0 0 0 80px;
+        }
+
+        .first dd {
             margin: 0;
-            line-height: 1em;
+        }
+
+        .lowest-container {
+            background: transparent url("../../content/dataviz/dashboards/lowest.png") no-repeat 0 67px;
+        }
+
+        .highest-container {
+            background: transparent url("../../content/dataviz/dashboards/highest.png") no-repeat 0 67px;
+        }
+
+        dd.highest,
+        dd.lowest {
+            margin: .6em 0 0 80px;
+            font-size: 37px;
         }
 
         .stat {
@@ -279,7 +349,7 @@
         }
 
         .example-title span,
-        .eoy-closing {
+        .first dd {
             font-weight: 700;
         }
 
@@ -358,20 +428,24 @@
         .radio-group label[for=chart-type-area] { background-image: url("../../content/dataviz/dashboards/area-chart.png"); }
         .radio-group label[for=chart-type-line] { background-image: url("../../content/dataviz/dashboards/line-chart.png"); }
 
-        .eoy-closing {
-            font-size: 100px;
+        .stat .eoy-closing {
+            font-size: 90px;
         }
 
-        #filtering-tabs {
+        .stat .volume {
+            font-size: 70px;
+        }
+
+        .filtering-tabs {
             border: 0;
             background: none;
         }
 
-        #filtering-tabs .k-tabstrip-items {
+        .filtering-tabs .k-tabstrip-items {
             padding: 0;
         }
 
-        #filtering-tabs .k-item {
+        .filtering-tabs .k-item {
             width: 19.6%;
             border: 0;
             margin: 0 .2%;
@@ -384,17 +458,17 @@
             color: #727f8e;
         }
 
-        #filtering-tabs .k-state-hover {
+        .filtering-tabs .k-state-hover {
             background: none;
         }
 
-        #filtering-tabs .k-state-active {
+        .filtering-tabs .k-state-active {
             padding: 0;
             color: #2b8abe;
             border-bottom: 8px solid #2b8abe;
         }
 
-        #filtering-tabs .k-link {
+        .filtering-tabs .k-link {
             padding: 0;
         }
 
@@ -402,6 +476,24 @@
             height: 200px;
             margin-top: 20px;
             clear: both;
+        }
+
+        #company-filtering-tabs {
+            text-align: right;
+            line-height: 46px;
+        }
+
+        #company-filtering-tabs .k-item {
+            border: 0;
+            padding: 0 1em;
+            width: auto;
+            -webkit-border-radius: 23px;
+            border-radius: 23px;
+        }
+
+        #company-filtering-tabs .k-state-active {
+            background: #009bd7;
+            color: #fff;
         }
 
         .lowest {
@@ -415,6 +507,16 @@
         .sparkline {
             height: 60px;
             width: 100px;
+        }
+
+        .volume-chart {
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            width: 330px;
+            height: 80px;
+            vertical-align: top;
+            margin-top: 4.2em;
         }
     </style>
 </div>
