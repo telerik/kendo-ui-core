@@ -1221,7 +1221,7 @@
                 return;
             }
 
-            if ($("." + CONTENT, that.wrapper).filter(function() { return $(this).data("animating"); }).length) {
+            if (that.tabGroup.children("[data-animating], [data-in-request]").length) {
                 return;
             }
 
@@ -1352,6 +1352,8 @@
                 return false;
             }
 
+            item.attr("data-animating", true);
+
             var isAjaxContent = (item.children("." + LINK).data(CONTENTURL) || false) && content.is(EMPTY),
                 showContentElement = function () {
                     oldTab.removeClass(TABONTOP);
@@ -1372,7 +1374,9 @@
                         .kendoStop(true, true)
                         .kendoAnimate( extend({ init: function () {
                             that.trigger(ACTIVATE, { item: item[0], contentElement: content[0] });
-                        } }, animation) );
+                        } }, animation, { complete: function () {
+                                                        item.removeAttr("data-animating");
+                                                    } } ) );
                 },
                 showContent = function() {
                     if (!isAjaxContent) {
@@ -1442,6 +1446,8 @@
                     statusIcon = $("<span class='k-icon k-loading'/>").prependTo(link)
                 }, 100);
 
+            element.attr("data-in-request", true);
+
             $.ajax({
                 type: "GET",
                 cache: false,
@@ -1456,6 +1462,8 @@
                 },
 
                 complete: function () {
+                    element.removeAttr("data-in-request");
+
                     clearTimeout(loadingIconTimeout);
                     if (statusIcon !== null) {
                         statusIcon.remove();
