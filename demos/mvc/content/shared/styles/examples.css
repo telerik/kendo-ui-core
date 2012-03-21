@@ -973,14 +973,14 @@ p#copy
 
 .demo-section
 {
-    margin: 20px auto; 
-    padding: 10px; 
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07); 
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07); 
-    box-shadow: 0 1px 1px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07); 
-    -webkit-border-radius: 8px; 
-    -moz-border-radius: 8px; 
-    border-radius: 8px; 
+    margin: 20px auto;
+    padding: 10px;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.45), inset 0 0 30px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.45), inner 0 0 30px rgba(0,0,0,0.07);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
 }
 
 /*widget grid*/
@@ -1800,7 +1800,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { background: #eee; }
     width:320px; /* Workaround the broken flex box in FF. */
 }
 
-#device-wrapper [href*=index]
+#device-wrapper [href*=index], #back-button
 {
     visibility: hidden;
 }
