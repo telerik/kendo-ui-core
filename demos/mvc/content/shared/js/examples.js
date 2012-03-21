@@ -329,6 +329,10 @@
                 e.preventDefault();
                 e.stopPropagation();
             });
+
+            $("#deviceChooser").mobileOsChooser({
+                container: "#mobile-application-container"
+            });
         },
 
         initMobile: function() {
@@ -339,10 +343,6 @@
                 $(this).children("em").html(newText);
                 e.preventDefault();
                 e.stopPropagation();
-            });
-
-            $("#deviceChooser").mobileOsChooser({
-                container: "#mobile-application-container"
             });
 
             applyCurrentMobileOS("#mobile-application-container");
@@ -428,9 +428,18 @@
         deviceList.html(kendo.render(deviceTemplate, oses.view()));
 
         deviceList.find(".osName,.osThumb").click(function () {
+            var li = $(this).closest("li");
             try {
-                sessionStorage.setItem("kendoMobileOS", $(this).closest("li").children(".osThumb").text());
-                location.reload();
+                if (sessionStorage.getItem("kendoMobileOS") === li.children(".osThumb").text()) {
+                    return;
+                }
+
+                sessionStorage.setItem("kendoMobileOS", li.children(".osThumb").text());
+
+                li.siblings().removeClass("selectedThumb")
+                  .end().addClass("selectedThumb");
+
+                Application.fetch(location.href, true);
             } catch(err) {}
         });
 
