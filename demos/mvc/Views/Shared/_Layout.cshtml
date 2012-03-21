@@ -28,7 +28,7 @@
         {
             if (ViewBag.Navigation.Keys.Count > 1)
             {
-                <div class="@(category.ToLower().Contains("ui") ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")">
+                <div class="@((category.ToLower().Contains("ui") || category.ToLower().IndexOf("dashboard") > -1) ? "wideCol" : "narrowCol") floatWrap @(category.ToLower().IndexOf("dashboard") > -1 ? "dashboards" : "")">
                     <h2>@category</h2>
                     @{ var idx = 0; }
                     <ul>
@@ -50,7 +50,9 @@
                                 <li class="@(isActive ? "active" : "")">
                                 @if (widget.Items[0].Url.IndexOf("dashboard") == 0)
                                 {
-                                    <img src="@widget.SpriteCssClass" alt="@widget.Name" />
+                                    <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">
+                                        <img src="@(Url.Content("~") + widget.SpriteCssClass)" alt="@widget.Name" />
+                                    </a>
                                 }
                                     <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
                                 </li>
