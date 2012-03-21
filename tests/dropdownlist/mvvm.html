@@ -432,7 +432,7 @@
             });
 
             test("selecting the default value sets the view model field to null", function() {
-                var dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-placeholder="placeholder"/>');
+                var dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-option-label="placeholder"/>');
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}],
@@ -449,7 +449,7 @@
             });
 
             test("selecting the default value sets the view model field to emtpy string", function() {
-                var dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-placeholder="placeholder"/>');
+                var dom = $('<select data-bind="value:bar, source:items" data-role="dropdownlist" data-value-field="text" data-option-label="placeholder"/>');
 
                 var observable = kendo.observable({
                     items: [{text:"foo"}, {text:"bar"}],

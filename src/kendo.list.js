@@ -560,7 +560,7 @@
             that._fetch = false;
         },
 
-        _options: function(data, placeholder) {
+        _options: function(data, optionLabel) {
             var that = this,
                 element = that.element,
                 selectedIndex = element[0].selectedIndex,
@@ -573,8 +573,8 @@
                 dataValue,
                 idx = 0;
 
-            if (placeholder) {
-                options = placeholder;
+            if (optionLabel) {
+                options = optionLabel;
                 idx = 1;
             }
 

@@ -242,10 +242,10 @@
          * $("#dropdownlist").kendoDropDownList({
          *     height: 400
          * });
-         * @option {String} [placeholder] Define the text of the default empty item.
+         * @option {String} [optionLabel] Define the text of the default empty item.
          * _example
          * $("#dropdownlist").kendoDropDownList({
-         *     placeholder: "Select An Option"
+         *     optionLabel: "Select An Option"
          * });
          * @option {Function} [template] Template to be used for rendering the items in the list.
          * _example
@@ -312,10 +312,6 @@
                 that.wrapper.focus();
             });
 
-            if (options.optionLabel && !options.placeholder) {
-                options.placeholder = options.optionLabel;
-            }
-
             that._reset();
 
             that._word = "";
@@ -343,8 +339,8 @@
                     that.text(element.children(":selected").text());
                 }
 
-                if (!that.text().replace(trimRegExp, "") && options.placeholder) {
-                    that.text(options.placeholder);
+                if (!that.text().replace(trimRegExp, "") && options.optionLabel) {
+                    that.text(options.optionLabel);
                 }
             }
 
@@ -360,7 +356,7 @@
             delay: 500,
             dataTextField: "",
             dataValueField: "",
-            placeholder: "",
+            optionLabel: "",
             height: 200,
             animation: {}
         },
@@ -614,7 +610,7 @@
             var that = this,
                 data = that._data(),
                 length = data.length,
-                placeholder = that.options.placeholder;
+                optionLabel = that.options.optionLabel;
 
             that.trigger("dataBinding");
 
@@ -622,11 +618,11 @@
             that._height(length);
 
             if (that.element.is(SELECT)) {
-                if (placeholder && length) {
-                    placeholder = '<option value="">' + placeholder + "</option>";
+                if (optionLabel && length) {
+                    optionLabel = '<option value="">' + optionLabel + "</option>";
                 }
 
-                that._options(data, placeholder);
+                that._options(data, optionLabel);
             }
 
             if (that._open) {
@@ -769,15 +765,15 @@
         _data: function() {
             var that = this,
                 options = that.options,
-                placeholder = options.placeholder,
+                optionLabel = options.optionLabel,
                 textField = options.dataTextField,
                 valueField = options.dataValueField,
                 data = that.dataSource.view(),
                 length = data.length,
-                first = placeholder,
+                first = optionLabel,
                 idx = 0;
 
-            if (placeholder && length) {
+            if (optionLabel && length) {
                 if (textField) {
                     first = {};
 
@@ -785,7 +781,7 @@
                     valueField = valueField.split(".");
 
                     assign(first, valueField, "");
-                    assign(first, textField, placeholder);
+                    assign(first, textField, optionLabel);
                 }
 
                 first = new kendo.data.ObservableArray([first]);
