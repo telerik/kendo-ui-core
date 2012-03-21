@@ -15,6 +15,9 @@
   <Description />
   <IndependentDescriptors />
   <Name>DragAndDropEvents</Name>
+  <QcFilePath i:nil="true" />
+  <QcId>0</QcId>
+  <QcTestVersionStamp>0</QcTestVersionStamp>
   <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
     <d2p1:AutomationStep i:type="d2p1:AutomationStep">
       <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
@@ -23,7 +26,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>1</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>8b49f122-1e8d-4f80-9d1a-31b6ecf99980</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>f35e842e-6d9b-4941-b439-6ea90a655fc4</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -43,6 +48,7 @@
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:BaseUrl>http://aggeorgiev/kendo/live</d2p1:BaseUrl>
         <d2p1:NavigateURL>/web/dragdrop/events.html</d2p1:NavigateURL>
@@ -58,7 +64,9 @@
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
       <d2p1:Order>2</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>ca329cdf-e5ca-413e-a56f-8b77fd09b435</d2p1:Runtime_x0020_ID>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>b30f88a6-c698-4dab-ab73-940340694ebe</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -76,7 +84,7 @@
             <d5p1:Value>
               <DomStateKey />
               <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]</BackupSearchClause>
+                <BackupSearchClause>/html[1]/body[1]/div[5]/div[2]/div[2]/div[1]/div[1]/div[1]</BackupSearchClause>
                 <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
                   <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
                     <d9p1:key>Html</d9p1:key>
@@ -111,226 +119,6 @@
                 <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
                 <d2p1:EquivalentUrls />
                 <d2p1:Fragment />
-                <d2p1:FriendlyName>Events25</d2p1:FriendlyName>
-                <d2p1:Path>/web/dragdrop/events.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Events</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:DesktopActionType>DragDrop</d2p1:DesktopActionType>
-        <d2p1:DropOffSet>
-          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
-          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>633</d2p1:X>
-          <d2p1:Y>241</d2p1:Y>
-        </d2p1:DropOffSet>
-        <d2p1:DropTargetType>Window</d2p1:DropTargetType>
-        <d2p1:DropWindowData>
-          <d2p1:DropPointOffsetReference>TopLeftCorner</d2p1:DropPointOffsetReference>
-          <d2p1:ScrollLeft>0</d2p1:ScrollLeft>
-          <d2p1:ScrollTop>0</d2p1:ScrollTop>
-          <d2p1:WindowDropPointX>633</d2p1:WindowDropPointX>
-          <d2p1:WindowDropPointY>241</d2p1:WindowDropPointY>
-          <d2p1:WindowHeight>619</d2p1:WindowHeight>
-          <d2p1:WindowWidth>1188</d2p1:WindowWidth>
-          <d2p1:WindowX>267</d2p1:WindowX>
-          <d2p1:WindowY>356</d2p1:WindowY>
-        </d2p1:DropWindowData>
-        <d2p1:Focus>true</d2p1:Focus>
-        <d2p1:OffSet>
-          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
-          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>38</d2p1:X>
-          <d2p1:Y>36</d2p1:Y>
-        </d2p1:OffSet>
-      </d2p1:Step>
-      <d2p1:StepImageKey>DragAndDropEventsobc1qmb5.bu3</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Desktop command: Drag &amp; Drop DraggableDiv0 to Window Target</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>3</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>0f64268a-0b8a-4b75-975c-042e2d86aed0</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops>
-                        <d5p1:int>1</d5p1:int>
-                      </ChainStops>
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>id=example</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagIndex=div:0</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>DraggableDiv0</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>Events10</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/dragdrop/events.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Events</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:DesktopActionType>DragDrop</d2p1:DesktopActionType>
-        <d2p1:DropOffSet>
-          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
-          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>681</d2p1:X>
-          <d2p1:Y>276</d2p1:Y>
-        </d2p1:DropOffSet>
-        <d2p1:DropTargetType>Window</d2p1:DropTargetType>
-        <d2p1:DropWindowData>
-          <d2p1:DropPointOffsetReference>TopLeftCorner</d2p1:DropPointOffsetReference>
-          <d2p1:ScrollLeft>0</d2p1:ScrollLeft>
-          <d2p1:ScrollTop>0</d2p1:ScrollTop>
-          <d2p1:WindowDropPointX>681</d2p1:WindowDropPointX>
-          <d2p1:WindowDropPointY>276</d2p1:WindowDropPointY>
-          <d2p1:WindowHeight>619</d2p1:WindowHeight>
-          <d2p1:WindowWidth>1188</d2p1:WindowWidth>
-          <d2p1:WindowX>267</d2p1:WindowX>
-          <d2p1:WindowY>356</d2p1:WindowY>
-        </d2p1:DropWindowData>
-        <d2p1:Focus>true</d2p1:Focus>
-        <d2p1:OffSet>
-          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
-          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>37</d2p1:X>
-          <d2p1:Y>39</d2p1:Y>
-        </d2p1:OffSet>
-      </d2p1:Step>
-      <d2p1:StepImageKey>Events13cpmch2.5im</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Desktop command: Drag &amp; Drop DraggableDiv to Window Target</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>4</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>760ae9f9-bad1-4b91-8a77-b4b4b20294fb</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops>
-                        <d5p1:int>1</d5p1:int>
-                      </ChainStops>
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>id=exampleWrap</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagIndex=div:2</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>DraggableDiv</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://localhost/kendomvc</d2p1:BaseUrl>
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
                 <d2p1:FriendlyName>Events24</d2p1:FriendlyName>
                 <d2p1:Path>/web/dragdrop/events.html</d2p1:Path>
                 <d2p1:Query />
@@ -349,21 +137,22 @@
         <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
         <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
         <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
         <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
         <d2p1:DesktopActionType>DragDrop</d2p1:DesktopActionType>
         <d2p1:DropOffSet>
           <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
           <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>629</d2p1:X>
-          <d2p1:Y>302</d2p1:Y>
+          <d2p1:X>806</d2p1:X>
+          <d2p1:Y>466</d2p1:Y>
         </d2p1:DropOffSet>
         <d2p1:DropTargetType>Window</d2p1:DropTargetType>
         <d2p1:DropWindowData>
           <d2p1:DropPointOffsetReference>TopLeftCorner</d2p1:DropPointOffsetReference>
           <d2p1:ScrollLeft>0</d2p1:ScrollLeft>
           <d2p1:ScrollTop>0</d2p1:ScrollTop>
-          <d2p1:WindowDropPointX>629</d2p1:WindowDropPointX>
-          <d2p1:WindowDropPointY>302</d2p1:WindowDropPointY>
+          <d2p1:WindowDropPointX>806</d2p1:WindowDropPointX>
+          <d2p1:WindowDropPointY>466</d2p1:WindowDropPointY>
           <d2p1:WindowHeight>619</d2p1:WindowHeight>
           <d2p1:WindowWidth>1188</d2p1:WindowWidth>
           <d2p1:WindowX>267</d2p1:WindowX>
@@ -373,124 +162,11 @@
         <d2p1:OffSet>
           <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
           <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>41</d2p1:X>
-          <d2p1:Y>45</d2p1:Y>
+          <d2p1:X>40</d2p1:X>
+          <d2p1:Y>40</d2p1:Y>
         </d2p1:OffSet>
       </d2p1:Step>
-      <d2p1:StepImageKey>DragAndDropEventsybzqd3ee.kj1</d2p1:StepImageKey>
-      <d2p1:StepState>NoCode</d2p1:StepState>
-      <d2p1:Version>200</d2p1:Version>
-    </d2p1:AutomationStep>
-    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
-      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
-      <d2p1:CustomDescription i:nil="true" />
-      <d2p1:Description>Desktop command: Drag &amp; Drop DraggableDiv to Window Target</d2p1:Description>
-      <d2p1:Enabled>false</d2p1:Enabled>
-      <d2p1:Id />
-      <d2p1:Order>5</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>a1834310-aa1a-4bae-afe0-a72cfe072dfe</d2p1:Runtime_x0020_ID>
-      <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
-        <d2p1:Constraints>
-          <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <d6p1:KeyValueOfstringstring>
-              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
-              <d6p1:Value />
-            </d6p1:KeyValueOfstringstring>
-          </ConstraintValues>
-        </d2p1:Constraints>
-        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-        <d2p1:EditorType />
-        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-            <d5p1:Key>target</d5p1:Key>
-            <d5p1:Value>
-              <DomStateKey />
-              <FindExpression i:type="HtmlFindExpressionElement">
-                <BackupSearchClause>/html[1]/body[1]/div[1]/div[1]/div[3]/div[2]/div[2]/div[1]/div[1]</BackupSearchClause>
-                <FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
-                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                    <d9p1:key>Html</d9p1:key>
-                    <d9p1:value i:type="HtmlFindExpression">
-                      <ChainStops>
-                        <d5p1:int>2</d5p1:int>
-                      </ChainStops>
-                      <Clauses>
-                        <HtmlFindClause>
-                          <Clause>tagname=div</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>class=console</Clause>
-                        </HtmlFindClause>
-                        <HtmlFindClause>
-                          <Clause>tagIndex=div:5</Clause>
-                        </HtmlFindClause>
-                      </Clauses>
-                      <Constraints />
-                    </d9p1:value>
-                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
-                </FindExpressions>
-                <Name>DraggableDiv</Name>
-                <NodeKind>4</NodeKind>
-                <TechnologyType>Html</TechnologyType>
-              </FindExpression>
-              <FindInfo i:nil="true" />
-              <Frame i:nil="true" />
-              <HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlDiv</HtmlControlType>
-              <IsIndependent>false</IsIndependent>
-              <Name>target</Name>
-              <Page i:type="d2p1:PageUri">
-                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
-                <d2p1:BaseUrl>http://aggeorgiev</d2p1:BaseUrl>
-                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
-                <d2p1:EquivalentUrls />
-                <d2p1:Fragment />
-                <d2p1:FriendlyName>Events10</d2p1:FriendlyName>
-                <d2p1:Path>/kendo/live/dragdrop/events.html</d2p1:Path>
-                <d2p1:Query />
-                <d2p1:Title>Events</d2p1:Title>
-              </Page>
-              <Region i:nil="true" />
-              <TechnologyType>Html</TechnologyType>
-              <Version>200</Version>
-            </d5p1:Value>
-          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
-        </d2p1:Elements>
-        <d2p1:LogMessageOnFailure />
-        <d2p1:Pause>None</d2p1:Pause>
-        <d2p1:RunsAgainstVersion />
-        <d2p1:StepType>Action</d2p1:StepType>
-        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
-        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
-        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
-        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
-        <d2p1:DesktopActionType>DragDrop</d2p1:DesktopActionType>
-        <d2p1:DropOffSet>
-          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
-          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>645</d2p1:X>
-          <d2p1:Y>276</d2p1:Y>
-        </d2p1:DropOffSet>
-        <d2p1:DropTargetType>Window</d2p1:DropTargetType>
-        <d2p1:DropWindowData>
-          <d2p1:DropPointOffsetReference>TopLeftCorner</d2p1:DropPointOffsetReference>
-          <d2p1:ScrollLeft>0</d2p1:ScrollLeft>
-          <d2p1:ScrollTop>0</d2p1:ScrollTop>
-          <d2p1:WindowDropPointX>645</d2p1:WindowDropPointX>
-          <d2p1:WindowDropPointY>276</d2p1:WindowDropPointY>
-          <d2p1:WindowHeight>619</d2p1:WindowHeight>
-          <d2p1:WindowWidth>1188</d2p1:WindowWidth>
-          <d2p1:WindowX>294</d2p1:WindowX>
-          <d2p1:WindowY>299</d2p1:WindowY>
-        </d2p1:DropWindowData>
-        <d2p1:Focus>true</d2p1:Focus>
-        <d2p1:OffSet>
-          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
-          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
-          <d2p1:X>39</d2p1:X>
-          <d2p1:Y>32</d2p1:Y>
-        </d2p1:OffSet>
-      </d2p1:Step>
-      <d2p1:StepImageKey>Eventsssanadq3.khh</d2p1:StepImageKey>
+      <d2p1:StepImageKey>DragAndDropEventscxx1ei4i.snj</d2p1:StepImageKey>
       <d2p1:StepState>NoCode</d2p1:StepState>
       <d2p1:Version>200</d2p1:Version>
     </d2p1:AutomationStep>
@@ -500,8 +176,10 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'dragstart' on 'DragstartDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>6</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>18eecf99-dcf1-4e70-84e7-b1c590e0f2a9</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>394dfed3-e030-43fa-ab7b-3ac03c40203b</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -588,8 +266,10 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'drag' on 'DragDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>7</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>120b7a38-e90e-4694-bfbc-4f3f563da417</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>3b0d1066-9972-4815-a029-e3fda4cb4f01</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -681,8 +361,10 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'dragenter' on 'DragenterDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>8</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>eb5c259c-b7b2-4030-a27c-79a74d8063c3</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>196450d0-76ac-45e8-aafa-7374bcad6e1c</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -774,8 +456,10 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'drag' on 'DragDiv0'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>9</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>622dc111-f36d-4821-995f-66d87f4f9989</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>c3232157-b55c-4c6c-ba2b-7b996d4192b6</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -867,8 +551,10 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'drop' on 'DropDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>10</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>bf34716c-3596-4139-82ab-5131648db81c</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>7b9e247b-d16a-4317-a6fe-8a9f961e3c1e</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -963,8 +649,10 @@
       <d2p1:Description>Verify 'TextContent' 'Contains' 'dragend' on 'DragendDiv'</d2p1:Description>
       <d2p1:Enabled>true</d2p1:Enabled>
       <d2p1:Id />
-      <d2p1:Order>11</d2p1:Order>
-      <d2p1:Runtime_x0020_ID>c910714e-6cf2-43ac-971e-dfb21609bc13</d2p1:Runtime_x0020_ID>
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>40e24f8c-fc0d-451d-bab7-427a7ad2758d</d2p1:Runtime_x0020_ID>
       <d2p1:Step i:type="d2p1:ContentVerificationDescriptor">
         <d2p1:Constraints>
           <ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
@@ -1059,11 +747,11 @@
   <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
     <d2p1:string>System</d2p1:string>
     <d2p1:string>System.Core</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
-    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
-    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1130.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
     <d2p1:string>c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</d2p1:string>
     <d2p1:string>System.Windows.Forms</d2p1:string>
     <d2p1:string>C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</d2p1:string>
@@ -1102,7 +790,7 @@
   <SilverlightEnabled>false</SilverlightEnabled>
   <StopTestListOnFailure>false</StopTestListOnFailure>
   <TestAssembly>KendoDemosTests.dll</TestAssembly>
-  <TestAssemblyPath>bin\Debug\</TestAssemblyPath>
+  <TestAssemblyPath>bin</TestAssemblyPath>
   <TestClass i:nil="true" />
   <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
   <TestType>Web</TestType>
@@ -1118,5 +806,6 @@
       <d2p1:Value>00000000-0000-0000-0000-000000000000</d2p1:Value>
     </d2p1:KeyValueOfstringstring>
   </VSProperties>
+  <WebKitExecutionDelay>0</WebKitExecutionDelay>
   <WpfAppPath i:nil="true" />
 </WebAiiTest>
