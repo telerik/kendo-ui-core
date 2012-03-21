@@ -66,6 +66,11 @@
 
             $.get(href, { partial: 1 }, function(html) {
                 exampleWrap.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
+                    var items = $("#examples-nav li").removeClass("active"),
+                        item = $($.grep(items, function(li) { return href.indexOf($(li).find("a").attr("href")) > -1; })).addClass("active");
+
+                    updateNavLinks(item, $("#nav-pager a"));
+
                     mainWrap.replaceWith(html);
                     setTimeout(function() {
                         $("#exampleWrap")
@@ -104,13 +109,14 @@
 
                 $($.grep(items, condition)).addClass("active");
 
-                if (widget == "dashboards") {
+                if (widget == "dashboards" || widget == "overview") {
                     $("#themeWrap").hide();
                 } else if (href.indexOf("mobile") == -1) {
                     $("#themeWrap").show();
                 }
 
-                $("#mainWrap").removeClass("widgetOverview");
+                $("#mainWrap").toggleClass("widgetOverview", href.indexOf("overview") > -1);
+
                 wrapInner.kendoStop(true).kendoAnimate(extend({}, animation.hide, { complete: function() {
                     wrapInner.replaceWith(html);
                     setTimeout(function() {
@@ -211,23 +217,12 @@
                 $(doc)
                     .on("click", "#examples-nav li a", function(e) {
                         var element = $(this),
-                            href = this.href,
-                            links, li, prev, next;
+                            href = this.href;
 
                         e.preventDefault();
 
                         if (!location.href.match(href)) {
-                            li = element.parent();
-                            links = $("#nav-pager a");
-                            prev = links.eq(0);
-                            next = links.eq(1);
-
-                            li.siblings().removeClass("active")
-                              .end().addClass("active");
-
-                            prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget")),
-                            next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
-
+                            updateNavLinks(element.parent(), $("#nav-pager a"));
                             Application.load(href);
                         }
                     })
@@ -266,11 +261,21 @@
                     });
 
                 $(window).bind("popstate", function(e) {
-                    var state = e.originalEvent.state;
+                    var state = e.originalEvent.state,
+                        href;
+
                     if (state) {
-                        Application.fetch(state.href.toLowerCase());
+                        href = state.href.toLowerCase();
+
+                        Application.unload();
+
+                        if (getWidgetPart(href) != getWidgetPart(Application.href) || href.indexOf("overview") > -1) {
+                            Application.fetchWidget(href);
+                        } else {
+                            Application.fetch(href);
+                        }
                     }
-                });
+                })
 
                 Application.href = location.href;
 
@@ -381,6 +386,20 @@
 
     function stopDefaults() {
         return false;
+    }
+
+    function getWidgetPart(href) {
+        var parts = href.split("/");
+        return parts[parts.length - 2];
+    }
+
+    function updateNavLinks(li, buttons) {
+        var prev = buttons.eq(0),
+            next = buttons.eq(1);
+
+        li.siblings().removeClass("active").end().addClass("active");
+        prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget")),
+        next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
     }
 
     $.fn.mobileOsChooser = function(options) {
