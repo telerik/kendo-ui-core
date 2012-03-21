@@ -57,6 +57,7 @@
      */
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
+        logToConsole = kendo.logToConsole,
         rFileExtension = /\.([^\.]+)$/,
         SELECT = "select",
         UPLOAD = "upload",
