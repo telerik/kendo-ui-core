@@ -250,7 +250,7 @@ html
 {
     content:" ";
     display:block;
-    border-color: #dd5310 transparent;
+    border-color: #eb6f18 transparent;
     border-style: solid;
     border-width: 0 7px 7px;
     left: 50%;
@@ -342,7 +342,7 @@ html
 {
     content:" ";
     display:block;
-    border-color: #fff transparent;
+    border-color: #f1f1f1 transparent;
     border-style: solid;
     border-width: 0 7px 7px;
     left: 50%;
@@ -701,7 +701,7 @@ p#copy
 .mobileNavBarIcon{background-position:-60px -60px;}
 .numericTextBoxIcon{background-position:-80px -60px;}
 .panelBarIcon{background-position:-100px -60px;}
-.mobileScrollIcon{background-position:-120px -60px;}
+.mobileScrollerIcon{background-position:-120px -60px;}
 .mobileScrollViewIcon{background-position:-140px -60px;}
 .sliderIcon{background-position:0 -80px;}
 .splitterIcon{background-position:-20px -80px;}
@@ -801,6 +801,7 @@ p#copy
 {
     cursor:default;
     position:relative;
+    background:repeat-x 0 -258px url(highlight.png)
 }
 
 #themeChooser .k-state-selected:after
@@ -817,6 +818,12 @@ p#copy
     width: 0;
     height:0;
 }
+
+#themeChooser .skin-black .k-state-selected{background-color:#0070e4;color:#fff;}
+#themeChooser .skin-blueopal .k-state-selected{background-color:#005c83;color:#fff;}
+#themeChooser .skin-default .k-state-selected{background-color:#f0713a;color:#fff;}
+#themeChooser .skin-metro .k-state-selected{background-color:#8ebc00;color:#fff;}
+#themeChooser .skin-silver .k-state-selected{background-color:#0879C0;color:#fff;}
 
 /*nav-pager*/
 
@@ -1106,7 +1113,7 @@ p#copy
     bottom:0;
     left:0;
     width:97px;
-    height:63px;
+    height:68px;
     margin:0 auto;
     background:no-repeat url(../../mobile/shared/sprite.devices.png);
     text-indent:-4444px;
@@ -1119,9 +1126,9 @@ p#copy
     transition: all 0.1s ease 0s;
 }
 
-#deviceList .iosThumb{background-position: 0 15px;}
-#deviceList .androidThumb{background-position: -97px 15px;}
-#deviceList .blackberryThumb{background-position: -194px 15px;}
+#deviceList .iosThumb{background-position: 0 18px;}
+#deviceList .androidThumb{background-position: -97px 18px;}
+#deviceList .blackberryThumb{background-position: -194px 18px;}
 
 #deviceList .selectedThumb .iosThumb,#deviceList li:hover .iosThumb{background-position: 0 0;}
 #deviceList .selectedThumb .androidThumb,#deviceList li:hover .androidThumb{background-position: -97px 0;}
@@ -1336,6 +1343,16 @@ pre.prettyprint
     position: relative;
     background: #d3d3d3;
     z-index: 2
+}
+
+.documentation-icon
+{
+    display:inline-block;
+    width:12px;
+    height:12px;
+    background:-336px -63px no-repeat url(sprite.misc.png);
+    vertical-align:middle;
+    margin:-1px 6px 0 0;
 }
 
 #codeStrip .k-content,
