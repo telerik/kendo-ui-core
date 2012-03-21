@@ -2105,7 +2105,7 @@
                 rangeEnd,
                 processed,
                 options = that.options,
-                remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates;
+                remote = options.serverSorting || options.serverPaging || options.serverFiltering || options.serverGrouping || options.serverAggregates,
                 length;
 
             for (skipIdx = 0, length = ranges.length; skipIdx < length; skipIdx++) {
