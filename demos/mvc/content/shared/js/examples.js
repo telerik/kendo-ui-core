@@ -133,7 +133,9 @@
         },
 
         unload: function() {
-            window.kendo.ui.DatePicker.sharedCalendar = null;
+            if (kendo.ui && kendo.ui.DatePicker) {
+                kendo.ui.DatePicker.sharedCalendar = null;
+            }
 
             $(doc)
                 .find(".k-animation-container, .k-list-container, .k-calendar-container, .k-calendar")
@@ -428,7 +430,7 @@
         deviceList.find(".thumbLink").click(function () {
             try {
                 sessionStorage.setItem("kendoMobileOS", $(this).closest(".thumbLink").children(".thumb").text());
-                Application.fetch(Application.href, true);
+                Application.fetch(location.href, true);
             } catch(err) {}
         });
 
