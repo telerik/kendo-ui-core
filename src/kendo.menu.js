@@ -976,6 +976,12 @@
                 return;
             }
 
+            if (touch) {
+                element.siblings().each(proxy(function (_, sibling) {
+                    that.close(sibling);
+                }, that));
+            }
+
             if (!e.handled) // We shouldn't stop propagation.
                 that.trigger(SELECT, { item: element[0] });
 
