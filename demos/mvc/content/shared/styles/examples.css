@@ -7,6 +7,10 @@ body,h1,h2,h3,.main-nav,.kendo-nav,#banner p,.browsers,.mobileOSs,#footer ul,#fo
     list-style:none;
 }
 
+body {
+    background-color: #fff;
+}
+
 img
 {
     border:0;
