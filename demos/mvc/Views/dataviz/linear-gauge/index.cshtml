@@ -1,57 +1,47 @@
         <div id="example" class="k-content">
             <div id="gauge-container">
-                <div id="vertical-gauge"></div>
-                <div id="horizontal-gauge"></div>
-
+                <div id="gauge"></div>
             </div>
-
-            <input id="gauge-value" value="40">
 
             <script>
                 function createGauges() {
                     var theme = $(document).data("kendoSkin") || "default",
                         value = $("#gauge-value").val();
 
-                    $("#vertical-gauge").kendoLinearGauge({
+                    $("#gauge").kendoLinearGauge({
                         theme: theme,
 
                         pointer: {
-                            value: value
+                            value: 28
                         },
 
                         scale: {
-                            max: 50,
-                            vertical: true
-                        }
-                    });
-
-                    $("#horizontal-gauge").kendoLinearGauge({
-                        theme: theme,
-
-                        pointer: {
-                            value: value
-                        },
-
-                        scale: {
-                            max: 50,
-                            vertical: false
+                            majorUnit: 20,
+                            minorUnit: 2,
+                            min: -40,
+                            max: 60,
+                            vertical: true,
+                            ranges: [
+                                {
+                                    from: -40,
+                                    to: -20,
+                                    color: "#2798df"
+                                }, {
+                                    from: 30,
+                                    to: 45,
+                                    color: "#ffc700"
+                                }, {
+                                    from: 45,
+                                    to: 60,
+                                    color: "#c20000"
+                                }
+                            ]
                         }
                     });
                 }
 
                 $(document).ready(function() {
                     createGauges();
-
-                    $("#gauge-value").kendoSlider({
-                        min: 0,
-                        max: 50,
-                        showButtons: false,
-                        change: function() {
-                            var value = $("#gauge-value").val();
-                            $("#vertical-gauge").data("kendoLinearGauge").value(value);
-                            $("#horizontal-gauge").data("kendoLinearGauge").value(value);
-                        }
-                    });
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauges();
@@ -63,12 +53,14 @@
                 #gauge-container {
                     text-align: center;
                     margin: 0 auto;
+                    background: transparent url("../../content/dataviz/gauge/linear-gauge-container.png") no-repeat 50% 50%;
+                    padding: 18px;
+                    width: 300px;
+                    height: 300px;
                 }
 
-                #vertical-gauge,
-                #horizontal-gauge {
-                    width: 200px;
-                    height: 200px;
+                #gauge {
+                    height: 300px;
                     display: inline-block;
                     *display: inline;
                     zoom: 1;
