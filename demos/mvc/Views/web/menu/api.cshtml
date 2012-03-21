@@ -1,27 +1,26 @@
 
         <div id="example" class="k-content">
 
-            <div class="configuration">
-                <span class="configHead">Configuration</span>
-                <span class="configTitle">API Functions</span>
+            <div class="configuration k-widget k-header">
+                <span class="configHead">API Functions</span>
                 <ul class="options">
                     <li>
-                        <input type="text" id="toggleIndex"/> <button class="toggleItem k-button">Enable/Disable</button>
+                        <input type="text" id="toggleIndex" class="k-textbox"/> <button class="toggleItem k-button">Enable/Disable</button>
                     </li>
                     <li>
-                        <input type="text" id="triggerIndex"/> <button class="triggerItem k-button">Open/Close</button>
+                        <input type="text" id="triggerIndex" class="k-textbox"/> <button class="triggerItem k-button">Open/Close</button>
                     </li>
                     <li>
-                        <input type="text" id="removeIndex"/> <button class="removeItem k-button">Remove</button>
+                        <input type="text" id="removeIndex" class="k-textbox"/> <button class="removeItem k-button">Remove</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" id="appendText"/> <input type="text" value="0.0" id="appendIndex"/> <button class="appendItem k-button">Append</button>
+                        <input type="text" value="Item" id="appendText" class="k-textbox"/> <input type="text" value="0.0" id="appendIndex" class="k-textbox"/> <button class="appendItem k-button">Append</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" id="beforeText"/> <input type="text" value="0" id="beforeIndex"/> <button class="beforeItem k-button">Before</button>
+                        <input type="text" value="Item" id="beforeText" class="k-textbox"/> <input type="text" value="0" id="beforeIndex" class="k-textbox"/> <button class="beforeItem k-button">Before</button>
                     </li>
                     <li>
-                        <input type="text" value="Item" id="afterText"/> <input type="text" value="0" id="afterIndex"/> <button class="afterItem k-button">After</button>
+                        <input type="text" value="Item" id="afterText" class="k-textbox"/> <input type="text" value="0" id="afterIndex" class="k-textbox"/> <button class="afterItem k-button">After</button>
                     </li>
                 </ul>
             </div>
@@ -146,6 +145,6 @@
                     $("#afterText,#afterIndex").keypress(after);
                 });
 
-                var menu = $("#menu").kendoMenu().css({ marginRight: "220px" }).data("kendoMenu");
+                var menu = $("#menu").kendoMenu().css({ "float": "left" }).data("kendoMenu");
             </script>
         </div>

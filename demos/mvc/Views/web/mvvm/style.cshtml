@@ -1,7 +1,6 @@
 <div id="example" class="k-content">
-    <div class="configuration">
-        <span class="configHead">Configuration</span>
-        <span class="configTitle">Style</span>
+    <div class="configuration k-widget k-header">
+        <span class="configHead">Style</span>
         <ul class="options">
             <li>
                 <label>Color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedColor"></select></label>
@@ -134,7 +133,8 @@ kendo.bind($("#example"), viewModel);
             clear: both;
         }
 
-        .configuration {
+        #example .configuration {
+            margin-bottom: 10px;
             width: 300px;
         }
 
