@@ -91,15 +91,16 @@
                     ok(chart._view instanceof dataviz.SVGView);
                 });
 
-                test("raises error if the browser does not support neither VML nor SVG", 1, function() {
+                asyncTest("logs warning if the browser does not support neither VML nor SVG", 1, function() {
                     dataviz.SVGView.available = function() { return false; };
                     dataviz.VMLView.available = function() { return false; };
 
-                    try {
+                    stubMethod(kendo, "logToConsole", function(message) {
+                        equals(message, "Warning: Missing SVG and VML support. KendoUI DataViz will not render.");
+                        start();
+                    }, function() {
                         createChart();
-                    } catch (e) {
-                        equals(e.message, "Unsupported browser: Missing SVG and VML support.");
-                    }
+                    });
                 });
 
                 test("sets dimensions on view element", 2, function() {
@@ -1206,7 +1207,7 @@
                 var animations;
                 function logAnimations(callback) {
                     animations = [];
-                    stubMethod(dataviz.ViewBase, "playAnimations",
+                    stubMethod(dataviz.ViewBase.fn, "playAnimations",
                         function() {
                             var view = this;
                             animations = view.animations;

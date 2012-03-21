@@ -247,12 +247,16 @@
                 model = chart._model = chart._getModel(),
                 plotArea = chart._plotArea = model._plotArea,
                 viewType = dataviz.ui.defaultView(),
+                view;
+
+            if (viewType) {
                 view = chart._view = viewType.fromModel(model);
 
-            element.css("position", "relative");
-            chart._viewElement = view.renderTo(element[0]);
-            chart._tooltip = new Tooltip(element, options.tooltip);
-            chart._highlight = new Highlight(view, chart._viewElement);
+                element.css("position", "relative");
+                chart._viewElement = view.renderTo(element[0]);
+                chart._tooltip = new Tooltip(element, options.tooltip);
+                chart._highlight = new Highlight(view, chart._viewElement);
+            }
         },
 
         svg: function() {

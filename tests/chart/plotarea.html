@@ -183,7 +183,7 @@
                 });
 
                 test("axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 0);
                             equal(this.valueAxisRangeTracker.query("primary").max, 1);
@@ -476,7 +476,7 @@
                 });
 
                 test("sets axis min/max to series limits", 2, function() {
-                    stubMethod(dataviz.CategoricalPlotArea, "createAxes",
+                    stubMethod(dataviz.CategoricalPlotArea.fn, "createAxes",
                         function() {
                             equal(this.valueAxisRangeTracker.query("primary").min, 10);
                             equal(this.valueAxisRangeTracker.query("primary").max, 300);
@@ -722,9 +722,9 @@
                         plotArea: options
                     });
 
-                    stubMethod(dataviz.NumericAxis, "getViewElements", function() { return []; },
+                    stubMethod(dataviz.NumericAxis.fn, "getViewElements", function() { return []; },
                         function() {
-                            stubMethod(dataviz.CategoryAxis, "getViewElements", function() { return []; },
+                            stubMethod(dataviz.CategoryAxis.fn, "getViewElements", function() { return []; },
                                 function() {
                                     plotArea.reflow(chartBox);
                                     plotArea.getViewElements(view);
@@ -1061,7 +1061,7 @@
                 });
 
                 test("X axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.XYPlotArea, "createAxes",
+                    stubMethod(dataviz.XYPlotArea.fn, "createAxes",
                         function() {
                             equal(this.xAxisRangeTracker.query("primary").min, 0);
                             equal(this.xAxisRangeTracker.query("primary").max, 1);
@@ -1073,7 +1073,7 @@
                 });
 
                 test("Y axis limit is [0, 1] when no series are configured", 2, function() {
-                    stubMethod(dataviz.XYPlotArea, "createAxes",
+                    stubMethod(dataviz.XYPlotArea.fn, "createAxes",
                         function() {
                             equal(this.yAxisRangeTracker.query("primary").min, 0);
                             equal(this.yAxisRangeTracker.query("primary").max, 1);

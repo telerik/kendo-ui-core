@@ -109,7 +109,7 @@
                 });
 
                 test("initial binding is done using fetch", 1, function() {
-                    stubMethod(kendo.data.DataSource, "fetch", function() {
+                    stubMethod(kendo.data.DataSource.fn, "fetch", function() {
                         ok(true);
                     }, function() {
                         createChart({
@@ -135,7 +135,7 @@
                         }]
                     });
 
-                    stubMethod(kendo.data.DataSource, "read",
+                    stubMethod(kendo.data.DataSource.fn, "read",
                         function() { ok(true); },
                         function() {
                             chart.refresh();
@@ -154,7 +154,7 @@
                         }]
                     });
 
-                    stubMethod(kendo.data.DataSource, "read",
+                    stubMethod(kendo.data.DataSource.fn, "read",
                         function() { ok(false); },
                         function() {
                             chart.redraw();

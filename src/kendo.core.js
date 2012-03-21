@@ -2225,6 +2225,13 @@
 
         roleSelector: function(role) {
             return "[" + kendo.attr("role") + "=" + role + "]";
+        },
+
+        /** @ignore */
+        logToConsole: function(message) {
+            if (typeof(console) != "undefined" && console.log) {
+                console.log(message);
+            }
         }
     });
 
