@@ -6,23 +6,24 @@
 
     function viewInit(e) {
         showButton = $("#show").bind(kendo.support.mouseup, function() {
-                        showButton.fadeOut();
+                        showButton.stop(true,true).fadeOut();
                         startLoading();
                      });
     }
 
     function hideLoader() {
         clearInterval(interval);
-        showButton.fadeIn();
         kendoMobileApplication.hideLoading(); //hide loading popup
-        kendoMobileApplication.loader.find("h1").removeClass("loaderHeading");
+        kendoMobileApplication.loader.find("h1").removeClass("loaderHeading").text("Loading...");
     }
 
     function viewHide(e) {
+        showButton.stop(true,true).fadeIn();
         hideLoader();
     }
 
     function startLoading() {
+        hideLoader();
         var seconds = 5,
             headingTag = kendoMobileApplication.loader.find("h1").text(seconds + " seconds left!").addClass("loaderHeading");
 
@@ -32,6 +33,7 @@
             headingTag.text(--seconds + " seconds left!"); //update text of the loading popup
 
             if (seconds == 0) {
+                showButton.stop(true,true).fadeIn();
                 hideLoader();
             }
         }, 1000);

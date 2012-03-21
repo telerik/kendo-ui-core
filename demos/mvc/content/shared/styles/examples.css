@@ -1037,7 +1037,8 @@ pre.prettyprint
     text-align: left;
 }
 
-.km-root .console .count
+.console .count,
+.km-root .km-android .console .count
 {
     background-color: #91AFEF;
     -moz-border-radius: 15px;
