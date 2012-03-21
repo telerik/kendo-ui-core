@@ -96,6 +96,7 @@
         {
             "text": "Scroller",
             "name": "scroller",
+            "documentation": "mobile/scroller",
             "spriteCssClass": "mobileScrollerIcon",
             "items": [
                 {
@@ -179,6 +180,7 @@
         {
             "text": "View",
             "name": "view",
+            "documentation": "mobile/view",
             "spriteCssClass": "mobileAppIcon",
             "items": [
                 {
@@ -190,6 +192,7 @@
         {
             "text": "Layout",
             "name": "layout",
+            "documentation": "mobile/layout",
             "spriteCssClass": "mobileAppIcon",
             "items": [
                 {
