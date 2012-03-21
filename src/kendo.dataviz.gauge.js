@@ -1088,6 +1088,14 @@
                 if (!height) {
                     height = vertical ? DEFAULT_HEIGHT : DEFAULT_MIN_HEIGHT;
                 }
+            } else {
+                if (!width) {
+                    width = DEFAULT_WIDTH;
+                }
+
+                if (!height) {
+                    height = DEFAULT_HEIGHT;
+                }
             }
 
             return new RootElement(deepExtend({
