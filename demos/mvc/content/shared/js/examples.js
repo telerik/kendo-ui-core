@@ -133,6 +133,8 @@
         },
 
         unload: function() {
+            window.kendo.ui.DatePicker.sharedCalendar = null;
+
             $(doc)
                 .find(".k-animation-container, .k-list-container, .k-calendar-container, .k-calendar")
                 .remove()
@@ -145,7 +147,7 @@
                     }
                 })
                 .end()
-                .trigger("kendo:pageUnload")
+                .trigger("kendo:pageUnload");
         },
 
         preloadStylesheet: function (file, callback) {
