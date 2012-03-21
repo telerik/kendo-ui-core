@@ -146,6 +146,15 @@
                 ok(args.model instanceof Model);
             });
 
+            test("removeRow does not show confirmation message if editing is false", function() {
+                var grid = setup({ editable: { confirmation: undefined } });
+                    method = stub(grid, "_showMessage");
+
+                grid.removeRow(table.find("tbody>tr:first"));
+
+                ok(!method.calls("_showMessage"));
+            });
+
             test("removeRow calls _confirmation if delete confirm is true", function() {
                 var grid = setup({ editable: { confirmation: true } });
                     method = stub(grid, "_confirmation");
