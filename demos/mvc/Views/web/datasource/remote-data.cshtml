@@ -5,7 +5,9 @@
                 <h3>Twitter feed</h3>
 
                 <div id="search-box">
-                    <label>Search for: <input type="text" value="html5" id="searchfor" /></label>
+                    <label>Search for:
+                        <input type="text" value="html5" id="searchfor" class="k-textbox" />
+                    </label>
                     <button class="k-button" id="search">search</button>
                 </div>
 
@@ -30,6 +32,8 @@
                 $(document).ready(function() {
                     // create a template using the above definition
                     var template = kendo.template($("#template").html());
+
+                    $("#test").kendoAutoComplete();
 
                     var dataSource = new kendo.data.DataSource({
                         transport: {
@@ -84,20 +88,25 @@
                     color: #358ae0;
                     font-size: 18px;
                     line-height: 32px;
-                    padding-left: 40px;
+                    padding: 0 0 5px 40px;
                     font-weight: normal;
                     background: transparent url("../../content/web/datasource/remote-data/twitter-icon.png") no-repeat 0 50%;
                 }
 
                 #search-box {
                     position: absolute;
-                    top: 30px;
+                    top: 23px;
                     right: 16px;
+                }
+
+                #searchfor {
+                    vertical-align: top;
                 }
 
                 #tweets {
                     overflow: auto;
-                    padding-right: 10px;
+                    margin-top: 10px;
+                    padding: 0 10px 0 0;
                     height: 400px;
                 }
 
