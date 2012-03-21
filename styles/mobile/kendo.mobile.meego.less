@@ -706,29 +706,19 @@
 
 /* Forms */
 
-.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]),
+.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
 .km-meego select:not([multiple]),
 .km-meego .k-dropdown
 {
-    border: 1px solid rgba(0,0,0,.5);
+    border: 0;
     right: .8em;
     padding: .4em;
     outline: none;
-    margin-top: -1.05em;
-    .border-radius(~".3em");
-}
-
-.km-root .km-meego .km-view .km-content input[type=file]
-{
-    padding: .2em;
-    outline: none;
-    right: .8em;
-    margin-top: -1.1em;
+    .border-radius(~".8em");
 }
 
 .km-meego .k-dropdown
 {
-    border: 0;
     padding: 0;
     width: 10em;
     .border-radius(0);
@@ -738,82 +728,41 @@
 {
     display: block;
     padding: .2em 2em .2em .4em;
-    border: 1px solid rgba(0,0,0,.5);
-    .border-radius(~".3em");
+    .border-radius(~".8em");
 }
 
 .km-meego select:not([multiple])
 {
+    margin-top: -.95em;
     min-width: 6em;
-    padding-right: 2em;
+    padding: .32em 2em .32em .4em;
 }
 
-.km-meego input[type=password],
-.km-meego input[type=search],
-.km-meego input[type=number],
-.km-meego input[type=tel],
-.km-meego input[type=url],
-.km-meego input[type=email],
-.km-meego input[type=text]
-{
-    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 1px 0 rgba(255,255,255,.3)");
-}
-
-.km-meego input[type=password]:focus,
-.km-meego input[type=search]:focus,
-.km-meego input[type=number]:focus,
-.km-meego input[type=tel]:focus,
-.km-meego input[type=url]:focus,
-.km-meego input[type=email]:focus,
-.km-meego input[type=text]:focus
-{
-    border: 1px solid rgba(0,50,100,.7);
-    .box-shadow(~"inset 0 0 2px 1px rgba(0,0,0,.2), 0 0 2px rgba(5,127,228,.6)");
-}
-
-.km-meego input[type=color],
-.km-meego input[type=week],
-.km-meego input[type=date],
-.km-meego input[type=time],
-.km-meego input[type=month],
-.km-meego input[type=datetime],
+.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
 .km-meego select:not([multiple]),
 .km-meego .k-dropdown-wrap
 {
-    background: 100% 50% no-repeat url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAADICAMAAAB28zu6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIVBMVEX////19fT19fX19fX19fT19fT19fX19fP19fT19fT19fRLB2KYAAAACnRSTlMA7xBQr5/PMN+AkwDcBAAAANFJREFUeF7t2LuVwzAAA0HKpPxh/wVfiFS+SPCbqQDBRhg/BAAAAAAAAAAAAAAAAACA13Nf93yNW3jvb7zHLezvGP1v5/7GOW7hcezrjse4h7mvm+Mu1r5qjSgIJHHcxSyKI1ZTHAmkJ46YRXHEaoojgfTEEbMojlhNcSSQnjhiFsURqymOBNITR8yiOGI1xZFAeuKIWRRHrKY4EkhPHDGL4ojVFkcCSRwdZlEcsZriSCCJo8dMHEXOPKRFPsc+PuO3AQAAAAAAAAAAAAAAAADwB5LFJn8OLOPPAAAAAElFTkSuQmCC"),
-                100% 0 no-repeat linear-gradient(left, rgba(0,0,0,.3), rgba(0,0,0,.3)), linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,.2)) #eee;
-    background-size: auto 100%, 1.8em 100%, auto;
-    .box-shadow(~"inset 0 0 0 1px rgba(255,255,255,.5), 0 1px 0 rgba(0,0,0,.2)");
+    .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2)");
 }
 
-.km-meego input[type=color]:active,
-.km-meego input[type=week]:active,
-.km-meego input[type=date]:active,
-.km-meego input[type=time]:active,
-.km-meego input[type=month]:active,
-.km-meego input[type=datetime]:active,
-.km-meego input[type=color]:focus,
-.km-meego input[type=week]:focus,
-.km-meego input[type=date]:focus,
-.km-meego input[type=time]:focus,
-.km-meego input[type=month]:focus,
-.km-meego input[type=datetime]:focus,
+.km-meego input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):focus,
 .km-meego select:not([multiple]):focus,
 .km-meego .k-dropdown .k-state-focused
 {
-    color: #fff;
-    background-color: #45bfff;
+    .box-shadow(~"inset 0 1px 2px 1px rgba(0,0,0,.2), 0 0 0 2px #1080DD");
 }
 
-.km-meego .k-dropdown .k-state-focused .k-input
+.km-meego select:not([multiple]),
+.km-meego .k-dropdown-wrap
 {
-    color: #fff;
+    border: 0;
+    background: #fff;
 }
 
-.km-meego select:not([multiple]):focus option
+.km-meego select:not([multiple]):focus,
+.km-meego .k-dropdown .k-state-focused
 {
-    color: #000;
-    background-color: #fff;
+    background: #fff;
 }
 
 .km-meego .km-popup
