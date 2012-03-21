@@ -668,8 +668,7 @@
                 "formatBlock",
                 "createLink",
                 "unlink",
-                "insertImage",
-                //"insertHtml",
+                "insertImage"
                 //"style",
                 //"subscript",
                 //"superscript",

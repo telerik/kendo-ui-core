@@ -165,6 +165,10 @@
                     "url": "editor/custom-tools.html"
                 },
                 {
+                    "text": "Snippets",
+                    "url": "editor/snippets.html"
+                },
+                {
                     "text": "Events",
                     "url": "editor/events.html"
                 },

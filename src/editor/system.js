@@ -95,32 +95,31 @@ var InsertHtmlCommand = Command.extend({
 });
 
 var InsertHtmlTool = Tool.extend({
-    initialize: function($ui, initOptions) {
-        var editor = initOptions.editor;
-        var title = editor.options.localization.insertHtml;
+    initialize: function(ui, initOptions) {
+        var editor = initOptions.editor,
+            title = editor.options.localization.insertHtml;
 
-        $ui.kendoDropDownList({
-            data: editor['insertHtml'],
-            itemCreate: function (e) {
-                e.html = '<span unselectable="on">' + e.dataItem.Text + '</span>';
-            },
+        new Editor.SelectBox(ui, {
+            dataSource: editor.options.insertHtml || [],
+            dataTextField: "text",
+            dataValueField: "value",
             change: function (e) {
-                Tool.exec(editor, 'insertHtml', e.value);
+                Tool.exec(editor, 'insertHtml', this.value());
             },
+            title:editor.options.localization.insertHtml,
             highlightFirst: false
-        }).find('.k-input').html(editor.options.localization.insertHtml);
+        });
     },
 
     command: function (commandArguments) {
         return new InsertHtmlCommand(commandArguments);
     },
 
-    update: function($ui, nodes) {
-        var list = $ui.data('kendoDropDownList');
-        list.close();
-        list.value(title);
+    update: function(ui, nodes) {
+        var selectbox = ui.data("kendoSelectBox") || ui.find("select").data("kendoSelectBox");
+        selectbox.close();
+        selectbox.value(selectbox.options.title);
     }
-
 });
 
 var UndoRedoStack = Class.extend({
