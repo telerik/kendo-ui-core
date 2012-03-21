@@ -1053,10 +1053,14 @@
                 model = gauge._model = gauge._getModel(),
                 plotArea = gauge._plotArea = model._plotArea,
                 viewType = dataviz.ui.defaultView(),
+                view;
+
+            if (viewType) {
                 view = gauge._view = viewType.fromModel(model);
 
-            element.css("position", "relative");
-            gauge._viewElement = view.renderTo(element[0]);
+                element.css("position", "relative");
+                gauge._viewElement = view.renderTo(element[0]);
+            }
         },
 
         svg: function() {
