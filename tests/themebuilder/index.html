@@ -115,6 +115,14 @@
                 equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-input").val()), "rgba(0,0,0,.25)");
             });
 
+            test("value() updates color preview", function() {
+                colorPicker = $("<input value='#f00' />").appendTo(document.body).kendoColorPicker();
+
+                colorPicker.data("kendoColorPicker").value("#000");
+
+                equals(ColorEngine.css2hex(colorPicker.closest(".k-widget").find(".k-icon").css("backgroundColor")), "#000000");
+            });
+
             var constant = function(target, property, values) {
                     return {
                         target: target,
