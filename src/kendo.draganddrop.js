@@ -176,7 +176,7 @@
                 .on("dragstart", filter, preventDefault);
 
             if (!options.allowSelection) {
-                element.on("mousedown selectstart", filter, preventDefault);
+                // element.on("mousedown selectstart", filter, preventDefault);
             }
 
             if (support.eventCapture) {
