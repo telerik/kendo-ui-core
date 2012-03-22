@@ -1864,8 +1864,8 @@ body .k-datetimepicker .k-select
 {
     display: inline-block;
     width: 75%;
-    margin: .3em 0;
-    padding: .28em 0;
+    height:29px;
+    line-height:29px;
 }
 
 .k-calendar .k-nav-fast .k-icon
@@ -1903,7 +1903,9 @@ body .k-datetimepicker .k-select
 
 .k-calendar .k-content .k-link
 {
-    padding: .26em .45em .26em .1em;
+    height:22px;
+    line-height:22px;
+    padding: 0 .45em 0 .1em;
 }
 
 .k-calendar .k-meta-view .k-link
