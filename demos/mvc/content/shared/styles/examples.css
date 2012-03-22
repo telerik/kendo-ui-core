@@ -1011,6 +1011,7 @@ p#copy
 {
     position:relative;
     padding:15px 15px 18px;
+    min-height:200px;
 }
 
 .widgetOverview #example
