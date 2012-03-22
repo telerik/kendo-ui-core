@@ -14,6 +14,14 @@
              '</div>',  { useWithBlock:false }),
         hint = function(target) {
             return $('<div class="k-header k-drag-clue" />')
+                .css({
+                    width: target.width(),
+                    paddingLeft: target.css("paddingLeft"),
+                    paddingRight: target.css("paddingRight"),
+                    height: target.height(),
+                    paddingTop: target.css("paddingTop"),
+                    paddingBottom: target.css("paddingBottom")
+                })
                 .html(target.attr(kendo.attr("title")) || target.attr(kendo.attr("field")))
                 .prepend('<span class="k-icon k-drag-status k-denied" />');
         },
