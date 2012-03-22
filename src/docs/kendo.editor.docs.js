@@ -23,14 +23,36 @@
     *    $(document).ready(function(){
     *       $("#editor").kendoEditor({
     *          tools: [
-    *          "bold",
-    *          "italic",
-    *          "underline",
-    *          "foreColor"
+    *              "bold",
+    *              "italic",
+    *              "underline",
+    *              "foreColor"
     *          ]
     *       });
     *   });
+    *  @section <h3>Specifying custom tools</h3>
+    *
+    *  The Editor functionality can be extended through custom tools, defined in the <code>tools</code> array.
+    *
+    *  @exampleTitle Adding a custom tool button
+    *  @example
+    *    $("#editor").kendoEditor({
+    *        tools: [
+    *            {
+    *                name: "toolName",
+    *                tooltip: "Custom editor tool",
+    *                exec: function(e) {
+    *                    var editor = $(this).data("kendoEditor");
+    *
+    *                    // execute command
+    *                }
+    *            }
+    *        ]
+    *    });
+    *
     *  @section
+    *
+    *  The custom buttons get a <strong>k-toolName</strong> CSS class to allow styling. (where <code>toolName</code> is the name specified in the custom tool configuration)
     */
     var EditorDocs = /** @lends kendo.ui.Editor.prototype */ {
         /**
