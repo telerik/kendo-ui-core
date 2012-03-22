@@ -219,7 +219,7 @@
 
         options: {
             min: 0,
-            max: 180,
+            max: 100,
 
             majorTicks: {
                 size: 15,
