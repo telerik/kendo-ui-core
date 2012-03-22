@@ -965,7 +965,7 @@ p#copy
 
 #example .k-grid-content table
 {
-    -webkit-transform: translatez(0);
+    -webkit-backface-visibility: hidden;
 }
 
 #qrWrap
