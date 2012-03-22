@@ -10,7 +10,7 @@
                 <h4>Text </h4>
             </td>
             <td rowspan="8" style="background-color: #efefef;">
-<pre style="margin-left: 50px; width: 300px;">
+<pre>
 {
     textValue: <span data-bind="text: textValue"></span>,
     textareaValue: <span data-bind="text: textareaValue"></span>,
@@ -216,9 +216,8 @@ kendo.bind($(&quot;table&quot;), viewModel);
         }
 
         .metrotable > tbody > tr > td {
-            padding: 5px;
+            padding: 5px 5px 5px 0;
             font-size: 1em;
-            font-weight: normal;
         }
 
         .metrotable td > input,
@@ -262,6 +261,8 @@ kendo.bind($(&quot;table&quot;), viewModel);
 
         td pre {
             font-size: 12px;
+            margin-left: 50px;
+            width: 300px;
         }
     </style>
 </div>
