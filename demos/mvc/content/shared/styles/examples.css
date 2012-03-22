@@ -658,7 +658,11 @@ p#copy
 }
 
 .flowers-left{background:fixed 0 460px no-repeat url(flowers-left.png);}
-.flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
+
+@media screen and (min-width:1030px) 
+{
+    .flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
+}
 
 @media screen and (min-width:1400px) 
 {
@@ -878,6 +882,7 @@ p#copy
 {
     text-transform:uppercase;
     position:relative;
+    color:#4e4e4e;
 }
 
 #nav-pager .prev
