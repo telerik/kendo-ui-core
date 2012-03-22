@@ -1,5 +1,5 @@
 <div id="example" class="k-content">
-    <div class="container">
+    <div class="demo-section k-widget">
         <img data-bind="attr: { src: imageSrc, alt: imageAlt, title: imageTitle }" />
 
         <label><select data-text-field="name" data-value-field="url" data-bind="source: food, value: imageSrc" ></select>src:</label>
@@ -24,9 +24,9 @@
             kendo.bind($("#example"), viewModel);
         });
     </script>
-<pre>
-&lt;img src="<span data-bind='text: imageSrc'></span>" alt="<span data-bind='text: imageAlt'></span>" title="<span data-bind='text: imageTitle'></span>" /&gt;
-</pre>
+    <div class="demo-section k-widget">
+    &lt;img src="<span data-bind='text: imageSrc'></span>" alt="<span data-bind='text: imageAlt'></span>" title="<span data-bind='text: imageTitle'></span>" /&gt;
+    </div>
     <div class="code-sample">
         <h4 class="code-title">View source code:</h4>
         <pre class="prettyprint">
@@ -59,16 +59,17 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         </pre>
     </div>
     <style scoped>
-        #example .container
+        .demo-section
         {
             overflow: hidden;
             width: 380px;
+            margin: 30px auto;
         }
 
         #example > div > label
         {
-            height: 26px;
-            line-height: 22px;
+            height: 30px;
+            line-height: 30px;
             vertical-align: middle;
         }
 
@@ -76,6 +77,12 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         #example > div > label > select
         {
             float: right;
+            width: 200px;
+        }
+        
+        #example > div > label > select
+        {
+            width: 207px;
         }
 
         img {

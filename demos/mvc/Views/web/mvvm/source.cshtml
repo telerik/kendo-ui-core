@@ -1,35 +1,37 @@
 <div id="example" class="k-content">
-    <table id="products" class="prettytable">
-        <thead>
-            <tr>
-                <th>Product name</th>
-                <th>Product price</th>
-                <th>Units in stock</th>
-                <th>Delete product</th>
-            </tr>
-        </thead>
-        <tbody data-template="row-template" data-bind="source: products">
-        </tbody>
-        <tfoot data-template="footer-template" data-bind="source: this">
-        </tfoot>
-    </table>
+    <div class="demo-section">
+        <div class="configuration k-widget k-header">
+            <span class="configHead">Add a product</span>
+            <ul class="options">
+                <li>
+                    <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" class="k-textbox"/></label>
+                </li>
+                <li>
+                    <label>Price:<input type="number" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" /></label>
+                </li>
+                <li>
+                    <label>Units in stock:<input type="number" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" /></label>
+                </li>
+                <li>
+                    <button class="k-button" data-bind="click: addProduct">Add a new product</button>
+                </li>
+            </ul>
+        </div>   
 
-    <div class="configuration k-widget k-header">
-        <span class="configHead">Add a product</span>
-        <ul class="options">
-            <li>
-                <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" class="k-textbox"/></label>
-            </li>
-            <li>
-                <label>Price:<input type="number" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" /></label>
-            </li>
-            <li>
-                <label>Units in stock:<input type="number" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" /></label>
-            </li>
-            <li>
-                <button class="k-button" data-bind="click: addProduct">Add a new product</button>
-            </li>
-        </ul>
+        <table id="products" class="metrotable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Units</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody data-template="row-template" data-bind="source: products">
+            </tbody>
+            <tfoot data-template="footer-template" data-bind="source: this">
+            </tfoot>
+        </table>
     </div>
 
     <script id="row-template" type="text/x-kendo-template">
@@ -46,13 +48,13 @@
     <script id="footer-template" type="text/x-kendo-template">
         <tr>
             <td>
-                Total number of products: #: total() #
+                Products count: #: total() #
             </td>
             <td>
                 Total price: #: totalPrice() #
             </td>
             <td colspan="2">
-                Total units in stock: #: totalUnitsInStock() #
+                Units in stock: #: totalUnitsInStock() #
             </td>
         </tr>
     </script>
@@ -102,10 +104,10 @@
                 return sum;
             },
             products: [
-                { name: "Chai", price: 18.00, unitsInStock: 39 },
-                { name: "Chang", price: 19.00, unitsInStock: 17 },
-                { name: "Mishi Kobe Niku", price: 97.00, unitsInStock: 29 },
-                { name: "Sir Rodney's Scones", price: 10.00, unitsInStock: 3 }
+                { name: "Hampton Sofa", price: 989.99, unitsInStock: 39 },
+                { name: "Perry Sofa", price: 559.99, unitsInStock: 17 },
+                { name: "Donovan Sofa", price: 719.99, unitsInStock: 29 },
+                { name: "Markus Sofa", price: 839.99, unitsInStock: 3 }
             ]
         });
 
@@ -119,10 +121,10 @@
     &lt;table&gt;
         &lt;thead&gt;
             &lt;tr&gt;
-                &lt;th&gt;Product name&lt;/th&gt;
-                &lt;th&gt;Product price&lt;/th&gt;
-                &lt;th&gt;Units in stock&lt;/th&gt;
-                &lt;th&gt;Delete product&lt;/th&gt;
+                &lt;th&gt;Name&lt;/th&gt;
+                &lt;th&gt;Price&lt;/th&gt;
+                &lt;th&gt;Units&lt;/th&gt;
+                &lt;th&gt;Delete&lt;/th&gt;
             &lt;/tr&gt;
         &lt;/thead&gt;
         &lt;tbody data-template=&quot;row-template&quot; data-bind=&quot;source: products&quot;&gt;&lt;/tbody&gt;
@@ -161,13 +163,13 @@
 &lt;script id=&quot;footer-template&quot; type=&quot;text/x-kendo-template&quot;&gt;
     &lt;tr&gt;
         &lt;td&gt;
-            Total number of products: #: total() #
+            Products count: #: total() #
         &lt;/td&gt;
         &lt;td&gt;
             Total price: #: totalPrice() #
         &lt;/td&gt;
         &lt;td colspan=&quot;2&quot;&gt;
-            Total units in stock: #: totalUnitsInStock() #
+            Units in stock: #: totalUnitsInStock() #
         &lt;/td&gt;
     &lt;/tr&gt;
 &lt;/script&gt;
@@ -220,10 +222,10 @@ var viewModel = kendo.observable({
         return sum;
     },
     products: [
-        { name: &quot;Chai&quot;, price: 18.00, unitsInStock: 39 },
-        { name: &quot;Chang&quot;, price: 19.00, unitsInStock: 17 },
-        { name: &quot;Mishi Kobe Niku&quot;, price: 97.00, unitsInStock: 29 },
-        { name: &quot;Sir Rodney's Scones&quot;, price: 10.00, unitsInStock: 3 }
+        { name: &quot;Hampton Sofa&quot;, price: 989.99, unitsInStock: 39 },
+        { name: &quot;Perry Sofa&quot;, price: 559.99, unitsInStock: 17 },
+        { name: &quot;Donovan Sofa&quot;, price: 719.99, unitsInStock: 29 },
+        { name: &quot;Markus Sofa&quot;, price: 839.99, unitsInStock: 3 }
     ]
 });
 
@@ -231,13 +233,25 @@ kendo.bind($(&quot;#example&quot;), viewModel);
 </pre>
     </div>
     <style scoped>
-        #products {
-            float: left;
+        .demo-section {
+        	width: 600px;
+        	min-height: 200px;
         }
-
+        .metrotable > tbody > tr > td  {
+        	font-size: 12px;
+        }
+        .metrotable > thead > tr > th {
+        	font-size: 14px;
+        	padding-top: 0;
+        }
+        
+        .metrotable > tfoot > tr > td {
+        	padding-right: 10px;
+        }
+        
         #example .configuration {
             margin-bottom: 10px;
-            width: 200px;
+            width: 190px;
         }
 
         .configuration label {
