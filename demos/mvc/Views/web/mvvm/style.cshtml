@@ -1,34 +1,36 @@
 <div id="example" class="k-content">
-    <div class="configuration k-widget k-header">
-        <span class="configHead">Style</span>
-        <ul class="options">
-            <li>
-                <label>Color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedColor"></select></label>
-            </li>
-            <li>
-                <label>Background color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBackground"></select></label>
-            </li>
-            <li>
-                <label>Border color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBorderColor"></select></label>
-            </li>
-            <li>
-                <label>Border style: <select data-text-field="name" data-value-field="value" data-bind="source: borders, value: selectedBorderStyle"></select></label>
-            </li>
-            <li>
-                <label>Border radius: <select data-bind="source: radii, value: selectedBorderRadius"></select></label>
-            </li>
-        </ul>
-    </div>
-    <div id="target" data-bind="style: {
-            backgroundColor: selectedBackground,
-            color: selectedColor,
-            borderStyle: selectedBorderStyle,
-            borderColor: selectedBorderColor,
-            webkitBorderRadius: selectedBorderRadius,
-            mozBorderRadius: selectedBorderRadius,
-            borderRadius: selectedBorderRadius
-        }">
-        Lorem ipsum dolor sit amet.
+    <div class="demo-section">
+        <div class="configuration k-widget k-header">
+            <span class="configHead">Style</span>
+            <ul class="options">
+                <li>
+                    <label>Color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedColor"></select></label>
+                </li>
+                <li>
+                    <label>Background color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBackground"></select></label>
+                </li>
+                <li>
+                    <label>Border color: <select data-text-field="name" data-value-field="hex" data-bind="source: colors, value: selectedBorderColor"></select></label>
+                </li>
+                <li>
+                    <label>Border style: <select data-text-field="name" data-value-field="value" data-bind="source: borders, value: selectedBorderStyle"></select></label>
+                </li>
+                <li>
+                    <label>Border radius: <select data-bind="source: radii, value: selectedBorderRadius"></select></label>
+                </li>
+            </ul>
+        </div>
+        <div id="target" data-bind="style: {
+                backgroundColor: selectedBackground,
+                color: selectedColor,
+                borderStyle: selectedBorderStyle,
+                borderColor: selectedBorderColor,
+                webkitBorderRadius: selectedBorderRadius,
+                mozBorderRadius: selectedBorderRadius,
+                borderRadius: selectedBorderRadius
+            }">
+            One Big Orange Square.
+        </div>
     </div>
     <script>
         $(document).ready(function() {
@@ -75,7 +77,7 @@
         mozBorderRadius: selectedBorderRadius,
         borderRadius: selectedBorderRadius
     }&quot;&gt;
-    Lorem ipsum dolor sit amet.
+    One Big Orange Square.
 &lt;/div&gt;
 &lt;ul&gt;
     &lt;li&gt;
@@ -129,6 +131,11 @@ kendo.bind($("#example"), viewModel);
         </pre>
     </div>
     <style scoped>
+        .demo-section {
+        	width: 500px;
+        	min-height: 185px;
+        	margin-bottom: 30px;
+        }
         .code-sample {
             clear: both;
         }
@@ -150,14 +157,17 @@ kendo.bind($("#example"), viewModel);
         }
 
         #target {
-            width: 100px;
-            height: 100px;
+            width: 60px;
+            height: 60px;
             border-width: 4px;
-            padding: 1em;
+            padding: 2em;
             float: left;
+            margin: 30px 0 0 20px;
             -webkit-transition: all 500ms;
             -moz-transition: all 500ms;
-            transition: all 500ms
+            transition: all 500ms;
+            text-align: center;
+            vertical-align: middle;
         }
     </style>
 </div>

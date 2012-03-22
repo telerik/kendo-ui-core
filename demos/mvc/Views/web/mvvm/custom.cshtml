@@ -1,12 +1,14 @@
 <div id="example" class="k-content">
-    <div class="configuration k-widget k-header" style="min-width: 110px; height: 110px; margin-bottom: 15px;">
-        <span class="configHead">Slide Binding</span>
-        <label>
-            Toggle: <input type="checkbox" data-bind="checked: slideValue" />
-        </label>
-    </div>
-    <div id="target" data-bind="slide: slideValue">
-        Lorem ipsum dolor sit amet.
+    <div class="demo-section">
+        <div class="configuration k-widget k-header" style="min-width: 110px; height: 110px; margin-bottom: 15px;">
+            <span class="configHead">Slide Binding</span>
+            <label>
+                Toggle: <input type="checkbox" data-bind="checked: slideValue" />
+            </label>
+        </div>
+        <div id="target" data-bind="slide: slideValue">
+            One Big Orange Square.
+        </div>
     </div>
     <script>
         kendo.data.binders.slide = kendo.data.Binder.extend( {
@@ -36,7 +38,7 @@
     Toggle: &lt;input type=&quot;checkbox&quot; data-bind=&quot;checked: slideValue&quot; /&gt;
 &lt;/label&gt;
 &lt;div id=&quot;target&quot; data-bind=&quot;slide: slideValue&quot;&gt;
-    Lorem ipsum dolor sit amet.
+    One Big Orange Square.
 &lt;/div&gt;
         </pre>
     </div>
@@ -67,6 +69,11 @@ kendo.bind($(&quot;#example&quot;), viewModel);
         </pre>
     </div>
     <style scoped>
+        .demo-section {
+        	width: 300px;
+        	min-height: 140px;
+        	margin-bottom: 30px;
+        }
         .configuration label {
             display: block;
             float: none;
@@ -75,10 +82,10 @@ kendo.bind($(&quot;#example&quot;), viewModel);
             clear: right;
         }
         #target {
-            width: 100px;
-            height: 100px;
+            width: 60px;
+            height: 60px;
             border-width: 4px;
-            padding: 1em;
+            padding: 2em;
             float: left;
             background-color: gold;
             color: darkRed;
@@ -88,6 +95,8 @@ kendo.bind($(&quot;#example&quot;), viewModel);
             -webkit-border-radius: 10px;
             -ms-border-radius: 10px;
             -moz-border-radius: 10px;
+            text-align: center;
+            vertical-align: middle;
         }
     </style>
 </div>

@@ -1,6 +1,9 @@
 <div id="example" class="k-content">
-    <button class="k-button" data-bind="events: { click: listener, dblclick: listener, mouseover: listener, mouseout: listener }">Button</button>
-    <br /><br />
+    <div class="demo-section">
+
+        <button class="k-button" data-bind="events: { click: listener, dblclick: listener, mouseover: listener, mouseout: listener }">Button</button>
+
+    </div>
     <script>
         $(document).ready(function() {
             var viewModel = kendo.observable({
@@ -34,6 +37,10 @@ kendo.bind($(&quot;#example&quot;), viewModel);
 </pre>
     </div>
     <style scoped>
+        .demo-section {
+        	width: 250px;
+        	text-align: center;
+        }
         #example button {
             width: 200px;
             height: 60px;
