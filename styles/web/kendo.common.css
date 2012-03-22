@@ -957,8 +957,6 @@ div.k-window-content
 
 .k-grid-edit-row td
 {
-    padding-top:.32em;
-    padding-bottom:.34em;
     text-overflow: clip;
 }
 
@@ -1449,6 +1447,11 @@ html body .k-grid tbody .k-button-icon
 .k-grid-edit-row .k-widget
 {
     width: 100%;
+}
+
+.k-edit-cell .k-widget,
+.k-grid-edit-row .k-widget
+{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
@@ -1458,7 +1461,13 @@ html body .k-grid tbody .k-button-icon
 *+html .k-grid-edit-row .k-textbox,
 *+html .k-grid-edit-row .k-widget
 {
-    width: 96%;
+    display: inline;
+    width: 90%;
+}
+
+*+html .k-edit-cell .k-textbox,
+*+html .k-grid-edit-row .k-textbox
+{
 }
 
 html .k-edit-cell .k-tooltip,
@@ -1749,6 +1758,15 @@ span.k-datetimepicker .k-select+.k-select
     text-indent: 4px;
     border: 0;
     margin: 0;
+}
+
+*+html .k-autocomplete .k-input,
+*+html .k-picker-wrap .k-input,
+*+html .k-numeric-wrap .k-input,
+*+html .k-dropdown-wrap .k-input,
+*+html .k-selectbox .k-input
+{
+    text-indent: 0;
 }
 
 .k-picker-wrap .k-select,
@@ -2079,7 +2097,14 @@ div.k-treeview
     outline: 0;
     height: 1.66em;
     line-height: 1.66em;
-    padding: 2px .2em;
+    padding: 2px 0;
+    text-indent: .3em;
+}
+
+*+html .k-textbox
+{
+    padding: 1px 0;
+    text-indent: 0;
 }
 
 /* NumericTextBox */
