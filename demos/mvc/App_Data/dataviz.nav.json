@@ -168,7 +168,8 @@
     "Sample Dashboards": [
         {
             "text": "Performance Benchmark",
-            "spriteCssClass": "content/dataviz/dashboards/performance.gif",
+            "spriteCssClass": "chartIcon",
+            "thumbnailUrl": "content/dataviz/dashboards/performance.gif",
             "expanded": "true",
             "items": [{
                 "url": "dashboards/high-performance.html"
@@ -177,7 +178,8 @@
         },
         {
             "text": "Car Dashboard",
-            "spriteCssClass": "content/dataviz/dashboards/car.gif",
+            "spriteCssClass": "gaugeRadialIcon",
+            "thumbnailUrl": "content/dataviz/dashboards/car.gif",
             "expanded": "true",
             "items": [{
                 "url": "dashboards/car-dashboard.html"
@@ -186,7 +188,8 @@
         },
         {
             "text": "Stock History",
-            "spriteCssClass": "content/dataviz/dashboards/stock.gif",
+            "spriteCssClass": "chartAreaIcon",
+            "thumbnailUrl": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
             "onlineOnly": "true",
             "items": [{
