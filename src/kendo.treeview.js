@@ -1219,6 +1219,7 @@
                top: kendo.support.touch ? -40 / kendo.support.zoomLevel() : 10
            },
            dragstart: proxy(that.dragstart, that),
+           dragcancel: proxy(that.dragcancel, that),
            drag: proxy(that.drag, that),
            dragend: proxy(that.dragend, that)
         });
@@ -1324,62 +1325,62 @@
             that._hintStatus(statusClass);
         },
 
+        dragcancel: function(e) {
+            this.dropHint.remove();
+            //treeview.trigger("nodeDragCancelled", { item: sourceNode[0] });
+        },
+
         dragend: function (e) {
             var that = this,
-                treeview = that.treeview,
-                dropPosition = "over",
-                sourceNode = that.sourceNode,
-                destinationNode,
-                dropHint = that.dropHint,
-                valid, dropPrevented;
+            treeview = that.treeview,
+            dropPosition = "over",
+            sourceNode = that.sourceNode,
+            destinationNode,
+            dropHint = that.dropHint,
+            valid, dropPrevented;
 
-            if (e.keyCode == kendo.keys.ESC){
-                dropHint.remove();
-                //treeview.trigger("nodeDragCancelled", { item: sourceNode[0] });
-            } else {
-                if (dropHint.css(VISIBILITY) == "visible") {
-                    dropPosition = dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
-                    destinationNode = dropHint.closest(NODE);
-                } else if (that.dropTarget) {
-                    destinationNode = that.dropTarget.closest(NODE);
-                }
-
-                valid = that._hintStatus() != "k-denied";
-
-                dropPrevented = treeview.trigger(DROP, {
-                    sourceNode: sourceNode[0],
-                    destinationNode: destinationNode[0],
-                    valid: valid,
-                    setValid: function(newValid) { valid = newValid; },
-                    dropTarget: e.target,
-                    dropPosition: dropPosition
-                });
-
-                dropHint.remove();
-
-                if (!valid || dropPrevented) {
-                    that._draggable.dropped = valid;
-                    return;
-                }
-
-                that._draggable.dropped = true;
-
-                // perform reorder / move
-                if (dropPosition == "over") {
-                    treeview.append(sourceNode, destinationNode);
-                    treeview.expand(destinationNode);
-                } else if (dropPosition == "before") {
-                    treeview.insertBefore(sourceNode, destinationNode);
-                } else if (dropPosition == "after") {
-                    treeview.insertAfter(sourceNode, destinationNode);
-                }
-
-                treeview.trigger(DRAGEND, {
-                    sourceNode: sourceNode[0],
-                    destinationNode: destinationNode[0],
-                    dropPosition: dropPosition
-                });
+            if (dropHint.css(VISIBILITY) == "visible") {
+                dropPosition = dropHint.prevAll(".k-in").length > 0 ? "after" : "before";
+                destinationNode = dropHint.closest(NODE);
+            } else if (that.dropTarget) {
+                destinationNode = that.dropTarget.closest(NODE);
             }
+
+            valid = that._hintStatus() != "k-denied";
+
+            dropPrevented = treeview.trigger(DROP, {
+                sourceNode: sourceNode[0],
+                destinationNode: destinationNode[0],
+                valid: valid,
+                setValid: function(newValid) { valid = newValid; },
+                dropTarget: e.target,
+                dropPosition: dropPosition
+            });
+
+            dropHint.remove();
+
+            if (!valid || dropPrevented) {
+                that._draggable.dropped = valid;
+                return;
+            }
+
+            that._draggable.dropped = true;
+
+            // perform reorder / move
+            if (dropPosition == "over") {
+                treeview.append(sourceNode, destinationNode);
+                treeview.expand(destinationNode);
+            } else if (dropPosition == "before") {
+                treeview.insertBefore(sourceNode, destinationNode);
+            } else if (dropPosition == "after") {
+                treeview.insertAfter(sourceNode, destinationNode);
+            }
+
+            treeview.trigger(DRAGEND, {
+                sourceNode: sourceNode[0],
+                destinationNode: destinationNode[0],
+                dropPosition: dropPosition
+            });
         }
     };
 
