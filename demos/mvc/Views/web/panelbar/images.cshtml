@@ -1,9 +1,14 @@
 
 
         <div id="example" class="k-content">
-            <h3>PanelBar with images</h3>
+            
+            <div class="demo-section">
+                
+                <h3>PanelBar with images</h3>
 
-            <div id="panelbar-images"></div>
+                <div id="panelbar-images"></div>
+
+            </div>
 
             <script>
                 $("#panelbar-images").kendoPanelBar({
@@ -43,38 +48,46 @@
                     ]
                 });
             </script>
+            
+            <div class="demo-section">
 
-            <br />
-            <h3>PanelBar with sprites</h3>
+                <h3>PanelBar with sprites</h3>
 
-            <div id="panelbar-sprites"></div>
+                <div id="panelbar-sprites"></div>
+
+            </div>
 
             <script>
                 $("#panelbar-sprites").kendoPanelBar({
                     dataSource: [{
-                            text: "Web", spriteCssClass: "overviewIcon", items: [
-                                { text: "Grid", spriteCssClass: "gridIcon" },
-                                { text: "TreeView", spriteCssClass: "treeViewIcon" },
-                                { text: "Upload", spriteCssClass: "uploadIcon" }
+                            text: "Brazil", spriteCssClass: "brazilFlag", items: [
+                                { text: "History", spriteCssClass: "historyIcon" },
+                                { text: "Geography", spriteCssClass: "geographyIcon" },
                             ]
                         },
                         {
-                            text: "DataViz", spriteCssClass: "chartPieIcon", items: [
-                                { text: "Charts", spriteCssClass: "chartIcon" },
-                                { text: "Gauges", spriteCssClass: "gaugeIcon" }
+                            text: "India", spriteCssClass: "indiaFlag", items: [
+                                { text: "History", spriteCssClass: "historyIcon" },
+                                { text: "Geography", spriteCssClass: "geographyIcon" },
                             ]
                         },
                         {
-                            text: "Mobile", spriteCssClass: "mobileAppIcon", items: [
-                                { text: "NavBar", spriteCssClass: "mobileNavBarIcon" },
-                                { text: "ListView", spriteCssClass: "mobileListViewIcon" },
-                                { text: "TabStrip", spriteCssClass: "mobileTabStripIcon" }
+                            text: "Netherlands", spriteCssClass: "netherlandsFlag", items: [
+                                { text: "History", spriteCssClass: "historyIcon" },
+                                { text: "Geography", spriteCssClass: "geographyIcon" },
                             ]
                         }]
                 });
             </script>
 
             <style scoped>
+                .demo-section {
+                	width: 300px;
+                }
+                .demo-section h3 {
+                	font-weight: normal;
+                	padding-bottom: 10px;
+                }
                 #panelbar-images > .k-item > .k-link > .k-image
                 {
                     margin-top: 2px;
@@ -87,8 +100,22 @@
                 }
 
                 #panelbar-sprites .k-sprite {
-                    background-image: url("../../content/shared/styles/sprite.png");
-                    /* sprite background-positions inherited from online demos */
+                    background-image: url("../../content/shared/styles/flags.png");
+                }
+                .brazilFlag {
+                	background-position: 0 0;
+                }
+                .indiaFlag {
+                	background-position: 0 -32px;
+                }
+                .netherlandsFlag {
+                	background-position: 0 -64px;
+                }
+                .historyIcon {
+                	background-position: 0 -96px;
+                }
+                .geographyIcon {
+                	background-position: 0 -128px;
                 }
             </style>
         </div>
