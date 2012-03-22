@@ -1564,11 +1564,16 @@
         addRow: function() {
             var that = this,
                 options = that.options,
+                index,
                 dataSource = that.dataSource;
 
             if ((that.editable && that.editable.end()) || !that.editable) {
-                var index = dataSource.indexOf((dataSource.view() || [])[0]) || 0,
-                    model = dataSource.insert(index, {}),
+                index = dataSource.indexOf((dataSource.view() || [])[0]);
+                if (index < 0) {
+                    index = 0;
+                }
+
+                var model = dataSource.insert(index, {}),
                     id = model.uid,
                     mode = that._editMode(),
                     row = that.table.find("tr[" + kendo.attr("uid") + "=" + id + "]"),
