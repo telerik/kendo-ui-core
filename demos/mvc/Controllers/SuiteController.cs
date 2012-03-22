@@ -85,7 +85,7 @@ namespace Kendo.Controllers
                             examplesUrl.Add(string.Format("~/{0}/{1}", ViewBag.Suite, example.Url));
                         }
 
-                        if (!found && Request.Path.EndsWith(example.Url))
+                        if (!found && (Request.Path.EndsWith(example.Url) || (ViewBag.Example == "result" && example.Url == "upload/index.html")))
                         {
                             ViewBag.CurrentWidget = widget;
                             ViewBag.CurrentExample = example;
