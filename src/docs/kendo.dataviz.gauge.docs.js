@@ -153,6 +153,9 @@
          * @option {Number} [scale.majorUnit] The interval between major divisions.
          * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {number} [scale.startAngle] <-30> The start angle of the gauge.
+         * The 0 degrees is 9 o'clock and the gauge is rendered clockwise.
+         * @option {number} [scale.endAngle] <210> The end angle of the gauge.
+         * The 0 degrees is 9 o'clock and the gauge is rendered clockwise.
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the scale.
          * @option {Number} [scale.max] <100> The maximum value of the scale.
@@ -259,65 +262,9 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {Object} [plotArea] The plot area configuration options.
-         * @option {Object} [plotArea.background] The background of the gauge area.
-         * Any valid CSS color string will work here, including hex and rgb.
-         * @option {Object} [plotArea.border] The border of the gauge area.
-         * @option {Number} [plotArea.border.width] <0> The width of the border.
-         * @option {String} [plotArea.border.color] <"black">
-         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
-         * @option {String} [plotArea.border.dashType] <"solid">
-         * The dash type of the border.
-         * <div class="details-list">
-         *     <dl>
-         *         <dt>
-         *              <code>"solid"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a solid line.
-         *         </dd>
-         *         <dt>
-         *              <code>"dot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dots.
-         *         </dd>
-         *         <dt>
-         *              <code>"dash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dashes.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash.
-         *         </dd>
-         *         <dt>
-         *              <code>"dashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDotDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
-         *         </dd>
-         *    </dl>
-         * </div>
          * @option {Object} [pointer] The pointer configuration options.
          * @option {String} [pointer.color] The color of the pointer.
          * Any valid CSS color string will work here, including hex and rgb.
-         * @option {String} [pointer.shape] The shape of the pointer.
          * @option {String} [pointer.value] The value of the gauge.
          * @option {String} [pointer.cap] The cap configuration options.
          * @option {String} [pointer.cap.size] The size of the cap in percents.
@@ -366,7 +313,7 @@
      *
      * @section
      * <p>
-     * The Radial Gauge widget is used to let users quickly understand where a value lies in a certain range.
+     * The Linear Gauge widget is used to let users quickly understand where a value lies in a certain range.
      * All graphics are rendered on the client using SVG with a fallback to VML for legacy browsers.
      * </p>
      *
@@ -569,61 +516,6 @@
          * @option {String} [gaugeArea.border.color] <"black">
          * The color of the border. Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [gaugeArea.border.dashType] <"solid">
-         * The dash type of the border.
-         * <div class="details-list">
-         *     <dl>
-         *         <dt>
-         *              <code>"solid"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a solid line.
-         *         </dd>
-         *         <dt>
-         *              <code>"dot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dots.
-         *         </dd>
-         *         <dt>
-         *              <code>"dash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of dashes.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDash"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash.
-         *         </dd>
-         *         <dt>
-         *              <code>"dashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot.
-         *         </dd>
-         *         <dt>
-         *              <code>"longDashDotDot"</code>
-         *         </dt>
-         *         <dd>
-         *              Specifies a line consisting of a repeating pattern of long-dash-dot-dot.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Object} [plotArea] The plot area configuration options.
-         * @option {Object} [plotArea.background] The background of the gauge area.
-         * Any valid CSS color string will work here, including hex and rgb.
-         * @option {Object} [plotArea.border] The border of the gauge area.
-         * @option {Number} [plotArea.border.width] <0> The width of the border.
-         * @option {String} [plotArea.border.color] <"black">
-         * The color of the border. Any valid CSS color string will work here, including hex and rgb.
-         * @option {String} [plotArea.border.dashType] <"solid">
          * The dash type of the border.
          * <div class="details-list">
          *     <dl>
