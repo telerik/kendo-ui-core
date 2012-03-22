@@ -246,7 +246,8 @@ html body .k-button-bare
 .k-icon-clock { background-position: -32px -192px; }
 
 .k-search { background-position: -32px -240px; }
-.k-custom { background-position: -112px -110px; }
+.k-custom { background-position: -115px -113px; }
+.k-editor .k-custom { background-position: -112px -110px; }
 
 .k-insert-top { background-position: -160px -32px; }
 .k-insert-middle { background-position: -160px -48px; }
