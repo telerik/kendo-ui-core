@@ -450,6 +450,8 @@
     ColorPicker.fn.options = extend(kendo.ui.ComboBox.fn.options, {
         name: "ColorPicker",
         autoBind: false,
+        dataTextField: "text",
+        dataValueField: "value",
         template: "<span style='background-color: ${ data.value }' "+
                         "class='k-icon k-color-preview' " +
                         "title='${ data.text }'></span> ",
