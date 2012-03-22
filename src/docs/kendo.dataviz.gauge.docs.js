@@ -326,7 +326,7 @@
      * <div id="linear-gauge"></div>
      *
      * @exampleTitle
-     * 2. Initialize the Kendo UI LinearGauge with default configuration
+     * 2. Initialize the Kendo UI Linear Gauge with default configuration
      * @example
      *    $(document).ready(function() {
      *        $("#linear-gauge").kendoLinearGauge();
@@ -348,7 +348,7 @@
      *
      * @section
      */
-     var RadialGaugeDocs = /** @lends kendo.dataviz.ui.LinearGauge.prototype */ {
+     var LinearGaugeDocs = /** @lends kendo.dataviz.ui.LinearGauge.prototype */ {
         /**
          * @constructs
          * @extends kendo.ui.Widget
