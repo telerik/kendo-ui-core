@@ -8,7 +8,7 @@ var kendoBuild = require("./kendo-build"),
     DEPLOY_PATH = path.join("themebuilder", "live"),
     DEPLOY_STYLES = path.join(DEPLOY_PATH, "styles"),
     DEPLOY_SCRIPTS = path.join(DEPLOY_PATH, "scripts"),
-    KENDO_CDN = process.argv[2] || "http://cdn.kendostatic.com/2011.3.1129/";
+    KENDO_CDN = process.argv[2] || "http://cdn.kendostatic.com/2012.1.322/";
 
 function wrap(source) {
     return "(function(window, undefined){\r\n" + source + "\r\n})(window);"
