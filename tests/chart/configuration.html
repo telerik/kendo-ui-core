@@ -96,7 +96,7 @@
                     dataviz.VMLView.available = function() { return false; };
 
                     stubMethod(kendo, "logToConsole", function(message) {
-                        equals(message, "Warning: Missing SVG and VML support. KendoUI DataViz will not render.");
+                        ok(message.indexOf("Warning: KendoUI DataViz cannot render.") > -1);
                         start();
                     }, function() {
                         createChart();

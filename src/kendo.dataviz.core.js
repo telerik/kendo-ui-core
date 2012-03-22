@@ -2345,7 +2345,9 @@
                     }
                 }
 
-                kendo.logToConsole("Warning: Missing SVG and VML support. KendoUI DataViz will not render.");
+                kendo.logToConsole("Warning: KendoUI DataViz cannot render. Possible causes:\n" +
+                                    "- The browser does not support SVG or VML. User agent: " + navigator.userAgent + "\n" +
+                                    "- The kendo.dataviz.svg.js or kendo.dataviz.vml.js scripts are not loaded");
             },
             registerView: function(viewType) {
                 var defaultView = dataviz.ui.views[0];
