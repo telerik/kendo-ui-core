@@ -26,14 +26,21 @@
                 $(document).ready(function() {
                     createGauge();
 
-                    $("#gauge-value").kendoSlider({
-                        min: 0,
-                        max: 180,
-                        showButtons: false,
-                        change: function() {
-                            $("#gauge").data("kendoRadialGauge").value($("#gauge-value").val());
-                        }
-                    });
+                    function updateValue() {
+                        $("#gauge").data("kendoRadialGauge").value($("#gauge-value").val());
+                    }
+
+                    if (kendo.ui.Slider) {
+                        $("#gauge-value").kendoSlider({
+                            min: 0,
+                            max: 180,
+                            showButtons: false,
+                            change: updateValue
+                        });
+                    } else {
+                        $("#gauge-value").change(updateValue);
+                    }
+
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauge();
