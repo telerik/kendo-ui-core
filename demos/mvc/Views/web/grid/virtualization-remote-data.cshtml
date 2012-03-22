@@ -18,7 +18,12 @@
                             virtual: true
                         },
                         sortable: true,
-                        columns: ["OrderID", "CustomerID", "ShipName", "ShipCity"]
+                        columns: [
+                            "OrderID",
+                            "CustomerID",
+                            { field:"ShipName", title:"Ship Name" },
+                            { field: "ShipCity", title:"Ship City" }
+                        ]
                     });
                 });
             </script>

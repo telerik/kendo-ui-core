@@ -33,12 +33,20 @@
                                 field:"OrderID",
                                 filterable: false
                             },
-                            "Freight", {
+                            "Freight",
+                            {
                                 field: "OrderDate",
+                                title: "Order Date",
+                                width: 100,
                                 format: "{0:MM/dd/yyyy}"
-                            },
-                            "ShipName",
-                            "ShipCity"
+                            }, {
+                                field: "ShipName",
+                                title: "Ship Name",
+                                width: 200
+                            }, {
+                                field: "ShipCity",
+                                title: "Ship City"
+                            }
                         ]
                     });
                 });

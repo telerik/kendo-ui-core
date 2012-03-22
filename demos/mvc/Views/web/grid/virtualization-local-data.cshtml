@@ -14,7 +14,11 @@
                         scrollable: {
                             virtual: true
                         },
-                        columns: [ "Id", "FirstName", "LastName", "City", "Title" ]
+                        columns: [ "Id",
+                            { field:"FirstName", title: "First Name" },
+                            { field:"LastName", title: "Last Name" },
+                            "City", "Title"
+                        ]
                     });
                 });
             </script>

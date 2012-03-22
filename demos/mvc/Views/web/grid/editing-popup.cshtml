@@ -50,9 +50,9 @@
                         height: 400,
                         toolbar: ["create"],
                         columns: [
-                            "ProductName",
-                            { field: "UnitPrice", format: "{0:c}", width: "150px" },
-                            { field: "UnitsInStock", width: "150px" },
+                            { field:"ProductName", title: "Product Name" },
+                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "150px" },
+                            { field: "UnitsInStock", title:"Units In Stock", width: "150px" },
                             { field: "Discontinued", width: "100px" },
                             { command: ["edit", "destroy"], title: "&nbsp;", width: "210px" }],
                         editable: "popup"

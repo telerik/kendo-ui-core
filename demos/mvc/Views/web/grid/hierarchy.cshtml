@@ -59,7 +59,12 @@
                         scrollable: false,
                         sortable: true,
                         pageable: true,
-                        columns: [ "OrderID", "ShipCountry", "ShipAddress", "ShipName" ]
+                        columns: [
+                            { field: "OrderID", width: 70 },
+                            { field: "ShipCountry", title:"Ship Country", width: 100 },
+                            { field: "ShipAddress", title:"Ship Address" },
+                            { field: "ShipName", title: "Ship Name", width: 200 }
+                        ]
                     });
                 }
             </script>
