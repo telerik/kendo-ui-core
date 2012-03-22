@@ -64,6 +64,7 @@
 
                     $(document).bind("kendo:skinChange", function(e) {
                         createGauge();
+                        refresh();
                     });
 
                     window.configuredRanges = $("#gauge").data("kendoLinearGauge").options.scale.ranges;
