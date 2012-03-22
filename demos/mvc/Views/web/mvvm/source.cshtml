@@ -4,13 +4,13 @@
             <span class="configHead">Add a product</span>
             <ul class="options">
                 <li>
-                    <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" class="k-textbox"/></label>
+                    <label>Name:<input type="text" placeholder="Enter name" data-bind="value: productName" class="name k-textbox"/></label>
                 </li>
                 <li>
-                    <label>Price:<input type="number" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" /></label>
+                    <label>Price:<input type="text" placeholder="Enter number" data-bind="value: productPrice" class="k-textbox" /></label>
                 </li>
                 <li>
-                    <label>Units in stock:<input type="number" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" /></label>
+                    <label>Units in stock:<input type="text" placeholder="Enter number" data-bind="value: productUnitsInStock" class="k-textbox" /></label>
                 </li>
                 <li>
                     <button class="k-button" data-bind="click: addProduct">Add a new product</button>
@@ -259,7 +259,7 @@ kendo.bind($(&quot;#example&quot;), viewModel);
             float: none;
         }
 
-        .configuration input[type=text] {
+        .configuration .name {
             margin-top: -3px;
             width: 130px;
         }
