@@ -319,6 +319,12 @@
          * Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [pointer.shape] The shape of the pointer.
          * @option {String} [pointer.value] The value of the gauge.
+         * @option {String} [pointer.cap] The cap configuration options.
+         * @option {String} [pointer.cap.size] The size of the cap in percents.
+         * @option {String} [pointer.cap.color] The color of the cap.
+         * Any valid CSS color string will work here, including hex and rgb.
+         * @option {String} [pointer.color] The color of the pointer.
+         * Any valid CSS color string will work here, including hex and rgb.
          *
          */
         init: function() { },
@@ -383,7 +389,7 @@
      * @exampleTitle
      * Create a horizontal linear gauge with value 20 and mininum value 10
      * @example
-     *     $("#radial-gauge").kendoLinearGauge({
+     *     $("#linear-gauge").kendoLinearGauge({
      *         pointer: {
      *             value: 20
      *         },
