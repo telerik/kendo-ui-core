@@ -36,7 +36,12 @@
                 theme:"default",
 
                 pointer: {
-                    value: 180
+                    value: 180,
+                    cap: {
+                        size: 0.10,
+                        color: "red"
+                    },
+                    color: "red"
                 },
 
                 scale: {
@@ -64,7 +69,6 @@
 
             $("#gauge1").kendoRadialGauge({
                 gaugeArea: {
-                    background: "red",
                     border: {
                         color: "blue",
                         width: 1,
