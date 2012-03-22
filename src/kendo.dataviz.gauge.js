@@ -32,7 +32,7 @@
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var ANGULAR_SPEED = 177,
+    var ANGULAR_SPEED = 250,
         ARROW = "arrow",
         ARROW_POINTER = "arrowPointer",
         BAR_INDICATOR = "barIndicator",
