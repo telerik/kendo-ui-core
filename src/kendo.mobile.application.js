@@ -617,7 +617,7 @@
                 text = that.options.loading;
 
             if (text === undefined) {
-                text = "<h1>Loading...";
+                text = "<h1>Loading...</h1>";
             }
 
             that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span>' + text + "</div>")
