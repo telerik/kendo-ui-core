@@ -214,11 +214,12 @@
             scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
             Axis.fn.init.call(scale, options);
+            scale.options.minorUnit = scale.options.minorUnit || scale.options.majorUnit / 10;
         },
 
         options: {
             min: 0,
-            max: 100,
+            max: 180,
 
             majorTicks: {
                 size: 15,
