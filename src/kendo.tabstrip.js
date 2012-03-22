@@ -1456,6 +1456,7 @@
                 data: data,
 
                 error: function (xhr, status) {
+                    element.removeAttr("data-animating");
                     if (that.trigger("error", { xhr: xhr, status: status })) {
                         this.complete();
                     }
