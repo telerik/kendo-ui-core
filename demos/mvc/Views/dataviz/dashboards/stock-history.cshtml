@@ -110,16 +110,17 @@
             change: function() {
                 $("[name=chart-type][value=area]").prop("checked", true);
 
-                var view = this.view();
+                var view = this.view(),
+                    index = $("#company-filtering-tabs").data("kendoTabStrip").select().index();
 
                 // populate detailed stock prices
-                populateStockPrices(view[$("#company-filtering-tabs").data("kendoTabStrip").select().index()]);
+                populateStockPrices(view[index], index);
             }
         });
 
         var defaultSeriesColors = [ "#70b5dd", "#1083c7", "#1c638d" ];
 
-        function populateStockPrices(data) {
+        function populateStockPrices(data, companyIndex) {
             var container = $(".company-info"),
                 yearlyStockValues = data.items,
                 highest = yearlyStockValues[0].high,
@@ -178,7 +179,9 @@
             });
 
             var companyRelativeGain = $.map(stocksDataSource.view(), function(data, index) {
-                return { value: yearlyRelativeValue(data.items) - 100 };
+                return {
+                    value: yearlyRelativeValue(data.items) - 100
+                };
             });
 
             container
@@ -197,13 +200,8 @@
                         type: "pie",
                         overlay: {
                             gradient: "none"
-                        },
-                        labels: {
-                            visible: false
                         }
                     },
-                    plotArea: { margin: 0, padding: 0 },
-                    chartArea: { margin: 0, padding: 0 },
                     seriesColors: defaultSeriesColors,
                     series: [{
                         field: "value"
@@ -344,12 +342,13 @@
             dataSource: ["Google", "Apple", "Amazon"],
             change: function() {
                 var company = this.value().toLowerCase(),
+                    index = this.select().index(),
                     view = stocksDataSource.view();
 
                 if (view.length) {
                     $(".company-info").html(companyInfoTemplate({ name: company }));
 
-                    populateStockPrices(view[this.select().index()]);
+                    populateStockPrices(view[index], index);
                 }
             }
         })
