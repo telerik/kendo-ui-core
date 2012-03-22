@@ -133,6 +133,12 @@
             container: "#mobile-application-container"
         });
 
+        @if (ViewBag.suite != "mobile") {
+            <text>
+                applyCurrentTheme();
+            </text>
+        }
+
     </script>
 </body>
 </html>
