@@ -23,8 +23,8 @@
 <body>
     @Html.Partial("Header")
 
-    <div id="example" class="k-content floatWrap centerWrap">
-        <h1>ThemeBuilder</h1>
+    <div id="example" class="floatWrap centerWrap">
+        <h1 id="exampleTitle" style="position:static">ThemeBuilder</h1>
 
         <div id="instructions-box">
             <h3>Instructions</h3>
@@ -54,6 +54,7 @@
                 "})()").replace(/\s+/g, "%20"));
         </script>
 
+        <div class="k-content floatWrap">
         <div class="column">
             <h3>Menu</h3>
             <ul id="menu">
@@ -175,6 +176,8 @@
             </div>
         </div>
 
+        </div>
+
         <style scoped>
             #example {
                 padding-top: 30px;
@@ -182,7 +185,7 @@
 
             h3 {
                 font: normal 16px/1.5 Arial,sans-serif;
-                margin: 34px 0 13px;
+                margin: 20px 0 13px;
             }
 
             #instructions-box {
@@ -292,7 +295,7 @@
 
                 $("#panelbar").kendoPanelBar();
 
-                $("#splitter").height(200).kendoSplitter();
+                $("#splitter").width(203).height(120).kendoSplitter();
 
                 var windowContent = $("#window"),
                     windowTitle = windowContent.prev("h3");
