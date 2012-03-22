@@ -202,11 +202,13 @@
                 Application.preloadStylesheet(url, function () {
                     var animated = $("#exampleTitle").add(exampleElement);
 
-                    animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function() {
-                        replaceTheme();
-                        setTimeout(function() {
-                            animated.kendoStop().kendoAnimate(animation.show);
-                        }, 100);
+                    animated.kendoStop().kendoAnimate(extend({}, animation.hide, { complete: function(element) {
+                        if (element[0] == exampleElement[0]) {
+                            replaceTheme();
+                            setTimeout(function() {
+                                animated.kendoStop().kendoAnimate(animation.show);
+                            }, 100);
+                        }
                     }}));
                 });
             } else {
