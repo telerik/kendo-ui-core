@@ -5,8 +5,8 @@
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li",
-        HIGHLIGHT_SELECTOR = ".km-list > li > .km-listview-link",
-        HANDLED_INPUTS_SELECTOR = ".km-list > li > .km-listview-link > input",
+        HIGHLIGHT_SELECTOR = ".km-list > li > .km-listview-link, .km-list > li > .km-listview-label",
+        HANDLED_INPUTS_SELECTOR = ".km-list > li > .km-listview-label > input",
         proxy = $.proxy,
         GROUP_CLASS = "km-group-title",
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><span class="km-text"></span></div>',
@@ -72,7 +72,7 @@
             return;
         }
 
-        label.addClass("km-listview-link");
+        label.addClass("km-listview-label");
     }
 
     /**
