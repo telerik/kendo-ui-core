@@ -336,7 +336,7 @@
             that.dataSource = DataSource.create(that.options.dataSource)
                                         .bind("change", that._refreshHandler);
 
-            if (that._showLoadingProxy) {
+            if (that._showLoadingProxy && !that.options.pullToRefresh) {
                 that.dataSource.bind(REQUEST_START, that._showLoadingProxy);
             }
         },
@@ -351,7 +351,9 @@
             that._hideLoadingProxy = proxy(application.hideLoading, application);
             that._showLoadingProxy = proxy(application.showLoading, application);
 
-            dataSource.bind(REQUEST_START, that._showLoadingProxy);
+            if (!options.pullToRefresh) {
+                dataSource.bind(REQUEST_START, that._showLoadingProxy);
+            }
 
             if (options.pullToRefresh) {
                 that.scroller.setOptions({
