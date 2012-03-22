@@ -1,20 +1,24 @@
 
         <div id="example" class="k-content">
-            <table id="movies" class="metrotable">
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Rating</th>
-                        <th>Title</th>
-                        <th>Year</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td colspan="4"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="demo-section">
+
+                <table id="movies" class="metrotable">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Rating</th>
+                            <th>Title</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
 
             <script id="template" type="text/x-kendo-template">
                 <tr>
@@ -55,10 +59,20 @@
                 });
             </script>
             <style scoped>
+                .demo-section {
+                    width: 600px;	
+                }
+                
                 .metrotable {
-                	width: 600px;
-                	margin: 30px auto;
+                	width: 100%;
                 	border-collapse: collapse;
+                }
+                
+                .metrotable > thead > tr > th 
+                {
+                	font-size: 1.3em;
+                	padding-top: 0;
+                	padding-bottom: 5px;
                 }
             </style>
         </div>
