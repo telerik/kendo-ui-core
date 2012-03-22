@@ -37,24 +37,32 @@
                     <span class="metric">throughout the year</span>
                 </div>
 
-                <dl class="stat highest-container">
+                <dl class="stat trend-container highest-container">
                     <dt class="example-subtitle">Highest stock price</dt>
                     <dd class="highest"></dd>
                     <dd class="sparkline highest-sparkline"></dd>
                 </dl>
 
-                <dl class="stat lowest-container">
+                <dl class="stat trend-container lowest-container">
                     <dt class="example-subtitle">Lowest stock price</dt>
                     <dd class="lowest"></dd>
                     <dd class="sparkline lowest-sparkline"></dd>
                 </dl>
+
+                <dl class="stat trend-container">
+                    <dt class="example-subtitle">Relative value</dt>
+                    <dd class="relative-value"></dd>
+                    <dd class="sparkline relative-value-sparkline"></dd>
+                </dl>
+
+                <div class="relative-value-pie"></div>
             </div>
 
             <div class="separator"></div>
 
             <dl class="stat first">
                 <dt class="example-subtitle">
-                    #= name # volume of traded stocks
+                    volume of traded stocks
                     <span class="metric">traded stocks</span>
                 </dt>
                 <dd class="volume"></dd>
@@ -119,9 +127,9 @@
                 format = function(number) {
                     return kendo.toString(number, "n");
                 },
-                sparklineOptions = function(field, color) {
+                sparklineOptions = function(field, color, data) {
                     return {
-                        dataSource: yearlyStockValues,
+                        dataSource: data || yearlyStockValues,
                         series: [{
                             field: field,
                             color: color
@@ -153,6 +161,18 @@
                 metric = "millions stocks";
             }
 
+            var yearlyRelativeValue = yearlyStockValues[yearlyStockValues.length-1].close / yearlyStockValues[0].open * 100;
+
+            var relativeValues = $.map(yearlyStockValues, function(item, index) {
+                var value = 100;
+
+                if (index > 0) {
+                    value = item.close * 100 / yearlyStockValues[index - 1].open;
+                }
+
+                return { value: value };
+            });
+
             container
                 .find(".eoy-closing").text(format(yearlyStockValues[yearlyStockValues.length - 1].close)).end()
                 .find(".highest").text(format(highest)).end()
@@ -161,6 +181,8 @@
                 .find(".highest-sparkline").kendoChart(sparklineOptions("high", "#639514")).end()
                 .find(".first dt .metric").eq(1).text(metric).end().end()
                 .find(".volume").text(format(volume)).end()
+                .find(".relative-value").text(format(yearlyRelativeValue) + "%").end()
+                .find(".relative-value-sparkline").kendoChart(sparklineOptions("value", "#4da3d5", relativeValues)).end()
                 .find(".volume-chart").kendoChart({
                     dataSource: yearlyStockValues,
                     series: [{
@@ -429,6 +451,8 @@
         .stat .eoy-closing {
             font-size: 110px;
             line-height: 1em;
+            letter-spacing: -2px;
+            text-indent: -8px;
             color: #454447;
         }
 
@@ -489,6 +513,7 @@
         }
 
         .stat,
+        .relative-value-pie,
         .company-trends {
             margin: 1em 0 0;
             display: inline-block;
@@ -498,11 +523,10 @@
         }
 
         .company-trends {
-            margin-left: 30px;
+            margin-left: 27px;
         }
 
-        .lowest-container,
-        .highest-container {
+        .trend-container {
             background: transparent none no-repeat 100% 29px;
             width: 120px;
             margin-right: 35px;
@@ -517,7 +541,8 @@
         }
 
         dd.highest,
-        dd.lowest {
+        dd.lowest,
+        dd.relative-value {
             margin: 0;
             font-size: 36px;
             font-weight: 700;
@@ -529,6 +554,10 @@
 
         .highest {
             color: #639514;
+        }
+
+        .relative-value {
+            color: #4da3d5;
         }
 
         .sparkline {
