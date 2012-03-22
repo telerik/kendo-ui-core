@@ -1839,7 +1839,7 @@
             anim.axis = axis;
             if (initial) {
                 updateArray(points, axis, start);
-            } else {
+            } else if (options.speed && options.speed != 0) {
                 anim.options.duration = math.max((math.abs(start - end) / options.speed) * 1000, 1);
             }
         },
@@ -1876,8 +1876,7 @@
                 options = element.options.animation,
                 vertical = options.vertical,
                 axis = options.vertical ? "y" : "x",
-                pos = options.vertical ? "y1" : "x2",
-                startPosition = options.startPosition[pos],
+                startPosition = options.startPosition[options.vertical ? "y2" : "x1"],
                 halfSize = options.size / 2,
                 count = points.length,
                 initial = !defined(anim.options.endPosition),
@@ -1891,8 +1890,10 @@
 
             if (!initial) {
                 startPosition = points[1][axis];
-                end = anim.options.endPosition[pos];
-                anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
+                end = anim.options.endPosition[options.vertical ? "y1" : "x2"];
+                if (options.speed && options.speed != 0) {
+                    anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
+                }
             }
 
             for (i = 0; i < count; i++) {

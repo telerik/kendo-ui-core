@@ -22,6 +22,8 @@
         <div id="gauge1"></div>
         <input type="button" value="value 10" id="button1" />
         <input type="button" value="value 40" id="button2" />
+        <input type="button" value="value 10" id="button3" />
+        <input type="button" value="value 40" id="button4" />
 
         <script>
             $("#button1").click(function () {
@@ -29,6 +31,12 @@
             });
             $("#button2").click(function () {
                 $("#gauge").data("kendoLinearGauge").value(40);
+            });
+            $("#button3").click(function () {
+                $("#gauge1").data("kendoLinearGauge").value(10);
+            });
+            $("#button4").click(function () {
+                $("#gauge1").data("kendoLinearGauge").value(40);
             });
             $("#gauge").kendoLinearGauge({
                 theme:"default",
@@ -42,12 +50,12 @@
                         from: 30,
                         to: 40,
                         color: "green"
-                    }]
+                    }],
+                    min: -10
                 },
 
                 pointer: {
                     value: 20,
-                    shape: "barIndicator",
                     track: {
                         visible: true,
                         border: {
@@ -61,12 +69,12 @@
             $("#gauge1").kendoLinearGauge({
                 theme:"default",
                 scale: {
-                    vertical: false
+                    vertical: false,
+                    min: -10
                 },
 
                 pointer: {
-                    value: 50,
-                    shape: "arrow"
+                    value: 50
                 }
             });
         </script>

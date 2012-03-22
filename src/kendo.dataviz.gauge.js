@@ -720,8 +720,7 @@
 
             margin: getSpacing(2.5),
             animation: {
-                type: BAR_INDICATOR,
-                speed: 120
+                type: BAR_INDICATOR
             },
             visible: true
         },
@@ -741,7 +740,7 @@
                 element.refresh(doc.getElementById(options.id));
             } else {
                 options.animation = deepExtend({}, options.animation, {
-                    endPosition: scale.getSlot(options.value)
+                    endPosition: scale.getSlot(scale.options.min, options.value)
                 });
                 if (options.shape === ARROW) {
                     animation = element._animation = new ArrowAnimation(element, options.animation);
@@ -797,7 +796,7 @@
                         fill: options.color,
                         fillOpacity: options.opacity,
                         animation: deepExtend(options.animation, {
-                            startPosition: scale.getSlot(options.min),
+                            startPosition: scale.getSlot(scale.options.min, options.value),
                             size: options.size,
                             vertical: scale.options.vertical
                         }),
@@ -821,7 +820,7 @@
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
-                slot = scale.getSlot(value),
+                slot = scale.getSlot(value, scale.options.min),
                 size = options.size,
                 halfSize = size / 2,
                 trackBox = pointer.trackBox,
