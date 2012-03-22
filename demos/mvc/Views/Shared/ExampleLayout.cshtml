@@ -15,7 +15,7 @@
     <h1 id="exampleTitle">
         @if (ViewBag.CurrentExample != null) {
             <span class="exampleIcon @ViewBag.CurrentWidget.SpriteCssClass"></span>
-            <strong>@ViewBag.CurrentWidget.Text /</strong> @ViewBag.CurrentExample.Text
+            <strong>@ViewBag.CurrentWidget.Text @(ViewBag.CurrentExample.Url.Contains("dashboard") ? "" : "/")</strong> @ViewBag.CurrentExample.Text
         }
     </h1>
 
