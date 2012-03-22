@@ -2782,23 +2782,23 @@ span.k-tooltip
 .k-callout-n,
 .k-callout-s
 {
-	width: 11px;
-	height: 6px;
+    width: 11px;
+    height: 6px;
 }
 
 .k-callout-w,
 .k-callout-e
 {
-	width: 6px;
-	height: 11px;
+    width: 6px;
+    height: 11px;
 }
 
 .k-callout-n
 {
-	top: -7px;
-	left: 49%;
-	margin-left: -5px;
-	background-position: -162px -181px;
+    top: -7px;
+    left: 49%;
+    margin-left: -5px;
+    background-position: -162px -181px;
 }
 
 .k-tooltip-validation .k-callout-n
@@ -2808,10 +2808,10 @@ span.k-tooltip
 
 .k-callout-w
 {
-	top: 49%;
-	left: -7px;
-	margin-top: -5px;
-	background-position: -165px -226px;
+    top: 49%;
+    left: -7px;
+    margin-top: -5px;
+    background-position: -165px -226px;
 }
 
 .k-tooltip-validation .k-callout-w
@@ -2821,11 +2821,11 @@ span.k-tooltip
 
 .k-callout-s
 {
-	top: 100%;
-	left: 49%;
-	margin-top: 2px;
-	margin-left: -5px;
-	background-position: -162px -213px;
+    top: 100%;
+    left: 49%;
+    margin-top: 2px;
+    margin-left: -5px;
+    background-position: -162px -213px;
 }
 
 .k-tooltip-validation .k-callout-s
@@ -2835,11 +2835,11 @@ span.k-tooltip
 
 .k-callout-e
 {
-	top: 49%;
-	left: 100%;
-	margin-top: -5px;
-	margin-left: 2px;
-	background-position: -165px -194px;
+    top: 49%;
+    left: 100%;
+    margin-top: -5px;
+    margin-left: 2px;
+    background-position: -165px -194px;
 }
 
 .k-tooltip-validation .k-callout-e
