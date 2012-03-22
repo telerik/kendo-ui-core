@@ -167,7 +167,7 @@
     ],
     "Sample Dashboards": [
         {
-            "text": "High Performance Chart",
+            "text": "Performance Benchmark",
             "spriteCssClass": "content/dataviz/dashboards/performance.gif",
             "expanded": "true",
             "items": [{
@@ -185,7 +185,7 @@
             "name": "car-dashboard"
         },
         {
-            "text": "Stock History Dashboard",
+            "text": "Stock History",
             "spriteCssClass": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
             "onlineOnly": "true",
