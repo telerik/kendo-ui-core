@@ -51,7 +51,7 @@
                                 @if (widget.Items[0].Url.IndexOf("dashboard") == 0)
                                 {
                                     <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">
-                                        <img src="@(Url.Content("~") + widget.SpriteCssClass)" alt="@widget.Name" />
+                                        <img src="@(Url.Content("~") + widget.ThumbnailUrl)" alt="@widget.Name" />
                                     </a>
                                 }
                                     <a href="@Url.Content("~/" + @ViewBag.Suite + "/" + widget.Items[0].Url)">@widget.Text</a>
