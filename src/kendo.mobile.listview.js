@@ -35,7 +35,7 @@
             item.toggleClass("km-state-active", e.type === MOUSEDOWN && !prevented);
         }
 
-        if (clicked.is("label") && e.type === MOUSEDOWN) {
+        if (clicked.is("label") && e.type === MOUSEUP && !prevented) {
             var checkBox = clicked.find("input")[0];
             checkBox.checked = !checkBox.checked;
         }
