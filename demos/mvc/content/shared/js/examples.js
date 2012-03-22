@@ -281,7 +281,7 @@
                             Application.fetch(href);
                         }
                     }
-                })
+                });
 
                 Application.href = location.href;
 
@@ -404,7 +404,7 @@
             next = buttons.eq(1);
 
         li.siblings().removeClass("active").end().addClass("active");
-        prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget")),
+        prev.attr("href", li.prev().find("a").attr("href") || prev.data("widget"));
         next.attr("href", li.next().find("a").attr("href") || next.data("widget"));
     }
 
