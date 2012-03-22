@@ -1,16 +1,16 @@
 <div id="example" class="k-content">
-    <table class="prettytable">
+    <table class="metrotable">
         <tbody>
         <tr>
-            <th class="k-header">Widget</th>
-            <th class="k-header">Current view model state</th>
+            <th>Widget</th>
+            <th>Current view model state</th>
         </tr>
         <tr>
             <td>
                 <input data-role="autocomplete" data-text-field="name" data-bind="source: colors, value: autoCompleteValue"/>
                 <h4>AutoComplete</h4>
             </td>
-            <td rowspan="9">
+            <td rowspan="9" style="background-color: #efefef; padding: 10px;">
 <pre>
 {
     autoCompleteValue: <span data-bind="text: displayAutoCompleteValue"></span>,
@@ -121,9 +121,9 @@
                     return kendo.stringify(dropDownListValue);
                 },
                 gridSource: [
-                    { Name: "Chai", Price: 18.00, UnitsInStock: 39 },
-                    { Name: "Chang", Price: 19.00, UnitsInStock: 17 },
-                    { Name: "Mishi Kobe Niku", Price: 97.00, UnitsInStock: 29 }
+                    { Name: "Socks", Price: 18.00, UnitsInStock: 39 },
+                    { Name: "Gloves", Price: 19.00, UnitsInStock: 17 },
+                    { Name: "Shoes", Price: 97.00, UnitsInStock: 29 }
                 ],
                 displayGridSource: function() {
                     var gridSource = this.get("gridSource");
@@ -301,46 +301,48 @@ kendo.bind($("table"), viewModel);
         </pre>
     </div>
     <style scoped>
-        .prettytable {
-            table-layout: fixed;
+        .metrotable {
+
             width: 100%;
         }
 
-        .prettytable > tbody > tr > td {
-            padding: 5px;
+        .metrotable > tbody > tr > td 
+        {
+        	display: table-cell;
+            padding: 5px 5px 5px 0;
+            font-size: 1em;
+            text-transform: none;
         }
 
-        .prettytable td > .k-autocomplete,
-        .prettytable td > .k-dropdown,
-        .prettytable td > .k-combobox,
-        .prettytable td > .k-datepicker,
-        .prettytable td > .k-numerictextbox,
-        .prettytable td > .k-timepicker,
-        .prettytable td > .k-slider
+        .metrotable td > .k-autocomplete,
+        .metrotable td > .k-dropdown,
+        .metrotable td > .k-combobox,
+        .metrotable td > .k-datepicker,
+        .metrotable td > .k-numerictextbox,
+        .metrotable td > .k-timepicker,
+        .metrotable td > .k-slider
         {
             float: right;
         }
 
-        .prettytable td > .k-slider
+        .metrotable td > .k-slider
         {
             margin-bottom: 10px;
         }
 
-        .prettytable > tbody > tr > th {
-            -moz-border-radius: 5px 0 0;
-            -webkit-border-radius: 5px 0 0;
-            border-radius: 5px 0 0;
-            text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-        }
-
-        .prettytable > tbody > tr > th:last-child {
-            -moz-border-radius: 0 5px 0 0;
-            -webkit-border-radius: 0 5px 0 0;
-            border-radius: 0 5px 0 0;
+        .metrotable > tbody > tr > th {
+            border-bottom: 1px solid #CCCCCC;
+            color: #787878;
+            font-size: 1.4em;
+            font-weight: lighter;
+            padding: 0 1em 0 0;
+            text-align: left;
         }
 
         td h4 {
             margin:0;
+            padding: 7px 0;
+            font-weight: normal;
         }
 
         td label {
@@ -349,7 +351,7 @@ kendo.bind($("table"), viewModel);
         }
 
         td pre {
-            font-size: 12px;
+            font-size: 11px;
         }
     </style>
 </div>
