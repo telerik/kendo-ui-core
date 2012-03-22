@@ -188,7 +188,7 @@ html
 
 .main-nav a
 {
-    color:#737373;
+    color:#2e2e2e;
 }
 
 .kendo-nav
@@ -203,13 +203,14 @@ html
 
 .kendo-nav li
 {
-    margin-left:42px;
+    margin-left:40px;
 }
 
 .kendo-nav a
 {
     display:block;
-    font:20px/34px arial,helvetica,sans-serif;
+    font-size:20px;
+    line-height:34px;
     color:#2e2e2e;
 }
 
@@ -344,7 +345,8 @@ html
 .suite-demos-nav a
 {
     display:block;
-    font:14px/46px arial,helvetica,sans-serif;
+    font-size:14px;
+    line-height:46px;
     color:#2e2e2e;
 }
 
