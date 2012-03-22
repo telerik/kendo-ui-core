@@ -3,8 +3,8 @@
         <h1><a href="@Url.Content("~")" id="logo">Kendo UI - the Art of Web Development</a></h1>
         <ul class="kendo-nav">
             <li><a href="http://www.kendoui.com/web">Web</a></li>
-            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
             <li><a href="http://www.kendoui.com/mobile">Mobile</a></li>
+            <li><a href="http://www.kendoui.com/dataviz">DataViz</a></li>
             <li class="active"><a href="http://demos.kendoui.com/">Demos</a><em></em></li>
             <li><a href="http://www.kendoui.com/get-kendo-ui" class="get-kendoui" onclick="_gaq.push(['_trackPageview','/download-button']);">Get Kendo UI</a></li>
         </ul>
@@ -19,9 +19,9 @@
 <div class="suite-demos-nav">
     <ul class="centerWrap floatWrap">
         <li><a href="@Url.Content("~")">Overview</a><em></em></li>
-        <li@(Html.ActiveSuiteClass(Url.Content("Web")))>@Html.SuiteLink("Web", "first")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("Mobile")))>@Html.SuiteLink("Mobile")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("DataViz")))>@Html.SuiteLink("DataViz")</li>
-        <li@(Html.ActiveSuiteClass(Url.Content("ThemeBuilder")))>@Html.SuiteLink("ThemeBuilder", "last")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("Web")))>@Html.SuiteLink("Web", "Web Demos")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("Mobile")))>@Html.SuiteLink("Mobile", "Mobile Demos")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("DataViz")))>@Html.SuiteLink("DataViz", "DataViz Demos")</li>
+        <li@(Html.ActiveSuiteClass(Url.Content("ThemeBuilder")))>@Html.SuiteLink("ThemeBuilder")</li>
     </ul>
 </div>

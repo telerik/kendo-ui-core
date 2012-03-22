@@ -7,9 +7,10 @@ namespace Kendo.Extensions
 {
     public static class HtmlExtensions
     {
-        public static IHtmlString SuiteLink(this HtmlHelper html, string title, string cssClass = "")
+        public static IHtmlString SuiteLink(this HtmlHelper html, string suite, string title = "", string cssClass = "")
         {
-            var suite = title.ToLowerInvariant();
+            title = string.IsNullOrEmpty(title) ? suite : title;
+            suite = suite.ToLowerInvariant();
             var Url = new UrlHelper(html.ViewContext.RequestContext);
             var viewBag = html.ViewContext.Controller.ViewBag;
             var selectedClass = viewBag.Suite == suite ? " selected" : "";
