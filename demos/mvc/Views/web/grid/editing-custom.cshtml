@@ -59,9 +59,9 @@
                         height: 260,
                         toolbar: ["create"],
                         columns: [
-                            "ProductName",
+                            { field:"ProductName",title:"Product Name" },
                             { field: "Category", width: "150px", editor: categoryDropDownEditor },
-                            { field: "UnitPrice", format: "{0:c}", width: "150px" },
+                            { field: "UnitPrice", title:"Unit Price", format: "{0:c}", width: "150px" },
                             { command: "destroy", title: " ", width: "110px" }],
                         editable: true
                     });

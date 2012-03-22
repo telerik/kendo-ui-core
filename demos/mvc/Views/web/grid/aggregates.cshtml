@@ -7,34 +7,34 @@
                         dataSource: {
                             type: "odata",
                             transport: {
-                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"                                
+                                read: "http://demos.kendoui.com/service/Northwind.svc/Products"
                             },
                             pageSize: 7,
-                            group: { 
-                                     field: "UnitsInStock", aggregates: [ 
-                                        { field: "ProductName", aggregate: "count" }, 
+                            group: {
+                                     field: "UnitsInStock", aggregates: [
+                                        { field: "ProductName", aggregate: "count" },
                                         { field: "UnitPrice", aggregate: "sum"},
                                         { field: "UnitsOnOrder", aggregate: "average" },
-                                        { field: "UnitsInStock", aggregate: "count" }                                        
-                                        ]
+                                        { field: "UnitsInStock", aggregate: "count" }
+                                     ]
                                    },
 
                             aggregate: [ { field: "ProductName", aggregate: "count" },
                                           { field: "UnitPrice", aggregate: "sum" },
-                                          { field: "UnitsOnOrder", aggregate: "average" },                                          
+                                          { field: "UnitsOnOrder", aggregate: "average" },
                                           { field: "UnitsInStock", aggregate: "min" },
                                           { field: "UnitsInStock", aggregate: "max" }]
-                        },                                                                  
+                        },
                         sortable: true,
                         scrollable: false,
                         pageable: true,
                         columns: [
-                            { field: "ProductName", footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
-                            { field: "UnitPrice" },
-                            { field: "UnitsOnOrder", footerTemplate: "Average: #=average#", 
-                                groupFooterTemplate: "Average: #=average#" },    
-                            { field: "UnitsInStock", footerTemplate: "<div>Min: #= min #</div><div>Max: #= max #</div>", 
-                                groupHeaderTemplate: "#= field #: #= value # (Count: #= count#)" }
+                            { field: "ProductName", title: "Product Name", footerTemplate: "Total Count: #=count#", groupFooterTemplate: "Count: #=count#" },
+                            { field: "UnitPrice", title: "Unit Price" },
+                            { field: "UnitsOnOrder", title: "Units On Order", footerTemplate: "Average: #=average#",
+                                groupFooterTemplate: "Average: #=average#" },
+                            { field: "UnitsInStock", title: "Units In Stock", footerTemplate: "<div>Min: #= min #</div><div>Max: #= max #</div>",
+                                groupHeaderTemplate: "Units In Stock: #= value # (Count: #= count#)" }
                         ]
                     });
                 });

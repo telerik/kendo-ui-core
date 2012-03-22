@@ -24,7 +24,12 @@
                         height: 450,
                         sortable: true,
                         pageable: true,
-                        columns: [ "ProductID", "ProductName", "UnitPrice", "QuantityPerUnit" ]
+                        columns: [
+                            { field: "ProductID", width: 100 },
+                            { field: "ProductName", title: "Product Name" },
+                            { field: "UnitPrice", title: "Unit Price", width: 100 },
+                            { field: "QuantityPerUnit", title: "Quantity Per Unit" }
+                        ]
                     });
                     var dropDown = grid.find("#category").kendoDropDownList({
                         dataTextField: "CategoryName",
