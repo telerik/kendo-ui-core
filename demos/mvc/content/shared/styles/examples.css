@@ -649,7 +649,12 @@ p#copy
 /*inner pages*/
 
 .flowers-left{background:0 240px no-repeat url(flowers-left.png);}
-.flowers-right{background:100% -55px no-repeat url(flowers-right.png);}
+.flowers-right{background:111% -55px no-repeat url(flowers-right.png);}
+
+@media screen and (min-width:1400px) 
+{
+    .flowers-right{background-position:100% -55px;}
+}
 
 #mainWrap
 {
