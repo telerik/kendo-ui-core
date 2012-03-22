@@ -44,7 +44,7 @@ html
     font-size:13px;
 }
 
-.overview .header,
+.overview #header,
 .overview #banner,
 .overview .suite-demos-nav,
 .overview .demos-nav,
@@ -120,7 +120,7 @@ html
     text-indent:-4444px;
     text-align:center;
     overflow:hidden;
-    background:-224px 0 url(sprite.misc.png);
+    background:-231px 0 url(sprite.misc.png);
 }
 
 .overview #logo
@@ -389,7 +389,7 @@ html
     float:left;
     width:290px;
     min-height:340px;
-    margin-right:22px;
+    margin-right:18px;
     padding:10px 0 0;
     color:#6f6f6f;
 }
@@ -518,17 +518,17 @@ html
     background:url(sprite.misc.png);
 }
 
-.browsers .ie{background-position:-128px -75px;}
-.browsers .chrome{background-position:-192px -75px;}
-.browsers .ff{background-position:-160px -75px;}
-.browsers .safari{background-position:-224px -75px;}
-.browsers .opera{background-position:-256px -75px;}
+.browsers .ie{background-position:-132px -76px;}
+.browsers .chrome{background-position:-198px -76px;}
+.browsers .ff{background-position:-165px -76px;}
+.browsers .safari{background-position:-231px -76px;}
+.browsers .opera{background-position:-264px -76px;}
 
 .mobileOSs li
 {
     float:left;
-    width:110px;
-    margin:22px 30px 0 10px;
+    width:150px;
+    margin:22px 0 0;
     text-align:center;
     font-size:1.2em;
 }
@@ -542,10 +542,10 @@ html
     background:url(sprite.misc.png);
 }
 
-.mobileOSs .android{background-position:0 -107px;}
-.mobileOSs .iOS{background-position:-90px -107px;}
-.mobileOSs .blackberry{background-position:-180px -107px;}
-.mobileOSs .webOS{background-position:-270px -107px;}
+.mobileOSs .android{background-position:0 -109px;}
+.mobileOSs .iOS{background-position:-91px -109px;}
+.mobileOSs .blackberry{background-position:-182px -109px;}
+.mobileOSs .webOS{background-position:-273px -109px;}
 
 .mobileOSs + p a
 {
@@ -635,10 +635,10 @@ html
     background:url(sprite.misc.png);
 }
 
-#social .tw{background-position:0 -75px;}
-#social .fb{background-position:-32px -75px;}
-#social .gplus{background-position:-64px -75px;}
-#social .rss{background-position:-96px -75px;}
+#social .tw{background-position:0 -76px;}
+#social .fb{background-position:-33px -76px;}
+#social .gplus{background-position:-66px -76px;}
+#social .rss{background-position:-99px -76px;}
 
 p#copy
 {
@@ -970,7 +970,7 @@ p#copy
     height:16px;
     margin-left:8px;
     vertical-align:text-top;
-    background:-288px -75px no-repeat url(sprite.misc.png)
+    background:-298px -76px no-repeat url(sprite.misc.png)
 }
 
 #qr em
@@ -1389,7 +1389,7 @@ pre.prettyprint
     display:inline-block;
     width:12px;
     height:12px;
-    background:-336px -63px no-repeat url(sprite.misc.png);
+    background:-345px -63px no-repeat url(sprite.misc.png);
     vertical-align:middle;
     margin:-1px 6px 0 0;
 }
