@@ -2317,6 +2317,10 @@
     }
 
     // Exports ================================================================
+    /**
+     * @name kendo.dataviz
+     * @namespace Contains Kendo DataViz.
+     */
     deepExtend(kendo.dataviz, {
         init: function(element) {
             kendo.init(element, kendo.dataviz.ui);
