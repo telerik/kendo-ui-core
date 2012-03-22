@@ -1654,12 +1654,13 @@
         indexOf: function(model) {
             var idx, length, data = this._data;
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
-                if (data[idx].uid == model.uid) {
-                    return idx;
+            if (model) {
+                for (idx = 0, length = data.length; idx < length; idx++) {
+                    if (data[idx].uid == model.uid) {
+                        return idx;
+                    }
                 }
             }
-
             return -1;
         },
 
