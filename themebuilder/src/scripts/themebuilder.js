@@ -74,8 +74,19 @@
                 }
             },
 
-            _updateColorPreview: function() {
-                return $(this.wrapper).find(".k-arrow-down").css("backgroundColor", this.value()).css("backgroundColor");
+            value: function(value) {
+
+                var result = ui.ComboBox.fn.value.call(this, value);
+
+                if (value) {
+                    this._updateColorPreview(value);
+                }
+
+                return result;
+            },
+
+            _updateColorPreview: function(value) {
+                return $(this.wrapper).find(".k-arrow-down").css("backgroundColor", value || this.value()).css("backgroundColor");
             }
         }),
         hexValueRe = /^#([0-9a-f]{3}){1,2}$/i,
