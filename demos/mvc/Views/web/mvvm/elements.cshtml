@@ -1,5 +1,5 @@
 <div id="example" class="k-content">
-    <table class="prettytable">
+    <table class="metrotable">
         <tr>
             <th>Element</th>
             <th>Current view model state</th>
@@ -9,8 +9,8 @@
                 <input type="text" data-bind="value: textValue" class="k-textbox" />
                 <h4>Text </h4>
             </td>
-            <td rowspan="8">
-<pre>
+            <td rowspan="8" style="background-color: #efefef;">
+<pre style="margin-left: 50px; width: 300px;">
 {
     textValue: <span data-bind="text: textValue"></span>,
     textareaValue: <span data-bind="text: textareaValue"></span>,
@@ -31,13 +31,16 @@
         </tr>
         <tr>
             <td>
-                <textarea data-bind="value: textareaValue" class="k-textbox" style="height: 40px"></textarea>
+                <textarea data-bind="value: textareaValue" class="k-textbox" style="height: 40px; width: 140px;"></textarea>
                 <h4>Textarea </h4>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="checkbox" data-bind="checked: checkboxValue" />
+                <label>
+                    <input type="checkbox" value="Check"
+                           data-bind="checked: checkboxValue" />Check
+                </label>
                 <h4>Checkbox</h4>
             </td>
         </tr>
@@ -77,13 +80,13 @@
         </tr>
         <tr>
             <td>
-                <select data-bind="source: fruits, value: selectValue"></select>
+                <select data-bind="source: fruits, value: selectValue" style="width: 147px;"></select>
                 <h4>Select</h4>
             </td>
         </tr>
         <tr>
             <td>
-                <select multiple data-bind="source: fruits, value: multipleSelectValue"></select>
+                <select multiple data-bind="source: fruits, value: multipleSelectValue" style="width: 147px;"></select>
                 <h4>Multiple select</h4>
             </td>
         </tr>
@@ -207,43 +210,49 @@ kendo.bind($(&quot;table&quot;), viewModel);
         </div>
     </div>
     <style scoped>
-        .prettytable {
+        .metrotable {
             table-layout: fixed;
             width: 100%;
         }
 
-        .prettytable > tbody > tr > td {
+        .metrotable > tbody > tr > td {
             padding: 5px;
+            font-size: 1em;
+            font-weight: normal;
         }
 
-        .prettytable td > input,
-        .prettytable td > textarea,
-        .prettytable td > label,
-        .prettytable td > select
+        .metrotable td > input,
+        .metrotable td > textarea,
+        .metrotable td > label,
+        .metrotable td > select
         {
             float: right;
+            clear: right;
+        }
+        
+        .metrotable td > label
+        {
+            text-align: left;
+            width: 150px;
         }
 
-        .prettytable td > .k-slider
+        .metrotable td > .k-slider
         {
             margin-bottom: 10px;
         }
 
-        .prettytable > tbody > tr > th {
-            -moz-border-radius: 5px 0 0;
-            -webkit-border-radius: 5px 0 0;
-            border-radius: 5px 0 0;
-            text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-        }
-
-        .prettytable > tbody > tr > th:last-child {
-            -moz-border-radius: 0 5px 0 0;
-            -webkit-border-radius: 0 5px 0 0;
-            border-radius: 0 5px 0 0;
+        .metrotable > tbody > tr > th {
+            border-bottom: 1px solid #CCCCCC;
+            color: #787878;
+            font-size: 1.4em;
+            font-weight: lighter;
+            padding: 0 1em 0 0;
+            text-align: left;
         }
 
         td h4 {
             margin:0;
+            font-weight: normal;
         }
 
         td label {
