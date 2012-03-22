@@ -1498,12 +1498,6 @@
         return fileEntry.children(".k-icon").is(".k-loading, .k-success, .k-fail");
     }
 
-    function logToConsole(message) {
-        if (typeof(console) != "undefined" && console.log) {
-            console.log(message);
-        }
-    }
-
     function getFileEntry(e) {
         return $(e.target).closest(".k-file");
     }
