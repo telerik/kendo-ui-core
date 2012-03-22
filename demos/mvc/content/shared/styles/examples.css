@@ -970,21 +970,30 @@ p#copy
 
 #qrWrap
 {
-    padding-right:14px;
+    margin-right:14px;
     color:#444;
+    border-top:1px solid #dfdfdf;
+    margin-top:30px;
+    padding-top:10px;/*
+    width:auto;
+    height:auto;
+    text-align:right;
+    margin-right:14px;
+    padding:8px 4px;
+    background:#fcfcfc;*/
 }
 
 #qr
 {
     display:inline-block;
     margin-top:1em;
-    color:#e26b1d;
+    color:#2e2e2e;
     text-decoration:none;
 }
 
 #qr:hover
 {
-    text-decoration:underline;
+    color:#e26b1d;
 }
 
 .k-qr
@@ -1004,7 +1013,7 @@ p#copy
 #qrBig
 {
     display:none;
-    margin-right:10px;
+    margin-right:9px;
 }
 
 #example
