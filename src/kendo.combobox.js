@@ -999,7 +999,7 @@
             input = wrapper.find(SELECTOR);
 
             if (!input[0]) {
-                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" combobox="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-arrow-down">select</span></span></span>')
+                wrapper.append('<span unselectable="on" class="k-dropdown-wrap k-state-default"><input class="k-input" type="text" autocomplete="off"/><span unselectable="on" class="k-select"><span unselectable="on" class="k-icon k-arrow-down">select</span></span></span>')
                        .append(that.element);
 
                 input = wrapper.find(SELECTOR);

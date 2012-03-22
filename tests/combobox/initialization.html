@@ -79,6 +79,7 @@
 
                ok(text.is("input"));
                ok(text.hasClass("k-input"));
+               equal(text.attr("autocomplete"), "off");
            });
 
            test("text input should wrapped with span", function(){
