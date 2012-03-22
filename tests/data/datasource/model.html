@@ -192,6 +192,12 @@
 
                 equal(dataSource.indexOf(model), 0);
             });
+            test("indexOf returns -1 if model is undefined", function() {
+                var model = dataSource.get();
+
+                equal(dataSource.indexOf(model), -1);
+            });
+
 
             test("indexOf returns -1 if model does is not contained in the data source", function() {
                 equal(dataSource.indexOf(new kendo.data.Model()), -1);
