@@ -50,7 +50,7 @@ var LinkFormatter = Class.extend({
 
 var UnlinkCommand = Command.extend({
     init: function(options) {
-        options.formatter = {
+        options.formatter = /** @ignore */ {
             toggle : function(range) {
                 new InlineFormatter([{ tags: ['a']}]).remove(textNodes(range));
             }

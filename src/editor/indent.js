@@ -155,7 +155,7 @@ var IndentFormatter = Class.extend({
 
 var IndentCommand = Command.extend({
     init: function(options) {
-        options.formatter = {
+        options.formatter = /** @ignore */ {
             toggle : function(range) {
                 new IndentFormatter().apply(RangeUtils.nodes(range));
             }
