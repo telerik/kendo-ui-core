@@ -310,8 +310,12 @@
          *     legend: {
          *         // set the background color to a dark blue
          *         background: "#336699",
-         *         // set the font to a size of 14px
-         *         font: "14px Arial,Helvetica,sans-serif",
+         *         labels: {
+         *             // set the font to a size of 14px
+         *             font: "14px Arial,Helvetica,sans-serif",
+         *             // set the color to red
+         *             color: "red"
+         *         },
          *         // move the legend to the left
          *         position: "left",
          *         // move the legend a bit closer to the chart by setting the x offset to 20
@@ -322,8 +326,11 @@
          * });
          *
          * @option {String} [legend.background] <"white"> The background color of the legend. Any valid CSS color string will work here, including hex and rgb.
-         * @option {String} [legend.font] <12px Arial,Helvetica,sans-serif> The font style of the legend.
-          * @option {String} [legend.position] <right> The positions of the legend.
+         * @option {Object} [legend.labels] Configures the legend labels.
+         * @option {String} [legend.labels.font] <12px Arial,Helvetica,sans-serif> The font style of the labels.
+         * @option {String} [legend.labels.color] <"black"> The color of the labels.
+         * Any valid CSS color string will work here, including hex and rgb.
+         * @option {String} [legend.position] <right> The positions of the legend.
          * <div class="details-list">
          *    <dl>
          *         <dt>
