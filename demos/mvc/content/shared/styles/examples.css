@@ -549,7 +549,8 @@ html
 .mobileOSs .blackberry{background-position:-182px -109px;}
 .mobileOSs .webOS{background-position:-273px -109px;}
 
-.mobileOSs + p a
+.mobileOSs + p a,
+.overview .column13 a
 {
     text-decoration:none;
     color:#e26b1d;
@@ -974,13 +975,7 @@ p#copy
     color:#444;
     border-top:1px solid #dfdfdf;
     margin-top:30px;
-    padding-top:10px;/*
-    width:auto;
-    height:auto;
-    text-align:right;
-    margin-right:14px;
-    padding:8px 4px;
-    background:#fcfcfc;*/
+    padding-top:10px;
 }
 
 #qr
@@ -1053,19 +1048,20 @@ p#copy
 {
     float:left;
     width:650px;
+    min-height:158px;
 }
 
 .widgetGrid .narrowCol
 {
     float:left;
     width:310px;
+    min-height:158px;
 }
 
 .widgetGrid .mobile-framework
 {
     width:276px;
     background:rgba(221, 221, 221, 0.2);
-    min-height:158px;
 }
 
 .widgetGrid h2
@@ -1103,6 +1099,22 @@ p#copy
 
 /*DataViz dashboard navigation*/
 
+.widgetGrid .chart
+{
+    width:260px;
+}
+
+.widgetGrid .dashboards
+{
+    width:526px;
+}
+
+.widgetGrid .gauges
+{
+    width:180px;
+    background:rgba(221, 221, 221, 0.2);
+}
+
 .dashboards ul,
 #deviceList
 {
@@ -1113,7 +1125,7 @@ p#copy
 .dashboards li
 {
     float:left;
-    width:200px;
+    width:168px;
 }
 
 .dashboards a
@@ -1124,8 +1136,8 @@ p#copy
 
 .dashboards a+a
 {
-    width:90px;
-    padding-left:12px;
+    width:84px;
+    padding-left:8px;
 }
 
 /*mobile device selector*/
