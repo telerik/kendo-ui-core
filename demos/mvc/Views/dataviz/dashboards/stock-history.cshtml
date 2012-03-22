@@ -50,7 +50,7 @@
                 </dl>
 
                 <dl class="stat trend-container">
-                    <dt class="example-subtitle">Relative value</dt>
+                    <dt class="example-subtitle">YoY change</dt>
                     <dd class="relative-value"></dd>
                     <dd class="sparkline relative-value-sparkline"></dd>
                 </dl>
@@ -117,6 +117,8 @@
             }
         });
 
+        var defaultSeriesColors = [ "#70b5dd", "#1083c7", "#1c638d" ];
+
         function populateStockPrices(data) {
             var container = $(".company-info"),
                 yearlyStockValues = data.items,
@@ -161,7 +163,9 @@
                 metric = "millions stocks";
             }
 
-            var yearlyRelativeValue = yearlyStockValues[yearlyStockValues.length-1].close / yearlyStockValues[0].open * 100;
+            function yearlyRelativeValue(stockValues) {
+                return stockValues[stockValues.length-1].close / stockValues[0].open * 100;
+            }
 
             var relativeValues = $.map(yearlyStockValues, function(item, index) {
                 var value = 100;
@@ -173,6 +177,10 @@
                 return { value: value };
             });
 
+            var companyRelativeGain = $.map(stocksDataSource.view(), function(data, index) {
+                return { value: yearlyRelativeValue(data.items) - 100 };
+            });
+
             container
                 .find(".eoy-closing").text(format(yearlyStockValues[yearlyStockValues.length - 1].close)).end()
                 .find(".highest").text(format(highest)).end()
@@ -181,8 +189,27 @@
                 .find(".highest-sparkline").kendoChart(sparklineOptions("high", "#639514")).end()
                 .find(".first dt .metric").eq(1).text(metric).end().end()
                 .find(".volume").text(format(volume)).end()
-                .find(".relative-value").text(format(yearlyRelativeValue) + "%").end()
+                .find(".relative-value").text(format(yearlyRelativeValue(yearlyStockValues) - 100) + "%").end()
                 .find(".relative-value-sparkline").kendoChart(sparklineOptions("value", "#4da3d5", relativeValues)).end()
+                .find(".relative-value-pie").kendoChart({
+                    dataSource: companyRelativeGain,
+                    seriesDefaults: {
+                        type: "pie",
+                        overlay: {
+                            gradient: "none"
+                        },
+                        labels: {
+                            visible: false
+                        }
+                    },
+                    plotArea: { margin: 0, padding: 0 },
+                    chartArea: { margin: 0, padding: 0 },
+                    seriesColors: defaultSeriesColors,
+                    series: [{
+                        field: "value"
+                    }],
+                    legend: { visible: false }
+                }).end()
                 .find(".volume-chart").kendoChart({
                     dataSource: yearlyStockValues,
                     series: [{
@@ -207,6 +234,9 @@
                             format: "{0:MMM}",
                             color: "#727f8e"
                         }
+                    },
+                    tooltip: {
+                        visible: true
                     },
                     valueAxis: {
                         visible: false
@@ -236,7 +266,7 @@
                 field: "close"
             }],
 
-            seriesColors: [ "#70b5dd", "#1083c7", "#1c638d" ],
+            seriesColors: defaultSeriesColors,
 
             valueAxis: {
                 line: {
@@ -324,8 +354,7 @@
             }
         })
             .find(".k-item").each(function(index) {
-                var chart = $("#yearly-stock-prices").data("kendoChart"),
-                    color = chart.options.seriesColors[index];
+                var color = defaultSeriesColors[index];
 
                 $(this).css({
                     color: color,
@@ -471,9 +500,9 @@
         }
 
         .filtering-tabs .k-item {
-            width: 19.6%;
+            width: 19.8%;
             border: 0;
-            margin: 0 .2%;
+            margin: 0 .2% 0 0;
             padding: 0 0 4px;
             text-align: center;
             cursor: pointer;
@@ -504,7 +533,7 @@
         }
 
         #company-filtering-tabs .k-item {
-            width: 32.5%;
+            width: 32.8%;
             margin: 4px .5% 0 0;
         }
 
@@ -529,7 +558,7 @@
         .trend-container {
             background: transparent none no-repeat 100% 29px;
             width: 120px;
-            margin-right: 35px;
+            margin-right: 27px;
         }
 
         .lowest-container {
@@ -560,14 +589,21 @@
             color: #4da3d5;
         }
 
-        .sparkline {
+        dd.sparkline {
             height: 40px;
             width: 120px;
+            margin-top: -5px;
         }
 
         .separator {
             height: 1px;
             background: #b3bbc5;
+        }
+
+        .relative-value-pie {
+            width: 110px;
+            height: 100px;
+            margin-left: -10px;
         }
 
         .volume-chart {
@@ -577,7 +613,7 @@
             width: 615px;
             height: 85px;
             vertical-align: top;
-            margin-top: 4.2em;
+            margin: 4.2em 0 0 4em;
         }
     </style>
 </div>
