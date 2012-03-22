@@ -1161,8 +1161,10 @@
         update: function(options) {
             options.success(options.data);
         },
-        create: noop,
-        destory: noop
+        create: function(options) {
+            options.success(options.data);
+        },
+        destroy: noop
     });
 
     var RemoteTransport = Class.extend( {
