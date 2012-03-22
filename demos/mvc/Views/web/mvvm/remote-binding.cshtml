@@ -1,13 +1,13 @@
 <div id="example" class="k-content">
     <div id="form-container">
-        <div class="selector">
+        <div class="demo-section">
             Select Product: <select data-role="dropdownlist" data-option-label="Select product"
                              data-value-field="ProductID" data-text-field="ProductName"
                              data-bind="source: productsSource, value: selectedProduct"></select>
 
             <button data-bind="click: save, enabled: hasChanges" class="k-button">Submit All Changes</button>
         </div>
-        <div class="form" data-bind="visible: showForm">
+        <div class="demo-section product-info" data-bind="visible: showForm">
             <ul>
                 <li><label>ID</label> <span data-bind="text:selectedProduct.ProductID, events: { change: change }"></span></li>
                 <li><label>Name</label> <input type="text" class="k-textbox" id="products" data-bind="value: selectedProduct.ProductName, events: { change: change }" /></li>
@@ -15,6 +15,7 @@
             </ul>
 
             <button data-bind="click: remove" class="k-button">Delete Product</button>
+
         </div>
     </div>
     <script>
@@ -158,27 +159,26 @@ kendo.bind($("#form-container"), viewModel);
     </div>
 
     <style scoped>
-        .form label {
+        .demo-section label {
             display: inline-block;
             width: 80px;
+            ling-height: 30px;
+            height: 30px;
         }
 
-        .form li {
+        .demo-section li {
           padding-bottom: 5px;
           list-style: none;
         }
 
-        .form {
-           background-color: #eeeeee;
+        .demo-section {
            width: 400px;
-           padding: 10px;
         }
-
-        .selector {
-            padding: 10px;
-            width: 400px;
-            background-color: #D75B26;
+        .demo-section button {
+           float: right;
         }
-
+        .product-info {
+        	min-height: 160px;
+        }
     </style>
 </div>
