@@ -88,11 +88,11 @@
             "@main-border-radius":              constant(".k-button", "border-radius"),
             "@list-border-radius": {
                 readonly: true,
-                value: "~`Math.max(parseInt('@{main-border-radius}', 10) - 1, 0) + 'px'`"
+                value: "@main-border-radius - 1"
             },
             "@inner-border-radius": {
                 readonly: true,
-                value: "~`Math.max(parseInt('@{main-border-radius}', 10) - 2, 0) + 'px'`"
+                value: "@main-border-radius - 2"
             },
             "@slider-border-radius":            { readonly: true, value: "13px" },
             "@draghandle-border-radius":        { readonly: true, value: "7px" },

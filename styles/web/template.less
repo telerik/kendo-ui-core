@@ -50,6 +50,14 @@
     border-radius: @arguments;
 }
 
+.guarded-border-radius(@value) when (@value < 0) {
+    .border-radius(0);
+}
+
+.guarded-border-radius(@value) when (@value >= 0) {
+    .border-radius(@value);
+}
+
 .box-shadow() {
     box-shadow: @arguments;
     -webkit-box-shadow: @arguments;
@@ -612,7 +620,7 @@ span.k-numeric-wrap.k-state-active,
 .k-progress,
 .k-progress-status
 {
-    .border-radius(@inner-border-radius);
+    .guarded-border-radius(@inner-border-radius);
 }
 
 .k-list .k-state-hover,
@@ -621,7 +629,7 @@ span.k-numeric-wrap.k-state-active,
 .k-dropzone,
 .k-upload-files
 {
-    .border-radius(@list-border-radius);
+    .guarded-border-radius(@list-border-radius);
 }
 
 .k-slider .k-button,
