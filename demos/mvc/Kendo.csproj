@@ -183,6 +183,8 @@
     <Content Include="content\shared\styles\examples-offline.css" />
     <Content Include="content\shared\styles\examples.css" />
     <Content Include="content\shared\styles\favicon.ico" />
+    <Content Include="content\shared\styles\flowers-left.png" />
+    <Content Include="content\shared\styles\flowers-right.png" />
     <Content Include="content\shared\styles\flowers.png" />
     <Content Include="content\shared\styles\flowerWrap.png" />
     <Content Include="content\shared\styles\hand-ipad.png" />
