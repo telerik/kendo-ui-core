@@ -159,7 +159,16 @@ namespace Kendo.Controllers
             } else {
                 switch(suite) {
                     case "dataviz":
-                        component = "dataviz.ui." + (section.Contains("gauge") ? "gauge" : "chart");
+                        if (section.Contains("gauge"))
+                        {
+                            section = section.Replace("-", "");
+                        }
+                        else
+                        {
+                            section = "chart";
+                        }
+
+                        component = "dataviz.ui." + section;
                         break;
                     case "mobile":
                         component = "mobile.ui." + component;
