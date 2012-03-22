@@ -153,9 +153,9 @@
          * @option {Number} [scale.majorUnit] The interval between major divisions.
          * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {number} [scale.startAngle] <-30> The start angle of the gauge.
-         * The 0 degrees is 9 o'clock and the gauge is rendered clockwise.
+         * The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
-         * The 0 degrees is 9 o'clock and the gauge is rendered clockwise.
+         * The gauge is rendered clockwise(0 degrees are the 180 degrees in the polar coordinat system)
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the scale.
          * @option {Number} [scale.max] <100> The maximum value of the scale.
