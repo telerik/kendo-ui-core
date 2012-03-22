@@ -4501,7 +4501,7 @@ var LinkFormatter = Class.extend({
 
 var UnlinkCommand = Command.extend({
     init: function(options) {
-        options.formatter = {
+        options.formatter = /** @ignore */ {
             toggle : function(range) {
                 new InlineFormatter([{ tags: ['a']}]).remove(textNodes(range));
             }
@@ -5171,7 +5171,7 @@ var IndentFormatter = Class.extend({
 
 var IndentCommand = Command.extend({
     init: function(options) {
-        options.formatter = {
+        options.formatter = /** @ignore */ {
             toggle : function(range) {
                 new IndentFormatter().apply(RangeUtils.nodes(range));
             }
