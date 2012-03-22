@@ -6,14 +6,14 @@
                 <span class="configHead">API Functions</span>
                 <ul class="options">
                     <li>
-                        <input type="number" value="0" id="selectRow" class="k-textbox"/>
+                        <input type="text" value="0" id="selectRow" class="k-textbox"/>
                         <button class="selectRow k-button">Select row</button>
                     </li>
                     <li>
                         <button class="clearSelection k-button">Clear selected rows</button>
                     </li>
                     <li>
-                        <input type="number" value="0" id="groupRow" class="k-textbox"/>
+                        <input type="text" value="0" id="groupRow" class="k-textbox"/>
                         <button class="toggleGroup k-button">Collapse/Expand group</button>
                     </li>
                 </ul>
@@ -86,5 +86,12 @@
                     $("#groupRow").keypress(toggleGroup);
                 });
             </script>
+
+            <style scoped>
+                .configuration .k-textbox
+                {
+                    width: 23px;
+                }
+            </style>
 
         </div>
