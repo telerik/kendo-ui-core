@@ -70,7 +70,7 @@
         wrap: function(object) {
             var that = this;
 
-            if (toString.call(object) === "[object Object]") {
+            if (object !== null && toString.call(object) === "[object Object]") {
                 var observable = object instanceof that.type || object instanceof Model;
                 if (!observable) {
                     object = object instanceof ObservableObject ? object.toJSON() : object;
@@ -288,7 +288,7 @@
             var that = this,
                 type = toString.call(object);
 
-            if (type === "[object Object]" && !(object instanceof DataSource)) {
+            if (object !== null && type === "[object Object]" && !(object instanceof DataSource)) {
                 if (!(object instanceof ObservableObject)) {
                     object = new ObservableObject(object);
                 }
@@ -304,7 +304,7 @@
                         that.trigger(CHANGE, e);
                     });
                 })(field);
-            } else if (type === "[object Array]") {
+            } else if (object !== null && type === "[object Array]") {
                 object = new ObservableArray(object);
 
                 (function(field) {
