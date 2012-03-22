@@ -557,9 +557,13 @@ html
 
 #footer
 {
-    margin-top:3em;
     padding-bottom:24px;
     background:#242424;
+}
+
+.overview #footer
+{
+    margin-top:3em;
 }
 
 #footer,
@@ -648,12 +652,17 @@ p#copy
 
 /*inner pages*/
 
-.flowers-left{background:0 240px no-repeat url(flowers-left.png);}
-.flowers-right{background:111% -55px no-repeat url(flowers-right.png);}
+.flowers-left
+{
+    padding-bottom:3em;
+}
+
+.flowers-left{background:fixed 0 460px no-repeat url(flowers-left.png);}
+.flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
 
 @media screen and (min-width:1400px) 
 {
-    .flowers-right{background-position:100% -55px;}
+    .flowers-right{background-position:100% -174px;}
 }
 
 #mainWrap
