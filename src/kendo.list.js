@@ -41,7 +41,7 @@
 
             that._template();
 
-            that.ul = $('<ul class="k-list k-reset"/>')
+            that.ul = $('<ul unselectable="on" class="k-list k-reset"/>')
                         .css({ overflow: kendo.support.touch ? "": "auto" })
                         .delegate(LI, "mouseenter", function() { $(this).addClass(HOVER); })
                         .delegate(LI, "mouseleave", function() { $(this).removeClass(HOVER); })
