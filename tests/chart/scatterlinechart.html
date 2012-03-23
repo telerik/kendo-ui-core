@@ -246,7 +246,8 @@
                                     $.extend({
                                         width: 4,
                                         color: "#cf0",
-                                        opacity: 0.5
+                                        opacity: 0.5,
+                                        dashType: "dot"
                                     },
                                     series
                                 )
@@ -265,6 +266,10 @@
 
                 test("sets line opacity", function() {
                     equals(view.log.path[0].style.strokeOpacity, 0.5);
+                });
+
+                test("sets line dashType", function() {
+                    equals(view.log.path[0].style.dashType, "dot");
                 });
 
                 test("registers line with root", function() {
