@@ -444,6 +444,31 @@
                 ok(!dataSource.get(2));
             });
 
+            test("sync response data as array is converted if model types are set", function() {
+                setup({
+                    data: [ { id: 1, foo: "1" } ],
+                    schema: { model: { id: "id", fields: { foo: { type: "number" } } } }
+                });
+                stubTransport("create", [{ id: 3, foo: "2" }]);
+
+                dataSource.add({});
+                dataSource.sync();
+
+                strictEqual(dataSource.get(3).get("foo"), 2);
+            });
+
+            test("sync response data as object is converted if model types are set", function() {
+                setup({
+                    data: [ { id: 1, foo: "1" } ],
+                    schema: { model: { id: "id", fields: { foo: { type: "number" } } } }
+                });
+                stubTransport("create", { id: 3, foo: "2" });
+
+                dataSource.add({});
+                dataSource.sync();
+
+                strictEqual(dataSource.get(3).get("foo"), 2);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
