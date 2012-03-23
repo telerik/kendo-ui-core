@@ -114,6 +114,7 @@
                     suggest: true
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.search();
 
@@ -127,6 +128,7 @@
                     suggest: true
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.search();
                 input.press(kendo.keys.DOWN);
@@ -140,6 +142,7 @@
                     dataSource: ["baz", "bar"]
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete._last = kendo.keys.BACKSPACE; //backspace is clicked
                 autocomplete.suggest("baz");
@@ -151,6 +154,7 @@
                     dataSource: ["baz", "bar"]
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete._last = kendo.keys.DELETE; //delete is clicked
                 autocomplete.suggest("baz");
@@ -163,6 +167,7 @@
                     dataSource: ["baz", "bar"]
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.suggest("baz");
                 equal(input.selectedText(), "az");
@@ -173,6 +178,7 @@
                     dataSource: ["baz", "bar"]
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.suggest("baz");
                 autocomplete.suggest("bar");
@@ -185,6 +191,7 @@
                     separator: ", "
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.search();
                 input.press(kendo.keys.DOWN);
@@ -201,6 +208,7 @@
                     dataSource: ["Cotton", "bar"]
                 });
 
+                input.focus();
                 input.type("Co");
                 autocomplete.suggest("Cotton");
 
@@ -219,6 +227,7 @@
                     suggest: true
                 });
 
+                input.focus();
                 input.val("o").keydown();
 
                 setTimeout(function() {
@@ -233,6 +242,7 @@
                         template: "#=data#<span>List:</span>#=data#"
                     });
 
+                input.focus();
                 input.val("f");
                 autocomplete.search();
 
@@ -247,6 +257,7 @@
                     separator: ", "
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.search();
                 autocomplete.suggest("baz");
@@ -262,6 +273,7 @@
                     separator: ", "
                 });
 
+                input.focus();
                 input.type("baz, b");
                 autocomplete.search();
                 autocomplete.suggest("bar");
@@ -288,6 +300,7 @@
                     suggest: true
                 });
 
+                input.focus();
                 input.type("b");
                 autocomplete.suggest("bar");
                 equal(input.selectedText(), "ar");
@@ -301,6 +314,7 @@
                     separator: ", "
                 });
 
+                input.focus();
                 input.type("foo, b");
                 autocomplete.suggest("bar");
                 equal(input.selectedText(), "ar");
