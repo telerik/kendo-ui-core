@@ -1502,21 +1502,23 @@
 
         _accept: function(result) {
             var that = this,
-            models = result.models,
-            response = result.response,
-            idx = 0,
-            pristine = that.reader.data(that._pristine),
-            type = result.type,
-            length;
+                models = result.models,
+                response = result.response,
+                idx = 0,
+                pristine = that.reader.data(that._pristine),
+                type = result.type,
+                length;
 
             if (response) {
-                response = that.reader.data(that.reader.parse(response));
+                response = that.reader.parse(response);
+
+                if (!$.isArray(response)) {
+                    response = [response];
+                }
+
+                response = that.reader.data(response);
             } else {
                 response = $.map(models, function(model) { return model.toJSON(); } );
-            }
-
-            if (!$.isArray(response)) {
-                response = [response];
             }
 
             if (type === "destroy") {
