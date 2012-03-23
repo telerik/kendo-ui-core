@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Editor playground</title>
+
+    <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+    <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+    <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+
+    <script src="../demos/mvc/content/shared/js/less.js"></script>
+
+    <script src="../src/jquery.js"></script>
+    <script src="../src/kendo.core.js"></script>
+    <script src="../src/kendo.data.js"></script>
+    <script src="../src/kendo.draganddrop.js"></script>
+    <script src="../src/kendo.binder.js"></script>
+    <script src="../src/kendo.popup.js"></script>
+    <script src="../src/kendo.list.js"></script>
+    <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.fx.js"></script>
+    <script src="../src/kendo.window.js"></script>
+    <script src="../src/kendo.editor.js"></script>
+</head>
+<body>
+    <label for="name">Name</label> <input id="name" />
+
+    <label for="comment">Comment</label> <textarea id="comment">Sample content</textarea>
+
+    <label for="email">Email</label> <input id="email" />
+
+    <button>Submit</button>
+
+    <script>
+        $("#comment").kendoEditor({
+            tools: [ "bold", "italic" ]
+        });
+    </script>
+</body>
+</html>
