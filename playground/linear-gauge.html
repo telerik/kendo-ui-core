@@ -39,31 +39,6 @@
                 $("#gauge1").data("kendoLinearGauge").value(40);
             });
             $("#gauge").kendoLinearGauge({
-                theme:"default",
-                scale: {
-                    vertical: true,
-                    ranges: [{
-                        from: 40,
-                        to: 50,
-                        color: "red"
-                    },{
-                        from: 30,
-                        to: 40,
-                        color: "green"
-                    }],
-                    min: -10
-                },
-
-                pointer: {
-                    value: 20,
-                    track: {
-                        visible: true,
-                        border: {
-                            color: "black"
-                        }
-                    },
-                    size: 19
-                }
             });
 
             $("#gauge1").kendoLinearGauge({

@@ -1146,6 +1146,9 @@
             transitions: true,
             gaugeArea: {
                 background: ""
+            },
+            scale: {
+                vertical: true
             }
         },
 
