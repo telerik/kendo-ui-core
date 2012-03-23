@@ -70,9 +70,7 @@ client.subscribe('/done', function(message) {
         .att('errors', 0)
         .att('failures', failures);
 
-        if (process.stdout._type != 'tty') {
-            process.stdout.write(doc.toString({pretty: true}));
-        }
+        process.stdout.write(doc.toString({pretty: true}));
 
         browsers.forEach(function(browser) {
             browser.process.kill();
