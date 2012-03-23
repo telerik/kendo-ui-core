@@ -34,10 +34,10 @@ var ListCommand,
 
 $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     ListCommand = kendo.ui.editor.ListCommand;
-}
+});
 
 test('exec adds list', function() {
     var range = createRangeFromText(editor, '|foo|');

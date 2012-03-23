@@ -33,9 +33,9 @@
 
 $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
-}
+});
 
 test('content iframe inherits rtl direction', function() {
     equal($(editor.body, editor.document).css('direction'), 'rtl');

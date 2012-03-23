@@ -41,10 +41,10 @@ function assertArrayEquals(actual, expected) {
         equal(actual[i], expected[i]);
 }
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     RangeEnumerator = kendo.ui.editor.RangeEnumerator;
-}
+});
 
 test('enumerate returns text node when all content selected', function() {
     var range = createRangeFromText(editor, '|foo|');

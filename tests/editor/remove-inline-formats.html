@@ -33,7 +33,7 @@ $("#Editor1").kendoEditor({
     tools: ["bold"]
 });
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     impl = {
         formatRange: function(range, format) {
             var command = new kendo.ui.editor.FormatCommand({
@@ -47,7 +47,7 @@ QUnit.testStart = function() {
         }
     }
     editor = getEditor();
-}
+});
 
 test('removeFormat removes format from text range', function() {
     editor.value('<p><strong>golgafrincham</strong> telephone sanitisers</p>');

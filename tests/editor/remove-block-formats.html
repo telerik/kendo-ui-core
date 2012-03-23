@@ -33,7 +33,7 @@ $("#Editor1").kendoEditor({
     tools: ["bold"]
 });
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     impl = {
         formatRange: function(range, format) {
@@ -47,7 +47,7 @@ QUnit.testStart = function() {
             command.exec();
         }
     }
-}
+});
 
 test('removeFormat applies block format on full selection', function() {
     editor.value('<p style="text-align:center;">golgafrincham</p>');
