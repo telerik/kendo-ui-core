@@ -406,6 +406,7 @@
             filter: "none",
             placeholder: "",
             suggest: false,
+            ignoreCase: true,
             animation: {}
         },
 
@@ -653,12 +654,12 @@
             }
 
             if (length) {
-                if (suggest || options.highlightFirst) {
+                if (options.highlightFirst) { //suggest ||
                     that.current($(ul.firstChild));
                 }
 
                 if (suggest && that.input.val()) {
-                    that.suggest(that._current);
+                    that.suggest(that._current || $(ul.firstChild));
                 }
             }
 
@@ -738,7 +739,7 @@
                     removeFiltersForField(expression, field);
 
                     filters = expression.filters || [];
-                    filters.push({ field: field, operator: filter, value: word });
+                    filters.push({ field: field, operator: filter, value: word, ignoreCase: options.ignoreCase });
 
                     that.dataSource.filter(filters);
                 }
@@ -770,7 +771,7 @@
                 return;
             }
 
-            word = word || "";
+           word = word || "";
 
             if (typeof word !== "string") {
                 idx = word.index();
@@ -797,11 +798,16 @@
 
             if (value.length !== caret || !word) {
 
-                if (value.toLowerCase() === word.toLowerCase()) {
-                    value = word;
+                //if (value.toLowerCase() === word.toLowerCase()) {
+                //    value = word;
+                //}
+
+                if (that.options.highlightFirst) {
+                    that.text(value);
+                } else {
+                    element.value = value;
                 }
 
-                that.text(value);
                 List.selectText(element, caret, value.length);
             }
         },
@@ -820,6 +826,7 @@
             var that = this,
                 textAccessor = that._text,
                 input = that.input[0],
+                ignoreCase = that.options.ignoreCase,
                 dataItem;
 
             if (text !== undefined) {
@@ -830,14 +837,22 @@
                 }
 
                 that._select(function(dataElement) {
-                    return textAccessor(dataElement) === text;
+                    var dataText = textAccessor(dataElement) + "",
+                        t = text + "";
+
+                    if (ignoreCase) {
+                        dataText = dataText.toLowerCase();
+                        t = text.toLowerCase();
+                    }
+
+                    return dataText === t; //textAccessor(dataElement) === text;
                 });
 
                 if (that.selectedIndex < 0) {
                     that._custom(text);
+                    input.value = text;
                 }
 
-                input.value = text;
             } else {
                 return input.value;
             }
