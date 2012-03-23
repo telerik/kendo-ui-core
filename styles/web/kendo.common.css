@@ -1918,11 +1918,7 @@ body .k-datetimepicker .k-select
 {
     display: block;
     overflow: hidden;
-}
-
-.k-calendar .k-content .k-link
-{
-    height:22px;
+    min-height:22px;
     line-height:22px;
     padding: 0 .45em 0 .1em;
 }
