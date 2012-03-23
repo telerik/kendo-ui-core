@@ -45,10 +45,11 @@ var agents = 0;
 url = process.argv[2] || 'tests/';
 
 client.subscribe('/testDone', function(message) {
+  var agent = message.agent.match(/Firefox/) ? "Firefox" : "Chrome";
   var testCase = root.ele('testcase')
     .att('name', message.name)
     .att('time', message.duration)
-    .att('classname', message.suite);
+    .att('classname', agent + "." + message.suite);
 
 
   if (message.failed > 0) {
