@@ -292,6 +292,11 @@ test('exec in td', function() {
     equal(editor.value(), '<table><tbody><tr><td><p></p><p>oo</p></td></tr></tbody></table>');
 });
 
+function insertCaretAnchor() {
+    var range = editor.getRange();
+    range.insertNode(editor.document.createElement('a'));
+}
+
 test('exec in header goes in new paragraph', function() {
     editor.value('<h1>foo</h1>');
     var range = editor.createRange();
@@ -301,9 +306,7 @@ test('exec in header goes in new paragraph', function() {
 
     command.exec();
 
-    range = editor.getRange();
-
-    range.insertNode(editor.document.createElement('a'));
+    insertCaretAnchor();
 
     equal(editor.value(), '<h1>foo</h1><p><a></a></p>');
 });
@@ -317,9 +320,7 @@ test('exec in midst of header splits it in two', function() {
 
     command.exec();
 
-    range = editor.getRange();
-
-    range.insertNode(editor.document.createElement('a'));
+    insertCaretAnchor();
 
     equal(editor.value(), '<h1>fo</h1><h1><a></a>o</h1>');
 });
@@ -333,9 +334,7 @@ test('exec at beginning of header adds header above', function() {
 
     command.exec();
 
-    range = editor.getRange();
-
-    range.insertNode(editor.document.createElement('a'));
+    insertCaretAnchor();
 
     equal(editor.value(), '<h1></h1><h1><a></a>foo</h1>');
 });
@@ -349,9 +348,7 @@ test('exec in list before image', function() {
 
     command.exec();
 
-    range = editor.getRange();
-
-    range.insertNode(editor.document.createElement('a'));
+    insertCaretAnchor();
 
     equal(editor.value(), '<ul><li></li><li><a></a><img src="foo" /></li></ul>');
 });
@@ -365,9 +362,7 @@ test('paragraph in formatted text', function() {
 
     command.exec();
 
-    range = editor.getRange();
-
-    range.insertNode(editor.document.createElement('a'));
+    insertCaretAnchor();
 
     var br = editor.body.firstChild.firstChild.firstChild;
 

@@ -21,8 +21,9 @@ var ParagraphCommand = Command.extend({
 
     exec: function () {
         var range = this.getRange(),
-            document = RangeUtils.documentFromRange(range),
+            doc = RangeUtils.documentFromRange(range),
             parent, previous, next,
+            container,
             emptyParagraphContent = $.browser.msie ? '' : '<br _moz_dirty="" />',
             paragraph, marker, li, heading, rng,
             // necessary while the emptyParagraphContent is empty under IE
@@ -33,8 +34,15 @@ var ParagraphCommand = Command.extend({
 
         range.deleteContents();
 
-        marker = dom.create(document, 'a');
+        marker = dom.create(doc, 'a');
         range.insertNode(marker);
+
+        if (!marker.parentNode) {
+            // inserting paragraph in Firefox full body range
+            container = range.commonAncestorContainer;
+            container.innerHTML = "";
+            container.appendChild(marker);
+        }
 
         normalize(marker.parentNode);
 
@@ -47,7 +55,7 @@ var ParagraphCommand = Command.extend({
 
             // hitting 'enter' in empty li
             if (RangeUtils.textNodes(rng).length == 0) {
-                paragraph = dom.create(document, 'p');
+                paragraph = dom.create(doc, 'p');
 
                 if (li.nextSibling) {
                     RangeUtils.split(rng, li.parentNode);
@@ -59,7 +67,7 @@ var ParagraphCommand = Command.extend({
                 next = paragraph;
             }
         } else if (heading && !marker.nextSibling) {
-            paragraph = dom.create(document, 'p');
+            paragraph = dom.create(doc, 'p');
 
             dom.insertAfter(paragraph, heading);
             paragraph.innerHTML = emptyParagraphContent;
@@ -125,6 +133,12 @@ var ParagraphCommand = Command.extend({
             range.setStartBefore(next);
         } else {
             range.selectNodeContents(next);
+
+            var textNode = RangeUtils.textNodes(range)[0];
+
+            if (textNode) {
+                range.selectNodeContents(textNode);
+            }
         }
 
         range.collapse(true);
