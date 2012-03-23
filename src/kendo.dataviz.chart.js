@@ -211,6 +211,9 @@
                 line: {
                     width: 4
                 },
+                scatterLine: {
+                    width: 1
+                },
                 labels: {}
             },
             series: [],
