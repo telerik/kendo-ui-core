@@ -34,10 +34,10 @@ var InlineFormatFinder,
 
 $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     InlineFormatFinder = kendo.ui.editor.InlineFormatFinder;
-}
+});
 
 test('findSuitable() does not return for single text node', function() {
     editor.value('foo');

@@ -33,10 +33,10 @@ var ListFormatter;
 
 $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     ListFormatter = kendo.ui.editor.ListFormatter;
-}
+});
 
 test('apply on text node', function() {
     editor.value('foo');

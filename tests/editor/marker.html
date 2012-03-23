@@ -51,10 +51,10 @@ function createRange(startContainer, startOffset, endContainer, endOffset) {
     return range;
 }
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     Marker = kendo.ui.editor.Marker;
-}
+});
 
 test('addMarker inserts markers', function() {
     editor.value('foo');

@@ -34,10 +34,10 @@ var NewLineCommand,
 
 $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     NewLineCommand = kendo.ui.editor.NewLineCommand;
-}
+});
 
 test('exec inserts br at carret position', function() {
     editor.value('foo');

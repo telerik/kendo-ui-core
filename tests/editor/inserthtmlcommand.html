@@ -33,10 +33,10 @@ var InsertHtmlCommand;
 
 $("#Editor1").kendoEditor();
 
-QUnit.testStart = function() {
+QUnit.config.testStart.push(function() {
     editor = getEditor();
     InsertHtmlCommand = kendo.ui.editor.InsertHtmlCommand;
-}
+});
 
 test('exec calls clipboard paste', function() {
     var range = createRangeFromText(editor, 'f|o|o');
