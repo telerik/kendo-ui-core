@@ -229,7 +229,7 @@
     });
 
     function groupCells(count) {
-        return new Array(count + 1).join('<td class="k-group-cell"></td>');
+        return new Array(count + 1).join('<td class="k-group-cell">&nbsp;</td>');
     }
 
     var defaultCommands = {
