@@ -21,6 +21,8 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
+            module("Gauge / Radigal");
+
             test("initializes a radial gauge when data role is gauge", function() {
                 var dom = $('<div data-role="radialgauge" />');
 
@@ -165,6 +167,154 @@
                 var radialgauge = dom.data("kendoRadialGauge");
 
                 ok(radialgauge.wrapper.css("display") != "none", "radialgauge is not invisible");
+            });
+
+            module("Gauge / Linear");
+
+            test("initializes a linear gauge when data role is gauge", function() {
+                var dom = $('<div data-role="lineargauge" />');
+
+                kendo.bind(dom, {}, kendo.dataviz.ui);
+
+                ok(dom.data("kendoLinearGauge") instanceof kendo.dataviz.ui.LinearGauge);
+            });
+
+            test("initializes options from data attributes", function() {
+                var dom = $('<div data-role="lineargauge" data-transitions="false" />');
+
+                kendo.bind(dom, {}, kendo.dataviz.ui);
+
+                var gauge = dom.data("kendoLinearGauge");
+
+                equal(gauge.options.transitions, false);
+            });
+
+            test("initializes value from view model", function() {
+                var dom = $('<div data-role="lineargauge" data-bind="value:value" />');
+
+                kendo.bind(dom, { value: 10 }, kendo.dataviz.ui);
+
+                equal(dom.data("kendoLinearGauge").value(), 10);
+            });
+
+            test("changing a value updates the view model", function() {
+                var dom = $('<div data-role="lineargauge" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                dom.data("kendoLinearGauge").value(10);
+                dom.data("kendoLinearGauge").trigger("change");
+
+                equal(observable.value, 10);
+            });
+
+            test("binding gauge initialized before binding", function() {
+                var dom = $('<div data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                observable.value = 10;
+
+                dom.kendoLinearGauge();
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                equal(dom.data("kendoLinearGauge").value(), 10);
+            });
+
+            test("binding gauge initialized after binding", function() {
+                var dom = $('<div data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+                observable.value = 10;
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                dom.kendoLinearGauge();
+
+                equal(dom.data("kendoLinearGauge").value(), 10);
+            });
+
+            test("updating model value updates the UI", function() {
+                var dom = $('<div data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                dom.kendoLinearGauge();
+
+                observable.set("value", 10)
+                equal(dom.data("kendoLinearGauge").value(), 10);
+            });
+
+            test("bindings are removed if element is rebind", 1, function() {
+                var dom = $('<div data-role="lineargauge" data-bind="value:value" />');
+
+                var observable = kendo.observable({ value: 10 });
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                var destroy = stub(dom[0].kendoBindingTarget, "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("binding target is destroyed", 1, function() {
+                var dom = $('<div data-role="lineargauge" data-bind="value:value"/>');
+
+                var observable = kendo.observable({ value: null });
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                var destroy = stub(dom[0].kendoBindingTarget, "destroy");
+
+                kendo.bind(dom, observable);
+
+                equal(destroy.calls("destroy"), 1);
+            });
+
+            test("binding visible to true shows the lineargauge", function() {
+                var dom = $('<div data-role="lineargauge" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: true }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoLinearGauge");
+
+                ok(radialgauge.wrapper.css("display") != "none", "lineargauge is visible");
+            });
+
+            test("binding visible to false hides the lineargauge", function() {
+                var dom = $('<div data-role="lineargauge" data-bind="visible: visible"></div>');
+
+                kendo.bind(dom, { visible: false }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoLinearGauge");
+
+                ok(radialgauge.wrapper.css("display") == "none", "lineargauge is not visible");
+            });
+
+            test("binding invisible to true hides the lineargauge", function() {
+                var dom = $('<div data-role="lineargauge" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: true }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoLinearGauge");
+
+                ok(radialgauge.wrapper.css("display") == "none", "lineargauge is invisible");
+            });
+
+            test("binding invisible to false shows the lineargauge", function() {
+                var dom = $('<div data-role="lineargauge" data-bind="invisible: invisible"></div>');
+
+                kendo.bind(dom, { invisible: false }, kendo.dataviz.ui);
+
+                var radialgauge = dom.data("kendoLinearGauge");
+
+                ok(radialgauge.wrapper.css("display") != "none", "lineargauge is not invisible");
             });
         </script>
 
