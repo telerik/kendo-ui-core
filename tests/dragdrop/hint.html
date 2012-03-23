@@ -89,8 +89,8 @@
                 trigger("mousedown", { pageX: 1, pageY: 1 });
                 trigger("mousemove", { pageX: 21, pageY: 21 });
 
-                equal(hint.css("top"), offset.top + 20 + "px");
-                equal(hint.css("left"), offset.left + 20 + "px");
+                equal(parseInt(hint.css("top")), parseInt(offset.top + 20));
+                equal(parseInt(hint.css("left")), parseInt(offset.left + 20));
             });
 
             test("the hint is positioned using options.cursorOffset", function() {
@@ -98,8 +98,8 @@
 
                 startDrag();
 
-                equal(hint.css("top"), "11px");
-                equal(hint.css("left"), "11px");
+                equal(parseInt(hint.css("top")), 11);
+                equal(parseInt(hint.css("left")), 11);
             });
 
             test("the hint is positioned using options.cursorOffset", function() {
