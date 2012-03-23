@@ -1042,7 +1042,8 @@
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
-                zIndex = +wrapper.css(ZINDEX);
+                originalZIndex,
+                zIndex = originalZIndex = +wrapper.css(ZINDEX);
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
@@ -1060,8 +1061,10 @@
                 }
             });
 
-            wrapper.css(ZINDEX, zIndex + 2);
-            that.element.find("> .k-overlay").remove();
+            if (zIndex == 10001 || originalZIndex < zIndex) {
+                wrapper.css(ZINDEX, zIndex + 2);
+                that.element.find("> .k-overlay").remove();
+            }
 
             return that;
         },

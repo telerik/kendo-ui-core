@@ -268,6 +268,15 @@
                     ok(parseInt(firstWindow.wrapper.css("zIndex")) < parseInt($(".k-overlay").css("zIndex")));
             });
 
+            test("toFront() does not increase the window z-index if not necessary", function() {
+                var dialog = createWindow(),
+                    zIndex = dialog.wrapper.css("zIndex");
+
+                dialog.toFront();
+
+                equal(dialog.wrapper.css("zIndex"), zIndex);
+            });
+
             test("open() calls toFront()", function() {
                 expect(1);
 
