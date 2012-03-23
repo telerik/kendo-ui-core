@@ -30,7 +30,7 @@ bayeux.attach(server);
 
 server.listen(PORT);
 
-var client = bayeux.getClient(), chrome;
+var client = bayeux.getClient(), browsers;
 var agents = 0, failures = 0, total = 0;
 
 client.subscribe("/ready", function(agent) {
@@ -45,10 +45,11 @@ var agents = 0;
 url = process.argv[2] || 'tests/';
 
 client.subscribe('/testDone', function(message) {
+  var agent = message.agent.match(/Firefox/) ? "Firefox" : "Chrome";
   var testCase = root.ele('testcase')
     .att('name', message.name)
     .att('time', message.duration)
-    .att('classname', "chrome." + message.suite);
+    .att('classname', agent + "." + message.suite);
 
 
   if (message.failed > 0) {
@@ -69,16 +70,30 @@ client.subscribe('/done', function(message) {
         .att('errors', 0)
         .att('failures', failures);
 
-        process.stdout.write(doc.toString({pretty: true}));
-        chrome.kill();
+        if (process.stdout._type != 'tty') {
+            process.stdout.write(doc.toString({pretty: true}));
+        }
+
+        browsers.forEach(function(browser) {
+            browser.process.kill();
+        });
+
         process.exit(failures === 0 ? 0 : 1);
     }
 });
 
-var browserPaths = {
-    'Darwin': "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-    'Linux': "google-chrome"
-}
+browsers = [
+    {
+        'Darwin': "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+        'Linux': "google-chrome"
+    },
+    {
+        'Darwin':"/Applications/Firefox.app/Contents/MacOS/firefox",
+        'Linux': "firefox"
+    }
+]
 
-chrome = spawn(browserPaths[os.type()], ['http://localhost:' + PORT + '/tests/testrunner.html']);
+browsers.forEach(function(browser) {
+    browser.process = spawn(browser[os.type()], ['http://localhost:' + PORT + '/tests/testrunner.html']);
+});
 

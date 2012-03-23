@@ -124,7 +124,8 @@
             $.extend(state, {
                 failures: $.map(newFails.contents(), function(err) { return $(err).text() }),
                 duration: ((+new Date()) - startDate) / 1000,
-                suite: runner.currentTestTitle
+                suite: runner.currentTestTitle,
+                agent: navigator.userAgent
             })
 
             if (top.client) {
