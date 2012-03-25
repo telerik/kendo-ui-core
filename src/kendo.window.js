@@ -773,14 +773,14 @@
                 doc = $(document),
                 wrapper = this.wrapper;
 
-            if (overlay.length == 0) {
+            if (!overlay.length) {
                 overlay = $("<div class='k-overlay' />");
             }
 
             overlay
                 .insertBefore(wrapper[0])
                 .toggle(visible)
-                .css(ZINDEX, parseInt(wrapper.css(ZINDEX)) - 1);
+                .css(ZINDEX, parseInt(wrapper.css(ZINDEX), 10) - 1);
 
             return overlay;
         },
@@ -857,7 +857,7 @@
                 title = titleBar.children(".k-window-title"),
                 titleBarHeight = titleBar.outerHeight();
 
-            if (arguments.length == 0) {
+            if (!arguments.length) {
                 return title.text();
             }
 
@@ -865,7 +865,7 @@
                 wrapper.addClass("k-window-titleless");
                 titleBar.remove();
             } else {
-                if (titleBar.length == 0) {
+                if (!titleBar.length) {
                     wrapper.prepend(templates.titlebar(extend(templates, options)));
                 }
 
@@ -1042,8 +1042,8 @@
             var that = this,
                 wrapper = that.wrapper,
                 currentWindow = wrapper[0],
-                originalZIndex,
-                zIndex = originalZIndex = +wrapper.css(ZINDEX);
+                zIndex = +wrapper.css(ZINDEX),
+                originalZIndex = zIndex;
 
             $(KWINDOW).each(function(i, element) {
                 var windowObject = $(element),
@@ -1377,7 +1377,7 @@
         wrapper = $(templates.wrapper(options));
 
         if (options.title !== false) {
-            wrapper.append(templates.titlebar(extend(templates, options)))
+            wrapper.append(templates.titlebar(extend(templates, options)));
         }
 
         wrapper.toggleClass("k-rtl", !!element.closest(".k-rtl").length);
@@ -1418,7 +1418,7 @@
             var wnd = this.owner,
                 wrapper = wnd.wrapper;
 
-            wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"));
+            wnd.elementPadding = parseInt(wnd.wrapper.css("padding-top"), 10);
             wnd.initialCursorPosition = wrapper.offset();
 
             wnd.resizeDirection = e.currentTarget.prop("className").replace("k-resize-handle k-resize-", "").split("");
@@ -1459,7 +1459,7 @@
                         wrapper.css({
                             left: windowRight - newWidth,
                             width: newWidth
-                        })
+                        });
                     },
                     "n": function () {
                         var windowBottom = wnd.initialCursorPosition.top + wnd.initialSize.height,
