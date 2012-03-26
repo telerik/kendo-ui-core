@@ -38,23 +38,6 @@
                 }
             });
 
-            asyncTest("keydown triggered from datepicker should call navigate method", function() {
-                var datepicker = input.kendoDatePicker().data("kendoDatePicker");
-
-                datepicker.dateView.calendar = div.kendoCalendar().data("kendoCalendar");
-                datepicker.open();
-
-                setTimeout(function() {
-                    input.focus()
-                        .trigger({
-                            type:"keydown",
-                            keyCode: 40,
-                            preventDefault: function() { start(); }
-                        });
-
-                }, 200);
-            });
-
             test("click enter should raise change event if dateview is closed", function() {
                 var input = $("<input />"),
                 datepicker = input.kendoDatePicker().data("kendoDatePicker");
@@ -255,7 +238,7 @@
                 equal(dv.calendar._table.find(".k-state-focused").text(), "Jul");
             });
 
-            asyncTest("navigate should focus month on next row in year view", function() {
+            test("navigate should focus month on next row in year view", function() {
                 var event = { keyCode: keys.DOWN, preventDefault: $.noop },
                     dv = new DateView({value: new Date(2000, 10, 10), start: "month", depth: "month", min: new Date(1999, 10, 10), max: new Date(2111, 10, 10)}),
                     focusedDate = new Date(dv._current);
@@ -269,11 +252,8 @@
 
                 dv.move(event);
 
-                setTimeout(function() {
-                    equal(+dv._current, +focusedDate);
-                    equal(dv.calendar._table.find(".k-state-focused").text(), "Mar");
-                    start();
-                },200);
+                equal(+dv._current, +focusedDate);
+                equal(dv.calendar._table.find(".k-state-focused").text(), "Mar");
             });
 
             //DECADE VIEW
@@ -588,7 +568,7 @@
                 ok(!dv.popup.visible());
             });
 
-            asyncTest("Enter should focus viewedDate", function() {
+            test("Enter should focus viewedDate", function() {
                 var event = { keyCode: keys.ENTER, preventDefault: $.noop },
                 dv = new DateView({
                     anchor: $("<input />"),
@@ -606,11 +586,8 @@
                 dv.calendar._focus(dv._current);
                 dv.move(event);
 
-                setTimeout(function() {
-                    ok(dv.popup.visible());
-                    equal(dv.calendar._table.find(".k-state-focused").length, 1);
-                    start();
-                }, 200);
+                ok(dv.popup.visible());
+                equal(dv.calendar._table.find(".k-state-focused").length, 1);
             });
 
             test("Enter should select date", function() {
@@ -684,21 +661,18 @@
                 equal(dv.popup.calls("close"), 1);
             });
 
-            asyncTest("type invalide date does not clear input", function() {
+            test("type invalide date does not clear input", function() {
                 var input = $("<input />"),
                     datepicker = input.kendoDatePicker({value: new Date()}).data("kendoDatePicker"),
                     value = "invalid date";
 
                 input.focus().val(value).blur();
 
-                setTimeout(function() {
-                    equal(input.val(), value);
-                    equal(datepicker.value(), null);
-                    start();
-                }, 200);
+                equal(input.val(), value);
+                equal(datepicker.value(), null);
             });
 
-            asyncTest("click on selected date should close the dateView", 1, function() {
+            test("click on selected date should close the dateView", 1, function() {
                 var dv = new DateView({
                     min: new Date(1800, 1, 1),
                     max: new Date(2800, 1, 1),

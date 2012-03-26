@@ -119,7 +119,7 @@
             });
 
             //DatePicker
-            asyncTest("open method opens the dateView", function() {
+            test("open method opens the dateView", 1, function() {
                 var datepicker = input.kendoDatePicker().data("kendoDatePicker");
 
                 stub(datepicker.dateView, "_calendar");
@@ -127,10 +127,7 @@
 
                 datepicker.open();
 
-                setTimeout(function() {
-                    equal(datepicker.dateView.popup.calls("open"), 1);
-                    start();
-                }, 200);
+                equal(datepicker.dateView.popup.calls("open"), 1);
             });
 
             test("close method should closes the dateView", function() {
