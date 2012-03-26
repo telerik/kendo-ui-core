@@ -56,7 +56,6 @@
     var Pointer = ChartElement.extend({
         init: function (scale, options) {
             var pointer = this,
-                options,
                 scaleOptions = scale.options;
 
             ChartElement.fn.init.call(pointer, options);
@@ -86,7 +85,7 @@
                 scaleOptions = pointer.scale.options,
                 element;
 
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 return value;
             }
 
@@ -179,7 +178,7 @@
                     center.x,
                     center.y
                 ]
-            })
+            });
 
             return [
                 view.createPolyline([
@@ -283,7 +282,7 @@
                     count = tickAngles.length;
 
                 for (i = 0; i < count; i++) {
-                    if (i % skip == 0) {
+                    if (i % skip === 0) {
                         continue;
                     }
 
@@ -380,11 +379,16 @@
                 ranges = options.ranges || [],
                 ring = scale.ring,
                 result = [],
-                from, to, r, ir, count = ranges.length,
-                range, defaultColor = options.rangePlaceholderColor,
+                from,
+                to,
+                r,
+                ir,
+                count = ranges.length,
+                range,
+                defaultColor = options.rangePlaceholderColor,
                 min = options.min,
                 max = options.max,
-                from, to, j, range,
+                j,
                 segments = [],
                 segment,
                 ringDistance = options.ringDistance,
@@ -432,7 +436,7 @@
                     segment = segments[i];
                     from = scale.getSlotAngle(segment.from);
                     to = scale.getSlotAngle(segment.to);
-                    if (to - from != 0) {
+                    if (to - from !== 0) {
                         result.push(view.createRing(
                             new Ring(ring.c, ir, r, from, to - from), {
                                 fill: segment.color,
