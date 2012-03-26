@@ -1024,7 +1024,7 @@
 
             that._thead();
 
-            if (that.options.dataBind) {
+            if (that.options.autoBind) {
                 dataSource.fetch();
             }
         },
