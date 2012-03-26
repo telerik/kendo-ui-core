@@ -275,7 +275,7 @@
             className: "k-grid-cancel",
             iconClass: "k-icon"
         }
-    }
+    };
 
     /**
      *  @name kendo.ui.Grid.Description
@@ -1116,7 +1116,7 @@
                 if (mode === "incell") {
                     if (editable.update !== false) {
                         that.wrapper.delegate("tr:not(.k-grouping-row) > td:not(.k-hierarchy-cell,.k-detail-cell,.k-group-cell,.k-edit-cell,:has(a.k-grid-delete))", CLICK, function(e) {
-                            var td = $(this)
+                            var td = $(this);
 
                             if (td.closest("tbody")[0] !== that.tbody[0] || $(e.target).is(":input")) {
                                 return;
@@ -1531,7 +1531,7 @@
                 editable = that.options.editable,
                 confirmation = editable === true || typeof editable === STRING ? DELETECONFIRM : editable.confirmation;
 
-            return confirmation !== false && confirmation != undefined ? that._showMessage(confirmation) : true;
+            return confirmation !== false && confirmation != null ? that._showMessage(confirmation) : true;
         },
 
         /**
@@ -1602,7 +1602,7 @@
             if (toolbar) {
                 toolbar = isFunction(toolbar) ? toolbar({}) : (typeof toolbar === STRING ? toolbar : that._toolbarTmpl(toolbar).replace(templateHashRegExp, "\\#"));
 
-                template = proxy(kendo.template(toolbar), that)
+                template = proxy(kendo.template(toolbar), that);
 
                 $('<div class="k-toolbar k-grid-toolbar" />')
                     .html(template({}))
@@ -1799,11 +1799,10 @@
                 containerOffsetHeight = container.clientHeight,
                 bottomDistance = elementOffsetTop + elementOffsetHeight;
 
-            container.scrollTop = containerScrollTop > elementOffsetTop
-                                    ? elementOffsetTop
-                                    : bottomDistance > (containerScrollTop + containerOffsetHeight)
-                                    ? bottomDistance - containerOffsetHeight
-                                    : containerScrollTop;
+            container.scrollTop = containerScrollTop > elementOffsetTop ?
+                                    elementOffsetTop :
+                                    (bottomDistance > (containerScrollTop + containerOffsetHeight) ?
+                                        (bottomDistance - containerOffsetHeight) : containerScrollTop);
         },
 
         _navigatable: function() {
@@ -1904,7 +1903,7 @@
                                         }
                                     }
 
-                                    if (browser.msie && parseInt(browser.version) < 9) {
+                                    if (browser.msie && parseInt(browser.version, 10) < 9) {
                                         document.body.focus();
                                     }
                                     wrapper.focus();
@@ -2197,7 +2196,7 @@
                     column = that.columns[idx];
 
                     if (column.field === e.field) {
-                        cell = tmp.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(idx)
+                        cell = tmp.children(":not(.k-group-cell,.k-hierarchy-cell)").eq(idx);
                         $('<span class="k-dirty"/>').prependTo(cell);
                     }
                 }
@@ -2283,7 +2282,7 @@
                         if (columns[index].filterable !== false) {
                             $(this).kendoFilterMenu(extend(true, {}, filterable, columns[index].filterable, { dataSource: that.dataSource }));
                         }
-                    })
+                    });
             }
         },
 
@@ -2301,7 +2300,7 @@
                         if (column.sortable !== false && !column.command) {
                             $(this).kendoSortable(extend({}, sortable, { dataSource: that.dataSource }));
                         }
-                    })
+                    });
             }
         },
 
@@ -2314,8 +2313,8 @@
 
             // using HTML5 data attributes as a configuration option e.g. <th data-field="foo">Foo</foo>
             columns = columns.length ? columns : map(table.find("th"), function(th, idx) {
-                var th = $(th),
-                    sortable = th.attr(kendo.attr("sortable")),
+                th = $(th);
+                var sortable = th.attr(kendo.attr("sortable")),
                     filterable = th.attr(kendo.attr("filterable")),
                     type = th.attr(kendo.attr("type")),
                     groupable = th.attr(kendo.attr("groupable")),
@@ -2475,12 +2474,13 @@
             }
 
             if (!isEmptyObject(aggregates) ||
-                $.grep(that.columns, function(column) { return column.footerTemplate }).length) {
+                $.grep(that.columns, function(column) { return column.footerTemplate; }).length) {
 
                 that.footerTemplate = that._footerTmpl(aggregates, "footerTemplate", "k-footer-template");
             }
-            if (groups.length && $.grep(that.columns, function(column) { return column.groupFooterTemplate }).length) {
-                aggregates = $.map(groups, function(g) { return g.aggregates });
+
+            if (groups.length && $.grep(that.columns, function(column) { return column.groupFooterTemplate; }).length) {
+                aggregates = $.map(groups, function(g) { return g.aggregates; });
                 that.groupFooterTemplate = that._footerTmpl(aggregates, "groupFooterTemplate", "k-group-footer");
             }
         },
@@ -2641,7 +2641,7 @@
          * grid.dataItem(grid.tbody.find(">tr:first"));
          */
         dataItem: function(tr) {
-            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))]
+            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))];
         },
 
         /**
@@ -2760,7 +2760,7 @@
                 width,
                 cols = map(that.columns, function(column) {
                     width = column.width;
-                    if (width && parseInt(width) != 0) {
+                    if (width && parseInt(width, 10) !== 0) {
                         return kendo.format('<col style="width:{0}"/>', typeof width === STRING? width : width + "px");
                     }
 
@@ -2839,8 +2839,8 @@
             html +=  '<tr class="k-grouping-row">' + groupCells(level) +
                       '<td colspan="' + colspan + '">' +
                         '<p class="k-reset">' +
-                         '<a class="k-icon k-collapse" href="#"></a>' + text
-                          +'</p></td></tr>';
+                         '<a class="k-icon k-collapse" href="#"></a>' + text +
+                         '</p></td></tr>';
 
             if(group.hasSubgroups) {
                 for(idx = 0, length = groupItems.length; idx < length; idx++) {
@@ -2912,7 +2912,7 @@
                 $(new Array(groups - length + 1).join('<th class="k-group-cell k-header">&nbsp;</th>')).prependTo(that.thead.find("tr"));
             } else if(groups < length) {
                 length = length - groups;
-                $($.grep(cells, function(item, index) { return length > index } )).remove();
+                $($.grep(cells, function(item, index) { return length > index; } )).remove();
             }
         },
 
@@ -3035,7 +3035,7 @@
            }
        }
        return false;
-   };
+   }
 
    ui.plugin(Grid);
    ui.plugin(VirtualScrollable);
