@@ -76,7 +76,9 @@
             this.options.dataSource = dataSource;
             this._dataSource();
 
-            dataSource.fetch();
+            if (this.options.autoBind) {
+                dataSource.fetch();
+            }
         },
 
         _dataSource: function() {

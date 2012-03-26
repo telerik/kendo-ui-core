@@ -208,6 +208,22 @@
                 ok(grid.wrapper.css("display") != "none", "grid is not invisible");
             });
 
+            test("setting autobind when bound to DataSource", function() {
+                var dom = $('<div data-role="grid" data-bind="source:dataSource" data-auto-bind="false" />');
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var grid = dom.data("kendoGrid");
+
+                ok(!grid.tbody.find("tr").length);
+            });
         </script>
 
         <script id="template" type="text/x-kendo-template">

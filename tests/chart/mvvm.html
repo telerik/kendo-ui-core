@@ -227,6 +227,22 @@
                 ok(chart.wrapper.css("display") != "none", "chart is not invisible");
             });
 
+            test("setting autobind when bound to DataSource", function() {
+                var dom = $('<div data-role="chart" data-bind="source:dataSource" data-auto-bind="false" data-series=\'[{"field":"text"}]\'"/>');
+
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable, kendo.dataviz.ui);
+
+                var chart = dom.data("kendoChart");
+                ok(!chart.options.series[0].data.length);
+            });
         </script>
 
         <div id="qunit-fixture">test markup, will be hidden</div>

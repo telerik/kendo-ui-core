@@ -167,7 +167,9 @@
 
             dataSource.bind(CHANGE, chart._dataChangeHandler);
 
-            dataSource.fetch();
+            if (chart.options.autoBind) {
+                dataSource.fetch();
+            }
         },
 
         events:[
