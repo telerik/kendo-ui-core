@@ -54,5 +54,9 @@ tests.push(
     {
         page: "core/template.html",
         title: "template"
-     }
+    },
+    {
+        page: "core/lint.html",
+        title: "core lint"
+    }
 );
