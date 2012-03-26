@@ -1011,19 +1011,23 @@
                 options = axis.options,
                 reverse = options.reverse,
                 vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
                 lineBox = axis.lineBox(),
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 size = vertical ? lineBox.height() : lineBox.width(),
                 categoriesLength = math.max(1, options.categories.length),
-                from = math.min(math.max(0, from), categoriesLength),
-                to = defined(to) ? to : from,
-                to = math.max(math.min(categoriesLength, to), from),
-                valueAxis = vertical ? Y : X,
-                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
                 step = (reverse ? -1 : 1) * (size / categoriesLength),
-                p1 = lineStart + (from * step),
-                p2 = p1 + step,
-                slotSize = to - from,
-                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+                p1,
+                p2,
+                slotSize;
+
+            from = math.min(math.max(0, from), categoriesLength);
+            to = defined(to) ? to : from;
+            to = math.max(math.min(categoriesLength, to), from);
+            p1 = lineStart + (from * step);
+            p2 = p1 + step;
+            slotSize = to - from;
 
             if (slotSize > 0 || (from == to && categoriesLength == from)) {
                 p2 = p1 + (slotSize * step);
@@ -1122,12 +1126,12 @@
                 var currentChild = children[i],
                     childBox = currentChild.box.clone();
 
-                childBox.snapTo(targetBox, positionAxis)
+                childBox.snapTo(targetBox, positionAxis);
                 if (currentChild.options) {
                     currentChild.options.stackBase = stackBase;
                 }
 
-                if (i == 0) {
+                if (i === 0) {
                     box = stack.box = childBox.clone();
                 } else {
                     childBox.alignTo(children[i - 1].box, stackDirection);
@@ -2150,7 +2154,7 @@
                 lineOptions = line.options;
                 seriesIx = lineOptions.seriesIx;
 
-                if (lineOptions.stack && seriesIx != 0) {
+                if (lineOptions.stack && seriesIx !== 0) {
                     if (seriesIx > 0) {
                         originalLinePoints = originalLines[i - 1].clone().points.reverse();
                         line.points = linePoints.concat(originalLinePoints);
@@ -2559,7 +2563,7 @@
                     cx: sector.c.x,
                     cy: sector.c.y,
                     bbox: sector.getBBox()
-                })
+                });
             }
 
             if (segment.value !== 0) {
@@ -2672,7 +2676,7 @@
                 currentSeries = series[seriesIx];
                 dataItems = currentSeries.dataItems;
                 data = currentSeries.data;
-                total = chart.pointsTotal(data)
+                total = chart.pointsTotal(data);
                 anglePerValue = 360 / total;
 
                 for (i = 0; i < data.length; i++) {
@@ -2771,7 +2775,6 @@
                 halfMinWidth = minWidth / 2,
                 defaultPadding = minWidth - minWidth * 0.85,
                 padding = defined(options.padding) ? options.padding : defaultPadding,
-                padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
                 newBox = new Box2D(box.x1, box.y1,
                     box.x1 + minWidth, box.y1 + minWidth),
                 newBoxCenter = newBox.center(),
@@ -2785,6 +2788,7 @@
                 sector,
                 i;
 
+            padding = padding > halfMinWidth - space ? halfMinWidth - space : padding,
             newBox.translate(boxCenter.x - newBoxCenter.x, boxCenter.y - newBoxCenter.y);
 
             for (i = 0; i < count; i++) {
@@ -3062,7 +3066,7 @@
                 a = (a.parent.sector.middle() + 270) % 360;
                 b = (b.parent.sector.middle() + 270) % 360;
                 return (a - b) * reverse;
-            }
+            };
         },
 
         hAlignLabel: function(originalX, sector, y1, y2, direction) {
@@ -3753,8 +3757,8 @@
                 axisRanges = vertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
                 rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
-                options = deepExtend({}, options, { vertical: vertical }),
-                axis = new NumericAxis(range.min, range.max, options);
+                axisOptions = deepExtend({}, options, { vertical: vertical }),
+                axis = new NumericAxis(range.min, range.max, axisOptions);
 
             namedAxes[axisName] = axis;
             plotArea.append(axis);
@@ -4054,7 +4058,7 @@
             u_b = (b2.y - b1.y) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.y - a1.y),
             ua;
 
-        if (u_b != 0) {
+        if (u_b !== 0) {
             ua = (ua_t / u_b);
 
             result = new Point2D(
