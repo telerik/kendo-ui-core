@@ -360,10 +360,10 @@
             if (!valid) {
                 messageText = that._extractMessage(input, result.key);
                 that._errors[fieldName] = messageText;
-
                 var messageLabel = $(template({ message: messageText })).addClass(INVALIDMSG).attr(DATAFOR, fieldName || "");
+
                 if (!lbl.replaceWith(messageLabel).length) {
-                    messageLabel.insertAfter(input)
+                    messageLabel.insertAfter(input);
                 }
                 messageLabel.show();
             }
