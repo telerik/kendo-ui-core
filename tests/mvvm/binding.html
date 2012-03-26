@@ -493,6 +493,28 @@
                 ok(dom.is(":checked"));
             });
 
+            test("checked binding binds radiobutton to boolean value", function() {
+                var dom = $('<input type="radio" value="true" data-bind="checked:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItem: true
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":checked"));
+            });
+
+            test("checked binding binds radiobutton too number value", function() {
+                var dom = $('<input type="radio" value="1" data-bind="checked:selectedItem"/>');
+
+                var viewModel = kendo.observable({
+                    selectedItem: 1
+                });
+
+                kendo.bind(dom, viewModel);
+                ok(dom.is(":checked"));
+            });
+
             test("checked binding binds checkbox to boolean", function() {
                 var dom = $('<input type="checkbox" data-bind="checked:selectedItem"/>');
 

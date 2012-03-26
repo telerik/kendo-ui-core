@@ -446,8 +446,8 @@
                     }
 
                     element.checked = value === true;
-                } else if (element.type == "radio") {
-                    if (element.value == value) {
+                } else if (element.type == "radio" && value != null) {
+                    if (element.value === value.toString()) {
                         element.checked = true;
                     }
                 }
