@@ -86,6 +86,9 @@ tests.push(
     {
         page: "chart/mvvm.html",
         title: "mvvm"
+    },
+    {
+        page: "chart/lint.html",
+        title: "jsLint"
     }
-
 );

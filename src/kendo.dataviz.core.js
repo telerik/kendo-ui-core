@@ -16,7 +16,7 @@
 
     var renderTemplate = function(definition) {
         return template(definition, { useWithBlock: false, paramName: "d" });
-    }
+    };
 
     var CSS_PREFIX = "k-";
 
@@ -313,7 +313,7 @@
                 box.wrapPoint(point, innerRadius);
             }
 
-            if (innerRadius == 0) {
+            if (!innerRadius) {
                 box.wrapPoint(ring.c);
             }
 
@@ -621,10 +621,11 @@
         reflow: function(targetBox) {
             var text = this,
                 options = text.options,
-                size = options.size = measureText(
-                                        text.content,
-                                        { font: options.font },
-                                        options.rotation);
+                size,
+                margin;
+
+            size = options.size =
+                measureText(text.content, { font: options.font }, options.rotation);
 
             text.baseline = size.baseline;
 
@@ -637,14 +638,14 @@
                     targetBox.x2 - size.width, targetBox.y1,
                     targetBox.x2, targetBox.y1 + size.height);
             } else if (options.align == CENTER) {
-                var margin = (targetBox.width() - size.width) / 2;
+                margin = (targetBox.width() - size.width) / 2;
                 text.box = new Box2D(
                     round(targetBox.x1 + margin, COORD_PRECISION), targetBox.y1,
                     round(targetBox.x2 - margin, COORD_PRECISION), targetBox.y1 + size.height);
             }
 
             if (options.vAlign == CENTER) {
-                var margin = (targetBox.height() - size.height) /2;
+                margin = (targetBox.height() - size.height) /2;
                 text.box = new Box2D(
                     text.box.x1, targetBox.y1 + margin,
                     text.box.x2, targetBox.y2 - margin);
@@ -685,7 +686,7 @@
             options = textBox.options;
 
             if (!options.template) {
-                content = options.format ? format(options.format, content) : content
+                content = options.format ? format(options.format, content) : content;
             }
 
             text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
@@ -894,7 +895,7 @@
 
                 if (visible) {
                     for (i = 0; i < count; i++) {
-                        if (i % skip == 0) {
+                        if (i % skip === 0) {
                             continue;
                         }
 
@@ -1002,7 +1003,7 @@
 
             if (title) {
                 if (vertical) {
-                    maxLabelWidth += title.box.width()
+                    maxLabelWidth += title.box.width();
                 } else {
                     maxLabelHeight += title.box.height();
                 }
@@ -1231,7 +1232,7 @@
         },
 
         autoAxisMax: function(min, max) {
-            if (min == 0 && max == 0) {
+            if (!min && !max) {
                 return 1;
             }
 
@@ -1254,7 +1255,7 @@
         },
 
         autoAxisMin: function(min, max) {
-            if (min == 0 && max == 0) {
+            if (!min && !max) {
                 return 0;
             }
 
@@ -1355,13 +1356,14 @@
                 lineSize = vertical ? lineBox.height() : lineBox.width(),
                 dir = reverse ? -1 : 1,
                 step = dir * (lineSize / (options.max - options.min)),
-                a = defined(a) ? a : options.axisCrossingValue,
-                b = defined(b) ? b : options.axisCrossingValue,
-                a = math.max(math.min(a, options.max), options.min),
-                b = math.max(math.min(b, options.max), options.min),
                 p1,
                 p2,
                 slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+
+            a = defined(a) ? a : options.axisCrossingValue;
+            b = defined(b) ? b : options.axisCrossingValue;
+            a = math.max(math.min(a, options.max), options.min);
+            b = math.max(math.min(b, options.max), options.min);
 
             if (vertical) {
                 p1 = options.max - math.max(a, b);
@@ -1507,10 +1509,10 @@
         },
 
         playAnimations: function() {
-            var anim;
+            var animations = this.animations;
 
-            while (anim = this.animations.shift()) {
-                anim.play();
+            while (animations.length > 0) {
+                animations.shift().play();
             }
         },
 
@@ -1839,7 +1841,7 @@
             anim.axis = axis;
             if (initial) {
                 updateArray(points, axis, start);
-            } else if (options.speed && options.speed != 0) {
+            } else if (options.speed) {
                 anim.options.duration = math.max((math.abs(start - end) / options.speed) * 1000, 1);
             }
         },
@@ -1891,7 +1893,7 @@
             if (!initial) {
                 startPosition = points[1][axis];
                 end = anim.options.endPosition[options.vertical ? "y1" : "x2"];
-                if (options.speed && options.speed != 0) {
+                if (options.speed) {
                     anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
                 }
             }
@@ -2141,8 +2143,8 @@
     function autoMajorUnit(min, max) {
         var diff = max - min;
 
-        if (diff == 0) {
-            if (max == 0) {
+        if (diff === 0) {
+            if (max === 0) {
                 return 0.1;
             }
 
@@ -2187,10 +2189,11 @@
 
     function rotatePoint(x, y, cx, cy, angle) {
         var theta = angle * DEGREE;
+
         return {
             x: cx + (x - cx) * math.cos(theta) + (y - cy) * math.sin(theta),
             y: cy - (x - cx) * math.sin(theta) + (y - cy) * math.cos(theta)
-        }
+        };
     }
 
     function boxDiff(r, s) {
@@ -2237,7 +2240,7 @@
         }
 
         return $.grep(result, function(box) {
-            return box.height() > 0 && box.width() > 0
+            return box.height() > 0 && box.width() > 0;
         })[0];
     }
 
