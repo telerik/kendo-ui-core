@@ -115,7 +115,7 @@
 
         renderElement: function(element) {
             var container = doc.createElement("div"),
-                element;
+                domElement;
 
             renderSVG(container,
                 "<?xml version='1.0' ?>" +
@@ -124,9 +124,9 @@
                 "</svg>"
             );
 
-            element = container.firstChild.nextSibling.firstChild;
+            domElement = container.firstChild.nextSibling.firstChild;
 
-            return element;
+            return domElement;
         },
 
         createGroup: function(options) {
@@ -182,13 +182,15 @@
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
             } else {
-                return new SVGLinearGradient(options)
+                return new SVGLinearGradient(options);
             }
         },
 
         alignToScreen: function(element) {
+            var ctm;
+
             try {
-                var ctm = element.getScreenCTM ? element.getScreenCTM() : null;
+                ctm = element.getScreenCTM ? element.getScreenCTM() : null;
             } catch (e) { }
 
             if (ctm) {
@@ -416,15 +418,18 @@
                 ringConfig = ring.config,
                 startAngle = ringConfig.startAngle,
                 endAngle = ringConfig.angle + startAngle,
-                endAngle = (endAngle - startAngle) == 360 ? endAngle - 0.001 : endAngle,
                 isReflexAngle = (endAngle - startAngle) > 180,
                 r = math.max(ringConfig.r, 0),
                 ir = math.max(ringConfig.ir, 0),
                 center = ringConfig.c,
                 firstOuterPoint = ringConfig.point(startAngle),
                 firstInnerPoint = ringConfig.point(startAngle, true),
-                secondOuterPoint = ringConfig.point(endAngle),
-                secondInnerPoint = ringConfig.point(endAngle, true);
+                secondOuterPoint,
+                secondInnerPoint;
+
+            endAngle = (endAngle - startAngle) === 360 ? endAngle - 0.001 : endAngle,
+            secondOuterPoint = ringConfig.point(endAngle),
+            secondInnerPoint = ringConfig.point(endAngle, true);
 
             return ring.pathTemplate({
                 firstOuterPoint: firstOuterPoint,
@@ -640,7 +645,7 @@
                 return element;
             }
         }
-    }
+    };
 
     function SVGGradientDecorator(view) {
         this.view = view;
@@ -727,9 +732,10 @@
 
     function renderSVGDash(dashType, strokeWidth) {
         var result = [],
-            dashType = dashType ? dashType.toLowerCase() : null,
             dashTypeArray,
             i;
+
+        dashType = dashType ? dashType.toLowerCase() : null;
 
         if (dashType && dashType != "solid" && strokeWidth) {
             dashTypeArray = SVG_DASH_TYPE[dashType];
@@ -743,9 +749,9 @@
         return "";
     }
 
-    function renderSVG(container, svg) {
+    var renderSVG = function(container, svg) {
         container.innerHTML = svg;
-    }
+    };
 
     (function() {
         var testFragment = "<svg xmlns='" + SVG_NS + "'></svg>",
