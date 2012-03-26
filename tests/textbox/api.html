@@ -20,6 +20,8 @@
             var NumericTextBox = kendo.ui.NumericTextBox,
                 input;
 
+            QUnit.config.testTimeout = 800;
+
             module("kendo.ui.NumericTextBox API", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);

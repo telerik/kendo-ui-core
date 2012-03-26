@@ -20,7 +20,7 @@
             var NumericTextBox = kendo.ui.NumericTextBox,
                 input;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 800;
 
             module("kendo.ui.NumericTextBox Events", {
                 setup: function() {
@@ -42,7 +42,7 @@
                 }, 100);
             });
 
-            asyncTest("focus div should focus element", function() {
+            test("focus div should focus element", function() {
                 var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
@@ -97,21 +97,15 @@
                 equal(input[0], document.activeElement);
             });
 
-            asyncTest("value() should not raise change event", function() {
+            test("value() should not raise change event", 0, function() {
                 var textbox = new NumericTextBox(input, {
                     change: function() {
-                        start();
                         ok(false);
                     }
                 });
 
                 textbox.value("22");
                 textbox._blur();
-
-                setTimeout(function() {
-                    ok(true);
-                    start();
-                }, 400);
             });
 
             asyncTest("raise spin event", function() {
