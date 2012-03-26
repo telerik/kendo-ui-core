@@ -145,7 +145,7 @@
             return this.validatable.validate();
         },
 
-        distroy: function() {
+        destroy: function() {
             kendo.unbind(this.element);
 
             this.element.removeData("kendoValidator")

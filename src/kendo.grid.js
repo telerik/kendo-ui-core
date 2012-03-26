@@ -1084,7 +1084,11 @@
         },
 
         _modelForContainer: function(container) {
-            var id = (container.is("tr") ? container : container.closest("tr")).attr(kendo.attr("uid"));
+            if (!container.is("tr") && this._editMode() !== "popup") {
+                container = container.closest("tr");
+            }
+
+            var id = container.attr(kendo.attr("uid"));
 
             return this.dataSource.getByUid(id);
         },
@@ -1193,13 +1197,13 @@
             }
         },
 
-        _distroyEditable: function() {
+        _destroyEditable: function() {
             var that = this;
 
             if (that.editable) {
                 that._detachModelChange();
 
-                that.editable.distroy();
+                that.editable.destroy();
                 delete that.editable;
 
                 if (that._editMode() === "popup") {
@@ -1247,7 +1251,7 @@
 
             cell.parent().removeClass("k-grid-edit-row");
 
-            that._distroyEditable(); // editable should be destoryed before content of the container is changed
+            that._destroyEditable(); // editable should be destoryed before content of the container is changed
 
             that._displayCell(cell, column, model);
 
@@ -1334,10 +1338,11 @@
                 that._attachModelChange(model);
 
                 if (that._editMode() === "popup") {
-                    that._createPopUpEditor(model);
+                    that._createPopupEditor(model);
                 } else {
                     that._createInlineEditor(row, model);
                 }
+
                 container = that._editContainer;
 
                 container.delegate("a.k-grid-cancel", CLICK, function(e) {
@@ -1352,9 +1357,9 @@
             }
         },
 
-        _createPopUpEditor: function(model) {
+        _createPopupEditor: function(model) {
             var that = this,
-                html = '<div><div class="k-edit-form-container">',
+                html = '<div ' + kendo.attr("uid") + '="' + model.uid + '"><div class="k-edit-form-container">',
                 column,
                 fields = [],
                 idx,
@@ -1447,18 +1452,18 @@
             that._editContainer = row;
 
             that.editable = row
-            .addClass("k-grid-edit-row")
-            .kendoEditable({
-                fields: fields,
-                model: model,
-                clearContainer: false
-            }).data("kendoEditable");
+                .addClass("k-grid-edit-row")
+                .kendoEditable({
+                    fields: fields,
+                    model: model,
+                    clearContainer: false
+                }).data("kendoEditable");
 
             that.trigger(EDIT, { container: row, model: model });
         },
 
         /**
-         * Switch the current edited row into dislay mode and revert changes made to the data
+         * Switch the current edited row into display mode and revert changes made to the data
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
@@ -1467,8 +1472,7 @@
         cancelRow: function() {
             var that = this,
                 container = that._editContainer,
-                newRow,
-                model
+                model;
 
             if (container) {
                 model = that._modelForContainer(container);
@@ -1479,7 +1483,7 @@
                     that._displayRow(container);
                 }
 
-                that._distroyEditable();
+                that._destroyEditable();
             }
         },
 
@@ -1504,7 +1508,7 @@
                     that._displayRow(container);
                 }
 
-                that._distroyEditable();
+                that._destroyEditable();
                 that.dataSource.sync();
             }
         },
@@ -2961,7 +2965,7 @@
                 currentIndex = that.items().index(current.parent());
             }
 
-            that._distroyEditable();
+            that._destroyEditable();
 
             that._progress(false);
 
