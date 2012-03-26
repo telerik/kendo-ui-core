@@ -10,4 +10,7 @@ tests.push( {
 },{
     page: "mvvm/changing.html",
     title: "mvvm change tracking"
+}, {
+    page: "mvvm/lint.html",
+    title:"mvvm lint"
 });

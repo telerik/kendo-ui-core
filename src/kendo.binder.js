@@ -8,6 +8,8 @@
         Class = kendo.Class,
         GET = "get",
         innerText,
+        VALUE = "value",
+        CHECKED = "checked",
         CHANGE = "change";
 
     (function() {
@@ -41,7 +43,7 @@
                     that.change(e);
                 };
 
-                that.source.bind("change", that._change);
+                that.source.bind(CHANGE, that._change);
             }
         },
 
@@ -52,7 +54,7 @@
                 that = this;
 
             if (that.path === "this") {
-                that.trigger("change", e);
+                that.trigger(CHANGE, e);
             } else {
                 for (dependency in that.dependencies) {
                     idx = dependency.indexOf(e.field);
@@ -61,7 +63,7 @@
                        ch = dependency.charAt(e.field.length);
 
                        if (!ch || ch === "." || ch === "[") {
-                            that.trigger("change", e);
+                            that.trigger(CHANGE, e);
                             break;
                        }
                     }
@@ -108,7 +110,7 @@
 
         destroy: function() {
             if (this.observable) {
-                this.source.unbind("change", this._change);
+                this.source.unbind(CHANGE, this._change);
             }
         }
     });
@@ -154,6 +156,18 @@
             this.element = element;
             this.bindings = bindings;
             this.options = options;
+        },
+
+        bind: function(binding, attribute) {
+            var that = this;
+
+            binding = attribute ? binding[attribute] : binding;
+
+            binding.bind(CHANGE, function(e) {
+                that.refresh(attribute || e);
+            });
+
+            that.refresh(attribute);
         },
 
         destroy: function() {
@@ -219,13 +233,13 @@
 
     binders.text = Binder.extend({
         refresh: function() {
-            this.element[innerText] = this.bindings["text"].get();
+            this.element[innerText] = this.bindings.text.get();
         }
     });
 
     binders.visible = Binder.extend({
         refresh: function() {
-            if (this.bindings["visible"].get()) {
+            if (this.bindings.visible.get()) {
                 this.element.style.display = "";
             } else {
                 this.element.style.display = "none";
@@ -235,7 +249,7 @@
 
     binders.invisible = Binder.extend({
         refresh: function() {
-            if (!this.bindings["invisible"].get()) {
+            if (!this.bindings.invisible.get()) {
                 this.element.style.display = "";
             } else {
                 this.element.style.display = "none";
@@ -245,7 +259,7 @@
 
     binders.html = Binder.extend({
         refresh: function() {
-            this.element.innerHTML = this.bindings["html"].get();
+            this.element.innerHTML = this.bindings.html.get();
         }
     });
 
@@ -254,17 +268,17 @@
             Binder.fn.init.call(this, element, bindings, options);
 
             this._change = $.proxy(this.change, this);
-            this.eventName = options.valueUpdate || "change";
+            this.eventName = options.valueUpdate ||CHANGE;
 
             $(this.element).bind(this.eventName, this._change);
         },
 
         change: function() {
-            this.bindings["value"].set(this.element.value);
+            this.bindings[VALUE].set(this.element.value);
         },
 
         refresh: function() {
-            this.element.value = this.bindings["value"].get();
+            this.element.value = this.bindings[VALUE].get();
         },
 
         destroy: function() {
@@ -275,8 +289,6 @@
     binders.source = Binder.extend({
         init: function(element, bindings, options) {
             Binder.fn.init.call(this, element, bindings, options);
-
-            var source = bindings["source"].get();
         },
 
         refresh: function(e) {
@@ -341,7 +353,7 @@
         destroy: function() {
             var source = this.bindings.source.get();
 
-            source.unbind("change", this._change);
+            source.unbind(CHANGE, this._change);
         },
 
         add: function(index, items) {
@@ -377,10 +389,11 @@
         },
 
         render: function() {
-            var source = this.bindings["source"].get();
-            var idx, length;
-            var element = this.container();
-            var template = this.template();
+            var source = this.bindings.source.get(),
+                 idx,
+                 length,
+                 element = this.container(),
+                 template = this.template();
 
             if (!(source instanceof ObservableArray) && toString.call(source) !== "[object Array]") {
                 source = new ObservableArray([source]);
@@ -414,9 +427,9 @@
                 var value = this.value();
 
                 if (element.type == "radio") {
-                    this.bindings["checked"].set(value);
+                    this.bindings[CHECKED].set(value);
                 } else if (element.type == "checkbox") {
-                    var source = this.bindings["checked"].get();
+                    var source = this.bindings[CHECKED].get();
                     var index;
 
                     if (source instanceof ObservableArray) {
@@ -429,13 +442,13 @@
                             }
                         }
                     } else {
-                        this.bindings["checked"].set(value);
+                        this.bindings[CHECKED].set(value);
                     }
                 }
             },
 
             refresh: function() {
-                var value = this.bindings["checked"].get();
+                var value = this.bindings[CHECKED].get();
                 var element = this.element;
 
                 if (element.type == "checkbox") {
@@ -454,8 +467,8 @@
             },
 
             value: function() {
-                var element = this.element;
-                var value = element.value;
+                var element = this.element,
+                    value = element.value;
 
                 if (element.type == "checkbox") {
                     if (value == "on" || value == "off") {
@@ -466,7 +479,7 @@
                 return value;
             },
             destroy: function() {
-                $(this.element).unbind("change", this._change);
+                $(this.element).unbind(CHANGE, this._change);
             }
         })
     };
@@ -519,20 +532,20 @@
                     }
                 }
 
-                value = this.bindings["value"].get();
+                value = this.bindings[VALUE].get();
                 if (value instanceof ObservableArray) {
                     value.splice.apply(value, [0, value.length].concat(values));
                 } else if (value instanceof ObservableObject || !field) {
-                    this.bindings["value"].set(values[0]);
+                    this.bindings[VALUE].set(values[0]);
                 } else {
-                    this.bindings["value"].set(values[0].get(field));
+                    this.bindings[VALUE].set(values[0].get(field));
                 }
             },
             refresh: function() {
                 var optionIndex,
                     element = this.element,
                     options = element.options,
-                    value = this.bindings["value"].get(),
+                    value = this.bindings[VALUE].get(),
                     values = value,
                     field = this.options.valueField || this.options.textField,
                     optionValue;
@@ -561,7 +574,7 @@
                 }
             },
             destroy: function() {
-                $(this.element).unbind("change", this._change);
+                $(this.element).unbind(CHANGE, this._change);
             }
         })
     };
@@ -596,14 +609,14 @@
 
                 this.widget = widget;
                 this._change = $.proxy(this.change, this);
-                this.widget.bind("change", this._change);
+                this.widget.bind(CHANGE, this._change);
             },
             change: function() {
-                this.bindings["checked"].set(this.value());
+                this.bindings[CHECKED].set(this.value());
             },
 
             refresh: function() {
-                this.widget.check(this.bindings["checked"].get() === true);
+                this.widget.check(this.bindings[CHECKED].get() === true);
             },
 
             value: function() {
@@ -618,7 +631,7 @@
             },
 
             destroy: function() {
-                this.widget.unbind("change", this._change);
+                this.widget.unbind(CHANGE, this._change);
             }
         }),
 
@@ -753,7 +766,7 @@
 
                 this.widget = widget;
                 this._change = $.proxy(this.change, this);
-                this.widget.bind("change", this._change);
+                this.widget.bind(CHANGE, this._change);
 
                 var value = this.bindings.value.get();
                 this._valueIsObservableObject = value == null || value instanceof ObservableObject;
@@ -808,7 +821,7 @@
             },
 
             destroy: function() {
-                this.widget.unbind("change", this._change);
+                this.widget.unbind(CHANGE, this._change);
             }
         })
     };
@@ -834,6 +847,7 @@
         applyBinding: function(name, bindings, specificBinders) {
             var binder = specificBinders[name] || binders[name],
                 toDestroy = this.toDestroy,
+                attribute,
                 binding = bindings[name];
 
             if (binder) {
@@ -842,19 +856,11 @@
                 toDestroy.push(binder);
 
                 if (binding instanceof Binding) {
-                    binding.bind("change", function(e){
-                        binder.refresh(e);
-                    });
-                    binder.refresh();
+                    binder.bind(binding);
                     toDestroy.push(binding);
                 } else {
-                    for (var attribute in binding) {
-                        (function(attribute) {
-                            binding[attribute].bind("change", function() {
-                                binder.refresh(attribute);
-                            });
-                        })(attribute);
-                        binder.refresh(attribute);
+                    for (attribute in binding) {
+                        binder.bind(binding, attribute);
                         toDestroy.push(binding[attribute]);
                     }
                 }
@@ -867,7 +873,6 @@
             var idx,
                 length,
                 toDestroy = this.toDestroy;
-
 
             for (idx = 0, length = toDestroy.length; idx < length; idx++) {
                 toDestroy[idx].destroy();
@@ -883,7 +888,7 @@
                 hasSource = false;
 
             for (binding in bindings) {
-                if (binding == "value") {
+                if (binding == VALUE) {
                     hasValue = true;
                 } else if (binding == "source") {
                     hasSource = true;
@@ -897,13 +902,14 @@
             }
 
             if (hasValue) {
-                this.applyBinding("value", bindings);
+                this.applyBinding(VALUE, bindings);
             }
         },
 
         applyBinding: function(name, bindings) {
             var binder = binders.widget[name],
                 toDestroy = this.toDestroy,
+                attribute,
                 binding = bindings[name];
 
             if (binder) {
@@ -913,24 +919,13 @@
 
 
                 if (binding instanceof Binding) {
-                    binding.bind("change", function(e) {
-                        binder.refresh(e);
-                    });
-
-                    binder.refresh();
-
+                    binder.bind(binding);
                     toDestroy.push(binding);
                 } else {
-                     for (var attribute in binding) {
-                        (function(attribute) {
-                            binding[attribute].bind("change", function() {
-                                binder.refresh(attribute);
-                            });
-                        })(attribute);
-                        binder.refresh(attribute);
+                    for (attribute in binding) {
+                        binder.bind(binding, attribute);
                         toDestroy.push(binding[attribute]);
                     }
-
                 }
             } else {
                 throw new Error("The " + name + " binding is not supported by the " + this.target.options.name + " widget");
@@ -1029,7 +1024,7 @@
             bind = parseBindings(bind.replace(whiteSpaceRegExp, ""));
 
             if (!target) {
-                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "", valueUpdate: "change" });
+                options = kendo.parseOptions(element, { textField: "", valueField: "", template: "", valueUpdate: CHANGE});
                 target = new BindingTarget(element, options);
             }
 
