@@ -14,6 +14,9 @@ tests.push(
     {
         page: "window/mvvm.html",
         title: "window mvvm"
+    },
+    {
+        page: "window/style.html",
+        title: "window style"
     }
-
 );
