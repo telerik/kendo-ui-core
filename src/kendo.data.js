@@ -213,8 +213,7 @@
         },
 
         shouldSerialize: function(field) {
-            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== FUNCTION
-            && field !== "uid";
+            return this.hasOwnProperty(field) && field !== "_events" && typeof this[field] !== FUNCTION && field !== "uid";
         },
 
         toJSON: function() {
@@ -354,7 +353,7 @@
             if (typeof value === STRING) {
                 var date = dateRegExp.exec(value);
                 if (date) {
-                    return new Date(parseInt(date[1]));
+                    return new Date(parseInt(date[1], 10));
                 }
             }
             return kendo.parseDate(value);
@@ -382,7 +381,7 @@
         "date": new Date(),
         "boolean": false,
         "default": ""
-    }
+    };
 
     var Model = ObservableObject.extend({
         init: function(data) {
@@ -406,10 +405,7 @@
         },
 
         shouldSerialize: function(field) {
-            return ObservableObject.fn.shouldSerialize.call(this, field)
-            && field !== "uid"
-            && !(this.idField !== "id" && field === "id")
-            && field !== "dirty" && field !== "_accessors";
+            return ObservableObject.fn.shouldSerialize.call(this, field) && field !== "uid" && !(this.idField !== "id" && field === "id") && field !== "dirty" && field !== "_accessors";
         },
 
         _parse: function(field, value) {
@@ -506,7 +502,7 @@
         }
 
         return model;
-    }
+    };
 
     var Comparer = {
         selector: function(field) {
@@ -540,15 +536,15 @@
         combine: function(comparers) {
             return function(a, b) {
                 var result = comparers[0](a, b),
-                idx,
-                length;
+                    idx,
+                    length;
 
                 for (idx = 1, length = comparers.length; idx < length; idx ++) {
                     result = result || comparers[idx](a, b);
                 }
 
                 return result;
-            }
+            };
         }
     };
 
@@ -599,7 +595,7 @@
                  }
 
                  return result;
-             }
+             };
         }
     };
 
@@ -622,7 +618,7 @@
         function operator(op, a, b, ignore) {
             var date;
 
-            if (b != undefined) {
+            if (b != null) {
                 if (typeof b === STRING) {
                     b = quote(b);
                     date = dateRegExp.exec(b);
@@ -705,7 +701,7 @@
                     b = quote(b);
                 }
 
-                return a + ".indexOf('" + b + "') >= 0"
+                return a + ".indexOf('" + b + "') >= 0";
             }
         };
     })();
@@ -718,16 +714,16 @@
 
     Query.filterExpr = function(expression) {
         var expressions = [],
-        logic = { and: " && ", or: " || " },
-        idx,
-        length,
-        filter,
-        expr,
-        fieldFunctions = [],
-        operatorFunctions = [],
-        field,
-        operator,
-        filters = expression.filters;
+            logic = { and: " && ", or: " || " },
+            idx,
+            length,
+            filter,
+            expr,
+            fieldFunctions = [],
+            operatorFunctions = [],
+            field,
+            operator,
+            filters = expression.filters;
 
         for (idx = 0, length = filters.length; idx < length; idx++) {
             filter = filters[idx];
@@ -837,7 +833,7 @@
                 expression = {
                     logic: "and",
                     filters: isArray(expression) ? expression : [expression]
-                }
+                };
             }
 
             normalizeOperator(expression);
@@ -847,7 +843,7 @@
     }
 
     function normalizeAggregate(expressions) {
-        return expressions = isArray(expressions) ? expressions : [expressions];
+        return isArray(expressions) ? expressions : [expressions];
     }
 
     function normalizeGroup(field, dir) {
@@ -959,7 +955,7 @@
                         items: descriptors.length > 1 ? new Query(group.items).group(descriptors.slice(1), data.toArray()).toArray() : group.items,
                         hasSubgroups: descriptors.length > 1,
                         aggregates: data.aggregate(descriptor.aggregates)
-                    }
+                    };
                 });
             }
             return result;
@@ -1033,7 +1029,7 @@
             }
             return result;
         }
-    }
+    };
 
     function groupValueComparer(a, b) {
         if (a && a.getTime && b && b.getTime) {
@@ -1061,7 +1057,7 @@
 
     var functions = {
         sum: function(accumulator, item, accessor) {
-            return accumulator = (accumulator || 0) + accessor.get(item);
+            return (accumulator || 0) + accessor.get(item);
         },
         count: function(accumulator, item, accessor) {
             return (accumulator || 0) + 1;
@@ -1074,16 +1070,20 @@
             return accumulator;
         },
         max: function(accumulator, item, accessor) {
-            var accumulator =  (accumulator || 0),
-            value = accessor.get(item);
+            var value = accessor.get(item);
+
+            accumulator = accumulator || 0;
+
             if(accumulator < value) {
                 accumulator = value;
             }
             return accumulator;
         },
         min: function(accumulator, item, accessor) {
-            var value = accessor.get(item),
-            accumulator = (accumulator || value)
+            var value = accessor.get(item);
+
+            accumulator = (accumulator || value);
+
             if(accumulator > value) {
                 accumulator = value;
             }
@@ -1102,14 +1102,15 @@
     }
 
     function process(data, options) {
+        options = options || {};
+
         var query = new Query(data),
-        options = options || {},
-        group = options.group,
-        sort = normalizeGroup(group || []).concat(normalizeSort(options.sort || [])),
-        total,
-        filter = options.filter,
-        skip = options.skip,
-        take = options.take;
+            group = options.group,
+            sort = normalizeGroup(group || []).concat(normalizeSort(options.sort || [])),
+            total,
+            filter = options.filter,
+            skip = options.skip,
+            take = options.take;
 
         if (filter) {
             query = query.filter(filter);
@@ -1139,14 +1140,16 @@
     }
 
     function calculateAggregates(data, options) {
+        options = options || {};
+
         var query = new Query(data),
-        options = options || {},
-        aggregates = options.aggregate,
-        filter = options.filter;
+            aggregates = options.aggregate,
+            filter = options.filter;
 
         if(filter) {
             query = query.filter(filter);
         }
+
         return query.aggregate(aggregates);
     }
 
@@ -1184,7 +1187,7 @@
             that.cache = options.cache? Cache.create(options.cache) : {
                 find: noop,
                 add: noop
-            }
+            };
 
             parameterMap = options.parameterMap;
 
@@ -1285,7 +1288,7 @@
         }
 
         return store[options]();
-    }
+    };
 
     function Cache() {
         this._store = {};
@@ -1306,7 +1309,7 @@
         remove: function(key) {
             delete this._store[stringify(key)];
         }
-    }
+    };
 
     var DataReader = Class.extend({
         init: function(schema) {
@@ -1355,7 +1358,7 @@
                     }
 
                     return data;
-                }
+                };
             }
         },
         parse: identity,
@@ -1913,7 +1916,7 @@
                 }
             }
 
-            if (remote || (that._data === undefined || that._data.length == 0)) {
+            if (remote || (that._data === undefined || that._data.length === 0)) {
                 that.read(options);
             } else {
                 that.trigger(REQUESTSTART);
@@ -2275,7 +2278,7 @@
         dataSource.data = data;
 
         return dataSource instanceof DataSource ? dataSource : new DataSource(dataSource);
-    }
+    };
 
     function inferSelect(select, fields) {
         var options = $(select)[0].children,
