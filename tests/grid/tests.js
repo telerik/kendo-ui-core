@@ -70,5 +70,9 @@ tests.push(
     {
         page: "grid/mvvm.html",
         title: "grid mvvm"
+    },
+    {
+        page: "grid/lint.html",
+        title: "grid lint"
     }
 );
