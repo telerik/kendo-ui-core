@@ -89,6 +89,6 @@ tests.push(
     },
     {
         page: "chart/lint.html",
-        title: "jsLint"
+        title: "lint"
     }
 );
