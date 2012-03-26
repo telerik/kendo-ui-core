@@ -278,7 +278,7 @@
        _destroyEditable: function() {
            var that = this;
            if (that.editable) {
-               that.editable.distroy();
+               that.editable.destroy();
                delete that.editable;
            }
        },
