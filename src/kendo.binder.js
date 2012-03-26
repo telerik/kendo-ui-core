@@ -13,7 +13,7 @@
     (function() {
         var a = document.createElement("a");
         if (a.innerText !== undefined) {
-            innerText = "innerText"
+            innerText = "innerText";
         } else if (a.textContent !== undefined) {
             innerText = "textContent";
         }
@@ -325,9 +325,9 @@
                         template = "<option>#:data#</option>";
                     }
                 } else if (nodeName == "tbody") {
-                    template = "<tr><td>#:data#</td></tr>"
+                    template = "<tr><td>#:data#</td></tr>";
                 } else if (nodeName == "ul" || nodeName == "ol") {
-                    template = "<li>#:data#</li>"
+                    template = "<li>#:data#</li>";
                 } else {
                     template = "#:data#";
                 }
@@ -469,7 +469,7 @@
                 $(this.element).unbind("change", this._change);
             }
         })
-    }
+    };
 
     binders.select = {
         value: Binder.extend({
@@ -485,7 +485,9 @@
                     element = this.element,
                     source,
                     field = this.options.valueField || this.options.textField,
-                    option, value,
+                    option,
+                    valueIndex,
+                    value,
                     idx,
                     length;
 
@@ -507,7 +509,7 @@
 
                 if (field) {
                     source = this.bindings.source.get();
-                    for (var valueIndex = 0; valueIndex < values.length; valueIndex++) {
+                    for (valueIndex = 0; valueIndex < values.length; valueIndex++) {
                         for (idx = 0, length = source.length; idx < length; idx++) {
                             if (source[idx].get(field) == values[valueIndex]) {
                                 values[valueIndex] = source[idx];
@@ -517,7 +519,7 @@
                     }
                 }
 
-                var value = this.bindings["value"].get();
+                value = this.bindings["value"].get();
                 if (value instanceof ObservableArray) {
                     value.splice.apply(value, [0, value.length].concat(values));
                 } else if (value instanceof ObservableObject || !field) {
@@ -562,7 +564,7 @@
                 $(this.element).unbind("change", this._change);
             }
         })
-    }
+    };
 
     binders.widget = {
         events : Binder.extend({
@@ -853,7 +855,7 @@
                             });
                         })(attribute);
                         binder.refresh(attribute);
-                        toDestroy.push(binding[attribute])
+                        toDestroy.push(binding[attribute]);
                     }
                 }
             } else if (name !== "template") {
@@ -926,7 +928,7 @@
                             });
                         })(attribute);
                         binder.refresh(attribute);
-                        toDestroy.push(binding[attribute])
+                        toDestroy.push(binding[attribute]);
                     }
 
                 }
@@ -937,7 +939,7 @@
     });
 
     function flattenGroups(data) {
-        var idx, lenght, result = [];
+        var idx, length, result = [];
 
         for (idx = 0, length = data.length; idx < length; idx++) {
             if (data[idx].hasSubgroups) {
@@ -957,7 +959,7 @@
         }
     }
 
-    var keyValueRegExp = /\w+:({([^}]*)}|[^,}]+)/g;
+    var keyValueRegExp = /\w+:(\{([^}]*)\}|[^,}]+)/g;
     var whiteSpaceRegExp = /\s/g;
 
     function parseBindings(bind) {
