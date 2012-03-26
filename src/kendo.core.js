@@ -38,7 +38,7 @@
             fn;
 
         base.prototype = that.prototype;
-        fn = subclass.fn = subclass.prototype = new base;
+        fn = subclass.fn = subclass.prototype = new base();
 
         for (member in proto) {
             if (typeof proto[member] === OBJECT && !(proto[member] instanceof Array) && proto[member] !== null) {
@@ -86,7 +86,7 @@
                         handler = function() {
                             that.unbind(eventName, handler);
                             original.apply(that, arguments);
-                        }
+                        };
                     }
                     events = that._events[eventName] = that._events[eventName] || [];
                     events.push(handler);
@@ -113,11 +113,11 @@
 
                 e.preventDefault = function () {
                     isDefaultPrevented = true;
-                }
+                };
 
                 e.isDefaultPrevented = function() {
                     return isDefaultPrevented;
-                }
+                };
 
                 //Do not cache the length of the events array as removing events attached through one will fail
                 for (idx = 0; idx < events.length; idx++) {
@@ -185,10 +185,9 @@
          if (stringPart) {
              return "'" +
                  part.split("'").join("\\'")
-                 .replace(/\n/g, "\\n")
-                 .replace(/\r/g, "\\r")
-                 .replace(/\t/g, "\\t")
-                 + "'";
+                     .replace(/\n/g, "\\n")
+                     .replace(/\r/g, "\\r")
+                     .replace(/\t/g, "\\t") + "'";
          } else {
              var first = part.charAt(0),
                  rest = part.substring(1);
@@ -204,8 +203,8 @@
      }
 
     var argumentNameRegExp = /^\w+/,
-        encodeRegExp = /\${([^}]*)}/g,
-        escapedCurlyRegExp = /\\}/g,
+        encodeRegExp = /\$\{([^}]*)\}/g,
+        escapedCurlyRegExp = /\\\}/g,
         curlyRegExp = /__CURLY__/g,
         escapedSharpRegExp = /\\#/g,
         sharpRegExp = /__SHARP__/g;
@@ -263,7 +262,7 @@
                     //looks like jQuery.template
                     return function(d) {
                         return template($, { data: d }).join("");
-                    }
+                    };
                 }
                 return template;
             }
@@ -314,8 +313,7 @@
         },
         rep,
         formatters,
-        toString = {}.toString,
-        hasOwnProperty = {}.hasOwnProperty;
+        toString = {}.toString;
 
     if (typeof Date.prototype.toJSON !== FUNCTION) {
 
@@ -401,7 +399,7 @@
                 }
             } else {
                 for (k in value) {
-                    if (hasOwnProperty.call(value, k)) {
+                    if (Object.hasOwnProperty.call(value, k)) {
                         v = str(k, value);
                         if (v) {
                             partial.push(quote(k) + (gap ? ": " : ":") + v);
@@ -445,7 +443,7 @@
 
 // Date and Number formatting
 (function() {
-    var formatRegExp = /{(\d+)(:[^\}]+)?}/g,
+    var formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
         dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
         literalRegExp = /["'].*?["']/g,
@@ -889,7 +887,7 @@
             } else if (match === "yyyy") {
                 result = date.getFullYear();
             } else if (match === "h" ) {
-                result = date.getHours() % 12 || 12
+                result = date.getHours() % 12 || 12;
             } else if (match === "hh") {
                 result = pad(date.getHours() % 12 || 12);
             } else if (match === "H") {
@@ -911,7 +909,7 @@
             } else if (match === "fff") {
                 result = date.getMilliseconds();
             } else if (match === "tt") {
-                result = date.getHours() < 12 ? calendar.AM[0] : calendar.PM[0]
+                result = date.getHours() < 12 ? calendar.AM[0] : calendar.PM[0];
             }
 
             return result !== undefined ? result : match.slice(1, match.length - 1);
@@ -1218,7 +1216,7 @@
         return number;
     }
 
-    function toString(value, fmt) {
+    var toString = function(value, fmt) {
         if (fmt) {
             if (value instanceof Date) {
                 return formatDate(value, fmt);
@@ -1228,7 +1226,7 @@
         }
 
         return value !== undefined ? value : "";
-    }
+    };
 
     if (globalize) {
         toString = proxy(globalize.format, globalize);
@@ -1238,7 +1236,7 @@
         var values = arguments;
 
         return fmt.replace(formatRegExp, function(match, index, placeholderFormat) {
-            var value = values[parseInt(index) + 1];
+            var value = values[parseInt(index, 10) + 1];
 
             return toString(value, placeholderFormat ? placeholderFormat.substring(1) : "");
         });
@@ -1251,7 +1249,7 @@
 (function() {
 
     var nonBreakingSpaceRegExp = /\u00A0/g,
-        exponentRegExp = /[eE][-+]?[0-9]+/,
+        exponentRegExp = /[eE][\-+]?[0-9]+/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
 
     function outOfRange(value, start, end) {
@@ -1566,13 +1564,13 @@
                              paddingBottom: bottom
                          }));
         } else {
-            var wrap = element.parent(".k-animation-container");
+            var wrapper = element.parent(".k-animation-container");
 
-            if (wrap.is(":hidden")) {
-                wrap.show();
+            if (wrapper.is(":hidden")) {
+                wrapper.show();
             }
 
-            wrap.css({
+            wrapper.css({
                     width: element.outerWidth(),
                     height: element.outerHeight()
                 });
@@ -1781,7 +1779,7 @@
          */
         support.placeholder = "placeholder" in document.createElement("input");
         support.stableSort = (function() {
-            var sorted = [0,1,2,3,4,5,6,7,8,9,10,11,12].sort(function() { return 0 } );
+            var sorted = [0,1,2,3,4,5,6,7,8,9,10,11,12].sort(function() { return 0; } );
             return sorted[0] === 0 && sorted[1] === 1 && sorted[2] === 2 && sorted[3] === 3 && sorted[4] === 4 &&
                 sorted[5] === 5 && sorted[6] === 6 && sorted[7] === 7 && sorted[8] === 8 &&
                 sorted[9] === 9 && sorted[10] === 10 && sorted[11] === 11 && sorted[12] === 12;
@@ -1797,16 +1795,18 @@
      */
 
     function size(obj) {
-        var size = 0, key;
+        var result = 0, key;
         for (key in obj) {
-            obj.hasOwnProperty(key) && size++;
+            if (obj.hasOwnProperty(key)) {
+                result++;
+            }
         }
 
-        return size;
+        return result;
     }
 
     function isNodeEmpty(element) {
-        return $.trim($(element).contents().filter(function () { return this.nodeType != 8 }).html()) === "";
+        return $.trim($(element).contents().filter(function () { return this.nodeType != 8; }).html()) === "";
     }
 
     function getOffset(element, type) {
@@ -2044,8 +2044,8 @@
 
         each(["swipe", "swipeLeft", "swipeRight", "swipeUp", "swipeDown", "doubleTap", "tap"], function(m, value) {
             $.fn[value] = function(callback) {
-                return this.bind(value, callback)
-            }
+                return this.bind(value, callback);
+            };
         });
     }
 
@@ -2074,7 +2074,7 @@
             if (member !== "") {
                 index = member.indexOf("[");
 
-                if (index != 0) {
+                if (index !== 0) {
                     if (index == -1) {
                         member = "." + member;
                     } else {
@@ -2309,6 +2309,7 @@
 
     function parseOptions(element, options) {
         var result = {},
+            option,
             value;
 
         for (option in options) {
@@ -2381,13 +2382,13 @@
         }
 
         return result;
-    }
+    };
 
     kendo.init = function(element, namespace) {
         $(element).find("[data-" + kendo.ns + "role]").andSelf().each(function(){
             kendo.initWidget(this, {}, namespace);
         });
-    }
+    };
 
     kendo.parseOptions = parseOptions;
 
@@ -2422,13 +2423,12 @@
             register.roles[name.toLowerCase()] = widget;
 
             name = "kendo" + prefix + name;
-            // expose a jQuery plugin
             $.fn[name] = function(options) {
                 $(this).each(function() {
                     new widget(this, options);
                 });
                 return this;
-            }
+            };
         }
     });
 
@@ -2492,5 +2492,5 @@
         } else {
             return false;
         }
-    }
+    };
 })(jQuery);
