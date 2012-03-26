@@ -16,7 +16,7 @@ tests.push(
         title: "window mvvm"
     },
     {
-        page: "window/style.html",
-        title: "window style"
+        page: "window/lint.html",
+        title: "window lint"
     }
 );
