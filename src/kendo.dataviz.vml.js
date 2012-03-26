@@ -104,16 +104,16 @@
 
         renderElement: function(element) {
             var container = doc.createElement("div"),
-                element;
+                domElement;
 
             container.style.display = "none";
             doc.body.appendChild(container);
             container.innerHTML = element.render();
 
-            element = container.firstChild;
+            domElement = container.firstChild;
             doc.body.removeChild(container);
 
-            return element;
+            return domElement;
         },
 
         createText: function(content, options) {
@@ -351,12 +351,12 @@
 
         renderCoordsize: function() {
             var scale = this.options.align === false ?  10000 : 1;
-            return "coordsize='" + scale + " " + scale + "'"
+            return "coordsize='" + scale + " " + scale + "'";
         },
 
         renderSize: function() {
             var scale = this.options.align === false ?  100 : 1;
-            return "width:" + scale + "px; height:" + scale + "px;"
+            return "width:" + scale + "px; height:" + scale + "px;";
         },
 
         render: function() {
@@ -479,38 +479,41 @@
                 cy = round(config.c.y),
                 startAngle = config.startAngle,
                 endAngle = config.angle + startAngle,
-                endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.22 : endAngle,
                 // outer bounding box
-                obb = {
+                outerBBox = {
                     l: cx - r,
                     t: cy - r,
                     r: cx + r,
                     b: cy + r
                 },
                 // inner bounding box
-                ibb = {
+                innerBBox = {
                     l: cx - ir,
                     t: cy - ir,
                     r: cx + ir,
                     b: cy + ir
                 },
                 // outer/inner start/end points
-                osp = roundPointCoordinates(config.point(startAngle)),
-                oep = roundPointCoordinates(config.point(endAngle)),
-                isp = roundPointCoordinates(config.point(startAngle, true)),
-                iep = roundPointCoordinates(config.point(endAngle, true));
+                outerStartPoint = roundPointCoordinates(config.point(startAngle)),
+                innerStartPoint = roundPointCoordinates(config.point(startAngle, true)),
+                innerEndPoint,
+                outerEndPoint;
 
             function roundPointCoordinates(point) {
                 return new Point2D(round(point.x), round(point.y));
             }
 
+            endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.22 : endAngle;
+            outerEndPoint = roundPointCoordinates(config.point(endAngle));
+            innerEndPoint = roundPointCoordinates(config.point(endAngle, true));
+
             return ring.pathTemplate({
-                obb: obb,
-                ibb: ibb,
-                osp: osp,
-                isp: isp,
-                oep: oep,
-                iep: iep,
+                obb: outerBBox,
+                ibb: innerBBox,
+                osp: outerStartPoint,
+                isp: innerStartPoint,
+                oep: outerEndPoint,
+                iep: innerEndPoint,
                 cx: cx,
                 cy: cy
             });
