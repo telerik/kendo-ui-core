@@ -197,8 +197,8 @@
                 ok(teardownWasCalled);
             });
 
-            asyncTest("callback is fired ~ duration seconds after animate", function() {
-                var oldTime;
+            asyncTest("callback is fired asynchronously after animate", function() {
+                var called = false;
 
                 kendo.fx.moo = {
                     setup: function(element, options) {
@@ -213,11 +213,13 @@
                         oldTime = +new Date();
                     },
                     complete: function() {
-                        var delta = +new Date() - oldTime;
-                        ok(delta >= 100 && delta <= 150);
+                        called = true;
+                        ok(true);
                         start();
                     }
                 });
+
+                ok(!called);
             });
 
             asyncTest("animating height from 0 to 100 results in 100px high element", function() {
