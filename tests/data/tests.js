@@ -9,7 +9,7 @@ tests.push(
     },
     {
         page: "data/datasource/read.html",
-        title: "datasource.read"
+        title: "datasource read"
     },
     {
         page: "data/datasource/initialization.html",
@@ -17,7 +17,7 @@ tests.push(
     },
     {
         page: "data/datasource/query.html",
-        title: "datasource.query"
+        title: "datasource query"
     },
     {
         page: "data/query-expr.html",
@@ -25,19 +25,23 @@ tests.push(
     },
     {
         page: "data/datasource/sync.html",
-        title: "datasource.sync"
+        title: "datasource sync"
     },
     {
         page: "data/datasource/range.html",
-        title: "datasource.range"
+        title: "datasource range"
     },
     {
         page: "data/datasource/observable-array.html",
-        title: "datasource.observableArray"
+        title: "datasource observableArray"
     },
     {
         page: "data/query.html",
-        title: "query"
+        title: "data query"
+    },
+    {
+        page: "data/lint.html",
+        title: "data lint"
     },
     {
         page: "data/remotetransport.html",

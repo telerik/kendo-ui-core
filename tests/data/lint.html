@@ -9,7 +9,6 @@
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.binder.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -21,8 +20,10 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
         <script>
-            qHint("../../src/kendo.binder.js", {
-                eqnull: true
+            qHint("../../src/kendo.data.js", {
+                eqnull: true,
+                loopfunc: true,
+                evil: true /* kendo.data.js is using new Function() which is considered the same as eval */
             });
         </script>
     </body>
