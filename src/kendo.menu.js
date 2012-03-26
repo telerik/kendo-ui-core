@@ -969,7 +969,8 @@
                 target = $(kendo.eventTarget(e)),
                 link = target.closest("." + LINK),
                 href = link.attr("href"),
-                element = target.closest(allItemsSelector);
+                element = target.closest(allItemsSelector),
+                isLink = (!!href && href.charAt(href.length - 1) != "#");
 
             if (element.hasClass(DISABLEDSTATE)) {
                 e.preventDefault();
@@ -995,7 +996,8 @@
                 return;
             }
 
-            e.preventDefault();
+            if (!isLink)
+                e.preventDefault();
 
             that.clicked = true;
             openHandle = element.children(".k-animation-container, .k-group").is(":visible") ? CLOSE : OPEN;
