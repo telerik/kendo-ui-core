@@ -302,6 +302,12 @@
 
                 viewModel.foo.pop();
             });
+
+            test("private fields are not included in JSON serialization", function() {
+                var viewModel = kendo.observable({ foo: [1] });
+
+                equal(kendo.stringify(viewModel.foo), "[1]");
+            });
         </script>
     </head>
 </html>

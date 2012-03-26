@@ -55,6 +55,10 @@
             that.wrapAll(array, that);
         },
 
+        toJSON: function() {
+            return slice.call(this);
+        },
+
         wrapAll: function(source, target) {
             var idx, length;
 
