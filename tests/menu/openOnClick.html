@@ -128,6 +128,7 @@
                         alt="image">WPF UI Controls</span></li>
             </ul>
         </li>
+        <li><a href="javascript:">ASP.NET MVC</a></li>
     </ul>
 
 <script type="text/javascript">
@@ -164,6 +165,17 @@
             menu._click(e);
 
             ok(isCalled);
+        });
+
+        test('click method on item with URL shouldn\'t call preventDefault method', function() {
+            var item = getRootItem(8);
+            var isCalled = false;
+
+            var e = { target: item, preventDefault: function () { isCalled = true; }, stopPropagation: function () {} };
+
+            menu._click(e);
+
+            ok(!isCalled);
         });
 
         test('hovering root item does not open it', function() {
