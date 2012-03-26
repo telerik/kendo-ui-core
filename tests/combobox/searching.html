@@ -19,7 +19,7 @@
         <h2 id="qunit-userAgent"></h2>
         <ol id="qunit-tests"></ol>
         <script>
-            QUnit.config.testTimeout = 300;
+            QUnit.config.testTimeout = 500;
             QUnit.config.reorder = false;
 
             var ComboBox = kendo.ui.ComboBox,
@@ -74,7 +74,7 @@
                 ok(combobox.popup.visible());
             });
 
-            asyncTest("open popup with all items if empty input", function() {
+            test("open popup with all items if empty input", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -85,12 +85,9 @@
                 combobox.text("b");
                 combobox.search("");
 
-                setTimeout(function() {
-                    combobox._state = "accept";
-                    combobox.open();
-                    equal(combobox.ul.find("li").length, data.length);
-                    start();
-                }, 100);
+                combobox._state = "accept";
+                combobox.open();
+                equal(combobox.ul.find("li").length, data.length);
             });
 
             test("open() does not rebind popup if server filtering", function() {
@@ -164,7 +161,7 @@
                 ok(true);
             });
 
-            asyncTest("search with no filter should open popup if any match", function() {
+            test("search with no filter should open popup if any match", 1, function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -174,15 +171,14 @@
 
                 combobox.popup.bind("open", function() {
                     ok(true);
-                    start();
                 });
 
                 combobox.text("f");
                 combobox.search("f");
             });
 
-            asyncTest("search with no filter should not open if no match", function() {
-                var opened = false, combobox = new ComboBox(input, {
+            test("search with no filter should not open if no match", 0, function() {
+                var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: data,
@@ -190,16 +186,11 @@
                 });
 
                 combobox.popup.bind("open", function() {
-                    opened = true;
+                    ok(false);
                 });
 
                 combobox.text("fooooo");
                 combobox.search("fooooo");
-
-                setTimeout(function() {
-                    ok(!opened);
-                    start();
-                }, 100);
             });
 
            test("search with startswith rebind items", function() {
@@ -210,10 +201,9 @@
                 equal(combobox.ul.children().length, 1);
             });
 
-            asyncTest("search with filter opens drop down if any items", function() {
+            test("search with filter opens drop down if any items", function() {
                 combobox.popup.bind("open", function() {
                     ok(true);
-                    start();
                 });
 
                 combobox.options.filter = "startswith";
@@ -221,56 +211,47 @@
                 combobox.search("f");
             });
 
-            asyncTest("rebound list should use correct dataItem to update text and value", function() {
+            test("rebound list should use correct dataItem to update text and value", function() {
                 combobox.options.filter = "startswith";
                 combobox.text("b");
                 combobox.search("b");
                 combobox._focus(combobox.ul.children().eq(1));
 
-                setTimeout(function() {
-                    equal(combobox.ul.children().length, 2);
-                    equal(combobox.value(), data[2].value);
-                    equal(combobox.text(), data[2].text);
-                    start();
-                },100);
+                equal(combobox.ul.children().length, 2);
+                equal(combobox.value(), data[2].value);
+                equal(combobox.text(), data[2].text);
             });
 
-            asyncTest("reopen ul after filter should show all data", function() {
+            test("reopen ul after filter should show all data", function() {
                 combobox.options.filter = "startswith";
                 combobox.text("b");
                 combobox.search("b");
                 combobox._focus(combobox.ul.children().eq(1));
                 combobox._state = "accept";
 
-                setTimeout(function() {
-                    combobox.open();
+                combobox.open();
 
-                    equal(combobox.ul.children().length, data.length);
-                    ok(combobox._current.hasClass("k-state-selected"));
-                    start();
-                },100);
+                equal(combobox.ul.children().length, data.length);
+                ok(combobox._current.hasClass("k-state-selected"));
             });
 
-            asyncTest("rebound ul should has item selected", function() {
+            test("rebound ul should has item selected", function() {
                 combobox.options.filter = "startswith";
                 combobox.open();
                 combobox.text("b");
                 combobox.search("b");
                 combobox.ul.children().eq(1).trigger(CLICK);
 
-                setTimeout(function() {
-                    combobox.open();
+                combobox.open();
 
-                    equal(combobox.ul.children().length, data.length);
-                    start();
-                },100);
+                equal(combobox.ul.children().length, data.length);
             });
 
-            asyncTest("typing should trigger search", function() {
+            test("typing should trigger search", 1, function() {
                 combobox._search = function() {
                     ok(true);
-                    start();
                 }
+
                 combobox.input.val("f").trigger({type: "keydown", keyCode: "f".charCodeAt(0)});
             });
 
@@ -314,33 +295,23 @@
                 ok(!called);
             });
 
-            asyncTest("allow custom value", function() {
+            test("allow custom value", 1, function() {
                 combobox._selected = combobox._current = null;
 
                 combobox.input.val("ffff").blur();
 
-                setTimeout(function() {
-                    equal(combobox.value(), "ffff");
-                    start();
-                }, 150);
+                equal(combobox.value(), "ffff");
             });
 
-            asyncTest("do not search if text does not changed", function() {
-                var called = false;
-
-                combobox.search = function() { called = true; };
+            test("do not search if text does not changed", 0, function() {
+                combobox.search = function() { ok(false); };
 
                 combobox._prev = "test";
                 combobox.input.val("test");
                 combobox.input.pressKeyDown(kendo.keys.HOME);
-
-                setTimeout(function() {
-                    ok(!called);
-                    start();
-                }, 100);
             });
 
-            asyncTest("highlight first item on refresh", function() {
+            test("highlight first item on refresh", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -352,22 +323,16 @@
                 combobox.input.val("f");
                 combobox.search("f");
 
-                setTimeout(function() {
-                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 100);
+                ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
-            asyncTest("no filter and highlightFirst should always focus first item", function() {
+            test("no filter and highlightFirst should always focus first item", function() {
                 combobox.search("");
 
-                setTimeout(function() {
-                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 100);
+                ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
-            asyncTest("no filter and highlightFirst=false should not focus first item", function() {
+            test("no filter and highlightFirst=false should not focus first item", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -377,26 +342,20 @@
 
                 combobox.search("");
 
-                setTimeout(function() {
-                    ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 100);
+                ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
-            asyncTest("failed filter should not focus first item", function() {
+            test("failed filter should not focus first item", function() {
                 combobox.open();
                 combobox.current(combobox.ul.children("li").eq(1));
 
                 combobox.input.val("Ice");
                 combobox.search("Ice");
 
-                setTimeout(function() {
-                    ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 100);
+                ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
-            asyncTest("startswith filter and highlightFirst should always focus first item", function() {
+            test("startswith filter and highlightFirst should always focus first item", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -406,13 +365,10 @@
 
                 combobox.search("");
 
-                setTimeout(function() {
-                    ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 100);
+                ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
-            asyncTest("startswith filter and highlightFirst=false should not focus first item", function() {
+            test("startswith filter and highlightFirst=false should not focus first item", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
@@ -423,10 +379,7 @@
 
                 combobox.search("");
 
-                setTimeout(function() {
-                    ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
-                    start();
-                }, 100);
+                ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
             test("do not remove default filter expression", function() {

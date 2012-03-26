@@ -28,7 +28,7 @@
                 CLICK = kendo.support.touch ? "touchend" : "click",
                 input;
 
-            QUnit.config.testTimeout = 300;
+            QUnit.config.testTimeout = 500;
             QUnit.config.reorder = false;
 
             $.fn.press = function(key) {
@@ -60,33 +60,26 @@
                 }
             });
 
-            asyncTest("pressing alt + down should open popup", function() {
-                var blurWasCalled;
+            test("pressing alt + down should open popup", 1, function() {
                 combobox.popup.bind("open", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
             });
 
-            asyncTest("pressing alt + up should close popup", function() {
-                var blurWasCalled;
+            test("pressing alt + up should close popup", 1, function() {
                 combobox.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
                 combobox.open();
 
                 combobox.input.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
             });
 
-            asyncTest("click _arrow should input", function() {
-                var focusWasCalled;
-
+            test("click _arrow should input", 1, function() {
                 combobox.input.bind("focus", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox._arrow.trigger(CLICK);
@@ -123,40 +116,36 @@
                 ok(combobox.ul.children().eq(1).hasClass(SELECTED));
            });
 
-            asyncTest("click first li should update text and value", function() {
+            test("click first li should update text and value", function() {
                 var combobox = input.kendoComboBox({
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: data
                 }).data("kendoComboBox");
+
                 combobox.open();
                 combobox.ul.children().eq(1).trigger(CLICK);
 
-                setTimeout(function() {
-                    equal(combobox.text(), data[1].text);
-                    equal(combobox.value(), data[1].value);
-                    start();
-                }, 100);
+                equal(combobox.text(), data[1].text);
+                equal(combobox.value(), data[1].value);
             });
 
-            asyncTest("click li should remove readonly css", function() {
+            test("click li should remove readonly css", function() {
                 var combobox = input.kendoComboBox({
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: data,
                     placeholder: "select"
                 }).data("kendoComboBox");
+
                 combobox.open();
                 combobox.ul.children().eq(1).trigger(CLICK);
 
-                setTimeout(function() {
-                    equal(combobox.text(), data[1].text);
-                    ok(!combobox.input.hasClass("k-readonly"));
-                    start();
-                }, 100);
+                equal(combobox.text(), data[1].text);
+                ok(!combobox.input.hasClass("k-readonly"));
             });
 
-            asyncTest("value should be set to item.text if no item.value", function() {
+            test("value should be set to item.text if no item.value", function() {
                 var localData = [{text: "Foo", value: 1}, {text:"Bar"}],
                 combobox = input.kendoComboBox({
                     dataTextField: "text",
@@ -181,10 +170,9 @@
                 equal(combobox.value(), data[1].value);
             });
 
-            asyncTest("click li should close popup", function() {
+            test("click li should close popup", function() {
                 combobox.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.popup.open();
@@ -261,10 +249,9 @@
                 equal(combobox.value(), data[0].value);
             });
 
-            asyncTest("press enter should close popup when no change in selection", function() {
+            test("press enter should close popup when no change in selection", function() {
                 combobox.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.popup.open();
@@ -273,7 +260,7 @@
                 combobox.input.focus().press(keys.ENTER);
             });
 
-            asyncTest("press enter should call preventDefault when popup is visible", function() {
+            test("press enter should call preventDefault when popup is visible", function() {
                 combobox.popup.open();
 
                 combobox.select(0);
@@ -282,7 +269,6 @@
                     keyCode: keys.ENTER,
                     preventDefault: function() {
                         ok(true);
-                        start();
                     }
                 });
             });
@@ -297,10 +283,9 @@
                 ok(combobox.calls("text") > 0);
             });
 
-            asyncTest("press esc should close popup when no change in selection", function() {
+            test("press esc should close popup when no change in selection", function() {
                 combobox.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.popup.open();
@@ -309,8 +294,8 @@
                 combobox.input.focus().press(keys.ESC);
             });
 
-            asyncTest("pressing enter calls _blur", function() {
-                var blurWasCalled, combobox = new ComboBox(input, {
+            test("pressing enter calls _blur", function() {
+                var combobox = new ComboBox(input, {
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: data
@@ -320,7 +305,6 @@
 
                 combobox._blur = function(li) {
                     ok(true);
-                    start();
                 };
 
                 combobox._current = combobox.ul.children().first();
