@@ -140,52 +140,45 @@
             editor.options.tools = editorTools;
         },
 
-        createContentElement: function($textarea, stylesheets) {
-            $textarea.hide();
-            var iframe = $("<iframe />", { src: 'javascript:"<html></html>"', frameBorder: "0" })
+        createContentElement: function(textarea, stylesheets) {
+            var iframe, wnd, doc,
+                html,
+                rtlStyle = textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
+
+            textarea.hide();
+            iframe = $("<iframe />", { src: 'javascript:"<html></html>"', frameBorder: "0" })
                             .css("display", "")
                             .addClass("k-content")
-                            .insertBefore($textarea)[0];
+                            .insertBefore(textarea)[0];
 
-            var window = iframe.contentWindow || iframe;
-            var document = window.document || iframe.contentDocument;
+            wnd = iframe.contentWindow || iframe;
+            doc = wnd.document || iframe.contentDocument;
 
-            var html = $textarea.val()
-                        // <img>\s+\w+ creates invalid nodes after cut in IE
-                        .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1")
-                        // indented HTML introduces problematic ranges in IE
-                        .replace(/[\r\n\v\f\t ]+/ig, " ");
-
-            if (!html.length && $.browser.mozilla)
-                html = '<br _moz_dirty="true" />';
-
-            var rtlStyle = $textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
-
-            document.designMode = "On";
-            document.open();
-            document.write(
-                    '<!DOCTYPE html><html><head>' +
-                    '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' +
-                    '<style type="text/css">' +
-                        'html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}' +
-                        'html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;' +
+            doc.designMode = "On";
+            doc.open();
+            doc.write(
+                    "<!DOCTYPE html><html><head>" +
+                    "<meta charset='utf-8' />" +
+                    "<style>" +
+                        "html,body{padding:0;margin:0;font-family:Verdana,Geneva,sans-serif;background:#fff;}" +
+                        "html{font-size:100%}body{font-size:.75em;line-height:1.5;padding-top:1px;margin-top:-1px;" +
                         rtlStyle +
-                        '}' +
-                        'h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}' +
-                        'p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}' +
-                        'ul,ol{padding-left:2.5em}' +
-                        'a{color:#00a}' +
-                        'code{font-size:1.23em}' +
-                    '</style>' +
-                    $.map(stylesheets, function(href){ return ['<link type="text/css" href="', href, '" rel="stylesheet"/>'].join(''); }).join('') +
-                    '</head><body spellcheck="false">' +
-                    html +
-                    '</body></html>'
+                        "}" +
+                        "h1{font-size:2em;margin:.67em 0}h2{font-size:1.5em}h3{font-size:1.16em}h4{font-size:1em}h5{font-size:.83em}h6{font-size:.7em}" +
+                        "p{margin:0 0 1em;padding:0 .2em}.k-marker{display:none;}.k-paste-container{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}" +
+                        "ul,ol{padding-left:2.5em}" +
+                        "a{color:#00a}" +
+                        "code{font-size:1.23em}" +
+                    "</style>" +
+                    $.map(stylesheets, function(href){
+                        return "<link rel='stylesheet' href='" + href + "'>";
+                    }).join("") +
+                    "</head><body spellcheck='false'></body></html>"
                 );
 
-            document.close();
+            doc.close();
 
-            return window;
+            return wnd;
         },
 
         initializeContentElement: function(editor) {
@@ -406,7 +399,9 @@
             }
 
             var that = this,
-                wrapper;
+                wrapper,
+                value,
+                editorNS = kendo.ui.editor;
 
             Widget.fn.init.call(that, element, options);
 
@@ -430,17 +425,25 @@
 
             initializeContentElement(that);
 
-            that.keyboard = new kendo.ui.editor.Keyboard([new kendo.ui.editor.TypingHandler(that), new kendo.ui.editor.SystemHandler(that)]);
+            that.keyboard = new editorNS.Keyboard([
+                new editorNS.TypingHandler(that),
+                new editorNS.SystemHandler(that)
+            ]);
 
-            that.clipboard = new kendo.ui.editor.Clipboard(this);
+            that.clipboard = new editorNS.Clipboard(this);
 
-            that.pendingFormats = new kendo.ui.editor.PendingFormats(this);
+            that.pendingFormats = new editorNS.PendingFormats(this);
 
-            that.undoRedoStack = new kendo.ui.editor.UndoRedoStack();
+            that.undoRedoStack = new editorNS.UndoRedoStack();
 
             if (options && options.value) {
-                that.value(options.value);
+                value = options.value;
+            } else {
+                // indented HTML introduces problematic ranges in IE
+                value = element.val().replace(/[\r\n\v\f\t ]+/ig, " ");
             }
+
+            that.value(value);
 
             function toolFromClassName(element) {
                 var tool = $.grep(element.className.split(" "), function (x) {
@@ -559,7 +562,7 @@
                 that.bind("select", function() {
                     var range = that.getRange();
 
-                    var nodes = kendo.ui.editor.RangeUtils.textNodes(range);
+                    var nodes = editorNS.RangeUtils.textNodes(range);
 
                     if (!nodes.length) {
                         nodes = [range.startContainer];
@@ -576,11 +579,13 @@
 
             $(document)
                 .bind("DOMNodeInserted", function(e) {
-                    if ($.contains(e.target, that.wrapper[0]) || that.wrapper[0] == e.target) {
+                    var wrapper = that.wrapper;
+
+                    if ($.contains(e.target, wrapper[0]) || wrapper[0] == e.target) {
                         // preserve updated value before re-initializing
                         // don't use update() to prevent the editor from encoding the content too early
                         that.textarea.value = that.value();
-                        that.wrapper.find("iframe").remove();
+                        wrapper.find("iframe").remove();
                         initializeContentElement(that);
                     }
                 })
@@ -590,7 +595,7 @@
                             that.keyboard.endTyping(true);
 
                         if (!that.selectionRestorePoint) {
-                            that.selectionRestorePoint = new kendo.ui.editor.RestorePoint(that.getRange());
+                            that.selectionRestorePoint = new editorNS.RestorePoint(that.getRange());
                         }
                     } catch (e) { }
                 });
@@ -690,22 +695,26 @@
         value: function (html) {
             var body = this.body,
                 dom = kendo.ui.editor.Dom;
-            if (html === undefined) return kendo.ui.editor.Serializer.domToXhtml(body);
+
+            if (html === undefined) {
+                return kendo.ui.editor.Serializer.domToXhtml(body);
+            }
 
             this.pendingFormats.clear();
 
             // handle null value passed as a parameter
-            html = html || "";
+            html = (html || "")
+                // Some browsers do not allow setting CDATA sections through innerHTML so we encode them
+                .replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->")
+                // Encode script tags to avoid execution and lost content (IE)
+                .replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script $1>$2<\/telerik:script>")
+                // <img>\s+\w+ creates invalid nodes after cut in IE
+                .replace(/(<\/?img[^>]*>)[\r\n\v\f\t ]+/ig, "$1");
 
-            // Some browsers do not allow setting CDATA sections through innerHTML so we encode them as comments
-            html = html.replace(/<!\[CDATA\[(.*)?\]\]>/g, "<!--[CDATA[$1]]-->");
-
-            // Encode script tags to avoid execution and lost content (IE)
-            html = html.replace(/<script([^>]*)>(.*)?<\/script>/ig, "<telerik:script $1>$2<\/telerik:script>");
-
-            // Add <br/>s to empty paragraphs in mozilla
-            if ($.browser.mozilla)
+            if (!$.browser.msie) {
+                // Add <br/>s to empty paragraphs in mozilla/chrome, to make them focusable
                 html = html.replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p $1><br _moz_dirty="" /><\/p>');
+            }
 
             if ($.browser.msie && parseInt($.browser.version) < 9) {
                 // Internet Explorer removes comments from the beginning of the html

@@ -100,6 +100,10 @@ tests.push(
         title: "editor IndentFormatter"
     },
     {
+        page: "editor/initialization.html",
+        title: "editor initialization"
+    },
+    {
         page: "editor/inlineformatfinder.html",
         title: "editor InlineFormatFinder"
     },
