@@ -479,14 +479,6 @@
             this._accessors();
         },
 
-        setDataSource: function(dataSource) {
-            this.options.dataSource = dataSource;
-
-            this._dataSource();
-
-            this._selectItem();
-        },
-
         /**
         * Closes the drop-down list.
         * @name kendo.ui.DropDownList#close

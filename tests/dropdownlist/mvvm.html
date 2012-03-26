@@ -465,6 +465,23 @@
                 strictEqual(observable.bar, "");
             });
 
+            test("assign to DataSource as ViewModel field", function() {
+                var dom = $('<select data-text-field="text" data-auto-bind="false" data-bind="source:dataSource" data-role="dropdownlist" />');
+                var dataSource = new kendo.data.DataSource({
+                    data: [{text:"foo"}, {text:"bar"}]
+                });
+
+                var observable = kendo.observable({
+                    dataSource: dataSource
+                });
+
+                kendo.bind(dom, observable);
+                var dropdownlist = dom.data("kendoDropDownList");
+
+                ok(!dropdownlist.ul.children().length);
+            });
+
+
         </script>
 
         <script id="template" type="text/x-kendo-template">

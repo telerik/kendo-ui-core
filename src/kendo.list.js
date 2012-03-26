@@ -358,7 +358,9 @@
 
             this._dataSource();
 
-            this._selectItem();
+            if (this.options.autoBind) {
+                this._selectItem();
+            }
         },
 
         /**
