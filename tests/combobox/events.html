@@ -52,7 +52,7 @@
                 ok(changeWasCalled);
             });
 
-            asyncTest("_blur calls popup close", function() {
+            test("_blur calls popup close", 1, function() {
                 var changeWasCalled = false, combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}]
                 });
@@ -62,7 +62,6 @@
 
                 combobox.popup.bind("close", function() {
                     ok(true);
-                    start();
                 });
 
                 combobox._blur();
@@ -145,12 +144,11 @@
                 ok(!changeWasCalled);
             });
 
-            asyncTest("clicking an item raises the change event", function() {
+            test("clicking an item raises the change event", 1, function() {
                 var combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -160,12 +158,11 @@
                 combobox.ul.children().eq(1).trigger(CLICK);
             });
 
-            asyncTest("change should be raised on enter", function() {
+            test("change should be raised on enter", 1, function() {
                 var changeWasCalled = false, combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -174,12 +171,11 @@
                 combobox.input.press(kendo.keys.ENTER);
             });
 
-            asyncTest("change should be raised on tab", function() {
+            test("change should be raised on tab", 1, function() {
                 var changeWasCalled = false, combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -203,11 +199,10 @@
                 combobox._change();
             });
 
-            asyncTest("clicking an item raises the change event of HTML select", function() {
+            test("clicking an item raises the change event of HTML select", 1, function() {
                 var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
                                 .bind("change", function() {
                                     ok(true);
-                                    start();
                                 });
 
                 var combobox = new ComboBox(select, {
@@ -222,11 +217,13 @@
                 combobox.ul.children().eq(1).trigger(CLICK);
             });
 
-            asyncTest("raise change on custom value", function() {
-                var changeWasCalled = false, combobox = new ComboBox(input, {
+            test("raise change on custom value", 3, function() {
+                var combobox = new ComboBox(input, {
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     change: function() {
-                        changeWasCalled = true;
+                        ok(true);
+                        equal(combobox._old, "foo");
+                        equal(combobox.value(), "foo");
                     }
                 });
 
@@ -234,20 +231,14 @@
                         .focus()
                         .val("foo")
                         .blur();
-
-                setTimeout(function() {
-                    ok(changeWasCalled);
-                    equal(combobox._old, "foo");
-                    equal(combobox.value(), "foo");
-                    start();
-                }, 100);
             });
 
-            asyncTest("raise change on custom value if element is select", function() {
-                var origCalled = false,
-                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+            test("raise change on custom value if element is select", 3, function() {
+                var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
                                 .bind("change", function() {
-                                    origCalled = true;
+                                    ok(true);
+                                    equal(combobox.value(), "custom value");
+                                    equal(combobox._old, "custom value");
                                 });
                 var combobox = new ComboBox(select, {
                     dataSource: [{text: "foo"}, {text: "bar"}]
@@ -260,19 +251,13 @@
                         .val("custom value")
                         .blur();
 
-                setTimeout(function() {
-                    ok(origCalled);
-                    equal(combobox.value(), "custom value");
-                    equal(combobox._old, "custom value");
-                    start();
-                }, 100);
             });
 
-            asyncTest("raise change if empty input after selection", function() {
-                var origCalled = false,
-                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+            test("raise change if empty input after selection", 2, function() {
+                var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
                                 .bind("change", function() {
-                                    origCalled = true;
+                                    ok(true);
+                                    equal(combobox.value(), "");
                                 });
                 var combobox = new ComboBox(select, {
                     dataSource: [{text: "foo"}, {text: "bar"}]
@@ -281,18 +266,14 @@
                 combobox._old = "test";
                 combobox.input.focus().val("").press(kendo.keys.BACKSPACE).blur();
 
-                setTimeout(function() {
-                    ok(origCalled);
-                    equal(combobox.value(), "");
-                    start();
-                }, 100);
             });
 
-            asyncTest("change on custom value and ENTER", function() {
-                var origCalled = false,
-                    select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
+            test("change on custom value and ENTER", 3, function() {
+                var select = $("<select><option value=1>foo1</option><option value=3>foo3</option></select>")
                                 .bind("change", function() {
-                                    origCalled = true;
+                                    ok(true);
+                                    equal(combobox.value(), "test");
+                                    equal(combobox.text(), "test");
                                 });
                 var combobox = new ComboBox(select, {
                     dataSource: [{text: "foo"}, {text: "bar"}]
@@ -301,29 +282,21 @@
                 combobox._old = "";
                 combobox._current = null;
                 combobox.input.focus().val("test").press(kendo.keys.ENTER);
-
-                setTimeout(function() {
-                    ok(origCalled);
-                    equal(combobox.value(), "test");
-                    equal(combobox.text(), "test");
-                    start();
-                }, 100);
             });
 
-            asyncTest("open event when click _arrow", function() {
+            test("open event when click _arrow", 2, function() {
                 var combobox = input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     open: function() {
                         ok(true);
                         ok(this === combobox, "'this' is not the correct scope");
-                        start();
                     }
                 }).data("kendoComboBox");
 
                 input.data("kendoComboBox")._arrow.trigger(CLICK);
             });
 
-            asyncTest("open event should be cancellable", function() {
+            test("open event should be cancellable", function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     open: function(e) {
@@ -335,13 +308,10 @@
 
                 combobox._arrow.trigger(CLICK);
 
-                setTimeout(function() {
-                    ok(!combobox.popup.visible());
-                    start();
-                }, 100);
+                ok(!combobox.popup.visible());
             });
 
-            asyncTest("open event should not raise twice on initial binding", function() {
+            test("open event should not raise twice on initial binding", function() {
                 var index = 0;
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
@@ -355,18 +325,14 @@
 
                 combobox._arrow.trigger(CLICK);
 
-                setTimeout(function() {
-                    equal(index, 1);
-                    start();
-                }, 100);
+                equal(index, 1);
             });
 
-            asyncTest("open event when ALT + down _arrow", function() {
+            test("open event when ALT + down _arrow", 1, function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     open: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -375,13 +341,12 @@
                 combobox.input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true } );
             });
 
-            asyncTest("close event when click _arrow", function() {
+            test("close event when click _arrow", 2, function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {
                         ok(true);
                         ok(this === combobox, "'this' is not the correct scope");
-                        start();
                     }
                 });
 
@@ -390,7 +355,7 @@
                 combobox._arrow.trigger(CLICK);
             });
 
-            asyncTest("close event should be cancellable", function() {
+            test("close event should be cancellable", function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function(e) {
@@ -403,13 +368,10 @@
                 combobox.open();
                 combobox._arrow.trigger(CLICK);
 
-                setTimeout(function() {
-                    ok(combobox.popup.visible());
-                    start();
-                }, 100);
+                ok(combobox.popup.visible());
             });
 
-            asyncTest("close should not raise if no data", function() {
+            test("close should not raise if no data", function() {
                 var called = false;
                 input.kendoComboBox({
                     close: function(e) {
@@ -420,18 +382,14 @@
                 var combobox = input.data("kendoComboBox");
                 combobox._arrow.trigger(CLICK);
 
-                setTimeout(function() {
-                    ok(!called);
-                    start();
-                }, 100);
+                ok(!called);
             });
 
-            asyncTest("close event when ALT + up _arrow", function() {
+            test("close event when ALT + up _arrow", 1, function() {
                 input.kendoComboBox({
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {
                         ok(true);
-                        start();
                     }
                 });
 
