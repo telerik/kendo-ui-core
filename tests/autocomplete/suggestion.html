@@ -55,57 +55,45 @@
                 }
             });
 
-            asyncTest("pressing enter calls _blur", function() {
-                var blurWasCalled, autocomplete = new AutoComplete(input, {
+            test("pressing enter calls _blur", 1, function() {
+                var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
                 autocomplete._blur = function(li) {
-                    blurWasCalled = true;
+                    ok(true);
                 };
 
                 autocomplete.current = autocomplete.ul.children().first();
                 input.press(kendo.keys.ENTER);
-                setTimeout(function () {
-                    ok(blurWasCalled);
-                    start();
-                }, 0);
             });
 
-            asyncTest("pressing enter calls _blur when no item is selected", function() {
-                var blurWasCalled, autocomplete = new AutoComplete(input, {
+            test("pressing enter calls _blur when no item is selected", 1, function() {
+                var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
                 autocomplete._blur = function(li) {
-                    blurWasCalled = true;
+                    ok(true);
                 };
 
                 input.press(kendo.keys.ENTER);
-                setTimeout(function () {
-                    ok(blurWasCalled);
-                    start();
-                }, 0);
             });
 
-            asyncTest("pressing tab calls _blur", function() {
+            test("pressing tab calls _blur", 1, function() {
                 var blurWasCalled, autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     suggest: true
                 });
 
                 autocomplete._blur = function(li) {
-                    blurWasCalled = true;
+                    ok(true);
                 };
 
                 autocomplete.current = autocomplete.ul.children().first();
                 input.press(kendo.keys.TAB);
-                setTimeout(function () {
-                    ok(blurWasCalled);
-                    start();
-                }, 0);
             });
 
             test("current popup item completes the value of the input if suggest is enabled", function() {
@@ -185,7 +173,7 @@
                 equal(input.selectedText(), "ar");
             });
 
-            asyncTest("separator", function() {
+            test("separator", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     separator: ", "
@@ -197,13 +185,10 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                setTimeout(function () {
-                    equal(input.val(), "baz, ");
-                    start();
-                }, 0);
+                equal(input.val(), "baz, ");
             });
 
-            asyncTest("suggestion should suggest correctly", function() {
+            test("suggestion should suggest correctly", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["Cotton", "bar"]
                 });
@@ -212,15 +197,11 @@
                 input.type("Co");
                 autocomplete.suggest("Cotton");
 
-                setTimeout(function() {
-                    start();
-
-                    equal(input.val(), "Cotton");
-                    equal(input.selectedText(), "tton");
-                }, 200);
+                equal(input.val(), "Cotton");
+                equal(input.selectedText(), "tton");
             });
 
-            asyncTest("suggestion should only append the rest of the text (filter:contains)", function() {
+            asyncTest("suggestion appends only the rest of the text (filter:contains)", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo", "bar"],
                     filter: "contains",
@@ -233,7 +214,7 @@
                 setTimeout(function() {
                     start();
                     equal(input.val(), "oo");
-                }, 300);
+                }, 200);
             });
 
             test("suggestion should use dataItem.text instead of li.text()", function() {
