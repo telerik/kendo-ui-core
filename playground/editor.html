@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <title>Editor playground</title>
 
-    <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
-    <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
-    <link rel="stylesheet" type="text/css" href="../demos/mvc/content/shared/styles/examples.css"></link>
+    <link rel="stylesheet" href="../styles/web/kendo.common.css">
+    <link rel="stylesheet/less" href="../styles/web/kendo.default.less">
+    <link rel="stylesheet" href="../demos/mvc/content/shared/styles/examples.css">
 
     <script src="../demos/mvc/content/shared/js/less.js"></script>
 
@@ -18,23 +18,37 @@
     <script src="../src/kendo.popup.js"></script>
     <script src="../src/kendo.list.js"></script>
     <script src="../src/kendo.dropdownlist.js"></script>
+    <script src="../src/kendo.combobox.js"></script>
     <script src="../src/kendo.fx.js"></script>
     <script src="../src/kendo.window.js"></script>
     <script src="../src/kendo.editor.js"></script>
+
+    <style>
+        html, body {
+            font: 12px/1.5 Tahima,sans-serif;
+        }
+
+        #content {
+            white-space: pre;
+            font-family: Consolas,monospace;
+        }
+    </style>
 </head>
 <body>
-    <label for="name">Name</label> <input id="name" />
+    <textarea id="comment" style="width: 400px; height: 200px;"></textarea>
 
-    <label for="comment">Comment</label> <textarea id="comment">Sample content</textarea>
-
-    <label for="email">Email</label> <input id="email" />
-
-    <button>Submit</button>
+    <div id="content"></div>
 
     <script>
-        $("#comment").kendoEditor({
-            tools: [ "bold", "italic" ]
-        });
+        var editor = $("#comment")
+            .val("<label>Stephen</label><blockquote><p>Puppies and kittens.</p><p>Sunshine and rainbows</p></blockquote><p></p>")
+            .kendoEditor({
+                select: function(e) {
+                    $("#content").text(this.value());
+                }
+            }).data("kendoEditor");
+
+        $("#content").text(editor.value());
     </script>
 </body>
 </html>
