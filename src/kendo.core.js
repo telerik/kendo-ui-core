@@ -296,6 +296,10 @@
         }
     };
 
+function pad(number) {
+    return number < 10 ? "0" + number : number;
+}
+
     //JSON stringify
 (function() {
     var cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,
@@ -851,10 +855,6 @@
 
     //set current culture to en-US.
     kendo.culture(EN);
-
-    function pad(number) {
-        return number < 10 ? "0" + number : number;
-    }
 
     function formatDate(date, format) {
         var calendar = kendo.cultures.current.calendar,
@@ -1683,7 +1683,7 @@
          * @name kendo.support.hasHW3D
          * @property {Boolean}
          */
-        support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style;
+        support.hasHW3D = ("WebKitCSSMatrix" in window && "m11" in new window.WebKitCSSMatrix()) || "MozPerspective" in document.documentElement.style;
         support.hasNativeScrolling = typeof document.documentElement.style.webkitOverflowScrolling == "string";
 
         each([ "Moz", "webkit", "O", "ms" ], function () {
@@ -1728,8 +1728,9 @@
                 },
                 testOs = function (agent) {
                     for (var os in osRxs) {
-                        if (osRxs.hasOwnProperty(os) && osRxs[os].test(agent))
+                        if (osRxs.hasOwnProperty(os) && osRxs[os].test(agent)) {
                             return os;
+                        }
                     }
                     return agent;
                 };
@@ -2230,6 +2231,8 @@
 
         /** @ignore */
         logToConsole: function(message) {
+            var console = window.console;
+
             if (typeof(console) != "undefined" && console.log) {
                 console.log(message);
             }
@@ -2336,6 +2339,7 @@
             idx,
             length,
             role,
+            value,
             dataSource;
 
         element = element.nodeType ? element : element[0];
