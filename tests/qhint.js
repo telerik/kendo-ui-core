@@ -5,7 +5,16 @@
             options = sourceFile;
             sourceFile = name;
         }
-        
+
+        options = $.extend({
+            curly: true,
+            trailing: true,
+            undef: true,
+            latedef: true,
+            browser: true,
+            jquery: true
+        }, options);
+
         function validateFile(source) {
             var i, len, err,
                 result = JSHINT(source, options);
@@ -26,7 +35,7 @@
             }
         }
 
-        return asyncTest(name, function() {	
+        return asyncTest(name, function() {
             qHint.sendRequest(sourceFile, function(source) {
                 start();
                 validateFile(source.responseText);
@@ -41,7 +50,6 @@
         if (!req) return;
         var method = "GET";
         req.open(method,url,true);
-        req.setRequestHeader('User-Agent','XMLHTTP/1.0');
         req.onreadystatechange = function () {
             if (req.readyState != 4) return;
             if (req.status != 200 && req.status != 304) {
