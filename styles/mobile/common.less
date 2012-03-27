@@ -1036,8 +1036,6 @@
 .km-root .k-dropdown
 {
     font-size: 1.2rem;
-    -moz-appearance: none;
-    -webkit-appearance: none;
 }
 
 .km-root input
@@ -1051,9 +1049,9 @@
     .user-select(none);
 }
 
-.km-root input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
-.km-root select:not([multiple]),
-.km-root .k-dropdown
+.km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]),
+.km-root .km-list select:not([multiple]),
+.km-root .km-list .k-dropdown
 {
     position: absolute;
     right: .8em;
@@ -1063,9 +1061,9 @@
     z-index: 1;
 }
 
-.km-root input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]),
-.km-root select:not([multiple]),
-.km-root .k-dropdown
+.km-root .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=checkbox]):not([type=radio]),
+.km-root .km-list select:not([multiple]),
+.km-root .km-list .k-dropdown
 {
     right: 0;
     margin-top: -.95em;

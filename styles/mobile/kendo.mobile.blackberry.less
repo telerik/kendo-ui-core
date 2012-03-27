@@ -515,15 +515,22 @@
 .km-blackberry select:not([multiple]),
 .km-blackberry .k-dropdown
 {
+    .appearance(none);
     border: 1px solid rgba(0,0,0,.5);
-    right: .8em;
     padding: .4em;
     outline: none;
-    margin-top: -1.05em;
     .border-radius(~".3em");
 }
 
-.km-root .km-blackberry .km-view .km-content input[type=file]
+.km-blackberry .km-list input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]),
+.km-blackberry .km-list select:not([multiple]),
+.km-blackberry .km-list .k-dropdown
+{
+    margin-top: -1.05em;
+    right: .8em;
+}
+
+.km-root .km-blackberry .km-view .km-content .km-list input[type=file]
 {
     padding: .2em;
     outline: none;
