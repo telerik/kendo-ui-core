@@ -82,16 +82,20 @@ client.subscribe('/done', function(message) {
 
 browsers = [
     {
-        'Darwin': "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
-        'Linux': "google-chrome"
+        Darwin: "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome",
+        Linux: "google-chrome"
     },
     {
-        'Darwin':"/Applications/Firefox.app/Contents/MacOS/firefox",
-        'Linux': "firefox"
+        Darwin: "/Applications/Firefox.app/Contents/MacOS/firefox",
+        Linux: "firefox",
+        params: ['-private', '-no-remote']
     }
 ]
 
+var testRunnerURL = 'http://localhost:' + PORT + '/tests/testrunner.html';
+
 browsers.forEach(function(browser) {
-    browser.process = spawn(browser[os.type()], ['http://localhost:' + PORT + '/tests/testrunner.html']);
+    var params = (browser.params || []).concat([testRunnerURL]);
+    browser.process = spawn(browser[os.type()], params);
 });
 
