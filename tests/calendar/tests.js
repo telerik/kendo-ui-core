@@ -18,5 +18,9 @@ tests.push(
     {
         page: "calendar/mvvm.html",
         title: "calendar mvvm"
+    },
+    {
+        page: "calendar/lint.html",
+        title: "calendar lint"
     }
 );
