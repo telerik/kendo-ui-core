@@ -660,16 +660,19 @@ p#copy
     padding-bottom:3em;
 }
 
-.flowers-left{background:fixed 0 460px no-repeat url(flowers-left.png);}
+.flowers-left{background:fixed 0 400px no-repeat url(flowers-left.png);}
+.flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
 
-@media screen and (min-width:1030px) 
-{
+@media screen and (min-width:1030px) {
     .flowers-right{background:fixed 111% -174px no-repeat url(flowers-right.png);}
 }
 
-@media screen and (min-width:1400px) 
-{
+@media screen and (min-width:1400px) {
     .flowers-right{background-position:100% -174px;}
+}
+
+@media screen and (max-width:1029px) {
+    .flowers-right{background-image:none;}
 }
 
 #mainWrap
