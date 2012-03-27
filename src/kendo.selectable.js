@@ -46,24 +46,28 @@
                     right: pos.left + element.outerWidth(),
                     bottom: pos.top + element.outerHeight()
                 };
-            return (!(selectee.left > marqueePos.right
-                || selectee.right < marqueePos.left
-                || selectee.top > marqueePos.bottom
-                || selectee.bottom < marqueePos.top));
+
+            return (!(selectee.left > marqueePos.right ||
+                selectee.right < marqueePos.left ||
+                selectee.top > marqueePos.bottom ||
+                selectee.bottom < marqueePos.top));
         },
         _position: function(event) {
             var pos = this._originalPosition,
                 left = pos.x,
                 top = pos.y,
                 right = event.pageX,
-                bottom = event.pageY;
+                bottom = event.pageY,
+                tmp;
+
             if (left > right) {
-                var tmp = right;
+                tmp = right;
                 right = left;
                 left = tmp;
             }
+
             if (top > bottom) {
-                var tmp = bottom;
+                tmp = bottom;
                 bottom = top;
                 top = tmp;
             }
@@ -197,8 +201,9 @@
                 that._marquee.remove();
             }
 
-            if (kendo.support.touch && single)
+            if (kendo.support.touch && single) {
                 that._downTarget.addClass(ACTIVE);
+            }
 
             if(!single && that._shiftPressed === true) {
                 that.selectRange(that._firstSelectee(), that._downTarget);
@@ -219,7 +224,8 @@
         },
         value: function(val) {
             var that = this,
-            selectElement = proxy(that._selectElement, that);
+                selectElement = proxy(that._selectElement, that);
+
             if(val) {
                 val.each(function() {
                     selectElement(this);
@@ -269,10 +275,10 @@
                 selectee = $(this);
                 if(found) {
                     selectElement(this);
-                    found = !(this === end);
+                    found = this !== end;
                 }
                 else if(this === start) {
-                    found = !(start === end);
+                    found = start !== end;
                     selectElement(this);
                 }
                 else if(this === end) {
