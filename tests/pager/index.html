@@ -1,235 +1,46 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>kendo.ui.Pager Tests</title>
         <script src="../../src/jquery.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" media="screen" />
+        <link rel="stylesheet" href="../qunit-runner.css" media="screen" />
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.pager.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <script>
+            var tests = [];
+        </script>
+        <script src="tests.js"></script>
+        <script>
+            tests = $.map(tests, function(test) {
+                return { 
+                    page: test.page.replace(/\w+\//, ""), 
+                    title: test.title 
+                };
+            });
+
+            var sequential = true,
+            runnerDone = function (failures, total) {
+                $('<p id="qunit-testresult" class="result" />')
+                .html([
+                    "Tests completed in ", (+new Date()) - start, " milliseconds.<br />",
+                    "<span class='passed'>", total - failures, "</span> tests of <span class='total'>", total,
+                        "</span> passed, <span class='failed'>", failures, "</span> failed."
+                ].join(''))
+                .appendTo("body > div");
+            };
+
+            var start = +new Date();
+
+            QUnit.run(tests, sequential, runnerDone);
+        </script>
     </head>
     <body>
-        <h1 id="qunit-header">kendo.ui.Pager Tests</h1>
-        <h2 id="qunit-banner"></h2>
-        <div id="qunit-testrunner-toolbar"></div>
-        <h2 id="qunit-userAgent"></h2>
-        <ol id="qunit-tests"></ol>
-        <div id="qunit-fixture">test markup, will be hidden</div>
-        <ul id="log"></ul>
-
-        <script>
-            kendo.ns = "kendo-";
-            var DataSource = kendo.data.DataSource,
-                pager,
-                dataSource;
-
-            function setup(dataOptions, options){
-                dataOptions = $.extend({
-                    data: [1,2,3,4,5],
-                    page: 1,
-                    pageSize: 1
-                }, dataOptions);
-
-                dataSource = new DataSource(dataOptions);
-                options = $.extend({
-                    dataSource: dataSource
-                }, options);
-                var element = $("<ul />").kendoPager(options);
-                pager = element.data("kendoPager");
-                return element;
-            }
-
-            test("kendoPager attach pager to an element", function() {
-                var ul = setup();
-
-                ok(ul.data("kendoPager") instanceof kendo.ui.Pager);
-                ok(pager instanceof kendo.ui.Pager);
-            });
-
-            test("renders buttons for all pages", function() {
-                var ul = setup();
-
-                dataSource.read();
-
-                var links = ul.find("a").add(ul.find(".k-state-active"));
-                equal(links.length, 5);
-                equal(links[0].innerHTML, "1");
-                equal(links[1].innerHTML, "2");
-                equal(links[2].innerHTML, "3");
-                equal(links[3].innerHTML, "4");
-                equal(links[4].innerHTML, "5");
-            });
-
-            test("one button is rendered on init", function() {
-                var ul = setup();
-                var links = ul.find("a").add(ul.find(".k-state-active"));
-
-                equal(links.length, 1);
-                equal(links[0].innerHTML, "1");
-            });
-
-            test("buttons are rendered if read before init", function() {
-                var dataSource = new DataSource({
-                    pageSize: 1,
-                    data: [1,2,3]
-                });
-
-                dataSource.read();
-
-                var ul = $("<ul />").kendoPager({
-                            dataSource: dataSource
-                        });
-                var links = ul.find("a").add(ul.find(".k-state-active"));
-
-                equal(links.length, 3);
-                equal(links[0].innerHTML, "1");
-                equal(links[1].innerHTML, "2");
-                equal(links[2].innerHTML, "3");
-            });
-
-            test("page number buttons have data attribute assign exept for the current page index", function(){
-                var ul = setup();
-
-                dataSource.read();
-
-                var links = ul.find("a");
-                equal(ul.find(".k-state-active").data("page"), undefined);
-                equal(links.eq(0).attr("data-kendo-page"), "2");
-                equal(links.eq(1).attr("data-kendo-page"), "3");
-                equal(links.eq(2).attr("data-kendo-page"), "4");
-                equal(links.eq(3).attr("data-kendo-page"), "5");
-            });
-
-            test("clear page number buttons on multiple datasource rebinds", function(){
-                var ul = setup();
-
-                dataSource.read();
-                dataSource.read();
-
-                var links = ul.find("a").add(ul.find(".k-state-active"));
-                equal(links.length, 5);
-                equal(links[0].innerHTML, "1");
-                equal(links[1].innerHTML, "2");
-                equal(links[2].innerHTML, "3");
-                equal(links[3].innerHTML, "4");
-                equal(links[4].innerHTML, "5");
-            });
-
-            test("does not render page numbers if total pages are zero", function(){
-                var ul = setup({pageSize: -1});
-
-                dataSource.read();
-
-                equal(ul.find("a").length, 0);
-            });
-
-            test("currentPage css class is added to current page a", function(){
-                var ul = setup();
-
-                dataSource.read();
-                ok(ul.find("span").hasClass("k-state-active"));
-            });
-
-            test("changing page raises change event passing the new index", function() {
-                var ul = setup(),
-                    index;
-
-                dataSource.read();
-                pager.bind("change", function(){
-                    index = arguments[0].index;
-                });
-
-                ul.find("a:eq(0)").click();
-                equal(index, 2);
-            });
-
-            test("clicking on the current page does not trigger change event", function(){
-                var ul = setup(),
-                    called = false;
-
-                dataSource.read();
-                pager.bind("change", function(){
-                    called = true;
-                });
-
-                ul.find("a.currentPage").click();
-                ok(!called);
-            });
-
-            test("changing page is paging datasource", function() {
-                var ul = setup();
-
-                dataSource.read();
-                ul.find("a:eq(0)").click();
-                equal(dataSource.page(), 2);
-            });
-
-            test("show more button should be shown if page buttons are more than the threshold", function(){
-                var ul = setup({},{ buttonCount: 3});
-
-                dataSource.read();
-                equal(ul.find("a").add(ul.find(".k-state-active")).length, 4);
-                equal(ul.find("a:last").attr("data-kendo-page"), "4");
-            });
-
-            test("show less button should be shown if page buttons are more than the threshold", function(){
-                var ul = setup({ page: 4 },{ buttonCount: 3});
-
-                dataSource.read();
-                equal(ul.find("a").add(ul.find(".k-state-active")).length, 3);
-                equal(ul.find("a:first").attr("data-kendo-page"), "3");
-            });
-
-            test("clicking more button pages to next pages group", function() {
-                var ul = setup({},{ buttonCount: 3});
-
-                dataSource.read();
-                ul.find("a:last").click();
-                equal(dataSource.page(), 4);
-            });
-
-            test("totalPages", function() {
-                var ul = setup();
-
-                dataSource.read();
-                equal(ul.data("kendoPager").totalPages(), 5);
-            });
-
-            test("pageSize returns the dataSource pageSize value", function() {
-                var ul = setup();
-                dataSource.read();
-
-                equal(ul.data("kendoPager").pageSize(), dataSource.pageSize());
-            });
-            test("page returns the current page", function(){
-                var ul = setup();
-                dataSource.read();
-                ul.find("a:eq(0)").click();
-
-                equal(ul.data("kendoPager").page(), 2);
-            });
-
-            test("custom linkTemplate should be used instead of the default", function() {
-                var ul = setup({}, { linkTemplate: "<a>foo</a>" });
-                dataSource.read();
-                equal(ul.find("a:eq(1)").text(), "foo");
-            });
-
-            test("custom selectTemplate should be used", function() {
-                var ul = setup({}, { selectTemplate: "<a>foo</a>" });
-                dataSource.read();
-                equal(ul.find("a:first").text(), "foo");
-            });
-
-            test("single page is rendered if no pageSize is set", function() {
-                var data = new DataSource( { data: [1,2,3,4,5], page: 1 }),
-                    ul = $("<ul/>").kendoPager({ dataSource: data });
-
-                data.read();
-                equal(ul.find(".k-state-active").length, 1);
-            });
-        </script>
+        <div>
+            <h1 id="qunit-header">TEST RUNNER</h1>
+            <h2 id="qunit-banner"></h2>
+            <h2 id="qunit-runner-userAgent"></h2>
+            <div id="runner-test-page-container">
+            </div>
+        </div>
     </body>
 </html>

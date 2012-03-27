@@ -65,7 +65,7 @@
             if (page > buttonCount) {
                 reminder = (page % buttonCount);
 
-                start = (reminder == 0) ? (page - buttonCount) + 1 : (page - reminder) + 1;
+                start = (reminder === 0) ? (page - buttonCount) + 1 : (page - reminder) + 1;
             }
 
             end = Math.min((start + buttonCount) - 1, totalPages);
