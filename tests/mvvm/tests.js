@@ -1,7 +1,16 @@
 tests.push( {
-    page: "sortable/sortable.html",
-    title: "sortable"
+    page: "mvvm/observableobject.html",
+    title: "mvvm observableobject"
 }, {
-    page: "sortable/lint.html",
-    title: "sortable lint"
+    page: "mvvm/observablearray.html",
+    title: "mvvm observablearray"
+},{
+    page: "mvvm/binding.html",
+    title: "mvvm binding"
+},{
+    page: "mvvm/changing.html",
+    title: "mvvm change tracking"
+},{
+    page: "mvvm/lint.html",
+    title: "mvvm lint"
 });
