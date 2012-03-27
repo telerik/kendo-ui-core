@@ -53,10 +53,9 @@
                 }, 100);
             });
 
-            asyncTest("_change should call value() method", function() {
+            test("_change should call value() method", 2, function() {
                 var textbox = new NumericTextBox(input, {
                     change: function() {
-                        start();
                         ok(true);
                         equal(textbox.value(), 22);
                     }
@@ -65,11 +64,10 @@
                 textbox._change("22");
             });
 
-            asyncTest("raise DOM change", function() {
+            test("raise DOM change", 2, function() {
                 var textbox = new NumericTextBox(input);
 
                 input.bind("change", function() {
-                    start();
                     ok(true);
                     equal(textbox.value(), 22);
                 });
