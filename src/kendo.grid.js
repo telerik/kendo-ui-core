@@ -2063,7 +2063,12 @@
                         scrollables.scrollLeft(this.scrollLeft);
                     });
 
-                    kendo.touchScroller(that.content);
+                    var touchScroller = kendo.touchScroller(that.content);
+                    if (touchScroller && touchScroller.movable) {
+                        touchScroller.movable.bind("change", function(e) {
+                            scrollables.scrollLeft(-e.sender.x);
+                        });
+                    }
                 }
             }
         },
