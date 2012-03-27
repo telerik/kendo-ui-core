@@ -82,8 +82,17 @@
      * @example
      * var item = {
      *     text: "Item text",
-     *     imageUrl: "/images/icon.png", // renders a <img class="k-image" src="/images/icon.png" />
-     *     spriteCssClass: "icon save",  // renders a <span class="k-sprite icon save" />
+     *
+     *     // renders a <img class="k-image" src="/images/icon.png" />
+     *     imageUrl: "/images/icon.png",
+     *
+     *     // renders a <span class="k-sprite icon save" />
+     *     spriteCssClass: "icon save",
+     *
+     *     // specifies whether the node text should be encoded or not
+     *     // useful when rendering node-specific HTML
+     *     encoded: false,
+     *
      *     items: [
      *         // child items
      *     ]
