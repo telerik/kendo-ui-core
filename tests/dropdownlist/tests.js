@@ -22,5 +22,9 @@ tests.push(
     {
         page: "dropdownlist/mvvm.html",
         title: "dropdownlist mvvm"
+    },
+    {
+        page: "dropdownlist/lint.html",
+        title: "dropdownlist lint"
     }
 );
