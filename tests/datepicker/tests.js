@@ -18,6 +18,9 @@ tests.push(
     {
         page: "datepicker/mvvm.html",
         title: "datepicker mvvm"
+    },
+    {
+        page: "datepicker/lint.html",
+        title: "datepicker lint"
     }
-
 );

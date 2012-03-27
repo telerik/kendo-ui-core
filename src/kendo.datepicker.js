@@ -168,7 +168,7 @@
 
                 if (!touch) {
                     calendar.unbind(NAVIGATE)
-                            .bind(NAVIGATE, proxy(that._navigate, that))
+                            .bind(NAVIGATE, proxy(that._navigate, that));
                 }
 
                 calendar.month = that.month;
@@ -728,7 +728,7 @@
                     .removeAttr(DISABLED);
 
                 icon.bind(CLICK, proxy(that._click, that))
-                    .bind(MOUSEDOWN, function(e) { e.preventDefault(); })
+                    .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
         },
 
