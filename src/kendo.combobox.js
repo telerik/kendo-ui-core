@@ -969,7 +969,7 @@
         _highlight: function(li) {
             var that = this, idx;
 
-            if (li === undefined) {
+            if (li === undefined || li === null) {
                 return -1;
             }
 
