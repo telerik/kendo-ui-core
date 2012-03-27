@@ -1,11 +1,11 @@
 tests.push(
     {
         page: "mobile/application.html",
-        title: "application"
+        title: "mobile application"
     },
     {
         page: "mobile/tabstrip.html",
-        title: "tabstrip"
+        title: "mobile tabstrip"
     },
     {
         page: "mobile/core.html",
@@ -21,30 +21,34 @@ tests.push(
     },
     {
         page: "mobile/switch/index.html",
-        title: "switch"
+        title: "mobile switch"
     },
     {
         page: "mobile/switch/mvvm.html",
-        title: "switch mvvm"
+        title: "mobile switch mvvm"
     },
     {
         page: "mobile/listview/index.html",
-        title: "listview"
+        title: "mobile listview"
     },
     {
         page: "mobile/listview/databinding.html",
-        title: "listview databinding"
+        title: "mobile listview databinding"
     },
     {
         page: "mobile/listview/mvvm.html",
-        title: "listview mvvm"
+        title: "mobile listview mvvm"
     },
     {
         page: "mobile/navbar.html",
-        title: "navbar"
+        title: "mobile navbar"
     },
     {
         page: "mobile/integration.html",
-        title: "integration"
+        title: "mobile integration"
+    },
+    {
+        page: "lint.html",
+        title: "mobile lint"
     }
 );
