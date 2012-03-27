@@ -652,12 +652,13 @@
         */
         search: function (word) {
             var that = this,
-            word = word || that.value(),
             options = that.options,
             separator = options.separator,
             length,
             caret,
             index;
+
+            word = word || that.value();
 
             that._current = null;
 
