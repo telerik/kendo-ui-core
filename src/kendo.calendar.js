@@ -503,7 +503,7 @@
             if (!value) {
                 value = currentValue;
             } else {
-                that._current = value = new DATE(restrictValue(value, min, max))
+                that._current = value = new DATE(restrictValue(value, min, max));
             }
 
             if (view === undefined) {
@@ -515,7 +515,7 @@
             that._view = currentView = calendar.views[view];
             compare = currentView.compare;
 
-            title.toggleClass(DISABLED, view === views[CENTURY])
+            title.toggleClass(DISABLED, view === views[CENTURY]);
             that[PREVARROW].toggleClass(DISABLED, compare(value, min) < 1);
             that[NEXTARROW].toggleClass(DISABLED, compare(value, max) > -1);
 
@@ -653,7 +653,7 @@
                 if (transitionOrigin) {
                     cell = that._cellByDate(that._view.toDateString(that._current));
                     position = cell.position();
-                    position = (position.left + parseInt(cell.width() / 2)) + "px" + " " + (position.top + parseInt(cell.height() / 2) + "px");
+                    position = (position.left + parseInt(cell.width() / 2, 10)) + "px" + " " + (position.top + parseInt(cell.height() / 2, 10) + "px");
                     to.css(transitionOrigin, position);
                 }
 
@@ -755,11 +755,11 @@
             links;
 
             if (!element.find(".k-header")[0]) {
-                element.html('<div class="k-header">'
-                           + '<a href="#" class="k-link k-nav-prev"><span class="k-icon k-arrow-prev"></span></a>'
-                           + '<a href="#" class="k-link k-nav-fast"></a>'
-                           + '<a href="#" class="k-link k-nav-next"><span class="k-icon k-arrow-next"></span></a>'
-                           + '</div>');
+                element.html('<div class="k-header">' +
+                             '<a href="#" class="k-link k-nav-prev"><span class="k-icon k-arrow-prev"></span></a>' +
+                             '<a href="#" class="k-link k-nav-fast"></a>' +
+                             '<a href="#" class="k-link k-nav-next"><span class="k-icon k-arrow-next"></span></a>' +
+                             '</div>');
             }
 
             links = element.find(".k-link")
@@ -812,7 +812,7 @@
 
             if (option === MIN) {
                 bigger = +value > selectedValue;
-                navigate = navigate > -1
+                navigate = navigate > -1;
             } else {
                 bigger = selectedValue > +value;
                 navigate = navigate < 1;
@@ -837,7 +837,7 @@
             }
 
             if (link) {
-                link.unbind(CLICK)
+                link.unbind(CLICK);
 
                 if (toggle) {
                     link.addClass(TODAY)
@@ -903,7 +903,7 @@
             firstVisibleDay = new DATE(date.getFullYear(), date.getMonth(), 0, date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds());
 
             while (firstVisibleDay.getDay() != firstDay) {
-                calendar.setTime(firstVisibleDay, -1 * MS_PER_DAY)
+                calendar.setTime(firstVisibleDay, -1 * MS_PER_DAY);
             }
 
             return firstVisibleDay;
@@ -1098,7 +1098,7 @@
                             value: date.getFullYear(),
                             ns: kendo.ns,
                             dateString: toDateString(date),
-                            cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
+                            cssClass: idx === 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
                     }
                 });
@@ -1154,7 +1154,7 @@
                             value: year + " - " + (year + 9),
                             ns: kendo.ns,
                             dateString: toDateString(date),
-                            cssClass: idx == 0 || idx == 11 ? OTHERMONTHCLASS : ""
+                            cssClass: idx === 0 || idx == 11 ? OTHERMONTHCLASS : ""
                         };
                     }
                 });
@@ -1178,12 +1178,11 @@
                 return (year - year % 10) + "/0/1";
             }
         }]
-    }
+    };
 
     function view(options) {
         var idx = 0,
             data,
-            view = options.view,
             min = options.min,
             max = options.max,
             start = options.start,
@@ -1197,7 +1196,7 @@
             html = options.html || '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';
 
         for(; idx < length; idx++) {
-            if (idx > 0 && idx % cellsPerRow == 0) {
+            if (idx > 0 && idx % cellsPerRow === 0) {
                 html += "</tr><tr>";
             }
 
