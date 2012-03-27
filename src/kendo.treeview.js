@@ -157,7 +157,8 @@
         var wrapper = node.find(">div"),
             subGroup = node.find(">ul"),
             toggleButton = wrapper.find(">.k-icon"),
-            innerWrapper = wrapper.find(">.k-in");
+            innerWrapper = wrapper.find(">.k-in"),
+            currentNode, tmp;
 
         if (node.hasClass("k-treeview")) {
             return;
@@ -196,7 +197,7 @@
 
     function updateNodeClasses(node, groupData, nodeData) {
         var wrapper = node.find(">div"),
-            subGroup = node.find(">ul")
+            subGroup = node.find(">ul");
 
         if (node.hasClass("k-treeview")) {
             return;
@@ -204,7 +205,7 @@
 
         if (!nodeData) {
             nodeData = {
-                expanded: !(subGroup.css("display") == "none"),
+                expanded: subGroup.css("display") != "none",
                 index: node.index(),
                 enabled: !wrapper.find(">.k-in").hasClass("k-state-disabled")
             };
@@ -396,7 +397,10 @@
                 MOUSEENTER = "mouseenter",
                 dataInit;
 
-            options = $.isArray(options) ? (dataInit = true, { dataSource: options }) : options;
+            if ($.isArray(options)) {
+                dataInit = true;
+                options = { dataSource: options };
+            }
 
             Widget.prototype.init.call(that, element, options);
 
@@ -877,7 +881,7 @@
         select: function (node) {
             var element = this.element;
 
-            if (arguments.length == 0) {
+            if (!arguments.length) {
                 return element.find(".k-state-selected").closest(NODE);
             }
 
@@ -906,7 +910,7 @@
         toggle: function (node) {
             node = $(node);
 
-            if (node.find(".k-minus,.k-plus").length == 0) {
+            if (!node.find(".k-minus,.k-plus").length) {
                 return;
             }
 
@@ -922,8 +926,9 @@
                 collapse = extend({}, animationSettings.collapse),
                 hasCollapseAnimation = collapse && "effects" in collapse;
 
-            if (contents.data("animating"))
+            if (contents.data("animating")) {
                 return;
+            }
 
             if (!isExpanding) {
                 animation = extend( hasCollapseAnimation ? collapse
@@ -1324,10 +1329,12 @@
                 pageY: e.pageY,
                 pageX: e.pageX,
                 statusClass: statusClass.substring(2),
-                setStatusClass: function (value) { statusClass = value }
+                setStatusClass: function (value) {
+                    statusClass = value;
+                }
             });
 
-            if (statusClass.indexOf("k-insert") != 0) {
+            if (statusClass.indexOf("k-insert") !== 0) {
                 that.dropHint.css(VISIBILITY, "hidden");
             }
 
@@ -1448,8 +1455,8 @@
             var result = "k-item",
                 index = item.index;
 
-            if (group.firstLevel && index == 0) {
-                result += " k-first"
+            if (group.firstLevel && index === 0) {
+                result += " k-first";
             }
 
             if (index == group.length-1) {
@@ -1463,11 +1470,11 @@
                 index = item.index,
                 groupLength = group.length - 1;
 
-            if (group.firstLevel && index == 0) {
+            if (group.firstLevel && index === 0) {
                 result += "k-top ";
             }
 
-            if (index == 0 && index != groupLength) {
+            if (index === 0 && index != groupLength) {
                 result += "k-top";
             } else if (index == groupLength) {
                 result += "k-bot";

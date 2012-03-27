@@ -26,6 +26,9 @@ tests.push(
     {
         page: "treeview/mvvm.html",
         title: "treeview mvvm"
+    },
+    {
+        page: "treeview/lint.html",
+        title: "treeview lint"
     }
-
 );
