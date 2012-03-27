@@ -1290,6 +1290,7 @@ pre.prettyprint
     -moz-border-radius: 8px;
     border-radius: 8px;
     min-width: 170px;
+    max-width: 300px;
 }
 
 .absConf .configuration

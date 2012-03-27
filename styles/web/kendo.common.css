@@ -3097,10 +3097,14 @@ html .k-upload
 }
 
 .k-upload .k-delete,
-.k-upload .k-cancel,
-.k-upload .k-fail
+.k-upload .k-cancel
 {
     background-position: -164px -116px;
+}
+
+.k-upload .k-fail
+{
+    background-position: -161px -111px;
 }
 
 .k-retry { background-position: -164px -132px; }
@@ -3113,6 +3117,7 @@ html .k-upload
     min-width: 120px;
     max-width: 200px;
     vertical-align: middle;
+    padding-bottom: 2px;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3124,7 +3129,7 @@ html .k-upload
 .k-progress-status
 {
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 0;
     width: 118px;
     height: 2px;
