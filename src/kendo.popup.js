@@ -178,7 +178,7 @@
                                 .bind(MOUSEDOWN, that._mousedownProxy);
                 if (!touch) {
                     WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy)
-                          .bind(RESIZE_SCROLL, that._resizeProxy)
+                          .bind(RESIZE_SCROLL, that._resizeProxy);
                 }
 
                 that.wrapper = wrapper = kendo.wrap(element)
@@ -394,7 +394,7 @@
             var flipPos = extend({}, location);
 
             if (collisions[0] === "flip") {
-                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewport.height() / zoomLevel, origins[0], positions[0], wrapper.outerHeight())
+                location.top += that._flip(offsets.top, element.outerHeight(), anchor.outerHeight(), viewport.height() / zoomLevel, origins[0], positions[0], wrapper.outerHeight());
             }
 
             if (collisions[1] === "flip") {
