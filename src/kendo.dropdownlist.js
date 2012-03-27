@@ -301,7 +301,7 @@
          *  &lt;/script&gt;
          */
         init: function(element, options) {
-            var that = this,
+            var that = this;
 
             options = $.isArray(options) ? { dataSource: options } : options;
 
@@ -856,7 +856,7 @@
                     that.selectedIndex = idx;
 
                     that.text(text);
-                    that._accessor(value != undefined ? value : text, idx);
+                    that._accessor(value !== undefined ? value : text, idx);
                     that.current(li.addClass(SELECTED));
                 }
             }
@@ -888,7 +888,7 @@
             }
 
             that.span = span;
-            that._inputWrapper = $(wrapper[0].firstChild)
+            that._inputWrapper = $(wrapper[0].firstChild);
             that._arrow = wrapper.find(".k-icon").mousedown(function(e) { e.preventDefault(); });
         },
 
