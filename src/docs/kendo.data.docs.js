@@ -288,6 +288,8 @@
         * // calculates total sum of unitPrice field's values.
         * [{ field: "unitPrice", aggregate: "sum" }]
         *
+        * @option {String} [type] Loads transport with preconfigured settings. Currently supports only "odata" (Requires kendo.data.odata.js to be included).
+        *
         * @option {Object} [transport] Sets the object responsible for loading and saving of data.
         *  This can be a remote or local/in-memory data.
         *
@@ -406,7 +408,7 @@
         *          type: "jsonp"
         *      }
         *  });
-        * @option {String} [schema.type] Specify the type of schema { xml | json | odata }
+        * @option {String} [schema.type] Specify the type of schema { xml | json }
         * @option {Function} [schema.parse] Executed before deserialized data is read.
         *  Appropriate for preprocessing of the raw data.
         * @option {Function} [schema.data] Returns the deserialized data.
