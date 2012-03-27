@@ -18,6 +18,9 @@ tests.push(
     {
         page: "textbox/mvvm.html",
         title: "textbox mvvm"
+    },
+    {
+        page: "textbox/lint.html",
+        title: "textbox lint"
     }
-
 );

@@ -2123,6 +2123,7 @@
         data: {},
         mobile: {},
         keys: {
+            INSERT: 45,
             DELETE: 46,
             BACKSPACE: 8,
             TAB: 9,
