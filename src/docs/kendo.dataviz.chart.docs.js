@@ -23,16 +23,13 @@
      * </ul>
      *
      * <p>
-     * Please visit the Kendo UI Road Map for additional information about
+     * Please visit the <a href="http://www.kendoui.com/roadmap.aspx">Kendo UI Roadmap</a> for additional information about
      * new Chart types and features.
      * </p>
      *
      * <h3>
-     * Getting Started
-     * </h3>
-     * <h4>
      * Creating a Chart
-     * </h4>
+     * </h3>
      * To create a chart, add an empty div in the HTML and give it an ID.
      * @example
      * <div id="chart"></div>
@@ -61,9 +58,9 @@
      * });
      *
      * @section
-     * <h4>
+     * <h3>
      * Data Binding
-     * </h4>
+     * </h3>
      * <p>
      * The Charts can visualize series bound to both local and remote data.
      * </p>
