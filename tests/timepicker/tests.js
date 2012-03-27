@@ -18,6 +18,9 @@ tests.push(
     {
         page: "timepicker/mvvm.html",
         title: "timepicker mvvm"
+    },
+    {
+        page: "timepicker/lint.html",
+        title: "timepicker lint"
     }
-
 );

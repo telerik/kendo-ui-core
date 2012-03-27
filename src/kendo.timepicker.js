@@ -86,7 +86,6 @@
         keys = kendo.keys,
         ui = kendo.ui,
         Widget = ui.Widget,
-        keys = kendo.keys,
         OPEN = "open",
         CLOSE = "close",
         CHANGE = "change",
@@ -231,11 +230,9 @@
                 ulOffsetHeight = ul.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight;
 
-            ul.scrollTop = ulScrollTop > itemOffsetTop
-                        ? itemOffsetTop
-                        : bottomDistance > (ulScrollTop + ulOffsetHeight)
-                        ? bottomDistance - ulOffsetHeight
-                        : ulScrollTop;
+                ul.scrollTop = ulScrollTop > itemOffsetTop ?
+                               itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
+                               bottomDistance - ulOffsetHeight : ulScrollTop;
         },
 
         select: function(li) {
@@ -399,7 +396,7 @@
             msMax += MS_PER_DAY;
         }
 
-        return msValue >= msMin && msValue <= msMax
+        return msValue >= msMin && msValue <= msMax;
     }
 
     kendo.TimeView = TimeView;
@@ -612,7 +609,7 @@
             if (enable === false) {
                 wrapper
                     .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED)
+                    .addClass(STATEDISABLED);
 
                 element.attr(DISABLED, DISABLED);
             } else {
