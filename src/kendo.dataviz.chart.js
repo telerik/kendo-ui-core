@@ -1949,6 +1949,7 @@
                 point,
                 pointIx,
                 pointCount,
+                pointCenter,
                 lines = [];
 
             for (seriesIx = 0; seriesIx < seriesCount; seriesIx++) {
@@ -2146,6 +2147,7 @@
                 firstPoint,
                 lastPoint,
                 lineOptions,
+                line,
                 i;
 
             for (i = 0; i < linesCount; i++) {
