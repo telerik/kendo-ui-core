@@ -65,16 +65,20 @@
         }
     }
 
-    function value(dom, value) {
+    function value(dom, val) {
         var widget = dom.data(DROPDOWNLIST) || dom.data(NUMERICTEXTBOX) || dom.data(DATEPICKER);
 
         if (widget) {
-            widget.value(value);
+            widget.value(val);
         } else if (dom.is(":radio")) {
-            dom.filter("[value=" + value + "]").attr("checked", "checked");
+            dom.filter("[value=" + val + "]").attr("checked", "checked");
         } else {
-            dom.val(value);
+            dom.val(val);
         }
+    }
+
+    function identity(value) {
+        return value;
     }
 
     function toObject(array) {
@@ -92,7 +96,7 @@
         for (idx = 0, length = array.length; idx < length; idx++) {
             members = array[idx].name.split(/[\.\[\]]+/);
 
-            members = $.grep(members, function(value){ return value });
+            members = $.grep(members, identity);
 
             value = array[idx].value;
 
@@ -153,7 +157,7 @@
 
             that._parse = function(value) {
                  return value + "";
-            }
+            };
 
             if (that.model && that.model.fields) {
                 field = that.model.fields[that.field];
@@ -250,7 +254,7 @@
             removeFiltersForField(result, that.field);
 
             filters = $.grep(filters, function(filter) {
-                return filter.value != "";
+                return filter.value !== "";
             });
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
