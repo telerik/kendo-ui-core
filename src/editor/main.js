@@ -90,8 +90,8 @@
                 toolsArea = $(editor.element).closest(".k-editor").find(".k-editor-toolbar");
 
             if (tools) {
-                for (j = 0; j < tools.length; j++) {
-                    currentTool = tools[j];
+                for (i = 0; i < tools.length; i++) {
+                    currentTool = tools[i];
 
                     if ($.isPlainObject(currentTool)) {
                         options = extend({ cssClass: "k-custom", type: "button", tooltip: "" }, currentTool);
@@ -133,8 +133,8 @@
                 }
             }
 
-            for (j = 0; j < nativeTools.length; j++) {
-                editorTools[nativeTools[j]] = editor._tools[nativeTools[j]];
+            for (i = 0; i < nativeTools.length; i++) {
+                editorTools[nativeTools[i]] = editor._tools[nativeTools[i]];
             }
 
             editor.options.tools = editorTools;
@@ -265,8 +265,9 @@
 
                         var target = $(e.target);
 
-                        if (!$.browser.gecko && e.which == 2 && target.is("a[href]"))
-                        window.open(target.attr("href"), "_new");
+                        if (!$.browser.gecko && e.which == 2 && target.is("a[href]")) {
+                            window.open(target.attr("href"), "_new");
+                        }
                     },
                     mouseup: function () {
                         select(editor);
@@ -295,26 +296,38 @@
 
             var range = editor.getRange(),
                 startContainer = range.startContainer,
-                dom = kendo.ui.editor.Dom;
+                dom = kendo.ui.editor.Dom,
+                startContainerChildCount = startContainer.childNodes.length;
 
-            if (startContainer == editor.body.firstChild || !dom.isBlock(startContainer)
-            || (startContainer.childNodes.length > 0 && !(startContainer.childNodes.length == 1 && dom.is(startContainer.firstChild, "br"))))
+            if (startContainer == editor.body.firstChild ||
+                !dom.isBlock(startContainer) ||
+                (startContainerChildCount > 0 && !(startContainerChildCount == 1 && dom.is(startContainer.firstChild, "br")))) {
                 return;
+            }
 
             var previousBlock = startContainer.previousSibling;
 
-            while (previousBlock && !dom.isBlock(previousBlock))
+            while (previousBlock && !dom.isBlock(previousBlock)) {
                 previousBlock = previousBlock.previousSibling;
+            }
 
-            if (!previousBlock)
+            if (!previousBlock) {
                 return;
+            }
 
-            var walker = editor.document.createTreeWalker(previousBlock, NodeFilter.SHOW_TEXT, null, false);
+            var walker = editor.document.createTreeWalker(previousBlock, window.NodeFilter.SHOW_TEXT, null, false);
 
             var textNode;
 
-            while (textNode = walker.nextNode())
-                previousBlock = textNode;
+            while (true) {
+                textNode = walker.nextNode();
+
+                if (textNode) {
+                    previousBlock = textNode;
+                } else {
+                    break;
+                }
+            }
 
             range.setStart(previousBlock, dom.isDataNode(previousBlock) ? previousBlock.nodeValue.length : 0);
             range.collapse(true);
@@ -326,9 +339,11 @@
         },
 
         formatByName: function(name, format) {
-            for (var i = 0; i < format.length; i++)
-                if ($.inArray(name, format[i].tags) >= 0)
+            for (var i = 0; i < format.length; i++) {
+                if ($.inArray(name, format[i].tags) >= 0) {
                     return format[i];
+                }
+            }
         },
 
         registerTool: function(toolName, tool) {
@@ -388,7 +403,14 @@
         directoryNotFound: "A directory with this name was not found."
     };
 
-    var emptyFinder = function () { return { isFormatted: function () { return false } } };
+    var emptyFinder = function () {
+        return {
+            isFormatted: function () {
+                return false;
+            }
+        };
+    };
+
     var supportedBrowser = !kendo.support.mobileOS || (kendo.support.mobileOS.ios && kendo.support.mobileOS.majorVersion >= 5);
 
     var Editor = Widget.extend({
@@ -453,14 +475,23 @@
             }
 
             function appendShortcutSequence(localizedText, tool) {
-                if (!tool.key)
+                if (!tool.key) {
                     return localizedText;
+                }
 
                 var res = localizedText + " (";
 
-                if (tool.ctrl) res += "Ctrl + ";
-                if (tool.shift) res += "Shift + ";
-                if (tool.alt) res += "Alt + ";
+                if (tool.ctrl) {
+                    res += "Ctrl + ";
+                }
+
+                if (tool.shift) {
+                    res += "Shift + ";
+                }
+
+                if (tool.alt) {
+                    res += "Alt + ";
+                }
 
                 res += tool.key + ")";
 
@@ -487,8 +518,8 @@
             });
 
             wrapper
-                .delegate(enabledButtons, "mouseenter", function() { $(this).addClass("k-state-hover")})
-                .delegate(enabledButtons, "mouseleave", function() { $(this).removeClass("k-state-hover")})
+                .delegate(enabledButtons, "mouseenter", function() { $(this).addClass("k-state-hover"); })
+                .delegate(enabledButtons, "mouseleave", function() { $(this).removeClass("k-state-hover"); })
                 .delegate(buttons, "mousedown", false)
                 .delegate(focusable, "keydown", function(e) {
                     var closestLi = $(this).closest("li"),
@@ -517,7 +548,7 @@
 
                             focusElement = closestLi.nextAll(focusableTool).first().find(focusable);
 
-                            if (focusElement.length == 0) {
+                            if (!focusElement.length) {
                                 focusElement = that;
                             }
                         }
@@ -546,7 +577,7 @@
                         }
 
                         if (toolName == "fontSize" || toolName == "fontName") {
-                            var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"]
+                            var inheritText = options.localization[toolName + "Inherit"] || localization[toolName + "Inherit"];
                             options[toolName][0].Text = inheritText;
                             $this.find("input").val(inheritText).end()
                                  .find("span.k-input").text(inheritText).end();
@@ -591,8 +622,9 @@
                 })
                 .bind("mousedown", function(e) {
                     try {
-                        if (that.keyboard.isTypingInProgress())
+                        if (that.keyboard.isTypingInProgress()) {
                             that.keyboard.endTyping(true);
+                        }
 
                         if (!that.selectionRestorePoint) {
                             that.selectionRestorePoint = new editorNS.RestorePoint(that.getRange());
@@ -716,7 +748,7 @@
                 html = html.replace(/<p([^>]*)>(\s*)?<\/p>/ig, '<p $1><br _moz_dirty="" /><\/p>');
             }
 
-            if ($.browser.msie && parseInt($.browser.version) < 9) {
+            if ($.browser.msie && parseInt($.browser.version, 10) < 9) {
                 // Internet Explorer removes comments from the beginning of the html
                 html = "<br/>" + html;
 
@@ -781,10 +813,11 @@
         },
 
         getRange: function () {
-            var selection = this.getSelection();
-            var range = selection.rangeCount > 0 ? selection.getRangeAt(0) : this.createRange();
+            var selection = this.getSelection(),
+                range = selection.rangeCount > 0 ? selection.getRangeAt(0) : this.createRange(),
+                doc = this.document;
 
-            if (range.startContainer == this.document && range.endContainer == this.document && range.startOffset == 0 && range.endOffset == 0) {
+            if (range.startContainer == doc && range.endContainer == doc && !range.startOffset && !range.endOffset) {
                 range.setStart(this.body, 0);
                 range.collapse(true);
             }
