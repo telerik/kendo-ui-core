@@ -6,7 +6,6 @@
         Widget = kendo.ui.Widget,
         keys = kendo.keys,
         FOCUSSELECTOR =  ">*",
-        CHANGE = "change",
         REQUESTSTART = "requestStart",
         ERROR = "error",
         FOCUSED = "k-state-focused",
@@ -296,8 +295,8 @@
                }
 
                if (valid) {
-                   data = that.dataSource.view()[editable.element.index()],
-                   container = $(that.template(data))
+                   data = that.dataSource.view()[editable.element.index()];
+                   container = $(that.template(data));
                    that._destroyEditable();
                    editable.element.replaceWith(container);
                }
