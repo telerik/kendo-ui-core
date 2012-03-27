@@ -351,7 +351,7 @@
             if (enable === false) {
                 wrapper
                     .removeClass(DEFAULT)
-                    .addClass(STATEDISABLED)
+                    .addClass(STATEDISABLED);
 
                 text.attr(DISABLED, DISABLED);
             } else {
@@ -596,21 +596,21 @@
                 precision = numberFormat.decimals;
             }
 
-            if ((key > 16 && key < 21)
-             || (key > 32 && key < 37)
-             || (key > 47 && key < 58)
-             || (key > 95 && key < 106)
-             || key == 45 /* INSERT */
-             || key == 46 /* DELETE */
-             || key == keys.LEFT
-             || key == keys.RIGHT
-             || key == keys.TAB
-             || key == keys.BACKSPACE
-             || key == keys.ENTER) {
+            if ((key > 16 && key < 21) ||
+                (key > 32 && key < 37) ||
+                (key > 47 && key < 58) ||
+                (key > 95 && key < 106) ||
+                 key == keys.INSERT ||
+                 key == keys.DELETE ||
+                 key == keys.LEFT ||
+                 key == keys.RIGHT ||
+                 key == keys.TAB ||
+                 key == keys.BACKSPACE ||
+                 key == keys.ENTER) {
                 prevent = false;
             } else if (decimals[key] === separator && precision > 0 && value.indexOf(separator) == -1) {
                 prevent = false;
-            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && idx == 0) { //sign
+            } else if ((min === NULL || min < 0) && value.indexOf("-") == -1 && (key == 189 || key == 109) && idx === 0) { //sign
                 prevent = false;
             } else if (key == 110 && precision > 0 && value.indexOf(separator) == -1) {
                 end = value.substring(idx);
@@ -709,7 +709,7 @@
     });
 
     function buttonHtml(className, text) {
-        return '<span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span></span>'
+        return '<span unselectable="on" class="k-link"><span unselectable="on" class="k-icon k-arrow-' + className + '" title="' + text + '">' + text + '</span></span>';
     }
 
     function caret(element, position) {
@@ -718,7 +718,7 @@
 
         if (document.selection) {
             element.focus();
-            var range = document.selection.createRange();
+            range = document.selection.createRange();
             if (isPosition) {
                 range.move("character", position);
                 range.select();
