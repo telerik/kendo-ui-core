@@ -714,8 +714,6 @@
         this.data = data || [];
     }
 
-    Query.normalizeFilter = normalizeFilter;
-
     Query.filterExpr = function(expression) {
         var expressions = [],
             logic = { and: " && ", or: " || " },
@@ -845,6 +843,8 @@
             return expression;
         }
     }
+
+    Query.normalizeFilter = normalizeFilter;
 
     function normalizeAggregate(expressions) {
         return isArray(expressions) ? expressions : [expressions];
@@ -1278,27 +1278,10 @@
         }
     });
 
-    Cache.create = function(options) {
-        var store = {
-            "inmemory": function() { return new Cache(); }
-        };
-
-        if (isPlainObject(options) && isFunction(options.find)) {
-            return options;
-        }
-
-        if (options === true) {
-            return new Cache();
-        }
-
-        return store[options]();
-    };
-
-    function Cache() {
-        this._store = {};
-    }
-
-    Cache.prototype = /** @ignore */ {
+    var Cache = Class.extend({
+        init: function() {
+            this._store = {};
+        },
         add: function(key, data) {
             if(key !== undefined) {
                 this._store[stringify(key)] = data;
@@ -1313,6 +1296,22 @@
         remove: function(key) {
             delete this._store[stringify(key)];
         }
+    });
+
+    Cache.create = function(options) {
+        var store = {
+            "inmemory": function() { return new Cache(); }
+        };
+
+        if (isPlainObject(options) && isFunction(options.find)) {
+            return options;
+        }
+
+        if (options === true) {
+            return new Cache();
+        }
+
+        return store[options]();
     };
 
     var DataReader = Class.extend({
