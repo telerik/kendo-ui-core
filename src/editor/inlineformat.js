@@ -210,7 +210,9 @@ var GreedyInlineFormatFinder = InlineFormatFinder.extend({
             trim = $.trim,
             i, l, attribute, name, attributeValue, css, pair, cssIndex, len, propertyAndValue, property, value;
 
-        if (!attributes) return;
+        if (!attributes) {
+            return;
+        }
 
         for (i = 0, l = attributes.length; i < l; i++) {
             attribute = attributes[i];
@@ -282,7 +284,7 @@ var GreedyInlineFormatter = InlineFormatter.extend({
 
         that.greedyProperty = greedyProperty;
         that.values = values;
-        that.finder = new GreedyInlineFormatFinder(format, greedyProperty)
+        that.finder = new GreedyInlineFormatFinder(format, greedyProperty);
     },
 
     activate: function(range, nodes) {
@@ -290,7 +292,7 @@ var GreedyInlineFormatter = InlineFormatter.extend({
         that.split(range);
 
         if (that.greedyProperty) {
-            var camelCase = that.greedyProperty.replace(/-([a-z])/, function(all, letter){return letter.toUpperCase()});
+            var camelCase = that.greedyProperty.replace(/-([a-z])/, function(all, letter) { return letter.toUpperCase(); });
             that[that.values.style[camelCase] == "inherit" ? "remove" : "apply"](nodes);
         } else {
             that.apply(nodes);
@@ -306,7 +308,7 @@ var InlineFormatTool = FormatTool.extend({
     init: function(options) {
         FormatTool.fn.init.call(this, extend(options, {
             finder: new InlineFormatFinder(options.format),
-            formatter: function () { return new InlineFormatter(options.format) }
+            formatter: function () { return new InlineFormatter(options.format); }
         }));
 
         this.willDelayExecution = inlineFormatWillDelayExecution;
@@ -326,16 +328,17 @@ var FontTool = Tool.extend({
     },
 
     command: function (commandArguments) {
-        var options = this.options;
+        var options = this.options,
             format = this.format,
             style = {};
+
         return new Editor.FormatCommand(extend(commandArguments, {
             formatter: function () {
                 style[options.domAttr] = commandArguments.value;
 
                 return new GreedyInlineFormatter(format, { style: style }, options.cssAttr);
             }
-        }))
+        }));
     },
 
     willDelayExecution: inlineFormatWillDelayExecution,
@@ -439,7 +442,7 @@ var StyleTool = Tool.extend({
         var editor = initOptions.editor;
 
         ui.kendoDropDownList({
-            data: editor["style"],
+            data: editor.style,
             title: editor.options.localization.style,
             itemCreate: function (e) {
                 var style = dom.inlineStyle(editor.document, "span", {className : e.dataItem.Value});

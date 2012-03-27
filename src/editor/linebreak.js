@@ -32,6 +32,26 @@ var ParagraphCommand = Command.extend({
             endInBlock = dom.parentOfType(range.endContainer, blocks),
             shouldTrim = (startInBlock && !endInBlock) || (!startInBlock && endInBlock);
 
+        function clean(node) {
+            if (node.firstChild && dom.is(node.firstChild, 'br')) {
+                dom.remove(node.firstChild);
+            }
+
+            if (dom.isDataNode(node) && !node.nodeValue) {
+                node = node.parentNode;
+            }
+
+            if (node && !dom.is(node, 'img')) {
+                while (node.firstChild && node.firstChild.nodeType == 1) {
+                    node = node.firstChild;
+                }
+
+                if (!node.innerHTML) {
+                    node.innerHTML = emptyParagraphContent;
+                }
+            }
+        }
+
         range.deleteContents();
 
         marker = dom.create(doc, 'a');
@@ -54,7 +74,7 @@ var ParagraphCommand = Command.extend({
             rng.selectNode(li);
 
             // hitting 'enter' in empty li
-            if (RangeUtils.textNodes(rng).length == 0) {
+            if (!RangeUtils.textNodes(rng).length) {
                 paragraph = dom.create(doc, 'p');
 
                 if (li.nextSibling) {
@@ -99,26 +119,6 @@ var ParagraphCommand = Command.extend({
             }
 
             dom.remove(parent);
-
-            function clean(node) {
-                if (node.firstChild && dom.is(node.firstChild, 'br')) {
-                    dom.remove(node.firstChild);
-                }
-
-                if (dom.isDataNode(node) && node.nodeValue == '') {
-                    node = node.parentNode;
-                }
-
-                if (node && !dom.is(node, 'img')) {
-                    while (node.firstChild && node.firstChild.nodeType == 1) {
-                        node = node.firstChild;
-                    }
-
-                    if (node.innerHTML == '') {
-                        node.innerHTML = emptyParagraphContent;
-                    }
-                }
-            }
 
             clean(previous);
             clean(next);

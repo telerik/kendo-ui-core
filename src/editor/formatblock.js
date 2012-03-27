@@ -25,8 +25,9 @@ var BlockFormatFinder = Class.extend({
 
         for (i = 0, len = children.length; i < len; i++) {
             child = children[i];
-            if (child == null || !dom.isAncestorOrSelf(node, child))
+            if (!child || !dom.isAncestorOrSelf(node, child)) {
                 return false;
+            }
         }
 
         return true;
@@ -39,22 +40,27 @@ var BlockFormatFinder = Class.extend({
 
         for (i = 0, len = nodes.length; i < len; i++) {
             candidate = dom.ofType(nodes[i], format[0].tags) ? nodes[i] : dom.parentOfType(nodes[i], format[0].tags);
-            if (!candidate)
+            if (!candidate) {
                 return [];
-            if ($.inArray(candidate, suitable) < 0)
+            }
+
+            if ($.inArray(candidate, suitable) < 0) {
                 suitable.push(candidate);
+            }
         }
 
-        for (i = 0, len = suitable.length; i < len; i++)
-            if (this.contains(suitable[i], suitable))
+        for (i = 0, len = suitable.length; i < len; i++) {
+            if (this.contains(suitable[i], suitable)) {
                 return [suitable[i]];
+            }
+        }
 
         return suitable;
     },
 
     findFormat: function (sourceNode) {
         var format = this.format,
-        i, len, node, tags, attributes;
+            i, len, node, tags, attributes;
 
         for (i = 0, len = format.length; i < len; i++) {
             node = sourceNode;
@@ -62,8 +68,10 @@ var BlockFormatFinder = Class.extend({
             attributes = format[i].attr;
 
             while (node) {
-                if (dom.ofType(node, tags) && dom.attrEquals(node, attributes))
+                if (dom.ofType(node, tags) && dom.attrEquals(node, attributes)) {
                     return node;
+                }
+
                 node = node.parentNode;
             }
         }
@@ -71,24 +79,32 @@ var BlockFormatFinder = Class.extend({
     },
 
     getFormat: function (nodes) {
-        var findFormat = $.proxy(function(node) { return this.findFormat(dom.isDataNode(node) ? node.parentNode : node); }, this),
+        var that = this,
+            findFormat = function(node) {
+                    return that.findFormat(dom.isDataNode(node) ? node.parentNode : node);
+                },
             result = findFormat(nodes[0]),
-            i;
+            i, len;
 
-        if (!result)
+        if (!result) {
             return "";
+        }
 
-        for (i = 1, len = nodes.length; i < len; i++)
-            if (result != findFormat(nodes[i]))
+        for (i = 1, len = nodes.length; i < len; i++) {
+            if (result != findFormat(nodes[i])) {
                 return "";
+            }
+        }
 
         return result.nodeName.toLowerCase();
     },
 
     isFormatted: function (nodes) {
-        for (var i = 0, len = nodes.length; i < len; i++)
-            if (!this.findFormat(nodes[i]))
+        for (var i = 0, len = nodes.length; i < len; i++) {
+            if (!this.findFormat(nodes[i])) {
                 return false;
+            }
+        }
 
         return true;
     }
@@ -104,8 +120,9 @@ var BlockFormatter = Class.extend({
     wrap: function(tag, attributes, nodes) {
         var commonAncestor = nodes.length == 1 ? dom.blockParentOrBody(nodes[0]) : dom.commonAncestor.apply(null, nodes);
 
-        if (dom.isInline(commonAncestor))
+        if (dom.isInline(commonAncestor)) {
             commonAncestor = dom.blockParentOrBody(commonAncestor);
+        }
 
         var ancestors = dom.significantChildNodes(commonAncestor),
             position = dom.findNodeIndex(ancestors[0]),
@@ -130,8 +147,9 @@ var BlockFormatter = Class.extend({
             wrapper.appendChild(ancestor);
         }
 
-        if (wrapper.firstChild)
+        if (wrapper.firstChild) {
             dom.insertAt(commonAncestor, wrapper, position);
+        }
     },
 
     apply: function (nodes) {
@@ -240,7 +258,9 @@ var BlockFormatTool = FormatTool.extend({
     init: function (options) {
         FormatTool.fn.init.call(this, extend(options, {
             finder: new BlockFormatFinder(options.format),
-            formatter: function () { return new BlockFormatter(options.format) }
+            formatter: function () {
+                return new BlockFormatter(options.format);
+            }
         }));
     }
 });

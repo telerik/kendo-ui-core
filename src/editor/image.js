@@ -29,10 +29,11 @@ var ImageCommand = Command.extend({
             if (!img) {
                 img = dom.create(RangeUtils.documentFromRange(range), "img", attributes);
                 img.onload = img.onerror = function () {
-                    img.removeAttribute("complete");
-                    img.removeAttribute("width");
-                    img.removeAttribute("height");
-                }
+                        img.removeAttribute("complete");
+                        img.removeAttribute("width");
+                        img.removeAttribute("height");
+                    };
+
                 range.deleteContents();
                 range.insertNode(img);
                 range.setStartAfter(img);

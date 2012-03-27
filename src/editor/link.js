@@ -28,7 +28,7 @@ var LinkFormatter = Class.extend({
 
     apply: function (range, attributes) {
         var nodes = textNodes(range);
-        if (attributes.innerHTML != undefined) {
+        if (attributes.innerHTML) {
             var markers = RangeUtils.getMarkers(range);
             var document = RangeUtils.documentFromRange(range);
             range.deleteContents();
@@ -81,31 +81,37 @@ var LinkCommand = Command.extend({
 
         var initialText = null;
 
-        var self = this;
+        var that = this;
 
         function apply(e) {
             var href = $('#k-editor-link-url', dialog.element).val();
 
             if (href && href != 'http://') {
-                self.attributes = { href: href };
+                that.attributes = { href: href };
 
                 var title = $('#k-editor-link-title', dialog.element).val();
-                if (title)
-                    self.attributes.title = title;
+                if (title) {
+                    that.attributes.title = title;
+                }
 
                 var text = $('#k-editor-link-text', dialog.element).val();
-                if (text !== initialText)
-                    self.attributes.innerHTML = text || href;
+                if (text !== initialText) {
+                    that.attributes.innerHTML = text || href;
+                }
 
                 var target = $('#k-editor-link-target', dialog.element).is(':checked');
-                if (target)
-                    self.attributes.target = '_blank';
+                if (target) {
+                    that.attributes.target = '_blank';
+                }
 
-                self.formatter.apply(range, self.attributes);
+                that.formatter.apply(range, that.attributes);
             }
+
             close(e);
-            if (self.change)
-                self.change();
+
+            if (that.change) {
+                that.change();
+            }
         }
 
         function close(e) {
@@ -114,10 +120,10 @@ var LinkCommand = Command.extend({
 
             dom.windowFromDocument(RangeUtils.documentFromRange(range)).focus();
 
-            self.releaseRange(range);
+            that.releaseRange(range);
         }
 
-        var a = nodes.length ? self.formatter.finder.findSuitable(nodes[0]) : null;
+        var a = nodes.length ? that.formatter.finder.findSuitable(nodes[0]) : null;
 
         var shouldShowText = nodes.length <= 1 || (nodes.length == 2 && collapsed);
 
@@ -144,10 +150,11 @@ var LinkCommand = Command.extend({
             .find('.k-dialog-insert').click(apply).end()
             .find('.k-dialog-close').click(close).end()
             .find('.k-form-text-row input').keydown(function (e) {
-                if (e.keyCode == 13)
+                if (e.keyCode == 13) {
                     apply(e);
-                else if (e.keyCode == 27)
+                } else if (e.keyCode == 27) {
                     close(e);
+                }
             }).end()
             // IE < 8 returns absolute url if getAttribute is not used
             .find('#k-editor-link-url').val(a ? a.getAttribute('href', 2) : 'http://').end()
@@ -158,8 +165,9 @@ var LinkCommand = Command.extend({
             .data('kendoWindow')
             .center();
 
-        if (shouldShowText && nodes.length > 0)
+        if (shouldShowText && nodes.length > 0) {
             initialText = $('#k-editor-link-text', dialog.element).val();
+        }
 
         $('#k-editor-link-url', dialog.element).focus().select();
     },

@@ -28,14 +28,14 @@ var SelectionUtils = {
     },
 
     selectionFromRange: function(range) {
-        var document = RangeUtils.documentFromRange(range);
-        return SelectionUtils.selectionFromDocument(document);
+        var rangeDocument = RangeUtils.documentFromRange(range);
+        return SelectionUtils.selectionFromDocument(rangeDocument);
     },
 
     selectionFromDocument: function(document) {
         return SelectionUtils.selectionFromWindow(dom.windowFromDocument(document));
     }
-}
+};
 
 var W3CRange = Class.extend({
     init: function(doc) {
@@ -92,26 +92,35 @@ var W3CRange = Class.extend({
     },
 
     collapse: function (toStart) {
-        if (toStart)
-            this.setEnd(this.startContainer, this.startOffset);
-        else
-            this.setStart(this.endContainer, this.endOffset);
+        var that = this;
+
+        if (toStart) {
+            that.setEnd(that.startContainer, that.startOffset);
+        } else {
+            that.setStart(that.endContainer, that.endOffset);
+        }
     },
 
     // Editing Methods
 
     deleteContents: function () {
-        var range = this.cloneRange();
+        var that = this,
+            range = that.cloneRange();
 
-        if (this.startContainer != this.commonAncestorContainer)
-            this.setStartAfter(findClosestAncestor(this.commonAncestorContainer, this.startContainer));
+        if (that.startContainer != that.commonAncestorContainer) {
+            that.setStartAfter(findClosestAncestor(that.commonAncestorContainer, that.startContainer));
+        }
 
-        this.collapse(true);
+        that.collapse(true);
 
         (function deleteSubtree(iterator) {
-            while (iterator.next())
-                iterator.hasPartialSubtree() ? deleteSubtree(iterator.getSubtreeIterator())
-                                            : iterator.remove();
+            while (iterator.next()) {
+                if (iterator.hasPartialSubtree()) {
+                    deleteSubtree(iterator.getSubtreeIterator());
+                } else {
+                    iterator.remove();
+                }
+            }
         })(new RangeIterator(range));
     },
 
@@ -119,34 +128,44 @@ var W3CRange = Class.extend({
         // clone subtree
         var document = RangeUtils.documentFromRange(this);
         return (function cloneSubtree(iterator) {
-                for (var node, frag = document.createDocumentFragment(); node = iterator.next(); ) {
-                        node = node.cloneNode(!iterator.hasPartialSubtree());
-                        if (iterator.hasPartialSubtree())
-                                node.appendChild(cloneSubtree(iterator.getSubtreeIterator()));
-                        frag.appendChild(node);
+                var node, frag = document.createDocumentFragment();
+
+                while (node = iterator.next()) {
+                    node = node.cloneNode(!iterator.hasPartialSubtree());
+
+                    if (iterator.hasPartialSubtree()) {
+                        node.appendChild(cloneSubtree(iterator.getSubtreeIterator()));
+                    }
+
+                    frag.appendChild(node);
                 }
+
                 return frag;
         })(new RangeIterator(this));
     },
 
     extractContents: function () {
-        var range = this.cloneRange();
+        var that = this,
+            range = that.cloneRange();
 
-        if (this.startContainer != this.commonAncestorContainer)
-            this.setStartAfter(findClosestAncestor(this.commonAncestorContainer, this.startContainer));
+        if (that.startContainer != that.commonAncestorContainer) {
+            that.setStartAfter(findClosestAncestor(that.commonAncestorContainer, that.startContainer));
+        }
 
-        this.collapse(true);
+        that.collapse(true);
 
-        var self = this;
-
-        var document = RangeUtils.documentFromRange(this);
+        var document = RangeUtils.documentFromRange(that);
 
         return (function extractSubtree(iterator) {
-            for (var node, frag = document.createDocumentFragment(); node = iterator.next(); ) {
-                iterator.hasPartialSubtree() ? node = node.cloneNode(false) : iterator.remove(self.originalRange);
+            var node, frag = document.createDocumentFragment();
 
-                if (iterator.hasPartialSubtree())
+            while (node = iterator.next()) {
+                if (iterator.hasPartialSubtree()) {
+                    node = node.cloneNode(false);
                     node.appendChild(extractSubtree(iterator.getSubtreeIterator()));
+                } else {
+                    iterator.remove(that.originalRange);
+                }
 
                 frag.appendChild(node);
             }
@@ -156,16 +175,19 @@ var W3CRange = Class.extend({
     },
 
     insertNode: function (node) {
-        if (isDataNode(this.startContainer)) {
-            if (this.startOffset != this.startContainer.nodeValue.length)
-                dom.splitDataNode(this.startContainer, this.startOffset);
+        var that = this;
 
-            dom.insertAfter(node, this.startContainer);
+        if (isDataNode(that.startContainer)) {
+            if (that.startOffset != that.startContainer.nodeValue.length) {
+                dom.splitDataNode(that.startContainer, that.startOffset);
+            }
+
+            dom.insertAfter(node, that.startContainer);
         } else {
-            dom.insertAt(this.startContainer, node, this.startOffset);
+            dom.insertAt(that.startContainer, node, that.startOffset);
         }
 
-        this.setStart(this.startContainer, this.startOffset);
+        that.setStart(that.startContainer, that.startOffset);
     },
 
     cloneRange: function () {
@@ -194,44 +216,54 @@ var W3CRange = Class.extend({
 
 /* can be used in Range.compareBoundaryPoints if we need it one day */
 function compareBoundaries(start, end, startOffset, endOffset) {
-    if (start == end)
+    if (start == end) {
         return endOffset - startOffset;
+    }
 
     // end is child of start
     var container = end;
-    while (container && container.parentNode != start)
+    while (container && container.parentNode != start) {
         container = container.parentNode;
+    }
 
-    if (container)
+    if (container) {
         return findNodeIndex(container) - startOffset;
+    }
 
     // start is child of end
     container = start;
-    while (container && container.parentNode != end)
+    while (container && container.parentNode != end) {
         container = container.parentNode;
+    }
 
-    if (container)
+    if (container) {
         return endOffset - findNodeIndex(container) - 1;
+    }
 
     // deep traversal
     var root = dom.commonAncestor(start, end);
     var startAncestor = start;
 
-    while (startAncestor && startAncestor.parentNode != root)
+    while (startAncestor && startAncestor.parentNode != root) {
         startAncestor = startAncestor.parentNode;
+    }
 
-    if (!startAncestor)
+    if (!startAncestor) {
         startAncestor = root;
+    }
 
     var endAncestor = end;
-    while (endAncestor && endAncestor.parentNode != root)
+    while (endAncestor && endAncestor.parentNode != root) {
         endAncestor = endAncestor.parentNode;
+    }
 
-    if (!endAncestor)
+    if (!endAncestor) {
         endAncestor = root;
+    }
 
-    if (startAncestor == endAncestor)
+    if (startAncestor == endAncestor) {
         return 0;
+    }
 
     return findNodeIndex(endAncestor) - findNodeIndex(startAncestor);
 }
@@ -263,8 +295,9 @@ function updateRangeProperties(range) {
     range.collapsed = range.startContainer == range.endContainer && range.startOffset == range.endOffset;
 
     var node = range.startContainer;
-    while (node && node != range.endContainer && !dom.isAncestorOf(node, range.endContainer))
+    while (node && node != range.endContainer && !dom.isAncestorOf(node, range.endContainer)) {
         node = node.parentNode;
+    }
 
     range.commonAncestorContainer = node;
 }
@@ -278,8 +311,9 @@ var RangeIterator = Class.extend({
             _end: null
         });
 
-        if (range.collapsed)
+        if (range.collapsed) {
             return;
+        }
 
         var root = range.commonAncestorContainer;
 
@@ -297,72 +331,85 @@ var RangeIterator = Class.extend({
     },
 
     next: function () {
-        var current = this._current = this._next;
-        this._next = this._current && this._current.nextSibling != this._end ?
-        this._current.nextSibling : null;
+        var that = this,
+            current = that._current = that._next;
+        that._next = that._current && that._current.nextSibling != that._end ?
+        that._current.nextSibling : null;
 
-        if (isDataNode(this._current)) {
-            if (this.range.endContainer == this._current)
-                (current = current.cloneNode(true)).deleteData(this.range.endOffset, current.length - this.range.endOffset);
+        if (isDataNode(that._current)) {
+            if (that.range.endContainer == that._current) {
+                current = current.cloneNode(true);
+                current.deleteData(that.range.endOffset, current.length - that.range.endOffset);
+            }
 
-            if (this.range.startContainer == this._current)
-                (current = current.cloneNode(true)).deleteData(0, this.range.startOffset);
+            if (that.range.startContainer == that._current) {
+                current = current.cloneNode(true);
+                current.deleteData(0, that.range.startOffset);
+            }
         }
 
         return current;
     },
 
     traverse: function (callback) {
+        var that = this,
+            current;
+
         function next() {
-            this._current = this._next;
-            this._next = this._current && this._current.nextSibling != this._end ? this._current.nextSibling : null;
-            return this._current;
+            that._current = that._next;
+            that._next = that._current && that._current.nextSibling != that._end ? that._current.nextSibling : null;
+            return that._current;
         }
 
-        var current;
-
-        while (current = next.call(this)) {
-            if (this.hasPartialSubtree())
-                this.getSubtreeIterator().traverse(callback);
-            else
-                callback(current)
+        while (current = next()) {
+            if (that.hasPartialSubtree()) {
+                that.getSubtreeIterator().traverse(callback);
+            } else {
+                callback(current);
+            }
         }
 
         return current;
     },
 
     remove: function (originalRange) {
-        var inStartContainer = this.range.startContainer == this._current;
-        var inEndContainer = this.range.endContainer == this._current;
+        var that = this,
+            inStartContainer = that.range.startContainer == that._current,
+            inEndContainer = that.range.endContainer == that._current,
+            start, end, delta;
 
-        if (isDataNode(this._current) && (inStartContainer || inEndContainer)) {
-            var start = inStartContainer ? this.range.startOffset : 0;
-            var end = inEndContainer ? this.range.endOffset : this._current.length;
-            var delta = end - start;
+        if (isDataNode(that._current) && (inStartContainer || inEndContainer)) {
+            start = inStartContainer ? that.range.startOffset : 0;
+            end = inEndContainer ? that.range.endOffset : that._current.length;
+            delta = end - start;
 
             if (originalRange && (inStartContainer || inEndContainer)) {
-                if (this._current == originalRange.startContainer && start <= originalRange.startOffset)
+                if (that._current == originalRange.startContainer && start <= originalRange.startOffset) {
                     originalRange.startOffset -= delta;
+                }
 
-                if (this._current == originalRange.endContainer && end <= originalRange.endOffset)
+                if (that._current == originalRange.endContainer && end <= originalRange.endOffset) {
                     originalRange.endOffset -= delta;
+                }
             }
 
-            this._current.deleteData(start, delta);
+            that._current.deleteData(start, delta);
         } else {
-            var parent = this._current.parentNode;
+            var parent = that._current.parentNode;
 
-            if (originalRange && (this.range.startContainer == parent || this.range.endContainer == parent)) {
-                var nodeIndex = findNodeIndex(this._current);
+            if (originalRange && (that.range.startContainer == parent || that.range.endContainer == parent)) {
+                var nodeIndex = findNodeIndex(that._current);
 
-                if (parent == originalRange.startContainer && nodeIndex <= originalRange.startOffset)
+                if (parent == originalRange.startContainer && nodeIndex <= originalRange.startOffset) {
                     originalRange.startOffset -= 1;
+                }
 
-                if (parent == originalRange.endContainer && nodeIndex < originalRange.endOffset)
+                if (parent == originalRange.endContainer && nodeIndex < originalRange.endOffset) {
                     originalRange.endOffset -= 1;
+                }
             }
 
-            dom.remove(this._current);
+            dom.remove(that._current);
         }
     },
 
@@ -373,13 +420,18 @@ var RangeIterator = Class.extend({
     },
 
     getSubtreeIterator: function () {
-        var subRange = this.range.cloneRange();
-        subRange.selectNodeContents(this._current);
+        var that = this,
+            subRange = that.range.cloneRange();
 
-        if (dom.isAncestorOrSelf(this._current, this.range.startContainer))
-            subRange.setStart(this.range.startContainer, this.range.startOffset);
-        if (dom.isAncestorOrSelf(this._current, this.range.endContainer))
-            subRange.setEnd(this.range.endContainer, this.range.endOffset);
+        subRange.selectNodeContents(that._current);
+
+        if (dom.isAncestorOrSelf(that._current, that.range.startContainer)) {
+            subRange.setStart(that.range.startContainer, that.range.startOffset);
+        }
+
+        if (dom.isAncestorOrSelf(that._current, that.range.endContainer)) {
+            subRange.setEnd(that.range.endContainer, that.range.endOffset);
+        }
 
         return new RangeIterator(subRange);
     }
@@ -411,8 +463,8 @@ var W3CSelection = Class.extend({
         try {
             textRange = selection.createRange();
             element = textRange.item ? textRange.item(0) : textRange.parentElement();
-			if (element.ownerDocument != this.ownerDocument) {
-				return range;
+            if (element.ownerDocument != this.ownerDocument) {
+                return range;
             }
         } catch (ex) {
             return range;
@@ -424,25 +476,28 @@ var W3CSelection = Class.extend({
             adoptEndPoint(textRange, range, true);
             adoptEndPoint(textRange, range, false);
 
-            if (range.startContainer.nodeType == 9)
+            if (range.startContainer.nodeType == 9) {
                 range.setStart(range.endContainer, range.startOffset);
+            }
 
-            if (range.endContainer.nodeType == 9)
+            if (range.endContainer.nodeType == 9) {
                 range.setEnd(range.startContainer, range.endOffset);
+            }
 
-            if (textRange.compareEndPoints('StartToEnd', textRange) == 0)
+            if (textRange.compareEndPoints('StartToEnd', textRange) === 0) {
                 range.collapse(false);
+            }
 
             var startContainer = range.startContainer,
                 endContainer = range.endContainer,
                 body = this.ownerDocument.body;
 
-            if (!range.collapsed && range.startOffset == 0 && range.endOffset == getNodeLength(range.endContainer) // check for full body selection
-            && !(startContainer == endContainer && isDataNode(startContainer) && startContainer.parentNode == body)) { // but not when single textnode is selected
+            if (!range.collapsed && range.startOffset === 0 && range.endOffset == getNodeLength(range.endContainer) &&  // check for full body selection
+                !(startContainer == endContainer && isDataNode(startContainer) && startContainer.parentNode == body)) { // but not when single textnode is selected
                 var movedStart = false,
                     movedEnd = false;
 
-                while (findNodeIndex(startContainer) == 0 && startContainer == startContainer.parentNode.firstChild && startContainer != body) {
+                while (findNodeIndex(startContainer) === 0 && startContainer == startContainer.parentNode.firstChild && startContainer != body) {
                     startContainer = startContainer.parentNode;
                     movedStart = true;
                 }
@@ -458,6 +513,7 @@ var W3CSelection = Class.extend({
                 }
             }
         }
+
         return range;
     }
 });
@@ -469,8 +525,9 @@ function adoptContainer(textRange, range, start) {
     var anchorNode = isDataNode(container) ? container : container.childNodes[offset] || null;
     var anchorParent = isDataNode(container) ? container.parentNode : container;
     // visible data nodes need a text offset
-    if (container.nodeType == 3 || container.nodeType == 4)
+    if (container.nodeType == 3 || container.nodeType == 4) {
         textOffset = offset;
+    }
 
     // create a cursor element node to position range (since we can't select text nodes)
     var cursorNode = anchorParent.insertBefore(dom.create(range.ownerDocument, 'a'), anchorNode);
@@ -514,10 +571,11 @@ function adoptEndPoint(textRange, range, start) {
 
     dom.remove(cursorNode);
 
-    if (isDataNode(target))
+    if (isDataNode(target)) {
         range[start ? 'setStart' : 'setEnd'](target, cursor.text.length);
-    else
+    } else {
         range[start ? 'setStartBefore' : 'setEndBefore'](target);
+    }
 }
 
 var RangeEnumerator = Class.extend({
@@ -540,7 +598,7 @@ var RangeEnumerator = Class.extend({
             new RangeIterator(range).traverse(visit);
 
             return nodes;
-        }
+        };
     }
 });
 
@@ -565,8 +623,9 @@ var RestorePoint = Class.extend({
         while (node = node.previousSibling) {
             var nodeType = node.nodeType;
 
-            if (nodeType != 3 || lastType != nodeType)
+            if (nodeType != 3 || lastType != nodeType) {
                 result ++;
+            }
 
             lastType = nodeType;
         }
@@ -576,9 +635,11 @@ var RestorePoint = Class.extend({
 
     offset: function(node, value) {
         if (node.nodeType == 3) {
-            while ((node = node.previousSibling) && node.nodeType == 3)
+            while ((node = node.previousSibling) && node.nodeType == 3) {
                 value += node.nodeValue.length;
+            }
         }
+
         return value;
     },
 
@@ -598,8 +659,9 @@ var RestorePoint = Class.extend({
             length = path.length,
             offset = denormalizedOffset;
 
-        while (length--)
+        while (length--) {
             node = node.childNodes[path[length]];
+        }
 
         while (node.nodeType == 3 && node.nodeValue.length < offset) {
             offset -= node.nodeValue.length;
@@ -637,11 +699,12 @@ var Marker = Class.extend({
 
     removeCaret: function (range) {
         var that = this,
-            previous = that.caret.previousSibling;
+            previous = that.caret.previousSibling,
             startOffset = 0;
 
-        if (previous)
+        if (previous) {
             startOffset = isDataNode(previous) ? previous.nodeValue.length : findNodeIndex(previous);
+        }
 
         var container = that.caret.parentNode;
         var containerIndex = previous ? findNodeIndex(previous) : 0;
@@ -651,17 +714,20 @@ var Marker = Class.extend({
 
         var node = container.childNodes[containerIndex];
 
-        if (isDataNode(node))
+        if (isDataNode(node)) {
             range.setStart(node, startOffset);
+        }
         else if (node) {
             var textNode = dom.lastTextNode(node);
-            if (textNode)
+            if (textNode) {
                 range.setStart(textNode, textNode.nodeValue.length);
-            else
+            } else {
                 range[previous ? 'setStartAfter' : 'setStartBefore'](node);
+            }
         } else {
-            if (!$.browser.msie && container.innerHTML == '')
+            if (!$.browser.msie && !container.innerHTML) {
                 container.innerHTML = '<br _moz_dirty="" />';
+            }
 
             range.selectNodeContents(container);
         }
@@ -669,24 +735,26 @@ var Marker = Class.extend({
     },
 
     add: function (range, expand) {
+        var that = this;
+
         if (expand && range.collapsed) {
-            this.addCaret(range);
+            that.addCaret(range);
             range = RangeUtils.expand(range);
         }
 
         var rangeBoundary = range.cloneRange();
 
         rangeBoundary.collapse(false);
-        this.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
-        rangeBoundary.insertNode(this.end);
+        that.end = dom.create(RangeUtils.documentFromRange(range), 'span', { className: 'k-marker' });
+        rangeBoundary.insertNode(that.end);
 
         rangeBoundary = range.cloneRange();
         rangeBoundary.collapse(true);
-        this.start = this.end.cloneNode(true);
-        rangeBoundary.insertNode(this.start);
+        that.start = that.end.cloneNode(true);
+        rangeBoundary.insertNode(that.start);
 
-        range.setStartBefore(this.start);
-        range.setEndAfter(this.end);
+        range.setStartBefore(that.start);
+        range.setEndAfter(that.end);
 
         normalize(range.commonAncestorContainer);
 
@@ -694,19 +762,25 @@ var Marker = Class.extend({
     },
 
     remove: function (range) {
-        var start = this.start,
-            end = this.end;
+        var that = this,
+            start = that.start,
+            end = that.end;
 
         normalize(range.commonAncestorContainer);
 
-        while (!start.nextSibling && start.parentNode) start = start.parentNode;
-        while (!end.previousSibling && end.parentNode) end = end.parentNode;
+        while (!start.nextSibling && start.parentNode) {
+            start = start.parentNode;
+        }
 
-        var shouldNormalizeStart = (start.previousSibling && start.previousSibling.nodeType == 3)
-                                && (start.nextSibling && start.nextSibling.nodeType == 3);
+        while (!end.previousSibling && end.parentNode) {
+            end = end.parentNode;
+        }
 
-        var shouldNormalizeEnd = (end.previousSibling && end.previousSibling.nodeType == 3)
-                                && (end.nextSibling && end.nextSibling.nodeType == 3);
+        var shouldNormalizeStart = (start.previousSibling && start.previousSibling.nodeType == 3) &&
+                                   (start.nextSibling && start.nextSibling.nodeType == 3);
+
+        var shouldNormalizeEnd = (end.previousSibling && end.previousSibling.nodeType == 3) &&
+                                 (end.nextSibling && end.nextSibling.nodeType == 3);
 
         start = start.nextSibling;
         end = end.previousSibling;
@@ -714,16 +788,16 @@ var Marker = Class.extend({
         var collapsed = false;
         var collapsedToStart = false;
         // collapsed range
-        if (start == this.end) {
-            collapsedToStart = !!this.start.previousSibling;
-            start = end = this.start.previousSibling || this.end.nextSibling;
+        if (start == that.end) {
+            collapsedToStart = !!that.start.previousSibling;
+            start = end = that.start.previousSibling || that.end.nextSibling;
             collapsed = true;
         }
 
-        dom.remove(this.start);
-        dom.remove(this.end);
+        dom.remove(that.start);
+        dom.remove(that.end);
 
-        if (start == null || end == null) {
+        if (!start || !end) {
             range.selectNodeContents(range.commonAncestorContainer);
             range.collapse(true);
             return;
@@ -732,56 +806,71 @@ var Marker = Class.extend({
         var startOffset = collapsed ? isDataNode(start) ? start.nodeValue.length : start.childNodes.length : 0;
         var endOffset = isDataNode(end) ? end.nodeValue.length : end.childNodes.length;
 
-        if (start.nodeType == 3)
+        if (start.nodeType == 3) {
             while (start.previousSibling && start.previousSibling.nodeType == 3) {
                 start = start.previousSibling;
                 startOffset += start.nodeValue.length;
             }
+        }
 
-        if (end.nodeType == 3)
+        if (end.nodeType == 3) {
             while (end.previousSibling && end.previousSibling.nodeType == 3) {
                 end = end.previousSibling;
                 endOffset += end.nodeValue.length;
             }
+        }
+
         var startIndex = findNodeIndex(start), startParent = start.parentNode;
         var endIndex = findNodeIndex(end), endParent = end.parentNode;
 
-        for (var startPointer = start; startPointer.previousSibling; startPointer = startPointer.previousSibling)
-            if (startPointer.nodeType == 3 && startPointer.previousSibling.nodeType == 3) startIndex--;
+        for (var startPointer = start; startPointer.previousSibling; startPointer = startPointer.previousSibling) {
+            if (startPointer.nodeType == 3 && startPointer.previousSibling.nodeType == 3) {
+                startIndex--;
+            }
+        }
 
-        for (var endPointer = end; endPointer.previousSibling; endPointer = endPointer.previousSibling)
-            if (endPointer.nodeType == 3 && endPointer.previousSibling.nodeType == 3) endIndex--;
+        for (var endPointer = end; endPointer.previousSibling; endPointer = endPointer.previousSibling) {
+            if (endPointer.nodeType == 3 && endPointer.previousSibling.nodeType == 3) {
+                endIndex--;
+            }
+        }
 
         normalize(startParent);
 
-        if (start.nodeType == 3)
+        if (start.nodeType == 3) {
             start = startParent.childNodes[startIndex];
+        }
 
         normalize(endParent);
-        if (end.nodeType == 3)
+        if (end.nodeType == 3) {
             end = endParent.childNodes[endIndex];
+        }
 
         if (collapsed) {
-            if (start.nodeType == 3)
+            if (start.nodeType == 3) {
                 range.setStart(start, startOffset);
-            else
+            } else {
                 range[collapsedToStart ? 'setStartAfter' : 'setStartBefore'](start);
+            }
 
             range.collapse(true);
 
         } else {
-            if (start.nodeType == 3)
+            if (start.nodeType == 3) {
                 range.setStart(start, startOffset);
-            else
+            } else {
                 range.setStartBefore(start);
+            }
 
-            if (end.nodeType == 3)
+            if (end.nodeType == 3) {
                 range.setEnd(end, endOffset);
-            else
+            } else {
                 range.setEndAfter(end);
+            }
         }
-        if (this.caret)
-            this.removeCaret(range);
+        if (that.caret) {
+            that.removeCaret(range);
+        }
     }
 
 });
@@ -794,8 +883,9 @@ var RangeUtils = {
         if (!nodes.length) {
             range.selectNodeContents(range.commonAncestorContainer);
             nodes = RangeUtils.textNodes(range);
-            if (!nodes.length)
+            if (!nodes.length) {
                 nodes = dom.significantChildNodes(range.commonAncestorContainer);
+            }
         }
         return nodes;
     },
@@ -834,8 +924,9 @@ var RangeUtils = {
             partitionRange.collapse(start);
             partitionRange[start ? 'setStartBefore' : 'setEndAfter'](node);
             var contents = partitionRange.extractContents();
-            if (trim)
+            if (trim) {
                 contents = dom.trim(contents);
+            }
             dom[start ? 'insertBefore' : 'insertAfter'](contents, node);
         }
         partition(true);
@@ -846,8 +937,9 @@ var RangeUtils = {
         var markers = [];
 
         new RangeIterator(range).traverse(function (node) {
-            if (node.className == 'k-marker')
+            if (node.className == 'k-marker') {
                 markers.push(node);
+            }
         });
 
         return markers;
@@ -857,34 +949,39 @@ var RangeUtils = {
         var nodes = [];
 
         new RangeIterator(range).traverse(function (node) {
-            if (dom.is(node, 'img'))
+            if (dom.is(node, 'img')) {
                 nodes.push(node);
+            }
         });
 
-        if (nodes.length == 1)
+        if (nodes.length == 1) {
             return nodes[0];
+        }
     },
 
     expand: function (range) {
         var result = range.cloneRange();
 
-        var startContainer = result.startContainer.childNodes[result.startOffset == 0 ? 0 : result.startOffset - 1];
+        var startContainer = result.startContainer.childNodes[result.startOffset === 0 ? 0 : result.startOffset - 1];
         var endContainer = result.endContainer.childNodes[result.endOffset];
 
-        if (!isDataNode(startContainer) || !isDataNode(endContainer))
+        if (!isDataNode(startContainer) || !isDataNode(endContainer)) {
             return result;
+        }
 
         var beforeCaret = startContainer.nodeValue;
         var afterCaret = endContainer.nodeValue;
 
-        if (beforeCaret == '' || afterCaret == '')
+        if (!beforeCaret || !afterCaret) {
             return result;
+        }
 
         var startOffset = beforeCaret.split('').reverse().join('').search(boundary);
         var endOffset = afterCaret.search(boundary);
 
-        if (startOffset == 0 || endOffset == 0)
+        if (!startOffset || !endOffset) {
             return result;
+        }
 
         endOffset = endOffset == -1 ? afterCaret.length : endOffset;
         startOffset = startOffset == -1 ? 0 : beforeCaret.length - startOffset;
@@ -897,29 +994,33 @@ var RangeUtils = {
 
     isExpandable: function (range) {
         var node = range.startContainer;
-        var document = RangeUtils.documentFromRange(range);
+        var rangeDocument = RangeUtils.documentFromRange(range);
 
-        if (node == document || node == document.body)
+        if (node == rangeDocument || node == rangeDocument.body) {
             return false;
+        }
 
         var result = range.cloneRange();
 
         var value = node.nodeValue;
-        if (!value)
+        if (!value) {
             return false;
+        }
 
         var beforeCaret = value.substring(0, result.startOffset);
         var afterCaret = value.substring(result.startOffset);
 
         var startOffset = 0, endOffset = 0;
 
-        if (beforeCaret != '')
+        if (beforeCaret) {
             startOffset = beforeCaret.split('').reverse().join('').search(boundary);
+        }
 
-        if (afterCaret != '')
+        if (afterCaret) {
             endOffset = afterCaret.search(boundary);
+        }
 
-        return startOffset != 0 && endOffset != 0;
+        return startOffset && endOffset;
     }
 };
 
