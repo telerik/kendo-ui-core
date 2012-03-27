@@ -35,6 +35,24 @@
     <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
     <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
     <script type="text/javascript">
+        function onSelect(e) {
+            var item = $(e.item),
+                menuElement = item.closest(".k-menu"),
+                dataItem = this.options.dataSource,
+                index = item.parentsUntil(menuElement, ".k-item").map(function () {
+                    return $(this).index();
+                }).get().reverse();
+
+            index.push(item.index());
+
+            for (var i = -1, len = index.length; ++i < len;) {
+                dataItem = dataItem[index[i]];
+                dataItem = i < len-1 ? dataItem.items : dataItem;
+            }
+
+            alert(JSON.stringify(dataItem));
+        }
+
         $(document).ready(function() {
             $("#Menu").kendoMenu({ openOnClick: true });
             $("#Menu1").kendoMenu({ animation: false });
@@ -61,7 +79,8 @@
                         text: "Link",
                         url: "http://www.google.com"
                     }
-                ]
+                ],
+                select: onSelect
             });
         });
     </script>
