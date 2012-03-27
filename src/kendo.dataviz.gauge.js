@@ -39,6 +39,8 @@
         BLACK = "#000",
         CAP_SIZE = 0.05,
         COORD_PRECISION = dataviz.COORD_PRECISION,
+        MAX_VALUE = Number.MAX_VALUE,
+        MIN_VALUE = -Number.MAX_VALUE,
         DEFAULT_HEIGHT = 200,
         DEFAULT_LINE_WIDTH = 0.5,
         DEFAULT_WIDTH = 200,
@@ -389,6 +391,7 @@
                 min = options.min,
                 max = options.max,
                 j,
+                segmentCount,
                 segments = [],
                 segment,
                 ringDistance = options.ringDistance,
@@ -1070,7 +1073,7 @@
 
         svg: function() {
             var model = this._getModel(),
-                view = Chart.SVGView.fromModel(model);
+                view = dataviz.SVGView.fromModel(model);
 
             return view.render();
         },

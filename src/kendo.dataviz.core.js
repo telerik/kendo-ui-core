@@ -57,6 +57,21 @@
         Y = "y",
         ZERO_THRESHOLD = 0.2;
 
+    function getSpacing(value) {
+        var spacing = { top: 0, right: 0, bottom: 0, left: 0 };
+
+        if (typeof(value) === "number") {
+            spacing[TOP] = spacing[RIGHT] = spacing[BOTTOM] = spacing[LEFT] = value;
+        } else {
+            spacing[TOP] = value[TOP] || 0;
+            spacing[RIGHT] = value[RIGHT] || 0;
+            spacing[BOTTOM] = value[BOTTOM] || 0;
+            spacing[LEFT] = value[LEFT] || 0;
+        }
+
+        return spacing;
+    }
+
     // Geometric primitives ===================================================
     var Point2D = Class.extend({
         init: function(x, y) {
@@ -814,6 +829,7 @@
         createLabels: function() {
             var axis = this,
                 options = axis.options,
+                labelTemplate,
                 align = options.vertical ? RIGHT : CENTER,
                 labelOptions = deepExtend({ }, options.labels, {
                     align: align, zIndex: options.zIndex
@@ -1118,7 +1134,6 @@
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
                 defaultOptions = axis.initDefaults(seriesMin, seriesMax, options),
-                labelTemplate,
                 i;
 
             defaultOptions.minorUnit = defined(options.minorUnit) ?
@@ -1884,6 +1899,7 @@
                 initial = !defined(anim.options.endPosition),
                 padding = halfSize,
                 point,
+                end,
                 i;
 
             anim.axis = axis;
@@ -1918,7 +1934,8 @@
                 element = anim.element,
                 points = element.points,
                 axis = anim.axis,
-                count = points.length;
+                count = points.length,
+                i;
 
             for (i = 0; i < count; i++) {
                 points[i][axis] = interpolateValue(startPositions[i], endPositions[i], pos);
@@ -2119,7 +2136,7 @@
                 cy = height / 2,
                 r1 = rotatePoint(0, 0, cx, cy, rotation),
                 r2 = rotatePoint(width, 0, cx, cy, rotation),
-                r3 = rotatePoint(width, height, cx, cy, rotation);
+                r3 = rotatePoint(width, height, cx, cy, rotation),
                 r4 = rotatePoint(0, height, cx, cy, rotation);
 
             size.normalWidth = width;
@@ -2242,21 +2259,6 @@
         return $.grep(result, function(box) {
             return box.height() > 0 && box.width() > 0;
         })[0];
-    }
-
-    function getSpacing(value) {
-        var spacing = { top: 0, right: 0, bottom: 0, left: 0 };
-
-        if (typeof(value) === "number") {
-            spacing[TOP] = spacing[RIGHT] = spacing[BOTTOM] = spacing[LEFT] = value;
-        } else {
-            spacing[TOP] = value[TOP] || 0;
-            spacing[RIGHT] = value[RIGHT] || 0;
-            spacing[BOTTOM] = value[BOTTOM] || 0;
-            spacing[LEFT] = value[LEFT] || 0;
-        }
-
-        return spacing;
     }
 
     function supportsSVG() {

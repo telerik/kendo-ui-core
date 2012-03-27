@@ -479,31 +479,28 @@
                 cy = round(config.c.y),
                 startAngle = config.startAngle,
                 endAngle = config.angle + startAngle,
-                // outer bounding box
                 outerBBox = {
                     l: cx - r,
                     t: cy - r,
                     r: cx + r,
                     b: cy + r
                 },
-                // inner bounding box
                 innerBBox = {
                     l: cx - ir,
                     t: cy - ir,
                     r: cx + ir,
                     b: cy + ir
                 },
-                // outer/inner start/end points
-                outerStartPoint = roundPointCoordinates(config.point(startAngle)),
-                innerStartPoint = roundPointCoordinates(config.point(startAngle, true)),
-                innerEndPoint,
-                outerEndPoint;
+                outerStartPoint, innerStartPoint,
+                innerEndPoint, outerEndPoint;
 
             function roundPointCoordinates(point) {
                 return new Point2D(round(point.x), round(point.y));
             }
 
             endAngle = (endAngle - startAngle) > 359.9 ? endAngle - 0.22 : endAngle;
+            outerStartPoint = roundPointCoordinates(config.point(startAngle)),
+            innerStartPoint = roundPointCoordinates(config.point(startAngle, true)),
             outerEndPoint = roundPointCoordinates(config.point(endAngle));
             innerEndPoint = roundPointCoordinates(config.point(endAngle, true));
 
