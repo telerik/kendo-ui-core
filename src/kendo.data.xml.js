@@ -8,7 +8,8 @@
         getter = kendo.getter,
         Class = kendo.Class;
 
-    var XmlDataReader = Class.extend({ init: function(options) {
+    var XmlDataReader = Class.extend({
+        init: function(options) {
             var that = this,
                 total = options.total,
                 model = options.model,
@@ -43,15 +44,14 @@
             if (total) {
                 total = that.getter(total);
                 that.total = function(data) {
-                    return parseInt(total(data));
+                    return parseInt(total(data), 10);
                 };
             }
 
             if (data) {
                 data = that.xpathToMember(data);
                 that.data = function(value) {
-                    var record, field, result = that.evaluate(value, data),
-                        idField,
+                    var result = that.evaluate(value, data),
                         modelInstance;
 
                     result = isArray(result) ? result : [result];
@@ -61,10 +61,12 @@
 
                         return map(result, function(value) {
                             if (value) {
-                                record = {};
+                                var record = {}, field;
+
                                 for (field in model.fields) {
                                     record[field] = modelInstance._parse(field, model.fields[field].field(value));
                                 }
+
                                 return record;
                             }
                         });
