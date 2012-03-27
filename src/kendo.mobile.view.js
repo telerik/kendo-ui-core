@@ -185,7 +185,7 @@
 
             that._eachWidget(function(widget) {
                 widget.viewShow(that);
-            })
+            });
         },
 
         _eachWidget: function(callback) {
@@ -197,7 +197,7 @@
                 if (widget) {
                     var instance = that.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
                     if (!instance) {
-                        raise(that[0]);
+                        throw that[0];
                     }
                     callback(instance);
                 }

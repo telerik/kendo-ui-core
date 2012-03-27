@@ -1,12 +1,13 @@
 (function($, undefined) {
-    var location            = window.location,
-        history             = window.history,
-        _checkUrlInterval    = 50,
-        hashStrip           = /^#*/,
-        documentMode        = window.document.documentMode,
-        oldIE               = $.browser.msie && (!documentMode || documentMode <= 8),
+    var kendo = window.kendo,
+        location = window.location,
+        history = window.history,
+        _checkUrlInterval = 50,
+        hashStrip = /^#*/,
+        documentMode = window.document.documentMode,
+        oldIE = $.browser.msie && (!documentMode || documentMode <= 8),
         hashChangeSupported = ("onhashchange" in window) && !oldIE,
-        document            = window.document;
+        document = window.document;
 
     var History = kendo.Observable.extend({
 
@@ -93,7 +94,7 @@
         _makePushStateUrl: function(address) {
             var that = this;
 
-            if (address.indexOf(that.root) != 0) {
+            if (address.indexOf(that.root) !== 0) {
                 address = (that.root + address).replace(/\/\//g, '/');
             }
 

@@ -164,7 +164,7 @@
                 e.preventDefault();
             } else {
                 that._setActiveItem(item);
-            };
+            }
         },
 
         _setActiveItem: function(item) {

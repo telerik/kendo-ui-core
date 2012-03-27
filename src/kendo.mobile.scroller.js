@@ -1,5 +1,6 @@
 (function($, undefined) {
-    var mobile = kendo.mobile,
+    var kendo = window.kendo,
+        mobile = kendo.mobile,
         fx = kendo.fx,
         ui = mobile.ui,
         proxy = $.proxy,

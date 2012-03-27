@@ -65,7 +65,8 @@
     * </style>
     * <div data-role="navbar" class="checkout">My View Title</div>
     */
-    var ui = window.kendo.mobile.ui,
+    var kendo = window.kendo,
+        ui = kendo.mobile.ui,
         roleSelector = kendo.roleSelector,
         Widget = ui.Widget;
 

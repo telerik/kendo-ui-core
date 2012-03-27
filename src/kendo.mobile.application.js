@@ -23,11 +23,13 @@
         TRANSFORM = support.transitions.css + "transform",
 
         div = $("<div/>"),
-        meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> \
-                <meta name="apple-mobile-web-app-status-bar-style" content="black" /> \
-                <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
+        meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
+               '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
+               '<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
+
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
+        toRoleSelector = function (string) { return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],"); },
         buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
 
@@ -45,10 +47,6 @@
         CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
 
         proxy = $.proxy;
-
-    function toRoleSelector(string) {
-        return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],");
-    }
 
     function toDom(html) {
         if (BODY_REGEX.test(html)) {
@@ -74,7 +72,7 @@
         if (!e.isDefaultPrevented() && isInternal(link)) {
             if (href && href != DUMMY_HREF) {
                 link.attr(HREF, DUMMY_HREF);
-                setTimeout(function() { link.attr(HREF, href) });
+                setTimeout(function() { link.attr(HREF, href); });
                 history.navigate(href);
             }
 
@@ -531,8 +529,9 @@
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
 
-                if (that.view) // On desktop resize is fired rather early
+                if (that.view) {// On desktop resize is fired rather early
                     that.view.scroller.reset();
+                }
             });
         },
 

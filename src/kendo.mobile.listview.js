@@ -26,7 +26,7 @@
 
         var item = $(e.currentTarget),
             clickedLink = $(e.target).closest("a"),
-            prevented = e.originalEvent && e.originalEvent.defaultPrevented;
+            prevented = e.originalEvent && e.originalEvent.defaultPrevented,
             role = clickedLink.data(kendo.ns + "role") || "";
 
         if (clickedLink[0] && (!role.match(/button/))) {
