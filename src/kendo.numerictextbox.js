@@ -215,7 +215,7 @@
          */
          init: function(element, options) {
              var that = this,
-             isStep = options && options[step] !== undefined,
+             isStep = options && options.step !== undefined,
              min, max, step, value, format;
 
              Widget.fn.init.call(that, element, options);
