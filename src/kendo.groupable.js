@@ -65,7 +65,7 @@
                     dragcancel: proxy(that._dragCancel, that),
                     dragstart: function(e) {
                         var element = e.currentTarget,
-                            marginLeft = parseInt(element.css("marginLeft")),
+                            marginLeft = parseInt(element.css("marginLeft"), 10),
                             left = element.position().left - marginLeft;
 
                         intializePositions();
@@ -107,7 +107,7 @@
                     intializePositions();
                     if(dropCuePositions.length) {
                         element = dropCuePositions[dropCuePositions.length - 1].element;
-                        marginRight = parseInt(element.css("marginRight"));
+                        marginRight = parseInt(element.css("marginRight"), 10);
                         left = element.position().left + element.outerWidth() + marginRight;
                     } else {
                         left = 0;
@@ -175,7 +175,7 @@
 
             aggregates = that.element.find(that.options.filter).map(function() {
                 var cell = $(this),
-                    aggregate = cell.attr(kendo.attr("aggregates"));
+                    aggregate = cell.attr(kendo.attr("aggregates")),
                     member = cell.attr(kendo.attr("field"));
 
                 if (aggregate && aggregate !== "") {
@@ -213,14 +213,14 @@
         },
         _dropCuePosition: function(position) {
             var dropCuePositions = this._dropCuePositions;
-            if(!dropCue.is(":visible") || dropCuePositions.length == 0) {
+            if(!dropCue.is(":visible") || dropCuePositions.length === 0) {
                 return;
             }
 
             var lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
                 right = lastCuePosition.right,
-                marginLeft = parseInt(lastCuePosition.element.css("marginLeft")),
-                marginRight = parseInt(lastCuePosition.element.css("marginRight"));
+                marginLeft = parseInt(lastCuePosition.element.css("marginLeft"), 10),
+                marginRight = parseInt(lastCuePosition.element.css("marginRight"), 10);
 
             if(position >= right) {
                 position = {
@@ -265,7 +265,7 @@
 
             if(draggable.dropped) {
                 if(lastCuePosition) {
-                    position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft")) + parseInt(lastCuePosition.element.css("marginRight")));
+                    position = that._dropCuePosition(dropCue.offset().left + parseInt(lastCuePosition.element.css("marginLeft"), 10) + parseInt(lastCuePosition.element.css("marginRight"), 10));
                     if(that._canDrop($(sourceIndicator), position.element, position.left)) {
                         if(position.before) {
                             position.element.before(sourceIndicator || that.buildIndicator(field, title));
