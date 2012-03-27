@@ -8,7 +8,6 @@
         <script src="../qhint.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.data.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -24,6 +23,15 @@
                 eqnull: true,
                 loopfunc: true,
                 evil: true /* kendo.data.js is using new Function() which is considered the same as eval */
+            });
+
+            qHint("../../src/kendo.data.odata.js", {
+                eqnull: true
+            });
+
+            qHint("../../src/kendo.data.xml.js", {
+                eqnull: true,
+                boss: true
             });
         </script>
     </body>
