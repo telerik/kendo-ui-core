@@ -1728,6 +1728,7 @@
         },
 
         error: function(xhr, status, errorThrown) {
+            this._dequeueRequest();
             this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
