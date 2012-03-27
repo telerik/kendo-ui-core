@@ -55,7 +55,7 @@
 
             id = that.element.attr(ID);
             if (id) {
-                list.attr(ID, id + "-list")
+                list.attr(ID, id + "-list");
             }
 
             $(document.documentElement).bind("mousedown", proxy(that._mousedown, that));
@@ -264,11 +264,9 @@
                 ulOffsetHeight = ul.clientHeight,
                 bottomDistance = itemOffsetTop + itemOffsetHeight;
 
-            ul.scrollTop = ulScrollTop > itemOffsetTop
-                        ? itemOffsetTop
-                        : bottomDistance > (ulScrollTop + ulOffsetHeight)
-                        ? bottomDistance - ulOffsetHeight
-                        : ulScrollTop;
+            ul.scrollTop = ulScrollTop > itemOffsetTop ?
+                           itemOffsetTop : bottomDistance > (ulScrollTop + ulOffsetHeight) ?
+                           bottomDistance - ulOffsetHeight : ulScrollTop;
         },
 
         _template: function() {
