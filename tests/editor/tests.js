@@ -1,5 +1,9 @@
 tests.push(
     {
+        page: "editor/lint.html",
+        title: "editor lint"
+    },
+    {
         page: "editor/api.html",
         title: "editor api"
     },
