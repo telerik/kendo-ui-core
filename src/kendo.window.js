@@ -135,7 +135,6 @@
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
-        fx = kendo.fx,
         isPlainObject = $.isPlainObject,
         proxy = $.proxy,
         extend = $.extend,
@@ -271,7 +270,7 @@
         init: function(element, options) {
             var that = this,
                 wrapper,
-                titleBar, offset, visibility, display,
+                offset, visibility, display,
                 isVisible = false,
                 content;
 
@@ -770,7 +769,6 @@
 
         _overlay: function (visible) {
             var overlay = $("body > .k-overlay"),
-                doc = $(document),
                 wrapper = this.wrapper;
 
             if (!overlay.length) {

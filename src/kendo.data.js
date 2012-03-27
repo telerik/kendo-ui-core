@@ -21,8 +21,6 @@
         DESTROY = "destroy",
         CHANGE = "change",
         GET = "get",
-        MULTIPLE = "multiple",
-        SINGLE = "single",
         ERROR = "error",
         REQUESTSTART = "requestStart",
         crud = [CREATE, READ, UPDATE, DESTROY],
@@ -274,8 +272,7 @@
 
         set: function(field, value) {
             var that = this,
-                current = that[field],
-                setter;
+                current = that[field];
 
             if (current != value) {
                 if (!that.trigger("set", { field: field, value: value })) {
@@ -1047,7 +1044,6 @@
         var idx,
         aggr,
         functionName,
-        fieldAccumulator,
         len = aggregates.length;
 
         for (idx = 0; idx < len; idx++) {
@@ -1584,10 +1580,9 @@
 
         _send: function(method, data) {
             var that = this,
-            idx,
-            length,
-            promises = [],
-            transport = that.transport;
+                idx,
+                length,
+                promises = [];
 
             if (that.options.batch) {
                 if (data.length) {
@@ -1734,9 +1729,8 @@
 
         success: function(data) {
             var that = this,
-            options = {},
-            result,
-            hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
+                options = that.options,
+                hasGroups = options.serverGrouping === true && that._group && that._group.length > 0;
 
             data = that.reader.parse(data);
 
@@ -1744,7 +1738,7 @@
 
             that._total = that.reader.total(data);
 
-            if (that._aggregate && that.options.serverAggregates) {
+            if (that._aggregate && options.serverAggregates) {
                 that._aggregateResult = that.reader.aggregates(data);
             }
 
@@ -1817,9 +1811,8 @@
 
         _process: function (data, e) {
             var that = this,
-            options = {},
-            result,
-            hasGroups = that.options.serverGrouping === true && that._group && that._group.length > 0;
+                options = {},
+                result;
 
             if (that.options.serverPaging !== true) {
                 options.skip = that._skip;

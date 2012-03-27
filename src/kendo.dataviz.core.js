@@ -8,7 +8,6 @@
         template = kendo.template,
         format = kendo.format,
         map = $.map,
-        grep = $.grep,
         noop = $.noop,
         indexOf = $.inArray,
         math = Math,
@@ -34,7 +33,6 @@
         DEFAULT_WIDTH = 600,
         DEGREE = math.PI / 180,
         FADEIN = "fadeIn",
-        POINTER = "pointer",
         HEIGHT = "height",
         ID_PREFIX = "k",
         INITIAL_ANIMATION_DURATION = 600,
@@ -45,7 +43,6 @@
         NONE = "none",
         ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
-        INSIDE = "inside",
         RADIAL = "radial",
         RIGHT = "right",
         SWING = "swing",
@@ -1050,7 +1047,6 @@
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
                 tickPositions = axis.getMajorTickPositions(),
-                tickSize = axis.getActualTickSize(),
                 labelOffset = axis.getActualTickSize() + options.margin,
                 labelBox,
                 labelY,
@@ -1133,8 +1129,7 @@
     var NumericAxis = Axis.extend({
         init: function(seriesMin, seriesMax, options) {
             var axis = this,
-                defaultOptions = axis.initDefaults(seriesMin, seriesMax, options),
-                i;
+                defaultOptions = axis.initDefaults(seriesMin, seriesMax, options);
 
             defaultOptions.minorUnit = defined(options.minorUnit) ?
                 options.minorUnit :
@@ -1865,7 +1860,6 @@
             var anim = this,
                 start = anim.start,
                 end = anim.end,
-                initialState = anim.initialState,
                 element = anim.element,
                 points = element.points,
                 axis = anim.axis;
@@ -1892,8 +1886,8 @@
                 points = element.points,
                 options = element.options.animation,
                 vertical = options.vertical,
-                axis = options.vertical ? "y" : "x",
-                startPosition = options.startPosition[options.vertical ? "y2" : "x1"],
+                axis = vertical ? "y" : "x",
+                startPosition = options.startPosition[vertical ? "y2" : "x1"],
                 halfSize = options.size / 2,
                 count = points.length,
                 initial = !defined(anim.options.endPosition),
@@ -1908,7 +1902,7 @@
 
             if (!initial) {
                 startPosition = points[1][axis];
-                end = anim.options.endPosition[options.vertical ? "y1" : "x2"];
+                end = anim.options.endPosition[vertical ? "y1" : "x2"];
                 if (options.speed) {
                     anim.options.duration = math.max((math.abs(startPosition - end) / options.speed) * 1000, 1);
                 }

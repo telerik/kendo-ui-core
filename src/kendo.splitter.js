@@ -244,7 +244,6 @@
          */
         init: function(element, options) {
             var that = this,
-                panesConfig,
                 triggerResize = function() {
                     that.trigger(RESIZE);
                 };

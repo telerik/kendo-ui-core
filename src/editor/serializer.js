@@ -1,8 +1,7 @@
 (function($, undefined) {
 
 // Imports ================================================================
-var doc = document,
-    kendo = window.kendo,
+var kendo = window.kendo,
     Editor = kendo.ui.editor,
     dom = Editor.Dom,
     extend = $.extend;
@@ -57,9 +56,8 @@ var Serializer = {
         function attr(node) {
             var specifiedAttributes = [],
                 attributes = node.attributes,
-                trim = $.trim,
-                i, l,
-                attribute;
+                attribute, i, l,
+                trim = $.trim;
 
             if (dom.is(node, 'img')) {
                 var width = node.style.width,
@@ -81,7 +79,7 @@ var Serializer = {
                 attribute = attributes[i];
                 var name = attribute.nodeName;
                 // In IE < 8 the 'value' attribute is not returned as 'specified'. The same goes for type="text"
-                if (attribute.specified || (name == 'value' && node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
+                if (attribute.specified || (name == 'value' && !node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
                     if (name.indexOf('_moz') < 0 && name != 'complete') {
                         specifiedAttributes.push(attribute);
                     }
@@ -195,7 +193,7 @@ var Serializer = {
                          previous = (dom.isInline(parent) ? parent : node).previousSibling;
                     }
 
-                    if (!previous || !previous.innerHTML || dom.isBlock(previous)) {
+                    if (!previous || previous.innerHTML === "" || dom.isBlock(previous)) {
                         value = value.replace(/^[\r\n\v\f\t ]+/, '');
                     }
 
@@ -226,7 +224,7 @@ var Serializer = {
         result = result.join('');
 
         // if serialized dom contains only whitespace elements, consider it empty (required field validation)
-        if (!result.replace(brRe, "").replace(emptyPRe, "")) {
+        if (result.replace(brRe, "").replace(emptyPRe, "") === "") {
             return "";
         }
 

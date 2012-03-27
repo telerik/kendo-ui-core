@@ -154,7 +154,6 @@
         ui = kendo.ui,
         Select = ui.Select,
         os = kendo.support.mobileOS,
-        CLICK = kendo.support.touch ? "touchend" : "click",
         ATTRIBUTE = "disabled",
         CHANGE = "change",
         SELECT = "select",
@@ -162,9 +161,7 @@
         DEFAULT = "k-state-default",
         DISABLED = "k-state-disabled",
         SELECTED = "k-state-selected",
-        HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
-        INPUTWRAPPER = ".k-dropdown-wrap",
         trimRegExp = /^\s/,
         proxy = $.proxy;
 
@@ -721,7 +718,6 @@
         */
         value: function(value) {
             var that = this,
-                element = that.element,
                 idx;
 
             if (value !== undefined) {
@@ -834,7 +830,6 @@
 
         _select: function(li) {
             var that = this,
-                element = that.element[0],
                 current = that._current,
                 data = that._data(),
                 value,

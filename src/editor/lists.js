@@ -142,19 +142,18 @@ var ListFormatter = Class.extend({
 
     split: function (range) {
         var nodes = textNodes(range),
-            start, end, i, l, formatNode, parents;
+            start, end;
 
         if (nodes.length) {
             start = dom.parentOfType(nodes[0], ['li']);
             end = dom.parentOfType(nodes[nodes.length - 1], ['li']);
-
             range.setStartBefore(start);
             range.setEndAfter(end);
 
-            for (i = 0, l = nodes.length; i < l; i++) {
-                formatNode = this.finder.findFormat(nodes[i]);
+            for (var i = 0, l = nodes.length; i < l; i++) {
+                var formatNode = this.finder.findFormat(nodes[i]);
                 if (formatNode) {
-                    parents = $(formatNode).parents("ul,ol");
+                    var parents = $(formatNode).parents("ul,ol");
                     if (parents[0]) {
                         RangeUtils.split(range, parents.last()[0], true);
                     } else {
@@ -193,8 +192,12 @@ var ListFormatter = Class.extend({
 
         if (/table|tbody/.test(dom.name(commonAncestor))) {
             childNodes = $.map(nodes, function(node) {
-                                return dom.parentOfType(node, ["td"]);
-                            });
+                return dom.parentOfType(node, ["td"]);
+            });
+        }
+
+        function pushAncestor() {
+            ancestors.push(this);
         }
 
         for (var i = 0; i < childNodes.length; i++) {
@@ -204,7 +207,8 @@ var ListFormatter = Class.extend({
 
                 if (formatNode && (nodeName == 'ul' || nodeName == 'ol')) {
                     // merging lists
-                    ancestors = ancestors.concat($.toArray(child.childNodes));
+                    //Array.prototype.push.apply(ancestors, $.toArray(child.childNodes));
+                    $.each(child.childNodes, pushAncestor);
                     dom.remove(child);
                 } else {
                     ancestors.push(child);
@@ -237,7 +241,6 @@ var ListFormatter = Class.extend({
             while(formatNode.firstChild) {
                 prev.appendChild(formatNode.firstChild);
             }
-
             dom.remove(formatNode);
             formatNode = prev;
         }
@@ -252,7 +255,6 @@ var ListFormatter = Class.extend({
             while(formatNode.lastChild) {
                 next.insertBefore(formatNode.lastChild, next.firstChild);
             }
-
             dom.remove(formatNode);
         }
     },
@@ -302,13 +304,12 @@ var ListFormatter = Class.extend({
     },
 
     remove: function (nodes) {
-        var formatNode, i, l, that = this;
-
-        for (i = 0, l = nodes.length; i < l; i++) {
-            formatNode = that.finder.findFormat(nodes[i]);
+        var formatNode;
+        for (var i = 0, l = nodes.length; i < l; i++) {
+            formatNode = this.finder.findFormat(nodes[i]);
 
             if (formatNode) {
-                that.unwrap(formatNode);
+                this.unwrap(formatNode);
             }
         }
     },

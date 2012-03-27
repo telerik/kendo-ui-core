@@ -640,7 +640,6 @@
             var that = this,
                 vertical = that.options.animation.vertical,
                 effects = vertical.effects,
-                viewWidth = from.outerWidth(),
                 cell, position;
 
             if (effects && effects.indexOf("zoom") != -1) {
@@ -728,8 +727,7 @@
             var that = this,
                 element = that.element,
                 today = new DATE(),
-                footer = element.find(".k-footer"),
-                link;
+                footer = element.find(".k-footer");
 
             if (!template) {
                 that._toggle(false);
@@ -1190,7 +1188,6 @@
             build = options.build,
             length = options.cells || 12,
             cellsPerRow = options.perRow || 4,
-            toDateString = options.toDateString,
             content = options.content || cellTemplate,
             empty = options.empty || emptyCellTemplate,
             html = options.html || '<table class="k-content k-meta-view" cellspacing="0"><tbody><tr>';

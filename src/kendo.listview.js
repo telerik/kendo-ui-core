@@ -13,7 +13,6 @@
         SELECTED = "k-state-selected",
         KEDITITEM = "k-edit-item",
         STRING = "string",
-        CLICK = "click",
         EDIT = "edit",
         REMOVE = "remove",
         proxy = $.proxy,

@@ -59,7 +59,6 @@ var ImageCommand = Command.extend({
 
     exec: function () {
         var that = this,
-            insertImage = that.insertImage,
             range = that.lockRange(),
             applied = false,
             img = RangeUtils.image(range),
@@ -98,14 +97,8 @@ var ImageCommand = Command.extend({
             }
         }
 
-//        var fileBrowser = that.editor.fileBrowser;
-//        var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
-//
-        function activate() {
-//            if (showBrowser) {
-//                new $t.imageBrowser($(this).find(".k-image-browser"), extend(fileBrowser, { apply: apply, element: that.editor.element, localization: that.editor.options.localization }));
-//            }
-        }
+        //var fileBrowser = that.editor.fileBrowser;
+        //var showBrowser = fileBrowser && fileBrowser.selectUrl !== undefined;
 
         windowContent =
             '<div class="k-editor-dialog">' +
@@ -124,7 +117,18 @@ var ImageCommand = Command.extend({
                 .appendTo(document.body)
                 .kendoWindow(extend({}, that.editor.options.dialogOptions, {
                     title: INSERTIMAGE,
-                    close: close
+                    close: close,
+                    activate: function() {
+                        //if (showBrowser) {
+                            //new $t.imageBrowser(
+                                //$(this).find(".k-image-browser"),
+                                //extend(fileBrowser, {
+                                    //apply: apply,
+                                    //element: that.editor.element,
+                                    //localization: that.editor.options.localization
+                                //}));
+                        //}
+                    }
                 }))
                 .hide()
                 .find(".k-dialog-insert").click(apply).end()

@@ -162,7 +162,6 @@
         STATE_SELECTED = "k-state-selected",
         STATE_FILTER = "filter",
         STATE_ACCEPT = "accept",
-        HOVER = "k-state-hover",
         HOVEREVENTS = "mouseenter mouseleave",
         NULL = null,
         proxy = $.proxy;
@@ -639,10 +638,8 @@
         refresh: function() {
             var that = this,
                 ul = that.ul[0],
-                popup = that.popup,
                 options = that.options,
                 suggest = options.suggest,
-                height = options.height,
                 data = that._data(),
                 length = data.length;
 
@@ -876,7 +873,6 @@
         */
         value: function(value) {
             var that = this,
-                element = that.element,
                 idx;
 
             if (value !== undefined) {

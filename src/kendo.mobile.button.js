@@ -4,7 +4,6 @@
         ui = mobile.ui,
         Widget = ui.Widget,
         support = kendo.support,
-        touch = support.touch,
         os = support.mobileOS,
         ANDROID3UP = os.android && os.flatVersion >= 300,
         MOUSECANCEL = support.mousecancel,

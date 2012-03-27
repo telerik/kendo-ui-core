@@ -6,8 +6,6 @@
         isFunction = $.isFunction,
         isPlainObject = $.isPlainObject,
         inArray = $.inArray,
-        Binder = kendo.data.ModelViewBinder,
-        Validator = ui.Validator,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
                     '${message}<div class="k-callout k-callout-n"></div></div>',
         CHANGE = "change";
@@ -127,7 +125,6 @@
 
         _validate: function(e) {
             var that = this,
-                model = that.options.model,
                 isBoolean = typeof e.value === "boolean",
                 input,
                 values = {};
@@ -170,7 +167,6 @@
                     isObject = isPlainObject(field),
                     fieldName = isObject ? field.field : field,
                     modelField = (model.fields || model)[fieldName],
-                    type = fieldType(modelField),
                     validation = modelField ? (modelField.validation || {}) : {};
 
                 for (var rule in validation) {

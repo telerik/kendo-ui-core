@@ -81,10 +81,7 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        mobile = kendo.mobile,
         support = kendo.support,
-        touch = support.touch,
-        os = support.mobileOS,
         ACTIVE_STATE_CLASS = "km-state-active",
         SELECT = "select",
         proxy = $.proxy;

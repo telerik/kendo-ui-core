@@ -319,7 +319,7 @@
         *  </script>
         */
         init: function (element, options) {
-            var that = this, wrapper, placeholder;
+            var that = this, wrapper;
 
             options = $.isArray(options) ? { dataSource: options} : options;
 
@@ -654,9 +654,7 @@
             var that = this,
             options = that.options,
             separator = options.separator,
-            length,
-            caret,
-            index;
+            length;
 
             word = word || that.value();
 
@@ -903,7 +901,6 @@
             var that = this,
                 element = that.element,
                 DOMelement = element[0],
-                TABINDEX = "tabIndex",
                 wrapper;
 
             wrapper = element.parent();

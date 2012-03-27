@@ -4,9 +4,7 @@
         ObservableObject = kendo.data.ObservableObject,
         ObservableArray = kendo.data.ObservableArray,
         toString = {}.toString,
-        data = kendo.data,
         Class = kendo.Class,
-        GET = "get",
         innerText,
         VALUE = "value",
         CHECKED = "checked",
@@ -834,8 +832,7 @@
         },
 
         bind: function(bindings) {
-            var that = this,
-                nodeName = this.target.nodeName.toLowerCase(),
+            var nodeName = this.target.nodeName.toLowerCase(),
                 key,
                 specificBinders = binders[nodeName] || {};
 
@@ -893,16 +890,16 @@
                 } else if (binding == "source") {
                     hasSource = true;
                 } else {
-                    this.applyBinding(binding, bindings);
+                    that.applyBinding(binding, bindings);
                 }
             }
 
             if (hasSource) {
-                this.applyBinding("source", bindings);
+                that.applyBinding("source", bindings);
             }
 
             if (hasValue) {
-                this.applyBinding(VALUE, bindings);
+                that.applyBinding(VALUE, bindings);
             }
         },
 
@@ -1000,7 +997,6 @@
     function bindElement(element, root, source, namespace) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
-            length,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
             children = element.children,
             deep = true,

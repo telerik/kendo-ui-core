@@ -15,7 +15,6 @@
         MOUSEMOVE = support.mousemove,
         MOUSECANCEL = support.mousecancel,
         MOUSEUP = support.mouseup,
-        ACTIVE_STATE_TIMEOUT = "active-state-timeout",
         CLICK = "click",
         REQUEST_START = "requestStart";
 
@@ -378,7 +377,6 @@
             var that = this,
                 dataSource = that.dataSource,
                 element = that.element,
-                grouped,
                 appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
                 contents,
                 view = dataSource.view();
@@ -393,13 +391,13 @@
                 contents = kendo.render(that.template, view);
             }
 
-            that.element[appendMethod](contents);
+            element[appendMethod](contents);
 
             if (that.options.pullToRefresh) {
                 that.scroller.pullHandled();
             }
 
-            kendo.mobile.init(that.element.children());
+            kendo.mobile.init(element.children());
 
             if (that._hideLoadingProxy) {
                 that._hideLoadingProxy();
