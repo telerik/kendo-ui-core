@@ -2,7 +2,6 @@
 
 // Imports ================================================================
 var kendo = window.kendo,
-    Class = kendo.Class,
     extend = $.extend,
     Editor = kendo.ui.editor,
     dom = Editor.Dom,

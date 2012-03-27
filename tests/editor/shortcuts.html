@@ -39,7 +39,7 @@ function makeEvent(keyCode) {
     e.altKey = false;
     return e;
 }
-        
+
 module("Shortcuts", {
     setup: function() {
         editor = getEditor();
@@ -50,7 +50,7 @@ test('find shorcut by single character', function() {
     var commands = { bold: { options: { key: 'B'} } }
 
     var e = makeEvent();
-                
+
     var command = editor.keyboard.toolFromShortcut(commands, e);
 
     equal(command, 'bold');
@@ -61,7 +61,7 @@ test('find shorcut with ctrl', function() {
 
     var e = makeEvent();
     e.ctrlKey = true;
-            
+
     var command = editor.keyboard.toolFromShortcut(commands, e);
 
     equal(command, 'bold');
@@ -76,7 +76,7 @@ test('should not find shorcut with ctrl when ctrl is not pressed', function() {
 
     ok(undefined === command);
 });
-        
+
 test('should find shortcut with alt', function() {
     var commands = { bold: { options: { alt: true, key: 'B' } } };
 
@@ -87,7 +87,7 @@ test('should find shortcut with alt', function() {
 
     equal(command, 'bold');
 });
-        
+
 test('should find shortcut with shift', function() {
     var commands = { bold: { options: { shift: true, key: 'B'} } };
 
@@ -115,7 +115,7 @@ test('should find shortcut with all modifiers shift', function() {
 
 test('editor dispatches shortcuts to exec', function() {
     var command = null;
-            
+
     editor.exec = function() {
         command = arguments[0];
     }
@@ -123,7 +123,7 @@ test('editor dispatches shortcuts to exec', function() {
     var e = makeEvent();
     e.ctrlKey = true;
     e.type = 'keydown';
-            
+
     $(editor.document).trigger(e);
 
     equal(command, 'bold');
@@ -144,7 +144,7 @@ test('ctrl z calls undo', function() {
 
     equal(command, 'undo');
 });
-        
+
 test('ctrl y calls redo', function() {
     var command = null;
 
@@ -160,7 +160,7 @@ test('ctrl y calls redo', function() {
 
     equal(command, 'redo');
 });
-        
+
 test('shift enter calls new line', function() {
     var command = null;
 
@@ -197,7 +197,7 @@ test('editor prevents default if shortcut is known', function() {
     var e = makeEvent();
     e.ctrlKey = true;
     e.type = 'keydown';
-            
+
     $(editor.document).trigger(e);
 
     ok(e.isDefaultPrevented());

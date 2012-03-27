@@ -170,8 +170,7 @@
                 names,
                 field,
                 idx,
-                length,
-                result;
+                length;
 
             aggregates = that.element.find(that.options.filter).map(function() {
                 var cell = $(this),

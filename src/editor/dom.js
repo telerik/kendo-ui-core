@@ -1,7 +1,6 @@
 (function($) {
 
 var kendo = window.kendo,
-    Class = kendo.Class,
     map = $.map,
     extend = $.extend,
     STYLE = "style",

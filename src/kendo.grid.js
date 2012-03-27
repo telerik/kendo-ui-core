@@ -26,7 +26,6 @@
         DETAILINIT = "detailInit",
         CHANGE = "change",
         SAVECHANGES = "saveChanges",
-        MODELCHANGE = "modelChange",
         DATABOUND = "dataBound",
         DETAILEXPAND = "detailExpand",
         DETAILCOLLAPSE = "detailCollapse",
@@ -406,9 +405,6 @@
 
         _editable: function() {
             var that = this,
-                cell,
-                model,
-                column,
                 editable = that.options.editable,
                 handler = function () {
                     var target = document.activeElement,
@@ -706,9 +702,7 @@
             var that = this,
                 column,
                 cell,
-                fields = [],
-                idx,
-                length;
+                fields = [];
 
             row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                 cell = $(this);
@@ -808,7 +802,6 @@
 
         addRow: function() {
             var that = this,
-                options = that.options,
                 index,
                 dataSource = that.dataSource;
 
@@ -856,11 +849,7 @@
             var that = this,
                 idx,
                 length,
-                html = "",
-                options,
-                commandName,
-                template,
-                command;
+                html = "";
 
             if (isArray(commands)) {
                 for (idx = 0, length = commands.length; idx < length; idx++) {
@@ -871,8 +860,7 @@
         },
 
         _createButton: function(command) {
-            var that = this,
-                template = command.template || COMMANDBUTTONTEMP,
+            var template = command.template || COMMANDBUTTONTEMP,
                 commandName = typeof command === STRING ? command : command.name,
                 options = { className: "", text: commandName, imageClass: "", attr: "", iconClass: "" };
 
@@ -1240,7 +1228,6 @@
                 header,
                 table,
                 options = that.options,
-                height = that.wrapper.innerHeight(),
                 scrollable = options.scrollable,
                 scrollbar = kendo.support.scrollbar();
 
@@ -1479,12 +1466,7 @@
 
         _wrapFooter: function(footerRow) {
             var that = this,
-                html = "",
-                columns = that.columns,
-                idx,
-                length,
-                groups = that.dataSource.group().length,
-                column;
+                html = "";
 
             if (that.options.scrollable) {
                 html = $('<div class="k-grid-footer"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div>');
@@ -1571,12 +1553,10 @@
         _tmpl: function(rowTemplate, alt) {
             var that = this,
                 settings = extend({}, kendo.Template, that.options.templateSettings),
-                paramName = settings.paramName,
                 idx,
                 length = that.columns.length,
                 template,
                 state = { storage: {}, count: 0 },
-                id,
                 column,
                 type,
                 hasDetails = that._hasDetails(),

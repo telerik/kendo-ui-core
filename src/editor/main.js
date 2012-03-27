@@ -73,8 +73,7 @@
                 h = textarea.height(),
                 template = EditorUtils.editorWrapperTemplate,
                 editorWrap = $(template).insertBefore(textarea).width(w).height(h),
-                editArea = editorWrap.find(".k-editable-area"),
-                toolsArea = editorWrap.find(".k-editor-toolbar");
+                editArea = editorWrap.find(".k-editable-area");
 
             textarea.appendTo(editArea).addClass("k-content k-raw-content").hide();
 
@@ -142,7 +141,6 @@
 
         createContentElement: function(textarea, stylesheets) {
             var iframe, wnd, doc,
-                html,
                 rtlStyle = textarea.closest(".k-rtl").length ? "direction:rtl;" : "";
 
             textarea.hide();
@@ -363,7 +361,6 @@
         focusable = EditorUtils.focusable,
         wrapTextarea = EditorUtils.wrapTextarea,
         renderTools = EditorUtils.renderTools,
-        createContentElement = EditorUtils.createContentElement,
         initializeContentElement = EditorUtils.initializeContentElement,
         fixBackspace = EditorUtils.fixBackspace;
 
@@ -401,14 +398,6 @@
         deleteFile: 'Are you sure you want to delete "{0}"?',
         overwriteFile: 'A file with name "{0}" already exists in the current directory. Do you want to overwrite it?',
         directoryNotFound: "A directory with this name was not found."
-    };
-
-    var emptyFinder = function () {
-        return {
-            isFormatted: function () {
-                return false;
-            }
-        };
     };
 
     var supportedBrowser = !kendo.support.mobileOS || (kendo.support.mobileOS.ios && kendo.support.mobileOS.majorVersion >= 5);

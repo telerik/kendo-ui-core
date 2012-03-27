@@ -139,14 +139,12 @@
         COLLAPSE = "collapse",
         DRAGSTART = "dragstart",
         DRAG = "drag",
-        NODEDRAGCANCELLED = "nodeDragCancelled",
         DROP = "drop",
         DRAGEND = "dragend",
         CLICK = "click",
         VISIBILITY = "visibility",
-        TSTATEHOVER = "k-state-hover",
-        TTREEVIEW = "k-treeview",
-        TITEM = "k-item",
+        KSTATEHOVER = "k-state-hover",
+        KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
         NODE = ".k-item",
         SUBGROUP = ">.k-group,>.k-animation-container>.k-group",
@@ -213,7 +211,7 @@
 
         if (!groupData) {
             groupData = {
-                firstLevel: node.parent().parent().hasClass(TTREEVIEW),
+                firstLevel: node.parent().parent().hasClass(KTREEVIEW),
                 length: node.parent().children().length
             };
         }
@@ -414,7 +412,7 @@
             }
 
             // render treeview if it's not already rendered
-            if (!element.hasClass(TTREEVIEW)) {
+            if (!element.hasClass(KTREEVIEW)) {
                 that._wrapper();
 
                 if (!that.root.length) { // treeview initialized from empty element
@@ -437,8 +435,8 @@
 
             that.wrapper
                 .on(MOUSEENTER, ".k-in.k-state-selected", function(e) { e.preventDefault(); })
-                .on(MOUSEENTER, clickableItems, function () { $(this).addClass(TSTATEHOVER); })
-                .on("mouseleave", clickableItems, function () { $(this).removeClass(TSTATEHOVER); })
+                .on(MOUSEENTER, clickableItems, function () { $(this).addClass(KSTATEHOVER); })
+                .on("mouseleave", clickableItems, function () { $(this).removeClass(KSTATEHOVER); })
                 .on(CLICK, clickableItems, proxy(that._nodeClick, that))
                 .on("dblclick", "div:not(.k-state-disabled) .k-in", proxy(that._toggleButtonClick, that))
                 .on(CLICK, ".k-plus,.k-minus", proxy(that._toggleButtonClick, that));
@@ -717,7 +715,7 @@
 
         _group: function(item) {
             var that = this,
-                firstLevel = item.hasClass(TTREEVIEW),
+                firstLevel = item.hasClass(KTREEVIEW),
                 group = {
                     firstLevel: firstLevel,
                     expanded: firstLevel || item.attr(kendo.attr("expanded")) === "true"
@@ -982,7 +980,7 @@
                 isArrayData = $.isArray(nodeData),
                 fromNodeData = isArrayData || $.isPlainObject(nodeData),
                 groupData = {
-                    firstLevel: parentNode.hasClass(TTREEVIEW),
+                    firstLevel: parentNode.hasClass(KTREEVIEW),
                     expanded: true,
                     length: updatedGroupLength
                 }, node, i, nodeHtml = "";
@@ -1297,7 +1295,7 @@
                     insertOnBottom = (itemTop + itemHeight - delta) < e.pageY;
                     addChild = itemContent.length > 0 && !insertOnTop && !insertOnBottom;
 
-                    itemContent.toggleClass(TSTATEHOVER, addChild);
+                    itemContent.toggleClass(KSTATEHOVER, addChild);
                     that.dropHint.css(VISIBILITY, addChild ? "hidden" : "visible");
 
                     if (addChild) {

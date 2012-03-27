@@ -1,8 +1,7 @@
 (function($) {
 
     // Imports ================================================================
-    var doc = document,
-        kendo = window.kendo,
+    var kendo = window.kendo,
         Class = kendo.Class,
         extend = $.extend,
         Editor = kendo.ui.editor,
@@ -12,11 +11,6 @@
         findClosestAncestor = dom.findClosestAncestor,
         getNodeLength = dom.getNodeLength,
         normalize = dom.normalize;
-
-var START_TO_START = 0,
-    START_TO_END = 1,
-    END_TO_END = 2,
-    END_TO_START = 3;
 
 var SelectionUtils = {
     selectionFromWindow: function(window) {
@@ -764,7 +758,10 @@ var Marker = Class.extend({
     remove: function (range) {
         var that = this,
             start = that.start,
-            end = that.end;
+            end = that.end,
+            shouldNormalizeStart,
+            shouldNormalizeEnd,
+            shouldNormalize;
 
         normalize(range.commonAncestorContainer);
 
@@ -776,11 +773,14 @@ var Marker = Class.extend({
             end = end.parentNode;
         }
 
-        var shouldNormalizeStart = (start.previousSibling && start.previousSibling.nodeType == 3) &&
-                                   (start.nextSibling && start.nextSibling.nodeType == 3);
+        // merely accessing the siblings will solve range issues in IE
+        shouldNormalizeStart = (start.previousSibling && start.previousSibling.nodeType == 3) &&
+                               (start.nextSibling && start.nextSibling.nodeType == 3);
 
-        var shouldNormalizeEnd = (end.previousSibling && end.previousSibling.nodeType == 3) &&
-                                 (end.nextSibling && end.nextSibling.nodeType == 3);
+        shouldNormalizeEnd = (end.previousSibling && end.previousSibling.nodeType == 3) &&
+                             (end.nextSibling && end.nextSibling.nodeType == 3);
+
+        shouldNormalize = shouldNormalizeStart && shouldNormalizeEnd;
 
         start = start.nextSibling;
         end = end.previousSibling;

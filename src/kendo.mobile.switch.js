@@ -58,8 +58,6 @@
         MARGINLEFT = "margin-left",
         ACTIVE_STATE = "km-state-active",
         TRANSFORMSTYLE = support.transitions.css + "transform",
-        DOCUMENT = $(document),
-        extend = $.extend,
         proxy = $.proxy;
 
     function limitValue(value, minLimit, maxLimit) {

@@ -2,12 +2,9 @@
 
     // Imports ================================================================
     var doc = document,
-        extend = $.extend,
-        map = $.map,
         math = Math,
 
         kendo = window.kendo,
-        Class = kendo.Class,
         Widget = kendo.ui.Widget,
         deepExtend = kendo.deepExtend,
 
@@ -51,8 +48,7 @@
         NEEDLE = "needle",
         OUTSIDE = "outside",
         RADIAL_POINTER = "radialPointer",
-        ROTATION_ORIGIN = 90,
-        VERTICAL = "vertical";
+        ROTATION_ORIGIN = 90;
 
     // Gauge ==================================================================
     var Pointer = ChartElement.extend({
@@ -84,8 +80,7 @@
             var pointer = this,
                 options = pointer.options,
                 value = options.value,
-                scaleOptions = pointer.scale.options,
-                element;
+                scaleOptions = pointer.scale.options;
 
             if (arguments.length === 0) {
                 return value;
@@ -162,7 +157,6 @@
                 options = pointer.options,
                 capSize = r * options.cap.size,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
-                halfWidth = box.width() / 2,
                 center = box.center(),
                 minAngle = scale.getSlotAngle(scale.options.min),
                 pointRotation = ROTATION_ORIGIN - minAngle;
@@ -198,7 +192,6 @@
 
         getViewElements: function(view) {
             var pointer = this,
-                shape = pointer.options.shape,
                 elements = pointer.renderPointer(view);
 
             pointer.elements = elements;
@@ -396,7 +389,7 @@
                 segment,
                 ringDistance = options.ringDistance,
                 ringSize = options.ringSize,
-                i, segmentsCount;
+                i;
 
             function rangeSegment(from, to, color) {
                 return { from: from, to: to, color: color };
@@ -455,11 +448,7 @@
 
         getViewElements: function(view) {
             var scale = this,
-                options = scale.options,
-                vertical = options.orientation === VERTICAL,
-                childElements = ChartElement.fn.getViewElements.call(scale, view),
-                tickPositions = scale.getMinorTickPositions(),
-                lineOptions;
+                childElements = ChartElement.fn.getViewElements.call(scale, view);
 
             append(childElements, scale.renderRanges(view));
             append(childElements, scale.renderTicks(view));
@@ -489,7 +478,6 @@
 
         reflow: function(box) {
             var plotArea = this,
-                options = plotArea.options,
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
                 plotBox;
@@ -512,8 +500,7 @@
                 paddingX = plotBoxCenter.x - boxCenter.x,
                 paddingY = plotBoxCenter.y - boxCenter.y,
                 scale = plotArea.scale,
-                pointer = plotArea.pointer,
-                ring = scale.ring;
+                pointer = plotArea.pointer;
 
             scale.ring.c.x -= paddingX;
             scale.ring.c.y -= paddingY;
@@ -575,7 +562,6 @@
 
         getPlotBox: function(step, box, ring) {
             var plotArea = this,
-                options = plotArea.options,
                 scale = plotArea.scale,
                 pointer = plotArea.pointer;
 
@@ -660,7 +646,6 @@
                 ranges = options.ranges || [],
                 vertical = options.vertical,
                 result = [],
-                plotArea = axis.parent,
                 count = ranges.length,
                 range, slotX, slotY,
                 from, to, i,
@@ -763,15 +748,11 @@
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
-                slot = scale.getSlot(options.value),
                 scaleLine = scale.lineBox(),
                 scaleBox = scale.box,
                 width = options.track.size || options.size,
                 padding = getSpacing(options.margin),
-                halfSize = options.size / 2,
-                trackBoxCenter,
-                trackBox,
-                pointerBox;
+                trackBox;
 
             if (scale.options.vertical) {
                 trackBox = new Box2D(
@@ -881,7 +862,6 @@
 
         renderTrack: function(view) {
             var pointer = this,
-                scale = pointer.scale,
                 options = pointer.options,
                 trackOptions = options.track,
                 border = trackOptions.border || {};
@@ -944,7 +924,6 @@
 
         calculateBox: function(box) {
             var plotArea = this,
-                options = plotArea.options,
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
                 boxCenter = box.center(),
@@ -1022,8 +1001,7 @@
                 options,
                 themeOptions,
                 themeName,
-                themes = dataviz.ui.themes.gauge || {},
-                i = 0;
+                themes = dataviz.ui.themes.gauge || {};
 
             Widget.fn.init.call(gauge, element);
 
@@ -1056,12 +1034,12 @@
 
         redraw: function() {
             var gauge = this,
-                options = gauge.options,
                 element = gauge.element,
                 model = gauge._model = gauge._getModel(),
-                plotArea = gauge._plotArea = model._plotArea,
                 viewType = dataviz.ui.defaultView(),
                 view;
+
+            gauge._plotArea = model._plotArea;
 
             if (viewType) {
                 view = gauge._view = viewType.fromModel(model);

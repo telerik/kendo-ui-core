@@ -1,8 +1,7 @@
 (function($) {
 
     // Imports ================================================================
-    var doc = document,
-        kendo = window.kendo,
+    var kendo = window.kendo,
         Class = kendo.Class,
         Editor = kendo.ui.editor,
         EditorUtils = Editor.EditorUtils,
@@ -96,8 +95,7 @@ var InsertHtmlCommand = Command.extend({
 
 var InsertHtmlTool = Tool.extend({
     initialize: function(ui, initOptions) {
-        var editor = initOptions.editor,
-            title = editor.options.localization.insertHtml;
+        var editor = initOptions.editor;
 
         new Editor.SelectBox(ui, {
             dataSource: editor.options.insertHtml || [],
@@ -106,7 +104,7 @@ var InsertHtmlTool = Tool.extend({
             change: function (e) {
                 Tool.exec(editor, 'insertHtml', this.value());
             },
-            title:editor.options.localization.insertHtml,
+            title: editor.options.localization.insertHtml,
             highlightFirst: false
         });
     },
@@ -275,7 +273,7 @@ var Keyboard = Class.extend({
             toolOptions;
 
         for (toolName in tools) {
-            toolOptions = tools[toolName].options || {};
+            toolOptions = $.extend({ ctrl: false, alt: false, shift: false }, tools[toolName].options);
 
             if ((toolOptions.key == key || toolOptions.key == e.keyCode) &&
                 toolOptions.ctrl == e.ctrlKey &&

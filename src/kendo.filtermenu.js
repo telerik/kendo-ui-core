@@ -132,7 +132,6 @@
                 type = "string",
                 link,
                 field,
-                getter,
                 operators;
 
             Widget.fn.init.call(that, element, options);

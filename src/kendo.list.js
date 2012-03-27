@@ -24,10 +24,6 @@
         proxy = $.proxy,
         isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9;
 
-    function contains(container, target) {
-        return container === target || $.contains(container, target);
-    }
-
     var List = Widget.extend(/** @lends kendo.ui.List */{
         /**
          * Creates a List instance.
@@ -567,7 +563,6 @@
             var that = this,
                 element = that.element,
                 selectedIndex = element[0].selectedIndex,
-                value = that.value(),
                 length = data.length,
                 options = "",
                 option,

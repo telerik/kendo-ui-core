@@ -97,7 +97,6 @@
         TOUCHEND = "touchend",
         MOUSEDOWN = touch ? "touchstart" : "mousedown",
         MOUSEUP = touch ? "touchmove " + TOUCHEND : "mouseup mouseleave",
-        HIDE = "k-hide-text",
         DEFAULT = "k-state-default",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
@@ -515,10 +514,7 @@
         },
 
         _format: function(format) {
-            var that = this,
-                options = that.options,
-                numberFormat = kendo.culture().numberFormat;
-
+            var numberFormat = kendo.culture().numberFormat;
 
             if (format.indexOf("c") > -1) {
                 numberFormat = numberFormat.currency;

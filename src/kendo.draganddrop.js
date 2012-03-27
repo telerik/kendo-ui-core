@@ -380,7 +380,6 @@
         _withEvent: function(e, callback) {
             var that = this,
                 originalEvent = e.originalEvent,
-                which = e.which,
                 touches = originalEvent && originalEvent.changedTouches,
                 idx = touches && touches.length;
 
@@ -486,8 +485,7 @@
 
     var PaneDimensions = Class.extend({
         init: function(options) {
-            var that = this,
-                movable = options.movable;
+            var that = this;
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
@@ -865,7 +863,6 @@
         updateHint: function(e) {
             var that = this,
                 coordinates,
-                offset = that.initialOffset,
                 cursorOffset = that.options.cursorOffset;
 
             if (cursorOffset) {
@@ -880,8 +877,7 @@
         },
 
         _drag: function(e) {
-            var that = this,
-                cursorOffset = that.options.cursorOffset;
+            var that = this;
 
             e.preventDefault();
 

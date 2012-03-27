@@ -119,7 +119,6 @@
     MONTH = "month",
     FIRST = "first",
     calendar = kendo.calendar,
-    views = calendar.viewsEnum,
     isInRange = calendar.isInRange,
     restrictValue = calendar.restrictValue,
     extend = $.extend,
@@ -212,14 +211,12 @@
         move: function(e) {
             var that = this,
                 options = that.options,
-                min = options.min,
-                max = options.max,
                 currentValue = new DATE(that._current),
                 calendar = that.calendar,
                 index = calendar._index,
                 view = calendar._view,
                 key = e.keyCode,
-                dateString, value, prevent, method;
+                value, prevent, method;
 
             if (key == keys.ESC) {
                 that.close();
@@ -561,7 +558,7 @@
          */
         init: function(element, options) {
             var that = this,
-                dateView, enable;
+                dateView;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;

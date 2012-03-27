@@ -4,7 +4,6 @@
         grep = $.grep,
         map = $.map,
         math = Math,
-        noop = $.noop,
         extend = $.extend,
         proxy = $.proxy,
         doc = document,
@@ -78,7 +77,6 @@
         LEFT = "left",
         LINE = "line",
         LINE_MARKER_SIZE = 8,
-        LINEAR = "linear",
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         MOUSEMOVE_TRACKING = "mousemove.tracking",
@@ -96,7 +94,6 @@
         SERIES_CLICK = "seriesClick",
         STRING = "string",
         SQUARE = "square",
-        SWING = "swing",
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -250,9 +247,10 @@
                 options = chart.options,
                 element = chart.element,
                 model = chart._model = chart._getModel(),
-                plotArea = chart._plotArea = model._plotArea,
                 viewType = dataviz.ui.defaultView(),
                 view;
+
+            chart._plotArea = model._plotArea;
 
             if (viewType) {
                 view = chart._view = viewType.fromModel(model);
@@ -2104,8 +2102,7 @@
         computeAxisRanges: function() {
             var chart = this,
                 isStacked = chart.options.isStacked,
-                axisName,
-                totals = chart._categoryTotals;
+                axisName;
 
             if (isStacked) {
                 axisName = chart.options.series[0].axis || PRIMARY;
@@ -2133,7 +2130,6 @@
     var AreaChart = LineChart.extend({
         splitSegments: function(view) {
             var chart = this,
-                options = chart.options,
                 plotArea = chart.plotArea,
                 invertAxes = chart.options.invertAxes,
                 originalLines = LineChart.fn.splitSegments.call(chart, view),
@@ -2325,7 +2321,6 @@
 
         reflow: function(targetBox) {
             var chart = this,
-                plotArea = chart.plotArea,
                 chartPoints = chart.points,
                 pointIx = 0,
                 point,
@@ -3201,7 +3196,6 @@
                 topAnchor,
                 bottomAnchor,
                 axis,
-                axisCrossings,
                 i;
 
             // TODO: Refactor almost-identical loops
@@ -3551,7 +3545,6 @@
             }
 
             var plotArea = this,
-                options = plotArea.options,
                 firstSeries = series[0],
                 barChart = new BarChart(plotArea, {
                     series: series,
@@ -3570,7 +3563,6 @@
             }
 
             var plotArea = this,
-                options = plotArea.options,
                 firstSeries = series[0],
                 lineChart = new LineChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
@@ -3587,7 +3579,6 @@
             }
 
             var plotArea = this,
-                options = plotArea.options,
                 firstSeries = series[0],
                 areaChart = new AreaChart(plotArea, {
                     invertAxes: plotArea.invertAxes,
@@ -3756,7 +3747,6 @@
             var plotArea = this,
                 axisName = options.name || PRIMARY,
                 namedAxes = vertical ? plotArea.namedYAxes : plotArea.namedXAxes,
-                axisRanges = vertical ? plotArea.yAxisRanges : plotArea.xAxisRanges,
                 rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
                 axisOptions = deepExtend({}, options, { vertical: vertical }),

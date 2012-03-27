@@ -3,7 +3,6 @@
         mobile = kendo.mobile,
         ui = mobile.ui,
         proxy = $.proxy,
-        Class = kendo.Class,
         Transition = kendo.fx.Transition,
         Pane = kendo.ui.Pane,
         PaneDimensions = kendo.ui.PaneDimensions,

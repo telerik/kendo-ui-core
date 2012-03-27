@@ -7,9 +7,7 @@
         roleSelector = kendo.roleSelector,
         attr = kendo.attr,
 
-        View = mobile.View,
         ViewSwitcher = mobile.ViewSwitcher,
-        Layout = mobile.Layout,
 
         OS = support.mobileOS,
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
@@ -19,8 +17,6 @@
             blackberry: "PlayBook Version/7.2.0.0",
             meego: "MeeGo NokiaBrowser/8.5.0"
         },
-
-        TRANSFORM = support.transitions.css + "transform",
 
         div = $("<div/>"),
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +

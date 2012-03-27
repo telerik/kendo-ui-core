@@ -3,15 +3,13 @@
         mobile = kendo.mobile,
         ui = mobile.ui,
         history = kendo.history,
-        os = kendo.support.mobileOS,
         attr = kendo.attr,
         Class = kendo.Class,
         Widget = ui.Widget,
         INIT = "init",
         SHOW = "show",
         HIDE = "hide",
-        roleSelector = kendo.roleSelector,
-        jsonRegExp = /^(?:\{.*\}|\[.*\])$/;
+        roleSelector = kendo.roleSelector;
 
     /**
      * @name kendo.mobile.ui.View.Description
