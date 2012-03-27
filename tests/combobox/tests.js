@@ -30,5 +30,9 @@ tests.push(
     {
         page: "combobox/mvvm.html",
         title: "combobox mvvm"
+    },
+    {
+        page: "combobox/lint.html",
+        title: "combobox lint"
     }
 );
