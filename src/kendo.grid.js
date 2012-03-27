@@ -1523,7 +1523,7 @@
         },
 
         _showMessage: function(text) {
-            return confirm(text);
+            return window.confirm(text);
         },
 
         _confirmation: function() {
@@ -2110,8 +2110,6 @@
                 that._rowHeight = rowHeight = that.table.outerHeight() / that.table[0].rows.length;
                 that._sum = rowHeight;
                 that._measures = 1;
-
-                totalHeight = math.round(that.dataSource.total() * rowHeight);
             }
 
             var currentRowHeight = that.table.outerHeight() / that.table[0].rows.length;
@@ -2896,14 +2894,16 @@
             group.nextAll("tr").each(function () {
                 var tr = $(this);
                 var offset = tr.find(".k-group-cell").length;
-                if (offset <= level)
+                if (offset <= level) {
                     return false;
+                }
 
                 if (offset == level + 1) {
                     tr.show();
 
-                    if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-collapse"))
+                    if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-collapse")) {
                         that.expandGroup(tr);
+                    }
                 }
             });
         },
