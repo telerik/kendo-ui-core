@@ -71,7 +71,6 @@
             test("binding switch initialized before binding", function() {
                 var checked = true;
                 var observable = kendo.observable({ checked: checked });
-                observable.value = value;
 
                 dom.kendoMobileSwitch();
 
@@ -83,7 +82,6 @@
             test("binding switch initialized after binding", function() {
                 var checked = true;
                 var observable = kendo.observable({ checked: checked });
-                observable.value = value;
 
                 kendo.bind(dom, observable, kendo.mobile.ui );
 
