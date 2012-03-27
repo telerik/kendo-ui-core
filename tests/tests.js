@@ -15,7 +15,7 @@ var http       = require("http"),
 
 
 var WEBROOT    = path.join(path.dirname(__filename), ".."),
-    PORT       = 8880,
+    PORT       = process.argv[3] || 8880,
     bayeux     = new faye.NodeAdapter({mount: "/faye", timeout: 100000});
 
 var fileServer = new static.Server(WEBROOT, {cache: false});
