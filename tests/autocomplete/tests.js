@@ -30,5 +30,9 @@ tests.push(
     {
         page: "autocomplete/mvvm.html",
         title: "autocomplete mvvm"
+    },
+    {
+        page: "autocomplete/lint.html",
+        title: "autocomplete lint"
     }
 );
