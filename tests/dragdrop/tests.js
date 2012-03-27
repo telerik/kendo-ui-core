@@ -14,5 +14,9 @@ tests.push(
     {
         page: "dragdrop/droptarget.html",
         title: "droptarget"
+    },
+    {
+        page: "dragdrop/lint.html",
+        title: "draganddrop lint"
     }
 );
