@@ -596,7 +596,7 @@
                     .bind(HOVEREVENTS, that._toggleHover);
 
                 input.removeAttr(ATTRIBUTE);
-                arrow.bind(CLICK, function() { that.toggle() })
+                arrow.bind(CLICK, function() { that.toggle(); })
                      .bind(MOUSEDOWN, function(e) { e.preventDefault(); });
             }
         },
@@ -969,7 +969,7 @@
         _highlight: function(li) {
             var that = this, idx;
 
-            if (li == undefined) {
+            if (li === undefined) {
                 return -1;
             }
 
@@ -1020,7 +1020,7 @@
 
             that._focused = that.input = input;
             that._arrow = wrapper.find(".k-icon");
-            that._inputWrapper = $(wrapper[0].firstChild)
+            that._inputWrapper = $(wrapper[0].firstChild);
         },
 
         _keydown: function(e) {
@@ -1102,7 +1102,7 @@
                 value = that._value(data);
 
                 that._prev = that.input[0].value = text;
-                that._accessor(value != undefined ? value : text, idx);
+                that._accessor(value !== undefined ? value : text, idx);
                 that._placeholder();
             }
         },
