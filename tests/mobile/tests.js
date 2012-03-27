@@ -48,7 +48,7 @@ tests.push(
         title: "mobile integration"
     },
     {
-        page: "lint.html",
+        page: "mobile/lint.html",
         title: "mobile lint"
     }
 );
