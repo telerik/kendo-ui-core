@@ -179,7 +179,11 @@
             }
 
             if (support.touch) {
-                that.surface[0].addEventListener("touchend", function(e) { if (that.moved) { e.preventDefault() } }, true);
+                that.surface[0].addEventListener("touchend", function(e) {
+                    if (that.moved) {
+                        e.preventDefault();
+                    }
+                }, true);
             }
 
             that.bind([
@@ -410,7 +414,9 @@
             that.trigger("press");
             if (that.capture) {
                 e.preventDefault();
-                e.originalEvent && e.originalEvent.preventDefault();
+                if (e.originalEvent) {
+                    e.originalEvent.preventDefault();
+                }
             }
         },
 
@@ -420,7 +426,9 @@
 
             if (that.capture) {
                 e.preventDefault();
-                e.originalEvent && e.originalEvent.preventDefault();
+                if (e.originalEvent) {
+                    e.originalEvent.preventDefault();
+                }
                 that.cancelCapture();
             }
         },
@@ -568,11 +576,11 @@
     if (support.hasHW3D) {
         translate = function(x, y) {
             return "translate3d(" + round(x) + "px," + round(y) +"px,0)";
-        }
+        };
     } else {
         translate = function(x, y) {
             return "translate(" + round(x) + "px," + round(y) +"px)";
-        }
+        };
     }
 
     var Movable = Observable.extend({
@@ -778,7 +786,7 @@
                     that._trigger(DRAGCANCEL, {event: e});
                     that.drag.cancel();
                 }
-            }
+            };
         },
 
         events: [
