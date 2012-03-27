@@ -25,7 +25,8 @@ function indent(node, value) {
             node.style[property] = value + "px";
         } else {
             node.style[property] = "";
-            if (node.style.cssText == "") {
+
+            if (!node.style.cssText) {
                 node.removeAttribute("style");
             }
         }
@@ -45,7 +46,7 @@ var IndentFormatter = Class.extend({
         if (formatNodes.length) {
             for (i = 0, len = formatNodes.length; i < len; i++) {
                 if (dom.is(formatNodes[i], "li")) {
-                    if ($(formatNodes[i]).index() == 0) {
+                    if (!$(formatNodes[i]).index()) {
                         targets.push(formatNodes[i].parentNode);
                     } else if ($.inArray(formatNodes[i].parentNode, targets) < 0) {
                         targets.push(formatNodes[i]);
@@ -86,7 +87,7 @@ var IndentFormatter = Class.extend({
                         }
                     }
                 } else {
-                    var marginLeft = parseInt(indent(formatNode)) + 30;
+                    var marginLeft = parseInt(indent(formatNode), 10) + 30;
                     indent(formatNode, marginLeft);
 
                     for (var targetIndex = 0; targetIndex < targets.length; targetIndex++) {
@@ -121,8 +122,9 @@ var IndentFormatter = Class.extend({
                     }
 
                     siblings = formatNode.nextAll("li");
-                    if (siblings.length)
+                    if (siblings.length) {
                         $(list[0].cloneNode(false)).appendTo(formatNode).append(siblings);
+                    }
 
                     if (listParent.is("li")) {
                         formatNode.insertAfter(listParent);
@@ -146,7 +148,7 @@ var IndentFormatter = Class.extend({
                 targetNode = formatNodes[i];
             }
 
-            var marginLeft = parseInt(indent(targetNode)) - 30;
+            var marginLeft = parseInt(indent(targetNode), 10) - 30;
             indent(targetNode, marginLeft);
         }
     }
@@ -196,8 +198,8 @@ var OutdentTool = Tool.extend({
 
             if (!isOutdentable) {
                 listParentsCount = $(suitable[i]).parents("ul,ol").length;
-                isOutdentable = (dom.is(suitable[i], "li") && (listParentsCount > 1 || indent(suitable[i].parentNode)))
-                             || (dom.ofType(suitable[i], ["ul","ol"]) && listParentsCount > 0);
+                isOutdentable = (dom.is(suitable[i], "li") && (listParentsCount > 1 || indent(suitable[i].parentNode))) ||
+                                (dom.ofType(suitable[i], ["ul","ol"]) && listParentsCount > 0);
             }
 
             if (isOutdentable) {

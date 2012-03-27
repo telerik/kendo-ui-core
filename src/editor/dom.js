@@ -29,25 +29,33 @@ var empty = makeMap("area,base,basefont,br,col,frame,hr,img,input,isindex,link,m
     fillAttrs = makeMap("checked,compact,declare,defer,disabled,ismap,multiple,nohref,noresize,noshade,nowrap,readonly,selected".split(","));
 
 var normalize = function (node) {
-    if (node.nodeType == 1)
+    if (node.nodeType == 1) {
         node.normalize();
+    }
 };
 
-if ($.browser.msie && parseInt($.browser.version) >= 8) {
+if ($.browser.msie && parseInt($.browser.version, 10) >= 8) {
     normalize = function(parent) {
         if (parent.nodeType == 1 && parent.firstChild) {
             var prev = parent.firstChild,
                 node = prev;
 
-            while (node = node.nextSibling) {
+            while (true) {
+                node = node.nextSibling;
+
+                if (!node) {
+                    break;
+                }
+
                 if (node.nodeType == 3 && prev.nodeType == 3) {
                     node.nodeValue = prev.nodeValue + node.nodeValue;
                     Dom.remove(prev);
                 }
+
                 prev = node;
             }
         }
-    }
+    };
 }
 
 var whitespace = /^\s+$/,
@@ -57,19 +65,30 @@ var whitespace = /^\s+$/,
     closeTag = />/g,
     nbsp = /\u00a0/g,
     bom = /\ufeff/g;
-var cssAttributes = ("color,padding-left,padding-right,padding-top,padding-bottom,\
-background-color,background-attachment,background-image,background-position,background-repeat,\
-border-top-style,border-top-width,border-top-color,\
-border-bottom-style,border-bottom-width,border-bottom-color,\
-border-left-style,border-left-width,border-left-color,\
-border-right-style,border-right-width,border-right-color,\
-font-family,font-size,font-style,font-variant,font-weight,line-height"
-).split(",");
+    var cssAttributes =
+           ("color,padding-left,padding-right,padding-top,padding-bottom," +
+            "background-color,background-attachment,background-image,background-position,background-repeat," +
+            "border-top-style,border-top-width,border-top-color," +
+            "border-bottom-style,border-bottom-width,border-bottom-color," +
+            "border-left-style,border-left-width,border-left-color," +
+            "border-right-style,border-right-width,border-right-color," +
+            "font-family,font-size,font-style,font-variant,font-weight,line-height"
+           ).split(",");
 
 var Dom = {
     findNodeIndex: function(node) {
         var i = 0;
-        while (node = node.previousSibling) i++;
+
+        while (true) {
+            node = node.previousSibling;
+
+            if (!node) {
+                break;
+            }
+
+            i++;
+        }
+
         return i;
     },
 
@@ -90,9 +109,11 @@ var Dom = {
     },
 
     findClosestAncestor: function(root, node) {
-        if (Dom.isAncestorOf(root, node))
-            while (node && node.parentNode != root)
+        if (Dom.isAncestorOf(root, node)) {
+            while (node && node.parentNode != root) {
                 node = node.parentNode;
+            }
+        }
 
         return node;
     },
@@ -112,14 +133,17 @@ var Dom = {
         for (var key in attributes) {
             var value = node[key];
 
-            if (key == FLOAT)
+            if (key == FLOAT) {
                 value = node[$.support.cssFloat ? CSSFLOAT : STYLEFLOAT];
+            }
 
             if (typeof value == "object") {
-                if (!Dom.attrEquals(value, attributes[key]))
+                if (!Dom.attrEquals(value, attributes[key])) {
                     return false;
-            } else if (value != attributes[key])
+                }
+            } else if (value != attributes[key]) {
                 return false;
+            }
         }
 
         return true;
@@ -135,8 +159,9 @@ var Dom = {
 
         for (i = 0, len = nodes.length; i < len; i++) {
             var block = Dom.parentOfType(nodes[i], Dom.blockElements);
-            if (block && $.inArray(block, blocks) < 0)
+            if (block && $.inArray(block, blocks) < 0) {
                 blocks.push(block);
+            }
         }
 
         return blocks;
@@ -155,10 +180,13 @@ var Dom = {
     toHex: function (color) {
         var matches = rgb.exec(color);
 
-        if (!matches) return color;
+        if (!matches) {
+            return color;
+        }
 
         return "#" + map(matches.slice(1), function (x) {
-            return x = parseInt(x).toString(16), x.length > 1 ? x : "0" + x;
+            x = parseInt(x, 10).toString(16);
+            return x.length > 1 ? x : "0" + x;
         }).join("");
     },
 
@@ -180,14 +208,19 @@ var Dom = {
     },
 
     lastTextNode: function(node) {
-        if (node.nodeType == 3)
-            return node;
-
         var result = null;
 
-        for (var child = node.lastChild; child; child = child.previousSibling)
-            if (result = Dom.lastTextNode(child))
+        if (node.nodeType == 3) {
+            return node;
+        }
+
+        for (var child = node.lastChild; child; child = child.previousSibling) {
+            result = Dom.lastTextNode(child);
+
+            if (result) {
                 return result;
+            }
+        }
 
         return result;
     },
@@ -225,10 +258,11 @@ var Dom = {
     },
 
     insertBefore: function (newElement, referenceElement) {
-        if (referenceElement.parentNode)
+        if (referenceElement.parentNode) {
             return referenceElement.parentNode.insertBefore(newElement, referenceElement);
-        else
+        } else {
             return referenceElement;
+        }
     },
 
     insertAfter: function (newElement, referenceElement) {
@@ -243,14 +277,18 @@ var Dom = {
         for (var i = parent.childNodes.length - 1; i >= 0; i--) {
             var node = parent.childNodes[i];
             if (Dom.isDataNode(node)) {
-                if (node.nodeValue.replace(bom, "").length == 0)
+                if (!node.nodeValue.replace(bom, "").length) {
                     Dom.remove(node);
-                if (Dom.isWhitespace(node))
+                }
+
+                if (Dom.isWhitespace(node)) {
                     Dom.insertBefore(node, parent);
+                }
             } else if (node.className != KMARKER) {
                 Dom.trim(node);
-                if (node.childNodes.length == 0 && !Dom.isEmpty(node))
+                if (!node.childNodes.length && !Dom.isEmpty(node)) {
                     Dom.remove(node);
+                }
             }
         }
 
@@ -307,8 +345,9 @@ var Dom = {
 
     unwrap: function (node) {
         var parent = node.parentNode;
-        while (node.firstChild)
+        while (node.firstChild) {
             parent.insertBefore(node.firstChild, node);
+        }
 
         parent.removeChild(node);
     },
@@ -333,14 +372,16 @@ var Dom = {
 
     unstyle: function (node, value) {
         for (var key in value) {
-            if (key == FLOAT)
+            if (key == FLOAT) {
                 key = $.support.cssFloat ? CSSFLOAT : STYLEFLOAT;
+            }
 
             node.style[key] = "";
         }
 
-        if (node.style.cssText == "")
+        if (node.style.cssText === "") {
             node.removeAttribute(STYLE);
+        }
     },
 
     inlineStyle: function(document, name, attributes) {
@@ -413,15 +454,17 @@ var Dom = {
         for (i = 0; i < minPathLength; i++) {
             first = paths[0][i];
 
-            for (j = 1; j < count; j++)
-                if (first != paths[j][i])
+            for (j = 1; j < count; j++) {
+                if (first != paths[j][i]) {
                     return output;
+                }
+            }
 
             output = first;
         }
         return output;
     }
-}
+};
 
 kendo.ui.editor.Dom = Dom;
 

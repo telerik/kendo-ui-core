@@ -16,8 +16,9 @@ var PendingFormats = Class.extend({
     },
 
     apply: function(range) {
-        if (!this.hasPending())
+        if (!this.hasPending()) {
             return;
+        }
 
         var marker = new Marker();
 
@@ -28,14 +29,15 @@ var PendingFormats = Class.extend({
         var target = caret.previousSibling;
 
         /* under IE, target is a zero-length text node. go figure. */
-        if (!target.nodeValue)
+        if (!target.nodeValue) {
             target = target.previousSibling;
+        }
 
         range.setStart(target, target.nodeValue.length - 1);
 
         marker.add(range);
 
-        if (RangeUtils.textNodes(range).length == 0) {
+        if (!RangeUtils.textNodes(range).length) {
             marker.remove(range);
             range.collapse(true);
             this.editor.selectRange(range);
@@ -79,9 +81,11 @@ var PendingFormats = Class.extend({
 
     getPending: function(format) {
         var formats = this.formats;
-        for (var i = 0; i < formats.length; i++)
-            if (formats[i].name == format)
+        for (var i = 0; i < formats.length; i++) {
+            if (formats[i].name == format) {
                 return formats[i];
+            }
+        }
 
         return;
     },
@@ -89,15 +93,17 @@ var PendingFormats = Class.extend({
     toggle: function(format) {
         var formats = this.formats;
 
-        for (var i = 0; i < formats.length; i++)
+        for (var i = 0; i < formats.length; i++) {
             if (formats[i].name == format.name) {
-                if (formats[i].params && formats[i].params.value != format.params.value)
+                if (formats[i].params && formats[i].params.value != format.params.value) {
                     formats[i].params.value = format.params.value;
-                else
+                } else {
                     formats.splice(i, 1);
+                }
 
                 return;
             }
+        }
 
         formats.push(format);
     },

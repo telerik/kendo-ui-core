@@ -26,9 +26,11 @@ var ListFormatFinder = BlockFormatFinder.extend({
     isFormatted: function (nodes) {
         var formatNodes = [], formatNode;
 
-        for (var i = 0; i < nodes.length; i++)
-            if ((formatNode = this.findFormat(nodes[i])) && dom.name(formatNode) == this.tag)
+        for (var i = 0; i < nodes.length; i++) {
+            if ((formatNode = this.findFormat(nodes[i])) && dom.name(formatNode) == this.tag) {
                 formatNodes.push(formatNode);
+            }
+        }
 
         if (formatNodes.length < 1) {
             return false;
@@ -48,9 +50,12 @@ var ListFormatFinder = BlockFormatFinder.extend({
     },
 
     findSuitable: function (nodes) {
-        var candidate = dom.parentOfType(nodes[0], this.tags)
-        if (candidate && dom.name(candidate) == this.tag)
+        var candidate = dom.parentOfType(nodes[0], this.tags);
+
+        if (candidate && dom.name(candidate) == this.tag) {
             return candidate;
+        }
+
         return null;
     }
 
@@ -102,14 +107,17 @@ var ListFormatter = Class.extend({
             }
         }
 
-        if (li.firstChild)
+        if (li.firstChild) {
             list.appendChild(li);
+        }
     },
 
     containsAny: function(parent, nodes) {
-        for (var i = 0; i < nodes.length; i++)
-            if (dom.isAncestorOrSelf(parent, nodes[i]))
+        for (var i = 0; i < nodes.length; i++) {
+            if (dom.isAncestorOrSelf(parent, nodes[i])) {
                 return true;
+            }
+        }
 
         return false;
     },
@@ -133,17 +141,20 @@ var ListFormatter = Class.extend({
     },
 
     split: function (range) {
-        var nodes = textNodes(range);
+        var nodes = textNodes(range),
+            start, end, i, l, formatNode, parents;
+
         if (nodes.length) {
-            var start = dom.parentOfType(nodes[0], ['li']);
-            var end = dom.parentOfType(nodes[nodes.length - 1], ['li'])
+            start = dom.parentOfType(nodes[0], ['li']);
+            end = dom.parentOfType(nodes[nodes.length - 1], ['li']);
+
             range.setStartBefore(start);
             range.setEndAfter(end);
 
-            for (var i = 0, l = nodes.length; i < l; i++) {
-                var formatNode = this.finder.findFormat(nodes[i]);
+            for (i = 0, l = nodes.length; i < l; i++) {
+                formatNode = this.finder.findFormat(nodes[i]);
                 if (formatNode) {
-                    var parents = $(formatNode).parents("ul,ol");
+                    parents = $(formatNode).parents("ul,ol");
                     if (parents[0]) {
                         RangeUtils.split(range, parents.last()[0], true);
                     } else {
@@ -158,18 +169,21 @@ var ListFormatter = Class.extend({
         var tag = this.tag,
             commonAncestor = nodes.length == 1 ? dom.parentOfType(nodes[0], ['ul','ol']) : dom.commonAncestor.apply(null, nodes);
 
-        if (!commonAncestor)
+        if (!commonAncestor) {
             commonAncestor = dom.parentOfType(nodes[0], ["td"]) || nodes[0].ownerDocument.body;
+        }
 
-        if (dom.isInline(commonAncestor))
+        if (dom.isInline(commonAncestor)) {
             commonAncestor = dom.blockParentOrBody(commonAncestor);
+        }
 
         var ancestors = [];
 
         var formatNode = this.finder.findSuitable(nodes);
 
-        if (!formatNode)
+        if (!formatNode) {
             formatNode = new ListFormatFinder(tag == 'ul' ? 'ol' : 'ul').findSuitable(nodes);
+        }
 
         var childNodes = dom.significantChildNodes(commonAncestor);
 
@@ -178,7 +192,9 @@ var ListFormatter = Class.extend({
         }
 
         if (/table|tbody/.test(dom.name(commonAncestor))) {
-            childNodes = $.map(nodes, function(node) { return dom.parentOfType(node, ["td"]) });
+            childNodes = $.map(nodes, function(node) {
+                                return dom.parentOfType(node, ["td"]);
+                            });
         }
 
         for (var i = 0; i < childNodes.length; i++) {
@@ -188,7 +204,7 @@ var ListFormatter = Class.extend({
 
                 if (formatNode && (nodeName == 'ul' || nodeName == 'ol')) {
                     // merging lists
-                    $.each(child.childNodes, function () { ancestors.push(this) });
+                    ancestors = ancestors.concat($.toArray(child.childNodes));
                     dom.remove(child);
                 } else {
                     ancestors.push(child);
@@ -196,8 +212,9 @@ var ListFormatter = Class.extend({
             }
         }
 
-        if (ancestors.length == childNodes.length && commonAncestor != nodes[0].ownerDocument.body && !/table|tbody|tr|td/.test(dom.name(commonAncestor)))
+        if (ancestors.length == childNodes.length && commonAncestor != nodes[0].ownerDocument.body && !/table|tbody|tr|td/.test(dom.name(commonAncestor))) {
             ancestors = [commonAncestor];
+        }
 
         if (!formatNode) {
             formatNode = dom.create(commonAncestor.ownerDocument, tag);
@@ -206,29 +223,36 @@ var ListFormatter = Class.extend({
 
         this.wrap(formatNode, ancestors);
 
-        if (!dom.is(formatNode, tag))
+        if (!dom.is(formatNode, tag)) {
             dom.changeTag(formatNode, tag);
+        }
 
         var prev = formatNode.previousSibling;
-        while (prev && (prev.className == "k-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) prev = prev.previousSibling;
+        while (prev && (prev.className == "k-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) {
+            prev = prev.previousSibling;
+        }
 
         // merge with previous list
         if (prev && dom.name(prev) == tag) {
             while(formatNode.firstChild) {
                 prev.appendChild(formatNode.firstChild);
             }
+
             dom.remove(formatNode);
             formatNode = prev;
         }
 
         var next = formatNode.nextSibling;
-        while (next && (next.className == "k-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) next = next.nextSibling;
+        while (next && (next.className == "k-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) {
+            next = next.nextSibling;
+        }
 
         // merge with next list
         if (next && dom.name(next) == tag) {
             while(formatNode.lastChild) {
                 next.insertBefore(formatNode.lastChild, next.firstChild);
             }
+
             dom.remove(formatNode);
         }
     },
@@ -278,10 +302,15 @@ var ListFormatter = Class.extend({
     },
 
     remove: function (nodes) {
-        var formatNode;
-        for (var i = 0, l = nodes.length; i < l; i++)
-            if (formatNode = this.finder.findFormat(nodes[i]))
-                this.unwrap(formatNode);
+        var formatNode, i, l, that = this;
+
+        for (i = 0, l = nodes.length; i < l; i++) {
+            formatNode = that.finder.findFormat(nodes[i]);
+
+            if (formatNode) {
+                that.unwrap(formatNode);
+            }
+        }
     },
 
     toggle: function (range) {

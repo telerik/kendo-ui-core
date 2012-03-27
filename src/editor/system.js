@@ -129,18 +129,22 @@ var UndoRedoStack = Class.extend({
     },
 
     push: function (command) {
-        this.stack = this.stack.slice(0, this.currentCommandIndex + 1);
-        this.currentCommandIndex = this.stack.push(command) - 1;
+        var that = this;
+
+        that.stack = that.stack.slice(0, that.currentCommandIndex + 1);
+        that.currentCommandIndex = that.stack.push(command) - 1;
     },
 
     undo: function () {
-        if (this.canUndo())
+        if (this.canUndo()) {
             this.stack[this.currentCommandIndex--].undo();
+        }
     },
 
     redo: function () {
-        if (this.canRedo())
+        if (this.canRedo()) {
             this.stack[++this.currentCommandIndex].redo();
+        }
     },
 
     canUndo: function () {
@@ -158,18 +162,19 @@ var TypingHandler = Class.extend({
     },
 
     keydown: function (e) {
-        var editor = this.editor,
-            keyboard = editor.keyboard;
+        var that = this,
+            editor = that.editor,
+            keyboard = editor.keyboard,
             isTypingKey = keyboard.isTypingKey(e);
 
         if (isTypingKey && !keyboard.isTypingInProgress()) {
             var range = editor.getRange();
-            this.startRestorePoint = new RestorePoint(range);
+            that.startRestorePoint = new RestorePoint(range);
 
-            keyboard.startTyping($.proxy(function () {
-                editor.selectionRestorePoint = this.endRestorePoint = new RestorePoint(editor.getRange());
-                editor.undoRedoStack.push(new GenericCommand(this.startRestorePoint, this.endRestorePoint));
-            }, this));
+            keyboard.startTyping(function () {
+                editor.selectionRestorePoint = that.endRestorePoint = new RestorePoint(editor.getRange());
+                editor.undoRedoStack.push(new GenericCommand(that.startRestorePoint, that.endRestorePoint));
+            });
 
             return true;
         }
@@ -196,37 +201,42 @@ var SystemHandler = Class.extend({
     },
 
     createUndoCommand: function () {
-        this.endRestorePoint = new RestorePoint(this.editor.getRange());
-        this.editor.undoRedoStack.push(new GenericCommand(this.startRestorePoint, this.endRestorePoint));
-        this.startRestorePoint = this.endRestorePoint;
+        var that = this;
+
+        that.endRestorePoint = new RestorePoint(that.editor.getRange());
+        that.editor.undoRedoStack.push(new GenericCommand(that.startRestorePoint, that.endRestorePoint));
+        that.startRestorePoint = that.endRestorePoint;
     },
 
     changed: function () {
-        if (this.startRestorePoint)
+        if (this.startRestorePoint) {
             return this.startRestorePoint.html != this.editor.body.innerHTML;
+        }
 
         return false;
     },
 
     keydown: function (e) {
-        var editor = this.editor,
+        var that = this,
+            editor = that.editor,
             keyboard = editor.keyboard;
 
         if (keyboard.isModifierKey(e)) {
 
-            if (keyboard.isTypingInProgress())
+            if (keyboard.isTypingInProgress()) {
                 keyboard.endTyping(true);
+            }
 
-            this.startRestorePoint = new RestorePoint(editor.getRange());
+            that.startRestorePoint = new RestorePoint(editor.getRange());
             return true;
         }
 
         if (keyboard.isSystem(e)) {
-            this.systemCommandIsInProgress = true;
+            that.systemCommandIsInProgress = true;
 
-            if (this.changed()) {
-                this.systemCommandIsInProgress = false;
-                this.createUndoCommand();
+            if (that.changed()) {
+                that.systemCommandIsInProgress = false;
+                that.createUndoCommand();
             }
 
             return true;
@@ -236,9 +246,11 @@ var SystemHandler = Class.extend({
     },
 
     keyup: function (e) {
-        if (this.systemCommandIsInProgress && this.changed()) {
-            this.systemCommandIsInProgress = false;
-            this.createUndoCommand(e);
+        var that = this;
+
+        if (that.systemCommandIsInProgress && that.changed()) {
+            that.systemCommandIsInProgress = false;
+            that.createUndoCommand(e);
             return true;
         }
 
@@ -254,19 +266,21 @@ var Keyboard = Class.extend({
 
     isCharacter: function(keyCode) {
         return (keyCode >= 48 && keyCode <= 90) || (keyCode >= 96 && keyCode <= 111) ||
-            (keyCode >= 186 && keyCode <= 192) || (keyCode >= 219 && keyCode <= 222);
+               (keyCode >= 186 && keyCode <= 192) || (keyCode >= 219 && keyCode <= 222);
     },
 
     toolFromShortcut: function (tools, e) {
-        var key = String.fromCharCode(e.keyCode);
+        var key = String.fromCharCode(e.keyCode),
+            toolName,
+            toolOptions;
 
-        for (var toolName in tools) {
-            var toolOptions = tools[toolName].options || {};
+        for (toolName in tools) {
+            toolOptions = tools[toolName].options || {};
 
-            if ((toolOptions.key == key || toolOptions.key == e.keyCode)
-                && !!toolOptions.ctrl == e.ctrlKey
-                && !!toolOptions.alt == e.altKey
-                && !!toolOptions.shift == e.shiftKey) {
+            if ((toolOptions.key == key || toolOptions.key == e.keyCode) &&
+                toolOptions.ctrl == e.ctrlKey &&
+                toolOptions.alt == e.altKey &&
+                toolOptions.shift == e.shiftKey) {
                 return toolName;
             }
         }
@@ -274,15 +288,16 @@ var Keyboard = Class.extend({
 
     isTypingKey: function (e) {
         var keyCode = e.keyCode;
-        return (this.isCharacter(keyCode) && !e.ctrlKey && !e.altKey) || keyCode == 32 || keyCode == 13
-        || keyCode == 8 || (keyCode == 46 && !e.shiftKey && !e.ctrlKey && !e.altKey);
+        return (this.isCharacter(keyCode) && !e.ctrlKey && !e.altKey) ||
+               keyCode == 32 || keyCode == 13 || keyCode == 8 ||
+               (keyCode == 46 && !e.shiftKey && !e.ctrlKey && !e.altKey);
     },
 
     isModifierKey: function (e) {
         var keyCode = e.keyCode;
-        return (keyCode == 17 && !e.shiftKey && !e.altKey)
-                || (keyCode == 16 && !e.ctrlKey && !e.altKey)
-                || (keyCode == 18 && !e.ctrlKey && !e.shiftKey);
+        return (keyCode == 17 && !e.shiftKey && !e.altKey) ||
+               (keyCode == 16 && !e.ctrlKey && !e.altKey) ||
+               (keyCode == 18 && !e.ctrlKey && !e.shiftKey);
     },
 
     isSystem: function (e) {
@@ -296,8 +311,9 @@ var Keyboard = Class.extend({
 
     stopTyping: function() {
         this.typingInProgress = false;
-        if (this.onEndTyping)
+        if (this.onEndTyping) {
             this.onEndTyping();
+        }
     },
 
     endTyping: function (force) {
@@ -319,9 +335,13 @@ var Keyboard = Class.extend({
     },
 
     notify: function(e, what) {
-        for (var i = 0; i < this.handlers.length; i++)
-            if (this.handlers[i][what](e))
+        var i, handlers = this.handlers;
+
+        for (i = 0; i < handlers.length; i++) {
+            if (handlers[i][what](e)) {
                 break;
+            }
+        }
     },
 
     keydown: function (e) {
@@ -341,20 +361,21 @@ var Clipboard = Class.extend({
 
     htmlToFragment: function(html) {
         var editor = this.editor,
-            container = dom.create(editor.document, 'div');
+            doc = editor.document,
+            container = dom.create(doc, 'div'),
+            fragment = doc.createDocumentFragment();
 
         container.innerHTML = html;
 
-        var fragment = editor.document.createDocumentFragment();
-
-        while (container.firstChild)
+        while (container.firstChild) {
             fragment.appendChild(container.firstChild);
+        }
 
         return fragment;
     },
 
     isBlock: function(html) {
-        return /<(div|p|ul|ol|table|h[1-6])/i.test(html);
+        return (/<(div|p|ul|ol|table|h[1-6])/i).test(html);
     },
 
     oncut: function(e) {
@@ -393,8 +414,9 @@ var Clipboard = Class.extend({
             selectRange(range);
             dom.remove(clipboardNode);
 
-            if (clipboardNode.lastChild && dom.is(clipboardNode.lastChild, 'br'))
+            if (clipboardNode.lastChild && dom.is(clipboardNode.lastChild, 'br')) {
                 dom.remove(clipboardNode.lastChild);
+            }
 
             var args = { html: clipboardNode.innerHTML };
             editor.trigger("paste", args);
@@ -405,27 +427,33 @@ var Clipboard = Class.extend({
     },
 
     splittableParent: function(block, node) {
-        if (block)
+        var parentNode, body;
+
+        if (block) {
             return dom.parentOfType(node, ['p', 'ul', 'ol']) || node.parentNode;
-
-        var parent = node.parentNode;
-        var body = node.ownerDocument.body;
-
-        if (dom.isInline(parent)) {
-            while (parent.parentNode != body && !dom.isBlock(parent.parentNode))
-                parent = parent.parentNode;
         }
 
-        return parent;
+        parentNode = node.parentNode;
+        body = node.ownerDocument.body;
+
+        if (dom.isInline(parentNode)) {
+            while (parentNode.parentNode != body && !dom.isBlock(parentNode.parentNode)) {
+                parentNode = parentNode.parentNode;
+            }
+        }
+
+        return parentNode;
     },
 
     paste: function (html, clean) {
         var editor = this.editor,
             i, l;
 
-        for (i = 0, l = this.cleaners.length; i < l; i++)
-            if (this.cleaners[i].applicable(html))
+        for (i = 0, l = this.cleaners.length; i < l; i++) {
+            if (this.cleaners[i].applicable(html)) {
                 html = this.cleaners[i].clean(html);
+            }
+        }
 
         if (clean) {
             // remove br elements which immediately precede block elements
@@ -442,11 +470,12 @@ var Clipboard = Class.extend({
         var range = editor.getRange();
         range.deleteContents();
 
-        if (range.startContainer == editor.document)
+        if (range.startContainer == editor.document) {
             range.selectNodeContents(editor.body);
+        }
 
         var marker = new Marker();
-        var caret = marker.addCaret(range)
+        var caret = marker.addCaret(range);
 
         var parent = this.splittableParent(block, caret);
         var unwrap = false;
@@ -472,8 +501,9 @@ var Clipboard = Class.extend({
 
         parent = this.splittableParent(block, caret);
         if (unwrap) {
-            while (caret.parentNode != parent)
+            while (caret.parentNode != parent) {
                 dom.unwrap(caret.parentNode);
+            }
 
             dom.unwrap(caret.parentNode);
         }
@@ -511,15 +541,17 @@ var MSWordFormatCleaner = Class.extend({
     },
 
     applicable: function(html) {
-        return /class="?Mso|style="[^"]*mso-/i.test(html);
+        return (/class="?Mso|style="[^"]*mso-/i).test(html);
     },
 
     listType: function(html) {
-        if (/^[\u2022\u00b7\u00a7\u00d8o]\u00a0+/.test(html))
+        if (/^[\u2022\u00b7\u00a7\u00d8o]\u00a0+/.test(html)) {
             return 'ul';
+        }
 
-        if (/^\s*\w+[\.\)]\u00a0{2,}/.test(html))
+        if (/^\s*\w+[\.\)]\u00a0{2,}/.test(html)) {
             return 'ol';
+        }
     },
 
     lists: function(html) {
@@ -530,11 +562,11 @@ var MSWordFormatCleaner = Class.extend({
 
         for (var i = 0; i < blockChildren.length; i++) {
             var p = blockChildren[i];
-            var html = p.innerHTML.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');
+            html = p.innerHTML.replace(/<\/?\w+[^>]*>/g, '').replace(/&nbsp;/g, '\u00a0');
             var type = this.listType(html);
 
             if (!type || dom.name(p) != 'p') {
-                if (p.innerHTML == '') {
+                if (!p.innerHTML) {
                     dom.remove(p);
                 } else {
                     levels = {'ul':{}, 'ol':{}};
@@ -550,19 +582,23 @@ var MSWordFormatCleaner = Class.extend({
             if (margin > lastMargin || !list) {
                 list = dom.create(document, type);
 
-                if (li == placeholder)
+                if (li == placeholder) {
                     dom.insertBefore(list, p);
-                else
+                } else {
                     li.appendChild(list);
+                }
 
                 levels[type][margin] = list;
             }
 
             if (lastType != type) {
-                for (var key in levels)
-                    for (var child in levels[key])
-                        if ($.contains(list, levels[key][child]))
+                for (var key in levels) {
+                    for (var child in levels[key]) {
+                        if ($.contains(list, levels[key][child])) {
                             delete levels[key][child];
+                        }
+                    }
+                }
             }
 
             dom.remove(p.firstChild);
@@ -586,11 +622,16 @@ var MSWordFormatCleaner = Class.extend({
     },
 
     clean: function(html) {
-        for (var i = 0, l = this.replacements.length; i < l; i+= 2)
-            html = html.replace(this.replacements[i], this.replacements[i+1]);
+        var that = this,
+            replacements = that.replacements,
+            i, l;
 
-        html = this.stripEmptyAnchors(html);
-        html = this.lists(html);
+        for (i = 0, l = replacements.length; i < l; i += 2) {
+            html = html.replace(replacements[i], replacements[i+1]);
+        }
+
+        html = that.stripEmptyAnchors(html);
+        html = that.lists(html);
         html = html.replace(/\s+class="?[^"\s>]*"?/ig, '');
 
         return html;

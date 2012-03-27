@@ -16,10 +16,10 @@ var Serializer = {
     domToXhtml: function(root) {
         var result = [];
         var tagMap = {
-            'telerik:script': { start: function (node) { result.push('<script'); attr(node); result.push('>'); }, end: function () { result.push('</script>') } },
-            b: { start: function () { result.push('<strong>') }, end: function () { result.push('</strong>') } },
-            i: { start: function () { result.push('<em>') }, end: function () { result.push('</em>') } },
-            u: { start: function () { result.push('<span style="text-decoration:underline;">') }, end: function () { result.push('</span>') } },
+            'telerik:script': { start: function (node) { result.push('<script'); attr(node); result.push('>'); }, end: function () { result.push('</script>'); } },
+            b: { start: function () { result.push('<strong>'); }, end: function () { result.push('</strong>'); } },
+            i: { start: function () { result.push('<em>'); }, end: function () { result.push('</em>'); } },
+            u: { start: function () { result.push('<span style="text-decoration:underline;">'); }, end: function () { result.push('</span>'); } },
             font: {
                 start: function (node) {
                     result.push('<span style="');
@@ -29,7 +29,7 @@ var Serializer = {
                     var face = node.getAttribute('face');
 
                     if (color) {
-                        result.push('color:')
+                        result.push('color:');
                         result.push(dom.toHex(color));
                         result.push(';');
                     }
@@ -57,7 +57,9 @@ var Serializer = {
         function attr(node) {
             var specifiedAttributes = [],
                 attributes = node.attributes,
-                trim = $.trim;
+                trim = $.trim,
+                i, l,
+                attribute;
 
             if (dom.is(node, 'img')) {
                 var width = node.style.width,
@@ -65,34 +67,37 @@ var Serializer = {
                     $node = $(node);
 
                 if (width) {
-                    $node.attr('width', parseInt(width));
+                    $node.attr('width', parseInt(width, 10));
                     dom.unstyle(node, { width: undefined });
                 }
 
                 if (height) {
-                    $node.attr('height', parseInt(height));
+                    $node.attr('height', parseInt(height, 10));
                     dom.unstyle(node, { height: undefined });
                 }
             }
 
-            for (var i = 0, l = attributes.length; i < l; i++) {
-                var attribute = attributes[i];
+            for (i = 0, l = attributes.length; i < l; i++) {
+                attribute = attributes[i];
                 var name = attribute.nodeName;
                 // In IE < 8 the 'value' attribute is not returned as 'specified'. The same goes for type="text"
-                if (attribute.specified || (name == 'value' && node.value != '') || (name == 'type' && attribute.nodeValue == 'text'))
-                    if (name.indexOf('_moz') < 0 && name != 'complete')
+                if (attribute.specified || (name == 'value' && node.value) || (name == 'type' && attribute.nodeValue == 'text')) {
+                    if (name.indexOf('_moz') < 0 && name != 'complete') {
                         specifiedAttributes.push(attribute);
+                    }
+                }
             }
 
-            if (!specifiedAttributes.length)
+            if (!specifiedAttributes.length) {
                 return;
+            }
 
             specifiedAttributes.sort(function (a, b) {
                 return a.nodeName > b.nodeName ? 1 : a.nodeName < b.nodeName ? -1 : 0;
             });
 
-            for (var i = 0, l = specifiedAttributes.length; i < l; i++) {
-                var attribute = specifiedAttributes[i];
+            for (i = 0, l = specifiedAttributes.length; i < l; i++) {
+                attribute = specifiedAttributes[i];
                 var attributeName = attribute.nodeName;
                 var attributeValue = attribute.nodeValue;
 
@@ -114,8 +119,9 @@ var Serializer = {
                                 continue;
                             }
 
-                            if (property.indexOf('color') >= 0)
+                            if (property.indexOf('color') >= 0) {
                                 value = dom.toHex(value);
+                            }
 
                             if (property.indexOf('font') >= 0) {
                                 value = value.replace(quoteRe, "'");
@@ -126,7 +132,7 @@ var Serializer = {
                             result.push(value);
                             result.push(';');
                         }
-                    };
+                    }
                 } else if (attributeName == 'src' || attributeName == 'href') {
                     result.push(node.getAttribute(attributeName, 2));
                 } else {
@@ -138,8 +144,9 @@ var Serializer = {
         }
 
         function children(node, skip) {
-            for (var childNode = node.firstChild; childNode; childNode = childNode.nextSibling)
+            for (var childNode = node.firstChild; childNode; childNode = childNode.nextSibling) {
                 child(childNode, skip);
+            }
         }
 
         function child(node, skip) {
@@ -150,8 +157,9 @@ var Serializer = {
             if (nodeType == 1) {
                 tagName = dom.name(node);
 
-                if (tagName == "" || (node.attributes['_moz_dirty'] && dom.is(node, 'br')))
+                if (!tagName || (node.attributes._moz_dirty && dom.is(node, 'br'))) {
                     return;
+                }
 
                 mapper = tagMap[tagName];
 
@@ -187,8 +195,9 @@ var Serializer = {
                          previous = (dom.isInline(parent) ? parent : node).previousSibling;
                     }
 
-                    if (!previous || previous.innerHTML == '' || dom.isBlock(previous))
+                    if (!previous || !previous.innerHTML || dom.isBlock(previous)) {
                         value = value.replace(/^[\r\n\v\f\t ]+/, '');
+                    }
 
                     value = value.replace(/ +/, ' ');
                 }
@@ -217,7 +226,7 @@ var Serializer = {
         result = result.join('');
 
         // if serialized dom contains only whitespace elements, consider it empty (required field validation)
-        if (result.replace(brRe, "").replace(emptyPRe, "") == "") {
+        if (!result.replace(brRe, "").replace(emptyPRe, "")) {
             return "";
         }
 

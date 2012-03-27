@@ -91,7 +91,7 @@ var ColorPicker = Widget.extend({
                 that.close();
             }
         } else {
-            that.trigger(CHANGE, { value: that._value })
+            that.trigger(CHANGE, { value: that._value });
         }
     },
 

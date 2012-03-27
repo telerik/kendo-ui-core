@@ -17,6 +17,21 @@
         <script src="../jshint/jshint.js"></script>
         <script src="../qhint.js"></script>
         <script>
+            qHint("../../src/editor/components.js");
+            qHint("../../src/editor/dom.js");
+            qHint("../../src/editor/formatblock.js");
+            qHint("../../src/editor/image.js");
+            qHint("../../src/editor/indent.js");
+            qHint("../../src/editor/inlineformat.js");
+            qHint("../../src/editor/linebreak.js");
+            qHint("../../src/editor/link.js");
+            qHint("../../src/editor/lists.js");
+            qHint("../../src/editor/pendingformats.js");
+            qHint("../../src/editor/range.js", {
+                boss: true
+            });
+            qHint("../../src/editor/serializer.js");
+            qHint("../../src/editor/system.js");
             qHint("../../src/editor/main.js", {
                 scripturl: true
             });
