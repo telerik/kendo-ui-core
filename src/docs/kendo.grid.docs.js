@@ -890,7 +890,7 @@
         },
 
         /**
-         * Reloads the data and repaints the grid.
+         * Repaints the grid.
          * @example
          * // get a reference to the grid widget
          * var grid = $("#grid").data("kendoGrid");
