@@ -770,7 +770,7 @@
                 return;
             }
 
-           word = word || "";
+            word = word || "";
 
             if (typeof word !== "string") {
                 idx = word.index();
@@ -796,11 +796,6 @@
             }
 
             if (value.length !== caret || !word) {
-
-                //if (value.toLowerCase() === word.toLowerCase()) {
-                //    value = word;
-                //}
-
                 if (that.options.highlightFirst) {
                     that.text(value);
                 } else {
@@ -826,7 +821,8 @@
                 textAccessor = that._text,
                 input = that.input[0],
                 ignoreCase = that.options.ignoreCase,
-                loweredText, dataItem;
+                loweredText = text,
+                dataItem;
 
             if (text !== undefined) {
                 dataItem = that.dataItem();
@@ -835,9 +831,8 @@
                     return;
                 }
 
-                loweredText = text;
                 if (ignoreCase) {
-                    loweredText = (loweredText + "").toLowerCase();
+                    loweredText = loweredText.toLowerCase();
                 }
 
                 that._select(function(data) {
