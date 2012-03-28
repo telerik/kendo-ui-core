@@ -12,13 +12,14 @@ namespace Kendo.Controllers
         public ActionResult Index()
         {
             ViewBag.Suite = "themebuilder";
-            ViewBag.DeployRoot = "http://themebuilder.kendoui.com";
             ViewBag.Title = "ThemeBuilder";
 
 #if DEBUG
             ViewBag.Debug = true;
+            ViewBag.DeployRoot = Url.Content("~/themebuilder/deploy");
 #else
             ViewBag.Debug = false;
+            ViewBag.DeployRoot = "http://themebuilder.kendoui.com";
 #endif
 
             ViewBag.scripts = Kendo.Models.ScriptGroups.All;
