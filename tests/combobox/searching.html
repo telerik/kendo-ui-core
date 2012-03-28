@@ -326,7 +326,24 @@
                 ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
+            test("refresh method highlights first item if options.highlightFirst is true", 1, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    suggest: true,
+                    filter: "startswith",
+                    highlightFirst: false
+                });
+
+                combobox.input.val("f");
+                combobox.search("f");
+
+                equal(combobox.ul.children().filter(".k-state-focused").length, 0);
+            });
+
             test("no filter and highlightFirst should always focus first item", function() {
+
                 combobox.search("");
 
                 ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));

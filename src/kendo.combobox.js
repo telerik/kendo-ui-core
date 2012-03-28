@@ -654,7 +654,7 @@
             }
 
             if (length) {
-                if (options.highlightFirst) { //suggest ||
+                if (options.highlightFirst) {
                     that.current($(ul.firstChild));
                 }
 
