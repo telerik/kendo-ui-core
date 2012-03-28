@@ -31,7 +31,7 @@
                 }
             });
 
-            asyncTest("focus should hide the _text and show the input value", function() {
+            asyncTest("focus should hide the _text and show the input value", 2, function() {
                 var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
@@ -39,16 +39,6 @@
                 setTimeout(function() {
                     start();
                     ok(!textbox._text.is(":visible"));
-                }, 100);
-            });
-
-            test("focus div should focus element", function() {
-                var textbox = new NumericTextBox(input);
-
-                textbox._text.focus();
-
-                setTimeout(function() {
-                    start();
                     equal(input[0], document.activeElement);
                 }, 100);
             });

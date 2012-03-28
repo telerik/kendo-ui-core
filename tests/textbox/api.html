@@ -261,7 +261,7 @@
                 ok(textbox._text.is(":visible"));
             });
 
-            asyncTest("focusing text input should call _focus", function() {
+            asyncTest("focusing text input should call _focus", 2, function() {
                 var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
@@ -273,17 +273,17 @@
                 }, 100);
             });
 
-            asyncTest("on blur should hide input text", function() {
+            asyncTest("on blur should hide input text", 2, function() {
                 var textbox = new NumericTextBox(input);
 
                 textbox._text.focus();
-                setTimeout(function() { input.blur(); }, 250);
+                setTimeout(function() { input.blur(); }, 100);
 
                 setTimeout(function() {
                     ok(!input.is(":visible"));
                     ok(textbox._text.is(":visible"));
                     start();
-                }, 500);
+                }, 300);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
