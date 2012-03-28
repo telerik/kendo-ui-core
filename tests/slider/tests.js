@@ -18,5 +18,9 @@ tests.push(
     {
         page: "slider/mvvm.html",
         title: "mvvm"
+    },
+    {
+        page: "slider/lint.html",
+        title: "lint"
     }
 );
