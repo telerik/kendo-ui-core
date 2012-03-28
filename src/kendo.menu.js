@@ -131,13 +131,11 @@
         TIMER = "timer",
         FIRST = "k-first",
         IMAGE = "k-image",
-        EMPTY = ":empty",
         SELECT = "select",
         ZINDEX = "zIndex",
         MOUSEENTER = "mouseenter",
         MOUSELEAVE = "mouseleave",
         KENDOPOPUP = "kendoPopup",
-        SLIDEINRIGHT = "slideIn:right",
         DEFAULTSTATE = "k-state-default",
         DISABLEDSTATE = "k-state-disabled",
         groupSelector = ".k-group",
@@ -184,8 +182,8 @@
                     result += " k-state-default";
                 }
 
-                if (group.firstLevel && index == 0) {
-                    result += " k-first"
+                if (group.firstLevel && index === 0) {
+                    result += " k-first";
                 }
 
                 if (index == group.length-1) {
@@ -774,7 +772,11 @@
 
             if (group && !group.children(allItemsSelector).length) {
                 var container = group.parent(".k-animation-container");
-                container.length ? container.remove() : group.remove();
+                if (container.length) {
+                    container.remove();
+                } else {
+                    group.remove();
+                }
             }
 
             if (parent.length) {
@@ -983,8 +985,9 @@
                 }, that));
             }
 
-            if (!e.handled) // We shouldn't stop propagation.
+            if (!e.handled) { // We shouldn't stop propagation.
                 that.trigger(SELECT, { item: element[0] });
+            }
 
             e.handled = true;
 
@@ -996,8 +999,9 @@
                 return;
             }
 
-            if (!isLink)
+            if (!isLink) {
                 e.preventDefault();
+            }
 
             that.clicked = true;
             openHandle = element.children(".k-animation-container, .k-group").is(":visible") ? CLOSE : OPEN;
@@ -1024,8 +1028,7 @@
             options = extend({ menu: {}, group: {} }, options);
 
             var empty = templates.empty,
-                item = options.item,
-                menu = options.menu;
+                item = options.item;
 
             return templates.item(extend(options, {
                 image: item.imageUrl ? templates.image : empty,

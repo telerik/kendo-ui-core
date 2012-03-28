@@ -17,7 +17,6 @@
         scaleProperties = { scale: 0, scaleX: 0, scaleY: 0, scale3d: 0 },
         translateProperties = { translate: 0, translateX: 0, translateY: 0, translate3d: 0 },
         hasZoom = (typeof document.documentElement.style.zoom !== "undefined") && $.browser.msie,
-        matrix3d = [ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1 ],
         matrix3dRegExp = /matrix3?d?\s*\(.*,\s*([\d\w\.\-]+),\s*([\d\w\.\-]+),\s*([\d\w\.\-]+)/,
         cssParamsRegExp = /^(-?[\d\.\-]+)?[\w\s]*,?\s*(-?[\d\.\-]+)?[\w\s]*/i,
         translateXRegExp = /translatex?$/i,
@@ -30,7 +29,6 @@
         PX = "px",
         NONE = "none",
         AUTO = "auto",
-        SCALE = "scale",
         WIDTH = "width",
         HEIGHT = "height",
         HIDDEN = "hidden",
@@ -157,7 +155,9 @@
                     direction = effect[1],
                     effectBody = {};
 
-                effect.length > 1 && (effectBody["direction"] = (mirror && redirectedEffect ? kendo.directions[direction].reverse : direction));
+                if (effect.length > 1) {
+                    effectBody.direction = (mirror && redirectedEffect ? kendo.directions[direction].reverse : direction);
+                }
 
                 effects[effect[0]] = effectBody;
             });
@@ -165,8 +165,9 @@
             each(input, function(idx) {
                 var direction = this.direction;
 
-                if (direction && mirror && !singleEffectRegExp.test(idx))
+                if (direction && mirror && !singleEffectRegExp.test(idx)) {
                     this.direction = kendo.directions[direction].reverse;
+                }
 
                 effects[idx] = this;
             });
@@ -198,7 +199,7 @@
                     var style = element.currentStyle;
 
                     each(properties, function(idx, value) {
-                        styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase() })];
+                        styles[value] = style[value.replace(/\-(\w)/g, function (strMatch, g1) { return g1.toUpperCase(); })];
                     });
                 }
         } else {
@@ -245,40 +246,43 @@
         return options;
     }
 
+    function keys(obj) {
+        var acc = [];
+        for (var propertyName in obj) {
+            acc.push(propertyName);
+        }
+        return acc;
+    }
+
+    function removeTransitionStyles(element) {
+        element.css(TRANSITION, NONE);
+
+        if (!browser.safari) {
+            element.css(HEIGHT);
+        }
+    }
+
+    function activateTask(currentTransition) {
+        var element = currentTransition.object;
+
+        if (!currentTransition) {
+            return;
+        }
+
+        element.css(currentTransition.setup);
+        element.css(TRANSITION);
+        element.data(ABORT_ID, setTimeout(function() {
+
+            removeTransitionStyles(element);
+            element.dequeue();
+            currentTransition.complete.call(element);
+
+        }, currentTransition.duration));
+
+        element.css(currentTransition.CSS);
+    }
+
     if (transitions) {
-
-        function keys(obj) {
-            var acc = [];
-            for (var propertyName in obj)
-                acc.push(propertyName);
-            return acc;
-        }
-
-        function removeTransitionStyles(element) {
-            element.css(TRANSITION, NONE);
-
-            if (!browser.safari) {
-                element.css(HEIGHT);
-            }
-        }
-
-        function activateTask(currentTransition) {
-            var element = currentTransition.object;
-
-            if (!currentTransition) return;
-
-            element.css(currentTransition.setup);
-            element.css(TRANSITION);
-            element.data(ABORT_ID, setTimeout(function() {
-
-                removeTransitionStyles(element);
-                element.dequeue();
-                currentTransition.complete.call(element);
-
-            }, currentTransition.duration));
-
-            element.css(currentTransition.CSS);
-        }
 
         extend(kendo.fx, {
             transition: function(element, properties, options) {
@@ -298,14 +302,17 @@
                     cssValues = {},
                     key;
 
-                for (key in properties)
-                    if (transformProps.indexOf(key) != -1)
+                for (key in properties) {
+                    if (transformProps.indexOf(key) != -1) {
                         transforms.push(key + "(" + properties[key] + ")");
-                    else
+                    } else {
                         cssValues[key] = properties[key];
+                    }
+                }
 
-                if (transforms.length)
+                if (transforms.length) {
                     cssValues[TRANSFORM] = transforms.join(" ");
+                }
 
                 var currentTask = {
                     keys: keys(cssValues),
@@ -331,12 +338,12 @@
                     element.removeData(ABORT_ID);
                 }
 
-                var that = this,
+                var that = this, cssValues,
                     taskKeys = element.data("keys"),
                     retainPosition = (gotoEnd === false && taskKeys);
 
                 if (retainPosition) {
-                    var cssValues = getComputedStyles(element[0], taskKeys);
+                    cssValues = getComputedStyles(element[0], taskKeys);
                 }
 
                 removeTransitionStyles(element);
@@ -361,14 +368,16 @@
     function animationProperty(element, property) {
         if (transforms) {
             var transform = element.css(TRANSFORM);
-            if (transform == "none") return property == "scale" ? 1 : 0;
+            if (transform == "none") {
+                return property == "scale" ? 1 : 0;
+            }
 
             var match = transform.match(new RegExp(property + "\\s*\\(([\\d\\w\\.]+)")),
                 computed = 0;
 
-            if (match)
+            if (match) {
                 computed = parseInteger(match[1]);
-            else {
+            } else {
                 match = transform.match(matrix3dRegExp) || [0, 0, 0, 0];
 
                 if (translateXRegExp.test(property)) {
@@ -381,8 +390,9 @@
             }
 
             return computed;
-        } else
+        } else {
             return element.css(property);
+        }
     }
 
     kendo.fx.promise = function(element, options) {
@@ -414,24 +424,28 @@
                             opts = extend(true, opts, settings);
 
                             each(methods, function (idx) {
-                                if (effect[idx])
+                                if (effect[idx]) {
                                     methods[idx].push(effect[idx]);
+                                }
                             });
 
                             each(props, function(idx) {
-                                if (effect[idx])
+                                if (effect[idx]) {
                                     $.merge(props[idx], effect[idx]);
+                                }
                             });
 
-                            if (effect["css"])
+                            if (effect.css) {
                                 css = extend(css, effect.css);
+                            }
                         }
                     });
 
                     if (methods.setup.length) {
                         each ($.unique(props.keep), function(idx, value) {
-                            if (!element.data(value))
+                            if (!element.data(value)) {
                                 element.data(value, element.css(value));
+                            }
                         });
 
                         if (options.show) {
@@ -447,9 +461,9 @@
                         element.css(css);
                         element.css("overflow"); // Nudge Chrome
 
-                        each (methods.setup, function() { properties = extend(properties, this(element, opts)) });
+                        each (methods.setup, function() { properties = extend(properties, this(element, opts)); });
 
-                        if (kendo.fx["animate"]) {
+                        if (kendo.fx.animate) {
                             options.init();
                             kendo.fx.animate(element, properties, opts);
                         }
@@ -550,11 +564,12 @@
                                                 bottom: parseCSS(element, "bottom"),
                                                 right: parseCSS(element, "right")
                                             });
-                                        } else
+                                        } else {
                                             element.data(TRANSLATE, {
                                                 top: parseCSS(element, "marginTop") || 0,
                                                 left: parseCSS(element, "marginLeft") || 0
                                             });
+                                        }
                                     }
 
                                     var originalPosition = element.data(TRANSLATE);
@@ -566,32 +581,37 @@
                                             dY = value == TRANSLATE + "Y" ? +params[1] : +params[2];
 
                                         if (isFixed) {
-                                            if (!isNaN(originalPosition.right))
-                                                !isNaN(dX) && extend(single, { right: originalPosition.right - dX });
-                                            else
-                                                !isNaN(dX) && extend(single, { left: originalPosition.left + dX });
+                                            if (!isNaN(originalPosition.right)) {
+                                                if (!isNaN(dX)) { extend(single, { right: originalPosition.right - dX }); }
+                                            } else {
+                                                if (!isNaN(dX)) { extend(single, { left: originalPosition.left + dX }); }
+                                            }
 
-                                            if (!isNaN(originalPosition.bottom))
-                                                !isNaN(dY) && extend(single, { bottom: originalPosition.bottom - dY });
-                                            else
-                                                !isNaN(dY) && extend(single, { top: originalPosition.top + dY });
+                                            if (!isNaN(originalPosition.bottom)) {
+                                                if (!isNaN(dY)) { extend(single, { bottom: originalPosition.bottom - dY }); }
+                                            } else {
+                                                if (!isNaN(dY)) { extend(single, { top: originalPosition.top + dY }); }
+                                            }
                                         } else {
-                                            !isNaN(dX) && extend(single, { marginLeft: originalPosition.left + dX });
-                                            !isNaN(dY) && extend(single, { marginTop: originalPosition.top + dY });
+                                            if (!isNaN(dX)) { extend(single, { marginLeft: originalPosition.left + dX }); }
+                                            if (!isNaN(dY)) { extend(single, { marginTop: originalPosition.top + dY }); }
                                         }
                                     }
                                 }
 
-                            if (!transforms && value != "scale")
-                                value in single && delete single[value];
+                            if (!transforms && value != "scale" && value in single) {
+                                delete single[value];
+                            }
 
-                            if (single)
+                            if (single) {
                                 extend(multiple, single);
+                            }
                         }
                     });
 
-                    if ($.browser.msie)
+                    if ($.browser.msie) {
                         delete multiple.scale;
+                    }
 
                     element.animate(multiple, extend({ queue: false, show: false, hide: false, duration: options.duration, complete: options.complete })); // Stop animate from showing/hiding the element to be able to hide it later on.
                 });
@@ -614,10 +634,12 @@
                 destination[0].style.cssText = "";
                 element[0].style.cssText = ""; // Removing the whole style attribute breaks Android.
                 commonParent.css(OVERFLOW, originalOverflow);
-                options.completeCallback && options.completeCallback();
+                if (options.completeCallback) {
+                    options.completeCallback();
+                }
             }
 
-            options.complete = $.browser.msie ? function() { setTimeout(complete) } : complete;
+            options.complete = $.browser.msie ? function() { setTimeout(complete); } : complete;
 
             if ("slide" in options.effects) {
               element.kendoAnimate(options);
@@ -637,7 +659,7 @@
                 }
             },
             setup: function(element, options) {
-                return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties)
+                return extend({ opacity: options.effects.fade.direction == "out" ? 0 : 1 }, options.properties);
             }
         },
         zoom: {
@@ -671,7 +693,7 @@
                     });
                 }
 
-                return extend({ scale: reverse ? .01 : 1 }, options.properties)
+                return extend({ scale: reverse ? 0.01 : 1 }, options.properties);
             }
         },
         slide: {
@@ -684,7 +706,9 @@
                 if (!reverse) {
                     var origin = element.data(ORIGIN);
                     offset = (direction.modifier * (direction.vertical ? element.outerHeight() : element.outerWidth()) / divisor);
-                    !origin && origin !== 0  && element.data(ORIGIN, parseFloat(animationProperty(element, property)));
+                    if (!origin && origin !== 0) {
+                        element.data(ORIGIN, parseFloat(animationProperty(element, property)));
+                    }
                 }
 
                 extender[property] = reverse ? (element.data(ORIGIN) || 0) : (element.data(ORIGIN) || 0) + offset + PX;
@@ -698,7 +722,9 @@
                     offset = options.offset, margin,
                     extender = {}, reverse = options.reverse;
 
-                !reverse && !origin && origin !== 0 && element.data(ORIGIN, parseInt(element.css("margin-" + options.axis), 10));
+                if (!reverse && !origin && origin !== 0) {
+                    element.data(ORIGIN, parseInt(element.css("margin-" + options.axis), 10));
+                }
 
                 margin = (element.data(ORIGIN) || 0);
                 extender["margin-" + options.axis] = !reverse ? margin + offset : margin;
@@ -711,10 +737,10 @@
                     extender = {}, reverse = options.reverse;
 
                 if (transitions && options.transition !== false) {
-                    extender["translate"] = !reverse ? offset + PX : 0;
+                    extender.translate = !reverse ? offset + PX : 0;
                 } else {
-                    extender["left"] = !reverse ? offset[0] : 0;
-                    extender["top"] = !reverse ? offset[1] : 0;
+                    extender.left = !reverse ? offset[0] : 0;
+                    extender.top = !reverse ? offset[1] : 0;
                 }
                 element.css("left");
 
@@ -734,7 +760,9 @@
                     extender[direction.transition] = reverse ? offset + PX : 0;
                     element.css(TRANSFORM);
                 } else {
-                    !reverse && element.css(direction.property, offset + PX);
+                    if (!reverse) {
+                        element.css(direction.property, offset + PX);
+                    }
                     extender[direction.property] = reverse ? offset + PX : 0;
                     element.css(direction.property); // Read a style to force Chrome to apply the change.
                 }
@@ -860,7 +888,7 @@
 
             return function() {
                 that.movable.moveAxis(that.axis, ease(that.timePassed(), that.initial, that.delta, that.duration));
-            }
+            };
         }
     });
 
