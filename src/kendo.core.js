@@ -1758,13 +1758,17 @@ function pad(number) {
             propValue = source[property];
             propType = typeof propValue;
             if (propType === OBJECT && propValue !== null && propValue.constructor !== Array) {
-                destProp = destination[property];
-                if (typeof (destProp) === OBJECT) {
-                    destination[property] = destProp || {};
+                if (propValue instanceof Date) {
+                    destination[property] = new Date(propValue.getTime());
                 } else {
-                    destination[property] = {};
+                    destProp = destination[property];
+                    if (typeof (destProp) === OBJECT) {
+                        destination[property] = destProp || {};
+                    } else {
+                        destination[property] = {};
+                    }
+                    deepExtendOne(destination[property], propValue);
                 }
-                deepExtendOne(destination[property], propValue);
             } else if (propType !== UNDEFINED) {
                 destination[property] = propValue;
             }
