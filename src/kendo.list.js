@@ -234,8 +234,9 @@
         },
 
         _toggleHover: function(e) {
-            if (!touch)
+            if (!touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+            }
         },
 
         _toggle: function(open) {
@@ -251,7 +252,9 @@
 
         _scroll: function (item) {
 
-            if (!item) return;
+            if (!item) {
+                return;
+            }
 
             if (item[0]) {
                 item = item[0];
