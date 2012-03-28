@@ -148,7 +148,7 @@
                 equal(combobox.text(), "Item1");
             });
 
-            asyncTest("suggest() should suggest correctly", function() {
+            test("suggest() should suggest correctly", function() {
                 var combobox = input.kendoComboBox({
                     dataTextField: "text",
                     dataValueField: "value",
@@ -159,15 +159,11 @@
                 combobox.input.type("Co");
                 combobox.suggest("Cotton");
 
-                setTimeout(function() {
-                    start();
-
-                    equal(combobox.text(), "Cotton");
-                    equal(combobox.input.selectedText(), "tton");
-                }, 200);
+                equal(combobox.text(), "Cotton");
+                equal(combobox.input.selectedText(), "tton");
             });
 
-            asyncTest("suggest(text) should only append the rest of the text (filter:contains)", function() {
+            asyncTest("suggest(text) should only append the rest of the text (filter:contains)", 1, function() {
                 var combobox = input.kendoComboBox({
                     dataTextField: "text",
                     dataValueField: "value",

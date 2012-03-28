@@ -85,7 +85,7 @@
                 combobox._arrow.trigger(CLICK);
             });
 
-            asyncTest("empty input should clear focused item", function() {
+            asyncTest("empty input should clear focused item", 3, function() {
                 var combobox = input.kendoComboBox({
                                     dataTextField: "text",
                                     dataValueField: "value",
