@@ -1144,10 +1144,6 @@
     });
 
     function removeFiltersForField(expression, field) {
-        if (!field) {
-            return;
-        }
-
         if (expression.filters) {
             expression.filters = $.grep(expression.filters, function(filter) {
                 removeFiltersForField(filter, field);
