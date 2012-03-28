@@ -18,5 +18,9 @@ tests.push(
     {
         page: "tabstrip/mvvm.html",
         title: "tabstrip mvvm"
+    },
+    {
+        page: "tabstrip/lint.html",
+        title: "tabstrip lint"
     }
 );

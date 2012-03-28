@@ -14,6 +14,9 @@ tests.push(
     {
         page: "menu/mvvm.html",
         title: "menu mvvm"
+    },
+    {
+        page: "menu/lint.html",
+        title: "menu lint"
     }
-
 );
