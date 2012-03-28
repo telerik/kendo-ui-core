@@ -1,22 +1,22 @@
 tests.push(
     {
         page: "gauge/api.html",
-        title: "API"
+        title: "gauge api"
     },
     {
         page: "gauge/radialscale.html",
-        title: "Radial Scale"
+        title: "gauge radial scale"
     },
     {
         page: "gauge/pointer.html",
-        title: "Pointer"
+        title: "gauge pointer"
     },
     {
         page: "gauge/plotarea.html",
-        title: "PlotArea"
+        title: "gauge plotarea"
     },
     {
         page: "gauge/mvvm.html",
-        title: "MVVM"
+        title: "gauge mvvm"
     }
 );

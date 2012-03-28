@@ -1,94 +1,94 @@
 tests.push(
     {
         page: "chart/configuration.html",
-        title: "Chart configuration"
+        title: "chart configuration"
     },
     {
         page: "chart/databinding.html",
-        title: "Data binding"
+        title: "chart data binding"
     },
     {
         page: "chart/helpers.html",
-        title: "Helpers"
+        title: "chart helpers"
     },
     {
         page: "chart/viewmodel.html",
-        title: "View model"
+        title: "chart view model"
     },
     {
         page: "chart/rendering.html",
-        title: "Rendering"
+        title: "chart rendering"
     },
     {
         page: "chart/svg.html",
-        title: "SVG View"
+        title: "chart SVG view"
     },
     {
         page: "chart/vml.html",
-        title: "VML View"
+        title: "chart VML view"
     },
     {
         page: "chart/plotarea.html",
-        title: "Plot Area"
+        title: "chart plot area"
     },
     {
         page: "chart/barchart.html",
-        title: "Bar Chart"
+        title: "chart bars"
     },
     {
         page: "chart/numericaxis.html",
-        title: "NumericAxis"
+        title: "chart numeric axis"
     },
     {
         page: "chart/categoryaxis.html",
-        title: "CategoryAxis"
+        title: "chart category axis"
     },
     {
         page: "chart/barseries.html",
-        title: "Bar Series"
+        title: "chart bar series"
     },
     {
         page: "chart/linechart.html",
-        title: "Line Chart"
+        title: "chart line"
     },
     {
         page: "chart/areachart.html",
-        title: "Area Chart"
+        title: "chart area"
     },
     {
         page: "chart/piechart.html",
-        title: "Pie Chart"
+        title: "chart pie"
     },
     {
         page: "chart/events.html",
-        title: "Events"
+        title: "chart events"
     },
     {
         page: "chart/tooltip.html",
-        title: "Tooltip"
+        title: "chart tooltip"
     },
     {
         page: "chart/highlight.html",
-        title: "Highlight"
+        title: "chart highlight"
     },
     {
         page: "chart/animations.html",
-        title: "Animations"
+        title: "chart animations"
     },
     {
         page: "chart/scatterlinechart.html",
-        title: "Scatter Line Chart"
+        title: "chart scatter line"
     },
     {
         page: "chart/scatterchart.html",
-        title: "Scatter Chart"
+        title: "chart scatter"
     },
     {
         page: "chart/mvvm.html",
-        title: "mvvm"
+        title: "chart mvvm"
     },
     {
         page: "chart/lint.html",
-        title: "lint"
+        title: "chart lint"
     }
 );

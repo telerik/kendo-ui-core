@@ -1,59 +1,59 @@
 tests.push(
     {
         page: "core/class.html",
-        title: "class"
+        title: "core class"
     },
     {
         page: "core/init.html",
-        title: "init"
+        title: "core init"
     },
     {
         page: "core/observable.html",
-        title: "observable"
+        title: "core observable"
     },
     {
         page: "core/component.html",
-        title: "component"
+        title: "core widget"
     },
     {
         page: "core/animation.html",
-        title: "animation"
+        title: "core animation"
     },
     {
         page: "core/format.html",
-        title: "format"
+        title: "core format"
     },
     {
         page: "core/dateformatting.html",
-        title: "date formatting"
+        title: "core date formatting"
     },
     {
         page: "core/dateparsing.html",
-        title: "date parsing"
+        title: "core date parsing"
     },
     {
         page: "core/numberformatting.html",
-        title: "number formatting"
+        title: "core number formatting"
     },
     {
         page: "core/numberparsing.html",
-        title: "number parsing"
+        title: "core number parsing"
     },
     {
         page: "core/culture.html",
-        title: "culture"
+        title: "core culture"
     },
     {
         page: "core/GlobalizeIntegration.html",
-        title: "globalize integration"
+        title: "core globalize integration"
     },
     {
         page: "core/json.html",
-        title: "json"
+        title: "core json"
     },
     {
         page: "core/template.html",
-        title: "template"
+        title: "core template"
     },
     {
         page: "core/lint.html",
