@@ -5,6 +5,6 @@ tests.push(
     },
     {
         page: "validation/lint.html",
-        title: "Validator lint"
+        title: "validator lint"
     }
 );

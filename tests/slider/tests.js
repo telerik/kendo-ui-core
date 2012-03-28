@@ -1,11 +1,11 @@
 tests.push(
     {
         page: "slider/clientsideapi.html",
-        title: "slider client api"
+        title: "slider api"
     },
     {
         page: "slider/rangeslider.html",
-        title: "range slider"
+        title: "slider range"
     },
     {
         page: "slider/rendering.html",
@@ -17,10 +17,10 @@ tests.push(
     },
     {
         page: "slider/mvvm.html",
-        title: "mvvm"
+        title: "slider mvvm"
     },
     {
         page: "slider/lint.html",
-        title: "lint"
+        title: "slider lint"
     }
 );

@@ -1,10 +1,10 @@
 tests.push(
     {
         page: "download-builder/script-resolver.html",
-        title: "Script Resolver"
+        title: "download builder script resolver"
     },
     {
         page: "download-builder/kendo-config.html",
-        title: "Kendo Config"
+        title: "download builder kendo config"
     }
 );

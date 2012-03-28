@@ -1,10 +1,10 @@
 tests.push(
     {
         page: "fx/animation.html",
-        title: "FX animation"
+        title: "fx animation"
     },
     {
         page: "fx/lint.html",
-        title: "FX lint"
+        title: "fx lint"
     }
 );

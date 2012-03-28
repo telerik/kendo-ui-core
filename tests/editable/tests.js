@@ -1,15 +1,14 @@
 tests.push(
     {
         page: "editable/editable.html",
-        title: "Editable main"
+        title: "editable"
     },
     {
         page: "editable/validation.html",
-        title: "Editable validation"
+        title: "editable validation"
     },
     {
         page: "editable/lint.html",
-        title: "Editable lint"
+        title: "editable lint"
     }
-
 );

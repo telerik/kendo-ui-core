@@ -33,39 +33,39 @@ tests.push(
     },
     {
         page: "grid/virtualscrolling.html",
-        title: "virtual scrolling"
+        title: "grid virtual scrolling"
     },
     {
         page: "grid/detailview.html",
-        title: "detail view"
+        title: "grid detail view"
     },
     {
         page: "grid/editing.html",
-        title: "editing"
+        title: "grid editing"
     },
     {
         page: "grid/editinginline.html",
-        title: "editing inline"
+        title: "grid editing inline"
     },
     {
         page: "grid/editingpopup.html",
-        title: "editing popup"
+        title: "grid editing popup"
     },
     {
         page: "grid/deleting.html",
-        title: "deleting"
+        title: "grid deleting"
     },
     {
         page: "grid/inserting.html",
-        title: "inserting"
+        title: "grid inserting"
     },
     {
         page: "grid/toolbar.html",
-        title: "toolbar"
+        title: "grid toolbar"
     },
     {
         page: "grid/editingnavigation.html",
-        title: "editing navigation"
+        title: "grid editing navigation"
     },
     {
         page: "grid/mvvm.html",

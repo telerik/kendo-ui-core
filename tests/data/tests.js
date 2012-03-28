@@ -1,39 +1,39 @@
 tests.push(
     {
         page: "data/datareader.html",
-        title: "datareader"
+        title: "data datareader"
     },
     {
         page: "data/xmldatareader.html",
-        title: "xmldatareader"
+        title: "data xmldatareader"
     },
     {
         page: "data/datasource/read.html",
-        title: "datasource read"
+        title: "data  read"
     },
     {
         page: "data/datasource/initialization.html",
-        title: "datasource initialization"
+        title: "data initialization"
     },
     {
         page: "data/datasource/query.html",
-        title: "datasource query"
+        title: "data datasource query"
     },
     {
         page: "data/query-expr.html",
-        title: "query filter compilation"
+        title: "data query filter compilation"
     },
     {
         page: "data/datasource/sync.html",
-        title: "datasource sync"
+        title: "data sync"
     },
     {
         page: "data/datasource/range.html",
-        title: "datasource range"
+        title: "data range"
     },
     {
         page: "data/datasource/observable-array.html",
-        title: "datasource observableArray"
+        title: "data observableArray"
     },
     {
         page: "data/query.html",
@@ -45,22 +45,22 @@ tests.push(
     },
     {
         page: "data/remotetransport.html",
-        title: "remote transport"
+        title: "data remote transport"
     },
     {
         page: "data/odata.html",
-        title: "odata"
+        title: "data odata"
     },
     {
         page: "data/inmemorycache.html",
-        title: "in-memory cache"
+        title: "data in-memory cache"
     },
     {
         page: "data/datasource/model.html",
-        title: "datasource model"
+        title: "data model"
     },
     {
         page: "data/datasource/sync-response.html",
-        title: "datasource sync response"
+        title: "data sync response"
     }
 );
