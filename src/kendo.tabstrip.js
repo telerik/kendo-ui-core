@@ -1192,7 +1192,7 @@
 
             that.contentElements = that.contentAnimators = that.wrapper.children("div"); // refresh the contents
 
-            if (kendo.support.touch) {
+            if (kendo.support.touch && kendo.mobile.ui.Scroller) {
                 kendo.touchScroller(that.contentElements);
                 that.contentElements = that.contentElements.children(".km-scroll-container");
             }
