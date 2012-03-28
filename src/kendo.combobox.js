@@ -726,7 +726,7 @@
                 options = that.options,
                 filter = options.filter,
                 field = options.dataTextField,
-                expression;
+                filters, expression;
 
             clearTimeout(that._typing);
 
