@@ -26,5 +26,9 @@ tests.push(
     {
         page: "panelbar/mvvm.html",
         title: "panelbar mvvm"
+    },
+    {
+        page: "panelbar/lint.html",
+        title: "panelbar lint"
     }
 );
