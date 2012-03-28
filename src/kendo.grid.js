@@ -353,14 +353,16 @@
             columns: [],
             toolbar: null,
             autoBind: true,
+            filterable: false,
             scrollable: true,
             sortable: false,
             selectable: false,
             navigatable: false,
             pageable: false,
             editable: false,
-            rowTemplate: "",
             groupable: false,
+            rowTemplate: "",
+            altRowTemplate: "",
             dataSource: {}
         },
 
