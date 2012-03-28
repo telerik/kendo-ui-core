@@ -180,7 +180,7 @@
             }
 
             if (support.eventCapture) {
-                preventIfMoving = function (e) {
+                preventIfMoving = function(e) {
                     if (that.moved) {
                         e.preventDefault();
                     }
