@@ -31,6 +31,7 @@
                     template:"",
                     altTemplate:"",
                     dataMinHeight: "",
+                    columns: null,
                     dataBar:""
                 },
 
@@ -193,6 +194,23 @@
                 equal(testwidget.dataSource.transport.options.read.url, "http://example.com");
             });
 
+            test("initializes multiline array field in JSON format", function() {
+                var dom = $('<div data-role="testwidget" data-columns=\'["foo",\r\n "bar"]\'/>');
+
+                kendo.init(dom);
+                var testwidget = dom.data("kendoTestWidget");
+                equal(testwidget.options.columns[0], "foo");
+                equal(testwidget.options.columns[1], "bar");
+            });
+
+            test("initializes multiline object field in JSON format", function() {
+                var dom = $('<div data-role="testwidget" data-columns=\'{"foo":"foo",\r\n "bar":"bar"}\'/>');
+
+                kendo.init(dom);
+                var testwidget = dom.data("kendoTestWidget");
+                equal(testwidget.options.columns.foo, "foo");
+                equal(testwidget.options.columns.bar, "bar");
+            });
         </script>
         <script id="template" type="text/x-kendo-template">
             foo
