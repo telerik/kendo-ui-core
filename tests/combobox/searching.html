@@ -524,6 +524,24 @@
                 equal(combobox.dataSource.filter().filters[0].field, "parent");
             });
 
+            test("refresh suggests on every dataSource change", 2, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["text", "Text", "3text"],
+                    filter: "startswith",
+                    highlightFirst: false,
+                    suggest: true,
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("f");
+                combobox.search("f");
+                combobox.input.val("3");
+                combobox.search("3");
+
+                equal(combobox.text(), "3text");
+                equal(combobox.current(), null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
