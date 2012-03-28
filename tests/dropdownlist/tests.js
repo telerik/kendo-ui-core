@@ -26,5 +26,9 @@ tests.push(
     {
         page: "dropdownlist/lint.html",
         title: "dropdownlist lint"
+    },
+    {
+        page: "dropdownlist/integration.html",
+        title: "dropdownlist integration"
     }
 );
