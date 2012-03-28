@@ -128,51 +128,39 @@
                 ok(!changeWasCalled);
             });
 
-            asyncTest("clicking an item raises the change event", function() {
-                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+            test("clicking an item raises the change event", 1, function() {
+                var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo"],
                     change: function() {
-                        changeWasCalled = true;
+                        ok(true);
                     }
                 });
 
                 input.focus().val("f");
                 autocomplete.search();
-                input.blur();
                 autocomplete.ul.children().first().trigger(CLICK);
-
-                setTimeout(function () {
-                    ok(changeWasCalled);
-                    start();
-                }, 0);
             });
 
-            asyncTest("clicking an item raises the change event of the dom element", function() {
-                var changeWasCalled = false, autocomplete = new AutoComplete(input, {
+            test("clicking an item raises the change event of the dom element", 1, function() {
+                var autocomplete = new AutoComplete(input, {
                     dataSource: ["foo"]
                 });
 
                 input.focus().val("f");
                 autocomplete.search();
-                input.blur();
                 input.change(function() {
-                    changeWasCalled = true;
+                    ok(true);
+                    start();
                 });
                 autocomplete.ul.children().first().trigger(CLICK);
-
-                setTimeout(function () {
-                    ok(changeWasCalled);
-                    start();
-                }, 0);
             });
 
-            asyncTest("open event when open popup on search", function() {
+            test("open event when open popup on search", 1, function() {
                 input.kendoAutoComplete({
                     delay: 0,
                     dataSource: ["foo", "bar"],
                     open: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -181,7 +169,7 @@
                 autocomplete.search();
             });
 
-            asyncTest("open event should be cancellable", function() {
+            asyncTest("open event should be cancellable", 1, function() {
                 input.kendoAutoComplete({
                     delay: 0,
                     dataSource: ["foo", "bar"],
@@ -200,13 +188,12 @@
                 }, 200);
             });
 
-            asyncTest("close event when popup close on click", function() {
+            test("close event when popup close on click", 1, function() {
                 input.kendoAutoComplete({
                     delay: 0,
                     dataSource: ["foo", "bar"],
                     close: function() {
                         ok(true);
-                        start();
                     }
                 });
 
