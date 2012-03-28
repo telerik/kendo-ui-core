@@ -46,6 +46,12 @@
             }
         }
 
+        if (typeof JSHINT == "undefined") {
+            return test(name, function() {
+                ok(false, "JSHINT is not loaded. Include JSHINT in the page before using qHint.");
+            });
+        }
+
         return asyncTest(name, function() {
             qHint.sendRequest(sourceFile, function(source) {
                 start();
