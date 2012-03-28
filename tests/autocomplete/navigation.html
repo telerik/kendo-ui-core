@@ -88,7 +88,7 @@
                 ok(!autocomplete.ul.children().first().is(".k-state-focused"));
             });
 
-            asyncTest("clicking an item applies selected style", function() {
+            test("clicking an item applies selected style", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -97,10 +97,7 @@
                 autocomplete.search();
                 autocomplete.ul.children().eq(0).trigger(CLICK);
 
-                setTimeout( function () {
-                    ok(autocomplete.ul.children().eq(0).is(".k-state-selected"));
-                    start();
-                }, 0);
+                ok(autocomplete.ul.children().eq(0).is(".k-state-selected"));
             });
 
             test("changing the current popup item does not update the input value", function() {
@@ -115,7 +112,7 @@
                 equal(input.val(), "b");
             });
 
-            asyncTest("pressing enter closes the dropdown", function() {
+            test("pressing enter closes the dropdown", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -125,13 +122,10 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                setTimeout( function () {
-                    ok(!autocomplete.ul.is(":visible"));
-                    start();
-                }, 0);
+                ok(!autocomplete.ul.is(":visible"));
             });
 
-            asyncTest("press enter should call preventDefault when popup is visible", function() {
+            test("press enter should call preventDefault when popup is visible", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -144,12 +138,11 @@
                     keyCode: kendo.keys.ENTER,
                     preventDefault: function() {
                         ok(true);
-                        start();
                     }
                 });
             });
 
-            asyncTest("pressing enter closes updates the value of the autocomplete", function() {
+            test("pressing enter closes updates the value of the autocomplete", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -159,13 +152,10 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.ENTER);
 
-                setTimeout( function () {
-                    equal(input.val(), "baz");
-                    start();
-                }, 0);
+                equal(input.val(), "baz");
             });
 
-            asyncTest("pressing tab closes updates the value of the autocomplete", function() {
+            test("pressing tab closes updates the value of the autocomplete", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"]
                 });
@@ -175,10 +165,7 @@
                 input.press(kendo.keys.DOWN);
                 input.press(kendo.keys.TAB);
 
-                setTimeout( function () {
-                    equal(input.val(), "baz");
-                    start();
-                }, 0);
+                equal(input.val(), "baz");
             });
 
             test("select applies selected style", function() {
@@ -263,7 +250,7 @@
                 ok(!autocomplete.ul.is(":visible"));
             });
 
-            asyncTest("clicking item more than once", function() {
+            test("clicking item more than once", 1, function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
                     separator: ", "
@@ -273,10 +260,7 @@
                 autocomplete.search();
                 autocomplete.ul.children().first().trigger(CLICK).trigger(CLICK);
 
-                setTimeout( function () {
-                    equal(input.val(), "baz, ");
-                    start();
-                }, 0);
+                equal(input.val(), "baz, ");
             });
 
             test("pressing the down arrows when the popup is not visible does not change value", function() {

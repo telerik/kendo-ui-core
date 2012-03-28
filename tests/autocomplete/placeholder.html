@@ -68,7 +68,7 @@
                     ok(!autocomplete.element.hasClass("k-readonly"));
                 });
 
-                asyncTest("set placeholder on blur", function() {
+                asyncTest("set placeholder on blur", 1, function() {
                     var autocomplete = input.val("1").kendoAutoComplete({
                         placeholder: "Select..."
                     }).data("kendoAutoComplete");
@@ -81,7 +81,7 @@
                     }, 300);
                 });
 
-                asyncTest("remove placeholder on focus", function() {
+                asyncTest("remove placeholder on focus", 1, function() {
                     var autocomplete = input.kendoAutoComplete({
                         placeholder: "Select..."
                     }).data("kendoAutoComplete");
