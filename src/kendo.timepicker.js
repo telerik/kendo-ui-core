@@ -93,7 +93,6 @@
         DEFAULT = "k-state-default",
         DISABLED = "disabled",
         LI = "li",
-        DIV = "<div/>",
         SPAN = "<span/>",
         FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
@@ -111,7 +110,7 @@
     TODAY = new DATE(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate(), 0, 0, 0);
 
     var TimeView = function(options) {
-        var that = this, list;
+        var that = this;
 
         that.options = options;
 
@@ -221,7 +220,9 @@
         },
 
         scroll: function(item) {
-            if (!item) return;
+            if (!item) {
+                return;
+            }
 
             var ul = this.ul[0],
                 itemOffsetTop = item.offsetTop,
@@ -847,7 +848,6 @@
 
         _update: function(value) {
             var that = this,
-                current = that._value,
                 options = that.options,
                 date = that._parse(value),
                 text = kendo.toString(date, options.format);
