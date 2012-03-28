@@ -318,15 +318,15 @@
                 count = labels.length,
                 labelsOptions = options.labels,
                 padding = labelsOptions.padding,
-                ringDistance = scale.options.ringDistance = ring.r * 0.05,
-                ringSize = scale.options.ringSize = ring.r * 0.1,
+                rangeDistance = scale.options.rangeDistance = ring.r * 0.05,
+                rangeSize = scale.options.rangeSize = ring.r * 0.1,
                 ranges = options.ranges || [],
                 halfWidth, halfHeight, labelAngle,
                 angle, label, lp, i, cx, cy, isInside;
 
             if (labelsOptions.position === INSIDE && ranges.length) {
-                ring.r -= ringSize + ringDistance;
-                ring.ir -= ringSize + ringDistance;
+                ring.r -= rangeSize + rangeDistance;
+                ring.ir -= rangeSize + rangeDistance;
             }
 
             for (i = 0; i < count; i++) {
@@ -370,52 +370,65 @@
 
         renderRanges: function(view) {
             var scale = this,
-                options = scale.options,
-                ranges = options.ranges || [],
-                ring = scale.ring,
                 result = [],
                 from,
                 to,
-                r,
-                ir,
+                segments,
+                segment,
+                ringRadius,
+                i;
+
+            segments = scale.rangeSegments();
+
+            if (segments) {
+                ringRadius = scale.getRadius();
+
+                for (i = 0; i < segments.length; i++) {
+                    segment = segments[i];
+                    from = scale.getSlotAngle(segment.from);
+                    to = scale.getSlotAngle(segment.to);
+                    if (to - from !== 0) {
+                        result.push(view.createRing(
+                            new Ring(
+                                scale.ring.c, ringRadius.inner,
+                                ringRadius.outer, from, to - from
+                            ), {
+                                fill: segment.color,
+                                fillOpacity: segment.opacity,
+                                zIndex: -1
+                        }));
+                    }
+                }
+            }
+
+            return result;
+        },
+
+        rangeSegments: function() {
+            var gauge = this,
+                options = gauge.options,
+                ranges = options.ranges || [],
                 count = ranges.length,
                 range,
+                segmentsCount,
                 defaultColor = options.rangePlaceholderColor,
-                min = options.min,
-                max = options.max,
-                j,
-                segmentCount,
                 segments = [],
                 segment,
-                ringDistance = options.ringDistance,
-                ringSize = options.ringSize,
-                i;
+                min = options.min,
+                max = options.max,
+                i, j;
 
             function rangeSegment(from, to, color) {
                 return { from: from, to: to, color: color };
             }
 
-            segments.push(rangeSegment(min, max, defaultColor));
-
             if (count) {
-                if (options.labels.position === OUTSIDE) {
-                    r = ring.ir - ringDistance;
-                    ir = r - ringSize;
-                } else {
-                    r = ring.r;
-                    ir = r - ringSize;
-                    ring.r -= ringSize + ringDistance;
-                    ring.ir -= ringSize + ringDistance;
-                }
+                segments.push(rangeSegment(min, max, defaultColor));
 
                 for (i = 0; i < count; i++) {
-                    range = ranges[i];
-                    from = defined(range.from) ? range.from : MIN_VALUE;
-                    to = defined(range.to) ? range.to : MAX_VALUE;
-                    range.from = math.max(math.min(to, from), min);
-                    range.to = math.min(math.max(to, from), max);
-                    segmentCount = segments.length;
-                    for (j = 0; j < segmentCount; j++) {
+                    range = getRange(ranges[i], min, max);
+                    segmentsCount = segments.length;
+                    for (j = 0; j < segmentsCount; j++) {
                         segment = segments[j];
                         if (segment.from <= range.from && range.from <= segment.to) {
                             segments.push(rangeSegment(range.from, range.to, range.color));
@@ -427,23 +440,31 @@
                         }
                     }
                 }
-
-                for (i = 0; i < segments.length; i++) {
-                    segment = segments[i];
-                    from = scale.getSlotAngle(segment.from);
-                    to = scale.getSlotAngle(segment.to);
-                    if (to - from !== 0) {
-                        result.push(view.createRing(
-                            new Ring(ring.c, ir, r, from, to - from), {
-                                fill: segment.color,
-                                fillOpacity: segment.opacity,
-                                zIndex: -1
-                        }));
-                    }
-                }
             }
 
-            return result;
+            return segments;
+        },
+
+        getRadius: function() {
+            var scale = this,
+                options = scale.options,
+                rangeSize = options.rangeSize,
+                rangeDistance = options.rangeDistance,
+                ring = scale.ring,
+                ir, r;
+
+            if (options.labels.position === OUTSIDE) {
+                r = ring.ir - rangeDistance;
+                ir = r - rangeSize;
+            } else {
+                r = ring.r;
+                ir = r - rangeSize;
+                // move the ticks with a range distance and a range size
+                ring.r -= rangeSize + rangeDistance;
+                ring.ir -= rangeSize + rangeDistance;
+            }
+
+            return { inner: ir, outer: r };
         },
 
         getViewElements: function(view) {
@@ -641,32 +662,31 @@
         },
 
         renderRanges: function(view) {
-            var axis = this,
-                options = axis.options,
+            var scale = this,
+                options = scale.options,
+                min = options.min,
+                max = options.max,
                 ranges = options.ranges || [],
                 vertical = options.vertical,
                 result = [],
                 count = ranges.length,
-                range, slotX, slotY,
-                from, to, i,
-                rangeSize = options.minorTicks.size / 2;
+                range, slotX, slotY, i,
+                rangeSize = options.minorTicks.size / 2,
+                lineBox = scale.lineBox(),
+                slot;
 
             if (count) {
                 for (i = 0; i < count; i++) {
-                    range = ranges[i];
-                    from = defined(range.from) ? range.from : MIN_VALUE;
-                    to = defined(range.to) ? range.to : MAX_VALUE;
-                    range.from = math.min(from, to);
-                    range.to = math.max(from, to);
+                    range = getRange(ranges[i], min, max);
+                    slot = scale.getSlot(range.from, range.to);
+                    slotX = vertical ? lineBox : slot;
+                    slotY = vertical ? slot : lineBox;
                     if (vertical) {
-                        slotX = axis.lineBox();
                         slotX.x1 -= rangeSize;
-                        slotY = axis.getSlot(range.from, range.to);
                     } else {
-                        slotX = axis.getSlot(range.from, range.to);
-                        slotY = axis.lineBox();
                         slotY.y2 += rangeSize;
                     }
+
                     result.push(view.createRect(
                             new Box2D(slotX.x1, slotY.y1, slotX.x2, slotY.y2),
                             { fill: range.color, fillOpacity: range.opacity }));
@@ -677,21 +697,20 @@
         },
 
         getViewElements: function(view) {
-            var axis = this,
-                elements = NumericAxis.fn.getViewElements.call(axis, view);
+            var scale = this,
+                elements = NumericAxis.fn.getViewElements.call(scale, view);
 
-            append(elements, axis.renderRanges(view));
+            append(elements, scale.renderRanges(view));
 
             return elements;
         }
     });
 
-
     var LinearPointer = Pointer.extend({
         init: function(scale, options) {
             var pointer = this;
             Pointer.fn.init.call(pointer, scale, options);
-            pointer.options = deepExtend({ size: pointer.getPointerSize() }, pointer.options);
+            pointer.options = deepExtend({ size: pointer.pointerSize() }, pointer.options);
         },
 
         options: {
@@ -844,7 +863,7 @@
             return shape;
         },
 
-        getPointerSize: function(shape) {
+        pointerSize: function(shape) {
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
@@ -918,11 +937,11 @@
 
             scale.reflow(box);
             pointer.reflow(box);
-            plotArea.box = plotArea.calculateBox(box);
+            plotArea.box = plotArea.getBox(box);
             plotArea.alignElements();
         },
 
-        calculateBox: function(box) {
+        getBox: function(box) {
             var plotArea = this,
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
@@ -1170,6 +1189,17 @@
             return { width: width, height: height };
         }
     });
+
+    function getRange(range, min, max) {
+        var from = defined(range.from) ? range.from : MIN_VALUE,
+            to = defined(range.to) ? range.to : MAX_VALUE;
+
+        range.from = math.max(math.min(to, from), min);
+        range.to = math.min(math.max(to, from), max);
+
+        return range;
+    }
+
 
     var RadialPointerAnimationDecorator = animationDecorator(RADIAL_POINTER, RotationAnimation);
     var ArrowPointerAnimationDecorator = animationDecorator(ARROW_POINTER, ArrowAnimation);
