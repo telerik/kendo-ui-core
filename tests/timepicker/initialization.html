@@ -129,7 +129,7 @@
                 ok(timepicker.timeView.popup.visible());
             });
 
-            asyncTest("form reset support", function() {
+            asyncTest("form reset support", 2, function() {
                 input.attr("value", "12:00 AM");
 
                 var form = $("<form/>").appendTo(document).append(input),
