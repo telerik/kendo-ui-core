@@ -39,7 +39,8 @@ html
     font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
 }
 
-.overview
+.overview,
+#footer
 {
     font-size:13px;
 }
