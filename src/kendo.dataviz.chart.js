@@ -2,6 +2,7 @@
     // Imports ================================================================
     var each = $.each,
         grep = $.grep,
+        isArray = $.isArray,
         map = $.map,
         math = Math,
         extend = $.extend,
@@ -1049,6 +1050,70 @@
                 category = defined(options.categories[index]) ? options.categories[index] : "";
 
             return new AxisLabel(category, index, dataItem, labelOptions);
+        }
+    });
+
+    var TIME_PER_DAY = 86400000,
+        TIME_PER_MONTH = 31 * TIME_PER_DAY,
+        TIME_PER_YEAR = 365 * TIME_PER_DAY,
+        YEARS = "years",
+        MONTHS = "months",
+        DAYS = "days";
+
+    function toDate(value) {
+        if (isArray(value)) {
+            return map(value, toDate);
+        } else if (value) {
+            return (value instanceof Date) ? value : new Date(value);
+        }
+    }
+
+    var DateAxis = Axis.extend({
+        init: function(seriesMin, seriesMax, seriesDelta, options) {
+            var axis = this;
+
+            if (options) {
+                options.min = toDate(options.min);
+                options.max = toDate(options.max);
+                options.axisCrossingValue = toDate(options.axisCrossingValue);
+            }
+
+            Axis.fn.init.call(
+                axis, axis.defaults(seriesMin, seriesMax, seriesDelta, options)
+            );
+        },
+
+        options: {
+            baseUnit: DAYS,
+            minorUnit: 1
+        },
+
+        defaults: function(seriesMin, seriesMax, seriesDelta, options) {
+            var defaults = {},
+                unitTime = TIME_PER_DAY,
+                unitRange;
+
+            if (seriesDelta >= TIME_PER_YEAR) {
+                defaults.baseUnit = YEARS;
+                unitTime = TIME_PER_YEAR;
+            } else if (seriesDelta >= TIME_PER_MONTH) {
+                defaults.baseUnit = MONTHS;
+                unitTime = TIME_PER_MONTH;
+            }
+
+            options = options || {};
+            defaults.min = options.min || seriesMin;
+            defaults.max = options.max || seriesMax;
+
+            unitRange = (seriesMax - seriesMin) / unitTime;
+            defaults.majorUnit = dataviz.autoMajorUnit(0, unitRange);
+
+            return deepExtend(defaults, options);
+        },
+
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
         }
     });
 
@@ -3839,8 +3904,13 @@
                 rangeTracker = vertical ? plotArea.yAxisRangeTracker : plotArea.xAxisRangeTracker,
                 range = rangeTracker.query(axisName),
                 axisOptions = deepExtend({}, options, { vertical: vertical }),
-                axis = new NumericAxis(range.min, range.max, axisOptions);
+                axis;
 
+            if (options.type === "Date") {
+                axis = new DateAxis(range.min, range.max, axisOptions);
+            } else {
+                axis = new NumericAxis(range.min, range.max, axisOptions);
+            }
             namedAxes[axisName] = axis;
             plotArea.append(axis);
             plotArea.axes.push(axis);
@@ -4304,6 +4374,7 @@
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
+        DateAxis: DateAxis,
         Highlight: Highlight,
         Legend: Legend,
         LineChart: LineChart,

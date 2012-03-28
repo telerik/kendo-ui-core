@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bar Chart</title>
+        <script src="../src/jquery.js"></script>
+        <script src="../src/kendo.core.js"></script>
+        <script src="../src/kendo.data.js"></script>
+        <script src="../src/kendo.dataviz.core.js"></script>
+        <script src="../src/kendo.dataviz.chart.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
+        <script src="../src/kendo.dataviz.vml.js"></script>
+        <script src="../src/kendo.dataviz.svg.js"></script>
+    </head>
+    <body>
+        <div id="chart" style="width: 400px; height; 300px;"></div>
+        <script>
+            $(function() {
+                var data = [{
+                    price: 10,
+                    date: new Date("2012-02-20")
+                    }, {
+                    price: 20,
+                    date: new Date("2012-02-25")
+                    }, {
+                    price: 15,
+                    date: new Date("2012-02-29")
+                }];
+
+                $("#chart").kendoChart({
+                    legend: {
+                        visible: false
+                    },
+                    dataSource: data,
+                    series: [{
+                        type: "scatterLine",
+                        xField: "date",
+                        yField: "price"
+                    }],
+                    xAxis: {
+                        type: "Date",
+                        min: new Date("2012-02-10"),
+                        max: "2012-03-10",
+                        labels: {
+                            //template: "#= formatTime(value) #"
+                        }
+                    },
+                    yAxis: {
+                        labels: {
+                            format: "${0:N}"
+                        }
+                    }
+                });
+            });
+
+            function formatTime(time) {
+                var date = new Date(time);
+                return (date.getMonth() + 1) + "/" + date.getDate();
+            }
+        </script>
+    </body>
+</html>
+
