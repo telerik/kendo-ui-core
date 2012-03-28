@@ -137,21 +137,20 @@
                 equal(dropdownlist.select(), 1);
             });
 
-            asyncTest("open should open popup", function () {
+            asyncTest("open should call _scroll method", 1, function () {
                 dropdownlist._scroll = function() { ok(true); start(); };
                 dropdownlist.open();
             });
 
-            asyncTest("open should call _scroll method", function () {
+            test("open should open popup", 1, function () {
                 dropdownlist.bind("open", function(){
                     ok(true);
-                    start();
                 });
 
                 dropdownlist.open();
             });
 
-            asyncTest("open should bind and open after this if no items", function () {
+            asyncTest("open method binds the widget and opens the popup", 1, function () {
                 var dropdownlist = input.kendoDropDownList({autoBind: false, dataSource: data}).data("kendoDropDownList");
 
                 dropdownlist.bind("open", function(){
@@ -162,10 +161,9 @@
                 dropdownlist.open();
             });
 
-            asyncTest("close should close popup", function () {
+            test("close should close popup", 1, function () {
                 dropdownlist.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 dropdownlist.open();

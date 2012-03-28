@@ -79,12 +79,11 @@
                 equal(dropdownlist.value(), data[1]);
             });
 
-            asyncTest("click li should close popup", function() {
+            test("click li should close popup", 1, function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 dropdownlist.popup.open();
@@ -198,12 +197,11 @@
 
             });
 
-            asyncTest("press enter should close popup when no change in selection", function() {
+            test("press enter should close popup when no change in selection", 1, function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 dropdownlist.popup.open();
@@ -212,14 +210,13 @@
                 dropdownlist.wrapper.focus().press(keys.ENTER);
             });
 
-            asyncTest("press enter should select current item", function() {
+            test("press enter should select current item", 3, function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
                     equal(dropdownlist._current.index(), 1);
                     ok(dropdownlist._current.hasClass("k-state-focused"));
                     ok(dropdownlist._current.hasClass("k-state-selected"));
-                    start();
                 });
 
                 dropdownlist.popup.open();
@@ -244,12 +241,11 @@
             });
 
 
-            asyncTest("press esc should close popup when no change in selection", function() {
+            test("press esc should close popup when no change in selection", 1, function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
                 dropdownlist.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 dropdownlist.popup.open();
@@ -272,25 +268,23 @@
                 ok(blurWasCalled);
             });
 
-            asyncTest("pressing alt + down should open popup", 1, function() {
+            test("pressing alt + down should open popup", 1, function() {
                 var dropdownlist = new DropDownList(input, {
                     dataSource: data,
                     open: function() {
                         ok(true);
-                        start();
                     }
                 });
 
                 dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.DOWN});
             });
 
-            asyncTest("pressing alt + up should close popup", function() {
+            test("pressing alt + up should close popup", 1, function() {
                 var blurWasCalled, dropdownlist = new DropDownList(input, {
                     dataSource: data
                 });
                 dropdownlist.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
                 dropdownlist.open();
 
