@@ -12,25 +12,27 @@
         * @param {DomElement} element DOM element
         */
         init: function(element, options) {
-            var that = this;
+            var that = this,
+                shim = $('<div class="km-shim" />').hide();
 
             Widget.fn.init.call(that, element, options);
-            element = that.element;
+
+            that.shim = shim;
+            that.element = element;
+
+        },
+
+        options: {
+            name: "Shim"
         },
 
         viewInit: function(view) {
-            var that = this,
-                element = that.element,
-                appElement = view.application.element,
-                shim = $('<div class="km-shim" />').appendTo(appElement);
+            var that = this;
+            view.application.element.append(that.shim);
 
-            shim.append(this.element).hide();
-
-            that.shim = shim;
-
-            that.popup = new Popup(element, {
-                anchor: shim,
-                appendTo: shim,
+            that.popup = new Popup(that.element, {
+                anchor: that.shim,
+                appendTo: that.shim,
                 origin: "bottom left",
                 position: "bottom left",
                 animation: { open: { effects: "slideIn:up" } }
@@ -45,11 +47,7 @@
         hide: function() {
             this.shim.hide();
             this.popup.close();
-        },
-
-        options: {
-            name: "Shim"
-        },
+        }
     });
 
     ui.plugin(Shim);
