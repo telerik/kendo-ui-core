@@ -256,7 +256,7 @@
                 $(items[first]).addClass("k-last")[that._size](pixelWidths[last - 1]);
             }
 
-            if (that._distance % options.smallStep != 0 && !that._isHorizontal) {
+            if (that._distance % options.smallStep !== 0 && !that._isHorizontal) {
                 for (i = 0; i < pixelWidths.length; i++) {
                     selection += pixelWidths[i];
                 }
@@ -273,11 +273,12 @@
                 options = that.options,
                 items = that.wrapper.find(TICK_SELECTOR),
                 titleNumber = options.min,
-                i = that._isHorizontal ? 0 : items.length - 1,
-                limit = that._isHorizontal ? items.length : -1,
+                count = items.length,
+                i = that._isHorizontal ? 0 : count - 1,
+                limit = that._isHorizontal ? count : -1,
                 increment = that._isHorizontal ? 1 : -1;
 
-            for (; i - limit != 0 ; i += increment) {
+            for (; i - limit !== 0 ; i += increment) {
                 $(items[i]).attr("title", format(options.tooltip.format, round(titleNumber)));
                 titleNumber += options.smallStep;
             }
@@ -291,7 +292,7 @@
                 item = {},
                 step = round(options.largeStep / options.smallStep);
 
-            if ((1000 * options.largeStep) % (1000 * options.smallStep) == 0) {
+            if ((1000 * options.largeStep) % (1000 * options.smallStep) === 0) {
                 if (that._isHorizontal) {
                     for (i = 0; i < items.length; i = round(i + step)) {
                         item = $(items[i]);
@@ -306,7 +307,7 @@
                         item.addClass("k-tick-large")
                             .html("<span class='k-label'>" + item.attr("title") + "</span>");
 
-                        if (i != 0 && i != items.length - 1) {
+                        if (i !== 0 && i !== items.length - 1) {
                             item.css("line-height", item[that._size]() + "px");
                         }
                     }
@@ -339,9 +340,11 @@
         },
 
         _roundWidths: function(pixelWidthsArray) {
-            var balance = 0;
+            var balance = 0,
+                count = pixelWidthsArray.length,
+                i;
 
-            for (i = 0; i < pixelWidthsArray.length; i++) {
+            for (i = 0; i < count; i++) {
                 balance += (pixelWidthsArray[i] - math.floor(pixelWidthsArray[i]));
                 pixelWidthsArray[i] = math.floor(pixelWidthsArray[i]);
             }
@@ -352,7 +355,7 @@
         },
 
         _addAdditionalSize: function(additionalSize, pixelWidthsArray) {
-            if (additionalSize == 0) {
+            if (additionalSize === 0) {
                 return pixelWidthsArray;
             }
 
@@ -361,7 +364,7 @@
                 i;
 
             for (i = 0; i < additionalSize; i++) {
-                pixelWidthsArray[parseInt(math.round(step * i))] += 1;
+                pixelWidthsArray[parseInt(math.round(step * i), 10)] += 1;
             }
 
             return pixelWidthsArray;
@@ -376,14 +379,14 @@
                 i = 1,
                 lastItem;
 
-            itemsCount += (that._distance / options.smallStep) % 1 == 0 ? 1 : 0;
+            itemsCount += (that._distance / options.smallStep) % 1 === 0 ? 1 : 0;
             pixelWidths.splice(0, 0, pixelWidths[itemsCount - 2] * 2);
             pixelWidths.splice(itemsCount -1, 1, pixelWidths.pop() * 2);
 
             that._pixelSteps = [selection];
             that._values = [val];
 
-            if (itemsCount == 0) {
+            if (itemsCount === 0) {
                 return;
             }
 
@@ -395,7 +398,7 @@
                 i++;
             }
 
-            lastItem = that._distance % options.smallStep == 0 ? itemsCount - 1 : itemsCount;
+            lastItem = that._distance % options.smallStep === 0 ? itemsCount - 1 : itemsCount;
 
             that._pixelSteps[lastItem] = that._maxSelection;
             that._values[lastItem] = options.max;
@@ -416,7 +419,7 @@
                 position = dragableArea.startPoint - mousePosition;
             }
 
-            if (that._maxSelection - ((parseInt(that._maxSelection % step) - 3) / 2) < position) {
+            if (that._maxSelection - ((parseInt(that._maxSelection % step, 10) - 3) / 2) < position) {
                 return options.max;
             }
 
@@ -496,7 +499,8 @@
 
     function createSliderItems (options, distance) {
         var result = "<ul class='k-reset k-slider-items'>",
-            count = math.floor(round(distance / options.smallStep)) + 1;
+            count = math.floor(round(distance / options.smallStep)) + 1,
+            i;
 
         for(i = 0; i < count; i++) {
             result += "<li class='k-tick'>&nbsp;</li>";
@@ -516,16 +520,16 @@
                "</div>";
     }
 
-    function step(step) {
+    function step(stepValue) {
         return function (value) {
-            return value + step;
-        }
+            return value + stepValue;
+        };
     }
 
     function setValue(value) {
         return function () {
             return value;
-        }
+        };
     }
 
     function formatValue(value) {
@@ -723,12 +727,12 @@
 
             if (options.showButtons) {
                 var mouseDownHandler = proxy(function(e, sign) {
-                    if (e.which == 1 || (touch && e.which == 0)) {
+                    if (e.which === 1 || (touch && e.which === 0)) {
                         move(sign);
 
                         this.timeout = setTimeout(proxy(function () {
                             this.timer = setInterval(function () {
-                                move(sign)
+                                move(sign);
                             }, 60);
                         }, this), 200);
                     }
@@ -891,7 +895,7 @@
         function moveSelection (val) {
             var selectionValue = val - options.min,
                 index = that._valueIndex = math.ceil(round(selectionValue / options.smallStep)),
-                selection = parseInt(that._pixelSteps[index]),
+                selection = parseInt(that._pixelSteps[index], 10),
                 selectionDiv = that._trackDiv.find(".k-slider-selection"),
                 halfDragHanndle = parseInt(dragHandle[that._outerSize]() / 2, 10);
 
@@ -1135,10 +1139,10 @@
                 positionLeft = dragHandleOffset.left;
             }
             if (owner._isHorizontal) {
-                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2);
+                positionLeft -= parseInt((that.tooltipDiv.outerWidth() - that.dragHandle[owner._outerSize]()) / 2, 10);
                 positionTop -= that.tooltipDiv.outerHeight() + callout.height() + margin;
             } else {
-                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2);
+                positionTop -= parseInt((that.tooltipDiv.outerHeight() - that.dragHandle[owner._outerSize]()) / 2, 10);
                 positionLeft -= that.tooltipDiv.outerWidth() + callout.width() + margin;
             }
 
@@ -1473,8 +1477,8 @@
                 end = round(end);
             }
 
-            if (start >= options.min && start <= options.max
-            && end >= options.min && end <= options.max && start <= end) {
+            if (start >= options.min && start <= options.max &&
+                end >= options.min && end <= options.max && start <= end) {
                 if (selectionStart != start || selectionEnd != end) {
                     that.element.find("input")
                                 .eq(0).attr("value", formatValue(start))
@@ -1529,8 +1533,8 @@
 
     RangeSlider.Selection = function (dragHandles, that, options) {
         function moveSelection(value) {
-            var value = value || [],
-                selectionStartValue = value[0] - options.min,
+            value = value || [];
+            var selectionStartValue = value[0] - options.min,
                 selectionEndValue = value[1] - options.min,
                 selectionStartIndex = math.ceil(round(selectionStartValue / options.smallStep)),
                 selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
