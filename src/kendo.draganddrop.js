@@ -178,12 +178,14 @@
                 element.on("mousedown selectstart", filter, preventDefault);
             }
 
-            if (support.touch) {
-                that.surface[0].addEventListener("touchend", function(e) {
+            if (support.eventCapture) {
+                function preventIfMoving(e) {
                     if (that.moved) {
                         e.preventDefault();
                     }
-                }, true);
+                };
+
+                that.surface[0].addEventListener(support.mouseup, preventIfMoving, true);
             }
 
             that.bind([
