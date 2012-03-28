@@ -50,7 +50,7 @@
                 ok(changeWasCalled);
             });
 
-            asyncTest("_blur calls popup close", function() {
+            test("_blur calls popup close", 1, function() {
                 var changeWasCalled = false, dropdownlist = new DropDownList(input, {
                     dataSource: ["foo", "bar"]
                 });
@@ -60,7 +60,6 @@
 
                 dropdownlist.popup.bind("close", function() {
                     ok(true);
-                    start();
                 });
 
                 dropdownlist._blur();
@@ -223,19 +222,18 @@
                 ok(origCalled);
             });
 
-            asyncTest("open event when click arrow", function() {
+            test("open event when click arrow", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     open: function() {
                         ok(true);
-                        start();
                     }
                 });
 
                 input.data("kendoDropDownList").wrapper.trigger(CLICK);
             });
 
-            asyncTest("open event should be cancellable", function() {
+            asyncTest("open event should be cancellable", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     open: function(e) {
@@ -253,24 +251,22 @@
                 }, 200);
             });
 
-            asyncTest("open event when ALT + down arrow", function() {
+            test("open event when ALT + down arrow", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     open: function() {
                         ok(true);
-                        start();
                     }
                 });
 
                 input.trigger({ type: "keydown", keyCode: kendo.keys.DOWN, altKey: true } );
             });
 
-            asyncTest("close event when click arrow", function() {
+            test("close event when click arrow", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     close: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -279,7 +275,7 @@
                 dropdownlist.wrapper.trigger(CLICK);
             });
 
-            asyncTest("close event should be cancellable", function() {
+            asyncTest("close event should be cancellable", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     dataSource: [{text: "foo"}, {text: "bar"}],
@@ -299,13 +295,12 @@
                 }, 200);
             });
 
-            asyncTest("close event when ALT + up arrow", function() {
+            test("close event when ALT + up arrow", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     dataSource: [{text: "foo"}, {text: "bar"}],
                     close: function() {
                         ok(true);
-                        start();
                     }
                 });
 
@@ -314,12 +309,11 @@
                 input.trigger({ type: "keydown", keyCode: kendo.keys.UP, altKey: true } );
             });
 
-            asyncTest("close event when select item", function() {
+            test("close event when select item", 1, function() {
                 input.kendoDropDownList({
                     dataSource: ["foo", "bar"],
                     close: function() {
                         ok(true);
-                        start();
                     }
                 });
 
