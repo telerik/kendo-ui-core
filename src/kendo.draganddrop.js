@@ -146,6 +146,7 @@
             var that = this,
                 eventMap = {},
                 filter,
+                preventIfMoving,
                 ns = "." + kendo.guid();
 
             options = options || {};
@@ -179,7 +180,7 @@
             }
 
             if (support.eventCapture) {
-                function preventIfMoving(e) {
+                preventIfMoving = function (e) {
                     if (that.moved) {
                         e.preventDefault();
                     }
