@@ -192,7 +192,7 @@
             * @name kendo.ui.RangeSlider#change
             * @event
             * @param {Event} e
-            * @param {Number} e.values Represents the updated array of values of the first and second drag handle.
+            * @param {Number} e.value Represents the updated array of values of the first and second drag handle.
             **/
             CHANGE,
 
@@ -209,7 +209,7 @@
             * @name kendo.ui.RangeSlider#slide
             * @event
             * @param {Event} e
-            * @param {Number} e.values Represents an array of values of the current positions of the first and second drag handle.
+            * @param {Number} e.value Represents an array of values of the current positions of the first and second drag handle.
             **/
             SLIDE
         ],
@@ -844,12 +844,12 @@
                 if (options.value != value) {
                     that.element.attr("value", formatValue(value));
                     options.value = value;
-                    that.refresh();
+                    that._refresh();
                 }
             }
         },
 
-        refresh: function () {
+        _refresh: function () {
             this.trigger(MOVE_SELECTION, { value: this.options.value });
         },
 
@@ -942,7 +942,8 @@
                 formattedSelectionEnd;
 
             if (!options.enabled) {
-                return false;
+                e.preventDefault();
+                return;
             }
 
             owner.element.unbind(MOUSE_OVER);
@@ -1036,7 +1037,10 @@
                             that.selectionStart = that.selectionEnd = that.val;
                         }
                     }
-                    slideParams = { values: [that.selectionStart, that.selectionEnd] };
+                    slideParams = {
+                        values: [that.selectionStart, that.selectionEnd],
+                        value: [that.selectionStart, that.selectionEnd]
+                    };
                 } else {
                     slideParams = { value: that.val };
                 }
@@ -1073,7 +1077,7 @@
         },
 
         dragcancel: function(e) {
-            this.owner.refresh();
+            this.owner._refresh();
             return this._end();
         },
 
@@ -1094,7 +1098,7 @@
             var that = this,
                 owner = that.owner;
 
-            if (owner.options.tooltip.enabled) {
+            if (owner.options.tooltip.enabled && owner.options.enabled) {
                 that.tooltipDiv.remove();
             }
 
@@ -1422,64 +1426,80 @@
 
         _update: function (selectionStart, selectionEnd) {
             var that = this,
-                values = that.values();
+                values = that.value();
 
             var change = values[0] != selectionStart || values[1] != selectionEnd;
 
-            that.values(selectionStart, selectionEnd);
+            that.value([selectionStart, selectionEnd]);
 
             if (change) {
-                that.trigger(CHANGE, { values: [selectionStart, selectionEnd] });
+                that.trigger(CHANGE, {
+                    values: [selectionStart, selectionEnd],
+                    value: [selectionStart, selectionEnd]
+                });
             }
         },
 
         /**
          *
-         * The value method gets or sets the start and end selection values of the <strong>RangeSlider</strong>. It
-         * accepts a string, a number, or an array as parameters, and returns an object array with the start and end
+         * The value method gets or sets the start and end values of the <strong>RangeSlider</strong>. It
+         * accepts an array as parameter, and returns an object array with the start and end
          * selection values.
          *
          * @example
          * var rangeSider = $("#rangeSlider").data("kendoRangeSlider");
-         * rangeSlider.values();
+         * rangeSlider.value();
          *
          */
-        values: function () {
+        value: function(value) {
+            if (value && value.length) {
+                this._value(value[0], value[1]);
+            } else {
+                return this._value();
+            }
+        },
+
+        _value: function(start, end) {
             var that = this,
                 options = that.options,
-                selectionStart = 0,
-                selectionEnd = 0;
+                selectionStart = options.selectionStart,
+                selectionEnd = options.selectionEnd;
 
-            if (arguments.length == 0) {
-                return [options.selectionStart, options.selectionEnd];
-            } else if (arguments.length == 1 && $.isArray(arguments[0])) {
-                selectionStart = arguments[0][0];
-                selectionEnd = arguments[0][1];
+
+            if (isNaN(start) && isNaN(end)) {
+                return [selectionStart, selectionEnd];
             } else {
-                selectionStart = round(arguments[0]);
-                selectionEnd = round(arguments[1]);
+                start = round(start);
+                end = round(end);
             }
 
-            if (selectionStart >= options.min && selectionStart <= options.max
-            && selectionEnd >= options.min && selectionEnd <= options.max && selectionStart <= selectionEnd) {
-                if (options.selectionStart != selectionStart || options.selectionEnd != selectionEnd) {
+            if (start >= options.min && start <= options.max
+            && end >= options.min && end <= options.max && start <= end) {
+                if (selectionStart != start || selectionEnd != end) {
                     that.element.find("input")
-                                .eq(0).attr("value", formatValue(selectionStart))
+                                .eq(0).attr("value", formatValue(start))
                                 .end()
-                                .eq(1).attr("value", formatValue(selectionEnd));
+                                .eq(1).attr("value", formatValue(end));
 
-                    options.selectionStart = selectionStart;
-                    options.selectionEnd = selectionEnd;
-                    that.refresh();
+                    options.selectionStart = start;
+                    options.selectionEnd = end;
+                    that._refresh();
                 }
             }
         },
 
-        refresh: function() {
+        values: function (start, end) {
+            return this._value(start, end);
+        },
+
+        _refresh: function() {
             var that = this,
                 options = that.options;
 
-            that.trigger(MOVE_SELECTION, { values: [options.selectionStart, options.selectionEnd] });
+            that.trigger(MOVE_SELECTION, {
+                values: [options.selectionStart, options.selectionEnd],
+                value: [options.selectionStart, options.selectionEnd]
+            });
 
             if (options.selectionStart == options.max && options.selectionEnd == options.max) {
                 that._setZIndex("firstHandle");
@@ -1508,9 +1528,10 @@
     });
 
     RangeSlider.Selection = function (dragHandles, that, options) {
-        function moveSelection(values) {
-            var selectionStartValue = values[0] - options.min,
-                selectionEndValue = values[1] - options.min,
+        function moveSelection(value) {
+            var value = value || [],
+                selectionStartValue = value[0] - options.min,
+                selectionEndValue = value[1] - options.min,
                 selectionStartIndex = math.ceil(round(selectionStartValue / options.smallStep)),
                 selectionEndIndex = math.ceil(round(selectionEndValue / options.smallStep)),
                 selectionStart = that._pixelSteps[selectionStartIndex],
@@ -1536,7 +1557,7 @@
             selectionDiv.css(that._position, selectionPosition - 1);
         }
 
-        moveSelection(that.values());
+        moveSelection(that.value());
 
         that.bind([ CHANGE, SLIDE, MOVE_SELECTION ], function (e) {
             moveSelection(e.values);

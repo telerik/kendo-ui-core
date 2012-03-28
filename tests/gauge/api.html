@@ -19,9 +19,8 @@
                 gaugeElement,
                 gauge;
 
-            // Tests expect particular font size
-            dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
+<<<<<<< HEAD
             function createGauge() {
                 gaugeElement = $("<div />").kendoRadialGauge({
                     pointer: {
@@ -37,7 +36,7 @@
                 gauge = gaugeElement.data("kendoRadialGauge");
             }
 
-            module("Gauge API", {
+            module("Gauge API / Radial", {
                 setup: function() {
                     createGauge();
                 }
@@ -89,6 +88,38 @@
                 var oldView = gauge._view;
                 gauge.svg();
                 ok(oldView === gauge._view);
+
+            module("Gauge API / Linear", {
+                setup: function() {
+                    gaugeElement = $("<div />").kendoLinearGauge({
+                        pointer: {
+                            value: 50
+                        }
+                    });
+
+                    gauge = gaugeElement.data("kendoLinearGauge");
+                }
+            });
+
+            test("value() method calls pointer.value()", function() {
+                var calls = 0,
+                    usedValue;
+
+                gauge._pointers[0].value = function(value) {
+                    calls++;
+                    usedValue = value;
+                };
+
+                gauge.value(10);
+
+                equal(calls, 1);
+                equal(usedValue, 10);
+            });
+
+            test("value() with no args returns pointer value", function() {
+                gauge.value(11);
+
+                equal(gauge.value(), 11);
             });
 
         </script>

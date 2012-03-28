@@ -68,13 +68,13 @@
                                     return;
                                 }
 
-                                var endValue = getValues()[1];
-                                rangeSlider.values(startValue, endValue);
+                                var endValue = getValue()[1];
+                                rangeSlider.value([startValue, endValue]);
                             }
                         },
                         setEndValue = function(e) {
                             if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
-                                var startValue = getValues()[0];
+                                var startValue = getValue()[0];
                                 var endValue = parseInt($("#endValue").val(), 10);
 
                                 if (isNaN(endValue) || endValue < 0 || endValue > 10) {
@@ -98,8 +98,8 @@
                         slider.disable();
                     });
 
-                    function getValues() {
-                        return rangeSlider.values();
+                    function getValue() {
+                        return rangeSlider.value();
                     }
 
                     $("#setSliderValue").click(setValue);
@@ -112,7 +112,7 @@
                     $("#endValue").keypress(setEndValue);
 
                     $("#getRangeSliderValue").click(function() {
-                        alert(getValues());
+                        alert(getValue());
                     });
 
                     $("#enableRangeSlider").click(function() {
