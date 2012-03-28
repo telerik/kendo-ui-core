@@ -68,7 +68,7 @@
                 combobox.input.type("b");
                 combobox.search("b");
 
-                equal(combobox.input.val(), "Bar");
+                equal(combobox.input.val(), "bar");
             });
 
             test("suggestion selects the remainder of the word", function() {
@@ -146,7 +146,7 @@
                     }).data("kendoComboBox");
 
                 combobox.suggest(combobox.ul.children(":first"));
-                equal(combobox.text(), "Item1");
+                equal(combobox.text(), "item1");
             });
 
             test("suggest() should suggest correctly", function() {
@@ -211,7 +211,7 @@
                 combobox.suggest("Cotton");
 
                 equal(combobox.current().index(), 0);
-                equal(combobox.text(), "Cotton");
+                equal(combobox.text(), "cotton");
                 equal(combobox.input.selectedText(), "tton");
             });
 

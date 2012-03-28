@@ -658,7 +658,7 @@
                 }
 
                 if (options.suggest && that.input.val()) {
-                    that.suggest(that._current || $(ul.firstChild));
+                    that.suggest($(ul.firstChild));
                 }
             }
 
@@ -773,7 +773,7 @@
             word = word || "";
 
             if (typeof word !== "string") {
-                idx = word.index();
+                idx = List.inArray(word[0], that.ul[0]);
 
                 if (idx > -1) {
                     word = that._text(that.dataSource.view()[idx]);
@@ -796,12 +796,7 @@
             }
 
             if (value.length !== caret || !word) {
-                if (that.options.highlightFirst) {
-                    that.text(value);
-                } else {
-                    element.value = value;
-                }
-
+                element.value = value;
                 List.selectText(element, caret, value.length);
             }
         },
