@@ -2284,7 +2284,7 @@ function pad(number) {
     kendo.notify = noop;
 
     var templateRegExp = /template$/i,
-        jsonRegExp = /^(?:\{.*\}|\[.*\])$/,
+        jsonRegExp = /^(?:\{(?:.|\n)*\}|\[(?:.|\n)*\])$/,
         dashRegExp = /([A-Z])/g;
 
     function parseOption(element, option) {
