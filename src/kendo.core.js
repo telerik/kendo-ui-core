@@ -1771,6 +1771,13 @@ function pad(number) {
         support.devicePixelRatio = window.devicePixelRatio === undefined ? 1 : window.devicePixelRatio;
 
         /**
+         * Indicates the browser support for event capturing
+         * @name kendo.support.eventCapture
+         * @property {Boolean}
+         */
+        support.eventCapture = document.documentElement.addEventListener;
+
+        /**
          * Indicates whether the browser supports input placeholder.
          * @name kendo.support.placeholder
          * @property {Boolean}
