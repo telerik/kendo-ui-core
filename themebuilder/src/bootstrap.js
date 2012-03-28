@@ -1,8 +1,8 @@
 // bootstrapper file for Kendo ThemeBuilder
 (function() {
     var doc = document,
+        kendo = window.kendo,
         UNDEFINED = "undefined",
-        head = doc.getElementsByTagName("head")[0],
         applicationRoot = (function() {
             var scripts = document.getElementsByTagName("script"),
                 path = scripts[scripts.length-1].src.split('?')[0];

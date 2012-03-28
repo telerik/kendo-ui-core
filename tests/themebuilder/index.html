@@ -30,6 +30,9 @@
         <script src="../../themebuilder/src/scripts/themebuilder.js"></script>
         <script src="../../themebuilder/src/scripts/colorengine.js"></script>
 
+        <script src="../jshint/jshint.js"></script>
+        <script src="../qhint.js"></script>
+
         <script>
             var ThemeBuilder = kendo.ThemeBuilder,
                 LessConstants = kendo.LessConstants;
@@ -546,6 +549,14 @@
                 equals(hex, "#000000");
             });
 
+            module("lint");
+
+            qHint("../../themebuilder/src/bootstrap.js", {
+                scripturl: true
+            });
+            qHint("../../themebuilder/src/scripts/themebuilder.js");
+            qHint("../../themebuilder/src/scripts/colorengine.js");
+            qHint("../../themebuilder/src/scripts/constants.js");
         </script>
 
         <div id="qunit-fixture"> </div>

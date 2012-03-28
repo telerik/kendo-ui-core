@@ -7,7 +7,6 @@
         CHANGE = "change",
         doc = (window.parent || window).document,
         ui = kendo.ui,
-        Widget = ui.Widget,
         colorPicker = "ktb-colorpicker",
         numeric = "ktb-numeric",
         propertyEditors = {
@@ -93,7 +92,10 @@
         rgbValuesRe = /rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi,
         toHex = function(value) {
             return value.replace(rgbValuesRe, function(match, r, g, b) {
-                function pad(x) { return x.length == 1 ? "0" + x : x }
+                function pad(x) {
+                    return x.length == 1 ? "0" + x : x;
+                }
+
                 return "#" + pad((+r).toString(16)) +
                              pad((+g).toString(16)) +
                              pad((+b).toString(16));
@@ -116,7 +118,7 @@
 
             serialize: function() {
                 return map(this.constants, function(item, key) {
-                    return key + ": " + item.value + ";"
+                    return key + ": " + item.value + ";";
                 }).join("\n");
             },
 
@@ -148,7 +150,6 @@
 
             infer: function() {
                 var constants = this.constants, constant,
-                    c, i,
                     property, value, target,
                     cachedPrototype = $("<div style='border-style:solid;' />").appendTo(doc.body),
                     prototype;
@@ -240,8 +241,9 @@
 
                 templateInfo = that.templateInfo = templateInfo || {};
 
-                var constants = that.constants = templateInfo.constants,
-                    constantsHierarchy = that.constantsHierarchy = templateInfo.constantsHierarchy;
+                var constants = that.constants = templateInfo.constants;
+
+                that.constantsHierarchy = templateInfo.constantsHierarchy;
 
                 if (constants) {
                     constants.infer();
@@ -358,9 +360,11 @@
             },
             _generateTheme: function(callback) {
                 var constants = this.constants.serialize();
-                (new less.Parser()).parse(
+                (new window.less.Parser()).parse(
                     constants + this.templateInfo.template,
                     function (err, tree) {
+                        var console = window.console;
+
                         if (err && console) {
                             return console.error(err);
                         }
@@ -479,4 +483,4 @@
         LessConstants: LessConstants,
         ThemeBuilder: ThemeBuilder
     });
-})(jQuery, kendo);
+})(jQuery, window.kendo);

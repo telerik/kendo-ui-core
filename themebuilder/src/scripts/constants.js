@@ -1,5 +1,6 @@
 (function(){
     var context = window.parent,
+        kendo = window.kendo,
         constant = function(target, property, values){
             return {
                 target: target,
@@ -36,7 +37,7 @@
             "@texture-url": constant(".k-header", "background-image", [
                 { text: "flat", value: "none" },
                 { text: "highlight", value: "url('" + applicationRoot + "styles/textures/highlight.png')" },
-                { text: "glass", value: "url('" + applicationRoot + "styles/textures/glass.png')" },
+                { text: "glass", value: "url('" + applicationRoot + "styles/textures/glass.png')" }
             ]),
 
             "@widget-background-color":         constant(".k-widget", BGCOLOR),
@@ -161,12 +162,12 @@
             "Tooltips": {
                 "@tooltip-background-color":      "Background",
                 "@tooltip-border-color":          "Border color",
-                "@tooltip-text-color":            "Text color",
+                "@tooltip-text-color":            "Text color"
             },
             "Validation": {
                 "@validation-background-color":   "Background",
                 "@validation-border-color":       "Border color",
-                "@validation-text-color":         "Text color",
+                "@validation-text-color":         "Text color"
             },
             "Misc": {
                 "@main-border-radius":            "Border radius",
