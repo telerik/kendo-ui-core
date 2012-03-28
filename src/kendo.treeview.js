@@ -297,7 +297,7 @@
          *             duration: 200,
          *             hide: true,
          *             show: false
-         *         }
+         *         },
          *         collapse: {
          *             duration: 200,
          *             effects: "expandVertical",
