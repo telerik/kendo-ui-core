@@ -1,6 +1,5 @@
 (function ($, undefined) {
     var kendo = window.kendo,
-        keys = kendo.keys,
         touch = kendo.support.touch,
         Widget = kendo.ui.Widget,
         proxy = $.proxy,
