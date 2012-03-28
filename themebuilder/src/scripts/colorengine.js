@@ -2,8 +2,7 @@
 
     /* code can be improved tremendously if there's a Color object with enough conversion functions */
 
-    function ColorEngine() {
-    }
+    function ColorEngine() {}
 
     $.extend(ColorEngine, {
         _CssRgb: /rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i,
@@ -44,13 +43,19 @@
                 green = rgb.green.toString(16),
                 blue = rgb.blue.toString(16);
 
-            if (red.length < 2) result[result.length] = "0";
+            if (red.length < 2) {
+                result[result.length] = "0";
+            }
             result[result.length] = red;
 
-            if (green.length < 2) result[result.length] = "0";
+            if (green.length < 2) {
+                result[result.length] = "0";
+            }
             result[result.length] = green;
 
-            if (blue.length < 2) result[result.length] = "0";
+            if (blue.length < 2) {
+                result[result.length] = "0";
+            }
             result[result.length] = blue;
 
             return result.join('');
@@ -76,7 +81,7 @@
         },
 
         css2hex: function(cssColor) {
-            if (cssColor == "" || /rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d*(\.\d+)?)\s*\)/i.test(cssColor)) {
+            if (!cssColor || /rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d*(\.\d+)?)\s*\)/i.test(cssColor)) {
                 return cssColor || "#000000";
             }
 
@@ -118,51 +123,67 @@
                 return result;
             }
 
-            if (result.l < 0.5)
+            if (result.l < 0.5) {
                 result.s = (delta / (min + max));
-            else
+            } else {
                 result.s = (delta / (2.0 - max - min));
+            }
 
-            if (r == max)
+            if (r == max) {
                 result.h = ((((max - b) / 6.0) + (delta / 2.0)) - (((max - g) / 6.0) + (delta / 2.0))) / delta;
-            else if (g == max)
+            } else if (g == max) {
                 result.h = (1.0 / 3.0) + ((((max - r) / 6.0) + (delta / 2.0)) - (((max - b) / 6.0) + (delta / 2.0))) / delta;
-            else if (b == max)
+            } else if (b == max) {
                 result.h = (2.0 / 3.0) + ((((max - g) / 6.0) + (delta / 2.0)) - (((max - r) / 6.0) + (delta / 2.0))) / delta;
+            }
 
-            if (result.h < 0.0)
+            if (result.h < 0.0) {
                 result.h += 1.0;
-            if (result.h > 1.0)
+            }
+
+            if (result.h > 1.0) {
                 result.h -= 1.0;
+            }
 
             return result;
         },
 
         hsl2rgb: function(h, s, l) {
             var ConvertHueToRGB = function(m1, m2, hue) {
-                if (hue < 0.0)
+                if (hue < 0.0) {
                     hue += 1.0;
-                if (hue > 1.0)
+                }
+
+                if (hue > 1.0) {
                     hue -= 1.0;
-                if ((6.0 * hue) < 1.0)
+                }
+
+                if ((6.0 * hue) < 1.0) {
                     return (m1 + 6.0 * (m2 - m1) * hue);
-                if ((2.0 * hue) < 1.0)
+                }
+
+                if ((2.0 * hue) < 1.0) {
                     return (m2);
-                if ((3.0 * hue) < 2.0)
+                }
+
+                if ((3.0 * hue) < 2.0) {
                     return (m1 + 6.0 * (m2 - m1) * (2.0 / 3.0 - hue));
+                }
 
                 return (m1);
             };
 
-            if (s === 0)
+            if (s === 0) {
                 return { r: l, g: l, b: l };
+            }
 
             var m2;
 
-            if (l <= 0.5)
+            if (l <= 0.5) {
                 m2 = l * (s + 1.0);
-            else
+            } else {
                 m2 = (l + s) - (l * s);
+            }
 
             var m1 = 2.0 * l - m2;
 
