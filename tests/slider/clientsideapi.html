@@ -18,7 +18,7 @@
             var Slider = kendo.ui.Slider,
                 input;
 
-            module("Slider/ClientSideAPI", {
+            module("slider/clientsideapi", {
                 setup: function () {
                     input = $("<input />").appendTo(document.body)[0];
                 },
@@ -178,7 +178,7 @@
             var RangeSlider = kendo.ui.RangeSlider,
                 div;
 
-            module("RangeSlider/ClientSideAPI", {
+            module("rangeslider/clientsideapi", {
                 setup: function () {
                     div = $("<div><input /><input /></div>").appendTo(document.body);
                 },
@@ -195,9 +195,9 @@
                 var rangeSlider = newRangeSlider(),
                     values = [ 0, 9 ];
 
-                rangeSlider.values(values);
+                rangeSlider.value(values);
 
-                deepEqual(rangeSlider.values(), values);
+                deepEqual(rangeSlider.value(), values);
             });
 
             test("values should return array of selectionStart and selectionEnd", function () {
