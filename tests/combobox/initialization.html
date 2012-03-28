@@ -424,7 +424,7 @@
                 equal(combobox.input.val(), "");
             });
 
-            asyncTest("list.mousedown should focus input", function() {
+            test("list.mousedown should focus input", function() {
                 var data = [{text: 1, value: 1}, {text:2, value:2}],
                     combobox = new ComboBox(input, {
                          dataSource: data
@@ -434,14 +434,10 @@
                 combobox.open();
                 combobox.list.mousedown();
 
-                setTimeout(function() {
-                    start();
-                    equal(document.activeElement.nodeName, "INPUT");
-                }, 100);
-
+                equal(document.activeElement.nodeName, "INPUT");
             });
 
-            asyncTest("form reset support", function() {
+            asyncTest("form reset support", 2, function() {
                 input.attr("value", "123");
 
                 var form = $("<form/>").appendTo(document).append(input),
@@ -457,7 +453,7 @@
                     equal(combobox.element.val(), "123");
                     equal(combobox.input.val(), "123");
                     start();
-                }, 100);
+                }, 150);
             });
 
             test("resetting dataSource detaches the previouse events", function() {

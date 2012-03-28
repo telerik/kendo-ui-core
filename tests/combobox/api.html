@@ -21,7 +21,7 @@
         <script>
 
             QUnit.config.reorder = false;
-            QUnit.config.timeOut = 500;
+            QUnit.config.timeOut = 800;
 
             var ComboBox = kendo.ui.ComboBox,
             data = [{text: "Foo", value: 1}, {text:"Bar", value:2}],
@@ -159,22 +159,21 @@
                 combobox._change();
             });
 
-            asyncTest("open should call _scroll method", function () {
+            asyncTest("open should call _scroll method", 1, function () {
                 combobox.select(0);
                 combobox._scroll = function() { ok(true); start(); };
                 combobox.open();
             });
 
-            asyncTest("open should open popup", function () {
+            test("open should open popup", 1,  function () {
                 combobox.popup.bind("open", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.open();
             });
 
-            asyncTest("open should bind and open after this if no items", function () {
+            test("open should bind and open after this if no items", 1, function () {
                 var combobox = input.kendoComboBox({
                     autoBind: false,
                     dataTextField: "text",
@@ -184,16 +183,14 @@
 
                 combobox.popup.bind("open", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.open();
             });
 
-            asyncTest("close should close popup", function () {
+            test("close should close popup", 1, function () {
                 combobox.popup.bind("close", function(){
                     ok(true);
-                    start();
                 });
 
                 combobox.open();
@@ -233,7 +230,7 @@
                 equal(combobox.text(), "custom");
             });
 
-            asyncTest("text should not change selection if selected item is equal to input.value", function() {
+            asyncTest("text should not change selection if selected item is equal to input.value", 2, function() {
                 var combobox = $("<input/>").kendoComboBox({
                     dataTextField: "text",
                     dataValueField: "value",
