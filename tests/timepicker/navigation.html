@@ -115,7 +115,7 @@
                 ok(true);
             });
 
-            asyncTest("move should call change handler", function() {
+            test("move should call change handler", 1, function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -124,7 +124,6 @@
                     format: "hh:mm tt",
                     change: function(value) {
                         equal(value, "12:00 AM");
-                        start();
                     }
                 });
 
@@ -135,7 +134,7 @@
                 tv.move({keyCode: keys.UP, preventDefault: $.noop});
             });
 
-            asyncTest("click item should call change handler", function() {
+            test("click item should call change handler", 1, function() {
                 var tv = new TimeView({
                     anchor: input,
                     min: MIDNIGHT,
@@ -144,7 +143,6 @@
                     format: "hh:mm tt",
                     change: function(value) {
                         equal(value, "12:00 AM");
-                        start();
                     }
                 });
 
@@ -191,21 +189,17 @@
                 equal(document.activeElement, input[0]);
             });
 
-            asyncTest("tabbing out should update timeView", function() {
+            test("tabbing out should update timeView", 1, function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
                 timepicker.open();
 
                 input.focus().val("2:00 PM").blur();
 
-                setTimeout(function() {
-                    equal(timepicker.timeView.ul.find("li.k-state-selected").text(), "2:00 PM");
-                    start();
-                }, 200);
-
+                equal(timepicker.timeView.ul.find("li.k-state-selected").text(), "2:00 PM");
             });
 
-            asyncTest("should clear selected item if no such time", function() {
+            test("should clear selected item if no such time", 3, function() {
                 var timepicker = input.kendoTimePicker({
                     value: new Date(2000, 10, 10, 10, 0, 0)
                 }).data("kendoTimePicker");
@@ -216,14 +210,11 @@
 
                 input.focus().val("2:33 PM").blur();
 
-                setTimeout(function() {
-                    ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
-                    equal(timepicker.timeView._value, "2:33 PM");
-                    start();
-                }, 200);
+                ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
+                equal(timepicker.timeView._value, "2:33 PM");
             });
 
-            asyncTest("do not clear input if not valid time", function() {
+            test("do not clear input if not valid time", function() {
                 var timepicker = input.kendoTimePicker({
                     value: new Date(2000, 10, 10, 10, 0, 0)
                 }).data("kendoTimePicker");
@@ -232,13 +223,10 @@
 
                 input.focus().val("invalid").blur();
 
-                setTimeout(function() {
-                    ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
-                    equal(timepicker.timeView._value, null);
-                    equal(timepicker._value, null);
-                    equal(input.val(), "invalid");
-                    start();
-                }, 200);
+                ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
+                equal(timepicker.timeView._value, null);
+                equal(timepicker._value, null);
+                equal(input.val(), "invalid");
             });
 
             test("Enter should update value of the timepicker", function() {
@@ -256,7 +244,7 @@
                 equal(timepicker.timeView._value, "12:22 PM");
             });
 
-            asyncTest("press enter should call preventDefault when popup is visible", function() {
+            asyncTest("press enter should call preventDefault when popup is visible", 1, function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
                 timepicker.open();
