@@ -24,7 +24,7 @@
                 DatePicker = kendo.ui.DatePicker,
                 div, input;
 
-            QUnit.config.testTimeout = 500;
+            QUnit.config.testTimeout = 800;
             QUnit.config.reorder = false;
 
             module("kendo.ui.DatePicker initialization", {
@@ -39,7 +39,7 @@
             });
 
             //DateView
-            test("DateView should re assign shared calendar", function() {
+            test("DateView re-assigns shared calendar", function() {
                 var options = {
                     anchor: $("<input/>"),
                     value: new Date (2000, 10, 10),
@@ -77,7 +77,7 @@
                 equal(popup._events["close"][0], dv2.options.close);
             });
 
-            test("DateView should call calendar.navigate correctly", function() {
+            test("DateView calls calendar.navigate method", 1, function() {
                 var dv1 = new DateView({
                     footer: '#= kendo.toString(data,"D") #',
                     anchor: $("<input/>"),
