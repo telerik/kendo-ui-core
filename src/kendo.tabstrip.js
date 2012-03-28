@@ -219,8 +219,8 @@
                     result += " k-state-default";
                 }
 
-                if (index == 0) {
-                    result += " k-first"
+                if (index === 0) {
+                    result += " k-first";
                 }
 
                 if (index == group.length-1) {
@@ -501,7 +501,7 @@
             var selectedItems = that.wrapper.find("li." + ACTIVESTATE),
                 content = $(that.contentElement(selectedItems.parent().children().index(selectedItems)));
 
-            if (content.length > 0 && content[0].childNodes.length == 0) {
+            if (content.length > 0 && content[0].childNodes.length) {
                 that.activateTab(selectedItems.eq(0));
             }
 
@@ -535,7 +535,6 @@
 
         refresh: function(e) {
             var that = this,
-                html = "",
                 options = that.options,
                 text = kendo.getter(options.dataTextField),
                 content = kendo.getter(options.dataContentField),
@@ -809,7 +808,7 @@
         select: function (element) {
             var that = this;
 
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 return that.wrapper.find("li." + ACTIVESTATE);
             }
 
@@ -1182,8 +1181,7 @@
 
             that.tabGroup.find(".k-item").each(function(idx) {
                 var currentContent = contentElements.eq(idx),
-                    id = tabStripID + "-" + (idx+1),
-                    href = $(this).children("." + LINK).attr(HREF);
+                    id = tabStripID + "-" + (idx+1);
 
                 if (!currentContent.length && contentUrls[idx]) {
                     $("<div id='"+ id +"' class='" + CONTENT + "'/>").appendTo(that.wrapper);
@@ -1327,7 +1325,7 @@
             // handle content elements
             var contentAnimators = that.contentAnimators;
 
-            if (contentAnimators.length == 0) {
+            if (contentAnimators.length === 0) {
                 oldTab.removeClass(TABONTOP);
                 item.addClass(TABONTOP) // change these directly to bring the tab on top.
                     .css("z-index");
@@ -1344,7 +1342,7 @@
             // find associated content element
             var content = $(that.contentElement(itemIndex));
 
-            if (content.length == 0) {
+            if (content.length === 0) {
                 visibleContents
                     .removeClass( ACTIVESTATE )
                     .kendoStop(true, true)
@@ -1382,11 +1380,12 @@
                     if (!isAjaxContent) {
                         showContentElement();
                         that.trigger("change");
-                    } else
+                    } else {
                         that.ajaxRequest(item, content, function () {
                             showContentElement();
                             that.trigger("change");
                         });
+                    }
                 };
 
             visibleContents
@@ -1421,7 +1420,9 @@
          *
          */
         contentElement: function (itemIndex) {
-            if (isNaN(itemIndex - 0)) return;
+            if (isNaN(itemIndex - 0)) {
+                return;
+            }
 
             var contentElements = this.contentElements,
                 idTest = new RegExp("-" + (itemIndex + 1) + "$");
@@ -1435,15 +1436,16 @@
 
         ajaxRequest: function (element, content, complete, url) {
             element = this.tabGroup.find(element);
-            if (element.find(".k-loading").length)
+            if (element.find(".k-loading").length) {
                 return;
+            }
 
             var that = this,
                 link = element.find("." + LINK),
                 data = {},
                 statusIcon = null,
                 loadingIconTimeout = setTimeout(function () {
-                    statusIcon = $("<span class='k-icon k-loading'/>").prependTo(link)
+                    statusIcon = $("<span class='k-icon k-loading'/>").prependTo(link);
                 }, 100);
 
             element.attr("data-in-request", true);
@@ -1490,8 +1492,7 @@
             options = extend({ tabStrip: {}, group: {} }, options);
 
             var empty = templates.empty,
-                item = options.item,
-                tabStrip = options.tabStrip;
+                item = options.item;
 
             return templates.item(extend(options, {
                 image: item.imageUrl ? templates.image : empty,

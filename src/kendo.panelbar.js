@@ -207,7 +207,6 @@
         VISIBLE = ":visible",
         EMPTY = ":empty",
         SINGLE = "single",
-        animating = false,
 
         templates = {
             content: template(
@@ -249,8 +248,8 @@
                     result += " k-state-default";
                 }
 
-                if (index == 0) {
-                    result += " k-first"
+                if (index === 0) {
+                    result += " k-first";
                 }
 
                 if (index == group.length-1) {
@@ -1006,8 +1005,9 @@
                 inserted.group.append(this);
 
                 var contents = inserted.contents[idx];
-                if (contents)
+                if (contents) {
                     $(this).append(contents);
+                }
 
                 updateFirstLast(this);
             });
@@ -1074,8 +1074,9 @@
                 referenceItem.before(this);
 
                 var contents = inserted.contents[idx];
-                if (contents)
+                if (contents) {
                     $(this).append(contents);
+                }
 
                 updateFirstLast(this);
             });
@@ -1130,8 +1131,9 @@
                 referenceItem.after(this);
 
                 var contents = inserted.contents[idx];
-                if (contents)
+                if (contents) {
                     $(this).append(contents);
+                }
 
                 updateFirstLast(this);
             });
@@ -1376,7 +1378,9 @@
                 return;
             }
 
-            visibility && element.css("height", element.height()); // Set initial height on visible items (due to a Chrome bug/feature).
+            if (visibility) { // Set initial height on visible items (due to a Chrome bug/feature).
+                element.css("height", element.height());
+            }
             element.css("height");
 
             element
@@ -1404,12 +1408,12 @@
 
             if (item.find("> ." + LINK).hasClass("k-header")) {
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
-                if (groups.is(VISIBLE) || groups.length == 0) {
+                if (groups.is(VISIBLE) || groups.length === 0) {
                     return true;
                 } else {
                     var children = $(that.element).children();
                     children.find(GROUPS).add(children.find(CONTENTS))
-                            .filter(function () { return $(this).is(VISIBLE) })
+                            .filter(function () { return $(this).is(VISIBLE); })
                             .each(function (index, content) {
                                 that._toggleGroup($(content), true);
                             });
@@ -1467,8 +1471,7 @@
             options = extend({ panelBar: {}, group: {} }, options);
 
             var empty = templates.empty,
-                item = options.item,
-                panelBar = options.panelBar;
+                item = options.item;
 
             return templates.item(extend(options, {
                 image: item.imageUrl ? templates.image : empty,
