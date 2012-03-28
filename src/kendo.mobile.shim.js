@@ -30,9 +30,10 @@
 
             that.popup = new Popup(element, {
                 anchor: shim,
+                appendTo: shim,
                 origin: "bottom left",
                 position: "bottom left",
-                animation: { open: { effects: "slideIn:up", duration: 2000 } }
+                animation: { open: { effects: "slideIn:up" } }
             });
         },
 
