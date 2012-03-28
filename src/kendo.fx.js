@@ -877,7 +877,7 @@
 
             that.duration = options.duration || 300;
 
-            that.tick = that._easeProxy(options.ease || Ease.easeOutQuad);
+            that.tick = that._easeProxy(options.ease);
 
             that.startDate = +new Date();
             that.start();
