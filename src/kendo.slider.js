@@ -103,7 +103,6 @@
     var kendo = window.kendo,
         Widget = kendo.ui.Widget,
         Draggable = kendo.ui.Draggable,
-        keys = kendo.keys,
         extend = $.extend,
         format = kendo.format,
         parse = kendo.parseFloat,
@@ -410,7 +409,6 @@
                 step = math.max(options.smallStep * (that._maxSelection / that._distance), 0),
                 position = 0,
                 halfStep = (step / 2),
-                val = 0,
                 i;
 
             if (that._isHorizontal) {
@@ -1120,12 +1118,14 @@
                 dragHandleOffset = that.dragHandle.offset(),
                 margin = 4,
                 callout = that.tooltipDiv.find(".k-callout"),
-                padding;
+                dragHandles,
+                firstDragHandleOffset,
+                secondDragHandleOffset;
 
             if (that.type) {
-                var dragHandles = owner.wrapper.find(DRAG_HANDLE),
-                    firstDragHandleOffset = dragHandles.eq(0).offset(),
-                    secondDragHandleOffset = dragHandles.eq(1).offset();
+                dragHandles = owner.wrapper.find(DRAG_HANDLE);
+                firstDragHandleOffset = dragHandles.eq(0).offset();
+                secondDragHandleOffset = dragHandles.eq(1).offset();
 
                 if (owner._isHorizontal) {
                     positionTop = secondDragHandleOffset.top;
@@ -1380,8 +1380,7 @@
          *
          */
         disable: function () {
-            var that = this,
-                options = that.options;
+            var that = this;
 
             that.wrapper
                 .removeClass(STATE_DEFAULT)
