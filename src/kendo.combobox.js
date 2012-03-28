@@ -640,7 +640,6 @@
             var that = this,
                 ul = that.ul[0],
                 options = that.options,
-                suggest = options.suggest,
                 data = that._data(),
                 length = data.length;
 
@@ -658,7 +657,7 @@
                     that.current($(ul.firstChild));
                 }
 
-                if (suggest && that.input.val()) {
+                if (options.suggest && that.input.val()) {
                     that.suggest(that._current || $(ul.firstChild));
                 }
             }
@@ -827,7 +826,7 @@
                 textAccessor = that._text,
                 input = that.input[0],
                 ignoreCase = that.options.ignoreCase,
-                dataItem;
+                loweredText, dataItem;
 
             if (text !== undefined) {
                 dataItem = that.dataItem();
@@ -836,16 +835,19 @@
                     return;
                 }
 
-                that._select(function(dataElement) {
-                    var dataText = textAccessor(dataElement) + "",
-                        t = text + "";
+                loweredText = text;
+                if (ignoreCase) {
+                    loweredText = (loweredText + "").toLowerCase();
+                }
+
+                that._select(function(data) {
+                    data = textAccessor(data);
 
                     if (ignoreCase) {
-                        dataText = dataText.toLowerCase();
-                        t = text.toLowerCase();
+                        data = (data + "").toLowerCase();
                     }
 
-                    return dataText === t; //textAccessor(dataElement) === text;
+                    return data === loweredText;
                 });
 
                 if (that.selectedIndex < 0) {

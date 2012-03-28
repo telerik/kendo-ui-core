@@ -399,6 +399,19 @@
                 ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
+            test("search method uses ignoreCase option", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["TEXT", "text"],
+                    ignoreCase: false,
+                    filter: "startswith"
+                });
+
+                combobox.search("T");
+
+                equal(combobox.ul.children().length, 1);
+                equal(combobox.ul.children().eq(0).text(), "TEXT");
+            });
+
             test("do not remove default filter expression", function() {
                 var combobox = new ComboBox(input, {
                     dataTextField: "text",
