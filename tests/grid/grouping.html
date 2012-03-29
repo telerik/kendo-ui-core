@@ -103,6 +103,23 @@
                 equal(masterExpandGroup.calls("expandGroup"), 0);
             });
 
+            test("expanding group with persist detail template state", function() {
+                var grid = new Grid(table(), {
+                        dataSource: {
+                            data: [{foo: "foo"}, {foo: "bar"}],
+                            group: { field: "foo" }
+                        },
+                        groupable: true,
+                        detailTemplate: "foo"
+                    });
+                grid.expandRow(grid.tbody.find("tr.k-master-row:first"));
+                grid.collapseRow(grid.tbody.find("tr.k-master-row:first"));
+
+                grid.expandGroup(grid.tbody.find("tr.k-grouping-row:first"));
+
+                ok(!grid.tbody.find("tr.k-detail-row:first").is(":visible"));
+            });
+
             test("nesting groups created grouping row for every group", function() {
 
                 var grid = new Grid(table(), {
