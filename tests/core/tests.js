@@ -32,6 +32,10 @@ tests.push(
         title: "core date parsing"
     },
     {
+        page: "core/deepextend.html",
+        title: "core deepExtend"
+    },
+    {
         page: "core/numberformatting.html",
         title: "core number formatting"
     },
