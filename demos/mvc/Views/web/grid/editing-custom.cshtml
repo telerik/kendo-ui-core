@@ -67,19 +67,17 @@
                     });
                 });
 
-                var categoryDataSource = new kendo.data.DataSource({
-                    type: "odata",
-                    transport: {
-                        read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
-                    }
-                });
-
                 function categoryDropDownEditor(container, options) {
                     $('<input data-text-field="CategoryName" data-value-field="CategoryName" data-bind="value:' + options.field + '"/>')
                         .appendTo(container)
                         .kendoDropDownList({
                             autoBind: false,
-                            dataSource: categoryDataSource
+                            dataSource: {
+                                type: "odata",
+                                transport: {
+                                    read: "http://demos.kendoui.com/service/Northwind.svc/Categories"
+                                }
+                            }
                         });
                 }
 
