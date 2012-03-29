@@ -179,7 +179,16 @@
          * // get value
          * var htmlValue = editor.value();
          */
-        value: function() { }
+        value: function() { },
+
+        /**
+         * Focuses the Editor editable area.
+         * @example
+         * var editor = $("#editor").data("kendoEditor");
+         *
+         * editor.focus();
+         */
+        focus: function() { }
     }
 
 })();
