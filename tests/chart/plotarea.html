@@ -1089,14 +1089,18 @@
                     ok(plotArea.axisY instanceof dataviz.NumericAxis);
                 });
 
-                test("creates Date axis", function() {
+                test("creates Date value axes", function() {
                     createPlotArea(scatterSeriesData, {
                         xAxis: {
+                            type: "Date"
+                        },
+                        yAxis: {
                             type: "Date"
                         }
                     });
 
-                    ok(plotArea.axisX instanceof dataviz.DateAxis);
+                    ok(plotArea.axisX instanceof dataviz.DateValueAxis);
+                    ok(plotArea.axisY instanceof dataviz.DateValueAxis);
                 });
 
                 // ------------------------------------------------------------

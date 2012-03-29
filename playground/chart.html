@@ -17,13 +17,13 @@
             $(function() {
                 var data = [{
                     price: 10,
-                    date: new Date("2012-02-20")
+                    date: new Date("2012/02/02")
                     }, {
                     price: 20,
-                    date: new Date("2012-02-25")
+                    date: new Date("2012/02/25")
                     }, {
                     price: 15,
-                    date: new Date("2012-02-29")
+                    date: new Date("2012/05/29")
                 }];
 
                 $("#chart").kendoChart({
@@ -38,8 +38,8 @@
                     }],
                     xAxis: {
                         type: "Date",
-                        min: new Date("2012-02-10"),
-                        max: "2012-03-10",
+                        //min: new Date("2012/02/10"),
+                        //max: "2012/03/10",
                         labels: {
                             //template: "#= formatTime(value) #"
                         }

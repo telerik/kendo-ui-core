@@ -1053,12 +1053,16 @@
         }
     });
 
-    var TIME_PER_DAY = 86400000,
+    var TIME_PER_MINUTE = 60000,
+        TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
+        TIME_PER_DAY = 24 * TIME_PER_HOUR,
         TIME_PER_MONTH = 31 * TIME_PER_DAY,
         TIME_PER_YEAR = 365 * TIME_PER_DAY,
         YEARS = "years",
         MONTHS = "months",
-        DAYS = "days";
+        DAYS = "days",
+        HOURS = "hours",
+        MINUTES = "minutes";
 
     function toDate(value) {
         if (isArray(value)) {
@@ -1066,6 +1070,52 @@
         } else if (value) {
             return (value instanceof Date) ? value : new Date(value);
         }
+    }
+
+    function toTime(value) {
+        if (isArray(value)) {
+            return map(value, toTime);
+        } else if (value) {
+            return toDate(value).getTime();
+        }
+    }
+
+    function ceilDate(date, unit) {
+        date = toDate(date);
+
+        if (unit === YEARS) {
+            return new Date(date.getFullYear() + 1, 0, 1);
+        } else if (unit === MONTHS) {
+            return new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        } else if (unit === DAYS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+        } else if (unit === HOURS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + 1);
+        } else if (unit === MINUTES) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours(), date.getMinutes() + 1);
+        }
+
+        return date;
+    }
+
+    function floorDate(date, unit) {
+        date = toDate(date);
+
+        if (unit === YEARS) {
+            return new Date(date.getFullYear(), 0, 1);
+        } else if (unit === MONTHS) {
+            return new Date(date.getFullYear(), date.getMonth(), 1);
+        } else if (unit === DAYS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        } else if (unit === HOURS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours());
+        } else if (unit === MINUTES) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours(), date.getMinutes());
+        }
+
+        return date;
     }
 
     var DateAxis = Axis.extend({
@@ -1114,6 +1164,76 @@
         range: function() {
             var options = this.options;
             return { min: options.min, max: options.max };
+        }
+    });
+
+    var DateValueAxis = NumericAxis.extend({
+        init: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                numAxisOptions,
+                seriesDelta;
+
+            options = options || {};
+            if (options.min && options.max) {
+                seriesDelta = toTime(options.max) - toTime(options.min);
+            } else {
+                seriesDelta = seriesMax - seriesMin;
+            }
+            numAxisOptions = deepExtend(
+                axis.defaults(seriesMin, seriesMax, seriesDelta, options),
+                options, {
+                min: toTime(options.min),
+                max: toTime(options.max),
+                axisCrossingValue: toTime(options.axisCrossingValue)
+            });
+
+            NumericAxis.fn.init.call(axis, seriesMin, seriesMax, numAxisOptions);
+        },
+
+        initDefaults: function(seriesMin, seriesMax, options) {
+            var axis = this,
+                baseUnit = options.baseUnit,
+                baseUnitTime = options._baseUnitTime,
+                autoMin = floorDate(seriesMin, baseUnit).getTime(),
+                autoMax = ceilDate(seriesMax, baseUnit).getTime(),
+                majorUnit = dataviz.ceil(dataviz.autoMajorUnit(autoMin, autoMax), baseUnitTime),
+                defaults = {
+                    min: dataviz.floor(autoMin, baseUnitTime),
+                    max: dataviz.ceil(autoMax, baseUnitTime),
+                    majorUnit: majorUnit,
+                    minorUnit: baseUnitTime
+                };
+
+            return deepExtend(defaults, options);
+        },
+
+        getLabelText: function(index) {
+            var ticks = NumericAxis.fn.getLabelText.call(this, index),
+                date = new Date(round(ticks));
+            return (date.getMonth() + 1) + "/" + date.getDate();
+        },
+
+        defaults: function(seriesMin, seriesMax, seriesDelta, options) {
+            var defaults = {},
+                unitTime;
+
+            if (seriesDelta >= TIME_PER_YEAR) {
+                defaults.baseUnit = YEARS;
+                unitTime = TIME_PER_YEAR;
+            } else if (seriesDelta >= TIME_PER_MONTH) {
+                defaults.baseUnit = MONTHS;
+                unitTime = TIME_PER_MONTH;
+            } else if (seriesDelta >= TIME_PER_DAY) {
+                defaults.baseUnit = DAYS;
+                unitTime = TIME_PER_DAY;
+            } else if (seriesDelta >= TIME_PER_HOUR) {
+                defaults.baseUnit = HOURS;
+                unitTime = TIME_PER_HOUR;
+            }
+
+            defaults._baseUnitTime = unitTime;
+
+            return deepExtend(defaults, options);
         }
     });
 
@@ -3907,7 +4027,7 @@
                 axis;
 
             if (options.type === "Date") {
-                axis = new DateAxis(range.min, range.max, axisOptions);
+                axis = new DateValueAxis(range.min, range.max, axisOptions);
             } else {
                 axis = new NumericAxis(range.min, range.max, axisOptions);
             }
@@ -4375,6 +4495,7 @@
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
         DateAxis: DateAxis,
+        DateValueAxis: DateValueAxis,
         Highlight: Highlight,
         Legend: Legend,
         LineChart: LineChart,
@@ -4391,7 +4512,9 @@
         Tooltip: Tooltip,
         XYPlotArea: XYPlotArea,
 
-        categoriesCount: categoriesCount
+        categoriesCount: categoriesCount,
+        ceilDate: ceilDate,
+        floorDate: floorDate
     });
 
 })(jQuery);

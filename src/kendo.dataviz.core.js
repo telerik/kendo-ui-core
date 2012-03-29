@@ -1184,10 +1184,6 @@
             var axis = this,
                 defaultOptions = axis.initDefaults(seriesMin, seriesMax, options);
 
-            defaultOptions.minorUnit = defined(options.minorUnit) ?
-                options.minorUnit :
-                defaultOptions.majorUnit / 5;
-
             Axis.fn.init.call(axis, defaultOptions);
         },
 
@@ -1246,6 +1242,8 @@
                     autoOptions.majorUnit = autoMajorUnit(options.min, options.max);
                 }
             }
+
+            autoOptions.minorUnit = autoOptions.majorUnit / 5;
 
             return deepExtend(autoOptions, options);
         },
@@ -2494,6 +2492,8 @@
         measureText: measureText,
         rotatePoint: rotatePoint,
         round: round,
+        ceil: ceil,
+        floor: floor,
         supportsSVG: supportsSVG,
         renderTemplate: renderTemplate,
         uniqueId: uniqueId

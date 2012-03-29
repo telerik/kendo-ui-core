@@ -494,6 +494,71 @@
                 });
             });
 
+            // ------------------------------------------------------------
+            var TIME_PER_MINUTE = 60000,
+                TIME_PER_HOUR = 60 * TIME_PER_MINUTE,
+                TIME_PER_DAY = 24 * TIME_PER_HOUR,
+                TIME_PER_MONTH = 31 * TIME_PER_DAY,
+                TIME_PER_YEAR = 365 * TIME_PER_DAY;
+
+            var floorDate = dataviz.floorDate,
+                ceilDate = dataviz.ceilDate,
+                date;
+
+            module("Date helpers", {
+                setup: function() {
+                    date = new Date("2012/03/29 17:40:10");
+                }
+            });
+
+            test("floorDate rounds date down to years", function() {
+                same(floorDate(date, "years"), new Date("2012/01/01 00:00"));
+            });
+
+            test("floorDate rounds date down to months", function() {
+                same(floorDate(date, "months"), new Date("2012/03/01 00:00"));
+            });
+
+            test("floorDate rounds date down to days", function() {
+                same(floorDate(date, "days"), new Date("2012/03/29 00:00"));
+            });
+
+            test("floorDate rounds date down to hours", function() {
+                same(floorDate(date, "hours"), new Date("2012/03/29 17:00"));
+            });
+
+            test("floorDate rounds date down to minutes", function() {
+                same(floorDate(date, "minutes"), new Date("2012/03/29 17:40"));
+            });
+
+            test("floorDate returns date when no unit is specified", function() {
+                same(floorDate(date), date);
+            });
+
+            test("ceilDate rounds date up to years", function() {
+                same(ceilDate(date, "years"), new Date("2013/01/01 00:00"));
+            });
+
+            test("ceilDate rounds date up to months", function() {
+                same(ceilDate(date, "months"), new Date("2012/04/01 00:00"));
+            });
+
+            test("ceilDate rounds date up to days", function() {
+                same(ceilDate(date, "days"), new Date("2012/03/30 00:00"));
+            });
+
+            test("ceilDate rounds date up to hours", function() {
+                same(ceilDate(date, "hours"), new Date("2012/03/29 18:00"));
+            });
+
+            test("ceilDate rounds date up to minutes", function() {
+                same(ceilDate(date, "minutes"), new Date("2012/03/29 17:41"));
+            });
+
+            test("ceilDate returns date when no unit is specified", function() {
+                same(ceilDate(date), date);
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>

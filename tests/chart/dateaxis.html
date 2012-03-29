@@ -28,107 +28,182 @@
             // Tests expect particular font size
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
-            function moduleSetup() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-02-10"), TIME_PER_DAY
-                );
-                view = new ViewStub();
-            }
+            (function() {
+                function moduleSetup() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-02-10"), TIME_PER_DAY
+                    );
+                    view = new ViewStub();
+                }
 
-            // ------------------------------------------------------------
-            module("Date Axis / Configuration", {
-                setup: moduleSetup
-            });
-
-            test("Base unit is determined by series delta (days)", function() {
-                equals(dateAxis.options.baseUnit, "days");
-            });
-
-            test("Base unit is determined by series delta (months)", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 31
-                );
-
-                equals(dateAxis.options.baseUnit, "months");
-            });
-
-            test("Base unit is determined by series delta (years)", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 365
-                );
-
-                equals(dateAxis.options.baseUnit, "years");
-            });
-
-            test("User set base unit is applied", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 365, {
-                        baseUnit: "days"
+                // ------------------------------------------------------------
+                module("Date Category Axis / Configuration", {
+                    setup: moduleSetup
                 });
 
-                equals(dateAxis.options.baseUnit, "days");
-            });
-
-            test("Min date can be parsed from string", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                        min: "2012-02-01"
+                test("Base unit is determined by series delta (days)", function() {
+                    equals(dateAxis.options.baseUnit, "days");
                 });
 
-                same(dateAxis.options.min, new Date("2012-02-01"));
-            });
+                test("Base unit is determined by series delta (months)", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 31
+                    );
 
-            test("Max date can be parsed from string", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                        max: "2012-02-29"
+                    equals(dateAxis.options.baseUnit, "months");
                 });
 
-                same(dateAxis.options.max, new Date("2012-02-29"));
-            });
+                test("Base unit is determined by series delta (years)", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 365
+                    );
 
-            test("Axis crossing value can be parsed from string", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                        axisCrossingValue: "2012-02-29"
+                    equals(dateAxis.options.baseUnit, "years");
                 });
 
-                same(dateAxis.options.axisCrossingValue, new Date("2012-02-29"));
-            });
+                test("User set base unit is applied", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-03-10"), TIME_PER_DAY * 365, {
+                            baseUnit: "days"
+                    });
 
-            test("Axis crossing values can be parsed from string array", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
-                        axisCrossingValue: ["2012-02-28", "2012-02-29"]
+                    equals(dateAxis.options.baseUnit, "days");
                 });
 
-                same(dateAxis.options.axisCrossingValue,
-                    [new Date("2012-02-28"), new Date("2012-02-29")]
-                );
-            });
+                test("Min date can be parsed from string", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
+                            min: "2012-02-01"
+                    });
 
-            test("Major unit is calculated for user set min/max", function() {
-                dateAxis = new dataviz.DateAxis(
-                    new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY * 20, {
-                        min: new Date("2012-02-01"),
-                        max: new Date("2012-02-29")
+                    same(dateAxis.options.min, new Date("2012-02-01"));
                 });
 
-                equals(dateAxis.options.majorUnit, 2);
-            });
+                test("Max date can be parsed from string", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
+                            max: "2012-02-29"
+                    });
 
-            test("Major unit is calculated for series when user min/max are not set", function() {
-                equal(dateAxis.options.majorUnit, 1);
-            });
+                    same(dateAxis.options.max, new Date("2012-02-29"));
+                });
 
-            test("reports range minimum equal to options.min", function() {
-                console.log(dateAxis.range());
-                same(dateAxis.range().min, new Date("2012-02-01"));
-            });
+                test("Axis crossing value can be parsed from string", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
+                            axisCrossingValue: "2012-02-29"
+                    });
 
-            test("reports range maximum equal to options.max", function() {
-                same(dateAxis.range().max, new Date("2012-02-10"));
-            });
+                    same(dateAxis.options.axisCrossingValue, new Date("2012-02-29"));
+                });
+
+                test("Axis crossing values can be parsed from string array", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY, {
+                            axisCrossingValue: ["2012-02-28", "2012-02-29"]
+                    });
+
+                    same(dateAxis.options.axisCrossingValue,
+                        [new Date("2012-02-28"), new Date("2012-02-29")]
+                    );
+                });
+
+                test("Major unit is calculated for user set min/max", function() {
+                    dateAxis = new dataviz.DateAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), TIME_PER_DAY * 20, {
+                            min: new Date("2012-02-01"),
+                            max: new Date("2012-02-29")
+                    });
+
+                    equals(dateAxis.options.majorUnit, 2);
+                });
+
+                test("Major unit is calculated for series when user min/max are not set", function() {
+                    equal(dateAxis.options.majorUnit, 1);
+                });
+
+                test("reports range minimum equal to options.min", function() {
+                    same(dateAxis.range().min, new Date("2012-02-01"));
+                });
+
+                test("reports range maximum equal to options.max", function() {
+                    same(dateAxis.range().max, new Date("2012-02-10"));
+                });
+            })();
+
+            (function() {
+                function moduleSetup() {
+                    dateAxis = new dataviz.DateValueAxis(
+                        new Date("2012-02-01"), new Date("2012-02-10")
+                    );
+                    view = new ViewStub();
+                }
+
+                // ------------------------------------------------------------
+                module("Date Value Axis / Configuration", {
+                    setup: moduleSetup
+                });
+
+                test("Min date can be parsed from string", function() {
+                    dateAxis = new dataviz.DateValueAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), {
+                            min: "2012-02-01"
+                    });
+
+                    same(new Date(dateAxis.options.min), new Date("2012-02-01"));
+                });
+
+                test("Max date can be parsed from string", function() {
+                    dateAxis = new dataviz.DateValueAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), {
+                            max: "2012-02-29"
+                    });
+
+                    same(new Date(dateAxis.options.max), new Date("2012-02-29"));
+                });
+
+                test("Axis crossing value can be parsed from string", function() {
+                    dateAxis = new dataviz.DateValueAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), {
+                            axisCrossingValue: "2012-02-29"
+                    });
+
+                    same(new Date(dateAxis.options.axisCrossingValue), new Date("2012-02-29"));
+                });
+
+                test("Axis crossing values can be parsed from string array", function() {
+                    dateAxis = new dataviz.DateValueAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), {
+                            axisCrossingValue: ["2012-02-28", "2012-02-29"]
+                    });
+
+                    same(dateAxis.options.axisCrossingValue,
+                        [(new Date("2012-02-28")).getTime(), (new Date("2012-02-29")).getTime()]
+                    );
+                });
+
+                test("Major unit is calculated for user set min/max", function() {
+                    dateAxis = new dataviz.DateValueAxis(
+                        new Date("2012-02-01"), new Date("2012-02-20"), {
+                            min: new Date("2012-02-01"),
+                            max: new Date("2012-02-29")
+                    });
+
+                    equals(dateAxis.options.majorUnit, 2 * TIME_PER_DAY);
+                });
+
+                test("Major unit is calculated for series when user min/max are not set", function() {
+                    equal(dateAxis.options.majorUnit, 1 * TIME_PER_DAY);
+                });
+
+                test("reports range minimum equal to options.min", function() {
+                    same(dateAxis.range().min, (new Date("2012-02-01")).getTime());
+                });
+
+                test("reports range maximum equal to options.max", function() {
+                    same(dateAxis.range().max, (new Date("2012-02-10").getTime()));
+                });
+            })();
 
         </script>
 
