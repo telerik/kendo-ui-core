@@ -714,7 +714,7 @@
             word = word || "";
 
             if (typeof word !== "string") {
-                idx = word.index();
+                idx = List.inArray(word[0], that.ul[0]);
 
                 if (idx > -1) {
                     word = that._text(that.dataSource.view()[idx]);
