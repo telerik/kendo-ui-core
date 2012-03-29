@@ -1210,7 +1210,8 @@
 
     deepExtend(dataviz, {
         Gauge: Gauge,
-        GaugePlotArea: RadialGaugePlotArea,
+        RadialGaugePlotArea: RadialGaugePlotArea,
+        LinearGaugePlotArea: LinearGaugePlotArea,
         RadialPointer: RadialPointer,
         LinearPointer: LinearPointer,
         LinearScale: LinearScale,
