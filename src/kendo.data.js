@@ -1347,7 +1347,11 @@
 
                     data = dataFunction(data);
 
-                    if (!isEmptyObject(getters)) {
+                    if (data && !isEmptyObject(getters)) {
+                        if (toString.call(data) !== "[object Array]") {
+                            data = [data];
+                        }
+
                         for (idx = 0, length = data.length; idx < length; idx++) {
                             record = data[idx];
                             for (getter in getters) {
@@ -1514,11 +1518,11 @@
             if (response) {
                 response = that.reader.parse(response);
 
+                response = that.reader.data(response);
+
                 if (!$.isArray(response)) {
                     response = [response];
                 }
-
-                response = that.reader.data(response);
             } else {
                 response = $.map(models, function(model) { return model.toJSON(); } );
             }

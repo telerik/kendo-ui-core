@@ -469,6 +469,23 @@
 
                 strictEqual(dataSource.get(3).get("foo"), 2);
             });
+
+            test("destroy sync null response", 1, function() {
+                setup({
+                    transport: {
+                        read: function(options) {
+                            options.success({ d:[ { id: 1, foo: "foo" }, { id: 2, foo: "foo2" }  ]});
+                        }
+                    },
+                    schema: { data: "d", model: { id: "id", fields: { foo: { type: "string" } } } }
+                });
+                stubTransport("destroy", { d: null });
+
+                dataSource.remove(dataSource.get(1));
+
+                dataSource.sync();
+                equal(dataSource.data().length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
