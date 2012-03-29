@@ -3,19 +3,287 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
         <title>ComboBox</title>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet/less" href="../styles/web/kendo.default.less" type="text/css" media="screen" charset="utf-8">
+        <script src="../demos/mvc/content/shared/js/less.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/jquery.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.fx.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.list.js" type="text/javascript" charset="utf-8"></script>
         <script src="../src/kendo.combobox.js" type="text/javascript" charset="utf-8"></script>
-        <link rel="stylesheet" href="../styles/kendo.common.css" type="text/css" media="screen" charset="utf-8">
-        <link rel="stylesheet" href="../styles/kendo.blueopal.css" type="text/css" media="screen" charset="utf-8">
-
     </head>
     <body>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: false, ignoreCase: true</legend>
+            <input id="combobox1" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: true, ignoreCase: true</legend>
+            <input id="combobox2" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "none", first: true, suggest: true, ignoreCase: true</legend>
+            <input id="combobox3" />
+        </fieldset>
+        <hr/>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: false, ignoreCase: false</legend>
+            <input id="combobox16" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: true, ignoreCase: false</legend>
+            <input id="combobox17" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "none", first: true, suggest: true, ignoreCase: false</legend>
+            <input id="combobox18" />
+        </fieldset>
+        <hr/>
+        <fieldset>
+            <legend>filter: "startswith", first: false, suggest: false, ignoreCase: true</legend>
+            <input id="combobox4" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "startswith", first: false, suggest: true, ignoreCase: true</legend>
+            <input id="combobox5" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "startswith", first: true, suggest: true, ignoreCase: true</legend>
+            <input id="combobox6" />
+        </fieldset>
+        <hr/>
+        <fieldset>
+            <legend>filter: "startswith", first: false, suggest: false, ignoreCase: false</legend>
+            <input id="combobox7" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "startswith", first: false, suggest: true, ignoreCase: false</legend>
+            <input id="combobox8" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "startswith", first: true, suggest: true, ignoreCase: false</legend>
+            <input id="combobox9" />
+        </fieldset>
+
+        <hr/>
+        <hr/>
+        <hr/>
+        <fieldset>
+            <legend>filter: "contains", first: false, suggest: false, ignoreCase: true</legend>
+            <input id="combobox10" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "contains", first: false, suggest: true, ignoreCase: true</legend>
+            <input id="combobox11" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "contains", first: true, suggest: true, ignoreCase: true</legend>
+            <input id="combobox12" />
+        </fieldset>
+        <hr/>
+        <fieldset>
+            <legend>filter: "contains", first: false, suggest: false, ignoreCase: false</legend>
+            <input id="combobox13" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "contains", first: false, suggest: true, ignoreCase: false</legend>
+            <input id="combobox14" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "contains", first: true, suggest: true, ignoreCase: false</legend>
+            <input id="combobox15" />
+        </fieldset>
+
+        <script>
+            $(document).ready(function() {
+                var data = [{text: "1text1"}, {text: "TEXT"}, {text: "text"}, {text: "3text3"}];
+
+                $("#combobox1").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    ignoreCase: true,
+                    suggest: false,
+                    filter: "none"
+                });
+
+                $("#combobox2").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    ignoreCase: true,
+                    suggest: true,
+                    filter: "none"
+                });
+
+                $("#combobox3").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    ignoreCase: true,
+                    suggest: true,
+                    filter: "none"
+                });
+
+                $("#combobox16").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    ignoreCase: false,
+                    suggest: false,
+                    filter: "none"
+                });
+
+                $("#combobox17").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    ignoreCase: false,
+                    suggest: true,
+                    filter: "none"
+                });
+
+                $("#combobox18").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    ignoreCase: false,
+                    suggest: true,
+                    filter: "none"
+                });
+
+                //
+                $("#combobox4").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: false,
+                    filter: "startswith"
+                });
+
+                $("#combobox5").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: true,
+                    filter: "startswith"
+                });
+
+                $("#combobox6").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    suggest: true,
+                    filter: "startswith"
+                });
+
+                //
+                $("#combobox7").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: false,
+                    ignoreCase: false,
+                    filter: "startswith"
+                });
+
+                $("#combobox8").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: true,
+                    ignoreCase: false,
+                    filter: "startswith"
+                });
+
+                $("#combobox9").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    suggest: true,
+                    ignoreCase: false,
+                    filter: "startswith"
+                });
+                /////////
+                //
+                $("#combobox10").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: false,
+                    filter: "contains"
+                });
+
+                $("#combobox11").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: true,
+                    filter: "contains"
+                });
+
+                $("#combobox12").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    suggest: true,
+                    filter: "contains"
+                });
+
+                //
+                $("#combobox13").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: false,
+                    ignoreCase: false,
+                    filter: "contains"
+                });
+
+                $("#combobox14").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    suggest: true,
+                    ignoreCase: false,
+                    filter: "contains"
+                });
+
+                $("#combobox15").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    suggest: true,
+                    ignoreCase: false,
+                    filter: "contains"
+                });
+
+            });
+        </script>
+
+
+        <!--
         dataSource: [{text: "foo", value: 1}, {text:"bar", value:2}, {text: "baz", value: 3}, {text:"2", value:4}],
         <fieldset>
             <legend>Vanilla input</legend>
@@ -222,5 +490,6 @@
             }
 
         </script>
+        -->
     </body>
 </html>

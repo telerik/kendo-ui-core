@@ -326,7 +326,24 @@
                 ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
             });
 
+            test("refresh method highlights first item if options.highlightFirst is true", 1, function() {
+                var combobox = new ComboBox(input, {
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    suggest: true,
+                    filter: "startswith",
+                    highlightFirst: false
+                });
+
+                combobox.input.val("f");
+                combobox.search("f");
+
+                equal(combobox.ul.children().filter(".k-state-focused").length, 0);
+            });
+
             test("no filter and highlightFirst should always focus first item", function() {
+
                 combobox.search("");
 
                 ok(combobox.ul.children().eq(0).hasClass("k-state-focused"));
@@ -380,6 +397,19 @@
                 combobox.search("");
 
                 ok(!combobox.ul.children().eq(0).hasClass("k-state-focused"));
+            });
+
+            test("search method uses ignoreCase option", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["TEXT", "text"],
+                    ignoreCase: false,
+                    filter: "startswith"
+                });
+
+                combobox.search("T");
+
+                equal(combobox.ul.children().length, 1);
+                equal(combobox.ul.children().eq(0).text(), "TEXT");
             });
 
             test("do not remove default filter expression", function() {
@@ -492,6 +522,50 @@
                 ok(combobox.dataSource.filter());
                 equal(combobox.dataSource.filter().filters.length, 1);
                 equal(combobox.dataSource.filter().filters[0].field, "parent");
+            });
+
+            test("refresh suggests on every dataSource change", 2, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["text", "Text", "3text"],
+                    filter: "startswith",
+                    highlightFirst: false,
+                    suggest: true,
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("t");
+                combobox.search("t");
+                combobox.input.val("3");
+                combobox.search("3");
+
+                equal(combobox.text(), "3text");
+                equal(combobox.current(), null);
+            });
+
+            test("ComboBox ignores case when filter is disabled", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["Text", "text", "3text"],
+                    ignoreCase: true, //default
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("t");
+                combobox.search("t");
+
+                equal(combobox.current().index(), 0);
+            });
+
+            test("ComboBox honors casing when filter is disabled", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["Text", "text", "3text"],
+                    ignoreCase: false,
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("t");
+                combobox.search("t");
+
+                equal(combobox.current().index(), 1);
             });
 
         </script>

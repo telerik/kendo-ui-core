@@ -68,7 +68,7 @@
                 combobox.input.type("b");
                 combobox.search("b");
 
-                equal(combobox.input.val(), "Bar");
+                equal(combobox.input.val(), "bar");
             });
 
             test("suggestion selects the remainder of the word", function() {
@@ -89,7 +89,8 @@
                     dataTextField: "text",
                     dataValueField: "value",
                     dataSource: data,
-                    suggest: true
+                    suggest: true,
+                    highlightFirst: false
                 });
 
                 combobox.input.type("b");
@@ -145,7 +146,7 @@
                     }).data("kendoComboBox");
 
                 combobox.suggest(combobox.ul.children(":first"));
-                equal(combobox.text(), "Item1");
+                equal(combobox.text(), "item1");
             });
 
             test("suggest() should suggest correctly", function() {
@@ -178,6 +179,61 @@
                     start();
                     equal(combobox.text(), "oo");
                 }, 300);
+            });
+
+            test("suggest method appends text only", function() {
+                var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
+                    highlightFirst: false,
+                    suggest: true
+                }).data("kendoComboBox");
+
+                combobox.input.type("co");
+                combobox.suggest("Cotton");
+
+                equal(combobox.current(), null);
+                equal(combobox.text(), "cotton");
+                equal(combobox.input.selectedText(), "tton");
+            });
+
+            test("suggest method modifes text and appends suggestion", function() {
+                var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: [{text:"Cotton"}, {text: "Cotton/Polyester"}],
+                    highlightFirst: true,
+                    suggest: true
+                }).data("kendoComboBox");
+
+                combobox.input.type("co");
+                combobox.suggest("Cotton");
+
+                equal(combobox.current().index(), 0);
+                equal(combobox.text(), "cotton");
+                equal(combobox.input.selectedText(), "tton");
+            });
+
+            asyncTest("refresh method suggests if no item is highlighted", 2, function() {
+                var combobox = input.kendoComboBox({
+                    dataTextField: "text",
+                    dataValueField: "value",
+                    dataSource: data,
+                    filter: "startswith",
+                    highlightFirst: false,
+                    suggest: true,
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("f");
+                combobox.search("f");
+
+                setTimeout(function() {
+                    start();
+                    equal(combobox.text(), "foo");
+                    equal(combobox.current(), null);
+                }, 200);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
