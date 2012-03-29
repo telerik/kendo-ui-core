@@ -28,7 +28,8 @@
 
         <script>
 
-            var markup = '<div data-role="view"><ul data-role="actionsheet"><li><a id="foo" data-context="1" data-action="foo">Foo</a></li></ul></div>',
+            var markup = '<div data-role="view"><a data-role="button" href="#actionSheet" data-rel="actionsheet"></a>' +
+                '<ul id="actionSheet" data-role="actionsheet"><li><a id="foo" data-context="1" data-action="foo"></a></li></ul></div>',
                 actionSheet,
                 element,
                 root = $('#qunit-fixture');
@@ -42,19 +43,25 @@
                 }
             });
 
-            test("Is hidden by default", function() {
+            function isOpen() {
+                ok(root.find("#foo").is(":visible"));
+            }
+
+            function isClosed() {
                 ok(!root.find("#foo").is(":visible"));
-            });
+            }
+
+            test("Is hidden by default", 1, isClosed);
 
             test("Is visible when open", function() {
                 actionSheet.open();
-                ok(root.find("#foo").is(":visible"));
+                isOpen();
             });
 
             test("Is hidden when closed", function() {
                 actionSheet.open();
                 actionSheet.close();
-                ok(!root.find("#foo").is(":visible"));
+                isClosed();
             });
 
             test("Calls click event handler", 1, function() {
@@ -73,7 +80,7 @@
 
                 actionSheet.open();
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
-                ok(!root.find("#foo").is(":visible"));
+                isClosed();
             });
 
             test("Passes target in click handler", 1, function() {
@@ -99,9 +106,13 @@
 
                 actionSheet.open();
                 cancel.trigger($.Event(kendo.support.mouseup));
-                ok(!root.find("#foo").is(":visible"));
+                isClosed();
             });
 
+            test("data-rel=actionsheet widget opens the action sheet", 1, function() {
+                root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
+                isOpen();
+            });
         </script>
     </body>
 </html>
