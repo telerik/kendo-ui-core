@@ -2057,11 +2057,15 @@
                     return false;
                 }
 
-                if (offset == level + 1) {
+                if (offset == level + 1 && !tr.hasClass("k-detail-row")) {
                     tr.show();
 
                     if (tr.hasClass("k-grouping-row") && tr.find(".k-icon").hasClass("k-collapse")) {
                         that.expandGroup(tr);
+                    }
+
+                    if (tr.hasClass("k-master-row") && tr.find(".k-icon").hasClass("k-minus")) {
+                        tr.next().show();
                     }
                 }
             });
