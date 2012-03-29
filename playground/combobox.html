@@ -16,19 +16,32 @@
         <script src="../src/kendo.combobox.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
-        <!-- <fieldset>
-            <legend>filter: "none", first: false, suggest: false</legend>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: false, ignoreCase: true</legend>
             <input id="combobox1" />
         </fieldset>
         <fieldset>
-            <legend>filter: "none", first: false, suggest: true</legend>
-            <input id="combobox2" /> suggest does not work!
+            <legend>filter: "none", first: false, suggest: true, ignoreCase: true</legend>
+            <input id="combobox2" />
         </fieldset>
         <fieldset>
-            <legend>filter: "none", first: true, suggest: true</legend>
-            <input id="combobox3" /> suggest does not work!
+            <legend>filter: "none", first: true, suggest: true, ignoreCase: true</legend>
+            <input id="combobox3" />
         </fieldset>
-        <hr/>-->
+        <hr/>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: false, ignoreCase: false</legend>
+            <input id="combobox16" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "none", first: false, suggest: true, ignoreCase: false</legend>
+            <input id="combobox17" />
+        </fieldset>
+        <fieldset>
+            <legend>filter: "none", first: true, suggest: true, ignoreCase: false</legend>
+            <input id="combobox18" />
+        </fieldset>
+        <hr/>
         <fieldset>
             <legend>filter: "startswith", first: false, suggest: false, ignoreCase: true</legend>
             <input id="combobox4" />
@@ -93,6 +106,7 @@
                     dataTextField: "text",
                     dataValueField: "text",
                     highlightFirst: false,
+                    ignoreCase: true,
                     suggest: false,
                     filter: "none"
                 });
@@ -102,6 +116,7 @@
                     dataTextField: "text",
                     dataValueField: "text",
                     highlightFirst: false,
+                    ignoreCase: true,
                     suggest: true,
                     filter: "none"
                 });
@@ -111,6 +126,37 @@
                     dataTextField: "text",
                     dataValueField: "text",
                     highlightFirst: true,
+                    ignoreCase: true,
+                    suggest: true,
+                    filter: "none"
+                });
+
+                $("#combobox16").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    ignoreCase: false,
+                    suggest: false,
+                    filter: "none"
+                });
+
+                $("#combobox17").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: false,
+                    ignoreCase: false,
+                    suggest: true,
+                    filter: "none"
+                });
+
+                $("#combobox18").kendoComboBox({
+                    dataSource: data,
+                    dataTextField: "text",
+                    dataValueField: "text",
+                    highlightFirst: true,
+                    ignoreCase: false,
                     suggest: true,
                     filter: "none"
                 });
