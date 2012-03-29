@@ -738,7 +738,12 @@
                     removeFiltersForField(expression, field);
 
                     filters = expression.filters || [];
-                    filters.push({ field: field, operator: filter, value: word, ignoreCase: options.ignoreCase });
+                    filters.push({
+                        value: word,
+                        field: field,
+                        operator: filter,
+                        ignoreCase: options.ignoreCase
+                    });
 
                     that.dataSource.filter(filters);
                 }

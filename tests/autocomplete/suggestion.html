@@ -113,6 +113,7 @@
             test("current highlighted item completes the value of the input if suggest is enabled", function() {
                 var autocomplete = new AutoComplete(input, {
                     dataSource: ["baz", "bar"],
+                    highlightFirst: true,
                     suggest: true
                 });
 
