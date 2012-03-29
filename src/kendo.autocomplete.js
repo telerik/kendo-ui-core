@@ -593,7 +593,7 @@
             ul = that.ul[0],
             popup = that.popup,
             options = that.options,
-            data = that.dataSource.view(),
+            data = that._data(),
             length = data.length;
 
             that.trigger("dataBinding");
@@ -717,7 +717,7 @@
                 idx = List.inArray(word[0], that.ul[0]);
 
                 if (idx > -1) {
-                    word = that._text(that.dataSource.view()[idx]);
+                    word = that._text(that._data()[idx]);
                 } else {
                     word = "";
                 }
@@ -873,7 +873,7 @@
         _select: function (li) {
             var that = this,
                 separator = that.options.separator,
-                data = that.dataSource.view(),
+                data = that._data(),
                 text,
                 idx;
 
