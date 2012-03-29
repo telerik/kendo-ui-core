@@ -358,6 +358,8 @@
         showLoading: function() {
             var that = this;
 
+            clearTimeout(that._loading);
+
             if (that.options.loading === false) {
                 return;
             }
