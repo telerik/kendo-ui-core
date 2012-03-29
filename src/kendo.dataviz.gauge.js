@@ -271,7 +271,7 @@
                 minorTickSize = options.minorTicks.size;
 
             function renderTickRing(ring, unit, tickOptions, skipUnit) {
-                var tickAngles = scale.getTickAngles(ring, unit),
+                var tickAngles = scale.tickAngles(ring, unit),
                     i, innerPoint, outerPoint,
                     skip = skipUnit / unit,
                     count = tickAngles.length;
@@ -313,7 +313,7 @@
             var scale = this,
                 options = scale.options,
                 ring = scale.ring.clone(),
-                tickAngels = scale.getTickAngles(ring, options.majorUnit),
+                tickAngels = scale.tickAngles(ring, options.majorUnit),
                 labels = scale.labels,
                 count = labels.length,
                 labelsOptions = options.labels,
@@ -346,7 +346,7 @@
             }
         },
 
-        getTickAngles: function(ring, stepValue) {
+        tickAngles: function(ring, stepValue) {
             var scale = this,
                 options = scale.options,
                 range = options.max - options.min,
