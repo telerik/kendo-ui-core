@@ -2096,34 +2096,12 @@ function pad(number) {
     },
     localUrlRe = /^([a-z]+:)?\/\//i;
 
-    extend(kendo, /** @lends kendo */ {
+    extend(true, kendo, /** @lends kendo */ {
         /**
          * @name kendo.ui
          * @namespace Contains all classes for the Kendo UI widgets.
          */
-        ui: {
-            /**
-             * Shows an overlay with a loading message, indicating that an action is in progress.
-             * @name kendo.ui.progress
-             * @function
-             * @param {jQueryObject} container The container that will hold the overlay
-             * @param {Boolean} toggle Whether the overlay should be shown or hidden
-             */
-            progress: function(container, toggle) {
-                var mask = container.find(".k-loading-mask");
-
-                if (toggle) {
-                    if (!mask.length) {
-                        mask = $("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
-                            .width("100%").height("100%")
-                            .prependTo(container)
-                            .css({ top: container.scrollTop(), left: container.scrollLeft() });
-                    }
-                } else if (mask) {
-                    mask.remove();
-                }
-            }
-        },
+        ui: {},
         fx: fx,
         data: {},
         mobile: {},
@@ -2405,6 +2383,27 @@ function pad(number) {
         Widget: Widget,
         roles: {},
         /**
+         * Shows an overlay with a loading message, indicating that an action is in progress.
+         * @name kendo.ui.progress
+         * @function
+         * @param {jQueryObject} container The container that will hold the overlay
+         * @param {Boolean} toggle Whether the overlay should be shown or hidden
+         */
+        progress: function(container, toggle) {
+            var mask = container.find(".k-loading-mask");
+
+            if (toggle) {
+                if (!mask.length) {
+                    mask = $("<div class='k-loading-mask'><span class='k-loading-text'>Loading...</span><div class='k-loading-image'/><div class='k-loading-color'/></div>")
+                        .width("100%").height("100%")
+                        .prependTo(container)
+                        .css({ top: container.scrollTop(), left: container.scrollLeft() });
+                }
+            } else if (mask) {
+                mask.remove();
+            }
+        },
+        /**
          * Helper method for writing new widgets.
          * Exposes a jQuery plug-in that will handle the widget creation and attach its client-side object in the appropriate data-* attribute.
          * @name kendo.ui.plugin
@@ -2470,7 +2469,7 @@ function pad(number) {
      * @name kendo.mobile
      * @namespace This object contains all code introduced by the Kendo mobile suite, plus helper functions that are used across all mobile widgets.
      */
-    $.extend(kendo.mobile, {
+    extend(kendo.mobile, {
         init: function(element) {
             kendo.init(element, kendo.mobile.ui);
         },
