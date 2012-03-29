@@ -1,0 +1,61 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.ui.ActionSheet Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.actionsheet.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.ActionSheet Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+
+            var markup = '<div data-role="view"><ul data-role="actionsheet"><li><a id="foo">Foo</a></li></ul></div>',
+                actionSheet,
+                root = $('#qunit-fixture');
+
+            module("ActionSheet", {
+                setup: function() {
+                    root.html(markup);
+                    new kendo.mobile.Application(root);
+                    actionSheet = root.find("[data-role=actionsheet]").data("kendoMobileActionSheet");
+                    console.log(actionSheet);
+                }
+            });
+
+            test("Is hidden by default", function(){
+                ok(!root.find("#foo").is(":visible"));
+            });
+
+            test("Is visible when open", function(){
+                actionSheet.open();
+                ok(root.find("#foo").is(":visible"));
+            });
+
+            test("Is hidden when closed", function(){
+                actionSheet.open();
+                actionSheet.close();
+                ok(!root.find("#foo").is(":visible"));
+            });
+
+        </script>
+    </body>
+</html>
