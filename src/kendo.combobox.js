@@ -938,10 +938,10 @@
         },
 
         _filter: function(word) {
-            word = word.toLowerCase();
             var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
+                ignoreCase = options.ignoreCase,
                 predicate = function (dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
@@ -950,9 +950,17 @@
                             return false;
                         }
 
-                        return text.toLowerCase().indexOf(word) === 0;
+                        if (ignoreCase) {
+                            text = text.toLowerCase();
+                        }
+
+                        return text.indexOf(word) === 0;
                     }
                 };
+
+            if (ignoreCase) {
+                word = word.toLowerCase();
+            }
 
             if (!that.ul[0].firstChild) {
                 dataSource.one(CHANGE, function () { that.search(word); }).fetch();

@@ -533,13 +533,39 @@
                     delay: 0
                 }).data("kendoComboBox");
 
-                combobox.input.val("f");
-                combobox.search("f");
+                combobox.input.val("t");
+                combobox.search("t");
                 combobox.input.val("3");
                 combobox.search("3");
 
                 equal(combobox.text(), "3text");
                 equal(combobox.current(), null);
+            });
+
+            test("ComboBox ignores case when filter is disabled", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["Text", "text", "3text"],
+                    ignoreCase: true, //default
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("t");
+                combobox.search("t");
+
+                equal(combobox.current().index(), 0);
+            });
+
+            test("ComboBox honors casing when filter is disabled", 1, function() {
+                var combobox = input.kendoComboBox({
+                    dataSource: ["Text", "text", "3text"],
+                    ignoreCase: false,
+                    delay: 0
+                }).data("kendoComboBox");
+
+                combobox.input.val("t");
+                combobox.search("t");
+
+                equal(combobox.current().index(), 1);
             });
 
         </script>
