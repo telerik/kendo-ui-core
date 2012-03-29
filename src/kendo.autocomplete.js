@@ -381,6 +381,7 @@
             delay: 200,
             height: 200,
             filter: "startswith",
+            ignoreCase: true,
             highlightFirst: false,
             separator: null,
             placeholder: "",
@@ -592,7 +593,6 @@
             ul = that.ul[0],
             popup = that.popup,
             options = that.options,
-            suggest = options.suggest,
             data = that.dataSource.view(),
             length = data.length;
 
@@ -603,12 +603,12 @@
             that._height(length);
 
             if (length) {
-                if (suggest || options.highlightFirst) {
+                if (options.highlightFirst) {
                     that.current($(ul.firstChild));
                 }
 
-                if (suggest) {
-                    that.suggest(that._current);
+                if (options.suggest) {
+                    that.suggest($(ul.firstChild));
                 }
             }
 
@@ -672,7 +672,12 @@
                 that.popup.close();
             } else if (length >= that.options.minLength) {
                 that._open = true;
-                that.dataSource.filter({ field: options.dataTextField, operator: options.filter, value: word });
+                that.dataSource.filter({
+                    value: word,
+                    operator: options.filter,
+                    field: options.dataTextField,
+                    ignoreCase: options.ignoreCase
+                });
             }
         },
 

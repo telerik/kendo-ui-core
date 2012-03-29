@@ -78,6 +78,34 @@
                 stop(1);
             });
 
+            test("search method supports case sensitive filtering", function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["FOO", "foo", "bar"],
+                    ignoreCase: false
+                });
+
+                autocomplete.search("f");
+                equal(autocomplete.dataSource.view()[0], "foo");
+            });
+
+            test("refresh suggests on every dataSource change", 2, function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["text", "Text", "3text"],
+                    filter: "startswith",
+                    highlightFirst: false,
+                    suggest: true,
+                    delay: 0
+                });
+
+                input.val("t");
+                autocomplete.search("t");
+                input.val("3");
+                autocomplete.search("3");
+
+                equal(autocomplete.value(), "3text");
+                equal(autocomplete.current(), null);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
