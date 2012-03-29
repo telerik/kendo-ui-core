@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Radial Scale</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.gauge.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../chart/util.js"></script>
+        <script>
+            var dataviz = kendo.dataviz,
+                Gauge = dataviz.ui.Gauge,
+                Box2D = dataviz.Box2D,
+                Point2D = dataviz.Point2D,
+                LinearScale = dataviz.LinearScale,
+                linearScale,
+                chartBox = new Box2D(0, 0, 400, 400),
+                view;
+
+            function createScale(options) {
+                linearScale = new LinearScale(options);
+                view = new ViewStub();
+            }
+
+            module("Linear Scale/ Ranges");
+
+            test("render range from 10 to 20", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 20
+                    }]
+                });
+                linearScale.reflow(chartBox);
+                linearScale.getViewElements(view);
+                var rect = view.log.rect[0];
+
+                same([rect.x1 , rect.y1, rect.x2, rect.y2], [33, 238.1, 38, 314.3]);
+            });
+
+            test("render range from 10 to 15 and from 15 to 20", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 15
+                    }, {
+                        from: 15,
+                        to: 20
+                    }]
+                });
+                linearScale.reflow(chartBox);
+                linearScale.getViewElements(view);
+
+                var rect = view.log.rect[0];
+                same([rect.x1 , rect.y1, rect.x2, rect.y2], [33, 276.2, 38, 314.3]);
+
+                rect = view.log.rect[1];
+                same([rect.x1 , rect.y1, rect.x2, rect.y2], [33, 238.1, 38, 276.2]);
+            });
+
+            module("Linear Scale/ Ranges/ Configuration");
+
+            test("render color", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 20,
+                        color: "red"
+                    }]
+                });
+                linearScale.reflow(chartBox);
+                linearScale.getViewElements(view);
+                var rect = view.log.rect[0];
+
+                ok(rect.style.fill, "red");
+            });
+
+            test("render opacity", function() {
+                createScale({
+                    ranges: [{
+                        from: 10,
+                        to: 20,
+                        opacity: 0.33
+                    }]
+                });
+                linearScale.reflow(chartBox);
+                linearScale.getViewElements(view);
+                var rect = view.log.rect[0];
+                ok(rect.style.fillOpacity, 0.33);
+            });
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>

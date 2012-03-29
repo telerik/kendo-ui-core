@@ -95,7 +95,7 @@
                 equal(ticks.length, 5);
             });
 
-            test("getSlotAngle() returns startAngle/endAngle for extreme values", function() {
+            test("slotAngle() returns startAngle/endAngle for extreme values", function() {
                 $.extend(radialScale.options, {
                     min: 0,
                     max: 100,
@@ -103,11 +103,11 @@
                     endAngle: 48
                 });
 
-                equal(radialScale.getSlotAngle(0), 27);
-                equal(radialScale.getSlotAngle(100), 48);
+                equal(radialScale.slotAngle(0), 27);
+                equal(radialScale.slotAngle(100), 48);
             });
 
-            test("getSlotAngle() takes options.min and options.max into account", function() {
+            test("slotAngle() takes options.min and options.max into account", function() {
                 $.extend(radialScale.options, {
                     min: 38,
                     max: 106,
@@ -115,11 +115,11 @@
                     endAngle: 48
                 });
 
-                equal(radialScale.getSlotAngle(38), 27);
-                equal(radialScale.getSlotAngle(106), 48);
+                equal(radialScale.slotAngle(38), 27);
+                equal(radialScale.slotAngle(106), 48);
             });
 
-            test("getSlotAngle() takes options.min and options.max into account", function() {
+            test("slotAngle() takes options.min and options.max into account", function() {
                 $.extend(radialScale.options, {
                     min: 38,
                     max: 106,
@@ -127,8 +127,8 @@
                     endAngle: 48
                 });
 
-                equal(radialScale.getSlotAngle(38), 27);
-                equal(radialScale.getSlotAngle(106), 48);
+                equal(radialScale.slotAngle(38), 27);
+                equal(radialScale.slotAngle(106), 48);
             });
 
             function createScale(options) {
@@ -150,8 +150,8 @@
                 var ranges = view.log.ring,
                     ring = ranges[0].ring;
 
-                equal(ring.startAngle, radialScale.getSlotAngle(0));
-                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(10));
+                equal(ring.startAngle, radialScale.slotAngle(0));
+                equal(ring.startAngle + ring.angle, radialScale.slotAngle(10));
             });
 
             test("render range from 10 to 100", function() {
@@ -166,8 +166,8 @@
                 var ranges = view.log.ring;
 
                 ring = ranges[1].ring;
-                equal(ring.startAngle, radialScale.getSlotAngle(10));
-                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(100));
+                equal(ring.startAngle, radialScale.slotAngle(10));
+                equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
             });
 
             test("render range from 10 to 50 and from 50 to 100", function() {
@@ -185,12 +185,12 @@
                 var ranges = view.log.ring;
 
                 ring = ranges[1].ring;
-                equal(ring.startAngle, radialScale.getSlotAngle(10));
-                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(50));
+                equal(ring.startAngle, radialScale.slotAngle(10));
+                equal(ring.startAngle + ring.angle, radialScale.slotAngle(50));
 
                 ring = ranges[2].ring;
-                equal(ring.startAngle, radialScale.getSlotAngle(50));
-                equal(ring.startAngle + ring.angle, radialScale.getSlotAngle(100));
+                equal(ring.startAngle, radialScale.slotAngle(50));
+                equal(ring.startAngle + ring.angle, radialScale.slotAngle(100));
             });
         </script>
 

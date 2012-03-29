@@ -126,10 +126,10 @@
                 needle = pointer.elements[0],
                 animationOptions = options.animation,
                 currentAngle = needle.options.rotation[0],
-                minSlotAngle = scale.getSlotAngle(scale.options.min),
+                minSlotAngle = scale.slotAngle(scale.options.min),
                 endAngle = needle.options.rotation[0] =
-                    scale.getSlotAngle(options.value) - minSlotAngle,
-                oldAngle = scale.getSlotAngle(options._oldValue) - minSlotAngle,
+                    scale.slotAngle(options.value) - minSlotAngle,
+                oldAngle = scale.slotAngle(options._oldValue) - minSlotAngle,
                 animation = needle._animation;
 
             if (animation) {
@@ -158,7 +158,7 @@
                 capSize = r * options.cap.size,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 center = box.center(),
-                minAngle = scale.getSlotAngle(scale.options.min),
+                minAngle = scale.slotAngle(scale.options.min),
                 pointRotation = ROTATION_ORIGIN - minAngle;
 
             if (options.animation !== false) {
@@ -170,7 +170,7 @@
 
             deepExtend(options, {
                 rotation: [
-                    scale.getSlotAngle(options.value) - minAngle,
+                    scale.slotAngle(options.value) - minAngle,
                     center.x,
                     center.y
                 ]
@@ -252,7 +252,7 @@
             scale.arrangeLabels();
         },
 
-        getSlotAngle: function(value) {
+        slotAngle: function(value) {
             var options = this.options,
                 startAngle = options.startAngle,
                 angle = options.endAngle - startAngle,
@@ -385,8 +385,8 @@
 
                 for (i = 0; i < segments.length; i++) {
                     segment = segments[i];
-                    from = scale.getSlotAngle(segment.from);
-                    to = scale.getSlotAngle(segment.to);
+                    from = scale.slotAngle(segment.from);
+                    to = scale.slotAngle(segment.to);
                     if (to - from !== 0) {
                         result.push(view.createRing(
                             new Ring(
@@ -672,15 +672,14 @@
                 count = ranges.length,
                 range, slotX, slotY, i,
                 rangeSize = options.minorTicks.size / 2,
-                lineBox = scale.lineBox(),
                 slot;
 
             if (count) {
                 for (i = 0; i < count; i++) {
                     range = getRange(ranges[i], min, max);
                     slot = scale.getSlot(range.from, range.to);
-                    slotX = vertical ? lineBox : slot;
-                    slotY = vertical ? slot : lineBox;
+                    slotX = vertical ? scale.lineBox() : slot;
+                    slotY = vertical ? slot : scale.lineBox();
                     if (vertical) {
                         slotX.x1 -= rangeSize;
                     } else {
