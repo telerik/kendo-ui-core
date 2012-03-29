@@ -230,6 +230,17 @@
                 equal(combobox.text(), "custom");
             });
 
+            test("text method selects item depending on ignoreCase option", function() {
+                var combobox = new ComboBox(input, {
+                    dataSource: ["foo", "Foo"],
+                    ignoreCase: false
+                });
+
+                combobox.text("Foo");
+
+                equal(combobox.selectedIndex, 1);
+            });
+
             asyncTest("text should not change selection if selected item is equal to input.value", 2, function() {
                 var combobox = $("<input/>").kendoComboBox({
                     dataTextField: "text",

@@ -406,6 +406,7 @@
             filter: "none",
             placeholder: "",
             suggest: false,
+            ignoreCase: true,
             animation: {}
         },
 
@@ -639,7 +640,6 @@
             var that = this,
                 ul = that.ul[0],
                 options = that.options,
-                suggest = options.suggest,
                 data = that._data(),
                 length = data.length;
 
@@ -653,12 +653,12 @@
             }
 
             if (length) {
-                if (suggest || options.highlightFirst) {
+                if (options.highlightFirst) {
                     that.current($(ul.firstChild));
                 }
 
-                if (suggest && that.input.val()) {
-                    that.suggest(that._current);
+                if (options.suggest && that.input.val()) {
+                    that.suggest($(ul.firstChild));
                 }
             }
 
@@ -738,7 +738,12 @@
                     removeFiltersForField(expression, field);
 
                     filters = expression.filters || [];
-                    filters.push({ field: field, operator: filter, value: word });
+                    filters.push({
+                        value: word,
+                        field: field,
+                        operator: filter,
+                        ignoreCase: options.ignoreCase
+                    });
 
                     that.dataSource.filter(filters);
                 }
@@ -773,7 +778,7 @@
             word = word || "";
 
             if (typeof word !== "string") {
-                idx = word.index();
+                idx = List.inArray(word[0], that.ul[0]);
 
                 if (idx > -1) {
                     word = that._text(that.dataSource.view()[idx]);
@@ -796,12 +801,7 @@
             }
 
             if (value.length !== caret || !word) {
-
-                if (value.toLowerCase() === word.toLowerCase()) {
-                    value = word;
-                }
-
-                that.text(value);
+                element.value = value;
                 List.selectText(element, caret, value.length);
             }
         },
@@ -820,6 +820,8 @@
             var that = this,
                 textAccessor = that._text,
                 input = that.input[0],
+                ignoreCase = that.options.ignoreCase,
+                loweredText = text,
                 dataItem;
 
             if (text !== undefined) {
@@ -829,15 +831,25 @@
                     return;
                 }
 
-                that._select(function(dataElement) {
-                    return textAccessor(dataElement) === text;
+                if (ignoreCase) {
+                    loweredText = loweredText.toLowerCase();
+                }
+
+                that._select(function(data) {
+                    data = textAccessor(data);
+
+                    if (ignoreCase) {
+                        data = (data + "").toLowerCase();
+                    }
+
+                    return data === loweredText;
                 });
 
                 if (that.selectedIndex < 0) {
                     that._custom(text);
+                    input.value = text;
                 }
 
-                input.value = text;
             } else {
                 return input.value;
             }
@@ -931,10 +943,10 @@
         },
 
         _filter: function(word) {
-            word = word.toLowerCase();
             var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
+                ignoreCase = options.ignoreCase,
                 predicate = function (dataItem) {
                     var text = that._text(dataItem);
                     if (text !== undefined) {
@@ -943,9 +955,17 @@
                             return false;
                         }
 
-                        return text.toLowerCase().indexOf(word) === 0;
+                        if (ignoreCase) {
+                            text = text.toLowerCase();
+                        }
+
+                        return text.indexOf(word) === 0;
                     }
                 };
+
+            if (ignoreCase) {
+                word = word.toLowerCase();
+            }
 
             if (!that.ul[0].firstChild) {
                 dataSource.one(CHANGE, function () { that.search(word); }).fetch();
@@ -1137,10 +1157,6 @@
     });
 
     function removeFiltersForField(expression, field) {
-        if (!field) {
-            return;
-        }
-
         if (expression.filters) {
             expression.filters = $.grep(expression.filters, function(filter) {
                 removeFiltersForField(filter, field);
