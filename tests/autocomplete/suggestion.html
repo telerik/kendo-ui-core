@@ -349,6 +349,37 @@
 
                 autocomplete.search("f");
             });
+
+            test("refresh method suggests if no item is highlighted", 2, function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["foo", "bar"],
+                    filter: "startswith",
+                    highlightFirst: false,
+                    suggest: true,
+                    delay: 0
+                });
+
+                input.val("f");
+                autocomplete.search("f");
+
+                equal(autocomplete.value(), "foo");
+                equal(autocomplete.current(), null);
+            });
+
+            test("suggest method append text without modifying the user input", 1, function() {
+                var autocomplete = new AutoComplete(input, {
+                    dataSource: ["Foo", "Bar"],
+                    filter: "contains",
+                    highlightFirst: false,
+                    suggest: true,
+                    delay: 0
+                });
+
+                input.val("f");
+                autocomplete.search("f");
+
+                equal(autocomplete.value(), "foo");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
