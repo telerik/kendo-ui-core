@@ -3,7 +3,9 @@
         ui = kendo.mobile.ui,
         Shim = ui.Shim,
         Widget = ui.Widget,
-        WRAP = '<div class="km-actionsheet-wrapper" />';
+        BUTTONS = 'li>a',
+        WRAP = '<div class="km-actionsheet-wrapper" />',
+        cancelTemplate = kendo.template('<li><a href="\\#" class="km-actionsheet-cancel">#:cancel#</a></li>');
 
     var ActionSheet = Widget.extend(/** @lends kendo.mobile.ui.ActionSheet.prototype */{
         /**
@@ -17,17 +19,19 @@
 
             Widget.fn.init.call(that, element, options);
 
-            element = that.element;
-            element.wrap(WRAP);
+            that.element.wrap(WRAP)
+                .append(cancelTemplate({cancel: that.options.cancel}))
+                .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that));
 
-            wrapper = element.parent();
+            wrapper = that.element.parent();
 
             that.wrapper = wrapper;
             that.shim = new Shim(that.wrapper);
         },
 
         options: {
-            name: "ActionSheet"
+            name: "ActionSheet",
+            cancel: 'Cancel'
         },
 
         open: function() {
@@ -36,6 +40,25 @@
 
         close: function() {
             this.shim.hide();
+        },
+
+        _click: function(e) {
+            if (e.originalEvent && e.originalEvent.defaultPrevented) {
+                return;
+            }
+
+            var target = $(e.currentTarget),
+                action = target.data("action"),
+                handler;
+
+            if (action) {
+                kendo.getter(action)(window)({
+                    target: target,
+                    context: target.data("context")
+                });
+            }
+
+            this.close();
         }
     });
 
