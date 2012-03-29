@@ -24,6 +24,7 @@
         UNDEFINED = "undefined",
         getterCache = {},
         setterCache = {},
+        slice = [].slice,
         globalize = window.Globalize;
 
     function Class() {}
@@ -2432,10 +2433,41 @@ function pad(number) {
 
             name = "kendo" + prefix + name;
             $.fn[name] = function(options) {
-                $(this).each(function() {
-                    new widget(this, options);
-                });
-                return this;
+                var value = this,
+                    args;
+
+                if (typeof options === STRING) {
+                    args = slice.call(arguments, 1);
+
+                    this.each(function(){
+                        var widget = $.data(this, name),
+                            method,
+                            result;
+
+                        if (!widget) {
+                            throw new Error(kendo.format("Cannot call method '{0}' of {1} before it is initialized", options, name));
+                        }
+
+                        method = widget[options];
+
+                        if (typeof method !== FUNCTION) {
+                            throw new Error(kendo.format("Cannot find method '{0}' of {1}", options, name));
+                        }
+
+                        result = method.apply(widget, args);
+
+                        if (result !== undefined) {
+                            value = result;
+                            return false;
+                        }
+                    });
+                } else {
+                    this.each(function() {
+                        new widget(this, options);
+                    });
+                }
+
+                return value;
             };
         }
     });
