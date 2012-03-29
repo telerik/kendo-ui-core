@@ -8,6 +8,10 @@ tests.push(
         title: "core init"
     },
     {
+        page: "core/dispatch.html",
+        title: "core dispatch"
+    },
+    {
         page: "core/observable.html",
         title: "core observable"
     },
