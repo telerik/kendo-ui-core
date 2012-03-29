@@ -403,8 +403,8 @@
                 that._hideLoadingProxy();
             }
 
-            that.trigger("dataBound");
             that._style();
+            that.trigger("dataBound");
         },
 
         _templates: function() {
