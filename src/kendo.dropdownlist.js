@@ -351,10 +351,11 @@
             autoBind: true,
             template: "",
             delay: 500,
+            height: 200,
             dataTextField: "",
             dataValueField: "",
             optionLabel: "",
-            height: 200,
+            ignoreCase: true,
             animation: {}
         },
         events: [
@@ -637,14 +638,24 @@
         * dropdownlist.search("In");
         */
         search: function(word) {
-            if(word){
-                var that = this;
-                word = word.toLowerCase();
+            if (word) {
+                var that = this,
+                    ignoreCase = that.options.ignoreCase;
+
+                if (ignoreCase) {
+                    word = word.toLowerCase();
+                }
 
                 that._select(function(dataItem) {
                     var text = that._text(dataItem);
+
                     if (text !== undefined) {
-                        return (text + "").toLowerCase().indexOf(word) === 0;
+                        text = (text + "");
+                        if (ignoreCase) {
+                            text = text.toLowerCase();
+                        }
+
+                        return text.indexOf(word) === 0;
                     }
                 });
             }

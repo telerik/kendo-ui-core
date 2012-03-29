@@ -97,6 +97,17 @@
                 stop(1);
             });
 
+            test("search method supports a case sensitive search", function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: ["TEXT", "text", "3text"],
+                    ignoreCase: false
+                });
+
+                dropdownlist.search("t");
+
+                equal(dropdownlist.selectedIndex, 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
