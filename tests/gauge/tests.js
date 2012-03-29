@@ -16,8 +16,8 @@ tests.push(
         title: "pointer"
     },
     {
-        page: "gauge/plotarea.html",
-        title: "plotarea"
+        page: "gauge/radialplotarea.html",
+        title: "radialplotarea"
     },
     {
         page: "gauge/mvvm.html",
