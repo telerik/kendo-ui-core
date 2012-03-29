@@ -2096,15 +2096,15 @@ function pad(number) {
     },
     localUrlRe = /^([a-z]+:)?\/\//i;
 
-    extend(true, kendo, /** @lends kendo */ {
+    extend(kendo, /** @lends kendo */ {
         /**
          * @name kendo.ui
          * @namespace Contains all classes for the Kendo UI widgets.
          */
-        ui: {},
-        fx: fx,
-        data: {},
-        mobile: {},
+        ui: kendo.ui || {},
+        fx: kendo.fx || fx,
+        data: kendo.data || {},
+        mobile: kendo.mobile || {},
         keys: {
             INSERT: 45,
             DELETE: 46,
