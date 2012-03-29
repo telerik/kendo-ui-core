@@ -48,8 +48,7 @@
             }
 
             var target = $(e.currentTarget),
-                action = target.data("action"),
-                handler;
+                action = target.data("action");
 
             if (action) {
                 kendo.getter(action)(window)({
