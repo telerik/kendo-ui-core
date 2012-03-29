@@ -88,6 +88,7 @@
                     separator: ", "
                 });
 
+                input.focus();
                 input.val("foo, bar, ");
                 input[0].selectionStart = 0;
                 autocomplete.search();
@@ -100,6 +101,7 @@
                     separator: ", "
                 });
 
+                input.focus();
                 input.val("foo, bar, ");
                 input[0].selectionStart = 0;
                 autocomplete.dataSource.read();
