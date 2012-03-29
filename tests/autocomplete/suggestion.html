@@ -66,7 +66,7 @@
                 };
 
                 autocomplete.current = autocomplete.ul.children().first();
-                input.press(kendo.keys.ENTER);
+                input.focus().press(kendo.keys.ENTER);
             });
 
             test("pressing enter calls _blur when no item is selected", 1, function() {
@@ -79,7 +79,7 @@
                     ok(true);
                 };
 
-                input.press(kendo.keys.ENTER);
+                input.focus().press(kendo.keys.ENTER);
             });
 
             test("pressing tab calls _blur", 1, function() {
@@ -93,7 +93,7 @@
                 };
 
                 autocomplete.current = autocomplete.ul.children().first();
-                input.press(kendo.keys.TAB);
+                input.focus().press(kendo.keys.TAB);
             });
 
             test("current popup item completes the value of the input if suggest is enabled", function() {
@@ -273,6 +273,7 @@
 
                 autocomplete.dataSource.read();
 
+                input.focus();
                 autocomplete.select(autocomplete.ul.children().eq(0));
                 equal(input.val(), "foo, ");
             });
@@ -330,6 +331,7 @@
                     start();
                 });
 
+                input.focus();
                 autocomplete.search("foo");
             });
 
@@ -347,6 +349,7 @@
                     start();
                 });
 
+                input.focus();
                 autocomplete.search("f");
             });
 
@@ -359,6 +362,7 @@
                     delay: 0
                 });
 
+                input.focus();
                 input.val("f");
                 autocomplete.search("f");
 
