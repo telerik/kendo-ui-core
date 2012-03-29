@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chart helpers</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../src/kendo.core.js"></script>
+        <script>
+            // ------------------------------------------------------------
+            var deepExtend = kendo.deepExtend,
+                src,
+                dst;
+
+            module("deepExtend", {
+                setup: function() {
+                    src = {
+                        margin: {
+                            top: 10
+                        },
+                        colors: ["red"],
+                        border: 5
+                    };
+
+                    dst = {
+                        margin: 5,
+                        colors: ["green", "blue"],
+                        border: undefined
+                    }
+
+                    deepExtend(dst, src);
+                }
+            });
+
+            test("Overwrites arrays", function() {
+                equal(dst.colors[0], "red");
+                equal(dst.colors.length, 1);
+            });
+
+            test("Does not copy undefined values", function() {
+                equal(dst.border, 5);
+            });
+
+            test("Overwrites fields containing primitive types", function() {
+                equal(dst.margin.top, 10);
+            });
+
+        </script>
+
+        <h1 id="qunit-header">kendo.chart</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html> 
