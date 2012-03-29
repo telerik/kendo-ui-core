@@ -766,7 +766,7 @@
 
 /* Forms */
 
-.km-android input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]),
+.km-android input:not([type=button]):not([type=submit]):not([type=reset]):not([type=image]):not([type=file]):not([type=checkbox]):not([type=radio]):not(.k-input):not(.k-button),
 .km-android select:not([multiple]),
 .km-android .k-dropdown
 {
@@ -813,7 +813,7 @@
 .km-android input[type=tel],
 .km-android input[type=url],
 .km-android input[type=email],
-.km-android input[type=text]
+.km-android input[type=text]:not(.k-input)
 {
     border: 0;
     border-bottom: 1px solid rgba(127,127,127,.5);
@@ -832,7 +832,7 @@
 .km-android input[type=tel]:focus,
 .km-android input[type=url]:focus,
 .km-android input[type=email]:focus,
-.km-android input[type=text]:focus
+.km-android input[type=text]:not(.k-input):focus
 {
     background: linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)),
                 linear-gradient(top, rgba(40,170,220,0) 90%, rgba(40,170,220,.6) 90%, rgba(40,170,220,.6)) transparent;
