@@ -22,7 +22,8 @@
                             top: 10
                         },
                         colors: ["red"],
-                        border: 5
+                        border: 5,
+                        date: new Date()
                     };
 
                     dst = {
@@ -46,6 +47,11 @@
 
             test("Overwrites fields containing primitive types", function() {
                 equal(dst.margin.top, 10);
+            });
+
+            test("Clones dates", function() {
+                equal(dst.date.getTime(), src.date.getTime());
+                ok(dst != src);
             });
 
         </script>
