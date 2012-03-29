@@ -300,11 +300,23 @@
 
             test("dataItem() returns dataItem of the selected LI element", function() {
                 var select = $("<select><option value=''>Chai</option><option>Bar</option></select>");
-                dropdownlist = new DropDownList(select);
+                dropdownlist = new DropDownList(select, {
+                    optionLabel: "Select..."
+                });
 
                 dropdownlist.select(1);
                 equal(dropdownlist.selectedIndex, 1);
-                equal(dropdownlist.dataItem(), dropdownlist.dataSource.view()[1]);
+                equal(dropdownlist.dataItem(), dropdownlist.dataSource.view()[0]);
+            });
+
+            test("dataItem() returns empty object if optionLabel", function() {
+                var select = $("<select><option value=''>Chai</option><option>Bar</option></select>");
+                dropdownlist = new DropDownList(select, {
+                    optionLabel: "Select..."
+                });
+
+                equal(dropdownlist.selectedIndex, 0);
+                equal(dropdownlist.dataItem().text, dropdownlist._data()[0].text);
             });
 
             test("dataItem() returns dataItem depending on passed index", function() {

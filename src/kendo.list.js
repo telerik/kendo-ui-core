@@ -87,7 +87,7 @@
                 index = that.selectedIndex;
             }
 
-            return that.dataSource.view()[index];
+            return that._data()[index];
         },
 
         _accessors: function() {
@@ -144,6 +144,10 @@
             if (!e.isDefaultPrevented()) {
                 this._accept($(e.currentTarget));
             }
+        },
+
+        _data: function() {
+            return this.dataSource.view();
         },
 
         _enable: function() {
@@ -419,10 +423,6 @@
             that._busy = setTimeout(function () {
                 that._arrow.addClass(LOADING);
             }, 100);
-        },
-
-        _data: function() {
-            return this.dataSource.view();
         },
 
         _dataSource: function() {
