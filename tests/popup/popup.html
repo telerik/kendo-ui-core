@@ -107,6 +107,15 @@
                 ok(div.is(":visible"));
             });
 
+            test("open with coordinates skips alignment", function() {
+                var popup = div.kendoPopup().data("kendoPopup");
+
+                popup.open(50, 50);
+
+                ok(popup.wrapper.css("left") == "50px");
+                ok(popup.wrapper.css("top") == "50px");
+            });
+
             asyncTest("close triggers the close event", function() {
                 div.kendoPopup( {
                     close: function() {

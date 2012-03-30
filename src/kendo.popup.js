@@ -154,8 +154,9 @@
             }
         },
 
-        open: function() {
+        open: function(x, y) {
             var that = this,
+                fixed = { isFixed: !isNaN(parseInt(y,10)), x: x, y: y },
                 element = that.element,
                 options = that.options,
                 direction = "down",
@@ -199,7 +200,7 @@
                 }
 
                 animation = extend(true, {}, options.animation.open);
-                animation.effects = kendo.parseEffects(animation.effects, that._update());
+                animation.effects = kendo.parseEffects(animation.effects, that._update(fixed));
                 direction = animation.effects.slideIn ? animation.effects.slideIn.direction : direction;
 
                 if (options.anchor != BODY) {
@@ -293,8 +294,8 @@
             }
         },
 
-        _update: function() {
-            return this._position($(window));
+        _update: function(fixed) {
+            return this._position($(window), fixed);
         },
 
         _fit: function(position, size, viewPortSize) {
@@ -327,7 +328,7 @@
             return output;
         },
 
-        _position: function(viewport) {
+        _position: function(viewport, fixed) {
             var that = this,
                 element = that.element,
                 wrapper = that.wrapper,
@@ -350,10 +351,14 @@
 
             wrapper.css("zIndex", zIndex);
 
-            if (options.appendTo === Popup.fn.options.appendTo) {
-                wrapper.css(that._align(origins, positions));
+            if (fixed && fixed.isFixed) {
+                wrapper.css({ left: fixed.x, top: fixed.y });
             } else {
-                wrapper.css(that._align(origins, positions, true));
+                if (options.appendTo === Popup.fn.options.appendTo) {
+                    wrapper.css(that._align(origins, positions));
+                } else {
+                    wrapper.css(that._align(origins, positions, true));
+                }
             }
 
             var pos = getOffset(wrapper, POSITION),
