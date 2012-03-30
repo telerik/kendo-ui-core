@@ -486,6 +486,46 @@
                 dataSource.sync();
                 equal(dataSource.data().length, 1);
             });
+
+            test("deleted items are not synced after changes are reverted", 1, function() {
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([{id: 1, foo: "bar"}]);
+                        },
+                        destroy: function(options) {
+                            ok(false);
+                        }
+                    }
+                });
+                dataSource.read();
+
+                dataSource.remove(dataSource.at(0));
+
+                dataSource.cancelChanges();
+                dataSource.sync();
+                ok(!dataSource._destroyed.length);
+            });
+            test("deleted items are synced after other record changes are reverted", 2, function() {
+                dataSource = new kendo.data.DataSource({
+                    transport: {
+                        read: function(options) {
+                            options.success([{id: 1, foo: "bar"},{id: 2, foo: "baz"}]);
+                        },
+                        destroy: function(options) {
+                            ok(true);
+                        }
+                    },
+                    schema: { model: { id: "id" } }
+                });
+                dataSource.read();
+
+                dataSource.remove(dataSource.at(0));
+
+                dataSource.cancelChanges(dataSource.get(2));
+                dataSource.sync();
+                equal(dataSource._destroyed.length, 1);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

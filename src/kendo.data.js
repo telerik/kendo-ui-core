@@ -1641,6 +1641,7 @@
                     }
                 }
             } else {
+                that._destroyed = [];
                 that._data = that._observe(pristine);
                 that._change();
             }
