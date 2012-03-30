@@ -37,6 +37,7 @@ var suiteScripts = {
         "kendo.binder.js",
         "kendo.validator.js",
         "kendo.draganddrop.js",
+        "kendo.mobile.scroller.js",
         "kendo.groupable.js",
         "kendo.resizable.js",
         "kendo.sortable.js",
