@@ -27,7 +27,8 @@
         },
 
         options: {
-            name: "Shim"
+            name: "Shim",
+            duration: 200
         },
 
         viewInit: function(view) {
@@ -39,7 +40,7 @@
                 appendTo: that.shim,
                 origin: "bottom left",
                 position: "bottom left",
-                animation: { open: { effects: "slideIn:up" } },
+                animation: { open: { effects: "slideIn:up", duration: that.options.duration } },
                 close: function() {
                     that.shim.css(VISIBILITY, HIDDEN);
                 },

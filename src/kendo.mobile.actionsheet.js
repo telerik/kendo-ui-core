@@ -3,7 +3,8 @@
         ui = kendo.mobile.ui,
         Shim = ui.Shim,
         Widget = ui.Widget,
-        BUTTONS = 'li>a',
+        BUTTONS = "li>a",
+        CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
         cancelTemplate = kendo.template('<li><a href="\\#" class="km-actionsheet-cancel">#:cancel#</a></li>');
 
@@ -34,7 +35,8 @@
             cancel: 'Cancel'
         },
 
-        open: function() {
+        open: function(target) {
+            this.target = $(target);
             this.shim.show();
         },
 
@@ -43,17 +45,17 @@
         },
 
         _click: function(e) {
+            var target = this.target;
             if (e.originalEvent && e.originalEvent.defaultPrevented) {
                 return;
             }
 
-            var target = $(e.currentTarget),
-                action = target.data("action");
+            var action = $(e.currentTarget).data("action");
 
             if (action) {
                 kendo.getter(action)(window)({
                     target: target,
-                    context: target.data("context")
+                    context: target.data(CONTEXT_DATA)
                 });
             }
 

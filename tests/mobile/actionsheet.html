@@ -28,14 +28,15 @@
 
         <script>
 
-            var markup = '<div data-role="view"><a data-role="button" href="#actionSheet" data-rel="actionsheet"></a>' +
-                '<ul id="actionSheet" data-role="actionsheet"><li><a id="foo" data-context="1" data-action="foo"></a></li></ul></div>',
+            var markup = '<div data-role="view"><a id="source" data-role="button" href="#actionSheet" data-rel="actionsheet" data-actionsheet-context="1"></a>' +
+                '<ul id="actionSheet" data-role="actionsheet"><li><a id="foo" data-action="foo"></a></li></ul></div>',
                 actionSheet,
                 element,
                 root = $('#qunit-fixture');
 
             module("ActionSheet", {
                 setup: function() {
+                    kendo.mobile.ui.Shim.fn.options.duration = 0;
                     root.html(markup);
                     new kendo.mobile.Application(root);
                     element = root.find("[data-role=actionsheet]");
@@ -44,11 +45,11 @@
             });
 
             function isOpen() {
-                ok(root.find("#foo").is(":visible"));
+                equal(root.find(".km-shim").css("visibility"), "visible");
             }
 
             function isClosed() {
-                ok(!root.find("#foo").is(":visible"));
+                equal(root.find(".km-shim").css("visibility"), "hidden");
             }
 
             test("Is hidden by default", 1, isClosed);
@@ -84,11 +85,12 @@
             });
 
             test("Passes target in click handler", 1, function() {
+                var source = root.find("#source")
                 window.foo = function(e) {
-                    equal(e.target[0], root.find("#foo")[0]);
+                    equal(e.target[0], source[0]);
                 };
 
-                actionSheet.open();
+                actionSheet.open(source);
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
@@ -97,7 +99,7 @@
                     equal(e.context, 1);
                 };
 
-                actionSheet.open();
+                actionSheet.open(root.find("#source"));
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
