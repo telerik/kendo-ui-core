@@ -1,3 +1,9 @@
+## What is Kendo UI Mobile?
+Kendo UI Mobile is a complete mobile framework that automatically adapts the look and feel of mobile applications to the platform they are used on (iOS, Android, or BlackBerry). Thanks to the adaptive rendering, mobile apps built with Kendo UI look iOS-ish on iOS, Android-ish on Android, etc. without any additional code required.
+
+Kendo UI Mobile consists of foundamental mobile framework extensions such as layouts, views, etc. as well as a set of UI widgets including buttons, scrollers, navigation widgets, and more. 
+
+
 ## Why would I choose Kendo UI Mobile vs jQuery Mobile?
 In the simplest terms, there are two ways we provide extended benefit and a differentiated approach than jQuery Mobile. First, Kendo UI Mobile is a cohesive mobile framework for all of your HTML/JS development, whereas jQuery Mobile is primarily focused on UI (and mostly mobile UI at that). Kendo UI provides core framework components, like templating, MVVM, validation, and a data source, as well as UI for mobile touch interfaces.  
 
