@@ -169,12 +169,19 @@
                 {
                     "text": "Loading popup",
                     "url": "application/loadingpopup.html"
-                },
-                {
-                    "text": "Form Elements",
-                    "url": "application/forms.html"
                 }
-
+            ]
+        },
+        {
+            "text": "Forms",
+            "name": "forms",
+            "documentation": "mobile/forms",
+            "spriteCssClass": "mobileAppIcon",
+            "items": [
+                {
+                    "text": "Overview",
+                    "url": "forms/index.html"
+                }
             ]
         },
         {
