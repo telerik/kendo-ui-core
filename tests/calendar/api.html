@@ -147,11 +147,11 @@
                     modified = new Date(cal._current),
                     names = kendo.culture().calendar.months.names;
 
-                modified.setMonth(modified.getMonth() - 1);
+                modified.setMonth(modified.getMonth() - 1, 1);
 
                 cal.navigateToPast();
 
-                equal(+cal._current, +modified);
+                equal(cal._current.getMonth(), modified.getMonth());
                 ok(cal._title.html().indexOf(names[modified.getMonth()]) !== -1);
             });
 
