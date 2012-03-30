@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bar Chart</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.dataviz.core.js"></script>
+        <script src="../../src/kendo.dataviz.chart.js"></script>
+        <script src="../../src/kendo.dataviz.themes.js"></script>
+        <script src="../../src/kendo.dataviz.vml.js"></script>
+        <script src="../../src/kendo.dataviz.svg.js"></script>
+    </head>
+    <body>
+        <button class="benchmark" data-step-function="stepPrepare">Preparation</button>
+        <button class="benchmark" data-step-function="stepRender">DOM rendering</button>
+        <button class="benchmark" data-step-function="stepFull">Preparation + DOM rendering</button>
+
+        <div id="fpsCount">-- FPS / (-- ms rendering time)</div>
+
+        <div id="chart" style="width: 600px; height: 400px;">
+        </div>
+
+        <script type="text/javascript">
+            var TICKS_PER_DAY = 86400000,
+                POINTS = 20,
+                SERIES_COUNT = 3,
+                lastDate = new Date("2000/01/20"),
+                playInterval,
+                fpsUpdateInterval,
+                chart,
+                chartView,
+                chartViewRenderTo,
+                chartElement,
+                step;
+
+            function testData(value) {
+                var result = [];
+                for (var i = 0; i < POINTS; i++) {
+                    result.push(value);
+                }
+
+                return result;
+            }
+
+            $(document).ready(function() {
+                $("#chart").kendoChart({
+                    title: {
+                        text: "Stock prices"
+                    },
+                    series: [
+                        {
+                            name: "Value A",
+                            type: "column",
+                            data: testData(10)
+                        },
+                        {
+                            name: "Value B",
+                            type: "line",
+                            data: testData(20)
+                        },
+                        {
+                            name: "Value C",
+                            type: "line",
+                            data: testData(30)
+                        }
+                    ],
+                    categoryAxis: {
+                        categories: testData("")
+                    },
+                    transitions: false
+                });
+
+                chart = $("#chart").data("kendoChart");
+                chartView = chart._view;
+                chartViewRenderTo = kendo.dataviz.SVGView.fn.renderTo;
+                chartElement = chart.element[0];
+
+                $(".benchmark").click(function(e) {
+                    var button = $(this),
+                        otherButtons = $(".benchmark").not(this);
+                    step = window[button.data("stepFunction")];
+
+                    if (playInterval) {
+                        stop();
+                        button.html(button.data("text"));
+                        otherButtons.removeAttr("disabled");
+                    } else {
+                        play();
+                        button.data("text", button.html());
+                        button.html("Pause update");
+                        otherButtons.attr("disabled", "disabled");
+                    }
+                });
+            });
+
+            function play() {
+                var frames = 0,
+                    start = new Date(),
+                    fpsDisplay = $("#fpsCount");
+
+                fpsDisplay.data("text", fpsDisplay.html());
+
+                chartElement.innerHTML = "";
+
+                playInterval = setInterval(function() {
+                    step();
+                    frames++;
+                }, 10);
+
+                fpsUpdateInterval = setInterval(function() {
+                    var time = (new Date() - start) / 1000,
+                    fps = Math.round(frames / time),
+                    frameTime = Math.round(1000 / fps);
+
+                    fpsDisplay.html(fps + " FPS (" + frameTime + " ms rendering time)");
+                }, 1000);
+            }
+
+            function stop() {
+                var fpsDisplay = $("#fpsCount");
+
+                fpsDisplay.html(fpsDisplay.data("text"));
+
+                clearInterval(playInterval);
+                clearInterval(fpsUpdateInterval);
+
+                playInterval = null;
+                fpsUpdateInterval = null;
+                kendo.dataviz.SVGView.fn.renderTo = chartViewRenderTo;
+            }
+
+            function stepPrepare() {
+                kendo.dataviz.SVGView.fn.renderTo = $.noop;
+                chart.refresh();
+            }
+
+            function stepRender() {
+                chartView.renderTo(chartElement);
+            }
+
+            function stepFull() {
+                chart.refresh();
+            }
+        </script>
+
+    </body>
+</html>
+
