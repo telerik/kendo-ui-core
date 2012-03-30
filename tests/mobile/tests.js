@@ -1,15 +1,11 @@
 tests.push(
     {
+        page: "mobile/actionsheet.html",
+        title: "mobile actionsheet"
+    },
+    {
         page: "mobile/application.html",
         title: "mobile application"
-    },
-    {
-        page: "mobile/tabstrip.html",
-        title: "mobile tabstrip"
-    },
-    {
-        page: "mobile/core.html",
-        title: "mobile core"
     },
     {
         page: "mobile/button.html",
@@ -20,12 +16,16 @@ tests.push(
         title: "mobile buttongroup"
     },
     {
-        page: "mobile/switch/index.html",
-        title: "mobile switch"
+        page: "mobile/core.html",
+        title: "mobile core"
     },
     {
-        page: "mobile/switch/mvvm.html",
-        title: "mobile switch mvvm"
+        page: "mobile/integration.html",
+        title: "mobile integration"
+    },
+    {
+        page: "mobile/lint.html",
+        title: "mobile lint"
     },
     {
         page: "mobile/listview/index.html",
@@ -44,11 +44,15 @@ tests.push(
         title: "mobile navbar"
     },
     {
-        page: "mobile/integration.html",
-        title: "mobile integration"
+        page: "mobile/switch/index.html",
+        title: "mobile switch"
     },
     {
-        page: "mobile/lint.html",
-        title: "mobile lint"
+        page: "mobile/switch/mvvm.html",
+        title: "mobile switch mvvm"
+    },
+    {
+        page: "mobile/tabstrip.html",
+        title: "mobile tabstrip"
     }
 );
