@@ -3,6 +3,10 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Popup = kendo.ui.Popup,
+        VISIBILITY = "visibility",
+        HIDDEN = "hidden",
+        VISIBLE = "visible",
+        SHIM = '<div class="km-shim"/>',
         Widget = ui.Widget;
 
     var Shim = Widget.extend(/** @lends kendo.mobile.ui.Shim.prototype */{
@@ -13,7 +17,7 @@
         */
         init: function(element, options) {
             var that = this,
-                shim = $('<div class="km-shim" />').hide();
+                shim = $(SHIM).css(VISIBILITY, HIDDEN);
 
             Widget.fn.init.call(that, element, options);
 
@@ -35,17 +39,21 @@
                 appendTo: that.shim,
                 origin: "bottom left",
                 position: "bottom left",
-                animation: { open: { effects: "slideIn:up" } }
+                animation: { open: { effects: "slideIn:up" } },
+                close: function() {
+                    that.shim.css(VISIBILITY, HIDDEN);
+                },
+                open: function() {
+                    that.shim.css(VISIBILITY, VISIBLE);
+                }
             });
         },
 
         show: function() {
-            this.shim.show();
             this.popup.open();
         },
 
         hide: function() {
-            this.shim.hide();
             this.popup.close();
         }
     });
