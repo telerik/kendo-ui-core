@@ -914,7 +914,7 @@
 
         that._resizable = new kendo.ui.Resizable(splitter.element, {
             orientation: orientation,
-            handle: ".k-splitbar-draggable-" + orientation,
+            handle: splitter.element.children(".k-splitbar-draggable-" + orientation),
             hint: proxy(that._createHint, that),
             start: proxy(that._start, that),
             max: proxy(that._max, that),

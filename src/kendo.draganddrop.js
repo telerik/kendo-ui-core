@@ -296,6 +296,10 @@
                 that.target = that.element;
             }
 
+            if (!that.target.length) {
+                return;
+            }
+
             that.pressed = true;
             that.moved = false;
 
