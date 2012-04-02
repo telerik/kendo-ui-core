@@ -3,6 +3,7 @@ var path = require("path"),
     fs = require("fs"),
     jsdoctoolkit = require("build/node-jsdoc-toolkit/app/nodemodule").jsdoctoolkit,
     bundles = require("build/bundles"),
+    themebuilder = require("build/themebuilder"),
     kendoBuild = require("build/kendo-build"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
@@ -11,6 +12,7 @@ var path = require("path"),
 
 // Configuration ==============================================================
 var CDN_ROOT = "http://cdn.kendostatic.com/",
+    STAGING_ROOT = "http://mvc-kendobuild/staging",
     SOURCE_PATH = "src",
     DOCS_PATH = path.join(SOURCE_PATH, "docs"),
     STYLES_PATH = "styles",
@@ -26,10 +28,12 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
     BUILDER_PATH = "download-builder",
     BUILDER_STAGING_PATH = path.join(DEPLOY_PATH, "download-builder-staging"),
-    BUILDER_STAGING_SERVICE = "http://mvc-kendobuild/staging/download-builder-service",
+    BUILDER_STAGING_SERVICE = STAGING_ROOT + "/download-builder-service",
     BUILDER_SERVICE_PATH = "service",
     BUILDER_PROJECT = path.join(BUILDER_SERVICE_PATH, "Download.csproj"),
     BUILDER_CONFIG_NAME = path.join("config", "kendo-config.VERSION_NUMBER.json"),
+    THEMEBUILDER_LIVE_PATH = path.join(DEPLOY_PATH, "themebuilder.telerik.com"),
+    THEMEBUILDER_LIVE_PACKAGE = path.join(DEPLOY_PATH, "themebuilder.zip"),
     RELEASE_PATH = "release",
     SUITES = ["web", "mobile", "dataviz"];
 
@@ -62,6 +66,23 @@ task("sitefinity-docs", function() {
     buildDocs(SITEFINITY_HELP_PATH);
 });
 
+namespace("themebuilder", function() {
+    desc("Builds the generated themebuilder sources");
+    task("source", function() {
+        themebuilder.buildGeneratedSources();
+    });
+
+    desc("Builds the themebuilder for live deployment");
+    task("production", ["themebuilder:source"], function() {
+        themebuilder.deploy(
+            THEMEBUILDER_LIVE_PATH,
+            CDN_ROOT + version()
+        );
+
+        zip(THEMEBUILDER_LIVE_PACKAGE, THEMEBUILDER_LIVE_PATH, complete);
+    });
+});
+
 namespace("demos", function() {
     desc("Build less.js for demo site");
     task("less-js", function() {
@@ -89,29 +110,45 @@ namespace("demos", function() {
     }, true);
 
     desc("Build staging demos site");
-    task("staging", ["merge-scripts", "docs"], function () {
+    task("staging", ["merge-scripts", "docs", "themebuilder:source"], function () {
         var scriptsDest = path.join(DEMOS_STAGING_CONTENT_PATH, "js"),
             stylesDest = path.join(DEMOS_STAGING_CONTENT_PATH, "styles");
 
-        deployDemos(DEMOS_STAGING_PATH, "~/content/cdn", function() {
-            mkdir(DEMOS_STAGING_CONTENT_PATH);
+        console.log("Building demos");
+        deployDemos({
+            outputPath: DEMOS_STAGING_PATH,
+            cdnRoot: "~/content/cdn",
+            themebuilderRoot: "~/content/cdn/themebuilder",
+            onSuccess: function() {
+                mkdir(DEMOS_STAGING_CONTENT_PATH);
 
-            kendoBuild.rmdirSyncRecursive(CDN_BUNDLE_PATH);
-            bundles.buildBundle(CDN_BUNDLE, version(), function() {
-                copyDir(path.join(CDN_BUNDLE_PATH, STYLES_PATH),
-                        path.join(DEMOS_STAGING_CONTENT_PATH, STYLES_PATH)
-                );
+                kendoBuild.rmdirSyncRecursive(CDN_BUNDLE_PATH);
+                bundles.buildBundle(CDN_BUNDLE, version(), function() {
+                    copyDir(path.join(CDN_BUNDLE_PATH, STYLES_PATH),
+                            path.join(DEMOS_STAGING_CONTENT_PATH, STYLES_PATH)
+                    );
 
-                copyDir(path.join(CDN_BUNDLE_PATH, SCRIPTS_PATH),
-                        path.join(DEMOS_STAGING_CONTENT_PATH, SCRIPTS_PATH)
-                );
-            });
+                    copyDir(path.join(CDN_BUNDLE_PATH, SCRIPTS_PATH),
+                            path.join(DEMOS_STAGING_CONTENT_PATH, SCRIPTS_PATH)
+                    );
+
+                    themebuilder.deploy(
+                        path.join(DEMOS_STAGING_CONTENT_PATH, "themebuilder"),
+                        STAGING_ROOT + "/staging/content/cdn/"
+                    );
+                });
+            }
         });
     });
 
     desc("Build demos site for live deployment");
     task("production", ["merge-scripts", "docs"], function () {
-        deployDemos(DEMOS_LIVE_PATH, CDN_ROOT + version(), complete);
+        deployDemos({
+            outputPath: DEMOS_LIVE_PATH,
+            cdnRoot: CDN_ROOT + version(),
+            themebuilderRoot: "http://themebuilder.kendoui.com",
+            onSuccess: complete
+        });
     }, true);
 
     desc("Pack online-demos.zip");
@@ -269,21 +306,23 @@ function buildDocs(sitefinity_path) {
     combine();
 }
 
-function deployDemos(outputPath, cdnRoot, onSuccess) {
-    var webConfig = path.join(outputPath, "Web.config");
+function deployDemos(options) {
+    var outputPath = options.outputPath,
+        webConfig = path.join(outputPath, "Web.config");
 
     kendoBuild.rmdirSyncRecursive(outputPath);
     copyDir(DEMOS_PATH, outputPath);
 
     kendoBuild.writeText(webConfig, kendoBuild
         .readText(webConfig)
-        .replace("$CDN_ROOT", cdnRoot)
+        .replace("$CDN_ROOT", options.cdnRoot)
+        .replace("$THEMEBUILDER_ROOT", options.themebuilderRoot)
     );
 
     kendoBuild.msBuild(
         path.join(outputPath, DEMOS_PROJECT),
         [ "/t:Clean;Build", "/p:Configuration=Release" ],
-        onSuccess
+        options.onSuccess
     );
 }
 
