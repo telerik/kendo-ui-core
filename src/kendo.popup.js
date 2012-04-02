@@ -8,6 +8,7 @@
         appendingToBodyTriggersResize = $.browser.msie && $.browser.version < 9,
         OPEN = "open",
         CLOSE = "close",
+        CLOSED = "closed",
         CENTER = "center",
         LEFT = "left",
         RIGHT = "right",
@@ -108,6 +109,7 @@
                     }
 
                     that._closing = false;
+                    that.trigger(CLOSED);
                 }
             });
 
@@ -128,7 +130,8 @@
 
         events: [
             OPEN,
-            CLOSE
+            CLOSE,
+            CLOSED
         ],
 
         options: {
