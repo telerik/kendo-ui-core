@@ -13,6 +13,18 @@
             ]
         },
         {
+            "text": "ActionSheet",
+            "name": "actionsheet",
+            "documentation": "mobile",
+            "spriteCssClass": "mobileButtonIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "actionsheet/index.html"
+                }
+            ]
+        },
+        {
             "text": "Button",
             "name": "button",
             "documentation": "mobile",
