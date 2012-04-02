@@ -17,7 +17,7 @@
         */
         init: function(element, options) {
             var that = this,
-                shim = $(SHIM).css(VISIBILITY, HIDDEN);
+                shim = $(SHIM).hide();
 
             Widget.fn.init.call(that, element, options);
 
@@ -40,12 +40,17 @@
                 appendTo: that.shim,
                 origin: "bottom left",
                 position: "bottom left",
-                animation: { open: { effects: "slideIn:up", duration: that.options.duration } },
-                close: function() {
-                    that.shim.css(VISIBILITY, HIDDEN);
+                animation: {
+                    open: {
+                        effects: "slideIn:up",
+                        duration: that.options.duration
+                    }
+                },
+                closed: function() {
+                    that.shim.hide();
                 },
                 open: function() {
-                    that.shim.css(VISIBILITY, VISIBLE);
+                    that.shim.show();
                 }
             });
         },
