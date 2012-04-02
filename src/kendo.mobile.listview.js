@@ -374,7 +374,7 @@
          * listview.refresh();
          */
         refresh: function(e) {
-            e = e || {}
+            e = e || {};
 
             var that = this,
                 dataSource = that.dataSource,
