@@ -32,6 +32,7 @@
                 '<ul id="actionSheet" data-role="actionsheet"><li><a id="foo" data-action="foo"></a></li></ul></div>',
                 actionSheet,
                 element,
+                source,
                 root = $('#qunit-fixture');
 
             module("ActionSheet", {
@@ -40,6 +41,7 @@
                     root.html(markup);
                     new kendo.mobile.Application(root);
                     element = root.find("[data-role=actionsheet]");
+                    source = root.find("#source");
                     actionSheet = element.data("kendoMobileActionSheet");
                 }
             });
@@ -85,7 +87,6 @@
             });
 
             test("Passes target in click handler", 1, function() {
-                var source = root.find("#source")
                 window.foo = function(e) {
                     equal(e.target[0], source[0]);
                 };
@@ -99,7 +100,7 @@
                     equal(e.context, 1);
                 };
 
-                actionSheet.open(root.find("#source"));
+                actionSheet.openFor(root.find("#source"));
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
@@ -114,6 +115,17 @@
             test("data-rel=actionsheet widget opens the action sheet", 1, function() {
                 root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
                 isOpen();
+            });
+
+            test("data-rel=actionsheet widget passes the target and the context", 2, function() {
+                window.foo = function(e) {
+                    console.log(e);
+                    equal(e.target[0], source[0]);
+                    equal(e.context, 1);
+                };
+
+                root.find('[data-role=button]').trigger($.Event(kendo.support.mouseup));
+                root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
         </script>
     </body>
