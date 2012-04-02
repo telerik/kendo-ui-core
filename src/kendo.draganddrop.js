@@ -67,10 +67,6 @@
         return events.replace(/ /g, ns + " ");
     }
 
-    function preventDefault(e) {
-        e.preventDefault();
-    }
-
     /**
      * @name kendo.DragAxis.Description
      *
@@ -181,10 +177,10 @@
 
             element
                 .on(START_EVENTS, filter, proxy(that._start, that))
-                .on("dragstart", filter, preventDefault);
+                .on("dragstart", filter, kendo.preventDefault);
 
             if (!options.allowSelection) {
-                // element.on("mousedown selectstart", filter, preventDefault);
+                // element.on("mousedown selectstart", filter, kendo.preventDefault);
             }
 
             if (support.eventCapture) {
