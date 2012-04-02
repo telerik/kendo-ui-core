@@ -32,17 +32,26 @@
         },
 
         viewInit: function(view) {
-            var that = this;
-            view.application.element.append(that.shim);
+            var that = this,
+                application = view.application,
+                align = "center center",
+                effect = "fade:in";
+
+            if (application.os === "ios") {
+                align = "bottom left";
+                effect = "slideIn:up";
+            }
+
+            application.element.append(that.shim);
 
             that.popup = new Popup(that.element, {
                 anchor: that.shim,
                 appendTo: that.shim,
-                origin: "bottom left",
-                position: "bottom left",
+                origin: align,
+                position: align,
                 animation: {
                     open: {
-                        effects: "slideIn:up",
+                        effects: effect,
                         duration: that.options.duration
                     }
                 },
