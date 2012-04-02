@@ -157,9 +157,12 @@
 
                     if (type === "read") {
                         params = {
-                            $format: "json",
                             $inlinecount: "allpages"
                         };
+
+                        if (dataType != "json") {
+                            params.$format = "json";
+                        }
 
                         for (option in options) {
                             if (mappers[option]) {

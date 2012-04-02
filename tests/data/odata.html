@@ -118,6 +118,21 @@
                 equal(result.$inlinecount, "allpages");
             });
 
+            test("$format is not set if dataType is json", function() {
+                var dataSource = new DataSource({
+                    type: "odata",
+                    transport: {
+                        read: {
+                            url: "foo",
+                            dataType: "json"
+                        }
+                    }
+                });
+
+                var result = dataSource.transport.parameterMap();
+                ok(!result.$format);
+            });
+
             test("parameterMap adds $skip when skip is specified", function() {
                 var result = parameterMap({ skip: 1 });
                 equal(result.$skip, 1);
