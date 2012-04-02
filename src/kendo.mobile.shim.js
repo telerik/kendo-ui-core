@@ -24,10 +24,20 @@
             that.shim = shim;
             that.element = element;
 
+            kendo.notify(that);
+        },
+
+        setOptions: function(options) {
+            var that = this,
+                attach = options.modal ? "off" : "on";
+
+            console.log(attach);
+            that.shim[attach](kendo.support.mouseup, $.proxy(that.hide, that));
         },
 
         options: {
             name: "Shim",
+            modal: true,
             duration: 200
         },
 

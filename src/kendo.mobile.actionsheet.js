@@ -89,7 +89,6 @@
             Widget.fn.init.call(that, element, options);
 
             that.element.wrap(WRAP)
-                .append(cancelTemplate({cancel: that.options.cancel}))
                 .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that))
                 .on("click", BUTTONS, kendo.preventDefault);
 
@@ -99,9 +98,20 @@
             that.shim = new Shim(that.wrapper);
         },
 
+
         options: {
             name: "ActionSheet",
             cancel: 'Cancel'
+        },
+
+        viewInit: function(view) {
+            var that = this,
+                appendCancel = view.application.os === 'ios';
+            that.shim.setOptions({modal: appendCancel});
+
+            if (appendCancel) {
+                that.element.append(cancelTemplate({cancel: that.options.cancel}));
+            }
         },
 
         /**
