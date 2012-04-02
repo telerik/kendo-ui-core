@@ -114,6 +114,12 @@
 
                     equal(pointer.value(), 20);
                 });
+
+                test("value() takes scale.min into account", function() {
+                    createPointer(stubScale(-10, 50), { });
+
+                    equal(pointer.value(), -10);
+                });
             })();
 
 
