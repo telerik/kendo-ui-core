@@ -803,15 +803,15 @@
             },
             majorTicks: {
                 align: OUTSIDE,
-                size: 4,
-                visible: true
+                size: 4
             },
             minorTicks: {
                 align: OUTSIDE,
-                size: 3,
-                visible: false
+                size: 3
             },
             axisCrossingValue: 0,
+            majorTickType: OUTSIDE,
+            minorTickType: NONE,
             minorGridLines: {
                 visible: false,
                 width: 1,
