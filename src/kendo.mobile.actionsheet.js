@@ -9,7 +9,9 @@
         cancelTemplate = kendo.template('<li><a href="\\#" class="km-actionsheet-cancel">#:cancel#</a></li>');
 
     /**
-     * The mobile ActionSheet widget displays a set of choices related to a task the user initiates.
+     * @name kendo.mobile.ui.ActionSheet.Description
+     * @section
+     * <p>The mobile ActionSheet widget displays a set of choices related to a task the user initiates.</p>
      * <h3>Getting Started</h3>
      * <p>The Kendo mobile Application will automatically initialize the mobile ActionSheet for every <code>ul</code> element with <code>role</code>
      * data attribute set to <code>actionsheet</code> present in the views/layouts markup.
@@ -29,7 +31,7 @@
      *
      * <h3>Opening ActionSheet</h3>
      * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is clicked or touched.
-     * To associate the widget with the ActionSheet, set <code>data-rel="actionsheet"</code> and a href attribute pointing to the ActionSheet's element id.</p>
+     * To do so, set <code>data-rel="actionsheet"</code> and <code>href</code> attribute pointing to the ActionSheet's element <code>id</code>.</p>
      *
      * @exampleTitle mobile Button with associated ActionSheet
      * @example
@@ -39,15 +41,16 @@
      *   <li><a data-action="bar">Bar</a></li>
      * </ul>
      *
+     * @section
      * <h3>Executing Actions</h3>
-     * <p>Each link from the ActionSheet should have a <code>data-action</code> attribute, specifying the callback method to be executed when selected.
-     * The callback can be either a function, or a method from an object in the global scope.</p>
+     * <p>Each link from the ActionSheet should have a <code>data-action</code> attribute, specifying the callback method to be executed when the user clicks/touches it.
+     * The callback can be either a function, or a method of an object in the global scope.</p>
      *
-     * <p>The callback accepts a object with two fields - <code>target</code> and (optional) <code>context</code>. The
-     * <code>target</code> points to the DOM element which has opened the Widget. The <code>context</code> field points
+     * <p>The callback receives a object with two fields - <code>target</code> and (optional) <code>context</code> as a
+     * parameter. The <code>target</code> points to the DOM element which has opened the Widget. The <code>context</code> field points
      * to the optional <code>actionsheet-context</code> attribute of the opening element.</p>
      *
-     * <p>After the method has been executed, the ActionSheet closes automatically</p>.
+     * <p>After the method has been executed, the ActionSheet closes automatically.</p>
      *
      * @exampleTitle Mobile ActionSheet actions
      * @example
