@@ -14,6 +14,7 @@
         Template,
         JSON = window.JSON || {},
         support = {},
+        formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
         FUNCTION = "function",
         STRING = "string",
@@ -445,8 +446,7 @@ function pad(number) {
 
 // Date and Number formatting
 (function() {
-    var formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
-        dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
+    var dateFormatRegExp = /dddd|ddd|dd|d|MMMM|MMM|MM|M|yyyy|yy|HH|H|hh|h|mm|m|fff|ff|f|tt|ss|s|"[^"]*"|'[^']*'/g,
         standardFormatRegExp =  /^(n|c|p|e)(\d*)$/i,
         literalRegExp = /["'].*?["']/g,
         EMPTY = "",
@@ -2287,7 +2287,7 @@ function pad(number) {
             value = false;
         } else if (!isNaN(parseFloat(value))) {
             value = parseFloat(value);
-        } else if (jsonRegExp.test(value)) {
+        } else if (jsonRegExp.test(value) && !formatRegExp.test(value)) {
            value = $.parseJSON(value);
         }
 
