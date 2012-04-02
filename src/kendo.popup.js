@@ -306,7 +306,7 @@
             }
 
             if (position < 0) {
-                output = position;
+                output = -position;
             }
 
             return output;

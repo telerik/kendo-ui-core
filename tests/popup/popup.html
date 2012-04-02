@@ -460,10 +460,9 @@
                 ok(called);
             });
 
-            test("fit returns position if position is negative", function() {
+            test("fit returns inverted position if position is negative", function() {
                 var popup = new Popup(div);
-                equal(popup._fit(-42, 42, 42), -42);
-
+                equal(popup._fit(-42, 42, 42), 42);
             });
 
             test("fit returns offset if element does not fit in original position", function() {
