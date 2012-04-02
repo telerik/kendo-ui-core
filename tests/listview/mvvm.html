@@ -10,6 +10,7 @@
         <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.validator.js"></script>
         <script src="../../src/kendo.editable.js"></script>
+        <script src="../../src/kendo.selectable.js"></script>
         <script src="../../src/kendo.listview.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -219,6 +220,26 @@
                 var listView = dom.data("kendoListView");
 
                 ok(!listView.wrapper.children().length);
+            });
+
+            test("binding selectable to true", function() {
+                var dom = $('<div data-role="listview" data-selectable="true"></div>');
+
+                kendo.bind(dom);
+
+                var listview = dom.data("kendoListView");
+
+                ok(listview.selectable, "listview is not selectable");
+            });
+
+            test("binding navigatable to true", function() {
+                var dom = $('<div data-role="listview" data-navigatable="true"></div>');
+
+                kendo.bind(dom);
+
+                var listview = dom.data("kendoListView");
+
+                ok(listview.options.navigatable, "listview is not navigatable");
             });
         </script>
 
