@@ -79,6 +79,7 @@ namespace Kendo.Models
             "kendo.draganddrop.js",
             "kendo.mobile.view.js",
             "kendo.mobile.application.js",
+            "kendo.mobile.actionsheet.js",
             "kendo.mobile.button.js",
             "kendo.mobile.listview.js",
             "kendo.mobile.scrollview.js",
