@@ -134,7 +134,7 @@ namespace("demos", function() {
 
                     themebuilder.deploy(
                         path.join(DEMOS_STAGING_CONTENT_PATH, "themebuilder"),
-                        STAGING_ROOT + "/staging/content/cdn/"
+                        STAGING_ROOT + "/content/cdn/"
                     );
                 });
             }
