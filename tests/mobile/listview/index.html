@@ -240,6 +240,24 @@
                 ok(listView._showLoadingProxy);
                 ok(listView._hideLoadingProxy);
             });
+
+            test("items returns list items", function() {
+                var dom = $('<ul><li><a href="#">Foo</a></li></ul>');
+
+                var listView = new ListView(dom);
+
+                equal(listView.items()[0], dom.children("li")[0]);
+            });
+
+            test("items returns list items in group type", function() {
+                var dom = $('<ul>\
+                    <li>Foo<ul><li>Bar</li><li>Baz</li></ul></li>\
+                </ul>');
+
+                var listView = new ListView(dom, { type: "group" });
+
+                equal(listView.items()[0], dom.find("ul > li")[0]);
+            });
         </script>
     </body>
 </html>
