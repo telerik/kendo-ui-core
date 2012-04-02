@@ -3510,16 +3510,16 @@
             var plotArea = this,
                 series = plotArea.series;
 
+            plotArea.createAreaChart(grep(series, function(s) {
+                return inArray(s.type, [AREA, VERTICAL_AREA]);
+            }));
+
             plotArea.createBarChart(grep(series, function(s) {
                 return inArray(s.type, [BAR, COLUMN]);
             }));
 
             plotArea.createLineChart(grep(series, function(s) {
                 return inArray(s.type, [LINE, VERTICAL_LINE]);
-            }));
-
-            plotArea.createAreaChart(grep(series, function(s) {
-                return inArray(s.type, [AREA, VERTICAL_AREA]);
             }));
 
             plotArea.createAxes();
