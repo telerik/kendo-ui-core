@@ -66,9 +66,13 @@
     function enhanceCheckBoxItem(i, label) {
         label = $(label);
 
+        if (!label.children("input[type=checkbox],input[type=radio]").length) {
+            return;
+        }
+
         var item = label.parent();
 
-        if (item.contents().not(label)[0]) {
+        if (item.contents().not(label).not(function() { return this.nodeType == 3; })[0]) {
             return;
         }
 

@@ -611,7 +611,8 @@
 }
 
 .km-list > li,
-.km-root .km-listview-link
+.km-root .km-listview-link,
+.km-root .km-listview-label
 {
     margin: 0;
     display: block;
@@ -647,13 +648,15 @@
     border-bottom: 0;
 }
 
-.km-root .km-listview-link
+.km-root .km-listview-link,
+.km-root .km-listview-label
 {
     text-decoration: none;
     margin: -.5em -.7em;
 }
 
-.km-listview-link:after
+.km-listview-link:after,
+.km-listview-label:after
 {
     border-color: #777;
     content: "\a0";
@@ -1038,6 +1041,14 @@
     font-size: 1.2rem;
 }
 
+.km-list input[type=checkbox],
+.km-list input[type=radio]
+{
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+}
+
 .km-root input
 {
     .user-select(text);
@@ -1108,3 +1119,13 @@
     border: 0;
 }
 
+/* Checkboxes and Radios */
+
+.km-listview-label input[type=radio],
+.km-listview-label input[type=checkbox]
+{
+    border: 0;
+    font-size: inherit;
+    width: 1em;
+    height: .9em;
+}
