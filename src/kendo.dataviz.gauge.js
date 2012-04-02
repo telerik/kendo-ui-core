@@ -807,7 +807,7 @@
                         zIndex: 2,
                         align: false
                     }, border),
-                shape = pointer.getPointerShape(options.value);
+                shape = pointer.pointerShape(options.value);
 
             if (options.shape === ARROW) {
                 elementOptions.animation.type = ARROW_POINTER;
@@ -819,7 +819,7 @@
             return element;
         },
 
-        getPointerShape: function(value) {
+        pointerShape: function(value) {
             var pointer = this,
                 options = pointer.options,
                 scale = pointer.scale,
