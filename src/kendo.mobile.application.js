@@ -381,6 +381,7 @@
             OS_NAME_CLASS = "km-" + OS_NAME;
             OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "") + (OS.appMode ? " km-app" : ""));
 
+            that.os = OS_NAME;
         },
 
         _setupLayouts: function(element) {
