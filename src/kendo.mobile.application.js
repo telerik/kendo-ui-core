@@ -61,7 +61,7 @@
             setTimeout(function() { link.attr(HREF, href); });
 
             if (rel === "actionsheet") {
-                $(href).data("kendoMobileActionSheet").open();
+                $(href).data("kendoMobileActionSheet").openFor(link);
             } else {
                 history.navigate(href);
             }

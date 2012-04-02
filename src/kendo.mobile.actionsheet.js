@@ -78,7 +78,7 @@
          * @extends kendo.mobile.ui.Widget
          * @param {DomElement} element DOM element.
          * @param {Object} options Configuration options.
-         * @option {String} [cancel] <Cancel> The text of the cancel button.
+         * @option {String} [cancel] <Cancel> The text of the cancel button. Applicable in iOS only.
          */
         init: function(element, options) {
             var that = this,
@@ -88,7 +88,8 @@
 
             that.element.wrap(WRAP)
                 .append(cancelTemplate({cancel: that.options.cancel}))
-                .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that));
+                .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that))
+                .on("click", BUTTONS, kendo.preventDefault);
 
             wrapper = that.element.parent();
 
@@ -103,22 +104,34 @@
 
         /**
          * Open the ActionSheet
-         * @param {jQueryObject} target The target of the ActionSheet, available in the callback methods.
+         * @param {jQueryObject} target (optional) The target of the ActionSheet, available in the callback methods.
+         * @param {Object} context (optional) The context of the ActionSheet, available in the callback methods.
          */
-        open: function(target) {
-            this.target = $(target);
-            this.shim.show();
+        open: function(target, context) {
+            var that = this;
+            that.target = $(target);
+            that.context = context;
+            that.shim.show();
         },
+
 
         /**
          * Close the ActionSheet
          */
         close: function() {
+            this.context = this.target = null;
             this.shim.hide();
         },
 
+        /** @ignore */
+        openFor: function(target) {
+            var that = this;
+            that.target = target;
+            that.context = target.data(CONTEXT_DATA);
+            that.shim.show();
+        },
+
         _click: function(e) {
-            var target = this.target;
             if (e.originalEvent && e.originalEvent.defaultPrevented) {
                 return;
             }
@@ -127,11 +140,12 @@
 
             if (action) {
                 kendo.getter(action)(window)({
-                    target: target,
-                    context: target.data(CONTEXT_DATA)
+                    target: this.target,
+                    context: this.context
                 });
             }
 
+            e.preventDefault();
             this.close();
         }
     });
