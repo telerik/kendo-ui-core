@@ -458,7 +458,11 @@
         },
 
         items: function() {
-            return this.element.find(".km-list").andSelf().find(">li");
+            if (this.options.type === "group") {
+                return this.element.find(".km-list").children();
+            } else {
+                return this.element.children();
+            }
         },
 
         _style: function() {
