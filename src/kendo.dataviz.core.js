@@ -1733,13 +1733,19 @@
             var anim = this,
                 element = anim.element,
                 elementOptions = element.options,
-                animationOptions = anim.options,
-                center = animationOptions.center;
+                options = anim.options,
+                center = options.center,
+                start, end;
 
             if (elementOptions.rotation) {
-                anim.endState = elementOptions.rotation[0];
+                start = options.startAngle;
+                end = elementOptions.rotation[0];
+
+                options.duration = math.max((math.abs(start - end) / options.speed) * 1000, 1);
+
+                anim.endState = end;
                 elementOptions.rotation = [
-                    animationOptions.startAngle,
+                    start,
                     center.x,
                     center.y
                 ];
