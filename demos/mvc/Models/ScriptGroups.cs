@@ -78,6 +78,7 @@ namespace Kendo.Models
             "kendo.history.js",
             "kendo.draganddrop.js",
             "kendo.mobile.view.js",
+            "kendo.mobile.shim.js",
             "kendo.mobile.application.js",
             "kendo.mobile.actionsheet.js",
             "kendo.mobile.button.js",
