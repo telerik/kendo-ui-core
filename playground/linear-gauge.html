@@ -52,7 +52,23 @@
                         from: 25,
                         to: 40,
                         color: "blue"
-                    }]
+                    }],
+                    labels: {
+                        visible: false
+                    }
+                },
+
+                pointer: {
+                    shape: "barIndicator",
+                    track: {
+                        border: {
+                            color: "black",
+                            width: 1
+                        },
+                        visible: true
+                    },
+                    size: 20,
+                    visible: false
                 }
             });
 
@@ -73,11 +89,9 @@
                         from: 25,
                         to: 40,
                         color: "blue"
-                    }]
-                },
-
-                pointer: {
-                    value: 50
+                    }],
+                    padding: 0,
+                    margin: 0
                 }
             });
         </script>
