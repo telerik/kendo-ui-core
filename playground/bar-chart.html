@@ -49,7 +49,14 @@
                             stack: "fruits"
                     }],
                     categoryAxis: {
-                        categories: ["Aug", "Sep", "Oct", "Nov"]
+                        categories: ["Aug", "Sep", "Oct", "Nov"],
+                        majorTicks: {
+                            type: "inside"
+                        },
+                        mirror: false,
+                        labels: {
+                            mirror: true
+                        }
                     }
                 });
             });
