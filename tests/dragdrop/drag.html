@@ -175,6 +175,36 @@
                 triggerEvent("mousedown", {pageX: 10, pageY: 20});
                 triggerEvent("mousemove", {pageX: 14, pageY: 24});
             });
+
+            module("drag of nested elements", {
+                setup: function() {
+                    element = $('<div id="parent"><div class="foo" /><div id="child"><div class="foo" /></div></div>');
+                    $("#qunit-fixture").empty().append(element);
+                    parentDrag = new Drag(element, {
+                        filter: element.children(".foo")
+                    });
+
+                    childElement = element.find("#child");
+                    childDrag = new Drag(childElement, {
+                        filter: childElement.children(".foo")
+                    });
+                }
+            });
+
+            test("ignores drag if filter does not match elements", 1, function() {
+                parentDrag.bind("start", function() {
+                    ok(false);
+                });
+
+                childDrag.bind("start", function() {
+                    ok(true);
+                });
+
+                var childFoo = childElement.children(".foo");
+                
+                triggerEvent("mousedown", {pageX: 10, pageY: 20}, childFoo);
+                triggerEvent("mousemove", {pageX: 24, pageY: 54}, childFoo);
+            });
         </script>
     </body>
 </html>
