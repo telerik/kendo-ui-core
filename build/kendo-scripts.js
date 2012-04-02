@@ -88,6 +88,8 @@ var suiteScripts = {
         "kendo.binder.js",
         "kendo.history.js",
         "kendo.draganddrop.js",
+        "kendo.popup.js",
+        "kendo.mobile.shim.js",
         "kendo.mobile.view.js",
         "kendo.mobile.application.js",
         "kendo.mobile.actionsheet.js",
