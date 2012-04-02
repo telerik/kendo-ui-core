@@ -90,6 +90,34 @@
                 equal(dom.children().first().text(), "foo");
             });
 
+            test("does not rebind when item in the datasource changes", function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: [ { text: "foo" }, { text: "bar" } ],
+                    template: "#= text #"
+                });
+
+                var last = dom.find("li:last")[0];
+
+                listView.dataSource.data()[0].set("text", "baz");
+
+                equal(last, dom.find("li:last")[0]);
+            });
+
+            test("refreshes the corresponding list item when item in the datasource changes", function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: [ { text: "foo" }, { text: "bar" } ],
+                    template: "#= text #"
+                });
+
+                listView.dataSource.data()[0].set("text", "baz");
+
+                equal(dom.find("li:first").text(), "baz");
+            });
+
             test("default template escapes html entities", function() {
                 var dom = $("<ul/>");
 

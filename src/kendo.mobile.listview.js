@@ -373,13 +373,24 @@
          * // refreshes the listview
          * listview.refresh();
          */
-        refresh: function() {
+        refresh: function(e) {
+            e = e || {}
+
             var that = this,
                 dataSource = that.dataSource,
                 element = that.element,
                 appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
                 contents,
+                item,
                 view = dataSource.view();
+
+            if (e.action === "itemchange") {
+                item = e.items[0];
+
+                element.find("[data-" + kendo.ns + "uid=" + item.uid + "]").replaceWith(that.template(item));
+
+                return;
+            }
 
             this._templates();
             that.trigger("dataBinding");
