@@ -152,6 +152,10 @@
                 equal(subList.find("li").eq(1).text(), "Baz");
             });
 
+            test("renders data-uid attribute for sublist items", function() {
+                equal(subList.find("li").data("uid"), listView.dataSource.view()[0].items[0].uid);
+            });
+
             test("accepts custom header template", function() {
                 ok(dom.find("li > div").eq(0).children(0).is("i"), "item has custom header");
             });
