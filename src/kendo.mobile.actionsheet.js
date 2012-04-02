@@ -13,7 +13,7 @@
      * @section
      * <p>The mobile ActionSheet widget displays a set of choices related to a task the user initiates.</p>
      * <h3>Getting Started</h3>
-     * <p>The Kendo mobile Application will automatically initialize the mobile ActionSheet for every <code>ul</code> element with <code>role</code>
+     * <p>The Kendo mobile Application will automatically initialize a mobile ActionSheet widget for every <code>ul</code> element with <code>role</code>
      * data attribute set to <code>actionsheet</code> present in the views/layouts markup.
      * Alternatively, it can be initialized using a jQuery selector. The actionsheet element should contain one or more <code>li</code> elements, which should contian an <code>a</code> element.</p>
      *
@@ -31,7 +31,7 @@
      *
      * <h3>Opening ActionSheet</h3>
      * <p>The widget can be open when any mobile navigational widget (listview, button, tabstrip, etc.) is clicked or touched.
-     * To do so, set <code>data-rel="actionsheet"</code> and <code>href</code> attribute pointing to the ActionSheet's element <code>id</code>.</p>
+     * To do so, the navigational widget should have <code>data-rel="actionsheet"</code> and <code>href</code> attribute pointing to the ActionSheet's element <code>id</code> set.</p>
      *
      * @exampleTitle mobile Button with associated ActionSheet
      * @example
@@ -46,7 +46,7 @@
      * <p>Each link from the ActionSheet should have a <code>data-action</code> attribute, specifying the callback method to be executed when the user clicks/touches it.
      * The callback can be either a function, or a method of an object in the global scope.</p>
      *
-     * <p>The callback receives a object with two fields - <code>target</code> and (optional) <code>context</code> as a
+     * <p>The callback receives a object with two fields: <code>target</code> and (optional) <code>context</code> as a
      * parameter. The <code>target</code> points to the DOM element which has opened the Widget. The <code>context</code> field points
      * to the optional <code>actionsheet-context</code> attribute of the opening element.</p>
      *
@@ -67,7 +67,9 @@
      *
      *      var bar = {
      *          baz: function(e) {
-     *          },
+     *              e.context; // 1
+     *              e.target; // $("#myButton")
+     *          }
      *      }
      * </script>
      *
