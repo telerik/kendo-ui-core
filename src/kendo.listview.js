@@ -61,6 +61,8 @@
         options: {
             name: "ListView",
             autoBind: true,
+            selectable: false,
+            navigatable: false,
             template: "",
             altTemplate: "",
             editTemplate: ""
