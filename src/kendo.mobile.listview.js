@@ -415,7 +415,7 @@
                 templateProxy = {},
                 groupTemplateProxy = {};
 
-            if (that.dataSource.view()[0] instanceof kendo.data.ObservableObject) {
+            if (that.dataSource.group()[0] || that.dataSource.view()[0] instanceof kendo.data.ObservableObject) {
                 dataIDAttribute = ' data-uid="#=uid#"';
             }
 
@@ -477,7 +477,6 @@
                 .toggleClass("km-listinset", !grouped && inset)
                 .toggleClass("km-listgroup", grouped && !inset)
                 .toggleClass("km-listgroupinset", grouped && inset);
-
 
             if (grouped) {
                 element
