@@ -527,62 +527,28 @@
          *     },
          *     ...
          * });
-         * @option {Number} [valueAxis.majorUnit] The interval between major divisions.  For instance, on a column chart, its the step size while going up the
-         * vertical axis.  You can additionally have minor steps and ticks in between the major ones by adjusting the <b>minorUnit</b>, <b>minorTickSize</b> and
-         * <b>minorTickType</b>
+         * @option {Number} [valueAxis.majorUnit] The interval between major divisions. For instance, on a column chart, its the step size while going up the
+         * vertical axis.You can additionally have minor steps and ticks in between the major ones by adjusting the <b>minorUnit</b>, <b>minorTicks.size</b>.
          * _example
          * $("#chart").kendoChart({
          *     valueAxis: {
          *         // show ticks in steps of 100.
          *         majorUnit: 100,
-         *         // by default, the size is 4. Increase it to 5 pixels.
-         *         majorTickSize: 5,
-         *         // change the tick type to none. only the number will appear.
-         *         majorTickType: "none"
+         *         // by default, the size is 4. increase it to 5 pixels.
+         *         majorTicks.size: 5,
+         *         // only the number will appear.
+         *         majorTicks.visible: false
          *     },
          *     ...
          * });
-         * @option {Number} [valueAxis.minorTickSize] <3> The axis minor tick size.  This is the length of the line in pixels that is drawn to indicate the tick
+         * @option {Object} [valueAxis.minorTicks] The minor ticks of the axis.
+         * @option {Boolean} [valueAxis.minorTicks.visible] <false> The visibility of the minor ticks.
+         * @option {Number} [valueAxis.minorTicks.size] <3> The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
          * on the chart.
-         * @option {String} [valueAxis.minorTickType] <none> The minor tick type.
-         * The tick can either be drawn outside, or hidden by selecting <b>none</b>.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              <code>"outside"</code>
-         *         </dt>
-         *         <dd>
-         *              The tick is drawn on the outer side of the axis.
-         *         </dd>
-         *         <dt>
-         *              <code>"none"</code>
-         *         </dt>
-         *         <dd>
-         *              No tick is drawn.
-         *         </dd>
-         *    </dl>
-         * </div>
-         * @option {Number} [valueAxis.majorTickSize] <4> The axis major tick size.  This is the length of the line in pixels that is drawn to indicate the tick
+         * @option {Object} [valueAxis.majorTicks] The major ticks of the axis.
+         * @option {Boolean} [valueAxis.majorTicks.visible] <true> The visibility of the major ticks.
+         * @option {Number} [valueAxis.majorTicks.size] <4> The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
          * on the chart.
-         * @option {String} [valueAxis.majorTickType] <outside> The major tick type.
-         * The tick can either be drawn outside, or hidden by selecting <b>none</b>.
-         * In the case of the minor tick, setting it's tick type to <b>none</b> will hide the minor ticks altogether.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              <code>"outside"</code>
-         *         </dt>
-         *         <dd>
-         *              The tick is drawn on the outer side of the axis.
-         *         </dd>
-         *         <dt>
-         *              <code>"none"</code>
-         *         </dt>
-         *         <dd>
-         *              No tick is drawn.
-         *         </dd>
-         *    </dl>
-         * </div>
          * @option {Object} [valueAxis.minorGridLines] Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through the
          * body of the chart.  <p>Note that minor grid lines are not visible by default, therefore none of these settings will take effect without the minor grid
          * lines visibility being set to <b>true</b></p>.
@@ -1189,26 +1155,14 @@
          *      ...
          * })'
          * </p>
-         * @option {Number} [categoryAxis.minorTickSize] <3> The axis minor tick size.  This is the length of the line in pixels that is drawn to indicate the tick
+         * @option {Object} [categoryAxis.minorTicks] The minor ticks of the axis.
+         * @option {Boolean} [categoryAxis.minorTicks.visible] <false> The visibility of the minor ticks.
+         * @option {Number} [categoryAxis.minorTicks.size] <3> The axis minor tick size. This is the length of the line in pixels that is drawn to indicate the tick
          * on the chart.
-          * @option {String} [categoryAxis.minorTickType] <"none"> The axis minor tick size.
-         * The tick can either be drawn outside, or hidden by selecting <b>none</b>.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              <code>"outside"</code>
-         *         </dt>
-         *         <dd>
-         *              The tick is drawn on the outer side of the axis.
-         *         </dd>
-         *         <dt>
-         *              <code>"none"</code>
-         *         </dt>
-         *         <dd>
-         *              No tick is drawn.
-         *         </dd>
-         *    </dl>
-         * </div>
+         * @option {Object} [categoryAxis.majorTicks] The major ticks of the axis.
+         * @option {Boolean} [categoryAxis.majorTicks.visible] <true> The visibility of the major ticks.
+         * @option {Number} [categoryAxis.majorTicks.size] <4> The axis major tick size. This is the length of the line in pixels that is drawn to indicate the tick
+         * on the chart.
          * @option {Object} [categoryAxis.minorGridLines] Configures the minor grid lines.  These are the lines that are an extension of the minor ticks through
          * the body of the chart. <p>Note that minor grid lines are not visible by default, therefore none of these settings will take effect with the minor grid
          * lines visibility being set to <b>true</b></p>.
