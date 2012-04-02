@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -16,11 +17,11 @@ namespace Kendo.Controllers
 
 #if DEBUG
             ViewBag.Debug = true;
-            ViewBag.DeployRoot = Url.Content("~/themebuilder/deploy");
 #else
             ViewBag.Debug = false;
-            ViewBag.DeployRoot = "http://themebuilder.kendoui.com";
 #endif
+
+            ViewBag.DeployRoot = Url.Content(ConfigurationManager.AppSettings["THEMEBUILDER_ROOT"]);
 
             ViewBag.scripts = Kendo.Models.ScriptGroups.All;
             ViewBag.styles = Kendo.Models.StyleGroups.All;
