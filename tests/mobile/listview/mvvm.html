@@ -30,6 +30,10 @@
             <strong data-bind="text:text"></strong>
         </script>
 
+        <script id="template-with-events" type="text/x-kendo-template">
+            <strong data-bind="text: foo, events:{ click: rootHandler}"></strong>
+        </script>
+
         <script>
             test("initializes a listview when data role is listview", function() {
                 var dom = $('<ul data-role="listview"/>');
@@ -208,6 +212,24 @@
                 observable.set("invisible", false);
 
                 ok(dom.data("kendoMobileListView").wrapper.css("display") != "none", "display is not 'none'");
+            });
+
+            test("binds event handlers in template to root view model when item changes", function() {
+                var dom = $('<ul data-role="listview" data-template="template-with-events" data-bind="source:dataSource" />');
+
+                var observable = kendo.observable({
+                    dataSource: [ { foo: "foo" } ]
+                });
+
+                stub(observable, "rootHandler");
+
+                kendo.bind(dom, observable, kendo.mobile.ui);
+
+                observable.dataSource[0].set("foo", "bar");
+
+                dom.find("li strong").click();
+
+                equal(observable.calls("rootHandler"), 1);
             });
         </script>
     </body>
