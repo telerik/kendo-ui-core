@@ -149,14 +149,64 @@
             }
         },
 
+        _renderNeedle: function(view, box, center, pointRotation) {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                capSize = scale.ring.r * options.cap.size;
+
+            return [
+                view.createPolyline([
+                    rotatePoint((box.x1 + box.x2) / 2,
+                        box.y1 + scale.options.minorTicks.size, center.x, center.y, pointRotation
+                    ),
+                    rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
+                    rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
+                ], true, options),
+                view.createCircle([center.x, center.y], capSize, {
+                    fill: options.cap.color || options.color
+                })
+            ];
+        },
+
+        _renderArrow: function(view, box, center, pointRotation) {
+            var pointer = this,
+                options = pointer.options,
+                scale = pointer.scale,
+                ring = scale.ring.clone(),
+                trackWidth = 5;
+
+            ring.ir = ring.r - trackWidth;
+
+            return [
+                view.createPolyline([
+                    rotatePoint(
+                        (box.x1 + box.x2) / 2, box.y1 + 20,
+                        center.x, center.y, pointRotation
+                    ),
+                    rotatePoint(
+                        (box.x1 + box.x2) / 2 - 10, box.y1,
+                        center.x, center.y, pointRotation
+                    ),
+                    rotatePoint(
+                        (box.x1 + box.x2) / 2 + 10, box.y1,
+                        center.x, center.y, pointRotation
+                    )
+                ], true, options),
+                view.createRing(ring, {
+                    fill: options.color
+                })
+            ];
+        },
+
         renderPointer: function(view) {
             var pointer = this,
                 scale = pointer.scale,
                 ring = scale.ring,
                 c = ring.c,
                 r = ring.r,
+                shape,
                 options = pointer.options,
-                capSize = r * options.cap.size,
                 box = new Box2D(c.x - r, c.y - r, c.x + r, c.y + r),
                 center = box.center(),
                 minAngle = scale.slotAngle(scale.options.min),
@@ -177,18 +227,13 @@
                 ]
             });
 
-            return [
-                view.createPolyline([
-                    rotatePoint((box.x1 + box.x2) / 2,
-                        box.y1 + scale.options.minorTicks.size, center.x, center.y, pointRotation
-                    ),
-                    rotatePoint(center.x - capSize / 2, center.y, center.x, center.y, pointRotation),
-                    rotatePoint(center.x + capSize / 2, center.y, center.x, center.y, pointRotation)
-                ], true, options),
-                view.createCircle([center.x, center.y], capSize, {
-                    fill: options.cap.color || options.color
-                })
-            ];
+            if (options.shape == ARROW) {
+                shape = pointer._renderArrow(view, box, center, pointRotation);
+            } else {
+                shape = pointer._renderNeedle(view, box, center, pointRotation);
+            }
+
+            return shape;
         },
 
         getViewElements: function(view) {
