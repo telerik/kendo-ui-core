@@ -178,18 +178,21 @@
 
             ring.ir = ring.r - trackWidth;
 
+            ring.angle += 8;
+            ring.startAngle -= 4;
+
             return [
                 view.createPolyline([
                     rotatePoint(
-                        (box.x1 + box.x2) / 2, box.y1 + 20,
+                        (box.x1 + box.x2) / 2, box.y1 + 14,
                         center.x, center.y, pointRotation
                     ),
                     rotatePoint(
-                        (box.x1 + box.x2) / 2 - 10, box.y1,
+                        (box.x1 + box.x2) / 2 - 8, box.y1,
                         center.x, center.y, pointRotation
                     ),
                     rotatePoint(
-                        (box.x1 + box.x2) / 2 + 10, box.y1,
+                        (box.x1 + box.x2) / 2 + 8, box.y1,
                         center.x, center.y, pointRotation
                     )
                 ], true, options),
