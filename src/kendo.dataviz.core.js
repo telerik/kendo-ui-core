@@ -919,15 +919,23 @@
                 options = axis.options,
                 box = axis.box,
                 vertical = options.vertical,
+                labels = axis.labels,
+                labelSize = vertical ? "height" : "width",
+                labelsOnTicks = !options._labelsBetweenTicks,
                 mirror = options.labels.mirror,
                 axisX = mirror ? box.x1 : box.x2,
-                axisY = mirror ? box.y2 : box.y1;
+                axisY = mirror ? box.y2 : box.y1,
+                startMargin = 0,
+                endMargin = 0;
 
-            if (vertical) {
-                return new Box2D(axisX, box.y1, axisX, box.y2);
+            if (labelsOnTicks && labels.length > 1) {
+                startMargin = labels[0].box[labelSize]() / 2;
+                endMargin = last(labels).box[labelSize]() / 2;
             }
 
-            return new Box2D(box.x1, axisY, box.x2, axisY);
+            return vertical ?
+                new Box2D(axisX, box.y1 + startMargin, axisX, box.y2 - endMargin) :
+                new Box2D(box.x1 + startMargin, axisY, box.x2 - endMargin, axisY);
         },
 
         createTitle: function() {
@@ -1367,30 +1375,6 @@
             var axis = this;
 
             return axis.getTickPositions(axis.options.minorUnit);
-        },
-
-        lineBox: function() {
-            var axis = this,
-                options = axis.options,
-                vertical = options.vertical,
-                labelSize = vertical ? "height" : "width",
-                labels = axis.labels,
-                baseBox = Axis.fn.lineBox.call(axis),
-                startMargin = 0,
-                endMargin = 0;
-
-            if (labels.length > 1) {
-                startMargin = labels[0].box[labelSize]() / 2;
-                endMargin = last(labels).box[labelSize]() / 2;
-            }
-
-            if (vertical) {
-               return new Box2D(baseBox.x1, baseBox.y1 + startMargin,
-                 baseBox.x1, baseBox.y2 - endMargin);
-            } else {
-               return new Box2D(baseBox.x1 + startMargin, baseBox.y1,
-                 baseBox.x2 - endMargin, baseBox.y1);
-            }
         },
 
         getSlot: function(a, b) {
