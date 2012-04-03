@@ -1032,7 +1032,8 @@
             "years": TIME_PER_YEAR,
             "months": TIME_PER_MONTH,
             "days": TIME_PER_DAY,
-            "hours": TIME_PER_HOUR
+            "hours": TIME_PER_HOUR,
+            "minutes": TIME_PER_MINUTE
         },
         YEARS = "years",
         MONTHS = "months",
@@ -1092,6 +1093,7 @@
 
         return date;
     }
+
     function floorDate(date, unit) {
         date = toDate(date);
 
@@ -1125,111 +1127,196 @@
         return unit;
     };
 
-    var DateAxis = Axis.extend({
-        init: function(seriesMin, seriesMax, seriesDelta, options) {
+    function dateAdd(date, time) {
+        var offset = date.getTimezoneOffset(),
+            result = new Date(date.getTime() + time),
+            offsetDiff = result.getTimezoneOffset() - offset;
+
+        return new Date(result.getTime() + offsetDiff * TIME_PER_MINUTE);
+    }
+
+    function dateDiff(a, b) {
+        var diff = a.getTime() - b,
+            offsetDiff = a.getTimezoneOffset() - b.getTimezoneOffset();
+
+        return diff - (offsetDiff * TIME_PER_MINUTE);
+    }
+
+    function duration(a, b, unit) {
+        var diff;
+
+        if (unit === YEARS) {
+            diff = b.getFullYear() - a.getFullYear();
+        } else if (unit === MONTHS) {
+            diff = duration(a, b, YEARS) * 12 + b.getMonth() - a.getMonth();
+        } else if (unit === DAYS) {
+            diff = math.floor(dateDiff(b, a) / TIME_PER_DAY);
+        } else {
+            diff = math.floor((b - a) / TIME_PER_UNIT[unit]);
+        }
+
+        return diff;
+    }
+
+    function addDuration(date, value, unit) {
+        date = toDate(date);
+
+        if (unit === YEARS) {
+            return new Date(date.getFullYear() + value, 0, 1);
+        } else if (unit === MONTHS) {
+            return new Date(date.getFullYear(), date.getMonth() + value, 1);
+        } else if (unit === DAYS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate() + value);
+        } else if (unit === HOURS) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours() + value);
+        } else if (unit === MINUTES) {
+            return new Date(date.getFullYear(), date.getMonth(), date.getDate(),
+                            date.getHours(), date.getMinutes() + value);
+        }
+
+        return date;
+    }
+
+    var DateValueAxis = Axis.extend({
+        init: function(seriesMin, seriesMax, options) {
             var axis = this;
 
-            if (options) {
-                options.min = toDate(options.min);
-                options.max = toDate(options.max);
-                options.axisCrossingValue = toDate(options.axisCrossingValue);
-            }
-
-            Axis.fn.init.call(
-                axis, axis.defaults(seriesMin, seriesMax, seriesDelta, options)
-            );
-        },
-
-        options: {
-            baseUnit: DAYS,
-            minorUnit: 1
-        },
-
-        defaults: function(seriesMin, seriesMax, seriesDelta, options) {
-            var defaults = {},
-                unitTime = TIME_PER_DAY,
-                unitRange;
-
-            if (seriesDelta >= TIME_PER_YEAR) {
-                defaults.baseUnit = YEARS;
-                unitTime = TIME_PER_YEAR;
-            } else if (seriesDelta >= TIME_PER_MONTH) {
-                defaults.baseUnit = MONTHS;
-                unitTime = TIME_PER_MONTH;
-            }
-
             options = options || {};
-            defaults.min = options.min || seriesMin;
-            defaults.max = options.max || seriesMax;
 
-            unitRange = (seriesMax - seriesMin) / unitTime;
-            defaults.majorUnit = dataviz.autoMajorUnit(0, unitRange);
-
-            return deepExtend(defaults, options);
-        },
-
-        range: function() {
-            var options = this.options;
-            return { min: options.min, max: options.max };
-        }
-    });
-
-    var DateValueAxis = NumericAxis.extend({
-        init: function(seriesMin, seriesMax, options) {
-            var axis = this,
-                numAxisOptions,
-                seriesDelta;
-
-            options = options || {};
-            if (options.min && options.max) {
-                seriesDelta = toTime(options.max) - toTime(options.min);
-            } else {
-                seriesDelta = seriesMax - seriesMin;
-            }
-            numAxisOptions = deepExtend(options, {
-                min: toTime(options.min),
-                max: toTime(options.max),
-                axisCrossingValue: toTime(options.axisCrossingValue)
+            deepExtend(options, {
+                min: toDate(options.min),
+                max: toDate(options.max),
+                axisCrossingValue: toDate(options.axisCrossingValue)
             });
 
-            NumericAxis.fn.init.call(axis, seriesMin, seriesMax, numAxisOptions);
+            options = axis.setDefaults(seriesMin, seriesMax, options);
+
+            Axis.fn.init.call(axis, options);
         },
 
-        initDefaults: function(seriesMin, seriesMax, options) {
+        setDefaults: function(seriesMin, seriesMax, options) {
             var axis = this,
                 min = options.min || seriesMin,
                 max = options.max || seriesMax,
                 baseUnit = options.baseUnit || timeUnit(max - min),
                 baseUnitTime = TIME_PER_UNIT[baseUnit],
-                autoMin = floorDate(min - baseUnitTime, baseUnit).getTime(),
-                autoMax = ceilDate(max + baseUnitTime, baseUnit).getTime(),
-                userMajorUnit = options.majorUnit ? options.majorUnit * baseUnitTime : undefined,
-                majorUnit = userMajorUnit ||
-                            dataviz.ceil(dataviz.autoMajorUnit(autoMin, autoMax), baseUnitTime),
-                minorUnit = baseUnitTime, // options.minorUnit
+                autoMin = floorDate(min - baseUnitTime, baseUnit),
+                autoMax = ceilDate(max + baseUnitTime, baseUnit),
+                userMajorUnit = options.majorUnit ? options.majorUnit : undefined,
+                majorUnit = userMajorUnit || dataviz.ceil(
+                                dataviz.autoMajorUnit(autoMin.getTime(), autoMax.getTime()),
+                                baseUnitTime
+                            ) / baseUnitTime,
                 defaults = {
-                    baseUnit: baseUnit
+                    baseUnit: baseUnit,
+                    minorUnit: 1
                 };
 
-            var actualUnits = (autoMax - autoMin) / baseUnitTime;
-            var totalUnits = dataviz.ceil(actualUnits, majorUnit / baseUnitTime);
+            var actualUnits = duration(autoMin, autoMax, baseUnit);
+            var totalUnits = dataviz.ceil(actualUnits, majorUnit);
             var unitsToAdd = totalUnits - actualUnits;
 
             var head = math.floor(unitsToAdd / 2);
             var tail = unitsToAdd - head;
 
-            defaults.min = autoMin - head * baseUnitTime;
-            defaults.max = autoMax + tail * baseUnitTime;
+            defaults.min = addDuration(autoMin, -head, baseUnit);
+            defaults.max = addDuration(autoMax, tail, baseUnit);
 
             return results = deepExtend(defaults, options, {
-                majorUnit: majorUnit,
-                minorUnit: baseUnitTime
+                majorUnit: majorUnit
             });;
         },
 
+        range: function() {
+            var options = this.options;
+            return { min: options.min, max: options.max };
+        },
+
+        getDivisions: function(stepValue) {
+            var options = this.options;
+
+            return duration(options.min, options.max, options.baseUnit) + 1;
+        },
+
+        getTickPositions: function(stepValue) {
+            var axis = this,
+                options = axis.options,
+                vertical = options.vertical,
+                reverse = options.reverse,
+                lineBox = axis.lineBox(),
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                timeRange = duration(options.min, options.max, options.baseUnit),
+                scale = lineSize / timeRange,
+                step = stepValue * scale,
+                divisions = axis.getDivisions(stepValue),
+                dir = (vertical ? -1 : 1) * (reverse ? -1 : 1),
+                startEdge = dir === 1 ? 1 : 2,
+                pos = lineBox[(vertical ? Y : X) + startEdge],
+                positions = [],
+                i;
+
+            for (i = 0; i < divisions; i++) {
+                positions.push(round(pos, COORD_PRECISION));
+                pos = pos + step * dir;
+            }
+
+            return positions;
+        },
+
+        getMajorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.options.majorUnit);
+        },
+
+        getMinorTickPositions: function() {
+            var axis = this;
+
+            return axis.getTickPositions(axis.options.minorUnit);
+        },
+
+        getSlot: function(a, b) {
+            var axis = this,
+                options = axis.options,
+                reverse = options.reverse,
+                vertical = options.vertical,
+                valueAxis = vertical ? Y : X,
+                lineBox = axis.lineBox(),
+                lineStart = lineBox[valueAxis + (reverse ? 2 : 1)],
+                lineSize = vertical ? lineBox.height() : lineBox.width(),
+                dir = reverse ? -1 : 1,
+                step = dir * (lineSize / (options.max - options.min)),
+                p1,
+                p2,
+                slotBox = new Box2D(lineBox.x1, lineBox.y1, lineBox.x1, lineBox.y1);
+
+            a = defined(a) ? a : options.axisCrossingValue;
+            b = defined(b) ? b : options.axisCrossingValue;
+            a = math.max(math.min(a, options.max), options.min);
+            b = math.max(math.min(b, options.max), options.min);
+
+            if (vertical) {
+                p1 = options.max - math.max(a, b);
+                p2 = options.max - math.min(a, b);
+            } else {
+                p1 = math.min(a, b) - options.min;
+                p2 = math.max(a, b) - options.min;
+            }
+
+            slotBox[valueAxis + 1] = lineStart + step * (reverse ? p2 : p1);
+            slotBox[valueAxis + 2] = lineStart + step * (reverse ? p1 : p2);
+
+            return slotBox;
+        },
+
+        getLabelsCount: function() {
+            return this.getDivisions(this.options.majorUnit);
+        },
+
         getLabelText: function(index) {
-            var ticks = NumericAxis.fn.getLabelText.call(this, index),
-                date = new Date(round(ticks));
+            var options = this.options,
+                date = addDuration(options.min, index, options.baseUnit);
+
             return (date.getMonth() + 1) + "/" + date.getDate();
         }
     });
@@ -4491,7 +4578,6 @@
         CategoricalPlotArea: CategoricalPlotArea,
         CategoryAxis: CategoryAxis,
         ClusterLayout: ClusterLayout,
-        DateAxis: DateAxis,
         DateValueAxis: DateValueAxis,
         Highlight: Highlight,
         Legend: Legend,
@@ -4509,8 +4595,10 @@
         Tooltip: Tooltip,
         XYPlotArea: XYPlotArea,
 
+        addDuration: addDuration,
         categoriesCount: categoriesCount,
         ceilDate: ceilDate,
+        duration: duration,
         floorDate: floorDate
     });
 

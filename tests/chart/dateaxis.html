@@ -29,6 +29,98 @@
             dataviz.Text.fn.options.font = "16px Verdana, sans-serif";
 
             (function() {
+                var duration = dataviz.duration,
+                    dateA = new Date("2010/01/01 10:00"),
+                    dateB = new Date("2011/03/01 15:00");
+
+                // ------------------------------------------------------------
+                module("Helpers / duration");
+
+                test("calculates duration in years", function() {
+                    equals(duration(dateA, dateB, "years"), 1);
+                });
+
+                test("calculates duration in months", function() {
+                    equals(duration(dateA, dateB, "months"), 14);
+                });
+
+                test("calculates duration in days", function() {
+                    equals(duration(dateA, dateB, "days"), 424);
+                });
+
+                test("calculates duration in days during DST transition", function() {
+                    equals(duration(
+                        new Date("2012/03/24 GMT+0200 (FLE Standard Time)"),
+                        new Date("2012/03/26 GMT+0300 (FLE Daylight Time)"),
+                        "days"
+                        ), 2
+                    );
+                });
+
+                test("calculates duration in hours", function() {
+                    equals(duration(dateA, dateB, "hours"), 10181);
+                });
+
+                test("calculates duration in hours during DST transition", function() {
+                    equals(duration(
+                        new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
+                        new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)"),
+                        "hours"
+                        ), 5
+                    );
+                });
+
+                test("calculates duration in minutes", function() {
+                    equals(duration(dateA, dateB, "minutes"), 610860);
+                });
+
+                // ------------------------------------------------------------
+                var addDuration = dataviz.addDuration;
+
+                module("Helpers / addDuration");
+
+                test("rounds date to years", function() {
+                    same(addDuration(dateA, 10, "years"), new Date("2020/01/01"));
+                });
+
+                test("rounds date to months", function() {
+                    same(addDuration(dateA, 15, "months"), new Date("2011/04/01"));
+                });
+
+                test("rounds date to days", function() {
+                    same(addDuration(dateA, 35, "days"), new Date("2010/02/05"));
+                });
+
+                test("rounds to days during DST transition", function() {
+                    same(addDuration(
+                            new Date("2012/03/25 GMT+0200 (FLE Standard Time)"),
+                            2,
+                            "days"
+                        ), new Date("2012/03/27 GMT+0300 (FLE Daylight Time)")
+                    );
+                });
+
+                test("rounds date to hours", function() {
+                    same(addDuration(dateA, 24, "hours"), new Date("2010/01/02 10:00"));
+                });
+
+                test("rounds to hours during DST transition", function() {
+                    same(addDuration(
+                            new Date("2012/03/25 00:00 GMT+0200 (FLE Standard Time)"),
+                            6,
+                            "hours"
+                        ), new Date("2012/03/25 06:00 GMT+0300 (FLE Daylight Time)")
+                    );
+                });
+
+                test("rounds date to minutes", function() {
+                    same(addDuration(dateA, 75, "minutes"), new Date("2010/01/01 11:15"));
+                });
+
+            })();
+
+            /*
+            (function() {
                 function moduleSetup() {
                     dateAxis = new dataviz.DateAxis(
                         new Date("2012-02-01"), new Date("2012-02-10"), TIME_PER_DAY
@@ -130,6 +222,7 @@
                     same(dateAxis.range().max, new Date("2012-02-10"));
                 });
             })();
+            */
 
             (function() {
                 function moduleSetup() {
@@ -178,7 +271,7 @@
                     });
 
                     same(dateAxis.options.axisCrossingValue,
-                        [(new Date("2012/02/28")).getTime(), (new Date("2012/02/29")).getTime()]
+                        [new Date("2012/02/28"), new Date("2012/02/29")]
                     );
                 });
 
@@ -219,7 +312,7 @@
                             max: new Date("2012/02/28")
                     });
 
-                    equals(dateAxis.options.majorUnit / TIME_PER_DAY, 6);
+                    equals(dateAxis.options.majorUnit, 6);
                 });
 
                 test("Major unit is calculated for user set min/max and base unit", function() {
@@ -230,7 +323,7 @@
                             baseUnit: "days"
                     });
 
-                    equals(dateAxis.options.majorUnit / TIME_PER_DAY, 12);
+                    equals(dateAxis.options.majorUnit, 12);
                 });
 
                 test("Major unit is calculated for user set min and automatic max", function() {
@@ -239,7 +332,7 @@
                             min: new Date("2012/11/01")
                     });
 
-                    equals(dateAxis.options.majorUnit / TIME_PER_DAY, 6);
+                    equals(dateAxis.options.majorUnit, 6);
                 });
 
                 test("Major unit is calculated for user set max and automatic min", function() {
@@ -248,11 +341,11 @@
                             max: new Date("2012/01/10")
                     });
 
-                    equals(dateAxis.options.majorUnit / TIME_PER_DAY, 3);
+                    equals(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Major unit is calculated for series when user min/max are not set", function() {
-                    equal(dateAxis.options.majorUnit / TIME_PER_DAY, 2);
+                    equal(dateAxis.options.majorUnit, 2);
                 });
 
                 test("Automatic maximum is rounded to set major unit", function() {
@@ -261,14 +354,14 @@
                             majorUnit: 4
                     });
 
-                    same(dateAxis.options.max, (new Date("2012/02/12")).getTime());
+                    same(dateAxis.options.max, new Date("2012/02/12"));
                 });
 
                 test("Automatic maximum is rounded to auto major unit", function() {
                     dateAxis = new dataviz.DateValueAxis(
                         new Date("2012/02/01"), new Date("2012/02/10"));
 
-                    same(dateAxis.options.max, (new Date("2012/02/12")).getTime());
+                    same(dateAxis.options.max, new Date("2012/02/12"));
                 });
 
                 test("Automatic minimum is rounded to set major unit", function() {
@@ -277,14 +370,14 @@
                             majorUnit: 4
                     });
 
-                    same(dateAxis.options.min, (new Date("2012/01/31")).getTime());
+                    same(dateAxis.options.min, new Date("2012/01/31"));
                 });
 
                 test("Automatic minimum is rounded to auto major unit", function() {
                     dateAxis = new dataviz.DateValueAxis(
                         new Date("2012/02/01"), new Date("2012/02/10"));
 
-                    same(dateAxis.options.min, (new Date("2012/01/31")).getTime());
+                    same(dateAxis.options.min, new Date("2012/01/31"));
                 });
 
                 test("Reports range minimum equal to options.min", function() {
@@ -293,7 +386,7 @@
                             min: new Date("2012/02/05")
                     });
 
-                    same(dateAxis.range().min, (new Date("2012/02/05")).getTime());
+                    same(dateAxis.range().min, new Date("2012/02/05"));
                 });
 
                 test("Reports range maximum equal to options.max", function() {
@@ -302,7 +395,7 @@
                             max: new Date("2012/02/05")
                     });
 
-                    same(dateAxis.range().max, (new Date("2012/02/05").getTime()));
+                    same(dateAxis.range().max, new Date("2012/02/05"));
                 });
 
                 // ------------------------------------------------------------
