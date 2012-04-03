@@ -22,17 +22,27 @@
 
 <script>
     function mobileListViewPullToRefresh() {
+            var lastID;
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
                         url: "http://search.twitter.com/search.json", // the remove service url
-                        dataType: "jsonp", // JSONP (JSON with padding) is required for cross-domain AJAX
-                        data: { //additional parameters sent to the remote service
-                            q: "javascript"
+                        dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
+                    },
+                    parameterMap: function(options) {
+                        return {
+                            q: "bieber", //additional parameters sent to the remote service
+                            since_id: lastID
                         }
                     }
                 },
+                change: function() {
+                    var item = this.view()[0];
 
+                    if (item) {
+                        lastID = item.id_str;
+                    }
+                },
                 schema: { // describe the result format
                     data: "results" // the data which the data source will be bound to is in the "results" field
                 }
