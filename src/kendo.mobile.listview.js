@@ -252,7 +252,7 @@
 
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
-            kendo.notify(that, kendo.mobile.ui);
+            kendo.notify(that, ui);
         },
 
         events: [
@@ -393,13 +393,14 @@
 
                 that.trigger("itemChange", {
                     item: item,
-                    data: data
+                    data: data,
+                    ns: ui
                 });
 
                 return;
             }
 
-            this._templates();
+            that._templates();
             that.trigger("dataBinding");
 
             if (dataSource.group()[0]) {
@@ -422,7 +423,7 @@
             }
 
             that._style();
-            that.trigger("dataBound");
+            that.trigger("dataBound", { ns: ui });
         },
 
         _templates: function() {

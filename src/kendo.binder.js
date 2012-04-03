@@ -701,7 +701,7 @@
             },
 
             itemChange: function(e) {
-                bindElement(e.item[0], this.bindings.source.root, e.data);
+                bindElement(e.item[0], this.bindings.source.root, e.data, e.ns || kendo.ui);
             },
 
             dataBinding: function() {
@@ -715,13 +715,14 @@
                 }
             },
 
-            dataBound: function() {
+            dataBound: function(e) {
                 var idx,
                     length,
                     widget = this.widget,
                     items = widget.items(),
                     dataSource = widget.dataSource,
                     view = dataSource.view(),
+                    ns = e.ns || kendo.ui,
                     groups = dataSource.group() || [];
 
                 if (items.length) {
@@ -730,7 +731,7 @@
                     }
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], this.bindings.source.root, view[idx]);
+                        bindElement(items[idx], this.bindings.source.root, view[idx], ns);
                     }
                 }
             },
