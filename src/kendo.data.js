@@ -531,7 +531,7 @@
         },
 
         create: function(descriptor) {
-            return Comparer[descriptor.dir.toLowerCase()](descriptor.field);
+            return this[descriptor.dir.toLowerCase()](descriptor.field);
         },
 
         combine: function(comparers) {
@@ -549,11 +549,7 @@
         }
     };
 
-    var PositionComparer = {
-        selector: function(field) {
-            return isFunction(field) ? field : getter(field);
-        },
-
+    var PositionComparer = extend({}, Comparer, {
         asc: function(field) {
             var selector = this.selector(field);
             return function (a, b) {
@@ -579,26 +575,8 @@
 
                 return valueA < valueB ? 1 : (valueA > valueB ? -1 : 0);
             };
-        },
-
-        create: function(descriptor) {
-            return PositionComparer[descriptor.dir.toLowerCase()](descriptor.field);
-        },
-
-        combine: function(comparers) {
-             return function(a, b) {
-                 var result = comparers[0](a, b),
-                     idx,
-                     length;
-
-                 for (idx = 1, length = comparers.length; idx < length; idx ++) {
-                     result = result || comparers[idx](a, b);
-                 }
-
-                 return result;
-             };
         }
-    };
+    });
 
     map = function (array, callback) {
         var idx, length = array.length, result = new Array(length);
