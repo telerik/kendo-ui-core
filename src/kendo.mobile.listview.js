@@ -381,13 +381,20 @@
                 element = that.element,
                 appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
                 contents,
+                data,
                 item,
                 view = dataSource.view();
 
             if (e.action === "itemchange") {
-                item = e.items[0];
+                data = e.items[0];
+                item = $(that.template(data));
 
-                element.find("[data-" + kendo.ns + "uid=" + item.uid + "]").replaceWith(that.template(item));
+                element.find("[data-" + kendo.ns + "uid=" + data.uid + "]").replaceWith(item);
+
+                that.trigger("itemChange", {
+                    item: item,
+                    data: data
+                });
 
                 return;
             }

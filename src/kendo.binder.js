@@ -6,6 +6,7 @@
         toString = {}.toString,
         Class = kendo.Class,
         innerText,
+        proxy = $.proxy,
         VALUE = "value",
         CHECKED = "checked",
         CHANGE = "change";
@@ -91,7 +92,7 @@
                 result = that.source.get(that.path);
 
                 if (typeof result === "function") {
-                    result = $.proxy(result, that.source);
+                    result = proxy(result, that.source);
 
                     result = result();
                 }
@@ -123,7 +124,7 @@
                 source = this.root;
             }
 
-            return $.proxy(handler, source);
+            return proxy(handler, source);
         }
     });
 
@@ -265,7 +266,7 @@
         init: function(element, bindings, options) {
             Binder.fn.init.call(this, element, bindings, options);
 
-            this._change = $.proxy(this.change, this);
+            this._change = proxy(this.change, this);
             this.eventName = options.valueUpdate ||CHANGE;
 
             $(this.element).bind(this.eventName, this._change);
@@ -416,7 +417,7 @@
         checked: Binder.extend({
             init: function(element, bindings, options) {
                 Binder.fn.init.call(this, element, bindings, options);
-                this._change = $.proxy(this.change, this);
+                this._change = proxy(this.change, this);
 
                 $(this.element).change(this._change);
             },
@@ -487,7 +488,7 @@
             init: function(target, bindings, options) {
                 Binder.fn.init.call(this, target, bindings, options);
 
-                this._change = $.proxy(this.change, this);
+                this._change = proxy(this.change, this);
                 $(this.element).change(this._change);
             },
 
@@ -606,7 +607,7 @@
                 Binder.fn.init.call(this, widget.element[0], bindings, options);
 
                 this.widget = widget;
-                this._change = $.proxy(this.change, this);
+                this._change = proxy(this.change, this);
                 this.widget.bind(CHANGE, this._change);
             },
             change: function() {
@@ -689,11 +690,18 @@
 
         source: Binder.extend({
             init: function(widget, bindings, options) {
-                Binder.fn.init.call(this, widget.element[0], bindings, options);
+                var that = this;
 
-                this.widget = widget;
-                this._dataBinding = $.proxy(this.dataBinding, this);
-                this._dataBound = $.proxy(this.dataBound, this);
+                Binder.fn.init.call(that, widget.element[0], bindings, options);
+
+                that.widget = widget;
+                that._dataBinding = proxy(that.dataBinding, that);
+                that._dataBound = proxy(that.dataBound, that);
+                that._itemChange = proxy(that.itemChange, that);
+            },
+
+            itemChange: function(e) {
+                bindElement(e.item[0], this.bindings.source.root, e.data);
             },
 
             dataBinding: function() {
@@ -729,6 +737,7 @@
 
             refresh: function(e) {
                 var that = this,
+                    source,
                     widget = that.widget;
 
                 e = e || {};
@@ -738,9 +747,10 @@
 
                     widget.bind("dataBinding", that._dataBinding);
                     widget.bind("dataBound", that._dataBound);
+                    widget.bind("itemChange", that._itemChange);
 
                     if (widget.dataSource instanceof kendo.data.DataSource) {
-                        var source = this.bindings.source.get();
+                        source = that.bindings.source.get();
                         if (source instanceof kendo.data.DataSource) {
                             widget.setDataSource(source);
                         } else {
@@ -755,6 +765,7 @@
 
                 widget.unbind("dataBinding", this._dataBinding);
                 widget.unbind("dataBound", this._dataBound);
+                widget.unbind("itemChange", this._itemChange);
             }
         }),
 
