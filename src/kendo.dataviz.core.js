@@ -42,7 +42,6 @@
         MAX_VALUE = Number.MAX_VALUE,
         MIN_VALUE = -Number.MAX_VALUE,
         NONE = "none",
-        ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE = "outside",
         RADIAL = "radial",
         RIGHT = "right",
@@ -883,7 +882,8 @@
             margin: 5,
             visible: true,
 
-            _alignLines: true
+            _alignLines: true,
+            _labelsBetweenTicks: false
         },
 
         // abstract labelsCount(): Number
@@ -1073,7 +1073,7 @@
             return result;
         },
 
-        reflowAxis: function(box, position) {
+        reflow: function(box) {
             var axis = this,
                 options = axis.options,
                 vertical = options.vertical,
@@ -1113,14 +1113,15 @@
             }
 
             axis.arrangeTitle();
-            axis.arrangeLabels(maxLabelWidth, maxLabelHeight, position);
+            axis.arrangeLabels(maxLabelWidth, maxLabelHeight);
         },
 
-        arrangeLabels: function(maxLabelWidth, maxLabelHeight, position) {
+        arrangeLabels: function(maxLabelWidth, maxLabelHeight) {
             var axis = this,
                 options = axis.options,
                 labelOptions = options.labels,
                 labels = axis.labels,
+                labelsBetweenTicks = options._labelsBetweenTicks,
                 vertical = options.vertical,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,
@@ -1141,7 +1142,7 @@
                     labelX;
 
                 if (vertical) {
-                    if (position == ON_MINOR_TICKS) {
+                    if (labelsBetweenTicks) {
                         firstTickPosition = tickPositions[tickIx];
                         nextTickPosition = tickPositions[tickIx + 1];
 
@@ -1159,7 +1160,7 @@
 
                     labelBox = label.box.move(labelX, labelPos);
                 } else {
-                    if (position == ON_MINOR_TICKS) {
+                    if (labelsBetweenTicks) {
                         firstTickPosition = tickPositions[tickIx];
                         nextTickPosition = tickPositions[tickIx + 1];
                     } else {
@@ -1276,10 +1277,6 @@
         range: function() {
             var options = this.options;
             return { min: options.min, max: options.max };
-        },
-
-        reflow: function(targetBox) {
-            this.reflowAxis(targetBox);
         },
 
         autoAxisMax: function(min, max) {

@@ -83,7 +83,6 @@
         MIN_VALUE = -Number.MAX_VALUE,
         MOUSEMOVE_TRACKING = "mousemove.tracking",
         MOUSEOVER = "mouseover",
-        ON_MINOR_TICKS = "onMinorTicks",
         OUTSIDE_END = "outsideEnd",
         OUTLINE_SUFFIX = "_outline",
         PIE = "pie",
@@ -936,15 +935,13 @@
                 width: 1,
                 color: BLACK
             },
-            zIndex: 1
+            zIndex: 1,
+
+            _labelsBetweenTicks: true
         },
 
         range: function() {
             return { min: 0, max: this.options.categories.length };
-        },
-
-        reflow: function(targetBox) {
-            this.reflowAxis(targetBox, ON_MINOR_TICKS);
         },
 
         getTickPositions: function(itemsCount) {
