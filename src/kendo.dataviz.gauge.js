@@ -380,7 +380,7 @@
 
             segments = scale.rangeSegments();
 
-            if (segments) {
+            if (segments.length) {
                 ringRadius = scale.getRadius();
 
                 for (i = 0; i < segments.length; i++) {
