@@ -508,7 +508,7 @@
                 that._xhr = $.get(url, function(html) {
                                 callback(that._createRemoteView(url, html));
                                 that.hideLoading();
-                            })
+                            }, 'html')
                             .fail(function() {
                                 that.hideLoading();
                             });
