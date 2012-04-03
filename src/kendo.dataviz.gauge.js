@@ -779,7 +779,6 @@
                 trackBox = new Box2D(
                     scaleBox.x2 + padding.left, scaleLine.y1,
                     scaleBox.x2 + padding.left + width, scaleLine.y2);
-
             } else {
                 trackBox = new Box2D(
                     scaleLine.x1, scaleBox.y1 - padding.bottom - width,
@@ -902,12 +901,10 @@
                 options = pointer.options,
                 elements = [];
 
-            if (options.visible) {
-                pointer.element = pointer.renderPointer(view);
-                elements.push(pointer.element);
-                if (options.track.visible && options.shape === BAR_INDICATOR) {
-                    elements.push(pointer.renderTrack(view));
-                }
+            pointer.element = pointer.renderPointer(view);
+            elements.push(pointer.element);
+            if (options.track.visible && options.shape === BAR_INDICATOR) {
+                elements.push(pointer.renderTrack(view));
             }
 
             append(elements, Pointer.fn.getViewElements.call(pointer, view));
@@ -924,11 +921,13 @@
         },
 
         options: {
-            margin: {},
-            background: "",
-            border: {
-                color: BLACK,
-                width: 0
+            plotArea: {
+                margin: {},
+                background: "",
+                border: {
+                    color: BLACK,
+                    width: 0
+                }
             }
         },
 
