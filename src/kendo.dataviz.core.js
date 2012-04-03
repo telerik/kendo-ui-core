@@ -883,7 +883,7 @@
             visible: true,
 
             _alignLines: true,
-            _labelsBetweenTicks: false
+            _labelsOnTicks: true
         },
 
         // abstract labelsCount(): Number
@@ -920,8 +920,8 @@
                 box = axis.box,
                 vertical = options.vertical,
                 labels = axis.labels,
-                labelSize = vertical ? "height" : "width",
-                labelsOnTicks = !options._labelsBetweenTicks,
+                labelSize = vertical ? HEIGHT : WIDTH,
+                labelsOnTicks = options._labelsOnTicks,
                 mirror = options.labels.mirror,
                 axisX = mirror ? box.x1 : box.x2,
                 axisY = mirror ? box.y2 : box.y1,
@@ -1129,7 +1129,7 @@
                 options = axis.options,
                 labelOptions = options.labels,
                 labels = axis.labels,
-                labelsBetweenTicks = options._labelsBetweenTicks,
+                labelsBetweenTicks = !options._labelsOnTicks,
                 vertical = options.vertical,
                 lineBox = axis.lineBox(),
                 mirror = options.labels.mirror,

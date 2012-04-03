@@ -937,7 +937,7 @@
             },
             zIndex: 1,
 
-            _labelsBetweenTicks: true
+            _labelsOnTicks: false
         },
 
         range: function() {
