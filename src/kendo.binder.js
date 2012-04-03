@@ -588,9 +588,15 @@
 
             refresh: function(key) {
                 var binding = this.bindings.events[key],
-                    handler = this.handlers[key] = binding.get();
+                    handler = binding.get();
 
-                this.widget.bind(key, handler);
+                this.handlers[key] = function(e) {
+                    e.data = binding.source;
+
+                    handler(e);
+                };
+
+                this.widget.bind(key, this.handlers[key]);
             },
 
             destroy: function() {
