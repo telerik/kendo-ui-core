@@ -339,7 +339,9 @@
 
             that._pageable();
 
-            that._groupable();
+            if (that.options.groupable) {
+                that._groupable();
+            }
 
             that._thead();
 

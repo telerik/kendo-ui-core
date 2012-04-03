@@ -434,6 +434,20 @@
                 notStrictEqual(grid.groupable, groupable);
             });
 
+            test("expand collapse handlers are not attached multiple times if bound through mvvm and groupable is false", 1, function() {
+                var grid = new Grid("<table />", { columns: ["text", "value"] });
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}],
+                    group: { field: "text" }
+                }));
+
+                var expandGroup = stub(grid, "expandGroup");
+                grid.tbody.find("tr.k-grouping-row:first > td:first a").click();
+                equal(expandGroup.calls("expandGroup"), 0);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
