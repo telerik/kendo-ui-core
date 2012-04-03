@@ -36,8 +36,15 @@
         }
 
         if (clicked.is("label") && e.type === MOUSEUP && !prevented) {
-            var checkBox = clicked.find("input")[0];
-            checkBox.checked = !checkBox.checked;
+            var input = clicked.find("input"),
+                type = input.attr("type"),
+                value = !input[0].checked;
+
+            if (type === "radio") {
+                value = true;
+            }
+
+            input[0].checked = value;
         }
     }
 
