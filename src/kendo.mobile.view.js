@@ -123,11 +123,11 @@
             that.scroller = that.content.data("kendoMobileScroller");
             that.scrollerContent = that.scroller.scrollElement;
 
+            that.trigger(INIT, {view: that});
+
             that._eachWidget(function(widget) {
                 widget.viewInit(that);
             });
-
-            that.trigger(INIT, {view: that});
         },
 
         events: [
