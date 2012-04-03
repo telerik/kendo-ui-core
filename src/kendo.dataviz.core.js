@@ -882,7 +882,8 @@
             // TODO: Move to line or labels options
             margin: 5,
             visible: true,
-            _align: true
+
+            _alignLines: true
         },
 
         // abstract labelsCount(): Number
@@ -971,7 +972,7 @@
                         lineOptions = {
                                 strokeWidth: tick.width,
                                 stroke: tick.color,
-                                align: axis.shouldAlign()
+                                align: options._alignLines
                             };
 
                         if (options.vertical) {
@@ -999,10 +1000,6 @@
             return ticks;
         },
 
-        shouldAlign: function() {
-            return true;
-        },
-
         getViewElements: function(view) {
             var axis = this,
                 options = axis.options,
@@ -1017,7 +1014,7 @@
                     stroke: line.color,
                     dashType: line.dashType,
                     zIndex: line.zIndex,
-                    align: axis.shouldAlign()
+                    align: options._alignLines
                 };
 
                 childElements.push(view.createLine(
