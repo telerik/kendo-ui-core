@@ -6,7 +6,7 @@
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
-        cancelTemplate = kendo.template('<li><a href="\\#" class="km-actionsheet-cancel">#:cancel#</a></li>');
+        cancelTemplate = kendo.template('<li class="km-actionsheet-cancel"><a href="\\#">#:cancel#</a></li>');
 
     /**
      * @name kendo.mobile.ui.ActionSheet.Description
@@ -88,16 +88,19 @@
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.wrap(WRAP)
+            element = that.element;
+
+            element
+                .addClass("km-actionsheet")
+                .wrap(WRAP)
                 .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that))
                 .on("click", BUTTONS, kendo.preventDefault);
 
-            wrapper = that.element.parent();
+            wrapper = element.parent();
 
             that.wrapper = wrapper;
             that.shim = new Shim(that.wrapper);
         },
-
 
         options: {
             name: "ActionSheet",
