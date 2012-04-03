@@ -1115,7 +1115,7 @@
     }
 
     function timeUnit(delta) {
-        var unit;
+        var unit = HOURS;
 
         if (delta >= TIME_PER_YEAR) {
             unit = YEARS;
@@ -1123,8 +1123,6 @@
             unit = MONTHS;
         } else if (delta >= TIME_PER_DAY) {
             unit = DAYS;
-        } else if (delta >= TIME_PER_HOUR) {
-            unit = HOURS;
         }
 
         return unit;
