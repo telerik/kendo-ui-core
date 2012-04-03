@@ -31,7 +31,6 @@
             var that = this,
                 attach = options.modal ? "off" : "on";
 
-            console.log(attach);
             that.shim[attach](kendo.support.mouseup, $.proxy(that.hide, that));
         },
 
@@ -63,6 +62,9 @@
                     open: {
                         effects: effect,
                         duration: that.options.duration
+                    },
+                    close: {
+                        duration: that.options.duration
                     }
                 },
                 closed: function() {
@@ -76,6 +78,11 @@
 
         show: function() {
             this.popup.open();
+            this.popup.wrapper.css({
+                width: "",
+                left: "",
+                top: ""
+            });
         },
 
         hide: function() {
