@@ -128,10 +128,11 @@
                 options = pointer.options,
                 needle = pointer.elements[0],
                 animationOptions = options.animation,
-                currentAngle = needle.options.rotation[0],
                 minSlotAngle = scale.slotAngle(scale.options.min),
                 oldAngle = scale.slotAngle(options._oldValue) - minSlotAngle,
                 animation = needle._animation;
+
+            needle.options.rotation[0] = scale.slotAngle(options.value) - minSlotAngle;
 
             if (animation) {
                 animation.abort();
@@ -141,7 +142,7 @@
                 needle.refresh(doc.getElementById(options.id));
             } else {
                 animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
-                    startAngle: currentAngle || oldAngle
+                    startAngle: oldAngle
                 }));
                 animation.setup();
                 animation.play();
