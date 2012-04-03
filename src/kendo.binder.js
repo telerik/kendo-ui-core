@@ -603,7 +603,7 @@
                 var handler;
 
                 for (handler in this.handlers) {
-                    this.element.unbind(handler, this.handlers[handler]);
+                    this.widget.unbind(handler, this.handlers[handler]);
                 }
             }
         }),
