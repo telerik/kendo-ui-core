@@ -168,6 +168,11 @@
                 ok(!result.hasOwnProperty("$orderby"), "orderby is not set");
             });
 
+            test("parameterMap does not add $orderby if sort is empty list", function() {
+                var result = parameterMap({ sort: [] });
+                ok(!result.hasOwnProperty("$orderby"), "orderby is not set");
+            });
+
             test("$orderby when direction is descending", function() {
                 var result = parameterMap({ sort: [ { field:"foo", dir: "desc" } ]});
                 equal(result.$orderby, "foo desc");
