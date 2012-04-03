@@ -170,7 +170,6 @@
 
             that.element.find("[data-role=page]").width(width);
 
-            // that.page = Math.round(-that.movable.x / width);
             that.scrollTo(that.page);
 
             pages = that.pages = ceil(dimension.totalSize() / width);
@@ -198,6 +197,7 @@
          * </script>
          */
         scrollTo: function(page) {
+            this.page = page;
             this._moveTo(- page * this.dimension.size, Transition.easeOutExpo);
         },
 
