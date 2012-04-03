@@ -5,6 +5,8 @@
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
         ITEM_SELECTOR = ".km-list > li",
+        HIGHLIGHT_SELECTOR = ".km-list > li > .km-listview-link, .km-list > li > .km-listview-label",
+        HANDLED_INPUTS_SELECTOR = ".km-list > li > .km-listview-label > input",
         proxy = $.proxy,
         GROUP_CLASS = "km-group-title",
         GROUP_WRAPPER = '<div class="' + GROUP_CLASS + '"><span class="km-text"></span></div>',
@@ -23,13 +25,19 @@
             return;
         }
 
-        var item = $(e.currentTarget),
-            clickedLink = $(e.target).closest("a"),
-            prevented = e.originalEvent && e.originalEvent.defaultPrevented,
-            role = clickedLink.data(kendo.ns + "role") || "";
+        var clicked = $(e.currentTarget),
+            item = clicked.parent(),
+            role = clicked.data(kendo.ns + "role") || "",
+            plainItem = (!role.match(/button/)),
+            prevented = e.originalEvent && e.originalEvent.defaultPrevented;
 
-        if (clickedLink[0] && (!role.match(/button/))) {
+        if (plainItem) {
             item.toggleClass("km-state-active", e.type === MOUSEDOWN && !prevented);
+        }
+
+        if (clicked.is("label") && e.type === MOUSEUP && !prevented) {
+            var checkBox = clicked.find("input")[0];
+            checkBox.checked = !checkBox.checked;
         }
     }
 
@@ -53,6 +61,22 @@
             item.prepend(iconSpan);
             iconSpan.addClass("km-" + icon);
         }
+    }
+
+    function enhanceCheckBoxItem(i, label) {
+        label = $(label);
+
+        if (!label.children("input[type=checkbox],input[type=radio]").length) {
+            return;
+        }
+
+        var item = label.parent();
+
+        if (item.contents().not(label).not(function() { return this.nodeType == 3; })[0]) {
+            return;
+        }
+
+        label.addClass("km-listview-label");
     }
 
     /**
@@ -239,7 +263,8 @@
             options = that.options;
 
             that.element
-                .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), ITEM_SELECTOR, toggleItemActiveClass)
+                .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
+                .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault() })
                 .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
             that._dataSource();
@@ -512,6 +537,7 @@
             }
 
             that.items().find(">a").each(enhanceLinkItem);
+            that.items().find(">label").each(enhanceCheckBoxItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         }
