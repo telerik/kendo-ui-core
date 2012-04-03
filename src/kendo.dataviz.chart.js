@@ -947,33 +947,6 @@
             this.reflowAxis(targetBox, ON_MINOR_TICKS);
         },
 
-        getViewElements: function(view) {
-            var axis = this,
-                options = axis.options,
-                line = options.line,
-                lineBox = axis.lineBox(),
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                lineOptions;
-
-            if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
-                    zIndex: line.zIndex
-                };
-
-                childElements.push(view.createLine(
-                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
-                    lineOptions));
-
-                append(childElements, axis.renderTicks(view));
-                append(childElements, axis.renderPlotBands(view));
-            }
-
-            return childElements;
-        },
-
         getTickPositions: function(itemsCount) {
             var axis = this,
                 options = axis.options,

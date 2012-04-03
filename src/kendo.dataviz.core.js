@@ -1003,6 +1003,34 @@
             return true;
         },
 
+        getViewElements: function(view) {
+            var axis = this,
+                options = axis.options,
+                line = options.line,
+                lineBox = axis.lineBox(),
+                childElements = ChartElement.fn.getViewElements.call(axis, view),
+                lineOptions;
+
+            if (line.width > 0 && line.visible) {
+                lineOptions = {
+                    strokeWidth: line.width,
+                    stroke: line.color,
+                    dashType: line.dashType,
+                    zIndex: line.zIndex,
+                    align: axis.shouldAlign()
+                };
+
+                childElements.push(view.createLine(
+                    lineBox.x1, lineBox.y1, lineBox.x2, lineBox.y2,
+                    lineOptions));
+
+                append(childElements, axis.renderTicks(view));
+                append(childElements, axis.renderPlotBands(view));
+            }
+
+            return childElements;
+        },
+
         getActualTickSize: function () {
             var axis = this,
                 options = axis.options,
@@ -1255,41 +1283,6 @@
 
         reflow: function(targetBox) {
             this.reflowAxis(targetBox);
-        },
-
-        getViewElements: function(view) {
-            var axis = this,
-                options = axis.options,
-                line = options.line,
-                childElements = ChartElement.fn.getViewElements.call(axis, view),
-                lineBox = axis.lineBox(),
-                lineOptions;
-
-            if (line.width > 0 && line.visible) {
-                lineOptions = {
-                    strokeWidth: line.width,
-                    stroke: line.color,
-                    dashType: line.dashType,
-                    zIndex: options.zIndex,
-                    align: axis.shouldAlign()
-                };
-                if (options.vertical) {
-                    childElements.push(view.createLine(
-                        lineBox.x1, lineBox.y1,
-                        lineBox.x1, lineBox.y2,
-                        lineOptions));
-                } else {
-                    childElements.push(view.createLine(
-                        lineBox.x1, lineBox.y1,
-                        lineBox.x2, lineBox.y1,
-                        lineOptions));
-                }
-
-                append(childElements, axis.renderTicks(view));
-                append(childElements, axis.renderPlotBands(view));
-            }
-
-            return childElements;
         },
 
         autoAxisMax: function(min, max) {
