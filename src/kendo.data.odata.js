@@ -21,7 +21,7 @@
                 }
             },
             sort: function(params, orderby) {
-                params.$orderby = $.map(orderby, function(value) {
+                var expr = $.map(orderby, function(value) {
                     var order = value.field.replace(/\./g, "/");
 
                     if (value.dir === "desc") {
@@ -30,6 +30,10 @@
 
                     return order;
                 }).join(",");
+
+                if (expr) {
+                    params.$orderby = expr;
+                }
             },
             skip: function(params, skip) {
                 if (skip) {
