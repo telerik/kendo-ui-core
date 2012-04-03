@@ -1,4 +1,142 @@
-<ProjectSettings Type="ArtOfTest.WebAii.Design.UserSettings" Version="2011.2.1330.0">
+<ProjectSettings Type="ArtOfTest.WebAii.Design.UserSettings" Version="2012.1.301.0">
+  <__DataMember_ShouldDeleteElement IsDataContractSerialized="True" PropertyName="ShouldDeleteElement" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_ShouldDeleteElement>
+  <__DataMember_SkipDeleteElementPrompt IsDataContractSerialized="True" PropertyName="SkipDeleteElementPrompt" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_SkipDeleteElementPrompt>
+  <__DataMember_HideFindExpressionWelcome IsDataContractSerialized="True" PropertyName="HideFindExpressionWelcome" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_HideFindExpressionWelcome>
+  <__DataMember_MenuHoldTime IsDataContractSerialized="True" PropertyName="MenuHoldTime" PropertyType="System.Double">
+    <double xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</double>
+  </__DataMember_MenuHoldTime>
+  <__DataMember_SilverlightConnectTimeout IsDataContractSerialized="True" PropertyName="SilverlightConnectTimeout" PropertyType="System.Int32">
+    <int xmlns="http://schemas.microsoft.com/2003/10/Serialization/">30000</int>
+  </__DataMember_SilverlightConnectTimeout>
+  <__DataMember_BaseClassName IsDataContractSerialized="True" PropertyName="BaseClassName" PropertyType="System.String">
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">BaseWebAiiTest</string>
+  </__DataMember_BaseClassName>
+  <__DataMember_UrlRecordMode IsDataContractSerialized="True" PropertyName="UrlRecordMode" PropertyType="ArtOfTest.WebAii.Design.PageUriCompareMode">
+    <PageUriCompareMode xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design">FullPathAndQuery</PageUriCompareMode>
+  </__DataMember_UrlRecordMode>
+  <__DataMember_HighlightBorderColor IsDataContractSerialized="True" PropertyName="HighlightBorderColor" PropertyType="System.Int32">
+    <int xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-65536</int>
+  </__DataMember_HighlightBorderColor>
+  <__DataMember_HighlightBorderSize IsDataContractSerialized="True" PropertyName="HighlightBorderSize" PropertyType="System.Int32">
+    <int xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</int>
+  </__DataMember_HighlightBorderSize>
+  <__DataMember_CodeGenerationElementIdentificationType IsDataContractSerialized="True" PropertyName="GeneratedElementIdentificationType" PropertyType="ArtOfTest.WebAii.Design.ProjectModel.GeneratedElementIdentificationType">
+    <GeneratedElementIdentificationType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel">PageElements</GeneratedElementIdentificationType>
+  </__DataMember_CodeGenerationElementIdentificationType>
+  <__DataMember_UrlHistory IsDataContractSerialized="True" PropertyName="UrlHistory" PropertyType="System.Collections.Generic.List`1[[System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+    <ArrayOfanyURI xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_UrlHistory>
+  <__DataMember_AbsoluteDragDropRecording IsDataContractSerialized="True" PropertyName="AbsoluteDragDrop" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+  </__DataMember_AbsoluteDragDropRecording>
+  <__DataMember_ImageScalePercentage IsDataContractSerialized="True" PropertyName="ImageScalePercentage" PropertyType="System.Int32">
+    <int xmlns="http://schemas.microsoft.com/2003/10/Serialization/">75</int>
+  </__DataMember_ImageScalePercentage>
+  <__DataMember_SelectedIdentificaitonScheme IsDataContractSerialized="True" PropertyName="SelectedIdentificationScheme" PropertyType="System.String">
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">Html</string>
+  </__DataMember_SelectedIdentificaitonScheme>
+  <__DataMember_UnitTypeTypeGeneration IsDataContractSerialized="True" PropertyName="UnitTestTypeCodeGeneration" PropertyType="ArtOfTest.Common.Design.ProjectModel.UnitTestType">
+    <UnitTestType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.Common.Design.ProjectModel">VS</UnitTestType>
+  </__DataMember_UnitTypeTypeGeneration>
+  <__DataMember_DebugMode IsDataContractSerialized="True" PropertyName="DebugMode" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_DebugMode>
+  <__DataMember_RecorderBaseUrl IsDataContractSerialized="True" PropertyName="RecorderBaseUrl" PropertyType="System.String">
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://mvc-kendobuild/staging</string>
+  </__DataMember_RecorderBaseUrl>
+  <__DataMember_IsStoryBoardCapturingEnabled IsDataContractSerialized="True" PropertyName="IsStoryBoardCapturingEnabled" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+  </__DataMember_IsStoryBoardCapturingEnabled>
+  <__DataMember_SimulateRealClickByDefault IsDataContractSerialized="True" PropertyName="SimulateRealClickByDefault" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_SimulateRealClickByDefault>
+  <__DataMember_SimulateRealTypingByDefault IsDataContractSerialized="True" PropertyName="SimulateRealTypingByDefault" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_SimulateRealTypingByDefault>
+  <__DataMember_SimulateRealSilverlightUserByDefault IsDataContractSerialized="True" PropertyName="SimulateRealSilverlightUserByDefault" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+  </__DataMember_SimulateRealSilverlightUserByDefault>
+  <__DataMember_DefaultDropDownSelection IsDataContractSerialized="True" PropertyName="DefaultDropDownSelection" PropertyType="ArtOfTest.WebAii.Design.SelectDropDownType">
+    <SelectDropDownType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design">ByValue</SelectDropDownType>
+  </__DataMember_DefaultDropDownSelection>
+  <__DataMember_QuickExecutionElementWaitTimeout IsDataContractSerialized="True" PropertyName="QuickExecutionElementWaitTimeout" PropertyType="System.Int32">
+    <int xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10000</int>
+  </__DataMember_QuickExecutionElementWaitTimeout>
+  <__DataMember_QuickExecutionClientReadyTimeout IsDataContractSerialized="True" PropertyName="QuickExecutionClientReadyTimeout" PropertyType="System.Int32">
+    <int xmlns="http://schemas.microsoft.com/2003/10/Serialization/">30000</int>
+  </__DataMember_QuickExecutionClientReadyTimeout>
+  <__DataMember_QcServerUrl IsDataContractSerialized="True" PropertyName="QcServerUrl" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_QcServerUrl>
+  <__DataMember_QcUserName IsDataContractSerialized="True" PropertyName="QcUserName" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_QcUserName>
+  <__DataMember_QcPassword IsDataContractSerialized="True" PropertyName="QcPassword" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_QcPassword>
+  <__DataMember_QcSkipAuthDialog IsDataContractSerialized="True" PropertyName="QcSkipAuthDialog" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_QcSkipAuthDialog>
+  <__DataMember_QcDomain IsDataContractSerialized="True" PropertyName="QcDomain" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_QcDomain>
+  <__DataMember_QcProject IsDataContractSerialized="True" PropertyName="QcProject" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_QcProject>
+  <__DataMember_TfsUserName IsDataContractSerialized="True" PropertyName="TfsUserName" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_TfsUserName>
+  <__DataMember_TfsPassword IsDataContractSerialized="True" PropertyName="TfsPassword" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_TfsPassword>
+  <__DataMember_TfsSkipAuthDialog IsDataContractSerialized="True" PropertyName="TfsSkipAuthDialog" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+  </__DataMember_TfsSkipAuthDialog>
+  <__DataMember_TfsDomain IsDataContractSerialized="True" PropertyName="TfsDomain" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_TfsDomain>
+  <__DataMember_TeamPulseServerUrl IsDataContractSerialized="True" PropertyName="TeamPulseServerUrl" PropertyType="System.String">
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+  </__DataMember_TeamPulseServerUrl>
+  <__DataMember_TpUserName IsDataContractSerialized="True" PropertyName="TpUserName" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_TpUserName>
+  <__DataMember_TpPassword IsDataContractSerialized="True" PropertyName="TpPassword" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_TpPassword>
+  <__DataMember_TpUseWindowsAuth IsDataContractSerialized="True" PropertyName="TpUseWindowsAuth" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_TpUseWindowsAuth>
+  <__DataMember_TpSkipAuthDialog IsDataContractSerialized="True" PropertyName="TpSkipAuthDialog" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_TpSkipAuthDialog>
+  <__DataMember_RecordWpfWindowStateChanged IsDataContractSerialized="True" PropertyName="RecordWpfWindowStateChanged" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_RecordWpfWindowStateChanged>
+  <__DataMember_PromptNameOnAddElement IsDataContractSerialized="True" PropertyName="PromptNameOnAddElement" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_PromptNameOnAddElement>
+  <__DataMember_DefaultWPFApplication IsDataContractSerialized="True" PropertyName="DefaultWPFApplication" PropertyType="System.String">
+    <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </__DataMember_DefaultWPFApplication>
+  <__DataMember_BugTitleMask IsDataContractSerialized="True" PropertyName="BugTitleMask" PropertyType="System.String">
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">{Step name} step on {Test name} test failed.</string>
+  </__DataMember_BugTitleMask>
+  <__DataMember_BugAddAttachment IsDataContractSerialized="True" PropertyName="BugAddAttachment" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_BugAddAttachment>
+  <__DataMember_BugAutoSubmit IsDataContractSerialized="True" PropertyName="BugAutoSubmit" PropertyType="System.Boolean">
+    <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+  </__DataMember_BugAutoSubmit>
+  <__DataMember_BugDescriptionMask IsDataContractSerialized="True" PropertyName="BugDescriptionMask" PropertyType="System.String">
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">{Description}</string>
+  </__DataMember_BugDescriptionMask>
   <BaseClassName Type="System.String">BaseWebAiiTest</BaseClassName>
   <UrlRecordMode Type="ArtOfTest.WebAii.Design.PageUriCompareMode">FullPathAndQuery</UrlRecordMode>
   <GeneratedElementIdentificationType Type="ArtOfTest.WebAii.Design.ProjectModel.GeneratedElementIdentificationType">PageElements</GeneratedElementIdentificationType>
@@ -6,35 +144,263 @@
   <ImageScalePercentage Type="System.Int32">75</ImageScalePercentage>
   <SelectedIdentificationScheme Type="System.String">Html</SelectedIdentificationScheme>
   <IdentificationOptionSchemes>
-    <Item Key="Html" Type="ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme" Version="2011.2.1330.0" CheckFindParamUniqueness="True" AutoDetectTestRegions="True" TryAttributeCombinations="True" AlwaysAssertTagName="True" TechnologyType="Html">
+    <Item Key="Html" Type="ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme" Version="2012.1.301.0" CheckFindParamUniqueness="True" AutoDetectTestRegions="True" TryAttributeCombinations="True" AlwaysAssertTagName="True" TechnologyType="Html">
+      <__DataMember_CheckFindParamUniqueness IsDataContractSerialized="True" PropertyName="CheckFindParamUniqueness" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_CheckFindParamUniqueness>
+      <__DataMember_AutoDetectTestRegions IsDataContractSerialized="True" PropertyName="AutoDetectTestRegions" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_AutoDetectTestRegions>
+      <__DataMember_TryAttributeCombinations IsDataContractSerialized="True" PropertyName="TryAttributeCombinations" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_TryAttributeCombinations>
+      <__DataMember_AlwaysAssertTagName IsDataContractSerialized="True" PropertyName="AlwaysAssertTagName" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_AlwaysAssertTagName>
+      <__DataMember_TechnologyType IsDataContractSerialized="True" PropertyName="TechnologyType" PropertyType="ArtOfTest.Common.TechnologyType">
+        <TechnologyType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.Common">Html</TechnologyType>
+      </__DataMember_TechnologyType>
       <IdentificationsPerTag>
-        <Item Key="All Elements" Type="ArtOfTest.Common.Design.Translation.IdentificationDescriptorList" Version="2011.2.1330.0">
+        <Item Key="All Elements" Type="ArtOfTest.Common.Design.Translation.IdentificationDescriptorList" Version="2012.1.301.0">
           <List>
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" AttributeName="id" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" AttributeName="name" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" AttributeName="src" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" AttributeName="href" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" AttributeName="value" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" AttributeName="alt" SearchType="Attribute" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="True" SearchType="TextContent" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="True" SearchType="TagIndex" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" AttributeName="id" SearchType="Attribute">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">Attribute</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">id</string>
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" AttributeName="name" SearchType="Attribute">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">Attribute</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">name</string>
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" AttributeName="src" SearchType="Attribute">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">Attribute</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">src</string>
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" AttributeName="href" SearchType="Attribute">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">Attribute</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">href</string>
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" AttributeName="value" SearchType="Attribute">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">Attribute</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">value</string>
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" AttributeName="alt" SearchType="Attribute">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">Attribute</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">alt</string>
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="True" SearchType="TextContent">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">TextContent</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.HtmlIdentificationDescriptor" Version="2012.1.301.0" IsLocked="True" SearchType="TagIndex">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Core.HtmlSearchType">
+                <HtmlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Core">TagIndex</HtmlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
           </List>
+          <__DataMembers />
         </Item>
       </IdentificationsPerTag>
+      <__DataMembers>
+        <Item Type="System.String">__DataMember_CheckFindParamUniqueness</Item>
+        <Item Type="System.String">__DataMember_AutoDetectTestRegions</Item>
+        <Item Type="System.String">__DataMember_TryAttributeCombinations</Item>
+        <Item Type="System.String">__DataMember_AlwaysAssertTagName</Item>
+        <Item Type="System.String">__DataMember_TechnologyType</Item>
+      </__DataMembers>
     </Item>
-    <Item Key="Silverlight" Type="ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme" Version="2011.2.1330.0" CheckFindParamUniqueness="True" AutoDetectTestRegions="True" TryAttributeCombinations="True" AlwaysAssertTagName="True" TechnologyType="Silverlight">
+    <Item Key="Silverlight" Type="ArtOfTest.Common.Design.Translation.IdentificationOptionsScheme" Version="2012.1.301.0" CheckFindParamUniqueness="True" AutoDetectTestRegions="True" TryAttributeCombinations="True" AlwaysAssertTagName="True" TechnologyType="Silverlight">
+      <__DataMember_CheckFindParamUniqueness IsDataContractSerialized="True" PropertyName="CheckFindParamUniqueness" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_CheckFindParamUniqueness>
+      <__DataMember_AutoDetectTestRegions IsDataContractSerialized="True" PropertyName="AutoDetectTestRegions" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_AutoDetectTestRegions>
+      <__DataMember_TryAttributeCombinations IsDataContractSerialized="True" PropertyName="TryAttributeCombinations" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_TryAttributeCombinations>
+      <__DataMember_AlwaysAssertTagName IsDataContractSerialized="True" PropertyName="AlwaysAssertTagName" PropertyType="System.Boolean">
+        <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+      </__DataMember_AlwaysAssertTagName>
+      <__DataMember_TechnologyType IsDataContractSerialized="True" PropertyName="TechnologyType" PropertyType="ArtOfTest.Common.TechnologyType">
+        <TechnologyType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.Common">Silverlight</TechnologyType>
+      </__DataMember_TechnologyType>
       <IdentificationsPerTag>
-        <Item Key="All Elements" Type="ArtOfTest.Common.Design.Translation.IdentificationDescriptorList" Version="2011.2.1330.0">
+        <Item Key="All Elements" Type="ArtOfTest.Common.Design.Translation.IdentificationDescriptorList" Version="2012.1.301.0">
           <List>
-            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" SearchType="AutomationId" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" SearchType="Name" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="False" SearchType="TextContent" />
-            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2011.2.1330.0" IsLocked="True" SearchType="TagIndex" />
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" SearchType="AutomationId">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Silverlight.XamlSearchType">
+                <XamlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Silverlight">AutomationId</XamlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" SearchType="Name">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Silverlight.XamlSearchType">
+                <XamlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Silverlight">Name</XamlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2012.1.301.0" IsLocked="False" SearchType="TextContent">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">false</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Silverlight.XamlSearchType">
+                <XamlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Silverlight">TextContent</XamlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
+            <Item Type="ArtOfTest.WebAii.Design.Translation.Silverlight.SilverlightIdentificationDescriptor" Version="2012.1.301.0" IsLocked="True" SearchType="TagIndex">
+              <__DataMember_IsLocked IsDataContractSerialized="True" PropertyName="IsLocked" PropertyType="System.Boolean">
+                <boolean xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</boolean>
+              </__DataMember_IsLocked>
+              <__DataMember_SearchType IsDataContractSerialized="True" PropertyName="SearchType" PropertyType="ArtOfTest.WebAii.Silverlight.XamlSearchType">
+                <XamlSearchType xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Silverlight">TagIndex</XamlSearchType>
+              </__DataMember_SearchType>
+              <__DataMember_AttributeName IsDataContractSerialized="True" PropertyName="AttributeName" PropertyType="System.String">
+                <string i:nil="true" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+              </__DataMember_AttributeName>
+              <__DataMembers>
+                <Item Type="System.String">__DataMember_IsLocked</Item>
+                <Item Type="System.String">__DataMember_SearchType</Item>
+                <Item Type="System.String">__DataMember_AttributeName</Item>
+              </__DataMembers>
+            </Item>
           </List>
+          <__DataMembers />
         </Item>
       </IdentificationsPerTag>
+      <__DataMembers>
+        <Item Type="System.String">__DataMember_CheckFindParamUniqueness</Item>
+        <Item Type="System.String">__DataMember_AutoDetectTestRegions</Item>
+        <Item Type="System.String">__DataMember_TryAttributeCombinations</Item>
+        <Item Type="System.String">__DataMember_AlwaysAssertTagName</Item>
+        <Item Type="System.String">__DataMember_TechnologyType</Item>
+      </__DataMembers>
     </Item>
   </IdentificationOptionSchemes>
+  <ProvidersSettings />
+  <ActiveBugTrackers />
   <UnitTestType Type="ArtOfTest.Common.Design.ProjectModel.UnitTestType">VS</UnitTestType>
   <RecorderBaseUrl Type="System.String">http://mvc-kendobuild/staging</RecorderBaseUrl>
   <IsStoryboardCapturingEnabled Type="System.Boolean">True</IsStoryboardCapturingEnabled>
@@ -44,7 +410,7 @@
   <DefaultDropDownSelection Type="ArtOfTest.WebAii.Design.SelectDropDownType">ByValue</DefaultDropDownSelection>
   <IsOnline Type="System.Boolean">False</IsOnline>
   <ProjectLanguage Type="ArtOfTest.Common.Design.CodeGeneration.CodeGenerationLanguage">CSharp</ProjectLanguage>
-  <ProjectVersion Type="System.String">2011.2.1330.0</ProjectVersion>
+  <ProjectVersion Type="System.String">2012.1.301.0</ProjectVersion>
   <Namespace Type="System.String">KendoDemosTests</Namespace>
   <AssemblyName Type="System.String">KendoDemosTests</AssemblyName>
   <OutputFolder Type="System.String">bin</OutputFolder>
@@ -54,15 +420,20 @@
   <PromptNameOnAddElement Type="System.Boolean">False</PromptNameOnAddElement>
   <QuickExecutionClientReadyTimeout Type="System.Int32">30000</QuickExecutionClientReadyTimeout>
   <QuickExecutionElementWaitTimeout Type="System.Int32">10000</QuickExecutionElementWaitTimeout>
-  <RecordWpfWindowStateChanged Type="System.Boolean">True</RecordWpfWindowStateChanged>
+  <RecordWpfWindowStateChanged Type="System.Boolean">False</RecordWpfWindowStateChanged>
+  <BugTitleMask Type="System.String">{Step name} step on {Test name} test failed.</BugTitleMask>
+  <BugDescriptionMask Type="System.String">{Description}</BugDescriptionMask>
+  <BugAddAttachment Type="System.Boolean">False</BugAddAttachment>
+  <BugAutoSubmit Type="System.Boolean">False</BugAutoSubmit>
   <ProjectReferences>
     <Item Type="System.String">System</Item>
     <Item Type="System.String">System.Core</Item>
-    <Item Type="System.String">ArtOfTest.WebAii, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</Item>
-    <Item Type="System.String">ArtOfTest.WebAii.Design, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</Item>
-    <Item Type="System.String">Telerik.WebAii.Controls.Html, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
-    <Item Type="System.String">Telerik.WebAii.Controls.Xaml, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
-    <Item Type="System.String">Telerik.WebAii.Controls.Xaml.Wpf, Version=2011.2.1330.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+    <Item Type="System.String">ArtOfTest.WebAii, Version=2012.1.301.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</Item>
+    <Item Type="System.String">ArtOfTest.WebAii.Design, Version=2012.1.301.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</Item>
+    <Item Type="System.String">Telerik.WebAii.Controls.Html, Version=2012.1.301.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+    <Item Type="System.String">Telerik.WebAii.Controls.Xaml, Version=2012.1.301.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+    <Item Type="System.String">Telerik.WebAii.Controls.Xaml.Wpf, Version=2012.1.301.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
+    <Item Type="System.String">Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.301.0, Culture=neutral, PublicKeyToken=528163f3e645de45</Item>
     <Item Type="System.String">c:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\PublicAssemblies\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll</Item>
     <Item Type="System.String">System.Windows.Forms</Item>
     <Item Type="System.String">C:\work\WebUI_Test_Studio\TelerikAdapters\Wrappers\Telerik.TestingFramework.Controls.KendoUI\bin\Debug\Telerik.TestingFramework.Controls.KendoUI.dll</Item>
@@ -78,4 +449,52 @@
     <Item Type="System.String">KendoTabStrip for KendoUI Translators</Item>
     <Item Type="System.String">KendoTreeView for KendoUI Translators</Item>
   </DisabledTranslators>
+  <__DataMembers>
+    <Item Type="System.String">__DataMember_ShouldDeleteElement</Item>
+    <Item Type="System.String">__DataMember_SkipDeleteElementPrompt</Item>
+    <Item Type="System.String">__DataMember_HideFindExpressionWelcome</Item>
+    <Item Type="System.String">__DataMember_MenuHoldTime</Item>
+    <Item Type="System.String">__DataMember_SilverlightConnectTimeout</Item>
+    <Item Type="System.String">__DataMember_BaseClassName</Item>
+    <Item Type="System.String">__DataMember_UrlRecordMode</Item>
+    <Item Type="System.String">__DataMember_HighlightBorderColor</Item>
+    <Item Type="System.String">__DataMember_HighlightBorderSize</Item>
+    <Item Type="System.String">__DataMember_CodeGenerationElementIdentificationType</Item>
+    <Item Type="System.String">__DataMember_UrlHistory</Item>
+    <Item Type="System.String">__DataMember_AbsoluteDragDropRecording</Item>
+    <Item Type="System.String">__DataMember_ImageScalePercentage</Item>
+    <Item Type="System.String">__DataMember_SelectedIdentificaitonScheme</Item>
+    <Item Type="System.String">__DataMember_UnitTypeTypeGeneration</Item>
+    <Item Type="System.String">__DataMember_DebugMode</Item>
+    <Item Type="System.String">__DataMember_RecorderBaseUrl</Item>
+    <Item Type="System.String">__DataMember_IsStoryBoardCapturingEnabled</Item>
+    <Item Type="System.String">__DataMember_SimulateRealClickByDefault</Item>
+    <Item Type="System.String">__DataMember_SimulateRealTypingByDefault</Item>
+    <Item Type="System.String">__DataMember_SimulateRealSilverlightUserByDefault</Item>
+    <Item Type="System.String">__DataMember_DefaultDropDownSelection</Item>
+    <Item Type="System.String">__DataMember_QuickExecutionElementWaitTimeout</Item>
+    <Item Type="System.String">__DataMember_QuickExecutionClientReadyTimeout</Item>
+    <Item Type="System.String">__DataMember_QcServerUrl</Item>
+    <Item Type="System.String">__DataMember_QcUserName</Item>
+    <Item Type="System.String">__DataMember_QcPassword</Item>
+    <Item Type="System.String">__DataMember_QcSkipAuthDialog</Item>
+    <Item Type="System.String">__DataMember_QcDomain</Item>
+    <Item Type="System.String">__DataMember_QcProject</Item>
+    <Item Type="System.String">__DataMember_TfsUserName</Item>
+    <Item Type="System.String">__DataMember_TfsPassword</Item>
+    <Item Type="System.String">__DataMember_TfsSkipAuthDialog</Item>
+    <Item Type="System.String">__DataMember_TfsDomain</Item>
+    <Item Type="System.String">__DataMember_TeamPulseServerUrl</Item>
+    <Item Type="System.String">__DataMember_TpUserName</Item>
+    <Item Type="System.String">__DataMember_TpPassword</Item>
+    <Item Type="System.String">__DataMember_TpUseWindowsAuth</Item>
+    <Item Type="System.String">__DataMember_TpSkipAuthDialog</Item>
+    <Item Type="System.String">__DataMember_RecordWpfWindowStateChanged</Item>
+    <Item Type="System.String">__DataMember_PromptNameOnAddElement</Item>
+    <Item Type="System.String">__DataMember_DefaultWPFApplication</Item>
+    <Item Type="System.String">__DataMember_BugTitleMask</Item>
+    <Item Type="System.String">__DataMember_BugAddAttachment</Item>
+    <Item Type="System.String">__DataMember_BugAutoSubmit</Item>
+    <Item Type="System.String">__DataMember_BugDescriptionMask</Item>
+  </__DataMembers>
 </ProjectSettings>
