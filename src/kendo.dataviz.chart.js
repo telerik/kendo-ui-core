@@ -1058,6 +1058,12 @@
         TIME_PER_DAY = 24 * TIME_PER_HOUR,
         TIME_PER_MONTH = 31 * TIME_PER_DAY,
         TIME_PER_YEAR = 365 * TIME_PER_DAY,
+        TIME_PER_UNIT = {
+            "years": TIME_PER_YEAR,
+            "months": TIME_PER_MONTH,
+            "days": TIME_PER_DAY,
+            "hours": TIME_PER_HOUR
+        },
         YEARS = "years",
         MONTHS = "months",
         DAYS = "days",
@@ -1099,6 +1105,23 @@
         return date;
     }
 
+    function dateUnits(date, unit) {
+        date = toDate(date);
+
+        if (unit === YEARS) {
+            return date.getFullYear();
+        } else if (unit === MONTHS) {
+            return date.getMonth();
+        } else if (unit === DAYS) {
+            return date.getDate();
+        } else if (unit === HOURS) {
+            return date.getHours();
+        } else if (unit === MINUTES) {
+            return date.getMinutes();
+        }
+
+        return date;
+    }
     function floorDate(date, unit) {
         date = toDate(date);
 
@@ -1117,6 +1140,22 @@
 
         return date;
     }
+
+    function timeUnit(delta) {
+        var unit;
+
+        if (delta >= TIME_PER_YEAR) {
+            unit = YEARS;
+        } else if (delta >= TIME_PER_MONTH) {
+            unit = MONTHS;
+        } else if (delta >= TIME_PER_DAY) {
+            unit = DAYS;
+        } else if (delta >= TIME_PER_HOUR) {
+            unit = HOURS;
+        }
+
+        return unit;
+    };
 
     var DateAxis = Axis.extend({
         init: function(seriesMin, seriesMax, seriesDelta, options) {
@@ -1179,9 +1218,7 @@
             } else {
                 seriesDelta = seriesMax - seriesMin;
             }
-            numAxisOptions = deepExtend(
-                axis.defaults(seriesMin, seriesMax, seriesDelta, options),
-                options, {
+            numAxisOptions = deepExtend(options, {
                 min: toTime(options.min),
                 max: toTime(options.max),
                 axisCrossingValue: toTime(options.axisCrossingValue)
@@ -1192,48 +1229,40 @@
 
         initDefaults: function(seriesMin, seriesMax, options) {
             var axis = this,
-                baseUnit = options.baseUnit,
-                baseUnitTime = options._baseUnitTime,
-                autoMin = floorDate(seriesMin, baseUnit).getTime(),
-                autoMax = ceilDate(seriesMax, baseUnit).getTime(),
-                majorUnit = dataviz.ceil(dataviz.autoMajorUnit(autoMin, autoMax), baseUnitTime),
+                min = options.min || seriesMin,
+                max = options.max || seriesMax,
+                baseUnit = options.baseUnit || timeUnit(max - min),
+                baseUnitTime = TIME_PER_UNIT[baseUnit],
+                autoMin = floorDate(min - baseUnitTime, baseUnit).getTime(),
+                autoMax = ceilDate(max + baseUnitTime, baseUnit).getTime(),
+                userMajorUnit = options.majorUnit ? options.majorUnit * baseUnitTime : undefined,
+                majorUnit = userMajorUnit ||
+                            dataviz.ceil(dataviz.autoMajorUnit(autoMin, autoMax), baseUnitTime),
+                minorUnit = baseUnitTime, // options.minorUnit
                 defaults = {
-                    min: dataviz.floor(autoMin, baseUnitTime),
-                    max: dataviz.ceil(autoMax, baseUnitTime),
-                    majorUnit: majorUnit,
-                    minorUnit: baseUnitTime
+                    baseUnit: baseUnit
                 };
 
-            return deepExtend(defaults, options);
+            var actualUnits = (autoMax - autoMin) / baseUnitTime;
+            var totalUnits = dataviz.ceil(actualUnits, majorUnit / baseUnitTime);
+            var unitsToAdd = totalUnits - actualUnits;
+
+            var head = math.floor(unitsToAdd / 2);
+            var tail = unitsToAdd - head;
+
+            defaults.min = autoMin - head * baseUnitTime;
+            defaults.max = autoMax + tail * baseUnitTime;
+
+            return results = deepExtend(defaults, options, {
+                majorUnit: majorUnit,
+                minorUnit: baseUnitTime
+            });;
         },
 
         getLabelText: function(index) {
             var ticks = NumericAxis.fn.getLabelText.call(this, index),
                 date = new Date(round(ticks));
             return (date.getMonth() + 1) + "/" + date.getDate();
-        },
-
-        defaults: function(seriesMin, seriesMax, seriesDelta, options) {
-            var defaults = {},
-                unitTime;
-
-            if (seriesDelta >= TIME_PER_YEAR) {
-                defaults.baseUnit = YEARS;
-                unitTime = TIME_PER_YEAR;
-            } else if (seriesDelta >= TIME_PER_MONTH) {
-                defaults.baseUnit = MONTHS;
-                unitTime = TIME_PER_MONTH;
-            } else if (seriesDelta >= TIME_PER_DAY) {
-                defaults.baseUnit = DAYS;
-                unitTime = TIME_PER_DAY;
-            } else if (seriesDelta >= TIME_PER_HOUR) {
-                defaults.baseUnit = HOURS;
-                unitTime = TIME_PER_HOUR;
-            }
-
-            defaults._baseUnitTime = unitTime;
-
-            return deepExtend(defaults, options);
         }
     });
 
