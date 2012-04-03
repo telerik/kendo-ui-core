@@ -181,6 +181,10 @@
                 {
                     "text": "Overview",
                     "url": "forms/index.html"
+                },
+                {
+                    "text": "Checks and Radios",
+                    "url": "forms/checkboxes.html"
                 }
             ]
         },

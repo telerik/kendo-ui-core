@@ -1,0 +1,104 @@
+<div id="checks" data-role="view" data-title="Shopping List" data-layout="checklayout">
+    <ul data-role="listview" data-style="inset">
+        <li>
+            <label>
+                <input type="checkbox" checked="checked" />
+                Lettuce
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Carrots
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Peas
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Bread
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="checkbox" />
+                Unicorns
+            </label>
+        </li>
+    </ul>
+</div>
+
+<div id="radios" data-role="view" data-title="Settings" data-layout="checklayout">
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            On Item Check
+            <ul>
+                <li>
+                    <label>
+                        <input name="radio" type="radio" checked="checked" />
+                        Move to bottom
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="radio" type="radio" />
+                        Delete
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="radio" type="radio" />
+                        Leave in place
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul data-role="listview" data-style="inset" data-type="group">
+        <li>
+            Show Units
+            <ul>
+                <li>
+                    <label>
+                        <input name="units" type="radio" checked="checked" />
+                        In Kilograms
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="units" type="radio" />
+                        In Grams
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input name="units" type="radio" />
+                        In Pieces
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div data-role="layout" data-id="checklayout">
+    <header data-role="header">
+        <div data-role="navbar">
+            <span data-role="view-title"></span>
+            <a data-align="right" data-role="button" class="nav-button" href="#index">Index</a>
+        </div>
+    </header>
+
+    <div data-role="footer">
+        <div data-role="tabstrip">
+            <a href="#checks" data-icon="bookmarks">Shopping</a>
+            <a href="#radios" data-icon="settings">Settings</a>
+        </div>
+    </div>
+</div>
+
