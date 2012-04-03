@@ -264,7 +264,7 @@
 
             that.element
                 .on([MOUSEDOWN, MOUSEUP, MOUSEMOVE, MOUSECANCEL].join(" "), HIGHLIGHT_SELECTOR, toggleItemActiveClass)
-                .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault() })
+                .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
                 .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
             that._dataSource();
