@@ -1,6 +1,7 @@
 (function ($, undefined) {
     var kendo = window.kendo,
         support = kendo.support,
+        pointers = support.pointers,
         document = window.document,
         SURFACE = $(document.documentElement),
         Class = kendo.Class,
@@ -41,6 +42,13 @@
         START_EVENTS = "touchstart";
         MOVE_EVENTS = "touchmove";
         END_EVENTS = "touchend touchcancel";
+    }
+
+    if(pointers) {
+        RESIZE_EVENT = "orientationchange resize";
+        START_EVENTS = "MSPointerDown";
+        MOVE_EVENTS = "MSPointerMove";
+        END_EVENTS = "MSPointerUp MSPointerCancel";
     }
 
     function contains(parent, child) {
@@ -285,8 +293,8 @@
             var that = this,
                 filter = that.filter,
                 originalEvent = e.originalEvent,
-                touches = originalEvent && originalEvent.changedTouches,
-                touch = touches && touches[0];
+                touch,
+                location = e;
 
             if (that.pressed) { return; }
 
@@ -303,11 +311,18 @@
             that.pressed = true;
             that.moved = false;
 
-            if (touch) {
+            if (support.touch) {
+                touch = originalEvent.changedTouches[0];
                 that.touchID = touch.identifier;
+                location = touch;
             }
 
-            that._perAxis(START, touch || e, e.timeStamp);
+            if (pointers) {
+                that.touchID = originalEvent.pointerId;
+                location = originalEvent;
+            }
+
+            that._perAxis(START, location, e.timeStamp);
             that.surface.off(that.eventMap).on(that.eventMap);
             Drag.captured = false;
         },
@@ -386,19 +401,28 @@
 
         _withEvent: function(e, callback) {
             var that = this,
+                touchID = that.touchID,
                 originalEvent = e.originalEvent,
-                touches = originalEvent && originalEvent.changedTouches,
-                idx = touches && touches.length;
+                touches,
+                idx;
 
-            if (!touches) {
-                return callback(e);
-            }
+            if (support.touch) {
+                touches = originalEvent.changedTouches;
+                idx = touches.length;
 
-            while (idx) {
-                idx --;
-                if (touches[idx].identifier === that.touchID) {
-                    return callback(touches[idx]);
+                while (idx) {
+                    idx --;
+                    if (touches[idx].identifier === touchID) {
+                        return callback(touches[idx]);
+                    }
                 }
+            }
+            else if (pointers) {
+                if (touchID === originalEvent.pointerId) {
+                    return callback(originalEvent);
+                }
+            } else {
+                return callback(e);
             }
         }
     });
