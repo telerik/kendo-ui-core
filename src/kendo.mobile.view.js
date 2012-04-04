@@ -44,6 +44,24 @@
      * and at the top of the screen in Android applications.  </p>
      *
      * @section
+     *
+     * <h3>View Parameters</h3>
+     *
+     * <p>Navigational widgets can pass additional URL parameters when navigating to <strong>Views</strong>. The parameters will be available in the <code>show</code> <strong>View</strong> event.</p>
+     *
+     * @exampleTitle Button with additional URL parameters
+     * @example
+     * <a data-role="button" href="#foo?bar=baz">Link to FOO <strong>View</strong> with bar parameter set to baz</a>
+     * <div data-role="view" id="foo" data-show="fooShow">
+     * </div>
+     *
+     * <script>
+     * function fooShow(e) {
+     *      e.view.params // {bar: "baz"}
+     * }
+     * </script>
+     *
+     * @section
      * <h3>View DOM elements</h3>
      * <p>Each mobile View instance exposes the following fields:</p>
      * <ul>
