@@ -468,7 +468,14 @@
             };
 
         return this.each(function() {
-            var theme = sessionStorage.getItem("kendoSkin") || "default";
+            var theme;
+
+            try {
+                theme = sessionStorage.getItem("kendoSkin");
+            } catch(err) {}
+
+            theme = theme || "default";
+
             $(this).html(kendo.render(template, themes))
                    .on("click", "li", function() {
                        var li = $(this).children("span").addClass("k-state-selected").end(),
