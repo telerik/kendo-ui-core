@@ -8,6 +8,10 @@
         <script src="../../src/kendo.core.js"></script>
         <script src="../../src/kendo.data.js"></script>
         <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.window.js"></script>
+        <script src="../../src/kendo.validator.js"></script>
+        <script src="../../src/kendo.editable.js"></script>
         <script src="../../src/kendo.grid.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
     </head>
@@ -224,6 +228,27 @@
 
                 ok(!grid.tbody.find("tr").length);
             });
+
+            test("binds event handlers in template to root view model when item changes", function() {
+                var dom = $('<div data-role="grid" data-editable="popup"  data-row-template="template-with-event" data-bind="source:dataSource" />');
+
+                var observable = kendo.observable({
+                    dataSource: [ { foo: "foo", bar: "bar" } ]
+                });
+
+                stub(observable, "rootHandler");
+
+                kendo.bind(dom, observable);
+
+                dom.data("kendoGrid").editRow(dom.find("tbody > tr:first"));
+
+                observable.dataSource[0].set("bar", "baz");
+
+                dom.find("tbody > tr:first strong").click();
+
+                equal(observable.calls("rootHandler"), 1);
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
@@ -231,6 +256,9 @@
         </script>
         <script id="template-with-attributes" type="text/x-kendo-template">
             <tr data-uid="#=uid#"><td><strong data-bind="text:text"></strong></td></tr>
+        </script>
+        <script id="template-with-event" type="text/x-kendo-template">
+            <tr data-uid="#=uid#"><td><strong data-bind="text:text, events:{ click: rootHandler}"></strong></td></tr>
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
