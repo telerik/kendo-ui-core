@@ -284,6 +284,17 @@
 
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
+            if (options.loadMore) {
+                that.wrapper.append('<span class="km-scroller-pull"><span class="km-icon"></span><button class="km-load-more">' + options.loadMoreText + '</button></span>');
+                that._loadMoreButton = that.wrapper
+                                           .children(".km-scroller-pull")
+                                           .children(".km-load-more")
+                                           .click(function() {
+                                               that._pressed = true;
+                                               that.dataSource.next();
+                                           });
+            }
+
             kendo.notify(that, ui);
         },
 
@@ -334,6 +345,8 @@
             name: "ListView",
             type: "flat",
             template: "${data}",
+            loadMore: false,
+            loadMoreText: "Press to load more",
             pullToRefresh: false,
             appendOnRefresh: false,
             pullTemplate: "Pull to refresh",
@@ -440,6 +453,11 @@
                 contents = kendo.render(that.groupTemplate, view);
             } else {
                 contents = kendo.render(that.template, view);
+            }
+
+            if (that._pressed) {
+                that._pressed = false;
+                appendMethod = "append";
             }
 
             element[appendMethod](contents);

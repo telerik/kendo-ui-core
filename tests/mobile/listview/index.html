@@ -258,6 +258,28 @@
 
                 equal(listView.items()[0], dom.find("ul > li")[0]);
             });
+
+            test("ListView renders button on botton of the widget", function() {
+                var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
+                    listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more..." });
+
+                var footer = listView.wrapper.children(".km-scroller-pull").eq(0);
+
+                ok(footer[0]);
+                ok(footer.find(".km-load-more")[0]);
+                equal(footer.find(".km-load-more").text(), "Press to load more...");
+                ok(footer.find(".km-icon")[0]);
+            });
+
+            test("ListView renders default text for the load-more button", function() {
+                var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
+                    listView = new ListView(dom, { loadMore: true });
+
+                var footer = listView.wrapper.children(".km-scroller-pull").eq(0);
+
+                ok(footer.find(".km-load-more")[0]);
+                equal(footer.find(".km-load-more").text(), "Press to load more");
+            });
         </script>
     </body>
 </html>
