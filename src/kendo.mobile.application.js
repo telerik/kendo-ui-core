@@ -187,16 +187,6 @@
     * <div data-role="view">Bar</div>
     *
     * @section
-    *
-    * <h3>View Parameters</h3>
-    *
-    * <p>Navigational widgets can pass additional URL parameters when navigating to <strong>Views</strong>. The parameters will be available in the <code>show</code> <strong>View</strong> event.</p>
-    *
-    * @exampleTitle Button with additional URL parameters
-    * @example
-    * <a data-role="button" href="#foo?bar=baz">Link to FOO <strong>View</strong> with bar parameter set to baz</a>
-    *
-    * @section
     * <h3> Initial View</h3>
     *
     * <p> The <strong>Application</strong> provides a way to specify the initial view to show. The initial view can be set by
