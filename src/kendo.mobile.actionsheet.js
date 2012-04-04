@@ -109,7 +109,7 @@
 
         viewInit: function(view) {
             var that = this,
-                appendCancel = view.application.os === 'ios';
+                appendCancel = true;
             that.shim.setOptions({modal: appendCancel});
 
             if (appendCancel) {
