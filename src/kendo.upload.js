@@ -1242,9 +1242,13 @@
                 upload._fileAction(fileEntry, CANCEL);
                 upload._hideUploadButton();
 
-                e.data = $.extend({ }, e.data, getAntiForgeryTokens());
-                for (var key in e.data) {
-                    formData.append(key, e.data[key]);
+                if (!fileEntry.data("dataAppended")) {
+                    e.data = $.extend({ }, e.data, getAntiForgeryTokens());
+                    for (var key in e.data) {
+                        formData.append(key, e.data[key]);
+                    }
+
+                    fileEntry.data("dataAppended", true);
                 }
 
                 upload._fileState(fileEntry, "uploading");
