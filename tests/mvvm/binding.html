@@ -99,14 +99,11 @@
                 equal(dom.attr("custom"), "foo");
             });
 
-            asyncTest("click binding", function() {
-                expect(1);
-
+            test("click binding", 1, function() {
                 var dom = $('<span data-bind="click:foo"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
-                        start();
                         ok(true, "click is raised");
                     }
                 });
@@ -114,14 +111,11 @@
                 dom.trigger("click");
             });
 
-            asyncTest("click event binding is detached", function() {
-                expect(1);
-
+            test("click event binding is detached", 1, function() {
                 var dom = $('<span data-bind="click:foo"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
-                        start();
                         ok(true, "click is raised");
                     }
                 });
@@ -133,14 +127,11 @@
                 dom.trigger("click");
             });
 
-            asyncTest("events binding is detached", function() {
-                expect(1);
-
+            test("events binding is detached", 1, function() {
                 var dom = $('<span data-bind="events: { click:foo }"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
-                        start();
                         ok(true, "click is raised");
                     }
                 });
@@ -152,14 +143,11 @@
                 dom.trigger("click");
             });
 
-            asyncTest("change binding", function() {
-                expect(1);
-
+            test("change binding", 1, function() {
                 var dom = $('<input data-bind="events: { change:foo }"/>');
 
                 kendo.bind(dom, {
                     foo: function() {
-                        start();
                         ok(true, "change is raised");
                     }
                 });
@@ -167,9 +155,7 @@
                 dom.trigger("change");
             });
 
-            asyncTest("the context of the event handler is the viewmodel", function() {
-                expect(1);
-
+            test("the context of the event handler is the viewmodel",1, function() {
                 var dom = $('<span data-bind="click:foo"/>');
                 var viewModel = kendo.observable( {
                     foo: function() {
@@ -181,6 +167,21 @@
                 kendo.bind(dom, viewModel);
 
                 dom.trigger("click");
+            });
+
+            test("the context of the nested function call is the nested observable object", 1, function() {
+                expect(1);
+
+                var dom = $('<span data-bind="text:nested.foo"/>');
+                var viewModel = kendo.observable( {
+                    nested: {
+                        foo: function() {
+                            strictEqual(this, viewModel.nested);
+                        }
+                    }
+                });
+
+                kendo.bind(dom, viewModel);
             });
 
             test("select binding", function() {
