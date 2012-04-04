@@ -250,7 +250,7 @@
                     teardown: destroyChart
                 });
 
-                asyncTest("series points are populated", 1, function() {
+                asyncTest("series points are populated if point is null", 1, function() {
                     createChart({
                         dataSource: [{
                             period: "Jan",
@@ -277,6 +277,42 @@
                         },
                         dataBound: function() {
                             same(this.options.categoryAxis.categories, ["Jan", null]);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("series points are populated if field is null", 1, function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan"
+                        }, {
+                            period: "Feb",
+                            sales: 100
+                        }],
+                        series: [{
+                            field: "sales"
+                        }],
+                        dataBound: function() {
+                            equal(this.options.series[0].data.length, 2);
+                            start();
+                        }
+                    });
+                });
+
+                asyncTest("series points order is preserved if field is null", 1, function() {
+                    createChart({
+                        dataSource: [{
+                            period: "Jan"
+                        }, {
+                            period: "Feb",
+                            sales: 100
+                        }],
+                        series: [{
+                            field: "sales"
+                        }],
+                        dataBound: function() {
+                            equal(this.options.series[0].data[1], 100);
                             start();
                         }
                     });

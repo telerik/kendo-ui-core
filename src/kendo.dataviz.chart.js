@@ -541,14 +541,12 @@
                         value = undefined;
                     }
 
-                    if (defined(value)) {
-                        if (dataIx === 0) {
-                            currentSeries.data = [value];
-                            currentSeries.dataItems = [row];
-                        } else {
-                            currentSeries.data.push(value);
-                            currentSeries.dataItems.push(row);
-                        }
+                    if (dataIx === 0) {
+                        currentSeries.data = [value];
+                        currentSeries.dataItems = [row];
+                    } else {
+                        currentSeries.data.push(value);
+                        currentSeries.dataItems.push(row);
                     }
                 }
             }
