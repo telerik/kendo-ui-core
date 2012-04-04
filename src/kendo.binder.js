@@ -84,15 +84,24 @@
 
         get: function() {
             var that = this,
-                result = that.source;
+                source = that.source,
+                index,
+                path = that.path,
+                result = source;
 
             that.start();
 
             if (that.observable) {
-                result = that.source.get(that.path);
+                result = source.get(path);
 
                 if (typeof result === "function") {
-                    result = proxy(result, that.source);
+                    index = path.lastIndexOf(".");
+
+                    if (index > 0) {
+                        source = source.get(path.substring(0, index));
+                    }
+
+                    result = proxy(result, source);
 
                     result = result();
                 }

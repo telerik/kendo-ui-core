@@ -55,27 +55,16 @@
         </style>
     </head>
     <body>
-        <div
-            data-role="grid"
-            data-columns='[{ "field": "Type", "title": "Type" },{ "field": "Name", "title": "Name" },{ "field": "Identifier", "title": "Identifier" },{ "field": "ExpirationDate", "title": "Expiration Date" }]'
-            data-bind="source: provisions">
-        </div>
-
-        <button data-bind="click: click">Change</button>
-
+        <span data-bind="text: nested.foo"></span>
         <script>
-            var viewModel = kendo.observable({
-                provisions: [ { Type: 1, Name: "Name 1", Identifier: "1", ExpirationDate: new Date() } ],
-                click: function() {
-                    var provisions = [ { Type: 2, Name: "Name 2", Identifier: "2", ExpirationDate: new Date() } ];
-
-                    this.set("provisions", provisions);
+            kendo.bind(document.body, {
+                nested: {
+                    bar: "bar",
+                    foo: function() {
+                        return this.get("bar");
+                    }
                 }
-            }).bind("change", function(e) {
-                console.log(e);
             });
-
-            kendo.bind(document.body, viewModel);
         </script>
     </body>
 </html>
