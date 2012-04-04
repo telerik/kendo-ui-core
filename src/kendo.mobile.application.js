@@ -228,6 +228,37 @@
     *          }
     *      });
     * </script>
+    *
+    * @section
+    * <h3>Force platform styles</h3>
+    *
+    * <p> The <strong>Application</strong> provides a way to force a specific platform look on your application upon init by
+    * passing the OS name in the options parameter of the Application's constructor:
+    * @exampleTitle Force iOS look
+    * @example
+    * <script>
+    *      new kendo.mobile.Application($(document.body), {
+    *          platform: "ios"
+    *      });
+    * </script>
+    *
+    * Additionally, if you want to specify os version, you can pass the entire kendo.support.mobileOS object that is expected by Kendo UI Mobile.
+    * This is more complex, but allows fine grained tuning of the application look and behavior. A sample object initialization is like this:
+    * @exampleTitle Force iOS 5 look
+    * @example
+    * <script>
+    *      new kendo.mobile.Application($(document.body), {
+    *          platform: {
+    *                         device: "ipad",       // Mobile device, can be "ipad", "iphone", "ipod", "android" "fire", "blackberry", "meego"
+    *                         name: "ios",          // Mobile OS, can be "ios", "android", "blackberry", "meego"
+    *                         ios: true,            // Mobile OS name as a flag
+    *                         majorVersion: 5,      // Major OS version
+    *                         minorVersion: "0.0",  // Minor OS versions
+    *                         flatVersion: "500",   // Flat OS version for easier comparison
+    *                         appMode: false        // Whether running in browser or in AppMode/PhoneGap/Titanium.
+    *                    }
+    *      });
+    * </script>
     */
     var Application = kendo.Observable.extend(/** @lends kendo.mobile.Application.prototype */{
         /**
@@ -259,6 +290,13 @@
          * _example
          * <script>
          *      new kendo.mobile.Application($(document.body), { transition: "slide" });
+         * </script>
+         * @option {String} [platform] <> Which platform look to force on the application. Can be one of "ios", "android", "blackberry".
+         * _example
+         * <script>
+         *      new kendo.mobile.Application($(document.body), {
+         *          platform: "android"
+         *      });
          * </script>
          */
         init: function(element, options) {
