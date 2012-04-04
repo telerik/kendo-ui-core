@@ -24,16 +24,26 @@
     function mobileListViewPullToRefresh() {
             var lastID;
             var dataSource = new kendo.data.DataSource({
+                pageSize: 15,
+                serverPaging: true,
                 transport: {
                     read: {
                         url: "http://search.twitter.com/search.json", // the remove service url
                         dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
                     },
                     parameterMap: function(options) {
-                        return {
-                            q: "bieber", //additional parameters sent to the remote service
-                            since_id: lastID
+                        var page = options.page;
+                        var parameters = {
+                            rrp: options.pageSize,
+                            q: "javascript", //additional parameters sent to the remote service
+                            page: page
                         }
+
+                        if (!page || page === 1) {
+                            parameters.since_id = lastID;
+                        }
+
+                        return parameters;
                     }
                 },
                 change: function() {
@@ -52,6 +62,7 @@
             dataSource: dataSource,
             pullToRefresh: true,
             appendOnRefresh: true,
+            loadMore: true,
             template: $("#pull-to-refresh-template").text()
         });
     }

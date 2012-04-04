@@ -39,6 +39,8 @@
         <script>
             var ListView = kendo.mobile.ui.ListView;
 
+            QUnit.config.testTimeout = 500;
+
             module("mobile listview", {
                 setup: function() {
 
@@ -309,6 +311,65 @@
 
                 ds.bind("change", firstAssert);
 
+            });
+
+            module("press to load more", {
+                setup: function() {
+                    location.hash = '';
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                    kendo.history.stop();
+                }
+            });
+
+            function setup(html, options) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+            }
+
+            asyncTest("refreshes on press to load more", 3, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+                var ds = kendo.data.DataSource.create({
+                    transport: {
+                        read: { url: "foo.json", type: "json" }
+                    },
+                    serverPaging: true,
+                    pageSize: 1
+                });
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        loadMore: true
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["baz"] });
+
+                function secondAssert() {
+                    start();
+                    equal(listview.children().length, 3);
+                    equal(listview.children(":last").text(), "baz");
+                }
+
+                function firstAssert() {
+                    equal(listview.children().length, 2);
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+
+                    listview.parent().find(".km-load-more").click();
+                }
+
+                ds.bind("change", firstAssert);
             });
         </script>
     </body>
