@@ -771,3 +771,79 @@
 {
     background-color: #eee;
 }
+
+.km-blackberry .km-shim
+{
+    background: none;
+}
+
+.km-blackberry .km-actionsheet-wrapper
+{
+    background: rgba(0,0,0,.5);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.km-blackberry .km-actionsheet
+{
+    position: static;
+    margin-left: 5%;
+    width: 90%;
+    display: inline-block;
+    max-height: 80%;
+    border: 0;
+    padding: 0;
+    background: #222;
+    color: #fff;
+    vertical-align: middle;
+    .border-radius(0);
+    .box-shadow(~"2px 2px 5px rgba(0,0,0,.5)");
+}
+
+.km-blackberry .km-actionsheet-wrapper:before
+{
+    content: "\a0";
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: 0;
+}
+
+.km-blackberry .km-actionsheet > li > a
+{
+    font-size: 1.2em;
+    font-weight: normal;
+    color: #fff;
+    display: block;
+    line-height: 3rem;
+    border-width: 0 0 1px 0;
+    padding: 0 1em;
+    .border-radius(0);
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+}
+
+.km-blackberry .km-actionsheet > li:last-child > a
+{
+    border: 0;
+}
+
+.km-blackberry .km-actionsheet > li > a:focus,
+.km-blackberry .km-actionsheet > li > a:active
+{
+    background: #33b5e5;
+}
+
+.km-blackberry .km-actionsheet > li > a:hover
+{
+    color: #fff;
+    background: rgba(51,181,229,.6);
+}
+
+.km-blackberry li.km-actionsheet-cancel > a
+{
+    text-align: center;
+    font-size: 1em;
+}
