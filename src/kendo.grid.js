@@ -1388,7 +1388,7 @@
                 idx,
                 length;
 
-            if (row.children(".k-edit-cell").length) {
+            if (row.children(".k-edit-cell").length && !that.options.rowTemplate) {
                 row.children(":not(.k-group-cell,.k-hierarchy-cell)").each(function() {
                     cell = $(this);
                     column = that.columns[that.cellIndex(cell)];
@@ -1416,7 +1416,9 @@
                         $('<span class="k-dirty"/>').prependTo(cell);
                     }
                 }
+                that.trigger("itemChange", { item: tmp, data: model, ns: ui });
             }
+
         },
 
         _pageable: function() {
