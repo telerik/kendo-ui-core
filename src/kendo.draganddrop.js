@@ -180,7 +180,7 @@
                 .on("dragstart", filter, kendo.preventDefault);
 
             if (!options.allowSelection) {
-                // element.on("mousedown selectstart", filter, kendo.preventDefault);
+                element.on("mousedown selectstart", filter, kendo.preventDefault);
             }
 
             if (support.eventCapture) {
