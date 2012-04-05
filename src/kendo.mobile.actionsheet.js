@@ -85,6 +85,7 @@
          */
         init: function(element, options) {
             var that = this,
+                os = kendo.support.mobileOS,
                 wrapper;
 
             Widget.fn.init.call(that, element, options);
@@ -93,6 +94,7 @@
 
             element
                 .addClass("km-actionsheet")
+                .append(cancelTemplate({cancel: that.options.cancel}))
                 .wrap(WRAP)
                 .on(kendo.support.mouseup, BUTTONS, $.proxy(that._click, that))
                 .on("click", BUTTONS, kendo.preventDefault);
@@ -100,7 +102,7 @@
             wrapper = element.parent();
 
             that.wrapper = wrapper;
-            that.shim = new Shim(that.wrapper);
+            that.shim = new Shim(that.wrapper, {modal: !(os.android || os.meego)});
         },
 
         events: [
@@ -118,14 +120,6 @@
         options: {
             name: "ActionSheet",
             cancel: 'Cancel'
-        },
-
-        viewInit: function(view) {
-            var that = this,
-                os = kendo.support.mobileOS;
-
-            that.shim.setOptions({modal: !(os.android || os.meego)});
-            that.element.append(cancelTemplate({cancel: that.options.cancel}));
         },
 
         /**
