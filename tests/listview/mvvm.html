@@ -241,6 +241,27 @@
 
                 ok(listview.options.navigatable, "listview is not navigatable");
             });
+
+            test("binds event handlers in template to root view model when item changes", function() {
+                var dom = $('<div data-role="listview" data-bind="source:dataSource"  data-template="template-with-events" />');
+
+                var observable = kendo.observable({
+                    dataSource: [{ text:"foo" }]
+                });
+
+                stub(observable, "rootHandler");
+
+                kendo.bind(dom, observable);
+
+                observable.dataSource[0].set("text", "bar");
+
+                dom.find("div strong").click();
+
+                equal(observable.calls("rootHandler"), 1);
+                equal($.trim(dom.find("div span").html()), "bar");
+                equal($.trim(dom.find("div strong").html()), "bar");
+            });
+
         </script>
 
         <script id="template" type="text/x-kendo-template">
@@ -254,6 +275,9 @@
         </script>
         <script id="template-with-attributes" type="text/x-kendo-template">
             <div><strong data-bind="text:text"></strong></div>
+        </script>
+        <script id="template-with-events" type="text/x-kendo-template">
+            <div><span>#=text#</span><strong data-bind="text:text, events:{ click: rootHandler }"></strong></div>
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
