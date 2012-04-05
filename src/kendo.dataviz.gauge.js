@@ -769,18 +769,19 @@
                 scale = pointer.scale,
                 scaleLine = scale.lineBox(),
                 scaleBox = scale.box,
-                width = options.track.size || options.size,
+                width = options.track.size || pointer.pointerSize(),
+                pointerHalfSize = options.size / 2,
                 padding = getSpacing(options.margin),
                 trackBox;
 
             if (scale.options.vertical) {
                 trackBox = new Box2D(
-                    scaleBox.x2 + padding.left, scaleLine.y1,
-                    scaleBox.x2 + padding.left + width, scaleLine.y2);
+                    scaleBox.x2 + padding.left, scaleLine.y1 - pointerHalfSize,
+                    scaleBox.x2 + padding.left + width, scaleLine.y2 + pointerHalfSize);
             } else {
                 trackBox = new Box2D(
-                    scaleLine.x1, scaleBox.y1 - padding.bottom - width,
-                    scaleLine.x2, scaleBox.y1 - padding.bottom);
+                    scaleLine.x1 - pointerHalfSize, scaleBox.y1 - padding.bottom - width,
+                    scaleLine.x2 + pointerHalfSize, scaleBox.y1 - padding.bottom);
             }
 
             pointer.trackBox = trackBox;
@@ -938,6 +939,31 @@
             pointer.reflow(box);
             plotArea.box = plotArea.getBox(box);
             plotArea.alignElements();
+            plotArea.shrinkElements();
+        },
+
+        shrinkElements: function () {
+            var plotArea = this,
+                scale = plotArea.scale,
+                pointer = plotArea.pointer,
+                vertical = scale.options.vertical,
+                scaleBox = scale.box,
+                pointerBox = pointer.box,
+                diff;
+
+            if (vertical) {
+                diff = scaleBox.height() - pointerBox.height();
+                scale.reflow(new Box2D(
+                    scaleBox.x1, scaleBox.y1 - diff / 2,
+                    scaleBox.x2, scaleBox.y2 + diff / 2
+                ));
+            } else {
+                diff = math.abs(scaleBox.width() - pointerBox.width());
+                scale.reflow(new Box2D(
+                    scaleBox.x1 + diff / 2, scaleBox.y1,
+                    scaleBox.x2 - diff / 2, scaleBox.y2
+                ));
+            }
         },
 
         getBox: function(box) {
