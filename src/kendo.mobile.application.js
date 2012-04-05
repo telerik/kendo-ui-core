@@ -346,7 +346,10 @@
 
                 history.navigate(url, true);
 
-                that.view.switchWith(view);
+                that.view.switchWith(view, that.options.transition, function() {
+                    that.transitioning = false;
+                });
+
                 that.view = view;
             });
         },

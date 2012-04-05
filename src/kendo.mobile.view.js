@@ -207,16 +207,16 @@
 
         hideComplete: function() {
             var that = this;
-            that.application.transitioning = false;
             that.element.hide();
             that.trigger(HIDE, {view: that});
         },
 
-        switchWith: function(view) {
+        switchWith: function(view, transition, complete) {
             new ViewTransition({
-                transition: this.application.options.transition,
                 current: this,
-                next: view
+                next: view,
+                transition: transition,
+                complete: complete
             });
         },
 
@@ -260,43 +260,21 @@
 
     var ViewTransition = Class.extend({
         init: function (options) {
-            var that = this;
             $.extend(this, options);
-            var current = that.current,
+
+            var that = this,
+                current = that.current,
                 next = that.next,
                 currentContent = current.element,
                 nextContent = next.element,
                 upper = next,
                 lower = current,
-                transition,
-                animationData,
-                animationType,
-                reverse,
-                transitionConfig;
+                transition = that._transition();
 
             current.hideStart();
             next.showStart();
 
-            that.back = next.nextView === current && JSON.stringify(next.params) === JSON.stringify(history.url().params);
-
-            transition = (that.back ? current : next).element.data(kendo.ns + "transition");
-
-            if (typeof transition !== "undefined") {
-                this.transition = transition;
-            }
-
-            animationData = this.transition.split(' ');
-            animationType = animationData[0];
-            that.parallax = animationType === "slide";
-            reverse = animationData[1] === "reverse";
-
-            if (that.back)  {
-                reverse = !reverse;
-            }
-
-            transitionConfig = { effects: animationType, reverse: reverse, complete: function() { current.hideComplete(); } };
-
-            if (reverse && !that.parallax) {
+            if (transition.reverse && !transition.parallax) {
                 upper = current;
                 lower = next;
             }
@@ -304,19 +282,62 @@
             upper.element.css(Z_INDEX, 1);
             lower.element.css(Z_INDEX, 0);
 
-            if (that.parallax) {
+            if (transition.parallax) {
                 fade(current.footer, next.footer);
                 fade(current.header, next.header);
                 currentContent = current.parallaxContents(next);
                 nextContent = next.parallaxContents(current);
             }
 
-            currentContent.kendoAnimateTo(nextContent, transitionConfig);
+            currentContent.kendoAnimateTo(nextContent, transition);
 
-            if (!that.back) {
+            if (!that.back()) {
                 current.nextView = next;
             }
         },
+
+        _transition: function(options) {
+            var that = this,
+                current = that.current,
+                next = that.next,
+                back = that.back(),
+                transition = that.transition,
+                viewTransition = (back ? current : next).element.data(kendo.ns + "transition"),
+                complete = function() {
+                    current.hideComplete();
+                    that.complete();
+                },
+                animationData,
+                animationType,
+                parallax,
+                reverse;
+
+            if (typeof viewTransition !== "undefined") {
+                transition = viewTransition;
+            }
+
+            animationData = transition.split(' ');
+            animationType = animationData[0];
+            parallax = animationType === "slide";
+            reverse = animationData[1] === "reverse";
+
+            if (that.back()) {
+                reverse = !reverse;
+            }
+
+            return {
+                effects: animationType,
+                reverse: reverse,
+                parallax: parallax,
+                complete: complete
+            };
+        },
+
+        back: function() {
+            var next = this.next,
+                current = this.current;
+            return next.nextView === current && JSON.stringify(next.params) === JSON.stringify(history.url().params);
+        }
     });
 
     /**
