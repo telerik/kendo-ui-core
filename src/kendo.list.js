@@ -22,7 +22,8 @@
         SELECT = "select",
         extend = $.extend,
         proxy = $.proxy,
-        isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9;
+        isIE8 = $.browser.msie && parseInt($.browser.version, 10) < 9,
+        quotRegExp = /"/g;
 
     var List = Widget.extend(/** @lends kendo.ui.List */{
         /**
@@ -583,6 +584,12 @@
                 dataValue = that._value(dataItem);
 
                 if (dataValue !== undefined) {
+                    dataValue += "";
+
+                    if (dataValue.indexOf('"') !== -1) {
+                        dataValue = dataValue.replace(quotRegExp, "&quot;");
+                    }
+
                     option += ' value="' + dataValue + '"';
                 }
 
