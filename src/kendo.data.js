@@ -57,27 +57,38 @@
             return slice.call(this);
         },
 
+        parent: noop,
+
         wrapAll: function(source, target) {
-            var idx, length;
+            var that = this,
+                idx,
+                length,
+                parent = function() {
+                    return that;
+                };
 
             target = target || [];
 
             for (idx = 0, length = source.length; idx < length; idx++) {
-                target[idx] = this.wrap(source[idx]);
+                target[idx] = that.wrap(source[idx], parent);
             }
 
             return target;
         },
 
-        wrap: function(object) {
-            var that = this;
+        wrap: function(object, parent) {
+            var that = this,
+                observable;
 
             if (object !== null && toString.call(object) === "[object Object]") {
-                var observable = object instanceof that.type || object instanceof Model;
+                observable = object instanceof that.type || object instanceof Model;
+
                 if (!observable) {
                     object = object instanceof ObservableObject ? object.toJSON() : object;
                     object = new that.type(object);
                 }
+
+                object.parent = parent;
 
                 object.bind(CHANGE, function(e) {
                     that.trigger(CHANGE, {
@@ -197,6 +208,9 @@
             var that = this,
                 member,
                 field,
+                parent = function() {
+                    return that;
+                },
                 type;
 
             Observable.fn.init.call(this);
@@ -206,7 +220,7 @@
                 if (field.charAt(0) != "_") {
                     type = toString.call(member);
 
-                    member = that.wrap(member, field);
+                    member = that.wrap(member, field, parent);
                 }
                 that[field] = member;
             }
@@ -284,7 +298,9 @@
             }
         },
 
-        wrap: function(object, field) {
+        parent: noop,
+
+        wrap: function(object, field, parent) {
             var that = this,
                 type = toString.call(object);
 
@@ -292,6 +308,8 @@
                 if (!(object instanceof ObservableObject)) {
                     object = new ObservableObject(object);
                 }
+
+                object.parent = parent;
 
                 (function(field) {
                     object.bind(GET, function(e) {
@@ -306,6 +324,7 @@
                 })(field);
             } else if (object !== null && type === "[object Array]") {
                 object = new ObservableArray(object);
+                object.parent = parent;
 
                 (function(field) {
                     object.bind(CHANGE, function(e) {
@@ -313,6 +332,7 @@
                     });
                 })(field);
             }
+
             return object;
         }
     });
