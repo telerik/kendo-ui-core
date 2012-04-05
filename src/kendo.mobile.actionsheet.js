@@ -109,12 +109,10 @@
 
         viewInit: function(view) {
             var that = this,
-                appendCancel = true;
-            that.shim.setOptions({modal: appendCancel});
+                os = kendo.support.mobileOS;
 
-            if (appendCancel) {
-                that.element.append(cancelTemplate({cancel: that.options.cancel}));
-            }
+            that.shim.setOptions({modal: !(os.android || os.meego)});
+            that.element.append(cancelTemplate({cancel: that.options.cancel}));
         },
 
         /**
