@@ -33,7 +33,8 @@
 .km-blackberry .km-button,
 .km-blackberry .km-buttongroup,
 .km-blackberry .km-tabstrip,
-.km-blackberry input[type=file]
+.km-blackberry input[type=file],
+.km-blackberry li.km-actionsheet-cancel > a
 {
     font: normal 1em Arial, Helvetica, sans-serif;
     color: #000;
@@ -107,7 +108,9 @@
 .km-blackberry .km-button.km-state-active:not([disabled]),
 .km-blackberry .km-buttongroup .km-state-active,
 .km-blackberry input[type=file]:active,
-.km-blackberry input[type=file]:focus
+.km-blackberry input[type=file]:focus,
+.km-blackberry li.km-actionsheet-cancel > a:hover,
+.km-blackberry li.km-actionsheet-cancel > a:active
 {
     color: #FFF;
     background-color: #057fe4;
@@ -777,6 +780,11 @@
     background: none;
 }
 
+.km-blackberry .km-shim > .k-animation-container
+{
+    height: 100% !important;
+}
+
 .km-blackberry .km-actionsheet-wrapper
 {
     background: rgba(0,0,0,.5);
@@ -784,6 +792,7 @@
     top: 0;
     width: 100%;
     height: 100%;
+    -webkit-transform: translatez(0);
 }
 
 .km-blackberry .km-actionsheet
@@ -795,11 +804,13 @@
     max-height: 80%;
     border: 0;
     padding: 0;
-    background: #222;
+    background-color: #e6e6e6;
     color: #fff;
     vertical-align: middle;
-    .border-radius(0);
-    .box-shadow(~"2px 2px 5px rgba(0,0,0,.5)");
+    padding: .5em;
+    .border-radius(5px);
+    .box-sizing(border-box);
+    .box-shadow(~"3px -3px 10px rgba(0,0,0,.3)");
 }
 
 .km-blackberry .km-actionsheet-wrapper:before
@@ -811,39 +822,45 @@
     width: 0;
 }
 
-.km-blackberry .km-actionsheet > li > a
+.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a
 {
     font-size: 1.2em;
     font-weight: normal;
-    color: #fff;
+    color: #333;
     display: block;
     line-height: 3rem;
-    border-width: 0 0 1px 0;
     padding: 0 1em;
-    .border-radius(0);
+    .border-radius(5px);
     text-decoration: none;
-    border-bottom: 1px solid #444;
 }
 
-.km-blackberry .km-actionsheet > li:last-child > a
+.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover,
+.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:focus,
+.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:active
 {
-    border: 0;
+    background: #a0a0a0;
+    .box-shadow(~"inset 0 1px 2px rgba(0,0,0,.3)");
 }
 
-.km-blackberry .km-actionsheet > li > a:focus,
-.km-blackberry .km-actionsheet > li > a:active
+.km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a:hover
 {
-    background: #33b5e5;
+    background: rgba(160,160,160,.7);
 }
 
-.km-blackberry .km-actionsheet > li > a:hover
+.km-blackberry li.km-actionsheet-cancel
 {
-    color: #fff;
-    background: rgba(51,181,229,.6);
+    margin: .5em -.5em -.5em;
+    background: #e6e6e6 linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0));
+    text-align: center;
+    line-height: 3.6rem;
+    border-top: 1px solid #d0d0d0;
+    .border-radius(0 0 5px 5px);
 }
 
 .km-blackberry li.km-actionsheet-cancel > a
 {
     text-align: center;
     font-size: 1em;
+    padding-left: 2.5em;
+    padding-right: 2.5em;
 }
