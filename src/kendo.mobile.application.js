@@ -7,8 +7,6 @@
         roleSelector = kendo.roleSelector,
         attr = kendo.attr,
 
-        ViewSwitcher = mobile.ViewSwitcher,
-
         OS = support.mobileOS,
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
         MOBILE_UA = {
@@ -349,7 +347,7 @@
 
                 history.navigate(url, true);
 
-                new ViewSwitcher(that).replace(that.view, view);
+                that.view.switchWith(view);
                 that.view = view;
             });
         },

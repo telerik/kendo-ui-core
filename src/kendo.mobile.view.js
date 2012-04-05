@@ -204,6 +204,10 @@
             that.trigger(SHOW, {view: that});
         },
 
+        switchWith: function(view) {
+            new ViewSwitcher(this.application).replace(this, view);
+        },
+
         _eachWidget: function(callback) {
             var role = kendo.ns + "role";
             this.element.find("[data-" + role + "]").each(function(){
@@ -448,5 +452,4 @@
 
     ui.plugin(View);
     ui.plugin(Layout);
-    mobile.ViewSwitcher = ViewSwitcher;
 })(jQuery);
