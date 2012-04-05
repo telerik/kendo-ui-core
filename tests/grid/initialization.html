@@ -335,10 +335,11 @@
             });
 
             test("scrollable area is sized", function() {
-                var grid = new Grid(table, { height: 100, pageable: true, scrollable: true, dataSource: [{foo:"bar"}] });
+                var grid = new Grid(table, { height: 100, pageable: true, scrollable: true, dataSource: [{foo:"bar"}], columns: [{field:"foo", footerTemplate:"bar"}]});
 
                 equal(grid.wrapper.find(".k-grid-content").height(), 100
                     - grid.wrapper.find(".k-grid-header").outerHeight()
+                    - grid.wrapper.find(".k-grid-footer").outerHeight()
                     - grid.wrapper.find(".k-grid-pager").outerHeight());
             });
 
