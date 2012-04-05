@@ -114,14 +114,31 @@
 
         refresh: function(e) {
             var that = this,
-                data = that.dataSource.view(),
+                view = that.dataSource.view(),
+                data,
+                item,
                 html = "",
                 idx,
                 length,
                 template = that.template,
                 altTemplate = that.altTemplate;
 
-            if (e && e.action === "itemchange" && that.editable) {
+            if (e && e.action === "itemchange") {
+                if (!that.editable) {
+                    data = e.items[0];
+                    idx = view.indexOf(data);
+
+                    if (idx >= 0) {
+                        item = $(template(data));
+                        that.items().eq(idx).replaceWith(item);
+
+                        that.trigger("itemChange", {
+                            item: item,
+                            data: data
+                        });
+                    }
+                }
+
                 return;
             }
 
@@ -129,11 +146,11 @@
 
             that._destroyEditable();
 
-            for (idx = 0, length = data.length; idx < length; idx++) {
+            for (idx = 0, length = view.length; idx < length; idx++) {
                 if (idx % 2) {
-                    html += altTemplate(data[idx]);
+                    html += altTemplate(view[idx]);
                 } else {
-                    html += template(data[idx]);
+                    html += template(view[idx]);
                 }
             }
 
