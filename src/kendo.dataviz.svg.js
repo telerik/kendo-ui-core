@@ -461,10 +461,10 @@
             if (!pin.pathTemplate) {
                 pin.pathTemplate = SVGPin.pathTemplate = renderTemplate(
                     "M #= d.origin.x # #= d.origin.y # " +
-                    "#= d.origin.x + d.hcl # #= d.origin.y - d.h # " +
+                    "#= d.as.x # #= d.as.y # " +
                     "A#= d.r # #= d.r # " +
                     "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
-                    "#= d.origin.x - d.hcl # #= d.origin.y - d.h # " +
+                    "#= d.ae.x # #= d.ae.y # " +
                     "z"
                 );
             }
@@ -479,14 +479,31 @@
                 degrees = math.PI / 180,
                 arcAngle = config.arcAngle,
                 halfChordLength = r * math.sin(arcAngle * degrees / 2),
-                height = config.height - r * (1 - math.cos(arcAngle * degrees / 2));
+                height = config.height - r * (1 - math.cos(arcAngle * degrees / 2)),
+                origin = config.origin,
+                arcStart = { x: origin.x + halfChordLength, y: origin.y - height },
+                arcEnd = { x: origin.x - halfChordLength, y: origin.y - height },
+                rotate = function(point, inclinedPoint) {
+                    var rotation = pin.options.rotation,
+                        inclination = config.rotation;
+
+                    point = rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
+
+                    if (inclinedPoint) {
+                        point = rotatePoint(point.x, point.y, origin.x, origin.y, inclination);
+                    }
+
+                    return point;
+                };
+
+            origin = rotate(origin);
 
             return pin.pathTemplate({
-                origin: config.origin,
+                origin: origin,
+                as: rotate(arcStart, true),
+                ae: rotate(arcEnd, true),
                 r: r,
-                h: height,
-                isReflexAngle: arcAngle > 180,
-                hcl: halfChordLength
+                isReflexAngle: arcAngle > 180
             });
         }
     });
