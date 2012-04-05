@@ -3,7 +3,6 @@
 
         history = kendo.history,
         support = kendo.support,
-        mobile = kendo.mobile,
         roleSelector = kendo.roleSelector,
         attr = kendo.attr,
 
@@ -301,7 +300,7 @@
             var that = this;
 
             that.layouts = {};
-            that.options = $.extend({ hideAddressBar: true }, options);
+            that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 
@@ -457,7 +456,7 @@
 
                     that._findView(url, function(view) {
                         views.not(view).hide();
-                        view.onShowStart();
+                        view.showStart();
                         that.view = view;
 
                         if (navigateToInitial) {
