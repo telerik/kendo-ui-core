@@ -449,6 +449,15 @@
                     equal(select[0].children[0].outerHTML, '<option value="">Select...</option>');
             });
 
+            test("_options method escape value of the option", function() {
+                var select = $("<select/>"),
+                    dropdownlist = new DropDownList(select, {
+                        dataSource: ['item1"', "item2"]
+                    });
+
+                    equal(select[0].childNodes[0].value, 'item1"');
+            });
+
             test("should not set id to the popup if the input does not have", function() {
                 input.removeAttr("id");
                 dropdownlist = new DropDownList(input);
