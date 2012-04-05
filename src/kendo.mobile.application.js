@@ -1,6 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
-
+        scrollTo = window.scrollTo,
         history = kendo.history,
         support = kendo.support,
         roleSelector = kendo.roleSelector,
@@ -8,6 +8,7 @@
 
         OS = support.mobileOS,
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
+
         MOBILE_UA = {
             ios: "iPhone OS 4_3",
             android: "Android 2.3.3",
@@ -25,7 +26,7 @@
         buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
 
-        ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
+        ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
@@ -37,35 +38,8 @@
         WINDOW = $(window),
         HEAD = $("head"),
         CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
+        BACK = "#:back",
         proxy = $.proxy;
-
-    function appLinkMouseUp(e) {
-        if (e.which > 1 || e.isDefaultPrevented()) {
-            return;
-        }
-
-        var link = $(e.currentTarget),
-            rel = link.data(kendo.ns + "rel"),
-            href = link.attr(HREF);
-
-        if (rel === EXTERNAL) {
-            return;
-        }
-
-        if (href && href != DUMMY_HREF) {
-            // Prevent iOS address bar progress display for in app navigation
-            link.attr(HREF, DUMMY_HREF);
-            setTimeout(function() { link.attr(HREF, href); });
-
-            if (rel === "actionsheet") {
-                $(href).data("kendoMobileActionSheet").openFor(link);
-            } else {
-                history.navigate(href);
-            }
-        }
-
-        e.preventDefault();
-    }
 
     function appLinkClick(e) {
         var rel = $(e.currentTarget).data(kendo.ns + "rel");
@@ -335,18 +309,19 @@
          * app.navigate("#foo");
          * </script>
          */
-        navigate: function(url) {
+        navigate: function(url, transition) {
             var that = this;
             that.transitioning = true;
+            history.navigate(url, true);
+
+            if (url === BACK) {
+                return;
+            }
 
             that._findView(url, function(view) {
-                if (that.view === view) {
-                    return;
-                }
+                if (that.view === view) { return; }
 
-                history.navigate(url, true);
-
-                that.view.switchWith(view, that.options.transition, function() {
+                that.view.switchWith(view, transition, function() {
                     that.transitioning = false;
                 });
 
@@ -399,9 +374,12 @@
         },
 
         _setupAppLinks: function() {
+            var that = this,
+                mouseup = $.proxy(that._mouseup, that);
+
             this.element
-                .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
-                .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
+                .delegate(linkRolesSelector, support.mousedown, mouseup)
+                .delegate(buttonRolesSelector, support.mouseup, mouseup)
                 .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
         },
 
@@ -639,6 +617,36 @@
             for (var i = 0; i < CAPTURE_EVENTS.length; i ++) {
                 that.element[0].addEventListener(CAPTURE_EVENTS[i], capture, true);
             }
+        },
+
+        _mouseup: function(e) {
+            if (e.which > 1 || e.isDefaultPrevented()) {
+                return;
+            }
+
+            var link = $(e.currentTarget),
+                transition = link.data(kendo.ns + "transition"),
+                rel = link.data(kendo.ns + "rel"),
+                href = link.attr(HREF);
+
+
+            if (rel === EXTERNAL) {
+                return;
+            }
+
+            if (href && href != DUMMY_HREF) {
+                // Prevent iOS address bar progress display for in app navigation
+                link.attr(HREF, DUMMY_HREF);
+                setTimeout(function() { link.attr(HREF, href); });
+
+                if (rel === "actionsheet") {
+                    $(href).data("kendoMobileActionSheet").openFor(link);
+                } else {
+                    this.navigate(href, transition);
+                }
+            }
+
+        e.preventDefault();
         },
 
         dataOrDefault: function(element, option) {
