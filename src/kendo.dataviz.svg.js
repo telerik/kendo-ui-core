@@ -178,6 +178,12 @@
             );
         },
 
+        createPin: function(pin, options) {
+            return this.decorate(
+                new SVGPin(pin, options)
+            );
+        },
+
         createGradient: function(options) {
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
@@ -441,6 +447,46 @@
                 cy: center.y,
                 firstInnerPoint: firstInnerPoint,
                 secondInnerPoint: secondInnerPoint
+            });
+        }
+    });
+
+    var SVGPin = SVGPath.extend({
+        init: function(config, options) {
+            var pin = this;
+
+            SVGPath.fn.init.call(pin, options);
+
+            pin.pathTemplate = SVGPin.pathTemplate;
+            if (!pin.pathTemplate) {
+                pin.pathTemplate = SVGPin.pathTemplate = renderTemplate(
+                    "M #= d.origin.x # #= d.origin.y # " +
+                    "#= d.origin.x + d.hcl # #= d.origin.y - d.h # " +
+                    "A#= d.r # #= d.r # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
+                    "#= d.origin.x - d.hcl # #= d.origin.y - d.h # " +
+                    "z"
+                );
+            }
+
+            pin.config = config || new dataviz.Pin();
+        },
+
+        renderPoints: function() {
+            var pin = this,
+                config = pin.config,
+                r = config.radius,
+                degrees = math.PI / 180,
+                arcAngle = config.arcAngle,
+                halfChordLength = r * math.sin(arcAngle * degrees / 2),
+                height = config.height - r * (1 - math.cos(arcAngle * degrees / 2));
+
+            return pin.pathTemplate({
+                origin: config.origin,
+                r: r,
+                h: height,
+                isReflexAngle: arcAngle > 180,
+                hcl: halfChordLength
             });
         }
     });
