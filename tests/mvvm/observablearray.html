@@ -308,6 +308,10 @@
 
                 equal(kendo.stringify(viewModel.foo), "[1]");
             });
+
+            test("parent returns undefined for new observable array", function() {
+                strictEqual((new kendo.data.ObservableArray([])).parent(), undefined);
+            });
         </script>
     </head>
 </html>

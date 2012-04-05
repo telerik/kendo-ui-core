@@ -245,6 +245,36 @@
 
                 ok(!(observable.dataSource instanceof kendo.data.ObservableObject))
             });
+
+            test("parent returns the parent observable object", function() {
+                var observable = kendo.observable( {
+                    foo: {
+                    }
+                });
+
+                strictEqual(observable.foo.parent(), observable);
+            });
+
+            test("parent returns the parent observable array", function() {
+                var observable = kendo.observable( {
+                    foo: [{}]
+                });
+
+                strictEqual(observable.foo[0].parent(), observable.foo);
+            });
+
+            test("parent returns the parent of the observable array", function() {
+                var observable = kendo.observable( {
+                    foo: [{}]
+                });
+
+                strictEqual(observable.foo.parent(), observable);
+            });
+
+            test("parent returns undefined for root observable object", function() {
+                strictEqual(kendo.observable({}).parent(), undefined);
+            });
+
         </script>
     </head>
 </html>
