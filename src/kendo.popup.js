@@ -8,6 +8,7 @@
         appendingToBodyTriggersResize = $.browser.msie && $.browser.version < 9,
         OPEN = "open",
         CLOSE = "close",
+        CLOSED = "closed",
         CENTER = "center",
         LEFT = "left",
         RIGHT = "right",
@@ -108,6 +109,7 @@
                     }
 
                     that._closing = false;
+                    that.trigger(CLOSED);
                 }
             });
 
@@ -128,7 +130,8 @@
 
         events: [
             OPEN,
-            CLOSE
+            CLOSE,
+            CLOSED
         ],
 
         options: {
@@ -354,11 +357,7 @@
             if (fixed && fixed.isFixed) {
                 wrapper.css({ left: fixed.x, top: fixed.y });
             } else {
-                if (options.appendTo === Popup.fn.options.appendTo) {
-                    wrapper.css(that._align(origins, positions));
-                } else {
-                    wrapper.css(that._align(origins, positions, true));
-                }
+                wrapper.css(that._align(origins, positions));
             }
 
             var pos = getOffset(wrapper, POSITION),
@@ -411,7 +410,7 @@
             return (location.left != flipPos.left || location.top != flipPos.top);
         },
 
-        _align: function(origin, position, isPosition) {
+        _align: function(origin, position) {
             var that = this,
                 element = that.wrapper,
                 anchor = $(that.options.anchor),
@@ -419,25 +418,25 @@
                 horizontalOrigin = origin[1],
                 verticalPosition = position[0],
                 horizontalPosition = position[1],
-                anchorOff = getOffset(anchor),
-                appendOff = getOffset($(that.options.appendTo)),
-                anchorOffset = isPosition ? { top: anchorOff.top - appendOff.top , left: anchorOff.left - appendOff.left } : anchorOff,
+                anchorOffset = getOffset(anchor),
+                appendTo = $(that.options.appendTo),
+                appendToOffset,
                 width = element.outerWidth(),
                 height = element.outerHeight(),
                 anchorWidth = anchor.outerWidth(),
                 anchorHeight = anchor.outerHeight(),
                 top = anchorOffset.top,
                 left = anchorOffset.left,
-                round = Math.round,
-                verticalFlip = verticalOrigin !== verticalPosition,
-                horizontalflip = horizontalOrigin !== horizontalPosition;
+                round = Math.round;
 
-
-            if (verticalOrigin === TOP && isPosition && verticalFlip) {
-                top -= height;
+            if (appendTo[0] != document.body) {
+                appendToOffset = getOffset(appendTo);
+                top -= appendToOffset.top;
+                left -= appendToOffset.left;
             }
 
-            if (verticalOrigin === BOTTOM && !isPosition) {
+
+            if (verticalOrigin === BOTTOM) {
                 top += anchorHeight;
             }
 
@@ -445,11 +444,7 @@
                 top += round(anchorHeight / 2);
             }
 
-            if (verticalPosition === TOP && isPosition && verticalFlip) {
-                top += anchorHeight;
-            }
-
-            if (verticalPosition === BOTTOM && !isPosition) {
+            if (verticalPosition === BOTTOM) {
                 top -= height;
             }
 
@@ -457,11 +452,7 @@
                 top -= round(height / 2);
             }
 
-            if (horizontalOrigin === LEFT && isPosition && horizontalflip) {
-                left -= width;
-            }
-
-            if (horizontalOrigin === RIGHT && !isPosition) {
+            if (horizontalOrigin === RIGHT) {
                 left += anchorWidth;
             }
 
@@ -469,11 +460,7 @@
                 left += round(anchorWidth / 2);
             }
 
-            if (horizontalPosition === LEFT && isPosition && horizontalflip) {
-                left += anchorWidth;
-            }
-
-            if (horizontalPosition === RIGHT && !isPosition) {
+            if (horizontalPosition === RIGHT) {
                 left -= width;
             }
 

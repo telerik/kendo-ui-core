@@ -2533,4 +2533,13 @@ function pad(number) {
             return false;
         }
     };
+
+    /**
+     * Prevents the default event action. Should be supplied as an event callback
+     * @name kendo.preventDefault
+     * @function
+     */
+    kendo.preventDefault = function(e) {
+        e.preventDefault();
+    };
 })(jQuery);

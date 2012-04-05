@@ -1,0 +1,59 @@
+<div data-role="view" data-title="Inbox">
+    <ul data-role="listview" data-source="inbox" data-template="inboxItem" class="inboxList"></ul>
+
+    <h3 id="actionResult"></h3>
+    <ul data-role="actionsheet" id="inboxActions" data-open="onOpen">
+        <li class="km-actionsheet-title">Monday Meeting:</li>
+        <li><a href="#" data-action="reply">Reply</a></li>
+        <li><a href="#" data-action="replyAll">Reply All</a></li>
+        <li><a href="#" data-action="archive">Archive</a></li>
+    </ul>
+</div>
+
+<script type="script/x-kendo-template" id="inboxItem">
+    <h3>#: Subject#</h3>
+    <a class="reply"
+        data-role="button"
+        data-rel="actionsheet"
+        href="\\#inboxActions"
+        data-actionsheet-context="#:ID#">Reply</a>
+    <p>#: From #</p>
+</script>
+
+<script>
+    var inbox = [
+        {ID: 4, From: "John Doe", Subject: "Monday Meeting"},
+        {ID: 5, From: "Sarah Jeanette Connor", Subject: "Regarding Last Q org Chart changes"}
+    ];
+
+    function onOpen(e) {
+        this.element.find(".km-actionsheet-title").text(e.target.prev().text());
+    }
+
+    function reply(e) {
+        $("#actionResult").html("Replying to message #" + e.context);
+    }
+
+    function replyAll(e) {
+        $("#actionResult").html("Replying to all in message #" + e.context);
+    }
+
+    function archive(e) {
+        $("#actionResult").html("Archiving message #" + e.context);
+    }
+
+</script>
+
+<style scoped>
+    .reply {
+        float: right;
+    }
+
+    .inboxList h3 {
+        width: 200px;
+    }
+
+    .inboxList p {
+        color: #999;
+    }
+</style>
