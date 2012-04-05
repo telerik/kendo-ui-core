@@ -178,6 +178,11 @@
     * The <strong>View</strong> content (the first element with <code>data-role="view"</code>) are extracted from the AJAX response and appended into the <strong>Application</strong> element.
     * Once the remote <strong>View</strong> is fetched, no additional roundtrips to the server occur when the <strong>View</strong> is displayed. </p>
     *
+    * <p>The remote view request will also append (but not initialize) any <strong>additional views</strong> found in the AJAX
+    * response. <strong>Inline style</strong> elements, <strong>inline script</strong> elements, and <strong>mobile layout</strong> definitions will also be evaluated and appended to the
+    * application. The elements must be available in the root of the response, or nested inside the <strong>body</strong> element.
+    * Scripts and styles from the <strong>head</strong> element (if present) will <strong>not</strong> be evaluated.</p>
+    *
     * @exampleTitle Remote View
     * @example
     * <!-- foo.html -->
