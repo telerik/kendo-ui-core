@@ -103,6 +103,10 @@
             cap: {
                 size: CAP_SIZE
             },
+            arrow: {
+                width: 16,
+                height: 14
+            },
             animation: {
                 type: RADIAL_POINTER,
                 speed: ANGULAR_SPEED
@@ -175,28 +179,24 @@
                 options = pointer.options,
                 scale = pointer.scale,
                 ring = scale.ring.clone(),
-                trackWidth = 5;
+                trackWidth = 5,
+                arrowOptions = options.arrow,
+                width = arrowOptions.width,
+                height = arrowOptions.height;
 
             ring.ir = ring.r - trackWidth;
 
-            ring.angle += 8;
-            ring.startAngle -= 4;
-
             return [
-                view.createPolyline([
-                    rotatePoint(
-                        (box.x1 + box.x2) / 2, box.y1 + 14,
+                view.createPin(new Pin({
+                    origin: rotatePoint(
+                        (box.x1 + box.x2) / 2, box.y1 + height,
                         center.x, center.y, pointRotation
                     ),
-                    rotatePoint(
-                        (box.x1 + box.x2) / 2 - 8, box.y1,
-                        center.x, center.y, pointRotation
-                    ),
-                    rotatePoint(
-                        (box.x1 + box.x2) / 2 + 8, box.y1,
-                        center.x, center.y, pointRotation
-                    )
-                ], true, options),
+                    height: arrowOptions.height,
+                    radius: trackWidth,
+                    rotation: pointRotation,
+                    arcAngle: 180
+                }), options),
                 view.createRing(ring, {
                     fill: options.color
                 })
