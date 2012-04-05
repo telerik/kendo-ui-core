@@ -452,7 +452,7 @@
 
         _createView: function(element) {
             var that = this,
-                layout = that.dataOrDefault(element, "layout");
+                layout = element.data(kendo.ns + option) || that.options.layout;
 
             if (layout) {
                 layout = that.layouts[layout];
@@ -647,10 +647,6 @@
             }
 
         e.preventDefault();
-        },
-
-        dataOrDefault: function(element, option) {
-            return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
         },
 
         _loader: function() {
