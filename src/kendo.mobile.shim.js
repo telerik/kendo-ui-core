@@ -24,14 +24,11 @@
             that.shim = shim;
             that.element = element;
 
+            if (!that.options.modal) {
+                that.shim.on(kendo.support.mouseup, $.proxy(that.hide, that));
+            }
+
             kendo.notify(that);
-        },
-
-        setOptions: function(options) {
-            var that = this,
-                attach = options.modal ? "off" : "on";
-
-            that.shim[attach](kendo.support.mouseup, $.proxy(that.hide, that));
         },
 
         options: {
