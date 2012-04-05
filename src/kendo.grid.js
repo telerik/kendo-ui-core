@@ -1236,7 +1236,7 @@
                 scrollbar = kendo.support.scrollbar();
 
             if (scrollable) {
-                header = that.wrapper.children().filter(".k-grid-header");
+                header = that.wrapper.children(".k-grid-header");
 
                 if (!header[0]) {
                     header = $('<div class="k-grid-header" />').insertBefore(that.table);
@@ -1265,21 +1265,21 @@
                     }
                 }
 
-                var scrollables = header.find(">.k-grid-header-wrap, > .k-footer-template"); // add footer when implemented
+                that.scrollables = header.children(".k-grid-header-wrap"); // the footer does not exists here yet!
 
                 if (scrollable.virtual) {
                     that.content.find(">.k-virtual-scrollable-wrap").bind('scroll', function () {
-                        scrollables.scrollLeft(this.scrollLeft);
+                        that.scrollables.scrollLeft(this.scrollLeft);
                     });
                 } else {
                     that.content.bind('scroll', function () {
-                        scrollables.scrollLeft(this.scrollLeft);
+                        that.scrollables.scrollLeft(this.scrollLeft);
                     });
 
                     var touchScroller = kendo.touchScroller(that.content);
                     if (touchScroller && touchScroller.movable) {
                         touchScroller.movable.bind("change", function(e) {
-                            scrollables.scrollLeft(-e.sender.x);
+                            that.scrollables.scrollLeft(-e.sender.x);
                         });
                     }
                 }
@@ -1307,6 +1307,10 @@
 
                 if(options.toolbar) {
                     height -= that.wrapper.children(".k-grid-toolbar").outerHeight();
+                }
+
+                if (that.footerTemplate) {
+                    height -= that.wrapper.children(".k-grid-footer").outerHeight();
                 }
 
                 if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
@@ -1463,10 +1467,12 @@
                 } else {
                     if (options.scrollable) {
                         that.footer = options.pageable ? html.insertBefore(that.wrapper.children("div.k-grid-pager")) : html.appendTo(that.wrapper);
+                        that.scrollables = that.scrollables.add(that.footer.children(".k-grid-footer-wrap"));
                     } else {
                         that.footer = html.insertBefore(that.tbody);
                     }
                 }
+                that._setContentHeight();
             }
         },
 
@@ -1475,12 +1481,12 @@
                 html = "";
 
             if (that.options.scrollable) {
-                html = $('<div class="k-grid-footer"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div>');
+                html = $('<div class="k-grid-footer"><div class="k-grid-footer-wrap"><table cellspacing="0"><tbody>' + footerRow + '</tbody></table></div></div>');
                 that._appendCols(html.find("table"));
                 return html;
             }
 
-            return '<tfoot>' + footerRow + '</tfoot>';
+            return '<tfoot class="k-grid-footer">' + footerRow + '</tfoot>';
         },
 
         _filterable: function() {
