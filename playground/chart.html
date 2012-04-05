@@ -38,26 +38,24 @@
                     }],
                     xAxis: {
                         type: "Date",
-                        baseUnit: "months",
+                        majorGridLines: {
+                            visible: true
+                        },
+                        //baseUnit: "months",
                         //majorUnit: 9,
                         //min: new Date("2012/02/01"),
-                        //max: "2012/02/10",
-                        labels: {
-                            //template: "#= formatTime(value) #"
-                        }
+                        //max: "2012/02/10"
                     },
                     yAxis: {
                         labels: {
                             format: "${0:N}"
+                        },
+                        majorGridLines: {
+                            visible: false // bug?
                         }
                     }
                 });
             });
-
-            function formatTime(time) {
-                var date = new Date(time);
-                return (date.getMonth() + 1) + "/" + date.getDate();
-            }
         </script>
     </body>
 </html>

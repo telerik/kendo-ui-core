@@ -1189,7 +1189,7 @@
                 axisCrossingValue: toDate(options.axisCrossingValue)
             });
 
-            options = axis.setDefaults(seriesMin, seriesMax, options);
+            options = axis.setDefaults(toDate(seriesMin), toDate(seriesMax), options);
 
             Axis.fn.init.call(axis, options);
         },
@@ -1235,7 +1235,9 @@
         getDivisions: function(stepValue) {
             var options = this.options;
 
-            return duration(options.min, options.max, options.baseUnit) + 1;
+            return math.floor(
+                duration(options.min, options.max, options.baseUnit) / options.majorUnit + 1
+            );
         },
 
         getTickPositions: function(stepValue) {
@@ -1315,7 +1317,8 @@
 
         getLabelText: function(index) {
             var options = this.options,
-                date = addDuration(options.min, index, options.baseUnit);
+                offset =  index * options.majorUnit,
+                date = addDuration(options.min, offset, options.baseUnit);
 
             return (date.getMonth() + 1) + "/" + date.getDate();
         }

@@ -230,6 +230,8 @@
                         new Date("2012/02/01"), new Date("2012/02/10")
                     );
                     view = new ViewStub();
+
+                    dateAxis.reflow(chartBox);
                 }
 
                 // ------------------------------------------------------------
@@ -396,6 +398,13 @@
                     });
 
                     same(dateAxis.range().max, new Date("2012/02/05"));
+                });
+
+                test("creates labels with default format", function() {
+                    dateAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["1/31", "2/2", "2/4", "2/6", "2/8", "2/10", "2/12"]);
                 });
 
                 // ------------------------------------------------------------
