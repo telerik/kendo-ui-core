@@ -739,6 +739,11 @@
                     ok(fill.render().indexOf("on='false'") > -1);
                 });
 
+                test("sets on attribute when fill color is set to transparent", function() {
+                    fill.options.fill = "transparent";
+                    ok(fill.render().indexOf("on='false'") > -1);
+                });
+
                 test("renders color", function() {
                     fill.options.fill = "#f00";
                     ok(fill.render().indexOf("color='#f00'") > -1);

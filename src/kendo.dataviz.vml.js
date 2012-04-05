@@ -32,7 +32,8 @@
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         OBJECT = "object",
         LINEAR = "linear",
-        RADIAL = "radial";
+        RADIAL = "radial",
+        TRANSPARENT = "transparent";
 
     // View ===================================================================
     var VMLView = ViewBase.extend({
@@ -312,12 +313,17 @@
             stroke.template = VMLFill.template;
             if (!stroke.template) {
                 stroke.template = VMLFill.template = renderTemplate(
-                    "<kvml:fill on='#= !!d.options.fill #' " +
+                    "<kvml:fill on='#= d.isEnabled() #' " +
                     "#= d.renderAttr(\"color\", d.options.fill) #" +
                     "#= d.renderAttr(\"weight\", d.options.fillWidth) #" +
                     "#= d.renderAttr(\"opacity\", d.options.fillOpacity) # />"
                 );
             }
+        },
+
+        isEnabled: function() {
+            var fill = this.options.fill;
+            return !!fill && fill.toLowerCase() !== TRANSPARENT;
         }
     });
 
