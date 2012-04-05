@@ -571,7 +571,7 @@
 
             /**
             *
-            * Triggered after a node is has been dropped.
+            * Triggered after a node has been dropped.
             *
             * @name kendo.ui.TreeView#dragend
             * @event
