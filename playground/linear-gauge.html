@@ -54,19 +54,12 @@
                         color: "blue"
                     }],
                     labels: {
-                        visible: false
+                        visible: true
                     }
                 },
 
                 pointer: {
-                    shape: "barIndicator",
-                    track: {
-                        border: {
-                            color: "black",
-                            width: 1
-                        },
-                        visible: true
-                    },
+                    shape: "arrow",
                     size: 20
                 }
             });
@@ -90,7 +83,23 @@
                         color: "blue"
                     }],
                     padding: 0,
-                    margin: 0
+                    margin: 0,
+                    labels: {
+                        visible: false
+                    }
+                },
+
+                pointer: {
+                    shape: "arrow",
+                    track: {
+                        border: {
+                            color: "black",
+                            width: 1
+                        },
+                        color: "black",
+                        visible: true
+                    },
+                    size: 20
                 }
             });
         </script>
