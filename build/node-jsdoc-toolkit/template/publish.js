@@ -101,6 +101,7 @@ function outputDescription(description) {
 
     if (sitefinity) {
         output = output.replace("index.html", "overview.aspx");
+        output = output.replace("../datasource", "../../framework/datasource");
     }
 
     return output;
