@@ -13,6 +13,7 @@
         Box2D = dataviz.Box2D,
         ChartElement = dataviz.ChartElement,
         NumericAxis = dataviz.NumericAxis,
+        Pin = dataviz.Pin,
         Ring = dataviz.Ring,
         RootElement = dataviz.RootElement,
         RotationAnimation = dataviz.RotationAnimation,

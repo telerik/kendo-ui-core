@@ -357,6 +357,17 @@
         }
     });
 
+    var Pin = Class.extend({
+        init: function(options) {
+            deepExtend(this, {
+                height: 40,
+                rotation: 90,
+                radius: 10,
+                arcAngle: 10
+            }, options);
+        }
+    });
+
     // View-Model primitives ==================================================
     var ChartElement = Class.extend({
         init: function(options) {
@@ -2392,6 +2403,7 @@
         NumericAxis: NumericAxis,
         Point2D: Point2D,
         Ring: Ring,
+        Pin: Pin,
         RootElement: RootElement,
         RotationAnimation: RotationAnimation,
         Sector: Sector,
