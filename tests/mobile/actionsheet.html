@@ -47,21 +47,22 @@
             });
 
             function isOpen() {
-                equal(root.find(".km-shim").css("visibility"), "visible");
+                equal(root.find(".km-shim").css("display"), "block");
             }
 
             function isClosed() {
-                equal(root.find(".km-shim").css("visibility"), "hidden");
+                setTimeout(function() {
+                    start();
+                    equal(root.find(".km-shim").css("display"), "none");
+                });
             }
-
-            test("Is hidden by default", 1, isClosed);
 
             test("Is visible when open", function() {
                 actionSheet.open();
                 isOpen();
             });
 
-            test("Is hidden when closed", function() {
+            asyncTest("Is hidden when closed", 1, function() {
                 actionSheet.open();
                 actionSheet.close();
                 isClosed();
@@ -76,7 +77,7 @@
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
-            test("Closes on click", 2, function() {
+            asyncTest("Closes on click", 2, function() {
                 window.foo = function() {
                     ok(true);
                 };
@@ -104,7 +105,7 @@
                 root.find("#foo").trigger($.Event(kendo.support.mouseup));
             });
 
-            test("Cancel button closes the sheet", 1, function() {
+            asyncTest("Cancel button closes the sheet", 1, function() {
                 var cancel = element.find("a:contains('Cancel')");
 
                 actionSheet.open();
