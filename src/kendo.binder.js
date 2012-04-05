@@ -981,7 +981,7 @@
         }
     }
 
-    var keyValueRegExp = /\w+:(\{([^}]*)\}|[^,}]+)/g,
+    var keyValueRegExp = /[A-Za-z0-9_\-]+:(\{([^}]*)\}|[^,}]+)/g,
         whiteSpaceRegExp = /\s/g;
 
     function parseBindings(bind) {

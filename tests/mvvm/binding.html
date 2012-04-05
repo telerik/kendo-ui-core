@@ -70,6 +70,13 @@
                 equal(dom.attr("href"), "foo");
             });
 
+            test("data attribute binding", function() {
+                var dom = $('<a data-bind="attr: { data-foo:foo}"/>');
+
+                kendo.bind(dom, { foo: "foo" });
+                equal(dom.attr("data-foo"), "foo");
+            });
+
             test("binding immediate children", function() {
                 var dom = $('<span><img data-bind="attr: {alt:foo}"/></span>');
 
