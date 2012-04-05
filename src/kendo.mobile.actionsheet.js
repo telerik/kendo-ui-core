@@ -3,6 +3,7 @@
         ui = kendo.mobile.ui,
         Shim = ui.Shim,
         Widget = ui.Widget,
+        OPEN = "open",
         BUTTONS = "li>a",
         CONTEXT_DATA = "actionsheetContext",
         WRAP = '<div class="km-actionsheet-wrapper" />',
@@ -102,6 +103,18 @@
             that.shim = new Shim(that.wrapper);
         },
 
+        events: [
+            /**
+             * Fires when the ActionSheet is opened.
+             * @name kendo.mobile.ui.ActionSheet#open
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.target The invocation target of the ActionSheet.
+             * @param {jQueryObject} e.context The defined ActionSheet context.
+             */
+            OPEN
+        ],
+
         options: {
             name: "ActionSheet",
             cancel: 'Cancel'
@@ -124,6 +137,7 @@
             var that = this;
             that.target = $(target);
             that.context = context;
+            that.trigger(OPEN, { target: that.target, context: that.context });
             that.shim.show();
         },
 
@@ -141,6 +155,7 @@
             var that = this;
             that.target = target;
             that.context = target.data(CONTEXT_DATA);
+            that.trigger(OPEN, { target: that.target, context: that.context });
             that.shim.show();
         },
 

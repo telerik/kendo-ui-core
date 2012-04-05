@@ -822,6 +822,7 @@
     width: 0;
 }
 
+.km-blackberry .km-actionsheet-title,
 .km-blackberry .km-actionsheet > li:not(.km-actionsheet-cancel) > a
 {
     font-size: 1.2em;
@@ -847,6 +848,7 @@
     background: rgba(160,160,160,.7);
 }
 
+.km-blackberry .km-actionsheet-title,
 .km-blackberry li.km-actionsheet-cancel
 {
     margin: .5em -.5em -.5em;
@@ -863,4 +865,18 @@
     font-size: 1em;
     padding-left: 2.5em;
     padding-right: 2.5em;
+}
+
+.km-blackberry .km-actionsheet-title
+{
+    font-weight: bold;
+    font-size: 1.05em;
+    height: 3.6rem;
+    margin: -.5em -.5em .5em -.5em;
+    border-bottom: 1px solid #d0d0d0;
+    border-top: 0;
+    .border-radius(5px 5px 0 0);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
