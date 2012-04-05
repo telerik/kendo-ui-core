@@ -18,7 +18,6 @@
             meego: "MeeGo NokiaBrowser/8.5.0"
         },
 
-        div = $("<div/>"),
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
                '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
                '<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
@@ -34,50 +33,47 @@
         BARCOMPENSATION = 60,
 
         HREF = "href",
+        EXTERNAL = "external",
         DUMMY_HREF = "#!",
         BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
 
-        scrollTo = window.scrollTo,
         WINDOW = $(window),
         HEAD = $("head"),
         CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
-
         proxy = $.proxy;
 
-    function toDom(html) {
-        if (BODY_REGEX.test(html)) {
-            html = RegExp.$1;
-        }
-        div[0].innerHTML = html;
-        return div;
-    }
-
-    function isInternal(link) {
-        return link.data(kendo.ns + "rel") != "external";
-    }
-
     function appLinkMouseUp(e) {
-        if (e.which > 1) {
+        if (e.which > 1 || e.isDefaultPrevented()) {
             return;
         }
 
         var link = $(e.currentTarget),
+            rel = link.data(kendo.ns + "rel"),
             href = link.attr(HREF);
 
-        // Prevent iOS address bar progress display for in app navigation
-        if (!e.isDefaultPrevented() && isInternal(link)) {
-            if (href && href != DUMMY_HREF) {
-                link.attr(HREF, DUMMY_HREF);
-                setTimeout(function() { link.attr(HREF, href); });
+        if (rel === EXTERNAL) {
+            return;
+        }
+
+        if (href && href != DUMMY_HREF) {
+            // Prevent iOS address bar progress display for in app navigation
+            link.attr(HREF, DUMMY_HREF);
+            setTimeout(function() { link.attr(HREF, href); });
+
+            if (rel === "actionsheet") {
+                $(href).data("kendoMobileActionSheet").openFor(link);
+            } else {
                 history.navigate(href);
             }
-
-            e.preventDefault();
         }
+
+        e.preventDefault();
     }
 
     function appLinkClick(e) {
-        if(isInternal($(e.currentTarget))) {
+        var rel = $(e.currentTarget).data(kendo.ns + "rel");
+
+        if(rel != EXTERNAL) {
             e.preventDefault();
         }
     }
@@ -232,6 +228,37 @@
     *          }
     *      });
     * </script>
+    *
+    * @section
+    * <h3>Force platform styles</h3>
+    *
+    * <p> The <strong>Application</strong> provides a way to force a specific platform look on your application upon init by
+    * passing the OS name in the options parameter of the Application's constructor:
+    * @exampleTitle Force iOS look
+    * @example
+    * <script>
+    *      new kendo.mobile.Application($(document.body), {
+    *          platform: "ios"
+    *      });
+    * </script>
+    *
+    * Additionally, if you want to specify os version, you can pass the entire kendo.support.mobileOS object that is expected by Kendo UI Mobile.
+    * This is more complex, but allows fine grained tuning of the application look and behavior. A sample object initialization is like this:
+    * @exampleTitle Force iOS 5 look
+    * @example
+    * <script>
+    *      new kendo.mobile.Application($(document.body), {
+    *          platform: {
+    *                         device: "ipad",       // Mobile device, can be "ipad", "iphone", "ipod", "android" "fire", "blackberry", "meego"
+    *                         name: "ios",          // Mobile OS, can be "ios", "android", "blackberry", "meego"
+    *                         ios: true,            // Mobile OS name as a flag
+    *                         majorVersion: 5,      // Major OS version
+    *                         minorVersion: "0.0",  // Minor OS versions
+    *                         flatVersion: "500",   // Flat OS version for easier comparison
+    *                         appMode: false        // Whether running in browser or in AppMode/PhoneGap/Titanium.
+    *                    }
+    *      });
+    * </script>
     */
     var Application = kendo.Observable.extend(/** @lends kendo.mobile.Application.prototype */{
         /**
@@ -263,6 +290,13 @@
          * _example
          * <script>
          *      new kendo.mobile.Application($(document.body), { transition: "slide" });
+         * </script>
+         * @option {String} [platform] <> Which platform look to force on the application. Can be one of "ios", "android", "blackberry".
+         * _example
+         * <script>
+         *      new kendo.mobile.Application($(document.body), {
+         *          platform: "android"
+         *      });
          * </script>
          */
         init: function(element, options) {
@@ -385,6 +419,7 @@
             OS_NAME_CLASS = "km-" + OS_NAME;
             OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "") + (OS.appMode ? " km-app" : ""));
 
+            that.os = OS_NAME;
         },
 
         _setupLayouts: function(element) {
@@ -452,22 +487,28 @@
 
         _createRemoteView: function(url, html) {
             var that = this,
-                dom = $(toDom(html)),
-                views = dom.find(roleSelector("view")).hide(),
-                layouts = dom.find(roleSelector("layout")),
-                scriptsAndStyles = dom.find("script, style"),
-                element = views.first(),
+                container = $('<div />'),
+                views,
                 view;
 
-            element.hide().attr(attr("url"), url);
+            if (BODY_REGEX.test(html)) {
+                html = RegExp.$1;
+            }
 
-            that._setupLayouts(dom);
-            that.element.append(layouts);
-            that.element.append(scriptsAndStyles);
-            that.element.append(views);
+            container[0].innerHTML = html;
 
-            view = that._createView(element);
-            return view;
+            views = container.find(roleSelector("view")).hide();
+            view = views.first();
+
+            view.hide().attr(attr("url"), url);
+
+            that._setupLayouts(container);
+
+            that.element.append(container.find(roleSelector("layout")))
+                        .append(container.find("script, style"))
+                        .append(views);
+
+            return that._createView(view);
         },
 
         _findView: function(url, callback) {
@@ -581,7 +622,7 @@
 
             if (newHeight != element.height()) {
                 element.height(newHeight);
-                setTimeout(scrollTo, 0, 0, 1);
+                setTimeout(window.scrollTo, 0, 0, 1);
             }
         },
 

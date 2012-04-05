@@ -143,7 +143,8 @@
 .km-navbar,
 .km-button,
 .km-buttongroup,
-.km-tabstrip
+.km-tabstrip,
+.km-blackberry li.km-actionsheet-cancel > a
 {
     background-origin: border-box;
     position: relative;
@@ -1099,7 +1100,8 @@
     display: none;
 }
 
-.km-root .km-popup .k-item
+.km-root .km-popup .k-item,
+.km-actionsheet > li
 {
     list-style-type: none;
     line-height: 2em;
@@ -1108,13 +1110,20 @@
     .box-sizing(border-box);
 }
 
-.km-root .km-popup .k-list
+.km-actionsheet > li
+{
+    border-bottom: 0;
+}
+
+.km-root .km-popup .k-list,
+.km-actionsheet
 {
     padding: 0;
     margin: 0;
 }
 
-.km-root .km-popup .k-item:last-child
+.km-root .km-popup .k-item:last-child,
+.km-actionsheet > li:last-child
 {
     border: 0;
 }
@@ -1128,4 +1137,24 @@
     font-size: inherit;
     width: 1em;
     height: .9em;
+}
+
+.km-shim
+{
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+    z-index:10001;
+    .box-sizing(border-box);
+}
+
+.km-shim .k-animation-container,
+.km-actionsheet-wrapper
+{
+    width: 100%;
+    .box-shadow(none);
+    border: 0;
 }

@@ -35,7 +35,8 @@
 .km-ios .km-navbar,
 .km-ios .km-button,
 .km-ios .km-tabstrip,
-.km-ios .km-popup .k-item
+.km-ios .km-popup .k-item,
+.km-ios .km-actionsheet > li > a
 {
     background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.45) 6%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 50%, rgba(100,100,100,0));
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -763,23 +764,37 @@
     color: #fff;
 }
 
-.km-ios .km-popup .k-item
+.km-ios .km-actionsheet > li > a
 {
+    color: #000;
+    text-align: center;
+}
+
+.km-ios .km-popup .k-item,
+.km-ios .km-actionsheet > li > a
+{
+    font-size: 1.4em;
     background-color: #ddd;
-    margin: .5em 0;
-    padding: 0 0 0 .6em;
+    padding: .3em 0 .3em .6em;
     color: #000;
     border-color: #32353a;
     border-width: 3px;
     .border-radius(.6em);
     background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
                 linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.1) 50%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.2)) #fff;
-    .box-shadow(~"inset 0 1px 1px rgba(0,0,0,.5), 0 1px 1px rgba(255,255,255,.5)");
+    .box-shadow(~"inset 0 1px 1px rgba(255,255,255,.5), 0 1px 1px rgba(255,255,255,.5)");
     .box-sizing(border-box);
     background-clip: padding-box;
+    text-shadow: 0 1px #fff;
 }
 
-.km-ios .km-popup .k-item:first-child
+.km-ios .km-actionsheet > li
+{
+    margin: .5em 0;
+}
+
+.km-ios .km-popup .k-item:first-child,
+.km-ios .km-actionsheet > li:first-child
 {
     margin: 1em 0 .5em;
 }
@@ -789,18 +804,34 @@
     margin: .5em 0 1em;
 }
 
-.km-ios .km-popup .k-state-hover,
-.km-ios .km-popup .k-state-focused,
-.km-ios .km-popup .k-state-selected
+.km-ios .km-actionsheet > .km-actionsheet-cancel
 {
-    color: #fff;
-    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
-                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #263e6c;
+    margin: 1.5em 0 1em;
 }
 
-.km-ios .km-popup .k-state-hover
+.km-ios .km-actionsheet > li > a:active,
+.km-ios .km-actionsheet > li > a:hover,
+.km-ios li.km-actionsheet-cancel > a
 {
-    background-color: rgba(38,62,108,.8);
+    color: #fff;
+}
+
+.km-ios .km-popup .k-state-hover,
+.km-ios .km-popup .k-state-focused,
+.km-ios .km-popup .k-state-selected,
+.km-ios .km-actionsheet > li > a:active,
+.km-ios .km-actionsheet > li > a:hover,
+.km-ios li.km-actionsheet-cancel > a
+{
+    color: #fff;
+    text-shadow: 0 -1px rgba(0,0,0,.3);
+    background: linear-gradient(top, rgba(0,0,0,.3), rgba(0,0,0,0) 5%, rgba(0,0,0,0) 98%, rgba(70,70,70,.5)),
+                linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 50%, rgba(255,255,255,0)) #0b47a2;
+}
+
+.km-ios li.km-actionsheet-cancel > a
+{
+    background-color: rgba(0,0,0,.8);
 }
 
 .km-ios .km-popup
@@ -817,8 +848,17 @@
 {
     width: 100% !important;
     height: auto !important;
+}
+
+.km-ios .km-actionsheet
+{
     max-height: 80%;
-    background: rgba(67,73,85,.7) linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 10%, rgba(255,255,255,0) 10%, rgba(255,255,255,0));
+}
+
+.km-ios .km-actionsheet-wrapper,
+.km-ios .km-popup .k-list-container
+{
+    background: rgba(0,0,0,.7) linear-gradient(top, rgba(255,255,255,0.35), rgba(255,255,255,0.1) 10%, rgba(255,255,255,0) 10%, rgba(255,255,255,0));
     color: #fff;
     bottom: 0;
     border: 0;
@@ -841,4 +881,23 @@
 .km-ios .km-state-active input[type=checkbox]:checked
 {
     background-color: #fff;
+}
+
+.km-ios .km-actionsheet > li > a
+{
+    display: block;
+}
+
+.km-ios .km-shim .k-animation-container
+{
+    left: 0;
+    top: auto;
+    bottom: 0;
+}
+
+.km-ios .km-shim li.km-actionsheet-title
+{
+    visibility: hidden;
+    height: 0;
+    margin: .5em 0 0;
 }
