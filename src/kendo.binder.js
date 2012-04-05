@@ -4,6 +4,7 @@
         ObservableObject = kendo.data.ObservableObject,
         ObservableArray = kendo.data.ObservableArray,
         toString = {}.toString,
+        binders = {},
         Class = kendo.Class,
         innerText,
         proxy = $.proxy,
@@ -21,12 +22,11 @@
     })();
 
     var Binding = Observable.extend( {
-        init: function(root, source, path) {
+        init: function(source, path) {
             var that = this;
 
             Observable.fn.init.call(that);
 
-            that.root = root;
             that.source = source;
             that.path = path;
             that.dependencies = {};
@@ -126,11 +126,16 @@
     var EventBinding = Binding.extend( {
         get: function() {
             var source = this.source,
-                handler = source.get(this.path);
+                path = this.path,
+                handler;
 
-            if (handler === undefined) {
-                handler = this.root.get(this.path);
-                source = this.root;
+            handler = source.get(path);
+
+            while (!handler && source) {
+                source = source.parent();
+                if (source instanceof ObservableObject) {
+                    handler = source.get(path);
+                }
             }
 
             return proxy(handler, source);
@@ -138,7 +143,7 @@
     });
 
     var TemplateBinding = Binding.extend( {
-        init: function(root, source, path, template) {
+        init: function(source, path, template) {
             var that = this;
 
             Binding.fn.init.call(that, source, path);
@@ -181,8 +186,6 @@
         destroy: function() {
         }
     });
-
-    var binders = {};
 
     binders.attr = Binder.extend({
         refresh: function(key) {
@@ -379,7 +382,7 @@
                     child = clone.children[0];
                     element.insertBefore(child, reference || null);
                     if (this.bindings.template) {
-                        bindElement(child, this.bindings.source.root, items[idx]);
+                        bindElement(child, items[idx]);
                     } else {
                         bindElement(child, items[idx]);
                     }
@@ -412,7 +415,7 @@
 
                 if (element.children.length) {
                     for (idx = 0, length = source.length; idx < length; idx++) {
-                        bindElement(element.children[idx], this.bindings.source.root, source[idx]);
+                        bindElement(element.children[idx], source[idx]);
                     }
                 }
             }
@@ -716,7 +719,7 @@
             },
 
             itemChange: function(e) {
-                bindElement(e.item[0], this.bindings.source.root, e.data, e.ns || kendo.ui);
+                bindElement(e.item[0], e.data, e.ns || kendo.ui);
             },
 
             dataBinding: function() {
@@ -746,7 +749,7 @@
                     }
 
                     for (idx = 0, length = view.length; idx < length; idx++) {
-                        bindElement(items[idx], this.bindings.source.root, view[idx], ns);
+                        bindElement(items[idx], view[idx], ns);
                     }
                 }
             },
@@ -978,8 +981,8 @@
         }
     }
 
-    var keyValueRegExp = /\w+:(\{([^}]*)\}|[^,}]+)/g;
-    var whiteSpaceRegExp = /\s/g;
+    var keyValueRegExp = /\w+:(\{([^}]*)\}|[^,}]+)/g,
+        whiteSpaceRegExp = /\s/g;
 
     function parseBindings(bind) {
         var result = {},
@@ -1010,18 +1013,18 @@
         return result;
     }
 
-    function createBindings(bindings, root, source, type) {
+    function createBindings(bindings, source, type) {
         var binding,
             result = {};
 
         for (binding in bindings) {
-            result[binding] = new type(root, source, bindings[binding]);
+            result[binding] = new type(source, bindings[binding]);
         }
 
         return result;
     }
 
-    function bindElement(element, root, source, namespace) {
+    function bindElement(element, source, namespace) {
         var role = element.getAttribute("data-" + kendo.ns + "role"),
             idx,
             bind = element.getAttribute("data-" + kendo.ns + "bind"),
@@ -1053,10 +1056,10 @@
 
             target.source = source;
 
-            bindings = createBindings(bind, root, source, Binding);
+            bindings = createBindings(bind, source, Binding);
 
             if (options.template) {
-                bindings.template = new TemplateBinding(root, source, "", options.template);
+                bindings.template = new TemplateBinding(source, "", options.template);
             }
 
             if (bindings.click) {
@@ -1070,15 +1073,15 @@
             }
 
             if (bind.attr) {
-                bindings.attr = createBindings(bind.attr, root, source, Binding);
+                bindings.attr = createBindings(bind.attr, source, Binding);
             }
 
             if (bind.style) {
-                bindings.style = createBindings(bind.style, root, source, Binding);
+                bindings.style = createBindings(bind.style, source, Binding);
             }
 
             if (bind.events) {
-                bindings.events = createBindings(bind.events, root, source, EventBinding);
+                bindings.events = createBindings(bind.events, source, EventBinding);
             }
 
             target.bind(bindings);
@@ -1090,7 +1093,7 @@
 
         if (deep && children) {
             for (idx = 0; idx < children.length; idx++) {
-                bindElement(children[idx], root, source, namespace);
+                bindElement(children[idx], source, namespace);
             }
         }
     }
@@ -1102,7 +1105,7 @@
         dom = $(dom);
 
         for (idx = 0, length = dom.length; idx < length; idx++ ) {
-            bindElement(dom[idx], object, object, namespace);
+            bindElement(dom[idx], object, namespace);
         }
     }
 
