@@ -104,6 +104,7 @@
             that.layout = options.layout;
             that.application = options.application;
             that.element.data("kendoView", that).addClass("km-view");
+            that.transition = element.data(kendo.ns + "transition");
 
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
@@ -216,6 +217,7 @@
                 current: this,
                 next: view,
                 transition: transition,
+                defaultTransition: this.application.options.transition,
                 complete: complete
             });
         },
@@ -293,35 +295,27 @@
 
             if (!that.back()) {
                 current.nextView = next;
+                current.backTransition = transition.transition;
             }
         },
 
-        _transition: function(options) {
+        _transition: function() {
             var that = this,
                 current = that.current,
                 next = that.next,
                 back = that.back(),
-                transition = that.transition,
-                viewTransition = (back ? current : next).element.data(kendo.ns + "transition"),
                 complete = function() {
                     current.hideComplete();
                     that.complete();
                 },
-                animationData,
-                animationType,
-                parallax,
-                reverse;
+                viewTransition = back ? next.backTransition : next.transition,
+                transition = that.transition || viewTransition || that.defaultTransition,
+                animationData = transition.split(' '),
+                animationType = animationData[0],
+                parallax = animationType === "slide",
+                reverse = animationData[1] === "reverse";
 
-            if (typeof viewTransition !== "undefined") {
-                transition = viewTransition;
-            }
-
-            animationData = transition.split(' ');
-            animationType = animationData[0];
-            parallax = animationType === "slide";
-            reverse = animationData[1] === "reverse";
-
-            if (that.back()) {
+            if (that.back() && !that.transition) {
                 reverse = !reverse;
             }
 
@@ -329,7 +323,8 @@
                 effects: animationType,
                 reverse: reverse,
                 parallax: parallax,
-                complete: complete
+                complete: complete,
+                transition: transition
             };
         },
 
