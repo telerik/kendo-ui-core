@@ -371,7 +371,7 @@
 
                 ds.bind("change", firstAssert);
             });
-/*
+
             test("ListView hides the load button on click", 4, function() {
                 var dom = $("<ul/>");
 
@@ -392,7 +392,31 @@
                 equal(icon.css("display"), "");
 
             });
-            */
+
+            asyncTest("ListView shows load button on dataSource change", 2, function() {
+                var dom = $("<ul/>");
+
+                var listView = new ListView(dom, {
+                    dataSource: {
+                        data: [1, 2],
+                        pageSize: 1
+                    },
+                    loadMore: true
+                });
+
+                var button = dom.parent().find(".km-load"),
+                    icon = dom.parent().find(".km-icon");
+
+                listView.bind("dataBound", function() {
+                    start();
+                    console.log("called");
+
+                    equal(button.css("display"), "");
+                    equal(icon.css("display"), "none");
+                });
+
+                button.click();
+            });
         </script>
     </body>
 </html>
