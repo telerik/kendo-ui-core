@@ -1,4 +1,4 @@
-<div data-role="view" id="flat" data-init="mobileListViewPressToLoadMore" data-title="Press to load more">
+<div data-role="view" id="flat" data-init="mobileListViewPressToLoadMore" data-title="Twitter">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -23,7 +23,7 @@
 <script>
     function mobileListViewPressToLoadMore() {
             var dataSource = new kendo.data.DataSource({
-                pageSize: 15,
+                pageSize: 3,
                 serverPaging: true,
                 transport: {
                     read: {
@@ -33,7 +33,7 @@
                     parameterMap: function(options) {
                         var parameters = {
                             q: "javascript", //additional parameters sent to the remote service
-                            rrp: options.pageSize,
+                            rpp: options.pageSize,
                             page: options.page //next page
                         }
 
