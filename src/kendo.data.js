@@ -1959,6 +1959,40 @@
             }, options));
         },
 
+        next: function() {
+            var that = this,
+                page = that.page(),
+                total = that.total();
+
+            if (!page) {
+                return;
+            }
+
+            if (total) {
+                that.page(page + 1);
+            } else {
+                that._skip = page * that.take();
+                that._query({ page: page + 1 });
+            }
+        },
+
+        prev: function() {
+            var that = this,
+                page = that.page(),
+                total = that.total();
+
+            if (!page || page === 1) {
+                return;
+            }
+
+            if (total) {
+                that.page(page - 1);
+            } else {
+                that._skip = that._skip - that.take();
+                that._query({ page: page - 1});
+            }
+        },
+
         page: function(val) {
             var that = this,
             skip;
