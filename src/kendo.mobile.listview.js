@@ -360,7 +360,8 @@
         },
 
         _dataSource: function() {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler)
@@ -369,10 +370,10 @@
                 that._refreshHandler = proxy(that.refresh, that);
             }
 
-            that.dataSource = DataSource.create(that.options.dataSource)
+            that.dataSource = DataSource.create(options.dataSource)
                                         .bind("change", that._refreshHandler);
 
-            if (that._showLoadingProxy && !that.options.pullToRefresh) {
+            if (that._showLoadingProxy && !options.pullToRefresh && !options.loadMore) {
                 that.dataSource.bind(REQUEST_START, that._showLoadingProxy);
             }
         },
@@ -387,7 +388,7 @@
             that._hideLoadingProxy = proxy(application.hideLoading, application);
             that._showLoadingProxy = proxy(application.showLoading, application);
 
-            if (!options.pullToRefresh) {
+            if (!options.pullToRefresh && !options.loadMore) {
                 dataSource.bind(REQUEST_START, that._showLoadingProxy);
             }
 
