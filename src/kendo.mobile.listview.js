@@ -449,6 +449,7 @@
 
             if (that._pressed) {
                 that._pressed = false;
+                that._toggleButton(true);
                 appendMethod = "append";
             }
 
@@ -566,18 +567,26 @@
 
             if (options.loadMore) {
                 wrapper.append('<span class="km-load-more">\
-                                <span class="km-icon km-refresh"></span>\
+                                <span style="display:none" class="km-icon km-refresh"></span>\
                                 <button class="km-load">' +
                                           options.loadMoreText +
                                 '</button></span>');
-                wrapper
-                    .children(".km-load-more")
-                    .children(".km-load")
-                    .click(function() {
-                       that._pressed = true;
-                       that.dataSource.next();
-                    });
+                that._loadButton = wrapper
+                                    .children(".km-load-more")
+                                    .children(".km-load")
+                                    .click(function() {
+                                       that._pressed = true;
+                                       that._toggleButton(false);
+                                       that.dataSource.next();
+                                    });
+
+                that._loadIcon = that._loadButton.prev();
             }
+        },
+
+        _toggleButton: function(toggle) {
+            this._loadButton.toggle(toggle);
+            this._loadIcon.toggle(!toggle);
         }
     });
 
