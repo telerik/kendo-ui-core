@@ -261,6 +261,8 @@
         * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
         * @option {String}  [releaseTemplate] <"Release to refresh"> The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
         * @option {String}  [refreshTemplate] <"Refreshing"> The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
+        * @option {Boolean} [loadMore] <false> If set to true, the listview will render button on the end of listview, which appends next page of data.
+        * @option {String}  [loadMoreText] <"Press to load more"> The text of the button rendered on the end of the listview.
         */
         init: function(element, options) {
             var that = this;
@@ -274,6 +276,11 @@
                 .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
                 .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
+            that.element.wrap(WRAPPER);
+            that.wrapper = that.element.parent();
+
+            that._loadMore();
+
             that._dataSource();
 
             if (options.dataSource) {
@@ -282,8 +289,6 @@
                 that._style();
             }
 
-            that.element.wrap(WRAPPER);
-            that.wrapper = that.element.parent();
             kendo.notify(that, ui);
         },
 
@@ -334,6 +339,8 @@
             name: "ListView",
             type: "flat",
             template: "${data}",
+            loadMore: false,
+            loadMoreText: "Press to load more",
             pullToRefresh: false,
             appendOnRefresh: false,
             pullTemplate: "Pull to refresh",
@@ -355,7 +362,8 @@
         },
 
         _dataSource: function() {
-            var that = this;
+            var that = this,
+                options = that.options;
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler)
@@ -364,10 +372,10 @@
                 that._refreshHandler = proxy(that.refresh, that);
             }
 
-            that.dataSource = DataSource.create(that.options.dataSource)
+            that.dataSource = DataSource.create(options.dataSource)
                                         .bind("change", that._refreshHandler);
 
-            if (that._showLoadingProxy && !that.options.pullToRefresh) {
+            if (that._showLoadingProxy && !options.pullToRefresh && !options.loadMore) {
                 that.dataSource.bind(REQUEST_START, that._showLoadingProxy);
             }
         },
@@ -382,7 +390,7 @@
             that._hideLoadingProxy = proxy(application.hideLoading, application);
             that._showLoadingProxy = proxy(application.showLoading, application);
 
-            if (!options.pullToRefresh) {
+            if (!options.pullToRefresh && !options.loadMore) {
                 dataSource.bind(REQUEST_START, that._showLoadingProxy);
             }
 
@@ -409,13 +417,14 @@
             e = e || {};
 
             var that = this,
-                dataSource = that.dataSource,
                 element = that.element,
-                appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
+                options = that.options,
+                dataSource = that.dataSource,
+                view = dataSource.view(),
+                appendMethod = "html",
                 contents,
                 data,
-                item,
-                view = dataSource.view();
+                item;
 
             if (e.action === "itemchange") {
                 data = e.items[0];
@@ -436,10 +445,17 @@
             that.trigger("dataBinding");
 
             if (dataSource.group()[0]) {
-                that.options.type = "group";
+                options.type = "group";
                 contents = kendo.render(that.groupTemplate, view);
             } else {
                 contents = kendo.render(that.template, view);
+            }
+
+            if (options.loadMore && !that._loadButton.is(":visible")) {
+                appendMethod = "append";
+                that._toggleButton(true);
+            } else if (options.appendOnRefresh) {
+                appendMethod = "prepend";
             }
 
             element[appendMethod](contents);
@@ -547,6 +563,30 @@
             that.items().find(">label").each(enhanceCheckBoxItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
+        },
+
+        _loadMore: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                options = that.options;
+
+            if (options.loadMore) {
+                wrapper.append('<span class="km-load-more"><span style="display:none" class="km-icon km-refresh"></span><button class="km-load">' + options.loadMoreText + '</button></span>');
+                that._loadButton = wrapper
+                                    .children(".km-load-more")
+                                    .children(".km-load")
+                                    .click(function() {
+                                       that._toggleButton(false);
+                                       that.dataSource.next();
+                                    });
+
+                that._loadIcon = that._loadButton.prev();
+            }
+        },
+
+        _toggleButton: function(toggle) {
+            this._loadButton.toggle(toggle);
+            this._loadIcon.toggle(!toggle);
         }
     });
 

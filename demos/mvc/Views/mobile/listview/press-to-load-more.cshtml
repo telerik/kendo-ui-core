@@ -1,4 +1,4 @@
-<div data-role="view" id="flat" data-init="mobileListViewPullToRefresh" data-title="Pull to refresh">
+<div data-role="view" id="flat" data-init="mobileListViewPressToLoadMore" data-title="Press to load more">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -6,10 +6,10 @@
         </div>
     </header>
 
-    <ul id="pull-to-refresh-listview"></ul>
+    <ul id="load-more"></ul>
 </div>
 
-<script id="pull-to-refresh-template" type="text/x-kendo-template">
+<script id="load-more-template" type="text/x-kendo-template">
     <div class="tweet">
         <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
         <div class="metadata">
@@ -21,9 +21,9 @@
 </script>
 
 <script>
-    function mobileListViewPullToRefresh() {
-            var lastID;
+    function mobileListViewPressToLoadMore() {
             var dataSource = new kendo.data.DataSource({
+                pageSize: 15,
                 serverPaging: true,
                 transport: {
                     read: {
@@ -31,20 +31,13 @@
                         dataType: "jsonp" // JSONP (JSON with padding) is required for cross-domain AJAX
                     },
                     parameterMap: function(options) {
-                        var page = options.page;
                         var parameters = {
-                            q: "javascript",
-                            since_id: lastID //additional parameters sent to the remote service
+                            q: "javascript", //additional parameters sent to the remote service
+                            rrp: options.pageSize,
+                            page: options.page //next page
                         }
 
                         return parameters;
-                    }
-                },
-                change: function() {
-                    var item = this.view()[0];
-
-                    if (item) {
-                        lastID = item.id_str;
                     }
                 },
                 schema: { // describe the result format
@@ -52,11 +45,10 @@
                 }
             });
 
-        $("#pull-to-refresh-listview").kendoMobileListView({
+        $("#load-more").kendoMobileListView({
             dataSource: dataSource,
-            pullToRefresh: true,
-            appendOnRefresh: true,
-            template: $("#pull-to-refresh-template").text()
+            template: $("#load-more-template").text(),
+            loadMore: true
         });
     }
 </script>

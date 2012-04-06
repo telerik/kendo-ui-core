@@ -226,6 +226,182 @@
                 stop(1);
             });
 
+            test("next method gets the subsequent page", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.next();
+
+                var view = dataSource.view();
+
+                equal(view.length, 1);
+                equal(view[0], 2);
+                equal(dataSource.page(), 2);
+            });
+
+            test("next method does nothing if no subsequent page", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.page(3);
+
+                dataSource.next();
+
+                var view = dataSource.view();
+
+                equal(view.length, 1);
+                equal(view[0], 3);
+                equal(dataSource.page(), 3);
+            });
+
+            test("next method gets the subsequent page from server", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.page, 2);
+
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverPaging: true,
+                    pageSize: 1
+                });
+
+                dataSource.next();
+            });
+
+            test("next method does nothing if pageSize is not defined (remote transport)", 0, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        ok(false)
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverPaging: true
+                });
+
+                dataSource.next();
+            });
+
+            test("next method does nothing (local transport)", 1, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3]
+                });
+
+                dataSource.next();
+
+                equal(dataSource.view().length, 0);
+            });
+
+            test("prev method gets the previous page", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.page(3);
+                dataSource.prev();
+
+                var view = dataSource.view();
+
+                equal(view.length, 1);
+                equal(view[0], 2);
+                equal(dataSource.page(), 2);
+            });
+
+            test("prev method does nothing if no previous page", function() {
+                var dataSource = new DataSource({
+                    data: [1,2,3],
+                    pageSize: 1
+                });
+
+                dataSource.read();
+                dataSource.prev();
+
+                var view = dataSource.view();
+
+                equal(view.length, 1);
+                equal(view[0], 1);
+                equal(dataSource.page(), 1);
+            });
+
+            test("prev method gets the previous page from server", 1, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        equal(options.page, 1);
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverPaging: true,
+                    pageSize: 1
+                });
+                dataSource._skip = 1; //fake current page (zero based)
+
+                dataSource.prev();
+            });
+
+            test("prev method does nothing if pageSize is not defined (remote transport)", 0, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        ok(false)
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverPaging: true
+                });
+
+                dataSource.prev();
+            });
+
+            test("prev method does nothing (local transport)", 1, function() {
+                var dataSource = new DataSource( {
+                    data: [1, 2, 3]
+                });
+
+                dataSource.prev();
+
+                equal(dataSource.view().length, 0);
+            });
+
+            test("prev does not page if no previous page (remote transport)", 0, function() {
+                var transport = new RemoteTransport({
+                    read: "foo",
+                    parameterMap: function(options) {
+                        ok(false)
+                        return options;
+                    }
+                });
+
+                var dataSource = new DataSource( {
+                    transport: transport,
+                    serverPaging: true,
+                    pageSize: 1
+                });
+
+                dataSource.prev();
+            });
+
             test("page should page and persist settings applied through the constructor", function(){
                 var dataSource = new DataSource({
                     data: [{ age: 1 }, { age: 2 }, { age: 3}],
