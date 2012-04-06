@@ -261,6 +261,8 @@
         * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
         * @option {String}  [releaseTemplate] <"Release to refresh"> The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
         * @option {String}  [refreshTemplate] <"Refreshing"> The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
+        * @option {Boolean} [loadMore] <false> If set to true, the listview will render button on the end of listview, which appends next page of data.
+        * @option {String}  [loadMoreText] <"Press to load more"> The text of the button rendered on the end of the listview.
         */
         init: function(element, options) {
             var that = this;
