@@ -395,6 +395,22 @@
                 });
             })();
 
+            (function() {
+                var pin;
+
+                module("Pin", {
+                    setup: function() {
+                        pin = new dataviz.Pin({
+                            origin: new Point2D(100, 200)
+                        });
+                    }
+                });
+
+                test("constructor sets origin", function() {
+                    same([pin.origin.x, pin.origin.y], [100, 200]);
+                });
+            })();
+
             // ------------------------------------------------------------
             var Color = dataviz.Color;
 

@@ -178,6 +178,12 @@
             );
         },
 
+        createPin: function(pin, options) {
+            return this.decorate(
+                new SVGPin(pin, options)
+            );
+        },
+
         createGradient: function(options) {
             if (options.type === RADIAL) {
                 return new SVGRadialGradient(options);
@@ -441,6 +447,63 @@
                 cy: center.y,
                 firstInnerPoint: firstInnerPoint,
                 secondInnerPoint: secondInnerPoint
+            });
+        }
+    });
+
+    var SVGPin = SVGPath.extend({
+        init: function(config, options) {
+            var pin = this;
+
+            SVGPath.fn.init.call(pin, options);
+
+            pin.pathTemplate = SVGPin.pathTemplate;
+            if (!pin.pathTemplate) {
+                pin.pathTemplate = SVGPin.pathTemplate = renderTemplate(
+                    "M #= d.origin.x # #= d.origin.y # " +
+                    "#= d.as.x # #= d.as.y # " +
+                    "A#= d.r # #= d.r # " +
+                    "0 #= d.isReflexAngle ? '1' : '0' #,0 " +
+                    "#= d.ae.x # #= d.ae.y # " +
+                    "z"
+                );
+            }
+
+            pin.config = config || new dataviz.Pin();
+        },
+
+        renderPoints: function() {
+            var pin = this,
+                config = pin.config,
+                r = config.radius,
+                degrees = math.PI / 180,
+                arcAngle = config.arcAngle,
+                halfChordLength = r * math.sin(arcAngle * degrees / 2),
+                height = config.height - r * (1 - math.cos(arcAngle * degrees / 2)),
+                origin = config.origin,
+                arcStart = { x: origin.x + halfChordLength, y: origin.y - height },
+                arcEnd = { x: origin.x - halfChordLength, y: origin.y - height },
+                rotate = function(point, inclinedPoint) {
+                    var rotation = pin.options.rotation,
+                        inclination = config.rotation;
+
+                    point = rotatePoint(point.x, point.y, rotation[1], rotation[2], -rotation[0]);
+
+                    if (inclinedPoint) {
+                        point = rotatePoint(point.x, point.y, origin.x, origin.y, inclination);
+                    }
+
+                    return point;
+                };
+
+            origin = rotate(origin);
+
+            return pin.pathTemplate({
+                origin: origin,
+                as: rotate(arcStart, true),
+                ae: rotate(arcEnd, true),
+                r: r,
+                isReflexAngle: arcAngle > 180
             });
         }
     });
