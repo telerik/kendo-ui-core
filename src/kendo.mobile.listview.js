@@ -571,7 +571,7 @@
                 options = that.options;
 
             if (options.loadMore) {
-                wrapper.append('<span class="km-load-more"><span style="display:none" class="km-icon km-refresh"></span><button class="km-load">' + options.loadMoreText + '</button></span>');
+                wrapper.append('<span class="km-load-more"><span style="display:none" class="km-icon"></span><button class="km-load km-button">' + options.loadMoreText + '</button></span>');
                 that._loadButton = wrapper
                                     .children(".km-load-more")
                                     .children(".km-load")
