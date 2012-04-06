@@ -881,8 +881,13 @@
                     equals(label.children[0].content, VALUE);
                 });
 
-                test("applies label format", function() {
+                test("applies full label format", function() {
                     createPoint({ labels: { visible: true, format: "{0}%" }});
+                    equals(label.children[0].content, VALUE + "%");
+                });
+
+                test("applies simple label format", function() {
+                    createPoint({ labels: { visible: true, format: "p0" }});
                     equals(label.children[0].content, VALUE + "%");
                 });
 

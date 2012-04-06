@@ -723,10 +723,6 @@
             BoxElement.fn.init.call(textBox, options);
             options = textBox.options;
 
-            if (!options.template) {
-                content = options.format ? format(options.format, content) : content;
-            }
-
             text = new Text(content, deepExtend({ }, options, { align: LEFT, vAlign: TOP }));
             textBox.append(text);
 

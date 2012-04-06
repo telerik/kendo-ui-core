@@ -795,11 +795,25 @@
                     });
                 });
 
-                test("format", 1, function() {
+                test("creates labels with full format", 1, function() {
                     setupBarChart(plotArea, { series: [{
                         data: positiveData,
                         labels: {
                             format: "{0:C}",
+                            visible: true
+                        }
+                    }] });
+
+                    same($.map(series.points, function(bar) {
+                        return bar.children[0].children[0].children[0].content }
+                    ), ["$100.00", "$150.00"]);
+                });
+
+                test("creates labels with simple format", 1, function() {
+                    setupBarChart(plotArea, { series: [{
+                        data: positiveData,
+                        labels: {
+                            format: "C",
                             visible: true
                         }
                     }] });

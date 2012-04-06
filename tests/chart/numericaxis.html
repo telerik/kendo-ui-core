@@ -354,8 +354,17 @@
                     equals(view.log.text[0].style.rotation, 42.5);
                 });
 
-                test("creates labels with format", 1, function() {
+                test("creates labels with full format", 1, function() {
                     numericAxis = new dataviz.NumericAxis(0, 1, { labels: { format: "{0:C}"} });
+                    numericAxis.reflow(chartBox);
+                    numericAxis.getViewElements(view);
+
+                    same($.map(view.log.text, function(text) { return text.content }),
+                         ["$0.00", "$0.20", "$0.40", "$0.60", "$0.80", "$1.00", "$1.20"]);
+                });
+
+                test("creates labels with simple format", 1, function() {
+                    numericAxis = new dataviz.NumericAxis(0, 1, { labels: { format: "C"} });
                     numericAxis.reflow(chartBox);
                     numericAxis.getViewElements(view);
 
