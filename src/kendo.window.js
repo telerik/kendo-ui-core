@@ -43,7 +43,7 @@
      * </p>
      * <ul>
      *  <li>Minimum height/width</li>
-     *  <li>Available user actions (close/refresh/maximize/minimize)</li>
+     *  <li>Available user actions (close/refresh/maximize/minimize) and ability to define custom ones</li>
      *  <li>Title</li>
      *  <li>Draggable and resizable behaviors</li>
      * </ul>
@@ -51,7 +51,7 @@
      * @exampleTitle Create a modal Window with all user actions enabled
      * @example
      * $("#window").kendoWindow({
-     *     actions: ["Refresh", "Maximize", "Minimize", "Close"],
+     *     actions: ["Custom", "Refresh", "Maximize", "Minimize", "Close"],
      *     draggable: false,
      *     height: "300px",
      *     modal: true,
@@ -67,6 +67,20 @@
      *  <strong>Window</strong> to fill the screen and as a button to restore a <strong>Window</strong> to its previous
      *  size. The minimize action collapses a <strong>Window</strong> to its title.
      * </p>
+     * <p>If a non-recognized action name is supplied, it is treated as a custom action - <strong>k-icon</strong> and <strong>k-actionname</strong>
+     * CSS classes are rendered for it and no click event handler is attached automatically. The Kendo stylesheets have a supplied icon for
+     * actions with the name "Custom", but any name can be used. Click events can be captured and handled in a standard way:</p>
+     *
+     * @exampleTitle Custom actions
+     * @example
+     *   $("#window").kendoWindow({
+     *       actions: ["Custom", "Minimize", "Maximize", "Close"],
+     *       title: "Window Title"
+     *   }).data("kendoWindow").wrapper.find(".k-custom").click(function(e) {
+     *       alert("Custom action button clicked");
+     *       e.preventDefault();
+     *   });
+     *
      * <h3>Positioning and Opening a Window</h3>
      * <p>
      *  In some scenarios, it is preferable to center a <strong>Window</strong> rather than open it near the HTML
@@ -77,9 +91,9 @@
      *
      * @exampleTitle Centering a Window and opening on button click
      * @example
-     * <p id="window">
+     * <div id="window">
      *     Content of the Window
-     * </p>
+     * </div>
      * <button id="openButton">Open Window</button>
      *
      * @exampleTitle Initialize Window, center, and configure button click action
