@@ -115,6 +115,7 @@
         MOUSE_UP = touch ? "touchend" : "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
+        CLICK = "click",
         MOUSE_OVER = "mouseover",
         DRAG_HANDLE = ".k-draghandle",
         TRACK_SELECTOR = ".k-slider-track",
@@ -513,8 +514,8 @@
         var dragHandleCount = element.is("input") ? 1 : 2;
 
         return "<div class='k-slider-track'><div class='k-slider-selection'><!-- --></div>" +
-               "<a href='javascript:void(0)' class='k-draghandle' title='Drag'>Drag</a>" +
-               (dragHandleCount > 1 ? "<a href='javascript:void(0)' class='k-draghandle' title='Drag'>Drag</a>" : "") +
+               "<a href='#' class='k-draghandle' title='Drag'>Drag</a>" +
+               (dragHandleCount > 1 ? "<a href='#' class='k-draghandle' title='Drag'>Drag</a>" : "") +
                "</div>";
     }
 
@@ -696,14 +697,15 @@
             that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
-                if ($(e.target).hasClass("k-draghandle")) {
-                    $(e.target).addClass(STATE_SELECTED);
-                    return;
-                }
-
                 var location = kendo.touchLocation(e),
                     mousePosition = that._isHorizontal ? location.x : location.y,
-                    dragableArea = that._getDragableArea();
+                    dragableArea = that._getDragableArea(),
+                    target = $(e.target);
+
+                if (target.hasClass("k-draghandle")) {
+                    target.addClass(STATE_SELECTED);
+                    return;
+                }
 
                 that._update(that._getValueFromPosition(mousePosition, dragableArea));
 
@@ -715,9 +717,14 @@
                 .end()
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
-            that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
-                $(e.target).removeClass(STATE_SELECTED);
-            });
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .bind(MOUSE_UP, function (e) {
+                    $(e.target).removeClass(STATE_SELECTED);
+                })
+                .bind(CLICK, function (e) {
+                    e.preventDefault();
+                });
 
             move = proxy(function (sign) {
                 that._setValueInRange(that._nextValueByIndex(that._valueIndex + (sign * 1)));
@@ -804,6 +811,7 @@
                 .find(DRAG_HANDLE)
                 .unbind(MOUSE_UP)
                 .unbind(KEY_DOWN)
+                .unbind(CLICK)
                 .bind(KEY_DOWN, false);
 
             that.options.enabled = false;
@@ -1318,15 +1326,16 @@
             that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
-                if ($(e.target).hasClass("k-draghandle")) {
-                    $(e.target).addClass(STATE_SELECTED);
-                    return;
-                }
-
                 var location = kendo.touchLocation(e),
                     mousePosition = that._isHorizontal ? location.x : location.y,
                     dragableArea = that._getDragableArea(),
-                    val = that._getValueFromPosition(mousePosition, dragableArea);
+                    val = that._getValueFromPosition(mousePosition, dragableArea),
+                    target = $(e.target);
+
+                if (target.hasClass("k-draghandle")) {
+                    target.addClass(STATE_SELECTED);
+                    return;
+                }
 
                 if (val < options.selectionStart) {
                     that._setValueInRange(val, options.selectionEnd);
@@ -1350,9 +1359,14 @@
                 .end()
                 .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
 
-            that.wrapper.find(DRAG_HANDLE).bind(MOUSE_UP, function (e) {
-                $(e.target).removeClass(STATE_SELECTED);
-            });
+            that.wrapper
+                .find(DRAG_HANDLE)
+                .bind(MOUSE_UP, function (e) {
+                    $(e.target).removeClass(STATE_SELECTED);
+                })
+                .bind(CLICK, function (e) {
+                    e.preventDefault();
+                });
 
             that.wrapper.find(DRAG_HANDLE)
                 .eq(0).bind(KEY_DOWN,
@@ -1397,6 +1411,7 @@
                 .find(DRAG_HANDLE)
                 .unbind(MOUSE_UP)
                 .unbind(KEY_DOWN)
+                .unbind(CLICK)
                 .bind(KEY_DOWN, false);
 
             that.options.enabled = false;
