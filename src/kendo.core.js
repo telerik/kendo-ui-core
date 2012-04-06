@@ -172,9 +172,9 @@
      * @example
      * Hello, John Doe!
      *
-     * @exampleTitle Encoding HTML
+     * @exampleTitle Encode HTML
      * @example
-     * var encodingTemplate = kendo.template("HTML tags are encoded as follows: ${ html }");
+     * var encodingTemplate = kendo.template("HTML tags are encoded as follows: #:html#");
      * var encodingData = { html: "<strong>lorem ipsum</strong>" };
      * $("#encoding").html(encodingTemplate(encodingData));
      *
@@ -182,6 +182,25 @@
      * @example
      * HTML tags are encoded as follows: <strong>lorem ipsum</strong>
      *
+     * @exampleTitle Use javascript in templates
+     * @example
+     * var encodingTemplate = kendo.template("#if (foo) {# bar #}#");
+     * var data = { foo: true};
+     * $("#encoding").html(encodingTemplate(data)); // outputs bar
+     *
+     * @exampleTitle Escape sharp symbols in JavaScript strings
+     * @example
+     * var encodingTemplate = kendo.template("<a href='\\#'>Link</a>");
+     *
+     * @exampleTitle Escape sharp symbols in script templates
+     * @example
+     * <script type="text/x-kendo-template" id="template">
+     *  <a href="\#">Link</a>
+     * </script>
+     *
+     * <script>
+     * var encodingTemplate = kendo.template($("#template").text());
+     * </script>
      */
 
      function compilePart(part, stringPart) {
