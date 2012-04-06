@@ -261,8 +261,8 @@
         * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
         * @option {String}  [releaseTemplate] <"Release to refresh"> The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
         * @option {String}  [refreshTemplate] <"Refreshing"> The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
-        * @option {Boolean} [loadMore] <false> If set to true, the listview will render button on the end of listview, which appends next page of data.
-        * @option {String}  [loadMoreText] <"Press to load more"> The text of the button rendered on the end of the listview.
+        * @option {Boolean} [loadMore] <false> If set to true, the listview renders a button on the end, which appends the newly loaded data.
+        * @option {String}  [loadMoreText] <"Press to load more"> The text of the "load more" button.
         */
         init: function(element, options) {
             var that = this;
@@ -342,6 +342,7 @@
             loadMore: false,
             loadMoreText: "Press to load more",
             pullToRefresh: false,
+            endlessScroll: false,
             appendOnRefresh: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
@@ -403,6 +404,24 @@
                     refreshTemplate: options.refreshTemplate
                 });
             }
+
+            if (options.endlessScroll) {
+                that.scroller.bind("scroll", function(e) {
+
+                    if (!that.loading &&
+                        (e.scrollTop + that.scroller.element.height()) > that.scroller.scrollHeight() * 0.9) {
+
+                        that.loading = true;
+
+                        that._toggleIcon(true);
+                        dataSource.next();
+
+                        console.log("page");
+                        console.log("scrolled", e.scrollTop + that.scroller.element.height());
+                        console.log("limit", that.scroller.scrollHeight() * 0.9);
+                    }
+                });
+            }
         },
 
         /**
@@ -451,9 +470,18 @@
                 contents = kendo.render(that.template, view);
             }
 
-            if (options.loadMore && !that._loadButton.is(":visible")) {
+            if ((options.loadMore || options.endlessScroll) && that._loadIcon.is(":visible")) {
                 appendMethod = "append";
-                that._toggleButton(true);
+
+                that.loading = false;
+                console.log("end of page");
+
+                if (options.loadMore) {
+                    that._toggleButton(true);
+                } else {
+                    that._toggleIcon(false);
+                }
+
             } else if (options.appendOnRefresh) {
                 appendMethod = "prepend";
             }
@@ -567,32 +595,39 @@
 
         _loadMore: function() {
             var that = this,
-                wrapper = that.wrapper,
-                options = that.options;
+                options = that.options,
+                loadWrapper;
 
-            if (options.loadMore) {
-                wrapper.append('<span class="km-load-more"><span style="display:none" class="km-icon"></span><button class="km-load km-button">' + options.loadMoreText + '</button></span>');
-                that._loadButton = wrapper
-                                    .children(".km-load-more")
-                                    .children(".km-load")
-                                    .click(function() {
-                                       that._toggleButton(false);
-                                       that.dataSource.next();
-                                    });
+            if (options.loadMore || options.endlessScroll) {
+                that._loadIcon = $('<span style="display:none" class="km-icon"></span>');
+                loadWrapper = $('<span class="km-load-more"></span>').append(that._loadIcon);
 
-                that._loadIcon = that._loadButton.prev();
+                if (options.loadMore) {
+                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
+                                        .click(function() {
+                                           that._toggleButton(false);
+                                           that.dataSource.next();
+                                        });
+
+                    loadWrapper.append(that._loadButton);
+                }
+
+                that.wrapper.append(loadWrapper);
             }
         },
 
         _toggleButton: function(toggle) {
+            this._loadButton.toggle(toggle);
+            this._toggleIcon(!toggle);
+        },
+
+        _toggleIcon: function(toggle) {
             var icon = this._loadIcon;
 
-            this._loadButton.toggle(toggle);
-
             if (toggle) {
-                icon.hide();
-            } else {
                 icon.css("display", "block");
+            } else {
+                icon.hide();
             }
         }
     });

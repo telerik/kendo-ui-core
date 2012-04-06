@@ -193,8 +193,6 @@
     * <ul>
     * <li><strong>scrollTop</strong> - the number of pixels that are hidden from view above the scrollable area.</li>
     * <li><strong>scrollLeft</strong> - the number of pixels that are hidden from view to the left of the scrollable area.</li>
-    * <li><strong>scrollWidth</strong> - the width in pixels of the scroller content.</li>
-    * <li><strong>scrollHeight</strong> - the height in pixels of the scroller content.</li>
     * </ul>
     *
     */
@@ -252,11 +250,10 @@
             movable.bind(CHANGE, function() {
                 that.scrollTop = - movable.y;
                 that.scrollLeft = - movable.x;
+
                 that.trigger(SCROLL, {
                     scrollTop: that.scrollTop,
-                    scrollLeft: that.scrollLeft,
-                    scrollWidth: that.scrollWidth,
-                    scrollHeight: that.scrollHeight
+                    scrollLeft: that.scrollLeft
                 });
             });
 
@@ -278,6 +275,20 @@
             if (that.options.pullToRefresh) {
                 that._initPullToRefresh();
             }
+        },
+
+        /**
+         * Returns the height in pixels of the scroller content.
+         */
+        scrollHeight: function() {
+            return this.scrollElement[0].scrollHeight;
+        },
+
+        /**
+         * Returns the width in pixels of the scroller content.
+         */
+        scrollWidth: function() {
+            return this.scrollElement[0].scrollWidth;
         },
 
         options: {
@@ -304,8 +315,6 @@
              * @param {Event} e
              * @param {Number} e.scrollTop The number of pixels that are hidden from view above the scrollable area.
              * @param {Number} e.scrollLeft The number of pixels that are hidden from view to the left of the scrollable area.
-             * @param {Number} e.scrollWidth The width in pixels of the scroller content.
-             * @param {Number} e.scrollHeight The height in pixels of the scroller content.
              */
             SCROLL
         ],
@@ -405,10 +414,6 @@
             });
 
             that[axis + "inertia"] = inertia;
-
-            dimension.bind(CHANGE, function() {
-                that[dimension.scrollSize] = dimension.total;
-            });
 
             that.pane[axis].bind(CHANGE, function() {
                 scrollBar.show();

@@ -23,7 +23,7 @@
 <script>
     function mobileListViewPressToLoadMore() {
             var dataSource = new kendo.data.DataSource({
-                pageSize: 3,
+                pageSize: 15,
                 serverPaging: true,
                 transport: {
                     read: {
@@ -48,7 +48,8 @@
         $("#load-more").kendoMobileListView({
             dataSource: dataSource,
             template: $("#load-more-template").text(),
-            loadMore: true
+            loadMore: true,
+            endlessScroll: true
         });
     }
 </script>
