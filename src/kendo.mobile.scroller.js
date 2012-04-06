@@ -19,7 +19,8 @@
         RELEASECLASS = "km-scroller-release",
         REFRESHCLASS = "km-scroller-refresh",
         PULL = "pull",
-        CHANGE = "change";
+        CHANGE = "change",
+        SCROLL = "scroll";
 
     var DragInertia = Animation.extend({
         init: function(options) {
@@ -187,6 +188,15 @@
     * var listView = $("#scroller").kendoMobileScroller();
     * </script>
     *
+    * @section
+    * <p>The scroller exposes the following fields:</p>
+    * <ul>
+    * <li><strong>scrollTop</strong> - the number of pixels that are hidden from view above the scrollable area.</li>
+    * <li><strong>scrollLeft</strong> - the number of pixels that are hidden from view to the left of the scrollable area.</li>
+    * <li><strong>scrollWidth</strong> - the width in pixels of the scroller content.</li>
+    * <li><strong>scrollHeight</strong> - the height in pixels of the scroller content.</li>
+    * </ul>
+    *
     */
     var Scroller = Widget.extend(/** @lends kendo.mobile.ui.Scroller.prototype */{
         /**
@@ -239,6 +249,17 @@
                     elastic: that.options.elastic
                 });
 
+            movable.bind(CHANGE, function() {
+                that.scrollTop = - movable.y;
+                that.scrollLeft = - movable.x;
+                that.trigger(SCROLL, {
+                    scrollTop: that.scrollTop,
+                    scrollLeft: that.scrollLeft,
+                    scrollWidth: that.scrollWidth,
+                    scrollHeight: that.scrollHeight
+                });
+            });
+
             extend(that, {
                 movable: movable,
                 dimensions: dimensions,
@@ -275,7 +296,18 @@
              * @event
              * @param {Event} e
              */
-            PULL
+            PULL,
+            /**
+             * Fires when the pull option is set to true, and the user pulls the scrolling container beyond the specified pullThreshold.
+             * @name kendo.mobile.ui.Scroller#scroll
+             * @event
+             * @param {Event} e
+             * @param {Number} e.scrollTop The number of pixels that are hidden from view above the scrollable area.
+             * @param {Number} e.scrollLeft The number of pixels that are hidden from view to the left of the scrollable area.
+             * @param {Number} e.scrollWidth The width in pixels of the scroller content.
+             * @param {Number} e.scrollHeight The height in pixels of the scroller content.
+             */
+            SCROLL
         ],
 
         setOptions: function(options) {
@@ -373,6 +405,10 @@
             });
 
             that[axis + "inertia"] = inertia;
+
+            dimension.bind(CHANGE, function() {
+                that[dimension.scrollSize] = dimension.total;
+            });
 
             that.pane[axis].bind(CHANGE, function() {
                 scrollBar.show();

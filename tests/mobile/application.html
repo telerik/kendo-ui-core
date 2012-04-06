@@ -395,6 +395,22 @@
                 drag.trigger("end", drag);
             });
 
+            asyncTest("Raises scroll when scrolled", 1, function() {
+                setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
+
+                var drag = application.view.scroller.drag;
+
+                application.view.scroller.bind("scroll", function() {
+                    start();
+                    ok(true);
+                });
+
+                drag.trigger("start", drag);
+                drag.y.delta = -200;
+                drag.trigger("move", drag);
+                drag.trigger("end", drag);
+            });
+
             test("View notifies widget on init", 1, function(){
                 var Foo = kendo.mobile.ui.Widget.extend({
                     options: {
