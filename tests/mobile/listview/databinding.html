@@ -366,11 +366,33 @@
                     ds.unbind("change", firstAssert);
                     ds.bind("change", secondAssert);
 
-                    listview.parent().find(".km-load-more").click();
+                    listview.parent().find(".km-load").click();
                 }
 
                 ds.bind("change", firstAssert);
             });
+/*
+            test("ListView hides the load button on click", 4, function() {
+                var dom = $("<ul/>");
+
+                new ListView(dom, {
+                    dataSource: [1, 2],
+                    loadMore: true
+                });
+
+                var button = dom.parent().find(".km-load"),
+                    icon = dom.parent().find(".km-icon");
+
+                equal(button.css("display"), "");
+                equal(icon.css("display"), "none");
+
+                button.click();
+
+                equal(button.css("display"), "none");
+                equal(icon.css("display"), "");
+
+            });
+            */
         </script>
     </body>
 </html>
