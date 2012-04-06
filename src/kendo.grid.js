@@ -985,6 +985,7 @@
 
         current: function(element) {
             var that = this,
+                scrollable = that.options.scrollable,
                 current = that._current;
 
             if (element !== undefined && element.length) {
@@ -994,29 +995,33 @@
                         current.removeClass(FOCUSED);
                     }
                     that._current = element;
-                    that._scrollTo(element.parent()[0]);
+
+                    if(element.length && scrollable) {
+                        that._scrollTo(element.parent()[0], that.content[0]);
+                        if (scrollable.virtual) {
+                            that._scrollTo(element[0], that.content.find(">.k-virtual-scrollable-wrap")[0]);
+                        } else {
+                            that._scrollTo(element[0], that.content[0]);
+                        }
+                    }
                 }
             }
 
             return that._current;
         },
 
-        _scrollTo: function(element) {
-            if(!element || !this.options.scrollable) {
-                return;
-            }
+        _scrollTo: function(element, container) {
+            var isHorizontal =  element.tagName.toLowerCase() === "td",
+                elementOffset = element[isHorizontal ? "offsetLeft" : "offsetTop"],
+                elementOffsetDir = element[isHorizontal ? "offsetWidth" : "offsetHeight"],
+                containerScroll = container[isHorizontal ? "scrollLeft" : "scrollTop"],
+                containerOffsetDir = container[isHorizontal ? "clientWidth" : "clientHeight"],
+                bottomDistance = elementOffset + elementOffsetDir;
 
-            var elementOffsetTop = element.offsetTop,
-                container = this.content[0],
-                elementOffsetHeight = element.offsetHeight,
-                containerScrollTop = container.scrollTop,
-                containerOffsetHeight = container.clientHeight,
-                bottomDistance = elementOffsetTop + elementOffsetHeight;
-
-            container.scrollTop = containerScrollTop > elementOffsetTop ?
-                                    elementOffsetTop :
-                                    (bottomDistance > (containerScrollTop + containerOffsetHeight) ?
-                                        (bottomDistance - containerOffsetHeight) : containerScrollTop);
+            container[isHorizontal ? "scrollLeft" : "scrollTop"] = containerScroll > elementOffset ?
+                                    elementOffset :
+                                    (bottomDistance > (containerScroll + containerOffsetDir) ?
+                                        (bottomDistance - containerOffsetDir) : containerScroll);
         },
 
         _navigatable: function() {
