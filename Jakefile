@@ -35,12 +35,18 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     THEMEBUILDER_LIVE_PATH = path.join(DEPLOY_PATH, "themebuilder.telerik.com"),
     THEMEBUILDER_LIVE_PACKAGE = path.join(DEPLOY_PATH, "themebuilder.zip"),
     RELEASE_PATH = "release",
+    WINJS_PATH = "winjs",
     SUITES = ["web", "mobile", "dataviz"];
 
 // CDN Configuration ===========================================================
 var CDN_PROJECT = path.join("build", "cdn.proj"),
     CDN_BUNDLE = bundles.cdnBundle,
     CDN_BUNDLE_PATH = path.join(DEPLOY_PATH, "kendoui.cdn.commercial");
+
+// WinJS Configuration ===========================================================
+var WINJS_BUNDLE = bundles.winjsBundle,
+    WINJS_CSS_PATH = path.join(RELEASE_PATH, WINJS_PATH, 'kendo.winjs.min.css');
+    WINJS_BUNDLE_PATH = path.join(DEPLOY_PATH, "kendoui.winjs.commercial");
 
 // Tasks ======================================================================
 desc("Clean deploy working directory");
@@ -156,6 +162,21 @@ namespace("demos", function() {
         copyDir(path.join("resources", "live", "bin"), path.join(DEMOS_LIVE_PATH, "bin"), true);
         zip(DEMOS_LIVE_PACKAGE, DEMOS_LIVE_PATH, complete);
     }, true);
+});
+
+desc("Build WinJS bundle");
+task("winjs", ["clean"], function() {
+    function readCSS(file) {
+        return kendoBuild.stripBOM(kendoBuild.readText(path.join(WINJS_BUNDLE_PATH, STYLES_PATH, file)));
+    }
+    mkdir(path.join(RELEASE_PATH, WINJS_PATH));
+    kendoBuild.rmdirSyncRecursive(WINJS_BUNDLE_PATH);
+    bundles.buildBundle(WINJS_BUNDLE, version(), function() {
+        var cssContents = readCSS('kendo.common.min.css') + readCSS('kendo.dataviz.min.css');
+        kendoBuild.writeText(WINJS_CSS_PATH, cssContents);
+        kendoBuild.copyFileSync(path.join(WINJS_BUNDLE_PATH, SCRIPTS_PATH, 'kendo.winjs.min.js'), path.join(RELEASE_PATH, WINJS_PATH, 'kendo.winjs.min.js'));
+        kendoBuild.copyFileSync(path.join(WINJS_BUNDLE_PATH, "source", SCRIPTS_PATH, 'kendo.winjs.js'), path.join(RELEASE_PATH, WINJS_PATH, 'kendo.winjs.js'));
+    });
 });
 
 desc("Build debug demos site");
