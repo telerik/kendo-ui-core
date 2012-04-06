@@ -15,6 +15,7 @@
         JSON = window.JSON || {},
         support = {},
         formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
+        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}/g,
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
         FUNCTION = "function",
         STRING = "string",
@@ -2287,7 +2288,7 @@ function pad(number) {
             value = false;
         } else if (!isNaN(parseFloat(value))) {
             value = parseFloat(value);
-        } else if (jsonRegExp.test(value) && !formatRegExp.test(value)) {
+        } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
            value = $.parseJSON(value);
         }
 
