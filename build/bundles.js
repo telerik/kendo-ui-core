@@ -23,6 +23,13 @@ var productionLicenses = [
     trialLicense
 ];
 
+var SUITE_STYLES = {
+    "web": "web",
+    "dataviz": "dataviz",
+    "mobile": "mobile",
+    "winjs": "web"
+}
+
 // Configuration ==============================================================
 var cdnBundle = {
     name: "kendoui.cdn",
@@ -30,7 +37,17 @@ var cdnBundle = {
     combinedScript: "all",
     sourceLicense: "src-license-complete.txt",
     licenses: [commercialLicense],
-    eula: "eula",
+    eula: "eula"
+};
+
+var winjsBundle = {
+    name: "kendoui.winjs",
+    suites: ["winjs", "dataviz"],
+    combinedScript: "winjs",
+    sourceLicense: "src-license-none.txt",
+    licenses: [commercialLicense],
+    skipExamples: true,
+    eula: "eula"
 };
 
 var bundles = [{
@@ -150,7 +167,7 @@ function deployStyles(root, bundle, license, copySource) {
     }
 
     bundle.suites.forEach(function(suite) {
-        var suiteStyles = path.join(STYLES_ROOT, suite);
+        var suiteStyles = path.join(STYLES_ROOT, SUITE_STYLES[suite]);
         if (path.existsSync(suiteStyles)) {
             kendoBuild.deployStyles(suiteStyles, stylesDest, license, true);
 
@@ -275,8 +292,10 @@ function buildBundle(bundle, version, success) {
         console.log("Deploying licenses");
         deployLicenses(root, bundle);
 
-        console.log("Deploying examples");
-        deployExamples(root, bundle);
+        if (!bundle.skipExamples) {
+            console.log("Deploying examples");
+            deployExamples(root, bundle);
+        }
 
         zip(packageName, root, function() {
             kendoBuild.copyFileSync(packageName, packageNameLatest);
@@ -306,4 +325,5 @@ function buildAllBundles(version, success, bundleIx) {
 exports.buildBundle = buildBundle;
 exports.buildAllBundles = buildAllBundles;
 exports.cdnBundle = cdnBundle;
+exports.winjsBundle = winjsBundle;
 exports.clean = clean;

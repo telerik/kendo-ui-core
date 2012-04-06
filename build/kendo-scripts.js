@@ -101,7 +101,37 @@ var suiteScripts = {
         "kendo.mobile.scroller.js",
         "kendo.mobile.switch.js",
         "kendo.mobile.tabstrip.js"
-    ]
+    ],
+    "winjs": [
+        "kendo.core.js",
+        "kendo.fx.js",
+        "kendo.data.odata.js",
+        "kendo.data.xml.js",
+        "kendo.data.js",
+        "kendo.binder.js",
+        "kendo.validator.js",
+        "kendo.draganddrop.js",
+        "kendo.mobile.scroller.js",
+        "kendo.groupable.js",
+        "kendo.resizable.js",
+        "kendo.sortable.js",
+        "kendo.selectable.js",
+        "kendo.pager.js",
+        "kendo.popup.js",
+        "kendo.list.js",
+        "kendo.calendar.js",
+        "kendo.datepicker.js",
+        "kendo.autocomplete.js",
+        "kendo.dropdownlist.js",
+        "kendo.combobox.js",
+        "kendo.grid.js",
+        "kendo.listview.js",
+        "kendo.numerictextbox.js",
+        "kendo.editable.js",
+        "kendo.filtermenu.js",
+        "kendo.timepicker.js",
+        "kendo.slider.js"
+    ],
 };
 
 var deployCache = { },
