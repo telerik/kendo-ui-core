@@ -414,6 +414,63 @@
 
                 button.click();
             });
+
+            module("endless scrolling", {
+                setup: function() {
+                    location.hash = '';
+                    $.mockjaxSettings.responseTime = 0;
+                    $.mockjaxSettings.contentType = "text/html";
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                    kendo.history.stop();
+                }
+            });
+
+            function setup(html, options) {
+                $("#qunit-fixture").html(html);
+                application = new kendo.mobile.Application($("#qunit-fixture"), options);
+            }
+
+            asyncTest("ListView appends on scroll", 2, function(){
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar"] });
+                var ds = kendo.data.DataSource.create({ pageSize: 1, transport: { read: { url: "foo.json", type: "json" } } });
+                var listview;
+
+                window.initListView = function(e) {
+                    listview = e.view.element.find("#listview");
+                    listview.kendoMobileListView({
+                        dataSource: ds,
+                        endlessScroll: true
+                    });
+                }
+
+                setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
+                var scroller = application.view.scroller;
+
+                $.mockjaxClear();
+                $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
+
+                function secondAssert() {
+                    start();
+                    equal(listview.children().length, 2);
+                }
+
+                function firstAssert() {
+                    equal(listview.children().length, 1);
+                    ds.unbind("change", firstAssert);
+                    ds.bind("change", secondAssert);
+
+                    scroller.trigger("scroll", {
+                        scrollTop: 300
+                    });
+                }
+
+                ds.bind("change", firstAssert);
+
+            });
+
         </script>
     </body>
 </html>
