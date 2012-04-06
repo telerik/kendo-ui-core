@@ -42,6 +42,10 @@
                             }
                         });
                     }
+                    window.data("kendoWindow").wrapper.find(".k-custom").click(function(e){
+                        alert("Custom action button clicked");
+                        e.preventDefault();
+                    });
                 });
             </script>
 
