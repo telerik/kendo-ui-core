@@ -39,8 +39,6 @@
         <script>
             var ListView = kendo.mobile.ui.ListView;
 
-            QUnit.config.testTimeout = 500;
-
             module("mobile listview", {
                 setup: function() {
 
@@ -373,7 +371,7 @@
             });
 
             test("ListView hides the load button on click", 4, function() {
-                var dom = $("<ul/>");
+                var dom = $("<ul/>").appendTo("#qunit-fixture");
 
                 new ListView(dom, {
                     dataSource: [1, 2],
@@ -383,18 +381,18 @@
                 var button = dom.parent().find(".km-load"),
                     icon = dom.parent().find(".km-icon");
 
-                equal(button.css("display"), "");
-                equal(icon.css("display"), "none");
+                ok(button.is(":visible"));
+                ok(!icon.is(":visible"));
 
                 button.click();
 
-                equal(button.css("display"), "none");
-                equal(icon.css("display"), "");
+                ok(!button.is(":visible"));
+                ok(icon.is(":visible"));
 
             });
 
             asyncTest("ListView shows load button on dataSource change", 2, function() {
-                var dom = $("<ul/>");
+                var dom = $("<ul/>").appendTo("#qunit-fixture");
 
                 var listView = new ListView(dom, {
                     dataSource: {
@@ -409,10 +407,9 @@
 
                 listView.bind("dataBound", function() {
                     start();
-                    console.log("called");
 
-                    equal(button.css("display"), "");
-                    equal(icon.css("display"), "none");
+                    ok(button.is(":visible"));
+                    ok(!icon.is(":visible"));
                 });
 
                 button.click();
