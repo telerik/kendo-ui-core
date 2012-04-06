@@ -414,13 +414,14 @@
             e = e || {};
 
             var that = this,
-                dataSource = that.dataSource,
                 element = that.element,
-                appendMethod = that.options.appendOnRefresh ? "prepend" : "html",
+                options = that.options,
+                dataSource = that.dataSource,
+                view = dataSource.view(),
+                appendMethod = "html",
                 contents,
                 data,
-                item,
-                view = dataSource.view();
+                item;
 
             if (e.action === "itemchange") {
                 data = e.items[0];
@@ -441,16 +442,17 @@
             that.trigger("dataBinding");
 
             if (dataSource.group()[0]) {
-                that.options.type = "group";
+                options.type = "group";
                 contents = kendo.render(that.groupTemplate, view);
             } else {
                 contents = kendo.render(that.template, view);
             }
 
-            if (that._pressed) {
-                that._pressed = false;
-                that._toggleButton(true);
+            if (options.loadMore && !that._loadButton.is(":visible")) {
                 appendMethod = "append";
+                that._toggleButton(true);
+            } else if (options.appendOnRefresh) {
+                appendMethod = "prepend";
             }
 
             element[appendMethod](contents);
@@ -566,16 +568,11 @@
                 options = that.options;
 
             if (options.loadMore) {
-                wrapper.append('<span class="km-load-more">\
-                                <span style="display:none" class="km-icon km-refresh"></span>\
-                                <button class="km-load">' +
-                                          options.loadMoreText +
-                                '</button></span>');
+                wrapper.append('<span class="km-load-more"><span style="display:none" class="km-icon km-refresh"></span><button class="km-load">' + options.loadMoreText + '</button></span>');
                 that._loadButton = wrapper
                                     .children(".km-load-more")
                                     .children(".km-load")
                                     .click(function() {
-                                       that._pressed = true;
                                        that._toggleButton(false);
                                        that.dataSource.next();
                                     });
