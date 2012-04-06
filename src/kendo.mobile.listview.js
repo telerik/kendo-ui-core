@@ -585,8 +585,15 @@
         },
 
         _toggleButton: function(toggle) {
+            var icon = this._loadIcon;
+
             this._loadButton.toggle(toggle);
-            this._loadIcon.toggle(!toggle);
+
+            if (toggle) {
+                icon.hide();
+            } else {
+                icon.css("display", "block");
+            }
         }
     });
 
