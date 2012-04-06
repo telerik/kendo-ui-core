@@ -181,7 +181,6 @@
                 ring = scale.ring.clone(),
                 trackWidth = 5,
                 arrowOptions = options.arrow,
-                width = arrowOptions.width,
                 height = arrowOptions.height;
 
             ring.ir = ring.r - trackWidth;
