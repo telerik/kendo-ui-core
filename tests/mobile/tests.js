@@ -28,7 +28,7 @@ tests.push(
         title: "mobile lint"
     },
     {
-        page: "mobile/listview/index.html",
+        page: "mobile/listview/initialization.html",
         title: "mobile listview"
     },
     {
