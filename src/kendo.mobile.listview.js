@@ -274,25 +274,17 @@
                 .on("click", HANDLED_INPUTS_SELECTOR, function (e) { e.preventDefault(); })
                 .on(MOUSEUP, ITEM_SELECTOR, proxy(that._click, that));
 
+            that.element.wrap(WRAPPER);
+            that.wrapper = that.element.parent();
+
+            that._loadMore();
+
             that._dataSource();
 
             if (options.dataSource) {
                 that.dataSource.fetch();
             } else {
                 that._style();
-            }
-
-            that.element.wrap(WRAPPER);
-            that.wrapper = that.element.parent();
-            if (options.loadMore) {
-                that.wrapper.append('<span class="km-scroller-pull"><span class="km-icon"></span><button class="km-load-more">' + options.loadMoreText + '</button></span>');
-                that._loadMoreButton = that.wrapper
-                                           .children(".km-scroller-pull")
-                                           .children(".km-load-more")
-                                           .click(function() {
-                                               that._pressed = true;
-                                               that.dataSource.next();
-                                           });
             }
 
             kendo.notify(that, ui);
@@ -565,6 +557,27 @@
             that.items().find(">label").each(enhanceCheckBoxItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
+        },
+
+        _loadMore: function() {
+            var that = this,
+                wrapper = that.wrapper,
+                options = that.options;
+
+            if (options.loadMore) {
+                wrapper.append('<span class="km-load-more">\
+                                <span class="km-icon km-refresh"></span>\
+                                <button class="km-load">' +
+                                          options.loadMoreText +
+                                '</button></span>');
+                wrapper
+                    .children(".km-load-more")
+                    .children(".km-load")
+                    .click(function() {
+                       that._pressed = true;
+                       that.dataSource.next();
+                    });
+            }
         }
     });
 

@@ -263,11 +263,11 @@
                 var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
                     listView = new ListView(dom, { loadMore: true, loadMoreText: "Press to load more..." });
 
-                var footer = listView.wrapper.children(".km-scroller-pull").eq(0);
+                var footer = listView.wrapper.children(".km-load-more").eq(0);
 
                 ok(footer[0]);
-                ok(footer.find(".km-load-more")[0]);
-                equal(footer.find(".km-load-more").text(), "Press to load more...");
+                ok(footer.find(".km-load")[0]);
+                equal(footer.find(".km-load").text(), "Press to load more...");
                 ok(footer.find(".km-icon")[0]);
             });
 
@@ -275,10 +275,10 @@
                 var dom = $('<ul><li>Foo<ul><li>Bar</li><li>Baz</li></ul></li></ul>'),
                     listView = new ListView(dom, { loadMore: true });
 
-                var footer = listView.wrapper.children(".km-scroller-pull").eq(0);
+                var footer = listView.wrapper.children(".km-load-more").eq(0);
 
-                ok(footer.find(".km-load-more")[0]);
-                equal(footer.find(".km-load-more").text(), "Press to load more");
+                ok(footer.find(".km-load")[0]);
+                equal(footer.find(".km-load").text(), "Press to load more");
             });
         </script>
     </body>
