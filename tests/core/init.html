@@ -221,6 +221,17 @@
 
                 equal(testwidget.options.foo, "{0:d}");
             });
+
+            test("skip format as property of complex object", function() {
+                var dom = $('<div data-role="testwidget" data-foo=\'{"bar":"{0:d}"}\'/>');
+
+                kendo.init(dom);
+
+                var testwidget = dom.data("kendoTestWidget");
+                console.log(testwidget.options.foo, "ggg");
+                equal(testwidget.options.foo.bar, "{0:d}");
+            });
+
         </script>
         <script id="template" type="text/x-kendo-template">
             foo
