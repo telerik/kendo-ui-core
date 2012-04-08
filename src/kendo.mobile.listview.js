@@ -474,7 +474,6 @@
                 appendMethod = "append";
 
                 that.loading = false;
-                console.log("end of page");
 
                 if (options.loadMore) {
                     that._toggleButton(true);
