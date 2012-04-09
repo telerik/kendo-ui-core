@@ -1,0 +1,22 @@
+<div data-role="view" data-title="Index" id="transitions">
+    <h1 sytle="text-align:center">My music</h1>
+    <a href="#login" data-role="button">Login/Sign-up</a>
+</div>
+
+<div data-role="view" id="login" data-transition="overlay:up">
+    <ul data-role="listview" data-style="inset">
+        <li><label for="username">Username:</label> <input type="text" id="username" /></li>
+        <li><label for="password">Password:</label> <input type="password" id="password" /></li>
+        <li>
+            <button type="button" href="#welcome" data-transition="overlay:down reverse" data-role="button">Login</button><br >
+            <button type="button" href="#transitions" data-transition="overlay:up reverse" data-role="backbutton" style="background-color: black;">Cancel</button>
+        </li>
+    </ul>
+</div>
+
+<div data-role="view" data-title="Index" id="welcome">
+    <h1 sytle="text-align:center">My music</h1>
+    <p>Welcome!<br />
+    <a data-role="button" href="#transitions" data-transition="slide:left reverse" style="background-color: black;">Sign out</a>
+    </p>
+</div>
