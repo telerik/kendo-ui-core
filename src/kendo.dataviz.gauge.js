@@ -844,7 +844,7 @@
                 }
             } else {
                 pointerBox = new Box2D(
-                    scaleLine.x1 - pointerHalfSize, scaleLine.y1 - sign * padding.bottom,
+                    scaleLine.x1 - pointerHalfSize, scaleLine.y1 - width - sign * padding.bottom,
                     scaleLine.x2 + pointerHalfSize, scaleLine.y1 - sign * padding.bottom
                 );
                 pointer.box = pointerBox;
