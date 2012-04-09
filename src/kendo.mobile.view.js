@@ -9,6 +9,7 @@
         INIT = "init",
         SHOW = "show",
         HIDE = "hide",
+        Z_INDEX = "z-index",
         roleSelector = kendo.roleSelector;
 
     /**
@@ -103,6 +104,7 @@
             that.layout = options.layout;
             that.application = options.application;
             that.element.data("kendoView", that).addClass("km-view");
+            that.transition = element.data(kendo.ns + "transition");
 
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
@@ -181,14 +183,7 @@
             model: null
         },
 
-        onHideStart: function() {
-            var that = this;
-            if (that.layout) {
-                that.layout.detach(that);
-            }
-        },
-
-        onShowStart: function () {
+        showStart: function () {
             var that = this;
             that.element.css("display", "");
             that.params = history.url().params;
@@ -202,6 +197,44 @@
             });
 
             that.trigger(SHOW, {view: that});
+        },
+
+        hideStart: function() {
+            var that = this;
+            if (that.layout) {
+                that.layout.detach(that);
+            }
+        },
+
+        hideComplete: function() {
+            var that = this;
+            that.element.hide();
+            that.trigger(HIDE, {view: that});
+        },
+
+        switchWith: function(view, transition, complete) {
+            new ViewTransition({
+                current: this,
+                next: view,
+                transition: transition,
+                defaultTransition: this.application.options.transition,
+                complete: complete
+            });
+        },
+
+        parallaxContents: function(other) {
+            var that = this,
+                contents = that.content;
+
+            if (!other.header[0]) {
+                contents = contents.add(that.header);
+            }
+
+            if (!other.footer[0]) {
+                contents = contents.add(that.footer);
+            }
+
+            return contents;
         },
 
         _eachWidget: function(callback) {
@@ -221,71 +254,84 @@
         }
     });
 
-    var ViewSwitcher = Class.extend({
-        init: function (application) {
-            this.application = application;
-        },
+    function fade(source, destination) {
+        if (source[0] && destination[0] && source[0] != destination[0]) {
+            source.kendoAnimateTo(destination, {effects: "fade"});
+        }
+    }
 
-        replace: function(previous, view) {
+    var ViewTransition = Class.extend({
+        init: function (options) {
+            $.extend(this, options);
+
             var that = this,
-                callback = function() {
-                    that.application.transitioning = false;
-                    previous.element.hide();
+                current = that.current,
+                next = that.next,
+                currentContent = current.element,
+                nextContent = next.element,
+                upper = next,
+                lower = current,
+                transition = that._transition();
 
-                    previous.trigger(HIDE, {view: previous});
+            current.hideStart();
+            next.showStart();
+
+            if (transition.reverse && !transition.parallax) {
+                upper = current;
+                lower = next;
+            }
+
+            upper.element.css(Z_INDEX, 1);
+            lower.element.css(Z_INDEX, 0);
+
+            if (transition.parallax) {
+                fade(current.footer, next.footer);
+                fade(current.header, next.header);
+                currentContent = current.parallaxContents(next);
+                nextContent = next.parallaxContents(current);
+            }
+
+            currentContent.kendoAnimateTo(nextContent, transition);
+
+            if (!that.back()) {
+                current.nextView = next;
+                current.backTransition = transition.transition;
+            }
+        },
+
+        _transition: function() {
+            var that = this,
+                current = that.current,
+                next = that.next,
+                back = that.back(),
+                complete = function() {
+                    current.hideComplete();
+                    that.complete();
                 },
+                viewTransition = back ? next.backTransition : next.transition,
+                transition = that.transition || viewTransition || that.defaultTransition,
+                animationData = transition.split(' '),
+                animationType = animationData[0],
+                parallax = animationType === "slide",
+                reverse = animationData[1] === "reverse";
 
-                animationType;
-
-            that.back = view.nextView === previous && JSON.stringify(view.params) === JSON.stringify(history.url().params);
-
-            animationType = that.application.dataOrDefault((that.back ? previous : view).element, "transition");
-
-            that.parallax = animationType === "slide";
-
-            previous.onHideStart();
-            view.onShowStart();
-
-            if (that.back && !that.parallax) {
-                view.element.css("z-index", 0);
-                previous.element.css("z-index", 1);
-              } else {
-                view.element.css("z-index", 1);
-                previous.element.css("z-index", 0);
+            if (that.back() && !that.transition) {
+                reverse = !reverse;
             }
 
-            that.switchWith(previous.footer, view.footer);
-            that.switchWith(previous.header, view.header);
-            that.contents(previous, view).kendoAnimateTo(that.contents(view, previous), {effects: animationType, reverse: that.back, complete: callback});
-
-            if (!that.back) {
-                previous.nextView = view;
-            }
+            return {
+                effects: animationType,
+                reverse: reverse,
+                parallax: parallax,
+                complete: complete,
+                transition: transition
+            };
         },
 
-        contents: function(source, destination) {
-            var contents;
-
-            if (this.parallax) {
-                contents = source.content;
-                if (!destination.header[0]) {
-                    contents = contents.add(source.header);
-                }
-
-                if (!destination.footer[0]) {
-                    contents = contents.add(source.footer);
-                }
-            } else {
-                contents = source.element;
-            }
-
-            return contents;
-        },
-
-        switchWith: function(source, destination) {
-            if (source[0] && destination[0] && source[0] != destination[0] && this.parallax) {
-                source.kendoAnimateTo(destination, {effects: "fade"});
-            }
+        back: function() {
+            var next = this.next,
+                current = this.current;
+            return next.nextView === current && JSON.stringify(next.params) === JSON.stringify(history.url().params);
         }
     });
 
@@ -448,5 +494,4 @@
 
     ui.plugin(View);
     ui.plugin(Layout);
-    mobile.ViewSwitcher = ViewSwitcher;
 })(jQuery);

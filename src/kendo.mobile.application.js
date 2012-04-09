@@ -1,16 +1,13 @@
 (function($, undefined) {
     var kendo = window.kendo,
-
         history = kendo.history,
         support = kendo.support,
-        mobile = kendo.mobile,
         roleSelector = kendo.roleSelector,
         attr = kendo.attr,
 
-        ViewSwitcher = mobile.ViewSwitcher,
-
         OS = support.mobileOS,
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
+
         MOBILE_UA = {
             ios: "iPhone OS 4_3",
             android: "Android 2.3.3",
@@ -28,7 +25,7 @@
         buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
         linkRolesSelector = toRoleSelector("tab"),
 
-        ORIENTATIONEVENT = "onorientationchange" in window ? "orientationchange" : "resize",
+        ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
@@ -40,35 +37,8 @@
         WINDOW = $(window),
         HEAD = $("head"),
         CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
+        BACK = "#:back",
         proxy = $.proxy;
-
-    function appLinkMouseUp(e) {
-        if (e.which > 1 || e.isDefaultPrevented()) {
-            return;
-        }
-
-        var link = $(e.currentTarget),
-            rel = link.data(kendo.ns + "rel"),
-            href = link.attr(HREF);
-
-        if (rel === EXTERNAL) {
-            return;
-        }
-
-        if (href && href != DUMMY_HREF) {
-            // Prevent iOS address bar progress display for in app navigation
-            link.attr(HREF, DUMMY_HREF);
-            setTimeout(function() { link.attr(HREF, href); });
-
-            if (rel === "actionsheet") {
-                $(href).data("kendoMobileActionSheet").openFor(link);
-            } else {
-                history.navigate(href);
-            }
-        }
-
-        e.preventDefault();
-    }
 
     function appLinkClick(e) {
         var rel = $(e.currentTarget).data(kendo.ns + "rel");
@@ -133,13 +103,16 @@
     * @section
     *
     * <h3>View Transitions</h3>
-    * <p><strong>View</strong> transitions are defined by setting a <code>data-transition</code> attribute to the <strong>View</strong> DOM element.
+    * <p><strong>View</strong> transitions are defined by setting a <code>data-transition</code> attribute to the <strong>View</strong> DOM element or to the navigational widget <code>A</code> DOM element.
+    * If both are present, the navigational widget transition takes precedence.
     * A default <strong>View</strong> transition may be set using the <code>transition</code> parameter in the options parameter of the <strong>Application</strong> constructor.
     * The following transitions are supported:</p>
     *
     * <h4>slide</h4>
     * <p> This is the default iOS <strong>View</strong> transition. Old <strong>View</strong> content slides to the left and the new <strong>View</strong> content slides in its place.
     * Headers and footers (if present) use the <strong>fade</strong> transition. </p>
+    * <p>The transition direction can be specified by using <code>slide:(direction)</code>.
+    * Supported directions are <code>left</code> and <code>right</code>. By default, the direction is <code>left</code>.</p>
     *
     * <h4>zoom</h4>
     * <p>The new <strong>View</strong> (along with its header and footer) content zooms over the previous <strong>View</strong>. The old <strong>View</strong> content fades out. Suitable for displaying dialogs.</p>
@@ -158,6 +131,13 @@
     * <div data-role="view" id="foo" data-transition="slide">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
     * <div data-role="view" id="bar" data-transition="overlay:up">Bar <a href="#foo" data-role="button">Go to Foo</a></div>
     *
+    * @section
+    * <p>Each transition may be played in <strong>reverse</strong>. To do so, add <code>" reverse"</code> after the transition definition. For
+    * instance, to simulate returning to previous view using slide transition, use <code>"slide:left reverse"</code></p>
+    * @exampleTitle Reverse transition
+    * @example
+    * <div data-role="view" id="foo">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
+    * <div data-role="view" id="bar">Bar <a href="#foo" data-role="button" data-transition="slide:left reverse">Go to Foo</a></div>
     * @section
     *
     * <p>When a <strong>View</strong> transitions to the <strong>View</strong> displayed before it (foo → bar → foo), this is considered a <strong>back</strong> navigation.
@@ -303,7 +283,7 @@
             var that = this;
 
             that.layouts = {};
-            that.options = $.extend({ hideAddressBar: true }, options);
+            that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 
@@ -338,18 +318,22 @@
          * app.navigate("#foo");
          * </script>
          */
-        navigate: function(url) {
+        navigate: function(url, transition) {
             var that = this;
             that.transitioning = true;
+            history.navigate(url, true);
+
+            if (url === BACK) {
+                return;
+            }
 
             that._findView(url, function(view) {
-                if (that.view === view) {
-                    return;
-                }
+                if (that.view === view) { return; }
 
-                history.navigate(url, true);
+                that.view.switchWith(view, transition, function() {
+                    that.transitioning = false;
+                });
 
-                new ViewSwitcher(that).replace(that.view, view);
                 that.view = view;
             });
         },
@@ -399,9 +383,12 @@
         },
 
         _setupAppLinks: function() {
+            var that = this,
+                mouseup = $.proxy(that._mouseup, that);
+
             this.element
-                .delegate(linkRolesSelector, support.mousedown, appLinkMouseUp)
-                .delegate(buttonRolesSelector, support.mouseup, appLinkMouseUp)
+                .delegate(linkRolesSelector, support.mousedown, mouseup)
+                .delegate(buttonRolesSelector, support.mouseup, mouseup)
                 .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
         },
 
@@ -459,7 +446,7 @@
 
                     that._findView(url, function(view) {
                         views.not(view).hide();
-                        view.onShowStart();
+                        view.showStart();
                         that.view = view;
 
                         if (navigateToInitial) {
@@ -474,7 +461,11 @@
 
         _createView: function(element) {
             var that = this,
-                layout = that.dataOrDefault(element, "layout");
+                layout = element.data(kendo.ns + "layout");
+
+            if (typeof layout === "undefined") {
+                layout = that.options.layout;
+            }
 
             if (layout) {
                 layout = that.layouts[layout];
@@ -641,8 +632,34 @@
             }
         },
 
-        dataOrDefault: function(element, option) {
-            return typeof element.data(kendo.ns + option) !== "undefined" ? element.data(option) : this.options[option];
+        _mouseup: function(e) {
+            if (e.which > 1 || e.isDefaultPrevented()) {
+                return;
+            }
+
+            var link = $(e.currentTarget),
+                transition = link.data(kendo.ns + "transition"),
+                rel = link.data(kendo.ns + "rel"),
+                href = link.attr(HREF);
+
+
+            if (rel === EXTERNAL) {
+                return;
+            }
+
+            if (href && href != DUMMY_HREF) {
+                // Prevent iOS address bar progress display for in app navigation
+                link.attr(HREF, DUMMY_HREF);
+                setTimeout(function() { link.attr(HREF, href); });
+
+                if (rel === "actionsheet") {
+                    $(href).data("kendoMobileActionSheet").openFor(link);
+                } else {
+                    this.navigate(href, transition);
+                }
+            }
+
+        e.preventDefault();
         },
 
         _loader: function() {
