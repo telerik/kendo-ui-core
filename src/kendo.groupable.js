@@ -216,6 +216,8 @@
                 return;
             }
 
+            position = Math.ceil(position);
+
             var lastCuePosition = dropCuePositions[dropCuePositions.length - 1],
                 right = lastCuePosition.right,
                 marginLeft = parseInt(lastCuePosition.element.css("marginLeft"), 10),
@@ -298,8 +300,8 @@
                 item = $(item);
                 left = item.offset().left;
                 return {
-                    left: left,
-                    right: left + item.outerWidth(),
+                    left: parseInt(left, 10),
+                    right: parseInt(left + item.outerWidth(), 10),
                     element: item
                 };
             });
