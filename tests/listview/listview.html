@@ -56,6 +56,13 @@
                 equal(ul.find("li").length, 5);
             });
 
+            test("options as array is used for dataSource", function() {
+                var div = $("<div></div>").kendoListView([1,2,3]),
+                    dataSource = div.data("kendoListView").dataSource.data();
+
+                equal(dataSource.length, 3);
+            });
+
             test("dataBound event should be raised when bound", function() {
                 var called = false,
                     ul = setup({
