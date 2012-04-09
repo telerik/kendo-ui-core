@@ -238,8 +238,12 @@
         * @param {Object} options Configuration options.
         */
         init: function(element, options) {
-            Button.fn.init.call(this, element, options);
-            this.element.attr("href", "#:back");
+            var that = this;
+            Button.fn.init.call(that, element, options);
+
+            if (!that.element.attr("href")) {
+                that.element.attr("href", "#:back");
+            }
         }
     });
 
