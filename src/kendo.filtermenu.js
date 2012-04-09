@@ -12,14 +12,12 @@
 
     var booleanTemplate =
             '<div>' +
-                '<input type="hidden" name="filters[0].field" value="#=field#"/>' +
-                '<input type="hidden" name="filters[0].operator" value="eq"/>' +
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
                 '<label>#=messages.isTrue#'+
-                    '<input type="radio" name="filters[0].value" value="true"/>' +
+                    '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="true"/>' +
                 '</label>' +
                 '<label>#=messages.isFalse#'+
-                    '<input type="radio" name="filters[0].value" value="false"/>' +
+                    '<input type="radio" data-#=ns#bind="checked: filters[0].value" value="false"/>' +
                 '</label>' +
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -27,26 +25,24 @@
 
     var defaultTemplate =
             '<div>' +
-                '<input type="hidden" name="filters[0].field" value="#=field#"/>' +
-                '#if(extra){#' + '<input type="hidden" name="filters[1].field" value="#=field#"/>' + '#}#'+
                 '<div class="k-filter-help-text">#=messages.info#</div>'+
-                '<select name="filters[0].operator">'+
+                '<select data-#=ns#bind="value: filters[0].operator" data-#=ns#role="dropdownlist">'+
                     '#for(var op in operators){#'+
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input name="filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
+                '<input data-#=ns#bind="value:filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
                 '#if(extra){#'+
-                    '<select name="logic" class="k-filter-and">'+
+                    '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
                         '<option value="and">And</option>'+
                         '<option value="or">Or</option>'+
                     '</select>'+
-                    '<select name="filters[1].operator">'+
+                    '<select data-#=ns#bind="value: filters[1].operator" data-#=ns#role="dropdownlist">'+
                         '#for(var op in operators){#'+
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input name="filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
+                    '<input data-#=ns#bind="value: filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -167,6 +163,11 @@
                 }
             }
 
+            that.filterModel = kendo.observable({
+                logic: "and",
+                filters: [{ field: that.field, operator: "eq", value: "" }, { field: that.field, operator: "eq", value: "" }]
+            });
+
             operators = operators[type] || options.operators[type];
 
             that.form = $('<form class="k-filter-menu k-group"/>');
@@ -191,14 +192,12 @@
                     submit: proxy(that._submit, that),
                     reset: proxy(that._reset, that)
                 })
-                .find("select")
-                [DROPDOWNLIST]()
-                .end()
                 .find("[" + kendo.attr("type") + "=number]")
                 [NUMERICTEXTBOX]()
                 .end()
                 .find("[" + kendo.attr("type") + "=date]")
                 [DATEPICKER]();
+
 
             that.refresh();
         },
@@ -206,6 +205,8 @@
         refresh: function() {
             var that = this,
                 expression = that.dataSource.filter() || { filters: [], logic: "and" };
+
+            kendo.bind(that.form, that.filterModel);
 
             if (that._populateForm(expression)) {
                 that.link.addClass("k-state-active");
@@ -219,17 +220,20 @@
                 filters = expression.filters,
                 idx,
                 length,
-                form = that.form,
                 found = false,
                 current = 0,
+                filterModel = that.filterModel,
+                currentFilter,
                 filter;
 
             for (idx = 0, length = filters.length; idx < length; idx++) {
                 filter = filters[idx];
                 if (filter.field == that.field) {
-                    value(form.find("[name='filters[" + current + "].value']"), that._parse(filter.value));
-                    value(form.find("[name='filters[" + current + "].operator']"), filter.operator);
-                    value(form.find("[name=logic]"), expression.logic);
+                    filterModel.set("logic", expression.logic);
+
+                    currentFilter = filterModel.filters[current];
+                    currentFilter.set("value", that._parse(filter.value));
+                    currentFilter.set("operator", filter.operator);
 
                     current++;
                     found = true;
@@ -320,7 +324,7 @@
 
             e.preventDefault();
 
-            that.filter(toObject(that.form.serializeArray()));
+            that.filter(that.filterModel);
 
             that.popup.close();
         },

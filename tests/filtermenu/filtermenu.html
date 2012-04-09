@@ -6,6 +6,8 @@
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
         <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.calendar.js"></script>
         <script src="../../src/kendo.datepicker.js"></script>
@@ -67,58 +69,34 @@
                 }
             });
 
-            test("initializes the name of the operator select from the field", function(){
+            test("binds the operator select from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filterMenu.form.find("select").attr("name"), "filters[0].operator");
+                equal(filterMenu.form.find("select").attr(kendo.attr("bind")), "value: filters[0].operator");
             });
 
-            test("initializes the name of the value input from the field", function(){
+            test("renders binding for the value input from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filterMenu.form.find("input[name='filters[0].value']").length, 1);
+                equal(filterMenu.form.find("input[" + kendo.attr("bind") + "='value:filters[0].value']").length, 1);
             });
 
-            test("initializes the name of the extra value input from the field", function(){
+            test("renders binding for the extra value input from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filterMenu.form.find("input[name='filters[1].value']").length, 1);
+                equal(filterMenu.form.find("input[" + kendo.attr("bind") + "='value:filters[0].value']").length, 1);
             });
 
-            test("second hidden input should not be present if extra filters is false", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource, extra: false});
-
-                equal(filterMenu.form.find("input[name='filters[1].field']").length, 0);
-            });
-
-            test("initializes the name of the logical operation select from the field", function(){
+            test("renders binding for the logical operation select from the field", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                equal(filterMenu.form.find("select:eq(1)").attr("name"), "logic");
+                equal(filterMenu.form.find("select:eq(1)").attr(kendo.attr("bind")), "value: logic");
             });
 
-            test("initializes a hidden whose value is the field name", function(){
+            test("renders binding for the extra operator select", function(){
                 filterMenu = new FilterMenu(dom, {dataSource: dataSource});
 
-                var hidden = filterMenu.form.find("input[type=hidden]").eq(0);
-
-                equal(hidden.attr("name"), "filters[0].field");
-                equal(hidden.val(), "foo");
-            });
-
-            test("initializes a hidden whose value is the field name when showing extra details", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
-
-                var hidden = filterMenu.form.find("input[type=hidden]").eq(1);
-
-                equal(hidden.attr("name"), "filters[1].field");
-                equal(hidden.val(), "foo");
-            });
-
-            test("initializes the name of the extra operator select", function(){
-                filterMenu = new FilterMenu(dom, {dataSource: dataSource});
-
-                equal(filterMenu.form.find("select:eq(2)").attr("name"), "filters[1].operator");
+                equal(filterMenu.form.find("select:eq(2)").attr(kendo.attr("bind")), "value: filters[1].operator");
             });
 
             test("display extra filtering options by default", function(){
@@ -162,7 +140,7 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("input[name='filters[0].value']").val("bar");
+                filterMenu.form.find("input[type=text]:first").val("bar").change();
                 filterMenu.form.submit();
 
                 equal(dataSource.filter().filters[0].value, "bar");
@@ -175,7 +153,7 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("input[name='filters[0].value']").val("bar");
+                filterMenu.form.find("input[type=text]:first").val("bar").change();
                 filterMenu.form.submit();
 
                 equal(dataSource.filter().filters.length, 1);
@@ -240,9 +218,10 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("input[name='filters[0].value']").val("foo");
-                filterMenu.form.find("input[name='filters[1].value']").val("bar");
-                filterMenu.form.find("select[name='logic']").val("or");
+                filterMenu.form.find("input[type=text]:first").val("foo").change();
+                filterMenu.form.find("input[type=text]:last").val("bar").change();
+                filterMenu.form.find("select.k-filter-and").data("kendoDropDownList").value("or");
+                filterMenu.form.find("select.k-filter-and").data("kendoDropDownList").trigger("change");
 
                 filterMenu.form.submit();
 
@@ -412,7 +391,7 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='filters[0].value']").val(), "1");
+                equal(filterMenu.form.find("[type=text]:first").val(), "1");
             });
 
             test("populates the second field value from the datasource", function() {
@@ -422,8 +401,8 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='filters[0].value']").val(), "1");
-                equal(filterMenu.form.find("[name='filters[1].value']").val(), "2");
+                equal(filterMenu.form.find("[type=text]:first").val(), "1");
+                equal(filterMenu.form.find("[type=text]:last").val(), "2");
             });
 
             test("populates the logic value from the datasource", function() {
@@ -433,7 +412,7 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='logic']").val(), "or");
+                equal(filterMenu.form.find("select.k-filter-and").val(), "or");
             });
 
             test("populates the logic value from the datasource nested expression", function() {
@@ -443,7 +422,7 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='logic']").val(), "or");
+                equal(filterMenu.form.find("select.k-filter-and").val(), "or");
             });
 
             test("populates the logic value from the last expression", function() {
@@ -453,7 +432,7 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='logic']").val(), "and");
+                equal(filterMenu.form.find("select.k-filter-and").val(), "and");
             });
 
             test("populates the operator from the datasource", function() {
@@ -463,7 +442,7 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='filters[0].operator']").val(), "neq");
+                equal(filterMenu.form.find("select:first").val(), "neq");
             });
 
             test("applies active state", function() {
@@ -502,7 +481,7 @@
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[name='filters[0].value']").data("kendoNumericTextBox"));
+                ok(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox"));
             });
 
             test("creates datepicker for date fields", function() {
@@ -511,7 +490,7 @@
                         dataSource: dataSource
                     });
 
-                ok(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker"));
+                ok(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker"));
             });
 
             test("updates dropdownlists", function() {
@@ -521,9 +500,9 @@
 
                 dataSource.filter( { logic: "or", filters: [{ field: "foo", value: "1", operator: "neq" }, { field: "foo", value: "2", operator: "neq" }]});
 
-                equal(filterMenu.form.find("[name='filters[0].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
-                equal(filterMenu.form.find("[name='filters[1].operator']").data("kendoDropDownList").current().text(), "Is not equal to");
-                equal(filterMenu.form.find("[name=logic]").data("kendoDropDownList").current().text(), "Or");
+                equal(filterMenu.form.find("select:first").data("kendoDropDownList").current().text(), "Is not equal to");
+                equal(filterMenu.form.find("select:last").data("kendoDropDownList").current().text(), "Is not equal to");
+                equal(filterMenu.form.find("select.k-filter-and").data("kendoDropDownList").current().text(), "Or");
             });
 
             test("updates numerictextboxes", function() {
@@ -532,7 +511,7 @@
                 });
 
                 dataSource.filter({ field: "bar", value: 1 });
-                equal(filterMenu.form.find("[name='filters[0].value']").data("kendoNumericTextBox")._text.val(), "1.00");
+                equal(filterMenu.form.find("[" + kendo.attr("type") + "=number]:first").data("kendoNumericTextBox")._text.val(), "1.00");
             });
 
             test("updates datepickers", function() {
@@ -542,7 +521,7 @@
 
                 var date = new Date(2011, 1, 1);
                 dataSource.filter({ field: "baz", value:date });
-                equal(filterMenu.form.find("[name='filters[0].value']").data("kendoDatePicker").value().getTime(), date.getTime());
+                equal(filterMenu.form.find("[" + kendo.attr("type") + "=date]:first").data("kendoDatePicker").value().getTime(), date.getTime());
             });
 
             test("closes sibling filtering menus", function() {
@@ -568,8 +547,7 @@
                     dataSource: dataSource
                 });
 
-                equal(filterMenu.form.find("[name='filters[0].value']").length, 2)
-                equal(filterMenu.form.find("[name='filters[0].value']").attr("type"), "radio")
+                equal(filterMenu.form.find("[type='radio']").length, 2)
             });
 
             test("boolean filtering true values", function() {
@@ -577,7 +555,7 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("[name='filters[0].value']").first().attr("checked", "checked");
+                filterMenu.form.find("[type='radio']").first().attr("checked", "checked").change();
                 filterMenu.form.submit();
 
                 equal(dataSource.filter().filters[0].field, "boo");
@@ -590,7 +568,7 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("[name='filters[0].value']").last().attr("checked", "checked");
+                filterMenu.form.find("[type='radio']").last().attr("checked", "checked").change();
                 filterMenu.form.submit();
 
                 equal(dataSource.filter().filters[0].field, "boo");
@@ -605,7 +583,7 @@
 
                 dataSource.filter( { field: "boo", operator: "eq", value: true});
 
-                ok(filterMenu.form.find("[name='filters[0].value']:first").is(":checked"));
+                ok(filterMenu.form.find("[type='radio']:first").is(":checked"));
             });
 
             test("updates boolean false radio button", function() {
@@ -615,7 +593,7 @@
 
                 dataSource.filter( { field: "boo", operator: "eq", value: false });
 
-                ok(filterMenu.form.find("[name='filters[0].value']:last").is(":checked"));
+                ok(filterMenu.form.find("[type='radio']:last").is(":checked"));
             });
 
             test("filtering without specified model defaults to string type", function() {
@@ -625,7 +603,7 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("[name='filters[0].value']").val("foo");
+                filterMenu.form.find("[type=text]:first").val("foo").change();
                 filterMenu.form.submit();
 
                 equal(dataSource.view().length, 1);
@@ -643,7 +621,7 @@
                     dataSource: dataSource
                 });
 
-                filterMenu.form.find("[name='filters[0].value']").val("foo");
+                filterMenu.form.find("[type=text]:first").val("foo").change();
                 filterMenu.form.submit();
 
                 equal(dataSource.view().length, 1);
