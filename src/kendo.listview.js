@@ -23,7 +23,7 @@
         init: function(element, options) {
             var that = this;
 
-            options = $.isArray(options) ? { data: options } : options;
+            options = $.isArray(options) ? { dataSource: options } : options;
 
             Widget.fn.init.call(that, element, options);
 
