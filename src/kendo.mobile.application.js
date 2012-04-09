@@ -1,6 +1,5 @@
 (function($, undefined) {
     var kendo = window.kendo,
-        scrollTo = window.scrollTo,
         history = kendo.history,
         support = kendo.support,
         roleSelector = kendo.roleSelector,
@@ -452,7 +451,11 @@
 
         _createView: function(element) {
             var that = this,
-                layout = element.data(kendo.ns + option) || that.options.layout;
+                layout = element.data(kendo.ns + "layout");
+
+            if (typeof layout === "undefined") {
+                layout = that.options.layout;
+            }
 
             if (layout) {
                 layout = that.layouts[layout];
