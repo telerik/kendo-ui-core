@@ -670,8 +670,10 @@
             scaleOptions.majorUnit = autoMajorUnit(scale.options.min, scale.options.max);
 
             options = deepExtend({}, scaleOptions, options);
+            options = deepExtend({}, options, { labels: { mirror: options.mirror } });
 
             NumericAxis.fn.init.call(scale, 0, 1, options);
+
         },
 
         options: {
@@ -703,7 +705,9 @@
             labels: {
                 position: INSIDE,
                 padding: 2
-            }
+            },
+
+            mirror: false
         },
 
         shouldAlign: function() {
@@ -717,7 +721,9 @@
                 max = options.max,
                 ranges = options.ranges || [],
                 vertical = options.vertical,
+                mirror = options.labels.mirror,
                 result = [],
+                lineBox = scale.lineBox().clone(),
                 count = ranges.length,
                 range, slotX, slotY, i,
                 rangeSize = options.minorTicks.size / 2,
@@ -730,9 +736,9 @@
                     slotX = vertical ? scale.lineBox() : slot;
                     slotY = vertical ? slot : scale.lineBox();
                     if (vertical) {
-                        slotX.x1 -= rangeSize;
+                        slotX.x1 -= rangeSize * (mirror ? -1 : 1);
                     } else {
-                        slotY.y2 += rangeSize;
+                        slotY.y2 += rangeSize * (mirror ? -1 : 1);
                     }
 
                     result.push(view.createRect(
@@ -820,21 +826,38 @@
                 width = options.track.size || pointer.pointerSize(),
                 pointerHalfSize = options.size / 2,
                 padding = getSpacing(options.margin),
-                trackBox;
+                pointerBox,
+                trackBox,
+                sign = (scale.options.mirror ? -1 : 1);
 
             if (scale.options.vertical) {
-                trackBox = new Box2D(
-                    scaleBox.x2 + padding.left, scaleLine.y1 - pointerHalfSize,
-                    scaleBox.x2 + padding.left + width, scaleLine.y2 + pointerHalfSize);
+                pointerBox = new Box2D(
+                    scaleLine.x2 + sign * padding.left, scaleLine.y1 - pointerHalfSize,
+                    scaleLine.x2 + sign * padding.left, scaleLine.y2 + pointerHalfSize
+                );
+                pointer.box = pointerBox;
+                if (options.track.visible && options.shape === BAR_INDICATOR) {
+                    trackBox = new Box2D(
+                        scaleBox.x2 + sign * padding.left, scaleLine.y1,
+                        scaleBox.x2 + sign * padding.left + width, scaleLine.y2);
+                    pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
+                }
             } else {
-                trackBox = new Box2D(
-                    scaleLine.x1 - pointerHalfSize, scaleBox.y1 - padding.bottom - width,
-                    scaleLine.x2 + pointerHalfSize, scaleBox.y1 - padding.bottom);
+                pointerBox = new Box2D(
+                    scaleLine.x1 - pointerHalfSize, scaleLine.y1 - sign * padding.bottom,
+                    scaleLine.x2 + pointerHalfSize, scaleLine.y1 - sign * padding.bottom
+                );
+                pointer.box = pointerBox;
+                if (options.track.visible && options.shape === BAR_INDICATOR) {
+                    trackBox = new Box2D(
+                        scaleLine.x1, scaleBox.y1 - sign * padding.bottom - width,
+                        scaleLine.x2, scaleBox.y1 - sign * padding.bottom);
+                    pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
+                }
             }
 
             pointer.trackBox = trackBox;
-
-            pointer.box = trackBox.clone().pad(padding);
+            pointer.pointerBox = pointerBox;
         },
 
         renderPointer: function(view) {
@@ -879,25 +902,27 @@
                 size = options.size,
                 halfSize = size / 2,
                 trackBox = pointer.trackBox,
-                trackBoxCenter = trackBox.center(),
-                shape;
+                pointerBox = pointer.pointerBox,
+                vertical = scale.options.vertical,
+                shape,
+                sign = (scale.options.mirror ? -1 : 1);
 
             if (options.shape == ARROW) {
-                if (scale.options.vertical) {
+                if (vertical) {
                     shape = [
-                        new Point2D(trackBox.x1, slot.y1 - halfSize),
-                        new Point2D(trackBox.x1 - size, slot.y1),
-                        new Point2D(trackBox.x1, slot.y1 + halfSize)
+                        new Point2D(pointerBox.x1, slot.y1 - halfSize),
+                        new Point2D(pointerBox.x1 - sign * size, slot.y1),
+                        new Point2D(pointerBox.x1, slot.y1 + halfSize)
                     ];
                 } else {
                     shape = [
-                        new Point2D(slot.x2 - halfSize, trackBox.y2),
-                        new Point2D(slot.x2, trackBox.y2 + size),
-                        new Point2D(slot.x2 + halfSize, trackBox.y2)
+                        new Point2D(slot.x2 - halfSize, pointerBox.y2),
+                        new Point2D(slot.x2, pointerBox.y2 + sign * size),
+                        new Point2D(slot.x2 + halfSize, pointerBox.y2)
                     ];
                 }
             } else {
-                if (scale.options.vertical) {
+                if (vertical) {
                     shape = new Box2D(
                         trackBoxCenter.x - halfSize, slot.y1,
                         trackBoxCenter.x + halfSize, slot.y2);
@@ -1043,14 +1068,22 @@
             var plotArea = this,
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
-                scaleBox = scale.box;
+                scaleBox = scale.box,
+                box = pointer.box.clone().wrap(scale.box),
+                plotAreaBox = plotArea.box,
+                diff;
 
             if (scale.options.vertical) {
-                scale.reflow(plotArea.box);
-            } else {
+                diff = plotAreaBox.center().x - box.center().x;
                 scale.reflow(new Box2D(
-                    scaleBox.x1, plotArea.box.y1 + pointer.box.height(),
-                    scaleBox.x2, plotArea.box.y2
+                    scaleBox.x1 + diff, plotAreaBox.y1,
+                    scaleBox.x2 + diff, plotAreaBox.y2
+                ));
+            } else {
+                diff = math.abs(plotAreaBox.center().y - box.center().y);
+                scale.reflow(new Box2D(
+                    plotAreaBox.x1, scaleBox.y1 + diff,
+                    plotAreaBox.x2, scaleBox.y2 + diff
                 ));
             }
             pointer.reflow(plotArea.box);
