@@ -282,7 +282,7 @@
             var that = this,
                 current = that[field];
 
-            if (current != value) {
+            if (current !== value) {
                 if (!that.trigger("set", { field: field, value: value })) {
 
                     that._set(field, that.wrap(value, field));
