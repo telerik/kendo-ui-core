@@ -103,13 +103,16 @@
     * @section
     *
     * <h3>View Transitions</h3>
-    * <p><strong>View</strong> transitions are defined by setting a <code>data-transition</code> attribute to the <strong>View</strong> DOM element.
+    * <p><strong>View</strong> transitions are defined by setting a <code>data-transition</code> attribute to the <strong>View</strong> DOM element or to the navigational widget <code>A</code> DOM element.
+    * If both are present, the navigational widget transition takes precedence.
     * A default <strong>View</strong> transition may be set using the <code>transition</code> parameter in the options parameter of the <strong>Application</strong> constructor.
     * The following transitions are supported:</p>
     *
     * <h4>slide</h4>
     * <p> This is the default iOS <strong>View</strong> transition. Old <strong>View</strong> content slides to the left and the new <strong>View</strong> content slides in its place.
     * Headers and footers (if present) use the <strong>fade</strong> transition. </p>
+    * <p>The transition direction can be specified by using <code>slide:(direction)</code>.
+    * Supported directions are <code>left</code> and <code>right</code>. By default, the direction is <code>left</code>.</p>
     *
     * <h4>zoom</h4>
     * <p>The new <strong>View</strong> (along with its header and footer) content zooms over the previous <strong>View</strong>. The old <strong>View</strong> content fades out. Suitable for displaying dialogs.</p>
@@ -128,6 +131,13 @@
     * <div data-role="view" id="foo" data-transition="slide">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
     * <div data-role="view" id="bar" data-transition="overlay:up">Bar <a href="#foo" data-role="button">Go to Foo</a></div>
     *
+    * @section
+    * <p>Each transition may be played in <strong>reverse</strong>. To do so, add <code>" reverse"</code> after the transition definition. For
+    * instance, to simulate returning to previous view using slide transition, use <code>"slide:left reverse"</code></p>
+    * @exampleTitle Reverse transition
+    * @example
+    * <div data-role="view" id="foo">Foo <a href="#bar" data-role="button">Go to Bar</a></div>
+    * <div data-role="view" id="bar">Bar <a href="#foo" data-role="button" data-transition="slide:left reverse">Go to Foo</a></div>
     * @section
     *
     * <p>When a <strong>View</strong> transitions to the <strong>View</strong> displayed before it (foo → bar → foo), this is considered a <strong>back</strong> navigation.
