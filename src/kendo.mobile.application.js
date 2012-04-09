@@ -303,6 +303,8 @@
         /**
          * Navigate the local or remote view.
          * @param {String} url The id or url of the view.
+         * @param {String} transition The transition to apply when navigating. See View Transitions section for more
+         * information.
          *
          * @exampleTitle Navigate to a remote view
          * @example
@@ -340,10 +342,10 @@
 
         /**
          * Get a reference to the current view's scroller widget instance.
-         * @returns {kendo.mobile.ui.Scroller} the scroller widget instance.
+         * @returns {Scroller} the scroller widget instance.
          */
         scroller: function() {
-            return this.view.content.data("kendoScroller");
+            return this.view.scroller;
         },
 
         /**
