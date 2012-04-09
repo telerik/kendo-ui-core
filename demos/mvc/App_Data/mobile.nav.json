@@ -185,7 +185,12 @@
                 {
                     "text": "Loading popup",
                     "url": "application/loadingpopup.html"
+                },
+                {
+                    "text": "View transitions",
+                    "url": "application/transitions.html"
                 }
+
             ]
         },
         {
