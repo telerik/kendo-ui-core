@@ -415,10 +415,6 @@
 
                         that._toggleIcon(true);
                         dataSource.next();
-
-                        console.log("page");
-                        console.log("scrolled", e.scrollTop + that.scroller.element.height());
-                        console.log("limit", that.scroller.scrollHeight() * 0.9);
                     }
                 });
             }
