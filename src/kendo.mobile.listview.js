@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        Node = window.Node,
         ui = kendo.mobile.ui,
         support = kendo.support,
         DataSource = kendo.data.DataSource,
