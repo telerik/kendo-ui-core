@@ -179,8 +179,8 @@
                 .on(START_EVENTS, filter, proxy(that._start, that))
                 .on("dragstart", filter, kendo.preventDefault);
 
-            if (!options.allowSelection) {
-                element.on("mousedown selectstart", filter, kendo.preventDefault);
+            if (!options.allowSelection && filter.length) {
+                element.on("mousedown selectstart", filter, null, kendo.preventDefault);
             }
 
             if (support.eventCapture) {
