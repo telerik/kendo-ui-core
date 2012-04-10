@@ -244,21 +244,15 @@
             return result;
         },
 
-        get: function(field, call) {
-            var that = this, result, getter;
+        get: function(field) {
+            var that = this, result;
 
             that.trigger(GET, { field: field });
 
             if (field === "this") {
                 result = that;
             } else {
-                getter = kendo.getter(field, true);
-
-                result = getter(that);
-
-                if (call && typeof result === FUNCTION) {
-                    result = result.call(that);
-                }
+                result = kendo.getter(field, true)(that);
             }
 
             return result;
