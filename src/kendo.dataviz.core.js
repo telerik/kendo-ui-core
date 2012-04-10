@@ -6,7 +6,6 @@
         dataviz = kendo.dataviz = {},
         Class = kendo.Class,
         template = kendo.template,
-        format = kendo.format,
         map = $.map,
         noop = $.noop,
         indexOf = $.inArray,
@@ -2366,6 +2365,14 @@
         }
     }
 
+    function autoFormat(format, value) {
+        if (format.indexOf("{0:") !== -1) {
+            return kendo.format.apply(this, arguments);
+        }
+
+        return kendo.toString(value, format);
+    }
+
     // Exports ================================================================
     /**
      * @name kendo.dataviz
@@ -2450,6 +2457,7 @@
 
         animationDecorator: animationDecorator,
         append: append,
+        autoFormat: autoFormat,
         autoMajorUnit: autoMajorUnit,
         defined: defined,
         getSpacing: getSpacing,

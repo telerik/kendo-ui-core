@@ -559,6 +559,23 @@
                 same(ceilDate(date), date);
             });
 
+            // ------------------------------------------------------------
+            var autoFormat = dataviz.autoFormat;
+
+            module("autoFormat");
+
+            test("Applies standard format with one argument", function() {
+                equals(autoFormat("{0:N2}", 1), "1.00");
+            });
+
+            test("Applies standard format with one argument", function() {
+                equals(autoFormat("{0:N2} {1:N2}", 1, 2), "1.00 2.00");
+            });
+
+            test("Applies simple format", function() {
+                equals(autoFormat("N2", 1), "1.00");
+            });
+
         </script>
 
         <h1 id="qunit-header">kendo.chart</h1>
