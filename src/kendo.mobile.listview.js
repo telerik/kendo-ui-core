@@ -568,6 +568,7 @@
 
         _style: function() {
             var that = this,
+                items,
                 options = that.options,
                 grouped = options.type === "group",
                 element = that.element,
@@ -585,7 +586,7 @@
                     .children("ul")
                     .addClass("km-list");
 
-                element.find(">li").each(function() {
+                element.children("li").each(function() {
                     var groupHeader = $(this).contents().first();
                     if (!groupHeader.is("ul") && !groupHeader.is("div." + GROUP_CLASS)) {
                         groupHeader.wrap(GROUP_WRAPPER);
@@ -593,8 +594,10 @@
                 });
             }
 
-            that.items().find(">a").each(enhanceLinkItem);
-            that.items().find(">label").each(enhanceCheckBoxItem);
+            items = that.items();
+
+            items.children("a").each(enhanceLinkItem);
+            items.children("label").each(enhanceCheckBoxItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         },
