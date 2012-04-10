@@ -1,7 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.ui,
-        DROPDOWNLIST = "kendoDropDownList",
         NUMERICTEXTBOX = "kendoNumericTextBox",
         DATEPICKER = "kendoDatePicker",
         proxy = $.proxy,
@@ -61,67 +60,6 @@
         }
     }
 
-    function value(dom, val) {
-        var widget = dom.data(DROPDOWNLIST) || dom.data(NUMERICTEXTBOX) || dom.data(DATEPICKER);
-
-        if (widget) {
-            widget.value(val);
-        } else if (dom.is(":radio")) {
-            dom.filter("[value=" + val + "]").attr("checked", "checked");
-        } else {
-            dom.val(val);
-        }
-    }
-
-    function identity(value) {
-        return value;
-    }
-
-    function toObject(array) {
-        var result = {},
-            idx,
-            length,
-            name,
-            members,
-            member,
-            value,
-            interimResult,
-            previousMember,
-            parentResult;
-
-        for (idx = 0, length = array.length; idx < length; idx++) {
-            members = array[idx].name.split(/[\.\[\]]+/);
-
-            members = $.grep(members, identity);
-
-            value = array[idx].value;
-
-            interimResult = result;
-
-            parentResult = result;
-
-            for (member = 0; member < members.length - 1; member++) {
-                name = members[member];
-
-                if (!isNaN(name)) {
-                    previousMember = members[member-1];
-
-                    if (!$.isArray(parentResult[previousMember])) {
-                        interimResult = parentResult[previousMember] = [];
-                    }
-                }
-
-                parentResult = interimResult;
-
-                interimResult = interimResult[name] = interimResult[name] || {};
-            }
-
-            interimResult[members[member]] = value;
-        }
-
-        return result;
-    }
-
     var FilterMenu = Widget.extend({
         init: function(element, options) {
             var that = this,
@@ -163,10 +101,6 @@
                 }
             }
 
-            that.filterModel = kendo.observable({
-                logic: "and",
-                filters: [{ field: that.field, operator: "eq", value: "" }, { field: that.field, operator: "eq", value: "" }]
-            });
 
             operators = operators[type] || options.operators[type];
 
@@ -206,16 +140,21 @@
             var that = this,
                 expression = that.dataSource.filter() || { filters: [], logic: "and" };
 
+            that.filterModel = kendo.observable({
+                logic: "and",
+                filters: [{ field: that.field, operator: "eq", value: "" }, { field: that.field, operator: "eq", value: "" }]
+            });
+
             kendo.bind(that.form, that.filterModel);
 
-            if (that._populateForm(expression)) {
+            if (that._bind(expression)) {
                 that.link.addClass("k-state-active");
             } else {
                 that.link.removeClass("k-state-active");
             }
         },
 
-        _populateForm: function(expression) {
+        _bind: function(expression) {
             var that = this,
                 filters = expression.filters,
                 idx,
@@ -238,7 +177,7 @@
                     current++;
                     found = true;
                 } else if (filter.filters) {
-                    found = found || that._populateForm(filter);
+                    found = found || that._bind(filter);
                 }
             }
 
