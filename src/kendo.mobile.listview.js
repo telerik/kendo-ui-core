@@ -48,13 +48,18 @@
         }
     }
 
+    function whitespace() {
+        return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(/^\s+$/);
+    }
+
     function enhanceLinkItem(i, item) {
         item = $(item);
 
         var parent = item.parent(),
-            itemAndDetailButtons = item.add(parent.children("[data-" + kendo.ns + "role=detailbutton]"));
+            itemAndDetailButtons = item.add(parent.children("[data-" + kendo.ns + "role=detailbutton]")),
+            otherNodes = parent.contents().not(itemAndDetailButtons).not(whitespace);
 
-        if (parent.contents().not(itemAndDetailButtons)[0]) {
+        if (otherNodes.length) {
             return;
         }
 
