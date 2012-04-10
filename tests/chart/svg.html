@@ -570,6 +570,11 @@
                     ok(path.render().indexOf("fill='none") > -1);
                 });
 
+                test("renders empty fill when fill is set to 'transparent'", function() {
+                    path.options.fill = "transparent";
+                    ok(path.render().indexOf("fill='none") > -1);
+                });
+
                 test("renders stroke color", function() {
                     path.options.stroke = "#f00";
                     ok(path.render().indexOf("stroke='#f00'") > -1);
