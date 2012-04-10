@@ -21,13 +21,15 @@
         uniqueId = dataviz.uniqueId;
 
     // Constants ==============================================================
-    var CLIP = dataviz.CLIP,
+    var BUTT = "butt",
+        CLIP = dataviz.CLIP,
         COORD_PRECISION = dataviz.COORD_PRECISION,
         DEFAULT_WIDTH = dataviz.DEFAULT_WIDTH,
         DEFAULT_HEIGHT = dataviz.DEFAULT_HEIGHT,
         DEFAULT_FONT = dataviz.DEFAULT_FONT,
         NONE = "none",
         RADIAL = "radial",
+        SOLID = "solid",
         SQUARE = "square",
         SVG_NS = "http://www.w3.org/2000/svg",
         SVG_DASH_TYPE = {
@@ -38,6 +40,7 @@
             longdashdot: [8, 3.5, 1.5, 3.5],
             longdashdotdot: [8, 3.5, 1.5, 3.5, 1.5, 3.5]
         },
+        TRANSPARENT = "transparent",
         UNDEFINED = "undefined";
 
     // View ===================================================================
@@ -302,7 +305,7 @@
                     "stroke-linejoin='round' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
                     "stroke-opacity='#= d.options.strokeOpacity #' " +
-                    "fill='#= d.options.fill || \"none\" #'></path>"
+                    "fill='#= d.renderFill() #'></path>"
                 );
             }
         },
@@ -343,7 +346,17 @@
         renderLinecap: function() {
             var dashType = this.options.dashType;
 
-            return (dashType && dashType != "solid") ? "butt" : "square";
+            return (dashType && dashType != SOLID) ? BUTT : SQUARE;
+        },
+
+        renderFill: function() {
+            var fill = this.options.fill;
+
+            if (fill && fill !== TRANSPARENT) {
+                return fill;
+            }
+
+            return NONE;
         }
     });
 
@@ -800,7 +813,7 @@
 
         dashType = dashType ? dashType.toLowerCase() : null;
 
-        if (dashType && dashType != "solid" && strokeWidth) {
+        if (dashType && dashType != SOLID && strokeWidth) {
             dashTypeArray = SVG_DASH_TYPE[dashType];
             for (i = 0; i < dashTypeArray.length; i++) {
                 result.push(dashTypeArray[i] * strokeWidth);
