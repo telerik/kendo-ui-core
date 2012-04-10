@@ -1614,7 +1614,7 @@
             return new Point2D(x, y);
         },
 
-        formatPointValue: function(format) {
+        formatValue: function(format) {
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
@@ -1778,8 +1778,8 @@
             }
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return autoFormat(tooltipFormat, value);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value);
         }
     });
 
@@ -2123,7 +2123,7 @@
                         series: point.series
                     });
                 } else if (labels.format) {
-                    labelText = point.formatPointValue(labels.format);
+                    labelText = point.formatValue(labels.format);
                 }
                 point.label = new TextBox(labelText,
                     deepExtend({
@@ -2215,7 +2215,7 @@
             );
         },
 
-        formatPointValue: function(format) {
+        formatValue: function(format) {
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
@@ -2749,8 +2749,8 @@
             }
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return autoFormat(tooltipFormat, value.x, value.y);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value.x, value.y);
         }
     });
 
@@ -2983,7 +2983,7 @@
             return new Point2D(tooltipCenter.x - w, tooltipCenter.y - h);
         },
 
-        formatPointValue: function(format) {
+        formatValue: function(format) {
             var point = this;
 
             return point.owner.formatPointValue(point.value, format);
@@ -3449,8 +3449,8 @@
             return sqr(c.x - point.x) + sqr(c.y - point.y) < sqr(r);
         },
 
-        formatPointValue: function(value, tooltipFormat) {
-            return autoFormat(tooltipFormat, value);
+        formatPointValue: function(value, format) {
+            return autoFormat(format, value);
         }
     });
 
@@ -4344,7 +4344,7 @@
                     percentage: point.percentage
                 });
             } else if (tooltipOptions.format) {
-                content = point.formatPointValue(tooltipOptions.format);
+                content = point.formatValue(tooltipOptions.format);
             }
 
             element.html(content);
