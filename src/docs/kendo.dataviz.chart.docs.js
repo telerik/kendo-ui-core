@@ -651,7 +651,7 @@
          *             // rotate the labels just slightly for visual effect
          *             rotation: 10,
          *             // format the labels for currency
-         *             format: "{0:C}"
+         *             format: "C"
          *         }
          *     },
          *     ...
@@ -834,7 +834,7 @@
          *     valueAxis: {
          *        labels: {
          *            // set the format to currency
-         *            format: "{0:C}"
+         *            format: "C"
          *        }
          *     },
          *     ...
@@ -1252,7 +1252,7 @@
          *             // rotate the labels just slightly for visual effect
          *             rotation: 10,
          *             // format the labels for currency
-         *             format: "{0:C}"
+         *             format: "C"
          *         }
          *     },
          *     ...
@@ -1442,7 +1442,7 @@
          *     categoryAxis: {
          *        labels: {
          *            // set the format to currency
-         *            format: "{0:C}"
+         *            format: "C"
          *        }
          *     },
          *     ...
@@ -1675,7 +1675,7 @@
          *             // set the margin on all sides to 1
          *             margin: 1,
          *             // format the labels as currency
-         *             format: "{0:C}"
+         *             format: "C"
          *         }
          *     },
          *     ...
@@ -1820,7 +1820,7 @@
          * @option {String} [seriesDefaults.labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "C"
          * @option {Object} [seriesDefaults.border] The border of the series.
          * @option {Number} [seriesDefaults.border.width] <0> The width of the border.
          * @option {String} [seriesDefaults.border.color] <"black"> The color of the border.
@@ -1876,7 +1876,7 @@
          * @option {String} [seriesDefaults.tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {String|Function} [seriesDefaults.tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -2137,7 +2137,7 @@
          * @option {String} [series.type="bar".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "C"
          * @option {Object} [series.type="bar".border] The border of the series.
          * @option {Number} [series.type="bar".border.width] <1> The width of the border.
          * @option {String} [series.type="bar".border.color] <the color of the curren series>
@@ -2211,7 +2211,7 @@
          * @option {String} [series.type="bar".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {String|Function} [series.type="bar".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -2512,12 +2512,12 @@
          * @option {String} [series.type="line".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "C"
          * @option {Object} [series.type="line".tooltip] The data point tooltip configuration options.
          * @option {String} [series.type="line".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {String|Function} [series.type="line".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -2745,7 +2745,7 @@
          * @option {String} [series.type="pie".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "C"
          * @option {String} [series.type="pie".labels.align] <"circle">
          * Defines the alignment of the pie labels.
          * <div class="details-list">
@@ -2853,7 +2853,7 @@
          * @option {String} [series.type="pie".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {String|Function} [series.type="pie".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -2971,7 +2971,7 @@
          * @option {String} [series.type="scatter".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "C"
          * @option {Number|Object} [series.type="scatter".labels.margin] <{ left: 5, right: 5}>
          * The margin of the labels.
          * _example
@@ -3096,7 +3096,7 @@
          * @option {String} [series.type="scatter".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}--{0:C}"
+         * format: "{0:C}--{1:C}"
          * @option {Number|Object} [series.type="scatter".tooltip.padding] The padding of the tooltip.
          * _example
          * // sets the top, right, bottom and left padding to 3px.
@@ -3252,7 +3252,7 @@
          * @option {String} [series.type="scatterLine".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}--{0:C}"
+         * format: "{0:C}--{1:C}"
          * @option {Number|Object} [series.type="scatterLine".labels.margin] <{ left: 5, right: 5}>
          * The margin of the labels.
          * _example
@@ -3401,7 +3401,7 @@
          * @option {String} [series.type="scatterLine".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {Number|Object} [series.type="scatterLine".tooltip.padding] The padding of the tooltip.
          * _example
          * // sets the top, right, bottom and left padding to 3px.
@@ -3644,12 +3644,12 @@
          * @option {String} [series.type="area".labels.format] The format of the labels.
          * _example
          * //sets format of the labels
-         * format: "{0:C}"
+         * format: "C"
          * @option {Object} [series.type="area".tooltip] The data point tooltip configuration options.
          * @option {String} [series.type="area".tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {String|Function} [series.type="area".tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
@@ -3829,7 +3829,7 @@
          * @option {String} [tooltip.format] The tooltip format.
          * _example
          * //sets format of the tooltip
-         * format: "{0:C}"
+         * format: "C"
          * @option {String|Function} [tooltip.template] The tooltip template.
          * Template variables:
          * <ul>
