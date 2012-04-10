@@ -30,7 +30,7 @@
                         '<option value="#=op#">#=operators[op]#</option>'+
                     '#}#'+
                 '</select>'+
-                '<input data-#=ns#bind="value:filters[0].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
+                '<input data-#=ns#bind="value:filters[0].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                 '#if(extra){#'+
                     '<select class="k-filter-and" data-#=ns#bind="value: logic" data-#=ns#role="dropdownlist">'+
                         '<option value="and">And</option>'+
@@ -41,7 +41,7 @@
                             '<option value="#=op#">#=operators[op]#</option>'+
                         '#}#'+
                     '</select>'+
-                    '<input data-#=ns#bind="value: filters[1].value" class="k-widget k-input k-autocomplete" type="text" data-#=ns#type="#=type#"/>'+
+                    '<input data-#=ns#bind="value: filters[1].value" class="k-textbox" type="text" data-#=ns#type="#=type#"/>'+
                 '#}#'+
                 '<button type="submit" class="k-button">#=messages.filter#</button>'+
                 '<button type="reset" class="k-button">#=messages.clear#</button>'+
@@ -127,9 +127,11 @@
                     reset: proxy(that._reset, that)
                 })
                 .find("[" + kendo.attr("type") + "=number]")
+                .removeClass("k-textbox")
                 [NUMERICTEXTBOX]()
                 .end()
                 .find("[" + kendo.attr("type") + "=date]")
+                .removeClass("k-textbox")
                 [DATEPICKER]();
 
 
@@ -263,7 +265,7 @@
 
             e.preventDefault();
 
-            that.filter(that.filterModel);
+            that.filter(that.filterModel.toJSON());
 
             that.popup.close();
         },
