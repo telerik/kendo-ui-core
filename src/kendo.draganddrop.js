@@ -18,6 +18,7 @@
         MOVE_EVENTS = "mousemove",
         END_EVENTS = "mouseup mouseleave",
         KEYUP = "keyup",
+        CHANGE = "change",
 
         // Draggable events
         DRAGSTART = "dragstart",
@@ -506,23 +507,34 @@
             that.size = that.container[that.measure]();
             that.total = that.element[0][that.scrollSize];
             that.min = Math.min(that.max, that.size - that.total);
-            that.trigger("change", that);
+            that.trigger(CHANGE, that);
         }
     });
 
-    var PaneDimensions = Class.extend({
+    var PaneDimensions = Observable.extend({
         init: function(options) {
-            var that = this;
+            var that = this,
+                refresh = proxy(that.refresh, that),
+                resizeHandler = refresh;
+
+            Observable.fn.init.call(that);
+
+            if (support.mobileOS.android) {
+                resizeHandler = function() { setTimeout(refresh, 200); };
+            }
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
 
-            $(window).bind(RESIZE_EVENT, proxy(that.refresh, that));
+            that.bind(CHANGE, options);
+
+            $(window).bind(RESIZE_EVENT, resizeHandler);
         },
 
         refresh: function() {
             this.x.update();
             this.y.update();
+            this.trigger(CHANGE);
         }
     });
 
@@ -549,7 +561,7 @@
             }
 
             movable.translateAxis(axis, delta);
-            that.trigger("change", that);
+            that.trigger(CHANGE, that);
         }
     });
 
@@ -648,7 +660,7 @@
             if (newCoordinates != that.coordinates) {
                 that.element[0].style[TRANSFORM_STYLE] = newCoordinates;
                 that._saveCoordinates(newCoordinates);
-                that.trigger("change");
+                that.trigger(CHANGE);
             }
         },
 
