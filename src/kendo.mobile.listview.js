@@ -185,6 +185,17 @@
     * </script>
     *
     * @section
+    * <h3>Link Items</h3>
+    * <p>The mobile ListView will automatically style items with a single link with an additional details indicator. </p>
+    *
+    * @exampleTitle ListView with link items
+    * @example
+    * <ul data-role="listview">
+    *   <li><a href="#foo">Foo</a></li>
+    *   <li><a href="#bar">Bar</a></li>
+    * </ul>
+    *
+    * @section
     * <h3>Item Icons</h3>
     * An icon can be set in two ways - either by adding an <code>img</code> element inside the <code>li</code> element, or by setting an <code>icon</code> data attribute to the <code>li</code> element.
     * if data attribute is used then an <code>a</code> element should be put in the <code>li</code> element. The icon class will be applied to the <code>a</code> element.
