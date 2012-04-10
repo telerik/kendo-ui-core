@@ -512,12 +512,18 @@
 
     var PaneDimensions = Class.extend({
         init: function(options) {
-            var that = this;
+            var that = this,
+                refresh = proxy(that.refresh, that),
+                resizeHandler = refresh;
+
+            if (support.mobileOS.android) {
+                resizeHandler = function() { setTimeout(refresh, 200); }
+            }
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
             that.y = new PaneDimension(extend({horizontal: false}, options));
 
-            $(window).bind(RESIZE_EVENT, proxy(that.refresh, that));
+            $(window).bind(RESIZE_EVENT, resizeHandler);
         },
 
         refresh: function() {
