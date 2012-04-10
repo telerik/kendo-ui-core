@@ -231,7 +231,10 @@
 
                 dimensions = new PaneDimensions({
                     element: inner,
-                    container: element
+                    container: element,
+                    change: function() {
+                        that.trigger("resize");
+                    }
                 }),
 
                 drag = new kendo.Drag(element, {
