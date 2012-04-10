@@ -2366,7 +2366,7 @@
     }
 
     function autoFormat(format, value) {
-        if (format.indexOf("{0:") !== -1) {
+        if (format.indexOf("{0:") !== -1 || format.indexOf("{0}") !== -1) {
             return kendo.format.apply(this, arguments);
         }
 

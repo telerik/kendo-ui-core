@@ -36,6 +36,7 @@
         Title = dataviz.Title,
         animationDecorator = dataviz.animationDecorator,
         append = dataviz.append,
+        autoFormat = dataviz.autoFormat,
         defined = dataviz.defined,
         getSpacing = dataviz.getSpacing,
         inArray = dataviz.inArray,
@@ -1498,6 +1499,8 @@
                         value: bar.value,
                         series: bar.series
                     });
+                } else if (labels.format) {
+                    labelText = autoFormat(labels.format, labelText);
                 }
 
                 bar.append(
@@ -1776,7 +1779,7 @@
         },
 
         formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value);
+            return autoFormat(tooltipFormat, value);
         }
     });
 
@@ -2131,7 +2134,7 @@
                             left: 5,
                             right: 5
                         }
-                    }, labels, { format: "" })
+                    }, labels)
                 );
                 point.append(point.label);
             }
@@ -2747,7 +2750,7 @@
         },
 
         formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value.x, value.y);
+            return autoFormat(tooltipFormat, value.x, value.y);
         }
     });
 
@@ -2836,6 +2839,8 @@
                     series: segment.series,
                     percentage: segment.percentage
                 });
+            } else if (labels.format) {
+                labelText = autoFormat(labels.format, labelText);
             }
 
             if (labels.visible) {
@@ -3445,7 +3450,7 @@
         },
 
         formatPointValue: function(value, tooltipFormat) {
-            return format(tooltipFormat, value);
+            return autoFormat(tooltipFormat, value);
         }
     });
 
