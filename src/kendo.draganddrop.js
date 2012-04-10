@@ -517,7 +517,7 @@
                 resizeHandler = refresh;
 
             if (support.mobileOS.android) {
-                resizeHandler = function() { setTimeout(refresh, 200); }
+                resizeHandler = function() { setTimeout(refresh, 200); };
             }
 
             that.x = new PaneDimension(extend({horizontal: true}, options));
