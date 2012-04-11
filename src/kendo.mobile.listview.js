@@ -340,6 +340,8 @@
             loadMore: false,
             loadMoreText: "Press to load more",
             pullToRefresh: false,
+            endlessScroll: false,
+            scrollTreshold: 0.95,
             appendOnRefresh: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
@@ -382,9 +384,10 @@
             var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
-                application = view.application;
+                application = view.application,
+                scroller;
 
-            that.scroller = view.scroller;
+            that.scroller = scroller = view.scroller;
             that._hideLoadingProxy = proxy(application.hideLoading, application);
             that._showLoadingProxy = proxy(application.showLoading, application);
 
@@ -393,13 +396,38 @@
             }
 
             if (options.pullToRefresh) {
-                that.scroller.setOptions({
+                scroller.setOptions({
                     pullToRefresh: true,
                     pull: function() { dataSource.read(); },
                     pullTemplate: options.pullTemplate,
                     releaseTemplate: options.releaseTemplate,
                     refreshTemplate: options.refreshTemplate
                 });
+            }
+
+            if (options.endlessScroll) {
+                that._scrollHeight = scroller.element.height();
+
+                scroller.bind("resize", function() {
+                    that._scrollHeight = scroller.element.height();
+                })
+                .bind("scroll", function(e) {
+                    if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
+                        that.loading = true;
+
+                        that._toggleIcon(true);
+                        dataSource.next();
+                    }
+                });
+            }
+        },
+
+        _calcTreshold: function() {
+            var that = this,
+                scroller = that.scroller;
+
+            if (scroller) {
+                that._treshold = scroller.scrollHeight() * that.options.scrollTreshold;
             }
         },
 
@@ -417,6 +445,7 @@
             var that = this,
                 element = that.element,
                 options = that.options,
+                loadMore = options.loadMore,
                 dataSource = that.dataSource,
                 view = dataSource.view(),
                 appendMethod = "html",
@@ -449,16 +478,24 @@
                 contents = kendo.render(that.template, view);
             }
 
-            if (options.loadMore && !that._loadButton.is(":visible")) {
+            if (that.loading) {
                 appendMethod = "append";
-                that._toggleButton(true);
+
+                that.loading = false;
+
+                if (loadMore) {
+                    that._toggleButton(true);
+                } else {
+                    that._toggleIcon(false);
+                }
+
             } else if (options.appendOnRefresh) {
                 appendMethod = "prepend";
             }
 
             element[appendMethod](contents);
 
-            if (that.options.pullToRefresh) {
+            if (options.pullToRefresh) {
                 that.scroller.pullHandled();
             }
 
@@ -469,6 +506,7 @@
             }
 
             that._style();
+            that._calcTreshold();
             that.trigger("dataBound", { ns: ui });
         },
 
@@ -565,21 +603,24 @@
 
         _loadMore: function() {
             var that = this,
-                wrapper = that.wrapper,
-                options = that.options;
+                options = that.options,
+                loadMore = options.loadMore,
+                loadWrapper;
 
-            if (options.loadMore) {
-                wrapper.append('<span class="km-load-more"><span style="display:none" class="km-icon"></span><button class="km-load km-button">' + options.loadMoreText + '</button></span>');
-                that._loadButton = wrapper
-                                    .children(".km-load-more")
-                                    .children(".km-load")
-                                    .click(function() {
-                                       that._toggleButton(false);
-                                       that.dataSource.next();
-                                    });
+            if (loadMore || options.endlessScroll) {
+                that._loadIcon = $('<span style="display:none" class="km-icon"></span>');
+                loadWrapper = $('<span class="km-load-more"></span>').append(that._loadIcon);
 
-                that._loadIcon = that._loadButton.prev();
-            }
+                if (loadMore) {
+                    that._loadButton = $('<button class="km-load km-button">' + options.loadMoreText + '</button>')
+                                        .click(function() {
+                                           that.loading = true;
+                                           that._toggleButton(false);
+                                           that.dataSource.next();
+                                        });
+
+                    loadWrapper.append(that._loadButton);
+                }
         },
 
         _toggleButton: function(toggle) {
