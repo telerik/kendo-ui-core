@@ -445,10 +445,10 @@
             var that = this,
                 element = that.element,
                 options = that.options,
-                loadMore = options.loadMore,
                 dataSource = that.dataSource,
                 view = dataSource.view(),
-                appendMethod = "html",
+                loading = that.loading,
+                appendMethod = loading ? "append" : "html",
                 contents,
                 data,
                 item;
@@ -478,22 +478,21 @@
                 contents = kendo.render(that.template, view);
             }
 
-            if (that.loading) {
-                appendMethod = "append";
-
-                that.loading = false;
-
-                if (loadMore) {
-                    that._toggleButton(true);
-                } else {
-                    that._toggleIcon(false);
-                }
-
-            } else if (options.appendOnRefresh) {
+             if (options.appendOnRefresh) {
                 appendMethod = "prepend";
             }
 
             element[appendMethod](contents);
+
+            if (loading) {
+                that.loading = false;
+
+                if (options.loadMore) {
+                    that._toggleButton(true);
+                } else {
+                    that._toggleIcon(false);
+                }
+            }
 
             if (options.pullToRefresh) {
                 that.scroller.pullHandled();
