@@ -153,7 +153,7 @@
 
 <script type="text/javascript">
 
-        $("#Menu1").kendoMenu({ animation: false, select: Select, open: Open, close: Close, hoverDelay: 0 });
+        $("#Menu1").kendoMenu({ animation: false, select: Select, open: Open, close: Close, hoverDelay: 0, popupCollision: "flip" });
 
         var menu,
             CLICK = kendo.support.touch ? "touchend" : "click";
@@ -200,7 +200,7 @@
         });
 
         test('clicking should raise select event', function() {
-            var item = getRootItem(6);
+            var item = getRootItem(2);
 
             isSelectRaised = false;
 
@@ -226,12 +226,29 @@
             }, 1);
         });
 
-        test('open should not open item if disabled', function() {
-            var item = getRootItem(3);
+        asyncTest('open should open item even if disabled', function() {
+            var item = getRootItem(6);
 
+            menu.disable(item);
             menu.open(item);
 
-            equal(item.find('> .k-group').css("display"), "none");
+            setTimeout(function () {
+                equal(item.find('.k-group').eq(0).css("display"), "block");
+                start();
+            }, 1);
+        });
+
+        asyncTest('clicking should not open item if disabled', function() {
+            var item = getRootItem(3);
+
+            menu.disable(item);
+
+            item.find('> .k-link').trigger(CLICK);
+
+            setTimeout(function () {
+                equal(item.find('.k-group').eq(0).css("display"), "none");
+                start();
+            }, 1);
         });
 
         test('disable method should disable enabled item', function() {
@@ -248,6 +265,17 @@
             menu.enable(item);
 
             ok(item.hasClass('k-state-default'));
+        });
+
+        asyncTest('configure with popupCollision overrides the default', function() {
+            var item = getRootItem(3);
+
+            menu.open(item);
+
+            setTimeout(function () {
+                ok(item.find(".k-group").eq(0).data("kendoPopup").options.collision == "flip");
+                start();
+            }, 1);
         });
 
         test('client object is available in on load', function() {
