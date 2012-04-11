@@ -429,6 +429,7 @@
 
                 scroller.bind("resize", function() {
                     that._scrollHeight = scroller.element.height();
+                    that._calcTreshold();
                 })
                 .bind("scroll", function(e) {
                     if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
@@ -525,7 +526,7 @@
             }
 
             that._style();
-            that._calcTreshold();
+            //that._calcTreshold();
             that.trigger("dataBound", { ns: ui });
         },
 
