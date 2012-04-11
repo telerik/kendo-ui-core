@@ -488,7 +488,10 @@
                 return;
             }
 
-            that._templates();
+            if (!that.template) {
+                that._templates();
+            }
+
             that.trigger("dataBinding");
 
             if (dataSource.group()[0]) {
@@ -525,7 +528,6 @@
             }
 
             that._style();
-            //that._calcTreshold();
             that.trigger("dataBound", { ns: ui });
         },
 
