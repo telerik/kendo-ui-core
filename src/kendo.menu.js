@@ -377,6 +377,13 @@
          * $("#menu").kendoMenu({
          *     direction: "top left"
          * });
+         * @option {String} [popupCollision] <> Specifies how Menu should adjust to screen boundaries. By default the strategy is <b>"fit"</b> for a sub menu with a horizontal parent,
+         * meaning it will move to fit in screen boundaries in all directions, and <b>"fit flip"</b> for a sub menu with vertical parent, meaning it will fit vertically and flip over
+         * its parent horizontally. You can also switch off the screen boundary detection completely if you set the <b>popupCollision</b> to false.
+         * _example
+         * $("#menu").kendoMenu({
+         *     popupCollision: false
+         * });
          */
         init: function(element, options) {
             var that = this;
@@ -840,7 +847,7 @@
                             popup = ul.kendoPopup({
                                 origin: directions.origin,
                                 position: directions.position,
-                                collision: parentHorizontal ? "fit" : "fit flip",
+                                collision: options.popupCollision !== undefined ? options.popupCollision : (parentHorizontal ? "fit" : "fit flip"),
                                 anchor: li,
                                 appendTo: li,
                                 animation: {
