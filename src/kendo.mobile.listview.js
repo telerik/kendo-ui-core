@@ -278,8 +278,10 @@
         * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
         * @option {String}  [releaseTemplate] <"Release to refresh"> The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
         * @option {String}  [refreshTemplate] <"Refreshing"> The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
-        * @option {Boolean} [loadMore] <false> If set to true, the listview renders a button on the end, which appends the newly loaded data.
-        * @option {String}  [loadMoreText] <"Press to load more"> The text of the "load more" button.
+        * @option {Boolean} [loadMore] <false> If set to true, a button is rendered on the end of the listview, which fetch the next page of data.
+        * @option {String}  [loadMoreText] <"Press to load more"> The text of the rendered load-more button.
+        * @option {Boolean} [endlessScroll] <false> If set to true, the listview gets the next page of data on scroll.
+        * @option {String}  [scrollTreshold] <30> The scroll treshold, set in pixels, after which the listview fetch the next page.
         */
         init: function(element, options) {
             var that = this;
@@ -356,16 +358,16 @@
             name: "ListView",
             type: "flat",
             template: "${data}",
+            headerTemplate: '<span class="km-text">${value}</span>',
+            appendOnRefresh: false,
             loadMore: false,
             loadMoreText: "Press to load more",
-            pullToRefresh: false,
             endlessScroll: false,
             scrollTreshold: 30,
-            appendOnRefresh: false,
+            pullToRefresh: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
             refreshTemplate: "Refreshing",
-            headerTemplate: '<span class="km-text">${value}</span>',
             pullOffset: 140,
             style: ""
         },
