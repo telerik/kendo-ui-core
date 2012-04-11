@@ -391,7 +391,7 @@
             that._hideLoadingProxy = proxy(application.hideLoading, application);
             that._showLoadingProxy = proxy(application.showLoading, application);
 
-            if (!options.pullToRefresh && !options.loadMore) {
+            if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
                 dataSource.bind(REQUEST_START, that._showLoadingProxy);
             }
 
