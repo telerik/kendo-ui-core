@@ -463,14 +463,13 @@
                     ds.bind("change", secondAssert);
 
                     scroller.trigger("scroll", {
-                        scrollTop: 300
+                        scrollTop: scroller.scrollHeight() - scroller.element.height()
                     });
                 }
 
                 ds.bind("change", firstAssert);
 
             });
-
         </script>
     </body>
 </html>
