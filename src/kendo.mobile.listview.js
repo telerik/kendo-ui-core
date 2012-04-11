@@ -296,7 +296,7 @@
             that.element.wrap(WRAPPER);
             that.wrapper = that.element.parent();
 
-            that._loadMore();
+            that._footer();
 
             that._dataSource();
 
@@ -360,7 +360,7 @@
             loadMoreText: "Press to load more",
             pullToRefresh: false,
             endlessScroll: false,
-            scrollTreshold: 0.95,
+            scrollTreshold: 30,
             appendOnRefresh: false,
             pullTemplate: "Pull to refresh",
             releaseTemplate: "Release to refresh",
@@ -446,7 +446,7 @@
                 scroller = that.scroller;
 
             if (scroller) {
-                that._treshold = scroller.scrollHeight() * that.options.scrollTreshold;
+                that._treshold = scroller.scrollHeight() - that.options.scrollTreshold;
             }
         },
 
@@ -623,7 +623,7 @@
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         },
 
-        _loadMore: function() {
+        _footer: function() {
             var that = this,
                 options = that.options,
                 loadMore = options.loadMore,
