@@ -1,4 +1,4 @@
-<div data-role="view" id="flat" data-init="mobileListViewPressToLoadMore" data-title="Twitter">
+<div data-role="view" id="flat" data-init="mobileListViewEndlessScrolling" data-title="Scroll down to load">
     <header data-role="header">
         <div data-role="navbar">
             <span data-role="view-title"></span>
@@ -6,10 +6,10 @@
         </div>
     </header>
 
-    <ul id="load-more"></ul>
+    <ul id="endless-scrolling"></ul>
 </div>
 
-<script id="load-more-template" type="text/x-kendo-template">
+<script id="endless-scrolling-template" type="text/x-kendo-template">
     <div class="tweet">
         <img class="pullImage" src="#= profile_image_url #" alt="#= from_user #" />#= text #
         <div class="metadata">
@@ -21,9 +21,9 @@
 </script>
 
 <script>
-    function mobileListViewPressToLoadMore() {
+    function mobileListViewEndlessScrolling() {
             var dataSource = new kendo.data.DataSource({
-                pageSize: 3,
+                pageSize: 10,
                 serverPaging: true,
                 transport: {
                     read: {
@@ -45,10 +45,11 @@
                 }
             });
 
-        $("#load-more").kendoMobileListView({
+        $("#endless-scrolling").kendoMobileListView({
             dataSource: dataSource,
-            template: $("#load-more-template").text(),
-            loadMore: true
+            template: $("#endless-scrolling-template").text(),
+            endlessScroll: true,
+            scrollTreshold: 30 //treshold in pixels
         });
     }
 </script>
