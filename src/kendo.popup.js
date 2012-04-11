@@ -53,7 +53,7 @@
             element = that.element;
             options = that.options;
 
-            that.collisions = that.options.collision.split(" ");
+            that.collisions = options.collision ? options.collision.split(" ") : [];
 
             if (that.collisions.length === 1) {
                 that.collisions.push(that.collisions[0]);

@@ -475,6 +475,19 @@
                 equal(popup._fit(42, 24, 42), -24); // should return offset from the current position - in this case its size
             });
 
+            test("collision is \"flip fit\" by default", function() {
+                var popup = new Popup(div);
+
+                equal(popup.options.collision, "flip fit");
+            });
+
+            test("setting collision to false stops boundary detection", function() {
+                var popup = new Popup(div, { collision: false });
+
+                ok($.isArray(popup.collisions));
+                equal(popup.collisions.length, 0);
+            });
+
             test("collision fit calls fit strategy when opened", function() {
                 var argsCount,
                     MyPopup = Popup.extend({
