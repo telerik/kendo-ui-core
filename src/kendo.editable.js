@@ -127,14 +127,22 @@
             var that = this,
                 isBoolean = typeof e.value === "boolean",
                 input,
+                preventChangeTrigger = that._validationEventInProgress,
                 values = {};
 
             values[e.field] = e.value;
 
             input = $(':input[' + kendo.attr("bind") + '="' + (isBoolean ? 'checked:' : 'value:') + e.field + '"]', that.element);
 
-            if (!that.validatable.validateInput(input) || that.trigger(CHANGE, { values: values })) {
-                e.preventDefault();
+            try {
+                that._validationEventInProgress = true;
+
+                if (!that.validatable.validateInput(input) || (!preventChangeTrigger && that.trigger(CHANGE, { values: values }))) {
+                    e.preventDefault();
+                }
+
+            } finally {
+                that._validationEventInProgress = false;
             }
         },
 
