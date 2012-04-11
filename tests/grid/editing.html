@@ -470,6 +470,24 @@
                 ok(!called);
             });
 
+            test("change model value during save event", function() {
+                var args,
+                    grid = setup({
+                        save: function(e) {
+                            e.model.set("foo", "boo");
+                            e.preventDefault();
+                        },
+                        dataSource: new DataSource({
+                            data: [{ foo: "bar", name: "tom" }, { foo: "baz", name: "jerry" }]
+                        })
+                    });
+
+                table.find("tr>td:first").click();
+                table.find("tr>td:first input").val("baz").change();
+                grid.closeCell();
+                equal(table.find("tr>td:first").text(), "boo");
+            });
+
             test("save event is raised when item is updated", function() {
                 var args,
                     grid = setup({
