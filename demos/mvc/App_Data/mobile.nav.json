@@ -87,6 +87,10 @@
                     "url": "listview/press-to-load-more.html"
                 },
                 {
+                    "text": "Endless scrolling",
+                    "url": "listview/endless-scrolling.html"
+                },
+                {
                     "text": "Custom templates",
                     "url": "listview/templates.html"
                 }
