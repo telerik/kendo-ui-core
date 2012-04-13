@@ -240,7 +240,7 @@
         * $("#autoComplete").kendoAutoComplete({
         *     filter: 'contains'
         * });
-        * @option {String} [ignoreCase] <true> Defines whether the filtration should be case insensitive. Set to false, makes the filtration case sensitive.
+        * @option {String} [ignoreCase] <true> Defines whether the filtration should be case sensitive.
         * _example
         * $("#autoComplete").kendoAutoComplete({
         *     filter: 'contains',

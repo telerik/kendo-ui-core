@@ -296,6 +296,11 @@
          *          }
          *      });
          *  &lt;/script&gt;
+         * @option {String} [ignoreCase] <true> Controls whether the search should be case sensitive.
+         * _example
+         * $("#dropdownlist").kendoDropDownList({
+         *     ignoreCase: false //now search will be case sensitive
+         * });
          */
         init: function(element, options) {
             var that = this;
