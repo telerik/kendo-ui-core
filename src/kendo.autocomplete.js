@@ -382,7 +382,7 @@
             height: 200,
             filter: "startswith",
             ignoreCase: true,
-            highlightFirst: false,
+            highlightFirst: true,
             separator: null,
             placeholder: "",
             animation: {}
