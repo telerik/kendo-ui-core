@@ -10,25 +10,21 @@
      * @section
      * <p>
      *  A <strong>DropDownList</strong> displays a list of values and allows the selection of a single value from the
-     *  list. It is a richer version of the standard HTML select, providing support for local and remote data binding,
-     *  item templates, and configurable options for controlling the list behavior.
-     * </p>
-     * <p>
-     *  If you want to allow user input, use the
-     *  <a href="../dropdownlist/index.html" title="Kendo UI dropdownlist">Kendo UI dropdownlist</a>.
+     *  list.Custom values may not be entered via keyboard input.If you wish permit keyboard input - that is, custom
+     *  values are allowed - use the <a href="../combobox/index.html" title="ComboBox">ComboBox</a>.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>There are two basic ways to create a <strong>DropDownList</strong>:</p>
+     * <p>There are two ways to create a <strong>DropDownList</strong>:</p>
      * <ol>
-     *  <li>From a input element, using data binding to define the list items</li>
-     *  <li>From a select element, using HTML to define the list items</li>
+     *  <li>From a &lt;select&gt; element with HTML to define the list items</li>
+     *  <li>From an &lt;input&gt; element with databinding to define the listitems</li>
      * </ol>
      * <p>
-     *  Regardless of the initialization technique, the resulting <strong>DropDownList</strong> will look and function
-     *  identically.
+     *  A <strong>DropDownList</strong> will look and operate consistently regardless of the way in which it was
+     *  created.
      * </p>
      *
-     * @exampleTitle Creating a dropdownlist from existing input HTML element
+     * @exampleTitle Creating a DropDownList from existing &lt;input&gt; element
      * @example
      * <input id="dropDownList" />
      *
@@ -53,7 +49,7 @@
      *     });
      * });
      *
-     * @exampleTitle Create a DropDownList from existing select HTML element with a defined structure
+     * @exampleTitle Create a DropDownList from existing &lt;select&gt; element with a pre-defined structure
      * @example
      * <select id="dropDownList">
      *     <option>Item 1</option>
@@ -62,16 +58,18 @@
      * </select>
      *
      * <script>
-     *    $(document).ready(function(){
-     *       $("#dropDownList").kendoDropDownList();
-     *    });
+     *     $(document).ready(function(){
+     *         $("#dropDownList").kendoDropDownList();
+     *     });
      * </script>
+     *
      * @section
-     * <h3>Binding to Data</h3>
+     * <h3>Binding to Local or Remote Data</h3>
      * <p>
-     *  A <strong>DropDownList</strong> can be bound to both local arrays and remote data via the DataSource component.
-     *  Arrays are appropriate for limited value options while remote data binding is better suited for larger data
-     *  sets. With remote binding, options will be loaded on-demand, similar to an <strong>AutoComplete</strong>.
+     *  The <strong>DropDownList</strong> can be bound to both local arrays and remote data via the
+     *  <a href="../datasource/index.html" title="DataSource">DataSource</a> component; an abstraction for local and
+     *  remote data. Local arrays are appropriate for limited value options, while remote data binding is better for
+     *  larger data sets. With remote data-binding, items will be loaded on-demand; when they are displayed.
      * </p>
      *
      * @exampleTitle Binding to a remote OData service
@@ -95,11 +93,12 @@
      * });
      *
      * @section
+     * @section
      * <h3>Customizing Item Templates</h3>
      * <p>
-     *  A DropDownList leverages templates, providing an ability to control item rendering. For a complete overview of
-     *  the template capabilities and syntax of Kendo UI Web, please review the
-     *  <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
+     *  The <strong>DropDownList</strong> uses Kendo UI templates to enable you to control how items are rendered. For
+     *  a detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the
+     *  <a href="../templates/index.html" title="Kendo UI Template">demos and documentation</a>.
      * </p>
      *
      * @exampleTitle Basic item template customization
@@ -110,9 +109,11 @@
      * <!-- Template -->
      * <script id="scriptTemplate" type="text/x-kendo-template">
      *     # if (data.BoxArt.SmallUrl) { #
-     *         <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
+     *         <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />
+     *         Title:${ data.Name }, Year: ${ data.Name }
      *     # } else { #
-     *         <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
+     *         <img alt="${ data.Name }" />
+     *         Title:${ data.Name }, Year: ${ data.Name }
      *     # } #
      * </script>
      *
