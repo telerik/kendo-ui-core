@@ -241,6 +241,13 @@
                 equal(combobox.selectedIndex, 1);
             });
 
+            test("text method does not throw expection if set to null", function() {
+                combobox.text(null);
+
+                equal(combobox.value(), "");
+                equal(combobox.text(), "");
+            });
+
             asyncTest("text should not change selection if selected item is equal to input.value", 2, function() {
                 var combobox = $("<input/>").kendoComboBox({
                     dataTextField: "text",
