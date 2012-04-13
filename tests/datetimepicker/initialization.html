@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DateTimePicker Initialization</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DateTimePicker Initialization</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+
+            var datetimepicker = kendo.ui.DateTimePicker,
+                input;
+
+            QUnit.config.testTimeout = 800;
+            QUnit.config.reorder = false;
+
+            module("kendo.ui.DateTimePicker initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            /*test("get value of the input if", function() {
+                input.val("10/10/2000");
+
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                equal(+datetimepicker.value(), +new Date(2000, 9, 10));
+            });*/
+
+            test("_wrapper() wraps input element", function() {
+                input.css("width", "200");
+
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                ok(input.parent().hasClass("k-picker-wrap k-state-default"));
+                equal(datetimepicker.wrapper.attr("class"), "k-widget k-datetimepicker k-header");
+            });
+
+            test("DateTimePicker adds k-input class to the element", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                ok(datetimepicker.element.hasClass("k-input"));
+            });
+
+            test("_icons method creates calendar and clock button", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+                    icons = datetimepicker.wrapper.find(".k-select");
+
+                ok(icons.is("span"));
+                ok(icons.hasClass("k-select"));
+
+                ok(icons.children(":first").hasClass("k-icon k-icon-calendar"));
+                ok(icons.children(":last").hasClass("k-icon k-icon-clock"));
+            });
+
+            test("DateTimePicker creates DateView", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                ok(datetimepicker.dateView);
+            });
+
+            test("DateTimePicker sets correct options to DateView", function() {
+                var datetimepicker = input.kendoDateTimePicker({open: function() {}, close: $.noop}).data("kendoDateTimePicker"),
+                    dateView = datetimepicker.dateView,
+                    options = dateView.options,
+                    dpOptions = datetimepicker.options;
+
+                ok(dateView.options);
+                equal(options.anchor, datetimepicker.wrapper);
+                equal(options.value, dpOptions.value);
+                equal(+options.min, +dpOptions.min);
+                equal(+options.max, +dpOptions.max);
+            });
+
+            test("DateTimePicker creates TimeView", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                ok(datetimepicker.timeView);
+            });
+
+            test("DateTimePicker sets correct options to TimeView", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+                    timeView = datetimepicker.timeView;
+
+                equal(timeView.options.anchor, datetimepicker.wrapper);
+                equal(timeView.options.min, datetimepicker.options.min);
+                equal(timeView.options.max, datetimepicker.options.max);
+                equal(timeView.options.format, datetimepicker.options.timeFormat);
+                equal(timeView.options.interval, datetimepicker.options.interval);
+            });
+
+            /*
+            test("dateView onChange should call value()", function() {
+                var called = false,
+                    datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                stub(datetimepicker, {
+                    _change: datetimepicker.value,
+                    close: datetimepicker.close
+                });
+
+                $.proxy(datetimepicker.dateView.options.change, datetimepicker.dateView.calendar)();
+
+                equal(datetimepicker.calls("_change"), 1);
+                equal(datetimepicker.calls("close"), 1);
+            });
+
+            test("datetimepicker wire icon click", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.close();
+                datetimepicker._icon.click();
+                ok(datetimepicker.dateView.popup.visible());
+            });
+
+            asyncTest("form reset support", 2, function() {
+                input.attr("value", "12/12/2000");
+
+                var form = $("<form/>").appendTo(document).append(input),
+                    datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.open();
+                datetimepicker.value("12/12/2010");
+
+                form[0].reset();
+
+                setTimeout(function() {
+                    equal(datetimepicker.element.val(), "12/12/2000");
+                    equal(datetimepicker.dateView.calendar.value().getFullYear(), "2000");
+                    start();
+                }, 200);
+            });
+
+            test("extend popup options if datetimepicker.options.popup", function() {
+                var appendTo = "fake",
+                    datetimepicker = new kendo.ui.datetimepicker(input, {
+                        popup: {
+                            appendTo: appendTo
+                        }
+                    });
+
+                equal(datetimepicker.dateView.popup.options.appendTo, appendTo);
+            });
+            */
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
