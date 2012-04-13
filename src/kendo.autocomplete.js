@@ -203,6 +203,11 @@
         * $("#autoComplete").kendoAutoComplete({
         *     enable: false
         * });
+        * @option {Boolean} [highlightFirst] <true> Controls whether the first item will be automatically highlighted.
+        * _example
+        * $("#autocomplete").kendoAutoComplete({
+        *     highLightFirst: false //no of the suggested items will be highlighted
+        * });
         * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
         * _example
         * // turn on auto-typing (off by default)
@@ -234,6 +239,12 @@
         * // send a filter value of 'contains' to the server
         * $("#autoComplete").kendoAutoComplete({
         *     filter: 'contains'
+        * });
+        * @option {String} [ignoreCase] <true> Defines whether the filtration should be case insensitive. Set to false, makes the filtration case sensitive.
+        * _example
+        * $("#autoComplete").kendoAutoComplete({
+        *     filter: 'contains',
+        *     ignoreCase: false //now filtration will be case sensitive
         * });
         * @option {Number} [height] <200> Sets the height of the drop-down list in pixels.
         * _example
