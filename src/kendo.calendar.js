@@ -362,6 +362,12 @@
             NAVIGATE
         ],
 
+        setOptions: function(options) {
+            validate(options);
+
+            Widget.fn.setOptions.call(this, options);
+        },
+
         /**
         * Gets/Sets the min value of the calendar.
         * @param {Date|String} value The min date to set.
