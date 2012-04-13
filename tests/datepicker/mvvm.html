@@ -39,6 +39,21 @@
                 equal(datepicker.dateView.options.start, "year");
             });
 
+            test("initializes a options from data attributes after init of the widget", function() {
+                var dom = $('<input data-role="datepicker" data-format="{0:MM yyyy}" data-start="year" />');
+                dom.kendoDatePicker();
+
+                kendo.bind(dom);
+
+                var datepicker = dom.data("kendoDatePicker");
+
+                equal(datepicker.options.format, "MM yyyy");
+                equal(datepicker.dateView.options.format, "MM yyyy");
+
+                equal(datepicker.options.start, "year");
+                equal(datepicker.dateView.options.start, "year");
+            });
+
             test("initializes value from view model", function() {
                 var dom = $('<input data-role="datepicker" data-bind="value:value" />');
                 var value = new Date();
