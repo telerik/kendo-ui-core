@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DateTimePicker API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DateTimePicker API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+
+            var DateTimePicker = kendo.ui.DateTimePicker,
+                input;
+
+            QUnit.config.testTimeout = 800;
+            QUnit.config.reorder = false;
+
+            module("kendo.ui.DateTimePicker initialization", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("open method with 'date' param opens DateView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+
+                ok(datetimepicker.dateView.popup.visible());
+            });
+
+            test("open method with 'time' param opens TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                ok(datetimepicker.timeView.popup.visible());
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
