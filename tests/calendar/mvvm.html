@@ -45,6 +45,18 @@
                 equal(dom.data("kendoCalendar").value().getTime(), value.getTime());
             });
 
+            test("initializes a options from data attributes after init of the widget", function() {
+                var dom = $('<div data-role="calendar" data-format="{0:MM yyyy}" data-start="year" />');
+                dom.kendoCalendar();
+
+                kendo.bind(dom);
+
+                var calendar = dom.data("kendoCalendar");
+
+                equal(calendar.options.format, "MM yyyy");
+                equal(calendar.options.start, "year");
+            });
+
             test("changing a value updates the view model", function() {
                 var dom = $('<div data-role="calendar" data-bind="value:value" />');
 

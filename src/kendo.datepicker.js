@@ -686,6 +686,8 @@
         },
 
         setOptions: function(options) {
+            calendar.validate(options);
+
             Widget.fn.setOptions.call(this, options);
             extend(this.dateView.options, options);
         },
