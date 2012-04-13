@@ -250,6 +250,12 @@
         * $("#comboBox").kendoComboBox({
         *     filter: "startswith"
         * });
+        * @option {String} [ignoreCase] <true> Defines whether the filtration should be case sensitive.
+        * _example
+        * $("#combobox").kendoComboBox({
+        *     filter: 'contains',
+        *     ignoreCase: false //now filtration will be case sensitive
+        * });
         * @option {Number} [height] <200> Define the height of the drop-down list in pixels.
         * _example
         * $("#comboBox").kendoComboBox({
