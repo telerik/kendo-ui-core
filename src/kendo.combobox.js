@@ -4,36 +4,38 @@
      *
      * @section
      * <p>
-     * The <b>ComboBox</b> widget allows the selection from pre-defined
-     * values or entering a new value. It is a richer version of the standard
-     * HTML select, providing support for local and remote data binding, item
-     * templates, and configurable options for controlling the list behavior.
+     * The <strong>ComboBox</strong> displays a list of values and allows the selection of a single value from this
+     * list. Custom values may also be entered via keyboard input. If you do not wish permit keyboard input - that is,
+     * custom values are not permitted - use the
+     * <a href="../dropdownlist/index.html" title="DropDownList">DropDownList</a>.
      * </p>
      * <p>
-     *  To prevent user input, use the
-     *  <a href="../combobox/index.html">combobox</a>.
+     * The <strong>ComboBox</strong> represents a richer version of a &lt;select&gt; element, providing support for
+     * local and remote data binding, item templates, and configurable options for controlling the list behavior.
      * </p>
      * <h3>Getting Started</h3>
-     * <p>There are two basic ways to create a <b>ComboBox</b>:</p>
+     * <p>There are two ways to create a <strong>ComboBox</strong>:</p>
      * <ol>
-     *  <li>
-     *   From a HTML input element, using data binding to define the list
-     *   items
-     *  </li>
-     *  <li>
-     *   From a HTML select element, using HTML to define the list items
-     *  </li>
+     *  <li>From a &lt;select&gt; element with HTML to define the list items</li>
+     *  <li>From an &lt;input&gt; element with databinding to define the listitems</li>
      * </ol>
      * <p>
-     *  Regardless of the initialization technique, the resulting
-     *  <b>ComboBox</b> will look and function identically.
+     *  A <strong>ComboBox</strong> will look and operate consistently regardless of the way in which it was created.
      * </p>
      *
-     * @exampleTitle Creating a combobox from existing input HTML element
+     * @exampleTitle Creating a ComboBox from an existing &lt;input&gt; element
      * @example
      * <input id="comboBox" />
      *
-     * @exampleTitle ComboBox initialization
+     * @section
+     * <p></p>
+     * <p>
+     *  Initialization of a <strong>ComboBox</strong> should occur after the DOM is fully loaded. It is recommended
+     *  that initialization the <strong>ComboBox</strong> occur within a handler is provided to
+     *  $(document).ready().
+     * </p>
+     *
+     * @exampleTitle Initialize a ComboBox using a selector within $(document).ready()
      * @example
      * $(document).ready(function(){
      *     $("#comboBox").kendoComboBox({
@@ -46,97 +48,98 @@
      *     });
      * });
      *
-     * @exampleTitle Creating a ComboBox from existing select HTML element
+     * @exampleTitle Creating a ComboBox from existing &lt;select&gt; element with a pre-defined structure
      * @example
      * <select id="comboBox">
-     *  <option>Item 1</option>
-     *  <option>Item 2</option>
-     *  <option>Item 3</option>
+     *     <option>Item 1</option>
+     *     <option>Item 2</option>
+     *     <option>Item 3</option>
      * </select>
      *
      * <script>
-     *    $(document).ready(function(){
-     *      $("#comboBox").kendoComboBox();
-     *    });
+     *     $(document).ready(function(){
+     *         $("#comboBox").kendoComboBox();
+     *     });
      * </script>
      *
      * @section
-     * <h3>Binding to Data</h3>
+     * <h3>Binding to Local or Remote Data</h3>
      * <p>
-     *  The <b>ComboBox</b> can be bound to both local arrays and remote data
-     *  via the <a href="../datasource/index.html">DataSource</a> component;
-     *  an abstraction for local and remote data. Local arrays are
-     *  appropriate for limited value options, while remote data binding is
-     *  better for larger data sets. With remote binding, options will be
-     *  loaded on-demand, similar to an
-     *  <a href="../combobox/index.html">combobox</a>.
+     *  The <strong>ComboBox</strong> can be bound to both local arrays and remote data via the
+     *  <a href="../datasource/index.html" title="DataSource">DataSource</a> component; an abstraction for local and
+     *  remote data. Local arrays are appropriate for limited value options, while remote data binding is better for
+     *  larger data sets. With remote data-binding, items will be loaded on-demand; when they are displayed.
      * </p>
+     *
      * @exampleTitle Binding to a remote OData service
      * @example
      * $(document).ready(function() {
-     *  $("#comboBox").kendoComboBox({
-     *   index: 0,
-     *   dataTextField: "Name",
-     *   dataValueField: "Id",
-     *   filter: "contains",
-     *   dataSource: {
-     *    type: "odata",
-     *    serverFiltering: true,
-     *    serverPaging: true,
-     *    pageSize: 20,
-     *    transport: {
-     *     read: "http://odata.netflix.com/Catalog/Titles"
-     *    }
-     *   }
-     *  });
+     *     $("#comboBox").kendoComboBox({
+     *         index: 0,
+     *         dataTextField: "Name",
+     *         dataValueField: "Id",
+     *         filter: "contains",
+     *         dataSource: {
+     *             type: "odata",
+     *             serverFiltering: true,
+     *             serverPaging: true,
+     *             pageSize: 20,
+     *             transport: {
+     *                 read: "http://odata.netflix.com/Catalog/Titles"
+     *             }
+     *         }
+     *     });
      * });
      *
      * @section
      * <h3>Customizing Item Templates</h3>
      * <p>
-     *       ComboBox leverages Kendo UI high-performance Templates to give you complete control
-     *       over item rendering. For a complete overview of Kendo UI Template capabilities and syntax,
-     *       please review the <a href="../templates/index.html" title="Kendo UI Template">Kendo UI Template</a> demos and documentation.
-     *   </p>
+     *  The <strong>ComboBox</strong> uses Kendo UI templates to enable you to control how items are rendered. For a
+     *  detailed description of the capabilities and syntax of the Kendo UI templates, please refer to the
+     *  <a href="../templates/index.html" title="Kendo UI Template">demos and documentation</a>.
+     * </p>
+     *
      * @exampleTitle Basic item template customization
      * @example
      * <input id="comboBox" />
      * <!-- Template -->
      * <script id="scriptTemplate" type="text/x-kendo-template">
-     *  # if (data.BoxArt.SmallUrl) { #
-     *  <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-     *  # } else { #
-     *  <img alt="${ data.Name }" />Title:${ data.Name }, Year: ${ data.Name }
-     *  # } #
+     *     # if (data.BoxArt.SmallUrl) { #
+     *         <img src="${ data.BoxArt.SmallUrl }" alt="${ data.Name }" />
+     *         Title:${ data.Name }, Year: ${ data.Name }
+     *     # } else { #
+     *         <img alt="${ data.Name }" />
+     *         Title:${ data.Name }, Year: ${ data.Name }
+     *     # } #
      * </script>
+     *
      * <!-- ComboBox initialization -->
      * <script>
-     *  $(document).ready(function() {
-     *   $("#comboBox").kendoComboBox({
-     *    autoBind: false,
-     *    dataTextField: "Name",
-     *    dataValueField: "Id",
-     *    template: $("#scriptTemplate").html(),
-     *    dataSource: {
-     *     type: "odata",
-     *     serverFiltering: true,
-     *     serverPaging: true,
-     *     pageSize: 20,
-     *     transport: {
-     *      read: "http://odata.netflix.com/Catalog/Titles"
-     *     }
-     *    }
-     *   });
-     *  });
+     *     $(document).ready(function() {
+     *         $("#comboBox").kendoComboBox({
+     *             autoBind: false,
+     *             dataTextField: "Name",
+     *             dataValueField: "Id",
+     *             template: $("#scriptTemplate").html(),
+     *             dataSource: {
+     *                 type: "odata",
+     *                 serverFiltering: true,
+     *                 serverPaging: true,
+     *                 pageSize: 20,
+     *                 transport: {
+     *                     read: "http://odata.netflix.com/Catalog/Titles"
+     *                 }
+     *             }
+     *         });
+     *     });
      * </script>
      *
      * @section
      * <h3>Accessing an Existing ComboBox</h3>
      * <p>
      *  You can reference an existing <b>ComboBox</b> instance via
-     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>.
-     *  Once a reference has been established, you can use the API to control
-     *  its behavior.
+     *  <a href="http://api.jquery.com/jQuery.data/">jQuery.data()</a>. Objectnce a reference has been established, you
+     *  can use the API to control its behavior.
      * </p>
      *
      * @exampleTitle Accessing an existing ComboBox instance
