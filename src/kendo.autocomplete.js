@@ -393,7 +393,7 @@
             height: 200,
             filter: "startswith",
             ignoreCase: true,
-            highlightFirst: true,
+            highlightFirst: false,
             separator: null,
             placeholder: "",
             animation: {}
