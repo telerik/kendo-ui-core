@@ -817,6 +817,8 @@
         * var text = combobox.text();
         */
         text: function (text) {
+            text = text === null ? "" : text;
+
             var that = this,
                 textAccessor = that._text,
                 input = that.input[0],
