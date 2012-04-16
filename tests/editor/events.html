@@ -78,11 +78,26 @@
                 }
             });
 
-            test('onChange executed', function() {
+            test("blurring the editor triggers onchange", function() {
                 editor.value('bar');
                 editor.body.innerHTML = 'foo';
                 $(editor.window).trigger('blur');
                 ok(onChangeRaised);
+            });
+
+            test("blurring the editor updates value", function() {
+                editor.value("foo");
+                editor.body.innerHTML = "<em>bar</em>";
+                $(editor.window).trigger("blur");
+                equal($(editor.textarea).val(), "&lt;em&gt;bar&lt;/em&gt;");
+            });
+
+            test("blurring the editor honors encoded property when updating value", function() {
+                editor.value("foo");
+                editor.options.encoded = false;
+                editor.body.innerHTML = "<em>bar</em>";
+                $(editor.window).trigger("blur");
+                equal($(editor.textarea).val(), "<em>bar</em>");
             });
 
             test('on selection change executed', function() {

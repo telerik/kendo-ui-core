@@ -275,9 +275,9 @@
             $(editor.window)
                 .bind("blur", function () {
                     var old = editor.textarea.value,
-                    value = editor.encodedValue();
+                        value = editor.encodedValue();
 
-                    editor.update(value);
+                    editor.update();
 
                     if (value != old) {
                         editor.trigger("change");
