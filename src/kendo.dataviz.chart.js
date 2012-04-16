@@ -93,7 +93,6 @@
         SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
         STRING = "string",
-        SQUARE = "square",
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
         TOOLTIP_OFFSET = 5,
@@ -1705,7 +1704,7 @@
         },
 
         options: {
-            type: SQUARE,
+            type: CIRCLE,
             align: CENTER,
             vAlign: CENTER
         },
