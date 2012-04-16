@@ -2344,7 +2344,7 @@
          *    </dl>
          * </div>
          * @option {Object} [series.type="line".markers] Configures the line markers.
-         * @option {String} [series.type="line".markers.type] <"square">
+         * @option {String} [series.type="line".markers.type] <"circle">
          * Configures the markers shape type.
          * <div class="details-list">
          *    <dl>
@@ -2355,10 +2355,10 @@
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              <code>"triagle"</code>
+         *              <code>"triangle"</code>
          *         </dt>
          *         <dd>
-         *              The marker shape is triagle.
+         *              The marker shape is triangle.
          *         </dd>
          *         <dt>
          *              <code>"circle"</code>
@@ -3024,7 +3024,7 @@
          * });
          * @option {Boolean} [series.type="scatter".labels.visible] <false> The visibility of the labels.
          * @option {Object} [series.type="scatter".markers] Configures the scatter markers.
-         * @option {String} [series.type="scatter".markers.type] <"square">
+         * @option {String} [series.type="scatter".markers.type] <"circle">
          * Configures the markers shape type.
          * <div class="details-list">
          *    <dl>
@@ -3035,10 +3035,10 @@
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              <code>"triagle"</code>
+         *              <code>"triangle"</code>
          *         </dt>
          *         <dd>
-         *              The marker shape is triagle.
+         *              The marker shape is triangle.
          *         </dd>
          *         <dt>
          *              <code>"circle"</code>
@@ -3329,7 +3329,7 @@
          * });
          * @option {Boolean} [series.type="scatterLine".labels.visible] <false> The visibility of the labels.
          * @option {Object} [series.type="scatterLine".markers] Configures the scatter markers.
-         * @option {String} [series.type="scatterLine".markers.type] <"square">
+         * @option {String} [series.type="scatterLine".markers.type] <"circle">
          * Configures the markers shape type.
          * <div class="details-list">
          *    <dl>
@@ -3340,10 +3340,10 @@
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              <code>"triagle"</code>
+         *              <code>"triangle"</code>
          *         </dt>
          *         <dd>
-         *              The marker shape is triagle.
+         *              The marker shape is triangle.
          *         </dd>
          *         <dt>
          *              <code>"circle"</code>
@@ -3473,7 +3473,7 @@
          *    </dl>
          * </div>
          * @option {Object} [series.type="area".markers] Configures the area markers.
-         * @option {String} [series.type="area".markers.type] <"square">
+         * @option {String} [series.type="area".markers.type] <"circle">
          * Configures the markers shape type.
          * <div class="details-list">
          *    <dl>
@@ -3484,10 +3484,10 @@
          *              The marker shape is square.
          *         </dd>
          *         <dt>
-         *              <code>"triagle"</code>
+         *              <code>"triangle"</code>
          *         </dt>
          *         <dd>
-         *              The marker shape is triagle.
+         *              The marker shape is triangle.
          *         </dd>
          *         <dt>
          *              <code>"circle"</code>
