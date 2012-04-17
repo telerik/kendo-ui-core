@@ -34,8 +34,28 @@
 
         },
 
+        close: function(view) {
+            if (view !== "time") {
+                view = "date";
+            }
+
+            this[view + "View"].close();
+        },
+
         open: function(view) {
+            if (view !== "time") {
+                view = "date";
+            }
+
             this[view + "View"].open();
+        },
+
+        toggle: function(view) {
+            if (view !== "time") {
+                view = "date";
+            }
+
+            this[view + "View"].toggle();
         },
 
         _views: function() {
@@ -83,8 +103,12 @@
                 icons = icons.children();
             }
 
-            that._dateIcon = icons.eq(0);
-            that._timeIcon = icons.eq(1);
+            that._dateIcon = icons.eq(0).click(function() {
+                that.toggle("date");
+            });
+            that._timeIcon = icons.eq(1).click(function() {
+                that.toggle("time");
+            });
         },
 
         _wrapper: function() {
