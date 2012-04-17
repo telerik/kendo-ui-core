@@ -240,6 +240,10 @@
             var that = this,
                 current = that._current;
 
+            if (li instanceof Date) {
+                li = kendo.toString(li, that.options.format);
+            }
+
             if (typeof li === "string") {
                 if (!current || current.text() !== li) {
                     li = $.grep(that.ul[0].childNodes, function(node) {
@@ -849,16 +853,15 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                date = that._parse(value),
-                text = kendo.toString(date, options.format);
+                date = that._parse(value);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;
             }
 
             that._value = date;
-            that.element.val(date ? text : value);
-            that.timeView.value(text);
+            that.element.val(date ? kendo.toString(date, options.format) : value);
+            that.timeView.value(date);
 
             return date;
         },
