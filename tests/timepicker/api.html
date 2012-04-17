@@ -331,13 +331,14 @@
 
             });
 
-            test("value() should select li item", function() {
+            test("value() selects li item", function() {
                 var timepicker = input.kendoTimePicker().data("kendoTimePicker");
 
+                timepicker.timeView.refresh();
                 timepicker.value(new Date(2000, 10, 10, 14, 30, 0));
 
                 equal(input.val(), "2:30 PM");
-                equal(timepicker.timeView._value, "2:30 PM");
+                equal(timepicker.timeView.ul.find(".k-state-selected").text(), "2:30 PM");
             });
 
             test("value() should honor min/max range", function() {

@@ -199,7 +199,7 @@
                 equal(timepicker.timeView.ul.find("li.k-state-selected").text(), "2:00 PM");
             });
 
-            test("should clear selected item if no such time", 3, function() {
+            test("should clear selected item if no such time", 2, function() {
                 var timepicker = input.kendoTimePicker({
                     value: new Date(2000, 10, 10, 10, 0, 0)
                 }).data("kendoTimePicker");
@@ -211,7 +211,6 @@
                 input.focus().val("2:33 PM").blur();
 
                 ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
-                equal(timepicker.timeView._value, "2:33 PM");
             });
 
             test("do not clear input if not valid time", function() {
@@ -224,7 +223,6 @@
                 input.focus().val("invalid").blur();
 
                 ok(!timepicker.timeView.ul.find("li.k-state-selected")[0]);
-                equal(timepicker.timeView._value, null);
                 equal(timepicker._value, null);
                 equal(input.val(), "invalid");
             });
@@ -241,7 +239,6 @@
                 date.setMinutes(22);
 
                 equal(+timepicker.value(), +date);
-                equal(timepicker.timeView._value, "12:22 PM");
             });
 
             asyncTest("press enter should call preventDefault when popup is visible", 1, function() {
