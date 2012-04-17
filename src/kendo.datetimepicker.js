@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        parse = kendo.parseDate,
         ui = kendo.ui,
         Widget = ui.Widget,
         SPAN = "<span/>";
@@ -9,6 +10,12 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+
+            options = that.options;
+
+            //should call calendar.validate and other validations of the options
+            options.format = options.format || kendo.culture().calendar.patterns.g;
+            options.timeFormat = options.timeFormat || kendo.culture().calendar.patterns.t;
 
             that._wrapper();
 
@@ -51,11 +58,45 @@
         },
 
         toggle: function(view) {
+            var secondView = "timeView";
+
             if (view !== "time") {
                 view = "date";
+            } else {
+                secondView = "dateView";
             }
 
             this[view + "View"].toggle();
+            this[secondView].close();
+        },
+
+        value: function(value) {
+            var that = this;
+
+            if (value === undefined) {
+                return that._value;
+            }
+
+            that._old = that._update(value);
+        },
+
+        _update: function(value) {
+            var that = this,
+                options = that.options,
+                format = options.format,
+                date = parse(value, format);
+
+            /*if (!isInRange(date, options.min, options.max)) {
+                date = null;
+            }
+            */
+
+            that._value = date;
+            that.dateView.value(date);
+            that.timeView.value(date);
+            that.element.val(date ? kendo.toString(date, format) : value);
+
+            return date;
         },
 
         _views: function() {
@@ -71,7 +112,7 @@
                     }
                 };
 
-            that.dateView = new kendo.DateView($.extend(that.options, {
+            that.dateView = new kendo.DateView($.extend({}, that.options, {
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
@@ -82,7 +123,7 @@
                 open: open
             }));
 
-            that.timeView = new kendo.TimeView($.extend(that.options, {
+            that.timeView = new kendo.TimeView($.extend({}, that.options, {
                 anchor: that.wrapper,
                 format: that.options.timeFormat,
                 change: function(value, trigger) { },
