@@ -78,7 +78,7 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-
+            that._validateProxy = $.proxy(that._validate, that);
             that.refresh();
         },
 
@@ -151,6 +151,7 @@
         },
 
         destroy: function() {
+            this.options.model.unbind("set", this._validateProxy);
             kendo.unbind(this.element);
 
             this.element.removeData("kendoValidator")
@@ -188,14 +189,12 @@
 
             kendo.bind(container, that.options.model);
 
-            that.options.model.bind("set", $.proxy(that._validate, that));
+            that.options.model.bind("set", that._validateProxy);
 
             that.validatable = container.kendoValidator({
                 validateOnBlur: false,
                 errorTemplate: that.options.errorTemplate || undefined,
-                /*errorTemplate: '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
-                    '${message}<div class="k-callout k-callout-n"></div></div>', */
-                rules: rules }).data("kendoValidator");
+               rules: rules }).data("kendoValidator");
 
             container.find(":input:visible:first").focus();
         }

@@ -420,6 +420,20 @@
                 ok(!wasCalled);
             });
 
+            test("end method detaches the change event", 1, function() {
+                var model = new Model({ foo: "bar" }),
+                    editable = new Editable(div, {
+                        fields: "foo",
+                        model: model,
+                        change: function() {
+                            ok(true);
+                        }
+                    });
+                model.set("foo", "foo");
+                editable.destroy();
+                model.set("foo", "baz");
+            });
+
             test("end method triggers validation", function() {
                 var MyModel = Model.define({
                         fields: {
