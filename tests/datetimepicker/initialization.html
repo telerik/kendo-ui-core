@@ -22,7 +22,7 @@
         <script>
             kendo.ns = "kendo-";
 
-            var datetimepicker = kendo.ui.DateTimePicker,
+            var DateTimePicker = kendo.ui.DateTimePicker,
                 input;
 
             QUnit.config.testTimeout = 800;
@@ -122,15 +122,25 @@
                 equal(datetimepicker.calls("_change"), 1);
                 equal(datetimepicker.calls("close"), 1);
             });
+            */
 
-            test("datetimepicker wire icon click", function() {
-                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+            test("datetimepicker wire date icon click", function() {
+                var datetimepicker = new DateTimePicker(input);
 
                 datetimepicker.close();
-                datetimepicker._icon.click();
+                datetimepicker._dateIcon.click();
                 ok(datetimepicker.dateView.popup.visible());
             });
 
+            test("datetimepicker wire clock icon click", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.close("time");
+                datetimepicker._timeIcon.click();
+                ok(datetimepicker.timeView.popup.visible());
+            });
+
+            /*
             asyncTest("form reset support", 2, function() {
                 input.attr("value", "12/12/2000");
 

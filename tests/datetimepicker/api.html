@@ -53,6 +53,24 @@
                 ok(datetimepicker.timeView.popup.visible());
             });
 
+            test("close method with 'date' param closes DateView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+                datetimepicker.close("date");
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("close method with 'time' param closes TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+                datetimepicker.close("time");
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
