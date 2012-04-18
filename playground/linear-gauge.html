@@ -10,8 +10,8 @@
         <script src="../src/kendo.dataviz.vml.js"></script>
 
         <style>
-            #gauge, #gauge1 {
-                margin-left: 200px;
+            #gauge, #gauge1, #gauge2, #gauge3 {
+                margin-left: 50px;
                 border: 1px solid red;
                 float: left;
             }
@@ -20,98 +20,73 @@
     <body>
         <div id="gauge"></div>
         <div id="gauge1"></div>
-        <input type="button" value="value 10" id="button1" />
-        <input type="button" value="value 40" id="button2" />
-        <input type="button" value="value 10" id="button3" />
-        <input type="button" value="value 40" id="button4" />
+        <div id="gauge2"></div>
+        <div id="gauge3"></div>
 
         <script>
-            $("#button1").click(function () {
-                $("#gauge").data("kendoLinearGauge").value(10);
-            });
-            $("#button2").click(function () {
-                $("#gauge").data("kendoLinearGauge").value(40);
-            });
-            $("#button3").click(function () {
-                $("#gauge1").data("kendoLinearGauge").value(10);
-            });
-            $("#button4").click(function () {
-                $("#gauge1").data("kendoLinearGauge").value(40);
-            });
-            $("#gauge").kendoLinearGauge({
-                scale: {
-                    ranges: [{
-                        from: 10,
-                        to: 14,
-                        color: "red"
-                    },{
-                        from: 15,
-                        to: 20,
-                        color: "green"
-                    },{
-                        from: 25,
-                        to: 40,
-                        color: "blue"
-                    }],
-                    labels: {
-                        visible: false
-                    },
+            //$("#gauge").kendoLinearGauge({
+            //    scale: {
+            //        labels: {
+            //            visible: true
+            //        }
+            //    },
+            //    pointer: {
+            //        shape: "barIndicator",
+            //        value: 10,
+            //        track: {
+            //            visible: true,
+            //            border: {
+            //                color: "red"
+            //            }
+            //        }
+            //    },
+            //    plotArea: {
+            //        border: {
+            //            color: "red",
+            //            width: 1
+            //        }
+            //    }
+            //});
 
-                    mirror: true
-                },
+            //$("#gauge1").kendoLinearGauge({
+            //    theme:"default",
+            //    scale: {
+            //        vertical: false,
+            //        labels: {
+            //            visible: true
+            //        }
+            //    },
+            //    pointer: {
+            //        shape: "barIndicator",
+            //        value: 10,
+            //        track: {
+            //            visible: true,
+            //            border: {
+            //                color: "red"
+            //            }
+            //        }
+            //    },
+            //    plotArea: {
+            //        border: {
+            //            color: "red",
+            //            width: 1
+            //        }
+            //    }
+            //});
 
-                pointer: {
-                    shape: "arrow",
-                    size: 20
-                },
-
-                plotArea: {
-                    border: {
-                        color: "red",
-                        width: 1
-                    }
-                }
-            });
-
-            $("#gauge1").kendoLinearGauge({
+            $("#gauge2").kendoLinearGauge({
                 theme:"default",
                 scale: {
-                    vertical: false,
-                    min: -10,
-                    ranges: [{
-                        from: 10,
-                        to: 14,
-                        color: "red"
-                    },{
-                        from: 15,
-                        to: 20,
-                        color: "green"
-                    },{
-                        from: 25,
-                        to: 40,
-                        color: "blue"
-                    }],
-                    padding: 0,
-                    margin: 0,
+                    mirror: true,
                     labels: {
                         visible: false
-                    },
-                    mirror: true
+                    }
                 },
-
                 pointer: {
                     shape: "arrow",
-                    track: {
-                        border: {
-                            color: "black",
-                            width: 1
-                        },
-                        color: "black",
-                        visible: true
-                    },
-                    size: 20
+                    value: 0,
+                    size: 40
                 },
-
                 plotArea: {
                     border: {
                         color: "red",
@@ -119,6 +94,31 @@
                     }
                 }
             });
+
+            $("#gauge3").kendoLinearGauge({
+                scale: {
+                    vertical: false,
+                    labels: {
+                        visible: false
+                    },
+                    max: 5000,
+                    majorUnit: 1000,
+                    minorUnit: 500,
+                    mirror: true
+                },
+                pointer: {
+                    shape: "arrow",
+                    size: 40,
+                    value: 0
+                },
+                plotArea: {
+                    border: {
+                        color: "red",
+                        width: 1
+                    }
+                }
+            });
+
         </script>
     </body>
 </html>
