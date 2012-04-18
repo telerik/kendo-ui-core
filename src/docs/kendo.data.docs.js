@@ -792,7 +792,7 @@
     * @name kendo.data.DataSource#requestStart
     * @event
     * @param {Event} e
-    * @param {jQueryObject} e.sender Reference to the dataSource object instance.
+    * @param {DataSource} e.sender Reference to the dataSource object instance.
     * @example
     * var dataSource = new kendo.data.DataSource({
     *     requestStart: function(e) {
