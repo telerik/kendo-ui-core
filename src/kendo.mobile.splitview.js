@@ -28,7 +28,7 @@
             var that = this,
                 element = that.element;
 
-            element.data("kendoView", that).addClass("km-view");
+            element.data("kendoView", that).addClass("km-view km-splitview");
 
             that.transition = element.data(kendo.ns + "transition");
             $.extend(that, { header: [], footer: [], content: element });
@@ -39,5 +39,29 @@
         }
     });
 
+    /**
+     * @name kendo.mobile.ui.Pane.Description
+     *
+     */
+    var Pane = View.extend(/** @lends kendo.mobile.ui.Pane.prototype */{
+        /**
+        * @constructs
+        * @extends kendo.mobile.ui.Widget
+        * @param {DomElement} element DOM element
+        */
+        init: function(element, options) {
+            var that = this;
+
+            Widget.fn.init.call(that, element, options);
+
+            that.element.addClass("km-pane");
+        },
+
+        options: {
+            name: "Pane"
+        }
+    });
+
     ui.plugin(SplitView);
+    ui.plugin(Pane);
 })(jQuery);

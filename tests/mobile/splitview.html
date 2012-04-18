@@ -83,6 +83,19 @@
                 visible("#foo");
                 hidden("#bar");
             });
+
+            module('mobile SplitView panes', {
+                setup: function() {
+                    root.html('<div data-role="splitview" id="foo"><div data-role="pane" id="foo-pane">Foo</div></div>');
+                    app = new kendo.mobile.Application(root);
+                },
+
+                teardown: teardown
+            });
+
+            test("splitview initializes nested panes", 1, function(){
+                ok(root.find("#foo-pane").data("kendoMobilePane"));
+            });
         </script>
     </body>
 </html>
