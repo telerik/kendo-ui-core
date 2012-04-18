@@ -36,20 +36,16 @@
                 series: [{
                     data:[
                       {
-                          value: 50,
+                          value: 312,
                           category: "Value A"
-                      }, {
-                          value: 25,
-                          category: "Value B"
-                      }, {
-                          value: 12.5,
-                          category: "Value C"
-                      }, {
-                          value: 12.5,
-                          category: "Value C"
                       }]
                   }],
-                  seriesClick: click
+                  seriesClick: click,
+              tooltip: {
+                visible: true,
+                    template: "#= console.log(dataItem) #"
+
+              }
             });
         });
 
