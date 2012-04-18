@@ -880,7 +880,7 @@
                 that.hintOffset = offset;
                 that.hint.css( {
                     position: "absolute",
-                    zIndex: 10010, //the Window's z-index is 10000
+                    zIndex: 20000, // the Window's z-index is 10000 and can be raised because of z-stacking
                     left: offset.x,
                     top: offset.y
                 })
