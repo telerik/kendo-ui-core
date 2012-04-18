@@ -27,14 +27,22 @@
         <ul id="log"></ul>
 
         <script>
-            module('mobile SplitView', {
-                setup: function() {
+            var root = $('#qunit-fixture');
 
+            module('mobile SplitView as initial view', {
+                setup: function() {
+                    root.html('<div data-role="splitview" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
+                    new kendo.mobile.Application(root);
                 },
 
                 teardown: function() {
                 }
-            })
+            });
+
+            test("application treats splitview as initial view", function(){
+                ok(root.find("#foo").is(":visible"));
+                ok(!root.find("#bar").is(":visible"));
+            });
         </script>
     </body>
 </html>
