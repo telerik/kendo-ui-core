@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
-        <title>Scroller</title>
+        <title>SplitView</title>
         <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
         <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
         <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
@@ -32,7 +32,8 @@
     </head>
     <body>
         <div data-role="splitview">
-            <a href="#foo" data-role="button">Foo</a>
+            <div data-role="pane"> <a href="#foo" data-role="button">Foo</a> </div>
+            <div data-role="pane"> <a href="#bar" data-role="button">Bar</a> </div>
         </div>
 
         <div data-role="view" id="foo">
