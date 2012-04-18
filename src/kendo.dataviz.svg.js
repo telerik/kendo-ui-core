@@ -771,7 +771,7 @@
                 href = doc.location.href,
                 hashIndex = href.indexOf("#");
 
-            if (base) {
+            if (base && !$.browser.msie) {
                 if (hashIndex !== -1) {
                     href = href.substring(0, hashIndex);
                 }
