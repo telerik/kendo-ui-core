@@ -1873,23 +1873,6 @@
          *    </dl>
          * </div>
          * @option {Object} [seriesDefaults.overlay] The effects overlay.
-         * @option {String} [seriesDefaults.overlay.gradient] <"glass"> Gradient name.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              "glass"
-         *         </dt>
-         *         <dd>
-         *              The bars have glass effect overlay.
-         *         </dd>
-         *         <dt>
-         *              "none"
-         *         </dt>
-         *         <dd>
-         *              The bars have no effect overlay.
-         *         </dd>
-         *    </dl>
-         * </div>
          * @option {Object} [seriesDefaults.tooltip] The data point tooltip configuration options.
          * @option {String} [seriesDefaults.tooltip.format] The tooltip format.
          * _example
@@ -2207,7 +2190,24 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {String} [series.type="bar".overlay] <"glass"> The effects overlay.
+         * @option {Object} [series.type="bar".overlay] The effects overlay.
+         * @option {String} [series.type="bar".overlay.gradient] <"glass"> The gradient name.
+         * <div class="details-list">
+         *    <dl>
+         *         <dt>
+         *              "glass"
+         *         </dt>
+         *         <dd>
+         *              The bars have glass effect overlay.
+         *         </dd>
+         *         <dt>
+         *              "none"
+         *         </dt>
+         *         <dd>
+         *              The bars have no effect overlay.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [series.type="bar".tooltip] The data point tooltip configuration options.
          * @option {String} [series.type="bar".tooltip.format] The tooltip format.
          * _example
@@ -2816,7 +2816,9 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {String} [series.type="pie".overlay] <"glass"> The effects overlay.
+         * @option {Object} [series.type="pie".overlay] The effects overlay.
+         * @option {String} [series.type="pie".overlay.gradient] <"roundBevel"> The gradient name.
+         * Available options are "none", "sharpBevel" and "roundBevel".
          * @option {Object} [series.type="pie".connectors] The label connectors options.
          * @option {Number} [series.type="pie".connectors.width] <1> The width of the connector line.
          * @option {String} [series.type="pie".connectors.color] The color of the connector line.
