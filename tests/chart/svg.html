@@ -1066,6 +1066,20 @@
                     $("base").remove();
                 });
 
+                test("does not set absolute url if the page has a base tag in IE", function() {
+                    var msie = $.browser.msie;
+                    $.browser.msie = true;
+
+                    $("head").append($("<base href='http://foo' />"));
+
+                    decorator.decorate(rect);
+
+                    equals(rect.options.fill, "url(#fillId)");
+
+                    $("base").remove();
+                    $.browser.msie = msie;
+                });
+
                 test("sets absolute url if the page has a base tag and hash", function() {
                     window.location.hash = "test";
                     $("head").append($("<base href='http://foo' />"));
