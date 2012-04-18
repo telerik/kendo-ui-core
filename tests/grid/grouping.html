@@ -461,6 +461,19 @@
                 equal(grid.table.find("tr.k-group-footer:visible").length, 1);
             });
 
+            test("items skips the group footer rows", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{foo: "1", bar: "bar"}],
+                        group: [{ field: "foo", aggregates: [ { field: "foo", aggregate: "count" },{ field: "bar", aggregate: "count" } ]}, { field: "bar", aggregates: [ { field: "foo", aggregate: "count" },{ field: "bar", aggregate: "count" } ]}]
+                    },
+                    columns: [{ field: "foo", groupFooterTemplate: "foo" }, "bar"]
+                });
+
+                equal(grid.items().length, 1);
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
