@@ -1,0 +1,118 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.ui.Pane Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.Pane Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var pane,
+                root = $("#qunit-fixture");
+
+            function hidden(selector) {
+                ok(!root.find(selector).is(":visible"));
+            }
+
+            function visible(selector) {
+                ok(root.find(selector).is(":visible"));
+            }
+
+            function view(selector) {
+                ok(root.find(selector).data("kendoView"));
+            }
+
+            ////////////////////////////////////////////////////////////////////
+            module("mobile pane initialization", {
+                setup: function() {
+                    root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
+                    pane = new kendo.mobile.ui.Pane(root);
+                }
+            });
+
+            test("hides child views initially", 2, function() {
+                hidden("#foo");
+                hidden("#bar");
+            });
+
+            test("displays first view by default", 2, function() {
+                pane.displayInitial();
+                visible("#foo");
+                hidden("#bar");
+            });
+
+            test("displays given view if passed", 2, function() {
+                pane.displayInitial("#bar");
+                hidden("#foo");
+                visible("#bar");
+            });
+
+            test("initiates view widget", 1, function() {
+                pane.displayInitial();
+                view("#foo");
+            });
+
+            ////////////////////////////////////////////////////////////////////
+            module("mobile pane initial view", {
+                setup: function() {
+                    root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
+                    pane = new kendo.mobile.ui.Pane(root, {initial: "#bar"});
+                }
+            });
+
+            test("displays initial view by default", 2, function() {
+                pane.displayInitial();
+                visible("#bar");
+                hidden("#foo");
+            });
+
+            test("overrides initial view with parameter", 2, function() {
+                pane.displayInitial("#foo");
+                hidden("#bar");
+                visible("#foo");
+            });
+
+            ////////////////////////////////////////////////////////////////////
+            module("mobile pane remote view", {
+                setup: function() {
+                    $.mockjax({
+                        url: "bar",
+                        responseText: '<div data-role="view" id="bar">Bar</div>'
+                    });
+
+                    root.html('<div data-role="view" id="foo">Foo</div>');
+                    pane = new kendo.mobile.ui.Pane(root);
+                }
+            });
+
+            test("displays initial remote view", 2, function() {
+                pane.displayInitial("bar");
+                visible("#bar");
+                hidden("#foo");
+            });
+
+        </script>
+    </body>
+</html>
