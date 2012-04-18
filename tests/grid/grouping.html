@@ -447,6 +447,19 @@
                 equal(expandGroup.calls("expandGroup"), 0);
             });
 
+            test("collapse child group does not hide parent footer", function() {
+                var grid = new Grid(table(), {
+                    dataSource: {
+                        data: [{foo: "1", bar: "bar"}],
+                        group: [{ field: "foo", aggregates: [ { field: "foo", aggregate: "count" },{ field: "bar", aggregate: "count" } ]}, { field: "bar", aggregates: [ { field: "foo", aggregate: "count" },{ field: "bar", aggregate: "count" } ]}]
+                    },
+                    columns: [{ field: "foo", groupFooterTemplate: "foo" }, "bar"]
+                });
+
+                grid.collapseGroup(grid.table.find("tr.k-grouping-row").eq(1));
+
+                equal(grid.table.find("tr.k-group-footer:visible").length, 1);
+            });
 
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
