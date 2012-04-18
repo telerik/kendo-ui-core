@@ -723,7 +723,6 @@
                 vertical = options.vertical,
                 mirror = options.labels.mirror,
                 result = [],
-                lineBox = scale.lineBox().clone(),
                 count = ranges.length,
                 range, slotX, slotY, i,
                 rangeSize = options.minorTicks.size / 2,
@@ -783,7 +782,7 @@
             },
             opacity: 1,
 
-            margin: getSpacing(2.5),
+            margin: getSpacing(3),
             animation: {
                 type: BAR_INDICATOR
             },
@@ -822,42 +821,51 @@
                 options = pointer.options,
                 scale = pointer.scale,
                 scaleLine = scale.lineBox(),
-                scaleBox = scale.box,
-                width = options.track.size || pointer.pointerSize(),
+                trackSize = options.track.size || options.size,
                 pointerHalfSize = options.size / 2,
-                padding = getSpacing(options.margin),
-                pointerBox,
-                trackBox,
-                sign = (scale.options.mirror ? -1 : 1);
+                mirror = scale.options.mirror,
+                margin = getSpacing(options.margin),
+                vertical = scale.options.vertical,
+                space = vertical ?
+                     margin[mirror ? "left" : "right"] :
+                     margin[mirror ? "bottom" : "top"],
+                pointerBox, pointerRangeBox, trackBox;
 
-            if (scale.options.vertical) {
-                pointerBox = new Box2D(
-                    scaleLine.x2 + sign * padding.left, scaleLine.y1 - pointerHalfSize,
-                    scaleLine.x2 + sign * padding.left, scaleLine.y2 + pointerHalfSize
-                );
-                pointer.box = pointerBox;
-                if (options.track.visible && options.shape === BAR_INDICATOR) {
-                    trackBox = new Box2D(
-                        scaleBox.x2 + sign * padding.left, scaleLine.y1,
-                        scaleBox.x2 + sign * padding.left + width, scaleLine.y2);
-                    pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
+            space = mirror ? -space : space;
+
+            if (vertical) {
+                trackBox = new Box2D(
+                    scaleLine.x2 + space, scaleLine.y1,
+                    scaleLine.x2 + space, scaleLine.y2);
+
+                trackBox[mirror ? "x1" : "x2"] += trackSize;
+
+                if (options.shape !== BAR_INDICATOR) {
+                    pointerRangeBox = new Box2D(
+                        scaleLine.x2 + space, scaleLine.y1 - pointerHalfSize,
+                        scaleLine.x2 + space, scaleLine.y2 + pointerHalfSize
+                    );
+                    pointerBox = pointerRangeBox;
                 }
             } else {
-                pointerBox = new Box2D(
-                    scaleLine.x1 - pointerHalfSize, scaleLine.y1 - width - sign * padding.bottom,
-                    scaleLine.x2 + pointerHalfSize, scaleLine.y1 - sign * padding.bottom
-                );
-                pointer.box = pointerBox;
-                if (options.track.visible && options.shape === BAR_INDICATOR) {
-                    trackBox = new Box2D(
-                        scaleLine.x1, scaleBox.y1 - sign * padding.bottom - width,
-                        scaleLine.x2, scaleBox.y1 - sign * padding.bottom);
-                    pointer.box = trackBox.clone().wrap(pointerBox).pad(padding);
+                trackBox = new Box2D(
+                    scaleLine.x1, scaleLine.y1 - space,
+                    scaleLine.x2, scaleLine.y1 - space);
+
+                trackBox[mirror ? "y2" : "y1"] -= trackSize;
+
+                if (options.shape !== BAR_INDICATOR) {
+                    pointerRangeBox = new Box2D(
+                        scaleLine.x1 - pointerHalfSize, scaleLine.y1 - space,
+                        scaleLine.x2 + pointerHalfSize, scaleLine.y1 - space
+                    );
+                    pointerBox = pointerRangeBox;
                 }
             }
 
             pointer.trackBox = trackBox;
-            pointer.pointerBox = pointerBox;
+            pointer.pointerRangeBox = pointerRangeBox;
+            pointer.box = pointerBox || trackBox.clone().pad(options.border.width);
         },
 
         renderPointer: function(view) {
@@ -900,36 +908,37 @@
                 scale = pointer.scale,
                 slot = scale.getSlot(value, scale.options.min),
                 size = options.size,
-                halfSize = size / 2,
-                trackBox = pointer.trackBox,
-                pointerBox = pointer.pointerBox,
+                pointerRangeBox = pointer.pointerRangeBox,
                 vertical = scale.options.vertical,
+                halfSize = size / 2,
                 shape,
-                sign = (scale.options.mirror ? -1 : 1);
+                sign = (scale.options.mirror ? -1 : 1),
+                trackBox;
 
             if (options.shape == ARROW) {
                 if (vertical) {
                     shape = [
-                        new Point2D(pointerBox.x1, slot.y1 - halfSize),
-                        new Point2D(pointerBox.x1 - sign * size, slot.y1),
-                        new Point2D(pointerBox.x1, slot.y1 + halfSize)
+                        new Point2D(pointerRangeBox.x1, slot.y1 - halfSize),
+                        new Point2D(pointerRangeBox.x1 - sign * size, slot.y1),
+                        new Point2D(pointerRangeBox.x1, slot.y1 + halfSize)
                     ];
                 } else {
                     shape = [
-                        new Point2D(slot.x2 - halfSize, pointerBox.y2),
-                        new Point2D(slot.x2, pointerBox.y2 + sign * size),
-                        new Point2D(slot.x2 + halfSize, pointerBox.y2)
+                        new Point2D(slot.x2 - halfSize, pointerRangeBox.y2),
+                        new Point2D(slot.x2, pointerRangeBox.y2 + sign * size),
+                        new Point2D(slot.x2 + halfSize, pointerRangeBox.y2)
                     ];
                 }
             } else {
+                trackBox = pointer.trackBox;
                 if (vertical) {
                     shape = new Box2D(
-                        trackBoxCenter.x - halfSize, slot.y1,
-                        trackBoxCenter.x + halfSize, slot.y2);
+                        trackBox.x1, slot.y1,
+                        trackBox.x1 + sign * size, slot.y2);
                 } else {
                     shape = new Box2D(
-                        slot.x1, trackBoxCenter.y - halfSize,
-                        slot.x2, trackBoxCenter.y + halfSize);
+                        slot.x1, trackBox.y1,
+                        slot.x2, trackBox.y1 + sign * size);
                 }
             }
 
@@ -956,9 +965,10 @@
             var pointer = this,
                 options = pointer.options,
                 trackOptions = options.track,
-                border = trackOptions.border || {};
+                border = trackOptions.border || {},
+                trackBox = pointer.trackBox.clone().pad(border.width || 0);
 
-            return view.createRect(pointer.trackBox, {
+            return view.createRect(trackBox, {
                 fill: trackOptions.color,
                 fillOpacity: trackOptions.opacity,
                 stroke: border.width ? border.color || trackOptions.color : "",
@@ -1019,24 +1029,16 @@
             var plotArea = this,
                 scale = plotArea.scale,
                 pointer = plotArea.pointer,
-                vertical = scale.options.vertical,
-                scaleBox = scale.box,
+                scaleBox = scale.box.clone(),
                 pointerBox = pointer.box,
-                diff;
+                pos = scale.options.vertical ? "y" : "x";
 
-            if (vertical) {
-                diff = scaleBox.height() - pointerBox.height();
-                scale.reflow(new Box2D(
-                    scaleBox.x1, scaleBox.y1 - diff / 2,
-                    scaleBox.x2, scaleBox.y2 + diff / 2
-                ));
-            } else {
-                diff = math.abs(scaleBox.width() - pointerBox.width());
-                scale.reflow(new Box2D(
-                    scaleBox.x1 + diff / 2, scaleBox.y1,
-                    scaleBox.x2 - diff / 2, scaleBox.y2
-                ));
-            }
+            scaleBox[pos + 1] += math.max(scaleBox[pos + 1] - pointerBox[pos + 1], 0);
+            scaleBox[pos + 2] -= math.max(pointerBox[pos + 2] - scaleBox[pos + 2], 0);
+
+            scale.reflow(scaleBox);
+
+            pointer.reflow(plotArea.box);
         },
 
         getBox: function(box) {
@@ -1080,7 +1082,7 @@
                     scaleBox.x2 + diff, plotAreaBox.y2
                 ));
             } else {
-                diff = math.abs(plotAreaBox.center().y - box.center().y);
+                diff = plotAreaBox.center().y - box.center().y;
                 scale.reflow(new Box2D(
                     plotAreaBox.x1, scaleBox.y1 + diff,
                     plotAreaBox.x2, scaleBox.y2 + diff
