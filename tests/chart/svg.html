@@ -1027,6 +1027,17 @@
                     rect,
                     decorator;
 
+                function hrefNoHash() {
+                    var href = window.location.href;
+                    var hashIndex = href.indexOf("#");
+
+                    if (hashIndex !== -1) {
+                        href = href.substring(0, hashIndex);
+                    }
+
+                    return href;
+                }
+
                 module("SVGGradientDecorator", {
                     setup: function() {
                         view = new dataviz.SVGView();
@@ -1043,6 +1054,26 @@
                 test("sets fill id", function() {
                     decorator.decorate(rect);
                     equals(rect.options.fill, "url(#fillId)");
+                });
+
+                test("sets absolute url if the page has a base tag", function() {
+                    $("head").append($("<base href='http://foo' />"));
+
+                    decorator.decorate(rect);
+
+                    equals(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
+
+                    $("base").remove();
+                });
+
+                test("sets absolute url if the page has a base tag and hash", function() {
+                    window.location.hash = "test";
+                    $("head").append($("<base href='http://foo' />"));
+
+                    decorator.decorate(rect);
+                    equals(rect.options.fill, "url(" + hrefNoHash() + "#fillId)");
+
+                    $("base").remove();
                 });
 
                 test("registers gradient definition", function() {

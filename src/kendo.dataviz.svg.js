@@ -740,6 +740,7 @@
         getPaint: function(paint) {
             var decorator = this,
                 view = decorator.view,
+                baseUrl = decorator.baseUrl(),
                 definitions = view.definitions,
                 overlay,
                 overlayId,
@@ -755,13 +756,30 @@
                         definitions[overlayId] = gradient;
                     }
 
-                    return "url(#" + gradient.options.id + ")";
+                    return "url(" + baseUrl + "#" + gradient.options.id + ")";
                 } else {
                     return NONE;
                 }
             } else {
                 return paint;
             }
+        },
+
+        baseUrl: function() {
+            var base = doc.getElementsByTagName("base")[0],
+                baseUrl = "",
+                href = doc.location.href,
+                hashIndex = href.indexOf("#");
+
+            if (base) {
+                if (hashIndex !== -1) {
+                    href = href.substring(0, hashIndex);
+                }
+
+                baseUrl = href;
+            }
+
+            return baseUrl;
         }
     };
 
