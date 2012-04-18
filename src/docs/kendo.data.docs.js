@@ -754,7 +754,7 @@
     });
 
     /**
-    * Fires when an error occurs during data retrieval.
+    * Fires when an error occurs during data retrieval. The event arguments are the same as the ones of the error event of $.ajax().
     * @name kendo.data.DataSource#error
     * @event
     * @example
@@ -786,4 +786,24 @@
     *     // handle event
     * });
     */
+
+    /**
+    * Fires when data request is to be made
+    * @name kendo.data.DataSource#requestStart
+    * @event
+    * @param {Event} e
+    * @param {jQueryObject} e.sender Reference to the dataSource object instance.
+    * @example
+    * var dataSource = new kendo.data.DataSource({
+    *     requestStart: function(e) {
+    *         // handle event
+    *     }
+    * });
+    * @exampleTitle To set after initialization
+    * @example
+    * dataSource.bind("requestStart", function(e) {
+    *     // handle event
+    * });
+    */
+
 })(jQuery);
