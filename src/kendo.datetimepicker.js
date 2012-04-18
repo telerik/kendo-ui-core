@@ -3,6 +3,7 @@
         parse = kendo.parseDate,
         ui = kendo.ui,
         Widget = ui.Widget,
+        MONTH = "month",
         SPAN = "<span/>";
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
@@ -34,7 +35,12 @@
             min: new Date(1900, 0, 1),
             max: new Date(2099, 11, 31),
             interval: 30,
-            height: 200
+            height: 200,
+            footer: '#= kendo.toString(data,"D") #',
+            start: MONTH,
+            depth: MONTH,
+            animation: {},
+            month : {}
         },
 
         events: {

@@ -303,6 +303,29 @@
             }
         },
 
+        _parse: function(value) {
+            var that = this,
+                current = that._value || TODAY;
+
+            if (value instanceof DATE) {
+                return value;
+            }
+
+            value = kendo.parseDate(value, that.options.format);
+
+            if (value) {
+                value = new DATE(current.getFullYear(),
+                                 current.getMonth(),
+                                 current.getDate(),
+                                 value.getHours(),
+                                 value.getMinutes(),
+                                 value.getSeconds(),
+                                 value.getMilliseconds());
+            }
+
+            return value;
+        },
+
         _popup: function() {
             var that = this,
                 list = that.list,
@@ -808,7 +831,7 @@
                 return options[option];
             }
 
-            value = that._parse(value);
+            value = that.timeView._parse(value);
 
             if (!value) {
                 return;
@@ -821,29 +844,6 @@
             that.timeView.refresh();
         },
 
-        _parse: function(value) {
-            var that = this,
-                current = that._value || TODAY;
-
-            if (value instanceof DATE) {
-                return value;
-            }
-
-            value = kendo.parseDate(value, that.options.format);
-
-            if (value) {
-                value = new DATE(current.getFullYear(),
-                                 current.getMonth(),
-                                 current.getDate(),
-                                 value.getHours(),
-                                 value.getMinutes(),
-                                 value.getSeconds(),
-                                 value.getMilliseconds());
-            }
-
-            return value;
-        },
-
         _toggleHover: function(e) {
             if (!touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
@@ -853,7 +853,7 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                date = that._parse(value);
+                date = that.timeView._parse(value);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;
