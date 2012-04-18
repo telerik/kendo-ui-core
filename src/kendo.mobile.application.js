@@ -26,9 +26,10 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        toRoleSelector = function (string) { return string.replace(/(\S+)/g, "[" + attr("role") + "=$1],"); },
-        buttonRolesSelector = toRoleSelector("button backbutton detailbutton listview-link"),
-        linkRolesSelector = toRoleSelector("tab"),
+        buttonRoles = "button backbutton detailbutton listview-link",
+        linkRoles = "tab",
+        // viewRoles = "view splitview",
+
 
         ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
@@ -404,9 +405,9 @@
                 mouseup = $.proxy(that._mouseup, that);
 
             this.element
-                .delegate(linkRolesSelector, support.mousedown, mouseup)
-                .delegate(buttonRolesSelector, support.mouseup, mouseup)
-                .delegate(linkRolesSelector + buttonRolesSelector, "click", appLinkClick);
+                .delegate(roleSelector(linkRoles), support.mousedown, mouseup)
+                .delegate(roleSelector(buttonRoles), support.mouseup, mouseup)
+                .delegate(roleSelector(linkRoles + " " + buttonRoles), "click", appLinkClick);
         },
 
         _setupPlatform: function() {
