@@ -377,7 +377,7 @@
         },
 
         items: function() {
-            return this.tbody.children(':not(.k-grouping-row,.k-detail-row)');
+            return this.tbody.children(':not(.k-grouping-row,.k-detail-row,.k-group-footer)');
         },
 
         _element: function() {
