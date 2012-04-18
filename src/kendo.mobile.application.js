@@ -28,7 +28,7 @@
 
         buttonRoles = "button backbutton detailbutton listview-link",
         linkRoles = "tab",
-        // viewRoles = "view splitview",
+        viewRoles = "view splitview",
 
 
         ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
@@ -454,7 +454,7 @@
                 views, historyEvents,
                 initial = that.options.initial;
 
-            views = that.element.find(roleSelector("view"));
+            views = that.element.find(roleSelector(viewRoles));
             that.rootView = views.first();
 
             historyEvents = {
@@ -514,7 +514,7 @@
 
             container[0].innerHTML = html;
 
-            views = container.find(roleSelector("view")).hide();
+            views = container.find(roleSelector(viewRoles)).hide();
             view = views.first();
 
             view.hide().attr(attr("url"), url);

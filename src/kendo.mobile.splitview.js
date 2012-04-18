@@ -1,13 +1,14 @@
 (function($, undefined) {
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
-        Widget = ui.Widget;
+        Widget = ui.Widget,
+        View = ui.View;
 
     /**
      * @name kendo.mobile.ui.SplitView.Description
      *
      */
-    var SplitView = Widget.extend(/** @lends kendo.mobile.ui.SplitView.prototype */{
+    var SplitView = View.extend(/** @lends kendo.mobile.ui.SplitView.prototype */{
         /**
         * @constructs
         * @extends kendo.mobile.ui.Widget
