@@ -18,8 +18,20 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+            that._layout();
+            that._model();
+            that._init();
+        },
 
-            element = that.element;
+        // Implement view interface
+        _layout: function() {
+            var that = this,
+                element = that.element;
+
+            element.data("kendoView", that).addClass("km-view");
+
+            that.transition = element.data(kendo.ns + "transition");
+            $.extend(that, { header: [], footer: [], content: element });
         },
 
         options: {

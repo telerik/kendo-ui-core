@@ -588,7 +588,7 @@
                     applyViewportHeight();
                 }
 
-                if (that.view) {// On desktop resize is fired rather early
+                if (that.view && that.view.scroller) {// On desktop resize is fired rather early
                     that.view.scroller.reset();
                 }
             });
