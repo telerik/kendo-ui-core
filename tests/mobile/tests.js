@@ -44,6 +44,10 @@ tests.push(
         title: "mobile navbar"
     },
     {
+        page: "mobile/splitview.html",
+        title: "mobile splitview"
+    },
+    {
         page: "mobile/switch/index.html",
         title: "mobile switch"
     },
