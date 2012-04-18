@@ -100,17 +100,11 @@
             element = that.element;
 
             that.layout = options.layout;
-            that.application = options.application;
 
             that._layout();
             that._model();
             that._scroller();
-
-            that.trigger(INIT, {view: that});
-
-            that._eachWidget(function(widget) {
-                widget.viewInit(that);
-            });
+            that._init();
         },
 
         events: [
@@ -180,7 +174,7 @@
                 current: this,
                 next: view,
                 transition: transition,
-                defaultTransition: this.application.options.transition,
+                defaultTransition: this.options.application.options.transition,
                 complete: complete
             });
         },
@@ -198,6 +192,16 @@
             }
 
             return contents;
+        },
+
+        _init: function() {
+            var that = this;
+
+            that.trigger(INIT, {view: that});
+
+            that._eachWidget(function(widget) {
+                widget.viewInit(that);
+            });
         },
 
         _scroller: function() {
@@ -342,6 +346,7 @@
         back: function() {
             var next = this.next,
                 current = this.current;
+
             return next.nextView === current && JSON.stringify(next.params) === JSON.stringify(history.url().params);
         }
     });

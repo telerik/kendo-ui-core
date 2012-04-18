@@ -27,21 +27,61 @@
         <ul id="log"></ul>
 
         <script>
-            var root = $('#qunit-fixture');
+            var root = $('#qunit-fixture'),
+                app;
+
+            function teardown() {
+                root.empty();
+                location.hash = '';
+                kendo.history.stop();
+            }
+
+            function hidden(selector) {
+                ok(!root.find(selector).is(":visible"));
+            }
+
+            function visible(selector) {
+                ok(root.find(selector).is(":visible"));
+            }
 
             module('mobile SplitView as initial view', {
                 setup: function() {
                     root.html('<div data-role="splitview" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
-                    new kendo.mobile.Application(root);
+                    app = new kendo.mobile.Application(root);
                 },
 
-                teardown: function() {
-                }
+                teardown: teardown
             });
 
-            test("application treats splitview as initial view", function(){
-                ok(root.find("#foo").is(":visible"));
-                ok(!root.find("#bar").is(":visible"));
+            test("application treats splitview as initial view", 2, function(){
+                visible("#foo");
+                hidden("#bar");
+            });
+
+            test("splitview navigates to regular view", 2, function() {
+                app.navigate("#bar");
+                visible("#bar");
+                hidden("#foo");
+            });
+
+            module('mobile SplitView as secondary view', {
+                setup: function() {
+                    root.html('<div data-role="view" id="bar">Bar</div><div data-role="splitview" id="foo">Foo</div>');
+                    app = new kendo.mobile.Application(root);
+                },
+
+                teardown: teardown
+            });
+
+            test("application hides splitview", 2, function(){
+                visible("#bar");
+                hidden("#foo");
+            });
+
+            test("splitview navigates to regular view", 2, function() {
+                app.navigate("#foo");
+                visible("#foo");
+                hidden("#bar");
             });
         </script>
     </body>
