@@ -93,9 +93,7 @@
          * </div>
          */
         init: function(element, options) {
-            var that = this,
-                contentSelector = roleSelector("content"),
-                model;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -103,45 +101,10 @@
 
             that.layout = options.layout;
             that.application = options.application;
-            that.element.data("kendoView", that).addClass("km-view");
-            that.transition = element.data(kendo.ns + "transition");
 
-            that.header = element.find(roleSelector("header")).addClass("km-header");
-            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
-
-            if (!element.has(contentSelector)[0]) {
-              element.wrapInner("<div " + attr("role") + '="content"></div>');
-            }
-
-            that.content = element.find(roleSelector("content"))
-                                .addClass("km-content");
-
-            that.element.prepend(that.header).append(that.footer);
-
-            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
-
-            if (that.layout) {
-                that.layout.setup(that);
-            }
-
-            model = options.model;
-
-            if (typeof model === "string") {
-                model = kendo.getter(model)(window);
-            }
-
-            that.model = model;
-
-            if (model) {
-                kendo.bind(element.children(), model, ui);
-            } else {
-                kendo.mobile.init(element.children());
-            }
-
-            that.content.kendoMobileScroller();
-
-            that.scroller = that.content.data("kendoMobileScroller");
-            that.scrollerContent = that.scroller.scrollElement;
+            that._layout();
+            that._model();
+            that._scroller();
 
             that.trigger(INIT, {view: that});
 
@@ -235,6 +198,60 @@
             }
 
             return contents;
+        },
+
+        _scroller: function() {
+            var that = this;
+
+            that.content.kendoMobileScroller();
+
+            that.scroller = that.content.data("kendoMobileScroller");
+            that.scrollerContent = that.scroller.scrollElement;
+        },
+
+        _model: function() {
+            var that = this,
+                element = that.element,
+                model = that.options.model;
+
+            if (typeof model === "string") {
+                model = kendo.getter(model)(window);
+            }
+
+            that.model = model;
+
+            if (model) {
+                kendo.bind(element.children(), model, ui);
+            } else {
+                kendo.mobile.init(element.children());
+            }
+        },
+
+        _layout: function() {
+            var that = this,
+                contentSelector = roleSelector("content"),
+                element = that.element;
+
+            element.data("kendoView", that).addClass("km-view");
+            that.transition = element.data(kendo.ns + "transition");
+
+            that.header = element.find(roleSelector("header")).addClass("km-header");
+            that.footer = element.find(roleSelector("footer")).addClass("km-footer");
+
+            if (!element.has(contentSelector)[0]) {
+              element.wrapInner("<div " + attr("role") + '="content"></div>');
+            }
+
+            that.content = element.find(roleSelector("content"))
+                                .addClass("km-content");
+
+            that.element.prepend(that.header).append(that.footer);
+
+            that.id = element.data(kendo.ns + "url") || "#" + element.attr("id");
+
+            if (that.layout) {
+                that.layout.setup(that);
+            }
         },
 
         _eachWidget: function(callback) {
