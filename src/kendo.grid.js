@@ -2053,11 +2053,28 @@
 
         collapseGroup: function(group) {
             group = $(group).find(".k-icon").addClass("k-expand").removeClass("k-collapse").end();
-            var level = group.find(".k-group-cell").length;
 
-            group.nextUntil(function() {
-                return $(".k-group-cell", this).length <= level;
-            }).hide();
+            var level = group.find(".k-group-cell").length,
+                footerCount = 1,
+                offset,
+                tr;
+
+            group.nextAll("tr").each(function() {
+                tr = $(this),
+                offset = tr.find(".k-group-cell").length;
+
+                if (tr.hasClass("k-group-row")) {
+                    footerCount++;
+                } else if (tr.hasClass("k-group-footer")) {
+                    footerCount--;
+                }
+
+                if (offset <= level || (tr.hasClass("k-group-footer") && footerCount < 0)) {
+                    return false;
+                }
+
+                tr.hide();
+            });
         },
 
         expandGroup: function(group) {
