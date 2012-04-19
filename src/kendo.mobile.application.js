@@ -355,7 +355,7 @@
                 return;
             }
 
-            that._findView(url, function(view) {
+            that.viewBuilder.findView(url, function(view) {
                 if (that.view === view) { return; }
 
                 that.view.switchWith(view, transition, function() {
@@ -453,11 +453,8 @@
 
         _startHistory: function() {
             var that = this,
-                views, historyEvents,
+                historyEvents,
                 initial = that.options.initial;
-
-            views = that.element.find(roleSelector(viewRoles));
-            that.rootView = views.first();
 
             historyEvents = {
                 change: function(e) {
@@ -472,8 +469,7 @@
                         url = initial;
                     }
 
-                    that._findView(url, function(view) {
-                        views.not(view).hide();
+                    that.viewBuilder.findView(url, function(view) {
                         view.showStart();
                         that.view = view;
 
@@ -485,35 +481,6 @@
             };
 
             history.start($.extend(that.options, historyEvents));
-        },
-
-        _findView: function(url, callback) {
-            var that = this,
-                view,
-                firstChar = url.charAt(0),
-                local = firstChar === "#",
-                remote = firstChar === "/",
-                element;
-
-            if (!url) {
-                element = that.rootView;
-            } else {
-                element = that.element.find("[" + attr("url") + "='" + url + "']");
-
-                if (!element[0] && !remote) {
-                    element = that.element.find(local ? url : "#" + url);
-                }
-            }
-
-            view = element.data("kendoView");
-
-            if (view) {
-                callback(view);
-            } else if (element[0]) {
-                callback(that.viewBuilder.createView(element));
-            } else {
-                that.viewBuilder.loadView(url, callback);
-            }
         },
 
         _setupElementClass: function() {
@@ -660,15 +627,50 @@
 
     var ViewBuilder = kendo.Class.extend({
         init: function(options) {
-            var that = this;
+            var that = this,
+                views;
 
             $.extend(that, options);
             that.sandbox = $("<div />");
+
+            views = that._hideViews(that.container);
+            that.rootView = views.first();
+
             that.layouts = {};
             that._setupLayouts(that.container);
         },
 
-        createView: function(element) {
+        findView: function(url, callback) {
+            var that = this,
+                container = that.container,
+                firstChar = url.charAt(0),
+                local = firstChar === "#",
+                remote = firstChar === "/",
+                view,
+                element;
+
+            if (!url) {
+                element = that.rootView;
+            } else {
+                element = container.find("[" + attr("url") + "='" + url + "']");
+
+                if (!element[0] && !remote) {
+                    element = container.find(local ? url : "#" + url);
+                }
+            }
+
+            view = element.data("kendoView");
+
+            if (view) {
+                callback(view);
+            } else if (element[0]) {
+                callback(that._createView(element));
+            } else {
+                that._loadView(url, callback);
+            }
+        },
+
+        _createView: function(element) {
             var that = this,
                 viewOptions,
                 layout = element.data(kendo.ns + "layout");
@@ -691,7 +693,7 @@
             return kendo.initWidget(element, viewOptions, kendo.mobile.ui);
         },
 
-        loadView: function(url, callback) {
+        _loadView: function(url, callback) {
             var that = this;
 
             if (that._xhr) {
@@ -722,7 +724,7 @@
 
             sandbox[0].innerHTML = html;
 
-            views = sandbox.find(roleSelector(viewRoles)).hide();
+            views = that._hideViews(sandbox);
             view = views.first();
 
             view.hide().attr(attr("url"), url);
@@ -733,7 +735,11 @@
                         .append(sandbox.find("script, style"))
                         .append(views);
 
-            return that.createView(view);
+            return that._createView(view);
+        },
+
+        _hideViews: function(container) {
+            return container.find(roleSelector(viewRoles)).hide();
         },
 
         _setupLayouts: function(element) {
