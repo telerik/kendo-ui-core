@@ -27,9 +27,7 @@
             element = that.element;
             options = that.options;
 
-            //should call calendar.validate and other validations of the options
-            options.format = options.format || kendo.culture().calendar.patterns.g;
-            options.timeFormat = options.timeFormat || kendo.culture().calendar.patterns.t;
+            validate(options);
 
             that._wrapper();
 
@@ -302,6 +300,12 @@
 
     function preventDefault(e) {
         e.preventDefault();
+    }
+
+    function validate(options) {
+        options.format = kendo.calendar.parseFormat(options.format || kendo.culture().calendar.patterns.g);
+        options.timeFormat = kendo.calendar.parseFormat(options.timeFormat || kendo.culture().calendar.patterns.t);
+        kendo.calendar.validate(options);
     }
 
     ui.plugin(DateTimePicker);
