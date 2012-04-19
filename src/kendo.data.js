@@ -2100,6 +2100,9 @@
                 try {
                     that.options.serverPaging = true;
                     that.options.serverSorting = true;
+                    if (paging) {
+                        that._data = data = that._observe(data);
+                    }
                     that._process(data);
                 } finally {
                     that.options.serverPaging = paging;
