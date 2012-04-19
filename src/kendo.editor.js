@@ -4435,10 +4435,11 @@ var ListFormatter = Class.extend({
     },
 
     wrap: function(list, nodes) {
-        var li = dom.create(list.ownerDocument, 'li');
+        var li = dom.create(list.ownerDocument, "li"),
+            i, node;
 
-        for (var i = 0; i < nodes.length; i++) {
-            var node = nodes[i];
+        for (i = 0; i < nodes.length; i++) {
+            node = nodes[i];
 
             if (dom.is(node, 'li')) {
                 list.appendChild(node);
@@ -4529,9 +4530,45 @@ var ListFormatter = Class.extend({
         }
     },
 
-    apply: function (nodes) {
+    merge: function(tag, formatNode) {
+        var prev = formatNode.previousSibling, next;
+
+        while (prev && (prev.className == "k-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) {
+            prev = prev.previousSibling;
+        }
+
+        // merge with previous list
+        if (prev && dom.name(prev) == tag) {
+            while(formatNode.firstChild) {
+                prev.appendChild(formatNode.firstChild);
+            }
+            dom.remove(formatNode);
+            formatNode = prev;
+        }
+
+        next = formatNode.nextSibling;
+        while (next && (next.className == "k-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) {
+            next = next.nextSibling;
+        }
+
+        // merge with next list
+        if (next && dom.name(next) == tag) {
+            while(formatNode.lastChild) {
+                next.insertBefore(formatNode.lastChild, next.firstChild);
+            }
+            dom.remove(formatNode);
+        }
+    },
+
+    applyOnSection: function (section, nodes) {
         var tag = this.tag,
-            commonAncestor = nodes.length == 1 ? dom.parentOfType(nodes[0], ['ul','ol']) : dom.commonAncestor.apply(null, nodes);
+            commonAncestor;
+
+        if (nodes.length == 1) {
+            commonAncestor = dom.parentOfType(nodes[0], ["ul","ol"]);
+        } else {
+            commonAncestor = dom.commonAncestor.apply(null, nodes);
+        }
 
         if (!commonAncestor) {
             commonAncestor = dom.parentOfType(nodes[0], ["td"]) || nodes[0].ownerDocument.body;
@@ -4546,7 +4583,7 @@ var ListFormatter = Class.extend({
         var formatNode = this.finder.findSuitable(nodes);
 
         if (!formatNode) {
-            formatNode = new ListFormatFinder(tag == 'ul' ? 'ol' : 'ul').findSuitable(nodes);
+            formatNode = new ListFormatFinder(tag == "ul" ? "ol" : "ul").findSuitable(nodes);
         }
 
         var childNodes = dom.significantChildNodes(commonAncestor);
@@ -4570,7 +4607,7 @@ var ListFormatter = Class.extend({
             var nodeName = dom.name(child);
             if (this.suitable(child, nodes) && (!formatNode || !dom.isAncestorOrSelf(formatNode, child))) {
 
-                if (formatNode && (nodeName == 'ul' || nodeName == 'ol')) {
+                if (formatNode && (nodeName == "ul" || nodeName == "ol")) {
                     // merging lists
                     //Array.prototype.push.apply(ancestors, $.toArray(child.childNodes));
                     $.each(child.childNodes, pushAncestor);
@@ -4596,31 +4633,44 @@ var ListFormatter = Class.extend({
             dom.changeTag(formatNode, tag);
         }
 
-        var prev = formatNode.previousSibling;
-        while (prev && (prev.className == "k-marker" || (prev.nodeType == 3 && dom.isWhitespace(prev)))) {
-            prev = prev.previousSibling;
-        }
+        this.merge(tag, formatNode);
+    },
 
-        // merge with previous list
-        if (prev && dom.name(prev) == tag) {
-            while(formatNode.firstChild) {
-                prev.appendChild(formatNode.firstChild);
+    apply: function (nodes) {
+        var i = 0,
+            sections = [],
+            lastSection,
+            lastNodes,
+            section;
+
+        // split nodes into sections that need to be different lists
+        do {
+            section = dom.parentOfType(nodes[i], ["td","body"]);
+
+            if (!lastSection || section != lastSection) {
+                if (lastSection) {
+                    sections.push({
+                        section: lastSection,
+                        nodes: lastNodes
+                    });
+                }
+
+                lastNodes = [nodes[i]];
+                lastSection = section;
+            } else {
+                lastNodes.push(nodes[i]);
             }
-            dom.remove(formatNode);
-            formatNode = prev;
-        }
 
-        var next = formatNode.nextSibling;
-        while (next && (next.className == "k-marker" || (next.nodeType == 3 && dom.isWhitespace(next)))) {
-            next = next.nextSibling;
-        }
+            i++;
+        } while (i < nodes.length);
 
-        // merge with next list
-        if (next && dom.name(next) == tag) {
-            while(formatNode.lastChild) {
-                next.insertBefore(formatNode.lastChild, next.firstChild);
-            }
-            dom.remove(formatNode);
+        sections.push({
+            section: lastSection,
+            nodes: lastNodes
+        });
+
+        for (i = 0; i < sections.length; i++) {
+            this.applyOnSection(sections[i].section, sections[i].nodes);
         }
     },
 
