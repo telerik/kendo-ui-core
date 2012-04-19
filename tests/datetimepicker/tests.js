@@ -6,5 +6,13 @@ tests.push(
     {
         page: "datetimepicker/api.html",
         title: "datetimepicker api"
+    },
+    {
+        page: "datetimepicker/navigation.html",
+        title: "datetimepicker navigation"
+    },
+    {
+        page: "datetimepicker/events.html",
+        title: "datetimepicker events"
     }
 );

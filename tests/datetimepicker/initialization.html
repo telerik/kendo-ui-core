@@ -107,23 +107,6 @@
                 equal(timeView.options.interval, datetimepicker.options.interval);
             });
 
-            /*
-            test("dateView onChange should call value()", function() {
-                var called = false,
-                    datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
-
-                stub(datetimepicker, {
-                    _change: datetimepicker.value,
-                    close: datetimepicker.close
-                });
-
-                $.proxy(datetimepicker.dateView.options.change, datetimepicker.dateView.calendar)();
-
-                equal(datetimepicker.calls("_change"), 1);
-                equal(datetimepicker.calls("close"), 1);
-            });
-            */
-
             test("datetimepicker wire date icon click", function() {
                 var datetimepicker = new DateTimePicker(input);
 
@@ -138,6 +121,12 @@
                 datetimepicker.close("time");
                 datetimepicker._timeIcon.click();
                 ok(datetimepicker.timeView.popup.visible());
+            });
+
+            test("datetimepicker disables widget if input has disabled attribute", function() {
+                var datetimepicker = new DateTimePicker(input.attr("disabled", "disabled"));
+
+                ok(datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
             });
 
             /*
