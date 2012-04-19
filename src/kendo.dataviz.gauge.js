@@ -589,10 +589,11 @@
                 step = math.abs(plotArea.getDiff(plotAreaBox, box)),
                 min = round(step, COORD_PRECISION),
                 max = round(-step, COORD_PRECISION),
-                minDiff, midDiff, maxDiff,
-                mid;
+                minDiff, midDiff, maxDiff, mid,
+                i = 0;
 
-            while (true) {
+            while (i < 100) {
+                i++;
                 if (min != mid) {
                     minDiff = plotArea.getPlotBox(min, box, ring);
                     if (0 <= minDiff && minDiff <= 2) {
