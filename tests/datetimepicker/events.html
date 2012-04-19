@@ -108,6 +108,21 @@
                 });
             });
 
+            test("DateTimePicker does not raise change when navigate in TimeView", 0, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    change: function() {
+                        ok(false);
+                    }
+                });
+
+                datetimepicker.open("time");
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

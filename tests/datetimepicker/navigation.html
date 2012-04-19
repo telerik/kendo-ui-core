@@ -192,6 +192,19 @@
                 equal(datetimepicker.timeView.calls("move"), 1);
             });
 
+            test("TimeView updates the input value on keyboard navigation", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                ok(input.val());
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -103,6 +103,10 @@
 
                 dateIcon.bind({
                     click: function() {
+                        if (!touch && element[0] !== document.activeElement) {
+                            element.focus();
+                        }
+
                         that.toggle("date");
                     },
                     mousedown: preventDefault
@@ -110,6 +114,10 @@
 
                 timeIcon.bind({
                     click: function() {
+                        if (!touch && element[0] !== document.activeElement) {
+                            element.focus();
+                        }
+
                         that.toggle("time");
                     },
                     mousedown: preventDefault
@@ -240,8 +248,11 @@
                 format: that.options.timeFormat,
                 change: function(value, trigger) {
                     value = that.timeView._parse(value);
-
-                    that._change(value);
+                    if (trigger) {
+                        that._change(value);
+                    } else {
+                        that.element.val(kendo.toString(value, that.options.format));
+                    }
                 },
                 close: close,
                 open: open
