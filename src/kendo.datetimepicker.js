@@ -76,6 +76,8 @@
         },
 
         events: [
+            "open",
+            "close",
             CHANGE
         ],
 
