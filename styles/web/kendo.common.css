@@ -1702,11 +1702,7 @@ span.k-dropdown
     padding: 0 2px;
 }
 
-span.k-datetimepicker .k-select
-{
-    right: 21px;
-}
-
+span.k-datetimepicker .k-select,
 span.k-datetimepicker .k-select+.k-select
 {
     right: 0;
@@ -1952,7 +1948,12 @@ span.k-datepicker
 
 .k-datetimepicker .k-picker-wrap
 {
-    padding-right: 44px;
+    padding-right: 42px;
+}
+
+.k-datetimepicker .k-picker-wrap .k-icon
+{
+    margin-left: 3px;
 }
 
 .k-picker-wrap .k-icon
