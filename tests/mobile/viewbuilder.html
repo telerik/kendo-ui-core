@@ -45,7 +45,7 @@
             }
 
             ////////////////////////////////////////////////////////////////////
-            module("view builder view finding", {
+            module("view builder view showing", {
                 setup: function() {
                     root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
                     viewBuilder = new kendo.mobile.ViewBuilder({
@@ -60,18 +60,6 @@
             test("hides child views", 2, function() {
                 hidden("#foo");
                 hidden("#bar");
-            });
-
-            test("finds view by id", 1, function() {
-                viewBuilder.findView("#foo", function(view) {
-                    equal(view.element[0], root.find("#foo")[0]);
-                });
-            });
-
-            test("returns root view if no url", 1, function() {
-                viewBuilder.findView("", function(view) {
-                    equal(view.element[0], root.find("#foo")[0]);
-                });
             });
 
             asyncTest("Loads remote view", 2, function() {
@@ -146,6 +134,15 @@
                 });
             });
 
+            test("shows default view if no url passed", 2, function() {
+                viewBuilder.viewShown = function() {
+                    visible("#foo");
+                    hidden("#bar");
+                }
+
+                viewBuilder.showView("");
+            });
+
             test("shows given view", 2, function() {
                 viewBuilder.viewShown = function() {
                     visible("#foo");
@@ -153,7 +150,14 @@
                 }
 
                 viewBuilder.showView("#foo");
+            });
 
+            test("parses url params and provides them to the view", 1, function() {
+                viewBuilder.viewShown = function() {
+                    equal(viewBuilder.view().params["foo"], "bar");
+                }
+
+                viewBuilder.showView("#foo?foo=bar");
             });
 
             asyncTest("hides given view", 4, function() {
@@ -211,7 +215,6 @@
                     equal(view.layout, viewBuilder.layouts["bar"]);
                 });
             });
-
 
             test("Uses platform specific layouts", 1, function() {
                 kendo.mobile.application = {os: "ios"};

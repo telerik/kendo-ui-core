@@ -646,8 +646,8 @@
             var that = this;
             if (that._view !== view) {
                 view.switchWith(that._view, that.transition, that.params, function() {
-                    that.viewShown();
                     that._view = view;
+                    that.viewShown();
                 });
             }
         },

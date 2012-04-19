@@ -131,14 +131,6 @@
                 equal(application.element.find(".km-footer").text(), "custom footer", "Custom footer is present");
             });
 
-            test("Applies default layout if passed", function() {
-            setup('<div data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
-                    ', { layout: "foo" });
-
-                equal(application.element.find(".km-footer").text(), "footer", "Layout footer is present");
-            });
-
             test("Overrides default layout if none specified", function() {
                 setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
@@ -173,16 +165,6 @@
             test("Pass application instance to the view", function() {
                 setup('<div data-init="foo" data-role="view">View</div>');
                 equal(application.view().application, application);
-            });
-
-            function checkViewParams(e) {
-                    equal(e.view.element.attr("id"), "page2");
-                    equal(e.view.params.foo, "bar");
-            }
-
-            test("Passes url params to the view show event", function() {
-                setup('<div data-role="view" id="page1">Page 1</div><div data-show="checkViewParams" id="page2" data-role="view"></div>');
-                application.navigate("#page2?foo=bar");
             });
 
             test("Creates loader", function() {
