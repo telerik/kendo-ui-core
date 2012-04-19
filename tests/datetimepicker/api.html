@@ -28,7 +28,7 @@
             QUnit.config.testTimeout = 800;
             QUnit.config.reorder = false;
 
-            module("kendo.ui.DateTimePicker initialization", {
+            module("kendo.ui.DateTimePicker api", {
                 setup: function() {
                     input = $("<input />").appendTo(document.body);
                 },
@@ -150,6 +150,67 @@
                 equal(+datetimepicker.value(), +value);
             });
 
+            test("enable method with false value disables the widget", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                equal(datetimepicker.element.attr("disabled"), "disabled");
+            });
+
+            test("enable method with false unbind click event of date icon", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                stub(datetimepicker.dateView, {toggle: datetimepicker.dateView.toggle});
+
+                datetimepicker._dateIcon.click();
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("enable method with false unbind click event of clock icon", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                stub(datetimepicker.timeView, {toggle: datetimepicker.timeView.toggle});
+
+                datetimepicker._timeIcon.click();
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("enable method with false adds disabled state class to the wrapper", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                var inputwrapper = datetimepicker.wrapper.children(":first");
+
+                ok(inputwrapper.hasClass("k-state-disabled"));
+                ok(!inputwrapper.hasClass("k-state-default"));
+            });
+
+            test("enable method with true remove disabled attribute", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.enable(false);
+                datetimepicker.enable(true);
+
+                equal(datetimepicker.element.attr("disabled"), undefined);
+            });
+
+            test("enable method with true remove disabled class from wrapper", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.enable(false);
+                datetimepicker.enable(true);
+
+                ok(datetimepicker.wrapper.children(":first").hasClass("k-state-default"));
+                ok(!datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

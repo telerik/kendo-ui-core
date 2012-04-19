@@ -1,8 +1,17 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        touch = kendo.support.touch,
         parse = kendo.parseDate,
         ui = kendo.ui,
         Widget = ui.Widget,
+        CLICK = (touch ? "touchend" : "click"),
+        DISABLED = "disabled",
+        DEFAULT = "k-state-default",
+        HOVER = "k-state-hover",
+        STATEDISABLED = "k-state-disabled",
+        HOVEREVENTS = "mouseenter mouseleave",
+        MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
+        ICONEVENTS = CLICK + " " + MOUSEDOWN,
         MONTH = "month",
         SPAN = "<span/>";
 
@@ -12,6 +21,7 @@
 
             Widget.fn.init.call(that, element, options);
 
+            element = that.element;
             options = that.options;
 
             //should call calendar.validate and other validations of the options
@@ -24,7 +34,10 @@
 
             that._views();
 
-            that.element.addClass("k-input");
+            element.addClass("k-input");
+
+            that.enable(!element.is('[disabled]'));
+            that.value(options.value || element.val());
         },
 
         options: {
@@ -45,6 +58,44 @@
 
         events: {
 
+        },
+
+        enable: function(enable) {
+            var that = this,
+                dateIcon = that._dateIcon.unbind(ICONEVENTS),
+                timeIcon = that._timeIcon.unbind(ICONEVENTS),
+                wrapper = that._inputWrapper.unbind(HOVEREVENTS),
+                element = that.element;
+
+            if (enable === false) {
+                wrapper
+                    .removeClass(DEFAULT)
+                    .addClass(STATEDISABLED);
+
+                element.attr(DISABLED, DISABLED);
+            } else {
+                wrapper
+                    .addClass(DEFAULT)
+                    .removeClass(STATEDISABLED)
+                    .bind(HOVEREVENTS, that._toggleHover);
+
+                element
+                    .removeAttr(DISABLED);
+
+                dateIcon.bind({
+                    click: function() {
+                        that.toggle("date");
+                    },
+                    mousedown: preventDefault
+                });
+
+                timeIcon.bind({
+                    click: function() {
+                        that.toggle("time");
+                    },
+                    mousedown: preventDefault
+                });
+            }
         },
 
         close: function(view) {
@@ -86,6 +137,26 @@
             that._old = that._update(value);
         },
 
+        _change: function(value) {
+            var that = this;
+
+            value = that._update(value);
+
+            /*if (+that._old != +value) {
+                that._old = value;
+                that.trigger(CHANGE);
+
+                // trigger the DOM change event so any subscriber gets notified
+                that.element.trigger(CHANGE);
+            }*/
+        },
+
+        _toggleHover: function(e) {
+            if (!touch) {
+                $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
+            }
+        },
+
         _update: function(value) {
             var that = this,
                 options = that.options,
@@ -122,7 +193,7 @@
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope
-                    //that._change(this.value());
+                    that._change(this.value());
                     //that.close();
                 },
                 close: close,
@@ -132,7 +203,11 @@
             that.timeView = new kendo.TimeView($.extend({}, that.options, {
                 anchor: that.wrapper,
                 format: that.options.timeFormat,
-                change: function(value, trigger) { },
+                change: function(value, trigger) {
+                    value = that.timeView._parse(value);
+
+                    that._change(value);
+                },
                 close: close,
                 open: open
             }));
@@ -150,12 +225,8 @@
                 icons = icons.children();
             }
 
-            that._dateIcon = icons.eq(0).click(function() {
-                that.toggle("date");
-            });
-            that._timeIcon = icons.eq(1).click(function() {
-                that.toggle("time");
-            });
+            that._dateIcon = icons.eq(0);
+            that._timeIcon = icons.eq(1);
         },
 
         _wrapper: function() {
@@ -180,6 +251,10 @@
             that._inputWrapper = $(wrapper[0].firstChild);
         }
     });
+
+    function preventDefault(e) {
+        e.preventDefault();
+    }
 
     ui.plugin(DateTimePicker);
 
