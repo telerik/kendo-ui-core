@@ -51,6 +51,20 @@
                 equal(input.val(), kendo.toString(today, datetimepicker.options.format));
             });
 
+            test("DateView closes itself on click", function() {
+                var today = new Date(),
+                    datetimepicker = new DateTimePicker(input),
+                    dateView = datetimepicker.dateView;
+
+                datetimepicker.open("date");
+
+                //simulate user click
+                dateView.calendar.value(today);
+                dateView.calendar.trigger("change");
+
+                ok(!dateView.popup.visible());
+            });
+
             test("TimeView sets the value on click", function() {
                 var datetimepicker = new DateTimePicker(input),
                     timeView = datetimepicker.timeView,
