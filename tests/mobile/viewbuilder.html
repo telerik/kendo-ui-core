@@ -62,17 +62,19 @@
                 hidden("#bar");
             });
 
-            asyncTest("Loads remote view", 2, function() {
+            asyncTest("Shows remote view", 2, function() {
                 $.mockjax({
                     url: "page2.html",
                     responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
                 });
 
-                viewBuilder.findView("page2.html", function(view) {
+                viewBuilder.bind("viewShow", function(e) {
                     start();
                     equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
-                    equal(view.element[0], root.find("#page2")[0]);
+                    equal(e.view.element[0], root.find("#page2")[0]);
                 });
+
+                viewBuilder.showView("page2.html");
             });
 
             asyncTest("Reuses remote view once loaded", 1, function() {
@@ -81,13 +83,23 @@
                     responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
                 });
 
-                viewBuilder.findView("page2.html", function(view1) {
-                    viewBuilder.findView("page2.html", function(view2) {
+                var view,
+                    callback3 = function(e) {
                         start();
-                        equal(view1, view2, "View is reused");
-                    });
-                });
+                        equal(view, e.view);
+                    },
+                    callback2 = function(e) {
+                        viewBuilder.one("viewShow", callback3);
+                        viewBuilder.showView("page2.html");
+                    },
+                    callback1 = function(e) {
+                        view = e.view;
+                        viewBuilder.one("viewShow", callback2);
+                        viewBuilder.showView("#foo");
+                    };
 
+                viewBuilder.one("viewShow", callback1);
+                viewBuilder.showView("page2.html");
             });
 
             asyncTest("Loads multiple remote views", 2, function() {
@@ -96,11 +108,13 @@
                     responseText: '<body><div data-role="view" id="page2">Page 2</div></body><div data-role="view" id="page3">Page 3</div></body>'
                 });
 
-                viewBuilder.findView("page2.html", function(view) {
+                viewBuilder.bind("viewShow", function(e) {
                     start();
                     equal(root.has("#page3").length, 1, "Secondary remote view is inserted in the application DOM element");
-                    equal(view.element[0], root.find("#page2")[0]);
+                    equal(e.view.element[0], root.find("#page2")[0]);
                 });
+
+                viewBuilder.showView("page2.html");
             });
 
             asyncTest("Deals with various newline characters when loading remote view", 2, function() {
@@ -109,11 +123,13 @@
                     responseText: '<html><head></head><body><div id="page2" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
                 });
 
-                viewBuilder.findView("page2.html", function(view) {
+                viewBuilder.bind("viewShow", function(e) {
                     start();
                     equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
-                    equal(view.element[0], root.find("#page2")[0]);
+                    equal(e.view.element[0], root.find("#page2")[0]);
                 });
+
+                viewBuilder.showView("page2.html");
             });
 
             asyncTest("remote asset loading injects scripts, styles and layouts", 3, function() {
@@ -125,53 +141,58 @@
                         'ipt><div data-role="layout" data-id="remoteLayout" /></body>'
                 });
 
-                viewBuilder.findView("page2.html", function(view) {
+                viewBuilder.bind("viewShow", function(e) {
                     start();
-                    console.log(root.html());
                     equal(root.find("#remoteStyle").length, 1, "Style is injected");
                     ok(viewBuilder.layouts["remoteLayout"], "Layout is injected");
                     ok(window.scriptInjected,  "Script is injected");
                 });
+
+                viewBuilder.showView("page2.html");
             });
 
             test("shows default view if no url passed", 2, function() {
-                viewBuilder.viewShown = function() {
+                viewBuilder.bind("viewShow", function() {
                     visible("#foo");
                     hidden("#bar");
-                }
+                });
 
                 viewBuilder.showView("");
             });
 
             test("shows given view", 2, function() {
-                viewBuilder.viewShown = function() {
+                viewBuilder.bind("viewShow", function() {
                     visible("#foo");
                     hidden("#bar");
-                }
+                });
 
                 viewBuilder.showView("#foo");
             });
 
             test("parses url params and provides them to the view", 1, function() {
-                viewBuilder.viewShown = function() {
-                    equal(viewBuilder.view().params["foo"], "bar");
-                }
+                viewBuilder.bind("viewShow", function(e) {
+                    equal(e.view.params["foo"], "bar");
+                });
 
                 viewBuilder.showView("#foo?foo=bar");
             });
 
             asyncTest("hides given view", 4, function() {
-                viewBuilder.viewShown = function() {
+                viewBuilder.bind("viewShow", function() {
                     visible("#foo");
                     hidden("#bar");
-                }
+                    viewBuilder.unbind("viewShow");
+
+                    viewBuilder.bind("viewShow", function() {
+                        start();
+                        visible("#bar");
+                        hidden("#foo");
+                    });
+
+                    viewBuilder.showView("#bar");
+                });
+
                 viewBuilder.showView("#foo");
-                viewBuilder.viewShown = function() {
-                    start();
-                    visible("#bar");
-                    hidden("#foo");
-                }
-                viewBuilder.showView("#bar");
             });
 
             ////////////////////////////////////////////////////////////////////
@@ -190,9 +211,11 @@
             });
 
             test("applies layout to view", 1, function() {
-                viewBuilder.findView("", function(view) {
-                    equal(view.layout, viewBuilder.layouts["bar"]);
+                viewBuilder.bind("viewShow", function(e) {
+                    equal(e.view.layout, viewBuilder.layouts["bar"]);
                 });
+
+                viewBuilder.showView("");
             });
 
             ////////////////////////////////////////////////////////////////////
@@ -211,9 +234,11 @@
             });
 
             test("applies layout to view", 1, function() {
-                viewBuilder.findView("", function(view) {
-                    equal(view.layout, viewBuilder.layouts["bar"]);
+                viewBuilder.bind("viewShow", function(e) {
+                    equal(e.view.layout, viewBuilder.layouts["bar"]);
                 });
+
+                viewBuilder.showView("");
             });
 
             test("Uses platform specific layouts", 1, function() {

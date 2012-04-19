@@ -45,7 +45,12 @@
         HEAD = $("head"),
         CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
         BACK = "#:back",
-        proxy = $.proxy;
+        proxy = $.proxy,
+
+        // ViewLoader events
+        LOAD_START = "loadStart",
+        LOAD_COMPLETE = "loadComplete",
+        VIEW_SHOW = "viewShow";
 
     function appLinkClick(e) {
         var rel = $(e.currentTarget).data(kendo.ns + "rel");
@@ -317,7 +322,7 @@
 
                     loadStart: function() { that.showLoading(); },
                     loadComplete: function() { that.hideLoading(); },
-                    viewShown: function() { that.transitioning = false;  }
+                    viewShow: function() { that.transitioning = false;  }
                 });
 
                 that._attachMeta();
@@ -613,10 +618,12 @@
         }
     });
 
-    var ViewBuilder = kendo.Class.extend({
+    var ViewBuilder = kendo.Observable.extend({
         init: function(options) {
             var that = this,
                 views;
+
+            kendo.Observable.fn.init.call(that);
 
             that.transition = "";
             $.extend(that, options);
@@ -624,37 +631,21 @@
 
             views = that._hideViews(that.container);
             that.rootView = views.first();
-            that._showViewCallback = $.proxy(that._showView, that);
             that._view = null;
 
             that.layouts = {};
             that._setupLayouts(that.container);
-        },
-
-        showView: function(url, transition) {
-            var that = this;
-            that.transition = transition;
-            that.params = kendo.parseURL(url).params;
-            that.findView(url, that._showViewCallback);
+            that.bind([LOAD_START, LOAD_COMPLETE, VIEW_SHOW], options);
         },
 
         view: function() {
             return this._view;
         },
 
-        _showView: function(view) {
-            var that = this;
-            if (that._view !== view) {
-                view.switchWith(that._view, that.transition, that.params, function() {
-                    that._view = view;
-                    that.viewShown();
-                });
-            }
-        },
-
-        findView: function(url, callback) {
+        showView: function(url, transition) {
             var that = this,
                 container = that.container,
+                params = kendo.parseURL(url).params,
                 firstChar = url.charAt(0),
                 local = firstChar === "#",
                 remote = firstChar === "/",
@@ -673,18 +664,16 @@
 
             view = element.data("kendoView");
 
-            if (view) {
-                callback(view);
-            } else if (element[0]) {
-                callback(that._createView(element));
+            if (element[0]) {
+                if (!view) {
+                    view = that._createView(element);
+                }
+
+                that._show(view, transition, params);
             } else {
-                that._loadView(url, callback);
+                that._loadView(url, function(view) { that._show(view, transition, params); });
             }
         },
-
-        loadStart: $.noop,
-        loadComplete: $.noop,
-        viewShown: $.noop,
 
         _createView: function(element) {
             var that = this,
@@ -716,14 +705,14 @@
                 that._xhr.abort();
             }
 
-            that.loadStart();
+            that.trigger(LOAD_START);
 
             that._xhr = $.get(url, function(html) {
+                            that.trigger(LOAD_COMPLETE);
                             callback(that._createRemoteView(url, html));
-                            that.loadComplete();
                         }, 'html')
                         .fail(function() {
-                            that.loadComplete();
+                            that.trigger(LOAD_COMPLETE);
                         });
         },
 
@@ -751,6 +740,16 @@
                 .append(views);
 
             return that._createView(view);
+        },
+
+        _show: function(view, transition, params) {
+            var that = this;
+            if (that._view !== view) {
+                view.switchWith(that._view, transition, params, function() {
+                    that._view = view;
+                    that.trigger(VIEW_SHOW, {view: view});
+                });
+            }
         },
 
         _hideViews: function(container) {
