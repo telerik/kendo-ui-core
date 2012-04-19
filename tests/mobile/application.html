@@ -191,53 +191,43 @@
                 equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
             });
 
-            test("Caches only platform specific layouts", function() {
+            test("Uses platform specific layouts", function() {
                 setup('<div data-role="view" id="page1">Page 1</div> \
-                    <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \
-                    <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
-                    <div data-role="layout" data-id="default"><div data-role="footer">footer</div></div> \
-                    ', { layout: "foo" });
+                    <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer" id="ios-footer">ios footer</div></div> \
+                    <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer" id="android-footer">android footer</div></div> \
+                    <div data-role="layout" data-id="default"><div data-role="footer">footer</div></div>', { layout: "foo" });
 
-                var foo = application.layouts.foo;
-                var defaultLayout = application.layouts.default;
                 var osName = kendo.support.mobileOS.name;
 
                 if (!osName) {
                     osName = "ios";
                 }
 
-                equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), osName);
-                equal(defaultLayout.element.attr("data-id"), "default");
-                equal(defaultLayout.element.attr("data-platform"), undefined);
+                ok($("#qunit-fixture").find("#" + osName + "-footer").is(":visible"));
             });
 
             test("Forces specific layout, if platform specified", function() {
                 setup('<div data-role="view" id="page1" data-id="foo">Page 1</div> \
-                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer">footer</div></div> \
-                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer">footer</div></div> \
+                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer" id="ios-footer">footer</div></div> \
+                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer" id="android-footer">footer</div></div> \
                       ', { layout: "foo", platform: "android" });
 
-                var foo = application.layouts.foo;
-
-                equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), "android");
+                ok($("#qunit-fixture").find("#android-footer").is(":visible"));
+                ok(!$("#qunit-fixture").find("#ios-footer").is(":visible"));
             });
 
             test("Forces specific layout, if platform specified as object", function() {
                 setup('<div data-role="view" id="page1" data-id="foo">Page 1</div> \
-                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer">footer</div></div> \
-                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer">footer</div></div> \
+                       <div data-role="layout" data-id="foo" data-platform="ios"><div data-role="footer" id="ios-footer">footer</div></div> \
+                       <div data-role="layout" data-id="foo" data-platform="android"><div data-role="footer" id="android-footer">footer</div></div> \
                       ', { layout: "foo", platform: {
                             name: "android",
                             device: "android",
                             android: true
                         } });
 
-                var foo = application.layouts.foo;
-
-                equal(foo.element.attr("data-id"), "foo");
-                equal(foo.element.attr("data-platform"), "android");
+                ok($("#qunit-fixture").find("#android-footer").is(":visible"));
+                ok(!$("#qunit-fixture").find("#ios-footer").is(":visible"));
             });
 
             test("Apply meta viewport", function() {
@@ -306,19 +296,6 @@
 
                 var loader = application.loader;
                 equal(loader.text(), "Custom text");
-            });
-
-            asyncTest("Does not show loader if options.loading is false", function() {
-                setup('<div data-role="view">Page 1</div>', {
-                    loading: false
-                });
-
-                application.showLoading();
-
-                setTimeout(function() {
-                    start();
-                    ok(!application.loader.is(":visible"));
-                }, 200);
             });
 
             if (kendo.support.mobileOS.android) {
