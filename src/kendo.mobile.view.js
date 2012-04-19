@@ -169,14 +169,21 @@
             that.trigger(HIDE, {view: that});
         },
 
-        switchWith: function(view, transition, complete) {
-            new ViewTransition({
-                current: this,
-                next: view,
-                transition: transition,
-                defaultTransition: this.defaultTransition,
-                complete: complete
-            });
+        switchWith: function(view, transition, callback) {
+            this.showStart();
+
+            if (view) {
+                view.hideStart();
+                new ViewTransition({
+                    current: view,
+                    next: this,
+                    transition: transition,
+                    defaultTransition: view.defaultTransition,
+                    complete: callback
+                });
+            } else {
+                callback();
+            }
         },
 
         parallaxContents: function(other) {
@@ -287,9 +294,6 @@
                 upper = next,
                 lower = current,
                 transition = that._transition();
-
-            current.hideStart();
-            next.showStart();
 
             if (transition.reverse && !transition.parallax) {
                 upper = current;
