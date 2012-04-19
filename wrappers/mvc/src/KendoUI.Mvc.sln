@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KendoUI.Mvc", "KendoUI.Mvc.csproj", "{7017CC26-BEAB-4C50-BFAE-3395314E8766}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KendoUI.Mvc.Tests", "..\tests\KendoUI.Mvc.Tests.csproj", "{997488B8-42AC-49C3-B866-E8264A058C7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7017CC26-BEAB-4C50-BFAE-3395314E8766}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7017CC26-BEAB-4C50-BFAE-3395314E8766}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7017CC26-BEAB-4C50-BFAE-3395314E8766}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7017CC26-BEAB-4C50-BFAE-3395314E8766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{997488B8-42AC-49C3-B866-E8264A058C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{997488B8-42AC-49C3-B866-E8264A058C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{997488B8-42AC-49C3-B866-E8264A058C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{997488B8-42AC-49C3-B866-E8264A058C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
