@@ -2,7 +2,6 @@
     var kendo = window.kendo,
         mobile = kendo.mobile,
         ui = mobile.ui,
-        history = kendo.history,
         attr = kendo.attr,
         Class = kendo.Class,
         Widget = ui.Widget,
@@ -99,6 +98,9 @@
 
             element = that.element;
 
+            that.params = {};
+            that.lastParams = {};
+
             $.extend(that, options);
 
             that._layout();
@@ -137,13 +139,13 @@
         options: {
             name: "View",
             title: "",
+            defaultTransition: "",
             model: null
         },
 
-        showStart: function () {
+        showStart: function() {
             var that = this;
             that.element.css("display", "");
-            that.params = history.url().params;
 
             if (that.layout) {
                 that.layout.attach(that);
@@ -169,16 +171,21 @@
             that.trigger(HIDE, {view: that});
         },
 
-        switchWith: function(view, transition, callback) {
-            this.showStart();
+        switchWith: function(view, transition, params, callback) {
+            var that = this;
+
+            that.lastParams = that.params;
+            that.params = params;
+
+            that.showStart();
 
             if (view) {
                 view.hideStart();
                 new ViewTransition({
                     current: view,
-                    next: this,
+                    next: that,
                     transition: transition,
-                    defaultTransition: view.defaultTransition,
+                    defaultTransition: view.options.defaultTransition,
                     complete: callback
                 });
             } else {
@@ -351,7 +358,7 @@
             var next = this.next,
                 current = this.current;
 
-            return next.nextView === current && JSON.stringify(next.params) === JSON.stringify(history.url().params);
+            return next.nextView === current && JSON.stringify(next.params) === JSON.stringify(next.lastParams);
         }
     });
 

@@ -2628,5 +2628,19 @@ function pad(number) {
         if (widget) {
             return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
         }
+    }
+
+    kendo.parseURL = function(urlToParse) {
+        var parts = urlToParse.split('?'),
+            url = {location: parts[0], params: {}, string: urlToParse},
+            paramParts = (parts[1] || "").split(/&|=/),
+            length = paramParts.length,
+            idx = 0;
+
+        for (; idx < length; idx += 2) {
+            url.params[paramParts[idx]] = paramParts[idx + 1];
+        }
+
+        return url;
     };
 })(jQuery);

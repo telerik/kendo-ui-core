@@ -172,7 +172,7 @@
 
             test("Pass application instance to the view", function() {
                 setup('<div data-init="foo" data-role="view">View</div>');
-                equal(application.view.application, application);
+                equal(application.view().application, application);
             });
 
             function checkViewParams(e) {
@@ -272,9 +272,9 @@
             asyncTest("Raises pull when pulled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var drag = application.view.scroller.drag;
+                var drag = application.view().scroller.drag;
 
-                application.view.scroller.setOptions({
+                application.scroller().setOptions({
                     pullToRefresh: true,
                     pullOffset: 100,
                     pull: function() {
@@ -292,9 +292,9 @@
             asyncTest("Raises scroll when scrolled", 1, function() {
                 setup('<div data-role="view" data-pull="pull" id="page1"><div style="height:200px">View</div></div><div id="page2" data-role="view"></div>');
 
-                var drag = application.view.scroller.drag;
+                var drag = application.scroller().drag;
 
-                application.view.scroller.bind("scroll", function() {
+                application.scroller().bind("scroll", function() {
                     start();
                     ok(true);
                 });
@@ -358,7 +358,7 @@
                 });
 
                 equal(location.hash, "#page2");
-                equal(application.view.id, "#page2");
+                equal(application.view().id, "#page2");
             });
 
             test("Omits options.initial if location.hash", function() {
@@ -369,8 +369,8 @@
                 });
 
                 equal(location.hash, "#../../test1");
-                equal(application.view.id, "../../test1");
-                equal(application.view.content.find(".km-scroll-container").html(), "Page 2");
+                equal(application.view().id, "../../test1");
+                equal(application.view().content.find(".km-scroll-container").html(), "Page 2");
             });
 
             test("View gets VM from data-model attr", function(){
@@ -383,12 +383,12 @@
 
                 setup('<div data-role="view" data-model="foo.bar"></div>');
 
-                equal(application.view.model, window.foo.bar);
+                equal(application.view().model, window.foo.bar);
             });
 
             test("View parses data-model value if JSON", function() {
                 setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
-                equal(application.view.model.bar, 1);
+                equal(application.view().model.bar, 1);
             });
 
             test("View call kendo.bind if data-model", function() {

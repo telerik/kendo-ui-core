@@ -146,6 +146,30 @@
                 });
             });
 
+            test("shows given view", 2, function() {
+                viewBuilder.viewShown = function() {
+                    visible("#foo");
+                    hidden("#bar");
+                }
+
+                viewBuilder.showView("#foo");
+
+            });
+
+            asyncTest("hides given view", 4, function() {
+                viewBuilder.viewShown = function() {
+                    visible("#foo");
+                    hidden("#bar");
+                }
+                viewBuilder.showView("#foo");
+                viewBuilder.viewShown = function() {
+                    start();
+                    visible("#bar");
+                    hidden("#foo");
+                }
+                viewBuilder.showView("#bar");
+            });
+
             ////////////////////////////////////////////////////////////////////
             module("view builder layout management", {
                 setup: function() {

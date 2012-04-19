@@ -287,7 +287,7 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var drag = application.view.scroller.drag;
+                var drag = application.scroller().drag;
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
@@ -446,7 +446,7 @@
                 }
 
                 setup('<div data-role="view" data-init="initListView"><div id="listview" style="height:300px"></div></div>');
-                var scroller = application.view.scroller;
+                var scroller = application.scroller();
 
                 $.mockjaxClear();
                 $.mockjax({ url: "foo.json", responseText: ["foo", "bar", "baz"] });
