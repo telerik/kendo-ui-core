@@ -40,7 +40,12 @@ var ListFormatFinder = BlockFormatFinder.extend({
             return false;
         }
 
+        // check if sequential lists are selected
         for (i = 0; i < formatNodes.length; i++) {
+            if (formatNodes[i].parentNode != formatNode.parentNode) {
+                break;
+            }
+
             if (formatNodes[i] != formatNode) {
                 return false;
             }
