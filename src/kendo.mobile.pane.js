@@ -41,7 +41,7 @@
 
         options: {
             name: "Pane"
-        }
+        },
 
         _createView: function(element) {
         }

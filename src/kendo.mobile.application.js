@@ -670,6 +670,9 @@
             }
         },
 
+        loadStart: $.noop,
+        loadComplete: $.noop,
+
         _createView: function(element) {
             var that = this,
                 viewOptions,
@@ -731,9 +734,8 @@
 
             that._setupLayouts(sandbox);
 
-            container.append(sandbox.find(roleSelector("layout")))
-                        .append(sandbox.find("script, style"))
-                        .append(views);
+            container.append(sandbox.find(roleSelector("layout") + ", script, style"))
+                .append(views);
 
             return that._createView(view);
         },
@@ -758,4 +760,5 @@
     });
 
     kendo.mobile.Application = Application;
+    kendo.mobile.ViewBuilder = ViewBuilder;
 })(jQuery);

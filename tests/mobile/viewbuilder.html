@@ -1,0 +1,111 @@
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.ViewBuilder Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ViewBuilder Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var viewBuilder,
+                root = $("#qunit-fixture");
+
+            function hidden(selector) {
+                ok(!root.find(selector).is(":visible"));
+            }
+
+            function visible(selector) {
+                ok(root.find(selector).is(":visible"));
+            }
+
+            function view(selector) {
+                ok(root.find(selector).data("kendoView"));
+            }
+
+            ////////////////////////////////////////////////////////////////////
+            module("mobile pane initialization", {
+                setup: function() {
+                    root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+                    viewBuilder = new kendo.mobile.ViewBuilder({
+                        container: root
+                    });
+                },
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
+
+            test("hides child views", 2, function() {
+                hidden("#foo");
+                hidden("#bar");
+            });
+
+            test("finds view by id", 1, function() {
+                viewBuilder.findView("#foo", function(view) {
+                    equal(view.element[0], root.find("#foo")[0]);
+                });
+            });
+
+            asyncTest("Loads remote view", 2, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
+                });
+
+                viewBuilder.findView("page2.html", function(view) {
+                    start();
+                    equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
+                    equal(view.element[0], root.find("#page2")[0]);
+                });
+            });
+
+            asyncTest("Loads multiple remote views", 2, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body><div data-role="view" id="page3">Page 3</div></body>'
+                });
+
+                viewBuilder.findView("page2.html", function(view) {
+                    start();
+                    equal(root.has("#page3").length, 1, "Secondary remote view is inserted in the application DOM element");
+                    equal(view.element[0], root.find("#page2")[0]);
+                });
+            });
+
+            asyncTest("Deals with various newline characters when loading remote view", 2, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<html><head></head><body><div id="page2" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
+                });
+
+                viewBuilder.findView("page2.html", function(view) {
+                    start();
+                    equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
+                    equal(view.element[0], root.find("#page2")[0]);
+                });
+            });
+        </script>
+    </body>
+</html>
