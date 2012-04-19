@@ -143,6 +143,7 @@
          * This is the length of the line in pixels that is drawn to indicate the tick on the scale.
          * @option {Number} [scale.majorTicks.width] <0.5> The width of the major ticks.
          * @option {String} [scale.majorTicks.color] The color of the major ticks.
+         * @option {Boolean} [scale.majorTicks.visible] <true> The visibility of the major ticks.
          * Any valid CSS color string will work here, including hex and rgb.
          * @option {Object} [scale.minorTicks] Configures the scale minor ticks.
          * @option {Number} [scale.minorTicks.size] The minor tick size.
@@ -150,6 +151,7 @@
          * @option {Number} [scale.minorTicks.width] <0.5> The width of the minor ticks.
          * @option {String} [scale.minorTicks.color] The color of the minor ticks.
          * Any valid CSS color string will work here, including hex and rgb.
+         * @option {Boolean} [scale.minorTicks.visible] <true> The visibility of the minor ticks.
          * @option {Number} [scale.majorUnit] The interval between major divisions.
          * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {number} [scale.startAngle] <-30> The start angle of the gauge.
@@ -263,11 +265,9 @@
          *    </dl>
          * </div>
          * @option {Object} [pointer] The pointer configuration options.
-         * @option {String} [pointer.color] The color of the pointer.
-         * Any valid CSS color string will work here, including hex and rgb.
-         * @option {String} [pointer.value] The value of the gauge.
-         * @option {String} [pointer.cap] The cap configuration options.
-         * @option {String} [pointer.cap.size] The size of the cap in percents.
+         * @option {Number} [pointer.value] The value of the gauge.
+         * @option {Object} [pointer.cap] The cap configuration options.
+         * @option {Number} [pointer.cap.size] The size of the cap in percents. (from 0 to 1)
          * @option {String} [pointer.cap.color] The color of the cap.
          * Any valid CSS color string will work here, including hex and rgb.
          * @option {String} [pointer.color] The color of the pointer.
@@ -450,10 +450,12 @@
          * @option {Number} [scale.majorTicks.width] <0.5> The width of the major ticks.
          * @option {String} [scale.majorTicks.color] The color of the major ticks.
          * Any valid CSS color string will work here, including hex and rgb.
+         * @option {Boolean} [scale.majorTicks.visible] <true> The visibility of the major ticks.
          * @option {Object} [scale.minorTicks] Configures the scale minor ticks.
          * @option {Number} [scale.minorTicks.size] The minor tick size.
          * This is the length of the line in pixels that is drawn to indicate the tick on the scale.
          * @option {Number} [scale.minorTicks.width] <0.5> The width of the minor ticks.
+         * @option {Boolean} [scale.minorTicks.visible] <true> The visibility of the minor ticks.
          * @option {String} [scale.minorTicks.color] The color of the minor ticks.
          * Any valid CSS color string will work here, including hex and rgb.
          * @option {Number} [scale.majorUnit] The interval between major divisions.
@@ -583,7 +585,7 @@
          *         </dd>
          *    </dl>
          * </div>
-         * @option {String} [pointer.value] The value of the gauge.
+         * @option {Number} [pointer.value] The value of the gauge.
          * @option {Number} [pointer.size] The size of the pointer.
          * @option {Object} [pointer.border] The border of the pointer.
          * @option {Number} [pointer.border.width] <1> The width of the border.
@@ -637,10 +639,11 @@
          *         </dd>
          *    </dl>
          * </div>
+         * @option {Boolean} [pointer.vertical] The position of the gauge.
          * @option {Object} [pointer.track] The element arround/under the pointer.
          * (available only for 'barIndicator' shape)
-         * @option {Boolean} [pointer.vertical] The position of the gauge.
          * @option {Number} [pointer.track.size] The size of the track of the pointer.
+         * @option {Boolean} [scale.track.visible] <false> The visibility of the track.
          * @option {Object} [pointer.track.border] The border of the track of the pointer.
          * @option {Number} [pointer.track.border.width] <1> The width of the border.
          * @option {String} [pointer.track.border.color]
