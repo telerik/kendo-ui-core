@@ -70,6 +70,15 @@ test('isFormatted returns false for two lists', function() {
     ok(!finder.isFormatted([editor.body.firstChild.firstChild.firstChild, editor.body.lastChild.firstChild.firstChild]));
 });
 
+test('isFormatted returns true for multiple lists in table cells', function() {
+    editor.value("<table><tbody><tr><td><ul><li>foo</li></ul></td><td><ul><li>bar</li></ul></td></tr></tbody></table>");
+
+    var lis = editor.document.getElementsByTagName("li");
+
+    var finder = new ListFormatFinder('ul');
+    ok(finder.isFormatted([lis[0].firstChild, lis[1].firstChild]));
+});
+
 test('findSuitable returns ul', function() {
     editor.value('<ul><li>foo</li></ul>bar');
     var finder = new ListFormatFinder('ul');
