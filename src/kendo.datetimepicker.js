@@ -4,9 +4,11 @@
         parse = kendo.parseDate,
         ui = kendo.ui,
         Widget = ui.Widget,
+        CHANGE = "change",
         CLICK = (touch ? "touchend" : "click"),
         DISABLED = "disabled",
         DEFAULT = "k-state-default",
+        FOCUSED = "k-state-focused",
         HOVER = "k-state-hover",
         STATEDISABLED = "k-state-disabled",
         HOVEREVENTS = "mouseenter mouseleave",
@@ -34,7 +36,18 @@
 
             that._views();
 
-            element.addClass("k-input");
+            element.addClass("k-input")
+                   .bind({
+                        focus: function() {
+                            that._inputWrapper.addClass(FOCUSED);
+                        },
+                        blur: function() {
+                            that._inputWrapper.removeClass(FOCUSED);
+                            that._change(element.val());
+                            that.close("date");
+                            that.close("time");
+                        }
+                   });
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || element.val());
@@ -56,9 +69,9 @@
             month : {}
         },
 
-        events: {
-
-        },
+        events: [
+            CHANGE
+        ],
 
         enable: function(enable) {
             var that = this,
@@ -142,13 +155,13 @@
 
             value = that._update(value);
 
-            /*if (+that._old != +value) {
+            if (+that._old != +value) {
                 that._old = value;
                 that.trigger(CHANGE);
 
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
-            }*/
+            }
         },
 
         _toggleHover: function(e) {
