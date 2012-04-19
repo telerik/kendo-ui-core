@@ -39,16 +39,15 @@
 
         viewInit: function(view) {
             var that = this,
-                application = view.application,
                 align = "center center",
                 effect = "fade:in";
 
-            if (application.os === "ios") {
+            if (kendo.support.mobileOS.ios) {
                 align = "bottom left";
                 effect = "slideIn:up";
             }
 
-            application.element.append(that.shim);
+            view.container.append(that.shim);
 
             that.popup = new Popup(that.element, {
                 anchor: that.shim,
