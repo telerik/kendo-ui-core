@@ -487,6 +487,7 @@
 
         _createView: function(element) {
             var that = this,
+                viewOptions,
                 layout = element.data(kendo.ns + "layout");
 
             if (typeof layout === "undefined") {
@@ -497,9 +498,14 @@
                 layout = that.layouts[layout];
             }
 
-            var view = kendo.initWidget(element, {application: this, layout: layout}, kendo.mobile.ui);
+            viewOptions = {
+                defaultTransition: that.options.transition,
+                application: that,
+                container: that.element,
+                layout: layout
+            };
 
-            return view;
+            return kendo.initWidget(element, viewOptions, kendo.mobile.ui);
         },
 
         _createRemoteView: function(url, html) {

@@ -99,7 +99,7 @@
 
             element = that.element;
 
-            that.layout = options.layout;
+            $.extend(that, options);
 
             that._layout();
             that._model();
@@ -174,7 +174,7 @@
                 current: this,
                 next: view,
                 transition: transition,
-                defaultTransition: this.options.application.options.transition,
+                defaultTransition: this.defaultTransition,
                 complete: complete
             });
         },

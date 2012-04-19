@@ -18,6 +18,7 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
+            $.extend(that, options);
             that._layout();
             that._model();
             that._init();
