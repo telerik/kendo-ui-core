@@ -125,6 +125,18 @@
             ]
         },
         {
+            "text": "DateTimePicker",
+            "name": "datetimepicker",
+            "documentation": "ui-widgets/datetimepicker",
+            "spriteCssClass": "dateTimePickerIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "datetimepicker/index.html"
+                }
+            ]
+        },
+        {
             "text": "DropDownList",
             "name": "dropdownlist",
             "documentation": "ui-widgets/dropdownlist",
