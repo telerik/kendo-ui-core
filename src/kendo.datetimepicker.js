@@ -15,7 +15,8 @@
         MOUSEDOWN = (touch ? "touchstart" : "mousedown"),
         ICONEVENTS = CLICK + " " + MOUSEDOWN,
         MONTH = "month",
-        SPAN = "<span/>";
+        SPAN = "<span/>",
+        isInRange = kendo.calendar.isInRange;
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
         init: function(element, options) {
@@ -180,10 +181,9 @@
                 format = options.format,
                 date = parse(value, format);
 
-            /*if (!isInRange(date, options.min, options.max)) {
+            if (!isInRange(date, options.min, options.max)) {
                 date = null;
             }
-            */
 
             that._value = date;
             that.dateView.value(date);
