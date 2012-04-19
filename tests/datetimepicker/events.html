@@ -38,6 +38,48 @@
                 }
             });
 
+            test("DateTimePicker triggers change event on DateView change", 1, function() {
+                var today = new Date(),
+                    datetimepicker = new DateTimePicker(input),
+                    dateView = datetimepicker.dateView;
+
+                datetimepicker.bind("change", function() {
+                    equal(+datetimepicker.value(), +today);
+                });
+
+                //simulate user click
+                dateView._calendar();
+                dateView.calendar.value(today);
+                dateView.calendar.trigger("change");
+            });
+
+            test("DateTimePicker triggers change event on TimeView click", 1, function() {
+                var datetimepicker = new DateTimePicker(input),
+                    timeView = datetimepicker.timeView,
+                    li, date;
+
+                timeView.refresh();
+                li = timeView.ul.children(":first");
+                date = timeView._parse(li.text());
+
+                datetimepicker.bind("change", function() {
+                    equal(+datetimepicker.value(), +date);
+                });
+
+                li.click();
+            });
+
+            test("DateTimePicker triggers change on blur", 1, function() {
+                var datetimepicker = new DateTimePicker(input),
+                    today = new Date(2000, 10, 10, 10, 30, 0);
+
+                datetimepicker.bind("change", function() {
+                    equal(+datetimepicker.value(), +today);
+                });
+
+                input.focus().val(kendo.toString(today, datetimepicker.options.format)).blur();
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

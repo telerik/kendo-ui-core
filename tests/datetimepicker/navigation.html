@@ -78,6 +78,34 @@
 
                 equal(input.val(), kendo.toString(date, datetimepicker.options.format));
             });
+
+            test("DateTimePicker closes all views on blur", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+                datetimepicker.open("time");
+
+                input.focus().blur();
+
+                ok(!datetimepicker.dateView.popup.visible());
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker add focus state to the wrapper on focus", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                input.focus();
+
+                ok(datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            });
+
+            test("DateTimePicker remove focus state to the wrapper on blur", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                input.focus().blur();
+
+                ok(!datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
