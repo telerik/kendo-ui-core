@@ -296,9 +296,6 @@
         init: function(element, options) {
             var that = this;
 
-            that.layouts = {};
-            kendo.mobile.application = that; // global reference to current application
-
             that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
@@ -310,7 +307,16 @@
                 that._setupElementClass();
                 that._loader();
                 that._setupAppLinks();
-                that._setupLayouts(that.element);
+
+                that.viewBuilder = new ViewBuilder({
+                    container: that.element,
+                    transition: that.options.transition,
+                    layout: that.options.layout,
+                    application: that,
+                    loadStart: function() { that.showLoading(); },
+                    loadComplete: function() { that.hideLoading(); }
+                });
+
                 that._startHistory();
                 that._attachCapture();
             });
@@ -435,20 +441,6 @@
             that.os = OS_NAME;
         },
 
-        _setupLayouts: function(element) {
-            var that = this,
-                platformAttr = kendo.ns + "platform";
-
-            element.find(roleSelector("layout")).each(function() {
-                var layout = $(this),
-                    platform = layout.data(platformAttr);
-
-                if (platform === undefined || platform === OS_NAME) {
-                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
-                }
-            });
-        },
-
         _startHistory: function() {
             var that = this,
                 views, historyEvents,
@@ -485,55 +477,6 @@
             history.start($.extend(that.options, historyEvents));
         },
 
-        _createView: function(element) {
-            var that = this,
-                viewOptions,
-                layout = element.data(kendo.ns + "layout");
-
-            if (typeof layout === "undefined") {
-                layout = that.options.layout;
-            }
-
-            if (layout) {
-                layout = that.layouts[layout];
-            }
-
-            viewOptions = {
-                defaultTransition: that.options.transition,
-                application: that,
-                container: that.element,
-                layout: layout
-            };
-
-            return kendo.initWidget(element, viewOptions, kendo.mobile.ui);
-        },
-
-        _createRemoteView: function(url, html) {
-            var that = this,
-                container = $('<div />'),
-                views,
-                view;
-
-            if (BODY_REGEX.test(html)) {
-                html = RegExp.$1;
-            }
-
-            container[0].innerHTML = html;
-
-            views = container.find(roleSelector(viewRoles)).hide();
-            view = views.first();
-
-            view.hide().attr(attr("url"), url);
-
-            that._setupLayouts(container);
-
-            that.element.append(container.find(roleSelector("layout")))
-                        .append(container.find("script, style"))
-                        .append(views);
-
-            return that._createView(view);
-        },
-
         _findView: function(url, callback) {
             var that = this,
                 view,
@@ -557,20 +500,9 @@
             if (view) {
                 callback(view);
             } else if (element[0]) {
-                callback(that._createView(element));
+                callback(that.viewBuilder.createView(element));
             } else {
-                if (that._xhr) {
-                    that._xhr.abort();
-                }
-
-                that.showLoading();
-                that._xhr = $.get(url, function(html) {
-                                callback(that._createRemoteView(url, html));
-                                that.hideLoading();
-                            }, 'html')
-                            .fail(function() {
-                                that.hideLoading();
-                            });
+                that.viewBuilder.loadView(url, callback);
             }
         },
 
@@ -713,6 +645,99 @@
             that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span>' + text + "</div>")
                             .hide()
                             .appendTo(that.element);
+        }
+    });
+
+    var ViewBuilder = kendo.Class.extend({
+        init: function(options) {
+            var that = this;
+
+            $.extend(that, options);
+            that.sandbox = $("<div />");
+            that.layouts = {};
+            that._setupLayouts(that.container);
+        },
+
+        createView: function(element) {
+            var that = this,
+                viewOptions,
+                layout = element.data(kendo.ns + "layout");
+
+            if (typeof layout === "undefined") {
+                layout = that.layout;
+            }
+
+            if (layout) {
+                layout = that.layouts[layout];
+            }
+
+            viewOptions = {
+                defaultTransition: that.transition,
+                application: that.application,
+                container: that.container,
+                layout: layout
+            };
+
+            return kendo.initWidget(element, viewOptions, kendo.mobile.ui);
+        },
+
+        loadView: function(url, callback) {
+            var that = this;
+
+            if (that._xhr) {
+                that._xhr.abort();
+            }
+
+            that.loadStart();
+
+            that._xhr = $.get(url, function(html) {
+                            callback(that._createRemoteView(url, html));
+                            that.loadComplete();
+                        }, 'html')
+                        .fail(function() {
+                            that.loadComplete();
+                        });
+        },
+
+        _createRemoteView: function(url, html) {
+            var that = this,
+                sandbox = that.sandbox,
+                container = that.container,
+                views,
+                view;
+
+            if (BODY_REGEX.test(html)) {
+                html = RegExp.$1;
+            }
+
+            sandbox[0].innerHTML = html;
+
+            views = sandbox.find(roleSelector(viewRoles)).hide();
+            view = views.first();
+
+            view.hide().attr(attr("url"), url);
+
+            that._setupLayouts(sandbox);
+
+            container.append(sandbox.find(roleSelector("layout")))
+                        .append(sandbox.find("script, style"))
+                        .append(views);
+
+            return that.createView(view);
+        },
+
+        _setupLayouts: function(element) {
+            var that = this,
+                platformAttr = kendo.ns + "platform";
+
+            element.find(roleSelector("layout")).each(function() {
+                var layout = $(this),
+                    platform = layout.data(platformAttr);
+
+                if (platform === undefined || platform === OS_NAME) {
+                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
+                }
+            });
         }
     });
 
