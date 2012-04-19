@@ -45,7 +45,7 @@
             }
 
             ////////////////////////////////////////////////////////////////////
-            module("mobile pane initialization", {
+            module("view builder view finding", {
                 setup: function() {
                     root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
                     viewBuilder = new kendo.mobile.ViewBuilder({
@@ -81,6 +81,21 @@
                 });
             });
 
+            asyncTest("Reuses remote view once loaded", 1, function() {
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
+                });
+
+                viewBuilder.findView("page2.html", function(view1) {
+                    viewBuilder.findView("page2.html", function(view2) {
+                        start();
+                        equal(view1, view2, "View is reused");
+                    });
+                });
+
+            });
+
             asyncTest("Loads multiple remote views", 2, function() {
                 $.mockjax({
                     url: "page2.html",
@@ -104,6 +119,24 @@
                     start();
                     equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
                     equal(view.element[0], root.find("#page2")[0]);
+                });
+            });
+
+        asyncTest("remote asset loading injects scripts, styles and layouts", 3, function() {
+
+                $.mockjax({
+                    url: "page2.html",
+                    responseText: '<body><div data-role="view" id="page2">Page 2</div></body><style ' +
+                        'id="remoteStyle"></style><script id="remoteScript">window.scriptInjected = true;</scr' +
+                        'ipt><div data-role="layout" data-id="remoteLayout" /></body>'
+                });
+
+                viewBuilder.findView("page2.html", function(view) {
+                    start();
+                    console.log(root.html());
+                    equal(root.find("#remoteStyle").length, 1, "Style is injected");
+                    ok(viewBuilder.layouts["remoteLayout"], "Layout is injected");
+                    ok(window.scriptInjected,  "Script is injected");
                 });
             });
         </script>
