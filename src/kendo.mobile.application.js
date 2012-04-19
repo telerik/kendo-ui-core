@@ -5,8 +5,8 @@
         roleSelector = kendo.roleSelector,
         attr = kendo.attr,
 
+        DEFAULT_OS = "ios",
         OS = support.mobileOS,
-        OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
         OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = OS.blackberry ? "km-horizontal" : "km-vertical",
@@ -313,6 +313,8 @@
                     transition: that.options.transition,
                     layout: that.options.layout,
                     application: that,
+                    os: that.os,
+
                     loadStart: function() { that.showLoading(); },
                     loadComplete: function() { that.hideLoading(); }
                 });
@@ -419,26 +421,32 @@
         _setupPlatform: function() {
             var that = this,
                 platform = that.options.platform,
-                isString = typeof platform == "string";
+                os = OS,
+                version;
 
             if (platform) {
-                OS = isString ? support.detectOS(MOBILE_UA[platform]) : platform;
-                support.mobileOS = OS; // reset mobileOS with custom platform
+                if (typeof platform === "string") {
+                    os = support.detectOS(MOBILE_UA[platform]);
+                } else {
+                    os = platform;
+                }
+
+                support.mobileOS = os;
             }
 
-            OS_NAME = !OS ? "ios" : OS.name;
-            OS_NAME_CLASS = "km-" + OS_NAME;
-            OS_CSS_CLASS = OS_NAME_TEMPLATE({
-                               name: OS_NAME_CLASS,
-                               version: OS ? {
-                                                 appMode: OS.appMode,
-                                                 major: OS.majorVersion,
-                                                 minor: OS.minorVersion ? OS.minorVersion[0] : 0
-                                             }
-                                           : false
-                           });
+            if (os) {
+                that.os = os.name;
+                version = {
+                    appMode: os.appMode,
+                    major: os.majorVersion,
+                    minor: os.minorVersion ? os.minorVersion[0] : 0
+                };
+            } else {
+                that.os = "ios";
+                version = false;
+            }
 
-            that.os = OS_NAME;
+            that.osCssClass = OS_NAME_TEMPLATE({ name: "km-" + that.os, version: version });
         },
 
         _startHistory: function() {
@@ -508,7 +516,7 @@
 
         _setupElementClass: function() {
             var that = this,
-                osCssClass = that.options.platform ? "km-" + that.options.platform : OS_CSS_CLASS,
+                osCssClass = that.options.platform ? "km-" + that.options.platform : that.osCssClass,
                 element = that.element;
 
             element.parent().addClass("km-root");
@@ -734,7 +742,7 @@
                 var layout = $(this),
                     platform = layout.data(platformAttr);
 
-                if (platform === undefined || platform === OS_NAME) {
+                if (platform === undefined || platform === that.os) {
                     that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
                 }
             });
