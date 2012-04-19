@@ -763,7 +763,12 @@
         init: function(scale, options) {
             var pointer = this;
             Pointer.fn.init.call(pointer, scale, options);
-            pointer.options = deepExtend({ size: pointer.pointerSize() }, pointer.options);
+            pointer.options = deepExtend({
+                size: pointer.pointerSize(),
+                track: {
+                    visible: defined(options.track)
+                }
+            }, pointer.options);
         },
 
         options: {
@@ -772,8 +777,7 @@
             track: {
                 border: {
                     width: 1
-                },
-                visible: false
+                }
             },
 
             color: BLACK,
@@ -835,10 +839,14 @@
 
             if (vertical) {
                 trackBox = new Box2D(
-                    scaleLine.x2 + space, scaleLine.y1,
-                    scaleLine.x2 + space, scaleLine.y2);
+                    scaleLine.x1 + space, scaleLine.y1,
+                    scaleLine.x1 + space, scaleLine.y2);
 
-                trackBox[mirror ? "x1" : "x2"] += trackSize;
+                if (mirror) {
+                    trackBox.x1 -= trackSize;
+                } else {
+                    trackBox.x2 += trackSize;
+                }
 
                 if (options.shape !== BAR_INDICATOR) {
                     pointerRangeBox = new Box2D(
@@ -852,7 +860,11 @@
                     scaleLine.x1, scaleLine.y1 - space,
                     scaleLine.x2, scaleLine.y1 - space);
 
-                trackBox[mirror ? "y2" : "y1"] -= trackSize;
+                if (mirror) {
+                    trackBox.y2 += trackSize;
+                } else {
+                    trackBox.y1 -= trackSize;
+                }
 
                 if (options.shape !== BAR_INDICATOR) {
                     pointerRangeBox = new Box2D(
@@ -934,11 +946,11 @@
                 if (vertical) {
                     shape = new Box2D(
                         trackBox.x1, slot.y1,
-                        trackBox.x1 + sign * size, slot.y2);
+                        trackBox.x1 + size, slot.y2);
                 } else {
                     shape = new Box2D(
                         slot.x1, trackBox.y1,
-                        slot.x2, trackBox.y1 + sign * size);
+                        slot.x2, trackBox.y1 + size);
                 }
             }
 
@@ -985,7 +997,8 @@
 
             pointer.element = pointer.renderPointer(view);
             elements.push(pointer.element);
-            if (options.track.visible && options.shape === BAR_INDICATOR) {
+            if (options.track.visible &&
+                (options.shape === BAR_INDICATOR || options.shape === "")) {
                 elements.push(pointer.renderTrack(view));
             }
 
@@ -1010,7 +1023,9 @@
                     color: BLACK,
                     width: 0
                 }
-            }
+            },
+            pointer: {},
+            scale: {}
         },
 
         reflow: function(box){

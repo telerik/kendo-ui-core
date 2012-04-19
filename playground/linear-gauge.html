@@ -6,6 +6,7 @@
         <script src="../src/kendo.core.js"></script>
         <script src="../src/kendo.dataviz.core.js"></script>
         <script src="../src/kendo.dataviz.gauge.js"></script>
+        <script src="../src/kendo.dataviz.themes.js"></script>
         <script src="../src/kendo.dataviz.svg.js"></script>
         <script src="../src/kendo.dataviz.vml.js"></script>
 
@@ -24,97 +25,74 @@
         <div id="gauge3"></div>
 
         <script>
-            //$("#gauge").kendoLinearGauge({
-            //    scale: {
-            //        labels: {
-            //            visible: true
-            //        }
-            //    },
-            //    pointer: {
-            //        shape: "barIndicator",
-            //        value: 10,
-            //        track: {
-            //            visible: true,
-            //            border: {
-            //                color: "red"
-            //            }
-            //        }
-            //    },
-            //    plotArea: {
-            //        border: {
-            //            color: "red",
-            //            width: 1
-            //        }
-            //    }
-            //});
+            $("#gauge").kendoLinearGauge({
+                theme:"default",
+                scale: {
+                    labels: {
+                        visible: true
+                    },
+                    mirror: false
+                },
+                pointer: {
+                    shape: "",
+                    value: 10,
+                    track: {
+                        visible: true
+                    }
+                }
+            });
 
-            //$("#gauge1").kendoLinearGauge({
-            //    theme:"default",
-            //    scale: {
-            //        vertical: false,
-            //        labels: {
-            //            visible: true
-            //        }
-            //    },
-            //    pointer: {
-            //        shape: "barIndicator",
-            //        value: 10,
-            //        track: {
-            //            visible: true,
-            //            border: {
-            //                color: "red"
-            //            }
-            //        }
-            //    },
-            //    plotArea: {
-            //        border: {
-            //            color: "red",
-            //            width: 1
-            //        }
-            //    }
-            //});
+            $("#gauge1").kendoLinearGauge({
+                theme:"default",
+                scale: {
+                    vertical: true,
+                    labels: {
+                        visible: true
+                    },
+                    mirror: true
+                },
+                pointer: {
+                    shape: "barIndicator",
+                    value: 10,
+                    track: {
+                        visible: true
+                    }
+                }
+            });
 
             $("#gauge2").kendoLinearGauge({
                 theme:"default",
                 scale: {
-                    mirror: true,
+                    mirror: false,
                     labels: {
-                        visible: false
-                    }
+                        visible: true
+                    },
+                    vertical: false
                 },
                 pointer: {
-                    shape: "arrow",
-                    value: 0,
-                    size: 40
-                },
-                plotArea: {
-                    border: {
-                        color: "red",
-                        width: 1
+                    value: 10,
+                    track: {
+                        visible: false,
+                        border: {
+                            color: "red"
+                        }
                     }
                 }
             });
 
             $("#gauge3").kendoLinearGauge({
+                theme:"default",
                 scale: {
                     vertical: false,
                     labels: {
-                        visible: false
+                        visible: true
                     },
-                    max: 5000,
-                    majorUnit: 1000,
-                    minorUnit: 500,
                     mirror: true
                 },
                 pointer: {
-                    shape: "arrow",
-                    size: 40,
-                    value: 0
-                },
-                plotArea: {
-                    border: {
-                        color: "red",
-                        width: 1
+                    value: 10,
+                    track: {
+                        visible: true
                     }
                 }
             });
