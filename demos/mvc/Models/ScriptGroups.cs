@@ -49,6 +49,7 @@ namespace Kendo.Models
             "kendo.splitter.js",
             "kendo.tabstrip.js",
             "kendo.timepicker.js",
+            "kendo.datetimepicker.js",
             "kendo.treeview.js",
             "kendo.upload.js",
             "kendo.window.js",
