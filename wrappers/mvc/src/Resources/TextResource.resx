@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ArrayCannotBeEmpty" xml:space="preserve">
+    <value>"{0}" array cannot be empty.</value>
+  </data>
+  <data name="CannotBeNegative" xml:space="preserve">
+    <value>"{0}" cannot be negative.</value>
+  </data>
+  <data name="CannotBeNegativeOrZero" xml:space="preserve">
+    <value>"{0}" cannot be negative or zero.</value>
+  </data>
+  <data name="CannotBeNull" xml:space="preserve">
+    <value>"{0}" cannot be null.</value>
+  </data>
+  <data name="CannotBeNullOrEmpty" xml:space="preserve">
+    <value>"{0}" cannot be null or empty.</value>
+  </data>
+  <data name="CannotFindPropertyToSortBy" xml:space="preserve">
+    <value>Cannot find a public property of primitive type to sort by.</value>
+  </data>
+  <data name="CannotHaveMoreOneColumnInOrderWhenSortModeIsSetToSingleColumn" xml:space="preserve">
+    <value>Cannot have more one column in order when sort mode is set to single column.</value>
+  </data>
+  <data name="CannotRouteToClassNamedController" xml:space="preserve">
+    <value>Cannot route to class named 'Controller'.</value>
+  </data>
+  <data name="CannotUseAjaxAndWebServiceAtTheSameTime" xml:space="preserve">
+    <value>Cannot use Ajax and WebService binding at the same time.</value>
+  </data>
+  <data name="CannotUseTemplatesInAjaxOrWebService" xml:space="preserve">
+    <value>Cannot use only server templates in Ajax or WebService binding mode. Please specify a client template as well.</value>
+  </data>
+  <data name="CollectionCannotBeEmpty" xml:space="preserve">
+    <value>"{0}" collection cannot be empty.</value>
+  </data>
+  <data name="ControllerNameAmbiguousWithoutRouteUrl" xml:space="preserve">
+    <value>Multiple types were found that match the controller named '{0}'. This can happen if the route that services this request does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter.
+
+The request for '{0}' has found the following matching controllers:{1}</value>
+  </data>
+  <data name="ControllerNameAmbiguousWithRouteUrl" xml:space="preserve">
+    <value>Multiple types were found that match the controller named '{0}'. This can happen if the route that services this request ('{1}') does not specify namespaces to search for a controller that matches the request. If this is the case, register this route by calling an overload of the 'MapRoute' method that takes a 'namespaces' parameter.
+
+The request for '{0}' has found the following matching controllers:{2}</value>
+  </data>
+  <data name="ControllerNameMustEndWithController" xml:space="preserve">
+    <value>Controller name must end with 'Controller'.</value>
+  </data>
+  <data name="DataKeysEmpty" xml:space="preserve">
+    <value>The DataKeys collection is empty. Please specify a data key.</value>
+  </data>
+  <data name="DataTableInLineEditingWithCustomEditorTemplates" xml:space="preserve">
+    <value>DataTable InLine editing and custom EditorTemplate per column is not supported</value>
+  </data>
+  <data name="DeleteCommandRequiresDelete" xml:space="preserve">
+    <value>The Delete data binding setting is required by the delete command. Please specify the Delete action or url in the DataBinding configuration.</value>
+  </data>
+  <data name="EditCommandRequiresUpdate" xml:space="preserve">
+    <value>The Update data binding setting is required by the edit command. Please specify the Update action or url in the DataBinding configuration.</value>
+  </data>
+  <data name="GroupWithSpecifiedNameAlreadyExists" xml:space="preserve">
+    <value>Group with specified name already exists.</value>
+  </data>
+  <data name="GroupWithSpecifiedNameAlreadyExistsPleaseSpecifyADifferentName" xml:space="preserve">
+    <value>Group with specified name "{0}" already exists. Please specify a different name.</value>
+  </data>
+  <data name="GroupWithSpecifiedNameDoesNotExistInAssetTypeOfSharedWebAssets" xml:space="preserve">
+    <value>Group with "{0}" does not exist in {1} SharedWebAssets.</value>
+  </data>
+  <data name="GroupWithSpecifiedNameDoesNotExistPleaseMakeSureYouHaveSpecifiedACorrectName" xml:space="preserve">
+    <value>Group with specified name "{0}" does not exist. Please make sure you have specified a correct name.</value>
+  </data>
+  <data name="IndexOutOfRange" xml:space="preserve">
+    <value>Provided index is out of range.</value>
+  </data>
+  <data name="InsertCommandRequiresInsert" xml:space="preserve">
+    <value>The Insert data binding setting is required by the insert command. Please specify the Insert action or url in the DataBinding configuration.</value>
+  </data>
+  <data name="ItemWithSpecifiedSourceAlreadyExists" xml:space="preserve">
+    <value>Item with specified source already exists.</value>
+  </data>
+  <data name="LocalGroupWithSpecifiedNameAlreadyExists" xml:space="preserve">
+    <value>Local group with name "{0}" already exists.</value>
+  </data>
+  <data name="LocalizationKeyNotFound" xml:space="preserve">
+    <value>The key with the following name "{0}" was not found. Please update all localization files.</value>
+  </data>
+  <data name="MemberExpressionRequired" xml:space="preserve">
+    <value>Bound columns require a field or property access expression.</value>
+  </data>
+  <data name="MinPropertyMustBeLessThenMaxProperty" xml:space="preserve">
+    <value>{0} should be less than {1}.</value>
+  </data>
+  <data name="NameCannotBeBlank" xml:space="preserve">
+    <value>Name cannot be blank.</value>
+  </data>
+  <data name="NoneIsOnlyUsedForInternalPurpose" xml:space="preserve">
+    <value>"None" is only used for internal purpose.</value>
+  </data>
+  <data name="OnlyOneScriptRegistrarIsAllowedInASingleRequest" xml:space="preserve">
+    <value>Only one ScriptRegistrar is allowed in a single request.</value>
+  </data>
+  <data name="OnlyOneStyleSheetRegistrarIsAllowedInASingleRequest" xml:space="preserve">
+    <value>Only one StyleSheetRegistrar is allowed in a single request.</value>
+  </data>
+  <data name="OnlyPropertyAndFieldExpressionsAreSupported" xml:space="preserve">
+    <value>Only property and field expressions are supported</value>
+  </data>
+  <data name="PropertyShouldBeInRange" xml:space="preserve">
+    <value>{0} should be bigger than {1} and less then {2}</value>
+  </data>
+  <data name="Rtl" xml:space="preserve">
+    <value>The "{0}" class is no longer supported. To enable RTL support you must include telerik.rtl.css and apply the "t-rtl" class to a parent HTML element or the &lt;body&gt;.</value>
+  </data>
+  <data name="SiteMapShouldBeDefinedInViewData" xml:space="preserve">
+    <value>You must have SiteMap defined with key "{0}" in ViewData dictionary.</value>
+  </data>
+  <data name="SourceMustBeAVirtualPathWhichShouldStartsWithTileAndSlash" xml:space="preserve">
+    <value>Source must be a virtual path which should starts with "~/"</value>
+  </data>
+  <data name="SpecifiedFileDoesNotExist" xml:space="preserve">
+    <value>Specified file does not exist: "{0}".</value>
+  </data>
+  <data name="StringNotCorrectDate" xml:space="preserve">
+    <value>Passed string cannot be parsed to DateTime object.</value>
+  </data>
+  <data name="StringNotCorrectTimeSpan" xml:space="preserve">
+    <value>Passed string cannot be parsed to TimeSpan object.</value>
+  </data>
+  <data name="TheSpecifiedMethodIsNotAnActionMethod" xml:space="preserve">
+    <value>The specified method is not an action method.</value>
+  </data>
+  <data name="TimeOutOfRange" xml:space="preserve">
+    <value>Time should be bigger than MinTime and less than MaxTime.</value>
+  </data>
+  <data name="UrlAndContentUrlCannotBeSet" xml:space="preserve">
+    <value>You cannot set Url and ContentUrl at the same time.</value>
+  </data>
+  <data name="ValueNotValidForProperty" xml:space="preserve">
+    <value>The value '{0}' is invalid.</value>
+  </data>
+  <data name="WebServiceUrlRequired" xml:space="preserve">
+    <value>The Url of the WebService must be set</value>
+  </data>
+  <data name="YouCannotAddMoreThanOnceColumnWhenSortModeIsSetToSingle" xml:space="preserve">
+    <value>You cannot add more than once column when sort mode is set to single column.</value>
+  </data>
+  <data name="YouCannotCallBindToWithoutCustomBinding" xml:space="preserve">
+    <value>You cannot use non generic BindTo overload without EnableCustomBinding set to true</value>
+  </data>
+  <data name="YouCannotCallRenderMoreThanOnce" xml:space="preserve">
+    <value>You cannot call render more than once.</value>
+  </data>
+  <data name="YouCannotCallStartMoreThanOnce" xml:space="preserve">
+    <value>You cannot call Start more than once.</value>
+  </data>
+  <data name="YouCannotConfigureASharedWebAssetGroup" xml:space="preserve">
+    <value>You cannot configure a shared web asset group.</value>
+  </data>
+  <data name="YouMustHaveToCallStartPriorCallingThisMethod" xml:space="preserve">
+    <value>You must have to call Start prior calling this method.</value>
+  </data>
+  <data name="InCellModeNotSupportedInServerBinding" xml:space="preserve">
+    <value>InCell editing mode is not supported in server binding mode</value>
+  </data>
+  <data name="BatchUpdatesRequireInCellMode" xml:space="preserve">
+    <value>You must use InCell edit mode for batch updates.</value>
+  </data>
+  <data name="BatchUpdatesRequireUpdate" xml:space="preserve">
+    <value>The Update data binding setting is required for batch updates. Please specify the Update action or url in the DataBinding configuration.</value>
+  </data>
+  <data name="FirstPropertyShouldNotBeBiggerThenSecondProperty" xml:space="preserve">
+    <value>{0} should not be bigger then {1}.</value>
+  </data>
+  <data name="PropertyMustBeBiggerThenZero" xml:space="preserve">
+    <value>The {0} must be bigger then 0.</value>
+  </data>
+  <data name="PropertyMustBePositiveNumber" xml:space="preserve">
+    <value>{0} must be positive number.</value>
+  </data>
+  <data name="InCellModeNotSupportedWithRowTemplate" xml:space="preserve">
+    <value>InCell editing mode is not supported when ClientRowTemplate is used</value>
+  </data>
+  <data name="CannotUsePageOnScrollWithServerBinding" xml:space="preserve">
+    <value>Cannot use PageOnScroll with Server binding.</value>
+  </data>
+  <data name="PagingMustBeEnabledToUsePageOnScroll" xml:space="preserve">
+    <value>Paging must be enabled to use PageOnScroll.</value>
+  </data>
+  <data name="ScrollingMustBeEnabledToUsePageOnScroll" xml:space="preserve">
+    <value>Scrolling must be enabled to use PageOnScroll.</value>
+  </data>
+  <data name="NameCannotContainSpaces" xml:space="preserve">
+    <value>Name cannot contain spaces.</value>
+  </data>
+</root>
