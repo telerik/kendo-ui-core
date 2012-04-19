@@ -347,23 +347,12 @@
          * </script>
          */
         navigate: function(url, transition) {
-            var that = this;
-            that.transitioning = true;
             history.navigate(url, true);
 
-            if (url === BACK) {
-                return;
+            if (url !== BACK) {
+                this.transitioning = true;
+                this._showView(url, transition);
             }
-
-            that.viewBuilder.findView(url, function(view) {
-                if (that.view === view) { return; }
-
-                that.view.switchWith(view, transition, function() {
-                    that.transitioning = false;
-                });
-
-                that.view = view;
-            });
         },
 
         /**
@@ -462,25 +451,31 @@
                 },
 
                 ready: function(e) {
-                    var url = e.string,
-                        navigateToInitial = !url && initial;
+                    var url = e.string;
 
-                    if (navigateToInitial) {
+                    if (!url && initial) {
                         url = initial;
+                        history.navigate(initial, true);
                     }
 
-                    that.viewBuilder.findView(url, function(view) {
-                        view.showStart();
-                        that.view = view;
-
-                        if (navigateToInitial) {
-                            history.navigate(initial, true);
-                        }
-                    });
+                    that._showView(url);
                 }
             };
 
             history.start($.extend(that.options, historyEvents));
+        },
+
+        _showView: function(url, transition) {
+            var that = this;
+
+            that.viewBuilder.findView(url, function(view) {
+                if (that.view !== view) {
+                    view.switchWith(that.view, transition, function() {
+                        that.transitioning = false;
+                        that.view = view;
+                    });
+                }
+            });
         },
 
         _setupElementClass: function() {
@@ -608,7 +603,7 @@
                 }
             }
 
-        e.preventDefault();
+            e.preventDefault();
         },
 
         _loader: function() {
