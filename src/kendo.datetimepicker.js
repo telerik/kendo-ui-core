@@ -194,7 +194,7 @@
                 change: function() {
                     // calendar is the current scope
                     that._change(this.value());
-                    //that.close();
+                    that.close("date");
                 },
                 close: close,
                 open: open
