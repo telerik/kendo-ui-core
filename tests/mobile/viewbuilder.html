@@ -68,6 +68,12 @@
                 });
             });
 
+            test("returns root view if no url", 1, function() {
+                viewBuilder.findView("", function(view) {
+                    equal(view.element[0], root.find("#foo")[0]);
+                });
+            });
+
             asyncTest("Loads remote view", 2, function() {
                 $.mockjax({
                     url: "page2.html",
@@ -122,7 +128,7 @@
                 });
             });
 
-        asyncTest("remote asset loading injects scripts, styles and layouts", 3, function() {
+            asyncTest("remote asset loading injects scripts, styles and layouts", 3, function() {
 
                 $.mockjax({
                     url: "page2.html",
@@ -138,6 +144,62 @@
                     ok(viewBuilder.layouts["remoteLayout"], "Layout is injected");
                     ok(window.scriptInjected,  "Script is injected");
                 });
+            });
+
+            ////////////////////////////////////////////////////////////////////
+            module("view builder layout management", {
+                setup: function() {
+                    root.html('<div data-role="view" data-layout="bar" id="foo">Foo</div>' +
+                    '<div data-role="layout" data-id="bar"><div data-role="header" id="layoutHeader">Foo</div>' +
+                    '<div data-role="footer" id="layoutFooter">Foo</div></div>').show();
+
+                    viewBuilder = new kendo.mobile.ViewBuilder({ container: root });
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
+
+            test("applies layout to view", 1, function() {
+                viewBuilder.findView("", function(view) {
+                    equal(view.layout, viewBuilder.layouts["bar"]);
+                });
+            });
+
+            ////////////////////////////////////////////////////////////////////
+            module("view builder default layout", {
+                setup: function() {
+                    root.html('<div data-role="view" id="foo">Foo</div>' +
+                    '<div data-role="layout" data-id="bar"><div data-role="header" id="layoutHeader">Foo</div>' +
+                    '<div data-role="footer" id="layoutFooter">Foo</div></div>').show();
+
+                    viewBuilder = new kendo.mobile.ViewBuilder({ container: root, layout: "bar" });
+                },
+
+                teardown: function() {
+                    $.mockjaxClear();
+                }
+            });
+
+            test("applies layout to view", 1, function() {
+                viewBuilder.findView("", function(view) {
+                    equal(view.layout, viewBuilder.layouts["bar"]);
+                });
+            });
+
+
+            test("Uses platform specific layouts", 1, function() {
+                kendo.mobile.application = {os: "ios"};
+
+                root.html('<div data-role="view" id="page1">Page 1</div> \
+                <div data-role="layout" data-platform="ios" data-id="foo"><div data-role="footer">footer</div></div> \
+                <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
+                ').show();
+
+                viewBuilder = new kendo.mobile.ViewBuilder({ container: root });
+
+                equal(viewBuilder.layouts["foo"].element.data("platform"), "ios");
             });
         </script>
     </body>
