@@ -150,6 +150,18 @@
                 equal(+datetimepicker.value(), +value);
             });
 
+            test("value method sets null if date is out of range", function() {
+                var datetimepicker = new DateTimePicker(input, {
+                        min: new Date(2000, 10, 10)
+                    }),
+                    value = "2/10/1900 10:10 AM";
+
+                datetimepicker.value(value);
+
+                equal(input.val(), value);
+                equal(datetimepicker.value(), null);
+            });
+
             test("enable method with false value disables the widget", function() {
                 var datetimepicker = new DateTimePicker(input);
 
