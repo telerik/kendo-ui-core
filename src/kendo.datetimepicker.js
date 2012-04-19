@@ -38,7 +38,8 @@
             that._views();
 
             element.addClass("k-input")
-                   .bind({
+                    .bind({
+                        keydown: $.proxy(that._keydown, that),
                         focus: function() {
                             that._inputWrapper.addClass(FOCUSED);
                         },
@@ -48,7 +49,7 @@
                             that.close("date");
                             that.close("time");
                         }
-                   })
+                    })
                    .closest("form")
                    .bind("reset", function() {
                        that.value(element[0].defaultValue);
@@ -191,6 +192,23 @@
             that.element.val(date ? kendo.toString(date, format) : value);
 
             return date;
+        },
+
+        _keydown: function(e) {
+            var that = this,
+                dateView = that.dateView,
+                timeView = that.timeView,
+                isDateViewVisible = dateView.popup.visible();
+
+            if (e.altKey && e.keyCode === kendo.keys.DOWN) {
+                that.toggle(isDateViewVisible ? "time" : "date");
+            } else if (isDateViewVisible) {
+                dateView.move(e);
+            } else if (timeView.popup.visible()) {
+                timeView.move(e);
+            } else if (e.keyCode === kendo.keys.ENTER) {
+                that._change(that.element.val());
+            }
         },
 
         _views: function() {

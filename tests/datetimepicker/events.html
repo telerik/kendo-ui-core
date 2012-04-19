@@ -80,6 +80,34 @@
                 input.focus().val(kendo.toString(today, datetimepicker.options.format)).blur();
             });
 
+            test("DateTimePicker raises change event on enter", 1, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    change: function() {
+                        ok(true);
+                    }
+                });
+
+                input.val("10/10/2000 12:00 AM");
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+            });
+
+            test("DateTimePicker does not raise change event on enter", 0, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    change: function() {
+                        ok(false);
+                    }
+                });
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
