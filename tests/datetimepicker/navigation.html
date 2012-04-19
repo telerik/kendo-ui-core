@@ -205,6 +205,26 @@
                 ok(input.val());
             });
 
+            test("DateTimePicker updates DateView when select time from TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+
+                var date = kendo.parseDate(input.val(), datetimepicker.options.format);
+
+                equal(+datetimepicker.dateView._value, +date);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

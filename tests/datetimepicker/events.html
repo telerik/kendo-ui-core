@@ -123,6 +123,29 @@
                 });
             });
 
+            test("DateTimePicker triggers open event", 1, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    open: function() {
+                        ok(true);
+                    }
+                });
+
+                datetimepicker.timeView.popup.open();
+            });
+
+            test("DateTimePicker triggers close event", 1, function() {
+                var datetimepicker = new DateTimePicker(input, {
+                    value: new Date(2000, 10, 10),
+                    close: function() {
+                        ok(true);
+                    }
+                });
+
+                datetimepicker.timeView.popup.open();
+                datetimepicker.timeView.popup.close();
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
