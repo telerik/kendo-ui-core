@@ -583,6 +583,30 @@
 
                 equal(dataSource.total(), 80);
             });
+
+            test("range data is same as the range if remote paging is enabled", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.range(30,16);
+                same(dataSource.data(), dataSource.view());
+            });
+
+            test("getByUid returns the item after remote range from a diffrent page is retrieved", function() {
+                var dataSource = remoteDataSource();
+                dataSource.read();
+                dataSource.range(30,16);
+                ok(dataSource.getByUid(dataSource.view()[0].uid));
+            });
+
+            test("getByUid returns the item after local range from a diffrent page is retrieved", function() {
+                var dataSource = new DataSource({
+                    data: [{foo: "foo"}, {foo: "bar"}, {foo: "baz"}],
+                    pageSize: 1
+                });
+                dataSource.read();
+                dataSource.range(2,1);
+                ok(dataSource.getByUid(dataSource.view()[0].uid));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
