@@ -47,6 +47,10 @@
                             that.close("date");
                             that.close("time");
                         }
+                   })
+                   .closest("form")
+                   .bind("reset", function() {
+                       that.value(element[0].defaultValue);
                    });
 
             that.enable(!element.is('[disabled]'));

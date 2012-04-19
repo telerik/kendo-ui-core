@@ -129,28 +129,27 @@
                 ok(datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
             });
 
-            /*
             asyncTest("form reset support", 2, function() {
-                input.attr("value", "12/12/2000");
+                input.attr("value", "12/12/2000 12:00 AM");
 
                 var form = $("<form/>").appendTo(document).append(input),
                     datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
 
                 datetimepicker.open();
-                datetimepicker.value("12/12/2010");
+                datetimepicker.value("12/12/2010 12:00 AM");
 
                 form[0].reset();
 
                 setTimeout(function() {
-                    equal(datetimepicker.element.val(), "12/12/2000");
+                    equal(datetimepicker.element.val(), "12/12/2000 12:00 AM");
                     equal(datetimepicker.dateView.calendar.value().getFullYear(), "2000");
                     start();
-                }, 200);
+                }, 100);
             });
 
             test("extend popup options if datetimepicker.options.popup", function() {
                 var appendTo = "fake",
-                    datetimepicker = new kendo.ui.datetimepicker(input, {
+                    datetimepicker = new kendo.ui.DateTimePicker(input, {
                         popup: {
                             appendTo: appendTo
                         }
@@ -158,7 +157,6 @@
 
                 equal(datetimepicker.dateView.popup.options.appendTo, appendTo);
             });
-            */
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
