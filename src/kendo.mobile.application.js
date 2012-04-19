@@ -306,8 +306,6 @@
             $(function(){
                 that._setupPlatform();
                 that._attachHideBarHandlers();
-                that._attachMeta();
-                that._setupElementClass();
                 that._loader();
                 that._setupAppLinks();
 
@@ -318,9 +316,12 @@
                     application: that,
 
                     loadStart: function() { that.showLoading(); },
-                    loadComplete: function() { that.hideLoading(); }
+                    loadComplete: function() { that.hideLoading(); },
+                    viewShown: function() { that.transitioning = false;  }
                 });
 
+                that._attachMeta();
+                that._setupElementClass();
                 that._startHistory();
                 that._attachCapture();
             });
@@ -351,7 +352,7 @@
 
             if (url !== BACK) {
                 this.transitioning = true;
-                this._showView(url, transition);
+                this.viewBuilder.showView(url, transition);
             }
         },
 
@@ -360,7 +361,7 @@
          * @returns {Scroller} the scroller widget instance.
          */
         scroller: function() {
-            return this.view.scroller;
+            return this.view().scroller;
         },
 
         /**
@@ -397,6 +398,10 @@
             that._loading = setTimeout(function() {
                 that.loader.show();
             }, 100);
+        },
+
+        view: function() {
+            return this.viewBuilder.view();
         },
 
         _setupAppLinks: function() {
@@ -447,39 +452,27 @@
 
             historyEvents = {
                 change: function(e) {
-                    that.navigate(e.string);
+                    that.navigate(e.url);
                 },
 
                 ready: function(e) {
-                    var url = e.string;
+                    var url = e.url;
 
                     if (!url && initial) {
                         url = initial;
                         history.navigate(initial, true);
                     }
 
-                    that._showView(url);
+                    that.viewBuilder.showView(url);
                 }
             };
 
             history.start($.extend(that.options, historyEvents));
         },
 
-        _showView: function(url, transition) {
-            var that = this;
-
-            that.viewBuilder.findView(url, function(view) {
-                if (that.view !== view) {
-                    view.switchWith(that.view, transition, function() {
-                        that.transitioning = false;
-                        that.view = view;
-                    });
-                }
-            });
-        },
-
         _setupElementClass: function() {
             var that = this,
+                view = that.view(),
                 osCssClass = that.options.platform ? "km-" + that.options.platform : that.osCssClass,
                 element = that.element;
 
@@ -498,8 +491,8 @@
                     applyViewportHeight();
                 }
 
-                if (that.view && that.view.scroller) {// On desktop resize is fired rather early
-                    that.view.scroller.reset();
+                if (view && view.scroller) { // On desktop resize is fired rather early
+                    view.scroller.reset();
                 }
             });
         },
@@ -625,14 +618,38 @@
             var that = this,
                 views;
 
+            that.transition = "";
             $.extend(that, options);
             that.sandbox = $("<div />");
 
             views = that._hideViews(that.container);
             that.rootView = views.first();
+            that._showViewCallback = $.proxy(that._showView, that);
+            that._view = null;
 
             that.layouts = {};
             that._setupLayouts(that.container);
+        },
+
+        showView: function(url, transition) {
+            var that = this;
+            that.transition = transition;
+            that.params = kendo.parseURL(url).params;
+            that.findView(url, that._showViewCallback);
+        },
+
+        view: function() {
+            return this._view;
+        },
+
+        _showView: function(view) {
+            var that = this;
+            if (that._view !== view) {
+                view.switchWith(that._view, that.transition, that.params, function() {
+                    that.viewShown();
+                    that._view = view;
+                });
+            }
         },
 
         findView: function(url, callback) {
@@ -667,6 +684,7 @@
 
         loadStart: $.noop,
         loadComplete: $.noop,
+        viewShown: $.noop,
 
         _createView: function(element) {
             var that = this,
