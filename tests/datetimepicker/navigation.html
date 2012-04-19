@@ -106,6 +106,92 @@
 
                 ok(!datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
             });
+
+            test("DateTimePicker opens DateView when press ALT + DOWN", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN,
+                    altKey: true
+                });
+
+                ok(datetimepicker.dateView.popup.visible());
+            });
+
+            test("DateTimePicker opens TimeView when press ALT + DOWN", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN,
+                    altKey: true
+                });
+
+                ok(!datetimepicker.dateView.popup.visible());
+                ok(datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker closes DateView when press ALT + UP", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP,
+                    altKey: true
+                });
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("DateTimePicker closes TimeView when press ALT + UP", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP,
+                    altKey: true
+                });
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker calls DateView move method if the view is opened", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                stub(datetimepicker.dateView, "move");
+
+                datetimepicker.open("date");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP
+                });
+
+                equal(datetimepicker.dateView.calls("move"), 1);
+            });
+
+            test("DateTimePicker calls TimeView move method if the view is opened", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                stub(datetimepicker.timeView, "move");
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                equal(datetimepicker.timeView.calls("move"), 1);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
