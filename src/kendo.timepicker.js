@@ -376,6 +376,9 @@
 
             } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
                 e.preventDefault();
+                if (current) {
+                    that.options.change(current.text(), true);
+                }
                 that.close();
             }
         }
@@ -811,14 +814,11 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                enter = key == keys.ENTER,
                 timeView = that.timeView;
 
-            if (timeView.popup.visible() || e.altKey || enter) {
+            if (timeView.popup.visible() || e.altKey) {
                 timeView.move(e);
-            }
-
-            if (enter) {
+            } else if (key === keys.ENTER) {
                 that._change(that.element.val());
             }
         },
