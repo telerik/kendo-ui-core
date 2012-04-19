@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        mobile = kendo.mobile,
         history = kendo.history,
         support = kendo.support,
         roleSelector = kendo.roleSelector,
@@ -296,6 +297,8 @@
         init: function(element, options) {
             var that = this;
 
+            mobile.application = that; // global reference to current application
+
             that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
@@ -313,7 +316,6 @@
                     transition: that.options.transition,
                     layout: that.options.layout,
                     application: that,
-                    os: that.os,
 
                     loadStart: function() { that.showLoading(); },
                     loadComplete: function() { that.hideLoading(); }
@@ -742,7 +744,7 @@
                 var layout = $(this),
                     platform = layout.data(platformAttr);
 
-                if (platform === undefined || platform === that.os) {
+                if (platform === undefined || platform === mobile.application.os) {
                     that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
                 }
             });
