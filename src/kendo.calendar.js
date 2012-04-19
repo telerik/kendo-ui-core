@@ -1274,10 +1274,19 @@
         e.preventDefault();
     }
 
+    function parseFormat(format) {
+        if (format.slice(0,3) === "{0:") {
+            format = format.slice(3, format.length - 1);
+        }
+
+        return format;
+    }
+
     function validate(options) {
         var start = views[options.start],
-            depth = views[options.depth],
-            format = options.format || kendo.culture().calendar.patterns.d;
+            depth = views[options.depth];
+
+        options.format = parseFormat(options.format || kendo.culture().calendar.patterns.d);
 
         if (isNaN(start)) {
             start = 0;
@@ -1287,12 +1296,6 @@
         if (depth === undefined || depth > start) {
             options.depth = MONTH;
         }
-
-        if (format.slice(0,3) === "{0:") {
-            format = format.slice(3, format.length - 1);
-        }
-
-        options.format = format;
     }
 
     function makeUnselectable(element) {
@@ -1304,6 +1307,7 @@
     calendar.makeUnselectable =  makeUnselectable;
     calendar.restrictValue = restrictValue;
     calendar.isInRange = isInRange;
+    calendar.parseFormat = parseFormat;
     calendar.validate = validate;
     calendar.viewsEnum = views;
 
