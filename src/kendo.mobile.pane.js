@@ -47,7 +47,7 @@
          * @param {DomElement} element DOM element
          */
         init: function(element, options) {
-            var that = this, loader;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
 
@@ -174,9 +174,9 @@
             that._setupLayouts(that.container);
 
             if (that.loader) {
-                that.bind(LOAD_START, function() { that.loader.show(); })
-                that.bind(LOAD_COMPLETE, function() { that.loader.hide(); })
-                that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); })
+                that.bind(LOAD_START, function() { that.loader.show(); });
+                that.bind(LOAD_COMPLETE, function() { that.loader.hide(); });
+                that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); });
             }
         },
 
