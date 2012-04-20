@@ -65,19 +65,42 @@
          *  $("#editor").kendoEditor({
          *      encoded: false
          *  });
-         * @option {Array} [tools] A collection of tools that should render a button, combobox, etc, to interact with the Editor
+         * @option {Array} [tools] A collection of tools that should render a button, combobox, etc, to interact with the Editor. Custom tools are defined
+         * as a collection of required properties, while the insertHtml  tool requires a collection of text-value pairs
          * _example
          *  $("#editor").kendoEditor({
          *      tools: [
-         *          "bold",
-         *          "italic",
-         *          "underline",
-         *          "foreColor",
-         *          "insertUnorderedList",
-         *          "insertOrderedList",
-         *          "createLink",
-         *          "unlink",
-         *          "insertImage"
+         *      "bold",
+         *      "italic",
+         *      "underline",
+         *      "strikethrough",
+         *      "fontName",
+         *      "fontSize",
+         *      "justifyLeft",
+         *      "justifyCenter",
+         *      "justifyRight",
+         *      "justifyFull",
+         *      "insertUnorderedList",
+         *      "insertOrderedList",
+         *      "indent",
+         *      "outdent",
+         *      "formatBlock",
+         *      "createLink",
+         *      "unlink",
+         *      "insertImage",
+         *      "insertHtml",
+         *      {
+         *          name: "customTool",
+         *          tooltip: "Custom Tool",
+         *          exec: function(e) {
+         *              var editor = $(this).data("kendoEditor");
+         *              // ...
+         *          }
+         *      }
+         *      ],
+         *      insertHtml: [
+         *          { text: "label 1", value: "<p>snippet 1</p>" },
+         *          { text: "label 2", value: "<p>snippet 2</p>" }
          *      ]
          *  });
          * @option {Array} [stylesheets] Allows custom stylesheets to be included within the editing area.
