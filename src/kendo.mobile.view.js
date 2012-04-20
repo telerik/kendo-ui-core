@@ -177,10 +177,11 @@
             that.lastParams = that.params;
             that.params = params;
 
-            that.showStart();
-
             if (view) {
+                // layout needs to be detached first, then reattached
                 view.hideStart();
+                that.showStart();
+
                 new ViewTransition({
                     current: view,
                     next: that,
@@ -189,6 +190,7 @@
                     complete: callback
                 });
             } else {
+                that.showStart();
                 callback();
             }
         },
