@@ -495,7 +495,8 @@
                 element.height(newHeight);
                 setTimeout(window.scrollTo, 0, 0, 1);
             }
-        }    });
+        }
+    });
 
     kendo.mobile.Application = Application;
 })(jQuery);

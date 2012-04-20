@@ -163,7 +163,6 @@
 
             kendo.Observable.fn.init.call(that);
 
-            that.transition = "";
             $.extend(that, options);
             that.sandbox = $("<div />");
 
@@ -195,13 +194,14 @@
                 view,
                 element;
 
+
             if (!url) {
                 element = that.rootView;
             } else {
-                element = container.find("[" + attr("url") + "='" + url + "']");
+                element = container.children("[" + attr("url") + "='" + url + "']");
 
                 if (!element[0] && !remote) {
-                    element = container.find(local ? url : "#" + url);
+                    element = container.children(local ? url : "#" + url);
                 }
             }
 
@@ -296,7 +296,7 @@
         },
 
         _hideViews: function(container) {
-            return container.find(roleSelector(viewRoles)).hide();
+            return container.children(roleSelector(viewRoles)).hide();
         },
 
         _setupLayouts: function(element) {
