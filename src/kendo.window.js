@@ -191,6 +191,8 @@
         return $(KWINDOW).filter(function() {
             var wnd = $(this);
             return wnd.is(VISIBLE) && windowObject(wnd).options.modal;
+        }).sort(function(a, b){
+            return +$(a).css("zIndex") - +$(b).css("zIndex");
         });
     }
 
