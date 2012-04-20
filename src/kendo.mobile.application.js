@@ -4,7 +4,6 @@
         history = kendo.history,
         support = kendo.support,
         Pane = mobile.ui.Pane,
-        roleSelector = kendo.roleSelector,
 
         DEFAULT_OS = "ios",
         OS = support.mobileOS,

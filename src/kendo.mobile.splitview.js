@@ -21,7 +21,7 @@
             $.extend(that, options);
             that._layout();
 
-            that.element.children(kendo.roleSelector["pane"]).each(function() {
+            that.element.children(kendo.roleSelector("pane")).each(function() {
                 kendo.initWidget(this, {}, kendo.mobile.ui);
                 $(this).data("kendoMobilePane").navigate("");
             });
