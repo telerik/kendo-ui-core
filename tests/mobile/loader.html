@@ -1,0 +1,72 @@
+
+<!DOCTYPE dom>
+<html>
+    <head>
+        <title>kendo.mobile.ui.Loader Tests</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.data.js"></script>
+        <script src="../../src/kendo.binder.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">kendo.mobile.ui.Loader Tests</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+        <script>
+            var pane,
+                root = $("#qunit-fixture");
+
+            function hidden(selector) {
+                ok(!root.find(selector).is(":visible"));
+            }
+
+            function visible(selector) {
+                ok(root.find(selector).is(":visible"));
+            }
+
+            function view(selector) {
+                ok(root.find(selector).data("kendoView"));
+            }
+
+            ////////////////////////////////////////////////////////////////////
+            module("mobile loader initialization", {
+                setup: function() {
+                    loader = new kendo.mobile.ui.Loader(root, {timeout: 0});
+                }
+            });
+
+            test("hides loader initially", 1, function() {
+                hidden(loader.element);
+            });
+
+            asyncTest("shows loader element", 1, function() {
+                loader.show();
+                setTimeout(function() {
+                    start();
+                    visible(loader.element);
+                });
+            });
+
+            asyncTest("hides loader element after shown", 1, function() {
+                loader.show();
+                setTimeout(function() {
+                    start();
+                    loader.hide();
+                    hidden(loader.element);
+                });
+            });
+        </script>
+    </body>
+</html>
