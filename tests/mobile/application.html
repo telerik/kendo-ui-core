@@ -12,8 +12,10 @@
         <script src="../../src/kendo.draganddrop.js"></script>
         <script src="../../src/kendo.history.js"></script>
         <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.navbar.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../jquery.mockjax.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
@@ -165,30 +167,6 @@
             test("Pass application instance to the view", function() {
                 setup('<div data-init="foo" data-role="view">View</div>');
                 equal(application.view().application, application);
-            });
-
-            test("Creates loader", function() {
-                setup('<div data-role="view">Page 1</div>');
-                var loader = application.loader;
-
-                ok(loader);
-                ok(loader.hasClass("km-loader"));
-            });
-
-            test("Loader uses default text", function() {
-                setup('<div data-role="view">Page 1</div>');
-
-                var loader = application.loader;
-                equal(loader.text(), "Loading...");
-            });
-
-            test("Loader uses options.loading", function() {
-                setup('<div data-role="view">Page 1</div>', {
-                    loading: "Custom text"
-                });
-
-                var loader = application.loader;
-                equal(loader.text(), "Custom text");
             });
 
             if (kendo.support.mobileOS.android) {
