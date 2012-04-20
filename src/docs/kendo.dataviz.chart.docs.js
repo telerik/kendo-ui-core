@@ -3913,6 +3913,25 @@
              *     alert("Clicked value: " + e.value);
              * }
              */
+
+            /**
+             * Fires when chart series are hovered.
+             * @name kendo.dataviz.ui.Chart#seriesHover
+             * @event
+             * @param {Event} e
+             * @param {Object} e.value The data point value.
+             * @param {Object} e.category The data point category
+             * @param {Object} e.series The clicked series.
+             * @param {String} e.series.type The series type
+             * @param {String} e.series.name The series name
+             * @param {Array} e.series.data The series data points
+             * @param {Object} e.dataItem The original data item (when binding to dataSource).
+             * @param {Object} e.element The DOM element of the data point.
+             * @example
+             * function onSeriesHover(e) {
+             *     alert("Hovered value: " + e.value);
+             * }
+             */
         },
 
         /**

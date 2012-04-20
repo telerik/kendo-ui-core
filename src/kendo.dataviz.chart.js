@@ -92,6 +92,7 @@
         SCATTER = "scatter",
         SCATTER_LINE = "scatterLine",
         SERIES_CLICK = "seriesClick",
+        SERIES_HOVER = "seriesHover",
         STRING = "string",
         TOP = "top",
         TOOLTIP_ANIMATION_DURATION = 150,
@@ -170,7 +171,8 @@
 
         events:[
             DATABOUND,
-            SERIES_CLICK
+            SERIES_CLICK,
+            SERIES_HOVER
         ],
 
         items: function() {
@@ -397,6 +399,13 @@
 
             point = chart._getPoint(e);
             if (point) {
+                chart.trigger(SERIES_HOVER, {
+                    value: point.value,
+                    category: point.category,
+                    series: point.series,
+                    dataItem: point.dataItem,
+                    element: $(e.target)
+                });
                 chart._activePoint = point;
                 tooltipOptions = deepExtend({}, chart.options.tooltip, point.options.tooltip);
                 if (tooltipOptions.visible) {
