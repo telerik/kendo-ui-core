@@ -701,14 +701,16 @@
         },
 
         _showLoading: function() {
-            if (mobile.application) {
-                mobile.application.showLoading();
+            var view = this.view();
+            if (view) {
+                view.loader.show();
             }
         },
 
         _hideLoading: function() {
-            if (mobile.application) {
-                mobile.application.hideLoading();
+            var view = this.view();
+            if (view) {
+                view.loader.show();
             }
         }
     });
