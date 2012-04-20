@@ -40,6 +40,10 @@ tests.push(
         title: "mobile listview mvvm"
     },
     {
+        page: "mobile/loader.html",
+        title: "mobile loader"
+    },
+    {
         page: "mobile/navbar.html",
         title: "mobile navbar"
     },
