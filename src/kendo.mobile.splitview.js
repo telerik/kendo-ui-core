@@ -40,29 +40,5 @@
         }
     });
 
-    /**
-     * @name kendo.mobile.ui.Pane.Description
-     *
-     */
-    var Pane = View.extend(/** @lends kendo.mobile.ui.Pane.prototype */{
-        /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element
-        */
-        init: function(element, options) {
-            var that = this;
-
-            Widget.fn.init.call(that, element, options);
-
-            that.element.addClass("km-pane");
-        },
-
-        options: {
-            name: "Pane"
-        }
-    });
-
     ui.plugin(SplitView);
-    ui.plugin(Pane);
 })(jQuery);

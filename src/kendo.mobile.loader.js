@@ -2,7 +2,7 @@
     var kendo = window.kendo,
         ui = kendo.mobile.ui,
         Widget = ui.Widget,
-        CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup", "click"];
+        CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"];
 
     /**
      * @name kendo.mobile.ui.Loader.Description
