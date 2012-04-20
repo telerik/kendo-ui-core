@@ -3082,30 +3082,6 @@
          * @option {String} [series.type="scatter".markers.border.color] <"black"> The color of the border.
          * @option {String} [series.type="scatter".markers.background]
          * The background color of the current series markers.
-         * @option {String} [series.type="scatter".missingValues] <"gap">
-         * Configures the behavior for handling missing values in scatter series.
-         * <div class="details-list">
-         *    <dl>
-         *         <dt>
-         *              <code>"interpolate"</code>
-         *         </dt>
-         *         <dd>
-         *              The value is interpolated from neighboring points.
-         *         </dd>
-         *         <dt>
-         *              <code>"zero"</code>
-         *         </dt>
-         *         <dd>
-         *              The value is assumed to be zero.
-         *         </dd>
-         *         <dt>
-         *              <code>"gap"</code>
-         *         </dt>
-         *         <dd>
-         *              The line stops before the missing point and continues after it.
-         *         </dd>
-         *    </dl>
-         * </div>
          * @option {String} [series.type="scatter".name] The series name.
          * @option {String} [series.type="scatter".xAxis] <primary> The name of the X axis to use.
          * @option {String} [series.type="scatter".yAxis] <primary> The name of the Y axis to use.
