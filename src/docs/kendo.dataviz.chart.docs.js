@@ -2765,6 +2765,31 @@
          *         </dd>
          *    </dl>
          * </div>
+         * @option {String} [series.type="pie".labels.position] <"outsideEnd">
+         * Defines the position of the pie labels.
+         * <div class="details-list">
+         *     <dl>
+         *         <dt>
+         *              <code>"center"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned at the center of the pie segments.
+         *         </dd>
+         *         <dt>
+         *              <code>"insideEnd"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned inside, near the end of the pie segments.
+         *         </dd>
+         *         <dt>
+         *              <code>"outsideEnd"</code>
+         *         </dt>
+         *         <dd>
+         *              The labels are positioned outside, near the end of the pie segments.
+         *              The labels and the pie segments are connected with connector line.
+         *         </dd>
+         *    </dl>
+         * </div>
          * @option {Object} [series.type="pie".border] The border of the series.
          * @option {Number} [series.type="pie".border.width] <1> The width of the border.
          * @option {String} [series.type="pie".border.color] <the color of the curren series>
