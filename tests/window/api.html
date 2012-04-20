@@ -92,6 +92,50 @@
                 ok(dialog.wrapper.prev("div").is(".k-overlay"));
             });
 
+            test("closing a modal window moves overlay below previous window", function() {
+                
+                function resumeTest() {
+                    window.setTimeout(function(){
+                        start();
+                        ok(+modalWindow1.wrapper.css("zIndex") > +modalWindow1.wrapper.siblings(".k-overlay").css("zIndex"));
+                    }, 10);
+                }
+
+                stop();
+
+	            var modalWindow2 = $("#modalWindow2").kendoWindow({
+		            modal: true,
+		            visible: false,
+                    animation: {
+                        open: {
+                            duration: 0
+                        },
+                        close: {
+                            duration: 0
+                        }
+                    },
+                    close: resumeTest
+	            }).data("kendoWindow");
+
+	            var modalWindow1 = $("#modalWindow1").kendoWindow({
+		            modal: true,
+                    animation: {
+                        open: {
+                            duration: 0
+                        },
+                        close: {
+                            duration: 0
+                        }
+                    },
+		            visible: false
+	            }).data("kendoWindow");
+
+                modalWindow1.open();
+                modalWindow2.open();
+
+                modalWindow2.close();
+            });
+
             test("refresh() of local URLs requests data via AJAX", function() {
                 var dialog = createWindow(),
                     hasRequestedData = false;
@@ -344,5 +388,14 @@
         <ol id="qunit-tests"></ol>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
+
+	    <div id="modalWindow1">
+		    modalWindow1
+	    </div> 
+
+	    <div id="modalWindow2">
+		    modalWindow2
+	    </div> 
+
     </body>
 </html>
