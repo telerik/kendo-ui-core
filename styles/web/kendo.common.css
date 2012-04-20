@@ -880,7 +880,8 @@ div.k-window-content
 
 /* Grid */
 
-.k-grid
+.k-grid,
+.k-listview
 {
     position: relative;
     zoom: 1;
