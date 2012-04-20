@@ -14,7 +14,7 @@
 
    <script type="text/javascript">
 
-       var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised;
+       var isRaised, isExpandRaised, isCollapseRaised, isSelectRaised, isActivateRaised;
 
         function getRootItem(index) {
 			return $('#PanelBar1').find('.k-header').parent().eq(index)
@@ -28,6 +28,10 @@
         function Expand(sender, args) {
             isExpandRaised = true;
         }
+
+       function Activate(sender, args) {
+           isActivateRaised = true;
+       }
 
         function Collapse(sender, args) {
             isCollapseRaised = true;
@@ -152,7 +156,7 @@
 
     <script type="text/javascript">
 
-        $("#PanelBar1").kendoPanelBar({ animation: false, expand: Expand, collapse: Collapse, select: Select });
+        $("#PanelBar1").kendoPanelBar({ animation: false, expand: Expand, collapse: Collapse, select: Select, activate: Activate });
 
         test('trigger input select should not bubble', function() {
 
@@ -200,6 +204,22 @@
             item.find('> .k-link').trigger('click');
 
             ok(isExpandRaised);
+        });
+
+        asyncTest('expand should raise onActivate event after duration', function() {
+
+            var panel = getPanelBar();
+
+            isActivateRaised = false;
+
+            var item = getRootItem(4);
+
+            item.find('> .k-link').trigger('click');
+
+            setTimeout(function () {
+                ok(isActivateRaised);
+                start();
+            }, 210);
         });
 
         test('disable method should disable disabled item', function() {
