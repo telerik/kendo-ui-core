@@ -151,14 +151,21 @@
 
     <script type="text/javascript">
 
-        test('clicking second item should collapse other', function() {
+        test('clicking item should collapse other and fire collapse on it', function() {
 
-            var item = getRootItem(3);
-            var item2 = getRootItem(2);
+            var panelbar = getPanelBar(),
+                item = getRootItem(3),
+                item2 = getRootItem(2),
+                collapseItem = false;
+
+            panelbar.bind( "collapse", function(e) {
+                collapseItem = e.item;
+            });
 
             item2.find('> .k-link').trigger('click');
 
             equal(item.find('.k-group').css("display"), "none");
+            equal(collapseItem, item[0]);
         });
 
         test('clicking item twice should not collapse it', function() {
