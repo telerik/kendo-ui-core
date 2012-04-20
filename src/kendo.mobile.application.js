@@ -3,6 +3,7 @@
         mobile = kendo.mobile,
         history = kendo.history,
         support = kendo.support,
+        Loader = mobile.ui.Loader,
         roleSelector = kendo.roleSelector,
         attr = kendo.attr,
 
@@ -31,7 +32,6 @@
         linkRoles = "tab",
         viewRoles = "view splitview",
 
-
         ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
@@ -43,7 +43,6 @@
 
         WINDOW = $(window),
         HEAD = $("head"),
-        CAPTURE_EVENTS = ["touchstart", "touchend", "touchmove", "mousedown", "mousemove", "mouseup"],
         BACK = "#:back",
         proxy = $.proxy,
 
@@ -300,7 +299,7 @@
          * </script>
          */
         init: function(element, options) {
-            var that = this;
+            var that = this, loader;
 
             mobile.application = that; // global reference to current application
 
@@ -311,7 +310,7 @@
             $(function(){
                 that._setupPlatform();
                 that._attachHideBarHandlers();
-                that._loader();
+                loader = new Loader(element, { loading: that.options.loading });
                 that._setupAppLinks();
 
                 that.viewBuilder = new ViewBuilder({
@@ -319,16 +318,16 @@
                     transition: that.options.transition,
                     layout: that.options.layout,
                     application: that,
-
-                    loadStart: function() { that.showLoading(); },
-                    loadComplete: function() { that.hideLoading(); },
-                    viewShow: function() { that.transitioning = false;  }
+                    loadStart: function() { loader.show(); },
+                    loadComplete: function() { loader.hide(); },
+                    viewShow: function() { loader.transitionDone();  }
                 });
+
+                that.loader = loader;
 
                 that._attachMeta();
                 that._setupElementClass();
                 that._startHistory();
-                that._attachCapture();
             });
         },
 
@@ -356,7 +355,7 @@
             history.navigate(url, true);
 
             if (url !== BACK) {
-                this.transitioning = true;
+                this.loader.transition();
                 this.viewBuilder.showView(url, transition);
             }
         },
@@ -378,9 +377,7 @@
          * </script>
          */
         hideLoading: function() {
-            var that = this;
-            clearTimeout(that._loading);
-            that.loader.hide();
+            this.loader.hide();
         },
 
         /**
@@ -392,17 +389,7 @@
          * </script>
          */
         showLoading: function() {
-            var that = this;
-
-            clearTimeout(that._loading);
-
-            if (that.options.loading === false) {
-                return;
-            }
-
-            that._loading = setTimeout(function() {
-                that.loader.show();
-            }, 100);
+            this.loader.show();
         },
 
         view: function() {
@@ -559,21 +546,6 @@
             }
         },
 
-        _attachCapture: function() {
-            var that = this;
-            that.transitioning = false;
-
-            function capture(e) {
-                if (that.transitioning) {
-                    e.stopPropagation();
-                }
-            }
-
-            for (var i = 0; i < CAPTURE_EVENTS.length; i ++) {
-                that.element[0].addEventListener(CAPTURE_EVENTS[i], capture, true);
-            }
-        },
-
         _mouseup: function(e) {
             if (e.which > 1 || e.isDefaultPrevented()) {
                 return;
@@ -602,19 +574,6 @@
             }
 
             e.preventDefault();
-        },
-
-        _loader: function() {
-            var that = this,
-                text = that.options.loading;
-
-            if (text === undefined) {
-                text = "<h1>Loading...</h1>";
-            }
-
-            that.loader = $('<div class="km-loader"><span class="km-loading km-spin"></span>' + text + "</div>")
-                            .hide()
-                            .appendTo(that.element);
         }
     });
 
