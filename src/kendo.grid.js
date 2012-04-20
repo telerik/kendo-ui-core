@@ -40,6 +40,7 @@
         STRING = "string",
         DELETECONFIRM = "Are you sure you want to delete this record?",
         formatRegExp = /\}/ig,
+        indicatorWidth = 3,
         templateHashRegExp = /#/ig,
         COMMANDBUTTONTEMP = '<a class="k-button k-button-icontext #=className#" #=attr# href="\\#"><span class="#=iconClass# #=imageClass#"></span>#=text#</a>';
 
@@ -320,6 +321,8 @@
 
             that._editable();
 
+            that._resizable();
+
             if (that.options.autoBind) {
                 that.dataSource.fetch();
             }
@@ -406,6 +409,28 @@
             that.table = table.attr("cellspacing", 0);
 
             that._wrapper();
+        },
+
+        _resizable: function() {
+            var that = this,
+                left = 0,
+                th;
+
+            if (that.options.resizable) {
+                that.thead.find("th").each(function() {
+                    left += this.offsetWidth;
+
+                    th = $(this);
+                    $('<div class="k-resize-handle" />')
+                    .css({
+                        left: left - indicatorWidth,
+                        top:  0,
+                        width: indicatorWidth * 2
+                    })
+                    .appendTo(that.thead)
+                    .data("th", th);
+                });
+            }
         },
 
         cellIndex: function(td) {
