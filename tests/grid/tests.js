@@ -72,6 +72,10 @@ tests.push(
         title: "grid mvvm"
     },
     {
+        page: "grid/columnresizing.html",
+        title: "grid column resize"
+    },
+    {
         page: "grid/lint.html",
         title: "grid lint"
     }
