@@ -15,6 +15,8 @@
         <script src="../../src/kendo.mobile.scroller.js"></script>
         <script src="../../src/kendo.mobile.shim.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.splitview.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
         <script src="../../src/kendo.mobile.button.js"></script>
@@ -32,12 +34,20 @@
     </head>
     <body>
         <div data-role="splitview">
-            <div data-role="pane"> <a href="#foo" data-role="button">Foo</a> </div>
-            <div data-role="pane"> <a href="#bar" data-role="button">Bar</a> </div>
-        </div>
+            <div data-role="pane" data-transition="slide">
+                <div data-role="view">
+                    <a data-role="button" href="#bar">Bar</a>
+                </div>
+                <div data-role="view" id="bar">
+                    <a data-role="backbutton">Back</a>
+                </div>
+            </div>
 
-        <div data-role="view" id="foo">
-            <a data-role="backbutton">Back</a>
+            <div data-role="pane">
+                <div data-role="view">
+                    Main pane
+                </div>
+            </div>
         </div>
     </body>
 </html>

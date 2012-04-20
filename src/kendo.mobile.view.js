@@ -276,7 +276,7 @@
 
         _eachWidget: function(callback) {
             var widget;
-            this.element.find("[data-" + kendo.ns + "role]").each(function(){
+            this.element.find("[data-" + kendo.ns + "role]").each(function() {
                 widget = kendo.widgetInstance($(this), ui);
                 if (widget) {
                     callback(widget);
