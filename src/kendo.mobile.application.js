@@ -27,29 +27,13 @@
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
-        buttonRoles = "button backbutton detailbutton listview-link",
-        linkRoles = "tab",
-
         ORIENTATIONEVENT = window.orientationchange ? "orientationchange" : "resize",
         HIDEBAR = OS.device == "iphone" || OS.device == "ipod",
         BARCOMPENSATION = 60,
 
-        HREF = "href",
-        EXTERNAL = "external",
-        DUMMY_HREF = "#!",
-
         WINDOW = $(window),
         HEAD = $("head"),
-        BACK = "#:back",
         proxy = $.proxy;
-
-    function appLinkClick(e) {
-        var rel = $(e.currentTarget).data(kendo.ns + "rel");
-
-        if(rel != EXTERNAL) {
-            e.preventDefault();
-        }
-    }
 
     function isOrientationHorizontal() {
         return Math.abs(window.orientation) / 90;
@@ -303,7 +287,6 @@
                 that._setupPlatform();
                 that._attachHideBarHandlers();
                 that.pane = new Pane(element, that.options);
-                that._setupAppLinks();
                 that._setupElementClass();
                 that._attachMeta();
                 that._startHistory();
@@ -331,11 +314,7 @@
          * </script>
          */
         navigate: function(url, transition) {
-            history.navigate(url, true);
-
-            if (url !== BACK) {
-                this.pane.navigate(url, transition);
-            }
+            this.pane.navigate(url, transition);
         },
 
         /**
@@ -372,16 +351,6 @@
 
         view: function() {
             return this.pane.view();
-        },
-
-        _setupAppLinks: function() {
-            var that = this,
-                mouseup = proxy(that._mouseup, that);
-
-            this.element
-                .on(support.mousedown, roleSelector(linkRoles), mouseup)
-                .on(support.mouseup, roleSelector(buttonRoles), mouseup)
-                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick);
         },
 
         _setupPlatform: function() {
@@ -422,7 +391,7 @@
 
             historyEvents = {
                 change: function(e) {
-                    that.navigate(e.url);
+                    that.pane.navigate(e.url);
                 },
 
                 ready: function(e) {
@@ -436,6 +405,10 @@
                     that.pane.navigate(url);
                 }
             };
+
+            that.pane.bind("navigate", function(e) {
+                history.navigate(e.url, true);
+            });
 
             history.start($.extend(that.options, historyEvents));
         },
@@ -522,37 +495,7 @@
                 element.height(newHeight);
                 setTimeout(window.scrollTo, 0, 0, 1);
             }
-        },
-
-        _mouseup: function(e) {
-            if (e.which > 1 || e.isDefaultPrevented()) {
-                return;
-            }
-
-            var link = $(e.currentTarget),
-                transition = link.data(kendo.ns + "transition"),
-                rel = link.data(kendo.ns + "rel"),
-                href = link.attr(HREF);
-
-            if (rel === EXTERNAL) {
-                return;
-            }
-
-            if (href && href != DUMMY_HREF) {
-                // Prevent iOS address bar progress display for in app navigation
-                link.attr(HREF, DUMMY_HREF);
-                setTimeout(function() { link.attr(HREF, href); });
-
-                if (rel === "actionsheet") {
-                    $(href).data("kendoMobileActionSheet").openFor(link);
-                } else {
-                    this.navigate(href, transition);
-                }
-            }
-
-            e.preventDefault();
-        }
-    });
+        }    });
 
     kendo.mobile.Application = Application;
 })(jQuery);

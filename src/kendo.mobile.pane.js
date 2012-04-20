@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        support = kendo.support,
         mobile = kendo.mobile,
         roleSelector = kendo.roleSelector,
         ui = mobile.ui,
@@ -11,10 +12,29 @@
 
         BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
 
+        EXTERNAL = "external",
+        HREF = "href",
+        DUMMY_HREF = "#!",
+
+        NAVIGATE = "navigate",
         // ViewLoader events
         LOAD_START = "loadStart",
         LOAD_COMPLETE = "loadComplete",
-        VIEW_SHOW = "viewShow";
+        VIEW_SHOW = "viewShow",
+
+        BACK = "#:back",
+        // navigation element roles
+        buttonRoles = "button backbutton detailbutton listview-link",
+        linkRoles = "tab";
+
+
+    function appLinkClick(e) {
+        var rel = $(e.currentTarget).data(kendo.ns + "rel");
+
+        if(rel != EXTERNAL) {
+            e.preventDefault();
+        }
+    }
 
     /**
      * @name kendo.mobile.ui.Pane.Description
@@ -22,10 +42,10 @@
      */
     var Pane = Widget.extend(/** @lends kendo.mobile.ui.Pane.prototype */{
         /**
-        * @constructs
-        * @extends kendo.mobile.ui.Widget
-        * @param {DomElement} element DOM element
-        */
+         * @constructs
+         * @extends kendo.mobile.ui.Widget
+         * @param {DomElement} element DOM element
+         */
         init: function(element, options) {
             var that = this, loader;
 
@@ -35,19 +55,19 @@
 
             element.addClass("km-pane");
 
-            loader = new Loader(element, { loading: that.options.loading });
+            that.loader = new Loader(element, {
+                loading: that.options.loading
+            });
 
             that.viewBuilder = new ViewBuilder({
                 container: element,
                 transition: that.options.transition,
                 layout: that.options.layout,
-                loader: loader,
-                loadStart: function() { loader.show(); },
-                loadComplete: function() { loader.hide(); },
-                viewShow: function() { loader.transitionDone();  }
+                loader: that.loader
             });
 
-            that.loader = loader;
+            that.history = [];
+            that._setupAppLinks();
         },
 
         options: {
@@ -57,9 +77,25 @@
             loading: undefined
         },
 
+        events: [
+            NAVIGATE
+        ],
+
         navigate: function(url, transition) {
-            this.loader.transition();
-            this.viewBuilder.showView(url, transition);
+            var that = this,
+                history = that.history;
+
+            that.trigger(NAVIGATE, {url: url});
+
+            if (url === BACK) {
+                history.pop();
+                url = history[history.length - 1];
+            } else {
+                that.history.push(url);
+            }
+
+            that.loader.transition();
+            that.viewBuilder.showView(url, transition);
         },
 
         /**
@@ -78,6 +114,45 @@
 
         view: function() {
             return this.viewBuilder.view();
+        },
+
+        _setupAppLinks: function() {
+            var that = this,
+                mouseup = $.proxy(that._mouseup, that);
+
+            this.element
+                .on(support.mousedown, roleSelector(linkRoles), mouseup)
+                .on(support.mouseup, roleSelector(buttonRoles), mouseup)
+                .on("click", roleSelector(linkRoles + " " + buttonRoles), appLinkClick);
+        },
+
+        _mouseup: function(e) {
+            if (e.which > 1 || e.isDefaultPrevented()) {
+                return;
+            }
+
+            var link = $(e.currentTarget),
+            transition = link.data(kendo.ns + "transition"),
+            rel = link.data(kendo.ns + "rel"),
+            href = link.attr(HREF);
+
+            if (rel === EXTERNAL) {
+                return;
+            }
+
+            if (href && href != DUMMY_HREF) {
+                // Prevent iOS address bar progress display for in app navigation
+                link.attr(HREF, DUMMY_HREF);
+                setTimeout(function() { link.attr(HREF, href); });
+
+                if (rel === "actionsheet") {
+                    $(href).data("kendoMobileActionSheet").openFor(link);
+                } else {
+                    this.navigate(href, transition);
+                }
+            }
+
+            e.preventDefault();
         }
     });
 
@@ -98,7 +173,12 @@
 
             that.layouts = {};
             that._setupLayouts(that.container);
-            that.bind([LOAD_START, LOAD_COMPLETE, VIEW_SHOW], options);
+
+            if (that.loader) {
+                that.bind(LOAD_START, function() { that.loader.show(); })
+                that.bind(LOAD_COMPLETE, function() { that.loader.hide(); })
+                that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); })
+            }
         },
 
         view: function() {
