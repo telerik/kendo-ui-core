@@ -190,6 +190,7 @@
         EXPAND = "expand",
         SELECT = "select",
         CONTENT = "k-content",
+        ACTIVATE = "activate",
         COLLAPSE = "collapse",
         CONTENTURL = "contentUrl",
         MOUSEENTER = "mouseenter",
@@ -676,6 +677,49 @@
                  *
                  */
                 SELECT,
+
+                /**
+                 *
+                 * Triggered when an item of a PanelBar is activated.
+                 *
+                 * @name kendo.ui.PanelBar#activate
+                 * @event
+                 *
+                 * @param {Event} e
+                 *
+                 * @param {Element} e.item
+                 * The activated item of the PanelBar.
+                 *
+                 * @exampleTitle Attach activate event handler during initialization; detach via unbind()
+                 * @example
+                 * // event handler for activate
+                 * var onActivate = function(e) {
+                 *     // access the activated item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach activate event handler during initialization
+                 * var panelBar = $("#panelBar").kendoPanelBar({
+                 *     activate: onActivate
+                 * });
+                 *
+                 * // detach activate event handler via unbind()
+                 * panelBar.data("kendoPanelBar").unbind("activate", onActivate);
+                 *
+                 * @exampleTitle Attach activate event handler via bind(); detach via unbind()
+                 * @example
+                 * // event handler for activate
+                 * var onActivate = function(e) {
+                 *     // access the activated item via e.item (HTMLElement)
+                 * };
+                 *
+                 * // attach activate event handler via bind()
+                 * $("#panelBar").data("kendoPanelBar").bind("activate", onActivate);
+                 *
+                 * // detach activate event handler via unbind()
+                 * $("#panelBar").data("kendoPanelBar").unbind("activate", onActivate);
+                 *
+                 */
+                ACTIVATE,
 
                 /**
                  * Fires when AJAX request results in an error.
@@ -1396,6 +1440,10 @@
             if (visibility) {
                 animation = extend( hasCollapseAnimation ? collapse
                                     : extend({ reverse: true }, animation), { show: false, hide: true });
+            } else {
+                animation = extend( { complete: function (element) {
+                    that._triggerEvent(ACTIVATE, element.closest(ITEM));
+                } }, animation );
             }
 
             element
@@ -1404,20 +1452,30 @@
         },
 
         _collapseAllExpanded: function (item) {
-            var that = this;
+            var that = this, children, stopExpand = false;
 
             if (item.find("> ." + LINK).hasClass("k-header")) {
                 var groups = item.find(GROUPS).add(item.find(CONTENTS));
-                if (groups.is(VISIBLE) || groups.length === 0) {
-                    return true;
-                } else {
-                    var children = $(that.element).children();
+
+                if (groups.is(VISIBLE)) {
+                    stopExpand = true;
+                }
+
+                if (!(groups.is(VISIBLE) || groups.length === 0)) {
+                    children = $(that.element).children();
                     children.find(GROUPS).add(children.find(CONTENTS))
                             .filter(function () { return $(this).is(VISIBLE); })
                             .each(function (index, content) {
-                                that._toggleGroup($(content), true);
+                                content = $(content);
+
+                                stopExpand = that._triggerEvent(COLLAPSE, content.closest(ITEM));
+                                if (!stopExpand) {
+                                    that._toggleGroup(content, true);
+                                }
                             });
                 }
+
+                return stopExpand;
             }
         },
 
@@ -1439,6 +1497,7 @@
                 data: data,
 
                 error: function (xhr, status) {
+                    statusIcon.removeClass("k-loading");
                     if (that.trigger(ERROR, { xhr: xhr, status: status })) {
                         this.complete();
                     }
