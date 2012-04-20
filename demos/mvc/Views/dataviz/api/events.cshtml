@@ -36,12 +36,17 @@
                         categoryAxis: {
                             categories: [2005, 2006, 2007, 2008, 2009]
                         },
-                        seriesClick: onSeriesClick
+                        seriesClick: onSeriesClick,
+                        seriesHover: onSeriesHover
                     });
                 }
 
                 function onSeriesClick(e) {
                     kendoConsole.log(kendo.format("Series click :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
+                }
+
+                function onSeriesHover(e) {
+                    kendoConsole.log(kendo.format("Series hover :: {0} ({1}): {2}%", e.series.name, e.category, e.value));
                 }
 
                 $(document).ready(function() {
