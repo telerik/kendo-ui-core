@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../src/jquery.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/jquery/jquery-tmpl/master/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="../src/kendo.core.js"></script>
+    <script type="text/javascript" src="../src/kendo.fx.js"></script>
+    <script type="text/javascript" src="../src/kendo.panelbar.js"></script>
+    <style type="text/css">
+        html
+        {
+            font-size: 12px;
+        }
+    </style>
+    <link type="text/css" href="../styles/web/kendo.common.css" rel="stylesheet"/>
+    <link type="text/css" href="../styles/web/kendo.blueopal.less" rel="stylesheet/less"/>
+    <script type="text/javascript" src="../demos/mvc/content/shared/js/less.js"></script>
+</head>
+<body>
+<ul id="FormBar"></ul>
+<script id="rowTemplate" type="text/x-jquery-tmpl">
+    <div>
+        <table class="formTbl" cellpadding="0" cellspacing="0" style="width: 100%;table-layout: fixed;">
+         <colgroup>
+                <col width="10px" />
+                <col width="250px" />
+                <col width="" />
+                <col width="" />
+            </colgroup>
+            <tr>
+                    <th>
+                     &nbsp;
+                    </th>
+                    <th class="fieldcell captionCell">
+                     Change
+                    </th>
+                    <th class="fieldcell">
+                      Before
+                    </th>
+                    <th class="fieldcell">
+                      After
+                    </th>
+                </tr>
+            <tbody id="customFormContainer">
+
+            {{each(i,field) HistoryList}}
+                <tr>
+                    <td>&nbsp;</td>
+                    <td class="fieldcell captionCell">
+                      ${field.Field}
+                    </td>
+                    <td class="fieldcell">
+                      {{html field.OValue}}
+                    </td>
+                    <td class="fieldcell">
+                      {{html field.NValue}}
+                    </td>
+                </tr>
+             {{/each}}
+        </tbody>
+        </table>
+    </div>
+</script>
+<script type="text/javascript">
+    var startupObject = { "Name": "User 1", "Date": "12/12/12", "Time":"01:45 CDT",
+                          "HistoryList": [
+                                            { "Field": "Activity Description Changed",
+                                              "OValue" : "this is a change",
+                                              "NValue" : "this is a <span class='invalid'>file</span> change"
+                                            },
+                                            { "Field": "Custom Form Added",
+                                              "OValue" : "",
+                                              "NValue" : "document type 20"
+                                            } ,
+                                            { "Field": "Document Review complete",
+                                              "OValue" : "Review in progress",
+                                              "NValue" : ""
+                                            }
+                                       ],
+                           "ItemId": 1018391,
+                           "Version": 1
+                        },
+                        list = [];
+
+    list.push(startupObject);
+    list.push(startupObject);
+    list.push(startupObject);
+
+    $(document).ready(function () {
+
+        var formBar = $("#FormBar").kendoPanelBar({
+                    dataSource: [{
+                        text: "test",
+                        items: [{
+                            text: "Test 1",
+                            expanded: true,
+                            items: [{
+                                text: "Test 2"
+                            }]
+                        },
+                        {
+                            text: "Test 2"
+                        }],
+                        expanded: true
+                    },
+                    {
+                        text: "test",
+                        content: "Test",
+                        expanded: false
+                    }]
+                }).data("kendoPanelBar");
+        for (var i = 0; i < list.length; i++) {
+            formBar.append({ text: "test", content: "Test", expanded: true });
+            formBar.append({
+                text: list[i].Name + ", " + list[i].Date + " " + list[i].Time,
+                content: $("#rowTemplate").tmpl(list[i]).html()
+            });
+        }
+    });
+</script>
+</body>
+</html>
