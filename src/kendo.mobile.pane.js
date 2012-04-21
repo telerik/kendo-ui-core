@@ -59,7 +59,7 @@
                 loading: that.options.loading
             });
 
-            that.viewBuilder = new ViewBuilder({
+            that.viewEngine = new ViewEngine({
                 container: element,
                 transition: that.options.transition,
                 layout: that.options.layout,
@@ -95,7 +95,7 @@
             }
 
             that.loader.transition();
-            that.viewBuilder.showView(url, transition);
+            that.viewEngine.showView(url, transition);
         },
 
         /**
@@ -113,7 +113,7 @@
         },
 
         view: function() {
-            return this.viewBuilder.view();
+            return this.viewEngine.view();
         },
 
         _setupAppLinks: function() {
@@ -156,7 +156,7 @@
         }
     });
 
-    var ViewBuilder = kendo.Observable.extend({
+    var ViewEngine = kendo.Observable.extend({
         init: function(options) {
             var that = this,
                 views;
@@ -314,6 +314,6 @@
         }
     });
 
-    kendo.mobile.ViewBuilder = ViewBuilder;
+    kendo.mobile.ViewEngine = ViewEngine;
     ui.plugin(Pane);
 })(jQuery);
