@@ -2093,10 +2093,13 @@ div.k-treeview
 .k-textbox
 {
     outline: 0;
-    height: 1.66em;
-    line-height: 1.66em;
-    padding: 2px 0;
-    text-indent: .3em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 2.12em;
+    line-height: 2.12em;
+    padding: 2px .3em;
+    width: 12.4em;
 }
 
 *+html .k-textbox
