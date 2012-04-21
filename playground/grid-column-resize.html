@@ -42,7 +42,9 @@
                 $("#grid").kendoGrid({
                     dataSource: dataSource,
                     pageable: true,
-                    sortable: true
+                    sortable: true,
+                    toolbar: ["create"],
+                    scrollable: false
                 });
 
                 var left = 0;
