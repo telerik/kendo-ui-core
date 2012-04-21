@@ -5,6 +5,11 @@ tests.push(
     },
     {
         page: "../mobile/view/layout.html",
-        title: "mobile listview layout"
+        title: "mobile view layout"
+    },
+    {
+        page: "../mobile/view/engine.html",
+        title: "mobile view engine"
     }
+
 );

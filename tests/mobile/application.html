@@ -70,14 +70,6 @@
                 equal(location.hash, "#../../test1");
             });
 
-            test("Overrides default layout if none specified", function() {
-                setup('<div data-role="view" id="page1" data-layout="">Page 1</div> \
-                       <div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div> \
-                      ', { layout: "foo" });
-
-                equal(application.element.find(".km-footer").text(), "", "Layout footer is present");
-            });
-
             test("Applies view title attribute contents to layout view title", function() {
                 setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
@@ -197,36 +189,6 @@
                 drag.trigger("end", drag);
             });
 
-            test("View notifies widget on init", 1, function(){
-                var Foo = kendo.mobile.ui.Widget.extend({
-                    options: {
-                        name: "Foo"
-                    },
-                    viewInit: function() {
-                        ok(true);
-                    }
-                });
-
-                kendo.mobile.ui.plugin(Foo);
-
-                setup('<div data-role="view"><i data-role="foo" /></div>');
-            });
-
-            test("View notifies widget on show", 1, function(){
-                var Foo = kendo.mobile.ui.Widget.extend({
-                    options: {
-                        name: "Foo"
-                    },
-                    viewShow: function() {
-                        ok(true);
-                    }
-                });
-
-                kendo.mobile.ui.plugin(Foo);
-
-                setup('<div data-role="view"><i data-role="foo" /></div>');
-            });
-
             function success() {
                 ok(true);
             }
@@ -263,31 +225,6 @@
                 equal(location.hash, "#../../test1");
                 equal(application.view().id, "../../test1");
                 equal(application.view().content.find(".km-scroll-container").html(), "Page 2");
-            });
-
-            test("View gets VM from data-model attr", function(){
-                window.foo = {
-                    id: 1,
-                    bar: {
-                        baz: "baz"
-                    }
-                };
-
-                setup('<div data-role="view" data-model="foo.bar"></div>');
-
-                equal(application.view().model, window.foo.bar);
-            });
-
-            test("View parses data-model value if JSON", function() {
-                setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
-                equal(application.view().model.bar, 1);
-            });
-
-            test("View call kendo.bind if data-model", function() {
-                stub(kendo, { bind: kendo.bind });
-                setup('<div data-role="view" data-model=' + '\'{"bar":1}\'' + '"></div>');
-
-                equal(kendo.calls("bind"), 1);
             });
         </script>
     </body>

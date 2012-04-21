@@ -2,24 +2,24 @@
 <html>
     <head>
         <title>kendo.mobile.ViewEngine Tests</title>
-        <script src="../../src/jquery.js"></script>
-        <script src="../qunit/qunit/qunit.js"></script>
-        <script src="../qunit-runner.js"></script>
-        <script src="../../src/kendo.core.js"></script>
-        <script src="../../src/kendo.data.js"></script>
-        <script src="../../src/kendo.binder.js"></script>
-        <script src="../../src/kendo.fx.js"></script>
-        <script src="../../src/kendo.draganddrop.js"></script>
-        <script src="../../src/kendo.history.js"></script>
-        <script src="../../src/kendo.mobile.scroller.js"></script>
-        <script src="../../src/kendo.mobile.view.js"></script>
-        <script src="../../src/kendo.mobile.pane.js"></script>
-        <script src="../../src/kendo.mobile.splitview.js"></script>
-        <script src="../../src/kendo.mobile.pane.js"></script>
-        <script src="../../src/kendo.mobile.loader.js"></script>
-        <script src="../../src/kendo.mobile.application.js"></script>
-        <script src="../jquery.mockjax.js"></script>
-        <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
+        <script src="../../../src/jquery.js"></script>
+        <script src="../../qunit/qunit/qunit.js"></script>
+        <script src="../../qunit-runner.js"></script>
+        <script src="../../../src/kendo.core.js"></script>
+        <script src="../../../src/kendo.data.js"></script>
+        <script src="../../../src/kendo.binder.js"></script>
+        <script src="../../../src/kendo.fx.js"></script>
+        <script src="../../../src/kendo.draganddrop.js"></script>
+        <script src="../../../src/kendo.history.js"></script>
+        <script src="../../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../../src/kendo.mobile.view.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.splitview.js"></script>
+        <script src="../../../src/kendo.mobile.pane.js"></script>
+        <script src="../../../src/kendo.mobile.loader.js"></script>
+        <script src="../../../src/kendo.mobile.application.js"></script>
+        <script src="../../jquery.mockjax.js"></script>
+        <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
     </head>
     <body>
         <h1 id="qunit-header">kendo.mobile.ViewEngine Tests</h1>
@@ -46,6 +46,10 @@
                 ok(root.find(selector).data("kendoView"));
             }
 
+            function success() {
+                ok(true);
+            }
+
             ////////////////////////////////////////////////////////////////////
             module("view engine view showing", {
                 setup: function() {
@@ -62,6 +66,30 @@
             test("hides child views", 2, function() {
                 hidden("#foo");
                 hidden("#bar");
+            });
+
+            test("shows given view", 2, function() {
+                viewEngine.bind("viewShow", function() {
+                    visible("#foo");
+                    hidden("#bar");
+                });
+
+                viewEngine.showView("#foo");
+            });
+
+            test("shown view triggers show event", 1, function() {
+                root.html('<div data-role="view" data-show="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+                viewEngine = new kendo.mobile.ViewEngine({ container: root });
+
+                viewEngine.showView("#foo");
+            });
+
+            test("hidden view triggers hide event", 1, function() {
+                root.html('<div data-role="view" data-hide="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+                viewEngine = new kendo.mobile.ViewEngine({ container: root });
+
+                viewEngine.showView("#foo");
+                viewEngine.showView("#bar");
             });
 
             asyncTest("Shows remote view", 2, function() {
@@ -162,15 +190,6 @@
                 viewEngine.showView("");
             });
 
-            test("shows given view", 2, function() {
-                viewEngine.bind("viewShow", function() {
-                    visible("#foo");
-                    hidden("#bar");
-                });
-
-                viewEngine.showView("#foo");
-            });
-
             test("parses url params and provides them to the view", 1, function() {
                 viewEngine.bind("viewShow", function(e) {
                     equal(e.view.params["foo"], "bar");
@@ -201,6 +220,7 @@
             module("view engine layout management", {
                 setup: function() {
                     root.html('<div data-role="view" data-layout="bar" id="foo">Foo</div>' +
+                    '<div data-role="view" data-layout="bar" id="dor">Dor</div>' +
                     '<div data-role="layout" data-id="bar"><div data-role="header" id="layoutHeader">Foo</div>' +
                     '<div data-role="footer" id="layoutFooter">Foo</div></div>').show();
 
@@ -220,12 +240,36 @@
                 viewEngine.showView("");
             });
 
+            test("empty string as a layout means no layout", function() {
+                root.html('<div data-role="view" id="page1" data-layout="">Page 1</div> ' +
+                      '<div data-role="layout" data-id="foo"><div data-role="footer">footer</div></div>'
+                  ).show();
+
+                  viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "foo" });
+
+                viewEngine.bind("viewShow", function(e) {
+                    equal(e.view.layout, "");
+                });
+
+                viewEngine.showView("");
+            });
+
+            test("preserves layout between views", 2, function() {
+                viewEngine.showView("");
+                viewEngine.bind("viewShow", function(e) {
+                    ok(e.view.element.find("#layoutHeader")[0]);
+                    ok(e.view.element.find("#layoutFooter")[0]);
+                });
+                viewEngine.showView("#dor");
+            });
+
             ////////////////////////////////////////////////////////////////////
             module("view engine default layout", {
                 setup: function() {
                     root.html('<div data-role="view" id="foo">Foo</div>' +
-                    '<div data-role="layout" data-id="bar"><div data-role="header" id="layoutHeader">Foo</div>' +
-                    '<div data-role="footer" id="layoutFooter">Foo</div></div>').show();
+                    '<div data-role="view" data-layout="baz" id="dor">dor</div>' +
+                    '<div data-role="layout" data-id="bar" />' +
+                    '<div data-role="layout" data-id="baz" />').show();
 
                     viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "bar" });
                 },
@@ -241,6 +285,14 @@
                 });
 
                 viewEngine.showView("");
+            });
+
+            test("respects view layout data attribute", 1, function() {
+                viewEngine.bind("viewShow", function(e) {
+                    equal(e.view.layout, viewEngine.layouts["baz"]);
+                });
+
+                viewEngine.showView("dor");
             });
 
             test("Uses platform specific layouts", 1, function() {
