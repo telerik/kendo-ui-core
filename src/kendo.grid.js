@@ -277,6 +277,14 @@
         }
     };
 
+    function heightAboveHeader(context) {
+        var top = 0;
+        $('> .k-grouping-header, > .k-grid-toolbar', context).each(function () {
+            top += this.offsetHeight;
+        });
+        return top;
+    }
+
    var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
@@ -399,9 +407,13 @@
         _resizable: function() {
             var that = this,
                 left = 0,
+                options = that.options,
                 th;
 
-            if (that.options.resizable) {
+            if (options.resizable) {
+
+                that.thead.find(".k-resize-handle").remove();
+
                 that.thead.find("th").each(function() {
                     left += this.offsetWidth;
 
@@ -409,11 +421,15 @@
                     $('<div class="k-resize-handle" />')
                     .css({
                         left: left - indicatorWidth,
-                        top:  0,
+                        top: options.scrollable ? 0 : heightAboveHeader(that.wrapper),
                         width: indicatorWidth * 2
                     })
                     .appendTo(that.thead)
                     .data("th", th);
+                });
+
+                that.thead.kendoResizable({
+                    handle: ".k-resize-handle"
                 });
             }
         },
