@@ -1,7 +1,7 @@
 <!DOCTYPE dom>
 <html>
     <head>
-        <title>kendo.mobile.ViewBuilder Tests</title>
+        <title>kendo.mobile.ViewEngine Tests</title>
         <script src="../../src/jquery.js"></script>
         <script src="../qunit/qunit/qunit.js"></script>
         <script src="../qunit-runner.js"></script>
@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
     </head>
     <body>
-        <h1 id="qunit-header">kendo.mobile.ViewBuilder Tests</h1>
+        <h1 id="qunit-header">kendo.mobile.ViewEngine Tests</h1>
         <h2 id="qunit-banner"></h2>
         <div id="qunit-testrunner-toolbar"></div>
         <h2 id="qunit-userAgent"></h2>
@@ -31,7 +31,7 @@
         <ul id="log"></ul>
 
         <script>
-            var viewBuilder,
+            var viewEngine,
                 root = $("#qunit-fixture");
 
             function hidden(selector) {
@@ -47,10 +47,10 @@
             }
 
             ////////////////////////////////////////////////////////////////////
-            module("view builder view showing", {
+            module("view engine view showing", {
                 setup: function() {
                     root.html('<div data-role="view" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
-                    viewBuilder = new kendo.mobile.ViewBuilder({
+                    viewEngine = new kendo.mobile.ViewEngine({
                         container: root
                     });
                 },
@@ -70,13 +70,13 @@
                     responseText: '<body><div data-role="view" id="page2">Page 2</div></body>'
                 });
 
-                viewBuilder.bind("viewShow", function(e) {
+                viewEngine.bind("viewShow", function(e) {
                     start();
                     equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
                     equal(e.view.element[0], root.find("#page2")[0]);
                 });
 
-                viewBuilder.showView("page2.html");
+                viewEngine.showView("page2.html");
             });
 
             asyncTest("Reuses remote view once loaded", 1, function() {
@@ -91,17 +91,17 @@
                         equal(view, e.view);
                     },
                     callback2 = function(e) {
-                        viewBuilder.one("viewShow", callback3);
-                        viewBuilder.showView("page2.html");
+                        viewEngine.one("viewShow", callback3);
+                        viewEngine.showView("page2.html");
                     },
                     callback1 = function(e) {
                         view = e.view;
-                        viewBuilder.one("viewShow", callback2);
-                        viewBuilder.showView("#foo");
+                        viewEngine.one("viewShow", callback2);
+                        viewEngine.showView("#foo");
                     };
 
-                viewBuilder.one("viewShow", callback1);
-                viewBuilder.showView("page2.html");
+                viewEngine.one("viewShow", callback1);
+                viewEngine.showView("page2.html");
             });
 
             asyncTest("Loads multiple remote views", 2, function() {
@@ -110,13 +110,13 @@
                     responseText: '<body><div data-role="view" id="page2">Page 2</div></body><div data-role="view" id="page3">Page 3</div></body>'
                 });
 
-                viewBuilder.bind("viewShow", function(e) {
+                viewEngine.bind("viewShow", function(e) {
                     start();
                     equal(root.has("#page3").length, 1, "Secondary remote view is inserted in the application DOM element");
                     equal(e.view.element[0], root.find("#page2")[0]);
                 });
 
-                viewBuilder.showView("page2.html");
+                viewEngine.showView("page2.html");
             });
 
             asyncTest("Deals with various newline characters when loading remote view", 2, function() {
@@ -125,13 +125,13 @@
                     responseText: '<html><head></head><body><div id="page2" data-role="view">View\n\u000a\u000a\u000d\u2028\u2029</div></body>\r\n</html>'
                 });
 
-                viewBuilder.bind("viewShow", function(e) {
+                viewEngine.bind("viewShow", function(e) {
                     start();
                     equal(root.has("#page2").length, 1, "Remote view is inserted in the application DOM element");
                     equal(e.view.element[0], root.find("#page2")[0]);
                 });
 
-                viewBuilder.showView("page2.html");
+                viewEngine.showView("page2.html");
             });
 
             asyncTest("remote asset loading injects scripts, styles and layouts", 3, function() {
@@ -143,68 +143,68 @@
                         'ipt><div data-role="layout" data-id="remoteLayout" /></body>'
                 });
 
-                viewBuilder.bind("viewShow", function(e) {
+                viewEngine.bind("viewShow", function(e) {
                     start();
                     equal(root.find("#remoteStyle").length, 1, "Style is injected");
-                    ok(viewBuilder.layouts["remoteLayout"], "Layout is injected");
+                    ok(viewEngine.layouts["remoteLayout"], "Layout is injected");
                     ok(window.scriptInjected,  "Script is injected");
                 });
 
-                viewBuilder.showView("page2.html");
+                viewEngine.showView("page2.html");
             });
 
             test("shows default view if no url passed", 2, function() {
-                viewBuilder.bind("viewShow", function() {
+                viewEngine.bind("viewShow", function() {
                     visible("#foo");
                     hidden("#bar");
                 });
 
-                viewBuilder.showView("");
+                viewEngine.showView("");
             });
 
             test("shows given view", 2, function() {
-                viewBuilder.bind("viewShow", function() {
+                viewEngine.bind("viewShow", function() {
                     visible("#foo");
                     hidden("#bar");
                 });
 
-                viewBuilder.showView("#foo");
+                viewEngine.showView("#foo");
             });
 
             test("parses url params and provides them to the view", 1, function() {
-                viewBuilder.bind("viewShow", function(e) {
+                viewEngine.bind("viewShow", function(e) {
                     equal(e.view.params["foo"], "bar");
                 });
 
-                viewBuilder.showView("#foo?foo=bar");
+                viewEngine.showView("#foo?foo=bar");
             });
 
             asyncTest("hides given view", 4, function() {
-                viewBuilder.bind("viewShow", function() {
+                viewEngine.bind("viewShow", function() {
                     visible("#foo");
                     hidden("#bar");
-                    viewBuilder.unbind("viewShow");
+                    viewEngine.unbind("viewShow");
 
-                    viewBuilder.bind("viewShow", function() {
+                    viewEngine.bind("viewShow", function() {
                         start();
                         visible("#bar");
                         hidden("#foo");
                     });
 
-                    viewBuilder.showView("#bar");
+                    viewEngine.showView("#bar");
                 });
 
-                viewBuilder.showView("#foo");
+                viewEngine.showView("#foo");
             });
 
             ////////////////////////////////////////////////////////////////////
-            module("view builder layout management", {
+            module("view engine layout management", {
                 setup: function() {
                     root.html('<div data-role="view" data-layout="bar" id="foo">Foo</div>' +
                     '<div data-role="layout" data-id="bar"><div data-role="header" id="layoutHeader">Foo</div>' +
                     '<div data-role="footer" id="layoutFooter">Foo</div></div>').show();
 
-                    viewBuilder = new kendo.mobile.ViewBuilder({ container: root });
+                    viewEngine = new kendo.mobile.ViewEngine({ container: root });
                 },
 
                 teardown: function() {
@@ -213,21 +213,21 @@
             });
 
             test("applies layout to view", 1, function() {
-                viewBuilder.bind("viewShow", function(e) {
-                    equal(e.view.layout, viewBuilder.layouts["bar"]);
+                viewEngine.bind("viewShow", function(e) {
+                    equal(e.view.layout, viewEngine.layouts["bar"]);
                 });
 
-                viewBuilder.showView("");
+                viewEngine.showView("");
             });
 
             ////////////////////////////////////////////////////////////////////
-            module("view builder default layout", {
+            module("view engine default layout", {
                 setup: function() {
                     root.html('<div data-role="view" id="foo">Foo</div>' +
                     '<div data-role="layout" data-id="bar"><div data-role="header" id="layoutHeader">Foo</div>' +
                     '<div data-role="footer" id="layoutFooter">Foo</div></div>').show();
 
-                    viewBuilder = new kendo.mobile.ViewBuilder({ container: root, layout: "bar" });
+                    viewEngine = new kendo.mobile.ViewEngine({ container: root, layout: "bar" });
                 },
 
                 teardown: function() {
@@ -236,11 +236,11 @@
             });
 
             test("applies layout to view", 1, function() {
-                viewBuilder.bind("viewShow", function(e) {
-                    equal(e.view.layout, viewBuilder.layouts["bar"]);
+                viewEngine.bind("viewShow", function(e) {
+                    equal(e.view.layout, viewEngine.layouts["bar"]);
                 });
 
-                viewBuilder.showView("");
+                viewEngine.showView("");
             });
 
             test("Uses platform specific layouts", 1, function() {
@@ -251,9 +251,9 @@
                 <div data-role="layout" data-platform="android" data-id="foo"><div data-role="footer">footer</div></div> \
                 ').show();
 
-                viewBuilder = new kendo.mobile.ViewBuilder({ container: root });
+                viewEngine = new kendo.mobile.ViewEngine({ container: root });
 
-                equal(viewBuilder.layouts["foo"].element.data("platform"), "ios");
+                equal(viewEngine.layouts["foo"].element.data("platform"), "ios");
             });
         </script>
     </body>
