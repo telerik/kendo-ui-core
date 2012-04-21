@@ -32,9 +32,14 @@
             var root = $('#qunit-fixture'),
                 app;
 
+            function setup(html) {
+                root.append(html).wrapInner("<div />");
+                location.hash = '';
+                app = new kendo.mobile.Application(root.children().first());
+            }
+
             function teardown() {
                 root.empty();
-                location.hash = '';
                 kendo.history.stop();
             }
 
@@ -48,8 +53,7 @@
 
             module('mobile SplitView as initial view', {
                 setup: function() {
-                    root.html('<div data-role="splitview" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
-                    app = new kendo.mobile.Application(root);
+                    setup('<div data-role="splitview" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>');
                 },
 
                 teardown: teardown
@@ -68,8 +72,7 @@
 
             module('mobile SplitView as secondary view', {
                 setup: function() {
-                    root.html('<div data-role="view" id="bar">Bar</div><div data-role="splitview" id="foo">Foo</div>');
-                    app = new kendo.mobile.Application(root);
+                    setup('<div data-role="view" id="bar">Bar</div><div data-role="splitview" id="foo">Foo</div>')
                 },
 
                 teardown: teardown
@@ -88,7 +91,7 @@
 
             module('mobile SplitView panes', {
                 setup: function() {
-                    root.html('<div data-role="splitview" id="foo"><div data-role="pane" id="foo-pane">Foo</div></div>');
+                    root.html('<div data-role="splitview" id="foo"><div data-role="pane" id="foo-pane"><div data-role="view" /></div></div>');
                     app = new kendo.mobile.Application(root);
                 },
 
@@ -97,6 +100,36 @@
 
             test("splitview initializes nested panes", 1, function(){
                 ok(root.find("#foo-pane").data("kendoMobilePane"));
+            });
+
+            module('navigation between panes', {
+                setup: function() {
+                    setup('<div data-role="splitview">' +
+                            '<div data-role="pane">' +
+                                '<div data-role="view">' +
+                                    '<a data-role="button" href="#bar" data-target="foo">Open Bar in main pane</a>' +
+                                    '<a data-role="button" href="#baz" data-target="_top">Open Bar in main pane</a>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div data-role="pane" id="foo"><div data-role="view" /><div data-role="view" id="bar" /></div>' +
+                            '</div>' +
+                           '<div data-role="view" id="baz" />'
+                                );
+                },
+
+                teardown: teardown
+            });
+
+            test("splitview navigates based on a target", 2, function(){
+                hidden("#bar");
+                root.find("[href='#bar']").trigger("mouseup");
+                visible("#bar");
+            });
+
+            test("splitview considers _top the application", 2, function(){
+                hidden("#baz");
+                root.find("[href='#baz']").trigger("mouseup");
+                visible("#baz");
             });
         </script>
     </body>

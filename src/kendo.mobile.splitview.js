@@ -22,8 +22,7 @@
             that._layout();
 
             that.element.children(kendo.roleSelector("pane")).each(function() {
-                kendo.initWidget(this, {}, kendo.mobile.ui);
-                $(this).data("kendoMobilePane").navigate("");
+                kendo.initWidget(this, {}, kendo.mobile.ui).navigate("");
             });
 
             that._init();
@@ -38,6 +37,12 @@
 
             that.transition = element.data(kendo.ns + "transition");
             $.extend(that, { header: [], footer: [], content: element });
+        },
+
+        showStart: function() {
+            var that = this;
+            that.element.css("display", "");
+            that.trigger("show", {view: that});
         },
 
         options: {
