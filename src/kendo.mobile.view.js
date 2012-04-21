@@ -556,6 +556,7 @@
             that._view = null;
 
             that.layouts = {};
+
             that._setupLayouts(that.container);
 
             if (that.loader) {
@@ -687,7 +688,7 @@
             var that = this,
                 platformAttr = kendo.ns + "platform";
 
-            element.find(roleSelector("layout")).each(function() {
+            element.children(roleSelector("layout")).each(function() {
                 var layout = $(this),
                     platform = layout.data(platformAttr);
 

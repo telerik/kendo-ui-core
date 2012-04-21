@@ -125,6 +125,8 @@
             var link = $(e.currentTarget),
             transition = link.data(kendo.ns + "transition"),
             rel = link.data(kendo.ns + "rel"),
+            target = link.data(kendo.ns + "target"),
+            pane = this;
             href = link.attr(HREF);
 
             if (rel === EXTERNAL) {
@@ -139,7 +141,14 @@
                 if (rel === "actionsheet") {
                     $(href).data("kendoMobileActionSheet").openFor(link);
                 } else {
-                    this.navigate(href, transition);
+                    if (target === "_top") {
+                        pane = mobile.application.pane;
+                    }
+                    else if (target) {
+                        pane = $("#" + target).data("kendoMobilePane");
+                    }
+
+                    pane.navigate(href, transition);
                 }
             }
 

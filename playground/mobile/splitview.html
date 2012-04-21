@@ -16,6 +16,7 @@
         <script src="../../src/kendo.mobile.shim.js"></script>
         <script src="../../src/kendo.mobile.view.js"></script>
         <script src="../../src/kendo.mobile.loader.js"></script>
+        <script src="../../src/kendo.mobile.navbar.js"></script>
         <script src="../../src/kendo.mobile.pane.js"></script>
         <script src="../../src/kendo.mobile.splitview.js"></script>
         <script src="../../src/kendo.mobile.application.js"></script>
@@ -34,17 +35,41 @@
     </head>
     <body>
         <div data-role="splitview">
-            <div data-role="pane" data-transition="slide">
-                <div data-role="view">
+            <div data-role="pane" data-transition="slide" data-layout="foo">
+                <div data-role="view" data-title="Level 1">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                            <a data-role="button" data-align="right" href="#bar">Bar</a>
+                        </div>
+                    </div>
+
                     <a data-role="button" href="#bar">Bar</a>
                 </div>
-                <div data-role="view" id="bar">
-                    <a data-role="backbutton">Back</a>
+
+                <div data-role="view" id="bar" data-title="Level 2">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <a data-role="backbutton" data-align="left">Back</a>
+                            <span data-role="view-title"></span>
+                        </div>
+                    </div>
+                    level 2
+                </div>
+
+                <div data-role="layout" data-id="foo">
                 </div>
             </div>
 
-            <div data-role="pane">
-                <div data-role="view">
+            <div data-role="pane" style="-webkit-box-flex: 4">
+                <div data-role="view" data-title="Main Pane">
+                    <div data-role="header">
+                        <div data-role="navbar">
+                            <span data-role="view-title"></span>
+                            <a data-role="button" data-align="right" href="#bar">Bar</a>
+                        </div>
+                    </div>
+
                     Main pane
                 </div>
             </div>
