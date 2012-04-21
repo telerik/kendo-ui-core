@@ -62,5 +62,13 @@ tests.push(
     {
         page: "mobile/tabstrip.html",
         title: "mobile tabstrip"
+    },
+    {
+        page: "mobile/view/view.html",
+        title: "mobile view"
+    },
+    {
+        page: "mobile/view/layout.html",
+        title: "mobile view layout"
     }
 );

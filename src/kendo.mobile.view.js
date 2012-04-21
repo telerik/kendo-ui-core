@@ -258,7 +258,7 @@
             that.header = element.find(roleSelector("header")).addClass("km-header");
             that.footer = element.find(roleSelector("footer")).addClass("km-footer");
 
-            if (!element.has(contentSelector)[0]) {
+            if (!element.children(contentSelector)[0]) {
               element.wrapInner("<div " + attr("role") + '="content"></div>');
             }
 
