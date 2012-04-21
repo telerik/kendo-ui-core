@@ -42,6 +42,10 @@
                 view.switchWith(null, '', {}, $.noop);
             }
 
+            function success() {
+                ok(true);
+            }
+
             module("mobile view");
 
             test("uses layout header and footer when shown", 2, function() {
@@ -58,6 +62,14 @@
 
                 equal(root.find('[data-role=header]').text(), 'Own Header');
                 equal(root.find('[data-role=footer]').text(), 'Own Footer');
+            });
+
+            test("Layout triggers init", 1, function() {
+                setup('<div data-role="view">', '</div><div data-role="layout" data-init="success" />');
+            });
+
+            test("Layout triggers show", 1, function() {
+                setup('<div data-role="view" data-layout="foo"></div>', '<div data-id="foo" data-role="layout" data-show="success" />');
             });
         </script>
     </body>
