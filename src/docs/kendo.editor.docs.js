@@ -197,21 +197,98 @@
          * var editor = $("#editor").data("kendoEditor");
          *
          * // set value
-         * editor.value(htmlString);
+         * editor.value("<p>new content</p>");
          *
          * // get value
          * var htmlValue = editor.value();
          */
-        value: function() { },
+        value: function (html) {},
 
         /**
-         * Focuses the Editor editable area.
+         * Focuses the editable area.
+         */
+        focus: function() {},
+
+        /**
+         * Serializes the current state of the editable area to the &lt;textarea&gt; element.
+         * This method should be called after modifying the editor content through the DOM.
+         */
+        update: function () {},
+
+        /**
+         * Gets the HTML encoded value of the editor.
+         */
+        encodedValue: function () {},
+
+        /**
+         * Creates a W3C-compatible <strong>Range</strong> object.
+         * @param {Document} document The document that the range is associated with. If ommited, the document of the editor editing area will be used.
+         * @returns {Range} The created <strong>Range</strong> object.
          * @example
          * var editor = $("#editor").data("kendoEditor");
          *
-         * editor.focus();
+         * var range = editor.createRange();
          */
-        focus: function() { }
+        createRange: function (document) {},
+
+        /**
+         * Gets a W3C-compatible <strong>Selection</strong> object form the editable area.
+         */
+        getSelection: function () {},
+
+        /**
+         * Gets a <strong>Range</strong> object form the editable area.
+         * @returns {Range} A W3C-compatible <strong>Range</strong> object that represents the currently selected text in the editor area.
+         * @example
+         * var editor = $("#editor").data("kendoEditor");
+         *
+         * var range = editor.getRange();
+         */
+        getRange: function () {},
+
+        /**
+         * Focuses the editable area and selects the range described by the range parameter.
+         * @param {Range} range The <strong>Range</strong> object that describes the new selection.
+         * @example
+         * var editor = $("#editor").data("kendoEditor"),
+         *     range = editor.createRange();
+         *
+         * range.selectNodeContents(editor.body);
+         *
+         * editor.selectRange(range);
+         */
+        selectRange: function (range) {},
+
+        /**
+         * Serializes the currently selected text to a XHTML string.
+         * @returns {String} The selectied text as valid XHTML.
+         */
+        selectedHtml: function () {},
+
+        /**
+         * Pastes HTML into the editable area.
+         * @param {String} html The HTML to be pasted.
+         * @example
+         * var editor = $("#editor").data("kendoEditor");
+         *
+         * editor.paste("<p>new content</p>");
+         */
+        paste: function (html) {},
+
+        /**
+         * Executes an editor command on the currently selected text.
+         * @param {String} name The name of the command to be executed.
+         * @param {String} params The parameters for the executed command.
+         * @example
+         * var editor = $("#editor").data("kendoEditor");
+         *
+         * editor.exec("bold");
+         *
+         * editor.exec("undo");
+         *
+         * editor.exec("foreColor", { value: "#ff0000" });
+         */
+        exec: function (name, params) {}
     }
 
 })();
