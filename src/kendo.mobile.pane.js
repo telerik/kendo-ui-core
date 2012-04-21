@@ -5,28 +5,19 @@
         roleSelector = kendo.roleSelector,
         ui = mobile.ui,
         Widget = ui.Widget,
+        ViewEngine = mobile.ViewEngine,
         Loader = mobile.ui.Loader,
-
-        viewRoles = "view splitview",
-        attr = kendo.attr,
-
-        BODY_REGEX = /<body[^>]*>(([\u000a\u000d\u2028\u2029]|.)*)<\/body>/i,
 
         EXTERNAL = "external",
         HREF = "href",
         DUMMY_HREF = "#!",
 
         NAVIGATE = "navigate",
-        // ViewLoader events
-        LOAD_START = "loadStart",
-        LOAD_COMPLETE = "loadComplete",
-        VIEW_SHOW = "viewShow",
 
         BACK = "#:back",
         // navigation element roles
         buttonRoles = "button backbutton detailbutton listview-link",
         linkRoles = "tab";
-
 
     function appLinkClick(e) {
         var rel = $(e.currentTarget).data(kendo.ns + "rel");
@@ -156,164 +147,5 @@
         }
     });
 
-    var ViewEngine = kendo.Observable.extend({
-        init: function(options) {
-            var that = this,
-                views;
-
-            kendo.Observable.fn.init.call(that);
-
-            $.extend(that, options);
-            that.sandbox = $("<div />");
-
-            views = that._hideViews(that.container);
-            that.rootView = views.first();
-            that._view = null;
-
-            that.layouts = {};
-            that._setupLayouts(that.container);
-
-            if (that.loader) {
-                that.bind(LOAD_START, function() { that.loader.show(); });
-                that.bind(LOAD_COMPLETE, function() { that.loader.hide(); });
-                that.bind(VIEW_SHOW, function() { that.loader.transitionDone(); });
-            }
-        },
-
-        view: function() {
-            return this._view;
-        },
-
-        showView: function(url, transition) {
-            var that = this,
-                container = that.container,
-                params = kendo.parseURL(url).params,
-                firstChar = url.charAt(0),
-                local = firstChar === "#",
-                remote = firstChar === "/",
-                view,
-                element;
-
-
-            if (!url) {
-                element = that.rootView;
-            } else {
-                element = container.children("[" + attr("url") + "='" + url + "']");
-
-                if (!element[0] && !remote) {
-                    element = container.children(local ? url : "#" + url);
-                }
-            }
-
-            view = element.data("kendoView");
-
-            if (element[0]) {
-                if (!view) {
-                    view = that._createView(element);
-                }
-
-                that._show(view, transition, params);
-            } else {
-                that._loadView(url, function(view) { that._show(view, transition, params); });
-            }
-        },
-
-        _createView: function(element) {
-            var that = this,
-                viewOptions,
-                layout = element.data(kendo.ns + "layout");
-
-            if (typeof layout === "undefined") {
-                layout = that.layout;
-            }
-
-            if (layout) {
-                layout = that.layouts[layout];
-            }
-
-            viewOptions = {
-                defaultTransition: that.transition,
-                loader: that.loader,
-                container: that.container,
-                layout: layout
-            };
-
-            return kendo.initWidget(element, viewOptions, kendo.mobile.ui);
-        },
-
-        _loadView: function(url, callback) {
-            var that = this;
-
-            if (that._xhr) {
-                that._xhr.abort();
-            }
-
-            that.trigger(LOAD_START);
-
-            that._xhr = $.get(url, function(html) {
-                            that.trigger(LOAD_COMPLETE);
-                            callback(that._createRemoteView(url, html));
-                        }, 'html')
-                        .fail(function() {
-                            that.trigger(LOAD_COMPLETE);
-                        });
-        },
-
-        _createRemoteView: function(url, html) {
-            var that = this,
-                sandbox = that.sandbox,
-                container = that.container,
-                views,
-                view;
-
-            if (BODY_REGEX.test(html)) {
-                html = RegExp.$1;
-            }
-
-            sandbox[0].innerHTML = html;
-
-            views = that._hideViews(sandbox);
-            view = views.first();
-
-            view.hide().attr(attr("url"), url);
-
-            that._setupLayouts(sandbox);
-
-            container.append(sandbox.find(roleSelector("layout") + ", script, style"))
-                .append(views);
-
-            return that._createView(view);
-        },
-
-        _show: function(view, transition, params) {
-            var that = this;
-            if (that._view !== view) {
-                view.switchWith(that._view, transition, params, function() {
-                    that._view = view;
-                    that.trigger(VIEW_SHOW, {view: view});
-                });
-            }
-        },
-
-        _hideViews: function(container) {
-            return container.children(roleSelector(viewRoles)).hide();
-        },
-
-        _setupLayouts: function(element) {
-            var that = this,
-                platformAttr = kendo.ns + "platform";
-
-            element.find(roleSelector("layout")).each(function() {
-                var layout = $(this),
-                    platform = layout.data(platformAttr);
-
-                if (platform === undefined || platform === mobile.application.os) {
-                    that.layouts[layout.data("id")] = kendo.initWidget(layout, {}, kendo.mobile.ui);
-                }
-            });
-        }
-    });
-
-    kendo.mobile.ViewEngine = ViewEngine;
     ui.plugin(Pane);
 })(jQuery);
