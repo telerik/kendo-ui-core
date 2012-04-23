@@ -3087,7 +3087,7 @@ var Clipboard = Class.extend({
             textRange.moveToElementText(clipboardNode);
             $(editor.body).unbind('paste');
             textRange.execCommand('Paste');
-            $(editor.body).bind('paste', arguments.callee);
+            $(editor.body).bind('paste', $.proxy(arguments.callee, this));
         } else {
             var clipboardRange = editor.createRange();
             clipboardRange.selectNodeContents(clipboardNode);
