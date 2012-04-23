@@ -206,7 +206,7 @@
         * @option {Boolean} [highlightFirst] <true> Controls whether the first item will be automatically highlighted.
         * _example
         * $("#autocomplete").kendoAutoComplete({
-        *     highLightFirst: false //no of the suggested items will be highlighted
+        *     highlightFirst: false //no of the suggested items will be highlighted
         * });
         * @option {Boolean} [suggest] <false> Controls whether the AutoComplete should automatically auto-type the rest of text.
         * _example
