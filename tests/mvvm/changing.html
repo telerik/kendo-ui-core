@@ -124,6 +124,23 @@
                 equal(dom.find("span").text(), "foo");
             });
 
+            test("changing value when value update mode is keyup does not reset the input value", 1, function() {
+                var viewModel = kendo.observable( {
+                    bar: "bar"
+                });
+
+                var dom = $('<div><input data-value-update="keyup" data-bind="value:bar"/><span data-bind="text:bar"/></div>');
+
+                kendo.bind(dom, viewModel);
+
+                viewModel.bind("get", function(e) {
+                    ok(true, "Should be called only for the span");
+                });
+
+                dom.find("input").val("foo")
+                    .trigger("keyup");
+            });
+
             test("select of multi select updates the viewModel", function() {
                 var viewModel = kendo.observable( {
                     foo: ["foo", "bar", "baz"],
