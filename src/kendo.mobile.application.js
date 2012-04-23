@@ -348,6 +348,10 @@
             this.pane.showLoading();
         },
 
+        /**
+         * Get a reference to the current view.
+         * @returns {View} the view instance.
+         */
         view: function() {
             return this.pane.view();
         },
