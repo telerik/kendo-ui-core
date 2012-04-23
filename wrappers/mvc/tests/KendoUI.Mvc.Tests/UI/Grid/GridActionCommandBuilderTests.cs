@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Fluent.Tests
+namespace KendoUI.Mvc.UI.Fluent.Tests
 {
     using System.Collections.Generic;
     using System.Web.Mvc;

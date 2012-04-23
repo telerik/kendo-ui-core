@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.Tests.Menu
+namespace KendoUI.Mvc.Tests.Menu
 {
     using Moq;
     using System;

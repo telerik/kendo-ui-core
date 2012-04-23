@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Tests.Grid
+namespace KendoUI.Mvc.UI.Tests.Grid
 {
     using System;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿#if MVC2 || MVC3
+#if MVC2 || MVC3
 namespace KendoUI.Mvc.UI.Html
 {
     using System;

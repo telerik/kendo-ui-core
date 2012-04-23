@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UnitTest.Menu
+namespace KendoUI.Mvc.UnitTest.Menu
 {
     using KendoUI.Mvc.UI;
     using KendoUI.Mvc.UI.Fluent;

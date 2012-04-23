@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System.Linq;
     using System.Web.Mvc;

@@ -1,4 +1,4 @@
-﻿using Xunit;
+using Xunit;
 using System;
 using KendoUI.Mvc.UI.Fluent;
 

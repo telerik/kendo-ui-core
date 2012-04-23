@@ -1,4 +1,4 @@
-﻿
+
 namespace KendoUI.Mvc.UI.Html.Tests
 {
     using System.Linq;

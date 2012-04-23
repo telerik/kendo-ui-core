@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.Tests.Effects
+namespace KendoUI.Mvc.Tests.Effects
 {
 
     using KendoUI.Mvc.UI;

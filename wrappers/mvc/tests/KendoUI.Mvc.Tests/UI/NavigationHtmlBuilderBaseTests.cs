@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Tests.UITests
+namespace KendoUI.Mvc.UI.Tests.UITests
 {
     using Moq;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿
+
 namespace KendoUI.Mvc.UI.Fluent
 {
     using KendoUI.Mvc.Infrastructure;

@@ -1,4 +1,4 @@
-﻿
+
 using System.Collections.Generic;
 using KendoUI.Mvc.Infrastructure;
 using KendoUI.Mvc.Extensions;

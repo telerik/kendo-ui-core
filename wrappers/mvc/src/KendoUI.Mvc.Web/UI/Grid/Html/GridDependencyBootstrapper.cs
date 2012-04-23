@@ -1,4 +1,4 @@
-﻿using KendoUI.Mvc.Infrastructure;
+using KendoUI.Mvc.Infrastructure;
 
 
 namespace KendoUI.Mvc.UI.Html

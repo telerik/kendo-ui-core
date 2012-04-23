@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.Tests.Data
+namespace KendoUI.Mvc.Tests.Data
 {
     using System;
     using System.Collections;

@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Html.Tests
+namespace KendoUI.Mvc.UI.Html.Tests
 {
     using System.Web.Mvc;
     using KendoUI.Mvc.UI.Tests.Upload;

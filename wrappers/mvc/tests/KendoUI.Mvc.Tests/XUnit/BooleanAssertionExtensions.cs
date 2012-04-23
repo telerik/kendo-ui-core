@@ -1,4 +1,4 @@
-﻿namespace Xunit
+namespace Xunit
 {
     /// <summary>
     /// Extensions which provide assertions to classes derived from <see cref="bool"/>.

@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.Web.Mvc;

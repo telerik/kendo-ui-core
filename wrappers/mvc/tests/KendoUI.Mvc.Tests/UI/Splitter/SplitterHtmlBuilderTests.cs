@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Html.Tests
+namespace KendoUI.Mvc.UI.Html.Tests
 {
     using KendoUI.Mvc.UI.Tests;
     using KendoUI.Mvc.UI.Tests.Extensions;

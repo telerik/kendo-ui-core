@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Tests.Chart
+namespace KendoUI.Mvc.UI.Tests.Chart
 {
     using System.Collections.Generic;
     using KendoUI.Mvc.UI;
