@@ -196,6 +196,27 @@ task("cdn", ["clean", "merge-scripts"], function() {
     });
 }, true);
 
+desc("Get changelog from GitHub");
+task("changelog", function() {
+    var GitHubApi = require("github");
+
+    var github = new GitHubApi({
+        version: "3.0.0"
+    });
+
+    github.authenticate({
+        type: "oauth",
+        token: "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb"
+    });
+
+    github.issues.repoIssues({
+        user: "telerik",
+        repo: "kendo"
+    }, function(err, res) {
+        console.log(JSON.stringify(res));
+    });
+});
+
 namespace("download-builder", function() {
     desc("Build staging download builder site");
     task("staging", ["merge-scripts"], function() {
