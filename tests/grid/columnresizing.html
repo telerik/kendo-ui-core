@@ -118,6 +118,23 @@
                 });
                 ok(grid.thead.data("kendoResizable"));
             });
+
+            test("column width is incremented when handler is moved to the right", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                }),
+                position = grid.thead.find(".k-resize-handle:first").position(),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = firstColumn[0].offsetWidth;
+
+                grid.thead.children(".k-resize-handle:first").trigger("mousedown");
+                $(document.documentElement).trigger({ type: "mousemove", pageX: position.left + initialWidth, pageY: position.top });
+                $(document.documentElement).trigger({ type: "mousemove", pageX: position.left + initialWidth + 10, pageY: position.top });
+                $(document.documentElement).trigger({ type: "mouseup" });
+                equal(firstColumn[0].offsetWidth, initialWidth + 10 - indicatorWidth);
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
