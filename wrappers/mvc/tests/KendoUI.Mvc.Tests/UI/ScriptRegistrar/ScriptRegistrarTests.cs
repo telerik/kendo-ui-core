@@ -3,14 +3,14 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Tests
+namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System;
     using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using Xunit;
 
     public class ScriptRegistrarTests

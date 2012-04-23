@@ -1,11 +1,11 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Grid
+﻿namespace KendoUI.Mvc.UI.Tests.Grid
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Data;
     using System.Linq;
     using Moq;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using Xunit;
 
     public class GridDataTableWrapperExtensionsTests

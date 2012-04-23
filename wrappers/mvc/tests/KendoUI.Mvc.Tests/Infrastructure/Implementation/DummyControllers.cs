@@ -3,7 +3,7 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
     using System;
     using System.Web.Mvc;
@@ -40,7 +40,7 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
     }
 }
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests.DummyNamespace
+namespace KendoUI.Mvc.Infrastructure.Implementation.Tests.DummyNamespace
 {
     using System;
     using System.Web.Mvc;
@@ -55,7 +55,7 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests.DummyNamespace
     }
 }
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test1
+namespace KendoUI.Mvc.Infrastructure.Implementation.Areas.Test1
 {
     using System;
     using System.Web.Mvc;
@@ -78,7 +78,7 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test1
     }
 }
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test2
+namespace KendoUI.Mvc.Infrastructure.Implementation.Areas.Test2
 {
     using System;
     using System.Web.Mvc;

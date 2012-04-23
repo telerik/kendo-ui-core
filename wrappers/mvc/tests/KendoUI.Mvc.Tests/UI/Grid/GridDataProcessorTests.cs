@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Grid
+﻿namespace KendoUI.Mvc.UI.Tests.Grid
 {
     using System;
     using System.Collections;
@@ -8,8 +8,8 @@
     using System.Web.Mvc;
     using Infrastructure.Implementation;
     using Moq;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI;
     using Xunit;
     using Mvc.Tests;
 

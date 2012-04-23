@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Chart
+﻿namespace KendoUI.Mvc.UI.Tests.Chart
 {
     using Moq;
     using System.IO;
     using System.Web.Routing;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class ChartSerializationTests

@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     public static class HtmlTextWriterExtensions
     {

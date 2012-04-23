@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     public interface IDatePicker : IInputComponent<DateTime>
     {

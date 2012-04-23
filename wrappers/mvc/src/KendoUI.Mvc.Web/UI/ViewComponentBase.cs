@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
@@ -13,9 +13,9 @@ namespace Telerik.Web.Mvc.UI
     using System.Web.Routing;
     using System.Web.Script.Serialization;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Resources;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Resources;
 
     /// <summary>
     /// View component base class.

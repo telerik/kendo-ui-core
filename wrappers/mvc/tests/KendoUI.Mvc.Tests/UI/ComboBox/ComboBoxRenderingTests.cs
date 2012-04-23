@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System.Collections.Generic;

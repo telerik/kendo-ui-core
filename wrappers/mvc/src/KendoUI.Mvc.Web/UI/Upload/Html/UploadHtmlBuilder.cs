@@ -5,7 +5,7 @@
 using System.Web.Mvc;
 using System.Collections.Generic;
 
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     /// <summary>
     /// An HTML Builder for the Upload component

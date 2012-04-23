@@ -3,10 +3,10 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation
+namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.Infrastructure.Implementation.Expressions;
+    using KendoUI.Mvc.Infrastructure.Implementation.Expressions;
     /// <summary>
 	/// The class enables implementation of custom filtering logic.
 	/// </summary>

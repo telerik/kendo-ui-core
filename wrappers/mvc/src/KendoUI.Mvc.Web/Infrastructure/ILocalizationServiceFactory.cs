@@ -5,7 +5,7 @@
 
 using System.Globalization;
 
-namespace Telerik.Web.Mvc.Infrastructure
+namespace KendoUI.Mvc.Infrastructure
 {
     public interface ILocalizationServiceFactory
     {

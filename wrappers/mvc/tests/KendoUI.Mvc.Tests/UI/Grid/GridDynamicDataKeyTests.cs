@@ -1,7 +1,7 @@
 #if MVC3
-namespace Telerik.Web.Mvc.UI.Tests 
+namespace KendoUI.Mvc.UI.Tests 
 {
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
     using Xunit;
 
     public class GridDynamicDataKeyTests

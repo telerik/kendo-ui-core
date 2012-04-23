@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     public class GridGroupDescriptorBuilder<T>
         where T : class

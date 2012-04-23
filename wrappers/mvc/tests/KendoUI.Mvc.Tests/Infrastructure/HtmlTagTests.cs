@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.Infrastructure.Tests
+﻿namespace KendoUI.Mvc.Infrastructure.Tests
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Web.Mvc;
     using Moq;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class HtmlTagTests

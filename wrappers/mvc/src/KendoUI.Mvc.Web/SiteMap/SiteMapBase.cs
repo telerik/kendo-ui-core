@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System.ComponentModel;
     using Infrastructure;
@@ -138,7 +138,7 @@ namespace Telerik.Web.Mvc
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Telerik.Web.Mvc.SiteMapBase"/> to <see cref="Telerik.Web.Mvc.SiteMapBuilder"/>.
+        /// Performs an implicit conversion from <see cref="KendoUI.Mvc.SiteMapBase"/> to <see cref="KendoUI.Mvc.SiteMapBuilder"/>.
         /// </summary>
         /// <param name="siteMap">The site map.</param>
         /// <returns>The result of the conversion.</returns>

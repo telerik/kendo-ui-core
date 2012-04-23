@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.UI.Slider
+﻿namespace KendoUI.Mvc.UI.Tests.UI.Slider
 {
     using Xunit;
     using System;
     using Moq;
     using System.IO;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.UI.Html;
 
     public class RangeSliderRenderingTests
     {

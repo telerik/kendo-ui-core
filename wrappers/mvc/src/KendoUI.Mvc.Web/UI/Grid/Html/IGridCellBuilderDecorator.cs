@@ -1,4 +1,4 @@
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     public interface IGridCellBuilderDecorator
     {

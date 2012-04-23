@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using System.Web.Routing;
     using Moq;
@@ -7,9 +7,9 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.UI;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
 
     public static class EditorTestHelper
     {

@@ -1,8 +1,8 @@
-﻿namespace Telerik.Web.Mvc.Configuration.Tests
+﻿namespace KendoUI.Mvc.Configuration.Tests
 {
     using Moq;
     using System;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using Xunit;
     
     public class SharedWebAssetTests : IDisposable

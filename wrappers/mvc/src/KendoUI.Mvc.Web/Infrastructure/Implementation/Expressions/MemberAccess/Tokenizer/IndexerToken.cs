@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Expressions
+namespace KendoUI.Mvc.Infrastructure.Implementation.Expressions
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
 
     internal class IndexerToken : IMemberAccessToken
     {

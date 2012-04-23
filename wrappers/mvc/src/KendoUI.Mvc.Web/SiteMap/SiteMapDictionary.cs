@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// Defines a class that is used to store <see cref="SiteMapBase"/> against a key.
@@ -121,7 +121,7 @@ namespace Telerik.Web.Mvc
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Telerik.Web.Mvc.SiteMapBase"/> with the specified key.
+        /// Gets or sets the <see cref="KendoUI.Mvc.SiteMapBase"/> with the specified key.
         /// </summary>
         /// <value></value>
         public SiteMapBase this[string key]

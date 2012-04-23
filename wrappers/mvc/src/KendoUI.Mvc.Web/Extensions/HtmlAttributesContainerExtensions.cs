@@ -3,10 +3,10 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     using System;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     public static class HtmlAttributesContainerExtensions
 	{

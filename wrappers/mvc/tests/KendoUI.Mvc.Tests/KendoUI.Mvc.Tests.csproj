@@ -8,8 +8,8 @@
     <ProjectGuid>{8B8CD7CD-01F9-430B-852A-3B11DE1C2854}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telerik.Web.Mvc.UI.Tests</RootNamespace>
-    <AssemblyName>Telerik.Web.Mvc.Tests</AssemblyName>
+    <RootNamespace>KendoUI.Mvc.UI.Tests</RootNamespace>
+    <AssemblyName>KendoUI.Mvc.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -519,7 +519,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\KendoUI.Mvc.Web\KendoUI.Mvc.Web.csproj">
       <Project>{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}</Project>
-      <Name>Telerik.Web.Mvc</Name>
+      <Name>KendoUI.Mvc.Web</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@
 // All other rights reserved.
 using System;
 
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     public class GridTemplateRowBuilder : IGridRowBuilder
     {

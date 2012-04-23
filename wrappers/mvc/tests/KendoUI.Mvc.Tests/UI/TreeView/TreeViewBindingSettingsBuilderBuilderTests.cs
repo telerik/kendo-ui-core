@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Fluent
+﻿namespace KendoUI.Mvc.UI.Fluent
 {
     using System.Web.Routing;
     using Xunit;

@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.Tests.Data
+﻿namespace KendoUI.Mvc.Tests.Data
 {
     using System;
     using System.Collections;
@@ -6,9 +6,9 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
     using UI.Tests;
     using Xunit;
 

@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
@@ -13,11 +13,11 @@ namespace Telerik.Web.Mvc.UI
     using System.Linq;
     using System.Linq.Expressions;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI.Fluent;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI.Html;
 
     /// <summary>
     /// Provides the factory methods for creating Telerik View Components.
@@ -562,7 +562,7 @@ namespace Telerik.Web.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a <see cref="Telerik.Web.Mvc.UI.Chart{T}"/>
+        /// Creates a <see cref="KendoUI.Mvc.UI.Chart{T}"/>
         /// </summary>
         /// <example>
         /// <code lang="CS">
@@ -578,7 +578,7 @@ namespace Telerik.Web.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a new <see cref="Telerik.Web.Mvc.UI.Chart{T}"/> bound to the specified data source.
+        /// Creates a new <see cref="KendoUI.Mvc.UI.Chart{T}"/> bound to the specified data source.
         /// </summary>
         /// <typeparam name="T">The type of the data item</typeparam>
         /// <param name="dataSource">The data source.</param>
@@ -599,7 +599,7 @@ namespace Telerik.Web.Mvc.UI
         }
 
         /// <summary>
-        /// Creates a new <see cref="Telerik.Web.Mvc.UI.Chart{T}"/> bound an item in ViewData.
+        /// Creates a new <see cref="KendoUI.Mvc.UI.Chart{T}"/> bound an item in ViewData.
         /// </summary>
         /// <typeparam name="T">Type of the data item</typeparam>
         /// <param name="dataSourceViewDataKey">The data source view data key.</param>
@@ -901,8 +901,8 @@ namespace Telerik.Web.Mvc.UI
             return DateTimePicker()
                     .Name(GetName(expression))
                     .Value((Nullable<DateTime>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Telerik.Web.Mvc.UI.DateTimePicker.defaultMinDate)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Telerik.Web.Mvc.UI.DateTimePicker.defaultMaxDate);
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? KendoUI.Mvc.UI.DateTimePicker.defaultMinDate)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? KendoUI.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -924,8 +924,8 @@ namespace Telerik.Web.Mvc.UI
             return DateTimePicker()
                     .Name(GetName(expression))
                     .Value(value == null ? default(DateTime) : (DateTime)value)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Telerik.Web.Mvc.UI.DateTimePicker.defaultMinDate)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Telerik.Web.Mvc.UI.DateTimePicker.defaultMaxDate);
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? KendoUI.Mvc.UI.DateTimePicker.defaultMinDate)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? KendoUI.Mvc.UI.DateTimePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -945,8 +945,8 @@ namespace Telerik.Web.Mvc.UI
             return DatePicker()
                     .Name(GetName(expression))
                     .Value((Nullable<DateTime>)ModelMetadata.FromLambdaExpression(expression, HtmlHelper.ViewData).Model)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Telerik.Web.Mvc.UI.DatePicker.defaultMinDate)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Telerik.Web.Mvc.UI.DatePicker.defaultMaxDate);
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? KendoUI.Mvc.UI.DatePicker.defaultMinDate)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? KendoUI.Mvc.UI.DatePicker.defaultMaxDate);
         }
 
         /// <summary>
@@ -968,8 +968,8 @@ namespace Telerik.Web.Mvc.UI
             return DatePicker()
                     .Name(GetName(expression))
                     .Value(value == null ? default(DateTime) : (DateTime)value)
-                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? Telerik.Web.Mvc.UI.DatePicker.defaultMinDate)
-                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? Telerik.Web.Mvc.UI.DatePicker.defaultMaxDate);
+                    .Min(GetRangeValidationParameter<DateTime>(validators, minimumValidator) ?? KendoUI.Mvc.UI.DatePicker.defaultMinDate)
+                    .Max(GetRangeValidationParameter<DateTime>(validators, maximumValidator) ?? KendoUI.Mvc.UI.DatePicker.defaultMaxDate);
         }
 
         /// <summary>

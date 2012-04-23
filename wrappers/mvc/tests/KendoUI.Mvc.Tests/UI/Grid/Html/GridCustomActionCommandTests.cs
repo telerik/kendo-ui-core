@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.UI
+﻿namespace KendoUI.Mvc.UI
 {
     using System.Collections.Generic;
     using System.Linq;
     using Moq;
-    using Telerik.Web.Mvc.UI.Html;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Html;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 
     public class GridCustomActionCommandTests

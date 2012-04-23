@@ -4,7 +4,7 @@
 // All other rights reserved.
 
 using System.ComponentModel;
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     /// <summary>
     /// Defines the fluent interface for configuring <see cref="ChartLine"/>.

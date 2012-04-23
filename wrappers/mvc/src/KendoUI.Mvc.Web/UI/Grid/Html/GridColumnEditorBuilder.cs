@@ -1,5 +1,5 @@
 ﻿#if MVC2 || MVC3
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     using System;
     using System.Linq.Expressions;

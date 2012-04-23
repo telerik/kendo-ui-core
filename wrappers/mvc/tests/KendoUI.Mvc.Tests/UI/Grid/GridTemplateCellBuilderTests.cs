@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Html.Tests
+﻿namespace KendoUI.Mvc.UI.Html.Tests
 {
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
     
     public class GridTemplateCellBuilderTests

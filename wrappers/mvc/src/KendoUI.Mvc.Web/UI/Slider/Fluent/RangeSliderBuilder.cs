@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.Linq;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>Defines the fluent interface for configuring the <see cref="RangeSlider"/>component.</summary>
     public class RangeSliderBuilder<T> : ViewComponentBuilderBase<RangeSlider<T>, RangeSliderBuilder<T>>, IHideObjectMembers where T : struct, IComparable

@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 #if MVC2 || MVC3
-namespace Telerik.Web.Mvc.UI.Html.Tests
+namespace KendoUI.Mvc.UI.Html.Tests
 {
     using System;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 
     public class GridEditorForCellBuilderTests : IDisposable

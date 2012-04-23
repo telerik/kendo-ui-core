@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.ComponentModel;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="WebAssetGroup"/>.
@@ -29,7 +29,7 @@ namespace Telerik.Web.Mvc.UI
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Telerik.Web.Mvc.UI.WebAssetGroupBuilder"/> to <see cref="Telerik.Web.Mvc.UI.WebAssetGroup"/>.
+        /// Performs an implicit conversion from <see cref="KendoUI.Mvc.UI.WebAssetGroupBuilder"/> to <see cref="KendoUI.Mvc.UI.WebAssetGroup"/>.
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <returns>The result of the conversion.</returns>

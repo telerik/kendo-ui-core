@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Globalization;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
 
     public static class AnimationExtensions
     {

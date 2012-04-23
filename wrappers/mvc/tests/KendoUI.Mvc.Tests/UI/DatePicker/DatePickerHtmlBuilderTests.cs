@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using System;
     using System.Globalization;
     using Xunit;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.UI.Html;
 
     public class DatePickerHtmlBuilderTests
     {

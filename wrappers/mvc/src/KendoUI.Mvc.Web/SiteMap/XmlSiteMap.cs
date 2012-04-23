@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace Telerik.Web.Mvc
     using System.Web.Caching;
     using System.Web.Routing;
     using System.Xml;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
 
     /// <summary>
     /// Xml file based sitemap.

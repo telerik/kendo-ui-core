@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections;
@@ -12,10 +12,10 @@ namespace Telerik.Web.Mvc.UI
     using System.Linq;
     using System.Reflection;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Resources;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Resources;
+    using KendoUI.Mvc.UI;
 
     public static class NavigationItemContainerExtensions
     {

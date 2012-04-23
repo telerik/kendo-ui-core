@@ -1,11 +1,11 @@
 #if MVC2 || MVC3
-namespace Telerik.Web.Mvc.UI.Fluent.Tests
+namespace KendoUI.Mvc.UI.Fluent.Tests
 {
     using System;
     using Moq;
     using Mvc.Tests;
     using Xunit;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Tests;
 
     public class GridEditingSettingsBuilderTests
     {

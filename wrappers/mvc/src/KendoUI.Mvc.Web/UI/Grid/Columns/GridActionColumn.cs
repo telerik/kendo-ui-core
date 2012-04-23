@@ -3,13 +3,13 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Telerik.Web.Mvc.UI.Html;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.UI.Html;
+    using KendoUI.Mvc.Extensions;
 
     public class GridActionColumn<T> : GridColumnBase<T>, IGridActionColumn where T : class
     {

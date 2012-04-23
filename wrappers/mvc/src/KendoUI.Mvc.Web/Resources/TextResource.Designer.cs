@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Telerik.Web.Mvc.Resources {
+namespace KendoUI.Mvc.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Telerik.Web.Mvc.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Telerik.Web.Mvc.Resources.TextResource", typeof(TextResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KendoUI.Mvc.Resources.TextResource", typeof(TextResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

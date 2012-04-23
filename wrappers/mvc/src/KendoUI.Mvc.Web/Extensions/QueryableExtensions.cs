@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     using System;
     using System.Collections;
@@ -12,10 +12,10 @@ namespace Telerik.Web.Mvc.Extensions
     using System.Linq;
     using System.Linq.Expressions;
     using Infrastructure.Implementation.Expressions;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.UI;
 
     public static class QueryableExtensions
     {

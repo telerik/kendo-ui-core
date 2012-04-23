@@ -3,10 +3,10 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     /// <summary>
-    /// Represents the default settings for all series in the <see cref="Telerik.Web.Mvc.UI.Chart{T}"/> component
+    /// Represents the default settings for all series in the <see cref="KendoUI.Mvc.UI.Chart{T}"/> component
     /// </summary>
     /// <typeparam name="T">The type of the data item</typeparam>
     public class ChartSeriesDefaults<T> : ChartSeriesBase<T>, IChartSeriesDefaults where T : class

@@ -3,9 +3,9 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.UI.Html;
     
     public class EditorSeparator : IEditorTool
     {

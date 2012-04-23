@@ -4,7 +4,7 @@
 // All other rights reserved.
 
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;

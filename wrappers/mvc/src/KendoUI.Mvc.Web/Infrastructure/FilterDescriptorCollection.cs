@@ -4,7 +4,7 @@
 // All other rights reserved.
 
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation
+namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System.Collections.ObjectModel;
     

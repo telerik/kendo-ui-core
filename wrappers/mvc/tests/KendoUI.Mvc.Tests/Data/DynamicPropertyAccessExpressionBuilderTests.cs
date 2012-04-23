@@ -1,5 +1,5 @@
 ﻿#if MVC3
-namespace Telerik.Web.Mvc.UI.Tests.Data
+namespace KendoUI.Mvc.UI.Tests.Data
 {
     using Xunit;
     using Infrastructure.Implementation.Expressions;

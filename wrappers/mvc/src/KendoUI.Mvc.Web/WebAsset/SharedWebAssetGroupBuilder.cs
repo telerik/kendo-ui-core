@@ -3,14 +3,14 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Resources;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Resources;
+    using KendoUI.Mvc.UI;
 
     /// <summary>
     /// Builder class for fluently configuring the shared group.

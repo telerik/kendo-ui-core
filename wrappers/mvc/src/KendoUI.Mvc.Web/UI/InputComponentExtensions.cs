@@ -6,7 +6,7 @@ using System;
 using System.Web.Mvc;
 using System.Globalization;
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     public static class InputComponentExtensions
     {

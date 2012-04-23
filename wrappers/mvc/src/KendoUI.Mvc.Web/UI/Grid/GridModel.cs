@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     public interface IGridModel
     {

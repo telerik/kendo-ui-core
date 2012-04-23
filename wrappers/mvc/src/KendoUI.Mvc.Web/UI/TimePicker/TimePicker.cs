@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Linq;
@@ -12,8 +12,8 @@ namespace Telerik.Web.Mvc.UI
     using System.Collections.Generic;
     
     using Extensions;
-    using Telerik.Web.Mvc.UI.Html;
-    using Telerik.Web.Mvc.Resources;
+    using KendoUI.Mvc.UI.Html;
+    using KendoUI.Mvc.Resources;
 
     public class TimePicker : DatePickerBase
     {

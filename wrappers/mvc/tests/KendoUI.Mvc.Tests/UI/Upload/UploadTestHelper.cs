@@ -1,11 +1,11 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Upload
+﻿namespace KendoUI.Mvc.UI.Tests.Upload
 {
     using Moq;
     using System.Collections.Generic;
     using System.Linq;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.UI;
 
     public static class UploadTestHelper
     {

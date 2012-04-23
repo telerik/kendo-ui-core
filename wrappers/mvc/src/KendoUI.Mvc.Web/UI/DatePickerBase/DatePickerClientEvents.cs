@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     public class DatePickerClientEvents
     {

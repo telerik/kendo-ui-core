@@ -3,14 +3,14 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
 
     public class WebAssetCollection : Collection<IWebAsset>
     {

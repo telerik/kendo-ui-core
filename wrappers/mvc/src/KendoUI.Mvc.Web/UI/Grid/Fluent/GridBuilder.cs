@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html.
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.Collections;
@@ -12,7 +12,7 @@ namespace Telerik.Web.Mvc.UI.Fluent
     using System.Globalization;
     using Extensions;
     using Infrastructure;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     /// <summary>
     /// Defines the fluent interface for configuring the <see cref="Grid{T}"/> component.

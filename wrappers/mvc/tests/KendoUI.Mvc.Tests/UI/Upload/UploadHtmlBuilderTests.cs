@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.UI.Html.Tests
+﻿namespace KendoUI.Mvc.UI.Html.Tests
 {
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.UI.Tests.Upload;
+    using KendoUI.Mvc.UI.Tests.Upload;
     using Xunit;
 
     public class UploadHtmlBuilderTests

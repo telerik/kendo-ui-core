@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.UI
+﻿namespace KendoUI.Mvc.UI
 {
     using System.Globalization;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// Localization strings for the Upload component

@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using Xunit;
     
     public class HtmlTemplateTests

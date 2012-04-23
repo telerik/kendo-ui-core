@@ -1,11 +1,11 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System;
     using System.Collections.Generic;
     using System.Web.Routing;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class NavigationItemContainerExtensionsTests

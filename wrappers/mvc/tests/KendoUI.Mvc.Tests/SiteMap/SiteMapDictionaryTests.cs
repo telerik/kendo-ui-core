@@ -3,12 +3,12 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Tests
+namespace KendoUI.Mvc.Tests
 {
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
     using Xunit;
 
     public class SiteMapDictionaryTests

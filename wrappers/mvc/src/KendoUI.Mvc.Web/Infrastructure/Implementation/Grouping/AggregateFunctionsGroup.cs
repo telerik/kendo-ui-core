@@ -3,14 +3,14 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure
+namespace KendoUI.Mvc.Infrastructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Web.Script.Serialization;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
 
     [KnownType(typeof(AggregateFunctionsGroup))]
     public class AggregateFunctionsGroup : Group

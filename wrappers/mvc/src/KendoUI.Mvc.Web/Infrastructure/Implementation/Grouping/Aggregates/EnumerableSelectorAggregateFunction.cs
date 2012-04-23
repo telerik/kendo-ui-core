@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System.Linq;
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
-    using Telerik.Web.Mvc.Infrastructure.Implementation.Expressions;
+    using KendoUI.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.Infrastructure.Implementation.Expressions;
 
     /// <summary>
     /// Represents an <see cref="AggregateFunction"/> that uses aggregate extension 

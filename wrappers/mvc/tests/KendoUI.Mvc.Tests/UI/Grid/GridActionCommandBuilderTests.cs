@@ -1,11 +1,11 @@
-﻿namespace Telerik.Web.Mvc.UI.Fluent.Tests
+﻿namespace KendoUI.Mvc.UI.Fluent.Tests
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
     using System;
-    using Telerik.Web.Mvc.UI.Html;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Html;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 #if MVC2 || MVC3
     public class GridActionCommandBuilderTests

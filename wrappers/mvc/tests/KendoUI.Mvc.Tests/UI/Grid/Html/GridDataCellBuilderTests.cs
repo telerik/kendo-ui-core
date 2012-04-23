@@ -3,10 +3,10 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 
     public class GridDataCellBuilderTests

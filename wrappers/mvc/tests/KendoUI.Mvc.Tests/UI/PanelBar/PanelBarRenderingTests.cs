@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
 
     using Moq;
@@ -7,8 +7,8 @@
     using System.Web;
     using System.Web.Routing;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class PanelBarRenderingTest

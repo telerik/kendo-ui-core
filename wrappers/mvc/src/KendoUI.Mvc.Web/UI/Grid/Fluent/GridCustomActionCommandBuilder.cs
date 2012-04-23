@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.Web.Routing;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     public class GridCustomActionCommandBuilder<T> : GridActionCommandBuilderBase<GridCustomActionCommand<T>, GridCustomActionCommandBuilder<T>>
         where T : class

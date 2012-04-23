@@ -3,13 +3,13 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
 #if MVC3
     using System.Web.WebPages;
 #endif    
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
 
     public class HtmlTemplate : HtmlTemplate<object>
     {

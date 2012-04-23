@@ -1,7 +1,7 @@
 #if MVC2 || MVC3
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     public class GridPopupEditFormHtmlBuilder<T> : GridFormEditRowHtmlBuilder<T>
         where T : class

@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Upload
+﻿namespace KendoUI.Mvc.UI.Tests.Upload
 {
     using Moq;
     using System.Web.Routing;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Fluent;
     using Xunit;
 
     public class UploadAsyncSettingsBuilderTests

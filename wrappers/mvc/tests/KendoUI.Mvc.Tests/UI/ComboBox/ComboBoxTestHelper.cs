@@ -1,8 +1,8 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using System.IO;
     using System.Web.UI;
     using System.Web;

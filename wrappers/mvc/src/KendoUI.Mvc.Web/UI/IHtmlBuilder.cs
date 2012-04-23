@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI
+﻿namespace KendoUI.Mvc.UI
 {
     using System.Collections.Generic;
     

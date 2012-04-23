@@ -3,14 +3,14 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.Collections.Generic;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
 
     public class WindowBuilder : ViewComponentBuilderBase<Window, WindowBuilder>, IHideObjectMembers
     {

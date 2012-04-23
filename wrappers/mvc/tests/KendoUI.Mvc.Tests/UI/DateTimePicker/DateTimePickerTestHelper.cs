@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using System.IO;
     using System.Web;
@@ -6,7 +6,7 @@
     using System.Web.UI;
 
     using Moq;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.UI.Html;
 
     public static class DateTimePickerTestHelper
     {

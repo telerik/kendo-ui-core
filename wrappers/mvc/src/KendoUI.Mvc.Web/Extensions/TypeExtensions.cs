@@ -2,7 +2,7 @@
 // This source is subject to the GNU General Public License, version 2
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -10,8 +10,8 @@ namespace Telerik.Web.Mvc.Extensions
     using System.Data;
     using System.Linq;
     using System.Reflection;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Resources;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Resources;
 
     internal static class TypeExtensions
     {

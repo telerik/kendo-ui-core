@@ -3,11 +3,11 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Tests
+namespace KendoUI.Mvc.Tests
 {
     using Moq;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.Infrastructure;
 
     public class WebAssetHttpHandlerTests
     {

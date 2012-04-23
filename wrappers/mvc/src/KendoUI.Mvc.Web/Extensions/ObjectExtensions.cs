@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     internal static class ObjectExtensions
     {

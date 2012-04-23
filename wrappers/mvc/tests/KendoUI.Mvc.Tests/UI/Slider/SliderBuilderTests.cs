@@ -3,10 +3,10 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Tests
+namespace KendoUI.Mvc.UI.Tests
 {
     using System;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI.Fluent;
 
     using Xunit;
 
