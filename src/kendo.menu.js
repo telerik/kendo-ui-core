@@ -38,18 +38,30 @@
      * @example
      * $(document).ready(function() {
      *  $("#menu").kendoMenu({
-     *   dataSource: [
-     *    {
-     *     text: "Menu Item 1",
-     *     items: [
-     *      { text: "Sub Menu Item 1" },
-     *      { text: "Sub Menu Item 2" }
-     *     ]
-     *    },
-     *    {
-     *     text: "Menu Item 2"
-     *    }
-     *   ]
+     *   dataSource:
+     *     [{
+     *         text: "Item 1",
+     *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
+     *     },
+     *     {
+     *         text: "<b>Item 2</b>",
+     *         encoded: false,                                 // Allows use of HTML for item text
+     *         content: "text"                                 // content within an item
+     *     },
+     *     {
+     *         text: "Item 3",
+     *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+     *         items: [{                                    // Sub item collection
+     *              text: "Sub Item 1"
+     *         },
+     *         {
+     *              text: "Sub Item 2"
+     *         }]
+     *     },
+     *     {
+     *         text: "Item 4",
+     *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
+     *     }]
      *  })
      * });
      *
@@ -145,6 +157,9 @@
         linkSelector = ".k-item:not(.k-state-disabled) > .k-link",
 
         templates = {
+            content: template(
+                "<div class='k-content k-group'>#= content(item) #</div>"
+            ),
             group: template(
                 "<ul class='#= groupCssClass(group) #'#= groupAttributes(group) #>" +
                     "#= renderItems(data) #" +
@@ -227,6 +242,10 @@
             /** @ignore */
             groupCssClass: function(group) {
                 return "k-group";
+            },
+            /** @ignore */
+            content: function(item) {
+                return item.content ? item.content : "&nbsp;";
             }
         };
 
@@ -391,11 +410,12 @@
             Widget.fn.init.call(that, element, options);
 
             element = that.wrapper = that.element;
-
             options = that.options;
 
             if (options.dataSource) {
-                that.element.empty().append($(Menu.renderGroup({
+                that.element.empty();
+                that.append(options.dataSource, element);
+                /*.append($(Menu.renderGroup({
                     items: options.dataSource,
                     group: {
                         firstLevel: true,
@@ -403,7 +423,7 @@
                         expanded: true
                     },
                     menu: {}
-                })).children());
+                })).children());*/
             }
 
             that._updateClasses();
@@ -574,7 +594,12 @@
          *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                                 // Allows use of HTML for item text
+         *         content: "text"                                 // content within an item
+         *     },
+         *     {
+         *         text: "Item 3",
          *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
          *         items: [{                                    // Sub item collection
          *              text: "Sub Item 1"
@@ -584,7 +609,7 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 3",
+         *         text: "Item 4",
          *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
@@ -595,8 +620,14 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.length ? referenceItem.find("> .k-group, .k-animation-container > .k-group") : null);
 
-            each(inserted.items, function () {
+            each(inserted.items, function (idx) {
                 inserted.group.append(this);
+
+                var contents = inserted.contents[idx];
+                if (contents) {
+                    $(this).append(contents);
+                }
+
                 updateFirstLast(this);
             });
 
@@ -629,7 +660,12 @@
          *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                                 // Allows use of HTML for item text
+         *         content: "text"                                 // content within an item
+         *     },
+         *     {
+         *         text: "Item 3",
          *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
          *         items: [{                                    // Sub item collection
          *              text: "Sub Item 1"
@@ -639,7 +675,7 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 3",
+         *         text: "Item 4",
          *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
@@ -650,8 +686,14 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function () {
+            each(inserted.items, function (idx) {
                 referenceItem.before(this);
+
+                var contents = inserted.contents[idx];
+                if (contents) {
+                    $(this).append(contents);
+                }
+
                 updateFirstLast(this);
             });
 
@@ -683,7 +725,12 @@
          *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                                 // Allows use of HTML for item text
+         *         content: "text"                                 // content within an item
+         *     },
+         *     {
+         *         text: "Item 3",
          *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
          *         items: [{                                    // Sub item collection
          *              text: "Sub Item 1"
@@ -693,7 +740,7 @@
          *         }]
          *     },
          *     {
-         *         text: "Item 3",
+         *         text: "Item 4",
          *         spriteCssClass: "imageClass3"                // Item image sprite CSS class, optional.
          *     }],
          *     referenceItem
@@ -705,8 +752,14 @@
 
             var inserted = this._insert(item, referenceItem, referenceItem.parent());
 
-            each(inserted.items, function () {
+            each(inserted.items, function (idx) {
                 referenceItem.after(this);
+
+                var contents = inserted.contents[idx];
+                if (contents) {
+                    $(this).append(contents);
+                }
+
                 updateFirstLast(this);
             });
 
@@ -716,14 +769,14 @@
         },
 
         _insert: function (item, referenceItem, parent) {
-            var that = this;
+            var that = this,
+                items, contents = [];
 
             if (!referenceItem || !referenceItem.length) {
                 parent = that.element;
             }
 
             var plain = $.isPlainObject(item),
-                items,
                 groupData = {
                     firstLevel: parent.hasClass(MENU),
                     horizontal: parent.hasClass(MENU + "-horizontal"),
@@ -737,10 +790,23 @@
 
             if (plain || $.isArray(item)) { // is JSON
                 items = $.map(plain ? [ item ] : item, function (value, idx) {
-                            return $(Menu.renderItem({
-                                group: groupData,
-                                item: extend(value, { index: idx })
-                            }));
+                            if (typeof value === "string") {
+                                return $(value);
+                            } else {
+                                return $(Menu.renderItem({
+                                    group: groupData,
+                                    item: extend(value, { index: idx })
+                                }));
+                            }
+                        });
+                contents = $.map(plain ? [ item ] : item, function (value, idx) {
+                            if (value.content || value.contentUrl) {
+                                return $(Menu.renderContent({
+                                    item: extend(value, { index: idx })
+                                }));
+                            } else {
+                                return false;
+                            }
                         });
             } else {
                 items = $(item);
@@ -748,7 +814,7 @@
                 updateItemClasses(items);
             }
 
-            return { items: items, group: parent };
+            return { items: items, group: parent, contents: contents };
         },
 
         /**
@@ -1041,7 +1107,7 @@
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
-                arrow: item.items ? templates.arrow : empty,
+                arrow: item.items || item.content ? templates.arrow : empty,
                 subGroup: Menu.renderGroup
             }, rendering));
         },
@@ -1065,6 +1131,10 @@
                     return html;
                 }
             }, options, rendering));
+        },
+
+        renderContent: function (options) {
+            return templates.content(extend(options, rendering));
         }
     });
 
