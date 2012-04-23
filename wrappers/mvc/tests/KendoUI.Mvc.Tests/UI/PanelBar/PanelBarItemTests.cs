@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.UnitTest
+namespace KendoUI.Mvc.UI.UnitTest
 {
     using KendoUI.Mvc.UI;
 

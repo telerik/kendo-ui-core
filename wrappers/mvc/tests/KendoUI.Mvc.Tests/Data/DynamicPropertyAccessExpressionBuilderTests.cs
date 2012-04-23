@@ -1,4 +1,4 @@
-﻿#if MVC3
+#if MVC3
 namespace KendoUI.Mvc.UI.Tests.Data
 {
     using Xunit;

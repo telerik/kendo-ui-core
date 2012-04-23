@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Tests.Upload
+namespace KendoUI.Mvc.UI.Tests.Upload
 {
     using Moq;
     using System.Web.Routing;

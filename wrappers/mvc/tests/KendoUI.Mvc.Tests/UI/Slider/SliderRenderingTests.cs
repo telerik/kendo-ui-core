@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.UI.Tests.UI.Slider
+namespace KendoUI.Mvc.UI.Tests.UI.Slider
 {
     using Xunit;
     using System;

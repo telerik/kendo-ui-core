@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
+namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
     using KendoUI.Mvc.Extensions;
     using Xunit;

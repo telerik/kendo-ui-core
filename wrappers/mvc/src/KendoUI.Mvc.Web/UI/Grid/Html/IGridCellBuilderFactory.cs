@@ -1,4 +1,4 @@
-﻿
+
 namespace KendoUI.Mvc.UI.Html
 {
     using System.Collections.Generic;

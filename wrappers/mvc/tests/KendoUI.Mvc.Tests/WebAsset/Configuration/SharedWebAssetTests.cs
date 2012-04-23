@@ -1,4 +1,4 @@
-﻿namespace KendoUI.Mvc.Configuration.Tests
+namespace KendoUI.Mvc.Configuration.Tests
 {
     using Moq;
     using System;

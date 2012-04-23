@@ -1,4 +1,4 @@
-﻿
+
 namespace KendoUI.Mvc.UI
 {
     public enum GridButtonType

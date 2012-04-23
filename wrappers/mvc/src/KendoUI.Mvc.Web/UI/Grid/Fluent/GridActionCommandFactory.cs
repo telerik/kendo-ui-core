@@ -1,4 +1,4 @@
-﻿
+
 using KendoUI.Mvc.Infrastructure;
 
 namespace KendoUI.Mvc.UI.Fluent
