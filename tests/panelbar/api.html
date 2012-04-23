@@ -153,10 +153,17 @@
         </ul>
     </li>
 </ul>
+<ul id="panel2"></ul>
 
     <script type="text/javascript">
 
         $("#PanelBar1").kendoPanelBar({ animation: false, expand: Expand, collapse: Collapse, select: Select, activate: Activate });
+
+        module("api", {
+            teardown: function() {
+                $("#panel2").empty();
+            }
+        });
 
         test('trigger input select should not bubble', function() {
 
@@ -267,6 +274,28 @@
          test('client object is available in on load', function() {
             ok(null !== onLoadPanelBar);
             ok(undefined !== onLoadPanelBar);
+        });
+
+        test('dataSource should create items with the text specified', function () {
+            $("#panel2").kendoPanelBar({ dataSource: [ { text: "Item 1" } ] });
+
+            equal($("#panel2").find(".k-item > .k-link:contains(Item 1)").length, 1);
+        });
+
+        test('dataSource should spawn arrows for items with group, content or contentUrl', function () {
+            $("#panel2").kendoPanelBar({ dataSource: [ { text: "Item 1", content: "Test" }, { text: "Item 2", items: [] }, { text: "Item 3", contentUrl: "http://www.google.com" } ] });
+
+            var icons = $("#panel2").find(".k-item > .k-link > .k-icon");
+
+            ok(icons.eq(0).is(".k-panelbar-expand.k-arrow-down"));
+            ok(icons.eq(1).is(".k-panelbar-expand.k-arrow-down"));
+            ok(icons.eq(2).is(".k-panelbar-expand.k-arrow-down"));
+        });
+
+        test('dataSource should show collapse arrows for expanded items', function () {
+            $("#panel2").kendoPanelBar({ dataSource: [ { text: "Item 1", content: "Test", expanded: true } ] });
+
+            ok($("#panel2").find(".k-item > .k-link > .k-icon").is(".k-panelbar-collapse.k-arrow-up"));
         });
 
     </script>
