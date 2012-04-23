@@ -613,7 +613,7 @@
                         delete multiple.scale;
                     }
 
-                    element.animate(multiple, extend({ queue: false, show: false, hide: false, duration: options.duration, complete: options.complete })); // Stop animate from showing/hiding the element to be able to hide it later on.
+                    element.animate(multiple, { queue: false, show: false, hide: false, duration: options.duration, complete: options.complete }); // Stop animate from showing/hiding the element to be able to hide it later on.
                 });
             }
         },
