@@ -32,6 +32,7 @@
         FOCUSED = "k-state-focused",
         FOCUSABLE = "k-focusable",
         SELECTED = "k-state-selected",
+        COLUMNRESIZE = "columnResize",
         CLICK = "click",
         HEIGHT = "height",
         TABINDEX = "tabIndex",
@@ -285,7 +286,13 @@
         return top;
     }
 
-   var Grid = Widget.extend({
+    function cursor(context, value) {
+        $('th, th .k-grid-filter, th .k-link', context)
+            .add(document.body)
+            .css('cursor', value);
+    }
+
+    var Grid = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -338,7 +345,8 @@
            EDIT,
            SAVE,
            REMOVE,
-           SAVECHANGES
+           SAVECHANGES,
+           COLUMNRESIZE
         ],
 
         setDataSource: function(dataSource) {
@@ -404,35 +412,45 @@
             that._wrapper();
         },
 
-        _resizable: function() {
+        _positionColumnResizeHandlers: function() {
             var that = this,
                 left = 0,
+                th,
+                scrollable = that.options.scrollable,
+                container = scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
+
+            container.find(".k-resize-handle").remove();
+
+            that.thead.find("th").each(function() {
+                left += this.offsetWidth;
+
+                th = $(this);
+                $('<div class="k-resize-handle" />')
+                .css({
+                    left: left - indicatorWidth,
+                    top: scrollable ? 0 : heightAboveHeader(that.wrapper),
+                    width: indicatorWidth * 2
+                })
+                .appendTo(container)
+                .data("th", th);
+            });
+        },
+
+        _resizable: function() {
+            var that = this,
                 options = that.options,
-                th;
+                container,
+                columnStart,
+                columnWidth,
+                gridWidth,
+                col;
 
             if (options.resizable) {
+                container = options.scrollable ? that.wrapper.find(".k-grid-header-wrap") : that.wrapper;
 
-                that.thead.find(".k-resize-handle").remove();
+                that._positionColumnResizeHandlers();
 
-                that.thead.find("th").each(function() {
-                    left += this.offsetWidth;
-
-                    th = $(this);
-                    $('<div class="k-resize-handle" />')
-                    .css({
-                        left: left - indicatorWidth,
-                        top: options.scrollable ? 0 : heightAboveHeader(that.wrapper),
-                        width: indicatorWidth * 2
-                    })
-                    .appendTo(that.thead)
-                    .data("th", th);
-                });
-                var columnStart,
-                    columnWidth,
-                    gridWidth,
-                    col;
-
-                that.thead.kendoResizable({
+                container.kendoResizable({
                     handle: ".k-resize-handle",
                     hint: function(handle) {
                         return $('<div class="k-grid-resize-indicator" />').css({
@@ -442,33 +460,51 @@
                     start: function(e) {
                         var th = $(e.currentTarget).data("th"),
                             index = $.inArray(th[0], th.parent().children(":visible")),
-                            contentTable = that.tbody.parent();
+                            contentTable = that.tbody.parent(),
+                            footer = that.footer || $();
 
-                            col = that.thead.parent().find("col:eq(" + index + ")")
-                                .add(contentTable.children("colgroup").find("col:eq(" + index + ")"));
+                        cursor(that.wrapper, th.css('cursor'));
+
+                        col = that.thead.parent().find("col:eq(" + index + ")")
+                            .add(contentTable.children("colgroup").find("col:eq(" + index + ")"))
+                            .add(footer.find("colgroup").find("col:eq(" + index + ")"));
 
                         columnStart = e.pageX;
                         columnWidth = th.outerWidth();
                         gridWidth = that.tbody.outerWidth();
                     },
                     resize: function(e) {
-                        var width = columnWidth + e.pageX - columnStart;
+                        var width = columnWidth + e.pageX - columnStart,
+                            footer = that.footer || $(),
+                            left = 0;
+
                         if (width > 10) {
                             col.css('width', width);
 
                             that.tbody.parent()
                                 .add(that.thead.parent())
+                                .add(footer.find("table"))
                                 .css('width', gridWidth + e.pageX - columnStart);
 
-                            var left = 0;
                             $('.k-resize-handle', that.wrapper).each(function () {
                                 left += $(this).data('th').outerWidth();
                                 $(this).css('left', left - indicatorWidth);
                             });
                         }
                     },
-                    stop: function() {
-                        init();
+                    resizeend: function(e) {
+                        var th = $(e.currentTarget).data("th"),
+                            newWidth = th.outerWidth();
+
+                        cursor(that.wrapper, "");
+
+                        if (columnWidth != newWidth) {
+                            that.trigger(COLUMNRESIZE, {
+                                column: that.columns[th.parent().find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)],
+                                oldWidth: columnWidth,
+                                newWidth: newWidth
+                            });
+                        }
                     }
                 });
             }
@@ -2255,6 +2291,7 @@
                 that._templates();
                 that._updateCols();
                 that._updateHeader(groups);
+                that._positionColumnResizeHandlers();
                 that._group = groups > 0;
             }
 

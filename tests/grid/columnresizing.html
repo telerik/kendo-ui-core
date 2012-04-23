@@ -48,13 +48,23 @@
                 }
             });
 
+            function resizeColumn(handle, from, to) {
+                var position = handle.position();
+
+                handle.trigger("mousedown");
+
+                $(document.documentElement).trigger({ type: "mousemove", pageX: position.left + from, pageY: position.top });
+                $(document.documentElement).trigger({ type: "mousemove", pageX: position.left + to, pageY: position.top });
+                $(document.documentElement).trigger({ type: "mouseup" });
+            }
+
             test("handlers for each column are added to the header if resizable is enabled", function() {
                 var grid = new Grid(table, {
                     dataSource: [ { foo: "foo", bar: "bar" } ],
                     resizable: true,
                     columns: ["foo", "bar"]
                 });
-                equal(grid.thead.children(".k-resize-handle").length, 2);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").length, 2);
             });
 
             test("handlers not are added to the header if resizable is not enabled", function() {
@@ -63,7 +73,7 @@
                     resizable: false,
                     columns: ["foo", "bar"]
                 });
-                ok(!grid.thead.children(".k-resize-handle").length);
+                ok(!grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").length);
             });
 
             test("th element is assign to the handle", function() {
@@ -72,8 +82,8 @@
                     resizable: true,
                     columns: ["foo", "bar"]
                 });
-                equal(grid.thead.children(".k-resize-handle").first().data("th")[0], grid.thead.find("th:first")[0]);
-                equal(grid.thead.children(".k-resize-handle").last().data("th")[0], grid.thead.find("th:last")[0]);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first().data("th")[0], grid.thead.find("th:first")[0]);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").last().data("th")[0], grid.thead.find("th:last")[0]);
             });
 
             test("handler is position over the th right side", function() {
@@ -83,8 +93,8 @@
                     columns: ["foo", "bar"]
                 });
                 var firstColumn = grid.thead.find("th:first");
-                equal(grid.thead.children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
-                equal(grid.thead.children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetTop, firstColumn[0].offsetTop);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
             });
 
             test("handler is position over the th right side when scrolling is disabled", function() {
@@ -96,8 +106,8 @@
                     toolbar: ["create"]
                 });
                 var firstColumn = grid.thead.find("th:first");
-                equal(grid.thead.children(".k-resize-handle").first().position().top, firstColumn.position().top);
-                equal(grid.thead.children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
+                equal(grid.wrapper.children(".k-resize-handle").first().position().top, firstColumn.position().top);
+                equal(grid.wrapper.children(".k-resize-handle").first()[0].offsetLeft, firstColumn[0].offsetLeft + firstColumn[0].offsetWidth - indicatorWidth);
             });
 
             test("existing handler are removed on multiple initializations", function() {
@@ -107,7 +117,7 @@
                     columns: ["foo", "bar"]
                 });
                 grid._resizable();
-                equal(grid.thead.children(".k-resize-handle").length, 2);
+                equal(grid.wrapper.find(".k-grid-header-wrap").children(".k-resize-handle").length, 2);
             });
 
             test("resizable is attached to the header", function() {
@@ -116,24 +126,134 @@
                     resizable: true,
                     columns: ["foo", "bar"]
                 });
-                ok(grid.thead.data("kendoResizable"));
+                ok(grid.wrapper.find(".k-grid-header-wrap").data("kendoResizable"));
             });
 
-            test("column width is incremented when handler is moved to the right", function() {
+            test("resizable is attached to the header if scrolling is disabled", function() {
+                var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    scrollable: false,
+                    columns: ["foo", "bar"]
+                });
+                ok(grid.wrapper.data("kendoResizable"));
+            });
+
+            test("column header cell width is incremented when handler is moved to the right", function() {
                  var grid = new Grid(table, {
                     dataSource: [ { foo: "foo", bar: "bar" } ],
                     resizable: true,
                     columns: ["foo", "bar"]
                 }),
-                position = grid.thead.find(".k-resize-handle:first").position(),
                 firstColumn = grid.thead.find("th:first"),
                 initialWidth = firstColumn[0].offsetWidth;
 
-                grid.thead.children(".k-resize-handle:first").trigger("mousedown");
-                $(document.documentElement).trigger({ type: "mousemove", pageX: position.left + initialWidth, pageY: position.top });
-                $(document.documentElement).trigger({ type: "mousemove", pageX: position.left + initialWidth + 10, pageY: position.top });
-                $(document.documentElement).trigger({ type: "mouseup" });
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+
                 equal(firstColumn[0].offsetWidth, initialWidth + 10 - indicatorWidth);
+            });
+
+            test("column body cell width is incremented when handler is moved to the right", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = grid.tbody.find("tr:first > td:first")[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+
+                equal(grid.tbody.find("tr:first > td:first")[0].offsetWidth, initialWidth + 10);
+            });
+
+            test("column footer cell width is incremented when handler is moved to the right", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = grid.footer.find("tr:first > td:first")[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+                equal(grid.footer.find("tr:first > td:first")[0].offsetWidth, initialWidth + 11);
+            });
+
+            test("column header cell width is incremented when handler is moved to the right if scrolling is disabled", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    scrollable: false,
+                    columns: ["foo", "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = firstColumn[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+
+                equal(firstColumn[0].offsetWidth, initialWidth + 10);
+            });
+
+            test("column body cell width is incremented when handler is moved to the right if scrolling is disabled", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    scrollable: false,
+                    columns: ["foo", "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = grid.tbody.find("tr:first > td:first")[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+
+                equal(grid.tbody.find("tr:first > td:first")[0].offsetWidth, initialWidth + 10);
+            });
+
+            test("column footer cell width is incremented when handler is moved to the right if scrolling is disabled", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    scrollable: false,
+                    columns: [{ field: "foo", footerTemplate: "foo" }, "bar"]
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = grid.footer.find("tr:first > td:first")[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-resize-handle:first"), initialWidth, initialWidth + 10);
+                equal(grid.footer.find("tr:first > td:first")[0].offsetWidth, initialWidth + 10);
+            });
+
+            test("columnresize event is raised", 3, function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"],
+                    columnResize: function(e) {
+                        equal(e.column.field, "foo");
+                        equal(e.oldWidth, initialWidth);
+                        equal(e.newWidth, initialWidth + 10);
+                    }
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = firstColumn[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth + 10 + 3);
+            });
+
+            test("columnresize event is not raised if width is not changed", function() {
+                 var grid = new Grid(table, {
+                    dataSource: [ { foo: "foo", bar: "bar" } ],
+                    resizable: true,
+                    columns: ["foo", "bar"],
+                    columnResize: function(e) {
+                       ok(false);
+                    }
+                }),
+                firstColumn = grid.thead.find("th:first"),
+                initialWidth = firstColumn[0].offsetWidth;
+
+                resizeColumn(grid.wrapper.find(".k-grid-header-wrap").find(".k-resize-handle:first"), initialWidth, initialWidth);
             });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
