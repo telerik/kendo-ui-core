@@ -609,6 +609,9 @@
                 optionLabel = that.options.optionLabel;
 
             that.trigger("dataBinding");
+            if (that._current) {
+                that.current(null);
+            }
 
             that.ul[0].innerHTML = kendo.render(that.template, data);
             that._height(length);
