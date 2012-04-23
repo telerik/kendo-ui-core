@@ -415,15 +415,6 @@
             if (options.dataSource) {
                 that.element.empty();
                 that.append(options.dataSource, element);
-                /*.append($(Menu.renderGroup({
-                    items: options.dataSource,
-                    group: {
-                        firstLevel: true,
-                        horizontal: that.element.hasClass(MENU + "-horizontal"),
-                        expanded: true
-                    },
-                    menu: {}
-                })).children());*/
             }
 
             that._updateClasses();
