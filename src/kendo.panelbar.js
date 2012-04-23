@@ -233,7 +233,7 @@
                 "</li>"
             ),
             image: template("<img class='k-image' alt='' src='#= imageUrl #' />"),
-            arrow: template("<span class='#= arrowClass(item, group) #'></span>"),
+            arrow: template("<span class='#= arrowClass(item) #'></span>"),
             sprite: template("<span class='k-sprite #= spriteCssClass #'></span>"),
             empty: template("")
         },
@@ -245,6 +245,8 @@
 
                 if (item.enabled === false) {
                     result += " k-state-disabled";
+                } else if (item.expanded === true) {
+                    result += " k-state-active";
                 } else {
                     result += " k-state-default";
                 }
@@ -271,14 +273,10 @@
             textAttributes: function(item) {
                 return item.url ? " href='" + item.url + "'" : "";
             },
-            arrowClass: function(item, group) {
+            arrowClass: function(item) {
                 var result = "k-icon";
 
-                if (group.horizontal) {
-                    result += " k-arrow-down";
-                } else {
-                    result += " k-arrow-right";
-                }
+                result += item.expanded ? " k-arrow-up k-panelbar-collapse" : " k-arrow-down k-panelbar-expand";
 
                 return result;
             },
@@ -295,7 +293,7 @@
                 return "k-group k-panel";
             },
             contentAttributes: function(content) {
-                return content.active !== true ? " style='display:none'" : "";
+                return content.item.expanded !== true ? " style='display:none'" : "";
             },
             content: function(item) {
                 return item.content ? item.content : item.contentUrl ? "" : "&nbsp;";
@@ -511,14 +509,7 @@
             options = that.options;
 
             if (options.dataSource) {
-                element.empty().append($(PanelBar.renderGroup({
-                    items: options.dataSource,
-                    group: {
-                        firstLevel: true,
-                        expanded: true
-                    },
-                    panelBar: {}
-                })).children());
+                that.append(options.dataSource, element);
             }
 
             that._updateClasses();
@@ -1536,7 +1527,7 @@
                 image: item.imageUrl ? templates.image : empty,
                 sprite: item.spriteCssClass ? templates.sprite : empty,
                 itemWrapper: templates.itemWrapper,
-                arrow: item.items ? templates.arrow : empty,
+                arrow: item.items || item.content || item.contentUrl ? templates.arrow : empty,
                 subGroup: PanelBar.renderGroup
             }, rendering));
         },
