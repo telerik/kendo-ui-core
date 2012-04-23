@@ -3,15 +3,15 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.Collections;
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Resources;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Resources;
+    using KendoUI.Mvc.UI;
 
     /// <summary>
     /// Configures the category axis for the <see cref="Chart{TModel}" />.

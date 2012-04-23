@@ -4,14 +4,14 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using Infrastructure;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.UI.Html;
 
     /// <summary>
     /// Represents a column in the <see cref="Grid{T}"/> component

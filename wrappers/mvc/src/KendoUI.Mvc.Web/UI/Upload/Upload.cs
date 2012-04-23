@@ -3,15 +3,15 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System.Globalization;
     using System.IO;
     using System.Web.Mvc;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI.Html;
 
     /// <summary>
     /// Telerik Upload for ASP.NET MVC is a view component for uploading files.

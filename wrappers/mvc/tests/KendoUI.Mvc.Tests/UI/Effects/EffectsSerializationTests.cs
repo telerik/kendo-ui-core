@@ -1,5 +1,5 @@
 ﻿
-namespace Telerik.Web.Mvc.UI.Tests
+namespace KendoUI.Mvc.UI.Tests
 {
     using System.IO;
     using Moq;

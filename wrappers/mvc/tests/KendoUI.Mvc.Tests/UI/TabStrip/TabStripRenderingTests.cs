@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System.IO;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class TabStripRenderingTests

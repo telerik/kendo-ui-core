@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
     using System;
     using System.Linq;
@@ -27,7 +27,7 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
         {
             Func<string, Type> getType = name =>
                                          {
-                                             Type t = Type.GetType("Telerik.Web.Mvc.Infrastructure.Implementation.Tests." + name + "Controller", false, true);
+                                             Type t = Type.GetType("KendoUI.Mvc.Infrastructure.Implementation.Tests." + name + "Controller", false, true);
 
                                              return t;
                                          };
@@ -62,10 +62,10 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
         [Fact]
         public void GetAuthorizeAttributes_should_return_correct_roles_from_namespaced_controller()
         {
-            controllerTypeCache.Setup(c => c.GetControllerTypes(It.IsAny<string>())).Returns((string t) => new List<Type>{ Type.GetType("Telerik.Web.Mvc.Infrastructure.Implementation.Tests.DummyNamespace." + t + "Controller", false, true) });
+            controllerTypeCache.Setup(c => c.GetControllerTypes(It.IsAny<string>())).Returns((string t) => new List<Type>{ Type.GetType("KendoUI.Mvc.Infrastructure.Implementation.Tests.DummyNamespace." + t + "Controller", false, true) });
 
             RequestContext context = TestHelper.CreateRequestContext();
-            context.RouteData.DataTokens.Add("Namespaces", new[] { "Telerik.Web.Mvc.Infrastructure.Implementation.Tests.DummyNamespace" });
+            context.RouteData.DataTokens.Add("Namespaces", new[] { "KendoUI.Mvc.Infrastructure.Implementation.Tests.DummyNamespace" });
 
             AuthorizeAttribute attribute = authorizeAttributeCache.GetAuthorizeAttributes(context, "DuplicateName", "AMethod", null).ElementAt(0);
 
@@ -84,8 +84,8 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
         public void GetAuthorizeAttributes_should_return_correct_action_attribute_from_area_controller()
         {
             List<Type> list = new List<Type> { 
-                typeof(Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController),
-                typeof(Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController)
+                typeof(KendoUI.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController),
+                typeof(KendoUI.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController)
             };
 
             controllerTypeCache.Setup(c => c.GetControllerTypes(It.IsAny<string>())).Returns((string t) => list);
@@ -102,8 +102,8 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
         public void GetAuthorizeAttributes_should_return_null_if_there_are_duplicated_methods_in_different_areas_and_the_second_method_does_not_have_attribute()
         {
             List<Type> list = new List<Type> { 
-                typeof(Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController),
-                typeof(Telerik.Web.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController)
+                typeof(KendoUI.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController),
+                typeof(KendoUI.Mvc.Infrastructure.Implementation.Areas.Test1.AreaController)
             };
 
             controllerTypeCache.Setup(c => c.GetControllerTypes(It.IsAny<string>())).Returns((string t) => list);

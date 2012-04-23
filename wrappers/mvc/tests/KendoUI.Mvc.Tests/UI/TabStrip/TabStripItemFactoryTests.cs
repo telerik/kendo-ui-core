@@ -1,9 +1,9 @@
-namespace Telerik.Web.Mvc.Tests.TabStrip
+namespace KendoUI.Mvc.Tests.TabStrip
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
     using Moq;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class TabItemFactoryTests

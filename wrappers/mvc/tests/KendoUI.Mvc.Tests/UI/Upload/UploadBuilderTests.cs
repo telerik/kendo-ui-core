@@ -1,12 +1,12 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Upload
+﻿namespace KendoUI.Mvc.UI.Tests.Upload
 {
     using Moq;
     using System;
     using System.Globalization;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Fluent;
     using Xunit;
 
     public class UploadBuilderTests

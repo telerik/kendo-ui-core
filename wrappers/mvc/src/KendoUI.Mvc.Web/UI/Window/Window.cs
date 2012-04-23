@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
 
     using System;
@@ -16,7 +16,7 @@ namespace Telerik.Web.Mvc.UI
 
     using Extensions;
     using Infrastructure;
-    using Telerik.Web.Mvc.Resources;
+    using KendoUI.Mvc.Resources;
     
     public class Window : ViewComponentBase, IContentContainer, IAsyncContentContainer, IEffectEnabled
     {

@@ -1,12 +1,12 @@
 ﻿
-namespace Telerik.Web.Mvc.UI.UnitTest.PanelBar
+namespace KendoUI.Mvc.UI.UnitTest.PanelBar
 {
     using System.IO;
     using System.Web.UI;
 
     using Moq;
     using Xunit;
-    using PanelBar = Telerik.Web.Mvc.UI.PanelBar;
+    using PanelBar = KendoUI.Mvc.UI.PanelBar;
 
     public class PanelBarTests
     {

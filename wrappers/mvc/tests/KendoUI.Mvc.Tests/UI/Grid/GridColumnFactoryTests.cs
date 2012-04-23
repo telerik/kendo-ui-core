@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Fluent.Tests
+﻿namespace KendoUI.Mvc.UI.Fluent.Tests
 {
     using System.Data;
     using System.Linq;

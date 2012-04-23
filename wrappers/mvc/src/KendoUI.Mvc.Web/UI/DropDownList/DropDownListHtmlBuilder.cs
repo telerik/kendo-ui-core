@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI
+﻿namespace KendoUI.Mvc.UI
 {
     using System.Linq;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
     using System.Web;
 
     public class DropDownListHtmlBuilder : IDropDownHtmlBuilder

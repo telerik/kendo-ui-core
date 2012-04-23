@@ -1,8 +1,8 @@
-﻿namespace Telerik.Web.Mvc.UI.Fluent.Tests
+﻿namespace KendoUI.Mvc.UI.Fluent.Tests
 {
     using Xunit;
 
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI.Fluent;
 
     public class ComboBoxDataBindingConfigurationBuilderTests
     {

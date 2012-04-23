@@ -3,16 +3,16 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Linq;
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.UI.Html;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.UI.Html;
+    using KendoUI.Mvc.Extensions;
     using System.Web.Mvc;
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.Infrastructure.Implementation.Expressions;
+    using KendoUI.Mvc.Infrastructure.Implementation.Expressions;
 
     public class GridForeignKeyColumn<TModel, TValue> : GridBoundColumn<TModel, TValue>, IGridForeignKeyColumn where TModel : class
     {        

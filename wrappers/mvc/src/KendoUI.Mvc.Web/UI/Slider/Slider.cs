@@ -3,14 +3,14 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
     using System.Web.UI;
-    using Telerik.Web.Mvc.UI.Html;
-    using Telerik.Web.Mvc.Resources;
+    using KendoUI.Mvc.UI.Html;
+    using KendoUI.Mvc.Resources;
 
     public class Slider<T> : ViewComponentBase, IInputComponent<T> where T : struct, IComparable
     {

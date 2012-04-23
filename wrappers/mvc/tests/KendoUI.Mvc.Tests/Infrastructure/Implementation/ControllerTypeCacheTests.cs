@@ -3,7 +3,7 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
     using System;
     using System.Linq;
@@ -53,7 +53,7 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
         {
             RequestContext requestContext = TestHelper.CreateRequestContext();
 
-            requestContext.RouteData.DataTokens.Add("Namespaces", new[] { "Telerik.Web.Mvc.Infrastructure.Implementation.Tests.DummyNamespace" });
+            requestContext.RouteData.DataTokens.Add("Namespaces", new[] { "KendoUI.Mvc.Infrastructure.Implementation.Tests.DummyNamespace" });
 
             Type type = _controllerTypeCache.GetControllerTypes(requestContext, "DuplicateName").FirstOrDefault();
 

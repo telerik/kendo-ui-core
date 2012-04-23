@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System.Collections.Generic;
     using System.IO;
@@ -11,9 +11,9 @@ namespace Telerik.Web.Mvc.UI
     using System.Web.Mvc;
     using System.Web.Query.Dynamic;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Html;
 
     public class Splitter : ViewComponentBase
     {

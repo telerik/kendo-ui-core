@@ -4,7 +4,7 @@
 // All other rights reserved.
 
 #if MVC3
-namespace Telerik.Web.Mvc.Infrastructure.Implementation.Expressions
+namespace KendoUI.Mvc.Infrastructure.Implementation.Expressions
 {
     using System;
     using System.Linq;

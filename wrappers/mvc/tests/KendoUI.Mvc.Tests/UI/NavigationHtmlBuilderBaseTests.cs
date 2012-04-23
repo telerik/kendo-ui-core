@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.UITests
+﻿namespace KendoUI.Mvc.UI.Tests.UITests
 {
     using Moq;
     using System.Collections.Generic;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using Xunit;
 
     public class NavigationHtmlBuilderBaseTests

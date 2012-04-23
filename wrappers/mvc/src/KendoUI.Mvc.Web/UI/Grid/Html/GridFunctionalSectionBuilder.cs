@@ -2,9 +2,9 @@
 // This source is subject to the GNU General Public License, version 2
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using System.Linq;
 
     public class GridFunctionalSectionBuilder : IGridFunctionalSectionBuilder

@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     using System;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.UI;
 
     public class GridDataCellBuilder<TModel, TValue> : GridDataCellBuilderBase, IGridFormatableCellBuilder
         where TModel : class

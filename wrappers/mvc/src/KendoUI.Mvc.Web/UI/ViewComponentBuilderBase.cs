@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// View component Builder base class.
@@ -45,7 +45,7 @@ namespace Telerik.Web.Mvc.UI
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Telerik.Web.Mvc.UI.ViewComponentBuilderBase&lt;TViewComponent,TBuilder&gt;"/> to TViewComponent.
+        /// Performs an implicit conversion from <see cref="KendoUI.Mvc.UI.ViewComponentBuilderBase&lt;TViewComponent,TBuilder&gt;"/> to TViewComponent.
         /// </summary>
         /// <param name="builder">The builder.</param>
         /// <returns>The result of the conversion.</returns>

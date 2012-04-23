@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Configuration
+namespace KendoUI.Mvc.Configuration
 {
     using System.Configuration;
 
@@ -14,7 +14,7 @@ namespace Telerik.Web.Mvc.Configuration
     public class WebAssetConfigurationElementCollection : ConfigurationElementCollection
     {
         /// <summary>
-        /// Gets the <see cref="Telerik.Web.Mvc.Configuration.WebAssetConfigurationElement"/> with the specified source.
+        /// Gets the <see cref="KendoUI.Mvc.Configuration.WebAssetConfigurationElement"/> with the specified source.
         /// </summary>
         /// <value></value>
         public new WebAssetConfigurationElement this[string source]

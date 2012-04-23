@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.UnitTest
+﻿namespace KendoUI.Mvc.UI.UnitTest
 {
     using Infrastructure;
 

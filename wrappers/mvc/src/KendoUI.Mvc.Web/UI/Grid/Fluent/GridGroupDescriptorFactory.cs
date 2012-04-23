@@ -2,13 +2,13 @@
 // This source is subject to the GNU General Public License, version 2
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     using System;
     using System.ComponentModel;
     using System.Linq.Expressions;
     using Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     public class GridGroupDescriptorFactory<TModel> : IHideObjectMembers
         where TModel : class

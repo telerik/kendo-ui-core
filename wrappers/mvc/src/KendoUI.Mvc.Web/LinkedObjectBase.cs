@@ -4,7 +4,7 @@
 // All other rights reserved.
 
 using System.Web.Script.Serialization;
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     /// <summary>
     /// Serves as the base class for classes that provides linked object information.

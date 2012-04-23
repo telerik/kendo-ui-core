@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation
+namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System.Globalization;
     using System.Resources;
@@ -30,7 +30,7 @@ namespace Telerik.Web.Mvc.Infrastructure.Implementation
             }
             else
             {
-                rm = new ResourceManager("Telerik.Web.Mvc.Resources." + resourceName, GetType().Assembly);
+                rm = new ResourceManager("KendoUI.Mvc.Resources." + resourceName, GetType().Assembly);
             }
 
             using (ResourceSet set = rm.GetResourceSet(culture ?? CultureInfo.CurrentCulture, true, true))

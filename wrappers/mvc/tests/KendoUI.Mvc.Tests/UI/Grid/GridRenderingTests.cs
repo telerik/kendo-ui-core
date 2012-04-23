@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Grid
+﻿namespace KendoUI.Mvc.UI.Tests.Grid
 {
     using System.IO;
     using System.Linq;
     using Moq;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using UI;
     using Xunit;
 

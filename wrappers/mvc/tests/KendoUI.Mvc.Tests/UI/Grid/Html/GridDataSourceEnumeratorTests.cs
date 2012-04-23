@@ -3,13 +3,13 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Html.Tests
+namespace KendoUI.Mvc.UI.Html.Tests
 {
     using Moq;
     using System.Linq;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 
     public class GridDataSourceEnumeratorTests

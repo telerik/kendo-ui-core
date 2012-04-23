@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     /// <summary>
     /// Helper class to convert jQuery Animation Duration.

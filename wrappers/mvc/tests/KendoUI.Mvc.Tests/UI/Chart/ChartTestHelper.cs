@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Chart
+﻿namespace KendoUI.Mvc.UI.Tests.Chart
 {
     using Moq;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     public static class ChartTestHelper
     {

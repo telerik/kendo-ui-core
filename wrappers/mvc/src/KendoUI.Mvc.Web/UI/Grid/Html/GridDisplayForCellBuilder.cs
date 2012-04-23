@@ -3,13 +3,13 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 #if MVC2 || MVC3
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     using System;
     using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
     
     public class GridDisplayForCellBuilder<TModel, TValue> : GridDataCellBuilderBase
              where TModel : class

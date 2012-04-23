@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Xunit;
     using System.Collections;
     using System.Collections.Generic;
-    using Telerik.Web.Mvc.UI.Tests.Chart;
+    using KendoUI.Mvc.UI.Tests.Chart;
     using System.Linq;
 
     public class ChartPieSeriesSerializerTests

@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+﻿namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class WebAssetCheckerTests

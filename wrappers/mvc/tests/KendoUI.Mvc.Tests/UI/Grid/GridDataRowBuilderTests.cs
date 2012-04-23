@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.UI.Html.Tests
+﻿namespace KendoUI.Mvc.UI.Html.Tests
 {
     using Moq;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
     using Xunit;
 
     public class GridDataRowBuilderTests

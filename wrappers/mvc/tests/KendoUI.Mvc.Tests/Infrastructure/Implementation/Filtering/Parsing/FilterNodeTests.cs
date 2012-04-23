@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+﻿namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
     using Moq;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.Infrastructure.Implementation;
     using Xunit;
 
     public class FilterNodeTests

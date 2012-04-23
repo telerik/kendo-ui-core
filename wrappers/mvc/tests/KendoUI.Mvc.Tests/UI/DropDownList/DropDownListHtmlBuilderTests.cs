@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using Xunit;
@@ -6,7 +6,7 @@
     using System.IO;
     using System.Web.UI;
 using System.Collections.Generic;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     public class DropDownListHtmlBuilderTests
     {

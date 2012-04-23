@@ -1,12 +1,12 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Grid
+﻿namespace KendoUI.Mvc.UI.Tests.Grid
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Html;
     using Xunit;
 
     public class GridBoundColumnTests

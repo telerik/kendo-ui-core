@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Upload
+﻿namespace KendoUI.Mvc.UI.Tests.Upload
 {
     using System.Web.Mvc;
 

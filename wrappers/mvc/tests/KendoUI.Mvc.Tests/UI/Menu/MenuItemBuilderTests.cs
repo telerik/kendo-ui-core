@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.Tests.Menu
+﻿namespace KendoUI.Mvc.Tests.Menu
 {
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
     using System.Collections.Generic;
 

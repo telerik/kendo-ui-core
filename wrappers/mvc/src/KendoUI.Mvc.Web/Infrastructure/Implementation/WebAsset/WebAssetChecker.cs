@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure.Implementation
+namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     internal class WebAssetChecker : IWebAssetChecker
     {

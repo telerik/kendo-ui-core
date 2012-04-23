@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Grid
+﻿namespace KendoUI.Mvc.UI.Tests.Grid
 {
     using System.Collections;
     using System.Collections.Generic;

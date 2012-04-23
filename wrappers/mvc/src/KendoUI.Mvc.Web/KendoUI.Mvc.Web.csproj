@@ -8,8 +8,8 @@
     <ProjectGuid>{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Telerik.Web.Mvc</RootNamespace>
-    <AssemblyName>Telerik.Web.Mvc</AssemblyName>
+    <RootNamespace>KendoUI.Mvc</RootNamespace>
+    <AssemblyName>KendoUI.Mvc.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -42,7 +42,7 @@
     <DefineConstants>TRACE;MVC1</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Telerik.Web.Mvc.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\KendoUI.Mvc.Web.XML</DocumentationFile>
     <NoWarn>1591</NoWarn>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
@@ -61,7 +61,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MVC2|AnyCPU' ">
     <OutputPath>bin\Release MVC2\</OutputPath>
     <DefineConstants>TRACE;MVC2</DefineConstants>
-    <DocumentationFile>bin\Release\Telerik.Web.Mvc.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\KendoUI.Mvc.Web.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -88,7 +88,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MVC3|AnyCPU' ">
     <OutputPath>bin\Release MVC3\</OutputPath>
     <DefineConstants>TRACE;MVC3;</DefineConstants>
-    <DocumentationFile>bin\Release\Telerik.Web.Mvc.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\KendoUI.Mvc.Web.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>

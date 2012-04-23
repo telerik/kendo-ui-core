@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.UI.Html.Tests
+﻿namespace KendoUI.Mvc.UI.Html.Tests
 {
-    using Telerik.Web.Mvc.UI.Tests;
-    using Telerik.Web.Mvc.UI.Tests.Extensions;
+    using KendoUI.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Tests.Extensions;
     using Xunit;
 
     public class SplitterHtmlBuilderTests

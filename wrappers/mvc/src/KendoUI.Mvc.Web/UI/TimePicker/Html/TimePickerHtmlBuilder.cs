@@ -3,12 +3,12 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Html
+namespace KendoUI.Mvc.UI.Html
 {
     using System;
     using System.Globalization;
     using System.Web.Mvc;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
 
     public class TimePickerHtmlBuilder
     {

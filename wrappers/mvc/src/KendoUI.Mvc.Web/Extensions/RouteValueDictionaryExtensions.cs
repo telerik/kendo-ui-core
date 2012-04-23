@@ -6,7 +6,7 @@
 using System;
 using System.Web.Routing;
 
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     public static class RouteValueDictionaryExtensions
     {

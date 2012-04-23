@@ -3,15 +3,15 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {    
     using System;
     using System.Web.Mvc;
     using System.Web.Routing;
     using System.Collections.Generic;
     
-    using Telerik.Web.Mvc.Resources;
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Resources;
+    using KendoUI.Mvc.Extensions;
 
 
     public class TextBoxBase<T> : ViewComponentBase, ITextBox<T>, IInputComponent<T> where T : struct

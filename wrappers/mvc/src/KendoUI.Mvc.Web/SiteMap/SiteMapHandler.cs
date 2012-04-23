@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Collections.Generic;
@@ -12,8 +12,8 @@ namespace Telerik.Web.Mvc
     using System.Text;
     using System.Web;
     using System.Xml;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// Defines a class that is used to generate searach engine sitemap xml.

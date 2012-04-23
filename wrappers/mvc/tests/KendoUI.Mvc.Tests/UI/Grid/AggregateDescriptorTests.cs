@@ -3,10 +3,10 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Tests
+namespace KendoUI.Mvc.Tests
 {
     using System.Linq;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.Infrastructure.Implementation;
     using Xunit;
     
     public class AggregateDescriptorTests

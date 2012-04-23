@@ -3,13 +3,13 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure
+namespace KendoUI.Mvc.Infrastructure
 {
     using System.Web;
     using System.Web.Routing;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Html;
     
     public static class DI
     {

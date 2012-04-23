@@ -1,8 +1,8 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
     using System;
 

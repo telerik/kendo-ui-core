@@ -1,12 +1,12 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Upload
+﻿namespace KendoUI.Mvc.UI.Tests.Upload
 {
     using Moq;
     using System.Collections.Generic;
     using System.IO;
     using System.Web.Routing;
-    using Telerik.Web.Mvc;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
     public class UploadSerializationTests

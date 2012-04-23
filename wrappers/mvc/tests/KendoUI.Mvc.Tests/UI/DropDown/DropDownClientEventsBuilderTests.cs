@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using System;
     using System.Web.Mvc;
 
     using Xunit;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI.Fluent;
 
     public class DropDownClientEventsBuilderTests
     {

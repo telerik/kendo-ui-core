@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Telerik.Web.Mvc.UI
     using System.Web.UI;
     using Extensions;
     using Infrastructure;
-    using Telerik.Web.Mvc.Resources;
+    using KendoUI.Mvc.Resources;
 
     /// <summary>
     /// Telerik Treeview for ASP.NET MVC is a view component for presenting hierarchical data.

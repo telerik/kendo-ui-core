@@ -1,10 +1,10 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System.Collections.Generic;
     using Xunit;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.UI.Fluent;
 
     public class SnippetsBuilderTests
     {

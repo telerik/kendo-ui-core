@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Telerik.Web.Mvc.UI.Tests
+namespace KendoUI.Mvc.UI.Tests
 {
     public class XYData
     {

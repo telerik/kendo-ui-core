@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Infrastructure
+namespace KendoUI.Mvc.Infrastructure
 {
     /// <summary>
     /// Defines members that a class must implement in order to provide helper methods for resolving relative path.

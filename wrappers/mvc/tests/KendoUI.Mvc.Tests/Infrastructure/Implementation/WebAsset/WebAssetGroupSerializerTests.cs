@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+﻿namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
-    using Telerik.Web.Mvc.Extensions;
+    using KendoUI.Mvc.Extensions;
     using Xunit;
     
     public class WebAssetGroupSerializerTests

@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.UI.Fluent.Tests
+﻿namespace KendoUI.Mvc.UI.Fluent.Tests
 {
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 #if MVC2 || MVC3
     public class GridActionCommandFactoryTests

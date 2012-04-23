@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.Tests.Effects
+﻿namespace KendoUI.Mvc.Tests.Effects
 {
 
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
 
 	public class EffectPropertyBuildersTests

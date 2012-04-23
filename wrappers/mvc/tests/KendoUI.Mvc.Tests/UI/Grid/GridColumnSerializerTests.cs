@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
     using Xunit;
     using System.Web.Mvc;
     using System.Collections;

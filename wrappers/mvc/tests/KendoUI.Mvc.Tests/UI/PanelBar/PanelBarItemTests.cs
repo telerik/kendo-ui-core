@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.UI.UnitTest
+﻿namespace KendoUI.Mvc.UI.UnitTest
 {
-    using Telerik.Web.Mvc.UI;
+    using KendoUI.Mvc.UI;
 
     public class PanelBarItemTests
     {

@@ -1,9 +1,9 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests.Chart
+﻿namespace KendoUI.Mvc.UI.Tests.Chart
 {
     using System;
     using System.Linq;
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Fluent;
     using Xunit;
 
     public class ChartBuilderTests

@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Extensions
+namespace KendoUI.Mvc.Extensions
 {
     using System;
     using System.Globalization;
@@ -11,7 +11,7 @@ namespace Telerik.Web.Mvc.Extensions
     using System.IO.Compression;
     using System.Text;
     using System.Text.RegularExpressions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// Contains the extension methods of <see cref="string"/>.

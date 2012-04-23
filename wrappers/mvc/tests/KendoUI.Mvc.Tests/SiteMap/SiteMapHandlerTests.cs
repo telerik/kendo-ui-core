@@ -3,7 +3,7 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Tests
+namespace KendoUI.Mvc.Tests
 {
     using System;
     using System.IO;

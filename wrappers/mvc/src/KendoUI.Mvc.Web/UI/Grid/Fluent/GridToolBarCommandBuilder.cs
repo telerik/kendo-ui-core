@@ -2,7 +2,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Fluent
+namespace KendoUI.Mvc.UI.Fluent
 {
     public class GridToolBarCommandBuilder<T> : GridToolBarCommandBuilderBase<T, GridToolBarCommandBase<T>, GridToolBarCommandBuilder<T>> where T : class
     {

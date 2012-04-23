@@ -3,11 +3,11 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Linq.Expressions;
-    using Telerik.Web.Mvc.Infrastructure.Implementation.Expressions;
+    using KendoUI.Mvc.Infrastructure.Implementation.Expressions;
     /// <summary>
     /// Base class for all <see cref="IFilterDescriptor"/> used for 
     /// handling the logic for property changed notifications.

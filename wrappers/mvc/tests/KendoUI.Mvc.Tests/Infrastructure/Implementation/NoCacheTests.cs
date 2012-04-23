@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.Infrastructure.Implementation.Tests
+﻿namespace KendoUI.Mvc.Infrastructure.Implementation.Tests
 {
     using Xunit;
     

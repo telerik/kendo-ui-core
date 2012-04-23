@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI.Html.Tests
+namespace KendoUI.Mvc.UI.Html.Tests
 {
     using System.Web.Mvc;
     using System.Linq;

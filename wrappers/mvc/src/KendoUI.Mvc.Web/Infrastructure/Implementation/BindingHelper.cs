@@ -4,7 +4,7 @@
 // All other rights reserved.
 
 #if MVC3
-namespace Telerik.Web.Mvc.Infrastructure.Implementation
+namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System;
     using Extensions;

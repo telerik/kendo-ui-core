@@ -1,6 +1,6 @@
-﻿namespace Telerik.Web.Mvc.UI.Tests
+﻿namespace KendoUI.Mvc.UI.Tests
 {
-    using Telerik.Web.Mvc.UI.Tests.Extensions;
+    using KendoUI.Mvc.UI.Tests.Extensions;
     using Xunit;
 
     public class WindowHtmlBuilderTests

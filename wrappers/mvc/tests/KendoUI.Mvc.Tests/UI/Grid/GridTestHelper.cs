@@ -1,5 +1,5 @@
 ﻿
-namespace Telerik.Web.Mvc.UI.Tests
+namespace KendoUI.Mvc.UI.Tests
 {
     using Moq;
     using System.Collections.Generic;
@@ -8,9 +8,9 @@ namespace Telerik.Web.Mvc.UI.Tests
     using System.Web;
     using System.Web.Mvc;
     using System.Web.UI;
-    using Telerik.Web.Mvc.Infrastructure;
-    using Telerik.Web.Mvc.Infrastructure.Implementation;
-    using Telerik.Web.Mvc.UI.Html;
+    using KendoUI.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure.Implementation;
+    using KendoUI.Mvc.UI.Html;
     
     public static class GridTestHelper
     {

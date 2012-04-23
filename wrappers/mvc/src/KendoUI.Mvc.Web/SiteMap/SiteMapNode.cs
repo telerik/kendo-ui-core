@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc
+namespace KendoUI.Mvc
 {
     using System;
     using System.Collections.Generic;
@@ -222,7 +222,7 @@ namespace Telerik.Web.Mvc
         }
 
         /// <summary>
-        /// Performs an implicit conversion from <see cref="Telerik.Web.Mvc.SiteMapNode"/> to <see cref="Telerik.Web.Mvc.SiteMapNodeBuilder"/>.
+        /// Performs an implicit conversion from <see cref="KendoUI.Mvc.SiteMapNode"/> to <see cref="KendoUI.Mvc.SiteMapNodeBuilder"/>.
         /// </summary>
         /// <param name="node">The node.</param>
         /// <returns>The result of the conversion.</returns>

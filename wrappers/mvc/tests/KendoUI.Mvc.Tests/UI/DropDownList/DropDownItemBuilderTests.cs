@@ -1,7 +1,7 @@
-﻿namespace Telerik.Web.Mvc.UnitTest.Menu
+﻿namespace KendoUI.Mvc.UnitTest.Menu
 {
-    using Telerik.Web.Mvc.UI;
-    using Telerik.Web.Mvc.UI.Fluent;
+    using KendoUI.Mvc.UI;
+    using KendoUI.Mvc.UI.Fluent;
 
     using Xunit;
 

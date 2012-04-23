@@ -3,15 +3,15 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Configuration
+namespace KendoUI.Mvc.Configuration
 {
     using System.Configuration;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Infrastructure;
 
     /*
     <configSections>
         <sectionGroup name="telerik">
-            <section name="webAssets" type="Telerik.Web.Mvc.Configuration.WebAssetConfigurationSection, Telerik.Web.Mvc"/>
+            <section name="webAssets" type="KendoUI.Mvc.Configuration.WebAssetConfigurationSection, KendoUI.Mvc"/>
         </sectionGroup>
     </configSections>
     <telerik>

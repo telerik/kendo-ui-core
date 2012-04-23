@@ -4,7 +4,7 @@
 // All other rights reserved.
 using System;
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     /// <summary>
     /// Defines the position of point labels.

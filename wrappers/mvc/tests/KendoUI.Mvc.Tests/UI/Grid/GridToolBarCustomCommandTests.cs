@@ -1,8 +1,8 @@
-﻿namespace Telerik.Web.Mvc.UI.Html.Tests
+﻿namespace KendoUI.Mvc.UI.Html.Tests
 {
     using Moq;
     using System.Linq;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 
     public class GridToolBarCustomCommandTests

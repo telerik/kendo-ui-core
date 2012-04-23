@@ -3,10 +3,10 @@
 // See http://www.microsoft.com/opensource/licenses.mspx#Ms-PL. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.Extensions.Tests
+namespace KendoUI.Mvc.Extensions.Tests
 {
     using System;
-    using Telerik.Web.Mvc.UI.Tests;
+    using KendoUI.Mvc.UI.Tests;
     using Xunit;
 
     public class StringExtensionsTests

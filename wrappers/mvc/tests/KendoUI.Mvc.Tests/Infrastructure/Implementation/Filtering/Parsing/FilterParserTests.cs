@@ -1,4 +1,4 @@
-﻿namespace Telerik.Web.Mvc.Infrastructure.Tests
+﻿namespace KendoUI.Mvc.Infrastructure.Tests
 {
     using System;
     using System.Globalization;

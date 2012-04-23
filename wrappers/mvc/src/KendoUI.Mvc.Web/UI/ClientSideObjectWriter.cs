@@ -3,7 +3,7 @@
 // See http://www.gnu.org/licenses/gpl-2.0.html. 
 // All other rights reserved.
 
-namespace Telerik.Web.Mvc.UI
+namespace KendoUI.Mvc.UI
 {
     using System;
     using System.Collections;
@@ -13,8 +13,8 @@ namespace Telerik.Web.Mvc.UI
     using System.Linq;
     using System.Text;
     using System.Web.Script.Serialization;
-    using Telerik.Web.Mvc.Extensions;
-    using Telerik.Web.Mvc.Infrastructure;
+    using KendoUI.Mvc.Extensions;
+    using KendoUI.Mvc.Infrastructure;
 
     /// <summary>
     /// Class used to build initialization script of jQuery plugin.
