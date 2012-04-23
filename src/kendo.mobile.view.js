@@ -664,7 +664,7 @@
 
             that._setupLayouts(sandbox);
 
-            container.append(sandbox.find(roleSelector("layout") + ", script, style"))
+            container.append(sandbox.children(roleSelector("layout") + ", script, style"))
                 .append(views);
 
             return that._createView(view);
