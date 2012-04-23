@@ -990,7 +990,7 @@
                     treeview: that.options,
                     group: groupData,
                     item: extend(nodeData, { index: index })
-                })
+                });
             }
 
             if (fromNodeData) {
