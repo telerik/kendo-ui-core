@@ -22,17 +22,15 @@
                             },
                             pageSize: 10
                         },
-                        height: 250,
-                        scrollable: false,
+                        height: 350,
                         sortable: true,
-                        filterable: true,
                         resizable: true,
                         pageable: true,
-                        toolbar: ["foo"],
                         columns: [
                             {
                                 field: "FirstName",
                                 title: "First Name",
+                                footerTemplate: "foo",
                                 width: 100
                             },
                             {
@@ -45,7 +43,8 @@
                                 width: 100
                             },
                             {
-                                field: "Title"
+                                field: "Title",
+                                width: 100
                             },
                             {
                                 field: "BirthDate",
