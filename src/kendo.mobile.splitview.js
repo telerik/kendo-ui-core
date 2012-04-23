@@ -28,6 +28,10 @@
             that._init();
         },
 
+        options: {
+            name: "SplitView"
+        },
+
         // Implement view interface
         _layout: function() {
             var that = this,
@@ -43,10 +47,6 @@
             var that = this;
             that.element.css("display", "");
             that.trigger("show", {view: that});
-        },
-
-        options: {
-            name: "SplitView"
         }
     });
 
