@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KendoUI.Mvc.Web", "KendoUI.Mvc.Web\KendoUI.Mvc.Web.csproj", "{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug MVC2|Any CPU = Debug MVC2|Any CPU
+		Debug MVC3|Any CPU = Debug MVC3|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release MVC2|Any CPU = Release MVC2|Any CPU
+		Release MVC3|Any CPU = Release MVC3|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Debug MVC2|Any CPU.ActiveCfg = Debug MVC2|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Debug MVC2|Any CPU.Build.0 = Debug MVC2|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Debug MVC3|Any CPU.ActiveCfg = Debug MVC3|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Debug MVC3|Any CPU.Build.0 = Debug MVC3|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Release MVC2|Any CPU.ActiveCfg = Release MVC2|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Release MVC2|Any CPU.Build.0 = Release MVC2|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Release MVC3|Any CPU.ActiveCfg = Release MVC3|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Release MVC3|Any CPU.Build.0 = Release MVC3|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
