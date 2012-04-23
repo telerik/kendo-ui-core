@@ -442,9 +442,49 @@
                     .appendTo(that.thead)
                     .data("th", th);
                 });
+                var columnStart,
+                    columnWidth,
+                    gridWidth,
+                    col;
 
                 that.thead.kendoResizable({
-                    handle: ".k-resize-handle"
+                    handle: ".k-resize-handle",
+                    hint: function(handle) {
+                        return $('<div class="k-grid-resize-indicator" />').css({
+                            height: handle.data("th").outerHeight() + that.tbody.attr("clientHeight")
+                        });
+                    },
+                    start: function(e) {
+                        var th = $(e.currentTarget).data("th"),
+                            index = $.inArray(th[0], th.parent().children(":visible")),
+                            contentTable = that.tbody.parent();
+
+                            col = that.thead.parent().find("col:eq(" + index + ")")
+                                .add(contentTable.children("colgroup").find("col:eq(" + index + ")"));
+
+                        columnStart = e.pageX;
+                        columnWidth = th.outerWidth();
+                        gridWidth = that.tbody.outerWidth();
+                    },
+                    resize: function(e) {
+                        var width = columnWidth + e.pageX - columnStart;
+                        if (width > 10) {
+                            col.css('width', width);
+
+                            that.tbody.parent()
+                                .add(that.thead.parent())
+                                .css('width', gridWidth + e.pageX - columnStart);
+
+                            var left = 0;
+                            $('.k-resize-handle', that.wrapper).each(function () {
+                                left += $(this).data('th').outerWidth();
+                                $(this).css('left', left - indicatorWidth);
+                            });
+                        }
+                    },
+                    stop: function() {
+                        init();
+                    }
                 });
             }
         },
