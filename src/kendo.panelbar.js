@@ -73,12 +73,33 @@
      *     dataSource: [
      *         {
      *             text: "Item 1",
-     *             items: [
-     *                 { text: "Sub Item 1" },
-     *                 { text: "Sub Item 2" }
-     *             ]
+     *             url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
      *         },
-     *         { text: "Item 2" }
+     *         {
+     *             text: "<b>Item 2</b>",
+     *             encoded: false,                                 // Allows use of HTML for item text
+     *             content: "text"                                 // content within an item
+     *         },
+     *         {
+     *             text: "Item 3",
+     *             contentUrl: "partialContent.html"               // content URL to load within an item
+     *         },
+     *         {
+     *             text: "Item 4",
+     *             imageUrl: "http://www.kendoui.com/test.jpg",    // item image URL, optional
+     *             expanded: true,                                 // item is rendered expanded
+     *             items: [{                                       // Sub item collection.
+     *                 text: "Sub Item 1"
+     *             },
+     *             {
+     *                 text: "Sub Item 2"
+     *             }]
+     *         },
+     *         {
+     *             text: "Item 5",
+     *             // item image sprite CSS class, optional
+     *             spriteCssClass: "imageClass3"
+     *         }
      *     ]
      * });
      *
@@ -505,10 +526,10 @@
             Widget.fn.init.call(that, element, options);
 
             element = that.wrapper = that.element;
-
             options = that.options;
 
             if (options.dataSource) {
+                that.element.empty();
                 that.append(options.dataSource, element);
             }
 
@@ -1004,7 +1025,8 @@
          *             url: "http://www.kendoui.com/"                  // link URL if navigation is needed (optional)
          *         },
          *         {
-         *             text: "Item 2",
+         *             text: "<b>Item 2</b>",
+         *             encoded: false,                                 // Allows use of HTML for item text
          *             content: "text"                                 // content within an item
          *         },
          *         {
@@ -1014,20 +1036,21 @@
          *         {
          *             text: "Item 4",
          *             imageUrl: "http://www.kendoui.com/test.jpg",    // item image URL, optional
-         *             // sub-item collection
-         *             items:
-         *                 [
-         *                     { text: "Sub Item 1" },
-         *                     { text: "Sub Item 2" }
-         *                 ]
+         *             expanded: true,                                 // item is rendered expanded
+         *             items: [{                                       // Sub item collection.
+         *                 text: "Sub Item 1"
+         *             },
+         *             {
+         *                 text: "Sub Item 2"
+         *             }]
          *         },
          *         {
          *             text: "Item 5",
          *             // item image sprite CSS class, optional
          *             spriteCssClass: "imageClass3"
          *         }
-         *      ],
-         *      referenceItem
+         *     ],
+         *     referenceItem
          * );
          *
          */
@@ -1075,7 +1098,8 @@
          *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                              // Allows use of HTML for item text
          *         content: "text"                              // Content for the content element
          *     },
          *     {
@@ -1085,6 +1109,7 @@
          *     {
          *         text: "Item 4",
          *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         expanded: true,                              // item is rendered expanded
          *         items: [{                                    // Sub item collection.
          *              text: "Sub Item 1"
          *         },
@@ -1133,7 +1158,8 @@
          *         url: "http://www.kendoui.com"                // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                              // Allows use of HTML for item text
          *         content: "text"                              // Content for the content element
          *     },
          *     {
@@ -1143,6 +1169,7 @@
          *     {
          *         text: "Item 4",
          *         imageUrl: "http://www.kendoui.com/test.jpg", // Item image URL, optional.
+         *         expanded: true,                              // item is rendered expanded
          *         items: [{                                    // Sub item collection.
          *              text: "Sub Item 1"
          *         },
@@ -1236,14 +1263,14 @@
         },
 
         _insert: function (item, referenceItem, parent) {
-            var that = this, contents = [];
+            var that = this,
+                items, contents = [];
 
             if (!referenceItem || !referenceItem.length) {
                 parent = that.element;
             }
 
             var plain = $.isPlainObject(item),
-                items,
                 groupData = {
                     firstLevel: parent.hasClass("k-panelbar"),
                     expanded: parent.parent().hasClass("k-state-active"),

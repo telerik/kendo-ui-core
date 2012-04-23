@@ -45,11 +45,31 @@
      *     $("#tabstrip").kendoTabStrip({
      *         dataTextField: "text",
      *         dataContentField: "content",
+     *         dataUrlField: "url",
+     *         dataImageUrlField: "imageUrl",
+     *         dataSpriteCssClass: "spriteCssClass",
+     *         dataContentUrlField: "contentUrl",
      *         dataSource:
-     *         [
-     *             { text: "Tab 1", content: "Tab 1 content" },
-     *             { text: "Tab 2", content: "Tab 2 content" }
-     *         ]
+     *         [{
+     *             text: "Item 1",
+     *             url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
+     *         },
+     *         {
+     *             text: "Item 2",
+     *             content: "text"                             // Content for the content element
+     *         },
+     *         {
+     *             text: "Item 3",
+     *             contentUrl: "partialContent.html"           // From where to load the item content
+     *         },
+     *         {
+     *             text: "Item 4",
+     *             imageUrl: "http://www.kendoui.com/test.jpg" // Item image URL, optional.
+     *         },
+     *         {
+     *             text: "Item 5",
+     *             spriteCssClass: "imageClass3"               // Item image sprite CSS class, optional.
+     *         }]
      *     });
      * });
      *
@@ -911,7 +931,8 @@
          *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                             // Allows use of HTML for item text
          *         content: "text"                             // Content for the content element
          *     },
          *     {
@@ -965,7 +986,8 @@
          *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                             // Allows use of HTML for item text
          *         content: "text"                             // Content for the content element
          *     },
          *     {
@@ -1020,7 +1042,8 @@
          *         url: "http://www.kendoui.com"               // Link URL if navigation is needed, optional.
          *     },
          *     {
-         *         text: "Item 2",
+         *         text: "<b>Item 2</b>",
+         *         encoded: false,                             // Allows use of HTML for item text
          *         content: "text"                             // Content for the content element
          *     },
          *     {
