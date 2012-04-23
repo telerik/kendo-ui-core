@@ -1,10 +1,12 @@
 *.dll
-!**/References/*.dll
 *.gpState
 *.pdb
 *.suo
 *.swp
 *.user
+bin/
+obj/
+!**/References/*.dll
 .DS_Store
 .livereload
 app.js
@@ -14,7 +16,6 @@ demos/mvc/content/docs/
 !src/docs
 live/
 node_modules
-obj/
 release/
 sitefinity-docs/
 tags
