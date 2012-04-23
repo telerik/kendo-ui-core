@@ -35,7 +35,9 @@
     </head>
     <body>
         <div data-role="splitview">
-            <div data-role="pane" data-transition="slide" data-layout="foo">
+
+            <div data-role="pane" data-transition="slide">
+
                 <div data-role="view" data-title="Level 1">
                     <div data-role="header">
                         <div data-role="navbar">
@@ -54,23 +56,29 @@
                             <span data-role="view-title"></span>
                         </div>
                     </div>
-                    level 2
-                </div>
 
-                <div data-role="layout" data-id="foo">
+                    <a data-role="button" data-transition="slide" data-target="main-pane" href="#main-bar">Bar (Main pane)</a>
+                    level 2
                 </div>
             </div>
 
-            <div data-role="pane" style="-webkit-box-flex: 4">
-                <div data-role="view" data-title="Main Pane">
+            <div data-role="pane" style="-webkit-box-flex: 4" id="main-pane" data-layout="main">
+
+                <div data-role="layout" data-id="main">
                     <div data-role="header">
                         <div data-role="navbar">
                             <span data-role="view-title"></span>
                             <a data-role="button" data-align="right" href="#bar">Bar</a>
                         </div>
                     </div>
+                </div>
 
-                    Main pane
+                <div data-role="view" data-title="Main Pane">
+                    Main pane Initial view
+                </div>
+
+                <div data-role="view" data-title="Main Pane Bar View" id="main-bar">
+                    Main pane Bar view
                 </div>
             </div>
         </div>
