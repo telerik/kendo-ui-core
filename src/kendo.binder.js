@@ -279,17 +279,23 @@
             Binder.fn.init.call(this, element, bindings, options);
 
             this._change = proxy(this.change, this);
-            this.eventName = options.valueUpdate ||CHANGE;
+            this.eventName = options.valueUpdate || CHANGE;
 
             $(this.element).bind(this.eventName, this._change);
+
+            this._initChange = false;
         },
 
         change: function() {
+            this._initChange = this.eventName != CHANGE;
             this.bindings[VALUE].set(this.element.value);
         },
 
         refresh: function() {
-            this.element.value = this.bindings[VALUE].get();
+            if (!this._initChange) {
+                this.element.value = this.bindings[VALUE].get();
+            }
+            this._initChange = false;
         },
 
         destroy: function() {
