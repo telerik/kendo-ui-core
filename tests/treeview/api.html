@@ -333,6 +333,23 @@
                 equals(treeview.findByText("foo").data("id"), 1);
             });
 
+            test("append() uses item template when creating items", function() {
+                var treeview = createTreeView({
+                        template: kendo.template("item: #= item.text #")
+                    }),
+                    treeviewObject = treeview.data("kendoTreeView");
+
+                treeviewObject.append({ text: "foo" });
+
+                equal(treeview.find(".k-in").text(), "item: foo");
+
+                treeviewObject.remove(".k-item");
+
+                treeviewObject.append([{ text: "foo" }]);
+
+                equal(treeview.find(".k-in").text(), "item: foo");
+            });
+
             test("detach() removes node and persists data", function() {
                 var treeview = createTreeView([
                             { text: "foo" },

@@ -985,20 +985,22 @@
                     length: updatedGroupLength
                 }, node, i, nodeHtml = "";
 
+            function toNodeHtml(nodeData, index) {
+                return TreeView.renderItem({
+                    treeview: that.options,
+                    group: groupData,
+                    item: extend(nodeData, { index: index })
+                })
+            }
+
             if (fromNodeData) {
                 if (isArrayData) {
                     for (i = 0; i < nodeData.length; i++) {
-                        nodeHtml += TreeView.renderItem({
-                            group: groupData,
-                            item: extend(nodeData[i], { index: index + i })
-                        });
+                        nodeHtml += toNodeHtml(nodeData[i], index + i);
                     }
 
                 } else {
-                    nodeHtml = TreeView.renderItem({
-                        group: groupData,
-                        item: extend(nodeData, { index: index })
-                    });
+                    nodeHtml = toNodeHtml(nodeData, index);
                 }
 
                 node = $(nodeHtml);
