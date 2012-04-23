@@ -1,0 +1,48 @@
+﻿// (c) Copyright 2002-2010 Telerik 
+// This source is subject to the GNU General Public License, version 2
+// See http://www.gnu.org/licenses/gpl-2.0.html. 
+// All other rights reserved.
+
+namespace Telerik.Web.Mvc.UI
+{
+    using System.Collections.Generic;
+    using Telerik.Web.Mvc.Infrastructure;
+    using Telerik.Web.Mvc.Extensions;
+
+    internal class PlotAreaSerializer : IChartSerializer
+    {
+        private readonly PlotArea plotArea;
+
+        public PlotAreaSerializer(PlotArea plotArea)
+        {
+            this.plotArea = plotArea;
+        }
+
+        public virtual IDictionary<string, object> Serialize()
+        {
+            var result = new Dictionary<string, object>();
+            
+            FluentDictionary.For(result)
+                .Add("background", plotArea.Background, () => plotArea.Background.HasValue())
+                .Add("margin", plotArea.Margin.CreateSerializer().Serialize(), ShouldSerializeMargin)
+                .Add("border", plotArea.Border.CreateSerializer().Serialize(), ShouldSerializeBorder);
+
+            return result;
+        }
+
+        private bool ShouldSerializeMargin()
+        {
+            return plotArea.Margin.Top.HasValue ||
+                   plotArea.Margin.Right.HasValue ||
+                   plotArea.Margin.Bottom.HasValue ||
+                   plotArea.Margin.Left.HasValue;
+        }
+
+        private bool ShouldSerializeBorder()
+        {
+            return plotArea.Border.Color.HasValue() ||
+                   plotArea.Border.Width.HasValue ||
+                   plotArea.Border.DashType.HasValue;
+        }
+    }
+}
