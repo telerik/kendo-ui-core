@@ -50,19 +50,11 @@
         comboBoxTemplate:
             '<li class="k-editor-combobox">' +
                 '<select title="#= tooltip #" class="#= cssClass #"></select>' +
-//                '<div class="k-widget k-combobox k-header #= cssClass #">' +
-//                    '<div class="k-dropdown-wrap k-state-default">' +
-//                        '<input class="k-input" id="-input" title="#= tooltip #" type="text" value="#=initialValue#" />' +
-//                        '<span class="k-select k-header"><span class="k-icon k-arrow-down">select</span></span>' +
-//                    '</div><input style="display:none" type="text" value="inherit" /></div>' +
             '</li>',
 
         dropDownListTemplate:
             '<li class="k-editor-selectbox">' +
                 '<select title="#= tooltip #" class="#= cssClass #"></select>' +
-//                '<div class="k-selectbox k-header #= cssClass #"><div class="k-dropdown-wrap k-state-default">' +
-//                    '<span class="k-input">#=initialValue#</span><span class="k-select"><span class="k-icon k-arrow-down">select</span></span>' +
-//                '</div></div>' +
             '</li>',
 
         focusable: ".k-colorpicker,a.k-tool-icon:not(.k-state-disabled),.k-selectbox, .k-combobox .k-input",
