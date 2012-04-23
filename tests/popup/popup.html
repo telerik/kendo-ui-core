@@ -22,6 +22,8 @@
         <script>
             var Popup = kendo.ui.Popup, div, anchor;
 
+            QUnit.config.reorder = false;
+
             module("kendo.ui.Popup", {
                 setup: function() {
                     div = $("<div style='background:red'>popup</div>");
