@@ -161,7 +161,6 @@
             test("press up arrow when first item is selected should not do anything", function() {
                 var dropdownlist = input.kendoDropDownList(data).data("kendoDropDownList");
 
-                dropdownlist.dataSource.read();
                 dropdownlist.wrapper.focus().press(keys.UP);
 
                 equal(dropdownlist.selectedIndex, 0);
@@ -289,6 +288,19 @@
                 dropdownlist.open();
 
                 dropdownlist.wrapper.trigger({type: "keydown", altKey: true, keyCode: kendo.keys.UP});
+            });
+
+            test("navigation works after rebind", 1, function() {
+                var dropdownlist = new DropDownList(input, {
+                    dataSource: data
+                });
+
+                dropdownlist.dataSource.data(data);
+                dropdownlist.wrapper.focusin();
+
+                dropdownlist.wrapper.trigger({type: "keydown", keyCode: kendo.keys.DOWN});
+
+                equal(dropdownlist.current().index(), 0);
             });
       </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
