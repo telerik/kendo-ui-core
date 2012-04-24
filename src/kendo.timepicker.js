@@ -84,6 +84,7 @@
     var kendo = window.kendo,
         touch = kendo.support.touch,
         keys = kendo.keys,
+        extractFormat = kendo._extractFormat,
         ui = kendo.ui,
         Widget = ui.Widget,
         OPEN = "open",
@@ -501,7 +502,7 @@
             element = that.element;
             options = that.options;
 
-            options.format = options.format || kendo.culture().calendar.patterns.t;
+            options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
 
             that._wrapper();
 

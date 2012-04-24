@@ -168,6 +168,14 @@
                 ok(timepicker.timeView.popup.element.hasClass("km-scroll-wrapper"));
             });
 
+            test("timepicker strips format from '{0:format}'", function() {
+                var timepicker = new kendo.ui.TimePicker(input, {
+                    format: "{0:hh:mm}"
+                });
+
+                equal(timepicker.options.format, "hh:mm");
+            });
+
        </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
