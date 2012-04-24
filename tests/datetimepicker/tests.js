@@ -14,5 +14,13 @@ tests.push(
     {
         page: "datetimepicker/events.html",
         title: "datetimepicker events"
+    },
+    {
+        page: "datetimepicker/mvvm.html",
+        title: "datetimepicker MVVM"
+    },
+    {
+        page: "datetimepicker/lint.html",
+        title: "datetimepicker lint"
     }
 );
