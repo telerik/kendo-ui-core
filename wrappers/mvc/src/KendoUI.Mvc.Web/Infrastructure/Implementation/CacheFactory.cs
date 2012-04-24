@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     internal class CacheFactory : ICacheFactory

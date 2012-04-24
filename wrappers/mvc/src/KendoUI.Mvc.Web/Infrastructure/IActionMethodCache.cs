@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.Infrastructure
 {
     using System.Collections.Generic;

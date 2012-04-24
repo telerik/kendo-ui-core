@@ -1,5 +1,3 @@
-
-
 #if MVC3
 namespace KendoUI.Mvc.Infrastructure.Implementation.Expressions
 {

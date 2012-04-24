@@ -1,6 +1,3 @@
-
-
-
 namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     public class BooleanNode : IFilterNode, IValueNode

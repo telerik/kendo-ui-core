@@ -1,6 +1,3 @@
-
-
-
 namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System.Collections.ObjectModel;

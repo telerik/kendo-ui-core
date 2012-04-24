@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI
 {
     public abstract class GridToolBarCommandBase<T> : GridActionCommandBase

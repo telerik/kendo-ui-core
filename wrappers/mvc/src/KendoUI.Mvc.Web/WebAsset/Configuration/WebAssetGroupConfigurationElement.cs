@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.Configuration
 {
     using System.Configuration;

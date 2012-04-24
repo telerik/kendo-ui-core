@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI.Fluent
 {
     public class GridFilterEqualityDescriptorBuilder<TValue> : GridFilterEqualityDescriptorBuilderBase<TValue, GridFilterCompositeBuilder<GridFilterEqualityDescriptorBuilder<TValue>>>

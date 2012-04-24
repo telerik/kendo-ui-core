@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI.Fluent
 {
     public class GridAjaxBindingSettingsBuilder : GridBindingSettingsBuilder<GridAjaxBindingSettingsBuilder>

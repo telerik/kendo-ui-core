@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI.Fluent
 {
     public abstract class GridFilterComparisonDescriptorBuilderBase<TValue, TCompositeBuilder> : GridFilterEqualityDescriptorBuilderBase<TValue, TCompositeBuilder> where TCompositeBuilder : GridFilterCompositeBuilderBase

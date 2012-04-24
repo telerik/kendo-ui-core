@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI
 {
     /// <summary>Specifies the general layout of the slider.</summary>

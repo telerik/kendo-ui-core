@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     using System.Text;

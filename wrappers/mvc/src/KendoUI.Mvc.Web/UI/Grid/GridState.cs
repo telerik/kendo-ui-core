@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc
 {
     using System.Runtime.Serialization;

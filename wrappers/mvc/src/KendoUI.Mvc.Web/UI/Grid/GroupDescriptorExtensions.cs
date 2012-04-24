@@ -1,4 +1,3 @@
-
 #if MVC3
 namespace KendoUI.Mvc.UI
 {

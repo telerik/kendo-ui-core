@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc.UI.Html
 {
     class GridPagerSectionsBuilder : IGridPagerSectionsBuilder

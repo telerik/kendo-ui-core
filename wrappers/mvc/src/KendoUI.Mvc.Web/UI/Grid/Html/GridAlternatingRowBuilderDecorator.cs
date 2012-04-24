@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI.Html
 {
     public class GridAlternatingRowBuilderDecorator : GridRowBuilderDecoratorBase

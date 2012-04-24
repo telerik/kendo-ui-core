@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.Infrastructure.Implementation
 {
     public class StringNode : IFilterNode, IValueNode
