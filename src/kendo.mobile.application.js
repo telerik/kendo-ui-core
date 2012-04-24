@@ -303,7 +303,9 @@
             var that = this;
 
             that.layouts = {};
-            that.options = $.extend({ hideAddressBar: true }, options);
+            kendo.mobile.application = that; // global reference to current application
+
+            that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
             that.element = element ? $(element) : $(document.body);
 

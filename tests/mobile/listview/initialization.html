@@ -232,15 +232,6 @@
                 ok(!dom.find("li>div.km-group-title").contents().first().is("div.km-group-title"), "No bogus element is present");
             });
 
-            test("Cache show/hide loading methods of the application", function() {
-                setup('<div data-role="view" id="page1"><ul data-role="listview"><li><a href="#">Foo</a></li></ul></div>');
-
-                var listView = $("#qunit-fixture").find("ul").data("kendoMobileListView");
-
-                ok(listView._showLoadingProxy);
-                ok(listView._hideLoadingProxy);
-            });
-
             test("items returns list items", function() {
                 var dom = $('<ul><li><a href="#">Foo</a></li></ul>');
 

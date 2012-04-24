@@ -1,7 +1,8 @@
 (function($, undefined) {
     var kendo = window.kendo,
         Node = window.Node,
-        ui = kendo.mobile.ui,
+        mobile = kendo.mobile,
+        ui = mobile.ui,
         support = kendo.support,
         DataSource = kendo.data.DataSource,
         Widget = ui.Widget,
@@ -388,7 +389,7 @@
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler)
-                               .unbind(REQUEST_START, that._showLoadingProxy);
+                               .unbind(REQUEST_START, that._showLoading);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
@@ -396,8 +397,8 @@
             that.dataSource = DataSource.create(options.dataSource)
                                         .bind("change", that._refreshHandler);
 
-            if (that._showLoadingProxy && !options.pullToRefresh && !options.loadMore) {
-                that.dataSource.bind(REQUEST_START, that._showLoadingProxy);
+            if (!options.pullToRefresh && !options.loadMore) {
+                that.dataSource.bind(REQUEST_START, that._showLoading);
             }
         },
 
@@ -408,11 +409,8 @@
                 application = view.application,
                 scroller = that._scroller();
 
-            that._hideLoadingProxy = proxy(application.hideLoading, application);
-            that._showLoadingProxy = proxy(application.showLoading, application);
-
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
-                dataSource.bind(REQUEST_START, that._showLoadingProxy);
+                dataSource.bind(REQUEST_START, that._showLoading);
             }
 
             if (options.pullToRefresh) {
@@ -522,11 +520,9 @@
                 that._scroller().pullHandled();
             }
 
-            kendo.mobile.init(element.children());
+            mobile.init(element.children());
 
-            if (that._hideLoadingProxy) {
-                that._hideLoadingProxy();
-            }
+            that._hideLoading();
 
             that._style();
             that.trigger("dataBound", { ns: ui });
@@ -668,6 +664,14 @@
 
         _scroller: function() {
             return this.view().scroller;
+        },
+
+        _showLoading: function() {
+            mobile.application && mobile.application.showLoading();
+        },
+
+        _hideLoading: function() {
+            mobile.application && mobile.application.hideLoading();
         }
     });
 
