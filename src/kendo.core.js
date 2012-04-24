@@ -15,7 +15,6 @@
         JSON = window.JSON || {},
         support = {},
         formatRegExp = /\{(\d+)(:[^\}]+)?\}/g,
-        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}/g,
         boxShadowRegExp = /(\d+?)px\s*(\d+?)px\s*(\d+?)px\s*(\d+?)?/i,
         FUNCTION = "function",
         STRING = "string",
@@ -2284,6 +2283,7 @@ function pad(number) {
 
     var templateRegExp = /template$/i,
         jsonRegExp = /^(?:\{(?:.|\n)*\}|\[(?:.|\n)*\])$/,
+        jsonFormatRegExp = /^\{(\d+)(:[^\}]+)?\}/,
         dashRegExp = /([A-Z])/g;
 
     function parseOption(element, option) {
@@ -2308,7 +2308,7 @@ function pad(number) {
         } else if (!isNaN(parseFloat(value))) {
             value = parseFloat(value);
         } else if (jsonRegExp.test(value) && !jsonFormatRegExp.test(value)) {
-           value = $.parseJSON(value);
+            value = $.parseJSON(value);
         }
 
         return value;
