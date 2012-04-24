@@ -1260,10 +1260,8 @@ function pad(number) {
     };
 
     kendo._extractFormat = function (format) {
-        var result = formatRegExp.exec(format);
-
-        if (result && result[2]) {
-            return result[2].substring(1);
+        if (format.slice(0,3) === "{0:") {
+            format = format.slice(3, format.length - 1);
         }
 
         return format;

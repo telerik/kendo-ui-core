@@ -2,6 +2,7 @@
     var kendo = window.kendo,
         touch = kendo.support.touch,
         parse = kendo.parseDate,
+        extractFormat = kendo._extractFormat,
         ui = kendo.ui,
         Widget = ui.Widget,
         CHANGE = "change",
@@ -303,8 +304,10 @@
     }
 
     function validate(options) {
-        options.format = kendo.calendar.parseFormat(options.format || kendo.culture().calendar.patterns.g);
-        options.timeFormat = kendo.calendar.parseFormat(options.timeFormat || kendo.culture().calendar.patterns.t);
+        var patterns = kendo.culture().calendar.patterns;
+
+        options.format = extractFormat(options.format || patterns.g);
+        options.timeFormat = extractFormat(options.timeFormat || patterns.t);
         kendo.calendar.validate(options);
     }
 
