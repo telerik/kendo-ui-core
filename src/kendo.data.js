@@ -1370,6 +1370,19 @@
         }
     });
 
+    function flattenGroups(data) {
+        var idx, length, result = [];
+
+        for (idx = 0, length = data.length; idx < length; idx++) {
+            if (data[idx].hasSubgroups) {
+                result = result.concat(flattenGroups(data[idx].items));
+            } else {
+                result = result.concat(data[idx].items.toJSON());
+            }
+        }
+        return result;
+    }
+
     var DataSource = Observable.extend({
         init: function(options) {
             var that = this, id, model, transport;
@@ -1438,8 +1451,15 @@
             batch: false
         },
 
+        _flatData: function(data) {
+            if (this.options.serverGrouping) {
+                return flattenGroups(data);
+            }
+            return data;
+        },
+
         get: function(id) {
-            var idx, length, data = this._data;
+            var idx, length, data = this._flatData(this._data);
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (data[idx].id == id) {
@@ -1449,7 +1469,7 @@
         },
 
         getByUid: function(id) {
-            var idx, length, data = this._data;
+            var idx, length, data = this._flatData(this._data);
 
             for (idx = 0, length = data.length; idx < length; idx++) {
                 if (data[idx].uid == id) {
