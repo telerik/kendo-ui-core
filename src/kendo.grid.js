@@ -481,10 +481,12 @@
                         if (width > 10) {
                             col.css('width', width);
 
+                            that._footerWidth = gridWidth + e.pageX - columnStart;
+
                             that.tbody.parent()
                                 .add(that.thead.parent())
                                 .add(footer.find("table"))
-                                .css('width', gridWidth + e.pageX - columnStart);
+                                .css('width', that._footerWidth);
 
                             $('.k-resize-handle', that.wrapper).each(function () {
                                 left += $(this).data('th').outerWidth();
@@ -494,13 +496,18 @@
                     },
                     resizeend: function(e) {
                         var th = $(e.currentTarget).data("th"),
-                            newWidth = th.outerWidth();
+                            newWidth = th.outerWidth(),
+                            column;
 
                         cursor(that.wrapper, "");
 
                         if (columnWidth != newWidth) {
+                            column = that.columns[th.parent().find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)];
+
+                            column.width = newWidth;
+
                             that.trigger(COLUMNRESIZE, {
-                                column: that.columns[th.parent().find("th:not(.k-group-cell,.k-hierarchy-cell)").index(th)],
+                                column: column,
                                 oldWidth: columnWidth,
                                 newWidth: newWidth
                             });
@@ -1594,6 +1601,11 @@
                         that.footer = html.insertBefore(that.tbody);
                     }
                 }
+
+                if (options.resizable && that._footerWidth) {
+                    that.footer.find("table").css('width', that._footerWidth);
+                }
+
                 that._setContentHeight();
             }
         },
@@ -2296,7 +2308,6 @@
             }
 
             if(groups > 0) {
-
                 if (that.detailTemplate) {
                     colspan++;
                 }
