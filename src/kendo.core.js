@@ -2511,9 +2511,10 @@ function pad(number) {
         events: [],
 
         viewShow: $.noop,
+        viewInit: $.noop,
 
-        viewInit: function(view) {
-            this.view = view;
+        view: function() {
+            return this.element.closest(kendo.roleSelector("view")).data("kendoMobileView");
         }
     });
 

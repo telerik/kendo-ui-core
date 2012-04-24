@@ -406,9 +406,8 @@
                 options = that.options,
                 dataSource = that.dataSource,
                 application = view.application,
-                scroller;
+                scroller = that._scroller();
 
-            that.scroller = scroller = view.scroller;
             that._hideLoadingProxy = proxy(application.hideLoading, application);
             that._showLoadingProxy = proxy(application.showLoading, application);
 
@@ -446,7 +445,7 @@
 
         _calcTreshold: function() {
             var that = this,
-                scroller = that.scroller;
+                scroller = that._scroller();
 
             if (scroller) {
                 that._treshold = scroller.scrollHeight() - that.options.scrollTreshold;
@@ -520,7 +519,7 @@
             }
 
             if (options.pullToRefresh) {
-                that.scroller.pullHandled();
+                that._scroller().pullHandled();
             }
 
             kendo.mobile.init(element.children());
@@ -665,6 +664,10 @@
             } else {
                 icon.hide();
             }
+        },
+
+        _scroller: function() {
+            return this.view().scroller;
         }
     });
 
