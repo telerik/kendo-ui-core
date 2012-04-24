@@ -325,10 +325,7 @@
                         that.trigger(CHANGE, { field: field, index: e.index, items: e.items, action: e.action});
                     });
                 })(field);
-            } else if (object !== null && object instanceof DataSource) {
-                object._parent = parent; // assign parent to the DataSource if part of observable object
             }
-
 
             return object;
         }
@@ -1747,8 +1744,6 @@
             this.trigger(ERROR, { xhr: xhr, status: status, errorThrown: errorThrown });
         },
 
-        _parent: noop,
-
         success: function(data) {
             var that = this,
                 options = that.options,
@@ -1798,7 +1793,6 @@
                 }
             } else {
                 data = new ObservableArray(data, that.reader.model);
-                data.parent = function() { return that._parent(); };
             }
 
             return data.bind(CHANGE, proxy(that._change, that));

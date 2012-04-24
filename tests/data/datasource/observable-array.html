@@ -81,29 +81,6 @@
                 ok(dataSource.at(0) instanceof ModelType);
                 strictEqual(dataSource.data(), data);
             });
-
-            test("data parent field is assign if observable array is assign", function() {
-                var viewModel = kendo.observable({
-                    data: [{foo: 1 }],
-                    dataSource: new kendo.data.DataSource({
-                    })
-                });
-
-                viewModel.dataSource.data(viewModel.data);
-
-                equal(viewModel.dataSource.data().parent(), viewModel);
-            });
-
-            test("data parent field is assign if array is assign", function() {
-                var viewModel = kendo.observable({
-                    data: [{foo: 1 }],
-                    dataSource: new kendo.data.DataSource({
-                        data: [1,2,3,4,5]
-                    })
-                });
-
-                equal(viewModel.dataSource.data().parent(), viewModel);
-            });
         </script>
     </body>
 </html>
