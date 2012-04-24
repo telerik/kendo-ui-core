@@ -84,6 +84,7 @@
     var kendo = window.kendo,
         touch = kendo.support.touch,
         keys = kendo.keys,
+        extractFormat = kendo._extractFormat,
         ui = kendo.ui,
         Widget = ui.Widget,
         OPEN = "open",
@@ -303,6 +304,29 @@
             }
         },
 
+        _parse: function(value) {
+            var that = this,
+                current = that._value || TODAY;
+
+            if (value instanceof DATE) {
+                return value;
+            }
+
+            value = kendo.parseDate(value, that.options.format);
+
+            if (value) {
+                value = new DATE(current.getFullYear(),
+                                 current.getMonth(),
+                                 current.getDate(),
+                                 value.getHours(),
+                                 value.getMinutes(),
+                                 value.getSeconds(),
+                                 value.getMilliseconds());
+            }
+
+            return value;
+        },
+
         _popup: function() {
             var that = this,
                 list = that.list,
@@ -353,6 +377,9 @@
 
             } else if (key === keys.ENTER || key === keys.TAB || key === keys.ESC) {
                 e.preventDefault();
+                if (current) {
+                    that.options.change(current.text(), true);
+                }
                 that.close();
             }
         }
@@ -475,7 +502,7 @@
             element = that.element;
             options = that.options;
 
-            options.format = options.format || kendo.culture().calendar.patterns.t;
+            options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
 
             that._wrapper();
 
@@ -578,6 +605,8 @@
         ],
 
         setOptions: function(options) {
+            options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
+
             Widget.fn.setOptions.call(this, options);
 
             extend(this.timeView.options, options);
@@ -788,14 +817,11 @@
         _keydown: function(e) {
             var that = this,
                 key = e.keyCode,
-                enter = key == keys.ENTER,
                 timeView = that.timeView;
 
-            if (timeView.popup.visible() || e.altKey || enter) {
+            if (timeView.popup.visible() || e.altKey) {
                 timeView.move(e);
-            }
-
-            if (enter) {
+            } else if (key === keys.ENTER) {
                 that._change(that.element.val());
             }
         },
@@ -808,7 +834,7 @@
                 return options[option];
             }
 
-            value = that._parse(value);
+            value = that.timeView._parse(value);
 
             if (!value) {
                 return;
@@ -821,29 +847,6 @@
             that.timeView.refresh();
         },
 
-        _parse: function(value) {
-            var that = this,
-                current = that._value || TODAY;
-
-            if (value instanceof DATE) {
-                return value;
-            }
-
-            value = kendo.parseDate(value, that.options.format);
-
-            if (value) {
-                value = new DATE(current.getFullYear(),
-                                 current.getMonth(),
-                                 current.getDate(),
-                                 value.getHours(),
-                                 value.getMinutes(),
-                                 value.getSeconds(),
-                                 value.getMilliseconds());
-            }
-
-            return value;
-        },
-
         _toggleHover: function(e) {
             if (!touch) {
                 $(e.currentTarget).toggleClass(HOVER, e.type === "mouseenter");
@@ -853,7 +856,7 @@
         _update: function(value) {
             var that = this,
                 options = that.options,
-                date = that._parse(value);
+                date = that.timeView._parse(value);
 
             if (!isInRange(date, options.min, options.max)) {
                 date = null;

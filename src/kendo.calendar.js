@@ -128,6 +128,7 @@
         ui = kendo.ui,
         Widget = ui.Widget,
         parse = kendo.parseDate,
+        extractFormat = kendo._extractFormat,
         template = kendo.template,
         touch = kendo.support.touch,
         transitions = kendo.support.transitions,
@@ -1276,8 +1277,9 @@
 
     function validate(options) {
         var start = views[options.start],
-            depth = views[options.depth],
-            format = options.format || kendo.culture().calendar.patterns.d;
+            depth = views[options.depth];
+
+        options.format = extractFormat(options.format || kendo.culture().calendar.patterns.d);
 
         if (isNaN(start)) {
             start = 0;
@@ -1287,12 +1289,6 @@
         if (depth === undefined || depth > start) {
             options.depth = MONTH;
         }
-
-        if (format.slice(0,3) === "{0:") {
-            format = format.slice(3, format.length - 1);
-        }
-
-        options.format = format;
     }
 
     function makeUnselectable(element) {

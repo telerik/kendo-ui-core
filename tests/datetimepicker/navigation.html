@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DateTimePicker Navigation</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DateTimePicker Navigation</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+
+            var DateTimePicker = kendo.ui.DateTimePicker,
+                input;
+
+            QUnit.config.testTimeout = 800;
+            QUnit.config.reorder = false;
+
+            module("kendo.ui.DateTimePicker navigation", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.data("kendoDateTimePicker").timeView.popup.element.remove();
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("DateView sets the value on click", function() {
+                var today = new Date(),
+                    datetimepicker = new DateTimePicker(input),
+                    dateView = datetimepicker.dateView;
+
+                //simulate user click
+                dateView._calendar();
+                dateView.calendar.value(today);
+                dateView.calendar.trigger("change");
+
+                equal(input.val(), kendo.toString(today, datetimepicker.options.format));
+            });
+
+            test("DateView closes itself on click", function() {
+                var today = new Date(),
+                    datetimepicker = new DateTimePicker(input),
+                    dateView = datetimepicker.dateView;
+
+                datetimepicker.open("date");
+
+                //simulate user click
+                dateView.calendar.value(today);
+                dateView.calendar.trigger("change");
+
+                ok(!dateView.popup.visible());
+            });
+
+            test("TimeView sets the value on click", function() {
+                var datetimepicker = new DateTimePicker(input),
+                    timeView = datetimepicker.timeView,
+                    li, date;
+
+                timeView.refresh();
+                li = timeView.ul.children(":first");
+                date = timeView._parse(li.text());
+
+                li.click();
+
+                equal(input.val(), kendo.toString(date, datetimepicker.options.format));
+            });
+
+            test("DateTimePicker closes all views on blur", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+                datetimepicker.open("time");
+
+                input.focus().blur();
+
+                ok(!datetimepicker.dateView.popup.visible());
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker add focus state to the wrapper on focus", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                input.focus();
+
+                ok(datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            });
+
+            test("DateTimePicker remove focus state to the wrapper on blur", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                input.focus().blur();
+
+                ok(!datetimepicker.wrapper.children(":first").hasClass("k-state-focused"));
+            });
+
+            test("DateTimePicker opens DateView when press ALT + DOWN", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN,
+                    altKey: true
+                });
+
+                ok(datetimepicker.dateView.popup.visible());
+            });
+
+            test("DateTimePicker opens TimeView when press ALT + DOWN", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN,
+                    altKey: true
+                });
+
+                ok(!datetimepicker.dateView.popup.visible());
+                ok(datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker closes DateView when press ALT + UP", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP,
+                    altKey: true
+                });
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("DateTimePicker closes TimeView when press ALT + UP", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP,
+                    altKey: true
+                });
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("DateTimePicker calls DateView move method if the view is opened", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                stub(datetimepicker.dateView, "move");
+
+                datetimepicker.open("date");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.UP
+                });
+
+                equal(datetimepicker.dateView.calls("move"), 1);
+            });
+
+            test("DateTimePicker calls TimeView move method if the view is opened", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                stub(datetimepicker.timeView, "move");
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                equal(datetimepicker.timeView.calls("move"), 1);
+            });
+
+            test("TimeView updates the input value on keyboard navigation", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                ok(input.val());
+            });
+
+            test("DateTimePicker updates DateView when select time from TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.DOWN
+                });
+
+                input.focus().trigger({
+                    type: "keydown",
+                    keyCode: kendo.keys.ENTER
+                });
+
+                var date = kendo.parseDate(input.val(), datetimepicker.options.format);
+
+                equal(+datetimepicker.dateView._value, +date);
+            });
+
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
