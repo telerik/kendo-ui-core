@@ -303,6 +303,8 @@
 
             that._dataSource();
 
+            that._bindScroller();
+
             if (options.dataSource) {
                 that.dataSource.fetch();
             } else {
@@ -397,20 +399,19 @@
             that.dataSource = DataSource.create(options.dataSource)
                                         .bind("change", that._refreshHandler);
 
-            if (!options.pullToRefresh && !options.loadMore) {
+            if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
                 that.dataSource.bind(REQUEST_START, that._showLoading);
             }
         },
 
-        viewInit: function(view) {
+        _bindScroller: function() {
             var that = this,
                 options = that.options,
                 dataSource = that.dataSource,
-                application = view.application,
                 scroller = that._scroller();
 
-            if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
-                dataSource.bind(REQUEST_START, that._showLoading);
+            if (!scroller) {
+                return;
             }
 
             if (options.pullToRefresh) {
@@ -426,16 +427,17 @@
             if (options.endlessScroll) {
                 that._scrollHeight = scroller.element.height();
 
-                scroller.bind("resize", function() {
-                    that._scrollHeight = scroller.element.height();
-                    that._calcTreshold();
-                })
-                .bind("scroll", function(e) {
-                    if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
-                        that.loading = true;
-
-                        that._toggleIcon(true);
-                        dataSource.next();
+                scroller.setOptions({
+                    resize: function() {
+                        that._scrollHeight = scroller.element.height();
+                        that._calcTreshold();
+                    },
+                    scroll: function(e) {
+                        if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
+                            that.loading = true;
+                            that._toggleIcon(true);
+                            dataSource.next();
+                        }
                     }
                 });
             }
@@ -663,15 +665,20 @@
         },
 
         _scroller: function() {
-            return this.view().scroller;
+            var view = this.view();
+            return view && view.scroller;
         },
 
         _showLoading: function() {
-            mobile.application && mobile.application.showLoading();
+            if (mobile.application) {
+                mobile.application.showLoading();
+            }
         },
 
         _hideLoading: function() {
-            mobile.application && mobile.application.hideLoading();
+            if (mobile.application) {
+                mobile.application.hideLoading();
+            }
         }
     });
 
