@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>editable</title>
+        <script src="../src/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.core.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.draganddrop.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.resizable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.selectable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.groupable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.sortable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.pager.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.model.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.data.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.grid.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.binder.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.validator.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.editable.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.popup.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.calendar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.datepicker.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../src/kendo.numerictextbox.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="../styles/web/kendo.common.css"/>
+        <link rel="stylesheet/less" type="text/css" href="../styles/web/kendo.default.less"/>
+        <script src="../demos/mvc/content/shared/js/less.js"></script>
+  </head>
+    <body>
+        <div id="grid" ></div>
+        <script>
+           $(document).ready(function() {
+                var data = [];
+                for (var idx = 0; idx < 20; idx++) {
+                    data.push({foo: "foo " + idx, bar: "bar " + idx, id: idx, date: new Date()});
+                }
+
+                dataSource = new kendo.data.DataSource({
+                    data: data,
+                    pageSize: 5
+                });
+
+                $("#grid").kendoGrid({
+                    dataSource: dataSource,
+                    pageable: true,
+                    sortable: true,
+                    toolbar: ["create"],
+                    scrollable: false
+                });
+
+                var left = 0;
+                var indicatorWidth = 3,
+                    columnStart,
+                    columnWidth,
+                    gridWidth,
+                    col;
+
+                var grid = $("#grid").data("kendoGrid");
+                var init = function() {
+                    left = 0;
+                    $(this).find("> .k-resize-handle").remove();
+
+                    grid.thead.find("th")
+                        .each(function() {
+                            left += this.offsetWidth;
+
+                            var th = $(this);
+                            $('<div class="k-resize-handle" />')
+                            .css({
+                                left: left - indicatorWidth,
+                                top:  0,
+                                width: indicatorWidth * 2
+                            })
+                            .appendTo(grid.thead)
+                            .data('th', th);
+                        });
+                    }
+                grid.wrapper.one("mouseenter", function() { init(); });
+
+                init();
+
+                grid.thead.kendoResizable({
+                    handle: ".k-resize-handle",
+                    hint: function(handle) {
+                        return $('<div class="k-grid-resize-indicator" />').css({
+                            height: handle.data("th").outerHeight() + grid.tbody.attr("clientHeight")
+                        });
+                    },
+                    start: function(e) {
+                        var th = $(e.currentTarget).data("th"),
+                            index = $.inArray(th[0], th.parent().children(":visible")),
+                            contentTable = grid.tbody.parent();
+
+                            col = grid.thead.parent().find("col:eq(" + index + ")")
+                                .add(contentTable.children("colgroup").find("col:eq(" + index + ")"));
+
+                        columnStart = e.pageX;
+                        columnWidth = th.outerWidth();
+                        gridWidth = grid.tbody.outerWidth();
+                    },
+                    resize: function(e) {
+                        var width = columnWidth + e.pageX - columnStart;
+                        if (width > 10) {
+                            col.css('width', width);
+
+                            grid.tbody.parent()
+                                .add(grid.thead.parent())
+                                .css('width', gridWidth + e.pageX - columnStart);
+
+                            var left = 0;
+                            $('.k-resize-handle', grid.wrapper).each(function () {
+                                left += $(this).data('th').outerWidth();
+                                $(this).css('left', left - indicatorWidth);
+                            });
+                        }
+                    },
+                    stop: function() {
+                        init();
+                    }
+                });
+            });
+
+        </script>
+    </body>
+</html>
