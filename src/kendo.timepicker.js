@@ -605,6 +605,8 @@
         ],
 
         setOptions: function(options) {
+            options.format = extractFormat(options.format || kendo.culture().calendar.patterns.t);
+
             Widget.fn.setOptions.call(this, options);
 
             extend(this.timeView.options, options);

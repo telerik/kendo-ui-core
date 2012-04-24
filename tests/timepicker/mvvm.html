@@ -47,6 +47,18 @@
                 equal(dom.data("kendoTimePicker").value().getTime(), value.getTime());
             });
 
+            test("initializes a options from data attributes after init of the widget", function() {
+                var dom = $('<input data-role="timepicker" data-format="{0:hh:mm}" />');
+                dom.kendoTimePicker();
+
+                kendo.bind(dom);
+
+                var timepicker = dom.data("kendoTimePicker");
+
+                equal(timepicker.options.format, "hh:mm");
+                equal(timepicker.timeView.options.format, "hh:mm");
+            });
+
             test("changing a value updates the view model", function() {
                 var dom = $('<input data-role="timepicker" data-bind="value:value" />');
 
