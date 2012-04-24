@@ -1259,12 +1259,21 @@ function pad(number) {
         });
     };
 
+    kendo._extractFormat = function (format) {
+        var result = formatRegExp.exec(format);
+
+        if (result && result[2]) {
+            return result[2].substring(1);
+        }
+
+        return format;
+    };
+
     kendo.toString = toString;
     })();
 
 
 (function() {
-
     var nonBreakingSpaceRegExp = /\u00A0/g,
         exponentRegExp = /[eE][\-+]?[0-9]+/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];
