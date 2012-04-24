@@ -188,6 +188,64 @@
                 equal(model.get("foo"), "bar");
             });
 
+            test("get returns data record if original data is grouped", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: Model.define()
+                    },
+                    serverGrouping: true,
+                    data: [ { field: "foo", value: "bar", items: [{ id: 1, foo: "bar"}, { id: 2, foo: "bar"}]}]
+                });
+                dataSource.read();
+                var model = dataSource.get(1);
+                equal(model.get("id"), 1);
+                equal(model.get("foo"), "bar");
+            });
+
+            test("get data record is same as the original if original data is grouped", function() {
+                var dataSource = new DataSource({
+                    schema: {
+                        model: Model.define()
+                    },
+                    serverGrouping: true,
+                    data: [ { field: "foo", value: "bar", items: [{ id: 1, foo: "bar"}, { id: 2, foo: "bar"}]}]
+                });
+                dataSource.read();
+                var original = dataSource.data()[0].items[0];
+
+                var model = dataSource.get(1);
+                equal(model, original);
+            });
+
+            test("getByUid returns data record if data is grouped", function() {
+                var dataSource = new DataSource({
+                    serverGrouping: true,
+                    data: [ { field: "foo", value: "bar", items: [{ id: 1, foo: "bar"}, { id: 2, foo: "bar"}]}]
+                });
+                dataSource.read();
+                var uid = dataSource.data()[0].items[0].uid;
+                var model = dataSource.getByUid(uid);
+
+                equal(model.get("id"), 1);
+                equal(model.get("foo"), "bar");
+            });
+
+            test("getByUid returns data record if data is grouped with multiple group levels", function() {
+                var dataSource = new DataSource({
+                    serverGrouping: true,
+                    data: [ { field: "foo", value: "bar", hasSubgroups: true, items: [
+                        { field: "id", value: 1, items: [{ id: 1, foo: "bar"}]},
+                        { field: "id", value: 2, items: [{ id: 2, foo: "bar"}]}
+                    ]}]
+                });
+                dataSource.read();
+                var uid = dataSource.data()[0].items[0].items[0].uid;
+                var model = dataSource.getByUid(uid);
+
+                equal(model.get("id"), 1);
+                equal(model.get("foo"), "bar");
+            });
+
             test("model use model metadata", function() {
                 var dataSource = new DataSource({
                     schema: {
