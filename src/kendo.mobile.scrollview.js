@@ -15,9 +15,9 @@
         round = math.round,
         max = math.max,
         min = math.min,
-        floor = math.floor;
-
-    var CURRENT_PAGE_CLASS = "km-current-page";
+        floor = math.floor,
+        CHANGE = "change",
+        CURRENT_PAGE_CLASS = "km-current-page";
 
     /**
     * @name kendo.mobile.ui.ScrollView.Description
@@ -147,6 +147,17 @@
             bounceVelocityThreshold: 1.6
         },
 
+        events: [
+            /**
+             * Fires when tab is selected.
+             * @name kendo.mobile.ui.ScrollView#select
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.page The current page (zero based index)
+             */
+            CHANGE
+        ],
+
         viewShow: function(view) {
             this.dimensions.refresh();
         },
@@ -232,10 +243,12 @@
 
         _updatePage: function() {
             var that = this,
-                pager = that.pager;
+                pager = that.pager,
+                page = that.page;
 
-            pager.children().removeClass(CURRENT_PAGE_CLASS);
-            pager.find(":nth-child(" + (that.page + 1) +")").addClass(CURRENT_PAGE_CLASS);
+            that.trigger(CHANGE, {page: page});
+            pager.children().removeClass(CURRENT_PAGE_CLASS)
+                .eq(page).addClass(CURRENT_PAGE_CLASS);;
         }
     });
 
