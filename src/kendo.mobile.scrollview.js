@@ -248,7 +248,7 @@
 
             that.trigger(CHANGE, {page: page});
             pager.children().removeClass(CURRENT_PAGE_CLASS)
-                .eq(page).addClass(CURRENT_PAGE_CLASS);;
+                .eq(page).addClass(CURRENT_PAGE_CLASS);
         }
     });
 
