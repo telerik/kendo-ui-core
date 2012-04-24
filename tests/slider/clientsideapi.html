@@ -10,24 +10,20 @@
         <script src="../../src/kendo.slider.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" />
         <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
-        <link type="text/css" href="../../styles/kendo.blueopal.css" rel="stylesheet"/>
     </head>
     <body>
 
         <script type="text/javascript">
-            var Slider = kendo.ui.Slider,
-                input;
+            var Slider = kendo.ui.Slider;
 
             module("slider/clientsideapi", {
-                setup: function () {
-                    input = $("<input />").appendTo(document.body)[0];
-                },
                 teardown: function() {
                     $(".k-slider").remove();
                 }
             });
 
-            function newSlider(options) {
+            function newSlider(options, sliderInput) {
+                var input = $(sliderInput || "<input />").appendTo(document.body)[0];
                 return new Slider(input, options);
             }
 
@@ -118,12 +114,44 @@
                 equal(slider.element.val(), value);
             });
 
+            test("enabled with false should disable slider", function () {
+                var slider = newSlider({ enabled: false });
+
+                ok(slider.element.is("[disabled]"));
+                ok(!slider.options.enabled);
+            });
+
+            test("disabled attribute should disable slider", function () {
+                var slider = newSlider({}, "<input disabled='disabled' />");
+
+                ok(slider.element.is("[disabled]"));
+                ok(!slider.options.enabled);
+            });
+
+            test("enable method with false should disable slider", function () {
+                var slider = newSlider();
+
+                slider.disable(false);
+
+                ok(slider.element.is("[disabled]"));
+                ok(!slider.options.enabled);
+            });
+
+            test("enable method with true should enable slider", function () {
+                var slider = newSlider();
+
+                slider.enable(true);
+
+                ok(!slider.element.attr("disabled"));
+                ok(slider.options.enabled);
+            });
+
             test("disable method should disable slider", function () {
                 var slider = newSlider();
 
                 slider.disable();
 
-                slider.wrapper.is("[disabled]");
+                ok(slider.element.is("[disabled]"));
                 ok(!slider.options.enabled);
             });
 
@@ -132,7 +160,7 @@
 
                 slider.enable();
 
-                ok(!slider.wrapper.attr("disabled"));
+                ok(!slider.element.attr("disabled"));
                 ok(slider.options.enabled);
             });
 
@@ -175,19 +203,16 @@
                 dragHandle.trigger({ type: "keydown", keyCode: leftArrow });
             });
 
-            var RangeSlider = kendo.ui.RangeSlider,
-                div;
+            var RangeSlider = kendo.ui.RangeSlider;
 
             module("rangeslider/clientsideapi", {
-                setup: function () {
-                    div = $("<div><input /><input /></div>").appendTo(document.body);
-                },
                 teardown: function() {
-                    div.closest(".k-slider").remove();
+                    $(".k-slider").remove();
                 }
             });
 
-            function newRangeSlider(options) {
+            function newRangeSlider(options, sliderDiv) {
+                var div = $(sliderDiv || "<div><input /><input /></div>").appendTo(document.body);
                 return new RangeSlider(div, options);
             }
 
@@ -284,12 +309,44 @@
                 equal(firstDragHandle.css("z-index"), 1);
             });
 
+            test("enabled with false should disable range slider", function () {
+                var rangeSlider = newRangeSlider({ enabled: false });
+
+                ok(rangeSlider.element.find("input").is("[disabled]"));
+                ok(!rangeSlider.options.enabled);
+            });
+
+            test("disabled attribute should disable range slider", function () {
+                var rangeSlider = newRangeSlider({}, "<div><input disabled='disabled' /><input disabled='disabled' /></div>");
+
+                ok(rangeSlider.element.find("input").is("[disabled]"));
+                ok(!rangeSlider.options.enabled);
+            });
+
+            test("enable method with false should disable range slider", function () {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.disable(false);
+
+                ok(rangeSlider.element.find("input").is("[disabled]"));
+                ok(!rangeSlider.options.enabled);
+            });
+
+            test("enable method with true should enable range slider", function () {
+                var rangeSlider = newRangeSlider();
+
+                rangeSlider.enable(true);
+
+                ok(!rangeSlider.element.find("input").attr("disabled"));
+                ok(rangeSlider.options.enabled);
+            });
+
             test("disable method should disable range slider", function () {
                 var rangeSlider = newRangeSlider();
 
                 rangeSlider.disable();
 
-                rangeSlider.wrapper.is(":disabled");
+                ok(rangeSlider.element.find("input").is(":disabled"));
                 ok(!rangeSlider.options.enabled);
             });
 
