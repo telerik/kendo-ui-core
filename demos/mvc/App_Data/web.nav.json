@@ -259,6 +259,11 @@
                     "url": "grid/selection.html"
                 },
                 {
+                    "text": "Column resizing",
+                    "url": "grid/column-resizing.html"
+                },
+
+                {
                     "text": "Row template",
                     "url": "grid/rowtemplate.html"
                 },
