@@ -17,6 +17,7 @@
         ICONEVENTS = CLICK + " " + MOUSEDOWN,
         MONTH = "month",
         SPAN = "<span/>",
+        DATE = Date,
         isInRange = kendo.calendar.isInRange;
 
     var DateTimePicker = Widget.extend(/** @lends kendo.ui.DateTimePicker.prototype */{
@@ -63,8 +64,8 @@
             value: null,
             format: "",
             timeFormat: "",
-            min: new Date(1900, 0, 1),
-            max: new Date(2099, 11, 31),
+            min: new DATE(1900, 0, 1),
+            max: new DATE(2099, 11, 31),
             interval: 30,
             height: 200,
             footer: '#= kendo.toString(data,"D") #',
@@ -142,6 +143,14 @@
             this[view + "View"].open();
         },
 
+        min: function(value) {
+            return this._option("min", value);
+        },
+
+        max: function(value) {
+            return this._option("max", value);
+        },
+
         toggle: function(view) {
             var secondView = "timeView";
 
@@ -177,6 +186,27 @@
                 // trigger the DOM change event so any subscriber gets notified
                 that.element.trigger(CHANGE);
             }
+        },
+
+        _option: function(option, value) {
+            var that = this,
+                options = that.options;
+
+            if (value === undefined) {
+                return options[option];
+            }
+
+            value = parse(value, options.format);
+
+            if (!value) {
+                return;
+            }
+
+            options[option] = new DATE(value);
+
+            that.dateView[option](value);
+            that.timeView.options[option] = value;
+            that.timeView.refresh();
         },
 
         _toggleHover: function(e) {
