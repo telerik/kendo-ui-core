@@ -209,11 +209,55 @@ task("changelog", function() {
         token: "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb"
     });
 
-    github.issues.repoIssues({
+    github.issues.getAllMilestones({
         user: "telerik",
         repo: "kendo"
     }, function(err, res) {
-        console.log(JSON.stringify(res));
+        var ver = JSON.parse(kendoBuild.readText("VERSION"));
+
+        var currentMilestone = res.filter(function(milestone) {
+            var components = milestone.title.split(".");
+
+            return components[0] == ver.year && components[1] == "Q" + ver.release;
+        })[0];
+
+        github.issues.repoIssues({
+            user: "telerik",
+            repo: "kendo",
+            state: "closed",
+            milestone: currentMilestone.number
+        }, function(err, res) {
+            var sortedIssues = {};
+
+            function taxonifyIssue(issue) {
+                var labels = issue.labels.map(function(label) {
+                        return label.name.toLowerCase();
+                    }),
+                    suites = [];
+
+                labels
+                    .filter(function(label) {
+                        return /^s:\s/.test(label);
+                    })
+                    .forEach(function(suite) {
+                        suites.push(suite.substring(3));
+                    });
+
+                labels
+                    .filter(function(label) {
+                        return /^w:\s/.test(label);
+                    })
+                    .forEach(function(widget) {
+                        widgets.push(widget.substring(3));
+                    });
+
+                console.log(issue.title);
+            }
+
+            res.forEach(taxonifyIssue);
+
+            console.log(sortedIssues);
+        });
     });
 });
 
