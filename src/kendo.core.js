@@ -1259,12 +1259,19 @@ function pad(number) {
         });
     };
 
+    kendo._extractFormat = function (format) {
+        if (format.slice(0,3) === "{0:") {
+            format = format.slice(3, format.length - 1);
+        }
+
+        return format;
+    };
+
     kendo.toString = toString;
     })();
 
 
 (function() {
-
     var nonBreakingSpaceRegExp = /\u00A0/g,
         exponentRegExp = /[eE][\-+]?[0-9]+/,
         formatsSequence = ["G", "g", "d", "F", "D", "y", "m", "T", "t"];

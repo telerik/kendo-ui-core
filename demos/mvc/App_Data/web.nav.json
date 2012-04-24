@@ -125,6 +125,34 @@
             ]
         },
         {
+            "text": "DateTimePicker",
+            "name": "datetimepicker",
+            "documentation": "ui-widgets/datetimepicker",
+            "spriteCssClass": "dateTimePickerIcon",
+            "items": [
+                {
+                    "text": "Basic usage",
+                    "url": "datetimepicker/index.html"
+                },
+                {
+                    "text": "Range selection",
+                    "url": "datetimepicker/rangeselection.html"
+                },
+                {
+                    "text": "Customizing templates",
+                    "url": "datetimepicker/template.html"
+                },
+                {
+                    "text": "Events",
+                    "url": "datetimepicker/events.html"
+                },
+                {
+                    "text": "API",
+                    "url": "datetimepicker/api.html"
+                }
+            ]
+        },
+        {
             "text": "DropDownList",
             "name": "dropdownlist",
             "documentation": "ui-widgets/dropdownlist",

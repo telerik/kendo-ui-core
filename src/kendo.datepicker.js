@@ -557,8 +557,7 @@
          *
          */
         init: function(element, options) {
-            var that = this,
-                dateView;
+            var that = this;
 
             Widget.fn.init.call(that, element, options);
             element = that.element;
@@ -568,7 +567,7 @@
 
             that._wrapper();
 
-            that.dateView = dateView = new DateView(extend({}, options, {
+            that.dateView = new DateView(extend({}, options, {
                 anchor: that.wrapper,
                 change: function() {
                     // calendar is the current scope

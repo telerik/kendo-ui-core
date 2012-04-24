@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DateTimePicker API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.calendar.js"></script>
+        <script src="../../src/kendo.datepicker.js"></script>
+        <script src="../../src/kendo.timepicker.js"></script>
+        <script src="../../src/kendo.datetimepicker.js"></script>
+        <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+    </head>
+    <body>
+        <h1 id="qunit-header">DateTimePicker API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <script>
+            kendo.ns = "kendo-";
+
+            var DateTimePicker = kendo.ui.DateTimePicker,
+                input;
+
+            QUnit.config.testTimeout = 800;
+            QUnit.config.reorder = false;
+
+            module("kendo.ui.DateTimePicker api", {
+                setup: function() {
+                    input = $("<input />").appendTo(document.body);
+                },
+                teardown: function() {
+                    input.data("kendoDateTimePicker").timeView.popup.element.remove();
+                    input.parents(".k-widget").andSelf().remove();
+                }
+            });
+
+            test("open method with 'date' param opens DateView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+
+                ok(datetimepicker.dateView.popup.visible());
+            });
+
+            test("open method with 'time' param opens TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+
+                ok(datetimepicker.timeView.popup.visible());
+            });
+
+            test("close method with 'date' param closes DateView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+                datetimepicker.close("date");
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("close method with 'time' param closes TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+                datetimepicker.close("time");
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("toggle method toggles DateView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+                datetimepicker.toggle("date");
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("toggle method toggles TimeView", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+                datetimepicker.toggle("time");
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("toggle method closes TimeView when DateView is about to open", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("time");
+                datetimepicker.toggle("date");
+
+                ok(datetimepicker.dateView.popup.visible());
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("toggle method closes DateView when TimeView is about to open", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.open("date");
+                datetimepicker.toggle("time");
+
+                ok(!datetimepicker.dateView.popup.visible());
+                ok(datetimepicker.timeView.popup.visible());
+            });
+
+            test("value method sets input value", function() {
+                var datetimepicker = new DateTimePicker(input),
+                    value = "2/10/2000 10:10 AM";
+
+                datetimepicker.value(value);
+
+                equal(input.val(), value);
+            });
+
+            test("value method sets DateView's value", function() {
+                var datetimepicker = new DateTimePicker(input),
+                    value = "2/10/2000 10:10 AM";
+
+                stub(datetimepicker.dateView, "value");
+
+                datetimepicker.value(value);
+
+                equal(datetimepicker.dateView.calls("value"), 1);
+                ok(datetimepicker.dateView.args("value", 0)[0] instanceof Date);
+            });
+
+            test("value method sets TimeView's value", function() {
+                var datetimepicker = new DateTimePicker(input),
+                    value = "2/10/2000 12:00 AM";
+
+                datetimepicker.timeView.refresh();
+                datetimepicker.value(value);
+
+                ok(datetimepicker.timeView.ul.find(".k-state-selected")[0]);
+            });
+
+            test("value method returns value of the datetimepicker", function() {
+                var datetimepicker = new DateTimePicker(input),
+                    value = new Date(2000, 10, 10);
+
+                datetimepicker.value(value);
+
+                equal(+datetimepicker.value(), +value);
+            });
+
+            test("value method sets null if date is out of range", function() {
+                var datetimepicker = new DateTimePicker(input, {
+                        min: new Date(2000, 10, 10)
+                    }),
+                    value = "2/10/1900 10:10 AM";
+
+                datetimepicker.value(value);
+
+                equal(input.val(), value);
+                equal(datetimepicker.value(), null);
+            });
+
+            test("enable method with false value disables the widget", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                equal(datetimepicker.element.attr("disabled"), "disabled");
+            });
+
+            test("enable method with false unbind click event of date icon", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                stub(datetimepicker.dateView, {toggle: datetimepicker.dateView.toggle});
+
+                datetimepicker._dateIcon.click();
+
+                ok(!datetimepicker.dateView.popup.visible());
+            });
+
+            test("enable method with false unbind click event of clock icon", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                stub(datetimepicker.timeView, {toggle: datetimepicker.timeView.toggle});
+
+                datetimepicker._timeIcon.click();
+
+                ok(!datetimepicker.timeView.popup.visible());
+            });
+
+            test("enable method with false adds disabled state class to the wrapper", function() {
+                var datetimepicker = new DateTimePicker(input);
+
+                datetimepicker.enable(false);
+
+                var inputwrapper = datetimepicker.wrapper.children(":first");
+
+                ok(inputwrapper.hasClass("k-state-disabled"));
+                ok(!inputwrapper.hasClass("k-state-default"));
+            });
+
+            test("enable method with true remove disabled attribute", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.enable(false);
+                datetimepicker.enable(true);
+
+                equal(datetimepicker.element.attr("disabled"), undefined);
+            });
+
+            test("enable method with true remove disabled class from wrapper", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker");
+
+                datetimepicker.enable(false);
+                datetimepicker.enable(true);
+
+                ok(datetimepicker.wrapper.children(":first").hasClass("k-state-default"));
+                ok(!datetimepicker.wrapper.children(":first").hasClass("k-state-disabled"));
+            });
+
+            test("min method returns min value", function() {
+                var value = new Date("10/22/2000"),
+                datetimepicker = input.kendoDateTimePicker({min: value}).data("kendoDateTimePicker");
+
+                var result = datetimepicker.min();
+
+                equal(+result, +value);
+            });
+
+            test("min() sets the min value of the datetimepicker", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+                    value = new Date("10/22/2000");
+
+                datetimepicker.min(value);
+
+                equal(+datetimepicker.options.min, +value);
+            });
+
+            test("min() calls min method of the DateView and refreshes TimeView", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+                    value = new Date(2000, 10, 10, 10, 10, 0);
+
+                stub(datetimepicker.dateView, { min: datetimepicker.dateView.min });
+                stub(datetimepicker.timeView, { refresh: datetimepicker.timeView.refresh });
+
+                datetimepicker.min(value);
+
+                equal(datetimepicker.dateView.calls("min"), 1);
+                equal(datetimepicker.timeView.calls("refresh"), 1);
+            });
+
+            test("max() returns max value", function() {
+                var value = new Date("10/22/2000"),
+                datetimepicker = input.kendoDateTimePicker({max: value}).data("kendoDateTimePicker");
+
+                var result = datetimepicker.max();
+
+                equal(+result, +value);
+            });
+
+            test("max() sets the max value of the datetimepicker", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+                    value = new Date("10/22/2000");
+
+                datetimepicker.max(value);
+
+                equal(+datetimepicker.options.max, +value);
+            });
+
+            test("max() should calls max methods of DateView and refreshes TimeView", function() {
+                var datetimepicker = input.kendoDateTimePicker().data("kendoDateTimePicker"),
+                    value = new Date(2000, 10, 10, 10, 10, 0);
+
+                stub(datetimepicker.dateView, { max: datetimepicker.dateView.max });
+                stub(datetimepicker.timeView, { refresh: datetimepicker.timeView.refresh });
+
+                datetimepicker.max(value);
+
+                equal(datetimepicker.dateView.calls("max"), 1);
+                equal(datetimepicker.timeView.calls("refresh"), 1);
+            });
+        </script>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+    </body>
+</html>
