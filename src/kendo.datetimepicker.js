@@ -57,6 +57,8 @@
 
             that.enable(!element.is('[disabled]'));
             that.value(options.value || element.val());
+
+            kendo.notify(that);
         },
 
         options: {
@@ -80,6 +82,14 @@
             "close",
             CHANGE
         ],
+
+        setOptions: function(options) {
+            validate(options);
+
+            Widget.fn.setOptions.call(this, options);
+            $.extend(this.dateView.options, options);
+            $.extend(this.timeView.options, options);
+        },
 
         enable: function(enable) {
             var that = this,
