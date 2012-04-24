@@ -157,6 +157,16 @@
 
                 equal(datetimepicker.dateView.popup.options.appendTo, appendTo);
             });
+
+            test("DateTimePicker strips the format from {0:format}", function() {
+                var datetimepicker = new kendo.ui.DateTimePicker(input, {
+                    format: "{0:MM/dd/yyyy hh:mm}",
+                    timeFormat: "{0:hh:mm}"
+                });
+
+                equal(datetimepicker.options.format, "MM/dd/yyyy hh:mm");
+                equal(datetimepicker.options.timeFormat, "hh:mm");
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
