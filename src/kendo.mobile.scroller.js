@@ -20,6 +20,7 @@
         REFRESHCLASS = "km-scroller-refresh",
         PULL = "pull",
         CHANGE = "change",
+        RESIZE = "resize",
         SCROLL = "scroll";
 
     var DragInertia = Animation.extend({
@@ -231,7 +232,7 @@
                     element: inner,
                     container: element,
                     change: function() {
-                        that.trigger("resize");
+                        that.trigger(RESIZE);
                     }
                 }),
 
@@ -319,7 +320,14 @@
              * @param {Number} e.scrollTop The number of pixels that are hidden from view above the scrollable area.
              * @param {Number} e.scrollLeft The number of pixels that are hidden from view to the left of the scrollable area.
              */
-            SCROLL
+            SCROLL,
+            /**
+             * Fires when the scroller dimensions change (e.g. orientation change or resize)
+             * @name kendo.mobile.ui.Scroller#scroll
+             * @event
+             * @param {Event} e
+             */
+            RESIZE
         ],
 
         setOptions: function(options) {
