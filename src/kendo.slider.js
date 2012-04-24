@@ -556,10 +556,6 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          *
-         * @option {Boolean} [enabled] <true>
-         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) the <strong>Slider</strong>. This
-         * option can be specified during initialization.
-         *
          * @option {Number} [min] <0>
          * The minimum value of the <strong>Slider</strong>.
          *
@@ -651,6 +647,10 @@
                 smallStep: parseAttr(element[0], "step")
             }, options);
 
+            if (options && options.enabled === undefined) {
+                options.enabled = !element.is("[disabled]");
+            }
+
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
 
@@ -671,13 +671,18 @@
         },
 
         /**
-         *
-         * Enables a <strong>Slider</strong> for handling user interactions (i.e. mouse click).
-         *
+         * Enable/Disable the <strong>Slider</strong> widget.
+         * @param {Boolean} enable
+         * The argument, which defines whether to enable/disable the <strong>Slider</strong>.
          * @example
+         * // get a reference to the slider widget
          * var slider = $("#slider").data("kendoSlider");
-         * slider.enable();
          *
+         * // disables the slider
+         * slider.enable(false);
+         *
+         * // enables the slider
+         * slider.enable(true);
          */
         enable: function (enable) {
             var that = this,
@@ -685,8 +690,8 @@
                 clickHandler,
                 move;
 
+            that.disable();
             if (enable === false) {
-                that.disable();
                 return;
             }
 
@@ -773,15 +778,6 @@
             options.enabled = true;
         },
 
-        /**
-         *
-         * Disables a <strong>Slider</strong> from handling user interactions (i.e. mouse click).
-         *
-         * @example
-         * var slider = $("#slider").data("kendoSlider");
-         * slider.disable();
-         *
-         */
         disable: function () {
             var that = this;
 
@@ -1188,10 +1184,6 @@
          * @param {DomElement} element DOM element
          * @param {Object} options Configuration options.
          *
-         * @option {Boolean} [enabled] <true>
-         * Disables (<strong>false</strong>) or enables (<strong>true</strong>) the <strong>RangeSlider</strong>. This
-         * option can be specified during initialization.
-         *
          * @option {Number} [min] <0>
          * The minimum value of the <strong>RangeSlider</strong>.
          *
@@ -1201,12 +1193,12 @@
          * @option {Object} [tooltip]
          * Configuration of the <strong>RangeSlider</strong> tooltip.
          *
-         * @option {Boolean} [tooltip.enabled] <true>
-         * Disables (<b>false</b>) or enables (<b>true</b>) the tooltip of the <strong>RangeSlider</strong>.
-         *
          * @option {String} [tooltip.format] <"{0}">
          * Format string for the text of the tooltip. Note: The applied format will also influence the appearance of
          * the <strong>RangeSlider</strong> tick labels.
+         *
+         * @option {Boolean} [tooltip.enabled] <true>
+         * Disables (<b>false</b>) or enables (<b>true</b>) the tooltip of the <strong>RangeSlider</strong>.
          *
          * @option {String} [orientation] <"horizontal">
          * The orientation of a <strong>RangeSlider</strong>; <strong>"horizontal"</strong> or
@@ -1282,6 +1274,10 @@
                 smallStep: parseAttr(secondInput, "step")
             }, options);
 
+            if (options && options.enabled === undefined) {
+                options.enabled = !inputs.is("[disabled]");
+            }
+
             SliderBase.fn.init.call(that, element, options);
             options = that.options;
             that._setValueInRange(options.selectionStart, options.selectionEnd);
@@ -1301,21 +1297,26 @@
         },
 
         /**
-         *
-         * Enables a <strong>RangeSlider</strong> for handling user interactions (i.e. mouse click).
-         *
+         * Enable/Disable the <strong>RangeSlider</strong> widget.
+         * @param {Boolean} enable
+         * The argument, which defines whether to enable/disable the <strong>RangeSlider</strong>.
          * @example
+         * // get a reference to the range slider widget
          * var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
-         * rangeSlider.enable();
          *
+         * // disables the range slider
+         * rangeSlider.enable(false);
+         *
+         * // enables the range slider
+         * rangeSlider.enable(true);
          */
         enable: function (enable) {
             var that = this,
                 options = that.options,
                 clickHandler;
 
+            that.disable();
             if (enable === false) {
-                that.disable();
                 return;
             }
 
@@ -1384,15 +1385,6 @@
             that.options.enabled = true;
         },
 
-        /**
-         *
-         * Disables a <strong>RangeSlider</strong> from handling user interactions (i.e. mouse click).
-         *
-         * @example
-         * var rangeSlider = $("#rangeSlider").data("kendoRangeSlider");
-         * rangeSlider.disable();
-         *
-         */
         disable: function () {
             var that = this;
 
