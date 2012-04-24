@@ -249,23 +249,6 @@
                 equal(observable.calls("rootHandler"), 1);
             });
 
-            test("binds event handlers in template to root view model if bound to DataSource instance", function() {
-                var dom = $('<div data-role="grid" data-editable="popup"  data-row-template="template-with-event" data-bind="source:dataSource" />');
-
-                var observable = kendo.observable({
-                    dataSource: new kendo.data.DataSource({ data: [ { foo: "foo", bar: "bar" } ] })
-                });
-
-                stub(observable, "rootHandler");
-
-                kendo.bind(dom, observable);
-
-                dom.find("tbody > tr:first strong").click();
-
-                equal(observable.calls("rootHandler"), 1);
-            });
-
-
         </script>
 
         <script id="template" type="text/x-kendo-template">
