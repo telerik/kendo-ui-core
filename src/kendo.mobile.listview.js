@@ -1,5 +1,6 @@
 (function($, undefined) {
     var kendo = window.kendo,
+        Node = window.Node,
         ui = kendo.mobile.ui,
         support = kendo.support,
         DataSource = kendo.data.DataSource,
@@ -48,13 +49,18 @@
         }
     }
 
+    function whitespace() {
+        return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(/^\s+$/);
+    }
+
     function enhanceLinkItem(i, item) {
         item = $(item);
 
         var parent = item.parent(),
-            itemAndDetailButtons = item.add(parent.children("[data-" + kendo.ns + "role=detailbutton]"));
+            itemAndDetailButtons = item.add(parent.children("[data-" + kendo.ns + "role=detailbutton]")),
+            otherNodes = parent.contents().not(itemAndDetailButtons).not(whitespace);
 
-        if (parent.contents().not(itemAndDetailButtons)[0]) {
+        if (otherNodes.length) {
             return;
         }
 
@@ -185,6 +191,17 @@
     * </script>
     *
     * @section
+    * <h3>Link Items</h3>
+    * <p>The mobile ListView will automatically style items with a single link with an additional details indicator. </p>
+    *
+    * @exampleTitle ListView with link items
+    * @example
+    * <ul data-role="listview">
+    *   <li><a href="#foo">Foo</a></li>
+    *   <li><a href="#bar">Bar</a></li>
+    * </ul>
+    *
+    * @section
     * <h3>Item Icons</h3>
     * An icon can be set in two ways - either by adding an <code>img</code> element inside the <code>li</code> element, or by setting an <code>icon</code> data attribute to the <code>li</code> element.
     * if data attribute is used then an <code>a</code> element should be put in the <code>li</code> element. The icon class will be applied to the <code>a</code> element.
@@ -261,6 +278,10 @@
         * @option {String}  [pullTemplate] <"Pull to refresh"> The message template displayed when the user pulls the listView. Applicable only when pullToRefresh is set to true.
         * @option {String}  [releaseTemplate] <"Release to refresh"> The message template indicating that pullToRefresh will occur. Applicable only when pullToRefresh is set to true.
         * @option {String}  [refreshTemplate] <"Refreshing"> The message template displayed during the refresh. Applicable only when pullToRefresh is set to true.
+        * @option {Boolean} [loadMore] <false> If set to true, a button is rendered on the end of the listview, which fetch the next page of data.
+        * @option {String}  [loadMoreText] <"Press to load more"> The text of the rendered load-more button.
+        * @option {Boolean} [endlessScroll] <false> If set to true, the listview gets the next page of data on scroll.
+        * @option {String}  [scrollTreshold] <30> The scroll treshold, set in pixels, after which the listview fetch the next page.
         */
         init: function(element, options) {
             var that = this;
@@ -410,6 +431,7 @@
 
                 scroller.bind("resize", function() {
                     that._scrollHeight = scroller.element.height();
+                    that._calcTreshold();
                 })
                 .bind("scroll", function(e) {
                     if (!that.loading && e.scrollTop + that._scrollHeight > that._treshold) {
@@ -508,7 +530,6 @@
             }
 
             that._style();
-            that._calcTreshold();
             that.trigger("dataBound", { ns: ui });
         },
 
@@ -572,6 +593,7 @@
 
         _style: function() {
             var that = this,
+                items,
                 options = that.options,
                 grouped = options.type === "group",
                 element = that.element,
@@ -589,7 +611,7 @@
                     .children("ul")
                     .addClass("km-list");
 
-                element.find(">li").each(function() {
+                element.children("li").each(function() {
                     var groupHeader = $(this).contents().first();
                     if (!groupHeader.is("ul") && !groupHeader.is("div." + GROUP_CLASS)) {
                         groupHeader.wrap(GROUP_WRAPPER);
@@ -597,8 +619,10 @@
                 });
             }
 
-            that.items().find(">a").each(enhanceLinkItem);
-            that.items().find(">label").each(enhanceCheckBoxItem);
+            items = that.items();
+
+            items.children("a").each(enhanceLinkItem);
+            items.children("label").each(enhanceCheckBoxItem);
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         },
@@ -623,17 +647,23 @@
 
                     loadWrapper.append(that._loadButton);
                 }
+
+                that.wrapper.append(loadWrapper);
+            }
         },
 
         _toggleButton: function(toggle) {
+            this._loadButton.toggle(toggle);
+            this._toggleIcon(!toggle);
+        },
+
+        _toggleIcon: function(toggle) {
             var icon = this._loadIcon;
 
-            this._loadButton.toggle(toggle);
-
             if (toggle) {
-                icon.hide();
-            } else {
                 icon.css("display", "block");
+            } else {
+                icon.hide();
             }
         }
     });
