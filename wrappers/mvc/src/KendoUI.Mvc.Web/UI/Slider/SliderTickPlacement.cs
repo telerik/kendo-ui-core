@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI
 {
     /// <summary>Specifies the location of tick marks in a component.</summary>

@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc.UI
 {
     using KendoUI.Mvc.Extensions;

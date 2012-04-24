@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 
 namespace KendoUI.Mvc.Infrastructure.Implementation.Tests

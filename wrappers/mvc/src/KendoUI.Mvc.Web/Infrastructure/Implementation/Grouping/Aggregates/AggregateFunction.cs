@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc
 {
     using System.Globalization;

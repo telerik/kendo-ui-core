@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.UI.Html.Tests
 {
     using KendoUI.Mvc.UI.Tests;

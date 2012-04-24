@@ -1,6 +1,3 @@
-
-
-
 namespace KendoUI.Mvc.UI
 {
     public interface INavigationComponentHtmlBuilderFactory<TComponent, TItem>

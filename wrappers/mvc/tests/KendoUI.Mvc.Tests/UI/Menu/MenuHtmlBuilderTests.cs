@@ -1,5 +1,3 @@
-
-
 namespace KendoUI.Mvc.Tests.Menu
 {
     using System.IO;

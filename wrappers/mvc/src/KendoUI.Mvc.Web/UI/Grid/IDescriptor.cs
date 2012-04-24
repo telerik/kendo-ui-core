@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc
 {
     public interface IDescriptor

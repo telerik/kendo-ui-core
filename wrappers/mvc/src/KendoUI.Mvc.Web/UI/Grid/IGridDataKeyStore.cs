@@ -1,6 +1,3 @@
-
-
-
 namespace KendoUI.Mvc.UI
 {
     using System;

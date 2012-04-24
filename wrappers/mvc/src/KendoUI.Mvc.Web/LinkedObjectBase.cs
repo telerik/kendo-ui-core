@@ -1,5 +1,3 @@
-
-
 using System.Web.Script.Serialization;
 namespace KendoUI.Mvc
 {

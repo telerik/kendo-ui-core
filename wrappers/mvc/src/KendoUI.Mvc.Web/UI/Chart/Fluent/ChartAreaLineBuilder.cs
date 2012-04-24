@@ -1,5 +1,3 @@
-
-
 using System.ComponentModel;
 namespace KendoUI.Mvc.UI.Fluent
 {

@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc.UI.UnitTest.PanelBar
 {
     using System.IO;

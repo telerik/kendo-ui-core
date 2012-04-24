@@ -1,4 +1,3 @@
-
 namespace KendoUI.Mvc.UI.Fluent
 {
     using System.Collections.Generic;
