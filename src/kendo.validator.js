@@ -136,7 +136,7 @@
      *  <p>
      *      Ideally Kendo Validator places its tooltips besides the validated input. However, if the input is later enhanced to a ComboBox, AutoComplete or other Kendo Widget, placing the
      *      tooltip beside the input may cover important information or break the widget rendering. In this case, you can specify where exactly do you want the tooltip to be placed by
-     *      adding a span with data-for attribute set to the validated input ID and a class .k-invalid-msg. Check the example below:
+     *      adding a span with data-for attribute set to the validated input name and a class .k-invalid-msg. Check the example below:
      *  </p>
      *
      *  @exampleTitle <b>Validator</b> initialization with specific tooltip placement (the tooltip will remain outside of the AutoComplete widget after enhancement)
