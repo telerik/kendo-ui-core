@@ -301,6 +301,40 @@
                 ok(!cell.parent().hasClass("k-state-selected"));
             });
 
+            test("clearSelection clears selected items when inside a collapsed group", function() {
+                var grid = setup({
+                        selectable: true
+                    });
+
+                grid.dataSource.group({ field: "foo" });
+
+                var cell = table.find("tbody tr:eq(1)").find("td").last();
+                cell.mousedown().mouseup();
+
+                grid.collapseGroup(table.find(".k-grouping-row:first"));
+
+                grid.clearSelection();
+
+                ok(!cell.parent().hasClass("k-state-selected"));
+            });
+
+            test("clearSelection clears selected cell when inside a collapsed group", function() {
+                var grid = setup({
+                        selectable: "cell"
+                    });
+
+                grid.dataSource.group({ field: "foo" });
+
+                var cell = table.find("tbody tr:eq(1)").find("td").last();
+                cell.mousedown().mouseup();
+
+                grid.collapseGroup(table.find(".k-grouping-row:first"));
+
+                grid.clearSelection();
+
+                ok(!cell.hasClass("k-state-selected"));
+            });
+
             test("clearSelection triggers change event", function() {
                 var triggered = false,
                     grid = setup({

@@ -18,6 +18,7 @@
         ERROR = "error",
         ROW_SELECTOR = "tbody>tr:not(.k-grouping-row,.k-detail-row):visible",
         DATA_CELL = ":not(.k-group-cell,.k-hierarchy-cell):visible",
+        SELECTION_CELL_SELECTOR = "tbody>tr:not(.k-grouping-row,.k-detail-row) > td:not(.k-group-cell,.k-hierarchy-cell)",
         CELL_SELECTOR =  ROW_SELECTOR + ">td" + DATA_CELL,
         FIRST_CELL_SELECTOR = CELL_SELECTOR + ":first",
         EDIT = "edit",
@@ -925,7 +926,7 @@
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
                 that.selectable = new kendo.ui.Selectable(that.table, {
-                    filter: ">" + (cell ? CELL_SELECTOR : ROW_SELECTOR),
+                    filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr:not(.k-grouping-row,.k-detail-row)"),
                     multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
