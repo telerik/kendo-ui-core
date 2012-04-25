@@ -108,10 +108,12 @@
         parse = kendo.parseFloat,
         proxy = $.proxy,
         math = Math,
-        touch = kendo.support.touch,
+        support = kendo.support,
+        touch = support.touch,
+        pointers = support.pointers,
         CHANGE = "change",
         SLIDE = "slide",
-        MOUSE_DOWN = touch ? "touchstart" : "mousedown",
+        MOUSE_DOWN = touch ? "touchstart" : pointers ? "MSPointerDown" : "mousedown",
         MOUSE_UP = touch ? "touchend" : "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
@@ -545,6 +547,52 @@
         return parse(element.getAttribute(name)) || undefined;
     }
 
+    var touchLocation = function(e) {
+        return {
+            idx: 0,
+            x: e.pageX,
+            y: e.pageY
+        };
+    };
+
+    if (support.pointers) {
+        /** @ignore */
+        touchLocation = function(e) {
+            return {
+                idx: 0,
+                x: e.originalEvent.clientX,
+                y: e.originalEvent.clientY
+            };
+        }
+    }
+
+    if (support.touch) {
+        /** @ignore */
+        touchLocation = function(e, id) {
+            var changedTouches = e.changedTouches || e.originalEvent.changedTouches;
+
+            if (id) {
+                var output = null;
+                each(changedTouches, function(idx, value) {
+                    if (id == value.identifier) {
+                        output = {
+                            idx: value.identifier,
+                            x: value.pageX,
+                            y: value.pageY
+                        };
+                    }
+                });
+                return output;
+            } else {
+                return {
+                    idx: changedTouches[0].identifier,
+                    x: changedTouches[0].pageX,
+                    y: changedTouches[0].pageY
+                };
+            }
+        };
+    }
+
     var Slider = SliderBase.extend(/** @lends kendo.ui.Slider.prototype */{
         /**
          *
@@ -702,7 +750,7 @@
             that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
-                var location = kendo.touchLocation(e),
+                var location = touchLocation(e),
                     mousePosition = that._isHorizontal ? location.x : location.y,
                     dragableArea = that._getDragableArea(),
                     target = $(e.target);
@@ -1327,7 +1375,7 @@
             that.wrapper.find("input").removeAttr(DISABLED);
 
             clickHandler = function (e) {
-                var location = kendo.touchLocation(e),
+                var location = touchLocation(e),
                     mousePosition = that._isHorizontal ? location.x : location.y,
                     dragableArea = that._getDragableArea(),
                     val = that._getValueFromPosition(mousePosition, dragableArea),
