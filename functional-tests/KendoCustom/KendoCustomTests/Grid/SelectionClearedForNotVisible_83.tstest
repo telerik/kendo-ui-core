@@ -1,0 +1,1059 @@
+﻿<WebAiiTest xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://artoftest.com/schemas/WebAiiDesignCanvas/3.0.0">
+  <Description />
+  <IsManual>false</IsManual>
+  <Name>SelectionClearedForNotVisible_83</Name>
+  <Owner i:nil="true" />
+  <Path>Grid\SelectionClearedForNotVisible_83.tstest</Path>
+  <Priority>0</Priority>
+  <TestType>Web</TestType>
+  <UniqueId>107030d3-08c7-47a1-b1e8-7f0931d6d87c</UniqueId>
+  <Version>200</Version>
+  <BrowserType>NotSet</BrowserType>
+  <CurrentReferences xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+    <d2p1:string>System</d2p1:string>
+    <d2p1:string>System.Core</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=4fd5f65be123776c</d2p1:string>
+    <d2p1:string>ArtOfTest.WebAii.Design, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=4fc62bbc3827ab1d</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Html, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.WebAii.Controls.Xaml.Wpf, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+    <d2p1:string>Telerik.TestingFramework.Controls.KendoUI, Version=2012.1.410.0, Culture=neutral, PublicKeyToken=528163f3e645de45</d2p1:string>
+  </CurrentReferences>
+  <DataInfo xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:BuiltInData i:nil="true" />
+    <d2p1:BuiltInDocumentKey i:nil="true" />
+    <d2p1:ConnectionString />
+    <d2p1:DataEnabled>true</d2p1:DataEnabled>
+    <d2p1:DataProvider />
+    <d2p1:DataRange />
+    <d2p1:DataTableName />
+    <d2p1:DataType>None</d2p1:DataType>
+    <d2p1:DefaultToGrid>true</d2p1:DefaultToGrid>
+    <d2p1:HasBuiltinGrid>false</d2p1:HasBuiltinGrid>
+    <d2p1:TSQL />
+  </DataInfo>
+  <DeploymentItems xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <DomStatesCounter xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <HasCodeBehind>false</HasCodeBehind>
+  <HtmlDescription />
+  <IndependentDescriptors xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" />
+  <InheritParentDataSource>false</InheritParentDataSource>
+  <IsSilverlightApp>false</IsSilverlightApp>
+  <IsTestFragment>false</IsTestFragment>
+  <ProfilerBenchmarkResultsFilePath i:nil="true" />
+  <ProfilerBenchmarkResultsId>00000000-0000-0000-0000-000000000000</ProfilerBenchmarkResultsId>
+  <ProfilerConfigurationFilePath>C:\work\GitHub\kendo\functional-tests\KendoCustom\KendoCustomTests\Profiler Configurations\{107030d3-08c7-47a1-b1e8-7f0931d6d87c}.tsprofconfig</ProfilerConfigurationFilePath>
+  <ProfilerConfigurationId>00000000-0000-0000-0000-000000000000</ProfilerConfigurationId>
+  <ProfilerConfigurations xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <ProfilerResultsDirectory>C:\Users\AGGEOR~1\AppData\Local\Temp\1\</ProfilerResultsDirectory>
+  <ProfilerServerName i:nil="true" />
+  <QcFilePath i:nil="true" />
+  <QcId>0</QcId>
+  <QcTestVersionStamp>0</QcTestVersionStamp>
+  <ResourceFilePath>Grid\SelectionClearedForNotVisible_83.resx</ResourceFilePath>
+  <ReuseAppWindow>0</ReuseAppWindow>
+  <SilverlightAppLocalDirectory />
+  <SilverlightAppOriginUri i:nil="true" />
+  <SilverlightAppRecordLocal>false</SilverlightAppRecordLocal>
+  <SilverlightAppWebUrl />
+  <SilverlightEnabled>false</SilverlightEnabled>
+  <Steps xmlns:d2p1="http://artoftest.com/schemas/WebAiiDesignCanvas/1.0.0">
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Navigate to : '/Grid/GroupDetailsGrid.html'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>1</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>da76d7a3-fa07-43f3-b3ec-bbed2aa14599</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:NavigateToActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>false</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>0</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+        <d2p1:NavigateURL>/Grid/GroupDetailsGrid.html</d2p1:NavigateURL>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83stklqqfd.hyq</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for '2500' msec.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>2</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>6ed43740-46e7-4d1d-a2ae-77b6a764492e</d2p1:Runtime_x0020_ID>
+      <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
+        <d2p1:Constraints>
+          <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d4p1:WaitTime>2500</d4p1:WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83xvzhijzs.lsr</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Desktop command: Drag &amp; Drop CountryLink to Window Target</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>3</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>968f21ab-0d48-471e-87b6-baa604efcd19</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:DragDropActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[2]/div[1]/table[1]/thead[1]/tr[1]/th[4]/a[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=a:2</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>CountryLink</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:DesktopActionType>DragDrop</d2p1:DesktopActionType>
+        <d2p1:DropOffSet>
+          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
+          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
+          <d2p1:X>516</d2p1:X>
+          <d2p1:Y>32</d2p1:Y>
+        </d2p1:DropOffSet>
+        <d2p1:DropTargetType>Window</d2p1:DropTargetType>
+        <d2p1:DropWindowData>
+          <d2p1:DropPointOffsetReference>TopLeftCorner</d2p1:DropPointOffsetReference>
+          <d2p1:ScrollLeft>0</d2p1:ScrollLeft>
+          <d2p1:ScrollTop>0</d2p1:ScrollTop>
+          <d2p1:WindowDropPointX>516</d2p1:WindowDropPointX>
+          <d2p1:WindowDropPointY>32</d2p1:WindowDropPointY>
+          <d2p1:WindowHeight>779</d2p1:WindowHeight>
+          <d2p1:WindowWidth>1199</d2p1:WindowWidth>
+          <d2p1:WindowX>1787</d2p1:WindowX>
+          <d2p1:WindowY>142</d2p1:WindowY>
+        </d2p1:DropWindowData>
+        <d2p1:Focus>true</d2p1:Focus>
+        <d2p1:OffSet>
+          <d2p1:ClickUnitType>Pixel</d2p1:ClickUnitType>
+          <d2p1:OffSetReference>TopLeftCorner</d2p1:OffSetReference>
+          <d2p1:X>22</d2p1:X>
+          <d2p1:Y>21</d2p1:Y>
+        </d2p1:OffSet>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_832myeedlp.lji</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for '2500' msec.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>4</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>fa4df2ff-1410-4eff-a73f-991059c4c02e</d2p1:Runtime_x0020_ID>
+      <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
+        <d2p1:Constraints>
+          <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d4p1:WaitTime>2500</d4p1:WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83z5nndffe.ygn</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Desktop command: LeftClick on Link</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>5</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>fd6995b8-5045-476e-9f6f-2cbedf96a6ae</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[2]/a[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=a:8</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>Link</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:DesktopActionType>LeftClick</d2p1:DesktopActionType>
+        <d2p1:Focus>false</d2p1:Focus>
+        <d2p1:OffSet>
+          <d2p1:ClickUnitType>Percentage</d2p1:ClickUnitType>
+          <d2p1:OffSetReference>AbsoluteCenter</d2p1:OffSetReference>
+          <d2p1:X>0</d2p1:X>
+          <d2p1:Y>0</d2p1:Y>
+        </d2p1:OffSet>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83hcct31cm.jpc</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for '500' msec.</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>6</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>3e58d483-ba8d-4bb1-961e-5d33fcaa7902</d2p1:Runtime_x0020_ID>
+      <d2p1:Step xmlns:d4p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0" i:type="d4p1:SleepActionDescriptor">
+        <d2p1:Constraints>
+          <d4p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d4p1:WaitTime>500</d4p1:WaitTime>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83jivamiy2.v14</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'USATableCell'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>7</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>f63278e0-d81a-42c9-9259-0022f11ab16d</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[7]/td[5]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=td:54</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>USATableCell</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_832yuoxi25.kvn</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for attribute 'class' has 'Contains' value of 'k-state-selected' on 'USATableCell'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>8</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>9cc059c9-9214-4cc6-b803-f2fc7d120b11</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>verifyTarget</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[7]/td[5]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=td:54</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>USATableCell</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>verifyTarget</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:UseBackupSearch>true</d2p1:UseBackupSearch>
+        <d2p1:AttributeName>class</d2p1:AttributeName>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
+        <d2p1:CompareType>Contains</d2p1:CompareType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83zfy0owyz.u1g</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Desktop command: LeftClick on Link0</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>9</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>3530a9b7-9de6-41b9-ae58-3e33f4e86618</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[5]/td[1]/p[1]/a[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=a:22</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>Link0</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:DesktopActionType>LeftClick</d2p1:DesktopActionType>
+        <d2p1:Focus>false</d2p1:Focus>
+        <d2p1:OffSet>
+          <d2p1:ClickUnitType>Percentage</d2p1:ClickUnitType>
+          <d2p1:OffSetReference>AbsoluteCenter</d2p1:OffSetReference>
+          <d2p1:X>0</d2p1:X>
+          <d2p1:Y>0</d2p1:Y>
+        </d2p1:OffSet>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83sp2bxd4v.dfi</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Click 'UKTableCell'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>10</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>d8495a61-f6d2-4729-b88d-b41337840769</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:ClickActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[4]/td[5]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=td:39</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>UKTableCell</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:SimulateRealClick>true</d2p1:SimulateRealClick>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_830kjjallw.rtn</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for attribute 'class' has 'Contains' value of 'k-state-selected' on 'UKTableCell'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>11</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>4f139230-b38f-4780-87a9-05f3a6f0a60b</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>verifyTarget</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[4]/td[5]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=td:39</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>UKTableCell</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>verifyTarget</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:UseBackupSearch>true</d2p1:UseBackupSearch>
+        <d2p1:AttributeName>class</d2p1:AttributeName>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
+        <d2p1:CompareType>Contains</d2p1:CompareType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83ilfijpjs.jxb</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Desktop command: LeftClick on Link0</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>12</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>e59ed7a5-de25-4dad-8474-bf33205ae0ce</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:DesktopActionDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>target</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[5]/td[1]/p[1]/a[1]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=a:22</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>Link0</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlAnchor</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>target</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Action</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <AjaxTimeout xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">0</AjaxTimeout>
+        <ClosesBrowser xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">false</ClosesBrowser>
+        <UseBackupSearch xmlns="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.Extensibility">true</UseBackupSearch>
+        <d2p1:DesktopActionType>LeftClick</d2p1:DesktopActionType>
+        <d2p1:Focus>false</d2p1:Focus>
+        <d2p1:OffSet>
+          <d2p1:ClickUnitType>Percentage</d2p1:ClickUnitType>
+          <d2p1:OffSetReference>AbsoluteCenter</d2p1:OffSetReference>
+          <d2p1:X>0</d2p1:X>
+          <d2p1:Y>0</d2p1:Y>
+        </d2p1:OffSet>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83tx0t2wlm.lzh</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+    <d2p1:AutomationStep i:type="d2p1:AutomationStep">
+      <d2p1:ContinueOnFailure>false</d2p1:ContinueOnFailure>
+      <d2p1:CustomDescription i:nil="true" />
+      <d2p1:Description>Wait for attribute 'class' has 'NotContain' value of 'k-state-selected' on 'USATableCell'</d2p1:Description>
+      <d2p1:Enabled>true</d2p1:Enabled>
+      <d2p1:Id />
+      <d2p1:Order>13</d2p1:Order>
+      <d2p1:QcId>0</d2p1:QcId>
+      <d2p1:QcVersionStamp>0</d2p1:QcVersionStamp>
+      <d2p1:Runtime_x0020_ID>50cf2112-7eff-486e-9cba-97761dbbe0b0</d2p1:Runtime_x0020_ID>
+      <d2p1:Step i:type="d2p1:AttributeVerificationDescriptor">
+        <d2p1:Constraints xmlns:d5p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+          <d5p1:ConstraintValues xmlns:d6p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+            <d6p1:KeyValueOfstringstring>
+              <d6p1:Key>RunsAgainstVersion</d6p1:Key>
+              <d6p1:Value />
+            </d6p1:KeyValueOfstringstring>
+          </d5p1:ConstraintValues>
+        </d2p1:Constraints>
+        <d2p1:DataBindingExpressions xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <d2p1:EditorType />
+        <d2p1:Elements xmlns:d5p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+          <d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+            <d5p1:Key>verifyTarget</d5p1:Key>
+            <d5p1:Value xmlns:d7p1="http://artoftest.com/schemas/WebAiiDesignCanvas/2.0.0">
+              <d7p1:DomStateKey />
+              <d7p1:FindExpression i:type="d7p1:HtmlFindExpressionElement">
+                <d7p1:BackupSearchClause>/html[1]/body[1]/div[1]/div[3]/table[1]/tbody[1]/tr[7]/td[5]</d7p1:BackupSearchClause>
+                <d7p1:FindExpressions xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Collections.Generic">
+                  <d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                    <d9p1:key>Html</d9p1:key>
+                    <d9p1:value i:type="d7p1:HtmlFindExpression">
+                      <d7p1:ChainStops>
+                        <d5p1:int>1</d5p1:int>
+                      </d7p1:ChainStops>
+                      <d7p1:Clauses>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>id=grid</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                        <d7p1:HtmlFindClause>
+                          <d7p1:Clause>tagIndex=td:54</d7p1:Clause>
+                        </d7p1:HtmlFindClause>
+                      </d7p1:Clauses>
+                      <d7p1:Constraints />
+                    </d9p1:value>
+                  </d9p1:KeyValuePairOfTechnologyTypeanyTypeHXKb0FV5>
+                </d7p1:FindExpressions>
+                <d7p1:Name>USATableCell</d7p1:Name>
+                <d7p1:NodeKind>4</d7p1:NodeKind>
+                <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              </d7p1:FindExpression>
+              <d7p1:FindInfo i:nil="true" />
+              <d7p1:Frame i:nil="true" />
+              <d7p1:HtmlControlType>ArtOfTest.WebAii.Controls.HtmlControls.HtmlTableCell</d7p1:HtmlControlType>
+              <d7p1:IsIndependent>false</d7p1:IsIndependent>
+              <d7p1:Name>verifyTarget</d7p1:Name>
+              <d7p1:Page i:type="d2p1:PageUri">
+                <d2p1:AlwaysUseTitleInCompare>false</d2p1:AlwaysUseTitleInCompare>
+                <d2p1:BaseUrl>http://mvc-kendobuild/staging/functional-tests/KendoCustom/KendoCustomSites</d2p1:BaseUrl>
+                <d2p1:CompareMode>FullPathAndQuery</d2p1:CompareMode>
+                <d2p1:EquivalentUrls />
+                <d2p1:Fragment />
+                <d2p1:FriendlyName>x404NotFound</d2p1:FriendlyName>
+                <d2p1:Path>/Grid/GroupDetailsGrid.html</d2p1:Path>
+                <d2p1:Query />
+                <d2p1:Title>Grid Hierarchy</d2p1:Title>
+              </d7p1:Page>
+              <d7p1:Region i:nil="true" />
+              <d7p1:TechnologyType>Html</d7p1:TechnologyType>
+              <d7p1:Version>200</d7p1:Version>
+            </d5p1:Value>
+          </d5p1:KeyValueOfstringElementDescriptorJagf4TWk>
+        </d2p1:Elements>
+        <d2p1:LogMessageOnFailure />
+        <d2p1:Pause>None</d2p1:Pause>
+        <d2p1:RunsAgainstVersion />
+        <d2p1:StepType>Wait</d2p1:StepType>
+        <d2p1:UseStepWaitOnElementsTimout>false</d2p1:UseStepWaitOnElementsTimout>
+        <d2p1:WaitOnElements>true</d2p1:WaitOnElements>
+        <d2p1:WaitOnElementsTimeout>10000</d2p1:WaitOnElementsTimeout>
+        <d2p1:CheckInterval>500</d2p1:CheckInterval>
+        <d2p1:DataBindVariableName i:nil="true" />
+        <d2p1:EnsureStateIsCurrent>false</d2p1:EnsureStateIsCurrent>
+        <d2p1:Timeout>10000</d2p1:Timeout>
+        <d2p1:UseBackupSearch>true</d2p1:UseBackupSearch>
+        <d2p1:AttributeName>class</d2p1:AttributeName>
+        <d2p1:AttributeValue>k-state-selected</d2p1:AttributeValue>
+        <d2p1:CompareType>NotContain</d2p1:CompareType>
+      </d2p1:Step>
+      <d2p1:StepImageKey>SelectionClearedForNotVisible_83ia3pdol1.dr0</d2p1:StepImageKey>
+      <d2p1:StepState>NoCode</d2p1:StepState>
+      <d2p1:Version>200</d2p1:Version>
+    </d2p1:AutomationStep>
+  </Steps>
+  <StopTestListOnFailure>false</StopTestListOnFailure>
+  <TestAssembly />
+  <TestAssemblyPath />
+  <TestClass i:nil="true" />
+  <TestLinks xmlns:d2p1="http://schemas.datacontract.org/2004/07/ArtOfTest.WebAii.Design.ProjectModel.TestLinks" />
+  <UseDefaultWpfAppPath>false</UseDefaultWpfAppPath>
+  <VSProperties xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <WebKitExecutionDelay>0</WebKitExecutionDelay>
+  <WpfAppPath i:nil="true" />
+</WebAiiTest>
