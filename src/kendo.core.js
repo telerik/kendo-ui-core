@@ -2566,7 +2566,6 @@ function pad(number) {
         events: [],
 
         viewShow: $.noop,
-        viewInit: $.noop,
 
         view: function() {
             return this.element.closest(kendo.roleSelector("view")).data("kendoMobileView");
