@@ -43,6 +43,10 @@
             that.dataSource.unbind("change", that._refreshHandler);
         },
 
+        events: [
+            "change"
+        ],
+
         options: {
             name: "Pager",
             selectTemplate: '<li><span class="k-state-active">#=text#</span></li>',

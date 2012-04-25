@@ -145,6 +145,19 @@
                 equal(index, 2);
             });
 
+            test("change event is fired when clicking a page button", function() {
+                var index = 0,
+                    changeHandler = function (e) {
+                        index = parseInt(e.index, 10);
+                    },
+                    ul = setup( { }, { change: changeHandler } );
+
+                dataSource.read();
+
+                ul.find("a:eq(0)").click();
+                equal(index, 2);
+            });
+
             test("clicking on the current page does not trigger change event", function(){
                 var ul = setup(),
                     called = false;
