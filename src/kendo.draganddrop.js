@@ -281,9 +281,14 @@
             this.trigger(CANCEL);
         },
 
+        skip: function() {
+            this._cancel();
+        },
+
         _cancel: function() {
-            this.pressed = false;
-            this.surface.off(this.ns);
+            var that = this;
+            that.moved = that.pressed = false;
+            that.surface.off(that.ns);
         },
 
         _start: function(e) {
@@ -367,14 +372,14 @@
             if (!that.pressed) { return; }
 
             that._withEvent(e, function() {
-                that._cancel();
-
                 if (that.moved) {
                     that._trigger(END, e);
                     that.moved = false;
                 } else {
                     that._trigger(TAP, e);
                 }
+
+                that._cancel();
             });
         },
 
@@ -596,6 +601,8 @@
                         x.dragMove(e.x.delta);
                         y.dragMove(e.y.delta);
                         e.preventDefault();
+                    } else {
+                        that.drag.skip();
                     }
                 },
 
