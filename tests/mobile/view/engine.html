@@ -77,6 +77,17 @@
                 viewEngine.showView("#foo");
             });
 
+            function checkVisible(e) {
+                ok(e.view.element.is(":visible"));
+            }
+
+            test("shown view is visible during init event", 1, function() {
+                root.html('<div data-role="view" data-init="checkVisible" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+                viewEngine = new kendo.mobile.ViewEngine({ container: root });
+
+                viewEngine.showView("#foo");
+            });
+
             test("shown view triggers show event", 1, function() {
                 root.html('<div data-role="view" data-show="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
                 viewEngine = new kendo.mobile.ViewEngine({ container: root });

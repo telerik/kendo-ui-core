@@ -106,7 +106,6 @@
             that._layout();
             that._model();
             that._scroller();
-            that._init();
         },
 
         events: [
@@ -146,6 +145,11 @@
         showStart: function() {
             var that = this;
             that.element.css("display", "");
+
+            if (!that.inited) {
+                that.inited = true;
+                that.trigger(INIT, {view: that});
+            }
 
             if (that.layout) {
                 that.layout.attach(that);
@@ -212,12 +216,6 @@
 
         _init: function() {
             var that = this;
-
-            that.trigger(INIT, {view: that});
-
-            that._eachWidget(function(widget) {
-                widget.viewInit(that);
-            });
         },
 
         _scroller: function() {
