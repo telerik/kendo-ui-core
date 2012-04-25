@@ -137,6 +137,21 @@
                 result = reader.data(result);
                 ok(called);
             });
+
+            test("data retuns empty observable array when such is passed and a model is declared", function() {
+                var reader = new DataReader({
+                    model: {
+                        fields: {
+                            bar: { type: "number" },
+                            baz: "baz"
+                        }
+                    },
+                    data: function() {
+                        return new kendo.data.ObservableArray([]);
+                    }
+                });
+                ok(!reader.data().length);
+            });
         </script>
     </body>
 </html>
