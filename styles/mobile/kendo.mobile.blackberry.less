@@ -4,28 +4,21 @@
 
 /* Platform specific BlackBerry CSS */
 
-.km-blackberry,
-.km-blackberry .km-button
+.km-blackberry
 {
-    font: normal 1.2em Arial, Helvetica, sans-serif;
+    font: 1.2em Arial, Helvetica, sans-serif;
+}
+
+.km-blackberry6,
+.km-blackberry7
+{
+    font-size: .9em;
 }
 
 .km-blackberry,
 .km-blackberry .km-content
 {
     background: #fff;
-}
-
-.km-blackberry .km-view-title,
-.km-blackberry .km-dialog-title
-{
-    text-align: center;
-    color: #fff;
-    font-size: 1.4rem;
-    line-height: 2.5rem;
-    font-weight: bold;
-    float: left;
-    width: 100%;
 }
 
 .km-blackberry .km-navbar,
@@ -36,13 +29,25 @@
 .km-blackberry input[type=file],
 .km-blackberry li.km-actionsheet-cancel > a
 {
-    font: normal 1em Arial, Helvetica, sans-serif;
+    font-weight: normal;
     color: #000;
     text-shadow: none;
     border: 1px solid rgba(0,0,0,.2);
     background-color: #cfd3d6;
     background-image: linear-gradient(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
     .box-shadow(~"0 1px 0 0 rgba(0,0,0,.1)");
+}
+
+.km-blackberry .km-view-title,
+.km-blackberry .km-dialog-title
+{
+    text-align: center;
+    color: #fff;
+    font-size: 1.3em;
+    line-height: 2.5rem;
+    font-weight: bold;
+    float: left;
+    width: 100%;
 }
 
 .km-blackberry .km-badge,
@@ -123,6 +128,12 @@
     padding: .6rem 2rem;
 }
 
+.km-blackberry6 .km-content .km-button,
+.km-blackberry7 .km-content .km-button
+{
+    padding: .6rem 1.6rem;
+}
+
 .km-blackberry .km-back:before
 {
     width: .4rem;
@@ -146,10 +157,18 @@
 {
     font-weight: normal;
     font-family: HelveticaNeue, Arial, sans-serif;
-    height: 2.3rem;
-    line-height: 2.3rem;
-    width: 10rem;
+    height: 2.3em;
+    line-height: 2.3em;
+    width: 10em;
     -webkit-transform: translatez(0);
+}
+
+.km-blackberry6 .km-switch,
+.km-blackberry7 .km-switch
+{
+    height: 2em;
+    line-height: 2em;
+    width: 8em;
 }
 
 .km-blackberry .km-switch-background,
@@ -158,6 +177,14 @@
     margin-left: -100%;
     background:
         linear-gradient(top, rgb(219,219,219), rgb(238,238,238) 50%) 10.5em 0 no-repeat #0074dc;
+}
+
+.km-blackberry6 .km-switch-background,
+.km-blackberry6 .km-slider-background,
+.km-blackberry7 .km-switch-background,
+.km-blackberry7 .km-slider-background
+{
+    background-position: 8.5em 0;
 }
 
 .km-blackberry .km-switch-background:after
@@ -181,7 +208,7 @@
 .km-blackberry .km-switch-handle
 {
     margin: 0;
-    width: 5rem;
+    width: 5em;
     height: 100%;
     background: #cfd3d6 linear-gradient(top, rgba(255,255,255,.95), rgba(255,255,255,.85) 50%, rgba(255,255,255,.5));
     .border-radius(4px);
@@ -189,23 +216,34 @@
     margin-right: 2px;
 }
 
+.km-blackberry6 .km-switch-handle,
+.km-blackberry7 .km-switch-handle
+{
+    width: 4em;
+}
+
 .km-blackberry .km-switch-label-off
 {
     color: #000;
-    left: 4.2em;
+    left: 4.6em;
 }
 
 .km-blackberry .km-switch-label-on
 {
     color: #fff;
-    left: -4.2em;
+    left: -4.6em;
 }
+
+.km-blackberry6 .km-switch-label-off,
+.km-blackberry7 .km-switch-label-off { left: 3.6em; }
+.km-blackberry6 .km-switch-label-on,
+.km-blackberry7 .km-switch-label-on { left: -3.6em; }
 
 .km-blackberry .km-switch-label-on,
 .km-blackberry .km-switch-label-off
 {
     text-shadow: none;
-    font-size: 1.2rem;
+    font-size: 1.1em;
     width: 100%;
 }
 
@@ -213,7 +251,7 @@
 {
     .border-radius(5px);
     border: 0;
-    font-size: 1rem;
+    font-size: 1em;
     border-collapse: separate;
     .box-shadow(~"inset 0 0 0 1px rgba(0,0,0,.2), 0 1px 0 0 rgba(0,0,0,.1)");
 }
@@ -275,7 +313,7 @@
 .km-blackberry .km-list > li
 {
     color: #fff;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: normal;
     line-height: 2em;
     border-bottom: 1px solid #e6e6e6;
@@ -324,8 +362,7 @@
 
 .km-blackberry .km-listview .km-switch
 {
-    margin-top: -1.2em;
-    margin-top: ~"-1.2rem";
+    margin-top: ~"-1.1em";
 }
 
 .km-blackberry .km-toolbar,
@@ -365,7 +402,7 @@
 {
     border: 0;
     margin: 0 1%;
-    padding: .2em 1.2em;
+    padding: .2em 1em;
     background: transparent;
     .border-radius(5pt);
     .box-shadow(none);
@@ -380,6 +417,12 @@
     right: 1rem;
     width: 0;
     height: 0;
+}
+
+.km-blackberry6 .km-tabstrip .km-text,
+.km-blackberry7 .km-tabstrip .km-text
+{
+    color: transparent;
 }
 
 .km-blackberry .km-tabstrip .km-badge
