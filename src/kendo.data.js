@@ -1343,7 +1343,7 @@
                     data = dataFunction(data);
 
                     if (data && !isEmptyObject(getters)) {
-                        if (toString.call(data) !== "[object Array]") {
+                        if (toString.call(data) !== "[object Array]" && !(data instanceof ObservableArray)) {
                             data = [data];
                         }
 
