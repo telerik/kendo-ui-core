@@ -17,9 +17,18 @@
         */
         init: function(element, options) {
             var that = this,
+                align = "center center",
+                effect = "fade:in",
+                view,
                 shim = $(SHIM).hide();
 
+            if (kendo.support.mobileOS.ios) {
+                align = "bottom left";
+                effect = "slideIn:up";
+            }
+
             Widget.fn.init.call(that, element, options);
+            view = that.view(),
 
             that.shim = shim;
             that.element = element;
@@ -28,30 +37,11 @@
                 that.shim.on(kendo.support.mouseup, $.proxy(that.hide, that));
             }
 
-            kendo.notify(that);
-        },
-
-        options: {
-            name: "Shim",
-            modal: true,
-            duration: 200
-        },
-
-        viewInit: function(view) {
-            var that = this,
-                align = "center center",
-                effect = "fade:in";
-
-            if (kendo.support.mobileOS.ios) {
-                align = "bottom left";
-                effect = "slideIn:up";
-            }
-
-            view.container.append(that.shim);
+            view.container.append(shim);
 
             that.popup = new Popup(that.element, {
-                anchor: that.shim,
-                appendTo: that.shim,
+                anchor: shim,
+                appendTo: shim,
                 origin: align,
                 position: align,
                 animation: {
@@ -64,12 +54,20 @@
                     }
                 },
                 closed: function() {
-                    that.shim.hide();
+                    shim.hide();
                 },
                 open: function() {
-                    that.shim.show();
+                    shim.show();
                 }
             });
+
+            kendo.notify(that);
+        },
+
+        options: {
+            name: "Shim",
+            modal: true,
+            duration: 200
         },
 
         show: function() {
