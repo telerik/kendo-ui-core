@@ -563,7 +563,7 @@
                 x: e.originalEvent.clientX,
                 y: e.originalEvent.clientY
             };
-        }
+        };
     }
 
     if (support.touch) {
@@ -573,7 +573,7 @@
 
             if (id) {
                 var output = null;
-                each(changedTouches, function(idx, value) {
+                $.each(changedTouches, function(idx, value) {
                     if (id == value.identifier) {
                         output = {
                             idx: value.identifier,
