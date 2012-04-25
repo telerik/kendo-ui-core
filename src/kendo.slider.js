@@ -718,9 +718,11 @@
             };
 
             that.wrapper
-                .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
-                .end()
-                .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
+                    .bind(MOUSE_DOWN, clickHandler)
+                    .end().bind(MOUSE_DOWN, function() {
+                        $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    });
 
             that.wrapper
                 .find(DRAG_HANDLE)
@@ -1355,10 +1357,13 @@
                 }
             };
 
+
             that.wrapper
-                .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
-                .end()
-                .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
+                    .bind(MOUSE_DOWN, clickHandler)
+                    .end().bind(MOUSE_DOWN, function() {
+                        $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    });
 
             that.wrapper
                 .find(DRAG_HANDLE)
