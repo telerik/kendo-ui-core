@@ -8,9 +8,9 @@
         inArray = $.inArray,
         ERRORTEMPLATE = '<div class="k-widget k-tooltip k-tooltip-validation" style="margin:0.5em"><span class="k-icon k-warning"> </span>' +
                     '${message}<div class="k-callout k-callout-n"></div></div>',
-        CHANGE = "change",
-        nameSpecialCharRegExp = /(\[|\]|\$|\.|\:|\+)/g,
-        specialRules = ["url", "email", "number", "date", "boolean"];
+        CHANGE = "change";
+
+    var specialRules = ["url", "email", "number", "date", "boolean"];
 
     function fieldType(field) {
         return field.type || $.type(field) || "string";
@@ -132,7 +132,7 @@
 
             values[e.field] = e.value;
 
-            input = $(":input[" + kendo.attr("bind") + "=" + (isBoolean ? "checked:" : "value:") + e.field.replace(nameSpecialCharRegExp, "\\$1") + "]", that.element);
+            input = $(':input[' + kendo.attr("bind") + '="' + (isBoolean ? 'checked:' : 'value:') + e.field + '"]', that.element);
 
             try {
                 that._validationEventInProgress = true;
