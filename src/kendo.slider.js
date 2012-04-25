@@ -113,7 +113,8 @@
         pointers = support.pointers,
         CHANGE = "change",
         SLIDE = "slide",
-        MOUSE_DOWN = touch ? "touchstart" : pointers ? "MSPointerDown" : "mousedown",
+        MOUSE_DOWN = touch ? "touchstart" : "mousedown",
+        TRACK_MOUSE_DOWN = pointers ? "MSPointerDown" : "mousedown",
         MOUSE_UP = touch ? "touchend" : "mouseup",
         MOVE_SELECTION = "moveSelection",
         KEY_DOWN = "keydown",
@@ -766,9 +767,11 @@
             };
 
             that.wrapper
-                .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
-                .end()
-                .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
+                    .bind(TRACK_MOUSE_DOWN, clickHandler)
+                    .end().bind(TRACK_MOUSE_DOWN, function() {
+                        $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    });
 
             that.wrapper
                 .find(DRAG_HANDLE)
@@ -847,9 +850,7 @@
                 .bind(MOUSE_OVER, false);
 
             that.wrapper
-                .find(TICK_SELECTOR).unbind(MOUSE_DOWN)
-                .end()
-                .find(TRACK_SELECTOR).unbind(MOUSE_DOWN);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).unbind(TRACK_MOUSE_DOWN);
 
             that.wrapper
                 .find(DRAG_HANDLE)
@@ -1404,9 +1405,11 @@
             };
 
             that.wrapper
-                .find(TICK_SELECTOR).bind(MOUSE_DOWN, clickHandler)
-                .end()
-                .find(TRACK_SELECTOR).bind(MOUSE_DOWN, clickHandler);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR)
+                    .bind(TRACK_MOUSE_DOWN, clickHandler)
+                    .end().bind(TRACK_MOUSE_DOWN, function() {
+                        $(document.documentElement).one("selectstart", kendo.preventDefault);
+                    });
 
             that.wrapper
                 .find(DRAG_HANDLE)
@@ -1443,9 +1446,7 @@
             that.wrapper.find("input").attr(DISABLED, DISABLED);
 
             that.wrapper
-                .find(TICK_SELECTOR).unbind(MOUSE_DOWN)
-                .end()
-                .find(TRACK_SELECTOR).unbind(MOUSE_DOWN);
+                .find(TICK_SELECTOR + ", " + TRACK_SELECTOR).unbind(TRACK_MOUSE_DOWN);
 
             that.wrapper
                 .find(DRAG_HANDLE)
