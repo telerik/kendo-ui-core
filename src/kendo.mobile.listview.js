@@ -399,11 +399,12 @@
 
         _dataSource: function() {
             var that = this,
-                options = that.options;
+                options = that.options,
+                showLoading = $.proxy(that._showLoading, that);
 
             if (that.dataSource && that._refreshHandler) {
                 that.dataSource.unbind("change", that._refreshHandler)
-                               .unbind(REQUEST_START, that._showLoading);
+                               .unbind(REQUEST_START, showLoading);
             } else {
                 that._refreshHandler = proxy(that.refresh, that);
             }
@@ -412,7 +413,7 @@
                                         .bind("change", that._refreshHandler);
 
             if (!options.pullToRefresh && !options.loadMore && !options.endlessScroll) {
-                that.dataSource.bind(REQUEST_START, that._showLoading);
+                that.dataSource.bind(REQUEST_START, showLoading);
             }
         },
 
@@ -710,7 +711,7 @@
         _hideLoading: function() {
             var view = this.view();
             if (view) {
-                view.loader.show();
+                view.loader.hide();
             }
         }
     });
