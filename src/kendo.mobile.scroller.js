@@ -323,7 +323,7 @@
             SCROLL,
             /**
              * Fires when the scroller dimensions change (e.g. orientation change or resize)
-             * @name kendo.mobile.ui.Scroller#scroll
+             * @name kendo.mobile.ui.Scroller#resize
              * @event
              * @param {Event} e
              */
