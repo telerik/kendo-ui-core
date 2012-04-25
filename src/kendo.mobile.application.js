@@ -7,6 +7,9 @@
 
         OS = support.mobileOS,
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
+        BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
+        VERTICAL = OS.blackberry ? "km-horizontal" : "km-vertical",
+        HORIZONTAL = OS.blackberry ? "km-vertical" : "km-horizontal",
 
         MOBILE_UA = {
             ios: "iPhone OS 4_3",
@@ -17,7 +20,7 @@
 
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
                '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
-               '<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport" />',
+               '<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width' + (BERRYPHONEGAP ? ', height=device-height' : '') + '" name="viewport" />',
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
@@ -49,7 +52,7 @@
     }
 
     function getOrientationClass() {
-        return Math.abs(window.orientation) / 90 ? "km-horizontal" : "km-vertical";
+        return Math.abs(window.orientation) / 90 ? HORIZONTAL : VERTICAL;
     }
 
     /**
@@ -554,9 +557,17 @@
             element.parent().addClass("km-root");
             element.addClass(osCssClass + " " + getOrientationClass());
 
+            if (BERRYPHONEGAP) {
+                $(document.documentElement).height(element.hasClass(HORIZONTAL) ? window.innerWidth : window.innerHeight);
+            }
+
             WINDOW.bind(ORIENTATIONEVENT, function(e) {
                 element.removeClass("km-horizontal km-vertical")
                     .addClass(getOrientationClass());
+
+                if (BERRYPHONEGAP) {
+                    $(document.documentElement).height(element.hasClass(HORIZONTAL) ? window.innerWidth : window.innerHeight);
+                }
 
                 if (that.view) {// On desktop resize is fired rather early
                     that.view.scroller.reset();
