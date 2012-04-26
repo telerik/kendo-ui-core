@@ -1,6 +1,6 @@
 # function outputIssues(title, issues) { #
     # if (issues && issues.length) { #
-    <h3>#= title #</h3>
+    <h4>#= title #</h4>
     <ul>
         # for (var issue in issues) { #
         <li>#= issues[issue] #</li>
@@ -24,30 +24,37 @@
             font: .75em/1.5 Tahoma, sans-serif;
         }
 
+        h2 {
+            margin: 1em 0 .3em;
+            border-bottom: 1px solid \#ccc;
+            padding-bottom: .2em;
+        }
+
         \#page {
             width: 50em;
             margin: 0 auto 2em;
             border-radius: 0 0 1em 1em;
             box-shadow: 0 0 10px \#ccc;
-            padding: 2em;
+            padding: 1em 2em 2em;
         }
     </style>
 </head>
 <body>
     <div id="page">
+        <h1>Release notes for Kendo UI v#= version #</h1>
     # var suiteOrder = ["Core", "Web", "DataViz", "Mobile"]; #
     # for (var suiteIndex in suiteOrder) { #
         # var suite = suiteOrder[suiteIndex]; #
         # var suiteIssues = issues[suite]; #
         # if (!suiteIssues) continue; #
-        <h1>#= suite #</h1>
+        <h2>#= suite #</h2>
 
         # outputIssues("What's new", suiteIssues.features); #
         # outputIssues("What's fixed", suiteIssues.bugs); #
 
         # for (var widget in suiteIssues) { #
         # if (widget == "bugs" || widget == "features") continue; #
-        <h2>#= widget #</h2>
+        <h3>#= widget #</h3>
 
             # var component = issues[suite][widget]; #
 

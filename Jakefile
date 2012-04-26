@@ -201,6 +201,8 @@ desc("Get changelog from GitHub");
 task("changelog", function() {
     var GitHubApi = require("github");
 
+    var changelog = new Changelog();
+
     var github = new GitHubApi({
         version: "3.0.0"
     });
@@ -216,33 +218,36 @@ task("changelog", function() {
     }, function(err, res) {
         var ver = JSON.parse(kendoBuild.readText("VERSION"));
 
-        // TODO: Add logic for SPs
-        var currentMilestone = res.filter(function(milestone) {
-            var components = milestone.title.split(".");
+        var milestones = changelog.filterMilestones(res, ver);
 
-            return components[0] == ver.year && components[1] == "Q" + ver.release;
-        })[0];
+        function gatherIssues(callback) {
+            if (milestones.length == 0) {
+                callback();
+            } else {
+                var milestone = milestones.pop();
 
-        github.issues.repoIssues({
-            user: "telerik",
-            repo: "kendo",
-            state: "closed",
-            milestone: currentMilestone.number
-        }, function(err, res) {
-            var changelog = new Changelog();
+                github.issues.repoIssues({
+                    user: "telerik",
+                    repo: "kendo",
+                    state: "closed",
+                    milestone: milestone.number
+                }, function(err, res) {
+                    changelog.groupIssues(res);
 
-            changelog.groupIssues(res);
+                    gatherIssues(callback);
+                });
+            }
+        }
 
+        gatherIssues(function() {
             var changelogTemplate = kendoBuild.readText(path.join("build", "templates", "changelog.html"));
 
             changelogTemplate = kendoBuild.template(changelogTemplate);
 
-            var changelogHtml = changelogTemplate({
+            kendoBuild.writeText("changelog.html", changelogTemplate({
                 version: version(),
                 issues: changelog.groupedIssues
-            });
-
-            kendoBuild.writeText("changelog.html", changelogHtml);
+            }));
         });
     });
 });

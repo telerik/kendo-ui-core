@@ -3,6 +3,30 @@ function Changelog() {
 }
 
 Changelog.prototype = {
+    milestone: function(year, quarter, servicePack) {
+        var result = year + ".Q" + quarter;
+
+        if (servicePack) {
+            result += ".SP" + servicePack;
+        }
+
+        return result;
+    },
+
+    filterMilestones: function(milestones, version) {
+        var targets = [
+            this.milestone(version.year, version.release, version.servicePack)
+        ];
+
+        if (!version.servicePack) {
+            //targets.splice(0, 0, this.milestone(version.year - 1, version.release - 1, 2);
+        }
+
+        return milestones.filter(function(milestone) {
+            return (targets.indexOf(milestone.title) >= 0);
+        });
+    },
+
     filterLabels: function(labels, prefix) {
         var result = [],
             regex = new RegExp("^" + prefix + ":\\s", "i");
@@ -62,6 +86,8 @@ Changelog.prototype = {
 
     groupIssues: function(issues) {
         issues.forEach(this.groupIssue.bind(this));
+
+        return this.groupedIssues;
     }
 };
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Changelog API</title>
+        <script src="../../src/jquery.js"></script>
+        <script src="../qunit/qunit/qunit.js"></script>
+        <script src="../qunit-runner.js"></script>
+        <link href="../qunit/qunit/qunit.css" type="text/css" rel="stylesheet"/>
+    </head>
+    <body>
+        <script src="../../build/changelog.js"></script>
+        <script>
+            var changelog, allMilestones;
+
+            module("Changelog", {
+                setup: function() {
+                    changelog = new Changelog();
+                    allMilestones = [
+                        milestone(2011, 3), milestone(2011, 3, 1), milestone(2011, 3, 2),
+                        milestone(2012, 1), milestone(2012, 1, 1), milestone(2012, 1, 2),
+                        milestone(2012, 2), milestone(2012, 2, 1), milestone(2012, 2, 2),
+                        milestone(2012, 3), milestone(2012, 3, 1), milestone(2012, 3, 2),
+                        milestone(2013, 1), milestone(2013, 1, 1), milestone(2013, 1, 2)
+                    ];
+                }
+            });
+
+            function milestone(y, q, sp) {
+                return { title: changelog.milestone(y, q, sp) };
+            }
+
+            test("filterMilestones for SP release returns only SP milestone", function() {
+                var milestones = changelog.filterMilestones(allMilestones, {
+                    year: 2012,
+                    release: 1,
+                    servicePack: 1
+                });
+
+                same(milestones, [ milestone(2012, 1, 1) ]);
+            });
+
+            //test("filterMilestones for Q release includes previous SP milestone and Q release", function() {
+                //var milestones = changelog.filterMilestones(allMilestones, {
+                    //year: 2012,
+                    //release: 2,
+                    //servicePack: 0
+                //});
+
+                //same(milestones, [ milestone(2012, 1, 2), milestone(2012, 2) ]);
+            //});
+        </script>
+
+        <h1 id="qunit-header">Changelog API</h1>
+        <h2 id="qunit-banner"></h2>
+        <div id="qunit-testrunner-toolbar"></div>
+        <h2 id="qunit-userAgent"></h2>
+        <ol id="qunit-tests"></ol>
+        <div id="qunit-fixture">test markup, will be hidden</div>
+        <ul id="log"></ul>
+
+    </body>
+</html>
