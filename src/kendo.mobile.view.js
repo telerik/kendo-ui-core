@@ -214,10 +214,6 @@
             return contents;
         },
 
-        _init: function() {
-            var that = this;
-        },
-
         _scroller: function() {
             var that = this;
 
