@@ -10,8 +10,11 @@ namespace KendoUI.Mvc.Web.Examples.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            return RedirectToRoute("RazorDefault", new { action = "BundleIndex" });
+        }
 
+        public ActionResult BundleIndex()
+        {
             return View();
         }
     }
