@@ -215,6 +215,7 @@ task("changelog", function() {
     }, function(err, res) {
         var ver = JSON.parse(kendoBuild.readText("VERSION"));
 
+        // TODO: Add logic for SPs
         var currentMilestone = res.filter(function(milestone) {
             var components = milestone.title.split(".");
 
@@ -230,33 +231,64 @@ task("changelog", function() {
             var sortedIssues = {};
 
             function taxonifyIssue(issue) {
-                var labels = issue.labels.map(function(label) {
-                        return label.name.toLowerCase();
-                    }),
-                    suites = [];
+                var labels = issue.labels.map(function(label) { return label.name; }),
+                    suites, widgets;
 
-                labels
-                    .filter(function(label) {
-                        return /^s:\s/.test(label);
-                    })
-                    .forEach(function(suite) {
-                        suites.push(suite.substring(3));
-                    });
+                function filterLabels(labels, regex) {
+                    var result = [];
 
-                labels
-                    .filter(function(label) {
-                        return /^w:\s/.test(label);
-                    })
-                    .forEach(function(widget) {
-                        widgets.push(widget.substring(3));
-                    });
+                    labels
+                        .filter(function(label) {
+                            return regex.test(label);
+                        })
+                        .forEach(function(item) {
+                            result.push(item.substring(3));
+                        });
 
-                console.log(issue.title);
+                    return result;
+                }
+
+                suites = filterLabels(labels, /^s:\s/i);
+                widgets = filterLabels(labels, /^w:\s/i);
+                // TODO: Add filtering for core components
+
+                var type = labels.indexOf("Bug") >= 0 ? "bugs" : "features";
+
+                suites.forEach(function(suite) {
+                    if (!sortedIssues[suite]) {
+                        sortedIssues[suite] = {};
+                    }
+
+                    if (widgets.length) {
+                        widgets.forEach(function(widget) {
+                            if (!sortedIssues[suite][widget]) {
+                                sortedIssues[suite][widget] = { bugs: [], features: [] };
+                            }
+
+                            sortedIssues[suite][widget][type].push(issue.title);
+                        });
+                    } else {
+                        if (!sortedIssues[suite][type]) {
+                            sortedIssues[suite][type] = [];
+                        }
+
+                        sortedIssues[suite][type].push(issue.title);
+                    }
+                });
             }
 
             res.forEach(taxonifyIssue);
 
-            console.log(sortedIssues);
+            var changelogTemplate = kendoBuild.readText(path.join("build", "templates", "changelog.html"));
+
+            changelogTemplate = kendoBuild.template(changelogTemplate);
+
+            var changelogHtml = changelogTemplate({
+                version: version(),
+                issues: sortedIssues
+            });
+
+            kendoBuild.writeText("changelog.html", changelogHtml);
         });
     });
 });
