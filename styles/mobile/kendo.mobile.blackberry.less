@@ -468,6 +468,11 @@
     -webkit-transform: translatez(0);
 }
 
+.km-blackberry7.km-m0 .km-icon
+{
+    -webkit-transform: none;
+}
+
 .km-blackberry .km-button .km-icon,
 .km-blackberry .km-state-active .km-icon,
 .km-blackberry .km-tabstrip .km-button .km-icon
@@ -480,6 +485,20 @@
 .km-blackberry .km-tabstrip .km-button .km-icon
 {
     background-color: #eee;
+}
+
+.km-blackberry7.km-m0.km-web .km-button .km-icon,
+.km-blackberry7.km-m0.km-web .km-state-active .km-icon,
+.km-blackberry7.km-m0.km-web .km-tabstrip .km-button .km-icon
+{
+    background-image: none;
+}
+
+.km-blackberry7.km-m0.km-web .km-listview-link:active .km-icon,
+.km-blackberry7.km-m0.km-web .km-state-active .km-icon,
+.km-blackberry7.km-m0.km-web .km-tabstrip .km-button .km-icon
+{
+    background-color: transparent;
 }
 
 /* Pull to refresh */
@@ -554,6 +573,15 @@
     margin-left: -25px;
     margin-top: -25px;
     background-color: #4acaff;
+}
+
+.km-blackberry7.km-m0.km-web .km-loading,
+.km-blackberry7.km-m0.km-web .km-load-more .km-icon,
+.km-blackberry7.km-m0.km-web .km-scroller-pull .km-icon,
+.km-blackberry7.km-m0.km-web .km-scroller-refresh .km-icon
+{
+    background-color: transparent;
+    .animation(none);
 }
 
 /* Forms */
