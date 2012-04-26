@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Slider in mobile</title>
+        <link href="../../styles/web/kendo.common.css" rel="stylesheet" />
+        <link href="../../styles/web/kendo.default.less" rel="stylesheet/less" />
+        <link href="../../styles/mobile/kendo.mobile.all.less" rel="stylesheet/less" />
+        <script src="../../demos/mvc/content/shared/js/less.js"></script>
+        <script src="../../src/jquery.js"></script>
+        <script src="../../src/kendo.core.js"></script>
+        <script src="../../src/kendo.draganddrop.js"></script>
+        <script src="../../src/kendo.popup.js"></script>
+        <script src="../../src/kendo.history.js"></script>
+        <script src="../../src/kendo.slider.js"></script>
+        <script src="../../src/kendo.fx.js"></script>
+        <script src="../../src/kendo.mobile.scroller.js"></script>
+        <script src="../../src/kendo.mobile.shim.js"></script>
+        <script src="../../src/kendo.mobile.view.js"></script>
+        <script src="../../src/kendo.mobile.application.js"></script>
+        <script src="../../src/kendo.mobile.button.js"></script>
+        <script src="../../src/kendo.mobile.actionsheet.js"></script>
+
+        <style>
+        </style>
+
+        <script>
+            $(function() {
+                    new kendo.mobile.Application();
+            });
+
+            function initSlider() {
+                $(".eqSlider").kendoSlider({
+                    orientation: "vertical",
+                    min: -20,
+                    max: 20,
+                    smallStep: 1,
+                    largeStep: 20,
+                    showButtons: false
+                });
+            }
+        </script>
+
+    </head>
+    <body>
+        <div data-role="view" data-init="initSlider">
+            <div style="padding: 50px">
+                <input class="eqSlider" value="10" />
+            </div>
+        </div>
+
+    </body>
+</html>
