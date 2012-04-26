@@ -91,9 +91,6 @@
     <Compile Include="UIWidgets\Menu\API\Append.tstest.cs">
       <DependentUpon>Append.tstest</DependentUpon>
     </Compile>
-    <Compile Include="UIWidgets\Menu\BasicUsage\NotClosedOnClick.tstest.cs">
-      <DependentUpon>NotClosedOnClick.tstest</DependentUpon>
-    </Compile>
     <None Include="Framework\DataSource\LocalDataOperationsIdDescending.tstest" />
     <None Include="Framework\DataSource\SharedDataSourceYearDescending.tstest" />
     <None Include="Framework\DataSource\XMLBinding.tstest">
@@ -101,6 +98,19 @@
     </None>
     <None Include="Framework\DragAndDrop\DragAndDropEvents.tstest" />
     <None Include="Framework\Globalizaiton\Globalization.tstest" />
+    <None Include="Framework\Integration\KnockoutJS.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\MVVM\BasicUsage.tstest" />
+    <None Include="Framework\MVVM\EventBinding.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\MVVM\HTMLBinding.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Framework\MVVM\WidgetBindingSetBlue.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Framework\Templates\BasicUsage.tstest" />
     <None Include="Framework\Validation\ValidateAmount.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -120,6 +130,7 @@
     <None Include="Framework\Validation\ValidatePhone.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Overview\ChangeTheme.tstest" />
     <None Include="Settings.aiis" />
     <None Include="ThemeBuilder\ChangeTextColor.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -203,6 +214,9 @@
     <None Include="UIWidgets\DropDown\API\SelectByValue.tstest" />
     <None Include="UIWidgets\DropDown\API\SelectItemStartingWith.tstest" />
     <None Include="UIWidgets\DropDown\BindingToRemoteData.tstest" />
+    <None Include="UIWidgets\DropDown\CascadingDropDown.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\DropDown\ChangeValueKeyboard.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -210,6 +224,8 @@
     <None Include="UIWidgets\DropDown\DropDownEvents.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UIWidgets\Gauges\Linear.tstest" />
+    <None Include="UIWidgets\Grid\Aggregates\Aggregates.tstest" />
     <None Include="UIWidgets\Grid\API\ClearSelectedRow.tstest" />
     <None Include="UIWidgets\Grid\API\CollapseExpandGroup.tstest" />
     <None Include="UIWidgets\Grid\BasicUsage\GroupByAge.tstest" />
@@ -217,6 +233,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Grid\BasicUsage\SortByFirstName.tstest" />
+    <None Include="UIWidgets\Grid\BatchEditing\EditCancel.tstest" />
+    <None Include="UIWidgets\Grid\BatchEditing\EditSave.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\BindToLocalData\AgeNotEqualTo.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -225,6 +245,9 @@
     </None>
     <None Include="UIWidgets\Grid\BindToLocalData\FilterBirthDateGreaterThanOrEqualTo.tstest" />
     <None Include="UIWidgets\Grid\BindToLocalData\FilterFirstNameIsEqualTo.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="UIWidgets\Grid\BindToRemoteData\ClearFiltering.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="UIWidgets\Grid\BindToRemoteData\FilterCityIs.tstest" />
@@ -259,6 +282,9 @@
     <None Include="UIWidgets\Grid\Editing\EditSave.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UIWidgets\Grid\Editing\EditSaveCancel.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\Events\GridEvents.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -277,10 +303,19 @@
     <None Include="UIWidgets\Grid\Hierarchy\SortInHierarchyGrid.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UIWidgets\Grid\InlineEditing\EditCancel.tstest" />
+    <None Include="UIWidgets\Grid\PopupEditing\EditSave.tstest" />
+    <None Include="UIWidgets\Grid\PopupEditing\PageAddNewRecord.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Grid\Selection\SelectMultipleCells.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectMultipleRows.tstest" />
     <None Include="UIWidgets\Grid\Selection\SelectRowSingle.tstest" />
     <None Include="UIWidgets\Grid\ToolbarTemplate\ToolbarTemplate.tstest" />
+    <None Include="UIWidgets\ListView\EditingCancel.tstest" />
+    <None Include="UIWidgets\ListView\Selection.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Menu\API\After.tstest" />
     <None Include="UIWidgets\Menu\API\Append.tstest" />
     <None Include="UIWidgets\Menu\API\Before.tstest" />
@@ -325,6 +360,9 @@
     <None Include="UIWidgets\PanelBar\Events\PanelBarEvents.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UIWidgets\Slider\API\DisableSliderDragAndDrop.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\Slider\API\DoubleSliderDisableMove.tstest" />
     <None Include="UIWidgets\Slider\API\DoubleSliderEnabledisable.tstest" />
     <None Include="UIWidgets\Slider\API\DoubleSliderSetValue.tstest" />
@@ -336,9 +374,13 @@
     <None Include="UIWidgets\Splitter\ResizePanels.tstest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="UIWidgets\TabStrip\AJAX\AjaxTabStrip.tstest" />
     <None Include="UIWidgets\TabStrip\API\Append.tstest" />
     <None Include="UIWidgets\TabStrip\API\EnableDisable.tstest" />
     <None Include="UIWidgets\TabStrip\API\RemoveTab.tstest" />
+    <None Include="UIWidgets\TabStrip\Events\ErrorAnotherTab.tstest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="UIWidgets\TabStrip\Events\SwitchTabs.tstest" />
     <None Include="UIWidgets\TabStrip\API\InsertBeforeInsertAfter.tstest" />
     <None Include="UIWidgets\TimePicker\PickTimeRange.tstest">
@@ -373,6 +415,7 @@
     <None Include="UIWidgets\TreeView\Events\DragAndDropInvalid.tstest" />
     <None Include="UIWidgets\TreeView\Events\DragAndDropValid.tstest" />
     <None Include="UIWidgets\TreeView\Events\ExpandCollapseSelect.tstest" />
+    <None Include="UIWidgets\TreeView\Templates\AssertSerializedData.tstest" />
     <None Include="UIWidgets\Window\API\CloseOpen.tstest" />
     <None Include="UIWidgets\Window\Events\OpenActivateRefreshclose.tstest" />
   </ItemGroup>
@@ -950,6 +993,74 @@
     <None Include="UIWidgets\TreeView\DragAndDrop\DragAndDropInTree.resx">
       <DependentUpon>DragAndDropInTree.tstest</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Framework\Integration\KnockoutJS.resx">
+      <DependentUpon>KnockoutJS.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\MVVM\BasicUsage.resx">
+      <DependentUpon>BasicUsage.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\MVVM\EventBinding.resx">
+      <DependentUpon>EventBinding.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\MVVM\HTMLBinding.resx">
+      <DependentUpon>HTMLBinding.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Framework\MVVM\WidgetBindingSetBlue.resx">
+      <DependentUpon>WidgetBindingSetBlue.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Overview\ChangeTheme.resx">
+      <DependentUpon>ChangeTheme.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\DropDown\CascadingDropDown.resx">
+      <DependentUpon>CascadingDropDown.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Gauges\Linear.resx">
+      <DependentUpon>Linear.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\Aggregates\Aggregates.resx">
+      <DependentUpon>Aggregates.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\BatchEditing\EditCancel.resx">
+      <DependentUpon>EditCancel.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\BatchEditing\EditSave.resx">
+      <DependentUpon>EditSave.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\BindToRemoteData\ClearFiltering.resx">
+      <DependentUpon>ClearFiltering.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\Editing\EditSaveCancel.resx">
+      <DependentUpon>EditSaveCancel.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\InlineEditing\EditCancel.resx">
+      <DependentUpon>EditCancel.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\PopupEditing\EditSave.resx">
+      <DependentUpon>EditSave.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Grid\PopupEditing\PageAddNewRecord.resx">
+      <DependentUpon>PageAddNewRecord.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ListView\EditingCancel.resx">
+      <DependentUpon>EditingCancel.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\ListView\Selection.resx">
+      <DependentUpon>Selection.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\Slider\API\DisableSliderDragAndDrop.resx">
+      <DependentUpon>DisableSliderDragAndDrop.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\TabStrip\AJAX\AjaxTabStrip.resx">
+      <DependentUpon>AjaxTabStrip.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\TabStrip\Events\ErrorAnotherTab.resx">
+      <DependentUpon>ErrorAnotherTab.tstest</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIWidgets\TreeView\Templates\AssertSerializedData.resx">
+      <DependentUpon>AssertSerializedData.tstest</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
