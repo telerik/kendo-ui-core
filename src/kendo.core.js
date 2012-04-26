@@ -1737,11 +1737,13 @@ function pad(number) {
                     ipad: /(iPad).*OS\s+(\d+)[\._]([\d_]+)/,
                     meego: /(MeeGo).+NokiaBrowser\/(\d+)\.([\d\._]+)/,
                     webos: /(webOS)\/(\d+)\.(\d+(\.\d+)?)/,
-                    blackberry: /(BlackBerry|PlayBook).*?Version\/(\d+)\.(\d+(\.\d+)?)/
+                    blackberry: /(BlackBerry).*?Version\/(\d+)\.(\d+(\.\d+)?)/,
+                    playbook: /(PlayBook).*?Tablet\s*OS\s*(\d+)\.(\d+(\.\d+)?)/
                 },
                 osRxs = {
                     ios: /^i(phone|pad|pod)$/i,
-                    android: /^android|fire$/i
+                    android: /^android|fire$/i,
+                    blackberry: /^blackberry|playbook/i
                 },
                 testOs = function (agent) {
                     for (var os in osRxs) {
