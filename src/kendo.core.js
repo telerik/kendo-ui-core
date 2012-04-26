@@ -2237,7 +2237,7 @@ function pad(number) {
         },
 
         roleSelector: function(role) {
-            return "[" + kendo.attr("role") + "=" + role + "]";
+            return role.replace(/(\S+)/g, "[" + kendo.attr("role") + "=$1],").slice(0, -1);
         },
 
         /** @ignore */
@@ -2571,5 +2571,16 @@ function pad(number) {
      */
     kendo.preventDefault = function(e) {
         e.preventDefault();
+    };
+
+    /**
+     * Retrieves the widget for a given element (if any)
+     */
+    kendo.widgetInstance = function(element, suite) {
+        var widget = suite.roles[element.data(kendo.ns + "role")];
+
+        if (widget) {
+            return element.data("kendo" + widget.fn.options.prefix + widget.fn.options.name);
+        }
     };
 })(jQuery);
