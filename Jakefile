@@ -230,7 +230,7 @@ namespace("download-builder", function() {
 
 namespace("mvc", function() {
     desc("Copy debug scripts and styles to the Web suite demo site");
-    task("web-scripts", [], function() {
+    task("debug-web", [], function() {
         var root = examplesRoot("web"),
             suiteStyles = path.join("styles", "web"),
             stylesDest = path.join(root, "Content", "kendo"),
