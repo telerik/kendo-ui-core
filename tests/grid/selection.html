@@ -455,6 +455,15 @@
                 ok(table.find("tbody tr:eq(0)").find("td:nth(1)").hasClass("k-state-focused"));
             });
 
+            test("group footer row is not selected when clicked", function() {
+                var grid = setup({selectable: true, columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+                grid.dataSource.group({ field: "foo" });
+                grid.element.find(".k-group-footer:first").mousedown().mouseup();
+
+                ok(!grid.element.find(".k-state-selected").length)
+            });
+
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
