@@ -234,6 +234,10 @@ task("changelog", function() {
                 var labels = issue.labels.map(function(label) { return label.name; }),
                     suites, widgets;
 
+                if (labels.indexOf("Deleted") >= 0) {
+                    return;
+                }
+
                 function filterLabels(labels, regex) {
                     var result = [];
 
@@ -250,11 +254,10 @@ task("changelog", function() {
 
                 suites = filterLabels(labels, /^s:\s/i);
                 widgets = filterLabels(labels, /^w:\s/i);
-                // TODO: Add filtering for core components
 
                 var type = labels.indexOf("Bug") >= 0 ? "bugs" : "features";
 
-                suites.forEach(function(suite) {
+                function groupToSuite(suite) {
                     if (!sortedIssues[suite]) {
                         sortedIssues[suite] = {};
                     }
@@ -274,7 +277,14 @@ task("changelog", function() {
 
                         sortedIssues[suite][type].push(issue.title);
                     }
-                });
+                }
+
+                if (suites.length) {
+                    suites.forEach(groupToSuite);
+                } else {
+                    widgets = filterLabels(labels, /^f:\s/i);
+                    groupToSuite("Core");
+                }
             }
 
             res.forEach(taxonifyIssue);
