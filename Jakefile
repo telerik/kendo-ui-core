@@ -23,6 +23,7 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_PROJECT = "Kendo.csproj",
     DEMOS_LIVE_PATH = path.join(DEPLOY_PATH, "live"),
     DEMOS_LIVE_PACKAGE = path.join(DEPLOY_PATH, "online-examples.zip"),
+    DEMOS_SHARED = path.join(DEMOS_PATH, "content", "shared"),
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
     DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
@@ -36,7 +37,8 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     THEMEBUILDER_LIVE_PACKAGE = path.join(DEPLOY_PATH, "themebuilder.zip"),
     RELEASE_PATH = "release",
     WINJS_PATH = "winjs",
-    SUITES = ["web", "mobile", "dataviz"];
+    SUITES = ["web", "mobile", "dataviz"],
+    SUITE_CSS = "suite.css";
 
 // CDN Configuration ===========================================================
 var CDN_PROJECT = path.join("build", "cdn.proj"),
@@ -95,7 +97,7 @@ namespace("demos", function() {
 
         kendoBuild.spawnSilent("make", [ "less" ], { cwd: path.resolve(lessPath) }, function() {
             kendoBuild.processFilesRecursive(distPath, /.*/, function(fileName) {
-                kendoBuild.copyFileSync(fileName, path.join(DEMOS_PATH, "content", "shared", "js", "less.js"));
+                kendoBuild.copyFileSync(fileName, path.join(DEMOS_SHARED, SCRIPTS_PATH, "less.js"));
             });
 
             kendoBuild.rmdirSyncRecursive(distPath);
@@ -242,8 +244,8 @@ namespace("mvc", function() {
 
         kendoScripts.buildSuiteScripts("web", scriptsDest, "", true);
         kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
-
         kendoBuild.copyFileSync(navigation, path.join(root, "App_Data", "web.nav.json"));
+        kendoBuild.copyFileSync(path.join(DEMOS_SHARED, STYLES_PATH, SUITE_CSS), path.join(stylesDest, SUITE_CSS));
     });
 
     function examplesRoot(suite) {
