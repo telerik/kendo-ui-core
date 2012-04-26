@@ -288,6 +288,7 @@
         _cancel: function() {
             var that = this;
             that.moved = that.pressed = false;
+            that.target.data("dragged", false);
             that.surface.off(that.ns);
         },
 
@@ -306,9 +307,11 @@
                 that.target = that.element;
             }
 
-            if (!that.target.length) {
+            if (!that.target.length || that.target.data("dragged")) {
                 return;
             }
+
+            that.target.data("dragged", true);
 
             that.pressed = true;
             that.moved = false;
