@@ -1195,7 +1195,8 @@ div.k-grid-header .k-header
     padding: .5em;
 }
 
-.k-filter-menu .k-widget
+.k-filter-menu .k-widget,
+.k-filter-menu .k-textbox
 {
     display: block;
 }
