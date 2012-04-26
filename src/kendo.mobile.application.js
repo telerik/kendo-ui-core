@@ -18,9 +18,10 @@
             meego: "MeeGo NokiaBrowser/8.5.0"
         },
 
+        viewportTemplate = kendo.template('<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width#=data.height#" name="viewport" />', {usedWithBlock: false}),
         meta = '<meta name="apple-mobile-web-app-capable" content="yes" /> ' +
                '<meta name="apple-mobile-web-app-status-bar-style" content="black" /> ' +
-               '<meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width' + (BERRYPHONEGAP ? ', height=device-height' : '') + '" name="viewport" />',
+                viewportTemplate({ height: "" }),
 
         iconMeta = kendo.template('<link rel="apple-touch-icon' + (support.mobileOS.android ? '-precomposed' : '') + '" # if(data.size) { # sizes="#=data.size#" #}# href="#=data.icon#" />', {usedWithBlock: false}),
 
@@ -51,8 +52,16 @@
         }
     }
 
+    function isOrientationHorizontal() {
+        return Math.abs(window.orientation) / 90;
+    }
+
     function getOrientationClass() {
-        return Math.abs(window.orientation) / 90 ? HORIZONTAL : VERTICAL;
+        return isOrientationHorizontal() ? HORIZONTAL : VERTICAL;
+    }
+
+    function applyViewportHeight() {
+        $("meta[name=viewport]").replaceWith(viewportTemplate({ height: isOrientationHorizontal() ? ", height=device-width" : ", height=device-height" }));
     }
 
     /**
@@ -295,8 +304,8 @@
             $(function(){
                 that._setupPlatform();
                 that._attachHideBarHandlers();
-                that._setupElementClass();
                 that._attachMeta();
+                that._setupElementClass();
                 that._loader();
                 that._setupAppLinks();
                 that._setupLayouts(that.element);
@@ -558,7 +567,7 @@
             element.addClass(osCssClass + " " + getOrientationClass());
 
             if (BERRYPHONEGAP) {
-                $(document.documentElement).height(element.hasClass(HORIZONTAL) ? window.innerWidth : window.innerHeight);
+                applyViewportHeight();
             }
 
             WINDOW.bind(ORIENTATIONEVENT, function(e) {
@@ -566,7 +575,7 @@
                     .addClass(getOrientationClass());
 
                 if (BERRYPHONEGAP) {
-                    $(document.documentElement).height(element.hasClass(HORIZONTAL) ? window.innerWidth : window.innerHeight);
+                    applyViewportHeight();
                 }
 
                 if (that.view) {// On desktop resize is fired rather early
