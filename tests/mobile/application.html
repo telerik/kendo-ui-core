@@ -240,6 +240,12 @@
                 equal(foo.element.attr("data-platform"), "android");
             });
 
+            test("Apply meta viewport", function() {
+                setup('<div data-role="view" id="page1" data-id="foo">Page 1</div>');
+
+                equal($(document.head).find("[name=viewport]").attr("content"), "initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width");
+            });
+
             test("Applies view title attribute contents to layout view title", function() {
                 setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
                        <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
