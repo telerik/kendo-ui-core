@@ -42,3 +42,4 @@ download-builder/service/bin/Download.*
 download-builder/service/App_Data
 wrappers/mvc/demos/**/Scripts/kendo
 wrappers/mvc/demos/**/Content/kendo
+wrappers/mvc/demos/**/App_Data

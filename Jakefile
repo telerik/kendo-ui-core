@@ -234,13 +234,16 @@ namespace("mvc", function() {
         var root = examplesRoot("web"),
             suiteStyles = path.join("styles", "web"),
             stylesDest = path.join(root, "Content", "kendo"),
-            scriptsDest = path.join(root, "Scripts", "kendo");
+            scriptsDest = path.join(root, "Scripts", "kendo"),
+            navigation = path.join(DEMOS_PATH, "App_Data", "web.nav.json");
 
         mkdirClean(scriptsDest);
         mkdirClean(stylesDest);
 
         kendoScripts.buildSuiteScripts("web", scriptsDest, "", true);
         kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
+
+        kendoBuild.copyFileSync(navigation, path.join(root, "App_Data", "web.nav.json"));
     });
 
     function examplesRoot(suite) {
