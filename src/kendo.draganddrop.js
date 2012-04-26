@@ -999,7 +999,6 @@
                 result,
                 options = that.options,
                 targets = dropTargets[options.group];
-
             if (targets && targets.length) {
                 target = elementUnderCursor(e);
 
@@ -1009,15 +1008,20 @@
                     that.hint.show();
                 }
 
-                $.each(targets, function() {
-                    var that = this,
-                        element = that.element[0];
+                var targetHash = {};
 
-                    if (contains(element, target)) {
-                        result = that;
-                        return false;
-                    }
+                $.each(targets, function() {
+                    targetHash[this.element[0]] = this;
                 });
+
+                target = $(target);
+
+                for(; target.length; target = target.parent()) {
+                    if (targetHash[target[0]]) {
+                        result = targetHash[target[0]];
+                        break;
+                    }
+                }
 
                 callback(result);
             }
