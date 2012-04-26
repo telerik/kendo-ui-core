@@ -10,20 +10,12 @@ namespace KendoUI.Mvc.Web.Examples.Models
     public static class NavigationProvider
     {
         private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer();
-        
-        public static IEnumerable<string> SuiteNames()
-        {
-            return new string[] {
-                "Web",
-                "DataViz"
-            };
-        }
 
-        public static IDictionary<string, NavigationWidget[]> SuiteWidgets(string suite)
+        public static IDictionary<string, NavigationWidget[]> SuiteWidgets()
         {
             var navigationJson = IOFile.ReadAllText(
                 HttpContext.Current.Server.MapPath(
-                    string.Format("~/App_Data/{0}.nav.json", suite.ToLowerInvariant())
+                    string.Format(Config.NavigationData)
                 )
             );
 

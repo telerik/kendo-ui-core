@@ -11,6 +11,7 @@ namespace KendoUI.Mvc.Web.Examples.Models
         public string ThumbnailUrl { get; set; }
         public string SpriteCssClass { get; set; }
         public bool Expanded { get; set; }
+        public bool OnlineOnly { get; set; }
         public NavigationExample[] Items { get; set; }
     }
 }
