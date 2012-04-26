@@ -13,7 +13,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Changelog for #= version #</title>
+    <title>Changelog for Kendo UI v#= version #</title>
     <style>
         html, body {
             margin: 0;
@@ -26,7 +26,8 @@
 
         \#page {
             width: 50em;
-            margin: 0 auto;
+            margin: 0 auto 2em;
+            border-radius: 0 0 1em 1em;
             box-shadow: 0 0 10px \#ccc;
             padding: 2em;
         }
@@ -34,13 +35,17 @@
 </head>
 <body>
     <div id="page">
-    # for (var suite in issues) { #
+    # var suiteOrder = ["Core", "Web", "DataViz", "Mobile"]; #
+    # for (var suiteIndex in suiteOrder) { #
+        # var suite = suiteOrder[suiteIndex]; #
+        # var suiteIssues = issues[suite]; #
+        # if (!suiteIssues) continue; #
         <h1>#= suite #</h1>
 
-        # outputIssues("What's new", issues[suite].features); #
-        # outputIssues("What's fixed", issues[suite].bugs); #
+        # outputIssues("What's new", suiteIssues.features); #
+        # outputIssues("What's fixed", suiteIssues.bugs); #
 
-        # for (var widget in issues[suite]) { #
+        # for (var widget in suiteIssues) { #
         # if (widget == "bugs" || widget == "features") continue; #
         <h2>#= widget #</h2>
 
