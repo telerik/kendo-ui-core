@@ -713,7 +713,9 @@
             isPosition = position !== undefined;
 
         if (document.selection) {
-            element.focus();
+            if ($(element).is(":visible")) {
+                element.focus();
+            }
             range = document.selection.createRange();
             if (isPosition) {
                 range.move("character", position);
