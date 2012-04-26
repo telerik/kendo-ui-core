@@ -17,7 +17,7 @@ namespace KendoUI.Mvc.Web.Examples.Areas.ASPX
             var aspxRoute = context.MapRoute(
                 "ASPXDefault",
                 "aspx/{controller}/{action}",
-                new { controller = "Home", action = "BundleIndex" }
+                new { controller = "Home", action = "SuiteIndex" }
             );
 
             // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
