@@ -16,6 +16,7 @@
         <script src="../../../src/kendo.mobile.navbar.js"></script>
         <script src="../../../src/kendo.mobile.application.js"></script>
         <script src="../../../src/kendo.mobile.listview.js"></script>
+        <script src="../../../src/kendo.mobile.button.js"></script>
         <link rel="stylesheet" href="../../qunit/qunit/qunit.css" />
     </head>
     <body>
@@ -28,7 +29,9 @@
         <ul id="log"></ul>
 
         <script>
-            var ListView = kendo.mobile.ui.ListView, application;
+            var ListView = kendo.mobile.ui.ListView,
+                Button = kendo.mobile.ui.Button,
+                application;
 
             module("mobile listview", {
             });
@@ -195,13 +198,15 @@
             });
 
             test("passes button if a button is clicked", function() {
-                var dom = $('<ul><li><a href="#">Foo</a></li></ul>'),
-                    link = dom.find("li>a");
+                var dom = $('<ul><li>Foo<a href="#">Foo</a></li></ul>'),
+                    link = dom.find("li>a"),
+                    listView = new ListView(dom),
+                    button = new Button(link);
 
-                var listView = new ListView(dom);
+
 
                 listView.bind("click", function(e) {
-                    equal(e.button, dom.find('a').data("kendoMobileButton"), "event passes the clicked button name");
+                    equal(e.button, button, "event passes the clicked button");
                 });
 
                 link.trigger(kendo.support.mousedown);

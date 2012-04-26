@@ -324,7 +324,7 @@
              * @param {jQueryObject} e.target The clicked DOM element.
              * @param {Object} e.dataItem The corresponding dataItem associated with the item (available in databound mode only).
              * Note: The dataItem must be from a non-primitive type (Object).
-             * @param {kendo.ui.MobileButton} e.button The clicked Kendo mobile Button.
+             * @param {kendo.mobile.ui.Button} e.button The clicked Kendo mobile Button.
              *
              * @exampleTitle Handling button clicks
              * @example
@@ -568,14 +568,15 @@
                 dataItem,
                 item = $(e.currentTarget),
                 target = $(e.target),
-                button = target.closest("[" + kendo.attr("name") + "]", item),
+                buttonElement = target.closest(kendo.roleSelector("button", "detailbutton", "backbutton")),
+                button = kendo.widgetInstance(buttonElement, ui),
                 id = item.attr(kendo.attr("uid"));
 
             if (id) {
                 dataItem = that.dataSource.getByUid(id);
             }
 
-            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, button: button.data("kendoMobileButton")})) {
+            if (that.trigger(CLICK, {target: target, item: item, dataItem: dataItem, button: button})) {
                 e.preventDefault();
             }
         },
