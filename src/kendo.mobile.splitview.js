@@ -32,8 +32,6 @@
             that.element.children(kendo.roleSelector("pane")).each(function() {
                 kendo.initWidget(this, {}, kendo.mobile.ui).navigate("");
             });
-
-            that._init();
         },
 
         options: {

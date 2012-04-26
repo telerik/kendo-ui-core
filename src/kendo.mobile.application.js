@@ -380,7 +380,7 @@
                     minor: os.minorVersion ? os.minorVersion[0] : 0
                 };
             } else {
-                that.os = "ios";
+                that.os = DEFAULT_OS;
                 version = false;
             }
 

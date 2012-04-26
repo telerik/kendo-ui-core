@@ -227,7 +227,7 @@
             transition = link.data(kendo.ns + "transition"),
             rel = link.data(kendo.ns + "rel"),
             target = link.data(kendo.ns + "target"),
-            pane = this;
+            pane = this,
             href = link.attr(HREF);
 
             if (rel === EXTERNAL) {
