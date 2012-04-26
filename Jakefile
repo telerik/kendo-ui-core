@@ -51,9 +51,7 @@ var WINJS_BUNDLE = bundles.winjsBundle,
 // Tasks ======================================================================
 desc("Clean deploy working directory");
 task("clean", function() {
-    kendoBuild.rmdirSyncRecursive(DEPLOY_PATH);
-
-    mkdir(DEPLOY_PATH);
+    mkdirClean(DEPLOY_PATH);
     mkdir(RELEASE_PATH);
 });
 
@@ -235,8 +233,11 @@ namespace("mvc", function() {
     task("web-scripts", [], function() {
         var root = examplesRoot("web"),
             suiteStyles = path.join("styles", "web"),
-            stylesDest = path.join("root", "Content", "kendo"),
-            scriptsDest = path.join(root, "Scripts");
+            stylesDest = path.join(root, "Content", "kendo"),
+            scriptsDest = path.join(root, "Scripts", "kendo");
+
+        mkdirClean(scriptsDest);
+        mkdirClean(stylesDest);
 
         kendoScripts.buildSuiteScripts("web", scriptsDest, "", true);
         kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
@@ -368,6 +369,14 @@ function deployDemos(options) {
 function version() {
     var v = JSON.parse(kendoBuild.readText("VERSION"));
     return kendoBuild.buildVersion(v.year, v.release);
+}
+
+function mkdirClean(dir) {
+    if (path.existsSync(dir)) {
+        kendoBuild.rmdirSyncRecursive(dir);
+    }
+
+    mkdir(dir);
 }
 
 // vim:ft=javascript
