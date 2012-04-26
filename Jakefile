@@ -8,6 +8,7 @@ var path = require("path"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
+    Changelog = require("build/changelog"),
     kendoScripts = require("build/kendo-scripts");
 
 // Configuration ==============================================================
@@ -228,66 +229,9 @@ task("changelog", function() {
             state: "closed",
             milestone: currentMilestone.number
         }, function(err, res) {
-            var sortedIssues = {};
+            var changelog = new Changelog();
 
-            function taxonifyIssue(issue) {
-                var labels = issue.labels.map(function(label) { return label.name; }),
-                    suites, widgets;
-
-                if (labels.indexOf("Deleted") >= 0) {
-                    return;
-                }
-
-                function filterLabels(labels, regex) {
-                    var result = [];
-
-                    labels
-                        .filter(function(label) {
-                            return regex.test(label);
-                        })
-                        .forEach(function(item) {
-                            result.push(item.substring(3));
-                        });
-
-                    return result;
-                }
-
-                suites = filterLabels(labels, /^s:\s/i);
-                widgets = filterLabels(labels, /^w:\s/i);
-
-                var type = labels.indexOf("Bug") >= 0 ? "bugs" : "features";
-
-                function groupToSuite(suite) {
-                    if (!sortedIssues[suite]) {
-                        sortedIssues[suite] = {};
-                    }
-
-                    if (widgets.length) {
-                        widgets.forEach(function(widget) {
-                            if (!sortedIssues[suite][widget]) {
-                                sortedIssues[suite][widget] = { bugs: [], features: [] };
-                            }
-
-                            sortedIssues[suite][widget][type].push(issue.title);
-                        });
-                    } else {
-                        if (!sortedIssues[suite][type]) {
-                            sortedIssues[suite][type] = [];
-                        }
-
-                        sortedIssues[suite][type].push(issue.title);
-                    }
-                }
-
-                if (suites.length) {
-                    suites.forEach(groupToSuite);
-                } else {
-                    widgets = filterLabels(labels, /^f:\s/i);
-                    groupToSuite("Core");
-                }
-            }
-
-            res.forEach(taxonifyIssue);
+            changelog.groupIssues(res);
 
             var changelogTemplate = kendoBuild.readText(path.join("build", "templates", "changelog.html"));
 
@@ -295,7 +239,7 @@ task("changelog", function() {
 
             var changelogHtml = changelogTemplate({
                 version: version(),
-                issues: sortedIssues
+                issues: changelog.groupedIssues
             });
 
             kendoBuild.writeText("changelog.html", changelogHtml);
