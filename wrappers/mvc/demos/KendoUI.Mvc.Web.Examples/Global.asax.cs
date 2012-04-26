@@ -7,9 +7,6 @@ using System.Web.Routing;
 
 namespace KendoUI.Mvc.Web.Examples
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-    // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : System.Web.HttpApplication
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -23,10 +20,9 @@ namespace KendoUI.Mvc.Web.Examples
 
             routes.MapRoute(
                 "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                "{controller}/{action}", // URL with parameters
+                new { controller = "Home", action = "Index" } // Parameter defaults
             );
-
         }
 
         protected void Application_Start()
