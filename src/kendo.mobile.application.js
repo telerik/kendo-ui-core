@@ -7,6 +7,7 @@
 
         OS = support.mobileOS,
         OS_NAME, OS_NAME_CLASS, OS_CSS_CLASS,
+        OS_NAME_TEMPLATE = kendo.template("#=data.name##if(data.version){# #=data.name##=data.version.major# km-m#=data.version.minor# #=data.version.appMode?'km-app':'km-web'##}#", {usedWithBlock: false}),
         BERRYPHONEGAP = OS.device == "blackberry" && OS.flatVersion >= 600 && OS.flatVersion < 1000 && OS.appMode,
         VERTICAL = OS.blackberry ? "km-horizontal" : "km-vertical",
         HORIZONTAL = OS.blackberry ? "km-vertical" : "km-horizontal",
@@ -420,7 +421,15 @@
 
             OS_NAME = !OS ? "ios" : OS.name;
             OS_NAME_CLASS = "km-" + OS_NAME;
-            OS_CSS_CLASS = (OS_NAME_CLASS + (OS ? " " + OS_NAME_CLASS + OS.majorVersion : "") + (OS.appMode ? " km-app" : ""));
+            OS_CSS_CLASS = OS_NAME_TEMPLATE({
+                               name: OS_NAME_CLASS,
+                               version: OS ? {
+                                                 appMode: OS.appMode,
+                                                 major: OS.majorVersion,
+                                                 minor: OS.minorVersion ? OS.minorVersion[0] : 0
+                                             }
+                                           : false
+                           });
 
             that.os = OS_NAME;
         },
