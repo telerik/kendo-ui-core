@@ -1050,7 +1050,7 @@
                 cell = typeof selectable === STRING && selectable.toLowerCase().indexOf("cell") > -1;
 
                 that.selectable = new kendo.ui.Selectable(that.table, {
-                    filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr:not(.k-grouping-row,.k-detail-row)"),
+                    filter: ">" + (cell ? SELECTION_CELL_SELECTOR : "tbody>tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)"),
                     multiple: multi,
                     change: function() {
                         that.trigger(CHANGE);
