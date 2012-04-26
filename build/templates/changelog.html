@@ -1,0 +1,55 @@
+# function outputIssues(title, issues) { #
+    # if (issues && issues.length) { #
+    <h3>#= title #</h3>
+    <ul>
+        # for (var issue in issues) { #
+        <li>#= issues[issue] #</li>
+        # } #
+    </ul>
+    # } #
+# } #
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Changelog for #= version #</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: .75em/1.5 Tahoma, sans-serif;
+        }
+
+        \#page {
+            width: 50em;
+            margin: 0 auto;
+            box-shadow: 0 0 10px \#ccc;
+            padding: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+    # for (var suite in issues) { #
+        <h1>#= suite #</h1>
+
+        # outputIssues("What's new", issues[suite].features); #
+        # outputIssues("What's fixed", issues[suite].bugs); #
+
+        # for (var widget in issues[suite]) { #
+        # if (widget == "bugs" || widget == "features") continue; #
+        <h2>#= widget #</h2>
+
+            # var component = issues[suite][widget]; #
+
+            # outputIssues("What's new", component.features); #
+            # outputIssues("What's fixed", component.bugs); #
+        # } #
+    # } #
+    </div>
+</body>
+</html>
