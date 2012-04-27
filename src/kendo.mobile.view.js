@@ -7,6 +7,7 @@
         Widget = ui.Widget,
         INIT = "init",
         SHOW = "show",
+        BEFORE_SHOW = "beforeShow",
         HIDE = "hide",
         Z_INDEX = "z-index",
         roleSelector = kendo.roleSelector;
@@ -118,6 +119,14 @@
              */
             INIT,
             /**
+             * Fires before a mobile View becomes visible. The event can be prevented using <code>preventDefault</code>, in case a redirection or navigation should happen.
+             * @name kendo.mobile.ui.View#beforeShow
+             * @event
+             * @param {Event} e
+             * @param {jQueryObject} e.view The mobile view instance
+             */
+            BEFORE_SHOW,
+            /**
              * Fires when a mobile View becomes visible.
              * @name kendo.mobile.ui.View#show
              * @event
@@ -177,6 +186,10 @@
 
         switchWith: function(view, transition, params, callback) {
             var that = this;
+
+            if (that.trigger(BEFORE_SHOW, {view: that})) {
+                return;
+            }
 
             that.lastParams = that.params;
             that.params = params;
