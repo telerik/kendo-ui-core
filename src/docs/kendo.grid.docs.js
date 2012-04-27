@@ -316,16 +316,16 @@
          *          { name: "cancel", template: "&lt;img src="icons/cancel.png' rel='cancel' /&gt;" }
          *      ],
          *      editable: {
-         *          update: "true", // puts the row in edit mode when it is clicked
-         *          destroy: "false", // does not remove the row when it is deleted, but marks it for deletion
+         *          update: true, // puts the row in edit mode when it is clicked
+         *          destroy: false, // does not remove the row when it is deleted, but marks it for deletion
          *          confirmation: "Are you sure you want to remove this item?"
          *      }
          *  });
          * @option {String} [editable.mode] Indicates which of the available edit modes(incell(default)/inline/popup) will be used
          * @option {Boolean} [editable.update] Indicates whether item should be switched to edit mode on click.
          * @option {Boolean} [editable.destroy] Indicates whether item should be deleted when click on delete button.
-         * @option {Boolean|String} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
-         * @option {Boolean} [editable.template] Template which will be use during popup editing
+         * @option {Boolean | String} [editable.confirmation] Defines the text that will be used in confirmation box when delete an item.
+         * @option {String} [editable.template] Template which will be use during popup editing
          * @option {Boolean} [pageable] <false> Indicates whether paging is enabled/disabled.
          * _example
          *  $("#grid").kendoGrid({
