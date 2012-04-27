@@ -95,6 +95,14 @@
                 viewEngine.showView("#foo");
             });
 
+            test("prevent default on before show event handler does not display view", 1, function() {
+                root.html('<div data-role="view" data-before-show="kendo.preventDefault" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
+                viewEngine = new kendo.mobile.ViewEngine({ container: root });
+
+                viewEngine.showView("#foo");
+                hidden($("#foo"));
+            });
+
             test("hidden view triggers hide event", 1, function() {
                 root.html('<div data-role="view" data-hide="success" id="foo">Foo</div><div data-role="view" id="bar">Bar</div>').show();
                 viewEngine = new kendo.mobile.ViewEngine({ container: root });
