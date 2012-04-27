@@ -16,11 +16,11 @@
                 setup: function() {
                     changelog = new Changelog();
                     allMilestones = [
-                        milestone(2011, 3), milestone(2011, 3, 1), milestone(2011, 3, 2),
-                        milestone(2012, 1), milestone(2012, 1, 1), milestone(2012, 1, 2),
-                        milestone(2012, 2), milestone(2012, 2, 1), milestone(2012, 2, 2),
-                        milestone(2012, 3), milestone(2012, 3, 1), milestone(2012, 3, 2),
-                        milestone(2013, 1), milestone(2013, 1, 1), milestone(2013, 1, 2)
+                        milestone(2011, 3), milestone(2011, 3, 1), milestone(2011, 3, "next"),
+                        milestone(2012, 1), milestone(2012, 1, 1), milestone(2012, 1, "next"),
+                        milestone(2012, 2), milestone(2012, 2, 1), milestone(2012, 2, "next"),
+                        milestone(2012, 3), milestone(2012, 3, 1), milestone(2012, 3, "next"),
+                        milestone(2013, 1), milestone(2013, 1, 1), milestone(2013, 1, "next")
                     ];
                 }
             });
@@ -39,15 +39,35 @@
                 same(milestones, [ milestone(2012, 1, 1) ]);
             });
 
-            //test("filterMilestones for Q release includes previous SP milestone and Q release", function() {
-                //var milestones = changelog.filterMilestones(allMilestones, {
-                    //year: 2012,
-                    //release: 2,
-                    //servicePack: 0
-                //});
+            test("filterMilestones for SP.next release returns SP.next milestone", function() {
+                var milestones = changelog.filterMilestones(allMilestones, {
+                    year: 2012,
+                    release: 2,
+                    servicePack: "next"
+                });
 
-                //same(milestones, [ milestone(2012, 1, 2), milestone(2012, 2) ]);
-            //});
+                same(milestones, [ milestone(2012, 2, "next") ]);
+            });
+
+            test("filterMilestones for Q release includes previous SP.next and Q release", function() {
+                var milestones = changelog.filterMilestones(allMilestones, {
+                    year: 2012,
+                    release: 2,
+                    servicePack: 0
+                });
+
+                same(milestones, [ milestone(2012, 1, "next"), milestone(2012, 2) ]);
+            });
+
+            test("filterMilestones for first Q release includes SP milestone from previous year", function() {
+                var milestones = changelog.filterMilestones(allMilestones, {
+                    year: 2012,
+                    release: 1,
+                    servicePack: 0
+                });
+
+                same(milestones, [ milestone(2011, 3, "next"), milestone(2012, 1) ]);
+            });
         </script>
 
         <h1 id="qunit-header">Changelog API</h1>
