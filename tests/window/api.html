@@ -103,9 +103,9 @@
 
                 stop();
 
-	            var modalWindow2 = $("#modalWindow2").kendoWindow({
-		            modal: true,
-		            visible: false,
+                var modalWindow2 = $("#modalWindow2").kendoWindow({
+                    modal: true,
+                    visible: false,
                     animation: {
                         open: {
                             duration: 0
@@ -115,10 +115,10 @@
                         }
                     },
                     close: resumeTest
-	            }).data("kendoWindow");
+                }).data("kendoWindow");
 
-	            var modalWindow1 = $("#modalWindow1").kendoWindow({
-		            modal: true,
+                var modalWindow1 = $("#modalWindow1").kendoWindow({
+                    modal: true,
                     animation: {
                         open: {
                             duration: 0
@@ -127,8 +127,8 @@
                             duration: 0
                         }
                     },
-		            visible: false
-	            }).data("kendoWindow");
+                    visible: false
+                }).data("kendoWindow");
 
                 modalWindow1.open();
                 modalWindow2.open();
@@ -253,6 +253,26 @@
 
                 equal(iframe.length, 1);
                 equal(iframe.attr("src"), url);
+            });
+
+            test("refresh() of local URL with iframe", function() {
+                $.mockjax({
+                    url: "foo",
+                    responseText: "server foo"
+                });
+
+                var dialog = createWindow({
+                    iframe: true
+                });
+
+                dialog.refresh({
+                    url: "foo"
+                });
+
+                var iframe = dialog.wrapper.find("iframe");
+
+                equal(iframe.length, 1);
+                equal(iframe.attr("src"), "foo");
             });
 
             function wrapper(windowObject) {
@@ -389,13 +409,13 @@
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
 
-	    <div id="modalWindow1">
-		    modalWindow1
-	    </div> 
+        <div id="modalWindow1">
+            modalWindow1
+        </div> 
 
-	    <div id="modalWindow2">
-		    modalWindow2
-	    </div> 
+        <div id="modalWindow2">
+            modalWindow2
+        </div> 
 
     </body>
 </html>
