@@ -296,9 +296,10 @@
 
         wrap: function(object, field, parent) {
             var that = this,
-                type = toString.call(object);
+                type = toString.call(object),
+                isObservableArray = object instanceof ObservableArray;
 
-            if (object !== null && type === "[object Object]" && !(object instanceof DataSource)) {
+            if (object !== null && type === "[object Object]" && !(object instanceof DataSource) && !isObservableArray) {
                 if (!(object instanceof ObservableObject)) {
                     object = new ObservableObject(object);
                 }
@@ -316,8 +317,10 @@
                         that.trigger(CHANGE, e);
                     });
                 })(field);
-            } else if (object !== null && type === "[object Array]") {
-                object = new ObservableArray(object);
+            } else if (object !== null && (type === "[object Array]" || isObservableArray)) {
+                if (!isObservableArray) {
+                    object = new ObservableArray(object);
+                }
                 object.parent = parent;
 
                 (function(field) {
