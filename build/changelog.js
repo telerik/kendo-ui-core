@@ -7,7 +7,13 @@ Changelog.prototype = {
         var result = year + ".Q" + quarter;
 
         if (servicePack) {
-            result += ".SP" + servicePack;
+            result += ".SP";
+
+            if (servicePack == "next") {
+                result += ".";
+            }
+
+            result += servicePack;
         }
 
         return result;
@@ -15,11 +21,20 @@ Changelog.prototype = {
 
     filterMilestones: function(milestones, version) {
         var targets = [
-            this.milestone(version.year, version.release, version.servicePack)
-        ];
+                this.milestone(version.year, version.release, version.servicePack)
+            ],
+            release, year;
 
         if (!version.servicePack) {
-            //targets.splice(0, 0, this.milestone(version.year - 1, version.release - 1, 2);
+            release = version.release - 1;
+            year = version.year;
+
+            if (release === 0) {
+                year--;
+                release = 3;
+            }
+
+            targets.splice(0, 0, this.milestone(year, release, "next"));
         }
 
         return milestones.filter(function(milestone) {
