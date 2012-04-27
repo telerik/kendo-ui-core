@@ -74,6 +74,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\OfflineFilter.cs" />
     <Compile Include="Models\NavigationExample.cs" />
     <Compile Include="Models\NavigationProvider.cs" />
     <Compile Include="Models\NavigationWidget.cs" />
