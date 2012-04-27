@@ -1262,6 +1262,7 @@
                 initOptions = that.options,
                 element = $(that.element),
                 iframe,
+                showIframe = initOptions.iframe,
                 url;
 
             if (!isPlainObject(options)) {
@@ -1273,7 +1274,11 @@
             url = options.url;
 
             if (url) {
-                if (that.options.iframe === false || isLocalUrl(url)) {
+                if (typeof showIframe == "undefined") {
+                    showIframe = !isLocalUrl(url);
+                }
+
+                if (!showIframe) {
                     // perform AJAX request
                     that._ajaxRequest(options);
                 } else {
