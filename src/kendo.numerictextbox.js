@@ -153,9 +153,6 @@
          * });
          * @option {Number} [decimals] <null> Specifies the number precision. If not set precision defined by current culture is used.
          * _example
-         *  // specify in the HTML
-         * &lt;input id="numeric" value="10" type="number" min="0" max="1" step=".1" decimals="1"/&gt;
-         * <br />
          * // specify on widget initialization
          * $("#numeric").kendoNumericTextBox({
          *     min: 0,
