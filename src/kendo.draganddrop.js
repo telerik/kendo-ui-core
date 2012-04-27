@@ -144,6 +144,8 @@
          * @option {Integer} [threshold] <0> The minimum distance the mouse/touch should move before the event is triggered.
          * @option {Boolean} [global] <false> If set to true, the drag event will be tracked beyond the element boundaries.
          * @option {Boolean} [allowSelection] <false> If set to true, the mousedown and selectstart events will not be prevented.
+         * @option {Boolean} [stopPropagation] <false> If set to true, the mousedown event propagation will stopped, disabling
+         * drag capturing at parent elements.
          * If set to false, dragging outside of the element boundaries will trigger the <code>end</code> event.
          * @option {Selector} [filter] If passed, the filter limits the child elements that will trigger the event sequence.
          */
@@ -171,6 +173,7 @@
                 y: new DragAxis("Y"),
                 element: element,
                 surface: options.global ? SURFACE : element,
+                stopPropagation: options.stopPropagation,
                 pressed: false,
                 eventMap: eventMap,
                 ns: ns
@@ -288,7 +291,6 @@
         _cancel: function() {
             var that = this;
             that.moved = that.pressed = false;
-            that.target.data("dragged", false);
             that.surface.off(that.ns);
         },
 
@@ -307,11 +309,13 @@
                 that.target = that.element;
             }
 
-            if (!that.target.length || that.target.data("dragged")) {
+            if (!that.target.length) {
                 return;
             }
 
-            that.target.data("dragged", true);
+            if (that.stopPropagation) {
+              e.stopPropagation();
+            }
 
             that.pressed = true;
             that.moved = false;
@@ -819,6 +823,7 @@
 
             that.drag = new Drag(that.element, {
                 global: true,
+                stopPropagation: true,
                 filter: that.options.filter,
                 threshold: that.options.distance,
                 start: proxy(that._start, that),
