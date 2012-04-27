@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Kendo UI Web Examples</title>
-    <link href="@Url.Content("~/Content/kendo/suite.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/suite.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div id="page">
@@ -12,13 +12,13 @@
             <ul>
                 @foreach (NavigationWidget widget in ViewBag.Navigation[category])
                 {
-                    if (widget.OnlineOnly) { continue; }
+                    if (widget.Offline.SkipAlways || widget.Offline.SkipMvc) { continue; }
                     <li>
                         <h2>@widget.Text</h2>
                         <ul>
                             @foreach (NavigationExample example in widget.Items)
                             {
-                                <li><a href='@Url.Action("SuiteIndex")/@example.Url'>@example.Text</a></li>
+                                <li><a href='/@ViewContext.RouteData.DataTokens["area"]/@example.Url'>@example.Text</a></li>
                             }
                         </ul>
                     </li>

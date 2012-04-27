@@ -10,12 +10,21 @@ namespace KendoUI.Mvc.Web.Examples.Areas.Razor
         {
             get
             {
-                return "Razor";
+                return "razor";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            var exampleRoute = context.MapRoute(
+                "RazorExample",
+                "razor/{controller}/{action}.html"
+            );
+
+            // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
+            exampleRoute.DataTokens["UseNamespaceFallback"] = true;
+            exampleRoute.DataTokens[RazorViewToken] = true;
+
             var razorRoute = context.MapRoute(
                 "RazorDefault",
                 "razor/{controller}/{action}",
@@ -24,7 +33,6 @@ namespace KendoUI.Mvc.Web.Examples.Areas.Razor
 
             // The 'UseNamespaceFallback' token will allow the runtime to use the controllers defined outside the area
             razorRoute.DataTokens["UseNamespaceFallback"] = true;
-
             razorRoute.DataTokens[RazorViewToken] = true;
         }
     }
