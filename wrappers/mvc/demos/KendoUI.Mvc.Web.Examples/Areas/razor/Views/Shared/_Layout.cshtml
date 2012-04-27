@@ -5,27 +5,15 @@
     <title>@ViewBag.Title</title>
     <link href="@Url.Content("~/Content/kendo/kendo.common.min.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/kendo/kendo.default.min.css")" rel="stylesheet" type="text/css" />
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/examples-offline.css")" rel="stylesheet" type="text/css" />
     <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
     <script src="@Url.Content("~/Scripts/kendo/kendo.web.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/console.js")"></script>
 </head>
 <body>
     <div class="page">
-        <header>
-            <div id="title">
-                <h1>My MVC Application</h1>
-            </div>
-            <nav>
-                <ul id="menu">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                </ul>
-            </nav>
-        </header>
-        <section id="main">
-            @RenderBody()
-        </section>
-        <footer>
-        </footer>
+        <a href="../">Back</a>
+        @RenderBody()
     </div>
 </body>
 </html>

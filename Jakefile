@@ -243,9 +243,12 @@ namespace("mvc", function() {
         mkdirClean(stylesDest);
 
         kendoScripts.buildSuiteScripts("web", scriptsDest, "", true);
+        kendoBuild.copyFileSync(path.join(DEMOS_SHARED, SCRIPTS_PATH, "console.js"), path.join(scriptsDest, "console.js"));
+
         kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
         kendoBuild.copyFileSync(navigation, path.join(root, "App_Data", "web.nav.json"));
         kendoBuild.copyFileSync(path.join(DEMOS_SHARED, STYLES_PATH, SUITE_CSS), path.join(stylesDest, SUITE_CSS));
+        kendoBuild.copyFileSync(path.join(DEMOS_SHARED, STYLES_PATH, "examples-offline.css"), path.join(stylesDest, "examples-offline.css"));
     });
 
     function examplesRoot(suite) {
