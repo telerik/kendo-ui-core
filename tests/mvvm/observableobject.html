@@ -246,6 +246,20 @@
                 ok(!(observable.dataSource instanceof kendo.data.ObservableObject))
             });
 
+            test("ObservableArray is not wrapped if set as ViewModel property",function() {
+                var observable = kendo.observable({ items: new kendo.data.ObservableArray([1,2,3,4,5]) });
+
+                ok(observable.items instanceof kendo.data.ObservableArray)
+            });
+
+            test("listen for changes of ObservableArray set as ViewModel property", 1,function() {
+                var observable = kendo.observable({ items: new kendo.data.ObservableArray([1,2,3,4,5]) });
+
+                observable.bind("change", function() { ok(true); });
+
+                observable.get("items").push(6);
+            });
+
             test("parent returns the parent observable object", function() {
                 var observable = kendo.observable( {
                     foo: {
