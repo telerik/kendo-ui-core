@@ -8,6 +8,7 @@ var path = require("path"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
+    GitHubApi = require("build/github-api"),
     Changelog = require("build/changelog"),
     kendoScripts = require("build/kendo-scripts");
 
@@ -199,8 +200,6 @@ task("cdn", ["clean", "merge-scripts"], function() {
 
 desc("Get changelog from GitHub");
 task("changelog", function() {
-    var GitHubApi = require("github");
-
     var changelog = new Changelog();
 
     var github = new GitHubApi({
