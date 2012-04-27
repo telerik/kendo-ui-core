@@ -40,6 +40,6 @@ themebuilder/src/styles/textures/
 demos/mvc/bin/Kendo.*
 download-builder/service/bin/Download.*
 download-builder/service/App_Data
-wrappers/mvc/demos/**/Scripts/kendo
-wrappers/mvc/demos/**/Content/kendo
+wrappers/mvc/demos/**/Scripts
+wrappers/mvc/demos/**/Content
 wrappers/mvc/demos/**/App_Data

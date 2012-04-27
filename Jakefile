@@ -235,11 +235,10 @@ namespace("mvc", function() {
     task("debug-web", [], function() {
         var root = examplesRoot("web"),
             suiteStyles = path.join("styles", "web"),
-            stylesDest = path.join(root, "Content", "kendo"),
-            scriptsDest = path.join(root, "Scripts", "kendo"),
+            stylesDest = path.join(root, "Content"),
+            scriptsDest = path.join(root, "Scripts"),
             navigation = path.join(DEMOS_PATH, "App_Data", "web.nav.json");
 
-        mkdirClean(scriptsDest);
         mkdirClean(stylesDest);
 
         kendoScripts.buildSuiteScripts("web", scriptsDest, "", true);
