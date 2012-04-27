@@ -23,6 +23,7 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_PROJECT = "Kendo.csproj",
     DEMOS_LIVE_PATH = path.join(DEPLOY_PATH, "live"),
     DEMOS_LIVE_PACKAGE = path.join(DEPLOY_PATH, "online-examples.zip"),
+    DEMOS_OFFLINE_CSS = "examples-offline.css",
     DEMOS_SHARED = path.join(DEMOS_PATH, "content", "shared"),
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
@@ -233,22 +234,45 @@ namespace("download-builder", function() {
 namespace("mvc", function() {
     desc("Copy debug scripts and styles to the Web suite demo site");
     task("debug-web", [], function() {
-        var root = examplesRoot("web"),
-            suiteStyles = path.join("styles", "web"),
-            stylesDest = path.join(root, "Content"),
-            scriptsDest = path.join(root, "Scripts"),
-            navigation = path.join(DEMOS_PATH, "App_Data", "web.nav.json");
-
-        mkdirClean(stylesDest);
-
-        kendoScripts.buildSuiteScripts("web", scriptsDest, "", true);
-        kendoBuild.copyFileSync(path.join(DEMOS_SHARED, SCRIPTS_PATH, "console.js"), path.join(scriptsDest, "console.js"));
-
-        kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
-        kendoBuild.copyFileSync(navigation, path.join(root, "App_Data", "web.nav.json"));
-        kendoBuild.copyFileSync(path.join(DEMOS_SHARED, STYLES_PATH, SUITE_CSS), path.join(stylesDest, SUITE_CSS));
-        kendoBuild.copyFileSync(path.join(DEMOS_SHARED, STYLES_PATH, "examples-offline.css"), path.join(stylesDest, "examples-offline.css"));
+        deploySharedFiles("web");
     });
+
+    function deploySharedFiles(suite) {
+        var projectRoot = examplesRoot(suite),
+            suiteStyles = path.join("styles", suite),
+            sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
+            stylesDest = path.join(projectRoot, "Content"),
+            scriptsDest = path.join(projectRoot, "Scripts");
+
+        var sharedFiles = [{
+                name: suite + ".nav.json",
+                src: path.join(DEMOS_PATH, "App_Data"),
+                dst: path.join(projectRoot, "App_Data")
+            }, {
+                name: "console.js",
+                src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
+                dst: scriptsDest
+            }, {
+                name: SUITE_CSS,
+                src: sharedStyles,
+                dst: stylesDest
+            }, {
+                name: DEMOS_OFFLINE_CSS,
+                src: sharedStyles,
+                dst: stylesDest
+            }
+        ];
+
+        sharedFiles.forEach(function(file) {
+            kendoBuild.copyFileSync(
+                path.join(file.src, file.name),
+                path.join(file.dst, file.name)
+            );
+        });
+
+        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", true);
+        kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
+    }
 
     function examplesRoot(suite) {
         suite = suite[0].toUpperCase() + suite.toLowerCase().substring(1);
