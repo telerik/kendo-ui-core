@@ -68,6 +68,12 @@
 
                 same(milestones, [ milestone(2011, 3, "next"), milestone(2012, 1) ]);
             });
+
+            test("filterLabels filters by prefix", function() {
+                var filteredLabels = changelog.filterLabels(["F: DataSource", "Bug"], "f");
+
+                same(filteredLabels, ["DataSource"]);
+            });
         </script>
 
         <h1 id="qunit-header">Changelog API</h1>
