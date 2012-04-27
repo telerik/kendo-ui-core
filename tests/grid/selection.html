@@ -463,7 +463,33 @@
                 ok(!grid.element.find(".k-state-selected").length)
             });
 
+            test("group footer row is not selected when clicked and selection mode is cell", function() {
+                var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+                grid.dataSource.group({ field: "foo" });
+                grid.element.find(".k-group-footer:first > td:last").mousedown().mouseup();
 
+                ok(!grid.element.find(".k-state-selected").length)
+            });
+
+            test("group footer row is skipped when up arrow is pressed", function() {
+                var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+                grid.dataSource.group({ field: "foo" });
+
+                grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first"));
+                grid.element.focus().press(kendo.keys.UP);
+
+                ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
+            });
+
+            test("group footer row is skipped when down arrow is pressed", function() {
+                var grid = setup({selectable: "cell", columns: [ { field: "foo", groupFooterTemplate: "foo" }] });
+                grid.dataSource.group({ field: "foo" });
+
+                grid.current(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(0)").find("td:not(.k-group-cell):first"));
+                grid.element.focus().press(kendo.keys.DOWN);
+
+                ok(table.find("tbody tr:not(.k-grouping-row,.k-group-footer):eq(1)").find("td:not(.k-group-cell):first").hasClass("k-state-focused"));
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
