@@ -3,9 +3,9 @@
             "text": "UI Widgets",
             "name": "overview",
             "spriteCssClass": "overviewIcon",
-            "expanded": true,
+            "expanded": "true",
             "offline": {
-                "skipAlways": true
+                "skipAlways": "true"
             },
             "items": [
                 {
@@ -557,7 +557,7 @@
             "documentation": "ui-widgets/upload",
             "spriteCssClass": "uploadIcon",
             "offline": {
-                "skipHtml": true
+                "skipHtml": "true"
             },
             "items": [
                 {
