@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Telerik Extensions for ASP.NET MVC Demos</title>
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+</head>
+<body>
+    <div id="page">
+        <h1 id="title"><%= Html.ActionLink("Telerik Extensions for ASP.NET MVC", "FirstLook", "Home") %></h1>
+        <div id="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+		
+		    <div class="corner rc-bottomleft"></div>
+		    <div class="corner rc-bottomright"></div>
+        </div>
+    </div>
+</body>
+</html>

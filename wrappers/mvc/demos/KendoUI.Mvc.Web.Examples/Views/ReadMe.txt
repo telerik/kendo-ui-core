@@ -1,0 +1,1 @@
+﻿Razor and WebForms (ASPX) views are located in the /Areas folder.

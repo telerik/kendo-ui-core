@@ -23,6 +23,8 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     DEMOS_PROJECT = "Kendo.csproj",
     DEMOS_LIVE_PATH = path.join(DEPLOY_PATH, "live"),
     DEMOS_LIVE_PACKAGE = path.join(DEPLOY_PATH, "online-examples.zip"),
+    DEMOS_OFFLINE_CSS = "examples-offline.css",
+    DEMOS_SHARED = path.join(DEMOS_PATH, "content", "shared"),
     DEMOS_STAGING_PATH = path.join(DEPLOY_PATH, "staging"),
     DEMOS_STAGING_CONTENT_PATH = path.join(DEMOS_STAGING_PATH, "content", "cdn"),
     DOCS_DEPLOY_PATH = path.join(DEMOS_PATH, "content", "docs"),
@@ -36,7 +38,8 @@ var CDN_ROOT = "http://cdn.kendostatic.com/",
     THEMEBUILDER_LIVE_PACKAGE = path.join(DEPLOY_PATH, "themebuilder.zip"),
     RELEASE_PATH = "release",
     WINJS_PATH = "winjs",
-    SUITES = ["web", "mobile", "dataviz"];
+    SUITES = ["web", "mobile", "dataviz"],
+    SUITE_CSS = "suite.css";
 
 // CDN Configuration ===========================================================
 var CDN_PROJECT = path.join("build", "cdn.proj"),
@@ -51,9 +54,7 @@ var WINJS_BUNDLE = bundles.winjsBundle,
 // Tasks ======================================================================
 desc("Clean deploy working directory");
 task("clean", function() {
-    kendoBuild.rmdirSyncRecursive(DEPLOY_PATH);
-
-    mkdir(DEPLOY_PATH);
+    mkdirClean(DEPLOY_PATH);
     mkdir(RELEASE_PATH);
 });
 
@@ -97,7 +98,7 @@ namespace("demos", function() {
 
         kendoBuild.spawnSilent("make", [ "less" ], { cwd: path.resolve(lessPath) }, function() {
             kendoBuild.processFilesRecursive(distPath, /.*/, function(fileName) {
-                kendoBuild.copyFileSync(fileName, path.join(DEMOS_PATH, "content", "shared", "js", "less.js"));
+                kendoBuild.copyFileSync(fileName, path.join(DEMOS_SHARED, SCRIPTS_PATH, "less.js"));
             });
 
             kendoBuild.rmdirSyncRecursive(distPath);
@@ -230,6 +231,55 @@ namespace("download-builder", function() {
     });
 });
 
+namespace("mvc", function() {
+    desc("Copy debug scripts and styles to the Web suite demo site");
+    task("debug-web", [], function() {
+        deploySharedFiles("web");
+    });
+
+    function deploySharedFiles(suite) {
+        var projectRoot = examplesRoot(suite),
+            suiteStyles = path.join("styles", suite),
+            sharedStyles = path.join(DEMOS_SHARED, STYLES_PATH),
+            stylesDest = path.join(projectRoot, "Content"),
+            scriptsDest = path.join(projectRoot, "Scripts");
+
+        var sharedFiles = [{
+                name: suite + ".nav.json",
+                src: path.join(DEMOS_PATH, "App_Data"),
+                dst: path.join(projectRoot, "App_Data")
+            }, {
+                name: "console.js",
+                src: path.join(DEMOS_SHARED, SCRIPTS_PATH),
+                dst: scriptsDest
+            }, {
+                name: SUITE_CSS,
+                src: sharedStyles,
+                dst: stylesDest
+            }, {
+                name: DEMOS_OFFLINE_CSS,
+                src: sharedStyles,
+                dst: stylesDest
+            }
+        ];
+
+        sharedFiles.forEach(function(file) {
+            kendoBuild.copyFileSync(
+                path.join(file.src, file.name),
+                path.join(file.dst, file.name)
+            );
+        });
+
+        kendoScripts.buildSuiteScripts(suite, scriptsDest, "", true);
+        kendoBuild.deployStyles(suiteStyles, stylesDest, "", true);
+    }
+
+    function examplesRoot(suite) {
+        suite = suite[0].toUpperCase() + suite.toLowerCase().substring(1);
+        return path.join("wrappers", "mvc", "demos", "KendoUI.Mvc." + suite + ".Examples");
+    }
+});
+
 // Helpers ====================================================================
 function buildDocs(sitefinity_path) {
     var mappings = {
@@ -350,6 +400,14 @@ function deployDemos(options) {
 function version() {
     var v = JSON.parse(kendoBuild.readText("VERSION"));
     return kendoBuild.buildVersion(v.year, v.release);
+}
+
+function mkdirClean(dir) {
+    if (path.existsSync(dir)) {
+        kendoBuild.rmdirSyncRecursive(dir);
+    }
+
+    mkdir(dir);
 }
 
 // vim:ft=javascript
