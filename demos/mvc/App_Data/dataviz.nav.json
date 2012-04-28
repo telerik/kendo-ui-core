@@ -21,7 +21,7 @@
                     "text": "Binding to remote data",
                     "url": "area-chart/remote-data.html",
                     "offline": {
-                        "skipHtml": true
+                        "skipHtml": "true"
                     }
                 }, {
                     "text": "Binding to local data",
@@ -51,7 +51,7 @@
                     "text": "Binding to remote data",
                     "url": "bar-charts/remote-data.html",
                     "offline": {
-                        "skipHtml": true
+                        "skipHtml": "true"
                     }
                 }, {
                     "text": "Binding to local data",
@@ -71,7 +71,7 @@
                     "text": "Binding to remote data",
                     "url": "line-chart/remote-data.html",
                     "offline": {
-                        "skipHtml": true
+                        "skipHtml": "true"
                     }
                 },
                 {
@@ -94,7 +94,7 @@
                     "text": "Binding to remote data",
                     "url": "pie-chart/remote-data.html",
                     "offline": {
-                        "skipHtml": true
+                        "skipHtml": "true"
                     }
                 }, {
                     "text": "Binding to local data",
@@ -118,7 +118,7 @@
                     "text": "Binding to remote data",
                     "url": "scatter-charts/remote-data.html",
                     "offline": {
-                        "skipHtml": true
+                        "skipHtml": "true"
                     }
                 }, {
                     "text": "Binding to local data",
@@ -202,7 +202,7 @@
             "thumbnailUrl": "content/dataviz/dashboards/stock.gif",
             "expanded": "true",
             "offline": {
-                "skipHtml": true
+                "skipHtml": "true"
             },
             "items": [{
                 "url": "dashboards/stock-history.html"
