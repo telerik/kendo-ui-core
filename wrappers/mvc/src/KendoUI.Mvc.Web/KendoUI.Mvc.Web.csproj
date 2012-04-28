@@ -1,0 +1,1183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7F7C110-D7F0-49B7-8DDA-FD2D1CC6F3B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KendoUI.Mvc</RootNamespace>
+    <AssemblyName>KendoUI.Mvc.Web</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\shared\Telerik.Web.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MVC1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;MVC1</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\KendoUI.Mvc.Web.XML</DocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug MVC2|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug MVC2\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MVC2</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRules>-Microsoft.Design#CA1006;-Microsoft.Design#CA1004</CodeAnalysisRules>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MVC2|AnyCPU' ">
+    <OutputPath>bin\Release MVC2\</OutputPath>
+    <DefineConstants>TRACE;MVC2</DefineConstants>
+    <DocumentationFile>bin\Release\KendoUI.Mvc.Web.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug MVC3|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug MVC3\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MVC3</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRules>-Microsoft.Design#CA1006;-Microsoft.Design#CA1004</CodeAnalysisRules>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release MVC3|AnyCPU' ">
+    <OutputPath>bin\Release MVC3\</OutputPath>
+    <DefineConstants>TRACE;MVC3;</DefineConstants>
+    <DocumentationFile>bin\Release\KendoUI.Mvc.Web.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <NoWarn>1591</NoWarn>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFrameworkVersion) == 'v4.0'">
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MVC2|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release MVC2|AnyCPU'">
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MVC3|AnyCPU' Or '$(Configuration)|$(Platform)' == 'Release MVC3|AnyCPU'">
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\shared\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="Extensions\MemberExpressionExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\StructExtensions.cs" />
+    <Compile Include="Extensions\CustomAttributeProviderExtensions.cs" />
+    <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
+    <Compile Include="Extensions\ListSortDirectionExtensions.cs" />
+    <Compile Include="Extensions\QueryProviderExtensions.cs" />
+    <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
+    <Compile Include="Extensions\HtmlTextWriterExtensions.cs" />
+    <Compile Include="Infrastructure\IControllerDescriptorCache.cs" />
+    <Compile Include="Infrastructure\IControllerContextCache.cs" />
+    <Compile Include="Infrastructure\IAuthorizationContextCache.cs" />
+    <Compile Include="Infrastructure\DynamicTypeBuilder.cs" />
+    <Compile Include="Infrastructure\FluentDictionary.cs" />
+    <Compile Include="Infrastructure\ICacheFactory.cs" />
+    <Compile Include="Infrastructure\ICacheProvider.cs" />
+    <Compile Include="Infrastructure\ILocalizationServiceFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\AuthorizationContextCache.cs" />
+    <Compile Include="Infrastructure\Implementation\Cache.cs" />
+    <Compile Include="Infrastructure\Implementation\CacheFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\CacheProvider.cs" />
+    <Compile Include="Infrastructure\Implementation\ClassFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\ControllerContextCache.cs" />
+    <Compile Include="Infrastructure\Implementation\ControllerDescriptorCache.cs" />
+    <Compile Include="Infrastructure\Implementation\DependencyInjectionContainer.cs" />
+    <Compile Include="Infrastructure\DI.cs" />
+    <Compile Include="Infrastructure\Implementation\DynamicClass.cs" />
+    <Compile Include="Infrastructure\Implementation\DynamicProperty.cs" />
+    <Compile Include="Infrastructure\Implementation\EmbeddedResource.cs" />
+    <Compile Include="Infrastructure\Implementation\ExpressionConstants.cs" />
+    <Compile Include="Infrastructure\ILocalizationService.cs" />
+    <Compile Include="Infrastructure\IDependencyInjectionContainer.cs" />
+    <Compile Include="Infrastructure\ICache.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\DynamicPropertyAccessExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\LocalizationService.cs" />
+    <Compile Include="Infrastructure\Implementation\LocalizationServiceFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\NoCache.cs" />
+    <Compile Include="Infrastructure\Implementation\ResourceBase.cs" />
+    <Compile Include="Infrastructure\Implementation\ResXResource.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\ReleaseWebAssetExtensions.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\DebugWebAssetExtensions.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetExtensions.cs" />
+    <Compile Include="Infrastructure\ViewComponentLocalization.cs" />
+    <Compile Include="Infrastructure\Implementation\Signature.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetLocator.cs" />
+    <Compile Include="Resources\EditorLocalization.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditorLocalization.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AutoComplete\AutoComplete.cs" />
+    <Compile Include="UI\AutoComplete\AutoCompleteHtmlBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteMultipleValuesSettingsBuilder.cs" />
+    <Compile Include="UI\AutoComplete\IAutoCompleteHtmlBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Settings\AutoCompleteMultipleValuesSettings.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisLabels.cs" />
+    <Compile Include="UI\Chart\Axes\ChartCategoryAxis.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisBase.cs" />
+    <Compile Include="UI\Chart\Axes\ChartNumericAxis.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisDefaults.cs" />
+    <Compile Include="UI\Chart\Axes\ChartPlotBand.cs" />
+    <Compile Include="UI\Chart\Axes\ChartAxisTitle.cs" />
+    <Compile Include="UI\Chart\Axes\IChartAxisDefaults.cs" />
+    <Compile Include="UI\Chart\Axes\IChartNumericAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartValueAxis.cs" />
+    <Compile Include="UI\Chart\Axes\IChartCategoryAxis.cs" />
+    <Compile Include="UI\Chart\Chart.cs" />
+    <Compile Include="UI\Chart\ChartClientEvents.cs" />
+    <Compile Include="UI\Chart\ChartTitle.cs" />
+    <Compile Include="UI\Chart\ChartLegend.cs" />
+    <Compile Include="UI\Chart\ChartSpacing.cs" />
+    <Compile Include="UI\Chart\ChartElementBorder.cs" />
+    <Compile Include="UI\Chart\ChartArea.cs" />
+    <Compile Include="UI\Chart\ChartLine.cs" />
+    <Compile Include="UI\Chart\ChartTooltip.cs" />
+    <Compile Include="UI\Chart\Enums\ChartAxisTickType.cs" />
+    <Compile Include="UI\Chart\Enums\ChartBarLabelsPosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartLegendPosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartPointLabelsPosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartLineMissingValues.cs" />
+    <Compile Include="UI\Chart\Enums\ChartMarkerShape.cs" />
+    <Compile Include="UI\Chart\Enums\ChartTextAlignment.cs" />
+    <Compile Include="UI\Chart\Enums\ChartTitlePosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartDashType.cs" />
+    <Compile Include="UI\Chart\Enums\ChartPieSeriesOverlay.cs" />
+    <Compile Include="UI\Chart\Enums\ChartPieLabelsAlign.cs" />
+    <Compile Include="UI\Chart\Enums\ChartScatterLineMissingValues.cs" />
+    <Compile Include="UI\Chart\Enums\ChartPieLabelsPosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartAxisOrientation.cs" />
+    <Compile Include="UI\Chart\Enums\ChartAxisTitlePosition.cs" />
+    <Compile Include="UI\Chart\Enums\ChartAreaMissingValues.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisDefaultsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPieLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartTooltipBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPieSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartScatterSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartScatterLineSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartScatterSeriesBuilderBase.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPieConnectorsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPlotBandsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisPlotBandsFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisTitleBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAreaSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartXYAxisFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBorderBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAreaLineBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartLineBuilderBase.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisSerializerBase.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLabelsBase.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLineSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisLabelsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartPieLabelsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartPieSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartTooltipSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartScatterSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartScatterLineSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartPieConnectorsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartPlotBandsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAxisTitleSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAreaSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Series\ChartMarkers.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartLineSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartPointLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartMarkersBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\PlotAreaBuilder.cs" />
+    <Compile Include="UI\Chart\PlotArea.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartLabelsBuilderBase.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBarLabelsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAreaBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartLineBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartSeriesDefaultsBuilder.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartBarLabelsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartElementBorderSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartAreaSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLineSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSeriesDefaultsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLineMarkersSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartPointLabelsSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\PlotAreaSerializer.cs" />
+    <Compile Include="UI\Chart\Series\ChartBarLabels.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBindingSettingsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartValueAxisFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartAxisBuilderBase.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartNumericAxisBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartTitleBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartLegendBuilder.cs" />
+    <Compile Include="UI\Chart\IChart.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartClientEventsBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartSeriesBuilderBase.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartSeriesFactory.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartBarSeriesBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartCategoryAxisBuilder.cs" />
+    <Compile Include="UI\Chart\Fluent\ChartDataBindingConfigurationBuilder.cs" />
+    <Compile Include="UI\Chart\Html\ChartHtmlBuilder.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSeriesSerializerBase.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartBarSeriesSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartCategoryAxisSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartNumericAxisSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartTitleSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartLegendSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\ChartSpacingSerializer.cs" />
+    <Compile Include="UI\Chart\Serialization\IChartSerializer.cs" />
+    <Compile Include="UI\Chart\Series\ChartBarSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartPieConnectors.cs" />
+    <Compile Include="UI\Chart\Series\ChartPieLabels.cs" />
+    <Compile Include="UI\Chart\Series\ChartPieSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartSeriesBase.cs" />
+    <Compile Include="UI\Chart\Series\ChartBoundSeries.cs" />
+    <Compile Include="UI\Chart\Enums\ChartBarSeriesOrientation.cs" />
+    <Compile Include="UI\Chart\ChartLabels.cs" />
+    <Compile Include="UI\Chart\Series\ChartSeriesDefaults.cs" />
+    <Compile Include="UI\Chart\Series\ChartPointLabels.cs" />
+    <Compile Include="UI\Chart\Series\ChartLineSeries.cs" />
+    <Compile Include="UI\Chart\Enums\ChartBarSeriesOverlay.cs" />
+    <Compile Include="UI\Chart\Series\ChartScatterSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartScatterLineSeries.cs" />
+    <Compile Include="UI\Chart\Series\ChartAreaSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartAreaSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartScatterLineSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartScatterSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartLabels.cs" />
+    <Compile Include="UI\Chart\Series\IChartLineSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartPieSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartSeriesDefaults.cs" />
+    <Compile Include="UI\Chart\Series\IChartBoundSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartBarSeries.cs" />
+    <Compile Include="UI\Chart\Series\IChartSeries.cs" />
+    <Compile Include="UI\Chart\Settings\ChartBindingSettings.cs" />
+    <Compile Include="UI\Chart\Settings\ChartDataBindingSettings.cs" />
+    <Compile Include="UI\ComboBox\ComboBox.cs" />
+    <Compile Include="UI\ComboBox\ComboBoxHtmlBuilder.cs" />
+    <Compile Include="UI\AutoComplete\AutoCompleteFilterMode.cs" />
+    <Compile Include="UI\AutoComplete\AutoCompleteDataBindingConfiguration.cs" />
+    <Compile Include="UI\ComboBox\Fluent\ComboBoxFilterSettingsBuilder.cs" />
+    <Compile Include="UI\ComboBox\Fluent\ComboBoxBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteBindingSettingsBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteFilterSettingsBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteDataBindingConfigurationBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Fluent\AutoCompleteWebServiceBindingSettingsBuilder.cs" />
+    <Compile Include="UI\AutoComplete\Settings\AutoCompleteBindingSettings.cs" />
+    <Compile Include="UI\AutoComplete\Settings\AutoCompleteFilterSettings.cs" />
+    <Compile Include="UI\ClientEvent.cs" />
+    <Compile Include="UI\ComboBox\IComboBoxRenderable.cs" />
+    <Compile Include="UI\ComboBox\Settings\ComboBoxFilterSettings.cs" />
+    <Compile Include="UI\ComponentBuilderBase.cs" />
+    <Compile Include="UI\DatePickerBase\DatePickerBase.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\DatePickerBaseBuilder.cs" />
+    <Compile Include="UI\DatePickerBase\Fluent\DatePickerClientEventsBuilder.cs" />
+    <Compile Include="UI\DatePickerBase\IDatePicker.cs" />
+    <Compile Include="UI\DateTimePicker\DateTimePicker.cs" />
+    <Compile Include="UI\DateTimePicker\DateTimePickerClientEvents.cs" />
+    <Compile Include="UI\DateTimePicker\DateTimePickerHtmlBuilder.cs" />
+    <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerBuilder.cs" />
+    <Compile Include="UI\DateTimePicker\Fluent\DateTimePickerClientEventsBuilder.cs" />
+    <Compile Include="UI\DateTimePicker\IDatePickerHtmlBuilder.cs" />
+    <Compile Include="UI\DropDownList\Fluent\DropDownListBindingSettingsBuilder.cs" />
+    <Compile Include="UI\DropDownList\Fluent\DropDownListWebServiceBindingSettingsBuilder.cs" />
+    <Compile Include="UI\DropDown\DropDownExtentions.cs" />
+    <Compile Include="UI\DropDown\IDropDown.cs" />
+    <Compile Include="UI\DropDown\IDropDownRenderable.cs" />
+    <Compile Include="UI\DropDown\IDataBoundDropDown.cs" />
+    <Compile Include="UI\DropDown\IDropDownDataBindingConfiguration.cs" />
+    <Compile Include="UI\DropDown\DropDownItem.cs" />
+    <Compile Include="UI\DropDownList\DropDownList.cs" />
+    <Compile Include="UI\DropDown\DropDownBindingSettingsExtensions.cs" />
+    <Compile Include="UI\DropDown\DropDownClientEvents.cs" />
+    <Compile Include="UI\DropDownList\DropDownListDataBindingConfiguration.cs" />
+    <Compile Include="UI\DropDownList\DropDownListHtmlBuilder.cs" />
+    <Compile Include="UI\DropDownList\Fluent\DropDownListBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownBindingSettingsBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownClientEventsBuilder.cs" />
+    <Compile Include="UI\DropDownList\Fluent\DropDownListDataBindingConfigurationBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownItemBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownBuilderBase.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownWebServiceBindingSettingsBuilder.cs" />
+    <Compile Include="UI\DropDown\Fluent\DropDownItemFactory.cs" />
+    <Compile Include="UI\DropDown\IDropDownHtmlBuilder.cs" />
+    <Compile Include="UI\DropDown\Settings\DropDownBindingSettings.cs" />
+    <Compile Include="UI\DropDown\Settings\IDropDownBindingSettings.cs" />
+    <Compile Include="UI\Editor\EditorLocalization.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorCustomToolBuilder.cs" />
+    <Compile Include="UI\Editor\EditorFileBrowserSettings.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorFileBrowserSettingsBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorColorPickerHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorCustomToolHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\IEditorTool.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\BrowseResult.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\DirectoryBrowser.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\DirectoryEntry.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\DirectoryPermission.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\FileEntry.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\FitImageResizer.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\ImageBrowserDependencyBootstrapper.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\IDirectoryBrowser.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\IDirectoryPermission.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\IImageBrowserController.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\IImageResizer.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\EditorFileBrowserController.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\ImageSize.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\IThumbnailCreator.cs" />
+    <Compile Include="UI\Editor\ImageBrowser\ThumbnailCreator.cs" />
+    <Compile Include="UI\Editor\Tools\EditorColorPicker.cs" />
+    <Compile Include="UI\Editor\Tools\EditorCustomTool.cs" />
+    <Compile Include="UI\Editor\Tools\EditorSelectBox.cs" />
+    <Compile Include="UI\Editor\Tools\EditorBreak.cs" />
+    <Compile Include="UI\Editor\EditorDefaultOptions.cs" />
+    <Compile Include="UI\Editor\Tools\EditorDropDown.cs" />
+    <Compile Include="UI\Editor\Tools\EditorButton.cs" />
+    <Compile Include="UI\Editor\EditorClientEvents.cs" />
+    <Compile Include="UI\Editor\Tools\EditorComboBox.cs" />
+    <Compile Include="UI\Editor\Tools\EditorSeparator.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorClientEventsBuilder.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorDropDownItemBuilder.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorSnippetBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorBreakHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorComboBoxHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorDropDownHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorSelectBoxHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorSeparatorHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Editor.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorToolFactory.cs" />
+    <Compile Include="UI\Editor\Html\EditorButtonHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\Html\EditorToolGroupHtmlBuilder.cs" />
+    <Compile Include="UI\Editor\EditorUrlBuilder.cs" />
+    <Compile Include="UI\Editor\Tools\IEditorListTool.cs" />
+    <Compile Include="UI\Editor\EditorToolGroup.cs" />
+    <Compile Include="UI\Editor\Fluent\EditorBuilder.cs" />
+    <Compile Include="UI\Editor\IEditorUrlBuilder.cs" />
+    <Compile Include="UI\Effects\EffectsBuilderBase.cs" />
+    <Compile Include="UI\Effects\IEffectContainer.cs" />
+    <Compile Include="UI\Effects\EffectsBuilder.cs" />
+    <Compile Include="UI\Effects\Effects.cs" />
+    <Compile Include="UI\Effects\EffectsBuilderFactory.cs" />
+    <Compile Include="UI\Effects\IEffectsBuilderFactory.cs" />
+    <Compile Include="UI\ExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\BindingHelper.cs" />
+    <Compile Include="UI\Grid\Columns\GridForeignKeyColumn.cs" />
+    <Compile Include="UI\Grid\Columns\IGridForeignKeyColumn.cs" />
+    <Compile Include="UI\Grid\Commands\GridCustomActionCommand.cs" />
+    <Compile Include="UI\Grid\Commands\GridCustomCommandBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridToolBarSubmitChangesCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridColumnContextMenuSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridAjaxBindingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridCustomActionCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridKeyboardNavigationSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridServerBindingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\GridActionResultAdapterFactory.cs" />
+    <Compile Include="UI\Grid\AggregateDescriptor.cs" />
+    <Compile Include="UI\Grid\GridBeginEditEvent.cs" />
+    <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilder.cs" />
+    <Compile Include="UI\Grid\GridAggregateResult.cs" />
+    <Compile Include="UI\Grid\Fluent\GridAggregatesFactory.cs" />
+    <Compile Include="UI\Grid\GridColumnExtensions.cs" />
+    <Compile Include="UI\Grid\GridGroupAggregateResult.cs" />
+    <Compile Include="UI\Grid\GridActionResultFactory.cs" />
+    <Compile Include="UI\Grid\GridOperationMode.cs" />
+    <Compile Include="UI\Grid\Html\GridForeignKeyDataCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridForeignKeyEditorForCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerPageSizeSection.cs" />
+    <Compile Include="UI\Grid\Html\GridSelectedRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridTemplateRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridFormatableCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerPageSizeSection.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerPagingSectionsBuilder.cs" />
+    <Compile Include="UI\Grid\IGridActionResultFactory.cs" />
+    <Compile Include="UI\Grid\Serialization\GridForeignKeyColumnSerializer.cs" />
+    <Compile Include="UI\Grid\Settings\GridColumnContextMenuSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridKeyboardNavigationSettings.cs" />
+    <Compile Include="UI\Grid\ToolBar\GridToolBarPosition.cs" />
+    <Compile Include="UI\Grid\Html\GridButtonBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridButtonBuilderBase.cs" />
+    <Compile Include="UI\Grid\Html\GridButtonFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridButtonImageDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridColData.cs" />
+    <Compile Include="UI\Grid\Html\GridDataCellBuilderBase.cs" />
+    <Compile Include="UI\Grid\Html\GridDataRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridDetailViewItem.cs" />
+    <Compile Include="UI\Grid\Html\GridEditFormBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridEditorForCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridEditRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridFilterCellDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridFooterCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridFormBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridGroupFooterRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridGroupHeaderBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridGroupingData.cs" />
+    <Compile Include="UI\Grid\Html\GridHeaderCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridItemExtensions.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerInputSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerSectionsBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPopUpEditRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPopUpInsertRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridHiddenCellBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridHtmlBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridScrollingHtmlBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridSortableHeaderCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridTableBuilderDetailViewColDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridTableBuilderGroupColDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridTemplateCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridToolBarBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridToolBarData.cs" />
+    <Compile Include="UI\Grid\Html\IGridCellBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\IGridDataSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridDecoratableCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridEditFormBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridFunctionalSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridHtmlHelper.cs" />
+    <Compile Include="UI\Grid\Html\GridLinkButtonBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerButtonFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerNumericSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerPagingSectionsBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridFormButtonBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerRefreshBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerStatusBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridTableBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridTableBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\IGridButtonBuilder.cs" />
+    <Compile Include="UI\Grid\Commands\IGridActionCommand.cs" />
+    <Compile Include="UI\Grid\Commands\IGridLocalization.cs" />
+    <Compile Include="UI\Grid\Html\GridButtonTextDecorator.cs" />
+    <Compile Include="UI\Grid\CustomGroupingWrapper.cs" />
+    <Compile Include="UI\Grid\Fluent\GridReorderingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\GridButtonType.cs" />
+    <Compile Include="UI\Grid\GridDynamicDataKey.cs" />
+    <Compile Include="UI\Grid\GridRowViewDataKey.cs" />
+    <Compile Include="UI\Grid\GridDataTableWrapperEnumerable.cs" />
+    <Compile Include="UI\Grid\GridDetailRow.cs" />
+    <Compile Include="UI\Grid\GridDetailView.cs" />
+    <Compile Include="UI\Grid\Columns\IGridActionColumn.cs" />
+    <Compile Include="UI\Grid\Columns\IGridBoundColumn.cs" />
+    <Compile Include="UI\Grid\Columns\IGridColumn.cs" />
+    <Compile Include="UI\Grid\Columns\IGridTemplateColumn.cs" />
+    <Compile Include="UI\Grid\Fluent\GridDetailViewBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterComparisonDescriptorBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterComparisonDescriptorBuilderBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterCompositeBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterCompositeBuilderBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterDescriptorBuilderBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterDescriptorFactory.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterEqualityDescriptorBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterEqualityDescriptorBuilderBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilterStringDescriptorBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridEditingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridResizingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridTemplateColumnBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridSortDescriptorBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridSortDescriptorFactory.cs" />
+    <Compile Include="UI\Grid\GridDetailViewExtensions.cs" />
+    <Compile Include="UI\Grid\GridEditMode.cs" />
+    <Compile Include="UI\Grid\GridJsonResultAdapter.cs" />
+    <Compile Include="UI\Grid\GroupDescriptorExtensions.cs" />
+    <Compile Include="UI\Grid\Html\GridActionCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridAlternatingRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridRenderingData.cs" />
+    <Compile Include="UI\Grid\Html\GridCellBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridColumnEditorBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridDataCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridDataKeyComparer.cs" />
+    <Compile Include="UI\Grid\Html\GridDetailRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridMasterRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridRowBuilderDecoratorProvider.cs" />
+    <Compile Include="UI\Grid\Html\IGridButtonBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\IGridDataCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridDataKeyExtensions.cs" />
+    <Compile Include="UI\Grid\Html\GridDataRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridDataSourceEnumerator.cs" />
+    <Compile Include="UI\Grid\Html\GridDependencyBootstrapper.cs" />
+    <Compile Include="UI\Grid\Html\GridDetailRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridDisplayForCellBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridEmptyRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridDataSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridGroupRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridGroupRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\GridInFormEditRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridInLineEditRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridItem.cs" />
+    <Compile Include="UI\Grid\Html\GridItemCreator.cs" />
+    <Compile Include="UI\Grid\Html\IGridItemCreatorData.cs" />
+    <Compile Include="UI\Grid\Html\GridItemCreatorFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridItemStates.cs" />
+    <Compile Include="UI\Grid\Html\GridItemMode.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridPagerData.cs" />
+    <Compile Include="UI\Grid\Html\GridRowBuilderDecoratorBase.cs" />
+    <Compile Include="UI\Grid\Html\GridRowBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\GridItemType.cs" />
+    <Compile Include="UI\Grid\Html\GridFunctionalData.cs" />
+    <Compile Include="UI\Grid\Html\IGridCellBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\IGridDataKeyComparer.cs" />
+    <Compile Include="UI\Grid\Html\IGridFormBuilder.cs" />
+    <Compile Include="UI\Grid\Html\GridFunctionalSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridHtmlBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridHtmlHelper.cs" />
+    <Compile Include="UI\Grid\Html\IGridItemCreator.cs" />
+    <Compile Include="UI\Grid\Html\IGridItemCreatorFactory.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerButtonFactory.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerInputBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerNumericSectionBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerSectionsBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridPagerStatusBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridRowBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridRowBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\IGridRowBuilderDecoratorProvider.cs" />
+    <Compile Include="UI\Grid\Html\IGridRowBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Html\IGridTableBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridTableBuilderDecorator.cs" />
+    <Compile Include="UI\Grid\Html\IGridTableBulderFactory.cs" />
+    <Compile Include="UI\Grid\Html\IGridGroupHeaderBuilder.cs" />
+    <Compile Include="UI\Grid\Html\IGridToolBarBuilder.cs" />
+    <Compile Include="UI\Grid\IGridActionResultAdapter.cs" />
+    <Compile Include="UI\Grid\IGridDataKeyStore.cs" />
+    <Compile Include="UI\Grid\IGridActionResultAdapterFactory.cs" />
+    <Compile Include="UI\Grid\IGridUrlBuilder.cs" />
+    <Compile Include="UI\Grid\Settings\GridReorderingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridColumnSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridCommandColumnSettings.cs" />
+    <Compile Include="UI\Grid\GridViewResultAdapter.cs" />
+    <Compile Include="UI\Grid\ToolBar\GridToolBarSubmitChangesCommand.cs" />
+    <Compile Include="UI\HtmlBuilderBase.cs" />
+    <Compile Include="UI\HtmlFragment.cs" />
+    <Compile Include="UI\IHtmlBuilder.cs" />
+    <Compile Include="UI\Grid\IGrid.cs" />
+    <Compile Include="UI\Grid\IGridDetailView.cs" />
+    <Compile Include="UI\Grid\Serialization\GridBoundColumnSerializer.cs" />
+    <Compile Include="UI\Grid\Serialization\GridColumnSerializer.cs" />
+    <Compile Include="UI\Grid\GridLocalization.cs" />
+    <Compile Include="UI\Grid\IGridDataKey.cs" />
+    <Compile Include="UI\Grid\Serialization\GridActionColumnSerializer.cs" />
+    <Compile Include="UI\Grid\Serialization\GridClientObjectSerializer.cs" />
+    <Compile Include="UI\Grid\Serialization\GridPluginSerializer.cs" />
+    <Compile Include="UI\Grid\Serialization\GridUrlFormatSerializer.cs" />
+    <Compile Include="UI\Grid\Serialization\IGridColumnSerializer.cs" />
+    <Compile Include="UI\Grid\Settings\GridResizingSettings.cs" />
+    <Compile Include="UI\Grid\Commands\GridToolBarCustomCommand.cs" />
+    <Compile Include="UI\Grid\Fluent\GridToolBarCustomCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Commands\GridToolBarInsertCommand.cs" />
+    <Compile Include="UI\Grid\Fluent\GridGroupDescriptorBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridGroupDescriptorFactory.cs" />
+    <Compile Include="UI\Grid\Fluent\GridGroupingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Commands\GridToolBarCommandBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridToolBarCommandBuilderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Grid\Fluent\GridToolBarCommandFactory.cs" />
+    <Compile Include="UI\Grid\GridControllerExtensions.cs" />
+    <Compile Include="Infrastructure\FilterDescriptorFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\ExpressionBuilderOptions.cs" />
+    <Compile Include="UI\HtmlElement.cs" />
+    <Compile Include="UI\IClientSerializable.cs" />
+    <Compile Include="UI\IHtmlAdorner.cs" />
+    <Compile Include="UI\IHtmlNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\AndNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\BooleanNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\ComparisonNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\DateTimeNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterNodeVisitor.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterTokenExtensions.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterTokenType.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\IFilterNodeVisitor.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\IFilterNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterParser.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterParserException.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterToken.cs" />
+    <Compile Include="Infrastructure\GlobalizationInfo.cs" />
+    <Compile Include="Infrastructure\IControllerAuthorization.cs" />
+    <Compile Include="Infrastructure\IControllerTypeCache.cs" />
+    <Compile Include="Infrastructure\Implementation\ActionMethodCache.cs" />
+    <Compile Include="Infrastructure\Implementation\AuthorizeAttributeCache.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\ExpressionBuilderBase.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\ExpressionBuilderFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\ExpressionFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Filtering\FilterDescriptionExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Filtering\FilterDescriptorCollectionExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Filtering\FilterDescriptorExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Filtering\FilterExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\Aggregates\AggregateFunctionExpressionBuilderBase.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\Aggregates\EnumerableAggregateFunctionExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\Aggregates\EnumerableSelectorAggregateFunctionExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\GroupDescriptorCollectionExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\GroupDescriptorExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\GroupDescriptorExpressionBuilderBase.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\Grouping\QueryableAggregatesExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\IdentityExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\CustomTypeDescriptorExtensions.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\CustomTypeDescriptorPropertyAccessExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\DataRowFieldAccessExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\MemberAccessExpressionBuilderBase.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\PropertyAccessExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\Tokenizer\IMemberAccessToken.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\Tokenizer\IndexerToken.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\Tokenizer\MemberAccessTokenExtensions.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\Tokenizer\MemberAccessTokenizer.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\Tokenizer\PropertyToken.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\Unbox.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\XmlNodeChildElementAccessExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\Implementation\Expressions\MemberAccess\XmlNodeExtensions.cs" />
+    <Compile Include="Infrastructure\IActionMethodCache.cs" />
+    <Compile Include="UI\Grid\CompositeFilterDescriptor.cs" />
+    <Compile Include="Infrastructure\FilterCompositionLogicalOperator.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\FilterDescription.cs" />
+    <Compile Include="UI\Grid\FilterDescriptor.cs" />
+    <Compile Include="Infrastructure\FilterDescriptorBase.cs" />
+    <Compile Include="Infrastructure\FilterDescriptorCollection.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\FilterDescriptorExtensions.cs" />
+    <Compile Include="Infrastructure\FilterOperator.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FilterLexer.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\FilterOperatorExtensions.cs" />
+    <Compile Include="UI\Grid\IDescriptor.cs" />
+    <Compile Include="UI\Grid\IFilterDescriptor.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\FunctionNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\ILogicalNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\IOperatorNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\IValueNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\NumberNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\OrNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\PropertyNode.cs" />
+    <Compile Include="Infrastructure\Implementation\Filtering\Parsing\StringNode.cs" />
+    <Compile Include="UI\HtmlTemplate.cs" />
+    <Compile Include="UI\IInputComponent.cs" />
+    <Compile Include="UI\INavigationComponentHtmlBuilder.cs" />
+    <Compile Include="UI\InputComponentExtensions.cs" />
+    <Compile Include="UI\IViewComponent.cs" />
+    <Compile Include="UI\LiteralNode.cs" />
+    <Compile Include="Infrastructure\Implementation\PredicateFilterDescription.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\AggregateFunctionsGroup.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\AggregateFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\AggregateFunctionCollection.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\AggregateResult.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\AggregateResultCollection.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\AverageFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\CountFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\EnumerableAggregateFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\EnumerableAggregateFunctionBase.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\EnumerableSelectorAggregateFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\FirstFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\LastFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\MaxFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\MinFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Aggregates\SumFunction.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\Group.cs" />
+    <Compile Include="UI\Grid\GroupDescriptor.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\GroupExtensions.cs" />
+    <Compile Include="Infrastructure\Implementation\Grouping\IGroup.cs" />
+    <Compile Include="Infrastructure\Implementation\ControllerAuthorization.cs" />
+    <Compile Include="Infrastructure\Implementation\ControllerTypeCache.cs" />
+    <Compile Include="Infrastructure\IAuthorizeAttributeCache.cs" />
+    <Compile Include="UI\RequestSettings.cs" />
+    <Compile Include="UI\Slider\Fluent\SliderTooltipBuilder.cs" />
+    <Compile Include="UI\Slider\Fluent\RangeSliderClientEventsBuilder.cs" />
+    <Compile Include="UI\Slider\Fluent\SliderClientEventsBuilder.cs" />
+    <Compile Include="UI\Slider\Settings\SliderTooltipSettings.cs" />
+    <Compile Include="UI\Slider\Html\IRangeSliderHtmlBuilder.cs" />
+    <Compile Include="UI\Slider\Html\IRangeSliderHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Slider\Html\RangeSliderHtmlBuilder.cs" />
+    <Compile Include="UI\Slider\Html\RangeSliderHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Slider\Fluent\RangeSliderBuilder.cs" />
+    <Compile Include="UI\Slider\Fluent\SliderBuilder.cs" />
+    <Compile Include="UI\Slider\Html\ISliderHtmlBuilder.cs" />
+    <Compile Include="UI\Slider\Html\ISliderHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Slider\Html\RangeSliderRenderingData.cs" />
+    <Compile Include="UI\Slider\Html\SliderRenderingData.cs" />
+    <Compile Include="UI\Slider\RangeSlider.cs" />
+    <Compile Include="UI\Slider\Settings\ISliderTooltipSettings.cs" />
+    <Compile Include="UI\Slider\Slider.cs" />
+    <Compile Include="UI\Slider\SliderBaseClientEvents.cs" />
+    <Compile Include="UI\Slider\SliderOrientation.cs" />
+    <Compile Include="UI\Slider\SliderTickPlacement.cs" />
+    <Compile Include="UI\Slider\Html\SliderHtmlBuilder.cs" />
+    <Compile Include="UI\Slider\Html\SliderHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Splitter\Fluent\SplitterPaneBuilder.cs" />
+    <Compile Include="UI\Splitter\Fluent\SplitterPaneFactory.cs" />
+    <Compile Include="UI\Splitter\Fluent\SplitterClientEventsBuilder.cs" />
+    <Compile Include="UI\Splitter\SplitterOrientation.cs" />
+    <Compile Include="UI\Splitter\Fluent\SplitterBuilder.cs" />
+    <Compile Include="UI\Splitter\Html\SplitterHtmlBuilder.cs" />
+    <Compile Include="UI\Splitter\SplitterClientEvents.cs" />
+    <Compile Include="UI\Splitter\Splitter.cs" />
+    <Compile Include="UI\Splitter\SplitterPane.cs" />
+    <Compile Include="UI\TextBox\IntegerTextBox.cs" />
+    <Compile Include="UI\TextBox\Fluent\IntegerTextBoxBuilder.cs" />
+    <Compile Include="UI\TextBox\Fluent\PercentTextBoxBuilder.cs" />
+    <Compile Include="UI\TextBox\PercentTextBox.cs" />
+    <Compile Include="UI\TextBox\CurrencyTextBox.cs" />
+    <Compile Include="UI\TextBox\Fluent\CurrencyTextBoxBuilder.cs" />
+    <Compile Include="UI\TextNode.cs" />
+    <Compile Include="IUrlGenerator.cs" />
+    <Compile Include="UI\Grid\Settings\GridGroupingSettings.cs" />
+    <Compile Include="UI\Grid\ToolBar\GridToolBarSettings.cs" />
+    <Compile Include="UI\Grid\SortDescriptor.cs" />
+    <Compile Include="Infrastructure\Implementation\Sorting\SortDescriptorCollectionExpressionBuilder.cs" />
+    <Compile Include="Infrastructure\QueryableFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\NavigationItemAuthorization.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\INavigationItemAuthorization.cs" />
+    <Compile Include="Infrastructure\IUrlAuthorization.cs" />
+    <Compile Include="Infrastructure\Implementation\UrlAuthorization.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="Infrastructure\IVirtualPathProvider.cs" />
+    <Compile Include="Infrastructure\Implementation\VirtualPathProviderWrapper.cs" />
+    <Compile Include="SiteMap\PopulateSiteMapAttribute.cs" />
+    <Compile Include="SiteMap\SiteMapBase.cs" />
+    <Compile Include="SiteMap\SiteMapBuilder.cs" />
+    <Compile Include="SiteMap\SiteMapChangeFrequency.cs" />
+    <Compile Include="SiteMap\SiteMapDictionary.cs" />
+    <Compile Include="SiteMap\SiteMapHandler.cs" />
+    <Compile Include="SiteMap\SiteMapManager.cs" />
+    <Compile Include="SiteMap\SiteMapNode.cs" />
+    <Compile Include="SiteMap\SiteMapNodeBuilder.cs" />
+    <Compile Include="SiteMap\SiteMapNodeFactory.cs" />
+    <Compile Include="SiteMap\SiteMapUpdatePriority.cs" />
+    <Compile Include="SiteMap\XmlSiteMap.cs" />
+    <Compile Include="UI\Calendar\Calendar.cs" />
+    <Compile Include="UI\Calendar\CalendarBuilder.cs" />
+    <Compile Include="UI\Calendar\CalendarClientEvents.cs" />
+    <Compile Include="UI\Calendar\CalendarClientEventsBuilder.cs" />
+    <Compile Include="UI\Calendar\CalendarExtension.cs" />
+    <Compile Include="UI\Calendar\CalendarHtmlBuilder.cs" />
+    <Compile Include="UI\Calendar\CalendarHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Calendar\CalendarNavigation.cs" />
+    <Compile Include="UI\Calendar\CalendarSelectionSettings.cs" />
+    <Compile Include="UI\Calendar\CalendarSelectionSettingsBuilder.cs" />
+    <Compile Include="UI\Calendar\ICalendarHtmlBuilder.cs" />
+    <Compile Include="UI\Calendar\ICalendarHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Grid\Commands\GridSelectActionCommand.cs" />
+    <Compile Include="UI\Grid\Fluent\GridDeleteActionCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Columns\GridActionColumn.cs" />
+    <Compile Include="UI\Grid\Commands\GridActionCommandBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridActionCommandBuilderBase.cs" />
+    <Compile Include="UI\Grid\Commands\GridDeleteActionCommand.cs" />
+    <Compile Include="UI\Grid\Commands\GridEditActionCommand.cs" />
+    <Compile Include="UI\Grid\Fluent\GridEditActionCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridSelectActionCommandBuilder.cs" />
+    <Compile Include="UI\Grid\Settings\GridDataBindingSettings.cs" />
+    <Compile Include="UI\Grid\Settings\GridBindingSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridBindingSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridDataBindingConfigurationBuilder.cs" />
+    <Compile Include="UI\Grid\GridDataKey.cs" />
+    <Compile Include="UI\Grid\Fluent\GridDataKeyBuilder.cs" />
+    <Compile Include="UI\Grid\GridState.cs" />
+    <Compile Include="UI\Grid\Settings\GridEditingSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridDataKeyFactory.cs" />
+    <Compile Include="UI\Grid\GridViewDataContainer.cs" />
+    <Compile Include="UI\Grid\Fluent\GridWebServiceBindingSettingsBuilder.cs" />
+    <Compile Include="UI\INavigationHtmlBuilder.cs" />
+    <Compile Include="UI\INavigationItemComponent.cs" />
+    <Compile Include="UI\TextBox\Fluent\NumericTextBoxBuilder.cs" />
+    <Compile Include="UI\TextBox\NumericTextBox.cs" />
+    <Compile Include="UI\TextBox\TextBoxBaseClientEvents.cs" />
+    <Compile Include="UI\TextBox\Fluent\TextBoxBaseClientEventsBuilder.cs" />
+    <Compile Include="UI\TextBox\ITextBox.cs" />
+    <Compile Include="UI\TextBox\TextBoxBase.cs" />
+    <Compile Include="UI\TextBox\Fluent\TextBoxBuilderBase.cs" />
+    <Compile Include="UI\TextBox\TextBoxBaseHtmlBuilder.cs" />
+    <Compile Include="UI\TextBox\TextBoxBaseHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TextBox\ITextBoxBaseHtmlBuilder.cs" />
+    <Compile Include="UI\TextBox\ITextBoxBaseHtmlBuilderFactory.cs" />
+    <Compile Include="UI\NavigationHtmlBuilderBase.cs" />
+    <Compile Include="UI\NavigationItemContainerExtensions.cs" />
+    <Compile Include="UI\TimePicker\Html\TimePickerHtmlBuilder.cs" />
+    <Compile Include="UI\TimePicker\Fluent\TimePickerBuilder.cs" />
+    <Compile Include="UI\TimePicker\TimePicker.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewDragAndDropSettingsBuilder.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewBindingSettingsBuilder.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewBuilder.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewClientEventsBuilder.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewDataBindingConfigurationBuilder.cs" />
+    <Compile Include="UI\TreeView\ITreeViewItem.cs" />
+    <Compile Include="UI\TreeView\Settings\TreeViewDragAndDropSettings.cs" />
+    <Compile Include="UI\TreeView\TreeViewHtmlBuilder.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewItemBuilder.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewItemFactory.cs" />
+    <Compile Include="UI\TreeView\TreeViewHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TreeView\Fluent\TreeViewWebServiceBindingSettingsBuilder.cs" />
+    <Compile Include="UI\TreeView\Settings\TreeViewBindingSettings.cs" />
+    <Compile Include="UI\TreeView\TreeViewDataBindingConfiguration.cs" />
+    <Compile Include="UI\TreeView\TreeViewItemModel.cs" />
+    <Compile Include="UI\TreeView\ITreeViewHtmlBuilder.cs" />
+    <Compile Include="UI\TreeView\ITreeViewHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TreeView\TreeView.cs" />
+    <Compile Include="UI\TreeView\TreeViewClientEvents.cs" />
+    <Compile Include="UI\TreeView\TreeViewItem.cs" />
+    <Compile Include="UI\DatePicker\DatePicker.cs" />
+    <Compile Include="UI\DatePicker\Fluent\DatePickerBuilder.cs" />
+    <Compile Include="UI\DatePickerBase\DatePickerClientEvents.cs" />
+    <Compile Include="UI\DatePicker\Html\DatePickerHtmlBuilder.cs" />
+    <Compile Include="UI\DatePicker\IDatePickerHtmlBuilder.cs" />
+    <Compile Include="UI\ContentNavigationItemBuilder.cs" />
+    <Compile Include="UI\Effects\AnimationBuilder.cs" />
+    <Compile Include="UI\Effects\AnimationExtensions.cs" />
+    <Compile Include="UI\Effects\PropertyAnimation.cs" />
+    <Compile Include="UI\Effects\IAnimation.cs" />
+    <Compile Include="UI\Effects\PropertyAnimationType.cs" />
+    <Compile Include="UI\Effects\ToggleEffect.cs" />
+    <Compile Include="UI\Effects\IEffect.cs" />
+    <Compile Include="UI\Effects\IEffectEnabled.cs" />
+    <Compile Include="UI\Effects\SlideAnimation.cs" />
+    <Compile Include="UI\Grid\GridActionBindingContext.cs" />
+    <Compile Include="UI\Grid\Settings\GridAjaxSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridAjaxSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\GridBindingContextExtensions.cs" />
+    <Compile Include="UI\Grid\Columns\GridBoundColumn.cs" />
+    <Compile Include="UI\Grid\Fluent\GridBoundColumnBuilder.cs" />
+    <Compile Include="UI\Grid\GridClientEvents.cs" />
+    <Compile Include="UI\Grid\Fluent\GridClientEventsBuilder.cs" />
+    <Compile Include="UI\Grid\GridCell.cs" />
+    <Compile Include="UI\Grid\Columns\GridColumnGenerator.cs" />
+    <Compile Include="UI\Grid\GridCommand.cs" />
+    <Compile Include="UI\Grid\Fluent\GridActionColumnBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridActionCommandFactory.cs" />
+    <Compile Include="UI\Grid\Settings\GridFilteringSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridFilteringSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\GridRow.cs" />
+    <Compile Include="UI\Grid\Settings\GridScrollingSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridScrollSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridRequestSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Fluent\GridRequestSettingsBuilderBase.cs" />
+    <Compile Include="UI\Grid\GridPagerStyles.cs" />
+    <Compile Include="UI\Grid\Settings\GridSelectionSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridSelectionSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Settings\GridSortSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridSortSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\Columns\GridTemplateColumn.cs" />
+    <Compile Include="UI\Grid\GridUrlParameters.cs" />
+    <Compile Include="UI\Grid\GridModel.cs" />
+    <Compile Include="UI\Grid\Settings\GridWebServiceSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridWebServiceSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\IGridBindingContext.cs" />
+    <Compile Include="UI\Effects\AnimationDuration.cs" />
+    <Compile Include="UI\Effects\AnimationDurationConverter.cs" />
+    <Compile Include="UI\IAsyncContentContainer.cs" />
+    <Compile Include="UI\IClientSideObjectWriter.cs" />
+    <Compile Include="UI\IClientSideObjectWriterFactory.cs" />
+    <Compile Include="UI\IContentContainer.cs" />
+    <Compile Include="UI\Grid\GridDataProcessor.cs" />
+    <Compile Include="UI\Grid\GridDescriptorSerializer.cs" />
+    <Compile Include="UI\Grid\GridSortMode.cs" />
+    <Compile Include="UI\Grid\Grid.cs" />
+    <Compile Include="UI\Grid\Fluent\GridBuilder.cs" />
+    <Compile Include="UI\Grid\Columns\GridColumnBase.cs" />
+    <Compile Include="UI\Grid\Fluent\GridColumnBuilderBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Grid\Fluent\GridColumnFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\Grid\GridActionAttribute.cs" />
+    <Compile Include="UI\Grid\Settings\GridPagingSettings.cs" />
+    <Compile Include="UI\Grid\Fluent\GridPagerSettingsBuilder.cs" />
+    <Compile Include="UI\Grid\GridPagerPosition.cs" />
+    <Compile Include="UI\Grid\GridUrlBuilder.cs" />
+    <Compile Include="UI\Grid\IGridColumnContainer.cs" />
+    <Compile Include="UI\IHtmlAttributesContainer.cs" />
+    <Compile Include="UI\INavigatable.cs" />
+    <Compile Include="LinkedObjectBase.cs" />
+    <Compile Include="LinkedObjectCollection.cs" />
+    <Compile Include="UI\INavigationItemContainer.cs" />
+    <Compile Include="UI\INavigationComponentHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Menu\MenuHtmlBuilder.cs" />
+    <Compile Include="UI\Menu\MenuHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Menu\Menu.cs" />
+    <Compile Include="UI\Menu\MenuBuilder.cs" />
+    <Compile Include="UI\Menu\MenuItem.cs" />
+    <Compile Include="UI\Menu\MenuItemBuilder.cs" />
+    <Compile Include="UI\Menu\MenuItemFactory.cs" />
+    <Compile Include="UI\Menu\MenuOrientation.cs" />
+    <Compile Include="UI\Menu\MenuClientEvents.cs" />
+    <Compile Include="UI\Menu\MenuClientEventsBuilder.cs" />
+    <Compile Include="UI\NavigatableExtensions.cs" />
+    <Compile Include="UI\NavigationBinding.cs" />
+    <Compile Include="UI\NavigationBindingBuilder.cs" />
+    <Compile Include="UI\NavigationBindingFactory.cs" />
+    <Compile Include="UI\NavigationItem.cs" />
+    <Compile Include="UI\NavigationItemBuilder.cs" />
+    <Compile Include="UI\NavigationItemImageRenderer.cs" />
+    <Compile Include="UI\NavigationItemLinkRenderer.cs" />
+    <Compile Include="UI\PanelBar\PanelBar.cs" />
+    <Compile Include="UI\PanelBar\PanelBarBuilder.cs" />
+    <Compile Include="UI\PanelBar\PanelBarClientEvents.cs" />
+    <Compile Include="UI\PanelBar\PanelBarClientEventsBuilder.cs" />
+    <Compile Include="UI\PanelBar\PanelBarExpandMode.cs" />
+    <Compile Include="UI\PanelBar\PanelBarItem.cs" />
+    <Compile Include="UI\PanelBar\PanelBarItemBuilder.cs" />
+    <Compile Include="UI\PanelBar\PanelBarItemFactory.cs" />
+    <Compile Include="UI\PanelBar\PanelBarHtmlBuilder.cs" />
+    <Compile Include="Extensions\HtmlAttributesContainerExtensions.cs" />
+    <Compile Include="UI\PanelBar\PanelBarHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TabStrip\ITabStripHtmlBuilder.cs" />
+    <Compile Include="UI\TabStrip\ITabStripHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TabStrip\TabStripClientEvents.cs" />
+    <Compile Include="UI\TabStrip\TabStripClientEventsBuilder.cs" />
+    <Compile Include="UI\TabStrip\TabStripHtmlBuilderFactory.cs" />
+    <Compile Include="UI\TabStrip\TabStrip.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TabStrip\TabStripBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TabStrip\TabStripItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TabStrip\TabStripItemBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TabStrip\TabStripItemFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UI\TabStrip\TabStripHtmlBuilder.cs" />
+    <Compile Include="UI\UiPrimitives.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadAsyncSettingsBuilder.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadBuilder.cs" />
+    <Compile Include="UI\Upload\Fluent\UploadClientEventsBuilder.cs" />
+    <Compile Include="UI\Upload\Html\UploadHtmlBuilder.cs" />
+    <Compile Include="UI\Upload\Settings\IUploadAsyncSettings.cs" />
+    <Compile Include="UI\Upload\Settings\UploadAsyncSettings.cs" />
+    <Compile Include="UI\Upload\Upload.cs" />
+    <Compile Include="UI\Upload\UploadClientEvents.cs" />
+    <Compile Include="UI\Upload\UploadLocalization.cs" />
+    <Compile Include="UI\ViewComponentExtensions.cs" />
+    <Compile Include="UI\ViewComponentFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\AbsoluteWebAssetResolver.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\CdnWebAssetResolver.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\CombinedWebAssetGroupResolver.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetContentFilter.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetChecker.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetGroupReader.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetGroupSerializer.cs" />
+    <Compile Include="UI\Effects\ZoomAnimation.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetResolver.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetResolverFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\RebaseImagePathContentFilter.cs" />
+    <Compile Include="Infrastructure\WebAsset\ResolverContext.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetChecker.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupConverter.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupReader.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupResolver.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\LocalWebAssetResolver.cs" />
+    <Compile Include="UI\Window\Fluent\WindowEffectsBuilder.cs" />
+    <Compile Include="UI\Window\WindowButtons.cs" />
+    <Compile Include="UI\Window\Fluent\WindowButtonsBuilder.cs" />
+    <Compile Include="UI\Window\Fluent\WindowResizingSettingsBuilder.cs" />
+    <Compile Include="UI\Window\IWindowButton.cs" />
+    <Compile Include="UI\Window\IWindowButtonsContainer.cs" />
+    <Compile Include="UI\Window\IWindowHtmlBuilder.cs" />
+    <Compile Include="UI\Window\IWindowHtmlBuilderFactory.cs" />
+    <Compile Include="UI\Window\Settings\WindowResizingSettings.cs" />
+    <Compile Include="UI\Window\HeaderButton.cs" />
+    <Compile Include="UI\Window\WindowClientEvents.cs" />
+    <Compile Include="UI\Window\Fluent\WindowClientEventsBuilder.cs" />
+    <Compile Include="UI\Window\Window.cs" />
+    <Compile Include="UI\Window\Fluent\WindowBuilder.cs" />
+    <Compile Include="UI\Window\WindowHtmlBuilder.cs" />
+    <Compile Include="UI\Window\WindowHtmlBuilderFactory.cs" />
+    <Compile Include="Infrastructure\WebAsset\IWebAssetCollectionResolver.cs" />
+    <Compile Include="WebAsset\SharedWebAssetGroupBuilder.cs" />
+    <Compile Include="UrlGenerator.cs" />
+    <Compile Include="WebAsset\SharedWebAssets.cs" />
+    <Compile Include="WebAsset\Configuration\WebAssetConfigurationSection.cs" />
+    <Compile Include="WebAsset\Configuration\WebAssetConfigurationElement.cs" />
+    <Compile Include="WebAsset\Configuration\WebAssetConfigurationElementCollection.cs" />
+    <Compile Include="WebAsset\Configuration\WebAssetGroupConfigurationElement.cs" />
+    <Compile Include="WebAsset\Configuration\WebAssetGroupConfigurationElementCollection.cs" />
+    <Compile Include="WebAsset\WebAssetHttpHandler.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetCollectionResolver.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetGroupSerializer.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetResolverFactory.cs" />
+    <Compile Include="Infrastructure\Implementation\WebAsset\WebAssetLocator.cs" />
+    <Compile Include="WebAsset\WebAssetDefaultSettings.cs" />
+    <Compile Include="Infrastructure\IPathResolver.cs" />
+    <Compile Include="Infrastructure\IHttpResponseCompressor.cs" />
+    <Compile Include="Infrastructure\IHttpResponseCacher.cs" />
+    <Compile Include="Infrastructure\IConfigurationManager.cs" />
+    <Compile Include="Infrastructure\PathHelper.cs" />
+    <Compile Include="UI\ClientSideObjectWriterFactory.cs" />
+    <Compile Include="UI\ClientSideEnumValueAttribute.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Infrastructure\Implementation\ConfigurationManagerWrapper.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\HttpContextBaseExtensions.cs" />
+    <Compile Include="Infrastructure\HttpHandlerBase.cs" />
+    <Compile Include="Infrastructure\Implementation\HttpResponseCacher.cs" />
+    <Compile Include="Infrastructure\Implementation\HttpResponseCompressor.cs" />
+    <Compile Include="IHideObjectMembers.cs" />
+    <Compile Include="Infrastructure\Implementation\PathResolver.cs" />
+    <Compile Include="Infrastructure\Guard.cs" />
+    <Compile Include="Extensions\ReaderWriterLockSlimExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Resources\TextResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WebAsset\WebAsset.cs" />
+    <Compile Include="WebAsset\WebAssetCollection.cs" />
+    <Compile Include="WebAsset\WebAssetCollectionBuilder.cs" />
+    <Compile Include="WebAsset\WebAssetGroup.cs" />
+    <Compile Include="UI\ClientSideObjectWriter.cs" />
+    <Compile Include="WebAsset\IWebAsset.cs" />
+    <Compile Include="Infrastructure\IUrlResolver.cs" />
+    <Compile Include="UI\HtmlHelperExtension.cs" />
+    <Compile Include="UI\IScriptableComponent.cs" />
+    <Compile Include="UI\IScriptableComponentContainer.cs" />
+    <Compile Include="UI\ViewComponentBuilderBase.cs" />
+    <Compile Include="UI\ViewComponentBase.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="UI\ScriptRegistrar\ScriptWrapperBase.cs" />
+    <Compile Include="UI\StyleSheetRegistrar\StyleSheetRegistrarBuilder.cs" />
+    <Compile Include="UI\StyleSheetRegistrar\StyleSheetRegistrar.cs" />
+    <Compile Include="Infrastructure\Implementation\UrlResolver.cs" />
+    <Compile Include="UI\ScriptRegistrar\ScriptWrapper.cs" />
+    <Compile Include="WebAsset\WebAssetGroupBuilder.cs" />
+    <Compile Include="UI\ScriptRegistrar\ScriptRegistrar.cs" />
+    <Compile Include="UI\ScriptRegistrar\ScriptRegistrarBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebAsset\WebAssetType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\shared\CodeAnalysisDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shared\Telerik.Web.snk">
+      <Link>Telerik.Web.snk</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\UploadLocalization.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\EditorLocalization.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditorLocalization.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\GridLocalization.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TextResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TextResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

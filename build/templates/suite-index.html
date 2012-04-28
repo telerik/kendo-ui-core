@@ -13,7 +13,8 @@
 
         <ul>
         # for (var i = 0, children = data[categoryName]; i < children.length; i++) { #
-            #  if (children[i].onlineOnly) continue; #
+            # var offline = children[i].offline || {}; #
+            # if (offline.skipAlways || offline.skipHtml) continue; #
             <li>
                 <h2>#= children[i].text #</h2>
                 <ul>

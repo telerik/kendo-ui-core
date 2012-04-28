@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Kendo UI Web Examples</title>
+    <link href="@Url.Content("~/Content/suite.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="page">
+        @foreach (string category in ViewBag.Navigation.Keys)
+        {
+            <h1>@category</h1>
+            <ul>
+                @foreach (NavigationWidget widget in ViewBag.Navigation[category])
+                {
+                    if (widget.Offline.SkipAlways || widget.Offline.SkipMvc) { continue; }
+                    <li>
+                        <h2>@widget.Text</h2>
+                        <ul>
+                            @foreach (NavigationExample example in widget.Items)
+                            {
+                                <li><a href='/@ViewContext.RouteData.DataTokens["area"]/@example.Url'>@example.Text</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        }
+    </div>
+</body>
+</html>

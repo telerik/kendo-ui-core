@@ -212,6 +212,11 @@ function deployExamples(root, bundle) {
         path.join(examplesRoot, CONTENT_ROOT)
     );
 
+    function shouldSkip(widget) {
+        var offline = widget.offline || {};
+        return offline.skipAlways || offline.skipHtml;
+    }
+
     bundle.suites.forEach(function(suite) {
         var navigationFile = path.join(DEMOS_ROOT, "App_Data", suite + ".nav.json"),
             exampleTemplate = template(readText(path.join(TEMPLATES_ROOT, suite + "-example.html"))),
@@ -225,7 +230,7 @@ function deployExamples(root, bundle) {
 
         for (var category in navigation) {
             for (var widgetIx = 0, widgets = navigation[category]; widgetIx < widgets.length; widgetIx++) {
-                if (widgets[widgetIx].onlineOnly) {
+                if (shouldSkip(widgets[widgetIx])) {
                     continue;
                 }
 
@@ -236,7 +241,7 @@ function deployExamples(root, bundle) {
                     outputName = path.join(suiteDest, example.url),
                     exampleBody = readText(fileName);
 
-                    if (example.onlineOnly) {
+                    if (shouldSkip(example)) {
                         continue;
                     }
 
