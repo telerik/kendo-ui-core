@@ -14,17 +14,6 @@
     <body>
         <script type="text/javascript">
 
-            var data = [
-            {
-                value: 1,
-                p: "1"
-            },
-            {
-                value: 1,
-               p: ""
-            }
-            ]
-
             $(document).ready(function() {
                 $("#container").kendoChart({
                     title: {
@@ -35,38 +24,25 @@
                         position: "bottom"
                     },
                     seriesDefaults: {
-                        type: "column"
+                        type: "column",
+                        labels: {
+                            visible: true
+                        }
+                    },
+                    seriesClick: function(e) {
+                        console.log(e);
                     },
                     series: [{
+                            type: "line",
                             name: "Apples",
                             data: [10, 15, 12, 16]
-                        }, {
-                            name: "Cabbages",
-                            data: [25, 30, 15, 20]
-                        }, {
-                            name: "Cucumbers",
-                            data: [25, 30, 15, 20]
                         }, {
                             name: "Pears",
                             data: [5, 8, 6, 8]
                         }, {
                             name: "Plums",
                             data: [5, 8, 6, 8]
-                    }],
-                    categoryAxis: {
-                        majorTicks: {
-                            type: "inside"
-                        },
-                        mirror: false,
-                        labels: {
-                            mirror: true
-                        }
-                    },
-                tooltip: {
-                    visible: true,
-                    template: "#= console.log(dataItem) #"
-
-                }
+                    }]
                 });
             });
         </script>
