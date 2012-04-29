@@ -237,6 +237,7 @@
             if (!text.template) {
                 text.template = SVGText.template = renderTemplate(
                     "<text #= d.renderAttr(\"id\", d.options.id) # " +
+                    "#= d.renderDataAttributes() # " +
                     "x='#= Math.round(d.options.x) #' " +
                     "y='#= Math.round(d.options.y + d.options.baseline) #' " +
                     "fill-opacity='#= d.options.fillOpacity #' " +
@@ -297,6 +298,7 @@
             if (!path.template) {
                 path.template = SVGPath.template = renderTemplate(
                     "<path #= d.renderAttr(\"id\", d.options.id) #" +
+                    "#= d.renderDataAttributes() # " +
                     "d='#= d.renderPoints() #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
                     "#= d.renderAttr(\"stroke-width\", d.options.strokeWidth) #" +
@@ -566,6 +568,7 @@
             if (!circle.template) {
                 circle.template = SVGCircle.template = renderTemplate(
                     "<circle #= d.renderAttr(\"id\", d.options.id) # " +
+                    "#= d.renderDataAttributes() #" +
                     "cx='#= d.center[0] #' cy='#= d.center[1] #' " +
                     "r='#= d.radius #' " +
                     "#= d.renderAttr(\"stroke\", d.options.stroke) # " +
@@ -592,9 +595,12 @@
             group.template = SVGGroup.template;
             if (!group.template) {
                 group.template = SVGGroup.template =
-                renderTemplate("<g#= d.renderAttr(\"id\", d.options.id) #" +
-                           "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
-                         "#= d.renderContent() #</g>");
+                renderTemplate(
+                    "<g#= d.renderAttr(\"id\", d.options.id) #" +
+                    "#= d.renderDataAttributes() #" +
+                    "#= d.renderAttr(\"clip-path\", d.options.clipPath) #>" +
+                    "#= d.renderContent() #</g>"
+                );
             }
         }
     });

@@ -355,6 +355,11 @@
                     ok(text.render().indexOf("id='id'") > -1);
                 });
 
+                test("renders data attributes", function() {
+                    text.options.data = { testId: 1 };
+                    ok(text.render().indexOf("data-test-id='1'") > -1);
+                });
+
                 test("hides text when fillOpacity is 0", function() {
                     text.options.fillOpacity = 0;
                     ok(text.render().indexOf("visibility: hidden") > -1);
@@ -508,6 +513,11 @@
                     ok(text.render().indexOf("id='id'") > -1);
                 });
 
+                test("renders data attributes", function() {
+                    text.options.data = { testId: 1 };
+                    ok(text.render().indexOf("data-test-id='1'") > -1);
+                });
+
             })();
 
             (function() {
@@ -612,6 +622,11 @@
                     ok(path.render().indexOf("id='id'") > -1);
                 });
 
+                test("renders data attributes", function() {
+                    path.options.data = { testId: 1 };
+                    ok(path.render().indexOf("data-test-id='1'") > -1);
+                });
+
                 test("refresh updates path fill opacity", function() {
                     path.options.fillOpacity = 0.5;
                     path.refresh(domElement);
@@ -665,6 +680,11 @@
                 test("refresh updates path v attribute", function() {
                     line.refresh(domElement);
                     ok(domElement.find("path")[0].v.length > 0);
+                });
+
+                test("renders data attributes", function() {
+                    line.options.data = { testId: 1 };
+                    ok(line.render().indexOf("data-test-id='1'") > -1);
                 });
 
             })();
@@ -786,6 +806,11 @@
                     ok(group.render().indexOf("id='id'") > -1);
                 });
 
+                test("renders data attributes", function() {
+                    group.options.data = { testId: 1 };
+                    ok(group.render().indexOf("data-test-id='1'") > -1);
+                });
+
             })();
 
             (function() {
@@ -872,6 +897,11 @@
                 test("renders id", function() {
                     circle.options.id = "id";
                     ok(circle.render().indexOf("id='id'") > -1);
+                });
+
+                test("renders data attributes", function() {
+                    circle.options.data = { testId: 1 };
+                    ok(circle.render().indexOf("data-test-id='1'") > -1);
                 });
 
             })();
@@ -966,6 +996,17 @@
                 test("renders inner arc", function() {
                     ok(ring.render().indexOf("AT 35,35 235,235 222,185 48,185") > -1);
                 });
+
+                test("renders id", function() {
+                    ring.options.id = "id";
+                    ok(ring.render().indexOf("id='id'") > -1);
+                });
+
+                test("renders data attributes", function() {
+                    ring.options.data = { testId: 1 };
+                    ok(ring.render().indexOf("data-test-id='1'") > -1);
+                });
+
             })();
 
             (function() {
@@ -1040,6 +1081,11 @@
                 test("renders id", function() {
                     sector.options.id = "id";
                     ok(sector.render().indexOf("id='id'") > -1);
+                });
+
+                test("renders data attributes", function() {
+                    sector.options.data = { testId: 1 };
+                    ok(sector.render().indexOf("data-test-id='1'") > -1);
                 });
 
             })();
