@@ -92,6 +92,42 @@
                     ok(child2.getRoot() === chartElement);
                 });
 
+                test("makeDiscoverable assigns unique model id", function() {
+                    chartElement.makeDiscoverable();
+                    ok(chartElement.options.modelId.length > 0);
+                });
+
+                test("makeDiscoverable registers model id in map", function() {
+                    chartElement.makeDiscoverable();
+                    ok(dataviz.ChartElement.modelMap[chartElement.options.modelId]);
+                });
+
+                test("getViewElements propagates model id to children", function() {
+                    var child1 = new dataviz.ChartElement(),
+                        child2 = new dataviz.ChartElement();
+
+                    child1.append(child2);
+                    chartElement.append(child1);
+
+                    chartElement.makeDiscoverable();
+                    chartElement.getViewElements(view);
+
+                    equals(chartElement.options.modelId, child1.options.modelId);
+                    equals(chartElement.options.modelId, child2.options.modelId);
+                });
+
+                test("getViewElements does not overwrite children model id", function() {
+                    var child1 = new dataviz.ChartElement();
+
+                    child1.makeDiscoverable();
+
+                    chartElement.makeDiscoverable();
+                    chartElement.append(child1);
+
+                    chartElement.getViewElements(view);
+
+                    notEqual(chartElement.options.modelId, child1.options.modelId);
+                });
 
             })();
 
@@ -645,6 +681,14 @@
                     equals(view.log.rect[0].style.id, "id");
                 });
 
+                test("renders model id as data", function() {
+                    boxElement.options.modelId = "id";
+                    boxElement.reflow(targetBox);
+                    boxElement.getViewElements(view);
+
+                    equals(view.log.rect[0].style.data.modelId, "id");
+                });
+
                 test("renders zIndex", function() {
                     boxElement.options.zIndex = 100;
                     boxElement.reflow(targetBox);
@@ -882,6 +926,14 @@
                     equals(view.log.text[0].style.id, "id");
                 });
 
+                test("renders model id as data", function() {
+                    text.options.modelId = "id";
+                    text.reflow(new Box2D());
+                    text.getViewElements(view);
+
+                    equals(view.log.text[0].style.data.modelId, "id");
+                });
+
                 test("renders zIndex", function() {
                     text.options.zIndex = 100;
                     text.reflow(new Box2D());
@@ -926,9 +978,17 @@
                     equal(textBox.options.id, "1");
                 });
 
-                test("moves id to text when background or border is set", function() {
-                    createTextBox({ id: "1" });
-                    equal(textBox.children[0].options.id, "1");
+                test("moves id to box when background or border are set", function() {
+                    createTextBox({ id: "1", border: { width: 1 }});
+                    equal(view.log.rect[0].style.id, "1");
+                });
+
+                test("assigns unique id to text when background or border is set", function() {
+                    createTextBox({ id: "1", border: { width: 1 }});
+
+                    var id = textBox.children[0].options.id;
+                    notEqual(id, "1");
+                    notEqual(id, "");
                 });
 
             })();

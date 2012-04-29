@@ -48,6 +48,7 @@
         SWING = "swing",
         TOP = "top",
         UNDEFINED = "undefined",
+        UPPERCASE_REGEX = /([A-Z])/g,
         WIDTH = "width",
         WHITE = "#fff",
         X = "x",
@@ -396,16 +397,33 @@
 
         getViewElements: function(view) {
             var element = this,
+                modelId = element.options.modelId,
                 viewElements = [],
                 children = element.children,
+                i,
+                child,
+                childOptions,
                 childrenCount = children.length;
 
-            for (var i = 0; i < childrenCount; i++) {
+            for (i = 0; i < childrenCount; i++) {
+                child = children[i];
+                childOptions = child.options = child.options || {};
+                childOptions.modelId = childOptions.modelId || modelId;
+
                 viewElements.push.apply(viewElements,
-                    children[i].getViewElements(view));
+                    child.getViewElements(view));
             }
 
             return viewElements;
+        },
+
+        makeDiscoverable: function() {
+            var element = this,
+                options = element.options,
+                modelId = uniqueId();
+
+            options.modelId = modelId;
+            ChartElement.modelMap[modelId] = element;
         },
 
         registerId: function(id, metadata) {
@@ -451,6 +469,9 @@
             return parent ? parent.getRoot() : null;
         }
     });
+
+    // Logical tree ID to element map
+    ChartElement.modelMap = {};
 
     var RootElement = ChartElement.extend({
         init: function(options) {
@@ -612,7 +633,8 @@
                         fill: options.background,
                         fillOpacity: options.opacity,
                         animation: options.animation,
-                        zIndex: options.zIndex
+                        zIndex: options.zIndex,
+                        data: { modelId: options.modelId }
                     }, renderOptions))
                 );
             }
@@ -693,7 +715,8 @@
                 view.createText(text.content,
                     deepExtend({}, options, {
                         x: text.box.x1, y: text.box.y1,
-                        baseline: text.baseline
+                        baseline: text.baseline,
+                        data: { modelId: options.modelId }
                     })
                 )
             ];
@@ -1464,6 +1487,21 @@
 
         renderAttr: function (name, value) {
             return defined(value) ? " " + name + "='" + value + "' " : "";
+        },
+
+        renderDataAttributes: function() {
+            var element = this,
+                data = element.options.data,
+                key,
+                attr,
+                output = "";
+
+            for (key in data) {
+                attr = "data-" + key.replace(UPPERCASE_REGEX, "-$1").toLowerCase();
+                output += element.renderAttr(attr, data[key]);
+            }
+
+            return output;
         }
     });
 

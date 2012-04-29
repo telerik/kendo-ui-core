@@ -207,6 +207,7 @@
             if (!text.template) {
                 text.template = VMLText.template = renderTemplate(
                     "<kvml:textbox #= d.renderAttr(\"id\", d.options.id) # " +
+                    "#= d.renderDataAttributes() #" +
                     "style='position: absolute; " +
                     "left: #= d.options.x #px; top: #= d.options.y #px; " +
                     "font: #= d.options.font #; color: #= d.options.color #; " +
@@ -248,6 +249,7 @@
             if (!text.template) {
                 text.template = VMLRotatedText.template = renderTemplate(
                     "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
+                    "#= d.renderDataAttributes() #" +
                     "style='position: absolute; top: 0px; left: 0px; " +
                     "width: 1px; height: 1px;' stroked='false' coordsize='1,1'>" +
                     "#= d.renderPath() #" +
@@ -336,6 +338,7 @@
             if (!path.template) {
                 path.template = VMLPath.template = renderTemplate(
                     "<kvml:shape #= d.renderAttr(\"id\", d.options.id) # " +
+                    "#= d.renderDataAttributes() #" +
                     "style='position:absolute; #= d.renderSize() #' " +
                     "coordorigin='0 0' #= d.renderCoordsize() # >" +
                         "<kvml:path v='#= d.renderPoints() # e' />" +
@@ -569,6 +572,7 @@
             if (!circle.template) {
                 circle.template = VMLCircle.template = renderTemplate(
                     "<kvml:oval #= d.renderAttr(\"id\", d.options.id) # " +
+                            "#= d.renderDataAttributes() #" +
                             "style='position:absolute; " +
                             "width:#= d.radius * 2 #px; height:#= d.radius * 2 #px; " +
                             "top:#= d.center[1] - d.radius #px; " +
@@ -596,6 +600,7 @@
             if (!group.template) {
                 group.template = VMLGroup.template = renderTemplate(
                     "<div #= d.renderAttr(\"id\", d.options.id) #" +
+                    "#= d.renderDataAttributes() #" +
                     "style='position: absolute; white-space: nowrap;'>" +
                     "#= d.renderContent() #</div>"
                 );
