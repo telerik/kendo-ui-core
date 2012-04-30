@@ -674,7 +674,6 @@
             options = deepExtend({}, options, { labels: { mirror: options.mirror } });
 
             NumericAxis.fn.init.call(scale, 0, 1, options);
-
         },
 
         options: {
@@ -809,7 +808,8 @@
                 element.refresh(doc.getElementById(options.id));
             } else {
                 options.animation = deepExtend({}, options.animation, {
-                    endPosition: scale.getSlot(scale.options.min, options.value)
+                    endPosition: scale.getSlot(scale.options.min, options.value),
+                    reverse: scale.options.reverse
                 });
                 if (options.shape === ARROW) {
                     animation = element._animation = new ArrowAnimation(element, options.animation);
@@ -897,7 +897,8 @@
                         animation: deepExtend(options.animation, {
                             startPosition: scale.getSlot(scale.options.min, options.value),
                             size: options.size,
-                            vertical: scale.options.vertical
+                            vertical: scale.options.vertical,
+                            reverse: scale.options.reverse
                         }),
                         id: options.id,
                         zIndex: 2,

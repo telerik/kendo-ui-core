@@ -843,8 +843,8 @@
                     align: align, zIndex: options.zIndex
                 }),
                 step = labelOptions.step;
-            axis.labels = [];
 
+            axis.labels = [];
 
             if (labelOptions.visible) {
                 var labelsCount = axis.getLabelsCount(),
@@ -1842,10 +1842,9 @@
                 points = element.points,
                 options = element.options.animation,
                 vertical = options.vertical,
-                pos = vertical ? "y1" : "x2",
-                axis = vertical ? "y" : "x",
-                start,
-                end,
+                reverse = options.reverse,
+                axis = anim.axis = vertical ? "y" : "x",
+                start, end, pos,
                 endPosition = anim.options.endPosition,
                 initialState = anim.initialState = {
                     top: points[0].y,
@@ -1856,20 +1855,22 @@
                 initial = !defined(anim.options.endPosition);
 
             if (vertical) {
-                start = initialState[initial ? BOTTOM : TOP];
-                end = initial ? initialState[TOP] : endPosition[pos];
+                pos = reverse ? "y2" : "y1";
+                start = initialState[initial && !reverse ? BOTTOM : TOP];
+                end = initial ? initialState[reverse ? BOTTOM : TOP] : endPosition[pos];
             } else {
-                start = initialState[initial ? LEFT : RIGHT];
-                end = initial ? initialState[RIGHT] : endPosition[pos];
+                pos = reverse ? "x1" : "x2";
+                start = initialState[initial && !reverse ? LEFT : RIGHT];
+                end = initial ? initialState[reverse ? LEFT : RIGHT] : endPosition[pos];
             }
 
             anim.start = start;
             anim.end = end;
-            anim.axis = axis;
+
             if (initial) {
-                updateArray(points, axis, start);
+                updateArray(points, axis, anim.start);
             } else if (options.speed) {
-                anim.options.duration = math.max((math.abs(start - end) / options.speed) * 1000, 1);
+                anim.options.duration = math.max((math.abs(anim.start - anim.end) / options.speed) * 1000, 1);
             }
         },
 
