@@ -147,7 +147,8 @@
                 needle.refresh(doc.getElementById(options.id));
             } else {
                 animation = needle._animation = new RotationAnimation(needle, deepExtend(animationOptions, {
-                    startAngle: oldAngle
+                    startAngle: oldAngle,
+                    reverse: scale.options.reverse
                 }));
                 animation.setup();
                 animation.play();
@@ -218,7 +219,8 @@
             if (options.animation !== false) {
                 deepExtend(options.animation, {
                     startAngle: 0,
-                    center: center
+                    center: center,
+                    reverse: scale.options.reverse
                 });
             }
 
@@ -304,11 +306,19 @@
         slotAngle: function(value) {
             var options = this.options,
                 startAngle = options.startAngle,
+                reverse = options.reverse,
                 angle = options.endAngle - startAngle,
                 min = options.min,
-                max = options.max;
+                max = options.max,
+                result;
 
-            return ((value - min) / (max - min) * angle) + startAngle;
+            if (reverse) {
+                result = options.endAngle - (value - min) / (max - min) * angle;
+            } else {
+                result = ((value - min) / (max - min) * angle) + startAngle;
+            }
+
+            return result;
         },
 
         renderTicks: function(view) {
@@ -398,21 +408,26 @@
         tickAngles: function(ring, stepValue) {
             var scale = this,
                 options = scale.options,
+                reverse = options.reverse,
                 range = options.max - options.min,
                 angle = ring.angle,
+                pos = ring.startAngle,
                 tickCount = range / stepValue,
                 step = angle / tickCount,
-                startAngle = ring.startAngle,
-                pos = startAngle,
                 positions = [],
                 i;
 
-            for (i = 0; i < tickCount; i++) {
+            if (reverse) {
+                pos += angle;
+                step = -step;
+            }
+
+            for (i = 0; i < tickCount ; i++) {
                 positions.push(round(pos, COORD_PRECISION));
                 pos += step;
             }
 
-            positions.push(startAngle + angle);
+            positions.push(pos);
 
             return positions;
         },
@@ -422,20 +437,21 @@
                 result = [],
                 from,
                 to,
-                segments,
+                segments = scale.rangeSegments(),
+                segmentsCount = segments.length,
+                reverse = scale.options.reverse,
                 segment,
                 ringRadius,
                 i;
 
-            segments = scale.rangeSegments();
-
-            if (segments.length) {
+            if (segmentsCount) {
                 ringRadius = scale.getRadius();
 
-                for (i = 0; i < segments.length; i++) {
+                for (i = 0; i < segmentsCount; i++) {
                     segment = segments[i];
-                    from = scale.slotAngle(segment.from);
-                    to = scale.slotAngle(segment.to);
+                    from = scale.slotAngle(segment[reverse ? "to": "from"]);
+                    to = scale.slotAngle(segment[!reverse ? "to": "from"]);
+
                     if (to - from !== 0) {
                         result.push(view.createRing(
                             new Ring(
