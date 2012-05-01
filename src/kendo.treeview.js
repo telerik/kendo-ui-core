@@ -147,13 +147,27 @@
         KTREEVIEW = "k-treeview",
         VISIBLE = ":visible",
         NODE = ".k-item",
-        SUBGROUP = ">.k-group,>.k-animation-container>.k-group",
-        NODECONTENTS = SUBGROUP + ",>.k-content,>.k-animation-container>.k-content",
-        templates, rendering, TreeView;
+        templates, rendering, TreeView,
+        subGroup, nodeContents;
+
+    function contentChild(filter) {
+        return function(node) {
+            var result = node.children(".k-animation-container");
+
+            if (!result.length) {
+                result = node;
+            }
+
+            return result.children(filter);
+        };
+    }
+
+    subGroup = contentChild(".k-group");
+    nodeContents = contentChild(".k-group,.k-content");
 
     function updateNodeHtml(node) {
         var wrapper = node.children("div"),
-            subGroup = node.children("ul"),
+            group = node.children("ul"),
             toggleButton = wrapper.children(".k-icon"),
             innerWrapper = wrapper.children(".k-in"),
             currentNode, tmp;
@@ -166,11 +180,11 @@
             wrapper = $("<div />").prependTo(node);
         }
 
-        if (!toggleButton.length && subGroup.length) {
+        if (!toggleButton.length && group.length) {
             toggleButton = $("<span class='k-icon' />").prependTo(wrapper);
-        } else if (!subGroup.length || !subGroup.children().length) {
+        } else if (!group.length || !group.children().length) {
             toggleButton.remove();
-            subGroup.remove();
+            group.remove();
         }
 
         if (!innerWrapper.length) {
@@ -195,7 +209,7 @@
 
     function updateNodeClasses(node, groupData, nodeData) {
         var wrapper = node.children("div"),
-            subGroup = node.children("ul");
+            group = node.children("ul");
 
         if (node.hasClass("k-treeview")) {
             return;
@@ -203,7 +217,7 @@
 
         if (!nodeData) {
             nodeData = {
-                expanded: subGroup.css("display") != "none",
+                expanded: group.css("display") != "none",
                 index: node.index(),
                 enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
             };
@@ -225,11 +239,11 @@
                .addClass(rendering.cssClass(groupData, nodeData));
 
         // toggle button
-        if (subGroup.length) {
+        if (group.length) {
             wrapper.children(".k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
                 .addClass(rendering.toggleButtonClass(nodeData));
 
-            subGroup.addClass("k-group");
+            group.addClass("k-group");
         }
     }
 
@@ -676,7 +690,7 @@
         _nodeClick: function (e) {
             var that = this,
                 node = $(e.target),
-                contents = node.closest(NODE).find(NODECONTENTS),
+                contents = nodeContents(node.closest(NODE)),
                 href = node.attr("href"),
                 shouldNavigate;
 
@@ -776,7 +790,7 @@
          */
         expand: function (nodes) {
             this._processNodes(nodes, function (index, item) {
-                var contents = item.find(NODECONTENTS);
+                var contents = nodeContents(item);
 
                 if (contents.length > 0 && !contents.is(VISIBLE)) {
                     this.toggle(item);
@@ -803,7 +817,7 @@
          */
         collapse: function (nodes) {
             this._processNodes(nodes, function (index, item) {
-                var contents = item.find(NODECONTENTS);
+                var contents = nodeContents(item);
 
                 if (contents.length > 0 && contents.is(VISIBLE)) {
                     this.toggle(item);
@@ -835,7 +849,7 @@
             enable = arguments.length == 2 ? !!enable : true;
 
             this._processNodes(nodes, function (index, item) {
-                var isCollapsed = !item.find(NODECONTENTS).is(VISIBLE);
+                var isCollapsed = !nodeContents(item).is(VISIBLE);
 
                 if (!enable) {
                     this.collapse(item);
@@ -917,7 +931,7 @@
             }
 
             var that = this,
-                contents = node.find(NODECONTENTS),
+                contents = nodeContents(node),
                 isExpanding = !contents.is(VISIBLE),
                 animationSettings = that.options.animation || {},
                 animation = animationSettings.expand,
@@ -1125,7 +1139,7 @@
         append: function (nodeData, parentNode) {
             parentNode = parentNode || this.element;
 
-            var group = parentNode.find(SUBGROUP);
+            var group = subGroup(parentNode);
 
             return this._insertNode(nodeData, group.children().length, parentNode, group, function(item, group) {
                 item.appendTo(group);
