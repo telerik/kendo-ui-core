@@ -152,10 +152,10 @@
         templates, rendering, TreeView;
 
     function updateNodeHtml(node) {
-        var wrapper = node.find(">div"),
-            subGroup = node.find(">ul"),
-            toggleButton = wrapper.find(">.k-icon"),
-            innerWrapper = wrapper.find(">.k-in"),
+        var wrapper = node.children("div"),
+            subGroup = node.children("ul"),
+            toggleButton = wrapper.children(".k-icon"),
+            innerWrapper = wrapper.children(".k-in"),
             currentNode, tmp;
 
         if (node.hasClass("k-treeview")) {
@@ -194,8 +194,8 @@
     }
 
     function updateNodeClasses(node, groupData, nodeData) {
-        var wrapper = node.find(">div"),
-            subGroup = node.find(">ul");
+        var wrapper = node.children("div"),
+            subGroup = node.children("ul");
 
         if (node.hasClass("k-treeview")) {
             return;
@@ -205,7 +205,7 @@
             nodeData = {
                 expanded: subGroup.css("display") != "none",
                 index: node.index(),
-                enabled: !wrapper.find(">.k-in").hasClass("k-state-disabled")
+                enabled: !wrapper.children(".k-in").hasClass("k-state-disabled")
             };
         }
 
@@ -226,7 +226,7 @@
 
         // toggle button
         if (subGroup.length) {
-            wrapper.find(">.k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
+            wrapper.children(".k-icon").removeClass("k-plus k-minus k-plus-disabled k-minus-disabled")
                 .addClass(rendering.toggleButtonClass(nodeData));
 
             subGroup.addClass("k-group");
@@ -720,7 +720,7 @@
                     firstLevel: firstLevel,
                     expanded: firstLevel || item.attr(kendo.attr("expanded")) === "true"
                 },
-                groupElement = item.find("> ul");
+                groupElement = item.children("ul");
 
             groupElement
                 .addClass(rendering.groupCssClass(group))
@@ -731,7 +731,7 @@
 
         _nodes: function(groupElement, groupData) {
             var that = this,
-                nodes = groupElement.find("> li"),
+                nodes = groupElement.children("li"),
                 nodeData;
 
             groupData = extend({ length: nodes.length }, groupData);
@@ -842,12 +842,12 @@
                     isCollapsed = true;
                 }
 
-                item.find(">div")
-                        .find(">.k-in")
+                item.children("div")
+                        .children(".k-in")
                             .toggleClass("k-state-default", enable)
                             .toggleClass("k-state-disabled", !enable)
                         .end()
-                        .find(">.k-icon")
+                        .children(".k-icon")
                             .toggleClass("k-plus", isCollapsed && enable)
                             .toggleClass("k-plus-disabled", isCollapsed && !enable)
                             .toggleClass("k-minus", !isCollapsed && enable)
@@ -1308,7 +1308,7 @@
 
                         that.dropHint
                             .css(hoveredItemPos)
-                            [insertOnTop ? "prependTo" : "appendTo"](dropTarget.closest(NODE).find("> div:first"));
+                            [insertOnTop ? "prependTo" : "appendTo"](dropTarget.closest(NODE).children("div:first"));
 
                         if (insertOnTop && hoveredItem.hasClass("k-top")) {
                             statusClass = "k-insert-top";
