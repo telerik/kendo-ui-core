@@ -11,7 +11,7 @@
     *
     * @exampleTitle Initialize Kendo mobile ButtonGroup based on role data attribute.
     * @example
-    * <ul id="buttongroup" data-role="buttongroup" />
+    * <ul id="buttongroup" data-role="buttongroup">
     *   <li>Option 1</li>
     *   <li>Option 2</li>
     * </ul>
@@ -26,7 +26,7 @@
     * Every Kendo Mobile ButtonGroup color can be customized by setting its <code>background-color</code> inline or using a CSS selector.
     * @exampleTitle Green Kendo mobile ButtonGroup
     * @example
-    * <ul id="buttongroup" data-role="buttongroup" />
+    * <ul id="buttongroup" data-role="buttongroup">
     *   <li style="background-color: green">Option1</li>
     *   <li style="beckground-color: red">Option2</li>
     * </ul>
@@ -83,7 +83,7 @@
     * }
     * </style>
     *
-    * <ul id="buttongroup" data-role="buttongroup" />
+    * <ul id="buttongroup" data-role="buttongroup">
     *   <li data-icon="custom">Option 1</li>
     *   <li>Option 2</li>
     * </ul>
@@ -126,7 +126,7 @@
             *
             * @exampleTitle Handle select event
             * @example
-            * <ul id="buttongroup" data-role="buttongroup" />
+            * <ul id="buttongroup" data-role="buttongroup">
             *   <li>Option 1</li>
             *   <li>Option 2</li>
             * </ul>
