@@ -119,16 +119,60 @@
                 equal(radialScale.slotAngle(106), 48);
             });
 
+            module("RadialScale / Reverse", {
+                setup: function() {
+                    radialScale = new RadialScale({
+                        min: 0,
+                        max: 100,
+                        majorTicks: {
+                            size: 10
+                        },
+                        endAngle: 100,
+                        startAngle: 0,
+                        reverse: true
+                    });
+
+                }
+            });
+
+            test("slotAngle() returns startAngle/endAngle for extreme values", function() {
+                $.extend(radialScale.options, {
+                    min: 0,
+                    max: 100,
+                    startAngle: 27,
+                    endAngle: 48,
+                    reverse: true
+                });
+
+                equal(radialScale.slotAngle(0), 48);
+                equal(radialScale.slotAngle(100), 27);
+            });
+
             test("slotAngle() takes options.min and options.max into account", function() {
                 $.extend(radialScale.options, {
                     min: 38,
                     max: 106,
                     startAngle: 27,
-                    endAngle: 48
+                    endAngle: 48,
+                    reverse: true
                 });
 
-                equal(radialScale.slotAngle(38), 27);
-                equal(radialScale.slotAngle(106), 48);
+                equal(radialScale.slotAngle(38), 48);
+                equal(radialScale.slotAngle(106), 27);
+            });
+
+            test("slotAngle() should return correct values", function() {
+                $.extend(radialScale.options, {
+                    min: 0,
+                    max: 100,
+                    startAngle: 0,
+                    endAngle: 100,
+                    reverse: true
+                });
+
+                equal(radialScale.slotAngle(50), 50);
+                equal(radialScale.slotAngle(10), 90);
+                equal(radialScale.slotAngle(90), 10);
             });
 
             function createScale(options) {
