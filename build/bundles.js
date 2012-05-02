@@ -352,7 +352,7 @@ function buildBundle(bundle, version, success) {
             console.log("Building " + deployName);
             mkdir(root);
 
-            /*console.log("Deploying scripts");
+            console.log("Deploying scripts");
             deployScripts(root, bundle, srcLicense, hasSource);
             deployThirdPartyScripts(root);
 
@@ -361,7 +361,6 @@ function buildBundle(bundle, version, success) {
 
             console.log("Deploying licenses");
             deployLicenses(root, bundle);
-            */
 
             if (!bundle.skipExamples) {
                 console.log("Deploying examples");
