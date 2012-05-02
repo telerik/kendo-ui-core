@@ -186,6 +186,7 @@
          *          }
          *      }
          * });
+         * @option {Boolean} [validateOnBlur] Determines if validation will be triggered when element loses focus. Default value is true.
          */
         init: function(element, options) {
             var that = this;
