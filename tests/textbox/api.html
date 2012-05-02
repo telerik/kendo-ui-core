@@ -285,6 +285,24 @@
                     start();
                 }, 300);
             });
+
+            test("NumericTextBox gets correct numeric format depending on the format field", function() {
+                kendo.culture().numberFormat.percent.decimals = 4;
+
+                var textbox = new NumericTextBox(input, {
+                        format: "P"
+                    }),
+                    value = "12.3447",
+                    number = 12.3447;
+
+                textbox.value(value);
+
+                equal(textbox.value(), number);
+                equal(input.val(), number.toString());
+                equal(textbox._text.val(), kendo.toString(number, "p"));
+
+                kendo.culture().numberFormat.percent.decimals = 2;
+            });
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>
