@@ -92,6 +92,18 @@
                 notStrictEqual(pager, grid.pager);
             });
 
+            test("resetting DataSource calls virtual scroller setDataSource", function() {
+                var grid = new Grid(table(), { scrollable: { virtual: true } }),
+                    scrollable = grid.content.data("kendoVirtualScrollable");
+
+                grid.setDataSource(new kendo.data.DataSource({
+                    data:[{text: 1, value: 1}, {text:2, value:2}],
+                    pageSize: 1
+                }));
+
+                same(grid.dataSource, scrollable.dataSource);
+            });
+
         </script>
         <div id="qunit-fixture">test markup, will be hidden</div>
         <ul id="log"></ul>

@@ -50,9 +50,18 @@
             var that = this;
 
             Widget.fn.init.call(that, element, options);
-            that.dataSource = options.dataSource;
-            that.dataSource.bind(CHANGE, proxy(that.refresh, that));
+            that._refreshHandler = proxy(that.refresh, that);
+            that.setDataSource(options.dataSource);
             that.wrap();
+        },
+
+        setDataSource: function(dataSource) {
+            var that = this;
+            if (that.dataSource) {
+                that.dataSource.unbind(CHANGE, that._refreshHandler);
+            }
+            that.dataSource = dataSource;
+            that.dataSource.bind(CHANGE, that._refreshHandler);
         },
 
         options: {
@@ -365,6 +374,10 @@
 
             that._thead();
 
+            if (that.virtualScrollable) {
+                that.virtualScrollable.setDataSource(that.options.dataSource);
+            }
+
             if (that.options.autoBind) {
                 dataSource.fetch();
             }
@@ -385,7 +398,8 @@
             groupable: false,
             rowTemplate: "",
             altRowTemplate: "",
-            dataSource: {}
+            dataSource: {},
+            height: null
         },
 
         setOptions: function(options) {
@@ -1388,10 +1402,10 @@
                     that.content = that.table.wrap('<div class="k-grid-content" />').parent();
 
                     if (scrollable !== true && scrollable.virtual) {
-                        new VirtualScrollable(that.content, {
-                            dataSource: that.dataSource,
-                            itemHeight: proxy(that._averageRowHeight, that)
-                        });
+                        that.virtualScrollable = new VirtualScrollable(that.content, {
+                                dataSource: that.dataSource,
+                                itemHeight: proxy(that._averageRowHeight, that)
+                            });
                     }
                 }
 
