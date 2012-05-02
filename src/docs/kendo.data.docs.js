@@ -345,8 +345,8 @@
         * var dataSource = new kendo.data.DataSource({
         *     transport: {
         *         read: "orders.json",
-        *         update: {
-        *             url: "orders/update.json",
+        *         create: {
+        *             url: "orders/create.json",
         *             data: {
         *                 orderId: $("#input").val() // sends the value of the input as the orderId
         *             }
@@ -362,8 +362,8 @@
         * var dataSource = new kendo.data.DataSource({
         *     transport: {
         *         read: "orders.json",
-        *         destroy: {
-        *             url: "orders/create.json",
+        *         update: {
+        *             url: "orders/update.json",
         *         }
         *     }
         * });
@@ -411,11 +411,65 @@
         * @option {String} [schema.type] Specify the type of schema { xml | json }
         * @option {Function} [schema.parse] Executed before deserialized data is read.
         *  Appropriate for preprocessing of the raw data.
-        * @option {Function} [schema.data] Returns the deserialized data.
+        * @option {Function} [schema.data] Returns the deserialized data as array.
         * @option {Function} [schema.total] Returns the total number of records.
-        * @option {Function} [schema.aggregates] Returns the calculated aggregates.
+        * @option {Function} [schema.aggregates] Returns the calculated aggregates as object.
+        * Result should have the following format:
+        * _example
+        * {
+        *   FIEL1DNAME: {
+        *       FUNCTON1NAME: FUNCTION1VALUE,
+        *       FUNCTON2NAME: FUNCTION2VALUE
+        *   },
+        *   FIELD2NAME: {
+        *       FUNCTON1NAME: FUNCTION1VALUE
+        *   }
+        *}
+        * _example
+        *{
+        *   unitPrice: {
+        *       max: 100,
+        *       min: 1
+        *   },
+        *   productName: {
+        *       count: 42
+        *   }
+        *}
         * @option {Function} [schema.groups] Used instead of data function if remote grouping operation is executed.
-        *  Returns the deserialized data.
+        *  Returns the deserialized data as array.
+        * Result should have the following format:
+        * _example
+        * [{
+        *   aggregates: {
+        *       FIEL1DNAME: {
+        *           FUNCTON1NAME: FUNCTION1VALUE,
+        *           FUNCTON2NAME: FUNCTION2VALUE
+        *       },
+        *       FIELD2NAME: {
+        *           FUNCTON1NAME: FUNCTION1VALUE
+        *       }
+        *   },
+        *   fieldName: FIELDNAME, // the field name on which is grouped
+        *   hasSubgroups: true, // false if there are not sub group items and this is the top most group
+        *   items: [
+        *   // either the inner group items (if hasSubgroups is true) or the data records
+        *      {
+        *          aggregates: {
+        *              //nested group aggregates
+        *          },
+        *          fieldName: NESTEDGROUPFIELDNAME,
+        *          hasSubgroups: false,
+        *          items: [
+        *          // data records
+        *          ],
+        *          value: NESTEDGROUPVALUE
+        *      },
+        *      //nestedgroup2, nestedgroup3, etc.
+        *   ],
+        *   value: VALUE // value of the field on which is grouped
+        * }
+        * // group2, group3, etc.
+        * ]
         * @option {Object} [schema.model] Describes the Model
         * _example
         *    var dataSource = new kendo.data.DataSource({
