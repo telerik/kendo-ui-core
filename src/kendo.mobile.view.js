@@ -698,7 +698,7 @@
         },
 
         _hideViews: function(container) {
-            return container.children(roleSelector("view splitview")).hide();
+            return container.children(roleSelector("view splitview popover")).hide();
         },
 
         _setupLayouts: function(element) {

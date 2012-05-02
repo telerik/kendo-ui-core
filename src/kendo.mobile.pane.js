@@ -7,6 +7,7 @@
         Widget = ui.Widget,
         ViewEngine = mobile.ViewEngine,
         Loader = mobile.ui.Loader,
+        PopOver = mobile.ui.PopOver,
 
         EXTERNAL = "external",
         HREF = "href",
@@ -251,8 +252,10 @@
                 link.attr(HREF, DUMMY_HREF);
                 setTimeout(function() { link.attr(HREF, href); });
 
-                if (rel === "actionsheet") {
-                    $(href).data("kendoMobileActionSheet").openFor(link);
+                if (rel === "popover") {
+                    PopOver.init($(href)).openFor(link);
+                } else if (rel === "actionsheet") {
+                    kendo.initWidget($(href), {}, kendo.mobile.ui).openFor(link);
                 } else {
                     if (target === "_top") {
                         pane = mobile.application.pane;
