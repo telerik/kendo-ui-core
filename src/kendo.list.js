@@ -190,22 +190,42 @@
             }
         },
 
-        _popup: function() {
-            var that = this,
-                list = that.list,
-                options = that.options,
-                wrapper = that.wrapper,
-                computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0,
-                computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth(),
-                width;
+        _adjustListWidth: function() {
+            var list = this.list,
+                wrapper = this.wrapper,
+                computedStyle, computedWidth, width;
+
+            computedStyle = window.getComputedStyle ? window.getComputedStyle(wrapper[0], null) : 0;
+            computedWidth = computedStyle ? parseFloat(computedStyle.width) : wrapper.outerWidth();
 
             if (computedStyle && ($.browser.mozilla || $.browser.msie)) { // getComputedStyle returns different box in FF and IE.
                 computedWidth += parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight) + parseFloat(computedStyle.borderLeftWidth) + parseFloat(computedStyle.borderRightWidth);
             }
 
+            width = computedWidth - (list.outerWidth() - list.width());
+
+            list.css({
+                fontFamily: wrapper.css("font-family"),
+                width: width
+            });
+
+            return true;
+        },
+
+        _popup: function() {
+            var that = this,
+                list = that.list,
+                options = that.options,
+                wrapper = that.wrapper,
+                opened = false;
+
             that.popup = new ui.Popup(list, extend({}, options.popup, {
                 anchor: wrapper,
                 open: function(e) {
+                    if (!opened) {
+                        opened = that._adjustListWidth();
+                    }
+
                     if (that.trigger(OPEN)) {
                         e.preventDefault();
                     }
@@ -217,13 +237,6 @@
                 },
                 animation: options.animation
             }));
-
-            width = computedWidth - (list.outerWidth() - list.width());
-
-            list.css({
-                fontFamily: wrapper.css("font-family"),
-                width: width
-            });
 
             that._touchScroller = kendo.touchScroller(that.popup.element);
         },
