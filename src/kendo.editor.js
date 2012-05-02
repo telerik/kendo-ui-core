@@ -3072,8 +3072,9 @@ var Clipboard = Class.extend({
     onpaste: function(e) {
         var editor = this.editor,
             range = editor.getRange(),
+            bom = "\ufeff",
             startRestorePoint = new RestorePoint(range),
-            clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: '\ufeff'});
+            clipboardNode = dom.create(editor.document, 'div', {className:'k-paste-container', innerHTML: bom });
 
         editor.body.appendChild(clipboardNode);
 
@@ -3094,6 +3095,8 @@ var Clipboard = Class.extend({
         }
 
         setTimeout(function() {
+            var html, args = { html: "" };
+
             selectRange(range);
             dom.remove(clipboardNode);
 
@@ -3101,7 +3104,12 @@ var Clipboard = Class.extend({
                 dom.remove(clipboardNode.lastChild);
             }
 
-            var args = { html: clipboardNode.innerHTML };
+            html = clipboardNode.innerHTML;
+
+            if (html != bom) {
+                args.html = html;
+            }
+
             editor.trigger("paste", args);
             editor.clipboard.paste(args.html, true);
             editor.undoRedoStack.push(new GenericCommand(startRestorePoint, new RestorePoint(editor.getRange())));
