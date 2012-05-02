@@ -1443,8 +1443,31 @@
                     height -= that.wrapper.children(".k-grid-footer").outerHeight();
                 }
 
-                if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
-                    that.content.height(height);
+                var isGridHeightSet = function(el) {
+                    var initialHeight, newHeight;
+                    if (el[0].style.height) {
+                        return true;
+                    } else {
+                        initialHeight = el.height();
+                    }
+
+                    el.height("auto");
+                    newHeight = el.height();
+
+                    if (initialHeight != newHeight) {
+                        el.height("");
+                        return true;
+                    }
+                    el.height("");
+                    return false;
+                };
+
+                if (isGridHeightSet(that.wrapper)) { // set content height only if needed
+                    if (height > scrollbar * 2) { // do not set height if proper scrollbar cannot be displayed
+                        that.content.height(height);
+                    } else {
+                        that.content.height(scrollbar * 2 + 1);
+                    }
                 }
             }
         },
