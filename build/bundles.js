@@ -5,6 +5,8 @@ var fs = require("fs"),
     themes = require("./themes"),
     kendoBuild = require("./kendo-build"),
     kendoScripts = require("./kendo-scripts"),
+    Changelog = require("./changelog"),
+    GitHubApi = require("build/github-api"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     processFiles = kendoBuild.processFilesRecursive,
     mkdir = kendoBuild.mkdir,
@@ -270,44 +272,112 @@ function deployThirdPartyScripts(outputRoot) {
     });
 }
 
-function buildBundle(bundle, version, success) {
-    var name = bundle.name,
-        zips = 0,
-        licenseTemplate = template(readText(path.join(LEGAL_ROOT, bundle.sourceLicense)));
+var changelog = new Changelog();
 
-    bundle.licenses.forEach(function(license) {
-        var licenseName = license.name,
-            hasSource = license.source,
-            deployName = name + "." + version + "." + licenseName,
-            root = path.join(DEPLOY_ROOT, name + "." + licenseName),
-            packageName = path.join(DROP_LOCATION, deployName + ".zip"),
-            srcLicense = licenseTemplate({ version: version, year: startDate.getFullYear() }),
-            packageNameLatest = packageName.replace(version, LATEST);
+function fetchChangelog(callback) {
+    if (changelog.fetched) {
+        callback();
+        return;
+    }
 
-        console.log("Building " + deployName);
-        mkdir(root);
+    var github = new GitHubApi({
+        version: "3.0.0"
+    });
 
-        console.log("Deploying scripts");
-        deployScripts(root, bundle, srcLicense, hasSource);
-        deployThirdPartyScripts(root);
+    github.authenticate({
+        type: "oauth",
+        token: "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb"
+    });
 
-        console.log("Deploying styles");
-        deployStyles(root, bundle, srcLicense, hasSource);
+    github.issues.getAllMilestones({
+        user: "telerik",
+        repo: "kendo"
+    }, function(err, res) {
+        var ver = JSON.parse(kendoBuild.readText("VERSION"));
 
-        console.log("Deploying licenses");
-        deployLicenses(root, bundle);
+        var milestones = changelog.filterMilestones(res, ver);
 
-        if (!bundle.skipExamples) {
-            console.log("Deploying examples");
-            deployExamples(root, bundle);
+        function gatherIssues(callback) {
+            if (milestones.length == 0) {
+                changelog.fetched = true;
+                callback();
+            } else {
+                var milestone = milestones.pop();
+
+                github.issues.repoIssues({
+                    user: "telerik",
+                    repo: "kendo",
+                    state: "closed",
+                    milestone: milestone.number
+                }, function(err, res) {
+                    changelog.groupIssues(res);
+
+                    gatherIssues(callback);
+                });
+            }
         }
 
-        zip(packageName, root, function() {
-            kendoBuild.copyFileSync(packageName, packageNameLatest);
+        gatherIssues(callback);
+    });
+}
 
-            if (success && ++zips === bundle.licenses.length) {
-                success();
+function deployChangelog(root, bundle, version) {
+    var changelogTemplate = kendoBuild.readText(path.join("build", "templates", "changelog.html")),
+        outputFile = path.join(root, "changelog.html");
+
+    changelogTemplate = kendoBuild.template(changelogTemplate);
+
+    kendoBuild.writeText(outputFile, changelogTemplate({
+        version: version,
+        issues: changelog.groupedIssues,
+        suites: bundle.suites
+    }));
+}
+
+function buildBundle(bundle, version, success) {
+    fetchChangelog(function() {
+        var name = bundle.name,
+            zips = 0,
+            licenseTemplate = template(readText(path.join(LEGAL_ROOT, bundle.sourceLicense)));
+
+        bundle.licenses.forEach(function(license) {
+            var licenseName = license.name,
+                hasSource = license.source,
+                deployName = name + "." + version + "." + licenseName,
+                root = path.join(DEPLOY_ROOT, name + "." + licenseName),
+                packageName = path.join(DROP_LOCATION, deployName + ".zip"),
+                srcLicense = licenseTemplate({ version: version, year: startDate.getFullYear() }),
+                packageNameLatest = packageName.replace(version, LATEST);
+
+            console.log("Building " + deployName);
+            mkdir(root);
+
+            /*console.log("Deploying scripts");
+            deployScripts(root, bundle, srcLicense, hasSource);
+            deployThirdPartyScripts(root);
+
+            console.log("Deploying styles");
+            deployStyles(root, bundle, srcLicense, hasSource);
+
+            console.log("Deploying licenses");
+            deployLicenses(root, bundle);
+            */
+
+            if (!bundle.skipExamples) {
+                console.log("Deploying examples");
+                deployExamples(root, bundle);
             }
+
+            console.log("Deploying changelog");
+            deployChangelog(root, bundle, version);
+
+            zip(packageName, root, function() {
+                kendoBuild.copyFileSync(packageName, packageNameLatest);
+
+                if (success && ++zips === bundle.licenses.length) {
+                    success();
+                }
+            });
         });
     });
 }
