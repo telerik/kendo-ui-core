@@ -289,6 +289,7 @@
                 that._setupElementClass();
                 that._attachMeta();
                 that._startHistory();
+                that._setupDocumentTitle();
             });
         },
 
@@ -472,6 +473,16 @@
             if (HIDEBAR) {
                 WINDOW.bind("load " + ORIENTATIONEVENT, proxy(that._hideBar, that));
             }
+        },
+
+        _setupDocumentTitle: function() {
+            var that = this,
+                defaultTitle = document.title;
+
+            that.pane.bind("viewShow", function(e) {
+                var title = e.view.title;
+                document.title = title !== undefined ? title : defaultTitle;
+            });
         },
 
         _hideBar: function() {

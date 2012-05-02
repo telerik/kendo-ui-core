@@ -78,6 +78,14 @@
                 equal(application.element.find("#view-title").text(), "foo", "view title applies view title attribute");
             });
 
+            test("Applies view title attribute contents to document title", function() {
+                setup('<div data-layout="foo" data-role="view" data-title="foo" id="page1">Page 1</div> \
+                       <div data-role="layout" data-id="foo"><div data-role="header"><div data-role="navbar"><span id="view-title" data-role="view-title"></span></div></div></div> \
+                 ');
+
+                equal(document.title, "foo", "view title applies view title attribute");
+            });
+
             if (kendo.support.mobileOS.android) {
                 test("Appends precomposed icon meta link", function() {
                     setup('<div data-role="view" id="test1">Page 1</div>', {
