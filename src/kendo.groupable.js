@@ -246,7 +246,8 @@
             return position;
         },
         _drag: function(event) {
-            var position = this._dropCuePosition(event.pageX);
+            var location = kendo.touchLocation(event),
+                position = this._dropCuePosition(location.x);
             if(position) {
                 dropCue.css({ left: position.left });
             }
