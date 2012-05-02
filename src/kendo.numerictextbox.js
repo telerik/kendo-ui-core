@@ -506,6 +506,7 @@
         _focusout: function() {
             var that = this;
 
+            clearTimeout(that._focusing);
             that._inputWrapper.removeClass(FOCUSED);
             that._blur();
         },
