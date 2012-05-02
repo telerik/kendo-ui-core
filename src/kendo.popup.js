@@ -235,6 +235,7 @@
                 options = that.options,
                 animation, openEffects, closeEffects;
 
+
             if (that.visible()) {
                 if (that._closing || that.trigger(CLOSE)) {
                     return;
@@ -256,6 +257,7 @@
 
                 that._closing = true;
 
+                debugger;
                 that.element.kendoStop(true).kendoAnimate(animation);
             }
         },
