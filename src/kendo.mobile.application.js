@@ -280,7 +280,7 @@
 
             that.options = $.extend({ hideAddressBar: true, transition: "" }, options);
             kendo.Observable.fn.init.call(that, that.options);
-            that.element = element ? $(element) : $(document.body);
+            that.element = $(element ? element : document.body);
 
             $(function(){
                 that._setupPlatform();
