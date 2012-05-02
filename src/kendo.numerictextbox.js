@@ -514,9 +514,9 @@
         _format: function(format) {
             var numberFormat = kendo.culture().numberFormat;
 
-            if (format.indexOf("c") > -1) {
+            if (format.toLowerCase().indexOf("c") > -1) {
                 numberFormat = numberFormat.currency;
-            } else if (format.indexOf("p") > -1) {
+            } else if (format.toLowerCase().indexOf("p") > -1) {
                 numberFormat = numberFormat.percent;
             }
 
