@@ -130,7 +130,12 @@ var suiteScripts = {
         "kendo.editable.js",
         "kendo.filtermenu.js",
         "kendo.timepicker.js",
-        "kendo.slider.js"
+        "kendo.slider.js",
+        "kendo.dataviz.core.js",
+        "kendo.dataviz.themes.js",
+        "kendo.dataviz.chart.js",
+        "kendo.dataviz.gauge.js",
+        "kendo.dataviz.svg.js"
     ],
 };
 
