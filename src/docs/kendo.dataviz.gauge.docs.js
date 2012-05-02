@@ -161,6 +161,8 @@
          * @option {number} [scale.endAngle] <210> The end angle of the gauge.
          * @option {Number} [scale.min] <0> The minimum value of the scale.
          * @option {Number} [scale.max] <100> The maximum value of the scale.
+         * @option {Boolean} [scale.reverse] <false>
+         * Reverses the scale direction - values are increase anticlockwise.
          * @option {Array} [scale.ranges] The ranges of the scale.
          * The range fields:
          * <div class="details-list">
@@ -462,6 +464,10 @@
          * @option {Number} [scale.minorUnit] The interval between minor divisions.
          * @option {Number} [scale.min] <0> The minimum value of the scale.
          * @option {Number} [scale.max] <100> The maximum value of the scale.
+         * @option {Boolean} [scale.reverse] <false>
+         * Reverses the axis direction - values increase from right to left and from top to bottom.
+         * @option {Boolean} [scale.mirror] Mirrors the scale labels and ticks.
+         * If the labels are normally on the left side of the scale, mirroring the scale will render them to the right.
          * @option {Array} [scale.ranges] The ranges of the scale.
          * The range fields:
          * <div class="details-list">
