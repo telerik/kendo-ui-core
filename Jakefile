@@ -8,8 +8,6 @@ var path = require("path"),
     copyDir = kendoBuild.copyDirSyncRecursive,
     mkdir = kendoBuild.mkdir,
     zip = kendoBuild.zip,
-    GitHubApi = require("build/github-api"),
-    Changelog = require("build/changelog"),
     kendoScripts = require("build/kendo-scripts");
 
 // Configuration ==============================================================
@@ -197,59 +195,6 @@ task("cdn", ["clean", "merge-scripts"], function() {
         kendoBuild.msBuild(CDN_PROJECT, ["/p:Version=" + version(), "/p:BundleRoot=" + path.join("..", CDN_BUNDLE_PATH)]);
     });
 }, true);
-
-desc("Get changelog from GitHub");
-task("changelog", function() {
-    var changelog = new Changelog();
-
-    var github = new GitHubApi({
-        version: "3.0.0"
-    });
-
-    github.authenticate({
-        type: "oauth",
-        token: "5dd646a3d9d8d5fb69fe59c163fc84b76fc67fcb"
-    });
-
-    github.issues.getAllMilestones({
-        user: "telerik",
-        repo: "kendo"
-    }, function(err, res) {
-        var ver = JSON.parse(kendoBuild.readText("VERSION"));
-
-        var milestones = changelog.filterMilestones(res, ver);
-
-        function gatherIssues(callback) {
-            if (milestones.length == 0) {
-                callback();
-            } else {
-                var milestone = milestones.pop();
-
-                github.issues.repoIssues({
-                    user: "telerik",
-                    repo: "kendo",
-                    state: "closed",
-                    milestone: milestone.number
-                }, function(err, res) {
-                    changelog.groupIssues(res);
-
-                    gatherIssues(callback);
-                });
-            }
-        }
-
-        gatherIssues(function() {
-            var changelogTemplate = kendoBuild.readText(path.join("build", "templates", "changelog.html"));
-
-            changelogTemplate = kendoBuild.template(changelogTemplate);
-
-            kendoBuild.writeText("changelog.html", changelogTemplate({
-                version: version(),
-                issues: changelog.groupedIssues
-            }));
-        });
-    });
-});
 
 namespace("download-builder", function() {
     desc("Build staging download builder site");
