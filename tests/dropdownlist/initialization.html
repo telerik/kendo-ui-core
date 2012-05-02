@@ -15,6 +15,7 @@
         <script src="../../src/kendo.list.js"></script>
         <script src="../../src/kendo.dropdownlist.js"></script>
         <link rel="stylesheet" href="../qunit/qunit/qunit.css" type="text/css" />
+        <link type="text/css" href="../../styles/web/kendo.common.css" rel="stylesheet"/>
     </head>
     <body>
         <h1 id="qunit-header">DropDownList Initialization</h1>
@@ -585,6 +586,16 @@
                 var dropdownlist = new DropDownList($("<input/>"));
 
                 ok(dropdownlist.popup.element.hasClass("km-scroll-wrapper"));
+            });
+
+            test("dropdownlist can be initialized in hidden container", function() {
+                var div = $("<div style='display: none'></div>").appendTo(document.body),
+                    dropdown = input.appendTo(div).kendoDropDownList().data("kendoDropDownList");
+
+                div.show();
+                dropdown.popup.open();
+
+                equal(dropdown.popup.element.parent().width(), dropdown.wrapper.width());
             });
 
         </script>
