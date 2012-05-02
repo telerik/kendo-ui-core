@@ -13,6 +13,7 @@
         DUMMY_HREF = "#!",
 
         NAVIGATE = "navigate",
+        VIEW_SHOW = "viewShow",
 
         BACK = "#:back",
         // navigation element roles
@@ -120,6 +121,10 @@
                 loader: that.loader
             });
 
+            that.viewEngine.bind(VIEW_SHOW, function(e) {
+                that.trigger(VIEW_SHOW, e);
+            })
+
             that.history = [];
             that._setupAppLinks();
         },
@@ -139,7 +144,15 @@
              * @param {Event} e
              * @param {jQueryObject} e.url The url of the view
              */
-            NAVIGATE
+            NAVIGATE,
+            /**
+             * Fires after the pane displays a view.
+             * @name kendo.mobile.ui.Pane#viewShow
+             * @event
+             * @param {Event} e
+             * @param {View} e.view The displayed view
+             */
+            VIEW_SHOW
         ],
 
         /**
