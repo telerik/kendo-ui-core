@@ -1855,7 +1855,7 @@
         },
 
         dataItem: function(tr) {
-            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row)').index($(tr))];
+            return this._data[this.tbody.find('> tr:not(.k-grouping-row,.k-detail-row,.k-group-footer)').index($(tr))];
         },
 
         expandRow: function(tr) {
