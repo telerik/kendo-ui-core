@@ -106,7 +106,7 @@
             test("parse should parse percent number", function() {
                 var value = "% 12";
 
-                equal(parseF(value, "en-US"), 12);
+                equal(parseF(value, "en-US"), 0.12);
             });
 
             test("parseFloat should use decimal separator from currency object", function() {
@@ -120,7 +120,7 @@
             test("parse should use decimal separator from percent object", function() {
                 var percent = customCulture.numberFormat.percent,
                     value = "% 1" + percent[","] + "123" + percent["."] + "12",
-                    expected = 1123.12;
+                    expected = 11.2312;
 
                 equal(parseF(value, "custom"), expected);
             });
@@ -148,7 +148,7 @@
             test("parseF should parse negative percent number", function() {
                 var value = kendo.culture().numberFormat.percent.pattern[0].replace("n", "1,123.23");
 
-                equal(parseF(value), -1123.23);
+                equal(parseF(value), -11.2323);
             });
 
             test("parse exponential number", function() {

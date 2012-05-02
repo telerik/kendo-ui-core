@@ -1515,7 +1515,7 @@ function pad(number) {
             symbol = currency.symbol,
             percentSymbol = percent.symbol,
             negative = value.indexOf("-") > -1,
-            parts;
+            parts, isPercent;
 
         //handle exponential number
         if (exponentRegExp.test(value)) {
@@ -1534,6 +1534,7 @@ function pad(number) {
                 negative = true;
             }
         } else if (value.indexOf(percentSymbol) > -1) {
+            isPercent = true;
             number = percent;
             symbol = percentSymbol;
         }
@@ -1550,6 +1551,10 @@ function pad(number) {
             value = null;
         } else if (negative) {
             value *= -1;
+        }
+
+        if (value && isPercent) {
+            value /= 100;
         }
 
         return value;
