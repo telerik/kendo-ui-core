@@ -537,7 +537,7 @@
             }
 
             element.type = TYPE;
-            text[0].type = TYPE;
+            text[0].type = "text";
 
             text[0].style.cssText = element.style.cssText;
             that._text = text.attr("readonly", true).addClass(element.className);
