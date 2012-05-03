@@ -362,6 +362,14 @@
                ok(combobox.input.hasClass("test"));
            });
 
+           test("copy input className to the wrapper", function() {
+               input.addClass("test").kendoComboBox();
+
+               var combobox = input.data("kendoComboBox");
+
+               ok(combobox.wrapper.hasClass("test"));
+           });
+
            test("set height if items height is bigger than options.height", function() {
                var dataSource = new kendo.data.DataSource.create([{text: 1, value: 1}, {text:2, value:2}]);
                dataSource.read();
