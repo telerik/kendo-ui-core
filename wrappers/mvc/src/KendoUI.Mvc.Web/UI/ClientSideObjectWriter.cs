@@ -54,7 +54,7 @@ namespace KendoUI.Mvc.UI
             //Escape meta characters: http://api.jquery.com/category/selectors/
             var selector = @";&,.+*~':""!^$[]()|/".ToCharArray().Aggregate(id, (current, chr) => current.Replace(chr.ToString(), @"\\" + chr));
 
-            writer.Write("jQuery('#{0}').{1}(".FormatWith(selector, type));
+            writer.Write("jQuery(document).ready(function(){{jQuery('#{0}').{1}(".FormatWith(selector, type));
             hasStarted = true;
 
             return this;
@@ -639,7 +639,7 @@ namespace KendoUI.Mvc.UI
                 writer.Write("}");
             }
 
-            writer.Write(");");
+            writer.Write(");});");
 
             hasStarted = false;
             appended = false;

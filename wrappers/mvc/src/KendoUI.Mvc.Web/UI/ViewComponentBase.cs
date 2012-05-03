@@ -39,7 +39,7 @@ namespace KendoUI.Mvc.UI
 
             HtmlAttributes = new RouteValueDictionary();
 
-            IsSelfInitialized = (ViewContext.HttpContext.Items["$SelfInitialize$"] != null) || ViewContext.HttpContext.Request.IsAjaxRequest();
+            IsSelfInitialized = true;
         }
 
         /// <summary>
@@ -221,53 +221,8 @@ namespace KendoUI.Mvc.UI
 
             if (IsSelfInitialized)
             {
-                writer.AddAttribute(HtmlTextWriterAttribute.Type, "text/javascript");
                 writer.RenderBeginTag(HtmlTextWriterTag.Script);
-
-                if (ViewContext.HttpContext.Request.IsAjaxRequest())
-                {
-                    var registrar = ScriptRegistrar.Current;
-
-                    registrar.ScriptableComponents.Clear();
-                    registrar.ScriptableComponents.Add(this);
-
-                    try
-                    {
-                        var dependencies = registrar.CollectScriptFiles();
-                        var common = dependencies.FirstOrDefault(file => file.Contains("telerik.common"));
-                        var buffer = new StringWriter();
-                        WriteInitializationScript(buffer);
-
-                        var initializationScript = "jQuery.telerik.load({0},function(){{ {1} }});".FormatWith(new JavaScriptSerializer().Serialize(dependencies),
-                            buffer.ToString());
-
-                        if (common != null)
-                        {
-                            writer.WriteLine("if(!jQuery.telerik){");
-                            writer.WriteLine("jQuery.ajax({");
-                            writer.WriteLine("url:\"{0}\",".FormatWith(common));
-                            writer.WriteLine("dataType:\"script\",");
-                            writer.WriteLine("cache:false,");
-                            writer.WriteLine("success:function(){");
-                            writer.WriteLine(initializationScript);
-                            writer.WriteLine("}});}else{");
-                            writer.WriteLine(initializationScript);
-                            writer.WriteLine("}");
-                        }
-                        else
-                        {
-                            writer.WriteLine(initializationScript);
-                        }
-                    }
-                    catch (FileNotFoundException)
-                    {
-                        WriteInitializationScript(writer);
-                    }
-                }
-                else
-                {
-                    WriteInitializationScript(writer);
-                }
+                WriteInitializationScript(writer);
                 writer.RenderEndTag();
             }
         }
