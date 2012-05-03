@@ -1980,7 +1980,7 @@
     });
 
     var LineChartMixin = {
-        splitSegments: function() {
+        renderSegments: function() {
             var chart = this,
                 options = chart.options,
                 series = options.series,
@@ -2028,7 +2028,8 @@
                 }
             }
 
-            return segments;
+            chart._segments = segments;
+            chart.append.apply(chart, segments);
         },
 
         createSegment: function(linePoints, currentSeries, seriesIx) {
@@ -2082,10 +2083,9 @@
             var chart = this;
 
             CategoricalChart.fn.render.apply(chart);
-            chart.computeAxisRanges();
 
-            chart._segments = chart.splitSegments();
-            chart.append.apply(chart, chart._segments);
+            chart.computeAxisRanges();
+            chart.renderSegments();
         },
 
         createPoint: function(value, category, categoryIx, series, seriesIx) {
@@ -2455,7 +2455,8 @@
             var chart = this;
 
             ScatterChart.fn.render.call(chart);
-            chart.append.apply(chart, chart.splitSegments());
+
+            chart.renderSegments();
         },
 
         getViewElements: function(view) {
