@@ -21,99 +21,19 @@ namespace KendoUI.Mvc.UI
 
         public IHtmlNode WindowTag()
         {
-            return new HtmlElement("div")
-                   .Attribute("style", !Window.Visible ? "display:none" : string.Empty)
+            string cssText = !Window.Visible ? "display:none" : string.Empty;
+
+            var element = new HtmlElement("div")
+                   .Attribute("style", cssText)
                    .Attribute("id", Window.Id)
-                   .Attributes(Window.HtmlAttributes)
-                   .PrependClass(UIPrimitives.Widget, "t-window");
-        }
+                   .Attributes(Window.HtmlAttributes);
 
-        public IHtmlNode HeaderTag()
-        {
-            IHtmlNode header = new HtmlElement("div")
-                  .AddClass("t-window-titlebar", UIPrimitives.Header);
-
-            new LiteralNode("&nbsp;").AppendTo(header);
-
-            return header;
-        }
-
-        public IHtmlNode IconTag()
-        {
-            return new HtmlElement("img", TagRenderMode.SelfClosing)
-                    .Attribute("alt", Window.IconAlternativeText.HasValue() ? Window.IconAlternativeText : "icon", false)
-                    .AddClass(UIPrimitives.Image)
-                    .Attribute("src", Window.IconUrl);
-        }
-
-        public IHtmlNode TitleTag() 
-        {
-            IHtmlNode title = new HtmlElement("span")
-                   .AddClass("t-window-title");
-
-            if (Window.IconUrl.HasValue())
-                IconTag().AppendTo(title);
-
-            new TextNode(Window.Title.HasValue() ? Window.Title : Window.Name).AppendTo(title);
-
-            return title;
-        }
-
-        public IHtmlNode ButtonContainerTag()
-        {
-            return new HtmlElement("div").AddClass("t-window-actions t-header");
-        }
-
-        public IHtmlNode ButtonTag(IWindowButton button)
-        {
-            IHtmlNode linkTag = new HtmlElement("a")
-                                .AddClass(UIPrimitives.Link)
-                                .Attribute("href", button.Url);
-
-            linkTag.Children.Add(new HtmlElement("span")
-                            .AddClass(UIPrimitives.Icon, button.CssClass)
-                            .Html(button.Name));
-
-
-            return linkTag;
-        }
-
-        public IHtmlNode ContentTag()
-        {
-            var content = new HtmlElement("div")
-                               .AddClass("t-window-content", UIPrimitives.Content)
-                               .Css("overflow", Window.Scrollable ? "auto" : "hidden")
-                               .Attributes(Window.ContentHtmlAttributes);
-
-            if (Window.Width != 0)
+            if (Window.Template.HasValue())
             {
-                content.Css("width", Window.Width + "px");
+                Window.Template.Apply(element);
             }
 
-            if (Window.Height != 0)
-            {
-                content.Css("height", Window.Height + "px");
-            }
-
-            if (Window.ContentUrl.HasValue() && RemoteUrlRegex.IsMatch(Window.ContentUrl))
-            {
-                new HtmlElement("iframe")
-                    .Attributes(new {
-                        src = Window.ContentUrl,
-                        title = Window.Title,
-                        style = "border: 0; width: 100%; height: 100%;",
-                        frameborder = "0"
-                    })
-                    .Html("This page requires frames in order to show content")
-                    .AppendTo(content);
-            } 
-            else if (Window.Template.HasValue())
-            {
-                Window.Template.Apply(content);
-            }
-            
-            return content;
+            return element;
         }
-
     }
 }

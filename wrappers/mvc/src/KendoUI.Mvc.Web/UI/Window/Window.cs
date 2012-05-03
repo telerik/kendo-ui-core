@@ -18,7 +18,7 @@ namespace KendoUI.Mvc.UI
         private readonly IList<IEffect> defaultEffects = new List<IEffect> { new ZoomAnimation(), new PropertyAnimation(PropertyAnimationType.Opacity) };
 
         private readonly IWindowHtmlBuilderFactory builderFactory;
-        private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton{Name = "Close", CssClass = "t-close"} };
+        private readonly IList<IWindowButton> defaultButtons = new List<IWindowButton> { new HeaderButton{Name = "Close", CssClass = "k-close"} };
         
         private string loadContentFromUrl;
 
@@ -26,8 +26,6 @@ namespace KendoUI.Mvc.UI
             : base(viewContext, clientSideObjectWriterFactory)
         {
             this.builderFactory = builderFactory;
-
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.draganddrop.js", "telerik.window.js" });
 
             Template = new HtmlTemplate();
 
@@ -180,7 +178,7 @@ namespace KendoUI.Mvc.UI
 
         public override void WriteInitializationScript(TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tWindow", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoWindow", writer);
 
             objectWriter.Start();
 
@@ -190,19 +188,15 @@ namespace KendoUI.Mvc.UI
             }
 
             //client events
-            objectWriter.AppendClientEvent("onClose", ClientEvents.OnClose);
-            objectWriter.AppendClientEvent("onError", ClientEvents.OnError);
-            objectWriter.AppendClientEvent("onLoad", ClientEvents.OnLoad);
-            objectWriter.AppendClientEvent("onDragStart", ClientEvents.OnDragStart);
-            objectWriter.AppendClientEvent("onDragEnd", ClientEvents.OnDragEnd);
-            objectWriter.AppendClientEvent("onOpen", ClientEvents.OnOpen);
-            objectWriter.AppendClientEvent("onActivate", ClientEvents.OnActivate);
-            objectWriter.AppendClientEvent("onResize", ClientEvents.OnResize);
-            objectWriter.AppendClientEvent("onRefresh", ClientEvents.OnRefresh);
+            objectWriter.AppendClientEvent("close", ClientEvents.OnClose);
+            objectWriter.AppendClientEvent("open", ClientEvents.OnOpen);
+            objectWriter.AppendClientEvent("activate", ClientEvents.OnActivate);
+            objectWriter.AppendClientEvent("resize", ClientEvents.OnResize);
+            objectWriter.AppendClientEvent("refresh", ClientEvents.OnRefresh);
 
             //properties
             objectWriter.Append("modal", Modal);
-            objectWriter.Append("contentUrl", ContentUrl);
+            objectWriter.Append("content", ContentUrl);
             objectWriter.Append("draggable", Draggable);
             objectWriter.Append("resizable", ResizingSettings.Enabled);
 
@@ -232,24 +226,7 @@ namespace KendoUI.Mvc.UI
 
             IWindowHtmlBuilder builder = builderFactory.Create(this);
 
-            IHtmlNode windowTag = builder.WindowTag();
-
-            //Header
-            IHtmlNode headerTag = builder.HeaderTag().AppendTo(windowTag);
-
-            builder.TitleTag().AppendTo(headerTag);
-
-            if (Buttons.Container.Count > 0)
-            {
-                IHtmlNode buttonContainerTag = builder.ButtonContainerTag().AppendTo(headerTag);
-                Buttons.Container.Each(button => builder.ButtonTag(button).AppendTo(buttonContainerTag));
-            }
-
-            //Content
-            builder.ContentTag().AppendTo(windowTag);
-
-            //output window HTML
-            windowTag.WriteTo(writer);
+            builder.WindowTag().WriteTo(writer);
 
             base.WriteHtml(writer);
         }
