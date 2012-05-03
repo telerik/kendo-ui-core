@@ -456,8 +456,8 @@
                 value = that._parse(field, value);
 
                 if (!equal(value, that.get(field))) {
-                    ObservableObject.fn.set.call(that, field, value, initiator);
                     that.dirty = true;
+                    ObservableObject.fn.set.call(that, field, value, initiator);
                 }
             }
         },
