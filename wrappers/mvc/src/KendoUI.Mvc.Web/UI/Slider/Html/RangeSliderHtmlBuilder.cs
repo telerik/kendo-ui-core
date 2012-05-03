@@ -16,7 +16,7 @@ namespace KendoUI.Mvc.UI.Html
             var div = new HtmlElement("div")
                         .Attributes( new { id = renderingData.Id }) 
                         .Attributes(renderingData.HtmlAttributes)
-                        .ToggleClass("t-state-disabled", !renderingData.Enabled);
+                        .ToggleClass("k-state-disabled", !renderingData.Enabled);
 
             new HtmlElement("input", TagRenderMode.SelfClosing)
                    .Attributes(new

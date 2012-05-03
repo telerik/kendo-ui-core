@@ -16,15 +16,13 @@ namespace KendoUI.Mvc.UI
         {
             this.rendererFactory = rendererFactory;
 
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.draganddrop.js", "telerik.slider.js" });
-
             Orientation = SliderOrientation.Horizontal;
             TickPlacement = SliderTickPlacement.Both;
             ShowButtons = true;
             IncreaseButtonTitle = "Increase";
             DecreaseButtonTitle = "Decrease";
-            MinValue = (T)Convert.ChangeType(0, typeof(T));
-            MaxValue = (T)Convert.ChangeType(10, typeof(T));
+            Min = (T)Convert.ChangeType(0, typeof(T));
+            Max = (T)Convert.ChangeType(10, typeof(T));
             SmallStep = (T)Convert.ChangeType(1, typeof(T));
             ClientEvents = new SliderBaseClientEvents();
             Enabled = true;
@@ -32,87 +30,35 @@ namespace KendoUI.Mvc.UI
             Settings = new SliderTooltipSettings();
         }
 
-        public SliderOrientation Orientation
-        {
-            get;
-            set;
-        }
+        public SliderOrientation Orientation { get; set; }
 
-        public SliderTickPlacement TickPlacement
-        {
-            get;
-            set;
-        }
+        public SliderTickPlacement TickPlacement { get; set; }
 
-        public T MinValue
-        {
-            get;
-            set;
-        }
+        public T Min { get; set; }
 
-        public T MaxValue
-        {
-            get;
-            set;
-        }
+        public T Max { get; set; }
 
-        public T SmallStep
-        {
-            get;
-            set;
-        }
+        public T SmallStep { get; set; }
 
-        public T? LargeStep
-        {
-            get;
-            set;
-        }
+        public T? LargeStep { get; set; }
 
-        public SliderBaseClientEvents ClientEvents
-        {
-            get;
-            private set;
-        }
+        public SliderBaseClientEvents ClientEvents { get; private set; }
 
-        public bool Enabled
-        {
-            get;
-            set;
-        }
+        public bool Enabled { get; set; }
 
-        public T? Value
-        {
-            get;
-            set;
-        }
+        public T? Value { get; set; }
 
-        public SliderTooltipSettings Settings
-        {
-            get;
-            set;
-        }
+        public SliderTooltipSettings Settings { get; set; }
 
-        public bool? ShowButtons
-        {
-            get;
-            set;
-        }
+        public bool? ShowButtons { get; set; }
 
-        public string IncreaseButtonTitle
-        {
-            get;
-            set;
-        }
+        public string IncreaseButtonTitle { get; set; }
 
-        public string DecreaseButtonTitle
-        {
-            get;
-            set;
-        }
+        public string DecreaseButtonTitle { get; set; }
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "tSlider", writer);
+            var objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoSlider", writer);
 
             objectWriter.Start();
 
@@ -135,8 +81,8 @@ namespace KendoUI.Mvc.UI
             objectWriter.AppendObject("enabled", Enabled);
             objectWriter.AppendObject("smallStep", SmallStep);
             objectWriter.AppendObject("largeStep", LargeStep);
-            objectWriter.AppendObject("minValue", MinValue);
-            objectWriter.AppendObject("maxValue", MaxValue);
+            objectWriter.AppendObject("min", Min);
+            objectWriter.AppendObject("max", Max);
 
             Settings.SerializeTo("tooltip", objectWriter);
         }
@@ -155,7 +101,7 @@ namespace KendoUI.Mvc.UI
 
                 if (!result.HasValue)
                 {
-                    result = MinValue;
+                    result = Min;
                 }
 
                 value = "{0}".FormatWith(result);
@@ -175,8 +121,8 @@ namespace KendoUI.Mvc.UI
                 Id = Id,
                 Name = Name,
                 HtmlAttributes = HtmlAttributes,
-                MaxValue = MaxValue,
-                MinValue = MinValue,
+                MaxValue = Max,
+                MinValue = Min,
                 SmallStep = SmallStep,
                 Value = value,
                 Enabled = Enabled
@@ -191,7 +137,7 @@ namespace KendoUI.Mvc.UI
         {
             base.VerifySettings();
 
-            if (MinValue.CompareTo(MaxValue) >= 0)
+            if (Min.CompareTo(Max) >= 0)
             {
                 throw new ArgumentException(TextResource.MinPropertyMustBeLessThenMaxProperty.FormatWith("Min", "Max"));
             }

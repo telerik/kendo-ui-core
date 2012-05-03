@@ -17,9 +17,9 @@ namespace KendoUI.Mvc.UI
 
         public void SerializeTo(IClientSideObjectWriter writer)
         {
-            writer.AppendClientEvent("onLoad", OnLoad);
-            writer.AppendClientEvent("onChange", OnChange);
-            writer.AppendClientEvent("onSlide", OnSlide);
+            writer.AppendClientEvent("load", OnLoad);
+            writer.AppendClientEvent("change", OnChange);
+            writer.AppendClientEvent("slide", OnSlide);
         }
     }
 }

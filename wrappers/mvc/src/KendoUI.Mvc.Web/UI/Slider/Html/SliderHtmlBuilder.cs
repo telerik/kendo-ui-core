@@ -25,7 +25,7 @@ namespace KendoUI.Mvc.UI.Html
                        value = renderingData.Value
                    })
                    .Attributes(renderingData.HtmlAttributes)
-                   .ToggleClass("t-state-disabled", !renderingData.Enabled);
+                   .ToggleClass("k-state-disabled", !renderingData.Enabled);
         }
     }
 }
