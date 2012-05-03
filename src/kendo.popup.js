@@ -73,10 +73,6 @@
                 options.animation = { open: { show: true, effects: {} }, close: { hide: true, effects: {} } };
             }
 
-            if (!(EFFECTS in options.animation.close)) {
-                options.animation.close = extend(true, { reverse: true }, options.animation.open, options.animation.close);
-            }
-
             extend(options.animation.open, {
                 complete: function() {
                     that.wrapper.css({ overflow: VISIBLE }); // Forcing refresh causes flickering in mobile.
@@ -237,8 +233,7 @@
         close: function() {
             var that = this,
                 options = that.options,
-                animation,
-                effects;
+                animation, openEffects, closeEffects;
 
             if (that.visible()) {
                 if (that._closing || that.trigger(CLOSE)) {
@@ -249,12 +244,14 @@
                 WINDOW.unbind(RESIZE_SCROLL, that._resizeProxy);
 
                 animation = extend(true, {}, options.animation.close);
-                effects = that.element.data(EFFECTS);
+                openEffects = that.element.data(EFFECTS);
+                closeEffects = animation.effects;
 
                 that.wrapper = kendo.wrap(that.element).css({ overflow: HIDDEN });
 
-                if (effects) {
-                    animation.effects = effects;
+                if (!closeEffects && !kendo.size(closeEffects) && openEffects && kendo.size(openEffects)) {
+                    animation.effects = openEffects;
+                    animation.reverse = true;
                 }
 
                 that._closing = true;
