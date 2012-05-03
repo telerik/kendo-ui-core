@@ -2768,7 +2768,7 @@ div.k-slider
 .k-tooltip
 {
     position: absolute;
-    z-index: 10002;
+    z-index: 20000;
     border-style: solid;
     border-width: 2px;
     padding: 4px 5px 4px 6px;
