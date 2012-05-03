@@ -70,7 +70,7 @@ namespace KendoUI.Mvc.UI.Fluent
         /// <summary>Sets the minimum value of the slider.</summary>
         public SliderBuilder<T> Min(T value)
         {
-            Component.MinValue = value;
+            Component.Min = value;
 
             return this;
         }
@@ -78,7 +78,7 @@ namespace KendoUI.Mvc.UI.Fluent
         /// <summary>Sets the maximum value of the slider.</summary>
         public SliderBuilder<T> Max(T value)
         {
-            Component.MaxValue = value;
+            Component.Max = value;
 
             return this;
         }

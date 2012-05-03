@@ -62,23 +62,23 @@ using KendoUI.Mvc.UI.Html;
         [Fact]
         public void Should_not_throw_exception_if_value_is_bigger_than_minValue_or_equal_to_minValue_and_bigger_than_maxValue_or_equal_to_maxValue()
         {
-            component.MinValue = 0;
-            component.MaxValue = 2;
+            component.Min = 0;
+            component.Max = 2;
             component.Value = 1;
             Assert.DoesNotThrow(() => component.Render());
 
-            component.MinValue = 1;
-            component.MaxValue = 2;
+            component.Min = 1;
+            component.Max = 2;
             component.Value = 1;
             Assert.DoesNotThrow(() => component.Render());
 
-            component.MinValue = -2;
-            component.MaxValue = 2;
+            component.Min = -2;
+            component.Max = 2;
             component.Value = 1;
             Assert.DoesNotThrow(() => component.Render());
 
-            component.MinValue = 0;
-            component.MaxValue = 1;
+            component.Min = 0;
+            component.Max = 1;
             component.Value = 1;
             Assert.DoesNotThrow(() => component.Render());
         }
@@ -86,19 +86,19 @@ using KendoUI.Mvc.UI.Html;
         [Fact]
         public void Should_not_throw_exception_if_minValue_is_smaller_then_maxValue_or_equal_to_maxValue()
         {
-            component.MinValue = 1;
-            component.MaxValue = 2;
+            component.Min = 1;
+            component.Max = 2;
             Assert.DoesNotThrow(() => component.Render());
         }
 
         [Fact]
         public void Should_throw_exception_if_minValue_is_equal_or_bigger_then_maxValue()
         {
-            component.MinValue = 2;
-            component.MaxValue = 2;
+            component.Min = 2;
+            component.Max = 2;
             Assert.Throws<ArgumentException>(() => component.Render());
-            component.MinValue = 3;
-            component.MaxValue = 2;
+            component.Min = 3;
+            component.Max = 2;
             Assert.Throws<ArgumentException>(() => component.Render());
         }
 
@@ -106,8 +106,8 @@ using KendoUI.Mvc.UI.Html;
         public void Should_not_throw_exception_if_value_is_big_then_zero()
         {
             component.Value = 11;
-            component.MinValue = 0;
-            component.MaxValue = 10;
+            component.Min = 0;
+            component.Max = 10;
             Assert.DoesNotThrow(() => component.Render());
         }
     }
