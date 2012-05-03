@@ -814,6 +814,7 @@
     <Compile Include="UI\Splitter\SplitterClientEvents.cs" />
     <Compile Include="UI\Splitter\Splitter.cs" />
     <Compile Include="UI\Splitter\SplitterPane.cs" />
+    <Compile Include="UI\TextBox\Html\NumericTextBoxHtmlBuilder.cs" />
     <Compile Include="UI\TextBox\IntegerTextBox.cs" />
     <Compile Include="UI\TextBox\Fluent\IntegerTextBoxBuilder.cs" />
     <Compile Include="UI\TextBox\Fluent\PercentTextBoxBuilder.cs" />

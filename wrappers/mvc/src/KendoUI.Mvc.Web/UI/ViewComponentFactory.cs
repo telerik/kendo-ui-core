@@ -367,7 +367,7 @@ namespace KendoUI.Mvc.UI
         /// <returns>Returns <see cref="NumericTextBoxBuilder{double}"/>.</returns>
         public virtual NumericTextBoxBuilder<double> NumericTextBox()
         {
-            return NumericTextBoxBuilder<double>.Create(Register(() => new NumericTextBox<double>(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<double>())));
+            return NumericTextBoxBuilder<double>.Create(Register(() => new NumericTextBox<double>(ViewContext, ClientSideObjectWriterFactory)));
         }
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace KendoUI.Mvc.UI
         /// </example>
         public virtual NumericTextBoxBuilder<T> NumericTextBox<T>() where T: struct
         {
-            return NumericTextBoxBuilder<T>.Create(Register(() => new NumericTextBox<T>(ViewContext, ClientSideObjectWriterFactory, new TextBoxBaseHtmlBuilderFactory<T>())));
+            return NumericTextBoxBuilder<T>.Create(Register(() => new NumericTextBox<T>(ViewContext, ClientSideObjectWriterFactory)));
         }
 
         /// <summary>
@@ -707,10 +707,10 @@ namespace KendoUI.Mvc.UI
             var max = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
             if(min != null)
-                builder.MinValue(min);
+                builder.Min(min);
             
             if(max != null)
-                builder.MaxValue(max);
+                builder.Max(max);
 
             return builder;
                 
@@ -739,10 +739,10 @@ namespace KendoUI.Mvc.UI
             var max = GetRangeValidationParameter<TValue>(validators, maximumValidator);
 
             if (min != null)
-                builder.MinValue(min);
+                builder.Min(min);
 
             if (max != null)
-                builder.MaxValue(max);
+                builder.Max(max);
 
             return builder;
         }

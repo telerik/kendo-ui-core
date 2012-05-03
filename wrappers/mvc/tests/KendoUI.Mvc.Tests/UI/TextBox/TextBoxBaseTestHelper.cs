@@ -74,10 +74,7 @@ namespace KendoUI.Mvc.UI.Tests
 
             clientSideObjectWriterFactory.Setup(c => c.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<TextWriter>())).Returns(clientSideObjectWriter.Object);
 
-            NumericTextBox<T> input = new NumericTextBox<T>(viewContext, clientSideObjectWriterFactory.Object, inputRendererFactory.Object);
-
-            renderer = renderer ?? new TextBoxBaseHtmlBuilder<T>(input);
-            inputRendererFactory.Setup(f => f.Create(It.IsAny<NumericTextBox<T>>())).Returns(renderer);
+            NumericTextBox<T> input = new NumericTextBox<T>(viewContext, clientSideObjectWriterFactory.Object);
 
             return input;
         }
