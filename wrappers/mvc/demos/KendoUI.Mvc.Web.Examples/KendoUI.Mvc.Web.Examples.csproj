@@ -87,6 +87,7 @@
     <Compile Include="Controllers\Upload\ApiController.cs" />
     <Compile Include="Controllers\Upload\EventsController.cs" />
     <Compile Include="Controllers\Upload\IndexController.cs" />
+    <Compile Include="Controllers\Window\IndexController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +164,9 @@
     <Content Include="Areas\razor\Views\upload\events.cshtml" />
     <Content Include="Areas\razor\Views\upload\index.cshtml" />
     <Content Include="Areas\razor\Views\upload\result.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\razor\Views\window\index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
