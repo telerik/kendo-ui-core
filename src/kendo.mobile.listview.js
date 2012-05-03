@@ -54,6 +54,18 @@
         return this.nodeType === Node.TEXT_NODE && this.nodeValue.match(/^\s+$/);
     }
 
+    function enhanceItem(i, item) {
+        item = $(item);
+
+        var icon = item.data(kendo.ns + "icon"),
+            iconSpan = $('<span class="km-icon"/>');
+
+        if (icon) {
+            item.prepend(iconSpan);
+            iconSpan.addClass("km-" + icon);
+        }
+    }
+
     function enhanceLinkItem(i, item) {
         item = $(item);
 
@@ -591,7 +603,7 @@
 
         _style: function() {
             var that = this,
-                items,
+                items, i, len, node, nodeName,
                 options = that.options,
                 grouped = options.type === "group",
                 element = that.element,
@@ -619,8 +631,26 @@
 
             items = that.items();
 
-            items.children("a").each(enhanceLinkItem);
-            items.children("label").each(enhanceCheckBoxItem);
+            items.each(function () {
+                var that = this, enhanced = false;
+
+                for (i = 0, len = that.childNodes.length; i < len; i++) {
+                    node = that.childNodes[i];
+                    nodeName = node.nodeName.toUpperCase();
+
+                    if (nodeName == "A") {
+                        enhanceLinkItem(i, node);
+                        enhanced = true;
+                    } if (nodeName == "LABEL") {
+                        enhanceCheckBoxItem(i, node);
+                        enhanced = true;
+                    }
+                }
+
+                if (!enhanced) {
+                    enhanceItem(i, that);
+                }
+            });
 
             element.closest(".km-content").toggleClass("km-insetcontent", inset); // iOS has white background when the list is not inset.
         },

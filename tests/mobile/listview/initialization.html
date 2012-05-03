@@ -103,10 +103,21 @@
                 </ul>');
 
                 new ListView(dom);
+
                 ok(dom.find("#foo").is(".km-listview-link"), "link item has correct CSS class");
                 ok(dom.find("#foo2").is(".km-listview-link"), "link item with whitespace has correct CSS class");
                 ok(dom.find("#baz").is(".km-listview-link"), "link item has correct CSS class");
                 ok(!dom.find("#bar").is(".km-listview-link"), "mixed item does not receive CSS class");
+            });
+
+            test("if no links and checkboxes, data-icon should enhance the item", function() {
+                var dom = $('<ul> \
+                    <li data-icon="globe" id="foo">Test</li> \
+                </ul>');
+
+                new ListView(dom);
+
+                ok(dom.find("#foo > span.km-icon").hasClass("km-globe"), "item receives icon span and km-iconName on it");
             });
 
             asyncTest("toggles item as pressed on press/release", 2, function() {
