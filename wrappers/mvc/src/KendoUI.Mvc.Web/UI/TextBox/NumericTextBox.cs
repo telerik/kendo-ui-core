@@ -1,96 +1,118 @@
 namespace KendoUI.Mvc.UI
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Web.Mvc;
     using KendoUI.Mvc.Extensions;
     using KendoUI.Mvc.Infrastructure;
-    using KendoUI.Mvc.Resources;
+    using KendoUI.Mvc.UI.Html;
+    using System;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
+    using System.Web.Routing;
 
-    public class NumericTextBox<T> : TextBoxBase<T> where T : struct
+    public class NumericTextBox<T> : ViewComponentBase, IInputComponent<T> where T : struct
     {
-        public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory, ITextBoxBaseHtmlBuilderFactory<T> rendererFactory)
-            : base(viewContext, clientSideObjectWriterFactory, rendererFactory)
+        public NumericTextBox(ViewContext viewContext, IClientSideObjectWriterFactory clientSideObjectWriterFactory)
+            : base(viewContext, clientSideObjectWriterFactory)
         {
-            ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.textbox.js" });
+           //Spinners = true;
 
-            MinValue = ReadField()["min"];
-            MaxValue = ReadField()["max"];
-            IncrementStep = (T)Convert.ChangeType(1, typeof(T));
-            EmptyMessage = "Enter value";
+            InputHtmlAttributes = new RouteValueDictionary();
 
-            DecimalDigits = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalDigits;
-            NumberGroupSize = CultureInfo.CurrentCulture.NumberFormat.NumberGroupSizes[0];
-            NegativePatternIndex = CultureInfo.CurrentCulture.NumberFormat.NumberNegativePattern;
+            //ClientEvents = new TextBoxBaseClientEvents();
+
+            Enabled = true;
+
+            //ScriptFileNames.AddRange(new[] { "telerik.common.js", "telerik.textbox.js" });
+
+            Step = (T)Convert.ChangeType(1, typeof(T));
+
+            Format = "n";
         }
 
-        private Dictionary<string, T> ReadField()
+        /// <summary>
+        /// Gets the id.
+        /// </summary>
+        /// <value>The id.</value>
+        public new string Id
         {
-            Func<object, object, Dictionary<string, T>> GetRangeValues = (min, max) => {
-                return new Dictionary<string, T>() { 
-                    { "min", (T)Convert.ChangeType(min, typeof(T)) },
-                    { "max", (T)Convert.ChangeType(max, typeof(T)) } 
-                };
-            };
-
-            var type = typeof(T);
-
-            if (type == typeof(int))
+            get
             {
-                return GetRangeValues(int.MinValue, int.MaxValue);
+                // Return from htmlattributes if user has specified
+                // otherwise build it from name
+                return InputHtmlAttributes.ContainsKey("id") ?
+                       InputHtmlAttributes["id"].ToString() :
+                       (!string.IsNullOrEmpty(Name) ? Name.Replace(".", HtmlHelper.IdAttributeDotReplacement) : null);
             }
-            else if (type == typeof(uint))
-            {
-                return GetRangeValues(uint.MinValue, uint.MaxValue);
-            }
-            else if (type == typeof(short))
-            {
-                return GetRangeValues(short.MinValue, short.MaxValue);
-            }
-            else if (type == typeof(ushort))
-            {
-                return GetRangeValues(ushort.MinValue, ushort.MaxValue);
-            }
-            else if (type == typeof(long))
-            {
-                return GetRangeValues(long.MinValue, long.MaxValue);
-            }
-            else if (type == typeof(ulong))
-            {
-                return GetRangeValues(ulong.MinValue, ulong.MaxValue);
-            }
-            else if (type == typeof(float))
-            {
-                return GetRangeValues(float.MinValue, float.MaxValue);
-            }
-            else if (type == typeof(double))
-            {
-                return GetRangeValues(double.MinValue, double.MaxValue);
-            }
-            else if (type == typeof(sbyte))
-            {
-                return GetRangeValues(sbyte.MinValue, sbyte.MaxValue);
-            }
-            else if (type == typeof(byte))
-            {
-                return GetRangeValues(byte.MinValue, byte.MaxValue);
-            }
-            else if (type == typeof(char))
-            {
-                return GetRangeValues(char.MinValue, char.MaxValue);
-            }
-
-            return GetRangeValues(decimal.MinValue, decimal.MaxValue);
         }
 
-        public int DecimalDigits
+        public IDictionary<string, object> InputHtmlAttributes
+        {
+            get;
+            private set;
+        }
+
+        public T? Value
         {
             get;
             set;
         }
 
-        public string DecimalSeparator
+        public T Step
+        {
+            get;
+            set;
+        }
+
+        public T? Min
+        {
+            get;
+            set;
+        }
+
+        public T? Max
+        {
+            get;
+            set;
+        }
+
+        public string Format
+        {
+            get;
+            set;
+        }
+
+        public string Placeholder
+        {
+            get;
+            set;
+        }
+
+        public bool Spinners
+        {
+            get;
+            set;
+        }
+
+        //get it from resource files
+        public string ButtonTitleUp
+        {
+            get;
+            set;
+        }
+
+        //get it from resource files
+        public string ButtonTitleDown
+        {
+            get;
+            set;
+        }
+
+        //public TextBoxBaseClientEvents ClientEvents
+        //{
+        //    get;
+        //    private set;
+        //}
+
+        public bool Enabled
         {
             get;
             set;
@@ -98,27 +120,15 @@ namespace KendoUI.Mvc.UI
 
         public override void WriteInitializationScript(System.IO.TextWriter writer)
         {
-            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "tTextBox", writer);
+            IClientSideObjectWriter objectWriter = ClientSideObjectWriterFactory.Create(Id, "kendoNumericTextBox", writer);
 
             objectWriter.Start();
 
-            objectWriter.AppendObject("val", this.Value);
-            objectWriter.AppendObject("step", this.IncrementStep);
-            objectWriter.AppendObject("minValue", this.MinValue);
-            objectWriter.AppendObject("maxValue", this.MaxValue);
-            objectWriter.Append("digits", this.DecimalDigits);
-            objectWriter.Append("separator", this.DecimalSeparator);
-            objectWriter.AppendNullableString("groupSeparator", this.NumberGroupSeparator);
-            objectWriter.Append("groupSize", this.NumberGroupSize);
-            objectWriter.Append("negative", this.NegativePatternIndex);
-            objectWriter.Append("text", this.EmptyMessage);
-            objectWriter.Append("type", "numeric");
+            objectWriter.AppendObject("value", this.Value);
+            objectWriter.AppendObject("step", this.Step);
+            objectWriter.Append("placeholder", this.Placeholder);
 
-            var inputAttributes = new Dictionary<string, string>();
-            this.InputHtmlAttributes.Each(x => inputAttributes.Add(x.Key, x.Value.ToString()));
-            objectWriter.AppendObject("inputAttributes", inputAttributes);
-
-            ClientEvents.SerializeTo(objectWriter);
+            //ClientEvents.SerializeTo(objectWriter);
 
             objectWriter.Complete();
 
@@ -129,30 +139,10 @@ namespace KendoUI.Mvc.UI
         {
             Guard.IsNotNull(writer, "writer");
 
-            ITextBoxBaseHtmlBuilder renderer = rendererFactory.Create(this);
+            NumericTextBoxHtmlBuilder<T> renderer = new NumericTextBoxHtmlBuilder<T>(this);
 
-            IHtmlNode rootTag = renderer.Build("t-numerictextbox");
-
-            rootTag.Children.Add(renderer.InputTag());
-
-            if (Spinners)
-            {
-                rootTag.Children.Add(renderer.UpButtonTag());
-                rootTag.Children.Add(renderer.DownButtonTag());
-            }
-
-            rootTag.WriteTo(writer);
+            renderer.Build().WriteTo(writer);
             base.WriteHtml(writer);
-        }
-
-        public override void VerifySettings()
-        {
-            base.VerifySettings();
-
-            if (NegativePatternIndex < 0 || NegativePatternIndex > 4)
-            {
-                throw new IndexOutOfRangeException(TextResource.PropertyShouldBeInRange.FormatWith("NegativePatternIndex", 0, 4));
-            }
         }
     }
 }

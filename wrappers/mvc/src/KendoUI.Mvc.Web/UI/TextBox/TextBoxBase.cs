@@ -18,11 +18,11 @@ namespace KendoUI.Mvc.UI
         {
             this.rendererFactory = rendererFactory;
 
-            Spinners = true;
+            //Spinners = true;
 
             InputHtmlAttributes = new RouteValueDictionary();
 
-            ClientEvents = new TextBoxBaseClientEvents();
+            //ClientEvents = new TextBoxBaseClientEvents();
 
             Enabled = true;
         }

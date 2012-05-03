@@ -99,8 +99,8 @@ namespace KendoUI.Mvc.UI.Tests
         {
             var builder = factory.NumericTextBoxFor(m => m.DoubleProperty);
 
-            Assert.Equal(1, builder.ToComponent().MinValue);
-            Assert.Equal(30, builder.ToComponent().MaxValue);
+            Assert.Equal(1, builder.ToComponent().Min);
+            Assert.Equal(30, builder.ToComponent().Max);
         }
 
         [Fact]
