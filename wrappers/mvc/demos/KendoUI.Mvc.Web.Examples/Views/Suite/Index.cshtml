@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Kendo UI Web Examples</title>
-    <link href="@Url.Content("~/Content/suite.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/suite.css")" rel="stylesheet">
 </head>
 <body>
     <div id="page">
@@ -18,7 +18,7 @@
                         <ul>
                             @foreach (NavigationExample example in widget.Items)
                             {
-                                <li><a href='/@ViewContext.RouteData.DataTokens["area"]/@example.Url'>@example.Text</a></li>
+                                <li><a href='@Url.Content("~/" + ViewContext.RouteData.DataTokens["area"] + "/" + example.Url)'>@example.Text</a></li>
                             }
                         </ul>
                     </li>
