@@ -2102,8 +2102,9 @@ div.k-treeview
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     height: 2.12em;
-    line-height: 2.12em;
+    line-height: 1.6em;
     padding: 2px .3em;
+    text-indent: 2px\9;
     width: 12.4em;
 }
 
