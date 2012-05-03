@@ -21,12 +21,12 @@ namespace KendoUI.Mvc.UI
 
         public IHtmlNode WindowTag()
         {
-            string cssText = !Window.Visible ? "display:none" : string.Empty;
-
             var element = new HtmlElement("div")
-                   .Attribute("style", cssText)
                    .Attribute("id", Window.Id)
-                   .Attributes(Window.HtmlAttributes);
+                   .Attributes(Window.HtmlAttributes)
+                   .ToggleCss("display", "none", !Window.Visible)
+                   .ToggleCss("width", Window.Width + "px", Window.Width != 0)
+                   .ToggleCss("height", Window.Height + "px", Window.Height != 0);
 
             if (Window.Template.HasValue())
             {
