@@ -197,6 +197,22 @@
         },
 
         /**
+         * Update the scrollview HTML content
+         * @param {String | jQueryObject} content the new scrollView content.
+         *
+         * @example
+         * <div data-role="scrollview" id="scrollview"></div>
+         *
+         * <script>
+         *    $("#scrollview").data("kendoMobileScrollView").content("<span>Foo</span>");
+         * </script>
+         */
+        content: function(html) {
+           this.element.children().first().html(html);
+           this.dimensions.refresh();
+        },
+
+        /**
          * Scroll to the given page. Pages are zero-based indexed.
          * @param {Number} page The page to scroll to.
          * @example
