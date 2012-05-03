@@ -522,7 +522,7 @@
         enable: function(enable) {
             var that = this,
                 element = that.element,
-                wrapper = that.wrapper.unbind(),
+                wrapper = that.wrapper.unbind(".dropdownlist"),
                 dropDownWrapper = that._inputWrapper.unbind(HOVEREVENTS);
 
             if (enable === false) {
@@ -541,16 +541,16 @@
 
                 wrapper
                     .bind({
-                        click: function(e) {
+                        "click.dropdownlist": function(e) {
                             e.preventDefault();
                             that.toggle();
                         },
-                        keydown: proxy(that._keydown, that),
-                        keypress: proxy(that._keypress, that),
-                        focusin: function() {
+                        "keydown.dropdownlist": proxy(that._keydown, that),
+                        "keypress.dropdownlist": proxy(that._keypress, that),
+                        "focusin.dropdownlist": function() {
                             dropDownWrapper.addClass(FOCUSED);
                         },
-                        focusout: function(e) {
+                        "focusout.dropdownlist": function(e) {
                             that._blur();
                             dropDownWrapper.removeClass(FOCUSED);
                         }
