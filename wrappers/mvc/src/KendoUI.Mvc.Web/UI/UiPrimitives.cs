@@ -8,152 +8,152 @@ namespace KendoUI.Mvc.UI
         /// <summary>
         /// Active state of items
         /// </summary>
-        public const string ActiveState = "t-state-active";
+        public const string ActiveState = "k-state-active";
 
         /// <summary>
         /// Button with plain text content
         /// </summary>
-        public const string Button = "t-button";
+        public const string Button = "k-button";
 
 		/// <summary>
 		/// Button with an icon and text content
 		/// </summary>
-		public const string ButtonIconText = "t-button-icontext";
+		public const string ButtonIconText = "k-button-icontext";
 
 		/// <summary>
 		/// Button with an icon only
 		/// </summary>
-		public const string ButtonIcon = "t-button-icon";
+		public const string ButtonIcon = "k-button-icon";
 
 		/// <summary>
 		/// Bare button with an icon only (no background and borders)
 		/// </summary>
-		public const string ButtonBare = "t-button-bare";
+		public const string ButtonBare = "k-button-bare";
 
 		/// <summary>
         /// Content - rendered around custom content
         /// </summary>
-        public const string Content = "t-content";
+        public const string Content = "k-content";
 
         /// <summary>
         /// Default state of items
         /// </summary>
-        public const string DefaultState = "t-state-default";
+        public const string DefaultState = "k-state-default";
 
         /// <summary>
         /// Disabled state of items
         /// </summary>
-        public const string DisabledState = "t-state-disabled";
+        public const string DisabledState = "k-state-disabled";
 
         /// <summary>
         /// Group - rendered around grouped items (children)
         /// </summary>
-        public const string Group = "t-group";
+        public const string Group = "k-group";
 
         /// <summary>
         /// Header - rendered on headers or header items
         /// </summary>
-        public const string Header = "t-header";
+        public const string Header = "k-header";
 
         /// <summary>
         /// Hovered state of items
         /// </summary>
-        public const string HoverState = "t-state-hover";
+        public const string HoverState = "k-state-hover";
 
         /// <summary>
         /// Icon - icon from default icon set
         /// </summary>
-        public const string Icon = "t-icon";
+        public const string Icon = "k-icon";
 
         /// <summary>
         /// Image - image rendered through ImageUrl
         /// </summary>
-        public const string Image = "t-image";
+        public const string Image = "k-image";
 
         /// <summary>
         /// Item - rendered on items
         /// </summary>
-        public const string Item = "t-item";
+        public const string Item = "k-item";
 
         /// <summary>
         /// First in list of items
         /// </summary>
-        public const string First = "t-first";
+        public const string First = "k-first";
 
         /// <summary>
         /// Last in list of items
         /// </summary>
-        public const string Last = "t-last";
+        public const string Last = "k-last";
 
         /// <summary>
         /// Top in list of items
         /// </summary>
-        public const string Top = "t-top";
+        public const string Top = "k-top";
 
         /// <summary>
         /// Bottom in list of items
         /// </summary>
-        public const string Bottom = "t-bot";
+        public const string Bottom = "k-bot";
 
         /// <summary>
         /// Middle in list of items
         /// </summary>
-        public const string Middle = "t-mid";
+        public const string Middle = "k-mid";
 
         /// <summary>
         /// Last in list of headers
         /// </summary>
-        public const string LastHeader = "t-last-header";
+        public const string LastHeader = "k-last-header";
 
         /// <summary>
         /// Link - rendered on all links
         /// </summary>
-        public const string Link = "t-link";
+        public const string Link = "k-link";
 
         /// <summary>
         /// Reset - removes inherited styles
         /// </summary>
-        public const string ResetStyle = "t-reset";
+        public const string ResetStyle = "k-reset";
 
         /// <summary>
         /// Selected state of items
         /// </summary>
-        public const string SelectedState = "t-state-selected";
+        public const string SelectedState = "k-state-selected";
 
         /// <summary>
         /// Sprite - sprite rendered in the begging of the item.
         /// </summary>
-        public const string Sprite = "t-sprite";
+        public const string Sprite = "k-sprite";
 
         /// <summary>
         /// Widget - rendered always on the outmost HTML element of a UI component
         /// </summary>
-        public const string Widget = "t-widget";
+        public const string Widget = "k-widget";
 
         /// <summary>
         /// Input - input rendered in the div wrapper
         /// </summary>
-        public const string Input = "t-input";
+        public const string Input = "k-input";
 
         /// <summary>
         /// CheckBox - rendered on all checkbox
         /// </summary>
-        public const string CheckBox = "t-checkbox";
+        public const string CheckBox = "k-checkbox";
 
         /// <summary>
         /// ToolBar - rendered on all toolbars
         /// </summary>
-        public const string ToolBar = "t-toolbar";
+        public const string ToolBar = "k-toolbar";
 
         /// <summary>
         /// Alternating class for zebra stripes
         /// </summary>
-        public const string Alt = "t-alt";
+        public const string Alt = "k-alt";
 
         /// <summary>
         /// Scrollable - rendered on all elements that wish to be scrollable on touch devices
         /// </summary>
-        public const string Scrollable = "t-scrollable";
+        public const string Scrollable = "k-scrollable";
 
         /// <summary>
         /// Contains CSS classes for icons
@@ -163,27 +163,27 @@ namespace KendoUI.Mvc.UI
             /// <summary>
             /// "Delete" icon
             /// </summary>
-            public const string Delete = "t-delete";
+            public const string Delete = "k-delete";
 
             /// <summary>
             /// "Delete Group" icon
             /// </summary>
-            public const string GroupDelete = "t-group-delete";
+            public const string GroupDelete = "k-group-delete";
 
             /// <summary>
             /// "Minimize" icon
             /// </summary>
-            public const string Refresh = "t-refresh";
+            public const string Refresh = "k-refresh";
 
             /// <summary>
             /// "Maximize" icon
             /// </summary>
-            public const string Maximize = "t-maximize";
+            public const string Maximize = "k-maximize";
 
             /// <summary>
             /// "Close" icon
             /// </summary>
-            public const string Close = "t-close";
+            public const string Close = "k-close";
         }
 
         /// <summary>
@@ -191,65 +191,65 @@ namespace KendoUI.Mvc.UI
         /// </summary>
         public static class Grid
         {
-            public const string GroupFooter = "t-group-footer";
+            public const string GroupFooter = "k-group-footer";
 
-            public const string Action = "t-grid-action";
+            public const string Action = "k-grid-action";
             
-            public const string Edit = "t-grid-edit";
+            public const string Edit = "k-grid-edit";
             
-            public const string Delete = "t-grid-delete";
+            public const string Delete = "k-grid-delete";
             
-            public const string Update = "t-grid-update";
+            public const string Update = "k-grid-update";
 
-            public const string SaveChanges = "t-grid-save-changes";
+            public const string SaveChanges = "k-grid-save-changes";
             
-            public const string CancelChanges = "t-grid-cancel-changes";
+            public const string CancelChanges = "k-grid-cancel-changes";
             
-            public const string Cancel = "t-grid-cancel";
+            public const string Cancel = "k-grid-cancel";
             
-            public const string Insert = "t-grid-insert";
+            public const string Insert = "k-grid-insert";
 
-            public const string Add = "t-grid-add";
+            public const string Add = "k-grid-add";
             
-            public const string Select = "t-grid-select";
+            public const string Select = "k-grid-select";
 
-            public const string GroupCell = "t-group-cell";
+            public const string GroupCell = "k-group-cell";
             
-            public const string HierarchyCell = "t-hierarchy-cell";
+            public const string HierarchyCell = "k-hierarchy-cell";
 
-            public const string GroupCol = "t-group-col";
+            public const string GroupCol = "k-group-col";
             
-            public const string HierarchyCol = "t-hierarchy-col";
+            public const string HierarchyCol = "k-hierarchy-col";
 
-            public const string GroupIndicator = "t-group-indicator";
+            public const string GroupIndicator = "k-group-indicator";
 
-            public const string FooterTemplateRow = "t-footer-template";
+            public const string FooterTemplateRow = "k-footer-template";
 
-            public const string FooterTemplateRowWrap = "t-footer-template-wrap";
+            public const string FooterTemplateRowWrap = "k-footer-template-wrap";
             
-            public const string ScrollableContent = "t-grid-content";
+            public const string ScrollableContent = "k-grid-content";
 
             /// <summary>
             /// Grid action
             /// </summary>
-            public const string ActionForm = "t-grid-actions";
+            public const string ActionForm = "k-grid-actions";
 
             /// <summary>
             /// Container element for editing / inserting form
             /// </summary>
-            public const string EditingContainer = "t-edit-container";
+            public const string EditingContainer = "k-edit-container";
 
-            public const string InFormContainer = "t-edit-form-container";
+            public const string InFormContainer = "k-edit-form-container";
 
             /// <summary>
             /// Container element for editing / inserting form
             /// </summary>
-            public const string EditingForm = "t-edit-form";
+            public const string EditingForm = "k-edit-form";
 
             /// <summary>
             /// Toolbar which contains different commands
             /// </summary>
-            public const string ToolBar = "t-grid-toolbar";
+            public const string ToolBar = "k-grid-toolbar";
         }
 
         /// <summary>
@@ -260,7 +260,7 @@ namespace KendoUI.Mvc.UI
             /// <summary>
             /// Class that shows treeview lines
             /// </summary>
-            public const string Lines = "t-treeview-lines";
+            public const string Lines = "k-treeview-lines";
         }
 
         /// <summary>
@@ -271,58 +271,58 @@ namespace KendoUI.Mvc.UI
             /// <summary>
             /// Button in editor toolbar
             /// </summary>
-            public const string ToolbarButton = "t-editor-button";
+            public const string ToolbarButton = "k-editor-button";
 
             /// <summary>
             /// Color picker in editor toolbar
             /// </summary>
-            public const string ToolbarColorPicker = "t-editor-colorpicker";
+            public const string ToolbarColorPicker = "k-editor-colorpicker";
 
             /// <summary>
             /// Editor tool icon
             /// </summary>
-            public const string ToolIcon = "t-tool-icon";
+            public const string ToolIcon = "k-tool-icon";
 
             /// <summary>
             /// Editor custom tool
             /// </summary>
-            public const string Custom = "t-custom";
+            public const string Custom = "k-custom";
 
             /// <summary>
             /// Editor textarea element
             /// </summary>
-            public const string RawContent = "t-raw-content";
+            public const string RawContent = "k-raw-content";
         }
 
         public static class Slider
         {
             /// <summary>Slider increase button.</summary>
-            public const string IncreaseButton = "t-increase";
+            public const string IncreaseButton = "k-increase";
 
             /// <summary>Slider decrease button.</summary>
-            public const string DecreaseButton = "t-decrease";
+            public const string DecreaseButton = "k-decrease";
 
-            public const string Items = "t-slider-items";
+            public const string Items = "k-slider-items";
 
-            public const string Item = "t-tick";
+            public const string Item = "k-tick";
 
-            public const string DragHandle = "t-draghandle";
+            public const string DragHandle = "k-draghandle";
 
-            public const string SlectedDiv = "t-draghandle";
+            public const string SlectedDiv = "k-draghandle";
 
-            public const string TrackDiv = "t-draghandle";
+            public const string TrackDiv = "k-draghandle";
         }
 
         public static class Splitter
         {
             /// <summary>Horizontal splitter</summary>
-            public const string Horizontal = "t-splitter-horizontal";
+            public const string Horizontal = "k-splitter-horizontal";
 
             /// <summary>Vertical splitter</summary>
-            public const string Vertical = "t-splitter-vertical";
+            public const string Vertical = "k-splitter-vertical";
 
             /// <summary>Splitter pane</summary>
-            public const string Pane = "t-pane";
+            public const string Pane = "k-pane";
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace KendoUI.Mvc.UI
             /// <summary>
             /// Upload button
             /// </summary>
-            public const string Button = "t-button t-upload-button";
+            public const string Button = "k-button t-upload-button";
         }
 
         /// <summary>
@@ -344,12 +344,12 @@ namespace KendoUI.Mvc.UI
             /// <summary>
             /// Window content area
             /// </summary>
-            public const string Content = "t-window-content";
+            public const string Content = "k-window-content";
 
             /// <summary>
             /// Window title bar
             /// </summary>
-            public const string TitleBar = "t-window-titlebar";
+            public const string TitleBar = "k-window-titlebar";
         }
     }
 }
