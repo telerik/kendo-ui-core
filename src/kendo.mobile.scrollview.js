@@ -136,7 +136,6 @@
             });
 
             that.page = that.options.page;
-            dimensions.refresh();
         },
 
         options: {
@@ -180,10 +179,11 @@
                 pages;
 
             that.element.find("[data-role=page]").width(width);
+            dimension.update(true);
 
             that.scrollTo(that.page);
 
-            pages = that.pages = ceil(dimension.totalSize() / width);
+            pages = that.pages = ceil(dimension.total / width);
 
             that.minSnap = - (pages - 1) * width;
             that.maxSnap = 0;
