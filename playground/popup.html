@@ -42,10 +42,22 @@
                 $("#popup").kendoPopup( {
                     toggleTarget: $("button"),
                     toggleEvent: "click",
-                    origin: "top left",
-                    position: "bottom left",
+                    origin: "bottom left",
+                    position: "top left",
                     anchor: ".anchor",
-                    collision: "flip"
+                    collision: "flip",
+                    animation: {
+                        open: {
+                            effects: "zoom:in"
+                        },
+                        close: {
+                            effects: "fade:out",
+                            duration: 1000
+                        }
+                    },
+                    open: function () {
+                        this.element.css("opacity", 1);
+                    }
                 });
 
                 $("#popup2").kendoPopup({
