@@ -1164,7 +1164,9 @@
             }
 
             wrapper[0].style.cssText = element[0].style.cssText;
-            that.wrapper = wrapper.addClass("k-widget k-combobox k-header").show();
+            that.wrapper = wrapper.addClass("k-widget k-combobox k-header")
+                                  .addClass(element[0].className)
+                                  .show();
         }
     });
 
