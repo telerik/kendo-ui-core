@@ -297,27 +297,37 @@ function fetchChangelog(callback) {
 
         var milestones = changelog.filterMilestones(res, ver);
 
-        function gatherIssues(callback) {
+        function processMilestone(callback) {
             if (milestones.length == 0) {
                 changelog.fetched = true;
                 callback();
             } else {
                 var milestone = milestones.pop();
 
-                github.issues.repoIssues({
-                    user: "telerik",
-                    repo: "kendo",
-                    state: "closed",
-                    milestone: milestone.number
-                }, function(err, res) {
-                    changelog.groupIssues(res);
+                function queryIssues(page) {
+                    github.issues.repoIssues({
+                        user: "telerik",
+                        repo: "kendo",
+                        state: "closed",
+                        milestone: milestone.number,
+                        per_page: 100,
+                        page: page
+                    }, function(err, res) {
+                        changelog.groupIssues(res);
 
-                    gatherIssues(callback);
-                });
+                        if (res.length == 100) {
+                            queryIssues(page + 1);
+                        } else {
+                            processMilestone(callback);
+                        }
+                    });
+                }
+
+                queryIssues(1);
             }
         }
 
-        gatherIssues(callback);
+        processMilestone(callback);
     });
 }
 
@@ -352,7 +362,7 @@ function buildBundle(bundle, version, success) {
             console.log("Building " + deployName);
             mkdir(root);
 
-            console.log("Deploying scripts");
+            /*console.log("Deploying scripts");
             deployScripts(root, bundle, srcLicense, hasSource);
             deployThirdPartyScripts(root);
 
@@ -365,7 +375,7 @@ function buildBundle(bundle, version, success) {
             if (!bundle.skipExamples) {
                 console.log("Deploying examples");
                 deployExamples(root, bundle);
-            }
+            }*/
 
             console.log("Deploying changelog");
             deployChangelog(root, bundle, version);
