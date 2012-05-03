@@ -55,6 +55,15 @@
                 ok(m.dirty);
             });
 
+            test("model is dirty during change event", 1, function() {
+                var m = new Model();
+                m.bind("change", function() {
+                    ok(m.dirty);
+                });
+                m.set("foo", "foo");
+            });
+
+
             test("model is not dirty if the same string value is set", function() {
                 var m = new Model({
                     foo: "foo"
