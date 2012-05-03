@@ -50,5 +50,16 @@ namespace KendoUI.Mvc.UI.Tests
 
             renderer.WindowTag().Attribute("style").ShouldContain("display:none");
         }
+
+        [Fact]
+        public void WindowTag_should_render_width_and_height()
+        {
+            window.Width = 24;
+            window.Height = 42;
+
+            renderer.WindowTag().Attribute("style")
+                .ShouldContain("width:24px")
+                .ShouldContain("height:42px");
+        }
     }
 }
